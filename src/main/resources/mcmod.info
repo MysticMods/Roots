@@ -1,0 +1,16 @@
+[
+{
+  "modid": "roots",
+  "name": "Roots 2",
+  "description": "Druidic magic mod.",
+  "version": "0.104",
+  "mcversion": "1.12",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Elucent","AlexisMachina","werty1124","SirShadow"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

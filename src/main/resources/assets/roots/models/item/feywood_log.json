@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "roots:blocks/log_feywood",
+        "side": "roots:blocks/bark_feywood"
+    }
+}

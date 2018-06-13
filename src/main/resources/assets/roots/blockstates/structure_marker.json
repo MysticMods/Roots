@@ -1,0 +1,20 @@
+{
+    "variants":{
+        "marker_value=0":  { "model": "roots:structure_marker" },
+        "marker_value=1":  { "model": "roots:structure_marker" },
+        "marker_value=2":  { "model": "roots:structure_marker" },
+        "marker_value=3":  { "model": "roots:structure_marker" },
+        "marker_value=4":  { "model": "roots:structure_marker" },
+        "marker_value=5":  { "model": "roots:structure_marker" },
+        "marker_value=6":  { "model": "roots:structure_marker" },
+        "marker_value=7":  { "model": "roots:structure_marker" },
+        "marker_value=8":  { "model": "roots:structure_marker" },
+        "marker_value=9":  { "model": "roots:structure_marker" },
+        "marker_value=10":  { "model": "roots:structure_marker" },
+        "marker_value=11":  { "model": "roots:structure_marker" },
+        "marker_value=12":  { "model": "roots:structure_marker" },
+        "marker_value=13":  { "model": "roots:structure_marker" },
+        "marker_value=14":  { "model": "roots:structure_marker" },
+        "marker_value=15":  { "model": "roots:structure_marker" }
+    }
+}

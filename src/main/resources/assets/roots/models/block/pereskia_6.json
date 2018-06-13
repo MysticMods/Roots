@@ -1,0 +1,7 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "particle": "roots:blocks/pereskia_6",
+        "cross": "roots:blocks/pereskia_6"
+    }
+}

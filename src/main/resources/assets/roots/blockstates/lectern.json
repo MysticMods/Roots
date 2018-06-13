@@ -1,0 +1,10 @@
+{
+    "variants":{
+        "facing=down":  { "model": "roots:lectern", "x": 180 },
+        "facing=up":    { "model": "roots:lectern" },
+        "facing=north": { "model": "roots:lectern", "y": 180},
+        "facing=south": { "model": "roots:lectern", "y": 0 },
+        "facing=west":  { "model": "roots:lectern", "y": 90 },
+        "facing=east":  { "model": "roots:lectern", "y": 270 }
+    }
+}
