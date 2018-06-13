@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "axis=y":  { "model": "roots:feywood_log" },
+        "axis=z":   { "model": "roots:feywood_log", "x": 90 },
+        "axis=x":   { "model": "roots:feywood_log", "x": 90, "y": 90 },
+        "axis=none": { "model": "roots:feywood_bark" }
+    }
+}

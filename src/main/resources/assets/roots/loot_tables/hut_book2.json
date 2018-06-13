@@ -1,0 +1,27 @@
+{
+    "pools": [
+        {
+			"name": "main",
+            "rolls": {
+                "min": 1,
+                "max": 2
+            },
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "roots:spellcraft_book",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 1
+                            }
+                        }
+                    ],
+                    "weight": 90
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "particle": "roots:blocks/chiseled_runestone",
+        "all": "roots:blocks/chiseled_runestone"
+    }
+}
