@@ -1,0 +1,227 @@
+   Listed in intended order of implementation.
+    
+    Fairy Magic:
+    
+        Fairies were always a very incomplete concept in Roots 2. I had all sorts of plans for them, but none ever really came to fruition. Essentially,
+        I wanted to make a school of magic that would have tricky or chaotic effects, instead of some kind of simple raw power.
+    
+        Offertory Plate:
+            Runestone pedestal atop which items can be placed.
+            Once per day, the items on the pedestal will be consumed and replaced with a small amount of fairy dust.
+            Different items have different values:
+                Vanilla crops -- lowest.
+                Roots 2 herbs -- twice as good as vanilla crops.
+                Spider eyes -- four times as good as Roots 2 herbs.
+                Blaze powder and ender pearls -- twice as good as spider eyes.
+            Every time a certain threshold is reached, instead of fairy dust you will receive a Fairy Charm.
+        Fairy Charm:
+            Can be given to fairies to tame them.
+        Tame Fairies:
+            Tame Fairies will fly after you.
+            You can have up to five fly around you at once -- any additional ones beyond that will simply stay put.
+            Fairies can be right-clicked to stay in place, like wolves.
+            Different color fairies give different buffs:
+                Green fairies will quickly decrease the duration of negative effects.
+                Pink fairies will offer you slight regen when your hunger is at or above 9 shanks.
+                Purple fairies will decrease the cooldown of your spells.
+                Orange fairies will give you 20% reduced fire and lava damage per fairy, capping at full immunity.
+        Fey Magic:
+            Fey magic is a mana-like system that is obtained by drinking Spritely Brew, a form of bottled fairy dust.
+            It is drained by using certain fairy-themed items.
+            Bathing in a fairy pool at night after many offerings will slowly regenerate your fey magic.
+        Wand of Transfiguration:
+            Transforms mobs into other kinds of mobs. Hostile mobs become random passive mobs, passive mobs become random hostiles, players get disguised
+            as a random hostile or passive mob.
+            Uses fey magic.
+        Wand of Warping:
+            Uses fey magic.
+            Fires a projectile forward that does damage and has limited range.
+            At the end of the projectile's range, it will come to a halt.
+            Right-clicking with the wand again while the projectile is out will teleport you to the projectile.
+        Flutter Charm:
+            Drains fey magic while active.
+            While active, you can jump an unlimited number of times in the air, and instead of simply jumping up, you dash in the direction you're
+            looking.
+        Illusory Circle:
+            Drains fey magic while active.
+            Any attack from monsters will phase through you while this circle is active. Hazards and damage sources that aren't attacks will still
+            affect you.
+            Casting a spell or using a melee attack will cancel the Circle.
+        Fairy Sigil:
+            A small slip of paper with fairy dust outlining a rune on it.
+            Can be hung on a block.
+            No monsters can walk under a fairy sigil.
+        
+    Paths of progression:
+        
+        The biggest issue with Roots 2, in my opinion, is that it's just not got enough content to be worth playing. Putting yourself through the 
+        trials of its early required mechanics for what, a couple spells, is simply not worth it. The solution to this, I believed, was extending the
+        mod's progression. I wanted to split the mod into two paths, not mutually exclusive -- one for animalistic druidry and one for herbology.
+    
+        Rite of the Verdant Grove:
+            Long-lasting ritual that encircles a large area.
+            Makes the area a Verdant Grove while the ritual is active.
+            This Ritual is the gateway to the herbology path of the mod.
+        Verdant Groves:
+            Regions denoted as Verdant Groves have special properties:
+                Small glittery green particles can be seen throughout the area.
+                Sprouts will spawn naturally in much higher numbers.
+                All plant life will grow somewhat faster.
+                No undead mobs will appear.
+                Occasionally, when a sapling grows, it will grow into a Verdant Tree instead of its normal tree type.
+        Verdant Trees:
+            A special tree type.
+            The saplings and bark are used for various advanced rituals and spells.
+        Ritual of the Defender:
+            Must be performed in a Verdant Grove.
+            The ritual will take any nearby Sprouts and slowly transform them into bark-clad Entlings.
+        Entling:
+            Entlings have higher health and armor than a Sprout.
+            They will also naturally regenerate health in light.
+            Entlings will imprint on the first player to interact with them -- that person is their owner.
+            Give an entling a sword and it will attack monsters.
+            Give an entling an axe and it will break logs in its area.
+            Give an entling a hoe and it will harvest fully grown crops and plant seeds that are on the ground.
+            Entlings have no inventory, so you will need to handle collection of resources they acquire yourself.
+            Entlings can be shift-right-clicked to toggle whether or not they will perform their given task.
+            Entlings can be right-clicked to toggle following, like a wolf.
+        New herbs:
+            I never thought of any names for these, but I wanted there to be three herbs introduced with the herbology path that would have special
+            in-world uses and would be used for spells.
+        New flowers:
+            Similarly to the herbs, I never got around to fleshing this part out, but I wanted there to be multiple new flowers you could grow and use
+            for making spells.
+        Ritual of Woodland Soul:
+            Gather four entlings around a small sapling and cast this ritual near it, while you stand near the sapling as well.
+            The ritual would progress and grow the sapling into a huge new tree of verdant wood.
+            This tree would have a glowing green rune towards its base, and several others dotted up the tree's trunk.
+        Spirit Tree:
+            This tree is bound to the person who cast the ritual.
+            It will keep a 3x3 area of chunks loaded around itself.
+            It has multiple runes dotted up its trunk. If the Ritual of the Woodland Soul is perpetuated, these runes will eventually grow.
+            If you don't want a particular rune, you can prune it by breaking it and letting the Ritual create a new one.
+            Only five tree runes besides the core one at the tree's base can be active at once.
+            Tree runes will give you different buffs:
+                Shield rune -- prevents knockback.
+                Heart rune -- gives you four extra hearts per rune.
+                Sun rune -- regenerate health when on grass, speed increases with rune count.
+                Seed rune -- all plants near you will grow.
+                Forest rune -- entlings bound to you will become larger, more resilient, and better at their tasks.
+                Root rune -- sneaking will render wooden barriers around you and reduce damage.
+            In addition, the total number of tree runes you have will give you a static buff: for each empty armor slot you have, you will reduce
+            incoming damage by 4.5% per tree rune. If you have grown all five tree runes then this means 22.5% reduction per slot, or 90% damage
+            reduction if you go no-armor.
+            You do gain a weakness by being bound to a spirit tree -- fire damage will pierce your armor and your magical defenses.
+        Disjunction Cap:
+            A special magical mushroom that can be given to a bound Spirit Tree or entling to unbind it. They can be rebound to anyone with a simple
+            right-click from any player.
+        Rite of the Wild Call:
+            Similar to the Rite of the Verdant Grove, except that it designates an area as Wild Land instead of a Verdant Grove.
+        Wild Lands:
+            Similar to the Verdant Grove in that it encircles an area, but there are key differences:
+                Gold glowing particles instead of green ones may spawn.
+                Entity spawning is decreased within the Wild Land.
+                Herds of animals with special herd AI would move through the Wild Land instead, with huge masses of one creature type appearing and
+                moving through the area.
+                Occasionally, when a sapling grows, it will grow into a Wildwood Tree instead of its normal tree type.
+                New types of mobs can spawn naturally.
+        Wildwood Trees:
+            A special tree type.
+            The saplings and bark are used for various advanced rituals and spells.
+        New wild mobs:
+            Will exclusively spawn in Wild Lands.
+            Bears:
+                12 hearts, huge neutral mobs that will attack if attacked.
+            Foxes:
+                6 hearts, neutral mobs that will attack if attacked.
+            Ravens:
+                3 hearts, passive mobs, will not attack.
+        Ritual of Bestial Power:
+            Must be performed in Wild Lands.
+            Standing by the Pyre along with a particular animal will grant you a special ability.
+            This ability has a certain number of charges, displayed over your hunger bar, and is triggered by right-clicking with an empty hand.
+            Charges of the ability will regenerate slowly over time.
+            The power depends on the animal:
+                Raven -- two black wings appear behind you and flap, giving you a boost into the air.
+                Wolf -- a spectral bite attacks mobs in front of you and deals 3.5 hearts of armor-piercing damage.
+                Fox -- activate a short window wherein you dodge all attacks dealt to you.
+                Deer -- gain a few seconds of high speed and auto-step-up allowing you to quickly dash forward.
+                Bears -- slash a powerful slash that pushes you forward, knocks mobs back, and deals 5.5 hearts of damage.
+        Rite of Dark Summons:
+            Must be performed in Wild Lands.
+            This ritual will summon a powerful boss of the type of one of the five attuneable animals: a raven, a bear, a fox, a wolf, or a deer.
+            The boss will only stick around as long as the ritual is active, and if they reach the ritual they will snuff it out and leave.
+            The ritual will also summon dark spectral versions of the boss's animal that will attack you.
+            Each boss would have two different useful items that it would drop. I never got around to deciding what these would be though.
+        Ritual of Spirit Binding:
+            Must be performed in Wild Lands.
+            This ritual will bind your soul to a particular animal, consuming the animal in the process as you are fused as one.
+            You gain the Bestial Power of the animal.
+            You also gain a particular passive buff depending on the bound animal:
+                Raven -- instead of jumping, you can fly upward for up to ten seconds. Also, you glide.
+                Wolf -- you run faster and deal more damage.
+                Fox -- while sprinting you can run straight through enemies and ignore melee damage.
+                Deer -- your stamina decreases less and food gives you more hunger back.
+                Bear -- you gain five additional hearts.
+            After an animal binds to you, a small remnant will be left behind -- a wolf's fang, or a raven's feather, perhaps.
+            This remnant can be used to create a new spell! Instead of draining herbs like a normal spell, it takes a use from your Bestial Power uses.
+            I never decided what these spells would be, but they would be luminous and arcane, likely implying some kind of elemental affinity for
+            each animal.
+        Polymorph Charm:
+            When bound to an animal through Bestial Power, you can transform visually into the animal of choice using the Polymorph charm.
+            During this time you cannot use items or attack, but you can still right-click to use your Bestial Power ability.
+            If your soul is bound to the animal, this lasts indefinitely. Otherwise, it drains your Bestial Power uses.
+    
+    Endgame Druidry:
+    
+        This is one part that never really got particularly fleshed out. I had this idea for how the endgame could work, but never planned out a lot of
+        the content for it. Regardless, I'll write what I have.
+    
+        Rite of Awakening:
+            Summons forth powerful bestial warrior spirits.
+            Requires endgame materials from either the herbology or bestial path.
+        Ancient Warrior:
+            Boss mob, several will spawn as the Rite of Awakening progresses.
+            150 hearts each.
+            Have a few random variants.
+            On death will drop a fragment of their spirit which can be jarred, and sometimes their full armor set.
+        Ancient Armor:
+            Several variants.
+            All variants provide 24 base armor, 8 toughness for the whole set.
+            Variants would give different buffs like life stealing or fearing enemies or being immune to attacks from undead.
+        Ancient Spirit:
+            Glowing yellow ember dropped by Ancient warriors.
+            Can be put in a runestone or wood case.
+        Engraved Stone:
+            Block of runestone with a rune carved into it.
+            Place an Ancient Spirit in it to light it up.
+        Engraved Wood:
+            Log of wood with a rune carved into it.
+            Place an Ancient Spirit in it to light it up.
+        Hallowed Sites:
+            Player-created locations based on arranged Engraved Stone/Wood.
+            Could be henges, groves of trees, one big pillar, one big tree, etc.
+            When many Ancient Spirits are placed into the engravings in the Site, it gains the ability to perform grand magic, as long as the Spirits
+            are still in place.
+            Sites must have an altar nearby to select and target magic, henceforth referred to as "calls".
+            Sites will chunkload a 3x3 of chunks around themselves.
+        Call of Affirmament:
+            Keeps a Wild Land or Verdant Grove as itself without a ritual, indefinitely, for no upkeep cost.
+        Call of Guardian:
+            Ancient Spirits will manifest as Ancient Warriors and kill hostile creatures, or players targeted by effigies.
+        Effigy:
+            A crude recreation of another player. Must be right-clicked on them to bind. Used to target Calls by placing them on the Altar.
+        Call of Rot:
+            All undead mobs across the entire map will be more vulnerable to damage.
+        Call of Drought:
+            No rain. Period.
+        Call of Downpour:
+            All rain, all the time.
+        Call of Darkness:
+            Nights are extended 3x.
+        Soul Forging:
+            At an altar, Ancient Spirits may be bound to items for particular powers.
+            Not sure what these would be, but they would be extremely powerful while not simply being a numbers game. Stuff that could take down a
+            Draconic player while still being able to be beaten by someone in Living Armor or Terrasteel.
+            One Spirit could be bound per item. As a result, the item becomes entirely unbreakable. Even if it falls in the void it will simply reappear
+            on the surface.
