@@ -1,8 +1,0 @@
-include ':MysticalLib', ':MysticalWorld', ':Roots'
-
-rootProject.name = 'Mystic Mods'
-
-rootProject.children.each { project ->
-    String fileBaseName = project.name.toLowerCase()
-    project.buildFileName = "build.gradle"
-}

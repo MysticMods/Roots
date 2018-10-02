@@ -11,9 +11,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockMortar extends BlockTEBase {
+public class BlockBonfire extends BlockTEBase {
 
-  public BlockMortar(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
+  public BlockBonfire(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
     super(mat, type, hardness, name, teClass);
   }
 
@@ -30,7 +30,6 @@ public class BlockMortar extends BlockTEBase {
   @Nonnull
   @Override
   public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
-    return new AxisAlignedBB(0.3125, 0, 0.3125, 0.6875, 0.4375, 0.6875);
+    return new AxisAlignedBB(0.25, 0, 0.25, 0.75, 0.1875, 0.75);
   }
-
 }
