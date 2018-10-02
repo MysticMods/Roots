@@ -26,8 +26,7 @@ public class Roots {
 
   public static ModContainer CONTAINER = null;
 
-  @SidedProxy(clientSide = "epicsquid.roots.proxy.ClientProxy", serverSide = "epicsquid.roots.proxy.CommonProxy")
-  public static CommonProxy proxy;
+  @SidedProxy(clientSide = "epicsquid.roots.proxy.ClientProxy", serverSide = "epicsquid.roots.proxy.CommonProxy") public static CommonProxy proxy;
 
   @Instance(MODID) public static Roots instance;
 
