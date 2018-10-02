@@ -8,7 +8,6 @@ import javax.annotation.Nonnull;
 import epicsquid.mysticallib.network.MessageTEUpdate;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
-import epicsquid.roots.RegistryManager;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.recipe.RecipeRegistry;
@@ -93,80 +92,78 @@ public class TileEntityMortar extends TileBase {
             }
           }
         }
-      }
-
-      else {
+      } else {
         List<ItemStack> ingredients = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
           ingredients.add(inventory.getStackInSlot(i));
         }
-//        SpellRecipe recipe = RecipeRegistry.getSpellRecipe(ingredients);
-//        if (recipe != null) {
-//          SpellBase spell = SpellRegistry.spellRegistry.get(recipe.result);
-//          if (world.isRemote) {
-//            for (int i = 0; i < 8; i++) {
-//              int chance = Misc.random.nextInt(3);
-//              if (chance == 0) {
-//                ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
-//                    getPos().getY() + 0.4375f + 0.125f * (Misc.random.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
-//                    0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f),
-//                    spell.red1, spell.green1, spell.blue1, 0.25f, 1.5f, 24, false);
-//              }
-//              if (chance == 1) {
-//                ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
-//                    getPos().getY() + 0.4375f + 0.125f * (Misc.random.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
-//                    0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f),
-//                    spell.red2, spell.green2, spell.blue2, 0.25f, 1.5f, 24, false);
-//              }
-//              if (chance == 2) {
-//                ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
-//                    getPos().getY() + 0.4375f + 0.125f * (Misc.random.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
-//                    0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.5f,
-//                    0.5f, 0.5f, 0.5f, 2.5f, 24, false);
-//              }
-//            }
-//          }
-//          ItemStack dust = new ItemStack(RegistryManager.petal_dust, 1);
-//          ItemPetalDust.createData(dust, recipe.result);
-//          if (!world.isRemote) {
-//            world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, dust));
-//            markDirty();
-//            PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this));
-//          }
-//          for (int i = 0; i < 5; i++) {
-//            inventory.extractItem(i, 1, false);
-//          }
-//          return true;
-//        }
+        //        SpellRecipe recipe = RecipeRegistry.getSpellRecipe(ingredients);
+        //        if (recipe != null) {
+        //          SpellBase spell = SpellRegistry.spellRegistry.get(recipe.result);
+        //          if (world.isRemote) {
+        //            for (int i = 0; i < 8; i++) {
+        //              int chance = Misc.random.nextInt(3);
+        //              if (chance == 0) {
+        //                ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
+        //                    getPos().getY() + 0.4375f + 0.125f * (Misc.random.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
+        //                    0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f),
+        //                    spell.red1, spell.green1, spell.blue1, 0.25f, 1.5f, 24, false);
+        //              }
+        //              if (chance == 1) {
+        //                ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
+        //                    getPos().getY() + 0.4375f + 0.125f * (Misc.random.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
+        //                    0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f),
+        //                    spell.red2, spell.green2, spell.blue2, 0.25f, 1.5f, 24, false);
+        //              }
+        //              if (chance == 2) {
+        //                ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
+        //                    getPos().getY() + 0.4375f + 0.125f * (Misc.random.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
+        //                    0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.5f,
+        //                    0.5f, 0.5f, 0.5f, 2.5f, 24, false);
+        //              }
+        //            }
+        //          }
+        //          ItemStack dust = new ItemStack(RegistryManager.petal_dust, 1);
+        //          ItemPetalDust.createData(dust, recipe.result);
+        //          if (!world.isRemote) {
+        //            world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, dust));
+        //            markDirty();
+        //            PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this));
+        //          }
+        //          for (int i = 0; i < 5; i++) {
+        //            inventory.extractItem(i, 1, false);
+        //          }
+        //          return true;
+        //        }
         MortarRecipe mortarRecipe = RecipeRegistry.getMortarRecipe(ingredients);
 
         if (mortarRecipe != null) {
-//          if (world.isRemote) {
-//            for (int i = 0; i < 8; i++) {
-//              int chance = Misc.random.nextInt(3);
-//              if (chance == 0) {
-//                ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
-//                    getPos().getY() + 0.4375f + 0.125f * (Misc.random.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
-//                    0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f),
-//                    mortarRecipe.r1, mortarRecipe.g1, mortarRecipe.b1, 0.25f, 1.5f, 24, false);
-//              }
-//              if (chance == 1) {
-//                ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
-//                    getPos().getY() + 0.4375f + 0.125f * (Misc.random.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
-//                    0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f),
-//                    mortarRecipe.r2, mortarRecipe.g2, mortarRecipe.b2, 0.25f, 1.5f, 24, false);
-//              }
-//              if (chance == 2) {
-//                ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
-//                    getPos().getY() + 0.4375f + 0.125f * (Misc.random.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
-//                    0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.5f,
-//                    0.5f, 0.5f, 0.5f, 2.5f, 24, false);
-//              }
-//            }
-//          }
+          //todo: fix particle
+          //          if (world.isRemote) {
+          //            for (int i = 0; i < 8; i++) {
+          //              int chance = Misc.random.nextInt(3);
+          //              if (chance == 0) {
+          //                ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
+          //                    getPos().getY() + 0.4375f + 0.125f * (Misc.random.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
+          //                    0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f),
+          //                    mortarRecipe.r1, mortarRecipe.g1, mortarRecipe.b1, 0.25f, 1.5f, 24, false);
+          //              }
+          //              if (chance == 1) {
+          //                ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
+          //                    getPos().getY() + 0.4375f + 0.125f * (Misc.random.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
+          //                    0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f),
+          //                    mortarRecipe.r2, mortarRecipe.g2, mortarRecipe.b2, 0.25f, 1.5f, 24, false);
+          //              }
+          //              if (chance == 2) {
+          //                ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
+          //                    getPos().getY() + 0.4375f + 0.125f * (Misc.random.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
+          //                    0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.5f,
+          //                    0.5f, 0.5f, 0.5f, 2.5f, 24, false);
+          //              }
+          //            }
+          //          }
           if (!world.isRemote) {
-            world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5,
-                mortarRecipe.getResult()));
+            world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, mortarRecipe.getResult()));
             markDirty();
             PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
           }

@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import epicsquid.roots.util.ListUtil;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public class MortarRecipe {
@@ -16,11 +15,11 @@ public class MortarRecipe {
 
   public float r1, g1, b1, r2, g2, b2;
 
-  public MortarRecipe(ItemStack result, ItemStack[] ingredients, float red1, float green1, float blue1, float red2, float green2, float blue2){
+  public MortarRecipe(ItemStack result, ItemStack[] ingredients, float red1, float green1, float blue1, float red2, float green2, float blue2) {
     this.result = result;
     this.ingredients.addAll(Arrays.asList(ingredients));
 
-    while(this.ingredients.size() < 5){
+    while (this.ingredients.size() < 5) {
       this.ingredients.add(ItemStack.EMPTY);
     }
 
@@ -32,11 +31,11 @@ public class MortarRecipe {
     this.b2 = blue2;
   }
 
-  public boolean matches(List<ItemStack> ingredients){
+  public boolean matches(List<ItemStack> ingredients) {
     return ListUtil.stackListsMatch(ingredients, this.ingredients);
   }
 
-  public ItemStack getResult(){
+  public ItemStack getResult() {
     return result;
   }
 }
