@@ -23,7 +23,7 @@ public class RitualRegistry {
   }
 
   public static void init(){
-//    ritualRegistry.put("ritual_life", ritual_life = new RitualLife("ritual_life",1200,true));
+    ritualRegistry.put("ritual_life", ritual_life = new RitualLife("ritual_life",1200,true));
 //    ritualRegistry.put("ritual_storm", ritual_storm = new RitualStorm("ritual_storm",2400,true));
 //    ritualRegistry.put("ritual_light", ritual_light = new RitualLight("ritual_light",1200,true));
 //    ritualRegistry.put("ritual_fire_storm", ritual_fire_storm = new RitualFireStorm("ritual_fire_storm",1200,true));

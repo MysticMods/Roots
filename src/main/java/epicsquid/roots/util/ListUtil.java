@@ -56,9 +56,18 @@ public class ListUtil {
     list2.sort(stackComparator);
     boolean doMatch = list1.size() == list2.size();
     if (doMatch) {
+      System.out.println("Do match");
       for (int i = 0; i < list1.size(); i++) {
         if (list1.get(i).getItem() != list2.get(i).getItem() || list1.get(i).getItemDamage() != list2.get(i).getItemDamage()) {
+          System.out.println("Item matches : " + i);
+          System.out.println(list1.get(i).getItem().getRegistryName());
+          System.out.println(list2.get(i).getItem().getRegistryName());
           doMatch = false;
+        }
+        else{
+          System.out.println("Item matches not: " + i);
+          System.out.println(list1.get(i).getItem().getRegistryName());
+          System.out.println(list2.get(i).getItem().getRegistryName());
         }
       }
     }
