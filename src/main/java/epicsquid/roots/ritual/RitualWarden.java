@@ -1,14 +1,11 @@
 package epicsquid.roots.ritual;
 
-import java.util.List;
-
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.EntityRitualWarden;
 import epicsquid.roots.init.ModBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -51,17 +48,6 @@ public class RitualWarden extends RitualBase {
 
   @Override
   public void doEffect(World world, BlockPos pos) {
-    List<EntityRitualWarden> pastRituals = world.getEntitiesWithinAABB(EntityRitualWarden.class,
-        new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 100, pos.getZ() + 1));
-    if (pastRituals.size() == 0 && !world.isRemote) {
-      EntityRitualWarden ritual = new EntityRitualWarden(world);
-      ritual.setPosition(pos.getX() + 0.5, pos.getY() + 6.5, pos.getZ() + 0.5);
-      world.spawnEntity(ritual);
-    } else if (pastRituals.size() > 0) {
-      for (EntityRitualWarden ritual : pastRituals) {
-        ritual.getDataManager().set(EntityRitualWarden.getLifetime(), duration + 20);
-        ritual.getDataManager().setDirty(EntityRitualWarden.getLifetime());
-      }
-    }
+    this.spawnEntity(world, pos, EntityRitualWarden.class);
   }
 }

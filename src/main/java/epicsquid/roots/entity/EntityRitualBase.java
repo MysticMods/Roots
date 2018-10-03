@@ -3,8 +3,6 @@ package epicsquid.roots.entity;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 
 public abstract class EntityRitualBase extends Entity implements IRitualEntity {

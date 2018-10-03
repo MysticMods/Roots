@@ -1,12 +1,9 @@
 package epicsquid.roots.ritual;
 
-import java.util.List;
-
 import epicsquid.mysticalworld.init.ModItems;
-import epicsquid.roots.entity.EntityRitualWindwall;
+import epicsquid.roots.entity.EntityRitualWarden;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -28,17 +25,6 @@ public class RitualWindwall extends RitualBase {
 
   @Override
   public void doEffect(World world, BlockPos pos) {
-    List<EntityRitualWindwall> pastRituals = world.getEntitiesWithinAABB(EntityRitualWindwall.class,
-        new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 100, pos.getZ() + 1));
-    if (pastRituals.size() == 0 && !world.isRemote) {
-      EntityRitualWindwall ritual = new EntityRitualWindwall(world);
-      ritual.setPosition(pos.getX() + 0.5, pos.getY() + 6.5, pos.getZ() + 0.5);
-      world.spawnEntity(ritual);
-    } else if (pastRituals.size() > 0) {
-      for (EntityRitualWindwall ritual : pastRituals) {
-        ritual.getDataManager().set(EntityRitualWindwall.getLifetime(), duration + 20);
-        ritual.getDataManager().setDirty(EntityRitualWindwall.getLifetime());
-      }
-    }
+    this.spawnEntity(world, pos, EntityRitualWarden.class);
   }
 }

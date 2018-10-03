@@ -1,6 +1,5 @@
 package epicsquid.roots.entity;
 
-import epicsquid.roots.ritual.RitualFireStorm;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
