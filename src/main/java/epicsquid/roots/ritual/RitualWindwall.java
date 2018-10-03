@@ -2,6 +2,7 @@ package epicsquid.roots.ritual;
 
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.EntityRitualWarden;
+import epicsquid.roots.entity.EntityRitualWindwall;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -25,6 +26,6 @@ public class RitualWindwall extends RitualBase {
 
   @Override
   public void doEffect(World world, BlockPos pos) {
-    this.spawnEntity(world, pos, EntityRitualWarden.class);
+    this.spawnEntity(world, pos, EntityRitualWindwall.class);
   }
 }
