@@ -28,10 +28,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityBonfire extends TileBase implements ITickable {
-  float ticker = 0;
-  float pickupDelay = 0;
-  int burnTime = 0;
-  boolean doBigFlame = false;
+  private float ticker = 0;
+  private float pickupDelay = 0;
+  private int burnTime = 0;
+  private boolean doBigFlame = false;
 
   public ItemStackHandler inventory = new ItemStackHandler(5) {
     @Override
@@ -85,7 +85,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     ItemStack heldItem = player.getHeldItem(hand);
     if (!heldItem.isEmpty()) {
       if (heldItem.getItem() instanceof ItemFlintAndSteel) {
-        List<ItemStack> stacks = new ArrayList<ItemStack>();
+        List<ItemStack> stacks = new ArrayList<>();
         for (int i = 0; i < inventory.getSlots(); i++) {
           stacks.add(inventory.getStackInSlot(i));
         }
@@ -243,4 +243,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     }
   }
 
+  public float getTicker() {
+    return ticker;
+  }
 }

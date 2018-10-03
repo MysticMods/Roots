@@ -49,8 +49,8 @@ public class RitualFireStorm extends RitualBase {
       world.spawnEntity(ritual);
     } else if (pastRituals.size() > 0) {
       for (EntityRitualFireStorm ritual : pastRituals) {
-        ritual.getDataManager().set(EntityRitualFireStorm.lifetime, duration + 20);
-        ritual.getDataManager().setDirty(EntityRitualFireStorm.lifetime);
+        ritual.getDataManager().set(EntityRitualFireStorm.getLifetime(), duration + 20);
+        ritual.getDataManager().setDirty(EntityRitualFireStorm.getLifetime());
       }
     }
   }

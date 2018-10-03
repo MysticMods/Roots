@@ -36,8 +36,8 @@ public class RitualWindwall extends RitualBase {
       world.spawnEntity(ritual);
     } else if (pastRituals.size() > 0) {
       for (EntityRitualWindwall ritual : pastRituals) {
-        ritual.getDataManager().set(EntityRitualWindwall.lifetime, duration + 20);
-        ritual.getDataManager().setDirty(EntityRitualWindwall.lifetime);
+        ritual.getDataManager().set(EntityRitualWindwall.getLifetime(), duration + 20);
+        ritual.getDataManager().setDirty(EntityRitualWindwall.getLifetime());
       }
     }
   }

@@ -26,7 +26,7 @@ public class TileEntityBonfireRenderer extends TileEntitySpecialRenderer<TileEnt
       GL11.glPushMatrix();
       EntityItem item = new EntityItem(Minecraft.getMinecraft().world, x, y, z, renderItems.get(i));
       item.hoverStart = 0;
-      double shifted = tem.ticker + partialTicks + i * (360.0 / renderItems.size());
+      double shifted = tem.getTicker() + partialTicks + i * (360.0 / renderItems.size());
       Random random = new Random();
       random.setSeed(item.getItem().hashCode());
       GL11.glTranslated(x + 0.5, y + 0.5 + 0.1 * Math.sin(Math.toRadians((shifted * 4.0))), z + 0.5);
