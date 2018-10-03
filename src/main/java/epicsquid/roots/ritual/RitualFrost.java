@@ -1,7 +1,7 @@
 package epicsquid.roots.ritual;
 
-import epicsquid.roots.init.ModBlocks;
 import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.init.ModBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -21,18 +21,15 @@ public class RitualFrost extends RitualBase {
 
   @Override
   public void doEffect(World world, BlockPos pos) {
-    super.doEffect(world, pos);
-
     for (int i = -19; i < 20; i++) {
       for (int j = -19; j < 20; j++) {
         BlockPos topBlockPos = world.getTopSolidOrLiquidBlock(pos.add(i, 0, j));
-        if(world.getBlockState(topBlockPos).getBlock() == Blocks.WATER){
+        if (world.getBlockState(topBlockPos).getBlock() == Blocks.WATER) {
           world.setBlockState(topBlockPos, Blocks.ICE.getDefaultState());
-        }
-        else{
-          if(!world.getBlockState(topBlockPos).getBlock().isLeaves(world.getBlockState(topBlockPos), world, topBlockPos)
+        } else {
+          if (!world.getBlockState(topBlockPos).getBlock().isLeaves(world.getBlockState(topBlockPos), world, topBlockPos)
               && world.getBlockState(topBlockPos.add(0, -1, 0)).getBlock() != ModBlocks.bonfire
-              && world.getBlockState(topBlockPos.add(0, -1, 0)).getBlock() != ModBlocks.mortar){
+              && world.getBlockState(topBlockPos.add(0, -1, 0)).getBlock() != ModBlocks.mortar) {
             world.setBlockState(topBlockPos, Blocks.SNOW_LAYER.getDefaultState());
           }
         }

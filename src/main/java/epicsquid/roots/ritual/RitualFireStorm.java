@@ -1,14 +1,11 @@
 package epicsquid.roots.ritual;
 
-import java.util.List;
-
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.EntityRitualFireStorm;
 import epicsquid.roots.init.ModBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -41,17 +38,6 @@ public class RitualFireStorm extends RitualBase {
 
   @Override
   public void doEffect(World world, BlockPos pos) {
-    List<EntityRitualFireStorm> pastRituals = world.getEntitiesWithinAABB(EntityRitualFireStorm.class,
-        new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 100, pos.getZ() + 1));
-    if (pastRituals.size() == 0 && !world.isRemote) {
-      EntityRitualFireStorm ritual = new EntityRitualFireStorm(world);
-      ritual.setPosition(pos.getX() + 0.5, pos.getY() + 6.5, pos.getZ() + 0.5);
-      world.spawnEntity(ritual);
-    } else if (pastRituals.size() > 0) {
-      for (EntityRitualFireStorm ritual : pastRituals) {
-        ritual.getDataManager().set(EntityRitualFireStorm.getLifetime(), duration + 20);
-        ritual.getDataManager().setDirty(EntityRitualFireStorm.getLifetime());
-      }
-    }
+    this.spawnEntity(world, pos, EntityRitualFireStorm.class);
   }
 }
