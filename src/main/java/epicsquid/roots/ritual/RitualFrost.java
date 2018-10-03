@@ -1,6 +1,7 @@
 package epicsquid.roots.ritual;
 
 import epicsquid.roots.init.ModBlocks;
+import epicsquid.mysticalworld.init.ModItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -12,10 +13,10 @@ public class RitualFrost extends RitualBase {
   public RitualFrost(String name, int duration, boolean doUpdateValidity) {
     super(name, duration, doUpdateValidity);
     addIngredient(new ItemStack(Items.SNOWBALL, 1));
-    addIngredient(new ItemStack(Items.SNOWBALL, 1));
-    addIngredient(new ItemStack(Items.SNOWBALL, 1));
-    addIngredient(new ItemStack(Items.SNOWBALL, 1));
-    addIngredient(new ItemStack(Items.SNOWBALL, 1));
+    addIngredient(new ItemStack(Blocks.PACKED_ICE, 1));
+    addIngredient(new ItemStack(Blocks.SNOW, 1));
+    addIngredient(new ItemStack(ModItems.bark_acacia, 1));
+    addIngredient(new ItemStack(ModItems.bark_acacia, 1));
   }
 
   @Override
