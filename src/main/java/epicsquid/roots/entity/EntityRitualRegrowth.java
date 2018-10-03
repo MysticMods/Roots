@@ -10,10 +10,16 @@ import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityRitualRegrowth extends EntityRitualBase {
+
+  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualRegrowth.class, DataSerializers.VARINT);
+
   public EntityRitualRegrowth(World worldIn) {
     super(worldIn);
     getDataManager().register(lifetime, RitualRegistry.ritual_regrowth.duration + 20);
@@ -103,4 +109,10 @@ public class EntityRitualRegrowth extends EntityRitualBase {
       }
     }
   }
+
+  @Override
+  public DataParameter<Integer> getLifetime() {
+    return lifetime;
+  }
+
 }

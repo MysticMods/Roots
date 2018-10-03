@@ -8,7 +8,8 @@ import epicsquid.mysticallib.util.ListUtil;
 import net.minecraft.item.ItemStack;
 
 public class RitualRegistry {
-  public static Map<String, RitualBase> ritualRegistry = new HashMap<String, RitualBase>();
+
+  private static Map<String, RitualBase> ritualRegistry = new HashMap<>();
 
   public static RitualBase ritual_life, ritual_storm, ritual_light, ritual_fire_storm, ritual_regrowth, ritual_windwall, ritual_warden, ritual_natural_aura, ritual_purity, ritual_frost;
 

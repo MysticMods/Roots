@@ -4,10 +4,15 @@ import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityRitualNaturalAura extends EntityRitualBase {
+
+  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualNaturalAura.class, DataSerializers.VARINT);
 
   public EntityRitualNaturalAura(World worldIn) {
     super(worldIn);
@@ -63,4 +68,10 @@ public class EntityRitualNaturalAura extends EntityRitualBase {
       }
     }
   }
+
+  @Override
+  public DataParameter<Integer> getLifetime() {
+    return lifetime;
+  }
+
 }

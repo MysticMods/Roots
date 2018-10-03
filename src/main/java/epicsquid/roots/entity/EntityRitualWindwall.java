@@ -5,10 +5,15 @@ import java.util.List;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class EntityRitualWindwall extends EntityRitualBase {
+
+  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualWindwall.class, DataSerializers.VARINT);
 
   public EntityRitualWindwall(World worldIn) {
     super(worldIn);
@@ -51,6 +56,11 @@ public class EntityRitualWindwall extends EntityRitualBase {
         }
       }
     }
+  }
+
+  @Override
+  public DataParameter<Integer> getLifetime() {
+    return lifetime;
   }
 
 }
