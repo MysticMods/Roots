@@ -35,8 +35,8 @@ public class RitualLight extends RitualBase {
       world.spawnEntity(ritual);
     } else if (pastRituals.size() > 0) {
       for (EntityRitualLight ritual : pastRituals) {
-        ritual.getDataManager().set(EntityRitualLight.lifetime, duration + 20);
-        ritual.getDataManager().setDirty(EntityRitualLight.lifetime);
+        ritual.getDataManager().set(EntityRitualLight.getLifetime(), duration + 20);
+        ritual.getDataManager().setDirty(EntityRitualLight.getLifetime());
       }
     }
   }

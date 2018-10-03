@@ -14,7 +14,6 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class Misc {
-  public static Random random = new Random();
 
   public static EnumFacing getOppositeHorizontalFace(EnumFacing face) {
     if (face == EnumFacing.DOWN) {

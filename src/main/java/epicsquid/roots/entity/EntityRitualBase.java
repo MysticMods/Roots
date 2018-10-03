@@ -9,11 +9,11 @@ import net.minecraft.world.World;
 
 public class EntityRitualBase extends Entity implements IRitualEntity {
 
-  public static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualWarden.class, DataSerializers.VARINT);
+  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualWarden.class, DataSerializers.VARINT);
 
-  public double x = 0;
-  public double y = 0;
-  public double z = 0;
+  private double x = 0;
+  private double y = 0;
+  private double z = 0;
 
   public EntityRitualBase(World worldIn) {
     super(worldIn);
@@ -36,7 +36,9 @@ public class EntityRitualBase extends Entity implements IRitualEntity {
 
   @Override
   protected void entityInit() {
-
+    this.posY = y;
+    this.posX = x;
+    this.posZ = z;
   }
 
   @Override
@@ -55,5 +57,9 @@ public class EntityRitualBase extends Entity implements IRitualEntity {
     compound.setDouble("y", y);
     compound.setDouble("z", z);
     compound.setInteger("lifetime", getDataManager().get(lifetime));
+  }
+
+  public static DataParameter<Integer> getLifetime() {
+    return lifetime;
   }
 }

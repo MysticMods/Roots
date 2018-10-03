@@ -13,13 +13,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class RitualWarden extends RitualBase {
+
   public RitualWarden(String name, int duration, boolean doUpdateValidity) {
     super(name, duration, doUpdateValidity);
     addIngredient(new ItemStack(Items.DYE, 1, 15));
     addIngredient(new ItemStack(ModItems.pereskia_bulb, 1));
     addIngredient(new ItemStack(ModItems.spirit_herb, 1));
     addIngredient(new ItemStack(ModItems.bark_oak, 1));
-    addIngredient(new ItemStack(epicsquid.roots.init.ModItems.totem_fragment, 1));
+    addIngredient(new ItemStack(Items.IRON_CHESTPLATE, 1));
   }
 
   @Override
@@ -58,8 +59,8 @@ public class RitualWarden extends RitualBase {
       world.spawnEntity(ritual);
     } else if (pastRituals.size() > 0) {
       for (EntityRitualWarden ritual : pastRituals) {
-        ritual.getDataManager().set(EntityRitualWarden.lifetime, duration + 20);
-        ritual.getDataManager().setDirty(EntityRitualWarden.lifetime);
+        ritual.getDataManager().set(EntityRitualWarden.getLifetime(), duration + 20);
+        ritual.getDataManager().setDirty(EntityRitualWarden.getLifetime());
       }
     }
   }
