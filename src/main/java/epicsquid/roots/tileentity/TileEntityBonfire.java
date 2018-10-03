@@ -8,9 +8,9 @@ import javax.annotation.Nonnull;
 import epicsquid.mysticallib.network.MessageTEUpdate;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
-import epicsquid.roots.util.Misc;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -144,7 +144,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   @Override
   public void breakBlock(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
     if (!world.isRemote) {
-      Misc.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
+      Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
     }
   }
 
