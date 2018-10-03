@@ -43,24 +43,6 @@ public class EntityRitualLife extends EntityRitualBase {
         //todo: fix particle when available | ParticleUtil.spawnParticleGlow(world, tx, ty, tz, 0, 0, 0, 100, 255, 100, 0.5f*alpha, 8.0f, 40);
       }
     }
-    if (this.ticksExisted % 5 == 0) {
-      BlockPos pos = world.getTopSolidOrLiquidBlock(getPosition().add(rand.nextInt(19) - 9, 0, rand.nextInt(19) - 9));
-      IBlockState state = world.getBlockState(pos);
-      if (state.getBlock() instanceof BlockCrops) {
-        if (((BlockCrops) state.getBlock()).canGrow(world, pos, state, world.isRemote)) {
-          //if (state.getValue(BlockCrops.AGE) < 7){
-          world.setBlockState(pos, state.getBlock().getStateFromMeta(state.getBlock().getMetaFromState(state) + 1));
-          world.notifyBlockUpdate(pos, state, state.getBlock().getStateFromMeta(state.getBlock().getMetaFromState(state) + 1), 8);
-          if (world.isRemote) {
-            for (float i = 0; i < 1; i += 0.125f) {
-              float coeff = i;
-              //todo: fix particle when available | ParticleUtil.spawnParticleSpark(world, (pos.getX()+0.5f), (pos.getY()+0.5f)+i, (pos.getZ()+0.5f), 0.125f*(rand.nextFloat()-0.5f), 0.0625f*(rand.nextFloat()), 0.125f*(rand.nextFloat()-0.5f), 100, 255, 100, 1.0f*(1.0f-coeff)*alpha, 3.0f*(1.0f-coeff), 40);
-            }
-          }
-          //}
-        }
-      }
-    }
     if (this.ticksExisted % 20 == 0) {
       List<EntityLivingBase> entities = world
           .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 15.5, posY - 15.5, posZ - 15.5, posX + 15.5, posY + 15.5, posZ + 15.5));

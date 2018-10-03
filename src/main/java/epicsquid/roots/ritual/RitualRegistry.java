@@ -10,7 +10,8 @@ import net.minecraft.item.ItemStack;
 public class RitualRegistry {
   public static Map<String, RitualBase> ritualRegistry = new HashMap<String, RitualBase>();
 
-  public static RitualBase ritual_life, ritual_storm, ritual_light, ritual_fire_storm, ritual_regrowth, ritual_windwall, ritual_warden;
+  public static RitualBase ritual_life, ritual_storm, ritual_light, ritual_fire_storm, ritual_regrowth, ritual_windwall, ritual_warden,
+      ritual_natural_aura;
 
   public static RitualBase getRitual(List<ItemStack> ingredients) {
     for (int i = 0; i < ritualRegistry.size(); i++) {
@@ -30,5 +31,6 @@ public class RitualRegistry {
     ritualRegistry.put("ritual_regrowth", ritual_regrowth = new RitualRegrowth("ritual_regrowth", 2400, true));
     ritualRegistry.put("ritual_windwall", ritual_windwall = new RitualWindwall("ritual_windwall", 3000, true));
     ritualRegistry.put("ritual_warden", ritual_warden = new RitualWarden("ritual_warden", 1200, true));
+    ritualRegistry.put("ritual_natural_aura", ritual_natural_aura = new RitualNaturalAura("ritual_natural_aura", 1200, true));
   }
 }
