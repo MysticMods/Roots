@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import epicsquid.roots.util.ListUtil;
+import epicsquid.mysticallib.util.ListUtil;
 import net.minecraft.item.ItemStack;
 
 public class RitualRegistry {

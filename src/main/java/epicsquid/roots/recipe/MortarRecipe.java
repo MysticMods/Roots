@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import epicsquid.roots.util.ListUtil;
+import epicsquid.mysticallib.util.ListUtil;
 import net.minecraft.item.ItemStack;
 
 public class MortarRecipe {
