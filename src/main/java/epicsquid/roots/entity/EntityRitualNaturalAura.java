@@ -1,7 +1,6 @@
 package epicsquid.roots.entity;
 
 import epicsquid.roots.ritual.RitualRegistry;
-import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.block.state.IBlockState;
@@ -55,7 +54,7 @@ public class EntityRitualNaturalAura extends EntityRitualBase {
           }
         }
       }
-      if(state.getBlock() instanceof BlockSapling){
+      if (state.getBlock() instanceof BlockSapling) {
         BlockSapling blockSapling = (BlockSapling) state.getBlock();
         blockSapling.grow(world, pos, state, rand);
         if (world.isRemote) {
