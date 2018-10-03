@@ -19,8 +19,8 @@ public class RitualNaturalAura extends RitualBase {
     super(name, duration, doUpdateValidity);
     addIngredient(new ItemStack(ModItems.wildroot, 1));
     addIngredient(new ItemStack(ModItems.wildroot, 1));
-    addIngredient(new ItemStack(Items.BONE, 1));
     addIngredient(new ItemStack(ModItems.spirit_herb, 1));
+    addIngredient(new ItemStack(Items.BONE, 1));
     addIngredient(new ItemStack(Items.BONE, 1));
   }
 
