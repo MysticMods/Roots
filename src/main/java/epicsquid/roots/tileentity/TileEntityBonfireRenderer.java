@@ -6,6 +6,7 @@ import java.util.Random;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
@@ -23,18 +24,18 @@ public class TileEntityBonfireRenderer extends TileEntitySpecialRenderer<TileEnt
     }
 
     for (int i = 0; i < renderItems.size(); i++) {
-      GL11.glPushMatrix();
+      GlStateManager.pushMatrix();
       EntityItem item = new EntityItem(Minecraft.getMinecraft().world, x, y, z, renderItems.get(i));
       item.hoverStart = 0;
-      double shifted = tem.getTicker() + partialTicks + i * (360.0 / renderItems.size());
+      float shifted = (float) (tem.getTicker() + partialTicks + i * (360.0 / renderItems.size()));
       Random random = new Random();
       random.setSeed(item.getItem().hashCode());
-      GL11.glTranslated(x + 0.5, y + 0.5 + 0.1 * Math.sin(Math.toRadians((shifted * 4.0))), z + 0.5);
-      GL11.glRotated(shifted, 0, 1, 0);
-      GL11.glTranslated(-0.5, 0, 0);
-      GL11.glRotated(shifted, 0, 1, 0);
+      GlStateManager.translate(x + 0.5, y + 0.5 + 0.1 * Math.sin(Math.toRadians((shifted * 4.0))), z + 0.5);
+      GlStateManager.rotate(shifted, 0, 1, 0);
+      GlStateManager.translate(-0.5, 0, 0);
+      GlStateManager.rotate(shifted, 0, 1, 0);
       Minecraft.getMinecraft().getRenderManager().renderEntity(item, 0, 0, 0, 0, 0, true);
-      GL11.glPopMatrix();
+      GlStateManager.popMatrix();
     }
   }
 }
