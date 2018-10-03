@@ -46,11 +46,3 @@ user.properties
 eiostore.jks
 
 build\.sh
-
-gradle/wrapper/gradle-wrapper\.jar
-
-gradle/wrapper/gradle-wrapper\.properties
-
-gradlew
-
-gradlew\.bat
