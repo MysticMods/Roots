@@ -4,6 +4,9 @@ import javax.annotation.Nonnull;
 
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.roots.Roots;
+import epicsquid.roots.recipe.MortarRecipe;
+import epicsquid.roots.recipe.RecipeRegistry;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
@@ -29,6 +32,7 @@ public class ModRecipes {
    * Register all recipes
    */
   public static void initRecipes(@Nonnull RegisterModRecipesEvent event) {
-
+    RecipeRegistry.addMortarRecipe(
+        new MortarRecipe(new ItemStack(Items.DYE, 1, 12), new ItemStack[] { new ItemStack(epicsquid.mysticalworld.init.ModItems.carapace) }, 1, 1, 1, 1, 1, 1));
   }
 }

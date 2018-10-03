@@ -26,7 +26,6 @@ public class RegistryManager {
 
     ModEntities.registerMobs();
     ModEntities.registerMobSpawn();
-
   }
 
   @SubscribeEvent
@@ -42,4 +41,5 @@ public class RegistryManager {
 
     ModItems.registerOredict();
   }
+
 }
