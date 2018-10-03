@@ -4,15 +4,15 @@ import java.util.List;
 
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
-public class EntityRitualLife extends EntityRitualBase {
+public class EntityRitualPurity extends EntityRitualBase {
 
-  public EntityRitualLife(World worldIn) {
+  public EntityRitualPurity(World worldIn) {
     super(worldIn);
-    getDataManager().register(lifetime, RitualRegistry.ritual_life.duration + 20);
+    getDataManager().register(lifetime, RitualRegistry.ritual_purity.duration + 20);
   }
 
   @Override
@@ -34,9 +34,9 @@ public class EntityRitualLife extends EntityRitualBase {
       }
       for (float i = 0; i < 360; i += 72.0f) {
         double ang = ticksExisted % 360;
-        float tx = (float) posX + 2.0f * (float) Math.sin(Math.toRadians(i + ang));
+        float tx = (float) posX + 1.0f * (float) Math.sin(Math.toRadians(i + ang));
         float ty = (float) posY;
-        float tz = (float) posZ + 2.0f * (float) Math.cos(Math.toRadians(i + ang));
+        float tz = (float) posZ + 1.0f * (float) Math.cos(Math.toRadians(i + ang));
         //todo: fix particle when available | ParticleUtil.spawnParticleGlow(world, tx, ty, tz, 0, 0, 0, 100, 255, 100, 0.5f*alpha, 8.0f, 40);
       }
     }
@@ -44,21 +44,14 @@ public class EntityRitualLife extends EntityRitualBase {
       List<EntityLivingBase> entities = world
           .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 15.5, posY - 15.5, posZ - 15.5, posX + 15.5, posY + 15.5, posZ + 15.5));
       for (EntityLivingBase e : entities) {
-        if (e instanceof EntityPlayer) {
-          if (((EntityPlayer) e).getFoodStats().getFoodLevel() >= 18) {
-            e.heal(1.0f);
+        for (PotionEffect potionEffect : e.getActivePotionEffects()) {
+          if (potionEffect.getPotion().isBadEffect()) {
+            e.removePotionEffect(potionEffect.getPotion());
           }
-          if (world.isRemote) {
-            for (float i = 0; i < 8; i++) {
-              //todo: fix particle when available | ParticleUtil.spawnParticleStar(world, (float)e.posX+0.5f*(rand.nextFloat()-0.5f), (float)e.posY+e.height/2.5f+(rand.nextFloat()-0.5f), (float)e.posZ+0.5f*(rand.nextFloat()-0.5f), 0.125f*(rand.nextFloat()-0.5f), 0.01875f*(rand.nextFloat()), 0.125f*(rand.nextFloat()-0.5f), 100, 255, 100, 1.0f*alpha, 1.0f+2.0f*rand.nextFloat(), 40);
-            }
-          }
-        } else {
-          e.heal(1.0f);
-          if (world.isRemote) {
-            for (float i = 0; i < 8; i++) {
-              //todo: fix particle when available | ParticleUtil.spawnParticleStar(world, (float)e.posX+0.5f*(rand.nextFloat()-0.5f), (float)e.posY+e.height/2.5f+(rand.nextFloat()-0.5f), (float)e.posZ+0.5f*(rand.nextFloat()-0.5f), 0.125f*(rand.nextFloat()-0.5f), 0.01875f*(rand.nextFloat()), 0.125f*(rand.nextFloat()-0.5f), 100, 255, 100, 1.0f*alpha, 1.0f+2.0f*rand.nextFloat(), 40);
-            }
+        }
+        if (world.isRemote) {
+          for (float i = 0; i < 8; i++) {
+            //todo: fix particle when available | ParticleUtil.spawnParticleStar(world, (float)e.posX+0.5f*(rand.nextFloat()-0.5f), (float)e.posY+e.height/2.5f+(rand.nextFloat()-0.5f), (float)e.posZ+0.5f*(rand.nextFloat()-0.5f), 0.125f*(rand.nextFloat()-0.5f), 0.01875f*(rand.nextFloat()), 0.125f*(rand.nextFloat()-0.5f), 100, 255, 100, 1.0f*alpha, 1.0f+2.0f*rand.nextFloat(), 40);
           }
         }
       }
