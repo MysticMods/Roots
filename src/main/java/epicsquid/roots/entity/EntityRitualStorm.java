@@ -4,10 +4,16 @@ import java.util.List;
 
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class EntityRitualStorm extends EntityRitualBase {
+
+  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualStorm.class, DataSerializers.VARINT);
+
   public EntityRitualStorm(World worldIn) {
     super(worldIn);
     getDataManager().register(lifetime, RitualRegistry.ritual_storm.duration + 20);
@@ -66,4 +72,10 @@ public class EntityRitualStorm extends EntityRitualBase {
       }
     }
   }
+
+  @Override
+  public DataParameter<Integer> getLifetime() {
+    return lifetime;
+  }
+
 }

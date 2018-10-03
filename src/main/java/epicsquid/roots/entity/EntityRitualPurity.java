@@ -4,11 +4,16 @@ import java.util.List;
 
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class EntityRitualPurity extends EntityRitualBase {
+
+  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualPurity.class, DataSerializers.VARINT);
 
   public EntityRitualPurity(World worldIn) {
     super(worldIn);
@@ -54,4 +59,10 @@ public class EntityRitualPurity extends EntityRitualBase {
       }
     }
   }
+
+  @Override
+  public DataParameter<Integer> getLifetime() {
+    return lifetime;
+  }
+
 }

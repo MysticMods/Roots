@@ -1,9 +1,15 @@
 package epicsquid.roots.entity;
 
+import epicsquid.roots.ritual.RitualFireStorm;
 import epicsquid.roots.ritual.RitualRegistry;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 
 public class EntityRitualFireStorm extends EntityRitualBase {
+
+  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualFireStorm.class, DataSerializers.VARINT);
 
   public EntityRitualFireStorm(World worldIn) {
     super(worldIn);
@@ -42,6 +48,11 @@ public class EntityRitualFireStorm extends EntityRitualBase {
       //        world.spawnEntity(flare);
       //      }
     }
+  }
+
+  @Override
+  public DataParameter<Integer> getLifetime() {
+    return lifetime;
   }
 
 }

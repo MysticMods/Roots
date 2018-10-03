@@ -5,10 +5,15 @@ import java.util.Random;
 
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class EntityRitualWarden extends EntityRitualBase {
+
+  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualWarden.class, DataSerializers.VARINT);
 
   public EntityRitualWarden(World worldIn) {
     super(worldIn);
@@ -47,6 +52,11 @@ public class EntityRitualWarden extends EntityRitualBase {
         //todo: fix particle when available |  EffectManager.assignEffect(e, EffectManager.effect_invulnerability.name, 22, new NBTTagCompound());
       }
     }
+  }
+
+  @Override
+  public DataParameter<Integer> getLifetime() {
+    return lifetime;
   }
 
 }

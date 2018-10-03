@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class RitualBase {
+public abstract class RitualBase {
   public List<ItemStack> ingredients = new ArrayList<>();
   public String name;
   public int duration;
@@ -28,7 +28,5 @@ public class RitualBase {
     return true;
   }
 
-  public void doEffect(World world, BlockPos pos) {
-
-  }
+  public abstract void doEffect(World world, BlockPos pos);
 }
