@@ -63,8 +63,7 @@ public class ListUtil {
           System.out.println(list1.get(i).getItem().getRegistryName());
           System.out.println(list2.get(i).getItem().getRegistryName());
           doMatch = false;
-        }
-        else{
+        } else {
           System.out.println("Item matches not: " + i);
           System.out.println(list1.get(i).getItem().getRegistryName());
           System.out.println(list2.get(i).getItem().getRegistryName());

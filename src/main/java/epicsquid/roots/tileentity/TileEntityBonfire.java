@@ -110,11 +110,10 @@ public class TileEntityBonfire extends TileBase implements ITickable {
             ItemStack attemptedInsert = inventory.insertItem(i, toInsert, true);
             if (attemptedInsert.isEmpty()) {
               inventory.insertItem(i, toInsert, false);
-              heldItem.setCount(heldItem.getCount()-1);
-              if(heldItem.getCount() <= 0){
+              heldItem.setCount(heldItem.getCount() - 1);
+              if (heldItem.getCount() <= 0) {
                 player.setHeldItem(hand, ItemStack.EMPTY);
-              }
-              else{
+              } else {
                 player.setHeldItem(hand, heldItem);
               }
               markDirty();
