@@ -12,11 +12,13 @@ public class RitualFrost extends RitualBase {
 
   public RitualFrost(String name, int duration, boolean doUpdateValidity) {
     super(name, duration, doUpdateValidity);
-    addIngredient(new ItemStack(Items.SNOWBALL, 1));
-    addIngredient(new ItemStack(Blocks.PACKED_ICE, 1));
-    addIngredient(new ItemStack(Blocks.SNOW, 1));
-    addIngredient(new ItemStack(ModItems.bark_acacia, 1));
-    addIngredient(new ItemStack(ModItems.bark_acacia, 1));
+    addIngredients(
+        new ItemStack(Items.SNOWBALL, 1),
+        new ItemStack(Blocks.PACKED_ICE, 1),
+        new ItemStack(Blocks.SNOW, 1),
+        new ItemStack(ModItems.bark_acacia, 1),
+        new ItemStack(ModItems.bark_acacia, 1)
+    );
   }
 
   @Override
