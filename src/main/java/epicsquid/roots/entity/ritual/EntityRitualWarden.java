@@ -3,8 +3,11 @@ package epicsquid.roots.entity.ritual;
 import java.util.List;
 import java.util.Random;
 
+import epicsquid.mysticallib.fx.EffectManager;
+import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -33,23 +36,23 @@ public class EntityRitualWarden extends EntityRitualBase {
       setDead();
     }
     if (world.isRemote && getDataManager().get(lifetime) > 0) {
-      //todo: fix particle when available | ParticleUtil.spawnParticleStar(world, (float)posX, (float)posY, (float)posZ, 0, 0, 0, 100, 255, 235, 0.5f*alpha, 20.0f, 40);
+      ParticleUtil.spawnParticleStar(world, (float)posX, (float)posY, (float)posZ, 0, 0, 0, 100, 255, 235, 0.5f*alpha, 20.0f, 40);
       if (rand.nextInt(5) == 0) {
-        //todo: fix particle when available | ParticleUtil.spawnParticleSpark(world, (float)posX, (float)posY, (float)posZ, 0.125f*(rand.nextFloat()-0.5f), 0.0625f*(rand.nextFloat()), 0.125f*(rand.nextFloat()-0.5f), 100, 255, 235, 1.0f*alpha, 1.0f+rand.nextFloat(), 160);
+        ParticleUtil.spawnParticleSpark(world, (float)posX, (float)posY, (float)posZ, 0.125f*(rand.nextFloat()-0.5f), 0.0625f*(rand.nextFloat()), 0.125f*(rand.nextFloat()-0.5f), 100, 255, 235, 1.0f*alpha, 1.0f+rand.nextFloat(), 160);
       }
       for (float i = 0; i < 360; i += 90.0f) {
         double ang = ticksExisted % 360;
         float tx = (float) posX + 2.5f * (float) Math.sin(Math.toRadians(ang)) * (float) Math.sin(Math.toRadians(i + ang));
         float ty = (float) posY;
         float tz = (float) posZ + 2.5f * (float) Math.sin(Math.toRadians(ang)) * (float) Math.cos(Math.toRadians(i + ang));
-        //todo: fix particle when available | ParticleUtil.spawnParticleGlow(world, tx, ty, tz, 0, 0, 0, 100, 255, 235, 0.5f*alpha, 8.0f, 40);
+        ParticleUtil.spawnParticleGlow(world, tx, ty, tz, 0, 0, 0, 100, 255, 235, 0.5f*alpha, 8.0f, 40);
       }
     }
     if (this.ticksExisted % 20 == 0) {
       List<EntityLivingBase> entities = world
           .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 15.5, posY - 15.5, posZ - 15.5, posX + 15.5, posY + 15.5, posZ + 15.5));
       for (EntityLivingBase e : entities) {
-        //todo: fix particle when available |  EffectManager.assignEffect(e, EffectManager.effect_invulnerability.name, 22, new NBTTagCompound());
+        EffectManager.assignEffect(e, EffectManager.effect_invulnerability.name, 22, new NBTTagCompound());
       }
     }
   }

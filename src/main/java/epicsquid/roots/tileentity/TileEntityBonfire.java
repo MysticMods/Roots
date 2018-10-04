@@ -2,6 +2,7 @@ package epicsquid.roots.tileentity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Nonnull;
 
@@ -9,6 +10,7 @@ import epicsquid.mysticallib.network.MessageTEUpdate;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.block.state.IBlockState;
@@ -32,6 +34,8 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   private float pickupDelay = 0;
   private int burnTime = 0;
   private boolean doBigFlame = false;
+
+  private Random random = new Random();
 
   public ItemStackHandler inventory = new ItemStackHandler(5) {
     @Override
@@ -156,8 +160,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     }
     if (world.isRemote && this.doBigFlame) {
       for (int i = 0; i < 40; i++) {
-        //todo: fix particle
-        //ParticleUtil.spawnParticleFiery(world, getPos().getX()+0.125f+0.75f*Misc.random.nextFloat(), getPos().getY()+0.75f+0.5f*Misc.random.nextFloat(), getPos().getZ()+0.125f+0.75f*Misc.random.nextFloat(), 0.03125f*(Misc.random.nextFloat()-0.5f), 0.125f*Misc.random.nextFloat(), 0.03125f*(Misc.random.nextFloat()-0.5f), 255.0f, 224.0f, 32.0f, 0.75f, 9.0f+9.0f*Misc.random.nextFloat(), 40);
+        ParticleUtil.spawnParticleFiery(world, getPos().getX()+0.125f+0.75f*random.nextFloat(), getPos().getY()+0.75f+0.5f*random.nextFloat(), getPos().getZ()+0.125f+0.75f*random.nextFloat(), 0.03125f*(random.nextFloat()-0.5f), 0.125f*random.nextFloat(), 0.03125f*(random.nextFloat()-0.5f), 255.0f, 224.0f, 32.0f, 0.75f, 9.0f+9.0f*random.nextFloat(), 40);
       }
     }
     if (doBigFlame) {
@@ -188,8 +191,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       }
       if (world.isRemote) {
         for (int i = 0; i < 2; i++) {
-          //todo: fix particle
-          //ParticleUtil.spawnParticleFiery(world, getPos().getX()+0.3125f+0.375f*Misc.random.nextFloat(), getPos().getY()+0.625f+0.375f*Misc.random.nextFloat(), getPos().getZ()+0.3125f+0.375f*Misc.random.nextFloat(), 0.03125f*(Misc.random.nextFloat()-0.5f), 0.125f*Misc.random.nextFloat(), 0.03125f*(Misc.random.nextFloat()-0.5f), 255.0f, 96.0f, 32.0f, 0.75f, 7.0f+7.0f*Misc.random.nextFloat(), 40);
+          ParticleUtil.spawnParticleFiery(world, getPos().getX()+0.3125f+0.375f*Util.rand.nextFloat(), getPos().getY()+0.625f+0.375f*Util.rand.nextFloat(), getPos().getZ()+0.3125f+0.375f*Util.rand.nextFloat(), 0.03125f*(Util.rand.nextFloat()-0.5f), 0.125f*Util.rand.nextFloat(), 0.03125f*(Util.rand.nextFloat()-0.5f), 255.0f, 96.0f, 32.0f, 0.75f, 7.0f+7.0f*Util.rand.nextFloat(), 40);
         }
       }
     }

@@ -3,6 +3,8 @@ package epicsquid.roots.entity.spell;
 import java.util.Random;
 import java.util.UUID;
 
+import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -46,7 +48,6 @@ public class EntityBoost extends Entity {
     }
     if (world.isRemote) {
       for (int i = 0; i < 4; i++) {
-        /* todo: fix when particles work
         if (rand.nextBoolean()) {
           ParticleUtil.spawnParticleStar(world, (float) posX + (rand.nextFloat()) - 0.5f, (float) posY + (rand.nextFloat()) + 0.5f,
               (float) posZ + (rand.nextFloat()) - 0.5f, -0.125f * (float) motionX, -0.125f * (float) motionY, -0.125f * (float) motionZ,
@@ -57,7 +58,7 @@ public class EntityBoost extends Entity {
               (float) posZ + (rand.nextFloat()) - 0.5f, -0.125f * (float) motionX, -0.125f * (float) motionY, -0.125f * (float) motionZ,
               SpellRegistry.spell_blue_orchid.red2, SpellRegistry.spell_blue_orchid.green2, SpellRegistry.spell_blue_orchid.blue2, 0.5f,
               5.0f * rand.nextFloat() + 5.0f, 40);
-        }*/
+        }
       }
     }
     if (playerId != null) {

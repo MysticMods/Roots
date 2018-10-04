@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.UUID;
 
 import epicsquid.mysticallib.fx.EffectManager;
+import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -51,7 +52,6 @@ public class EntityTimeStop extends Entity {
     if (world.isRemote) {
       for (float i = 0; i < 360; i += 24.0f) {
         if (rand.nextInt(4) == 0) {
-          /* todo: fix when particles work
           if (rand.nextBoolean()) {
             ParticleUtil
                 .spawnParticleSmoke(world, (float) posX + rand.nextFloat() * rand.nextFloat() * 8.0f * (float) Math.sin(Math.toRadians(i)), (float) posY - 0.5f,
@@ -65,7 +65,6 @@ public class EntityTimeStop extends Entity {
                     SpellRegistry.spell_oxeye_daisy.red2, SpellRegistry.spell_oxeye_daisy.green2, SpellRegistry.spell_oxeye_daisy.blue2,
                     rand.nextFloat() * 0.25f, rand.nextFloat() * 24f, 120, true);
           }
-           */
         }
       }
     }

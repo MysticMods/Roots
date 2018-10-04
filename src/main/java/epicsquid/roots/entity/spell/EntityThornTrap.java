@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
@@ -62,7 +64,6 @@ public class EntityThornTrap extends Entity {
     }
     if (world.isRemote) {
       if (onGround) {
-        /* todo: fix when particles work
         if (rand.nextBoolean()) {
           ParticleUtil
               .spawnParticleThorn(world, (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f),
@@ -86,7 +87,6 @@ public class EntityThornTrap extends Entity {
                   0.125f * (rand.nextFloat() - 0.5f), SpellRegistry.spell_rose.red2, SpellRegistry.spell_rose.green2, SpellRegistry.spell_rose.blue2, 0.5f, 5f,
                   12);
         }
-         */
       }
     }
     if (playerId != null) {
@@ -111,7 +111,6 @@ public class EntityThornTrap extends Entity {
           }
           if (world.isRemote) {
             for (int i = 0; i < 30; i++) {
-              /*todo: fix when particles work
               if (rand.nextBoolean()) {
                 ParticleUtil.spawnParticleThorn(world, (float) posX + 0.25f * (rand.nextFloat() - 0.5f), (float) posY + 0.25f * (rand.nextFloat() - 0.5f),
                     (float) posZ + 0.25f * (rand.nextFloat() - 0.5f), 0.375f * rand.nextFloat() - 0.1875f, 0.1f + 0.125f * rand.nextFloat(),
@@ -123,7 +122,6 @@ public class EntityThornTrap extends Entity {
                     0.375f * rand.nextFloat() - 0.1875f, SpellRegistry.spell_rose.red2, SpellRegistry.spell_rose.green2, SpellRegistry.spell_rose.blue2, 0.5f,
                     4.0f, 24, rand.nextBoolean());
               }
-               */
             }
           }
         }
