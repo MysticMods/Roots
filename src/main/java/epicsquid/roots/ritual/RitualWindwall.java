@@ -1,8 +1,7 @@
 package epicsquid.roots.ritual;
 
 import epicsquid.mysticalworld.init.ModItems;
-import epicsquid.roots.entity.EntityRitualWarden;
-import epicsquid.roots.entity.EntityRitualWindwall;
+import epicsquid.roots.entity.ritual.EntityRitualWindwall;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;

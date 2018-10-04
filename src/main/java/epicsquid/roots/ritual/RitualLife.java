@@ -1,7 +1,7 @@
 package epicsquid.roots.ritual;
 
 import epicsquid.mysticalworld.init.ModItems;
-import epicsquid.roots.entity.EntityRitualLife;
+import epicsquid.roots.entity.ritual.EntityRitualLife;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.block.state.IBlockState;

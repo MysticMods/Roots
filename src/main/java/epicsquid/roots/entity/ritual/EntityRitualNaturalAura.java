@@ -1,4 +1,4 @@
-package epicsquid.roots.entity;
+package epicsquid.roots.entity.ritual;
 
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.block.BlockCrops;

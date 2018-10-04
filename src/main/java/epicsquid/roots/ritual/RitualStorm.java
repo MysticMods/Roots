@@ -1,7 +1,7 @@
 package epicsquid.roots.ritual;
 
 import epicsquid.mysticalworld.init.ModItems;
-import epicsquid.roots.entity.EntityRitualStorm;
+import epicsquid.roots.entity.ritual.EntityRitualStorm;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

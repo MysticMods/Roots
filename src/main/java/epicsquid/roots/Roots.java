@@ -47,6 +47,7 @@ public class Roots {
   public void preInit(FMLPreInitializationEvent event) {
     CONTAINER = Loader.instance().activeModContainer();
     MinecraftForge.EVENT_BUS.register(new RegistryManager());
+    MinecraftForge.EVENT_BUS.register(new EventManager());
     proxy.preInit(event);
   }
 

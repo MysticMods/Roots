@@ -10,8 +10,12 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.item.ItemPetalDust;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.recipe.RecipeRegistry;
+import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.recipe.SpellRecipe;
+import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -97,44 +101,46 @@ public class TileEntityMortar extends TileBase {
         for (int i = 0; i < 5; i++) {
           ingredients.add(inventory.getStackInSlot(i));
         }
-        //        SpellRecipe recipe = RecipeRegistry.getSpellRecipe(ingredients);
-        //        if (recipe != null) {
-        //          SpellBase spell = SpellRegistry.spellRegistry.get(recipe.result);
-        //          if (world.isRemote) {
-        //            for (int i = 0; i < 8; i++) {
-        //              int chance = Misc.random.nextInt(3);
-        //              if (chance == 0) {
-        //                ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
-        //                    getPos().getY() + 0.4375f + 0.125f * (Misc.random.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
-        //                    0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f),
-        //                    spell.red1, spell.green1, spell.blue1, 0.25f, 1.5f, 24, false);
-        //              }
-        //              if (chance == 1) {
-        //                ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
-        //                    getPos().getY() + 0.4375f + 0.125f * (Misc.random.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
-        //                    0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f),
-        //                    spell.red2, spell.green2, spell.blue2, 0.25f, 1.5f, 24, false);
-        //              }
-        //              if (chance == 2) {
-        //                ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
-        //                    getPos().getY() + 0.4375f + 0.125f * (Misc.random.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
-        //                    0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.5f,
-        //                    0.5f, 0.5f, 0.5f, 2.5f, 24, false);
-        //              }
-        //            }
-        //          }
-        //          ItemStack dust = new ItemStack(RegistryManager.petal_dust, 1);
-        //          ItemPetalDust.createData(dust, recipe.result);
-        //          if (!world.isRemote) {
-        //            world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, dust));
-        //            markDirty();
-        //            PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this));
-        //          }
-        //          for (int i = 0; i < 5; i++) {
-        //            inventory.extractItem(i, 1, false);
-        //          }
-        //          return true;
-        //        }
+                SpellRecipe recipe = RecipeRegistry.getSpellRecipe(ingredients);
+                if (recipe != null) {
+                  SpellBase spell = SpellRegistry.spellRegistry.get(recipe.result);
+                  if (world.isRemote) {
+                    //todo: fix particles
+                  }
+                    /*for (int i = 0; i < 8; i++) {
+                      int chance = Misc.random.nextInt(3);
+                      if (chance == 0) {
+                        ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
+                            getPos().getY() + 0.4375f + 0.125f * (Misc.random.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
+                            0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f),
+                            spell.red1, spell.green1, spell.blue1, 0.25f, 1.5f, 24, false);
+                      }
+                      if (chance == 1) {
+                        ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
+                            getPos().getY() + 0.4375f + 0.125f * (Misc.random.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
+                            0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f),
+                            spell.red2, spell.green2, spell.blue2, 0.25f, 1.5f, 24, false);
+                      }
+                      if (chance == 2) {
+                        ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
+                            getPos().getY() + 0.4375f + 0.125f * (Misc.random.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Misc.random.nextFloat() - 0.5f),
+                            0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.0125f * (Misc.random.nextFloat() - 0.5f), 0.5f,
+                            0.5f, 0.5f, 0.5f, 2.5f, 24, false);
+                      }
+                    }
+                  }*/
+                  ItemStack dust = new ItemStack(ModItems.petal_dust, 1);
+                  ItemPetalDust.createData(dust, recipe.result);
+                  if (!world.isRemote) {
+                    world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, dust));
+                    markDirty();
+                    PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+                  }
+                  for (int i = 0; i < 5; i++) {
+                    inventory.extractItem(i, 1, false);
+                  }
+                  return true;
+                }
         MortarRecipe mortarRecipe = RecipeRegistry.getMortarRecipe(ingredients);
 
         if (mortarRecipe != null) {

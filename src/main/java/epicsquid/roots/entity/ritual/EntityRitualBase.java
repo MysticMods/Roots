@@ -1,4 +1,4 @@
-package epicsquid.roots.entity;
+package epicsquid.roots.entity.ritual;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
