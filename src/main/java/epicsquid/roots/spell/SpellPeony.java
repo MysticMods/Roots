@@ -7,7 +7,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 
-
 public class SpellPeony extends SpellBase {
 
   public SpellPeony(String name) {

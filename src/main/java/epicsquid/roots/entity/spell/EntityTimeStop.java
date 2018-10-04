@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import epicsquid.mysticallib.fx.EffectManager;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.entity.Entity;

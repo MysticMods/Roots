@@ -2,7 +2,8 @@ package epicsquid.roots.init;
 
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.entity.RenderNull;
-import epicsquid.mysticalworld.entity.EntityDeer;
+import epicsquid.roots.Roots;
+import epicsquid.roots.entity.ritual.EntityFlare;
 import epicsquid.roots.entity.ritual.EntityRitualFireStorm;
 import epicsquid.roots.entity.ritual.EntityRitualLife;
 import epicsquid.roots.entity.ritual.EntityRitualLight;
@@ -16,11 +17,6 @@ import epicsquid.roots.entity.spell.EntityPetalShell;
 import epicsquid.roots.entity.spell.EntityThornTrap;
 import epicsquid.roots.entity.spell.EntityTimeStop;
 import epicsquid.roots.proxy.ClientProxy;
-import epicsquid.roots.Roots;
-import epicsquid.roots.entity.ritual.EntityFlare;
-import net.minecraft.client.renderer.entity.RenderEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class ModEntities {
 

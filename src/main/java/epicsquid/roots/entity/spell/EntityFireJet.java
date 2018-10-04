@@ -1,7 +1,6 @@
 package epicsquid.roots.entity.spell;
 
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 import epicsquid.roots.particle.ParticleUtil;

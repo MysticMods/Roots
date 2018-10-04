@@ -61,7 +61,7 @@ public abstract class RitualBase {
     }
   }
 
-  protected int getThreeHighStandingStones(World world, BlockPos pos){
+  protected int getThreeHighStandingStones(World world, BlockPos pos) {
     int threeHighCount = 0;
     for (int i = -6; i < 7 + 1; i++) {
       for (int j = -6; j < 7 + 1; j++) {
@@ -77,7 +77,7 @@ public abstract class RitualBase {
     return threeHighCount;
   }
 
-  protected int getFourHighStandingStones(World world, BlockPos pos){
+  protected int getFourHighStandingStones(World world, BlockPos pos) {
     int fourHighCount = 0;
     for (int i = -6; i < 7 + 1; i++) {
       for (int j = -6; j < 7 + 1; j++) {

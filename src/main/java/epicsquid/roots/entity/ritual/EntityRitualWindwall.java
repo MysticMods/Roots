@@ -31,16 +31,17 @@ public class EntityRitualWindwall extends EntityRitualBase {
       setDead();
     }
     if (world.isRemote && getDataManager().get(lifetime) > 0) {
-      ParticleUtil.spawnParticleStar(world, (float)posX, (float)posY, (float)posZ, 0, 0, 0, 70, 70, 70, 0.5f*alpha, 20.0f, 40);
+      ParticleUtil.spawnParticleStar(world, (float) posX, (float) posY, (float) posZ, 0, 0, 0, 70, 70, 70, 0.5f * alpha, 20.0f, 40);
       for (float i = 0; i < 360; i += 120) {
         float ang = (float) (ticksExisted % 360);
         float tx = (float) posX + 2.5f * (float) Math.sin(Math.toRadians(2.0f * (i + ang)));
         float ty = (float) posY + 0.5f * (float) Math.sin(Math.toRadians(4.0f * (i + ang)));
         float tz = (float) posZ + 2.5f * (float) Math.cos(Math.toRadians(2.0f * (i + ang)));
-        ParticleUtil.spawnParticleStar(world, tx, ty, tz, 0, 0, 0, 70, 70, 70, 0.5f*alpha, 10.0f, 40);
+        ParticleUtil.spawnParticleStar(world, tx, ty, tz, 0, 0, 0, 70, 70, 70, 0.5f * alpha, 10.0f, 40);
       }
       if (rand.nextInt(5) == 0) {
-        ParticleUtil.spawnParticleSpark(world, (float)posX, (float)posY, (float)posZ, 0.125f*(rand.nextFloat()-0.5f), 0.0625f*(rand.nextFloat()), 0.125f*(rand.nextFloat()-0.5f), 70, 70, 70, 1.0f*alpha, 1.0f+rand.nextFloat(), 160);
+        ParticleUtil.spawnParticleSpark(world, (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.0625f * (rand.nextFloat()),
+            0.125f * (rand.nextFloat() - 0.5f), 70, 70, 70, 1.0f * alpha, 1.0f + rand.nextFloat(), 160);
       }
     }
     if (this.ticksExisted % 5 == 0) {
@@ -51,7 +52,9 @@ public class EntityRitualWindwall extends EntityRitualBase {
           e.knockBack(this, 1.0f, posX - e.posX, posZ - e.posZ);
           if (world.isRemote) {
             for (int i = 0; i < 10; i++) {
-              ParticleUtil.spawnParticleSmoke(world, (float)e.posX, (float)e.posY, (float)e.posZ, (float)e.motionX*rand.nextFloat()*0.5f, (float)e.motionY*rand.nextFloat()*0.5f, (float)e.motionZ*rand.nextFloat()*0.5f, 0.65f, 0.65f, 0.65f, 0.15f, 12.0f+24.0f*rand.nextFloat(), 80, false);
+              ParticleUtil.spawnParticleSmoke(world, (float) e.posX, (float) e.posY, (float) e.posZ, (float) e.motionX * rand.nextFloat() * 0.5f,
+                  (float) e.motionY * rand.nextFloat() * 0.5f, (float) e.motionZ * rand.nextFloat() * 0.5f, 0.65f, 0.65f, 0.65f, 0.15f,
+                  12.0f + 24.0f * rand.nextFloat(), 80, false);
             }
           }
         }

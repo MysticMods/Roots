@@ -14,8 +14,8 @@ import epicsquid.roots.item.ItemPetalDust;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.recipe.RecipeRegistry;
-import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.recipe.SpellRecipe;
+import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -111,20 +111,20 @@ public class TileEntityMortar extends TileBase {
               if (chance == 0) {
                 ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
-                    0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f),
-                    spell.red1, spell.green1, spell.blue1, 0.25f, 1.5f, 24, false);
+                    0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), spell.red1,
+                    spell.green1, spell.blue1, 0.25f, 1.5f, 24, false);
               }
               if (chance == 1) {
                 ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
-                    0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f),
-                    spell.red2, spell.green2, spell.blue2, 0.25f, 1.5f, 24, false);
+                    0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), spell.red2,
+                    spell.green2, spell.blue2, 0.25f, 1.5f, 24, false);
               }
               if (chance == 2) {
                 ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
-                    0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.5f,
-                    0.5f, 0.5f, 0.5f, 2.5f, 24, false);
+                    0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.5f, 0.5f,
+                    0.5f, 0.5f, 2.5f, 24, false);
               }
             }
           }
@@ -161,8 +161,8 @@ public class TileEntityMortar extends TileBase {
               if (chance == 2) {
                 ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
-                    0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.5f,
-                    0.5f, 0.5f, 0.5f, 2.5f, 24, false);
+                    0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.5f, 0.5f,
+                    0.5f, 0.5f, 2.5f, 24, false);
               }
             }
           }

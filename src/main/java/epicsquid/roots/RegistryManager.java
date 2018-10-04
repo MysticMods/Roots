@@ -47,7 +47,7 @@ public class RegistryManager {
   }
 
   @SideOnly(Side.CLIENT)
-  public static void registerColorHandlers(){
+  public static void registerColorHandlers() {
     Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemStaff.StaffColorHandler(), ModItems.staff);
   }
 

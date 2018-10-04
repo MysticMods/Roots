@@ -11,13 +11,8 @@ public class RitualNaturalAura extends RitualBase {
 
   public RitualNaturalAura(String name, int duration, boolean doUpdateValidity) {
     super(name, duration, doUpdateValidity);
-    addIngredients(
-        new ItemStack(ModItems.wildroot, 1),
-        new ItemStack(ModItems.wildroot, 1),
-        new ItemStack(ModItems.spirit_herb, 1),
-        new ItemStack(Items.BONE, 1),
-        new ItemStack(Items.BONE, 1)
-    );
+    addIngredients(new ItemStack(ModItems.wildroot, 1), new ItemStack(ModItems.wildroot, 1), new ItemStack(ModItems.spirit_herb, 1),
+        new ItemStack(Items.BONE, 1), new ItemStack(Items.BONE, 1));
   }
 
   @Override

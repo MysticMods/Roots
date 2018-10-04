@@ -13,7 +13,6 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
-
 public class SpellSunflower extends SpellBase {
 
   public SpellSunflower(String name) {

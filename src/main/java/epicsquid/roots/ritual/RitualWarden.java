@@ -11,13 +11,8 @@ public class RitualWarden extends RitualBase {
 
   public RitualWarden(String name, int duration, boolean doUpdateValidity) {
     super(name, duration, doUpdateValidity);
-    addIngredients(
-        new ItemStack(Items.DYE, 1, 15),
-        new ItemStack(ModItems.pereskia_bulb, 1),
-        new ItemStack(ModItems.spirit_herb, 1),
-        new ItemStack(ModItems.bark_oak, 1),
-        new ItemStack(Items.IRON_CHESTPLATE, 1)
-    );
+    addIngredients(new ItemStack(Items.DYE, 1, 15), new ItemStack(ModItems.pereskia_bulb, 1), new ItemStack(ModItems.spirit_herb, 1),
+        new ItemStack(ModItems.bark_oak, 1), new ItemStack(Items.IRON_CHESTPLATE, 1));
   }
 
   @Override
