@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import epicsquid.roots.entity.EntityRitualBase;
+import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.init.ModBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;

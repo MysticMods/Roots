@@ -1,4 +1,4 @@
-package epicsquid.roots.entity;
+package epicsquid.roots.entity.ritual;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,9 +58,9 @@ public class EntityRitualRegrowth extends EntityRitualBase {
           ((BlockGrass) state.getBlock()).grow(world, rand, pos, state);
           if (world.isRemote) {
             for (int i = 0; i < 360; i += rand.nextFloat() * 45.0f) {
-              float tx = (float) (pos.getX() + 0.5f) + (rand.nextFloat() - 0.5f) * 0.25f;
-              float ty = (float) (pos.getY() + 1.5f) + (rand.nextFloat() - 0.5f) * 0.25f;
-              float tz = (float) (pos.getZ() + 0.5f) + (rand.nextFloat() - 0.5f) * 0.25f;
+              float tx = pos.getX() + 0.5f + (rand.nextFloat() - 0.5f) * 0.25f;
+              float ty = pos.getY() + 1.5f + (rand.nextFloat() - 0.5f) * 0.25f;
+              float tz = pos.getZ() + 0.5f + (rand.nextFloat() - 0.5f) * 0.25f;
               float vx = 0.125f * (float) Math.sin(Math.toRadians(i));
               float vz = 0.125f * (float) Math.cos(Math.toRadians(i));
               //todo: fix particle when available | ParticleUtil.spawnParticleSpark(world, tx, ty, tz, vx, rand.nextFloat()*0.0625f+0.0625f, vz, 150, 255, 100, 0.5f*alpha, 6.0f+rand.nextFloat()*6.0f, 40);
@@ -76,8 +76,8 @@ public class EntityRitualRegrowth extends EntityRitualBase {
                   BlockPos p = pos.add(i, j + 1, k);
                   IBlockState state2 = world.getBlockState(p);
                   if (state2.getBlock() instanceof BlockLeaves) {
-                    List<ItemStack> items = ((BlockLeaves) state2.getBlock()).getDrops(world, p, state2, 0);
-                    items.addAll(((BlockLeaves) state2.getBlock()).getDrops(world, p, state2, 0));
+                    List<ItemStack> items = state2.getBlock().getDrops(world, p, state2, 0);
+                    items.addAll(state2.getBlock().getDrops(world, p, state2, 0));
                     for (ItemStack s : items) {
                       if (Block.getBlockFromItem(s.getItem()) instanceof BlockSapling) {
                         Block b = Block.getBlockFromItem(s.getItem());
