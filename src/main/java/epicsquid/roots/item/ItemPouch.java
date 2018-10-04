@@ -15,13 +15,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemPouch extends ItemBase {
   public static final double capacity = 128.0;
 
-  public ItemPouch(String name){
+  public ItemPouch(String name) {
     super(name);
     setMaxStackSize(1);
   }
 
-  public static ItemStack createData(ItemStack stack, String plantName, double quantity){
-    if (!stack.hasTagCompound()){
+  public static ItemStack createData(ItemStack stack, String plantName, double quantity) {
+    if (!stack.hasTagCompound()) {
       stack.setTagCompound(new NBTTagCompound());
     }
     stack.getTagCompound().setString("plant", plantName);
@@ -29,20 +29,20 @@ public class ItemPouch extends ItemBase {
     return stack;
   }
 
-  public static double getQuantity(ItemStack stack, String plantName){
-    if (stack.hasTagCompound()){
-      if (stack.getTagCompound().hasKey("quantity")){
+  public static double getQuantity(ItemStack stack, String plantName) {
+    if (stack.hasTagCompound()) {
+      if (stack.getTagCompound().hasKey("quantity")) {
         return stack.getTagCompound().getDouble("quantity");
       }
     }
     return 0.0;
   }
 
-  public static void setQuantity(ItemStack stack, String plantName, double quantity){
-    if (stack.hasTagCompound()){
-      if (stack.getTagCompound().hasKey("quantity")){
+  public static void setQuantity(ItemStack stack, String plantName, double quantity) {
+    if (stack.hasTagCompound()) {
+      if (stack.getTagCompound().hasKey("quantity")) {
         stack.getTagCompound().setDouble("quantity", Math.min(128.0, quantity));
-        if (stack.getTagCompound().getDouble("quantity") <= 0){
+        if (stack.getTagCompound().getDouble("quantity") <= 0) {
           stack.getTagCompound().removeTag("quantity");
           stack.getTagCompound().removeTag("plant");
         }
@@ -51,9 +51,9 @@ public class ItemPouch extends ItemBase {
   }
 
   @Override
-  public boolean showDurabilityBar(ItemStack stack){
-    if (stack.hasTagCompound()){
-      if (stack.getTagCompound().hasKey("quantity")){
+  public boolean showDurabilityBar(ItemStack stack) {
+    if (stack.hasTagCompound()) {
+      if (stack.getTagCompound().hasKey("quantity")) {
         return true;
       }
     }
@@ -61,15 +61,15 @@ public class ItemPouch extends ItemBase {
   }
 
   @Override
-  public int getRGBDurabilityForDisplay(ItemStack stack){
+  public int getRGBDurabilityForDisplay(ItemStack stack) {
     return Util.intColor(96, 255, 96);
   }
 
   @Override
-  public double getDurabilityForDisplay(ItemStack stack){
-    if (stack.hasTagCompound()){
-      if (stack.getTagCompound().hasKey("quantity")){
-        return 1.0-stack.getTagCompound().getDouble("quantity")/128.0;
+  public double getDurabilityForDisplay(ItemStack stack) {
+    if (stack.hasTagCompound()) {
+      if (stack.getTagCompound().hasKey("quantity")) {
+        return 1.0 - stack.getTagCompound().getDouble("quantity") / 128.0;
       }
     }
     return 0;
@@ -77,14 +77,13 @@ public class ItemPouch extends ItemBase {
 
   @SideOnly(Side.CLIENT)
   @Override
-  public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced){
-    if (stack.hasTagCompound()){
-      if (stack.getTagCompound().hasKey("quantity")){
-        tooltip.add(
-            I18n.format(stack.getTagCompound().getString("plant")+".name")+I18n.format("roots.tooltip.pouch_divider")+(int)Math.ceil(stack.getTagCompound().getDouble("quantity")));
+  public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
+    if (stack.hasTagCompound()) {
+      if (stack.getTagCompound().hasKey("quantity")) {
+        tooltip.add(I18n.format(stack.getTagCompound().getString("plant") + ".name") + I18n.format("roots.tooltip.pouch_divider") + (int) Math
+            .ceil(stack.getTagCompound().getDouble("quantity")));
       }
     }
   }
-
 
 }

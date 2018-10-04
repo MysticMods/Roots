@@ -30,18 +30,18 @@ public class RecipeRegistry {
     mortarRecipes.add(recipe);
   }
 
-  public static SpellRecipe getSpellRecipe(List<ItemStack> items){
-    for (int i = 0; i < spellRecipes.size(); i ++){
-      if (spellRecipes.get(i).matches(items)){
+  public static SpellRecipe getSpellRecipe(List<ItemStack> items) {
+    for (int i = 0; i < spellRecipes.size(); i++) {
+      if (spellRecipes.get(i).matches(items)) {
         return spellRecipes.get(i);
       }
     }
     return null;
   }
 
-  public static SpellRecipe getSpellRecipe(String spell){
-    for (int i = 0; i < spellRecipes.size(); i ++){
-      if (spellRecipes.get(i).result.compareTo(spell) == 0){
+  public static SpellRecipe getSpellRecipe(String spell) {
+    for (int i = 0; i < spellRecipes.size(); i++) {
+      if (spellRecipes.get(i).result.compareTo(spell) == 0) {
         return spellRecipes.get(i);
       }
     }

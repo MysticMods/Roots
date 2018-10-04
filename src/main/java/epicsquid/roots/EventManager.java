@@ -11,10 +11,10 @@ public class EventManager {
   public static long ticks = 0;
 
   @SubscribeEvent(priority = EventPriority.HIGHEST)
-  public void onTick(TickEvent.ClientTickEvent event){
-    if (event.side == Side.CLIENT){
+  public void onTick(TickEvent.ClientTickEvent event) {
+    if (event.side == Side.CLIENT) {
       ClientProxy.particleRenderer.updateParticles();
-      ticks ++;
+      ticks++;
     }
   }
 

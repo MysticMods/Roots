@@ -2,7 +2,6 @@ package epicsquid.roots.spell;
 
 import java.util.Random;
 
-import epicsquid.mysticallib.util.Util;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

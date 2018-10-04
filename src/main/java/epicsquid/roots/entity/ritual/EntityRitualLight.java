@@ -31,9 +31,10 @@ public class EntityRitualLight extends EntityRitualBase {
       setDead();
     }
     if (world.isRemote && getDataManager().get(lifetime) > 0) {
-      ParticleUtil.spawnParticleStar(world, (float)posX, (float)posY, (float)posZ, 0, 0, 0, 255, 255, 75, 0.5f*alpha, 20.0f, 40);
+      ParticleUtil.spawnParticleStar(world, (float) posX, (float) posY, (float) posZ, 0, 0, 0, 255, 255, 75, 0.5f * alpha, 20.0f, 40);
       if (rand.nextInt(5) == 0) {
-        ParticleUtil.spawnParticleSpark(world, (float)posX, (float)posY, (float)posZ, 0.125f*(rand.nextFloat()-0.5f), 0.0625f*(rand.nextFloat()), 0.125f*(rand.nextFloat()-0.5f), 255, 255, 75, 1.0f*alpha, 1.0f+rand.nextFloat(), 160);
+        ParticleUtil.spawnParticleSpark(world, (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.0625f * (rand.nextFloat()),
+            0.125f * (rand.nextFloat() - 0.5f), 255, 255, 75, 1.0f * alpha, 1.0f + rand.nextFloat(), 160);
       }
       if (rand.nextInt(2) == 0) {
         float pitch = rand.nextFloat() * 360.0f;
@@ -43,7 +44,7 @@ public class EntityRitualLight extends EntityRitualBase {
           float ty = (float) posY + i * (float) Math.cos(Math.toRadians(pitch));
           float tz = (float) posZ + i * (float) Math.cos(Math.toRadians(yaw)) * (float) Math.sin(Math.toRadians(pitch));
           float coeff = i / 3.5f;
-          ParticleUtil.spawnParticleGlow(world, tx, ty, tz, 0, 0, 0, 255, 255, 75, 0.5f*alpha*(1.0f-coeff), 18.0f*(1.0f-coeff), 20);
+          ParticleUtil.spawnParticleGlow(world, tx, ty, tz, 0, 0, 0, 255, 255, 75, 0.5f * alpha * (1.0f - coeff), 18.0f * (1.0f - coeff), 20);
         }
       }
     }
@@ -66,7 +67,10 @@ public class EntityRitualLight extends EntityRitualBase {
           e.setFire(2);
           if (world.isRemote) {
             for (float i = 0; i < 16; i++) {
-              ParticleUtil.spawnParticleFiery(world, (float)e.posX+0.5f*(rand.nextFloat()-0.5f), (float)e.posY+e.height/2.5f+(rand.nextFloat()-0.5f), (float)e.posZ+0.5f*(rand.nextFloat()-0.5f), 0.0625f*(rand.nextFloat()-0.5f), 0.09375f*(rand.nextFloat()), 0.0625f*(rand.nextFloat()-0.5f), 255.0f, 96.0f, 32.0f, 1.0f*alpha, 4.0f+12.0f*rand.nextFloat(), 40);
+              ParticleUtil
+                  .spawnParticleFiery(world, (float) e.posX + 0.5f * (rand.nextFloat() - 0.5f), (float) e.posY + e.height / 2.5f + (rand.nextFloat() - 0.5f),
+                      (float) e.posZ + 0.5f * (rand.nextFloat() - 0.5f), 0.0625f * (rand.nextFloat() - 0.5f), 0.09375f * (rand.nextFloat()),
+                      0.0625f * (rand.nextFloat() - 0.5f), 255.0f, 96.0f, 32.0f, 1.0f * alpha, 4.0f + 12.0f * rand.nextFloat(), 40);
             }
           }
         }

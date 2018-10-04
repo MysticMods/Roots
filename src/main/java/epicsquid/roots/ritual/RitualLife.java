@@ -13,13 +13,8 @@ import net.minecraft.world.World;
 public class RitualLife extends RitualBase {
   public RitualLife(String name, int duration, boolean doUpdateValidity) {
     super(name, duration, doUpdateValidity);
-    addIngredients(
-        new ItemStack(ModItems.terra_moss, 1),
-        new ItemStack(ModItems.bark_oak, 1),
-        new ItemStack(ModItems.bark_birch, 1),
-        new ItemStack(ModItems.bark_birch, 1),
-        new ItemStack(Blocks.SAPLING, 1, 2)
-    );
+    addIngredients(new ItemStack(ModItems.terra_moss, 1), new ItemStack(ModItems.bark_oak, 1), new ItemStack(ModItems.bark_birch, 1),
+        new ItemStack(ModItems.bark_birch, 1), new ItemStack(Blocks.SAPLING, 1, 2));
   }
 
   @Override

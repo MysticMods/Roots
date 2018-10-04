@@ -10,16 +10,16 @@ public class SpellRecipe {
   public List<ItemStack> ingredients = new ArrayList<>();
   public String result;
 
-  public SpellRecipe(String result){
+  public SpellRecipe(String result) {
     this.result = result;
   }
 
-  public SpellRecipe addIngredient(ItemStack stack){
+  public SpellRecipe addIngredient(ItemStack stack) {
     this.ingredients.add(stack);
     return this;
   }
 
-  public boolean matches(List<ItemStack> ingredients){
+  public boolean matches(List<ItemStack> ingredients) {
     return ListUtil.stackListsMatch(ingredients, this.ingredients);
   }
 }
