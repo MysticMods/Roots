@@ -70,7 +70,7 @@ public class ParticleUtil {
     if (MysticalLib.proxy instanceof ClientProxy){
       counter += random.nextInt(3);
       if (counter % (Minecraft.getMinecraft().gameSettings.particleSetting == 0 ? 1 : 2*Minecraft.getMinecraft().gameSettings.particleSetting) == 0){
-        ClientProxy.particleRenderer.spawnParticle(world, LibRegistry.PARTICLE_SPARK, x,y,z,vx,vy,vz,lifetime, r,g,b,a, scale);
+        ClientProxy.particleRenderer.spawnParticle(world, LibRegistry.PARTICLE_SPARK, x,y,z,vx,vy,vz,lifetime, r,g,b,a, scale, lifetime);
       }
     }
   }

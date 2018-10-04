@@ -44,7 +44,6 @@ public class EntityRitualPurity extends EntityRitualBase {
       }
     }
     if (this.ticksExisted % 20 == 0) {
-      System.out.println("Second");
       List<EntityLivingBase> entities = world
           .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 15.5, posY - 15.5, posZ - 15.5, posX + 15.5, posY + 15.5, posZ + 15.5));
       for (EntityLivingBase e : entities) {
@@ -54,10 +53,8 @@ public class EntityRitualPurity extends EntityRitualBase {
           }
         }
         if (world.isRemote) {
-          System.out.println("");
           for (float i = 0; i < 8; i++) {
             ParticleUtil.spawnParticleStar(world, (float)e.posX+0.5f*(rand.nextFloat()-0.5f), (float)e.posY+e.height/2.5f+(rand.nextFloat()-0.5f), (float)e.posZ+0.5f*(rand.nextFloat()-0.5f), 0.125f*(rand.nextFloat()-0.5f), 0.01875f*(rand.nextFloat()), 0.125f*(rand.nextFloat()-0.5f), 100, 255, 100, 1.0f*alpha, 1.0f+2.0f*rand.nextFloat(), 40);
-            System.out.println("mhm yeah");
           }
         }
       }
