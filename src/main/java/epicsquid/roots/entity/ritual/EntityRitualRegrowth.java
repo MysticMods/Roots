@@ -3,6 +3,7 @@ package epicsquid.roots.entity.ritual;
 import java.util.ArrayList;
 import java.util.List;
 
+import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
@@ -35,9 +36,9 @@ public class EntityRitualRegrowth extends EntityRitualBase {
       setDead();
     }
     if (world.isRemote && getDataManager().get(lifetime) > 0) {
-      //todo: fix particle when available | ParticleUtil.spawnParticleStar(world, (float)posX, (float)posY, (float)posZ, 0, 0, 0, 150, 255, 100, 0.5f*alpha, 20.0f, 40);
+      ParticleUtil.spawnParticleStar(world, (float)posX, (float)posY, (float)posZ, 0, 0, 0, 150, 255, 100, 0.5f*alpha, 20.0f, 40);
       if (rand.nextInt(5) == 0) {
-        //todo: fix particle when available | ParticleUtil.spawnParticleSpark(world, (float)posX, (float)posY, (float)posZ, 0.125f*(rand.nextFloat()-0.5f), 0.0625f*(rand.nextFloat()), 0.125f*(rand.nextFloat()-0.5f), 100, 255, 50, 1.0f*alpha, 1.0f+rand.nextFloat(), 160);
+        ParticleUtil.spawnParticleSpark(world, (float)posX, (float)posY, (float)posZ, 0.125f*(rand.nextFloat()-0.5f), 0.0625f*(rand.nextFloat()), 0.125f*(rand.nextFloat()-0.5f), 100, 255, 50, 1.0f*alpha, 1.0f+rand.nextFloat(), 160);
       }
       if (rand.nextInt(2) == 0) {
         for (float i = 0; i < 360; i += rand.nextFloat() * 120.0f) {
@@ -45,7 +46,7 @@ public class EntityRitualRegrowth extends EntityRitualBase {
           float ty = (float) posY;
           float tz = (float) posZ + 2.0f * (float) Math.cos(Math.toRadians(i));
           for (int j = 0; j < 4; j++) {
-            //todo: fix particle when available | ParticleUtil.spawnParticleStar(world, tx, ty, tz, 0, rand.nextFloat()*0.125f, 0, 100, 255, 50, 0.5f*alpha, 5.0f+rand.nextFloat()*5.0f, 40);
+            ParticleUtil.spawnParticleStar(world, tx, ty, tz, 0, rand.nextFloat()*0.125f, 0, 100, 255, 50, 0.5f*alpha, 5.0f+rand.nextFloat()*5.0f, 40);
           }
         }
       }
@@ -63,7 +64,7 @@ public class EntityRitualRegrowth extends EntityRitualBase {
               float tz = pos.getZ() + 0.5f + (rand.nextFloat() - 0.5f) * 0.25f;
               float vx = 0.125f * (float) Math.sin(Math.toRadians(i));
               float vz = 0.125f * (float) Math.cos(Math.toRadians(i));
-              //todo: fix particle when available | ParticleUtil.spawnParticleSpark(world, tx, ty, tz, vx, rand.nextFloat()*0.0625f+0.0625f, vz, 150, 255, 100, 0.5f*alpha, 6.0f+rand.nextFloat()*6.0f, 40);
+              ParticleUtil.spawnParticleSpark(world, tx, ty, tz, vx, rand.nextFloat()*0.0625f+0.0625f, vz, 150, 255, 100, 0.5f*alpha, 6.0f+rand.nextFloat()*6.0f, 40);
             }
           }
         }

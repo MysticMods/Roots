@@ -8,6 +8,7 @@ import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemStaff;
+import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.block.state.IBlockState;
@@ -145,14 +146,12 @@ public class TileEntityImbuer extends TileBase implements ITickable {
       if (spellDust.hasTagCompound()){
         SpellBase spell = SpellRegistry.spellRegistry.get(spellDust.getTagCompound().getString("spell"));
         if (world.isRemote){
-          /* todo: fix when particles work
-          if (Misc.random.nextInt(2) == 0){
-            ParticleUtil.spawnParticleLineGlow(world, getPos().getX()+0.5f, getPos().getY()+0.125f, getPos().getZ()+0.5f, getPos().getX()+0.5f+0.5f*(Misc.random.nextFloat()-0.5f), getPos().getY()+1.0f, getPos().getZ()+0.5f+0.5f*(Misc.random.nextFloat()-0.5f), spell.red1, spell.green1, spell.blue1, 0.25f, 4.0f, 40);
+          if (Util.rand.nextInt(2) == 0){
+            ParticleUtil.spawnParticleLineGlow(world, getPos().getX()+0.5f, getPos().getY()+0.125f, getPos().getZ()+0.5f, getPos().getX()+0.5f+0.5f*(Util.rand.nextFloat()-0.5f), getPos().getY()+1.0f, getPos().getZ()+0.5f+0.5f*(Util.rand.nextFloat()-0.5f), spell.red1, spell.green1, spell.blue1, 0.25f, 4.0f, 40);
           }
           else {
-            ParticleUtil.spawnParticleLineGlow(world, getPos().getX()+0.5f, getPos().getY()+0.125f, getPos().getZ()+0.5f, getPos().getX()+0.5f+0.5f*(Misc.random.nextFloat()-0.5f), getPos().getY()+1.0f, getPos().getZ()+0.5f+0.5f*(Misc.random.nextFloat()-0.5f), spell.red2, spell.green2, spell.blue2, 0.25f, 4.0f, 40);
+            ParticleUtil.spawnParticleLineGlow(world, getPos().getX()+0.5f, getPos().getY()+0.125f, getPos().getZ()+0.5f, getPos().getX()+0.5f+0.5f*(Util.rand.nextFloat()-0.5f), getPos().getY()+1.0f, getPos().getZ()+0.5f+0.5f*(Util.rand.nextFloat()-0.5f), spell.red2, spell.green2, spell.blue2, 0.25f, 4.0f, 40);
           }
-           */
         }
       }
       if (progress > 200){

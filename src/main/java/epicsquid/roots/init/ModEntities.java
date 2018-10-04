@@ -1,5 +1,11 @@
 package epicsquid.roots.init;
 
+import epicsquid.mysticallib.LibRegistry;
+import epicsquid.mysticallib.entity.RenderNull;
+import epicsquid.roots.proxy.ClientProxy;
+import epicsquid.roots.Roots;
+import epicsquid.roots.entity.ritual.EntityFlare;
+
 public class ModEntities {
 
   /**
@@ -15,7 +21,9 @@ public class ModEntities {
    * LibRegistry.registerEntityRenderer(Entity.class, new RenderEntity.Factory());
    */
   public static void registerMobs() {
-
+    LibRegistry.registerEntity(EntityFlare.class, 0xD46724, 0xF5E0D3);
+    if (Roots.proxy instanceof ClientProxy)
+      LibRegistry.registerEntityRenderer(EntityFlare.class, new RenderNull.Factory());
   }
 
   /**

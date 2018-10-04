@@ -37,8 +37,6 @@ public class RitualFrost extends RitualBase {
         }
       }
     }
-
-    //todo: add nice particle effects in the area
   }
 
 }

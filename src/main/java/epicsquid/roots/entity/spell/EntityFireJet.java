@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import epicsquid.roots.particle.ParticleUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -54,11 +55,10 @@ public class EntityFireJet extends Entity {
       for (int i = 0; i < 8; i++) {
         float offX = 0.5f * (float) Math.sin(Math.toRadians(rotationYaw));
         float offZ = 0.5f * (float) Math.cos(Math.toRadians(rotationYaw));
-        /* todo: fix when particles work
         ParticleUtil.spawnParticleFiery(world, (float) posX + (float) motionX * 2.5f + offX, (float) posY + 1.62F + (float) motionY * 2.5f,
             (float) posZ + (float) motionZ * 2.5f + offZ, (float) motionX + 0.125f * (rand.nextFloat() - 0.5f),
             (float) motionY + 0.125f * (rand.nextFloat() - 0.5f), (float) motionZ + 0.125f * (rand.nextFloat() - 0.5f), 255.0f, 96.0f, 32.0f, 0.5f, 7.5f, 24);
-        */
+
       }
     }
     if (this.playerId != null) {
