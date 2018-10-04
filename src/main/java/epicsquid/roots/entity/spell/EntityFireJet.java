@@ -18,16 +18,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class EntityFireJet extends Entity {
-  public static final DataParameter<Integer> lifetime = EntityDataManager.<Integer>createKey(EntityFireJet.class, DataSerializers.VARINT);
+  public static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityFireJet.class, DataSerializers.VARINT);
   public UUID playerId = null;
-  public EntityPlayer savedPlayer = null;
 
   public EntityFireJet(World worldIn) {
     super(worldIn);
     this.setInvisible(true);
     this.setSize(1, 1);
     getDataManager().register(lifetime, 12);
-    Random random = new Random();
   }
 
   public void setPlayer(UUID id) {
@@ -51,7 +49,9 @@ public class EntityFireJet extends Entity {
     if (getDataManager().get(lifetime) <= 0) {
       setDead();
     }
+    System.out.println("OnUpdate");
     if (world.isRemote) {
+      System.out.println("World is remote");
       for (int i = 0; i < 8; i++) {
         float offX = 0.5f * (float) Math.sin(Math.toRadians(rotationYaw));
         float offZ = 0.5f * (float) Math.cos(Math.toRadians(rotationYaw));
@@ -77,13 +77,13 @@ public class EntityFireJet extends Entity {
           float vz = (float) player.getLookVec().z * 3.0f;
           List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class,
               new AxisAlignedBB(posX + vx * i - 1.5, posY + vy * i - 1.5, posZ + vz * i - 1.5, posX + vx * i + 1.5, posY + vy * i + 1.5, posZ + vz * i + 1.5));
-          for (int j = 0; j < entities.size(); j++) {
-            if (!(entities.get(j) instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
-                && entities.get(j).getUniqueID().compareTo(player.getUniqueID()) != 0) {
-              entities.get(j).setFire(4);
-              entities.get(j).attackEntityFrom((DamageSource.IN_FIRE).causeMobDamage(player), 2.0f);
-              entities.get(j).setLastAttackedEntity(player);
-              entities.get(j).setRevengeTarget(player);
+          for (EntityLivingBase entity : entities) {
+            if (!(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
+                && entity.getUniqueID().compareTo(player.getUniqueID()) != 0) {
+              entity.setFire(4);
+              entity.attackEntityFrom((DamageSource.IN_FIRE).causeMobDamage(player), 2.0f);
+              entity.setLastAttackedEntity(player);
+              entity.setRevengeTarget(player);
             }
           }
         }

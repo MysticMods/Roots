@@ -52,7 +52,8 @@ public class EntityRitualWarden extends EntityRitualBase {
       List<EntityLivingBase> entities = world
           .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 15.5, posY - 15.5, posZ - 15.5, posX + 15.5, posY + 15.5, posZ + 15.5));
       for (EntityLivingBase e : entities) {
-        EffectManager.assignEffect(e, EffectManager.effect_invulnerability.name, 22, new NBTTagCompound());
+        //todo: add effect
+        //EffectManager.assignEffect(e, EffectManager.effect_invulnerability.name, 22, new NBTTagCompound());
       }
     }
   }
