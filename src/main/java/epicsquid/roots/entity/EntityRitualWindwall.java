@@ -17,13 +17,13 @@ public class EntityRitualWindwall extends EntityRitualBase {
 
   public EntityRitualWindwall(World worldIn) {
     super(worldIn);
-    getDataManager().register(lifetime, RitualRegistry.ritual_windwall.duration + 20);
+    getDataManager().register(lifetime, RitualRegistry.ritual_windwall.getDuration() + 20);
   }
 
   @Override
   public void onUpdate() {
     ticksExisted++;
-    float alpha = (float) Math.min(40, (RitualRegistry.ritual_windwall.duration + 20) - getDataManager().get(lifetime)) / 40.0f;
+    float alpha = (float) Math.min(40, (RitualRegistry.ritual_windwall.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
     getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
     getDataManager().setDirty(lifetime);
     if (getDataManager().get(lifetime) < 0) {

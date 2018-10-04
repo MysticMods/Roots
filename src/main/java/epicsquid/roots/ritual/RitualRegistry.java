@@ -16,7 +16,7 @@ public class RitualRegistry {
   public static RitualBase getRitual(List<ItemStack> ingredients) {
     for (int i = 0; i < ritualRegistry.size(); i++) {
       RitualBase ritual = ritualRegistry.values().toArray(new RitualBase[ritualRegistry.size()])[i];
-      if (ListUtil.stackListsMatch(ingredients, ritual.ingredients)) {
+      if (ListUtil.stackListsMatch(ingredients, ritual.getIngredients())) {
         return ritual;
       }
     }

@@ -13,37 +13,18 @@ public class RitualWarden extends RitualBase {
 
   public RitualWarden(String name, int duration, boolean doUpdateValidity) {
     super(name, duration, doUpdateValidity);
-    addIngredient(new ItemStack(Items.DYE, 1, 15));
-    addIngredient(new ItemStack(ModItems.pereskia_bulb, 1));
-    addIngredient(new ItemStack(ModItems.spirit_herb, 1));
-    addIngredient(new ItemStack(ModItems.bark_oak, 1));
-    addIngredient(new ItemStack(Items.IRON_CHESTPLATE, 1));
+    addIngredients(
+        new ItemStack(Items.DYE, 1, 15),
+        new ItemStack(ModItems.pereskia_bulb, 1),
+        new ItemStack(ModItems.spirit_herb, 1),
+        new ItemStack(ModItems.bark_oak, 1),
+        new ItemStack(Items.IRON_CHESTPLATE, 1)
+    );
   }
 
   @Override
   public boolean isValidForPos(World world, BlockPos pos) {
-    int threeHighCount = 0;
-    int fourHighCount = 0;
-    for (int i = -6; i < 7; i++) {
-      for (int j = -6; j < 7; j++) {
-        IBlockState state = world.getBlockState(pos.add(i, 3, j));
-        if (state.getBlock() == ModBlocks.chiseled_runestone) {
-          if (world.getBlockState(pos.add(i, 2, j)).getBlock() == ModBlocks.runestone && world.getBlockState(pos.add(i, 1, j)).getBlock() == ModBlocks.runestone
-              && world.getBlockState(pos.add(i, 0, j)).getBlock() == ModBlocks.runestone) {
-            fourHighCount++;
-          }
-        } else {
-          state = world.getBlockState(pos.add(i, 2, j));
-          if (state.getBlock() == ModBlocks.chiseled_runestone) {
-            if (world.getBlockState(pos.add(i, 1, j)).getBlock() == ModBlocks.runestone
-                && world.getBlockState(pos.add(i, 0, j)).getBlock() == ModBlocks.runestone) {
-              threeHighCount++;
-            }
-          }
-        }
-      }
-    }
-    return threeHighCount == 3 && fourHighCount == 3;
+    return this.getThreeHighStandingStones(world, pos) >= 3 && this.getFourHighStandingStones(world, pos) >= 3;
   }
 
   @Override

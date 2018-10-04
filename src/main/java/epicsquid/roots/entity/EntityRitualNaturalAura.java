@@ -16,13 +16,13 @@ public class EntityRitualNaturalAura extends EntityRitualBase {
 
   public EntityRitualNaturalAura(World worldIn) {
     super(worldIn);
-    getDataManager().register(lifetime, RitualRegistry.ritual_natural_aura.duration + 20);
+    getDataManager().register(lifetime, RitualRegistry.ritual_natural_aura.getDuration() + 20);
   }
 
   @Override
   public void onUpdate() {
     ticksExisted++;
-    float alpha = (float) Math.min(40, (RitualRegistry.ritual_life.duration + 20) - getDataManager().get(lifetime)) / 40.0f;
+    float alpha = (float) Math.min(40, (RitualRegistry.ritual_life.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
     getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
     getDataManager().setDirty(lifetime);
     if (getDataManager().get(lifetime) < 0) {

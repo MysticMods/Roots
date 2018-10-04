@@ -19,14 +19,14 @@ public class EntityRitualWarden extends EntityRitualBase {
     super(worldIn);
     this.setInvisible(true);
     this.setSize(1, 1);
-    getDataManager().register(lifetime, RitualRegistry.ritual_warden.duration + 20);
+    getDataManager().register(lifetime, RitualRegistry.ritual_warden.getDuration() + 20);
     Random random = new Random();
   }
 
   @Override
   public void onUpdate() {
     ticksExisted++;
-    float alpha = (float) Math.min(40, (RitualRegistry.ritual_warden.duration + 20) - getDataManager().get(lifetime)) / 40.0f;
+    float alpha = (float) Math.min(40, (RitualRegistry.ritual_warden.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
     getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
     getDataManager().setDirty(lifetime);
     if (getDataManager().get(lifetime) < 0) {

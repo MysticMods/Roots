@@ -13,28 +13,18 @@ public class RitualNaturalAura extends RitualBase {
 
   public RitualNaturalAura(String name, int duration, boolean doUpdateValidity) {
     super(name, duration, doUpdateValidity);
-    addIngredient(new ItemStack(ModItems.wildroot, 1));
-    addIngredient(new ItemStack(ModItems.wildroot, 1));
-    addIngredient(new ItemStack(ModItems.spirit_herb, 1));
-    addIngredient(new ItemStack(Items.BONE, 1));
-    addIngredient(new ItemStack(Items.BONE, 1));
+    addIngredients(
+        new ItemStack(ModItems.wildroot, 1),
+        new ItemStack(ModItems.wildroot, 1),
+        new ItemStack(ModItems.spirit_herb, 1),
+        new ItemStack(Items.BONE, 1),
+        new ItemStack(Items.BONE, 1)
+    );
   }
 
   @Override
   public boolean isValidForPos(World world, BlockPos pos) {
-    int threeHighCount = 0;
-    for (int i = -6; i < 7; i++) {
-      for (int j = -6; j < 7; j++) {
-        IBlockState state = world.getBlockState(pos.add(i, 2, j));
-        if (state.getBlock() == ModBlocks.chiseled_runestone) {
-          if (world.getBlockState(pos.add(i, 1, j)).getBlock() == ModBlocks.runestone
-              && world.getBlockState(pos.add(i, 0, j)).getBlock() == ModBlocks.runestone) {
-            threeHighCount++;
-          }
-        }
-      }
-    }
-    return threeHighCount == 3;
+    return this.getThreeHighStandingStones(world, pos) >= 3;
   }
 
   @Override

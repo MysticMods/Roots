@@ -3,19 +3,22 @@ package epicsquid.roots.ritual;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import epicsquid.roots.entity.EntityRitualBase;
+import epicsquid.roots.init.ModBlocks;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public abstract class RitualBase {
-  public List<ItemStack> ingredients = new ArrayList<>();
-  public String name;
-  public int duration;
-  public boolean updateValidity;
+  private List<ItemStack> ingredients = new ArrayList<>();
+  private String name;
+  private int duration;
+  private boolean updateValidity;
 
   public RitualBase(String name, int duration, boolean doUpdateValidity) {
     this.name = name;
@@ -23,8 +26,8 @@ public abstract class RitualBase {
     this.updateValidity = doUpdateValidity;
   }
 
-  public RitualBase addIngredient(ItemStack stack) {
-    ingredients.add(stack);
+  public RitualBase addIngredients(ItemStack... stack) {
+    Collections.addAll(ingredients, stack);
     return this;
   }
 
@@ -56,5 +59,45 @@ public abstract class RitualBase {
         ritual.getDataManager().setDirty(ritual.getLifetime());
       }
     }
+  }
+
+  protected int getThreeHighStandingStones(World world, BlockPos pos){
+    int threeHighCount = 0;
+    for (int i = -6; i < 7 + 1; i++) {
+      for (int j = -6; j < 7 + 1; j++) {
+        IBlockState state = world.getBlockState(pos.add(i, 2, j));
+        if (state.getBlock() == ModBlocks.chiseled_runestone) {
+          if (world.getBlockState(pos.add(i, 1, j)).getBlock() == ModBlocks.runestone
+              && world.getBlockState(pos.add(i, 0, j)).getBlock() == ModBlocks.runestone) {
+            threeHighCount++;
+          }
+        }
+      }
+    }
+    return threeHighCount;
+  }
+
+  protected int getFourHighStandingStones(World world, BlockPos pos){
+    int fourHighCount = 0;
+    for (int i = -6; i < 7 + 1; i++) {
+      for (int j = -6; j < 7 + 1; j++) {
+        IBlockState state = world.getBlockState(pos.add(i, 3, j));
+        if (state.getBlock() == ModBlocks.chiseled_runestone) {
+          if (world.getBlockState(pos.add(i, 2, j)).getBlock() == ModBlocks.runestone && world.getBlockState(pos.add(i, 1, j)).getBlock() == ModBlocks.runestone
+              && world.getBlockState(pos.add(i, 0, j)).getBlock() == ModBlocks.runestone) {
+            fourHighCount++;
+          }
+        }
+      }
+    }
+    return fourHighCount;
+  }
+
+  public int getDuration() {
+    return duration;
+  }
+
+  public List<ItemStack> getIngredients() {
+    return ingredients;
   }
 }

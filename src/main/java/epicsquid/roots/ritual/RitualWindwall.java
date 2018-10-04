@@ -11,11 +11,13 @@ import net.minecraft.world.World;
 public class RitualWindwall extends RitualBase {
   public RitualWindwall(String name, int duration, boolean doUpdateValidity) {
     super(name, duration, doUpdateValidity);
-    addIngredient(new ItemStack(ModItems.pereskia, 1));
-    addIngredient(new ItemStack(ModItems.pereskia_bulb, 1));
-    addIngredient(new ItemStack(ModItems.bark_spruce, 1));
-    addIngredient(new ItemStack(ModItems.bark_birch, 1));
-    addIngredient(new ItemStack(Items.FEATHER, 1));
+    addIngredients(
+        new ItemStack(ModItems.pereskia, 1),
+        new ItemStack(ModItems.pereskia_bulb, 1),
+        new ItemStack(ModItems.bark_spruce, 1),
+        new ItemStack(ModItems.bark_birch, 1),
+        new ItemStack(Items.FEATHER, 1)
+    );
   }
 
   @Override
