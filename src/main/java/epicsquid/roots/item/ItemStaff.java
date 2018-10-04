@@ -51,18 +51,13 @@ public class ItemStaff extends ItemBase {
     ItemStack stack = player.getHeldItem(hand);
     if (player.isSneaking()){
       if (!stack.hasTagCompound()){
-        stack.setTagCompound(new NBTTagCompound());
-        stack.getTagCompound().setInteger("selected", 0);
-        stack.getTagCompound().setString("spell0", "null");
-        stack.getTagCompound().setString("spell1", "null");
-        stack.getTagCompound().setString("spell2", "null");
-        stack.getTagCompound().setString("spell3", "null");
+        addTagCompound(stack);
       }
       stack.getTagCompound().setInteger("selected", stack.getTagCompound().getInteger("selected")+1);
       if (stack.getTagCompound().getInteger("selected") > 3){
         stack.getTagCompound().setInteger("selected", 0);
       }
-      return new ActionResult<ItemStack>(EnumActionResult.PASS,player.getHeldItem(hand));
+      return new ActionResult<>(EnumActionResult.PASS,player.getHeldItem(hand));
     }
     else {
       if (stack.hasTagCompound()){
@@ -78,18 +73,18 @@ public class ItemStaff extends ItemBase {
                 spell.enactCosts(player);
                 stack.getTagCompound().setInteger("cooldown", event.getCooldown());
                 stack.getTagCompound().setInteger("lastCooldown", event.getCooldown());
-                return new ActionResult<ItemStack>(EnumActionResult.SUCCESS,player.getHeldItem(hand));
+                return new ActionResult<>(EnumActionResult.SUCCESS,player.getHeldItem(hand));
               }
             }
             else if (spell.castType == SpellBase.EnumCastType.CONTINUOUS){
               player.setActiveHand(hand);
-              return new ActionResult<ItemStack>(EnumActionResult.SUCCESS,stack);
+              return new ActionResult<>(EnumActionResult.SUCCESS,stack);
             }
           }
         }
       }
     }
-    return new ActionResult<ItemStack>(EnumActionResult.FAIL,player.getHeldItem(hand));
+    return new ActionResult<>(EnumActionResult.FAIL, player.getHeldItem(hand));
   }
 
   @Override
@@ -139,12 +134,7 @@ public class ItemStaff extends ItemBase {
 
   public static void createData(ItemStack stack, String spellName){
     if (!stack.hasTagCompound()){
-      stack.setTagCompound(new NBTTagCompound());
-      stack.getTagCompound().setInteger("selected", 0);
-      stack.getTagCompound().setString("spell0", "null");
-      stack.getTagCompound().setString("spell1", "null");
-      stack.getTagCompound().setString("spell2", "null");
-      stack.getTagCompound().setString("spell3", "null");
+      addTagCompound(stack);
     }
     stack.getTagCompound().setString("spell"+stack.getTagCompound().getInteger("selected"), spellName);
   }
@@ -153,12 +143,7 @@ public class ItemStaff extends ItemBase {
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced){
     if (!stack.hasTagCompound()){
-      stack.setTagCompound(new NBTTagCompound());
-      stack.getTagCompound().setInteger("selected", 0);
-      stack.getTagCompound().setString("spell0", "null");
-      stack.getTagCompound().setString("spell1", "null");
-      stack.getTagCompound().setString("spell2", "null");
-      stack.getTagCompound().setString("spell3", "null");
+      addTagCompound(stack);
     }
     else {
       tooltip.add(I18n.format("roots.tooltip.staff.selected")+(stack.getTagCompound().getInteger("selected")+1));
@@ -168,6 +153,15 @@ public class ItemStaff extends ItemBase {
         spell.addToolTip(tooltip);
       }
     }
+  }
+
+  private static void addTagCompound(ItemStack stack){
+    stack.setTagCompound(new NBTTagCompound());
+    stack.getTagCompound().setInteger("selected", 0);
+    stack.getTagCompound().setString("spell0", "null");
+    stack.getTagCompound().setString("spell1", "null");
+    stack.getTagCompound().setString("spell2", "null");
+    stack.getTagCompound().setString("spell3", "null");
   }
 
   @Override

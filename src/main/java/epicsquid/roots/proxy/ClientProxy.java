@@ -1,5 +1,6 @@
 package epicsquid.roots.proxy;
 
+import epicsquid.roots.RegistryManager;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import epicsquid.roots.tileentity.TileEntityBonfireRenderer;
 import epicsquid.roots.tileentity.TileEntityImbuer;
@@ -23,6 +24,7 @@ public class ClientProxy extends CommonProxy {
   @Override
   public void init(FMLInitializationEvent event) {
     super.init(event);
+    RegistryManager.registerColorHandlers();
   }
 
   @Override
