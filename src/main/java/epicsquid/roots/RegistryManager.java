@@ -9,10 +9,14 @@ import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModEntities;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.item.ItemStaff;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class RegistryManager {
 
@@ -40,6 +44,11 @@ public class RegistryManager {
     LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
 
     ModItems.registerOredict();
+  }
+
+  @SideOnly(Side.CLIENT)
+  public static void registerColorHandlers(){
+    Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemStaff.StaffColorHandler(), ModItems.staff);
   }
 
 }
