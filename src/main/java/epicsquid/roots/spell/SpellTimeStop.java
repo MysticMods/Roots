@@ -4,9 +4,9 @@ import epicsquid.roots.entity.spell.EntityTimeStop;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextFormatting;
 
-public class SpellOxeyeDaisy extends SpellBase {
+public class SpellTimeStop extends SpellBase {
 
-  public SpellOxeyeDaisy(String name) {
+  public SpellTimeStop(String name) {
     super(name, TextFormatting.DARK_BLUE, 64f / 255f, 64f / 255f, 64f / 255f, 192f / 255f, 32f / 255f, 255f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 320;

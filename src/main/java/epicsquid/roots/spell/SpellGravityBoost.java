@@ -4,9 +4,9 @@ import epicsquid.roots.entity.spell.EntityBoost;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextFormatting;
 
-public class SpellBlueOrchid extends SpellBase {
+public class SpellGravityBoost extends SpellBase {
 
-  public SpellBlueOrchid(String name) {
+  public SpellGravityBoost(String name) {
     super(name, TextFormatting.BLUE, 32f / 255f, 200f / 255f, 255f / 255f, 32f / 255f, 64f / 255f, 255f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 56;

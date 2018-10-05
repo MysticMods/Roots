@@ -11,9 +11,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
-public class SpellAllium extends SpellBase {
+public class SpellAcidCloud extends SpellBase {
 
-  public SpellAllium(String name) {
+  public SpellAcidCloud(String name) {
     super(name, TextFormatting.DARK_GREEN, 80f / 255f, 160f / 255f, 40f / 255f, 64f / 255f, 96f / 255f, 32f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 24;

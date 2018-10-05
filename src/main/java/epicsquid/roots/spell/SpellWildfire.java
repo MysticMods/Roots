@@ -4,9 +4,9 @@ import epicsquid.roots.entity.spell.EntityFireJet;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextFormatting;
 
-public class SpellOrangeTulip extends SpellBase {
+public class SpellWildfire extends SpellBase {
 
-  public SpellOrangeTulip(String name) {
+  public SpellWildfire(String name) {
     super(name, TextFormatting.GOLD, 255f / 255f, 128f / 255f, 32f / 255f, 255f / 255f, 64f / 255f, 32f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 24;

@@ -13,9 +13,9 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
-public class SpellSunflower extends SpellBase {
+public class SpellRadiance extends SpellBase {
 
-  public SpellSunflower(String name) {
+  public SpellRadiance(String name) {
     super(name, TextFormatting.WHITE, 255f / 255f, 255f / 255f, 64f / 255f, 255f / 255f, 255f / 255f, 192f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 40;

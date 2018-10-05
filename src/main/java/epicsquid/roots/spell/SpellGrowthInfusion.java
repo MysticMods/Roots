@@ -8,9 +8,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
 
-public class SpellLilac extends SpellBase {
+public class SpellGrowthInfusion extends SpellBase {
 
-  public SpellLilac(String name) {
+  public SpellGrowthInfusion(String name) {
     super(name, TextFormatting.GREEN, 48f / 255f, 255f / 255f, 48f / 255f, 192f / 255f, 255f / 255f, 192f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 16;

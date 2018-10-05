@@ -8,28 +8,28 @@ import epicsquid.mysticalworld.init.ModItems;
 public class SpellRegistry {
   public static Map<String, SpellBase> spellRegistry = new HashMap<>();
 
-  public static SpellBase spell_orange_tulip, spell_red_tulip, spell_dandelion, spell_rose, spell_azure_bluet, spell_peony, spell_oxeye_daisy, spell_blue_orchid, spell_pink_tulip, spell_allium, spell_lilac, spell_poppy, spell_sunflower, spell_white_tulip;
+  public static SpellBase spell_wild_fire, spell_sanctuary, spell_dandelion_winds, spell_rose_thorns, spell_shatter, spell_petal_shell, spell_time_stop, spell_gravity_boost, spell_life_drain, spell_acid_cloud, spell_growth_infusion, spell_mind_ward, spell_radiance, spell_light_drifter;
 
   public static void init() {
-    spellRegistry.put("spell_orange_tulip", spell_orange_tulip = new SpellOrangeTulip("spell_orange_tulip").addCost(ModItems.wildroot, 0.125f));
-    spellRegistry.put("spell_red_tulip",
-        spell_red_tulip = new SpellRedTulip("spell_red_tulip").addCost(ModItems.moonglow_leaf, 0.125f).addCost(ModItems.aubergine_seed, 0.125f));
-    spellRegistry.put("spell_dandelion", spell_dandelion = new SpellDandelion("spell_dandelion").addCost(ModItems.moonglow_leaf, 0.125f));
-    spellRegistry.put("spell_rose", spell_rose = new SpellRose("spell_rose").addCost(ModItems.terra_moss, 0.25f));
-    spellRegistry.put("spell_azure_bluet", spell_azure_bluet = new SpellAzureBluet("spell_azure_bluet").addCost(ModItems.wildroot, 0.0625f));
-    spellRegistry.put("spell_peony", spell_peony = new SpellPeony("spell_peony").addCost(ModItems.aubergine_seed, 0.5f).addCost(ModItems.moonglow_leaf, 0.25f));
-    spellRegistry.put("spell_oxeye_daisy",
-        spell_oxeye_daisy = new SpellOxeyeDaisy("spell_oxeye_daisy").addCost(ModItems.pereskia, 0.5f).addCost(ModItems.moonglow_leaf, 0.25f)
+    spellRegistry.put("spell_wild_fire", spell_wild_fire = new SpellWildfire("spell_wild_fire").addCost(ModItems.wildroot, 0.125f));
+    spellRegistry.put("spell_sanctuary",
+        spell_sanctuary = new SpellSanctuary("spell_sanctuary").addCost(ModItems.moonglow_leaf, 0.125f).addCost(ModItems.aubergine_seed, 0.125f));
+    spellRegistry.put("spell_dandelion_winds", spell_dandelion_winds = new SpellDandelionWinds("spell_dandelion_winds").addCost(ModItems.moonglow_leaf, 0.125f));
+    spellRegistry.put("spell_rose_thorns", spell_rose_thorns = new SpellRoseThorns("spell_rose_thorns").addCost(ModItems.terra_moss, 0.25f));
+    spellRegistry.put("spell_shatter", spell_shatter = new SpellShatter("spell_shatter").addCost(ModItems.wildroot, 0.0625f));
+    spellRegistry.put("spell_petal_shell", spell_petal_shell = new SpellPetalShell("spell_petal_shell").addCost(ModItems.aubergine_seed, 0.5f).addCost(ModItems.moonglow_leaf, 0.25f));
+    spellRegistry.put("spell_time_stop",
+        spell_time_stop = new SpellTimeStop("spell_time_stop").addCost(ModItems.pereskia, 0.5f).addCost(ModItems.moonglow_leaf, 0.25f)
             .addCost(ModItems.pereskia_bulb, 0.25f));
-    spellRegistry.put("spell_blue_orchid", spell_blue_orchid = new SpellBlueOrchid("spell_blue_orchid").addCost(ModItems.pereskia, 0.125f));
-    spellRegistry.put("spell_pink_tulip", spell_pink_tulip = new SpellPinkTulip("spell_pink_tulip").addCost(ModItems.pereskia_bulb, 0.125f));
-    spellRegistry.put("spell_allium", spell_allium = new SpellAllium("spell_allium").addCost(ModItems.terra_moss, 0.0625f));
-    spellRegistry.put("spell_lilac", spell_lilac = new SpellLilac("spell_lilac").addCost(ModItems.terra_moss, 0.125f));
-    spellRegistry.put("spell_poppy", spell_poppy = new SpellPoppy("spell_poppy").addCost(ModItems.aubergine_seed, 0.25f).addCost(ModItems.terra_moss, 0.25f));
-    spellRegistry.put("spell_sunflower",
-        spell_sunflower = new SpellSunflower("spell_sunflower").addCost(ModItems.moonglow_leaf, 0.25f).addCost(ModItems.wildroot, 0.125f)
+    spellRegistry.put("spell_gravity_boost", spell_gravity_boost = new SpellGravityBoost("spell_gravity_boost").addCost(ModItems.pereskia, 0.125f));
+    spellRegistry.put("spell_life_drain", spell_life_drain = new SpellLifeDrain("spell_life_drain").addCost(ModItems.pereskia_bulb, 0.125f));
+    spellRegistry.put("spell_acid_cloud", spell_acid_cloud = new SpellAcidCloud("spell_acid_cloud").addCost(ModItems.terra_moss, 0.0625f));
+    spellRegistry.put("spell_growth_infusion", spell_growth_infusion = new SpellGrowthInfusion("spell_growth_infusion").addCost(ModItems.terra_moss, 0.125f));
+    spellRegistry.put("spell_mind_ward", spell_mind_ward = new SpellMindWard("spell_mind_ward").addCost(ModItems.aubergine_seed, 0.25f).addCost(ModItems.terra_moss, 0.25f));
+    spellRegistry.put("spell_radiance",
+        spell_radiance = new SpellRadiance("spell_radiance").addCost(ModItems.moonglow_leaf, 0.25f).addCost(ModItems.wildroot, 0.125f)
             .addCost(ModItems.aubergine_seed, 0.25f));
-    spellRegistry.put("spell_white_tulip",
-        spell_white_tulip = new SpellWhiteTulip("spell_white_tulip").addCost(ModItems.pereskia, 0.5f).addCost(ModItems.wildroot, 0.25f));
+    spellRegistry.put("spell_light_drifter",
+        spell_light_drifter = new LightDrifter("spell_light_drifter").addCost(ModItems.pereskia, 0.5f).addCost(ModItems.wildroot, 0.25f));
   }
 }

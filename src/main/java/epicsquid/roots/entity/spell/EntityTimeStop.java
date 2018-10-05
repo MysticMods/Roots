@@ -53,13 +53,13 @@ public class EntityTimeStop extends Entity {
             ParticleUtil
                 .spawnParticleSmoke(world, (float) posX + rand.nextFloat() * rand.nextFloat() * 8.0f * (float) Math.sin(Math.toRadians(i)), (float) posY - 0.5f,
                     (float) posZ + rand.nextFloat() * rand.nextFloat() * 8.0f * (float) Math.cos(Math.toRadians(i)), 0, rand.nextFloat() * 0.05f, 0,
-                    SpellRegistry.spell_oxeye_daisy.red1, SpellRegistry.spell_oxeye_daisy.green1, SpellRegistry.spell_oxeye_daisy.blue1,
+                    SpellRegistry.spell_time_stop.red1, SpellRegistry.spell_time_stop.green1, SpellRegistry.spell_time_stop.blue1,
                     rand.nextFloat() * 0.25f, rand.nextFloat() * 24f, 120, true);
           } else {
             ParticleUtil
                 .spawnParticleSmoke(world, (float) posX + rand.nextFloat() * rand.nextFloat() * 8.0f * (float) Math.sin(Math.toRadians(i)), (float) posY - 0.5f,
                     (float) posZ + rand.nextFloat() * rand.nextFloat() * 8.0f * (float) Math.cos(Math.toRadians(i)), 0, rand.nextFloat() * 0.05f, 0,
-                    SpellRegistry.spell_oxeye_daisy.red2, SpellRegistry.spell_oxeye_daisy.green2, SpellRegistry.spell_oxeye_daisy.blue2,
+                    SpellRegistry.spell_time_stop.red2, SpellRegistry.spell_time_stop.green2, SpellRegistry.spell_time_stop.blue2,
                     rand.nextFloat() * 0.25f, rand.nextFloat() * 24f, 120, true);
           }
         }
