@@ -7,9 +7,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 
-public class SpellRedTulip extends SpellBase {
+public class SpellSanctuary extends SpellBase {
 
-  public SpellRedTulip(String name) {
+  public SpellSanctuary(String name) {
     super(name, TextFormatting.DARK_PURPLE, 208f / 255f, 16f / 255f, 80f / 255f, 224f / 255f, 32f / 255f, 144f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 60;

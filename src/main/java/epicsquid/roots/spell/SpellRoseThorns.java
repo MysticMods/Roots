@@ -4,9 +4,9 @@ import epicsquid.roots.entity.spell.EntityThornTrap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextFormatting;
 
-public class SpellRose extends SpellBase {
+public class SpellRoseThorns extends SpellBase {
 
-  public SpellRose(String name) {
+  public SpellRoseThorns(String name) {
     super(name, TextFormatting.RED, 255f / 255f, 32f / 255f, 64f / 255f, 32f / 255f, 255f / 255f, 96f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 24;
