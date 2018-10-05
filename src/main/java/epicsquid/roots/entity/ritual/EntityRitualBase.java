@@ -1,15 +1,11 @@
-package epicsquid.roots.entity;
+package epicsquid.roots.entity.ritual;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 
-public class EntityRitualBase extends Entity implements IRitualEntity {
-
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualWarden.class, DataSerializers.VARINT);
+public abstract class EntityRitualBase extends Entity implements IRitualEntity {
 
   private double x = 0;
   private double y = 0;
@@ -47,8 +43,8 @@ public class EntityRitualBase extends Entity implements IRitualEntity {
     this.y = compound.getDouble("y");
     this.z = compound.getDouble("z");
     this.setPosition(x, y, z);
-    getDataManager().set(lifetime, compound.getInteger("lifetime"));
-    getDataManager().setDirty(lifetime);
+    getDataManager().set(getLifetime(), compound.getInteger("lifetime"));
+    getDataManager().setDirty(getLifetime());
   }
 
   @Override
@@ -56,10 +52,8 @@ public class EntityRitualBase extends Entity implements IRitualEntity {
     compound.setDouble("x", x);
     compound.setDouble("y", y);
     compound.setDouble("z", z);
-    compound.setInteger("lifetime", getDataManager().get(lifetime));
+    compound.setInteger("lifetime", getDataManager().get(getLifetime()));
   }
 
-  public static DataParameter<Integer> getLifetime() {
-    return lifetime;
-  }
+  public abstract DataParameter<Integer> getLifetime();
 }
