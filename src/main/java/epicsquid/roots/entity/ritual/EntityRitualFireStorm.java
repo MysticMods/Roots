@@ -16,7 +16,7 @@ public class EntityRitualFireStorm extends EntityRitualBase {
 
   public EntityRitualFireStorm(World worldIn) {
     super(worldIn);
-    getDataManager().register(lifetime, RitualRegistry.ritual_fire_storm.getDuration() + 20);
+    this.getDataManager().register(lifetime, RitualRegistry.ritual_fire_storm.getDuration() + 20);
   }
 
   @Override

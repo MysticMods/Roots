@@ -1,6 +1,5 @@
 package epicsquid.roots.entity.spell;
 
-import java.util.Random;
 import java.util.UUID;
 
 import epicsquid.roots.particle.ParticleUtil;
@@ -15,14 +14,13 @@ import net.minecraft.world.World;
 
 public class EntityBoost extends Entity {
   public static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityBoost.class, DataSerializers.VARINT);
-  public UUID playerId = null;
+  private UUID playerId = null;
 
   public EntityBoost(World worldIn) {
     super(worldIn);
     this.setInvisible(true);
     this.setSize(1, 1);
     getDataManager().register(lifetime, 20);
-    Random random = new Random();
   }
 
   public void setPlayer(UUID id) {

@@ -1,6 +1,5 @@
 package epicsquid.roots.entity.spell;
 
-import java.util.Random;
 import java.util.UUID;
 
 import net.minecraft.entity.Entity;
@@ -20,7 +19,6 @@ public class EntityPetalShell extends Entity {
     this.setInvisible(true);
     this.setSize(1, 1);
     getDataManager().register(charge, 1);
-    Random random = new Random();
     this.noClip = true;
   }
 

@@ -1,7 +1,6 @@
 package epicsquid.roots.entity.ritual;
 
 import java.util.List;
-import java.util.Random;
 
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
@@ -21,7 +20,6 @@ public class EntityRitualWarden extends EntityRitualBase {
     this.setInvisible(true);
     this.setSize(1, 1);
     getDataManager().register(lifetime, RitualRegistry.ritual_warden.getDuration() + 20);
-    Random random = new Random();
   }
 
   @Override
