@@ -80,7 +80,7 @@ public class TileEntityMortar extends TileBase {
     ItemStack heldItem = player.getHeldItem(hand);
     if (heldItem != ItemStack.EMPTY && heldItem.getCount() > 0) {
       if (heldItem.getItem() != ModItems.pestle) {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < inventory.getSlots(); i++) {
           if (inventory.getStackInSlot(i).isEmpty()) {
             ItemStack toInsert = heldItem.copy();
             toInsert.setCount(1);
@@ -99,7 +99,7 @@ public class TileEntityMortar extends TileBase {
         }
       } else {
         List<ItemStack> ingredients = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < inventory.getSlots(); i++) {
           ingredients.add(inventory.getStackInSlot(i));
         }
         SpellRecipe recipe = RecipeRegistry.getSpellRecipe(ingredients);
@@ -113,14 +113,12 @@ public class TileEntityMortar extends TileBase {
                     getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), spell.red1,
                     spell.green1, spell.blue1, 0.25f, 1.5f, 24, false);
-              }
-              if (chance == 1) {
+              }else if (chance == 1) {
                 ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), spell.red2,
                     spell.green2, spell.blue2, 0.25f, 1.5f, 24, false);
-              }
-              if (chance == 2) {
+              }else if (chance == 2) {
                 ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.5f, 0.5f,
@@ -135,7 +133,7 @@ public class TileEntityMortar extends TileBase {
             markDirty();
             PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
           }
-          for (int i = 0; i < 5; i++) {
+          for (int i = 0; i < inventory.getSlots(); i++) {
             inventory.extractItem(i, 1, false);
           }
           return true;
@@ -151,14 +149,12 @@ public class TileEntityMortar extends TileBase {
                     getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f),
                     mortarRecipe.r1, mortarRecipe.g1, mortarRecipe.b1, 0.25f, 1.5f, 24, false);
-              }
-              if (chance == 1) {
+              }else if (chance == 1) {
                 ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f),
                     mortarRecipe.r2, mortarRecipe.g2, mortarRecipe.b2, 0.25f, 1.5f, 24, false);
-              }
-              if (chance == 2) {
+              }else if (chance == 2) {
                 ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.5f, 0.5f,
@@ -171,7 +167,7 @@ public class TileEntityMortar extends TileBase {
             markDirty();
             PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
           }
-          for (int i = 0; i < 5; i++) {
+          for (int i = 0; i < inventory.getSlots(); i++) {
             inventory.extractItem(i, 1, false);
           }
           return true;
@@ -180,14 +176,8 @@ public class TileEntityMortar extends TileBase {
 
     }
     if (heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND) {
-      for (int i = 4; i >= 0; i--) {
-        if (!inventory.getStackInSlot(i).isEmpty()) {
-          ItemStack extracted = inventory.extractItem(i, 1, false);
-          if (!world.isRemote) {
-            world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, extracted));
-          }
-          markDirty();
-          PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+      for (int i = inventory.getSlots() - 1; i >= 0; i--) {
+        if(this.dropItemInInventory(inventory, i)){
           return true;
         }
       }
