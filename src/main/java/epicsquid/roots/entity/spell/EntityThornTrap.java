@@ -1,7 +1,6 @@
 package epicsquid.roots.entity.spell;
 
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 import epicsquid.roots.particle.ParticleUtil;
@@ -9,7 +8,6 @@ import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -22,17 +20,15 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class EntityThornTrap extends Entity {
   public static final DataParameter<Integer> lifetime = EntityDataManager.<Integer>createKey(EntityThornTrap.class, DataSerializers.VARINT);
-  public UUID playerId = null;
+  private UUID playerId = null;
 
   public EntityThornTrap(World worldIn) {
     super(worldIn);
     this.setInvisible(false);
     this.setSize(1, 1);
     getDataManager().register(lifetime, 600);
-    Random random = new Random();
     this.setNoGravity(false);
     this.noClip = false;
-    EntityItem item;
   }
 
   public void setPlayer(UUID id) {

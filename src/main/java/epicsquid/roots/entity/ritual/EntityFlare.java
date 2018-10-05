@@ -3,6 +3,7 @@ package epicsquid.roots.entity.ritual;
 import java.util.List;
 import java.util.UUID;
 
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -13,21 +14,17 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityFlare extends Entity {
   public static final DataParameter<Float> value = EntityDataManager.createKey(EntityFlare.class, DataSerializers.FLOAT);
-  BlockPos pos = new BlockPos(0, 0, 0);
   int lifetime = 320;
-  public BlockPos dest = new BlockPos(0, 0, 0);
   public UUID id = null;
 
   public EntityFlare(World worldIn) {
     super(worldIn);
     this.setInvisible(true);
-    this.getDataManager().register(value, Float.valueOf(0));
+    this.getDataManager().register(value, 0f);
   }
 
   public void initCustom(double x, double y, double z, double vx, double vy, double vz, double value) {
@@ -37,10 +34,10 @@ public class EntityFlare extends Entity {
     this.motionX = vx;
     this.motionY = vy;
     this.motionZ = vz;
-    setSize((float) value / 10.0f, (float) value / 10.0f);
-    getDataManager().set(EntityFlare.value, (float) value);
-    getDataManager().setDirty(EntityFlare.value);
-    setSize((float) value / 10.0f, (float) value / 10.0f);
+    this.setSize((float) value / 10.0f, (float) value / 10.0f);
+    this.getDataManager().set(EntityFlare.value, (float) value);
+    this.getDataManager().setDirty(EntityFlare.value);
+    this.setSize((float) value / 10.0f, (float) value / 10.0f);
   }
 
   @Override
@@ -68,21 +65,18 @@ public class EntityFlare extends Entity {
   @Override
   public void onUpdate() {
     super.onUpdate();
-    float alpha = (float) Math.min(40, (320.0f - (float) lifetime)) / 40.0f;
-    lifetime--;
-    if (lifetime <= 0) {
-      getEntityWorld().removeEntity(this);
-      this.setDead();
-    }
-    getDataManager().set(value, getDataManager().get(value) - 0.025f);
-    if (getDataManager().get(value) <= 0) {
-      getEntityWorld().removeEntity(this);
+    float alpha = Math.min(40, (320.0f - (float) lifetime)) / 40.0f;
+    this.lifetime--;
+    this.getDataManager().set(value, this.getDataManager().get(value) - 0.025f);
+
+    if (this.lifetime <= 0 || this.getDataManager().get(value) <= 0) {
+      this.getEntityWorld().removeEntity(this);
       this.setDead();
     }
 
-    posX += motionX;
-    posY += motionY;
-    posZ += motionZ;
+    this.posX += this.motionX;
+    this.posY += this.motionY;
+    this.posZ += this.motionZ;
     IBlockState state = getEntityWorld().getBlockState(getPosition());
     if (state.isFullCube() && state.isOpaqueCube()) {
       if (getEntityWorld().isRemote) {
@@ -92,15 +86,9 @@ public class EntityFlare extends Entity {
               getDataManager().get(value) + rand.nextFloat() * getDataManager().get(value), 40);
         }
       }
-      List<EntityLivingBase> entities = getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class,
-          new AxisAlignedBB(posX - getDataManager().get(value) * 0.25, posY - getDataManager().get(value) * 0.25, posZ - getDataManager().get(value) * 0.25,
-              posX + getDataManager().get(value) * 0.25, posY + getDataManager().get(value) * 0.25, posZ + getDataManager().get(value) * 0.25));
-      for (EntityLivingBase target : entities) {
-        DamageSource source = DamageSource.IN_FIRE;
-        target.setFire(4);
-        target.attackEntityFrom(source, getDataManager().get(value));
-        target.knockBack(this, 0.5f, -motionX, -motionZ);
-      }
+      List<EntityLivingBase> entities = Util
+          .getEntitiesWithinRadius(getEntityWorld(), EntityLivingBase.class, this.getPosition(), (float) (getDataManager().get(value) * 0.125));
+      this.attackWithFire(entities);
       if (world.isAirBlock(getPosition().up())) {
         world.setBlockState(getPosition().up(), Blocks.FIRE.getDefaultState());
       }
@@ -114,16 +102,10 @@ public class EntityFlare extends Entity {
             0.0125f * (rand.nextFloat() - 0.5f), 255, 96, 32, 0.5f * alpha, getDataManager().get(value) + rand.nextFloat() * getDataManager().get(value), 40);
       }
     }
-    List<EntityLivingBase> entities = getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class,
-        new AxisAlignedBB(posX - getDataManager().get(value) * 0.125, posY - getDataManager().get(value) * 0.125, posZ - getDataManager().get(value) * 0.125,
-            posX + getDataManager().get(value) * 0.125, posY + getDataManager().get(value) * 0.125, posZ + getDataManager().get(value) * 0.125));
+    List<EntityLivingBase> entities = Util
+        .getEntitiesWithinRadius(getEntityWorld(), EntityLivingBase.class, this.getPosition(), (float) (getDataManager().get(value) * 0.125));
     if (entities.size() > 0) {
-      for (EntityLivingBase target : entities) {
-        DamageSource source = DamageSource.IN_FIRE;
-        target.setFire(4);
-        target.attackEntityFrom(source, getDataManager().get(value));
-        target.knockBack(this, 0.5f, -motionX, -motionZ);
-      }
+      this.attackWithFire(entities);
       if (getEntityWorld().isRemote) {
         for (int i = 0; i < 40; i++) {
           ParticleUtil.spawnParticleFiery(getEntityWorld(), (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f),
@@ -132,6 +114,15 @@ public class EntityFlare extends Entity {
         }
       }
       this.setDead();
+    }
+  }
+
+  private void attackWithFire(List<EntityLivingBase> entities) {
+    for (EntityLivingBase target : entities) {
+      DamageSource source = DamageSource.IN_FIRE;
+      target.setFire(4);
+      target.attackEntityFrom(source, getDataManager().get(value));
+      target.knockBack(this, 0.5f, -motionX, -motionZ);
     }
   }
 }

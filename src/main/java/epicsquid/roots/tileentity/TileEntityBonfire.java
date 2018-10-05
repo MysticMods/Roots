@@ -132,9 +132,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       for (int i = 4; i >= 0; i--) {
         if (!inventory.getStackInSlot(i).isEmpty()) {
           ItemStack extracted = inventory.extractItem(i, inventory.getStackInSlot(i).getCount(), false);
-          if (!world.isRemote) {
-            world.spawnEntity(new EntityItem(world, player.posX, player.posY + 0.5, player.posZ, extracted));
-          }
+          world.spawnEntity(new EntityItem(world, player.posX, player.posY + 0.5, player.posZ, extracted));
           markDirty();
           PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
           pickupDelay = 40;

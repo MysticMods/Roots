@@ -35,57 +35,34 @@ public class ModEntities {
   public static void registerMobs() {
     //Spell & Ritual Entities
     LibRegistry.registerEntity(EntityFireJet.class);
-    if (Roots.proxy instanceof ClientProxy)
-      LibRegistry.registerEntityRenderer(EntityFireJet.class, new RenderNull.Factory());
-
     LibRegistry.registerEntity(EntityThornTrap.class);
-    if (Roots.proxy instanceof ClientProxy)
-      LibRegistry.registerEntityRenderer(EntityThornTrap.class, new RenderNull.Factory());
-
     LibRegistry.registerEntity(EntityPetalShell.class);
-    if (Roots.proxy instanceof ClientProxy)
-      LibRegistry.registerEntityRenderer(EntityPetalShell.class, new RenderNull.Factory());
-
     LibRegistry.registerEntity(EntityTimeStop.class);
-    if (Roots.proxy instanceof ClientProxy)
-      LibRegistry.registerEntityRenderer(EntityTimeStop.class, new RenderNull.Factory());
-
     LibRegistry.registerEntity(EntityBoost.class);
-    if (Roots.proxy instanceof ClientProxy)
-      LibRegistry.registerEntityRenderer(EntityBoost.class, new RenderNull.Factory());
-
     LibRegistry.registerEntity(EntityRitualLife.class);
-    if (Roots.proxy instanceof ClientProxy)
-      LibRegistry.registerEntityRenderer(EntityRitualLife.class, new RenderNull.Factory());
-
     LibRegistry.registerEntity(EntityRitualStorm.class);
-    if (Roots.proxy instanceof ClientProxy)
-      LibRegistry.registerEntityRenderer(EntityRitualStorm.class, new RenderNull.Factory());
-
     LibRegistry.registerEntity(EntityRitualLight.class);
-    if (Roots.proxy instanceof ClientProxy)
-      LibRegistry.registerEntityRenderer(EntityRitualLight.class, new RenderNull.Factory());
-
     LibRegistry.registerEntity(EntityRitualFireStorm.class);
-    if (Roots.proxy instanceof ClientProxy)
-      LibRegistry.registerEntityRenderer(EntityRitualFireStorm.class, new RenderNull.Factory());
-
     LibRegistry.registerEntity(EntityFlare.class);
-    if (Roots.proxy instanceof ClientProxy)
-      LibRegistry.registerEntityRenderer(EntityFlare.class, new RenderNull.Factory());
-
     LibRegistry.registerEntity(EntityRitualRegrowth.class);
-    if (Roots.proxy instanceof ClientProxy)
-      LibRegistry.registerEntityRenderer(EntityRitualRegrowth.class, new RenderNull.Factory());
-
     LibRegistry.registerEntity(EntityRitualWindwall.class);
-    if (Roots.proxy instanceof ClientProxy)
-      LibRegistry.registerEntityRenderer(EntityRitualWindwall.class, new RenderNull.Factory());
-
     LibRegistry.registerEntity(EntityRitualWarden.class);
-    if (Roots.proxy instanceof ClientProxy)
-      LibRegistry.registerEntityRenderer(EntityRitualWarden.class, new RenderNull.Factory());
 
+    if (Roots.proxy instanceof ClientProxy) {
+      LibRegistry.registerEntityRenderer(EntityFireJet.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntityThornTrap.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntityPetalShell.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntityTimeStop.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntityBoost.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntityRitualLife.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntityRitualStorm.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntityRitualLight.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntityRitualFireStorm.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntityFlare.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntityRitualRegrowth.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntityRitualWindwall.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntityRitualWarden.class, new RenderNull.Factory());
+    }
   }
 
   /**
