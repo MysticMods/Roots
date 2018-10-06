@@ -1,6 +1,9 @@
 package epicsquid.roots.spell;
 
 import epicsquid.roots.Constants;
+import epicsquid.roots.network.PacketHandler;
+import epicsquid.roots.network.message.MessageLightDrifterFX;
+import epicsquid.roots.network.message.MessageLightDrifterSync;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameType;
@@ -29,8 +32,8 @@ public class LightDrifter extends SpellBase {
         player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_MODE, GameType.SURVIVAL.getID());
       }
       player.setGameType(GameType.SPECTATOR);
-      //todo: add FX | PacketHandler.INSTANCE.sendToAll(new MessageLightDrifterSync(player.getUniqueID(), player.posX, player.posY, player.posZ, true, GameType.SPECTATOR.getID()));
-      //todo: add FX | PacketHandler.INSTANCE.sendToAll(new MessageLightDrifterFX(player.posX, player.posY + 1.0f, player.posZ));
+      PacketHandler.INSTANCE.sendToAll(new MessageLightDrifterSync(player.getUniqueID(), player.posX, player.posY, player.posZ, true, GameType.SPECTATOR.getID()));
+      PacketHandler.INSTANCE.sendToAll(new MessageLightDrifterFX(player.posX, player.posY + 1.0f, player.posZ));
     }
   }
 

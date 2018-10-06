@@ -2,6 +2,9 @@ package epicsquid.roots.spell;
 
 import java.util.List;
 
+import epicsquid.roots.network.PacketHandler;
+import epicsquid.roots.network.message.MessageSanctuaryBurstFX;
+import epicsquid.roots.network.message.MessageSanctuaryRingFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -28,14 +31,14 @@ public class SpellSanctuary extends SpellBase {
             e.motionZ = 0.125f * (e.posZ - player.posZ);
             e.velocityChanged = true;
             if (!e.isInvisible()) {
-              //todo: add FX | PacketHandler.INSTANCE.sendToAll(new MessageSanctuaryBurstFX(e.posX, e.posY + 0.6f * e.getEyeHeight(), e.posZ));
+              PacketHandler.INSTANCE.sendToAll(new MessageSanctuaryBurstFX(e.posX, e.posY + 0.6f * e.getEyeHeight(), e.posZ));
             }
           }
         }
       }
     }
     if (player.ticksExisted % 2 == 0) {
-      //todo: add FX | PacketHandler.INSTANCE.sendToAll(new MessageSanctuaryRingFX(player.posX, player.posY + 0.875f, player.posZ));
+      PacketHandler.INSTANCE.sendToAll(new MessageSanctuaryRingFX(player.posX, player.posY + 0.875f, player.posZ));
     }
   }
 

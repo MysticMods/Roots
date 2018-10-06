@@ -2,6 +2,8 @@ package epicsquid.roots.spell;
 
 import java.util.List;
 
+import epicsquid.roots.network.PacketHandler;
+import epicsquid.roots.network.message.MessageAcidCloudFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
@@ -33,7 +35,7 @@ public class SpellAcidCloud extends SpellBase {
           e.setLastAttackedEntity(player);
         }
       }
-      //todo: add FX | PacketHandler.INSTANCE.sendToAll(new MessageAcidCloudFX(player.posX,player.posY+player.getEyeHeight(),player.posZ));
+      PacketHandler.INSTANCE.sendToAll(new MessageAcidCloudFX(player.posX,player.posY+player.getEyeHeight(),player.posZ));
     }
   }
 

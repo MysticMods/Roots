@@ -5,12 +5,15 @@ import javax.annotation.Nonnull;
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
+import epicsquid.mysticallib.event.RegisterParticleEvent;
 import epicsquid.mysticallib.event.RegisterWorldGenEvent;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModEntities;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModParticles;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.item.ItemStaff;
+import epicsquid.roots.network.PacketHandler;
 import epicsquid.roots.world.WorldGenBarrow;
 import epicsquid.roots.world.WorldGenHut;
 import net.minecraft.client.Minecraft;
@@ -34,6 +37,7 @@ public class RegistryManager {
 
     ModEntities.registerMobs();
     ModEntities.registerMobSpawn();
+    PacketHandler.registerMessages();
   }
 
   @SubscribeEvent
@@ -49,6 +53,12 @@ public class RegistryManager {
 
     GameRegistry.registerWorldGenerator(new WorldGenBarrow(), 100);
     GameRegistry.registerWorldGenerator(new WorldGenHut(), 101);
+  }
+
+  @SideOnly(Side.CLIENT)
+  @SubscribeEvent
+  public void onRegisterCustomModels(@Nonnull RegisterParticleEvent event) {
+    ModParticles.init();
   }
 
   @SubscribeEvent(priority = EventPriority.LOWEST)
