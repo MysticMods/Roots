@@ -7,6 +7,8 @@ import epicsquid.roots.tileentity.TileEntityImbuer;
 import epicsquid.roots.tileentity.TileEntityImbuerRenderer;
 import epicsquid.roots.tileentity.TileEntityMortar;
 import epicsquid.roots.tileentity.TileEntityMortarRenderer;
+import epicsquid.roots.tileentity.TileEntityOffertoryPlate;
+import epicsquid.roots.tileentity.TileEntityOffertoryPlateRenderer;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -18,6 +20,7 @@ public class ClientProxy extends CommonProxy {
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMortar.class, new TileEntityMortarRenderer());
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBonfire.class, new TileEntityBonfireRenderer());
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityImbuer.class, new TileEntityImbuerRenderer());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOffertoryPlate.class, new TileEntityOffertoryPlateRenderer());
     super.preInit(event);
   }
 
