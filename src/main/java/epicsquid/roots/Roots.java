@@ -1,5 +1,7 @@
 package epicsquid.roots;
 
+import java.io.File;
+
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
