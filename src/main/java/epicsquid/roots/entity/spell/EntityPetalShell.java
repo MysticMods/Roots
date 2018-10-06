@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 public class EntityPetalShell extends Entity {
   public UUID playerId = null;
-  public static final DataParameter<Integer> charge = EntityDataManager.createKey(EntityPetalShell.class, DataSerializers.VARINT);
+  private static final DataParameter<Integer> charge = EntityDataManager.createKey(EntityPetalShell.class, DataSerializers.VARINT);
 
   public EntityPetalShell(World worldIn) {
     super(worldIn);
@@ -63,4 +63,7 @@ public class EntityPetalShell extends Entity {
     compound.setTag("id", net.minecraft.nbt.NBTUtil.createUUIDTag(playerId));
   }
 
+  public static DataParameter<Integer> getCharge() {
+    return charge;
+  }
 }

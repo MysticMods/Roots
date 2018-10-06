@@ -1,7 +1,7 @@
 package epicsquid.roots.network.message;
 
-import java.util.Random;
 
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRegistry;
 import io.netty.buffer.ByteBuf;
@@ -15,14 +15,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessageSanctuaryBurstFX implements IMessage {
-  public static Random random = new Random();
   double posX = 0, posY = 0, posZ = 0;
 
-  public MessageSanctuaryBurstFX(){
+  public MessageSanctuaryBurstFX() {
     super();
   }
 
-  public MessageSanctuaryBurstFX(double x, double y, double z){
+  public MessageSanctuaryBurstFX(double x, double y, double z) {
     super();
     this.posX = x;
     this.posY = y;
@@ -43,22 +42,24 @@ public class MessageSanctuaryBurstFX implements IMessage {
     buf.writeDouble(posZ);
   }
 
-  public static float getColorCycle(float ticks){
-    return (MathHelper.sin((float)Math.toRadians(ticks))+1.0f)/2.0f;
+  public static float getColorCycle(float ticks) {
+    return (MathHelper.sin((float) Math.toRadians(ticks)) + 1.0f) / 2.0f;
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageSanctuaryBurstFX,IMessage>
-  {
+  public static class MessageHolder implements IMessageHandler<MessageSanctuaryBurstFX, IMessage> {
     @SideOnly(Side.CLIENT)
     @Override
     public IMessage onMessage(final MessageSanctuaryBurstFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
-      for (int k = 0; k < 10; k ++){
-        if (random.nextBoolean()){
-          ParticleUtil.spawnParticlePetal(world, (float)message.posX, (float)message.posY, (float)message.posZ, 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), SpellRegistry.spell_sanctuary.red1*255.0f,SpellRegistry.spell_sanctuary.green1*255.0f,SpellRegistry.spell_sanctuary.blue1*255.0f, 0.5f, 5f, 14);
-        }
-        else {
-          ParticleUtil.spawnParticlePetal(world, (float)message.posX, (float)message.posY, (float)message.posZ, 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), SpellRegistry.spell_sanctuary.red2*255.0f,SpellRegistry.spell_sanctuary.green2*255.0f,SpellRegistry.spell_sanctuary.blue2*255.0f, 0.5f, 5f, 14);
+      for (int k = 0; k < 10; k++) {
+        if (Util.rand.nextBoolean()) {
+          ParticleUtil.spawnParticlePetal(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f),
+              0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellRegistry.spell_sanctuary.red1 * 255.0f,
+              SpellRegistry.spell_sanctuary.green1 * 255.0f, SpellRegistry.spell_sanctuary.blue1 * 255.0f, 0.5f, 5f, 14);
+        } else {
+          ParticleUtil.spawnParticlePetal(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f),
+              0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellRegistry.spell_sanctuary.red2 * 255.0f,
+              SpellRegistry.spell_sanctuary.green2 * 255.0f, SpellRegistry.spell_sanctuary.blue2 * 255.0f, 0.5f, 5f, 14);
         }
       }
       return null;

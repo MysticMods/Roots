@@ -8,9 +8,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameType;
 
-public class LightDrifter extends SpellBase {
+public class SpellLightDrifter extends SpellBase {
 
-  public LightDrifter(String name) {
+  public SpellLightDrifter(String name) {
     super(name, TextFormatting.AQUA, 196f / 255f, 240f / 255f, 255f / 255f, 32f / 255f, 64f / 255f, 96f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 200;

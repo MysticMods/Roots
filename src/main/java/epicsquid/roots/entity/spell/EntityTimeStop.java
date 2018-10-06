@@ -15,7 +15,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class EntityTimeStop extends Entity {
-  public static final DataParameter<Integer> lifetime = EntityDataManager.<Integer>createKey(EntityTimeStop.class, DataSerializers.VARINT);
+  private static final DataParameter<Integer> lifetime = EntityDataManager.<Integer>createKey(EntityTimeStop.class, DataSerializers.VARINT);
   private UUID playerId = null;
 
   public EntityTimeStop(World worldIn) {
@@ -65,7 +65,6 @@ public class EntityTimeStop extends Entity {
         }
       }
     }
-    //if (!world.isRemote){
     List<EntityLivingBase> entities = world
         .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 9.0, posY - 1.0, posZ - 9.0, posX + 9.0, posY + 19.0, posZ + 9.0));
     for (EntityLivingBase e : entities) {
@@ -75,7 +74,6 @@ public class EntityTimeStop extends Entity {
         }
       }
     }
-    //}
   }
 
   @Override

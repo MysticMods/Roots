@@ -1,13 +1,12 @@
 package epicsquid.roots.network.message;
 
-import java.util.Random;
 import java.util.UUID;
 
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -15,16 +14,15 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class MessageDandelionCastFX  implements IMessage {
-  public static Random random = new Random();
+public class MessageDandelionCastFX implements IMessage {
   double posX = 0, posY = 0, posZ = 0;
   UUID id = null;
 
-  public MessageDandelionCastFX(){
+  public MessageDandelionCastFX() {
     super();
   }
 
-  public MessageDandelionCastFX(UUID id, double x, double y, double z){
+  public MessageDandelionCastFX(UUID id, double x, double y, double z) {
     super();
     this.posX = x;
     this.posY = y;
@@ -37,7 +35,7 @@ public class MessageDandelionCastFX  implements IMessage {
     posX = buf.readDouble();
     posY = buf.readDouble();
     posZ = buf.readDouble();
-    id = new UUID(buf.readLong(),buf.readLong());
+    id = new UUID(buf.readLong(), buf.readLong());
   }
 
   @Override
@@ -49,16 +47,17 @@ public class MessageDandelionCastFX  implements IMessage {
     buf.writeLong(id.getLeastSignificantBits());
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageDandelionCastFX,IMessage>
-  {
+  public static class MessageHolder implements IMessageHandler<MessageDandelionCastFX, IMessage> {
     @SideOnly(Side.CLIENT)
     @Override
     public IMessage onMessage(final MessageDandelionCastFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       EntityPlayer player = world.getPlayerEntityByUUID(message.id);
-      if (player != null){
-        for (int k = 0; k < 40; k ++){
-          ParticleUtil.spawnParticleSmoke(world, (float)player.posX, (float)player.posY+player.getEyeHeight(), (float)player.posZ, (float)player.getLookVec().x+(random.nextFloat()-0.5f), (float)player.getLookVec().y+(random.nextFloat()-0.5f), (float)player.getLookVec().z+(random.nextFloat()-0.5f), 0.65f, 0.65f, 0.65f, 0.15f, 12f, 40, false);
+      if (player != null) {
+        for (int k = 0; k < 40; k++) {
+          ParticleUtil.spawnParticleSmoke(world, (float) player.posX, (float) player.posY + player.getEyeHeight(), (float) player.posZ,
+              (float) player.getLookVec().x + (Util.rand.nextFloat() - 0.5f), (float) player.getLookVec().y + (Util.rand.nextFloat() - 0.5f),
+              (float) player.getLookVec().z + (Util.rand.nextFloat() - 0.5f), 0.65f, 0.65f, 0.65f, 0.15f, 12f, 40, false);
         }
       }
       return null;

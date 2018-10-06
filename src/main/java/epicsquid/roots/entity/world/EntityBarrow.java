@@ -11,10 +11,10 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class EntityBarrow extends Entity {
-  public int x = 0;
-  public int y = 0;
-  public int z = 0;
-  public boolean initedPosition = false;
+  private int x = 0;
+  private int y = 0;
+  private int z = 0;
+  private boolean initedPosition = false;
   public EntityBarrow(World worldIn) {
     super(worldIn);
     this.setInvisible(false);

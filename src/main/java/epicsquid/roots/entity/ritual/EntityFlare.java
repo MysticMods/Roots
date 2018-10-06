@@ -17,9 +17,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class EntityFlare extends Entity {
-  public static final DataParameter<Float> value = EntityDataManager.createKey(EntityFlare.class, DataSerializers.FLOAT);
-  int lifetime = 320;
-  public UUID id = null;
+  private static final DataParameter<Float> value = EntityDataManager.createKey(EntityFlare.class, DataSerializers.FLOAT);
+  private int lifetime = 320;
+  private UUID id = null;
 
   public EntityFlare(World worldIn) {
     super(worldIn);

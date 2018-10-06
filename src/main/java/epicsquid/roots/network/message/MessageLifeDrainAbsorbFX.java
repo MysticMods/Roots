@@ -1,8 +1,8 @@
 package epicsquid.roots.network.message;
 
-import java.util.Random;
 import java.util.UUID;
 
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRegistry;
 import io.netty.buffer.ByteBuf;
@@ -17,15 +17,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessageLifeDrainAbsorbFX implements IMessage {
-  public static Random random = new Random();
   double posX = 0, posY = 0, posZ = 0;
   UUID id = null;
 
-  public MessageLifeDrainAbsorbFX(){
+  public MessageLifeDrainAbsorbFX() {
     super();
   }
 
-  public MessageLifeDrainAbsorbFX(UUID id, double x, double y, double z){
+  public MessageLifeDrainAbsorbFX(UUID id, double x, double y, double z) {
     super();
     this.posX = x;
     this.posY = y;
@@ -38,7 +37,7 @@ public class MessageLifeDrainAbsorbFX implements IMessage {
     posX = buf.readDouble();
     posY = buf.readDouble();
     posZ = buf.readDouble();
-    id = new UUID(buf.readLong(),buf.readLong());
+    id = new UUID(buf.readLong(), buf.readLong());
   }
 
   @Override
@@ -50,27 +49,29 @@ public class MessageLifeDrainAbsorbFX implements IMessage {
     buf.writeLong(id.getLeastSignificantBits());
   }
 
-  public static float getColorCycle(float ticks){
-    return (MathHelper.sin((float)Math.toRadians(ticks))+1.0f)/2.0f;
+  public static float getColorCycle(float ticks) {
+    return (MathHelper.sin((float) Math.toRadians(ticks)) + 1.0f) / 2.0f;
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageLifeDrainAbsorbFX,IMessage>
-  {
+  public static class MessageHolder implements IMessageHandler<MessageLifeDrainAbsorbFX, IMessage> {
     @SideOnly(Side.CLIENT)
     @Override
     public IMessage onMessage(final MessageLifeDrainAbsorbFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       EntityPlayer player = world.getPlayerEntityByUUID(message.id);
-      if (player != null){
-        for (int i = 0; i < 4; i ++){
-          float x = (float)player.posX+(float)player.getLookVec().x*(6.0f+random.nextFloat()*9.0f)+2.0f*(random.nextFloat()-0.5f);
-          float y = (float)player.posY+1.0f+(float)player.getLookVec().y*(6.0f+random.nextFloat()*9.0f)+2.0f*(random.nextFloat()-0.5f);
-          float z = (float)player.posZ+(float)player.getLookVec().z*(6.0f+random.nextFloat()*9.0f)+2.0f*(random.nextFloat()-0.5f);
-          if (random.nextBoolean()){
-            ParticleUtil.spawnParticleLineGlow(world, x, y, z, (float)player.posX, (float)player.posY+1.0f, (float)player.posZ, SpellRegistry.spell_life_drain.red1, SpellRegistry.spell_life_drain.green1, SpellRegistry.spell_life_drain.blue1, 1.0f, 6.0f+6.0f*random.nextFloat(), 40);
-          }
-          else {
-            ParticleUtil.spawnParticleLineGlow(world, x, y, z, (float)player.posX, (float)player.posY+1.0f, (float)player.posZ, SpellRegistry.spell_life_drain.red2, SpellRegistry.spell_life_drain.green2, SpellRegistry.spell_life_drain.blue2, 1.0f, 6.0f+6.0f*random.nextFloat(), 40);
+      if (player != null) {
+        for (int i = 0; i < 4; i++) {
+          float x = (float) player.posX + (float) player.getLookVec().x * (6.0f + Util.rand.nextFloat() * 9.0f) + 2.0f * (Util.rand.nextFloat() - 0.5f);
+          float y = (float) player.posY + 1.0f + (float) player.getLookVec().y * (6.0f + Util.rand.nextFloat() * 9.0f) + 2.0f * (Util.rand.nextFloat() - 0.5f);
+          float z = (float) player.posZ + (float) player.getLookVec().z * (6.0f + Util.rand.nextFloat() * 9.0f) + 2.0f * (Util.rand.nextFloat() - 0.5f);
+          if (Util.rand.nextBoolean()) {
+            ParticleUtil.spawnParticleLineGlow(world, x, y, z, (float) player.posX, (float) player.posY + 1.0f, (float) player.posZ,
+                SpellRegistry.spell_life_drain.red1, SpellRegistry.spell_life_drain.green1, SpellRegistry.spell_life_drain.blue1, 1.0f,
+                6.0f + 6.0f * Util.rand.nextFloat(), 40);
+          } else {
+            ParticleUtil.spawnParticleLineGlow(world, x, y, z, (float) player.posX, (float) player.posY + 1.0f, (float) player.posZ,
+                SpellRegistry.spell_life_drain.red2, SpellRegistry.spell_life_drain.green2, SpellRegistry.spell_life_drain.blue2, 1.0f,
+                6.0f + 6.0f * Util.rand.nextFloat(), 40);
           }
         }
       }

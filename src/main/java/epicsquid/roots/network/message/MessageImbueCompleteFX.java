@@ -1,7 +1,6 @@
 package epicsquid.roots.network.message;
 
-import java.util.Random;
-
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
@@ -17,15 +16,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessageImbueCompleteFX implements IMessage {
-  public static Random random = new Random();
   double posX = 0, posY = 0, posZ = 0;
   String spellName = "null";
 
-  public MessageImbueCompleteFX(){
+  public MessageImbueCompleteFX() {
     super();
   }
 
-  public MessageImbueCompleteFX(String name, double x, double y, double z){
+  public MessageImbueCompleteFX(String name, double x, double y, double z) {
     super();
     this.posX = x;
     this.posY = y;
@@ -49,24 +47,26 @@ public class MessageImbueCompleteFX implements IMessage {
     ByteBufUtils.writeUTF8String(buf, spellName);
   }
 
-  public static float getColorCycle(float ticks){
-    return (MathHelper.sin((float)Math.toRadians(ticks))+1.0f)/2.0f;
+  public static float getColorCycle(float ticks) {
+    return (MathHelper.sin((float) Math.toRadians(ticks)) + 1.0f) / 2.0f;
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageImbueCompleteFX,IMessage>
-  {
+  public static class MessageHolder implements IMessageHandler<MessageImbueCompleteFX, IMessage> {
     @SideOnly(Side.CLIENT)
     @Override
     public IMessage onMessage(final MessageImbueCompleteFX message, final MessageContext ctx) {
       SpellBase spell = SpellRegistry.spellRegistry.get(message.spellName);
-      if (spell != null){
+      if (spell != null) {
         World world = Minecraft.getMinecraft().world;
-        for (int k = 0; k < 40; k ++){
-          if (random.nextBoolean()){
-            ParticleUtil.spawnParticleGlow(world, (float)message.posX, (float)message.posY, (float)message.posZ, 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), spell.red1*255.0f,spell.green1*255.0f,spell.blue1*255.0f, 0.5f, 2.5f, 48);
-          }
-          else {
-            ParticleUtil.spawnParticleGlow(world, (float)message.posX, (float)message.posY, (float)message.posZ, 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), spell.red2*255.0f,spell.green2*255.0f,spell.blue2*255.0f, 0.5f, 2.5f, 48);
+        for (int k = 0; k < 40; k++) {
+          if (Util.rand.nextBoolean()) {
+            ParticleUtil.spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f),
+                0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), spell.red1 * 255.0f, spell.green1 * 255.0f,
+                spell.blue1 * 255.0f, 0.5f, 2.5f, 48);
+          } else {
+            ParticleUtil.spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f),
+                0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), spell.red2 * 255.0f, spell.green2 * 255.0f,
+                spell.blue2 * 255.0f, 0.5f, 2.5f, 48);
           }
         }
       }
