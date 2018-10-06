@@ -48,9 +48,7 @@ public class EntityFireJet extends Entity {
     if (getDataManager().get(lifetime) <= 0) {
       setDead();
     }
-    System.out.println("OnUpdate");
     if (world.isRemote) {
-      System.out.println("World is remote");
       for (int i = 0; i < 8; i++) {
         float offX = 0.5f * (float) Math.sin(Math.toRadians(rotationYaw));
         float offZ = 0.5f * (float) Math.cos(Math.toRadians(rotationYaw));
