@@ -63,24 +63,24 @@ public class EntityThornTrap extends Entity {
         if (rand.nextBoolean()) {
           ParticleUtil
               .spawnParticleThorn(world, (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f),
-                  0.125f * (rand.nextFloat() - 0.5f), SpellRegistry.spell_rose.red1, SpellRegistry.spell_rose.green1, SpellRegistry.spell_rose.blue1, 0.5f,
+                  0.125f * (rand.nextFloat() - 0.5f), SpellRegistry.spell_rose_thorns.red1, SpellRegistry.spell_rose_thorns.green1, SpellRegistry.spell_rose_thorns.blue1, 0.5f,
                   2.5f, 12, rand.nextBoolean());
         } else {
           ParticleUtil
               .spawnParticleThorn(world, (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f),
-                  0.125f * (rand.nextFloat() - 0.5f), SpellRegistry.spell_rose.red2, SpellRegistry.spell_rose.green2, SpellRegistry.spell_rose.blue2, 0.5f,
+                  0.125f * (rand.nextFloat() - 0.5f), SpellRegistry.spell_rose_thorns.red2, SpellRegistry.spell_rose_thorns.green2, SpellRegistry.spell_rose_thorns.blue2, 0.5f,
                   2.5f, 12, rand.nextBoolean());
         }
       } else {
         if (rand.nextBoolean()) {
           ParticleUtil
               .spawnParticleGlow(world, (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f),
-                  0.125f * (rand.nextFloat() - 0.5f), SpellRegistry.spell_rose.red1, SpellRegistry.spell_rose.green1, SpellRegistry.spell_rose.blue1, 0.5f, 5f,
+                  0.125f * (rand.nextFloat() - 0.5f), SpellRegistry.spell_rose_thorns.red1, SpellRegistry.spell_rose_thorns.green1, SpellRegistry.spell_rose_thorns.blue1, 0.5f, 5f,
                   12);
         } else {
           ParticleUtil
               .spawnParticleGlow(world, (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f),
-                  0.125f * (rand.nextFloat() - 0.5f), SpellRegistry.spell_rose.red2, SpellRegistry.spell_rose.green2, SpellRegistry.spell_rose.blue2, 0.5f, 5f,
+                  0.125f * (rand.nextFloat() - 0.5f), SpellRegistry.spell_rose_thorns.red2, SpellRegistry.spell_rose_thorns.green2, SpellRegistry.spell_rose_thorns.blue2, 0.5f, 5f,
                   12);
         }
       }
@@ -110,12 +110,12 @@ public class EntityThornTrap extends Entity {
               if (rand.nextBoolean()) {
                 ParticleUtil.spawnParticleThorn(world, (float) posX + 0.25f * (rand.nextFloat() - 0.5f), (float) posY + 0.25f * (rand.nextFloat() - 0.5f),
                     (float) posZ + 0.25f * (rand.nextFloat() - 0.5f), 0.375f * rand.nextFloat() - 0.1875f, 0.1f + 0.125f * rand.nextFloat(),
-                    0.375f * rand.nextFloat() - 0.1875f, SpellRegistry.spell_rose.red1, SpellRegistry.spell_rose.green1, SpellRegistry.spell_rose.blue1, 0.5f,
+                    0.375f * rand.nextFloat() - 0.1875f, SpellRegistry.spell_rose_thorns.red1, SpellRegistry.spell_rose_thorns.green1, SpellRegistry.spell_rose_thorns.blue1, 0.5f,
                     4.0f, 24, rand.nextBoolean());
               } else {
                 ParticleUtil.spawnParticleThorn(world, (float) posX + 0.25f * (rand.nextFloat() - 0.5f), (float) posY + 0.25f * (rand.nextFloat() - 0.5f),
                     (float) posZ + 0.25f * (rand.nextFloat() - 0.5f), 0.375f * rand.nextFloat() - 0.1875f, 0.1f + 0.125f * rand.nextFloat(),
-                    0.375f * rand.nextFloat() - 0.1875f, SpellRegistry.spell_rose.red2, SpellRegistry.spell_rose.green2, SpellRegistry.spell_rose.blue2, 0.5f,
+                    0.375f * rand.nextFloat() - 0.1875f, SpellRegistry.spell_rose_thorns.red2, SpellRegistry.spell_rose_thorns.green2, SpellRegistry.spell_rose_thorns.blue2, 0.5f,
                     4.0f, 24, rand.nextBoolean());
               }
             }
