@@ -8,6 +8,7 @@ import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemStaff;
+import epicsquid.roots.network.message.MessageImbueCompleteFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
@@ -161,7 +162,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
               inventory.extractItem(1, 1, false);
               markDirty();
               PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
-              //todo: fix when particles work PacketHandler.INSTANCE.sendToAll(new MessageImbueCompleteFX(spellDust.getTagCompound().getString("spell"),getPos().getX()+0.5,getPos().getY()+0.5,getPos().getZ()+0.5));
+              epicsquid.roots.network.PacketHandler.INSTANCE.sendToAll(new MessageImbueCompleteFX(spellDust.getTagCompound().getString("spell"),getPos().getX()+0.5,getPos().getY()+0.5,getPos().getZ()+0.5));
             }
           }
         }

@@ -2,6 +2,8 @@ package epicsquid.roots.spell;
 
 import java.util.List;
 
+import epicsquid.roots.network.PacketHandler;
+import epicsquid.roots.network.message.MessageLifeDrainAbsorbFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
@@ -21,7 +23,7 @@ public class SpellLifeDrain extends SpellBase {
   public void cast(EntityPlayer player) {
     if (!player.world.isRemote) {
       boolean foundTarget = false;
-      //todo: add FX | PacketHandler.INSTANCE.sendToAll(new MessageLifeDrainAbsorbFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ));
+      PacketHandler.INSTANCE.sendToAll(new MessageLifeDrainAbsorbFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ));
       for (int i = 0; i < 4 && !foundTarget; i++) {
         double x = player.posX + player.getLookVec().x * 3.0 * (float) i;
         double y = player.posY + player.getEyeHeight() + player.getLookVec().y * 3.0 * (float) i;

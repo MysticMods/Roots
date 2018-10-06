@@ -1,6 +1,8 @@
 package epicsquid.roots.spell;
 
 import epicsquid.roots.entity.spell.EntityTimeStop;
+import epicsquid.roots.network.PacketHandler;
+import epicsquid.roots.network.message.MessageTimeStopStartFX;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextFormatting;
 
@@ -19,7 +21,7 @@ public class SpellTimeStop extends SpellBase {
       timeStop.setPlayer(player.getUniqueID());
       timeStop.setPosition(player.posX, player.posY, player.posZ);
       player.world.spawnEntity(timeStop);
-      //todo: add FX | PacketHandler.INSTANCE.sendToAll(new MessageTimeStopStartFX(player.posX, player.posY + 1.0f, player.posZ));
+      PacketHandler.INSTANCE.sendToAll(new MessageTimeStopStartFX(player.posX, player.posY + 1.0f, player.posZ));
     }
   }
 

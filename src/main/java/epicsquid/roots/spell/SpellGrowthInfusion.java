@@ -2,6 +2,8 @@ package epicsquid.roots.spell;
 
 import java.util.Random;
 
+import epicsquid.roots.network.PacketHandler;
+import epicsquid.roots.network.message.MessageLifeInfusionFX;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -28,7 +30,7 @@ public class SpellGrowthInfusion extends SpellBase {
           for (int i = 0; i < 1; i++) {
             state.getBlock().randomTick(player.world, pos, state, new Random());
           }
-          //todo: add FX | PacketHandler.INSTANCE.sendToAll(new MessageLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()));
+          PacketHandler.INSTANCE.sendToAll(new MessageLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()));
         }
       }
     }

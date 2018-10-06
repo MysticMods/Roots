@@ -2,6 +2,8 @@ package epicsquid.roots.spell;
 
 import java.util.Random;
 
+import epicsquid.roots.network.PacketHandler;
+import epicsquid.roots.network.message.MessageShatterBurstFX;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,7 +48,7 @@ public class SpellShatter extends SpellBase {
           if (doParticles) {
             float offX = 0.5f * (float) Math.sin(Math.toRadians(-90.0f - player.rotationYaw));
             float offZ = 0.5f * (float) Math.cos(Math.toRadians(-90.0f - player.rotationYaw));
-            //todo: add FX | PacketHandler.INSTANCE.sendToAll(new MessageShatterBurstFX(player.posX + offX, player.posY + player.getEyeHeight(), player.posZ + offZ, result.hitVec.x, result.hitVec.y, result.hitVec.z));
+            PacketHandler.INSTANCE.sendToAll(new MessageShatterBurstFX(player.posX + offX, player.posY + player.getEyeHeight(), player.posZ + offZ, result.hitVec.x, result.hitVec.y, result.hitVec.z));
           }
         } else if (result.typeOfHit == RayTraceResult.Type.ENTITY) {
           if (result.entityHit instanceof EntityLivingBase) {
@@ -55,7 +57,7 @@ public class SpellShatter extends SpellBase {
             ((EntityLivingBase) result.entityHit).setRevengeTarget(player);
             float offX = 0.5f * (float) Math.sin(Math.toRadians(-90.0f - player.rotationYaw));
             float offZ = 0.5f * (float) Math.cos(Math.toRadians(-90.0f - player.rotationYaw));
-            //todo: add FX | PacketHandler.INSTANCE.sendToAll(new MessageShatterBurstFX(player.posX + offX, player.posY + player.getEyeHeight(), player.posZ + offZ, result.hitVec.x, result.hitVec.y, result.hitVec.z));
+            PacketHandler.INSTANCE.sendToAll(new MessageShatterBurstFX(player.posX + offX, player.posY + player.getEyeHeight(), player.posZ + offZ, result.hitVec.x, result.hitVec.y, result.hitVec.z));
           }
         }
       }

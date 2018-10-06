@@ -3,6 +3,8 @@ package epicsquid.roots.spell;
 import java.util.List;
 
 import epicsquid.roots.entity.spell.EntityPetalShell;
+import epicsquid.roots.network.PacketHandler;
+import epicsquid.roots.network.message.MessagePetalShellBurstFX;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
@@ -34,7 +36,7 @@ public class SpellPetalShell extends SpellBase {
         shell.setPlayer(player.getUniqueID());
         player.world.spawnEntity(shell);
       }
-      //todo: add FX | PacketHandler.INSTANCE.sendToAll(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ));
+      PacketHandler.INSTANCE.sendToAll(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ));
     }
   }
 
