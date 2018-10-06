@@ -26,8 +26,8 @@ public class SpellPetalShell extends SpellBase {
       for (EntityPetalShell s : shells) {
         if (s.playerId.compareTo(player.getUniqueID()) == 0) {
           hasShell = true;
-          s.getDataManager().set(s.charge, Math.min(3, s.getDataManager().get(s.charge) + 1));
-          s.getDataManager().setDirty(s.charge);
+          s.getDataManager().set(EntityPetalShell.getCharge(), Math.min(3, s.getDataManager().get(EntityPetalShell.getCharge()) + 1));
+          s.getDataManager().setDirty(EntityPetalShell.getCharge());
         }
       }
       if (!hasShell) {

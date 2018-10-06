@@ -1,7 +1,6 @@
 package epicsquid.roots.network.message;
 
-import java.util.Random;
-
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRegistry;
 import io.netty.buffer.ByteBuf;
@@ -15,14 +14,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessageTimeStopStartFX implements IMessage {
-  public static Random random = new Random();
   double posX = 0, posY = 0, posZ = 0;
 
-  public MessageTimeStopStartFX(){
+  public MessageTimeStopStartFX() {
     super();
   }
 
-  public MessageTimeStopStartFX(double x, double y, double z){
+  public MessageTimeStopStartFX(double x, double y, double z) {
     super();
     this.posX = x;
     this.posY = y;
@@ -43,23 +41,27 @@ public class MessageTimeStopStartFX implements IMessage {
     buf.writeDouble(posZ);
   }
 
-  public static float getColorCycle(float ticks){
-    return (MathHelper.sin((float)Math.toRadians(ticks))+1.0f)/2.0f;
+  public static float getColorCycle(float ticks) {
+    return (MathHelper.sin((float) Math.toRadians(ticks)) + 1.0f) / 2.0f;
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageTimeStopStartFX,IMessage>
-  {
+  public static class MessageHolder implements IMessageHandler<MessageTimeStopStartFX, IMessage> {
     @SideOnly(Side.CLIENT)
     @Override
     public IMessage onMessage(final MessageTimeStopStartFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
-      for (float k = 0; k < 360; k += random.nextInt(4)){
-        if (random.nextBoolean()){
-          if (random.nextBoolean()){
-            ParticleUtil.spawnParticleGlow(world, (float)message.posX+0.5f*(float)Math.sin(Math.toRadians(k)), (float)message.posY, (float)message.posZ+0.5f*(float)Math.cos(Math.toRadians(k)), random.nextFloat()*0.1875f*(float)Math.sin(Math.toRadians(k)), random.nextFloat()*-0.0625f, random.nextFloat()*0.1875f*(float)Math.cos(Math.toRadians(k)), SpellRegistry.spell_time_stop.red1, SpellRegistry.spell_time_stop.green1, SpellRegistry.spell_time_stop.blue1, 0.5f, 2.5f+7.0f*random.nextFloat(), 40);
-          }
-          else {
-            ParticleUtil.spawnParticleGlow(world, (float)message.posX+0.5f*(float)Math.sin(Math.toRadians(k)), (float)message.posY, (float)message.posZ+0.5f*(float)Math.cos(Math.toRadians(k)), random.nextFloat()*0.1875f*(float)Math.sin(Math.toRadians(k)), random.nextFloat()*-0.0625f, random.nextFloat()*0.1875f*(float)Math.cos(Math.toRadians(k)), SpellRegistry.spell_time_stop.red2, SpellRegistry.spell_time_stop.green2, SpellRegistry.spell_time_stop.blue2, 0.5f, 2.5f+7.0f*random.nextFloat(), 40);
+      for (float k = 0; k < 360; k += Util.rand.nextInt(4)) {
+        if (Util.rand.nextBoolean()) {
+          if (Util.rand.nextBoolean()) {
+            ParticleUtil.spawnParticleGlow(world, (float) message.posX + 0.5f * (float) Math.sin(Math.toRadians(k)), (float) message.posY,
+                (float) message.posZ + 0.5f * (float) Math.cos(Math.toRadians(k)), Util.rand.nextFloat() * 0.1875f * (float) Math.sin(Math.toRadians(k)),
+                Util.rand.nextFloat() * -0.0625f, Util.rand.nextFloat() * 0.1875f * (float) Math.cos(Math.toRadians(k)), SpellRegistry.spell_time_stop.red1,
+                SpellRegistry.spell_time_stop.green1, SpellRegistry.spell_time_stop.blue1, 0.5f, 2.5f + 7.0f * Util.rand.nextFloat(), 40);
+          } else {
+            ParticleUtil.spawnParticleGlow(world, (float) message.posX + 0.5f * (float) Math.sin(Math.toRadians(k)), (float) message.posY,
+                (float) message.posZ + 0.5f * (float) Math.cos(Math.toRadians(k)), Util.rand.nextFloat() * 0.1875f * (float) Math.sin(Math.toRadians(k)),
+                Util.rand.nextFloat() * -0.0625f, Util.rand.nextFloat() * 0.1875f * (float) Math.cos(Math.toRadians(k)), SpellRegistry.spell_time_stop.red2,
+                SpellRegistry.spell_time_stop.green2, SpellRegistry.spell_time_stop.blue2, 0.5f, 2.5f + 7.0f * Util.rand.nextFloat(), 40);
           }
         }
       }

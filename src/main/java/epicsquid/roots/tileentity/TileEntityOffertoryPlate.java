@@ -33,9 +33,9 @@ public class TileEntityOffertoryPlate extends TileBase {
       }
     }
   };
-  public UUID lastPlayer = null;
-  int progress = 0;
-  public float angle = 0;
+  private UUID lastPlayer = null;
+  private int progress = 0;
+  private float angle = 0;
 
   public TileEntityOffertoryPlate(){
     super();

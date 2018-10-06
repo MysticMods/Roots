@@ -30,6 +30,6 @@ public class SpellRegistry {
         spell_radiance = new SpellRadiance("spell_radiance").addCost(ModItems.moonglow_leaf, 0.25f).addCost(ModItems.wildroot, 0.125f)
             .addCost(ModItems.aubergine_seed, 0.25f));
     spellRegistry.put("spell_light_drifter",
-        spell_light_drifter = new LightDrifter("spell_light_drifter").addCost(ModItems.pereskia, 0.5f).addCost(ModItems.wildroot, 0.25f));
+        spell_light_drifter = new SpellLightDrifter("spell_light_drifter").addCost(ModItems.pereskia, 0.5f).addCost(ModItems.wildroot, 0.25f));
   }
 }

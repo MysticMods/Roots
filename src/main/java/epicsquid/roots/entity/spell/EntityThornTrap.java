@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class EntityThornTrap extends Entity {
-  public static final DataParameter<Integer> lifetime = EntityDataManager.<Integer>createKey(EntityThornTrap.class, DataSerializers.VARINT);
+  private static final DataParameter<Integer> lifetime = EntityDataManager.<Integer>createKey(EntityThornTrap.class, DataSerializers.VARINT);
   private UUID playerId = null;
 
   public EntityThornTrap(World worldIn) {
