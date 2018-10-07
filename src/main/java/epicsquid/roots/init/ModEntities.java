@@ -3,6 +3,7 @@ package epicsquid.roots.init;
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.entity.RenderNull;
 import epicsquid.roots.Roots;
+import epicsquid.roots.entity.grove.EntityWildlandsGrove;
 import epicsquid.roots.entity.ritual.EntityFlare;
 import epicsquid.roots.entity.ritual.EntityRitualFireStorm;
 import epicsquid.roots.entity.ritual.EntityRitualLife;
@@ -39,6 +40,7 @@ public class ModEntities {
     LibRegistry.registerEntity(EntityPetalShell.class);
     LibRegistry.registerEntity(EntityTimeStop.class);
     LibRegistry.registerEntity(EntityBoost.class);
+
     LibRegistry.registerEntity(EntityRitualLife.class);
     LibRegistry.registerEntity(EntityRitualStorm.class);
     LibRegistry.registerEntity(EntityRitualLight.class);
@@ -48,12 +50,15 @@ public class ModEntities {
     LibRegistry.registerEntity(EntityRitualWindwall.class);
     LibRegistry.registerEntity(EntityRitualWarden.class);
 
+    LibRegistry.registerEntity(EntityWildlandsGrove.class);
+
     if (Roots.proxy instanceof ClientProxy) {
       LibRegistry.registerEntityRenderer(EntityFireJet.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityThornTrap.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityPetalShell.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityTimeStop.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityBoost.class, new RenderNull.Factory());
+
       LibRegistry.registerEntityRenderer(EntityRitualLife.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualStorm.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualLight.class, new RenderNull.Factory());
@@ -62,6 +67,8 @@ public class ModEntities {
       LibRegistry.registerEntityRenderer(EntityRitualRegrowth.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualWindwall.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualWarden.class, new RenderNull.Factory());
+
+      LibRegistry.registerEntityRenderer(EntityWildlandsGrove.class, new RenderNull.Factory());
     }
   }
 

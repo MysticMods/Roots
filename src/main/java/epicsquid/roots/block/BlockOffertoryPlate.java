@@ -11,7 +11,9 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockOffertoryPlate extends BlockTEBase {
@@ -52,4 +54,9 @@ public class BlockOffertoryPlate extends BlockTEBase {
     return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
   }
 
+  @Nonnull
+  @Override
+  public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+    return new AxisAlignedBB(0.125,0.0,0.125,0.875,0.875,0.875);
+  }
 }
