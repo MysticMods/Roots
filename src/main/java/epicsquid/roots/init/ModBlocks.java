@@ -2,7 +2,10 @@ package epicsquid.roots.init;
 
 import javax.annotation.Nonnull;
 
+import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.block.BlockBase;
+import epicsquid.mysticallib.block.BlockStairsBase;
+import epicsquid.mysticallib.block.BlockWallBase;
 import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.roots.Roots;
 import epicsquid.roots.block.BlockBonfire;
@@ -21,7 +24,7 @@ import net.minecraft.block.material.Material;
 public class ModBlocks {
 
   // All block
-  public static Block mortar, bonfire, runestone, chiseled_runestone, imbuer, structure_marker, offertory_plate;
+  public static Block mortar, bonfire, runestone, runestone_brick, chiseled_runestone, imbuer, structure_marker, offertory_plate;
 
   /**
    * Register all block
@@ -31,8 +34,16 @@ public class ModBlocks {
     event.addBlock(bonfire = new BlockBonfire(Material.WOOD, SoundType.WOOD, 1.4f, "bonfire", TileEntityBonfire.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(imbuer = new BlockImbuer(Material.WOOD, SoundType.WOOD, 1.4f, "imbuer", TileEntityImbuer.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(runestone = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone")).setCreativeTab(Roots.tab);
+    event.addBlock(runestone_brick = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_brick")).setCreativeTab(Roots.tab);
     event.addBlock(chiseled_runestone = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "chiseled_runestone")).setCreativeTab(Roots.tab);
     event.addBlock(structure_marker = new BlockStructureMarker());
     event.addBlock(offertory_plate = new BlockOffertoryPlate(Material.ROCK, SoundType.STONE, 1.4f, "offertory_plate", TileEntityOffertoryPlate.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+  }
+
+  private static void variants(RegisterContentEvent event, Block base, String name, Block... refs){
+    event.addBlock(base);
+    LibRegistry.addSlabPair(Material.ROCK, SoundType.STONE, 1.7f, name, base.getDefaultState(), new Block[]{refs[0], refs[1]}, true, base.getCreativeTabToDisplayOn());
+    event.addBlock(refs[2] = new BlockStairsBase(base.getDefaultState(), SoundType.STONE, 1.7f, name+"_stairs").setModelCustom(true).setCreativeTab(base.getCreativeTabToDisplayOn()));
+    event.addBlock(refs[3] = new BlockWallBase(base, SoundType.STONE, 1.7f, name+"_wall").setModelCustom(true).setCreativeTab(base.getCreativeTabToDisplayOn()));
   }
 }
