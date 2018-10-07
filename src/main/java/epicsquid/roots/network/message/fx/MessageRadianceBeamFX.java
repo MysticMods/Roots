@@ -1,4 +1,4 @@
-package epicsquid.roots.network.message;
+package epicsquid.roots.network.message.fx;
 
 import java.util.ArrayList;
 import java.util.UUID;
