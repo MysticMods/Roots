@@ -3,6 +3,10 @@ package epicsquid.roots.world;
 import java.util.Random;
 
 import epicsquid.mysticallib.util.Util;
+import epicsquid.mysticalworld.entity.EntityBeetle;
+import epicsquid.mysticalworld.entity.EntityDeer;
+import epicsquid.mysticalworld.entity.EntityFox;
+import epicsquid.roots.entity.spell.EntityFireJet;
 import epicsquid.roots.init.ModBlocks;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.state.IBlockState;
@@ -83,8 +87,8 @@ public class WorldGenWildlandGrove extends StructureBase implements IWorldGenera
         "GGGGGGGGGGGG",
     });
     addLayer(new String[]{
-        "OOOYOOOOOOOO",
-        "OYOOOOAAOOYO",
+        "  OYOOOOOO  ",
+        " YOOOOAAOOY ",
         "OOOSAAAAAYOO",
         "OYOOAAAAAAOO",
         "OOOAAAAAAAAS",
@@ -93,8 +97,8 @@ public class WorldGenWildlandGrove extends StructureBase implements IWorldGenera
         "OOOAAAAAAAOO",
         "OYOOAAAAAOOO",
         "OOOOOAAASOOO",
-        "OOYOOOOOYYOO",
-        "OOOOOYOOOOOO",
+        " OYOOOOOYYO ",
+        "  OOOYOOOO  ",
     });
   }
 
@@ -126,11 +130,35 @@ public class WorldGenWildlandGrove extends StructureBase implements IWorldGenera
             }
           }
           if (canGenerate){
-            System.out.println("Generate: " + xx + " " + zz);
+            System.out.println("Generate wildlands: " + xx + " " + zz);
             this.generateIn(world, xx, height-3, zz);
+            spawnEntities(world, random, xx, zz, height);
           }
         }
       }
     }
+  }
+
+  private void spawnEntities(World world, Random rand, int xx, int zz, int height){
+    EntityBeetle beetle1 = new EntityBeetle(world);
+    EntityDeer deer1 = new EntityDeer(world);
+    EntityFox fox1 = new EntityFox(world);
+    EntityBeetle beetle2 = new EntityBeetle(world);
+    EntityDeer deer2 = new EntityDeer(world);
+    EntityFox fox2 = new EntityFox(world);
+
+    beetle1.setPosition(xx + (rand.nextInt(12) - 6), height+1, zz + (rand.nextInt(12) - 6));
+    deer1.setPosition(xx + (rand.nextInt(12) - 6), height+1, zz + (rand.nextInt(12) - 6));
+    fox1.setPosition(xx + (rand.nextInt(12) - 6), height+1, zz + (rand.nextInt(12) - 6));
+    beetle2.setPosition(xx + (rand.nextInt(12) - 6), height+1, zz + (rand.nextInt(12) - 6));
+    deer2.setPosition(xx + (rand.nextInt(12) - 6), height+1, zz + (rand.nextInt(12) - 6));
+    fox2.setPosition(xx + (rand.nextInt(12) - 6), height+1, zz + (rand.nextInt(12) - 6));
+
+    world.spawnEntity(beetle1);
+    world.spawnEntity(deer1);
+    world.spawnEntity(fox1);
+    world.spawnEntity(beetle2);
+    world.spawnEntity(deer2);
+    world.spawnEntity(fox2);
   }
 }
