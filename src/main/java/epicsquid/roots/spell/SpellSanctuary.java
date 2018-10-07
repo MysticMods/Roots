@@ -2,9 +2,9 @@ package epicsquid.roots.spell;
 
 import java.util.List;
 
-import epicsquid.roots.network.PacketHandler;
-import epicsquid.roots.network.message.MessageSanctuaryBurstFX;
-import epicsquid.roots.network.message.MessageSanctuaryRingFX;
+import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.roots.network.message.fx.MessageSanctuaryBurstFX;
+import epicsquid.roots.network.message.fx.MessageSanctuaryRingFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;

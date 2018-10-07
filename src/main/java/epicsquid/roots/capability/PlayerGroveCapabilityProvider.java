@@ -2,7 +2,6 @@ package epicsquid.roots.capability;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -10,8 +9,9 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 public class PlayerGroveCapabilityProvider implements ICapabilitySerializable<NBTTagCompound> {
+
   @CapabilityInject(PlayerGroveCapability.class)
-  public static final Capability<PlayerGroveCapability> PLAYER_GROVE_CAPABILITY = injected();
+  public static final Capability<PlayerGroveCapability> PLAYER_GROVE_CAPABILITY = null;
 
   private PlayerGroveCapability instance = PLAYER_GROVE_CAPABILITY.getDefaultInstance();
 

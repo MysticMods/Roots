@@ -1,8 +1,5 @@
 package epicsquid.roots.capability;
 
-import java.util.Map;
-
-import epicsquid.roots.grove.GroveType;
 import net.minecraft.nbt.NBTTagCompound;
 
 public interface IPlayerGroveCapability {

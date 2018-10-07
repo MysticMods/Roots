@@ -2,9 +2,9 @@ package epicsquid.roots.spell;
 
 import java.util.List;
 
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.entity.spell.EntityPetalShell;
-import epicsquid.roots.network.PacketHandler;
-import epicsquid.roots.network.message.MessagePetalShellBurstFX;
+import epicsquid.roots.network.message.fx.MessagePetalShellBurstFX;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;

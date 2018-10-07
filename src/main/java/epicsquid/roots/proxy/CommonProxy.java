@@ -15,8 +15,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class CommonProxy {
   public void preInit(FMLPreInitializationEvent event) {
     ModItems.registerOredict();
-
-    CapabilityManager.INSTANCE.register(IPlayerGroveCapability.class, new PlayerGroveCapabilityStorage(), PlayerGroveCapability::new);
   }
 
   public void init(FMLInitializationEvent event) {

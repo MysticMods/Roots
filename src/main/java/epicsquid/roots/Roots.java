@@ -1,10 +1,14 @@
 package epicsquid.roots;
 
+import epicsquid.roots.capability.IPlayerGroveCapability;
+import epicsquid.roots.capability.PlayerGroveCapability;
+import epicsquid.roots.capability.PlayerGroveCapabilityStorage;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -46,6 +50,7 @@ public class Roots {
   @EventHandler
   public void preInit(FMLPreInitializationEvent event) {
     CONTAINER = Loader.instance().activeModContainer();
+    CapabilityManager.INSTANCE.register(IPlayerGroveCapability.class, new PlayerGroveCapabilityStorage(), PlayerGroveCapability::new);
     MinecraftForge.EVENT_BUS.register(new RegistryManager());
     MinecraftForge.EVENT_BUS.register(new EventManager());
     proxy.preInit(event);
