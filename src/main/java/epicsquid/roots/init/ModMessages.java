@@ -1,6 +1,7 @@
 package epicsquid.roots.init;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.roots.network.message.MessagePlayerGroveUpdate;
 import epicsquid.roots.network.message.fx.MessageAcidCloudFX;
 import epicsquid.roots.network.message.fx.MessageDandelionCastFX;
 import epicsquid.roots.network.message.fx.MessageImbueCompleteFX;
@@ -32,5 +33,6 @@ public class ModMessages {
     PacketHandler.registerMessage(MessageRadianceBeamFX.MessageHolder.class,MessageRadianceBeamFX.class,Side.CLIENT);
     PacketHandler.registerMessage(MessageLightDrifterFX.MessageHolder.class,MessageLightDrifterFX.class,Side.CLIENT);
     PacketHandler.registerMessage(MessageLightDrifterSync.MessageHolder.class,MessageLightDrifterSync.class,Side.CLIENT);
+    PacketHandler.registerMessage(MessagePlayerGroveUpdate.MessageHolder.class, MessagePlayerGroveUpdate.class, Side.CLIENT);
   }
 }

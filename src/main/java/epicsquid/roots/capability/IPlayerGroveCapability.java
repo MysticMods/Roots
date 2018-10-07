@@ -6,5 +6,8 @@ public interface IPlayerGroveCapability {
 
   public NBTTagCompound getData();
   public void setData(NBTTagCompound tag);
+  public void markDirty();
+  public boolean isDirty();
+  public void clean();
 
 }

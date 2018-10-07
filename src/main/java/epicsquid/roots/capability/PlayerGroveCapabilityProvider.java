@@ -10,8 +10,8 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 public class PlayerGroveCapabilityProvider implements ICapabilitySerializable<NBTTagCompound> {
 
-  @CapabilityInject(PlayerGroveCapability.class)
-  public static final Capability<PlayerGroveCapability> PLAYER_GROVE_CAPABILITY = null;
+  @CapabilityInject(IPlayerGroveCapability.class)
+  public static final Capability<PlayerGroveCapability> PLAYER_GROVE_CAPABILITY = injected();
 
   private PlayerGroveCapability instance = PLAYER_GROVE_CAPABILITY.getDefaultInstance();
 
