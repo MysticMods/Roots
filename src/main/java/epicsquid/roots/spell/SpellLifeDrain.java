@@ -2,8 +2,8 @@ package epicsquid.roots.spell;
 
 import java.util.List;
 
-import epicsquid.roots.network.PacketHandler;
-import epicsquid.roots.network.message.MessageLifeDrainAbsorbFX;
+import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.roots.network.message.fx.MessageLifeDrainAbsorbFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
