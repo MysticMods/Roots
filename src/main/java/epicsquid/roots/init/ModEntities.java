@@ -3,7 +3,7 @@ package epicsquid.roots.init;
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.entity.RenderNull;
 import epicsquid.roots.Roots;
-import epicsquid.roots.entity.grove.EntityWildlandsGrove;
+import epicsquid.roots.entity.grove.EntityWildGrove;
 import epicsquid.roots.entity.ritual.EntityFlare;
 import epicsquid.roots.entity.ritual.EntityRitualFireStorm;
 import epicsquid.roots.entity.ritual.EntityRitualLife;
@@ -50,7 +50,7 @@ public class ModEntities {
     LibRegistry.registerEntity(EntityRitualWindwall.class);
     LibRegistry.registerEntity(EntityRitualWarden.class);
 
-    LibRegistry.registerEntity(EntityWildlandsGrove.class);
+    LibRegistry.registerEntity(EntityWildGrove.class);
 
     if (Roots.proxy instanceof ClientProxy) {
       LibRegistry.registerEntityRenderer(EntityFireJet.class, new RenderNull.Factory());
@@ -68,7 +68,7 @@ public class ModEntities {
       LibRegistry.registerEntityRenderer(EntityRitualWindwall.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualWarden.class, new RenderNull.Factory());
 
-      LibRegistry.registerEntityRenderer(EntityWildlandsGrove.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntityWildGrove.class, new RenderNull.Factory());
     }
   }
 

@@ -1,5 +1,6 @@
 package epicsquid.roots.tileentity;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Nonnull;
@@ -8,6 +9,7 @@ import epicsquid.mysticallib.network.MessageTEUpdate;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.entity.grove.EntityGrove;
 import epicsquid.roots.util.OfferingUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -81,7 +83,7 @@ public class TileEntityOffertoryPlate extends TileBase {
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand,
       @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
-    if (!heldItem.isEmpty() && OfferingUtil.getValue(heldItem) != 0){
+    if (!heldItem.isEmpty() && OfferingUtil.getValue(heldItem) != 0f){
       if (inventory.getStackInSlot(0).isEmpty()){
         ItemStack toInsert = heldItem.copy();
         ItemStack attemptedInsert = inventory.insertItem(0, toInsert, true);
@@ -92,6 +94,10 @@ public class TileEntityOffertoryPlate extends TileBase {
             player.setHeldItem(hand, ItemStack.EMPTY);
           }
           markDirty();
+
+          //Search for the grove and let it do its things
+          List<EntityGrove> groveList = Util.getEntitiesWithinRadius(world, EntityGrove.class, getPos(), 10);
+          System.out.println(groveList.size());
           return true;
         }
       }

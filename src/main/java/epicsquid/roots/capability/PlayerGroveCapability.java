@@ -9,7 +9,7 @@ import net.minecraft.nbt.NBTTagList;
 
 public class PlayerGroveCapability implements IPlayerGroveCapability {
 
-  private Map<GroveType, Integer> groveTrust = new HashMap<>();
+  private Map<GroveType, Float> groveTrust = new HashMap<>();
 
   public boolean dirty = true;
 
@@ -19,10 +19,10 @@ public class PlayerGroveCapability implements IPlayerGroveCapability {
 
     NBTTagList groveTagList = new NBTTagList();
     int count = 0;
-    for(Map.Entry<GroveType, Integer> entry : groveTrust.entrySet()){
+    for(Map.Entry<GroveType, Float> entry : groveTrust.entrySet()){
       NBTTagCompound groveVariable = new NBTTagCompound();
       groveVariable.setString("grove" + count, entry.getKey().toString());
-      groveVariable.setInteger("trust" + count, entry.getValue());
+      groveVariable.setFloat("trust" + count, entry.getValue());
       groveTagList.appendTag(groveVariable);
       count++;
     }
@@ -39,7 +39,7 @@ public class PlayerGroveCapability implements IPlayerGroveCapability {
     for (int i = 0; i < groveTagList.tagCount(); i++) {
       NBTTagCompound groveTag = groveTagList.getCompoundTagAt(i);
       String groveName = groveTag.getString("grove" + i);
-      int trust = groveTag.getInteger("trust"+i);
+      float trust = groveTag.getFloat("trust"+i);
       this.groveTrust.put(GroveType.valueOf(groveName), trust);
     }
     this.dirty = true;
