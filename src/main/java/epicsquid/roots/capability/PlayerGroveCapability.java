@@ -11,7 +11,18 @@ public class PlayerGroveCapability implements IPlayerGroveCapability {
 
   private Map<GroveType, Float> groveTrust = new HashMap<>();
 
-  public boolean dirty = true;
+  private boolean dirty = true;
+
+  @Override
+  public void addTrust(GroveType type, float amount) {
+    if(groveTrust.get(type) == null ||groveTrust.get(type) == 0f ){
+      groveTrust.put(type, + amount);
+    }
+    else{
+      groveTrust.put(type, groveTrust.get(type) + amount);
+    }
+    markDirty();
+  }
 
   @Override
   public NBTTagCompound getData() {
@@ -40,7 +51,7 @@ public class PlayerGroveCapability implements IPlayerGroveCapability {
       NBTTagCompound groveTag = groveTagList.getCompoundTagAt(i);
       String groveName = groveTag.getString("grove" + i);
       float trust = groveTag.getFloat("trust"+i);
-      this.groveTrust.put(GroveType.valueOf(groveName), trust);
+      this.groveTrust.put(GroveType.valueOf(groveName.toUpperCase()), trust);
     }
     this.dirty = true;
   }
