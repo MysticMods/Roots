@@ -67,9 +67,18 @@ public class EntityGrove extends Entity {
     super.onUpdate();
     if (world.isRemote) {
       ParticleUtil.spawnParticleGlow(world, (float) posX, (float) posY, (float) posZ, 0, 0, 0, r, g, b, 0.2f, 20.0f, 40);
+
+
+
     }
 
     if(this.ticksExisted % 10 == 0){
+      if(world.isRemote){
+        for(TileEntityOffertoryPlate tile : this.offertoryPlateList){
+          ParticleUtil.spawnParticleLineGlowSteady(world, tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), (float)this.posX, (float)this.posY, (float)this.posZ,
+              r, g, b, 1, 5, 100);
+        }
+      }
       List<TileEntityOffertoryPlate> toRemove = new ArrayList<>();
       for(TileEntityOffertoryPlate tile : this.offertoryPlateList){
         ItemStack stack = tile.getHeldItem();
@@ -85,10 +94,9 @@ public class EntityGrove extends Entity {
           IPlayerGroveCapability capability = player.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null);
           capability.addTrust(this.type, itemValue);
         }
-
-        for(TileEntityOffertoryPlate tile2 : toRemove){
-          this.offertoryPlateList.remove(tile2);
-        }
+      }
+      for(TileEntityOffertoryPlate tile2 : toRemove){
+        this.offertoryPlateList.remove(tile2);
       }
     }
   }
