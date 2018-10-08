@@ -63,7 +63,9 @@ public class OfferingUtil {
 
   public static GroveType getGroveType(ItemStack heldItem){
     if (!heldItem.isEmpty()){
+      System.out.println("Not empty");
       if (groveItems.containsKey(heldItem.getItem())){
+        System.out.println("Contains");
         return groveItems.get(heldItem.getItem());
       }
     }

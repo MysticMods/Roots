@@ -10,6 +10,7 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.entity.grove.EntityGrove;
+import epicsquid.roots.grove.GroveType;
 import epicsquid.roots.util.OfferingUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -37,7 +38,6 @@ public class TileEntityOffertoryPlate extends TileBase {
   };
   private UUID lastPlayer = null;
   private int progress = 0;
-  private float angle = 0;
 
   public TileEntityOffertoryPlate(){
     super();
@@ -83,6 +83,9 @@ public class TileEntityOffertoryPlate extends TileBase {
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand,
       @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
+    this.lastPlayer = player.getUniqueID();
+    markDirty();
+
     if (!heldItem.isEmpty() && OfferingUtil.getValue(heldItem) != 0f){
       if (inventory.getStackInSlot(0).isEmpty()){
         ItemStack toInsert = heldItem.copy();
@@ -93,11 +96,28 @@ public class TileEntityOffertoryPlate extends TileBase {
           if (player.getHeldItem(hand).getCount() == 0){
             player.setHeldItem(hand, ItemStack.EMPTY);
           }
-          markDirty();
 
-          //Search for the grove and let it do its things
+          //Search for the grove and assigning this plate to the grove
           List<EntityGrove> groveList = Util.getEntitiesWithinRadius(world, EntityGrove.class, getPos(), 10);
-          System.out.println(groveList.size());
+          if(groveList.size()>0){
+            GroveType type = OfferingUtil.getGroveType(this.inventory.getStackInSlot(0));
+            EntityGrove grove = null;
+            for(EntityGrove entityGrove : groveList){
+              System.out.println("Go through list");
+              System.out.println("type: " + type);
+              System.out.println("grove: " + entityGrove.getType());
+              if(entityGrove.getType() == type){
+                System.out.println("Is type!");
+                grove = entityGrove;
+                break;
+              }
+            }
+            if(grove != null){
+              System.out.println("Add offering");
+              grove.addActiveOffering(this);
+            }
+          }
+          PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
           return true;
         }
       }
@@ -108,17 +128,30 @@ public class TileEntityOffertoryPlate extends TileBase {
         if (!world.isRemote){
           world.spawnEntity(new EntityItem(world,getPos().getX()+0.5,getPos().getY()+0.5,getPos().getZ()+0.5,extracted));
         }
-        markDirty();
         PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
         return true;
       }
     }
     if (!world.isRemote){
-      lastPlayer = player.getUniqueID();
-      markDirty();
+
       PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
     }
     return false;
+  }
+
+  public ItemStack getHeldItem(){
+    return this.inventory.getStackInSlot(0);
+  }
+
+  public void removeItem(){
+    ItemStack stack = this.inventory.getStackInSlot(0);
+    stack.setCount(stack.getCount()-1);
+    if(stack.getCount() == 0){
+      inventory.setStackInSlot(0, ItemStack.EMPTY);
+    }
+    else{
+      inventory.setStackInSlot(0, stack);
+    }
   }
 
   @Override
@@ -126,5 +159,9 @@ public class TileEntityOffertoryPlate extends TileBase {
     if (!world.isRemote){
       Util.spawnInventoryInWorld(world, getPos().getX()+0.5,getPos().getY()+0.5,getPos().getZ()+0.5, inventory);
     }
+  }
+
+  public UUID getLastPlayer() {
+    return lastPlayer;
   }
 }
