@@ -5,11 +5,12 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public interface IPlayerGroveCapability {
 
-  public void addTrust(GroveType type, float amount);
-  public NBTTagCompound getData();
-  public void setData(NBTTagCompound tag);
-  public void markDirty();
-  public boolean isDirty();
-  public void clean();
+  void addTrust(GroveType type, float amount);
+  float getTrust(GroveType type);
+  NBTTagCompound getData();
+  void setData(NBTTagCompound tag);
+  void markDirty();
+  boolean isDirty();
+  void clean();
 
 }

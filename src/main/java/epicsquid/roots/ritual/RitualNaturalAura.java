@@ -2,6 +2,7 @@ package epicsquid.roots.ritual;
 
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.ritual.EntityRitualNaturalAura;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -16,7 +17,7 @@ public class RitualNaturalAura extends RitualBase {
   }
 
   @Override
-  public boolean isValidForPos(World world, BlockPos pos) {
+  public boolean canFire(World world, BlockPos pos, EntityPlayer player) {
     return this.getThreeHighStandingStones(world, pos) >= 3;
   }
 

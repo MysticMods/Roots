@@ -25,6 +25,11 @@ public class PlayerGroveCapability implements IPlayerGroveCapability {
   }
 
   @Override
+  public float getTrust(GroveType type) {
+    return groveTrust.get(type);
+  }
+
+  @Override
   public NBTTagCompound getData() {
     NBTTagCompound nbtTagCompound = new NBTTagCompound();
 

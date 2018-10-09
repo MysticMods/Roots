@@ -5,6 +5,7 @@ import epicsquid.roots.entity.ritual.EntityRitualLife;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -18,7 +19,7 @@ public class RitualLife extends RitualBase {
   }
 
   @Override
-  public boolean isValidForPos(World world, BlockPos pos) {
+  public boolean canFire(World world, BlockPos pos, EntityPlayer player) {
     int birchTreeCount = 0;
     for (int i = -9; i < 10; i++) {
       for (int j = -9; j < 10; j++) {

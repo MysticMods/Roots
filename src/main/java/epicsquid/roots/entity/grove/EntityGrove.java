@@ -75,7 +75,7 @@ public class EntityGrove extends Entity {
     if(this.ticksExisted % 10 == 0){
       if(world.isRemote){
         for(TileEntityOffertoryPlate tile : this.offertoryPlateList){
-          ParticleUtil.spawnParticleLineGlowSteady(world, tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getZ(), (float)this.posX, (float)this.posY, (float)this.posZ,
+          ParticleUtil.spawnParticleLineGlowSteady(world, tile.getPos().getX() + 0.5f, tile.getPos().getY() + 0.5f, tile.getPos().getZ() + 0.5f, (float)this.posX, (float)this.posY, (float)this.posZ,
               r, g, b, 1, 5, 100);
         }
       }
