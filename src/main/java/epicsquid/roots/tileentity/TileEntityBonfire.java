@@ -95,7 +95,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         }
         RitualBase ritual = RitualRegistry.getRitual(stacks);
         if (ritual != null) {
-          if (ritual.isValidForPos(world, pos)) {
+          if (ritual.canFire(world, pos, player)) {
             ritual.doEffect(world, pos);
             this.burnTime = ritual.getDuration();
             this.doBigFlame = true;
@@ -177,7 +177,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         }
         RitualBase ritual = RitualRegistry.getRitual(stacks);
         if (ritual != null) {
-          if (ritual.isValidForPos(world, getPos())) {
+          if (ritual.canFire(world, getPos(), null)) {
             ritual.doEffect(world, pos);
             this.burnTime = ritual.getDuration();
             for (int i = 0; i < inventory.getSlots(); i++) {

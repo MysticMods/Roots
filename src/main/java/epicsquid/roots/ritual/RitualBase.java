@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.init.ModBlocks;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -31,7 +34,7 @@ public abstract class RitualBase {
     return this;
   }
 
-  public boolean isValidForPos(World world, BlockPos pos) {
+  public boolean canFire(World world, BlockPos pos,@Nullable EntityPlayer player) {
     return true;
   }
 

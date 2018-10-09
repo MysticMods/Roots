@@ -2,6 +2,7 @@ package epicsquid.roots.ritual;
 
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.ritual.EntityRitualLight;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -16,7 +17,7 @@ public class RitualLight extends RitualBase {
   }
 
   @Override
-  public boolean isValidForPos(World world, BlockPos pos) {
+  public boolean canFire(World world, BlockPos pos, EntityPlayer player) {
     return world.getWorldTime() % 24000 < 13000;
   }
 

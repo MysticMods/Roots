@@ -6,6 +6,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.entity.EntityBeetle;
 import epicsquid.mysticalworld.entity.EntityDeer;
 import epicsquid.mysticalworld.entity.EntityFox;
+import epicsquid.roots.entity.grove.EntityWildGrove;
 import epicsquid.roots.entity.spell.EntityFireJet;
 import epicsquid.roots.init.ModBlocks;
 import net.minecraft.block.BlockGrass;
@@ -133,6 +134,9 @@ public class WorldGenWildlandGrove extends StructureBase implements IWorldGenera
             System.out.println("Generate wildlands: " + xx + " " + zz);
             this.generateIn(world, xx, height-3, zz);
             spawnEntities(world, random, xx, zz, height);
+            EntityWildGrove wildGrove = new EntityWildGrove(world);
+            wildGrove.setPosition(xx, height + 6, zz);
+            world.spawnEntity(wildGrove);
           }
         }
       }
