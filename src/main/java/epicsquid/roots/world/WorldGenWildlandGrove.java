@@ -10,8 +10,10 @@ import epicsquid.roots.entity.grove.EntityWildGrove;
 import epicsquid.roots.entity.spell.EntityFireJet;
 import epicsquid.roots.init.ModBlocks;
 import net.minecraft.block.BlockGrass;
+import net.minecraft.block.BlockSapling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
@@ -131,12 +133,24 @@ public class WorldGenWildlandGrove extends StructureBase implements IWorldGenera
             }
           }
           if (canGenerate){
-            System.out.println("Generate wildlands: " + xx + " " + zz);
             this.generateIn(world, xx, height-3, zz);
             spawnEntities(world, random, xx, zz, height);
             EntityWildGrove wildGrove = new EntityWildGrove(world);
             wildGrove.setPosition(xx, height + 6, zz);
             world.spawnEntity(wildGrove);
+
+            for(int i = 0; i < 10; i++){
+              int randX = random.nextInt(10) - 5;
+              int randZ = random.nextInt(10) - 5;
+              BlockPos checkPos = new BlockPos(xx - randX, height + 1, zz-randZ);
+              BlockPos grassPos = checkPos.add(0, -1, 0);
+              if(world.getBlockState(checkPos).getBlock() == Blocks.AIR || world.getBlockState(checkPos).getBlock() == Blocks.TALLGRASS ){
+                if(world.getBlockState(grassPos).getBlock().canSustainPlant(world.getBlockState(grassPos), world, grassPos, EnumFacing.UP, (BlockSapling)Blocks.SAPLING)){
+                  world.setBlockState(checkPos, Blocks.SAPLING.getDefaultState());
+                  ((BlockSapling) Blocks.SAPLING).generateTree(world, checkPos, world.getBlockState(checkPos), random);
+                }
+              }
+            }
           }
         }
       }
