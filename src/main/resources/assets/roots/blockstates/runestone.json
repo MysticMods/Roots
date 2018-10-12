@@ -1,34 +1,5 @@
 {
-    "forge_marker": 1,
-    "defaults": {
-        "model": "minecraft:cube_all",
-        "transform": "forge:default-block",
-        "textures": {
-            "particle": "roots:blocks/runestone",
-            "all": "roots:blocks/runestone"
-        }
-    },
     "variants":{
-        "runetype": {
-            "normal" :{  },
-            "fairy": { },
-            "wild": {
-                "model": "minecraft:cube_all",
-                "textures": {
-                    "particle": "roots:blocks/runestone",
-                    "all": "roots:blocks/runestone_wild"
-                }
-            },
-            "natural": {
-                "model": "minecraft:cube_all",
-                "textures": {
-                    "particle": "roots:blocks/runestone",
-                    "all": "roots:blocks/runestone_natural"
-                }
-            },
-            "mystic": { },
-            "fungal": { },
-            "forbidden": { }
-        }
+        "normal" :{  "model": "roots:runestone" }
     }
 }
