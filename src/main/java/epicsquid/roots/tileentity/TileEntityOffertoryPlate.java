@@ -103,17 +103,12 @@ public class TileEntityOffertoryPlate extends TileBase {
             GroveType type = OfferingUtil.getGroveType(this.inventory.getStackInSlot(0));
             EntityGrove grove = null;
             for(EntityGrove entityGrove : groveList){
-              System.out.println("Go through list");
-              System.out.println("type: " + type);
-              System.out.println("grove: " + entityGrove.getType());
               if(entityGrove.getType() == type){
-                System.out.println("Is type!");
                 grove = entityGrove;
                 break;
               }
             }
             if(grove != null){
-              System.out.println("Add offering");
               grove.addActiveOffering(this);
             }
           }
