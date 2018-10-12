@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "roots:blocks/runestone",
+    "all": "roots:blocks/runestone_forbidden"
+  }
+}
