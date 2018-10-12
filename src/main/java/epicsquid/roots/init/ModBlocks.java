@@ -12,6 +12,7 @@ import epicsquid.roots.block.BlockBonfire;
 import epicsquid.roots.block.BlockImbuer;
 import epicsquid.roots.block.BlockMortar;
 import epicsquid.roots.block.BlockOffertoryPlate;
+import epicsquid.roots.block.BlockRunestone;
 import epicsquid.roots.block.BlockStructureMarker;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import epicsquid.roots.tileentity.TileEntityImbuer;
@@ -39,7 +40,7 @@ public class ModBlocks {
     event.addBlock(mortar = new BlockMortar(Material.ROCK, SoundType.STONE, 1.4f, "mortar", TileEntityMortar.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(bonfire = new BlockBonfire(Material.WOOD, SoundType.WOOD, 1.4f, "bonfire", TileEntityBonfire.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(imbuer = new BlockImbuer(Material.WOOD, SoundType.WOOD, 1.4f, "imbuer", TileEntityImbuer.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(runestone = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone")).setCreativeTab(Roots.tab);
+    event.addBlock(runestone = new BlockRunestone(Material.ROCK, SoundType.METAL, 1.4f, "runestone")).setCreativeTab(Roots.tab);
     event.addBlock(runestone_wild = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_wild")).setCreativeTab(Roots.tab);
     event.addBlock(runestone_natural = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_natural")).setCreativeTab(Roots.tab);
     event.addBlock(runestone_mystic = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_mystic")).setCreativeTab(Roots.tab);
