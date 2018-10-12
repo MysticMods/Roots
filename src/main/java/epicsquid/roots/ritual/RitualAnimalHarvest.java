@@ -81,7 +81,6 @@ public class RitualAnimalHarvest extends RitualBase {
     }
     catch (IllegalAccessException | InvocationTargetException e)
     {
-      System.out.println(e);
       return null;
     }
   }
