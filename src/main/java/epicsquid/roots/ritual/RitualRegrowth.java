@@ -8,8 +8,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class RitualRegrowth extends RitualBase {
-  public RitualRegrowth(String name, int duration, boolean doUpdateValidity) {
-    super(name, duration, doUpdateValidity);
+  public RitualRegrowth(String name, int duration) {
+    super(name, duration);
     addIngredients(new ItemStack(ModItems.terra_moss, 1), new ItemStack(ModItems.terra_moss_seed, 1), new ItemStack(ModItems.bark_spruce, 1),
         new ItemStack(Blocks.SAPLING, 1, 1), new ItemStack(Blocks.SAPLING, 1));
   }

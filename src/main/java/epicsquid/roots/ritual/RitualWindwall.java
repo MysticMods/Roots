@@ -9,8 +9,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class RitualWindwall extends RitualBase {
-  public RitualWindwall(String name, int duration, boolean doUpdateValidity) {
-    super(name, duration, doUpdateValidity);
+  public RitualWindwall(String name, int duration) {
+    super(name, duration);
     addIngredients(new ItemStack(ModItems.pereskia, 1), new ItemStack(ModItems.pereskia_bulb, 1), new ItemStack(ModItems.bark_spruce, 1),
         new ItemStack(ModItems.bark_birch, 1), new ItemStack(Items.FEATHER, 1));
   }

@@ -86,7 +86,7 @@ public class TileEntityOffertoryPlate extends TileBase {
     this.lastPlayer = player.getUniqueID();
     markDirty();
 
-    if (!heldItem.isEmpty() && OfferingUtil.getValue(heldItem) != 0f){
+    if (!heldItem.isEmpty()){
       if (inventory.getStackInSlot(0).isEmpty()){
         ItemStack toInsert = heldItem.copy();
         ItemStack attemptedInsert = inventory.insertItem(0, toInsert, true);

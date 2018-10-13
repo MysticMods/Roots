@@ -10,8 +10,8 @@ import net.minecraft.world.World;
 
 public class RitualFireStorm extends RitualBase {
 
-  public RitualFireStorm(String name, int duration, boolean doUpdateValidity) {
-    super(name, duration, doUpdateValidity);
+  public RitualFireStorm(String name, int duration) {
+    super(name, duration);
     addIngredients(new ItemStack(ModItems.wildroot, 1), new ItemStack(ModItems.bark_acacia, 1), new ItemStack(Items.COAL, 1),
         new ItemStack(ModItems.bark_acacia, 1), new ItemStack(Items.BLAZE_POWDER, 1));
   }

@@ -1,4 +1,4 @@
-package epicsquid.roots.ritual;
+package epicsquid.roots.ritual.wild;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -11,6 +11,7 @@ import epicsquid.roots.capability.IPlayerGroveCapability;
 import epicsquid.roots.capability.PlayerGroveCapabilityProvider;
 import epicsquid.roots.grove.GroveType;
 import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.ritual.RitualBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
@@ -28,8 +29,8 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class RitualAnimalHarvest extends RitualBase {
 
-  public RitualAnimalHarvest(String name, int duration, boolean doUpdateValidity) {
-    super(name, duration, doUpdateValidity);
+  public RitualAnimalHarvest(String name, int duration) {
+    super(name, duration);
     addIngredients(new ItemStack(Items.WHEAT));
     addIngredients(new ItemStack(Items.CHICKEN));
     addIngredients(new ItemStack(Items.MELON));

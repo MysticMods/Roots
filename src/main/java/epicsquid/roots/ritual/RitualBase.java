@@ -10,6 +10,7 @@ import javax.annotation.Nullable;
 
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.init.ModBlocks;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -18,15 +19,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public abstract class RitualBase {
+  public static int OFFERTORY_RADIUS = 6;
+
   private List<ItemStack> ingredients = new ArrayList<>();
   private String name;
   private int duration;
-  private boolean updateValidity;
 
-  public RitualBase(String name, int duration, boolean doUpdateValidity) {
+  public RitualBase(String name, int duration) {
     this.name = name;
     this.duration = duration;
-    this.updateValidity = doUpdateValidity;
   }
 
   public RitualBase addIngredients(ItemStack... stack) {
@@ -79,6 +80,23 @@ public abstract class RitualBase {
     }
     return threeHighCount;
   }
+
+  protected int getThreeHighStandingStones(World world, BlockPos pos, Block rune) {
+    int threeHighCount = 0;
+    for (int i = -6; i < 7 + 1; i++) {
+      for (int j = -6; j < 7 + 1; j++) {
+        IBlockState state = world.getBlockState(pos.add(i, 2, j));
+        if (state.getBlock() == ModBlocks.chiseled_runestone) {
+          if (world.getBlockState(pos.add(i, 1, j)).getBlock() == rune
+              && world.getBlockState(pos.add(i, 0, j)).getBlock() == rune) {
+            threeHighCount++;
+          }
+        }
+      }
+    }
+    return threeHighCount;
+  }
+
 
   protected int getFourHighStandingStones(World world, BlockPos pos) {
     int fourHighCount = 0;
