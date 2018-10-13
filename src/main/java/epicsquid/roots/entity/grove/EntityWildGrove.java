@@ -6,7 +6,7 @@ import net.minecraft.world.World;
 public class EntityWildGrove extends EntityGrove {
 
   public EntityWildGrove(World worldIn) {
-    super(worldIn, 100, 255, 100, GroveType.WILD);
+    super(worldIn, 165, 42, 42, GroveType.WILD);
     this.setInvisible(true);
   }
 
