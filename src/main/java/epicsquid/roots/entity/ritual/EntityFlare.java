@@ -87,7 +87,7 @@ public class EntityFlare extends Entity {
         }
       }
       List<EntityLivingBase> entities = Util
-          .getEntitiesWithinRadius(getEntityWorld(), EntityLivingBase.class, this.getPosition(), (float) (getDataManager().get(value) * 0.125));
+          .getEntitiesWithinRadius(getEntityWorld(), EntityLivingBase.class, this.getPosition(), (float) (getDataManager().get(value) * 0.125), (float) (getDataManager().get(value) * 0.125), (float) (getDataManager().get(value) * 0.125));
       this.attackWithFire(entities);
       if (world.isAirBlock(getPosition().up())) {
         world.setBlockState(getPosition().up(), Blocks.FIRE.getDefaultState());
@@ -103,7 +103,7 @@ public class EntityFlare extends Entity {
       }
     }
     List<EntityLivingBase> entities = Util
-        .getEntitiesWithinRadius(getEntityWorld(), EntityLivingBase.class, this.getPosition(), (float) (getDataManager().get(value) * 0.125));
+        .getEntitiesWithinRadius(getEntityWorld(), EntityLivingBase.class, this.getPosition(), (float) (getDataManager().get(value) * 0.125), (float) (getDataManager().get(value) * 0.125), (float) (getDataManager().get(value) * 0.125));
     if (entities.size() > 0) {
       this.attackWithFire(entities);
       if (getEntityWorld().isRemote) {

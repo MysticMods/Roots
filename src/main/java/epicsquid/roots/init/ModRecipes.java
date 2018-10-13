@@ -93,6 +93,10 @@ public class ModRecipes {
         new SpellRecipe("spell_mind_ward").addIngredient(new ItemStack(Blocks.BROWN_MUSHROOM, 1)).addIngredient(new ItemStack(Blocks.RED_FLOWER, 1, 0))
             .addIngredient(new ItemStack(Blocks.RED_MUSHROOM, 1)).addIngredient(new ItemStack(ModItems.aubergine_seed, 1))
             .addIngredient(new ItemStack(Items.DYE, 1, 3)));
+    RecipeRegistry.addSpellRecipe(
+        new SpellRecipe("spell_sense_animals").addIngredient(new ItemStack(Items.CARROT, 1)).addIngredient(new ItemStack(Blocks.RED_FLOWER, 1, 0))
+            .addIngredient(new ItemStack(ModItems.moonglow_seed, 1)).addIngredient(new ItemStack(ModItems.moonglow_leaf, 1))
+            .addIngredient(new ItemStack(Items.GOLDEN_CARROT, 1)));
 
   }
 }

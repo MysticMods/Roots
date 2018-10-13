@@ -3,6 +3,7 @@ package epicsquid.roots.spell;
 import java.util.List;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.network.message.fx.MessageSanctuaryBurstFX;
 import epicsquid.roots.network.message.fx.MessageSanctuaryRingFX;
 import net.minecraft.entity.Entity;
@@ -16,6 +17,8 @@ public class SpellSanctuary extends SpellBase {
     super(name, TextFormatting.DARK_PURPLE, 208f / 255f, 16f / 255f, 80f / 255f, 224f / 255f, 32f / 255f, 144f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 60;
+    addCost(ModItems.moonglow_leaf, 0.125f);
+    addCost(ModItems.aubergine_seed, 0.125f);
   }
 
   @Override

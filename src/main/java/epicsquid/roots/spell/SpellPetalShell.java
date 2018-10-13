@@ -3,6 +3,7 @@ package epicsquid.roots.spell;
 import java.util.List;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.spell.EntityPetalShell;
 import epicsquid.roots.network.message.fx.MessagePetalShellBurstFX;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +16,8 @@ public class SpellPetalShell extends SpellBase {
     super(name, TextFormatting.LIGHT_PURPLE, 255f / 255f, 192f / 255f, 240f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 120;
+    addCost(ModItems.aubergine_seed, 0.5f);
+    addCost(ModItems.moonglow_leaf, 0.25f);
   }
 
   @Override

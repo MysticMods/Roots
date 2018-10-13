@@ -3,6 +3,7 @@ package epicsquid.roots.spell;
 import java.util.List;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.network.message.fx.MessageDandelionCastFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +16,7 @@ public class SpellDandelionWinds extends SpellBase {
     super(name, TextFormatting.YELLOW, 255f / 255f, 255f / 255f, 32f / 255f, 255f / 255f, 176f / 255f, 32f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 20;
+    addCost(ModItems.moonglow_leaf, 0.125f);
   }
 
   @Override

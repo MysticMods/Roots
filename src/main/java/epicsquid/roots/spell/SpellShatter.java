@@ -3,6 +3,7 @@ package epicsquid.roots.spell;
 import java.util.Random;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.network.message.fx.MessageShatterBurstFX;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,6 +21,7 @@ public class SpellShatter extends SpellBase {
     super(name, TextFormatting.GRAY, 96f / 255f, 96f / 255f, 96f / 255f, 192f / 255f, 192f / 255f, 192f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 20;
+    addCost(ModItems.wildroot, 0.0625f);
   }
 
   @Override

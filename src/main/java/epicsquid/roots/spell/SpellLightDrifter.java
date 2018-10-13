@@ -1,6 +1,7 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Constants;
 import epicsquid.roots.network.message.fx.MessageLightDrifterFX;
 import epicsquid.roots.network.message.fx.MessageLightDrifterSync;
@@ -14,6 +15,8 @@ public class SpellLightDrifter extends SpellBase {
     super(name, TextFormatting.AQUA, 196f / 255f, 240f / 255f, 255f / 255f, 32f / 255f, 64f / 255f, 96f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 200;
+    addCost(ModItems.pereskia, 0.5f);
+    addCost(ModItems.wildroot, 0.25f);
   }
 
   @Override
