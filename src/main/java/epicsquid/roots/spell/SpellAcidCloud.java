@@ -3,6 +3,7 @@ package epicsquid.roots.spell;
 import java.util.List;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.network.message.fx.MessageAcidCloudFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,6 +20,7 @@ public class SpellAcidCloud extends SpellBase {
     super(name, TextFormatting.DARK_GREEN, 80f / 255f, 160f / 255f, 40f / 255f, 64f / 255f, 96f / 255f, 32f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 24;
+    addCost(ModItems.terra_moss, 0.0625f);
   }
 
   @Override

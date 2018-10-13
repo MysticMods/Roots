@@ -2,6 +2,7 @@ package epicsquid.roots.spell;
 
 import java.util.List;
 
+import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Constants;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +15,8 @@ public class SpellMindWard extends SpellBase {
     super(name, TextFormatting.DARK_RED, 128f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 80;
+    addCost(ModItems.aubergine_seed, 0.25f);
+    addCost(ModItems.terra_moss, 0.25f);
   }
 
   @Override

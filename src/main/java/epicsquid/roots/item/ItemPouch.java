@@ -4,11 +4,30 @@ import java.util.List;
 
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.Roots;
+import epicsquid.roots.world.RootsTemplate;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Rotation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.gen.structure.template.PlacementSettings;
+import net.minecraft.world.gen.structure.template.Template;
+import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -18,6 +37,34 @@ public class ItemPouch extends ItemBase {
   public ItemPouch(String name) {
     super(name);
     setMaxStackSize(1);
+  }
+
+  @Override
+  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    if (!worldIn.isRemote) {
+      WorldServer worldserver = (WorldServer) worldIn;
+      MinecraftServer minecraftserver = worldIn.getMinecraftServer();
+      TemplateManager templatemanager = worldserver.getStructureTemplateManager();
+      ResourceLocation loc = new ResourceLocation(Roots.MODID,"natural_grove");
+      Template template = templatemanager.getTemplate(minecraftserver, loc);
+      System.out.println("=======0======="+template);
+      if (template != null) {
+        PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE)
+            .setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk((ChunkPos) null)
+            .setReplacedBlock(Blocks.AIR).setIgnoreStructureBlock(false);
+
+        System.out.println("=======1======="+loc);
+
+
+        template.addBlocksToWorld(worldIn, pos.add(0, 1, 0), placementsettings);
+
+        IBlockState iblockstate = worldIn.getBlockState(pos);
+        worldIn.notifyBlockUpdate(pos, iblockstate, iblockstate, 3);
+
+        System.out.println("========2======="+pos);
+      }
+    }
+    return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
   }
 
   public static ItemStack createData(ItemStack stack, String plantName, double quantity) {
@@ -85,5 +132,4 @@ public class ItemPouch extends ItemBase {
       }
     }
   }
-
 }

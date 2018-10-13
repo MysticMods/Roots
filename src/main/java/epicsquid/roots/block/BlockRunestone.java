@@ -30,7 +30,7 @@ public class BlockRunestone extends BlockBase {
       float hitY, float hitZ) {
     ItemStack heldItem = playerIn.getHeldItem(hand);
     if (heldItem.getItem() instanceof ItemKnife) {
-      List<EntityGrove> groves = Util.getEntitiesWithinRadius(worldIn, EntityGrove.class, pos, 6);
+      List<EntityGrove> groves = Util.getEntitiesWithinRadius(worldIn, EntityGrove.class, pos, 6, 10, 6);
       if (groves.size() > 0) {
         EntityGrove closestGrove = null;
         double closestDistance = 0;

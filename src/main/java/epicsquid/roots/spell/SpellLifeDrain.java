@@ -3,6 +3,7 @@ package epicsquid.roots.spell;
 import java.util.List;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.network.message.fx.MessageLifeDrainAbsorbFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,6 +18,7 @@ public class SpellLifeDrain extends SpellBase {
     super(name, TextFormatting.DARK_GRAY, 144f / 255f, 32f / 255f, 64f / 255f, 255f / 255f, 196f / 255f, 240f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 28;
+    addCost(ModItems.pereskia_bulb, 0.125f);
   }
 
   @Override

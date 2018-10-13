@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.network.message.fx.MessageRadianceBeamFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,6 +22,9 @@ public class SpellRadiance extends SpellBase {
     super(name, TextFormatting.WHITE, 255f / 255f, 255f / 255f, 64f / 255f, 255f / 255f, 255f / 255f, 192f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 40;
+    addCost(ModItems.moonglow_leaf, 0.25f);
+    addCost(ModItems.wildroot, 0.125f);
+    addCost(ModItems.aubergine_seed, 0.25f);
   }
 
   @Override

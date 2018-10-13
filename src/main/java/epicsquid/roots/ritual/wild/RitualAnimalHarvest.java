@@ -39,7 +39,7 @@ public class RitualAnimalHarvest extends RitualBase {
 
   @Override
   public void doEffect(World world, BlockPos pos) {
-    List<EntityLiving> livingList = Util.getEntitiesWithinRadius(world, EntityLiving.class, pos, 10);
+    List<EntityLiving> livingList = Util.getEntitiesWithinRadius(world, EntityLiving.class, pos, 10, 5, 10);
     if (!world.isRemote) {
       for (EntityLiving entity : livingList) {
         ResourceLocation location = EntityLiving_getLootTable(entity);
