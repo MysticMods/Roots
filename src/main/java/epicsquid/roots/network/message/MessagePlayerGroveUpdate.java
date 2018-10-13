@@ -19,18 +19,18 @@ public class MessagePlayerGroveUpdate implements IMessage {
   public UUID id = null;
   public NBTTagCompound tag = new NBTTagCompound();
 
-  public MessagePlayerGroveUpdate(){
+  public MessagePlayerGroveUpdate() {
 
   }
 
-  public MessagePlayerGroveUpdate(UUID id, NBTTagCompound tag){
+  public MessagePlayerGroveUpdate(UUID id, NBTTagCompound tag) {
     this.tag = tag;
     this.id = id;
   }
 
   @Override
   public void fromBytes(ByteBuf buf) {
-    id = new UUID(buf.readLong(),buf.readLong());
+    id = new UUID(buf.readLong(), buf.readLong());
     tag = ByteBufUtils.readTag(buf);
   }
 
@@ -41,17 +41,16 @@ public class MessagePlayerGroveUpdate implements IMessage {
     ByteBufUtils.writeTag(buf, tag);
   }
 
-  public static class MessageHolder implements IMessageHandler<MessagePlayerGroveUpdate,IMessage>
-  {
+  public static class MessageHolder implements IMessageHandler<MessagePlayerGroveUpdate, IMessage> {
     @SideOnly(Side.CLIENT)
     @Override
     public IMessage onMessage(final MessagePlayerGroveUpdate message, final MessageContext ctx) {
-      if (message != null){
+      if (message != null) {
         World w = Minecraft.getMinecraft().world;
-        if (w != null){
-          if (w.getPlayerEntityByUUID(message.id) != null){
+        if (w != null) {
+          if (w.getPlayerEntityByUUID(message.id) != null) {
             EntityPlayer player = w.getPlayerEntityByUUID(message.id);
-            if (player.hasCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null)){
+            if (player.hasCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null)) {
               player.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null).setData(message.tag);
             }
           }

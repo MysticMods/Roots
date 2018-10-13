@@ -17,14 +17,14 @@ public class ParticleStar extends ParticleBase {
     this.colorR = (float) data[1];
     this.colorG = (float) data[2];
     this.colorB = (float) data[3];
-    if (this.colorR > 1.0){
-      this.colorR = this.colorR/255.0f;
+    if (this.colorR > 1.0) {
+      this.colorR = this.colorR / 255.0f;
     }
-    if (this.colorG > 1.0){
-      this.colorG = this.colorG/255.0f;
+    if (this.colorG > 1.0) {
+      this.colorG = this.colorG / 255.0f;
     }
-    if (this.colorB > 1.0){
-      this.colorB = this.colorB/255.0f;
+    if (this.colorB > 1.0) {
+      this.colorB = this.colorB / 255.0f;
     }
     this.setRBGColorF(colorR, colorG, colorB);
     this.setAlphaF((float) data[4]);
@@ -38,26 +38,26 @@ public class ParticleStar extends ParticleBase {
   }
 
   @Override
-  public int getBrightnessForRender(float pTicks){
+  public int getBrightnessForRender(float pTicks) {
     return 255;
   }
 
   @Override
-  public boolean shouldDisableDepth(){
+  public boolean shouldDisableDepth() {
     return true;
   }
 
   @Override
-  public int getFXLayer(){
+  public int getFXLayer() {
     return 1;
   }
 
   @Override
-  public void onUpdate(){
+  public void onUpdate() {
     super.onUpdate();
-    float lifeCoeff = (float)this.particleAge/(float)this.particleMaxAge;
-    this.particleScale = initScale-initScale*lifeCoeff;
-    this.particleAlpha = (1.0f-lifeCoeff)*initAlpha;
+    float lifeCoeff = (float) this.particleAge / (float) this.particleMaxAge;
+    this.particleScale = initScale - initScale * lifeCoeff;
+    this.particleAlpha = (1.0f - lifeCoeff) * initAlpha;
     prevParticleAngle = particleAngle;
     particleAngle += rand.nextFloat();
   }
@@ -71,6 +71,5 @@ public class ParticleStar extends ParticleBase {
   public boolean isAdditive() {
     return true;
   }
-
 
 }

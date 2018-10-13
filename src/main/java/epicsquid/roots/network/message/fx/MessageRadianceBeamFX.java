@@ -2,6 +2,7 @@ package epicsquid.roots.network.message.fx;
 
 import java.util.ArrayList;
 import java.util.UUID;
+
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRegistry;

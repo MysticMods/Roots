@@ -62,9 +62,9 @@ public class ParticleLineGlowSteady extends ParticleBase {
     super.onUpdate();
 
     float lifeCoeff = (float) this.particleAge / (float) this.particleMaxAge;
-    this.posX = ((1.0f-lifeCoeff*lifeCoeff)*initPosX + (lifeCoeff*lifeCoeff)*targetPosX);
-    this.posY = ((1.0f-lifeCoeff*lifeCoeff)*initPosY + (lifeCoeff*lifeCoeff)*targetPosY);
-    this.posZ = ((1.0f-lifeCoeff*lifeCoeff)*initPosZ + (lifeCoeff*lifeCoeff)*targetPosZ);
+    this.posX = ((1.0f - lifeCoeff * lifeCoeff) * initPosX + (lifeCoeff * lifeCoeff) * targetPosX);
+    this.posY = ((1.0f - lifeCoeff * lifeCoeff) * initPosY + (lifeCoeff * lifeCoeff) * targetPosY);
+    this.posZ = ((1.0f - lifeCoeff * lifeCoeff) * initPosZ + (lifeCoeff * lifeCoeff) * targetPosZ);
     this.particleScale = initScale;
     this.particleAlpha = initAlpha;
     prevParticleAngle = particleAngle;

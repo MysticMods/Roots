@@ -14,9 +14,9 @@ import epicsquid.roots.init.ModMessages;
 import epicsquid.roots.init.ModParticles;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.item.ItemStaff;
-import epicsquid.roots.world.WorldGenWildlandGrove;
 import epicsquid.roots.world.WorldGenBarrow;
 import epicsquid.roots.world.WorldGenHut;
+import epicsquid.roots.world.WorldGenWildlandGrove;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
@@ -49,7 +49,7 @@ public class RegistryManager {
   }
 
   @SubscribeEvent
-  public void worldGenInit(RegisterWorldGenEvent event){
+  public void worldGenInit(RegisterWorldGenEvent event) {
     LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
 
     GameRegistry.registerWorldGenerator(new WorldGenBarrow(), 100);

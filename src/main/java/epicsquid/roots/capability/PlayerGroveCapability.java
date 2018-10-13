@@ -15,10 +15,9 @@ public class PlayerGroveCapability implements IPlayerGroveCapability {
 
   @Override
   public void addTrust(GroveType type, float amount) {
-    if(groveTrust.get(type) == null ||groveTrust.get(type) == 0f ){
-      groveTrust.put(type, + amount);
-    }
-    else{
+    if (groveTrust.get(type) == null || groveTrust.get(type) == 0f) {
+      groveTrust.put(type, +amount);
+    } else {
       groveTrust.put(type, groveTrust.get(type) + amount);
     }
     markDirty();
@@ -35,7 +34,7 @@ public class PlayerGroveCapability implements IPlayerGroveCapability {
 
     NBTTagList groveTagList = new NBTTagList();
     int count = 0;
-    for(Map.Entry<GroveType, Float> entry : groveTrust.entrySet()){
+    for (Map.Entry<GroveType, Float> entry : groveTrust.entrySet()) {
       NBTTagCompound groveVariable = new NBTTagCompound();
       groveVariable.setString("grove" + count, entry.getKey().toString());
       groveVariable.setFloat("trust" + count, entry.getValue());
@@ -55,7 +54,7 @@ public class PlayerGroveCapability implements IPlayerGroveCapability {
     for (int i = 0; i < groveTagList.tagCount(); i++) {
       NBTTagCompound groveTag = groveTagList.getCompoundTagAt(i);
       String groveName = groveTag.getString("grove" + i);
-      float trust = groveTag.getFloat("trust"+i);
+      float trust = groveTag.getFloat("trust" + i);
       this.groveTrust.put(GroveType.valueOf(groveName.toUpperCase()), trust);
     }
     this.dirty = true;

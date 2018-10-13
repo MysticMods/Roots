@@ -35,7 +35,7 @@ public abstract class RitualBase {
     return this;
   }
 
-  public boolean canFire(World world, BlockPos pos,@Nullable EntityPlayer player) {
+  public boolean canFire(World world, BlockPos pos, @Nullable EntityPlayer player) {
     return true;
   }
 
@@ -87,8 +87,7 @@ public abstract class RitualBase {
       for (int j = -6; j < 7 + 1; j++) {
         IBlockState state = world.getBlockState(pos.add(i, 2, j));
         if (state.getBlock() == ModBlocks.chiseled_runestone) {
-          if (world.getBlockState(pos.add(i, 1, j)).getBlock() == rune
-              && world.getBlockState(pos.add(i, 0, j)).getBlock() == rune) {
+          if (world.getBlockState(pos.add(i, 1, j)).getBlock() == rune && world.getBlockState(pos.add(i, 0, j)).getBlock() == rune) {
             threeHighCount++;
           }
         }
@@ -96,7 +95,6 @@ public abstract class RitualBase {
     }
     return threeHighCount;
   }
-
 
   protected int getFourHighStandingStones(World world, BlockPos pos) {
     int fourHighCount = 0;

@@ -48,7 +48,9 @@ public class SpellShatter extends SpellBase {
           if (doParticles) {
             float offX = 0.5f * (float) Math.sin(Math.toRadians(-90.0f - player.rotationYaw));
             float offZ = 0.5f * (float) Math.cos(Math.toRadians(-90.0f - player.rotationYaw));
-            PacketHandler.INSTANCE.sendToAll(new MessageShatterBurstFX(player.posX + offX, player.posY + player.getEyeHeight(), player.posZ + offZ, result.hitVec.x, result.hitVec.y, result.hitVec.z));
+            PacketHandler.INSTANCE.sendToAll(
+                new MessageShatterBurstFX(player.posX + offX, player.posY + player.getEyeHeight(), player.posZ + offZ, result.hitVec.x, result.hitVec.y,
+                    result.hitVec.z));
           }
         } else if (result.typeOfHit == RayTraceResult.Type.ENTITY) {
           if (result.entityHit instanceof EntityLivingBase) {
@@ -57,7 +59,9 @@ public class SpellShatter extends SpellBase {
             ((EntityLivingBase) result.entityHit).setRevengeTarget(player);
             float offX = 0.5f * (float) Math.sin(Math.toRadians(-90.0f - player.rotationYaw));
             float offZ = 0.5f * (float) Math.cos(Math.toRadians(-90.0f - player.rotationYaw));
-            PacketHandler.INSTANCE.sendToAll(new MessageShatterBurstFX(player.posX + offX, player.posY + player.getEyeHeight(), player.posZ + offZ, result.hitVec.x, result.hitVec.y, result.hitVec.z));
+            PacketHandler.INSTANCE.sendToAll(
+                new MessageShatterBurstFX(player.posX + offX, player.posY + player.getEyeHeight(), player.posZ + offZ, result.hitVec.x, result.hitVec.y,
+                    result.hitVec.z));
           }
         }
       }

@@ -22,8 +22,9 @@ public class TileEntityOffertoryPlateRenderer extends TileEntitySpecialRenderer<
       EnumFacing f = tei.getWorld().getBlockState(tei.getPos()).getValue(BlockOffertoryPlate.FACING);
       for (int i = 0; i < count; i++) {
         GlStateManager.pushMatrix();
-        GlStateManager.translate(x + 0.5, y + 0.8125 + 0.0625 * (double) i + 0.0625 * (tei.inventory.getStackInSlot(0).getItem() instanceof ItemBlock ? 1.0 : 0),
-            z + 0.5);
+        GlStateManager
+            .translate(x + 0.5, y + 0.8125 + 0.0625 * (double) i + 0.0625 * (tei.inventory.getStackInSlot(0).getItem() instanceof ItemBlock ? 1.0 : 0),
+                z + 0.5);
         GlStateManager.rotate(180 - f.getHorizontalAngle(), 0, 1, 0);
         GlStateManager.rotate(67.5f, 1.0f, 0, 0);
         Random random = new Random();
@@ -35,20 +36,20 @@ public class TileEntityOffertoryPlateRenderer extends TileEntitySpecialRenderer<
     }
   }
 
-  public int getCount(ItemStack s){
-    if (s.getCount() == 64){
+  public int getCount(ItemStack s) {
+    if (s.getCount() == 64) {
       return 5;
     }
-    if (s.getCount() > 33){
+    if (s.getCount() > 33) {
       return 4;
     }
-    if (s.getCount() > 16){
+    if (s.getCount() > 16) {
       return 3;
     }
-    if (s.getCount() >= 2){
+    if (s.getCount() >= 2) {
       return 2;
     }
-    if (s.getCount() == 1){
+    if (s.getCount() == 1) {
       return 1;
     }
     return 0;

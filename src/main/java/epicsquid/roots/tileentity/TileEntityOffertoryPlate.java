@@ -27,11 +27,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityOffertoryPlate extends TileBase {
-  public ItemStackHandler inventory = new ItemStackHandler(1){
+  public ItemStackHandler inventory = new ItemStackHandler(1) {
     @Override
     protected void onContentsChanged(int slot) {
       TileEntityOffertoryPlate.this.markDirty();
-      if (!world.isRemote){
+      if (!world.isRemote) {
         PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(TileEntityOffertoryPlate.this.getUpdateTag()));
       }
     }
@@ -39,25 +39,25 @@ public class TileEntityOffertoryPlate extends TileBase {
   private UUID lastPlayer = null;
   private int progress = 0;
 
-  public TileEntityOffertoryPlate(){
+  public TileEntityOffertoryPlate() {
     super();
   }
 
   @Override
-  public NBTTagCompound writeToNBT(NBTTagCompound tag){
+  public NBTTagCompound writeToNBT(NBTTagCompound tag) {
     super.writeToNBT(tag);
     tag.setTag("inventory", inventory.serializeNBT());
     tag.setInteger("progress", progress);
-    if (lastPlayer != null){
+    if (lastPlayer != null) {
       tag.setTag("lastPlayer", NBTUtil.createUUIDTag(lastPlayer));
     }
     return tag;
   }
 
   @Override
-  public void readFromNBT(NBTTagCompound tag){
+  public void readFromNBT(NBTTagCompound tag) {
     super.readFromNBT(tag);
-    if (tag.hasKey("lastPlayer")){
+    if (tag.hasKey("lastPlayer")) {
       lastPlayer = NBTUtil.getUUIDFromTag(tag.getCompoundTag("lastPlayer"));
     }
     inventory.deserializeNBT(tag.getCompoundTag("inventory"));
@@ -86,29 +86,29 @@ public class TileEntityOffertoryPlate extends TileBase {
     this.lastPlayer = player.getUniqueID();
     markDirty();
 
-    if (!heldItem.isEmpty()){
-      if (inventory.getStackInSlot(0).isEmpty()){
+    if (!heldItem.isEmpty()) {
+      if (inventory.getStackInSlot(0).isEmpty()) {
         ItemStack toInsert = heldItem.copy();
         ItemStack attemptedInsert = inventory.insertItem(0, toInsert, true);
-        if (attemptedInsert.isEmpty()){
+        if (attemptedInsert.isEmpty()) {
           inventory.insertItem(0, toInsert, false);
           player.getHeldItem(hand).shrink(toInsert.getCount());
-          if (player.getHeldItem(hand).getCount() == 0){
+          if (player.getHeldItem(hand).getCount() == 0) {
             player.setHeldItem(hand, ItemStack.EMPTY);
           }
 
           //Search for the grove and assigning this plate to the grove
           List<EntityGrove> groveList = Util.getEntitiesWithinRadius(world, EntityGrove.class, getPos(), 10);
-          if(groveList.size()>0){
+          if (groveList.size() > 0) {
             GroveType type = OfferingUtil.getGroveType(this.inventory.getStackInSlot(0));
             EntityGrove grove = null;
-            for(EntityGrove entityGrove : groveList){
-              if(entityGrove.getType() == type){
+            for (EntityGrove entityGrove : groveList) {
+              if (entityGrove.getType() == type) {
                 grove = entityGrove;
                 break;
               }
             }
-            if(grove != null){
+            if (grove != null) {
               grove.addActiveOffering(this);
             }
           }
@@ -117,42 +117,41 @@ public class TileEntityOffertoryPlate extends TileBase {
         }
       }
     }
-    if (heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND){
-      if (!inventory.getStackInSlot(0).isEmpty()){
+    if (heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND) {
+      if (!inventory.getStackInSlot(0).isEmpty()) {
         ItemStack extracted = inventory.extractItem(0, inventory.getStackInSlot(0).getCount(), false);
-        if (!world.isRemote){
-          world.spawnEntity(new EntityItem(world,getPos().getX()+0.5,getPos().getY()+0.5,getPos().getZ()+0.5,extracted));
+        if (!world.isRemote) {
+          world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, extracted));
         }
         PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
         return true;
       }
     }
-    if (!world.isRemote){
+    if (!world.isRemote) {
 
       PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
     }
     return false;
   }
 
-  public ItemStack getHeldItem(){
+  public ItemStack getHeldItem() {
     return this.inventory.getStackInSlot(0);
   }
 
-  public void removeItem(){
+  public void removeItem() {
     ItemStack stack = this.inventory.getStackInSlot(0);
-    stack.setCount(stack.getCount()-1);
-    if(stack.getCount() == 0){
+    stack.setCount(stack.getCount() - 1);
+    if (stack.getCount() == 0) {
       inventory.setStackInSlot(0, ItemStack.EMPTY);
-    }
-    else{
+    } else {
       inventory.setStackInSlot(0, stack);
     }
   }
 
   @Override
   public void breakBlock(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
-    if (!world.isRemote){
-      Util.spawnInventoryInWorld(world, getPos().getX()+0.5,getPos().getY()+0.5,getPos().getZ()+0.5, inventory);
+    if (!world.isRemote) {
+      Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
     }
   }
 

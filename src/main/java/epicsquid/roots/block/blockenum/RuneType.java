@@ -3,13 +3,7 @@ package epicsquid.roots.block.blockenum;
 import net.minecraft.util.IStringSerializable;
 
 public enum RuneType implements IStringSerializable {
-  NORMAL(0, "normal"),
-  WILD(1, "wild"),
-  NATURAL(2, "natural"),
-  MYSTIC(3, "mystic"),
-  FUNGAL(4, "fungal"),
-  FORBIDDEN(5, "forbidden"),
-  FAIRY(6, "fairy");
+  NORMAL(0, "normal"), WILD(1, "wild"), NATURAL(2, "natural"), MYSTIC(3, "mystic"), FUNGAL(4, "fungal"), FORBIDDEN(5, "forbidden"), FAIRY(6, "fairy");
 
   private final String name;
   private final int meta;
@@ -19,7 +13,7 @@ public enum RuneType implements IStringSerializable {
     this.name = name;
   }
 
-  public int getMeta(){
+  public int getMeta() {
     return meta;
   }
 
@@ -29,8 +23,8 @@ public enum RuneType implements IStringSerializable {
   }
 
   public static RuneType intOf(int meta) {
-    for(RuneType type : RuneType.values()){
-      if(type.getMeta() == meta){
+    for (RuneType type : RuneType.values()) {
+      if (type.getMeta() == meta) {
         return type;
       }
     }

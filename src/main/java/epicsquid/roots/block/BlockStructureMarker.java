@@ -22,25 +22,25 @@ public class BlockStructureMarker extends BlockBase {
 
   @SideOnly(Side.CLIENT)
   @Override
-  public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list){
-    if (tab == this.getCreativeTabToDisplayOn()){
+  public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+    if (tab == this.getCreativeTabToDisplayOn()) {
       list.clear();
     }
   }
 
   @Override
-  public BlockStateContainer createBlockState(){
-    return new BlockStateContainer(this,marker_value);
+  public BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, marker_value);
   }
 
   @Override
-  public int getMetaFromState(IBlockState state){
+  public int getMetaFromState(IBlockState state) {
     return state.getValue(marker_value);
   }
 
   @Override
-  public IBlockState getStateFromMeta(int meta){
-    return getDefaultState().withProperty(marker_value,meta);
+  public IBlockState getStateFromMeta(int meta) {
+    return getDefaultState().withProperty(marker_value, meta);
   }
 
 }
