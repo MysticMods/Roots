@@ -16,6 +16,7 @@ import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.world.WorldGenBarrow;
 import epicsquid.roots.world.WorldGenHut;
+import epicsquid.roots.world.WorldGenNaturalGrove;
 import epicsquid.roots.world.WorldGenWildlandGrove;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
@@ -55,6 +56,7 @@ public class RegistryManager {
     GameRegistry.registerWorldGenerator(new WorldGenBarrow(), 100);
     GameRegistry.registerWorldGenerator(new WorldGenHut(), 101);
     GameRegistry.registerWorldGenerator(new WorldGenWildlandGrove(), 102);
+    GameRegistry.registerWorldGenerator(new WorldGenNaturalGrove(), 103);
   }
 
   @SideOnly(Side.CLIENT)
