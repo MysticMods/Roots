@@ -7,7 +7,6 @@ import epicsquid.mysticalworld.entity.EntityBeetle;
 import epicsquid.mysticalworld.entity.EntityDeer;
 import epicsquid.mysticalworld.entity.EntityFox;
 import epicsquid.roots.entity.grove.EntityWildGrove;
-import epicsquid.roots.entity.spell.EntityFireJet;
 import epicsquid.roots.init.ModBlocks;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.BlockSapling;
@@ -33,119 +32,60 @@ public class WorldGenWildlandGrove extends StructureBase implements IWorldGenera
     addBlockMapping("O", Blocks.TALLGRASS.getStateFromMeta(1));
     addBlockMapping("A", ModBlocks.structure_marker.getDefaultState());
     addBlockMapping("Y", Blocks.YELLOW_FLOWER.getDefaultState());
-    addLayer(new String[]{
-        "DDDDDDDDDDDD",
-        "DDDDDDDDDDDD",
-        "DDDDDDDDDDDD",
-        "DDDDDDDDDDDD",
-        "DDDDDDDDDDDD",
-        "DDDDDDDDDDDD",
-        "DDDDDDDDDDDD",
-        "DDDDDDDDDDDD",
-        "DDDDDDDDDDDD",
-        "DDDDDDDDDDDD",
-        "DDDDDDDDDDDD",
-        "DDDDDDDDDDDD",
-    });
-    addLayer(new String[]{
-        "DDDDDDDDDDDD",
-        "DDDDDDDDDDDD",
-        "DDDDDDDDDDDD",
-        "DDDDDDWWDDDD",
-        "DDDDDWWWWDDD",
-        "DDDDWWWWWDDD",
-        "DDDWWWWDDDDD",
-        "DDDDWWWDDDDD",
-        "DDDDDDDDDDDD",
-        "DDDDDDDDDDDD",
-        "DDDDDDDDDDDD",
-        "DDDDDDDDDDDD",
-    });
-    addLayer(new String[]{
-        "DDDDDDDDDDDD",
-        "DDDDDDDDDDDD",
-        "DDDDDDWWDDDD",
-        "DDDDDWWWWDDD",
-        "DDDDWWWWWWDD",
-        "DDDWWWWWWWDD",
-        "DDDWWWWWWDDD",
-        "DDDDWWWWWDDD",
-        "DDDDDWWWDDDD",
-        "DDDDDDDDDDDD",
-        "DDDDDDDDDDDD",
-        "DDDDDDDDDDDD",
-    });
-    addLayer(new String[]{
-        "GGGGGGGGGGGG",
-        "GGGGGGWWGGGG",
-        "GGGGWWWWWGGG",
-        "GGGGWWWWWWGG",
-        "GGGWWWWWWWWG",
-        "GWWWWWWWWWWG",
-        "GGWWWWWWWWGG",
-        "GGGWWWWWWWGG",
-        "GGGGWWWWWGGG",
-        "GGGGGWWWGGGG",
-        "GGGGGGGGGGGG",
-        "GGGGGGGGGGGG",
-    });
-    addLayer(new String[]{
-        "  OYOOOOOO  ",
-        " YOOOOAAOOY ",
-        "OOOSAAAAAYOO",
-        "OYOOAAAAAAOO",
-        "OOOAAAAAAAAS",
-        "OAAAAAAAAAAY",
-        "OSAAAAAAAAOO",
-        "OOOAAAAAAAOO",
-        "OYOOAAAAAOOO",
-        "OOOOOAAASOOO",
-        " OYOOOOOYYO ",
-        "  OOOYOOOO  ",
-    });
+    addLayer(new String[] { "DDDDDDDDDDDD", "DDDDDDDDDDDD", "DDDDDDDDDDDD", "DDDDDDDDDDDD", "DDDDDDDDDDDD", "DDDDDDDDDDDD", "DDDDDDDDDDDD", "DDDDDDDDDDDD",
+        "DDDDDDDDDDDD", "DDDDDDDDDDDD", "DDDDDDDDDDDD", "DDDDDDDDDDDD", });
+    addLayer(new String[] { "DDDDDDDDDDDD", "DDDDDDDDDDDD", "DDDDDDDDDDDD", "DDDDDDWWDDDD", "DDDDDWWWWDDD", "DDDDWWWWWDDD", "DDDWWWWDDDDD", "DDDDWWWDDDDD",
+        "DDDDDDDDDDDD", "DDDDDDDDDDDD", "DDDDDDDDDDDD", "DDDDDDDDDDDD", });
+    addLayer(new String[] { "DDDDDDDDDDDD", "DDDDDDDDDDDD", "DDDDDDWWDDDD", "DDDDDWWWWDDD", "DDDDWWWWWWDD", "DDDWWWWWWWDD", "DDDWWWWWWDDD", "DDDDWWWWWDDD",
+        "DDDDDWWWDDDD", "DDDDDDDDDDDD", "DDDDDDDDDDDD", "DDDDDDDDDDDD", });
+    addLayer(new String[] { "GGGGGGGGGGGG", "GGGGGGWWGGGG", "GGGGWWWWWGGG", "GGGGWWWWWWGG", "GGGWWWWWWWWG", "GWWWWWWWWWWG", "GGWWWWWWWWGG", "GGGWWWWWWWGG",
+        "GGGGWWWWWGGG", "GGGGGWWWGGGG", "GGGGGGGGGGGG", "GGGGGGGGGGGG", });
+    addLayer(new String[] { "  OYOOOOOO  ", " YOOOOAAOOY ", "OOOSAAAAAYOO", "OYOOAAAAAAOO", "OOOAAAAAAAAS", "OAAAAAAAAAAY", "OSAAAAAAAAOO", "OOOAAAAAAAOO",
+        "OYOOAAAAAOOO", "OOOOOAAASOOO", " OYOOOOOYYO ", "  OOOYOOOO  ", });
   }
 
   @Override
-  public void placeBlock(World world, BlockPos pos, IBlockState state){
+  public void placeBlock(World world, BlockPos pos, IBlockState state) {
     super.placeBlock(world, pos, state);
-    if (state.getBlock() == epicsquid.roots.init.ModBlocks.structure_marker){
+    if (state.getBlock() == epicsquid.roots.init.ModBlocks.structure_marker) {
       world.setBlockToAir(pos);
     }
   }
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-    if(random.nextInt(10) != 0){
+    if (random.nextInt(10) != 0) {
       return;
     }
-    if (world.provider.getDimension() == DimensionType.OVERWORLD.getId() && !world.isRemote){
-      int xx = chunkX*16 + 13 + Util.rand.nextInt(6);
-      int zz = chunkZ*16 + 13 + Util.rand.nextInt(6);
-      if ((Math.abs(xx) > 500 || Math.abs(zz) > 500)){
-        int height = world.getHeight(xx, zz)-1;
-        if (height > 0 && world.getBlockState(new BlockPos(xx,height,zz)).getBlock() instanceof BlockGrass){
+    if (world.provider.getDimension() == DimensionType.OVERWORLD.getId() && !world.isRemote) {
+      int xx = chunkX * 16 + 13 + Util.rand.nextInt(6);
+      int zz = chunkZ * 16 + 13 + Util.rand.nextInt(6);
+      if ((Math.abs(xx) > 500 || Math.abs(zz) > 500)) {
+        int height = world.getHeight(xx, zz) - 1;
+        if (height > 0 && world.getBlockState(new BlockPos(xx, height, zz)).getBlock() instanceof BlockGrass) {
           boolean canGenerate = true;
-          for (int i = -5; i < 6; i ++){
-            for (int j = -5; j < 6; j ++){
-              if (world.getBlockState(new BlockPos(xx+i,height,zz+j)).getBlock() != Blocks.GRASS){
+          for (int i = -5; i < 6; i++) {
+            for (int j = -5; j < 6; j++) {
+              if (world.getBlockState(new BlockPos(xx + i, height, zz + j)).getBlock() != Blocks.GRASS) {
                 canGenerate = false;
               }
             }
           }
-          if (canGenerate){
-            this.generateIn(world, xx, height-3, zz);
+          if (canGenerate) {
+            this.generateIn(world, xx, height - 3, zz);
             spawnEntities(world, random, xx, zz, height);
             EntityWildGrove wildGrove = new EntityWildGrove(world);
             wildGrove.setPosition(xx, height + 6, zz);
             world.spawnEntity(wildGrove);
 
-            for(int i = 0; i < 10; i++){
+            for (int i = 0; i < 10; i++) {
               int randX = random.nextInt(10) - 5;
               int randZ = random.nextInt(10) - 5;
-              BlockPos checkPos = new BlockPos(xx - randX, height + 1, zz-randZ);
+              BlockPos checkPos = new BlockPos(xx - randX, height + 1, zz - randZ);
               BlockPos grassPos = checkPos.add(0, -1, 0);
-              if(world.getBlockState(checkPos).getBlock() == Blocks.AIR || world.getBlockState(checkPos).getBlock() == Blocks.TALLGRASS ){
-                if(world.getBlockState(grassPos).getBlock().canSustainPlant(world.getBlockState(grassPos), world, grassPos, EnumFacing.UP, (BlockSapling)Blocks.SAPLING)){
+              if (world.getBlockState(checkPos).getBlock() == Blocks.AIR || world.getBlockState(checkPos).getBlock() == Blocks.TALLGRASS) {
+                if (world.getBlockState(grassPos).getBlock()
+                    .canSustainPlant(world.getBlockState(grassPos), world, grassPos, EnumFacing.UP, (BlockSapling) Blocks.SAPLING)) {
                   world.setBlockState(checkPos, Blocks.SAPLING.getDefaultState());
                   ((BlockSapling) Blocks.SAPLING).generateTree(world, checkPos, world.getBlockState(checkPos), random);
                 }
@@ -157,7 +97,7 @@ public class WorldGenWildlandGrove extends StructureBase implements IWorldGenera
     }
   }
 
-  private void spawnEntities(World world, Random rand, int xx, int zz, int height){
+  private void spawnEntities(World world, Random rand, int xx, int zz, int height) {
     EntityBeetle beetle1 = new EntityBeetle(world);
     EntityDeer deer1 = new EntityDeer(world);
     EntityFox fox1 = new EntityFox(world);
@@ -165,12 +105,12 @@ public class WorldGenWildlandGrove extends StructureBase implements IWorldGenera
     EntityDeer deer2 = new EntityDeer(world);
     EntityFox fox2 = new EntityFox(world);
 
-    beetle1.setPosition(xx + (rand.nextInt(12) - 6), height+1, zz + (rand.nextInt(12) - 6));
-    deer1.setPosition(xx + (rand.nextInt(12) - 6), height+1, zz + (rand.nextInt(12) - 6));
-    fox1.setPosition(xx + (rand.nextInt(12) - 6), height+1, zz + (rand.nextInt(12) - 6));
-    beetle2.setPosition(xx + (rand.nextInt(12) - 6), height+1, zz + (rand.nextInt(12) - 6));
-    deer2.setPosition(xx + (rand.nextInt(12) - 6), height+1, zz + (rand.nextInt(12) - 6));
-    fox2.setPosition(xx + (rand.nextInt(12) - 6), height+1, zz + (rand.nextInt(12) - 6));
+    beetle1.setPosition(xx + (rand.nextInt(12) - 6), height + 1, zz + (rand.nextInt(12) - 6));
+    deer1.setPosition(xx + (rand.nextInt(12) - 6), height + 1, zz + (rand.nextInt(12) - 6));
+    fox1.setPosition(xx + (rand.nextInt(12) - 6), height + 1, zz + (rand.nextInt(12) - 6));
+    beetle2.setPosition(xx + (rand.nextInt(12) - 6), height + 1, zz + (rand.nextInt(12) - 6));
+    deer2.setPosition(xx + (rand.nextInt(12) - 6), height + 1, zz + (rand.nextInt(12) - 6));
+    fox2.setPosition(xx + (rand.nextInt(12) - 6), height + 1, zz + (rand.nextInt(12) - 6));
 
     world.spawnEntity(beetle1);
     world.spawnEntity(deer1);

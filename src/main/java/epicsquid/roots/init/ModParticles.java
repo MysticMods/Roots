@@ -18,7 +18,8 @@ public class ModParticles {
     PARTICLE_STAR = ParticleRegistry.registerParticle(MysticalLib.MODID, ParticleStar.class, new ResourceLocation("roots:particle/particle_star"));
     PARTICLE_LINE_GLOW = ParticleRegistry.registerParticle(MysticalLib.MODID, ParticleLineGlow.class, new ResourceLocation("roots:particle/particle_glow"));
     PARTICLE_THORN = ParticleRegistry.registerParticle(MysticalLib.MODID, ParticleThorn.class, new ResourceLocation("roots:particle/particle_thorn"));
-    PARTICLE_LINE_GLOW_STEADY = ParticleRegistry.registerParticle(MysticalLib.MODID, ParticleLineGlowSteady.class, new ResourceLocation("roots:particle/particle_glow"));
+    PARTICLE_LINE_GLOW_STEADY = ParticleRegistry
+        .registerParticle(MysticalLib.MODID, ParticleLineGlowSteady.class, new ResourceLocation("roots:particle/particle_glow"));
 
   }
 }

@@ -114,7 +114,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
     }
     if (heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND) {
       for (int i = inventory.getSlots() - 1; i >= 0; i--) {
-        if(this.dropItemInInventory(inventory, i)){
+        if (this.dropItemInInventory(inventory, i)) {
           return true;
         }
       }
@@ -162,7 +162,9 @@ public class TileEntityImbuer extends TileBase implements ITickable {
               inventory.extractItem(1, 1, false);
               markDirty();
               PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
-              PacketHandler.INSTANCE.sendToAll(new MessageImbueCompleteFX(spellDust.getTagCompound().getString("spell"),getPos().getX()+0.5,getPos().getY()+0.5,getPos().getZ()+0.5));
+              PacketHandler.INSTANCE.sendToAll(
+                  new MessageImbueCompleteFX(spellDust.getTagCompound().getString("spell"), getPos().getX() + 0.5, getPos().getY() + 0.5,
+                      getPos().getZ() + 0.5));
             }
           }
         }

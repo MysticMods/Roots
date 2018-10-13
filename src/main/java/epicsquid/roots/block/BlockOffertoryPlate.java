@@ -25,12 +25,12 @@ public class BlockOffertoryPlate extends BlockTEBase {
   }
 
   @Override
-  public BlockStateContainer createBlockState(){
+  public BlockStateContainer createBlockState() {
     return new BlockStateContainer(this, FACING);
   }
 
   @Override
-  public int getMetaFromState(IBlockState state){
+  public int getMetaFromState(IBlockState state) {
     return state.getValue(FACING).getIndex();
   }
 
@@ -45,18 +45,18 @@ public class BlockOffertoryPlate extends BlockTEBase {
   }
 
   @Override
-  public IBlockState getStateFromMeta(int meta){
+  public IBlockState getStateFromMeta(int meta) {
     return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
   }
 
   @Override
-  public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing face, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
+  public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing face, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
     return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
   }
 
   @Nonnull
   @Override
   public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
-    return new AxisAlignedBB(0.125,0.0,0.125,0.875,0.875,0.875);
+    return new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 0.875, 0.875);
   }
 }

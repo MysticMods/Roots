@@ -29,37 +29,37 @@ public class BlockRunestone extends BlockBase {
   public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX,
       float hitY, float hitZ) {
     ItemStack heldItem = playerIn.getHeldItem(hand);
-    if(heldItem.getItem() instanceof ItemKnife){
+    if (heldItem.getItem() instanceof ItemKnife) {
       List<EntityGrove> groves = Util.getEntitiesWithinRadius(worldIn, EntityGrove.class, pos, 6);
-      if(groves.size() > 0){
+      if (groves.size() > 0) {
         EntityGrove closestGrove = null;
         double closestDistance = 0;
-        for(EntityGrove grove : groves){
-          if(closestGrove == null || grove.getPosition().getDistance(pos.getX(), pos.getY(), pos.getZ()) < closestDistance){
+        for (EntityGrove grove : groves) {
+          if (closestGrove == null || grove.getPosition().getDistance(pos.getX(), pos.getY(), pos.getZ()) < closestDistance) {
             closestGrove = grove;
             closestDistance = grove.getPosition().getDistance(pos.getX(), pos.getY(), pos.getZ());
           }
         }
 
-        switch (closestGrove.getType()){
-          case WILD:
-            worldIn.setBlockState(pos, ModBlocks.runestone_wild.getDefaultState());
-            break;
-          case NATURAL:
-            worldIn.setBlockState(pos, ModBlocks.runestone_natural.getDefaultState());
-            break;
-          case FAIRY:
-            worldIn.setBlockState(pos, ModBlocks.runestone_fairy.getDefaultState());
-            break;
-          case FUNGAL:
-            worldIn.setBlockState(pos, ModBlocks.runestone_fungal.getDefaultState());
-            break;
-          case MYSTIC:
-            worldIn.setBlockState(pos, ModBlocks.runestone_mystic.getDefaultState());
-            break;
-          case FORBIDDEN:
-            worldIn.setBlockState(pos, ModBlocks.runestone_forbidden.getDefaultState());
-            break;
+        switch (closestGrove.getType()) {
+        case WILD:
+          worldIn.setBlockState(pos, ModBlocks.runestone_wild.getDefaultState());
+          break;
+        case NATURAL:
+          worldIn.setBlockState(pos, ModBlocks.runestone_natural.getDefaultState());
+          break;
+        case FAIRY:
+          worldIn.setBlockState(pos, ModBlocks.runestone_fairy.getDefaultState());
+          break;
+        case FUNGAL:
+          worldIn.setBlockState(pos, ModBlocks.runestone_fungal.getDefaultState());
+          break;
+        case MYSTIC:
+          worldIn.setBlockState(pos, ModBlocks.runestone_mystic.getDefaultState());
+          break;
+        case FORBIDDEN:
+          worldIn.setBlockState(pos, ModBlocks.runestone_forbidden.getDefaultState());
+          break;
         }
         return true;
       }

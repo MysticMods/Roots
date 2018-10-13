@@ -14,33 +14,33 @@ public class StructureBase {
   public int width, length;
   public Map<String, IBlockState> blocks = new HashMap<>();
 
-  public StructureBase(int w, int h){
+  public StructureBase(int w, int h) {
     width = w;
     length = h;
   }
 
-  public StructureBase addLayer(String[] layer){
+  public StructureBase addLayer(String[] layer) {
     layers.add(layer);
     return this;
   }
 
-  public void generateIn(World world, int x, int y, int z){
-    for (int i = 0; i < layers.size(); i ++){
-      for (int j = 0; j < layers.get(i).length; j ++){
-        for (int k = 0; k < layers.get(i)[j].length(); k ++){
-          placeBlock(world,new BlockPos(x+j-width/2, y+i,z+k-length/2), blocks.get(layers.get(i)[j].substring(k, k+1)));
+  public void generateIn(World world, int x, int y, int z) {
+    for (int i = 0; i < layers.size(); i++) {
+      for (int j = 0; j < layers.get(i).length; j++) {
+        for (int k = 0; k < layers.get(i)[j].length(); k++) {
+          placeBlock(world, new BlockPos(x + j - width / 2, y + i, z + k - length / 2), blocks.get(layers.get(i)[j].substring(k, k + 1)));
         }
       }
     }
   }
 
-  public void placeBlock(World world, BlockPos pos, IBlockState state){
-    if (state.getBlock() != Blocks.AIR){
+  public void placeBlock(World world, BlockPos pos, IBlockState state) {
+    if (state.getBlock() != Blocks.AIR) {
       world.setBlockState(pos, state);
     }
   }
 
-  public StructureBase addBlockMapping(String name, IBlockState state){
+  public StructureBase addBlockMapping(String name, IBlockState state) {
     blocks.put(name, state);
     return this;
   }

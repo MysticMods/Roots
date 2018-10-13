@@ -2,7 +2,6 @@ package epicsquid.roots;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.proxy.ClientProxy;
-import epicsquid.roots.capability.PlayerGroveCapability;
 import epicsquid.roots.capability.PlayerGroveCapabilityProvider;
 import epicsquid.roots.network.message.MessagePlayerGroveUpdate;
 import net.minecraft.entity.Entity;
@@ -29,29 +28,29 @@ public class EventManager {
   }
 
   @SubscribeEvent
-  public void copyCapabilities(PlayerEvent.Clone event){
-    if (event.isWasDeath()){
-      if (event.getOriginal().hasCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null)){
-        event.getEntityPlayer().getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null).setData(event.getOriginal().getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null).getData());
+  public void copyCapabilities(PlayerEvent.Clone event) {
+    if (event.isWasDeath()) {
+      if (event.getOriginal().hasCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null)) {
+        event.getEntityPlayer().getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null)
+            .setData(event.getOriginal().getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null).getData());
       }
     }
   }
 
   @SubscribeEvent
-  public void addCapabilities(AttachCapabilitiesEvent<Entity> event)
-  {
-    if(event.getObject() instanceof EntityPlayer)
-    {
+  public void addCapabilities(AttachCapabilitiesEvent<Entity> event) {
+    if (event.getObject() instanceof EntityPlayer) {
       event.addCapability(new ResourceLocation(Roots.MODID, "player_grove_capability"), new PlayerGroveCapabilityProvider());
     }
   }
-  
+
   @SubscribeEvent
-  public void livingUpdate(LivingUpdateEvent event){
-    if (event.getEntity() instanceof EntityPlayer){
-      if (event.getEntity().hasCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null)){
-        if (!event.getEntity().world.isRemote && event.getEntity().getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null).isDirty()){
-          PacketHandler.INSTANCE.sendToAll(new MessagePlayerGroveUpdate(event.getEntity().getUniqueID(),event.getEntity().getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null).getData()));
+  public void livingUpdate(LivingUpdateEvent event) {
+    if (event.getEntity() instanceof EntityPlayer) {
+      if (event.getEntity().hasCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null)) {
+        if (!event.getEntity().world.isRemote && event.getEntity().getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null).isDirty()) {
+          PacketHandler.INSTANCE.sendToAll(new MessagePlayerGroveUpdate(event.getEntity().getUniqueID(),
+              event.getEntity().getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null).getData()));
           event.getEntity().getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null).clean();
         }
       }

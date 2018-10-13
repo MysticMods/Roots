@@ -1,6 +1,5 @@
 package epicsquid.roots.network.message.fx;
 
-
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRegistry;

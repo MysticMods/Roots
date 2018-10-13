@@ -18,6 +18,7 @@ import epicsquid.mysticalworld.entity.EntityDeer;
 import epicsquid.mysticalworld.entity.EntityFox;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.tileentity.TileEntityOffertoryPlate;
 import net.minecraft.entity.Entity;
@@ -30,7 +31,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class RitualSummoning extends RitualBase{
+public class RitualSummoning extends RitualBase {
 
   private static Map<Class<? extends Entity>, List<ItemStack>> entityItem = new HashMap<>();
 
@@ -53,36 +54,43 @@ public class RitualSummoning extends RitualBase{
 
   @Override
   public void doEffect(World world, BlockPos pos) {
-    System.out.println("Does run");
     List<TileEntityOffertoryPlate> plateList = Util.getTileEntitiesWithin(world, TileEntityOffertoryPlate.class, pos, OFFERTORY_RADIUS);
-    if(plateList.size() <= 0){
+    if (plateList.size() <= 0) {
       return;
     }
     List<ItemStack> offertoryItems = new ArrayList<>();
-    for(TileEntityOffertoryPlate plate : plateList){
-      if(plate.getHeldItem() != ItemStack.EMPTY){
+    for (TileEntityOffertoryPlate plate : plateList) {
+      if (plate.getHeldItem() != ItemStack.EMPTY) {
         offertoryItems.add(plate.getHeldItem());
       }
     }
 
-    for(Map.Entry<Class<? extends Entity>, List<ItemStack>> entry : entityItem.entrySet()){
-      if(ListUtil.stackListsMatch(entry.getValue(), offertoryItems )){
-        if(!world.isRemote){
-          Entity entity = null;
-          try {
-            Constructor<? extends Entity> cons = entry.getKey().getDeclaredConstructor(World.class);
-            entity = cons.newInstance(world);
-          } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
-            e.printStackTrace();
-          }
-          if (entity == null) {
-            return;
-          }
-          entity.setPosition(pos.getX() + 1.5, pos.getY(), pos.getZ());
+    for (Map.Entry<Class<? extends Entity>, List<ItemStack>> entry : entityItem.entrySet()) {
+      if (ListUtil.stackListsMatch(entry.getValue(), offertoryItems)) {
+
+        Entity entity = null;
+        try {
+          Constructor<? extends Entity> cons = entry.getKey().getDeclaredConstructor(World.class);
+          entity = cons.newInstance(world);
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+          e.printStackTrace();
+        }
+        if (entity == null) {
+          return;
+        }
+        entity.setPosition(pos.getX() + 1.5, pos.getY(), pos.getZ());
+        if (!world.isRemote) {
           world.spawnEntity(entity);
 
-          for(TileEntityOffertoryPlate plate : plateList){
+          for (TileEntityOffertoryPlate plate : plateList) {
             plate.removeItem();
+          }
+        } else {
+          for(int i = 0; i < 10; i++){
+            ParticleUtil.spawnParticleStar(world, (float) entity.posX + 0.5f * (Util.rand.nextFloat() - 0.5f),
+                (float) (entity.posY + entity.height / 2.5f + (Util.rand.nextFloat())), (float) entity.posZ + 0.5f * (Util.rand.nextFloat() - 0.5f),
+                0.125f * (Util.rand.nextFloat() - 0.5f), 0.01875f * (Util.rand.nextFloat()), 0.125f * (Util.rand.nextFloat() - 0.5f), 100, 255, 100, 1.0f,
+                1.0f + 2.0f * Util.rand.nextFloat(), 40);
           }
         }
       }
@@ -91,7 +99,7 @@ public class RitualSummoning extends RitualBase{
 
   @Override
   public boolean canFire(World world, BlockPos pos, @Nullable EntityPlayer player) {
-    System.out.println("tests");
+    //todo: add wild grove trust needed
     return getThreeHighStandingStones(world, pos, ModBlocks.runestone_wild) >= 3;
   }
 }

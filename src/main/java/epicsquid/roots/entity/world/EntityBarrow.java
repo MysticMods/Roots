@@ -15,6 +15,7 @@ public class EntityBarrow extends Entity {
   private int y = 0;
   private int z = 0;
   private boolean initedPosition = false;
+
   public EntityBarrow(World worldIn) {
     super(worldIn);
     this.setInvisible(false);
@@ -22,16 +23,16 @@ public class EntityBarrow extends Entity {
   }
 
   @Override
-  public void setPosition(double x, double y, double z){
+  public void setPosition(double x, double y, double z) {
     super.setPosition(x, y, z);
-    this.x = (int)x;
-    this.y = (int)y;
-    this.z = (int)z;
+    this.x = (int) x;
+    this.y = (int) y;
+    this.z = (int) z;
     initedPosition = true;
   }
 
   @Override
-  public boolean isEntityInsideOpaqueBlock(){
+  public boolean isEntityInsideOpaqueBlock() {
     return false;
   }
 
@@ -41,26 +42,26 @@ public class EntityBarrow extends Entity {
   }
 
   @Override
-  public void onUpdate(){
-    ticksExisted ++;
+  public void onUpdate() {
+    ticksExisted++;
     this.posX = x;
     this.posY = y;
     this.posZ = z;
-    if (ticksExisted % 70 == 0 && (world.getWorldTime() % 24000) > 12000 && !world.isRemote){
-      List<EntityMob> nearbyMobs = world.getEntitiesWithinAABB(EntityMob.class, new AxisAlignedBB(posX-16,posY-16,posZ-16,posX+16,posY+16,posZ+16));
-      if (nearbyMobs.size() < 10){
-        if (rand.nextInt(10) == 0){
+    if (ticksExisted % 70 == 0 && (world.getWorldTime() % 24000) > 12000 && !world.isRemote) {
+      List<EntityMob> nearbyMobs = world
+          .getEntitiesWithinAABB(EntityMob.class, new AxisAlignedBB(posX - 16, posY - 16, posZ - 16, posX + 16, posY + 16, posZ + 16));
+      if (nearbyMobs.size() < 10) {
+        if (rand.nextInt(10) == 0) {
           EntityZombie zombie = new EntityZombie(world);
           zombie.setWorld(world);
           zombie.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
-          zombie.setPosition(posX+2.0f*(rand.nextFloat()-0.5f),posY,posZ+2.0f*(rand.nextFloat()-0.5f));
+          zombie.setPosition(posX + 2.0f * (rand.nextFloat() - 0.5f), posY, posZ + 2.0f * (rand.nextFloat() - 0.5f));
           world.spawnEntity(zombie);
-        }
-        else if (rand.nextInt(9) == 0){
+        } else if (rand.nextInt(9) == 0) {
           EntitySkeleton skeleton = new EntitySkeleton(world);
           skeleton.setWorld(world);
           skeleton.onInitialSpawn(world.getDifficultyForLocation(getPosition()), null);
-          skeleton.setPosition(posX+2.0f*(rand.nextFloat()-0.5f),posY,posZ+2.0f*(rand.nextFloat()-0.5f));
+          skeleton.setPosition(posX + 2.0f * (rand.nextFloat() - 0.5f), posY, posZ + 2.0f * (rand.nextFloat() - 0.5f));
           world.spawnEntity(skeleton);
         }
       }
@@ -73,7 +74,7 @@ public class EntityBarrow extends Entity {
     this.y = compound.getInteger("y");
     this.z = compound.getInteger("z");
     this.initedPosition = compound.getBoolean("initedPosition");
-    this.setPosition(x,y,z);
+    this.setPosition(x, y, z);
   }
 
   @Override

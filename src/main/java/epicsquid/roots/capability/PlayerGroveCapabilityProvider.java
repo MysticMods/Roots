@@ -10,8 +10,7 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 public class PlayerGroveCapabilityProvider implements ICapabilitySerializable<NBTTagCompound> {
 
-  @CapabilityInject(IPlayerGroveCapability.class)
-  public static final Capability<PlayerGroveCapability> PLAYER_GROVE_CAPABILITY = injected();
+  @CapabilityInject(IPlayerGroveCapability.class) public static final Capability<PlayerGroveCapability> PLAYER_GROVE_CAPABILITY = injected();
 
   private PlayerGroveCapability instance = PLAYER_GROVE_CAPABILITY.getDefaultInstance();
 
@@ -37,6 +36,7 @@ public class PlayerGroveCapabilityProvider implements ICapabilitySerializable<NB
 
   //This is here to get rid of all the ugly PLAYER_GROVE might be null
   private static final Object NULL = null;
+
   @SuppressWarnings("unchecked")
   private static <T> T injected() {
     return (T) NULL;

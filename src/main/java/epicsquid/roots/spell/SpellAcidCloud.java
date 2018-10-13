@@ -35,7 +35,7 @@ public class SpellAcidCloud extends SpellBase {
           e.setLastAttackedEntity(player);
         }
       }
-      PacketHandler.INSTANCE.sendToAll(new MessageAcidCloudFX(player.posX,player.posY+player.getEyeHeight(),player.posZ));
+      PacketHandler.INSTANCE.sendToAll(new MessageAcidCloudFX(player.posX, player.posY + player.getEyeHeight(), player.posZ));
     }
   }
 
