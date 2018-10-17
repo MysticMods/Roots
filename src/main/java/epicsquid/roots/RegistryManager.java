@@ -10,7 +10,7 @@ import epicsquid.mysticallib.event.RegisterWorldGenEvent;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModEntities;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.init.ModMessages;
+import epicsquid.roots.network.PacketHandler;
 import epicsquid.roots.init.ModParticles;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.item.ItemStaff;
@@ -39,7 +39,7 @@ public class RegistryManager {
 
     ModEntities.registerMobs();
     ModEntities.registerMobSpawn();
-    ModMessages.registerMessages();
+    PacketHandler.registerMessages();
   }
 
   @SubscribeEvent

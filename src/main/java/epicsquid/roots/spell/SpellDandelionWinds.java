@@ -4,7 +4,7 @@ import java.util.List;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticalworld.init.ModItems;
-import epicsquid.roots.network.message.fx.MessageDandelionCastFX;
+import epicsquid.roots.network.fx.MessageDandelionCastFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;

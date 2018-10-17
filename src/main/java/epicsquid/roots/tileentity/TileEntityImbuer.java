@@ -8,7 +8,7 @@ import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemStaff;
-import epicsquid.roots.network.message.fx.MessageImbueCompleteFX;
+import epicsquid.roots.network.fx.MessageImbueCompleteFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
