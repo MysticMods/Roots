@@ -1,4 +1,6 @@
-package epicsquid.roots;
+package epicsquid.roots.util;
+
+import epicsquid.roots.Roots;
 
 public class Constants {
   public static String MIND_WARD_TAG = Roots.MODID + ":mind_ward";
