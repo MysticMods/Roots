@@ -3,7 +3,7 @@ package epicsquid.roots.spell;
 import java.util.List;
 
 import epicsquid.mysticalworld.init.ModItems;
-import epicsquid.roots.Constants;
+import epicsquid.roots.util.Constants;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
