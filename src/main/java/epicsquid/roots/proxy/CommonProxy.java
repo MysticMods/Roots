@@ -1,6 +1,7 @@
 package epicsquid.roots.proxy;
 
 import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.util.OfferingUtil;
@@ -10,6 +11,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class CommonProxy {
   public void preInit(FMLPreInitializationEvent event) {
+    HerbRegistry.init();
     ModItems.registerOredict();
   }
 

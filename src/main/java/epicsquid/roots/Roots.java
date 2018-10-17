@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod(modid = Roots.MODID, version = Roots.VERSION, name = Roots.NAME)
+@Mod(modid = Roots.MODID, version = Roots.VERSION, name = Roots.NAME, dependencies = "required-before:mysticalworld")
 public class Roots {
   public static final String MODID = "roots";
   public static final String DOMAIN = "roots";
