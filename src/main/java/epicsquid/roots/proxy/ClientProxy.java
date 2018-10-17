@@ -17,11 +17,11 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class ClientProxy extends CommonProxy {
   @Override
   public void preInit(FMLPreInitializationEvent event) {
+    super.preInit(event);
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMortar.class, new TileEntityMortarRenderer());
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBonfire.class, new TileEntityBonfireRenderer());
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityImbuer.class, new TileEntityImbuerRenderer());
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOffertoryPlate.class, new TileEntityOffertoryPlateRenderer());
-    super.preInit(event);
   }
 
   @Override
