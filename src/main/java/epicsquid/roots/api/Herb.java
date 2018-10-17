@@ -3,6 +3,7 @@ package epicsquid.roots.api;
 import javax.annotation.Nonnull;
 
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 /**
@@ -17,9 +18,10 @@ public class Herb extends IForgeRegistryEntry.Impl<Herb> {
    */
   private Item item;
 
-  public Herb(@Nonnull Item item) {
+  public Herb(@Nonnull Item item, ResourceLocation resourceLocation) {
     super();
     this.item = item;
+    setRegistryName(resourceLocation);
   }
 
   @Nonnull
@@ -30,4 +32,5 @@ public class Herb extends IForgeRegistryEntry.Impl<Herb> {
   public void setItem(@Nonnull Item item) {
     this.item = item;
   }
+
 }
