@@ -4,8 +4,8 @@ import java.util.List;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticalworld.init.ModItems;
-import epicsquid.roots.network.message.fx.MessageSanctuaryBurstFX;
-import epicsquid.roots.network.message.fx.MessageSanctuaryRingFX;
+import epicsquid.roots.network.fx.MessageSanctuaryBurstFX;
+import epicsquid.roots.network.fx.MessageSanctuaryRingFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;

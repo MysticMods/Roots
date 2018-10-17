@@ -3,7 +3,7 @@ package epicsquid.roots;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.roots.capability.PlayerGroveCapabilityProvider;
-import epicsquid.roots.network.message.MessagePlayerGroveUpdate;
+import epicsquid.roots.network.MessagePlayerGroveUpdate;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
