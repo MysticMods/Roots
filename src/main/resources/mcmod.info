@@ -1,13 +1,13 @@
 [
 {
   "modid": "roots",
-  "name": "Roots 2",
+  "name": "Roots 3",
   "description": "Druidic magic mod.",
-  "version": "0.104",
-  "mcversion": "1.12",
+  "version": "3.0.0",
+  "mcversion": "1.12.2",
   "url": "",
   "updateUrl": "",
-  "authorList": ["Elucent","AlexisMachina","werty1124","SirShadow"],
+  "authorList": ["EpicSquid", "Martacus", "Elucent"],
   "credits": "",
   "logoFile": "",
   "screenshots": [],
