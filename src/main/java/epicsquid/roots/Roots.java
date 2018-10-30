@@ -1,7 +1,5 @@
 package epicsquid.roots;
 
-import epicsquid.mysticallib.MysticalLib;
-import epicsquid.mysticalworld.MysticalWorld;
 import epicsquid.roots.capability.IPlayerGroveCapability;
 import epicsquid.roots.capability.PlayerGroveCapability;
 import epicsquid.roots.capability.PlayerGroveCapabilityStorage;
@@ -29,7 +27,7 @@ public class Roots {
   public static final String DOMAIN = "roots";
   public static final String NAME = "Roots";
   public static final String VERSION = "@VERSION@";
-  public static final String DEPENDENCIES = "required-before:mysticallib@[" + MysticalLib.VERSION + ",);required-before:mysticalworld@[" + MysticalWorld.VERSION + ",)";
+  public static final String DEPENDENCIES = "required-before:mysticallib;required-before:mysticalworld";
 
   public static ModContainer CONTAINER = null;
 
