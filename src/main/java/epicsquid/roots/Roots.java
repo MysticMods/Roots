@@ -23,12 +23,13 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod(modid = Roots.MODID, version = Roots.VERSION, name = Roots.NAME, dependencies = "required-after:mysticallib@[" + MysticalLib.VERSION + ",);required-after:mysticalworld@[" + MysticalWorld.VERSION + ",)")
+@Mod(modid = Roots.MODID, version = Roots.VERSION, name = Roots.NAME, dependencies = Roots.DEPENDENCIES)
 public class Roots {
   public static final String MODID = "roots";
   public static final String DOMAIN = "roots";
   public static final String NAME = "Roots";
   public static final String VERSION = "@VERSION@";
+  public static final String DEPENDENCIES = "required-before:mysticallib@[" + MysticalLib.VERSION + ",);required-before:mysticalworld@[" + MysticalWorld.VERSION + ",)";
 
   public static ModContainer CONTAINER = null;
 
