@@ -1,5 +1,7 @@
 package epicsquid.roots;
 
+import epicsquid.mysticallib.MysticalLib;
+import epicsquid.mysticalworld.MysticalWorld;
 import epicsquid.roots.capability.IPlayerGroveCapability;
 import epicsquid.roots.capability.PlayerGroveCapability;
 import epicsquid.roots.capability.PlayerGroveCapabilityStorage;
@@ -21,7 +23,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod(modid = Roots.MODID, version = Roots.VERSION, name = Roots.NAME, dependencies = "required-before:mysticalworld")
+@Mod(modid = Roots.MODID, version = Roots.VERSION, name = Roots.NAME, dependencies = "required-after:mysticallib@[" + MysticalLib.VERSION + ",);required-after:mysticalworld@[" + MysticalWorld.VERSION + ",)")
 public class Roots {
   public static final String MODID = "roots";
   public static final String DOMAIN = "roots";
