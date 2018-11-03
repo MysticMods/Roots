@@ -18,7 +18,7 @@ import net.minecraftforge.registries.RegistryBuilder;
 public class HerbRegistry {
 
   private static final ResourceLocation NAME = new ResourceLocation(Roots.DOMAIN, "herb");
-  private static IForgeRegistry<Herb> REGISTRY = null;
+  public static IForgeRegistry<Herb> REGISTRY = null;
 
   public static void init() {
     MinecraftForge.EVENT_BUS.post(new RegisterHerbEvent(NAME, REGISTRY));

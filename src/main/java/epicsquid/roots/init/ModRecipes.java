@@ -6,6 +6,7 @@ import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
 import epicsquid.roots.recipe.MortarRecipe;
+import epicsquid.roots.recipe.PowderPouchFillRecipe;
 import epicsquid.roots.recipe.RecipeRegistry;
 import epicsquid.roots.recipe.SpellRecipe;
 import net.minecraft.init.Blocks;
@@ -97,6 +98,8 @@ public class ModRecipes {
         new SpellRecipe("spell_sense_animals").addIngredient(new ItemStack(Items.CARROT, 1)).addIngredient(new ItemStack(Blocks.RED_FLOWER, 1, 0))
             .addIngredient(new ItemStack(ModItems.moonglow_seed, 1)).addIngredient(new ItemStack(ModItems.moonglow_leaf, 1))
             .addIngredient(new ItemStack(Items.GOLDEN_CARROT, 1)));
+
+    event.getRegistry().register(new PowderPouchFillRecipe().setRegistryName(getRL("powder_pouch_fill")));
 
   }
 }
