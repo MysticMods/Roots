@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import epicsquid.roots.util.RInventoryUtil;
+import epicsquid.roots.util.PowderInventoryUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -28,7 +28,7 @@ public class SpellBase {
     for (int i = 0; i < costs.size(); i++) {
       String s = costs.keySet().toArray(new String[costs.size()])[i];
       double d = costs.values().toArray(new Double[costs.size()])[i];
-      matches = matches && RInventoryUtil.getPowderTotal(player, s) >= d;
+      matches = matches && PowderInventoryUtil.getPowderTotal(player, s) >= d;
     }
     return matches && costs.size() > 0 || player.capabilities.isCreativeMode;
   }
@@ -37,7 +37,7 @@ public class SpellBase {
     for (int i = 0; i < costs.size(); i++) {
       String s = costs.keySet().toArray(new String[costs.size()])[i];
       double d = costs.values().toArray(new Double[costs.size()])[i];
-      RInventoryUtil.removePowder(player, s, d);
+      PowderInventoryUtil.removePowder(player, s, d);
     }
   }
 
@@ -45,7 +45,7 @@ public class SpellBase {
     for (int i = 0; i < costs.size(); i++) {
       String s = costs.keySet().toArray(new String[costs.size()])[i];
       double d = costs.values().toArray(new Double[costs.size()])[i];
-      RInventoryUtil.removePowder(player, s, d / 20.0);
+      PowderInventoryUtil.removePowder(player, s, d / 20.0);
     }
   }
 
