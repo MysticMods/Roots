@@ -10,10 +10,10 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.item.ItemPetalDust;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.MortarRecipe;
-import epicsquid.roots.recipe.RecipeRegistry;
 import epicsquid.roots.recipe.SpellRecipe;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
@@ -102,7 +102,7 @@ public class TileEntityMortar extends TileBase {
         for (int i = 0; i < inventory.getSlots(); i++) {
           ingredients.add(inventory.getStackInSlot(i));
         }
-        SpellRecipe recipe = RecipeRegistry.getSpellRecipe(ingredients);
+        SpellRecipe recipe = ModRecipes.getSpellRecipe(ingredients);
         if (recipe != null) {
           SpellBase spell = SpellRegistry.spellRegistry.get(recipe.result);
           if (world.isRemote) {
@@ -138,7 +138,7 @@ public class TileEntityMortar extends TileBase {
           }
           return true;
         }
-        MortarRecipe mortarRecipe = RecipeRegistry.getMortarRecipe(ingredients);
+        MortarRecipe mortarRecipe = ModRecipes.getMortarRecipe(ingredients);
 
         if (mortarRecipe != null) {
           if (world.isRemote) {
