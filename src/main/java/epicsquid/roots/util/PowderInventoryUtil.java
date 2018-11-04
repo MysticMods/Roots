@@ -3,7 +3,7 @@ package epicsquid.roots.util;
 import epicsquid.roots.item.ItemPouch;
 import net.minecraft.entity.player.EntityPlayer;
 
-public class RInventoryUtil {
+public class PowderInventoryUtil {
 
   public static double getPowderCapacityTotal(EntityPlayer player, String plantName) {
     double amount = 0;
