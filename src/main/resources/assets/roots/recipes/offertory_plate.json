@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RCR",
+    " C ",
+    "RCR"  ],
+  "key": {
+    "R": [
+      {
+        "item": "roots:runestone",
+        "data": 0
+      }
+    ],
+    "C": [
+      {
+        "item": "roots:chiseled_runestone",
+        "data": 0
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:offertory_plate",
+    "data": 0
+  }
+}

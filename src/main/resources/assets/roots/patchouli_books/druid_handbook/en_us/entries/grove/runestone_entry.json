@@ -1,0 +1,11 @@
+{
+  "name": "Runestone",
+  "icon": "roots:runestone",
+  "category": "grove_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Runestone is a magic infused stone that is often used in structures build by druids. These structures range from magical ones to normal housings and temples."
+    }
+  ]
+}
