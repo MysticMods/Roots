@@ -14,6 +14,21 @@
       "item3": "minecraft:coal",
       "item4": "mysticalworld:bark_acacia",
       "item5": "minecraft:blaze_powder"
+    },
+    {
+      "type": "multiblock",
+      "multiblock": {
+        "mapping": {
+          "0": "roots:bonfire",
+          "R": "roots:runestone",
+          "C": "roots:chiseled_runestone"
+        },
+        "pattern": [
+          ["   C   ","       ","       ","C     C","       ","       ","       "],
+          ["   R   ","       ","       ","R     R","       ","       ","       "],
+          ["   R   ","       ","       ","R  0  R","       ","       ","       "]
+        ]
+      }
     }
   ]
 }

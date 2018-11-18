@@ -34,6 +34,16 @@
       "type": "text",
       "title": "Imbuing",
       "text": "Imbuing spells is done with the imbuer. The imbuer is placed on the ground and then the staff and the petal dust are added. The imbuer imbues spells in the current slot the staff is on. If there is a spell in the current selected slot this spell will be overridden."
+    },
+    {
+      "type": "text",
+      "title": "Casting",
+      "text": "Casting spells is very easy. Hold the staff, right click and a spell has been cast. Some spells have a cooldown and some do not. All spells however have a herb cost. This herb cost is taken out of pouches filled with the magical herbs that you can grow. First you have to create a pouch.$(br)When the pouch is created take the pouch, a pestle and the herb into a crafting grid. The herbs get consumed and put into the pouch."
+    },
+    {
+      "type":"crafting",
+      "recipe": "roots:pouch",
+      "title": "Pouch"
     }
   ]
 }

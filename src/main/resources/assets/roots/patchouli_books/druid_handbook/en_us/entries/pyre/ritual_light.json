@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Banish the clouds from the skies, lengthen the light but shorter is the night. Will-O-Will-O-Wisp, undead be burning to crisp."
+      "text": "Banish the clouds from the skies, lengthen the light but shorter is the night. Will-O-Will-O-Wisp, undead be burning to crisp.$(br2)Ritual will fail if it's nighttime."
     },
     {
       "type": "pyre_template",

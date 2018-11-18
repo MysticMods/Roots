@@ -14,6 +14,22 @@
       "item3": "minecraft:melon",
       "item4": "minecraft:wheat_seeds",
       "item5": "mysticalworld:wildroot"
+    },
+    {
+      "type": "multiblock",
+      "multiblock": {
+        "mapping": {
+          "0": "roots:bonfire",
+          "R": "roots:runestone",
+          "C": "roots:chiseled_runestone",
+          "O": "roots:offertory_plate"
+        },
+        "pattern": [
+          ["   C   ","       ","       ","C     C","       ","       ","       "],
+          ["   R   ","       ","       ","R     R","       ","       ","       "],
+          ["   R   ","       ","       ","R  0  R","       ","       ","   O   "]
+        ]
+      }
     }
   ]
 }
