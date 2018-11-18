@@ -1,0 +1,19 @@
+{
+  "name": "Heavy Storms",
+  "icon": "roots:bonfire",
+  "category": "pyre_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Invokes a torrent of rain from the heavens, and keeps fire at bay for all creatures within its radius."
+    },
+    {
+      "type": "pyre_template",
+      "item1": "minecraft:vine",
+      "item2": "mysticalworld:bark_oak",
+      "item3": "minecraft:waterlily",
+      "item4": "mysticalworld:wildroot",
+      "item5": "minecraft:beetroot_seeds"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Windwall",
+  "icon": "roots:bonfire",
+  "category": "pyre_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Forces away all creatures that wear the mark of evil with a powerful gust of wind."
+    },
+    {
+      "type": "pyre_template",
+      "item1": "mysticalworld:pereskia",
+      "item2": "mysticalworld:pereskia_bulb",
+      "item3": "minecraft:feather",
+      "item4": "mysticalworld:bark_spruce",
+      "item5": "mysticalworld:bark_birch"
+    }
+  ]
+}
