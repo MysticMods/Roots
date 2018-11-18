@@ -1,0 +1,19 @@
+{
+  "name": "Natural Aura",
+  "icon": "roots:bonfire",
+  "category": "pyre_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Energy from dirt and sand, flows through the air directed at a plant. The plant grows high, wondering if it will every reach the sky."
+    },
+    {
+      "type": "pyre_template",
+      "item1": "mysticalworld:wildroot",
+      "item2": "mysticalworld:wildroot",
+      "item3": "mysticalworld:spirit_herb",
+      "item4": "minecraft:bone",
+      "item5": "minecraft:bone"
+    }
+  ]
+}

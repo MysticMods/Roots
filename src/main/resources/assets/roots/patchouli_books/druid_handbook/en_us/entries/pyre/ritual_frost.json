@@ -1,0 +1,19 @@
+{
+  "name": "Frost Lands",
+  "icon": "roots:bonfire",
+  "category": "pyre_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Turns the area into a snowy place"
+    },
+    {
+      "type": "pyre_template",
+      "item1": "minecraft:snowball",
+      "item2": "minecraft:packed_ice",
+      "item3": "minecraft:snow",
+      "item4": "mysticalworld:bark_acacia",
+      "item5": "mysticalworld:bark_acacia"
+    }
+  ]
+}

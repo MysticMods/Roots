@@ -1,0 +1,19 @@
+{
+  "name": "Storm of Fire",
+  "icon": "roots:bonfire",
+  "category": "pyre_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Rains down fire from the sky burning down everything alive."
+    },
+    {
+      "type": "pyre_template",
+      "item1": "mysticalworld:wildroot",
+      "item2": "mysticalworld:bark_acacia",
+      "item3": "minecraft:coal",
+      "item4": "mysticalworld:bark_acacia",
+      "item5": "minecraft:blaze_powder"
+    }
+  ]
+}

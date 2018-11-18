@@ -1,0 +1,19 @@
+{
+  "name": "Healing Aura",
+  "icon": "roots:bonfire",
+  "category": "pyre_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Everything alive in the immediate area is healed by the aura of the pyre."
+    },
+    {
+      "type": "pyre_template",
+      "item1": "mysticalworld:terra_moss",
+      "item2": "mysticalworld:bark_oak",
+      "item3": "minecraft:sapling",
+      "item4": "mysticalworld:bark_birch",
+      "item5": "mysticalworld:bark_birch"
+    }
+  ]
+}

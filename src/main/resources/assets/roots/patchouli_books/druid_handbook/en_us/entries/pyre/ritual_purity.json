@@ -1,0 +1,19 @@
+{
+  "name": "Purify",
+  "icon": "roots:bonfire",
+  "category": "pyre_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "An illness or curse on thy body leaves gaping hole. Cast this spell and cleanse thy soul."
+    },
+    {
+      "type": "pyre_template",
+      "item1": "mysticalworld:spirit_herb",
+      "item2": "mysticalworld:spirit_herb",
+      "item3": "mysticalworld:wildroot",
+      "item4": "minecraft:milk_bucket",
+      "item5": "minecraft:glass_bottle"
+    }
+  ]
+}
