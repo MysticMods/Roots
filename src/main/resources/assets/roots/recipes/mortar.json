@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "XCX",
+    " X "  ],
+  "key": {
+    "X": [
+      {
+        "item": "minecraft:cobblestone",
+        "data": 0
+      }
+    ],
+    "C": [
+      {
+        "item": "minecraft:coal",
+        "data": 1
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:mortar",
+    "data": 0
+  }
+}

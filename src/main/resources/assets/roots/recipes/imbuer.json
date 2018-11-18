@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S S",
+    " B ",
+    "S S"  ],
+  "key": {
+    "S": [
+      {
+        "item": "minecraft:stick",
+        "data": 0
+      }
+    ],
+    "B": [
+      {
+        "item": "minecraft:stone",
+        "data": 0
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:imbuer",
+    "data": 0
+  }
+}
