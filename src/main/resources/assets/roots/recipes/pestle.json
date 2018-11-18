@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  X",
+    "XX ",
+    "XX "  ],
+  "key": {
+    "X": [
+      {
+        "item": "minecraft:stone",
+        "data": 0
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:pestle",
+    "data": 0
+  }
+}
