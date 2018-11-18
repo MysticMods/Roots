@@ -1,0 +1,46 @@
+{
+  "components": [
+    {
+      "type": "item",
+      "item": "roots:bonfire",
+      "framed": false,
+      "x": 50,
+      "y": 60
+    },
+    {
+      "type": "item",
+      "item": "#item1",
+      "framed": false,
+      "x": 50,
+      "y": 20
+    },
+    {
+      "type": "item",
+      "item": "#item2",
+      "framed": false,
+      "x": 85,
+      "y": 45
+    },
+    {
+      "type": "item",
+      "item": "#item3",
+      "framed": false,
+      "x": 15,
+      "y": 45
+    },
+    {
+      "type": "item",
+      "item": "#item4",
+      "framed": false,
+      "x": 25,
+      "y": 90
+    },
+    {
+      "type": "item",
+      "item": "#item5",
+      "framed": false,
+      "x": 75,
+      "y": 90
+    }
+  ]
+}

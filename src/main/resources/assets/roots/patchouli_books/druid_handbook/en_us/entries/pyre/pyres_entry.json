@@ -1,0 +1,17 @@
+{
+  "name": "Pyre",
+  "icon": "roots:bonfire",
+  "category": "pyre_category",
+  "priority": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Rituals are higher level spells that require a magical bonfire. This bonfire is also called a pyre. Items are placed untop of the pyre. When the pyre is lit the ritual will commence. Often these rituals are also referred to as pyres."
+    },
+    {
+      "type":"crafting",
+      "recipe": "roots:pyre",
+      "title": "Pyre"
+    }
+  ]
+}

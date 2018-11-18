@@ -1,0 +1,11 @@
+{
+  "name": "Groves",
+  "icon": "roots:offertory_plate",
+  "category": "grove_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Groves are natural area's where the world of the fae overlaps with our own. Groves can be interacted with in multiple ways."
+    }
+  ]
+}
