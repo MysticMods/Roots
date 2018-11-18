@@ -1,0 +1,19 @@
+{
+  "name": "Time Stop",
+  "icon": "roots:petal_dust",
+  "category": "spell_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Prevents time from progressing in a region around where the spell is cast, for all creatures besides the caster."
+    },
+    {
+      "type": "spell_template",
+      "item1": "minecraft:nether_wart",
+      "item2": "minecraft:red_flower:8",
+      "item3": "minecraft:dye",
+      "item4": "mysticalworld:pereskia",
+      "item5": "mysticalworld:aubergine_seed"
+    }
+  ]
+}

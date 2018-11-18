@@ -1,0 +1,19 @@
+{
+  "name": "Dandelion Winds",
+  "icon": "roots:petal_dust",
+  "category": "spell_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Blasts forth a massive gust of wind that blows away the creatures before the caster."
+    },
+    {
+      "type": "spell_template",
+      "item1": "minecraft:feather",
+      "item2": "minecraft:yellow_flower",
+      "item3": "minecraft:snowball",
+      "item4": "mysticalworld:moonglow_leaf",
+      "item5": "minecraft:wheat"
+    }
+  ]
+}

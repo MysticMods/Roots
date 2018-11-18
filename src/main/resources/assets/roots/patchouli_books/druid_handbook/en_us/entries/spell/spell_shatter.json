@@ -1,0 +1,19 @@
+{
+  "name": "Shatter",
+  "icon": "roots:petal_dust",
+  "category": "spell_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Fires a beam of force into a targeted block nearby, instantly breaking it apart."
+    },
+    {
+      "type": "spell_template",
+      "item1": "minecraft:flint",
+      "item2": "minecraft:red_flower:3",
+      "item3": "minecraft:dye:15",
+      "item4": "mysticalworld:terra_moss",
+      "item5": "mysticalworld:wildroot"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Animal Harvest",
+  "icon": "mysticalworld:pelt",
+  "category": "pyre_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Animals in the area drop a piece of their animal component."
+    },
+    {
+      "type": "pyre_template",
+      "item1": "minecraft:wheat",
+      "item2": "minecraft:chicken",
+      "item3": "minecraft:melon",
+      "item4": "minecraft:wheat_seeds",
+      "item5": "mysticalworld:wildroot"
+    }
+  ]
+}

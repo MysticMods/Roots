@@ -1,0 +1,19 @@
+{
+  "name": "Mind Ward",
+  "icon": "roots:petal_dust",
+  "category": "spell_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Creates a floating ward above the creature the caster targets, preventing them from attacking the caster."
+    },
+    {
+      "type": "spell_template",
+      "item1": "minecraft:brown_mushroom",
+      "item2": "minecraft:red_flower:0",
+      "item3": "minecraft:red_mushroom",
+      "item4": "mysticalworld:aubergine_seed",
+      "item5": "minecraft:dye:3"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Rose Thorns",
+  "icon": "roots:petal_dust",
+  "category": "spell_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Throws a ball of glowing thorns forward. Upon landing, the ball of thorns will create a trap that will harm any creature that steps on it."
+    },
+    {
+      "type": "spell_template",
+      "item1": "minecraft:cactus",
+      "item2": "minecraft:double_plant:4",
+      "item3": "minecraft:bone",
+      "item4": "minecraft:fermented_spider_eye",
+      "item5": "mysticalworld:terra_moss"
+    }
+  ]
+}
