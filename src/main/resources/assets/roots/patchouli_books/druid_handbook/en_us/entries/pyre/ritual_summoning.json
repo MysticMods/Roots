@@ -1,0 +1,19 @@
+{
+  "name": "Summon Creatures",
+  "icon": "mysticalworld:pelt",
+  "category": "pyre_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Summon a creature depending on the item on the offertory plate."
+    },
+    {
+      "type": "pyre_template",
+      "item1": "minecraft:wheat",
+      "item2": "minecraft:egg",
+      "item3": "minecraft:ender_pearl",
+      "item4": "mysticalworld:wildroot",
+      "item5": "mysticalworld:fungus_cap"
+    }
+  ]
+}

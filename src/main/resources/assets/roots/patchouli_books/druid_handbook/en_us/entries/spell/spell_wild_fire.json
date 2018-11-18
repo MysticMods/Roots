@@ -1,0 +1,19 @@
+{
+  "name": "Wildfire",
+  "icon": "roots:petal_dust",
+  "category": "spell_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Spews forth a jet of fire from the tip of the staff."
+    },
+    {
+      "type": "spell_template",
+      "item1": "minecraft:dye:14",
+      "item2": "minecraft:red_flower:5",
+      "item3": "minecraft:gunpowder",
+      "item4": "minecraft:coal:1",
+      "item5": "mysticalworld:wildroot"
+    }
+  ]
+}

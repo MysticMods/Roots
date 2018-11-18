@@ -1,0 +1,19 @@
+{
+  "name": "Radiance",
+  "icon": "roots:petal_dust",
+  "category": "spell_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Radiates a tremendous beam of golden light from the tip of the staff. The scourge of the undead."
+    },
+    {
+      "type": "spell_template",
+      "item1": "minecraft:glowstone_dust",
+      "item2": "minecraft:double_plant",
+      "item3": "minecraft:beetroot_seeds",
+      "item4": "minecraft:rotten_flesh",
+      "item5": "mysticalworld:pereskia_bulb"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Acid Cloud",
+  "icon": "roots:petal_dust",
+  "category": "spell_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Conjures up a ring of burning gas around the caster. Poisoning and hurting anything that steps into the ring."
+    },
+    {
+      "type": "spell_template",
+      "item1": "minecraft:spider_eye",
+      "item2": "minecraft:red_flower:2",
+      "item3": "minecraft:slime_ball",
+      "item4": "mysticalworld:terra_moss",
+      "item5": "mysticalworld:wildroot"
+    }
+  ]
+}

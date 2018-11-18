@@ -1,0 +1,19 @@
+{
+  "name": "Light Drifter",
+  "icon": "roots:petal_dust",
+  "category": "spell_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Allows the caster to become ethereal, passing through solid objects, for a time."
+    },
+    {
+      "type": "spell_template",
+      "item1": "minecraft:ender_pearl",
+      "item2": "minecraft:red_flower:6",
+      "item3": "minecraft:string",
+      "item4": "mysticalworld:moonglow_leaf",
+      "item5": "mysticalworld:pereskia"
+    }
+  ]
+}

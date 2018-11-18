@@ -1,0 +1,19 @@
+{
+  "name": "Sense Animals",
+  "icon": "mysticalworld:pelt",
+  "category": "spell_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Animals in the near vicinity light up for you revealing their location."
+    },
+    {
+      "type": "spell_template",
+      "item1": "minecraft:carrot",
+      "item2": "minecraft:red_flower:0",
+      "item3": "minecraft:golden_carrot",
+      "item4": "mysticalworld:moonglow_seed",
+      "item5": "mysticalworld:moonglow_leaf"
+    }
+  ]
+}
