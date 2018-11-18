@@ -1,0 +1,19 @@
+{
+  "name": "Warding Protection",
+  "icon": "roots:bonfire",
+  "category": "pyre_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Preventing injury near the pyre."
+    },
+    {
+      "type": "pyre_template",
+      "item1": "minecraft:dye:15",
+      "item2": "mysticalworld:pereskia_bulb",
+      "item3": "mysticalworld:spirit_herb",
+      "item4": "mysticalworld:bark_oak",
+      "item5": "minecraft:iron_chestplate"
+    }
+  ]
+}
