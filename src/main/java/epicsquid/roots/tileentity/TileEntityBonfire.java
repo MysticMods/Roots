@@ -201,47 +201,18 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     if ((int) this.ticker % 20 == 0 && pickupDelay == 0) {
       List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class,
           new AxisAlignedBB(getPos().getX(), getPos().getY(), getPos().getZ(), getPos().getX() + 1, getPos().getY() + 1, getPos().getZ() + 1));
-      for (int i = 0; i < items.size(); i++) {
-        ItemStack stack = items.get(i).getItem();
-        boolean isFull = false;
-        boolean isEmpty = false;
-        while (stack.getCount() > 0 && !isFull && !isEmpty) {
-          isFull = true;
-          isEmpty = true;
-          int minStack = -1;
-          for (int j = 0; j < 5; j++) {
-            if (stack != ItemStack.EMPTY) {
-              isEmpty = false;
-              if (stack.getItem() == inventory.getStackInSlot(j).getItem() && stack.getItemDamage() == inventory.getStackInSlot(j).getItemDamage()) {
-                if (inventory.getStackInSlot(j).getCount() < inventory.getSlotLimit(j)) {
-                  isFull = false;
-                  if (minStack == -1) {
-                    minStack = j;
-                  } else {
-                    if (inventory.getStackInSlot(j).getCount() < inventory.getStackInSlot(minStack).getCount()) {
-                      minStack = j;
-                    }
-                  }
-                }
-              }
-            }
-          }
-          if (minStack != -1 && minStack < 5) {
-            if (inventory.getStackInSlot(minStack) != ItemStack.EMPTY && stack != ItemStack.EMPTY) {
-              ItemStack toInsert = stack.copy();
-              toInsert.setCount(1);
-              inventory.insertItem(minStack, toInsert, false);
-              markDirty();
-              PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
-              stack.shrink(1);
-              if (stack.getCount() == 0) {
-                stack = ItemStack.EMPTY;
-              }
-            }
+      for (EntityItem item : items) {
+        ItemStack stack = item.getItem();
+
+        for(int i = 0; i < this.inventory.getSlots(); i++){
+          if(this.inventory.getStackInSlot(i).isEmpty()){
+            ItemStack inputStack = stack.copy();
+            inputStack.setCount(1);
+            this.inventory.insertItem(i, inputStack, false);
+            stack.shrink(1);
           }
         }
 
-        items.get(i).setItem(stack);
         markDirty();
         PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
       }
