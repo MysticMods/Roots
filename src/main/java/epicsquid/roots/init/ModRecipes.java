@@ -8,11 +8,13 @@ import javax.annotation.Nonnull;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
+import epicsquid.roots.recipe.CraftingRecipe;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.recipe.PowderPouchFillRecipe;
 import epicsquid.roots.recipe.SpellRecipe;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
@@ -24,6 +26,7 @@ public class ModRecipes {
 
   private static ArrayList<MortarRecipe> mortarRecipes = new ArrayList<>();
   private static ArrayList<SpellRecipe> spellRecipes = new ArrayList<>();
+  private static ArrayList<CraftingRecipe> craftingRecipes = new ArrayList<>();
 
   private static ResourceLocation getRL(@Nonnull String s) {
     return new ResourceLocation(Roots.MODID + ":" + s);
@@ -86,12 +89,46 @@ public class ModRecipes {
     spellRecipes.add(recipe);
   }
 
+  public static CraftingRecipe getCraftingRecipe(List<ItemStack> items) {
+    for (CraftingRecipe craftingRecipe : craftingRecipes) {
+      if (craftingRecipe.matches(items)) {
+        return craftingRecipe;
+      }
+    }
+    return null;
+  }
+
+  private static void addCraftingRecipe(CraftingRecipe craftingRecipe) {
+    for (CraftingRecipe spellRecipe : craftingRecipes) {
+      if (craftingRecipe.matches(craftingRecipe.getIngredients())) {
+        System.out.println("A Crafting Recipe is already registered");
+        return;
+      }
+    }
+
+    craftingRecipes.add(craftingRecipe);
+  }
+
   /**
    * Register all recipes
    */
   public static void initRecipes(@Nonnull RegisterModRecipesEvent event) {
     addMortarRecipe(new MortarRecipe(new ItemStack(Items.DYE, 1, 12), new ItemStack[] { new ItemStack(ModItems.carapace) }, 1, 1, 1, 1, 1, 1));
 
+    initSpellRecipes();
+    initCraftingRecipes();
+
+    event.getRegistry().register(new PowderPouchFillRecipe().setRegistryName(getRL("powder_pouch_fill")));
+
+  }
+
+  private static void initCraftingRecipes(){
+    addCraftingRecipe(new CraftingRecipe(new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.unending_bowl)))
+    .addIngredients(new ItemStack(Items.WATER_BUCKET), new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.mortar)), new ItemStack(ModItems.moonglow_leaf),
+        new ItemStack(ModItems.terra_moss), new ItemStack(ModItems.spirit_herb)));
+  }
+
+  private static void initSpellRecipes(){
     addSpellRecipe(new SpellRecipe("spell_wild_fire")
         .addIngredients(new ItemStack(Items.DYE, 1, 14), new ItemStack(Blocks.RED_FLOWER, 1, 5), new ItemStack(Items.GUNPOWDER, 1),
             new ItemStack(Items.COAL, 1, 1), new ItemStack(ModItems.wildroot, 1)));
@@ -140,8 +177,5 @@ public class ModRecipes {
     addSpellRecipe(new SpellRecipe("spell_terra_transmutation")
         .addIngredients(new ItemStack(Items.REDSTONE),new ItemStack(Blocks.RED_FLOWER, 1, 0),new ItemStack(Items.DYE),
             new ItemStack(ModItems.terra_moss),new ItemStack(ModItems.wildroot)));
-
-    event.getRegistry().register(new PowderPouchFillRecipe().setRegistryName(getRL("powder_pouch_fill")));
-
   }
 }
