@@ -1,0 +1,19 @@
+{
+  "name": "Terra Infusion",
+  "icon": "roots:petal_dust",
+  "category": "spell_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Fires a beam of magic into stone giving it magical properties and turning it into runestone"
+    },
+    {
+      "type": "spell_template",
+      "item1": "minecraft:redstone",
+      "item2": "minecraft:red_flower",
+      "item3": "minecraft:dye",
+      "item4": "mysticalworld:terra_moss",
+      "item5": "mysticalworld:wildroot"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 package epicsquid.roots.recipe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import epicsquid.mysticallib.util.ListUtil;
@@ -16,6 +17,11 @@ public class SpellRecipe {
 
   public SpellRecipe addIngredient(ItemStack stack) {
     this.ingredients.add(stack);
+    return this;
+  }
+
+  public SpellRecipe addIngredients(ItemStack... stack) {
+    this.ingredients.addAll(Arrays.asList(stack));
     return this;
   }
 
