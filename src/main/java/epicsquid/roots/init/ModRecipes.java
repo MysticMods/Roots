@@ -137,7 +137,7 @@ public class ModRecipes {
     addSpellRecipe(new SpellRecipe("spell_sense_animals")
         .addIngredients(new ItemStack(Items.CARROT, 1), new ItemStack(Blocks.RED_FLOWER, 1, 0), new ItemStack(ModItems.moonglow_seed, 1),
             new ItemStack(ModItems.moonglow_leaf, 1), new ItemStack(Items.GOLDEN_CARROT, 1)));
-    addSpellRecipe(new SpellRecipe("spell_terra_infusion")
+    addSpellRecipe(new SpellRecipe("spell_terra_transmutation")
         .addIngredients(new ItemStack(Items.REDSTONE),new ItemStack(Blocks.RED_FLOWER, 1, 0),new ItemStack(Items.DYE),
             new ItemStack(ModItems.terra_moss),new ItemStack(ModItems.wildroot)));
 

@@ -11,9 +11,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
 
-public class SpellTerraInfusion extends SpellBase{
+public class SpellTerraTransmutation extends SpellBase{
 
-  public SpellTerraInfusion(String name) {
+  public SpellTerraTransmutation(String name) {
     super(name, TextFormatting.GRAY, 0, 0, 0, 211 / 255f,211 / 255f,211 / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 5;
