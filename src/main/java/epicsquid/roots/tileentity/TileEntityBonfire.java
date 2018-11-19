@@ -10,7 +10,9 @@ import epicsquid.mysticallib.network.MessageTEUpdate;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.recipe.CraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.block.state.IBlockState;
@@ -34,6 +36,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   private float pickupDelay = 0;
   private int burnTime = 0;
   private boolean doBigFlame = false;
+  private ItemStack craftingResult = ItemStack.EMPTY;
 
   private Random random = new Random();
 
@@ -57,6 +60,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     tag.setTag("inventory", inventory.serializeNBT());
     tag.setInteger("burnTime", burnTime);
     tag.setBoolean("doBigFlame", doBigFlame);
+    tag.setTag("craftingResult", this.craftingResult.serializeNBT());
     return tag;
   }
 
@@ -66,6 +70,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     inventory.deserializeNBT(tag.getCompoundTag("inventory"));
     burnTime = tag.getInteger("burnTime");
     doBigFlame = tag.getBoolean("doBigFlame");
+    this.craftingResult = new ItemStack(tag.getCompoundTag("craftingResult"));
   }
 
   @Override
@@ -93,6 +98,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         for (int i = 0; i < inventory.getSlots(); i++) {
           stacks.add(inventory.getStackInSlot(i));
         }
+
         RitualBase ritual = RitualRegistry.getRitual(stacks);
         if (ritual != null) {
           if (ritual.canFire(world, pos, player)) {
@@ -105,6 +111,18 @@ public class TileEntityBonfire extends TileBase implements ITickable {
             markDirty();
             PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
           }
+        }
+
+        CraftingRecipe recipe = ModRecipes.getCraftingRecipe(stacks);
+        if(recipe != null){
+          this.craftingResult = recipe.getResult();
+          this.burnTime = 200;
+          this.doBigFlame = true;
+          for (int i = 0; i < inventory.getSlots(); i++) {
+            inventory.extractItem(i, 1, false);
+          }
+          markDirty();
+          PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
         }
       } else {
         for (int i = 0; i < 5; i++) {
@@ -171,6 +189,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     if (burnTime > 0) {
       burnTime--;
       if (burnTime == 0) {
+        /*
         List<ItemStack> stacks = new ArrayList<>();
         for (int i = 0; i < inventory.getSlots(); i++) {
           stacks.add(inventory.getStackInSlot(i));
@@ -188,6 +207,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
             PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
           }
         }
+         */
+        world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, this.craftingResult));
+        this.craftingResult = ItemStack.EMPTY;
       }
       if (world.isRemote) {
         for (int i = 0; i < 2; i++) {
