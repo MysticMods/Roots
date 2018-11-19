@@ -14,10 +14,12 @@ import epicsquid.roots.block.BlockMortar;
 import epicsquid.roots.block.BlockOffertoryPlate;
 import epicsquid.roots.block.BlockRunestone;
 import epicsquid.roots.block.BlockStructureMarker;
+import epicsquid.roots.block.BlockUnendingBowl;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import epicsquid.roots.tileentity.TileEntityImbuer;
 import epicsquid.roots.tileentity.TileEntityMortar;
 import epicsquid.roots.tileentity.TileEntityOffertoryPlate;
+import epicsquid.roots.tileentity.TileEntityUnendingBowl;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -25,7 +27,7 @@ import net.minecraft.block.material.Material;
 public class ModBlocks {
 
   // All block
-  public static Block mortar, bonfire, runestone_brick, chiseled_runestone, imbuer, structure_marker, offertory_plate;
+  public static Block mortar, bonfire, runestone_brick, chiseled_runestone, imbuer, structure_marker, offertory_plate, unending_bowl;
 
   //Runestones
   public static Block runestone, runestone_wild, runestone_natural, runestone_mystic, runestone_fungal, runestone_forbidden, runestone_fairy;
@@ -55,6 +57,8 @@ public class ModBlocks {
     event.addBlock(chiseled_runestone = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "chiseled_runestone")).setCreativeTab(Roots.tab);
     event.addBlock(structure_marker = new BlockStructureMarker());
     event.addBlock(offertory_plate = new BlockOffertoryPlate(Material.ROCK, SoundType.STONE, 1.4f, "offertory_plate", TileEntityOffertoryPlate.class))
+        .setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(unending_bowl = new BlockUnendingBowl(Material.ROCK, SoundType.STONE, 1.4f, "unending_bowl", TileEntityUnendingBowl.class))
         .setCreativeTab(Roots.tab).setLightOpacity(0);
 
     //Decoration
