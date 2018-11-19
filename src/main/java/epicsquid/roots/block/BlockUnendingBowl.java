@@ -33,6 +33,6 @@ public class BlockUnendingBowl extends BlockTEBase {
   @Nonnull
   @Override
   public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
-    return new AxisAlignedBB(0.125, 0, 0.125, 0.875, 0.375, 0.875);
+    return new AxisAlignedBB(0.125, 0, 0.125, 0.875, 0.3125, 0.875);
   }
 }
