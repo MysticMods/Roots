@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Runestone is a magic infused stone that is often used in structures build by druids. These structures range from magical ones to normal housings and temples."
+      "text": "Runestone is a magic infused stone that is often used in structures build by druids. These structures range from magical ones to normal housings and temples. Runestone is made with the $(l:spell/spell_terra_infusion) Terra Infusion $()spell."
     }
   ]
 }
