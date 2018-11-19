@@ -3,14 +3,12 @@ package epicsquid.roots.spell;
 import java.util.HashMap;
 import java.util.Map;
 
-import epicsquid.mysticalworld.init.ModItems;
-
 public class SpellRegistry {
   public static Map<String, SpellBase> spellRegistry = new HashMap<>();
 
   public static SpellBase spell_wild_fire, spell_sanctuary, spell_dandelion_winds, spell_rose_thorns, spell_shatter, spell_petal_shell, spell_time_stop,
       spell_gravity_boost, spell_life_drain, spell_acid_cloud, spell_growth_infusion, spell_mind_ward, spell_radiance, spell_light_drifter,
-      spell_sense_animals, spell_terra_infusion;
+      spell_sense_animals, spell_terra_transmutation;
 
   public static void init() {
     spellRegistry.put("spell_wild_fire", spell_wild_fire = new SpellWildfire("spell_wild_fire"));
@@ -28,7 +26,7 @@ public class SpellRegistry {
     spellRegistry.put("spell_radiance", spell_radiance = new SpellRadiance("spell_radiance"));
     spellRegistry.put("spell_light_drifter", spell_light_drifter = new SpellLightDrifter("spell_light_drifter"));
     spellRegistry.put("spell_sense_animals", spell_sense_animals = new SpellSenseAnimals("spell_sense_animals"));
-    spellRegistry.put("spell_terra_infusion", spell_terra_infusion = new SpellTerraInfusion("spell_terra_infusion"));
+    spellRegistry.put("spell_terra_transmutation", spell_terra_transmutation = new SpellTerraTransmutation("spell_terra_transmutation"));
   }
 
 }
