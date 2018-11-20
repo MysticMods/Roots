@@ -189,26 +189,14 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     if (burnTime > 0) {
       burnTime--;
       if (burnTime == 0) {
-        /*
-        List<ItemStack> stacks = new ArrayList<>();
-        for (int i = 0; i < inventory.getSlots(); i++) {
-          stacks.add(inventory.getStackInSlot(i));
+        if(!world.isRemote){
+          EntityItem item = new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, new ItemStack(this.craftingResult.getItem(), this.craftingResult.getCount()));
+          item.setCustomNameTag("bonfire");
+          world.spawnEntity(item);
         }
-        RitualBase ritual = RitualRegistry.getRitual(stacks);
-        if (ritual != null) {
-          if (ritual.canFire(world, getPos(), null)) {
-            ritual.doEffect(world, pos);
-            this.burnTime = ritual.getDuration();
-            for (int i = 0; i < inventory.getSlots(); i++) {
-              inventory.extractItem(i, 1, false);
-            }
-            this.doBigFlame = true;
-            markDirty();
-            PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
-          }
-        }
-         */
-        world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, this.craftingResult));
+
+        System.out.println("Has spawned");
+
         this.craftingResult = ItemStack.EMPTY;
       }
       if (world.isRemote) {
@@ -225,7 +213,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           new AxisAlignedBB(getPos().getX(), getPos().getY(), getPos().getZ(), getPos().getX() + 1, getPos().getY() + 1, getPos().getZ() + 1));
       for (EntityItem item : items) {
         ItemStack stack = item.getItem();
-
+        if(item.getCustomNameTag().equalsIgnoreCase("bonfire")){
+          continue;
+        }
         for(int i = 0; i < this.inventory.getSlots(); i++){
           if(this.inventory.getStackInSlot(i).isEmpty()){
             ItemStack inputStack = stack.copy();

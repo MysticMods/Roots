@@ -99,8 +99,8 @@ public class ModRecipes {
   }
 
   private static void addCraftingRecipe(CraftingRecipe craftingRecipe) {
-    for (CraftingRecipe spellRecipe : craftingRecipes) {
-      if (craftingRecipe.matches(craftingRecipe.getIngredients())) {
+    for (CraftingRecipe existingRecipe : craftingRecipes) {
+      if (existingRecipe.matches(craftingRecipe.getIngredients())) {
         System.out.println("A Crafting Recipe is already registered");
         return;
       }
