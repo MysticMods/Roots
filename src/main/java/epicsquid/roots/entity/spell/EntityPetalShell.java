@@ -63,7 +63,7 @@ public class EntityPetalShell extends Entity {
     compound.setTag("id", net.minecraft.nbt.NBTUtil.createUUIDTag(playerId));
   }
 
-  public static DataParameter<Integer> getCharge() {
+  public DataParameter<Integer> getCharge() {
     return charge;
   }
 }
