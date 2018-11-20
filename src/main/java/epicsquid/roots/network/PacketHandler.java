@@ -7,6 +7,7 @@ import epicsquid.roots.network.fx.MessageLifeDrainAbsorbFX;
 import epicsquid.roots.network.fx.MessageLifeInfusionFX;
 import epicsquid.roots.network.fx.MessageLightDrifterFX;
 import epicsquid.roots.network.fx.MessageLightDrifterSync;
+import epicsquid.roots.network.fx.MessageMindWardRingFX;
 import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
 import epicsquid.roots.network.fx.MessageRadianceBeamFX;
 import epicsquid.roots.network.fx.MessageSanctuaryBurstFX;
@@ -32,5 +33,6 @@ public class PacketHandler {
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageLightDrifterFX.MessageHolder.class, MessageLightDrifterFX.class, Side.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageLightDrifterSync.MessageHolder.class, MessageLightDrifterSync.class, Side.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessagePlayerGroveUpdate.MessageHolder.class, MessagePlayerGroveUpdate.class, Side.CLIENT);
+    epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageMindWardRingFX.MessageHolder.class, MessageMindWardRingFX.class, Side.CLIENT);
   }
 }
