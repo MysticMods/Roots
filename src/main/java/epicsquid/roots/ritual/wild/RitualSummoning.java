@@ -100,6 +100,6 @@ public class RitualSummoning extends RitualBase {
   @Override
   public boolean canFire(World world, BlockPos pos, @Nullable EntityPlayer player) {
     //todo: add wild grove trust needed
-    return getThreeHighStandingStones(world, pos, ModBlocks.runestone_wild) >= 3;
+    return getStandingStones(world, pos, 3, ModBlocks.runestone_wild) >= 3;
   }
 }

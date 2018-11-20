@@ -18,7 +18,7 @@ public class RitualFireStorm extends RitualBase {
 
   @Override
   public boolean canFire(World world, BlockPos pos, EntityPlayer player) {
-    return this.getThreeHighStandingStones(world, pos) >= 3;
+    return this.getStandingStones(world, pos, 3, null) >= 3;
   }
 
   @Override

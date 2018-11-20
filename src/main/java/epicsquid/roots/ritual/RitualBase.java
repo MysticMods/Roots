@@ -19,7 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public abstract class RitualBase {
-  public static int OFFERTORY_RADIUS = 6;
+  protected static int OFFERTORY_RADIUS = 6;
 
   private List<ItemStack> ingredients = new ArrayList<>();
   private String name;
@@ -65,51 +65,29 @@ public abstract class RitualBase {
     }
   }
 
-  protected int getThreeHighStandingStones(World world, BlockPos pos) {
+  protected int getStandingStones(World world, BlockPos pos, int height, @Nullable Block standingMaterial) {
+    Block material = standingMaterial;
+    if(material == null){
+      material = ModBlocks.runestone;
+    }
     int threeHighCount = 0;
     for (int i = -6; i < 7 + 1; i++) {
       for (int j = -6; j < 7 + 1; j++) {
-        IBlockState state = world.getBlockState(pos.add(i, 2, j));
+        IBlockState state = world.getBlockState(pos.add(i, height-1, j));
         if (state.getBlock() == ModBlocks.chiseled_runestone) {
-          if (world.getBlockState(pos.add(i, 1, j)).getBlock() == ModBlocks.runestone
-              && world.getBlockState(pos.add(i, 0, j)).getBlock() == ModBlocks.runestone) {
+          boolean stoneFound = true;
+          for(int y = height-1; y > 0; y++){
+            if (world.getBlockState(pos.add(i, 1, j)).getBlock() != material){
+              stoneFound = false;
+            }
+          }
+          if(stoneFound){
             threeHighCount++;
           }
         }
       }
     }
     return threeHighCount;
-  }
-
-  protected int getThreeHighStandingStones(World world, BlockPos pos, Block rune) {
-    int threeHighCount = 0;
-    for (int i = -6; i < 7 + 1; i++) {
-      for (int j = -6; j < 7 + 1; j++) {
-        IBlockState state = world.getBlockState(pos.add(i, 2, j));
-        if (state.getBlock() == ModBlocks.chiseled_runestone) {
-          if (world.getBlockState(pos.add(i, 1, j)).getBlock() == rune && world.getBlockState(pos.add(i, 0, j)).getBlock() == rune) {
-            threeHighCount++;
-          }
-        }
-      }
-    }
-    return threeHighCount;
-  }
-
-  protected int getFourHighStandingStones(World world, BlockPos pos) {
-    int fourHighCount = 0;
-    for (int i = -6; i < 7 + 1; i++) {
-      for (int j = -6; j < 7 + 1; j++) {
-        IBlockState state = world.getBlockState(pos.add(i, 3, j));
-        if (state.getBlock() == ModBlocks.chiseled_runestone) {
-          if (world.getBlockState(pos.add(i, 2, j)).getBlock() == ModBlocks.runestone && world.getBlockState(pos.add(i, 1, j)).getBlock() == ModBlocks.runestone
-              && world.getBlockState(pos.add(i, 0, j)).getBlock() == ModBlocks.runestone) {
-            fourHighCount++;
-          }
-        }
-      }
-    }
-    return fourHighCount;
   }
 
   public int getDuration() {
