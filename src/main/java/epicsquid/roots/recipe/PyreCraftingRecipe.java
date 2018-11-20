@@ -7,20 +7,20 @@ import java.util.List;
 import epicsquid.mysticallib.util.ListUtil;
 import net.minecraft.item.ItemStack;
 
-public class CraftingRecipe {
+public class PyreCraftingRecipe {
   private List<ItemStack> ingredients = new ArrayList<>();
   private ItemStack result;
 
-  public CraftingRecipe(ItemStack result) {
+  public PyreCraftingRecipe(ItemStack result) {
     this.result = result;
   }
 
-  public CraftingRecipe addIngredient(ItemStack stack) {
+  public PyreCraftingRecipe addIngredient(ItemStack stack) {
     this.ingredients.add(stack);
     return this;
   }
 
-  public CraftingRecipe addIngredients(ItemStack... stack) {
+  public PyreCraftingRecipe addIngredients(ItemStack... stack) {
     this.ingredients.addAll(Arrays.asList(stack));
     return this;
   }

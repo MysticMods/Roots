@@ -12,7 +12,7 @@ import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.recipe.CraftingRecipe;
+import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.block.state.IBlockState;
@@ -113,7 +113,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           }
         }
 
-        CraftingRecipe recipe = ModRecipes.getCraftingRecipe(stacks);
+        PyreCraftingRecipe recipe = ModRecipes.getCraftingRecipe(stacks);
         if(recipe != null){
           this.craftingResult = recipe.getResult();
           this.burnTime = 200;

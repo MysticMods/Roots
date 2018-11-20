@@ -8,7 +8,7 @@ import javax.annotation.Nonnull;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
-import epicsquid.roots.recipe.CraftingRecipe;
+import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.recipe.PowderPouchFillRecipe;
 import epicsquid.roots.recipe.SpellRecipe;
@@ -26,7 +26,7 @@ public class ModRecipes {
 
   private static ArrayList<MortarRecipe> mortarRecipes = new ArrayList<>();
   private static ArrayList<SpellRecipe> spellRecipes = new ArrayList<>();
-  private static ArrayList<CraftingRecipe> craftingRecipes = new ArrayList<>();
+  private static ArrayList<PyreCraftingRecipe> pyreCraftingRecipes = new ArrayList<>();
 
   private static ResourceLocation getRL(@Nonnull String s) {
     return new ResourceLocation(Roots.MODID + ":" + s);
@@ -89,24 +89,24 @@ public class ModRecipes {
     spellRecipes.add(recipe);
   }
 
-  public static CraftingRecipe getCraftingRecipe(List<ItemStack> items) {
-    for (CraftingRecipe craftingRecipe : craftingRecipes) {
-      if (craftingRecipe.matches(items)) {
-        return craftingRecipe;
+  public static PyreCraftingRecipe getCraftingRecipe(List<ItemStack> items) {
+    for (PyreCraftingRecipe pyreCraftingRecipe : pyreCraftingRecipes) {
+      if (pyreCraftingRecipe.matches(items)) {
+        return pyreCraftingRecipe;
       }
     }
     return null;
   }
 
-  private static void addCraftingRecipe(CraftingRecipe craftingRecipe) {
-    for (CraftingRecipe existingRecipe : craftingRecipes) {
-      if (existingRecipe.matches(craftingRecipe.getIngredients())) {
+  private static void addCraftingRecipe(PyreCraftingRecipe pyreCraftingRecipe) {
+    for (PyreCraftingRecipe existingRecipe : pyreCraftingRecipes) {
+      if (existingRecipe.matches(pyreCraftingRecipe.getIngredients())) {
         System.out.println("A Crafting Recipe is already registered");
         return;
       }
     }
 
-    craftingRecipes.add(craftingRecipe);
+    pyreCraftingRecipes.add(pyreCraftingRecipe);
   }
 
   /**
@@ -123,7 +123,7 @@ public class ModRecipes {
   }
 
   private static void initCraftingRecipes(){
-    addCraftingRecipe(new CraftingRecipe(new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.unending_bowl)))
+    addCraftingRecipe(new PyreCraftingRecipe(new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.unending_bowl)))
     .addIngredients(new ItemStack(Items.WATER_BUCKET), new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.mortar)), new ItemStack(ModItems.moonglow_leaf),
         new ItemStack(ModItems.terra_moss), new ItemStack(ModItems.spirit_herb)));
   }

@@ -64,6 +64,13 @@ tile.chiseled_runestone.name=Chiseled Runestone
 tile.fairy_dust.name=Fairy Dust
 tile.offertory_plate.name=Offering Plate
 
+tile.runestone_stairs.name=Runestone Stairs
+tile.runestone_slab.name=Runestone Slab
+tile.runestone_wall.name=Runestone Wall
+tile.runestone_brick_stairs.name=Runestone Brick Stairs
+tile.runestone_brick_slab.name=Runestone Brick Slab
+tile.runestone_brick_wall.name=Runestone Brick Wall
+
 entity.deer.name=Deer
 entity.sprout.name=Sprout
 entity.vile_shade.name=Vile Shade
