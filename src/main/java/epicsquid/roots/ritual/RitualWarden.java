@@ -18,7 +18,7 @@ public class RitualWarden extends RitualBase {
 
   @Override
   public boolean canFire(World world, BlockPos pos, EntityPlayer player) {
-    return this.getThreeHighStandingStones(world, pos) >= 3 && this.getFourHighStandingStones(world, pos) >= 3;
+    return this.getStandingStones(world, pos, 3, null) >= 3 && this.getStandingStones(world, pos, 4, null) >= 3;
   }
 
   @Override
