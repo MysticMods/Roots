@@ -6,6 +6,9 @@ import epicsquid.roots.util.Constants;
 import epicsquid.roots.network.fx.MessageLightDrifterFX;
 import epicsquid.roots.network.fx.MessageLightDrifterSync;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameType;
 
@@ -15,8 +18,16 @@ public class SpellLightDrifter extends SpellBase {
     super(name, TextFormatting.AQUA, 196f / 255f, 240f / 255f, 255f / 255f, 32f / 255f, 64f / 255f, 96f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 200;
+
     addCost(ModItems.pereskia, 0.5f);
     addCost(ModItems.wildroot, 0.25f);
+    addIngredients(
+        new ItemStack(Items.ENDER_PEARL, 1),
+        new ItemStack(Blocks.RED_FLOWER, 1, 6),
+        new ItemStack(Items.STRING, 1),
+        new ItemStack(ModItems.moonglow_leaf, 1),
+        new ItemStack(ModItems.pereskia, 1)
+    );
   }
 
   @Override

@@ -8,12 +8,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class RitualFrost extends RitualBase {
+public class  RitualFrost extends RitualBase {
 
   public RitualFrost(String name, int duration) {
     super(name, duration);
-    addIngredients(new ItemStack(Items.SNOWBALL, 1), new ItemStack(Blocks.PACKED_ICE, 1), new ItemStack(Blocks.SNOW, 1), new ItemStack(ModItems.bark_acacia, 1),
-        new ItemStack(ModItems.bark_acacia, 1));
+    addIngredients(
+        new ItemStack(Items.SNOWBALL, 1),
+        new ItemStack(Blocks.PACKED_ICE, 1),
+        new ItemStack(Blocks.SNOW, 1),
+        new ItemStack(ModItems.bark_acacia, 1),
+        new ItemStack(ModItems.bark_acacia, 1)
+    );
   }
 
   @Override

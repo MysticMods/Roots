@@ -53,12 +53,12 @@ public class MessageSanctuaryBurstFX implements IMessage {
       for (int k = 0; k < 10; k++) {
         if (Util.rand.nextBoolean()) {
           ParticleUtil.spawnParticlePetal(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f),
-              0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellRegistry.spell_sanctuary.red1 * 255.0f,
-              SpellRegistry.spell_sanctuary.green1 * 255.0f, SpellRegistry.spell_sanctuary.blue1 * 255.0f, 0.5f, 5f, 14);
+              0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellRegistry.spell_sanctuary.getRed1() * 255.0f,
+              SpellRegistry.spell_sanctuary.getGreen1() * 255.0f, SpellRegistry.spell_sanctuary.getBlue1() * 255.0f, 0.5f, 5f, 14);
         } else {
           ParticleUtil.spawnParticlePetal(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f),
-              0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellRegistry.spell_sanctuary.red2 * 255.0f,
-              SpellRegistry.spell_sanctuary.green2 * 255.0f, SpellRegistry.spell_sanctuary.blue2 * 255.0f, 0.5f, 5f, 14);
+              0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellRegistry.spell_sanctuary.getRed2() * 255.0f,
+              SpellRegistry.spell_sanctuary.getGreen2() * 255.0f, SpellRegistry.spell_sanctuary.getBlue2() * 255.0f, 0.5f, 5f, 14);
         }
       }
       return null;

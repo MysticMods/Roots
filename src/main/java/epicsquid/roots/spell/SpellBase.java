@@ -1,61 +1,33 @@
 package epicsquid.roots.spell;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import epicsquid.mysticallib.util.ListUtil;
+import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.util.PowderInventoryUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 
-public class SpellBase {
-  public float red1, green1, blue1;
-  public float red2, green2, blue2;
-  public TextFormatting textColor;
-  public String name;
-  public EnumCastType castType = EnumCastType.INSTANTANEOUS;
-  public int cooldown = 20;
-  public Map<String, Double> costs = new HashMap<>();
+public abstract class SpellBase {
+  private float red1, green1, blue1;
+  private float red2, green2, blue2;
+  private String name;
+  protected int cooldown = 20;
 
-  public static enum EnumCastType {
+  private TextFormatting textColor;
+  protected EnumCastType castType = EnumCastType.INSTANTANEOUS;
+  private Map<String, Double> costs = new HashMap<>();
+  private List<ItemStack> ingredients = new ArrayList<>();
+
+  public enum EnumCastType {
     INSTANTANEOUS, CONTINUOUS
-  }
-
-  public boolean costsMet(EntityPlayer player) {
-    boolean matches = true;
-    for (int i = 0; i < costs.size(); i++) {
-      String s = costs.keySet().toArray(new String[costs.size()])[i];
-      double d = costs.values().toArray(new Double[costs.size()])[i];
-      matches = matches && PowderInventoryUtil.getPowderTotal(player, s) >= d;
-    }
-    return matches && costs.size() > 0 || player.capabilities.isCreativeMode;
-  }
-
-  public void enactCosts(EntityPlayer player) {
-    for (int i = 0; i < costs.size(); i++) {
-      String s = costs.keySet().toArray(new String[costs.size()])[i];
-      double d = costs.values().toArray(new Double[costs.size()])[i];
-      PowderInventoryUtil.removePowder(player, s, d);
-    }
-  }
-
-  public void enactTickCosts(EntityPlayer player) {
-    for (int i = 0; i < costs.size(); i++) {
-      String s = costs.keySet().toArray(new String[costs.size()])[i];
-      double d = costs.values().toArray(new Double[costs.size()])[i];
-      PowderInventoryUtil.removePowder(player, s, d / 20.0);
-    }
-  }
-
-  public void addToolTip(List<String> tooltip) {
-    tooltip.add("" + textColor + TextFormatting.BOLD + I18n.format("roots.spell." + name + ".name") + TextFormatting.RESET);
-    for (int i = 0; i < costs.size(); i++) {
-      String s = costs.keySet().toArray(new String[costs.size()])[i];
-      double d = costs.values().toArray(new Double[costs.size()])[i];
-      tooltip.add(I18n.format(s + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
-    }
   }
 
   public SpellBase(String name, TextFormatting textColor, float r1, float g1, float b1, float r2, float g2, float b2) {
@@ -69,12 +41,100 @@ public class SpellBase {
     this.textColor = textColor;
   }
 
+  public SpellBase addIngredients(ItemStack... stack) {
+    Collections.addAll(ingredients, stack);
+    return this;
+  }
+
+  public boolean costsMet(EntityPlayer player) {
+    boolean matches = true;
+    for(Map.Entry<String, Double> entry : this.costs.entrySet()){
+      String s = entry.getKey();
+      double d = entry.getValue();
+      matches = matches && PowderInventoryUtil.getPowderTotal(player, s) >= d;
+    }
+    return matches && costs.size() > 0 || player.capabilities.isCreativeMode;
+  }
+
+  public void enactCosts(EntityPlayer player) {
+    for(Map.Entry<String, Double> entry : this.costs.entrySet()){
+      String s = entry.getKey();
+      double d = entry.getValue();
+      PowderInventoryUtil.removePowder(player, s, d);
+    }
+  }
+
+  public void enactTickCosts(EntityPlayer player) {
+    for(Map.Entry<String, Double> entry : this.costs.entrySet()){
+      String s = entry.getKey();
+      double d = entry.getValue();
+      PowderInventoryUtil.removePowder(player, s, d / 20.0);
+    }
+  }
+
+  public void addToolTip(List<String> tooltip) {
+    tooltip.add("" + textColor + TextFormatting.BOLD + I18n.format("roots.spell." + name + ".name") + TextFormatting.RESET);
+    for(Map.Entry<String, Double> entry : this.costs.entrySet()){
+      String s = entry.getKey();
+      double d = entry.getValue();
+      tooltip.add(I18n.format(s + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
+    }
+  }
+
   public SpellBase addCost(Item herb, double amount) {
     costs.put(herb.getUnlocalizedName(), amount);
     return this;
   }
 
-  public void cast(EntityPlayer caster) {
-    //
+  public boolean matchesIngredients(List<ItemStack> ingredients) {
+    return ListUtil.stackListsMatch(ingredients, this.ingredients);
   }
+
+  public abstract void cast(EntityPlayer caster);
+
+  public float getRed1() {
+    return red1;
+  }
+
+  public float getGreen1() {
+    return green1;
+  }
+
+  public float getBlue1() {
+    return blue1;
+  }
+
+  public float getRed2() {
+    return red2;
+  }
+
+  public float getGreen2() {
+    return green2;
+  }
+
+  public float getBlue2() {
+    return blue2;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public int getCooldown() {
+    return cooldown;
+  }
+
+  public TextFormatting getTextColor() {
+    return textColor;
+  }
+
+  public EnumCastType getCastType() {
+    return castType;
+  }
+
+  public Map<String, Double> getCosts() {
+    return costs;
+  }
+
+
 }

@@ -13,7 +13,7 @@ public class SpellEvent extends Event {
     super();
     this.player = player;
     this.spell = spell;
-    this.cooldown = spell.cooldown;
+    this.cooldown = spell.getCooldown();
   }
 
   public EntityPlayer getPlayer() {

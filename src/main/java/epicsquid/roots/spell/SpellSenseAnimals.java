@@ -6,7 +6,10 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.init.ModItems;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextFormatting;
 
@@ -16,7 +19,15 @@ public class SpellSenseAnimals extends SpellBase {
     super(name, TextFormatting.WHITE, 255f / 255f, 255f / 255f, 255f / 255f, 10f / 255f, 196f / 255f, 10f / 255f);
     this.castType = EnumCastType.INSTANTANEOUS;
     this.cooldown = 100;
+
     addCost(ModItems.wildroot, 0.25f);
+    addIngredients(
+        new ItemStack(Items.CARROT, 1),
+        new ItemStack(Blocks.RED_FLOWER, 1, 0),
+        new ItemStack(ModItems.moonglow_seed, 1),
+        new ItemStack(ModItems.moonglow_leaf, 1),
+        new ItemStack(Items.GOLDEN_CARROT, 1)
+    );
   }
 
   @Override
@@ -25,6 +36,5 @@ public class SpellSenseAnimals extends SpellBase {
     for(EntityAnimal animal : animals){
       animal.addPotionEffect( new PotionEffect(MobEffects.GLOWING, 20*20, 0));
     }
-    super.cast(caster);
   }
 }

@@ -67,7 +67,7 @@ public class ItemStaff extends ItemBase {
             SpellEvent event = new SpellEvent(player, spell);
             MinecraftForge.EVENT_BUS.post(event);
             spell = event.getSpell();
-            if (spell.castType == SpellBase.EnumCastType.INSTANTANEOUS) {
+            if (spell.getCastType() == SpellBase.EnumCastType.INSTANTANEOUS) {
               if (spell.costsMet(player)) {
                 spell.cast(player);
                 spell.enactCosts(player);
@@ -75,7 +75,7 @@ public class ItemStaff extends ItemBase {
                 stack.getTagCompound().setInteger("lastCooldown", event.getCooldown());
                 return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
               }
-            } else if (spell.castType == SpellBase.EnumCastType.CONTINUOUS) {
+            } else if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
               player.setActiveHand(hand);
               return new ActionResult<>(EnumActionResult.SUCCESS, stack);
             }
@@ -92,7 +92,7 @@ public class ItemStaff extends ItemBase {
       if (!stack.getTagCompound().hasKey("cooldown")) {
         SpellBase spell = SpellRegistry.spellRegistry.get(stack.getTagCompound().getString("spell" + stack.getTagCompound().getInteger("selected")));
         if (spell != null) {
-          if (spell.castType == SpellBase.EnumCastType.CONTINUOUS) {
+          if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
             if (spell.costsMet((EntityPlayer) player)) {
               spell.cast((EntityPlayer) player);
               spell.enactTickCosts((EntityPlayer) player);
@@ -110,7 +110,7 @@ public class ItemStaff extends ItemBase {
       if (spell != null) {
         SpellEvent event = new SpellEvent((EntityPlayer) entity, spell);
         MinecraftForge.EVENT_BUS.post(event);
-        if (spell.castType == SpellBase.EnumCastType.CONTINUOUS) {
+        if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
           stack.getTagCompound().setInteger("cooldown", event.getCooldown());
           stack.getTagCompound().setInteger("lastCooldown", event.getCooldown());
         }
@@ -181,8 +181,8 @@ public class ItemStaff extends ItemBase {
       if (spell != null) {
         double factor = 0.5f * (Math.sin(6.0f * Math.toRadians(EventManager.ticks + Minecraft.getMinecraft().getRenderPartialTicks())) + 1.0f);
         return Util
-            .intColor((int) (255 * (spell.red1 * factor + spell.red2 * (1.0 - factor))), (int) (255 * (spell.green1 * factor + spell.green2 * (1.0 - factor))),
-                (int) (255 * (spell.blue1 * factor + spell.blue2 * (1.0 - factor))));
+            .intColor((int) (255 * (spell.getRed1() * factor + spell.getRed2() * (1.0 - factor))), (int) (255 * (spell.getGreen1() * factor + spell.getGreen2() * (1.0 - factor))),
+                (int) (255 * (spell.getBlue1() * factor + spell.getBlue2() * (1.0 - factor))));
       }
     }
     return Util.intColor(255, 255, 255);
@@ -208,7 +208,7 @@ public class ItemStaff extends ItemBase {
     if (stack.hasTagCompound()) {
       SpellBase spell = SpellRegistry.spellRegistry.get(stack.getTagCompound().getString("spell" + stack.getTagCompound().getInteger("selected")));
       if (spell != null) {
-        if (spell.castType == SpellBase.EnumCastType.CONTINUOUS) {
+        if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
           return EnumAction.BOW;
         } else {
           return EnumAction.NONE;
@@ -257,15 +257,15 @@ public class ItemStaff extends ItemBase {
           SpellBase spell = SpellRegistry.spellRegistry.get(stack.getTagCompound().getString("spell" + stack.getTagCompound().getInteger("selected")));
           if (spell != null) {
             if (tintIndex == 0) {
-              int r = (int) (255 * spell.red1);
-              int g = (int) (255 * spell.green1);
-              int b = (int) (255 * spell.blue1);
+              int r = (int) (255 * spell.getRed1());
+              int g = (int) (255 * spell.getGreen1());
+              int b = (int) (255 * spell.getBlue1());
               return (r << 16) + (g << 8) + b;
             }
             if (tintIndex == 1) {
-              int r = (int) (255 * spell.red2);
-              int g = (int) (255 * spell.green2);
-              int b = (int) (255 * spell.blue2);
+              int r = (int) (255 * spell.getRed2());
+              int g = (int) (255 * spell.getGreen2());
+              int b = (int) (255 * spell.getBlue2());
               return (r << 16) + (g << 8) + b;
             }
           }
@@ -273,15 +273,15 @@ public class ItemStaff extends ItemBase {
         } else {
           SpellBase spell = SpellRegistry.spellRegistry.get(stack.getTagCompound().getString("spell" + stack.getTagCompound().getInteger("selected")));
           if (tintIndex == 1) {
-            int r = (int) (255 * spell.red1);
-            int g = (int) (255 * spell.green1);
-            int b = (int) (255 * spell.blue1);
+            int r = (int) (255 * spell.getRed1());
+            int g = (int) (255 * spell.getGreen1());
+            int b = (int) (255 * spell.getBlue1());
             return (r << 16) + (g << 8) + b;
           }
           if (tintIndex == 2) {
-            int r = (int) (255 * spell.red2);
-            int g = (int) (255 * spell.green2);
-            int b = (int) (255 * spell.blue2);
+            int r = (int) (255 * spell.getRed2());
+            int g = (int) (255 * spell.getGreen2());
+            int b = (int) (255 * spell.getBlue2());
             return (r << 16) + (g << 8) + b;
           }
           return Util.intColor(255, 255, 255);

@@ -49,12 +49,12 @@ public class EntityBoost extends Entity {
         if (rand.nextBoolean()) {
           ParticleUtil.spawnParticleStar(world, (float) posX + (rand.nextFloat()) - 0.5f, (float) posY + (rand.nextFloat()) + 0.5f,
               (float) posZ + (rand.nextFloat()) - 0.5f, -0.125f * (float) motionX, -0.125f * (float) motionY, -0.125f * (float) motionZ,
-              SpellRegistry.spell_gravity_boost.red1, SpellRegistry.spell_gravity_boost.green1, SpellRegistry.spell_gravity_boost.blue1, 0.5f,
+              SpellRegistry.spell_gravity_boost.getRed1(), SpellRegistry.spell_gravity_boost.getGreen1(), SpellRegistry.spell_gravity_boost.getBlue1(), 0.5f,
               5.0f * rand.nextFloat() + 5.0f, 40);
         } else {
           ParticleUtil.spawnParticleStar(world, (float) posX + (rand.nextFloat()) - 0.5f, (float) posY + (rand.nextFloat()) + 0.5f,
               (float) posZ + (rand.nextFloat()) - 0.5f, -0.125f * (float) motionX, -0.125f * (float) motionY, -0.125f * (float) motionZ,
-              SpellRegistry.spell_gravity_boost.red2, SpellRegistry.spell_gravity_boost.green2, SpellRegistry.spell_gravity_boost.blue2, 0.5f,
+              SpellRegistry.spell_gravity_boost.getRed2(), SpellRegistry.spell_gravity_boost.getGreen2(), SpellRegistry.spell_gravity_boost.getBlue2(), 0.5f,
               5.0f * rand.nextFloat() + 5.0f, 40);
         }
       }

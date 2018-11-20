@@ -7,6 +7,8 @@ import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.network.fx.MessageLifeInfusionFX;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
@@ -17,7 +19,15 @@ public class SpellGrowthInfusion extends SpellBase {
     super(name, TextFormatting.GREEN, 48f / 255f, 255f / 255f, 48f / 255f, 192f / 255f, 255f / 255f, 192f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 16;
+
     addCost(ModItems.terra_moss, 0.125f);
+    addIngredients(
+        new ItemStack(Blocks.SAPLING, 1, 2),
+        new ItemStack(Blocks.DOUBLE_PLANT, 1, 1),
+        new ItemStack(Blocks.SAPLING, 1, 1),
+        new ItemStack(ModItems.terra_moss, 1),
+        new ItemStack(ModItems.pereskia, 1)
+    );
   }
 
   @Override

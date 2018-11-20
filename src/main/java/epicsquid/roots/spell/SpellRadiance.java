@@ -8,6 +8,9 @@ import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.network.fx.MessageRadianceBeamFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
@@ -22,9 +25,17 @@ public class SpellRadiance extends SpellBase {
     super(name, TextFormatting.WHITE, 255f / 255f, 255f / 255f, 64f / 255f, 255f / 255f, 255f / 255f, 192f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 40;
+
     addCost(ModItems.moonglow_leaf, 0.25f);
     addCost(ModItems.wildroot, 0.125f);
     addCost(ModItems.aubergine_seed, 0.25f);
+    addIngredients(
+        new ItemStack(Items.GLOWSTONE_DUST, 1),
+        new ItemStack(Blocks.DOUBLE_PLANT, 1, 0),
+        new ItemStack(Items.DYE, 1, 11),
+        new ItemStack(ModItems.pereskia, 1),
+        new ItemStack(ModItems.wildroot, 1)
+    );
   }
 
   @Override

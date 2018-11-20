@@ -12,7 +12,8 @@ import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.recipe.PowderPouchFillRecipe;
 import epicsquid.roots.recipe.SpellRecipe;
-import net.minecraft.init.Blocks;
+import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -25,7 +26,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class ModRecipes {
 
   private static ArrayList<MortarRecipe> mortarRecipes = new ArrayList<>();
-  private static ArrayList<SpellRecipe> spellRecipes = new ArrayList<>();
   private static ArrayList<PyreCraftingRecipe> pyreCraftingRecipes = new ArrayList<>();
 
   private static ResourceLocation getRL(@Nonnull String s) {
@@ -60,33 +60,13 @@ public class ModRecipes {
     mortarRecipes.add(recipe);
   }
 
-  public static SpellRecipe getSpellRecipe(List<ItemStack> items) {
-    for (SpellRecipe spellRecipe : spellRecipes) {
-      if (spellRecipe.matches(items)) {
-        return spellRecipe;
+  public static SpellBase getSpellRecipe(List<ItemStack> items) {
+    for (SpellBase spell : SpellRegistry.spellRegistry.values()) {
+      if (spell.matchesIngredients(items)) {
+        return spell;
       }
     }
     return null;
-  }
-
-  public static SpellRecipe getSpellRecipe(String spell) {
-    for (SpellRecipe spellRecipe : spellRecipes) {
-      if (spellRecipe.result.compareTo(spell) == 0) {
-        return spellRecipe;
-      }
-    }
-    return null;
-  }
-
-  private static void addSpellRecipe(SpellRecipe recipe) {
-    for (SpellRecipe spellRecipe : spellRecipes) {
-      if (spellRecipe.matches(recipe.ingredients)) {
-        System.out.println("A Spell Recipe is already registered");
-        return;
-      }
-    }
-
-    spellRecipes.add(recipe);
   }
 
   public static PyreCraftingRecipe getCraftingRecipe(List<ItemStack> items) {
@@ -115,7 +95,6 @@ public class ModRecipes {
   public static void initRecipes(@Nonnull RegisterModRecipesEvent event) {
     addMortarRecipe(new MortarRecipe(new ItemStack(Items.DYE, 1, 12), new ItemStack[] { new ItemStack(ModItems.carapace) }, 1, 1, 1, 1, 1, 1));
 
-    initSpellRecipes();
     initCraftingRecipes();
 
     event.getRegistry().register(new PowderPouchFillRecipe().setRegistryName(getRL("powder_pouch_fill")));
@@ -128,54 +107,4 @@ public class ModRecipes {
         new ItemStack(ModItems.terra_moss), new ItemStack(ModItems.spirit_herb)));
   }
 
-  private static void initSpellRecipes(){
-    addSpellRecipe(new SpellRecipe("spell_wild_fire")
-        .addIngredients(new ItemStack(Items.DYE, 1, 14), new ItemStack(Blocks.RED_FLOWER, 1, 5), new ItemStack(Items.GUNPOWDER, 1),
-            new ItemStack(Items.COAL, 1, 1), new ItemStack(ModItems.wildroot, 1)));
-    addSpellRecipe(new SpellRecipe("spell_sanctuary")
-        .addIngredients(new ItemStack(Items.DYE, 1, 1), new ItemStack(Blocks.RED_FLOWER, 1, 4), new ItemStack(Blocks.VINE, 1),
-            new ItemStack(ModItems.moonglow_leaf, 1), new ItemStack(ModItems.wildroot, 1)));
-    addSpellRecipe(new SpellRecipe("spell_dandelion_winds")
-        .addIngredients(new ItemStack(Items.FEATHER, 1), new ItemStack(Blocks.YELLOW_FLOWER, 1), new ItemStack(Items.SNOWBALL, 1),
-            new ItemStack(ModItems.moonglow_leaf, 1), new ItemStack(Items.WHEAT, 1)));
-    addSpellRecipe(new SpellRecipe("spell_rose_thorns")
-        .addIngredients(new ItemStack(Blocks.CACTUS, 1), new ItemStack(Blocks.DOUBLE_PLANT, 1, 4), new ItemStack(Items.BONE, 1),
-            new ItemStack(Items.FERMENTED_SPIDER_EYE, 1), new ItemStack(ModItems.terra_moss, 1)));
-    addSpellRecipe(new SpellRecipe("spell_shatter")
-        .addIngredients(new ItemStack(Items.FLINT, 1), new ItemStack(Blocks.RED_FLOWER, 1, 3), new ItemStack(Items.DYE, 1, 15),
-            new ItemStack(ModItems.terra_moss, 1), new ItemStack(ModItems.wildroot, 1)));
-    addSpellRecipe(new SpellRecipe("spell_petal_shell")
-        .addIngredients(new ItemStack(Items.MELON_SEEDS, 1), new ItemStack(Blocks.DOUBLE_PLANT, 1, 5), new ItemStack(Items.DYE, 1, 9),
-            new ItemStack(ModItems.moonglow_leaf, 1), new ItemStack(ModItems.pereskia_bulb, 1)));
-    addSpellRecipe(new SpellRecipe("spell_acid_cloud")
-        .addIngredients(new ItemStack(Items.SPIDER_EYE, 1), new ItemStack(Blocks.RED_FLOWER, 1, 2), new ItemStack(Items.SLIME_BALL, 1),
-            new ItemStack(ModItems.terra_moss, 1), new ItemStack(ModItems.wildroot, 1)));
-    addSpellRecipe(new SpellRecipe("spell_light_drifter")
-        .addIngredients(new ItemStack(Items.ENDER_PEARL, 1), new ItemStack(Blocks.RED_FLOWER, 1, 6), new ItemStack(Items.STRING, 1),
-            new ItemStack(ModItems.moonglow_leaf, 1), new ItemStack(ModItems.pereskia, 1)));
-    addSpellRecipe(new SpellRecipe("spell_time_stop")
-        .addIngredients(new ItemStack(Items.NETHER_WART, 1), new ItemStack(Blocks.RED_FLOWER, 1, 8), new ItemStack(Items.DYE, 1, 0),
-            new ItemStack(ModItems.pereskia, 1), new ItemStack(ModItems.aubergine_seed, 1)));
-    addSpellRecipe(new SpellRecipe("spell_radiance")
-        .addIngredients(new ItemStack(Items.GLOWSTONE_DUST, 1), new ItemStack(Blocks.DOUBLE_PLANT, 1, 0), new ItemStack(Items.DYE, 1, 11),
-            new ItemStack(ModItems.pereskia, 1), new ItemStack(ModItems.wildroot, 1)));
-    addSpellRecipe(new SpellRecipe("spell_life_drain")
-        .addIngredients(new ItemStack(Items.BEETROOT, 1), new ItemStack(Blocks.RED_FLOWER, 1, 7), new ItemStack(Items.BEETROOT_SEEDS, 1),
-            new ItemStack(Items.ROTTEN_FLESH, 1), new ItemStack(ModItems.pereskia_bulb, 1)));
-    addSpellRecipe(new SpellRecipe("spell_growth_infusion")
-        .addIngredients(new ItemStack(Blocks.SAPLING, 1, 2), new ItemStack(Blocks.DOUBLE_PLANT, 1, 1), new ItemStack(Blocks.SAPLING, 1, 1),
-            new ItemStack(ModItems.terra_moss, 1), new ItemStack(ModItems.pereskia, 1)));
-    addSpellRecipe(new SpellRecipe("spell_gravity_boost")
-        .addIngredients(new ItemStack(Items.RABBIT_FOOT, 1), new ItemStack(Blocks.RED_FLOWER, 1, 1), new ItemStack(Items.SUGAR, 1),
-            new ItemStack(ModItems.aubergine_seed, 1), new ItemStack(ModItems.moonglow_leaf, 1)));
-    addSpellRecipe(new SpellRecipe("spell_mind_ward")
-        .addIngredients(new ItemStack(Blocks.BROWN_MUSHROOM, 1), new ItemStack(Blocks.RED_FLOWER, 1, 0), new ItemStack(Blocks.RED_MUSHROOM, 1),
-            new ItemStack(ModItems.aubergine_seed, 1), new ItemStack(Items.DYE, 1, 3)));
-    addSpellRecipe(new SpellRecipe("spell_sense_animals")
-        .addIngredients(new ItemStack(Items.CARROT, 1), new ItemStack(Blocks.RED_FLOWER, 1, 0), new ItemStack(ModItems.moonglow_seed, 1),
-            new ItemStack(ModItems.moonglow_leaf, 1), new ItemStack(Items.GOLDEN_CARROT, 1)));
-    addSpellRecipe(new SpellRecipe("spell_terra_transmutation")
-        .addIngredients(new ItemStack(Items.REDSTONE),new ItemStack(Blocks.RED_FLOWER, 1, 0),new ItemStack(Items.DYE),
-            new ItemStack(ModItems.terra_moss),new ItemStack(ModItems.wildroot)));
-  }
 }

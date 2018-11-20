@@ -61,11 +61,11 @@ public class MessageAcidCloudFX implements IMessage {
           vz *= -1;
         }
         if (Util.rand.nextBoolean()) {
-          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellRegistry.spell_acid_cloud.red1,
-              SpellRegistry.spell_acid_cloud.green1, SpellRegistry.spell_acid_cloud.blue1, 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
+          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellRegistry.spell_acid_cloud.getRed1(),
+              SpellRegistry.spell_acid_cloud.getGreen1(), SpellRegistry.spell_acid_cloud.getBlue1(), 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
         } else {
-          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellRegistry.spell_acid_cloud.red2,
-              SpellRegistry.spell_acid_cloud.green2, SpellRegistry.spell_acid_cloud.blue2, 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
+          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellRegistry.spell_acid_cloud.getRed2(),
+              SpellRegistry.spell_acid_cloud.getGreen2(), SpellRegistry.spell_acid_cloud.getBlue2(), 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
         }
       }
       return null;

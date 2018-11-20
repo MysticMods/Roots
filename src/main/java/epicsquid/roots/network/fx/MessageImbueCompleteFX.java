@@ -61,12 +61,12 @@ public class MessageImbueCompleteFX implements IMessage {
         for (int k = 0; k < 40; k++) {
           if (Util.rand.nextBoolean()) {
             ParticleUtil.spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f),
-                0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), spell.red1 * 255.0f, spell.green1 * 255.0f,
-                spell.blue1 * 255.0f, 0.5f, 2.5f, 48);
+                0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), spell.getRed1() * 255.0f, spell.getGreen1() * 255.0f,
+                spell.getBlue1() * 255.0f, 0.5f, 2.5f, 48);
           } else {
             ParticleUtil.spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f),
-                0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), spell.red2 * 255.0f, spell.green2 * 255.0f,
-                spell.blue2 * 255.0f, 0.5f, 2.5f, 48);
+                0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), spell.getRed2() * 255.0f, spell.getGreen2() * 255.0f,
+                spell.getBlue2() * 255.0f, 0.5f, 2.5f, 48);
           }
         }
       }

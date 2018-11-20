@@ -65,22 +65,22 @@ public class MessageShatterBurstFX implements IMessage {
         double y = (1.0f - i / 40.0f) * message.srcY + (i / 40.0f) * message.posY;
         double z = (1.0f - i / 40.0f) * message.srcZ + (i / 40.0f) * message.posZ;
         if (Util.rand.nextBoolean()) {
-          ParticleUtil.spawnParticleGlow(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellRegistry.spell_shatter.red1 * 255.0f,
-              SpellRegistry.spell_shatter.green1 * 255.0f, SpellRegistry.spell_shatter.blue1 * 255.0f, 0.25f * (i / 40.0f), 2.5f, 24);
+          ParticleUtil.spawnParticleGlow(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellRegistry.spell_shatter.getRed1() * 255.0f,
+              SpellRegistry.spell_shatter.getGreen1() * 255.0f, SpellRegistry.spell_shatter.getBlue1() * 255.0f, 0.25f * (i / 40.0f), 2.5f, 24);
         } else {
-          ParticleUtil.spawnParticleGlow(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellRegistry.spell_shatter.red2 * 255.0f,
-              SpellRegistry.spell_shatter.green2 * 255.0f, SpellRegistry.spell_shatter.blue2 * 255.0f, 0.25f * (i / 40.0f), 2.5f, 24);
+          ParticleUtil.spawnParticleGlow(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellRegistry.spell_shatter.getRed2() * 255.0f,
+              SpellRegistry.spell_shatter.getGreen2() * 255.0f, SpellRegistry.spell_shatter.getBlue2() * 255.0f, 0.25f * (i / 40.0f), 2.5f, 24);
         }
       }
       for (int k = 0; k < 20; k++) {
         if (Util.rand.nextBoolean()) {
           ParticleUtil.spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.25f * (Util.rand.nextFloat() - 0.5f),
-              0.25f * (Util.rand.nextFloat() - 0.5f), 0.25f * (Util.rand.nextFloat() - 0.5f), SpellRegistry.spell_shatter.red1 * 255.0f,
-              SpellRegistry.spell_shatter.green1 * 255.0f, SpellRegistry.spell_shatter.blue1 * 255.0f, 0.25f, 5f, 12);
+              0.25f * (Util.rand.nextFloat() - 0.5f), 0.25f * (Util.rand.nextFloat() - 0.5f), SpellRegistry.spell_shatter.getRed1() * 255.0f,
+              SpellRegistry.spell_shatter.getGreen1() * 255.0f, SpellRegistry.spell_shatter.getBlue1() * 255.0f, 0.25f, 5f, 12);
         } else {
           ParticleUtil.spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.25f * (Util.rand.nextFloat() - 0.5f),
-              0.25f * (Util.rand.nextFloat() - 0.5f), 0.25f * (Util.rand.nextFloat() - 0.5f), SpellRegistry.spell_shatter.red2 * 255.0f,
-              SpellRegistry.spell_shatter.green2 * 255.0f, SpellRegistry.spell_shatter.blue2 * 255.0f, 0.25f, 5f, 12);
+              0.25f * (Util.rand.nextFloat() - 0.5f), 0.25f * (Util.rand.nextFloat() - 0.5f), SpellRegistry.spell_shatter.getRed2() * 255.0f,
+              SpellRegistry.spell_shatter.getGreen2() * 255.0f, SpellRegistry.spell_shatter.getBlue2() * 255.0f, 0.25f, 5f, 12);
         }
       }
       return null;

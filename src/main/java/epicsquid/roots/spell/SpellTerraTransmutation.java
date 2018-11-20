@@ -7,6 +7,8 @@ import epicsquid.roots.network.fx.MessageShatterBurstFX;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
@@ -17,7 +19,15 @@ public class SpellTerraTransmutation extends SpellBase{
     super(name, TextFormatting.GRAY, 0, 0, 0, 211 / 255f,211 / 255f,211 / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 5;
+
     addCost(ModItems.wildroot, 0.0625f);
+    addIngredients(
+        new ItemStack(Items.REDSTONE),
+        new ItemStack(Blocks.RED_FLOWER, 1, 0),
+        new ItemStack(Items.DYE),
+        new ItemStack(ModItems.terra_moss),
+        new ItemStack(ModItems.wildroot)
+    );
   }
 
   @Override

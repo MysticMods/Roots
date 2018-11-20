@@ -7,6 +7,9 @@ import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.spell.EntityPetalShell;
 import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 
@@ -16,8 +19,16 @@ public class SpellPetalShell extends SpellBase {
     super(name, TextFormatting.LIGHT_PURPLE, 255f / 255f, 192f / 255f, 240f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 120;
+
     addCost(ModItems.aubergine_seed, 0.5f);
     addCost(ModItems.moonglow_leaf, 0.25f);
+    addIngredients(
+        new ItemStack(Items.MELON_SEEDS, 1),
+        new ItemStack(Blocks.DOUBLE_PLANT, 1, 5),
+        new ItemStack(Items.DYE, 1, 9),
+        new ItemStack(ModItems.moonglow_leaf, 1),
+        new ItemStack(ModItems.pereskia_bulb, 1)
+    );
   }
 
   @Override

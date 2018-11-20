@@ -143,12 +143,12 @@ public class MessageRadianceBeamFX implements IMessage {
               alphaDist += 0.15;
 
               if (Util.rand.nextBoolean()) {
-                ParticleUtil.spawnParticleStar(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellRegistry.spell_radiance.red1 * 255.0f,
-                    SpellRegistry.spell_radiance.green1 * 255.0f, SpellRegistry.spell_radiance.blue1 * 255.0f, 0.75f * (float) (1.0f - alphaDist / totalDist),
+                ParticleUtil.spawnParticleStar(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellRegistry.spell_radiance.getRed1() * 255.0f,
+                    SpellRegistry.spell_radiance.getGreen1() * 255.0f, SpellRegistry.spell_radiance.getBlue1() * 255.0f, 0.75f * (float) (1.0f - alphaDist / totalDist),
                     3f + 3f * Util.rand.nextFloat(), 14);
               } else {
-                ParticleUtil.spawnParticleStar(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellRegistry.spell_radiance.red2 * 255.0f,
-                    SpellRegistry.spell_radiance.green2 * 255.0f, SpellRegistry.spell_radiance.blue2 * 255.0f, 0.75f * (float) (1.0f - alphaDist / totalDist),
+                ParticleUtil.spawnParticleStar(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellRegistry.spell_radiance.getRed2() * 255.0f,
+                    SpellRegistry.spell_radiance.getGreen2() * 255.0f, SpellRegistry.spell_radiance.getBlue2() * 255.0f, 0.75f * (float) (1.0f - alphaDist / totalDist),
                     3f + 3f * Util.rand.nextFloat(), 14);
               }
             }
