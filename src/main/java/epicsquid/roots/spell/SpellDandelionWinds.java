@@ -7,6 +7,9 @@ import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.network.fx.MessageDandelionCastFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 
@@ -16,7 +19,15 @@ public class SpellDandelionWinds extends SpellBase {
     super(name, TextFormatting.YELLOW, 255f / 255f, 255f / 255f, 32f / 255f, 255f / 255f, 176f / 255f, 32f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 20;
+
     addCost(ModItems.moonglow_leaf, 0.125f);
+    addIngredients(
+        new ItemStack(Items.FEATHER, 1),
+        new ItemStack(Blocks.YELLOW_FLOWER, 1),
+        new ItemStack(Items.SNOWBALL, 1),
+        new ItemStack(ModItems.moonglow_leaf, 1),
+        new ItemStack(Items.WHEAT, 1)
+    );
   }
 
   @Override

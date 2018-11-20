@@ -6,6 +6,9 @@ import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.util.Constants;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 
@@ -15,8 +18,16 @@ public class SpellMindWard extends SpellBase {
     super(name, TextFormatting.DARK_RED, 128f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 80;
+
     addCost(ModItems.aubergine_seed, 0.25f);
     addCost(ModItems.terra_moss, 0.25f);
+    addIngredients(
+        new ItemStack(Blocks.BROWN_MUSHROOM, 1),
+        new ItemStack(Blocks.RED_FLOWER, 1, 0),
+        new ItemStack(Blocks.RED_MUSHROOM, 1),
+        new ItemStack(ModItems.aubergine_seed, 1),
+        new ItemStack(Items.DYE, 1, 3)
+    );
   }
 
   @Override

@@ -102,22 +102,21 @@ public class TileEntityMortar extends TileBase {
         for (int i = 0; i < inventory.getSlots(); i++) {
           ingredients.add(inventory.getStackInSlot(i));
         }
-        SpellRecipe recipe = ModRecipes.getSpellRecipe(ingredients);
-        if (recipe != null) {
-          SpellBase spell = SpellRegistry.spellRegistry.get(recipe.result);
+        SpellBase spell = ModRecipes.getSpellRecipe(ingredients);
+        if (spell != null) {
           if (world.isRemote) {
             for (int i = 0; i < 8; i++) {
               int chance = Util.rand.nextInt(3);
               if (chance == 0) {
                 ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
-                    0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), spell.red1,
-                    spell.green1, spell.blue1, 0.25f, 1.5f, 24, false);
+                    0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), spell.getRed1(),
+                    spell.getGreen1(), spell.getBlue1(), 0.25f, 1.5f, 24, false);
               } else if (chance == 1) {
                 ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
-                    0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), spell.red2,
-                    spell.green2, spell.blue2, 0.25f, 1.5f, 24, false);
+                    0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), spell.getRed2(),
+                    spell.getGreen2(), spell.getBlue2(), 0.25f, 1.5f, 24, false);
               } else if (chance == 2) {
                 ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
@@ -127,7 +126,7 @@ public class TileEntityMortar extends TileBase {
             }
           }
           ItemStack dust = new ItemStack(ModItems.petal_dust, 1);
-          ItemPetalDust.createData(dust, recipe.result);
+          ItemPetalDust.createData(dust, spell.getName());
           if (!world.isRemote) {
             world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, dust));
             markDirty();

@@ -8,6 +8,9 @@ import epicsquid.roots.network.fx.MessageSanctuaryBurstFX;
 import epicsquid.roots.network.fx.MessageSanctuaryRingFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 
@@ -17,8 +20,16 @@ public class SpellSanctuary extends SpellBase {
     super(name, TextFormatting.DARK_PURPLE, 208f / 255f, 16f / 255f, 80f / 255f, 224f / 255f, 32f / 255f, 144f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 60;
+
     addCost(ModItems.moonglow_leaf, 0.125f);
     addCost(ModItems.aubergine_seed, 0.125f);
+    addIngredients(
+        new ItemStack(Items.DYE, 1, 1),
+        new ItemStack(Blocks.RED_FLOWER, 1, 4),
+        new ItemStack(Blocks.VINE, 1),
+        new ItemStack(ModItems.moonglow_leaf, 1),
+        new ItemStack(ModItems.wildroot, 1)
+    );
   }
 
   @Override

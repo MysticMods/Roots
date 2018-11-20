@@ -9,6 +9,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -21,7 +23,15 @@ public class SpellShatter extends SpellBase {
     super(name, TextFormatting.GRAY, 96f / 255f, 96f / 255f, 96f / 255f, 192f / 255f, 192f / 255f, 192f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 20;
+
     addCost(ModItems.wildroot, 0.0625f);
+    addIngredients(
+        new ItemStack(Items.FLINT, 1),
+        new ItemStack(Blocks.RED_FLOWER, 1, 3),
+        new ItemStack(Items.DYE, 1, 15),
+        new ItemStack(ModItems.terra_moss, 1),
+        new ItemStack(ModItems.wildroot, 1)
+    );
   }
 
   @Override

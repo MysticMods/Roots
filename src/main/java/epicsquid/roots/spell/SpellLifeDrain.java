@@ -7,6 +7,9 @@ import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.network.fx.MessageLifeDrainAbsorbFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
@@ -18,7 +21,15 @@ public class SpellLifeDrain extends SpellBase {
     super(name, TextFormatting.DARK_GRAY, 144f / 255f, 32f / 255f, 64f / 255f, 255f / 255f, 196f / 255f, 240f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 28;
+
     addCost(ModItems.pereskia_bulb, 0.125f);
+    addIngredients(
+        new ItemStack(Items.BEETROOT, 1),
+        new ItemStack(Blocks.RED_FLOWER, 1, 7),
+        new ItemStack(Items.BEETROOT_SEEDS, 1),
+        new ItemStack(Items.ROTTEN_FLESH, 1),
+        new ItemStack(ModItems.pereskia_bulb, 1)
+    );
   }
 
   @Override

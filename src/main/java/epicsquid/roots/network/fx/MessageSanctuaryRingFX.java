@@ -54,12 +54,12 @@ public class MessageSanctuaryRingFX implements IMessage {
         if (Util.rand.nextBoolean()) {
           if (Util.rand.nextBoolean()) {
             ParticleUtil.spawnParticlePetal(world, (float) message.posX + 3.0f * (float) Math.sin(Math.toRadians(k)), (float) message.posY,
-                (float) message.posZ + 3.0f * (float) Math.cos(Math.toRadians(k)), 0, 0, 0, SpellRegistry.spell_sanctuary.red1,
-                SpellRegistry.spell_sanctuary.green1, SpellRegistry.spell_sanctuary.blue1, 0.5f, 1.25f + 5.0f * Util.rand.nextFloat(), 40);
+                (float) message.posZ + 3.0f * (float) Math.cos(Math.toRadians(k)), 0, 0, 0, SpellRegistry.spell_sanctuary.getRed1(),
+                SpellRegistry.spell_sanctuary.getGreen1(), SpellRegistry.spell_sanctuary.getBlue1(), 0.5f, 1.25f + 5.0f * Util.rand.nextFloat(), 40);
           } else {
             ParticleUtil.spawnParticlePetal(world, (float) message.posX + 3.0f * (float) Math.sin(Math.toRadians(k)), (float) message.posY,
-                (float) message.posZ + 3.0f * (float) Math.cos(Math.toRadians(k)), 0, 0, 0, SpellRegistry.spell_sanctuary.red2,
-                SpellRegistry.spell_sanctuary.green2, SpellRegistry.spell_sanctuary.blue2, 0.5f, 1.25f + 5.0f * Util.rand.nextFloat(), 40);
+                (float) message.posZ + 3.0f * (float) Math.cos(Math.toRadians(k)), 0, 0, 0, SpellRegistry.spell_sanctuary.getRed2(),
+                SpellRegistry.spell_sanctuary.getGreen2(), SpellRegistry.spell_sanctuary.getBlue2(), 0.5f, 1.25f + 5.0f * Util.rand.nextFloat(), 40);
           }
         }
       }

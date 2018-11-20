@@ -3,6 +3,9 @@ package epicsquid.roots.spell;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.spell.EntityThornTrap;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 
 public class SpellRoseThorns extends SpellBase {
@@ -11,7 +14,15 @@ public class SpellRoseThorns extends SpellBase {
     super(name, TextFormatting.RED, 255f / 255f, 32f / 255f, 64f / 255f, 32f / 255f, 255f / 255f, 96f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 24;
+
     addCost(ModItems.terra_moss, 0.25f);
+    addIngredients(
+        new ItemStack(Blocks.CACTUS, 1),
+        new ItemStack(Blocks.DOUBLE_PLANT, 1, 4),
+        new ItemStack(Items.BONE, 1),
+        new ItemStack(Items.FERMENTED_SPIDER_EYE, 1),
+        new ItemStack(ModItems.terra_moss, 1)
+    );
   }
 
   @Override

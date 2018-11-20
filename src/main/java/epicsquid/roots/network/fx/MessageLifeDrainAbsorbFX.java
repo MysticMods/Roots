@@ -66,11 +66,11 @@ public class MessageLifeDrainAbsorbFX implements IMessage {
           float z = (float) player.posZ + (float) player.getLookVec().z * (6.0f + Util.rand.nextFloat() * 9.0f) + 2.0f * (Util.rand.nextFloat() - 0.5f);
           if (Util.rand.nextBoolean()) {
             ParticleUtil.spawnParticleLineGlow(world, x, y, z, (float) player.posX, (float) player.posY + 1.0f, (float) player.posZ,
-                SpellRegistry.spell_life_drain.red1, SpellRegistry.spell_life_drain.green1, SpellRegistry.spell_life_drain.blue1, 1.0f,
+                SpellRegistry.spell_life_drain.getRed1(), SpellRegistry.spell_life_drain.getGreen1(), SpellRegistry.spell_life_drain.getBlue1(), 1.0f,
                 6.0f + 6.0f * Util.rand.nextFloat(), 40);
           } else {
             ParticleUtil.spawnParticleLineGlow(world, x, y, z, (float) player.posX, (float) player.posY + 1.0f, (float) player.posZ,
-                SpellRegistry.spell_life_drain.red2, SpellRegistry.spell_life_drain.green2, SpellRegistry.spell_life_drain.blue2, 1.0f,
+                SpellRegistry.spell_life_drain.getRed2(), SpellRegistry.spell_life_drain.getGreen2(), SpellRegistry.spell_life_drain.getBlue2(), 1.0f,
                 6.0f + 6.0f * Util.rand.nextFloat(), 40);
           }
         }

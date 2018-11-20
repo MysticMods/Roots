@@ -55,13 +55,13 @@ public class MessageTimeStopStartFX implements IMessage {
           if (Util.rand.nextBoolean()) {
             ParticleUtil.spawnParticleGlow(world, (float) message.posX + 0.5f * (float) Math.sin(Math.toRadians(k)), (float) message.posY,
                 (float) message.posZ + 0.5f * (float) Math.cos(Math.toRadians(k)), Util.rand.nextFloat() * 0.1875f * (float) Math.sin(Math.toRadians(k)),
-                Util.rand.nextFloat() * -0.0625f, Util.rand.nextFloat() * 0.1875f * (float) Math.cos(Math.toRadians(k)), SpellRegistry.spell_time_stop.red1,
-                SpellRegistry.spell_time_stop.green1, SpellRegistry.spell_time_stop.blue1, 0.5f, 2.5f + 7.0f * Util.rand.nextFloat(), 40);
+                Util.rand.nextFloat() * -0.0625f, Util.rand.nextFloat() * 0.1875f * (float) Math.cos(Math.toRadians(k)), SpellRegistry.spell_time_stop.getRed1(),
+                SpellRegistry.spell_time_stop.getGreen1(), SpellRegistry.spell_time_stop.getBlue1(), 0.5f, 2.5f + 7.0f * Util.rand.nextFloat(), 40);
           } else {
             ParticleUtil.spawnParticleGlow(world, (float) message.posX + 0.5f * (float) Math.sin(Math.toRadians(k)), (float) message.posY,
                 (float) message.posZ + 0.5f * (float) Math.cos(Math.toRadians(k)), Util.rand.nextFloat() * 0.1875f * (float) Math.sin(Math.toRadians(k)),
-                Util.rand.nextFloat() * -0.0625f, Util.rand.nextFloat() * 0.1875f * (float) Math.cos(Math.toRadians(k)), SpellRegistry.spell_time_stop.red2,
-                SpellRegistry.spell_time_stop.green2, SpellRegistry.spell_time_stop.blue2, 0.5f, 2.5f + 7.0f * Util.rand.nextFloat(), 40);
+                Util.rand.nextFloat() * -0.0625f, Util.rand.nextFloat() * 0.1875f * (float) Math.cos(Math.toRadians(k)), SpellRegistry.spell_time_stop.getRed2(),
+                SpellRegistry.spell_time_stop.getGreen2(), SpellRegistry.spell_time_stop.getBlue2(), 0.5f, 2.5f + 7.0f * Util.rand.nextFloat(), 40);
           }
         }
       }

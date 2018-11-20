@@ -61,11 +61,11 @@ public class MessageLightDrifterFX implements IMessage {
           vz *= -1;
         }
         if (Util.rand.nextBoolean()) {
-          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellRegistry.spell_light_drifter.red1,
-              SpellRegistry.spell_light_drifter.green1, SpellRegistry.spell_light_drifter.blue1, 0.125f, 8f + Util.rand.nextFloat() * 6f, 80, true);
+          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellRegistry.spell_light_drifter.getRed1(),
+              SpellRegistry.spell_light_drifter.getGreen1(), SpellRegistry.spell_light_drifter.getBlue1(), 0.125f, 8f + Util.rand.nextFloat() * 6f, 80, true);
         } else {
-          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellRegistry.spell_light_drifter.red2,
-              SpellRegistry.spell_light_drifter.green2, SpellRegistry.spell_light_drifter.blue2, 0.125f, 8f + Util.rand.nextFloat() * 6f, 80, true);
+          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellRegistry.spell_light_drifter.getRed2(),
+              SpellRegistry.spell_light_drifter.getGreen2(), SpellRegistry.spell_light_drifter.getBlue2(), 0.125f, 8f + Util.rand.nextFloat() * 6f, 80, true);
         }
       }
       return null;
