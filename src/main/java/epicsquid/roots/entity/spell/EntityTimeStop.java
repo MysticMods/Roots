@@ -3,6 +3,7 @@ package epicsquid.roots.entity.spell;
 import java.util.List;
 import java.util.UUID;
 
+import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.entity.Entity;
@@ -70,7 +71,7 @@ public class EntityTimeStop extends Entity {
     for (EntityLivingBase e : entities) {
       if (playerId != null) {
         if (e.getUniqueID().compareTo(playerId) != 0) {
-          //todo: fix this aswell | EffectManager.assignEffect(e, EffectManager.effect_time_stop.name, 40, new NBTTagCompound());
+          EffectManager.assignEffect(e, EffectManager.effect_time_stop.name, 40, new NBTTagCompound());
         }
       }
     }
