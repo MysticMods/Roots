@@ -6,6 +6,10 @@
     {
       "type": "text",
       "text": "The unending bowl never seems to run out of water. You can take and take but it fills up just as quickly as you take out water."
+    },
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "unending_bowl"
     }
   ]
 }
