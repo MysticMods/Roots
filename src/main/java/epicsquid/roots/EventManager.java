@@ -19,6 +19,7 @@ import epicsquid.roots.util.Constants;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -62,7 +63,7 @@ public class EventManager {
   public void addCapabilities(AttachCapabilitiesEvent<Entity> event) {
     if (event.getObject() instanceof EntityPlayer) {
       event.addCapability(new ResourceLocation(Roots.MODID, "player_grove_capability"), new PlayerGroveCapabilityProvider());
-      event.addCapability(new ResourceLocation(Roots.MODID, "player_data_capability"), new PlayerGroveCapabilityProvider());
+      event.addCapability(new ResourceLocation(Roots.MODID, "player_data_capability"), new PlayerDataCapabilityProvider());
     }
   }
 
@@ -78,7 +79,8 @@ public class EventManager {
       }
       if (event.getEntity().hasCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null)){
         if (!event.getEntity().world.isRemote && event.getEntity().getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null).isDirty()){
-          PacketHandler.INSTANCE.sendToAll(new MessagePlayerDataUpdate(event.getEntity().getUniqueID(),event.getEntity().getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null).getData()));
+          PacketHandler.INSTANCE.sendToAll(new MessagePlayerDataUpdate(event.getEntity().getUniqueID(),
+              event.getEntity().getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null).getData()));
           event.getEntity().getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null).clean();
         }
       }
@@ -87,6 +89,23 @@ public class EventManager {
 
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public void onDamage(LivingHurtEvent event){
+    if (EffectManager.hasEffect(event.getEntityLiving(), EffectManager.effect_time_stop.name)){
+      event.setAmount(event.getAmount()*0.1f);
+    }
+//    if (event.getEntity() instanceof EntityPlayer){
+//      if (!event.getEntity().world.isRemote && ((EntityPlayer)event.getEntity()).getGameProfile().getName().compareToIgnoreCase("ellpeck") == 0 && Misc.random.nextInt(100) == 0){
+//        EntityFairy fairy = new EntityFairy(event.getEntity().getEntityWorld());
+//        fairy.setPosition(event.getEntity().posX, event.getEntity().posY+1.0, event.getEntity().posZ);
+//        fairy.onInitialSpawn(event.getEntity().world.getDifficultyForLocation(fairy.getPosition()), null);
+//        event.getEntity().world.spawnEntity(fairy);
+//      }
+//    }
+    if (event.getEntityLiving().getEntityData().hasKey(Constants.EFFECT_TAG)){
+      NBTTagCompound tag = event.getEntityLiving().getEntityData().getCompoundTag(Constants.EFFECT_TAG);
+      if (tag.hasKey(EffectManager.effect_invulnerability.name)){
+        event.setCanceled(true);
+      }
+    }
     if (event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().getEntityWorld().isRemote){
       EntityPlayer p = ((EntityPlayer)event.getEntityLiving());
       List<EntityPetalShell> shells = p.getEntityWorld().getEntitiesWithinAABB(EntityPetalShell.class, new AxisAlignedBB(p.posX-0.5,p.posY,p.posZ-0.5,p.posX+0.5,p.posY+2.0,p.posZ+0.5));

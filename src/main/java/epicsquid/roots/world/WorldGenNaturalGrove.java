@@ -37,7 +37,6 @@ public class WorldGenNaturalGrove implements IWorldGenerator {
       return;
     }
     if (!isNumberAwayOf(5, chunkX, (int) this.lastChunkGenerated.x) || !isNumberAwayOf(5, chunkZ, (int) this.lastChunkGenerated.y)) {
-      System.out.println("what");
       return;
     }
     if (world.provider.getDimension() == DimensionType.OVERWORLD.getId() && !world.isRemote) {
@@ -57,18 +56,14 @@ public class WorldGenNaturalGrove implements IWorldGenerator {
       for(int x = -2; x < 3; x++){
         for(int z = -2; z < 3; z++){
           Block checkBlock = world.getBlockState(checkForGroundPos.add(x, 0, z)).getBlock();
-          System.out.println(checkBlock);
           if(checkBlock != Blocks.DIRT && checkBlock != Blocks.GRASS && checkBlock != Blocks.TALLGRASS && checkBlock != Blocks.STONE && checkBlock != Blocks.SAND){
             airBlocks++;
           }
           if(airBlocks > 3){
-            System.out.println("Returning");
             return;
           }
         }
       }
-
-      System.out.println("Building");
 
       //Check for biomes
       if(biome == Biomes.FOREST || biome == Biomes.BIRCH_FOREST || biome == Biomes.PLAINS  ){
@@ -86,8 +81,6 @@ public class WorldGenNaturalGrove implements IWorldGenerator {
         template.addBlocksToWorld(world, blockpos.add(-8, -1, -9f), placementsettings);
         IBlockState iblockstate = world.getBlockState(blockpos);
         world.notifyBlockUpdate(blockpos, iblockstate, iblockstate, 3);
-
-        System.out.println(blockpos);
 
         //Spawn entity grove
         EntityNaturalGrove naturalGrove = new EntityNaturalGrove(world);

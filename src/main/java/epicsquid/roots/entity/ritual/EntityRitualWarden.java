@@ -2,9 +2,12 @@ package epicsquid.roots.entity.ritual;
 
 import java.util.List;
 
+import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -49,8 +52,7 @@ public class EntityRitualWarden extends EntityRitualBase {
       List<EntityLivingBase> entities = world
           .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 15.5, posY - 15.5, posZ - 15.5, posX + 15.5, posY + 15.5, posZ + 15.5));
       for (EntityLivingBase e : entities) {
-        //todo: add effect
-        //EffectManager.assignEffect(e, EffectManager.effect_invulnerability.name, 22, new NBTTagCompound());
+        EffectManager.assignEffect(e, EffectManager.effect_invulnerability.name, 22, new NBTTagCompound());
       }
     }
   }
