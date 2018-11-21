@@ -1,6 +1,9 @@
 package epicsquid.roots;
 
+import epicsquid.roots.capability.IPlayerDataCapability;
 import epicsquid.roots.capability.IPlayerGroveCapability;
+import epicsquid.roots.capability.PlayerDataCapability;
+import epicsquid.roots.capability.PlayerDataCapabilityStorage;
 import epicsquid.roots.capability.PlayerGroveCapability;
 import epicsquid.roots.capability.PlayerGroveCapabilityStorage;
 import epicsquid.roots.init.ModItems;
@@ -52,6 +55,7 @@ public class Roots {
   public void preInit(FMLPreInitializationEvent event) {
     CONTAINER = Loader.instance().activeModContainer();
     CapabilityManager.INSTANCE.register(IPlayerGroveCapability.class, new PlayerGroveCapabilityStorage(), PlayerGroveCapability::new);
+    CapabilityManager.INSTANCE.register(IPlayerDataCapability.class, new PlayerDataCapabilityStorage(), PlayerDataCapability::new);
     MinecraftForge.EVENT_BUS.register(new RegistryManager());
     MinecraftForge.EVENT_BUS.register(new EventManager());
     proxy.preInit(event);

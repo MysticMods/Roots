@@ -1,6 +1,7 @@
 package epicsquid.roots.proxy;
 
 import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellRegistry;
@@ -19,6 +20,7 @@ public class CommonProxy {
     RitualRegistry.init();
     SpellRegistry.init();
     OfferingUtil.init();
+    EffectManager.init();
   }
 
   public void postInit(FMLPostInitializationEvent event) {

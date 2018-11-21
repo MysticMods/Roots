@@ -83,7 +83,7 @@ public class RenderPetalShell extends RenderEntity{
         buff.pos(x+posX4, y+posY4, z+posZ4).tex(0, 1.0).lightmap(lightx, lighty).color(getColorCycle(i+yawRads)*r1+(1.0f-getColorCycle(i+yawRads))*r2, getColorCycle(i+yawRads)*g1+(1.0f-getColorCycle(i+yawRads))*g2, getColorCycle(i+yawRads)*b1+(1.0f-getColorCycle(i+yawRads))*b2, 1f).endVertex();
       }
       tess.draw();
-      
+
       GlStateManager.enableCull();
       GlStateManager.alphaFunc(func, ref);
       GlStateManager.enableLighting();
