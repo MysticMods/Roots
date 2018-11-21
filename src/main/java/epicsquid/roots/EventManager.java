@@ -92,6 +92,9 @@ public class EventManager {
     if (EffectManager.hasEffect(event.getEntityLiving(), EffectManager.effect_time_stop.name)){
       event.setAmount(event.getAmount()*0.1f);
     }
+    if (EffectManager.hasEffect(event.getEntityLiving(), EffectManager.effect_invulnerability.name)){
+     event.setCanceled(true);
+    }
 //    if (event.getEntity() instanceof EntityPlayer){
 //      if (!event.getEntity().world.isRemote && ((EntityPlayer)event.getEntity()).getGameProfile().getName().compareToIgnoreCase("ellpeck") == 0 && Misc.random.nextInt(100) == 0){
 //        EntityFairy fairy = new EntityFairy(event.getEntity().getEntityWorld());
