@@ -9,11 +9,7 @@
     },
     {
       "type": "pyre_template",
-      "item1": "mysticalworld:wildroot",
-      "item2": "mysticalworld:wildroot",
-      "item3": "mysticalworld:spirit_herb",
-      "item4": "minecraft:bone",
-      "item5": "minecraft:bone"
+      "ritual": "ritual_natural_aura"
     }
   ]
 }

@@ -9,11 +9,7 @@
     },
     {
       "type": "spell_template",
-      "item1": "minecraft:nether_wart",
-      "item2": "minecraft:red_flower:8",
-      "item3": "minecraft:dye",
-      "item4": "mysticalworld:pereskia",
-      "item5": "mysticalworld:aubergine_seed"
+      "spell": "spell_time_stop"
     }
   ]
 }

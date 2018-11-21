@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 
 public class RitualRegistry {
 
-  private static Map<String, RitualBase> ritualRegistry = new HashMap<>();
+  public static Map<String, RitualBase> ritualRegistry = new HashMap<>();
 
   public static RitualBase ritual_life, ritual_storm, ritual_light, ritual_fire_storm, ritual_regrowth, ritual_windwall, ritual_warden, ritual_natural_aura, ritual_purity, ritual_frost, ritual_animal_harvest, ritual_summoning;
 

@@ -1,4 +1,6 @@
+
 {
+  "processor": "epicsquid.roots.api.RitualRecipeProcessor",
   "components": [
     {
       "type": "item",

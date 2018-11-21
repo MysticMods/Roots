@@ -9,11 +9,7 @@
     },
     {
       "type": "spell_template",
-      "item1": "minecraft:redstone",
-      "item2": "minecraft:red_flower",
-      "item3": "minecraft:dye",
-      "item4": "mysticalworld:terra_moss",
-      "item5": "mysticalworld:wildroot"
+      "spell": "spell_terra_transmutation"
     }
   ]
 }

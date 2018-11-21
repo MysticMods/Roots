@@ -9,11 +9,7 @@
     },
     {
       "type": "pyre_template",
-      "item1": "mysticalworld:terra_moss",
-      "item2": "mysticalworld:terra_moss_seed",
-      "item3": "minecraft:sapling:1",
-      "item4": "minecraft:sapling:1",
-      "item5": "mysticalworld:bark_spruce"
+      "ritual": "ritual_regrowth"
     }
   ]
 }

@@ -1,4 +1,6 @@
+
 {
+  "processor": "epicsquid.roots.api.SpellRecipeProcessor",
   "components": [
     {
       "type": "item",

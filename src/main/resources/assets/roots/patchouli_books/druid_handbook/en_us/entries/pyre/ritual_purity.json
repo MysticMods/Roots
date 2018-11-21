@@ -9,11 +9,7 @@
     },
     {
       "type": "pyre_template",
-      "item1": "mysticalworld:spirit_herb",
-      "item2": "mysticalworld:spirit_herb",
-      "item3": "mysticalworld:wildroot",
-      "item4": "minecraft:milk_bucket",
-      "item5": "minecraft:glass_bottle"
+      "ritual": "ritual_purity"
     }
   ]
 }

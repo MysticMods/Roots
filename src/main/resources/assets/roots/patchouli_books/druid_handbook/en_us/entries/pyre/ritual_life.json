@@ -9,11 +9,7 @@
     },
     {
       "type": "pyre_template",
-      "item1": "mysticalworld:terra_moss",
-      "item2": "mysticalworld:bark_oak",
-      "item3": "minecraft:sapling",
-      "item4": "mysticalworld:bark_birch",
-      "item5": "mysticalworld:bark_birch"
+      "ritual": "ritual_life"
     }
   ]
 }
