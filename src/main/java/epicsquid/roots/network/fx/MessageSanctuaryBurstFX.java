@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessageSanctuaryBurstFX implements IMessage {
-  double posX = 0, posY = 0, posZ = 0;
+  private double posX = 0, posY = 0, posZ = 0;
 
   public MessageSanctuaryBurstFX() {
     super();

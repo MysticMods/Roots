@@ -5,12 +5,12 @@ import epicsquid.mysticallib.util.Util;
 import net.minecraft.world.World;
 
 public class ParticleStar extends ParticleBase {
-  public float colorR = 0;
-  public float colorG = 0;
-  public float colorB = 0;
-  public float initScale = 0;
-  public float initAlpha = 0;
-  public float angularVelocity = 0;
+  private float colorR;
+  private float colorG;
+  private float colorB;
+  private float initScale;
+  private float initAlpha;
+  private float angularVelocity;
 
   public ParticleStar(World world, double x, double y, double z, double vx, double vy, double vz, double[] data) {
     super(world, x, y, z, vx, vy, vz, data);

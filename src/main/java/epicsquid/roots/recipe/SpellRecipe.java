@@ -8,8 +8,8 @@ import epicsquid.mysticallib.util.ListUtil;
 import net.minecraft.item.ItemStack;
 
 public class SpellRecipe {
-  public List<ItemStack> ingredients = new ArrayList<>();
-  public String result;
+  private List<ItemStack> ingredients = new ArrayList<>();
+  private String result;
 
   public SpellRecipe(String result) {
     this.result = result;
@@ -27,5 +27,13 @@ public class SpellRecipe {
 
   public boolean matches(List<ItemStack> ingredients) {
     return ListUtil.stackListsMatch(ingredients, this.ingredients);
+  }
+
+  public List<ItemStack> getIngredients() {
+    return ingredients;
+  }
+
+  public String getResult() {
+    return result;
   }
 }

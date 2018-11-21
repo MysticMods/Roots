@@ -5,12 +5,12 @@ import net.minecraft.world.World;
 
 public class ParticleThorn extends ParticleBase {
 
-  public float colorR = 0;
-  public float colorG = 0;
-  public float colorB = 0;
-  public float initAlpha = 1.0f;
-  public float initScale = 0;
-  public boolean isAdditive = false;
+  private float colorR;
+  private float colorG;
+  private float colorB;
+  private float initAlpha;
+  private float initScale;
+  private boolean isAdditive = false;
 
   public ParticleThorn(World worldIn, double x, double y, double z, double vx, double vy, double vz, double[] data) {
     super(worldIn, x, y, z, 0, 0, 0, data);

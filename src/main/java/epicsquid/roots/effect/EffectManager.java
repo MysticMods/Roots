@@ -11,7 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class EffectManager {
-  public static Map<String, Effect> effects = new HashMap<>();
+  private static Map<String, Effect> effects = new HashMap<>();
 
   public static Effect effect_time_stop,
       effect_invulnerability,
@@ -137,29 +137,24 @@ public class EffectManager {
       if (!(entity instanceof EntityPlayer)){
         if (entity.getEntityData().hasKey(Constants.EFFECT_TAG)){
           NBTTagCompound tag = entity.getEntityData().getCompoundTag(Constants.EFFECT_TAG);
-          if (tag != null){
-            ArrayList<String> keys = new ArrayList<String>();
-            for (String s : tag.getKeySet()){
-              if (!s.endsWith("_data")){
-                NBTTagCompound data_tag = tag.getCompoundTag(s+"_data");
-                if (data_tag != null){
-                  effects.get(s).onTick(entity,tag.getInteger(s)-1,data_tag);
-                  tag.setInteger(s, tag.getInteger(s)-1);
-                  if (tag.getInteger(s) <= 0){
-                    keys.add(s);
-                  }
-                }
+          ArrayList<String> keys = new ArrayList<String>();
+          for (String s : tag.getKeySet()){
+            if (!s.endsWith("_data")){
+              NBTTagCompound data_tag = tag.getCompoundTag(s+"_data");
+              effects.get(s).onTick(entity,tag.getInteger(s)-1,data_tag);
+              tag.setInteger(s, tag.getInteger(s)-1);
+              if (tag.getInteger(s) <= 0){
+                keys.add(s);
               }
             }
-            for (int i = 0; i < keys.size(); i ++){
-              String s = keys.get(i);
-              NBTTagCompound data_tag = tag.getCompoundTag(s+"_data");
-              effects.get(s).onEnd(entity, data_tag);
-              tag.removeTag(s);
-              tag.removeTag(s+"_data");
-              if (tag.getKeySet().size() == 0){
-                entity.getEntityData().removeTag(Constants.EFFECT_TAG);
-              }
+          }
+          for (String s : keys) {
+            NBTTagCompound data_tag = tag.getCompoundTag(s + "_data");
+            effects.get(s).onEnd(entity, data_tag);
+            tag.removeTag(s);
+            tag.removeTag(s + "_data");
+            if (tag.getKeySet().size() == 0) {
+              entity.getEntityData().removeTag(Constants.EFFECT_TAG);
             }
           }
         }
@@ -168,32 +163,27 @@ public class EffectManager {
         EntityPlayer player = (EntityPlayer)entity;
         if (player.hasCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null)){
           NBTTagCompound tag = player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null).getData().getCompoundTag(Constants.EFFECT_TAG);
-          if (tag != null){
-            ArrayList<String> keys = new ArrayList<String>();
-            for (String s : tag.getKeySet()){
-              if (!s.endsWith("_data")){
-                NBTTagCompound data_tag = tag.getCompoundTag(s+"_data");
-                if (data_tag != null){
-                  effects.get(s).onTick(entity,tag.getInteger(s)-1, data_tag);
-                  tag.setInteger(s, tag.getInteger(s)-1);
-                  if (tag.getInteger(s) <= 0){
-                    keys.add(s);
-                  }
-                }
-              }
-            }
-            for (int i = 0; i < keys.size(); i ++){
-              String s = keys.get(i);
+          ArrayList<String> keys = new ArrayList<String>();
+          for (String s : tag.getKeySet()){
+            if (!s.endsWith("_data")){
               NBTTagCompound data_tag = tag.getCompoundTag(s+"_data");
-              effects.get(s).onEnd(entity, data_tag);
-              tag.removeTag(s);
-              tag.removeTag(s+"_data");
-              if (tag.getKeySet().size() == 0){
-                player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null).getData().removeTag(Constants.EFFECT_TAG);
+              effects.get(s).onTick(entity,tag.getInteger(s)-1, data_tag);
+              tag.setInteger(s, tag.getInteger(s)-1);
+              if (tag.getInteger(s) <= 0){
+                keys.add(s);
               }
             }
-            player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null).markDirty();
           }
+          for (String s : keys) {
+            NBTTagCompound data_tag = tag.getCompoundTag(s + "_data");
+            effects.get(s).onEnd(entity, data_tag);
+            tag.removeTag(s);
+            tag.removeTag(s + "_data");
+            if (tag.getKeySet().size() == 0) {
+              player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null).getData().removeTag(Constants.EFFECT_TAG);
+            }
+          }
+          player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null).markDirty();
         }
       }
     }

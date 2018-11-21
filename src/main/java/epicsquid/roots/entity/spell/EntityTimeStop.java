@@ -71,7 +71,7 @@ public class EntityTimeStop extends Entity {
     for (EntityLivingBase e : entities) {
       if (playerId != null) {
         if (e.getUniqueID().compareTo(playerId) != 0) {
-          EffectManager.assignEffect(e, EffectManager.effect_time_stop.name, 40, new NBTTagCompound());
+          EffectManager.assignEffect(e, EffectManager.effect_time_stop.getName(), 40, new NBTTagCompound());
         }
       }
     }

@@ -9,11 +9,11 @@ import net.minecraft.item.ItemStack;
 
 public class MortarRecipe {
 
-  public ItemStack result;
+  private ItemStack result;
 
-  public List<ItemStack> ingredients = new ArrayList<>();
+  private List<ItemStack> ingredients = new ArrayList<>();
 
-  public float r1, g1, b1, r2, g2, b2;
+  private float r1, g1, b1, r2, g2, b2;
 
   public MortarRecipe(ItemStack result, ItemStack[] ingredients, float red1, float green1, float blue1, float red2, float green2, float blue2) {
     this.result = result;
@@ -37,5 +37,33 @@ public class MortarRecipe {
 
   public ItemStack getResult() {
     return result;
+  }
+
+  public List<ItemStack> getIngredients() {
+    return ingredients;
+  }
+
+  public float getR1() {
+    return r1;
+  }
+
+  public float getG1() {
+    return g1;
+  }
+
+  public float getB1() {
+    return b1;
+  }
+
+  public float getR2() {
+    return r2;
+  }
+
+  public float getG2() {
+    return g2;
+  }
+
+  public float getB2() {
+    return b2;
   }
 }

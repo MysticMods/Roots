@@ -15,10 +15,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessageLightDrifterSync implements IMessage {
-  UUID id = null;
-  public boolean enable = false;
-  public double x = 0, y = 0, z = 0;
-  public int mode = 0;
+  private UUID id = null;
+  private boolean enable = false;
+  private double x = 0, y = 0, z = 0;
+  private int mode = 0;
 
   public MessageLightDrifterSync() {
     super();

@@ -5,9 +5,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
 public class Effect {
-  public String name = "";
-  public boolean hasIcon = false;
-  public ResourceLocation icon = null;
+  private String name;
+  private boolean hasIcon;
+  private ResourceLocation icon = null;
+
   public Effect(String name, boolean hasIcon){
     this.name = name;
     this.hasIcon = hasIcon;
@@ -29,5 +30,17 @@ public class Effect {
 
   public void onEnd(EntityLivingBase entity, NBTTagCompound data){
 
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public boolean isHasIcon() {
+    return hasIcon;
+  }
+
+  public ResourceLocation getIcon() {
+    return icon;
   }
 }

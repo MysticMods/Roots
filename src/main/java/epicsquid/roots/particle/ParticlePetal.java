@@ -5,11 +5,11 @@ import epicsquid.mysticallib.util.Util;
 import net.minecraft.world.World;
 
 public class ParticlePetal extends ParticleBase {
-  public float colorR = 0;
-  public float colorG = 0;
-  public float colorB = 0;
-  public float initAlpha = 1.0f;
-  public float initScale = 0;
+  private float colorR;
+  private float colorG;
+  private float colorB;
+  private float initAlpha;
+  private float initScale;
 
   public ParticlePetal(World world, double x, double y, double z, double vx, double vy, double vz, double[] data) {
     super(world, x, y, z, vx, vy, vz, data);

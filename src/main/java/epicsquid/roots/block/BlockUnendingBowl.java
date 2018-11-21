@@ -13,10 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 public class BlockUnendingBowl extends BlockTEBase {
-
-  /*
-  This block is a TE since I wanna do some render magic eventually
-   */
+  
   public BlockUnendingBowl(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
     super(mat, type, hardness, name, teClass);
   }
