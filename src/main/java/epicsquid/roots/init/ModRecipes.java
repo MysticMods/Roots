@@ -1,7 +1,9 @@
 package epicsquid.roots.init;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nonnull;
 
@@ -26,7 +28,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class ModRecipes {
 
   private static ArrayList<MortarRecipe> mortarRecipes = new ArrayList<>();
-  private static ArrayList<PyreCraftingRecipe> pyreCraftingRecipes = new ArrayList<>();
+  private static Map<String, PyreCraftingRecipe> pyreCraftingRecipes = new HashMap<>();
 
   private static ResourceLocation getRL(@Nonnull String s) {
     return new ResourceLocation(Roots.MODID + ":" + s);
@@ -70,23 +72,27 @@ public class ModRecipes {
   }
 
   public static PyreCraftingRecipe getCraftingRecipe(List<ItemStack> items) {
-    for (PyreCraftingRecipe pyreCraftingRecipe : pyreCraftingRecipes) {
-      if (pyreCraftingRecipe.matches(items)) {
-        return pyreCraftingRecipe;
+    for (Map.Entry<String, PyreCraftingRecipe> pyreCraftingRecipe : pyreCraftingRecipes.entrySet()) {
+      if (pyreCraftingRecipe.getValue().matches(items)) {
+        return pyreCraftingRecipe.getValue();
       }
     }
     return null;
   }
 
-  private static void addCraftingRecipe(PyreCraftingRecipe pyreCraftingRecipe) {
-    for (PyreCraftingRecipe existingRecipe : pyreCraftingRecipes) {
-      if (existingRecipe.matches(pyreCraftingRecipe.getIngredients())) {
+  public static PyreCraftingRecipe getCraftingRecipe(String recipeName) {
+    return pyreCraftingRecipes.get(recipeName);
+  }
+
+  private static void addCraftingRecipe(String recipeName, PyreCraftingRecipe pyreCraftingRecipe) {
+    for (Map.Entry<String, PyreCraftingRecipe> pyreCraftingRecipeEntry : pyreCraftingRecipes.entrySet()) {
+      if (pyreCraftingRecipeEntry.getValue().matches(pyreCraftingRecipe.getIngredients())) {
         System.out.println("A Crafting Recipe is already registered");
         return;
       }
     }
 
-    pyreCraftingRecipes.add(pyreCraftingRecipe);
+    pyreCraftingRecipes.put(recipeName, pyreCraftingRecipe);
   }
 
   /**
@@ -102,7 +108,7 @@ public class ModRecipes {
   }
 
   private static void initCraftingRecipes(){
-    addCraftingRecipe(new PyreCraftingRecipe(new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.unending_bowl)))
+    addCraftingRecipe("unending_bowl", new PyreCraftingRecipe(new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.unending_bowl)))
     .addIngredients(new ItemStack(Items.WATER_BUCKET), new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.mortar)), new ItemStack(ModItems.moonglow_leaf),
         new ItemStack(ModItems.terra_moss), new ItemStack(ModItems.spirit_herb)));
   }
