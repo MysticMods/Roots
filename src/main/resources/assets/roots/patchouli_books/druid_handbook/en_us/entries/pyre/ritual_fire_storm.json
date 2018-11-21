@@ -9,11 +9,7 @@
     },
     {
       "type": "pyre_template",
-      "item1": "mysticalworld:wildroot",
-      "item2": "mysticalworld:bark_acacia",
-      "item3": "minecraft:coal",
-      "item4": "mysticalworld:bark_acacia",
-      "item5": "minecraft:blaze_powder"
+      "ritual": "ritual_fire_storm"
     },
     {
       "type": "multiblock",

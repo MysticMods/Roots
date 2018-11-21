@@ -9,11 +9,7 @@
     },
     {
       "type": "pyre_template",
-      "item1": "mysticalworld:moonglow_leaf",
-      "item2": "mysticalworld:moonglow_seed",
-      "item3": "minecraft:log:2",
-      "item4": "mysticalworld:bark_birch",
-      "item5": "mysticalworld:bark_acacia"
+      "ritual": "ritual_light"
     }
   ]
 }

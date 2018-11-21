@@ -9,11 +9,7 @@
     },
     {
       "type": "spell_template",
-      "item1": "minecraft:cactus",
-      "item2": "minecraft:double_plant:4",
-      "item3": "minecraft:bone",
-      "item4": "minecraft:fermented_spider_eye",
-      "item5": "mysticalworld:terra_moss"
+      "spell": "spell_rose_thorns"
     }
   ]
 }

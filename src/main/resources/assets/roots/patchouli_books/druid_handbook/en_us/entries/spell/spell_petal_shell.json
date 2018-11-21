@@ -9,11 +9,7 @@
     },
     {
       "type": "spell_template",
-      "item1": "minecraft:melon_seeds",
-      "item2": "minecraft:double_plant:5",
-      "item3": "minecraft:dye:9",
-      "item4": "mysticalworld:moonglow_leaf",
-      "item5": "mysticalworld:pereskia_bulb"
+      "spell": "spell_petal_shell"
     }
   ]
 }

@@ -9,11 +9,7 @@
     },
     {
       "type": "spell_template",
-      "item1": "minecraft:spider_eye",
-      "item2": "minecraft:red_flower:2",
-      "item3": "minecraft:slime_ball",
-      "item4": "mysticalworld:terra_moss",
-      "item5": "mysticalworld:wildroot"
+      "spell": "spell_acid_cloud"
     }
   ]
 }

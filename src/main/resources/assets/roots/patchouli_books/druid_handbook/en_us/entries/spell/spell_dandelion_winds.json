@@ -9,11 +9,7 @@
     },
     {
       "type": "spell_template",
-      "item1": "minecraft:feather",
-      "item2": "minecraft:yellow_flower",
-      "item3": "minecraft:snowball",
-      "item4": "mysticalworld:moonglow_leaf",
-      "item5": "minecraft:wheat"
+      "spell": "spell_dandelion_winds"
     }
   ]
 }

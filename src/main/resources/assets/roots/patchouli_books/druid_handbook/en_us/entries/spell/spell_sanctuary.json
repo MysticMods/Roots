@@ -9,11 +9,7 @@
     },
     {
       "type": "spell_template",
-      "item1": "minecraft:vine",
-      "item2": "minecraft:red_flower:4",
-      "item3": "minecraft:dye:1",
-      "item4": "mysticalworld:moonglow_leaf",
-      "item5": "mysticalworld:wildroot"
+      "spell": "spell_sanctuary"
     }
   ]
 }

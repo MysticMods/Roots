@@ -9,11 +9,7 @@
     },
     {
       "type": "pyre_template",
-      "item1": "minecraft:snowball",
-      "item2": "minecraft:packed_ice",
-      "item3": "minecraft:snow",
-      "item4": "mysticalworld:bark_acacia",
-      "item5": "mysticalworld:bark_acacia"
+      "ritual": "ritual_frost"
     }
   ]
 }

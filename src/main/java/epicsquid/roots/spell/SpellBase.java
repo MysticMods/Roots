@@ -136,5 +136,7 @@ public abstract class SpellBase {
     return costs;
   }
 
-
+  public List<ItemStack> getIngredients() {
+    return ingredients;
+  }
 }
