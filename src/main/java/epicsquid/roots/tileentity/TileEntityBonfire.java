@@ -195,8 +195,6 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           world.spawnEntity(item);
         }
 
-        System.out.println("Has spawned");
-
         this.craftingResult = ItemStack.EMPTY;
       }
       if (world.isRemote) {

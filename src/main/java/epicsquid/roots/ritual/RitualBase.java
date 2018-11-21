@@ -76,7 +76,7 @@ public abstract class RitualBase {
         IBlockState state = world.getBlockState(pos.add(i, height-1, j));
         if (state.getBlock() == ModBlocks.chiseled_runestone) {
           boolean stoneFound = true;
-          for(int y = height-1; y > 0; y++){
+          for(int y = height-1; y > 0; y--){
             if (world.getBlockState(pos.add(i, 1, j)).getBlock() != material){
               stoneFound = false;
             }

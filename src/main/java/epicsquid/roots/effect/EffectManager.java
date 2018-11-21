@@ -21,7 +21,7 @@ public class EffectManager {
       effect_regen;
 
   public static void init(){
-    //effects.put("effect_invulnerability", effect_invulnerability = new EffectInvulnerability("effect_invulnerability",false));
+    effects.put("effect_invulnerability", effect_invulnerability = new EffectInvulnerability("effect_invulnerability",false));
     effects.put("effect_time_stop", effect_time_stop = new EffectTimeStop("effect_time_stop",false));
     //effects.put("effect_fireresist", effect_fireresist = new EffectFireResist("effect_fireresist",false));
     //effects.put("effect_arcanism", effect_arcanism = new EffectArcanism("effect_arcanism",false));
