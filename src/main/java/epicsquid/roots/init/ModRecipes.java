@@ -51,7 +51,7 @@ public class ModRecipes {
 
   private static void addMortarRecipe(MortarRecipe recipe) {
     for (MortarRecipe mortarRecipe : mortarRecipes) {
-      if (mortarRecipe.matches(recipe.ingredients)) {
+      if (mortarRecipe.matches(recipe.getIngredients())) {
         System.out.println("Recipe is already registered with output - " + recipe.getResult().getItem().getUnlocalizedName());
         return;
       }

@@ -38,7 +38,7 @@ public class SpellPetalShell extends SpellBase {
           new AxisAlignedBB(player.posX - 0.5, player.posY, player.posZ - 0.5, player.posX + 0.5, player.posY + 2.0, player.posZ + 0.5));
       boolean hasShell = false;
       for (EntityPetalShell s : shells) {
-        if (s.playerId.compareTo(player.getUniqueID()) == 0) {
+        if (s.getPlayerId().compareTo(player.getUniqueID()) == 0) {
           hasShell = true;
           s.getDataManager().set(s.getCharge(), Math.min(3, s.getDataManager().get(s.getCharge()) + 1));
           s.getDataManager().setDirty(s.getCharge());

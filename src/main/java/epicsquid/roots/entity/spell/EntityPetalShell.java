@@ -11,7 +11,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 
 public class EntityPetalShell extends Entity {
-  public UUID playerId = null;
+  private UUID playerId = null;
   private static final DataParameter<Integer> charge = EntityDataManager.createKey(EntityPetalShell.class, DataSerializers.VARINT);
 
   public EntityPetalShell(World worldIn) {
@@ -65,5 +65,9 @@ public class EntityPetalShell extends Entity {
 
   public DataParameter<Integer> getCharge() {
     return charge;
+  }
+
+  public UUID getPlayerId() {
+    return playerId;
   }
 }

@@ -16,8 +16,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessageImbueCompleteFX implements IMessage {
-  double posX = 0, posY = 0, posZ = 0;
-  String spellName = "null";
+  private double posX = 0, posY = 0, posZ = 0;
+  private String spellName = "null";
 
   public MessageImbueCompleteFX() {
     super();

@@ -4,18 +4,18 @@ import epicsquid.mysticallib.particle.ParticleBase;
 import net.minecraft.world.World;
 
 public class ParticleLineGlowSteady extends ParticleBase {
-  public float colorR;
-  public float colorG;
-  public float colorB;
-  public float initAlpha;
-  public double targetPosX;
-  public double targetPosY;
-  public double targetPosZ;
-  public double initPosX;
-  public double initPosY;
-  public double initPosZ;
+  private float colorR;
+  private float colorG;
+  private float colorB;
+  private float initAlpha;
+  private double targetPosX;
+  private double targetPosY;
+  private double targetPosZ;
+  private double initPosX;
+  private double initPosY;
+  private double initPosZ;
 
-  public float initScale;
+  private float initScale;
 
   public ParticleLineGlowSteady(World world, double x, double y, double z, double vx, double vy, double vz, double[] data) {
     super(world, x, y, z, vx, vy, vz, data);

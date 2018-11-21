@@ -21,8 +21,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessageRadianceBeamFX implements IMessage {
-  double posX = 0, posY = 0, posZ = 0;
-  UUID id = null;
+  private double posX = 0, posY = 0, posZ = 0;
+  private UUID id = null;
 
   public MessageRadianceBeamFX() {
     super();

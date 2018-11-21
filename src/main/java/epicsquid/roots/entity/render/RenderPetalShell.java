@@ -24,8 +24,8 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 public class RenderPetalShell extends RenderEntity{
   public ResourceLocation texture = new ResourceLocation("roots:textures/entity/particle_petal.png");
 
-  public static int lightx = 0xF000F0;
-  public static int lighty = 0xF000F0;
+  private static int lightx = 0xF000F0;
+  private static int lighty = 0xF000F0;
 
   public RenderPetalShell(RenderManager renderManagerIn) {
     super(renderManagerIn);

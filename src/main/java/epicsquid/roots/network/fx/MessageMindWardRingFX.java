@@ -15,8 +15,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessageMindWardRingFX implements IMessage {
-  public static Random random = new Random();
-  double posX = 0, posY = 0, posZ = 0;
+  private static Random random = new Random();
+  private double posX = 0, posY = 0, posZ = 0;
 
   public MessageMindWardRingFX(){
     super();

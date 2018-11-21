@@ -89,10 +89,10 @@ public class EventManager {
 
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public void onDamage(LivingHurtEvent event){
-    if (EffectManager.hasEffect(event.getEntityLiving(), EffectManager.effect_time_stop.name)){
+    if (EffectManager.hasEffect(event.getEntityLiving(), EffectManager.effect_time_stop.getName())){
       event.setAmount(event.getAmount()*0.1f);
     }
-    if (EffectManager.hasEffect(event.getEntityLiving(), EffectManager.effect_invulnerability.name)){
+    if (EffectManager.hasEffect(event.getEntityLiving(), EffectManager.effect_invulnerability.getName())){
      event.setCanceled(true);
     }
 //    if (event.getEntity() instanceof EntityPlayer){
@@ -105,7 +105,7 @@ public class EventManager {
 //    }
     if (event.getEntityLiving().getEntityData().hasKey(Constants.EFFECT_TAG)){
       NBTTagCompound tag = event.getEntityLiving().getEntityData().getCompoundTag(Constants.EFFECT_TAG);
-      if (tag.hasKey(EffectManager.effect_invulnerability.name)){
+      if (tag.hasKey(EffectManager.effect_invulnerability.getName())){
         event.setCanceled(true);
       }
     }
@@ -114,7 +114,7 @@ public class EventManager {
       List<EntityPetalShell> shells = p.getEntityWorld().getEntitiesWithinAABB(EntityPetalShell.class, new AxisAlignedBB(p.posX-0.5,p.posY,p.posZ-0.5,p.posX+0.5,p.posY+2.0,p.posZ+0.5));
       if (shells.size() > 0){
         for (EntityPetalShell s : shells){
-          if (s.playerId.compareTo(p.getUniqueID()) == 0){
+          if (s.getPlayerId().compareTo(p.getUniqueID()) == 0){
             if (s.getDataManager().get(s.getCharge()) > 0){
               event.setAmount(0);
               event.setCanceled(true);
@@ -149,7 +149,7 @@ public class EventManager {
   @SubscribeEvent
   public void onEntityTick(LivingUpdateEvent event){
     EffectManager.tickEffects(event.getEntityLiving());
-    if (EffectManager.hasEffect(event.getEntityLiving(), EffectManager.effect_time_stop.name)){
+    if (EffectManager.hasEffect(event.getEntityLiving(), EffectManager.effect_time_stop.getName())){
       event.setCanceled(true);
     }
     if (event.getEntity().getEntityData().hasKey(Constants.MIND_WARD_TAG) && !event.getEntity().getEntityWorld().isRemote){

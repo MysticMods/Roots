@@ -10,9 +10,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class StructureBase {
-  public ArrayList<String[]> layers = new ArrayList<>();
-  public int width, length;
-  public Map<String, IBlockState> blocks = new HashMap<>();
+  private ArrayList<String[]> layers = new ArrayList<>();
+  private int width, length;
+  private Map<String, IBlockState> blocks = new HashMap<>();
 
   public StructureBase(int w, int h) {
     width = w;

@@ -16,8 +16,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessagePlayerDataUpdate implements IMessage {
-  public UUID id = null;
-  public NBTTagCompound tag = new NBTTagCompound();
+  private UUID id = null;
+  private NBTTagCompound tag = new NBTTagCompound();
 
   public MessagePlayerDataUpdate(){
     //

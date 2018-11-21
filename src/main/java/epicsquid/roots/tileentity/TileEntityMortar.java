@@ -147,12 +147,12 @@ public class TileEntityMortar extends TileBase {
                 ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f),
-                    mortarRecipe.r1, mortarRecipe.g1, mortarRecipe.b1, 0.25f, 1.5f, 24, false);
+                    mortarRecipe.getR1(), mortarRecipe.getG1(), mortarRecipe.getB1(), 0.25f, 1.5f, 24, false);
               } else if (chance == 1) {
                 ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f),
-                    mortarRecipe.r2, mortarRecipe.g2, mortarRecipe.b2, 0.25f, 1.5f, 24, false);
+                    mortarRecipe.getR2(), mortarRecipe.getG2(), mortarRecipe.getB2(), 0.25f, 1.5f, 24, false);
               } else if (chance == 2) {
                 ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
                     getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),

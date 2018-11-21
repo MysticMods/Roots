@@ -14,8 +14,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessageShatterBurstFX implements IMessage {
-  double srcX = 0, srcY = 0, srcZ = 0;
-  double posX = 0, posY = 0, posZ = 0;
+  private double srcX = 0, srcY = 0, srcZ = 0;
+  private double posX = 0, posY = 0, posZ = 0;
 
   public MessageShatterBurstFX() {
     super();
