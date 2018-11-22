@@ -6,6 +6,11 @@ item.staff.name=Staff
 item.pouch.name=Powder Pouch
 item.straw.name=Straw
 item.firestarter.name=Firestarter
+item.living_pickaxe.name=Living Pickaxe
+item.living_axe.name=Living Axe
+item.living_shovel.name=Living Shove
+item.living_hoe.name=Living Hoe
+item.living_sword.name=Living Sword
 
 tile.mortar.name=Mortar
 tile.imbuer.name=Imbuer
