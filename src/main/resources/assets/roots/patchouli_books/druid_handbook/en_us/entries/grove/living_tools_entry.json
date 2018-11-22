@@ -5,11 +5,27 @@
   "pages": [
     {
       "type": "text",
-      "text": "Unlike normal tools Living Tools regenerate their durability. They also are less sturdy then normal tools but can mine diamonds."
+      "text": "Your rituals are capable of channeling life energy into previously dead objects. Using this, you can grow newer, stronger forms for your wooden tools. Adding a little gold for reinforcement will grant you tools of similar strength to Iron that repair slowly over time."
     },
     {
       "type": "ritual_crafting_template",
       "recipe": "living_pickaxe"
+    },
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "living_axe"
+    },
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "living_shovel"
+    },
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "living_hoe"
+    },
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "living_sword"
     }
   ]
 }

@@ -13,7 +13,6 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.recipe.PowderPouchFillRecipe;
-import epicsquid.roots.recipe.SpellRecipe;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.init.Items;
@@ -120,6 +119,34 @@ public class ModRecipes {
         .addIngredients(
             new ItemStack(Items.GOLD_INGOT),
             new ItemStack(Items.WOODEN_PICKAXE),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak)));
+    addCraftingRecipe("living_axe", new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.living_axe))
+        .addIngredients(
+            new ItemStack(Items.GOLD_INGOT),
+            new ItemStack(Items.WOODEN_AXE),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak)));
+    addCraftingRecipe("living_shovel", new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.living_shovel))
+        .addIngredients(
+            new ItemStack(Items.GOLD_INGOT),
+            new ItemStack(Items.WOODEN_SHOVEL),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak)));
+    addCraftingRecipe("living_hoe", new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.living_hoe))
+        .addIngredients(
+            new ItemStack(Items.GOLD_INGOT),
+            new ItemStack(Items.WOODEN_HOE),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak)));
+    addCraftingRecipe("living_sword", new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.living_sword))
+        .addIngredients(
+            new ItemStack(Items.GOLD_INGOT),
+            new ItemStack(Items.WOODEN_SWORD),
             new ItemStack(ModItems.wildroot),
             new ItemStack(ModItems.bark_oak),
             new ItemStack(ModItems.bark_oak)));

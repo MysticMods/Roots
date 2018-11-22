@@ -1,7 +1,6 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.LibRegistry;
-import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.model.CustomModelItem;
 import epicsquid.mysticallib.model.CustomModelLoader;
 import epicsquid.mysticallib.model.ICustomModeledObject;
@@ -9,21 +8,21 @@ import epicsquid.mysticallib.model.IModeledObject;
 import epicsquid.mysticallib.util.Util;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 
-public class ItemLivingPickaxe extends ItemPickaxe implements IModeledObject, ICustomModeledObject {
+public class ItemLivingHoe extends ItemHoe implements IModeledObject, ICustomModeledObject {
 
   private boolean hasCustomModel = false;
 
-  public ItemLivingPickaxe(ToolMaterial material, String name) {
+  public ItemLivingHoe(ToolMaterial material, String name) {
     super(material);
     setUnlocalizedName(name);
     setRegistryName(LibRegistry.getActiveModid(), name);
-    setHarvestLevel("pickaxe", 3);
+    setHarvestLevel("hoe", 3);
     setMaxDamage(192);
   }
 
@@ -32,7 +31,7 @@ public class ItemLivingPickaxe extends ItemPickaxe implements IModeledObject, IC
     return 22;
   }
 
-  public ItemLivingPickaxe setModelCustom(boolean custom) {
+  public ItemLivingHoe setModelCustom(boolean custom) {
     this.hasCustomModel = custom;
     return this;
   }
