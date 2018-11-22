@@ -109,8 +109,20 @@ public class ModRecipes {
 
   private static void initCraftingRecipes(){
     addCraftingRecipe("unending_bowl", new PyreCraftingRecipe(new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.unending_bowl)))
-    .addIngredients(new ItemStack(Items.WATER_BUCKET), new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.mortar)), new ItemStack(ModItems.moonglow_leaf),
-        new ItemStack(ModItems.terra_moss), new ItemStack(ModItems.spirit_herb)));
+    .addIngredients(
+        new ItemStack(Items.WATER_BUCKET),
+        new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.mortar)),
+        new ItemStack(ModItems.moonglow_leaf),
+        new ItemStack(ModItems.terra_moss),
+        new ItemStack(ModItems.spirit_herb)));
+
+    addCraftingRecipe("living_pickaxe", new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.living_pickaxe))
+        .addIngredients(
+            new ItemStack(Items.GOLD_INGOT),
+            new ItemStack(Items.WOODEN_PICKAXE),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak)));
   }
 
 }

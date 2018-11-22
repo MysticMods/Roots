@@ -1,7 +1,0 @@
-{
-    "parent": "block/crop",
-    "textures": {
-        "particle": "roots:blocks/terra_moss_5",
-        "crop": "roots:blocks/terra_moss_5"
-    }
-}

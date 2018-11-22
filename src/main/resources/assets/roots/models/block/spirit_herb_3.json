@@ -1,7 +1,0 @@
-{
-    "parent": "block/crop",
-    "textures": {
-        "particle": "roots:blocks/spirit_herb_3",
-        "crop": "roots:blocks/spirit_herb_3"
-    }
-}

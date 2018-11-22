@@ -1,7 +1,0 @@
-{
-    "parent": "block/crop",
-    "textures": {
-        "particle": "roots:blocks/wildroot_3",
-        "crop": "roots:blocks/wildroot_3"
-    }
-}
