@@ -5,15 +5,17 @@ import javax.annotation.Nonnull;
 import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.roots.Roots;
+import epicsquid.roots.item.ItemLivingPickaxe;
 import epicsquid.roots.item.ItemPetalDust;
 import epicsquid.roots.item.ItemPouch;
 import epicsquid.roots.item.ItemStaff;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
 
 public class ModItems {
 
   // All mod items
-  public static Item pestle, pouch, petal_dust, staff;
+  public static Item pestle, pouch, petal_dust, staff, living_pickaxe;
 
   /**
    * Register all items
@@ -23,6 +25,7 @@ public class ModItems {
     event.addItem(pouch = new ItemPouch("pouch").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(petal_dust = new ItemPetalDust("petal_dust").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(staff = new ItemStaff("staff").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(living_pickaxe = new ItemLivingPickaxe(ToolMaterial.GOLD, "living_pickaxe").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
   }
 
   /**

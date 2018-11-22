@@ -1,0 +1,15 @@
+{
+  "name": "Living Tools",
+  "icon": "roots:living_pickaxe",
+  "category": "grove_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Unlike normal tools Living Tools regenerate their durability. They also are less sturdy then normal tools but can mine diamonds."
+    },
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "living_pickaxe"
+    }
+  ]
+}
