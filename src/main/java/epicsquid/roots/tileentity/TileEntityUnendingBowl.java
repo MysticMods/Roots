@@ -2,8 +2,6 @@ package epicsquid.roots.tileentity;
 
 import javax.annotation.Nonnull;
 
-import epicsquid.mysticallib.network.MessageTEUpdate;
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

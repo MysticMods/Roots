@@ -6,7 +6,6 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.entity.grove.EntityNaturalGrove;
 import epicsquid.roots.entity.grove.EntityWildGrove;
 import epicsquid.roots.entity.render.RenderPetalShell;
-import epicsquid.roots.entity.render.RenderPetalShell.Factory;
 import epicsquid.roots.entity.ritual.EntityFlare;
 import epicsquid.roots.entity.ritual.EntityRitualFireStorm;
 import epicsquid.roots.entity.ritual.EntityRitualLife;

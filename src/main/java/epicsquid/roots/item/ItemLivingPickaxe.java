@@ -1,7 +1,6 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.LibRegistry;
-import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.model.CustomModelItem;
 import epicsquid.mysticallib.model.CustomModelLoader;
 import epicsquid.mysticallib.model.ICustomModeledObject;

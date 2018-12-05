@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import epicsquid.mysticallib.util.ListUtil;
-import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.util.PowderInventoryUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
