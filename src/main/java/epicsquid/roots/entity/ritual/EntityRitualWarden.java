@@ -6,7 +6,6 @@ import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;

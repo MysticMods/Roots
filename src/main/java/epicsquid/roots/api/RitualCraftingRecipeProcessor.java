@@ -1,12 +1,7 @@
 package epicsquid.roots.api;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
-import epicsquid.roots.ritual.RitualBase;
-import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.item.ItemStack;
 import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariableProvider;

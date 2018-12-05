@@ -8,8 +8,6 @@ import epicsquid.mysticallib.model.IModeledObject;
 import epicsquid.mysticallib.util.Util;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
