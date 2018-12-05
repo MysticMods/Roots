@@ -34,7 +34,15 @@ dependencies {
     } else {
         compile project(':MysticalLib')
         compile project(':MysticalWorld')
+        compile "vazkii.patchouli:Patchouli:${patchouli_version}"
     }
+}
+
+repositories {
+    maven { 
+        name = 'Patchouli'
+        url = "https://maven.blamejared.com" 
+    } 
 }
 
 processResources {
