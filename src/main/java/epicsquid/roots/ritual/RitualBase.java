@@ -97,4 +97,8 @@ public abstract class RitualBase {
   public List<ItemStack> getIngredients() {
     return ingredients;
   }
+
+  public String getName() {
+    return name;
+  }
 }

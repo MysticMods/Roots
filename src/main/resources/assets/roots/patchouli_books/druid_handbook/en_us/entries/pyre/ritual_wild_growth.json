@@ -1,0 +1,15 @@
+{
+  "name": "Wildroot Growth",
+  "icon": "mysticalworld:pelt",
+  "category": "pyre_category",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Makes wildroot grow into wildwoot branches."
+    },
+    {
+      "type": "pyre_template",
+      "ritual": "ritual_wild_growth"
+    }
+  ]
+}

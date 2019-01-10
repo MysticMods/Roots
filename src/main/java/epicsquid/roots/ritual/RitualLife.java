@@ -12,6 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class RitualLife extends RitualBase {
+
   public RitualLife(String name, int duration) {
     super(name, duration);
     addIngredients(new ItemStack(ModItems.terra_moss, 1), new ItemStack(ModItems.bark_oak, 1), new ItemStack(ModItems.bark_birch, 1),
