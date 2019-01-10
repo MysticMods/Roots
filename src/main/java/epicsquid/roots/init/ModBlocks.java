@@ -8,13 +8,7 @@ import epicsquid.mysticallib.block.BlockStairsBase;
 import epicsquid.mysticallib.block.BlockWallBase;
 import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.roots.Roots;
-import epicsquid.roots.block.BlockBonfire;
-import epicsquid.roots.block.BlockImbuer;
-import epicsquid.roots.block.BlockMortar;
-import epicsquid.roots.block.BlockOffertoryPlate;
-import epicsquid.roots.block.BlockRunestone;
-import epicsquid.roots.block.BlockStructureMarker;
-import epicsquid.roots.block.BlockUnendingBowl;
+import epicsquid.roots.block.*;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import epicsquid.roots.tileentity.TileEntityImbuer;
 import epicsquid.roots.tileentity.TileEntityMortar;
@@ -27,7 +21,7 @@ import net.minecraft.block.material.Material;
 public class ModBlocks {
 
   // All block
-  public static Block mortar, bonfire, runestone_brick, chiseled_runestone, imbuer, structure_marker, offertory_plate, unending_bowl;
+  public static Block mortar, bonfire, runestone_brick, chiseled_runestone, imbuer, structure_marker, offertory_plate, unending_bowl, wildroot_log;
 
   //Runestones
   public static Block runestone, runestone_wild, runestone_natural, runestone_mystic, runestone_fungal, runestone_forbidden, runestone_fairy;
@@ -46,6 +40,13 @@ public class ModBlocks {
         .setLightOpacity(0);
     event.addBlock(imbuer = new BlockImbuer(Material.WOOD, SoundType.WOOD, 1.4f, "imbuer", TileEntityImbuer.class)).setCreativeTab(Roots.tab)
         .setLightOpacity(0);
+    event.addBlock(structure_marker = new BlockStructureMarker());
+    event.addBlock(offertory_plate = new BlockOffertoryPlate(Material.ROCK, SoundType.STONE, 1.4f, "offertory_plate", TileEntityOffertoryPlate.class))
+            .setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(unending_bowl = new BlockUnendingBowl(Material.ROCK, SoundType.STONE, 1.4f, "unending_bowl", TileEntityUnendingBowl.class))
+            .setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(wildroot_log = new BlockWildrootLog("wildroot_log").setCreativeTab(Roots.tab));
+    //Runestones
     event.addBlock(runestone = new BlockRunestone(Material.ROCK, SoundType.METAL, 1.4f, "runestone")).setCreativeTab(Roots.tab);
     event.addBlock(runestone_wild = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_wild")).setCreativeTab(Roots.tab);
     event.addBlock(runestone_natural = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_natural")).setCreativeTab(Roots.tab);
@@ -55,11 +56,7 @@ public class ModBlocks {
     event.addBlock(runestone_fairy = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_fairy")).setCreativeTab(Roots.tab);
     event.addBlock(runestone_brick = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_brick")).setCreativeTab(Roots.tab);
     event.addBlock(chiseled_runestone = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "chiseled_runestone")).setCreativeTab(Roots.tab);
-    event.addBlock(structure_marker = new BlockStructureMarker());
-    event.addBlock(offertory_plate = new BlockOffertoryPlate(Material.ROCK, SoundType.STONE, 1.4f, "offertory_plate", TileEntityOffertoryPlate.class))
-        .setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(unending_bowl = new BlockUnendingBowl(Material.ROCK, SoundType.STONE, 1.4f, "unending_bowl", TileEntityUnendingBowl.class))
-        .setCreativeTab(Roots.tab).setLightOpacity(0);
+
 
     //Decoration
     variants(event, runestone, "runestone", runestone_slab, runestone_double_slab, runestone_stairs, runestone_wall);
