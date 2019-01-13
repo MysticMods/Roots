@@ -1,14 +1,7 @@
 package epicsquid.roots.proxy;
 
 import epicsquid.roots.RegistryManager;
-import epicsquid.roots.tileentity.TileEntityBonfire;
-import epicsquid.roots.tileentity.TileEntityBonfireRenderer;
-import epicsquid.roots.tileentity.TileEntityImbuer;
-import epicsquid.roots.tileentity.TileEntityImbuerRenderer;
-import epicsquid.roots.tileentity.TileEntityMortar;
-import epicsquid.roots.tileentity.TileEntityMortarRenderer;
-import epicsquid.roots.tileentity.TileEntityOffertoryPlate;
-import epicsquid.roots.tileentity.TileEntityOffertoryPlateRenderer;
+import epicsquid.roots.tileentity.*;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -22,6 +15,7 @@ public class ClientProxy extends CommonProxy {
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBonfire.class, new TileEntityBonfireRenderer());
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityImbuer.class, new TileEntityImbuerRenderer());
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOffertoryPlate.class, new TileEntityOffertoryPlateRenderer());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileEntityIncenseBurner.class, new TileEntityIncenseBurnerRenderer());
   }
 
   @Override
