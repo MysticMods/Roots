@@ -9,11 +9,7 @@ import epicsquid.mysticallib.block.BlockWallBase;
 import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.roots.Roots;
 import epicsquid.roots.block.*;
-import epicsquid.roots.tileentity.TileEntityBonfire;
-import epicsquid.roots.tileentity.TileEntityImbuer;
-import epicsquid.roots.tileentity.TileEntityMortar;
-import epicsquid.roots.tileentity.TileEntityOffertoryPlate;
-import epicsquid.roots.tileentity.TileEntityUnendingBowl;
+import epicsquid.roots.tileentity.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -22,6 +18,7 @@ public class ModBlocks {
 
   // All block
   public static Block mortar, bonfire, runestone_brick, chiseled_runestone, imbuer, structure_marker, offertory_plate, unending_bowl, wildroot_log;
+  public static Block incense_burner;
 
   //Runestones
   public static Block runestone, runestone_wild, runestone_natural, runestone_mystic, runestone_fungal, runestone_forbidden, runestone_fairy;
@@ -34,18 +31,15 @@ public class ModBlocks {
    * Register all block
    */
   public static void registerBlocks(@Nonnull RegisterContentEvent event) {
-    event.addBlock(mortar = new BlockMortar(Material.ROCK, SoundType.STONE, 1.4f, "mortar", TileEntityMortar.class)).setCreativeTab(Roots.tab)
-        .setLightOpacity(0);
-    event.addBlock(bonfire = new BlockBonfire(Material.WOOD, SoundType.WOOD, 1.4f, "bonfire", TileEntityBonfire.class)).setCreativeTab(Roots.tab)
-        .setLightOpacity(0);
-    event.addBlock(imbuer = new BlockImbuer(Material.WOOD, SoundType.WOOD, 1.4f, "imbuer", TileEntityImbuer.class)).setCreativeTab(Roots.tab)
-        .setLightOpacity(0);
     event.addBlock(structure_marker = new BlockStructureMarker());
-    event.addBlock(offertory_plate = new BlockOffertoryPlate(Material.ROCK, SoundType.STONE, 1.4f, "offertory_plate", TileEntityOffertoryPlate.class))
-            .setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(unending_bowl = new BlockUnendingBowl(Material.ROCK, SoundType.STONE, 1.4f, "unending_bowl", TileEntityUnendingBowl.class))
-            .setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(mortar = new BlockMortar(Material.ROCK, SoundType.STONE, 1.4f, "mortar", TileEntityMortar.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(bonfire = new BlockBonfire(Material.WOOD, SoundType.WOOD, 1.4f, "bonfire", TileEntityBonfire.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(imbuer = new BlockImbuer(Material.WOOD, SoundType.WOOD, 1.4f, "imbuer", TileEntityImbuer.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(offertory_plate = new BlockOffertoryPlate(Material.ROCK, SoundType.STONE, 1.4f, "offertory_plate", TileEntityOffertoryPlate.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(unending_bowl = new BlockUnendingBowl(Material.ROCK, SoundType.STONE, 1.4f, "unending_bowl", TileEntityUnendingBowl.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(wildroot_log = new BlockWildrootLog("wildroot_log").setCreativeTab(Roots.tab));
+    event.addBlock(incense_burner = new BlockIncenseBurner(Material.WOOD, SoundType.WOOD, 1.4f, "incense_burner", TileEntityIncenseBurner.class).setCreativeTab(Roots.tab));
+
     //Runestones
     event.addBlock(runestone = new BlockRunestone(Material.ROCK, SoundType.METAL, 1.4f, "runestone")).setCreativeTab(Roots.tab);
     event.addBlock(runestone_wild = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_wild")).setCreativeTab(Roots.tab);
