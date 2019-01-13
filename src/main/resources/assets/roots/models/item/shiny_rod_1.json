@@ -1,8 +1,0 @@
-{
-    "parent": "item/handheld",
-    "textures": {
-        "layer0": "roots:items/shiny_rod_petal_1",
-        "layer1": "roots:items/shiny_rod_petal_2",
-        "layer2": "roots:items/shiny_rod_active"
-    }
-}
