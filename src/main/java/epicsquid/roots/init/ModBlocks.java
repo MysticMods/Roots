@@ -38,7 +38,7 @@ public class ModBlocks {
     event.addBlock(offertory_plate = new BlockOffertoryPlate(Material.ROCK, SoundType.STONE, 1.4f, "offertory_plate", TileEntityOffertoryPlate.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(unending_bowl = new BlockUnendingBowl(Material.ROCK, SoundType.STONE, 1.4f, "unending_bowl", TileEntityUnendingBowl.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(wildroot_log = new BlockWildrootLog("wildroot_log").setCreativeTab(Roots.tab));
-    event.addBlock(incense_burner = new BlockIncenseBurner(Material.WOOD, SoundType.WOOD, 1.4f, "incense_burner", TileEntityIncenseBurner.class).setCreativeTab(Roots.tab));
+    event.addBlock(incense_burner = new BlockIncenseBurner(Material.ROCK, SoundType.STONE, 1.4f, "incense_burner", TileEntityIncenseBurner.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
 
     //Runestones
     event.addBlock(runestone = new BlockRunestone(Material.ROCK, SoundType.METAL, 1.4f, "runestone")).setCreativeTab(Roots.tab);
