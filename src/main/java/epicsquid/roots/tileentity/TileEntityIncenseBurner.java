@@ -6,11 +6,11 @@ import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.init.HerbRegistry;
-import epicsquid.roots.particle.ParticleUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -25,7 +25,7 @@ import javax.annotation.Nonnull;
 
 public class TileEntityIncenseBurner extends TileBase implements ITickable {
 
-
+    public static final int BURN_TICKS = 1200;
 
     public ItemStackHandler inventory = new ItemStackHandler(1) {
         @Override
@@ -66,7 +66,6 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
         if(hand != EnumHand.MAIN_HAND){
             return false;
         }
-        System.out.println(lit);
         ItemStack stack = player.getHeldItem(hand);
         ItemStack inventoryStack = this.inventory.getStackInSlot(0);
         if(stack.isEmpty()){
@@ -134,6 +133,42 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
             double d8 = (double)pos.getY()+ 0.6;
             double d13 = (double)pos.getZ() + 0.5;
             world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d3, d8, d13, 0.0D, 0.0D, 0.0D);
+
+            burnTick++;
+
+            if(this.burnTick >= BURN_TICKS){
+                this.inventory.extractItem(0, 1, false);
+                burnTick = 0;
+
+                if(this.inventory.getStackInSlot(0).isEmpty()){
+                    this.lit = false;
+                }
+
+                markDirty();
+                PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+            }
+
+
+        }
+    }
+
+    @Override
+    public void breakBlock(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+        if (!world.isRemote) {
+            Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
+        }
+    }
+
+    public boolean isLit() {
+        return lit;
+    }
+
+    public Item burningItem(){
+        if(this.lit){
+            return this.inventory.getStackInSlot(0).getItem();
+        }
+        else{
+            return null;
         }
     }
 }
