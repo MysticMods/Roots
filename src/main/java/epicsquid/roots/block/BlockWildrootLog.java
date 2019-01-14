@@ -10,6 +10,9 @@ import epicsquid.mysticallib.model.ICustomModeledObject;
 import epicsquid.mysticallib.model.IModeledObject;
 import epicsquid.mysticallib.model.block.BakedModelBlock;
 import epicsquid.mysticallib.model.block.BakedModelStairs;
+import epicsquid.mysticallib.tile.ITile;
+import epicsquid.mysticalworld.item.ItemKnife;
+import epicsquid.roots.init.ModBlocks;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.SoundType;
@@ -17,10 +20,17 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -35,7 +45,7 @@ public class BlockWildrootLog extends BlockLog implements IBlock, IModeledObject
     private boolean isOpaque = false;
     private boolean hasCustomModel = false;
     private BlockRenderLayer layer = BlockRenderLayer.SOLID;
-    public String name = "";
+    public String name;
 
     public BlockWildrootLog(@Nonnull String name) {
         super();
@@ -45,7 +55,20 @@ public class BlockWildrootLog extends BlockLog implements IBlock, IModeledObject
         setRegistryName(name);
         itemBlock = new ItemBlock(this).setRegistryName(LibRegistry.getActiveModid(), name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
+    }
 
+    @Override
+    public boolean onBlockActivated(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing face, float hitX, float hitY, float hitZ) {
+        ItemStack stack = player.getHeldItem(hand);
+        if(stack.isEmpty()){
+            return false;
+        }
+
+        if(stack.getItem() instanceof ItemKnife){
+            stack.damageItem(1, player);
+            world.setBlockState(pos, ModBlocks.wildroot_rune.getDefaultState());
+        }
+        return false;
     }
 
     @Nonnull

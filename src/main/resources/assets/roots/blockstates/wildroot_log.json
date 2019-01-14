@@ -3,6 +3,6 @@
     "axis=y":  { "model": "roots:wildroot_log" },
     "axis=z":   { "model": "roots:wildroot_log", "x": 90 },
     "axis=x":   { "model": "roots:wildroot_log", "x": 90, "y": 90 },
-    "axis=none": { "model": "roots:wildroot_bark" }
+    "axis=none": { "model": "roots:wildroot_log" }
   }
 }
