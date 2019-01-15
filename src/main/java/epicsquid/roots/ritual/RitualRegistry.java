@@ -5,9 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import epicsquid.mysticallib.util.ListUtil;
+import epicsquid.roots.init.ModItems;
+import epicsquid.roots.ritual.ash.RitualAsh;
 import epicsquid.roots.ritual.natural.RitualWildGrowth;
 import epicsquid.roots.ritual.wild.RitualAnimalHarvest;
 import epicsquid.roots.ritual.wild.RitualSummoning;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class RitualRegistry {
@@ -17,6 +22,9 @@ public class RitualRegistry {
   public static RitualBase ritual_life, ritual_storm, ritual_light, ritual_fire_storm, ritual_regrowth, ritual_windwall,
           ritual_warden, ritual_natural_aura, ritual_purity, ritual_frost, ritual_animal_harvest, ritual_summoning,
           ritual_wild_growth;
+
+  //Ash rituals
+  public static RitualBase ritual_aer_ash, ritual_terra_ash;
 
   public static RitualBase getRitual(List<ItemStack> ingredients) {
     for (int i = 0; i < ritualRegistry.size(); i++) {
@@ -42,6 +50,17 @@ public class RitualRegistry {
     addRitual(ritual_animal_harvest = new RitualAnimalHarvest("ritual_animal_harvest", 0));
     addRitual(ritual_summoning = new RitualSummoning("ritual_summoning", 0));
     addRitual(ritual_wild_growth = new RitualWildGrowth("ritual_wild_growth", 0));
+
+    //Ashes
+    addRitual(ritual_aer_ash = new RitualAsh("ritual_aer_ash", 100, new ItemStack(ModItems.aer_ash)).addIngredients(
+            new ItemStack(Items.FEATHER, 1), new ItemStack(Items.FEATHER, 1),
+            new ItemStack(Items.FEATHER, 1), new ItemStack(Items.FEATHER, 1),
+            new ItemStack(Items.FEATHER, 1)));
+    addRitual(ritual_terra_ash = new RitualAsh("ritual_terra_ash", 100, new ItemStack(ModItems.terra_ash)).addIngredients(
+            new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 1), new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 1),
+            new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 1), new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 1),
+            new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 1)));
+
   }
 
   public static void addRitual(RitualBase ritual){

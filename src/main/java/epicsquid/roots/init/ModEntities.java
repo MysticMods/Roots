@@ -6,14 +6,7 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.entity.grove.EntityNaturalGrove;
 import epicsquid.roots.entity.grove.EntityWildGrove;
 import epicsquid.roots.entity.render.RenderPetalShell;
-import epicsquid.roots.entity.ritual.EntityFlare;
-import epicsquid.roots.entity.ritual.EntityRitualFireStorm;
-import epicsquid.roots.entity.ritual.EntityRitualLife;
-import epicsquid.roots.entity.ritual.EntityRitualLight;
-import epicsquid.roots.entity.ritual.EntityRitualRegrowth;
-import epicsquid.roots.entity.ritual.EntityRitualStorm;
-import epicsquid.roots.entity.ritual.EntityRitualWarden;
-import epicsquid.roots.entity.ritual.EntityRitualWindwall;
+import epicsquid.roots.entity.ritual.*;
 import epicsquid.roots.entity.spell.EntityBoost;
 import epicsquid.roots.entity.spell.EntityFireJet;
 import epicsquid.roots.entity.spell.EntityPetalShell;
@@ -51,6 +44,7 @@ public class ModEntities {
     LibRegistry.registerEntity(EntityRitualRegrowth.class);
     LibRegistry.registerEntity(EntityRitualWindwall.class);
     LibRegistry.registerEntity(EntityRitualWarden.class);
+    LibRegistry.registerEntity(EntitySpawnItem.class);
 
     LibRegistry.registerEntity(EntityWildGrove.class);
     LibRegistry.registerEntity(EntityNaturalGrove.class);
@@ -70,6 +64,7 @@ public class ModEntities {
       LibRegistry.registerEntityRenderer(EntityRitualRegrowth.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualWindwall.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualWarden.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntitySpawnItem.class, new RenderNull.Factory());
 
       LibRegistry.registerEntityRenderer(EntityWildGrove.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityNaturalGrove.class, new RenderNull.Factory());
