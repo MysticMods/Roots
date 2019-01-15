@@ -21,6 +21,9 @@ public class ModItems {
   // All mod items
   public static Item pestle, pouch, petal_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword;
 
+  //Rune Ashes
+  public static Item aer_ash, terra_ash;
+
   /**
    * Register all items
    */
@@ -34,6 +37,9 @@ public class ModItems {
     event.addItem(living_shovel = new ItemLivingShovel(ToolMaterial.IRON, "living_shovel").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_hoe = new ItemLivingHoe(ToolMaterial.IRON, "living_hoe").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_sword = new ItemLivingSword(ToolMaterial.IRON, "living_sword").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
+
+    event.addItem(aer_ash = new ItemBase("aer_ash").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(terra_ash = new ItemBase("terra_ash").setModelCustom(true).setCreativeTab(Roots.tab));
   }
 
   /**
