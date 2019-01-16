@@ -4,6 +4,7 @@ import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.ritual.RitualRegistry;
+import epicsquid.roots.rune.RuneRegistry;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.util.OfferingUtil;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -21,6 +22,7 @@ public class CommonProxy {
     SpellRegistry.init();
     OfferingUtil.init();
     EffectManager.init();
+    RuneRegistry.init();
   }
 
   public void postInit(FMLPostInitializationEvent event) {
