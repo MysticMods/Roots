@@ -1,6 +1,5 @@
 package epicsquid.roots.entity.ritual;
 
-import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
