@@ -2,6 +2,7 @@ package epicsquid.roots.rune;
 
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.tileentity.TileEntityWildrootRune;
+import epicsquid.roots.util.RgbColorUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,6 +12,7 @@ public class AerRune extends Rune {
 
     public AerRune(){
         setIncense(ModItems.moonglow_leaf);
+        setColor(RgbColorUtil.AER);
     }
 
     @Override

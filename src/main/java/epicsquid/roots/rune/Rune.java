@@ -1,6 +1,7 @@
 package epicsquid.roots.rune;
 
 import epicsquid.roots.tileentity.TileEntityWildrootRune;
+import epicsquid.roots.util.RgbColor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
@@ -8,6 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 public abstract class Rune {
 
     private Item incense;
+    private RgbColor color = new RgbColor(0, 0, 0);
 
     public Rune(){
 
@@ -38,5 +40,13 @@ public abstract class Rune {
 
     public void setIncense(Item incense) {
         this.incense = incense;
+    }
+
+    public RgbColor getColor() {
+        return color;
+    }
+
+    public void setColor(RgbColor color) {
+        this.color = color;
     }
 }

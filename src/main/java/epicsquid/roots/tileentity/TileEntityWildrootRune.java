@@ -114,4 +114,8 @@ public class TileEntityWildrootRune extends TileBase implements ITickable {
         return incenseBurner;
     }
 
+    public Rune getRune() {
+        return rune;
+    }
+
 }
