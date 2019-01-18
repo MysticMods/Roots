@@ -10,19 +10,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RuneRegistry {
-    public static Map<Item, Class<? extends Rune>> runeRegistry = new HashMap<>();
+    public static Map<Item, Class<? extends RuneBase>> runeRegistry = new HashMap<>();
 
     public static void init() {
-        runeRegistry.put(ModItems.aer_ash, AerRune.class);
+        runeRegistry.put(ModItems.aer_ash, FleetnessRune.class);
+        runeRegistry.put(ModItems.terra_ash, OvergrowthRune.class);
     }
 
-    public static Rune getRune(NBTTagCompound compound){
+    public static RuneBase getRune(NBTTagCompound compound){
         if(!compound.hasKey("reagent")){
             return null;
         }
 
         Item runeItem = new ItemStack(compound.getCompoundTag("reagent")).getItem();
-        Rune rune = null;
+        RuneBase rune = null;
         if(runeRegistry.get(runeItem) != null){
             try {
 
@@ -39,8 +40,8 @@ public class RuneRegistry {
         return rune;
     }
 
-    public static Rune getRune(Item item){
-        Rune rune = null;
+    public static RuneBase getRune(Item item){
+        RuneBase rune = null;
         if(runeRegistry.get(item) != null){
             try {
 

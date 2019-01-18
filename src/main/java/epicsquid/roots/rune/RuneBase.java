@@ -6,18 +6,23 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 
-public abstract class Rune {
+public abstract class RuneBase {
 
     private Item incense;
     private RgbColor color = new RgbColor(0, 0, 0);
+    private String runeName;
 
-    public Rune(){
+    public RuneBase(){
 
     }
 
-    public abstract void saveToEntity(NBTTagCompound tag);
+    public void saveToEntity(NBTTagCompound tag){
+        tag.setString("rune", getRuneName());
+    }
 
-    public abstract void readFromEntity(NBTTagCompound tag);
+    public void readFromEntity(NBTTagCompound tag){
+
+    }
 
     public abstract void activate(TileEntityWildrootRune entity, EntityPlayer player);
 
@@ -48,5 +53,13 @@ public abstract class Rune {
 
     public void setColor(RgbColor color) {
         this.color = color;
+    }
+
+    public void setRuneName(String runeName) {
+        this.runeName = runeName;
+    }
+
+    public String getRuneName() {
+        return runeName;
     }
 }
