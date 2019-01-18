@@ -222,29 +222,24 @@ public class ItemStaff extends ItemBase {
   @Override
   public void initModel() {
     ModelBakery
-        .registerItemVariants(this, new ModelResourceLocation(getRegistryName().toString()), new ModelResourceLocation(getRegistryName().toString() + "_1"),
-            new ModelResourceLocation(Roots.MODID + ":shiny_rod"), new ModelResourceLocation(Roots.MODID + ":shiny_rod_1"),
-            new ModelResourceLocation(Roots.MODID + ":moon_rod"), new ModelResourceLocation(Roots.MODID + ":moon_rod_1"));
-    ModelLoader.setCustomMeshDefinition(this, new ItemMeshDefinition() {
-      @Override
-      public ModelResourceLocation getModelLocation(ItemStack stack) {
-        ResourceLocation baseName = getRegistryName();
-        if (stack.getDisplayName().compareToIgnoreCase("Shiny Rod") == 0) {
-          baseName = new ResourceLocation(Roots.MODID + ":shiny_rod");
-        }
-        if (stack.getDisplayName().compareToIgnoreCase("Cutie Moon Rod") == 0) {
-          baseName = new ResourceLocation(Roots.MODID + ":moon_rod");
-        }
-        if (stack.hasTagCompound()) {
-          String s = stack.getTagCompound().getString("spell" + stack.getTagCompound().getInteger("selected"));
-          if (SpellRegistry.spellRegistry.containsKey(s)) {
-            return new ModelResourceLocation(baseName.toString() + "_1");
-          } else {
-            return new ModelResourceLocation(baseName.toString());
-          }
-        }
-        return new ModelResourceLocation(baseName.toString());
+        .registerItemVariants(this, new ModelResourceLocation(getRegistryName().toString()), new ModelResourceLocation(getRegistryName().toString() + "_1"));
+    ModelLoader.setCustomMeshDefinition(this, stack -> {
+      ResourceLocation baseName = getRegistryName();
+      if (stack.getDisplayName().compareToIgnoreCase("Shiny Rod") == 0) {
+        baseName = new ResourceLocation(Roots.MODID + ":shiny_rod");
       }
+      if (stack.getDisplayName().compareToIgnoreCase("Cutie Moon Rod") == 0) {
+        baseName = new ResourceLocation(Roots.MODID + ":moon_rod");
+      }
+      if (stack.hasTagCompound()) {
+        String s = stack.getTagCompound().getString("spell" + stack.getTagCompound().getInteger("selected"));
+        if (SpellRegistry.spellRegistry.containsKey(s)) {
+          return new ModelResourceLocation(baseName.toString() + "_1");
+        } else {
+          return new ModelResourceLocation(baseName.toString());
+        }
+      }
+      return new ModelResourceLocation(baseName.toString());
     });
   }
 
