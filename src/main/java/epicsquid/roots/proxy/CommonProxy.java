@@ -1,6 +1,6 @@
 package epicsquid.roots.proxy;
 
-import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.ritual.RitualRegistry;
