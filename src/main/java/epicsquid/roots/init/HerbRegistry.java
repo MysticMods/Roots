@@ -42,7 +42,7 @@ public class HerbRegistry {
     event.register(ModItems.pereskia, "pereskia");
     event.register(ModItems.pereskia_bulb, "pereskia_bulb");
     event.register(ModItems.terra_moss, "terra_moss");
-    event.register(ModItems.terra_moss_seed, "terra_moss_seed");
+    event.register(ModItems.terra_spores, "terra_moss_seed");
     event.register(ModItems.wildroot, "wildroot");
   }
 }

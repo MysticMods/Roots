@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 public class RitualRegrowth extends RitualBase {
   public RitualRegrowth(String name, int duration) {
     super(name, duration);
-    addIngredients(new ItemStack(ModItems.terra_moss, 1), new ItemStack(ModItems.terra_moss_seed, 1), new ItemStack(ModItems.bark_spruce, 1),
+    addIngredients(new ItemStack(ModItems.terra_moss, 1), new ItemStack(ModItems.terra_spores, 1), new ItemStack(ModItems.bark_spruce, 1),
         new ItemStack(Blocks.SAPLING, 1, 1), new ItemStack(Blocks.SAPLING, 1));
   }
 
