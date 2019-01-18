@@ -20,9 +20,6 @@ public class TileEntityWildrootRuneRenderer  extends TileEntitySpecialRenderer<T
                             tei.getPos().getX() + Util.rand.nextFloat(), tei.getPos().getY() + Util.rand.nextFloat(), tei.getPos().getZ() + Util.rand.nextFloat(), 0,0,0,
                             color.getRed()/255f, color.getGreen()/255f, color.getBlue()/255f, 1, 2, 100);
                 }
-
-
-
             }
 
         }

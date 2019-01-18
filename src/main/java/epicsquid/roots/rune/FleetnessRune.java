@@ -8,21 +8,22 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 
-public class AerRune extends Rune {
+public class FleetnessRune extends RuneBase {
 
-    public AerRune(){
+    public FleetnessRune(){
         setIncense(ModItems.moonglow_leaf);
-        setColor(RgbColorUtil.AER);
+        setColor(RgbColorUtil.FLEETNESS);
+        setRuneName("fleetness_rune");
     }
 
     @Override
     public void saveToEntity(NBTTagCompound tag) {
-        tag.setString("rune", "aer_rune");
+        super.saveToEntity(tag);
     }
 
     @Override
     public void readFromEntity(NBTTagCompound tag) {
-
+        super.readFromEntity(tag);
     }
 
     @Override

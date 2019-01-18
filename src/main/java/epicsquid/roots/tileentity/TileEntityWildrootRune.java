@@ -3,14 +3,11 @@ package epicsquid.roots.tileentity;
 import epicsquid.mysticallib.network.MessageTEUpdate;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
-import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModBlocks;
-import epicsquid.roots.rune.Rune;
+import epicsquid.roots.rune.RuneBase;
 import epicsquid.roots.rune.RuneRegistry;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -26,7 +23,7 @@ public class TileEntityWildrootRune extends TileBase implements ITickable {
     private TileEntityIncenseBurner incenseBurner;
     private static final BlockPos[] INCENSE_POSITIONS = new BlockPos[]{new BlockPos(0, -1, 1), new BlockPos(0, -1, -1), new BlockPos(1, -1, 0), new BlockPos(-1, -1, 0)};
 
-    private Rune rune;
+    private RuneBase rune;
     private ItemStack reagent;
 
     public TileEntityWildrootRune(){
@@ -50,6 +47,7 @@ public class TileEntityWildrootRune extends TileBase implements ITickable {
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         this.rune = RuneRegistry.getRune(compound);
+        this.reagent = new ItemStack(compound.getCompoundTag("reagent"));
         super.readFromNBT(compound);
     }
 
@@ -64,7 +62,7 @@ public class TileEntityWildrootRune extends TileBase implements ITickable {
         }
         else{
             if(rune == null){
-                Rune newRune = RuneRegistry.getRune(heldItem.getItem());
+                RuneBase newRune = RuneRegistry.getRune(heldItem.getItem());
                 System.out.println(newRune);
                 if(newRune != null){
                     this.rune = newRune;
@@ -114,7 +112,7 @@ public class TileEntityWildrootRune extends TileBase implements ITickable {
         return incenseBurner;
     }
 
-    public Rune getRune() {
+    public RuneBase getRune() {
         return rune;
     }
 
