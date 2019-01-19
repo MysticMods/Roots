@@ -106,6 +106,10 @@ public class TileEntityWildrootRune extends TileBase implements ITickable {
                 }
             }
         }
+
+        if(this.rune != null){
+            this.rune.update(getWorld(), getPos());
+        }
     }
 
     public TileEntityIncenseBurner getIncenseBurner() {
