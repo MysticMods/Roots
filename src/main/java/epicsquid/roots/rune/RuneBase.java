@@ -5,6 +5,8 @@ import epicsquid.roots.util.RgbColor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public abstract class RuneBase {
 
@@ -37,6 +39,10 @@ public abstract class RuneBase {
         }
 
         return false;
+    }
+
+    public void update(World world, BlockPos pos){
+
     }
 
     public Item getIncense() {
