@@ -12,6 +12,7 @@ import epicsquid.roots.item.ItemLivingShovel;
 import epicsquid.roots.item.ItemLivingSword;
 import epicsquid.roots.item.ItemPetalDust;
 import epicsquid.roots.item.ItemPouch;
+import epicsquid.roots.item.ItemRunicShears;
 import epicsquid.roots.item.ItemStaff;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
@@ -19,7 +20,7 @@ import net.minecraft.item.Item.ToolMaterial;
 public class ModItems {
 
   // All mod items
-  public static Item pestle, pouch, petal_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword;
+  public static Item pestle, pouch, petal_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears;
 
   //Rune Ashes
   public static Item aer_ash, terra_ash;
@@ -40,6 +41,7 @@ public class ModItems {
 
     event.addItem(aer_ash = new ItemBase("aer_ash").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(terra_ash = new ItemBase("terra_ash").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(runic_shears = new ItemRunicShears("runic_shears").setModelCustom(true).setCreativeTab(Roots.tab));
   }
 
   /**
