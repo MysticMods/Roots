@@ -11,6 +11,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.RunicShearRecipe;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockCrops;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -41,9 +42,17 @@ public class ItemRunicShears extends ItemBase {
 
     if (recipe != null) {
       if (!world.isRemote) {
-        world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), new ItemStack(recipe.getDrop())));
-        world.setBlockState(pos, recipe.getReplacementBlock().getDefaultState());
 
+        if (block instanceof BlockCrops) {
+          if (((BlockCrops) block).isMaxAge(world.getBlockState(pos))) {
+            world.setBlockState(pos, ((BlockCrops) block).withAge(0));
+          } else {
+            return EnumActionResult.SUCCESS;
+          }
+        } else {
+          world.setBlockState(pos, recipe.getReplacementBlock().getDefaultState());
+        }
+        world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), new ItemStack(recipe.getDrop())));
         player.getHeldItem(hand).damageItem(1, player);
       } else {
         for (int i = 0; i < 50; i++) {
