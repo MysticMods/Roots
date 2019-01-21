@@ -8,11 +8,11 @@ import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.recipe.RunicShearRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -36,11 +36,13 @@ public class ItemRunicShears extends ItemBase {
   @Nonnull
   public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     Block block = world.getBlockState(pos).getBlock();
-    if (block == Blocks.MOSSY_COBBLESTONE) {
 
+    RunicShearRecipe recipe = ModRecipes.getRunicShearRecipe(block);
+
+    if (recipe != null) {
       if (!world.isRemote) {
-        world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), new ItemStack(ModItems.terra_moss)));
-        world.setBlockState(pos, Blocks.COBBLESTONE.getDefaultState());
+        world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), new ItemStack(recipe.getDrop())));
+        world.setBlockState(pos, recipe.getReplacementBlock().getDefaultState());
 
         player.getHeldItem(hand).damageItem(1, player);
       } else {
