@@ -36,7 +36,7 @@ public class HerbRegistry {
     event.register(ModItems.spirit_herb_seed, "spirit_herb_seed");
     event.register(ModItems.aubergine, "aubergine");
     event.register(ModItems.aubergine_seed, "aubergine_seed");
-    event.register(ModItems.fungus_cap, "fungus_cap");
+    event.register(ModItems.baffle_cap, "baffle_cap");
     event.register(ModItems.moonglow_leaf, "moonglow_leaf");
     event.register(ModItems.moonglow_seed, "moonglow_seed");
     event.register(ModItems.pereskia, "pereskia");
