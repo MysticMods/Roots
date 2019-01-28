@@ -11,8 +11,13 @@ public class RitualPurity extends RitualBase {
 
   public RitualPurity(String name, int duration) {
     super(name, duration);
-    addIngredients(new ItemStack(ModItems.spirit_herb, 1), new ItemStack(ModItems.spirit_herb, 1), new ItemStack(ModItems.wildroot, 1),
-        new ItemStack(Items.MILK_BUCKET, 1), new ItemStack(Items.GLASS_BOTTLE, 1));
+    addIngredients(
+            new ItemStack(ModItems.terra_moss), 
+            new ItemStack(ModItems.aubergine), 
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(Items.MILK_BUCKET), 
+            new ItemStack(Items.GLASS_BOTTLE)
+    );
   }
 
   @Override

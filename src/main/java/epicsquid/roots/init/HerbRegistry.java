@@ -2,10 +2,12 @@ package epicsquid.roots.init;
 
 import javax.annotation.Nonnull;
 
+import epicsquid.mysticalworld.init.ModBlocks;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.api.RegisterHerbEvent;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -36,7 +38,7 @@ public class HerbRegistry {
     event.register(ModItems.spirit_herb_seed, "spirit_herb_seed");
     event.register(ModItems.aubergine, "aubergine");
     event.register(ModItems.aubergine_seed, "aubergine_seed");
-    event.register(ModItems.baffle_cap, "baffle_cap");
+    event.register(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom), "baffle_cap");
     event.register(ModItems.moonglow_leaf, "moonglow_leaf");
     event.register(ModItems.moonglow_seed, "moonglow_seed");
     event.register(ModItems.pereskia, "pereskia");
@@ -44,5 +46,6 @@ public class HerbRegistry {
     event.register(ModItems.terra_moss, "terra_moss");
     event.register(ModItems.terra_spores, "terra_moss_seed");
     event.register(ModItems.wildroot, "wildroot");
+    event.register(ModItems.wildewheet, "wildewheet");
   }
 }

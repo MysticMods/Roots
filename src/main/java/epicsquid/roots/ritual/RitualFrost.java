@@ -13,11 +13,11 @@ public class  RitualFrost extends RitualBase {
   public RitualFrost(String name, int duration) {
     super(name, duration);
     addIngredients(
-        new ItemStack(Items.SNOWBALL, 1),
-        new ItemStack(Blocks.PACKED_ICE, 1),
-        new ItemStack(Blocks.SNOW, 1),
-        new ItemStack(ModItems.bark_acacia, 1),
-        new ItemStack(ModItems.bark_acacia, 1)
+        new ItemStack(Items.SNOWBALL),
+        new ItemStack(Blocks.PACKED_ICE),
+        new ItemStack(Blocks.SNOW),
+        new ItemStack(ModItems.bark_acacia),
+        new ItemStack(ModItems.bark_acacia)
     );
   }
 

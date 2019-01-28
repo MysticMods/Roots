@@ -11,8 +11,13 @@ import net.minecraft.world.World;
 public class RitualWindwall extends RitualBase {
   public RitualWindwall(String name, int duration) {
     super(name, duration);
-    addIngredients(new ItemStack(ModItems.pereskia, 1), new ItemStack(ModItems.pereskia_bulb, 1), new ItemStack(ModItems.bark_spruce, 1),
-        new ItemStack(ModItems.bark_birch, 1), new ItemStack(Items.FEATHER, 1));
+    addIngredients(
+            new ItemStack(ModItems.pereskia),
+            new ItemStack(ModItems.pereskia_bulb),
+            new ItemStack(ModItems.bark_spruce),
+            new ItemStack(ModItems.bark_birch),
+            new ItemStack(Items.FEATHER)
+    );
   }
 
   @Override

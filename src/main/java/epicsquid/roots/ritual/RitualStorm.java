@@ -11,8 +11,13 @@ import net.minecraft.world.World;
 public class RitualStorm extends RitualBase {
   public RitualStorm(String name, int duration) {
     super(name, duration);
-    addIngredients(new ItemStack(Blocks.WATERLILY, 1), new ItemStack(ModItems.bark_oak, 1), new ItemStack(Blocks.VINE, 1), new ItemStack(ModItems.wildroot, 1),
-        new ItemStack(Items.BEETROOT_SEEDS, 1));
+    addIngredients(
+            new ItemStack(Blocks.WATERLILY),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(Blocks.VINE),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(Items.BEETROOT_SEEDS)
+    );
   }
 
   @Override

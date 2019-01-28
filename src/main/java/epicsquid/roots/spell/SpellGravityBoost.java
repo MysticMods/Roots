@@ -17,11 +17,11 @@ public class SpellGravityBoost extends SpellBase {
 
     addCost(ModItems.pereskia, 0.125f);
     addIngredients(
-        new ItemStack(Items.RABBIT_FOOT, 1),
+        new ItemStack(Items.RABBIT_FOOT),
         new ItemStack(Blocks.RED_FLOWER, 1, 1),
-        new ItemStack(Items.SUGAR, 1),
-        new ItemStack(ModItems.aubergine_seed, 1),
-        new ItemStack(ModItems.moonglow_leaf, 1)
+        new ItemStack(Items.SUGAR),
+        new ItemStack(ModItems.aubergine_seed),
+        new ItemStack(ModItems.moonglow_leaf)
     );
   }
 

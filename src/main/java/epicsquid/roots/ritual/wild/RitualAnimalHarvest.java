@@ -30,10 +30,10 @@ public class RitualAnimalHarvest extends RitualBase {
 
   public RitualAnimalHarvest(String name, int duration) {
     super(name, duration);
-    addIngredients(new ItemStack(Items.WHEAT));
+    addIngredients(new ItemStack(ModItems.wildewheet));
     addIngredients(new ItemStack(Items.CHICKEN));
     addIngredients(new ItemStack(Items.MELON));
-    addIngredients(new ItemStack(Items.WHEAT_SEEDS));
+    addIngredients(new ItemStack(Items.CARROT));
     addIngredients(new ItemStack(ModItems.wildroot));
   }
 

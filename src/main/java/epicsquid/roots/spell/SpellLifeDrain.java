@@ -24,11 +24,11 @@ public class SpellLifeDrain extends SpellBase {
 
     addCost(ModItems.pereskia_bulb, 0.125f);
     addIngredients(
-        new ItemStack(Items.BEETROOT, 1),
+        new ItemStack(Items.BEETROOT),
         new ItemStack(Blocks.RED_FLOWER, 1, 7),
-        new ItemStack(Items.BEETROOT_SEEDS, 1),
-        new ItemStack(Items.ROTTEN_FLESH, 1),
-        new ItemStack(ModItems.pereskia_bulb, 1)
+        new ItemStack(Items.BEETROOT_SEEDS),
+        new ItemStack(Items.ROTTEN_FLESH),
+        new ItemStack(ModItems.pereskia_bulb)
     );
   }
 

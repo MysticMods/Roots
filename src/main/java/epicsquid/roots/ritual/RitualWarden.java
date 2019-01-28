@@ -13,11 +13,11 @@ public class RitualWarden extends RitualBase {
   public RitualWarden(String name, int duration) {
     super(name, duration);
     addIngredients(
-        new ItemStack(Items.DYE, 1, 15),
-        new ItemStack(ModItems.pereskia_bulb, 1),
-        new ItemStack(ModItems.spirit_herb, 1),
-        new ItemStack(ModItems.bark_oak, 1),
-        new ItemStack(Items.IRON_CHESTPLATE, 1)
+        new ItemStack(Items.SPECKLED_MELON),
+        new ItemStack(ModItems.pereskia_bulb),
+        new ItemStack(ModItems.pereskia),
+        new ItemStack(ModItems.bark_oak),
+        new ItemStack(Items.IRON_CHESTPLATE)
     );
   }
 

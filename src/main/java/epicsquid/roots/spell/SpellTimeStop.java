@@ -21,11 +21,11 @@ public class SpellTimeStop extends SpellBase {
     addCost(ModItems.moonglow_leaf, 0.25f);
     addCost(ModItems.pereskia_bulb, 0.25f);
     addIngredients(
-        new ItemStack(Items.NETHER_WART, 1),
-        new ItemStack(Blocks.RED_FLOWER, 1, 8),
-        new ItemStack(Items.DYE, 1, 0),
-        new ItemStack(ModItems.pereskia, 1),
-        new ItemStack(ModItems.aubergine_seed, 1)
+        new ItemStack(Items.NETHER_WART),
+        new ItemStack(ModItems.moonglow_leaf),
+        new ItemStack(ModItems.moonglow_leaf),
+        new ItemStack(ModItems.pereskia),
+        new ItemStack(Items.CLOCK)
     );
   }
 

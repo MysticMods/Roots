@@ -1,7 +1,7 @@
 {
   "name": "Wildfire",
   "icon": "roots:petal_dust",
-  "category": "natural_grove_category",
+  "category": "elemental_grove_category",
   "pages": [
     {
       "type": "text",
