@@ -1,7 +1,7 @@
 {
   "name": "Shatter",
   "icon": "roots:petal_dust",
-  "category": "spell_category",
+  "category": "elemental_category",
   "pages": [
     {
       "type": "text",

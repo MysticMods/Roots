@@ -1,7 +1,7 @@
 {
   "name": "Wildroot Growth",
   "icon": "mysticalworld:pelt",
-  "category": "pyre_category",
+  "category": "natural_grove_category",
   "pages": [
     {
       "type": "text",

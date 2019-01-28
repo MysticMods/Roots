@@ -1,7 +1,7 @@
 {
   "name": "Rose Thorns",
   "icon": "roots:petal_dust",
-  "category": "spell_category",
+  "category": "nature_grove_category",
   "pages": [
     {
       "type": "text",

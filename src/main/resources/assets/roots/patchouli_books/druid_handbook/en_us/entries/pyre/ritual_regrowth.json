@@ -1,7 +1,7 @@
 {
   "name": "Natural Growth",
   "icon": "roots:bonfire",
-  "category": "pyre_category",
+  "category": "natural_growth_category",
   "pages": [
     {
       "type": "text",

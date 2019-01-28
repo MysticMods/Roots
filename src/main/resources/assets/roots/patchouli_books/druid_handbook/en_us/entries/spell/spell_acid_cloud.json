@@ -1,7 +1,7 @@
 {
   "name": "Acid Cloud",
   "icon": "roots:petal_dust",
-  "category": "spell_category",
+  "category": "fungal_grove_category",
   "pages": [
     {
       "type": "text",
