@@ -24,8 +24,13 @@ public class RitualWildGrowth extends RitualBase {
 
     public RitualWildGrowth(String name, int duration) {
         super(name, duration);
-        addIngredients(new ItemStack(ModItems.wildroot, 1), new ItemStack(ModItems.bark_oak, 1), new ItemStack(ModItems.bark_oak, 1),
-                new ItemStack(ModItems.bark_oak, 1), new ItemStack(Items.DYE, 1, 15));
+        addIngredients(
+                new ItemStack(ModItems.wildroot), 
+                new ItemStack(ModItems.bark_oak), 
+                new ItemStack(ModItems.bark_oak),
+                new ItemStack(ModItems.bark_oak), 
+                new ItemStack(Items.DYE, 1, 15)
+        );
     }
 
     @Override

@@ -21,12 +21,13 @@ public class SpellSenseAnimals extends SpellBase {
     this.cooldown = 100;
 
     addCost(ModItems.wildroot, 0.25f);
+    addCost(ModItems.wildewheet, 0.25f);
     addIngredients(
-        new ItemStack(Items.CARROT, 1),
-        new ItemStack(Blocks.RED_FLOWER, 1, 0),
-        new ItemStack(ModItems.moonglow_seed, 1),
-        new ItemStack(ModItems.moonglow_leaf, 1),
-        new ItemStack(Items.GOLDEN_CARROT, 1)
+        new ItemStack(Items.CARROT),
+        new ItemStack(Blocks.RED_FLOWER),
+        new ItemStack(ModItems.wildewheet),
+        new ItemStack(Items.WHEAT),
+        new ItemStack(Items.GOLDEN_CARROT)
     );
   }
 

@@ -41,7 +41,7 @@ public class RitualSummoning extends RitualBase {
     addIngredients(new ItemStack(Items.EGG));
     addIngredients(new ItemStack(Items.ENDER_PEARL));
     addIngredients(new ItemStack(ModItems.wildroot));
-    addIngredients(new ItemStack(ModItems.baffle_cap));
+    addIngredients(new ItemStack(ModItems.wildewheet));
 
     entityItem.put(EntityChicken.class, Lists.newArrayList(new ItemStack(Items.CHICKEN)));
     entityItem.put(EntityCow.class, Lists.newArrayList(new ItemStack(Items.BEEF)));

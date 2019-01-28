@@ -53,13 +53,13 @@ public class RitualRegistry {
 
     //Ashes
     addRitual(ritual_aer_ash = new RitualAsh("ritual_aer_ash", 100, new ItemStack(ModItems.aer_ash)).addIngredients(
-            new ItemStack(Items.FEATHER, 1), new ItemStack(Items.FEATHER, 1),
-            new ItemStack(Items.FEATHER, 1), new ItemStack(Items.FEATHER, 1),
-            new ItemStack(Items.FEATHER, 1)));
+            new ItemStack(Items.FEATHER), new ItemStack(Items.FEATHER),
+            new ItemStack(Items.FEATHER), new ItemStack(Items.FEATHER),
+            new ItemStack(Items.FEATHER)));
     addRitual(ritual_terra_ash = new RitualAsh("ritual_terra_ash", 100, new ItemStack(ModItems.terra_ash)).addIngredients(
-            new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 1), new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 1),
-            new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 1), new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 1),
-            new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 1)));
+            new ItemStack(Item.getItemFromBlock(Blocks.DIRT)), new ItemStack(Item.getItemFromBlock(Blocks.DIRT)),
+            new ItemStack(Item.getItemFromBlock(Blocks.DIRT)), new ItemStack(Item.getItemFromBlock(Blocks.DIRT)),
+            new ItemStack(Item.getItemFromBlock(Blocks.DIRT))));
 
   }
 

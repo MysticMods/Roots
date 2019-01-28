@@ -1,7 +1,7 @@
 {
   "name": "Light Drifter",
   "icon": "roots:petal_dust",
-  "category": "elemental_grove_category",
+  "category": "forbidden_grove_category",
   "pages": [
     {
       "type": "text",

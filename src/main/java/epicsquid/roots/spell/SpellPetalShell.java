@@ -23,11 +23,11 @@ public class SpellPetalShell extends SpellBase {
     addCost(ModItems.aubergine_seed, 0.5f);
     addCost(ModItems.moonglow_leaf, 0.25f);
     addIngredients(
-        new ItemStack(Items.MELON_SEEDS, 1),
-        new ItemStack(Blocks.DOUBLE_PLANT, 1, 5),
-        new ItemStack(Items.DYE, 1, 9),
-        new ItemStack(ModItems.moonglow_leaf, 1),
-        new ItemStack(ModItems.pereskia_bulb, 1)
+        new ItemStack(Items.MELON_SEEDS),
+        new ItemStack(ModItems.wildroot),
+        new ItemStack(ModItems.terra_moss),
+        new ItemStack(Items.SHIELD),
+        new ItemStack(ModItems.pereskia_bulb)
     );
   }
 

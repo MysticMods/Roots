@@ -30,11 +30,11 @@ public class SpellRadiance extends SpellBase {
     addCost(ModItems.wildroot, 0.125f);
     addCost(ModItems.aubergine_seed, 0.25f);
     addIngredients(
-        new ItemStack(Items.GLOWSTONE_DUST, 1),
+        new ItemStack(Items.GLOWSTONE_DUST),
         new ItemStack(Blocks.DOUBLE_PLANT, 1, 0),
         new ItemStack(Items.DYE, 1, 11),
-        new ItemStack(ModItems.pereskia, 1),
-        new ItemStack(ModItems.wildroot, 1)
+        new ItemStack(ModItems.pereskia),
+        new ItemStack(ModItems.wildroot)
     );
   }
 

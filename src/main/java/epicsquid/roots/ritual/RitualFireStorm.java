@@ -12,8 +12,12 @@ public class RitualFireStorm extends RitualBase {
 
   public RitualFireStorm(String name, int duration) {
     super(name, duration);
-    addIngredients(new ItemStack(ModItems.wildroot, 1), new ItemStack(ModItems.bark_acacia, 1), new ItemStack(Items.COAL, 1),
-        new ItemStack(ModItems.bark_acacia, 1), new ItemStack(Items.BLAZE_POWDER, 1));
+    addIngredients(
+            new ItemStack(ModItems.wildroot), 
+            new ItemStack(ModItems.bark_acacia), 
+            new ItemStack(Items.COAL),
+            new ItemStack(ModItems.bark_acacia), 
+            new ItemStack(Items.BLAZE_POWDER));
   }
 
   @Override

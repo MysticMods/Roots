@@ -17,11 +17,11 @@ public class SpellRoseThorns extends SpellBase {
 
     addCost(ModItems.terra_moss, 0.25f);
     addIngredients(
-        new ItemStack(Blocks.CACTUS, 1),
+        new ItemStack(Blocks.CACTUS),
         new ItemStack(Blocks.DOUBLE_PLANT, 1, 4),
-        new ItemStack(Items.BONE, 1),
-        new ItemStack(Items.FERMENTED_SPIDER_EYE, 1),
-        new ItemStack(ModItems.terra_moss, 1)
+        new ItemStack(Items.BONE),
+        new ItemStack(Items.FERMENTED_SPIDER_EYE),
+        new ItemStack(ModItems.terra_moss)
     );
   }
 

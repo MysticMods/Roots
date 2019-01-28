@@ -15,8 +15,13 @@ public class RitualLife extends RitualBase {
 
   public RitualLife(String name, int duration) {
     super(name, duration);
-    addIngredients(new ItemStack(ModItems.terra_moss, 1), new ItemStack(ModItems.bark_oak, 1), new ItemStack(ModItems.bark_birch, 1),
-        new ItemStack(ModItems.bark_birch, 1), new ItemStack(Blocks.SAPLING, 1, 2));
+    addIngredients(
+            new ItemStack(ModItems.terra_moss), 
+            new ItemStack(ModItems.bark_oak), 
+            new ItemStack(ModItems.bark_birch),
+            new ItemStack(ModItems.wildroot), 
+            new ItemStack(Blocks.SAPLING, 1, 2)
+    );
   }
 
   @Override

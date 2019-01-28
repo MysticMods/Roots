@@ -4,6 +4,7 @@ import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.ritual.EntityRitualLight;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -11,8 +12,13 @@ import net.minecraft.world.World;
 public class RitualLight extends RitualBase {
   public RitualLight(String name, int duration) {
     super(name, duration);
-    addIngredients(new ItemStack(ModItems.moonglow_leaf, 1), new ItemStack(ModItems.moonglow_seed, 1), new ItemStack(ModItems.bark_birch, 1),
-        new ItemStack(ModItems.bark_acacia, 1), new ItemStack(Blocks.LOG, 1, 2));
+    addIngredients(
+            new ItemStack(ModItems.pereskia), 
+            new ItemStack(ModItems.pereskia_bulb), 
+            new ItemStack(ModItems.bark_birch),
+            new ItemStack(ModItems.bark_acacia), 
+            new ItemStack(Items.GLOWSTONE_DUST)
+    );
 
   }
 

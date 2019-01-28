@@ -23,8 +23,8 @@ public class SpellTerraTransmutation extends SpellBase{
     addCost(ModItems.wildroot, 0.0625f);
     addIngredients(
         new ItemStack(Items.REDSTONE),
-        new ItemStack(Blocks.RED_FLOWER, 1, 0),
-        new ItemStack(Items.DYE),
+        new ItemStack(ModItems.wood_knife),
+        new ItemStack(ModItems.pereskia),
         new ItemStack(ModItems.terra_moss),
         new ItemStack(ModItems.wildroot)
     );

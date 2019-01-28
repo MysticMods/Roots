@@ -23,10 +23,10 @@ public class SpellGrowthInfusion extends SpellBase {
     addCost(ModItems.terra_moss, 0.125f);
     addIngredients(
         new ItemStack(Blocks.SAPLING, 1, 2),
-        new ItemStack(Blocks.DOUBLE_PLANT, 1, 1),
+        new ItemStack(ModItems.wildroot),
         new ItemStack(Blocks.SAPLING, 1, 1),
-        new ItemStack(ModItems.terra_moss, 1),
-        new ItemStack(ModItems.pereskia, 1)
+        new ItemStack(ModItems.terra_moss),
+        new ItemStack(ModItems.pereskia)
     );
   }
 

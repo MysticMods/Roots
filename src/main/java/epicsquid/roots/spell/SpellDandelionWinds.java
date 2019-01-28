@@ -22,11 +22,11 @@ public class SpellDandelionWinds extends SpellBase {
 
     addCost(ModItems.moonglow_leaf, 0.125f);
     addIngredients(
-        new ItemStack(Items.FEATHER, 1),
-        new ItemStack(Blocks.YELLOW_FLOWER, 1),
-        new ItemStack(Items.SNOWBALL, 1),
-        new ItemStack(ModItems.moonglow_leaf, 1),
-        new ItemStack(Items.WHEAT, 1)
+        new ItemStack(Items.FEATHER),
+        new ItemStack(Blocks.YELLOW_FLOWER),
+        new ItemStack(Items.SNOWBALL),
+        new ItemStack(ModItems.moonglow_leaf),
+        new ItemStack(Items.WHEAT)
     );
   }
 

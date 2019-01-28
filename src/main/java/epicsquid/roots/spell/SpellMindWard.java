@@ -22,11 +22,11 @@ public class SpellMindWard extends SpellBase {
     addCost(ModItems.aubergine_seed, 0.25f);
     addCost(ModItems.terra_moss, 0.25f);
     addIngredients(
-        new ItemStack(Blocks.BROWN_MUSHROOM, 1),
-        new ItemStack(Blocks.RED_FLOWER, 1, 0),
-        new ItemStack(Blocks.RED_MUSHROOM, 1),
-        new ItemStack(ModItems.aubergine_seed, 1),
-        new ItemStack(Items.DYE, 1, 3)
+        new ItemStack(Items.ROTTEN_FLESH),
+        new ItemStack(ModItems.moonglow_leaf),
+        new ItemStack(ModItems.moonglow_seed),
+        new ItemStack(ModItems.aubergine_seed),
+        new ItemStack(Items.ENDER_PEARL)
     );
   }
 

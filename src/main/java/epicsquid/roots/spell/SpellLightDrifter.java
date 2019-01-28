@@ -22,11 +22,11 @@ public class SpellLightDrifter extends SpellBase {
     addCost(ModItems.pereskia, 0.5f);
     addCost(ModItems.wildroot, 0.25f);
     addIngredients(
-        new ItemStack(Items.ENDER_PEARL, 1),
-        new ItemStack(Blocks.RED_FLOWER, 1, 6),
-        new ItemStack(Items.STRING, 1),
-        new ItemStack(ModItems.moonglow_leaf, 1),
-        new ItemStack(ModItems.pereskia, 1)
+        new ItemStack(Items.ENDER_PEARL),
+        new ItemStack(ModItems.moonglow_leaf),
+        new ItemStack(Items.STRING),
+        new ItemStack(ModItems.moonglow_leaf),
+        new ItemStack(ModItems.pereskia)
     );
   }
 

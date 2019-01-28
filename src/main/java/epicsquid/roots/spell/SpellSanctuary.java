@@ -21,14 +21,14 @@ public class SpellSanctuary extends SpellBase {
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 60;
 
-    addCost(ModItems.moonglow_leaf, 0.125f);
-    addCost(ModItems.aubergine_seed, 0.125f);
+    addCost(ModItems.pereskia, 0.125f);
+    addCost(ModItems.wildroot, 0.125f);
     addIngredients(
         new ItemStack(Items.DYE, 1, 1),
-        new ItemStack(Blocks.RED_FLOWER, 1, 4),
-        new ItemStack(Blocks.VINE, 1),
-        new ItemStack(ModItems.moonglow_leaf, 1),
-        new ItemStack(ModItems.wildroot, 1)
+        new ItemStack(ModItems.pereskia),
+        new ItemStack(Blocks.VINE),
+        new ItemStack(ModItems.pereskia),
+        new ItemStack(ModItems.wildroot)
     );
   }
 

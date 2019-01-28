@@ -19,9 +19,9 @@ public class SpellWildfire extends SpellBase {
     addIngredients(
         new ItemStack(Items.DYE, 1, 14),
         new ItemStack(Blocks.RED_FLOWER, 1, 5),
-        new ItemStack(Items.GUNPOWDER, 1),
+        new ItemStack(Items.GUNPOWDER),
         new ItemStack(Items.COAL, 1, 1),
-        new ItemStack(ModItems.wildroot, 1)
+        new ItemStack(ModItems.wildroot)
     );
   }
 
