@@ -1,7 +1,7 @@
 {
   "name": "Sense Animals",
-  "icon": "mysticalworld:pelt",
-  "category": "spell_category",
+  "icon": "roots:petal_dust",
+  "category": "wild_grove_category",
   "pages": [
     {
       "type": "text",

@@ -1,7 +1,7 @@
 {
   "name": "Living Tools",
   "icon": "roots:living_pickaxe",
-  "category": "grove_category",
+  "category": "roots_category",
   "pages": [
     {
       "type": "text",

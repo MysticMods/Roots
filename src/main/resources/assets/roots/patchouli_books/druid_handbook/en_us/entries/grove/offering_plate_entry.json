@@ -1,7 +1,7 @@
 {
   "name": "Offering Plate",
   "icon": "roots:offertory_plate",
-  "category": "grove_category",
+  "category": "roots_category",
   "pages": [
     {
       "type": "text",

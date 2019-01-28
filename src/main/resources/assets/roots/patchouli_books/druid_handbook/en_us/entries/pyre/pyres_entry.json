@@ -1,8 +1,7 @@
 {
   "name": "Pyre",
   "icon": "roots:bonfire",
-  "category": "pyre_category",
-  "priority": true,
+  "category": "roots_category",
   "pages": [
     {
       "type": "text",

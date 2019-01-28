@@ -1,7 +1,7 @@
 {
   "name": "Summon Creatures",
   "icon": "mysticalworld:pelt",
-  "category": "pyre_category",
+  "category": "wild_grove_category",
   "pages": [
     {
       "type": "text",

@@ -1,8 +1,7 @@
 {
   "name": "Spells",
   "icon": "roots:staff",
-  "category": "spell_category",
-  "priority": true,
+  "category": "roots_category",
   "pages": [
     {
       "type": "text",

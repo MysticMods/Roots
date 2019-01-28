@@ -1,7 +1,7 @@
 {
   "name": "Petal Shell",
   "icon": "roots:petal_dust",
-  "category": "spell_category",
+  "category": "natural_grove_category",
   "pages": [
     {
       "type": "text",

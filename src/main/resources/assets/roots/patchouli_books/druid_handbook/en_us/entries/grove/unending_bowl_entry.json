@@ -1,7 +1,7 @@
 {
   "name": "Unending Bowl",
   "icon": "roots:unending_bowl",
-  "category": "grove_category",
+  "category": "roots_category",
   "pages": [
     {
       "type": "text",

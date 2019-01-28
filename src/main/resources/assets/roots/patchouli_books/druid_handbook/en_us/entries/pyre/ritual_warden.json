@@ -1,7 +1,7 @@
 {
   "name": "Warding Protection",
   "icon": "roots:bonfire",
-  "category": "pyre_category",
+  "category": "fairy_grove_category",
   "pages": [
     {
       "type": "text",

@@ -1,7 +1,7 @@
 {
   "name": "Time Stop",
   "icon": "roots:petal_dust",
-  "category": "spell_category",
+  "category": "forbidden_grove_category",
   "pages": [
     {
       "type": "text",
