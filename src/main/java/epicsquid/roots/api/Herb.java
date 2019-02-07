@@ -40,6 +40,6 @@ public class Herb extends IForgeRegistryEntry.Impl<Herb> {
 
   @Override
   public boolean equals(Object obj) {
-    return obj instanceof Herb && ((Herb) obj).getItem().getUnlocalizedName().equals(getItem().getUnlocalizedName());
+    return obj instanceof Herb && ((Herb) obj).getName().equals(this.getName());
   }
 }
