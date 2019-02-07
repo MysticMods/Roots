@@ -44,7 +44,7 @@ public class ItemPouch extends ItemBase {
   public static Herb getHerb(ItemStack stack) {
     String name = getPlantName(stack);
     if (name != null) {
-      return HerbRegistry.REGISTRY.getValue(new ResourceLocation(name));
+      return HerbRegistry.getHerbByName(name);
     }
     return null;
   }
