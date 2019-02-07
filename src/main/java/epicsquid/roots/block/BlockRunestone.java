@@ -3,7 +3,7 @@ package epicsquid.roots.block;
 import javax.annotation.Nonnull;
 
 import epicsquid.mysticallib.block.BlockBase;
-import epicsquid.mysticalworld.item.ItemKnife;
+import epicsquid.roots.item.ItemKnife;
 import epicsquid.roots.init.ModBlocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

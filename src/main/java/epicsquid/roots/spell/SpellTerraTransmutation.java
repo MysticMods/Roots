@@ -23,7 +23,7 @@ public class SpellTerraTransmutation extends SpellBase{
     addCost(ModItems.wildroot, 0.0625f);
     addIngredients(
         new ItemStack(Items.REDSTONE),
-        new ItemStack(ModItems.wood_knife),
+        new ItemStack(epicsquid.roots.init.ModItems.wood_knife),
         new ItemStack(ModItems.pereskia),
         new ItemStack(ModItems.terra_moss),
         new ItemStack(ModItems.wildroot)
