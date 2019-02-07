@@ -44,8 +44,11 @@ public class HerbRegistry {
     event.register(ModItems.pereskia, "pereskia");
     event.register(ModItems.pereskia_bulb, "pereskia_bulb");
     event.register(ModItems.terra_moss, "terra_moss");
-    event.register(ModItems.terra_spores, "terra_moss_seed");
     event.register(ModItems.wildroot, "wildroot");
     event.register(ModItems.wildewheet, "wildewheet");
+    event.register(ModItems.infernal_bulb, "infernal_ulb");
+    event.register(ModItems.dewgonia, "dewgonia");
+    event.register(ModItems.stalicripe, "stalicripe");
+    event.register(ModItems.cloud_berry, "cloud_berry");
   }
 }
