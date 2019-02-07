@@ -2,6 +2,7 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.spell.EntityThornTrap;
+import epicsquid.roots.init.HerbRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -15,7 +16,7 @@ public class SpellRoseThorns extends SpellBase {
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 24;
 
-    addCost(ModItems.terra_moss, 0.25f);
+    addCost(HerbRegistry.getHerbByName("terra_moss"), 0.25f);
     addIngredients(
         new ItemStack(Blocks.CACTUS),
         new ItemStack(Blocks.DOUBLE_PLANT, 1, 4),

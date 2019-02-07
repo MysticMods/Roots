@@ -5,6 +5,7 @@ import java.util.List;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticalworld.init.ModBlocks;
 import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.network.fx.MessageAcidCloudFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,8 +27,8 @@ public class SpellAcidCloud extends SpellBase {
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 24;
 
-    addCost(ModItems.terra_moss, 0.0625f);
-    addCost(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom), 0.05f);
+    addCost(HerbRegistry.getHerbByName("terra_moss"), 0.0625f);
+    addCost(HerbRegistry.getHerbByName("baffle_cap"), 0.05f);
     addIngredients(
         new ItemStack(Items.SPIDER_EYE),
         new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom)),

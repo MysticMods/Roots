@@ -1,6 +1,9 @@
 package epicsquid.roots.init;
 
+import java.util.Collection;
+
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import epicsquid.mysticalworld.init.ModBlocks;
 import epicsquid.mysticalworld.init.ModItems;
@@ -46,9 +49,20 @@ public class HerbRegistry {
     event.register(ModItems.terra_moss, "terra_moss");
     event.register(ModItems.wildroot, "wildroot");
     event.register(ModItems.wildewheet, "wildewheet");
-    event.register(ModItems.infernal_bulb, "infernal_ulb");
+    event.register(ModItems.infernal_bulb, "infernal_bulb");
     event.register(ModItems.dewgonia, "dewgonia");
     event.register(ModItems.stalicripe, "stalicripe");
     event.register(ModItems.cloud_berry, "cloud_berry");
+  }
+
+  @Nullable
+  public static Herb getHerbByName(@Nonnull String name) {
+    Collection<Herb> herbs = REGISTRY.getValuesCollection();
+    for (Herb herb : herbs) {
+      if (herb.getName().equals(name)) {
+        return herb;
+      }
+    }
+    return null;
   }
 }
