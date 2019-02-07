@@ -4,6 +4,7 @@ import java.util.List;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.network.fx.MessageLifeDrainAbsorbFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +23,7 @@ public class SpellLifeDrain extends SpellBase {
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 28;
 
-    addCost(ModItems.pereskia_bulb, 0.125f);
+    addCost(HerbRegistry.getHerbByName("pereskia"), 0.125f);
     addIngredients(
         new ItemStack(Items.BEETROOT),
         new ItemStack(Blocks.RED_FLOWER, 1, 7),

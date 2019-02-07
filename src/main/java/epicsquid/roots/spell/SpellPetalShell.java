@@ -5,6 +5,7 @@ import java.util.List;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.spell.EntityPetalShell;
+import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -20,8 +21,8 @@ public class SpellPetalShell extends SpellBase {
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 120;
 
-    addCost(ModItems.aubergine_seed, 0.5f);
-    addCost(ModItems.moonglow_leaf, 0.25f);
+    addCost(HerbRegistry.getHerbByName("aubergine_seed"), 0.5f);
+    addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.25f);
     addIngredients(
         new ItemStack(Items.MELON_SEEDS),
         new ItemStack(ModItems.wildroot),

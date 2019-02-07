@@ -2,6 +2,7 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.spell.EntityBoost;
+import epicsquid.roots.init.HerbRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -15,7 +16,7 @@ public class SpellGravityBoost extends SpellBase {
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 56;
 
-    addCost(ModItems.pereskia, 0.125f);
+    addCost(HerbRegistry.getHerbByName("pereskia"), 0.125f);
     addIngredients(
         new ItemStack(Items.RABBIT_FOOT),
         new ItemStack(Blocks.RED_FLOWER, 1, 1),

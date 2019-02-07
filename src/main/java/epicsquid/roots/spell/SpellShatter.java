@@ -4,6 +4,7 @@ import java.util.Random;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.network.fx.MessageShatterBurstFX;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -24,7 +25,7 @@ public class SpellShatter extends SpellBase {
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 20;
 
-    addCost(ModItems.wildroot, 0.0625f);
+    addCost(HerbRegistry.getHerbByName("wildroot"), 0.0625f);
     addIngredients(
         new ItemStack(Items.FLINT),
         new ItemStack(Blocks.RED_FLOWER, 1, 3),

@@ -2,6 +2,7 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.spell.EntityFireJet;
+import epicsquid.roots.init.HerbRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -15,7 +16,7 @@ public class SpellWildfire extends SpellBase {
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 24;
 
-    addCost(ModItems.wildroot, 0.125f);
+    addCost(HerbRegistry.getHerbByName("infernal_bulb"), 0.125f);
     addIngredients(
         new ItemStack(Items.DYE, 1, 14),
         new ItemStack(Blocks.RED_FLOWER, 1, 5),

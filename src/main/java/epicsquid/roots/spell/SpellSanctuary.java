@@ -4,6 +4,7 @@ import java.util.List;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.network.fx.MessageSanctuaryBurstFX;
 import epicsquid.roots.network.fx.MessageSanctuaryRingFX;
 import net.minecraft.entity.Entity;
@@ -21,8 +22,8 @@ public class SpellSanctuary extends SpellBase {
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 60;
 
-    addCost(ModItems.pereskia, 0.125f);
-    addCost(ModItems.wildroot, 0.125f);
+    addCost(HerbRegistry.getHerbByName("pereskia"), 0.125f);
+    addCost(HerbRegistry.getHerbByName("wildroot"), 0.125f);
     addIngredients(
         new ItemStack(Items.DYE, 1, 1),
         new ItemStack(ModItems.pereskia),
