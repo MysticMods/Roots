@@ -3,6 +3,7 @@ package epicsquid.roots.spell;
 import java.util.List;
 
 import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.util.Constants;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,8 +20,8 @@ public class SpellMindWard extends SpellBase {
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 80;
 
-    addCost(ModItems.aubergine_seed, 0.25f);
-    addCost(ModItems.terra_moss, 0.25f);
+    addCost(HerbRegistry.getHerbByName("aubergine_seed"), 0.25f);
+    addCost(HerbRegistry.getHerbByName("terra_moss"), 0.25f);
     addIngredients(
         new ItemStack(Items.ROTTEN_FLESH),
         new ItemStack(ModItems.moonglow_leaf),

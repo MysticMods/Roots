@@ -2,6 +2,7 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.network.fx.MessageLightDrifterFX;
 import epicsquid.roots.network.fx.MessageLightDrifterSync;
 import epicsquid.roots.util.Constants;
@@ -19,8 +20,8 @@ public class SpellLightDrifter extends SpellBase {
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 200;
 
-    addCost(ModItems.pereskia, 0.5f);
-    addCost(ModItems.wildroot, 0.25f);
+    addCost(HerbRegistry.getHerbByName("pereskia"), 0.5f);
+    addCost(HerbRegistry.getHerbByName("wildroot"), 0.25f);
     addIngredients(
         new ItemStack(Items.ENDER_PEARL),
         new ItemStack(ModItems.moonglow_leaf),

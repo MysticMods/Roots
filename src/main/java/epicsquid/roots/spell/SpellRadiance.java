@@ -5,6 +5,7 @@ import java.util.List;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.network.fx.MessageRadianceBeamFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,9 +27,9 @@ public class SpellRadiance extends SpellBase {
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 40;
 
-    addCost(ModItems.moonglow_leaf, 0.25f);
-    addCost(ModItems.wildroot, 0.125f);
-    addCost(ModItems.aubergine_seed, 0.25f);
+    addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.25f);
+    addCost(HerbRegistry.getHerbByName("wild_root"), 0.125f);
+    addCost(HerbRegistry.getHerbByName("aubergine_seed"), 0.25f);
     addIngredients(
         new ItemStack(Items.GLOWSTONE_DUST),
         new ItemStack(Blocks.DOUBLE_PLANT, 1, 0),

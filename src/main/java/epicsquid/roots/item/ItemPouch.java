@@ -100,7 +100,7 @@ public class ItemPouch extends ItemBase {
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
     if (stack.hasTagCompound()) {
       if (stack.getTagCompound().hasKey("quantity")) {
-        tooltip.add(I18n.format(stack.getTagCompound().getString("plant") + ".name") + I18n.format("roots.tooltip.pouch_divider") + (int) Math
+        tooltip.add(I18n.format( HerbRegistry.getHerbByName(stack.getTagCompound().getString("plant")).getItem().getUnlocalizedName() + ".name") + I18n.format("roots.tooltip.pouch_divider") + (int) Math
             .ceil(stack.getTagCompound().getDouble("quantity")));
       }
     }
