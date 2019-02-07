@@ -4,10 +4,13 @@ import java.util.List;
 
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.api.Herb;
+import epicsquid.roots.init.HerbRegistry;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -27,6 +30,23 @@ public class ItemPouch extends ItemBase {
     stack.getTagCompound().setString("plant", plantName);
     stack.getTagCompound().setDouble("quantity", quantity);
     return stack;
+  }
+
+  public static String getPlantName(ItemStack stack) {
+    if (stack.hasTagCompound()) {
+      if (stack.getTagCompound().hasKey("plant")) {
+        return stack.getTagCompound().getString("plant");
+      }
+    }
+    return null;
+  }
+
+  public static Herb getHerb(ItemStack stack) {
+    String name = getPlantName(stack);
+    if (name != null) {
+      return HerbRegistry.REGISTRY.getValue(new ResourceLocation(name));
+    }
+    return null;
   }
 
   public static double getQuantity(ItemStack stack, String plantName) {

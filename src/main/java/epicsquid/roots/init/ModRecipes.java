@@ -7,17 +7,23 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import org.lwjgl.Sys;
+
+import epicsquid.mysticallib.block.IBlock;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
+import epicsquid.roots.api.Herb;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.recipe.PowderPouchFillRecipe;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
+import epicsquid.roots.recipe.RunicCarvingRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
 import epicsquid.roots.recipe.recipes.RunicShearRecipes;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
@@ -33,6 +39,7 @@ public class ModRecipes {
   private static ArrayList<MortarRecipe> mortarRecipes = new ArrayList<>();
   private static Map<String, PyreCraftingRecipe> pyreCraftingRecipes = new HashMap<>();
   private static List<RunicShearRecipe> runicShearRecipes = new ArrayList<>();
+  private static List<RunicCarvingRecipe> runicCarvingRecipes = new ArrayList<>();
 
   private static ResourceLocation getRL(@Nonnull String s) {
     return new ResourceLocation(Roots.MODID + ":" + s);
@@ -44,6 +51,27 @@ public class ModRecipes {
 
   private static void registerShaped(@Nonnull IForgeRegistry<IRecipe> registry, @Nonnull String name, @Nonnull ItemStack result, Object... ingredients) {
     registry.register(new ShapedOreRecipe(getRL(name), result, ingredients).setRegistryName(getRL(name)));
+  }
+
+  public static void addRunicCarvingRecipe(RunicCarvingRecipe recipe) {
+    for (RunicCarvingRecipe runicCarvingRecipe : runicCarvingRecipes) {
+      if (runicCarvingRecipe.matches(recipe)) {
+        System.out.println("Recipe is already registered with carving block - " + recipe.getCarvingBlock() + ", rune block - " + recipe.getRuneBlock() + ", herb - " + recipe.getHerb().getItem());
+        return;
+      }
+    }
+    runicCarvingRecipes.add(recipe);
+  }
+
+  public static RunicCarvingRecipe getRunicCarvingRecipe(IBlockState carvingBlock, Herb herb) {
+    if (carvingBlock != null && herb != null) {
+      for (RunicCarvingRecipe recipe : runicCarvingRecipes) {
+        if (recipe.getHerb().equals(herb) && recipe.getCarvingBlock().equals(carvingBlock)) {
+          return recipe;
+        }
+      }
+    }
+    return null;
   }
 
   public static void addRunicShearRecipe(RunicShearRecipe recipe) {
