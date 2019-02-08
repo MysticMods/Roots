@@ -25,6 +25,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -190,10 +191,13 @@ public class ModRecipes {
     addCraftingRecipe("cloud_berry",
         new PyreCraftingRecipe(new ItemStack(ModItems.cloud_berry)).addIngredients(new ItemStack(ItemBlock.getItemFromBlock(Blocks.LEAVES)), new ItemStack(Items.STRING), new ItemStack(ItemBlock.getItemFromBlock(Blocks.WOOL)), new ItemStack(ModItems.terra_moss)));
     addCraftingRecipe("stalicripe",
-        new PyreCraftingRecipe(new ItemStack(ModItems.stalicripe)).addIngredients(new ItemStack(Items.FLINT), new ItemStack(ItemBlock.getItemFromBlock(Blocks.STONE)), new ItemStack(Items.GOLD_NUGGET), new ItemStack(ModItems.wildroot)));
-    //    addCraftingRecipe("pereskia", new PyreCraftingRecipe(new ItemStack(ItemBlock.getItemFromBlock(epicsquid.mysticalworld.init.ModBlocks.runic_soil)))
-//        .addIngredients(new ItemStack(ItemBlock.getItemFromBlock(Blocks.DIRT)), new ItemStack(ModItems.terra_moss), new ItemStack(ModItems.wildroot), new ItemStack(ModItems.bark_oak), new ItemStack(ModItems.spirit_herb)));
-
+        new PyreCraftingRecipe(new ItemStack(ModItems.stalicripe)).addIngredients(new ItemStack(Items.FLINT), new ItemStack(Blocks.STONE), new ItemStack(Items.GOLD_NUGGET), new ItemStack(ModItems.wildroot)));
+    addCraftingRecipe("moonglow_leaf",
+            new PyreCraftingRecipe(new ItemStack(ModItems.moonglow_leaf)).addIngredients(new ItemStack(Blocks.LEAVES), new ItemStack(Items.GLOWSTONE_DUST), new ItemStack(Items.GOLD_NUGGET), new ItemStack(Items.SUGAR)));
+    addCraftingRecipe("pereskia",
+            new PyreCraftingRecipe(new ItemStack(ModItems.pereskia)).addIngredients(new ItemStack(Blocks.RED_FLOWER), new ItemStack(Items.MELON), new ItemStack(Items.WHEAT_SEEDS), new ItemStack(Items.QUARTZ)));
+    addCraftingRecipe("spirit_herb",
+            new PyreCraftingRecipe(new ItemStack(ModItems.spirit_herb)).addIngredients(new ItemStack(ModItems.wildroot), new ItemStack(ModItems.terra_moss), new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Blocks.SOUL_SAND)));
   }
 
 }
