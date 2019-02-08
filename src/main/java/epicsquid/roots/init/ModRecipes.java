@@ -23,6 +23,7 @@ import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -172,7 +173,8 @@ public class ModRecipes {
   private static void initCraftingRecipes() {
     addCraftingRecipe("unending_bowl", new PyreCraftingRecipe(new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.unending_bowl)))
         .addIngredients(new ItemStack(Items.WATER_BUCKET), new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.mortar)), new ItemStack(ModItems.moonglow_leaf), new ItemStack(ModItems.terra_moss), new ItemStack(ModItems.spirit_herb)));
-
+    addCraftingRecipe("runic_soil", new PyreCraftingRecipe(new ItemStack(ItemBlock.getItemFromBlock(epicsquid.mysticalworld.init.ModBlocks.runic_soil)))
+        .addIngredients(new ItemStack(ItemBlock.getItemFromBlock(Blocks.DIRT)), new ItemStack(ModItems.terra_moss), new ItemStack(ModItems.wildroot), new ItemStack(ModItems.bark_oak), new ItemStack(ModItems.spirit_herb)));
     addCraftingRecipe("living_pickaxe",
         new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.living_pickaxe)).addIngredients(new ItemStack(Items.GOLD_INGOT), new ItemStack(Items.WOODEN_PICKAXE), new ItemStack(ModItems.wildroot), new ItemStack(ModItems.bark_oak), new ItemStack(ModItems.bark_oak)));
     addCraftingRecipe("living_axe", new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.living_axe)).addIngredients(new ItemStack(Items.GOLD_INGOT), new ItemStack(Items.WOODEN_AXE), new ItemStack(ModItems.wildroot), new ItemStack(ModItems.bark_oak), new ItemStack(ModItems.bark_oak)));
