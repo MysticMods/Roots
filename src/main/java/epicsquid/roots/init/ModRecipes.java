@@ -183,6 +183,17 @@ public class ModRecipes {
     addCraftingRecipe("living_hoe", new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.living_hoe)).addIngredients(new ItemStack(Items.GOLD_INGOT), new ItemStack(Items.WOODEN_HOE), new ItemStack(ModItems.wildroot), new ItemStack(ModItems.bark_oak), new ItemStack(ModItems.bark_oak)));
     addCraftingRecipe("living_sword",
         new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.living_sword)).addIngredients(new ItemStack(Items.GOLD_INGOT), new ItemStack(Items.WOODEN_SWORD), new ItemStack(ModItems.wildroot), new ItemStack(ModItems.bark_oak), new ItemStack(ModItems.bark_oak)));
+    addCraftingRecipe("infernal_bulb",
+        new PyreCraftingRecipe(new ItemStack(ModItems.infernal_bulb)).addIngredients(new ItemStack(Items.NETHER_WART), new ItemStack(ItemBlock.getItemFromBlock(Blocks.MAGMA)), new ItemStack(Items.BLAZE_POWDER), new ItemStack(ModItems.wildroot)));
+    addCraftingRecipe("dewgonia",
+        new PyreCraftingRecipe(new ItemStack(ModItems.dewgonia)).addIngredients(new ItemStack(Items.WATER_BUCKET), new ItemStack(Items.SUGAR), new ItemStack(Items.DYE, 1, 4), new ItemStack(ModItems.terra_moss)));
+    addCraftingRecipe("cloud_berry",
+        new PyreCraftingRecipe(new ItemStack(ModItems.cloud_berry)).addIngredients(new ItemStack(ItemBlock.getItemFromBlock(Blocks.LEAVES)), new ItemStack(Items.STRING), new ItemStack(ItemBlock.getItemFromBlock(Blocks.WOOL)), new ItemStack(ModItems.terra_moss)));
+    addCraftingRecipe("stalicripe",
+        new PyreCraftingRecipe(new ItemStack(ModItems.stalicripe)).addIngredients(new ItemStack(Items.FLINT), new ItemStack(ItemBlock.getItemFromBlock(Blocks.STONE)), new ItemStack(Items.GOLD_NUGGET), new ItemStack(ModItems.wildroot)));
+    //    addCraftingRecipe("pereskia", new PyreCraftingRecipe(new ItemStack(ItemBlock.getItemFromBlock(epicsquid.mysticalworld.init.ModBlocks.runic_soil)))
+//        .addIngredients(new ItemStack(ItemBlock.getItemFromBlock(Blocks.DIRT)), new ItemStack(ModItems.terra_moss), new ItemStack(ModItems.wildroot), new ItemStack(ModItems.bark_oak), new ItemStack(ModItems.spirit_herb)));
+
   }
 
 }
