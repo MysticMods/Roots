@@ -68,3 +68,9 @@ roots.spell.spell_growth_infusion.name=Growth Infusion
 roots.spell.spell_sense_animals.name=Sense Animals
 roots.spell.spell_terra_transmutation.name=Terra Transmutation
 
+#Knifes
+item.wood_knife.name=Wooden Knife
+item.stone_knife.name=Stone Knife
+item.iron_knife.name=Iron Knife
+item.gold_knife.name=Golden Knife
+item.diamond_knife.name=Diamond Knife
