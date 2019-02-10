@@ -34,6 +34,15 @@
     {
       "type": "ritual_crafting_template",
       "recipe": "infernal_bulb"
+    },
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "wildewheet"
+    },
+    {
+      "type": "text",
+      "title": "Terra Moss",
+      "text": "Terra moss can be obtained by using terra spores on cobble stone that is sitting next to water and then using the runic shears to obtain the terra moss. You can also use runic shears on naturally found mossy cobblestone to retrieve Terra Moss"
     }
   ]
 }
