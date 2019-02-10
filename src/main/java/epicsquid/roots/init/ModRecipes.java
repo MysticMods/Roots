@@ -135,6 +135,16 @@ public class ModRecipes {
   }
 
   public static PyreCraftingRecipe getCraftingRecipe(List<ItemStack> items) {
+    List<ItemStack> stacksToRemove = new ArrayList<>();
+    for(ItemStack s : items){
+      if(s == ItemStack.EMPTY){
+        stacksToRemove.add(s);
+      }
+    }
+    for(ItemStack s : stacksToRemove){
+      items.remove(s);
+    }
+    stacksToRemove.clear();
     for (Map.Entry<String, PyreCraftingRecipe> pyreCraftingRecipe : pyreCraftingRecipes.entrySet()) {
       if (pyreCraftingRecipe.getValue().matches(items)) {
         return pyreCraftingRecipe.getValue();
@@ -198,6 +208,10 @@ public class ModRecipes {
             new PyreCraftingRecipe(new ItemStack(ModItems.pereskia)).addIngredients(new ItemStack(Blocks.RED_FLOWER), new ItemStack(Items.MELON), new ItemStack(Items.WHEAT_SEEDS), new ItemStack(Items.QUARTZ)));
     addCraftingRecipe("spirit_herb",
             new PyreCraftingRecipe(new ItemStack(ModItems.spirit_herb)).addIngredients(new ItemStack(ModItems.wildroot), new ItemStack(ModItems.terra_moss), new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Blocks.SOUL_SAND)));
+    addCraftingRecipe("wildewheet",
+            new PyreCraftingRecipe(new ItemStack(ModItems.wildewheet)).addIngredients(new ItemStack(ModItems.wildroot), new ItemStack(ModItems.wildroot), new ItemStack(Items.WHEAT_SEEDS), new ItemStack(Items.WHEAT)));
+    addCraftingRecipe("runic_shears",
+            new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.runic_shears)).addIngredients(new ItemStack(Items.SHEARS), new ItemStack(ModItems.wildroot), new ItemStack(Item.getItemFromBlock(ModBlocks.runestone)), new ItemStack(Item.getItemFromBlock(ModBlocks.runestone)), new ItemStack(ModItems.wildroot)));
   }
 
 }
