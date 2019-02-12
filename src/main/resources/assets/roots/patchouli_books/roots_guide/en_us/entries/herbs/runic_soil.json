@@ -1,0 +1,16 @@
+{
+  "name": "Runic Soil",
+  "icon": "mysticalworld:runic_soil",
+  "category": "herbs",
+  "priority": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Elementally attuned herbs are rather picky about what they will grow on, as fickle as the elements themselves. Runic Soil is a special kind of soil that can be further refined into different forms, upon which a corresponding elemental plant may grow."
+    },
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "runic_soil"
+    }
+  ]
+}

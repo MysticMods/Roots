@@ -1,0 +1,31 @@
+{
+  "name": "Animal Harvest",
+  "icon": "minecraft:leather",
+  "category": "rituals",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Animals in the vicinity of the ritual will drop a piece of their physical forms - without coming to any harm."
+    },
+    {
+      "type": "pyre_template",
+      "ritual": "ritual_animal_harvest"
+    },
+    {
+      "type": "multiblock",
+      "multiblock": {
+        "mapping": {
+          "0": "roots:bonfire",
+          "R": "roots:runestone",
+          "C": "roots:chiseled_runestone",
+          "O": "roots:offertory_plate"
+        },
+        "pattern": [
+          ["   C   ","       ","       ","C     C","       ","       ","       "],
+          ["   R   ","       ","       ","R     R","       ","       ","       "],
+          ["   R   ","       ","       ","R  0  R","       ","       ","   O   "]
+        ]
+      }
+    }
+  ]
+}

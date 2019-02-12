@@ -1,0 +1,15 @@
+{
+  "name": "Shatter",
+  "icon": "roots:petal_dust",
+  "category": "spells",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A burst of tremendouse force is expelled, which instantly breaks blocks it collides with."
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_shatter"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Runestone",
+  "icon": "roots:runestone",
+  "category": "basics",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Runestone is a magic-infused variety of stone that is often used in structures required by druidic rituals, or as a specialized crafting component where ordinary stone fails.$(br2)Basic Runestone is made using the $(l:spells/spell_terra_transmutation) Terra Transmutation $()spell and can be carved into further forms by other means."
+    }
+  ]
+}

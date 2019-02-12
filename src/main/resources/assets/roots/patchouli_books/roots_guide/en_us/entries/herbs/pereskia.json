@@ -1,0 +1,19 @@
+{
+  "name": "Pereskia",
+  "icon": "mysticalworld:pereskia",
+  "category": "herbs",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A vibrant plant full of magical energy. Both the bulbs and the flowers that grow from them have different magical applications, which has earned this plant the nickname 'Feyblossom' among some circles - in reference to legends which state the flower was originally cultivated in the gardens of fairies."
+    },
+    {
+      "type": "text",
+      "text": "Pereskia flowers can be obtained by using Runic Shears on dandelions or poppies, and then crafted into bulbs to propogate them further."
+    },
+	{
+		"type": "crafting",
+		"recipe": "mysticalworld:pereskia_seed"
+	}
+  ]
+}

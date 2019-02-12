@@ -1,0 +1,15 @@
+{
+  "name": "Acid Cloud",
+  "icon": "roots:petal_dust",
+  "category": "spells",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Conjures up a ring of burning gas around the caster, which remains until the caster ceases casting. Any creature that approaches the caster while they maintain the poisonous ring is damaged by the noxious fumes.$(br2)It is difficult for the caster to move quickly while channeling this spell, lest they get caught up in the acidic gas themselves."
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_acid_cloud"
+    }
+  ]
+}

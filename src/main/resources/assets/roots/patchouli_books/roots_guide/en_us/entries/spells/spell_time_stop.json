@@ -1,0 +1,15 @@
+{
+  "name": "Time Stop",
+  "icon": "roots:petal_dust",
+  "category": "spells",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Temporarily halts the progress of time for all creatures in the vicinity of the caster, save for the caster themselves."
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_time_stop"
+    }
+  ]
+}

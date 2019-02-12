@@ -1,0 +1,15 @@
+{
+  "name": "Petal Shell",
+  "icon": "roots:petal_dust",
+  "category": "spells",
+  "pages": [
+    {
+      "type": "text",
+      "text": "One cast of this spell conjures up protective magic in the form of an ethereal flower petal that circles the caster, which absorbs a single strike before dissipating.$(br2)The spell can be cast until, at most, three of these petals are protecting the caster at a single time."
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_petal_shell"
+    }
+  ]
+}

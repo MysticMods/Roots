@@ -1,0 +1,15 @@
+{
+  "name": "Healing Aura",
+  "icon": "minecraft:speckled_melon",
+  "category": "rituals",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Living creatures close to the ritual are rejuvenated. $(br2)This ritual requires 4 birch trees to be present."
+    },
+    {
+      "type": "pyre_template",
+      "ritual": "ritual_life"
+    }
+  ]
+}
