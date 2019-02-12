@@ -1,0 +1,15 @@
+{
+  "name": "Radiance",
+  "icon": "roots:petal_dust",
+  "category": "spells",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The power of the sun is focused into a radiant beam of light, as directed by the caster - a powerful force that seems especially effective against the undead."
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_radiance"
+    }
+  ]
+}

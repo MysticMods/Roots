@@ -1,0 +1,15 @@
+{
+  "name": "Unending Bowl",
+  "icon": "roots:unending_bowl",
+  "category": "basics",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The Unending Bowl, as its name suggests, never seems to run out of water no matter how much is taken from it once placed."
+    },
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "unending_bowl"
+    }
+  ]
+}

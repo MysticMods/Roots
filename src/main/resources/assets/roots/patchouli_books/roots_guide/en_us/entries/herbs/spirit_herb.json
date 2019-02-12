@@ -1,0 +1,15 @@
+{
+  "name": "Spirit Herb",
+  "icon": "mysticalworld:spirit_herb",
+  "category": "herbs",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A reagent which has been used in ceremonies to communicate with the dead for centuries, the Spirit Herb seems to resonate with the spirits of the deceased.$(br2)Spirit Herbs can be initially obtained by using Runic Shears on saplings. From there, they can be crafted into seeds for further propogation."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:spirit_herb_seed"
+    }
+  ]
+}

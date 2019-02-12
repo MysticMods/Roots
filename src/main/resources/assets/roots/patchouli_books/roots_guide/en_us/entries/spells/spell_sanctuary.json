@@ -1,0 +1,15 @@
+{
+  "name": "Sanctuary",
+  "icon": "roots:petal_dust",
+  "category": "spells",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A protective shield is conjured around the caster as long as the spell is channeled.$(br2)This shield deflects both creatures and projectiles that approach the caster."
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_sanctuary"
+    }
+  ]
+}

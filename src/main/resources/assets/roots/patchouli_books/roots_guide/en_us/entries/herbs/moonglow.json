@@ -1,0 +1,15 @@
+{
+  "name": "Moonglow Leaf",
+  "icon": "mysticalworld:moonglow_leaf",
+  "category": "herbs",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Moonglow, at a first glance, seems to glow in the dark at night; observant druids have noted that it actually emits no light at all if the moon is obscured.$(br2)(THIS IS A PLACEHOLDER RECIPE!)"
+    },
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "moonglow_leaf"
+    }
+  ]
+}

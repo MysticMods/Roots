@@ -1,0 +1,6 @@
+{
+  "name": "Natural Grove",
+  "parent": "groves",
+  "description": "The natural grove is the first grove most druids interact with. But don't let it fool you. It may be the most easy one to get into, but it may also be the most powerful one.",
+  "icon": "roots:runestone_natural"
+}

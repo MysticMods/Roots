@@ -1,0 +1,31 @@
+{
+  "name": "Warding Protection",
+  "icon": "minecraft:shield",
+  "category": "rituals",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Prevents injury to those near the ritual."
+    },
+    {
+      "type": "pyre_template",
+      "ritual": "ritual_warden"
+    },
+    {
+      "type": "multiblock",
+      "multiblock": {
+        "mapping": {
+          "0": "roots:bonfire",
+          "R": "roots:runestone",
+          "C": "roots:chiseled_runestone"
+        },
+        "pattern": [
+          ["       "," C   C ","       ","       ","       "," C   C ","       "],
+          ["   C   "," R   R ","       ","C     C","       "," R   R ","       "],
+          ["   R   "," R   R ","       ","R     R","       "," R   R ","       "],
+          ["   R   "," R   R ","       ","R  0  R","       "," R   R ","       "]
+        ]
+      }
+    }
+  ]
+}

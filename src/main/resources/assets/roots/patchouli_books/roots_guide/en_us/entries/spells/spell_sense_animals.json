@@ -1,0 +1,15 @@
+{
+  "name": "Sense Animals",
+  "icon": "roots:petal_dust",
+  "category": "spells",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Animals relatively near to the caster will begin to glow, making it easier to pinpoint their location."
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_sense_animals"
+    }
+  ]
+}

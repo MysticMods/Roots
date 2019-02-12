@@ -1,0 +1,15 @@
+{
+  "name": "Infernal Bulb",
+  "icon": "mysticalworld:infernal_bulb",
+  "category": "herbs",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A tough-budded flower which never seems to bloom. The bulbs from which these flowers bud are warm to the touch even after they are removed from the main plant. Can only be grown on Magmatic Soil.$(br2)(THIS IS A PLACEHOLDER RECIPE!)"
+    },
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "infernal_bulb"
+    }
+  ]
+}
