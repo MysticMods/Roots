@@ -211,7 +211,7 @@ public class ModRecipes {
     addCraftingRecipe("wildewheet",
             new PyreCraftingRecipe(new ItemStack(ModItems.wildewheet)).addIngredients(new ItemStack(ModItems.wildroot), new ItemStack(ModItems.wildroot), new ItemStack(Items.WHEAT_SEEDS), new ItemStack(Items.WHEAT)));
     addCraftingRecipe("runic_shears",
-            new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.runic_shears)).addIngredients(new ItemStack(Items.SHEARS), new ItemStack(ModItems.wildroot), new ItemStack(Item.getItemFromBlock(ModBlocks.runestone)), new ItemStack(Item.getItemFromBlock(ModBlocks.runestone)), new ItemStack(ModItems.wildroot)));
+    new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.runic_shears)).addIngredients(new ItemStack(Items.SHEARS), new ItemStack(ModItems.wildroot), new ItemStack(ModItems.wildroot), new ItemStack(Item.getItemFromBlock(Blocks.STONE)), new ItemStack(Blocks.STONE)));
   }
 
 }
