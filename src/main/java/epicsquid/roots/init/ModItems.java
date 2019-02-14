@@ -5,24 +5,17 @@ import javax.annotation.Nonnull;
 import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticalworld.MysticalWorld;
-import epicsquid.roots.item.ItemKnife;
+import epicsquid.roots.item.*;
 import epicsquid.roots.Roots;
-import epicsquid.roots.item.ItemLivingAxe;
-import epicsquid.roots.item.ItemLivingHoe;
-import epicsquid.roots.item.ItemLivingPickaxe;
-import epicsquid.roots.item.ItemLivingShovel;
-import epicsquid.roots.item.ItemLivingSword;
-import epicsquid.roots.item.ItemPetalDust;
-import epicsquid.roots.item.ItemPouch;
-import epicsquid.roots.item.ItemRunicShears;
-import epicsquid.roots.item.ItemStaff;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemArmor;
 
 public class ModItems {
 
   // All mod items
-  public static Item pestle, pouch, petal_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife;
+  public static Item pestle, pouch, petal_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots;
 
   //Rune Ashes
   public static Item aer_ash, terra_ash;
@@ -40,6 +33,14 @@ public class ModItems {
     event.addItem(living_shovel = new ItemLivingShovel(ToolMaterial.IRON, "living_shovel").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_hoe = new ItemLivingHoe(ToolMaterial.IRON, "living_hoe").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_sword = new ItemLivingSword(ToolMaterial.IRON, "living_sword").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(sylvan_helmet = new ItemSylvanArmor(ItemArmor.ArmorMaterial.IRON, EntityEquipmentSlot.HEAD, "sylvan_helmet").setMaxStackSize(1));
+    event.addItem(sylvan_chestplate = new ItemSylvanArmor(ItemArmor.ArmorMaterial.IRON, EntityEquipmentSlot.CHEST, "sylvan_chestplate").setMaxStackSize(1));
+    event.addItem(sylvan_leggings = new ItemSylvanArmor(ItemArmor.ArmorMaterial.IRON, EntityEquipmentSlot.LEGS, "sylvan_leggings").setMaxStackSize(1));
+    event.addItem(sylvan_boots = new ItemSylvanArmor(ItemArmor.ArmorMaterial.IRON, EntityEquipmentSlot.FEET, "sylvan_boots").setMaxStackSize(1));
+    event.addItem(wildwood_helmet = new ItemWildwoodArmor(ItemArmor.ArmorMaterial.DIAMOND, EntityEquipmentSlot.HEAD, "wildwood_helmet").setMaxStackSize(1));
+    event.addItem(wildwood_chestplate = new ItemWildwoodArmor(ItemArmor.ArmorMaterial.DIAMOND, EntityEquipmentSlot.CHEST, "wildwood_chestplate").setMaxStackSize(1));
+    event.addItem(wildwood_leggings = new ItemWildwoodArmor(ItemArmor.ArmorMaterial.DIAMOND, EntityEquipmentSlot.LEGS, "wildwood_leggings").setMaxStackSize(1));
+    event.addItem(wildwood_boots = new ItemWildwoodArmor(ItemArmor.ArmorMaterial.DIAMOND, EntityEquipmentSlot.FEET, "wildwood_boots").setMaxStackSize(1));
 
     event.addItem(aer_ash = new ItemBase("aer_ash").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(terra_ash = new ItemBase("terra_ash").setModelCustom(true).setCreativeTab(Roots.tab));
