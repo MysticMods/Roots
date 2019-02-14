@@ -1,0 +1,15 @@
+{
+  "name": "Dandelion Winds",
+  "icon": "roots:petal_dust",
+  "category": "spells",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Summons a quick gust of wind, which knocks away creatures in front of the caster."
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_dandelion_winds"
+    }
+  ]
+}

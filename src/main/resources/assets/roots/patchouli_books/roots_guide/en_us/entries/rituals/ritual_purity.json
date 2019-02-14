@@ -1,0 +1,15 @@
+{
+  "name": "Purify",
+  "icon": "minecraft:red_flower:6",
+  "category": "rituals",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Ailments are cleansed from creatures near the ritual."
+    },
+    {
+      "type": "pyre_template",
+      "ritual": "ritual_purity"
+    }
+  ]
+}

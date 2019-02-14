@@ -1,0 +1,30 @@
+{
+  "name": "Storm of Fire",
+  "icon": "minecraft:fire_charge",
+  "category": "rituals",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Rains fire down from the heavens, burning creatures unfortunate to be near the ritual in a raging inferno."
+    },
+    {
+      "type": "pyre_template",
+      "ritual": "ritual_fire_storm"
+    },
+    {
+      "type": "multiblock",
+      "multiblock": {
+        "mapping": {
+          "0": "roots:bonfire",
+          "R": "roots:runestone",
+          "C": "roots:chiseled_runestone"
+        },
+        "pattern": [
+          ["   C   ","       ","       ","C     C","       ","       ","       "],
+          ["   R   ","       ","       ","R     R","       ","       ","       "],
+          ["   R   ","       ","       ","R  0  R","       ","       ","       "]
+        ]
+      }
+    }
+  ]
+}

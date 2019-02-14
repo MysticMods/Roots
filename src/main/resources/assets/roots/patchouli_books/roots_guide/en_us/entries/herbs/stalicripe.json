@@ -1,0 +1,15 @@
+{
+  "name": "Stalicripe",
+  "icon": "mysticalworld:stalicripe",
+  "category": "herbs",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A rough, rugged plant that feels almost like it's made of stone when touched. Can only be grown on Terra Soil.$(br2)(THIS IS A PLACEHOLDER RECIPE!)"
+    },
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "stalicripe"
+    }
+  ]
+}

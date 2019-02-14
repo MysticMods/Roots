@@ -1,8 +1,9 @@
 package epicsquid.roots.proxy;
 
-import epicsquid.roots.init.ModItems;
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.init.ModItems;
+import epicsquid.roots.recipe.recipes.RunicCarvingRecipes;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.rune.RuneRegistry;
 import epicsquid.roots.spell.SpellRegistry;
@@ -23,8 +24,10 @@ public class CommonProxy {
     OfferingUtil.init();
     EffectManager.init();
     RuneRegistry.init();
+    RunicCarvingRecipes.initRecipes();
   }
 
   public void postInit(FMLPostInitializationEvent event) {
+
   }
 }

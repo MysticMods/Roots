@@ -1,0 +1,16 @@
+{
+  "name": "Terra Transmutation",
+  "icon": "roots:petal_dust",
+  "category": "spells",
+  "priority": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "A channeled spell which infuses dropped stone it comes into contact with into $(l:basics/runestone)Runestone.$()"
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_terra_transmutation"
+    }
+  ]
+}

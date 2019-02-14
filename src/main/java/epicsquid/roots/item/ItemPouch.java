@@ -4,10 +4,13 @@ import java.util.List;
 
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.api.Herb;
+import epicsquid.roots.init.HerbRegistry;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -27,6 +30,23 @@ public class ItemPouch extends ItemBase {
     stack.getTagCompound().setString("plant", plantName);
     stack.getTagCompound().setDouble("quantity", quantity);
     return stack;
+  }
+
+  public static String getPlantName(ItemStack stack) {
+    if (stack.hasTagCompound()) {
+      if (stack.getTagCompound().hasKey("plant")) {
+        return stack.getTagCompound().getString("plant");
+      }
+    }
+    return null;
+  }
+
+  public static Herb getHerb(ItemStack stack) {
+    String name = getPlantName(stack);
+    if (name != null) {
+      return HerbRegistry.getHerbByName(name);
+    }
+    return null;
   }
 
   public static double getQuantity(ItemStack stack, String plantName) {
@@ -80,7 +100,7 @@ public class ItemPouch extends ItemBase {
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
     if (stack.hasTagCompound()) {
       if (stack.getTagCompound().hasKey("quantity")) {
-        tooltip.add(I18n.format(stack.getTagCompound().getString("plant") + ".name") + I18n.format("roots.tooltip.pouch_divider") + (int) Math
+        tooltip.add(I18n.format( HerbRegistry.getHerbByName(stack.getTagCompound().getString("plant")).getItem().getUnlocalizedName() + ".name") + I18n.format("roots.tooltip.pouch_divider") + (int) Math
             .ceil(stack.getTagCompound().getDouble("quantity")));
       }
     }

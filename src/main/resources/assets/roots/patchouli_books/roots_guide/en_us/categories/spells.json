@@ -1,0 +1,6 @@
+{
+  "name": "Spell Recipes",
+  "sortnum" : 2,
+  "description": "Spells are one of the most direct ways a druid can utilize magical herbs for instantaneous results.",
+  "icon": "roots:staff"
+}

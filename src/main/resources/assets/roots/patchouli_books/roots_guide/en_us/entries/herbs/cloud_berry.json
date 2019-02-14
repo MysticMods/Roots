@@ -1,0 +1,15 @@
+{
+  "name": "Cloud Berry",
+  "icon": "mysticalworld:cloud_berry",
+  "category": "herbs",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Light and fluffy, cloudberries contain the very essence of the sky and are delicate to the touch. Can only be grown on Aeros Soil.$(br2)(THIS IS A PLACEHOLDER RECIPE!)"
+    },
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "cloud_berry"
+    }
+  ]
+}

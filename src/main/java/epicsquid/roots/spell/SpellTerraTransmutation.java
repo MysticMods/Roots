@@ -2,6 +2,7 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.network.fx.MessageShatterBurstFX;
 import net.minecraft.block.state.IBlockState;
@@ -20,10 +21,10 @@ public class SpellTerraTransmutation extends SpellBase{
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 5;
 
-    addCost(ModItems.wildroot, 0.0625f);
+    addCost(HerbRegistry.getHerbByName("stalicripe"), 0.0625f);
     addIngredients(
         new ItemStack(Items.REDSTONE),
-        new ItemStack(ModItems.wood_knife),
+        new ItemStack(epicsquid.roots.init.ModItems.wood_knife),
         new ItemStack(ModItems.pereskia),
         new ItemStack(ModItems.terra_moss),
         new ItemStack(ModItems.wildroot)

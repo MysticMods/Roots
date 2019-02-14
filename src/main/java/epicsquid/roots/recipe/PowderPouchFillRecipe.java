@@ -1,6 +1,7 @@
 package epicsquid.roots.recipe;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.init.HerbRegistry;
@@ -24,9 +25,10 @@ public class PowderPouchFillRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
     String pouchPlant = "";
     for (int i = 0; i < inv.getSizeInventory(); i++) {
       if (inv.getStackInSlot(i) != ItemStack.EMPTY) {
-        if (isHerb(inv.getStackInSlot(i))) {
+        Herb herb = getHerb(inv.getStackInSlot(i));
+        if (herb != null) {
           herbCount++;
-          plantName = inv.getStackInSlot(i).getItem().getUnlocalizedName();
+          plantName = herb.getName();
         } else if (inv.getStackInSlot(i).getItem() instanceof ItemPouch) {
           pouchCount++;
           if (inv.getStackInSlot(i).hasTagCompound()) {
@@ -51,8 +53,9 @@ public class PowderPouchFillRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
     int plantStack = 0;
     for (int i = 0; i < inv.getSizeInventory(); i++) {
       if (inv.getStackInSlot(i) != ItemStack.EMPTY) {
-        if (isHerb(inv.getStackInSlot(i))) {
-          plantName = inv.getStackInSlot(i).getItem().getUnlocalizedName();
+        Herb herb = getHerb(inv.getStackInSlot(i));
+        if (herb != null) {
+          plantName = herb.getName();
           plantStack = inv.getStackInSlot(i).getCount();
         }
       }
@@ -96,13 +99,14 @@ public class PowderPouchFillRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
     return remaining;
   }
 
-  private boolean isHerb(@Nonnull ItemStack stack) {
+  @Nullable
+  private Herb getHerb(@Nonnull ItemStack stack) {
     for (Herb herb : HerbRegistry.REGISTRY.getValuesCollection()) {
       if (stack.getItem() == herb.getItem()) {
-        return true;
+        return herb;
       }
     }
-    return false;
+    return null;
   }
 
   @Override

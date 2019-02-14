@@ -10,16 +10,22 @@ import javax.annotation.Nonnull;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
+import epicsquid.roots.api.Herb;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.recipe.PowderPouchFillRecipe;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
+import epicsquid.roots.recipe.RunicCarvingRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
+import epicsquid.roots.recipe.recipes.RunicCarvingRecipes;
 import epicsquid.roots.recipe.recipes.RunicShearRecipes;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -33,6 +39,7 @@ public class ModRecipes {
   private static ArrayList<MortarRecipe> mortarRecipes = new ArrayList<>();
   private static Map<String, PyreCraftingRecipe> pyreCraftingRecipes = new HashMap<>();
   private static List<RunicShearRecipe> runicShearRecipes = new ArrayList<>();
+  private static List<RunicCarvingRecipe> runicCarvingRecipes = new ArrayList<>();
 
   private static ResourceLocation getRL(@Nonnull String s) {
     return new ResourceLocation(Roots.MODID + ":" + s);
@@ -44,6 +51,27 @@ public class ModRecipes {
 
   private static void registerShaped(@Nonnull IForgeRegistry<IRecipe> registry, @Nonnull String name, @Nonnull ItemStack result, Object... ingredients) {
     registry.register(new ShapedOreRecipe(getRL(name), result, ingredients).setRegistryName(getRL(name)));
+  }
+
+  public static void addRunicCarvingRecipe(RunicCarvingRecipe recipe) {
+    for (RunicCarvingRecipe runicCarvingRecipe : runicCarvingRecipes) {
+      if (runicCarvingRecipe.matches(recipe)) {
+        System.out.println("Recipe is already registered with carving block - " + recipe.getCarvingBlock() + ", rune block - " + recipe.getRuneBlock() + ", herb - " + recipe.getHerb().getItem());
+        return;
+      }
+    }
+    runicCarvingRecipes.add(recipe);
+  }
+
+  public static RunicCarvingRecipe getRunicCarvingRecipe(IBlockState carvingBlock, Herb herb) {
+    if (carvingBlock != null && herb != null) {
+      for (RunicCarvingRecipe recipe : runicCarvingRecipes) {
+        if (recipe.getHerb().equals(herb) && recipe.getCarvingBlock().equals(carvingBlock)) {
+          return recipe;
+        }
+      }
+    }
+    return null;
   }
 
   public static void addRunicShearRecipe(RunicShearRecipe recipe) {
@@ -107,6 +135,16 @@ public class ModRecipes {
   }
 
   public static PyreCraftingRecipe getCraftingRecipe(List<ItemStack> items) {
+    List<ItemStack> stacksToRemove = new ArrayList<>();
+    for(ItemStack s : items){
+      if(s == ItemStack.EMPTY){
+        stacksToRemove.add(s);
+      }
+    }
+    for(ItemStack s : stacksToRemove){
+      items.remove(s);
+    }
+    stacksToRemove.clear();
     for (Map.Entry<String, PyreCraftingRecipe> pyreCraftingRecipe : pyreCraftingRecipes.entrySet()) {
       if (pyreCraftingRecipe.getValue().matches(items)) {
         return pyreCraftingRecipe.getValue();
@@ -146,7 +184,8 @@ public class ModRecipes {
   private static void initCraftingRecipes() {
     addCraftingRecipe("unending_bowl", new PyreCraftingRecipe(new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.unending_bowl)))
         .addIngredients(new ItemStack(Items.WATER_BUCKET), new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.mortar)), new ItemStack(ModItems.moonglow_leaf), new ItemStack(ModItems.terra_moss), new ItemStack(ModItems.spirit_herb)));
-
+    addCraftingRecipe("runic_soil", new PyreCraftingRecipe(new ItemStack(ItemBlock.getItemFromBlock(epicsquid.mysticalworld.init.ModBlocks.runic_soil)))
+        .addIngredients(new ItemStack(ItemBlock.getItemFromBlock(Blocks.DIRT)), new ItemStack(ModItems.terra_moss), new ItemStack(ModItems.wildroot), new ItemStack(ModItems.bark_oak), new ItemStack(ModItems.spirit_herb)));
     addCraftingRecipe("living_pickaxe",
         new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.living_pickaxe)).addIngredients(new ItemStack(Items.GOLD_INGOT), new ItemStack(Items.WOODEN_PICKAXE), new ItemStack(ModItems.wildroot), new ItemStack(ModItems.bark_oak), new ItemStack(ModItems.bark_oak)));
     addCraftingRecipe("living_axe", new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.living_axe)).addIngredients(new ItemStack(Items.GOLD_INGOT), new ItemStack(Items.WOODEN_AXE), new ItemStack(ModItems.wildroot), new ItemStack(ModItems.bark_oak), new ItemStack(ModItems.bark_oak)));
@@ -155,6 +194,24 @@ public class ModRecipes {
     addCraftingRecipe("living_hoe", new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.living_hoe)).addIngredients(new ItemStack(Items.GOLD_INGOT), new ItemStack(Items.WOODEN_HOE), new ItemStack(ModItems.wildroot), new ItemStack(ModItems.bark_oak), new ItemStack(ModItems.bark_oak)));
     addCraftingRecipe("living_sword",
         new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.living_sword)).addIngredients(new ItemStack(Items.GOLD_INGOT), new ItemStack(Items.WOODEN_SWORD), new ItemStack(ModItems.wildroot), new ItemStack(ModItems.bark_oak), new ItemStack(ModItems.bark_oak)));
+    addCraftingRecipe("infernal_bulb",
+        new PyreCraftingRecipe(new ItemStack(ModItems.infernal_bulb)).addIngredients(new ItemStack(Items.NETHER_WART), new ItemStack(ItemBlock.getItemFromBlock(Blocks.MAGMA)), new ItemStack(Items.BLAZE_POWDER), new ItemStack(ModItems.wildroot)));
+    addCraftingRecipe("dewgonia",
+        new PyreCraftingRecipe(new ItemStack(ModItems.dewgonia)).addIngredients(new ItemStack(Items.WATER_BUCKET), new ItemStack(Items.SUGAR), new ItemStack(Items.DYE, 1, 4), new ItemStack(ModItems.terra_moss)));
+    addCraftingRecipe("cloud_berry",
+        new PyreCraftingRecipe(new ItemStack(ModItems.cloud_berry)).addIngredients(new ItemStack(ItemBlock.getItemFromBlock(Blocks.LEAVES)), new ItemStack(Items.STRING), new ItemStack(ItemBlock.getItemFromBlock(Blocks.WOOL)), new ItemStack(ModItems.terra_moss)));
+    addCraftingRecipe("stalicripe",
+        new PyreCraftingRecipe(new ItemStack(ModItems.stalicripe)).addIngredients(new ItemStack(Items.FLINT), new ItemStack(Blocks.STONE), new ItemStack(Items.GOLD_NUGGET), new ItemStack(ModItems.wildroot)));
+    addCraftingRecipe("moonglow_leaf",
+            new PyreCraftingRecipe(new ItemStack(ModItems.moonglow_leaf)).addIngredients(new ItemStack(Blocks.LEAVES), new ItemStack(Items.GLOWSTONE_DUST), new ItemStack(Items.GOLD_NUGGET), new ItemStack(Items.SUGAR)));
+    addCraftingRecipe("pereskia",
+            new PyreCraftingRecipe(new ItemStack(ModItems.pereskia)).addIngredients(new ItemStack(Blocks.RED_FLOWER), new ItemStack(Items.MELON), new ItemStack(Items.WHEAT_SEEDS), new ItemStack(Items.QUARTZ)));
+    addCraftingRecipe("spirit_herb",
+            new PyreCraftingRecipe(new ItemStack(ModItems.spirit_herb)).addIngredients(new ItemStack(ModItems.wildroot), new ItemStack(ModItems.terra_moss), new ItemStack(Items.ROTTEN_FLESH), new ItemStack(Blocks.SOUL_SAND)));
+    addCraftingRecipe("wildewheet",
+            new PyreCraftingRecipe(new ItemStack(ModItems.wildewheet)).addIngredients(new ItemStack(ModItems.wildroot), new ItemStack(ModItems.wildroot), new ItemStack(Items.WHEAT_SEEDS), new ItemStack(Items.WHEAT)));
+    addCraftingRecipe("runic_shears",
+    new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.runic_shears)).addIngredients(new ItemStack(Items.SHEARS), new ItemStack(ModItems.wildroot), new ItemStack(ModItems.wildroot), new ItemStack(Item.getItemFromBlock(Blocks.STONE)), new ItemStack(Blocks.STONE)));
   }
 
 }

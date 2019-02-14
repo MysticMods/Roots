@@ -4,6 +4,8 @@ import javax.annotation.Nonnull;
 
 import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.mysticallib.item.ItemBase;
+import epicsquid.mysticalworld.MysticalWorld;
+import epicsquid.roots.item.ItemKnife;
 import epicsquid.roots.Roots;
 import epicsquid.roots.item.ItemLivingAxe;
 import epicsquid.roots.item.ItemLivingHoe;
@@ -20,7 +22,7 @@ import net.minecraft.item.Item.ToolMaterial;
 public class ModItems {
 
   // All mod items
-  public static Item pestle, pouch, petal_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears;
+  public static Item pestle, pouch, petal_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife;
 
   //Rune Ashes
   public static Item aer_ash, terra_ash;
@@ -42,6 +44,12 @@ public class ModItems {
     event.addItem(aer_ash = new ItemBase("aer_ash").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(terra_ash = new ItemBase("terra_ash").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(runic_shears = new ItemRunicShears("runic_shears").setModelCustom(true).setCreativeTab(Roots.tab));
+
+    event.addItem(wood_knife = new ItemKnife("wood_knife", ToolMaterial.WOOD).setModelCustom(true).setCreativeTab(MysticalWorld.tab));
+    event.addItem(stone_knife = new ItemKnife("stone_knife", ToolMaterial.STONE).setModelCustom(true).setCreativeTab(MysticalWorld.tab));
+    event.addItem(iron_knife = new ItemKnife("iron_knife", ToolMaterial.IRON).setModelCustom(true).setCreativeTab(MysticalWorld.tab));
+    event.addItem(diamond_knife = new ItemKnife("diamond_knife", ToolMaterial.DIAMOND).setModelCustom(true).setCreativeTab(MysticalWorld.tab));
+    event.addItem(gold_knife = new ItemKnife("gold_knife", ToolMaterial.GOLD).setModelCustom(true).setCreativeTab(MysticalWorld.tab));
   }
 
   /**

@@ -1,0 +1,15 @@
+{
+  "name": "Wildfire",
+  "icon": "roots:petal_dust",
+  "category": "spells",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Spews forth a brief jet of fire from the tip of the staff."
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_wild_fire"
+    }
+  ]
+}

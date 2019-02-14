@@ -4,6 +4,7 @@ import java.util.Random;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.network.fx.MessageLifeInfusionFX;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +21,7 @@ public class SpellGrowthInfusion extends SpellBase {
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 16;
 
-    addCost(ModItems.terra_moss, 0.125f);
+    addCost(HerbRegistry.getHerbByName("terra_moss"), 0.125f);
     addIngredients(
         new ItemStack(Blocks.SAPLING, 1, 2),
         new ItemStack(ModItems.wildroot),

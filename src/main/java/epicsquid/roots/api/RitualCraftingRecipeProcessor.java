@@ -21,6 +21,11 @@ public class RitualCraftingRecipeProcessor implements IComponentProcessor {
   public String process(String s) {
     if(s.startsWith("item")) {
       int index = Integer.parseInt(s.substring(4)) - 1;
+
+      if(index >= pyreCraftingRecipe.getIngredients().size()){
+        return ItemStackUtil.serializeStack(ItemStack.EMPTY);
+      }
+
       ItemStack ingredient = pyreCraftingRecipe.getIngredients().get(index);
 
       return ItemStackUtil.serializeStack(ingredient);

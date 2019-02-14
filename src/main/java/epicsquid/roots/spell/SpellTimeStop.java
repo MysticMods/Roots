@@ -3,6 +3,7 @@ package epicsquid.roots.spell;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.spell.EntityTimeStop;
+import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.network.fx.MessageTimeStopStartFX;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -17,9 +18,9 @@ public class SpellTimeStop extends SpellBase {
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 320;
 
-    addCost(ModItems.pereskia, 0.5f);
-    addCost(ModItems.moonglow_leaf, 0.25f);
-    addCost(ModItems.pereskia_bulb, 0.25f);
+    addCost(HerbRegistry.getHerbByName("pereskia"), 0.5f);
+    addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.25f);
+    addCost(HerbRegistry.getHerbByName("pereskia_bulb"), 0.25f);
     addIngredients(
         new ItemStack(Items.NETHER_WART),
         new ItemStack(ModItems.moonglow_leaf),

@@ -1,0 +1,15 @@
+{
+  "name": "Windwall",
+  "icon": "minecraft:feather",
+  "category": "rituals",
+  "pages": [
+    {
+      "type": "text",
+      "text": "All creatures with the mark of evil are forced away from the ritual's location."
+    },
+    {
+      "type": "pyre_template",
+      "ritual": "ritual_windwall"
+    }
+  ]
+}

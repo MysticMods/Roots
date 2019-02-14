@@ -16,5 +16,7 @@ public class RunicShearRecipes {
     ModRecipes.addRunicShearRecipe(new RunicShearRecipe(Blocks.SAPLING, Blocks.AIR, ModItems.spirit_herb));
     ModRecipes.addRunicShearRecipe(new RunicShearRecipe(Blocks.BROWN_MUSHROOM, Blocks.AIR, ModItems.baffle_cap));
     ModRecipes.addRunicShearRecipe(new RunicShearRecipe(Blocks.RED_MUSHROOM, Blocks.AIR, ModItems.baffle_cap));
+    ModRecipes.addRunicShearRecipe(new RunicShearRecipe(Blocks.LEAVES, Blocks.AIR, ModItems.spirit_herb));
+    ModRecipes.addRunicShearRecipe(new RunicShearRecipe(Blocks.LEAVES2, Blocks.AIR, ModItems.spirit_herb));
   }
 }

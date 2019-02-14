@@ -1,0 +1,15 @@
+{
+  "name": "Mind Ward",
+  "icon": "roots:petal_dust",
+  "category": "spells",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A mystical ward is placed onto the mind of the first creature the caster directs this spell at.$(br2)The afflicted creature cannot harm the caster for a short time."
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_mind_ward"
+    }
+  ]
+}

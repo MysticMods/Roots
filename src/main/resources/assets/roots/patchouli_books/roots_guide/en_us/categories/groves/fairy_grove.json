@@ -1,0 +1,6 @@
+{
+  "name": "Fairy Grove",
+  "parent": "groves",
+  "description": "The fae have long been known to be fickle, mischievous creatures, both experts of deception and keepers of powerful magics. If a druid were to prove their loyalty to them, perhaps they would learn valuable magic in turn.",
+  "icon": "roots:runestone_fairy"
+}

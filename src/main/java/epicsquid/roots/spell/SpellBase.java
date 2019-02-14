@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import epicsquid.mysticallib.util.ListUtil;
+import epicsquid.roots.api.Herb;
 import epicsquid.roots.util.PowderInventoryUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +23,7 @@ public abstract class SpellBase {
 
   private TextFormatting textColor;
   protected EnumCastType castType = EnumCastType.INSTANTANEOUS;
-  private Map<String, Double> costs = new HashMap<>();
+  private Map<Herb, Double> costs = new HashMap<>();
   private List<ItemStack> ingredients = new ArrayList<>();
 
   public enum EnumCastType {
@@ -47,41 +48,45 @@ public abstract class SpellBase {
 
   public boolean costsMet(EntityPlayer player) {
     boolean matches = true;
-    for(Map.Entry<String, Double> entry : this.costs.entrySet()){
-      String s = entry.getKey();
+    for(Map.Entry<Herb, Double> entry : this.costs.entrySet()){
+      Herb herb = entry.getKey();
       double d = entry.getValue();
-      matches = matches && PowderInventoryUtil.getPowderTotal(player, s) >= d;
+      matches = matches && PowderInventoryUtil.getPowderTotal(player, herb) >= d;
     }
     return matches && costs.size() > 0 || player.capabilities.isCreativeMode;
   }
 
   public void enactCosts(EntityPlayer player) {
-    for(Map.Entry<String, Double> entry : this.costs.entrySet()){
-      String s = entry.getKey();
+    for(Map.Entry<Herb, Double> entry : this.costs.entrySet()){
+      Herb herb = entry.getKey();
       double d = entry.getValue();
-      PowderInventoryUtil.removePowder(player, s, d);
+      PowderInventoryUtil.removePowder(player, herb, d);
     }
   }
 
   public void enactTickCosts(EntityPlayer player) {
-    for(Map.Entry<String, Double> entry : this.costs.entrySet()){
-      String s = entry.getKey();
+    for(Map.Entry<Herb, Double> entry : this.costs.entrySet()){
+      Herb herb = entry.getKey();
       double d = entry.getValue();
-      PowderInventoryUtil.removePowder(player, s, d / 20.0);
+      PowderInventoryUtil.removePowder(player, herb, d / 20.0);
     }
   }
 
   public void addToolTip(List<String> tooltip) {
     tooltip.add("" + textColor + TextFormatting.BOLD + I18n.format("roots.spell." + name + ".name") + TextFormatting.RESET);
-    for(Map.Entry<String, Double> entry : this.costs.entrySet()){
-      String s = entry.getKey();
+    for(Map.Entry<Herb, Double> entry : this.costs.entrySet()){
+      Herb herb = entry.getKey();
       double d = entry.getValue();
-      tooltip.add(I18n.format(s + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
+      tooltip.add(I18n.format(herb.getItem().getUnlocalizedName() + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
     }
   }
 
-  public SpellBase addCost(Item herb, double amount) {
-    costs.put(herb.getUnlocalizedName(), amount);
+  public SpellBase addCost(Herb herb, double amount) {
+    if (herb == null) {
+      System.out.println("Spell - " + this.getClass().getName() + " - added a null herb ingredient. This is a bug.");
+      return this;
+    }
+    costs.put(herb, amount);
     return this;
   }
 
@@ -131,7 +136,7 @@ public abstract class SpellBase {
     return castType;
   }
 
-  public Map<String, Double> getCosts() {
+  public Map<Herb, Double> getCosts() {
     return costs;
   }
 

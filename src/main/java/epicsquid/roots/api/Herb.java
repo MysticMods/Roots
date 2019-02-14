@@ -25,6 +25,11 @@ public class Herb extends IForgeRegistryEntry.Impl<Herb> {
   }
 
   @Nonnull
+  public String getName() {
+    return getRegistryName().getResourcePath();
+  }
+
+  @Nonnull
   public Item getItem() {
     return item;
   }
@@ -33,4 +38,8 @@ public class Herb extends IForgeRegistryEntry.Impl<Herb> {
     this.item = item;
   }
 
+  @Override
+  public boolean equals(Object obj) {
+    return obj instanceof Herb && ((Herb) obj).getName().equals(this.getName());
+  }
 }

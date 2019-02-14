@@ -4,6 +4,7 @@ import java.util.List;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.network.fx.MessageDandelionCastFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +21,7 @@ public class SpellDandelionWinds extends SpellBase {
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 20;
 
-    addCost(ModItems.moonglow_leaf, 0.125f);
+    addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.125f);
     addIngredients(
         new ItemStack(Items.FEATHER),
         new ItemStack(Blocks.YELLOW_FLOWER),

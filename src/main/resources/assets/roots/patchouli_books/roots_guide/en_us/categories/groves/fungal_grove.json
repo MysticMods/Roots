@@ -1,0 +1,6 @@
+{
+  "name": "Fungal Grove",
+  "parent": "groves",
+  "description": "Druids who devote themselves to the Fungal Grove walk the fine line which divides traditional druids and those who meddle in powers they shouldn't. Much of the power that lies within can be easily misused to poison the rest of the natural world, yet is intrinsically an undeniable part of it. Druids who choose to follow this path are often fascinated with the applications of natural reagents, regardless of whether they are used for healing or for harm.",
+  "icon": "roots:runestone_fungal"
+}

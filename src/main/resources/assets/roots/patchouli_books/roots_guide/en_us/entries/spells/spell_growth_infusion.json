@@ -1,0 +1,15 @@
+{
+  "name": "Growth Infusion",
+  "icon": "roots:petal_dust",
+  "category": "spells",
+  "pages": [
+    {
+      "type": "text",
+      "text": "A channeled spell which infuses the targeted plant with natural energy, accelerating its growth."
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_growth_infusion"
+    }
+  ]
+}
