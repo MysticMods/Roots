@@ -24,20 +24,15 @@ public class TileEntityWildrootRune extends TileBase implements ITickable {
     private static final BlockPos[] INCENSE_POSITIONS = new BlockPos[]{new BlockPos(0, -1, 1), new BlockPos(0, -1, -1), new BlockPos(1, -1, 0), new BlockPos(-1, -1, 0)};
 
     private RuneBase rune;
-    private ItemStack reagent;
 
-    public TileEntityWildrootRune(){
+    public TileEntityWildrootRune(RuneBase rune){
         this.incenseBurner = null;
-        this.rune = null;
-        this.reagent = ItemStack.EMPTY;
+        this.rune = rune;
+        System.out.println("Okay instantiated! " + rune);
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        if(reagent != ItemStack.EMPTY){
-            NBTTagCompound stackCompound = new NBTTagCompound();
-            compound.setTag("reagent", reagent.writeToNBT(stackCompound));
-        }
         if(rune != null){
             rune.saveToEntity(compound);
         }
@@ -46,8 +41,9 @@ public class TileEntityWildrootRune extends TileBase implements ITickable {
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
+        System.out.println(compound.getString("rune"));
+        System.out.println(RuneRegistry.getRune(compound));
         this.rune = RuneRegistry.getRune(compound);
-        this.reagent = new ItemStack(compound.getCompoundTag("reagent"));
         super.readFromNBT(compound);
     }
 
@@ -59,26 +55,6 @@ public class TileEntityWildrootRune extends TileBase implements ITickable {
                 return true;
             }
             rune.activate(this, player);
-        }
-        else{
-            if(rune == null){
-                RuneBase newRune = RuneRegistry.getRune(heldItem.getItem());
-                System.out.println(newRune);
-                if(newRune != null){
-                    this.rune = newRune;
-                    ItemStack toInsert = heldItem.copy();
-                    toInsert.setCount(1);
-                    this.reagent = toInsert;
-                    heldItem.setCount(heldItem.getCount() - 1);
-                    if (heldItem.getCount() <= 0) {
-                        player.setHeldItem(hand, ItemStack.EMPTY);
-                    } else {
-                        player.setHeldItem(hand, heldItem);
-                    }
-                    markDirty();
-                    PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
-                }
-            }
         }
         return true;
     }
@@ -108,7 +84,9 @@ public class TileEntityWildrootRune extends TileBase implements ITickable {
         }
 
         if(this.rune != null){
-            this.rune.update(getWorld(), getPos());
+            if(rune.isCharged(this)){
+                this.rune.update(getWorld(), getPos());
+            }
         }
     }
 
@@ -117,6 +95,7 @@ public class TileEntityWildrootRune extends TileBase implements ITickable {
     }
 
     public RuneBase getRune() {
+
         return rune;
     }
 
