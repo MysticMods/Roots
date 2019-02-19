@@ -1,23 +1,23 @@
 {
     "display": {
         "icon": {
-            "item": "roots:pyre"
+            "item": "mysticalworld:aubergine"
         },
         "title": {
-            "translate": "advancement.roots.pyre"
+            "translate": "advancement.roots.aubergine"
         },
         "description": {
-            "translate": "advancement.roots.pyre.desc"
+            "translate": "advancement.roots.aubergine.desc"
         }
     },
-    "parent": "roots:terra_moss",
+    "parent": "roots:root",
     "criteria": {
         "book": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
                 "items": [
                     {
-                        "item": "roots:pyre"
+                        "item": "mysticalworld:aubergine"
                     }
                 ]
             }
