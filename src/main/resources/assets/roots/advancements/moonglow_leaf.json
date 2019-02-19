@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "mysticalworld:moonglow_leaf"
+        },
+        "title": {
+            "translate": "advancement.roots.moonglow_leaf"
+        },
+        "description": {
+            "translate": "advancement.roots.moonglow_leaf.desc"
+        }
+    },
+    "parent": "roots:pyre",
+    "criteria": {
+        "book": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mysticalworld:moonglow_leaf"
+                    }
+                ]
+            }
+        }
+    }
+}

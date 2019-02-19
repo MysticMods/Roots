@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "mysticalworld:terra_moss"
+        },
+        "title": {
+            "translate": "advancement.roots.terra_moss"
+        },
+        "description": {
+            "translate": "advancement.roots.terra_moss.desc"
+        }
+    },
+    "parent": "roots:root",
+    "criteria": {
+        "book": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mysticalworld:terra_moss"
+                    }
+                ]
+            }
+        }
+    }
+}

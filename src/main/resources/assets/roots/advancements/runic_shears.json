@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "roots:runic_shears"
+        },
+        "title": {
+            "translate": "advancement.roots.runic_shears"
+        },
+        "description": {
+            "translate": "advancement.roots.runic_shears.desc"
+        }
+    },
+    "parent": "roots:pereskia",
+    "criteria": {
+        "book": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:runic_shears"
+                    }
+                ]
+            }
+        }
+    }
+}
