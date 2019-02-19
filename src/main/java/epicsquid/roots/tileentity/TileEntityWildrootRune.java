@@ -1,7 +1,5 @@
 package epicsquid.roots.tileentity;
 
-import epicsquid.mysticallib.network.MessageTEUpdate;
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.rune.RuneBase;
