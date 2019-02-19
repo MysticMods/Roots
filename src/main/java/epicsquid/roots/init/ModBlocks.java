@@ -9,6 +9,8 @@ import epicsquid.mysticallib.block.BlockWallBase;
 import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.roots.Roots;
 import epicsquid.roots.block.*;
+import epicsquid.roots.block.runes.BlockOvergrowthRune;
+import epicsquid.roots.block.runes.BlockSpeedRune;
 import epicsquid.roots.tileentity.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -18,7 +20,7 @@ public class ModBlocks {
 
   // All block
   public static Block mortar, bonfire, runestone_brick, chiseled_runestone, imbuer, structure_marker, offertory_plate, unending_bowl, wildroot_log;
-  public static Block incense_burner, wildroot_rune;
+  public static Block incense_burner, speed_rune, overgrowth_rune;
 
   //Runestones
   public static Block runestone, runestone_wild, runestone_natural, runestone_mystic, runestone_fungal, runestone_forbidden, runestone_fairy;
@@ -38,8 +40,11 @@ public class ModBlocks {
     event.addBlock(offertory_plate = new BlockOffertoryPlate(Material.ROCK, SoundType.STONE, 1.4f, "offertory_plate", TileEntityOffertoryPlate.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(unending_bowl = new BlockUnendingBowl(Material.ROCK, SoundType.STONE, 1.4f, "unending_bowl", TileEntityUnendingBowl.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(wildroot_log = new BlockWildrootLog("wildroot_log")).setCreativeTab(Roots.tab);
-    event.addBlock(wildroot_rune = new BlockWildrootRune("wildroot_rune", TileEntityWildrootRune.class)).setCreativeTab(Roots.tab);
     event.addBlock(incense_burner = new BlockIncenseBurner(Material.ROCK, SoundType.STONE, 1.4f, "incense_burner", TileEntityIncenseBurner.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+
+    //Runes
+    event.addBlock(speed_rune = new BlockSpeedRune(Material.WOOD, SoundType.WOOD, 1.4f, "speed_rune", TileEntityWildrootRune.class)).setCreativeTab(Roots.tab);
+    event.addBlock(overgrowth_rune = new BlockOvergrowthRune(Material.WOOD, SoundType.WOOD, 1.4f, "overgrowth_rune", TileEntityWildrootRune.class)).setCreativeTab(Roots.tab);
 
     //Runestones
     event.addBlock(runestone = new BlockRunestone(Material.ROCK, SoundType.METAL, 1.4f, "runestone")).setCreativeTab(Roots.tab);
