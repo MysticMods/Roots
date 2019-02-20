@@ -99,9 +99,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           stacks.add(inventory.getStackInSlot(i));
         }
 
-        RitualBase ritual = RitualRegistry.getRitual(stacks);
+        RitualBase ritual = RitualRegistry.getRitual(this, player);
         if (ritual != null) {
-          if (ritual.canFire(world, pos, player)) {
+          if (ritual.canFire(this, player)) {
             ritual.doEffect(world, pos);
             this.burnTime = ritual.getDuration();
             this.doBigFlame = true;

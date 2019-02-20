@@ -1,15 +1,10 @@
 package epicsquid.roots.ritual;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.recipe.conditions.Condition;
+import epicsquid.roots.recipe.conditions.ConditionItems;
+import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,10 +13,17 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class RitualBase {
   protected static int OFFERTORY_RADIUS = 6;
 
-  private List<ItemStack> ingredients = new ArrayList<>();
+  private List<Condition> conditions = new ArrayList<>();
+
   private String name;
   private int duration;
 
@@ -30,12 +32,26 @@ public abstract class RitualBase {
     this.duration = duration;
   }
 
-  public RitualBase addIngredients(ItemStack... stack) {
-    Collections.addAll(ingredients, stack);
-    return this;
+  protected void addCondition(Condition condition){
+    this.conditions.add(condition);
   }
 
-  public boolean canFire(World world, BlockPos pos, @Nullable EntityPlayer player) {
+  public boolean isRitualRecipe(TileEntityBonfire tileEntityBonfire, EntityPlayer player){
+    for(Condition condition : this.conditions){
+      if(condition instanceof ConditionItems){
+        ConditionItems conditionItems = (ConditionItems) condition;
+        return conditionItems.checkCondition(tileEntityBonfire, player);
+      }
+    }
+    return false;
+  }
+
+  public boolean canFire(TileEntityBonfire tileEntityBonfire, EntityPlayer player) {
+    for(Condition condition : this.conditions){
+      if(!condition.checkCondition(tileEntityBonfire, player)){
+        return false;
+      }
+    }
     return true;
   }
 
@@ -65,40 +81,21 @@ public abstract class RitualBase {
     }
   }
 
-  protected int getStandingStones(World world, BlockPos pos, int height, @Nullable Block standingMaterial) {
-    Block material = standingMaterial;
-    if(material == null){
-      material = ModBlocks.runestone;
-    }
-    int threeHighCount = 0;
-    for (int i = -6; i < 7 + 1; i++) {
-      for (int j = -6; j < 7 + 1; j++) {
-        IBlockState state = world.getBlockState(pos.add(i, height-1, j));
-        if (state.getBlock() == ModBlocks.chiseled_runestone) {
-          boolean stoneFound = true;
-          for(int y = height-1; y > 0; y--){
-            if (world.getBlockState(pos.add(i, 1, j)).getBlock() != material){
-              stoneFound = false;
-            }
-          }
-          if(stoneFound){
-            threeHighCount++;
-          }
-        }
-      }
-    }
-    return threeHighCount;
-  }
-
   public int getDuration() {
     return duration;
   }
 
-  public List<ItemStack> getIngredients() {
-    return ingredients;
-  }
-
   public String getName() {
     return name;
+  }
+
+  public List<ItemStack> getRecipe(){
+    for(Condition condition : this.conditions){
+      if(condition instanceof ConditionItems){
+        ConditionItems conditionItems = (ConditionItems) condition;
+        return conditionItems.getItemList();
+      }
+    }
+    return new ArrayList<>();
   }
 }
