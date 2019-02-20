@@ -18,7 +18,7 @@ public class RitualRecipeProcessor implements IComponentProcessor {
   public void setup(IVariableProvider<String> iVariableProvider) {
     String ritualName = iVariableProvider.get("ritual");
     RitualBase ritualBase = RitualRegistry.ritualRegistry.get(ritualName);
-    ingredients = ritualBase.getIngredients();
+    ingredients = ritualBase.getRecipe();
   }
 
   @Override

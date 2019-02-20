@@ -1,19 +1,13 @@
 package epicsquid.roots.ritual;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import epicsquid.mysticallib.util.ListUtil;
-import epicsquid.roots.init.ModItems;
-import epicsquid.roots.ritual.ash.RitualAsh;
 import epicsquid.roots.ritual.natural.RitualWildGrowth;
 import epicsquid.roots.ritual.wild.RitualAnimalHarvest;
 import epicsquid.roots.ritual.wild.RitualSummoning;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import epicsquid.roots.tileentity.TileEntityBonfire;
+import net.minecraft.entity.player.EntityPlayer;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RitualRegistry {
 
@@ -23,13 +17,10 @@ public class RitualRegistry {
           ritual_warden, ritual_natural_aura, ritual_purity, ritual_frost, ritual_animal_harvest, ritual_summoning,
           ritual_wild_growth;
 
-  //Ash rituals
-  public static RitualBase ritual_aer_ash, ritual_terra_ash;
-
-  public static RitualBase getRitual(List<ItemStack> ingredients) {
+  public static RitualBase getRitual(TileEntityBonfire tileEntity, EntityPlayer player) {
     for (int i = 0; i < ritualRegistry.size(); i++) {
       RitualBase ritual = ritualRegistry.values().toArray(new RitualBase[ritualRegistry.size()])[i];
-      if (ListUtil.stackListsMatch(ingredients, ritual.getIngredients())) {
+      if (ritual.isRitualRecipe(tileEntity, player)) {
         return ritual;
       }
     }
@@ -50,16 +41,6 @@ public class RitualRegistry {
     addRitual(ritual_animal_harvest = new RitualAnimalHarvest("ritual_animal_harvest", 0));
     addRitual(ritual_summoning = new RitualSummoning("ritual_summoning", 0));
     addRitual(ritual_wild_growth = new RitualWildGrowth("ritual_wild_growth", 0));
-
-    //Ashes
-    addRitual(ritual_aer_ash = new RitualAsh("ritual_aer_ash", 100, new ItemStack(ModItems.aer_ash)).addIngredients(
-            new ItemStack(Items.FEATHER), new ItemStack(Items.FEATHER),
-            new ItemStack(Items.FEATHER), new ItemStack(Items.FEATHER),
-            new ItemStack(Items.FEATHER)));
-    addRitual(ritual_terra_ash = new RitualAsh("ritual_terra_ash", 100, new ItemStack(ModItems.terra_ash)).addIngredients(
-            new ItemStack(Item.getItemFromBlock(Blocks.DIRT)), new ItemStack(Item.getItemFromBlock(Blocks.DIRT)),
-            new ItemStack(Item.getItemFromBlock(Blocks.DIRT)), new ItemStack(Item.getItemFromBlock(Blocks.DIRT)),
-            new ItemStack(Item.getItemFromBlock(Blocks.DIRT))));
 
   }
 

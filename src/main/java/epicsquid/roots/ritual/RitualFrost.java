@@ -2,6 +2,7 @@ package epicsquid.roots.ritual;
 
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.recipe.conditions.ConditionItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -12,13 +13,13 @@ public class  RitualFrost extends RitualBase {
 
   public RitualFrost(String name, int duration) {
     super(name, duration);
-    addIngredients(
+    addCondition(new ConditionItems(
         new ItemStack(Items.SNOWBALL),
         new ItemStack(Blocks.PACKED_ICE),
         new ItemStack(Blocks.SNOW),
         new ItemStack(ModItems.bark_acacia),
         new ItemStack(ModItems.bark_acacia)
-    );
+    ));
   }
 
   @Override

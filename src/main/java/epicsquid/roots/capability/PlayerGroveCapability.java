@@ -25,7 +25,7 @@ public class PlayerGroveCapability implements IPlayerGroveCapability {
 
   @Override
   public float getTrust(GroveType type) {
-    return groveTrust.get(type);
+    return groveTrust.getOrDefault(type, 0f);
   }
 
   @Override
