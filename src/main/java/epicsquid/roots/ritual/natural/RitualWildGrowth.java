@@ -3,12 +3,9 @@ package epicsquid.roots.ritual.natural;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.init.ModBlocks;
 import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.recipe.conditions.ConditionItems;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.world.tree.WorldGenWildwoodTree;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockOldLeaf;
-import net.minecraft.block.BlockOldLog;
-import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -24,13 +21,15 @@ public class RitualWildGrowth extends RitualBase {
 
     public RitualWildGrowth(String name, int duration) {
         super(name, duration);
-        addIngredients(
-                new ItemStack(ModItems.wildroot), 
-                new ItemStack(ModItems.bark_oak), 
+
+        addCondition(new ConditionItems(
+                new ItemStack(ModItems.wildroot),
                 new ItemStack(ModItems.bark_oak),
-                new ItemStack(ModItems.bark_oak), 
-                new ItemStack(Items.DYE, 1, 15)
+                new ItemStack(ModItems.bark_oak),
+                new ItemStack(ModItems.bark_oak),
+                new ItemStack(Items.DYE, 1, 15))
         );
+
     }
 
     @Override

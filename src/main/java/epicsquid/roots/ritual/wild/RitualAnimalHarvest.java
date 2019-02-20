@@ -7,14 +7,13 @@ import java.util.Random;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.init.ModItems;
-import epicsquid.roots.capability.IPlayerGroveCapability;
-import epicsquid.roots.capability.PlayerGroveCapabilityProvider;
 import epicsquid.roots.grove.GroveType;
 import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.recipe.conditions.ConditionGroveFaith;
+import epicsquid.roots.recipe.conditions.ConditionItems;
 import epicsquid.roots.ritual.RitualBase;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -30,11 +29,16 @@ public class RitualAnimalHarvest extends RitualBase {
 
   public RitualAnimalHarvest(String name, int duration) {
     super(name, duration);
-    addIngredients(new ItemStack(ModItems.wildewheet));
-    addIngredients(new ItemStack(Items.CHICKEN));
-    addIngredients(new ItemStack(Items.MELON));
-    addIngredients(new ItemStack(Items.CARROT));
-    addIngredients(new ItemStack(ModItems.wildroot));
+
+    addCondition(new ConditionItems(
+            new ItemStack(ModItems.wildewheet),
+            new ItemStack(Items.CHICKEN),
+            new ItemStack(Items.MELON),
+            new ItemStack(Items.CARROT),
+            new ItemStack(ModItems.wildroot)
+    ));
+
+    addCondition(new ConditionGroveFaith(GroveType.WILD, 0));
   }
 
   @Override
@@ -60,17 +64,6 @@ public class RitualAnimalHarvest extends RitualBase {
 
       }
     }
-
-    //todo: let all mobs drop their thingy items
-  }
-
-  @Override
-  public boolean canFire(World world, BlockPos pos, EntityPlayer player) {
-    if (player != null) {
-      IPlayerGroveCapability capability = player.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null);
-      return capability.getTrust(GroveType.WILD) > 10;
-    }
-    return false;
   }
 
   private static Method m_EntityLiving_getLootTable = ReflectionHelper.findMethod(EntityLiving.class, "getLootTable", "func_184647_J");
