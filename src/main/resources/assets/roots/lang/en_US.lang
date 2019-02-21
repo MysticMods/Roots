@@ -14,6 +14,14 @@ item.living_sword.name=Living Sword
 item.aer_ash.name=Aer Ash
 item.terra_ash.name=Terra Ash
 item.runic_shears.name=Runic Shears
+item.sylvan_helmet.name=Sylvan Helmet
+item.sylvan_chestplate.name=Sylvan Chestplate
+item.sylvan_leggings.name=Sylvan Leggings
+item.sylvan_boots.name=Sylvan Boots
+item.wildwood_helmet.name=Wildwood Helmet
+item.wildwood_chestplate.name=Wildwood Chestplate
+item.wildwood_leggings.name=Wildwood Leggings
+item.wildwood_boots.name=Wildwood Boots
 
 tile.mortar.name=Mortar
 tile.imbuer.name=Imbuer
