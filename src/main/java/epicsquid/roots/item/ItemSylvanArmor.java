@@ -5,6 +5,7 @@ import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.util.PowderInventoryUtil;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +25,7 @@ import java.util.List;
 public class ItemSylvanArmor extends ItemArmor implements IModeledObject {
 
     private List<String> herbs = new ArrayList<>();
+    private int delayTicks = 0;
 
     public ItemSylvanArmor(ArmorMaterial material, EntityEquipmentSlot slot, String name)
     {
@@ -82,15 +84,18 @@ public class ItemSylvanArmor extends ItemArmor implements IModeledObject {
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
     {
-        //TODO add delay
-        if (itemStack.hasTagCompound())
+        delayTicks++;
+
+        //One minute delay
+        if (itemStack.hasTagCompound() && delayTicks == 1200)
         {
             NBTTagCompound compound = itemStack.getTagCompound();
             Herb herb = HerbRegistry.getHerbByName(compound.getString("herb"));
-            if (player.inventory.getSlotFor(new ItemStack(herb.getItem())) != -1)
-            {
-                player.inventory.removeStackFromSlot(player.inventory.getSlotFor(new ItemStack(herb.getItem())));
-            }
+
+            if (PowderInventoryUtil.getPowderTotal(player, herb) >= 1)
+                PowderInventoryUtil.removePowder(player, herb, 1);
+
+            delayTicks = 0;
         }
 
     }

@@ -13,6 +13,8 @@ import net.minecraftforge.client.model.ModelLoader;
 
 public class ItemWildwoodArmor extends ItemArmor implements IModeledObject {
 
+    private int delayTicks = 0;
+
     public ItemWildwoodArmor(ArmorMaterial material, EntityEquipmentSlot slot, String name)
     {
         super(material, 0, slot);
@@ -31,8 +33,10 @@ public class ItemWildwoodArmor extends ItemArmor implements IModeledObject {
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
     {
-        //TODO Might need a nerf
-        if (player.shouldHeal() & itemRand.nextInt(50) == 5)
+        delayTicks++;
+        if (delayTicks == 60 && player.shouldHeal())
             player.heal(1);
+
+        delayTicks = 0;
     }
 }
