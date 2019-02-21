@@ -7,6 +7,7 @@ import epicsquid.roots.api.Herb;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.util.PowderInventoryUtil;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -19,6 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class ItemSylvanArmor extends ItemArmor implements IModeledObject {
     public ItemSylvanArmor(ArmorMaterial material, EntityEquipmentSlot slot, String name)
     {
         super(material, 0, slot);
-        setUnlocalizedName(this.getUnlocalizedName());
+        setUnlocalizedName(name);
         setRegistryName(new ResourceLocation(Roots.MODID, name));
         setMaxDamage(500);
         setCreativeTab(Roots.tab);
@@ -41,22 +43,6 @@ public class ItemSylvanArmor extends ItemArmor implements IModeledObject {
     {
         for (Herb herb : HerbRegistry.REGISTRY)
             herbs.add(herb.getName());
-    }
-
-    @Nonnull
-    @Override
-    public String getUnlocalizedName(ItemStack stack)
-    {
-        if (stack.hasTagCompound())
-        {
-            NBTTagCompound NBTData = stack.getTagCompound();
-
-            if (NBTData.hasKey("herb"))
-            {
-                return "item.sylvan_armor." + NBTData.getString("herb");
-            }
-        }
-        return "item.sylvan_armor.null";
     }
 
     @Override
@@ -90,13 +76,30 @@ public class ItemSylvanArmor extends ItemArmor implements IModeledObject {
         if (itemStack.hasTagCompound() && delayTicks == 1200)
         {
             NBTTagCompound compound = itemStack.getTagCompound();
-            Herb herb = HerbRegistry.getHerbByName(compound.getString("herb"));
+            if (compound.hasKey("herb"))
+            {
+                Herb herb = HerbRegistry.getHerbByName(compound.getString("herb"));
 
-            if (PowderInventoryUtil.getPowderTotal(player, herb) >= 1)
-                PowderInventoryUtil.removePowder(player, herb, 1);
+                if (PowderInventoryUtil.getPowderTotal(player, herb) >= 1)
+                    PowderInventoryUtil.removePowder(player, herb, 1);
+            }
 
             delayTicks = 0;
         }
 
+    }
+
+        @Override
+        public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
+        {
+            if (stack.hasTagCompound())
+            {
+                NBTTagCompound compound = stack.getTagCompound();
+                if (compound.hasKey("herb"))
+                {
+                    String herb = compound.getString("herb");
+                    tooltip.add("Infused Herb: " + herb);
+                }
+        }
     }
 }
