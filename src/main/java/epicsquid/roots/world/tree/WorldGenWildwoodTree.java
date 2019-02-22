@@ -10,7 +10,7 @@ import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
 public class WorldGenWildwoodTree extends WorldGenAbstractTree
 {
-    private static final IBlockState LOG = ModBlocks.wildroot_log.getDefaultState();
+    private static final IBlockState LOG = ModBlocks.wildwoodLog.getDefaultState();
     private final boolean useExtraRandomHeight;
 
     public WorldGenWildwoodTree(boolean notify, boolean useExtraRandomHeightIn)
@@ -23,7 +23,7 @@ public class WorldGenWildwoodTree extends WorldGenAbstractTree
     public boolean generate(World worldIn, Random rand, BlockPos position)
     {
         for(int i = 0; i < 6; i++){
-            worldIn.setBlockState(position.add(0, i, 0), ModBlocks.wildroot_log.getDefaultState());
+            worldIn.setBlockState(position.add(0, i, 0), ModBlocks.wildwoodLog.getDefaultState());
         }
 
         return true;
