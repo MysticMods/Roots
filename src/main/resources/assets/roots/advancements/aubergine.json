@@ -10,7 +10,7 @@
             "translate": "advancement.roots.aubergine.desc"
         }
     },
-    "parent": "roots:root",
+    "parent": "roots:runic_shears",
     "criteria": {
         "book": {
             "trigger": "minecraft:inventory_changed",

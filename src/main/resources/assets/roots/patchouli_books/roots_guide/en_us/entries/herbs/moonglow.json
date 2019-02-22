@@ -2,6 +2,8 @@
   "name": "Moonglow Leaf",
   "icon": "mysticalworld:moonglow_leaf",
   "category": "herbs",
+  "advancement": "roots:pyre",
+  "secret": true,
   "pages": [
     {
       "type": "text",

@@ -2,6 +2,8 @@
   "name": "Baffle Cap",
   "icon": "mysticalworld:baffle_cap_mushroom",
   "category": "herbs",
+  "advancement": "roots:pyre",
+  "secret": true,
   "pages": [
     {
       "type": "text",

@@ -3,6 +3,8 @@
   "icon": "roots:runic_shears",
   "category": "basics",
   "priority": true,
+  "advancement": "roots:pereskia",
+  "secret": true,
   "pages": [
     {
       "type": "text",
