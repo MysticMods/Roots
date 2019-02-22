@@ -47,10 +47,10 @@ public class RitualSummoning extends RitualBase {
             new ItemStack(ModItems.wildewheet),
             new ItemStack(Items.WHEAT),
             new ItemStack(Items.EGG),
-            new ItemStack(Items.ENDER_PEARL),
-            new ItemStack(ModItems.wildroot)
+            new ItemStack(Items.ROTTEN_FLESH),
+            new ItemStack(ModItems.moonglow_leaf)
     ));
-    addCondition(new ConditionGroveFaith(GroveType.WILD, 0));
+//    addCondition(new ConditionGroveFaith(GroveType.WILD, 0));
     addCondition(new ConditionStandingStones(3, 3));
 
     entityItem.put(EntityChicken.class, Lists.newArrayList(new ItemStack(Items.CHICKEN)));

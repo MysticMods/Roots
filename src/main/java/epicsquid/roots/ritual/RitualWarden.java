@@ -15,8 +15,8 @@ public class RitualWarden extends RitualBase {
     super(name, duration);
     addCondition(new ConditionItems(
         new ItemStack(Items.SPECKLED_MELON),
-        new ItemStack(ModItems.pereskia_bulb),
-        new ItemStack(ModItems.pereskia),
+        new ItemStack(ModItems.stalicripe),
+        new ItemStack(ModItems.wildroot),
         new ItemStack(ModItems.bark_oak),
         new ItemStack(Items.IRON_CHESTPLATE)
     ));

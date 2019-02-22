@@ -14,9 +14,9 @@ public class RitualLight extends RitualBase {
     super(name, duration);
     addCondition(new ConditionItems(
             new ItemStack(ModItems.pereskia), 
-            new ItemStack(ModItems.pereskia_bulb), 
+            new ItemStack(ModItems.cloud_berry),
             new ItemStack(ModItems.bark_birch),
-            new ItemStack(ModItems.bark_acacia), 
+            new ItemStack(ModItems.bark_oak),
             new ItemStack(Items.GLOWSTONE_DUST)
     ));
     addCondition(new ConditionWorldTime(0, 13000));
