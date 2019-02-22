@@ -3,6 +3,8 @@
   "icon": "roots:staff",
   "category": "basics",
   "priority": true,
+  "advancement": "roots:root",
+  "secret": true,
   "pages": [
     {
       "type": "text",

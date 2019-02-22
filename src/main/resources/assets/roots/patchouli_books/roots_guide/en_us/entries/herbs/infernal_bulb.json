@@ -2,6 +2,8 @@
   "name": "Infernal Bulb",
   "icon": "mysticalworld:infernal_bulb",
   "category": "herbs",
+  "advancement": "roots:pyre",
+  "secret": true,
   "pages": [
     {
       "type": "text",

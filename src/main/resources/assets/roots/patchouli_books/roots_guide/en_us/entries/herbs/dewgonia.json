@@ -2,6 +2,8 @@
   "name": "Dewgonia",
   "icon": "mysticalworld:dewgonia",
   "category": "herbs",
+  "advancement": "roots:pyre",
+  "secret": true,
   "pages": [
     {
       "type": "text",
