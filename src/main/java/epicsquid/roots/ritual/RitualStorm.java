@@ -14,9 +14,9 @@ public class RitualStorm extends RitualBase {
     super(name, duration);
     addCondition(new ConditionItems(
             new ItemStack(Blocks.WATERLILY),
-            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.dewgonia),
             new ItemStack(Blocks.VINE),
-            new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.cloud_berry),
             new ItemStack(Items.BEETROOT_SEEDS)
     ));
   }

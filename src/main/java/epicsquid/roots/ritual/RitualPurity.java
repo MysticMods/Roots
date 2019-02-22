@@ -15,7 +15,7 @@ public class RitualPurity extends RitualBase {
     addCondition(new ConditionItems(
             new ItemStack(ModItems.terra_moss), 
             new ItemStack(ModItems.aubergine), 
-            new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.baffle_cap),
             new ItemStack(Items.MILK_BUCKET), 
             new ItemStack(Items.GLASS_BOTTLE)
     ));

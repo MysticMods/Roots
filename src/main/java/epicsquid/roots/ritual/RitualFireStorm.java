@@ -14,7 +14,7 @@ public class RitualFireStorm extends RitualBase {
   public RitualFireStorm(String name, int duration) {
     super(name, duration);
     addCondition(new ConditionItems(
-            new ItemStack(ModItems.wildroot), 
+            new ItemStack(ModItems.infernal_bulb),
             new ItemStack(ModItems.bark_acacia), 
             new ItemStack(Items.COAL),
             new ItemStack(ModItems.bark_acacia), 

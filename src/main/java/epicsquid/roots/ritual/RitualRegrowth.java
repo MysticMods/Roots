@@ -13,7 +13,7 @@ public class RitualRegrowth extends RitualBase {
     super(name, duration);
     addCondition(new ConditionItems(
             new ItemStack(ModItems.terra_moss), 
-            new ItemStack(ModItems.terra_spores), 
+            new ItemStack(ModItems.spirit_herb),
             new ItemStack(ModItems.bark_spruce),
             new ItemStack(Blocks.SAPLING), 
             new ItemStack(Blocks.SAPLING)
