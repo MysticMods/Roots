@@ -21,7 +21,7 @@ public class SpellLightDrifter extends SpellBase {
     this.cooldown = 200;
 
     addCost(HerbRegistry.getHerbByName("pereskia"), 0.5f);
-    addCost(HerbRegistry.getHerbByName("wildroot"), 0.25f);
+    addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.25f);
     addIngredients(
         new ItemStack(Items.ENDER_PEARL),
         new ItemStack(ModItems.moonglow_leaf),

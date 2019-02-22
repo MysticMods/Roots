@@ -21,12 +21,12 @@ public class SpellDandelionWinds extends SpellBase {
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 20;
 
-    addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.125f);
+    addCost(HerbRegistry.getHerbByName("cloud_berry"), 0.125f);
     addIngredients(
         new ItemStack(Items.FEATHER),
         new ItemStack(Blocks.YELLOW_FLOWER),
         new ItemStack(Items.SNOWBALL),
-        new ItemStack(ModItems.moonglow_leaf),
+        new ItemStack(ModItems.cloud_berry),
         new ItemStack(Items.WHEAT)
     );
   }

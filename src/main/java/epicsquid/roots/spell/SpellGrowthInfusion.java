@@ -21,12 +21,13 @@ public class SpellGrowthInfusion extends SpellBase {
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 16;
 
-    addCost(HerbRegistry.getHerbByName("terra_moss"), 0.125f);
+    addCost(HerbRegistry.getHerbByName("spirit_herb"), 0.25f);
+    addCost(HerbRegistry.getHerbByName("pereskia"), 0.125f);
     addIngredients(
         new ItemStack(Blocks.SAPLING, 1, 2),
-        new ItemStack(ModItems.wildroot),
+        new ItemStack(ModItems.aubergine_seed),
         new ItemStack(Blocks.SAPLING, 1, 1),
-        new ItemStack(ModItems.terra_moss),
+        new ItemStack(ModItems.spirit_herb),
         new ItemStack(ModItems.pereskia)
     );
   }

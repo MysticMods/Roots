@@ -1,0 +1,15 @@
+{
+    "name": "Sky Soarer",
+    "icon": "roots:petal_dust",
+    "category": "spells",
+    "pages": [
+      {
+        "type": "text",
+        "text": "Carries the caster forward upon a cloud, granting them the ability to soar briefly before floating back to the surface."
+      },
+      {
+        "type": "spell_template",
+        "spell": "spell_sky_soarer"
+      }
+    ]
+  }

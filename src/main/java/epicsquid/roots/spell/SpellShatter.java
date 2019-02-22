@@ -25,13 +25,13 @@ public class SpellShatter extends SpellBase {
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 20;
 
-    addCost(HerbRegistry.getHerbByName("wildroot"), 0.0625f);
+    addCost(HerbRegistry.getHerbByName("stalicripe"), 0.0625f);
     addIngredients(
         new ItemStack(Items.FLINT),
-        new ItemStack(Blocks.RED_FLOWER, 1, 3),
+        new ItemStack(Items.STONE_PICKAXE),
         new ItemStack(Items.DYE, 1, 15),
-        new ItemStack(ModItems.terra_moss),
-        new ItemStack(ModItems.wildroot)
+        new ItemStack(ModItems.stalicripe),
+        new ItemStack(ModItems.stalicripe)
     );
   }
 

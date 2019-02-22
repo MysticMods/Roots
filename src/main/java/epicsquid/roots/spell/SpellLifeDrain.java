@@ -3,6 +3,7 @@ package epicsquid.roots.spell;
 import java.util.List;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticalworld.init.ModBlocks;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.network.fx.MessageLifeDrainAbsorbFX;
@@ -10,6 +11,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -23,13 +25,14 @@ public class SpellLifeDrain extends SpellBase {
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 28;
 
-    addCost(HerbRegistry.getHerbByName("pereskia"), 0.125f);
+    addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.25f);
+    addCost(HerbRegistry.getHerbByName("baffle_cap"), 0.125f);
     addIngredients(
         new ItemStack(Items.BEETROOT),
-        new ItemStack(Blocks.RED_FLOWER, 1, 7),
-        new ItemStack(Items.BEETROOT_SEEDS),
+        new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom)),
+        new ItemStack(Items.DYE, 1, 15),
         new ItemStack(Items.ROTTEN_FLESH),
-        new ItemStack(ModItems.pereskia_bulb)
+        new ItemStack(ModItems.moonglow_leaf)
     );
   }
 

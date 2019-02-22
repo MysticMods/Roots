@@ -21,14 +21,13 @@ public class SpellSenseAnimals extends SpellBase {
     this.castType = EnumCastType.INSTANTANEOUS;
     this.cooldown = 100;
 
-    addCost(HerbRegistry.getHerbByName("wildroot"), 0.25f);
     addCost(HerbRegistry.getHerbByName("wildewheet"), 0.25f);
     addIngredients(
         new ItemStack(Items.CARROT),
         new ItemStack(Blocks.RED_FLOWER),
         new ItemStack(ModItems.wildewheet),
         new ItemStack(Items.WHEAT),
-        new ItemStack(Items.GOLDEN_CARROT)
+        new ItemStack(Items.GOLD_NUGGET)
     );
   }
 

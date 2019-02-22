@@ -20,12 +20,11 @@ public class SpellMindWard extends SpellBase {
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 80;
 
-    addCost(HerbRegistry.getHerbByName("aubergine_seed"), 0.25f);
-    addCost(HerbRegistry.getHerbByName("terra_moss"), 0.25f);
+    addCost(HerbRegistry.getHerbByName("wildewheet"), 0.5f);
     addIngredients(
         new ItemStack(Items.ROTTEN_FLESH),
-        new ItemStack(ModItems.moonglow_leaf),
-        new ItemStack(ModItems.moonglow_seed),
+        new ItemStack(ModItems.wildewheet),
+        new ItemStack(ModItems.wildewheet_seed),
         new ItemStack(ModItems.aubergine_seed),
         new ItemStack(Items.ENDER_PEARL)
     );
