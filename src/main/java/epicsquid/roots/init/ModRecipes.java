@@ -300,8 +300,8 @@ public class ModRecipes {
           new ItemStack(Items.SHEARS),
           new ItemStack(ModItems.pereskia),
           new ItemStack(ModItems.pereskia),
-          new ItemStack(ModBlocks.runestone),
-          new ItemStack(ModBlocks.runestone)));
+          new ItemStack(epicsquid.mysticalworld.init.ModBlocks.runestone),
+          new ItemStack(epicsquid.mysticalworld.init.ModBlocks.runestone)));
   }
 
 }
