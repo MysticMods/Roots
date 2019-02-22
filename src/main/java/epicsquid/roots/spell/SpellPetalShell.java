@@ -21,12 +21,11 @@ public class SpellPetalShell extends SpellBase {
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 120;
 
-    addCost(HerbRegistry.getHerbByName("aubergine_seed"), 0.5f);
-    addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.25f);
+    addCost(HerbRegistry.getHerbByName("spirit_herb"), 0.75f);
     addIngredients(
-        new ItemStack(Items.MELON_SEEDS),
-        new ItemStack(ModItems.wildroot),
-        new ItemStack(ModItems.terra_moss),
+        new ItemStack(Items.MELON),
+        new ItemStack(ModItems.aubergine),
+        new ItemStack(ModItems.spirit_herb),
         new ItemStack(Items.SHIELD),
         new ItemStack(ModItems.pereskia_bulb)
     );

@@ -19,10 +19,10 @@ public class SpellWildfire extends SpellBase {
     addCost(HerbRegistry.getHerbByName("infernal_bulb"), 0.125f);
     addIngredients(
         new ItemStack(Items.DYE, 1, 14),
-        new ItemStack(Blocks.RED_FLOWER, 1, 5),
-        new ItemStack(Items.GUNPOWDER),
         new ItemStack(Items.COAL, 1, 1),
-        new ItemStack(ModItems.wildroot)
+        new ItemStack(Items.GUNPOWDER),
+        new ItemStack(ModItems.infernal_bulb),
+        new ItemStack(ModItems.infernal_bulb)
     );
   }
 

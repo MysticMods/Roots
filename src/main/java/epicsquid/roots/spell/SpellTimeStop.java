@@ -19,10 +19,9 @@ public class SpellTimeStop extends SpellBase {
     this.cooldown = 320;
 
     addCost(HerbRegistry.getHerbByName("pereskia"), 0.5f);
-    addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.25f);
-    addCost(HerbRegistry.getHerbByName("pereskia_bulb"), 0.25f);
+    addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.5f);
     addIngredients(
-        new ItemStack(Items.NETHER_WART),
+        new ItemStack(Items.ENDER_EYE),
         new ItemStack(ModItems.moonglow_leaf),
         new ItemStack(ModItems.moonglow_leaf),
         new ItemStack(ModItems.pereskia),

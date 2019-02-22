@@ -27,15 +27,14 @@ public class SpellRadiance extends SpellBase {
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 40;
 
-    addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.25f);
-    addCost(HerbRegistry.getHerbByName("wild_root"), 0.125f);
-    addCost(HerbRegistry.getHerbByName("aubergine_seed"), 0.25f);
+    addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.5f);
+    addCost(HerbRegistry.getHerbByName("infernal_bulb"), 0.25f);
     addIngredients(
         new ItemStack(Items.GLOWSTONE_DUST),
-        new ItemStack(Blocks.DOUBLE_PLANT, 1, 0),
+        new ItemStack(Blocks.MAGMA),
         new ItemStack(Items.DYE, 1, 11),
-        new ItemStack(ModItems.pereskia),
-        new ItemStack(ModItems.wildroot)
+        new ItemStack(ModItems.infernal_bulb),
+        new ItemStack(ModItems.moonglow_leaf)
     );
   }
 
