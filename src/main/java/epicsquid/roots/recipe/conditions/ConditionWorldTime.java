@@ -15,6 +15,6 @@ public class ConditionWorldTime implements Condition {
 
     @Override
     public boolean checkCondition(TileEntityBonfire tile, EntityPlayer player) {
-        return tile.getWorld().getWorldTime() >= first && tile.getWorld().getWorldTime() <= second;
+        return tile.getWorld().getWorldTime() % 24000 >= first && tile.getWorld().getWorldTime() % 24000 <= second;
     }
 }
