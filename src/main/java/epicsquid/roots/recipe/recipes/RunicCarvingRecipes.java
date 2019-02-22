@@ -12,7 +12,7 @@ public class RunicCarvingRecipes {
     ModRecipes.addRunicCarvingRecipe(new RunicCarvingRecipe(ModBlocks.runic_soil.getDefaultState(), ModBlocks.runic_soil_water.getDefaultState(), HerbRegistry.getHerbByName("dewgonia")));
     ModRecipes.addRunicCarvingRecipe(new RunicCarvingRecipe(ModBlocks.runic_soil.getDefaultState(), ModBlocks.runic_soil_air.getDefaultState(), HerbRegistry.getHerbByName("cloud_berry")));
     ModRecipes.addRunicCarvingRecipe(new RunicCarvingRecipe(ModBlocks.runic_soil.getDefaultState(), ModBlocks.runic_soil_earth.getDefaultState(), HerbRegistry.getHerbByName("stalicripe")));
-    ModRecipes.addRunicCarvingRecipe(new RunicCarvingRecipe(ModBlocks.wildroot_log.getDefaultState(), epicsquid.roots.init.ModBlocks.speed_rune.getDefaultState(), HerbRegistry.getHerbByName("moonglow_leaf")));
-    ModRecipes.addRunicCarvingRecipe(new RunicCarvingRecipe(ModBlocks.wildroot_log.getDefaultState(), epicsquid.roots.init.ModBlocks.overgrowth_rune.getDefaultState(), HerbRegistry.getHerbByName("terra_moss")));
+    ModRecipes.addRunicCarvingRecipe(new RunicCarvingRecipe(ModBlocks.wildwoodLog.getDefaultState(), epicsquid.roots.init.ModBlocks.speed_rune.getDefaultState(), HerbRegistry.getHerbByName("moonglow_leaf")));
+    ModRecipes.addRunicCarvingRecipe(new RunicCarvingRecipe(ModBlocks.wildwoodLog.getDefaultState(), epicsquid.roots.init.ModBlocks.overgrowth_rune.getDefaultState(), HerbRegistry.getHerbByName("terra_moss")));
   }
 }

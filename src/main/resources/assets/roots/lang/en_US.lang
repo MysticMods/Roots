@@ -27,22 +27,7 @@ tile.offertory_plate.name=Offering Plate
 tile.unending_bowl.name=Unending Bowl
 tile.structure_marker.name=Structure Marker
 tile.incense_burner.name=Incense Burner
-tile.wildroot_log.name=Wildroot Log
 tile.speed_rune.name=Wildroot Speed Rune
-
-tile.runestone_stairs.name=Runestone Stairs
-tile.runestone_slab.name=Runestone Slab
-tile.runestone_wall.name=Runestone Wall
-tile.runestone_brick_stairs.name=Runestone Brick Stairs
-tile.runestone_brick_slab.name=Runestone Brick Slab
-tile.runestone_brick_wall.name=Runestone Brick Wall
-
-tile.runestone_wild.name=Wild Runestone
-tile.runestone_natural.name=Natural Runestone
-tile.runestone_mystic.name=Mystic Runestone
-tile.runestone_fungal.name=Fungal Runestone
-tile.runestone_forbidden.name=Forbidden Runestone
-tile.runestone_fairy.name=Fairy Runestone
 
 roots.tooltip.petaldust.notag=This Petal Dust has no NBT data! It is potentially prone to errors and should not be used!
 roots.tooltip.staff.notag=This Staff has no NBT data! It is potentially prone to errors and should not be used!
