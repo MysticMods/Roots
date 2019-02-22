@@ -13,9 +13,9 @@
       "type": "text",
       "text": "Pereskia flowers can be obtained by using Runic Shears on dandelions or poppies, and then crafted into bulbs to propogate them further."
     },
-	{
-		"type": "crafting",
-		"recipe": "mysticalworld:pereskia_seed"
-	}
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "pereskia"
+    }
   ]
 }
