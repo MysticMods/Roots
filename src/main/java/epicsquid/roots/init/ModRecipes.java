@@ -302,6 +302,14 @@ public class ModRecipes {
           new ItemStack(ModItems.pereskia),
           new ItemStack(epicsquid.mysticalworld.init.ModBlocks.runestone),
           new ItemStack(epicsquid.mysticalworld.init.ModBlocks.runestone)));
+
+    addCraftingRecipe("rune_stone",
+        new PyreCraftingRecipe(new ItemStack(Item.getItemFromBlock(epicsquid.mysticalworld.init.ModBlocks.runestone), 8)).addIngredients(
+            new ItemStack(Items.DYE, 1, 4),
+            new ItemStack(Blocks.STONE),
+            new ItemStack(Blocks.STONE),
+            new ItemStack(Blocks.STONE),
+            new ItemStack(Blocks.STONE)));
   }
 
 }
