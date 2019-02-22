@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Light and fluffy, cloudberries contain the very essence of the sky and are delicate to the touch. Can only be grown on Aeros Soil.$(br2)(THIS IS A PLACEHOLDER RECIPE!)"
+      "text": "Light and fluffy, cloudberries contain the very essence of the sky and are delicate to the touch. Can only be grown on Aeros Soil.$(br2)(!)"
     },
     {
       "type": "ritual_crafting_template",

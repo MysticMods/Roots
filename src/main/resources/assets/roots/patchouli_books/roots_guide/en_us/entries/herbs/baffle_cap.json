@@ -8,6 +8,10 @@
     {
       "type": "text",
       "text": "Baffle Caps are a bizarre variety of fungus, the spores of which seem to confound those who mishandle it.$(br2)Baffle Caps can be obtained by using Runic Shears on ordinary mushrooms."
+    },
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "baffle_cap_mushroom"
     }
   ]
 }

@@ -2,6 +2,8 @@
   "name": "Runestone",
   "icon": "roots:runestone",
   "category": "basics",
+  "advancement": "roots:staff",
+  "secret": true,
   "pages": [
     {
       "type": "text",
