@@ -28,13 +28,13 @@ public class SpellAcidCloud extends SpellBase {
     this.cooldown = 24;
 
     addCost(HerbRegistry.getHerbByName("terra_moss"), 0.0625f);
-    addCost(HerbRegistry.getHerbByName("baffle_cap"), 0.05f);
+    addCost(HerbRegistry.getHerbByName("baffle_cap"), 0.125f);
     addIngredients(
         new ItemStack(Items.SPIDER_EYE),
         new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom)),
-        new ItemStack(Items.SLIME_BALL),
+        new ItemStack(Items.SUGAR),
         new ItemStack(ModItems.terra_moss),
-        new ItemStack(ModItems.wildroot)
+        new ItemStack(ModItems.terra_moss)
     );
   }
 

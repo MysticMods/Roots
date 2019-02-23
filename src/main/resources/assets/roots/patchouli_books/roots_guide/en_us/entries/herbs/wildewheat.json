@@ -2,6 +2,8 @@
   "name": "Wildewheet",
   "icon": "mysticalworld:wildewheet",
   "category": "herbs",
+  "advancement": "roots:runic_shears",
+  "secret": true,
   "pages": [
     {
       "type": "text",

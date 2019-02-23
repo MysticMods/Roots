@@ -9,20 +9,20 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 
-public class SpellGravityBoost extends SpellBase {
+public class SpellSkySoarer extends SpellBase {
 
-  public SpellGravityBoost(String name) {
+  public SpellSkySoarer(String name) {
     super(name, TextFormatting.BLUE, 32f / 255f, 200f / 255f, 255f / 255f, 32f / 255f, 64f / 255f, 255f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 56;
 
-    addCost(HerbRegistry.getHerbByName("pereskia"), 0.125f);
+    addCost(HerbRegistry.getHerbByName("cloud_berry"), 0.125f);
     addIngredients(
-        new ItemStack(Items.RABBIT_FOOT),
-        new ItemStack(Blocks.RED_FLOWER, 1, 1),
         new ItemStack(Items.SUGAR),
+        new ItemStack(Items.FEATHER),
+        new ItemStack(Items.STRING),
         new ItemStack(ModItems.aubergine_seed),
-        new ItemStack(ModItems.moonglow_leaf)
+        new ItemStack(ModItems.cloud_berry)
     );
   }
 

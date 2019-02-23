@@ -49,8 +49,6 @@ public class ModItems {
     event.addItem(wildwood_leggings = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.LEGS, "wildwood_leggings").setMaxStackSize(1));
     event.addItem(wildwood_boots = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.FEET, "wildwood_boots").setMaxStackSize(1));
 
-    event.addItem(aer_ash = new ItemBase("aer_ash").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(terra_ash = new ItemBase("terra_ash").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(runic_shears = new ItemRunicShears("runic_shears").setModelCustom(true).setCreativeTab(Roots.tab));
 
     event.addItem(wood_knife = new ItemKnife("wood_knife", ToolMaterial.WOOD).setModelCustom(true).setCreativeTab(MysticalWorld.tab));

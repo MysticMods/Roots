@@ -26,7 +26,7 @@ public class RitualWildGrowth extends RitualBase {
                 new ItemStack(ModItems.wildroot),
                 new ItemStack(ModItems.bark_oak),
                 new ItemStack(ModItems.bark_oak),
-                new ItemStack(ModItems.bark_oak),
+                new ItemStack(ModItems.bark_dark_oak),
                 new ItemStack(Items.DYE, 1, 15))
         );
 

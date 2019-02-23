@@ -14,7 +14,9 @@ import epicsquid.roots.recipe.conditions.ConditionItems;
 import epicsquid.roots.ritual.RitualBase;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -32,13 +34,13 @@ public class RitualAnimalHarvest extends RitualBase {
 
     addCondition(new ConditionItems(
             new ItemStack(ModItems.wildewheet),
-            new ItemStack(Items.CHICKEN),
+            new ItemStack(Item.getItemFromBlock(Blocks.WOOL)),
             new ItemStack(Items.MELON),
             new ItemStack(Items.CARROT),
             new ItemStack(ModItems.wildroot)
     ));
 
-    addCondition(new ConditionGroveFaith(GroveType.WILD, 0));
+//    addCondition(new ConditionGroveFaith(GroveType.WILD, 0));
   }
 
   @Override

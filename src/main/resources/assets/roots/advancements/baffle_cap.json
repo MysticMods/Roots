@@ -1,23 +1,23 @@
 {
     "display": {
         "icon": {
-            "item": "mysticalworld:aubergine"
+            "item": "mysticalworld:baffle_cap_mushroom"
         },
         "title": {
-            "translate": "advancement.roots.aubergine"
+            "translate": "advancement.roots.baffle_cap"
         },
         "description": {
-            "translate": "advancement.roots.aubergine.desc"
+            "translate": "advancement.roots.baffle_cap.desc"
         }
     },
-    "parent": "roots:runic_shears",
+    "parent": "roots:pyre",
     "criteria": {
         "book": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
                 "items": [
                     {
-                        "item": "mysticalworld:aubergine"
+                        "item": "mysticalworld:baffle_cap_mushroom"
                     }
                 ]
             }

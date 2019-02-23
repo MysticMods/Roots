@@ -2,6 +2,8 @@
   "name": "Spirit Herb",
   "icon": "mysticalworld:spirit_herb",
   "category": "herbs",
+  "advancement": "roots:runic_shears",
+  "secret": true,
   "pages": [
     {
       "type": "text",

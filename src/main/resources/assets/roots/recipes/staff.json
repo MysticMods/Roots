@@ -7,64 +7,20 @@
   "key": {
     "H": [
       {
-        "item": "mysticalworld:moonglow_leaf",
-        "data": 0
-      },
-      {
-        "item": "mysticalworld:aubergine",
-        "data": 0
-      },
-      {
-        "item": "mysticalworld:pereskia_bulb",
-        "data": 0
-      },
-      {
-        "item": "mysticalworld:terra_moss",
-        "data": 0
-      },
-      {
-        "item": "mysticalworld:spirit_herb",
-        "data": 0
-      },
-      {
-        "item": "mysticalworld:wildroot",
-        "data": 0
-      },
-      {
-        "item": "mysticalworld:baffle_cap",
-        "data": 0
+        "type": "forge:ore_dict",
+        "ore": "logWood"
       }
     ],
     "L": [
       {
-        "item": "minecraft:log",
+        "item": "mysticalworld:wildroot",
         "data": 0
-      },
-      {
-        "item": "minecraft:log",
-        "data": 1
-      },
-      {
-        "item": "minecraft:log",
-        "data": 2
-      },
-      {
-        "item": "minecraft:log",
-        "data": 3
-      },
-      {
-        "item": "minecraft:log2",
-        "data": 0
-      },
-      {
-        "item": "minecraft:log2",
-        "data": 1
       }
     ],
     "S": [
       {
-        "item": "minecraft:stick",
-        "data": 0
+        "type": "forge:ore_dict",
+        "ore": "stickWood"
       }
     ]
   },

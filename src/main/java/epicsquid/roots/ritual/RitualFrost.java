@@ -15,10 +15,10 @@ public class  RitualFrost extends RitualBase {
     super(name, duration);
     addCondition(new ConditionItems(
         new ItemStack(Items.SNOWBALL),
-        new ItemStack(Blocks.PACKED_ICE),
+        new ItemStack(ModItems.dewgonia),
         new ItemStack(Blocks.SNOW),
-        new ItemStack(ModItems.bark_acacia),
-        new ItemStack(ModItems.bark_acacia)
+        new ItemStack(ModItems.bark_spruce),
+        new ItemStack(ModItems.bark_spruce)
     ));
   }
 

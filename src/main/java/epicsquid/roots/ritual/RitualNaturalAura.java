@@ -14,11 +14,11 @@ public class RitualNaturalAura extends RitualBase {
   public RitualNaturalAura(String name, int duration) {
     super(name, duration);
     addCondition(new ConditionItems(
-            new ItemStack(Items.WHEAT), 
+            new ItemStack(ModItems.spirit_herb),
             new ItemStack(ModItems.wildroot), 
             new ItemStack(ModItems.aubergine),
-            new ItemStack(Items.BONE), 
-            new ItemStack(Items.BONE)
+            new ItemStack(Items.DYE, 1, 15),
+            new ItemStack(Items.DYE, 1, 15)
     ));
     addCondition(new ConditionStandingStones(3, 3));
   }

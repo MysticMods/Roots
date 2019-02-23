@@ -3,6 +3,8 @@
   "icon": "mysticalworld:runic_soil",
   "category": "herbs",
   "priority": true,
+  "advancement": "roots:pyre",
+  "secret": true,
   "pages": [
     {
       "type": "text",

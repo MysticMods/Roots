@@ -1,0 +1,15 @@
+{
+    "name": "Life Drain",
+    "icon": "roots:petal_dust",
+    "category": "spells",
+    "pages": [
+      {
+        "type": "text",
+        "text": "Drains the essence of life from surrounding friend or foe to replenish your own.$(br2)Why nurse nature, when nature can nurse you?"
+      },
+      {
+        "type": "spell_template",
+        "spell": "spell_life_drain"
+      }
+    ]
+  }
