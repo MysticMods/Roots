@@ -58,11 +58,6 @@ public class BlockWildrootLog extends BlockLog implements IBlock, IModeledObject
         if(stack.isEmpty()){
             return false;
         }
-
-        if(stack.getItem() instanceof ItemKnife){
-            stack.damageItem(1, player);
-            world.setBlockState(pos, ModBlocks.wildroot_rune.getDefaultState());
-        }
         return false;
     }
 

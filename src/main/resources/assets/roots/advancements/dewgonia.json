@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "mysticalworld:dewgonia"
+        },
+        "title": {
+            "translate": "advancement.roots.dewgonia"
+        },
+        "description": {
+            "translate": "advancement.roots.dewgonia.desc"
+        }
+    },
+    "parent": "roots:pyre",
+    "criteria": {
+        "book": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mysticalworld:dewgonia"
+                    }
+                ]
+            }
+        }
+    }
+}

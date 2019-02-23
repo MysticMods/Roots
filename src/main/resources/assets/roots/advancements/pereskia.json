@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "mysticalworld:pereskia"
+        },
+        "title": {
+            "translate": "advancement.roots.pereskia"
+        },
+        "description": {
+            "translate": "advancement.roots.pereskia.desc"
+        }
+    },
+    "parent": "roots:pyre",
+    "criteria": {
+        "book": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mysticalworld:pereskia"
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -1,5 +1,10 @@
 {
 	"name": "Teachings of the Natural World",
+	"advancement_namespaces": [
+		"roots"
+	],
+	"creative_tab": "roots",
+	"advancements_tab": "roots",
 	"landing_text": "The art of druidism takes many forms. This book is a compilation of all known information on the different ways the natural world can be interacted with, and how to come to a mutually beneificial relationship with it.",
 	"model": "roots:druid_handbook",
 	"book_texture:": "roots:textures/gui/book.png",

@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "mysticalworld:aubergine"
+        },
+        "title": {
+            "translate": "advancement.roots.aubergine"
+        },
+        "description": {
+            "translate": "advancement.roots.aubergine.desc"
+        }
+    },
+    "parent": "roots:root",
+    "criteria": {
+        "book": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mysticalworld:aubergine"
+                    }
+                ]
+            }
+        }
+    }
+}

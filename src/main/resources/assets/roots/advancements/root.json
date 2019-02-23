@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "mysticalworld:wildroot"
+        },
+        "title": {
+            "translate": "advancement.roots.root"
+        },
+        "description": {
+            "translate": "advancement.roots.root.desc"
+        },
+        "background": "mysticalworld:textures/blocks/thatch.png"
+    },
+    "criteria": {
+        "book": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mysticalworld:wildroot"
+                    }
+                ]
+            }
+        }
+    }
+}

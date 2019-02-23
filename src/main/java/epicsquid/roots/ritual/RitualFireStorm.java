@@ -2,7 +2,8 @@ package epicsquid.roots.ritual;
 
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.ritual.EntityRitualFireStorm;
-import net.minecraft.entity.player.EntityPlayer;
+import epicsquid.roots.recipe.conditions.ConditionItems;
+import epicsquid.roots.recipe.conditions.ConditionStandingStones;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -12,17 +13,14 @@ public class RitualFireStorm extends RitualBase {
 
   public RitualFireStorm(String name, int duration) {
     super(name, duration);
-    addIngredients(
+    addCondition(new ConditionItems(
             new ItemStack(ModItems.wildroot), 
             new ItemStack(ModItems.bark_acacia), 
             new ItemStack(Items.COAL),
             new ItemStack(ModItems.bark_acacia), 
-            new ItemStack(Items.BLAZE_POWDER));
-  }
-
-  @Override
-  public boolean canFire(World world, BlockPos pos, EntityPlayer player) {
-    return this.getStandingStones(world, pos, 3, null) >= 3;
+            new ItemStack(Items.BLAZE_POWDER)
+    ));
+    addCondition(new ConditionStandingStones(3, 3));
   }
 
   @Override

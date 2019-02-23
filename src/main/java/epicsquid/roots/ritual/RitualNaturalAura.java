@@ -2,7 +2,8 @@ package epicsquid.roots.ritual;
 
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.ritual.EntityRitualNaturalAura;
-import net.minecraft.entity.player.EntityPlayer;
+import epicsquid.roots.recipe.conditions.ConditionItems;
+import epicsquid.roots.recipe.conditions.ConditionStandingStones;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -12,18 +13,14 @@ public class RitualNaturalAura extends RitualBase {
 
   public RitualNaturalAura(String name, int duration) {
     super(name, duration);
-    addIngredients(
+    addCondition(new ConditionItems(
             new ItemStack(Items.WHEAT), 
             new ItemStack(ModItems.wildroot), 
             new ItemStack(ModItems.aubergine),
             new ItemStack(Items.BONE), 
             new ItemStack(Items.BONE)
-    );
-  }
-
-  @Override
-  public boolean canFire(World world, BlockPos pos, EntityPlayer player) {
-    return this.getStandingStones(world, pos, 3, null) >= 3;
+    ));
+    addCondition(new ConditionStandingStones(3, 3));
   }
 
   @Override

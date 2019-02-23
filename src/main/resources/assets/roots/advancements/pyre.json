@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "roots:bonfire"
+        },
+        "title": {
+            "translate": "advancement.roots.pyre"
+        },
+        "description": {
+            "translate": "advancement.roots.pyre.desc"
+        }
+    },
+    "parent": "roots:terra_moss",
+    "criteria": {
+        "book": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:bonfire"
+                    }
+                ]
+            }
+        }
+    }
+}

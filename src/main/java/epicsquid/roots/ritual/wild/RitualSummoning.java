@@ -17,9 +17,14 @@ import epicsquid.mysticalworld.entity.EntityBeetle;
 import epicsquid.mysticalworld.entity.EntityDeer;
 import epicsquid.mysticalworld.entity.EntityFox;
 import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.grove.GroveType;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.recipe.conditions.ConditionGroveFaith;
+import epicsquid.roots.recipe.conditions.ConditionItems;
+import epicsquid.roots.recipe.conditions.ConditionStandingStones;
 import epicsquid.roots.ritual.RitualBase;
+import epicsquid.roots.tileentity.TileEntityBonfire;
 import epicsquid.roots.tileentity.TileEntityOffertoryPlate;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityChicken;
@@ -37,11 +42,16 @@ public class RitualSummoning extends RitualBase {
 
   public RitualSummoning(String name, int duration) {
     super(name, duration);
-    addIngredients(new ItemStack(Items.WHEAT));
-    addIngredients(new ItemStack(Items.EGG));
-    addIngredients(new ItemStack(Items.ENDER_PEARL));
-    addIngredients(new ItemStack(ModItems.wildroot));
-    addIngredients(new ItemStack(ModItems.wildewheet));
+
+    addCondition(new ConditionItems(
+            new ItemStack(ModItems.wildewheet),
+            new ItemStack(Items.WHEAT),
+            new ItemStack(Items.EGG),
+            new ItemStack(Items.ENDER_PEARL),
+            new ItemStack(ModItems.wildroot)
+    ));
+    addCondition(new ConditionGroveFaith(GroveType.WILD, 0));
+    addCondition(new ConditionStandingStones(3, 3));
 
     entityItem.put(EntityChicken.class, Lists.newArrayList(new ItemStack(Items.CHICKEN)));
     entityItem.put(EntityCow.class, Lists.newArrayList(new ItemStack(Items.BEEF)));
@@ -97,9 +107,4 @@ public class RitualSummoning extends RitualBase {
     }
   }
 
-  @Override
-  public boolean canFire(World world, BlockPos pos, @Nullable EntityPlayer player) {
-    //todo: add wild grove trust needed
-    return getStandingStones(world, pos, 3, ModBlocks.runestone_wild) >= 3;
-  }
 }
