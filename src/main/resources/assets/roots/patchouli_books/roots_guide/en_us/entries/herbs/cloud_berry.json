@@ -3,7 +3,7 @@
   "icon": "mysticalworld:cloud_berry",
   "category": "herbs",
   "advancement": "roots:pyre",
-  "secret": true,
+  
   "pages": [
     {
       "type": "text",
