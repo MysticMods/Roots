@@ -2,6 +2,8 @@
   "name": "Storm of Fire",
   "icon": "minecraft:fire_charge",
   "category": "rituals",
+  "advancement": "roots:infernal_bulb",
+  
   "pages": [
     {
       "type": "text",

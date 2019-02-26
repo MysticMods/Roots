@@ -2,6 +2,7 @@
   "name": "Purify",
   "icon": "minecraft:red_flower:6",
   "category": "rituals",
+  "advancement": "roots:baffle_cap",
   "pages": [
     {
       "type": "text",

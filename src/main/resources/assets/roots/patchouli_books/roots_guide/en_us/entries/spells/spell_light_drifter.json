@@ -2,6 +2,8 @@
   "name": "Light Drifter",
   "icon": "roots:petal_dust",
   "category": "spells",
+  "advancement": "roots:moonglow_leaf",
+  
   "pages": [
     {
       "type": "text",

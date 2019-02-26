@@ -2,6 +2,8 @@
   "name": "Animal Harvest",
   "icon": "minecraft:leather",
   "category": "rituals",
+  "advancement": "roots:wildewheet",
+  
   "pages": [
     {
       "type": "text",

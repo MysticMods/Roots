@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "mysticalworld:runestone"
+        },
+        "title": {
+            "translate": "advancement.roots.runestone"
+        },
+        "description": {
+            "translate": "advancement.roots.runestone.desc"
+        }
+    },
+    "parent": "roots:pyre",
+    "criteria": {
+        "book": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mysticalworld:runestone"
+                    }
+                ]
+            }
+        }
+    }
+}

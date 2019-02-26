@@ -2,6 +2,8 @@
   "name": "Mind Ward",
   "icon": "roots:petal_dust",
   "category": "spells",
+  "advancement": "roots:wildewheet",
+  
   "pages": [
     {
       "type": "text",

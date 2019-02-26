@@ -2,6 +2,8 @@
   "name": "Shatter",
   "icon": "roots:petal_dust",
   "category": "spells",
+  "advancement": "roots:stalicripe",
+  
   "pages": [
     {
       "type": "text",

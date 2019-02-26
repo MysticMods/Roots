@@ -2,6 +2,7 @@
   "name": "Natural Growth",
   "icon": "minecraft:sapling",
   "category": "rituals",
+  "advancement": "roots:spirit_herb",
   "pages": [
     {
       "type": "text",

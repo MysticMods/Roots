@@ -2,6 +2,8 @@
   "name": "Wildfire",
   "icon": "roots:petal_dust",
   "category": "spells",
+  "advancement": "roots:infernal_bulb",
+  
   "pages": [
     {
       "type": "text",

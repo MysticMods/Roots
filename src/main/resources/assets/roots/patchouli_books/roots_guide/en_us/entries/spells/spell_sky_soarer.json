@@ -2,6 +2,8 @@
     "name": "Sky Soarer",
     "icon": "roots:petal_dust",
     "category": "spells",
+    "advancement": "roots:cloud_berry",
+    
     "pages": [
       {
         "type": "text",
