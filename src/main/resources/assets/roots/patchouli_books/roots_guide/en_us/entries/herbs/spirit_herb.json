@@ -7,7 +7,13 @@
   "pages": [
     {
       "type": "text",
-      "text": "A reagent which has been used in ceremonies to communicate with the dead for centuries, the Spirit Herb seems to resonate with the spirits of the deceased.$(br2)Spirit Herbs can be initially obtained by using Runic Shears on saplings. From there, they can be crafted into seeds for further propogation."
+      "text": "A reagent which has been used in ceremonies to communicate with the dead for centuries, the Spirit Herb seems to resonate with the spirits of the deceased.$(br2)Spirit Herbs can be initially obtained by using Runic Shears on beetroot. From there, they can be crafted into seeds for further propogation."
+    },
+    {
+      "type": "runic_shears_template",
+      "recipe": "spirit_herb",
+      "name": "Spirit Herb",
+      "text": "Use Runic Shears on a fully grown Beetroot crop to obtain a Spirit Herb."
     },
     {
       "type": "crafting",

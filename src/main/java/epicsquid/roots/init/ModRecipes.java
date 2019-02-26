@@ -105,6 +105,15 @@ public class ModRecipes {
     return null;
   }
 
+  public static RunicShearRecipe getRunicShearRecipe(String name) {
+    for (RunicShearRecipe recipe : runicShearRecipes) {
+      if (recipe.getName().equals(name)) {
+        return recipe;
+      }
+    }
+    return null;
+  }
+
   public static MortarRecipe getMortarRecipe(List<ItemStack> items) {
     for (MortarRecipe mortarRecipe : mortarRecipes) {
       if (mortarRecipe.matches(items)) {

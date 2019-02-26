@@ -9,9 +9,15 @@
       "type": "text",
       "text": "Wildewheet is a lesser-known variety of wheat which many animals seem to adore - though many druids have long puzzled over $(o)why$(), since they do not consume it. It can be obtained by using Runic Shears on fully grown wheat, and can be crafted into seeds which will produce only Wildewheet thereon."
     },
-	{
-		"type": "crafting",
-		"recipe": "mysticalworld:wildewheet_seed"
-	}
+    {
+      "type": "runic_shears_template",
+      "recipe": "wildewheet",
+      "name": "Wildewheet",
+      "text": "Use Runic Shears on a fully grown Wheat crop to obtain Wildewheet."
+    },
+    {
+      "type": "crafting",
+      "recipe": "mysticalworld:wildewheet_seed"
+    }
   ]
 }

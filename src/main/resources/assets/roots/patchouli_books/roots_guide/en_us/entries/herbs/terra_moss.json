@@ -8,9 +8,15 @@
       "type": "text",
       "text": "Terra Moss is one of the two herbs initially available to a budding druid, with an affinity for the connection between plants and the earth. Terra Moss Spores can be found by breaking tall grass - however, Terra Moss does not grow like a conventional crop."
     },
-	{
-		"type": "text",
-		"text": "Terra Moss Spores can be planted on cobblestone that is adjacent to water to transform the cobblestone into moss stone - and Terra Moss itself can be harvested from moss stone by using $(l:basics/runic_shears)Runic Shears$(). This process changes the moss stone back into cobblestone.$(br2)Moss stone found through other means may also be harvested for Terra Moss."
-	}
+    {
+      "type": "text",
+      "text": "Terra Moss Spores can be planted on cobblestone that is adjacent to water to transform the cobblestone into moss stone - and Terra Moss itself can be harvested from moss stone by using $(l:basics/runic_shears)Runic Shears$(). This process changes the moss stone back into cobblestone.$(br2)Moss stone found through other means may also be harvested for Terra Moss."
+    },
+    {
+      "type": "runic_shears_template",
+      "recipe": "terra_moss",
+      "name": "Terra Moss",
+      "text": "Use Runic Shears on Mossy Cobblestone to obtain Terra Moss."
+    }
   ]
 }
