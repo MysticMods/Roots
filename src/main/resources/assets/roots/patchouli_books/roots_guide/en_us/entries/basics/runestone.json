@@ -2,7 +2,7 @@
   "name": "Runestone",
   "icon": "mysticalworld:runestone",
   "category": "basics",
-  "advancement": "roots:terra_moss",
+  "advancement": "roots:pyre",
   "secret": true,
   "pages": [
     {

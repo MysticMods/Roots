@@ -2,6 +2,8 @@
   "name": "Sense Animals",
   "icon": "roots:petal_dust",
   "category": "spells",
+  "advancement": "roots:wildewheet",
+  
   "pages": [
     {
       "type": "text",

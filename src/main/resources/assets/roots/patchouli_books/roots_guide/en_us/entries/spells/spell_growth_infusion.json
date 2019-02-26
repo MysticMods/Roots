@@ -2,6 +2,8 @@
   "name": "Growth Infusion",
   "icon": "roots:petal_dust",
   "category": "spells",
+  "advancement": "roots:spirit_herb",
+  
   "pages": [
     {
       "type": "text",
