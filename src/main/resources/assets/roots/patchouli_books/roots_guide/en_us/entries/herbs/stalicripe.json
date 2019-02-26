@@ -3,7 +3,7 @@
   "icon": "mysticalworld:stalicripe",
   "category": "herbs",
   "advancement": "roots:pyre",
-  "secret": true,
+  
   "pages": [
     {
       "type": "text",
