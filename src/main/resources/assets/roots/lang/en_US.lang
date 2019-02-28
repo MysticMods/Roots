@@ -101,3 +101,5 @@ advancement.roots.baffle_cap=Corrosive Confusion
 advancement.roots.baffle_cap.desc=Use a pyre to create a more baffling and potent shroom
 advancement.roots.runestone=Runic Stones
 advancement.roots.runestone.desc=Use a pyre to construct enchantable stones
+advancement.roots.living=The Hills Are Alive
+advancement.roots.living.desc=Create a complete set of Living Tools
