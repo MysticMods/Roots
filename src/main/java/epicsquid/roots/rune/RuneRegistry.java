@@ -14,7 +14,6 @@ public class RuneRegistry {
 
     public static void init() {
         runeRegistry.put("fleetness_rune", FleetnessRune.class);
-        runeRegistry.put("overgrowth_rune", OvergrowthRune.class);
     }
 
     public static RuneBase getRune(NBTTagCompound compound){
