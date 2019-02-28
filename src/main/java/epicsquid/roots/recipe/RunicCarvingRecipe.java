@@ -13,6 +13,7 @@ public class RunicCarvingRecipe {
   private final IBlockState carvingBlock;
   private final IBlockState runeBlock;
   private final Herb herb;
+  private final String name;
 
   /**
    * Defines a runic carving recipe
@@ -20,10 +21,11 @@ public class RunicCarvingRecipe {
    * @param runeBlock The block the recipe creates
    * @param herb The herb needed in the petal pouch
    */
-  public RunicCarvingRecipe(@Nonnull IBlockState carvingBlock, @Nonnull IBlockState runeBlock, @Nonnull Herb herb) {
+  public RunicCarvingRecipe(@Nonnull IBlockState carvingBlock, @Nonnull IBlockState runeBlock, @Nonnull Herb herb, @Nonnull String name) {
     this.carvingBlock = carvingBlock;
     this.runeBlock = runeBlock;
     this.herb = herb;
+    this.name = name;
   }
 
   public IBlockState getCarvingBlock() {
@@ -36,6 +38,10 @@ public class RunicCarvingRecipe {
 
   public Herb getHerb() {
     return herb;
+  }
+
+  public String getName() {
+    return name;
   }
 
   public boolean matches(RunicCarvingRecipe recipe) {

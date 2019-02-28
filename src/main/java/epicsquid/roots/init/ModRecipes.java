@@ -74,6 +74,17 @@ public class ModRecipes {
     return null;
   }
 
+  public static RunicCarvingRecipe getRunicCarvingRecipe(String name) {
+    if (name != null) {
+      for (RunicCarvingRecipe recipe : runicCarvingRecipes) {
+        if (recipe.getName().equals(name)) {
+          return recipe;
+        }
+      }
+    }
+    return null;
+  }
+
   public static void addRunicShearRecipe(RunicShearRecipe recipe) {
     for (RunicShearRecipe runicShearRecipe : runicShearRecipes) {
       if (recipe.isBlockRecipe() && recipe.getBlock() == runicShearRecipe.getBlock()) {

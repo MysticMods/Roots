@@ -13,6 +13,30 @@
     {
       "type": "ritual_crafting_template",
       "recipe": "runic_soil"
+    },
+    {
+      "type": "runic_carving_template",
+      "recipe": "runic_soil_fire",
+      "name": "Magmatic Soil",
+      "text": "$(l:herbs/infernal_bulb)Infernal Bulbs$() can grow in this magmatic soil."
+    },
+    {
+      "type": "runic_carving_template",
+      "recipe": "runic_soil_water",
+      "name": "Aqueous Soil",
+      "text": "$(l:herbs/dewgonia)Dewgonia$() can grow in this aquatic soil."
+    },
+    {
+      "type": "runic_carving_template",
+      "recipe": "runic_soil_air",
+      "name": "Aeros Soil",
+      "text": "$(l:herbs/cloud_berry)Cloud Berries$() can grow in this air-infused soil."
+    },
+    {
+      "type": "runic_carving_template",
+      "recipe": "runic_soil_earth",
+      "name": "Terra Soil",
+      "text": "$(l:herbs/stalicripe)Stalicripe$() can grow in this earthen soil."
     }
   ]
 }
