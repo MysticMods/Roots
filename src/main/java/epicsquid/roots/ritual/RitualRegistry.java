@@ -41,7 +41,7 @@ public class RitualRegistry {
     addRitual(ritual_animal_harvest = new RitualAnimalHarvest("ritual_animal_harvest", 0));
     addRitual(ritual_summoning = new RitualSummoning("ritual_summoning", 0));
     addRitual(ritual_wild_growth = new RitualWildGrowth("ritual_wild_growth", 0));
-    addRitual(ritual_overgrowth = new RitualOvergrowth("ritual_overgrowth", 2400));
+    addRitual(ritual_overgrowth = new RitualOvergrowth("ritual_overgrowth", 6400));
   }
 
   public static void addRitual(RitualBase ritual){
