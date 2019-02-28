@@ -15,7 +15,7 @@ public class RitualRegistry {
 
   public static RitualBase ritual_life, ritual_storm, ritual_light, ritual_fire_storm, ritual_regrowth, ritual_windwall,
           ritual_warden, ritual_natural_aura, ritual_purity, ritual_frost, ritual_animal_harvest, ritual_summoning,
-          ritual_wild_growth;
+          ritual_wild_growth, ritual_overgrowth;
 
   public static RitualBase getRitual(TileEntityBonfire tileEntity, EntityPlayer player) {
     for (int i = 0; i < ritualRegistry.size(); i++) {
@@ -41,7 +41,7 @@ public class RitualRegistry {
     addRitual(ritual_animal_harvest = new RitualAnimalHarvest("ritual_animal_harvest", 0));
     addRitual(ritual_summoning = new RitualSummoning("ritual_summoning", 0));
     addRitual(ritual_wild_growth = new RitualWildGrowth("ritual_wild_growth", 0));
-
+    addRitual(ritual_overgrowth = new RitualOvergrowth("ritual_overgrowth", 2400));
   }
 
   public static void addRitual(RitualBase ritual){
