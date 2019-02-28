@@ -20,7 +20,7 @@ public class ModBlocks {
 
   // All block
   public static Block mortar, bonfire,imbuer, structure_marker, offertory_plate, unending_bowl;
-  public static Block incense_burner, speed_rune, overgrowth_rune;
+  public static Block incense_burner, speed_rune;
 
 
 
@@ -37,8 +37,7 @@ public class ModBlocks {
     event.addBlock(incense_burner = new BlockIncenseBurner(Material.ROCK, SoundType.STONE, 1.4f, "incense_burner", TileEntityIncenseBurner.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
 
     //Runes
-    event.addBlock(speed_rune = new BlockSpeedRune(Material.WOOD, SoundType.WOOD, 1.4f, "speed_rune", TileEntityWildrootRune.class)).setCreativeTab(Roots.tab);
-    event.addBlock(overgrowth_rune = new BlockOvergrowthRune(Material.WOOD, SoundType.WOOD, 1.4f, "overgrowth_rune", TileEntityWildrootRune.class)).setCreativeTab(Roots.tab);
+    event.addBlock(speed_rune = new BlockSpeedRune(Material.WOOD, SoundType.WOOD, 1.4f, "rune_speed", TileEntityWildrootRune.class)).setCreativeTab(Roots.tab);
 
   }
 
