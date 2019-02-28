@@ -190,7 +190,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       burnTime--;
       if (burnTime == 0) {
         if(!world.isRemote){
-          EntityItem item = new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, new ItemStack(this.craftingResult.getItem(), this.craftingResult.getCount()));
+          EntityItem item = new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, this.craftingResult.copy());
           item.setCustomNameTag("bonfire");
           world.spawnEntity(item);
         }
