@@ -18,9 +18,11 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public abstract class RitualBase {
   protected static int OFFERTORY_RADIUS = 6;
+  protected static Random random = new Random();
 
   private List<Condition> conditions = new ArrayList<>();
 

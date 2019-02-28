@@ -1,0 +1,17 @@
+{
+  "name": "Overgrowth",
+  "icon": "minecraft:mossy_cobblestone",
+  "category": "rituals",
+  "advancement": "roots:pyre",
+  
+  "pages": [
+    {
+      "type": "text",
+      "text": "Natural energies spring forth from the pyre, bringing life to otherwise barren stone.$(br2)This causes moss to grow on nearby cobblestone, so long as it is touching water."
+    },
+    {
+      "type": "pyre_template",
+      "ritual": "ritual_overgrowth"
+    }
+  ]
+}
