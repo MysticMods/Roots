@@ -337,6 +337,7 @@ public class ModRecipes {
             new ItemStack(ModItems.bark_oak),
             new ItemStack(Blocks.PLANKS, 1, 0),
             new ItemStack(Items.DIAMOND)));
+
     addCraftingRecipe("wildwood_chestplate", new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.wildwood_chestplate)).addIngredients(
             new ItemStack(Items.IRON_CHESTPLATE),
             new ItemStack(ModItems.bark_oak),
@@ -355,9 +356,10 @@ public class ModRecipes {
             new ItemStack(ModItems.bark_oak),
             new ItemStack(Blocks.PLANKS, 1, 0),
             new ItemStack(Items.DIAMOND)));
+  }
 
+  public static void afterHerbRegisterInit(){
     //Sylvan Armor Recipe Registration
-    //FIXME: it doesn't work for some reason
     for (Herb herb : HerbRegistry.REGISTRY)
     {
       NBTTagCompound nbtData = new NBTTagCompound();
@@ -373,32 +375,33 @@ public class ModRecipes {
       leggings.setTagCompound(nbtData);
       boots.setTagCompound(nbtData);
 
+      System.out.println(herb.getItem().getUnlocalizedName());
+
       addCraftingRecipe("sylvan_helmet_" + herb.getName(), new PyreCraftingRecipe(helmet).addIngredients(
               new ItemStack(Items.LEATHER_HELMET),
               new ItemStack(Blocks.VINE),
               new ItemStack(ModItems.bark_birch),
               new ItemStack(Items.DIAMOND),
               new ItemStack(herb.getItem())));
-      addCraftingRecipe("sylvan_helmet_" + herb.getName(), new PyreCraftingRecipe(chestplate).addIngredients(
+      addCraftingRecipe("sylvan_chestplate_" + herb.getName(), new PyreCraftingRecipe(chestplate).addIngredients(
               new ItemStack(Items.LEATHER_CHESTPLATE),
               new ItemStack(Blocks.VINE),
               new ItemStack(ModItems.bark_birch),
               new ItemStack(Items.DIAMOND),
               new ItemStack(herb.getItem())));
-      addCraftingRecipe("sylvan_helmet_" + herb.getName(), new PyreCraftingRecipe(leggings).addIngredients(
+      addCraftingRecipe("sylvan_leggings_" + herb.getName(), new PyreCraftingRecipe(leggings).addIngredients(
               new ItemStack(Items.LEATHER_LEGGINGS),
               new ItemStack(Blocks.VINE),
               new ItemStack(ModItems.bark_birch),
               new ItemStack(Items.DIAMOND),
               new ItemStack(herb.getItem())));
-      addCraftingRecipe("sylvan_helmet_" + herb.getName(), new PyreCraftingRecipe(boots).addIngredients(
+      addCraftingRecipe("sylvan_boots_" + herb.getName(), new PyreCraftingRecipe(boots).addIngredients(
               new ItemStack(Items.LEATHER_BOOTS),
               new ItemStack(Blocks.VINE),
               new ItemStack(ModItems.bark_birch),
               new ItemStack(Items.DIAMOND),
               new ItemStack(herb.getItem())));
     }
-
   }
 
 }
