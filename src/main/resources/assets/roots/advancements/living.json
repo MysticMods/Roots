@@ -1,0 +1,38 @@
+{
+    "display": {
+        "icon": {
+            "item": "roots:living_hoe"
+        },
+        "title": {
+            "translate": "advancement.roots.living"
+        },
+        "description": {
+            "translate": "advancement.roots.living.desc"
+        }
+    },
+    "parent": "roots:pyre",
+    "criteria": {
+        "book": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:living_pickaxe"
+                    },
+                    {
+                        "item": "roots:living_axe"
+                    },
+                    {
+                        "item": "roots:living_shovel"
+                    },
+                    {
+                        "item": "roots:living_hoe"
+                    },
+                    {
+                        "item": "roots:living_sword"
+                    }
+                ]
+            }
+        }
+    }
+}
