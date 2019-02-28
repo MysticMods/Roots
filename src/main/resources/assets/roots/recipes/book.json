@@ -2,19 +2,25 @@
   "type": "forge:ore_shapeless",
   "ingredients": [
     {
-      "item": "mysticalworld:wildroot"
+      "type": "forge:ore_dict",
+      "ore": "treeSapling"
     },
     {
       "item": "minecraft:paper"
     },
     {
-      "item": "minecraft:leather"
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
     }
   ],
   "result": {
     "item": "patchouli:guide_book",
     "nbt": {
-      "patchouli:book": "roots:druid_handbook"
+      "patchouli:book": "roots:roots_guide"
     }
   }
 }
