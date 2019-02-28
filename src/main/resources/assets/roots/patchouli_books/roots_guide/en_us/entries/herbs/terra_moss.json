@@ -10,13 +10,15 @@
     },
     {
       "type": "text",
-      "text": "Terra Moss Spores can be planted on cobblestone that is adjacent to water to transform the cobblestone into moss stone - and Terra Moss itself can be harvested from moss stone by using $(l:basics/runic_shears)Runic Shears$(). This process changes the moss stone back into cobblestone.$(br2)Moss stone found through other means may also be harvested for Terra Moss."
+      "text": "Terra Moss Spores can be planted on cobblestone that is adjacent to water to transform the cobblestone into moss stone - and Terra Moss itself can be harvested from moss stone by using a knife on the block. This process changes the moss stone back into cobblestone.$(br2)Moss stone found through other means may also be harvested for Terra Moss."
     },
     {
-      "type": "runic_shears_template",
+      "type": "runic_carving_terra_moss_template",
       "recipe": "terra_moss",
+      "block": "minecraft:mossy_cobblestone",
+      "rune": "mysticalworld:terra_moss",
       "name": "Terra Moss",
-      "text": "Use Runic Shears on Mossy Cobblestone to obtain Terra Moss."
+      "text": "Right click a block of mossy cobblestone with a knife in hand to get Terra Moss."
     }
   ]
 }

@@ -1,0 +1,16 @@
+{
+    "name": "Druidic Carving",
+    "icon": "roots:wood_knife",
+    "category": "basics",
+    "priority": true,
+    "pages": [
+      {
+        "type": "text",
+        "text": "Any respectable druid can carve enchanted runes, allowing natural (or otherworldly) energies to flow through the ancient symbols. However, a sword is far to long an inelegant for carving. Instead, druids use knives for their various runes, carving into stone and wood alike."  
+      },
+      {
+        "type": "text",
+        "text": "Druids call this \"Runic Carving\" and can engrave this runes while holding a petal pouch with the required herb in their offhand.$(br2)Knives are also an elegant offensive weapon for a druid, with a high attack speed, but lower damage than a sword."
+      }
+    ]
+  }
