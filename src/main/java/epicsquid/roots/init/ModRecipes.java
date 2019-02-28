@@ -29,6 +29,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
@@ -330,6 +331,74 @@ public class ModRecipes {
             new ItemStack(Blocks.STONE),
             new ItemStack(Blocks.STONE),
             new ItemStack(Blocks.STONE)));
+
+    addCraftingRecipe("wildwood_helmet", new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.wildwood_helmet)).addIngredients(
+            new ItemStack(Items.IRON_HELMET), new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(Blocks.PLANKS, 1, 0),
+            new ItemStack(Items.DIAMOND)));
+    addCraftingRecipe("wildwood_chestplate", new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.wildwood_chestplate)).addIngredients(
+            new ItemStack(Items.IRON_CHESTPLATE),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(Blocks.PLANKS, 1, 0),
+            new ItemStack(Items.DIAMOND)));
+    addCraftingRecipe("wildwood_leggings", new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.wildwood_leggings)).addIngredients(
+            new ItemStack(Items.IRON_LEGGINGS),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(Blocks.PLANKS, 1, 0),
+            new ItemStack(Items.DIAMOND)));
+    addCraftingRecipe("wildwood_boots", new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.wildwood_boots)).addIngredients(
+            new ItemStack(Items.IRON_BOOTS),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(Blocks.PLANKS, 1, 0),
+            new ItemStack(Items.DIAMOND)));
+
+    //Sylvan Armor Recipe Registration
+    //FIXME: it doesn't work for some reason
+    for (Herb herb : HerbRegistry.REGISTRY)
+    {
+      NBTTagCompound nbtData = new NBTTagCompound();
+      nbtData.setString("herb", herb.getName());
+
+      ItemStack helmet = new ItemStack(epicsquid.roots.init.ModItems.sylvan_helmet);
+      ItemStack chestplate = new ItemStack(epicsquid.roots.init.ModItems.sylvan_chestplate);
+      ItemStack leggings = new ItemStack(epicsquid.roots.init.ModItems.sylvan_leggings);
+      ItemStack boots = new ItemStack(epicsquid.roots.init.ModItems.sylvan_boots);
+
+      helmet.setTagCompound(nbtData);
+      chestplate.setTagCompound(nbtData);
+      leggings.setTagCompound(nbtData);
+      boots.setTagCompound(nbtData);
+
+      addCraftingRecipe("sylvan_helmet_" + herb.getName(), new PyreCraftingRecipe(helmet).addIngredients(
+              new ItemStack(Items.LEATHER_HELMET),
+              new ItemStack(Blocks.VINE),
+              new ItemStack(ModItems.bark_birch),
+              new ItemStack(Items.DIAMOND),
+              new ItemStack(herb.getItem())));
+      addCraftingRecipe("sylvan_helmet_" + herb.getName(), new PyreCraftingRecipe(chestplate).addIngredients(
+              new ItemStack(Items.LEATHER_CHESTPLATE),
+              new ItemStack(Blocks.VINE),
+              new ItemStack(ModItems.bark_birch),
+              new ItemStack(Items.DIAMOND),
+              new ItemStack(herb.getItem())));
+      addCraftingRecipe("sylvan_helmet_" + herb.getName(), new PyreCraftingRecipe(leggings).addIngredients(
+              new ItemStack(Items.LEATHER_LEGGINGS),
+              new ItemStack(Blocks.VINE),
+              new ItemStack(ModItems.bark_birch),
+              new ItemStack(Items.DIAMOND),
+              new ItemStack(herb.getItem())));
+      addCraftingRecipe("sylvan_helmet_" + herb.getName(), new PyreCraftingRecipe(boots).addIngredients(
+              new ItemStack(Items.LEATHER_BOOTS),
+              new ItemStack(Blocks.VINE),
+              new ItemStack(ModItems.bark_birch),
+              new ItemStack(Items.DIAMOND),
+              new ItemStack(herb.getItem())));
+    }
+
   }
 
 }
