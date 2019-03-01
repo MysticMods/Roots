@@ -9,12 +9,14 @@ import javax.annotation.Nonnull;
 import epicsquid.mysticallib.network.MessageTEUpdate;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
+import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
+import epicsquid.roots.ritual.RitualRegrowth;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,6 +39,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   private int burnTime = 0;
   private boolean doBigFlame = false;
   private ItemStack craftingResult = ItemStack.EMPTY;
+  private RitualBase lastRitualUsed = null;
 
   private Random random = new Random();
 
@@ -61,6 +64,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     tag.setInteger("burnTime", burnTime);
     tag.setBoolean("doBigFlame", doBigFlame);
     tag.setTag("craftingResult", this.craftingResult.serializeNBT());
+    if(this.lastRitualUsed != null){
+      tag.setString("lastRitualUsed", this.lastRitualUsed.getName());
+    }
     return tag;
   }
 
@@ -71,6 +77,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     burnTime = tag.getInteger("burnTime");
     doBigFlame = tag.getBoolean("doBigFlame");
     this.craftingResult = new ItemStack(tag.getCompoundTag("craftingResult"));
+    this.lastRitualUsed = RitualRegistry.getRitual(tag.getString("lastRitualUsed"));
   }
 
   @Override
@@ -104,6 +111,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           if (ritual.canFire(this, player)) {
             ritual.doEffect(world, pos);
             this.burnTime = ritual.getDuration();
+            this.lastRitualUsed = ritual;
             this.doBigFlame = true;
             for (int i = 0; i < inventory.getSlots(); i++) {
               inventory.extractItem(i, 1, false);
@@ -174,11 +182,12 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     if (pickupDelay > 0) {
       pickupDelay--;
     }
+    //Spawn the Ignite flame particle
     if (world.isRemote && this.doBigFlame) {
       for (int i = 0; i < 40; i++) {
         ParticleUtil.spawnParticleFiery(world, getPos().getX() + 0.125f + 0.75f * random.nextFloat(), getPos().getY() + 0.75f + 0.5f * random.nextFloat(),
-            getPos().getZ() + 0.125f + 0.75f * random.nextFloat(), 0.03125f * (random.nextFloat() - 0.5f), 0.125f * random.nextFloat(),
-            0.03125f * (random.nextFloat() - 0.5f), 255.0f, 224.0f, 32.0f, 0.75f, 9.0f + 9.0f * random.nextFloat(), 40);
+                getPos().getZ() + 0.125f + 0.75f * random.nextFloat(), 0.03125f * (random.nextFloat() - 0.5f), 0.125f * random.nextFloat(),
+                0.03125f * (random.nextFloat() - 0.5f), 255.0f, 224.0f, 32.0f, 0.75f, 9.0f + 9.0f * random.nextFloat(), 40);
       }
     }
     if (doBigFlame) {
@@ -186,17 +195,39 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       markDirty();
       PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
     }
+
     if (burnTime > 0) {
       burnTime--;
       if (burnTime == 0) {
-        if(!world.isRemote){
+        //Check if it is a ritual, if so try and see if it has new ritual fuel.
+        if(this.craftingResult == ItemStack.EMPTY && this.lastRitualUsed != null){
+          List<ItemStack> stacks = new ArrayList<>();
+          for (int i = 0; i < inventory.getSlots(); i++) {
+            ItemStack stack = inventory.getStackInSlot(i).copy();
+            stack.setCount(1);
+            stacks.add(stack);
+          }
+          if(ListUtil.stackListsMatch(stacks, this.lastRitualUsed.getRecipe())){
+            lastRitualUsed.doEffect(world, getPos());
+            this.burnTime = this.lastRitualUsed.getDuration();
+            this.doBigFlame = true;
+            for (int i = 0; i < inventory.getSlots(); i++) {
+              inventory.extractItem(i, 1, false);
+            }
+            markDirty();
+            PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+          }
+        }
+
+        //Spawn item if crafting recipe
+        if(!world.isRemote && this.craftingResult != ItemStack.EMPTY){
           EntityItem item = new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, this.craftingResult.copy());
           item.setCustomNameTag("bonfire");
           world.spawnEntity(item);
+          this.craftingResult = ItemStack.EMPTY;
         }
-
-        this.craftingResult = ItemStack.EMPTY;
       }
+      //Spawn Fire particles
       if (world.isRemote) {
         for (int i = 0; i < 2; i++) {
           ParticleUtil
@@ -206,9 +237,15 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         }
       }
     }
+
+    pickupItem();
+
+  }
+
+  private void pickupItem(){
     if ((int) this.ticker % 20 == 0 && pickupDelay == 0) {
       List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class,
-          new AxisAlignedBB(getPos().getX(), getPos().getY(), getPos().getZ(), getPos().getX() + 1, getPos().getY() + 1, getPos().getZ() + 1));
+              new AxisAlignedBB(getPos().getX(), getPos().getY(), getPos().getZ(), getPos().getX() + 1, getPos().getY() + 1, getPos().getZ() + 1));
       for (EntityItem item : items) {
         ItemStack stack = item.getItem();
         if(item.getCustomNameTag().equalsIgnoreCase("bonfire")){
