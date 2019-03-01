@@ -27,6 +27,19 @@ public class RitualRegistry {
     return null;
   }
 
+  public static RitualBase getRitual(String ritualName) {
+    if(ritualName == null){
+      return null;
+    }
+    for (int i = 0; i < ritualRegistry.size(); i++) {
+      RitualBase ritual = ritualRegistry.values().toArray(new RitualBase[ritualRegistry.size()])[i];
+      if (ritual.getName().equalsIgnoreCase(ritualName)) {
+        return ritual;
+      }
+    }
+    return null;
+  }
+
   public static void init() {
     addRitual(ritual_life = new RitualLife("ritual_life", 1200));
     addRitual(ritual_storm = new RitualStorm("ritual_storm", 2400));
