@@ -103,7 +103,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       if (heldItem.getItem() instanceof ItemFlintAndSteel) {
         List<ItemStack> stacks = new ArrayList<>();
         for (int i = 0; i < inventory.getSlots(); i++) {
-          stacks.add(inventory.getStackInSlot(i));
+          ItemStack stack = inventory.getStackInSlot(i).copy();
+          stack.setCount(1);
+          stacks.add(stack);
         }
 
         RitualBase ritual = RitualRegistry.getRitual(this, player);
@@ -136,11 +138,19 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         for (int i = 0; i < 5; i++) {
           if (inventory.getStackInSlot(i).isEmpty()) {
             ItemStack toInsert = heldItem.copy();
-            toInsert.setCount(1);
+            if(!player.isSneaking()){
+              toInsert.setCount(1);
+            }
+
             ItemStack attemptedInsert = inventory.insertItem(i, toInsert, true);
             if (attemptedInsert.isEmpty()) {
               inventory.insertItem(i, toInsert, false);
-              heldItem.setCount(heldItem.getCount() - 1);
+              if(!player.isSneaking()){
+                heldItem.setCount(heldItem.getCount() - 1);
+              }
+              else{
+                player.setHeldItem(hand, ItemStack.EMPTY);
+              }
               if (heldItem.getCount() <= 0) {
                 player.setHeldItem(hand, ItemStack.EMPTY);
               } else {
