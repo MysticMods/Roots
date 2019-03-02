@@ -9,11 +9,16 @@
     },
 	{
 		"type": "text",
-		"text": "Some druids speculate that this is because the seeds are in their most potent state while still inside of the fruit - and there are very few druids who wish to carry entire aubergines around in their pockets when the seeds on their own often work just as well.$(br2)Aubergines can be initially obtained by using Runic Shears on fully grown carrots. They can then be crafted into seeds for further propogation."
+		"text": "Some druids speculate that this is because the seeds are in their most potent state while still inside of the fruit - and there are very few druids who wish to carry entire aubergines around in their pockets when the seeds on their own often work just as well.$(br2)Aubergine seeds can be found by breaking tall grass. Aubergines themselves can be crafted into seeds for further propagation."
 	},
-	{
+ 	{
 		"type": "crafting",
 		"recipe": "mysticalworld:aubergine_seed"
-	}
+	},
+    {
+      "type": "text",
+      "text": "Aubergines can additionally be obtained by using Runic Shears on fully grown carrots.",
+      "advancement": "roots:runic_shears"
+    }
   ]
 }
