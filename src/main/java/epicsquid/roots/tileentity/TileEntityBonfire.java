@@ -40,6 +40,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   private boolean doBigFlame = false;
   private ItemStack craftingResult = ItemStack.EMPTY;
   private RitualBase lastRitualUsed = null;
+  private List<ItemStack> lastUsedItems = null;
 
   private Random random = new Random();
 
@@ -114,6 +115,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
             ritual.doEffect(world, pos);
             this.burnTime = ritual.getDuration();
             this.lastRitualUsed = ritual;
+            this.lastUsedItems = ritual.getRecipe();
             this.doBigFlame = true;
             for (int i = 0; i < inventory.getSlots(); i++) {
               inventory.extractItem(i, 1, false);
@@ -125,6 +127,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
 
         PyreCraftingRecipe recipe = ModRecipes.getCraftingRecipe(stacks);
         if(recipe != null){
+          this.lastUsedItems = recipe.getIngredients();
           this.craftingResult = recipe.getResult();
           this.burnTime = 200;
           this.doBigFlame = true;
@@ -164,6 +167,23 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         }
       }
     }
+    if (player.isSneaking() && heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND) {
+      if(this.lastUsedItems != null){
+        for(int i = 0; i < player.inventory.mainInventory.size(); i++){
+          ItemStack stack = player.inventory.mainInventory.get(i);
+          for(ItemStack recipeIngredient : this.lastUsedItems){
+            if(stack.isItemEqual(recipeIngredient)){
+              if(!isItemInInventory(stack)){
+                insertItemFromPlayerInventory(stack, player, i);
+                break;
+              }
+            }
+          }
+        }
+      }
+      return true;
+    }
+
     if (heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND) {
       for (int i = 4; i >= 0; i--) {
         if (!inventory.getStackInSlot(i).isEmpty()) {
@@ -272,6 +292,32 @@ public class TileEntityBonfire extends TileBase implements ITickable {
 
         markDirty();
         PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+      }
+    }
+  }
+
+  public boolean isItemInInventory(ItemStack stack){
+    for (int i = 0; i < inventory.getSlots(); i++) {
+      ItemStack inventoryStack = inventory.getStackInSlot(i).copy();
+      if(inventoryStack.isItemEqual(stack)){
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  private void insertItemFromPlayerInventory(ItemStack stack, EntityPlayer player, int slot){
+    for (int i = 0; i < 5; i++) {
+      if (inventory.getStackInSlot(i).isEmpty()) {
+        ItemStack toInsert = stack.copy();
+        toInsert.setCount(1);
+        inventory.insertItem(i, toInsert, false);
+        stack.setCount(stack.getCount() - 1);
+        //todo: check if the item goes away
+        markDirty();
+        PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+        break;
       }
     }
   }
