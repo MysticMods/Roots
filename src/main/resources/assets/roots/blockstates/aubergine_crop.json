@@ -1,0 +1,12 @@
+{
+    "variants":{
+        "age=0":  { "model": "mysticalworld:aubergine_0" },
+        "age=1":  { "model": "mysticalworld:aubergine_1" },
+        "age=2":  { "model": "mysticalworld:aubergine_2" },
+        "age=3":  { "model": "mysticalworld:aubergine_3" },
+        "age=4":  { "model": "mysticalworld:aubergine_4" },
+        "age=5":  { "model": "mysticalworld:aubergine_5" },
+        "age=6":  { "model": "mysticalworld:aubergine_6" },
+        "age=7":  { "model": "mysticalworld:aubergine_7" }
+    }
+}
