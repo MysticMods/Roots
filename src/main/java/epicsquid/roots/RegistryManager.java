@@ -53,8 +53,8 @@ public class RegistryManager {
   public void worldGenInit(RegisterWorldGenEvent event) {
     LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
 
-    GameRegistry.registerWorldGenerator(new WorldGenBarrow(), 100);
-    GameRegistry.registerWorldGenerator(new WorldGenHut(), 101);
+    /*GameRegistry.registerWorldGenerator(new WorldGenBarrow(), 100);
+    GameRegistry.registerWorldGenerator(new WorldGenHut(), 101);*/
     GameRegistry.registerWorldGenerator(new WorldGenWildlandGrove(), 102);
     GameRegistry.registerWorldGenerator(new WorldGenNaturalGrove(), 103);
   }
