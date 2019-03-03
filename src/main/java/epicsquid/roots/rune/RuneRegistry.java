@@ -1,13 +1,10 @@
 package epicsquid.roots.rune;
 
-import epicsquid.roots.init.ModItems;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
+
+import net.minecraft.nbt.NBTTagCompound;
 
 public class RuneRegistry {
     public static Map<String, Class<? extends RuneBase>> runeRegistry = new HashMap<>();

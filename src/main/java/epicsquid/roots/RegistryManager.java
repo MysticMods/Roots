@@ -14,8 +14,6 @@ import epicsquid.roots.init.ModParticles;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.network.PacketHandler;
-import epicsquid.roots.world.WorldGenBarrow;
-import epicsquid.roots.world.WorldGenHut;
 import epicsquid.roots.world.WorldGenNaturalGrove;
 import epicsquid.roots.world.WorldGenWildlandGrove;
 import net.minecraft.client.Minecraft;

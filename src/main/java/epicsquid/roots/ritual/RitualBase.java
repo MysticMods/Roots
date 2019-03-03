@@ -1,5 +1,11 @@
 package epicsquid.roots.ritual;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.recipe.conditions.Condition;
 import epicsquid.roots.recipe.conditions.ConditionItems;
@@ -9,12 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public abstract class RitualBase {
   protected static int OFFERTORY_RADIUS = 6;

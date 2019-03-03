@@ -1,11 +1,12 @@
 package epicsquid.roots.recipe.conditions;
 
+import java.util.function.BooleanSupplier;
+
 import com.google.gson.JsonObject;
+
 import epicsquid.roots.util.OreCondition;
 import net.minecraftforge.common.crafting.IConditionFactory;
 import net.minecraftforge.common.crafting.JsonContext;
-
-import java.util.function.BooleanSupplier;
 
 @SuppressWarnings("unused")
 public class RecipeConditionFactory {
