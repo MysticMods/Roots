@@ -1,5 +1,8 @@
 package epicsquid.roots.block.runes;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import epicsquid.mysticallib.block.BlockTEBase;
 import epicsquid.roots.rune.RuneRegistry;
 import epicsquid.roots.tileentity.TileEntityWildrootRune;
@@ -7,9 +10,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public class BlockSpeedRune extends BlockTEBase {
 

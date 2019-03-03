@@ -1,5 +1,7 @@
 package epicsquid.roots.tileentity;
 
+import javax.annotation.Nonnull;
+
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.rune.RuneBase;
@@ -13,8 +15,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import javax.annotation.Nonnull;
 
 public class TileEntityWildrootRune extends TileBase implements ITickable {
 

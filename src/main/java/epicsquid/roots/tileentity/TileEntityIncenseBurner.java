@@ -1,5 +1,7 @@
 package epicsquid.roots.tileentity;
 
+import javax.annotation.Nonnull;
+
 import epicsquid.mysticallib.network.MessageTEUpdate;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
@@ -20,8 +22,6 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
-
-import javax.annotation.Nonnull;
 
 public class TileEntityIncenseBurner extends TileBase implements ITickable {
 

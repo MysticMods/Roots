@@ -1,13 +1,13 @@
 package epicsquid.roots.ritual;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import epicsquid.roots.ritual.natural.RitualWildGrowth;
 import epicsquid.roots.ritual.wild.RitualAnimalHarvest;
 import epicsquid.roots.ritual.wild.RitualSummoning;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.entity.player.EntityPlayer;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class RitualRegistry {
 

@@ -1,5 +1,8 @@
 package epicsquid.roots.ritual.natural;
 
+import java.util.List;
+import java.util.Random;
+
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
@@ -12,10 +15,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.*;
-
-import java.util.List;
-import java.util.Random;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class RitualWildGrowth extends RitualBase {
 
