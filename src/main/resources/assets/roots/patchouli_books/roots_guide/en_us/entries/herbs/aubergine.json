@@ -1,6 +1,6 @@
 {
   "name": "Aubergine",
-  "icon": "mysticalworld:aubergine",
+  "icon": "roots:aubergine",
   "category": "herbs",
   "pages": [
     {
@@ -13,7 +13,7 @@
 	},
  	{
 		"type": "crafting",
-		"recipe": "mysticalworld:aubergine_seed"
+		"recipe": "roots:aubergine_seed"
 	},
     {
       "type": "text",

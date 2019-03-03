@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Nullable;
-
 import com.google.common.collect.Lists;
 
 import epicsquid.mysticallib.util.ListUtil;
@@ -16,21 +14,16 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.entity.EntityBeetle;
 import epicsquid.mysticalworld.entity.EntityDeer;
 import epicsquid.mysticalworld.entity.EntityFox;
-import epicsquid.mysticalworld.init.ModItems;
-import epicsquid.roots.grove.GroveType;
-import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.recipe.conditions.ConditionGroveFaith;
 import epicsquid.roots.recipe.conditions.ConditionItems;
 import epicsquid.roots.recipe.conditions.ConditionStandingStones;
 import epicsquid.roots.ritual.RitualBase;
-import epicsquid.roots.tileentity.TileEntityBonfire;
 import epicsquid.roots.tileentity.TileEntityOffertoryPlate;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -57,8 +50,8 @@ public class RitualSummoning extends RitualBase {
     entityItem.put(EntityCow.class, Lists.newArrayList(new ItemStack(Items.BEEF)));
     entityItem.put(EntityPig.class, Lists.newArrayList(new ItemStack(Items.PORKCHOP)));
 
-    entityItem.put(EntityFox.class, Lists.newArrayList(new ItemStack(ModItems.pelt)));
-    entityItem.put(EntityBeetle.class, Lists.newArrayList(new ItemStack(ModItems.carapace)));
+    entityItem.put(EntityFox.class, Lists.newArrayList(new ItemStack(epicsquid.mysticalworld.init.ModItems.pelt)));
+    entityItem.put(EntityBeetle.class, Lists.newArrayList(new ItemStack(epicsquid.mysticalworld.init.ModItems.carapace)));
     entityItem.put(EntityDeer.class, Lists.newArrayList(new ItemStack(Items.LEATHER)));
   }
 

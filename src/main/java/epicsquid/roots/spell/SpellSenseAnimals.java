@@ -3,8 +3,8 @@ package epicsquid.roots.spell;
 import java.util.List;
 
 import epicsquid.mysticallib.util.Util;
-import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.init.ModItems;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;

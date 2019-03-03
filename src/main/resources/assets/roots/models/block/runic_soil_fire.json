@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "bottom": "roots:blocks/fire_soil_top",
+        "top": "roots:blocks/fire_soil_top",
+        "side": "roots:blocks/fire_soil_side"
+    }
+}

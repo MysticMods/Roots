@@ -3,12 +3,11 @@ package epicsquid.roots.spell;
 import java.util.List;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.spell.EntityPetalShell;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;

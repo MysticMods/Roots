@@ -105,3 +105,52 @@ advancement.roots.runestone=The Language of Trees
 advancement.roots.runestone.desc=Use a pyre to construct enchantable runestones
 advancement.roots.living=The Hills Are Alive
 advancement.roots.living.desc=Create a complete set of Living Tools
+
+# Herbs
+item.moonglow_seed.name=Moonglow Seed
+item.moonglow_leaf.name=Moonglow Leaf
+item.aubergine_seed.name=Aubergine Seed
+item.aubergine.name=Aubergine
+item.pereskia_bulb.name=Pereskia Bulb
+item.pereskia.name=Pereskia
+item.terra_spores.name=Terra Spores
+item.terra_moss.name=Terra Moss
+item.spirit_herb_seed.name=Spirit Herb Seed
+item.spirit_herb.name=Spirit Herb
+item.wildroot.name=Wildroot
+item.wildewheet.name=Wildewheet
+item.wildewheet_seed.name=Wildewheet Seed
+item.infernal_bulb.name=Infernal Bulb
+item.dewgonia.name=Dewgonia
+item.stalicripe.name=Stalicripe
+item.cloud_berry.name=Cloud Berry
+tile.baffle_cap_mushroom.name=Baffle Cap
+tile.baffle_cap_huge_stem.name=Baffle Cap Stem
+tile.baffle_cap_huge_top.name=Baffle Cap Huge
+
+# Bark
+item.bark_oak.name=Oak Bark
+item.bark_spruce.name=Spruce Bark
+item.bark_birch.name=Birch Bark
+item.bark_jungle.name=Jungle Bark
+item.bark_acacia.name=Acacia Bark
+item.bark_dark_oak.name=Dark Oak Bark
+
+# Runic Soil
+tile.runic_soil.name=Runic Soil
+tile.runic_soil_fire.name=Magmatic Soil
+tile.runic_soil_water.name=Aqueous Soil
+tile.runic_soil_earth.name=Terra Soil
+tile.runic_soil_air.name=Aeros Soil
+
+# Rune Stone
+tile.runestone_stairs.name=Runestone Stairs
+tile.runestone_slab.name=Runestone Slab
+tile.runestone_wall.name=Runestone Wall
+tile.runestone_brick_stairs.name=Runestone Brick Stairs
+tile.runestone_brick_slab.name=Runestone Brick Slab
+tile.runestone_brick_wall.name=Runestone Brick Wall
+
+tile.wildwood_log.name=Wildwood Log
+tile.wildwood_planks.name=Wildwood Planks
+tile.wildwood_leaves.name=Wildwood Leaves

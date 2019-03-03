@@ -1,6 +1,6 @@
 {
   "name": "Terra Moss",
-  "icon": "mysticalworld:terra_moss",
+  "icon": "roots:terra_moss",
   "category": "herbs",
   "priority": true,
   "pages": [
@@ -16,7 +16,7 @@
       "type": "runic_carving_terra_moss_template",
       "recipe": "terra_moss",
       "block": "minecraft:mossy_cobblestone",
-      "rune": "mysticalworld:terra_moss",
+      "rune": "roots:terra_moss",
       "name": "Terra Moss",
       "text": "Right click a block of mossy cobblestone with a knife in hand to get Terra Moss."
     }

@@ -1,6 +1,6 @@
 {
   "name": "Wildewheet",
-  "icon": "mysticalworld:wildewheet",
+  "icon": "roots:wildewheet",
   "category": "herbs",
   "advancement": "roots:runic_shears",
   
@@ -17,7 +17,7 @@
     },
     {
       "type": "crafting",
-      "recipe": "mysticalworld:wildewheet_seed"
+      "recipe": "roots:wildewheet_seed"
     }
   ]
 }

@@ -3,13 +3,12 @@ package epicsquid.roots.spell;
 import java.util.List;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticalworld.init.ModBlocks;
-import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageLifeDrainAbsorbFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

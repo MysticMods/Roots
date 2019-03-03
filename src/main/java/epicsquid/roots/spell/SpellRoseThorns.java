@@ -1,8 +1,8 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.spell.EntityThornTrap;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.init.ModItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

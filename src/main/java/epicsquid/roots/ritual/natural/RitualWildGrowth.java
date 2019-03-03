@@ -1,8 +1,8 @@
 package epicsquid.roots.ritual.natural;
 
 import epicsquid.mysticallib.util.Util;
-import epicsquid.mysticalworld.init.ModBlocks;
-import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.world.tree.WorldGenWildwoodTree;

@@ -1,0 +1,12 @@
+{
+    "variants":{
+        "age=0":  { "model": "roots:moonglow_0" },
+        "age=1":  { "model": "roots:moonglow_1" },
+        "age=2":  { "model": "roots:moonglow_2" },
+        "age=3":  { "model": "roots:moonglow_3" },
+        "age=4":  { "model": "roots:moonglow_4" },
+        "age=5":  { "model": "roots:moonglow_5" },
+        "age=6":  { "model": "roots:moonglow_6" },
+        "age=7":  { "model": "roots:moonglow_7" }
+    }
+}

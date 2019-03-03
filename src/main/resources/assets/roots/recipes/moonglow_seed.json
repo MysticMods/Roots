@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "roots:moonglow_leaf",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "roots:moonglow_seed",
+    "data": 0
+  }
+}

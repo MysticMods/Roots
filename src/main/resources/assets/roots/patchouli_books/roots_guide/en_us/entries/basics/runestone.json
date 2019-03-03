@@ -1,6 +1,6 @@
 {
   "name": "Runestone",
-  "icon": "mysticalworld:runestone",
+  "icon": "roots:runestone",
   "category": "basics",
   "advancement": "roots:pyre",
   "secret": true,

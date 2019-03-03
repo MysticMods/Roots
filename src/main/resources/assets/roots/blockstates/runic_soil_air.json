@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "normal": { "model": "roots:runic_soil_air" },
+        "handlers": { "model": "roots:runic_soil_air" }
+    }
+}
