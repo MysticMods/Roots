@@ -1,0 +1,12 @@
+{
+    "variants":{
+        "age=0":  { "model": "roots:wildewheet_0" },
+        "age=1":  { "model": "roots:wildewheet_1" },
+        "age=2":  { "model": "roots:wildewheet_2" },
+        "age=3":  { "model": "roots:wildewheet_3" },
+        "age=4":  { "model": "roots:wildewheet_4" },
+        "age=5":  { "model": "roots:wildewheet_5" },
+        "age=6":  { "model": "roots:wildewheet_6" },
+        "age=7":  { "model": "roots:wildewheet_7" }
+    }
+}

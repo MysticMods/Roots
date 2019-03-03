@@ -7,8 +7,8 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
-import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.recipe.MortarRecipe;
@@ -16,7 +16,6 @@ import epicsquid.roots.recipe.PowderPouchFillRecipe;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.recipe.RunicCarvingRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
-import epicsquid.roots.recipe.recipes.RunicCarvingRecipes;
 import epicsquid.roots.recipe.recipes.RunicShearRecipes;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
@@ -193,7 +192,8 @@ public class ModRecipes {
    * Register all recipes
    */
   public static void initRecipes(@Nonnull RegisterModRecipesEvent event) {
-    addMortarRecipe(new MortarRecipe(new ItemStack(Items.DYE, 1, 12), new ItemStack[] { new ItemStack(ModItems.carapace) }, 1, 1, 1, 1, 1, 1));
+    initDrops();
+    addMortarRecipe(new MortarRecipe(new ItemStack(Items.DYE, 1, 12), new ItemStack[] { new ItemStack(epicsquid.mysticalworld.init.ModItems.carapace) }, 1, 1, 1, 1, 1, 1));
 
     initCraftingRecipes();
     RunicShearRecipes.initRecipes();
@@ -213,7 +213,7 @@ public class ModRecipes {
             new ItemStack(ModItems.spirit_herb)));
 
     addCraftingRecipe("runic_soil",
-        new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModBlocks.runic_soil)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModBlocks.runic_soil)).addIngredients(
           new ItemStack(Blocks.DIRT),
           new ItemStack(ModItems.terra_moss),
           new ItemStack(ModItems.wildroot),
@@ -221,7 +221,7 @@ public class ModRecipes {
           new ItemStack(Items.DYE, 1, 15)));
 
     addCraftingRecipe("living_pickaxe",
-        new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.living_pickaxe)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_pickaxe)).addIngredients(
           new ItemStack(Items.GOLD_INGOT),
           new ItemStack(Items.WOODEN_PICKAXE),
           new ItemStack(ModItems.wildroot),
@@ -229,7 +229,7 @@ public class ModRecipes {
           new ItemStack(ModItems.bark_oak)));
 
     addCraftingRecipe("living_axe",
-        new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.living_axe)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_axe)).addIngredients(
           new ItemStack(Items.GOLD_INGOT),
           new ItemStack(Items.WOODEN_AXE),
           new ItemStack(ModItems.wildroot),
@@ -237,7 +237,7 @@ public class ModRecipes {
           new ItemStack(ModItems.bark_oak)));
 
     addCraftingRecipe("living_shovel",
-        new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.living_shovel)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_shovel)).addIngredients(
             new ItemStack(Items.GOLD_INGOT),
             new ItemStack(Items.WOODEN_SHOVEL),
             new ItemStack(ModItems.wildroot),
@@ -245,7 +245,7 @@ public class ModRecipes {
             new ItemStack(ModItems.bark_oak)));
 
     addCraftingRecipe("living_hoe",
-        new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.living_hoe)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_hoe)).addIngredients(
           new ItemStack(Items.GOLD_INGOT),
           new ItemStack(Items.WOODEN_HOE),
           new ItemStack(ModItems.wildroot),
@@ -253,7 +253,7 @@ public class ModRecipes {
           new ItemStack(ModItems.bark_oak)));
 
     addCraftingRecipe("living_sword",
-        new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.living_sword)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_sword)).addIngredients(
             new ItemStack(Items.GOLD_INGOT),
             new ItemStack(Items.WOODEN_SWORD),
             new ItemStack(ModItems.wildroot),
@@ -309,7 +309,7 @@ public class ModRecipes {
             new ItemStack(Items.REEDS)));
 
     addCraftingRecipe("baffle_cap",
-        new PyreCraftingRecipe(new ItemStack(Item.getItemFromBlock(epicsquid.mysticalworld.init.ModBlocks.baffle_cap_mushroom), 3)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom), 3)).addIngredients(
             new ItemStack(ModItems.terra_moss),
             new ItemStack(Items.POISONOUS_POTATO),
             new ItemStack(Items.WHEAT_SEEDS),
@@ -321,36 +321,36 @@ public class ModRecipes {
           new ItemStack(Items.SHEARS),
           new ItemStack(ModItems.pereskia),
           new ItemStack(ModItems.pereskia),
-          new ItemStack(epicsquid.mysticalworld.init.ModBlocks.runestone),
-          new ItemStack(epicsquid.mysticalworld.init.ModBlocks.runestone)));
+          new ItemStack(ModBlocks.runestone),
+          new ItemStack(ModBlocks.runestone)));
 
     addCraftingRecipe("rune_stone",
-        new PyreCraftingRecipe(new ItemStack(Item.getItemFromBlock(epicsquid.mysticalworld.init.ModBlocks.runestone), 8)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(Item.getItemFromBlock(ModBlocks.runestone), 8)).addIngredients(
             new ItemStack(Items.DYE, 1, 4),
             new ItemStack(Blocks.STONE),
             new ItemStack(Blocks.STONE),
             new ItemStack(Blocks.STONE),
             new ItemStack(Blocks.STONE)));
 
-    addCraftingRecipe("wildwood_helmet", new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.wildwood_helmet)).addIngredients(
+    addCraftingRecipe("wildwood_helmet", new PyreCraftingRecipe(new ItemStack(ModItems.wildwood_helmet)).addIngredients(
             new ItemStack(Items.IRON_HELMET), new ItemStack(ModItems.bark_oak),
             new ItemStack(ModItems.bark_oak),
             new ItemStack(Blocks.PLANKS, 1, 0),
             new ItemStack(Items.DIAMOND)));
 
-    addCraftingRecipe("wildwood_chestplate", new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.wildwood_chestplate)).addIngredients(
+    addCraftingRecipe("wildwood_chestplate", new PyreCraftingRecipe(new ItemStack(ModItems.wildwood_chestplate)).addIngredients(
             new ItemStack(Items.IRON_CHESTPLATE),
             new ItemStack(ModItems.bark_oak),
             new ItemStack(ModItems.bark_oak),
             new ItemStack(Blocks.PLANKS, 1, 0),
             new ItemStack(Items.DIAMOND)));
-    addCraftingRecipe("wildwood_leggings", new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.wildwood_leggings)).addIngredients(
+    addCraftingRecipe("wildwood_leggings", new PyreCraftingRecipe(new ItemStack(ModItems.wildwood_leggings)).addIngredients(
             new ItemStack(Items.IRON_LEGGINGS),
             new ItemStack(ModItems.bark_oak),
             new ItemStack(ModItems.bark_oak),
             new ItemStack(Blocks.PLANKS, 1, 0),
             new ItemStack(Items.DIAMOND)));
-    addCraftingRecipe("wildwood_boots", new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.wildwood_boots)).addIngredients(
+    addCraftingRecipe("wildwood_boots", new PyreCraftingRecipe(new ItemStack(ModItems.wildwood_boots)).addIngredients(
             new ItemStack(Items.IRON_BOOTS),
             new ItemStack(ModItems.bark_oak),
             new ItemStack(ModItems.bark_oak),
@@ -365,10 +365,10 @@ public class ModRecipes {
       NBTTagCompound nbtData = new NBTTagCompound();
       nbtData.setString("herb", herb.getName());
 
-      ItemStack helmet = new ItemStack(epicsquid.roots.init.ModItems.sylvan_helmet);
-      ItemStack chestplate = new ItemStack(epicsquid.roots.init.ModItems.sylvan_chestplate);
-      ItemStack leggings = new ItemStack(epicsquid.roots.init.ModItems.sylvan_leggings);
-      ItemStack boots = new ItemStack(epicsquid.roots.init.ModItems.sylvan_boots);
+      ItemStack helmet = new ItemStack(ModItems.sylvan_helmet);
+      ItemStack chestplate = new ItemStack(ModItems.sylvan_chestplate);
+      ItemStack leggings = new ItemStack(ModItems.sylvan_leggings);
+      ItemStack boots = new ItemStack(ModItems.sylvan_boots);
 
       helmet.setTagCompound(nbtData);
       chestplate.setTagCompound(nbtData);
@@ -402,6 +402,12 @@ public class ModRecipes {
               new ItemStack(Items.DIAMOND),
               new ItemStack(herb.getItem())));
     }
+  }
+
+  private static void initDrops() {
+    List<ItemStack> baffleCapDrops = new ArrayList<>();
+    baffleCapDrops.add(new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom)));
+    ((BlockBase) ModBlocks.baffle_cap_huge_top).setDrops(baffleCapDrops);
   }
 
 }

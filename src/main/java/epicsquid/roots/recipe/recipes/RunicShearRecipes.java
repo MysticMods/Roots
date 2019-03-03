@@ -1,6 +1,6 @@
 package epicsquid.roots.recipe.recipes;
 
-import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.RunicShearRecipe;
 import net.minecraft.init.Blocks;

@@ -1,8 +1,8 @@
 package epicsquid.roots.ritual;
 
-import epicsquid.mysticalworld.init.ModBlocks;
-import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.ritual.EntityRitualPurity;
+import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -14,7 +14,7 @@ public class RitualPurity extends RitualBase {
   public RitualPurity(String name, int duration) {
     super(name, duration);
     addCondition(new ConditionItems(
-            new ItemStack(ModItems.terra_moss), 
+            new ItemStack(ModItems.terra_moss),
             new ItemStack(ModItems.aubergine), 
             new ItemStack(ModBlocks.baffle_cap_mushroom),
             new ItemStack(Items.MILK_BUCKET), 

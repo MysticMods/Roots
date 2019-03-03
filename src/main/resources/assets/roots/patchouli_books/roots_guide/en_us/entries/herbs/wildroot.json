@@ -1,6 +1,6 @@
 {
   "name": "Wildroot",
-  "icon": "mysticalworld:wildroot",
+  "icon": "roots:wildroot",
   "category": "herbs",
   "priority": true,
   "pages": [

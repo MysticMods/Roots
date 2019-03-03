@@ -1,7 +1,7 @@
 package epicsquid.roots.recipe.recipes;
 
-import epicsquid.mysticalworld.init.ModBlocks;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.RunicCarvingRecipe;
 

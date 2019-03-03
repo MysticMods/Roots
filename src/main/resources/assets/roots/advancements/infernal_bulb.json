@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "mysticalworld:infernal_bulb"
+            "item": "roots:infernal_bulb"
         },
         "title": {
             "translate": "advancement.roots.infernal_bulb"
@@ -17,7 +17,7 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "mysticalworld:infernal_bulb"
+                        "item": "roots:infernal_bulb"
                     }
                 ]
             }

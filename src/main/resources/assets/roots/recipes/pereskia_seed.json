@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "roots:pereskia",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "roots:pereskia_bulb",
+    "data": 0
+  }
+}

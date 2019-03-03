@@ -1,0 +1,12 @@
+{
+    "variants":{
+        "age=0":  { "model": "roots:infernal_bulb_0" },
+        "age=1":  { "model": "roots:infernal_bulb_0" },
+        "age=2":  { "model": "roots:infernal_bulb_1" },
+        "age=3":  { "model": "roots:infernal_bulb_1" },
+        "age=4":  { "model": "roots:infernal_bulb_2" },
+        "age=5":  { "model": "roots:infernal_bulb_2" },
+        "age=6":  { "model": "roots:infernal_bulb_2" },
+        "age=7":  { "model": "roots:infernal_bulb_3" }
+    }
+}

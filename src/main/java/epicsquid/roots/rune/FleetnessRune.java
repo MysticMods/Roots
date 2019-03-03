@@ -1,6 +1,6 @@
 package epicsquid.roots.rune;
 
-import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.tileentity.TileEntityWildrootRune;
 import epicsquid.roots.util.RgbColorUtil;
 import net.minecraft.entity.player.EntityPlayer;

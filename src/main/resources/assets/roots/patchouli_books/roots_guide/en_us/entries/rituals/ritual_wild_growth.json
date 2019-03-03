@@ -1,6 +1,6 @@
 {
   "name": "Wildroot Growth",
-  "icon": "mysticalworld:wildroot_log",
+  "icon": "roots:wildroot_log",
   "category": "rituals",
   "advancement": "roots:spirit_herb",
   "pages": [

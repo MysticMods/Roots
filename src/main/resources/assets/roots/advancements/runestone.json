@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "mysticalworld:runestone"
+            "item": "roots:runestone"
         },
         "title": {
             "translate": "advancement.roots.runestone"
@@ -17,7 +17,7 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "mysticalworld:runestone"
+                        "item": "roots:runestone"
                     }
                 ]
             }

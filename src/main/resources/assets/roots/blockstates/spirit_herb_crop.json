@@ -1,0 +1,12 @@
+{
+    "variants":{
+        "age=0":  { "model": "roots:spirit_herb_0" },
+        "age=1":  { "model": "roots:spirit_herb_0" },
+        "age=2":  { "model": "roots:spirit_herb_1" },
+        "age=3":  { "model": "roots:spirit_herb_1" },
+        "age=4":  { "model": "roots:spirit_herb_2" },
+        "age=5":  { "model": "roots:spirit_herb_2" },
+        "age=6":  { "model": "roots:spirit_herb_3" },
+        "age=7":  { "model": "roots:spirit_herb_4" }
+    }
+}

@@ -1,7 +1,7 @@
 package epicsquid.roots.ritual;
 
-import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.ritual.EntityRitualRegrowth;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -12,7 +12,7 @@ public class RitualRegrowth extends RitualBase {
   public RitualRegrowth(String name, int duration) {
     super(name, duration);
     addCondition(new ConditionItems(
-            new ItemStack(ModItems.terra_moss), 
+            new ItemStack(ModItems.terra_moss),
             new ItemStack(ModItems.spirit_herb),
             new ItemStack(ModItems.bark_spruce),
             new ItemStack(Blocks.SAPLING), 

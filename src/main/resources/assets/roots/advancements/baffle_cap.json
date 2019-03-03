@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "mysticalworld:baffle_cap_mushroom"
+            "item": "roots:baffle_cap_mushroom"
         },
         "title": {
             "translate": "advancement.roots.baffle_cap"
@@ -17,7 +17,7 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "mysticalworld:baffle_cap_mushroom"
+                        "item": "roots:baffle_cap_mushroom"
                     }
                 ]
             }

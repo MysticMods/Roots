@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "mysticalworld:pereskia"
+            "item": "roots:pereskia"
         },
         "title": {
             "translate": "advancement.roots.pereskia"
@@ -17,7 +17,7 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "mysticalworld:pereskia"
+                        "item": "roots:pereskia"
                     }
                 ]
             }

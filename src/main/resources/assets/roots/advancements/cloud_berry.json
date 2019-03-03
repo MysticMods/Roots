@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "mysticalworld:cloud_berry"
+            "item": "roots:cloud_berry"
         },
         "title": {
             "translate": "advancement.roots.cloud_berry"
@@ -17,7 +17,7 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "mysticalworld:cloud_berry"
+                        "item": "roots:cloud_berry"
                     }
                 ]
             }

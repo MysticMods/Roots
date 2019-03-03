@@ -1,7 +1,7 @@
 package epicsquid.roots.ritual;
 
-import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.ritual.EntityRitualWindwall;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

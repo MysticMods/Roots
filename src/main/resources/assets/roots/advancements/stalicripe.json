@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "mysticalworld:stalicripe"
+            "item": "roots:stalicripe"
         },
         "title": {
             "translate": "advancement.roots.stalicripe"
@@ -17,7 +17,7 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "mysticalworld:stalicripe"
+                        "item": "roots:stalicripe"
                     }
                 ]
             }

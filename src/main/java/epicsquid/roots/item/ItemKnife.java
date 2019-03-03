@@ -5,7 +5,7 @@ import javax.annotation.Nonnull;
 import com.google.common.collect.Sets;
 
 import epicsquid.mysticallib.item.ItemToolBase;
-import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.RunicCarvingRecipe;
 import net.minecraft.block.BlockLog;

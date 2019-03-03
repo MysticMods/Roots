@@ -2,12 +2,11 @@ package epicsquid.roots.spell;
 
 import java.util.List;
 
-import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.util.Constants;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;

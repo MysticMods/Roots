@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "mysticalworld:wildroot"
+            "item": "roots:wildroot"
         },
         "title": {
             "translate": "advancement.roots.root"
@@ -9,7 +9,7 @@
         "description": {
             "translate": "advancement.roots.root.desc"
         },
-        "background": "mysticalworld:textures/blocks/thatch.png"
+        "background": "roots:textures/blocks/thatch.png"
     },
     "criteria": {
         "book": {
@@ -17,7 +17,7 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "mysticalworld:wildroot"
+                        "item": "roots:wildroot"
                     }
                 ]
             }

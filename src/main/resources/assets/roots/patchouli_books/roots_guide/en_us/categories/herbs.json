@@ -2,5 +2,5 @@
   "name": "Herbs",
   "sortnum" : 1,
   "description": "Herbs with unusual properties can be used for a variety of purposes within the druidic art. Many are not found in the wild naturally, and must be created through Rituals.",
-  "icon": "mysticalworld:moonglow_leaf"
+  "icon": "roots:moonglow_leaf"
 }
