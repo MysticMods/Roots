@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "roots:wildewheet",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "roots:wildewheet_seed",
+    "data": 0
+  }
+}

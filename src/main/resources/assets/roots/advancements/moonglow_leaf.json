@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "mysticalworld:moonglow_leaf"
+            "item": "roots:moonglow_leaf"
         },
         "title": {
             "translate": "advancement.roots.moonglow_leaf"
@@ -17,7 +17,7 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "mysticalworld:moonglow_leaf"
+                        "item": "roots:moonglow_leaf"
                     }
                 ]
             }

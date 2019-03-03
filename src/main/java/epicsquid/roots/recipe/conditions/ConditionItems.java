@@ -1,13 +1,13 @@
 package epicsquid.roots.recipe.conditions;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class ConditionItems implements Condition {
 

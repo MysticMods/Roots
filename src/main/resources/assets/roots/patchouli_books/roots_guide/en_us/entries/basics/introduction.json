@@ -1,6 +1,6 @@
 {
     "name": "The Basics of Druidry",
-    "icon": "mysticalworld:wildroot",
+    "icon": "roots:wildroot",
     "category": "basics",
     "priority": true,
     "pages": [

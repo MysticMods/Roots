@@ -2,7 +2,6 @@ package epicsquid.roots.api;
 
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.RunicCarvingRecipe;
-import epicsquid.roots.recipe.RunicShearRecipe;
 import net.minecraft.item.ItemStack;
 import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariableProvider;

@@ -3,8 +3,8 @@ package epicsquid.roots.spell;
 import java.util.Random;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageShatterBurstFX;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;

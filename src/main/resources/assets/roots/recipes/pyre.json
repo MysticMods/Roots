@@ -19,13 +19,13 @@
     ],
     "W": [
       {
-        "item": "mysticalworld:wildroot",
+        "item": "roots:wildroot",
         "data": 0
       }
     ],
     "C": [
       {
-        "item": "mysticalworld:terra_moss",
+        "item": "roots:terra_moss",
         "data": 0
       }
     ]

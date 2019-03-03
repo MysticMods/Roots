@@ -1,6 +1,6 @@
 {
   "name": "Spirit Herb",
-  "icon": "mysticalworld:spirit_herb",
+  "icon": "roots:spirit_herb",
   "category": "herbs",
   "advancement": "roots:runic_shears",
   
@@ -17,7 +17,7 @@
     },
     {
       "type": "crafting",
-      "recipe": "mysticalworld:spirit_herb_seed"
+      "recipe": "roots:spirit_herb_seed"
     }
   ]
 }

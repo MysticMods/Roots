@@ -32,7 +32,7 @@ public class WorldGenHut extends StructureBase implements IWorldGenerator {
     addBlockMapping("W", Blocks.LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Y));
     addBlockMapping(" ", Blocks.AIR.getDefaultState());
     addBlockMapping("F", Blocks.OAK_FENCE.getDefaultState());
-    addBlockMapping("T", epicsquid.mysticalworld.init.ModBlocks.thatch.getDefaultState());
+    addBlockMapping("T", ModBlocks.thatch.getDefaultState());
     addBlockMapping("P", Blocks.FLOWER_POT.getDefaultState().withProperty(BlockFlowerPot.CONTENTS, BlockFlowerPot.EnumFlowerType.ORANGE_TULIP));
     addBlockMapping("M", ModBlocks.mortar.getDefaultState());
     addBlockMapping("C", Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, EnumFacing.WEST));

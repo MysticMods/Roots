@@ -1,9 +1,9 @@
 package epicsquid.roots.util;
 
-import net.minecraftforge.oredict.OreDictionary;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import net.minecraftforge.oredict.OreDictionary;
 
 public class OreCondition {
     public static Map<String, Boolean> ORES_EXISTING = new HashMap<>();

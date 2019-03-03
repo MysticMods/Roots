@@ -11,7 +11,6 @@ import epicsquid.roots.api.Herb;
 import epicsquid.roots.util.PowderInventoryUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 

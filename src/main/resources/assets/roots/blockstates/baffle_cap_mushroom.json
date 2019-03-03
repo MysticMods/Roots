@@ -1,0 +1,6 @@
+{
+    "variants":{
+        "inventory":  { "model": "roots:baffle_cap" },
+        "normal":  { "model": "roots:baffle_cap_mushroom" }
+    }
+}

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageRadianceBeamFX;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

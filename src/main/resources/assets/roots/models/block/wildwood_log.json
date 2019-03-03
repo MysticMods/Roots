@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "roots:blocks/wildwood_log_top",
+    "side": "roots:blocks/wildwood_log"
+  }
+}

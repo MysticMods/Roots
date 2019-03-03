@@ -1,7 +1,7 @@
 package epicsquid.roots.ritual;
 
-import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.ritual.EntityRitualFireStorm;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
 import epicsquid.roots.recipe.conditions.ConditionStandingStones;
 import net.minecraft.init.Items;

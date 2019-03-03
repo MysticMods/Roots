@@ -1,7 +1,7 @@
 package epicsquid.roots.ritual;
 
-import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.entity.ritual.EntityRitualLight;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
 import epicsquid.roots.recipe.conditions.ConditionWorldTime;
 import net.minecraft.init.Items;
@@ -13,7 +13,7 @@ public class RitualLight extends RitualBase {
   public RitualLight(String name, int duration) {
     super(name, duration);
     addCondition(new ConditionItems(
-            new ItemStack(ModItems.pereskia), 
+            new ItemStack(ModItems.pereskia),
             new ItemStack(ModItems.cloud_berry),
             new ItemStack(ModItems.bark_birch),
             new ItemStack(ModItems.bark_oak),

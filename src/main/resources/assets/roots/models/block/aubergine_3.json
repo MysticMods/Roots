@@ -1,0 +1,7 @@
+{
+    "parent": "block/crop",
+    "textures": {
+        "particle": "roots:blocks/aubergine_3",
+        "crop": "roots:blocks/aubergine_3"
+    }
+}

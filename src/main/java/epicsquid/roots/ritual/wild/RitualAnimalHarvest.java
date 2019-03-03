@@ -6,10 +6,8 @@ import java.util.List;
 import java.util.Random;
 
 import epicsquid.mysticallib.util.Util;
-import epicsquid.mysticalworld.init.ModItems;
-import epicsquid.roots.grove.GroveType;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.recipe.conditions.ConditionGroveFaith;
 import epicsquid.roots.recipe.conditions.ConditionItems;
 import epicsquid.roots.ritual.RitualBase;
 import net.minecraft.entity.EntityLiving;

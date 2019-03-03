@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "mysticalworld:dewgonia"
+            "item": "roots:dewgonia"
         },
         "title": {
             "translate": "advancement.roots.dewgonia"
@@ -17,7 +17,7 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "mysticalworld:dewgonia"
+                        "item": "roots:dewgonia"
                     }
                 ]
             }

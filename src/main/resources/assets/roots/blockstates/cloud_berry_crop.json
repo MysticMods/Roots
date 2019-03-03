@@ -1,0 +1,12 @@
+{
+    "variants":{
+        "age=0":  { "model": "roots:cloud_berry_0" },
+        "age=1":  { "model": "roots:cloud_berry_0" },
+        "age=2":  { "model": "roots:cloud_berry_1" },
+        "age=3":  { "model": "roots:cloud_berry_1" },
+        "age=4":  { "model": "roots:cloud_berry_2" },
+        "age=5":  { "model": "roots:cloud_berry_2" },
+        "age=6":  { "model": "roots:cloud_berry_2" },
+        "age=7":  { "model": "roots:cloud_berry_3" }
+    }
+}

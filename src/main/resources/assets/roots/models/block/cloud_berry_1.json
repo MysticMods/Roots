@@ -1,0 +1,7 @@
+{
+    "parent": "block/crop",
+    "textures": {
+        "particle": "roots:blocks/cloud_berry_1",
+        "crop": "roots:blocks/cloud_berry_1"
+    }
+}

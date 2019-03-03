@@ -1,6 +1,6 @@
 package epicsquid.roots.recipe.conditions;
 
-import epicsquid.mysticalworld.init.ModBlocks;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

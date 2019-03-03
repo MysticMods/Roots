@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "mysticalworld:wildewheet"
+            "item": "roots:wildewheet"
         },
         "title": {
             "translate": "advancement.roots.wildewheet"
@@ -17,7 +17,7 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "mysticalworld:wildewheet"
+                        "item": "roots:wildewheet"
                     }
                 ]
             }

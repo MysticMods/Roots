@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "mysticalworld:spirit_herb"
+            "item": "roots:spirit_herb"
         },
         "title": {
             "translate": "advancement.roots.spirit_herb"
@@ -17,7 +17,7 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "mysticalworld:spirit_herb"
+                        "item": "roots:spirit_herb"
                     }
                 ]
             }

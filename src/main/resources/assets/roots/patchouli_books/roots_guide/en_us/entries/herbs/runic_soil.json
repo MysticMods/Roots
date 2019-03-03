@@ -1,6 +1,6 @@
 {
   "name": "Runic Soil",
-  "icon": "mysticalworld:runic_soil",
+  "icon": "roots:runic_soil",
   "category": "herbs",
   "priority": true,
   "advancement": "roots:pyre",
