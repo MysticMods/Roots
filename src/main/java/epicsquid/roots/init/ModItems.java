@@ -7,6 +7,7 @@ import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticalworld.MysticalWorld;
 import epicsquid.roots.item.*;
 import epicsquid.roots.Roots;
+import epicsquid.roots.util.OreCondition;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -18,7 +19,9 @@ public class ModItems {
 
   // All mod items
   public static Item pestle, pouch, petal_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife,
-          sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots;
+          sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots,
+  // Conditionally registered
+  copper_knife, silver_knife;
 
   //Rune Ashes
   public static Item aer_ash, terra_ash;
@@ -56,6 +59,12 @@ public class ModItems {
     event.addItem(iron_knife = new ItemKnife("iron_knife", ToolMaterial.IRON).setModelCustom(true).setCreativeTab(MysticalWorld.tab));
     event.addItem(diamond_knife = new ItemKnife("diamond_knife", ToolMaterial.DIAMOND).setModelCustom(true).setCreativeTab(MysticalWorld.tab));
     event.addItem(gold_knife = new ItemKnife("gold_knife", ToolMaterial.GOLD).setModelCustom(true).setCreativeTab(MysticalWorld.tab));
+
+    ToolMaterial COPPER = EnumHelper.addToolMaterial("ROOTS:COPPER", 1, 175, 4.0f, 1.0f, 7);
+    event.addItem(copper_knife = new ItemKnife("copper_knife", COPPER).setModelCustom(true).setCreativeTab(Roots.tab));
+
+    ToolMaterial SILVER = EnumHelper.addToolMaterial("ROOTS:SILVER", 1, 75, 6.0f, 1.0f, 25);
+    event.addItem(silver_knife = new ItemKnife("silver_knife", SILVER).setModelCustom(true).setCreativeTab(Roots.tab));
   }
 
   /**
