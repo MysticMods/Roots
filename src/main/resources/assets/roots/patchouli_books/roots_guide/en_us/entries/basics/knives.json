@@ -14,17 +14,17 @@
       },
       {
         "type": "crafting",
-        "recipe": "mysticalworld:wood_knife",
-        "recipe2": "mysticalworld:stone_knife"
+        "recipe": "roots:wood_knife",
+        "recipe2": "roots:stone_knife"
       },
       {
         "type": "crafting",
-        "recipe": "mysticalworld:iron_knife",
-        "recipe2": "mysticalworld:gold_knife"
+        "recipe": "roots:iron_knife",
+        "recipe2": "roots:gold_knife"
       },
       {
         "type": "crafting",
-        "recipe": "mysticalworld:diamond_knife"
+        "recipe": "roots:diamond_knife"
       }
     ]
   }

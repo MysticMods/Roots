@@ -1,0 +1,25 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "  W",
+    " W ",
+    "S  "  ],
+  "key": {
+    "S": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "stickWood"
+      }
+    ],
+    "W": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "gemDiamond"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:diamond_knife",
+    "data": 0
+  }
+}
