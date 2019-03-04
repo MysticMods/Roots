@@ -1,7 +1,7 @@
 {
   "parent": "block/cube_column",
   "textures": {
-    "end": "mysticalworld:blocks/wildwood_log_top",
+    "end": "roots:blocks/wildwood_log_top",
     "side": "roots:blocks/speed_rune"
   }
 }
