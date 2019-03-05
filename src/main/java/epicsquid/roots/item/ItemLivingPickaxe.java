@@ -22,7 +22,7 @@ public class ItemLivingPickaxe extends ItemPickaxe implements IModeledObject, IC
     super(material);
     setUnlocalizedName(name);
     setRegistryName(LibRegistry.getActiveModid(), name);
-    setHarvestLevel("pickaxe", 3);
+    setHarvestLevel("pickaxe", 2);
     setMaxDamage(192);
   }
 
