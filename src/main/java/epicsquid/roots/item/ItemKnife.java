@@ -74,7 +74,7 @@ public class ItemKnife extends ItemToolBase {
 
           return EnumActionResult.SUCCESS;
         }
-      } else if (offhand.isEmpty()) {
+      } else {
         // Used to get terramoss from a block of cobble. This can also be done using runic shears.
         IBlockState block = world.getBlockState(pos);
         if (block.getBlock() == Blocks.MOSSY_COBBLESTONE) {
