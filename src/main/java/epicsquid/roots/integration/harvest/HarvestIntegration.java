@@ -2,6 +2,7 @@ package epicsquid.roots.integration.harvest;
 
 import epicsquid.mysticallib.block.BlockCropBase;
 import epicsquid.roots.init.ModBlocks;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.Loader;
 import tehnut.harvest.BlockStack;
 import tehnut.harvest.Crop;
@@ -27,7 +28,6 @@ public class HarvestIntegration {
         if (Loader.isModLoaded("harvest")) {
             Map<BlockStack, Crop> map = Harvest.config.getCropMap();
             for (BlockCropBase block : crops) {
-                Harvest.CUSTOM_HANDLERS.put(block, block);
                 BlockStack blockStack = new BlockStack(block, 7);
                 Crop crop = new Crop(block, 7);
                 map.put(blockStack, crop);
