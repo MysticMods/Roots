@@ -19,7 +19,7 @@ public class BlockStalicripeCrop extends BlockCropBase {
   @Override
   @Nonnull
   public Item getSeed() {
-    return ModItems.cloud_berry;
+    return ModItems.stalicripe;
   }
 
   /**
@@ -28,7 +28,7 @@ public class BlockStalicripeCrop extends BlockCropBase {
   @Override
   @Nonnull
   public Item getCrop() {
-    return ModItems.cloud_berry;
+    return ModItems.stalicripe;
   }
 
 }
