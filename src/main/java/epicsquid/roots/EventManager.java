@@ -25,13 +25,16 @@ import net.minecraft.block.BlockNewLog;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
@@ -53,9 +56,11 @@ public class EventManager {
 
   @SubscribeEvent
   public void onBlockHarvested(HarvestDropsEvent event){
+    ItemStack tool = event.getHarvester().getHeldItem(EnumHand.MAIN_HAND);
+
     if (event.getHarvester() != null){
-      if (event.getHarvester().getHeldItem(EnumHand.MAIN_HAND) != ItemStack.EMPTY){
-        if (event.getHarvester().getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemKnife){
+      if (tool != ItemStack.EMPTY){
+        if (tool.getItem() instanceof ItemKnife){
           if (event.getState().getBlock() instanceof BlockLog){
             event.getDrops().clear();
             ItemStack bark = new ItemStack(ModItems.bark_oak,1);
@@ -63,24 +68,24 @@ public class EventManager {
             Block b = s.getBlock();
             if (b == Blocks.LOG){
               if (s.getValue(BlockOldLog.VARIANT) == EnumType.OAK){
-                bark = new ItemStack(ModItems.bark_oak,1);
+                bark = new ItemStack(ModItems.bark_oak, getBarkAmount(tool));
               }
               if (s.getValue(BlockOldLog.VARIANT) == EnumType.SPRUCE){
-                bark = new ItemStack(ModItems.bark_spruce,1);
+                bark = new ItemStack(ModItems.bark_spruce, getBarkAmount(tool));
               }
               if (s.getValue(BlockOldLog.VARIANT) == EnumType.BIRCH){
-                bark = new ItemStack(ModItems.bark_birch,1);
+                bark = new ItemStack(ModItems.bark_birch, getBarkAmount(tool));
               }
               if (s.getValue(BlockOldLog.VARIANT) == EnumType.JUNGLE){
-                bark = new ItemStack(ModItems.bark_jungle,1);
+                bark = new ItemStack(ModItems.bark_jungle, getBarkAmount(tool));
               }
             }
             if (b == Blocks.LOG2){
               if (s.getValue(BlockNewLog.VARIANT) == EnumType.ACACIA){
-                bark = new ItemStack(ModItems.bark_acacia,1);
+                bark = new ItemStack(ModItems.bark_acacia, getBarkAmount(tool));
               }
               if (s.getValue(BlockNewLog.VARIANT) == EnumType.DARK_OAK){
-                bark = new ItemStack(ModItems.bark_dark_oak,1);
+                bark = new ItemStack(ModItems.bark_dark_oak, getBarkAmount(tool));
               }
             }
             int count = new Random().nextInt(2)+1;
@@ -92,6 +97,24 @@ public class EventManager {
           }
         }
       }
+    }
+  }
+
+  private int getBarkAmount(ItemStack stack)
+  {
+    Random random = new Random();
+    int enchLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
+    System.out.println(enchLevel);
+
+    switch (enchLevel){
+      case 1:
+        return random.nextInt(2) + 1;
+      case 2:
+        return random.nextInt(3) + 1;
+      case 3:
+        return random.nextInt( 4) + 1;
+      default:
+        return 1;
     }
   }
 
