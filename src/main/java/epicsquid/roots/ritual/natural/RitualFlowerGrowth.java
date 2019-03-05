@@ -3,6 +3,7 @@ package epicsquid.roots.ritual.natural;
 import epicsquid.roots.entity.ritual.EntityRitualFlowerGrowth;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
+import epicsquid.roots.recipe.conditions.ConditionWorldTime;
 import epicsquid.roots.ritual.RitualBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -20,6 +21,8 @@ public class RitualFlowerGrowth extends RitualBase {
                 new ItemStack(ModItems.wildroot),
                 new ItemStack(ModItems.spirit_herb)
         ));
+
+        addCondition(new ConditionWorldTime(0, 13000));
     }
 
     @Override
