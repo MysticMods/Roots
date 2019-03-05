@@ -35,6 +35,7 @@ dependencies {
         compile project(':MysticalLib')
         compile project(':MysticalWorld')
         compile "vazkii.patchouli:Patchouli:${patchouli_version}"
+        deobfCompile "info.tehnut.harvest:Harvest:1.12-1.2.7-20"
     }
 }
 
@@ -42,7 +43,11 @@ repositories {
     maven { 
         name = 'Patchouli'
         url = "https://maven.blamejared.com" 
-    } 
+    }
+    maven {
+        name = "TehNut"
+        url = "http://tehnut.info/maven"
+    }
 }
 
 processResources {

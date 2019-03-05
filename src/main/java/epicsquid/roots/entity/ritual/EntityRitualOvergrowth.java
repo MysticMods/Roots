@@ -34,10 +34,10 @@ public class EntityRitualOvergrowth extends EntityRitualBase {
     if (getDataManager().get(lifetime) < 0) {
       setDead();
     }
-    if (this.ticksExisted % 100 == 0) {
+    if (this.ticksExisted % 400 == 0) {
       boolean blockOvergrown = false;
-      for (int i = -19; i < 20; i++) {
-        for (int j = -19; j < 20; j++) {
+      for (int i = -9; i < 10; i++) {
+        for (int j = -9; j < 10; j++) {
           // Attempt to overgrow it
           BlockPos topBlockPos = world.getTopSolidOrLiquidBlock(new BlockPos(getPosition().getX() + i, getPosition().getY() - 20, getPosition().getZ() + j));
           topBlockPos = topBlockPos.subtract(new Vec3i(0, 1, 0));

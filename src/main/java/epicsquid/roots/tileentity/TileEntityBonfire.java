@@ -16,9 +16,11 @@ import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -29,6 +31,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -227,6 +230,11 @@ public class TileEntityBonfire extends TileBase implements ITickable {
 
     if (burnTime > 0) {
       burnTime--;
+
+      if (getTicker() % 20.0f == 0 && random.nextDouble() < 0.05) {
+        meltNearbySnow();
+      }
+
       if (burnTime == 0) {
         //Check if it is a ritual, if so try and see if it has new ritual fuel.
         if(this.craftingResult == ItemStack.EMPTY && this.lastRitualUsed != null){
@@ -268,7 +276,30 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     }
 
     pickupItem();
+  }
 
+  private void meltNearbySnow() {
+    List<BlockPos> nearbySnowOrIce = new ArrayList<>();
+    for (int x = -4; x < 5; x++) {
+      for (int z = -4; z < 5; z++) {
+        BlockPos topBlockPos = world.getTopSolidOrLiquidBlock(new BlockPos(pos.getX() + x, pos.getY(), pos.getZ() + z));
+        topBlockPos = topBlockPos.subtract(new Vec3i(0, 1, 0));
+        IBlockState topBlockState = world.getBlockState(topBlockPos);
+        if (topBlockState.getMaterial() == Material.SNOW || topBlockState.getMaterial() == Material.ICE) {
+          nearbySnowOrIce.add(topBlockPos);
+        }
+      }
+    }
+
+    if (nearbySnowOrIce.isEmpty()) {
+      return;
+    }
+    BlockPos posToMelt = nearbySnowOrIce.get(nearbySnowOrIce.size() > 1 ? random.nextInt(nearbySnowOrIce.size() -1 ) : 0);
+    if (world.getBlockState(posToMelt).getMaterial() == Material.SNOW) {
+      world.setBlockState(posToMelt, Blocks.AIR.getDefaultState());
+    } else if (world.getBlockState(posToMelt).getMaterial() == Material.ICE) {
+      world.setBlockState(posToMelt, Blocks.WATER.getDefaultState());
+    }
   }
 
   private void pickupItem(){

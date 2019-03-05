@@ -60,4 +60,20 @@ public class HerbRegistry {
     }
     return null;
   }
+
+  @Nullable
+  public static Herb getHerbByItem(@Nonnull Item item) {
+    Collection<Herb> herbs = REGISTRY.getValuesCollection();
+    for (Herb herb : herbs) {
+      if (herb.getItem() == item) {
+        return herb;
+      }
+    }
+    return null;
+  }
+
+  public static boolean containsHerbItem(@Nonnull Item item) {
+    return REGISTRY.getValuesCollection().stream()
+        .anyMatch(herb -> herb.getItem() == item);
+  }
 }

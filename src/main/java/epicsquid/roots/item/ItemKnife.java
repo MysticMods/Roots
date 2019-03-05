@@ -5,6 +5,7 @@ import javax.annotation.Nonnull;
 import com.google.common.collect.Sets;
 
 import epicsquid.mysticallib.item.ItemToolBase;
+import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.RunicCarvingRecipe;
@@ -61,20 +62,19 @@ public class ItemKnife extends ItemToolBase {
   public EnumActionResult onItemUse(@Nonnull EntityPlayer player, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (hand == EnumHand.MAIN_HAND) {
       ItemStack offhand = player.getHeldItemOffhand();
-      if (!offhand.isEmpty() && offhand.getItem() instanceof ItemPouch) {
-        RunicCarvingRecipe recipe = ModRecipes.getRunicCarvingRecipe(world.getBlockState(pos), ItemPouch.getHerb(offhand));
+      if (!offhand.isEmpty() && HerbRegistry.containsHerbItem(offhand.getItem())) {
+        RunicCarvingRecipe recipe = ModRecipes.getRunicCarvingRecipe(world.getBlockState(pos), HerbRegistry.getHerbByItem(offhand.getItem()));
         if (recipe != null) {
           world.setBlockState(pos, recipe.getRuneBlock());
-          String plantName = ItemPouch.getPlantName(offhand);
 
           if (!player.isCreative()) {
-            ItemPouch.setQuantity(offhand, plantName, ItemPouch.getQuantity(offhand, plantName) - 1);
+            player.getHeldItemOffhand().shrink(1);
             player.getHeldItemMainhand().damageItem(1, player);
           }
 
           return EnumActionResult.SUCCESS;
         }
-      } else if (offhand.isEmpty()) {
+      } else {
         // Used to get terramoss from a block of cobble. This can also be done using runic shears.
         IBlockState block = world.getBlockState(pos);
         if (block.getBlock() == Blocks.MOSSY_COBBLESTONE) {
