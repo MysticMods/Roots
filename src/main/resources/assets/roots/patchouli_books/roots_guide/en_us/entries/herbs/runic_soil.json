@@ -18,25 +18,25 @@
       "type": "runic_carving_template",
       "recipe": "runic_soil_fire",
       "name": "Magmatic Soil",
-      "text": "$(l:herbs/infernal_bulb)Infernal Bulbs$() can grow in this magmatic soil."
+      "text": "$(l:herbs/infernal_bulb)Infernal Bulbs$() can grow in this magmatic soil.$(br2)Created by using a knife on runic soil while holding an $(l:herbs/infernal_bulb)Infernal Bulb$() in your offhand."
     },
     {
       "type": "runic_carving_template",
       "recipe": "runic_soil_water",
       "name": "Aqueous Soil",
-      "text": "$(l:herbs/dewgonia)Dewgonia$() can grow in this aquatic soil."
+      "text": "$(l:herbs/dewgonia)Dewgonia$() can grow in this aquatic soil.$(br2)Created by using a knife on runic soil while holding a $(l:herbs/dewgonia)Dewgonia$() in your offhand."
     },
     {
       "type": "runic_carving_template",
       "recipe": "runic_soil_air",
       "name": "Aeros Soil",
-      "text": "$(l:herbs/cloud_berry)Cloud Berries$() can grow in this air-infused soil."
+      "text": "$(l:herbs/cloud_berry)Cloud Berries$() can grow in this air-infused soil.$(br2)Created by using a knife on runic soil while holding a $(l:herbs/cloud_berry)Cloud Berry$() in your offhand."
     },
     {
       "type": "runic_carving_template",
       "recipe": "runic_soil_earth",
       "name": "Terra Soil",
-      "text": "$(l:herbs/stalicripe)Stalicripe$() can grow in this earthen soil."
+      "text": "$(l:herbs/stalicripe)Stalicripe$() can grow in this earthen soil.$(br2)Created by using a knife on runic soil while holding an $(l:herbs/stalicripe)Stalicripe$() in your offhand."
     }
   ]
 }

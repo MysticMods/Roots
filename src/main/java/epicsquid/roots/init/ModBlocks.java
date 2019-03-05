@@ -10,7 +10,6 @@ import epicsquid.mysticallib.block.BlockMushroomBase;
 import epicsquid.mysticallib.block.BlockStairsBase;
 import epicsquid.mysticallib.block.BlockWallBase;
 import epicsquid.mysticallib.event.RegisterContentEvent;
-import epicsquid.mysticalworld.MysticalWorld;
 import epicsquid.mysticalworld.api.CustomPlantType;
 import epicsquid.mysticalworld.util.EnumRunicSoilType;
 import epicsquid.roots.Roots;
