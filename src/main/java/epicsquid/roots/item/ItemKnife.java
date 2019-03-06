@@ -1,5 +1,8 @@
 package epicsquid.roots.item;
 
+import java.util.Collections;
+import java.util.Set;
+
 import javax.annotation.Nonnull;
 
 import com.google.common.collect.Sets;
@@ -31,30 +34,15 @@ public class ItemKnife extends ItemToolBase {
   }
 
   @Override
-  public float getDestroySpeed(ItemStack stack, IBlockState state) {
-    if (state.getBlock() instanceof BlockLog) {
-      return this.efficiency;
-    }
-    return super.getDestroySpeed(stack, state);
-  }
-
-  @Override
   public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
     stack.damageItem(1, attacker);
     return true;
   }
 
   @Override
-  public boolean canHarvestBlock(IBlockState block) {
-    if (block.getBlock() instanceof BlockLog) {
-      return false;
-    }
-    return true;
-  }
-
-  @Override
-  public boolean onBlockDestroyed(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityLivingBase entity) {
-    return super.onBlockDestroyed(stack, world, state, pos, entity);
+  @Nonnull
+  public Set<String> getToolClasses(ItemStack stack) {
+    return Collections.singleton("druidKnife");
   }
 
   @Override
