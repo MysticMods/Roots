@@ -1,4 +1,4 @@
-package epicsquid.roots.integration.jei.runicshears;
+package epicsquid.roots.integration.jei.shears;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.integration.jei.JEIRootsPlugin;

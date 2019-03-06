@@ -1,4 +1,4 @@
-package epicsquid.roots.integration.jei.runicshears;
+package epicsquid.roots.integration.jei.shears;
 
 import epicsquid.roots.recipe.RunicShearRecipe;
 import mezz.jei.api.ingredients.IIngredients;
