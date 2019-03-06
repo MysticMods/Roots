@@ -58,7 +58,7 @@ public class EventManager {
   public void onBlockHarvested(HarvestDropsEvent event){
     if (event.getHarvester() != null){
       ItemStack tool = event.getHarvester().getHeldItem(EnumHand.MAIN_HAND);
-      if (tool != ItemStack.EMPTY){
+      if (!(tool.isEmpty())){
         if (tool.getItem() instanceof ItemKnife){
           if (event.getState().getBlock() instanceof BlockLog){
             event.getDrops().clear();
