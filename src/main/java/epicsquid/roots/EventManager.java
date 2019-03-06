@@ -63,27 +63,27 @@ public class EventManager {
           if (event.getState().getBlock() instanceof BlockLog){
             event.getDrops().clear();
             ItemStack bark = new ItemStack(ModItems.bark_oak,1);
-            IBlockState s = event.getState();
-            Block b = s.getBlock();
-            if (b == Blocks.LOG){
-              if (s.getValue(BlockOldLog.VARIANT) == EnumType.OAK){
+            IBlockState blockstate = event.getState();
+            Block block = blockstate.getBlock();
+            if (block == Blocks.LOG){
+              if (blockstate.getValue(BlockOldLog.VARIANT) == EnumType.OAK){
                 bark = new ItemStack(ModItems.bark_oak, 1);
               }
-              if (s.getValue(BlockOldLog.VARIANT) == EnumType.SPRUCE){
+              if (blockstate.getValue(BlockOldLog.VARIANT) == EnumType.SPRUCE){
                 bark = new ItemStack(ModItems.bark_spruce, 1);
               }
-              if (s.getValue(BlockOldLog.VARIANT) == EnumType.BIRCH){
+              if (blockstate.getValue(BlockOldLog.VARIANT) == EnumType.BIRCH){
                 bark = new ItemStack(ModItems.bark_birch, 1);
               }
-              if (s.getValue(BlockOldLog.VARIANT) == EnumType.JUNGLE){
+              if (blockstate.getValue(BlockOldLog.VARIANT) == EnumType.JUNGLE){
                 bark = new ItemStack(ModItems.bark_jungle, 1);
               }
             }
-            if (b == Blocks.LOG2){
-              if (s.getValue(BlockNewLog.VARIANT) == EnumType.ACACIA){
+            if (block == Blocks.LOG2){
+              if (blockstate.getValue(BlockNewLog.VARIANT) == EnumType.ACACIA){
                 bark = new ItemStack(ModItems.bark_acacia, 1);
               }
-              if (s.getValue(BlockNewLog.VARIANT) == EnumType.DARK_OAK){
+              if (blockstate.getValue(BlockNewLog.VARIANT) == EnumType.DARK_OAK){
                 bark = new ItemStack(ModItems.bark_dark_oak, 1);
               }
             }
@@ -170,14 +170,6 @@ public class EventManager {
     if (EffectManager.hasEffect(event.getEntityLiving(), EffectManager.effect_invulnerability.getName())){
      event.setCanceled(true);
     }
-//    if (event.getEntity() instanceof EntityPlayer){
-//      if (!event.getEntity().world.isRemote && ((EntityPlayer)event.getEntity()).getGameProfile().getName().compareToIgnoreCase("ellpeck") == 0 && Misc.random.nextInt(100) == 0){
-//        EntityFairy fairy = new EntityFairy(event.getEntity().getEntityWorld());
-//        fairy.setPosition(event.getEntity().posX, event.getEntity().posY+1.0, event.getEntity().posZ);
-//        fairy.onInitialSpawn(event.getEntity().world.getDifficultyForLocation(fairy.getPosition()), null);
-//        event.getEntity().world.spawnEntity(fairy);
-//      }
-//    }
     if (event.getEntityLiving().getEntityData().hasKey(Constants.EFFECT_TAG)){
       NBTTagCompound tag = event.getEntityLiving().getEntityData().getCompoundTag(Constants.EFFECT_TAG);
       if (tag.hasKey(EffectManager.effect_invulnerability.getName())){
@@ -185,19 +177,19 @@ public class EventManager {
       }
     }
     if (event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().getEntityWorld().isRemote){
-      EntityPlayer p = ((EntityPlayer)event.getEntityLiving());
-      List<EntityPetalShell> shells = p.getEntityWorld().getEntitiesWithinAABB(EntityPetalShell.class, new AxisAlignedBB(p.posX-0.5,p.posY,p.posZ-0.5,p.posX+0.5,p.posY+2.0,p.posZ+0.5));
+      EntityPlayer player = ((EntityPlayer)event.getEntityLiving());
+      List<EntityPetalShell> shells = player.getEntityWorld().getEntitiesWithinAABB(EntityPetalShell.class, new AxisAlignedBB(player.posX-0.5,player.posY,player.posZ-0.5,player.posX+0.5,player.posY+2.0,player.posZ+0.5));
       if (shells.size() > 0){
-        for (EntityPetalShell s : shells){
-          if (s.getPlayerId().compareTo(p.getUniqueID()) == 0){
-            if (s.getDataManager().get(s.getCharge()) > 0){
+        for (EntityPetalShell shell : shells){
+          if (shell.getPlayerId().compareTo(player.getUniqueID()) == 0){
+            if (shell.getDataManager().get(shell.getCharge()) > 0){
               event.setAmount(0);
               event.setCanceled(true);
-              s.getDataManager().set(s.getCharge(), s.getDataManager().get(s.getCharge())-1);
-              s.getDataManager().setDirty(s.getCharge());
-              PacketHandler.INSTANCE.sendToAll(new MessagePetalShellBurstFX(p.posX,p.posY+1.0f,p.posZ));
-              if (s.getDataManager().get(s.getCharge()) <= 0){
-                p.world.removeEntity(s);
+              shell.getDataManager().set(shell.getCharge(), shell.getDataManager().get(shell.getCharge())-1);
+              shell.getDataManager().setDirty(shell.getCharge());
+              PacketHandler.INSTANCE.sendToAll(new MessagePetalShellBurstFX(player.posX,player.posY+1.0f,player.posZ));
+              if (shell.getDataManager().get(shell.getCharge()) <= 0){
+                player.world.removeEntity(shell);
               }
             }
           }
@@ -213,10 +205,10 @@ public class EventManager {
     }
     if (event.getSource().getTrueSource() instanceof EntityLivingBase){
       if (event.getSource().getTrueSource().getEntityData().hasKey(Constants.MIND_WARD_TAG)){
-        EntityLivingBase e = (EntityLivingBase)event.getSource().getTrueSource();
-        e.attackEntityFrom(DamageSource.WITHER, event.getAmount()*2.0f);
+        EntityLivingBase entity = (EntityLivingBase)event.getSource().getTrueSource();
+        entity.attackEntityFrom(DamageSource.WITHER, event.getAmount()*2.0f);
         event.setAmount(0);
-        PacketHandler.INSTANCE.sendToAll(new MessageMindWardRingFX(e.posX,e.posY+1.0,e.posZ));
+        PacketHandler.INSTANCE.sendToAll(new MessageMindWardRingFX(entity.posX,entity.posY+1.0,entity.posZ));
       }
     }
   }
@@ -237,17 +229,17 @@ public class EventManager {
     if (event.getEntity().getEntityData().hasKey(Constants.LIGHT_DRIFTER_TAG) && !event.getEntity().getEntityWorld().isRemote){
       event.getEntity().getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_TAG)-1);
       if (event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_TAG) <= 0){
-        EntityPlayer p = ((EntityPlayer)event.getEntity());
-        p.posX = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_X);
-        p.posY = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_Y);
-        p.posZ = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_Z);
-        PacketHandler.INSTANCE.sendToAll(new MessageLightDrifterSync(event.getEntity().getUniqueID(),p.posX,p.posY,p.posZ,false,event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE)));
-        p.capabilities.allowFlying = false;
-        p.capabilities.disableDamage = false;
-        p.noClip = false;
-        p.capabilities.isFlying = false;
-        p.setGameType(GameType.getByID(event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE)));
-        p.setPositionAndUpdate(p.posX, p.posY, p.posZ);
+        EntityPlayer player = ((EntityPlayer)event.getEntity());
+        player.posX = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_X);
+        player.posY = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_Y);
+        player.posZ = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_Z);
+        PacketHandler.INSTANCE.sendToAll(new MessageLightDrifterSync(event.getEntity().getUniqueID(),player.posX,player.posY,player.posZ,false,event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE)));
+        player.capabilities.allowFlying = false;
+        player.capabilities.disableDamage = false;
+        player.noClip = false;
+        player.capabilities.isFlying = false;
+        player.setGameType(GameType.getByID(event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE)));
+        player.setPositionAndUpdate(player.posX, player.posY, player.posZ);
         PacketHandler.INSTANCE.sendToAll(new MessageLightDrifterFX(event.getEntity().posX,event.getEntity().posY+1.0f,event.getEntity().posZ));
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_TAG);
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_X);
