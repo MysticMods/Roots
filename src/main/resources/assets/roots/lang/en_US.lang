@@ -155,3 +155,6 @@ tile.runestone_brick_wall.name=Runestone Brick Wall
 tile.wildwood_log.name=Wildwood Log
 tile.wildwood_planks.name=Wildwood Planks
 tile.wildwood_leaves.name=Wildwood Leaves
+
+# JEI
+container.roots.runic_shears.name=Runic Shearing
