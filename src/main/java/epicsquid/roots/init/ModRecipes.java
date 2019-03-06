@@ -196,6 +196,10 @@ public class ModRecipes {
     return runicShearRecipes;
   }
 
+  public static Map<String, PyreCraftingRecipe> getPyreCraftingRecipes() {
+    return pyreCraftingRecipes;
+  }
+
   /**
    * Register all recipes
    */
