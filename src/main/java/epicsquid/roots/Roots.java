@@ -1,11 +1,14 @@
 package epicsquid.roots;
 
-import epicsquid.roots.capability.IPlayerDataCapability;
-import epicsquid.roots.capability.IPlayerGroveCapability;
-import epicsquid.roots.capability.PlayerDataCapability;
-import epicsquid.roots.capability.PlayerDataCapabilityStorage;
-import epicsquid.roots.capability.PlayerGroveCapability;
-import epicsquid.roots.capability.PlayerGroveCapabilityStorage;
+import epicsquid.roots.capability.playerdata.IPlayerDataCapability;
+import epicsquid.roots.capability.grove.IPlayerGroveCapability;
+import epicsquid.roots.capability.playerdata.PlayerDataCapability;
+import epicsquid.roots.capability.playerdata.PlayerDataCapabilityStorage;
+import epicsquid.roots.capability.grove.PlayerGroveCapability;
+import epicsquid.roots.capability.grove.PlayerGroveCapabilityStorage;
+import epicsquid.roots.capability.spell.ISpellHolderCapability;
+import epicsquid.roots.capability.spell.SpellHolderCapability;
+import epicsquid.roots.capability.spell.SpellHolderCapabilityStorage;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
@@ -57,6 +60,7 @@ public class Roots {
     CONTAINER = Loader.instance().activeModContainer();
     CapabilityManager.INSTANCE.register(IPlayerGroveCapability.class, new PlayerGroveCapabilityStorage(), PlayerGroveCapability::new);
     CapabilityManager.INSTANCE.register(IPlayerDataCapability.class, new PlayerDataCapabilityStorage(), PlayerDataCapability::new);
+    CapabilityManager.INSTANCE.register(ISpellHolderCapability.class, new SpellHolderCapabilityStorage(), SpellHolderCapability::new);
     MinecraftForge.EVENT_BUS.register(new RegistryManager());
     MinecraftForge.EVENT_BUS.register(new EventManager());
     proxy.preInit(event);

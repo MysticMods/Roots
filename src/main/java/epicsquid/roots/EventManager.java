@@ -5,8 +5,9 @@ import java.util.Random;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.proxy.ClientProxy;
-import epicsquid.roots.capability.PlayerDataCapabilityProvider;
-import epicsquid.roots.capability.PlayerGroveCapabilityProvider;
+import epicsquid.roots.capability.playerdata.PlayerDataCapabilityProvider;
+import epicsquid.roots.capability.grove.PlayerGroveCapabilityProvider;
+import epicsquid.roots.capability.spell.SpellHolderCapabilityProvider;
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.entity.spell.EntityPetalShell;
 import epicsquid.roots.init.ModItems;
@@ -34,7 +35,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
@@ -124,6 +124,13 @@ public class EventManager {
         event.getEntityPlayer().getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null)
             .setData(event.getOriginal().getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null).getData());
       }
+    }
+  }
+
+  @SubscribeEvent
+  public void addItemStackCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
+    if(event.getObject().getItem() == ModItems.staff ) {
+      event.addCapability(new ResourceLocation(Roots.MODID, "spell_holder_capability"), new SpellHolderCapabilityProvider());
     }
   }
 

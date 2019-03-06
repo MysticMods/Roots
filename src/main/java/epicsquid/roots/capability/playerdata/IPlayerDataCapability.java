@@ -1,4 +1,4 @@
-package epicsquid.roots.capability;
+package epicsquid.roots.capability.playerdata;
 
 import net.minecraft.nbt.NBTTagCompound;
 

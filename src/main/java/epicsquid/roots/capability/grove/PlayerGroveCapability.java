@@ -1,4 +1,4 @@
-package epicsquid.roots.capability;
+package epicsquid.roots.capability.grove;
 
 import java.util.HashMap;
 import java.util.Map;
