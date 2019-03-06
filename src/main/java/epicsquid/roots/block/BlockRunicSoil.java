@@ -3,7 +3,7 @@ package epicsquid.roots.block;
 import javax.annotation.Nonnull;
 
 import epicsquid.mysticallib.block.BlockBase;
-import epicsquid.mysticalworld.api.CustomPlantType;
+import epicsquid.roots.api.CustomPlantType;
 import epicsquid.mysticalworld.util.EnumRunicSoilType;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
