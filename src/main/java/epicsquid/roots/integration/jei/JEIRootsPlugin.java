@@ -1,5 +1,8 @@
 package epicsquid.roots.integration.jei;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
@@ -17,7 +20,9 @@ import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
 @JEIPlugin
@@ -56,5 +61,19 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModItems.copper_knife), RUNIC_CARVING);
     registry.addRecipeCatalyst(new ItemStack(ModItems.silver_knife), RUNIC_CARVING);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.bonfire), RITUAL_CRAFTING);
+
+    registry.addIngredientInfo(new ItemStack(ModItems.terra_moss), VanillaTypes.ITEM, I18n.format("jei.roots.terra_moss.desc"));
+    registry.addIngredientInfo(new ItemStack(ModItems.terra_spores), VanillaTypes.ITEM, I18n.format("jei.roots.terra_spores.desc"));
+    registry.addIngredientInfo(new ItemStack(ModItems.wildroot), VanillaTypes.ITEM, I18n.format("jei.roots.wildroot.desc"));
+
+    List<ItemStack> bark = new ArrayList<>();
+    bark.add(new ItemStack(ModItems.bark_oak));
+    bark.add(new ItemStack(ModItems.bark_acacia));
+    bark.add(new ItemStack(ModItems.bark_birch));
+    bark.add(new ItemStack(ModItems.bark_dark_oak));
+    bark.add(new ItemStack(ModItems.bark_jungle));
+    bark.add(new ItemStack(ModItems.bark_spruce));
+
+    registry.addIngredientInfo(bark, VanillaTypes.ITEM, I18n.format("jei.roots.bark.desc"));
   }
 }
