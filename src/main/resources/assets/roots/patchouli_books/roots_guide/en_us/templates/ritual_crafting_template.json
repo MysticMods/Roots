@@ -4,52 +4,61 @@
   "components": [
     {
       "type": "item",
-      "item": "roots:bonfire",
-      "framed": false,
-      "x": 50,
-      "y": 50
-    },
-    {
-      "type": "item",
       "item": "#item1",
       "framed": false,
-      "x": 50,
-      "y": 10
+      "x": 46,
+      "y": 18
     },
     {
       "type": "item",
       "item": "#item2",
       "framed": false,
-      "x": 85,
-      "y": 35
+      "x": 71,
+      "y": 39
     },
     {
       "type": "item",
       "item": "#item3",
       "framed": false,
-      "x": 15,
-      "y": 35
+      "x": 21,
+      "y": 39
     },
     {
       "type": "item",
       "item": "#item4",
       "framed": false,
-      "x": 25,
-      "y": 80
+      "x": 27,
+      "y": 72
     },
     {
       "type": "item",
       "item": "#item5",
       "framed": false,
-      "x": 75,
-      "y": 80
+      "x": 67,
+      "y": 72
     },
     {
       "type": "item",
       "item": "#result",
       "framed": false,
-      "x": 50,
-      "y": 120
+      "x": 46,
+      "y": 131
+    },
+    {
+      "type": "image",
+      "image": "roots:textures/gui/patchouli/elements.png",
+      "x": 16,
+      "y": 14,
+      "u": 0,
+      "v": 93,
+      "width": 76,
+      "height": 137
+    },
+    {
+      "type": "header",
+      "text": "Pyre Ritual",
+      "x": -1,
+      "y": 0
     }
   ]
 }
