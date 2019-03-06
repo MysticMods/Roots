@@ -30,6 +30,6 @@ public class BlockBonfire extends BlockTEBase {
   @Nonnull
   @Override
   public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
-    return new AxisAlignedBB(0, 0, 0, 1, 0.1875, 1);
+    return new AxisAlignedBB(-0.125, 0, -0.125, 1.125, 0.25, 1.125);
   }
 }
