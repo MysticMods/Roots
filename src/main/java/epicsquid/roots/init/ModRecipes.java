@@ -188,6 +188,14 @@ public class ModRecipes {
     pyreCraftingRecipes.put(recipeName, pyreCraftingRecipe);
   }
 
+  public static List<RunicCarvingRecipe> getRunicCarvingRecipes() {
+    return runicCarvingRecipes;
+  }
+
+  public static List<RunicShearRecipe> getRunicShearRecipes() {
+    return runicShearRecipes;
+  }
+
   /**
    * Register all recipes
    */
