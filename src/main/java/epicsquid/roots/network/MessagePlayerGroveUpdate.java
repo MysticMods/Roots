@@ -2,7 +2,7 @@ package epicsquid.roots.network;
 
 import java.util.UUID;
 
-import epicsquid.roots.capability.PlayerGroveCapabilityProvider;
+import epicsquid.roots.capability.grove.PlayerGroveCapabilityProvider;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;

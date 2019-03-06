@@ -3,8 +3,8 @@ package epicsquid.roots.entity.grove;
 import java.util.ArrayList;
 import java.util.List;
 
-import epicsquid.roots.capability.IPlayerGroveCapability;
-import epicsquid.roots.capability.PlayerGroveCapabilityProvider;
+import epicsquid.roots.capability.grove.IPlayerGroveCapability;
+import epicsquid.roots.capability.grove.PlayerGroveCapabilityProvider;
 import epicsquid.roots.grove.GroveType;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.tileentity.TileEntityOffertoryPlate;

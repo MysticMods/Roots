@@ -1,7 +1,7 @@
 package epicsquid.roots.recipe.conditions;
 
-import epicsquid.roots.capability.IPlayerGroveCapability;
-import epicsquid.roots.capability.PlayerGroveCapabilityProvider;
+import epicsquid.roots.capability.grove.IPlayerGroveCapability;
+import epicsquid.roots.capability.grove.PlayerGroveCapabilityProvider;
 import epicsquid.roots.grove.GroveType;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.entity.player.EntityPlayer;
