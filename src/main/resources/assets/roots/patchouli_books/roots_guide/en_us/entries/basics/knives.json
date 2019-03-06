@@ -10,7 +10,7 @@
       },
       {
         "type": "text",
-        "text": "Druids call this \"Runic Carving\" and can engrave this runes while holding a petal pouch with the required herb in their offhand.$(br2)Knives are also an elegant offensive weapon for a druid, with a high attack speed, but lower damage than a sword."
+        "text": "Druids call this \"Runic Carving\" and can engrave this runes while holding the required herb in their offhand, which is consumed in the process.$(br2)Knives are also an elegant offensive weapon for a druid, with a high attack speed, but lower damage than a sword."
       },
       {
         "type": "crafting",
