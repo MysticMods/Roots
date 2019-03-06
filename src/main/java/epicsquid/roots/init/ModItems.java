@@ -38,9 +38,11 @@ public class ModItems {
   // Conditionally registered
   copper_knife, silver_knife;
 
-  public static Item moonglow_seed, moonglow_leaf, aubergine, aubergine_seed, pereskia_bulb, pereskia, terra_spores, terra_moss, spirit_herb, wildewheet,
-      spirit_herb_seed, wildroot, baffle_cap, bark_oak, bark_birch, bark_spruce, bark_jungle, bark_dark_oak, bark_acacia, wildewheet_seed, cloud_berry, infernal_bulb,
-      stalicripe, dewgonia;
+  public static Item moonglow_leaf, aubergine, pereskia, terra_spores, terra_moss, spirit_herb, wildewheet,
+      baffle_cap, bark_oak, bark_birch, bark_spruce, bark_jungle, bark_dark_oak, bark_acacia;
+
+  public static ItemSeedBase moonglow_seed, aubergine_seed, pereskia_bulb, spirit_herb_seed, wildewheet_seed,cloud_berry, infernal_bulb,
+      stalicripe, dewgonia, wildroot;
 
   //Armor Materials
   public static final ItemArmor.ArmorMaterial sylvanArmorMaterial = EnumHelper.addArmorMaterial("SYLVAN", Roots.MODID + ":sylvan",8, new int[]{1, 3, 4, 2}, 20, SoundEvents.BLOCK_SNOW_PLACE, 0F);
