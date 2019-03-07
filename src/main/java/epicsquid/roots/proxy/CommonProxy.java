@@ -4,6 +4,7 @@ import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.integration.harvest.HarvestIntegration;
+import epicsquid.roots.integration.jer.JERIntegration;
 import epicsquid.roots.recipe.recipes.RunicCarvingRecipes;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.rune.RuneRegistry;
@@ -36,6 +37,9 @@ public class CommonProxy {
   public void loadComplete(FMLLoadCompleteEvent event) {
     if (Loader.isModLoaded("harvest")) {
       HarvestIntegration.init();
+    }
+    if (Loader.isModLoaded("jeresources")) {
+      JERIntegration.init();
     }
   }
 }

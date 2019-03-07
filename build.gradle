@@ -42,6 +42,7 @@ dependencies {
     deobfProvided "mezz.jei:jei_${minecraft_version}:${jei_version}:api"
     // at runtime, use the full JEI jar
     runtime "mezz.jei:jei_${minecraft_version}:${jei_version}"
+    compile "jeresources:JustEnoughResources-${minecraft_version}:${jer_version}"
 }
 
 repositories {
@@ -62,6 +63,10 @@ repositories {
         // location of a maven mirror for JEI files, as a fallback
         name = "ModMaven"
         url = "modmaven.k-4u.nl"
+    }
+    maven {
+        name = "JER"
+        url = "https://dl.bintray.com/way2muchnoise/dev"
     }
 }
 

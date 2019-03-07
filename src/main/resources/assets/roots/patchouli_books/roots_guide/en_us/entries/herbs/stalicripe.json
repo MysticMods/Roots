@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "A rough, rugged plant that feels almost like it's made of stone when touched. Can only be grown on Terra Soil.$(br2)(!)"
+      "text": "A rough, rugged plant that feels almost like it's made of stone when touched. Can only be grown on $(l:herbs/runic_soil)Terra Soil.$()"
     },
     {
       "type": "ritual_crafting_template",

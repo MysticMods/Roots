@@ -1,6 +1,7 @@
 package epicsquid.roots.integration.jei.ritual;
 
 import epicsquid.roots.Roots;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.integration.jei.JEIRootsPlugin;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import mezz.jei.api.IGuiHelper;
@@ -10,6 +11,7 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class RitualCraftingCategory implements IRecipeCategory<RitualCraftingWrapper> {
@@ -56,5 +58,7 @@ public class RitualCraftingCategory implements IRecipeCategory<RitualCraftingWra
     group.set(4, recipe.getIngredients().get(4));
     group.init(5, false, 99, 23);
     group.set(5, recipe.getResult());
+    group.init(6, true, 26, 30);
+    group.set(6, new ItemStack(ModBlocks.bonfire));
   }
 }

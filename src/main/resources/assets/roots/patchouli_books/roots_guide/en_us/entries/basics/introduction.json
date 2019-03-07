@@ -9,8 +9,8 @@
         "text": "Within nature there is much power to be discovered. From the creation of the world, the mystical energies that wove the land into existence have been left behind, accessible to those who know where they to find them."  
       },
       {
-          "type": "text",
-          "text": "Begin by breaking some tall grass to obtain $(l:herbs/wildroot)Wildroot$() and some Terra Spores, with which you can grow $(l:herbs/terra_moss)Terra Moss$() to further your druidic discoveries."
+        "type": "text",
+        "text": "Begin by breaking some tall grass to obtain $(l:herbs/wildroot)Wildroot$() and some Terra Spores, with which you can grow $(l:herbs/terra_moss)Terra Moss$() to further your druidic discoveries."
       }
     ]
   }

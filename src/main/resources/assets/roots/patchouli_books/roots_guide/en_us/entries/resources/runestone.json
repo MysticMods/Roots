@@ -1,7 +1,7 @@
 {
   "name": "Runestone",
   "icon": "roots:runestone",
-  "category": "basics",
+  "category": "resources",
   "advancement": "roots:pyre",
   "secret": true,
   "pages": [
