@@ -1,0 +1,6 @@
+{
+    "name": "Natural Resources",
+    "sortnum" : 4,
+    "description": "Resources of natural origin that may be useful to druids.",
+    "icon": "roots:bark_oak"
+  }

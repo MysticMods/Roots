@@ -8,60 +8,22 @@
   "pages": [
     {
       "type": "text",
-      "text": "The art of druidic spellcraft is not a terribly difficult one to master, but it does require specific combinations of special reagents to work.$(br2)The first thing an aspiring spellcaster would need is a mortar and a pestle."
-    },
-    {
-      "type":"crafting",
-      "recipe": "roots:pestle",
-      "recipe2": "roots:mortar",
-      "title": "Pestle & Mortar"
+      "text": "The most basic form of power available to a druid is through spellcraft. Each spell makes use of druid herbs to produce wonderous magic. To do this, a druid must break down reagents in a $(l:apparatus/mortar)Mortar & Pestle$() into a condensed Petal Dust which carries the essence of the spell."
     },
     {
       "type": "text",
-      "title": "Create spell dust",
-      "text": "The mortar is placed in-world, and different combinations of reagents may be placed inside to designated the desired spell to be crafted - a list of such combinations may be found elsehwere in this book. Once the required reagents have been gathered, they are placed into the mortar one at a time by right-clicking. Right-clicking a valid combination with the pestle will produce special 'petal dust' associated with the spell."
-    },
-	{
-		"type": "text",
-		"text": "Once you have acquired any variety of petal dust, you will need a staff from which to cast it, and an imbuer to apply the petal dust to the staff."
-	},
-    {
-      "type":"crafting",
-      "recipe": "roots:imbuer",
-      "recipe2": "roots:staff",
-      "title": "Imbuer & Staff"
+      "text": "Once a Petal Dust has been crafted, it can be imbued into a simple staff for casting using an $(l:apparatus/imbuer)Imbuer.$() During the imbuement, further reagents can be added to modify the spells effects permenantly."
     },
     {
-      "type": "text",
-      "title": "Imbuing",
-      "text": "An imbuer allows a druid to infuse a staff with given petal dust, allowing access to the spell the petal dust is associated with.$(br2)To use the imbuer, first place it in-world, and then place both the staff and the desired petal dust upon it. After a bit, the imbuement will complete, and the resultant staff will pop out of the imbuer."
+      "type": "crafting",
+      "recipe": "roots:staff",
+      "title": "Spell Staff",
+      "text": "All spells require a druid to have various herbs in their inventory in order to cast them. These herbs can be provided to the staff through a $(l:apparatus/pouch)Petal Pouch.$()"
     },
-    {
-      "type": "text",
-      "title": "Staff",
-      "text": "A staff may be imbued with up to four spells at a time, which can be cycled freely by sneak-right-clicking the staff. Each staff has only four slots, which are always cycled through in the same order, from 1 to 4, with the current selected slot indicated on the staff's tooltip."
-    },
-	{
-		"type": "text",
-		"text": "To imbue a new spell onto a staff that already has any number of spells on it, you must cycle to the desired slot of the staff before placing it onto the imbuer. If the current slot already contains a spell, that slot will be overridden by the new one."
-	},
     {
       "type": "text",
       "title": "Casting",
-      "text": "Casting spells is quite simple. Hold the staff in either hand, right click, and the spell will cast!$(br2)Spells take form in different ways. Some may be brief, insant effects that incur a cooldown before they can be cast again(right-click), and others are only particularly useful if their effect is consistently channeled(hold right-click)."
-    },
-	{
-		"type": "text",
-		"text": "All spells, however, require reagents in the caster's inventory to be cast. These reagents, which take the form of crushed herbs grown by the druid, must be placed into special pouches before they can be used.$(br2)Each pouch can only hold one kind of herbal reagent, so some spells necessitate carrying around multiple pouches."
-	},
-	{
-		"type": "text",
-		"text": "To fill a powder pouch, place the pouch, a pestle, and the corresponding herb in any sized crafting grid. The pestle is not consumed in the craft, and the herb(s) will be added to the pouch.$(br2)Each pouch can hold more herbs than a simple stack in one's inventory would be able to."
-	},
-    {
-      "type":"crafting",
-      "recipe": "roots:pouch",
-      "title": "Pouch"
+      "text": "Casting spells is quite simple. Hold the staff in either hand, right click, and the spell will cast!$(br2)Spells take form in different ways. Some may be brief, insant effects that incur a cooldown before they can be cast again(right-click), and others are only particularly useful if their effect is consistently channeled (hold right-click)."
     }
   ]
 }
