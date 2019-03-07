@@ -9,6 +9,7 @@ import epicsquid.roots.recipe.recipes.RunicCarvingRecipes;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.rune.RuneRegistry;
 import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.util.OfferingUtil;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -24,6 +25,7 @@ public class CommonProxy {
   public void init(FMLInitializationEvent event) {
     HerbRegistry.init();
     RitualRegistry.init();
+    ModuleRegistry.init();
     SpellRegistry.init();
     OfferingUtil.init();
     EffectManager.init();
