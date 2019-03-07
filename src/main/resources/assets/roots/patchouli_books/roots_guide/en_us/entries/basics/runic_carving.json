@@ -6,7 +6,7 @@
     "pages": [
       {
         "type": "text",
-        "text": "Any respectable druid can carve enchanted runes, allowing natural (or otherworldly) energies to flow through the ancient symbols. However, a sword is far to long an inelegant for carving. Instead, druids use $(l:apparatus/knife)Knives$() for their various runes, carving into stone and wood alike."  
+        "text": "Any respectable druid can carve enchanted runes, allowing natural (or otherworldly) energies to flow through the ancient symbols. However, a sword is far to long an inelegant for carving. Instead, druids use $(l:apparatus/knives)Knives$() for their various runes, carving into stone and wood alike."  
       },
       {
         "type": "text",
