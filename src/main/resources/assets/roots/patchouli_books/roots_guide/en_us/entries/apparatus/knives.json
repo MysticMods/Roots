@@ -1,0 +1,26 @@
+{
+    "name": "Druidic Carving",
+    "icon": "roots:wood_knife",
+    "category": "apparatus",
+    "priority": true,
+    "pages": [
+      {
+        "type": "text",
+        "text": "Knives are a simple and lightweight tool, suitable as both a dagger and a tool for cutting wood. Logs broken with a knife will drop $(l:resources/bark)Bark$(), which is necessary for many druidic rituals."  
+      },
+      {
+        "type": "crafting",
+        "recipe": "roots:wood_knife",
+        "recipe2": "roots:stone_knife"
+      },
+      {
+        "type": "crafting",
+        "recipe": "roots:iron_knife",
+        "recipe2": "roots:gold_knife"
+      },
+      {
+        "type": "crafting",
+        "recipe": "roots:diamond_knife"
+      }
+    ]
+  }

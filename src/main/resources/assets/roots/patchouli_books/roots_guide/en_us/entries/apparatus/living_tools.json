@@ -1,7 +1,7 @@
 {
   "name": "Living Tools",
   "icon": "roots:living_pickaxe",
-  "category": "basics",
+  "category": "apparatus",
   "advancement": "roots:pyre",
   "secret": true,
   "pages": [

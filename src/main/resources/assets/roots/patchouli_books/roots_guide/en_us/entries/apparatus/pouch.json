@@ -1,0 +1,23 @@
+{
+    "name": "Petal Pouch",
+    "icon": "roots:pouch",
+    "category": "apparatus",
+    "priority": true,
+    "advancement": "roots:root",
+    "secret": true,
+    "pages": [
+      {
+        "type": "text",
+        "text": "All spells, however, require reagents in the caster's inventory to be cast. These reagents, which take the form of crushed herbs grown by the druid, must be placed into special pouches before they can be used.$(br2)Each pouch can only hold one kind of herbal reagent, so some spells necessitate carrying around multiple pouches."
+      },
+      {
+        "type": "text",
+        "text": "To fill a powder pouch, place the pouch, a pestle, and the corresponding herb in any sized crafting grid. The pestle is not consumed in the craft, and the herb(s) will be added to the pouch.$(br2)Each pouch can hold more herbs than a simple stack in one's inventory would be able to."
+      },
+      {
+        "type":"crafting",
+        "recipe": "roots:pouch",
+        "title": "Pouch"
+      }
+    ]
+  }

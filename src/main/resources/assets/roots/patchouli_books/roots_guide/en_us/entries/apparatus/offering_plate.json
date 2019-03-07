@@ -1,7 +1,7 @@
 {
   "name": "Offering Plate",
   "icon": "roots:offertory_plate",
-  "category": "basics",
+  "category": "apparatus",
   "advancement": "roots:runestone",
   "secret": true,
   "pages": [

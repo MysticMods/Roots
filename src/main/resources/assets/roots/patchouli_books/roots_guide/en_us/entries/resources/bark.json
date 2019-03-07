@@ -1,0 +1,47 @@
+{
+    "name": "Tree Bark",
+    "icon": "roots:bark_oak",
+    "category": "resources",
+    "pages": [
+      {
+        "type": "text",
+        "text": "A whole log contains far more energy than is needed for druidic rituals. The bark of a tree will be sufficient for most purposes, and is abudant in supply.$(br2)Breaking a log with a $(l:apparatus/knife)Knife$() will drop bark instead of the log."  
+      },
+      {
+        "type": "spotlight",
+        "item": "roots:bark_oak",
+        "title": "Oak Bark",
+        "text": "Dropped when breaking an Oak Log with a $(l:apparatus/knife)Knife.$()"
+      },
+      {
+        "type": "spotlight",
+        "item": "roots:bark_birch",
+        "title": "Birch Bark",
+        "text": "Dropped when breaking an Birch Log with a $(l:apparatus/knife)Knife.$()"
+      },
+      {
+        "type": "spotlight",
+        "item": "roots:bark_spruce",
+        "title": "Spruce Bark",
+        "text": "Dropped when breaking an Spruce Log with a $(l:apparatus/knife)Knife.$()"
+      },
+      {
+        "type": "spotlight",
+        "item": "roots:bark_jungle",
+        "title": "Jungle Bark",
+        "text": "Dropped when breaking an Jungle Log with a $(l:apparatus/knife)Knife.$()"
+      },
+      {
+        "type": "spotlight",
+        "item": "roots:bark_acacia",
+        "title": "Acacia Bark",
+        "text": "Dropped when breaking an Acacia Log with a $(l:apparatus/knife)Knife.$()"
+      },
+      {
+        "type": "spotlight",
+        "item": "roots:bark_dark_oak",
+        "title": "Dark Oak Bark",
+        "text": "Dropped when breaking an Dark Oak Log with a $(l:apparatus/knife)Knife.$()"
+      }
+    ]
+  }

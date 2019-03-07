@@ -1,10 +1,9 @@
 {
   "name": "Runic Shears",
   "icon": "roots:runic_shears",
-  "category": "basics",
+  "category": "apparatus",
   "priority": true,
   "advancement": "roots:pereskia",
-  "secret": true,
   "pages": [
     {
       "type": "text",

@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Dewgonia grows in stalks ending in flowers, which look similar to barely-contained water and yet are less delicate than they appear. Can only be grown on Aqueous Soil.$(br2)(!)"
+      "text": "Dewgonia grows in stalks ending in flowers, which look similar to barely-contained water and yet are less delicate than they appear. Can only be grown on $(l:herbs/runic_soil)Aqueous Soil.$()"
     },
     {
       "type": "ritual_crafting_template",
