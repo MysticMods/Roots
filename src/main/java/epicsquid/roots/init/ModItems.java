@@ -52,22 +52,22 @@ public class ModItems {
    * Register all items
    */
   public static void registerItems(@Nonnull RegisterContentEvent event) {
-    event.addItem(moonglow_seed = new ItemSeedBase("moonglow_seed", ModBlocks.moonglow, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(moonglow_seed = (ItemSeedBase) new ItemSeedBase("moonglow_seed", ModBlocks.moonglow, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(moonglow_leaf = new ItemBase("moonglow_leaf").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(aubergine_seed = new ItemSeedBase("aubergine_seed", ModBlocks.aubergine, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(aubergine_seed = (ItemSeedBase) new ItemSeedBase("aubergine_seed", ModBlocks.aubergine, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(aubergine = new ItemBase("aubergine").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(pereskia_bulb = new ItemSeedBase("pereskia_bulb", ModBlocks.pereskia, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(pereskia_bulb = (ItemSeedBase) new ItemSeedBase("pereskia_bulb", ModBlocks.pereskia, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(pereskia = new ItemBase("pereskia").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(terra_moss = new ItemBase("terra_moss").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(spirit_herb_seed = new ItemSeedBase("spirit_herb_seed", ModBlocks.spirit_herb, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(spirit_herb_seed = (ItemSeedBase) new ItemSeedBase("spirit_herb_seed", ModBlocks.spirit_herb, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(spirit_herb = new ItemBase("spirit_herb").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(wildroot = new ItemSeedBase("wildroot", ModBlocks.wildroot, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(wildroot = (ItemSeedBase) new ItemSeedBase("wildroot", ModBlocks.wildroot, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(wildewheet = new ItemBase("wildewheet").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(wildewheet_seed = new ItemSeedBase("wildewheet_seed", ModBlocks.wildewheet, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(cloud_berry = new ItemSeedBase("cloud_berry", ModBlocks.cloud_berry, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(infernal_bulb = new ItemSeedBase("infernal_bulb", ModBlocks.infernal_bulb, Blocks.MAGMA).setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(dewgonia = new ItemSeedBase("dewgonia", ModBlocks.dewgonia, Blocks.SAND).setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(stalicripe = new ItemSeedBase("stalicripe", ModBlocks.stalicripe, Blocks.STONE).setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(wildewheet_seed = (ItemSeedBase) new ItemSeedBase("wildewheet_seed", ModBlocks.wildewheet, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(cloud_berry = (ItemSeedBase) new ItemSeedBase("cloud_berry", ModBlocks.cloud_berry, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(infernal_bulb = (ItemSeedBase) new ItemSeedBase("infernal_bulb", ModBlocks.infernal_bulb, Blocks.MAGMA).setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(dewgonia = (ItemSeedBase) new ItemSeedBase("dewgonia", ModBlocks.dewgonia, Blocks.SAND).setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(stalicripe = (ItemSeedBase) new ItemSeedBase("stalicripe", ModBlocks.stalicripe, Blocks.STONE).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(terra_spores = new ItemTerraSpore("terra_spores").setModelCustom(true).setCreativeTab(Roots.tab));
 
     // Barks and Knifes
