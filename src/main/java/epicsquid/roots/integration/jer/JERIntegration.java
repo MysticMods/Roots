@@ -1,5 +1,6 @@
 package epicsquid.roots.integration.jer;
 
+import epicsquid.mysticallib.item.ItemSeedBase;
 import epicsquid.roots.init.ModItems;
 import jeresources.api.IJERAPI;
 import jeresources.api.IPlantRegistry;
@@ -16,30 +17,30 @@ public class JERIntegration {
     // Plant Drops
     IPlantRegistry registry = JERApi.getPlantRegistry();
 
-    registry.register(ModItems.moonglow_seed,
+    registry.register((ItemSeedBase) ModItems.moonglow_seed,
         new PlantDrop(new ItemStack(ModItems.moonglow_leaf), 1, 1),
         new PlantDrop(new ItemStack(ModItems.moonglow_seed), 1, 4));
-    registry.register(ModItems.wildroot,
+    registry.register((ItemSeedBase) ModItems.wildroot,
         new PlantDrop(new ItemStack(ModItems.wildroot), 1, 4));
-    registry.register(ModItems.pereskia_bulb,
+    registry.register((ItemSeedBase) ModItems.pereskia_bulb,
         new PlantDrop(new ItemStack(ModItems.pereskia), 1, 1),
         new PlantDrop(new ItemStack(ModItems.pereskia_bulb), 1, 4));
-    registry.register(ModItems.wildewheet_seed,
+    registry.register((ItemSeedBase) ModItems.wildewheet_seed,
         new PlantDrop(new ItemStack(ModItems.wildewheet), 1, 1),
         new PlantDrop(new ItemStack(ModItems.wildewheet_seed), 1, 4));
-    registry.register(ModItems.spirit_herb_seed,
+    registry.register((ItemSeedBase) ModItems.spirit_herb_seed,
         new PlantDrop(new ItemStack(ModItems.spirit_herb), 1, 1),
         new PlantDrop(new ItemStack(ModItems.spirit_herb_seed), 1, 4));
-    registry.register(ModItems.aubergine_seed,
+    registry.register((ItemSeedBase) ModItems.aubergine_seed,
         new PlantDrop(new ItemStack(ModItems.aubergine), 1, 1),
         new PlantDrop(new ItemStack(ModItems.aubergine_seed), 1, 4));
-    registry.register(ModItems.infernal_bulb,
+    registry.register((ItemSeedBase) ModItems.infernal_bulb,
         new PlantDrop(new ItemStack(ModItems.infernal_bulb), 1, 4));
-    registry.register(ModItems.dewgonia,
+    registry.register((ItemSeedBase) ModItems.dewgonia,
         new PlantDrop(new ItemStack(ModItems.dewgonia), 1, 4));
-    registry.register(ModItems.stalicripe,
+    registry.register((ItemSeedBase) ModItems.stalicripe,
         new PlantDrop(new ItemStack(ModItems.stalicripe), 1, 4));
-    registry.register(ModItems.cloud_berry,
+    registry.register((ItemSeedBase) ModItems.cloud_berry,
         new PlantDrop(new ItemStack(ModItems.cloud_berry), 1, 4));
   }
 }
