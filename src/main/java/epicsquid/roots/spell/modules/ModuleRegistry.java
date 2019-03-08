@@ -24,6 +24,15 @@ public class ModuleRegistry {
         return moduleRegistry.getOrDefault(string, null);
     }
 
+    public static SpellModule getModule(ItemStack stack) {
+        for(Map.Entry<String, SpellModule> entry : moduleRegistry.entrySet()){
+            if(entry.getValue().getIngredient().isItemEqual(stack)){
+                return entry.getValue();
+            }
+        }
+        return null;
+    }
+
     public static boolean isModule(ItemStack heldItem) {
         for(Map.Entry<String, SpellModule> entry : moduleRegistry.entrySet()){
             if(entry.getValue().getIngredient().isItemEqual(heldItem)){

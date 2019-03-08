@@ -140,4 +140,17 @@ public class SpellHolderCapability implements ISpellHolderCapability {
         this.spells.put(this.selectedSlot, spell);
         this.spellModules.remove(this.selectedSlot);
     }
+
+    @Override
+    public void addModule(SpellModule module) {
+        if(this.spellModules.getOrDefault(this.selectedSlot, null) == null){
+            List<SpellModule> modules = new ArrayList<>();
+            modules.add(module);
+            this.spellModules.put(this.selectedSlot, modules);
+        }
+        else{
+            List<SpellModule> modules = this.spellModules.get(this.selectedSlot);
+            modules.add(module);
+        }
+    }
 }
