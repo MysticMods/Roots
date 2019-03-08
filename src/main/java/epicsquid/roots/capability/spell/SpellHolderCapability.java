@@ -16,6 +16,8 @@ public class SpellHolderCapability implements ISpellHolderCapability {
     private Map<Integer, SpellBase> spells = new HashMap<>();
     private Map<Integer, List<SpellModule>> spellModules = new HashMap<>();
     private int selectedSlot = 0;
+    private int cooldown = 0;
+    private int lastCooldown = 0;
 
     @Override
     public NBTTagCompound getData() {
@@ -32,6 +34,8 @@ public class SpellHolderCapability implements ISpellHolderCapability {
         }
 
         compound.setInteger("selectedSlot", this.selectedSlot);
+        compound.setInteger("cooldown", this.cooldown);
+        compound.setInteger("lastCooldown", this.lastCooldown);
         return compound;
     }
 
@@ -56,6 +60,8 @@ public class SpellHolderCapability implements ISpellHolderCapability {
         }
 
         this.selectedSlot = tag.getInteger("selectedSlot");
+        this.cooldown = tag.getInteger("cooldown");
+        this.lastCooldown = tag.getInteger("lastCooldown");
     }
 
     @Override
@@ -71,5 +77,67 @@ public class SpellHolderCapability implements ISpellHolderCapability {
     @Override
     public void clean() {
 
+    }
+
+    @Override
+    public boolean hasSpell() {
+        if(!spells.isEmpty()){
+            for(Map.Entry<Integer, SpellBase> entry : this.spells.entrySet()){
+                if(entry != null){
+                    if(entry.getValue() != null){
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean hasSpellInSlot() {
+        return spells.getOrDefault(this.selectedSlot, null) != null;
+
+    }
+
+    @Override
+    public int getCooldown() {
+        return cooldown;
+    }
+
+    @Override
+    public void setCooldown(int cooldown) {
+        this.cooldown = cooldown;
+    }
+
+    @Override
+    public int getLastCooldown() {
+        return lastCooldown;
+    }
+
+    @Override
+    public void setLastCooldown(int lastCooldown) {
+        this.lastCooldown = lastCooldown;
+    }
+
+    @Override
+    public SpellBase getSelectedSpell() {
+        return spells.getOrDefault(this.selectedSlot, null);
+    }
+
+    @Override
+    public int getSelectedSlot() {
+        return this.selectedSlot;
+    }
+
+    @Override
+    public void setSelectedSlot(int slot) {
+        this.selectedSlot = slot;
+    }
+
+    @Override
+    public void setSpellToSlot(SpellBase spell) {
+        this.spells.put(this.selectedSlot, spell);
+        this.spellModules.remove(this.selectedSlot);
     }
 }
