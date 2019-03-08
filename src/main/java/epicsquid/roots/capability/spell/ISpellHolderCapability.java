@@ -2,6 +2,7 @@ package epicsquid.roots.capability.spell;
 
 import epicsquid.roots.capability.ICapability;
 import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.spell.modules.SpellModule;
 
 public interface ISpellHolderCapability extends ICapability {
 
@@ -20,5 +21,7 @@ public interface ISpellHolderCapability extends ICapability {
     void setSelectedSlot(int slot);
 
     void setSpellToSlot(SpellBase spell);
+
+    void addModule(SpellModule module);
 
 }

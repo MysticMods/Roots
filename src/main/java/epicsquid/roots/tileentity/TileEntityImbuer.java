@@ -6,6 +6,8 @@ import epicsquid.mysticallib.network.MessageTEUpdate;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.capability.spell.ISpellHolderCapability;
+import epicsquid.roots.capability.spell.SpellHolderCapabilityProvider;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.network.fx.MessageImbueCompleteFX;
@@ -13,6 +15,7 @@ import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.modules.ModuleRegistry;
+import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -137,17 +140,18 @@ public class TileEntityImbuer extends TileBase implements ITickable {
       progress++;
       angle += 2.0f;
       ItemStack spellDust = inventory.getStackInSlot(0);
-      if (spellDust.hasTagCompound()) {
-        SpellBase spell = SpellRegistry.spellRegistry.get(spellDust.getTagCompound().getString("spell"));
+      ISpellHolderCapability capability = spellDust.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+      if(capability.getSelectedSpell() != null){
+        SpellBase spell = capability.getSelectedSpell();
         if (world.isRemote) {
           if (Util.rand.nextInt(2) == 0) {
             ParticleUtil.spawnParticleLineGlow(world, getPos().getX() + 0.5f, getPos().getY() + 0.125f, getPos().getZ() + 0.5f,
-                getPos().getX() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), getPos().getY() + 1.0f,
-                getPos().getZ() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), spell.getRed1(), spell.getGreen1(), spell.getBlue1(), 0.25f, 4.0f, 40);
+                    getPos().getX() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), getPos().getY() + 1.0f,
+                    getPos().getZ() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), spell.getRed1(), spell.getGreen1(), spell.getBlue1(), 0.25f, 4.0f, 40);
           } else {
             ParticleUtil.spawnParticleLineGlow(world, getPos().getX() + 0.5f, getPos().getY() + 0.125f, getPos().getZ() + 0.5f,
-                getPos().getX() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), getPos().getY() + 1.0f,
-                getPos().getZ() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), spell.getRed2(), spell.getGreen2(), spell.getBlue2(), 0.25f, 4.0f, 40);
+                    getPos().getX() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), getPos().getY() + 1.0f,
+                    getPos().getZ() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), spell.getRed2(), spell.getGreen2(), spell.getBlue2(), 0.25f, 4.0f, 40);
           }
         }
       }
@@ -165,10 +169,21 @@ public class TileEntityImbuer extends TileBase implements ITickable {
                 markDirty();
                 PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
                 PacketHandler.INSTANCE.sendToAll(
-                        new MessageImbueCompleteFX(spellDust.getTagCompound().getString("spell"), getPos().getX() + 0.5, getPos().getY() + 0.5,
+                        new MessageImbueCompleteFX(capability.getSelectedSpell().getName(), getPos().getX() + 0.5, getPos().getY() + 0.5,
                                 getPos().getZ() + 0.5));
               }
             }
+          }
+          else{
+            ItemStack stack = inventory.getStackInSlot(1);
+            SpellModule module = ModuleRegistry.getModule(stack);
+            capability.addModule(module);
+            inventory.extractItem(1, 1, false);
+            markDirty();
+            PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+            PacketHandler.INSTANCE.sendToAll(
+                    new MessageImbueCompleteFX(capability.getSelectedSpell().getName(), getPos().getX() + 0.5, getPos().getY() + 0.5,
+                            getPos().getZ() + 0.5));
           }
         }
       }
