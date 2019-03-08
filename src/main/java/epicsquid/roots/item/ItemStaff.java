@@ -6,6 +6,8 @@ import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.EventManager;
 import epicsquid.roots.Roots;
+import epicsquid.roots.capability.spell.ISpellHolderCapability;
+import epicsquid.roots.capability.spell.SpellHolderCapabilityProvider;
 import epicsquid.roots.event.SpellEvent;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
@@ -39,45 +41,44 @@ public class ItemStaff extends ItemBase {
 
   @Override
   public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-    if (oldStack.hasTagCompound() && newStack.hasTagCompound()) {
-      return slotChanged || oldStack.getTagCompound().getInteger("selected") != newStack.getTagCompound().getInteger("selected");
+    ISpellHolderCapability oldCapability = oldStack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    ISpellHolderCapability newCapability = newStack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+
+    if(oldCapability != null && newCapability != null){
+      return slotChanged || oldCapability.getSelectedSlot() != newCapability.getSelectedSlot();
     }
+
     return slotChanged;
   }
 
   @Override
   public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
-    ;
     ItemStack stack = player.getHeldItem(hand);
+    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
     if (player.isSneaking()) {
-      if (!stack.hasTagCompound()) {
-        addTagCompound(stack);
-      }
-      stack.getTagCompound().setInteger("selected", stack.getTagCompound().getInteger("selected") + 1);
-      if (stack.getTagCompound().getInteger("selected") > 3) {
-        stack.getTagCompound().setInteger("selected", 0);
+      capability.setSelectedSlot(capability.getSelectedSlot() + 1);
+      if (capability.getSelectedSlot() > 3) {
+        capability.setSelectedSlot(0);
       }
       return new ActionResult<>(EnumActionResult.PASS, player.getHeldItem(hand));
     } else {
-      if (stack.hasTagCompound()) {
-        if (!stack.getTagCompound().hasKey("cooldown")) {
-          SpellBase spell = SpellRegistry.spellRegistry.get(stack.getTagCompound().getString("spell" + stack.getTagCompound().getInteger("selected")));
-          if (spell != null) {
-            SpellEvent event = new SpellEvent(player, spell);
-            MinecraftForge.EVENT_BUS.post(event);
-            spell = event.getSpell();
-            if (spell.getCastType() == SpellBase.EnumCastType.INSTANTANEOUS) {
-              if (spell.costsMet(player)) {
-                spell.cast(player);
-                spell.enactCosts(player);
-                stack.getTagCompound().setInteger("cooldown", event.getCooldown());
-                stack.getTagCompound().setInteger("lastCooldown", event.getCooldown());
-                return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
-              }
-            } else if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
-              player.setActiveHand(hand);
-              return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+      if (capability.getCooldown() <= 0) {
+        SpellBase spell = capability.getSelectedSpell();
+        if (spell != null) {
+          SpellEvent event = new SpellEvent(player, spell);
+          MinecraftForge.EVENT_BUS.post(event);
+          spell = event.getSpell();
+          if (spell.getCastType() == SpellBase.EnumCastType.INSTANTANEOUS) {
+            if (spell.costsMet(player)) {
+              spell.cast(player);
+              spell.enactCosts(player);
+              capability.setCooldown(event.getCooldown());
+              capability.setLastCooldown(event.getCooldown());
+              return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
             }
+          } else if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
+            player.setActiveHand(hand);
+            return new ActionResult<>(EnumActionResult.SUCCESS, stack);
           }
         }
       }
@@ -87,9 +88,10 @@ public class ItemStaff extends ItemBase {
 
   @Override
   public void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
-    if (stack.hasTagCompound() && player instanceof EntityPlayer) {
-      if (!stack.getTagCompound().hasKey("cooldown")) {
-        SpellBase spell = SpellRegistry.spellRegistry.get(stack.getTagCompound().getString("spell" + stack.getTagCompound().getInteger("selected")));
+    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    if (player instanceof EntityPlayer) {
+      if (capability.getCooldown() <= 0) {
+        SpellBase spell = capability.getSelectedSpell();
         if (spell != null) {
           if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
             if (spell.costsMet((EntityPlayer) player)) {
@@ -104,70 +106,54 @@ public class ItemStaff extends ItemBase {
 
   @Override
   public void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase entity, int timeLeft) {
-    if (stack.hasTagCompound()) {
-      SpellBase spell = SpellRegistry.spellRegistry.get(stack.getTagCompound().getString("spell" + stack.getTagCompound().getInteger("selected")));
-      if (spell != null) {
-        SpellEvent event = new SpellEvent((EntityPlayer) entity, spell);
-        MinecraftForge.EVENT_BUS.post(event);
-        if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
-          stack.getTagCompound().setInteger("cooldown", event.getCooldown());
-          stack.getTagCompound().setInteger("lastCooldown", event.getCooldown());
-        }
+    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    SpellBase spell = capability.getSelectedSpell();
+    if (spell != null) {
+      SpellEvent event = new SpellEvent((EntityPlayer) entity, spell);
+      MinecraftForge.EVENT_BUS.post(event);
+      if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
+        capability.setCooldown(event.getCooldown());
+        capability.setLastCooldown(event.getCooldown());
       }
     }
   }
 
   @Override
   public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-    if (stack.hasTagCompound()) {
-      if (stack.getTagCompound().hasKey("cooldown")) {
-        stack.getTagCompound().setInteger("cooldown", stack.getTagCompound().getInteger("cooldown") - 1);
-        if (stack.getTagCompound().getInteger("cooldown") <= 0) {
-          stack.getTagCompound().removeTag("cooldown");
-          stack.getTagCompound().removeTag("lastCooldown");
-        }
+    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    if(capability.getCooldown() > 0){
+      capability.setCooldown(capability.getCooldown() - 1);
+      if(capability.getCooldown() <= 0){
+        capability.setCooldown(0);
+        capability.setLastCooldown(0);
       }
     }
   }
 
   public static void createData(ItemStack stack, String spellName) {
-    if (!stack.hasTagCompound()) {
-      addTagCompound(stack);
-    }
-    stack.getTagCompound().setString("spell" + stack.getTagCompound().getInteger("selected"), spellName);
+    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    capability.setSpellToSlot(SpellRegistry.getSpell(spellName));
+    int i = 0;
   }
 
   @SideOnly(Side.CLIENT)
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
-    if (!stack.hasTagCompound()) {
-      addTagCompound(stack);
-    } else {
-      tooltip.add(I18n.format("roots.tooltip.staff.selected") + (stack.getTagCompound().getInteger("selected") + 1));
-      SpellBase spell = SpellRegistry.spellRegistry.get(stack.getTagCompound().getString("spell" + stack.getTagCompound().getInteger("selected")));
-      if (spell != null) {
-        tooltip.add("");
-        spell.addToolTip(tooltip);
-      }
+    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    tooltip.add(I18n.format("roots.tooltip.staff.selected") + (capability.getSelectedSlot() + 1));
+    SpellBase spell = capability.getSelectedSpell();
+    if (spell != null) {
+      tooltip.add("");
+      spell.addToolTip(tooltip);
     }
-  }
-
-  private static void addTagCompound(ItemStack stack) {
-    stack.setTagCompound(new NBTTagCompound());
-    stack.getTagCompound().setInteger("selected", 0);
-    stack.getTagCompound().setString("spell0", "null");
-    stack.getTagCompound().setString("spell1", "null");
-    stack.getTagCompound().setString("spell2", "null");
-    stack.getTagCompound().setString("spell3", "null");
   }
 
   @Override
   public boolean showDurabilityBar(ItemStack stack) {
-    if (stack.hasTagCompound()) {
-      SpellBase spell = SpellRegistry.spellRegistry.get(stack.getTagCompound().getString("spell" + stack.getTagCompound().getInteger("selected")));
-      if (stack.getTagCompound().hasKey("cooldown") && spell != null) {
-        return true;
-      }
+    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    SpellBase spell = capability.getSelectedSpell();
+    if (capability.getCooldown() > 0 && spell != null) {
+      return true;
     }
     return false;
   }
@@ -175,26 +161,21 @@ public class ItemStaff extends ItemBase {
   @SideOnly(Side.CLIENT)
   @Override
   public int getRGBDurabilityForDisplay(ItemStack stack) {
-    if (stack.hasTagCompound()) {
-      SpellBase spell = SpellRegistry.spellRegistry.get(stack.getTagCompound().getString("spell" + stack.getTagCompound().getInteger("selected")));
-      if (spell != null) {
-        double factor = 0.5f * (Math.sin(6.0f * Math.toRadians(EventManager.ticks + Minecraft.getMinecraft().getRenderPartialTicks())) + 1.0f);
-        return Util
-            .intColor((int) (255 * (spell.getRed1() * factor + spell.getRed2() * (1.0 - factor))), (int) (255 * (spell.getGreen1() * factor + spell.getGreen2() * (1.0 - factor))),
-                (int) (255 * (spell.getBlue1() * factor + spell.getBlue2() * (1.0 - factor))));
-      }
+    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    SpellBase spell = capability.getSelectedSpell();
+    if (spell != null) {
+      double factor = 0.5f * (Math.sin(6.0f * Math.toRadians(EventManager.ticks + Minecraft.getMinecraft().getRenderPartialTicks())) + 1.0f);
+      return Util
+              .intColor((int) (255 * (spell.getRed1() * factor + spell.getRed2() * (1.0 - factor))), (int) (255 * (spell.getGreen1() * factor + spell.getGreen2() * (1.0 - factor))),
+                      (int) (255 * (spell.getBlue1() * factor + spell.getBlue2() * (1.0 - factor))));
     }
     return Util.intColor(255, 255, 255);
   }
 
   @Override
   public double getDurabilityForDisplay(ItemStack stack) {
-    if (stack.hasTagCompound()) {
-      if (stack.getTagCompound().hasKey("cooldown")) {
-        return (double) stack.getTagCompound().getInteger("cooldown") / (double) stack.getTagCompound().getInteger("lastCooldown");
-      }
-    }
-    return 0;
+    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    return (double) capability.getCooldown() / capability.getLastCooldown();
   }
 
   @Override
@@ -204,14 +185,13 @@ public class ItemStaff extends ItemBase {
 
   @Override
   public EnumAction getItemUseAction(ItemStack stack) {
-    if (stack.hasTagCompound()) {
-      SpellBase spell = SpellRegistry.spellRegistry.get(stack.getTagCompound().getString("spell" + stack.getTagCompound().getInteger("selected")));
-      if (spell != null) {
-        if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
-          return EnumAction.BOW;
-        } else {
-          return EnumAction.NONE;
-        }
+    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    SpellBase spell = capability.getSelectedSpell();
+    if (spell != null) {
+      if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
+        return EnumAction.BOW;
+      } else {
+        return EnumAction.NONE;
       }
     }
     return EnumAction.NONE;
@@ -230,8 +210,10 @@ public class ItemStaff extends ItemBase {
       if (stack.getDisplayName().compareToIgnoreCase("Cutie Moon Rod") == 0) {
         baseName = new ResourceLocation(Roots.MODID + ":moon_rod");
       }
-      if (stack.hasTagCompound()) {
-        String s = stack.getTagCompound().getString("spell" + stack.getTagCompound().getInteger("selected"));
+
+      ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+      if(capability.hasSpellInSlot()){
+        String s = capability.getSelectedSpell().getName();
         if (SpellRegistry.spellRegistry.containsKey(s)) {
           return new ModelResourceLocation(baseName.toString() + "_1");
         } else {
@@ -246,9 +228,10 @@ public class ItemStaff extends ItemBase {
 
     @Override
     public int colorMultiplier(ItemStack stack, int tintIndex) {
-      if (stack.hasTagCompound() && stack.getItem() instanceof ItemStaff) {
+      ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+      if (capability.hasSpellInSlot() && stack.getItem() instanceof ItemStaff) {
         if (stack.getDisplayName().compareToIgnoreCase("Shiny Rod") == 0 || stack.getDisplayName().compareToIgnoreCase("Cutie Moon Rod") == 0) {
-          SpellBase spell = SpellRegistry.spellRegistry.get(stack.getTagCompound().getString("spell" + stack.getTagCompound().getInteger("selected")));
+          SpellBase spell = capability.getSelectedSpell();
           if (spell != null) {
             if (tintIndex == 0) {
               int r = (int) (255 * spell.getRed1());
@@ -265,7 +248,7 @@ public class ItemStaff extends ItemBase {
           }
           return Util.intColor(255, 255, 255);
         } else {
-          SpellBase spell = SpellRegistry.spellRegistry.get(stack.getTagCompound().getString("spell" + stack.getTagCompound().getInteger("selected")));
+          SpellBase spell = capability.getSelectedSpell();
           if (tintIndex == 1) {
             int r = (int) (255 * spell.getRed1());
             int g = (int) (255 * spell.getGreen1());
