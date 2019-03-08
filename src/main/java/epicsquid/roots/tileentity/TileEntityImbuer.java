@@ -12,6 +12,7 @@ import epicsquid.roots.network.fx.MessageImbueCompleteFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.spell.modules.ModuleRegistry;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -94,7 +95,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
             return true;
           }
         }
-      } else if (heldItem.getItem() == ModItems.staff) {
+      } else if(heldItem.getItem() == ModItems.staff || ModuleRegistry.isModule(heldItem)){
         if (inventory.getStackInSlot(1).isEmpty()) {
           ItemStack toInsert = heldItem.copy();
           toInsert.setCount(1);
@@ -153,18 +154,20 @@ public class TileEntityImbuer extends TileBase implements ITickable {
       if (progress > 200) {
         progress = 0;
         if (!world.isRemote) {
-          ItemStack staff = inventory.getStackInSlot(1);
-          if (spellDust.hasTagCompound()) {
-            if (SpellRegistry.spellRegistry.containsKey(spellDust.getTagCompound().getString("spell"))) {
-              ItemStaff.createData(staff, spellDust.getTagCompound().getString("spell"));
-              world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, staff));
-              inventory.extractItem(0, 1, false);
-              inventory.extractItem(1, 1, false);
-              markDirty();
-              PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
-              PacketHandler.INSTANCE.sendToAll(
-                  new MessageImbueCompleteFX(spellDust.getTagCompound().getString("spell"), getPos().getX() + 0.5, getPos().getY() + 0.5,
-                      getPos().getZ() + 0.5));
+          if(inventory.getStackInSlot(1).getItem() == ModItems.staff){
+            ItemStack staff = inventory.getStackInSlot(1);
+            if (spellDust.hasTagCompound()) {
+              if (SpellRegistry.spellRegistry.containsKey(spellDust.getTagCompound().getString("spell"))) {
+                ItemStaff.createData(staff, spellDust.getTagCompound().getString("spell"));
+                world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, staff));
+                inventory.extractItem(0, 1, false);
+                inventory.extractItem(1, 1, false);
+                markDirty();
+                PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+                PacketHandler.INSTANCE.sendToAll(
+                        new MessageImbueCompleteFX(spellDust.getTagCompound().getString("spell"), getPos().getX() + 0.5, getPos().getY() + 0.5,
+                                getPos().getZ() + 0.5));
+              }
             }
           }
         }
