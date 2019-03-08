@@ -1,8 +1,12 @@
 package epicsquid.roots.item;
 
 import java.util.List;
+import java.util.Map;
 
 import epicsquid.mysticallib.item.ItemBase;
+import epicsquid.roots.capability.spell.ISpellHolderCapability;
+import epicsquid.roots.capability.spell.SpellHolderCapabilityProvider;
+import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -24,29 +28,25 @@ public class ItemPetalDust extends ItemBase {
   @Override
   public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
     if (tab == this.getCreativeTab()) {
-      for (int i = 0; i < SpellRegistry.spellRegistry.size(); i++) {
+      for(Map.Entry<String, SpellBase> entry : SpellRegistry.spellRegistry.entrySet()){
         ItemStack stack = new ItemStack(this, 1);
-        createData(stack, SpellRegistry.spellRegistry.keySet().toArray(new String[SpellRegistry.spellRegistry.size()])[i]);
+        createData(stack, entry.getValue());
         subItems.add(stack);
       }
     }
   }
 
-  public static ItemStack createData(ItemStack stack, String spellName) {
-    if (!stack.hasTagCompound()) {
-      stack.setTagCompound(new NBTTagCompound());
-    }
-    stack.getTagCompound().setString("spell", spellName);
+  public static ItemStack createData(ItemStack stack, SpellBase spell) {
+    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    capability.setSpellToSlot(spell);
     return stack;
   }
 
   @SideOnly(Side.CLIENT)
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
-    if (!stack.hasTagCompound()) {
-      tooltip.add(I18n.format("roots.tooltip.petaldust.notag"));
-    } else {
-      SpellRegistry.spellRegistry.get(stack.getTagCompound().getString("spell")).addToolTip(tooltip);
-    }
+    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    capability.getSelectedSpell().addToolTip(tooltip);
   }
+
 }
