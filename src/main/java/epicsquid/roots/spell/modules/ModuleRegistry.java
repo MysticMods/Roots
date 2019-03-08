@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class ModuleRegistry {
 
-    public static Map<String, SpellModule> spellRegistry = new HashMap<>();
+    public static Map<String, SpellModule> moduleRegistry = new HashMap<>();
 
     public static SpellModule module_fire;
 
@@ -17,10 +17,19 @@ public class ModuleRegistry {
     }
 
     public static void addModule(SpellModule module){
-        spellRegistry.put(module.getName(), module);
+        moduleRegistry.put(module.getName(), module);
     }
 
     public static SpellModule getModule(String string) {
-        return spellRegistry.getOrDefault(string, null);
+        return moduleRegistry.getOrDefault(string, null);
+    }
+
+    public static boolean isModule(ItemStack heldItem) {
+        for(Map.Entry<String, SpellModule> entry : moduleRegistry.entrySet()){
+            if(entry.getValue().getIngredient().isItemEqual(heldItem)){
+                return true;
+            }
+        }
+        return false;
     }
 }

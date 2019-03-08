@@ -15,4 +15,8 @@ public class SpellModule {
     public String getName() {
         return name;
     }
+
+    public ItemStack getIngredient() {
+        return ingredient;
+    }
 }
