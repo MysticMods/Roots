@@ -1,10 +1,17 @@
 package epicsquid.roots.entity.ritual;
 
 import epicsquid.roots.ritual.RitualRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockFlower;
+import net.minecraft.init.Blocks;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class EntityRitualFlowerGrowth extends EntityRitualBase {
 
@@ -20,21 +27,42 @@ public class EntityRitualFlowerGrowth extends EntityRitualBase {
     public void onUpdate()
     {
         ticksExisted++;
-        float alpha = (float) Math.min(40, (RitualRegistry.ritual_flower_growth.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
         getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
         getDataManager().setDirty(lifetime);
         if (getDataManager().get(lifetime) < 0) {
             setDead();
         }
-        if (ticksExisted % 100 == 0)
+        if (this.ticksExisted % 200 == 0)
         {
-            generateFlower();
+            for (int i = -10; i < 11; i++)
+            {
+                for (int j = -10; j < 11; j++)
+                {
+
+                }
+            }
         }
     }
 
-    private void generateFlower()
+    private void generateFlower(BlockPos pos)
     {
+        Block ground = world.getBlockState(pos.offset(EnumFacing.DOWN)).getBlock();
+        if (world.isAirBlock(pos) && (ground != Blocks.AIR && canPlaceFlower(ground)))
+        {
+            BlockFlower flower = new BlockFlower() {
+                @Nonnull
+                @Override
+                public EnumFlowerColor getBlockType()
+                {
+                    return null;
+                }
+            };
+        }
+    }
 
+    private boolean canPlaceFlower(Block block)
+    {
+        return block == Blocks.GRASS || block == Blocks.DIRT || block == Blocks.MYCELIUM;
     }
 
     @Override
