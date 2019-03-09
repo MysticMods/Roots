@@ -8,6 +8,7 @@ import java.util.Map;
 
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.roots.api.Herb;
+import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.PowderInventoryUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -93,7 +94,7 @@ public abstract class SpellBase {
     return ListUtil.stackListsMatch(ingredients, this.ingredients);
   }
 
-  public abstract void cast(EntityPlayer caster);
+  public abstract void cast(EntityPlayer caster, List<SpellModule> modules);
 
   public float getRed1() {
     return red1;

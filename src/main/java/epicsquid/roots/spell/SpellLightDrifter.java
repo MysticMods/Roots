@@ -5,12 +5,15 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageLightDrifterFX;
 import epicsquid.roots.network.fx.MessageLightDrifterSync;
+import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.Constants;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameType;
+
+import java.util.List;
 
 public class SpellLightDrifter extends SpellBase {
 
@@ -31,7 +34,7 @@ public class SpellLightDrifter extends SpellBase {
   }
 
   @Override
-  public void cast(EntityPlayer player) {
+  public void cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
       player.capabilities.disableDamage = true;
       player.capabilities.allowFlying = true;

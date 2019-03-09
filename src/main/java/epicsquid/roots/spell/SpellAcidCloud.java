@@ -7,6 +7,8 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageAcidCloudFX;
+import epicsquid.roots.spell.modules.ModuleRegistry;
+import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -38,7 +40,7 @@ public class SpellAcidCloud extends SpellBase {
   }
 
   @Override
-  public void cast(EntityPlayer player) {
+  public void cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
       List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class,
           new AxisAlignedBB(player.posX - 4.0, player.posY - 1.0, player.posZ - 4.0, player.posX + 4.0, player.posY + 3.0, player.posZ + 4.0));
@@ -49,6 +51,11 @@ public class SpellAcidCloud extends SpellBase {
           e.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("poison"), 80, 0));
           e.setRevengeTarget(player);
           e.setLastAttackedEntity(player);
+
+          if(modules.contains(ModuleRegistry.module_fire)){
+            e.setFire(5);
+          }
+
         }
       }
       PacketHandler.INSTANCE.sendToAll(new MessageAcidCloudFX(player.posX, player.posY + player.getEyeHeight(), player.posZ));

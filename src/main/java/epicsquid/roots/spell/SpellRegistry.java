@@ -9,6 +9,10 @@ public class SpellRegistry {
   public static SpellBase spell_wild_fire, spell_sanctuary, spell_dandelion_winds, spell_rose_thorns, spell_shatter, spell_petal_shell, spell_time_stop, spell_sky_soarer, spell_life_drain, spell_acid_cloud, spell_growth_infusion, spell_mind_ward, spell_radiance, spell_light_drifter,
       spell_sense_animals;
 
+  public static SpellBase getSpell(String s){
+    return spellRegistry.getOrDefault(s, null);
+  }
+
   public static void init() {
     spellRegistry.put("spell_wild_fire", spell_wild_fire = new SpellWildfire("spell_wild_fire"));
     spellRegistry.put("spell_sanctuary", spell_sanctuary = new SpellSanctuary("spell_sanctuary"));

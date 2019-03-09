@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "R",
+    "R"
+    ],
+  "key": {
+    "R": [
+      {
+        "item": "roots:runestone_slab"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:runestone",
+    "data": 0,
+    "count": 1
+  }
+}

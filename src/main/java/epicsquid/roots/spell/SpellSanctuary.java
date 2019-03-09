@@ -7,6 +7,7 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageSanctuaryBurstFX;
 import epicsquid.roots.network.fx.MessageSanctuaryRingFX;
+import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -34,7 +35,7 @@ public class SpellSanctuary extends SpellBase {
   }
 
   @Override
-  public void cast(EntityPlayer player) {
+  public void cast(EntityPlayer player, List<SpellModule> modules) {
     List<Entity> entities = player.world.getEntitiesWithinAABB(Entity.class,
         new AxisAlignedBB(player.posX - 4.0, player.posY - 4.0, player.posZ - 4.0, player.posX + 4.0, player.posY + 5.0, player.posZ + 4.0));
     if (entities.size() > 0) {

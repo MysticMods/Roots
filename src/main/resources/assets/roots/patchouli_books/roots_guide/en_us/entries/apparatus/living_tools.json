@@ -1,0 +1,33 @@
+{
+  "name": "Living Tools",
+  "icon": "roots:living_pickaxe",
+  "category": "apparatus",
+  "advancement": "roots:pyre",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Living Tools are a druid's solution to making wooden tools less useless by encouraging the organic matter within to reach its maximum potential. Reinforcing the tool with tree bark and wildroot allows it to slowly regrow itself when worn down, and inlaying it with bits of gold seems to make it about as effective as an iron tool in most regards."
+    },
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "living_pickaxe"
+    },
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "living_axe"
+    },
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "living_shovel"
+    },
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "living_hoe"
+    },
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "living_sword"
+    }
+  ]
+}

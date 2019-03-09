@@ -7,6 +7,7 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageRadianceBeamFX;
+import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -39,7 +40,7 @@ public class SpellRadiance extends SpellBase {
   }
 
   @Override
-  public void cast(EntityPlayer player) {
+  public void cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote && player.ticksExisted % 2 == 0) {
       float distance = 32;
       RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().addVector(0, player.getEyeHeight(), 0),

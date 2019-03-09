@@ -188,6 +188,18 @@ public class ModRecipes {
     pyreCraftingRecipes.put(recipeName, pyreCraftingRecipe);
   }
 
+  public static List<RunicCarvingRecipe> getRunicCarvingRecipes() {
+    return runicCarvingRecipes;
+  }
+
+  public static List<RunicShearRecipe> getRunicShearRecipes() {
+    return runicShearRecipes;
+  }
+
+  public static Map<String, PyreCraftingRecipe> getPyreCraftingRecipes() {
+    return pyreCraftingRecipes;
+  }
+
   /**
    * Register all recipes
    */
@@ -290,7 +302,7 @@ public class ModRecipes {
             new ItemStack(Blocks.STONE),
             new ItemStack(Items.IRON_INGOT),
             new ItemStack(ModItems.wildroot),
-            new ItemStack(Items.QUARTZ)));
+            new ItemStack(Items.REDSTONE)));
 
     addCraftingRecipe("moonglow_leaf",
         new PyreCraftingRecipe(new ItemStack(ModItems.moonglow_leaf, 3)).addIngredients(
@@ -305,7 +317,7 @@ public class ModRecipes {
             new ItemStack(ModItems.wildroot),
             new ItemStack(Items.SPECKLED_MELON),
             new ItemStack(Items.REDSTONE),
-            new ItemStack(Items.GLOWSTONE_DUST),
+            new ItemStack(Items.BEETROOT),
             new ItemStack(Items.REEDS)));
 
     addCraftingRecipe("baffle_cap",

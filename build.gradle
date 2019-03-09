@@ -37,6 +37,12 @@ dependencies {
         compile "vazkii.patchouli:Patchouli:${patchouli_version}"
         deobfCompile "info.tehnut.harvest:Harvest:1.12-1.2.7-20"
     }
+
+    // compile against the JEI API but do not include it at runtime
+    deobfProvided "mezz.jei:jei_${minecraft_version}:${jei_version}:api"
+    // at runtime, use the full JEI jar
+    runtime "mezz.jei:jei_${minecraft_version}:${jei_version}"
+    compile "jeresources:JustEnoughResources-${minecraft_version}:${jer_version}"
 }
 
 repositories {
@@ -47,6 +53,20 @@ repositories {
     maven {
         name = "TehNut"
         url = "http://tehnut.info/maven"
+    }
+    maven {
+        // location of the maven that hosts JEI files
+        name = "Progwml6 maven"
+        url = "http://dvs1.progwml6.com/files/maven"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "modmaven.k-4u.nl"
+    }
+    maven {
+        name = "JER"
+        url = "https://dl.bintray.com/way2muchnoise/dev"
     }
 }
 
