@@ -1,5 +1,6 @@
 package epicsquid.roots.ritual;
 
+import epicsquid.roots.entity.ritual.EntityRitualFrost;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
@@ -24,20 +25,7 @@ public class  RitualFrost extends RitualBase {
 
   @Override
   public void doEffect(World world, BlockPos pos) {
-    for (int i = -19; i < 20; i++) {
-      for (int j = -19; j < 20; j++) {
-        BlockPos topBlockPos = world.getTopSolidOrLiquidBlock(pos.add(i, 0, j));
-        if (world.getBlockState(topBlockPos).getBlock() == Blocks.WATER) {
-          world.setBlockState(topBlockPos, Blocks.ICE.getDefaultState());
-        } else {
-          if (!world.getBlockState(topBlockPos).getBlock().isLeaves(world.getBlockState(topBlockPos), world, topBlockPos)
-              && world.getBlockState(topBlockPos.add(0, -1, 0)).getBlock() != ModBlocks.bonfire
-              && world.getBlockState(topBlockPos.add(0, -1, 0)).getBlock() != ModBlocks.mortar) {
-            world.setBlockState(topBlockPos, Blocks.SNOW_LAYER.getDefaultState());
-          }
-        }
-      }
-    }
+    this.spawnEntity(world, pos, EntityRitualFrost.class);
   }
 
 }
