@@ -4,6 +4,8 @@ import epicsquid.roots.capability.ICapability;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.modules.SpellModule;
 
+import java.util.List;
+
 public interface ISpellHolderCapability extends ICapability {
 
     boolean hasSpell();
@@ -24,4 +26,5 @@ public interface ISpellHolderCapability extends ICapability {
 
     void addModule(SpellModule module);
 
+    List<SpellModule> getSelectedModules();
 }

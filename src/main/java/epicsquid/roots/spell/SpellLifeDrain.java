@@ -7,6 +7,7 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageLifeDrainAbsorbFX;
+import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -36,7 +37,7 @@ public class SpellLifeDrain extends SpellBase {
   }
 
   @Override
-  public void cast(EntityPlayer player) {
+  public void cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
       boolean foundTarget = false;
       PacketHandler.INSTANCE.sendToAll(new MessageLifeDrainAbsorbFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ));

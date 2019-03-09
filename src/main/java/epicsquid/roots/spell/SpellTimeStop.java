@@ -5,10 +5,13 @@ import epicsquid.roots.entity.spell.EntityTimeStop;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageTimeStopStartFX;
+import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+
+import java.util.List;
 
 public class SpellTimeStop extends SpellBase {
 
@@ -29,7 +32,7 @@ public class SpellTimeStop extends SpellBase {
   }
 
   @Override
-  public void cast(EntityPlayer player) {
+  public void cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
       EntityTimeStop timeStop = new EntityTimeStop(player.world);
       timeStop.setPlayer(player.getUniqueID());

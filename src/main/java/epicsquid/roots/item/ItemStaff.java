@@ -11,6 +11,7 @@ import epicsquid.roots.capability.spell.SpellHolderCapabilityProvider;
 import epicsquid.roots.event.SpellEvent;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -70,7 +71,7 @@ public class ItemStaff extends ItemBase {
           spell = event.getSpell();
           if (spell.getCastType() == SpellBase.EnumCastType.INSTANTANEOUS) {
             if (spell.costsMet(player)) {
-              spell.cast(player);
+              spell.cast(player, capability.getSelectedModules());
               spell.enactCosts(player);
               capability.setCooldown(event.getCooldown());
               capability.setLastCooldown(event.getCooldown());
@@ -95,7 +96,7 @@ public class ItemStaff extends ItemBase {
         if (spell != null) {
           if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
             if (spell.costsMet((EntityPlayer) player)) {
-              spell.cast((EntityPlayer) player);
+              spell.cast((EntityPlayer) player, capability.getSelectedModules());
               spell.enactTickCosts((EntityPlayer) player);
             }
           }
@@ -130,10 +131,12 @@ public class ItemStaff extends ItemBase {
     }
   }
 
-  public static void createData(ItemStack stack, String spellName) {
+  public static void createData(ItemStack stack, ISpellHolderCapability dustCapability) {
     ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-    capability.setSpellToSlot(SpellRegistry.getSpell(spellName));
-    int i = 0;
+    capability.setSpellToSlot(dustCapability.getSelectedSpell());
+    for(SpellModule module : dustCapability.getSelectedModules()){
+      capability.addModule(module);
+    }
   }
 
   @SideOnly(Side.CLIENT)
