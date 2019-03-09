@@ -355,4 +355,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   public float getTicker() {
     return ticker;
   }
+
+  public int getBurnTime()
+  {
+    return burnTime;
+  }
 }
