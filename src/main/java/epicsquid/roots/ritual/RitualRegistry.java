@@ -50,7 +50,7 @@ public class RitualRegistry {
     addRitual(ritual_warden = new RitualWarden("ritual_warden", 1200));
     addRitual(ritual_natural_aura = new RitualNaturalAura("ritual_natural_aura", 1200));
     addRitual(ritual_purity = new RitualPurity("ritual_purity", 1200));
-    addRitual(ritual_frost = new RitualFrost("ritual_frost", 0));
+    addRitual(ritual_frost = new RitualFrost("ritual_frost", 6400));
     addRitual(ritual_animal_harvest = new RitualAnimalHarvest("ritual_animal_harvest", 0));
     addRitual(ritual_summoning = new RitualSummoning("ritual_summoning", 0));
     addRitual(ritual_wild_growth = new RitualWildGrowth("ritual_wild_growth", 0));
