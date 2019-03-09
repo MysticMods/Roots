@@ -3,18 +3,10 @@
   "ingredients": [
     {
       "type": "forge:ore_dict",
-      "ore": "treeSapling"
+      "ore": "paper"
     },
     {
-      "item": "minecraft:paper"
-    },
-    {
-      "type": "forge:ore_dict",
-      "ore": "stickWood"
-    },
-    {
-      "type": "forge:ore_dict",
-      "ore": "stickWood"
+      "item": "roots:wildroot"
     }
   ],
   "result": {

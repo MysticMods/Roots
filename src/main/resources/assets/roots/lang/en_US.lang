@@ -74,6 +74,8 @@ item.copper_knife.name=Copper Knife
 # Advancements
 advancement.roots.root=The Root of Magic
 advancement.roots.root.desc=Forage amongst broken grass to find wildroot
+advancement.roots.guide=Epi-Tome of Druidry
+advancement.roots.guide.desc=Combine wildroot and paper to obtain an essential guide book
 advancement.roots.terra_moss=Overgrown Nature
 advancement.roots.terra_moss.desc=Scrape the lichenous growth off mossy cobblestone
 advancement.roots.aubergine=That's No Carrot...
