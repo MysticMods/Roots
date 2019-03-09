@@ -3,10 +3,13 @@ package epicsquid.roots.spell;
 import epicsquid.roots.entity.spell.EntityBoost;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+
+import java.util.List;
 
 public class SpellSkySoarer extends SpellBase {
 
@@ -26,7 +29,7 @@ public class SpellSkySoarer extends SpellBase {
   }
 
   @Override
-  public void cast(EntityPlayer player) {
+  public void cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
       EntityBoost boost = new EntityBoost(player.world);
       boost.setPlayer(player.getUniqueID());
