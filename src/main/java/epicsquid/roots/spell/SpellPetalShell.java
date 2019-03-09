@@ -7,6 +7,7 @@ import epicsquid.roots.entity.spell.EntityPetalShell;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
+import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -31,7 +32,7 @@ public class SpellPetalShell extends SpellBase {
   }
 
   @Override
-  public void cast(EntityPlayer player) {
+  public void cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
       List<EntityPetalShell> shells = player.world.getEntitiesWithinAABB(EntityPetalShell.class,
           new AxisAlignedBB(player.posX - 0.5, player.posY, player.posZ - 0.5, player.posX + 0.5, player.posY + 2.0, player.posZ + 0.5));

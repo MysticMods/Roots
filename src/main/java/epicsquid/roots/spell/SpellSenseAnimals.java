@@ -5,6 +5,7 @@ import java.util.List;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -32,7 +33,7 @@ public class SpellSenseAnimals extends SpellBase {
   }
 
   @Override
-  public void cast(EntityPlayer caster) {
+  public void cast(EntityPlayer caster, List<SpellModule> modules) {
     List<EntityAnimal> animals = Util.getEntitiesWithinRadius(caster.getEntityWorld(), EntityAnimal.class, caster.getPosition(), 50, 10, 50);
     for(EntityAnimal animal : animals){
       animal.addPotionEffect( new PotionEffect(MobEffects.GLOWING, 20*20, 0));

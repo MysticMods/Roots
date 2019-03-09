@@ -160,18 +160,16 @@ public class TileEntityImbuer extends TileBase implements ITickable {
         if (!world.isRemote) {
           if(inventory.getStackInSlot(1).getItem() == ModItems.staff){
             ItemStack staff = inventory.getStackInSlot(1);
-            if (spellDust.hasTagCompound()) {
-              if (SpellRegistry.spellRegistry.containsKey(spellDust.getTagCompound().getString("spell"))) {
-                ItemStaff.createData(staff, spellDust.getTagCompound().getString("spell"));
-                world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, staff));
-                inventory.extractItem(0, 1, false);
-                inventory.extractItem(1, 1, false);
-                markDirty();
-                PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
-                PacketHandler.INSTANCE.sendToAll(
-                        new MessageImbueCompleteFX(capability.getSelectedSpell().getName(), getPos().getX() + 0.5, getPos().getY() + 0.5,
-                                getPos().getZ() + 0.5));
-              }
+            if(capability.getSelectedSpell() != null){
+              ItemStaff.createData(staff, capability);
+              world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, staff));
+              inventory.extractItem(0, 1, false);
+              inventory.extractItem(1, 1, false);
+              markDirty();
+              PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+              PacketHandler.INSTANCE.sendToAll(
+                      new MessageImbueCompleteFX(capability.getSelectedSpell().getName(), getPos().getX() + 0.5, getPos().getY() + 0.5,
+                              getPos().getZ() + 0.5));
             }
           }
           else{

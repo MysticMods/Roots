@@ -153,4 +153,9 @@ public class SpellHolderCapability implements ISpellHolderCapability {
             modules.add(module);
         }
     }
+
+    @Override
+    public List<SpellModule> getSelectedModules() {
+        return this.spellModules.getOrDefault(this.selectedSlot, null);
+    }
 }

@@ -3,11 +3,14 @@ package epicsquid.roots.spell;
 import epicsquid.roots.entity.spell.EntityThornTrap;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+
+import java.util.List;
 
 public class SpellRoseThorns extends SpellBase {
 
@@ -27,7 +30,7 @@ public class SpellRoseThorns extends SpellBase {
   }
 
   @Override
-  public void cast(EntityPlayer player) {
+  public void cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
       EntityThornTrap trap = new EntityThornTrap(player.world);
       trap.setPlayer(player.getUniqueID());

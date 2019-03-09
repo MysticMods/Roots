@@ -4,6 +4,7 @@ import java.util.List;
 
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.Constants;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,7 +31,7 @@ public class SpellMindWard extends SpellBase {
   }
 
   @Override
-  public void cast(EntityPlayer player) {
+  public void cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
       boolean foundTarget = false;
       for (int i = 0; i < 4 && !foundTarget; i++) {
