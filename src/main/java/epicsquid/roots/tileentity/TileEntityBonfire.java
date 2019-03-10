@@ -35,6 +35,7 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
+// TODO: 10/03/2019 find the right moment to change the state of the pyre
 public class TileEntityBonfire extends TileBase implements ITickable {
   private float ticker = 0;
   private float pickupDelay = 0;
@@ -43,6 +44,8 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   private ItemStack craftingResult = ItemStack.EMPTY;
   private RitualBase lastRitualUsed = null;
   private List<ItemStack> lastUsedItems = null;
+
+  private boolean isBurning = false;
 
   private Random random = new Random();
 
@@ -110,6 +113,8 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           stack.setCount(1);
           stacks.add(stack);
         }
+
+        setState(true);
 
         RitualBase ritual = RitualRegistry.getRitual(this, player);
         if (ritual != null) {
@@ -229,6 +234,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     }
 
     if (burnTime > 0) {
+      setState(true);
       burnTime--;
 
       if (getTicker() % 20.0f == 0 && random.nextDouble() < 0.05) {
@@ -236,6 +242,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       }
 
       if (burnTime == 0) {
+
         //Check if it is a ritual, if so try and see if it has new ritual fuel.
         if(this.craftingResult == ItemStack.EMPTY && this.lastRitualUsed != null){
           List<ItemStack> stacks = new ArrayList<>();
@@ -263,6 +270,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           world.spawnEntity(item);
           this.craftingResult = ItemStack.EMPTY;
         }
+        setState(false);
       }
       //Spawn Fire particles
       if (world.isRemote) {
@@ -352,12 +360,25 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     }
   }
 
-  public float getTicker() {
-    return ticker;
+  public void setState(boolean state)
+  {
+    if (this.isBurning != state)
+    {
+      this.isBurning = state;
+      markDirty();
+
+      //Client notification
+      IBlockState blockState = world.getBlockState(pos);
+      getWorld().notifyBlockUpdate(pos, blockState, blockState, 3);
+    }
   }
 
-  public int getBurnTime()
+  public boolean getState()
   {
-    return burnTime;
+    return isBurning;
+  }
+
+  public float getTicker() {
+    return ticker;
   }
 }
