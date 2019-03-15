@@ -1,16 +1,11 @@
 package epicsquid.roots.tileentity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
 import epicsquid.mysticallib.network.MessageTEUpdate;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.block.BlockBonfire;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
@@ -34,6 +29,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 // TODO: 10/03/2019 find the right moment to change the state of the pyre
 public class TileEntityBonfire extends TileBase implements ITickable {
@@ -113,8 +113,6 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           stack.setCount(1);
           stacks.add(stack);
         }
-
-        setState(true);
 
         RitualBase ritual = RitualRegistry.getRitual(this, player);
         if (ritual != null) {
@@ -228,13 +226,14 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       }
     }
     if (doBigFlame) {
+      BlockBonfire.setState(true, world, pos);
       doBigFlame = false;
       markDirty();
       PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
     }
 
     if (burnTime > 0) {
-      setState(true);
+
       burnTime--;
 
       if (getTicker() % 20.0f == 0 && random.nextDouble() < 0.05) {
@@ -242,7 +241,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       }
 
       if (burnTime == 0) {
-
+        BlockBonfire.setState(false, world, pos);
         //Check if it is a ritual, if so try and see if it has new ritual fuel.
         if(this.craftingResult == ItemStack.EMPTY && this.lastRitualUsed != null){
           List<ItemStack> stacks = new ArrayList<>();
@@ -270,7 +269,6 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           world.spawnEntity(item);
           this.craftingResult = ItemStack.EMPTY;
         }
-        setState(false);
       }
       //Spawn Fire particles
       if (world.isRemote) {
@@ -357,19 +355,6 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
         break;
       }
-    }
-  }
-
-  public void setState(boolean state)
-  {
-    if (this.isBurning != state)
-    {
-      this.isBurning = state;
-      markDirty();
-
-      //Client notification
-      IBlockState blockState = world.getBlockState(pos);
-      getWorld().notifyBlockUpdate(pos, blockState, blockState, 3);
     }
   }
 
