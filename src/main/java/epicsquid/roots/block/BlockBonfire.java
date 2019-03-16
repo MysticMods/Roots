@@ -15,8 +15,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
@@ -40,7 +38,6 @@ public class BlockBonfire extends BlockTEBase {
     return false;
   }
 
-  @SideOnly(Side.CLIENT)
   @Override
   public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos)
   {
@@ -81,7 +78,7 @@ public class BlockBonfire extends BlockTEBase {
     if (te != null)
     {
       te.validate();
-      world.setTileEntity(pos, te);
+      //world.setTileEntity(pos, te);
     }
 
   }
