@@ -15,7 +15,12 @@
       },
       {
         "type": "crafting",
-        "recipe": "roots:iron_knife",
+        "recipe": "roots:copper_knife",
+        "recipe2": "roots:iron_knife"
+      },
+      {
+        "type": "crafting",
+        "recipe": "roots:silver_knife",
         "recipe2": "roots:gold_knife"
       },
       {
