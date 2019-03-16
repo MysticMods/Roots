@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-// TODO: 10/03/2019 find the right moment to change the state of the pyre
 public class TileEntityBonfire extends TileBase implements ITickable {
   private float ticker = 0;
   private float pickupDelay = 0;
