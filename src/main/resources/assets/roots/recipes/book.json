@@ -6,13 +6,19 @@
       "ore": "paper"
     },
     {
-      "item": "roots:wildroot"
+      "type": "forge:ore_dict",
+      "ore": "paper"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "paper"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "string"
     }
   ],
   "result": {
-    "item": "patchouli:guide_book",
-    "nbt": {
-      "patchouli:book": "roots:roots_guide"
-    }
+    "item": "minecraft:book"
   }
 }

@@ -108,6 +108,8 @@ advancement.roots.runestone=The Language of Trees
 advancement.roots.runestone.desc=Forge scribable runestones through a pyre's heat
 advancement.roots.living=The Hills Are Alive
 advancement.roots.living.desc=Obtain a complete set of Living Tools from the pyre's tongues of flame
+advancement.roots.pacifist=Untrue Pacifist
+advancement.roots.pacifist.desc=You murdered an innocent creature. Congratulations!
 
 # Herbs
 item.moonglow_seed.name=Moonglow Seed
