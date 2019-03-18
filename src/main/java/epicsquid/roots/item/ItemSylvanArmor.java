@@ -1,19 +1,17 @@
 package epicsquid.roots.item;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import epicsquid.mysticallib.model.IModeledObject;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.model.ModelSylvanArmor;
 import epicsquid.roots.util.PowderInventoryUtil;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
@@ -23,6 +21,11 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemSylvanArmor extends ItemArmor implements IModeledObject {
 
@@ -49,6 +52,20 @@ public class ItemSylvanArmor extends ItemArmor implements IModeledObject {
     public void initModel()
     {
         ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    }
+
+    @Nullable
+    @Override
+    public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type)
+    {
+        return Roots.MODID + ":textures/models/armor/sylvan_armor.png";
+    }
+
+    @Nullable
+    @Override
+    public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default)
+    {
+        return new ModelSylvanArmor(armorSlot);
     }
 
     //Temporary method to add an armor for each herb

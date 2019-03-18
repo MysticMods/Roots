@@ -2,7 +2,11 @@ package epicsquid.roots.item;
 
 import epicsquid.mysticallib.model.IModeledObject;
 import epicsquid.roots.Roots;
+import epicsquid.roots.model.ModelWildwoodArmor;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
@@ -10,6 +14,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+
+import javax.annotation.Nullable;
 
 public class ItemWildwoodArmor extends ItemArmor implements IModeledObject {
 
@@ -28,6 +34,20 @@ public class ItemWildwoodArmor extends ItemArmor implements IModeledObject {
     public void initModel()
     {
         ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    }
+
+    @Nullable
+    @Override
+    public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type)
+    {
+        return Roots.MODID + ":textures/models/armor/wildwood_armor.png";
+    }
+
+    @Nullable
+    @Override
+    public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default)
+    {
+        return new ModelWildwoodArmor(armorSlot);
     }
 
     @Override
