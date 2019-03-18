@@ -110,6 +110,10 @@ advancement.roots.living=The Hills Are Alive
 advancement.roots.living.desc=Obtain a complete set of Living Tools from the pyre's tongues of flame
 advancement.roots.pacifist=Untrue Pacifist
 advancement.roots.pacifist.desc=You murdered an innocent creature. Congratulations!
+advancement.roots.sylvan_armor=Botanical Robes
+advancement.roots.sylvan_armor.desc=Druidic robes made of interwoven herbs
+advancement.roots.wildwood_armor=Natural Resistance
+advancement.roots.wildwood_armor.desc=Let the wood protect you!
 
 # Herbs
 item.moonglow_seed.name=Moonglow Seed

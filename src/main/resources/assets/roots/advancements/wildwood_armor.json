@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "item": "roots:wildwood_helmet"
+    },
+    "title": {
+      "translate": "advancement.roots.wildwood_armor"
+    },
+    "description": {
+      "translate": "advancement.roots.wildwood_armor.desc"
+    }
+  },
+  "parent": "roots:pyre",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "roots:wildwood_helmet"
+          },
+          {
+            "item": "roots:wildwood_chestplate"
+          },
+          {
+            "item": "roots:wildwood_leggings"
+          },
+          {
+            "item": "roots:wildwood_boots"
+          }
+        ]
+      }
+    }
+  }
+}

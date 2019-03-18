@@ -2,7 +2,7 @@
   "name": "Wildwood Armor",
   "icon": "roots:wildwood_helmet",
   "category": "apparatus",
-  "advancement": "",
+  "advancement": "roots:wildwood_armor",
   "secret": true,
   "pages": [
     {
