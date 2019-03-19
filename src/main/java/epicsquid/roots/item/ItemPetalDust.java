@@ -38,6 +38,8 @@ public class ItemPetalDust extends ItemBase {
 
   public static ItemStack createData(ItemStack stack, SpellBase spell) {
     ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    if (capability == null) return stack;
+
     capability.setSpellToSlot(spell);
     return stack;
   }
@@ -46,7 +48,12 @@ public class ItemPetalDust extends ItemBase {
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
     ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-    capability.getSelectedSpell().addToolTip(tooltip);
+    if (capability == null) return;
+
+    SpellBase spell = capability.getSelectedSpell();
+    if (spell == null) return;
+
+    spell.addToolTip(tooltip);
   }
 
 }
