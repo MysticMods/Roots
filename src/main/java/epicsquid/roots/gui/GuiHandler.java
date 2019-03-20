@@ -9,6 +9,8 @@ package epicsquid.roots.gui;
 
 import javax.annotation.Nullable;
 
+import epicsquid.roots.gui.client.GuiPouch;
+import epicsquid.roots.gui.container.ContainerPouch;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
@@ -22,7 +24,7 @@ public class GuiHandler implements IGuiHandler {
   public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
     switch (id) {
     case POUCH_ID:
-      // TODO Open Gui in mainhand
+      return new ContainerPouch(player.getHeldItemMainhand(), player.inventory);
     default:
       return null;
     }
@@ -33,7 +35,7 @@ public class GuiHandler implements IGuiHandler {
   public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
     switch (id) {
     case POUCH_ID:
-      // TODO Open Gui in mainhand
+      return new GuiPouch(new ContainerPouch(player.getHeldItemMainhand(), player.inventory));
     default:
       return null;
     }

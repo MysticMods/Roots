@@ -65,9 +65,9 @@ public class PowderPouchFillRecipe extends IForgeRegistryEntry.Impl<IRecipe> imp
         if (inv.getStackInSlot(i).getItem() instanceof ItemPouch) {
           ItemStack result = inv.getStackInSlot(i).copy();
           if (!result.hasTagCompound()) {
-            ItemPouch.createData(result, plantName, plantStack);
+//            ItemPouch.createData(result, plantName, plantStack);
           } else {
-            ItemPouch.setQuantity(result, plantName, ItemPouch.getQuantity(result, plantName) + plantStack);
+//            ItemPouch.setQuantity(result, plantName, ItemPouch.getQuantity(result, plantName) + plantStack);
           }
           return result;
         }

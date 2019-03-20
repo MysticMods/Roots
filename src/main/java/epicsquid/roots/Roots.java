@@ -11,6 +11,7 @@ import epicsquid.roots.capability.grove.PlayerGroveCapabilityStorage;
 import epicsquid.roots.capability.spell.ISpellHolderCapability;
 import epicsquid.roots.capability.spell.SpellHolderCapability;
 import epicsquid.roots.capability.spell.SpellHolderCapabilityStorage;
+import epicsquid.roots.gui.GuiHandler;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.proxy.CommonProxy;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -30,6 +31,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -43,6 +45,7 @@ public class Roots {
 
   public static final ResourceLocation PACIFIST_ID = new ResourceLocation(MODID, "pacifist");
   public static final GenericTrigger<LivingDeathEvent> PACIFIST_TRIGGER = CriteriaTriggers.register(new GenericTrigger<>(PACIFIST_ID, new KillPredicate()));
+  public static final GuiHandler GUI_HANDLER = new GuiHandler();
 
   public static ModContainer CONTAINER = null;
 
@@ -71,6 +74,7 @@ public class Roots {
     CapabilityManager.INSTANCE.register(ISpellHolderCapability.class, new SpellHolderCapabilityStorage(), SpellHolderCapability::new);
     MinecraftForge.EVENT_BUS.register(new RegistryManager());
     MinecraftForge.EVENT_BUS.register(new EventManager());
+    NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);
     proxy.preInit(event);
   }
 
