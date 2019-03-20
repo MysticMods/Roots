@@ -99,25 +99,7 @@ public abstract class SpellBase {
   }
 
   public boolean matchesIngredients(List<ItemStack> ingredients) {
-    boolean doMatch = ingredients.size() == this.ingredients.size();
-    if (doMatch) {
-      for (ItemStack stack : ingredients) {
-        boolean matchIngredient = false;
-        for (Ingredient ingredient : this.ingredients) {
-          for (ItemStack matchingStack : ingredient.getMatchingStacks()) {
-            if (stack.isItemEqual(matchingStack)) {
-              matchIngredient = true;
-              break;
-            }
-          }
-        }
-        if (!matchIngredient) {
-          doMatch = false;
-          break;
-        }
-      }
-    }
-    return doMatch;
+    return ListUtil.matchesIngredients(ingredients, this.ingredients);
   }
 
   public abstract void cast(EntityPlayer caster, List<SpellModule> modules);
