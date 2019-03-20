@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import scala.actors.threadpool.Arrays;
 
 public abstract class RitualBase {
   protected static int OFFERTORY_RADIUS = 6;
@@ -87,11 +88,15 @@ public abstract class RitualBase {
     return name;
   }
 
+  @SuppressWarnings("unchecked")
   public List<ItemStack> getRecipe(){
     for(Condition condition : this.conditions){
       if(condition instanceof ConditionItems){
         ConditionItems conditionItems = (ConditionItems) condition;
-        return conditionItems.getItemList();
+        ItemStack[] stacks = conditionItems.getIngredients().stream()
+            .map(ingredient -> ingredient.getMatchingStacks()[0])
+            .toArray(ItemStack[]::new);
+        return Arrays.asList(stacks);
       }
     }
     return new ArrayList<>();

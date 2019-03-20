@@ -30,6 +30,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ModItems {
 
@@ -121,7 +122,7 @@ public class ModItems {
    * Register item oredicts here
    */
   public static void registerOredict() {
-
+    OreDictionary.registerOre("blockWool", new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE));
   }
 
   private static void registerSeedDrops() {
