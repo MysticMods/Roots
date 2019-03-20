@@ -18,7 +18,7 @@ public class RitualCraftingWrapper implements IRecipeWrapper {
 
   @Override
   public void getIngredients(IIngredients ingredients) {
-    List<ItemStack> inputs = recipe.getIngredients();
+    List<ItemStack> inputs = recipe.getRecipe();
     ingredients.setInputs(VanillaTypes.ITEM, inputs);
     ingredients.setOutput(VanillaTypes.ITEM, recipe.getResult());
   }

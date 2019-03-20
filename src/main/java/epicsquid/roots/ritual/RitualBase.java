@@ -3,6 +3,7 @@ package epicsquid.roots.ritual;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -12,6 +13,7 @@ import epicsquid.roots.recipe.conditions.ConditionItems;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -100,5 +102,15 @@ public abstract class RitualBase {
       }
     }
     return new ArrayList<>();
+  }
+
+  @SuppressWarnings("unchecked")
+  public List<Ingredient> getIngredients() {
+    for (Condition condition : this.conditions) {
+      if (condition instanceof ConditionItems) {
+        return ((ConditionItems) condition).getIngredients();
+      }
+    }
+    return Collections.EMPTY_LIST;
   }
 }

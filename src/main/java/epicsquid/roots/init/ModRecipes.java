@@ -180,7 +180,7 @@ public class ModRecipes {
 
   private static void addCraftingRecipe(String recipeName, PyreCraftingRecipe pyreCraftingRecipe) {
     for (Map.Entry<String, PyreCraftingRecipe> pyreCraftingRecipeEntry : pyreCraftingRecipes.entrySet()) {
-      if (pyreCraftingRecipeEntry.getValue().matches(pyreCraftingRecipe.getIngredients())) {
+      if (pyreCraftingRecipeEntry.getValue().matches(pyreCraftingRecipe.getRecipe())) {
         System.out.println("A Crafting Recipe is already registered");
         return;
       }

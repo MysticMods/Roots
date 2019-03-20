@@ -46,10 +46,14 @@ public class PyreCraftingRecipe {
     return result;
   }
 
-  public List<ItemStack> getIngredients(){
+  public List<ItemStack> getRecipe(){
     ItemStack[] stacks = ingredients.stream()
         .map(ingredient -> ingredient.getMatchingStacks()[0])
         .toArray(ItemStack[]::new);
     return Arrays.asList(stacks);
+  }
+
+  public List<Ingredient> getIngredients(){
+    return ingredients;
   }
 }

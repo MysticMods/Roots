@@ -3,6 +3,7 @@ package epicsquid.roots.api;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariableProvider;
 import vazkii.patchouli.common.util.ItemStackUtil;
@@ -26,9 +27,9 @@ public class RitualCraftingRecipeProcessor implements IComponentProcessor {
         return ItemStackUtil.serializeStack(ItemStack.EMPTY);
       }
 
-      ItemStack ingredient = pyreCraftingRecipe.getIngredients().get(index);
+      Ingredient ingredient = pyreCraftingRecipe.getIngredients().get(index);
 
-      return ItemStackUtil.serializeStack(ingredient);
+      return ItemStackUtil.serializeIngredient(ingredient);
     }
 
     if(s.equalsIgnoreCase("result")){
