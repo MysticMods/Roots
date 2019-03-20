@@ -10,6 +10,7 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class SpellIronLungs extends SpellBase {
         new ItemStack(Items.REEDS),
         new ItemStack(Items.CLAY_BALL),
         new ItemStack(Items.GLASS_BOTTLE),
-        new ItemStack(Items.IRON_INGOT)
+        new OreIngredient("ingotIron")
     );
   }
 
