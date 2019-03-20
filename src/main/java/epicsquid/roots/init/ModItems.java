@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 
 import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.mysticallib.item.ItemBase;
+import epicsquid.mysticallib.item.ItemFoodBase;
 import epicsquid.mysticallib.item.ItemSeedBase;
 import epicsquid.mysticalworld.MysticalWorld;
 import epicsquid.roots.Roots;
@@ -55,7 +56,7 @@ public class ModItems {
     event.addItem(moonglow_seed = new ItemSeedBase("moonglow_seed", ModBlocks.moonglow, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(moonglow_leaf = new ItemBase("moonglow_leaf").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(aubergine_seed = new ItemSeedBase("aubergine_seed", ModBlocks.aubergine, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(aubergine = new ItemBase("aubergine").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(aubergine = new ItemFoodBase("aubergine", 4, 1.2f, false).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(pereskia_bulb = new ItemSeedBase("pereskia_bulb", ModBlocks.pereskia, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(pereskia = new ItemBase("pereskia").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(terra_moss = new ItemBase("terra_moss").setModelCustom(true).setCreativeTab(Roots.tab));
