@@ -22,7 +22,6 @@ public class EntityRitualStorm extends EntityRitualBase {
 
   @Override
   public void onUpdate() {
-    ticksExisted++;
     float alpha = (float) Math.min(40, (RitualRegistry.ritual_storm.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
     getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
     getDataManager().setDirty(lifetime);
