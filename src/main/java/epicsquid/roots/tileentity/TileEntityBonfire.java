@@ -129,7 +129,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
 
         PyreCraftingRecipe recipe = ModRecipes.getCraftingRecipe(stacks);
         if(recipe != null){
-          this.lastUsedItems = recipe.getIngredients();
+          this.lastUsedItems = recipe.getRecipe();
           this.craftingResult = recipe.getResult();
           this.burnTime = 200;
           this.doBigFlame = true;

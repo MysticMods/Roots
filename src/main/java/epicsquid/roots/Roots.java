@@ -1,5 +1,7 @@
 package epicsquid.roots;
 
+import epicsquid.roots.advancements.GenericTrigger;
+import epicsquid.roots.advancements.KillPredicate;
 import epicsquid.roots.capability.playerdata.IPlayerDataCapability;
 import epicsquid.roots.capability.grove.IPlayerGroveCapability;
 import epicsquid.roots.capability.playerdata.PlayerDataCapability;
@@ -11,10 +13,13 @@ import epicsquid.roots.capability.spell.SpellHolderCapability;
 import epicsquid.roots.capability.spell.SpellHolderCapabilityStorage;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.proxy.CommonProxy;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -35,6 +40,9 @@ public class Roots {
   public static final String NAME = "Roots";
   public static final String VERSION = "@VERSION@";
   public static final String DEPENDENCIES = "required-before:mysticallib;required-before:mysticalworld";
+
+  public static final ResourceLocation PACIFIST_ID = new ResourceLocation(MODID, "pacifist");
+  public static final GenericTrigger<LivingDeathEvent> PACIFIST_TRIGGER = CriteriaTriggers.register(new GenericTrigger<>(PACIFIST_ID, new KillPredicate()));
 
   public static ModContainer CONTAINER = null;
 
