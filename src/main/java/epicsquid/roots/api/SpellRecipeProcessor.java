@@ -8,6 +8,7 @@ import epicsquid.roots.item.ItemPetalDust;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariableProvider;
@@ -22,7 +23,10 @@ public class SpellRecipeProcessor implements IComponentProcessor {
   public void setup(IVariableProvider<String> iVariableProvider) {
     spellName = iVariableProvider.get("spell");
     SpellBase spellBase = SpellRegistry.spellRegistry.get(spellName);
-    ingredients = spellBase.getIngredients();
+    List<Ingredient> spellIngredients = spellBase.getIngredients();
+    for (Ingredient ingredient : spellIngredients) {
+      ingredients.add(ingredient.getMatchingStacks()[0]);
+    }
   }
 
   @Override
