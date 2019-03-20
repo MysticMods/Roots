@@ -29,6 +29,7 @@ tile.thatch.name=Thatch
 tile.bonfire.name=Pyre
 tile.runestone.name=Runestone
 tile.runestone_brick.name=Runestone Brick
+tile.runestone_brick_alt.name=Runestone Brick
 tile.chiseled_runestone.name=Chiseled Runestone
 tile.fairy_dust.name=Fairy Dust
 tile.offertory_plate.name=Offering Plate
@@ -156,9 +157,15 @@ tile.runestone_brick_stairs.name=Runestone Brick Stairs
 tile.runestone_brick_slab.name=Runestone Brick Slab
 tile.runestone_brick_wall.name=Runestone Brick Wall
 
+tile.runestone_brick_alt_stairs.name=Runestone Brick Stairs
+tile.runestone_brick_alt_slab.name=Runestone Brick Slab
+tile.runestone_brick_alt_wall.name=Runestone Brick Wall
+
 tile.wildwood_log.name=Wildwood Log
 tile.wildwood_planks.name=Wildwood Planks
 tile.wildwood_leaves.name=Wildwood Leaves
+
+item.petals.name=Petals
 
 # JEI
 container.roots.runic_shears.name=Runic Shearing
