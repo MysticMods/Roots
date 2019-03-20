@@ -20,6 +20,9 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class PouchItemHandler extends ItemStackHandler implements ICapabilityProvider {
 
+  public static final int COMPONENT_POUCH_HERB_SLOTS = 6;
+  public static final int COMPONENT_POUCH_INVENTORY_SLOTS = 12;
+
   // Marks the start of the herb slots as well
   private int inventorySlots;
   private int herbSlots;
@@ -61,5 +64,13 @@ public class PouchItemHandler extends ItemStackHandler implements ICapabilityPro
   @SuppressWarnings("unchecked")
   public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
     return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T) this : null;
+  }
+
+  public int getHerbSlots() {
+    return herbSlots;
+  }
+
+  public int getInventorySlots() {
+    return inventorySlots;
   }
 }

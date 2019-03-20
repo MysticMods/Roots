@@ -13,7 +13,7 @@ public class PowderInventoryUtil {
         if (player.inventory.getStackInSlot(i).hasTagCompound()) {
           if (player.inventory.getStackInSlot(i).getTagCompound().hasKey("plant")) {
             if (player.inventory.getStackInSlot(i).getTagCompound().getString("plant").compareTo(herb.getName()) == 0) {
-              amount += ItemPouch.capacity;
+//              amount += ItemPouch.capacity;
             }
           }
         }
@@ -29,7 +29,7 @@ public class PowderInventoryUtil {
         if (player.inventory.getStackInSlot(i).hasTagCompound()) {
           if (player.inventory.getStackInSlot(i).getTagCompound().hasKey("plant")) {
             if (player.inventory.getStackInSlot(i).getTagCompound().getString("plant").compareTo(herb.getName()) == 0) {
-              amount += ItemPouch.getQuantity(player.inventory.getStackInSlot(i), herb.getName());
+//              amount += ItemPouch.getQuantity(player.inventory.getStackInSlot(i), herb.getName());
             }
           }
         }
@@ -45,10 +45,10 @@ public class PowderInventoryUtil {
         if (player.inventory.getStackInSlot(i).hasTagCompound()) {
           if (player.inventory.getStackInSlot(i).getTagCompound().hasKey("plant")) {
             if (player.inventory.getStackInSlot(i).getTagCompound().getString("plant").compareTo(herb.getName()) == 0) {
-              double removeAmount = Math.min(128.0, Math.min(ItemPouch.getQuantity(player.inventory.getStackInSlot(i), herb.getName()), temp));
-              ItemPouch.setQuantity(player.inventory.getStackInSlot(i), herb.getName(),
-                  ItemPouch.getQuantity(player.inventory.getStackInSlot(i), herb.getName()) - removeAmount);
-              temp -= removeAmount;
+//              double removeAmount = Math.min(128.0, Math.min(ItemPouch.getQuantity(player.inventory.getStackInSlot(i), herb.getName()), temp));
+//              ItemPouch.setQuantity(player.inventory.getStackInSlot(i), herb.getName(),
+//                  ItemPouch.getQuantity(player.inventory.getStackInSlot(i), herb.getName()) - removeAmount);
+//              temp -= removeAmount;
             }
           }
         }

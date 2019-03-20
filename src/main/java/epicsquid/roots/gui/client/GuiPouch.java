@@ -7,16 +7,13 @@
 
 package epicsquid.roots.gui.client;
 
-import java.awt.Color;
-
 import javax.annotation.Nonnull;
 
+import epicsquid.roots.Roots;
 import epicsquid.roots.gui.container.ContainerPouch;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
-import sun.plugin2.util.ColorUtil;
+import net.minecraft.util.ResourceLocation;
 
 public class GuiPouch extends GuiContainer {
 
@@ -30,21 +27,18 @@ public class GuiPouch extends GuiContainer {
   }
 
   @Override
-  protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-    bindGuiTexture();
-    int sx = (width - xSize) / 2;
-    int sy = (height - ySize) / 2;
-    drawTexturedModalRect(sx, sy, 0, 0, xSize, ySize);
-
-    FontRenderer fr = Minecraft.getMinecraft().fontRenderer;
-    fr.drawString(getUnlocalisedNameForHeading(), getGuiLeft() + 28, getGuiTop() + 13, ColorUtil.getRGB(Color.DARK_GRAY));
-
-    renderCustomOptions(getGuiTop() + 13, par1, mouseX, mouseY);
-    super.drawGuiContainerBackgroundLayer(par1, mouseX, mouseY);
+  public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+    drawDefaultBackground();
+    super.drawScreen(mouseX, mouseY, partialTicks);
+    this.renderHoveredToolTip(mouseX, mouseY);
   }
 
-  private void bindGuiTexture() {
-    
+  @Override
+  protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+    this.mc.getTextureManager().bindTexture(new ResourceLocation(Roots.MODID, "textures/gui/component_pouch_gui.png"));
+    int i = (this.width - this.xSize) / 2;
+    int j = (this.height - this.ySize) / 2;
+    this.drawTexturedModalRect(i - 13, j - 55, 0, 0, 176, 207);
   }
 }
