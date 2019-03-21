@@ -1,107 +1,117 @@
 package epicsquid.roots.item;
 
-import java.util.List;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import epicsquid.mysticallib.item.ItemBase;
-import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
+import epicsquid.roots.capability.pouch.PouchItemHandler;
+import epicsquid.roots.gui.GuiHandler;
 import epicsquid.roots.init.HerbRegistry;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.items.CapabilityItemHandler;
 
 public class ItemPouch extends ItemBase {
-  public static final double capacity = 128.0;
 
-  public ItemPouch(String name) {
+  private int inventorySlots;
+  private int herbSlots;
+
+  public ItemPouch(@Nonnull String name, int inventorySlots, int herbSlots) {
     super(name);
-    setMaxStackSize(1);
+    this.inventorySlots = inventorySlots;
+    this.herbSlots = herbSlots;
+    this.setMaxStackSize(1);
   }
 
-  public static ItemStack createData(ItemStack stack, String plantName, double quantity) {
+  public static boolean hasHerb(@Nonnull ItemStack pouch, Herb herb) {
+    return getHerbQuantity(pouch, herb) > 0;
+  }
+
+  public static double getHerbQuantity(@Nonnull ItemStack pouch, Herb herb) {
+    if (!pouch.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
+      return 0.0;
+    }
+    PouchItemHandler handler = (PouchItemHandler) pouch.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+    for (int i = handler.getInventorySlots(); i < handler.getInventorySlots() + handler.getHerbSlots(); i++) {
+      ItemStack stack = handler.getStackInSlot(i);
+      if (!stack.isEmpty() && HerbRegistry.containsHerbItem(stack.getItem()) && HerbRegistry.getHerbByItem(stack.getItem()).equals(herb)) {
+        return stack.getCount() + getNbtQuantity(pouch, herb.getName());
+      }
+    }
+    return getNbtQuantity(pouch, herb.getName());
+  }
+
+  @Nullable
+  @Override
+  public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+    return new PouchItemHandler(inventorySlots, herbSlots);
+  }
+
+  @Override
+  @Nonnull
+  public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
+    player.openGui(Roots.getInstance(), GuiHandler.POUCH_ID, world, 0, 0, 0);
+    return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
+  }
+
+  private static ItemStack createData(ItemStack stack, Herb herb, double quantity) {
     if (!stack.hasTagCompound()) {
       stack.setTagCompound(new NBTTagCompound());
     }
-    stack.getTagCompound().setString("plant", plantName);
-    stack.getTagCompound().setDouble("quantity", quantity);
+    stack.getTagCompound().setDouble(herb.getName(), quantity);
     return stack;
   }
 
-  public static String getPlantName(ItemStack stack) {
+  private static double getNbtQuantity(@Nonnull ItemStack stack, String plantName) {
     if (stack.hasTagCompound()) {
-      if (stack.getTagCompound().hasKey("plant")) {
-        return stack.getTagCompound().getString("plant");
-      }
-    }
-    return null;
-  }
-
-  public static Herb getHerb(ItemStack stack) {
-    String name = getPlantName(stack);
-    if (name != null) {
-      return HerbRegistry.getHerbByName(name);
-    }
-    return null;
-  }
-
-  public static double getQuantity(ItemStack stack, String plantName) {
-    if (stack.hasTagCompound()) {
-      if (stack.getTagCompound().hasKey("quantity")) {
-        return stack.getTagCompound().getDouble("quantity");
+      if (stack.getTagCompound().hasKey(plantName)) {
+        return stack.getTagCompound().getDouble(plantName);
       }
     }
     return 0.0;
   }
 
-  public static void setQuantity(ItemStack stack, String plantName, double quantity) {
-    if (stack.hasTagCompound()) {
-      if (stack.getTagCompound().hasKey("quantity")) {
-        stack.getTagCompound().setDouble("quantity", Math.min(128.0, quantity));
-        if (stack.getTagCompound().getDouble("quantity") <= 0) {
-          stack.getTagCompound().removeTag("quantity");
-          stack.getTagCompound().removeTag("plant");
+  public static double useQuantity(@Nonnull ItemStack stack, Herb herb, double quantity) {
+    double temp = quantity;
+    if (stack.hasTagCompound() && stack.getTagCompound().hasKey(herb.getName())) {
+      temp = temp - stack.getTagCompound().getDouble(herb.getName());
+      if (temp >= 0) {
+        stack.getTagCompound().removeTag(herb.getName());
+        if (temp > 0 && addHerbToNbt(stack, herb)) {
+          temp = useQuantity(stack, herb, temp);
+        }
+      } else {
+        stack.getTagCompound().setDouble(herb.getName(), stack.getTagCompound().getDouble(herb.getName()) - quantity);
+        temp = 0;
+      }
+    } else {
+      if (addHerbToNbt(stack, herb)) {
+        temp = useQuantity(stack, herb, quantity);
+      }
+    }
+    return temp;
+  }
+
+  private static boolean addHerbToNbt(@Nonnull ItemStack pouch, Herb herb) {
+    if (pouch.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
+      PouchItemHandler handler = (PouchItemHandler) pouch.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+      for (int i = handler.getInventorySlots(); i < handler.getInventorySlots() + handler.getHerbSlots(); i++) {
+        ItemStack stack = handler.getStackInSlot(i);
+        if (!stack.isEmpty() && HerbRegistry.containsHerbItem(stack.getItem()) && HerbRegistry.getHerbByItem(stack.getItem()).equals(herb)) {
+          createData(pouch, herb, 1.0);
+          stack.shrink(1);
+          return true;
         }
       }
     }
-  }
-
-  @Override
-  public boolean showDurabilityBar(ItemStack stack) {
-    if (stack.hasTagCompound()) {
-      if (stack.getTagCompound().hasKey("quantity")) {
-        return true;
-      }
-    }
     return false;
-  }
-
-  @Override
-  public int getRGBDurabilityForDisplay(ItemStack stack) {
-    return Util.intColor(96, 255, 96);
-  }
-
-  @Override
-  public double getDurabilityForDisplay(ItemStack stack) {
-    if (stack.hasTagCompound()) {
-      if (stack.getTagCompound().hasKey("quantity")) {
-        return 1.0 - stack.getTagCompound().getDouble("quantity") / 128.0;
-      }
-    }
-    return 0;
-  }
-
-  @SideOnly(Side.CLIENT)
-  @Override
-  public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
-    if (stack.hasTagCompound()) {
-      if (stack.getTagCompound().hasKey("quantity")) {
-        tooltip.add(I18n.format( HerbRegistry.getHerbByName(stack.getTagCompound().getString("plant")).getItem().getUnlocalizedName() + ".name") + I18n.format("roots.tooltip.pouch_divider") + (int) Math
-            .ceil(stack.getTagCompound().getDouble("quantity")));
-      }
-    }
   }
 }

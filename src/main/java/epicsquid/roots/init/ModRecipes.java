@@ -12,7 +12,6 @@ import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.recipe.MortarRecipe;
-import epicsquid.roots.recipe.PowderPouchFillRecipe;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.recipe.RunicCarvingRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
@@ -211,8 +210,6 @@ public class ModRecipes {
     initCraftingRecipes();
     RunicShearRecipes.initRecipes();
 
-    event.getRegistry().register(new PowderPouchFillRecipe().setRegistryName(getRL("powder_pouch_fill")));
-
   }
 
   private static void initCraftingRecipes() {
@@ -369,6 +366,14 @@ public class ModRecipes {
             new ItemStack(ModItems.bark_oak),
             new OreIngredient("plankWood"),
             new OreIngredient("gemDiamond")));
+
+    addCraftingRecipe("apothecary_pouch", new PyreCraftingRecipe(new ItemStack(ModItems.apothecary_pouch)).addIngredients(
+            new ItemStack(Blocks.ENDER_CHEST),
+            new ItemStack(ModItems.bark_wildwood),
+            new ItemStack(ModItems.bark_wildwood),
+            new ItemStack(ModItems.spirit_herb),
+            new ItemStack(ModItems.component_pouch)
+    ));
   }
 
   public static void afterHerbRegisterInit(){

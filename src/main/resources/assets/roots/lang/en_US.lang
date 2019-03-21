@@ -3,7 +3,6 @@ itemGroup.roots=Roots
 item.pestle.name=Pestle
 item.petal_dust.name=Petal Dust
 item.staff.name=Staff
-item.pouch.name=Powder Pouch
 item.straw.name=Straw
 item.firestarter.name=Firestarter
 item.living_pickaxe.name=Living Pickaxe
@@ -22,6 +21,8 @@ item.wildwood_helmet.name=Wildwood Helmet
 item.wildwood_chestplate.name=Wildwood Chestplate
 item.wildwood_leggings.name=Wildwood Leggings
 item.wildwood_boots.name=Wildwood Boots
+item.component_pouch.name=Component Pouch
+item.apothecary_pouch.name=Apothecary Pouch
 
 tile.mortar.name=Mortar
 tile.imbuer.name=Imbuer
@@ -141,6 +142,7 @@ item.bark_birch.name=Birch Bark
 item.bark_jungle.name=Jungle Bark
 item.bark_acacia.name=Acacia Bark
 item.bark_dark_oak.name=Dark Oak Bark
+item.bark_wildwood.name=Wildwood Bark
 
 # Runic Soil
 tile.runic_soil.name=Runic Soil
@@ -175,3 +177,4 @@ jei.roots.terra_moss.desc=Created by using a knife on a block of Mossy Cobblesto
 jei.roots.terra_spores.desc=Dropped by tall grass. Can be used on cobblestone that is adjacent to water to create Mossy Cobblestone.
 jei.roots.wildroot.desc=Dropped by tall grass.
 jei.roots.bark.desc=Obtained by breaking logs with a knife.
+jei.roots.wildwood.desc=Brought into the world by the Wildroot Growth ritual.
