@@ -35,7 +35,7 @@ public class PouchItemHandler extends ItemStackHandler implements ICapabilityPro
 
   @Override
   public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
-    if (slot > inventorySlots && !isHerb(slot)) {
+    if (slot >= inventorySlots && !HerbRegistry.containsHerbItem(stack.getItem())) {
       return;
     }
     super.setStackInSlot(slot, stack);
@@ -44,14 +44,10 @@ public class PouchItemHandler extends ItemStackHandler implements ICapabilityPro
   @Nonnull
   @Override
   public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-    if (slot > inventorySlots && !isHerb(slot)) {
-      return ItemStack.EMPTY;
+    if (slot >= inventorySlots && !HerbRegistry.containsHerbItem(stack.getItem())) {
+      return stack;
     }
     return super.insertItem(slot, stack, simulate);
-  }
-
-  private boolean isHerb(int slot) {
-    return HerbRegistry.containsHerbItem(getStackInSlot(slot).getItem());
   }
 
   @Override
