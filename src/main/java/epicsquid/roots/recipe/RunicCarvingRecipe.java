@@ -6,7 +6,7 @@ import epicsquid.roots.api.Herb;
 import net.minecraft.block.state.IBlockState;
 
 /**
- * Used to decide how a runic carving using a knife and petal pouch should work.
+ * Used to decide how a runic carving using a knife and herb should work.
  */
 public class RunicCarvingRecipe {
 
@@ -19,7 +19,7 @@ public class RunicCarvingRecipe {
    * Defines a runic carving recipe
    * @param carvingBlock The block the recipe starts with
    * @param runeBlock The block the recipe creates
-   * @param herb The herb needed in the petal pouch
+   * @param herb The herb needed
    */
   public RunicCarvingRecipe(@Nonnull IBlockState carvingBlock, @Nonnull IBlockState runeBlock, @Nonnull Herb herb, @Nonnull String name) {
     this.carvingBlock = carvingBlock;
