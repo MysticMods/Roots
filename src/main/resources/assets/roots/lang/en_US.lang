@@ -3,7 +3,6 @@ itemGroup.roots=Roots
 item.pestle.name=Pestle
 item.petal_dust.name=Petal Dust
 item.staff.name=Staff
-item.pouch.name=Powder Pouch
 item.straw.name=Straw
 item.firestarter.name=Firestarter
 item.living_pickaxe.name=Living Pickaxe
@@ -22,6 +21,7 @@ item.wildwood_helmet.name=Wildwood Helmet
 item.wildwood_chestplate.name=Wildwood Chestplate
 item.wildwood_leggings.name=Wildwood Leggings
 item.wildwood_boots.name=Wildwood Boots
+item.component_pouch.name=Component Pouch
 
 tile.mortar.name=Mortar
 tile.imbuer.name=Imbuer

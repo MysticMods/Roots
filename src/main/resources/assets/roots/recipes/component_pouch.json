@@ -2,8 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "S S",
-    "LDL",
-    " L "  ],
+    "LLL",
+    "LDL"  ],
   "key": {
     "S": [
       {
@@ -75,77 +75,25 @@
       {
         "item": "minecraft:wool",
         "data": 15
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "blockWool"
       }
     ],
     "D": [
       {
-        "item": "minecraft:dye",
+        "item": "minecraft:chest",
         "data": 0
       },
       {
-        "item": "minecraft:dye",
-        "data": 1
-      },
-      {
-        "item": "minecraft:dye",
-        "data": 2
-      },
-      {
-        "item": "minecraft:dye",
-        "data": 3
-      },
-      {
-        "item": "minecraft:dye",
-        "data": 4
-      },
-      {
-        "item": "minecraft:dye",
-        "data": 5
-      },
-      {
-        "item": "minecraft:dye",
-        "data": 6
-      },
-      {
-        "item": "minecraft:dye",
-        "data": 7
-      },
-      {
-        "item": "minecraft:dye",
-        "data": 8
-      },
-      {
-        "item": "minecraft:dye",
-        "data": 9
-      },
-      {
-        "item": "minecraft:dye",
-        "data": 10
-      },
-      {
-        "item": "minecraft:dye",
-        "data": 11
-      },
-      {
-        "item": "minecraft:dye",
-        "data": 12
-      },
-      {
-        "item": "minecraft:dye",
-        "data": 13
-      },
-      {
-        "item": "minecraft:dye",
-        "data": 14
-      },
-      {
-        "item": "minecraft:dye",
-        "data": 15
+        "type": "forge:ore_dict",
+        "ore": "chestWood"
       }
     ]
   },
   "result": {
-    "item": "roots:pouch",
+    "item": "roots:component_pouch",
     "data": 0
   }
 }
