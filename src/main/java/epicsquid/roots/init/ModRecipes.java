@@ -12,7 +12,6 @@ import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.recipe.MortarRecipe;
-import epicsquid.roots.recipe.PowderPouchFillRecipe;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.recipe.RunicCarvingRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
@@ -210,8 +209,6 @@ public class ModRecipes {
 
     initCraftingRecipes();
     RunicShearRecipes.initRecipes();
-
-    event.getRegistry().register(new PowderPouchFillRecipe().setRegistryName(getRL("powder_pouch_fill")));
 
   }
 
