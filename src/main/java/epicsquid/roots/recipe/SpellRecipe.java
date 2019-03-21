@@ -1,14 +1,14 @@
 package epicsquid.roots.recipe;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import epicsquid.mysticallib.util.ListUtil;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SpellRecipe {
-  private List<ItemStack> ingredients = new ArrayList<>();
+  private List<Ingredient> ingredients = new ArrayList<>();
   private String result;
 
   public SpellRecipe(String result) {
@@ -16,20 +16,26 @@ public class SpellRecipe {
   }
 
   public SpellRecipe addIngredient(ItemStack stack) {
-    this.ingredients.add(stack);
+    this.ingredients.add(Ingredient.fromStacks(stack));
     return this;
   }
 
-  public SpellRecipe addIngredients(ItemStack... stack) {
-    this.ingredients.addAll(Arrays.asList(stack));
+  public SpellRecipe addIngredients(Object... stacks) {
+    for (Object stack : stacks) {
+      if (stack instanceof Ingredient) {
+        ingredients.add((Ingredient) stack);
+      } else if (stack instanceof ItemStack) {
+        ingredients.add(Ingredient.fromStacks((ItemStack) stack));
+      }
+    }
     return this;
   }
 
   public boolean matches(List<ItemStack> ingredients) {
-    return ListUtil.stackListsMatch(ingredients, this.ingredients);
+    return ListUtil.matchesIngredients(ingredients, this.ingredients);
   }
 
-  public List<ItemStack> getIngredients() {
+  public List<Ingredient> getIngredients() {
     return ingredients;
   }
 
