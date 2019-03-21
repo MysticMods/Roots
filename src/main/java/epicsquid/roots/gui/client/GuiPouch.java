@@ -10,6 +10,7 @@ package epicsquid.roots.gui.client;
 import javax.annotation.Nonnull;
 
 import epicsquid.roots.Roots;
+import epicsquid.roots.capability.pouch.PouchItemHandler;
 import epicsquid.roots.gui.container.ContainerPouch;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -36,9 +37,13 @@ public class GuiPouch extends GuiContainer {
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
     GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-    this.mc.getTextureManager().bindTexture(new ResourceLocation(Roots.MODID, "textures/gui/component_pouch_gui.png"));
+    this.mc.getTextureManager().bindTexture(new ResourceLocation(Roots.MODID, isComponentPouch() ? "textures/gui/component_pouch_gui.png" : "textures/gui/apothecary_pouch_gui.png"));
     int i = (this.width - this.xSize) / 2;
     int j = (this.height - this.ySize) / 2;
-    this.drawTexturedModalRect(i - 13, j - 55, 0, 0, 176, 207);
+    this.drawTexturedModalRect(i - (isComponentPouch() ? 13 : 35), j - (isComponentPouch() ? 55 : 63), 0, 0, isComponentPouch() ? 176 : 213, isComponentPouch() ? 207 : 215);
+  }
+
+  private boolean isComponentPouch() {
+    return containerPouch.getInvSlots() == PouchItemHandler.COMPONENT_POUCH_INVENTORY_SLOTS && containerPouch.getHerbSlots() == PouchItemHandler.COMPONENT_POUCH_HERB_SLOTS;
   }
 }
