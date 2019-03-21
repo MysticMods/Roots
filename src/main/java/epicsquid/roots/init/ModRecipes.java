@@ -369,9 +369,8 @@ public class ModRecipes {
 
     addCraftingRecipe("apothecary_pouch", new PyreCraftingRecipe(new ItemStack(ModItems.apothecary_pouch)).addIngredients(
             new ItemStack(Blocks.ENDER_CHEST),
-            // TODO make this a Wildwood Bark
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_wildwood),
+            new ItemStack(ModItems.bark_wildwood),
             new ItemStack(ModItems.spirit_herb),
             new ItemStack(ModItems.component_pouch)
     ));

@@ -10,6 +10,7 @@ import epicsquid.roots.capability.grove.PlayerGroveCapabilityProvider;
 import epicsquid.roots.capability.spell.SpellHolderCapabilityProvider;
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.entity.spell.EntityPetalShell;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemKnife;
 import epicsquid.roots.network.MessagePlayerDataUpdate;
@@ -87,6 +88,9 @@ public class EventManager {
               if (blockstate.getValue(BlockNewLog.VARIANT) == EnumType.DARK_OAK){
                 bark = new ItemStack(ModItems.bark_dark_oak, 1);
               }
+            }
+            if (block == ModBlocks.wildwoodLog) {
+              bark = new ItemStack(ModItems.bark_wildwood, 1);
             }
             int count = new Random().nextInt(getBarkAmount(tool)) +1;
             for (int i = 0; i < count; i ++){

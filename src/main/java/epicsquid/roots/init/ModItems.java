@@ -41,7 +41,7 @@ public class ModItems {
   copper_knife, silver_knife, petals;
 
   public static Item moonglow_leaf, aubergine, pereskia, terra_spores, terra_moss, spirit_herb, wildewheet,
-      baffle_cap, bark_oak, bark_birch, bark_spruce, bark_jungle, bark_dark_oak, bark_acacia;
+      baffle_cap, bark_oak, bark_birch, bark_spruce, bark_jungle, bark_dark_oak, bark_acacia, bark_wildwood;
 
   public static Item moonglow_seed, aubergine_seed, pereskia_bulb, spirit_herb_seed, wildewheet_seed,cloud_berry, infernal_bulb,
       stalicripe, dewgonia, wildroot;
@@ -80,6 +80,7 @@ public class ModItems {
     event.addItem(bark_jungle = new ItemBase("bark_jungle").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(bark_dark_oak = new ItemBase("bark_dark_oak").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(bark_acacia = new ItemBase("bark_acacia").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(bark_wildwood = new ItemBase("bark_wildwood").setModelCustom(true).setCreativeTab(Roots.tab));
 
     event.addItem(pestle = new ItemBase("pestle").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(component_pouch = new ItemPouch("component_pouch", PouchItemHandler.COMPONENT_POUCH_INVENTORY_SLOTS, PouchItemHandler.COMPONENT_POUCH_HERB_SLOTS).setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));

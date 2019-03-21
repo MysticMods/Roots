@@ -142,6 +142,7 @@ item.bark_birch.name=Birch Bark
 item.bark_jungle.name=Jungle Bark
 item.bark_acacia.name=Acacia Bark
 item.bark_dark_oak.name=Dark Oak Bark
+item.bark_wildwood.name=Wildwood Bark
 
 # Runic Soil
 tile.runic_soil.name=Runic Soil
@@ -176,3 +177,4 @@ jei.roots.terra_moss.desc=Created by using a knife on a block of Mossy Cobblesto
 jei.roots.terra_spores.desc=Dropped by tall grass. Can be used on cobblestone that is adjacent to water to create Mossy Cobblestone.
 jei.roots.wildroot.desc=Dropped by tall grass.
 jei.roots.bark.desc=Obtained by breaking logs with a knife.
+jei.roots.wildwood.desc=Brought into the world by the Wildroot Growth ritual.
