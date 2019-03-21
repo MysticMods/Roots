@@ -1,0 +1,17 @@
+{
+  "name": "Iron Lungs",
+  "icon": "roots:petal_dust",
+  "category": "spells",
+  "advancement": "roots:staff",
+  
+  "pages": [
+    {
+      "type": "text",
+      "text": "A bottle of air stabilised with iron and imbued with terra spores is the perfect counter to running out of breath when you're underwater."
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_iron_lungs"
+    }
+  ]
+}

@@ -56,13 +56,14 @@ public class ModBlocks {
   public static BlockCropBase moonglow, aubergine, pereskia, wildroot, spirit_herb,wildewheet, cloud_berry, infernal_bulb, dewgonia, stalicripe;
 
   // Runestones
-  public static Block thatch, runestone, runestone_brick, chiseled_runestone, wildwoodLog, wildwoodPlanks, wildwoodLeaves, baffle_cap_huge_stem, baffle_cap_huge_top,
+  public static Block thatch, runestone, runestone_brick, runestone_brick_alt, chiseled_runestone, wildwoodLog, wildwoodPlanks, wildwoodLeaves, baffle_cap_huge_stem, baffle_cap_huge_top,
       baffle_cap_mushroom, runic_soil_fire, runic_soil_water, runic_soil_air, runic_soil_earth, runic_soil;
 
 
   // Decoration
   public static Block runestone_slab, runestone_double_slab, runestone_stairs, runestone_wall;
   public static Block runestone_brick_slab, runestone_brick_double_slab, runestone_brick_stairs, runestone_brick_wall;
+  public static Block runestone_brick_alt_slab, runestone_brick_alt_double_slab, runestone_brick_alt_stairs, runestone_brick_alt_wall;
 
   /**
    * Register all block
@@ -97,6 +98,7 @@ public class ModBlocks {
     //Runestones
     event.addBlock(runestone = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone").setModelCustom(true)).setCreativeTab(Roots.tab);
     event.addBlock(runestone_brick = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_brick").setModelCustom(true)).setCreativeTab(Roots.tab);
+    event.addBlock(runestone_brick_alt = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_brick_alt").setModelCustom(true)).setCreativeTab(Roots.tab);
     event.addBlock(chiseled_runestone = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "chiseled_runestone").setModelCustom(true)).setCreativeTab(Roots.tab);
 
     event.addBlock(wildwoodLog = new BlockLogBase("wildwood_log").setCreativeTab(Roots.tab));
@@ -106,6 +108,7 @@ public class ModBlocks {
     //Decoration
     variants(event, runestone, "runestone", runestone_slab, runestone_double_slab, runestone_stairs, runestone_wall);
     variants(event, runestone_brick, "runestone_brick", runestone_brick_slab, runestone_brick_double_slab, runestone_brick_stairs, runestone_brick_wall);
+    variants(event, runestone_brick_alt, "runestone_brick_alt", runestone_brick_alt_slab, runestone_brick_alt_double_slab, runestone_brick_alt_stairs, runestone_brick_alt_wall);
 
 
     event.addBlock(structure_marker = new BlockStructureMarker());

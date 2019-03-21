@@ -3,8 +3,8 @@ itemGroup.roots=Roots
 item.pestle.name=Pestle
 item.petal_dust.name=Petal Dust
 item.staff.name=Staff
-item.pouch.name=Powder Pouch
 item.straw.name=Straw
+item.flour.name=Flour
 item.firestarter.name=Firestarter
 item.living_pickaxe.name=Living Pickaxe
 item.living_axe.name=Living Axe
@@ -22,6 +22,8 @@ item.wildwood_helmet.name=Wildwood Helmet
 item.wildwood_chestplate.name=Wildwood Chestplate
 item.wildwood_leggings.name=Wildwood Leggings
 item.wildwood_boots.name=Wildwood Boots
+item.component_pouch.name=Component Pouch
+item.apothecary_pouch.name=Apothecary Pouch
 
 tile.mortar.name=Mortar
 tile.imbuer.name=Imbuer
@@ -29,6 +31,7 @@ tile.thatch.name=Thatch
 tile.bonfire.name=Pyre
 tile.runestone.name=Runestone
 tile.runestone_brick.name=Runestone Brick
+tile.runestone_brick_alt.name=Runestone Brick
 tile.chiseled_runestone.name=Chiseled Runestone
 tile.fairy_dust.name=Fairy Dust
 tile.offertory_plate.name=Offering Plate
@@ -61,6 +64,7 @@ roots.spell.spell_growth_infusion.name=Growth Infusion
 roots.spell.spell_sense_animals.name=Sense Animals
 roots.spell.spell_terra_transmutation.name=Terra Transmutation
 roots.spell.spell_sky_soarer.name=Sky Soarer
+roots.spell.spell_iron_lungs.name=Iron Lungs
 
 #Knifes
 item.wood_knife.name=Wooden Knife
@@ -92,7 +96,7 @@ advancement.roots.moonglow_leaf=A Touch of Moonlight
 advancement.roots.moonglow_leaf.desc=Bathe leaf in dim moonglow to find something more
 advancement.roots.spirit_herb=A Spiritu'l Blessing
 advancement.roots.spirit_herb.desc=Reach through the cracks with Runic Shears and pluck forth a herb
-advancement.roots.wildewheet=Where the Wildewheet Are
+advancement.roots.wildewheet=Where the Wildewheet are
 advancement.roots.wildewheet.desc=Bypass the planes to obtain a most bountiful crop
 advancement.roots.cloud_berry=Fluffy like a Cloud
 advancement.roots.cloud_berry.desc=Trap the very clouds inside a berry in the heart of a pyre
@@ -144,6 +148,7 @@ item.bark_birch.name=Birch Bark
 item.bark_jungle.name=Jungle Bark
 item.bark_acacia.name=Acacia Bark
 item.bark_dark_oak.name=Dark Oak Bark
+item.bark_wildwood.name=Wildwood Bark
 
 # Runic Soil
 tile.runic_soil.name=Runic Soil
@@ -160,15 +165,22 @@ tile.runestone_brick_stairs.name=Runestone Brick Stairs
 tile.runestone_brick_slab.name=Runestone Brick Slab
 tile.runestone_brick_wall.name=Runestone Brick Wall
 
+tile.runestone_brick_alt_stairs.name=Runestone Brick Stairs
+tile.runestone_brick_alt_slab.name=Runestone Brick Slab
+tile.runestone_brick_alt_wall.name=Runestone Brick Wall
+
 tile.wildwood_log.name=Wildwood Log
 tile.wildwood_planks.name=Wildwood Planks
 tile.wildwood_leaves.name=Wildwood Leaves
+
+item.petals.name=Petals
 
 # JEI
 container.roots.runic_shears.name=Runic Shearing
 container.roots.runic_carving.name=Runic Carving
 container.roots.ritual_crafting.name=Pyre Crafting Ritual
-jei.roots.terra_moss.desc=Created by using a knife on a block of Mossy Cobblestone. Mossy cobble can be created with Terra Spores.
-jei.roots.terra_spores.desc=Dropped by tall grass. Can be used on cobblestone that is adjacent to water to create Mossy Cobblestone.
-jei.roots.wildroot.desc=Dropped by tall grass.
-jei.roots.bark.desc=Obtained by breaking logs with a knife.
+jei.roots.terra_moss.desc=Scraped from mossy cobblestone with a knife. Cobblestone infused with terra spores will grow moss when adjacent to water.
+jei.roots.terra_spores.desc=Dropped from broken tall grass; used on cobblestone adjacent to water to turn it into mossy cobblestone.
+jei.roots.wildroot.desc=Dropped from broken tall grass.
+jei.roots.bark.desc=Created when breaking logs with a knife.
+jei.roots.wildwood.desc=Brought into the world by the ritual of Wildroot Growth.

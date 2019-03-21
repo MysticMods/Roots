@@ -1,25 +1,12 @@
 package epicsquid.roots.init;
 
-import javax.annotation.Nonnull;
-
 import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.mysticallib.item.ItemBase;
+import epicsquid.mysticallib.item.ItemFoodBase;
 import epicsquid.mysticallib.item.ItemSeedBase;
-import epicsquid.mysticalworld.MysticalWorld;
 import epicsquid.roots.Roots;
-import epicsquid.roots.item.ItemKnife;
-import epicsquid.roots.item.ItemLivingAxe;
-import epicsquid.roots.item.ItemLivingHoe;
-import epicsquid.roots.item.ItemLivingPickaxe;
-import epicsquid.roots.item.ItemLivingShovel;
-import epicsquid.roots.item.ItemLivingSword;
-import epicsquid.roots.item.ItemPetalDust;
-import epicsquid.roots.item.ItemPouch;
-import epicsquid.roots.item.ItemRunicShears;
-import epicsquid.roots.item.ItemStaff;
-import epicsquid.roots.item.ItemSylvanArmor;
-import epicsquid.roots.item.ItemTerraSpore;
-import epicsquid.roots.item.ItemWildwoodArmor;
+import epicsquid.roots.capability.pouch.PouchItemHandler;
+import epicsquid.roots.item.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -29,24 +16,27 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.oredict.OreDictionary;
+
+import javax.annotation.Nonnull;
 
 public class ModItems {
 
   // All mod items
-  public static Item pestle, pouch, petal_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife,
-          sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots,
+  public static Item pestle, component_pouch, petal_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife,
+          sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, apothecary_pouch,
   // Conditionally registered
-  copper_knife, silver_knife;
+  copper_knife, silver_knife, petals, flour;
 
   public static Item moonglow_leaf, aubergine, pereskia, terra_spores, terra_moss, spirit_herb, wildewheet,
-      baffle_cap, bark_oak, bark_birch, bark_spruce, bark_jungle, bark_dark_oak, bark_acacia;
+          baffle_cap, bark_oak, bark_birch, bark_spruce, bark_jungle, bark_dark_oak, bark_acacia, bark_wildwood;
 
-  public static Item moonglow_seed, aubergine_seed, pereskia_bulb, spirit_herb_seed, wildewheet_seed,cloud_berry, infernal_bulb,
-      stalicripe, dewgonia, wildroot;
+  public static Item moonglow_seed, aubergine_seed, pereskia_bulb, spirit_herb_seed, wildewheet_seed, cloud_berry, infernal_bulb,
+          stalicripe, dewgonia, wildroot;
 
   //Armor Materials
-  public static final ItemArmor.ArmorMaterial sylvanArmorMaterial = EnumHelper.addArmorMaterial("SYLVAN", Roots.MODID + ":sylvan",8, new int[]{1, 3, 4, 2}, 20, SoundEvents.BLOCK_SNOW_PLACE, 0F);
-  public static final ItemArmor.ArmorMaterial wildwoodArmorMaterial = EnumHelper.addArmorMaterial("WILDWOOD", Roots.MODID + ":wildwood",20, new int[]{3, 5, 6, 3}, 10, SoundEvents.BLOCK_WOOD_PLACE, 0F);
+  public static final ItemArmor.ArmorMaterial sylvanArmorMaterial = EnumHelper.addArmorMaterial("SYLVAN", Roots.MODID + ":sylvan", 8, new int[]{1, 3, 4, 2}, 20, SoundEvents.BLOCK_SNOW_PLACE, 0F);
+  public static final ItemArmor.ArmorMaterial wildwoodArmorMaterial = EnumHelper.addArmorMaterial("WILDWOOD", Roots.MODID + ":wildwood", 20, new int[]{3, 5, 6, 3}, 10, SoundEvents.BLOCK_WOOD_PLACE, 0F);
 
   /**
    * Register all items
@@ -55,7 +45,7 @@ public class ModItems {
     event.addItem(moonglow_seed = new ItemSeedBase("moonglow_seed", ModBlocks.moonglow, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(moonglow_leaf = new ItemBase("moonglow_leaf").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(aubergine_seed = new ItemSeedBase("aubergine_seed", ModBlocks.aubergine, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(aubergine = new ItemBase("aubergine").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(aubergine = new ItemFoodBase("aubergine", 4, 1.2f, false).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(pereskia_bulb = new ItemSeedBase("pereskia_bulb", ModBlocks.pereskia, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(pereskia = new ItemBase("pereskia").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(terra_moss = new ItemBase("terra_moss").setModelCustom(true).setCreativeTab(Roots.tab));
@@ -69,6 +59,7 @@ public class ModItems {
     event.addItem(dewgonia = new ItemSeedBase("dewgonia", ModBlocks.dewgonia, Blocks.SAND).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(stalicripe = new ItemSeedBase("stalicripe", ModBlocks.stalicripe, Blocks.STONE).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(terra_spores = new ItemTerraSpore("terra_spores").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(petals = new ItemBase("petals").setModelCustom(true).setCreativeTab(Roots.tab));
 
     // Barks and Knifes
     event.addItem(bark_oak = new ItemBase("bark_oak").setModelCustom(true).setCreativeTab(Roots.tab));
@@ -77,10 +68,13 @@ public class ModItems {
     event.addItem(bark_jungle = new ItemBase("bark_jungle").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(bark_dark_oak = new ItemBase("bark_dark_oak").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(bark_acacia = new ItemBase("bark_acacia").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(bark_wildwood = new ItemBase("bark_wildwood").setModelCustom(true).setCreativeTab(Roots.tab));
 
     event.addItem(pestle = new ItemBase("pestle").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(pouch = new ItemPouch("pouch").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(component_pouch = new ItemPouch("component_pouch", PouchItemHandler.COMPONENT_POUCH_INVENTORY_SLOTS, PouchItemHandler.COMPONENT_POUCH_HERB_SLOTS).setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(apothecary_pouch = new ItemPouch("apothecary_pouch", PouchItemHandler.APOTHECARY_POUCH_INVENTORY_SLOTS, PouchItemHandler.APOTHECARY_POUCH_HERB_SLOTS).setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(petal_dust = new ItemPetalDust("petal_dust").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(flour = new ItemBase("flour").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(staff = new ItemStaff("staff").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_pickaxe = new ItemLivingPickaxe(ToolMaterial.IRON, "living_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_axe = new ItemLivingAxe(ToolMaterial.IRON, "living_axe").setCreativeTab(Roots.tab).setMaxStackSize(1));
@@ -119,7 +113,7 @@ public class ModItems {
    * Register item oredicts here
    */
   public static void registerOredict() {
-
+    OreDictionary.registerOre("blockWool", new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE));
   }
 
   private static void registerSeedDrops() {

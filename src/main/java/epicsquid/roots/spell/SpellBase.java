@@ -1,6 +1,7 @@
 package epicsquid.roots.spell;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +14,7 @@ import epicsquid.roots.util.PowderInventoryUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.text.TextFormatting;
 
 public abstract class SpellBase {
@@ -24,7 +26,7 @@ public abstract class SpellBase {
   private TextFormatting textColor;
   protected EnumCastType castType = EnumCastType.INSTANTANEOUS;
   private Map<Herb, Double> costs = new HashMap<>();
-  private List<ItemStack> ingredients = new ArrayList<>();
+  private List<Ingredient> ingredients = new ArrayList<>();
 
   public enum EnumCastType {
     INSTANTANEOUS, CONTINUOUS
@@ -41,8 +43,14 @@ public abstract class SpellBase {
     this.textColor = textColor;
   }
 
-  public SpellBase addIngredients(ItemStack... stack) {
-    Collections.addAll(ingredients, stack);
+  public SpellBase addIngredients(Object... stacks) {
+    for (Object stack : stacks) {
+      if (stack instanceof ItemStack) {
+        ingredients.add(Ingredient.fromStacks((ItemStack) stack));
+      } else if (stack instanceof Ingredient) {
+        ingredients.add((Ingredient) stack);
+      }
+    }
     return this;
   }
 
@@ -91,7 +99,7 @@ public abstract class SpellBase {
   }
 
   public boolean matchesIngredients(List<ItemStack> ingredients) {
-    return ListUtil.stackListsMatch(ingredients, this.ingredients);
+    return ListUtil.matchesIngredients(ingredients, this.ingredients);
   }
 
   public abstract void cast(EntityPlayer caster, List<SpellModule> modules);
@@ -140,7 +148,7 @@ public abstract class SpellBase {
     return costs;
   }
 
-  public List<ItemStack> getIngredients() {
+  public List<Ingredient> getIngredients() {
     return ingredients;
   }
 }

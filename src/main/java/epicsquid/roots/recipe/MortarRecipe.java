@@ -6,21 +6,22 @@ import java.util.List;
 
 import epicsquid.mysticallib.util.ListUtil;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 
 public class MortarRecipe {
 
   private ItemStack result;
 
-  private List<ItemStack> ingredients = new ArrayList<>();
+  private List<Ingredient> ingredients = new ArrayList<>();
 
   private float r1, g1, b1, r2, g2, b2;
 
-  public MortarRecipe(ItemStack result, ItemStack[] ingredients, float red1, float green1, float blue1, float red2, float green2, float blue2) {
+  public MortarRecipe(ItemStack result, Ingredient[] ingredients, float red1, float green1, float blue1, float red2, float green2, float blue2) {
     this.result = result;
     this.ingredients.addAll(Arrays.asList(ingredients));
 
     while (this.ingredients.size() < 5) {
-      this.ingredients.add(ItemStack.EMPTY);
+      this.ingredients.add(null);
     }
 
     this.r1 = red1;
@@ -32,14 +33,14 @@ public class MortarRecipe {
   }
 
   public boolean matches(List<ItemStack> ingredients) {
-    return ListUtil.stackListsMatch(ingredients, this.ingredients);
+    return ListUtil.matchesIngredients(ingredients, this.ingredients);
   }
 
   public ItemStack getResult() {
     return result;
   }
 
-  public List<ItemStack> getIngredients() {
+  public List<Ingredient> getIngredients() {
     return ingredients;
   }
 

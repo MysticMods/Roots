@@ -1,21 +1,27 @@
 package epicsquid.roots.recipe.conditions;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 
 public class ConditionItems implements Condition {
 
-    final List<ItemStack> itemList;
+    final List<Ingredient> ingredients;
 
-    public ConditionItems(ItemStack... stacks){
-        itemList = Arrays.asList(stacks);
-
+    public ConditionItems(Object... stacks){
+        ingredients = new ArrayList<>();
+        for (Object stack : stacks) {
+            if (stack instanceof Ingredient) {
+                ingredients.add((Ingredient) stack);
+            } else if (stack instanceof ItemStack) {
+                ingredients.add(Ingredient.fromStacks((ItemStack) stack));
+            }
+        }
     }
 
     @Override
@@ -24,10 +30,10 @@ public class ConditionItems implements Condition {
         for (int i = 0; i < tile.inventory.getSlots(); i++) {
             stacks.add(tile.inventory.getStackInSlot(i));
         }
-        return ListUtil.stackListsMatch(stacks, this.itemList);
+        return ListUtil.matchesIngredients(stacks, ingredients);
     }
 
-    public List<ItemStack> getItemList() {
-        return itemList;
+    public List<Ingredient> getIngredients() {
+        return ingredients;
     }
 }
