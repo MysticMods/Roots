@@ -121,4 +121,17 @@ public class ContainerPouch extends Container {
     }
     return ItemStack.EMPTY;
   }
+
+  @Override
+  @Nonnull
+  public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
+    if (slotId > 0) {
+      ItemStack stack = getSlot(slotId).getStack();
+      if (stack.getItem() instanceof ItemPouch) {
+        return ItemStack.EMPTY;
+      }
+      return super.slotClick(slotId, dragType, clickTypeIn, player);
+    }
+    return ItemStack.EMPTY;
+  }
 }
