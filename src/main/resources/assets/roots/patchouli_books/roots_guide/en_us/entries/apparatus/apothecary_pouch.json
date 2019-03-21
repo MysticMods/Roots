@@ -1,0 +1,17 @@
+{
+    "name": "Apothecary Pouch",
+    "icon": "roots:apothecary_pouch",
+    "category": "apparatus",
+    "advancement": "roots:spirit_herb",
+    "secret": true,
+    "pages": [
+      {
+        "type": "text",
+        "text": "A vastly improved component pouch, the apothecary pouch can hold many more items and herbs, storing the herbs in small glass vials to maintain their ease of access."
+      },
+      {
+        "type": "ritual_crafting_template",
+        "recipe": "apothecary_pouch"
+      }
+    ]
+  }
