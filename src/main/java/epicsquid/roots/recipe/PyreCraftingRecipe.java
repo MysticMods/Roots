@@ -2,7 +2,9 @@ package epicsquid.roots.recipe;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.roots.recipe.conditions.ConditionItems;
@@ -47,10 +49,7 @@ public class PyreCraftingRecipe {
   }
 
   public List<ItemStack> getRecipe(){
-    ItemStack[] stacks = ingredients.stream()
-        .map(ingredient -> ingredient.getMatchingStacks()[0])
-        .toArray(ItemStack[]::new);
-    return Arrays.asList(stacks);
+    return ingredients.stream().map(ingredient -> ingredient.getMatchingStacks()[0]).collect(Collectors.toList());
   }
 
   public List<Ingredient> getIngredients(){

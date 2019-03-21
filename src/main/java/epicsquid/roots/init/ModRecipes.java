@@ -27,6 +27,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -135,15 +136,17 @@ public class ModRecipes {
     return null;
   }
 
-  private static void addMortarRecipe(MortarRecipe recipe) {
-    for (MortarRecipe mortarRecipe : mortarRecipes) {
-      if (mortarRecipe.matches(recipe.getIngredients())) {
-        System.out.println("Recipe is already registered with output - " + recipe.getResult().getItem().getUnlocalizedName());
-        return;
-      }
+  private static void addMortarRecipe(ItemStack output, Ingredient input, float red1, float green1, float blue1, float red2, float green2, float blue2) {
+    MortarRecipe recipe;
+    ItemStack copy;
+    List<Ingredient> ingredients = new ArrayList<>();
+    for (int i = 0; i < 5; i++) {
+      ingredients.add(input);
+      copy = output.copy();
+      copy.setCount(i + 1);
+      recipe = new MortarRecipe(copy, ingredients.toArray(new Ingredient[0]), red1, green1, blue1, red2, green2, blue2);
+      mortarRecipes.add(recipe);
     }
-
-    mortarRecipes.add(recipe);
   }
 
   public static SpellBase getSpellRecipe(List<ItemStack> items) {
@@ -206,8 +209,8 @@ public class ModRecipes {
    */
   public static void initRecipes(@Nonnull RegisterModRecipesEvent event) {
     initDrops();
-    addMortarRecipe(new MortarRecipe(new ItemStack(Items.DYE, 1, 12), new ItemStack[] { new ItemStack(epicsquid.mysticalworld.init.ModItems.carapace) }, 1, 1, 1, 1, 1, 1));
-    addMortarRecipe(new MortarRecipe(new ItemStack(ModItems.flour), new ItemStack[] { new ItemStack(Items.WHEAT) }, 1f, 1f, 0f, 1f, 1f, 0f));
+    addMortarRecipe(new ItemStack(Items.DYE, 1, 12), Ingredient.fromStacks(new ItemStack(epicsquid.mysticalworld.init.ModItems.carapace)), 1, 1, 1, 1, 1, 1);
+    addMortarRecipe(new ItemStack(ModItems.flour), Ingredient.fromStacks(new ItemStack(Items.WHEAT)), 1f, 1f, 0f, 1f, 1f, 0f);
 
     GameRegistry.addSmelting(ModItems.flour, new ItemStack(Items.BREAD), 0.125f);
 
