@@ -22,6 +22,8 @@ public class PouchItemHandler extends ItemStackHandler implements ICapabilityPro
 
   public static final int COMPONENT_POUCH_HERB_SLOTS = 6;
   public static final int COMPONENT_POUCH_INVENTORY_SLOTS = 12;
+  public static final int APOTHECARY_POUCH_HERB_SLOTS = 9;
+  public static final int APOTHECARY_POUCH_INVENTORY_SLOTS = 18;
 
   // Marks the start of the herb slots as well
   private int inventorySlots;

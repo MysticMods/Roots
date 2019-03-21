@@ -39,6 +39,8 @@ public class ContainerPouch extends Container {
   private void createPouchSlots() {
     if (itemHandler.getHerbSlots() == PouchItemHandler.COMPONENT_POUCH_HERB_SLOTS && itemHandler.getInventorySlots() == PouchItemHandler.COMPONENT_POUCH_INVENTORY_SLOTS) {
       createComponentPouchSlots();
+    } else if (itemHandler.getHerbSlots() == PouchItemHandler.APOTHECARY_POUCH_HERB_SLOTS && itemHandler.getInventorySlots() == PouchItemHandler.APOTHECARY_POUCH_INVENTORY_SLOTS) {
+      createApothecaryPouchSlots();
     }
   }
 
@@ -63,6 +65,35 @@ public class ContainerPouch extends Container {
         // Controls which row the slots appear on
         int yPosOffset = i >= 14 ? i >= 16 ? 21 * 2 : 21 : 0;
         addSlotToContainer(new SlotItemHandler(itemHandler, i, xOffset + 127 + (21 * (i % 2)), yOffset + 23 + yPosOffset));
+      }
+    }
+  }
+
+  private void createApothecaryPouchSlots() {
+    int xOffset = -35;
+    int yOffset = -63;
+    for (int i = 0; i < itemHandler.getSlots(); i++) {
+      // Top Row
+      if (i < 6) {
+        addSlotToContainer(new SlotItemHandler(itemHandler, i, xOffset + 25 + (20 * (i % 6)), yOffset + 19));
+      }
+      // Middle Slot
+      if (i >= 6 && i < 12) {
+        addSlotToContainer(new SlotItemHandler(itemHandler, i, xOffset + 25 + (20 * (i % 6)), yOffset + 43));
+      }
+      // Bottom Slot
+      if (i >= 12 && i < 18) {
+        addSlotToContainer(new SlotItemHandler(itemHandler, i, xOffset + 25 + (20 * (i % 6)), yOffset + 66));
+      }
+      // Add Herb Slots
+      if (i >= 18 && i < 21) {
+        addSlotToContainer(new SlotItemHandler(itemHandler, i, xOffset + 149 + (16 * (i % 3)), yOffset + 16 + (4 * (i % 2))));
+      }
+      if (i >= 21 && i < 24) {
+        addSlotToContainer(new SlotItemHandler(itemHandler, i, xOffset + 149 + (16 * (i % 3)), yOffset + 39 + (4 * ((i + 1) % 2))));
+      }
+      if (i >= 24 && i < 27) {
+        addSlotToContainer(new SlotItemHandler(itemHandler, i, xOffset + 149 + (16 * (i % 3)), yOffset + 64 + (4 * (i % 2))));
       }
     }
   }
@@ -125,7 +156,7 @@ public class ContainerPouch extends Container {
   @Override
   @Nonnull
   public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
-    if (slotId > 0) {
+    if (slotId >= 0) {
       ItemStack stack = getSlot(slotId).getStack();
       if (stack.getItem() instanceof ItemPouch) {
         return ItemStack.EMPTY;
@@ -133,5 +164,13 @@ public class ContainerPouch extends Container {
       return super.slotClick(slotId, dragType, clickTypeIn, player);
     }
     return ItemStack.EMPTY;
+  }
+
+  public int getHerbSlots() {
+    return itemHandler.getHerbSlots();
+  }
+
+  public int getInvSlots() {
+    return itemHandler.getInventorySlots();
   }
 }

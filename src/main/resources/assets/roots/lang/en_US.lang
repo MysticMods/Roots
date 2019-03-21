@@ -22,6 +22,7 @@ item.wildwood_chestplate.name=Wildwood Chestplate
 item.wildwood_leggings.name=Wildwood Leggings
 item.wildwood_boots.name=Wildwood Boots
 item.component_pouch.name=Component Pouch
+item.apothecary_pouch.name=Apothecary Pouch
 
 tile.mortar.name=Mortar
 tile.imbuer.name=Imbuer
