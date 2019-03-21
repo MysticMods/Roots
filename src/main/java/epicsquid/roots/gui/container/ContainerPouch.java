@@ -10,11 +10,14 @@ package epicsquid.roots.gui.container;
 import javax.annotation.Nonnull;
 
 import epicsquid.roots.capability.pouch.PouchItemHandler;
+import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.item.ItemPouch;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -29,8 +32,8 @@ public class ContainerPouch extends Container {
     if (stack.getItem() instanceof ItemPouch) {
       itemHandler = (PouchItemHandler) stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
     }
-    createPouchSlots();
     createPlayerInventory(playerInv);
+    createPouchSlots();
   }
 
   private void createPouchSlots() {
@@ -82,5 +85,40 @@ public class ContainerPouch extends Container {
   @Override
   public boolean canInteractWith(@Nonnull EntityPlayer player) {
     return true;
+  }
+
+  @Override
+  @Nonnull
+  public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+    ItemStack stack = inventorySlots.get(index).getStack();
+    if (!stack.isEmpty()) {
+      ItemStack copyStack = stack.copy();
+      if (index < 36) {
+        if (HerbRegistry.containsHerbItem(stack.getItem())) {
+          for (int i = itemHandler.getInventorySlots(); i < itemHandler.getInventorySlots() + itemHandler.getHerbSlots(); i++) {
+            if (itemHandler.insertItem(i, copyStack, true).isEmpty()) {
+              stack.shrink(stack.getCount());
+              return itemHandler.insertItem(i, copyStack, false);
+            }
+          }
+        }
+        for (int i = 0; i < itemHandler.getInventorySlots(); i++) {
+          if (itemHandler.insertItem(i, copyStack, true).isEmpty()) {
+            stack.shrink(stack.getCount());
+            return itemHandler.insertItem(i, copyStack, false);
+          }
+        }
+      } else {
+        for (int i = 0; i < 36; i++) {
+          Slot slot = inventorySlots.get(i);
+          if (slot.getStack().isEmpty()) {
+            slot.putStack(copyStack);
+            stack.shrink(stack.getCount());
+            return ItemStack.EMPTY;
+          }
+        }
+      }
+    }
+    return ItemStack.EMPTY;
   }
 }
