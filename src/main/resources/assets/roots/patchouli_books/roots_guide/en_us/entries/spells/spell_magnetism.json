@@ -1,0 +1,17 @@
+{
+  "name": "Magnetism",
+  "icon": "roots:petal_dust",
+  "category": "spells",
+  "advancement": "roots:staff",
+  
+  "pages": [
+    {
+      "type": "text",
+      "text": "Iron and redstone are a strangely magnetic combination, and with the addition of wildroot and aubergine this magnetism becomes magical, drawing all nearby items to the caster."
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_magnetism"
+    }
+  ]
+}
