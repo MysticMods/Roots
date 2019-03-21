@@ -30,6 +30,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -206,6 +207,9 @@ public class ModRecipes {
   public static void initRecipes(@Nonnull RegisterModRecipesEvent event) {
     initDrops();
     addMortarRecipe(new MortarRecipe(new ItemStack(Items.DYE, 1, 12), new ItemStack[] { new ItemStack(epicsquid.mysticalworld.init.ModItems.carapace) }, 1, 1, 1, 1, 1, 1));
+    addMortarRecipe(new MortarRecipe(new ItemStack(ModItems.flour), new ItemStack[] { new ItemStack(Items.WHEAT) }, 1f, 1f, 0f, 1f, 1f, 0f));
+
+    GameRegistry.addSmelting(ModItems.flour, new ItemStack(Items.BREAD), 0.125f);
 
     initCraftingRecipes();
     RunicShearRecipes.initRecipes();

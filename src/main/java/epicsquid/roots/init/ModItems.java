@@ -7,19 +7,7 @@ import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.item.ItemSeedBase;
 import epicsquid.mysticalworld.MysticalWorld;
 import epicsquid.roots.Roots;
-import epicsquid.roots.item.ItemKnife;
-import epicsquid.roots.item.ItemLivingAxe;
-import epicsquid.roots.item.ItemLivingHoe;
-import epicsquid.roots.item.ItemLivingPickaxe;
-import epicsquid.roots.item.ItemLivingShovel;
-import epicsquid.roots.item.ItemLivingSword;
-import epicsquid.roots.item.ItemPetalDust;
-import epicsquid.roots.item.ItemPouch;
-import epicsquid.roots.item.ItemRunicShears;
-import epicsquid.roots.item.ItemStaff;
-import epicsquid.roots.item.ItemSylvanArmor;
-import epicsquid.roots.item.ItemTerraSpore;
-import epicsquid.roots.item.ItemWildwoodArmor;
+import epicsquid.roots.item.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -34,8 +22,7 @@ public class ModItems {
 
   // All mod items
   public static Item pestle, pouch, petal_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife,
-          sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots,
-  // Conditionally registered
+          sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, flour,
   copper_knife, silver_knife;
 
   public static Item moonglow_leaf, aubergine, pereskia, terra_spores, terra_moss, spirit_herb, wildewheet,
@@ -81,6 +68,7 @@ public class ModItems {
     event.addItem(pestle = new ItemBase("pestle").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(pouch = new ItemPouch("pouch").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(petal_dust = new ItemPetalDust("petal_dust").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(flour = new ItemBase("flour").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(staff = new ItemStaff("staff").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_pickaxe = new ItemLivingPickaxe(ToolMaterial.IRON, "living_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_axe = new ItemLivingAxe(ToolMaterial.IRON, "living_axe").setCreativeTab(Roots.tab).setMaxStackSize(1));
