@@ -36,6 +36,7 @@ dependencies {
         compile project(':MysticalWorld')
         compile "vazkii.patchouli:Patchouli:${patchouli_version}"
         deobfCompile "info.tehnut.harvest:Harvest:1.12-1.2.7-20"
+        deobfCompile "com.azanor:Baubles:${version_baubles}"
     }
 
     // compile against the JEI API but do not include it at runtime
@@ -67,6 +68,9 @@ repositories {
     maven {
         name = "JER"
         url = "https://dl.bintray.com/way2muchnoise/dev"
+    }
+    maven {
+        url 'https://maven.mcmoddev.com'
     }
 }
 

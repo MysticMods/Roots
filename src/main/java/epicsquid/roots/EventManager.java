@@ -14,7 +14,9 @@ import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.entity.spell.EntityPetalShell;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.integration.baubles.pouch.BaubleCapabilityHandler;
 import epicsquid.roots.item.ItemKnife;
+import epicsquid.roots.item.ItemPouch;
 import epicsquid.roots.network.MessagePlayerDataUpdate;
 import epicsquid.roots.network.MessagePlayerGroveUpdate;
 import epicsquid.roots.network.fx.MessageLightDrifterFX;
@@ -50,6 +52,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -148,6 +151,14 @@ public class EventManager {
     if (event.getObject() instanceof EntityPlayer) {
       event.addCapability(new ResourceLocation(Roots.MODID, "player_grove_capability"), new PlayerGroveCapabilityProvider());
       event.addCapability(new ResourceLocation(Roots.MODID, "player_data_capability"), new PlayerDataCapabilityProvider());
+    }
+  }
+
+  @SubscribeEvent
+  @Optional.Method(modid = "baubles")
+  public void addBaublesCapability (AttachCapabilitiesEvent<ItemStack> event) {
+    if (event.getObject().getItem() instanceof ItemPouch) {
+      event.addCapability(new ResourceLocation(Roots.MODID, "baubles_pouch"), BaubleCapabilityHandler.instance);
     }
   }
 
