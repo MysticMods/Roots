@@ -84,7 +84,7 @@ public abstract class SpellBase {
     tooltip.add("" + textColor + TextFormatting.BOLD + I18n.format("roots.spell." + name + ".name") + TextFormatting.RESET);
     for(Map.Entry<Herb, Double> entry : this.costs.entrySet()){
       Herb herb = entry.getKey();
-      double d = entry.getValue();
+      String d = String.format("%.3f", entry.getValue());
       tooltip.add(I18n.format(herb.getItem().getUnlocalizedName() + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
     }
   }
