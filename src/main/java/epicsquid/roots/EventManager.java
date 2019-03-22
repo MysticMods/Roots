@@ -5,6 +5,8 @@ import java.util.Random;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.proxy.ClientProxy;
+import epicsquid.roots.capability.grove.IPlayerGroveCapability;
+import epicsquid.roots.capability.playerdata.IPlayerDataCapability;
 import epicsquid.roots.capability.playerdata.PlayerDataCapabilityProvider;
 import epicsquid.roots.capability.grove.PlayerGroveCapabilityProvider;
 import epicsquid.roots.capability.spell.SpellHolderCapabilityProvider;
@@ -150,18 +152,19 @@ public class EventManager {
   @SubscribeEvent
   public void livingUpdate(LivingUpdateEvent event) {
     if (event.getEntity() instanceof EntityPlayer) {
-      if (event.getEntity().hasCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null)) {
-        if (!event.getEntity().world.isRemote && event.getEntity().getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null).isDirty()) {
-          PacketHandler.INSTANCE.sendToAll(new MessagePlayerGroveUpdate(event.getEntity().getUniqueID(),
-              event.getEntity().getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null).getData()));
-          event.getEntity().getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null).clean();
+      EntityPlayer player = (EntityPlayer) event.getEntity();
+      if (player.hasCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null)) {
+        IPlayerGroveCapability cap = player.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null);
+        if (cap != null && !player.world.isRemote && cap.isDirty()) {
+          PacketHandler.INSTANCE.sendToAll(new MessagePlayerGroveUpdate(player.getUniqueID(), cap.getData()));
+          cap.clean();
         }
       }
-      if (event.getEntity().hasCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null)){
-        if (!event.getEntity().world.isRemote && event.getEntity().getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null).isDirty()){
-          PacketHandler.INSTANCE.sendToAll(new MessagePlayerDataUpdate(event.getEntity().getUniqueID(),
-              event.getEntity().getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null).getData()));
-          event.getEntity().getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null).clean();
+      if (player.hasCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null)){
+        IPlayerDataCapability cap = player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null);
+        if (cap != null && !player.world.isRemote && cap.isDirty()){
+          PacketHandler.INSTANCE.sendToAll(new MessagePlayerDataUpdate(player.getUniqueID(), cap.getData()));
+          cap.clean();
         }
       }
     }
