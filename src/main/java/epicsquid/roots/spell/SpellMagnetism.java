@@ -37,6 +37,8 @@ public class SpellMagnetism extends SpellBase {
     List<EntityItem> items = Util.getEntitiesWithinRadius(player.getEntityWorld(), EntityItem.class, player.getPosition(), 8, 8, 8);
     for (EntityItem item : items) {
       item.setPickupDelay(0);
+      // TODO: Check to see what the potential standard is for "unmagnetising" things
+      // TODO: Support Solegnolia?
       item.moveToBlockPosAndAngles(player.getPosition(), 0f, 0f);
     }
   }
