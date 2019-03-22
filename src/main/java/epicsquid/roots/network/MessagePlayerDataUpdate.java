@@ -51,7 +51,7 @@ public class MessagePlayerDataUpdate implements IMessage {
         if (w != null){
           if (w.getPlayerEntityByUUID(message.id) != null){
             EntityPlayer player = w.getPlayerEntityByUUID(message.id);
-            if (player.hasCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null)){
+            if (player != null && player.hasCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null)){
               player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null).setData(message.tag);
             }
           }
