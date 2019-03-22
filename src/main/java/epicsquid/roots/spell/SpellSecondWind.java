@@ -14,9 +14,9 @@ import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
-public class SpellIronLungs extends SpellBase {
+public class SpellSecondWind extends SpellBase {
 
-  public SpellIronLungs(String name) {
+  public SpellSecondWind(String name) {
     super(name, TextFormatting.BLUE, 64f / 255f, 64f / 255f, 64f / 255f, 192f / 255f, 32f / 255f, 255f / 255f);
     this.castType = EnumCastType.INSTANTANEOUS;
     this.cooldown = 24;
