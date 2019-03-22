@@ -7,7 +7,7 @@ public class SpellRegistry {
   public static Map<String, SpellBase> spellRegistry = new HashMap<>();
 
   public static SpellBase spell_wild_fire, spell_sanctuary, spell_dandelion_winds, spell_rose_thorns, spell_shatter, spell_petal_shell, spell_time_stop, spell_sky_soarer, spell_life_drain, spell_acid_cloud, spell_growth_infusion, spell_mind_ward, spell_radiance, spell_light_drifter,
-      spell_sense_animals, spell_iron_lungs, spell_magnetism;
+      spell_sense_animals, spell_second_wind, spell_magnetism;
 
   public static SpellBase getSpell(String s){
     return spellRegistry.getOrDefault(s, null);
@@ -29,7 +29,7 @@ public class SpellRegistry {
     spellRegistry.put("spell_radiance", spell_radiance = new SpellRadiance("spell_radiance"));
     spellRegistry.put("spell_light_drifter", spell_light_drifter = new SpellLightDrifter("spell_light_drifter"));
     spellRegistry.put("spell_sense_animals", spell_sense_animals = new SpellSenseAnimals("spell_sense_animals"));
-    spellRegistry.put("spell_iron_lungs", spell_iron_lungs = new SpellIronLungs("spell_iron_lungs"));
+    spellRegistry.put("spell_second_wind", spell_second_wind = new SpellSecondWind("spell_second_wind"));
     spellRegistry.put("spell_magnetism", spell_magnetism = new SpellMagnetism("spell_magnetism"));
   }
 
