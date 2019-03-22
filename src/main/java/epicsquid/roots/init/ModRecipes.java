@@ -9,6 +9,9 @@ import javax.annotation.Nonnull;
 
 import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
+import epicsquid.mysticallib.item.ItemBase;
+import epicsquid.mysticalworld.MysticalWorld;
+import epicsquid.mysticalworld.item.metals.Metal;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.recipe.MortarRecipe;
@@ -204,15 +207,37 @@ public class ModRecipes {
     return pyreCraftingRecipes;
   }
 
+  public static void initMortarRecipes () {
+    addMortarRecipe(new ItemStack(Items.DYE, 1, 12), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.carapace), 1, 1, 1, 1, 1, 1);
+    addMortarRecipe(new ItemStack(ModItems.flour), Ingredient.fromItem(Items.WHEAT), 1f, 1f, 0f, 1f, 1f, 0f);
+    addMortarRecipe(new ItemStack(ModItems.flour), Ingredient.fromItem(Items.POTATO), 1f, 1f, 0, 1f, 1f, 0f);
+
+    for (Metal metal : Metal.values()) {
+      if (!metal.isEnabled()) continue;
+
+      Item metalDust = metal.getDust();
+      if (metalDust == null) {
+        continue;
+      }
+
+      addMortarRecipe(new ItemStack(metalDust), new OreIngredient("ingot" + metal.getOredictNameSuffix()), 82f/255f, 92f/255f, 114f/255f, 160f/255f, 167f/255f, 183f/255f);
+    }
+
+    addMortarRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.gold_dust), new OreIngredient("ingotGold"), 82f/255f, 92f/255f, 114f/255f, 160f/255f, 167f/255f, 183f/255f);
+    addMortarRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.iron_dust), new OreIngredient("ingotIron"), 82f/255f, 92f/255f, 114f/255f, 160f/255f, 167f/255f, 183f/255f);
+  }
+
   /**
    * Register all recipes
    */
   public static void initRecipes(@Nonnull RegisterModRecipesEvent event) {
     initDrops();
-    addMortarRecipe(new ItemStack(Items.DYE, 1, 12), Ingredient.fromStacks(new ItemStack(epicsquid.mysticalworld.init.ModItems.carapace)), 1, 1, 1, 1, 1, 1);
-    addMortarRecipe(new ItemStack(ModItems.flour), Ingredient.fromStacks(new ItemStack(Items.WHEAT)), 1f, 1f, 0f, 1f, 1f, 0f);
+
+    initMortarRecipes();
 
     GameRegistry.addSmelting(ModItems.flour, new ItemStack(Items.BREAD), 0.125f);
+    GameRegistry.addSmelting(Items.IRON_INGOT, new ItemStack(epicsquid.mysticalworld.init.ModItems.iron_dust), 0.125f);
+    GameRegistry.addSmelting(Items.GOLD_INGOT, new ItemStack(epicsquid.mysticalworld.init.ModItems.gold_dust), 0.125f);
 
     initCraftingRecipes();
     RunicShearRecipes.initRecipes();
