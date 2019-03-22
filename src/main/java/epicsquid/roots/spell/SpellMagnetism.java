@@ -20,7 +20,7 @@ public class SpellMagnetism extends SpellBase {
   public SpellMagnetism(String name) {
     super(name, TextFormatting.DARK_RED, 53f / 255f, 31f / 255f, 34f / 255f, 37f / 255f, 45f / 255f, 80f / 255f);
     this.castType = EnumCastType.INSTANTANEOUS;
-    this.cooldown = 120;
+    this.cooldown = 200;
 
     addCost(HerbRegistry.getHerbByName("wildroot"), 0.725f);
     addIngredients(
@@ -34,7 +34,7 @@ public class SpellMagnetism extends SpellBase {
 
   @Override
   public void cast(EntityPlayer player, List<SpellModule> modules) {
-    List<EntityItem> items = Util.getEntitiesWithinRadius(player.getEntityWorld(), EntityItem.class, player.getPosition(), 30, 15, 30);
+    List<EntityItem> items = Util.getEntitiesWithinRadius(player.getEntityWorld(), EntityItem.class, player.getPosition(), 8, 8, 8);
     for (EntityItem item : items) {
       item.setPickupDelay(0);
       item.moveToBlockPosAndAngles(player.getPosition(), 0f, 0f);
