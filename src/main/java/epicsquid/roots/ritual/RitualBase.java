@@ -3,6 +3,7 @@ package epicsquid.roots.ritual;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -17,7 +18,6 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import scala.actors.threadpool.Arrays;
 
 public abstract class RitualBase {
   protected static int OFFERTORY_RADIUS = 6;
