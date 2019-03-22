@@ -17,6 +17,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 
 public class SpellSanctuary extends SpellBase {
+  public static String spellName = "spell_sanctuary";
+  public static SpellSanctuary instance = new SpellSanctuary(spellName);
 
   public SpellSanctuary(String name) {
     super(name, TextFormatting.DARK_PURPLE, 208f / 255f, 16f / 255f, 80f / 255f, 224f / 255f, 32f / 255f, 144f / 255f);

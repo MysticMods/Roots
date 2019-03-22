@@ -13,6 +13,8 @@ import net.minecraft.util.text.TextFormatting;
 import java.util.List;
 
 public class SpellRoseThorns extends SpellBase {
+  public static String spellName = "spell_rose_thorns";
+  public static SpellRoseThorns instance = new SpellRoseThorns(spellName);
 
   public SpellRoseThorns(String name) {
     super(name, TextFormatting.RED, 255f / 255f, 32f / 255f, 64f / 255f, 32f / 255f, 255f / 255f, 96f / 255f);

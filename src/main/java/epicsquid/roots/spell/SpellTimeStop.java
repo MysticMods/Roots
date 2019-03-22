@@ -14,6 +14,8 @@ import net.minecraft.util.text.TextFormatting;
 import java.util.List;
 
 public class SpellTimeStop extends SpellBase {
+  public static String spellName = "spell_time_stop";
+  public static SpellTimeStop instance = new SpellTimeStop(spellName);
 
   public SpellTimeStop(String name) {
     super(name, TextFormatting.DARK_BLUE, 64f / 255f, 64f / 255f, 64f / 255f, 192f / 255f, 32f / 255f, 255f / 255f);

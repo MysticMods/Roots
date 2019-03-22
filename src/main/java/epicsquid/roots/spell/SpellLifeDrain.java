@@ -19,6 +19,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class SpellLifeDrain extends SpellBase {
+  public static String spellName = "spell_life_drain";
+  public static SpellLifeDrain instance = new SpellLifeDrain(spellName);
 
   public SpellLifeDrain(String name) {
     super(name, TextFormatting.DARK_GRAY, 144f / 255f, 32f / 255f, 64f / 255f, 255f / 255f, 196f / 255f, 240f / 255f);

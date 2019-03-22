@@ -6,6 +6,7 @@ import java.util.UUID;
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.spell.SpellTimeStop;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -54,13 +55,13 @@ public class EntityTimeStop extends Entity {
             ParticleUtil
                 .spawnParticleSmoke(world, (float) posX + rand.nextFloat() * rand.nextFloat() * 8.0f * (float) Math.sin(Math.toRadians(i)), (float) posY - 0.5f,
                     (float) posZ + rand.nextFloat() * rand.nextFloat() * 8.0f * (float) Math.cos(Math.toRadians(i)), 0, rand.nextFloat() * 0.05f, 0,
-                    SpellRegistry.spell_time_stop.getRed1(), SpellRegistry.spell_time_stop.getGreen1(), SpellRegistry.spell_time_stop.getBlue1(), rand.nextFloat() * 0.25f,
+                    SpellTimeStop.instance.getRed1(), SpellTimeStop.instance.getGreen1(), SpellTimeStop.instance.getBlue1(), rand.nextFloat() * 0.25f,
                     rand.nextFloat() * 24f, 120, true);
           } else {
             ParticleUtil
                 .spawnParticleSmoke(world, (float) posX + rand.nextFloat() * rand.nextFloat() * 8.0f * (float) Math.sin(Math.toRadians(i)), (float) posY - 0.5f,
                     (float) posZ + rand.nextFloat() * rand.nextFloat() * 8.0f * (float) Math.cos(Math.toRadians(i)), 0, rand.nextFloat() * 0.05f, 0,
-                    SpellRegistry.spell_time_stop.getRed2(), SpellRegistry.spell_time_stop.getRed2(), SpellRegistry.spell_time_stop.getBlue2(), rand.nextFloat() * 0.25f,
+                    SpellTimeStop.instance.getRed2(), SpellTimeStop.instance.getRed2(), SpellTimeStop.instance.getBlue2(), rand.nextFloat() * 0.25f,
                     rand.nextFloat() * 24f, 120, true);
           }
         }

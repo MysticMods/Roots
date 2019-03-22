@@ -3,6 +3,7 @@ package epicsquid.roots.network.fx;
 import java.util.Random;
 
 import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.spell.SpellMindWard;
 import epicsquid.roots.spell.SpellRegistry;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -58,10 +59,10 @@ public class MessageMindWardFX implements IMessage {
         float y = (float)message.posY;
         float z = (float)message.posZ+(0.25f*random.nextFloat())*(float)Math.cos(Math.toRadians(i));
         if (random.nextBoolean()){
-          ParticleUtil.spawnParticleGlow(world, x, y, z, 0, 0.125f*(random.nextFloat()-0.5f), 0, SpellRegistry.spell_mind_ward.getRed1(), SpellRegistry.spell_mind_ward.getGreen1(), SpellRegistry.spell_mind_ward.getBlue1(), 0.75f, 2f+random.nextFloat()*2f, 20);
+          ParticleUtil.spawnParticleGlow(world, x, y, z, 0, 0.125f*(random.nextFloat()-0.5f), 0, SpellMindWard.instance.getRed1(), SpellMindWard.instance.getGreen1(), SpellMindWard.instance.getBlue1(), 0.75f, 2f+random.nextFloat()*2f, 20);
         }
         else {
-          ParticleUtil.spawnParticleGlow(world, x, y, z, 0, 0.125f*(random.nextFloat()-0.5f), 0, SpellRegistry.spell_mind_ward.getRed2(), SpellRegistry.spell_mind_ward.getGreen2(), SpellRegistry.spell_mind_ward.getBlue2(), 0.75f, 2f+random.nextFloat()*2f, 20);
+          ParticleUtil.spawnParticleGlow(world, x, y, z, 0, 0.125f*(random.nextFloat()-0.5f), 0, SpellMindWard.instance.getRed2(), SpellMindWard.instance.getGreen2(), SpellMindWard.instance.getBlue2(), 0.75f, 2f+random.nextFloat()*2f, 20);
         }
       }
       return null;

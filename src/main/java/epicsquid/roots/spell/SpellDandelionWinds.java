@@ -16,6 +16,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 
 public class SpellDandelionWinds extends SpellBase {
+  public static String spellName = "spell_dandelion_winds";
+  public static SpellDandelionWinds instance = new SpellDandelionWinds(spellName);
 
   public SpellDandelionWinds(String name) {
     super(name, TextFormatting.YELLOW, 255f / 255f, 255f / 255f, 32f / 255f, 255f / 255f, 176f / 255f, 32f / 255f);

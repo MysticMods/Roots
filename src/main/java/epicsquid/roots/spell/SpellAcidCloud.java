@@ -22,6 +22,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class SpellAcidCloud extends SpellBase {
+  public static String spellName = "spell_acid_cloud";
+  public static SpellAcidCloud instance = new SpellAcidCloud(spellName);
 
   public SpellAcidCloud(String name) {
     super(name, TextFormatting.DARK_GREEN, 80f / 255f, 160f / 255f, 40f / 255f, 64f / 255f, 96f / 255f, 32f / 255f);

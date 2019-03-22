@@ -2,6 +2,7 @@ package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.spell.SpellLightDrifter;
 import epicsquid.roots.spell.SpellRegistry;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -61,11 +62,11 @@ public class MessageLightDrifterFX implements IMessage {
           vz *= -1;
         }
         if (Util.rand.nextBoolean()) {
-          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellRegistry.spell_light_drifter.getRed1(),
-              SpellRegistry.spell_light_drifter.getGreen1(), SpellRegistry.spell_light_drifter.getBlue1(), 0.125f, 8f + Util.rand.nextFloat() * 6f, 80, true);
+          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellLightDrifter.instance.getRed1(),
+              SpellLightDrifter.instance.getGreen1(), SpellLightDrifter.instance.getBlue1(), 0.125f, 8f + Util.rand.nextFloat() * 6f, 80, true);
         } else {
-          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellRegistry.spell_light_drifter.getRed2(),
-              SpellRegistry.spell_light_drifter.getGreen2(), SpellRegistry.spell_light_drifter.getBlue2(), 0.125f, 8f + Util.rand.nextFloat() * 6f, 80, true);
+          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellLightDrifter.instance.getRed2(),
+              SpellLightDrifter.instance.getGreen2(), SpellLightDrifter.instance.getBlue2(), 0.125f, 8f + Util.rand.nextFloat() * 6f, 80, true);
         }
       }
       return null;

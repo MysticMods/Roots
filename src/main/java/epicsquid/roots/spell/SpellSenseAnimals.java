@@ -16,6 +16,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextFormatting;
 
 public class SpellSenseAnimals extends SpellBase {
+  public static String spellName = "spell_sense_animals";
+  public static SpellSenseAnimals instance = new SpellSenseAnimals(spellName);
 
   public SpellSenseAnimals(String name) {
     super(name, TextFormatting.WHITE, 255f / 255f, 255f / 255f, 255f / 255f, 10f / 255f, 196f / 255f, 10f / 255f);

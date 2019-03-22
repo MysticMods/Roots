@@ -3,6 +3,7 @@ package epicsquid.roots.network.fx;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.spell.SpellSanctuary;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.MathHelper;
@@ -54,12 +55,12 @@ public class MessageSanctuaryRingFX implements IMessage {
         if (Util.rand.nextBoolean()) {
           if (Util.rand.nextBoolean()) {
             ParticleUtil.spawnParticlePetal(world, (float) message.posX + 3.0f * (float) Math.sin(Math.toRadians(k)), (float) message.posY,
-                (float) message.posZ + 3.0f * (float) Math.cos(Math.toRadians(k)), 0, 0, 0, SpellRegistry.spell_sanctuary.getRed1(),
-                SpellRegistry.spell_sanctuary.getGreen1(), SpellRegistry.spell_sanctuary.getBlue1(), 0.5f, 1.25f + 5.0f * Util.rand.nextFloat(), 40);
+                (float) message.posZ + 3.0f * (float) Math.cos(Math.toRadians(k)), 0, 0, 0, SpellSanctuary.instance.getRed1(),
+                SpellSanctuary.instance.getGreen1(), SpellSanctuary.instance.getBlue1(), 0.5f, 1.25f + 5.0f * Util.rand.nextFloat(), 40);
           } else {
             ParticleUtil.spawnParticlePetal(world, (float) message.posX + 3.0f * (float) Math.sin(Math.toRadians(k)), (float) message.posY,
-                (float) message.posZ + 3.0f * (float) Math.cos(Math.toRadians(k)), 0, 0, 0, SpellRegistry.spell_sanctuary.getRed2(),
-                SpellRegistry.spell_sanctuary.getGreen2(), SpellRegistry.spell_sanctuary.getBlue2(), 0.5f, 1.25f + 5.0f * Util.rand.nextFloat(), 40);
+                (float) message.posZ + 3.0f * (float) Math.cos(Math.toRadians(k)), 0, 0, 0, SpellSanctuary.instance.getRed2(),
+                SpellSanctuary.instance.getGreen2(), SpellSanctuary.instance.getBlue2(), 0.5f, 1.25f + 5.0f * Util.rand.nextFloat(), 40);
           }
         }
       }

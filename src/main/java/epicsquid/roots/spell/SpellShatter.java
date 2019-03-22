@@ -21,6 +21,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
 
 public class SpellShatter extends SpellBase {
+  public static String spellName = "spell_shatter";
+  public static SpellShatter instance = new SpellShatter(spellName);
 
   public SpellShatter(String name) {
     super(name, TextFormatting.GRAY, 96f / 255f, 96f / 255f, 96f / 255f, 192f / 255f, 192f / 255f, 192f / 255f);

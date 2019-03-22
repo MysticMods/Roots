@@ -3,6 +3,7 @@ package epicsquid.roots.network.fx;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.spell.SpellTimeStop;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.MathHelper;
@@ -55,13 +56,13 @@ public class MessageTimeStopStartFX implements IMessage {
           if (Util.rand.nextBoolean()) {
             ParticleUtil.spawnParticleGlow(world, (float) message.posX + 0.5f * (float) Math.sin(Math.toRadians(k)), (float) message.posY,
                 (float) message.posZ + 0.5f * (float) Math.cos(Math.toRadians(k)), Util.rand.nextFloat() * 0.1875f * (float) Math.sin(Math.toRadians(k)),
-                Util.rand.nextFloat() * -0.0625f, Util.rand.nextFloat() * 0.1875f * (float) Math.cos(Math.toRadians(k)), SpellRegistry.spell_time_stop.getRed1(),
-                SpellRegistry.spell_time_stop.getGreen1(), SpellRegistry.spell_time_stop.getBlue1(), 0.5f, 2.5f + 7.0f * Util.rand.nextFloat(), 40);
+                Util.rand.nextFloat() * -0.0625f, Util.rand.nextFloat() * 0.1875f * (float) Math.cos(Math.toRadians(k)), SpellTimeStop.instance.getRed1(),
+                SpellTimeStop.instance.getGreen1(), SpellTimeStop.instance.getBlue1(), 0.5f, 2.5f + 7.0f * Util.rand.nextFloat(), 40);
           } else {
             ParticleUtil.spawnParticleGlow(world, (float) message.posX + 0.5f * (float) Math.sin(Math.toRadians(k)), (float) message.posY,
                 (float) message.posZ + 0.5f * (float) Math.cos(Math.toRadians(k)), Util.rand.nextFloat() * 0.1875f * (float) Math.sin(Math.toRadians(k)),
-                Util.rand.nextFloat() * -0.0625f, Util.rand.nextFloat() * 0.1875f * (float) Math.cos(Math.toRadians(k)), SpellRegistry.spell_time_stop.getRed2(),
-                SpellRegistry.spell_time_stop.getGreen2(), SpellRegistry.spell_time_stop.getBlue2(), 0.5f, 2.5f + 7.0f * Util.rand.nextFloat(), 40);
+                Util.rand.nextFloat() * -0.0625f, Util.rand.nextFloat() * 0.1875f * (float) Math.cos(Math.toRadians(k)), SpellTimeStop.instance.getRed2(),
+                SpellTimeStop.instance.getGreen2(), SpellTimeStop.instance.getBlue2(), 0.5f, 2.5f + 7.0f * Util.rand.nextFloat(), 40);
           }
         }
       }
