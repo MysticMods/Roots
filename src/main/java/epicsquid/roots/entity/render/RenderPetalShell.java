@@ -1,5 +1,6 @@
 package epicsquid.roots.entity.render;
 
+import epicsquid.roots.spell.SpellPetalShell;
 import org.lwjgl.opengl.GL11;
 
 import epicsquid.roots.entity.spell.EntityPetalShell;
@@ -38,12 +39,12 @@ public class RenderPetalShell extends RenderEntity{
   @Override
   public void doRender(Entity entity, double dx, double dy, double dz, float entityYaw, float partialTicks){
     EntityPetalShell shell = (EntityPetalShell) entity;
-    float r1 = SpellRegistry.spell_petal_shell.getRed1();
-    float r2 = SpellRegistry.spell_petal_shell.getRed2();
-    float g1 = SpellRegistry.spell_petal_shell.getGreen1();
-    float g2 = SpellRegistry.spell_petal_shell.getGreen2();
-    float b1 = SpellRegistry.spell_petal_shell.getBlue1();
-    float b2 = SpellRegistry.spell_petal_shell.getBlue2();
+    float r1 = SpellPetalShell.instance.getRed1();
+    float r2 = SpellPetalShell.instance.getRed2();
+    float g1 = SpellPetalShell.instance.getGreen1();
+    float g2 = SpellPetalShell.instance.getGreen2();
+    float b1 = SpellPetalShell.instance.getBlue1();
+    float b2 = SpellPetalShell.instance.getBlue2();
     double x = entity.posX+dx + 1;
     double y = entity.posY+dy;
     double z = entity.posZ+dz;

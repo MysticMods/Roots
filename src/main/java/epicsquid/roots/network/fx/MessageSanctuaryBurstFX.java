@@ -3,6 +3,7 @@ package epicsquid.roots.network.fx;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.spell.SpellSanctuary;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.MathHelper;
@@ -53,12 +54,12 @@ public class MessageSanctuaryBurstFX implements IMessage {
       for (int k = 0; k < 10; k++) {
         if (Util.rand.nextBoolean()) {
           ParticleUtil.spawnParticlePetal(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f),
-              0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellRegistry.spell_sanctuary.getRed1() * 255.0f,
-              SpellRegistry.spell_sanctuary.getGreen1() * 255.0f, SpellRegistry.spell_sanctuary.getBlue1() * 255.0f, 0.5f, 5f, 14);
+              0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellSanctuary.instance.getRed1() * 255.0f,
+              SpellSanctuary.instance.getGreen1() * 255.0f, SpellSanctuary.instance.getBlue1() * 255.0f, 0.5f, 5f, 14);
         } else {
           ParticleUtil.spawnParticlePetal(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f),
-              0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellRegistry.spell_sanctuary.getRed2() * 255.0f,
-              SpellRegistry.spell_sanctuary.getGreen2() * 255.0f, SpellRegistry.spell_sanctuary.getBlue2() * 255.0f, 0.5f, 5f, 14);
+              0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellSanctuary.instance.getRed2() * 255.0f,
+              SpellSanctuary.instance.getGreen2() * 255.0f, SpellSanctuary.instance.getBlue2() * 255.0f, 0.5f, 5f, 14);
         }
       }
       return null;

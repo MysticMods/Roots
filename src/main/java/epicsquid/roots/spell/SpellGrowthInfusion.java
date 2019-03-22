@@ -17,6 +17,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
 
 public class SpellGrowthInfusion extends SpellBase {
+  public static String spellName = "spell_growth_infusion";
+  public static SpellGrowthInfusion instance = new SpellGrowthInfusion(spellName);
 
   public SpellGrowthInfusion(String name) {
     super(name, TextFormatting.GREEN, 48f / 255f, 255f / 255f, 48f / 255f, 192f / 255f, 255f / 255f, 192f / 255f);

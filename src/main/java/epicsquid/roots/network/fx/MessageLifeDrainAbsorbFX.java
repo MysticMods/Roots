@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.spell.SpellLifeDrain;
 import epicsquid.roots.spell.SpellRegistry;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -66,11 +67,11 @@ public class MessageLifeDrainAbsorbFX implements IMessage {
           float z = (float) player.posZ + (float) player.getLookVec().z * (6.0f + Util.rand.nextFloat() * 9.0f) + 2.0f * (Util.rand.nextFloat() - 0.5f);
           if (Util.rand.nextBoolean()) {
             ParticleUtil.spawnParticleLineGlow(world, x, y, z, (float) player.posX, (float) player.posY + 1.0f, (float) player.posZ,
-                SpellRegistry.spell_life_drain.getRed1(), SpellRegistry.spell_life_drain.getGreen1(), SpellRegistry.spell_life_drain.getBlue1(), 1.0f,
+                SpellLifeDrain.instance.getRed1(), SpellLifeDrain.instance.getGreen1(), SpellLifeDrain.instance.getBlue1(), 1.0f,
                 6.0f + 6.0f * Util.rand.nextFloat(), 40);
           } else {
             ParticleUtil.spawnParticleLineGlow(world, x, y, z, (float) player.posX, (float) player.posY + 1.0f, (float) player.posZ,
-                SpellRegistry.spell_life_drain.getRed2(), SpellRegistry.spell_life_drain.getGreen2(), SpellRegistry.spell_life_drain.getBlue2(), 1.0f,
+                SpellLifeDrain.instance.getRed2(), SpellLifeDrain.instance.getGreen2(), SpellLifeDrain.instance.getBlue2(), 1.0f,
                 6.0f + 6.0f * Util.rand.nextFloat(), 40);
           }
         }

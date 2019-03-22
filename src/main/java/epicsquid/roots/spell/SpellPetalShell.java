@@ -15,6 +15,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 
 public class SpellPetalShell extends SpellBase {
+  public static String spellName = "spell_petal_shell";
+  public static SpellPetalShell instance = new SpellPetalShell(spellName);
 
   public SpellPetalShell(String name) {
     super(name, TextFormatting.LIGHT_PURPLE, 255f / 255f, 192f / 255f, 240f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);

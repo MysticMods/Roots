@@ -3,6 +3,7 @@ package epicsquid.roots.network.fx;
 import java.util.Random;
 
 import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.spell.SpellMindWard;
 import epicsquid.roots.spell.SpellRegistry;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -55,19 +56,19 @@ public class MessageMindWardRingFX implements IMessage {
       World world = Minecraft.getMinecraft().world;
       for (int k = 0; k < 20; k ++){
         if (random.nextBoolean()){
-          ParticleUtil.spawnParticleGlow(world, (float)message.posX, (float)message.posY, (float)message.posZ, 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), SpellRegistry.spell_mind_ward.getRed1()*255.0f,SpellRegistry.spell_mind_ward.getGreen1()*255.0f,SpellRegistry.spell_mind_ward.getBlue1()*255.0f, 0.75f, 7.5f, 24);
+          ParticleUtil.spawnParticleGlow(world, (float)message.posX, (float)message.posY, (float)message.posZ, 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), SpellMindWard.instance.getRed1()*255.0f,SpellMindWard.instance.getGreen1()*255.0f,SpellMindWard.instance.getBlue1()*255.0f, 0.75f, 7.5f, 24);
         }
         else {
-          ParticleUtil.spawnParticleGlow(world, (float)message.posX, (float)message.posY, (float)message.posZ, 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), SpellRegistry.spell_mind_ward.getRed2()*255.0f,SpellRegistry.spell_mind_ward.getGreen2()*255.0f,SpellRegistry.spell_mind_ward.getBlue2()*255.0f, 0.75f, 7.5f, 24);
+          ParticleUtil.spawnParticleGlow(world, (float)message.posX, (float)message.posY, (float)message.posZ, 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), SpellMindWard.instance.getRed2()*255.0f,SpellMindWard.instance.getGreen2()*255.0f,SpellMindWard.instance.getBlue2()*255.0f, 0.75f, 7.5f, 24);
         }
       }
       for (float k = 0; k < 360; k += random.nextInt(9)){
         if (random.nextBoolean()){
           if (random.nextBoolean()){
-            ParticleUtil.spawnParticleGlow(world, (float)message.posX+1.15f*(float)Math.sin(Math.toRadians(k)), (float)message.posY, (float)message.posZ+1.15f*(float)Math.cos(Math.toRadians(k)), 0, 0, 0, SpellRegistry.spell_mind_ward.getRed1(), SpellRegistry.spell_mind_ward.getGreen1(), SpellRegistry.spell_mind_ward.getBlue1(), 0.75f, 1.25f+5.0f*random.nextFloat(), 40);
+            ParticleUtil.spawnParticleGlow(world, (float)message.posX+1.15f*(float)Math.sin(Math.toRadians(k)), (float)message.posY, (float)message.posZ+1.15f*(float)Math.cos(Math.toRadians(k)), 0, 0, 0, SpellMindWard.instance.getRed1(), SpellMindWard.instance.getGreen1(), SpellMindWard.instance.getBlue1(), 0.75f, 1.25f+5.0f*random.nextFloat(), 40);
           }
           else {
-            ParticleUtil.spawnParticleGlow(world, (float)message.posX+1.15f*(float)Math.sin(Math.toRadians(k)), (float)message.posY, (float)message.posZ+1.15f*(float)Math.cos(Math.toRadians(k)), 0, 0, 0, SpellRegistry.spell_mind_ward.getRed2(), SpellRegistry.spell_mind_ward.getGreen2(), SpellRegistry.spell_mind_ward.getBlue2(), 0.75f, 1.25f+5.0f*random.nextFloat(), 40);
+            ParticleUtil.spawnParticleGlow(world, (float)message.posX+1.15f*(float)Math.sin(Math.toRadians(k)), (float)message.posY, (float)message.posZ+1.15f*(float)Math.cos(Math.toRadians(k)), 0, 0, 0, SpellMindWard.instance.getRed2(), SpellMindWard.instance.getGreen2(), SpellMindWard.instance.getBlue2(), 0.75f, 1.25f+5.0f*random.nextFloat(), 40);
           }
         }
       }

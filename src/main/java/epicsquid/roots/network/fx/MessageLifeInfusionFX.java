@@ -2,6 +2,7 @@ package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.spell.SpellGrowthInfusion;
 import epicsquid.roots.spell.SpellRegistry;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.state.IBlockState;
@@ -59,13 +60,13 @@ public class MessageLifeInfusionFX implements IMessage {
         if (Util.rand.nextBoolean()) {
           ParticleUtil.spawnParticleStar(world, (float) message.posX + Util.rand.nextFloat(), (float) message.posY + Util.rand.nextFloat(),
               (float) message.posZ + Util.rand.nextFloat(), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f),
-              0.125f * (Util.rand.nextFloat() - 0.5f), SpellRegistry.spell_growth_infusion.getRed1() * 255.0f, SpellRegistry.spell_growth_infusion.getGreen1() * 255.0f,
-              SpellRegistry.spell_growth_infusion.getBlue1() * 255.0f, 0.5f, 5f, 14);
+              0.125f * (Util.rand.nextFloat() - 0.5f), SpellGrowthInfusion.instance.getRed1() * 255.0f, SpellGrowthInfusion.instance.getGreen1() * 255.0f,
+              SpellGrowthInfusion.instance.getBlue1() * 255.0f, 0.5f, 5f, 14);
         } else {
           ParticleUtil.spawnParticleStar(world, (float) message.posX + Util.rand.nextFloat(), (float) message.posY + Util.rand.nextFloat(),
               (float) message.posZ + Util.rand.nextFloat(), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f),
-              0.125f * (Util.rand.nextFloat() - 0.5f), SpellRegistry.spell_growth_infusion.getRed2() * 255.0f, SpellRegistry.spell_growth_infusion.getGreen2() * 255.0f,
-              SpellRegistry.spell_growth_infusion.getBlue2() * 255.0f, 0.5f, 5f, 14);
+              0.125f * (Util.rand.nextFloat() - 0.5f), SpellGrowthInfusion.instance.getRed2() * 255.0f, SpellGrowthInfusion.instance.getGreen2() * 255.0f,
+              SpellGrowthInfusion.instance.getBlue2() * 255.0f, 0.5f, 5f, 14);
         }
       }
       return null;

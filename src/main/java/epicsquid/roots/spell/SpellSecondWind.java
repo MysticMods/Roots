@@ -15,6 +15,8 @@ import net.minecraftforge.oredict.OreIngredient;
 import java.util.List;
 
 public class SpellSecondWind extends SpellBase {
+  public static String spellName = "spell_second_wind";
+  public static SpellSecondWind instance = new SpellSecondWind(spellName);
 
   public SpellSecondWind(String name) {
     super(name, TextFormatting.BLUE, 64f / 255f, 64f / 255f, 64f / 255f, 192f / 255f, 32f / 255f, 255f / 255f);

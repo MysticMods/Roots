@@ -22,6 +22,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class SpellRadiance extends SpellBase {
+  public static String spellName = "spell_radiance";
+  public static SpellRadiance instance = new SpellRadiance(spellName);
 
   public SpellRadiance(String name) {
     super(name, TextFormatting.WHITE, 255f / 255f, 255f / 255f, 64f / 255f, 255f / 255f, 255f / 255f, 192f / 255f);

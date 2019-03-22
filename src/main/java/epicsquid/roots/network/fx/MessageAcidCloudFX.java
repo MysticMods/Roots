@@ -2,6 +2,7 @@ package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.spell.SpellAcidCloud;
 import epicsquid.roots.spell.SpellRegistry;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -61,11 +62,11 @@ public class MessageAcidCloudFX implements IMessage {
           vz *= -1;
         }
         if (Util.rand.nextBoolean()) {
-          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellRegistry.spell_acid_cloud.getRed1(),
-              SpellRegistry.spell_acid_cloud.getGreen1(), SpellRegistry.spell_acid_cloud.getBlue1(), 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
+          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellAcidCloud.instance.getRed1(),
+              SpellAcidCloud.instance.getGreen1(), SpellAcidCloud.instance.getBlue1(), 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
         } else {
-          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellRegistry.spell_acid_cloud.getRed2(),
-              SpellRegistry.spell_acid_cloud.getGreen2(), SpellRegistry.spell_acid_cloud.getBlue2(), 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
+          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellAcidCloud.instance.getRed2(),
+              SpellAcidCloud.instance.getGreen2(), SpellAcidCloud.instance.getBlue2(), 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
         }
       }
       return null;

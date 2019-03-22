@@ -14,6 +14,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 
 public class SpellMindWard extends SpellBase {
+  public static String spellName = "spell_mind_ward";
+  public static SpellMindWard instance = new SpellMindWard(spellName);
 
   public SpellMindWard(String name) {
     super(name, TextFormatting.DARK_RED, 128f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f);

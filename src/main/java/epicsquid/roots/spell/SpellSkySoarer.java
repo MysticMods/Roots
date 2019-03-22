@@ -12,6 +12,8 @@ import net.minecraft.util.text.TextFormatting;
 import java.util.List;
 
 public class SpellSkySoarer extends SpellBase {
+  public static String spellName = "spell_sky_soarer";
+  public static SpellSkySoarer instance = new SpellSkySoarer(spellName);
 
   public SpellSkySoarer(String name) {
     super(name, TextFormatting.BLUE, 32f / 255f, 200f / 255f, 255f / 255f, 32f / 255f, 64f / 255f, 255f / 255f);

@@ -12,6 +12,8 @@ import net.minecraft.util.text.TextFormatting;
 import java.util.List;
 
 public class SpellWildfire extends SpellBase {
+  public static String spellName = "spell_wild_fire";
+  public static SpellWildfire instance = new SpellWildfire(spellName);
 
   public SpellWildfire(String name) {
     super(name, TextFormatting.GOLD, 255f / 255f, 128f / 255f, 32f / 255f, 255f / 255f, 64f / 255f, 32f / 255f);
