@@ -34,6 +34,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
@@ -52,6 +53,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class EventManager {
@@ -156,14 +158,14 @@ public class EventManager {
       if (player.hasCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null)) {
         IPlayerGroveCapability cap = player.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null);
         if (cap != null && !player.world.isRemote && cap.isDirty()) {
-          PacketHandler.INSTANCE.sendToAll(new MessagePlayerGroveUpdate(player.getUniqueID(), cap.getData()));
+          PacketHandler.INSTANCE.sendTo(new MessagePlayerGroveUpdate(player.getUniqueID(), cap.getData()), (EntityPlayerMP) player);
           cap.clean();
         }
       }
       if (player.hasCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null)){
         IPlayerDataCapability cap = player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null);
         if (cap != null && !player.world.isRemote && cap.isDirty()){
-          PacketHandler.INSTANCE.sendToAll(new MessagePlayerDataUpdate(player.getUniqueID(), cap.getData()));
+          PacketHandler.INSTANCE.sendToAllAround(new MessagePlayerDataUpdate(player.getUniqueID(), cap.getData()), new NetworkRegistry.TargetPoint(player.dimension, player.posX, player.posY, player.posZ, 128));
           cap.clean();
         }
       }

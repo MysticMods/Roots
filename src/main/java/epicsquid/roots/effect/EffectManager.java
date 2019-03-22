@@ -163,11 +163,14 @@ public class EffectManager {
         EntityPlayer player = (EntityPlayer)entity;
         if (player.hasCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null)){
           NBTTagCompound tag = player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null).getData().getCompoundTag(Constants.EFFECT_TAG);
+          boolean ticked = false;
+
           ArrayList<String> keys = new ArrayList<String>();
           for (String s : tag.getKeySet()){
             if (!s.endsWith("_data")){
               NBTTagCompound data_tag = tag.getCompoundTag(s+"_data");
               effects.get(s).onTick(entity,tag.getInteger(s)-1, data_tag);
+              ticked = true;
               tag.setInteger(s, tag.getInteger(s)-1);
               if (tag.getInteger(s) <= 0){
                 keys.add(s);
@@ -177,13 +180,17 @@ public class EffectManager {
           for (String s : keys) {
             NBTTagCompound data_tag = tag.getCompoundTag(s + "_data");
             effects.get(s).onEnd(entity, data_tag);
+            ticked = true;
             tag.removeTag(s);
             tag.removeTag(s + "_data");
             if (tag.getKeySet().size() == 0) {
               player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null).getData().removeTag(Constants.EFFECT_TAG);
             }
           }
-          player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null).markDirty();
+
+          if (ticked) {
+            player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null).markDirty();
+          }
         }
       }
     }
