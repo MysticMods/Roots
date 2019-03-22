@@ -7,7 +7,10 @@ import epicsquid.mysticallib.item.ItemSeedBase;
 import epicsquid.roots.Roots;
 import epicsquid.roots.capability.pouch.PouchItemHandler;
 import epicsquid.roots.item.*;
+import net.minecraft.block.BlockDoublePlant;
+import net.minecraft.block.BlockFlower;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -114,6 +117,13 @@ public class ModItems {
    */
   public static void registerOredict() {
     OreDictionary.registerOre("blockWool", new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE));
+
+    for (BlockFlower.EnumFlowerType type : BlockFlower.EnumFlowerType.values()) {
+      OreDictionary.registerOre("allFlowers", new ItemStack(type.getBlockType().getBlock(), 1, type.getMeta()));
+    }
+    for (BlockDoublePlant.EnumPlantType type : BlockDoublePlant.EnumPlantType.values()) {
+      OreDictionary.registerOre("allFlowers", new ItemStack(Blocks.DOUBLE_PLANT, 1, type.getMeta()));
+    }
   }
 
   private static void registerSeedDrops() {

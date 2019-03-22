@@ -225,6 +225,8 @@ public class ModRecipes {
 
     addMortarRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.gold_dust), new OreIngredient("ingotGold"), 82f/255f, 92f/255f, 114f/255f, 160f/255f, 167f/255f, 183f/255f);
     addMortarRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.iron_dust), new OreIngredient("ingotIron"), 82f/255f, 92f/255f, 114f/255f, 160f/255f, 167f/255f, 183f/255f);
+
+    addMortarRecipe(new ItemStack(ModItems.petals), new OreIngredient("allFlowers"), 1f, 0f, 0f, 0f, 1f, 0f);
   }
 
   /**
