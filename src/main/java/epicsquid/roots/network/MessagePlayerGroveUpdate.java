@@ -47,8 +47,10 @@ public class MessagePlayerGroveUpdate implements IMessage {
     public IMessage onMessage(final MessagePlayerGroveUpdate message, final MessageContext ctx) {
       if (message != null) {
         EntityPlayer player = Minecraft.getMinecraft().player;
-        if (player.hasCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null)) {
-          player.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null).setData(message.tag);
+        if (player != null) {
+          if (player.hasCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null)) {
+            player.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null).setData(message.tag);
+          }
         }
       }
 
