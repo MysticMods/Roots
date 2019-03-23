@@ -14,9 +14,19 @@ import net.minecraft.item.crafting.Ingredient;
 public class PyreCraftingRecipe {
   private List<Ingredient> ingredients = new ArrayList<>();
   private ItemStack result;
+  private String name;
 
   public PyreCraftingRecipe(ItemStack result) {
     this.result = result;
+  }
+
+  public PyreCraftingRecipe setName(String name) {
+    this.name = name;
+    return this;
+  }
+
+  public String getName() {
+    return name;
   }
 
   public PyreCraftingRecipe addIngredient(Ingredient stack) {
