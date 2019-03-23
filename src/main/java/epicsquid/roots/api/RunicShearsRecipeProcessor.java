@@ -16,7 +16,7 @@ public class RunicShearsRecipeProcessor implements IComponentProcessor {
   public void setup(IVariableProvider<String> iVariableProvider) {
     String recipeName = iVariableProvider.get("recipe");
     RunicShearRecipe recipe = ModRecipes.getRunicShearRecipe(recipeName);
-    output = new ItemStack(recipe.getDrop());
+    output = recipe.getDrop();
 
     if (recipe.isBlockRecipe()) {
       if (recipe.getOptionalDisplayItem() != ItemStack.EMPTY) {

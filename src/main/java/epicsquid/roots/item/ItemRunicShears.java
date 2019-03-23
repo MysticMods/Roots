@@ -54,7 +54,7 @@ public class ItemRunicShears extends ItemBase {
         } else {
           world.setBlockState(pos, recipe.getReplacementBlock().getDefaultState());
         }
-        world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), new ItemStack(recipe.getDrop())));
+        world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), recipe.getDrop()));
         player.getHeldItem(hand).damageItem(1, player);
       } else {
         for (int i = 0; i < 50; i++) {

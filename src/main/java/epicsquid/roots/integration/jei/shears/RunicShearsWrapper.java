@@ -17,6 +17,6 @@ public class RunicShearsWrapper implements IRecipeWrapper {
   @Override
   public void getIngredients(IIngredients ingredients) {
     ingredients.setInput(VanillaTypes.ITEM, this.recipe.getOptionalDisplayItem());
-    ingredients.setOutput(VanillaTypes.ITEM, new ItemStack(this.recipe.getDrop()));
+    ingredients.setOutput(VanillaTypes.ITEM, this.recipe.getDrop());
   }
 }

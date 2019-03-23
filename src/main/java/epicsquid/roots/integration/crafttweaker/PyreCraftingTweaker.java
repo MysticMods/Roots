@@ -30,11 +30,11 @@ public class PyreCraftingTweaker {
     if (inputs.length != 5) {
       LogHelper.logError("Pyre Crafting Ritual must have 5 items: " + name);
     }
-    CraftTweakerRootsPlugin.SCHEDULED_ACTIONS.add(() -> {
-      return new Add(Collections.singletonMap(name + ".ct", new PyreCraftingRecipe(InputHelper.toStack(output)).addIngredients(
+    CraftTweakerRootsPlugin.SCHEDULED_ACTIONS.add(() ->
+        new Add(Collections.singletonMap(name + ".ct", new PyreCraftingRecipe(InputHelper.toStack(output)).addIngredients(
           Arrays.stream(inputs).map(CraftTweakerMC::getIngredient).toArray(Ingredient[]::new)
-      ).setName(name + ".ct")));
-    });
+      ).setName(name + ".ct")))
+    );
   }
 
   @ZenMethod
