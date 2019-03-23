@@ -377,26 +377,26 @@ public class ModRecipes {
 
     addCraftingRecipe("wildwood_helmet", new PyreCraftingRecipe(new ItemStack(ModItems.wildwood_helmet)).addIngredients(
             new ItemStack(Items.IRON_HELMET),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_wildwood),
+            new ItemStack(ModItems.bark_wildwood),
             new OreIngredient("plankWood"),
             new OreIngredient("gemDiamond")));
     addCraftingRecipe("wildwood_chestplate", new PyreCraftingRecipe(new ItemStack(ModItems.wildwood_chestplate)).addIngredients(
             new ItemStack(Items.IRON_CHESTPLATE),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_wildwood),
+            new ItemStack(ModItems.bark_wildwood),
             new OreIngredient("plankWood"),
             new OreIngredient("gemDiamond")));
     addCraftingRecipe("wildwood_leggings", new PyreCraftingRecipe(new ItemStack(ModItems.wildwood_leggings)).addIngredients(
             new ItemStack(Items.IRON_LEGGINGS),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_wildwood),
+            new ItemStack(ModItems.bark_wildwood),
             new OreIngredient("plankWood"),
             new OreIngredient("gemDiamond")));
     addCraftingRecipe("wildwood_boots", new PyreCraftingRecipe(new ItemStack(ModItems.wildwood_boots)).addIngredients(
             new ItemStack(Items.IRON_BOOTS),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_wildwood),
+            new ItemStack(ModItems.bark_wildwood),
             new OreIngredient("plankWood"),
             new OreIngredient("gemDiamond")));
 
