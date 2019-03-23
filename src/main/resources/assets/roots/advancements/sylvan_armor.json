@@ -1,0 +1,35 @@
+{
+  "display": {
+    "icon": {
+      "item": "roots:sylvan_helmet"
+    },
+    "title": {
+      "translate": "advancement.roots.sylvan_armor"
+    },
+    "description": {
+      "translate": "advancement.roots.sylvan_armor.desc"
+    }
+  },
+  "parent": "roots:pyre",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "roots:sylvan_helmet"
+          },
+          {
+            "item": "roots:sylvan_chestplate"
+          },
+          {
+            "item": "roots:sylvan_leggings"
+          },
+          {
+            "item": "roots:sylvan_boots"
+          }
+        ]
+      }
+    }
+  }
+}

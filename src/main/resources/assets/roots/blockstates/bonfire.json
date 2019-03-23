@@ -1,5 +1,6 @@
 {
     "variants":{
-        "normal":  { "model": "roots:bonfire" }
+        "burning=false":  { "model": "roots:bonfire" },
+        "burning=true": { "model": "roots:bonfire"}
     }
 }

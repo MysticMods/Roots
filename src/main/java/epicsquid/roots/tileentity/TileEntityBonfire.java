@@ -1,16 +1,11 @@
 package epicsquid.roots.tileentity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
 import epicsquid.mysticallib.network.MessageTEUpdate;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.block.BlockBonfire;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
@@ -35,6 +30,11 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class TileEntityBonfire extends TileBase implements ITickable {
   private float ticker = 0;
   private float pickupDelay = 0;
@@ -43,6 +43,8 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   private ItemStack craftingResult = ItemStack.EMPTY;
   private RitualBase lastRitualUsed = null;
   private List<ItemStack> lastUsedItems = null;
+
+  private boolean isBurning = false;
 
   private Random random = new Random();
 
@@ -223,12 +225,14 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       }
     }
     if (doBigFlame) {
+      BlockBonfire.setState(true, world, pos);
       doBigFlame = false;
       markDirty();
       PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
     }
 
     if (burnTime > 0) {
+
       burnTime--;
 
       if (getTicker() % 20.0f == 0 && random.nextDouble() < 0.05) {
@@ -236,6 +240,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       }
 
       if (burnTime == 0) {
+        BlockBonfire.setState(false, world, pos);
         //Check if it is a ritual, if so try and see if it has new ritual fuel.
         if(this.craftingResult == ItemStack.EMPTY && this.lastRitualUsed != null){
           List<ItemStack> stacks = new ArrayList<>();
@@ -350,6 +355,11 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         break;
       }
     }
+  }
+
+  public boolean getState()
+  {
+    return isBurning;
   }
 
   public float getTicker() {

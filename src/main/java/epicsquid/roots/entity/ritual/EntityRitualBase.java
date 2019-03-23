@@ -3,7 +3,10 @@ package epicsquid.roots.entity.ritual;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public abstract class EntityRitualBase extends Entity implements IRitualEntity {
 
@@ -23,6 +26,13 @@ public abstract class EntityRitualBase extends Entity implements IRitualEntity {
     this.x = x;
     this.y = y;
     this.z = z;
+  }
+
+  @Nonnull
+  @Override
+  public BlockPos getPosition()
+  {
+    return new BlockPos(x, y, z);
   }
 
   @Override
