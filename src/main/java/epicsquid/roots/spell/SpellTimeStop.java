@@ -34,7 +34,7 @@ public class SpellTimeStop extends SpellBase {
   }
 
   @Override
-  public void cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
       EntityTimeStop timeStop = new EntityTimeStop(player.world);
       timeStop.setPlayer(player.getUniqueID());
@@ -42,6 +42,7 @@ public class SpellTimeStop extends SpellBase {
       player.world.spawnEntity(timeStop);
       PacketHandler.INSTANCE.sendToAll(new MessageTimeStopStartFX(player.posX, player.posY + 1.0f, player.posZ));
     }
+    return true;
   }
 
 }

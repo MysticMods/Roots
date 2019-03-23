@@ -42,7 +42,7 @@ public class SpellAcidCloud extends SpellBase {
   }
 
   @Override
-  public void cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
       List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class,
           new AxisAlignedBB(player.posX - 4.0, player.posY - 1.0, player.posZ - 4.0, player.posX + 4.0, player.posY + 3.0, player.posZ + 4.0));
@@ -62,6 +62,7 @@ public class SpellAcidCloud extends SpellBase {
       }
       PacketHandler.INSTANCE.sendToAll(new MessageAcidCloudFX(player.posX, player.posY + player.getEyeHeight(), player.posZ));
     }
+    return true;
   }
 
 }

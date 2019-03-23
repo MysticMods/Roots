@@ -42,7 +42,7 @@ public class SpellRadiance extends SpellBase {
   }
 
   @Override
-  public void cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote && player.ticksExisted % 2 == 0) {
       float distance = 32;
       RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().addVector(0, player.getEyeHeight(), 0),
@@ -134,6 +134,7 @@ public class SpellRadiance extends SpellBase {
         }
       }
     }
+    return true;
   }
 
 }
