@@ -29,7 +29,7 @@ public class ModItems {
   public static Item pestle, component_pouch, petal_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife,
           sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, apothecary_pouch,
   // Conditionally registered
-  copper_knife, silver_knife, petals, flour;
+  copper_knife, silver_knife, petals, flour, cooked_aubergine, stuffed_aubergine;
 
   public static Item moonglow_leaf, aubergine, pereskia, terra_spores, terra_moss, spirit_herb, wildewheet,
           baffle_cap, bark_oak, bark_birch, bark_spruce, bark_jungle, bark_dark_oak, bark_acacia, bark_wildwood;
@@ -48,7 +48,7 @@ public class ModItems {
     event.addItem(moonglow_seed = new ItemSeedBase("moonglow_seed", ModBlocks.moonglow, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(moonglow_leaf = new ItemBase("moonglow_leaf").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(aubergine_seed = new ItemSeedBase("aubergine_seed", ModBlocks.aubergine, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(aubergine = new ItemFoodBase("aubergine", 4, 1.2f, false).setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(aubergine = new ItemFoodBase("aubergine", 4, false).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(pereskia_bulb = new ItemSeedBase("pereskia_bulb", ModBlocks.pereskia, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(pereskia = new ItemBase("pereskia").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(terra_moss = new ItemBase("terra_moss").setModelCustom(true).setCreativeTab(Roots.tab));
@@ -107,6 +107,9 @@ public class ModItems {
 
     ToolMaterial SILVER = EnumHelper.addToolMaterial("ROOTS:SILVER", 1, 75, 6.0f, 1.0f, 25);
     event.addItem(silver_knife = new ItemKnife("silver_knife", SILVER).setCreativeTab(Roots.tab));
+
+    event.addItem(cooked_aubergine = new ItemFoodBase("cooked_aubergine", 5, false).setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(stuffed_aubergine = new ItemFoodBase("stuffed_aubergine", 8, false).setModelCustom(true).setCreativeTab(Roots.tab));
 
     // KEEP AT END
     registerSeedDrops();

@@ -237,8 +237,9 @@ public class ModRecipes {
     initMortarRecipes();
 
     GameRegistry.addSmelting(ModItems.flour, new ItemStack(Items.BREAD), 0.125f);
-    GameRegistry.addSmelting(Items.IRON_INGOT, new ItemStack(epicsquid.mysticalworld.init.ModItems.iron_dust), 0.125f);
-    GameRegistry.addSmelting(Items.GOLD_INGOT, new ItemStack(epicsquid.mysticalworld.init.ModItems.gold_dust), 0.125f);
+    GameRegistry.addSmelting(epicsquid.mysticalworld.init.ModItems.iron_dust, new ItemStack(Items.IRON_INGOT), 0.125f);
+    GameRegistry.addSmelting(epicsquid.mysticalworld.init.ModItems.gold_dust, new ItemStack(Items.GOLD_INGOT), 0.125f);
+    GameRegistry.addSmelting(ModItems.aubergine, new ItemStack(ModItems.cooked_aubergine), 0.125f);
 
     initCraftingRecipes();
     RunicShearRecipes.initRecipes();
