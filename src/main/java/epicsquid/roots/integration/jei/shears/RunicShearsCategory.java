@@ -48,6 +48,6 @@ public class RunicShearsCategory implements IRecipeCategory<RunicShearsWrapper> 
     group.init(0, true, 0, 2);
     group.set(0, recipe.getOptionalDisplayItem());
     group.init(1, false, 60, 2);
-    group.set(1, new ItemStack(recipe.getDrop()));
+    group.set(1, recipe.getDrop());
   }
 }

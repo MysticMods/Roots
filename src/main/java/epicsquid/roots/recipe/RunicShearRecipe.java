@@ -12,13 +12,13 @@ public class RunicShearRecipe {
 
   private Block block;
   private Block replacementBlock;
-  private Item drop;
+  private ItemStack drop;
   private ItemStack optionalDisplayItem = ItemStack.EMPTY;
   private String name;
 
   private EntityLiving entity;
 
-  public RunicShearRecipe(Block block, Block replacementBlock, Item drop, String name, ItemStack optionalDisplayItem) {
+  public RunicShearRecipe(Block block, Block replacementBlock, ItemStack drop, String name, ItemStack optionalDisplayItem) {
     this.block = block;
     this.replacementBlock = replacementBlock;
     this.drop = drop;
@@ -26,11 +26,11 @@ public class RunicShearRecipe {
     this.optionalDisplayItem = optionalDisplayItem;
   }
 
-  public RunicShearRecipe(Block block, Block replacementBlock, Item drop, String name) {
+  public RunicShearRecipe(Block block, Block replacementBlock, ItemStack drop, String name) {
     this(block, replacementBlock, drop, name, null);
   }
 
-  public RunicShearRecipe(Item drop, EntityLiving entity, String name) {
+  public RunicShearRecipe(ItemStack drop, EntityLiving entity, String name) {
     this.drop = drop;
     this.entity = entity;
     this.name = name;
@@ -52,7 +52,7 @@ public class RunicShearRecipe {
     return replacementBlock;
   }
 
-  public Item getDrop() {
+  public ItemStack getDrop() {
     return drop;
   }
 

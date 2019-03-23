@@ -43,7 +43,7 @@ public class ModRecipes {
 
   private static ArrayList<MortarRecipe> mortarRecipes = new ArrayList<>();
   private static Map<String, PyreCraftingRecipe> pyreCraftingRecipes = new HashMap<>();
-  private static List<RunicShearRecipe> runicShearRecipes = new ArrayList<>();
+  private static Map<String, RunicShearRecipe> runicShearRecipes = new HashMap<>();
   private static List<RunicCarvingRecipe> runicCarvingRecipes = new ArrayList<>();
 
   private static ResourceLocation getRL(@Nonnull String s) {
@@ -91,7 +91,7 @@ public class ModRecipes {
   }
 
   public static void addRunicShearRecipe(RunicShearRecipe recipe) {
-    for (RunicShearRecipe runicShearRecipe : runicShearRecipes) {
+    for (RunicShearRecipe runicShearRecipe : runicShearRecipes.values()) {
       if (recipe.isBlockRecipe() && recipe.getBlock() == runicShearRecipe.getBlock()) {
         System.out.println("Recipe is already registered with block - " + recipe.getBlock().getUnlocalizedName());
         return;
@@ -100,11 +100,11 @@ public class ModRecipes {
         return;
       }
     }
-    runicShearRecipes.add(recipe);
+    runicShearRecipes.put(recipe.getName(), recipe);
   }
 
   public static RunicShearRecipe getRunicShearRecipe(Block block) {
-    for (RunicShearRecipe recipe : runicShearRecipes) {
+    for (RunicShearRecipe recipe : runicShearRecipes.values()) {
       if (recipe.isBlockRecipe() && recipe.getBlock() == block) {
         return recipe;
       }
@@ -113,7 +113,7 @@ public class ModRecipes {
   }
 
   public static RunicShearRecipe getRunicShearRecipe(EntityLiving entity) {
-    for (RunicShearRecipe recipe : runicShearRecipes) {
+    for (RunicShearRecipe recipe : runicShearRecipes.values()) {
       if (recipe.isEntityRecipe() && recipe.getEntity() == entity) {
         return recipe;
       }
@@ -122,7 +122,7 @@ public class ModRecipes {
   }
 
   public static RunicShearRecipe getRunicShearRecipe(String name) {
-    for (RunicShearRecipe recipe : runicShearRecipes) {
+    for (RunicShearRecipe recipe : runicShearRecipes.values()) {
       if (recipe.getName().equals(name)) {
         return recipe;
       }
@@ -198,7 +198,7 @@ public class ModRecipes {
     return runicCarvingRecipes;
   }
 
-  public static List<RunicShearRecipe> getRunicShearRecipes() {
+  public static Map<String, RunicShearRecipe> getRunicShearRecipes() {
     return runicShearRecipes;
   }
 
