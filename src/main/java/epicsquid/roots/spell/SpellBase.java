@@ -1,8 +1,6 @@
 package epicsquid.roots.spell;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -102,7 +100,7 @@ public abstract class SpellBase {
     return ListUtil.matchesIngredients(ingredients, this.ingredients);
   }
 
-  public abstract void cast(EntityPlayer caster, List<SpellModule> modules);
+  public abstract boolean cast(EntityPlayer caster, List<SpellModule> modules);
 
   public float getRed1() {
     return red1;

@@ -71,10 +71,12 @@ public class ItemStaff extends ItemBase {
           spell = event.getSpell();
           if (spell.getCastType() == SpellBase.EnumCastType.INSTANTANEOUS) {
             if (spell.costsMet(player)) {
-              spell.cast(player, capability.getSelectedModules());
-              spell.enactCosts(player);
-              capability.setCooldown(event.getCooldown());
-              capability.setLastCooldown(event.getCooldown());
+              boolean result = spell.cast(player, capability.getSelectedModules());
+              if (result) {
+                spell.enactCosts(player);
+                capability.setCooldown(event.getCooldown());
+                capability.setLastCooldown(event.getCooldown());
+              }
               return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
             }
           } else if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
@@ -96,8 +98,9 @@ public class ItemStaff extends ItemBase {
         if (spell != null) {
           if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
             if (spell.costsMet((EntityPlayer) player)) {
-              spell.cast((EntityPlayer) player, capability.getSelectedModules());
-              spell.enactTickCosts((EntityPlayer) player);
+              boolean result = spell.cast((EntityPlayer) player, capability.getSelectedModules());
+              if (result)
+                spell.enactTickCosts((EntityPlayer) player);
             }
           }
         }

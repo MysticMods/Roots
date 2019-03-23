@@ -37,7 +37,7 @@ public class SpellSanctuary extends SpellBase {
   }
 
   @Override
-  public void cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     List<Entity> entities = player.world.getEntitiesWithinAABB(Entity.class,
         new AxisAlignedBB(player.posX - 4.0, player.posY - 4.0, player.posZ - 4.0, player.posX + 4.0, player.posY + 5.0, player.posZ + 4.0));
     if (entities.size() > 0) {
@@ -58,6 +58,7 @@ public class SpellSanctuary extends SpellBase {
     if (player.ticksExisted % 2 == 0) {
       PacketHandler.INSTANCE.sendToAll(new MessageSanctuaryRingFX(player.posX, player.posY + 0.875f, player.posZ));
     }
+    return true;
   }
 
 }

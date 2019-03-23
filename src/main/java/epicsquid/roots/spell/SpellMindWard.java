@@ -33,7 +33,7 @@ public class SpellMindWard extends SpellBase {
   }
 
   @Override
-  public void cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
       boolean foundTarget = false;
       for (int i = 0; i < 4 && !foundTarget; i++) {
@@ -50,6 +50,7 @@ public class SpellMindWard extends SpellBase {
         }
       }
     }
+    return true;
   }
 
 }

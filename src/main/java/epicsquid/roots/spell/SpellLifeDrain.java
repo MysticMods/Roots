@@ -39,7 +39,7 @@ public class SpellLifeDrain extends SpellBase {
   }
 
   @Override
-  public void cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
       boolean foundTarget = false;
       PacketHandler.INSTANCE.sendToAll(new MessageLifeDrainAbsorbFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ));
@@ -63,6 +63,7 @@ public class SpellLifeDrain extends SpellBase {
         }
       }
     }
+    return true;
   }
 
 }

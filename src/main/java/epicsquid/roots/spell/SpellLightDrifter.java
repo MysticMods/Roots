@@ -36,7 +36,7 @@ public class SpellLightDrifter extends SpellBase {
   }
 
   @Override
-  public void cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
       player.capabilities.disableDamage = true;
       player.capabilities.allowFlying = true;
@@ -55,6 +55,7 @@ public class SpellLightDrifter extends SpellBase {
           .sendToAll(new MessageLightDrifterSync(player.getUniqueID(), player.posX, player.posY, player.posZ, true, GameType.SPECTATOR.getID()));
       PacketHandler.INSTANCE.sendToAll(new MessageLightDrifterFX(player.posX, player.posY + 1.0f, player.posZ));
     }
+    return true;
   }
 
 }
