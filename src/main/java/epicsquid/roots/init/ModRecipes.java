@@ -191,8 +191,7 @@ public class ModRecipes {
         return;
       }
     }
-
-    pyreCraftingRecipes.put(recipeName, pyreCraftingRecipe);
+    pyreCraftingRecipes.put(recipeName, pyreCraftingRecipe.setName(recipeName));
   }
 
   public static List<RunicCarvingRecipe> getRunicCarvingRecipes() {

@@ -3,6 +3,7 @@ package epicsquid.roots.proxy;
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.integration.crafttweaker.CraftTweakerRootsPlugin;
 import epicsquid.roots.integration.harvest.HarvestIntegration;
 import epicsquid.roots.integration.jer.JERIntegration;
 import epicsquid.roots.recipe.recipes.RunicCarvingRecipes;
@@ -42,6 +43,9 @@ public class CommonProxy {
     }
     if (Loader.isModLoaded("jeresources")) {
       JERIntegration.init();
+    }
+    if (Loader.isModLoaded("crafttweaker") && Loader.isModLoaded("mtlib")) {
+      CraftTweakerRootsPlugin.postInit();
     }
   }
 }

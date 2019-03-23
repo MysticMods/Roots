@@ -44,6 +44,8 @@ dependencies {
     // at runtime, use the full JEI jar
     runtime "mezz.jei:jei_${minecraft_version}:${jei_version}"
     compile "jeresources:JustEnoughResources-${minecraft_version}:${jer_version}"
+    compile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${ct_version}"
+    compile "com.blamejared:MTLib:${mt_lib_version}"
 }
 
 repositories {
@@ -71,6 +73,10 @@ repositories {
     }
     maven {
         url 'https://maven.mcmoddev.com'
+    }
+    maven {
+        name = "Jared"
+        url = "https://maven.blamejared.com"
     }
 }
 
