@@ -26,6 +26,9 @@ minecraft {
 
     replace "@VERSION@", project.version
     replaceIn "Roots.java"
+
+    // Scala: not even once
+    replace 'scala.actors.threadpool.Arrays', 'java.util.Arrays'
 }
 
 dependencies {
