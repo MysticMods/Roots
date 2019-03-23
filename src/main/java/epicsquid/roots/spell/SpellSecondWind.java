@@ -1,10 +1,8 @@
 package epicsquid.roots.spell;
 
-import epicsquid.roots.entity.spell.EntityFireJet;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -34,10 +32,11 @@ public class SpellSecondWind extends SpellBase {
   }
 
   @Override
-  public void cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     player.setAir(300);
     if (player.world.isRemote) {
       player.playSound(SoundEvents.ENTITY_BOAT_PADDLE_WATER, 1, 1);
     }
+    return true;
   }
 }

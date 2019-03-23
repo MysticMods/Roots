@@ -31,13 +31,14 @@ public class SpellSkySoarer extends SpellBase {
   }
 
   @Override
-  public void cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
       EntityBoost boost = new EntityBoost(player.world);
       boost.setPlayer(player.getUniqueID());
       boost.setPosition(player.posX, player.posY, player.posZ);
       player.world.spawnEntity(boost);
     }
+    return true;
   }
 
 }

@@ -32,7 +32,7 @@ public class SpellRoseThorns extends SpellBase {
   }
 
   @Override
-  public void cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
       EntityThornTrap trap = new EntityThornTrap(player.world);
       trap.setPlayer(player.getUniqueID());
@@ -42,6 +42,7 @@ public class SpellRoseThorns extends SpellBase {
       trap.motionZ = player.getLookVec().z * 0.75f;
       player.world.spawnEntity(trap);
     }
+    return true;
   }
 
 }
