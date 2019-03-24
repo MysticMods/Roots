@@ -1,0 +1,17 @@
+{
+  "name": "Flower Growth",
+  "icon": "minecraft:red_flower",
+  "category": "rituals",
+  "advancement": "roots:pereskia",
+
+  "pages": [
+    {
+      "type": "text",
+      "text": "The energy of fire mixed with sunbeams allows you to perform a ritual that makes many flowers sprout on the vivid grass"
+    },
+    {
+      "type": "pyre_template",
+      "ritual": "ritual_flower_growth"
+    }
+  ]
+}
