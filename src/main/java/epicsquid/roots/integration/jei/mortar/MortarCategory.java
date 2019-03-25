@@ -5,7 +5,7 @@ import java.util.Arrays;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.integration.jei.JEIRootsPlugin;
-import epicsquid.roots.item.ItemPetalDust;
+import epicsquid.roots.item.ItemSpellDust;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
 import epicsquid.roots.spell.SpellBase;
@@ -65,8 +65,8 @@ public class MortarCategory implements IRecipeCategory<MortarWrapper> {
         group.set(i, Arrays.asList(spell.getIngredients().get(i).getMatchingStacks()));
       }
       group.init(5, false, 72, 27);
-      ItemStack spellDust = new ItemStack(ModItems.petal_dust);
-      ItemPetalDust.createData(spellDust, spell);
+      ItemStack spellDust = new ItemStack(ModItems.spell_dust);
+      ItemSpellDust.createData(spellDust, spell);
       group.set(5, spellDust);
     }
   }

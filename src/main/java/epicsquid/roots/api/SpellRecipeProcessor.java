@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.item.ItemPetalDust;
+import epicsquid.roots.item.ItemSpellDust;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.item.ItemStack;
@@ -34,8 +34,8 @@ public class SpellRecipeProcessor implements IComponentProcessor {
       return ItemStackUtil.serializeIngredient(ingredient);
     }
     if (s.equalsIgnoreCase("result")) {
-      ItemStack dust = new ItemStack(ModItems.petal_dust);
-      ItemPetalDust.createData(dust, SpellRegistry.getSpell(spellName));
+      ItemStack dust = new ItemStack(ModItems.spell_dust);
+      ItemSpellDust.createData(dust, SpellRegistry.getSpell(spellName));
 
       return ItemStackUtil.serializeStack(dust);
     }
