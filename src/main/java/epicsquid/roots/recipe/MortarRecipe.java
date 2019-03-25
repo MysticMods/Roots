@@ -16,6 +16,10 @@ public class MortarRecipe {
 
   private float r1, g1, b1, r2, g2, b2;
 
+  public MortarRecipe(ItemStack result, Ingredient[] ingredients) {
+    this(result, ingredients, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+  }
+
   public MortarRecipe(ItemStack result, Ingredient[] ingredients, float red1, float green1, float blue1, float red2, float green2, float blue2) {
     this.result = result;
     this.ingredients.addAll(Arrays.asList(ingredients));
