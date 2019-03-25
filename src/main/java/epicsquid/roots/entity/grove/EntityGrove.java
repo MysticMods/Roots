@@ -79,7 +79,7 @@ public class EntityGrove extends Entity {
       List<TileEntityOffertoryPlate> toRemove = new ArrayList<>();
       for (TileEntityOffertoryPlate tile : this.offertoryPlateList) {
         ItemStack stack = tile.getHeldItem();
-        if (stack == ItemStack.EMPTY) {
+        if (stack.isEmpty()) {
           toRemove.add(tile);
           continue;
         }

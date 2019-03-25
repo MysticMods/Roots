@@ -76,7 +76,7 @@ public class TileEntityMortar extends TileBase {
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand,
       @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
-    if (heldItem != ItemStack.EMPTY && heldItem.getCount() > 0) {
+    if (!heldItem.isEmpty()) {
       if (heldItem.getItem() != ModItems.pestle) {
         for (int i = 0; i < inventory.getSlots(); i++) {
           if (inventory.getStackInSlot(i).isEmpty()) {

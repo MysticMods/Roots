@@ -103,7 +103,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
           ItemStack toInsert = heldItem.copy();
           toInsert.setCount(1);
           ItemStack attemptedInsert = inventory.insertItem(1, toInsert, true);
-          if (attemptedInsert == ItemStack.EMPTY) {
+          if (attemptedInsert.isEmpty()) {
             inventory.insertItem(1, toInsert, false);
             player.getHeldItem(hand).shrink(1);
             if (player.getHeldItem(hand).getCount() == 0) {
