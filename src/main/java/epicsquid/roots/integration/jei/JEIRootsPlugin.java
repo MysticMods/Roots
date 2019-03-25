@@ -19,6 +19,9 @@ import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.recipe.RunicCarvingRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
+import epicsquid.roots.recipe.SpellRecipe;
+import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.spell.SpellRegistry;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
@@ -53,11 +56,13 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(RunicCarvingRecipe.class, RunicCarvingWrapper::new, RUNIC_CARVING);
     registry.handleRecipes(PyreCraftingRecipe.class, RitualCraftingWrapper::new, RITUAL_CRAFTING);
     registry.handleRecipes(MortarRecipe.class, MortarWrapper::new, MORTAR_AND_PESTLE);
+    registry.handleRecipes(SpellBase.class, MortarWrapper::new, MORTAR_AND_PESTLE);
 
     registry.addRecipes(ModRecipes.getRunicShearRecipes().values(), RUNIC_SHEARS);
     registry.addRecipes(ModRecipes.getRunicCarvingRecipes(), RUNIC_CARVING);
     registry.addRecipes(ModRecipes.getPyreCraftingRecipes().values(), RITUAL_CRAFTING);
     registry.addRecipes(ModRecipes.getMortarRecipes(), MORTAR_AND_PESTLE);
+    registry.addRecipes(SpellRegistry.spellRegistry.values(), MORTAR_AND_PESTLE);
 
     registry.addRecipeCatalyst(new ItemStack(ModItems.runic_shears), RUNIC_SHEARS);
     registry.addRecipeCatalyst(new ItemStack(ModItems.wood_knife), RUNIC_CARVING);
