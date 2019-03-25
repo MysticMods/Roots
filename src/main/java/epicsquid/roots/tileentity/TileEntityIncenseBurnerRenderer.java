@@ -13,7 +13,7 @@ public class TileEntityIncenseBurnerRenderer extends TileEntitySpecialRenderer<T
 
     @Override
     public void render(TileEntityIncenseBurner tei, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        if (tei.inventory.getStackInSlot(0) != ItemStack.EMPTY) {
+        if (!tei.inventory.getStackInSlot(0).isEmpty()) {
             RenderItem r = Minecraft.getMinecraft().getRenderItem();
             GlStateManager.pushMatrix();
             GlStateManager.translate(x + 0.5, y + 0.575, z + 0.35);

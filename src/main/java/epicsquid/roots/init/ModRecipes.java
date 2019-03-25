@@ -164,7 +164,7 @@ public class ModRecipes {
   public static PyreCraftingRecipe getCraftingRecipe(List<ItemStack> items) {
     List<ItemStack> stacksToRemove = new ArrayList<>();
     for(ItemStack s : items){
-      if(s == ItemStack.EMPTY){
+      if(s.isEmpty()) {
         stacksToRemove.add(s);
       }
     }
