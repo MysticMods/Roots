@@ -206,6 +206,10 @@ public class ModRecipes {
     return pyreCraftingRecipes;
   }
 
+  public static List<MortarRecipe> getMortarRecipes() {
+    return mortarRecipes;
+  }
+
   public static void initMortarRecipes () {
     addMortarRecipe(new ItemStack(Items.DYE, 1, 12), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.carapace), 1, 1, 1, 1, 1, 1);
     addMortarRecipe(new ItemStack(ModItems.flour), Ingredient.fromItem(Items.WHEAT), 1f, 1f, 0f, 1f, 1f, 0f);
