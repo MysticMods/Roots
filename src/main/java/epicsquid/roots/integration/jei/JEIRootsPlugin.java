@@ -9,10 +9,13 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.jei.carving.RunicCarvingCategory;
 import epicsquid.roots.integration.jei.carving.RunicCarvingWrapper;
+import epicsquid.roots.integration.jei.mortar.MortarCategory;
+import epicsquid.roots.integration.jei.mortar.MortarWrapper;
 import epicsquid.roots.integration.jei.ritual.RitualCraftingCategory;
 import epicsquid.roots.integration.jei.ritual.RitualCraftingWrapper;
 import epicsquid.roots.integration.jei.shears.RunicShearsCategory;
 import epicsquid.roots.integration.jei.shears.RunicShearsWrapper;
+import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.recipe.RunicCarvingRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
@@ -31,6 +34,7 @@ public class JEIRootsPlugin implements IModPlugin {
   public static final String RUNIC_SHEARS = Roots.MODID + ".runic_shears";
   public static final String RUNIC_CARVING = Roots.MODID + ".runic_carving";
   public static final String RITUAL_CRAFTING = Roots.MODID + ".ritual_crafting";
+  public static final String MORTAR_AND_PESTLE = Roots.MODID + ".mortar_and_pestle";
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registry) {
@@ -38,7 +42,8 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCategories(
         new RunicShearsCategory(helper),
         new RunicCarvingCategory(helper),
-        new RitualCraftingCategory(helper)
+        new RitualCraftingCategory(helper),
+        new MortarCategory(helper)
     );
   }
 
@@ -47,10 +52,12 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(RunicShearRecipe.class, RunicShearsWrapper::new, RUNIC_SHEARS);
     registry.handleRecipes(RunicCarvingRecipe.class, RunicCarvingWrapper::new, RUNIC_CARVING);
     registry.handleRecipes(PyreCraftingRecipe.class, RitualCraftingWrapper::new, RITUAL_CRAFTING);
+    registry.handleRecipes(MortarRecipe.class, MortarWrapper::new, MORTAR_AND_PESTLE);
 
     registry.addRecipes(ModRecipes.getRunicShearRecipes().values(), RUNIC_SHEARS);
     registry.addRecipes(ModRecipes.getRunicCarvingRecipes(), RUNIC_CARVING);
     registry.addRecipes(ModRecipes.getPyreCraftingRecipes().values(), RITUAL_CRAFTING);
+    registry.addRecipes(ModRecipes.getMortarRecipes(), MORTAR_AND_PESTLE);
 
     registry.addRecipeCatalyst(new ItemStack(ModItems.runic_shears), RUNIC_SHEARS);
     registry.addRecipeCatalyst(new ItemStack(ModItems.wood_knife), RUNIC_CARVING);
@@ -61,6 +68,8 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModItems.copper_knife), RUNIC_CARVING);
     registry.addRecipeCatalyst(new ItemStack(ModItems.silver_knife), RUNIC_CARVING);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.bonfire), RITUAL_CRAFTING);
+    registry.addRecipeCatalyst(new ItemStack(ModBlocks.mortar), MORTAR_AND_PESTLE);
+    registry.addRecipeCatalyst(new ItemStack(ModItems.pestle), MORTAR_AND_PESTLE);
 
     registry.addIngredientInfo(new ItemStack(ModItems.terra_moss), VanillaTypes.ITEM, I18n.format("jei.roots.terra_moss.desc"));
     registry.addIngredientInfo(new ItemStack(ModItems.terra_spores), VanillaTypes.ITEM, I18n.format("jei.roots.terra_spores.desc"));
