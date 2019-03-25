@@ -10,10 +10,12 @@ import com.blamejared.mtlib.helpers.LogHelper;
 import com.blamejared.mtlib.utils.BaseMapAddition;
 import com.blamejared.mtlib.utils.BaseMapRemoval;
 
+import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
+import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
@@ -28,26 +30,21 @@ public class PyreCraftingTweaker {
   @ZenMethod
   public static void addRecipe(String name, IItemStack output, IIngredient[] inputs) {
     if (inputs.length != 5) {
-      LogHelper.logError("Pyre Crafting Ritual must have 5 items: " + name);
+      CraftTweakerAPI.getLogger().logError("Pyre Crafting Ritual must have 5 items: " + name);
     }
-    CraftTweakerRootsPlugin.SCHEDULED_ACTIONS.add(() ->
-        new Add(Collections.singletonMap(name + ".ct", new PyreCraftingRecipe(InputHelper.toStack(output)).addIngredients(
-          Arrays.stream(inputs).map(CraftTweakerMC::getIngredient).toArray(Ingredient[]::new)
-      ).setName(name + ".ct")))
-    );
+    CraftTweaker.LATE_ACTIONS.add(new Add(Collections.singletonMap(name + ".ct", new PyreCraftingRecipe(InputHelper.toStack(output)).addIngredients(
+        Arrays.stream(inputs).map(CraftTweakerMC::getIngredient).toArray(Ingredient[]::new)).setName(name + ".ct"))));
   }
 
   @ZenMethod
   public static void removeRecipe(IItemStack output) {
-    CraftTweakerRootsPlugin.SCHEDULED_ACTIONS.add(() -> {
-      Map<String, PyreCraftingRecipe> recipes = new HashMap<>();
-      for(PyreCraftingRecipe modRecipe : ModRecipes.getPyreCraftingRecipes().values()) {
-        if (output.matches(InputHelper.toIItemStack(modRecipe.getResult()))) {
-          recipes.put(modRecipe.getName(), modRecipe);
-        }
+    Map<String, PyreCraftingRecipe> recipes = new HashMap<>();
+    for(PyreCraftingRecipe modRecipe : ModRecipes.getPyreCraftingRecipes().values()) {
+      if (output.matches(InputHelper.toIItemStack(modRecipe.getResult()))) {
+        recipes.put(modRecipe.getName(), modRecipe);
       }
-      return new Remove(recipes);
-    });
+    }
+    CraftTweaker.LATE_ACTIONS.add(new Remove(recipes));
   }
 
   private static class Remove extends BaseMapRemoval<String, PyreCraftingRecipe> {
