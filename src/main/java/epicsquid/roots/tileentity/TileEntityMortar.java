@@ -11,7 +11,7 @@ import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.item.ItemPetalDust;
+import epicsquid.roots.item.ItemSpellDust;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.spell.SpellBase;
@@ -123,8 +123,8 @@ public class TileEntityMortar extends TileBase {
               }
             }
           }
-          ItemStack dust = new ItemStack(ModItems.petal_dust, 1);
-          ItemPetalDust.createData(dust, spell);
+          ItemStack dust = new ItemStack(ModItems.spell_dust, 1);
+          ItemSpellDust.createData(dust, spell);
           if (!world.isRemote) {
             world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, dust));
             markDirty();

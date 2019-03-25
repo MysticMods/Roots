@@ -3,7 +3,7 @@ package epicsquid.roots.integration.jei.mortar;
 import java.util.Arrays;
 
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.item.ItemPetalDust;
+import epicsquid.roots.item.ItemSpellDust;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
 import epicsquid.roots.recipe.SpellRecipe;
@@ -38,8 +38,8 @@ public class MortarWrapper implements IRecipeWrapper {
       for (Ingredient ingredient : spellBase.getIngredients()) {
         ingredients.setInputs(VanillaTypes.ITEM, Arrays.asList(ingredient.getMatchingStacks()));
       }
-      ItemStack spellDust = new ItemStack(ModItems.petal_dust);
-      ItemPetalDust.createData(spellDust, spellBase);
+      ItemStack spellDust = new ItemStack(ModItems.spell_dust);
+      ItemSpellDust.createData(spellDust, spellBase);
       ingredients.setOutput(VanillaTypes.ITEM, spellDust);
     }
   }

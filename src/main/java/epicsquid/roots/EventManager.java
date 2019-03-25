@@ -51,7 +51,6 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -141,7 +140,7 @@ public class EventManager {
 
   @SubscribeEvent
   public void addItemStackCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
-    if(event.getObject().getItem() == ModItems.staff || event.getObject().getItem() == ModItems.petal_dust) {
+    if(event.getObject().getItem() == ModItems.staff || event.getObject().getItem() == ModItems.spell_dust) {
       event.addCapability(new ResourceLocation(Roots.MODID, "spell_holder_capability"), new SpellHolderCapabilityProvider());
     }
   }

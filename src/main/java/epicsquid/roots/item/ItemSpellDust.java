@@ -18,8 +18,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemPetalDust extends ItemBase {
-  public ItemPetalDust(String name) {
+public class ItemSpellDust extends ItemBase {
+  public ItemSpellDust(String name) {
     super(name);
     this.hasSubtypes = true;
     this.setHasSubtypes(true);
