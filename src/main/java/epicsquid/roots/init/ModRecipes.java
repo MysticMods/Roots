@@ -41,7 +41,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 public class ModRecipes {
 
-  private static ArrayList<MortarRecipe> mortarRecipes = new ArrayList<>();
+  private static List<MortarRecipe> mortarRecipes = new ArrayList<>();
   private static Map<String, PyreCraftingRecipe> pyreCraftingRecipes = new HashMap<>();
   private static Map<String, RunicShearRecipe> runicShearRecipes = new HashMap<>();
   private static List<RunicCarvingRecipe> runicCarvingRecipes = new ArrayList<>();
