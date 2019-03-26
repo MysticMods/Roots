@@ -44,6 +44,7 @@ public class RegistryManager {
   public void initRecipes(@Nonnull RegisterModRecipesEvent event) {
     LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
 
+    ModItems.registerOredict();
     ModRecipes.initRecipes(event);
   }
 

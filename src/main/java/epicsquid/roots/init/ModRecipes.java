@@ -317,6 +317,14 @@ public class ModRecipes {
             new ItemStack(ModItems.bark_oak),
             new ItemStack(ModItems.bark_oak)));
 
+    addCraftingRecipe("living_arrow",
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_arrow, 10)).addIngredients(
+            new OreIngredient("treeLeaves"),
+            new OreIngredient("treeLeaves"),
+            new OreIngredient("rootsBark"),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(Items.FLINT)));
+
     addCraftingRecipe("infernal_bulb",
         new PyreCraftingRecipe(new ItemStack(ModItems.infernal_bulb, 3)).addIngredients(
             new ItemStack(Items.NETHER_WART),
