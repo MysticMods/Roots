@@ -46,7 +46,6 @@ public class HerbRegistry {
     event.register(ModItems.dewgonia, "dewgonia");
     event.register(ModItems.stalicripe, "stalicripe");
     event.register(ModItems.cloud_berry, "cloud_berry");
-    event.register(ModItems.aubergine, "aubergine");
 
     ModRecipes.afterHerbRegisterInit();
   }
