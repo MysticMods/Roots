@@ -27,7 +27,7 @@ public class SpellSenseDanger extends SpellBase {
     this.castType = EnumCastType.INSTANTANEOUS;
     this.cooldown = 190;
 
-    addCost(HerbRegistry.getHerbByName("aubergine"), 0.95f);
+    addCost(HerbRegistry.getHerbByName("wildroot"), 0.95f);
     addIngredients(
         new ItemStack(Items.GOLDEN_CARROT),
         new ItemStack(Items.COMPASS),
@@ -40,7 +40,7 @@ public class SpellSenseDanger extends SpellBase {
   @Override
   public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
     List<EntityCreature> creatures = Util.getEntitiesWithinRadius(caster.getEntityWorld(), EntityCreature.class, caster.getPosition(), 40, 40, 40);
-    caster.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 60*20));
+    caster.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 40*20));
     for(EntityCreature creature : creatures){
       if (!(creature instanceof IMob)) continue;
       creature.addPotionEffect( new PotionEffect(MobEffects.GLOWING, 10*20, 0));
