@@ -67,6 +67,7 @@ roots.spell.spell_terra_transmutation.name=Terra Transmutation
 roots.spell.spell_sky_soarer.name=Sky Soarer
 roots.spell.spell_second_wind.name=Second Wind
 roots.spell.spell_magnetism.name=Magnetism
+roots.spell.spell_sense_danger.name=Sense Danger
 
 #Knifes
 item.wood_knife.name=Wooden Knife
