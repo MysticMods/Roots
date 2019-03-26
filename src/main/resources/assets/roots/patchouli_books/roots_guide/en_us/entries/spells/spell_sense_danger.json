@@ -1,0 +1,17 @@
+{
+  "name": "Sense Danger",
+  "icon": "roots:petal_dust",
+  "category": "spells",
+  "advancement": "roots:aubergine",
+  
+  "pages": [
+    {
+      "type": "text",
+      "text": "There's a certain aura that creatures with ill-intent emit. This spell allows you to sense this, as well as see into the darkest depths -- but only for a short while."
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_sense_danger"
+    }
+  ]
+}
