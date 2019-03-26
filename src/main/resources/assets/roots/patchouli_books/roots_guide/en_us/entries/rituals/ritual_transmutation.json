@@ -7,32 +7,11 @@
   "pages": [
     {
       "type": "text",
-      "text": "Some natural delights are harder to find than others. Thankfully, with the energies of the pyre, you can convert more mundane objects into more precious items."
+      "text": "Some natural delights are harder to find than others. Thankfully, with the energies of the pyre, you can convert more mundane objects into more precious items.$(br2)Pumpkins planted above water will become melons, while pumpkins planted above sand will become cacti. Dead bushes will transform into cocoa beans, and birch logs will become jungle."
     },
     {
       "type": "pyre_template",
       "ritual": "ritual_transmutation"
-    },
-    {
-      "type": "pyre_transmutation",
-      "text": "With pumpkin above water",
-      "input": "minecraft:pumpkin",
-      "output": "minecraft:melon_block",
-      "input2": "minecraft:pumpkin",
-      "output2": "minecraft:cactus",
-      "text2": "With pumpkin above sand"
-    },
-    {
-      "type": "pyre_transmutation",
-      "text": "",
-      "input": "minecraft:deadbush",
-      "output": "minecraft:dye:12"
-    },
-    {
-      "type": "pyre_transmutation",
-      "text": "",
-      "input": "minecraft:log:2",
-      "output": "minecraft:log:4"
     }
   ]
 }
