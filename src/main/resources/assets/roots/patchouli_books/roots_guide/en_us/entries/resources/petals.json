@@ -1,0 +1,15 @@
+{
+  "name": "Petals",
+  "icon": "roots:petals",
+  "category": "resources",
+  "pages": [
+    {
+      "type": "text",
+      "text": "It is possible to delicately separate the petals from a variety of flowers into a collection that can be used for crafting purposes. Any flower will suffice for this recipe."
+    },
+    {
+      "type": "mortar_template",
+      "mortar": "roots:petals"
+    }
+  ]
+}

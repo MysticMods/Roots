@@ -139,6 +139,40 @@ public class ModRecipes {
     return null;
   }
 
+  public static MortarRecipe getMortarRecipe(ItemStack output) {
+    for (MortarRecipe mortarRecipe : mortarRecipes) {
+      if (mortarRecipe.getResult().isItemEqual(output)) {
+        return mortarRecipe;
+      }
+    }
+    return null;
+  }
+
+  public static MortarRecipe getMortarRecipe(String string) {
+    ResourceLocation result;
+    int meta = 0;
+    String[] split = string.split(":");
+    if (split.length == 1) {
+      result = new ResourceLocation("minecraft:" + split[0]);
+    } else if (split.length == 2) {
+      result = new ResourceLocation(string);
+    } else if (split.length == 3) {
+      result = new ResourceLocation(split[0] + ":" + split[1]);
+      meta = Integer.parseInt(split[2]);
+    } else {
+      return null;
+    }
+
+    for (MortarRecipe mortarRecipe : mortarRecipes) {
+      ItemStack output = mortarRecipe.getResult();
+      if (output.getItem().getRegistryName().compareTo(result) == 0 && output.getMetadata() == meta) {
+        return mortarRecipe;
+      }
+    }
+
+    return null;
+  }
+
   private static void addMortarRecipe(ItemStack output, Ingredient input, float red1, float green1, float blue1, float red2, float green2, float blue2) {
     mortarRecipes.addAll(getMortarRecipeList(output, input, red1, green1, blue1, red2, green2, blue2));
   }
