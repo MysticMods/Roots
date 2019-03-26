@@ -1,7 +1,6 @@
 package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualFrost;
-import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
 import net.minecraft.init.Blocks;
