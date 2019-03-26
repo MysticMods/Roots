@@ -31,6 +31,7 @@ public class MortarWrapper implements IRecipeWrapper {
   public void getIngredients(IIngredients ingredients) {
     if (recipe != null) {
       for (Ingredient ingredient : recipe.getIngredients()) {
+        if (ingredient == null || ingredient == Ingredient.EMPTY) continue;
         ingredients.setInputs(VanillaTypes.ITEM, Arrays.asList(ingredient.getMatchingStacks()));
       }
       ingredients.setOutput(VanillaTypes.ITEM, this.recipe.getResult());
