@@ -5,6 +5,7 @@ import epicsquid.roots.entity.ritual.EntityRitualTransmutation;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
+import epicsquid.roots.recipe.conditions.ConditionStandingStones;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -22,6 +23,7 @@ public class RitualTransmutation extends RitualBase {
             new ItemStack(ModItems.cloud_berry),
             new ItemStack(ModItems.bark_birch),
             new ItemStack(ModBlocks.chiseled_runestone)));
+    addCondition(new ConditionStandingStones(3, 1));
   }
 
   @Override
