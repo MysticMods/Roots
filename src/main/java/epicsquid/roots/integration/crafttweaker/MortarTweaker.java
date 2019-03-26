@@ -1,19 +1,10 @@
 package epicsquid.roots.integration.crafttweaker;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.blamejared.mtlib.helpers.InputHelper;
 import com.blamejared.mtlib.helpers.LogHelper;
+import com.blamejared.mtlib.utils.BaseAction;
 import com.blamejared.mtlib.utils.BaseListAddition;
 import com.blamejared.mtlib.utils.BaseListRemoval;
-import com.blamejared.mtlib.utils.BaseMapAddition;
-import com.blamejared.mtlib.utils.BaseMapRemoval;
-
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
@@ -23,10 +14,14 @@ import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.MortarRecipe;
-import epicsquid.roots.recipe.PyreCraftingRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @ZenRegister
 @ZenClass("mods." + Roots.MODID + ".Mortar")
@@ -35,12 +30,17 @@ public class MortarTweaker {
   @ZenMethod
   public static void addRecipe(IItemStack output, IIngredient[] inputs) {
     if (inputs.length != 5) {
-      CraftTweakerAPI.getLogger().logError("Mortar recipe must have 5 items.");
+      if (inputs.length == 1) {
+        CraftTweaker.LATE_ACTIONS.add(new AddMultiple(ModRecipes.getMortarRecipeList(CraftTweakerMC.getItemStack(output), CraftTweakerMC.getIngredient(inputs[0]))));
+      } else {
+        CraftTweakerAPI.getLogger().logError("Mortar recipe must have 5 items total, or 1 single item.");
+      }
+    } else {
+      CraftTweaker.LATE_ACTIONS.add(new Add(Collections.singletonList(new MortarRecipe(
+              CraftTweakerMC.getItemStack(output),
+              Arrays.stream(inputs).map(CraftTweakerMC::getIngredient).toArray(Ingredient[]::new))))
+      );
     }
-    CraftTweaker.LATE_ACTIONS.add(new Add(Collections.singletonList(new MortarRecipe(
-        CraftTweakerMC.getItemStack(output),
-        Arrays.stream(inputs).map(CraftTweakerMC::getIngredient).toArray(Ingredient[]::new))))
-    );
   }
 
   @ZenMethod
@@ -75,6 +75,26 @@ public class MortarTweaker {
     @Override
     protected String getRecipeInfo(MortarRecipe recipe) {
       return LogHelper.getStackDescription(recipe.getResult());
+    }
+  }
+
+  private static class AddMultiple extends BaseAction {
+
+    private List<MortarRecipe> multiRecipes;
+
+    private AddMultiple(List<MortarRecipe> recipes) {
+      super("MultiMortarRecipe");
+      multiRecipes = recipes;
+    }
+
+    @Override
+    public void apply() {
+      ModRecipes.getMortarRecipes().addAll(multiRecipes);
+    }
+
+    @Override
+    public String getRecipeInfo() {
+      return String.format("MultiMortarRecipe for variable input of %s into variable output of %s.", multiRecipes.get(0).getIngredients().get(0).getMatchingStacks()[0].getDisplayName(), multiRecipes.get(0).getResult().getDisplayName());
     }
   }
 }
