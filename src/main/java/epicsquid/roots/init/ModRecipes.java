@@ -140,16 +140,25 @@ public class ModRecipes {
   }
 
   private static void addMortarRecipe(ItemStack output, Ingredient input, float red1, float green1, float blue1, float red2, float green2, float blue2) {
-    MortarRecipe recipe;
+    mortarRecipes.addAll(getMortarRecipeList(output, input, red1, green1, blue1, red2, green2, blue2));
+  }
+
+  public static List<MortarRecipe> getMortarRecipeList (ItemStack output, Ingredient input) {
+    return getMortarRecipeList(output, input, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+  }
+
+  public static List<MortarRecipe> getMortarRecipeList (ItemStack output, Ingredient input, float red1, float green1, float blue1, float red2, float green2, float blue2) {
+    List<MortarRecipe> result = new ArrayList<>();
     ItemStack copy;
     List<Ingredient> ingredients = new ArrayList<>();
     for (int i = 0; i < 5; i++) {
       ingredients.add(input);
       copy = output.copy();
       copy.setCount(i + 1);
-      recipe = new MortarRecipe(copy, ingredients.toArray(new Ingredient[0]), red1, green1, blue1, red2, green2, blue2);
-      mortarRecipes.add(recipe);
+      MortarRecipe recipe = new MortarRecipe(copy, ingredients.toArray(new Ingredient[0]), red1, green1, blue1, red2, green2, blue2);
+      result.add(recipe);
     }
+    return result;
   }
 
   public static SpellBase getSpellRecipe(List<ItemStack> items) {
