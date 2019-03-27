@@ -48,6 +48,7 @@ public class EntityRitualTransmutation extends EntityRitualBase {
 
         return false;
       });
+      if (eligiblePositions.isEmpty()) return;
       int index = random.nextInt(eligiblePositions.size());
       BlockPos pos = eligiblePositions.get(index);
       transmuteBlock(world, pos);
