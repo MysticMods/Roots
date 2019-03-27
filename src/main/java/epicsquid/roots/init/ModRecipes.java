@@ -185,10 +185,11 @@ public class ModRecipes {
     List<MortarRecipe> result = new ArrayList<>();
     ItemStack copy;
     List<Ingredient> ingredients = new ArrayList<>();
+    int count = output.getCount();
     for (int i = 0; i < 5; i++) {
       ingredients.add(input);
       copy = output.copy();
-      copy.setCount(i + 1);
+      copy.setCount((i + 1) * count);
       MortarRecipe recipe = new MortarRecipe(copy, ingredients.toArray(new Ingredient[0]), red1, green1, blue1, red2, green2, blue2);
       result.add(recipe);
     }
