@@ -8,6 +8,7 @@ import epicsquid.mysticallib.item.ItemSeedBase;
 import epicsquid.roots.Roots;
 import epicsquid.roots.capability.pouch.PouchItemHandler;
 import epicsquid.roots.item.*;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.init.Blocks;
@@ -29,7 +30,7 @@ public class ModItems {
   // All mod items
   public static Item pestle, component_pouch, spell_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife,
           sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, apothecary_pouch,
-  copper_knife, silver_knife, petals, flour, cooked_aubergine, stuffed_aubergine, living_arrow;
+  copper_knife, silver_knife, petals, flour, cooked_aubergine, stuffed_aubergine, living_arrow, runic_dust;
 
   public static Item moonglow_leaf, aubergine, pereskia, terra_spores, terra_moss, spirit_herb, wildewheet,
           baffle_cap, bark_oak, bark_birch, bark_spruce, bark_jungle, bark_dark_oak, bark_acacia, bark_wildwood;
@@ -63,6 +64,7 @@ public class ModItems {
     event.addItem(stalicripe = new ItemSeedBase("stalicripe", ModBlocks.stalicripe, Blocks.STONE).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(terra_spores = new ItemTerraSpore("terra_spores").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(petals = new ItemBase("petals").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(runic_dust = new ItemBase("runic_dust").setModelCustom(true).setCreativeTab(Roots.tab));
 
     // Barks and Knifes
     event.addItem(bark_oak = new ItemBase("bark_oak").setModelCustom(true).setCreativeTab(Roots.tab));
@@ -132,8 +134,11 @@ public class ModItems {
     }
 
     for (Item bark : Arrays.asList(bark_oak, bark_wildwood, bark_birch, bark_spruce, bark_acacia, bark_dark_oak, bark_jungle)) {
-      ItemStack temp = new ItemStack(bark);
-      OreDictionary.registerOre("rootsBark", temp);
+      OreDictionary.registerOre("rootsBark", bark);
+    }
+
+    for (Block rune : Arrays.asList(ModBlocks.runestone, ModBlocks.chiseled_runestone, ModBlocks.runestone_brick, ModBlocks.runestone_brick_alt)) {
+      OreDictionary.registerOre("runestone", rune);
     }
   }
 
