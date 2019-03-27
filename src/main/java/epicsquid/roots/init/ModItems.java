@@ -126,6 +126,8 @@ public class ModItems {
       OreDictionary.registerOre("allFlowers", new ItemStack(type.getBlockType().getBlock(), 1, type.getMeta()));
     }
     for (BlockDoublePlant.EnumPlantType type : BlockDoublePlant.EnumPlantType.values()) {
+      if (type == BlockDoublePlant.EnumPlantType.FERN || type == BlockDoublePlant.EnumPlantType.GRASS) continue;
+
       OreDictionary.registerOre("allFlowers", new ItemStack(Blocks.DOUBLE_PLANT, 1, type.getMeta()));
     }
 
