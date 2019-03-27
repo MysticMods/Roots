@@ -1,0 +1,17 @@
+{
+  "name": "Runic Dust",
+  "icon": "roots:runic_dust",
+  "category": "resources",
+  "advancement": "roots:pyre",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "While made of hardy stuff, the magic of the Mortar and Pestle can break most types of runestone down into a fine powder, which can be used in rituals or crafting."
+    },
+    {
+      "type": "mortar_template",
+      "mortar": "roots:runic_dust"
+    }
+  ]
+}
