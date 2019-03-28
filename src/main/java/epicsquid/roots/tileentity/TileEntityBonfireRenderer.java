@@ -1,13 +1,17 @@
 package epicsquid.roots.tileentity;
 
-import java.util.ArrayList;
-import java.util.Random;
-
+import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.recipe.PyreCraftingRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class TileEntityBonfireRenderer extends TileEntitySpecialRenderer<TileEntityBonfire> {
 
@@ -35,5 +39,29 @@ public class TileEntityBonfireRenderer extends TileEntitySpecialRenderer<TileEnt
       Minecraft.getMinecraft().getRenderManager().renderEntity(item, 0, 0, 0, 0, 0, true);
       GlStateManager.popMatrix();
     }
+
+    PyreCraftingRecipe recipe = ModRecipes.getCraftingRecipe(renderItems);
+    if (recipe != null)
+      renderResult(tem, x, y, z, recipe);
+  }
+
+  private void renderResult(TileEntityBonfire tem, double x, double y, double z, PyreCraftingRecipe recipe)
+  {
+    ItemStack result = recipe.getResult();
+
+    GlStateManager.enableBlend();
+    RenderHelper.enableStandardItemLighting();
+    GlStateManager.pushMatrix();
+    GlStateManager.translate(x + 0.5, y + 1.5, z + 0.5);
+    GlStateManager.scale(0.5, 0.5, 0.5);
+
+    IBakedModel model = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(result, tem.getWorld(), null);
+    GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+    GlStateManager.color(1F, 1F, 1F, 0.8F);
+    Minecraft.getMinecraft().getRenderItem().renderItem(result, model);
+    GlStateManager.popMatrix();
+    GlStateManager.disableRescaleNormal();
+    GlStateManager.disableBlend();
+    GlStateManager.color(1F, 1F, 1F, 1F);
   }
 }
