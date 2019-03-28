@@ -27,7 +27,7 @@ public class SpellSenseDanger extends SpellBase {
     this.castType = EnumCastType.INSTANTANEOUS;
     this.cooldown = 190;
 
-    addCost(HerbRegistry.getHerbByName("wildroot"), 0.95f);
+    addCost(HerbRegistry.getHerbByName("wildroot"), 0.285f);
     addIngredients(
         new ItemStack(Items.GOLDEN_CARROT),
         new ItemStack(Items.COMPASS),
