@@ -112,7 +112,7 @@ public class ModItems {
     event.addItem(silver_knife = new ItemKnife("silver_knife", SILVER).setCreativeTab(Roots.tab));
 
     event.addItem(cooked_aubergine = new ItemFoodBase("cooked_aubergine", 5, false).setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(stuffed_aubergine = new ItemFoodBase("stuffed_aubergine", 8, false).setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(stuffed_aubergine = new ItemFoodBase("stuffed_aubergine", 11, false).setModelCustom(true).setCreativeTab(Roots.tab));
 
     // KEEP AT END
     registerSeedDrops();
