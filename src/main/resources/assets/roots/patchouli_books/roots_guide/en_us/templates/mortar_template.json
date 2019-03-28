@@ -1,6 +1,6 @@
 
 {
-  "processor": "epicsquid.roots.api.SpellRecipeProcessor",
+  "processor": "epicsquid.roots.api.MortarRecipeProcessor",
   "components": [
     {
       "type": "item",
@@ -56,13 +56,13 @@
     },
     {
       "type": "header",
-      "text": "Spell Crafting",
+      "text": "Mortar Crafting",
       "x": -1,
       "y": 0
     },
     {
       "type": "text",
-      "text": "Crush the ingredients in a Mortar and Pestle to produce spell dust. Use spell dust in an imbuer to add it to your Spell Staff.",
+      "text": "Crush the ingredients in a Mortar using a Pestle to produce the output. Adding more of the same ingredient increases the output.",
       "x": 0,
       "y": 70
     }

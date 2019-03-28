@@ -19,7 +19,7 @@ public class RunicShearsRecipeProcessor implements IComponentProcessor {
     output = recipe.getDrop();
 
     if (recipe.isBlockRecipe()) {
-      if (recipe.getOptionalDisplayItem() != ItemStack.EMPTY) {
+      if (!recipe.getOptionalDisplayItem().isEmpty()) {
         input = recipe.getOptionalDisplayItem();
       }
     }

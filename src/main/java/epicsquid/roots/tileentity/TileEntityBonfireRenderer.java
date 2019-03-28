@@ -20,7 +20,7 @@ public class TileEntityBonfireRenderer extends TileEntitySpecialRenderer<TileEnt
     ArrayList<ItemStack> renderItems = new ArrayList<>();
 
     for (int i = 0; i < tem.inventory.getSlots(); i++) {
-      if (tem.inventory.getStackInSlot(i) != ItemStack.EMPTY) {
+      if (!tem.inventory.getStackInSlot(i).isEmpty()) {
         renderItems.add(tem.inventory.getStackInSlot(i));
       }
     }

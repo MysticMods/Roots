@@ -21,6 +21,8 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -63,6 +65,7 @@ public class ItemSylvanArmor extends ItemArmor implements IModeledObject {
 
     @Nullable
     @Override
+    @SideOnly(Side.CLIENT)
     public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default)
     {
         return new ModelSylvanArmor(armorSlot);

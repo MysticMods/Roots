@@ -242,7 +242,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       if (burnTime == 0) {
         BlockBonfire.setState(false, world, pos);
         //Check if it is a ritual, if so try and see if it has new ritual fuel.
-        if(this.craftingResult == ItemStack.EMPTY && this.lastRitualUsed != null){
+        if(this.craftingResult.isEmpty() && this.lastRitualUsed != null){
           List<ItemStack> stacks = new ArrayList<>();
           for (int i = 0; i < inventory.getSlots(); i++) {
             ItemStack stack = inventory.getStackInSlot(i).copy();
@@ -262,7 +262,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         }
 
         //Spawn item if crafting recipe
-        if(!world.isRemote && this.craftingResult != ItemStack.EMPTY){
+        if(!world.isRemote && !this.craftingResult.isEmpty()) {
           EntityItem item = new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, this.craftingResult.copy());
           item.setCustomNameTag("bonfire");
           world.spawnEntity(item);

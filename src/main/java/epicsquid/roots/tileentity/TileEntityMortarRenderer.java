@@ -16,7 +16,7 @@ public class TileEntityMortarRenderer extends TileEntitySpecialRenderer<TileEnti
     ArrayList<ItemStack> renderItems = new ArrayList<>();
 
     for (int i = 0; i < te.inventory.getSlots(); i++) {
-      if (te.inventory.getStackInSlot(i) != ItemStack.EMPTY) {
+      if (!te.inventory.getStackInSlot(i).isEmpty()) {
         renderItems.add(te.inventory.getStackInSlot(i));
       }
     }

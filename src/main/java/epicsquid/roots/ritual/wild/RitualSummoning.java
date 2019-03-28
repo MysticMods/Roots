@@ -63,7 +63,7 @@ public class RitualSummoning extends RitualBase {
     }
     List<ItemStack> offertoryItems = new ArrayList<>();
     for (TileEntityOffertoryPlate plate : plateList) {
-      if (plate.getHeldItem() != ItemStack.EMPTY) {
+      if (!plate.getHeldItem().isEmpty()) {
         offertoryItems.add(plate.getHeldItem());
       }
     }

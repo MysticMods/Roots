@@ -12,6 +12,7 @@ import com.blamejared.mtlib.utils.BaseMapRemoval;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
+import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
@@ -33,27 +34,25 @@ public class RunicShearsTweaker {
     if (!InputHelper.isABlock(inputBlock) || (replacementBlock != null && !InputHelper.isABlock(replacementBlock))) {
       LogHelper.logError("Runic Shears require input and replacement to be blocks. Recipe: " + name);
     }
-    CraftTweakerRootsPlugin.SCHEDULED_ACTIONS.add(() ->
-      new Add(Collections.singletonMap(name, new RunicShearRecipe(
-          CraftTweakerMC.getBlock(inputBlock.asBlock()),
-          replacementBlock != null ? CraftTweakerMC.getBlock(replacementBlock.asBlock()) : Blocks.AIR,
-          CraftTweakerMC.getItemStack(outputDrop),
-          name + ".ct",
-          jeiDisplayItem != null ? CraftTweakerMC.getItemStack(jeiDisplayItem) : ItemStack.EMPTY)))
+    CraftTweaker.LATE_ACTIONS.add(
+        new Add(Collections.singletonMap(name, new RunicShearRecipe(
+            CraftTweakerMC.getBlock(inputBlock.asBlock()),
+            replacementBlock != null ? CraftTweakerMC.getBlock(replacementBlock.asBlock()) : Blocks.AIR,
+            CraftTweakerMC.getItemStack(outputDrop),
+            name + ".ct",
+            jeiDisplayItem != null ? CraftTweakerMC.getItemStack(jeiDisplayItem) : ItemStack.EMPTY)))
     );
   }
 
   @ZenMethod
   public static void removeRecipe(IItemStack output) {
-    CraftTweakerRootsPlugin.SCHEDULED_ACTIONS.add(() -> {
-      Map<String, RunicShearRecipe> recipes = new HashMap<>();
-      for(RunicShearRecipe modRecipe : ModRecipes.getRunicShearRecipes().values()) {
-        if (output.matches(InputHelper.toIItemStack(modRecipe.getDrop()))) {
-          recipes.put(modRecipe.getName(), modRecipe);
-        }
+    Map<String, RunicShearRecipe> recipes = new HashMap<>();
+    for(RunicShearRecipe modRecipe : ModRecipes.getRunicShearRecipes().values()) {
+      if (output.matches(InputHelper.toIItemStack(modRecipe.getDrop()))) {
+        recipes.put(modRecipe.getName(), modRecipe);
       }
-      return new Remove(recipes);
-    });
+    }
+    CraftTweaker.LATE_ACTIONS.add(new Remove(recipes));
   }
 
   private static class Remove extends BaseMapRemoval<String, RunicShearRecipe> {

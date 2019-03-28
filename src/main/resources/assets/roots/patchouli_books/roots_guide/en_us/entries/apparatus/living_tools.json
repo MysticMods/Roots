@@ -28,6 +28,14 @@
     {
       "type": "ritual_crafting_template",
       "recipe": "living_sword"
+    },
+    {
+      "type": "text",
+      "text": "While too brittle and frail to be fully imbued with wildroot, these sturdy arrows should get you through the worst of fights."
+    },
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "living_arrow"
     }
   ]
 }

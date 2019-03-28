@@ -11,7 +11,7 @@ import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.item.ItemPetalDust;
+import epicsquid.roots.item.ItemSpellDust;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.spell.SpellBase;
@@ -76,7 +76,7 @@ public class TileEntityMortar extends TileBase {
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand,
       @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
-    if (heldItem != ItemStack.EMPTY && heldItem.getCount() > 0) {
+    if (!heldItem.isEmpty()) {
       if (heldItem.getItem() != ModItems.pestle) {
         for (int i = 0; i < inventory.getSlots(); i++) {
           if (inventory.getStackInSlot(i).isEmpty()) {
@@ -123,8 +123,8 @@ public class TileEntityMortar extends TileBase {
               }
             }
           }
-          ItemStack dust = new ItemStack(ModItems.petal_dust, 1);
-          ItemPetalDust.createData(dust, spell);
+          ItemStack dust = new ItemStack(ModItems.spell_dust, 1);
+          ItemSpellDust.createData(dust, spell);
           if (!world.isRemote) {
             world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, dust));
             markDirty();

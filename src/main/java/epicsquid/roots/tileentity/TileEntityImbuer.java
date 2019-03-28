@@ -13,7 +13,6 @@ import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.network.fx.MessageImbueCompleteFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellBase;
-import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.block.state.IBlockState;
@@ -82,7 +81,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
       @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
     if (!heldItem.isEmpty()) {
-      if (heldItem.getItem() == ModItems.petal_dust) {
+      if (heldItem.getItem() == ModItems.spell_dust) {
         if (inventory.getStackInSlot(0).isEmpty()) {
           ItemStack toInsert = heldItem.copy();
           toInsert.setCount(1);
@@ -103,7 +102,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
           ItemStack toInsert = heldItem.copy();
           toInsert.setCount(1);
           ItemStack attemptedInsert = inventory.insertItem(1, toInsert, true);
-          if (attemptedInsert == ItemStack.EMPTY) {
+          if (attemptedInsert.isEmpty()) {
             inventory.insertItem(1, toInsert, false);
             player.getHeldItem(hand).shrink(1);
             if (player.getHeldItem(hand).getCount() == 0) {

@@ -16,7 +16,7 @@ public class TileEntityOffertoryPlateRenderer extends TileEntitySpecialRenderer<
 
   @Override
   public void render(TileEntityOffertoryPlate tei, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-    if (tei.inventory.getStackInSlot(0) != ItemStack.EMPTY) {
+    if (!tei.inventory.getStackInSlot(0).isEmpty()) {
       int count = getCount(tei.inventory.getStackInSlot(0));
       RenderItem r = Minecraft.getMinecraft().getRenderItem();
       EnumFacing f = tei.getWorld().getBlockState(tei.getPos()).getValue(BlockOffertoryPlate.FACING);

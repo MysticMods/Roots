@@ -10,7 +10,7 @@ public class TileEntityImbuerRenderer extends TileEntitySpecialRenderer<TileEnti
 
   @Override
   public void render(TileEntityImbuer tei, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-    if (tei.inventory.getStackInSlot(1) != ItemStack.EMPTY) {
+    if (!tei.inventory.getStackInSlot(1).isEmpty()) {
       GlStateManager.pushMatrix();
       EntityItem item = new EntityItem(Minecraft.getMinecraft().world, x, y, z, tei.inventory.getStackInSlot(1));
       item.hoverStart = 0;
@@ -19,7 +19,7 @@ public class TileEntityImbuerRenderer extends TileEntitySpecialRenderer<TileEnti
       Minecraft.getMinecraft().getRenderManager().renderEntity(item, 0, 0, 0, 0, 0, true);
       GlStateManager.popMatrix();
     }
-    if (tei.inventory.getStackInSlot(0) != ItemStack.EMPTY) {
+    if (!tei.inventory.getStackInSlot(0).isEmpty()) {
       GlStateManager.pushMatrix();
       EntityItem item = new EntityItem(Minecraft.getMinecraft().world, x, y, z, tei.inventory.getStackInSlot(0));
       item.hoverStart = 0;
