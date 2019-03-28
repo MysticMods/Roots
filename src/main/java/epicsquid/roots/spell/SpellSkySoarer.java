@@ -20,7 +20,7 @@ public class SpellSkySoarer extends SpellBase {
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 39;
 
-    addCost(HerbRegistry.getHerbByName("cloud_berry"), 0.4f);
+    addCost(HerbRegistry.getHerbByName("cloud_berry"), 0.15f);
     addIngredients(
         new ItemStack(Items.SUGAR),
         new ItemStack(Items.FEATHER),
