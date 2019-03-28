@@ -1,11 +1,14 @@
 package epicsquid.roots.entity.ritual;
 
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.ritual.RitualRegistry;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.datasync.DataParameter;
@@ -34,21 +37,11 @@ public class EntityRitualOvergrowth extends EntityRitualBase {
       setDead();
     }
     if (this.ticksExisted % 400 == 0) {
-      boolean blockOvergrown = false;
-      for (int i = -9; i < 10; i++) {
-        for (int j = -9; j < 10; j++) {
-          // Attempt to overgrow it
-          BlockPos topBlockPos = world.getTopSolidOrLiquidBlock(new BlockPos(getPosition().getX() + i, getPosition().getY() - 20, getPosition().getZ() + j));
-          topBlockPos = topBlockPos.subtract(new Vec3i(0, 1, 0));
-          blockOvergrown = overgrowBlock(world, topBlockPos, world.getBlockState(topBlockPos));
-          if (blockOvergrown) {
-            break;
-          }
-        }
-        if (blockOvergrown) {
-          break;
-        }
-      }
+      List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), 10, 20, 10, Blocks.COBBLESTONE).stream().filter((pos) -> isAdjacentToWater(world, pos)).collect(Collectors.toList());
+      if (eligiblePositions.isEmpty()) return;
+
+      BlockPos pos = eligiblePositions.get(random.nextInt(eligiblePositions.size()));
+      overgrowBlock(world, pos, world.getBlockState(pos));
     }
   }
 
