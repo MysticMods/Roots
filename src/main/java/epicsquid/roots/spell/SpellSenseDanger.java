@@ -43,7 +43,7 @@ public class SpellSenseDanger extends SpellBase {
     caster.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 40*20));
     for(EntityCreature creature : creatures){
       if (!(creature instanceof IMob)) continue;
-      creature.addPotionEffect( new PotionEffect(MobEffects.GLOWING, 10*20, 0));
+      creature.addPotionEffect( new PotionEffect(MobEffects.GLOWING, 40*20, 0));
     }
     return true;
   }
