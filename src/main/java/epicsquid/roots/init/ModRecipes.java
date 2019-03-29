@@ -109,7 +109,7 @@ public class ModRecipes {
 
   public static RunicShearRecipe getRunicShearRecipe(EntityLiving entity) {
     for (RunicShearRecipe recipe : runicShearRecipes.values()) {
-      if (recipe.isEntityRecipe() && recipe.getEntity() == entity) {
+      if (recipe.isEntityRecipe() && recipe.getEntity() == entity.getClass()) {
         return recipe;
       }
     }
