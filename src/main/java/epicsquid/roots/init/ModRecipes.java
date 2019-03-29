@@ -36,6 +36,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 public class ModRecipes {
 
+  private static Map<ResourceLocation, AnimalHarvestRecipe> harvestRecipes = new HashMap<>();
+  private static Map<ResourceLocation, TransmutationRecipe> transmutationRecipes = new HashMap<>();
   private static List<MortarRecipe> mortarRecipes = new ArrayList<>();
   private static Map<String, PyreCraftingRecipe> pyreCraftingRecipes = new HashMap<>();
   private static Map<String, RunicShearRecipe> runicShearRecipes = new HashMap<>();
