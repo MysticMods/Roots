@@ -16,7 +16,7 @@ public class RunicShearRecipe {
   private ItemStack optionalDisplayItem = ItemStack.EMPTY;
   private String name;
 
-  private EntityLiving entity;
+  private Class<? extends EntityLiving> entity = null;
 
   public RunicShearRecipe(Block block, Block replacementBlock, ItemStack drop, String name, ItemStack optionalDisplayItem) {
     this.block = block;
@@ -32,7 +32,7 @@ public class RunicShearRecipe {
 
   public RunicShearRecipe(ItemStack drop, EntityLiving entity, String name) {
     this.drop = drop;
-    this.entity = entity;
+    this.entity = entity.getClass();
     this.name = name;
   }
 
@@ -56,7 +56,7 @@ public class RunicShearRecipe {
     return drop;
   }
 
-  public EntityLiving getEntity() {
+  public Class getEntity() {
     return entity;
   }
 
