@@ -18,7 +18,9 @@ public class MortarRecipeProcessor implements IComponentProcessor {
 
   @Override
   public void setup(IVariableProvider<String> iVariableProvider) {
-    MortarRecipe mortarBase = ModRecipes.getMortarRecipe(iVariableProvider.get("mortar"));
+    String item = iVariableProvider.get("item");
+    int meta = iVariableProvider.has("meta") ? Integer.parseInt(iVariableProvider.get("meta")) : 0;
+    MortarRecipe mortarBase = ModRecipes.getMortarRecipe(item, meta);
     if (mortarBase != null) {
       ingredients = mortarBase.getIngredients();
       output = mortarBase.getResult();

@@ -11,7 +11,7 @@
     },
     {
       "type": "mortar_template",
-      "mortar": "roots:runic_dust"
+      "item": "roots:runic_dust"
     }
   ]
 }

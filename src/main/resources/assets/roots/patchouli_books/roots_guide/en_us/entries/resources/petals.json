@@ -9,7 +9,7 @@
     },
     {
       "type": "mortar_template",
-      "mortar": "roots:petals"
+      "item": "roots:petals"
     }
   ]
 }

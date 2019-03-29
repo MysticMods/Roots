@@ -9,15 +9,10 @@ import javax.annotation.Nonnull;
 
 import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
-import epicsquid.mysticallib.item.ItemBase;
-import epicsquid.mysticalworld.MysticalWorld;
 import epicsquid.mysticalworld.item.metals.Metal;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
-import epicsquid.roots.recipe.MortarRecipe;
-import epicsquid.roots.recipe.PyreCraftingRecipe;
-import epicsquid.roots.recipe.RunicCarvingRecipe;
-import epicsquid.roots.recipe.RunicShearRecipe;
+import epicsquid.roots.recipe.*;
 import epicsquid.roots.recipe.recipes.RunicShearRecipes;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
@@ -28,7 +23,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
@@ -149,24 +143,11 @@ public class ModRecipes {
     return null;
   }
 
-  public static MortarRecipe getMortarRecipe(String string) {
-    ResourceLocation result;
-    int meta = 0;
-    String[] split = string.split(":");
-    if (split.length == 1) {
-      result = new ResourceLocation("minecraft:" + split[0]);
-    } else if (split.length == 2) {
-      result = new ResourceLocation(string);
-    } else if (split.length == 3) {
-      result = new ResourceLocation(split[0] + ":" + split[1]);
-      meta = Integer.parseInt(split[2]);
-    } else {
-      return null;
-    }
-
+  public static MortarRecipe getMortarRecipe(String name, int meta) {
+    ResourceLocation item = new ResourceLocation(name);
     for (MortarRecipe mortarRecipe : mortarRecipes) {
       ItemStack output = mortarRecipe.getResult();
-      if (output.getItem().getRegistryName().compareTo(result) == 0 && output.getMetadata() == meta) {
+      if (output.getItem().getRegistryName().equals(item) && output.getMetadata() == meta) {
         return mortarRecipe;
       }
     }
