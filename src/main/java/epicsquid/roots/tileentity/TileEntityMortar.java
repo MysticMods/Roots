@@ -1,10 +1,5 @@
 package epicsquid.roots.tileentity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import epicsquid.mysticallib.network.MessageTEUpdate;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
@@ -27,6 +22,10 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TileEntityMortar extends TileBase {
 
@@ -76,8 +75,16 @@ public class TileEntityMortar extends TileBase {
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand,
       @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
+    ItemStack offHand = player.getHeldItemOffhand();
+    List<ItemStack> ingredients = new ArrayList<>();
+    for (int i = 0; i < inventory.getSlots(); i++) {
+      ItemStack stack = inventory.getStackInSlot(i);
+      if (!stack.isEmpty()) ingredients.add(stack);
+    }
     if (!heldItem.isEmpty()) {
-      if (heldItem.getItem() != ModItems.pestle) {
+      ItemStack slot0 = inventory.getStackInSlot(0);
+      if (heldItem.getItem() != ModItems.pestle && !(ingredients.size() == 5 && offHand.getItem() == ModItems.pestle)) {
+        if (!slot0.isEmpty() && slot0.getItem() == ModItems.pestle) return true;
         for (int i = 0; i < inventory.getSlots(); i++) {
           if (inventory.getStackInSlot(i).isEmpty()) {
             ItemStack toInsert = heldItem.copy();
@@ -96,11 +103,6 @@ public class TileEntityMortar extends TileBase {
           }
         }
       } else {
-        List<ItemStack> ingredients = new ArrayList<>();
-        for (int i = 0; i < inventory.getSlots(); i++) {
-          ItemStack stack = inventory.getStackInSlot(i);
-          if (!stack.isEmpty()) ingredients.add(stack);
-        }
         if (ingredients.isEmpty()) {
           ItemStack mortar = inventory.insertItem(0, heldItem, false);
           if (mortar.isEmpty()) {
@@ -189,6 +191,7 @@ public class TileEntityMortar extends TileBase {
         }
       }
     }
+    if (!heldItem.isEmpty()) return true;
     return false;
   }
 
