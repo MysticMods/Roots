@@ -7,7 +7,7 @@
     "pages": [
       {
         "type": "text",
-        "text": "Carries the caster forward upon a cloud, granting them the ability to soar briefly before floating back to the surface."
+        "text": "Carries the caster forward upon a cloud, granting them the ability to soar briefly ... before they crash back down to the surface."
       },
       {
         "type": "spell_template",
