@@ -46,6 +46,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   private boolean doBigFlame = false;
   private ItemStack craftingResult = ItemStack.EMPTY;
   private RitualBase lastRitualUsed = null;
+  private PyreCraftingRecipe lastRecipeUsed = null;
   private List<Ingredient> lastUsedIngredients = null;
 
   private boolean isBurning = false;
@@ -73,9 +74,8 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     tag.setInteger("burnTime", burnTime);
     tag.setBoolean("doBigFlame", doBigFlame);
     tag.setTag("craftingResult", this.craftingResult.serializeNBT());
-    if(this.lastRitualUsed != null){
-      tag.setString("lastRitualUsed", this.lastRitualUsed.getName());
-    }
+    tag.setString("lastRitualUsed", (this.lastRitualUsed != null) ? this.lastRitualUsed.getName() : "");
+    tag.setString("lastRecipeUsed", (this.lastRecipeUsed != null) ? this.lastRecipeUsed.getName() : "");
     return tag;
   }
 
@@ -87,6 +87,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     doBigFlame = tag.getBoolean("doBigFlame");
     this.craftingResult = new ItemStack(tag.getCompoundTag("craftingResult"));
     this.lastRitualUsed = RitualRegistry.getRitual(tag.getString("lastRitualUsed"));
+    this.lastRecipeUsed = ModRecipes.getCraftingRecipe(tag.getString("lastRecipeUsed"));
   }
 
   @Override
@@ -102,6 +103,14 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   @Override
   public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
     readFromNBT(pkt.getNbtCompound());
+  }
+
+  public RitualBase getLastRitualUsed() {
+    return lastRitualUsed;
+  }
+
+  public PyreCraftingRecipe getLastRecipeUsed() {
+    return lastRecipeUsed;
   }
 
   @Override
@@ -123,6 +132,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
             ritual.doEffect(world, pos);
             this.burnTime = ritual.getDuration();
             this.lastRitualUsed = ritual;
+            this.lastRecipeUsed = null;
             this.lastUsedIngredients = ritual.getIngredients();
             this.doBigFlame = true;
             for (int i = 0; i < inventory.getSlots(); i++) {
@@ -135,6 +145,8 @@ public class TileEntityBonfire extends TileBase implements ITickable {
 
         PyreCraftingRecipe recipe = ModRecipes.getCraftingRecipe(stacks);
         if(recipe != null){
+          this.lastRecipeUsed = recipe;
+          this.lastRitualUsed = null;
           this.lastUsedIngredients = recipe.getIngredients();
           this.craftingResult = recipe.getResult();
           this.burnTime = 200;
@@ -179,6 +191,8 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       if (this.lastUsedIngredients == null) {
         if (this.lastRitualUsed != null) {
           this.lastUsedIngredients = this.lastRitualUsed.getIngredients();
+        } else if (this.lastRecipeUsed != null) {
+          this.lastUsedIngredients = this.lastRecipeUsed.getIngredients();
         }
       }
       if (this.lastUsedIngredients != null) {
