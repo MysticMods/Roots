@@ -499,9 +499,6 @@ public class ModRecipes {
   }
 
   private static void initDrops() {
-    List<ItemStack> baffleCapDrops = new ArrayList<>();
-    baffleCapDrops.add(new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom)));
-    ((BlockBase) ModBlocks.baffle_cap_huge_top).setDrops(baffleCapDrops);
   }
 
 }
