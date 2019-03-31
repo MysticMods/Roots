@@ -68,6 +68,7 @@ roots.spell.spell_sky_soarer.name=Sky Soarer
 roots.spell.spell_second_wind.name=Second Wind
 roots.spell.spell_magnetism.name=Magnetism
 roots.spell.spell_sense_danger.name=Sense Danger
+roots.spell.spell_scatter.name=Scatter
 
 roots.ritual.ritual_life.name=Healing Aura
 roots.ritual.ritual_storm.name=Heavy Storms

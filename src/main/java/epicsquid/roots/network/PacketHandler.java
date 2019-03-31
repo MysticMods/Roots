@@ -1,20 +1,6 @@
 package epicsquid.roots.network;
 
-import epicsquid.roots.network.fx.MessageAcidCloudFX;
-import epicsquid.roots.network.fx.MessageDandelionCastFX;
-import epicsquid.roots.network.fx.MessageImbueCompleteFX;
-import epicsquid.roots.network.fx.MessageLifeDrainAbsorbFX;
-import epicsquid.roots.network.fx.MessageLifeInfusionFX;
-import epicsquid.roots.network.fx.MessageLightDrifterFX;
-import epicsquid.roots.network.fx.MessageLightDrifterSync;
-import epicsquid.roots.network.fx.MessageMindWardFX;
-import epicsquid.roots.network.fx.MessageMindWardRingFX;
-import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
-import epicsquid.roots.network.fx.MessageRadianceBeamFX;
-import epicsquid.roots.network.fx.MessageSanctuaryBurstFX;
-import epicsquid.roots.network.fx.MessageSanctuaryRingFX;
-import epicsquid.roots.network.fx.MessageShatterBurstFX;
-import epicsquid.roots.network.fx.MessageTimeStopStartFX;
+import epicsquid.roots.network.fx.*;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class PacketHandler {
@@ -37,6 +23,7 @@ public class PacketHandler {
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageMindWardFX.MessageHolder.class, MessageMindWardFX.class, Side.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessagePlayerGroveUpdate.MessageHolder.class, MessagePlayerGroveUpdate.class, Side.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessagePlayerDataUpdate.MessageHolder.class, MessagePlayerDataUpdate.class, Side.CLIENT);
+    epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageScatterPlantFX.Handler.class, MessageScatterPlantFX.class, Side.CLIENT);
 
   }
 }
