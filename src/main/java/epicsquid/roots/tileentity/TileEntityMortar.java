@@ -98,7 +98,17 @@ public class TileEntityMortar extends TileBase {
       } else {
         List<ItemStack> ingredients = new ArrayList<>();
         for (int i = 0; i < inventory.getSlots(); i++) {
-          ingredients.add(inventory.getStackInSlot(i));
+          ItemStack stack = inventory.getStackInSlot(i);
+          if (!stack.isEmpty()) ingredients.add(stack);
+        }
+        if (ingredients.isEmpty()) {
+          ItemStack mortar = inventory.insertItem(0, heldItem, false);
+          if (mortar.isEmpty()) {
+            player.setHeldItem(hand, ItemStack.EMPTY);
+            markDirty();
+            PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+            return true;
+          }
         }
         SpellBase spell = ModRecipes.getSpellRecipe(ingredients);
         if (spell != null) {
