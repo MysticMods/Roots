@@ -78,7 +78,7 @@ public class BlockBonfire extends BlockTEBase {
     if (te != null)
     {
       te.validate();
-      //world.setTileEntity(pos, te);
+      world.setTileEntity(pos, te);
     }
 
   }

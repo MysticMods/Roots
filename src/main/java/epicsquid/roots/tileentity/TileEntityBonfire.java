@@ -172,6 +172,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       }
     }
     if (player.isSneaking() && heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND) {
+      if (this.lastRitualUsed != null) {
+        this.lastUsedItems = this.lastRitualUsed.getRecipe();
+      }
       if(this.lastUsedItems != null){
         for(int i = 0; i < player.inventory.mainInventory.size(); i++){
           ItemStack stack = player.inventory.mainInventory.get(i);
