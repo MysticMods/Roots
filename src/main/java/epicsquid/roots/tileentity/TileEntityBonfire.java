@@ -18,6 +18,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -28,10 +29,13 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -42,7 +46,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   private boolean doBigFlame = false;
   private ItemStack craftingResult = ItemStack.EMPTY;
   private RitualBase lastRitualUsed = null;
-  private List<ItemStack> lastUsedItems = null;
+  private List<Ingredient> lastUsedIngredients = null;
 
   private boolean isBurning = false;
 
@@ -119,7 +123,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
             ritual.doEffect(world, pos);
             this.burnTime = ritual.getDuration();
             this.lastRitualUsed = ritual;
-            this.lastUsedItems = ritual.getRecipe();
+            this.lastUsedIngredients = ritual.getIngredients();
             this.doBigFlame = true;
             for (int i = 0; i < inventory.getSlots(); i++) {
               inventory.extractItem(i, 1, false);
@@ -131,7 +135,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
 
         PyreCraftingRecipe recipe = ModRecipes.getCraftingRecipe(stacks);
         if(recipe != null){
-          this.lastUsedItems = recipe.getRecipe();
+          this.lastUsedIngredients = recipe.getIngredients();
           this.craftingResult = recipe.getResult();
           this.burnTime = 200;
           this.doBigFlame = true;
@@ -172,18 +176,24 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       }
     }
     if (player.isSneaking() && heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND) {
-      if (this.lastRitualUsed != null) {
-        this.lastUsedItems = this.lastRitualUsed.getRecipe();
+      if (this.lastUsedIngredients == null) {
+        if (this.lastRitualUsed != null) {
+          this.lastUsedIngredients = this.lastRitualUsed.getIngredients();
+        }
       }
-      if(this.lastUsedItems != null){
-        for(int i = 0; i < player.inventory.mainInventory.size(); i++){
-          ItemStack stack = player.inventory.mainInventory.get(i);
-          for(ItemStack recipeIngredient : this.lastUsedItems){
-            if(stack.isItemEqual(recipeIngredient)){
-              if(!isItemInInventory(stack)){
-                insertItemFromPlayerInventory(stack, player, i);
-                break;
-              }
+      if (this.lastUsedIngredients != null) {
+        List<Ingredient> ingredientsCopy = new ArrayList<>(this.lastUsedIngredients);
+        IItemHandler inventory = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+        assert inventory != null;
+        Iterator<Ingredient> iter = ingredientsCopy.iterator();
+        while (iter.hasNext()) {
+          Ingredient ingredient = iter.next();
+          for (int i = 0; i < inventory.getSlots(); i++) {
+            ItemStack stack = inventory.getStackInSlot(i);
+            if (ingredient.apply(stack)) {
+              insertItemFromPlayerInventory(stack, player, i);
+              iter.remove();
+              break;
             }
           }
         }
@@ -332,17 +342,6 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
       }
     }
-  }
-
-  public boolean isItemInInventory(ItemStack stack){
-    for (int i = 0; i < inventory.getSlots(); i++) {
-      ItemStack inventoryStack = inventory.getStackInSlot(i).copy();
-      if(inventoryStack.isItemEqual(stack)){
-        return true;
-      }
-    }
-
-    return false;
   }
 
   private void insertItemFromPlayerInventory(ItemStack stack, EntityPlayer player, int slot){
