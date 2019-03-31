@@ -33,7 +33,7 @@ public class RenderHUD {
     if (block == ModBlocks.mortar) {
       RenderMortar.render(mc, trace.getBlockPos(), state, event);
     } else if (block == ModBlocks.bonfire) {
-
+      RenderBonfire.render(mc, trace.getBlockPos(), state, event);
     }
   }
 }
