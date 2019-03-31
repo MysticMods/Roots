@@ -16,8 +16,8 @@ public class HugeBaffleCap {
   public HugeBaffleCap() {
     this.data = new StructureData() {
       @Override
-      public void generateIn(@Nonnull World world, int x, int y, int z, @Nonnull Rotation rotation, @Nonnull Mirror doMirror, boolean replaceWithAir) {
-        super.generateIn(world, x - 2, y, z - 2, rotation, doMirror, replaceWithAir);
+      public void generateIn(@Nonnull World world, int x, int y, int z, @Nonnull Rotation rotation, @Nonnull Mirror doMirror, boolean replaceWithAir, boolean force) {
+        super.generateIn(world, x - 2, y, z - 2, rotation, doMirror, replaceWithAir, force);
       }
     };
 
