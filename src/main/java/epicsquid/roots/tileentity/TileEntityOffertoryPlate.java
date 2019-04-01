@@ -32,7 +32,7 @@ public class TileEntityOffertoryPlate extends TileBase {
     protected void onContentsChanged(int slot) {
       TileEntityOffertoryPlate.this.markDirty();
       if (!world.isRemote) {
-        PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(TileEntityOffertoryPlate.this.getUpdateTag()));
+        PacketHandler.sendToAllTracking(new MessageTEUpdate(TileEntityOffertoryPlate.this.getUpdateTag()), TileEntityOffertoryPlate.this);
       }
     }
   };
@@ -112,7 +112,7 @@ public class TileEntityOffertoryPlate extends TileBase {
               grove.addActiveOffering(this);
             }
           }
-          PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+          PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
           return true;
         }
       }
@@ -123,13 +123,13 @@ public class TileEntityOffertoryPlate extends TileBase {
         if (!world.isRemote) {
           world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, extracted));
         }
-        PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+        PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
         return true;
       }
     }
     if (!world.isRemote) {
 
-      PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+      PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
     }
     return false;
   }

@@ -58,7 +58,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     protected void onContentsChanged(int slot) {
       TileEntityBonfire.this.markDirty();
       if (!world.isRemote) {
-        PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(TileEntityBonfire.this.getUpdateTag()));
+        PacketHandler.sendToAllTracking(new MessageTEUpdate(TileEntityBonfire.this.getUpdateTag()), TileEntityBonfire.this);
       }
     }
   };
@@ -139,7 +139,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
               inventory.extractItem(i, 1, false);
             }
             markDirty();
-            PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+            PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
           }
         }
 
@@ -155,7 +155,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
             inventory.extractItem(i, 1, false);
           }
           markDirty();
-          PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+          PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
         }
       } else {
         for (int i = 0; i < 5; i++) {
@@ -180,7 +180,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
                 player.setHeldItem(hand, heldItem);
               }
               markDirty();
-              PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+              PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
               return true;
             }
           }
@@ -217,7 +217,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           ItemStack extracted = inventory.extractItem(i, inventory.getStackInSlot(i).getCount(), false);
           world.spawnEntity(new EntityItem(world, player.posX, player.posY + 0.5, player.posZ, extracted));
           markDirty();
-          PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+          PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
           pickupDelay = 40;
           return true;
         }
@@ -251,7 +251,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       BlockBonfire.setState(true, world, pos);
       doBigFlame = false;
       markDirty();
-      PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+      PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
     }
 
     if (burnTime > 0) {
@@ -280,7 +280,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
               inventory.extractItem(i, 1, false);
             }
             markDirty();
-            PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+            PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
           }
         }
 
@@ -349,7 +349,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         }
 
         markDirty();
-        PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+        PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
       }
     }
   }
@@ -363,7 +363,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         stack.setCount(stack.getCount() - 1);
         //todo: check if the item goes away
         markDirty();
-        PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+        PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
         break;
       }
     }

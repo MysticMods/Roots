@@ -42,7 +42,7 @@ public class SpellLifeDrain extends SpellBase {
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
       boolean foundTarget = false;
-      PacketHandler.INSTANCE.sendToAll(new MessageLifeDrainAbsorbFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ));
+      PacketHandler.sendToAllTracking(new MessageLifeDrainAbsorbFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ), player);
       for (int i = 0; i < 4 && !foundTarget; i++) {
         double x = player.posX + player.getLookVec().x * 3.0 * (float) i;
         double y = player.posY + player.getEyeHeight() + player.getLookVec().y * 3.0 * (float) i;
