@@ -68,7 +68,7 @@ public class SpellScatter extends SpellBase {
           if (!broken)
           {
             caster.world.setBlockState(pos, plant);
-            PacketHandler.INSTANCE.sendToAll(new MessageScatterPlantFX(pos.getX(), pos.getY(), pos.getZ()));
+            PacketHandler.sendToAllTracking(new MessageScatterPlantFX(pos.getX(), pos.getY(), pos.getZ()), caster);
           }
         }
       }
