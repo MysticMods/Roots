@@ -52,7 +52,7 @@ public class SpellPetalShell extends SpellBase {
         shell.setPlayer(player.getUniqueID());
         player.world.spawnEntity(shell);
       }
-      PacketHandler.INSTANCE.sendToAll(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ));
+      PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ), player);
     }
     return true;
   }

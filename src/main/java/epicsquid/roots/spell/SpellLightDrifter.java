@@ -51,9 +51,8 @@ public class SpellLightDrifter extends SpellBase {
         player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_MODE, GameType.SURVIVAL.getID());
       }
       player.setGameType(GameType.SPECTATOR);
-      PacketHandler.INSTANCE
-          .sendToAll(new MessageLightDrifterSync(player.getUniqueID(), player.posX, player.posY, player.posZ, true, GameType.SPECTATOR.getID()));
-      PacketHandler.INSTANCE.sendToAll(new MessageLightDrifterFX(player.posX, player.posY + 1.0f, player.posZ));
+      PacketHandler.sendToAllTracking(new MessageLightDrifterSync(player.getUniqueID(), player.posX, player.posY, player.posZ, true, GameType.SPECTATOR.getID()), player);
+      PacketHandler.sendToAllTracking(new MessageLightDrifterFX(player.posX, player.posY + 1.0f, player.posZ), player);
     }
     return true;
   }

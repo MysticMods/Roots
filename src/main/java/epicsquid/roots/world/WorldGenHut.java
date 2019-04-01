@@ -54,7 +54,7 @@ public class WorldGenHut extends StructureBase implements IWorldGenerator {
       if (world.getTileEntity(pos) != null) {
         TileEntityChest chest = (TileEntityChest) world.getTileEntity(pos);
         chest.setLootTable(new ResourceLocation("roots:hut"), NoiseGenUtil.getSeed((int) world.getSeed(), pos.getX(), pos.getZ()));
-        PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(chest.getUpdateTag()));
+        PacketHandler.sendToAllTracking(new MessageTEUpdate(chest.getUpdateTag()), chest);
         chest.markDirty();
       }
     }

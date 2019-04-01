@@ -40,7 +40,7 @@ public class SpellTimeStop extends SpellBase {
       timeStop.setPlayer(player.getUniqueID());
       timeStop.setPosition(player.posX, player.posY, player.posZ);
       player.world.spawnEntity(timeStop);
-      PacketHandler.INSTANCE.sendToAll(new MessageTimeStopStartFX(player.posX, player.posY + 1.0f, player.posZ));
+      PacketHandler.sendToAllTracking(new MessageTimeStopStartFX(player.posX, player.posY + 1.0f, player.posZ), player);
     }
     return true;
   }

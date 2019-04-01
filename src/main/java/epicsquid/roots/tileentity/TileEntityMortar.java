@@ -34,7 +34,7 @@ public class TileEntityMortar extends TileBase {
     protected void onContentsChanged(int slot) {
       TileEntityMortar.this.markDirty();
       if (!world.isRemote) {
-        PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(TileEntityMortar.this.getUpdateTag()));
+        PacketHandler.sendToAllTracking(new MessageTEUpdate(TileEntityMortar.this.getUpdateTag()), TileEntityMortar.this);
       }
     }
   };
@@ -97,7 +97,7 @@ public class TileEntityMortar extends TileBase {
                 player.setHeldItem(hand, ItemStack.EMPTY);
               }
               markDirty();
-              PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+              PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
               return true;
             }
           }
@@ -108,7 +108,7 @@ public class TileEntityMortar extends TileBase {
           if (mortar.isEmpty()) {
             player.setHeldItem(hand, ItemStack.EMPTY);
             markDirty();
-            PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+            PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
             return true;
           }
         }
@@ -140,7 +140,7 @@ public class TileEntityMortar extends TileBase {
           if (!world.isRemote) {
             world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, dust));
             markDirty();
-            PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+            PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
           }
           for (int i = 0; i < inventory.getSlots(); i++) {
             inventory.extractItem(i, 1, false);
@@ -174,7 +174,7 @@ public class TileEntityMortar extends TileBase {
           if (!world.isRemote) {
             world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, mortarRecipe.getResult()));
             markDirty();
-            PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+            PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
           }
           for (int i = 0; i < inventory.getSlots(); i++) {
             inventory.extractItem(i, 1, false);

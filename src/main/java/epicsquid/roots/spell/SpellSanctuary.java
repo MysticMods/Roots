@@ -49,14 +49,14 @@ public class SpellSanctuary extends SpellBase {
             e.motionZ = 0.125f * (e.posZ - player.posZ);
             e.velocityChanged = true;
             if (!e.isInvisible()) {
-              PacketHandler.INSTANCE.sendToAll(new MessageSanctuaryBurstFX(e.posX, e.posY + 0.6f * e.getEyeHeight(), e.posZ));
+              PacketHandler.sendToAllTracking(new MessageSanctuaryBurstFX(e.posX, e.posY + 0.6f * e.getEyeHeight(), e.posZ), e);
             }
           }
         }
       }
     }
     if (player.ticksExisted % 2 == 0) {
-      PacketHandler.INSTANCE.sendToAll(new MessageSanctuaryRingFX(player.posX, player.posY + 0.875f, player.posZ));
+      PacketHandler.sendToAllTracking(new MessageSanctuaryRingFX(player.posX, player.posY + 0.875f, player.posZ), player);
     }
     return true;
   }
