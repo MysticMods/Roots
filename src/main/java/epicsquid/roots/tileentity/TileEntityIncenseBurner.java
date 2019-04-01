@@ -32,7 +32,7 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
         protected void onContentsChanged(int slot) {
             TileEntityIncenseBurner.this.markDirty();
             if (!world.isRemote) {
-                PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(TileEntityIncenseBurner.this.getUpdateTag()));
+                PacketHandler.sendToAllTracking(new MessageTEUpdate(TileEntityIncenseBurner.this.getUpdateTag()), TileEntityIncenseBurner.this);
             }
         }
     };
@@ -72,21 +72,21 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
             if(lit){
                 this.lit = false;
                 markDirty();
-                PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+                PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
                 return false;
             }
             ItemStack extracted = inventory.extractItem(0, inventory.getStackInSlot(0).getCount(), false);
             if (!world.isRemote) {
                 world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, extracted));
             }
-            PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+            PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
             return false;
         }
         if(stack.getItem() == Items.FLINT_AND_STEEL){
             if (!inventoryStack.isEmpty()) {
                 this.lit = true;
                 markDirty();
-                PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+                PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
                 return false;
             }
         }
@@ -112,7 +112,7 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
         }
 
         markDirty();
-        PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+        PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
 
         return false;
     }
@@ -145,7 +145,7 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
                 }
 
                 markDirty();
-                PacketHandler.INSTANCE.sendToAll(new MessageTEUpdate(this.getUpdateTag()));
+                PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
             }
 
 

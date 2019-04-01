@@ -48,7 +48,7 @@ public class SpellGrowthInfusion extends SpellBase {
           for (int i = 0; i < 1; i++) {
             state.getBlock().randomTick(player.world, pos, state, new Random());
           }
-          PacketHandler.INSTANCE.sendToAll(new MessageLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()));
+          PacketHandler.sendToAllTracking(new MessageLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);
         }
       }
     }

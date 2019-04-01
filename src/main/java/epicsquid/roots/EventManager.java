@@ -175,7 +175,7 @@ public class EventManager {
       if (player.hasCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null)){
         IPlayerDataCapability cap = player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null);
         if (cap != null && !player.world.isRemote && cap.isDirty()){
-          PacketHandler.INSTANCE.sendToAllAround(new MessagePlayerDataUpdate(player.getUniqueID(), cap.getData()), new NetworkRegistry.TargetPoint(player.dimension, player.posX, player.posY, player.posZ, 128));
+          PacketHandler.INSTANCE.sendToAllTracking(new MessagePlayerDataUpdate(player.getUniqueID(), cap.getData()), new NetworkRegistry.TargetPoint(player.dimension, player.posX, player.posY, player.posZ, 0));
           cap.clean();
         }
       }
@@ -207,7 +207,7 @@ public class EventManager {
               event.setCanceled(true);
               shell.getDataManager().set(shell.getCharge(), shell.getDataManager().get(shell.getCharge())-1);
               shell.getDataManager().setDirty(shell.getCharge());
-              PacketHandler.INSTANCE.sendToAll(new MessagePetalShellBurstFX(player.posX,player.posY+1.0f,player.posZ));
+              PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(player.posX,player.posY+1.0f,player.posZ), player);
               if (shell.getDataManager().get(shell.getCharge()) <= 0){
                 player.world.removeEntity(shell);
               }
@@ -228,7 +228,7 @@ public class EventManager {
         EntityLivingBase entity = (EntityLivingBase)event.getSource().getTrueSource();
         entity.attackEntityFrom(DamageSource.WITHER, event.getAmount()*2.0f);
         event.setAmount(0);
-        PacketHandler.INSTANCE.sendToAll(new MessageMindWardRingFX(entity.posX,entity.posY+1.0,entity.posZ));
+        PacketHandler.sendToAllTracking(new MessageMindWardRingFX(entity.posX,entity.posY+1.0,entity.posZ), entity);
       }
     }
   }
@@ -244,7 +244,7 @@ public class EventManager {
       if (event.getEntity().getEntityData().getInteger(Constants.MIND_WARD_TAG) <= 0){
         event.getEntity().getEntityData().removeTag(Constants.MIND_WARD_TAG);
       }
-      PacketHandler.INSTANCE.sendToAll(new MessageMindWardFX(event.getEntity().posX,event.getEntity().posY+event.getEntity().getEyeHeight()+0.75f,event.getEntity().posZ));
+      PacketHandler.sendToAllTracking(new MessageMindWardFX(event.getEntity().posX,event.getEntity().posY+event.getEntity().getEyeHeight()+0.75f,event.getEntity().posZ), event.getEntity());
     }
     if (event.getEntity().getEntityData().hasKey(Constants.LIGHT_DRIFTER_TAG) && !event.getEntity().getEntityWorld().isRemote){
       event.getEntity().getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_TAG)-1);
@@ -253,14 +253,14 @@ public class EventManager {
         player.posX = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_X);
         player.posY = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_Y);
         player.posZ = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_Z);
-        PacketHandler.INSTANCE.sendToAll(new MessageLightDrifterSync(event.getEntity().getUniqueID(),player.posX,player.posY,player.posZ,false,event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE)));
+        PacketHandler.sendToAllTracking(new MessageLightDrifterSync(event.getEntity().getUniqueID(),player.posX,player.posY,player.posZ,false,event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE)), player);
         player.capabilities.allowFlying = false;
         player.capabilities.disableDamage = false;
         player.noClip = false;
         player.capabilities.isFlying = false;
         player.setGameType(GameType.getByID(event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE)));
         player.setPositionAndUpdate(player.posX, player.posY, player.posZ);
-        PacketHandler.INSTANCE.sendToAll(new MessageLightDrifterFX(event.getEntity().posX,event.getEntity().posY+1.0f,event.getEntity().posZ));
+        PacketHandler.sendToAllTracking(new MessageLightDrifterFX(event.getEntity().posX,event.getEntity().posY+1.0f,event.getEntity().posZ), event.getEntity());
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_TAG);
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_X);
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_Y);

@@ -60,7 +60,7 @@ public class SpellAcidCloud extends SpellBase {
 
         }
       }
-      PacketHandler.INSTANCE.sendToAll(new MessageAcidCloudFX(player.posX, player.posY + player.getEyeHeight(), player.posZ));
+      PacketHandler.sendToAllTracking(new MessageAcidCloudFX(player.posX, player.posY + player.getEyeHeight(), player.posZ), player);
     }
     return true;
   }
