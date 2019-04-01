@@ -1,14 +1,11 @@
 package epicsquid.roots;
 
-import java.util.List;
-import java.util.Random;
-
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.roots.capability.grove.IPlayerGroveCapability;
+import epicsquid.roots.capability.grove.PlayerGroveCapabilityProvider;
 import epicsquid.roots.capability.playerdata.IPlayerDataCapability;
 import epicsquid.roots.capability.playerdata.PlayerDataCapabilityProvider;
-import epicsquid.roots.capability.grove.PlayerGroveCapabilityProvider;
 import epicsquid.roots.capability.spell.SpellHolderCapabilityProvider;
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.entity.spell.EntityPetalShell;
@@ -19,11 +16,7 @@ import epicsquid.roots.item.ItemKnife;
 import epicsquid.roots.item.ItemPouch;
 import epicsquid.roots.network.MessagePlayerDataUpdate;
 import epicsquid.roots.network.MessagePlayerGroveUpdate;
-import epicsquid.roots.network.fx.MessageLightDrifterFX;
-import epicsquid.roots.network.fx.MessageLightDrifterSync;
-import epicsquid.roots.network.fx.MessageMindWardFX;
-import epicsquid.roots.network.fx.MessageMindWardRingFX;
-import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
+import epicsquid.roots.network.fx.*;
 import epicsquid.roots.util.Constants;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
@@ -57,6 +50,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
+
+import java.util.List;
+import java.util.Random;
 
 public class EventManager {
 

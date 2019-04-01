@@ -9,6 +9,10 @@ import javax.annotation.Nonnull;
 
 import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
+import epicsquid.mysticalworld.entity.EntityBeetle;
+import epicsquid.mysticalworld.entity.EntityDeer;
+import epicsquid.mysticalworld.entity.EntityFox;
+import epicsquid.mysticalworld.entity.EntityFrog;
 import epicsquid.mysticalworld.item.metals.Metal;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
@@ -16,9 +20,13 @@ import epicsquid.roots.recipe.*;
 import epicsquid.roots.recipe.recipes.RunicShearRecipes;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.passive.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -37,6 +45,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class ModRecipes {
 
   private static Map<ResourceLocation, AnimalHarvestRecipe> harvestRecipes = new HashMap<>();
+  private static ObjectOpenHashSet<Class<? extends Entity>> harvestClasses = null;
   private static Map<ResourceLocation, TransmutationRecipe> transmutationRecipes = new HashMap<>();
   private static List<MortarRecipe> mortarRecipes = new ArrayList<>();
   private static Map<String, PyreCraftingRecipe> pyreCraftingRecipes = new HashMap<>();
@@ -53,6 +62,101 @@ public class ModRecipes {
 
   private static void registerShaped(@Nonnull IForgeRegistry<IRecipe> registry, @Nonnull String name, @Nonnull ItemStack result, Object... ingredients) {
     registry.register(new ShapedOreRecipe(getRL(name), result, ingredients).setRegistryName(getRL(name)));
+  }
+
+  public static void addAnimalHarvestRecipe (Entity entity) {
+    addAnimalHarvestRecipe(EntityList.getEntityString(entity), entity);
+  }
+
+  public static void addAnimalHarvestRecipe (String name, Entity entity) {
+    addAnimalHarvestRecipe(name, entity.getClass());
+  }
+
+  public static void addAnimalHarvestRecipe (String name, Class<? extends Entity> clazz) {
+    ResourceLocation n = new ResourceLocation(Roots.MODID, name);
+    if (harvestRecipes.containsKey(n)) {
+        System.out.println("Animal Harvest recipe name is already registered: " + n.toString());
+        return;
+    }
+    AnimalHarvestRecipe recipe = new AnimalHarvestRecipe(n, clazz);
+    harvestRecipes.put(n, recipe);
+    harvestClasses = null;
+  }
+
+  public static void removeAnimalHarvestRecipe (ResourceLocation location) {
+    harvestClasses = null;
+    harvestRecipes.remove(location);
+  }
+
+  public static void removeAnimalHarvestRecipe (Entity entity) {
+    ResourceLocation n = new ResourceLocation(Roots.MODID, entity.getName());
+    if (harvestRecipes.containsKey(n)) {
+      harvestRecipes.remove(n);
+      harvestClasses = null;
+    } else {
+      n = null;
+      for (Map.Entry<ResourceLocation, AnimalHarvestRecipe> entry : harvestRecipes.entrySet()) {
+        if (entry.getValue().matches(entity)) {
+          n = entry.getKey();
+          break;
+        }
+      }
+      if (n != null) {
+        harvestRecipes.remove(n);
+        harvestClasses = null;
+      }
+    }
+  }
+
+  public static void getAnimalHarvestRecipe (ResourceLocation location) {
+    harvestRecipes.getOrDefault(location, null);
+  }
+
+  public static AnimalHarvestRecipe getAnimalHarvestRecipe (Entity entity) {
+    ResourceLocation n = new ResourceLocation(Roots.MODID, entity.getName());
+    if (harvestRecipes.containsKey(n)) {
+      return harvestRecipes.get(n);
+    } else {
+      for (AnimalHarvestRecipe recipe : harvestRecipes.values()) {
+        if (recipe.matches(entity)) return recipe;
+      }
+    }
+    return null;
+  }
+
+  public static ObjectOpenHashSet<Class<? extends Entity>> getAnimalHarvestClasses () {
+    if (harvestClasses == null || harvestClasses.size() != harvestRecipes.size()) {
+      harvestClasses = new ObjectOpenHashSet<>();
+      for (AnimalHarvestRecipe recipe : harvestRecipes.values()) {
+        harvestClasses.add(recipe.getHarvestClass());
+      }
+    }
+    return harvestClasses;
+  }
+
+  public static void initAnimalHarvestRecipes () {
+    // Vanilla
+    addAnimalHarvestRecipe("bat", EntityBat.class);
+    addAnimalHarvestRecipe("chicken", EntityChicken.class);
+    addAnimalHarvestRecipe("cow", EntityCow.class);
+    addAnimalHarvestRecipe("donkey", EntityDonkey.class);
+    addAnimalHarvestRecipe("horse", EntityHorse.class);
+    addAnimalHarvestRecipe("llama", EntityLlama.class);
+    addAnimalHarvestRecipe("mooshroom", EntityMooshroom.class);
+    addAnimalHarvestRecipe("mule", EntityMule.class);
+    addAnimalHarvestRecipe("ocelot", EntityOcelot.class);
+    addAnimalHarvestRecipe("parrot", EntityParrot.class);
+    addAnimalHarvestRecipe("pig", EntityPig.class);
+    addAnimalHarvestRecipe("rabbit", EntityRabbit.class);
+    addAnimalHarvestRecipe("sheep", EntitySheep.class);
+    addAnimalHarvestRecipe("squid", EntitySquid.class);
+    addAnimalHarvestRecipe("wolf", EntityWolf.class);
+    // No villager or skeletal/zombie horses.
+    // Mystical World
+    addAnimalHarvestRecipe("beetle", EntityBeetle.class);
+    addAnimalHarvestRecipe("deer", EntityDeer.class);
+    addAnimalHarvestRecipe("fox", EntityFox.class);
+    addAnimalHarvestRecipe("frog", EntityFrog.class);
   }
 
   public static void addRunicCarvingRecipe(RunicCarvingRecipe recipe) {
@@ -234,6 +338,10 @@ public class ModRecipes {
     return pyreCraftingRecipes;
   }
 
+  public static Map<ResourceLocation, AnimalHarvestRecipe> getHarvestRecipes () {
+    return harvestRecipes;
+  }
+
   public static List<MortarRecipe> getMortarRecipes() {
     return mortarRecipes;
   }
@@ -269,6 +377,7 @@ public class ModRecipes {
     initDrops();
 
     initMortarRecipes();
+    initAnimalHarvestRecipes();
 
     GameRegistry.addSmelting(ModItems.flour, new ItemStack(Items.BREAD), 0.125f);
     GameRegistry.addSmelting(epicsquid.mysticalworld.init.ModItems.iron_dust, new ItemStack(Items.IRON_INGOT), 0.125f);

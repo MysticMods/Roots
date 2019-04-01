@@ -12,6 +12,10 @@ public class AnimalHarvestRecipe extends RegistryItem {
     this.clazz = clazz;
   }
 
+  public Class<? extends Entity> getHarvestClass () {
+    return this.clazz;
+  }
+
   public boolean matches (Entity entity) {
     return entity.getClass().equals(this.clazz);
   }
