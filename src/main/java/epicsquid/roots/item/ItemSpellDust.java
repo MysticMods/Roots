@@ -55,5 +55,4 @@ public class ItemSpellDust extends ItemBase {
 
     spell.addToolTip(tooltip);
   }
-
 }

@@ -18,6 +18,12 @@ public interface ISpellHolderCapability extends ICapability {
     void setLastCooldown(int cooldown);
 
     SpellBase getSelectedSpell();
+    void clearSelectedSlot ();
+
+    int getNextFreeSlot ();
+    boolean hasFreeSlot ();
+
+    SpellBase getSpellInSlot (int slot);
 
     int getSelectedSlot();
     void setSelectedSlot(int slot);

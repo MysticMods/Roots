@@ -24,6 +24,11 @@
       "type": "text",
       "title": "Casting",
       "text": "Casting spells is quite simple. Hold the staff in either hand, right click, and the spell will cast!$(br2)Spells take form in different ways. Some may be brief, insant effects that incur a cooldown before they can be cast again(right-click), and others are only particularly useful if their effect is consistently channeled (hold right-click)."
+    },
+    {
+      "type": "text",
+      "title": "Removing Spells",
+      "text": "In order to remove a spell from a slot in your staff, you can select the relevant slot and then imbue it with runic dust."
     }
   ]
 }

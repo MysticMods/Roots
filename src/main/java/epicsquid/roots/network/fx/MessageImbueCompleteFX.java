@@ -2,6 +2,7 @@ package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.spell.FakeSpellRunicDust;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import io.netty.buffer.ByteBuf;
@@ -55,7 +56,7 @@ public class MessageImbueCompleteFX implements IMessage {
     @SideOnly(Side.CLIENT)
     @Override
     public IMessage onMessage(final MessageImbueCompleteFX message, final MessageContext ctx) {
-      SpellBase spell = SpellRegistry.spellRegistry.get(message.spellName);
+      SpellBase spell = (message.spellName.equals("fake_spell")) ? new FakeSpellRunicDust() : SpellRegistry.spellRegistry.get(message.spellName);
       if (spell != null) {
         World world = Minecraft.getMinecraft().world;
         for (int k = 0; k < 40; k++) {
