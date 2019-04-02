@@ -7,6 +7,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.EventManager;
 import epicsquid.roots.Roots;
 import epicsquid.roots.capability.spell.ISpellHolderCapability;
+import epicsquid.roots.capability.spell.SpellHolderCapability;
 import epicsquid.roots.capability.spell.SpellHolderCapabilityProvider;
 import epicsquid.roots.event.SpellEvent;
 import epicsquid.roots.spell.SpellBase;
@@ -28,11 +29,16 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.input.Keyboard;
 
 public class ItemStaff extends ItemBase {
   public ItemStaff(String name) {
@@ -58,8 +64,12 @@ public class ItemStaff extends ItemBase {
     ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
     if (player.isSneaking()) {
       capability.setSelectedSlot(capability.getSelectedSlot() + 1);
-      if (capability.getSelectedSlot() > 3) {
+      if (capability.getSelectedSlot() > 4) {
         capability.setSelectedSlot(0);
+      }
+      if (world.isRemote) {
+        SpellBase spell = capability.getSelectedSpell();
+        player.sendMessage(new TextComponentTranslation("roots.info.staff.slot_and_spell", capability.getSelectedSlot() + 1, spell == null ? "none" : new TextComponentTranslation("roots.spell." + spell.getName() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))).setStyle(new Style().setColor(TextFormatting.GOLD)));
       }
       return new ActionResult<>(EnumActionResult.PASS, player.getHeldItem(hand));
     } else {
@@ -142,6 +152,11 @@ public class ItemStaff extends ItemBase {
     }
   }
 
+  public static void clearData(ItemStack stack) {
+    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    capability.clearSelectedSlot();
+  }
+
   @SideOnly(Side.CLIENT)
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
@@ -151,6 +166,23 @@ public class ItemStaff extends ItemBase {
     if (spell != null) {
       tooltip.add("");
       spell.addToolTip(tooltip);
+    } else {
+      tooltip.add("");
+      tooltip.add("No spell.");
+    }
+    if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+      tooltip.add("");
+      int curSlot = capability.getSelectedSlot();
+      for (int i = 0; i < 5; i++) {
+        if (curSlot == i) continue;
+        SpellBase other = capability.getSpellInSlot(i);
+        if (other == null) {
+          tooltip.add("" + (i + 1) + ": No spell.");
+        } else
+        {
+          tooltip.add("" + (i + 1) + ": " + other.getTextColor() + TextFormatting.BOLD + I18n.format("roots.spell." + other.getName() + ".name"));
+        }
+      }
     }
   }
 

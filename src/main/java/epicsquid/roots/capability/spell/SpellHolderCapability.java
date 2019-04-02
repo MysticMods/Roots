@@ -4,6 +4,7 @@ import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.ArrayList;
@@ -13,8 +14,8 @@ import java.util.Map;
 
 public class SpellHolderCapability implements ISpellHolderCapability {
 
-    private Map<Integer, SpellBase> spells = new HashMap<>();
-    private Map<Integer, List<SpellModule>> spellModules = new HashMap<>();
+    private Map<Integer, SpellBase> spells = new Int2ObjectOpenHashMap<>();
+    private Map<Integer, List<SpellModule>> spellModules = new Int2ObjectOpenHashMap<>();
     private int selectedSlot = 0;
     private int cooldown = 0;
     private int lastCooldown = 0;
@@ -23,7 +24,7 @@ public class SpellHolderCapability implements ISpellHolderCapability {
     public NBTTagCompound getData() {
         NBTTagCompound compound = new NBTTagCompound();
         for(Map.Entry<Integer, SpellBase> entry : this.spells.entrySet()){
-            compound.setString("spell_"+entry.getKey(), entry.getValue().getName());
+            compound.setString("spell_"+entry.getKey(), (entry.getValue() == null) ? "" : entry.getValue().getName());
         }
 
         for(Map.Entry<Integer, List<SpellModule>> entry : this.spellModules.entrySet()){
@@ -97,7 +98,12 @@ public class SpellHolderCapability implements ISpellHolderCapability {
     @Override
     public boolean hasSpellInSlot() {
         return spells.getOrDefault(this.selectedSlot, null) != null;
+    }
 
+    @Override
+    public SpellBase getSpellInSlot (int slot) {
+        if (slot < 0 || slot >= 5) return null;
+        return spells.getOrDefault(slot, null);
     }
 
     @Override
@@ -126,6 +132,11 @@ public class SpellHolderCapability implements ISpellHolderCapability {
     }
 
     @Override
+    public void clearSelectedSlot() {
+        spells.put(this.selectedSlot, null);
+    }
+
+    @Override
     public int getSelectedSlot() {
         return this.selectedSlot;
     }
@@ -137,6 +148,8 @@ public class SpellHolderCapability implements ISpellHolderCapability {
 
     @Override
     public void setSpellToSlot(SpellBase spell) {
+        assert hasFreeSlot();
+        setSelectedSlot(getNextFreeSlot());
         this.spells.put(this.selectedSlot, spell);
         this.spellModules.remove(this.selectedSlot);
     }
@@ -157,5 +170,20 @@ public class SpellHolderCapability implements ISpellHolderCapability {
     @Override
     public List<SpellModule> getSelectedModules() {
         return this.spellModules.getOrDefault(this.selectedSlot, new ArrayList<>());
+    }
+
+    @Override
+    public int getNextFreeSlot () {
+        for (int i = 0; i < 5; i++) {
+            if (spells.getOrDefault(i, null) == null) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    @Override
+    public boolean hasFreeSlot () {
+        return getNextFreeSlot() != -1;
     }
 }
