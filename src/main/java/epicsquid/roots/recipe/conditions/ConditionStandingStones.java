@@ -20,7 +20,7 @@ public class ConditionStandingStones implements Condition{
 
     @Override
     public boolean checkCondition(TileEntityBonfire tile, EntityPlayer player) {
-        return getStandingStones(tile.getWorld(), tile.getPos(), this.height) == this.amount;
+        return getStandingStones(tile.getWorld(), tile.getPos(), this.height) >= this.amount;
     }
 
     protected int getStandingStones(World world, BlockPos pos, int height) {
