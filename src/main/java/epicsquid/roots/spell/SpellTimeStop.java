@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class SpellTimeStop extends SpellBase {
     addCost(HerbRegistry.getHerbByName("pereskia"), 0.5f);
     addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.5f);
     addIngredients(
-        new ItemStack(Items.ENDER_EYE),
+        new OreIngredient("enderpearl"),
         new ItemStack(ModItems.moonglow_leaf),
         new ItemStack(ModItems.moonglow_leaf),
         new ItemStack(ModItems.pereskia),

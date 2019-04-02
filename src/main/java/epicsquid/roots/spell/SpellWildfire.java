@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class SpellWildfire extends SpellBase {
     addIngredients(
         new ItemStack(Items.DYE, 1, 14),
         new ItemStack(Items.COAL, 1, 1),
-        new ItemStack(Items.GUNPOWDER),
+        new OreIngredient("gunpowder"),
         new ItemStack(ModItems.infernal_bulb),
         new ItemStack(ModItems.infernal_bulb)
     );
