@@ -1,28 +1,28 @@
 package epicsquid.roots.entity.ritual;
 
-import epicsquid.mysticallib.particle.particles.ParticleGlitter;
-import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.recipe.TransmutationRecipe;
 import epicsquid.roots.ritual.RitualRegistry;
-import net.minecraft.block.*;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class EntityRitualTransmutation extends EntityRitualBase {
 
   protected static Random random = new Random();
   protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualTransmutation.class, DataSerializers.VARINT);
+  private Set<TransmutationRecipe> recipes = new HashSet<>();
 
   public EntityRitualTransmutation(World worldIn) {
     super(worldIn);
@@ -38,21 +38,27 @@ public class EntityRitualTransmutation extends EntityRitualBase {
       setDead();
     }
     if (this.ticksExisted % 100 == 0) {
-      List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), 16, 16, 8, (state) -> {
-        Block block = state.getBlock();
-        if (block == Blocks.DEADBUSH || block == Blocks.PUMPKIN) return true;
-
-        if (block == Blocks.LOG) {
-          return state.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.BIRCH;
+      List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), 16, 16, 8, (pos) -> {
+        if (world.isAirBlock(pos)) return false;
+        IBlockState state = world.getBlockState(pos);
+        List<TransmutationRecipe> stateRecipes = ModRecipes.getTransmutationRecipes(state);
+        if (stateRecipes == null) return false;
+        boolean foundMatch = false;
+        for (TransmutationRecipe r : stateRecipes) {
+          if (r.matches(world, pos, state)) {
+            foundMatch = true;
+            break;
+          }
         }
-
+        if (foundMatch) {
+          recipes.addAll(stateRecipes);
+          return true;
+        }
         return false;
       });
       if (eligiblePositions.isEmpty()) return;
-      int index = random.nextInt(eligiblePositions.size());
-      BlockPos pos = eligiblePositions.get(index);
+      BlockPos pos = eligiblePositions.get(random.nextInt(eligiblePositions.size()));
       transmuteBlock(world, pos);
-      eligiblePositions.remove(index);
     }
   }
 
@@ -62,39 +68,23 @@ public class EntityRitualTransmutation extends EntityRitualBase {
   }
 
   private void transmuteBlock(World world, BlockPos pos) {
-    boolean didTransmute = false;
     IBlockState state = world.getBlockState(pos);
-    Block block = state.getBlock();
 
-    if (block == Blocks.PUMPKIN) {
-      didTransmute = true;
-      Block down = world.getBlockState(pos.down()).getBlock();
-      if (down == Blocks.WATER || down == Blocks.FLOWING_WATER) {
-        world.setBlockState(pos, Blocks.MELON_BLOCK.getDefaultState());
-      } else if (world.getBlockState(pos.down()).getBlock() == Blocks.SAND){
-        world.setBlockState(pos, Blocks.CACTUS.getDefaultState());
-      } else {
-        didTransmute = false;
+    TransmutationRecipe recipe = null;
+    for (TransmutationRecipe r : recipes) {
+      if (r.matches(world, pos, state)) {
+        recipe = r;
+        break;
       }
-    } else if (block == Blocks.LOG) {
-      world.setBlockState(pos, state.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE));
-      didTransmute = true;
-    } else if (block == Blocks.DEADBUSH) {
-      world.setBlockState(pos, Blocks.AIR.getDefaultState());
-      ItemStack cocoaBeans = new ItemStack(Items.DYE, 1 + random.nextInt(2), 3);
-      EntityItem entityBeans = new EntityItem(world, pos.getX(), pos.getY() + 0.5, pos.getZ(), cocoaBeans);
-      world.spawnEntity(entityBeans);
-      didTransmute = true;
     }
+    if (recipe == null) return;
 
-    if (didTransmute && world.isRemote) {
-      for (int i = 0; i < 50; i++) {
-        ClientProxy.particleRenderer
-            .spawnParticle(world, Util.getLowercaseClassName(ParticleGlitter.class), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-                random.nextDouble() * 0.1 * (random.nextDouble() > 0.5 ? -1 : 1), random.nextDouble() * 0.1 * (random.nextDouble() > 0.5 ? -1 : 1),
-                random.nextDouble() * 0.1 * (random.nextDouble() > 0.5 ? -1 : 1), 120, 0.607, 0.698 + random.nextDouble() * 0.05, 0.306, 1,
-                random.nextDouble() + 0.5, random.nextDouble() * 2);
-      }
+    if (recipe.itemOutput()) {
+      world.setBlockState(pos, Blocks.AIR.getDefaultState());
+      EntityItem item = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), recipe.getEndStack().copy());
+      world.spawnEntity(item);
+    } else {
+      world.setBlockState(pos, recipe.getEndState());
     }
   }
 }
