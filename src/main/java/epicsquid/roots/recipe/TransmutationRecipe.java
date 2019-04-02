@@ -1,32 +1,63 @@
 package epicsquid.roots.recipe;
 
+import epicsquid.roots.util.StateUtil;
 import epicsquid.roots.util.types.RegistryItem;
 import epicsquid.roots.util.types.WorldPosStatePredicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class TransmutationRecipe extends RegistryItem {
-  private Block startState;
+  private IBlockState startState;
+  private Block startBlock;
   private IBlockState endState;
+  private ItemStack endStack;
   private WorldPosStatePredicate condition = (a, b, c) -> true;
 
-  public TransmutationRecipe(ResourceLocation name,  Block startState, Block endState) {
-    this(name, startState, endState.getDefaultState(), null);
+  public TransmutationRecipe(ResourceLocation name, Block startBlock, Block endState) {
+    this(name, startBlock, endState.getDefaultState(), null);
   }
 
-  public TransmutationRecipe(ResourceLocation name, Block startState, Block endState, WorldPosStatePredicate condition) {
-    this(name, startState, endState.getDefaultState(), condition);
+  public TransmutationRecipe(ResourceLocation name, Block startBlock, Block endState, WorldPosStatePredicate condition) {
+    this(name, startBlock, endState.getDefaultState(), condition);
   }
 
-  public TransmutationRecipe(ResourceLocation name, Block startState, IBlockState endState) {
+  public TransmutationRecipe(ResourceLocation name, Block startBlock, IBlockState endState) {
+    this(name, startBlock, endState, null);
+  }
+
+  public TransmutationRecipe(ResourceLocation name, IBlockState startState, IBlockState endState) {
     this(name, startState, endState, null);
   }
 
-  public TransmutationRecipe(ResourceLocation name, Block startState, IBlockState endState, WorldPosStatePredicate condition) {
+  public TransmutationRecipe(ResourceLocation name, Block startBlock, ItemStack endState) {
+    this(name, startBlock, endState, null);
+  }
+
+  public TransmutationRecipe(ResourceLocation name, Block startBlock, ItemStack endState, WorldPosStatePredicate condition) {
     this.setRegistryName(name);
+    this.startBlock = startBlock;
+    this.endStack = endState;
+    this.endState = null;
+    if (condition != null)
+      this.condition = condition;
+  }
+
+  public TransmutationRecipe(ResourceLocation name, Block startBlock, IBlockState endState, WorldPosStatePredicate condition) {
+    this.setRegistryName(name);
+    this.startBlock = startBlock;
+    this.endState = endState;
+    if (condition != null) {
+      this.condition = condition;
+    }
+  }
+
+  public TransmutationRecipe(ResourceLocation name, IBlockState startState, IBlockState endState, WorldPosStatePredicate condition) {
+    this.setRegistryName(name);
+    this.startBlock = null;
     this.startState = startState;
     this.endState = endState;
     if (condition != null) {
@@ -34,8 +65,32 @@ public class TransmutationRecipe extends RegistryItem {
     }
   }
 
-  public Block getStartState() {
+  public TransmutationRecipe(ResourceLocation name, IBlockState startState, ItemStack endState, WorldPosStatePredicate condition) {
+    this.setRegistryName(name);
+    this.startBlock = null;
+    this.startState = startState;
+    this.endStack = endState;
+    this.endState = null;
+    if (condition != null) {
+      this.condition = condition;
+    }
+  }
+
+  public boolean itemOutput () {
+    return this.endStack != null;
+  }
+
+  public Block getStartBlock() {
+    return startBlock;
+  }
+
+  public IBlockState getStartState() {
+    if (startState == null && startBlock != null) return startBlock.getDefaultState();
     return startState;
+  }
+
+  public ItemStack getEndStack() {
+    return endStack;
   }
 
   public IBlockState getEndState() {
@@ -46,8 +101,20 @@ public class TransmutationRecipe extends RegistryItem {
     return condition;
   }
 
+  public boolean matches (Block block) {
+    return matches(block.getDefaultState());
+  }
+
+  public boolean matches (IBlockState start) {
+    if (this.startState != null) {
+      return StateUtil.compareStates(this.startState, start);
+    } else {
+      return this.startBlock == start.getBlock();
+    }
+  }
+
   public boolean matches (World world, BlockPos pos, IBlockState state) {
-    return state.getBlock() == this.startState && (this.condition == null || this.condition.test(world, pos, state));
+    return (this.startBlock != null && this.startBlock == state.getBlock() || this.startState != null && StateUtil.compareStates(this.startState, state)) && (this.condition == null || this.condition.test(world, pos, state));
   }
 
   public boolean matches (World world, BlockPos pos) {

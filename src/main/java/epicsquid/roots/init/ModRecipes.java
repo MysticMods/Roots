@@ -20,8 +20,10 @@ import epicsquid.roots.recipe.*;
 import epicsquid.roots.recipe.recipes.RunicShearRecipes;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.util.StateUtil;
+import epicsquid.roots.util.types.WorldPosStatePredicate;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import net.minecraft.block.Block;
+import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -36,6 +38,8 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreIngredient;
 import net.minecraftforge.oredict.ShapedOreRecipe;
@@ -62,6 +66,91 @@ public class ModRecipes {
 
   private static void registerShaped(@Nonnull IForgeRegistry<IRecipe> registry, @Nonnull String name, @Nonnull ItemStack result, Object... ingredients) {
     registry.register(new ShapedOreRecipe(getRL(name), result, ingredients).setRegistryName(getRL(name)));
+  }
+
+  public static void addTransmutationRecipe(String name, Block start, IBlockState endState, WorldPosStatePredicate condition) {
+    ResourceLocation n = new ResourceLocation(Roots.MODID, name);
+    TransmutationRecipe recipe = new TransmutationRecipe(n, start, endState, condition);
+    transmutationRecipes.put(n, recipe);
+  }
+
+  public static void addTransmutationRecipe(String name, IBlockState start, IBlockState endState) {
+    addTransmutationRecipe(name, start, endState, null);
+  }
+
+  public static void addTransmutationRecipe(String name, IBlockState start, IBlockState endState, WorldPosStatePredicate condition) {
+    ResourceLocation n = new ResourceLocation(Roots.MODID, name);
+    TransmutationRecipe recipe = new TransmutationRecipe(n, start, endState, condition);
+    transmutationRecipes.put(n, recipe);
+  }
+
+  public static void addTransmutationRecipe(String name, IBlockState start, ItemStack endState) {
+    addTransmutationRecipe(name, start, endState, null);
+  }
+
+  public static void addTransmutationRecipe (String name, IBlockState start, ItemStack endState, WorldPosStatePredicate condition) {
+    ResourceLocation n = new ResourceLocation(Roots.MODID, name);
+    TransmutationRecipe recipe = new TransmutationRecipe(n, start, endState, condition);
+    transmutationRecipes.put(n, recipe);
+  }
+
+  public static void addTransmutationRecipe (String name, Block start, ItemStack endState) {
+    addTransmutationRecipe(name, start, endState, null);
+  }
+
+  public static void addTransmutationRecipe (String name, Block start, ItemStack endState, WorldPosStatePredicate condition) {
+    ResourceLocation n = new ResourceLocation(Roots.MODID, name);
+    TransmutationRecipe recipe = new TransmutationRecipe(n, start, endState, condition);
+    transmutationRecipes.put(n, recipe);
+  }
+
+  public static void addTransmutationRecipe (String name, Block start, IBlockState endState) {
+    addTransmutationRecipe(name, start, endState, null);
+  }
+
+  public static void addTransmutationRecipe (String name, Block start, Block endState) {
+    addTransmutationRecipe(name, start, endState.getDefaultState(), null);
+  }
+
+  public static void removeTransmutationRecipe (String name) {
+    removeTransmutationRecipe(new ResourceLocation(Roots.MODID, name));
+  }
+
+  public static void removeTransmutationRecipe (ResourceLocation name) {
+    transmutationRecipes.remove(name);
+  }
+
+  public static TransmutationRecipe getTransmutationRecipe (String name) {
+    return getTransmutationRecipe(new ResourceLocation(Roots.MODID, name));
+  }
+
+  public static TransmutationRecipe getTransmutationRecipe (ResourceLocation name) {
+    return transmutationRecipes.getOrDefault(name, null);
+  }
+
+  public static List<TransmutationRecipe> getTransmutationRecipes (IBlockState startState) {
+    List<TransmutationRecipe> result = new ArrayList<>();
+    for (TransmutationRecipe recipe : transmutationRecipes.values()) {
+      if (recipe.matches(startState)) result.add(recipe);
+    }
+    return result;
+  }
+
+  public static List<TransmutationRecipe> getTransmutationRecipes (Block startState) {
+    return getTransmutationRecipes(startState.getDefaultState());
+  }
+
+  public static void initTransmutationRecipes () {
+    addTransmutationRecipe("deadbush_cocoa", Blocks.DEADBUSH, new ItemStack(Items.DYE, 3, 3));
+    addTransmutationRecipe("birch_jungle", Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH), Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE));
+    addTransmutationRecipe("birch_jungle_leaves", Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.BIRCH), Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE));
+    addTransmutationRecipe("pumpkin_melon", Blocks.PUMPKIN, Blocks.MELON_BLOCK.getDefaultState(), (t, u, v) -> {
+      Block b = t.getBlockState(u.down()).getBlock();
+      return b == Blocks.WATER || b == Blocks.FLOWING_WATER;
+    });
+    addTransmutationRecipe("pumpkin_cactus", Blocks.PUMPKIN, Blocks.CACTUS.getDefaultState(), (t, u, v) -> t.getBlockState(u.down()).getBlock() instanceof BlockSand);
+    StateUtil.ignoreState(Blocks.LEAVES, BlockLeaves.CHECK_DECAY);
+    StateUtil.ignoreState(Blocks.LEAVES, BlockLeaves.DECAYABLE);
   }
 
   public static void addAnimalHarvestRecipe (Entity entity) {
@@ -378,6 +467,7 @@ public class ModRecipes {
 
     initMortarRecipes();
     initAnimalHarvestRecipes();
+    initTransmutationRecipes();
 
     GameRegistry.addSmelting(ModItems.flour, new ItemStack(Items.BREAD), 0.125f);
     GameRegistry.addSmelting(epicsquid.mysticalworld.init.ModItems.iron_dust, new ItemStack(Items.IRON_INGOT), 0.125f);
