@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
@@ -23,8 +24,8 @@ public class SpellSkySoarer extends SpellBase {
     addCost(HerbRegistry.getHerbByName("cloud_berry"), 0.15f);
     addIngredients(
         new ItemStack(Items.SUGAR),
-        new ItemStack(Items.FEATHER),
-        new ItemStack(Items.STRING),
+        new ItemStack(ModItems.runic_dust),
+        new OreIngredient("string"),
         new ItemStack(ModItems.aubergine_seed),
         new ItemStack(ModItems.cloud_berry)
     );

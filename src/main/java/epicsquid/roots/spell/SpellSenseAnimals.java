@@ -14,6 +14,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreIngredient;
 
 public class SpellSenseAnimals extends SpellBase {
   public static String spellName = "spell_sense_animals";
@@ -26,11 +27,11 @@ public class SpellSenseAnimals extends SpellBase {
 
     addCost(HerbRegistry.getHerbByName("wildewheet"), 0.25f);
     addIngredients(
-        new ItemStack(Items.CARROT),
+        new OreIngredient("cropCarrot"),
         new ItemStack(Blocks.RED_FLOWER),
         new ItemStack(ModItems.wildewheet),
-        new ItemStack(Items.WHEAT),
-        new ItemStack(Items.GOLD_NUGGET)
+        new OreIngredient("cropWheat"),
+        new OreIngredient("nuggetGold")
     );
   }
 

@@ -20,6 +20,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.oredict.OreIngredient;
 
 public class SpellRadiance extends SpellBase {
   public static String spellName = "spell_radiance";
@@ -33,7 +34,7 @@ public class SpellRadiance extends SpellBase {
     addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.5f);
     addCost(HerbRegistry.getHerbByName("infernal_bulb"), 0.25f);
     addIngredients(
-        new ItemStack(Items.GLOWSTONE_DUST),
+        new OreIngredient("dustGlowstone"),
         new ItemStack(Blocks.MAGMA),
         new ItemStack(Items.DYE, 1, 11),
         new ItemStack(ModItems.infernal_bulb),

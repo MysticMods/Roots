@@ -15,6 +15,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreIngredient;
 
 public class SpellSanctuary extends SpellBase {
   public static String spellName = "spell_sanctuary";
@@ -30,7 +31,7 @@ public class SpellSanctuary extends SpellBase {
     addIngredients(
         new ItemStack(Items.DYE, 1, 1),
         new ItemStack(ModItems.pereskia),
-        new ItemStack(Blocks.VINE),
+        new OreIngredient("vine"),
         new ItemStack(ModItems.pereskia),
         new ItemStack(ModItems.wildroot)
     );

@@ -9,6 +9,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
@@ -23,9 +24,9 @@ public class SpellRoseThorns extends SpellBase {
 
     addCost(HerbRegistry.getHerbByName("terra_moss"), 0.25f);
     addIngredients(
-        new ItemStack(Blocks.CACTUS),
+        new OreIngredient("blockCactus"),
         new ItemStack(Blocks.DOUBLE_PLANT, 1, 4),
-        new ItemStack(Items.BONE),
+        new OreIngredient("bone"),
         new ItemStack(Items.FERMENTED_SPIDER_EYE),
         new ItemStack(ModItems.terra_moss)
     );
