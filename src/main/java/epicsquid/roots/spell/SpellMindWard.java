@@ -12,6 +12,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreIngredient;
 
 public class SpellMindWard extends SpellBase {
   public static String spellName = "spell_mind_ward";
@@ -28,7 +29,7 @@ public class SpellMindWard extends SpellBase {
         new ItemStack(ModItems.wildewheet),
         new ItemStack(ModItems.wildewheet_seed),
         new ItemStack(ModItems.aubergine_seed),
-        new ItemStack(Items.ENDER_PEARL)
+        new OreIngredient("enderpearl")
     );
   }
 

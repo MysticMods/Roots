@@ -24,7 +24,7 @@ public class SpellSecondWind extends SpellBase {
     addCost(HerbRegistry.getHerbByName("terra_moss"), 0.125f);
     addIngredients(
         new ItemStack(ModItems.terra_spores),
-        new ItemStack(Items.REEDS),
+        new OreIngredient("sugarcane"),
         new ItemStack(Items.CLAY_BALL),
         new ItemStack(Items.GLASS_BOTTLE),
         new OreIngredient("ingotIron")

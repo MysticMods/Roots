@@ -30,6 +30,9 @@ public class CommonProxy {
     EffectManager.init();
     RuneRegistry.init();
     RunicCarvingRecipes.initRecipes();
+    if (Loader.isModLoaded("jeresources")) {
+      JERIntegration.init();
+    }
   }
 
   public void postInit(FMLPostInitializationEvent event) {
@@ -38,9 +41,6 @@ public class CommonProxy {
   public void loadComplete(FMLLoadCompleteEvent event) {
     if (Loader.isModLoaded("harvest")) {
       HarvestIntegration.init();
-    }
-    if (Loader.isModLoaded("jeresources")) {
-      JERIntegration.init();
     }
   }
 }

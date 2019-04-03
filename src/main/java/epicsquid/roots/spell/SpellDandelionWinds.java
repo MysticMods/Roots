@@ -14,6 +14,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreIngredient;
 
 public class SpellDandelionWinds extends SpellBase {
   public static String spellName = "spell_dandelion_winds";
@@ -26,11 +27,11 @@ public class SpellDandelionWinds extends SpellBase {
 
     addCost(HerbRegistry.getHerbByName("cloud_berry"), 0.125f);
     addIngredients(
-        new ItemStack(Items.FEATHER),
+        new ItemStack(ModItems.petals),
         new ItemStack(Blocks.YELLOW_FLOWER),
         new ItemStack(Items.SNOWBALL),
         new ItemStack(ModItems.cloud_berry),
-        new ItemStack(Items.WHEAT)
+        new OreIngredient("cropWheat")
     );
   }
 

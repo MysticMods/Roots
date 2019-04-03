@@ -12,6 +12,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameType;
+import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
@@ -27,9 +28,9 @@ public class SpellLightDrifter extends SpellBase {
     addCost(HerbRegistry.getHerbByName("pereskia"), 0.5f);
     addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.25f);
     addIngredients(
-        new ItemStack(Items.ENDER_PEARL),
+        new OreIngredient("enderpearl"),
         new ItemStack(ModItems.moonglow_leaf),
-        new ItemStack(Items.STRING),
+        new OreIngredient("string"),
         new ItemStack(ModItems.moonglow_leaf),
         new ItemStack(ModItems.pereskia)
     );

@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Animals in the vicinity of the ritual will drop a piece of their physical forms - without coming to any harm."
+      "text": "Animals in the vicinity of the ritual will drop pieces of their physical forms - without coming to any harm."
     },
     {
       "type": "pyre_template",
@@ -19,13 +19,13 @@
         "mapping": {
           "0": "roots:bonfire",
           "R": "roots:runestone",
-          "C": "roots:chiseled_runestone",
-          "O": "roots:offertory_plate"
+          "C": "roots:chiseled_runestone"
         },
         "pattern": [
-          ["   C   ","       ","       ","C     C","       ","       ","       "],
-          ["   R   ","       ","       ","R     R","       ","       ","       "],
-          ["   R   ","       ","       ","R  0  R","       ","       ","   O   "]
+          ["       ","       ","       ","      C","       ","       ","       "],
+          ["   C   ","       ","       ","      R","       ","       ","       "],
+          ["   R   ","       ","       ","C     R","       ","       ","       "],
+          ["   R   ","       ","       ","R  0  R","       ","       ","       "]
         ]
       }
     }
