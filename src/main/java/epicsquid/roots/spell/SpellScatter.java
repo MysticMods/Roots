@@ -28,7 +28,7 @@ public class SpellScatter extends SpellBase {
     super(name, TextFormatting.DARK_GREEN, 188F/255F, 244F/255F, 151F/255F, 71F/255F, 132F/255F, 30F/255F);
 
     this.castType = EnumCastType.INSTANTANEOUS;
-    this.cooldown = 30;
+    this.cooldown = 120;
 
     addCost(HerbRegistry.getHerbByName("wildroot"), 0.125F);
     addIngredients(
@@ -39,23 +39,23 @@ public class SpellScatter extends SpellBase {
     );
   }
 
+  //Something tells me this method is completely broken :c
   @Override
   public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
     BlockPos pos = caster.getPosition().down(10);
     ItemSeeds seeds = (ItemSeeds) caster.getHeldItemOffhand().getItem();
     IBlockState plant = seeds.getPlant(caster.world, pos);
 
-    boolean broken = false;
-
     for (int i = -7; i < 8; i++)
     {
       for (int j = -7; j < 8; j++)
       {
+        boolean broken = false;
         pos = pos.add(i, 0, j);
 
         if (caster.getHeldItemOffhand() != ItemStack.EMPTY)
         {
-          while (!canPlacePlant(caster.world, plant, pos, seeds))
+          while (!canPlacePlant(caster.world, plant, pos.down(), seeds))
           {
             pos = pos.up();
             if (pos.getY() > 255) {
