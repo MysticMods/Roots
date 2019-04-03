@@ -24,9 +24,7 @@ public class RitualAnimalHarvest extends RitualBase {
             new ItemStack(Items.CARROT),
             new ItemStack(ModItems.wildroot)
     ));
-    addCondition(new ConditionStandingStones(2, 1));
-    addCondition(new ConditionStandingStones(3, 1));
-    addCondition(new ConditionStandingStones(4, 1));
+    addCondition(new ConditionStandingStones(3, 3));
   }
 
 
