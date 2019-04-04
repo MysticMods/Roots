@@ -1,0 +1,17 @@
+{
+    "name": "Zephyr's Slice",
+    "icon": "minecraft:golden_sword",
+    "category": "spells",
+    "advancement": "roots:cloud_berry",
+    
+    "pages": [
+      {
+        "type": "text",
+        "text": "Summons a great, whirlwind-like scythe to slice down nearby plants, mushrooms and grass."
+      },
+      {
+        "type": "spell_template",
+        "spell": "spell_zephyr_slice"
+      }
+    ]
+  }
