@@ -44,7 +44,7 @@ public class SpellHarvest extends SpellBase {
   public SpellHarvest(String name) {
     super(name, TextFormatting.GREEN, 57f / 255f, 253f / 255f, 28f / 255f, 197f / 255f, 233f / 255f, 28f / 255f);
     this.castType = EnumCastType.INSTANTANEOUS;
-    this.cooldown = 45;
+    this.cooldown = 25;
 
     addCost(HerbRegistry.getHerbByName("spirit_herb"), 0.55f);
     addIngredients(

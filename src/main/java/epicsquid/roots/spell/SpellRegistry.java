@@ -30,5 +30,6 @@ public class SpellRegistry {
     spellRegistry.put(SpellMagnetism.spellName, SpellMagnetism.instance);
     spellRegistry.put(SpellSenseDanger.spellName, SpellSenseDanger.instance);
     spellRegistry.put(SpellHarvest.spellName, SpellHarvest.instance);
+    spellRegistry.put(SpellZephyrSlice.spellName, SpellZephyrSlice.instance);
   }
 }
