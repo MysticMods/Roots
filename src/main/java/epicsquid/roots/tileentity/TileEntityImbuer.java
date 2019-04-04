@@ -101,6 +101,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
       } else if(heldItem.getItem() == ModItems.staff || ModuleRegistry.isModule(heldItem)){
         if (heldItem.hasCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null)) {
           ISpellHolderCapability cap = heldItem.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+          ItemStaff.updateCapability(heldItem, cap);
           assert cap != null;
           if (!cap.hasFreeSlot() && inventory.getStackInSlot(0).getItem() != ModItems.runic_dust) {
             if (world.isRemote) {
@@ -159,6 +160,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
       ItemStack spellDust = inventory.getStackInSlot(0);
       boolean clearSlot = spellDust.getItem() == ModItems.runic_dust;
       ISpellHolderCapability capability = spellDust.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+      ItemStaff.updateCapability(spellDust, capability);
       if((capability != null && capability.getSelectedSpell() != null) || clearSlot){
         SpellBase spell;
         if (clearSlot) {
