@@ -28,7 +28,7 @@ public class SpellScatter extends SpellBase {
     super(name, TextFormatting.DARK_GREEN, 188F/255F, 244F/255F, 151F/255F, 71F/255F, 132F/255F, 30F/255F);
 
     this.castType = EnumCastType.INSTANTANEOUS;
-    this.cooldown = 120;
+    this.cooldown = 60;
 
     addCost(HerbRegistry.getHerbByName("wildroot"), 0.125F);
     addIngredients(
@@ -42,35 +42,28 @@ public class SpellScatter extends SpellBase {
   //Something tells me this method is completely broken :c
   @Override
   public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
-    BlockPos pos = caster.getPosition().down(10);
-    ItemSeeds seeds = (ItemSeeds) caster.getHeldItemOffhand().getItem();
-    IBlockState plant = seeds.getPlant(caster.world, pos);
 
     for (int i = -7; i < 8; i++)
     {
       for (int j = -7; j < 8; j++)
       {
-        boolean broken = false;
-        pos = pos.add(i, 0, j);
+        BlockPos pos = new BlockPos(caster.posX + i, caster.posY - 1, caster.posZ + j);
 
-        if (caster.getHeldItemOffhand() != ItemStack.EMPTY)
+        if (caster.getHeldItemOffhand() != ItemStack.EMPTY && caster.getHeldItemOffhand().getItem() instanceof ItemSeeds)
         {
-          while (!canPlacePlant(caster.world, plant, pos.down(), seeds))
-          {
-            pos = pos.up();
-            if (pos.getY() > 255) {
-              broken = true;
-              break;
-            }
+          ItemSeeds  seeds = (ItemSeeds) caster.getHeldItemOffhand().getItem();
+          IBlockState plant = seeds.getPlant(caster.world, pos);
 
-          }
-
-          if (!broken)
+          if(canPlacePlant(caster.world, plant, pos, seeds)/* && caster.world.getBlockState(pos.up()) == Blocks.AIR*/)
           {
-            caster.world.setBlockState(pos, plant);
-            PacketHandler.sendToAllTracking(new MessageScatterPlantFX(pos.getX(), pos.getY(), pos.getZ()), caster);
+            caster.world.setBlockState(pos.up(), plant);
+            caster.getHeldItemOffhand().shrink(1);
+            MessageScatterPlantFX fx = new MessageScatterPlantFX(pos.getX(), pos.getY() + 1, pos.getZ());
+            PacketHandler.sendToAllTracking(fx, caster);
           }
         }
+        else
+          return false;
       }
     }
 
