@@ -36,9 +36,18 @@ public class ItemSpellDust extends ItemBase {
     }
   }
 
+  @Override
+  public void readNBTShareTag(ItemStack stack, @Nullable NBTTagCompound nbt) {
+    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    if (capability != null && nbt != null && nbt.hasKey("spell_capability")) {
+      capability.setData(nbt.getCompoundTag("spell_capability"));
+      nbt.removeTag("spell_capability");
+    }
+    super.readNBTShareTag(stack, nbt);
+  }
+
   public static ItemStack createData(ItemStack stack, SpellBase spell) {
     ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-    ItemStaff.updateCapability(stack, capability);
     if (capability == null) return stack;
 
     capability.setSpellToSlot(spell);
@@ -49,7 +58,6 @@ public class ItemSpellDust extends ItemBase {
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
     ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-    ItemStaff.updateCapability(stack, capability);
     if (capability == null) return;
 
     SpellBase spell = capability.getSelectedSpell();
