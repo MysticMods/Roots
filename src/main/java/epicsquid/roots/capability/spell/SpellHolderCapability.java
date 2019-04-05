@@ -7,10 +7,7 @@ import epicsquid.roots.spell.modules.SpellModule;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.nbt.NBTTagCompound;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SpellHolderCapability implements ISpellHolderCapability {
 
@@ -98,6 +95,11 @@ public class SpellHolderCapability implements ISpellHolderCapability {
     @Override
     public boolean hasSpellInSlot() {
         return spells.getOrDefault(this.selectedSlot, null) != null;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return spells.values().stream().filter(Objects::isNull).count() != 5;
     }
 
     @Override

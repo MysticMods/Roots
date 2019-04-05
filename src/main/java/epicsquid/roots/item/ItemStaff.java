@@ -65,9 +65,19 @@ public class ItemStaff extends ItemBase {
     ItemStack stack = player.getHeldItem(hand);
     ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
     if (player.isSneaking()) {
-      capability.setSelectedSlot(capability.getSelectedSlot() + 1);
-      if (capability.getSelectedSlot() > 4) {
-        capability.setSelectedSlot(0);
+      if (!capability.isEmpty()) {
+        int count = 0;
+        capability.setSelectedSlot(capability.getSelectedSlot() + 1);
+        if (capability.getSelectedSlot() > 4) {
+          capability.setSelectedSlot(0);
+        }
+        while (capability.getSelectedSpell() == null && count < 5) {
+          capability.setSelectedSlot(capability.getSelectedSlot() + 1);
+          if (capability.getSelectedSlot() > 4) {
+            capability.setSelectedSlot(0);
+          }
+          count++;
+        }
       }
       if (world.isRemote) {
         SpellBase spell = capability.getSelectedSpell();
