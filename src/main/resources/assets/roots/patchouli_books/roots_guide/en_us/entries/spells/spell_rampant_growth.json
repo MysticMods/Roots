@@ -1,0 +1,17 @@
+{
+  "name": "Rampant Growth",
+  "icon": "minecraft:dye:15",
+  "category": "spells",
+  "advancement": "roots:spirit_herb",
+  
+  "pages": [
+    {
+      "type": "text",
+      "text": "A channeled spell which infuses surrounding plants with natural energy, rapidly increasing their growth."
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_rampant_growth"
+    }
+  ]
+}

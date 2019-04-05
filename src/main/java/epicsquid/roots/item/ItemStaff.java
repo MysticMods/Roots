@@ -121,8 +121,9 @@ public class ItemStaff extends ItemBase {
           if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
             if (spell.costsMet((EntityPlayer) player)) {
               boolean result = spell.cast((EntityPlayer) player, capability.getSelectedModules());
-              if (result)
+              if (result) {
                 spell.enactTickCosts((EntityPlayer) player);
+              }
             }
           }
         }
