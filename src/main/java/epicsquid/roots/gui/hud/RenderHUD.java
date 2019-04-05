@@ -1,4 +1,4 @@
-package epicsquid.roots.client.render.hud;
+package epicsquid.roots.gui.hud;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModBlocks;
