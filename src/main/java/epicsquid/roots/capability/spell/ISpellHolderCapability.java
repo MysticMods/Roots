@@ -10,6 +10,7 @@ public interface ISpellHolderCapability extends ICapability {
 
     boolean hasSpell();
     boolean hasSpellInSlot();
+    boolean isEmpty();
 
     int getCooldown();
     void setCooldown(int cooldown);
