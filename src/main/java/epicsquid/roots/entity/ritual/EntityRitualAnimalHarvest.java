@@ -40,9 +40,7 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
     if (getDataManager().get(lifetime) < 0) {
       setDead();
     }
-    if (this.ticksExisted % 80 == 0) {
-      // Expensive, maybe, but not every tick
-      // We try five times?
+    if (this.ticksExisted % 110 == 0) {
       for (int i = 0; i < 5; i++) {
         if (doHarvest()) break;
       }

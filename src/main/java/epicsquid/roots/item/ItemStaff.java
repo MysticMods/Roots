@@ -40,6 +40,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
+import javax.annotation.Nullable;
+
 public class ItemStaff extends ItemBase {
   public ItemStaff(String name) {
     super(name);
@@ -233,6 +235,32 @@ public class ItemStaff extends ItemBase {
       }
     }
     return EnumAction.NONE;
+  }
+
+  @Nullable
+  @Override
+  public NBTTagCompound getNBTShareTag(ItemStack stack) {
+    NBTTagCompound result = super.getNBTShareTag(stack);
+
+    if (result == null) result = new NBTTagCompound();
+
+    ISpellHolderCapability cap = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    if (cap != null) {
+      NBTTagCompound cap_tag = cap.getData();
+      result.setTag("staff_capability", cap_tag);
+    }
+
+    return result;
+  }
+
+  @Override
+  public void readNBTShareTag(ItemStack stack, @Nullable NBTTagCompound nbt) {
+    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    if (capability != null && nbt != null && nbt.hasKey("staff_capability")) {
+      capability.setData(nbt.getCompoundTag("staff_capability"));
+      nbt.removeTag("staff_capability");
+    }
+    super.readNBTShareTag(stack, nbt);
   }
 
   @SideOnly(Side.CLIENT)
