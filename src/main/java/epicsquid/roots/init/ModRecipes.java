@@ -482,7 +482,7 @@ public class ModRecipes {
   private static void initCraftingRecipes() {
 
     addCraftingRecipe("unending_bowl",
-        new PyreCraftingRecipe(new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.unending_bowl))).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.unending_bowl)), 2).addIngredients(
             new ItemStack(Items.WATER_BUCKET),
             new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.mortar)),
             new ItemStack(ModItems.moonglow_leaf),
@@ -490,7 +490,7 @@ public class ModRecipes {
             new ItemStack(ModItems.spirit_herb)));
 
     addCraftingRecipe("runic_soil",
-        new PyreCraftingRecipe(new ItemStack(ModBlocks.runic_soil)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModBlocks.runic_soil), 1).addIngredients(
           new ItemStack(Blocks.DIRT),
           new ItemStack(ModItems.terra_moss),
           new ItemStack(ModItems.wildroot),
@@ -498,7 +498,7 @@ public class ModRecipes {
           new ItemStack(Items.DYE, 1, 15)));
 
     addCraftingRecipe("living_pickaxe",
-        new PyreCraftingRecipe(new ItemStack(ModItems.living_pickaxe)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_pickaxe), 1).addIngredients(
           new OreIngredient("ingotGold"),
           new ItemStack(Items.WOODEN_PICKAXE),
           new ItemStack(ModItems.wildroot),
@@ -506,7 +506,7 @@ public class ModRecipes {
           new ItemStack(ModItems.bark_oak)));
 
     addCraftingRecipe("living_axe",
-        new PyreCraftingRecipe(new ItemStack(ModItems.living_axe)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_axe), 1).addIngredients(
           new OreIngredient("ingotGold"),
           new ItemStack(Items.WOODEN_AXE),
           new ItemStack(ModItems.wildroot),
@@ -514,7 +514,7 @@ public class ModRecipes {
           new ItemStack(ModItems.bark_oak)));
 
     addCraftingRecipe("living_shovel",
-        new PyreCraftingRecipe(new ItemStack(ModItems.living_shovel)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_shovel), 1).addIngredients(
             new OreIngredient("ingotGold"),
             new ItemStack(Items.WOODEN_SHOVEL),
             new ItemStack(ModItems.wildroot),
@@ -522,7 +522,7 @@ public class ModRecipes {
             new ItemStack(ModItems.bark_oak)));
 
     addCraftingRecipe("living_hoe",
-        new PyreCraftingRecipe(new ItemStack(ModItems.living_hoe)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_hoe), 1).addIngredients(
           new OreIngredient("ingotGold"),
           new ItemStack(Items.WOODEN_HOE),
           new ItemStack(ModItems.wildroot),
@@ -530,7 +530,7 @@ public class ModRecipes {
           new ItemStack(ModItems.bark_oak)));
 
     addCraftingRecipe("living_sword",
-        new PyreCraftingRecipe(new ItemStack(ModItems.living_sword)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_sword), 1).addIngredients(
             new OreIngredient("ingotGold"),
             new ItemStack(Items.WOODEN_SWORD),
             new ItemStack(ModItems.wildroot),
@@ -538,7 +538,7 @@ public class ModRecipes {
             new ItemStack(ModItems.bark_oak)));
 
     addCraftingRecipe("living_arrow",
-        new PyreCraftingRecipe(new ItemStack(ModItems.living_arrow, 10)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_arrow, 10), 1).addIngredients(
             new OreIngredient("treeLeaves"),
             new OreIngredient("treeLeaves"),
             new OreIngredient("rootsBark"),
@@ -546,7 +546,7 @@ public class ModRecipes {
             new ItemStack(Items.FLINT)));
 
     addCraftingRecipe("infernal_bulb",
-        new PyreCraftingRecipe(new ItemStack(ModItems.infernal_bulb, 3)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModItems.infernal_bulb, 3), 1).addIngredients(
             new ItemStack(Items.NETHER_WART),
             new ItemStack(ItemBlock.getItemFromBlock(Blocks.MAGMA)),
             new ItemStack(Items.BLAZE_ROD),
@@ -554,7 +554,7 @@ public class ModRecipes {
             new ItemStack(Items.GUNPOWDER)));
 
     addCraftingRecipe("dewgonia",
-        new PyreCraftingRecipe(new ItemStack(ModItems.dewgonia, 3)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModItems.dewgonia, 3), 1).addIngredients(
             new ItemStack(Item.getItemFromBlock(Blocks.TALLGRASS), 1, 1),
             new ItemStack(Items.SUGAR),
             new ItemStack(Items.DYE, 1, 4),
@@ -562,7 +562,7 @@ public class ModRecipes {
             new ItemStack(Item.getItemFromBlock(Blocks.WATERLILY))));
 
     addCraftingRecipe("cloud_berry",
-        new PyreCraftingRecipe(new ItemStack(ModItems.cloud_berry, 3)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModItems.cloud_berry, 3), 1).addIngredients(
             new ItemStack(ItemBlock.getItemFromBlock(Blocks.LEAVES)),
             new ItemStack(Item.getItemFromBlock(Blocks.TALLGRASS), 1, 1),
             new OreIngredient("blockWool"),
@@ -570,7 +570,7 @@ public class ModRecipes {
             new ItemStack(ModItems.terra_moss)));
 
     addCraftingRecipe("stalicripe",
-        new PyreCraftingRecipe(new ItemStack(ModItems.stalicripe, 3)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModItems.stalicripe, 3), 1).addIngredients(
             new ItemStack(Items.FLINT),
             new OreIngredient("stone"),
             new OreIngredient("ingotIron"),
@@ -578,7 +578,7 @@ public class ModRecipes {
             new OreIngredient("dustRedstone")));
 
     addCraftingRecipe("moonglow_leaf",
-        new PyreCraftingRecipe(new ItemStack(ModItems.moonglow_leaf, 3)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModItems.moonglow_leaf, 3), 1).addIngredients(
             new OreIngredient("treeLeaves"),
             new OreIngredient("blockGlass"),
             new OreIngredient("gemQuartz"),
@@ -586,7 +586,7 @@ public class ModRecipes {
             new ItemStack(ModItems.bark_birch)));
 
     addCraftingRecipe("pereskia",
-        new PyreCraftingRecipe(new ItemStack(ModItems.pereskia, 3)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModItems.pereskia, 3), 1).addIngredients(
             new ItemStack(ModItems.wildroot),
             new ItemStack(Items.SPECKLED_MELON),
             new OreIngredient("dustRedstone"),
@@ -594,7 +594,7 @@ public class ModRecipes {
             new ItemStack(Items.REEDS)));
 
     addCraftingRecipe("baffle_cap",
-        new PyreCraftingRecipe(new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom), 3)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom), 3), 1).addIngredients(
             new ItemStack(ModItems.terra_moss),
             new ItemStack(Items.FERMENTED_SPIDER_EYE),
             new ItemStack(Items.WHEAT_SEEDS),
@@ -602,7 +602,7 @@ public class ModRecipes {
             new ItemStack(Blocks.BROWN_MUSHROOM)));
 
     addCraftingRecipe("runic_shears",
-        new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.runic_shears)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.runic_shears), 1).addIngredients(
           new ItemStack(Items.SHEARS),
           new ItemStack(ModItems.pereskia),
           new ItemStack(ModItems.pereskia),
@@ -610,45 +610,47 @@ public class ModRecipes {
           new ItemStack(ModBlocks.runestone)));
 
     addCraftingRecipe("rune_stone",
-        new PyreCraftingRecipe(new ItemStack(Item.getItemFromBlock(ModBlocks.runestone), 8)).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(Item.getItemFromBlock(ModBlocks.runestone), 8), 1).addIngredients(
             new ItemStack(Items.DYE, 1, 4),
             new OreIngredient("stone"),
             new OreIngredient("stone"),
             new OreIngredient("stone"),
             new OreIngredient("stone")));
 
-    addCraftingRecipe("wildwood_helmet", new PyreCraftingRecipe(new ItemStack(ModItems.wildwood_helmet)).addIngredients(
+    addCraftingRecipe("wildwood_helmet", new PyreCraftingRecipe(new ItemStack(ModItems.wildwood_helmet), 1).addIngredients(
             new ItemStack(Items.IRON_HELMET),
             new ItemStack(ModItems.bark_wildwood),
             new ItemStack(ModItems.bark_wildwood),
             new OreIngredient("plankWood"),
             new OreIngredient("gemDiamond")));
-    addCraftingRecipe("wildwood_chestplate", new PyreCraftingRecipe(new ItemStack(ModItems.wildwood_chestplate)).addIngredients(
+    addCraftingRecipe("wildwood_chestplate", new PyreCraftingRecipe(new ItemStack(ModItems.wildwood_chestplate), 1).addIngredients(
             new ItemStack(Items.IRON_CHESTPLATE),
             new ItemStack(ModItems.bark_wildwood),
             new ItemStack(ModItems.bark_wildwood),
             new OreIngredient("plankWood"),
             new OreIngredient("gemDiamond")));
-    addCraftingRecipe("wildwood_leggings", new PyreCraftingRecipe(new ItemStack(ModItems.wildwood_leggings)).addIngredients(
+    addCraftingRecipe("wildwood_leggings", new PyreCraftingRecipe(new ItemStack(ModItems.wildwood_leggings), 1).addIngredients(
             new ItemStack(Items.IRON_LEGGINGS),
             new ItemStack(ModItems.bark_wildwood),
             new ItemStack(ModItems.bark_wildwood),
             new OreIngredient("plankWood"),
             new OreIngredient("gemDiamond")));
-    addCraftingRecipe("wildwood_boots", new PyreCraftingRecipe(new ItemStack(ModItems.wildwood_boots)).addIngredients(
+    addCraftingRecipe("wildwood_boots", new PyreCraftingRecipe(new ItemStack(ModItems.wildwood_boots), 1).addIngredients(
             new ItemStack(Items.IRON_BOOTS),
             new ItemStack(ModItems.bark_wildwood),
             new ItemStack(ModItems.bark_wildwood),
             new OreIngredient("plankWood"),
             new OreIngredient("gemDiamond")));
 
-    addCraftingRecipe("apothecary_pouch", new PyreCraftingRecipe(new ItemStack(ModItems.apothecary_pouch)).addIngredients(
+    // TODO: Work out a way to upgrade the component pouch rather than
+    // TODO: simply overwriting the contents.
+    /*addCraftingRecipe("apothecary_pouch", new PyreCraftingRecipe(new ItemStack(ModItems.apothecary_pouch), 1f).addIngredients(
             new ItemStack(Blocks.ENDER_CHEST),
             new ItemStack(ModItems.bark_wildwood),
             new ItemStack(ModItems.bark_wildwood),
             new ItemStack(ModItems.spirit_herb),
             new ItemStack(ModItems.component_pouch)
-    ));
+    ));*/
   }
 
   public static void afterHerbRegisterInit(){
@@ -670,25 +672,25 @@ public class ModRecipes {
 
       System.out.println(herb.getItem().getUnlocalizedName());
 
-      addCraftingRecipe("sylvan_helmet_" + herb.getName(), new PyreCraftingRecipe(helmet).addIngredients(
+      addCraftingRecipe("sylvan_helmet_" + herb.getName(), new PyreCraftingRecipe(helmet, 1).addIngredients(
               new ItemStack(Items.LEATHER_HELMET),
               new ItemStack(Blocks.VINE),
               new ItemStack(ModItems.bark_birch),
               new OreIngredient("gemDiamond"),
               new ItemStack(herb.getItem())));
-      addCraftingRecipe("sylvan_chestplate_" + herb.getName(), new PyreCraftingRecipe(chestplate).addIngredients(
+      addCraftingRecipe("sylvan_chestplate_" + herb.getName(), new PyreCraftingRecipe(chestplate, 1).addIngredients(
               new ItemStack(Items.LEATHER_CHESTPLATE),
               new ItemStack(Blocks.VINE),
               new ItemStack(ModItems.bark_birch),
               new OreIngredient("gemDiamond"),
               new ItemStack(herb.getItem())));
-      addCraftingRecipe("sylvan_leggings_" + herb.getName(), new PyreCraftingRecipe(leggings).addIngredients(
+      addCraftingRecipe("sylvan_leggings_" + herb.getName(), new PyreCraftingRecipe(leggings, 1).addIngredients(
               new ItemStack(Items.LEATHER_LEGGINGS),
               new ItemStack(Blocks.VINE),
               new ItemStack(ModItems.bark_birch),
               new OreIngredient("gemDiamond"),
               new ItemStack(herb.getItem())));
-      addCraftingRecipe("sylvan_boots_" + herb.getName(), new PyreCraftingRecipe(boots).addIngredients(
+      addCraftingRecipe("sylvan_boots_" + herb.getName(), new PyreCraftingRecipe(boots, 1).addIngredients(
               new ItemStack(Items.LEATHER_BOOTS),
               new ItemStack(Blocks.VINE),
               new ItemStack(ModItems.bark_birch),

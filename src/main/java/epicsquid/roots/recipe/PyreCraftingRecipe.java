@@ -1,13 +1,10 @@
 package epicsquid.roots.recipe;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import epicsquid.mysticallib.util.ListUtil;
-import epicsquid.roots.recipe.conditions.ConditionItems;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
@@ -15,9 +12,15 @@ public class PyreCraftingRecipe {
   private List<Ingredient> ingredients = new ArrayList<>();
   private ItemStack result;
   private String name;
+  private int xp;
+
+  public PyreCraftingRecipe(ItemStack result, int xp){
+    this.result = result;
+    this.xp = xp;
+  }
 
   public PyreCraftingRecipe(ItemStack result) {
-    this.result = result;
+    this(result, 0);
   }
 
   public PyreCraftingRecipe setName(String name) {
@@ -56,6 +59,10 @@ public class PyreCraftingRecipe {
 
   public ItemStack getResult() {
     return result;
+  }
+
+  public int getXP() {
+    return xp;
   }
 
   public List<ItemStack> getRecipe(){
