@@ -11,10 +11,12 @@ import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreIngredient;
 
 public class SpellGrowthInfusion extends SpellBase {
   public static String spellName = "spell_growth_infusion";
@@ -25,14 +27,13 @@ public class SpellGrowthInfusion extends SpellBase {
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 16;
 
-    addCost(HerbRegistry.getHerbByName("spirit_herb"), 0.25f);
-    addCost(HerbRegistry.getHerbByName("pereskia"), 0.125f);
+    addCost(HerbRegistry.getHerbByName("terra_moss"), 0.08f);
     addIngredients(
-        new ItemStack(Blocks.SAPLING, 1, 2),
-        new ItemStack(ModItems.aubergine_seed),
-        new ItemStack(Blocks.SAPLING, 1, 1),
-        new ItemStack(ModItems.spirit_herb),
-        new ItemStack(ModItems.pereskia)
+        new OreIngredient("treeSapling"),
+        new OreIngredient("treeSapling"),
+        new ItemStack(ModItems.terra_moss),
+        new ItemStack(ModItems.aubergine),
+        new ItemStack(Items.WHEAT)
     );
   }
 
@@ -54,5 +55,4 @@ public class SpellGrowthInfusion extends SpellBase {
     }
     return true;
   }
-
 }
