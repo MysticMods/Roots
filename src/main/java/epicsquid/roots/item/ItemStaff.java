@@ -40,26 +40,18 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
+import javax.annotation.Nullable;
+
 public class ItemStaff extends ItemBase {
   public ItemStaff(String name) {
     super(name);
     setMaxStackSize(1);
   }
 
-  public static void updateCapability (ItemStack stack, ISpellHolderCapability capability) {
-    if (stack.isEmpty() || capability == null) return;
-    NBTTagCompound tag = stack.getTagCompound();
-    if (tag != null && tag.hasKey("spell_capability")) {
-      capability.setData(tag.getCompoundTag("spell_capability"));
-    }
-  }
-
   @Override
   public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
     ISpellHolderCapability oldCapability = oldStack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-    updateCapability(oldStack, oldCapability);
     ISpellHolderCapability newCapability = newStack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-    updateCapability(newStack, newCapability);
 
     if(oldCapability != null && newCapability != null){
       return slotChanged || oldCapability.getSelectedSlot() != newCapability.getSelectedSlot();
@@ -72,7 +64,6 @@ public class ItemStaff extends ItemBase {
   public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
     ItemStack stack = player.getHeldItem(hand);
     ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-    updateCapability(stack, capability);
     if (player.isSneaking()) {
       capability.setSelectedSlot(capability.getSelectedSlot() + 1);
       if (capability.getSelectedSlot() > 4) {
@@ -113,7 +104,6 @@ public class ItemStaff extends ItemBase {
   @Override
   public void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
     ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-    updateCapability(stack, capability);
     if (player instanceof EntityPlayer) {
       if (capability.getCooldown() <= 0) {
         SpellBase spell = capability.getSelectedSpell();
@@ -133,7 +123,6 @@ public class ItemStaff extends ItemBase {
   @Override
   public void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase entity, int timeLeft) {
     ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-    updateCapability(stack, capability);
     SpellBase spell = capability.getSelectedSpell();
     if (spell != null) {
       SpellEvent event = new SpellEvent((EntityPlayer) entity, spell);
@@ -148,7 +137,6 @@ public class ItemStaff extends ItemBase {
   @Override
   public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
     ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-    updateCapability(stack, capability);
     if(capability.getCooldown() > 0){
       capability.setCooldown(capability.getCooldown() - 1);
       if(capability.getCooldown() <= 0){
@@ -175,7 +163,6 @@ public class ItemStaff extends ItemBase {
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
     ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-    updateCapability(stack, capability);
     tooltip.add(I18n.format("roots.tooltip.staff.selected") + (capability.getSelectedSlot() + 1));
     SpellBase spell = capability.getSelectedSpell();
     if (spell != null) {
@@ -248,6 +235,32 @@ public class ItemStaff extends ItemBase {
       }
     }
     return EnumAction.NONE;
+  }
+
+  @Nullable
+  @Override
+  public NBTTagCompound getNBTShareTag(ItemStack stack) {
+    NBTTagCompound result = super.getNBTShareTag(stack);
+
+    if (result == null) result = new NBTTagCompound();
+
+    ISpellHolderCapability cap = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    if (cap != null) {
+      NBTTagCompound cap_tag = cap.getData();
+      result.setTag("staff_capability", cap_tag);
+    }
+
+    return result;
+  }
+
+  @Override
+  public void readNBTShareTag(ItemStack stack, @Nullable NBTTagCompound nbt) {
+    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    if (capability != null && nbt != null && nbt.hasKey("staff_capability")) {
+      capability.setData(nbt.getCompoundTag("staff_capability"));
+      nbt.removeTag("staff_capability");
+    }
+    super.readNBTShareTag(stack, nbt);
   }
 
   @SideOnly(Side.CLIENT)
