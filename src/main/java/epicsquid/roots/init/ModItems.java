@@ -12,6 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -143,6 +144,10 @@ public class ModItems {
 
     for (Block rune : Arrays.asList(ModBlocks.runestone, ModBlocks.chiseled_runestone, ModBlocks.runestone_brick, ModBlocks.runestone_brick_alt)) {
       OreDictionary.registerOre("runestone", rune);
+    }
+
+    for (Item seed : Arrays.asList(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.PUMPKIN_SEEDS, Items.MELON_SEEDS, ModItems.aubergine_seed, ModItems.moonglow_seed, ModItems.spirit_herb_seed, ModItems.wildewheet_seed, ModItems.terra_spores)) {
+      OreDictionary.registerOre("seed", seed);
     }
   }
 
