@@ -99,7 +99,7 @@ public class SpellHolderCapability implements ISpellHolderCapability {
 
     @Override
     public boolean isEmpty() {
-        return spells.values().stream().filter(Objects::isNull).count() != 5;
+        return spells.values().stream().filter(Objects::isNull).count() == 5;
     }
 
     @Override
@@ -157,7 +157,7 @@ public class SpellHolderCapability implements ISpellHolderCapability {
 
         int originalSlot = selectedSlot;
 
-        for (int i = selectedSlot; i < 5; i++) {
+        for (int i = selectedSlot + 1; i < 5; i++) {
             if (spells.get(i) == null) {
                 continue;
             } else {
