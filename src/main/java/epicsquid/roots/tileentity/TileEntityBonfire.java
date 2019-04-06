@@ -11,6 +11,7 @@ import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
+import epicsquid.roots.util.XPUtil;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -35,7 +36,6 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -45,6 +45,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   private int burnTime = 0;
   private boolean doBigFlame = false;
   private ItemStack craftingResult = ItemStack.EMPTY;
+  private int craftingXP = 0;
   private RitualBase lastRitualUsed = null;
   private PyreCraftingRecipe lastRecipeUsed = null;
   private List<Ingredient> lastUsedIngredients = null;
@@ -74,6 +75,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     tag.setInteger("burnTime", burnTime);
     tag.setBoolean("doBigFlame", doBigFlame);
     tag.setTag("craftingResult", this.craftingResult.serializeNBT());
+    tag.setInteger("craftingXP", craftingXP);
     tag.setString("lastRitualUsed", (this.lastRitualUsed != null) ? this.lastRitualUsed.getName() : "");
     tag.setString("lastRecipeUsed", (this.lastRecipeUsed != null) ? this.lastRecipeUsed.getName() : "");
     return tag;
@@ -86,6 +88,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     burnTime = tag.getInteger("burnTime");
     doBigFlame = tag.getBoolean("doBigFlame");
     this.craftingResult = new ItemStack(tag.getCompoundTag("craftingResult"));
+    this.craftingXP = tag.getInteger("craftingXP");
     this.lastRitualUsed = RitualRegistry.getRitual(tag.getString("lastRitualUsed"));
     this.lastRecipeUsed = ModRecipes.getCraftingRecipe(tag.getString("lastRecipeUsed"));
   }
@@ -149,6 +152,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           this.lastRitualUsed = null;
           this.lastUsedIngredients = recipe.getIngredients();
           this.craftingResult = recipe.getResult();
+          this.craftingXP = recipe.getXP();
           this.burnTime = 200;
           this.doBigFlame = true;
           for (int i = 0; i < inventory.getSlots(); i++) {
@@ -289,6 +293,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           EntityItem item = new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, this.craftingResult.copy());
           item.setCustomNameTag("bonfire");
           world.spawnEntity(item);
+          XPUtil.spawnXP(world, getPos(), this.craftingXP);
           this.craftingResult = ItemStack.EMPTY;
         }
       }

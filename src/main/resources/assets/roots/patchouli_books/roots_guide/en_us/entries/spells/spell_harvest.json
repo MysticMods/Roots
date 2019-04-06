@@ -1,0 +1,17 @@
+{
+    "name": "Harvest",
+    "icon": "roots:living_hoe",
+    "category": "spells",
+    "advancement": "roots:spirit_herb",
+    
+    "pages": [
+      {
+        "type": "text",
+        "text": "Immediately harvests and replants crops around the caster, greatly simplifying the task of maintaining a garden or field."
+      },
+      {
+        "type": "spell_template",
+        "spell": "spell_harvest"
+      }
+    ]
+  }

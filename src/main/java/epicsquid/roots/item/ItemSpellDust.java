@@ -1,14 +1,10 @@
 package epicsquid.roots.item;
 
-import java.util.List;
-import java.util.Map;
-
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.roots.capability.spell.ISpellHolderCapability;
 import epicsquid.roots.capability.spell.SpellHolderCapabilityProvider;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -17,6 +13,10 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Map;
 
 public class ItemSpellDust extends ItemBase {
   public ItemSpellDust(String name) {
@@ -34,6 +34,16 @@ public class ItemSpellDust extends ItemBase {
         subItems.add(stack);
       }
     }
+  }
+
+  @Override
+  public void readNBTShareTag(ItemStack stack, @Nullable NBTTagCompound nbt) {
+    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    if (capability != null && nbt != null && nbt.hasKey("spell_capability")) {
+      capability.setData(nbt.getCompoundTag("spell_capability"));
+      nbt.removeTag("spell_capability");
+    }
+    super.readNBTShareTag(stack, nbt);
   }
 
   public static ItemStack createData(ItemStack stack, SpellBase spell) {
@@ -54,5 +64,26 @@ public class ItemSpellDust extends ItemBase {
     if (spell == null) return;
 
     spell.addToolTip(tooltip);
+  }
+
+  @Override
+  public boolean getShareTag() {
+    return true;
+  }
+
+  @Nullable
+  @Override
+  public NBTTagCompound getNBTShareTag(ItemStack stack) {
+    NBTTagCompound result = super.getNBTShareTag(stack);
+
+    if (result == null) result = new NBTTagCompound();
+
+    ISpellHolderCapability cap = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    if (cap != null) {
+      NBTTagCompound cap_tag = cap.getData();
+      result.setTag("spell_capability", cap_tag);
+    }
+
+    return result;
   }
 }

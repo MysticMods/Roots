@@ -7,10 +7,7 @@ import epicsquid.roots.spell.modules.SpellModule;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.nbt.NBTTagCompound;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SpellHolderCapability implements ISpellHolderCapability {
 
@@ -101,6 +98,11 @@ public class SpellHolderCapability implements ISpellHolderCapability {
     }
 
     @Override
+    public boolean isEmpty() {
+        return spells.values().stream().filter(Objects::isNull).count() == 5;
+    }
+
+    @Override
     public SpellBase getSpellInSlot (int slot) {
         if (slot < 0 || slot >= 5) return null;
         return spells.getOrDefault(slot, null);
@@ -144,6 +146,35 @@ public class SpellHolderCapability implements ISpellHolderCapability {
     @Override
     public void setSelectedSlot(int slot) {
         this.selectedSlot = slot;
+    }
+
+    @Override
+    public void nextSlot () {
+        if (this.isEmpty()) {
+            setSelectedSlot(0);
+            return;
+        }
+
+        int originalSlot = selectedSlot;
+
+        for (int i = selectedSlot + 1; i < 5; i++) {
+            if (spells.get(i) == null) {
+                continue;
+            } else {
+                setSelectedSlot(i);
+                return;
+            }
+        }
+        for (int i = 0; i < originalSlot; i++) {
+            if (spells.get(i) == null) {
+                continue;
+            } else {
+                setSelectedSlot(i);
+                return;
+            }
+        }
+
+        setSelectedSlot(originalSlot);
     }
 
     @Override

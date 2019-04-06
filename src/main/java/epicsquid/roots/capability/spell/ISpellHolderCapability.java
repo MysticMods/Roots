@@ -8,8 +8,11 @@ import java.util.List;
 
 public interface ISpellHolderCapability extends ICapability {
 
+    void nextSlot();
+
     boolean hasSpell();
     boolean hasSpellInSlot();
+    boolean isEmpty();
 
     int getCooldown();
     void setCooldown(int cooldown);

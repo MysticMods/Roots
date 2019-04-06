@@ -40,6 +40,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
+import javax.annotation.Nullable;
+
 public class ItemStaff extends ItemBase {
   public ItemStaff(String name) {
     super(name);
@@ -63,10 +65,7 @@ public class ItemStaff extends ItemBase {
     ItemStack stack = player.getHeldItem(hand);
     ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
     if (player.isSneaking()) {
-      capability.setSelectedSlot(capability.getSelectedSlot() + 1);
-      if (capability.getSelectedSlot() > 4) {
-        capability.setSelectedSlot(0);
-      }
+      capability.nextSlot();
       if (world.isRemote) {
         SpellBase spell = capability.getSelectedSpell();
         player.sendMessage(new TextComponentTranslation("roots.info.staff.slot_and_spell", capability.getSelectedSlot() + 1, spell == null ? "none" : new TextComponentTranslation("roots.spell." + spell.getName() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))).setStyle(new Style().setColor(TextFormatting.GOLD)));
@@ -109,8 +108,9 @@ public class ItemStaff extends ItemBase {
           if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
             if (spell.costsMet((EntityPlayer) player)) {
               boolean result = spell.cast((EntityPlayer) player, capability.getSelectedModules());
-              if (result)
+              if (result) {
                 spell.enactTickCosts((EntityPlayer) player);
+              }
             }
           }
         }
@@ -174,7 +174,6 @@ public class ItemStaff extends ItemBase {
       tooltip.add("");
       int curSlot = capability.getSelectedSlot();
       for (int i = 0; i < 5; i++) {
-        if (curSlot == i) continue;
         SpellBase other = capability.getSpellInSlot(i);
         if (other == null) {
           tooltip.add("" + (i + 1) + ": No spell.");
@@ -233,6 +232,32 @@ public class ItemStaff extends ItemBase {
       }
     }
     return EnumAction.NONE;
+  }
+
+  @Nullable
+  @Override
+  public NBTTagCompound getNBTShareTag(ItemStack stack) {
+    NBTTagCompound result = super.getNBTShareTag(stack);
+
+    if (result == null) result = new NBTTagCompound();
+
+    ISpellHolderCapability cap = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    if (cap != null) {
+      NBTTagCompound cap_tag = cap.getData();
+      result.setTag("staff_capability", cap_tag);
+    }
+
+    return result;
+  }
+
+  @Override
+  public void readNBTShareTag(ItemStack stack, @Nullable NBTTagCompound nbt) {
+    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    if (capability != null && nbt != null && nbt.hasKey("staff_capability")) {
+      capability.setData(nbt.getCompoundTag("staff_capability"));
+      nbt.removeTag("staff_capability");
+    }
+    super.readNBTShareTag(stack, nbt);
   }
 
   @SideOnly(Side.CLIENT)
