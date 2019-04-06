@@ -30,7 +30,7 @@ public class SpellScatter extends SpellBase {
     this.castType = EnumCastType.INSTANTANEOUS;
     this.cooldown = 60;
 
-    addCost(HerbRegistry.getHerbByName("wildroot"), 0.125F);
+    addCost(HerbRegistry.getHerbByName("wildroot"), 0.25F);
     addIngredients(
             new ItemStack(ModItems.terra_spores),
             new ItemStack(ModItems.wildroot),
@@ -58,6 +58,8 @@ public class SpellScatter extends SpellBase {
           {
             caster.world.setBlockState(pos.up(), plant);
             caster.getHeldItemOffhand().shrink(1);
+
+            //FIXME FX is gone immediately after the seeds are planted
             MessageScatterPlantFX fx = new MessageScatterPlantFX(pos.getX(), pos.getY() + 1, pos.getZ());
             PacketHandler.sendToAllTracking(fx, caster);
           }

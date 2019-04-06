@@ -14,7 +14,7 @@ public class RitualUtil {
 
         pos = pos.add(rand.nextInt(xRadius*2), 0, rand.nextInt(zRadius*2));
 
-        System.out.println("Pos: " +  pos.getX() +  " - " + pos.getY() + " - " + pos.getZ());
+        System.out.println("Pos: " +  pos.getX() +  " | " + pos.getY() + " | " + pos.getZ());
 
         return pos;
     }
