@@ -149,6 +149,35 @@ public class SpellHolderCapability implements ISpellHolderCapability {
     }
 
     @Override
+    public void nextSlot () {
+        if (this.isEmpty()) {
+            setSelectedSlot(0);
+            return;
+        }
+
+        int originalSlot = selectedSlot;
+
+        for (int i = selectedSlot; i < 5; i++) {
+            if (spells.get(i) == null) {
+                continue;
+            } else {
+                setSelectedSlot(i);
+                return;
+            }
+        }
+        for (int i = 0; i < originalSlot; i++) {
+            if (spells.get(i) == null) {
+                continue;
+            } else {
+                setSelectedSlot(i);
+                return;
+            }
+        }
+
+        setSelectedSlot(originalSlot);
+    }
+
+    @Override
     public void setSpellToSlot(SpellBase spell) {
         assert hasFreeSlot();
         setSelectedSlot(getNextFreeSlot());
