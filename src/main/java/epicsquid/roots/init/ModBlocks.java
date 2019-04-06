@@ -33,7 +33,7 @@ public class ModBlocks {
   public static BlockCropBase moonglow, aubergine, pereskia, wildroot, spirit_herb,wildewheet, cloud_berry, infernal_bulb, dewgonia, stalicripe;
 
   // Runestones
-  public static Block thatch, runestone, runestone_brick, runestone_brick_alt, chiseled_runestone, wildwoodLog, wildwoodPlanks, wildwoodLeaves, baffle_cap_huge_stem, baffle_cap_huge_top,
+  public static Block runestone, runestone_brick, runestone_brick_alt, chiseled_runestone, wildwoodLog, wildwoodPlanks, wildwoodLeaves, baffle_cap_huge_stem, baffle_cap_huge_top,
       baffle_cap_mushroom, runic_soil_fire, runic_soil_water, runic_soil_air, runic_soil_earth, runic_soil;
 
 
@@ -52,7 +52,6 @@ public class ModBlocks {
     event.addBlock(pereskia = new BlockPereskiaCrop("pereskia_crop", EnumPlantType.Crop));
     event.addBlock(wildroot = new BlockWildrootCrop("wildroot_crop", EnumPlantType.Crop));
     event.addBlock(spirit_herb = new BlockSpiritHerbCrop("spirit_herb_crop", EnumPlantType.Crop));
-    event.addBlock(thatch = new BlockThatch(Material.LEAVES, SoundType.PLANT, 0.8f, "thatch")).setCreativeTab(Roots.tab);
     event.addBlock(baffle_cap_huge_stem = new BlockHugeMushroomBase(Material.WOOD, SoundType.WOOD, 0.8f, "baffle_cap_huge_stem").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addBlock(baffle_cap_huge_top = new BlockHugeMushroomBase(Material.WOOD, SoundType.WOOD, 0.8f, "baffle_cap_huge_top").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addBlock(baffle_cap_mushroom = new BlockMushroomBase("baffle_cap_mushroom", new HugeBaffleCap().getData()));
