@@ -55,6 +55,8 @@ public class ModRecipes {
   private static Map<String, PyreCraftingRecipe> pyreCraftingRecipes = new HashMap<>();
   private static Map<String, RunicShearRecipe> runicShearRecipes = new HashMap<>();
   private static List<RunicCarvingRecipe> runicCarvingRecipes = new ArrayList<>();
+  private static Map<ResourceLocation, PacifistEntry> pacifistEntities = new HashMap<>();
+  private static Map<Class<? extends Entity>, PacifistEntry> pacifistClasses = new HashMap<>();
 
   private static ResourceLocation getRL(@Nonnull String s) {
     return new ResourceLocation(Roots.MODID + ":" + s);
@@ -66,6 +68,58 @@ public class ModRecipes {
 
   private static void registerShaped(@Nonnull IForgeRegistry<IRecipe> registry, @Nonnull String name, @Nonnull ItemStack result, Object... ingredients) {
     registry.register(new ShapedOreRecipe(getRL(name), result, ingredients).setRegistryName(getRL(name)));
+  }
+
+  public static PacifistEntry addPacifistEntry (String name, Class<? extends Entity> clazz) {
+    PacifistEntry entry = new PacifistEntry(clazz, name);
+    pacifistEntities.put(entry.getRegistryName(), entry);
+    pacifistClasses.put(clazz, entry);
+    return entry;
+  }
+
+  public static PacifistEntry getPacifistEntry (String name) {
+    return getPacifistEntry(new ResourceLocation(Roots.MODID, name));
+  }
+
+  public static PacifistEntry getPacifistEntry (ResourceLocation name) {
+    return pacifistEntities.get(name);
+  }
+
+  public static PacifistEntry getPacifistEntry (Entity entity) {
+    return pacifistClasses.get(entity.getClass());
+  }
+
+  public static void removePacifistEntry (String name) {
+    removePacifistEntry(new ResourceLocation(Roots.MODID, name));
+  }
+
+  public static void removePacifistEntry (ResourceLocation name) {
+    pacifistEntities.remove(name);
+  }
+
+  public static void initPacifistEntities () {
+    addPacifistEntry("bat", EntityBat.class);
+    addPacifistEntry("chicken", EntityChicken.class);
+    addPacifistEntry("cow", EntityCow.class);
+    addPacifistEntry("donkey", EntityDonkey.class);
+    addPacifistEntry("horse", EntityHorse.class);
+    addPacifistEntry("llama", EntityLlama.class);
+    addPacifistEntry("mooshroom", EntityMooshroom.class);
+    addPacifistEntry("mule", EntityMule.class);
+    addPacifistEntry("ocelot", EntityOcelot.class);
+    addPacifistEntry("parrot", EntityParrot.class);
+    addPacifistEntry("pig", EntityPig.class);
+    addPacifistEntry("rabbit", EntityRabbit.class);
+    addPacifistEntry("sheep", EntitySheep.class);
+    addPacifistEntry("squid", EntitySquid.class);
+    addPacifistEntry("villager", EntityVillager.class).setCheckTarget(true);
+    addPacifistEntry("wolf", EntityWolf.class);
+
+    // Mystical Worlds
+    addPacifistEntry("beetle", EntityBeetle.class);
+    addPacifistEntry("deer", EntityDeer.class);
+    addPacifistEntry("fox", EntityFox.class);
+    addPacifistEntry("frog", EntityFrog.class);
   }
 
   public static void addTransmutationRecipe(String name, Block start, IBlockState endState, WorldPosStatePredicate condition) {
@@ -468,6 +522,7 @@ public class ModRecipes {
     initMortarRecipes();
     initAnimalHarvestRecipes();
     initTransmutationRecipes();
+    initPacifistEntities();
 
     GameRegistry.addSmelting(ModItems.flour, new ItemStack(Items.BREAD), 0.125f);
     GameRegistry.addSmelting(epicsquid.mysticalworld.init.ModItems.iron_dust, new ItemStack(Items.IRON_INGOT), 0.125f);
