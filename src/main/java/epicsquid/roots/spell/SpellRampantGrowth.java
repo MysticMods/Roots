@@ -5,6 +5,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageLifeInfusionFX;
+import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
@@ -26,12 +27,12 @@ public class SpellRampantGrowth extends SpellBase {
   public static SpellRampantGrowth instance = new SpellRampantGrowth(spellName);
 
   public SpellRampantGrowth(String name) {
-    super(name, TextFormatting.GREEN, 48f / 255f, 255f / 255f, 48f / 255f, 192f / 255f, 255f / 255f, 192f / 255f);
+    super(name, TextFormatting.DARK_GREEN, 224f / 255f, 135f / 255f, 40f / 255f, 46f / 255f, 94f / 255f, 93f / 255f);
     this.castType = EnumCastType.CONTINUOUS;
     this.cooldown = 16;
 
-    addCost(HerbRegistry.getHerbByName("spirit_herb"), 0.3f);
-    addCost(HerbRegistry.getHerbByName("pereskia"), 0.2f);
+    addCost(HerbRegistry.getHerbByName("spirit_herb"), 0.65f);
+    addCost(HerbRegistry.getHerbByName("pereskia"), 0.45f);
     addIngredients(
             new ItemStack(Blocks.SAPLING, 1, 5),
             new ItemStack(Items.GOLDEN_APPLE),
@@ -63,7 +64,9 @@ public class SpellRampantGrowth extends SpellBase {
         for (int j = 0; j < 3; j++) {
           state.getBlock().randomTick(player.world, pos, state, new Random());
         }
-        PacketHandler.sendToAllTracking(new MessageLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);
+        if (player.world.rand.nextInt(3) == 0) {
+          PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);
+        }
       }
     }
     return true;
