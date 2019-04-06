@@ -27,7 +27,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 public class WorldGenHut extends StructureBase implements IWorldGenerator {
   public WorldGenHut() {
     super(7, 7);
-    addBlockMapping("L", Blocks.LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.X));
+    /*addBlockMapping("L", Blocks.LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.X));
     addBlockMapping("l", Blocks.LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Z));
     addBlockMapping("W", Blocks.LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Y));
     addBlockMapping(" ", Blocks.AIR.getDefaultState());
@@ -44,7 +44,7 @@ public class WorldGenHut extends StructureBase implements IWorldGenerator {
     addLayer(new String[] { " TTTTT ", "  WWW  ", " W   W ", "     W ", " W   W ", "  WWW  ", " TTTTT " });
     addLayer(new String[] { "       ", "TTTTTTT", " W   W ", " FW WF ", " W   W ", "TTTTTTT", "       " });
     addLayer(new String[] { "       ", "       ", "TTTTTTT", " W   W ", "TTTTTTT", "       ", "       " });
-    addLayer(new String[] { "       ", "       ", "       ", "TTTTTTT", "       ", "       ", "       " });
+    addLayer(new String[] { "       ", "       ", "       ", "TTTTTTT", "       ", "       ", "       " });*/
   }
 
   @Override
