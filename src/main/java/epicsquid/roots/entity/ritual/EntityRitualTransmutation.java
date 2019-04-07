@@ -1,7 +1,9 @@
 package epicsquid.roots.entity.ritual;
 
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
 import epicsquid.roots.recipe.TransmutationRecipe;
 import epicsquid.roots.ritual.RitualRegistry;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
@@ -37,6 +39,8 @@ public class EntityRitualTransmutation extends EntityRitualBase {
     if (getDataManager().get(lifetime) < 0) {
       setDead();
     }
+    if (world.isRemote) return;
+
     if (this.ticksExisted % 100 == 0) {
       List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), 16, 16, 8, (pos) -> {
         if (world.isAirBlock(pos)) return false;
@@ -59,6 +63,7 @@ public class EntityRitualTransmutation extends EntityRitualBase {
       if (eligiblePositions.isEmpty()) return;
       BlockPos pos = eligiblePositions.get(random.nextInt(eligiblePositions.size()));
       transmuteBlock(world, pos);
+      PacketHandler.sendToAllTracking(new MessageOvergrowthEffectFX(pos.getX(), pos.getY(), pos.getZ()), this);
     }
   }
 
