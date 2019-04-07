@@ -498,6 +498,7 @@ public class ModRecipes {
     addMortarRecipe(new ItemStack(ModItems.flour), Ingredient.fromItem(Items.WHEAT), 1f, 1f, 0f, 1f, 1f, 0f);
     addMortarRecipe(new ItemStack(ModItems.flour), Ingredient.fromItem(Items.POTATO), 1f, 1f, 0, 1f, 1f, 0f);
     addMortarRecipe(new ItemStack(Items.DYE, 4, 15), Ingredient.fromItem(Items.BONE), 0f, 0f, 0f, 0f, 0f, 0f);
+    addMortarRecipe(new ItemStack(Items.SUGAR, 2), new OreIngredient("sugarcane"), 0f, 0f, 0f, 1f, 1f, 1f);
 
     for (Metal metal : Metal.values()) {
       if (!metal.isEnabled()) continue;
