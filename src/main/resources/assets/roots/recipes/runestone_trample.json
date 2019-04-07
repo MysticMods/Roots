@@ -13,12 +13,13 @@
     ],
     "H": [
       {
-        "item": "roots:living_hoe"
+        "item": "roots:terra_moss"
       }
     ],
     "M": [
       {
-        "item": "roots:terra_moss"
+      "type": "forge:ore_dict",
+      "ore": "blockGold"
       }
     ]
   },
