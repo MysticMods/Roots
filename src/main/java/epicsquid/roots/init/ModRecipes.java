@@ -427,6 +427,10 @@ public class ModRecipes {
     return result;
   }
 
+  public static SpellBase getSpellRecipe (String name) {
+    return SpellRegistry.getSpell(name);
+  }
+
   public static SpellBase getSpellRecipe(List<ItemStack> items) {
     for (SpellBase spell : SpellRegistry.spellRegistry.values()) {
       if (spell.matchesIngredients(items)) {
