@@ -131,7 +131,7 @@ public class MortarTweaker {
 
     @Override
     public String getRecipeInfo () {
-      return String.format("ChangeSpellRecipe to change spell %s ")
+      return String.format("ChangeSpellRecipe to change spell %s", spell.getName());
     }
   }
 }
