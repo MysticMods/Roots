@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW"
+  ],
+  "key": {
+    "W": [
+      {
+        "item": "roots:wildroot",
+        "data": 0
+      }
+    ]
+  },
+  "result": {
+    "item": "minecraft:paper",
+    "data": 0,
+    "count": 3
+  }
+}
