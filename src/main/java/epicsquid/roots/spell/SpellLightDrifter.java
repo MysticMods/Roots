@@ -18,7 +18,7 @@ import java.util.List;
 
 public class SpellLightDrifter extends SpellBase {
   public static String spellName = "spell_light_drifter";
-  public static SpellLifeDrain instance = new SpellLifeDrain(spellName);
+  public static SpellLightDrifter instance = new SpellLightDrifter(spellName);
 
   public SpellLightDrifter(String name) {
     super(name, TextFormatting.AQUA, 196f / 255f, 240f / 255f, 255f / 255f, 32f / 255f, 64f / 255f, 96f / 255f);
