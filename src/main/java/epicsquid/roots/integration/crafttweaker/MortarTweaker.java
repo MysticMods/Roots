@@ -14,6 +14,7 @@ import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.MortarRecipe;
+import epicsquid.roots.spell.SpellBase;
 import net.minecraft.item.crafting.Ingredient;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -22,10 +23,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @ZenRegister
 @ZenClass("mods." + Roots.MODID + ".Mortar")
 public class MortarTweaker {
+
+  @ZenMethod
+  public static void changeSpell(String spellName, IIngredient[] inputs) {
+    SpellBase recipe = ModRecipes.getSpellRecipe(spellName);
+    if (recipe == null) {
+      CraftTweakerAPI.getLogger().logError(String.format("No spell by the name '%s' exists", spellName));
+    } else if (inputs.length != 5) {
+      CraftTweakerAPI.getLogger().logError(String.format("Invalid ingredients length to change recipe for spell %s: need 5 ingredients, got %d.", spellName, inputs.length));
+    } else {
+      List<Ingredient> ingredients = Stream.of(inputs).map(CraftTweakerMC::getIngredient).collect(Collectors.toList());
+      CraftTweaker.LATE_ACTIONS.add(new ChangeSpell(recipe, ingredients));
+    }
+  }
 
   @ZenMethod
   public static void addRecipe(IItemStack output, IIngredient[] inputs) {
@@ -95,6 +111,27 @@ public class MortarTweaker {
     @Override
     public String getRecipeInfo() {
       return String.format("MultiMortarRecipe for variable input of %s into variable output of %s.", multiRecipes.get(0).getIngredients().get(0).getMatchingStacks()[0].getDisplayName(), multiRecipes.get(0).getResult().getDisplayName());
+    }
+  }
+
+  private static class ChangeSpell extends BaseAction {
+    private SpellBase spell;
+    private List<Ingredient> ingredients;
+
+    private ChangeSpell (SpellBase spell, List<Ingredient> ingredients) {
+      super("ChangeSpellRecipe");
+      this.spell = spell;
+      this.ingredients = ingredients;
+    }
+
+    @Override
+    public void apply () {
+      spell.setIngredients(this.ingredients);
+    }
+
+    @Override
+    public String getRecipeInfo () {
+      return String.format("ChangeSpellRecipe to change spell %s ")
     }
   }
 }
