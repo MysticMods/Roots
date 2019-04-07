@@ -2,8 +2,7 @@
   "type": "forge:ore_shapeless",
   "ingredients": [
     {
-      "type": "forge:ore_dict",
-      "ore": "paper"
+      "item": "minecraft:book"
     },
     {
       "item": "roots:wildroot"
