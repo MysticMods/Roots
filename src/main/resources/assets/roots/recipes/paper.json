@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS"
+  ],
+  "key": {
+    "S": [
+      {
+        "item": "roots:wildroot"
+      }
+    ]
+  },
+  "result": {
+    "item": "minecraft:paper",
+    "data": 0,
+    "count": 3
+  }
+}

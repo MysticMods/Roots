@@ -1,15 +1,19 @@
 package epicsquid.roots.entity.ritual;
 
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
 import epicsquid.roots.ritual.RitualRegistry;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.MobEffects;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
@@ -65,6 +69,10 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
           didDrops = true;
         }
       }
+    }
+
+    if (didDrops) {
+      entity.addPotionEffect( new PotionEffect(MobEffects.GLOWING, 30, 0));
     }
     return didDrops;
   }

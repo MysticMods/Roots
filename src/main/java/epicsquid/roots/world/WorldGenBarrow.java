@@ -28,7 +28,7 @@ public class WorldGenBarrow extends StructureBase implements IWorldGenerator {
   public WorldGenBarrow() {
     super(9, 9);
 
-    addBlockMapping("c", Blocks.STONE_SLAB.getDefaultState().withProperty(BlockStoneSlab.VARIANT, BlockStoneSlab.EnumType.COBBLESTONE));
+    /*addBlockMapping("c", Blocks.STONE_SLAB.getDefaultState().withProperty(BlockStoneSlab.VARIANT, BlockStoneSlab.EnumType.COBBLESTONE));
     addBlockMapping("C", Blocks.COBBLESTONE.getDefaultState());
     addBlockMapping("T", ModBlocks.thatch.getDefaultState());
     addBlockMapping("W", Blocks.COBBLESTONE_WALL.getDefaultState());
@@ -42,7 +42,7 @@ public class WorldGenBarrow extends StructureBase implements IWorldGenerator {
     addLayer(new String[] { "   CCM   ", "  CAAAM  ", " MAAAAAM ", "CAAAAAAAC", "MAAAWAAAC", "CAAAAAAAC", " CAAAAAM ", "  CAAAC  ", "   CCM   " });
     addLayer(new String[] { "   CCC   ", "  CAAAC  ", " CAAAAAC ", "CAAAWAAAC", "CAAWWWAAC", "CAAAWAAAC", " CAAAAAC ", "  CAAAC  ", "   CCC   " });
     addLayer(new String[] { "   cCc   ", "  cTCTc  ", " cTTCAAc ", "cTTTCTATc", "CCCCACCCC", "cTTTCTATc", " cTTCTAc ", "  cACTc  ", "   cCc   " });
-    addLayer(new String[] { "         ", "    c    ", "    c    ", "    c    ", " ccc ccc ", "    c    ", "    c    ", "    c    ", "         " });
+    addLayer(new String[] { "         ", "    c    ", "    c    ", "    c    ", " ccc ccc ", "    c    ", "    c    ", "    c    ", "         " });*/
   }
 
   @Override

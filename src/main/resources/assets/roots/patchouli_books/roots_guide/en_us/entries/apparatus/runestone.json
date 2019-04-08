@@ -1,0 +1,17 @@
+{
+  "name": "Sure-Footed Stone",
+  "icon": "roots:runestone_trample",
+  "category": "apparatus",
+  "advancement": "roots:runestone",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "It is possible to prevent the unwanted trampling of herbs by crafting the Sure-Footed Stone. All creatures treading on your precious crops will instead find themselves sure-footed, with even the most clumsy being guided by nature's hand to prevent damage."
+    },
+    {
+      "type": "crafting",
+      "recipe": "roots:runestone_trample"
+    }
+  ]
+}

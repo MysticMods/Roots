@@ -98,6 +98,7 @@ public class PowderInventoryUtil {
     return alerts.get(herb);
   }
 
+  // TODO: THIS SHOULD NOT BE HERE
   @SubscribeEvent
   @SideOnly(Side.CLIENT)
   public static void renderHUD (RenderGameOverlayEvent.Post event) {
@@ -199,7 +200,11 @@ public class PowderInventoryUtil {
       float y = res.getScaledHeight() - anim; //res.getScaledHeight() - progress;
 
       int barWidth = 190 + 58;
+      if (!mc.player.getHeldItemOffhand().isEmpty()) {
+        barWidth += 58;
+      }
       x += ((barWidth / 2.0) * -1 + slot * 40) - 95;
+
 
       ItemStack stack = getStack();
 
