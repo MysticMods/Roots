@@ -33,6 +33,7 @@ tile.bonfire.name=Pyre
 tile.runestone.name=Runestone
 tile.runestone_brick.name=Runestone Brick
 tile.runestone_brick_alt.name=Runestone Brick
+tile.runestone_trample.name=Sure-Footed Stone
 tile.chiseled_runestone.name=Chiseled Runestone
 tile.fairy_dust.name=Fairy Dust
 tile.offertory_plate.name=Offering Plate
@@ -203,7 +204,7 @@ tile.wildwood_leaves.name=Wildwood Leaves
 item.petals.name=Petals
 item.runic_dust.name=Runic Dust
 item.cooked_aubergine.name=Cooked Aubergine
-item.stuffed_aubergine.name=Stuffed Aubgergine
+item.stuffed_aubergine.name=Stuffed Aubergine
 
 # JEI
 container.roots.runic_shears.name=Runic Shearing

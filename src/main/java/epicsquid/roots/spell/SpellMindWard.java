@@ -35,7 +35,6 @@ public class SpellMindWard extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
-    if (!player.world.isRemote) {
       boolean foundTarget = false;
       for (int i = 0; i < 4 && !foundTarget; i++) {
         double x = player.posX + player.getLookVec().x * 3.0 * (float) i;
@@ -46,12 +45,13 @@ public class SpellMindWard extends SpellBase {
         for (EntityLivingBase e : entities) {
           if (e.getUniqueID().compareTo(player.getUniqueID()) != 0 && !foundTarget) {
             foundTarget = true;
-            e.getEntityData().setInteger(Constants.MIND_WARD_TAG, 400);
+            if (!player.world.isRemote) {
+              e.getEntityData().setInteger(Constants.MIND_WARD_TAG, 400);
+            }
           }
         }
       }
-    }
-    return true;
+    return foundTarget;
   }
 
 }

@@ -7,7 +7,6 @@ import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockMushroom;
-import net.minecraft.block.BlockYellowFlower;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -15,7 +14,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
@@ -30,10 +29,10 @@ public class SpellZephyrSlice extends SpellBase {
 
     addCost(HerbRegistry.getHerbByName("cloud_berry"), 0.08f);
     addIngredients(
-            new ItemStack(Items.GOLDEN_SWORD),
+            new ItemStack(Items.IRON_SWORD),
             new ItemStack(ModItems.cloud_berry),
             new ItemStack(Items.APPLE),
-            new ItemStack(Items.SHEARS),
+            new OreIngredient("treeSapling"),
             new ItemStack(ModItems.petals)
     );
   }

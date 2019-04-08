@@ -1,0 +1,31 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "CHC",
+    "HMH",
+    "CHC"
+    ],
+  "key": {
+    "C": [
+      {
+        "item": "roots:chiseled_runestone"
+      }
+    ],
+    "H": [
+      {
+        "item": "roots:terra_moss"
+      }
+    ],
+    "M": [
+      {
+      "type": "forge:ore_dict",
+      "ore": "blockGold"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:runestone_trample",
+    "data": 0,
+    "count": 1
+  }
+}

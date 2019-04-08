@@ -8,6 +8,7 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.api.CustomPlantType;
 import epicsquid.roots.block.*;
 import epicsquid.roots.block.runes.BlockSpeedRune;
+import epicsquid.roots.block.runes.BlockTrample;
 import epicsquid.roots.tileentity.*;
 import epicsquid.roots.world.HugeBaffleCap;
 import net.minecraft.block.Block;
@@ -33,8 +34,8 @@ public class ModBlocks {
   public static BlockCropBase moonglow, aubergine, pereskia, wildroot, spirit_herb,wildewheet, cloud_berry, infernal_bulb, dewgonia, stalicripe;
 
   // Runestones
-  public static Block thatch, runestone, runestone_brick, runestone_brick_alt, chiseled_runestone, wildwoodLog, wildwoodPlanks, wildwoodLeaves, baffle_cap_huge_stem, baffle_cap_huge_top,
-      baffle_cap_mushroom, runic_soil_fire, runic_soil_water, runic_soil_air, runic_soil_earth, runic_soil;
+  public static Block runestone, runestone_brick, runestone_brick_alt, chiseled_runestone, wildwoodLog, wildwoodPlanks, wildwoodLeaves, baffle_cap_huge_stem, baffle_cap_huge_top,
+      baffle_cap_mushroom, runic_soil_fire, runic_soil_water, runic_soil_air, runic_soil_earth, runic_soil, trample_rune;
 
 
   // Decoration
@@ -52,7 +53,6 @@ public class ModBlocks {
     event.addBlock(pereskia = new BlockPereskiaCrop("pereskia_crop", EnumPlantType.Crop));
     event.addBlock(wildroot = new BlockWildrootCrop("wildroot_crop", EnumPlantType.Crop));
     event.addBlock(spirit_herb = new BlockSpiritHerbCrop("spirit_herb_crop", EnumPlantType.Crop));
-    event.addBlock(thatch = new BlockThatch(Material.LEAVES, SoundType.PLANT, 0.8f, "thatch")).setCreativeTab(Roots.tab);
     event.addBlock(baffle_cap_huge_stem = new BlockHugeMushroomBase(Material.WOOD, SoundType.WOOD, 0.8f, "baffle_cap_huge_stem").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addBlock(baffle_cap_huge_top = new BlockHugeMushroomBase(Material.WOOD, SoundType.WOOD, 0.8f, "baffle_cap_huge_top").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addBlock(baffle_cap_mushroom = new BlockMushroomBase("baffle_cap_mushroom", new HugeBaffleCap().getData()));
@@ -79,6 +79,7 @@ public class ModBlocks {
     event.addBlock(runestone_brick = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_brick").setModelCustom(true)).setCreativeTab(Roots.tab);
     event.addBlock(runestone_brick_alt = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_brick_alt").setModelCustom(true)).setCreativeTab(Roots.tab);
     event.addBlock(chiseled_runestone = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "chiseled_runestone").setModelCustom(true)).setCreativeTab(Roots.tab);
+    event.addBlock(trample_rune = new BlockTrample(Material.ROCK, SoundType.METAL, 1.4f, "runestone_trample").setModelCustom(true)).setCreativeTab(Roots.tab);
 
     event.addBlock(wildwoodLog = new BlockLogBase("wildwood_log").setCreativeTab(Roots.tab));
     event.addBlock(wildwoodPlanks = new BlockBase(Material.WOOD, SoundType.WOOD, 2.0f, "wildwood_planks").setModelCustom(true).setCreativeTab(Roots.tab));
