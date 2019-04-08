@@ -34,6 +34,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.logging.log4j.core.Logger;
 
 @Mod(modid = Roots.MODID, version = Roots.VERSION, name = Roots.NAME, dependencies = Roots.DEPENDENCIES)
 public class Roots {
@@ -48,6 +49,8 @@ public class Roots {
   public static final GuiHandler GUI_HANDLER = new GuiHandler();
 
   public static ModContainer CONTAINER = null;
+
+  public static Logger logger;
 
   @SidedProxy(clientSide = "epicsquid.roots.proxy.ClientProxy", serverSide = "epicsquid.roots.proxy.CommonProxy") public static CommonProxy proxy;
 
