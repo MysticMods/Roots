@@ -1,10 +1,5 @@
 package epicsquid.roots.init;
 
-import java.util.Collection;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.api.RegisterHerbEvent;
@@ -16,6 +11,10 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Collection;
 
 @EventBusSubscriber(modid = Roots.MODID)
 public class HerbRegistry {
@@ -58,6 +57,7 @@ public class HerbRegistry {
         return herb;
       }
     }
+    Roots.logger.warn("Herb \"" + name + "\" not found in HerbRegistry");
     return null;
   }
 
@@ -69,6 +69,7 @@ public class HerbRegistry {
         return herb;
       }
     }
+    Roots.logger.warn("Herb \"" + item.getRegistryName() + "\" not found in HerbRegistry");
     return null;
   }
 
