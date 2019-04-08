@@ -66,7 +66,8 @@ public class SpellDisarm extends SpellBase{
           if (!inventory.isEmpty())
           {
             for (ItemStack stack : inventory)
-              caster.world.spawnEntity(new EntityItem(caster.world, entity.posX, entity.posY, entity.posZ, stack));
+              if (Math.random() * 100 < 15)
+                caster.world.spawnEntity(new EntityItem(caster.world, entity.posX, entity.posY, entity.posZ, stack));
           }
           //Removes Armor
           //for (int i = 0; i < 4; i++)
