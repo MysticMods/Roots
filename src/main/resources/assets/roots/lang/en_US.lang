@@ -77,6 +77,8 @@ roots.spell.spell_scatter.name=Scatter
 roots.spell.spell_harvest.name=Harvest
 roots.spell.spell_zephyr_slice.name=Zephyr's Slice
 roots.spell.spell_rampant_growth.name=Rampant Growth
+roots.spell.spell_thaw.name=Thaw
+roots.spell.spell_disarm.name=Disarm
 
 roots.ritual.ritual_life.name=Healing Aura
 roots.ritual.ritual_storm.name=Heavy Storms

@@ -15,7 +15,7 @@ import java.util.List;
 
 public class SpellThaw extends SpellBase{
 
-  public static String spellName = "thaw";
+  public static String spellName = "spell_thaw";
   public static SpellThaw instance = new SpellThaw(spellName);
 
   public SpellThaw(String name) {
