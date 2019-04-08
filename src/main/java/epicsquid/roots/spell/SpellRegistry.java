@@ -34,5 +34,6 @@ public class SpellRegistry {
     spellRegistry.put(SpellZephyrSlice.spellName, SpellZephyrSlice.instance);
     spellRegistry.put(SpellRampantGrowth.spellName, SpellRampantGrowth.instance);
     spellRegistry.put(SpellThaw.spellName, SpellThaw.instance);
+    spellRegistry.put(SpellDisarm.spellName, SpellDisarm.instance);
   }
 }
