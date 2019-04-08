@@ -6,6 +6,7 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageDisarmFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -14,6 +15,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -51,9 +53,21 @@ public class SpellDisarm extends SpellBase{
 
       if (!entities.isEmpty()) {
         for (EntityLivingBase entity : entities) {
+
+          List<ItemStack> inventory = new ArrayList<>();
+          if (!entity.getHeldItem(EnumHand.MAIN_HAND).isEmpty())
+            inventory.add(entity.getHeldItemMainhand());
+          if (!entity.getHeldItem(EnumHand.OFF_HAND).isEmpty())
+            inventory.add(entity.getHeldItemOffhand());
+
           entity.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
           entity.setHeldItem(EnumHand.OFF_HAND, ItemStack.EMPTY);
 
+          if (!inventory.isEmpty())
+          {
+            for (ItemStack stack : inventory)
+              caster.world.spawnEntity(new EntityItem(caster.world, entity.posX, entity.posY, entity.posZ, stack));
+          }
           //Removes Armor
           //for (int i = 0; i < 4; i++)
           //  entity.replaceItemInInventory(i + 5, ItemStack.EMPTY);
