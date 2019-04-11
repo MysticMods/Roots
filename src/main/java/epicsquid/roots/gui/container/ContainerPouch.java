@@ -12,6 +12,7 @@ import javax.annotation.Nonnull;
 import epicsquid.roots.capability.pouch.PouchItemHandler;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.item.ItemPouch;
+import epicsquid.roots.util.PowderInventoryUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
@@ -27,12 +28,23 @@ public class ContainerPouch extends Container {
   private PouchItemHandler itemHandler;
   private EntityPlayer player;
 
-  public ContainerPouch(@Nonnull ItemStack stack, @Nonnull InventoryPlayer playerInv) {
-    this.player = playerInv.player;
-    if (stack.getItem() instanceof ItemPouch) {
-      itemHandler = (PouchItemHandler) stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+  public ContainerPouch(EntityPlayer player) {
+    this.player = player;
+    ItemStack main = player.getHeldItemMainhand();
+    ItemStack off = player.getHeldItemOffhand();
+    ItemStack first = PowderInventoryUtil.getPouch(player);
+
+    ItemStack use = ItemStack.EMPTY;
+    if (main.getItem() instanceof ItemPouch) {
+      use = main;
+    } else if (off.getItem() instanceof ItemPouch) {
+      use = off;
+    } else if (first.getItem() instanceof ItemPouch) {
+      use = first;
     }
-    createPlayerInventory(playerInv);
+
+    itemHandler = (PouchItemHandler) use.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+    createPlayerInventory(player.inventory);
     createPouchSlots();
   }
 

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import epicsquid.mysticallib.util.ListUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraftforge.items.IItemHandlerModifiable;
 
 public class PyreCraftingRecipe {
   private List<Ingredient> ingredients = new ArrayList<>();
@@ -82,5 +83,8 @@ public class PyreCraftingRecipe {
 
   public List<Ingredient> getIngredients(){
     return ingredients;
+  }
+
+  public void postCraft (ItemStack output, IItemHandlerModifiable handler) {
   }
 }

@@ -712,13 +712,13 @@ public class ModRecipes {
 
     // TODO: Work out a way to upgrade the component pouch rather than
     // TODO: simply overwriting the contents.
-    /*addCraftingRecipe("apothecary_pouch", new PyreCraftingRecipe(new ItemStack(ModItems.apothecary_pouch), 1f).addIngredients(
+    addCraftingRecipe("apothecary_pouch", new ApothecaryPouchRecipe(new ItemStack(ModItems.apothecary_pouch), 1).addIngredients(
             new ItemStack(Blocks.ENDER_CHEST),
             new ItemStack(ModItems.bark_wildwood),
             new ItemStack(ModItems.bark_wildwood),
             new ItemStack(ModItems.spirit_herb),
             new ItemStack(ModItems.component_pouch)
-    ));*/
+    ));
   }
 
   public static void afterHerbRegisterInit(){
