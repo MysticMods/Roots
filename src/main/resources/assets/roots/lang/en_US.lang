@@ -1,5 +1,7 @@
 itemGroup.roots=Roots
 
+item.assorted_seeds.name=Mixed Seeds
+item.cooked_seeds.name=Toasted Seeds
 item.pestle.name=Pestle
 item.spell_dust.name=Spell Dust
 item.staff.name=Staff
