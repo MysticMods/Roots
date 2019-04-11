@@ -52,6 +52,7 @@ roots.tooltip.trap_paper_health_divider= /
 roots.info.staff.slot_and_spell=Selected Slot (%d) has spell: %s
 roots.info.staff.no_slots=Your staff has no room for new spells!
 roots.info.staff.empty_slot=That staff slot is already empty.
+roots.info.pouch.no_herbs=You don't have enoguh %s!
 
 roots.spell.spell_wild_fire.name=Wildfire
 roots.spell.spell_dandelion_winds.name=Dandelion Winds
