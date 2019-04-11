@@ -8,10 +8,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import epicsquid.roots.block.BlockBonfire;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.recipe.conditions.Condition;
 import epicsquid.roots.recipe.conditions.ConditionItems;
 import epicsquid.roots.tileentity.TileEntityBonfire;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -48,6 +50,11 @@ public abstract class RitualBase {
   }
 
   public boolean canFire(TileEntityBonfire tileEntityBonfire, EntityPlayer player) {
+    IBlockState state = tileEntityBonfire.getWorld().getBlockState(tileEntityBonfire.getPos());
+    if (state.getValue(BlockBonfire.BURNING)) {
+      return false;
+    }
+
     for(Condition condition : this.conditions){
       if(!condition.checkCondition(tileEntityBonfire, player)){
         return false;
