@@ -52,10 +52,7 @@ public class PowderInventoryUtil {
     ItemStack pouch = getPouch(player);
     if (pouch.isEmpty()) return;
 
-    double used = ItemPouch.useQuantity(pouch, herb, amount);
-    if (used == 0) {
-      player.sendStatusMessage(new TextComponentTranslation("roots.info.pouch.no_herbs", herb.getName()), true);
-    }
+    ItemPouch.useQuantity(pouch, herb, amount);
     resolveSlots(herb);
   }
 
