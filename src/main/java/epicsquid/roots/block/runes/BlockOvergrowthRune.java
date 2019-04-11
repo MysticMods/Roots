@@ -20,6 +20,6 @@ public class BlockOvergrowthRune extends BlockTEBase {
     @Override
     @Nullable
     public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
-        return new TileEntityWildrootRune(RuneRegistry.getRune("overgrowth_rune"));
+        return new TileEntityWildrootRune();
     }
 }
