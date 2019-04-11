@@ -3,11 +3,11 @@ package epicsquid.roots.init;
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.block.*;
 import epicsquid.mysticallib.event.RegisterContentEvent;
+import epicsquid.roots.block.runes.BlockWildwoodRune;
 import epicsquid.roots.util.EnumRunicSoilType;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.CustomPlantType;
 import epicsquid.roots.block.*;
-import epicsquid.roots.block.runes.BlockSpeedRune;
 import epicsquid.roots.block.runes.BlockTrample;
 import epicsquid.roots.tileentity.*;
 import epicsquid.roots.world.HugeBaffleCap;
@@ -23,7 +23,7 @@ public class ModBlocks {
 
   // All block
   public static Block mortar, bonfire,imbuer, structure_marker, offertory_plate, unending_bowl;
-  public static Block incense_burner, speed_rune;
+  public static Block incense_burner, wildwood_rune;
 
   public static BlockCropBase moonglow, aubergine, pereskia, wildroot, spirit_herb,wildewheet, cloud_berry, infernal_bulb, dewgonia, stalicripe;
 
@@ -94,7 +94,7 @@ public class ModBlocks {
     event.addBlock(incense_burner = new BlockIncenseBurner(Material.ROCK, SoundType.STONE, 1.4f, "incense_burner", TileEntityIncenseBurner.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
 
     //Runes
-    event.addBlock(speed_rune = new BlockSpeedRune(Material.WOOD, SoundType.WOOD, 1.4f, "rune_speed", TileEntityWildrootRune.class)).setCreativeTab(Roots.tab);
+    event.addBlock(wildwood_rune = new BlockWildwoodRune(Material.WOOD, SoundType.WOOD, 1.4f, "rune_speed", TileEntityWildrootRune.class)).setCreativeTab(Roots.tab);
 
   }
 

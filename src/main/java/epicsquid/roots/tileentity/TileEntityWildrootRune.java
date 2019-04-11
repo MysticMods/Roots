@@ -4,55 +4,55 @@ import javax.annotation.Nonnull;
 
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.rune.RuneBase;
 import epicsquid.roots.rune.RuneRegistry;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TileEntityWildrootRune extends TileBase implements ITickable {
 
     private TileEntityIncenseBurner incenseBurner;
     private static final BlockPos[] INCENSE_POSITIONS = new BlockPos[]{new BlockPos(0, -1, 1), new BlockPos(0, -1, -1), new BlockPos(1, -1, 0), new BlockPos(-1, -1, 0)};
 
-    private RuneBase rune;
+    public final Map<Item, PotionEffect> effectItemMap = new HashMap<>();
 
-    public TileEntityWildrootRune(RuneBase rune){
+    public TileEntityWildrootRune(){
         this.incenseBurner = null;
-        this.rune = rune;
-        System.out.println("Okay instantiated! " + rune);
+
+        effectItemMap.put(ModItems.moonglow_leaf, new PotionEffect(MobEffects.SPEED, 1200, 1));
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        if(rune != null){
-            rune.saveToEntity(compound);
-        }
         return super.writeToNBT(compound);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
-        System.out.println(compound.getString("rune"));
-        System.out.println(RuneRegistry.getRune(compound));
-        this.rune = RuneRegistry.getRune(compound);
         super.readFromNBT(compound);
     }
 
     @Override
     public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
         ItemStack heldItem = player.getHeldItem(hand);
-        if(heldItem.isEmpty()){
-            if(rune == null){
-                return true;
+        if(heldItem.isEmpty() && incenseBurner.isLit()){
+            if(this.effectItemMap.getOrDefault(incenseBurner.burningItem(), null) != null){
+                player.addPotionEffect(this.effectItemMap.get(incenseBurner.burningItem()));
             }
-            rune.activate(this, player);
         }
         return true;
     }
@@ -80,21 +80,11 @@ public class TileEntityWildrootRune extends TileBase implements ITickable {
                 }
             }
         }
-
-        if(this.rune != null){
-            if(rune.isCharged(this)){
-                this.rune.update(getWorld(), getPos());
-            }
-        }
     }
 
     public TileEntityIncenseBurner getIncenseBurner() {
         return incenseBurner;
     }
 
-    public RuneBase getRune() {
-
-        return rune;
-    }
 
 }
