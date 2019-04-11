@@ -7,8 +7,6 @@
 
 package epicsquid.roots.gui.container;
 
-import javax.annotation.Nonnull;
-
 import epicsquid.roots.capability.pouch.PouchItemHandler;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.item.ItemPouch;
@@ -18,10 +16,11 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
+
+import javax.annotation.Nonnull;
 
 public class ContainerPouch extends Container {
 
@@ -173,9 +172,9 @@ public class ContainerPouch extends Container {
       if (stack.getItem() instanceof ItemPouch) {
         return ItemStack.EMPTY;
       }
-      return super.slotClick(slotId, dragType, clickTypeIn, player);
     }
-    return ItemStack.EMPTY;
+
+    return super.slotClick(slotId, dragType, clickTypeIn, player);
   }
 
   public int getHerbSlots() {
