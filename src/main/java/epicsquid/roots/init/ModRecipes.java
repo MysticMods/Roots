@@ -599,7 +599,7 @@ public class ModRecipes {
             new ItemStack(ModItems.bark_oak)));
 
     addCraftingRecipe("living_arrow",
-        new PyreCraftingRecipe(new ItemStack(ModItems.living_arrow, 10), 1).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_arrow, 6), 1).addIngredients(
             new OreIngredient("treeLeaves"),
             new OreIngredient("treeLeaves"),
             new OreIngredient("rootsBark"),
