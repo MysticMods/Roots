@@ -25,7 +25,7 @@ public class GuiHandler implements IGuiHandler {
   public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
     switch (id) {
     case POUCH_ID:
-      return new ContainerPouch(PowderInventoryUtil.getPouch(player), player.inventory);
+      return new ContainerPouch(player);
     default:
       return null;
     }
@@ -36,7 +36,7 @@ public class GuiHandler implements IGuiHandler {
   public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
     switch (id) {
     case POUCH_ID:
-      return new GuiPouch(new ContainerPouch(PowderInventoryUtil.getPouch(player), player.inventory));
+      return new GuiPouch(new ContainerPouch(player));
     default:
       return null;
     }
