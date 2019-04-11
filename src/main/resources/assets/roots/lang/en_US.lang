@@ -55,6 +55,9 @@ roots.info.staff.slot_and_spell=Selected Slot (%d) has spell: %s
 roots.info.staff.no_slots=Your staff has no room for new spells!
 roots.info.staff.empty_slot=That staff slot is already empty.
 roots.info.pouch.no_herbs=You don't have enough %s in your component pouch!
+roots.info.pyre.repeat1=Sneak-Right-Click
+roots.info.pyre.repeat2=to repeat ritual.
+roots.info.pyre.repeat3=to repeat craft.
 
 roots.spell.spell_wild_fire.name=Wildfire
 roots.spell.spell_dandelion_winds.name=Dandelion Winds
