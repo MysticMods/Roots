@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 
 import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.roots.api.CustomPlantType;
-import epicsquid.mysticalworld.util.EnumRunicSoilType;
+import epicsquid.roots.util.EnumRunicSoilType;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;

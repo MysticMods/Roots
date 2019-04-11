@@ -3,7 +3,7 @@ package epicsquid.roots.init;
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.block.*;
 import epicsquid.mysticallib.event.RegisterContentEvent;
-import epicsquid.mysticalworld.util.EnumRunicSoilType;
+import epicsquid.roots.util.EnumRunicSoilType;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.CustomPlantType;
 import epicsquid.roots.block.*;
@@ -14,16 +14,10 @@ import epicsquid.roots.world.HugeBaffleCap;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 
 import javax.annotation.Nonnull;
-import java.util.Random;
 
 public class ModBlocks {
 
