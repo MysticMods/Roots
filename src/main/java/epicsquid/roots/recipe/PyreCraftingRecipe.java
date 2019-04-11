@@ -13,10 +13,12 @@ public class PyreCraftingRecipe {
   private ItemStack result;
   private String name;
   private int xp;
+  private int burnTime;
 
   public PyreCraftingRecipe(ItemStack result, int xp){
     this.result = result;
     this.xp = xp;
+    this.burnTime = 200;
   }
 
   public PyreCraftingRecipe(ItemStack result) {
@@ -59,6 +61,15 @@ public class PyreCraftingRecipe {
 
   public ItemStack getResult() {
     return result;
+  }
+
+  public int getBurnTime() {
+    return burnTime;
+  }
+
+  public PyreCraftingRecipe setBurnTime(int burnTime) {
+    this.burnTime = burnTime;
+    return this;
   }
 
   public int getXP() {

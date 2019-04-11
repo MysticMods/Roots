@@ -153,7 +153,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           this.lastUsedIngredients = recipe.getIngredients();
           this.craftingResult = recipe.getResult();
           this.craftingXP = recipe.getXP();
-          this.burnTime = 200;
+          this.burnTime = recipe.getBurnTime();
           this.doBigFlame = true;
           for (int i = 0; i < inventory.getSlots(); i++) {
             inventory.extractItem(i, 1, false);
