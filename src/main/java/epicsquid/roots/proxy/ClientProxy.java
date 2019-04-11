@@ -1,6 +1,7 @@
 package epicsquid.roots.proxy;
 
 import epicsquid.roots.RegistryManager;
+import epicsquid.roots.gui.Keybinds;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import epicsquid.roots.tileentity.TileEntityBonfireRenderer;
 import epicsquid.roots.tileentity.TileEntityImbuer;
@@ -28,6 +29,8 @@ public class ClientProxy extends CommonProxy {
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOffertoryPlate.class, new TileEntityOffertoryPlateRenderer());
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityIncenseBurner.class, new TileEntityIncenseBurnerRenderer());
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWildrootRune.class, new TileEntityWildrootRuneRenderer());
+
+    Keybinds.init();
   }
 
   @Override
