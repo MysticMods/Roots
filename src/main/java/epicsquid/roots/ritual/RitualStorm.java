@@ -19,6 +19,7 @@ public class RitualStorm extends RitualBase {
             new ItemStack(ModItems.cloud_berry),
             new ItemStack(Items.BEETROOT_SEEDS)
     ));
+    setIcon(ModItems.ritual_storm);
   }
 
   @Override

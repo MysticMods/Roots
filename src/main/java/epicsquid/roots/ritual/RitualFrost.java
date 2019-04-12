@@ -20,6 +20,7 @@ public class  RitualFrost extends RitualBase {
         new ItemStack(ModItems.bark_spruce),
         new ItemStack(ModItems.bark_spruce)
     ));
+    setIcon(ModItems.ritual_frost);
   }
 
   @Override

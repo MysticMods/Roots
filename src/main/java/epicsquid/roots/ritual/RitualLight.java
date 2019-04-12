@@ -20,6 +20,7 @@ public class RitualLight extends RitualBase {
             new ItemStack(Items.GLOWSTONE_DUST)
     ));
     addCondition(new ConditionWorldTime(0, 13000));
+    setIcon(ModItems.ritual_light);
   }
 
   @Override

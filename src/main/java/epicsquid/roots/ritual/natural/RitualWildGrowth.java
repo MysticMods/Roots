@@ -29,7 +29,7 @@ public class RitualWildGrowth extends RitualBase {
                 new ItemStack(ModItems.bark_dark_oak),
                 new ItemStack(Items.DYE, 1, 15))
         );
-
+        setIcon(ModItems.ritual_wild_growth);
     }
 
     @Override

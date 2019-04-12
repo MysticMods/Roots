@@ -20,6 +20,7 @@ public class RitualPurity extends RitualBase {
             new ItemStack(Items.MILK_BUCKET), 
             new ItemStack(Items.GLASS_BOTTLE)
     ));
+    setIcon(ModItems.ritual_purity);
   }
 
   @Override

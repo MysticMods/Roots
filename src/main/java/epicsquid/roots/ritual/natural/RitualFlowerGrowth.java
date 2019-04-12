@@ -23,6 +23,7 @@ public class RitualFlowerGrowth extends RitualBase {
         ));
 
         addCondition(new ConditionWorldTime(0, 13000));
+        setIcon(ModItems.ritual_flower_growth);
     }
 
     @Override
