@@ -13,6 +13,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 
 public abstract class SpellBase {
@@ -57,7 +58,13 @@ public abstract class SpellBase {
     for(Map.Entry<Herb, Double> entry : this.costs.entrySet()){
       Herb herb = entry.getKey();
       double d = entry.getValue();
-      matches = matches && PowderInventoryUtil.getPowderTotal(player, herb) >= d;
+      if (matches) {
+        double r = PowderInventoryUtil.getPowderTotal(player, herb);
+        matches = r >= d;
+        if (!matches) {
+          player.sendStatusMessage(new TextComponentTranslation("roots.info.pouch.no_herbs", new TextComponentTranslation(String.format("item.%s.name", herb.getName()))), true);
+        }
+      }
     }
     return matches && costs.size() > 0 || player.capabilities.isCreativeMode;
   }

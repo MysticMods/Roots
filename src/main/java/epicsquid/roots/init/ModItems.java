@@ -117,7 +117,12 @@ public class ModItems {
     event.addItem(stuffed_aubergine = new ItemFoodBase("stuffed_aubergine", 11, false).setModelCustom(true).setCreativeTab(Roots.tab));
 
     event.addItem(seeds = new ItemBase("assorted_seeds").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(cooked_seeds = new ItemCookedSeeds("cooked_seeds", 1, 0.4f, false).setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(cooked_seeds = new ItemFoodBase("cooked_seeds", 1, 0.4f, false) {
+      @Override
+      public int getMaxItemUseDuration(ItemStack stack) {
+        return 8;
+      }
+    }.setModelCustom(true).setCreativeTab(Roots.tab));
 
     // KEEP AT END
     registerSeedDrops();

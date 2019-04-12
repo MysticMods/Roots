@@ -64,6 +64,14 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     }
   };
 
+  public ItemStackHandler inventory_storage = new ItemStackHandler(5);
+
+  public void clearStorage () {
+    for (int i = 0; i < 5; i++) {
+      inventory_storage.setStackInSlot(i, ItemStack.EMPTY);
+    }
+  }
+
   public TileEntityBonfire() {
     super();
   }
@@ -153,10 +161,11 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           this.lastUsedIngredients = recipe.getIngredients();
           this.craftingResult = recipe.getResult();
           this.craftingXP = recipe.getXP();
-          this.burnTime = 200;
+          this.burnTime = recipe.getBurnTime();
           this.doBigFlame = true;
           for (int i = 0; i < inventory.getSlots(); i++) {
-            inventory.extractItem(i, 1, false);
+              ItemStack item = inventory.extractItem(i, 1, false);
+              inventory_storage.insertItem(i, item, false);
           }
           markDirty();
           PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
@@ -290,11 +299,16 @@ public class TileEntityBonfire extends TileBase implements ITickable {
 
         //Spawn item if crafting recipe
         if(!world.isRemote && !this.craftingResult.isEmpty()) {
-          EntityItem item = new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, this.craftingResult.copy());
+          ItemStack result = this.craftingResult.copy();
+          if (this.lastRecipeUsed != null) {
+            this.lastRecipeUsed.postCraft(result, inventory_storage);
+          }
+          EntityItem item = new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, result);
           item.setCustomNameTag("bonfire");
           world.spawnEntity(item);
           XPUtil.spawnXP(world, getPos(), this.craftingXP);
           this.craftingResult = ItemStack.EMPTY;
+          clearStorage();
         }
       }
       //Spawn Fire particles

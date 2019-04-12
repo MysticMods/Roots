@@ -7,16 +7,19 @@ import java.util.stream.Collectors;
 import epicsquid.mysticallib.util.ListUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraftforge.items.IItemHandlerModifiable;
 
 public class PyreCraftingRecipe {
   private List<Ingredient> ingredients = new ArrayList<>();
   private ItemStack result;
   private String name;
   private int xp;
+  private int burnTime;
 
   public PyreCraftingRecipe(ItemStack result, int xp){
     this.result = result;
     this.xp = xp;
+    this.burnTime = 200;
   }
 
   public PyreCraftingRecipe(ItemStack result) {
@@ -61,6 +64,15 @@ public class PyreCraftingRecipe {
     return result;
   }
 
+  public int getBurnTime() {
+    return burnTime;
+  }
+
+  public PyreCraftingRecipe setBurnTime(int burnTime) {
+    this.burnTime = burnTime;
+    return this;
+  }
+
   public int getXP() {
     return xp;
   }
@@ -71,5 +83,8 @@ public class PyreCraftingRecipe {
 
   public List<Ingredient> getIngredients(){
     return ingredients;
+  }
+
+  public void postCraft (ItemStack output, IItemHandlerModifiable handler) {
   }
 }

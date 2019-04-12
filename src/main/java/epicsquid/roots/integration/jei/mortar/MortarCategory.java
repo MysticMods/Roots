@@ -17,6 +17,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 
 public class MortarCategory implements IRecipeCategory<MortarWrapper> {
@@ -54,7 +55,10 @@ public class MortarCategory implements IRecipeCategory<MortarWrapper> {
       MortarRecipe recipe = recipeWrapper.recipe;
       for (int i = 0; i < recipe.getIngredients().size(); i++) {
         group.init(i, true, i * 18, 2);
-        group.set(i, Arrays.asList(recipe.getIngredients().get(i).getMatchingStacks()));
+        Ingredient ing = recipe.getIngredients().get(i);
+        if (ing != null) {
+          group.set(i, Arrays.asList(ing.getMatchingStacks()));
+        }
       }
       group.init(5, false, 72, 27);
       group.set(5, recipe.getResult());

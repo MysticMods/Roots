@@ -51,6 +51,13 @@ public class ItemSpellDust extends ItemBase {
     if (capability == null) return stack;
 
     capability.setSpellToSlot(spell);
+    NBTTagCompound tag = stack.getTagCompound();
+    if (tag == null) {
+      tag = new NBTTagCompound();
+      stack.setTagCompound(tag);
+    }
+
+    tag.setString("spell_name", spell.getName());
     return stack;
   }
 

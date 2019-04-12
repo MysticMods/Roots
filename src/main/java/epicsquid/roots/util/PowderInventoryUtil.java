@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -27,7 +28,7 @@ public class PowderInventoryUtil {
   private static HerbAlert slot1 = null;
   private static HerbAlert slot2 = null;
 
-  private static ItemStack getPouch (EntityPlayer player) {
+  public static ItemStack getPouch (EntityPlayer player) {
     for (int i = 0; i < 36; i++) {
       if (player.inventory.getStackInSlot(i).getItem() instanceof ItemPouch) {
         return player.inventory.getStackInSlot(i);

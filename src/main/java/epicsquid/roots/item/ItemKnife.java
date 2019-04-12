@@ -56,7 +56,6 @@ public class ItemKnife extends ItemToolBase {
           world.setBlockState(pos, recipe.getRuneBlock());
 
           if (!player.isCreative()) {
-            player.getHeldItemOffhand().shrink(1);
             player.getHeldItemMainhand().damageItem(1, player);
           }
 

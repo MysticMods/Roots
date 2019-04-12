@@ -24,7 +24,7 @@ public class SpellSkySoarer extends SpellBase {
     addCost(HerbRegistry.getHerbByName("cloud_berry"), 0.15f);
     addIngredients(
         new ItemStack(Items.SUGAR),
-        new ItemStack(ModItems.runic_dust),
+        new ItemStack(ModItems.petals),
         new OreIngredient("string"),
         new ItemStack(ModItems.aubergine_seed),
         new ItemStack(ModItems.cloud_berry)

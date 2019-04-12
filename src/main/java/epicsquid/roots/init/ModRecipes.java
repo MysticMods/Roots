@@ -533,6 +533,7 @@ public class ModRecipes {
     GameRegistry.addSmelting(epicsquid.mysticalworld.init.ModItems.iron_dust, new ItemStack(Items.IRON_INGOT), 0.125f);
     GameRegistry.addSmelting(epicsquid.mysticalworld.init.ModItems.gold_dust, new ItemStack(Items.GOLD_INGOT), 0.125f);
     GameRegistry.addSmelting(ModItems.aubergine, new ItemStack(ModItems.cooked_aubergine), 0.125f);
+    GameRegistry.addSmelting(ModItems.seeds, new ItemStack(ModItems.seeds), 0.05f);
 
     initCraftingRecipes();
     RunicShearRecipes.initRecipes();
@@ -598,7 +599,7 @@ public class ModRecipes {
             new ItemStack(ModItems.bark_oak)));
 
     addCraftingRecipe("living_arrow",
-        new PyreCraftingRecipe(new ItemStack(ModItems.living_arrow, 10), 1).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_arrow, 6), 1).addIngredients(
             new OreIngredient("treeLeaves"),
             new OreIngredient("treeLeaves"),
             new OreIngredient("rootsBark"),
@@ -702,15 +703,22 @@ public class ModRecipes {
             new OreIngredient("plankWood"),
             new OreIngredient("gemDiamond")));
 
+    addCraftingRecipe("seeds", new PyreCraftingRecipe(new ItemStack(ModItems.cooked_seeds, 5), 1).addIngredients(
+            new ItemStack(ModItems.seeds),
+            new ItemStack(ModItems.seeds),
+            new ItemStack(ModItems.seeds),
+            new ItemStack(ModItems.seeds),
+            new ItemStack(ModItems.seeds)).setBurnTime(20));
+
     // TODO: Work out a way to upgrade the component pouch rather than
     // TODO: simply overwriting the contents.
-    /*addCraftingRecipe("apothecary_pouch", new PyreCraftingRecipe(new ItemStack(ModItems.apothecary_pouch), 1f).addIngredients(
+    addCraftingRecipe("apothecary_pouch", new ApothecaryPouchRecipe(new ItemStack(ModItems.apothecary_pouch), 1).addIngredients(
             new ItemStack(Blocks.ENDER_CHEST),
             new ItemStack(ModItems.bark_wildwood),
             new ItemStack(ModItems.bark_wildwood),
             new ItemStack(ModItems.spirit_herb),
             new ItemStack(ModItems.component_pouch)
-    ));*/
+    ));
   }
 
   public static void afterHerbRegisterInit(){

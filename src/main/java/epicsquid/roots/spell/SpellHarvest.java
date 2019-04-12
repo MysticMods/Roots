@@ -46,7 +46,7 @@ public class SpellHarvest extends SpellBase {
     this.castType = EnumCastType.INSTANTANEOUS;
     this.cooldown = 25;
 
-    addCost(HerbRegistry.getHerbByName("spirit_herb"), 0.55f);
+    addCost(HerbRegistry.getHerbByName("wildewheet"), 0.55f);
     addIngredients(
             new ItemStack(Items.GOLDEN_HOE),
             new ItemStack(ModItems.spirit_herb),
