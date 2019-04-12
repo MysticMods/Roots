@@ -100,6 +100,23 @@ roots.ritual.ritual_overgrowth.name=Overgrowth
 roots.ritual.ritual_flower_growth.name=Flower Growth
 roots.ritual.ritual_transmutation.name=Transmutation
 
+item.ritual_life.name=Healing Aura Ritual
+item.ritual_storm.name=Heavy Storms Ritual
+item.ritual_light.name=Divine Protection Ritual
+item.ritual_fire_storm.name=Storm of Fire Ritual
+item.ritual_regrowth.name=Natural Growth Ritual
+item.ritual_windwall.name=Windwall Ritual
+item.ritual_warden.name=Warding Protection Ritual
+item.ritual_natural_aura.name=Natural Aura Ritual
+item.ritual_purity.name=Purify Ritual
+item.ritual_frost.name=Frost Lands Ritual
+item.ritual_animal_harvest.name=Animal Harvest Ritual
+item.ritual_summoning.name=Summon Creatures Ritual
+item.ritual_wild_growth.name=Wildroot Growth Ritual
+item.ritual_overgrowth.name=Overgrowth Ritual
+item.ritual_flower_growth.name=Flower Growth Ritual
+item.ritual_transmutation.name=Transmutation Ritual
+
 #Knifes
 item.wood_knife.name=Wooden Knife
 item.stone_knife.name=Stone Knife
