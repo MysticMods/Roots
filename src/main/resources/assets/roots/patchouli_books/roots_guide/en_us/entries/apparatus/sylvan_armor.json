@@ -2,7 +2,7 @@
   "name": "Sylvan Armor",
   "icon": "roots:sylvan_helmet",
   "category": "apparatus",
-  "advancement": "roots:sylvan_armor",
+  "advancement": "roots:pyre",
   "secret": true,
   "pages": [
     {
