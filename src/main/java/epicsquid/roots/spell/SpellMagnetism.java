@@ -19,7 +19,7 @@ public class SpellMagnetism extends SpellBase {
   public static SpellMagnetism instance = new SpellMagnetism(spellName);
 
   public SpellMagnetism(String name) {
-    super(name, TextFormatting.DARK_RED, 53f / 255f, 31f / 255f, 34f / 255f, 37f / 255f, 45f / 255f, 80f / 255f);
+    super(name, TextFormatting.RED, 255f / 255f, 130f / 255f, 130f / 255f, 130f / 255f, 130f / 255f, 255f / 255f);
     this.castType = EnumCastType.INSTANTANEOUS;
     this.cooldown = 100;
 
