@@ -27,6 +27,7 @@ public class PacketHandler {
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageRampantLifeInfusionFX.MessageHolder.class, MessageRampantLifeInfusionFX.class, Side.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageOvergrowthEffectFX.MessageHolder.class, MessageOvergrowthEffectFX.class, Side.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageDisarmFX.Handler.class, MessageDisarmFX.class, Side.CLIENT);
+    epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageSoftTouchFX.Handler.class, MessageSoftTouchFX.class, Side.CLIENT);
 
   }
 }

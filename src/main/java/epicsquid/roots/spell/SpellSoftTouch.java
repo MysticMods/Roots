@@ -1,7 +1,9 @@
 package epicsquid.roots.spell;
 
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.network.fx.MessageSoftTouchFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -49,6 +51,8 @@ public class SpellSoftTouch extends SpellBase {
         {
           caster.world.setBlockState(pos, Blocks.AIR.getBlockState().getBaseState());
           caster.world.spawnEntity(new EntityItem(caster.world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(state.getBlock())));
+
+          PacketHandler.sendToAllTracking(new MessageSoftTouchFX(pos.getX(), pos.getY(), pos.getZ()), caster);
           return true;
         }
       }
