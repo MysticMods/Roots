@@ -21,6 +21,7 @@ public class RitualNaturalAura extends RitualBase {
             new ItemStack(Items.DYE, 1, 15)
     ));
     addCondition(new ConditionStandingStones(3, 3));
+    setIcon(ModItems.ritual_natural_aura);
   }
 
   @Override

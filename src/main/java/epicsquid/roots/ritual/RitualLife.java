@@ -22,6 +22,7 @@ public class RitualLife extends RitualBase {
             new ItemStack(Blocks.SAPLING, 1, 2)
     ));
     addCondition(new ConditionTrees(BlockPlanks.EnumType.BIRCH, 4));
+    setIcon(ModItems.ritual_life);
   }
 
   @Override

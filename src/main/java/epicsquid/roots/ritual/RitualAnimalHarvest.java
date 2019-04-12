@@ -25,6 +25,7 @@ public class RitualAnimalHarvest extends RitualBase {
             new ItemStack(ModItems.wildroot)
     ));
     addCondition(new ConditionStandingStones(3, 3));
+    setIcon(ModItems.ritual_animal_harvest);
   }
 
 

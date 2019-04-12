@@ -18,6 +18,7 @@ public class RitualWindwall extends RitualBase {
             new ItemStack(ModItems.bark_birch),
             new ItemStack(Items.FEATHER)
     ));
+    setIcon(ModItems.ritual_windwall);
   }
 
   @Override

@@ -22,6 +22,7 @@ public class RitualTransmutation extends RitualBase {
             new ItemStack(ModItems.bark_birch),
             new ItemStack(ModBlocks.chiseled_runestone)));
     addCondition(new ConditionStandingStones(3, 1));
+    setIcon(ModItems.ritual_transmutation);
   }
 
   @Override

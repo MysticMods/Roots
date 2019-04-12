@@ -21,6 +21,7 @@ public class RitualFireStorm extends RitualBase {
             new ItemStack(Items.BLAZE_POWDER)
     ));
     addCondition(new ConditionStandingStones(3, 3));
+    setIcon(ModItems.ritual_fire_storm);
   }
 
   @Override

@@ -22,6 +22,7 @@ public class RitualWarden extends RitualBase {
     ));
     addCondition(new ConditionStandingStones(3, 3));
     addCondition(new ConditionStandingStones(4, 3));
+    setIcon(ModItems.ritual_warden);
   }
 
   @Override

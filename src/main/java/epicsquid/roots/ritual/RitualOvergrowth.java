@@ -20,6 +20,7 @@ public class RitualOvergrowth extends RitualBase {
             new ItemStack(Blocks.TALLGRASS, 1, 1),
             new ItemStack(ModItems.bark_oak),
             new ItemStack(ModItems.bark_oak)));
+    setIcon(ModItems.ritual_overgrowth);
   }
 
   @Override

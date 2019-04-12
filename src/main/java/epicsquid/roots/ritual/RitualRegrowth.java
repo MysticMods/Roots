@@ -18,6 +18,7 @@ public class RitualRegrowth extends RitualBase {
             new ItemStack(Blocks.SAPLING), 
             new ItemStack(Blocks.SAPLING)
     ));
+    setIcon(ModItems.ritual_regrowth);
   }
 
   @Override

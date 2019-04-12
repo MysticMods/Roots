@@ -15,6 +15,7 @@ import epicsquid.roots.recipe.conditions.ConditionItems;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -27,12 +28,21 @@ public abstract class RitualBase {
 
   private List<Condition> conditions = new ArrayList<>();
 
+  private Item icon;
   private String name;
   private int duration;
 
   public RitualBase(String name, int duration) {
     this.name = name;
     this.duration = duration;
+  }
+
+  public Item getIcon() {
+    return icon;
+  }
+
+  public void setIcon(Item icon) {
+    this.icon = icon;
   }
 
   protected void addCondition(Condition condition){
