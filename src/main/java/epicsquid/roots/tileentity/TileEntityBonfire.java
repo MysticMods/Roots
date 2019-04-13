@@ -262,7 +262,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       }
     }
     if (doBigFlame) {
-      BlockBonfire.setState(true, world, pos);
+      if (burnTime != 0) {
+        BlockBonfire.setState(true, world, pos);
+      }
       doBigFlame = false;
       markDirty();
       PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
