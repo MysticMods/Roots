@@ -64,7 +64,7 @@ public class ItemKnife extends ItemToolBase {
         if (block.getBlock() == Blocks.MOSSY_COBBLESTONE) {
           if (!world.isRemote) {
             world.setBlockState(pos, Blocks.COBBLESTONE.getDefaultState());
-            ItemSpawnUtil.spawnItem(world, pos.add(0, 1, 0), new ItemStack(ModItems.terra_moss));
+            ItemSpawnUtil.spawnItem(world, player.getPosition().add(0, 1, 0), new ItemStack(ModItems.terra_moss));
             if (!player.capabilities.isCreativeMode) {
               player.getHeldItem(hand).damageItem(1, player);
             }
