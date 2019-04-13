@@ -7,6 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class  RitualFrost extends RitualBase {
@@ -21,6 +22,8 @@ public class  RitualFrost extends RitualBase {
         new ItemStack(ModItems.bark_spruce)
     ));
     setIcon(ModItems.ritual_frost);
+    setColor(TextFormatting.AQUA);
+    setBold(true);
   }
 
   @Override

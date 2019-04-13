@@ -20,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public abstract class RitualBase {
@@ -31,10 +32,28 @@ public abstract class RitualBase {
   private Item icon;
   private String name;
   private int duration;
+  private TextFormatting color;
+  private boolean bold;
 
   public RitualBase(String name, int duration) {
     this.name = name;
     this.duration = duration;
+  }
+
+  public String getFormat () {
+    String format = this.color + "";
+    if (this.bold) {
+      format += TextFormatting.BOLD;
+    }
+    return format;
+  }
+
+  public void setColor(TextFormatting color) {
+    this.color = color;
+  }
+
+  public void setBold(boolean bold) {
+    this.bold = bold;
   }
 
   public Item getIcon() {

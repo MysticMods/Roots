@@ -6,6 +6,7 @@ import epicsquid.roots.recipe.conditions.ConditionItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class RitualWindwall extends RitualBase {
@@ -19,6 +20,7 @@ public class RitualWindwall extends RitualBase {
             new ItemStack(Items.FEATHER)
     ));
     setIcon(ModItems.ritual_windwall);
+    setColor(TextFormatting.DARK_AQUA);
   }
 
   @Override

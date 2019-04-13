@@ -7,6 +7,7 @@ import epicsquid.roots.recipe.conditions.ConditionStandingStones;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class RitualFireStorm extends RitualBase {
@@ -22,6 +23,8 @@ public class RitualFireStorm extends RitualBase {
     ));
     addCondition(new ConditionStandingStones(3, 3));
     setIcon(ModItems.ritual_fire_storm);
+    setColor(TextFormatting.RED);
+    setBold(true);
   }
 
   @Override

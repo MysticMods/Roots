@@ -6,6 +6,7 @@ import epicsquid.roots.recipe.conditions.ConditionItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class RitualRegrowth extends RitualBase {
@@ -19,6 +20,8 @@ public class RitualRegrowth extends RitualBase {
             new ItemStack(Blocks.SAPLING)
     ));
     setIcon(ModItems.ritual_regrowth);
+    setColor(TextFormatting.GREEN);
+    setBold(true);
   }
 
   @Override
