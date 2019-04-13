@@ -1,27 +1,25 @@
 package epicsquid.roots.item;
 
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.RunicShearRecipe;
+import epicsquid.roots.util.ItemSpawnUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import java.util.Random;
 
 public class ItemRunicShears extends ItemBase {
 
@@ -54,8 +52,10 @@ public class ItemRunicShears extends ItemBase {
         } else {
           world.setBlockState(pos, recipe.getReplacementBlock().getDefaultState());
         }
-        world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), recipe.getDrop()));
-        player.getHeldItem(hand).damageItem(1, player);
+        ItemSpawnUtil.spawnItem(world, pos.add(0, 1, 0), recipe.getDrop().copy());
+        if (!player.capabilities.isCreativeMode) {
+          player.getHeldItem(hand).damageItem(1, player);
+        }
       } else {
         for (int i = 0; i < 50; i++) {
           ClientProxy.particleRenderer.spawnParticle(world, Util.getLowercaseClassName(ParticleGlitter.class), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, random.nextDouble() * 0.1 * (random.nextDouble() > 0.5 ? -1 : 1), random.nextDouble() * 0.1 * (random.nextDouble() > 0.5 ? -1 : 1),

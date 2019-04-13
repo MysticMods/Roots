@@ -1,15 +1,13 @@
 package epicsquid.roots.tileentity;
 
-import javax.annotation.Nonnull;
-
 import epicsquid.mysticallib.network.MessageTEUpdate;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.util.ItemSpawnUtil;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -22,6 +20,8 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
+
+import javax.annotation.Nonnull;
 
 public class TileEntityIncenseBurner extends TileBase implements ITickable {
 
@@ -77,7 +77,7 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
             }
             ItemStack extracted = inventory.extractItem(0, inventory.getStackInSlot(0).getCount(), false);
             if (!world.isRemote) {
-                world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, extracted));
+                ItemSpawnUtil.spawnItem(world, getPos(), extracted);
             }
             PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
             return false;

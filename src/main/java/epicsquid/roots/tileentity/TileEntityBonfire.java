@@ -11,6 +11,7 @@ import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
+import epicsquid.roots.util.ItemSpawnUtil;
 import epicsquid.roots.util.XPUtil;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -228,7 +229,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       for (int i = 4; i >= 0; i--) {
         if (!inventory.getStackInSlot(i).isEmpty()) {
           ItemStack extracted = inventory.extractItem(i, inventory.getStackInSlot(i).getCount(), false);
-          world.spawnEntity(new EntityItem(world, player.posX, player.posY + 0.5, player.posZ, extracted));
+          ItemSpawnUtil.spawnItem(world, player.posX, player.posY + 1, player.posZ, false, extracted, 0, -1);
           markDirty();
           PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
           pickupDelay = 40;
@@ -303,9 +304,10 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           if (this.lastRecipeUsed != null) {
             this.lastRecipeUsed.postCraft(result, inventory_storage);
           }
-          EntityItem item = new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, result);
+
+          EntityItem item = new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 1, getPos().getZ() + 0.5, result);
           item.setCustomNameTag("bonfire");
-          world.spawnEntity(item);
+          ItemSpawnUtil.spawnItem(world, item);
           XPUtil.spawnXP(world, getPos(), this.craftingXP);
           this.craftingResult = ItemStack.EMPTY;
           clearStorage();

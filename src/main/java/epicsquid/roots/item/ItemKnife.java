@@ -1,21 +1,14 @@
 package epicsquid.roots.item;
 
-import java.util.Collections;
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-
 import com.google.common.collect.Sets;
-
 import epicsquid.mysticallib.item.ItemToolBase;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.RunicCarvingRecipe;
-import net.minecraft.block.BlockLog;
+import epicsquid.roots.util.ItemSpawnUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -26,6 +19,10 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import java.util.Collections;
+import java.util.Set;
 
 public class ItemKnife extends ItemToolBase {
 
@@ -67,8 +64,10 @@ public class ItemKnife extends ItemToolBase {
         if (block.getBlock() == Blocks.MOSSY_COBBLESTONE) {
           if (!world.isRemote) {
             world.setBlockState(pos, Blocks.COBBLESTONE.getDefaultState());
-            world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY() + 1, pos.getZ(), new ItemStack(ModItems.terra_moss)));
-            player.getHeldItem(hand).damageItem(1, player);
+            ItemSpawnUtil.spawnItem(world, pos.add(0, 1, 0), new ItemStack(ModItems.terra_moss));
+            if (!player.capabilities.isCreativeMode) {
+              player.getHeldItem(hand).damageItem(1, player);
+            }
           }
           world.playSound(player, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
         }
