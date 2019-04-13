@@ -40,6 +40,8 @@ public class ModItems {
   public static Item moonglow_seed, aubergine_seed, pereskia_bulb, spirit_herb_seed, wildewheet_seed, cloud_berry, infernal_bulb,
           stalicripe, dewgonia, wildroot;
 
+  public static Item ritual_life, ritual_storm, ritual_light, ritual_fire_storm, ritual_regrowth, ritual_windwall, ritual_warden, ritual_natural_aura, ritual_purity, ritual_frost, ritual_animal_harvest, ritual_summoning, ritual_wild_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation;
+
   //Armor Materials
   public static final ItemArmor.ArmorMaterial sylvanArmorMaterial = EnumHelper.addArmorMaterial("SYLVAN", Roots.MODID + ":sylvan", 8, new int[]{1, 3, 4, 2}, 20, SoundEvents.BLOCK_SNOW_PLACE, 0F);
   public static final ItemArmor.ArmorMaterial wildwoodArmorMaterial = EnumHelper.addArmorMaterial("WILDWOOD", Roots.MODID + ":wildwood", 20, new int[]{3, 5, 6, 3}, 10, SoundEvents.BLOCK_WOOD_PLACE, 0F);
@@ -123,6 +125,24 @@ public class ModItems {
         return 8;
       }
     }.setModelCustom(true).setCreativeTab(Roots.tab));
+
+    // Rituals
+    event.addItem(ritual_life = new ItemBase("ritual_life").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_storm = new ItemBase("ritual_storm").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_light = new ItemBase("ritual_light").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_fire_storm = new ItemBase("ritual_fire_storm").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_regrowth = new ItemBase("ritual_regrowth").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_windwall = new ItemBase("ritual_windwall").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_warden = new ItemBase("ritual_warden").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_natural_aura = new ItemBase("ritual_natural_aura").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_purity = new ItemBase("ritual_purity").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_frost = new ItemBase("ritual_frost").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_animal_harvest = new ItemBase("ritual_animal_harvest").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_summoning = new ItemBase("ritual_summoning").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_wild_growth = new ItemBase("ritual_wild_growth").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_overgrowth = new ItemBase("ritual_overgrowth").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_flower_growth = new ItemBase("ritual_flower_growth").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_transmutation = new ItemBase("ritual_transmutation").setModelCustom(false).setCreativeTab(null));
 
     // KEEP AT END
     registerSeedDrops();

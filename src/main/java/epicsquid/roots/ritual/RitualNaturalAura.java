@@ -7,6 +7,7 @@ import epicsquid.roots.recipe.conditions.ConditionStandingStones;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class RitualNaturalAura extends RitualBase {
@@ -21,6 +22,9 @@ public class RitualNaturalAura extends RitualBase {
             new ItemStack(Items.DYE, 1, 15)
     ));
     addCondition(new ConditionStandingStones(3, 3));
+    setIcon(ModItems.ritual_natural_aura);
+    setColor(TextFormatting.DARK_RED);
+    setBold(true);
   }
 
   @Override

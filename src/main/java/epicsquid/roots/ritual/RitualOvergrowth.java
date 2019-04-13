@@ -7,6 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class RitualOvergrowth extends RitualBase {
@@ -20,6 +21,9 @@ public class RitualOvergrowth extends RitualBase {
             new ItemStack(Blocks.TALLGRASS, 1, 1),
             new ItemStack(ModItems.bark_oak),
             new ItemStack(ModItems.bark_oak)));
+    setIcon(ModItems.ritual_overgrowth);
+    setColor(TextFormatting.DARK_GREEN);
+    setBold(true);
   }
 
   @Override

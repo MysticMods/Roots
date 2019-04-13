@@ -65,6 +65,9 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
       entity.captureDrops = false;
       if (!ForgeHooks.onLivingDrops(entity, DamageSource.GENERIC, entity.capturedDrops, 0, false)) {
         for (EntityItem item : entity.capturedDrops) {
+          item.motionY = 0;
+          item.motionX = 0;
+          item.motionZ = 0;
           world.spawnEntity(item);
           didDrops = true;
         }

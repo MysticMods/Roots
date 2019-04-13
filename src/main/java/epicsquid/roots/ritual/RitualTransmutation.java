@@ -8,6 +8,7 @@ import epicsquid.roots.recipe.conditions.ConditionStandingStones;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class RitualTransmutation extends RitualBase {
@@ -22,6 +23,8 @@ public class RitualTransmutation extends RitualBase {
             new ItemStack(ModItems.bark_birch),
             new ItemStack(ModBlocks.chiseled_runestone)));
     addCondition(new ConditionStandingStones(3, 1));
+    setIcon(ModItems.ritual_transmutation);
+    setColor(TextFormatting.DARK_PURPLE);
   }
 
   @Override

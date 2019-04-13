@@ -10,8 +10,8 @@ import epicsquid.roots.item.ItemSpellDust;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.util.ItemSpawnUtil;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -138,7 +138,7 @@ public class TileEntityMortar extends TileBase {
           ItemStack dust = new ItemStack(ModItems.spell_dust, 1);
           ItemSpellDust.createData(dust, spell);
           if (!world.isRemote) {
-            world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, dust));
+            ItemSpawnUtil.spawnItem(world, getPos(), dust);
             markDirty();
             PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
           }
@@ -172,7 +172,7 @@ public class TileEntityMortar extends TileBase {
             }
           }
           if (!world.isRemote) {
-            world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, mortarRecipe.getResult()));
+            ItemSpawnUtil.spawnItem(world, getPos(), mortarRecipe.getResult().copy());
             markDirty();
             PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
           }

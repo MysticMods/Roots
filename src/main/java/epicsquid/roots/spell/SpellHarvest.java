@@ -4,11 +4,10 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import epicsquid.roots.util.ItemSpawnUtil;
 import net.minecraft.block.*;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -127,8 +126,7 @@ public class SpellHarvest extends SpellBase {
           player.world.setBlockState(pos, newState);
           for (ItemStack stack : drops) {
             if (stack.isEmpty()) continue;
-            EntityItem spawn = new EntityItem(player.world, pos.getX(), pos.getY(), pos.getZ(), stack);
-            player.world.spawnEntity(spawn);
+            ItemSpawnUtil.spawnItem(player.world, pos, stack);
           }
         }
       }

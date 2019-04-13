@@ -7,6 +7,7 @@ import epicsquid.roots.recipe.conditions.ConditionWorldTime;
 import epicsquid.roots.ritual.RitualBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class RitualFlowerGrowth extends RitualBase {
@@ -23,6 +24,8 @@ public class RitualFlowerGrowth extends RitualBase {
         ));
 
         addCondition(new ConditionWorldTime(0, 13000));
+        setIcon(ModItems.ritual_flower_growth);
+        setColor(TextFormatting.LIGHT_PURPLE);
     }
 
     @Override

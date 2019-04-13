@@ -39,10 +39,13 @@ public class RenderBonfire {
       mc.fontRenderer.drawStringWithShadow(I18n.format("roots.info.pyre.repeat3"), x + 40, y + 34, 16777215);
     } else if (te.getLastRitualUsed() != null) {
       RitualBase ritual = te.getLastRitualUsed();
+      if (ritual.getIcon() != null) {
+        mc.getRenderItem().renderItemIntoGUI(new ItemStack(ritual.getIcon()), x + 40, y);
+      }
       String s = I18n.format("roots.ritual." + ritual.getName() + ".name");
-      mc.fontRenderer.drawStringWithShadow(s, (float) x + 48,  y, 16777215);
-      mc.fontRenderer.drawStringWithShadow(I18n.format("roots.info.pyre.repeat1"), x + 40, y + 22, 16777215);
-      mc.fontRenderer.drawStringWithShadow(I18n.format("roots.info.pyre.repeat2"), x + 40, y + 34, 16777215);
+      mc.fontRenderer.drawStringWithShadow(ritual.getFormat() + s, (float) x + 40,  y + 22, 16777215);
+      mc.fontRenderer.drawStringWithShadow(I18n.format("roots.info.pyre.repeat1"), x + 40, y + 37, 16777215);
+      mc.fontRenderer.drawStringWithShadow(I18n.format("roots.info.pyre.repeat2"), x + 40, y + 49, 16777215);
     }
   }
 }

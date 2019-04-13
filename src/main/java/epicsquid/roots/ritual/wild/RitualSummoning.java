@@ -27,6 +27,7 @@ import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class RitualSummoning extends RitualBase {
@@ -53,6 +54,10 @@ public class RitualSummoning extends RitualBase {
     entityItem.put(EntityFox.class, Lists.newArrayList(new ItemStack(epicsquid.mysticalworld.init.ModItems.pelt)));
     entityItem.put(EntityBeetle.class, Lists.newArrayList(new ItemStack(epicsquid.mysticalworld.init.ModItems.carapace)));
     entityItem.put(EntityDeer.class, Lists.newArrayList(new ItemStack(Items.LEATHER)));
+
+    setIcon(ModItems.ritual_summoning);
+    setColor(TextFormatting.DARK_PURPLE);
+    setBold(true);
   }
 
   @Override

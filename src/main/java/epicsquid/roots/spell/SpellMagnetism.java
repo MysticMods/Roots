@@ -23,7 +23,7 @@ public class SpellMagnetism extends SpellBase {
     this.castType = EnumCastType.INSTANTANEOUS;
     this.cooldown = 100;
 
-    addCost(HerbRegistry.getHerbByName("wildroot"), 0.25f);
+    addCost(HerbRegistry.getHerbByName("wildroot"), 0.195f);
     addIngredients(
         new OreIngredient("ingotIron"),
         new OreIngredient("dustRedstone"),

@@ -1,19 +1,14 @@
 package epicsquid.roots.tileentity;
 
-import java.util.List;
-import java.util.UUID;
-
-import javax.annotation.Nonnull;
-
 import epicsquid.mysticallib.network.MessageTEUpdate;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.entity.grove.EntityGrove;
 import epicsquid.roots.grove.GroveType;
+import epicsquid.roots.util.ItemSpawnUtil;
 import epicsquid.roots.util.OfferingUtil;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -25,6 +20,10 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
+
+import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.UUID;
 
 public class TileEntityOffertoryPlate extends TileBase {
   public ItemStackHandler inventory = new ItemStackHandler(1) {
@@ -120,17 +119,14 @@ public class TileEntityOffertoryPlate extends TileBase {
     if (heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND) {
       if (!inventory.getStackInSlot(0).isEmpty()) {
         ItemStack extracted = inventory.extractItem(0, inventory.getStackInSlot(0).getCount(), false);
-        if (!world.isRemote) {
-          world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, extracted));
-        }
+        ItemSpawnUtil.spawnItem(world, getPos(), extracted);
         PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
         return true;
       }
     }
-    if (!world.isRemote) {
-
+    /*if (!world.isRemote) {
       PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
-    }
+    }*/ // Nothing has changed, why send an update packet here?
     return false;
   }
 

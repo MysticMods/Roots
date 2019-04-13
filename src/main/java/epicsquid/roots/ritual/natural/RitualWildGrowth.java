@@ -14,6 +14,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -29,7 +30,9 @@ public class RitualWildGrowth extends RitualBase {
                 new ItemStack(ModItems.bark_dark_oak),
                 new ItemStack(Items.DYE, 1, 15))
         );
-
+        setIcon(ModItems.ritual_wild_growth);
+        setColor(TextFormatting.DARK_GRAY);
+        setBold(true);
     }
 
     @Override

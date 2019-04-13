@@ -15,10 +15,12 @@ import epicsquid.roots.recipe.conditions.ConditionItems;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public abstract class RitualBase {
@@ -27,12 +29,39 @@ public abstract class RitualBase {
 
   private List<Condition> conditions = new ArrayList<>();
 
+  private Item icon;
   private String name;
   private int duration;
+  private TextFormatting color;
+  private boolean bold;
 
   public RitualBase(String name, int duration) {
     this.name = name;
     this.duration = duration;
+  }
+
+  public String getFormat () {
+    String format = this.color + "";
+    if (this.bold) {
+      format += TextFormatting.BOLD;
+    }
+    return format;
+  }
+
+  public void setColor(TextFormatting color) {
+    this.color = color;
+  }
+
+  public void setBold(boolean bold) {
+    this.bold = bold;
+  }
+
+  public Item getIcon() {
+    return icon;
+  }
+
+  public void setIcon(Item icon) {
+    this.icon = icon;
   }
 
   protected void addCondition(Condition condition){
