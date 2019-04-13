@@ -7,6 +7,7 @@ import epicsquid.roots.recipe.conditions.ConditionStandingStones;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class RitualWarden extends RitualBase {
@@ -23,6 +24,8 @@ public class RitualWarden extends RitualBase {
     addCondition(new ConditionStandingStones(3, 3));
     addCondition(new ConditionStandingStones(4, 3));
     setIcon(ModItems.ritual_warden);
+    setColor(TextFormatting.DARK_BLUE);
+    setBold(true);
   }
 
   @Override

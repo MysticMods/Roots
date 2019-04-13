@@ -11,8 +11,10 @@ import epicsquid.roots.integration.jei.carving.RunicCarvingCategory;
 import epicsquid.roots.integration.jei.carving.RunicCarvingWrapper;
 import epicsquid.roots.integration.jei.mortar.MortarCategory;
 import epicsquid.roots.integration.jei.mortar.MortarWrapper;
+import epicsquid.roots.integration.jei.ritual.RitualCategory;
 import epicsquid.roots.integration.jei.ritual.RitualCraftingCategory;
 import epicsquid.roots.integration.jei.ritual.RitualCraftingWrapper;
+import epicsquid.roots.integration.jei.ritual.RitualWrapper;
 import epicsquid.roots.integration.jei.shears.RunicShearsCategory;
 import epicsquid.roots.integration.jei.shears.RunicShearsWrapper;
 import epicsquid.roots.recipe.MortarRecipe;
@@ -20,6 +22,8 @@ import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.recipe.RunicCarvingRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
 import epicsquid.roots.recipe.SpellRecipe;
+import epicsquid.roots.ritual.RitualBase;
+import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import mezz.jei.api.IGuiHelper;
@@ -38,6 +42,7 @@ public class JEIRootsPlugin implements IModPlugin {
   public static final String RUNIC_CARVING = Roots.MODID + ".runic_carving";
   public static final String RITUAL_CRAFTING = Roots.MODID + ".ritual_crafting";
   public static final String MORTAR_AND_PESTLE = Roots.MODID + ".mortar_and_pestle";
+  public static final String RITUAL = Roots.MODID + ".ritual";
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registry) {
@@ -46,7 +51,8 @@ public class JEIRootsPlugin implements IModPlugin {
         new RunicShearsCategory(helper),
         new RunicCarvingCategory(helper),
         new RitualCraftingCategory(helper),
-        new MortarCategory(helper)
+        new MortarCategory(helper),
+        new RitualCategory(helper)
     );
   }
 
@@ -57,12 +63,14 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(PyreCraftingRecipe.class, RitualCraftingWrapper::new, RITUAL_CRAFTING);
     registry.handleRecipes(MortarRecipe.class, MortarWrapper::new, MORTAR_AND_PESTLE);
     registry.handleRecipes(SpellBase.class, MortarWrapper::new, MORTAR_AND_PESTLE);
+    registry.handleRecipes(RitualBase.class, RitualWrapper::new, RITUAL);
 
     registry.addRecipes(ModRecipes.getRunicShearRecipes().values(), RUNIC_SHEARS);
     registry.addRecipes(ModRecipes.getRunicCarvingRecipes(), RUNIC_CARVING);
     registry.addRecipes(ModRecipes.getPyreCraftingRecipes().values(), RITUAL_CRAFTING);
     registry.addRecipes(ModRecipes.getMortarRecipes(), MORTAR_AND_PESTLE);
     registry.addRecipes(SpellRegistry.spellRegistry.values(), MORTAR_AND_PESTLE);
+    registry.addRecipes(RitualRegistry.ritualRegistry.values(), RITUAL);
 
     registry.addRecipeCatalyst(new ItemStack(ModItems.runic_shears), RUNIC_SHEARS);
     registry.addRecipeCatalyst(new ItemStack(ModItems.wood_knife), RUNIC_CARVING);

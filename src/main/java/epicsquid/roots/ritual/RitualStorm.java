@@ -7,6 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class RitualStorm extends RitualBase {
@@ -20,6 +21,8 @@ public class RitualStorm extends RitualBase {
             new ItemStack(Items.BEETROOT_SEEDS)
     ));
     setIcon(ModItems.ritual_storm);
+    setColor(TextFormatting.DARK_AQUA);
+    setBold(true);
   }
 
   @Override
