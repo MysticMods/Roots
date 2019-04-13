@@ -42,7 +42,7 @@ tile.offertory_plate.name=Offering Plate
 tile.unending_bowl.name=Unending Bowl
 tile.structure_marker.name=Structure Marker
 tile.incense_burner.name=Incense Burner
-tile.speed_rune.name=Wildroot Speed Rune
+tile.wildwood_rune.name=Wildroot Rune
 
 roots.tooltip.petaldust.notag=This Petal Dust has no NBT data! It is potentially prone to errors and should not be used!
 roots.tooltip.staff.notag=This Staff has no NBT data! It is potentially prone to errors and should not be used!

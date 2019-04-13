@@ -33,7 +33,15 @@ public class TileEntityWildrootRune extends TileBase implements ITickable {
     public TileEntityWildrootRune(){
         this.incenseBurner = null;
 
-        effectItemMap.put(ModItems.moonglow_leaf, new PotionEffect(MobEffects.SPEED, 1200, 1));
+        effectItemMap.put(ModItems.moonglow_leaf, new PotionEffect(MobEffects.SPEED, 2400, 1));
+        effectItemMap.put(ModItems.spirit_herb, new PotionEffect(MobEffects.NIGHT_VISION, 2400, 1));
+        effectItemMap.put(ModItems.infernal_bulb, new PotionEffect(MobEffects.FIRE_RESISTANCE, 2400, 1));
+        effectItemMap.put(ModItems.dewgonia, new PotionEffect(MobEffects.WATER_BREATHING, 3600, 1));
+        effectItemMap.put(ModItems.stalicripe, new PotionEffect(MobEffects.STRENGTH, 1200, 1));
+        effectItemMap.put(ModItems.spirit_herb, new PotionEffect(MobEffects.INVISIBILITY, 2400, 1));
+        effectItemMap.put(ModItems.cloud_berry, new PotionEffect(MobEffects.JUMP_BOOST, 1200, 1));
+        effectItemMap.put(ModItems.pereskia, new PotionEffect(MobEffects.REGENERATION, 200, 1));
+
     }
 
     @Override
