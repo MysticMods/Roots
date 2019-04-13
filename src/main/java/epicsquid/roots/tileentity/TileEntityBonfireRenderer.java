@@ -2,6 +2,8 @@ package epicsquid.roots.tileentity;
 
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
+import epicsquid.roots.ritual.RitualBase;
+import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
@@ -42,13 +44,14 @@ public class TileEntityBonfireRenderer extends TileEntitySpecialRenderer<TileEnt
 
     PyreCraftingRecipe recipe = ModRecipes.getCraftingRecipe(renderItems);
     if (recipe != null)
-      renderResult(tem, x, y, z, recipe);
+      renderResult(tem, x, y, z, recipe.getResult(), 0.8f);
+    RitualBase ritual = RitualRegistry.getRitual(tem, Minecraft.getMinecraft().player);
+    if (ritual != null)
+      renderResult(tem, x, y, z, new ItemStack(ritual.getIcon()), 1f);
   }
 
-  private void renderResult(TileEntityBonfire tem, double x, double y, double z, PyreCraftingRecipe recipe)
+  private void renderResult(TileEntityBonfire tem, double x, double y, double z, ItemStack result, float alpha)
   {
-    ItemStack result = recipe.getResult();
-
     GlStateManager.enableBlend();
     RenderHelper.enableStandardItemLighting();
     GlStateManager.pushMatrix();
@@ -56,12 +59,16 @@ public class TileEntityBonfireRenderer extends TileEntitySpecialRenderer<TileEnt
     GlStateManager.scale(0.5, 0.5, 0.5);
 
     IBakedModel model = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(result, tem.getWorld(), null);
-    GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-    GlStateManager.color(1F, 1F, 1F, 0.8F);
+    if (alpha != 1f) {
+      GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+      GlStateManager.color(1F, 1F, 1F, alpha);
+    }
     Minecraft.getMinecraft().getRenderItem().renderItem(result, model);
     GlStateManager.popMatrix();
     GlStateManager.disableRescaleNormal();
-    GlStateManager.disableBlend();
+    if (alpha != 1f) {
+      GlStateManager.disableBlend();
+    }
     GlStateManager.color(1F, 1F, 1F, 1F);
   }
 }
