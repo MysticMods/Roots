@@ -1,6 +1,6 @@
 package epicsquid.roots.entity.ritual;
 
-import net.minecraft.entity.item.EntityItem;
+import epicsquid.roots.util.ItemSpawnUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -50,7 +50,7 @@ public class EntitySpawnItem extends EntityRitualBase {
     public void onUpdate() {
         if(this.dropTime == ticksTillDrop){
             if (!world.isRemote) {
-                world.spawnEntity(new EntityItem(world, this.posX , this.posY, this.posZ, this.spawnStack));
+                ItemSpawnUtil.spawnItem(world, this.posX, this.posY, this.posZ, true, this.spawnStack.copy(), -1, -1);
             }
         }
         dropTime++;

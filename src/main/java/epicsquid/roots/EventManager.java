@@ -18,6 +18,7 @@ import epicsquid.roots.network.MessagePlayerDataUpdate;
 import epicsquid.roots.network.MessagePlayerGroveUpdate;
 import epicsquid.roots.network.fx.*;
 import epicsquid.roots.util.Constants;
+import epicsquid.roots.util.ItemSpawnUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockNewLog;
@@ -27,7 +28,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -97,7 +97,7 @@ public class EventManager {
             int count = new Random().nextInt(getBarkAmount(tool)) +1;
             for (int i = 0; i < count; i ++){
               if (!event.getWorld().isRemote){
-                event.getWorld().spawnEntity(new EntityItem(event.getWorld(),event.getPos().getX()+0.5,event.getPos().getY()+0.5,event.getPos().getZ()+0.5,bark));
+                ItemSpawnUtil.spawnItem(event.getWorld(), event.getPos(), bark);
               }
             }
           }
