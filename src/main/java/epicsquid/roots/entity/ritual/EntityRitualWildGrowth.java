@@ -38,7 +38,7 @@ public class EntityRitualWildGrowth extends EntityRitualBase {
       setDead();
     }
     if (!world.isRemote) {
-      if (this.ticksExisted % 100 == 0) {
+      if (this.ticksExisted % 400 == 0) {
         List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), 10, 20, 10, ModBlocks.wildroot);
         if (eligiblePositions.isEmpty()) return;
 
