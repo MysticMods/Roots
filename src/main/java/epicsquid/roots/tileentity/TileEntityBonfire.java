@@ -210,14 +210,21 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         }
       }
       if (this.lastUsedIngredients != null) {
-        IItemHandler inventory = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
-        assert inventory != null;
-        for (Ingredient ingredient : lastUsedIngredients) {
-          for (int i = 0; i < inventory.getSlots(); i++) {
-            ItemStack stack = inventory.getStackInSlot(i);
-            if (ingredient.apply(stack)) {
-              insertItemFromPlayerInventory(stack, player, i);
-              break;
+        if (player.capabilities.isCreativeMode) {
+          int i = 0;
+          for (Ingredient ingredient : this.lastUsedIngredients) {
+            inventory.setStackInSlot(i++, ingredient.getMatchingStacks()[0]);
+          }
+        } else {
+          IItemHandler inventory = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+          assert inventory != null;
+          for (Ingredient ingredient : lastUsedIngredients) {
+            for (int i = 0; i < inventory.getSlots(); i++) {
+              ItemStack stack = inventory.getStackInSlot(i);
+              if (ingredient.apply(stack)) {
+                insertItemFromPlayerInventory(stack, player, i);
+                break;
+              }
             }
           }
         }
