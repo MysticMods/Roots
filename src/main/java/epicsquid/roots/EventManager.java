@@ -6,7 +6,6 @@ import epicsquid.roots.capability.grove.IPlayerGroveCapability;
 import epicsquid.roots.capability.grove.PlayerGroveCapabilityProvider;
 import epicsquid.roots.capability.playerdata.IPlayerDataCapability;
 import epicsquid.roots.capability.playerdata.PlayerDataCapabilityProvider;
-import epicsquid.roots.capability.spell.SpellHolderCapabilityProvider;
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.entity.spell.EntityPetalShell;
 import epicsquid.roots.init.ModBlocks;
@@ -131,13 +130,6 @@ public class EventManager {
         event.getEntityPlayer().getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null)
             .setData(event.getOriginal().getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null).getData());
       }
-    }
-  }
-
-  @SubscribeEvent
-  public void addItemStackCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
-    if(event.getObject().getItem() == ModItems.staff || event.getObject().getItem() == ModItems.spell_dust) {
-      event.addCapability(new ResourceLocation(Roots.MODID, "spell_holder_capability"), new SpellHolderCapabilityProvider());
     }
   }
 

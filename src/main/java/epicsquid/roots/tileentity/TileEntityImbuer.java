@@ -1,15 +1,11 @@
 package epicsquid.roots.tileentity;
 
-import javax.annotation.Nonnull;
-
 import epicsquid.mysticallib.network.MessageTEUpdate;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.capability.spell.ISpellHolderCapability;
-import epicsquid.roots.capability.spell.SpellHolderCapability;
-import epicsquid.roots.capability.spell.SpellHolderCapabilityProvider;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.inventory.SpellHolder;
 import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.network.fx.MessageImbueCompleteFX;
 import epicsquid.roots.particle.ParticleUtil;
@@ -33,6 +29,8 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
+
+import javax.annotation.Nonnull;
 
 public class TileEntityImbuer extends TileBase implements ITickable {
   public ItemStackHandler inventory = new ItemStackHandler(2) {
@@ -99,9 +97,8 @@ public class TileEntityImbuer extends TileBase implements ITickable {
           }
         }
       } else if(heldItem.getItem() == ModItems.staff || ModuleRegistry.isModule(heldItem)){
-        if (heldItem.hasCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null)) {
-          ISpellHolderCapability cap = heldItem.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-          assert cap != null;
+        if (heldItem.getItem() == ModItems.staff) {
+          SpellHolder cap = SpellHolder.fromStack(heldItem);
           if (!cap.hasFreeSlot() && inventory.getStackInSlot(0).getItem() != ModItems.runic_dust) {
             if (world.isRemote) {
               player.sendMessage(new TextComponentTranslation("roots.info.staff.no_slots").setStyle(new Style().setColor(TextFormatting.GOLD)));
@@ -158,8 +155,8 @@ public class TileEntityImbuer extends TileBase implements ITickable {
       angle += 2.0f;
       ItemStack spellDust = inventory.getStackInSlot(0);
       boolean clearSlot = spellDust.getItem() == ModItems.runic_dust;
-      ISpellHolderCapability capability = spellDust.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-      if((capability != null && capability.getSelectedSpell() != null) || clearSlot){
+      SpellHolder capability = SpellHolder.fromStack(spellDust);
+      if ((capability.getSelectedSpell() != null) || clearSlot) {
         SpellBase spell;
         if (clearSlot) {
           spell = new FakeSpellRunicDust();
@@ -184,7 +181,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
           if(inventory.getStackInSlot(1).getItem() == ModItems.staff){
             ItemStack staff = inventory.getStackInSlot(1);
             SpellBase spell;
-            if(!clearSlot && capability != null && capability.getSelectedSpell() != null) {
+            if (!clearSlot && capability.getSelectedSpell() != null) {
               ItemStaff.createData(staff, capability);
               spell = capability.getSelectedSpell();
             } else {

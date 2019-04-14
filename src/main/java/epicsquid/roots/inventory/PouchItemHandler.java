@@ -5,7 +5,7 @@
  * This means no, you cannot steal this code. This is licensed for sole use by Horizon Studio and its subsidiaries, you MUST be granted specific written permission by Horizon Studio to use this code, thinking you have permission IS NOT PERMISSION!
  */
 
-package epicsquid.roots.capability.pouch;
+package epicsquid.roots.inventory;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -18,12 +18,9 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class PouchItemHandler extends ItemStackHandler implements ICapabilityProvider {
+public class PouchItemHandler extends ItemStackHandler {
 
-  public static final int COMPONENT_POUCH_HERB_SLOTS = 6;
-  public static final int COMPONENT_POUCH_INVENTORY_SLOTS = 12;
-  public static final int APOTHECARY_POUCH_HERB_SLOTS = 9;
-  public static final int APOTHECARY_POUCH_INVENTORY_SLOTS = 18;
+
 
   // Marks the start of the herb slots as well
   private int inventorySlots;
@@ -50,18 +47,6 @@ public class PouchItemHandler extends ItemStackHandler implements ICapabilityPro
       return stack;
     }
     return super.insertItem(slot, stack, simulate);
-  }
-
-  @Override
-  public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-    return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
-  }
-
-  @Nullable
-  @Override
-  @SuppressWarnings("unchecked")
-  public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-    return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T) this : null;
   }
 
   public int getHerbSlots() {

@@ -21,7 +21,6 @@ import epicsquid.roots.recipe.RunicShearRecipe;
 import epicsquid.roots.recipe.recipes.RunicShearRecipes;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import scala.collection.script.Remove;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 

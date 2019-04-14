@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import com.blamejared.mtlib.helpers.InputHelper;
 import com.blamejared.mtlib.helpers.LogHelper;
@@ -32,8 +33,7 @@ public class PyreCraftingTweaker {
     if (inputs.length != 5) {
       CraftTweakerAPI.getLogger().logError("Pyre Crafting Ritual must have 5 items: " + name);
     }
-    CraftTweaker.LATE_ACTIONS.add(new Add(Collections.singletonMap(name + ".ct", new PyreCraftingRecipe(InputHelper.toStack(output)).addIngredients(
-        Arrays.stream(inputs).map(CraftTweakerMC::getIngredient).toArray(Ingredient[]::new)).setName(name + ".ct"))));
+    CraftTweaker.LATE_ACTIONS.add(new Add(Collections.singletonMap(name + ".ct", new PyreCraftingRecipe(InputHelper.toStack(output)).addIngredients(Stream.of(inputs).map(CraftTweakerMC::getIngredient).toArray(Ingredient[]::new)).setName(name + ".ct"))));
   }
 
   @ZenMethod

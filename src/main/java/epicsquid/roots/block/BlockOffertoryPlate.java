@@ -16,6 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+@SuppressWarnings("deprecation")
 public class BlockOffertoryPlate extends BlockTEBase {
   public static final PropertyDirection FACING = PropertyDirection.create("facing");
 
@@ -46,7 +47,7 @@ public class BlockOffertoryPlate extends BlockTEBase {
 
   @Override
   public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
+    return getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta));
   }
 
   @Override

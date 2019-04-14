@@ -26,7 +26,7 @@ public class Herb extends IForgeRegistryEntry.Impl<Herb> {
 
   @Nonnull
   public String getName() {
-    return getRegistryName().getResourcePath();
+    return getRegistryName().getPath();
   }
 
   @Nonnull

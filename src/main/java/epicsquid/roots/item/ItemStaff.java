@@ -6,10 +6,8 @@ import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.EventManager;
 import epicsquid.roots.Roots;
-import epicsquid.roots.capability.spell.ISpellHolderCapability;
-import epicsquid.roots.capability.spell.SpellHolderCapability;
-import epicsquid.roots.capability.spell.SpellHolderCapabilityProvider;
 import epicsquid.roots.event.SpellEvent;
+import epicsquid.roots.inventory.SpellHolder;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
@@ -30,7 +28,6 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -50,8 +47,8 @@ public class ItemStaff extends ItemBase {
 
   @Override
   public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-    ISpellHolderCapability oldCapability = oldStack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-    ISpellHolderCapability newCapability = newStack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    SpellHolder oldCapability = SpellHolder.fromStack(oldStack);
+    SpellHolder newCapability = SpellHolder.fromStack(newStack);
 
     if(oldCapability != null && newCapability != null){
       return slotChanged || oldCapability.getSelectedSlot() != newCapability.getSelectedSlot();
@@ -63,7 +60,7 @@ public class ItemStaff extends ItemBase {
   @Override
   public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
     ItemStack stack = player.getHeldItem(hand);
-    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    SpellHolder capability = SpellHolder.fromStack(stack);
     if (player.isSneaking()) {
       capability.nextSlot();
       if (world.isRemote) {
@@ -100,7 +97,7 @@ public class ItemStaff extends ItemBase {
 
   @Override
   public void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
-    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    SpellHolder capability = SpellHolder.fromStack(stack);
     if (player instanceof EntityPlayer) {
       if (capability.getCooldown() <= 0) {
         SpellBase spell = capability.getSelectedSpell();
@@ -120,7 +117,7 @@ public class ItemStaff extends ItemBase {
 
   @Override
   public void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase entity, int timeLeft) {
-    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    SpellHolder capability = SpellHolder.fromStack(stack);
     SpellBase spell = capability.getSelectedSpell();
     if (spell != null) {
       SpellEvent event = new SpellEvent((EntityPlayer) entity, spell);
@@ -134,7 +131,7 @@ public class ItemStaff extends ItemBase {
 
   @Override
   public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    SpellHolder capability = SpellHolder.fromStack(stack);
     if(capability.getCooldown() > 0){
       capability.setCooldown(capability.getCooldown() - 1);
       if(capability.getCooldown() <= 0){
@@ -144,8 +141,8 @@ public class ItemStaff extends ItemBase {
     }
   }
 
-  public static void createData(ItemStack stack, ISpellHolderCapability dustCapability) {
-    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+  public static void createData(ItemStack stack, SpellHolder dustCapability) {
+    SpellHolder capability = SpellHolder.fromStack(stack);
     capability.setSpellToSlot(dustCapability.getSelectedSpell());
     for(SpellModule module : dustCapability.getSelectedModules()){
       capability.addModule(module);
@@ -153,14 +150,14 @@ public class ItemStaff extends ItemBase {
   }
 
   public static void clearData(ItemStack stack) {
-    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    SpellHolder capability = SpellHolder.fromStack(stack);
     capability.clearSelectedSlot();
   }
 
   @SideOnly(Side.CLIENT)
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
-    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    SpellHolder capability = SpellHolder.fromStack(stack);
     tooltip.add(I18n.format("roots.tooltip.staff.selected") + (capability.getSelectedSlot() + 1));
     SpellBase spell = capability.getSelectedSpell();
     if (spell != null) {
@@ -187,7 +184,7 @@ public class ItemStaff extends ItemBase {
 
   @Override
   public boolean showDurabilityBar(ItemStack stack) {
-    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    SpellHolder capability = SpellHolder.fromStack(stack);
     SpellBase spell = capability.getSelectedSpell();
     if (capability.getCooldown() > 0 && spell != null) {
       return true;
@@ -198,7 +195,7 @@ public class ItemStaff extends ItemBase {
   @SideOnly(Side.CLIENT)
   @Override
   public int getRGBDurabilityForDisplay(ItemStack stack) {
-    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    SpellHolder capability = SpellHolder.fromStack(stack);
     SpellBase spell = capability.getSelectedSpell();
     if (spell != null) {
       double factor = 0.5f * (Math.sin(6.0f * Math.toRadians(EventManager.ticks + Minecraft.getMinecraft().getRenderPartialTicks())) + 1.0f);
@@ -211,7 +208,7 @@ public class ItemStaff extends ItemBase {
 
   @Override
   public double getDurabilityForDisplay(ItemStack stack) {
-    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    SpellHolder capability = SpellHolder.fromStack(stack);
     return (double) capability.getCooldown() / capability.getLastCooldown();
   }
 
@@ -222,7 +219,7 @@ public class ItemStaff extends ItemBase {
 
   @Override
   public EnumAction getItemUseAction(ItemStack stack) {
-    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+    SpellHolder capability = SpellHolder.fromStack(stack);
     SpellBase spell = capability.getSelectedSpell();
     if (spell != null) {
       if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
@@ -232,32 +229,6 @@ public class ItemStaff extends ItemBase {
       }
     }
     return EnumAction.NONE;
-  }
-
-  @Nullable
-  @Override
-  public NBTTagCompound getNBTShareTag(ItemStack stack) {
-    NBTTagCompound result = super.getNBTShareTag(stack);
-
-    if (result == null) result = new NBTTagCompound();
-
-    ISpellHolderCapability cap = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-    if (cap != null) {
-      NBTTagCompound cap_tag = cap.getData();
-      result.setTag("staff_capability", cap_tag);
-    }
-
-    return result;
-  }
-
-  @Override
-  public void readNBTShareTag(ItemStack stack, @Nullable NBTTagCompound nbt) {
-    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-    if (capability != null && nbt != null && nbt.hasKey("staff_capability")) {
-      capability.setData(nbt.getCompoundTag("staff_capability"));
-      nbt.removeTag("staff_capability");
-    }
-    super.readNBTShareTag(stack, nbt);
   }
 
   @SideOnly(Side.CLIENT)
@@ -274,7 +245,7 @@ public class ItemStaff extends ItemBase {
         baseName = new ResourceLocation(Roots.MODID + ":moon_rod");
       }
 
-      ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+      SpellHolder capability = SpellHolder.fromStack(stack);
       if(capability.hasSpellInSlot()){
         String s = capability.getSelectedSpell().getName();
         if (SpellRegistry.spellRegistry.containsKey(s)) {
@@ -291,7 +262,7 @@ public class ItemStaff extends ItemBase {
 
     @Override
     public int colorMultiplier(ItemStack stack, int tintIndex) {
-      ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
+      SpellHolder capability = SpellHolder.fromStack(stack);
       if (capability.hasSpellInSlot() && stack.getItem() instanceof ItemStaff) {
         if (stack.getDisplayName().compareToIgnoreCase("Shiny Rod") == 0 || stack.getDisplayName().compareToIgnoreCase("Cutie Moon Rod") == 0) {
           SpellBase spell = capability.getSelectedSpell();

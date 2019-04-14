@@ -46,8 +46,8 @@ public class SpellRadiance extends SpellBase {
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote && player.ticksExisted % 2 == 0) {
       float distance = 32;
-      RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().addVector(0, player.getEyeHeight(), 0),
-          player.getPositionVector().addVector(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)));
+      RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0),
+          player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)));
       Vec3d direction = player.getLookVec();
       ArrayList<Vec3d> positions = new ArrayList<Vec3d>();
       float offX = 0.5f * (float) Math.sin(Math.toRadians(-90.0f - player.rotationYaw));
@@ -71,7 +71,7 @@ public class SpellRadiance extends SpellBase {
             zCoeff = -1f;
           }
           direction = new Vec3d(direction.x * xCoeff, direction.y * yCoeff, direction.z * zCoeff);
-          distance -= result.hitVec.subtract(player.getPositionVector()).lengthVector();
+          distance -= result.hitVec.subtract(player.getPositionVector()).length();
           if (distance > 0) {
             RayTraceResult result2 = player.world.rayTraceBlocks(result.hitVec, result.hitVec.add(direction.scale(distance)));
             if (result2 != null) {
@@ -91,7 +91,7 @@ public class SpellRadiance extends SpellBase {
                   zCoeff = -1f;
                 }
                 direction = new Vec3d(direction.x * xCoeff, direction.y * yCoeff, direction.z * zCoeff);
-                distance -= result2.hitVec.subtract(player.getPositionVector()).lengthVector();
+                distance -= result2.hitVec.subtract(player.getPositionVector()).length();
                 if (distance > 0) {
                   RayTraceResult result3 = player.world.rayTraceBlocks(result2.hitVec, result2.hitVec.add(direction.scale(distance)));
                   if (result3 != null) {
@@ -107,7 +107,7 @@ public class SpellRadiance extends SpellBase {
           }
         }
       } else {
-        positions.add(player.getPositionVector().addVector(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)));
+        positions.add(player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)));
       }
       if (positions.size() > 1) {
         for (int i = 0; i < positions.size() - 1; i++) {

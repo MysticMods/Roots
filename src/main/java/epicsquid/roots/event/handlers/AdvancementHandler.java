@@ -17,8 +17,8 @@ public class AdvancementHandler {
     if (event.getEntityPlayer().world.isRemote) return;
 
     ResourceLocation adv = event.getAdvancement().getId();
-    if (adv.getResourceDomain().equals(Roots.MODID)) {
-      switch (adv.getResourcePath()) {
+    if (adv.getNamespace().equals(Roots.MODID)) {
+      switch (adv.getPath()) {
         case "aubergine":
         case "baffle_cap":
         case "cloud_berry":

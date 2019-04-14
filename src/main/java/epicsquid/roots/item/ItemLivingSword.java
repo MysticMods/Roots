@@ -20,7 +20,7 @@ public class ItemLivingSword extends ItemSword implements IModeledObject, ICusto
 
   public ItemLivingSword(ToolMaterial material, String name) {
     super(material);
-    setUnlocalizedName(name);
+    setTranslationKey(name);
     setRegistryName(LibRegistry.getActiveModid(), name);
     setMaxDamage(192);
   }
@@ -44,7 +44,7 @@ public class ItemLivingSword extends ItemSword implements IModeledObject, ICusto
   public void initCustomModel() {
     if (this.hasCustomModel) {
       CustomModelLoader.itemmodels.put(getRegistryName(),
-          new CustomModelItem(false, new ResourceLocation(getRegistryName().getResourceDomain() + ":items/" + getRegistryName().getResourcePath())));
+          new CustomModelItem(false, new ResourceLocation(getRegistryName().getNamespace() + ":items/" + getRegistryName().getPath())));
     }
   }
 
