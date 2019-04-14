@@ -20,7 +20,7 @@ public class ItemLivingShovel extends ItemSpade implements IModeledObject, ICust
 
   public ItemLivingShovel(ToolMaterial material, String name) {
     super(material);
-    setUnlocalizedName(name);
+    setTranslationKey(name);
     setRegistryName(LibRegistry.getActiveModid(), name);
     setHarvestLevel("shovel", 3);
     setMaxDamage(192);
@@ -45,7 +45,7 @@ public class ItemLivingShovel extends ItemSpade implements IModeledObject, ICust
   public void initCustomModel() {
     if (this.hasCustomModel) {
       CustomModelLoader.itemmodels.put(getRegistryName(),
-          new CustomModelItem(false, new ResourceLocation(getRegistryName().getResourceDomain() + ":items/" + getRegistryName().getResourcePath())));
+          new CustomModelItem(false, new ResourceLocation(getRegistryName().getNamespace() + ":items/" + getRegistryName().getPath())));
     }
   }
 

@@ -20,7 +20,7 @@ public class ItemLivingPickaxe extends ItemPickaxe implements IModeledObject, IC
 
   public ItemLivingPickaxe(ToolMaterial material, String name) {
     super(material);
-    setUnlocalizedName(name);
+    setTranslationKey(name);
     setRegistryName(LibRegistry.getActiveModid(), name);
     setHarvestLevel("pickaxe", 2);
     setMaxDamage(192);
@@ -45,7 +45,7 @@ public class ItemLivingPickaxe extends ItemPickaxe implements IModeledObject, IC
   public void initCustomModel() {
     if (this.hasCustomModel) {
       CustomModelLoader.itemmodels.put(getRegistryName(),
-          new CustomModelItem(false, new ResourceLocation(getRegistryName().getResourceDomain() + ":items/" + getRegistryName().getResourcePath())));
+          new CustomModelItem(false, new ResourceLocation(getRegistryName().getNamespace() + ":items/" + getRegistryName().getPath())));
     }
   }
 

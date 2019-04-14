@@ -11,6 +11,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+@SuppressWarnings("deprecation")
 public class EntityRitualNaturalAura extends EntityRitualBase {
 
   protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualNaturalAura.class, DataSerializers.VARINT);
@@ -51,9 +52,8 @@ public class EntityRitualNaturalAura extends EntityRitualBase {
           world.notifyBlockUpdate(pos, state, state.getBlock().getStateFromMeta(state.getBlock().getMetaFromState(state) + 1), 8);
           if (world.isRemote) {
             for (float i = 0; i < 1; i += 0.125f) {
-              float coeff = i;
               ParticleUtil.spawnParticleSpark(world, (pos.getX() + 0.5f), (pos.getY() + 0.5f) + i, (pos.getZ() + 0.5f), 0.125f * (rand.nextFloat() - 0.5f),
-                  0.0625f * (rand.nextFloat()), 0.125f * (rand.nextFloat() - 0.5f), 100, 255, 100, 1.0f * (1.0f - coeff) * alpha, 3.0f * (1.0f - coeff), 40);
+                  0.0625f * (rand.nextFloat()), 0.125f * (rand.nextFloat() - 0.5f), 100, 255, 100, 1.0f * (1.0f - i) * alpha, 3.0f * (1.0f - i), 40);
             }
           }
         }
@@ -63,9 +63,8 @@ public class EntityRitualNaturalAura extends EntityRitualBase {
         blockSapling.grow(world, pos, state, rand);
         if (world.isRemote) {
           for (float i = 0; i < 1; i += 0.125f) {
-            float coeff = i;
             ParticleUtil.spawnParticleSpark(world, (pos.getX() + 0.5f), (pos.getY() + 0.5f) + i, (pos.getZ() + 0.5f), 0.125f * (rand.nextFloat() - 0.5f),
-                0.0625f * (rand.nextFloat()), 0.125f * (rand.nextFloat() - 0.5f), 100, 255, 100, 1.0f * (1.0f - coeff) * alpha, 3.0f * (1.0f - coeff), 40);
+                0.0625f * (rand.nextFloat()), 0.125f * (rand.nextFloat() - 0.5f), 100, 255, 100, 1.0f * (1.0f - i) * alpha, 3.0f * (1.0f - i), 40);
           }
         }
       }

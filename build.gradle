@@ -22,7 +22,7 @@ minecraft {
     version = "1.12.2-14.23.5.2768"
     runDir = "run"
 
-    mappings = "snapshot_20171003"
+    mappings = "stable_39"
 
     replace "@VERSION@", project.version
     replaceIn "Roots.java"

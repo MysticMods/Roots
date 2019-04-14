@@ -337,7 +337,7 @@ public class ModRecipes {
   public static void addRunicShearRecipe(RunicShearRecipe recipe) {
     for (RunicShearRecipe runicShearRecipe : runicShearRecipes.values()) {
       if (recipe.isBlockRecipe() && recipe.getBlock() == runicShearRecipe.getBlock()) {
-        System.out.println("Recipe is already registered with block - " + recipe.getBlock().getUnlocalizedName());
+        System.out.println("Recipe is already registered with block - " + recipe.getBlock().getTranslationKey());
         return;
       } else if (recipe.isEntityRecipe() && recipe.getEntity() == runicShearRecipe.getEntity()) {
         System.out.println("Recipe is already registered with entity - " + recipe.getEntity().getName());
@@ -738,7 +738,7 @@ public class ModRecipes {
       leggings.setTagCompound(nbtData);
       boots.setTagCompound(nbtData);
 
-      System.out.println(herb.getItem().getUnlocalizedName());
+      System.out.println(herb.getItem().getTranslationKey());
 
       addCraftingRecipe("sylvan_helmet_" + herb.getName(), new PyreCraftingRecipe(helmet, 1).addIngredients(
               new ItemStack(Items.LEATHER_HELMET),

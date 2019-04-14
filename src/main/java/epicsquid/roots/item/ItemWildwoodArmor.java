@@ -26,7 +26,7 @@ public class ItemWildwoodArmor extends ItemArmor implements IModeledObject {
     public ItemWildwoodArmor(ArmorMaterial material, EntityEquipmentSlot slot, String name)
     {
         super(material, 0, slot);
-        setUnlocalizedName(name);
+        setTranslationKey(name);
         setRegistryName(new ResourceLocation(Roots.MODID, name));
         setMaxDamage(750);
         setCreativeTab(Roots.tab);

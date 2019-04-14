@@ -66,8 +66,8 @@ public class MessageRadianceBeamFX implements IMessage {
       EntityPlayer player = world.getPlayerEntityByUUID(message.id);
       if (player != null) {
         float distance = 32;
-        RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().addVector(0, player.getEyeHeight(), 0),
-            player.getPositionVector().addVector(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)));
+        RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0),
+            player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)));
         Vec3d direction = player.getLookVec();
         ArrayList<Vec3d> positions = new ArrayList<Vec3d>();
         float offX = 0.5f * (float) Math.sin(Math.toRadians(-90.0f - player.rotationYaw));
@@ -90,7 +90,7 @@ public class MessageRadianceBeamFX implements IMessage {
               zCoeff = -1f;
             }
             direction = new Vec3d(direction.x * xCoeff, direction.y * yCoeff, direction.z * zCoeff);
-            distance -= result.hitVec.subtract(player.getPositionVector()).lengthVector();
+            distance -= result.hitVec.subtract(player.getPositionVector()).length();
             if (distance > 0) {
               RayTraceResult result2 = player.world.rayTraceBlocks(result.hitVec.add(direction.scale(0.1)), result.hitVec.add(direction.scale(distance)));
               if (result2 != null) {
@@ -110,7 +110,7 @@ public class MessageRadianceBeamFX implements IMessage {
                     zCoeff = -1f;
                   }
                   direction = new Vec3d(direction.x * xCoeff, direction.y * yCoeff, direction.z * zCoeff);
-                  distance -= result2.hitVec.subtract(player.getPositionVector()).lengthVector();
+                  distance -= result2.hitVec.subtract(player.getPositionVector()).length();
                   if (distance > 0) {
                     RayTraceResult result3 = player.world
                         .rayTraceBlocks(result2.hitVec.add(direction.scale(0.1)), result2.hitVec.add(direction.scale(distance)));
@@ -127,16 +127,16 @@ public class MessageRadianceBeamFX implements IMessage {
             }
           }
         } else {
-          positions.add(player.getPositionVector().addVector(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)));
+          positions.add(player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)));
         }
         if (positions.size() > 1) {
           double totalDist = 0;
           for (int i = 0; i < positions.size() - 1; i++) {
-            totalDist += positions.get(i).subtract(positions.get(i + 1)).lengthVector();
+            totalDist += positions.get(i).subtract(positions.get(i + 1)).length();
           }
           double alphaDist = 0;
           for (int i = 0; i < positions.size() - 1; i++) {
-            double dist = positions.get(i).subtract(positions.get(i + 1)).lengthVector();
+            double dist = positions.get(i).subtract(positions.get(i + 1)).length();
             for (double j = 0; j < dist; j += 0.15) {
               double x = positions.get(i).x * (1.0 - j / dist) + positions.get(i + 1).x * (j / dist);
               double y = positions.get(i).y * (1.0 - j / dist) + positions.get(i + 1).y * (j / dist);

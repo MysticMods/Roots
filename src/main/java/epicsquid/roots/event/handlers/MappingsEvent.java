@@ -15,7 +15,7 @@ public class MappingsEvent {
   public static void onMissingBlockMappings(RegistryEvent.MissingMappings<Block> event) {
     for (RegistryEvent.MissingMappings.Mapping<Block> mapping : event.getMappings()) {
       ResourceLocation missing = mapping.key;
-      if (missing.getResourceDomain().equals(Roots.MODID) && missing.getResourcePath().equals("thatch")) {
+      if (missing.getNamespace().equals(Roots.MODID) && missing.getPath().equals("thatch")) {
         mapping.remap(ModBlocks.thatch);
       }
     }
@@ -25,7 +25,7 @@ public class MappingsEvent {
   public static void onMissingItemMappings (RegistryEvent.MissingMappings<Item> event) {
     for (RegistryEvent.MissingMappings.Mapping<Item> mapping : event.getMappings()) {
       ResourceLocation missing = mapping.key;
-      if (missing.getResourceDomain().equals(Roots.MODID) && missing.getResourcePath().equals("thatch")) {
+      if (missing.getNamespace().equals(Roots.MODID) && missing.getPath().equals("thatch")) {
         mapping.remap(Item.getItemFromBlock(ModBlocks.thatch));
       }
     }

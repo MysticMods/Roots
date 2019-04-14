@@ -20,7 +20,7 @@ public class ItemLivingHoe extends ItemHoe implements IModeledObject, ICustomMod
 
   public ItemLivingHoe(ToolMaterial material, String name) {
     super(material);
-    setUnlocalizedName(name);
+    setTranslationKey(name);
     setRegistryName(LibRegistry.getActiveModid(), name);
     setHarvestLevel("hoe", 3);
     setMaxDamage(192);
@@ -45,7 +45,7 @@ public class ItemLivingHoe extends ItemHoe implements IModeledObject, ICustomMod
   public void initCustomModel() {
     if (this.hasCustomModel) {
       CustomModelLoader.itemmodels.put(getRegistryName(),
-          new CustomModelItem(false, new ResourceLocation(getRegistryName().getResourceDomain() + ":items/" + getRegistryName().getResourcePath())));
+          new CustomModelItem(false, new ResourceLocation(getRegistryName().getNamespace() + ":items/" + getRegistryName().getPath())));
     }
   }
 

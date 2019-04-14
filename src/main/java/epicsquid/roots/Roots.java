@@ -8,9 +8,6 @@ import epicsquid.roots.capability.grove.PlayerGroveCapabilityStorage;
 import epicsquid.roots.capability.playerdata.IPlayerDataCapability;
 import epicsquid.roots.capability.playerdata.PlayerDataCapability;
 import epicsquid.roots.capability.playerdata.PlayerDataCapabilityStorage;
-import epicsquid.roots.capability.spell.ISpellHolderCapability;
-import epicsquid.roots.capability.spell.SpellHolderCapability;
-import epicsquid.roots.capability.spell.SpellHolderCapabilityStorage;
 import epicsquid.roots.gui.GuiHandler;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.proxy.CommonProxy;
@@ -64,7 +61,7 @@ public class Roots {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public ItemStack getTabIconItem() {
+    public ItemStack createIcon() {
       return new ItemStack(ModItems.pestle, 1);
     }
   };
@@ -74,7 +71,6 @@ public class Roots {
     CONTAINER = Loader.instance().activeModContainer();
     CapabilityManager.INSTANCE.register(IPlayerGroveCapability.class, new PlayerGroveCapabilityStorage(), PlayerGroveCapability::new);
     CapabilityManager.INSTANCE.register(IPlayerDataCapability.class, new PlayerDataCapabilityStorage(), PlayerDataCapability::new);
-    CapabilityManager.INSTANCE.register(ISpellHolderCapability.class, new SpellHolderCapabilityStorage(), SpellHolderCapability::new);
     MinecraftForge.EVENT_BUS.register(new RegistryManager());
     MinecraftForge.EVENT_BUS.register(new EventManager());
     NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);

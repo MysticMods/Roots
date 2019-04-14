@@ -40,7 +40,7 @@ public class SpellGrowthInfusion extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
-    RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().addVector(0, player.getEyeHeight(), 0), player.getLookVec().scale(8.0f).add(player.getPositionVector().addVector(0, player.getEyeHeight(), 0)));
+    RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0), player.getLookVec().scale(8.0f).add(player.getPositionVector().add(0, player.getEyeHeight(), 0)));
       if (result != null) {
         if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
           BlockPos pos = result.getBlockPos();

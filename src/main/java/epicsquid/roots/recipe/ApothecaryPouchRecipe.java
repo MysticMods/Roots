@@ -1,7 +1,7 @@
 package epicsquid.roots.recipe;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.capability.pouch.PouchItemHandler;
+import epicsquid.roots.inventory.PouchItemHandler;
 import epicsquid.roots.init.ModItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;

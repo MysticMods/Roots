@@ -6,7 +6,6 @@ import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.item.ItemFoodBase;
 import epicsquid.mysticallib.item.ItemSeedBase;
 import epicsquid.roots.Roots;
-import epicsquid.roots.capability.pouch.PouchItemHandler;
 import epicsquid.roots.item.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
@@ -18,7 +17,6 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
@@ -80,8 +78,8 @@ public class ModItems {
     event.addItem(bark_wildwood = new ItemBase("bark_wildwood").setModelCustom(true).setCreativeTab(Roots.tab));
 
     event.addItem(pestle = new ItemBase("pestle").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(component_pouch = new ItemPouch("component_pouch", PouchItemHandler.COMPONENT_POUCH_INVENTORY_SLOTS, PouchItemHandler.COMPONENT_POUCH_HERB_SLOTS).setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(apothecary_pouch = new ItemPouch("apothecary_pouch", PouchItemHandler.APOTHECARY_POUCH_INVENTORY_SLOTS, PouchItemHandler.APOTHECARY_POUCH_HERB_SLOTS).setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(component_pouch = new ItemPouch("component_pouch").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(apothecary_pouch = new ItemPouch("apothecary_pouch").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(spell_dust = new ItemSpellDust("spell_dust").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(flour = new ItemBase("flour").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(staff = new ItemStaff("staff").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));

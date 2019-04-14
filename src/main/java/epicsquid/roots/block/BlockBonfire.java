@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
+@SuppressWarnings("deprecation")
 public class BlockBonfire extends BlockTEBase {
 
   public static PropertyBool BURNING = PropertyBool.create("burning");

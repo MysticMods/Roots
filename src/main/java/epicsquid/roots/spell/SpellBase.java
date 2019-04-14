@@ -90,7 +90,7 @@ public abstract class SpellBase {
     for(Map.Entry<Herb, Double> entry : this.costs.entrySet()){
       Herb herb = entry.getKey();
       String d = String.format("%.3f", entry.getValue());
-      tooltip.add(I18n.format(herb.getItem().getUnlocalizedName() + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
+      tooltip.add(I18n.format(herb.getItem().getTranslationKey() + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
     }
   }
 

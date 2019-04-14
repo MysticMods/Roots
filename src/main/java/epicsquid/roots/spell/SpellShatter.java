@@ -42,8 +42,8 @@ public class SpellShatter extends SpellBase {
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
-      RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().addVector(0, player.getEyeHeight(), 0),
-          player.getLookVec().scale(8.0f).add(player.getPositionVector().addVector(0, player.getEyeHeight(), 0)));
+      RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0),
+          player.getLookVec().scale(8.0f).add(player.getPositionVector().add(0, player.getEyeHeight(), 0)));
       if (result != null) {
         if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
           BlockPos pos = result.getBlockPos();
@@ -55,7 +55,7 @@ public class SpellShatter extends SpellBase {
             doParticles = true;
           }
           for (int i = 0; i < 4; i++) {
-            pos = result.getBlockPos().offset(EnumFacing.getFront(new Random().nextInt(6)));
+            pos = result.getBlockPos().offset(EnumFacing.byIndex(new Random().nextInt(6)));
             state = player.world.getBlockState(pos);
             if (state.getBlockHardness(player.world, pos) > 0) {
               player.world.destroyBlock(pos, true);

@@ -100,10 +100,10 @@ public class ModBlocks {
 
   private static void variants(RegisterContentEvent event, Block base, String name, Block... refs) {
     LibRegistry.addSlabPair(Material.ROCK, SoundType.STONE, 1.7f, name, base.getDefaultState(), new Block[] { refs[0], refs[1] }, true,
-        base.getCreativeTabToDisplayOn());
+        base.getCreativeTab());
     event.addBlock(refs[2] = new BlockStairsBase(base.getDefaultState(), SoundType.STONE, 1.7f, name + "_stairs").setModelCustom(true)
-        .setCreativeTab(base.getCreativeTabToDisplayOn()));
+        .setCreativeTab(base.getCreativeTab()));
     event.addBlock(
-        refs[3] = new BlockWallBase(base, SoundType.STONE, 1.7f, name + "_wall").setModelCustom(true).setCreativeTab(base.getCreativeTabToDisplayOn()));
+        refs[3] = new BlockWallBase(base, SoundType.STONE, 1.7f, name + "_wall").setModelCustom(true).setCreativeTab(base.getCreativeTab()));
   }
 }

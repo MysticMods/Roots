@@ -12,6 +12,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SuppressWarnings("deprecation")
 public class BlockStructureMarker extends BlockBase {
 
   public static final PropertyInteger marker_value = PropertyInteger.create("marker_value", 0, 15);
@@ -23,7 +24,7 @@ public class BlockStructureMarker extends BlockBase {
   @SideOnly(Side.CLIENT)
   @Override
   public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
-    if (tab == this.getCreativeTabToDisplayOn()) {
+    if (tab == this.getCreativeTab()) {
       list.clear();
     }
   }
