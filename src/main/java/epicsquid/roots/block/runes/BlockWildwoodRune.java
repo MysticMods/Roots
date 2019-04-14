@@ -4,12 +4,17 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import epicsquid.mysticallib.block.BlockTEBase;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.rune.RuneRegistry;
 import epicsquid.roots.tileentity.TileEntityWildrootRune;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockWildwoodRune extends BlockTEBase {
 
@@ -21,5 +26,10 @@ public class BlockWildwoodRune extends BlockTEBase {
     @Nullable
     public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
         return new TileEntityWildrootRune();
+    }
+
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return Item.getItemFromBlock(ModBlocks.wildwoodLog);
     }
 }

@@ -5,7 +5,7 @@
 	],
 	"creative_tab": "roots",
 	"advancements_tab": "roots",
-	"landing_text": "The art of druidism takes many forms. This book is a compilation of all known information on the different ways the natural world can be interacted with, and how to come to a mutually beneificial relationship with it.",
+	"landing_text": "The art of druidism takes many forms. This book is a compilation of all known information on the different ways the natural world can be interacted with, and how to come to a mutually beneficial relationship with it.",
 	"book_texture": "roots:textures/gui/book.png",
 	"filler_texture": "roots:textures/gui/patchouli/book_filler.png",
 	"model": "roots:druid_handbook",
