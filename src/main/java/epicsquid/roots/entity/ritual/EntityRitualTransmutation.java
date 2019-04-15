@@ -43,7 +43,7 @@ public class EntityRitualTransmutation extends EntityRitualBase {
     if (world.isRemote) return;
 
     if (this.ticksExisted % 100 == 0) {
-      List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), 16, 16, 8, (pos) -> {
+      List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), 8, 8, 8, (pos) -> {
         if (world.isAirBlock(pos)) return false;
         IBlockState state = world.getBlockState(pos);
         List<TransmutationRecipe> stateRecipes = ModRecipes.getTransmutationRecipes(state);
