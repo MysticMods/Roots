@@ -94,9 +94,10 @@ public class ItemPouch extends ItemBase {
     for (int i = 0; i < handler.getSlots(); i++) {
         ItemStack stack = handler.getStackInSlot(i);
         if (!stack.isEmpty() && HerbRegistry.containsHerbItem(stack.getItem()) && HerbRegistry.getHerbByItem(stack.getItem()).equals(herb)) {
-          createData(pouch, herb, 1.0);
-          stack.shrink(1);
-          return true;
+          if (!handler.extractItem(i, 1, false).isEmpty()) {
+            createData(pouch, herb, 1.0);
+            return true;
+          }
         }
       }
     return false;
