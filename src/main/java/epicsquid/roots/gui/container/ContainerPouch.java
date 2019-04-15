@@ -16,18 +16,19 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 
 public class ContainerPouch extends Container {
 
-  private ItemStackHandler inventoryHandler;
-  private ItemStackHandler herbsHandler;
+  private PouchHandler.PouchItemHandler inventoryHandler;
+  private PouchHandler.PouchItemHandler herbsHandler;
   private EntityPlayer player;
+  private ItemStack pouch;
 
   public boolean componentPouch = false;
 
@@ -53,11 +54,13 @@ public class ContainerPouch extends Container {
     inventoryHandler = handler.getInventory();
     herbsHandler = handler.getHerbs();
 
+    this.pouch = use;
+
     createPlayerInventory(player.inventory);
-    createPouchSlots(use);
+    createPouchSlots();
   }
 
-  private void createPouchSlots(ItemStack pouch) {
+  private void createPouchSlots() {
     if (pouch.getItem() == ModItems.component_pouch) {
       createComponentPouchSlots();
       componentPouch = true;
@@ -90,7 +93,8 @@ public class ContainerPouch extends Container {
       if (q >= 12 && q < 18) {
         // Controls which row the slots appear on
         int yPosOffset = q >= 14 ? q >= 16 ? 21 * 2 : 21 : 0;
-        addSlotToContainer(new SlotItemHandler(herbsHandler, q, xOffset + 127 + (21 * (q % 2)), yOffset + 23 + yPosOffset));
+        addSlotToContainer(new SlotItemHandler(herbsHandler, i, xOffset + 127 + (21 * (q % 2)), yOffset + 23 + yPosOffset));
+        q++;
       }
     }
     herbsEnd = q;
@@ -118,14 +122,15 @@ public class ContainerPouch extends Container {
     for (int i = 0; i < herbsHandler.getSlots(); i++) {
       // Add Herb Slots
       if (q >= 18 && q < 21) {
-        addSlotToContainer(new SlotItemHandler(herbsHandler, q++, xOffset + 149 + (16 * (q % 3)), yOffset + 16 + (4 * (q % 2))));
+        addSlotToContainer(new SlotItemHandler(herbsHandler, i++, xOffset + 149 + (16 * (q % 3)), yOffset + 16 + (4 * (q % 2))));
       }
       if (q >= 21 && q < 24) {
-        addSlotToContainer(new SlotItemHandler(herbsHandler, q++, xOffset + 149 + (16 * (q % 3)), yOffset + 39 + (4 * ((q + 1) % 2))));
+        addSlotToContainer(new SlotItemHandler(herbsHandler, i++, xOffset + 149 + (16 * (q % 3)), yOffset + 39 + (4 * ((q + 1) % 2))));
       }
       if (q >= 24 && q < 27) {
-        addSlotToContainer(new SlotItemHandler(herbsHandler, q++, xOffset + 149 + (16 * (q % 3)), yOffset + 64 + (4 * (q % 2))));
+        addSlotToContainer(new SlotItemHandler(herbsHandler, i++, xOffset + 149 + (16 * (q % 3)), yOffset + 64 + (4 * (q % 2))));
       }
+      q++;
     }
     herbsEnd = q;
   }
@@ -153,37 +158,38 @@ public class ContainerPouch extends Container {
   @Override
   @Nonnull
   public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
-    /*ItemStack stack = inventorySlots.get(index).getStack();
-    if (!stack.isEmpty()) {
-      ItemStack copyStack = stack.copy();
-      if (index < 36) {
-        if (HerbRegistry.containsHerbItem(stack.getItem())) {
-          for (int i = itemHandler.getInventorySlots(); i < itemHandler.getInventorySlots() + itemHandler.getHerbSlots(); i++) {
-            if (itemHandler.insertItem(i, copyStack, true).isEmpty()) {
-              stack.shrink(stack.getCount());
-              return itemHandler.insertItem(i, copyStack, false);
-            }
-          }
-        }
-        for (int i = 0; i < itemHandler.getInventorySlots(); i++) {
-          if (itemHandler.insertItem(i, copyStack, true).isEmpty()) {
-            stack.shrink(stack.getCount());
-            return itemHandler.insertItem(i, copyStack, false);
-          }
+    ItemStack slotStack = ItemStack.EMPTY;
+
+    Slot slot = inventorySlots.get(index);
+    int herbStart = inventoryEnd + 36;
+    int herbStop = herbsEnd + 36;
+
+    if (slot != null && slot.getHasStack()) {
+      ItemStack stack = slot.getStack();
+      slotStack = stack.copy();
+
+      boolean herb = HerbRegistry.containsHerbItem(slotStack.getItem());
+
+      if (index < 36) { // Player Inventory -> Inventory/herbs
+        if (herb && !mergeItemStack(stack, herbStart, herbStop, false)) {
+          return ItemStack.EMPTY;
+        } else if (!herb && !mergeItemStack(stack, 36, herbStart, false)) {
+          return ItemStack.EMPTY;
         }
       } else {
-        for (int i = 0; i < 36; i++) {
-          Slot slot = inventorySlots.get(i);
-          if (slot.getStack().isEmpty()) {
-            slot.putStack(copyStack);
-            stack.shrink(stack.getCount());
-            return ItemStack.EMPTY;
-          }
+        if (!mergeItemStack(stack, 0, 36, false)) {
+          return ItemStack.EMPTY;
         }
       }
-    }*/
-    // TODO: This
-    return ItemStack.EMPTY;
+
+      if (stack.isEmpty()) {
+        slot.putStack(ItemStack.EMPTY);
+      }
+
+      slot.onSlotChanged();
+    }
+
+    return slotStack;
   }
 
   @Override
