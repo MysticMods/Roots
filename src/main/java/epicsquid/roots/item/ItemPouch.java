@@ -24,6 +24,10 @@ public class ItemPouch extends ItemBase {
     this.setMaxStackSize(1);
   }
 
+  public boolean isApothecary () {
+    return false;
+  }
+
   public static boolean hasHerb(@Nonnull ItemStack pouch, Herb herb) {
     return getHerbQuantity(pouch, herb) > 0;
   }

@@ -2,6 +2,7 @@ package epicsquid.roots.handler;
 
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.item.ItemPouch;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -19,8 +20,13 @@ public class PouchHandler implements INBTSerializable<NBTTagCompound> {
   private PouchItemHandler herbSlots;
   private ItemStack pouch;
 
+  private boolean isApoth = false;
+
   public PouchHandler (ItemStack pouch, int inventorySlots, int herbSlots) {
     this.pouch = pouch;
+    if (inventorySlots == APOTHECARY_POUCH_INVENTORY_SLOTS) {
+      isApoth = true;
+    }
     this.inventorySlots = new PouchItemHandler(inventorySlots);
     this.herbSlots = new PouchItemHandler(herbSlots) {
       @Override
@@ -48,18 +54,27 @@ public class PouchHandler implements INBTSerializable<NBTTagCompound> {
 
   @Override
   public void deserializeNBT(NBTTagCompound nbt) {
-    inventorySlots.deserializeNBT(nbt.getCompoundTag("inventory_slots"));
-    herbSlots.deserializeNBT(nbt.getCompoundTag("herb_slots"));
+    NBTTagCompound inv = nbt.getCompoundTag("inventory_slots");
+    NBTTagCompound herb = nbt.getCompoundTag("herb_slots");
+    if (isApoth) {
+      if (inv.getInteger("Size") != APOTHECARY_POUCH_INVENTORY_SLOTS) {
+        inv.setInteger("Size", APOTHECARY_POUCH_INVENTORY_SLOTS);
+      }
+      if (herb.getInteger("Size") != APOTHECARY_POUCH_HERB_SLOTS) {
+        herb.setInteger("Size", APOTHECARY_POUCH_HERB_SLOTS);
+      }
+    }
+    inventorySlots.deserializeNBT(inv);
+    herbSlots.deserializeNBT(herb);
   }
 
   public static PouchHandler getHandler (ItemStack stack) {
     PouchHandler handler;
-    if (stack.getItem() == ModItems.component_pouch) {
-      handler = new PouchHandler(stack, COMPONENT_POUCH_INVENTORY_SLOTS, COMPONENT_POUCH_HERB_SLOTS);
-    } else if (stack.getItem() == ModItems.apothecary_pouch) {
+    boolean isApoth = ((ItemPouch) stack.getItem()).isApothecary();
+    if (isApoth) {
       handler = new PouchHandler(stack, APOTHECARY_POUCH_INVENTORY_SLOTS, APOTHECARY_POUCH_HERB_SLOTS);
     } else {
-      return null;
+      handler = new PouchHandler(stack, COMPONENT_POUCH_INVENTORY_SLOTS, COMPONENT_POUCH_HERB_SLOTS);
     }
     if (stack.hasTagCompound()) {
       NBTTagCompound tag = stack.getTagCompound();
