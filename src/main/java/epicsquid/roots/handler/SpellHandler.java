@@ -98,6 +98,31 @@ public class SpellHandler implements INBTSerializable<NBTTagCompound> {
         saveToStack();
     }
 
+    public void previousSlot () {
+        if (this.isEmpty()) {
+            setSelectedSlot(0);
+            return;
+        }
+
+        int originalSlot = selectedSlot;
+
+        for (int i = selectedSlot - 1; i >= 0; i--) {
+            if (spells.get(i) != null) {
+                setSelectedSlot(i);
+                return;
+            }
+        }
+        for (int i = 5; i >= originalSlot; i--) {
+            if (spells.get(i) != null) {
+                setSelectedSlot(i);
+                return;
+            }
+        }
+
+        setSelectedSlot(originalSlot);
+    }
+
+
     public void nextSlot () {
         if (this.isEmpty()) {
             setSelectedSlot(0);
@@ -107,17 +132,13 @@ public class SpellHandler implements INBTSerializable<NBTTagCompound> {
         int originalSlot = selectedSlot;
 
         for (int i = selectedSlot + 1; i < 5; i++) {
-            if (spells.get(i) == null) {
-                continue;
-            } else {
+            if (spells.get(i) != null) {
                 setSelectedSlot(i);
                 return;
             }
         }
         for (int i = 0; i < originalSlot; i++) {
-            if (spells.get(i) == null) {
-                continue;
-            } else {
+            if (spells.get(i) != null) {
                 setSelectedSlot(i);
                 return;
             }

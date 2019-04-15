@@ -100,9 +100,16 @@ roots.ritual.ritual_overgrowth.name=Overgrowth
 roots.ritual.ritual_flower_growth.name=Flower Growth
 roots.ritual.ritual_transmutation.name=Transmutation
 
-roots.keybind.group=Roots
-roots.keybind.pouch=Open Pouch
-roots.keybind.quiver=Open Quiver
+roots.keybinds.group=Roots
+roots.keybinds.pouch=Open Pouch
+roots.keybinds.quiver=Open Quiver
+roots.keybinds.spell_slot_1=Select Slot 1
+roots.keybinds.spell_slot_2=Select Slot 2
+roots.keybinds.spell_slot_3=Select Slot 3
+roots.keybinds.spell_slot_4=Select Slot 4
+roots.keybinds.spell_slot_5=Select Slot 5
+roots.keybinds.spell_slot_next=Select Next Slot
+roots.keybinds.spell_slot_previous=Select Previous Slot
 
 item.ritual_life.name=Healing Aura Ritual
 item.ritual_storm.name=Heavy Storms Ritual
