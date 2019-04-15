@@ -1,4 +1,4 @@
-package epicsquid.roots.inventory;
+package epicsquid.roots.handler;
 
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.SpellBase;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class SpellHolder implements INBTSerializable<NBTTagCompound> {
+public class SpellHandler implements INBTSerializable<NBTTagCompound> {
 
     private Map<Integer, SpellBase> spells = new Int2ObjectOpenHashMap<>();
     private Map<Integer, List<SpellModule>> spellModules = new Int2ObjectOpenHashMap<>();
@@ -26,7 +26,7 @@ public class SpellHolder implements INBTSerializable<NBTTagCompound> {
     private int lastCooldown = 0;
     private ItemStack stack;
 
-    public SpellHolder(ItemStack stack) {
+    public SpellHandler(ItemStack stack) {
         this.stack = stack;
     }
 
@@ -210,11 +210,11 @@ public class SpellHolder implements INBTSerializable<NBTTagCompound> {
     }
 
     @Nonnull
-    public static SpellHolder fromStack (ItemStack stack) {
+    public static SpellHandler fromStack (ItemStack stack) {
         boolean correct = stack.getItem() == ModItems.spell_dust || stack.getItem() == ModItems.staff;
         assert correct;
 
-        SpellHolder result = new SpellHolder(stack);
+        SpellHandler result = new SpellHandler(stack);
         NBTTagCompound tag = stack.getTagCompound();
         if (tag != null && tag.hasKey("spell_holder")) {
             result.deserializeNBT(tag.getCompoundTag("spell_holder"));

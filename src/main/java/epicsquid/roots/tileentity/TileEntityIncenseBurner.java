@@ -49,7 +49,7 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setInteger("burnTick", this.burnTick);
         compound.setBoolean("lit", this.lit);
-        compound.setTag("inventory", inventory.serializeNBT());
+        compound.setTag("handler", inventory.serializeNBT());
         return super.writeToNBT(compound);
     }
 
@@ -57,7 +57,7 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
     public void readFromNBT(NBTTagCompound compound) {
         this.burnTick = compound.getInteger("burnTick");
         this.lit = compound.getBoolean("lit");
-        inventory.deserializeNBT(compound.getCompoundTag("inventory"));
+        inventory.deserializeNBT(compound.getCompoundTag("handler"));
         super.readFromNBT(compound);
     }
 

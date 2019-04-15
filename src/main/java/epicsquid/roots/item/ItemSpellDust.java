@@ -1,20 +1,18 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemBase;
-import epicsquid.roots.inventory.SpellHolder;
+import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
-import java.util.Map;
 
 public class ItemSpellDust extends ItemBase {
   public ItemSpellDust(String name) {
@@ -35,7 +33,7 @@ public class ItemSpellDust extends ItemBase {
   @SideOnly(Side.CLIENT)
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
-    SpellHolder capability = SpellHolder.fromStack(stack);
+    SpellHandler capability = SpellHandler.fromStack(stack);
 
     SpellBase spell = capability.getSelectedSpell();
     if (spell == null) return;
