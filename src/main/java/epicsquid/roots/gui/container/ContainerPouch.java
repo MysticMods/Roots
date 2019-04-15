@@ -121,13 +121,13 @@ public class ContainerPouch extends Container {
     for (int i = 0; i < herbsHandler.getSlots(); i++) {
       // Add Herb Slots
       if (q >= 18 && q < 21) {
-        addSlotToContainer(new SlotItemHandler(herbsHandler, i++, xOffset + 149 + (16 * (q % 3)), yOffset + 16 + (4 * (q % 2))));
+        addSlotToContainer(new SlotItemHandler(herbsHandler, q++, xOffset + 149 + (16 * (q % 3)), yOffset + 16 + (4 * (q % 2))));
       }
       if (q >= 21 && q < 24) {
-        addSlotToContainer(new SlotItemHandler(herbsHandler, i++, xOffset + 149 + (16 * (q % 3)), yOffset + 39 + (4 * ((q + 1) % 2))));
+        addSlotToContainer(new SlotItemHandler(herbsHandler, q++, xOffset + 149 + (16 * (q % 3)), yOffset + 39 + (4 * ((q + 1) % 2))));
       }
       if (q >= 24 && q < 27) {
-        addSlotToContainer(new SlotItemHandler(herbsHandler, i++, xOffset + 149 + (16 * (q % 3)), yOffset + 64 + (4 * (q % 2))));
+        addSlotToContainer(new SlotItemHandler(herbsHandler, q++, xOffset + 149 + (16 * (q % 3)), yOffset + 64 + (4 * (q % 2))));
       }
       q++;
     }
