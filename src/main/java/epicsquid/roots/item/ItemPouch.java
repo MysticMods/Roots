@@ -35,7 +35,7 @@ public class ItemPouch extends ItemBase {
     IItemHandler handler = pouchHandler.getHerbs();
     for (int i = 0; i < handler.getSlots(); i++) {
       ItemStack stack = handler.getStackInSlot(i);
-      if (!stack.isEmpty() && HerbRegistry.containsHerbItem(stack.getItem()) && HerbRegistry.getHerbByItem(stack.getItem()).equals(herb)) {
+      if (!stack.isEmpty() && herb.equals(HerbRegistry.getHerbByItem(stack.getItem()))) {
         count += stack.getCount();
       }
     }
