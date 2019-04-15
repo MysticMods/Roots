@@ -11,6 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -78,8 +79,9 @@ public class SpellHolder implements INBTSerializable<NBTTagCompound> {
         saveToStack();
     }
 
+    @Nullable
     public SpellBase getSelectedSpell() {
-        return spells.getOrDefault(this.selectedSlot, null);
+        return spells.get(this.selectedSlot);
     }
 
     public void clearSelectedSlot() {
