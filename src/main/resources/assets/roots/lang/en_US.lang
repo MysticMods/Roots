@@ -100,6 +100,10 @@ roots.ritual.ritual_overgrowth.name=Overgrowth
 roots.ritual.ritual_flower_growth.name=Flower Growth
 roots.ritual.ritual_transmutation.name=Transmutation
 
+roots.keybind.group=Roots
+roots.keybind.pouch=Open Pouch
+roots.keybind.quiver=Open Quiver
+
 item.ritual_life.name=Healing Aura Ritual
 item.ritual_storm.name=Heavy Storms Ritual
 item.ritual_light.name=Divine Protection Ritual
