@@ -228,6 +228,7 @@ item.petals.name=Petals
 item.runic_dust.name=Runic Dust
 item.cooked_aubergine.name=Cooked Aubergine
 item.stuffed_aubergine.name=Stuffed Aubergine
+item.cooked_pereskia.name=Roasted Pereskia
 
 # JEI
 container.roots.runic_shears.name=Runic Shearing
