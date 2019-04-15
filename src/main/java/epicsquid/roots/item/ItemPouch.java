@@ -5,7 +5,7 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.gui.GuiHandler;
 import epicsquid.roots.init.HerbRegistry;
-import epicsquid.roots.inventory.PouchHandler;
+import epicsquid.roots.handler.PouchHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

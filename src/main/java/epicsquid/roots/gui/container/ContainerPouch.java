@@ -9,14 +9,13 @@ package epicsquid.roots.gui.container;
 
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.inventory.PouchHandler;
+import epicsquid.roots.handler.PouchHandler;
 import epicsquid.roots.item.ItemPouch;
 import epicsquid.roots.util.PowderInventoryUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;

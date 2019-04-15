@@ -1,4 +1,4 @@
-package epicsquid.roots.inventory;
+package epicsquid.roots.handler;
 
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
@@ -63,8 +63,8 @@ public class PouchHandler implements INBTSerializable<NBTTagCompound> {
     }
     if (stack.hasTagCompound()) {
       NBTTagCompound tag = stack.getTagCompound();
-      if (tag.hasKey("inventory")) {
-        handler.deserializeNBT(tag.getCompoundTag("inventory"));
+      if (tag.hasKey("handler")) {
+        handler.deserializeNBT(tag.getCompoundTag("handler"));
       }
     }
 
@@ -78,7 +78,7 @@ public class PouchHandler implements INBTSerializable<NBTTagCompound> {
       pouch.setTagCompound(tag);
     }
 
-    tag.setTag("inventory", serializeNBT());
+    tag.setTag("handler", serializeNBT());
   }
 
   public class PouchItemHandler extends ItemStackHandler {

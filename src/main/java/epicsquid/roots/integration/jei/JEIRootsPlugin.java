@@ -17,12 +17,11 @@ import epicsquid.roots.integration.jei.ritual.RitualCraftingWrapper;
 import epicsquid.roots.integration.jei.ritual.RitualWrapper;
 import epicsquid.roots.integration.jei.shears.RunicShearsCategory;
 import epicsquid.roots.integration.jei.shears.RunicShearsWrapper;
-import epicsquid.roots.inventory.SpellHolder;
+import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.recipe.RunicCarvingRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
-import epicsquid.roots.recipe.SpellRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellBase;
@@ -105,7 +104,7 @@ public class JEIRootsPlugin implements IModPlugin {
     ISubtypeRegistry.ISubtypeInterpreter spellInterpreter = itemStack -> {
       Item stackItem = itemStack.getItem();
       if (stackItem != ModItems.spell_dust) return ISubtypeRegistry.ISubtypeInterpreter.NONE;
-      SpellBase spell = SpellHolder.fromStack(itemStack).getSelectedSpell();
+      SpellBase spell = SpellHandler.fromStack(itemStack).getSelectedSpell();
       if (spell != null) {
         return spell.getName();
       }

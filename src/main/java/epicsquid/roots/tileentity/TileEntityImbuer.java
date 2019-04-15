@@ -5,7 +5,7 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.inventory.SpellHolder;
+import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.network.fx.MessageImbueCompleteFX;
 import epicsquid.roots.particle.ParticleUtil;
@@ -52,7 +52,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
   @Override
   public NBTTagCompound writeToNBT(NBTTagCompound tag) {
     super.writeToNBT(tag);
-    tag.setTag("inventory", inventory.serializeNBT());
+    tag.setTag("handler", inventory.serializeNBT());
     tag.setInteger("progress", progress);
     return tag;
   }
@@ -60,7 +60,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
   @Override
   public void readFromNBT(NBTTagCompound tag) {
     super.readFromNBT(tag);
-    inventory.deserializeNBT(tag.getCompoundTag("inventory"));
+    inventory.deserializeNBT(tag.getCompoundTag("handler"));
     progress = tag.getInteger("progress");
   }
 
@@ -98,7 +98,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
         }
       } else if(heldItem.getItem() == ModItems.staff || ModuleRegistry.isModule(heldItem)){
         if (heldItem.getItem() == ModItems.staff) {
-          SpellHolder cap = SpellHolder.fromStack(heldItem);
+          SpellHandler cap = SpellHandler.fromStack(heldItem);
           if (!cap.hasFreeSlot() && inventory.getStackInSlot(0).getItem() != ModItems.runic_dust) {
             if (world.isRemote) {
               player.sendMessage(new TextComponentTranslation("roots.info.staff.no_slots").setStyle(new Style().setColor(TextFormatting.GOLD)));
@@ -155,7 +155,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
       angle += 2.0f;
       ItemStack spellDust = inventory.getStackInSlot(0);
       boolean clearSlot = spellDust.getItem() == ModItems.runic_dust;
-      SpellHolder capability = SpellHolder.fromStack(spellDust);
+      SpellHandler capability = SpellHandler.fromStack(spellDust);
       if ((capability.getSelectedSpell() != null) || clearSlot) {
         SpellBase spell;
         if (clearSlot) {

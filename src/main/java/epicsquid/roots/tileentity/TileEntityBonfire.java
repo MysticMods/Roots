@@ -80,7 +80,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   @Override
   public NBTTagCompound writeToNBT(NBTTagCompound tag) {
     super.writeToNBT(tag);
-    tag.setTag("inventory", inventory.serializeNBT());
+    tag.setTag("handler", inventory.serializeNBT());
     tag.setInteger("burnTime", burnTime);
     tag.setBoolean("doBigFlame", doBigFlame);
     tag.setTag("craftingResult", this.craftingResult.serializeNBT());
@@ -93,7 +93,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   @Override
   public void readFromNBT(NBTTagCompound tag) {
     super.readFromNBT(tag);
-    inventory.deserializeNBT(tag.getCompoundTag("inventory"));
+    inventory.deserializeNBT(tag.getCompoundTag("handler"));
     burnTime = tag.getInteger("burnTime");
     doBigFlame = tag.getBoolean("doBigFlame");
     this.craftingResult = new ItemStack(tag.getCompoundTag("craftingResult"));

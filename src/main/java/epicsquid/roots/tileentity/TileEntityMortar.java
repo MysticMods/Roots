@@ -46,14 +46,14 @@ public class TileEntityMortar extends TileBase {
   @Override
   public NBTTagCompound writeToNBT(NBTTagCompound tag) {
     super.writeToNBT(tag);
-    tag.setTag("inventory", inventory.serializeNBT());
+    tag.setTag("handler", inventory.serializeNBT());
     return tag;
   }
 
   @Override
   public void readFromNBT(NBTTagCompound tag) {
     super.readFromNBT(tag);
-    inventory.deserializeNBT(tag.getCompoundTag("inventory"));
+    inventory.deserializeNBT(tag.getCompoundTag("handler"));
   }
 
   @Override

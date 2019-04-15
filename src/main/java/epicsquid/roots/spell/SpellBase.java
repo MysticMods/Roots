@@ -1,15 +1,13 @@
 package epicsquid.roots.spell;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.inventory.SpellHolder;
-import epicsquid.roots.item.ItemSpellDust;
+import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.PowderInventoryUtil;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
@@ -167,7 +165,7 @@ public abstract class SpellBase {
 
   public ItemStack getResult () {
     ItemStack stack = new ItemStack(ModItems.spell_dust);
-    SpellHolder.fromStack(stack).setSpellToSlot(this);
+    SpellHandler.fromStack(stack).setSpellToSlot(this);
     return stack;
   }
 }

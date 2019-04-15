@@ -35,7 +35,7 @@ public class ItemWildwoodArmor extends ItemArmor implements IModeledObject {
     @Override
     public void initModel()
     {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "handler"));
     }
 
     @Nullable

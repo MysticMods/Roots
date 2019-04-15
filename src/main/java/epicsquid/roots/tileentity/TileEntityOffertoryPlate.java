@@ -45,7 +45,7 @@ public class TileEntityOffertoryPlate extends TileBase {
   @Override
   public NBTTagCompound writeToNBT(NBTTagCompound tag) {
     super.writeToNBT(tag);
-    tag.setTag("inventory", inventory.serializeNBT());
+    tag.setTag("handler", inventory.serializeNBT());
     tag.setInteger("progress", progress);
     if (lastPlayer != null) {
       tag.setTag("lastPlayer", NBTUtil.createUUIDTag(lastPlayer));
@@ -59,7 +59,7 @@ public class TileEntityOffertoryPlate extends TileBase {
     if (tag.hasKey("lastPlayer")) {
       lastPlayer = NBTUtil.getUUIDFromTag(tag.getCompoundTag("lastPlayer"));
     }
-    inventory.deserializeNBT(tag.getCompoundTag("inventory"));
+    inventory.deserializeNBT(tag.getCompoundTag("handler"));
     progress = tag.getInteger("progress");
   }
 
