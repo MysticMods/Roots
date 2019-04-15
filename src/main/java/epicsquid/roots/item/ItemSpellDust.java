@@ -26,26 +26,10 @@ public class ItemSpellDust extends ItemBase {
   @Override
   public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
     if (tab == this.getCreativeTab()) {
-      for(Map.Entry<String, SpellBase> entry : SpellRegistry.spellRegistry.entrySet()){
-        ItemStack stack = new ItemStack(this, 1);
-        createData(stack, entry.getValue());
-        subItems.add(stack);
+      for(SpellBase entry : SpellRegistry.spellRegistry.values()){
+        subItems.add(entry.getResult());
       }
     }
-  }
-
-  public static ItemStack createData(ItemStack stack, SpellBase spell) {
-    SpellHolder capability = SpellHolder.fromStack(stack);
-
-    capability.setSpellToSlot(spell);
-    NBTTagCompound tag = stack.getTagCompound();
-    if (tag == null) {
-      tag = new NBTTagCompound();
-      stack.setTagCompound(tag);
-    }
-
-    tag.setString("spell_name", spell.getName());
-    return stack;
   }
 
   @SideOnly(Side.CLIENT)

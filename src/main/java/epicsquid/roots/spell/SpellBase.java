@@ -7,8 +7,12 @@ import java.util.Map;
 
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.roots.api.Herb;
+import epicsquid.roots.init.ModItems;
+import epicsquid.roots.inventory.SpellHolder;
+import epicsquid.roots.item.ItemSpellDust;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.PowderInventoryUtil;
+import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -24,7 +28,7 @@ public abstract class SpellBase {
 
   private TextFormatting textColor;
   protected EnumCastType castType = EnumCastType.INSTANTANEOUS;
-  private Map<Herb, Double> costs = new HashMap<>();
+  private Map<Herb, Double> costs = new Object2DoubleOpenHashMap<>();
   private List<Ingredient> ingredients = new ArrayList<>();
 
   public enum EnumCastType {
@@ -159,5 +163,11 @@ public abstract class SpellBase {
 
   public void setIngredients (List<Ingredient> ingredients) {
     this.ingredients = ingredients;
+  }
+
+  public ItemStack getResult () {
+    ItemStack stack = new ItemStack(ModItems.spell_dust);
+    SpellHolder.fromStack(stack).setSpellToSlot(this);
+    return stack;
   }
 }

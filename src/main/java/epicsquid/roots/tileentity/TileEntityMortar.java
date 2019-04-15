@@ -135,8 +135,7 @@ public class TileEntityMortar extends TileBase {
               }
             }
           }
-          ItemStack dust = new ItemStack(ModItems.spell_dust, 1);
-          ItemSpellDust.createData(dust, spell);
+          ItemStack dust = spell.getResult();
           if (!world.isRemote) {
             ItemSpawnUtil.spawnItem(world, getPos(), dust);
             markDirty();
