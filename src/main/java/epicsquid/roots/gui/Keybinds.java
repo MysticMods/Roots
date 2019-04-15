@@ -1,11 +1,10 @@
 package epicsquid.roots.gui;
 
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
-import epicsquid.roots.util.PowderInventoryUtil;
+import epicsquid.roots.network.MessageServerOpenPouch;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -42,10 +41,8 @@ public class Keybinds {
   public static void onKeyInput (InputEvent.KeyInputEvent event) {
     Minecraft mc = Minecraft.getMinecraft();
     if (POUCH_KEYBIND.isKeyDown() && mc.inGameHasFocus) {
-      ItemStack pouch = PowderInventoryUtil.getPouch(mc.player);
-      if (!pouch.isEmpty()) {
-        pouch.getItem().onItemRightClick(mc.world, mc.player, EnumHand.MAIN_HAND);
-      }
+      MessageServerOpenPouch packet = new MessageServerOpenPouch();
+      PacketHandler.INSTANCE.sendToServer(packet);
     } else if (QUIVER_KEYBIND.isKeyDown() && mc.inGameHasFocus) {
       // Handle the quiver here when implemented
     }
