@@ -39,9 +39,7 @@ public class MortarWrapper implements IRecipeWrapper {
       for (Ingredient ingredient : spellBase.getIngredients()) {
         ingredients.setInputs(VanillaTypes.ITEM, Arrays.asList(ingredient.getMatchingStacks()));
       }
-      ItemStack spellDust = new ItemStack(ModItems.spell_dust);
-      ItemSpellDust.createData(spellDust, spellBase);
-      ingredients.setOutput(VanillaTypes.ITEM, spellDust);
+      ingredients.setOutput(VanillaTypes.ITEM, spellBase.getResult());
     }
   }
 }

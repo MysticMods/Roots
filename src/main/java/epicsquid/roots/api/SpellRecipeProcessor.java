@@ -34,8 +34,7 @@ public class SpellRecipeProcessor implements IComponentProcessor {
       return ItemStackUtil.serializeIngredient(ingredient);
     }
     if (s.equalsIgnoreCase("result")) {
-      ItemStack dust = new ItemStack(ModItems.spell_dust);
-      ItemSpellDust.createData(dust, SpellRegistry.getSpell(spellName));
+      ItemStack dust = SpellRegistry.getSpell(spellName).getResult();
 
       return ItemStackUtil.serializeStack(dust);
     }
