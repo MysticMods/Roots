@@ -31,14 +31,15 @@ public class ItemPouch extends ItemBase {
   public static double getHerbQuantity(@Nonnull ItemStack pouch, Herb herb) {
     PouchHandler pouchHandler = PouchHandler.getHandler(pouch);
     if (pouchHandler == null) return 0.0;
+    double count = getNbtQuantity(pouch, herb.getName());
     IItemHandler handler = pouchHandler.getHerbs();
     for (int i = 0; i < handler.getSlots(); i++) {
       ItemStack stack = handler.getStackInSlot(i);
       if (!stack.isEmpty() && HerbRegistry.containsHerbItem(stack.getItem()) && HerbRegistry.getHerbByItem(stack.getItem()).equals(herb)) {
-        return stack.getCount() + getNbtQuantity(pouch, herb.getName());
+        count += stack.getCount();
       }
     }
-    return getNbtQuantity(pouch, herb.getName());
+    return count;
   }
 
   @Override
