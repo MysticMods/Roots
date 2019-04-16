@@ -92,6 +92,12 @@ repositories {
     }
 }
 
+jar {
+    manifest {
+        attributes 'FMLAT': 'roots_at.cfg'
+    }
+}
+
 processResources {
     // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version
@@ -109,6 +115,8 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+
+    rename '(.+_at.cfg)', 'META-INF/$1'
 }
 
 
