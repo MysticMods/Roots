@@ -57,4 +57,6 @@ public class ItemLivingHoe extends ItemHoe implements IModeledObject, ICustomMod
     }
     super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
   }
+
+  // TODO: Add a break block thing
 }

@@ -10,9 +10,11 @@ import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.entity.spell.EntityPetalShell;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.integration.baubles.pouch.BaubleCapabilityHandler;
+import epicsquid.roots.integration.baubles.pouch.BaubleBeltCapabilityHandler;
+import epicsquid.roots.integration.baubles.quiver.BaubleBodyCapabilityHandler;
 import epicsquid.roots.item.ItemKnife;
 import epicsquid.roots.item.ItemPouch;
+import epicsquid.roots.item.ItemQuiver;
 import epicsquid.roots.network.MessagePlayerDataUpdate;
 import epicsquid.roots.network.MessagePlayerGroveUpdate;
 import epicsquid.roots.network.fx.*;
@@ -145,7 +147,10 @@ public class EventManager {
   @Optional.Method(modid = "baubles")
   public void addBaublesCapability (AttachCapabilitiesEvent<ItemStack> event) {
     if (event.getObject().getItem() instanceof ItemPouch) {
-      event.addCapability(new ResourceLocation(Roots.MODID, "baubles_pouch"), BaubleCapabilityHandler.instance);
+      event.addCapability(new ResourceLocation(Roots.MODID, "baubles_pouch"), BaubleBeltCapabilityHandler.instance);
+    }
+    if (event.getObject().getItem() instanceof ItemQuiver) {
+      event.addCapability(new ResourceLocation(Roots.MODID, "baubles_quiver"), BaubleBodyCapabilityHandler.instance);
     }
   }
 

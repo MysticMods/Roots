@@ -1,0 +1,17 @@
+{
+    "name": "Living Quiver",
+    "icon": "roots:living_quiver",
+    "category": "apparatus",
+    "advancement": "roots:spirit_herb",
+    "secret": true,
+    "pages": [
+      {
+        "type": "text",
+        "text": "A small quiver reinforced with wildwood, it has the ability to augment normal arrows or even grow arrows from nothing at the cost of durability, although these are not augmented as strongly.$(br2)It can even consume arrows stuck into the ground nearby, although you will have to sneak closer to the ground in order to get a good grip on them. However, it cannot consume any arrows grown of itself, and the process damages any augments the arrow may have had, returning it to its basic form.$(br2)The natural magic infused in this quiver allow it to repair itself, like other living tools, but at a much reduced rate."
+      },
+      {
+        "type": "ritual_crafting_template",
+        "recipe": "living_quiver"
+      }
+    ]
+  }

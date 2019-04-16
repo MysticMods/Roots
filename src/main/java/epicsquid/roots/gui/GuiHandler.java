@@ -10,7 +10,9 @@ package epicsquid.roots.gui;
 import javax.annotation.Nullable;
 
 import epicsquid.roots.gui.client.GuiPouch;
+import epicsquid.roots.gui.client.GuiQuiver;
 import epicsquid.roots.gui.container.ContainerPouch;
+import epicsquid.roots.gui.container.ContainerQuiver;
 import epicsquid.roots.util.PowderInventoryUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -19,6 +21,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 public class GuiHandler implements IGuiHandler {
 
   public static final int POUCH_ID = 16;
+  public static final int QUIVER_ID = 17;
 
   @Nullable
   @Override
@@ -26,6 +29,8 @@ public class GuiHandler implements IGuiHandler {
     switch (id) {
     case POUCH_ID:
       return new ContainerPouch(player);
+    case QUIVER_ID:
+      return new ContainerQuiver(player);
     default:
       return null;
     }
@@ -37,6 +42,8 @@ public class GuiHandler implements IGuiHandler {
     switch (id) {
     case POUCH_ID:
       return new GuiPouch(new ContainerPouch(player));
+    case QUIVER_ID:
+      return new GuiQuiver(new ContainerQuiver(player));
     default:
       return null;
     }

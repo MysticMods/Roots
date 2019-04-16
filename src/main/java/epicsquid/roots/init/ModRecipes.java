@@ -604,6 +604,14 @@ public class ModRecipes {
             new ItemStack(ModItems.wildroot),
             new ItemStack(Items.FLINT)));
 
+    addCraftingRecipe("living_quiver",
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_quiver), 2).addIngredients(
+            new OreIngredient("chestWood"),
+            new ItemStack(ModItems.bark_wildwood),
+            new ItemStack(ModItems.bark_wildwood),
+            new ItemStack(ModItems.terra_moss),
+            new ItemStack(ModItems.spirit_herb)));
+
     addCraftingRecipe("infernal_bulb",
         new PyreCraftingRecipe(new ItemStack(ModItems.infernal_bulb, 3), 1).addIngredients(
             new ItemStack(Items.NETHER_WART),
