@@ -5,6 +5,7 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.ItemSpawnUtil;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.block.*;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
@@ -37,7 +38,11 @@ public class SpellHarvest extends SpellBase {
   }
 
   public Deque<HarvestEntry> queue = new ArrayDeque<>();
-  public HashMap<Block, ItemStack> seedCache = new HashMap<>();
+  public static HashMap<Block, ItemStack> seedCache = new HashMap<>();
+
+  static {
+    seedCache.put(Blocks.NETHER_WART, new ItemStack(Items.NETHER_WART));
+  }
   public HashMap<Block, IProperty<Integer>> propertyMap = new HashMap<>();
 
   public SpellHarvest(String name) {
@@ -86,39 +91,59 @@ public class SpellHarvest extends SpellBase {
     }
   }
 
+  private static List<Block> skipBlocks = Arrays.asList(Blocks.BEDROCK, Blocks.GRASS, Blocks.DIRT);
+  private static Map<IProperty<Integer>, Integer> stateMax = new Object2IntOpenHashMap<>();
+
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
-    if (!player.world.isRemote) {
-      List<BlockPos> pumpkinsAndMelons = new ArrayList<>();
-      List<BlockPos> reedsAndCactus = new ArrayList<>();
-      List<BlockPos> crops = Util.getBlocksWithinRadius(player.world, player.getPosition(), 6, 5, 6, (pos) -> {
-        IBlockState state = player.world.getBlockState(pos);
-        if (state.getBlock() == Blocks.PUMPKIN || state.getBlock() == Blocks.MELON_BLOCK) {
-          pumpkinsAndMelons.add(pos);
-          return false;
-        }
-        if (state.getBlock() == Blocks.REEDS || state.getBlock() == Blocks.CACTUS) {
-          reedsAndCactus.add(pos);
-          return false;
-        }
-        if (state.getProperties().get(BlockCrops.AGE) != null && state.getValue(BlockCrops.AGE) == 7) {
-          return true;
-        }
-        for (IProperty<Integer> prop : Arrays.asList(BlockBeetroot.AGE, BlockNetherWart.AGE, BlockCocoa.AGE)) {
-          if (state.getProperties().get(prop) != null && state.getValue(prop).equals(Collections.max(prop.getAllowedValues()))) {
+    List<BlockPos> pumpkinsAndMelons = new ArrayList<>();
+    List<BlockPos> reedsAndCactus = new ArrayList<>();
+    List<BlockPos> crops = Util.getBlocksWithinRadius(player.world, player.getPosition(), 6, 5, 6, (pos) -> {
+      if (player.world.isAirBlock(pos)) return false;
+      IBlockState state = player.world.getBlockState(pos);
+      if (skipBlocks.contains(state.getBlock())) return false;
+
+      if (state.getBlock() == Blocks.PUMPKIN || state.getBlock() == Blocks.MELON_BLOCK) {
+        pumpkinsAndMelons.add(pos);
+        return false;
+      }
+      if (state.getBlock() == Blocks.REEDS || state.getBlock() == Blocks.CACTUS) {
+        reedsAndCactus.add(pos);
+        return false;
+      }
+      for (IProperty<?> prop : state.getPropertyKeys()) {
+        if (prop.getName().equals("age") && prop.getValueClass() == Integer.class) {
+          int max = stateMax.getOrDefault(prop, -1);
+          if (max == -1) {
+            max = Collections.max((Collection<Integer>) prop.getAllowedValues());
+            stateMax.put((IProperty<Integer>) prop, max);
+          }
+          if (state.getValue((IProperty<Integer>) prop) == max) {
             return true;
           }
         }
-        return false;
-      });
+      }
+      return false;
+    });
 
-      for (BlockPos pos : crops) {
-        IBlockState state = player.world.getBlockState(pos);
-        ItemStack seed = getSeed(state);
-        if (!seed.isEmpty()) {
-          // Do do do the harvest!
-          IProperty<Integer> age = propertyMap.getOrDefault(state.getBlock(), BlockCrops.AGE);
-          IBlockState newState = state.withProperty(age, Collections.min(age.getAllowedValues()));
+    int count = 0;
+
+    for (BlockPos pos : crops) {
+      IBlockState state = player.world.getBlockState(pos);
+      ItemStack seed = getSeed(state);
+      if (!seed.isEmpty()) {
+        // Do do do the harvest!
+        IProperty<Integer> prop = null;
+        for (IProperty<Integer> entry : stateMax.keySet()) {
+          if (state.getPropertyKeys().contains(entry)) {
+            prop = entry;
+          }
+        }
+
+        assert prop != null;
+
+        if (!player.world.isRemote) {
+          IBlockState newState = state.withProperty(prop, 0);
           NonNullList<ItemStack> drops = NonNullList.create();
           queue.push(new HarvestEntry(seed, player.dimension, pos, state));
           state.getBlock().getDrops(drops, player.world, pos, state, 0);
@@ -129,36 +154,44 @@ public class SpellHarvest extends SpellBase {
             ItemSpawnUtil.spawnItem(player.world, pos, stack);
           }
         }
+        count++;
       }
-      for (BlockPos pos : pumpkinsAndMelons) {
+    }
+    for (BlockPos pos : pumpkinsAndMelons) {
+      count++;
+      if (!player.world.isRemote) {
         IBlockState state = player.world.getBlockState(pos);
         player.world.setBlockState(pos, Blocks.AIR.getDefaultState());
         state.getBlock().harvestBlock(player.world, player, pos, state, null, player.getHeldItemMainhand());
       }
-      Set<BlockPos> done = new HashSet<>();
-      List<BlockPos> lowest = new ArrayList<>();
-      for (BlockPos pos : reedsAndCactus) {
-        if (done.contains(pos)) continue;
+    }
+    Set<BlockPos> done = new HashSet<>();
+    List<BlockPos> lowest = new ArrayList<>();
+    for (BlockPos pos : reedsAndCactus) {
+      if (done.contains(pos)) continue;
 
-        BlockPos down = pos.down();
-        IBlockState downState = player.world.getBlockState(down);
-        while (downState.getBlock() == Blocks.CACTUS || downState.getBlock() == Blocks.REEDS) {
-          done.add(down);
-          down = down.down();
-          downState = player.world.getBlockState(down);
-        }
-        lowest.add(down.up());
-        done.add(pos);
+      BlockPos down = pos.down();
+      IBlockState downState = player.world.getBlockState(down);
+      while (downState.getBlock() == Blocks.CACTUS || downState.getBlock() == Blocks.REEDS) {
+        done.add(down);
+        down = down.down();
+        downState = player.world.getBlockState(down);
       }
-      for (BlockPos pos : lowest) {
-        IBlockState state = player.world.getBlockState(pos.up());
-        if (state.getBlock() == Blocks.CACTUS || state.getBlock() == Blocks.REEDS) {
+      lowest.add(down.up());
+      done.add(pos);
+    }
+    for (BlockPos pos : lowest) {
+      IBlockState state = player.world.getBlockState(pos.up());
+      if (state.getBlock() == Blocks.CACTUS || state.getBlock() == Blocks.REEDS) {
+        count++;
+        if (!player.world.isRemote) {
           state.getBlock().harvestBlock(player.world, player, pos.up(), state, null, player.getHeldItemMainhand());
           player.world.setBlockState(pos.up(), Blocks.AIR.getDefaultState());
         }
       }
     }
-    return true;
+
+    return count != 0;
   }
 
   public ItemStack getSeed(IBlockState state) {
