@@ -9,6 +9,7 @@ import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
+import net.minecraft.block.BlockNetherWart;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -53,6 +54,8 @@ public class SpellRampantGrowth extends SpellBase {
         if (skips.contains(block)) return false;
         if (state.getBlock() instanceof BlockFlower) return false;
         return ((IGrowable) state.getBlock()).canGrow(player.world, pos, state, false);
+      } else if (state.getBlock() == Blocks.NETHER_WART) {
+        return state.getValue(BlockNetherWart.AGE) < 3;
       }
       return false;
     });
