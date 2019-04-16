@@ -256,10 +256,7 @@ jei.roots.bark.desc=Created when breaking logs with a knife.
 jei.roots.wildwood.desc=Brought into the world by the ritual of Wildroot Growth.
 
 # Quiver
-roots.quiver.one_broke= The other arrow broke in the process.
-roots.quiver.some_broke= The other arrows broke in the process.
-roots.quiver.picked_up_arrow=Took an arrow and put it in your quiver!%s
-roots.quiver.picked_up_arrows=Took arrows and put them in your quiver!%s
+roots.quiver.picked_up_arrow=Retrieved some arrows.
 roots.quiver.quiver_full=Your quiver is full.
-roots.quiver.fragile=This arrow was grown from a living quiver, and is too fragile to pick up.
-roots.quiver.broke=Unfortunately, you broke all the arrows in your attempt to dislodge them.
+roots.quiver.fragile=This grown arrow cannot be picked up.
+roots.quiver.broke=All of the arrows broke.

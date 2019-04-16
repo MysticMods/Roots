@@ -156,37 +156,25 @@ public class ItemQuiver extends ItemArrowBase {
     }
 
     int consumed = 0;
-    int broke = 0;
+    int generated = 0;
     for (EntityArrow arrow : arrows) {
       arrow.setDead();
       if (arrow.getEntityData().hasKey("generated")) {
+        generated++;
         continue;
       }
-      if (Util.rand.nextInt(3) == 0) {
-        broke++;
-      } else {
-        if (!handler.consume()) {
-          break;
-        } else {
+      if (Util.rand.nextInt(3) != 0) {
+        if (handler.consume()) {
           consumed++;
         }
       }
     }
-    ITextComponent comp = new TextComponentString("");
-    if (broke == 1) {
-      comp = new TextComponentTranslation("roots.quiver.one_broke");
-    } else if (broke > 1) {
-      comp = new TextComponentTranslation("roots.quiver.some_broke");
-    }
+
     if (consumed > 0) {
-      if (consumed == 1) {
-        player.sendStatusMessage(new TextComponentTranslation("roots.quiver.picked_up_arrow", comp).setStyle(new Style().setColor(TextFormatting.GREEN).setBold(true)), true);
-      } else {
-        player.sendStatusMessage(new TextComponentTranslation("roots.quiver.picked_up_arrows", comp).setStyle(new Style().setColor(TextFormatting.GREEN).setBold(true)), true);
-      }
-    } else if (consumed == 0 && broke == 0) {
+      player.sendStatusMessage(new TextComponentTranslation("roots.quiver.picked_up_arrow").setStyle(new Style().setColor(TextFormatting.GREEN).setBold(true)), true);
+    } else if (consumed == 0 && generated > 0){
       player.sendStatusMessage(new TextComponentTranslation("roots.quiver.fragile").setStyle(new Style().setColor(TextFormatting.DARK_GREEN).setBold(true)), true);
-    } else if (consumed == 0 && broke > 0) {
+    } else {
       player.sendStatusMessage(new TextComponentTranslation("roots.quiver.broke").setStyle(new Style().setColor(TextFormatting.DARK_GREEN).setBold(true)), true);
     }
   }
