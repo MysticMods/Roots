@@ -1,23 +1,12 @@
 package epicsquid.roots.item;
 
-import baubles.api.BaubleType;
-import baubles.api.BaublesApi;
-import baubles.api.cap.IBaublesItemHandler;
 import epicsquid.mysticallib.item.ItemArrowBase;
-import epicsquid.mysticallib.item.ItemBase;
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
-import epicsquid.roots.api.Herb;
 import epicsquid.roots.gui.GuiHandler;
-import epicsquid.roots.handler.PouchHandler;
 import epicsquid.roots.handler.QuiverHandler;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.integration.baubles.quiver.BaubleQuiverInventoryUtil;
-import epicsquid.roots.network.MessageServerTryPickupArrows;
 import epicsquid.roots.util.QuiverInventoryUtil;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,29 +15,20 @@ import net.minecraft.entity.projectile.EntityTippedArrow;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.text.*;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Optional;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid=Roots.MODID)
 public class ItemQuiver extends ItemArrowBase {
-  private static AxisAlignedBB bounding = new AxisAlignedBB(-1.5, -1.5, -1.5, 1.5, 1.5, 1.5);
-  private static boolean lastSneak = false;
+  public static AxisAlignedBB bounding = new AxisAlignedBB(-1.5, -1.5, -1.5, 1.5, 1.5, 1.5);
 
   public ItemQuiver(@Nonnull String name) {
     super(name);
@@ -117,31 +97,6 @@ public class ItemQuiver extends ItemArrowBase {
     return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
   }
 
-  @SubscribeEvent
-  @SideOnly(Side.CLIENT)
-  public static void onPlayerSneak (TickEvent.ClientTickEvent event) {
-    Minecraft mc = Minecraft.getMinecraft();
-    if (mc.player == null) return;
-
-    if (lastSneak != mc.player.isSneaking() && !lastSneak) {
-      lastSneak = mc.player.isSneaking();
-
-      List<EntityArrow> arrows = mc.world.getEntitiesWithinAABB(EntityArrow.class, bounding.offset(mc.player.getPosition()));
-      if (arrows.isEmpty()) return;
-
-      ItemStack quiver = QuiverInventoryUtil.getQuiver(mc.player);
-      if (quiver.isEmpty()) return;
-
-      QuiverHandler handler = QuiverHandler.getHandler(quiver);
-      if (!handler.canConsume()) return;
-
-      MessageServerTryPickupArrows packet = new MessageServerTryPickupArrows();
-      PacketHandler.INSTANCE.sendToServer(packet);
-    }
-
-    lastSneak = mc.player.isSneaking();
-  }
-
   public static void tryPickupArrows (EntityPlayer player) {
     ItemStack quiver = QuiverInventoryUtil.getQuiver(player);
     if (quiver.isEmpty()) return;
@@ -195,14 +150,5 @@ public class ItemQuiver extends ItemArrowBase {
     return EnumRarity.RARE;
   }
 
-  @SubscribeEvent
-  @Optional.Method(modid="baubles")
-  public static void onBaubleTick (TickEvent.PlayerTickEvent event) {
-    ItemStack quiver = BaubleQuiverInventoryUtil.getQuiver(event.player);
-    if (quiver.isEmpty() || quiver.getItemDamage() == 0) return;
 
-    if (Util.rand.nextInt(repairChance) == 0) {
-      quiver.setItemDamage(quiver.getItemDamage()-1);
-    }
-  }
 }
