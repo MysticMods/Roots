@@ -6,6 +6,7 @@ import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.item.ItemFoodBase;
 import epicsquid.mysticallib.item.ItemSeedBase;
 import epicsquid.roots.Roots;
+import epicsquid.roots.config.RootsConfig;
 import epicsquid.roots.item.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
@@ -54,7 +55,7 @@ public class ModItems {
 
   @SubscribeEvent
   public static void onItemRegister (RegistryEvent.Register<Item> event) {
-    if (Loader.isModLoaded("baubles")) {
+    if (Loader.isModLoaded("baubles") && !RootsConfig.disableBaubleBow) {
       baubleBow = new ItemBaubleBow();
       baubleBow.setRegistryName(new ResourceLocation("bow"));
       event.getRegistry().register(baubleBow);
