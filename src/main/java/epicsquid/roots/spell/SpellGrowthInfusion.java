@@ -24,7 +24,7 @@ public class SpellGrowthInfusion extends SpellBase {
   public static SpellGrowthInfusion instance = new SpellGrowthInfusion(spellName);
 
   public SpellGrowthInfusion(String name) {
-    super(name, TextFormatting.GREEN, 48f / 255f, 255f / 255f, 48f / 255f, 192f / 255f, 255f / 255f, 192f / 255f);
+    super(name, TextFormatting.YELLOW, 48f / 255f, 255f / 255f, 48f / 255f, 192f / 255f, 255f / 255f, 192f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 16;
 
