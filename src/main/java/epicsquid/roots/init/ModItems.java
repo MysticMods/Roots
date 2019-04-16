@@ -6,7 +6,6 @@ import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.item.ItemFoodBase;
 import epicsquid.mysticallib.item.ItemSeedBase;
 import epicsquid.roots.Roots;
-import epicsquid.roots.config.RootsConfig;
 import epicsquid.roots.item.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
@@ -19,19 +18,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
 
-@Mod.EventBusSubscriber(modid=Roots.MODID)
 public class ModItems {
 
   // All mod items
@@ -50,17 +43,6 @@ public class ModItems {
   //Armor Materials
   public static final ItemArmor.ArmorMaterial sylvanArmorMaterial = EnumHelper.addArmorMaterial("SYLVAN", Roots.MODID + ":sylvan", 8, new int[]{1, 3, 4, 2}, 20, SoundEvents.BLOCK_SNOW_PLACE, 0F);
   public static final ItemArmor.ArmorMaterial wildwoodArmorMaterial = EnumHelper.addArmorMaterial("WILDWOOD", Roots.MODID + ":wildwood", 20, new int[]{3, 5, 6, 3}, 10, SoundEvents.BLOCK_WOOD_PLACE, 0F);
-
-  public static Item baubleBow = null;
-
-  @SubscribeEvent
-  public static void onItemRegister (RegistryEvent.Register<Item> event) {
-    if (Loader.isModLoaded("baubles") && !RootsConfig.disableBaubleBow) {
-      baubleBow = new ItemBaubleBow();
-      baubleBow.setRegistryName(new ResourceLocation("bow"));
-      event.getRegistry().register(baubleBow);
-    }
-  }
 
   /**
    * Register all items
