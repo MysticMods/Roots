@@ -4,6 +4,7 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.MessageServerOpenPouch;
+import epicsquid.roots.network.MessageServerOpenQuiver;
 import epicsquid.roots.network.MessageServerUpdateStaff;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.client.Minecraft;
@@ -64,7 +65,8 @@ public class Keybinds {
       MessageServerOpenPouch packet = new MessageServerOpenPouch();
       PacketHandler.INSTANCE.sendToServer(packet);
     } else if (QUIVER_KEYBIND.isKeyDown() && mc.inGameHasFocus) {
-      // Handle the quiver here when implemented
+      MessageServerOpenQuiver packet = new MessageServerOpenQuiver();
+      PacketHandler.INSTANCE.sendToServer(packet);
     } else if (mc.inGameHasFocus) {
       if (mc.player.getHeldItemOffhand().getItem() != ModItems.staff && mc.player.getHeldItemMainhand().getItem() != ModItems.staff) {
         return;

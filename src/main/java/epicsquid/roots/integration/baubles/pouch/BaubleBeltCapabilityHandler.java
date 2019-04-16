@@ -11,8 +11,8 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class BaubleCapabilityHandler implements ICapabilityProvider {
-  public static final BaubleCapabilityHandler instance = new BaubleCapabilityHandler();
+public class BaubleBeltCapabilityHandler implements ICapabilityProvider {
+  public static final BaubleBeltCapabilityHandler instance = new BaubleBeltCapabilityHandler();
 
   public static IBauble bauble = new BaubleItem(BaubleType.BELT);
 
