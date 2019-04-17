@@ -34,7 +34,8 @@ public class EntityRitualOvergrowth extends EntityRitualBase {
 
   @Override
   public void onUpdate() {
-    getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
+    int curLifetime = getDataManager().get(lifetime);
+    getDataManager().set(lifetime, curLifetime - 1);
     getDataManager().setDirty(lifetime);
     if (getDataManager().get(lifetime) < 0) {
       setDead();
