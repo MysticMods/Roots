@@ -27,12 +27,13 @@ public class EntityRitualWildGrowth extends EntityRitualBase {
 
   public EntityRitualWildGrowth(World worldIn) {
     super(worldIn);
-    this.getDataManager().register(lifetime, RitualRegistry.ritual_overgrowth.getDuration() + 20);
+    this.getDataManager().register(lifetime, RitualRegistry.ritual_wild_growth.getDuration() + 20);
   }
 
   @Override
   public void onUpdate() {
-    getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
+    int curLifetime = getDataManager().get(lifetime);
+    getDataManager().set(lifetime, curLifetime - 1);
     getDataManager().setDirty(lifetime);
     if (getDataManager().get(lifetime) < 0) {
       setDead();
