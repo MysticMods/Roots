@@ -1,13 +1,9 @@
 package epicsquid.roots.spell;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.roots.api.Herb;
-import epicsquid.roots.init.ModItems;
 import epicsquid.roots.handler.SpellHandler;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.PowderInventoryUtil;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
@@ -17,6 +13,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public abstract class SpellBase {
   private float red1, green1, blue1;
@@ -63,7 +63,7 @@ public abstract class SpellBase {
       if (matches) {
         double r = PowderInventoryUtil.getPowderTotal(player, herb);
         matches = r >= d;
-        if (!matches) {
+        if (!matches && !player.isCreative()) {
           player.sendStatusMessage(new TextComponentTranslation("roots.info.pouch.no_herbs", new TextComponentTranslation(String.format("item.%s.name", herb.getName()))), true);
         }
       }
