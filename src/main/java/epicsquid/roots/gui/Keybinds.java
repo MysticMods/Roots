@@ -9,7 +9,6 @@ import epicsquid.roots.network.MessageServerUpdateStaff;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -38,7 +37,7 @@ public class Keybinds {
   private static Object2IntOpenHashMap<KeyBinding> SLOT_MAP = new Object2IntOpenHashMap<>();
 
   public static void init () {
-    POUCH_KEYBIND = new KeyBinding(ROOTS_BASE + "pouch", 0, ROOTS_GROUP);
+    POUCH_KEYBIND = new KeyBinding(ROOTS_BASE + "quiver", 0, ROOTS_GROUP);
     QUIVER_KEYBIND = new KeyBinding(ROOTS_BASE + "quiver", 0, ROOTS_GROUP);
 
     SLOT_MAP.put(SPELL_SLOT_1 = new KeyBinding(ROOTS_BASE + "spell_slot_1", 0, ROOTS_GROUP), 1);

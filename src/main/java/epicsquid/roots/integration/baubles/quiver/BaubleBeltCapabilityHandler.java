@@ -1,4 +1,4 @@
-package epicsquid.roots.integration.baubles.pouch;
+package epicsquid.roots.integration.baubles.quiver;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;

@@ -2,7 +2,7 @@ package epicsquid.roots.util;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
-import epicsquid.roots.integration.baubles.pouch.BaublePowderInventoryUtil;
+import epicsquid.roots.integration.baubles.quiver.BaubleQuiverInventoryUtil;
 import epicsquid.roots.item.ItemPouch;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
@@ -10,7 +10,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -35,7 +34,7 @@ public class PowderInventoryUtil {
       }
     }
     if (Loader.isModLoaded("baubles")) {
-      return BaublePowderInventoryUtil.getPouch(player);
+      return BaubleQuiverInventoryUtil.getQuiver(player);
     }
 
     return ItemStack.EMPTY;

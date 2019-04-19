@@ -10,7 +10,7 @@ import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.entity.spell.EntityPetalShell;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.integration.baubles.pouch.BaubleBeltCapabilityHandler;
+import epicsquid.roots.integration.baubles.quiver.BaubleBeltCapabilityHandler;
 import epicsquid.roots.item.ItemKnife;
 import epicsquid.roots.item.ItemPouch;
 import epicsquid.roots.network.MessagePlayerDataUpdate;

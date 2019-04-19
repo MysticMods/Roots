@@ -1,12 +1,5 @@
 package epicsquid.roots.init;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticalworld.entity.EntityBeetle;
 import epicsquid.mysticalworld.entity.EntityDeer;
@@ -42,6 +35,12 @@ import net.minecraftforge.oredict.OreIngredient;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ModRecipes {
 
@@ -716,7 +715,7 @@ public class ModRecipes {
             new ItemStack(ModItems.seeds),
             new ItemStack(ModItems.seeds)).setBurnTime(20));
 
-    // TODO: Work out a way to upgrade the component pouch rather than
+    // TODO: Work out a way to upgrade the component quiver rather than
     // TODO: simply overwriting the contents.
     addCraftingRecipe("apothecary_pouch", new ApothecaryPouchRecipe(new ItemStack(ModItems.apothecary_pouch), 1).addIngredients(
             new ItemStack(Blocks.ENDER_CHEST),
