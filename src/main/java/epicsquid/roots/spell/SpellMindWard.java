@@ -1,7 +1,6 @@
 package epicsquid.roots.spell;
 
-import java.util.List;
-
+import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
@@ -14,6 +13,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
 
+import java.util.List;
+
 public class SpellMindWard extends SpellBase {
   public static String spellName = "spell_mind_ward";
   public static SpellMindWard instance = new SpellMindWard(spellName);
@@ -21,7 +22,7 @@ public class SpellMindWard extends SpellBase {
   public SpellMindWard(String name) {
     super(name, TextFormatting.DARK_RED, 128f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
-    this.cooldown = 80;
+    this.cooldown = SpellConfig.categoryMindWard.cooldown;
 
     addCost(HerbRegistry.getHerbByName("wildewheet"), 0.5f);
     addIngredients(

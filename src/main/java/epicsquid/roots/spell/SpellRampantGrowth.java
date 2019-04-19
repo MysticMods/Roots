@@ -2,9 +2,9 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.network.fx.MessageLifeInfusionFX;
 import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.block.Block;
@@ -30,7 +30,7 @@ public class SpellRampantGrowth extends SpellBase {
   public SpellRampantGrowth(String name) {
     super(name, TextFormatting.DARK_GREEN, 224f / 255f, 135f / 255f, 40f / 255f, 46f / 255f, 94f / 255f, 93f / 255f);
     this.castType = EnumCastType.CONTINUOUS;
-    this.cooldown = 16;
+    this.cooldown = SpellConfig.categoryRampantGrowth.cooldown;
 
     addCost(HerbRegistry.getHerbByName("spirit_herb"), 0.65f);
     addCost(HerbRegistry.getHerbByName("pereskia"), 0.45f);
@@ -47,7 +47,7 @@ public class SpellRampantGrowth extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
-    List<BlockPos> positions = Util.getBlocksWithinRadius(player.world, player.getPosition(), 6, 3, 6, (pos) -> {
+    List<BlockPos> positions = Util.getBlocksWithinRadius(player.world, player.getPosition(), SpellConfig.categoryRampantGrowth.radius, SpellConfig.categoryRampantGrowth.yRadius, SpellConfig.categoryRampantGrowth.radius, (pos) -> {
       IBlockState state = player.world.getBlockState(pos);
       if (state.getBlock() instanceof IGrowable) {
         Block block = state.getBlock();
