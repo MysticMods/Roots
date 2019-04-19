@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "roots:items/ritual_placeholder"
+    "layer0": "roots:items/ritual_transmutation"
   }
 }
