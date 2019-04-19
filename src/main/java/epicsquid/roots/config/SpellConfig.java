@@ -12,6 +12,11 @@ public class SpellConfig {
   public static CategoryHarvest categoryHarvest = new CategoryHarvest();
   public static CategoryLifeDrain categoryLifeDrain = new CategoryLifeDrain();
   public static CategoryLightDrifter categoryLightDrifter = new CategoryLightDrifter();
+  public static CategoryMagnetism categoryMagnetism = new CategoryMagnetism();
+  public static CategoryMindWard categoryMindWard = new CategoryMindWard();
+  public static CategoryPetalShell categoryPetalShell = new CategoryPetalShell();
+  public static CategoryRadiance categoryRadiance = new CategoryRadiance();
+  public static CategoryRampantGrowth categoryRampantGrowth = new CategoryRampantGrowth();
 
   public static class CategoryAcidCloud {
 
@@ -75,41 +80,131 @@ public class SpellConfig {
     @Config.Name("Harvest Spell Y Radius")
     @Config.Comment("The highest and lowest y level the spell can work at")
     @Config.RangeInt(min = 0)
-    public int Yradius = 5;
+    public int yRadius = 5;
 
   }
 
-public static class CategoryLifeDrain {
+  public static class CategoryLifeDrain {
 
-  @Config.Name("Life Drain Spell Cooldown")
-  @Config.Comment("Sets the cooldown time in ticks for Life Drain")
-  @Config.RangeInt(min = 0)
-  public int cooldown = 28;
+    @Config.Name("Life Drain Spell Cooldown")
+    @Config.Comment("Sets the cooldown time in ticks for Life Drain")
+    @Config.RangeInt(min = 0)
+    public int cooldown = 28;
 
-  @Config.Name("Life Drain Spell Damage")
-  @Config.Comment("Sets how much damage per hit is dealt by Life Drain")
-  @Config.RangeDouble(min = 0)
-  public float damage = 1F;
+    @Config.Name("Life Drain Spell Damage")
+    @Config.Comment("Sets how much damage per hit is dealt by Life Drain")
+    @Config.RangeDouble(min = 0)
+    public float damage = 1F;
 
-  @Config.Name("Life Drain Spell Healing")
-  @Config.Comment("Sets how much the player is healed per hit (by default is half the damage)")
-  @Config.RangeDouble(min = 0)
-  public float healing = 0.5F;
+    @Config.Name("Life Drain Spell Healing")
+    @Config.Comment("Sets how much the player is healed per hit (by default is half the damage)")
+    @Config.RangeDouble(min = 0)
+    public float healing = 0.5F;
 
-}
+  }
 
-public static class CategoryLightDrifter {
+  public static class CategoryLightDrifter {
 
-  @Config.Name("Light Drifter Spell Cooldown")
-  @Config.Comment("Sets the cooldown time in ticks for Light Drifter")
-  @Config.RangeInt(min = 0)
-  public int cooldown = 200;
+    @Config.Name("Light Drifter Spell Cooldown")
+    @Config.Comment("Sets the cooldown time in ticks for Light Drifter")
+    @Config.RangeInt(min = 0)
+    public int cooldown = 200;
 
-  @Config.Name("Light Drift Effect Duration")
-  @Config.Comment("Controls how much time in ticks the player can stay in light drift mode")
-  @Config.RangeInt(min = 20)
-  public int driftingDuration = 100;
+    @Config.Name("Light Drift Effect Duration")
+    @Config.Comment("Controls how much time in ticks the player can stay in light drift mode")
+    @Config.RangeInt(min = 20)
+    public int driftingDuration = 100;
 
-}
+  }
+
+  public static class CategoryMagnetism {
+
+    @Config.Name("Magnetism Spell Cooldown")
+    @Config.Comment("Sets the cooldown time in ticks for Magnetism")
+    @Config.RangeInt(min = 0)
+    public int cooldown = 60;
+
+    @Config.Name("Magnetism Spell Radius")
+    @Config.Comment("The radius in which the spell can work")
+    @Config.RangeInt(min = 1)
+    public int radius = 15;
+
+    @Config.Name("Should Attract Experience Orbs")
+    @Config.Comment("When set to true allows the spell to attract xp orbs as well")
+    public boolean shouldAttractXP = true;
+
+  }
+
+  public static class CategoryMindWard {
+
+    @Config.Name("Mind Ward Spell Cooldown")
+    @Config.Comment("Sets the cooldown time in ticks for Mind Ward")
+    @Config.RangeInt(min = 0)
+    public int cooldown = 80;
+
+    @Config.Name("Mind Ward Spell Duration")
+    @Config.Comment(value = "Sets the duration of the Mind Ward Spell in ticks")
+    @Config.RangeInt(min = 20)
+    public int duration = 400;
+
+  }
+
+  public static class CategoryPetalShell {
+
+    @Config.Name("Petal Shell Spell Cooldown")
+    @Config.Comment("Sets the cooldown time in ticks for Petal Shell")
+    @Config.RangeInt(min = 0)
+    public int cooldown = 120;
+
+    @Config.Name("Maximum number of shells")
+    @Config.Comment("The maximum number of petal shells that you can rack up")
+    @Config.RangeInt(min = 1)
+    public int maxCharges = 3;
+
+  }
+
+  public static class CategoryRadiance {
+
+    @Config.Name("Petal Shell Spell Cooldown")
+    @Config.Comment("Sets the cooldown time in ticks for Petal Shell")
+    @Config.RangeInt(min = 0)
+    public int cooldown = 40;
+
+    @Config.Name("Range of Radiance")
+    @Config.Comment("The maximum reach of the radiance ray")
+    @Config.RangeInt(min = 1)
+    public int range = 32;
+
+    @Config.Name("Radiance Spell Damage")
+    @Config.Comment("Sets how much damage per hit is dealt by Radiance on normal mobs")
+    @Config.RangeDouble(min = 0)
+    public float damage = 4F;
+
+    @Config.Name("Radiance Spell Damage to Undead Mobs")
+    @Config.Comment("Sets how much damage per hit is dealt by Radiance on undead mobs")
+    @Config.RangeDouble(min = 0)
+    public float damageToUndead = 2F;
+
+  }
+
+  public static class CategoryRampantGrowth {
+
+    @Config.Name("Rampant Growth Spell Cooldown")
+    @Config.Comment("Sets the cooldown time in ticks for Rampant Growth")
+    @Config.RangeInt(min = 0)
+    public int cooldown = 16;
+
+    @Config.Name("Rampant Growth Spell X-Z Radius")
+    @Config.Comment("The radius in which the spell can work")
+    @Config.RangeInt(min = 1)
+    public int radius = 6;
+
+    @Config.Name("Rampant Growth Spell Y Radius")
+    @Config.Comment("The highest and lowest y level the spell can work at")
+    @Config.RangeInt(min = 0)
+    public int yRadius = 3;
+
+  }
+
 
 }

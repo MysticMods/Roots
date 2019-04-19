@@ -1,8 +1,7 @@
 package epicsquid.roots.spell;
 
-import java.util.List;
-
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.entity.spell.EntityPetalShell;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
@@ -14,6 +13,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 
+import java.util.List;
+
 public class SpellPetalShell extends SpellBase {
   public static String spellName = "spell_petal_shell";
   public static SpellPetalShell instance = new SpellPetalShell(spellName);
@@ -21,7 +22,7 @@ public class SpellPetalShell extends SpellBase {
   public SpellPetalShell(String name) {
     super(name, TextFormatting.LIGHT_PURPLE, 255f / 255f, 192f / 255f, 240f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
-    this.cooldown = 120;
+    this.cooldown = SpellConfig.categoryPetalShell.cooldown;
 
     addCost(HerbRegistry.getHerbByName("spirit_herb"), 0.75f);
     addIngredients(
@@ -42,7 +43,7 @@ public class SpellPetalShell extends SpellBase {
       for (EntityPetalShell s : shells) {
         if (s.getPlayerId().compareTo(player.getUniqueID()) == 0) {
           hasShell = true;
-          s.getDataManager().set(s.getCharge(), Math.min(3, s.getDataManager().get(s.getCharge()) + 1));
+          s.getDataManager().set(s.getCharge(), Math.min(SpellConfig.categoryPetalShell.maxCharges, s.getDataManager().get(s.getCharge()) + 1));
           s.getDataManager().setDirty(s.getCharge());
         }
       }

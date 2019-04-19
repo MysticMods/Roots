@@ -1,6 +1,7 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.integration.botania.SolegnoliaHelper;
@@ -22,7 +23,7 @@ public class SpellMagnetism extends SpellBase {
   public SpellMagnetism(String name) {
     super(name, TextFormatting.RED, 255f / 255f, 130f / 255f, 130f / 255f, 130f / 255f, 130f / 255f, 255f / 255f);
     this.castType = EnumCastType.INSTANTANEOUS;
-    this.cooldown = 60;
+    this.cooldown = SpellConfig.categoryMagnetism.cooldown;
 
     addCost(HerbRegistry.getHerbByName("wildroot"), 0.195f);
     addIngredients(
@@ -48,8 +49,8 @@ public class SpellMagnetism extends SpellBase {
         i++;
       }
     }
-    List<EntityXPOrb> orbs = Util.getEntitiesWithinRadius(player.getEntityWorld(), EntityXPOrb.class, player.getPosition(), 15, 15, 15);
-    if (!orbs.isEmpty()) {
+    List<EntityXPOrb> orbs = Util.getEntitiesWithinRadius(player.getEntityWorld(), EntityXPOrb.class, player.getPosition(), SpellConfig.categoryMagnetism.radius, SpellConfig.categoryMagnetism.radius, SpellConfig.categoryMagnetism.radius);
+    if (!orbs.isEmpty() && SpellConfig.categoryMagnetism.shouldAttractXP) {
       for (EntityXPOrb orb : orbs) {
         if (SolegnoliaHelper.hasBotania() && SolegnoliaHelper.hasSolegnoliaAround(orb)) continue;
 
