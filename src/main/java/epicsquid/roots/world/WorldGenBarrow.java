@@ -1,21 +1,15 @@
 package epicsquid.roots.world;
 
-import java.util.Random;
-
 import epicsquid.mysticallib.network.MessageTEUpdate;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.NoiseGenUtil;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.ConfigManager;
+import epicsquid.roots.config.WorldGenConfig;
 import epicsquid.roots.entity.world.EntityBarrow;
-import epicsquid.roots.init.ModBlocks;
-import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockGrass;
-import net.minecraft.block.BlockStoneSlab;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DimensionType;
@@ -23,6 +17,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
+
+import java.util.Random;
 
 public class WorldGenBarrow extends StructureBase implements IWorldGenerator {
   public WorldGenBarrow() {
@@ -63,13 +59,13 @@ public class WorldGenBarrow extends StructureBase implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-    if (ConfigManager.worldGen.barrowChance <= 0) {
+    if (WorldGenConfig.worldGen.barrowChance <= 0) {
       return;
     }
     if (world.provider.getDimension() == DimensionType.OVERWORLD.getId() && !world.isRemote) {
       int xx = chunkX * 16 + 13 + Util.rand.nextInt(6);
       int zz = chunkZ * 16 + 13 + Util.rand.nextInt(6);
-      if (random.nextInt(ConfigManager.worldGen.barrowChance) == 0 && (Math.abs(xx) > 500 || Math.abs(zz) > 500)) {
+      if (random.nextInt(WorldGenConfig.worldGen.barrowChance) == 0 && (Math.abs(xx) > 500 || Math.abs(zz) > 500)) {
         int height = world.getHeight(xx, zz) - 1;
         if (height > 0 && world.getBlockState(new BlockPos(xx, height, zz)).getBlock() instanceof BlockGrass) {
           boolean canGenerate = true;
