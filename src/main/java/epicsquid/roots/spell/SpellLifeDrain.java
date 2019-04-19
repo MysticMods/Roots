@@ -1,8 +1,7 @@
 package epicsquid.roots.spell;
 
-import java.util.List;
-
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
@@ -18,6 +17,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
+import java.util.List;
+
 public class SpellLifeDrain extends SpellBase {
   public static String spellName = "spell_life_drain";
   public static SpellLifeDrain instance = new SpellLifeDrain(spellName);
@@ -25,7 +26,7 @@ public class SpellLifeDrain extends SpellBase {
   public SpellLifeDrain(String name) {
     super(name, TextFormatting.DARK_GRAY, 144f / 255f, 32f / 255f, 64f / 255f, 255f / 255f, 196f / 255f, 240f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
-    this.cooldown = 28;
+    this.cooldown = SpellConfig.categoryLifeDrain.cooldown;
 
     addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.25f);
     addCost(HerbRegistry.getHerbByName("baffle_cap"), 0.125f);
@@ -54,10 +55,10 @@ public class SpellLifeDrain extends SpellBase {
               && e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
             foundTarget = true;
             if (e.hurtTime <= 0 && !e.isDead) {
-              e.attackEntityFrom(DamageSource.WITHER.causeMobDamage(player), 1.0f);
+              e.attackEntityFrom(DamageSource.WITHER.causeMobDamage(player), SpellConfig.categoryLifeDrain.damage);
               e.setRevengeTarget(player);
               e.setLastAttackedEntity(player);
-              player.heal(0.5f);
+              player.heal(SpellConfig.categoryLifeDrain.healing);
             }
           }
         }
