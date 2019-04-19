@@ -1,6 +1,7 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageLifeInfusionFX;
@@ -26,7 +27,7 @@ public class SpellGrowthInfusion extends SpellBase {
   public SpellGrowthInfusion(String name) {
     super(name, TextFormatting.YELLOW, 48f / 255f, 255f / 255f, 48f / 255f, 192f / 255f, 255f / 255f, 192f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
-    this.cooldown = 16;
+    this.cooldown = SpellConfig.categoryGrowthInfusion.cooldown;
 
     addCost(HerbRegistry.getHerbByName("terra_moss"), 0.08f);
     addIngredients(
