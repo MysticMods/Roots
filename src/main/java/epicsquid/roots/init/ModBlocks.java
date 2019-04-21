@@ -89,12 +89,30 @@ public class ModBlocks {
     event.addBlock(wildwood_pressure_plate = new BlockPressurePlateBase(wildwood_planks, BlockPressurePlate.Sensitivity.EVERYTHING, SoundType.WOOD, 2.0f, "wildwood_pressure_plate").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addBlock(wildwood_fence = new BlockFenceBase(wildwood_planks, SoundType.WOOD, 2.0f, "wildwood_fence").setModelCustom(true).setCreativeTab(Roots.tab));
     //      event.addBlock(wildwoodLeaves = new BlockBase(Material.LEAVES, SoundType.PLANT, 0.8f,"wildwood_leaves").setModelCustom(true).setOpacity(false).setCreativeTab(Roots.tab));
-    variants(event, wildwood_planks, "wildwood", SoundType.WOOD, Material.WOOD, wildwood_slab, wildwood_double_slab, wildwood_stairs, wildwood_wall);
+    Variants wildwood = variants(event, wildwood_planks, "wildwood", SoundType.WOOD, Material.WOOD);
+    wildwood_slab = wildwood.slab;
+    wildwood_double_slab = wildwood.double_slab;
+    wildwood_stairs = wildwood.stairs;
+    wildwood_wall = wildwood.wall;
 
     //Decoration
-    variants(event, runestone, "runestone", runestone_slab, runestone_double_slab, runestone_stairs, runestone_wall);
-    variants(event, runestone_brick, "runestone_brick", runestone_brick_slab, runestone_brick_double_slab, runestone_brick_stairs, runestone_brick_wall);
-    variants(event, runestone_brick_alt, "runestone_brick_alt", runestone_brick_alt_slab, runestone_brick_alt_double_slab, runestone_brick_alt_stairs, runestone_brick_alt_wall);
+    Variants runes = variants(event, runestone, "runestone", SoundType.STONE, Material.ROCK);
+    runestone_slab = runes.slab;
+    runestone_double_slab = runes.double_slab;
+    runestone_stairs = runes.stairs;
+    runestone_wall = runes.wall;
+
+    runes = variants(event, runestone_brick, "runestone_brick", SoundType.STONE, Material.ROCK);
+    runestone_brick_slab = runes.slab;
+    runestone_brick_double_slab = runes.double_slab;
+    runestone_brick_stairs = runes.stairs;
+    runestone_brick_wall = runes.wall;
+
+    runes = variants(event, runestone_brick_alt, "runestone_brick_alt", SoundType.STONE, Material.ROCK);
+    runestone_brick_alt_slab = runes.slab;
+    runestone_brick_alt_double_slab = runes.double_slab;
+    runestone_brick_alt_stairs = runes.stairs;
+    runestone_brick_alt_wall = runes.wall;
 
     event.addBlock(structure_marker = new BlockStructureMarker());
     event.addBlock(mortar = new BlockMortar(Material.ROCK, SoundType.STONE, 1.4f, "mortar", TileEntityMortar.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
@@ -109,16 +127,29 @@ public class ModBlocks {
 
   }
 
-  private static void variants(RegisterContentEvent event, Block base, String name, Block... refs) {
-    variants(event, base, name, SoundType.STONE, Material.ROCK, refs);
-  }
-
-  private static void variants(RegisterContentEvent event, Block base, String name, SoundType sound, Material material, Block... refs) {
-    LibRegistry.addSlabPair(material, sound, 1.7f, name, base.getDefaultState(), new Block[] { refs[0], refs[1] }, true,
+  private static Variants variants(RegisterContentEvent event, Block base, String name, SoundType sound, Material material) {
+    Block[] slabs = new Block[2];
+    Block stairs;
+    Block wall;
+    LibRegistry.addSlabPair(material, sound, 1.7f, name, base.getDefaultState(), slabs, true,
         base.getCreativeTab());
-    event.addBlock(refs[2] = new BlockStairsBase(base.getDefaultState(), sound, 1.7f, name + "_stairs").setModelCustom(true)
+    event.addBlock(stairs = new BlockStairsBase(base.getDefaultState(), sound, 1.7f, name + "_stairs").setModelCustom(true)
         .setCreativeTab(base.getCreativeTab()));
     event.addBlock(
-        refs[3] = new BlockWallBase(base, sound, 1.7f, name + "_wall").setModelCustom(true).setCreativeTab(base.getCreativeTab()));
+        wall = new BlockWallBase(base, sound, 1.7f, name + "_wall").setModelCustom(true).setCreativeTab(base.getCreativeTab()));
+    return new Variants(slabs, stairs, wall);
+  }
+
+  private static class Variants {
+    public Block stairs;
+    public Block wall;
+    public Block slab;
+    public Block double_slab;
+    public Variants (Block[] slabs, Block stairs, Block wall) {
+      this.slab = slabs[0];
+      this.double_slab = slabs[1];
+      this.stairs = stairs;
+      this.wall = wall;
+    }
   }
 }
