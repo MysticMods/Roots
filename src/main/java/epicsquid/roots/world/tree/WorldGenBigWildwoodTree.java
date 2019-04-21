@@ -209,7 +209,7 @@ public class WorldGenBigWildwoodTree extends WorldGenAbstractTree {
   private void generateTrunk() {
     BlockPos blockpos = this.basePos;
     BlockPos blockpos1 = this.basePos.up(this.height);
-    Block block = ModBlocks.wildwoodLog;
+    Block block = ModBlocks.wildwood_log;
     this.limb(blockpos, blockpos1, block);
   }
 
@@ -222,7 +222,7 @@ public class WorldGenBigWildwoodTree extends WorldGenAbstractTree {
       BlockPos blockpos = new BlockPos(this.basePos.getX(), i, this.basePos.getZ());
 
       if (!blockpos.equals(worldgenbigtree$foliagecoordinates) && this.leafNodeNeedsBase(i - this.basePos.getY())) {
-        this.limb(blockpos, worldgenbigtree$foliagecoordinates, ModBlocks.wildwoodLog);
+        this.limb(blockpos, worldgenbigtree$foliagecoordinates, ModBlocks.wildwood_log);
       }
     }
   }

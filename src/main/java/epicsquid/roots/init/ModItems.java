@@ -171,9 +171,11 @@ public class ModItems {
       OreDictionary.registerOre("runestone", rune);
     }
 
-    for (Item seed : Arrays.asList(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.PUMPKIN_SEEDS, Items.MELON_SEEDS, ModItems.aubergine_seed, ModItems.moonglow_seed, ModItems.spirit_herb_seed, ModItems.wildewheet_seed, ModItems.terra_spores)) {
-      OreDictionary.registerOre("seed", seed);
-    }
+    OreDictionary.registerOre("logWood", ModBlocks.wildwood_log);
+    OreDictionary.registerOre("plankWood", ModBlocks.wildwood_planks);
+    OreDictionary.registerOre("stairWood", ModBlocks.wildwood_stairs);
+    OreDictionary.registerOre("slabWood", ModBlocks.wildwood_slab);
+    OreDictionary.registerOre("doorWood", ModBlocks.wildwood_door);
   }
 
   private static void registerSeedDrops() {

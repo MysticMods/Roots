@@ -90,7 +90,7 @@ public class EventManager {
                 bark = new ItemStack(ModItems.bark_dark_oak, 1);
               }
             }
-            if (block == ModBlocks.wildwoodLog) {
+            if (block == ModBlocks.wildwood_log) {
               bark = new ItemStack(ModItems.bark_wildwood, 1);
             }
             int count = new Random().nextInt(getBarkAmount(tool)) +1;

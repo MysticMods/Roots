@@ -96,7 +96,7 @@ public class JEIRootsPlugin implements IModPlugin {
     bark.add(new ItemStack(ModItems.bark_wildwood));
 
     registry.addIngredientInfo(bark, VanillaTypes.ITEM, I18n.format("jei.roots.bark.desc"));
-    registry.addIngredientInfo(new ItemStack(ModBlocks.wildwoodLog), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood.desc"));
+    registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_log), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood.desc"));
   }
 
   @Override
