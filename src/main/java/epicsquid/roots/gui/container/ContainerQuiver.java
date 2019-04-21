@@ -25,6 +25,7 @@ import javax.annotation.Nonnull;
 public class ContainerQuiver extends Container {
 
   private ItemStackHandler quiverHandler;
+  private QuiverHandler handler;
   private EntityPlayer player;
   private ItemStack quiver;
 
@@ -43,7 +44,7 @@ public class ContainerQuiver extends Container {
       use = first;
     }
 
-    QuiverHandler handler = QuiverHandler.getHandler(use);
+    handler = QuiverHandler.getHandler(use);
     quiverHandler = handler.getInventory();
 
     this.quiver = use;
@@ -99,10 +100,12 @@ public class ContainerQuiver extends Container {
 
       if (isArrow && index < 36) { // Player Inventory -> Quiver
         if (!mergeItemStack(stack, 36, 42, false)) {
+          handler.saveToStack();
           return ItemStack.EMPTY;
         }
       } else {
         if (!mergeItemStack(stack, 0, 36, false)) {
+          handler.saveToStack();
           return ItemStack.EMPTY;
         }
       }
@@ -114,6 +117,7 @@ public class ContainerQuiver extends Container {
       slot.onSlotChanged();
     }
 
+    handler.saveToStack();
     return slotStack;
   }
 
