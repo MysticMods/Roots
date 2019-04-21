@@ -50,7 +50,7 @@ public class SpellMagnetism extends SpellBase {
       }
     }
     List<EntityXPOrb> orbs = Util.getEntitiesWithinRadius(player.getEntityWorld(), EntityXPOrb.class, player.getPosition(), 15, 15, 15);
-    if (!orbs.isEmpty() && SpellConfig.categoryMagnetism.shouldAttractXP) {
+    if (!orbs.isEmpty() && SpellConfig.spellFeaturesCategory.shouldMagnetismAttractXP) {
       for (EntityXPOrb orb : orbs) {
         if (SolegnoliaHelper.hasBotania() && SolegnoliaHelper.hasSolegnoliaAround(orb)) continue;
 

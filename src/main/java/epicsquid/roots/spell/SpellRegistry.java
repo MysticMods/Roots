@@ -14,45 +14,45 @@ public class SpellRegistry {
 
   public static void init() {
 
-    if (!SpellConfig.disableWildFire)
+    if (!SpellConfig.disableSpellsCategory.disableWildFire)
       spellRegistry.put(SpellWildfire.spellName, SpellWildfire.instance);
-    if (!SpellConfig.disableSanctuary)
+    if (!SpellConfig.disableSpellsCategory.disableSanctuary)
       spellRegistry.put(SpellSanctuary.spellName, SpellSanctuary.instance);
-    if (!SpellConfig.disableDandelionWinds)
+    if (!SpellConfig.disableSpellsCategory.disableDandelionWinds)
       spellRegistry.put(SpellDandelionWinds.spellName, SpellDandelionWinds.instance);
-    if (!SpellConfig.disableRoseThorns)
+    if (!SpellConfig.disableSpellsCategory.disableRoseThorns)
       spellRegistry.put(SpellRoseThorns.spellName, SpellRoseThorns.instance);
-    if (!SpellConfig.disableShatter)
+    if (!SpellConfig.disableSpellsCategory.disableShatter)
       spellRegistry.put(SpellShatter.spellName, SpellShatter.instance);
-    if (!SpellConfig.disablePetalShell)
+    if (!SpellConfig.disableSpellsCategory.disablePetalShell)
       spellRegistry.put(SpellPetalShell.spellName, SpellPetalShell.instance);
-    if (!SpellConfig.disableTimeStop)
+    if (!SpellConfig.disableSpellsCategory.disableTimeStop)
       spellRegistry.put(SpellTimeStop.spellName, SpellTimeStop.instance);
-    if (!SpellConfig.disableSkySoarer)
+    if (!SpellConfig.disableSpellsCategory.disableSkySoarer)
       spellRegistry.put(SpellSkySoarer.spellName, SpellSkySoarer.instance);
-    if (!SpellConfig.disableLifeDrain)
+    if (!SpellConfig.disableSpellsCategory.disableLifeDrain)
       spellRegistry.put(SpellLifeDrain.spellName, SpellLifeDrain.instance);
-    if (!SpellConfig.disableAcidCloud)
+    if (!SpellConfig.disableSpellsCategory.disableAcidCloud)
       spellRegistry.put(SpellAcidCloud.spellName, SpellAcidCloud.instance);
-    if (!SpellConfig.disableGrowthInfusion)
+    if (!SpellConfig.disableSpellsCategory.disableGrowthInfusion)
       spellRegistry.put(SpellGrowthInfusion.spellName, SpellGrowthInfusion.instance);
-    if (!SpellConfig.disableMindWard)
+    if (!SpellConfig.disableSpellsCategory.disableMindWard)
       spellRegistry.put(SpellMindWard.spellName, SpellMindWard.instance);
-    if (!SpellConfig.disableRadiance)
+    if (!SpellConfig.disableSpellsCategory.disableRadiance)
       spellRegistry.put(SpellRadiance.spellName, SpellRadiance.instance);
-    if (!SpellConfig.disableLightDrifter)
+    if (!SpellConfig.disableSpellsCategory.disableLightDrifter)
       spellRegistry.put(SpellLightDrifter.spellName, SpellLightDrifter.instance);
-    if (!SpellConfig.disableSenseAnimals)
+    if (!SpellConfig.disableSpellsCategory.disableSenseAnimals)
       spellRegistry.put(SpellSenseAnimals.spellName, SpellSenseAnimals.instance);
-    if (!SpellConfig.disableSecondWind)
+    if (!SpellConfig.disableSpellsCategory.disableSecondWind)
       spellRegistry.put(SpellSecondWind.spellName, SpellSecondWind.instance);
-    if (!SpellConfig.disableMagnetism)
+    if (!SpellConfig.disableSpellsCategory.disableMagnetism)
       spellRegistry.put(SpellMagnetism.spellName, SpellMagnetism.instance);
-    if (!SpellConfig.disableSenseDanger)
+    if (!SpellConfig.disableSpellsCategory.disableSenseDanger)
       spellRegistry.put(SpellSenseDanger.spellName, SpellSenseDanger.instance);
-    if (!SpellConfig.disableHarvest)
+    if (!SpellConfig.disableSpellsCategory.disableHarvest)
       spellRegistry.put(SpellHarvest.spellName, SpellHarvest.instance);
-    if (!SpellConfig.disableRampantGrowth)
+    if (!SpellConfig.disableSpellsCategory.disableRampantGrowth)
       spellRegistry.put(SpellRampantGrowth.spellName, SpellRampantGrowth.instance);
 
   }

@@ -1,6 +1,7 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
@@ -50,7 +51,8 @@ public class SpellAcidCloud extends SpellBase {
         if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
             && e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
           e.attackEntityFrom(DamageSource.causeMobDamage(player), 1F);
-          e.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("poison"), 80, 0));
+          if (SpellConfig.spellFeaturesCategory.acidCloudPoisoningEffect)
+            e.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("poison"), 80, 0));
           e.setRevengeTarget(player);
           e.setLastAttackedEntity(player);
 
