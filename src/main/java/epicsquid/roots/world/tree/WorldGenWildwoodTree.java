@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
 public class WorldGenWildwoodTree extends WorldGenAbstractTree {
-  private static final IBlockState LOG = ModBlocks.wildwoodLog.getDefaultState();
+  private static final IBlockState LOG = ModBlocks.wildwood_log.getDefaultState();
   private final boolean useExtraRandomHeight;
 
   public WorldGenWildwoodTree(boolean notify, boolean useExtraRandomHeightIn) {

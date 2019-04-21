@@ -12,6 +12,7 @@ import epicsquid.roots.block.runes.BlockTrample;
 import epicsquid.roots.tileentity.*;
 import epicsquid.roots.world.HugeBaffleCap;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
@@ -28,7 +29,7 @@ public class ModBlocks {
   public static BlockCropBase moonglow, aubergine, pereskia, wildroot, spirit_herb,wildewheet, cloud_berry, infernal_bulb, dewgonia, stalicripe;
 
   // Runestones
-  public static Block runestone, runestone_brick, runestone_brick_alt, chiseled_runestone, wildwoodLog, wildwoodPlanks, wildwoodLeaves, baffle_cap_huge_stem, baffle_cap_huge_top,
+  public static Block runestone, runestone_brick, runestone_brick_alt, chiseled_runestone, wildwood_log, wildwood_planks, wildwoodLeaves, baffle_cap_huge_stem, baffle_cap_huge_top,
       baffle_cap_mushroom, runic_soil_fire, runic_soil_water, runic_soil_air, runic_soil_earth, runic_soil, trample_rune;
 
 
@@ -36,6 +37,11 @@ public class ModBlocks {
   public static Block runestone_slab, runestone_double_slab, runestone_stairs, runestone_wall;
   public static Block runestone_brick_slab, runestone_brick_double_slab, runestone_brick_stairs, runestone_brick_wall;
   public static Block runestone_brick_alt_slab, runestone_brick_alt_double_slab, runestone_brick_alt_stairs, runestone_brick_alt_wall;
+
+  // Wildwood
+  public static Block wildwood_slab, wildwood_double_slab, wildwood_stairs, wildwood_wall;
+  public static Block wildwood_door, wildwood_trapdoor;
+  public static Block wildwood_button, wildwood_pressure_plate, wildwood_fence;
 
   /**
    * Register all block
@@ -75,15 +81,20 @@ public class ModBlocks {
     event.addBlock(chiseled_runestone = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "chiseled_runestone").setModelCustom(true)).setCreativeTab(Roots.tab);
     event.addBlock(trample_rune = new BlockTrample(Material.ROCK, SoundType.METAL, 1.4f, "runestone_trample").setModelCustom(true)).setCreativeTab(Roots.tab);
 
-    event.addBlock(wildwoodLog = new BlockLogBase("wildwood_log").setCreativeTab(Roots.tab));
-    event.addBlock(wildwoodPlanks = new BlockBase(Material.WOOD, SoundType.WOOD, 2.0f, "wildwood_planks").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addBlock(wildwood_log = new BlockLogBase("wildwood_log").setCreativeTab(Roots.tab));
+    event.addBlock(wildwood_planks = new BlockBase(Material.WOOD, SoundType.WOOD, 2.0f, "wildwood_planks").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addBlock(wildwood_door = new BlockDoorBase(wildwood_planks, SoundType.WOOD, 2.0f, "wildwood_door").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addBlock(wildwood_trapdoor = new BlockTrapDoorBase(wildwood_planks, SoundType.WOOD, 2.0f, "wildwood_trapdoor").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addBlock(wildwood_button = new BlockButtonBase(wildwood_planks, SoundType.WOOD, 2.0f, "wildwood_button").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addBlock(wildwood_pressure_plate = new BlockPressurePlateBase(wildwood_planks, BlockPressurePlate.Sensitivity.EVERYTHING, SoundType.WOOD, 2.0f, "wildwood_pressure_plate").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addBlock(wildwood_fence = new BlockFenceBase(wildwood_planks, SoundType.WOOD, 2.0f, "wildwood_fence").setModelCustom(true).setCreativeTab(Roots.tab));
     //      event.addBlock(wildwoodLeaves = new BlockBase(Material.LEAVES, SoundType.PLANT, 0.8f,"wildwood_leaves").setModelCustom(true).setOpacity(false).setCreativeTab(Roots.tab));
+    variants(event, wildwood_planks, "wildwood", SoundType.WOOD, Material.WOOD, wildwood_slab, wildwood_double_slab, wildwood_stairs, wildwood_wall);
 
     //Decoration
     variants(event, runestone, "runestone", runestone_slab, runestone_double_slab, runestone_stairs, runestone_wall);
     variants(event, runestone_brick, "runestone_brick", runestone_brick_slab, runestone_brick_double_slab, runestone_brick_stairs, runestone_brick_wall);
     variants(event, runestone_brick_alt, "runestone_brick_alt", runestone_brick_alt_slab, runestone_brick_alt_double_slab, runestone_brick_alt_stairs, runestone_brick_alt_wall);
-
 
     event.addBlock(structure_marker = new BlockStructureMarker());
     event.addBlock(mortar = new BlockMortar(Material.ROCK, SoundType.STONE, 1.4f, "mortar", TileEntityMortar.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
@@ -99,11 +110,15 @@ public class ModBlocks {
   }
 
   private static void variants(RegisterContentEvent event, Block base, String name, Block... refs) {
-    LibRegistry.addSlabPair(Material.ROCK, SoundType.STONE, 1.7f, name, base.getDefaultState(), new Block[] { refs[0], refs[1] }, true,
+    variants(event, base, name, SoundType.STONE, Material.ROCK, refs);
+  }
+
+  private static void variants(RegisterContentEvent event, Block base, String name, SoundType sound, Material material, Block... refs) {
+    LibRegistry.addSlabPair(material, sound, 1.7f, name, base.getDefaultState(), new Block[] { refs[0], refs[1] }, true,
         base.getCreativeTab());
-    event.addBlock(refs[2] = new BlockStairsBase(base.getDefaultState(), SoundType.STONE, 1.7f, name + "_stairs").setModelCustom(true)
+    event.addBlock(refs[2] = new BlockStairsBase(base.getDefaultState(), sound, 1.7f, name + "_stairs").setModelCustom(true)
         .setCreativeTab(base.getCreativeTab()));
     event.addBlock(
-        refs[3] = new BlockWallBase(base, SoundType.STONE, 1.7f, name + "_wall").setModelCustom(true).setCreativeTab(base.getCreativeTab()));
+        refs[3] = new BlockWallBase(base, sound, 1.7f, name + "_wall").setModelCustom(true).setCreativeTab(base.getCreativeTab()));
   }
 }
