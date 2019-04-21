@@ -1,5 +1,6 @@
 package epicsquid.roots.init;
 
+import epicsquid.mysticallib.block.BlockDoorBase;
 import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.mysticallib.item.ItemArrowBase;
 import epicsquid.mysticallib.item.ItemBase;
@@ -175,7 +176,7 @@ public class ModItems {
     OreDictionary.registerOre("plankWood", ModBlocks.wildwood_planks);
     OreDictionary.registerOre("stairWood", ModBlocks.wildwood_stairs);
     OreDictionary.registerOre("slabWood", ModBlocks.wildwood_slab);
-    OreDictionary.registerOre("doorWood", ModBlocks.wildwood_door);
+    OreDictionary.registerOre("doorWood", new ItemStack(((BlockDoorBase) ModBlocks.wildwood_door).getItemBlock()));
   }
 
   private static void registerSeedDrops() {
