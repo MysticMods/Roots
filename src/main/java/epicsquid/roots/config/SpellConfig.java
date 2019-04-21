@@ -20,114 +20,29 @@ public class SpellConfig {
 
   public static class CategoryAcidCloud {
 
-    @Config.Name("Acid Cloud Spell Cooldown")
-    @Config.Comment("Sets the cooldown time in ticks for Acid Cloud")
-    @Config.RangeInt(min = 0)
-    public int cooldown = 24;
-
-    @Config.Name("Acid Cloud Spell Damage")
-    @Config.Comment("Sets how much damage per hit is dealt by Acid Cloud")
-    @Config.RangeDouble(min = 0)
-    public float damage = 1F;
-
-    @Config.Name("Acid Cloud Poison Effect Duration")
-    @Config.Comment("Sets how long in ticks poisoning from acid cloud should affect the player")
-    @Config.RangeInt(min = 0)
-    public int poisoningDuration = 80;
-
-    @Config.Name("Acid Cloud fire effect duration")
-    @Config.Comment("Sets how long in seconds the player should be on fire (Only in case the extra fire module is loaded)")
-    @Config.RangeInt(min = 0)
-    public int fireDuration = 5;
-
   }
 
   public static class CategoryDandelionWinds {
-
-    @Config.Name("Dandelion Winds Spell Cooldown")
-    @Config.Comment("Sets the cooldown time in ticks for Dandelion Winds")
-    @Config.RangeInt(min = 0)
-    public int cooldown = 20;
-
-    @Config.Name("Dandelion Winds Intensity Multiplier")
-    @Config.Comment("Sets how strong is the push of Dandelion Winds")
-    @Config.RangeDouble(min = 0)
-    public float intensityMultiplier = 1F;
 
   }
 
   public static class CategoryGrowthInfusion {
 
-    @Config.Name("Growth Infusion Spell Cooldown")
-    @Config.Comment("Sets the cooldown time in ticks for Growth Infusion")
-    @Config.RangeInt(min = 0)
-    public int cooldown = 16;
-
   }
 
   public static class CategoryHarvest {
-
-    @Config.Name("Harvest Spell Cooldown")
-    @Config.Comment("Sets the cooldown time in ticks for Harvest")
-    @Config.RangeInt(min = 0)
-    public int cooldown = 25;
-
-    @Config.Name("Harvest Spell X-Z Radius")
-    @Config.Comment("The radius in which the spell can work")
-    @Config.RangeInt(min = 1)
-    public int radius = 6;
-
-    @Config.Name("Harvest Spell Y Radius")
-    @Config.Comment("The highest and lowest y level the spell can work at")
-    @Config.RangeInt(min = 0)
-    public int yRadius = 5;
 
   }
 
   public static class CategoryLifeDrain {
 
-    @Config.Name("Life Drain Spell Cooldown")
-    @Config.Comment("Sets the cooldown time in ticks for Life Drain")
-    @Config.RangeInt(min = 0)
-    public int cooldown = 28;
-
-    @Config.Name("Life Drain Spell Damage")
-    @Config.Comment("Sets how much damage per hit is dealt by Life Drain")
-    @Config.RangeDouble(min = 0)
-    public float damage = 1F;
-
-    @Config.Name("Life Drain Spell Healing")
-    @Config.Comment("Sets how much the player is healed per hit (by default is half the damage)")
-    @Config.RangeDouble(min = 0)
-    public float healing = 0.5F;
-
   }
 
   public static class CategoryLightDrifter {
 
-    @Config.Name("Light Drifter Spell Cooldown")
-    @Config.Comment("Sets the cooldown time in ticks for Light Drifter")
-    @Config.RangeInt(min = 0)
-    public int cooldown = 200;
-
-    @Config.Name("Light Drift Effect Duration")
-    @Config.Comment("Controls how much time in ticks the player can stay in light drift mode")
-    @Config.RangeInt(min = 20)
-    public int driftingDuration = 100;
-
   }
 
   public static class CategoryMagnetism {
-
-    @Config.Name("Magnetism Spell Cooldown")
-    @Config.Comment("Sets the cooldown time in ticks for Magnetism")
-    @Config.RangeInt(min = 0)
-    public int cooldown = 60;
-
-    @Config.Name("Magnetism Spell Radius")
-    @Config.Comment("The radius in which the spell can work")
-    @Config.RangeInt(min = 1)
-    public int radius = 15;
 
     @Config.Name("Should Attract Experience Orbs")
     @Config.Comment("When set to true allows the spell to attract xp orbs as well")
@@ -137,72 +52,17 @@ public class SpellConfig {
 
   public static class CategoryMindWard {
 
-    @Config.Name("Mind Ward Spell Cooldown")
-    @Config.Comment("Sets the cooldown time in ticks for Mind Ward")
-    @Config.RangeInt(min = 0)
-    public int cooldown = 80;
-
-    @Config.Name("Mind Ward Spell Duration")
-    @Config.Comment(value = "Sets the duration of the Mind Ward Spell in ticks")
-    @Config.RangeInt(min = 20)
-    public int duration = 400;
-
   }
 
   public static class CategoryPetalShell {
-
-    @Config.Name("Petal Shell Spell Cooldown")
-    @Config.Comment("Sets the cooldown time in ticks for Petal Shell")
-    @Config.RangeInt(min = 0)
-    public int cooldown = 120;
-
-    @Config.Name("Maximum number of shells")
-    @Config.Comment("The maximum number of petal shells that you can rack up")
-    @Config.RangeInt(min = 1)
-    public int maxCharges = 3;
 
   }
 
   public static class CategoryRadiance {
 
-    @Config.Name("Petal Shell Spell Cooldown")
-    @Config.Comment("Sets the cooldown time in ticks for Petal Shell")
-    @Config.RangeInt(min = 0)
-    public int cooldown = 40;
-
-    @Config.Name("Range of Radiance")
-    @Config.Comment("The maximum reach of the radiance ray")
-    @Config.RangeInt(min = 1)
-    public int range = 32;
-
-    @Config.Name("Radiance Spell Damage")
-    @Config.Comment("Sets how much damage per hit is dealt by Radiance on normal mobs")
-    @Config.RangeDouble(min = 0)
-    public float damage = 4F;
-
-    @Config.Name("Radiance Spell Damage to Undead Mobs")
-    @Config.Comment("Sets how much damage per hit is dealt by Radiance on undead mobs")
-    @Config.RangeDouble(min = 0)
-    public float damageToUndead = 2F;
-
   }
 
   public static class CategoryRampantGrowth {
-
-    @Config.Name("Rampant Growth Spell Cooldown")
-    @Config.Comment("Sets the cooldown time in ticks for Rampant Growth")
-    @Config.RangeInt(min = 0)
-    public int cooldown = 16;
-
-    @Config.Name("Rampant Growth Spell X-Z Radius")
-    @Config.Comment("The radius in which the spell can work")
-    @Config.RangeInt(min = 1)
-    public int radius = 6;
-
-    @Config.Name("Rampant Growth Spell Y Radius")
-    @Config.Comment("The highest and lowest y level the spell can work at")
-    @Config.RangeInt(min = 0)
-    public int yRadius = 3;
 
   }
 

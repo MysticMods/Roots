@@ -23,7 +23,7 @@ public class SpellMagnetism extends SpellBase {
   public SpellMagnetism(String name) {
     super(name, TextFormatting.RED, 255f / 255f, 130f / 255f, 130f / 255f, 130f / 255f, 130f / 255f, 255f / 255f);
     this.castType = EnumCastType.INSTANTANEOUS;
-    this.cooldown = SpellConfig.categoryMagnetism.cooldown;
+    this.cooldown = 60;
 
     addCost(HerbRegistry.getHerbByName("wildroot"), 0.195f);
     addIngredients(
@@ -49,7 +49,7 @@ public class SpellMagnetism extends SpellBase {
         i++;
       }
     }
-    List<EntityXPOrb> orbs = Util.getEntitiesWithinRadius(player.getEntityWorld(), EntityXPOrb.class, player.getPosition(), SpellConfig.categoryMagnetism.radius, SpellConfig.categoryMagnetism.radius, SpellConfig.categoryMagnetism.radius);
+    List<EntityXPOrb> orbs = Util.getEntitiesWithinRadius(player.getEntityWorld(), EntityXPOrb.class, player.getPosition(), 15, 15, 15);
     if (!orbs.isEmpty() && SpellConfig.categoryMagnetism.shouldAttractXP) {
       for (EntityXPOrb orb : orbs) {
         if (SolegnoliaHelper.hasBotania() && SolegnoliaHelper.hasSolegnoliaAround(orb)) continue;

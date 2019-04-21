@@ -1,6 +1,5 @@
 package epicsquid.roots.spell;
 
-import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
@@ -22,7 +21,7 @@ public class SpellMindWard extends SpellBase {
   public SpellMindWard(String name) {
     super(name, TextFormatting.DARK_RED, 128f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
-    this.cooldown = SpellConfig.categoryMindWard.cooldown;
+    this.cooldown = 80;
 
     addCost(HerbRegistry.getHerbByName("wildewheet"), 0.5f);
     addIngredients(

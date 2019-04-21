@@ -1,7 +1,6 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
@@ -26,7 +25,7 @@ public class SpellLifeDrain extends SpellBase {
   public SpellLifeDrain(String name) {
     super(name, TextFormatting.DARK_GRAY, 144f / 255f, 32f / 255f, 64f / 255f, 255f / 255f, 196f / 255f, 240f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
-    this.cooldown = SpellConfig.categoryLifeDrain.cooldown;
+    this.cooldown = 28;
 
     addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.25f);
     addCost(HerbRegistry.getHerbByName("baffle_cap"), 0.125f);
@@ -55,10 +54,10 @@ public class SpellLifeDrain extends SpellBase {
               && e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
             foundTarget = true;
             if (e.hurtTime <= 0 && !e.isDead) {
-              e.attackEntityFrom(DamageSource.WITHER.causeMobDamage(player), SpellConfig.categoryLifeDrain.damage);
+              e.attackEntityFrom(DamageSource.WITHER.causeMobDamage(player), 1F);
               e.setRevengeTarget(player);
               e.setLastAttackedEntity(player);
-              player.heal(SpellConfig.categoryLifeDrain.healing);
+              player.heal(0.5F);
             }
           }
         }

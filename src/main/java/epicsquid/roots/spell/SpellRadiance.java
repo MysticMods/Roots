@@ -1,7 +1,6 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageRadianceBeamFX;
@@ -30,7 +29,7 @@ public class SpellRadiance extends SpellBase {
   public SpellRadiance(String name) {
     super(name, TextFormatting.WHITE, 255f / 255f, 255f / 255f, 64f / 255f, 255f / 255f, 255f / 255f, 192f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
-    this.cooldown = SpellConfig.categoryRadiance.cooldown;
+    this.cooldown = 40;
 
     addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.5f);
     addCost(HerbRegistry.getHerbByName("infernal_bulb"), 0.25f);
@@ -46,7 +45,7 @@ public class SpellRadiance extends SpellBase {
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote && player.ticksExisted % 2 == 0) {
-      float distance = SpellConfig.categoryRadiance.range;
+      float distance = 32;
       RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0),
           player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)));
       Vec3d direction = player.getLookVec();
@@ -124,9 +123,9 @@ public class SpellRadiance extends SpellBase {
             for (EntityLivingBase e : entities) {
               if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
                   && e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
-                e.attackEntityFrom(DamageSource.MAGIC.causeMobDamage(player), SpellConfig.categoryRadiance.damage);
+                e.attackEntityFrom(DamageSource.MAGIC.causeMobDamage(player), 4F);
                 if (e.isEntityUndead()) {
-                  e.attackEntityFrom(DamageSource.MAGIC.causeMobDamage(player), SpellConfig.categoryRadiance.damageToUndead);
+                  e.attackEntityFrom(DamageSource.MAGIC.causeMobDamage(player), 2F);
                 }
                 e.setRevengeTarget(player);
                 e.setLastAttackedEntity(player);
