@@ -1,7 +1,6 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
@@ -29,7 +28,7 @@ public class SpellAcidCloud extends SpellBase {
   public SpellAcidCloud(String name) {
     super(name, TextFormatting.DARK_GREEN, 80f / 255f, 160f / 255f, 40f / 255f, 64f / 255f, 96f / 255f, 32f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
-    this.cooldown = SpellConfig.categoryAcidCloud.cooldown;
+    this.cooldown = 24;
 
     addCost(HerbRegistry.getHerbByName("terra_moss"), 0.0625f);
     addCost(HerbRegistry.getHerbByName("baffle_cap"), 0.125f);
@@ -50,13 +49,13 @@ public class SpellAcidCloud extends SpellBase {
       for (EntityLivingBase e : entities) {
         if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
             && e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
-          e.attackEntityFrom(DamageSource.causeMobDamage(player), SpellConfig.categoryAcidCloud.damage);
-          e.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("poison"), SpellConfig.categoryAcidCloud.poisoningDuration, 0));
+          e.attackEntityFrom(DamageSource.causeMobDamage(player), 1F);
+          e.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("poison"), 80, 0));
           e.setRevengeTarget(player);
           e.setLastAttackedEntity(player);
 
           if(modules.contains(ModuleRegistry.module_fire)){
-            e.setFire(SpellConfig.categoryAcidCloud.fireDuration);
+            e.setFire(5);
           }
 
         }

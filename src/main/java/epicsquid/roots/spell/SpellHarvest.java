@@ -1,7 +1,6 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
@@ -49,7 +48,7 @@ public class SpellHarvest extends SpellBase {
   public SpellHarvest(String name) {
     super(name, TextFormatting.GREEN, 57f / 255f, 253f / 255f, 28f / 255f, 197f / 255f, 233f / 255f, 28f / 255f);
     this.castType = EnumCastType.INSTANTANEOUS;
-    this.cooldown = SpellConfig.categoryHarvest.cooldown;
+    this.cooldown = 25;
 
     addCost(HerbRegistry.getHerbByName("wildewheet"), 0.55f);
     addIngredients(
@@ -100,7 +99,7 @@ public class SpellHarvest extends SpellBase {
     List<BlockPos> pumpkinsAndMelons = new ArrayList<>();
     List<BlockPos> reedsAndCactus = new ArrayList<>();
     List<BlockPos> crops = Util.getBlocksWithinRadius(player.world, player.getPosition(),
-            SpellConfig.categoryHarvest.radius, SpellConfig.categoryHarvest.Yradius, SpellConfig.categoryHarvest.radius, (pos) -> {
+            6, 5, 6, (pos) -> {
       if (player.world.isAirBlock(pos)) return false;
       IBlockState state = player.world.getBlockState(pos);
       if (skipBlocks.contains(state.getBlock())) return false;

@@ -1,7 +1,6 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageLightDrifterFX;
@@ -42,7 +41,7 @@ public class SpellLightDrifter extends SpellBase {
       player.capabilities.disableDamage = true;
       player.capabilities.allowFlying = true;
       player.noClip = true;
-      player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, SpellConfig.categoryLightDrifter.driftingDuration);
+      player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, 100);
       player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_X, player.posX);
       player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_Y, player.posY);
       player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_Z, player.posZ);
