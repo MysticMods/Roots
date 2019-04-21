@@ -182,6 +182,8 @@ advancement.roots.sylvan_armor=Botanical Robes
 advancement.roots.sylvan_armor.desc=Druidic robes made of interwoven herbs
 advancement.roots.wildwood_armor=Natural Resistance
 advancement.roots.wildwood_armor.desc=Let the wood protect you!
+advancement.roots.apothecary_pouch=House of Herbs
+advancement.roots.apothecary_pouch.desc=Craft an apothecary pouch with spirit and fire.
 
 # Herbs
 item.moonglow_seed.name=Moonglow Seed
