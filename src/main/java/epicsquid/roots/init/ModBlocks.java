@@ -79,7 +79,7 @@ public class ModBlocks {
     event.addBlock(runestone_brick = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_brick").setModelCustom(true)).setCreativeTab(Roots.tab);
     event.addBlock(runestone_brick_alt = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_brick_alt").setModelCustom(true)).setCreativeTab(Roots.tab);
     event.addBlock(chiseled_runestone = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "chiseled_runestone").setModelCustom(true)).setCreativeTab(Roots.tab);
-    event.addBlock(trample_rune = new BlockTrample(Material.ROCK, SoundType.METAL, 1.4f, "runestone_trample").setModelCustom(true)).setCreativeTab(Roots.tab);
+    event.addBlock(trample_rune = new BlockTrample(Material.WATER, SoundType.METAL, 1.4f, "runestone_trample").setModelCustom(true)).setCreativeTab(Roots.tab);
 
     event.addBlock(wildwood_log = new BlockLogBase("wildwood_log").setCreativeTab(Roots.tab));
     event.addBlock(wildwood_planks = new BlockBase(Material.WOOD, SoundType.WOOD, 2.0f, "wildwood_planks").setModelCustom(true).setCreativeTab(Roots.tab));
