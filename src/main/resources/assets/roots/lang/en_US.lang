@@ -28,6 +28,7 @@ item.wildwood_leggings.name=Wildwood Leggings
 item.wildwood_boots.name=Wildwood Boots
 item.component_pouch.name=Component Pouch
 item.apothecary_pouch.name=Apothecary Pouch
+item.wildwood_door.name=Wildwood Door
 
 tile.mortar.name=Mortar
 tile.imbuer.name=Imbuer
@@ -44,6 +45,13 @@ tile.unending_bowl.name=Unending Bowl
 tile.structure_marker.name=Structure Marker
 tile.incense_burner.name=Incense Burner
 tile.wildwood_rune.name=Wildroot Rune
+tile.wildwood_stairs.name=Wildwood Stairs
+tile.wildwood_trapdoor.name=Wildwood Trapdoor
+tile.wildwood_button.name=Wildwood Button
+tile.wildwood_pressure_plate.name=Wildwood Pressure Plate
+tile.wildwood_fence.name=Wildwood Fence
+tile.wildwood_slab.name=Wildwood Slab
+tile.wildwood_wall.name=Wildwood Wall
 
 roots.tooltip.petaldust.notag=This Petal Dust has no NBT data! It is potentially prone to errors and should not be used!
 roots.tooltip.staff.notag=This Staff has no NBT data! It is potentially prone to errors and should not be used!
