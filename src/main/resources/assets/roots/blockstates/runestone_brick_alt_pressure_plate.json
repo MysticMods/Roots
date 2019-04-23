@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "powered=false": { "model": "roots:runestone_brick_alt_pressure_plate_up" },
+        "powered=true": { "model": "roots:runestone_brick_alt_pressure_plate_down" }
+    }
+}
