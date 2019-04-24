@@ -30,7 +30,7 @@ public class ModBlocks {
   public static BlockCropBase moonglow, aubergine, pereskia, wildroot, spirit_herb,wildewheet, cloud_berry, infernal_bulb, dewgonia, stalicripe;
 
   // Runestones
-  public static Block runestone, runestone_brick, runestone_brick_alt, chiseled_runestone, wildwood_log, wildwood_planks, wildwoodLeaves, baffle_cap_huge_stem, baffle_cap_huge_top,
+  public static Block runestone, runestone_brick, runestone_brick_alt, chiseled_runestone, wildwood_log, wildwood_planks, wildwood_leaves, baffle_cap_huge_stem, baffle_cap_huge_top,
       baffle_cap_mushroom, runic_soil_fire, runic_soil_water, runic_soil_air, runic_soil_earth, runic_soil, trample_rune;
 
 
@@ -86,10 +86,8 @@ public class ModBlocks {
     event.addBlock(wildwood_planks = new BlockBase(Material.WOOD, SoundType.WOOD, 2.0f, "wildwood_planks").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addBlock(wildwood_door = new BlockDoorBase(wildwood_planks, SoundType.WOOD, 2.0f, "wildwood_door").setModelCustom(true).setLayer(BlockRenderLayer.TRANSLUCENT).setCreativeTab(Roots.tab));
     event.addBlock(wildwood_trapdoor = new BlockTrapDoorBase(wildwood_planks, SoundType.WOOD, 2.0f, "wildwood_trapdoor").setModelCustom(true).setLayer(BlockRenderLayer.TRANSLUCENT).setCreativeTab(Roots.tab));
-    /*event.addBlock(wildwood_button = new BlockButtonWoodBase(wildwood_planks, SoundType.WOOD, 2.0f, "wildwood_button").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addBlock(wildwood_pressure_plate = new BlockPressurePlateBase(wildwood_planks, BlockPressurePlate.Sensitivity.EVERYTHING, SoundType.WOOD, 2.0f, "wildwood_pressure_plate").setModelCustom(true).setCreativeTab(Roots.tab));*/
     event.addBlock(wildwood_fence = new BlockFenceBase(wildwood_planks, SoundType.WOOD, 2.0f, "wildwood_fence").setModelCustom(true).setCreativeTab(Roots.tab));
-    //      event.addBlock(wildwoodLeaves = new BlockBase(Material.LEAVES, SoundType.PLANT, 0.8f,"wildwood_leaves").setModelCustom(true).setOpacity(false).setCreativeTab(Roots.tab));
+    event.addBlock(wildwood_leaves = new BlockBase(Material.LEAVES, SoundType.PLANT, 0.8f,"wildwood_leaves").setModelCustom(true).setOpacity(false).setCreativeTab(Roots.tab));
 
     Variants wildwood = variants(event, wildwood_planks, "wildwood", SoundType.WOOD, Material.WOOD);
     wildwood_slab = wildwood.slab;

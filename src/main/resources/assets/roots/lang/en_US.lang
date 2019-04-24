@@ -52,6 +52,12 @@ tile.wildwood_pressure_plate.name=Wildwood Pressure Plate
 tile.wildwood_fence.name=Wildwood Fence
 tile.wildwood_slab.name=Wildwood Slab
 tile.wildwood_wall.name=Wildwood Wall
+tile.runestone_button.name=Runestone Button
+tile.runestone_brick_button.name=Runestone Brick Button
+tile.runestone_brick_alt_button.name=Runestone Brick Button
+tile.runestone_pressure_plate.name=Runestone Pressure Plate
+tile.runestone_brick_pressure_plate.name=Runestone Brick Pressure Plate
+tile.runestone_brick_alt_pressure_plate.name=Runestone Brick Pressure Plate
 
 roots.tooltip.petaldust.notag=This Petal Dust has no NBT data! It is potentially prone to errors and should not be used!
 roots.tooltip.staff.notag=This Staff has no NBT data! It is potentially prone to errors and should not be used!
