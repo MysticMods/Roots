@@ -1,0 +1,7 @@
+{
+    "variants":{
+        "custom": { "model": "roots:wildwood_sapling" },
+        "stage=0": { "model": "roots:wildwood_sapling" },
+        "stage=1": { "model": "roots:wildwood_sapling" }
+    }
+}
