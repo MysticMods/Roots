@@ -135,7 +135,7 @@ public class WorldGenBigWildwoodTree extends WorldGenAbstractTree {
    */
   private void generateLeafNode(BlockPos pos) {
     for (int i = 0; i < this.leafDistanceLimit; ++i) {
-      this.crosSection(pos.up(i), this.leafSize(i), Blocks.LEAVES2.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, false).withProperty(BlockNewLeaf.VARIANT, BlockPlanks.EnumType.DARK_OAK));
+      this.crosSection(pos.up(i), this.leafSize(i), ModBlocks.wildwood_leaves.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, false));
     }
   }
 
