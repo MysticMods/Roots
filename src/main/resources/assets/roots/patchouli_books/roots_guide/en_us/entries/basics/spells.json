@@ -18,7 +18,7 @@
       "type": "crafting",
       "recipe": "roots:staff",
       "title": "Spell Staff",
-        "text": "All spells require a druid to have various herbs in their inventory in order to cast them. These herbs can be provided to the staff through a $(l:apparatus/pouch)Component Pouch$() or an $(l:apparatus/apothecary_pouch)Apothecary Pouch$()."
+        "text": "All spells require a druid to have various herbs in their inventory in order to cast them. These herbs can be provided to the staff through a $(l:apparatus/component_pouch)Component Pouch$() or an $(l:apparatus/apothecary_pouch)Apothecary Pouch$()."
     },
     {
       "type": "text",
