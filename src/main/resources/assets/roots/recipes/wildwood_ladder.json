@@ -1,0 +1,20 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "R R",
+    "RRR",
+    "R R"
+    ],
+  "key": {
+    "R": [
+      {
+        "item": "roots:bark_wildwood"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:wildwood_ladder",
+    "data": 0,
+    "count": 21
+  }
+}

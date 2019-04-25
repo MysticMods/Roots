@@ -1,0 +1,18 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "RR"
+    ],
+  "key": {
+    "R": [
+      {
+        "item": "roots:wildwood_slab"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:wildwood_pressure_plate",
+    "data": 0,
+    "count": 1
+  }
+}
