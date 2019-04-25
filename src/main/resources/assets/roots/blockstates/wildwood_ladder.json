@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "roots:wildwood_ladder" },
+        "facing=east":  { "model": "roots:wildwood_ladder", "y": 90 },
+        "facing=south": { "model": "roots:wildwood_ladder", "y": 180 },
+        "facing=west":  { "model": "roots:wildwood_ladder", "y": 270 }
+    }
+}

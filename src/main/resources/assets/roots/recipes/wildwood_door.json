@@ -1,24 +1,20 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-    "FFF",
-    "RRR"
+    "RR",
+    "RR",
+    "RR"
     ],
   "key": {
     "R": [
       {
         "item": "roots:wildwood_planks"
       }
-    ],
-    "F": [
-      {
-        "item": "roots:wildwood_fence"
-      }
     ]
   },
   "result": {
-    "item": "roots:wildwood_wall",
+    "item": "roots:wildwood_door",
     "data": 0,
-    "count": 6
+    "count": 3
   }
 }

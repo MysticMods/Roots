@@ -46,7 +46,7 @@ public class ModBlocks {
   // Wildwood
   public static Block wildwood_slab, wildwood_double_slab, wildwood_stairs, wildwood_wall;
   public static Block wildwood_door, wildwood_trapdoor;
-  public static Block wildwood_button, wildwood_pressure_plate, wildwood_fence;
+  public static Block wildwood_button, wildwood_pressure_plate, wildwood_fence, wildwood_ladder;
 
   /**
    * Register all block
@@ -94,12 +94,15 @@ public class ModBlocks {
     event.addBlock(wildwood_door = new BlockDoorBase(wildwood_planks, SoundType.WOOD, 2.0f, "wildwood_door").setModelCustom(true).setLayer(BlockRenderLayer.TRANSLUCENT).setCreativeTab(Roots.tab));
     event.addBlock(wildwood_trapdoor = new BlockTrapDoorBase(wildwood_planks, SoundType.WOOD, 2.0f, "wildwood_trapdoor").setModelCustom(true).setLayer(BlockRenderLayer.TRANSLUCENT).setCreativeTab(Roots.tab));
     event.addBlock(wildwood_fence = new BlockFenceBase(wildwood_planks, SoundType.WOOD, 2.0f, "wildwood_fence").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addBlock(wildwood_ladder = new BlockLadderBase(wildwood_planks, 2.0f, "wildwood_ladder").setModelCustom(true).setCreativeTab(Roots.tab));
 
     Variants wildwood = variants(event, wildwood_planks, "wildwood", SoundType.WOOD, Material.WOOD);
     wildwood_slab = wildwood.slab;
     wildwood_double_slab = wildwood.double_slab;
     wildwood_stairs = wildwood.stairs;
     wildwood_wall = wildwood.wall;
+    wildwood_button = wildwood.button;
+    wildwood_pressure_plate = wildwood.pressure_plate;
 
     //Decoration
     Variants runes = variants(event, runestone, "runestone", SoundType.STONE, Material.ROCK);
