@@ -9,6 +9,6 @@
 	"book_texture": "roots:textures/gui/book.png",
 	"filler_texture": "roots:textures/gui/patchouli/book_filler.png",
 	"model": "roots:druid_handbook",
-	"version": 2,
+	"version": 3,
 	"show_progress": false
 }
