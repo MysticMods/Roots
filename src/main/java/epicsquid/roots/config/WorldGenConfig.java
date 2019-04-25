@@ -4,6 +4,7 @@ import epicsquid.roots.Roots;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.fml.common.Mod;
 
+@Config.LangKey("config.roots.category.worldgen")
 @Config(modid = Roots.MODID, name = "roots/world_gen")
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 public class WorldGenConfig {

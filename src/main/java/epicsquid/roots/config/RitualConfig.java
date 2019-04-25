@@ -3,6 +3,7 @@ package epicsquid.roots.config;
 import epicsquid.roots.Roots;
 import net.minecraftforge.common.config.Config;
 
+@Config.LangKey("config.roots.category.rituals")
 @Config(modid = Roots.MODID, name = "roots/rituals")
 public class RitualConfig {
 
@@ -75,5 +76,7 @@ public class RitualConfig {
     public boolean disableSummoning = false;
 
   }
+
+
 
 }

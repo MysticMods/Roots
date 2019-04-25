@@ -3,6 +3,7 @@ package epicsquid.roots.config;
 import epicsquid.roots.Roots;
 import net.minecraftforge.common.config.Config;
 
+@Config.LangKey("config.roots.category.general")
 @Config(modid= Roots.MODID, name = "roots/general")
 @SuppressWarnings("unused")
 public class GeneralConfig {
@@ -12,3 +13,5 @@ public class GeneralConfig {
   public static boolean disableBaubleBow = false;
 
 }
+
+
