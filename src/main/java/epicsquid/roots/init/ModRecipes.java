@@ -564,9 +564,25 @@ public class ModRecipes {
           new ItemStack(ModItems.bark_oak),
           new ItemStack(ModItems.bark_oak)));
 
+    addCraftingRecipe("living_pickaxe_silver",
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_pickaxe), 1).addIngredients(
+          new OreIngredient("ingotSilver"),
+          new ItemStack(Items.WOODEN_PICKAXE),
+          new ItemStack(ModItems.wildroot),
+          new ItemStack(ModItems.bark_oak),
+          new ItemStack(ModItems.bark_oak)));
+
     addCraftingRecipe("living_axe",
         new PyreCraftingRecipe(new ItemStack(ModItems.living_axe), 1).addIngredients(
           new OreIngredient("ingotGold"),
+          new ItemStack(Items.WOODEN_AXE),
+          new ItemStack(ModItems.wildroot),
+          new ItemStack(ModItems.bark_oak),
+          new ItemStack(ModItems.bark_oak)));
+
+    addCraftingRecipe("living_axe_silver",
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_axe), 1).addIngredients(
+          new OreIngredient("ingotSilver"),
           new ItemStack(Items.WOODEN_AXE),
           new ItemStack(ModItems.wildroot),
           new ItemStack(ModItems.bark_oak),
@@ -580,9 +596,25 @@ public class ModRecipes {
             new ItemStack(ModItems.bark_oak),
             new ItemStack(ModItems.bark_oak)));
 
+    addCraftingRecipe("living_shovel_silver",
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_shovel), 1).addIngredients(
+            new OreIngredient("ingotSilver"),
+            new ItemStack(Items.WOODEN_SHOVEL),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak)));
+
     addCraftingRecipe("living_hoe",
         new PyreCraftingRecipe(new ItemStack(ModItems.living_hoe), 1).addIngredients(
           new OreIngredient("ingotGold"),
+          new ItemStack(Items.WOODEN_HOE),
+          new ItemStack(ModItems.wildroot),
+          new ItemStack(ModItems.bark_oak),
+          new ItemStack(ModItems.bark_oak)));
+
+    addCraftingRecipe("living_hoe_silver",
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_hoe), 1).addIngredients(
+          new OreIngredient("ingotSilver"),
           new ItemStack(Items.WOODEN_HOE),
           new ItemStack(ModItems.wildroot),
           new ItemStack(ModItems.bark_oak),
@@ -595,6 +627,15 @@ public class ModRecipes {
             new ItemStack(ModItems.wildroot),
             new ItemStack(ModItems.bark_oak),
             new ItemStack(ModItems.bark_oak)));
+
+    addCraftingRecipe("living_sword_silver",
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_sword), 1).addIngredients(
+            new OreIngredient("ingotSilver"),
+            new ItemStack(Items.WOODEN_SWORD),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak)));
+
 
     addCraftingRecipe("living_arrow",
         new PyreCraftingRecipe(new ItemStack(ModItems.living_arrow, 6), 1).addIngredients(
