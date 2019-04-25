@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Carving runes in wildwood with $(l:herbs/moonglow_leaf)Moonglow Leaves$() create a special type of rune that reacts with smoke of burning herbs. These herbs are burned underneath the rune in an Incense Burner. Right click to place items in the Burner and use flint and steel to light it on fire. Then right click again to put out the fire, and again to take out the items. "
+      "text": "Carving runes in wildwood with $(l:herbs/moonglow)Moonglow Leaves$() create a special type of rune that reacts with smoke of burning herbs. These herbs are burned underneath the rune in an Incense Burner. Right click to place items in the Burner and use flint and steel to light it on fire. Then right click again to put out the fire, and again to take out the items. "
     },
     {
       "type": "text",

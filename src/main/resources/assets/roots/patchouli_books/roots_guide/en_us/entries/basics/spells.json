@@ -12,13 +12,13 @@
     },
     {
       "type": "text",
-      "text": "Once a Petal Dust has been crafted, it can be imbued into a simple staff for casting using an $(l:apparatus/imbuer)Imbuer.$() During the imbuement, further reagents can be added to modify the spells effects permenantly."
+      "text": "Once a Petal Dust has been crafted, it can be imbued into a simple staff for casting using an $(l:apparatus/imbuer)Imbuer.$() During the imbuement, further reagents can be added to modify the spells effects permenantly. The imbuement will never override the old spell slots, instead it'll install the spell in the first empty spell slot in the staff"
     },
     {
       "type": "crafting",
       "recipe": "roots:staff",
       "title": "Spell Staff",
-      "text": "All spells require a druid to have various herbs in their inventory in order to cast them. These herbs can be provided to the staff through a $(l:apparatus/pouch)Petal Pouch.$()"
+        "text": "All spells require a druid to have various herbs in their inventory in order to cast them. These herbs can be provided to the staff through a $(l:apparatus/pouch)Component Pouch$() or an $(l:apparatus/apothecary_pouch)Apothecary Pouch$()."
     },
     {
       "type": "text",
@@ -28,7 +28,7 @@
     {
       "type": "text",
       "title": "Removing Spells",
-      "text": "In order to remove a spell from a slot in your staff, you can select the relevant slot and then imbue it with runic dust."
+      "text": "In order to remove a spell from a slot in your staff, you can select the relevant slot and then imbue it with $(l:resources/runic_dust)Runic Dust$()."
     }
   ]
 }
