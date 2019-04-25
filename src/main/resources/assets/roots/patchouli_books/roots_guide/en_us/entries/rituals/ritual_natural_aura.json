@@ -1,6 +1,6 @@
 {
   "name": "Natural Aura",
-  "icon": "minecraft:tallgrass:1",
+  "icon": "roots:ritual_natural_aura",
   "category": "rituals",
   "advancement": "roots:spirit_herb",
   "pages": [

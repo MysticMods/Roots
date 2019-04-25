@@ -1,6 +1,6 @@
 {
   "name": "Flower Growth",
-  "icon": "minecraft:red_flower",
+  "icon": "roots:ritual_flower_growth",
   "category": "rituals",
   "advancement": "roots:pereskia",
 

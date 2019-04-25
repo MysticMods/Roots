@@ -1,6 +1,6 @@
 {
   "name": "Warding Protection",
-  "icon": "minecraft:shield",
+  "icon": "roots:ritual_warden",
   "category": "rituals",
   "advancement": "roots:stalicripe",
   "pages": [

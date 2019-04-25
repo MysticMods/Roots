@@ -1,6 +1,6 @@
 {
   "name": "Heavy Storms",
-  "icon": "minecraft:water_bucket",
+  "icon": "roots:ritual_storm",
   "category": "rituals",
   "advancement": "roots:cloud_berry",
   "pages": [
