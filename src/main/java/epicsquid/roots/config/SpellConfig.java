@@ -3,6 +3,7 @@ package epicsquid.roots.config;
 import epicsquid.roots.Roots;
 import net.minecraftforge.common.config.Config;
 
+@Config.LangKey("config.roots.category.spells")
 @Config(modid = Roots.MODID, name = "roots/spells")
 public class SpellConfig {
 
