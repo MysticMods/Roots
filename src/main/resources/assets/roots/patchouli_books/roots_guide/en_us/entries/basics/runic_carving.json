@@ -10,7 +10,7 @@
       },
       {
         "type": "text",
-        "text": "Druids call this \"Runic Carving\" and can engrave this runes while holding the required $(l:herbs)Herb$() in their offhand, which is consumed in the process.$(br2)Examples can be found in the \"Runes\" chapter of this book"
+        "text": "Druids call this \"Runic Carving\" and can engrave this runes while holding the required Herb in their offhand, which is consumed in the process.$(br2)Examples can be found in the \"Runes\" chapter of this book"
       }
     ]
   }
