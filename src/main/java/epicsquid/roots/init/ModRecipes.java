@@ -710,7 +710,7 @@ public class ModRecipes {
             new ItemStack(Blocks.BROWN_MUSHROOM)));
 
     addCraftingRecipe("runic_shears",
-        new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.runic_shears), 1).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModItems.runic_shears), 1).addIngredients(
           new ItemStack(Items.SHEARS),
           new ItemStack(ModItems.pereskia),
           new ItemStack(ModItems.pereskia),
