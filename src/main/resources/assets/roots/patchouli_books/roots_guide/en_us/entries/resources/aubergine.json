@@ -4,7 +4,8 @@
   "category": "resources",
   "pages": [
     {
-      "type": "text",
+      "type": "spotlight",
+      "item": "roots:aubergine",
       "text": "Aubergines are mostly used in the druidic arts for their seeds, which store potent amounts of energy - however, there are rituals that are only successful when performed with the entire aubergine."
     },
     {

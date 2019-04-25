@@ -30,7 +30,8 @@
       "recipe": "living_sword"
     },
     {
-      "type": "text",
+      "type": "spotlight",
+      "item": "roots:living_arrow",
       "text": "While too brittle and frail to be fully imbued with wildroot, these sturdy arrows should get you through the worst of fights."
     },
     {
