@@ -7,6 +7,7 @@ import net.minecraftforge.common.config.Config;
 @Config(modid = Roots.MODID, name = "roots/rituals")
 public class RitualConfig {
 
+  @Config.LangKey("config.roots.subcategory.disable_rituals")
   public static DisableRitualCategory disableRitualCategory = new DisableRitualCategory();
 
   public static class DisableRitualCategory {
