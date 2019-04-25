@@ -6,7 +6,8 @@
     "secret": true,
     "pages": [
       {
-        "type": "text",
+        "type": "spotlight",
+        "item": "roots:apothecary_pouch",
         "text": "A vastly improved component pouch, the apothecary pouch can hold many more items and herbs, storing the herbs in small glass vials to maintain their ease of access."
       },
       {

@@ -2,5 +2,8 @@
   "conditions": {
     "copper_exists": "epicsquid.roots.recipe.conditions.RecipeConditionFactory$CopperExists",
     "silver_exists": "epicsquid.roots.recipe.conditions.RecipeConditionFactory$CopperExists"
+  },
+  "ingredients": {
+    "seed": "epicsquid.roots.recipe.ingredient.SeedFactory"
   }
 }

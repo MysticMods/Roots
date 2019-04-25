@@ -6,7 +6,8 @@
   "secret": true,
   "pages": [
     {
-      "type": "text",
+      "type": "spotlight",
+      "item": "roots:runestone",
       "text": "Runestone is a magic-infused variety of stone that is often used in structures required by druidic rituals, or as a specialized crafting component where ordinary stone fails."
     },
     {

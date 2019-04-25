@@ -135,7 +135,7 @@ public class WorldGenBigWildwoodTree extends WorldGenAbstractTree {
    */
   private void generateLeafNode(BlockPos pos) {
     for (int i = 0; i < this.leafDistanceLimit; ++i) {
-      this.crosSection(pos.up(i), this.leafSize(i), Blocks.LEAVES2.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, false).withProperty(BlockNewLeaf.VARIANT, BlockPlanks.EnumType.DARK_OAK));
+      this.crosSection(pos.up(i), this.leafSize(i), ModBlocks.wildwood_leaves.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, false));
     }
   }
 
@@ -209,7 +209,7 @@ public class WorldGenBigWildwoodTree extends WorldGenAbstractTree {
   private void generateTrunk() {
     BlockPos blockpos = this.basePos;
     BlockPos blockpos1 = this.basePos.up(this.height);
-    Block block = ModBlocks.wildwoodLog;
+    Block block = ModBlocks.wildwood_log;
     this.limb(blockpos, blockpos1, block);
   }
 
@@ -222,7 +222,7 @@ public class WorldGenBigWildwoodTree extends WorldGenAbstractTree {
       BlockPos blockpos = new BlockPos(this.basePos.getX(), i, this.basePos.getZ());
 
       if (!blockpos.equals(worldgenbigtree$foliagecoordinates) && this.leafNodeNeedsBase(i - this.basePos.getY())) {
-        this.limb(blockpos, worldgenbigtree$foliagecoordinates, ModBlocks.wildwoodLog);
+        this.limb(blockpos, worldgenbigtree$foliagecoordinates, ModBlocks.wildwood_log);
       }
     }
   }

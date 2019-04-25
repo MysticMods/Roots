@@ -1,0 +1,18 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "RR"
+    ],
+  "key": {
+    "R": [
+      {
+        "item": "roots:runestone_brick_alt"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:runestone_brick_alt_pressure_plate",
+    "data": 0,
+    "count": 1
+  }
+}

@@ -33,7 +33,7 @@ public class ItemQuiver extends ItemArrowBase {
   public ItemQuiver(@Nonnull String name) {
     super(name);
     this.setMaxStackSize(1);
-    this.setMaxDamage(128);
+    this.setMaxDamage(256);
   }
 
   @Override
@@ -47,14 +47,16 @@ public class ItemQuiver extends ItemArrowBase {
     if (!normalArrow.isEmpty()) {
       EntityArrow arrow = ((ItemArrow) normalArrow.getItem()).createArrow(worldIn, normalArrow, shooter);
       arrow.setDamage(arrow.getDamage() + 3.0D);
-      stack.damageItem(2, shooter);
+      if (worldIn.rand.nextBoolean()) {
+        stack.damageItem(2, shooter);
+      }
       return arrow;
     }
 
     EntityArrow arrow = new EntityTippedArrow(worldIn, shooter);
     arrow.setDamage(1.5D);
     arrow.getEntityData().setBoolean("generated", true);
-    stack.damageItem(5, shooter);
+    stack.damageItem(3, shooter);
     return arrow;
   }
 
@@ -134,21 +136,32 @@ public class ItemQuiver extends ItemArrowBase {
     }
   }
 
-  public static int repairChance = 750;
-
-  @Override
-  public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-    int chance = Util.rand.nextInt(repairChance);
-    if(chance == 0){
-      stack.setItemDamage(stack.getItemDamage()-1);
-    }
-    super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
-  }
-
   @Override
   public EnumRarity getRarity(ItemStack stack) {
     return EnumRarity.RARE;
   }
 
+  @Override
+  public int getItemEnchantability() {
+    return 22;
+  }
 
+  @Override
+  public boolean isEnchantable(ItemStack stack) {
+    return true;
+  }
+
+  @Override
+  public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+    if (repair.getItem() == ModItems.bark_wildwood) {
+      return true;
+    }
+
+    return super.getIsRepairable(toRepair, repair);
+  }
+
+  @Override
+  public boolean isRepairable() {
+    return true;
+  }
 }

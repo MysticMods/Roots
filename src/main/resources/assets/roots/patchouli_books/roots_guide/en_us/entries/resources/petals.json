@@ -4,7 +4,8 @@
   "category": "resources",
   "pages": [
     {
-      "type": "text",
+      "type": "spotlight",
+      "item": "roots:petals",
       "text": "It is possible to delicately separate the petals from a variety of flowers into a collection that can be used for crafting purposes. Any flower will suffice for this recipe."
     },
     {

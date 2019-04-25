@@ -6,7 +6,8 @@
   
   "pages": [
     {
-      "type": "text",
+      "type": "spotlight",
+      "item": "roots:moonglow_leaf",
       "text": "Moonglow, at a first glance, seems to glow in the dark at night; observant druids have noted that it actually emits no light at all if the moon is obscured."
     },
     {

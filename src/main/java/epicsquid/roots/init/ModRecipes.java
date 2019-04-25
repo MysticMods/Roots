@@ -1,5 +1,12 @@
 package epicsquid.roots.init;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Nonnull;
+
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticalworld.entity.EntityBeetle;
 import epicsquid.mysticalworld.entity.EntityDeer;
@@ -35,12 +42,6 @@ import net.minecraftforge.oredict.OreIngredient;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
-
-import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class ModRecipes {
 
@@ -563,9 +564,25 @@ public class ModRecipes {
           new ItemStack(ModItems.bark_oak),
           new ItemStack(ModItems.bark_oak)));
 
+    addCraftingRecipe("living_pickaxe_silver",
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_pickaxe), 1).addIngredients(
+          new OreIngredient("ingotSilver"),
+          new ItemStack(Items.WOODEN_PICKAXE),
+          new ItemStack(ModItems.wildroot),
+          new ItemStack(ModItems.bark_oak),
+          new ItemStack(ModItems.bark_oak)));
+
     addCraftingRecipe("living_axe",
         new PyreCraftingRecipe(new ItemStack(ModItems.living_axe), 1).addIngredients(
           new OreIngredient("ingotGold"),
+          new ItemStack(Items.WOODEN_AXE),
+          new ItemStack(ModItems.wildroot),
+          new ItemStack(ModItems.bark_oak),
+          new ItemStack(ModItems.bark_oak)));
+
+    addCraftingRecipe("living_axe_silver",
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_axe), 1).addIngredients(
+          new OreIngredient("ingotSilver"),
           new ItemStack(Items.WOODEN_AXE),
           new ItemStack(ModItems.wildroot),
           new ItemStack(ModItems.bark_oak),
@@ -579,9 +596,25 @@ public class ModRecipes {
             new ItemStack(ModItems.bark_oak),
             new ItemStack(ModItems.bark_oak)));
 
+    addCraftingRecipe("living_shovel_silver",
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_shovel), 1).addIngredients(
+            new OreIngredient("ingotSilver"),
+            new ItemStack(Items.WOODEN_SHOVEL),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak)));
+
     addCraftingRecipe("living_hoe",
         new PyreCraftingRecipe(new ItemStack(ModItems.living_hoe), 1).addIngredients(
           new OreIngredient("ingotGold"),
+          new ItemStack(Items.WOODEN_HOE),
+          new ItemStack(ModItems.wildroot),
+          new ItemStack(ModItems.bark_oak),
+          new ItemStack(ModItems.bark_oak)));
+
+    addCraftingRecipe("living_hoe_silver",
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_hoe), 1).addIngredients(
+          new OreIngredient("ingotSilver"),
           new ItemStack(Items.WOODEN_HOE),
           new ItemStack(ModItems.wildroot),
           new ItemStack(ModItems.bark_oak),
@@ -594,6 +627,15 @@ public class ModRecipes {
             new ItemStack(ModItems.wildroot),
             new ItemStack(ModItems.bark_oak),
             new ItemStack(ModItems.bark_oak)));
+
+    addCraftingRecipe("living_sword_silver",
+        new PyreCraftingRecipe(new ItemStack(ModItems.living_sword), 1).addIngredients(
+            new OreIngredient("ingotSilver"),
+            new ItemStack(Items.WOODEN_SWORD),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak)));
+
 
     addCraftingRecipe("living_arrow",
         new PyreCraftingRecipe(new ItemStack(ModItems.living_arrow, 6), 1).addIngredients(
@@ -668,7 +710,7 @@ public class ModRecipes {
             new ItemStack(Blocks.BROWN_MUSHROOM)));
 
     addCraftingRecipe("runic_shears",
-        new PyreCraftingRecipe(new ItemStack(epicsquid.roots.init.ModItems.runic_shears), 1).addIngredients(
+        new PyreCraftingRecipe(new ItemStack(ModItems.runic_shears), 1).addIngredients(
           new ItemStack(Items.SHEARS),
           new ItemStack(ModItems.pereskia),
           new ItemStack(ModItems.pereskia),
@@ -715,7 +757,7 @@ public class ModRecipes {
             new ItemStack(ModItems.seeds),
             new ItemStack(ModItems.seeds)).setBurnTime(20));
 
-    // TODO: Work out a way to upgrade the component quiver rather than
+    // TODO: Work out a way to upgrade the component pouch rather than
     // TODO: simply overwriting the contents.
     addCraftingRecipe("apothecary_pouch", new ApothecaryPouchRecipe(new ItemStack(ModItems.apothecary_pouch), 1).addIngredients(
             new ItemStack(Blocks.ENDER_CHEST),

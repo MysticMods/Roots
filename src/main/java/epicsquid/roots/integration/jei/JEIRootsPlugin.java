@@ -81,6 +81,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.bonfire), RITUAL_CRAFTING);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.mortar), MORTAR_AND_PESTLE);
     registry.addRecipeCatalyst(new ItemStack(ModItems.pestle), MORTAR_AND_PESTLE);
+    registry.addRecipeCatalyst(new ItemStack(ModBlocks.bonfire), RITUAL);
 
     registry.addIngredientInfo(new ItemStack(ModItems.terra_moss), VanillaTypes.ITEM, I18n.format("jei.roots.terra_moss.desc"));
     registry.addIngredientInfo(new ItemStack(ModItems.terra_spores), VanillaTypes.ITEM, I18n.format("jei.roots.terra_spores.desc"));
@@ -96,7 +97,9 @@ public class JEIRootsPlugin implements IModPlugin {
     bark.add(new ItemStack(ModItems.bark_wildwood));
 
     registry.addIngredientInfo(bark, VanillaTypes.ITEM, I18n.format("jei.roots.bark.desc"));
-    registry.addIngredientInfo(new ItemStack(ModBlocks.wildwoodLog), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood.desc"));
+    registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_log), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood.desc"));
+    registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_sapling), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood_sapling.desc"));
+    registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_leaves), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood_leaves.desc"));
   }
 
   @Override

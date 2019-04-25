@@ -1,0 +1,18 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "RR"
+    ],
+  "key": {
+    "R": [
+      {
+        "item": "roots:runestone"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:runestone_pressure_plate",
+    "data": 0,
+    "count": 1
+  }
+}

@@ -7,7 +7,8 @@
     "secret": true,
     "pages": [
       {
-        "type": "text",
+        "type": "spotlight",
+        "item": "roots:component_pouch",
         "text": "All spells, however, require a special, easy-to-access pouch to be cast from. The Component Pouch is the most basic form of this, with a slots to carry your herbs and to carry your items."
       },
       {

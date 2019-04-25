@@ -1,0 +1,25 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "RSR",
+    "RSR"
+    ],
+  "key": {
+    "R": [
+      {
+        "item": "roots:wildwood_planks"
+      }
+    ],
+    "S": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "stickWood"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:wildwood_fence",
+    "data": 0,
+    "count": 3
+  }
+}

@@ -1,5 +1,6 @@
 package epicsquid.roots.init;
 
+import epicsquid.mysticallib.block.BlockDoorBase;
 import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.mysticallib.item.ItemArrowBase;
 import epicsquid.mysticallib.item.ItemBase;
@@ -11,7 +12,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -36,7 +36,7 @@ public class ModItems {
           baffle_cap, bark_oak, bark_birch, bark_spruce, bark_jungle, bark_dark_oak, bark_acacia, bark_wildwood;
 
   public static Item moonglow_seed, aubergine_seed, pereskia_bulb, spirit_herb_seed, wildewheet_seed, cloud_berry, infernal_bulb,
-          stalicripe, dewgonia, wildroot;
+      stalicripe, dewgonia, wildroot;
 
   public static Item ritual_life, ritual_storm, ritual_light, ritual_fire_storm, ritual_regrowth, ritual_windwall, ritual_warden, ritual_natural_aura, ritual_purity, ritual_frost, ritual_animal_harvest, ritual_summoning, ritual_wild_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation;
 
@@ -171,9 +171,11 @@ public class ModItems {
       OreDictionary.registerOre("runestone", rune);
     }
 
-    for (Item seed : Arrays.asList(Items.WHEAT_SEEDS, Items.BEETROOT_SEEDS, Items.PUMPKIN_SEEDS, Items.MELON_SEEDS, ModItems.aubergine_seed, ModItems.moonglow_seed, ModItems.spirit_herb_seed, ModItems.wildewheet_seed, ModItems.terra_spores)) {
-      OreDictionary.registerOre("seed", seed);
-    }
+    OreDictionary.registerOre("logWood", ModBlocks.wildwood_log);
+    OreDictionary.registerOre("plankWood", ModBlocks.wildwood_planks);
+    OreDictionary.registerOre("stairWood", ModBlocks.wildwood_stairs);
+    OreDictionary.registerOre("slabWood", ModBlocks.wildwood_slab);
+    OreDictionary.registerOre("doorWood", new ItemStack(((BlockDoorBase) ModBlocks.wildwood_door).getItemBlock()));
   }
 
   private static void registerSeedDrops() {

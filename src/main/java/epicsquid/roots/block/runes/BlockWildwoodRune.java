@@ -5,7 +5,6 @@ import javax.annotation.Nullable;
 
 import epicsquid.mysticallib.block.BlockTEBase;
 import epicsquid.roots.init.ModBlocks;
-import epicsquid.roots.rune.RuneRegistry;
 import epicsquid.roots.tileentity.TileEntityWildrootRune;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -30,6 +29,6 @@ public class BlockWildwoodRune extends BlockTEBase {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return Item.getItemFromBlock(ModBlocks.wildwoodLog);
+        return Item.getItemFromBlock(ModBlocks.wildwood_log);
     }
 }

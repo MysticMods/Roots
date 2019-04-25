@@ -1,0 +1,20 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "R  ",
+    "RR ",
+    "RRR"
+    ],
+  "key": {
+    "R": [
+      {
+        "item": "roots:wildwood_planks"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:wildwood_stairs",
+    "data": 0,
+    "count": 8
+  }
+}

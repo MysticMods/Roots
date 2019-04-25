@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "roots:apothecary_pouch"
+        },
+        "title": {
+            "translate": "advancement.roots.apothecary_pouch"
+        },
+        "description": {
+            "translate": "advancement.roots.apothecary_pouch.desc"
+        }
+    },
+    "parent": "roots:spirit_herb",
+    "criteria": {
+        "book": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:apothecary_pouch"
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -10,7 +10,7 @@ import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.entity.spell.EntityPetalShell;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.integration.baubles.quiver.BaubleBeltCapabilityHandler;
+import epicsquid.roots.integration.baubles.pouch.BaubleBeltCapabilityHandler;
 import epicsquid.roots.item.ItemKnife;
 import epicsquid.roots.item.ItemPouch;
 import epicsquid.roots.network.MessagePlayerDataUpdate;
@@ -90,7 +90,7 @@ public class EventManager {
                 bark = new ItemStack(ModItems.bark_dark_oak, 1);
               }
             }
-            if (block == ModBlocks.wildwoodLog) {
+            if (block == ModBlocks.wildwood_log) {
               bark = new ItemStack(ModItems.bark_wildwood, 1);
             }
             int count = new Random().nextInt(getBarkAmount(tool)) +1;

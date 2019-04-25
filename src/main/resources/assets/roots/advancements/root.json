@@ -9,7 +9,7 @@
         "description": {
             "translate": "advancement.roots.root.desc"
         },
-        "background": "roots:textures/blocks/thatch.png"
+        "background": "mysticalworld:textures/blocks/thatch.png"
     },
     "criteria": {
         "book": {

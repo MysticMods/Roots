@@ -5,7 +5,8 @@
   "priority": true,
   "pages": [
     {
-      "type": "text",
+      "type": "spotlight",
+      "item": "roots:wildroot",
       "text": "Wildroot is perhaps the most easily obtained druidic herb, and one of the two initially available to aspiring druids - yet no less important. It is a versatile herb with many applications.$(br2)Wildroot can be obtained by breaking grass and planting it like any other crop to obtain more of it."
     }
   ]
