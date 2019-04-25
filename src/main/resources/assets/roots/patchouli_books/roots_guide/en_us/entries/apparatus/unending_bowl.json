@@ -5,7 +5,8 @@
   "advancement": "roots:runestone",
   "pages": [
     {
-      "type": "text",
+      "type": "spotlight",
+      "item": "roots:unending_bowl",
       "text": "The Unending Bowl, as its name suggests, never seems to run out of water no matter how much is taken from it once placed."
     },
     {

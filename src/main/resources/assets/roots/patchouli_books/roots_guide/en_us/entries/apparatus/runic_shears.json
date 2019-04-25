@@ -6,7 +6,8 @@
   "advancement": "roots:pereskia",
   "pages": [
     {
-      "type": "text",
+      "type": "spotlight",
+      "item": "roots:/runic_shears",
       "text": "Runic shears are used to harvest various types of ingredients from blocks, plants and animals."
     },
     {

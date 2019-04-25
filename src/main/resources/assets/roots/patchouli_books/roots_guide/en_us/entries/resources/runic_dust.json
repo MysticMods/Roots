@@ -6,7 +6,8 @@
   "secret": true,
   "pages": [
     {
-      "type": "text",
+      "type": "spotlight",
+      "item": "roots:runic_dust",
       "text": "While made of hardy stuff, the magic of the Mortar and Pestle can break most types of runestone down into a fine powder, which can be used in rituals or crafting.$(br2)This runic dust has the further use of removing a spell from the selected slot from a Staff"
     },
     {
