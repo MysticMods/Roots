@@ -1,8 +1,11 @@
 package epicsquid.roots.spell;
 
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.network.fx.MessageHarvestCompleteFX;
+import epicsquid.roots.network.fx.MessageTreeCompleteFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.ItemSpawnUtil;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
@@ -96,6 +99,7 @@ public class SpellHarvest extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+    List<BlockPos> affectedPositions = new ArrayList<>();
     List<BlockPos> pumpkinsAndMelons = new ArrayList<>();
     List<BlockPos> reedsAndCactus = new ArrayList<>();
     List<BlockPos> crops = Util.getBlocksWithinRadius(player.world, player.getPosition(), 6, 5, 6, (pos) -> {
@@ -153,6 +157,7 @@ public class SpellHarvest extends SpellBase {
             if (stack.isEmpty()) continue;
             ItemSpawnUtil.spawnItem(player.world, pos, stack);
           }
+          affectedPositions.add(pos);
         }
         count++;
       }
@@ -163,6 +168,7 @@ public class SpellHarvest extends SpellBase {
         IBlockState state = player.world.getBlockState(pos);
         player.world.setBlockState(pos, Blocks.AIR.getDefaultState());
         state.getBlock().harvestBlock(player.world, player, pos, state, null, player.getHeldItemMainhand());
+        affectedPositions.add(pos);
       }
     }
     Set<BlockPos> done = new HashSet<>();
@@ -187,8 +193,14 @@ public class SpellHarvest extends SpellBase {
         if (!player.world.isRemote) {
           state.getBlock().harvestBlock(player.world, player, pos.up(), state, null, player.getHeldItemMainhand());
           player.world.setBlockState(pos.up(), Blocks.AIR.getDefaultState());
+          affectedPositions.add(pos);
         }
       }
+    }
+
+    if (!affectedPositions.isEmpty() && !player.world.isRemote) {
+      MessageHarvestCompleteFX message = new MessageHarvestCompleteFX(affectedPositions);
+      PacketHandler.sendToAllTracking(message, player);
     }
 
     return count != 0;
