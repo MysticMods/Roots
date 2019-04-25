@@ -8,7 +8,6 @@ import epicsquid.roots.network.fx.MessageLightDrifterSync;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.Constants;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameType;

@@ -4,7 +4,6 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.network.fx.MessageLifeInfusionFX;
 import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.block.Block;

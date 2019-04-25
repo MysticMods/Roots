@@ -9,6 +9,7 @@ import epicsquid.roots.capability.playerdata.IPlayerDataCapability;
 import epicsquid.roots.capability.playerdata.PlayerDataCapability;
 import epicsquid.roots.capability.playerdata.PlayerDataCapabilityStorage;
 import epicsquid.roots.gui.GuiHandler;
+import epicsquid.roots.handler.ConfigHandler;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.proxy.CommonProxy;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -73,6 +74,7 @@ public class Roots {
     CapabilityManager.INSTANCE.register(IPlayerDataCapability.class, new PlayerDataCapabilityStorage(), PlayerDataCapability::new);
     MinecraftForge.EVENT_BUS.register(new RegistryManager());
     MinecraftForge.EVENT_BUS.register(new EventManager());
+    MinecraftForge.EVENT_BUS.register(ConfigHandler.class);
     NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);
     proxy.preInit(event);
   }

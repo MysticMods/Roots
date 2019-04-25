@@ -1,8 +1,5 @@
 package epicsquid.roots.spell;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
@@ -21,6 +18,9 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.oredict.OreIngredient;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SpellRadiance extends SpellBase {
   public static String spellName = "spell_radiance";
@@ -123,9 +123,9 @@ public class SpellRadiance extends SpellBase {
             for (EntityLivingBase e : entities) {
               if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
                   && e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
-                e.attackEntityFrom(DamageSource.MAGIC.causeMobDamage(player), 4.0f);
+                e.attackEntityFrom(DamageSource.MAGIC.causeMobDamage(player), 4F);
                 if (e.isEntityUndead()) {
-                  e.attackEntityFrom(DamageSource.MAGIC.causeMobDamage(player), 2.0f);
+                  e.attackEntityFrom(DamageSource.MAGIC.causeMobDamage(player), 2F);
                 }
                 e.setRevengeTarget(player);
                 e.setLastAttackedEntity(player);

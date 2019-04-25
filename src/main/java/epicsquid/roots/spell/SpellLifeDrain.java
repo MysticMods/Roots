@@ -1,7 +1,5 @@
 package epicsquid.roots.spell;
 
-import java.util.List;
-
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModBlocks;
@@ -17,6 +15,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+
+import java.util.List;
 
 public class SpellLifeDrain extends SpellBase {
   public static String spellName = "spell_life_drain";
@@ -54,10 +54,10 @@ public class SpellLifeDrain extends SpellBase {
               && e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
             foundTarget = true;
             if (e.hurtTime <= 0 && !e.isDead) {
-              e.attackEntityFrom(DamageSource.WITHER.causeMobDamage(player), 1.0f);
+              e.attackEntityFrom(DamageSource.WITHER.causeMobDamage(player), 1F);
               e.setRevengeTarget(player);
               e.setLastAttackedEntity(player);
-              player.heal(0.5f);
+              player.heal(0.5F);
             }
           }
         }

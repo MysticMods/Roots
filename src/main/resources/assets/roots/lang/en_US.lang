@@ -280,3 +280,16 @@ roots.quiver.picked_up_arrow=Retrieved some arrows.
 roots.quiver.quiver_full=Your quiver is full.
 roots.quiver.fragile=This grown arrow cannot be picked up.
 roots.quiver.broke=All of the arrows broke.
+
+# Config
+# Categories
+config.roots.category.general=General
+config.roots.category.rituals=Rituals
+config.roots.category.spells=Spells
+config.roots.category.worldgen=World
+
+# SubCategories
+config.roots.subcategory.disable_spells=Enable / Disable Spells
+config.roots.subcategory.spell_features=Spell Features
+config.roots.subcategory.disable_rituals=Enable / Disable Rituals
+config.roots.subcategory.worldgen=World Generation Settings

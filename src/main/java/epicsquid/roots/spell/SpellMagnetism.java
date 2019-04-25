@@ -1,6 +1,7 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.integration.botania.SolegnoliaHelper;
@@ -49,7 +50,7 @@ public class SpellMagnetism extends SpellBase {
       }
     }
     List<EntityXPOrb> orbs = Util.getEntitiesWithinRadius(player.getEntityWorld(), EntityXPOrb.class, player.getPosition(), 15, 15, 15);
-    if (!orbs.isEmpty()) {
+    if (!orbs.isEmpty() && SpellConfig.spellFeaturesCategory.shouldMagnetismAttractXP) {
       for (EntityXPOrb orb : orbs) {
         if (SolegnoliaHelper.hasBotania() && SolegnoliaHelper.hasSolegnoliaAround(orb)) continue;
 

@@ -102,7 +102,8 @@ public class SpellHarvest extends SpellBase {
     List<BlockPos> affectedPositions = new ArrayList<>();
     List<BlockPos> pumpkinsAndMelons = new ArrayList<>();
     List<BlockPos> reedsAndCactus = new ArrayList<>();
-    List<BlockPos> crops = Util.getBlocksWithinRadius(player.world, player.getPosition(), 6, 5, 6, (pos) -> {
+    List<BlockPos> crops = Util.getBlocksWithinRadius(player.world, player.getPosition(),
+            6, 5, 6, (pos) -> {
       if (player.world.isAirBlock(pos)) return false;
       IBlockState state = player.world.getBlockState(pos);
       if (skipBlocks.contains(state.getBlock())) return false;

@@ -1,7 +1,5 @@
 package epicsquid.roots.spell;
 
-import java.util.List;
-
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
@@ -13,6 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
+
+import java.util.List;
 
 public class SpellMindWard extends SpellBase {
   public static String spellName = "spell_mind_ward";
