@@ -62,7 +62,7 @@
     },
     {
       "type": "text",
-      "text": "Crush the ingredients in a Mortar and Pestle to produce spell dust. Use spell dust in an imbuer to add it to your Spell Staff.",
+      "text": "Crush the ingredients in a $(l:apparatus/mortar)Mortar$() and Pestle to produce spell dust. Use spell dust in an $(l:apparatus/imbuer)Imbuer$() to add it to your Spell Staff.",
       "x": 0,
       "y": 70
     }
