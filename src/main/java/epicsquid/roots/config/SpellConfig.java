@@ -8,7 +8,9 @@ import net.minecraftforge.common.config.Config;
 public class SpellConfig {
 
 
+  @Config.LangKey("config.roots.subcategory.disable_spells")
   public static DisableSpellsCategory disableSpellsCategory = new DisableSpellsCategory();
+  @Config.LangKey("config.roots.subcategory.spell_features")
   public static SpellFeaturesCategory spellFeaturesCategory = new SpellFeaturesCategory();
 
   public static class DisableSpellsCategory {

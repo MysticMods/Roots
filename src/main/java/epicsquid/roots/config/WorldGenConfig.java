@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 public class WorldGenConfig {
 
-  @Config.Comment("Worldgen settings")
+  @Config.LangKey("config.roots.subcategory.worldgen")
   public static ConfigWorldGen worldGen = new ConfigWorldGen();
 
   public static class ConfigWorldGen {
