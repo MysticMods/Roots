@@ -6,7 +6,8 @@
   
   "pages": [
     {
-      "type": "text",
+      "type": "spotlight",
+      "item": "roots:pereskia",
       "text": "A vibrant plant full of magical energy. Both the bulbs and the flowers that grow from them have different magical applications, which has earned this plant the nickname 'Feyblossom' among some circles - in reference to legends which state the flower was originally cultivated in the gardens of fairies."
     },
     {

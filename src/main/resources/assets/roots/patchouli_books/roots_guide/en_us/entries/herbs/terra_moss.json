@@ -5,7 +5,8 @@
   "priority": true,
   "pages": [
     {
-      "type": "text",
+      "type": "spotlight",
+      "item": "roots:terra_moss",
       "text": "Terra Moss is one of the two herbs initially available to a budding druid, with an affinity for the connection between plants and the earth. Terra Moss Spores can be found by breaking tall grass - however, Terra Moss does not grow like a conventional crop."
     },
     {
