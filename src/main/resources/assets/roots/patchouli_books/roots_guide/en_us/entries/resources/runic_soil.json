@@ -1,7 +1,7 @@
 {
   "name": "Runic Soil",
   "icon": "roots:runic_soil",
-  "category": "herbs",
+  "category": "resources",
   "priority": true,
   "advancement": "roots:pyre",
   
