@@ -1,6 +1,6 @@
 {
   "name": "Frost Lands",
-  "icon": "minecraft:snowball",
+  "icon": "roots:ritual_frost",
   "category": "rituals",
   "advancement": "roots:dewgonia",
   

@@ -1,6 +1,6 @@
 {
   "name": "Windwall",
-  "icon": "minecraft:feather",
+  "icon": "roots:ritual_windwall",
   "category": "rituals",
   "advancement": "roots:cloud_berry",
   "pages": [

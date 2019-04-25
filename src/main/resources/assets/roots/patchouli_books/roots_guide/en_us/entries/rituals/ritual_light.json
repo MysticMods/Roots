@@ -1,6 +1,6 @@
 {
   "name": "Divine Protection",
-  "icon": "minecraft:double_plant",
+  "icon": "roots:ritual_light",
   "category": "rituals",
   "advancement": "roots:pereskia",
   "pages": [

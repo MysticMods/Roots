@@ -1,6 +1,6 @@
 {
   "name": "Healing Aura",
-  "icon": "minecraft:speckled_melon",
+  "icon": "roots:ritual_life",
   "category": "rituals",
   "advancement": "roots:pyre",
   

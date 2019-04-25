@@ -1,6 +1,6 @@
 {
   "name": "Transmutation",
-  "icon": "minecraft:melon_block",
+  "icon": "roots:ritual_transmutation",
   "category": "rituals",
   "advancement": "roots:runestone",
   

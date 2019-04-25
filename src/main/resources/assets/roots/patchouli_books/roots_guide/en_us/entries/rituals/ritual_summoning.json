@@ -1,6 +1,6 @@
 {
   "name": "Summon Creatures",
-  "icon": "minecraft:bone",
+  "icon": "roots:ritual_summoning",
   "category": "rituals",
   "advancement": "roots:wildewheet",
   "pages": [
