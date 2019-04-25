@@ -1,0 +1,15 @@
+{
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "S": {
+      "type": "roots:seed"
+    }
+  },
+  "result": {
+    "item": "roots:assorted_seeds"
+  }
+}
