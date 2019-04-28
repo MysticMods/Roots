@@ -44,6 +44,7 @@ public class BlockUnendingBowl extends BlockTEBase {
 
   @Override
   @Nonnull
+  @SuppressWarnings("deprecation")
   public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
     return BlockFaceShape.BOWL;
   }
