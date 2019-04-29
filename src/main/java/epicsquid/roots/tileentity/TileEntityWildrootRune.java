@@ -57,6 +57,9 @@ public class TileEntityWildrootRune extends TileBase implements ITickable {
     @Override
     public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
         ItemStack heldItem = player.getHeldItem(hand);
+        if(incenseBurner == null){
+            return true;
+        }
         if(heldItem.isEmpty() && incenseBurner.isLit()){
             if(this.effectItemMap.getOrDefault(incenseBurner.burningItem(), null) != null){
                 player.addPotionEffect(this.effectItemMap.get(incenseBurner.burningItem()));
