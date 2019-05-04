@@ -28,7 +28,7 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 public class ItemQuiver extends ItemArrowBase {
-  public static AxisAlignedBB bounding = new AxisAlignedBB(-1.5, -1.5, -1.5, 1.5, 1.5, 1.5);
+  public static AxisAlignedBB bounding = new AxisAlignedBB(-2.5, -2.5, -2.5, 2.5, 2.5, 2.5);
 
   public ItemQuiver(@Nonnull String name) {
     super(name);
