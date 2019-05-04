@@ -8,13 +8,15 @@ import epicsquid.mysticallib.model.IModeledObject;
 import epicsquid.mysticallib.util.Util;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 
-public class ItemLivingAxe extends ItemAxe implements IModeledObject, ICustomModeledObject {
+public class ItemLivingAxe extends ItemAxe implements IModeledObject, ICustomModeledObject, ILivingRepair {
 
   private boolean hasCustomModel = false;
 
@@ -51,10 +53,7 @@ public class ItemLivingAxe extends ItemAxe implements IModeledObject, ICustomMod
 
   @Override
   public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-    int chance = Util.rand.nextInt(80);
-    if(chance == 0){
-      stack.setItemDamage(stack.getItemDamage()-1);
-    }
+    update(stack, worldIn, entityIn, itemSlot, isSelected);
     super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
   }
 }
