@@ -14,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 
-public class ItemLivingSword extends ItemSword implements IModeledObject, ICustomModeledObject {
+public class ItemLivingSword extends ItemSword implements IModeledObject, ICustomModeledObject, ILivingRepair {
 
   private boolean hasCustomModel = false;
 
@@ -50,10 +50,7 @@ public class ItemLivingSword extends ItemSword implements IModeledObject, ICusto
 
   @Override
   public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-    int chance = Util.rand.nextInt(80);
-    if(chance == 0){
-      stack.setItemDamage(stack.getItemDamage()-1);
-    }
+    update(stack, worldIn, entityIn, itemSlot, isSelected);
     super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
   }
 }
