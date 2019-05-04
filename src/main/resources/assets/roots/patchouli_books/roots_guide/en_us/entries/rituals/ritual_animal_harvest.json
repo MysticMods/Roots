@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Animals in the vicinity of the ritual will drop pieces of their physical forms - without coming to any harm."
+      "text": "Animals in the vicinity of the ritual will drop pieces of their physical forms - without coming to any harm.$(br2)This ritual requires standing stones."
     },
     {
       "type": "pyre_template",

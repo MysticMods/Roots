@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Prevents injury to those near the ritual."
+      "text": "Prevents injury to those near the ritual.$(br2)This ritual requires standing stones."
     },
     {
       "type": "pyre_template",
