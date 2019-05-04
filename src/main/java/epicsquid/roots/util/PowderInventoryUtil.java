@@ -10,7 +10,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -22,13 +21,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.HashMap;
 import java.util.Map;
 
-@Mod.EventBusSubscriber(modid= Roots.MODID)
+@Mod.EventBusSubscriber(modid = Roots.MODID)
 public class PowderInventoryUtil {
   private static Map<Herb, HerbAlert> alerts = new HashMap<>();
   private static HerbAlert slot1 = null;
   private static HerbAlert slot2 = null;
 
-  public static ItemStack getPouch (EntityPlayer player) {
+  public static ItemStack getPouch(EntityPlayer player) {
     for (int i = 0; i < 36; i++) {
       if (player.inventory.getStackInSlot(i).getItem() instanceof ItemPouch) {
         return player.inventory.getStackInSlot(i);
@@ -73,20 +72,20 @@ public class PowderInventoryUtil {
       slot1.setSlot(1);
     }
 
-    if (slot1 == null) {
-      slot1 = getAlert(herb);
-      slot1.setSlot(1);
-      slot1.enable();
-    } else if (slot2 == null) {
-      slot2 = getAlert(herb);
-      slot2.setSlot(2);
-      slot2.enable();
-    }
-
     if (slot1 == getAlert(herb)) {
       slot1.refresh();
     } else if (slot2 == getAlert(herb)) {
       slot2.refresh();
+    } else {
+      if (slot1 == null) {
+        slot1 = getAlert(herb);
+        slot1.setSlot(1);
+        slot1.enable();
+      } else if (slot2 == null) {
+        slot2 = getAlert(herb);
+        slot2.setSlot(2);
+        slot2.enable();
+      }
     }
   }
 
@@ -102,7 +101,7 @@ public class PowderInventoryUtil {
   // TODO: THIS SHOULD NOT BE HERE
   @SubscribeEvent
   @SideOnly(Side.CLIENT)
-  public static void renderHUD (RenderGameOverlayEvent.Post event) {
+  public static void renderHUD(RenderGameOverlayEvent.Post event) {
     if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
       ScaledResolution res = event.getResolution();
       float partial = event.getPartialTicks();
@@ -127,7 +126,7 @@ public class PowderInventoryUtil {
 
   @SubscribeEvent
   @SideOnly(Side.CLIENT)
-  public static void clientTick (TickEvent.ClientTickEvent event) {
+  public static void clientTick(TickEvent.ClientTickEvent event) {
     if (slot1 != null) {
       slot1.tick(event);
     }
@@ -146,7 +145,7 @@ public class PowderInventoryUtil {
     private Herb herb;
     private ItemStack stack = null;
 
-    public HerbAlert (Herb herb) {
+    public HerbAlert(Herb herb) {
       this.herb = herb;
     }
 
@@ -170,12 +169,12 @@ public class PowderInventoryUtil {
       return stack;
     }
 
-    public boolean active () {
+    public boolean active() {
       return slot != -1 && ticks > 0;
     }
 
     @SideOnly(Side.CLIENT)
-    public void tick (TickEvent.ClientTickEvent event) {
+    public void tick(TickEvent.ClientTickEvent event) {
       if (ticks == -1) return;
 
       ticks--;
