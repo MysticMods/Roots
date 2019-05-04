@@ -5,7 +5,6 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageHarvestCompleteFX;
-import epicsquid.roots.network.fx.MessageTreeCompleteFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.ItemSpawnUtil;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
@@ -20,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.world.BlockEvent;
@@ -46,6 +46,7 @@ public class SpellHarvest extends SpellBase {
   static {
     seedCache.put(Blocks.NETHER_WART, new ItemStack(Items.NETHER_WART));
   }
+
   public HashMap<Block, IProperty<Integer>> propertyMap = new HashMap<>();
 
   public SpellHarvest(String name) {
@@ -55,11 +56,11 @@ public class SpellHarvest extends SpellBase {
 
     addCost(HerbRegistry.getHerbByName("wildewheet"), 0.55f);
     addIngredients(
-            new ItemStack(Items.GOLDEN_HOE),
-            new ItemStack(ModItems.spirit_herb),
-            new ItemStack(ModItems.wildewheet),
-            new ItemStack(ModItems.terra_moss),
-            new ItemStack(Items.WHEAT_SEEDS)
+        new ItemStack(Items.GOLDEN_HOE),
+        new ItemStack(ModItems.spirit_herb),
+        new ItemStack(ModItems.wildewheet),
+        new ItemStack(ModItems.terra_moss),
+        new ItemStack(Items.WHEAT_SEEDS)
     );
 
     // This is so harvest drops can be monitored.
@@ -80,7 +81,6 @@ public class SpellHarvest extends SpellBase {
     if (!ref.equals(me)) return;
 
     ItemStack seed = ref.getSeed();
-    if (seed.isEmpty()) return;
 
     List<ItemStack> drops = event.getDrops();
     Iterator<ItemStack> dropIter = drops.listIterator();
@@ -90,11 +90,14 @@ public class SpellHarvest extends SpellBase {
       if (ItemStack.areItemStacksEqual(copy, seed)) {
         dropIter.remove();
         break;
+      } else if (copy.getItem() instanceof IPlantable) {
+        dropIter.remove();
+        break;
       }
     }
   }
 
-  private static List<Block> skipBlocks = Arrays.asList(Blocks.BEDROCK, Blocks.GRASS, Blocks.DIRT);
+  private static List<Block> skipBlocks = Arrays.asList(Blocks.BEDROCK, Blocks.GRASS, Blocks.DIRT, Blocks.STONE, Blocks.TALLGRASS, Blocks.WATER, Blocks.LAVA, Blocks.DOUBLE_PLANT);
   private static Map<IProperty<Integer>, Integer> stateMax = new Object2IntOpenHashMap<>();
 
   @Override
@@ -103,65 +106,63 @@ public class SpellHarvest extends SpellBase {
     List<BlockPos> pumpkinsAndMelons = new ArrayList<>();
     List<BlockPos> reedsAndCactus = new ArrayList<>();
     List<BlockPos> crops = Util.getBlocksWithinRadius(player.world, player.getPosition(),
-            6, 5, 6, (pos) -> {
-      if (player.world.isAirBlock(pos)) return false;
-      IBlockState state = player.world.getBlockState(pos);
-      if (skipBlocks.contains(state.getBlock())) return false;
+        6, 5, 6, (pos) -> {
+          if (player.world.isAirBlock(pos)) return false;
+          IBlockState state = player.world.getBlockState(pos);
+          if (skipBlocks.contains(state.getBlock())) return false;
 
-      if (state.getBlock() == Blocks.PUMPKIN || state.getBlock() == Blocks.MELON_BLOCK) {
-        pumpkinsAndMelons.add(pos);
-        return false;
-      }
-      if (state.getBlock() == Blocks.REEDS || state.getBlock() == Blocks.CACTUS) {
-        reedsAndCactus.add(pos);
-        return false;
-      }
-      for (IProperty<?> prop : state.getPropertyKeys()) {
-        if (prop.getName().equals("age") && prop.getValueClass() == Integer.class) {
-          int max = stateMax.getOrDefault(prop, -1);
-          if (max == -1) {
-            max = Collections.max((Collection<Integer>) prop.getAllowedValues());
-            stateMax.put((IProperty<Integer>) prop, max);
+          if (state.getBlock() == Blocks.PUMPKIN || state.getBlock() == Blocks.MELON_BLOCK) {
+            pumpkinsAndMelons.add(pos);
+            return false;
           }
-          if (state.getValue((IProperty<Integer>) prop) == max) {
-            return true;
+          if (state.getBlock() == Blocks.REEDS || state.getBlock() == Blocks.CACTUS) {
+            reedsAndCactus.add(pos);
+            return false;
           }
-        }
-      }
-      return false;
-    });
+          for (IProperty<?> prop : state.getPropertyKeys()) {
+            if ((prop.getName().equals("age") || prop.getName().equals("growth")) && prop.getValueClass() == Integer.class) {
+              int max = stateMax.getOrDefault(prop, -1);
+              if (max == -1) {
+                max = Collections.max((Collection<Integer>) prop.getAllowedValues());
+                stateMax.put((IProperty<Integer>) prop, max);
+              }
+              if (state.getValue((IProperty<Integer>) prop) == max) {
+                return true;
+              }
+            }
+          }
+          return false;
+        });
 
     int count = 0;
 
     for (BlockPos pos : crops) {
       IBlockState state = player.world.getBlockState(pos);
       ItemStack seed = getSeed(state);
-      if (!seed.isEmpty()) {
-        // Do do do the harvest!
-        IProperty<Integer> prop = null;
-        for (IProperty<Integer> entry : stateMax.keySet()) {
-          if (state.getPropertyKeys().contains(entry)) {
-            prop = entry;
-          }
+      // Do do do the harvest!
+      IProperty<Integer> prop = null;
+      for (IProperty<Integer> entry : stateMax.keySet()) {
+        if (state.getPropertyKeys().contains(entry)) {
+          prop = entry;
         }
-
-        assert prop != null;
-
-        if (!player.world.isRemote) {
-          IBlockState newState = state.withProperty(prop, 0);
-          NonNullList<ItemStack> drops = NonNullList.create();
-          queue.push(new HarvestEntry(seed, player.dimension, pos, state));
-          state.getBlock().getDrops(drops, player.world, pos, state, 0);
-          ForgeEventFactory.fireBlockHarvesting(drops, player.world, pos, state, 0, 1.0f, false, player);
-          player.world.setBlockState(pos, newState);
-          for (ItemStack stack : drops) {
-            if (stack.isEmpty()) continue;
-            ItemSpawnUtil.spawnItem(player.world, pos, stack);
-          }
-          affectedPositions.add(pos);
-        }
-        count++;
       }
+
+      assert prop != null;
+
+      if (!player.world.isRemote) {
+        IBlockState newState = state.withProperty(prop, 0);
+        NonNullList<ItemStack> drops = NonNullList.create();
+        queue.push(new HarvestEntry(seed, player.dimension, pos, state));
+        state.getBlock().getDrops(drops, player.world, pos, state, 0);
+        ForgeEventFactory.fireBlockHarvesting(drops, player.world, pos, state, 0, 1.0f, false, player);
+        player.world.setBlockState(pos, newState);
+        for (ItemStack stack : drops) {
+          if (stack.isEmpty()) continue;
+          ItemSpawnUtil.spawnItem(player.world, pos, stack);
+        }
+        affectedPositions.add(pos);
+      }
+      count++;
     }
     for (BlockPos pos : pumpkinsAndMelons) {
       count++;
@@ -243,8 +244,8 @@ public class SpellHarvest extends SpellBase {
       if (o == null || getClass() != o.getClass()) return false;
       HarvestEntry that = (HarvestEntry) o;
       return dimension == that.dimension &&
-              Objects.equals(position, that.position) &&
-              Objects.equals(block, that.block);
+          Objects.equals(position, that.position) &&
+          Objects.equals(block, that.block);
     }
 
     @Override
