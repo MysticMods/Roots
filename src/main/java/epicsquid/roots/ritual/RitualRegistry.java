@@ -67,7 +67,7 @@ public class RitualRegistry {
     if (!RitualConfig.disableRitualCategory.disableSummoning)
       addRitual(ritual_summoning = new RitualSummoning("ritual_summoning", 0));
     if (!RitualConfig.disableRitualCategory.disableWildGrowth)
-      addRitual(ritual_wild_growth = new RitualWildGrowth("ritual_wild_growth", 2000));
+      addRitual(ritual_wild_growth = new RitualWildGrowth("ritual_wild_growth", 300));
     if (!RitualConfig.disableRitualCategory.disableOvergrowth)
       addRitual(ritual_overgrowth = new RitualOvergrowth("ritual_overgrowth", 6400));
     if (!RitualConfig.disableRitualCategory.disableFlowerGrowth)
