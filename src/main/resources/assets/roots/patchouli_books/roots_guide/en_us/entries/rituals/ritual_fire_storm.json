@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Rains fire down from the heavens, burning creatures unfortunate to be near the ritual in a raging inferno."
+      "text": "Rains fire down from the heavens, burning creatures unfortunate to be near the ritual in a raging inferno.$(br2)This ritual requires standing stones."
     },
     {
       "type": "pyre_template",
