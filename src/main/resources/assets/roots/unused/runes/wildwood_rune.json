@@ -2,7 +2,7 @@
   "name": "Wildwood Rune",
   "icon": "roots:wildwood_rune",
   "category": "runes",
-
+  "advancement": "roots:wildwood",
   "pages": [
     {
       "type": "text",

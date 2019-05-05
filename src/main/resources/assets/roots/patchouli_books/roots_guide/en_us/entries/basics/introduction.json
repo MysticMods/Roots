@@ -2,7 +2,7 @@
     "name": "The Basics of Druidry",
     "icon": "roots:wildroot",
     "category": "basics",
-    "priority": true,
+    "advancement": "roots:root",
     "pages": [
       {
         "type": "text",
