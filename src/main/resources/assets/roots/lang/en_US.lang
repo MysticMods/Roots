@@ -200,6 +200,8 @@ advancement.roots.wildwood_armor=Natural Resistance
 advancement.roots.wildwood_armor.desc=Let the wood protect you!
 advancement.roots.apothecary_pouch=House of Herbs
 advancement.roots.apothecary_pouch.desc=Craft an apothecary pouch with spirit and fire.
+advancement.roots.wildwood=Wild, Wild Wood!
+advancement.roots.wildwood.desc=Acquire wildwood in any form through the Ritual of Wild Growth.
 
 # Herbs
 item.moonglow_seed.name=Moonglow Seed

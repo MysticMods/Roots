@@ -1,8 +1,7 @@
 {
-    "name": "Druidic Carving",
+    "name": "Knives",
     "icon": "roots:wood_knife",
     "category": "apparatus",
-    "priority": true,
     "pages": [
       {
         "type": "text",

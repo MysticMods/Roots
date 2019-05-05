@@ -1,0 +1,18 @@
+{
+    "name": "Carving",
+    "icon": "roots:wood_knife",
+    "category": "basics",
+    "advancement": "roots:root",
+    "pages": [
+      {
+        "title": "Barks",
+        "type": "text",
+        "text": "The process of extracting (l:resources/bark)bark$() from a log requires a delicate instrument, and a sword is far too long and imprecise. Instead, druids use $(l:apparatus/knives)knives$() for the process of carving bark from trees."
+      },
+      {
+        "title": "Runes",
+        "type": "text",
+        "text": "The same tools can also be used specifically, allowing a druid to carve enchanted runes into both bark and runestone alike, allowing energy of both this world and the fae to flow through the ancient symbol.$(br2)Examples of this process of \"Runic Carving\" can be found in the \"Runes\" chapter of this book."
+      }
+    ]
+  }

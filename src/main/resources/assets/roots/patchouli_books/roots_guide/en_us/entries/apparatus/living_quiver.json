@@ -2,7 +2,7 @@
     "name": "Living Quiver",
     "icon": "roots:living_quiver",
     "category": "apparatus",
-    "advancement": "roots:spirit_herb",
+    "advancement": "roots:wildwood",
     "secret": true,
     "pages": [
       {
