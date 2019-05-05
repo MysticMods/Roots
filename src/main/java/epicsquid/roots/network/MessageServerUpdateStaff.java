@@ -2,9 +2,13 @@ package epicsquid.roots.network;
 
 import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.spell.SpellBase;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -64,7 +68,12 @@ public class MessageServerUpdateStaff implements IMessage {
                 handler.nextSlot();
             } else if (opcode == 60) {
                 handler.previousSlot();
+            } else {
+                return;
             }
+
+            SpellBase spell = handler.getSelectedSpell();
+            player.sendMessage(new TextComponentTranslation("roots.info.staff.slot_and_spell", handler.getSelectedSlot() + 1, spell == null ? "none" : new TextComponentTranslation("roots.spell." + spell.getName() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))).setStyle(new Style().setColor(TextFormatting.GOLD)));
         }
     }
 }
