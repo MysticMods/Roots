@@ -58,6 +58,11 @@ dependencies {
     compile("vazkii.botania:Botania:${botania_version}") {
         exclude group: 'mezz.jei'
     }
+
+    deobfCompile "team.chisel.ctm:CTM:MC1.12.2-0.3.3.22"
+    deobfCompile "team.chisel:Chisel:MC1.12.2-0.2.1.36"
+    deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}"
+    deobfCompile "mcjty.theoneprobe:TheOneProbe-${top_version}"
 }
 
 repositories {
@@ -89,6 +94,9 @@ repositories {
     maven {
         name = "Jared"
         url = "https://maven.blamejared.com"
+    }
+    maven {
+        url "http://maven.tterrag.com"
     }
 }
 
