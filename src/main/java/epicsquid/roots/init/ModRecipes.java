@@ -228,6 +228,20 @@ public class ModRecipes {
     harvestRecipes.remove(location);
   }
 
+  public static void removeAnimalHarvestRecipe (Class<? extends Entity> clz) {
+    harvestClasses = null;
+    ResourceLocation toRemove = null;
+    for (Map.Entry<ResourceLocation, AnimalHarvestRecipe> entry : harvestRecipes.entrySet()) {
+      AnimalHarvestRecipe recipe = entry.getValue();
+      if (recipe.getHarvestClass().equals(clz)) {
+        toRemove = entry.getKey();
+      }
+    }
+    if (toRemove != null) {
+      harvestRecipes.remove(toRemove);
+    }
+  }
+
   public static void removeAnimalHarvestRecipe (Entity entity) {
     ResourceLocation n = new ResourceLocation(Roots.MODID, entity.getName());
     if (harvestRecipes.containsKey(n)) {
@@ -273,6 +287,9 @@ public class ModRecipes {
     }
     return harvestClasses;
   }
+
+
+
 
   public static void initAnimalHarvestRecipes () {
     // Vanilla
