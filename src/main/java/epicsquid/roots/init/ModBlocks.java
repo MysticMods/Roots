@@ -3,27 +3,26 @@ package epicsquid.roots.init;
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.block.*;
 import epicsquid.mysticallib.event.RegisterContentEvent;
-import epicsquid.roots.block.runes.BlockWildwoodRune;
-import epicsquid.roots.util.EnumRunicSoilType;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.CustomPlantType;
 import epicsquid.roots.block.*;
 import epicsquid.roots.block.runes.BlockTrample;
+import epicsquid.roots.block.runes.BlockWildwoodRune;
 import epicsquid.roots.tileentity.*;
+import epicsquid.roots.util.EnumRunicSoilType;
 import epicsquid.roots.world.HugeBaffleCap;
 import epicsquid.roots.world.tree.WorldGenBigWildwoodTree;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.common.EnumPlantType;
 
 import javax.annotation.Nonnull;
-import java.util.Collections;
 
 public class ModBlocks {
 
@@ -69,7 +68,15 @@ public class ModBlocks {
     // TODO 1.13 make the dewgonia work only underwater
     event.addBlock(dewgonia = new BlockDewgoniaCrop("dewgonia_crop", CustomPlantType.ELEMENT_WATER));
     event.addBlock(stalicripe = new BlockStalicripeCrop("stalicripe_crop", CustomPlantType.ELEMENT_EARTH));
-    event.addBlock(runic_soil = new BlockBase(Material.GROUND, SoundType.GROUND, 0.8f, "runic_soil").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addBlock(runic_soil = new BlockBase(Material.GROUND, SoundType.GROUND, 0.8f, "runic_soil")
+    {
+      @Override
+      public Item getItemBlock() {
+        return ModItems.item_block_elemental_soil;
+      }
+    }
+
+            .setModelCustom(true).setCreativeTab(Roots.tab));
 
     event.addBlock(runic_soil_air = new BlockRunicSoil(Material.GROUND, SoundType.GROUND, "runic_soil_air", EnumRunicSoilType.AIR).setModelCustom(false).setCreativeTab(Roots.tab));
     event.addBlock(runic_soil_water = new BlockRunicSoil(Material.GROUND, SoundType.GROUND, "runic_soil_water", EnumRunicSoilType.WATER).setModelCustom(false).setCreativeTab(Roots.tab));

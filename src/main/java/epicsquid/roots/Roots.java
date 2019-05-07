@@ -73,7 +73,7 @@ public class Roots {
     CapabilityManager.INSTANCE.register(IPlayerGroveCapability.class, new PlayerGroveCapabilityStorage(), PlayerGroveCapability::new);
     CapabilityManager.INSTANCE.register(IPlayerDataCapability.class, new PlayerDataCapabilityStorage(), PlayerDataCapability::new);
     MinecraftForge.EVENT_BUS.register(new RegistryManager());
-    MinecraftForge.EVENT_BUS.register(new EventManager());
+    MinecraftForge.EVENT_BUS.register(EventManager.class);
     MinecraftForge.EVENT_BUS.register(ConfigHandler.class);
     NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);
     proxy.preInit(event);
