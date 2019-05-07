@@ -2,7 +2,7 @@ package epicsquid.roots.block;
 
 import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.roots.api.CustomPlantType;
-import epicsquid.roots.util.EnumRunicSoilType;
+import epicsquid.roots.util.EnumElementalSoilType;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -18,11 +18,11 @@ import net.minecraftforge.common.IPlantable;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class BlockRunicSoil extends BlockBase {
+public class BlockElementalSoil extends BlockBase {
 
-  private final EnumRunicSoilType soilType;
+  private final EnumElementalSoilType soilType;
 
-  public BlockRunicSoil(@Nonnull Material mat, @Nonnull SoundType type, @Nonnull String name, @Nonnull EnumRunicSoilType soilType) {
+  public BlockElementalSoil(@Nonnull Material mat, @Nonnull SoundType type, @Nonnull String name, @Nonnull EnumElementalSoilType soilType) {
     super(mat, type, 0.8f, name);
     this.soilType = soilType;
   }
@@ -38,10 +38,10 @@ public class BlockRunicSoil extends BlockBase {
       case Plains:
         return true;
     }
-    return plant == CustomPlantType.ELEMENT_FIRE && soilType == EnumRunicSoilType.FIRE
-        || plant == CustomPlantType.ELEMENT_AIR && soilType == EnumRunicSoilType.AIR
-        || plant == CustomPlantType.ELEMENT_EARTH && soilType == EnumRunicSoilType.EARTH
-        || plant == CustomPlantType.ELEMENT_WATER && soilType == EnumRunicSoilType.WATER;
+    return plant == CustomPlantType.ELEMENT_FIRE && soilType == EnumElementalSoilType.FIRE
+        || plant == CustomPlantType.ELEMENT_AIR && soilType == EnumElementalSoilType.AIR
+        || plant == CustomPlantType.ELEMENT_EARTH && soilType == EnumElementalSoilType.EARTH
+        || plant == CustomPlantType.ELEMENT_WATER && soilType == EnumElementalSoilType.WATER;
   }
 
   @Override

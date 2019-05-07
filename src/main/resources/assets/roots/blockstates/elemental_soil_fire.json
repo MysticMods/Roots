@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "normal": { "model": "roots:elemental_soil_fire" },
+        "handlers": { "model": "roots:elemental_soil_fire" }
+    }
+}

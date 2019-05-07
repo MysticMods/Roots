@@ -1,9 +1,8 @@
 package epicsquid.roots.util;
 
-public enum EnumRunicSoilType {
+public enum EnumElementalSoilType {
   FIRE,
   WATER,
   EARTH,
   AIR
-  ;
 }

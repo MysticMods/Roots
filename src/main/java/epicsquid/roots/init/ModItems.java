@@ -146,7 +146,7 @@ public class ModItems {
     event.addItem(ritual_flower_growth = new ItemBase("ritual_flower_growth").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_transmutation = new ItemBase("ritual_transmutation").setModelCustom(false).setCreativeTab(null));
 
-    event.addItem(item_block_elemental_soil = new ItemBlockElementalSoil(ModBlocks.runic_soil));
+    event.addItem(item_block_elemental_soil = new ItemBlockElementalSoil(ModBlocks.elemental_soil));
 
     // KEEP AT END
     registerSeedDrops();
