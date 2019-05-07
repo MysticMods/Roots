@@ -27,7 +27,7 @@ public class ItemBlockElementalSoil extends ItemBlock {
         int count = entityItem.getItem().getCount();
         entityItem.setDead();
         world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
-                new ItemStack(ModBlocks.runic_soil_water, count)));
+                new ItemStack(ModBlocks.elemental_soil_water, count)));
       }
     }
     else if (entityItem.isInLava())
@@ -39,7 +39,7 @@ public class ItemBlockElementalSoil extends ItemBlock {
         int count = entityItem.getItem().getCount();
         entityItem.setDead();
         world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
-                new ItemStack(ModBlocks.runic_soil_fire, count)));
+                new ItemStack(ModBlocks.elemental_soil_fire, count)));
       }
     }
     return false;
