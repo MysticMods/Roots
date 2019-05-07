@@ -1,7 +1,5 @@
 package epicsquid.roots.block;
 
-import javax.annotation.Nonnull;
-
 import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.roots.api.CustomPlantType;
 import epicsquid.roots.util.EnumRunicSoilType;
@@ -17,6 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class BlockRunicSoil extends BlockBase {
