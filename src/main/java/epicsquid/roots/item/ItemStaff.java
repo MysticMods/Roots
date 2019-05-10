@@ -1,7 +1,5 @@
 package epicsquid.roots.item;
 
-import java.util.List;
-
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.EventManager;
@@ -36,6 +34,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
+import javax.annotation.Nonnull;
+import java.util.List;
+
 public class ItemStaff extends ItemBase {
   public ItemStaff(String name) {
     super(name);
@@ -43,7 +44,7 @@ public class ItemStaff extends ItemBase {
   }
 
   @Override
-  public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+  public boolean shouldCauseReequipAnimation(ItemStack oldStack, @Nonnull ItemStack newStack, boolean slotChanged) {
     SpellHandler oldCapability = SpellHandler.fromStack(oldStack);
     SpellHandler newCapability = SpellHandler.fromStack(newStack);
 
@@ -54,15 +55,16 @@ public class ItemStaff extends ItemBase {
     return slotChanged;
   }
 
+  @Nonnull
   @Override
-  public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+  public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
     ItemStack stack = player.getHeldItem(hand);
     SpellHandler capability = SpellHandler.fromStack(stack);
     if (player.isSneaking()) {
       capability.nextSlot();
       if (world.isRemote) {
         SpellBase spell = capability.getSelectedSpell();
-        player.sendMessage(new TextComponentTranslation("roots.info.staff.slot_and_spell", capability.getSelectedSlot() + 1, spell == null ? "none" : new TextComponentTranslation("roots.spell." + spell.getName() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))).setStyle(new Style().setColor(TextFormatting.GOLD)));
+        player.sendStatusMessage(new TextComponentTranslation("roots.info.staff.slot_and_spell", capability.getSelectedSlot() + 1, spell == null ? "none" : new TextComponentTranslation("roots.spell." + spell.getName() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))).setStyle(new Style().setColor(TextFormatting.GOLD)), true);
       }
       return new ActionResult<>(EnumActionResult.PASS, player.getHeldItem(hand));
     } else {
@@ -191,7 +193,7 @@ public class ItemStaff extends ItemBase {
 
   @SideOnly(Side.CLIENT)
   @Override
-  public int getRGBDurabilityForDisplay(ItemStack stack) {
+  public int getRGBDurabilityForDisplay(@Nonnull ItemStack stack) {
     SpellHandler capability = SpellHandler.fromStack(stack);
     SpellBase spell = capability.getSelectedSpell();
     if (spell != null) {
@@ -214,6 +216,7 @@ public class ItemStaff extends ItemBase {
     return 72000;
   }
 
+  @Nonnull
   @Override
   public EnumAction getItemUseAction(ItemStack stack) {
     SpellHandler capability = SpellHandler.fromStack(stack);
@@ -258,7 +261,7 @@ public class ItemStaff extends ItemBase {
   public static class StaffColorHandler implements IItemColor {
 
     @Override
-    public int colorMultiplier(ItemStack stack, int tintIndex) {
+    public int colorMultiplier(@Nonnull ItemStack stack, int tintIndex) {
       SpellHandler capability = SpellHandler.fromStack(stack);
       if (capability.hasSpellInSlot() && stack.getItem() instanceof ItemStaff) {
         if (stack.getDisplayName().compareToIgnoreCase("Shiny Rod") == 0 || stack.getDisplayName().compareToIgnoreCase("Cutie Moon Rod") == 0) {
