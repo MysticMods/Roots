@@ -16,7 +16,7 @@ import epicsquid.mysticalworld.item.metals.Metal;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.recipe.*;
-import epicsquid.roots.recipe.recipes.RunicShearRecipes;
+import epicsquid.roots.recipe.RunicShearRecipes;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.util.StateUtil;
