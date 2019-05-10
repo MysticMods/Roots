@@ -1,4 +1,4 @@
-package epicsquid.roots.recipe.recipes;
+package epicsquid.roots.recipe;
 
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
