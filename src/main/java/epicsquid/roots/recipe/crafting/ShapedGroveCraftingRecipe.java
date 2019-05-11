@@ -53,7 +53,7 @@ public class ShapedGroveCraftingRecipe extends GroveCraftingRecipe implements IS
   @Override
   public boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World world) {
     for (int x = 0; x <= inv.getWidth(); x++) {
-      for (int y = 0; y <= inv.getHeight(); x++) {
+      for (int y = 0; y <= inv.getHeight(); y++) {
         if (checkMatch(inv, x, y, false)) {
           return findGrove(inv, world);
         }
