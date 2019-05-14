@@ -4,7 +4,7 @@ import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.integration.harvest.HarvestIntegration;
 import epicsquid.roots.integration.jer.JERIntegration;
-import epicsquid.roots.recipe.recipes.RunicCarvingRecipes;
+import epicsquid.roots.recipe.RunicCarvingRecipes;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.rune.RuneRegistry;
 import epicsquid.roots.spell.SpellRegistry;
