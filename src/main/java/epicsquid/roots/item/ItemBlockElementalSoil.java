@@ -18,30 +18,41 @@ public class ItemBlockElementalSoil extends ItemBlock {
 
   @Override
   public boolean onEntityItemUpdate(EntityItem entityItem) {
-    if (entityItem.isInWater())
-    {
-      World world = entityItem.world;
 
-      if (!world.isRemote)
+    System.out.println(entityItem.ticksExisted);
+
+    World world = entityItem.world;
+
+    if (!world.isRemote && (entityItem.ticksExisted % 100 == 0))
+    {
+      int count = entityItem.getItem().getCount();
+      entityItem.setDead();
+
+      if (entityItem.isInWater())
       {
-        int count = entityItem.getItem().getCount();
-        entityItem.setDead();
         world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
                 new ItemStack(ModBlocks.elemental_soil_water, count)));
       }
-    }
-    else if (entityItem.isInLava())
-    {
-      World world = entityItem.world;
-
-      if (!world.isRemote)
+      else if (entityItem.isInLava())
       {
-        int count = entityItem.getItem().getCount();
-        entityItem.setDead();
+        entityItem.hurtResistantTime = 500;
         world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
                 new ItemStack(ModBlocks.elemental_soil_fire, count)));
       }
+      else if (entityItem.posY <= 20)
+      {
+        world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
+                new ItemStack(ModBlocks.elemental_soil_earth, count)));
+      }
+      else if (entityItem.posY >= 120)
+      {
+        world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
+                new ItemStack(ModBlocks.elemental_soil_air, count)));
+      }
     }
-    return false;
+    else
+      return super.onEntityItemUpdate(entityItem);
+
+      return false;
   }
 }
