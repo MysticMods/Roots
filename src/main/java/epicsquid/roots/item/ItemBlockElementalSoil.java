@@ -16,28 +16,32 @@ public class ItemBlockElementalSoil extends ItemBlock {
     setRegistryName(new ResourceLocation(Roots.MODID, "runic_soil"));
   }
 
+
+
   @Override
   public boolean onEntityItemUpdate(EntityItem entityItem) {
 
     System.out.println(entityItem.ticksExisted);
 
     World world = entityItem.world;
+    int count = entityItem.getItem().getCount();
 
-    if (!world.isRemote && (entityItem.ticksExisted % 100 == 0))
+    if (!world.isRemote && entityItem.isInLava())
     {
-      int count = entityItem.getItem().getCount();
+      world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY + 0.5, entityItem.posZ,
+              new ItemStack(ModBlocks.elemental_soil_fire, count)));
+
+      entityItem.setDead();
+    }
+
+    if (!world.isRemote && entityItem.ticksExisted >= 100)
+    {
       entityItem.setDead();
 
       if (entityItem.isInWater())
       {
         world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
                 new ItemStack(ModBlocks.elemental_soil_water, count)));
-      }
-      else if (entityItem.isInLava())
-      {
-        entityItem.hurtResistantTime = 500;
-        world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
-                new ItemStack(ModBlocks.elemental_soil_fire, count)));
       }
       else if (entityItem.posY <= 20)
       {
