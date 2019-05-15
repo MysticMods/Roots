@@ -6,115 +6,58 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import epicsquid.roots.Roots;
+import net.minecraft.block.Block;
 import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
-import net.minecraftforge.common.crafting.IShapedRecipe;
 import net.minecraftforge.common.crafting.JsonContext;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import javax.annotation.Nonnull;
 import java.util.Map;
 import java.util.Set;
 
-public class ShapedGroveCraftingRecipe extends GroveCraftingRecipe implements IShapedRecipe {
-  @Nonnull
-  protected ItemStack output;
-  protected NonNullList<Ingredient> input;
-  protected int width;
-  protected int height;
-  protected boolean mirrored;
+public class ShapedGroveCraftingRecipe extends ShapedOreRecipe implements GroveCraftingRecipe {
+  private BlockPos grove_pos = null;
 
-  public ShapedGroveCraftingRecipe(String group, @Nonnull ItemStack result, CraftingHelper.ShapedPrimer primer) {
-    super(group);
-    output = result.copy();
-    this.width = primer.width;
-    this.height = primer.height;
-    this.input = primer.input;
-    this.mirrored = primer.mirrored;
+  public ShapedGroveCraftingRecipe(ResourceLocation group, @Nonnull ItemStack result, Object... recipe) {
+    super(group, result, recipe);
   }
 
-  @Nonnull
-  @Override
-  public ItemStack getCraftingResult(@Nonnull InventoryCrafting var1) {
-    return output.copy();
+  public ShapedGroveCraftingRecipe(ResourceLocation group, @Nonnull ItemStack result, CraftingHelper.ShapedPrimer primer) {
+    super(group, result, primer);
   }
 
-  @Nonnull
+  public ShapedGroveCraftingRecipe(ResourceLocation group, Block result, Object... recipe) {
+    super(group, result, recipe);
+  }
+
+  public ShapedGroveCraftingRecipe(ResourceLocation group, Item result, Object... recipe) {
+    super(group, result, recipe);
+  }
+
   @Override
-  public ItemStack getRecipeOutput() {
-    return output;
+  public BlockPos getGrovePos() {
+    return grove_pos;
+  }
+
+  @Override
+  public void setGrovePos(BlockPos pos) {
+    this.grove_pos = pos;
   }
 
   @Override
   public boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World world) {
-    for (int x = 0; x <= inv.getWidth(); x++) {
-      for (int y = 0; y <= inv.getHeight(); y++) {
-        if (checkMatch(inv, x, y, false)) {
-          return findGrove(inv, world);
-        }
-
-        if (mirrored && checkMatch(inv, x, y, true)) {
-          return findGrove(inv, world);
-        }
-      }
-    }
-
-    return false;
-  }
-
-  protected boolean checkMatch(InventoryCrafting inv, int startX, int startY, boolean mirror) {
-    for (int x = 0; x < inv.getWidth(); x++) {
-      for (int y = 0; y < inv.getHeight(); y++) {
-        int subX = x - startX;
-        int subY = y - startY;
-        Ingredient target = Ingredient.EMPTY;
-
-        if (subX >= 0 && subY >= 0 && subX < width && subY < height) {
-          if (mirror) {
-            target = input.get(width - subX - 1 + subY * width);
-          } else {
-            target = input.get(subX + subY * width);
-          }
-        }
-
-        if (!target.apply(inv.getStackInRowAndColumn(x, y))) {
-          return false;
-        }
-      }
-    }
-
-    return true;
-  }
-
-  public ShapedGroveCraftingRecipe setMirrored(boolean mirror) {
-    mirrored = mirror;
-    return this;
-  }
-
-  @Nonnull
-  @Override
-  public NonNullList<Ingredient> getIngredients() {
-    return this.input;
-  }
-
-  @Override
-  public int getRecipeWidth() {
-    return width;
-  }
-
-  @Override
-  public int getRecipeHeight() {
-    return height;
-  }
-
-  @Override
-  public boolean canFit(int width, int height) {
-    return width >= this.width && height >= this.height;
+    return super.matches(inv, world) && findGrove(inv, world);
   }
 
   @SuppressWarnings("unused")
@@ -173,7 +116,7 @@ public class ShapedGroveCraftingRecipe extends GroveCraftingRecipe implements IS
         throw new JsonSyntaxException("Key defines symbols that aren't used in pattern: " + keys);
 
       ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
-      return new ShapedGroveCraftingRecipe(group, result, primer);
+      return new ShapedGroveCraftingRecipe(group.isEmpty() ? null : new ResourceLocation(Roots.MODID, group), result, primer);
     }
   }
 }
