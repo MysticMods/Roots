@@ -1,6 +1,7 @@
 package epicsquid.roots.recipe.crafting;
 
 import epicsquid.roots.Roots;
+import epicsquid.roots.config.GroveCraftingConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.util.GroveStoneUtil;
 import net.minecraft.block.state.IBlockState;
@@ -13,6 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.lang.reflect.Field;
+import java.util.Map;
 
 public abstract class GroveCraftingRecipe implements IRecipe {
   private ResourceLocation registryName;
@@ -46,20 +49,47 @@ public abstract class GroveCraftingRecipe implements IRecipe {
     return IRecipe.class;
   }
 
-  public boolean findGrove (InventoryCrafting inv, World world) {
-    Container cont = inv.eventHandler;
-    if (!(cont instanceof ContainerWorkbench)) return false;
+  private boolean testPos(World world, BlockPos pos) {
+    IBlockState state = world.getBlockState(pos);
+    return state.getBlock() == ModBlocks.grove_stone;
+  }
 
-    ContainerWorkbench bench = (ContainerWorkbench) cont;
-
-    if (grove_pos != null) {
-      IBlockState state = world.getBlockState(grove_pos);
-      if (state.getBlock() == ModBlocks.grove_stone && grove_pos.getDistance(bench.pos.getX(), bench.pos.getY(), bench.pos.getZ()) <= 5) return true;
+  public boolean findGrove(InventoryCrafting inv, World world) {
+    if (grove_pos != null && testPos(world, grove_pos)) {
+      return true;
     }
 
-    grove_pos = GroveStoneUtil.findGroveStone(world, bench.pos);
-    if (grove_pos != null) return true;
+    Container cont = inv.eventHandler;
+    if (cont instanceof ContainerWorkbench) {
 
-    return false;
+      ContainerWorkbench bench = (ContainerWorkbench) cont;
+
+      grove_pos = GroveStoneUtil.findGroveStone(world, bench.pos);
+      return grove_pos != null;
+    } else {
+      Map<Class<?>, Field> map = GroveCraftingConfig.getClasses();
+      Class clazz = cont.getClass();
+      Field f = map.get(clazz);
+      if (f == null) {
+        for (Map.Entry<Class<?>, Field> c : map.entrySet()) {
+          if (c.getKey().isAssignableFrom(clazz)) {
+            f = c.getValue();
+            break;
+          }
+        }
+        if (f == null) return false;
+      }
+
+      BlockPos pos;
+
+      try {
+        pos = (BlockPos) f.get(cont);
+      } catch (IllegalAccessException e) {
+        return false;
+      }
+
+      grove_pos = GroveStoneUtil.findGroveStone(world, pos);
+      return grove_pos != null;
+    }
   }
 }

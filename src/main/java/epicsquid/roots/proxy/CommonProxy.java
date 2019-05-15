@@ -1,5 +1,6 @@
 package epicsquid.roots.proxy;
 
+import epicsquid.roots.config.GroveCraftingConfig;
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.integration.harvest.HarvestIntegration;
@@ -43,5 +44,7 @@ public class CommonProxy {
     if (Loader.isModLoaded("harvest")) {
       HarvestIntegration.init();
     }
+
+    GroveCraftingConfig.getClasses();
   }
 }
