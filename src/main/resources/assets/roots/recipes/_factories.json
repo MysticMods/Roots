@@ -1,6 +1,7 @@
 {
   "recipes": {
-    "grove_shaped": "epicsquid.roots.recipe.crafting.ShapedGroveCraftingRecipe$GroveFactory"
+    "grove_shaped": "epicsquid.roots.recipe.crafting.ShapedGroveCraftingRecipe$GroveFactory",
+    "grove_shapeless": "epicsquid.roots.recipe.crafting.ShapelessGroveCraftingRecipe$GroveFactory"
   },
   "conditions": {
     "copper_exists": "epicsquid.roots.recipe.conditions.RecipeConditionFactory$CopperExists",
