@@ -1,61 +1,33 @@
 package epicsquid.roots.recipe.crafting;
 
-import epicsquid.roots.Roots;
+import com.sun.istack.internal.Nullable;
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.config.GroveCraftingConfig;
 import epicsquid.roots.init.ModBlocks;
-import epicsquid.roots.util.GroveStoneUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Map;
 
-public abstract class GroveCraftingRecipe implements IRecipe {
-  private ResourceLocation registryName;
-  private String group;
-  private BlockPos grove_pos = null;
+public interface GroveCraftingRecipe extends IRecipe {
+  BlockPos getGrovePos();
 
-  public GroveCraftingRecipe(String group) {
-    this.setRegistryName(new ResourceLocation(Roots.MODID, group));
-    this.group = group;
-  }
+  void setGrovePos(BlockPos pos);
 
-  @Override
-  public String getGroup() {
-    return group;
-  }
-
-  @Override
-  public IRecipe setRegistryName(ResourceLocation name) {
-    this.registryName = name;
-    return this;
-  }
-
-  @Nullable
-  @Override
-  public ResourceLocation getRegistryName() {
-    return this.registryName;
-  }
-
-  @Override
-  public Class<IRecipe> getRegistryType() {
-    return IRecipe.class;
-  }
-
-  private boolean testPos(World world, BlockPos pos) {
+  default boolean testPos(World world, BlockPos pos) {
     IBlockState state = world.getBlockState(pos);
     return state.getBlock() == ModBlocks.grove_stone;
   }
 
-  public boolean findGrove(InventoryCrafting inv, World world) {
-    if (grove_pos != null && testPos(world, grove_pos)) {
+  default boolean findGrove(InventoryCrafting inv, World world) {
+    if (getGrovePos() != null && testPos(world, getGrovePos())) {
       return true;
     }
 
@@ -64,8 +36,8 @@ public abstract class GroveCraftingRecipe implements IRecipe {
 
       ContainerWorkbench bench = (ContainerWorkbench) cont;
 
-      grove_pos = GroveStoneUtil.findGroveStone(world, bench.pos);
-      return grove_pos != null;
+      setGrovePos(findGroveStone(world, bench.pos));
+      return getGrovePos() != null;
     } else {
       Map<Class<?>, Field> map = GroveCraftingConfig.getClasses();
       Class clazz = cont.getClass();
@@ -88,8 +60,17 @@ public abstract class GroveCraftingRecipe implements IRecipe {
         return false;
       }
 
-      grove_pos = GroveStoneUtil.findGroveStone(world, pos);
-      return grove_pos != null;
+      setGrovePos(findGroveStone(world, pos));
+      return getGrovePos() != null;
     }
+  }
+
+  int GROVE_STONE_RADIUS = 5;
+
+  @Nullable
+  default BlockPos findGroveStone(World world, BlockPos near) {
+    List<BlockPos> positions = Util.getBlocksWithinRadius(world, near, GROVE_STONE_RADIUS, GROVE_STONE_RADIUS, GROVE_STONE_RADIUS, ModBlocks.grove_stone);
+    if (positions.isEmpty()) return null;
+    return positions.get(0);
   }
 }
