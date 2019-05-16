@@ -126,10 +126,9 @@ public class BlockGroveStone extends BlockTEBase {
 
   @Override
   public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-    if (state.getValue(HALF) == Half.BOTTOM) {
-      return super.getItemDropped(state, rand, fortune);
-    }
-    return Items.AIR;
+    // We don't actually need to worry about the state because upup/downdown are
+    // replaced with setToAir
+    return super.getItemDropped(state, rand, fortune);
   }
 
   @Override
