@@ -13,7 +13,8 @@
     ],
     "S": [
       {
-        "item": "minecraft:stone_slab"
+        "item": "minecraft:stone_slab",
+        "data": 3
       }
     ],
     "W": [
@@ -30,7 +31,7 @@
     ]
   },
   "result": {
-    "item": "roots:bonfire",
+    "item": "roots:grove_stone",
     "data": 0
   },
   "mirrored": true
