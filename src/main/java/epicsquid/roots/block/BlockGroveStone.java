@@ -125,13 +125,6 @@ public class BlockGroveStone extends BlockTEBase {
   }
 
   @Override
-  public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-    // We don't actually need to worry about the state because upup/downdown are
-    // replaced with setToAir
-    return super.getItemDropped(state, rand, fortune);
-  }
-
-  @Override
   public int damageDropped(IBlockState state) {
     return 0;
   }
