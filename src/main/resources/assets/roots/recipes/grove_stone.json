@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    "WCT",
+    "SCS"  ],
+  "key": {
+    "C": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "cobblestone"
+      }
+    ],
+    "S": [
+      {
+        "item": "minecraft:stone_slab"
+      }
+    ],
+    "W": [
+      {
+        "item": "roots:wildroot",
+        "data": 0
+      }
+    ],
+    "T": [
+      {
+        "item": "roots:terra_moss",
+        "data": 0
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:bonfire",
+    "data": 0
+  },
+  "mirrored": true
+}
