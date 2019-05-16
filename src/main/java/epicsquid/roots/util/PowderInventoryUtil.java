@@ -28,13 +28,14 @@ public class PowderInventoryUtil {
   private static HerbAlert slot2 = null;
 
   public static ItemStack getPouch(EntityPlayer player) {
+    if (Loader.isModLoaded("baubles")) {
+      return BaublePowderInventoryUtil.getPouch(player);
+    }
+
     for (int i = 0; i < 36; i++) {
       if (player.inventory.getStackInSlot(i).getItem() instanceof ItemPouch) {
         return player.inventory.getStackInSlot(i);
       }
-    }
-    if (Loader.isModLoaded("baubles")) {
-      return BaublePowderInventoryUtil.getPouch(player);
     }
 
     return ItemStack.EMPTY;
