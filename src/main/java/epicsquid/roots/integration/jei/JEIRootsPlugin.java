@@ -1,16 +1,13 @@
 package epicsquid.roots.integration.jei;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import epicsquid.roots.Roots;
+import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.jei.carving.RunicCarvingCategory;
 import epicsquid.roots.integration.jei.carving.RunicCarvingWrapper;
 import epicsquid.roots.integration.jei.grove.GroveHandler;
-import epicsquid.roots.integration.jei.grove.GroveWrapper;
 import epicsquid.roots.integration.jei.mortar.MortarCategory;
 import epicsquid.roots.integration.jei.mortar.MortarWrapper;
 import epicsquid.roots.integration.jei.ritual.RitualCategory;
@@ -19,12 +16,10 @@ import epicsquid.roots.integration.jei.ritual.RitualCraftingWrapper;
 import epicsquid.roots.integration.jei.ritual.RitualWrapper;
 import epicsquid.roots.integration.jei.shears.RunicShearsCategory;
 import epicsquid.roots.integration.jei.shears.RunicShearsWrapper;
-import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.recipe.RunicCarvingRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
-import epicsquid.roots.recipe.crafting.GroveCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellBase;
@@ -35,8 +30,9 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.IRecipe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @JEIPlugin
 public class JEIRootsPlugin implements IModPlugin {
