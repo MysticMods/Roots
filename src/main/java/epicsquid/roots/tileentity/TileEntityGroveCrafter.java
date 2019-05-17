@@ -13,13 +13,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityWildCrafter extends TileBase {
+public class TileEntityGroveCrafter extends TileBase {
   private GroveCraftingRecipe lastRecipeUsed;
 
   public ItemStackHandler inventory = new ItemStackHandler(5);
   public ItemStackHandler output = new ItemStackHandler(1);
 
-  public TileEntityWildCrafter() {
+  public TileEntityGroveCrafter() {
     super();
   }
 

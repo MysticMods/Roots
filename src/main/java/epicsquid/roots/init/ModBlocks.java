@@ -13,7 +13,6 @@ import epicsquid.roots.tileentity.*;
 import epicsquid.roots.world.HugeBaffleCap;
 import epicsquid.roots.world.tree.WorldGenBigWildwoodTree;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -23,7 +22,6 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.common.EnumPlantType;
 
 import javax.annotation.Nonnull;
-import java.util.Collections;
 
 public class ModBlocks {
 
@@ -145,7 +143,7 @@ public class ModBlocks {
     event.addBlock(grove_stone = new BlockGroveStone(Material.ROCK, SoundType.STONE, 2.5f, "grove_stone", TileEntityGroveStone.class)).setCreativeTab(Roots.tab);
 
     // Wild Crafter
-    event.addBlock(wild_crafter = new BlockWildCrafter(Material.WOOD, SoundType.WOOD, 2.5f, "wild_crafter", TileEntityWildCrafter.class)).setCreativeTab(Roots.tab);
+    event.addBlock(wild_crafter = new BlockGroveCrafter(Material.WOOD, SoundType.WOOD, 2.5f, "wild_crafter", TileEntityGroveCrafter.class)).setCreativeTab(Roots.tab);
 
   }
 

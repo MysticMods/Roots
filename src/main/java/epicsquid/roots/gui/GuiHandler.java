@@ -11,12 +11,11 @@ import javax.annotation.Nullable;
 
 import epicsquid.roots.gui.client.GuiPouch;
 import epicsquid.roots.gui.client.GuiQuiver;
-import epicsquid.roots.gui.client.GuiWildCrafter;
+import epicsquid.roots.gui.client.GuiGroveCrafter;
 import epicsquid.roots.gui.container.ContainerPouch;
 import epicsquid.roots.gui.container.ContainerQuiver;
-import epicsquid.roots.gui.container.ContainerWildCrafter;
-import epicsquid.roots.tileentity.TileEntityWildCrafter;
-import epicsquid.roots.util.PowderInventoryUtil;
+import epicsquid.roots.gui.container.ContainerGroveCrafter;
+import epicsquid.roots.tileentity.TileEntityGroveCrafter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -39,8 +38,8 @@ public class GuiHandler implements IGuiHandler {
       return new ContainerQuiver(player);
     case CRAFTER_ID:
       TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
-      if (te instanceof TileEntityWildCrafter) {
-        return new ContainerWildCrafter(player, (TileEntityWildCrafter) te);
+      if (te instanceof TileEntityGroveCrafter) {
+        return new ContainerGroveCrafter(player, (TileEntityGroveCrafter) te);
       }
     default:
       return null;
@@ -57,8 +56,8 @@ public class GuiHandler implements IGuiHandler {
       return new GuiQuiver(new ContainerQuiver(player));
     case CRAFTER_ID:
       TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
-      if (te instanceof TileEntityWildCrafter) {
-        return new GuiWildCrafter(new ContainerWildCrafter(player, (TileEntityWildCrafter) te));
+      if (te instanceof TileEntityGroveCrafter) {
+        return new GuiGroveCrafter(new ContainerGroveCrafter(player, (TileEntityGroveCrafter) te));
       }
     default:
       return null;
