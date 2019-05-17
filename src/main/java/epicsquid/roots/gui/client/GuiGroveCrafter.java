@@ -8,18 +8,18 @@
 package epicsquid.roots.gui.client;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.gui.container.ContainerWildCrafter;
+import epicsquid.roots.gui.container.ContainerGroveCrafter;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
-public class GuiWildCrafter extends GuiContainer {
+public class GuiGroveCrafter extends GuiContainer {
 
-  private ContainerWildCrafter container;
+  private ContainerGroveCrafter container;
 
-  public GuiWildCrafter(@Nonnull ContainerWildCrafter container) {
+  public GuiGroveCrafter(@Nonnull ContainerGroveCrafter container) {
     super(container);
     this.container = container;
     xSize = 176;

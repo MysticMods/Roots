@@ -8,9 +8,9 @@ import net.minecraft.tileentity.TileEntity;
 
 import javax.annotation.Nonnull;
 
-public class BlockWildCrafter extends BlockTEBase {
+public class BlockGroveCrafter extends BlockTEBase {
 
-  public BlockWildCrafter(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
+  public BlockGroveCrafter(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
     super(mat, type, hardness, name, teClass);
   }
 

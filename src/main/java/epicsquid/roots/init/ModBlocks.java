@@ -155,7 +155,7 @@ public class ModBlocks {
     event.addBlock(grove_stone = new BlockGroveStone(Material.ROCK, SoundType.STONE, 2.5f, "grove_stone", TileEntityGroveStone.class)).setCreativeTab(Roots.tab);
 
     // Wild Crafter
-    event.addBlock(wild_crafter = new BlockWildCrafter(Material.WOOD, SoundType.WOOD, 2.5f, "wild_crafter", TileEntityWildCrafter.class)).setCreativeTab(Roots.tab);
+    event.addBlock(wild_crafter = new BlockGroveCrafter(Material.WOOD, SoundType.WOOD, 2.5f, "wild_crafter", TileEntityGroveCrafter.class)).setCreativeTab(Roots.tab);
 
   }
 

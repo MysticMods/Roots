@@ -7,7 +7,7 @@
 
 package epicsquid.roots.gui.container;
 
-import epicsquid.roots.tileentity.TileEntityWildCrafter;
+import epicsquid.roots.tileentity.TileEntityGroveCrafter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -16,12 +16,12 @@ import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 
-public class ContainerWildCrafter extends Container {
+public class ContainerGroveCrafter extends Container {
 
-  private TileEntityWildCrafter crafter;
+  private TileEntityGroveCrafter crafter;
   private EntityPlayer player;
 
-  public ContainerWildCrafter(EntityPlayer player, TileEntityWildCrafter crafter) {
+  public ContainerGroveCrafter(EntityPlayer player, TileEntityGroveCrafter crafter) {
     this.player = player;
     this.crafter = crafter;
 
