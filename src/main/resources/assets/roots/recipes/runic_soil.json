@@ -1,40 +1,25 @@
 {
-  "type": "roots:grove_shaped",
-  "pattern": [
-    " T ",
-    "GDB",
-    " W "
-  ],
-  "key": {
-    "D": [
+  "type": "roots:grove_shapeless",
+  "ingredients": [
       {
         "type": "forge:ore_dict",
         "ore": "dirt"
-      }
-    ],
-    "T": [
+      },
       {
         "item": "roots:terra_moss"
-      }
-    ],
-    "W": [
+      },
       {
         "item": "roots:wildroot"
-      }
-    ],
-    "G": [
+      },
       {
         "type": "forge:ore_dict",
         "ore": "gravel"
-      }
-    ],
-    "B": [
+      },
       {
         "item": "minecraft:dye",
         "data": 15
       }
-    ]
-  },
+  ],
   "result": {
     "item": "roots:runic_soil",
     "data": 0

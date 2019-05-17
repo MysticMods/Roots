@@ -272,6 +272,7 @@ container.roots.runic_carving.name=Runic Carving
 container.roots.ritual_crafting.name=Pyre Crafting Ritual
 container.roots.mortar_and_pestle.name=Mortar and Pestle
 container.roots.ritual.name=Pyre Ritual
+container.roots.grove_crafting.name=Grove Crafting
 jei.roots.terra_moss.desc=Scraped from moss cobblestone with a knife. Cobblestone infused with terra spores will grow moss when adjacent to water.
 jei.roots.terra_spores.desc=Dropped from broken tall grass; used on cobblestone adjacent allows the spores to grow, turning it into moss cobblestone.
 jei.roots.wildroot.desc=Dropped from broken tall grass and the extremely rare leaves of the wildwood tree.

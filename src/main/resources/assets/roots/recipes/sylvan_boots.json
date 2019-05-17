@@ -1,0 +1,36 @@
+{
+  "type": "roots:grove_shaped",
+  "pattern": [
+    "BHB",
+    "BDB",
+    "VVV"
+  ],
+  "key": {
+    "H": [
+      {
+        "item": "minecraft:golden_boots"
+      }
+    ],
+    "B": [
+      {
+        "item": "roots:bark_birch"
+
+      }
+    ],
+    "D": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "gemDiamond"
+      }
+    ],
+    "V": [
+      {
+        "item": "minecraft:vine"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:sylvan_boots",
+    "data": 0
+  }
+}

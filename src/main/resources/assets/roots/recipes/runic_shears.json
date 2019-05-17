@@ -1,0 +1,30 @@
+{
+  "type": "roots:grove_shaped",
+  "pattern": [
+    " R ",
+    "PSP",
+    " R "
+  ],
+  "key": {
+    "S": [
+      {
+        "item": "minecraft:shears"
+      }
+    ],
+    "P": [
+      {
+        "item": "roots:pereskia"
+      }
+    ],
+    "R": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "runestone"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:runic_shears",
+    "data": 0
+  }
+}

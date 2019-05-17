@@ -1,0 +1,37 @@
+{
+  "type": "roots:grove_shaped",
+  "pattern": [
+    " F ",
+    " B ",
+    "LWL"
+  ],
+  "key": {
+    "W": [
+      {
+        "item": "roots:wildroot"
+      }
+    ],
+    "B": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "rootsBark"
+      }
+    ],
+    "L": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "treeLeaves"
+      }
+    ],
+    "F": [
+      {
+        "item": "minecraft:flint"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:living_arrow",
+    "data": 0,
+    "count": 5
+  }
+}
