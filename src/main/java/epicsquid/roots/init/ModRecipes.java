@@ -1,12 +1,5 @@
 package epicsquid.roots.init;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticalworld.entity.EntityBeetle;
 import epicsquid.mysticalworld.entity.EntityDeer;
@@ -16,7 +9,6 @@ import epicsquid.mysticalworld.item.metals.Metal;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.recipe.*;
-import epicsquid.roots.recipe.RunicShearRecipes;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.util.StateUtil;
@@ -35,13 +27,19 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreIngredient;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ModRecipes {
 
@@ -50,6 +48,7 @@ public class ModRecipes {
   private static Map<ResourceLocation, TransmutationRecipe> transmutationRecipes = new HashMap<>();
   private static List<MortarRecipe> mortarRecipes = new ArrayList<>();
   private static Map<String, PyreCraftingRecipe> pyreCraftingRecipes = new HashMap<>();
+  private static Map<ResourceLocation, GroveCraftingRecipe> groveCraftingRecipes = new HashMap<>();
   private static Map<String, RunicShearRecipe> runicShearRecipes = new HashMap<>();
   private static List<RunicCarvingRecipe> runicCarvingRecipes = new ArrayList<>();
   private static Map<ResourceLocation, PacifistEntry> pacifistEntities = new HashMap<>();
@@ -67,34 +66,34 @@ public class ModRecipes {
     registry.register(new ShapedOreRecipe(getRL(name), result, ingredients).setRegistryName(getRL(name)));
   }
 
-  public static PacifistEntry addPacifistEntry (String name, Class<? extends Entity> clazz) {
+  public static PacifistEntry addPacifistEntry(String name, Class<? extends Entity> clazz) {
     PacifistEntry entry = new PacifistEntry(clazz, name);
     pacifistEntities.put(entry.getRegistryName(), entry);
     pacifistClasses.put(clazz, entry);
     return entry;
   }
 
-  public static PacifistEntry getPacifistEntry (String name) {
+  public static PacifistEntry getPacifistEntry(String name) {
     return getPacifistEntry(new ResourceLocation(Roots.MODID, name));
   }
 
-  public static PacifistEntry getPacifistEntry (ResourceLocation name) {
+  public static PacifistEntry getPacifistEntry(ResourceLocation name) {
     return pacifistEntities.get(name);
   }
 
-  public static PacifistEntry getPacifistEntry (Entity entity) {
+  public static PacifistEntry getPacifistEntry(Entity entity) {
     return pacifistClasses.get(entity.getClass());
   }
 
-  public static void removePacifistEntry (String name) {
+  public static void removePacifistEntry(String name) {
     removePacifistEntry(new ResourceLocation(Roots.MODID, name));
   }
 
-  public static void removePacifistEntry (ResourceLocation name) {
+  public static void removePacifistEntry(ResourceLocation name) {
     pacifistEntities.remove(name);
   }
 
-  public static void initPacifistEntities () {
+  public static void initPacifistEntities() {
     addPacifistEntry("bat", EntityBat.class);
     addPacifistEntry("chicken", EntityChicken.class);
     addPacifistEntry("cow", EntityCow.class);
@@ -139,47 +138,47 @@ public class ModRecipes {
     addTransmutationRecipe(name, start, endState, null);
   }
 
-  public static void addTransmutationRecipe (String name, IBlockState start, ItemStack endState, WorldPosStatePredicate condition) {
+  public static void addTransmutationRecipe(String name, IBlockState start, ItemStack endState, WorldPosStatePredicate condition) {
     ResourceLocation n = new ResourceLocation(Roots.MODID, name);
     TransmutationRecipe recipe = new TransmutationRecipe(n, start, endState, condition);
     transmutationRecipes.put(n, recipe);
   }
 
-  public static void addTransmutationRecipe (String name, Block start, ItemStack endState) {
+  public static void addTransmutationRecipe(String name, Block start, ItemStack endState) {
     addTransmutationRecipe(name, start, endState, null);
   }
 
-  public static void addTransmutationRecipe (String name, Block start, ItemStack endState, WorldPosStatePredicate condition) {
+  public static void addTransmutationRecipe(String name, Block start, ItemStack endState, WorldPosStatePredicate condition) {
     ResourceLocation n = new ResourceLocation(Roots.MODID, name);
     TransmutationRecipe recipe = new TransmutationRecipe(n, start, endState, condition);
     transmutationRecipes.put(n, recipe);
   }
 
-  public static void addTransmutationRecipe (String name, Block start, IBlockState endState) {
+  public static void addTransmutationRecipe(String name, Block start, IBlockState endState) {
     addTransmutationRecipe(name, start, endState, null);
   }
 
-  public static void addTransmutationRecipe (String name, Block start, Block endState) {
+  public static void addTransmutationRecipe(String name, Block start, Block endState) {
     addTransmutationRecipe(name, start, endState.getDefaultState(), null);
   }
 
-  public static void removeTransmutationRecipe (String name) {
+  public static void removeTransmutationRecipe(String name) {
     removeTransmutationRecipe(new ResourceLocation(Roots.MODID, name));
   }
 
-  public static void removeTransmutationRecipe (ResourceLocation name) {
+  public static void removeTransmutationRecipe(ResourceLocation name) {
     transmutationRecipes.remove(name);
   }
 
-  public static TransmutationRecipe getTransmutationRecipe (String name) {
+  public static TransmutationRecipe getTransmutationRecipe(String name) {
     return getTransmutationRecipe(new ResourceLocation(Roots.MODID, name));
   }
 
-  public static TransmutationRecipe getTransmutationRecipe (ResourceLocation name) {
+  public static TransmutationRecipe getTransmutationRecipe(ResourceLocation name) {
     return transmutationRecipes.getOrDefault(name, null);
   }
 
-  public static List<TransmutationRecipe> getTransmutationRecipes (IBlockState startState) {
+  public static List<TransmutationRecipe> getTransmutationRecipes(IBlockState startState) {
     List<TransmutationRecipe> result = new ArrayList<>();
     for (TransmutationRecipe recipe : transmutationRecipes.values()) {
       if (recipe.matches(startState)) result.add(recipe);
@@ -187,11 +186,11 @@ public class ModRecipes {
     return result;
   }
 
-  public static List<TransmutationRecipe> getTransmutationRecipes (Block startState) {
+  public static List<TransmutationRecipe> getTransmutationRecipes(Block startState) {
     return getTransmutationRecipes(startState.getDefaultState());
   }
 
-  public static void initTransmutationRecipes () {
+  public static void initTransmutationRecipes() {
     addTransmutationRecipe("deadbush_cocoa", Blocks.DEADBUSH, new ItemStack(Items.DYE, 3, 3));
     addTransmutationRecipe("birch_jungle", Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH), Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE));
     addTransmutationRecipe("birch_jungle_leaves", Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.BIRCH), Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE));
@@ -204,31 +203,31 @@ public class ModRecipes {
     StateUtil.ignoreState(Blocks.LEAVES, BlockLeaves.DECAYABLE);
   }
 
-  public static void addAnimalHarvestRecipe (Entity entity) {
+  public static void addAnimalHarvestRecipe(Entity entity) {
     addAnimalHarvestRecipe(EntityList.getEntityString(entity), entity);
   }
 
-  public static void addAnimalHarvestRecipe (String name, Entity entity) {
+  public static void addAnimalHarvestRecipe(String name, Entity entity) {
     addAnimalHarvestRecipe(name, entity.getClass());
   }
 
-  public static void addAnimalHarvestRecipe (String name, Class<? extends Entity> clazz) {
+  public static void addAnimalHarvestRecipe(String name, Class<? extends Entity> clazz) {
     ResourceLocation n = new ResourceLocation(Roots.MODID, name);
     if (harvestRecipes.containsKey(n)) {
-        System.out.println("Animal Harvest recipe name is already registered: " + n.toString());
-        return;
+      System.out.println("Animal Harvest recipe name is already registered: " + n.toString());
+      return;
     }
     AnimalHarvestRecipe recipe = new AnimalHarvestRecipe(n, clazz);
     harvestRecipes.put(n, recipe);
     harvestClasses = null;
   }
 
-  public static void removeAnimalHarvestRecipe (ResourceLocation location) {
+  public static void removeAnimalHarvestRecipe(ResourceLocation location) {
     harvestClasses = null;
     harvestRecipes.remove(location);
   }
 
-  public static void removeAnimalHarvestRecipe (Class<? extends Entity> clz) {
+  public static void removeAnimalHarvestRecipe(Class<? extends Entity> clz) {
     harvestClasses = null;
     ResourceLocation toRemove = null;
     for (Map.Entry<ResourceLocation, AnimalHarvestRecipe> entry : harvestRecipes.entrySet()) {
@@ -242,7 +241,7 @@ public class ModRecipes {
     }
   }
 
-  public static void removeAnimalHarvestRecipe (Entity entity) {
+  public static void removeAnimalHarvestRecipe(Entity entity) {
     ResourceLocation n = new ResourceLocation(Roots.MODID, entity.getName());
     if (harvestRecipes.containsKey(n)) {
       harvestRecipes.remove(n);
@@ -262,11 +261,11 @@ public class ModRecipes {
     }
   }
 
-  public static void getAnimalHarvestRecipe (ResourceLocation location) {
+  public static void getAnimalHarvestRecipe(ResourceLocation location) {
     harvestRecipes.getOrDefault(location, null);
   }
 
-  public static AnimalHarvestRecipe getAnimalHarvestRecipe (Entity entity) {
+  public static AnimalHarvestRecipe getAnimalHarvestRecipe(Entity entity) {
     ResourceLocation n = new ResourceLocation(Roots.MODID, entity.getName());
     if (harvestRecipes.containsKey(n)) {
       return harvestRecipes.get(n);
@@ -278,7 +277,7 @@ public class ModRecipes {
     return null;
   }
 
-  public static ObjectOpenHashSet<Class<? extends Entity>> getAnimalHarvestClasses () {
+  public static ObjectOpenHashSet<Class<? extends Entity>> getAnimalHarvestClasses() {
     if (harvestClasses == null || harvestClasses.size() != harvestRecipes.size()) {
       harvestClasses = new ObjectOpenHashSet<>();
       for (AnimalHarvestRecipe recipe : harvestRecipes.values()) {
@@ -289,9 +288,7 @@ public class ModRecipes {
   }
 
 
-
-
-  public static void initAnimalHarvestRecipes () {
+  public static void initAnimalHarvestRecipes() {
     // Vanilla
     addAnimalHarvestRecipe("bat", EntityBat.class);
     addAnimalHarvestRecipe("chicken", EntityChicken.class);
@@ -422,11 +419,11 @@ public class ModRecipes {
     mortarRecipes.addAll(getMortarRecipeList(output, input, red1, green1, blue1, red2, green2, blue2));
   }
 
-  public static List<MortarRecipe> getMortarRecipeList (ItemStack output, Ingredient input) {
+  public static List<MortarRecipe> getMortarRecipeList(ItemStack output, Ingredient input) {
     return getMortarRecipeList(output, input, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
   }
 
-  public static List<MortarRecipe> getMortarRecipeList (ItemStack output, Ingredient input, float red1, float green1, float blue1, float red2, float green2, float blue2) {
+  public static List<MortarRecipe> getMortarRecipeList(ItemStack output, Ingredient input, float red1, float green1, float blue1, float red2, float green2, float blue2) {
     List<MortarRecipe> result = new ArrayList<>();
     ItemStack copy;
     List<Ingredient> ingredients = new ArrayList<>();
@@ -441,7 +438,7 @@ public class ModRecipes {
     return result;
   }
 
-  public static SpellBase getSpellRecipe (String name) {
+  public static SpellBase getSpellRecipe(String name) {
     return SpellRegistry.getSpell(name);
   }
 
@@ -455,22 +452,32 @@ public class ModRecipes {
   }
 
   public static PyreCraftingRecipe getCraftingRecipe(List<ItemStack> items) {
-    List<ItemStack> stacksToRemove = new ArrayList<>();
-    for(ItemStack s : items){
-      if(s.isEmpty()) {
-        stacksToRemove.add(s);
-      }
-    }
-    for(ItemStack s : stacksToRemove){
-      items.remove(s);
-    }
-    stacksToRemove.clear();
+    items.removeIf(ItemStack::isEmpty);
     for (Map.Entry<String, PyreCraftingRecipe> pyreCraftingRecipe : pyreCraftingRecipes.entrySet()) {
       if (pyreCraftingRecipe.getValue().matches(items)) {
         return pyreCraftingRecipe.getValue();
       }
     }
     return null;
+  }
+
+  @Nullable
+  public static GroveCraftingRecipe getGroveCraftingRecipe(List<ItemStack> items) {
+    items.removeIf(ItemStack::isEmpty);
+    for (GroveCraftingRecipe recipe : groveCraftingRecipes.values()) {
+      if (recipe.matches(items)) return recipe;
+    }
+
+    return null;
+  }
+
+  public static GroveCraftingRecipe getGroveCraftingRecipe (String name) {
+    return getGroveCraftingRecipe(new ResourceLocation(Roots.MODID, name));
+  }
+
+  @Nullable
+  public static GroveCraftingRecipe getGroveCraftingRecipe (ResourceLocation name) {
+    return groveCraftingRecipes.get(name);
   }
 
   public static PyreCraftingRecipe getCraftingRecipe(String recipeName) {
@@ -487,6 +494,16 @@ public class ModRecipes {
     pyreCraftingRecipes.put(recipeName, pyreCraftingRecipe.setName(recipeName));
   }
 
+  private static void addCraftingRecipe(String recipeName, GroveCraftingRecipe recipe) {
+    ResourceLocation recipeId = new ResourceLocation(Roots.MODID, recipeName);
+    if (groveCraftingRecipes.containsKey(recipeId)) {
+      System.out.println("GroveCraftingRecipe already registered with name " + recipeName);
+      return;
+    }
+
+    groveCraftingRecipes.put(recipeId, recipe);
+  }
+
   public static List<RunicCarvingRecipe> getRunicCarvingRecipes() {
     return runicCarvingRecipes;
   }
@@ -499,7 +516,7 @@ public class ModRecipes {
     return pyreCraftingRecipes;
   }
 
-  public static Map<ResourceLocation, AnimalHarvestRecipe> getHarvestRecipes () {
+  public static Map<ResourceLocation, AnimalHarvestRecipe> getHarvestRecipes() {
     return harvestRecipes;
   }
 
@@ -507,7 +524,7 @@ public class ModRecipes {
     return mortarRecipes;
   }
 
-  public static void initMortarRecipes () {
+  public static void initMortarRecipes() {
     addMortarRecipe(new ItemStack(Items.DYE, 1, 12), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.carapace), 1, 1, 1, 1, 1, 1);
     addMortarRecipe(new ItemStack(ModItems.flour), Ingredient.fromItem(Items.WHEAT), 1f, 1f, 0f, 1f, 1f, 0f);
     addMortarRecipe(new ItemStack(ModItems.flour), Ingredient.fromItem(Items.POTATO), 1f, 1f, 0, 1f, 1f, 0f);
@@ -522,14 +539,14 @@ public class ModRecipes {
         continue;
       }
 
-      addMortarRecipe(new ItemStack(metalDust), new OreIngredient("ingot" + metal.getOredictNameSuffix()), 82f/255f, 92f/255f, 114f/255f, 160f/255f, 167f/255f, 183f/255f);
+      addMortarRecipe(new ItemStack(metalDust), new OreIngredient("ingot" + metal.getOredictNameSuffix()), 82f / 255f, 92f / 255f, 114f / 255f, 160f / 255f, 167f / 255f, 183f / 255f);
     }
 
-    addMortarRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.gold_dust), new OreIngredient("ingotGold"), 82f/255f, 92f/255f, 114f/255f, 160f/255f, 167f/255f, 183f/255f);
-    addMortarRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.iron_dust), new OreIngredient("ingotIron"), 82f/255f, 92f/255f, 114f/255f, 160f/255f, 167f/255f, 183f/255f);
+    addMortarRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.gold_dust), new OreIngredient("ingotGold"), 82f / 255f, 92f / 255f, 114f / 255f, 160f / 255f, 167f / 255f, 183f / 255f);
+    addMortarRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.iron_dust), new OreIngredient("ingotIron"), 82f / 255f, 92f / 255f, 114f / 255f, 160f / 255f, 167f / 255f, 183f / 255f);
 
     addMortarRecipe(new ItemStack(ModItems.petals), new OreIngredient("allFlowers"), 1f, 0f, 0f, 0f, 1f, 0f);
-    addMortarRecipe(new ItemStack(ModItems.runic_dust), new OreIngredient("runestone"), 0f, 0f, 1f, 60/255f, 0f, 1f);
+    addMortarRecipe(new ItemStack(ModItems.runic_dust), new OreIngredient("runestone"), 0f, 0f, 1f, 60 / 255f, 0f, 1f);
   }
 
   /**
@@ -611,9 +628,209 @@ public class ModRecipes {
             new ItemStack(Items.WHEAT_SEEDS),
             new ItemStack(Blocks.RED_MUSHROOM),
             new ItemStack(Blocks.BROWN_MUSHROOM)));
+
+    addCraftingRecipe("seeds", new PyreCraftingRecipe(new ItemStack(ModItems.cooked_seeds, 5), 1).addIngredients(
+        new ItemStack(ModItems.seeds),
+        new ItemStack(ModItems.seeds),
+        new ItemStack(ModItems.seeds),
+        new ItemStack(ModItems.seeds),
+        new ItemStack(ModItems.seeds)).setBurnTime(20));
+
+    addCraftingRecipe("unending_bowl",
+        new GroveCraftingRecipe(new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.unending_bowl)), 2).addIngredients(
+            new ItemStack(Items.WATER_BUCKET),
+            new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.mortar)),
+            new ItemStack(ModItems.moonglow_leaf),
+            new ItemStack(ModItems.terra_moss),
+            new ItemStack(ModItems.spirit_herb)));
+
+    addCraftingRecipe("runic_soil",
+        new GroveCraftingRecipe(new ItemStack(ModBlocks.runic_soil), 1).addIngredients(
+            new ItemStack(Blocks.DIRT),
+            new ItemStack(ModItems.terra_moss),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(Blocks.GRAVEL),
+            new ItemStack(Items.DYE, 1, 15)));
+
+    addCraftingRecipe("living_pickaxe",
+        new GroveCraftingRecipe(new ItemStack(ModItems.living_pickaxe), 1).addIngredients(
+            new OreIngredient("ingotGold"),
+            new ItemStack(Items.WOODEN_PICKAXE),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak)));
+
+    addCraftingRecipe("living_pickaxe_silver",
+        new GroveCraftingRecipe(new ItemStack(ModItems.living_pickaxe), 1).addIngredients(
+            new OreIngredient("ingotSilver"),
+            new ItemStack(Items.WOODEN_PICKAXE),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak)));
+
+    addCraftingRecipe("living_axe",
+        new GroveCraftingRecipe(new ItemStack(ModItems.living_axe), 1).addIngredients(
+            new OreIngredient("ingotGold"),
+            new ItemStack(Items.WOODEN_AXE),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak)));
+
+    addCraftingRecipe("living_axe_silver",
+        new GroveCraftingRecipe(new ItemStack(ModItems.living_axe), 1).addIngredients(
+            new OreIngredient("ingotSilver"),
+            new ItemStack(Items.WOODEN_AXE),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak)));
+
+    addCraftingRecipe("living_shovel",
+        new GroveCraftingRecipe(new ItemStack(ModItems.living_shovel), 1).addIngredients(
+            new OreIngredient("ingotGold"),
+            new ItemStack(Items.WOODEN_SHOVEL),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak)));
+
+    addCraftingRecipe("living_shovel_silver",
+        new GroveCraftingRecipe(new ItemStack(ModItems.living_shovel), 1).addIngredients(
+            new OreIngredient("ingotSilver"),
+            new ItemStack(Items.WOODEN_SHOVEL),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak)));
+
+    addCraftingRecipe("living_hoe",
+        new GroveCraftingRecipe(new ItemStack(ModItems.living_hoe), 1).addIngredients(
+            new OreIngredient("ingotGold"),
+            new ItemStack(Items.WOODEN_HOE),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak)));
+
+    addCraftingRecipe("living_hoe_silver",
+        new GroveCraftingRecipe(new ItemStack(ModItems.living_hoe), 1).addIngredients(
+            new OreIngredient("ingotSilver"),
+            new ItemStack(Items.WOODEN_HOE),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak)));
+
+    addCraftingRecipe("living_sword",
+        new GroveCraftingRecipe(new ItemStack(ModItems.living_sword), 1).addIngredients(
+            new OreIngredient("ingotGold"),
+            new ItemStack(Items.WOODEN_SWORD),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak)));
+
+    addCraftingRecipe("living_sword_silver",
+        new GroveCraftingRecipe(new ItemStack(ModItems.living_sword), 1).addIngredients(
+            new OreIngredient("ingotSilver"),
+            new ItemStack(Items.WOODEN_SWORD),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.bark_oak),
+            new ItemStack(ModItems.bark_oak)));
+
+
+    addCraftingRecipe("living_arrow",
+        new GroveCraftingRecipe(new ItemStack(ModItems.living_arrow, 6), 1).addIngredients(
+            new OreIngredient("treeLeaves"),
+            new OreIngredient("treeLeaves"),
+            new OreIngredient("rootsBark"),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(Items.FLINT)));
+
+    addCraftingRecipe("living_quiver",
+        new GroveCraftingRecipe(new ItemStack(ModItems.living_quiver), 2).addIngredients(
+            new OreIngredient("chestWood"),
+            new ItemStack(ModItems.bark_wildwood),
+            new ItemStack(ModItems.bark_wildwood),
+            new ItemStack(ModItems.terra_moss),
+            new ItemStack(ModItems.spirit_herb)));
+
+    addCraftingRecipe("runic_shears",
+        new GroveCraftingRecipe(new ItemStack(ModItems.runic_shears), 1).addIngredients(
+            new ItemStack(Items.SHEARS),
+            new ItemStack(ModItems.pereskia),
+            new ItemStack(ModItems.pereskia),
+            new ItemStack(ModBlocks.runestone),
+            new ItemStack(ModBlocks.runestone)));
+
+    addCraftingRecipe("runestone",
+        new GroveCraftingRecipe(new ItemStack(Item.getItemFromBlock(ModBlocks.runestone), 8), 1).addIngredients(
+            new ItemStack(Items.DYE, 1, 4),
+            new OreIngredient("stone"),
+            new OreIngredient("stone"),
+            new OreIngredient("stone"),
+            new OreIngredient("stone")));
+
+    addCraftingRecipe("wildwood_helmet", new GroveCraftingRecipe(new ItemStack(ModItems.wildwood_helmet), 1).addIngredients(
+        new ItemStack(Items.IRON_HELMET),
+        new ItemStack(ModItems.bark_wildwood),
+        new ItemStack(ModItems.bark_wildwood),
+        new OreIngredient("plankWood"),
+        new OreIngredient("gemDiamond")));
+
+    addCraftingRecipe("wildwood_chestplate", new GroveCraftingRecipe(new ItemStack(ModItems.wildwood_chestplate), 1).addIngredients(
+        new ItemStack(Items.IRON_CHESTPLATE),
+        new ItemStack(ModItems.bark_wildwood),
+        new ItemStack(ModItems.bark_wildwood),
+        new OreIngredient("plankWood"),
+        new OreIngredient("gemDiamond")));
+
+    addCraftingRecipe("wildwood_leggings", new GroveCraftingRecipe(new ItemStack(ModItems.wildwood_leggings), 1).addIngredients(
+        new ItemStack(Items.IRON_LEGGINGS),
+        new ItemStack(ModItems.bark_wildwood),
+        new ItemStack(ModItems.bark_wildwood),
+        new OreIngredient("plankWood"),
+        new OreIngredient("gemDiamond")));
+
+    addCraftingRecipe("wildwood_boots", new GroveCraftingRecipe(new ItemStack(ModItems.wildwood_boots), 1).addIngredients(
+        new ItemStack(Items.IRON_BOOTS),
+        new ItemStack(ModItems.bark_wildwood),
+        new ItemStack(ModItems.bark_wildwood),
+        new OreIngredient("plankWood"),
+        new OreIngredient("gemDiamond")));
+
+    addCraftingRecipe("apothecary_pouch", new ApothecaryPouchRecipe(new ItemStack(ModItems.apothecary_pouch), 1).addIngredients(
+        new ItemStack(Blocks.ENDER_CHEST),
+        new ItemStack(ModItems.bark_wildwood),
+        new ItemStack(ModItems.bark_wildwood),
+        new ItemStack(ModItems.spirit_herb),
+        new ItemStack(ModItems.component_pouch)
+    ));
+
+    addCraftingRecipe("sylvan_helmet", new GroveCraftingRecipe(new ItemStack(ModItems.sylvan_helmet), 1).addIngredients(
+        new ItemStack(Items.GOLDEN_HELMET),
+        new ItemStack(Blocks.VINE),
+        new ItemStack(ModItems.bark_birch),
+        new OreIngredient("gemDiamond"), // TODO: Replace with amethyst
+        new ItemStack(ModItems.bark_birch)));
+
+    addCraftingRecipe("sylvan_chestplate", new GroveCraftingRecipe(new ItemStack(ModItems.sylvan_chestplate), 1).addIngredients(
+        new ItemStack(Items.GOLDEN_CHESTPLATE),
+        new ItemStack(Blocks.VINE),
+        new ItemStack(ModItems.bark_birch),
+        new OreIngredient("gemDiamond"),
+        new ItemStack(ModItems.bark_birch)));
+
+    addCraftingRecipe("sylvan_leggings", new GroveCraftingRecipe(new ItemStack(ModItems.sylvan_leggings), 1).addIngredients(
+        new ItemStack(Items.GOLDEN_LEGGINGS),
+        new ItemStack(Blocks.VINE),
+        new ItemStack(ModItems.bark_birch),
+        new OreIngredient("gemDiamond"),
+        new ItemStack(ModItems.bark_birch)));
+
+    addCraftingRecipe("sylvan_boots", new GroveCraftingRecipe(new ItemStack(ModItems.sylvan_boots), 1).addIngredients(
+        new ItemStack(Items.GOLDEN_BOOTS),
+        new ItemStack(Blocks.VINE),
+        new ItemStack(ModItems.bark_birch),
+        new OreIngredient("gemDiamond"),
+        new ItemStack(ModItems.bark_birch)));
   }
 
-  public static void afterHerbRegisterInit(){
+  public static void afterHerbRegisterInit() {
   }
 
   private static void initDrops() {
