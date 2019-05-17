@@ -1,13 +1,15 @@
 {
   "recipes": {
-    "grove_shaped": "epicsquid.roots.recipe.crafting.ShapedGroveCraftingRecipe$GroveFactory",
-    "grove_shapeless": "epicsquid.roots.recipe.crafting.ShapelessGroveCraftingRecipe$GroveFactory"
+    "grove_shaped": "epicsquid.roots.recipe.crafting.ShapedGroveCraftingRecipe$Factory",
+    "grove_shapeless": "epicsquid.roots.recipe.crafting.ShapelessGroveCraftingRecipe$Factory",
+    "apothecary_shaped": "epicsquid.roots.recipe.crafting.ApothecaryGroveCraftingRecipe$Factory"
   },
   "conditions": {
     "copper_exists": "epicsquid.roots.recipe.conditions.RecipeConditionFactory$CopperExists",
     "silver_exists": "epicsquid.roots.recipe.conditions.RecipeConditionFactory$CopperExists"
   },
   "ingredients": {
-    "seed": "epicsquid.roots.recipe.ingredient.SeedFactory"
+    "seed": "epicsquid.roots.recipe.ingredient.SeedBuilder$Factory",
+    "gold_or_silver": "epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient$Factory"
   }
 }

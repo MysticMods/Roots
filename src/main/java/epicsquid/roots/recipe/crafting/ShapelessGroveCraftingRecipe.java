@@ -56,7 +56,7 @@ public class ShapelessGroveCraftingRecipe extends ShapelessOreRecipe implements 
   }
 
   @SuppressWarnings("unused")
-  public static class GroveFactory implements IRecipeFactory {
+  public static class Factory implements IRecipeFactory {
     public ShapelessGroveCraftingRecipe parse(JsonContext context, JsonObject json) {
       String group = JsonUtils.getString(json, "group", "");
 
