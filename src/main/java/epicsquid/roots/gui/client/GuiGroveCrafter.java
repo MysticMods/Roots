@@ -36,9 +36,9 @@ public class GuiGroveCrafter extends GuiContainer {
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
     GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-    this.mc.getTextureManager().bindTexture(new ResourceLocation(Roots.MODID, "textures/gui/wild_crafter.png"));
+    this.mc.getTextureManager().bindTexture(new ResourceLocation(Roots.MODID, "textures/gui/grove_crafting_gui.png"));
     int i = (this.width - this.xSize) / 2;
     int j = (this.height - this.ySize) / 2;
-    this.drawTexturedModalRect(i - 13, j - 55, 0, 0, 176, 207);
+    this.drawTexturedModalRect(i, j, 0, 0, 176, 207);
   }
 }

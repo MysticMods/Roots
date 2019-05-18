@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ModRecipes {
 
@@ -463,7 +464,6 @@ public class ModRecipes {
 
   @Nullable
   public static GroveCraftingRecipe getGroveCraftingRecipe(List<ItemStack> items) {
-    items.removeIf(ItemStack::isEmpty);
     for (GroveCraftingRecipe recipe : groveCraftingRecipes.values()) {
       if (recipe.matches(items)) return recipe;
     }
