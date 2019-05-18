@@ -6,6 +6,7 @@ import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.GroveCraftingRecipe;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -13,11 +14,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityGroveCrafter extends TileBase {
-  private GroveCraftingRecipe lastRecipeUsed;
+import java.util.ArrayList;
+import java.util.List;
 
+public class TileEntityGroveCrafter extends TileBase {
   public ItemStackHandler inventory = new ItemStackHandler(5);
-  public ItemStackHandler output = new ItemStackHandler(1);
 
   public TileEntityGroveCrafter() {
     super();
@@ -27,8 +28,6 @@ public class TileEntityGroveCrafter extends TileBase {
   public NBTTagCompound writeToNBT(NBTTagCompound tag) {
     super.writeToNBT(tag);
     tag.setTag("handler", inventory.serializeNBT());
-    tag.setTag("output", output.serializeNBT());
-    tag.setString("lastRecipeUsed", lastRecipeUsed == null ? "" : lastRecipeUsed.getName());
 
     return tag;
   }
@@ -37,8 +36,6 @@ public class TileEntityGroveCrafter extends TileBase {
   public void readFromNBT(NBTTagCompound tag) {
     super.readFromNBT(tag);
     inventory.deserializeNBT(tag.getCompoundTag("handler"));
-    output.deserializeNBT(tag.getCompoundTag("output"));
-    this.lastRecipeUsed = ModRecipes.getGroveCraftingRecipe(tag.getString("lastRecipeUsed"));
   }
 
   @Override
@@ -56,16 +53,19 @@ public class TileEntityGroveCrafter extends TileBase {
     readFromNBT(pkt.getNbtCompound());
   }
 
-  public GroveCraftingRecipe getLastRecipeUsed() {
-    return lastRecipeUsed;
-  }
-
   @Override
   public void breakBlock(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
     if (!world.isRemote) {
       Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
-      Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, output);
     }
+  }
+
+  public List<ItemStack> getContents () {
+    List<ItemStack> result = new ArrayList<>();
+    for (int i = 0; i < inventory.getSlots(); i++) {
+      result.add(inventory.getStackInSlot(i));
+    }
+    return result;
   }
 }
 
