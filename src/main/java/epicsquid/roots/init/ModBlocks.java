@@ -19,6 +19,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.EnumPlantType;
 
 import javax.annotation.Nonnull;
@@ -28,7 +29,7 @@ public class ModBlocks {
   // All block
   public static Block mortar, bonfire,imbuer, structure_marker, offertory_plate, unending_bowl;
   public static Block incense_burner, wildwood_rune;
-  public static Block grove_stone, wild_crafter;
+  public static Block grove_stone, grove_crafter;
 
   public static BlockCropBase moonglow, aubergine, pereskia, wildroot, spirit_herb,wildewheet, cloud_berry, infernal_bulb, dewgonia, stalicripe;
 
@@ -143,7 +144,7 @@ public class ModBlocks {
     event.addBlock(grove_stone = new BlockGroveStone(Material.ROCK, SoundType.STONE, 2.5f, "grove_stone", TileEntityGroveStone.class)).setCreativeTab(Roots.tab);
 
     // Wild Crafter
-    event.addBlock(wild_crafter = new BlockGroveCrafter(Material.WOOD, SoundType.WOOD, 2.5f, "wild_crafter", TileEntityGroveCrafter.class)).setCreativeTab(Roots.tab);
+    event.addBlock(grove_crafter = new BlockGroveCrafter(Material.WOOD, SoundType.WOOD, 2.5f, "grove_crafter", TileEntityGroveCrafter.class)).setCreativeTab(Roots.tab);
 
   }
 
