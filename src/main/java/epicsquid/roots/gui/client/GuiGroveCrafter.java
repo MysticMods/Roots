@@ -9,8 +9,12 @@ package epicsquid.roots.gui.client;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.gui.container.ContainerGroveCrafter;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
@@ -40,5 +44,13 @@ public class GuiGroveCrafter extends GuiContainer {
     int i = (this.width - this.xSize) / 2;
     int j = (this.height - this.ySize) / 2;
     this.drawTexturedModalRect(i, j, 0, 0, 176, 207);
+    if (container.getRecipe() != null) {
+      RenderHelper.enableGUIStandardItemLighting();
+      ItemStack result = container.getRecipe().getResult();
+      i += (this.xSize / 4) * 3;
+      j += (this.ySize / 5);
+      mc.getRenderItem().renderItemIntoGUI(result, i, j);
+      mc.getRenderItem().renderItemOverlayIntoGUI(mc.fontRenderer, result, i, j, null);
+    }
   }
 }
