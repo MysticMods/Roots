@@ -9,17 +9,18 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -32,7 +33,8 @@ public class BlockGroveStone extends BlockTEBase {
   public BlockGroveStone(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
     super(mat, type, hardness, name, teClass);
 
-    this.setDefaultState(this.blockState.getBaseState().withProperty(VALID, true).withProperty(HALF, Half.BOTTOM).withProperty(FACING, EnumFacing.NORTH));
+    this.setDefaultState(this.blockState.getBaseState().withProperty(VALID, false).withProperty(HALF, Half.BOTTOM).withProperty(FACING, EnumFacing.NORTH));
+    this.setTickRandomly(true);
   }
 
   @Nonnull
@@ -60,7 +62,7 @@ public class BlockGroveStone extends BlockTEBase {
   @Override
   @SuppressWarnings("deprecation")
   public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(VALID, (meta & 1) == 1).withProperty(HALF, Half.fromInt((meta >> 1 & 1))).withProperty(FACING, EnumFacing.byIndex(((meta >> 2)+2)));
+    return getDefaultState().withProperty(VALID, (meta & 1) == 1).withProperty(HALF, Half.fromInt((meta >> 1 & 1))).withProperty(FACING, EnumFacing.byIndex(((meta >> 2) + 2)));
   }
 
   @Override
@@ -129,21 +131,48 @@ public class BlockGroveStone extends BlockTEBase {
     return 0;
   }
 
-  public enum Half implements IStringSerializable
-  {
+  public enum Half implements IStringSerializable {
     TOP,
     BOTTOM;
 
     @Override
     public String getName() {
       switch (this) {
-        case TOP: return "top";
-        default: return "bottom";
+        case TOP:
+          return "top";
+        default:
+          return "bottom";
       }
     }
 
-    public static Half fromInt (int x) {
+    public static Half fromInt(int x) {
       return values()[x];
+    }
+  }
+
+  @Override
+  @SideOnly(Side.CLIENT)
+  public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+    super.randomDisplayTick(stateIn, worldIn, pos, rand);
+
+    if (stateIn.getValue(VALID)) {
+      for (int i = -2; i <= 2; ++i) {
+        for (int j = -2; j <= 2; ++j) {
+          if (i > -2 && i < 2 && j == -1) {
+            j = 2;
+          }
+
+          if (rand.nextInt(16) == 0) {
+            for (int k = 0; k <= 1; ++k) {
+              if (!worldIn.isAirBlock(pos.add(i / 2, 0, j / 2))) {
+                break;
+              }
+
+              worldIn.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, (double) pos.getX() + 0.5D, (double) pos.getY() + 2.0D, (double) pos.getZ() + 0.5D, (double) ((float) i + rand.nextFloat()) - 0.5D, (double) ((float) k - rand.nextFloat() - 1.0F), (double) ((float) j + rand.nextFloat()) - 0.5D);
+            }
+          }
+        }
+      }
     }
   }
 }
