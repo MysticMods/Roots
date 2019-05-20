@@ -55,5 +55,8 @@ public class SpellRegistry {
     if (!SpellConfig.disableSpellsCategory.disableRampantGrowth)
       spellRegistry.put(SpellRampantGrowth.spellName, SpellRampantGrowth.instance);
 
+    // Cannot disable Grove-related spells
+    spellRegistry.put(SpellGroveSupplication.spellName, SpellGroveSupplication.instance);
+
   }
 }
