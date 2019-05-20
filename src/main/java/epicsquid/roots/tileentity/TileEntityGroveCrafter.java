@@ -37,6 +37,7 @@ public class TileEntityGroveCrafter extends TileBase {
   public NBTTagCompound writeToNBT(NBTTagCompound tag) {
     super.writeToNBT(tag);
     tag.setTag("handler", inventory.serializeNBT());
+    tag.setLong("groveStone", groveStone == null ? -1 : groveStone.toLong());
 
     return tag;
   }
@@ -45,6 +46,9 @@ public class TileEntityGroveCrafter extends TileBase {
   public void readFromNBT(NBTTagCompound tag) {
     super.readFromNBT(tag);
     inventory.deserializeNBT(tag.getCompoundTag("handler"));
+    long gpos = tag.getLong("groveStone");
+    if (gpos == -1) groveStone = null;
+    else groveStone = BlockPos.fromLong(gpos);
   }
 
   @Override
