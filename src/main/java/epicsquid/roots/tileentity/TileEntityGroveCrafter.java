@@ -2,6 +2,8 @@ package epicsquid.roots.tileentity;
 
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.block.BlockGroveStone;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.GroveCraftingRecipe;
 import net.minecraft.block.state.IBlockState;
@@ -22,7 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TileEntityGroveCrafter extends TileBase {
+  public static int GROVE_STONE_RADIUS = 10;
+
   public ItemStackHandler inventory = new ItemStackHandler(5);
+  private BlockPos groveStone = null;
 
   public TileEntityGroveCrafter() {
     super();
@@ -64,28 +69,70 @@ public class TileEntityGroveCrafter extends TileBase {
     }
   }
 
-  public List<ItemStack> craft () {
+  public boolean hasValidGroveStone () {
+    if (groveStone != null) {
+      IBlockState grove = world.getBlockState(groveStone);
+      if (grove.getBlock() == ModBlocks.grove_stone && grove.getValue(BlockGroveStone.VALID)) {
+        return true;
+      } else {
+        groveStone = null;
+      }
+    }
+
+    List<BlockPos> potentials = Util.getBlocksWithinRadius(world, pos, GROVE_STONE_RADIUS, GROVE_STONE_RADIUS, GROVE_STONE_RADIUS, ModBlocks.grove_stone);
+    if (potentials.isEmpty()) return false;
+
+    for (BlockPos pos : potentials) {
+      IBlockState grove = world.getBlockState(pos);
+      if (grove.getValue(BlockGroveStone.VALID)) {
+        groveStone = pos;
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  public List<ItemStack> craft() {
     GroveCraftingRecipe recipe = getRecipe();
     List<ItemStack> result = new ArrayList<>();
+    ItemStack current = ItemStack.EMPTY;
     while (recipe != null) {
 
       for (int i = 0; i < 5; i++) {
         inventory.extractItem(i, 1, false);
       }
 
-      result.add(recipe.getResult().copy());
+      if (current.isEmpty()) {
+        current = recipe.getResult().copy();
+      } else {
+        // TODO: If this ever becomes a problem in the future I will laugh
+        // TODO: But technically if you run out of ingredients for one recipe and then shift down to another, the result could change
+        if (current.getCount() + recipe.getResult().getCount() < current.getMaxStackSize()) {
+          current.grow(recipe.getResult().getCount());
+        } else {
+          result.add(current);
+          current = recipe.getResult().copy();
+        }
+      }
 
       recipe = getRecipe();
+    }
+
+    if (!current.isEmpty()) {
+      result.add(current);
     }
 
     return result;
   }
 
-  public GroveCraftingRecipe getRecipe () {
+  public GroveCraftingRecipe getRecipe() {
+    if (!hasValidGroveStone()) return null;
+
     return ModRecipes.getGroveCraftingRecipe(getContents());
   }
 
-  public List<ItemStack> getContents () {
+  public List<ItemStack> getContents() {
     List<ItemStack> result = new ArrayList<>();
     for (int i = 0; i < inventory.getSlots(); i++) {
       result.add(inventory.getStackInSlot(i));
@@ -107,7 +154,7 @@ public class TileEntityGroveCrafter extends TileBase {
     }
 
     for (ItemStack stack : items) {
-      EntityItem item = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);
+      EntityItem item = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.1, pos.getZ() + 0.5, stack);
       world.spawnEntity(item);
     }
 
