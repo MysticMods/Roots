@@ -103,7 +103,7 @@ public class ModBlocks {
     event.addBlock(wildwood_planks = new BlockBase(Material.WOOD, SoundType.WOOD, 2.0f, "wildwood_planks").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addBlock(wildwood_sapling = new BlockSaplingBase("wildwood_sapling", () -> new WorldGenBigWildwoodTree(true)).setModelCustom(false).setCreativeTab(Roots.tab));
 
-    event.addBlock(wildwood_door = new BlockDoorBase(wildwood_planks, SoundType.WOOD, 2.0f, "wildwood_door").setModelCustom(true).setLayer(BlockRenderLayer.TRANSLUCENT).setCreativeTab(Roots.tab));
+    event.addBlock(wildwood_door = new BlockDoorBase(wildwood_planks, SoundType.WOOD, 2.0f, "wildwood_door").setModelCustom(false).setLayer(BlockRenderLayer.TRANSLUCENT).setCreativeTab(Roots.tab));
     event.addBlock(wildwood_trapdoor = new BlockTrapDoorBase(wildwood_planks, SoundType.WOOD, 2.0f, "wildwood_trapdoor").setModelCustom(true).setLayer(BlockRenderLayer.TRANSLUCENT).setCreativeTab(Roots.tab));
     event.addBlock(wildwood_fence = new BlockFenceBase(wildwood_planks, SoundType.WOOD, 2.0f, "wildwood_fence").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addBlock(wildwood_ladder = new BlockLadderBase(wildwood_planks, 2.0f, "wildwood_ladder").setModelCustom(true).setCreativeTab(Roots.tab));
@@ -174,10 +174,10 @@ public class ModBlocks {
         wall = new BlockWallBase(base, sound, 1.7f, name + "_wall").setModelCustom(true).setCreativeTab(base.getCreativeTab()));
     if (material.equals(Material.ROCK)) {
       event.addBlock(button = new BlockButtonStoneBase(base, sound, 1.7f, name + "_button").setModelCustom(true).setCreativeTab(Roots.tab));
-      event.addBlock(pressure_plate = new BlockPressurePlateBase(base, BlockPressurePlate.Sensitivity.MOBS, sound, 1.7f, name + "_pressure_plate").setModelCustom(true).setCreativeTab(Roots.tab));
+      event.addBlock(pressure_plate = new BlockPressurePlateBase(base, BlockPressurePlateBase.PressurePlateType.MOBS, sound, 1.7f, name + "_pressure_plate").setModelCustom(true).setCreativeTab(Roots.tab));
     } else {
       event.addBlock(button = new BlockButtonWoodBase(base, sound, 1.7f, name + "_button").setModelCustom(true).setCreativeTab(Roots.tab));
-      event.addBlock(pressure_plate = new BlockPressurePlateBase(base, BlockPressurePlate.Sensitivity.EVERYTHING, sound, 1.7f, name + "_pressure_plate").setModelCustom(true).setCreativeTab(Roots.tab));
+      event.addBlock(pressure_plate = new BlockPressurePlateBase(base, BlockPressurePlateBase.PressurePlateType.ALL, sound, 1.7f, name + "_pressure_plate").setModelCustom(true).setCreativeTab(Roots.tab));
     }
     return new Variants(slabs, stairs, wall, button, pressure_plate);
   }
