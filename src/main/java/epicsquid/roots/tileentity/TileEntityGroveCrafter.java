@@ -33,6 +33,7 @@ public class TileEntityGroveCrafter extends TileBase {
     super();
   }
 
+  @Nonnull
   @Override
   public NBTTagCompound writeToNBT(NBTTagCompound tag) {
     super.writeToNBT(tag);
@@ -51,6 +52,7 @@ public class TileEntityGroveCrafter extends TileBase {
     else groveStone = BlockPos.fromLong(gpos);
   }
 
+  @Nonnull
   @Override
   public NBTTagCompound getUpdateTag() {
     return writeToNBT(new NBTTagCompound());
@@ -62,12 +64,12 @@ public class TileEntityGroveCrafter extends TileBase {
   }
 
   @Override
-  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+  public void onDataPacket(@Nonnull NetworkManager net, SPacketUpdateTileEntity pkt) {
     readFromNBT(pkt.getNbtCompound());
   }
 
   @Override
-  public void breakBlock(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+  public void breakBlock(World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, EntityPlayer player) {
     if (!world.isRemote) {
       Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
     }
