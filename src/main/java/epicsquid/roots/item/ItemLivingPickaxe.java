@@ -1,52 +1,13 @@
 package epicsquid.roots.item;
 
-import epicsquid.mysticallib.LibRegistry;
-import epicsquid.mysticallib.model.CustomModelItem;
-import epicsquid.mysticallib.model.CustomModelLoader;
-import epicsquid.mysticallib.model.ICustomModeledObject;
-import epicsquid.mysticallib.model.IModeledObject;
-import epicsquid.mysticallib.util.Util;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import epicsquid.mysticallib.item.ItemPickaxeBase;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 
-public class ItemLivingPickaxe extends ItemPickaxe implements IModeledObject, ICustomModeledObject, ILivingRepair {
-
-  private boolean hasCustomModel = false;
-
+public class ItemLivingPickaxe extends ItemPickaxeBase implements ILivingRepair {
   public ItemLivingPickaxe(ToolMaterial material, String name) {
-    super(material);
-    setTranslationKey(name);
-    setRegistryName(LibRegistry.getActiveModid(), name);
-    setHarvestLevel("pickaxe", 2);
-    setMaxDamage(192);
-  }
-
-  @Override
-  public int getItemEnchantability() {
-    return 22;
-  }
-
-  public ItemLivingPickaxe setModelCustom(boolean custom) {
-    this.hasCustomModel = custom;
-    return this;
-  }
-
-  @Override
-  public void initModel() {
-    ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "handlers"));
-  }
-
-  @Override
-  public void initCustomModel() {
-    if (this.hasCustomModel) {
-      CustomModelLoader.itemmodels.put(getRegistryName(),
-          new CustomModelItem(false, new ResourceLocation(getRegistryName().getNamespace() + ":items/" + getRegistryName().getPath())));
-    }
+    super(material, name, 2, 192, 22);
   }
 
   @Override

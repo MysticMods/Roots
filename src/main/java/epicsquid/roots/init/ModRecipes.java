@@ -5,7 +5,7 @@ import epicsquid.mysticalworld.entity.EntityBeetle;
 import epicsquid.mysticalworld.entity.EntityDeer;
 import epicsquid.mysticalworld.entity.EntityFox;
 import epicsquid.mysticalworld.entity.EntityFrog;
-import epicsquid.mysticalworld.item.metals.Metal;
+import epicsquid.mysticalworld.materials.Metal;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.recipe.*;
@@ -40,7 +40,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class ModRecipes {
 
@@ -471,12 +470,12 @@ public class ModRecipes {
     return null;
   }
 
-  public static GroveCraftingRecipe getGroveCraftingRecipe (String name) {
+  public static GroveCraftingRecipe getGroveCraftingRecipe(String name) {
     return getGroveCraftingRecipe(new ResourceLocation(Roots.MODID, name));
   }
 
   @Nullable
-  public static GroveCraftingRecipe getGroveCraftingRecipe (ResourceLocation name) {
+  public static GroveCraftingRecipe getGroveCraftingRecipe(ResourceLocation name) {
     return groveCraftingRecipes.get(name);
   }
 
