@@ -15,28 +15,24 @@
       "recipe": "elemental_soil"
     },
     {
-      "type": "runic_carving_template",
-      "recipe": "elemental_soil_fire",
-      "name": "Magmatic Soil",
-      "text": "$(l:herbs/infernal_bulb)Infernal Bulbs$() can grow in this magmatic soil.$(br2)Created by using a knife on elemental soil while holding an $(l:herbs/infernal_bulb)Infernal Bulb$() in your offhand, which is consumed in the process."
+      "type": "spotlight",
+      "item": "roots:elemental_soil_fire",
+      "text": "$(l:herbs/infernal_bulb)Infernal Bulbs$() can grow in this magmatic soil.$(br2)Created by dropping a piece of neutral elemental soil into a pond of lava. (Such intense temperatures make this transmutation instantaneous)"
     },
     {
-      "type": "runic_carving_template",
-      "recipe": "elemental_soil_water",
-      "name": "Aqueous Soil",
-      "text": "$(l:herbs/dewgonia)Dewgonia$() can grow in this aquatic soil.$(br2)Created by using a knife on elemental soil while holding a $(l:herbs/dewgonia)Dewgonia$() in your offhand, which is consumed in the process."
+      "type": "spotlight",
+      "item": "roots:elemental_soil_water",
+      "text": "$(l:herbs/dewgonia)Dewgonia$() can grow in this aquatic soil.$(br2)Created by dropping a piece of neutral elemental soil into a pond of water. (This transmutation may need some seconds to finish properly)"
     },
     {
-      "type": "runic_carving_template",
-      "recipe": "elemental_soil_air",
-      "name": "Aeros Soil",
-      "text": "$(l:herbs/cloud_berry)Cloud Berries$() can grow in this air-infused soil.$(br2)Created by using a knife on elemental soil while holding a $(l:herbs/cloud_berry)Cloud Berry$() in your offhand, which is consumed in the process."
+      "type": "spotlight",
+      "item": "roots:elemental_soil_air",
+      "text": "$(l:herbs/cloud_berry)Cloud Berries$() can grow in this air-infused soil.$(br2)Created by dropping a piece of neutral elemental soil at a really low Y level [less than 20]. (This transmutation may need some seconds to finish properly)"
     },
     {
-      "type": "runic_carving_template",
-      "recipe": "elemental_soil_earth",
-      "name": "Terra Soil",
-      "text": "$(l:herbs/stalicripe)Stalicripe$() can grow in this earthen soil.$(br2)Created by using a knife on elemental soil while holding an $(l:herbs/stalicripe)Stalicripe$() in your offhand, which is consumed in the process."
+      "type": "spotlight",
+      "item": "roots:elemental_soil_earth",
+      "text": "$(l:herbs/stalicripe)Stalicripe$() can grow in this earthen soil.$(br2)Created by dropping a piece of neutral elemental soil at a really high Y level [more than 120]. (This transmutation may need some seconds to finish properly)"
     }
   ]
 }
