@@ -1,51 +1,13 @@
 package epicsquid.roots.item;
 
-import epicsquid.mysticallib.LibRegistry;
-import epicsquid.mysticallib.model.CustomModelItem;
-import epicsquid.mysticallib.model.CustomModelLoader;
-import epicsquid.mysticallib.model.ICustomModeledObject;
-import epicsquid.mysticallib.model.IModeledObject;
-import epicsquid.mysticallib.util.Util;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import epicsquid.mysticallib.item.ItemSwordBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 
-public class ItemLivingSword extends ItemSword implements IModeledObject, ICustomModeledObject, ILivingRepair {
-
-  private boolean hasCustomModel = false;
-
+public class ItemLivingSword extends ItemSwordBase implements ILivingRepair {
   public ItemLivingSword(ToolMaterial material, String name) {
-    super(material);
-    setTranslationKey(name);
-    setRegistryName(LibRegistry.getActiveModid(), name);
-    setMaxDamage(192);
-  }
-
-  @Override
-  public int getItemEnchantability() {
-    return 22;
-  }
-
-  public ItemLivingSword setModelCustom(boolean custom) {
-    this.hasCustomModel = custom;
-    return this;
-  }
-
-  @Override
-  public void initModel() {
-    ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "handlers"));
-  }
-
-  @Override
-  public void initCustomModel() {
-    if (this.hasCustomModel) {
-      CustomModelLoader.itemmodels.put(getRegistryName(),
-          new CustomModelItem(false, new ResourceLocation(getRegistryName().getNamespace() + ":items/" + getRegistryName().getPath())));
-    }
+    super(material, name, 0, 192, 22);
   }
 
   @Override
