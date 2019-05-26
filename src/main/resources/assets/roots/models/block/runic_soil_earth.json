@@ -1,7 +1,7 @@
 {
     "parent": "block/cube_bottom_top",
     "textures": {
-        "bottom": "roots:blocks/earth_soil_top",
+        "bottom": "roots:blocks/runic_soil",
         "top": "roots:blocks/earth_soil_top",
         "side": "roots:blocks/earth_soil_side"
     }
