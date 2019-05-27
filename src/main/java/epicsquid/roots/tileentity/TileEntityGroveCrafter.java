@@ -1,10 +1,13 @@
 package epicsquid.roots.tileentity;
 
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.block.BlockGroveStone;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.network.fx.MessageGrowthCrafterVisualFX;
+import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.GroveCraftingRecipe;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -13,18 +16,26 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 public class TileEntityGroveCrafter extends TileBase {
   public static int GROVE_STONE_RADIUS = 10;
+
+  private Random random = new Random();
 
   public ItemStackHandler inventory = new ItemStackHandler(5);
   private BlockPos groveStone = null;
@@ -157,12 +168,43 @@ public class TileEntityGroveCrafter extends TileBase {
       return true;
     }
 
+    for (EnumFacing facing : EnumFacing.values()) {
+      TileEntity te = world.getTileEntity(getPos().offset(facing));
+      if (te != null) {
+        IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        if (cap != null) {
+          List<ItemStack> newItems = new ArrayList<>();
+          for (ItemStack toPut : items) {
+            ItemStack result = ItemHandlerHelper.insertItemStacked(cap, toPut, false);
+            if (!result.isEmpty()) {
+              newItems.add(result);
+            }
+          }
+          items = newItems;
+        }
+      }
+    }
+
     for (ItemStack stack : items) {
       EntityItem item = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.1, pos.getZ() + 0.5, stack);
       world.spawnEntity(item);
     }
 
+    MessageGrowthCrafterVisualFX packet = new MessageGrowthCrafterVisualFX(getPos(), world.provider.getDimension());
+    PacketHandler.sendToAllTracking(packet, this);
+
     return true;
+  }
+
+  public void doVisual () {
+    if (world.isRemote) {
+      for (int i = 0; i < 40; i++) {
+        // TODO: Use whirlwind of leaf particles!
+        ParticleUtil.spawnParticleFiery(world, getPos().getX() + 0.125f + 0.75f * random.nextFloat(), getPos().getY() + 1.25f + 0.5f * random.nextFloat(),
+                getPos().getZ() + 0.125f + 0.75f * random.nextFloat(), 0.03125f * (random.nextFloat() - 0.5f), 0.125f * random.nextFloat(),
+                0.03125f * (random.nextFloat() - 0.5f), 255.0f, 224.0f, 32.0f, 0.75f, 9.0f + 9.0f * random.nextFloat(), 40);
+      }
+    }
   }
 }
 
