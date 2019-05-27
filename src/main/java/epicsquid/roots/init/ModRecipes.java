@@ -461,6 +461,10 @@ public class ModRecipes {
     return null;
   }
 
+  public static Map<ResourceLocation, GroveCraftingRecipe> getGroveCraftingRecipes() {
+    return groveCraftingRecipes;
+  }
+
   @Nullable
   public static GroveCraftingRecipe getGroveCraftingRecipe(List<ItemStack> items) {
     for (GroveCraftingRecipe recipe : groveCraftingRecipes.values()) {
