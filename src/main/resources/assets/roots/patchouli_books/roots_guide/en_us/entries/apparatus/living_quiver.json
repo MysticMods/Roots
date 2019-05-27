@@ -10,7 +10,7 @@
         "text": "Reinforced with wildwood, this quiver has the ability to augment normal arrows or even grow arrows from itself, at the cost of durability.$(br2)It can even consume arrows stuck into the ground nearby, if you get close enough and can obtain the proper leverage, although arrows may break in the process."
       },
       {
-        "type": "ritual_crafting_template",
+        "type": "grove_crafting_template",
         "recipe": "living_quiver"
       },
       {
