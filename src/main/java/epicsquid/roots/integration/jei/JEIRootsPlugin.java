@@ -7,6 +7,8 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.jei.carving.RunicCarvingCategory;
 import epicsquid.roots.integration.jei.carving.RunicCarvingWrapper;
+import epicsquid.roots.integration.jei.grove.GroveCategory;
+import epicsquid.roots.integration.jei.grove.GroveWrapper;
 import epicsquid.roots.integration.jei.mortar.MortarCategory;
 import epicsquid.roots.integration.jei.mortar.MortarWrapper;
 import epicsquid.roots.integration.jei.ritual.RitualCategory;
@@ -15,10 +17,7 @@ import epicsquid.roots.integration.jei.ritual.RitualCraftingWrapper;
 import epicsquid.roots.integration.jei.ritual.RitualWrapper;
 import epicsquid.roots.integration.jei.shears.RunicShearsCategory;
 import epicsquid.roots.integration.jei.shears.RunicShearsWrapper;
-import epicsquid.roots.recipe.MortarRecipe;
-import epicsquid.roots.recipe.PyreCraftingRecipe;
-import epicsquid.roots.recipe.RunicCarvingRecipe;
-import epicsquid.roots.recipe.RunicShearRecipe;
+import epicsquid.roots.recipe.*;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellBase;
@@ -50,7 +49,8 @@ public class JEIRootsPlugin implements IModPlugin {
         new RunicCarvingCategory(helper),
         new RitualCraftingCategory(helper),
         new MortarCategory(helper),
-        new RitualCategory(helper)
+        new RitualCategory(helper),
+        new GroveCategory(helper)
     );
   }
 
@@ -62,6 +62,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(MortarRecipe.class, MortarWrapper::new, MORTAR_AND_PESTLE);
     registry.handleRecipes(SpellBase.class, MortarWrapper::new, MORTAR_AND_PESTLE);
     registry.handleRecipes(RitualBase.class, RitualWrapper::new, RITUAL);
+    registry.handleRecipes(GroveCraftingRecipe.class, GroveWrapper::new, GROVE_CRAFTING);
 
     registry.addRecipes(ModRecipes.getRunicShearRecipes().values(), RUNIC_SHEARS);
     registry.addRecipes(ModRecipes.getRunicCarvingRecipes(), RUNIC_CARVING);
@@ -69,6 +70,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipes(ModRecipes.getMortarRecipes(), MORTAR_AND_PESTLE);
     registry.addRecipes(SpellRegistry.spellRegistry.values(), MORTAR_AND_PESTLE);
     registry.addRecipes(RitualRegistry.ritualRegistry.values(), RITUAL);
+    registry.addRecipes(ModRecipes.getGroveCraftingRecipes().values(), GROVE_CRAFTING);
 
     registry.addRecipeCatalyst(new ItemStack(ModItems.runic_shears), RUNIC_SHEARS);
     registry.addRecipeCatalyst(new ItemStack(ModItems.wood_knife), RUNIC_CARVING);
@@ -76,13 +78,14 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModItems.iron_knife), RUNIC_CARVING);
     registry.addRecipeCatalyst(new ItemStack(ModItems.gold_knife), RUNIC_CARVING);
     registry.addRecipeCatalyst(new ItemStack(ModItems.diamond_knife), RUNIC_CARVING);
-    registry.addRecipeCatalyst(new ItemStack(ModItems.copper_knife), RUNIC_CARVING);
-    registry.addRecipeCatalyst(new ItemStack(ModItems.silver_knife), RUNIC_CARVING);
+    registry.addRecipeCatalyst(new ItemStack(epicsquid.mysticalworld.init.ModItems.copper_knife), RUNIC_CARVING);
+    registry.addRecipeCatalyst(new ItemStack(epicsquid.mysticalworld.init.ModItems.silver_knife), RUNIC_CARVING);
+    registry.addRecipeCatalyst(new ItemStack(epicsquid.mysticalworld.init.ModItems.amethyst_knife), RUNIC_CARVING);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.bonfire), RITUAL_CRAFTING);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.mortar), MORTAR_AND_PESTLE);
     registry.addRecipeCatalyst(new ItemStack(ModItems.pestle), MORTAR_AND_PESTLE);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.bonfire), RITUAL);
-    registry.addRecipeCatalyst(new ItemStack(ModBlocks.grove_stone), GROVE_CRAFTING);
+    registry.addRecipeCatalyst(new ItemStack(ModBlocks.grove_crafter), GROVE_CRAFTING);
 
     registry.addIngredientInfo(new ItemStack(ModItems.terra_moss), VanillaTypes.ITEM, I18n.format("jei.roots.terra_moss.desc"));
     registry.addIngredientInfo(new ItemStack(ModItems.terra_spores), VanillaTypes.ITEM, I18n.format("jei.roots.terra_spores.desc"));
