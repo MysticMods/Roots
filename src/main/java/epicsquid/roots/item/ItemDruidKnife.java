@@ -1,14 +1,12 @@
 package epicsquid.roots.item;
 
-import com.google.common.collect.Sets;
-import epicsquid.mysticallib.item.ItemToolBase;
+import epicsquid.mysticallib.item.ItemKnifeBase;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.RunicCarvingRecipe;
 import epicsquid.roots.util.ItemSpawnUtil;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -21,25 +19,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-import java.util.Collections;
-import java.util.Set;
 
-public class ItemKnife extends ItemToolBase {
+public class ItemDruidKnife extends ItemKnifeBase {
 
-  public ItemKnife(String name, ToolMaterial material) {
-    super(name, 2.0f, -1.6f, material, Sets.newHashSet(Blocks.PLANKS, Blocks.LOG, Blocks.LOG2));
-  }
-
-  @Override
-  public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-    stack.damageItem(1, attacker);
-    return true;
-  }
-
-  @Override
-  @Nonnull
-  public Set<String> getToolClasses(ItemStack stack) {
-    return Collections.singleton("druidKnife");
+  public ItemDruidKnife(String name, ToolMaterial material) {
+    super(name, material);
   }
 
   @Override

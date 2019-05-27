@@ -3,7 +3,7 @@ package epicsquid.roots.block;
 import epicsquid.mysticallib.block.BlockTEBase;
 import epicsquid.roots.Roots;
 import epicsquid.roots.gui.GuiHandler;
-import epicsquid.roots.item.ItemKnife;
+import epicsquid.roots.item.ItemDruidKnife;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -38,7 +38,7 @@ public class BlockGroveCrafter extends BlockTEBase {
 
   @Override
   public boolean onBlockActivated(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing face, float hitX, float hitY, float hitZ) {
-    if (player.getHeldItem(hand).getItem() instanceof ItemKnife) {
+    if (player.getHeldItem(hand).getItem() instanceof ItemDruidKnife) {
       if (super.onBlockActivated(world, pos, state, player, hand, face, hitX, hitY, hitZ)) return true;
     }
 
