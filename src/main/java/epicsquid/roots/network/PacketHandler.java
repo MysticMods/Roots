@@ -33,5 +33,6 @@ public class PacketHandler {
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageHarvestCompleteFX.MessageHolder.class, MessageHarvestCompleteFX.class, Side.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageGroveCompleteFX.MessageHolder.class, MessageGroveCompleteFX.class, Side.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageGroveTickFX.MessageHolder.class, MessageGroveTickFX.class, Side.CLIENT);
+    epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageGrowthCrafterVisualFX.MessageHolder.class, MessageGrowthCrafterVisualFX.class, Side.CLIENT);
   }
 }
