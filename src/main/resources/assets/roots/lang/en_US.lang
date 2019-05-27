@@ -157,8 +157,6 @@ item.stone_knife.name=Stone Knife
 item.iron_knife.name=Iron Knife
 item.gold_knife.name=Golden Knife
 item.diamond_knife.name=Diamond Knife
-item.silver_knife.name=Silver Knife
-item.copper_knife.name=Copper Knife
 
 # Advancements
 advancement.roots.root=The Root of Magic

@@ -11,7 +11,7 @@ import epicsquid.roots.entity.spell.EntityPetalShell;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.integration.baubles.pouch.BaubleBeltCapabilityHandler;
-import epicsquid.roots.item.ItemKnife;
+import epicsquid.roots.item.ItemDruidKnife;
 import epicsquid.roots.item.ItemPouch;
 import epicsquid.roots.network.MessagePlayerDataUpdate;
 import epicsquid.roots.network.MessagePlayerGroveUpdate;
@@ -62,7 +62,7 @@ public class EventManager {
     if (event.getHarvester() != null){
       ItemStack tool = event.getHarvester().getHeldItem(EnumHand.MAIN_HAND);
       if (!(tool.isEmpty())){
-        if (tool.getItem() instanceof ItemKnife){
+        if (tool.getItem() instanceof ItemDruidKnife){
           if (event.getState().getBlock() instanceof BlockLog){
             event.getDrops().clear();
             ItemStack bark = new ItemStack(ModItems.bark_oak,1);

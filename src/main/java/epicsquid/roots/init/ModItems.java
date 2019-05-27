@@ -6,6 +6,7 @@ import epicsquid.mysticallib.item.ItemArrowBase;
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.item.ItemFoodBase;
 import epicsquid.mysticallib.item.ItemSeedBase;
+import epicsquid.mysticallib.material.MaterialTypes;
 import epicsquid.roots.Roots;
 import epicsquid.roots.item.*;
 import net.minecraft.block.Block;
@@ -104,17 +105,17 @@ public class ModItems {
 
     event.addItem(runic_shears = new ItemRunicShears("runic_shears").setModelCustom(true).setCreativeTab(Roots.tab));
 
-    event.addItem(wood_knife = new ItemKnife("wood_knife", ToolMaterial.WOOD).setCreativeTab(Roots.tab));
-    event.addItem(stone_knife = new ItemKnife("stone_knife", ToolMaterial.STONE).setCreativeTab(Roots.tab));
-    event.addItem(iron_knife = new ItemKnife("iron_knife", ToolMaterial.IRON).setCreativeTab(Roots.tab));
-    event.addItem(diamond_knife = new ItemKnife("diamond_knife", ToolMaterial.DIAMOND).setCreativeTab(Roots.tab));
-    event.addItem(gold_knife = new ItemKnife("gold_knife", ToolMaterial.GOLD).setCreativeTab(Roots.tab));
+    MaterialTypes.addMaterial("vanilla:wood", ToolMaterial.WOOD, ToolMaterial.WOOD.getAttackDamage(), -1.7f);
+    MaterialTypes.addMaterial("vanilla:stone", ToolMaterial.STONE, ToolMaterial.STONE.getAttackDamage(), -1.7f);
+    MaterialTypes.addMaterial("vanilla:iron", ToolMaterial.IRON, ToolMaterial.IRON.getAttackDamage(), -1.5f);
+    MaterialTypes.addMaterial("vanilla:diamond", ToolMaterial.DIAMOND, ToolMaterial.DIAMOND.getAttackDamage(), -1.0f);
+    MaterialTypes.addMaterial("vanilla:gold", ToolMaterial.GOLD, ToolMaterial.GOLD.getAttackDamage(), -1.0f);
 
-    ToolMaterial COPPER = EnumHelper.addToolMaterial("ROOTS:COPPER", 1, 175, 4.0f, 1.0f, 7);
-    event.addItem(copper_knife = new ItemKnife("copper_knife", COPPER).setCreativeTab(Roots.tab));
-
-    ToolMaterial SILVER = EnumHelper.addToolMaterial("ROOTS:SILVER", 1, 75, 6.0f, 1.0f, 25);
-    event.addItem(silver_knife = new ItemKnife("silver_knife", SILVER).setCreativeTab(Roots.tab));
+    event.addItem(wood_knife = new ItemDruidKnife("wood_knife", ToolMaterial.WOOD).setCreativeTab(Roots.tab));
+    event.addItem(stone_knife = new ItemDruidKnife("stone_knife", ToolMaterial.STONE).setCreativeTab(Roots.tab));
+    event.addItem(iron_knife = new ItemDruidKnife("iron_knife", ToolMaterial.IRON).setCreativeTab(Roots.tab));
+    event.addItem(diamond_knife = new ItemDruidKnife("diamond_knife", ToolMaterial.DIAMOND).setCreativeTab(Roots.tab));
+    event.addItem(gold_knife = new ItemDruidKnife("gold_knife", ToolMaterial.GOLD).setCreativeTab(Roots.tab));
 
     event.addItem(cooked_aubergine = new ItemFoodBase("cooked_aubergine", 5, false).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(stuffed_aubergine = new ItemFoodBase("stuffed_aubergine", 11, false).setModelCustom(true).setCreativeTab(Roots.tab));
