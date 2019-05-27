@@ -133,8 +133,6 @@ public class TileEntityGroveCrafter extends TileBase {
   }
 
   public GroveCraftingRecipe getRecipe() {
-    if (!hasValidGroveStone()) return null;
-
     return ModRecipes.getGroveCraftingRecipe(getContents());
   }
 

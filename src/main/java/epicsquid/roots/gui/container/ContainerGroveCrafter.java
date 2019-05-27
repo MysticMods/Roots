@@ -7,21 +7,14 @@
 
 package epicsquid.roots.gui.container;
 
-import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.GroveCraftingRecipe;
 import epicsquid.roots.tileentity.TileEntityGroveCrafter;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.play.server.SPacketSetSlot;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
@@ -237,6 +230,10 @@ public class ContainerGroveCrafter extends Container {
     if (recipe == null || !recipe.matches(items)) {
       recipe = crafter.getRecipe();
     }
+  }
+
+  public boolean getValidStone () {
+    return crafter.hasValidGroveStone();
   }
 
   public GroveCraftingRecipe getRecipe() {
