@@ -58,7 +58,7 @@ public class RitualCategory implements IRecipeCategory<RitualWrapper> {
     group.set(4, recipe.getRecipe().get(4));
     group.init(5, false, 99, 23);
     group.set(5, new ItemStack(recipe.getIcon()));
-    group.init(6, true, 26, 30);
+    group.init(6, true, 26, 29);
     group.set(6, new ItemStack(ModBlocks.bonfire));
   }
 }
