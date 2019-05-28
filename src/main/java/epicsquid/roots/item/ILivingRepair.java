@@ -8,11 +8,10 @@ import net.minecraft.world.World;
 
 public interface ILivingRepair {
   default void update(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-    if (isSelected && entityIn instanceof EntityPlayer) {
+    if (entityIn instanceof EntityPlayer) {
       if (stack.equals(((EntityPlayer) entityIn).getActiveItemStack())) return;
     }
-    int chance = Util.rand.nextInt(60);
-    if(chance == 0){
+    if(Util.rand.nextInt(40) == 0){
       stack.setItemDamage(stack.getItemDamage()-1);
     }
   }
