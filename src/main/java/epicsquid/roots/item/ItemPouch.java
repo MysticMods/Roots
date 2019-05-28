@@ -11,6 +11,7 @@ import epicsquid.roots.gui.GuiHandler;
 import epicsquid.roots.gui.Keybinds;
 import epicsquid.roots.handler.PouchHandler;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.integration.baubles.pouch.PouchEquipHandler;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.ITooltipFlag;
@@ -25,6 +26,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.settings.KeyBindingMap;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandler;
@@ -34,7 +36,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemPouch extends ItemBase implements IBauble {
+public class ItemPouch extends ItemBase {
 
     public ItemPouch(@Nonnull String name) {
         super(name);
@@ -67,44 +69,17 @@ public class ItemPouch extends ItemBase implements IBauble {
     @Nonnull
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
-        ItemStack toEquip = stack.copy();
-        if (player.isSneaking()) {
+        boolean isBaublesLoaded = Loader.isModLoaded("baubles");
+        if (player.isSneaking() || !isBaublesLoaded) {
             player.openGui(Roots.getInstance(), GuiHandler.POUCH_ID, world, 0, 0, 0);
             return new ActionResult<>(EnumActionResult.SUCCESS, stack);
         }
-        if(canEquip(toEquip, player)) {
-            if(world.isRemote)
-                return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
-
-            IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
-            for(int i = 0; i < baubles.getSlots(); i++) {
-                if(baubles.isItemValidForSlot(i, toEquip, player)) {
-                    ItemStack stackInSlot = baubles.getStackInSlot(i);
-                    if(stackInSlot.isEmpty() || ((IBauble) stackInSlot.getItem()).canUnequip(stackInSlot, player)) {
-                        baubles.setStackInSlot(i, ItemStack.EMPTY);
-
-                        baubles.setStackInSlot(i, toEquip);
-                        ((IBauble) toEquip.getItem()).onEquipped(toEquip, player);
-
-                        stack.shrink(1);
-                        player.world.playSound(null, player.getPosition(), SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, SoundCategory.PLAYERS, 0.5F, 1.0F );
-
-                        if(!stackInSlot.isEmpty()) {
-                            ((IBauble) stackInSlot.getItem()).onUnequipped(stackInSlot, player);
-
-                            if(stack.isEmpty()) {
-                                return ActionResult.newResult(EnumActionResult.SUCCESS, stackInSlot);
-                            } else {
-                                ItemHandlerHelper.giveItemToPlayer(player, stackInSlot);
-                            }
-                        }
-
-                        return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
-                    }
-                }
+        if (isBaublesLoaded) {
+            if (!world.isRemote){
+                PouchEquipHandler.tryEquipPouch(player,stack);
             }
+                return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
         }
-
         return ActionResult.newResult(EnumActionResult.PASS, stack);
     }
 
@@ -161,15 +136,15 @@ public class ItemPouch extends ItemBase implements IBauble {
         }
         return false;
     }
- @SideOnly(Side.CLIENT)
+
+    @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(TextFormatting.GREEN + I18n.format("pouch.tooltip"));
+        if(Loader.isModLoaded("baubles")){
+        tooltip.add(TextFormatting.GREEN + I18n.format("roots.tooltip.pouch",Keybinds.POUCH_KEYBIND.getDisplayName()));
+        }else {
+            tooltip.add(TextFormatting.GREEN + I18n.format("roots.tooltip.pouch2", Keybinds.POUCH_KEYBIND.getDisplayName()));
+        }
         super.addInformation(stack, worldIn, tooltip, flagIn);
-    }
-
-    @Override
-    public BaubleType getBaubleType(ItemStack itemStack) {
-        return this.getBaubleType(itemStack);
     }
 }

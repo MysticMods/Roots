@@ -71,7 +71,8 @@ roots.tooltip.staff.selected=Selected Slot:
 roots.tooltip.pouch_divider=: x
 roots.tooltip.trap_paper_health=Health: 
 roots.tooltip.trap_paper_health_divider= /
-pouch.tooltip=Sneak-Right-Click to open pouch.
+roots.tooltip.pouch=Sneak-Right-Click or %s to open pouch.
+roots.tooltip.pouch2=Right-Click or %s to open pouch.
 
 roots.info.staff.slot_and_spell=Selected Slot (%d) has spell: %s
 roots.info.staff.no_slots=Your staff has no room for new spells!
