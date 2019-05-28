@@ -154,7 +154,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
               inventory.extractItem(i, 1, false);
             }
             markDirty();
-            PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+            updatePacketViaState();
+            //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+            return true; // It seems unlikely but is it possible for this to cascade in bad circumstances?
           }
         }
 
@@ -172,7 +174,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
             inventory_storage.insertItem(i, item, false);
           }
           markDirty();
-          PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+          updatePacketViaState();
+          //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+          return true; // Cf above
         }
       } else {
         for (int i = 0; i < 5; i++) {
@@ -196,7 +200,8 @@ public class TileEntityBonfire extends TileBase implements ITickable {
                 player.setHeldItem(hand, heldItem);
               }
               markDirty();
-              PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+              updatePacketViaState();
+              // PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
               return true;
             }
           }
@@ -240,7 +245,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           ItemStack extracted = inventory.extractItem(i, inventory.getStackInSlot(i).getCount(), false);
           ItemSpawnUtil.spawnItem(world, player.posX, player.posY + 1, player.posZ, false, extracted, 0, -1);
           markDirty();
-          PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+          updatePacketViaState();
+          // The above should do this -v
+          // PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
           pickupDelay = 40;
           return true;
         }
