@@ -67,7 +67,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
 
   public ItemStackHandler inventory_storage = new ItemStackHandler(5);
 
-  public void clearStorage () {
+  public void clearStorage() {
     for (int i = 0; i < 5; i++) {
       inventory_storage.setStackInSlot(i, ItemStack.EMPTY);
     }
@@ -125,19 +125,22 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     return lastRecipeUsed;
   }
 
+  public PyreCraftingRecipe getCurrentRecipe() {
+    List<ItemStack> stacks = new ArrayList<>();
+    for (int i = 0; i < inventory.getSlots(); i++) {
+      ItemStack stack = inventory.extractItem(i, 1, false);
+      stacks.add(stack);
+    }
+
+    return ModRecipes.getCraftingRecipe(stacks);
+  }
+
   @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand,
-      @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
+                          @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
     if (!heldItem.isEmpty()) {
       if (heldItem.getItem() instanceof ItemFlintAndSteel) {
-        List<ItemStack> stacks = new ArrayList<>();
-        for (int i = 0; i < inventory.getSlots(); i++) {
-          ItemStack stack = inventory.getStackInSlot(i).copy();
-          stack.setCount(1);
-          stacks.add(stack);
-        }
-
         RitualBase ritual = RitualRegistry.getRitual(this, player);
         if (ritual != null) {
           if (ritual.canFire(this, player)) {
@@ -155,8 +158,8 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           }
         }
 
-        PyreCraftingRecipe recipe = ModRecipes.getCraftingRecipe(stacks);
-        if(recipe != null){
+        PyreCraftingRecipe recipe = getCurrentRecipe();
+        if (recipe != null) {
           this.lastRecipeUsed = recipe;
           this.lastRitualUsed = null;
           this.lastUsedIngredients = recipe.getIngredients();
@@ -165,8 +168,8 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           this.burnTime = recipe.getBurnTime();
           this.doBigFlame = true;
           for (int i = 0; i < inventory.getSlots(); i++) {
-              ItemStack item = inventory.extractItem(i, 1, false);
-              inventory_storage.insertItem(i, item, false);
+            ItemStack item = inventory.extractItem(i, 1, false);
+            inventory_storage.insertItem(i, item, false);
           }
           markDirty();
           PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
@@ -175,17 +178,16 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         for (int i = 0; i < 5; i++) {
           if (inventory.getStackInSlot(i).isEmpty()) {
             ItemStack toInsert = heldItem.copy();
-            if(!player.isSneaking()){
+            if (!player.isSneaking()) {
               toInsert.setCount(1);
             }
 
             ItemStack attemptedInsert = inventory.insertItem(i, toInsert, true);
             if (attemptedInsert.isEmpty()) {
               inventory.insertItem(i, toInsert, false);
-              if(!player.isSneaking()){
+              if (!player.isSneaking()) {
                 heldItem.setCount(heldItem.getCount() - 1);
-              }
-              else{
+              } else {
                 player.setHeldItem(hand, ItemStack.EMPTY);
               }
               if (heldItem.getCount() <= 0) {
@@ -254,6 +256,10 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     }
   }
 
+  public int getBurnTime() {
+    return burnTime;
+  }
+
   @Override
   public void update() {
     this.ticker += 1.0f;
@@ -264,8 +270,8 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     if (world.isRemote && this.doBigFlame) {
       for (int i = 0; i < 40; i++) {
         ParticleUtil.spawnParticleFiery(world, getPos().getX() + 0.125f + 0.75f * random.nextFloat(), getPos().getY() + 0.75f + 0.5f * random.nextFloat(),
-                getPos().getZ() + 0.125f + 0.75f * random.nextFloat(), 0.03125f * (random.nextFloat() - 0.5f), 0.125f * random.nextFloat(),
-                0.03125f * (random.nextFloat() - 0.5f), 255.0f, 224.0f, 32.0f, 0.75f, 9.0f + 9.0f * random.nextFloat(), 40);
+            getPos().getZ() + 0.125f + 0.75f * random.nextFloat(), 0.03125f * (random.nextFloat() - 0.5f), 0.125f * random.nextFloat(),
+            0.03125f * (random.nextFloat() - 0.5f), 255.0f, 224.0f, 32.0f, 0.75f, 9.0f + 9.0f * random.nextFloat(), 40);
       }
     }
     if (doBigFlame) {
@@ -288,14 +294,14 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       if (burnTime == 0) {
         BlockBonfire.setState(false, world, pos);
         //Check if it is a ritual, if so try and see if it has new ritual fuel.
-        if(this.craftingResult.isEmpty() && this.lastRitualUsed != null){
+        if (this.craftingResult.isEmpty() && this.lastRitualUsed != null) {
           List<ItemStack> stacks = new ArrayList<>();
           for (int i = 0; i < inventory.getSlots(); i++) {
             ItemStack stack = inventory.getStackInSlot(i).copy();
             stack.setCount(1);
             stacks.add(stack);
           }
-          if(ListUtil.stackListsMatch(stacks, this.lastRitualUsed.getRecipe())){
+          if (ListUtil.stackListsMatch(stacks, this.lastRitualUsed.getRecipe())) {
             lastRitualUsed.doEffect(world, getPos());
             this.burnTime = this.lastRitualUsed.getDuration();
             this.doBigFlame = true;
@@ -308,7 +314,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         }
 
         //Spawn item if crafting recipe
-        if(!world.isRemote && !this.craftingResult.isEmpty()) {
+        if (!world.isRemote && !this.craftingResult.isEmpty()) {
           ItemStack result = this.craftingResult.copy();
           if (this.lastRecipeUsed != null) {
             this.lastRecipeUsed.postCraft(result, inventory_storage);
@@ -352,7 +358,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     if (nearbySnowOrIce.isEmpty()) {
       return;
     }
-    BlockPos posToMelt = nearbySnowOrIce.get(nearbySnowOrIce.size() > 1 ? random.nextInt(nearbySnowOrIce.size() -1 ) : 0);
+    BlockPos posToMelt = nearbySnowOrIce.get(nearbySnowOrIce.size() > 1 ? random.nextInt(nearbySnowOrIce.size() - 1) : 0);
     if (world.getBlockState(posToMelt).getMaterial() == Material.SNOW) {
       world.setBlockState(posToMelt, Blocks.AIR.getDefaultState());
     } else if (world.getBlockState(posToMelt).getMaterial() == Material.ICE) {
@@ -360,17 +366,17 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     }
   }
 
-  private void pickupItem(){
+  private void pickupItem() {
     if ((int) this.ticker % 20 == 0 && pickupDelay == 0) {
       List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class,
-              new AxisAlignedBB(getPos().getX(), getPos().getY(), getPos().getZ(), getPos().getX() + 1, getPos().getY() + 1, getPos().getZ() + 1));
+          new AxisAlignedBB(getPos().getX(), getPos().getY(), getPos().getZ(), getPos().getX() + 1, getPos().getY() + 1, getPos().getZ() + 1));
       for (EntityItem item : items) {
         ItemStack stack = item.getItem();
-        if(item.getCustomNameTag().equalsIgnoreCase("bonfire")){
+        if (item.getCustomNameTag().equalsIgnoreCase("bonfire")) {
           continue;
         }
-        for(int i = 0; i < this.inventory.getSlots(); i++){
-          if(this.inventory.getStackInSlot(i).isEmpty()){
+        for (int i = 0; i < this.inventory.getSlots(); i++) {
+          if (this.inventory.getStackInSlot(i).isEmpty()) {
             ItemStack inputStack = stack.copy();
             inputStack.setCount(1);
             this.inventory.insertItem(i, inputStack, false);
@@ -384,7 +390,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     }
   }
 
-  private void insertItemFromPlayerInventory(ItemStack stack, EntityPlayer player, int slot){
+  private void insertItemFromPlayerInventory(ItemStack stack, EntityPlayer player, int slot) {
     for (int i = 0; i < 5; i++) {
       if (inventory.getStackInSlot(i).isEmpty()) {
         ItemStack toInsert = stack.copy();
@@ -399,8 +405,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     }
   }
 
-  public boolean getState()
-  {
+  public boolean getState() {
     return isBurning;
   }
 

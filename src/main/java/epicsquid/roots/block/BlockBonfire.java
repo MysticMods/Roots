@@ -2,6 +2,11 @@ package epicsquid.roots.block;
 
 import epicsquid.mysticallib.block.BlockTEBase;
 import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.recipe.PyreCraftingRecipe;
+import epicsquid.roots.ritual.RitualBase;
+import epicsquid.roots.ritual.RitualRegistry;
+import epicsquid.roots.tileentity.TileEntityBonfire;
+import epicsquid.roots.util.types.BlockPosDimension;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -22,6 +27,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
@@ -106,5 +113,64 @@ public class BlockBonfire extends BlockTEBase {
     if (stateIn.getValue(BURNING)) {
       worldIn.playSound((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.5F, 1.0F, false);
     }
+  }
+
+  @Override
+  public boolean hasComparatorInputOverride(IBlockState state) {
+    return true;
+  }
+
+  public static Map<BlockPosDimension, RitualBase> ritualCache = new HashMap<>();
+  public static Map<BlockPosDimension, PyreCraftingRecipe> recipeCache = new HashMap<>();
+
+  @Override
+  /*
+    0 = Unlit, no recipe
+    1 = Unlit, valid recipe or ritual
+    3 = Lit, no items
+    4 = Lit, valid recipe of ritual
+    5 = Lit, valid recipe or ritual matches current ritual or recipe
+   */
+  public int getComparatorInputOverride(IBlockState blockState, World worldIn, BlockPos pos) {
+    TileEntity te = worldIn.getTileEntity(pos);
+    if (te instanceof TileEntityBonfire) {
+      TileEntityBonfire bon = (TileEntityBonfire) te;
+      boolean lit = bon.getBurnTime() != 0;
+
+      BlockPosDimension pdos = new BlockPosDimension(pos, worldIn.provider.getDimension());
+      RitualBase ritual = ritualCache.get(pdos);
+      if (ritual == null || !ritual.isRitualRecipe(bon, null)) {
+        ritual = RitualRegistry.getRitual(bon, null);
+        if (ritual != null) {
+          ritualCache.put(pdos, ritual);
+        }
+      }
+      if (ritual != null) {
+        if (bon.getLastRitualUsed().equals(ritual) && lit) return 5;
+
+        return lit ? 4 : 1;
+      }
+
+      // Check for crafting
+      if (ritual == null) {
+        PyreCraftingRecipe recipe = recipeCache.get(pdos);
+        if (recipe == null) {
+          recipe = bon.getCurrentRecipe();
+          if (recipe != null) {
+            recipeCache.put(pdos, recipe);
+          }
+        }
+        if (recipe != null) {
+        if (bon.getLastRecipeUsed().equals(recipe) && lit) return 5;
+
+          return lit ? 4 : 1;
+        }
+      }
+
+      return lit ? 3 : 0;
+    }
+
+    // Empty, no items in it
+    return 0;
   }
 }
