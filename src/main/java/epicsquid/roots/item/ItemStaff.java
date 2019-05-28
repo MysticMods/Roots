@@ -301,4 +301,15 @@ public class ItemStaff extends ItemBase {
       return Util.intColor(255, 255, 255);
     }
   }
+
+  @Override
+  public String getHighlightTip(ItemStack stack, String displayName) {
+    SpellHandler capability = SpellHandler.fromStack(stack);
+    String additional = capability.formatSelectedSpell();
+    if (additional != null) {
+      return displayName + " " + additional;
+    }
+
+    return displayName;
+  }
 }

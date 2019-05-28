@@ -4,6 +4,7 @@ import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -39,5 +40,18 @@ public class ItemSpellDust extends ItemBase {
     if (spell == null) return;
 
     spell.addToolTip(tooltip);
+  }
+
+  @Override
+  public String getItemStackDisplayName(ItemStack stack) {
+    String displayName = super.getItemStackDisplayName(stack);
+
+    SpellHandler capability = SpellHandler.fromStack(stack);
+    String additional = capability.formatSelectedSpell();
+    if (additional != null) {
+      return displayName + " " + additional;
+    }
+
+    return displayName;
   }
 }
