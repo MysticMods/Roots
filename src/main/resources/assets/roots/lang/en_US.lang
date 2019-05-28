@@ -301,3 +301,14 @@ config.roots.subcategory.disable_spells=Enable / Disable Spells
 config.roots.subcategory.spell_features=Spell Features
 config.roots.subcategory.disable_rituals=Enable / Disable Rituals
 config.roots.subcategory.worldgen=World Generation Settings
+
+# WAILA/TOP/etc
+roots.hud.grove_stone.valid=Valid stone
+roots.hud.pyre.recipe=Crafting: %s
+roots.hud.pyre.ritual=Ritual: %s
+roots.hud.pyre.progress=Progress: %.2f minutes remaining
+
+roots.hud.top.pyre.recipe=Crafting:
+roots.hud.top.pyre.ritual=Ritual:
+roots.hud.top.pyre.progress=Progress:
+roots.hud.top.pyre.progress_info=minutes remaining
