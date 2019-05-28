@@ -1,5 +1,6 @@
 package epicsquid.roots.proxy;
 
+import epicsquid.roots.Roots;
 import epicsquid.roots.config.GroveCraftingConfig;
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.init.HerbRegistry;
@@ -11,11 +12,14 @@ import epicsquid.roots.rune.RuneRegistry;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.util.OfferingUtil;
+import epicsquid.roots.world.village.ComponentDruidHut;
+import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
 public class CommonProxy {
   public void preInit(FMLPreInitializationEvent event) {
