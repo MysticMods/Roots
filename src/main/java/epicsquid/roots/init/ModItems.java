@@ -31,7 +31,7 @@ public class ModItems {
   // All mod items
   public static Item pestle, component_pouch, spell_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, living_quiver,
           sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, apothecary_pouch,
-  copper_knife, silver_knife, petals, flour, cooked_aubergine, stuffed_aubergine, living_arrow, runic_dust, seeds, cooked_seeds, cooked_pereskia, fay_leather;
+  petals, flour, cooked_aubergine, stuffed_aubergine, living_arrow, runic_dust, seeds, cooked_seeds, cooked_pereskia, fay_leather;
 
   public static Item moonglow_leaf, aubergine, pereskia, terra_spores, terra_moss, spirit_herb, wildewheet,
           baffle_cap, bark_oak, bark_birch, bark_spruce, bark_jungle, bark_dark_oak, bark_acacia, bark_wildwood;
