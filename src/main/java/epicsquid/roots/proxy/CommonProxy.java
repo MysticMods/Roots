@@ -4,6 +4,7 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.config.GroveCraftingConfig;
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.integration.chisel.RootsChisel;
 import epicsquid.roots.integration.harvest.HarvestIntegration;
 import epicsquid.roots.integration.jer.JERIntegration;
 import epicsquid.roots.recipe.RunicCarvingRecipes;
@@ -36,6 +37,9 @@ public class CommonProxy {
     RunicCarvingRecipes.initRecipes();
     if (Loader.isModLoaded("jeresources")) {
       JERIntegration.init();
+    }
+    if (Loader.isModLoaded("chisel")) {
+      RootsChisel.integrate();
     }
     //MapGenStructureIO.registerStructureComponent(ComponentDruidHut.class, Roots.MODID + ":" + "druidhut");
     //VillagerRegistry.instance().registerVillageCreationHandler(new ComponentDruidHut.CreationHandler());
