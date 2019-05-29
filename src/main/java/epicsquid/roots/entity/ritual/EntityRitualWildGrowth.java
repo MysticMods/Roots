@@ -1,5 +1,6 @@
 package epicsquid.roots.entity.ritual;
 
+import epicsquid.mysticallib.block.BlockCropBase;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
@@ -40,7 +41,10 @@ public class EntityRitualWildGrowth extends EntityRitualBase {
     }
     if (!world.isRemote) {
       if (this.ticksExisted % 250 == 0) {
-        List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), 10, 20, 10, ModBlocks.wildroot);
+        List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), 10, 20, 10, (pos) -> {
+          IBlockState state = world.getBlockState(pos);
+          return state.getBlock() == ModBlocks.wildroot && state.getValue(BlockCropBase.AGE) == 7;
+        });
         if (eligiblePositions.isEmpty()) return;
 
         BlockPos pos = eligiblePositions.get(random.nextInt(eligiblePositions.size()));
