@@ -40,6 +40,7 @@
     {
       "type": "item",
       "item": "#result",
+      "link_recipe": true,
       "framed": false,
       "x": 46,
       "y": 102

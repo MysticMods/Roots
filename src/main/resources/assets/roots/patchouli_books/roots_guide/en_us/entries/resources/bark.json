@@ -17,19 +17,19 @@
         "type": "spotlight",
         "item": "roots:bark_birch",
         "title": "Birch Bark",
-        "text": "Dropped when breaking an Birch Log with a $(l:apparatus/knives)Knife.$()"
+        "text": "Dropped when breaking a Birch Log with a $(l:apparatus/knives)Knife.$()"
       },
       {
         "type": "spotlight",
         "item": "roots:bark_spruce",
         "title": "Spruce Bark",
-        "text": "Dropped when breaking an Spruce Log with a $(l:apparatus/knives)Knife.$()"
+        "text": "Dropped when breaking a Spruce Log with a $(l:apparatus/knives)Knife.$()"
       },
       {
         "type": "spotlight",
         "item": "roots:bark_jungle",
         "title": "Jungle Bark",
-        "text": "Dropped when breaking an Jungle Log with a $(l:apparatus/knives)Knife.$()"
+        "text": "Dropped when breaking a Jungle Log with a $(l:apparatus/knives)Knife.$()"
       },
       {
         "type": "spotlight",
@@ -41,7 +41,14 @@
         "type": "spotlight",
         "item": "roots:bark_dark_oak",
         "title": "Dark Oak Bark",
-        "text": "Dropped when breaking an Dark Oak Log with a $(l:apparatus/knives)Knife.$()"
+        "text": "Dropped when breaking a Dark Oak Log with a $(l:apparatus/knives)Knife.$()"
+      },
+      {
+        "type": "spotlight",
+        "item": "roots:bark_wildwood",
+        "title": "Wildwood Bark",
+        "advancement": "roots:spirit_herb",
+        "text": "Dropped when breaking a Wildwood Log with a $(l:apparatus/knives)Knife.$()"
       }
     ]
   }

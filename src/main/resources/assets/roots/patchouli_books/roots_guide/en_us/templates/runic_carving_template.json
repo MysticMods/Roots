@@ -12,6 +12,7 @@
     {
       "type": "item",
       "item": "#rune",
+      "link_recipe": true,
       "framed": false,
       "x": 80,
       "y": 37
