@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S S",
+    "TSW",
+    "SLS"  ],
+  "key": {
+    "S": [
+      {
+        "item":  "minecraft:sapling",
+        "data": 0
+      }
+    ],
+    "L": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "logWood"
+      }
+    ],
+    "W": [
+      {
+        "item": "roots:wildroot",
+        "data": 0
+      }
+    ],
+    "T": [
+      {
+        "item": "roots:terra_moss",
+        "data": 0
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:grove_crafter",
+    "data": 0
+  },
+  "mirrored": true
+}
