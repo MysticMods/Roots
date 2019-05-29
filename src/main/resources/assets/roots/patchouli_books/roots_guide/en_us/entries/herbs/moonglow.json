@@ -13,6 +13,10 @@
     {
       "type": "ritual_crafting_template",
       "recipe": "moonglow_leaf"
+    },
+    {
+      "type": "crafting",
+      "recipe": "roots:moonglow_seed"
     }
   ]
 }
