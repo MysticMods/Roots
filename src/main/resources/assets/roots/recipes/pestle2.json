@@ -1,9 +1,10 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "  X",
     "XX ",
-    "XX "  ],
+    "XX ",
+    "  X"
+  ],
   "mirrored": true,
   "key": {
     "X": [
