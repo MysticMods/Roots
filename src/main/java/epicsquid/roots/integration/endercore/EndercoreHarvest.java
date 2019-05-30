@@ -20,7 +20,8 @@ public class EndercoreHarvest {
       BlockCropBase block = crops.get(i);
       Item seed = seeds.get(i);
 
-      FMLInterModComms.sendMessage("endercore", "addRightClickCrop", String.format("%s|%s|7|3", seed.getRegistryName().toString(), block.getRegistryName().toString()));
+      String message = String.format("%s|%s|7|0", seed.getRegistryName().toString(), block.getRegistryName().toString());
+      FMLInterModComms.sendMessage("endercore", "addRightClickCrop", message);
     }
   }
 }
