@@ -105,6 +105,7 @@ roots.spell.spell_harvest.name=Harvest
 roots.spell.spell_zephyr_slice.name=Zephyr's Slice
 roots.spell.spell_rampant_growth.name=Rampant Growth
 roots.spell.spell_supplication.name=Grove Supplication
+roots.spell.spell_fae_light.name=Fae Light
 
 roots.ritual.ritual_life.name=Healing Aura
 roots.ritual.ritual_storm.name=Heavy Storms
