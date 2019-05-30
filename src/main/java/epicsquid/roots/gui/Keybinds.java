@@ -24,8 +24,8 @@ public class Keybinds {
   private static final String ROOTS_BASE = "roots.keybinds.";
   private static final String ROOTS_GROUP = ROOTS_BASE + "group";
 
-  private static KeyBinding POUCH_KEYBIND = null;
-  private static KeyBinding QUIVER_KEYBIND = null;
+  public static KeyBinding POUCH_KEYBIND = null;
+  public static KeyBinding QUIVER_KEYBIND = null;
 
   private static KeyBinding SPELL_SLOT_1 = null;
   private static KeyBinding SPELL_SLOT_2 = null;
