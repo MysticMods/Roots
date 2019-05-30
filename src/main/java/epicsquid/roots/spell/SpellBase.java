@@ -15,8 +15,10 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public abstract class SpellBase {
   private float red1, green1, blue1;
@@ -26,8 +28,9 @@ public abstract class SpellBase {
 
   private TextFormatting textColor;
   protected EnumCastType castType = EnumCastType.INSTANTANEOUS;
-  private Map<Herb, Double> costs = new Object2DoubleOpenHashMap<>();
+  private Object2DoubleOpenHashMap<Herb> costs = new Object2DoubleOpenHashMap<>();
   private List<Ingredient> ingredients = new ArrayList<>();
+  private List<SpellModule> acceptedModules = new ArrayList<>();
 
   public enum EnumCastType {
     INSTANTANEOUS, CONTINUOUS
@@ -42,6 +45,20 @@ public abstract class SpellBase {
     this.green2 = g2;
     this.blue2 = b2;
     this.textColor = textColor;
+  }
+
+  public boolean hasModules () {
+    return !acceptedModules.isEmpty();
+  }
+
+  public SpellBase acceptModules(SpellModule ... modules) {
+    assert modules.length < 5;
+    acceptedModules.addAll(Arrays.asList(modules));
+    return this;
+  }
+
+  public List<SpellModule> getModules () {
+    return acceptedModules;
   }
 
   public SpellBase addIngredients(Object... stacks) {
@@ -91,7 +108,7 @@ public abstract class SpellBase {
     tooltip.add("" + textColor + TextFormatting.BOLD + I18n.format("roots.spell." + name + ".name") + TextFormatting.RESET);
     for(Map.Entry<Herb, Double> entry : this.costs.entrySet()){
       Herb herb = entry.getKey();
-      String d = String.format("%.3f", entry.getValue());
+      String d = String.format("%.4f", entry.getValue());
       tooltip.add(I18n.format(herb.getItem().getTranslationKey() + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
     }
   }
@@ -151,7 +168,7 @@ public abstract class SpellBase {
     return castType;
   }
 
-  public Map<Herb, Double> getCosts() {
+  public Object2DoubleOpenHashMap<Herb> getCosts() {
     return costs;
   }
 
@@ -167,5 +184,9 @@ public abstract class SpellBase {
     ItemStack stack = new ItemStack(ModItems.spell_dust);
     SpellHandler.fromStack(stack).setSpellToSlot(this);
     return stack;
+  }
+
+  public List<ItemStack> getCostItems () {
+    return costs.keySet().stream().map((herb) -> new ItemStack(herb.getItem())).collect(Collectors.toList());
   }
 }

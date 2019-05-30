@@ -40,6 +40,7 @@ public class SpellAcidCloud extends SpellBase {
         new ItemStack(ModItems.terra_moss),
         new ItemStack(ModItems.terra_moss)
     );
+    acceptModules(ModuleRegistry.module_fire);
   }
 
   @Override
