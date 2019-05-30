@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.event.FMLInterModComms;
 import java.util.Arrays;
 
 public class RootsChisel {
-  public static void integrate () {
+  public static void init() {
     for (Block block : Arrays.asList(ModBlocks.runestone, ModBlocks.runestone_brick, ModBlocks.runestone_brick_alt, ModBlocks.chiseled_runestone)) {
       NBTTagCompound tag = new NBTTagCompound();
       tag.setString("group", "rootsRunestone");
