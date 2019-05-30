@@ -40,7 +40,7 @@ public class Roots {
   public static final String DOMAIN = "roots";
   public static final String NAME = "Roots";
   public static final String VERSION = "@VERSION@";
-  public static final String DEPENDENCIES = "required-before:mysticallib;required-before:mysticalworld;before:harvest;required:patchouli";
+  public static final String DEPENDENCIES = "required-before:mysticallib;required-before:mysticalworld;before:harvest;before:chisel;before:endercore;required:patchouli";
 
   public static final ResourceLocation PACIFIST_ID = new ResourceLocation(MODID, "pacifist");
   public static final GenericTrigger<LivingDeathEvent> PACIFIST_TRIGGER = CriteriaTriggers.register(new GenericTrigger<>(PACIFIST_ID, new KillPredicate()));
