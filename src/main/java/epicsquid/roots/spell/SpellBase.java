@@ -1,6 +1,7 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.util.ListUtil;
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.init.ModItems;
@@ -13,6 +14,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,7 +60,7 @@ public abstract class SpellBase {
     return this;
   }
 
-  public List<SpellModule> getModules () {
+  public List<SpellModule> getModuleItems() {
     return acceptedModules;
   }
 
@@ -104,6 +107,7 @@ public abstract class SpellBase {
     }
   }
 
+  @SideOnly(Side.CLIENT)
   public void addToolTip(List<String> tooltip) {
     tooltip.add("" + textColor + TextFormatting.BOLD + I18n.format("roots.spell." + name + ".name") + TextFormatting.RESET);
     for(Map.Entry<Herb, Double> entry : this.costs.entrySet()){
@@ -111,6 +115,26 @@ public abstract class SpellBase {
       String d = String.format("%.4f", entry.getValue());
       tooltip.add(I18n.format(herb.getItem().getTranslationKey() + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
     }
+  }
+
+  private List<ItemStack> moduleItems = null;
+
+  @SideOnly(Side.CLIENT)
+  public List<ItemStack> getModuleStacks () {
+    if (moduleItems == null) {
+      moduleItems = new ArrayList<>();
+      String prefix = "roots.spell." + name + ".";
+      String mod = I18n.format("roots.spell.module.description");
+
+      for (SpellModule module : getModuleItems()) {
+        ItemStack stack = module.getIngredient().copy();
+        String description = I18n.format(prefix + module.getName() + ".description");
+        Util.appendLoreTag(stack, mod, description);
+        moduleItems.add(stack);
+      }
+    }
+
+    return moduleItems;
   }
 
   public SpellBase addCost(Herb herb, double amount) {
