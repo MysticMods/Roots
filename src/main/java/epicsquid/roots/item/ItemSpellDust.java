@@ -8,7 +8,11 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.event.HoverEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -40,18 +44,5 @@ public class ItemSpellDust extends ItemBase {
     if (spell == null) return;
 
     spell.addToolTip(tooltip);
-  }
-
-  @Override
-  public String getItemStackDisplayName(ItemStack stack) {
-    String displayName = super.getItemStackDisplayName(stack);
-
-    SpellHandler capability = SpellHandler.fromStack(stack);
-    String additional = capability.formatSelectedSpell();
-    if (additional != null) {
-      return displayName + " " + additional;
-    }
-
-    return displayName;
   }
 }
