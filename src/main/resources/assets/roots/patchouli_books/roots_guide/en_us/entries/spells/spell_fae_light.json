@@ -1,0 +1,17 @@
+{
+  "name": "Fae Light",
+  "icon": "roots:spell_dust",
+  "category": "spells",
+  "advancement": "roots:cloud_berry",
+
+  "pages": [
+    {
+      "type": "text",
+      "text": "Harness the Fae's light and use it to light your path."
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_fae_light"
+    }
+  ]
+}
