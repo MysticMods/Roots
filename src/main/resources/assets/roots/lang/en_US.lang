@@ -64,6 +64,7 @@ tile.wildwood_sapling.name=Wildwood Sapling
 tile.wildwood_ladder.name=Wildwood Ladder
 tile.grove_stone.name=Grove Stone
 tile.grove_crafter.name=Grove Crafter
+tile.faerie_light_block.name=Fae Light
 
 roots.tooltip.petaldust.notag=This Petal Dust has no NBT data! It is potentially prone to errors and should not be used!
 roots.tooltip.staff.notag=This Staff has no NBT data! It is potentially prone to errors and should not be used!

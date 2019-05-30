@@ -52,6 +52,9 @@ public class ModBlocks {
   public static Block wildwood_door, wildwood_trapdoor;
   public static Block wildwood_button, wildwood_pressure_plate, wildwood_fence, wildwood_ladder;
 
+  //Fae Blocks
+  public static Block faerie_light_block;
+
   /**
    * Register all block
    */
@@ -157,6 +160,9 @@ public class ModBlocks {
 
     // Wild Crafter
     event.addBlock(grove_crafter = new BlockGroveCrafter(Material.WOOD, SoundType.WOOD, 2.5f, "grove_crafter", TileEntityGroveCrafter.class)).setCreativeTab(Roots.tab);
+
+    // Fae Blocks
+    event.addBlock(faerie_light_block = new BlockFaerieLight(Material.SNOW, SoundType.SNOW,0.0f,"faerie_light_block")).setCreativeTab(Roots.tab);
 
   }
 
