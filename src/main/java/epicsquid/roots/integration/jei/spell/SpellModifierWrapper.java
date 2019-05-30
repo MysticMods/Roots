@@ -1,7 +1,6 @@
 package epicsquid.roots.integration.jei.spell;
 
 import epicsquid.roots.spell.SpellBase;
-import epicsquid.roots.spell.modules.SpellModule;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -12,7 +11,6 @@ import net.minecraft.util.text.TextFormatting;
 
 import java.awt.*;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SpellModifierWrapper implements IRecipeWrapper {
 
@@ -21,7 +19,7 @@ public class SpellModifierWrapper implements IRecipeWrapper {
 
   public SpellModifierWrapper(SpellBase recipe) {
     this.recipe = recipe;
-    this.module_items = recipe.getModules().stream().map(SpellModule::getIngredient).collect(Collectors.toList());
+    this.module_items = recipe.getModuleStacks();
   }
 
   @Override
@@ -36,10 +34,5 @@ public class SpellModifierWrapper implements IRecipeWrapper {
     String name = recipe.getTextColor() + "" + TextFormatting.BOLD + spell_name + TextFormatting.RESET;
     int x = (75 - minecraft.fontRenderer.getStringWidth(spell_name)) / 2;
     minecraft.fontRenderer.drawString(name, x, 3, Color.BLACK.getRGB());
-  }
-
-  @Override
-  public List<String> getTooltipStrings(int mouseX, int mouseY) {
-    return null;
   }
 }
