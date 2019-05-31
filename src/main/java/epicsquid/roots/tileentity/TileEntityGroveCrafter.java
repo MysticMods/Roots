@@ -28,7 +28,6 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -37,7 +36,16 @@ public class TileEntityGroveCrafter extends TileBase {
 
   private Random random = new Random();
 
-  public ItemStackHandler inventory = new ItemStackHandler(5);
+  public ItemStackHandler inventory = new ItemStackHandler(5) {
+    @Override
+    protected void onContentsChanged(int slot) {
+      TileEntityGroveCrafter.this.markDirty();
+      if (!world.isRemote) {
+        TileEntityGroveCrafter.this.updatePacketViaState();
+      }
+    }
+  };
+
   private BlockPos groveStone = null;
 
   public TileEntityGroveCrafter() {
@@ -86,7 +94,7 @@ public class TileEntityGroveCrafter extends TileBase {
     }
   }
 
-  public boolean hasValidGroveStone () {
+  public boolean hasValidGroveStone() {
     if (groveStone != null) {
       IBlockState grove = world.getBlockState(groveStone);
       if (grove.getBlock() == ModBlocks.grove_stone && grove.getValue(BlockGroveStone.VALID)) {
@@ -196,13 +204,13 @@ public class TileEntityGroveCrafter extends TileBase {
     return true;
   }
 
-  public void doVisual () {
+  public void doVisual() {
     if (world.isRemote) {
       for (int i = 0; i < 40; i++) {
         // TODO: Use whirlwind of leaf particles!
         ParticleUtil.spawnParticleFiery(world, getPos().getX() + 0.125f + 0.75f * random.nextFloat(), getPos().getY() + 1.25f + 0.5f * random.nextFloat(),
-                getPos().getZ() + 0.125f + 0.75f * random.nextFloat(), 0.03125f * (random.nextFloat() - 0.5f), 0.125f * random.nextFloat(),
-                0.03125f * (random.nextFloat() - 0.5f), 255.0f, 224.0f, 32.0f, 0.75f, 9.0f + 9.0f * random.nextFloat(), 40);
+            getPos().getZ() + 0.125f + 0.75f * random.nextFloat(), 0.03125f * (random.nextFloat() - 0.5f), 0.125f * random.nextFloat(),
+            0.03125f * (random.nextFloat() - 0.5f), 255.0f, 224.0f, 32.0f, 0.75f, 9.0f + 9.0f * random.nextFloat(), 40);
       }
     }
   }
