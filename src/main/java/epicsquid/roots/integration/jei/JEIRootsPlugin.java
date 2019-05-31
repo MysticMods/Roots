@@ -122,6 +122,8 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_log), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood.desc"));
     registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_sapling), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood_sapling.desc"));
     registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_leaves), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood_leaves.desc"));
+
+    registry.getRecipeTransferRegistry().addRecipeTransferHandler(new GroveCrafterTransfer());
   }
 
   @Override
