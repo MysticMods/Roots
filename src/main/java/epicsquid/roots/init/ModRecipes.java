@@ -752,6 +752,14 @@ public class ModRecipes {
             new ItemStack(ModItems.terra_moss),
             new ItemStack(ModItems.spirit_herb)));
 
+    addCraftingRecipe("wildwood_bow",
+        new GroveCraftingRecipe(new ItemStack(ModItems.wildwood_bow), 2).addIngredients(
+            new ItemStack(Items.BOW),
+            new ItemStack(ModItems.bark_wildwood),
+            new ItemStack(ModItems.bark_wildwood),
+            new ItemStack(ModItems.terra_moss),
+            new ItemStack(ModItems.spirit_herb)));
+
     addCraftingRecipe("runic_shears",
         new GroveCraftingRecipe(new ItemStack(ModItems.runic_shears), 1).addIngredients(
             new ItemStack(Items.SHEARS),
