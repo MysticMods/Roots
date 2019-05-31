@@ -2,6 +2,7 @@ package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemBowBase;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -31,5 +32,10 @@ public class ItemWildwoodBow extends ItemBowBase {
         return entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack ? 1.0F : 0.0F;
       }
     });
+  }
+
+  @Override
+  public EnumRarity getRarity(ItemStack stack) {
+    return EnumRarity.RARE;
   }
 }
