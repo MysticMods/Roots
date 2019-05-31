@@ -61,17 +61,21 @@ public class ItemPouch extends ItemBase {
   public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
     ItemStack stack = player.getHeldItem(hand);
     boolean isBaublesLoaded = Loader.isModLoaded("baubles");
-    if (player.isSneaking() || !isBaublesLoaded) {
-      player.openGui(Roots.getInstance(), GuiHandler.POUCH_ID, world, 0, 0, 0);
-      return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+    boolean open_gui = false;
+    if (player.isSneaking()) {
+      open_gui = true;
     }
     if (isBaublesLoaded) {
       if (!world.isRemote) {
-        PouchEquipHandler.tryEquipPouch(player, stack);
+        if (!PouchEquipHandler.tryEquipPouch(player, stack)) {
+          open_gui = true;
+        }
       }
-      return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
     }
-    return ActionResult.newResult(EnumActionResult.PASS, stack);
+    if (!world.isRemote && open_gui) {
+      player.openGui(Roots.getInstance(), GuiHandler.POUCH_ID, world, 0, 0, 0);
+    }
+    return new ActionResult<>(EnumActionResult.SUCCESS, stack);
   }
 
   private static ItemStack createData(ItemStack stack, Herb herb, double quantity) {
