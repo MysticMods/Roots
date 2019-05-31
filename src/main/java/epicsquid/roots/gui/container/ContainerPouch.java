@@ -180,11 +180,7 @@ public class ContainerPouch extends Container {
           return ItemStack.EMPTY;
         }
       } else {
-        if (!mergeItemStack(stack, 0, 9, true)) {
-          handler.saveToStack();
-          return ItemStack.EMPTY;
-        }
-        if (!mergeItemStack(stack, 9, 36, false)) {
+        if (!mergeItemStack(stack, 27, 36, false) && !mergeItemStack(stack, 0, 27, false)) {
           handler.saveToStack();
           return ItemStack.EMPTY;
         }
