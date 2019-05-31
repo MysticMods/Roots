@@ -18,6 +18,9 @@ public class GeneralConfig {
 
   @Config.Comment(("Set to true to automatically equip component and apothecary pouches when right-clicking"))
   public static boolean AutoEquipPouches = false;
+
+  @Config.Comment(("Set to true to automatically refill your component and apothecary pouches when picking up herbs"))
+  public static boolean AutoRefillPouches = true;
 }
 
 
