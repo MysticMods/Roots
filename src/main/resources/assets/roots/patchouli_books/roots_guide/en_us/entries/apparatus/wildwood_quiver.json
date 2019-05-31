@@ -1,0 +1,17 @@
+{
+    "name": "Wildwood Quiver",
+    "icon": "roots:wildwood_quiver",
+    "category": "apparatus",
+    "advancement": "roots:wildwood",
+    "secret": true,
+    "pages": [
+      {
+        "type": "text",
+        "text": "Reinforced with wildwood, this quiver has the ability to augment normal arrows or even grow arrows from itself, at the cost of durability.$(br2)It can even consume arrows stuck into the ground nearby, although arrows may break in the process. It cannot consume arrows grown of itself."
+      },
+      {
+        "type": "grove_crafting_template",
+        "recipe": "wildwood_quiver"
+      }
+    ]
+  }
