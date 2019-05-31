@@ -1,0 +1,6 @@
+{
+    "parent": "roots:item/wildwood_bow",
+    "textures": {
+        "layer0": "roots:items/wildbow_pulling_0"
+    }
+}

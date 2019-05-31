@@ -1,7 +1,5 @@
 package epicsquid.roots.tileentity;
 
-import epicsquid.mysticallib.network.MessageTEUpdate;
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.entity.grove.EntityGrove;
@@ -31,7 +29,8 @@ public class TileEntityOffertoryPlate extends TileBase {
     protected void onContentsChanged(int slot) {
       TileEntityOffertoryPlate.this.markDirty();
       if (!world.isRemote) {
-        PacketHandler.sendToAllTracking(new MessageTEUpdate(TileEntityOffertoryPlate.this.getUpdateTag()), TileEntityOffertoryPlate.this);
+        updatePacketViaState();
+        //PacketHandler.sendToAllTracking(new MessageTEUpdate(TileEntityOffertoryPlate.this.getUpdateTag()), TileEntityOffertoryPlate.this);
       }
     }
   };
@@ -80,7 +79,7 @@ public class TileEntityOffertoryPlate extends TileBase {
 
   @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand,
-      @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
+                          @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
     this.lastPlayer = player.getUniqueID();
     markDirty();
@@ -111,7 +110,9 @@ public class TileEntityOffertoryPlate extends TileBase {
               grove.addActiveOffering(this);
             }
           }
-          PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+          if (!world.isRemote)
+            updatePacketViaState();
+          //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
           return true;
         }
       }
@@ -120,7 +121,9 @@ public class TileEntityOffertoryPlate extends TileBase {
       if (!inventory.getStackInSlot(0).isEmpty()) {
         ItemStack extracted = inventory.extractItem(0, inventory.getStackInSlot(0).getCount(), false);
         ItemSpawnUtil.spawnItem(world, getPos(), extracted);
-        PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+        if (!world.isRemote)
+          updatePacketViaState();
+        //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
         return true;
       }
     }

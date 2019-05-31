@@ -1,7 +1,5 @@
 package epicsquid.roots.tileentity;
 
-import epicsquid.mysticallib.network.MessageTEUpdate;
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
@@ -288,7 +286,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       }
       doBigFlame = false;
       markDirty();
-      PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+      if (!world.isRemote)
+        updatePacketViaState();
+      //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
     }
 
     if (burnTime > 0) {
@@ -317,7 +317,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
               inventory.extractItem(i, 1, false);
             }
             markDirty();
-            PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+            if (!world.isRemote)
+              updatePacketViaState();
+            //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
           }
         }
 
@@ -393,7 +395,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         }
 
         markDirty();
-        PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+        if (!world.isRemote)
+          updatePacketViaState();
+        //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
       }
     }
   }
@@ -407,7 +411,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         stack.setCount(stack.getCount() - 1);
         //todo: check if the item goes away
         markDirty();
-        PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+        if (!world.isRemote)
+          updatePacketViaState();
+        //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
         break;
       }
     }
