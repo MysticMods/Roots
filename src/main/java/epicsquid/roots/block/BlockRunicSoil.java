@@ -51,12 +51,13 @@ public class BlockRunicSoil extends BlockBase {
 
     if (world.isAirBlock(pos.up())) return;
 
-    Block upBlock = world.getBlockState(pos.up()).getBlock();
+    IBlockState upState = world.getBlockState(pos.up());
+    Block upBlock = upState.getBlock();
     if (!(upBlock instanceof IGrowable)) return;
 
     // TODO: Who knows if this value is any good
     if (rand.nextInt(5) == 0) {
-      upBlock.randomTick(world, pos.up(), state, rand);
+      upBlock.randomTick(world, pos.up(), upState, rand);
     }
   }
 }
