@@ -60,7 +60,8 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     protected void onContentsChanged(int slot) {
       TileEntityBonfire.this.markDirty();
       if (!world.isRemote) {
-        PacketHandler.sendToAllTracking(new MessageTEUpdate(TileEntityBonfire.this.getUpdateTag()), TileEntityBonfire.this);
+        TileEntityBonfire.this.updatePacketViaState();
+        //PacketHandler.sendToAllTracking(new MessageTEUpdate(TileEntityBonfire.this.getUpdateTag()), TileEntityBonfire.this);
       }
     }
   };
