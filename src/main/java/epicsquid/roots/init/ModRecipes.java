@@ -744,8 +744,8 @@ public class ModRecipes {
             new ItemStack(ModItems.wildroot),
             new ItemStack(Items.FLINT)));
 
-    addCraftingRecipe("living_quiver",
-        new GroveCraftingRecipe(new ItemStack(ModItems.living_quiver), 2).addIngredients(
+    addCraftingRecipe("wildwood_quiver",
+        new GroveCraftingRecipe(new ItemStack(ModItems.wildwood_quiver), 2).addIngredients(
             new OreIngredient("chestWood"),
             new ItemStack(ModItems.bark_wildwood),
             new ItemStack(ModItems.bark_wildwood),

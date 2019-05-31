@@ -18,7 +18,6 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
@@ -30,7 +29,7 @@ import java.util.Arrays;
 public class ModItems {
 
   // All mod items
-  public static Item pestle, component_pouch, spell_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, living_quiver,
+  public static Item pestle, component_pouch, spell_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, wildwood_quiver,
           sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, apothecary_pouch,
   petals, flour, cooked_aubergine, stuffed_aubergine, living_arrow, runic_dust, seeds, cooked_seeds, cooked_pereskia, fay_leather, wildewheet_bread;
 
@@ -93,7 +92,7 @@ public class ModItems {
     event.addItem(living_hoe = new ItemLivingHoe(ToolMaterial.IRON, "living_hoe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_sword = new ItemLivingSword(ToolMaterial.IRON, "living_sword").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_arrow = new ItemArrowBase("living_arrow").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(living_quiver = new ItemQuiver("living_quiver").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(wildwood_quiver = new ItemQuiver("wildwood_quiver").setModelCustom(true).setCreativeTab(Roots.tab));
 
     event.addItem(sylvan_helmet = new ItemSylvanArmor(sylvanArmorMaterial, EntityEquipmentSlot.HEAD, "sylvan_helmet").setMaxStackSize(1));
     event.addItem(sylvan_chestplate = new ItemSylvanArmor(sylvanArmorMaterial, EntityEquipmentSlot.CHEST, "sylvan_chestplate").setMaxStackSize(1));
