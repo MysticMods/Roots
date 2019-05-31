@@ -79,6 +79,7 @@ public class ModItems {
     event.addItem(bark_acacia = new ItemBase("bark_acacia").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(bark_wildwood = new ItemBase("bark_wildwood").setModelCustom(true).setCreativeTab(Roots.tab));
 
+    // TODO: do this
     event.addItem(fay_leather = new ItemBase("fay_leather").setModelCustom(true).setCreativeTab(Roots.tab));
 
     event.addItem(pestle = new ItemBase("pestle").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
