@@ -2,6 +2,7 @@ package epicsquid.roots.spell.modules;
 
 import epicsquid.roots.init.ModItems;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextFormatting;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +14,7 @@ public class ModuleRegistry {
     public static SpellModule module_fire;
 
     public static void init() {
-        addModule(module_fire = new SpellModule("module_fire", new ItemStack(ModItems.infernal_bulb)));
+        addModule(module_fire = new SpellModule("module_fire", new ItemStack(ModItems.infernal_bulb), TextFormatting.DARK_RED));
     }
 
     public static void addModule(SpellModule module){

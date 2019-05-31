@@ -60,7 +60,7 @@ public abstract class SpellBase {
     return this;
   }
 
-  public List<SpellModule> getModuleItems() {
+  public List<SpellModule> getModules() {
     return acceptedModules;
   }
 
@@ -109,11 +109,19 @@ public abstract class SpellBase {
 
   @SideOnly(Side.CLIENT)
   public void addToolTip(List<String> tooltip) {
-    tooltip.add("" + textColor + TextFormatting.BOLD + I18n.format("roots.spell." + name + ".name") + TextFormatting.RESET);
+    String prefix = "roots.spell." + name;
+    tooltip.add("" + textColor + TextFormatting.BOLD + I18n.format(prefix + ".name") + TextFormatting.RESET);
     for(Map.Entry<Herb, Double> entry : this.costs.entrySet()){
       Herb herb = entry.getKey();
       String d = String.format("%.4f", entry.getValue());
       tooltip.add(I18n.format(herb.getItem().getTranslationKey() + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
+    }
+    List<SpellModule> modules = getModules();
+    if (!modules.isEmpty()) {
+      tooltip.add(I18n.format("roots.spell.module.description"));
+    }
+    for (SpellModule module : getModules()) {
+      tooltip.add(module.getFormat() + I18n.format("roots.spell.module." + module.getName() + ".name") + ": " + I18n.format(prefix + "." + module.getName() + ".description"));
     }
   }
 
@@ -126,7 +134,7 @@ public abstract class SpellBase {
       String prefix = "roots.spell." + name + ".";
       String mod = I18n.format("roots.spell.module.description");
 
-      for (SpellModule module : getModuleItems()) {
+      for (SpellModule module : getModules()) {
         ItemStack stack = module.getIngredient().copy();
         String description = I18n.format(prefix + module.getName() + ".description");
         Util.appendLoreTag(stack, mod, description);

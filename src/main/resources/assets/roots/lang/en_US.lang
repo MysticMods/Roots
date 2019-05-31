@@ -83,6 +83,7 @@ roots.info.pyre.repeat1=Sneak-Right-Click
 roots.info.pyre.repeat2=to repeat ritual.
 roots.info.pyre.repeat3=to repeat craft.
 
+roots.spell.module.module_fire.name=Fire
 roots.spell.module.description=Spell module:
 roots.spell.spell_wild_fire.name=Wildfire
 roots.spell.spell_dandelion_winds.name=Dandelion Winds
