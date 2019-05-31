@@ -29,7 +29,8 @@ public class PowderInventoryUtil {
 
   public static ItemStack getPouch(EntityPlayer player) {
     if (Loader.isModLoaded("baubles")) {
-      return BaublePowderInventoryUtil.getPouch(player);
+      ItemStack stack = BaublePowderInventoryUtil.getPouch(player);
+      if (!stack.isEmpty()) return stack;
     }
 
     for (int i = 0; i < 36; i++) {
