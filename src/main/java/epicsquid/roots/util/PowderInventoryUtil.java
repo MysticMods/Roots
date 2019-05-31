@@ -56,7 +56,7 @@ public class PowderInventoryUtil {
     if (pouch.isEmpty()) return;
 
     // TODO: Cost reduction is calculated here
-    amount = amount * ItemSylvanArmor.sylvanBonus(player);
+    amount -= amount * ItemSylvanArmor.sylvanBonus(player);
 
     ItemPouch.useQuantity(pouch, herb, amount);
     resolveSlots(herb);
