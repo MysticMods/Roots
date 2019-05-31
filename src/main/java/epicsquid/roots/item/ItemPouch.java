@@ -3,6 +3,7 @@ package epicsquid.roots.item;
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
+import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.gui.GuiHandler;
 import epicsquid.roots.gui.Keybinds;
 import epicsquid.roots.handler.PouchHandler;
@@ -62,15 +63,19 @@ public class ItemPouch extends ItemBase {
     ItemStack stack = player.getHeldItem(hand);
     boolean isBaublesLoaded = Loader.isModLoaded("baubles");
     boolean open_gui = false;
-    if (player.isSneaking()) {
-      open_gui = true;
-    }
-    if (isBaublesLoaded) {
-      if (!world.isRemote) {
-        if (!PouchEquipHandler.tryEquipPouch(player, stack)) {
-          open_gui = true;
+    if (GeneralConfig.AutoEquipPouches) {
+      if (player.isSneaking()) {
+        open_gui = true;
+      }
+      if (isBaublesLoaded) {
+        if (!world.isRemote) {
+          if (!PouchEquipHandler.tryEquipPouch(player, stack)) {
+            open_gui = true;
+          }
         }
       }
+    } else {
+      open_gui = true;
     }
     if (!world.isRemote && open_gui) {
       player.openGui(Roots.getInstance(), GuiHandler.POUCH_ID, world, 0, 0, 0);
@@ -135,11 +140,12 @@ public class ItemPouch extends ItemBase {
   @SideOnly(Side.CLIENT)
   @Override
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-    if (Loader.isModLoaded("baubles")) {
+    if (GeneralConfig.AutoEquipPouches && Loader.isModLoaded("baubles")) {
       tooltip.add(TextFormatting.GREEN + I18n.format("roots.tooltip.pouch", Keybinds.POUCH_KEYBIND.getDisplayName()));
     } else {
       tooltip.add(TextFormatting.GREEN + I18n.format("roots.tooltip.pouch2", Keybinds.POUCH_KEYBIND.getDisplayName()));
     }
+
     super.addInformation(stack, worldIn, tooltip, flagIn);
   }
 }

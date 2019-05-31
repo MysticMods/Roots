@@ -15,6 +15,9 @@ public class GeneralConfig {
 
   @Config.Comment(("Maximum nubmer of pulls for injected loot"))
   public static int InjectMaximum = 1;
+
+  @Config.Comment(("Set to true to automatically equip component and apothecary pouches when right-clicking"))
+  public static boolean AutoEquipPouches = false;
 }
 
 
