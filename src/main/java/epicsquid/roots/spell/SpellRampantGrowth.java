@@ -27,7 +27,7 @@ public class SpellRampantGrowth extends SpellBase {
   public static SpellRampantGrowth instance = new SpellRampantGrowth(spellName);
 
   public SpellRampantGrowth(String name) {
-    super(name, TextFormatting.DARK_GREEN, 224f / 255f, 135f / 255f, 40f / 255f, 46f / 255f, 94f / 255f, 93f / 255f);
+    super(name, TextFormatting.DARK_AQUA, 224f / 255f, 135f / 255f, 40f / 255f, 46f / 255f, 94f / 255f, 93f / 255f);
     this.castType = EnumCastType.CONTINUOUS;
     this.cooldown = 16;
 
