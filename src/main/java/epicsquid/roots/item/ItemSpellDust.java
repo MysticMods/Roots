@@ -4,15 +4,12 @@ import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.event.HoverEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -29,7 +26,7 @@ public class ItemSpellDust extends ItemBase {
   @Override
   public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
     if (tab == this.getCreativeTab()) {
-      for(SpellBase entry : SpellRegistry.spellRegistry.values()){
+      for (SpellBase entry : SpellRegistry.spellRegistry.values()) {
         subItems.add(entry.getResult());
       }
     }
@@ -44,5 +41,13 @@ public class ItemSpellDust extends ItemBase {
     if (spell == null) return;
 
     spell.addToolTip(tooltip);
+    List<SpellModule> spellModules = capability.getSelectedModules();
+    if (!spellModules.isEmpty()) {
+      tooltip.add(I18n.format("roots.spell.module.description"));
+      String prefix = "roots.spell." + spell.getName();
+      for (SpellModule module : spellModules) {
+        tooltip.add(module.getFormat() + I18n.format("roots.spell.module." + module.getName() + ".name") + ": " + I18n.format(prefix + "." + module.getName() + ".description"));
+      }
+    }
   }
 }
