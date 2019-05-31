@@ -25,7 +25,7 @@ public class ItemSylvanArmor extends ItemArmor implements IModeledObject {
     super(material, 0, slot);
     setTranslationKey(name);
     setRegistryName(new ResourceLocation(Roots.MODID, name));
-    setMaxDamage(500);
+    setMaxDamage(750);
     setCreativeTab(Roots.tab);
   }
 
