@@ -1,30 +1,21 @@
 package epicsquid.roots.capability.runic_shears;
 
-import net.minecraft.nbt.NBTTagLong;
-import net.minecraftforge.common.util.INBTSerializable;
-
-public class RunicShearsCapability implements INBTSerializable<NBTTagLong> {
+public class RunicShearsCapability {
   private long cooldown = 0;
 
   public boolean canHarvest() {
-    return cooldown == 0;
+    return cooldown <= System.currentTimeMillis();
   }
 
-  public int getCooldown() {
-    return 0;
+  public long getCooldown() {
+    return cooldown;
   }
 
-  public void setCooldown(int cooldown) {
-    this.cooldown = cooldown;
-  }
+  /**
+   * @param cooldown Cooldown in ticks/milliseconds
+   */
+  public void setCooldown(long cooldown) {
 
-  @Override
-  public NBTTagLong serializeNBT() {
-    return new NBTTagLong(cooldown);
-  }
-
-  @Override
-  public void deserializeNBT(NBTTagLong nbt) {
-    this.cooldown = nbt.getLong();
+    this.cooldown = System.currentTimeMillis() + cooldown;
   }
 }

@@ -19,6 +19,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -50,6 +51,7 @@ public class ModRecipes {
   private static Map<String, PyreCraftingRecipe> pyreCraftingRecipes = new HashMap<>();
   private static Map<ResourceLocation, GroveCraftingRecipe> groveCraftingRecipes = new HashMap<>();
   private static Map<String, RunicShearRecipe> runicShearRecipes = new HashMap<>();
+  private static Map<Class<? extends EntityLivingBase>, RunicShearRecipe> runicShearEntityRecipes = new HashMap<>();
   private static List<RunicCarvingRecipe> runicCarvingRecipes = new ArrayList<>();
   private static Map<ResourceLocation, PacifistEntry> pacifistEntities = new HashMap<>();
   private static Map<Class<? extends Entity>, PacifistEntry> pacifistClasses = new HashMap<>();
@@ -355,7 +357,11 @@ public class ModRecipes {
         return;
       }
     }
-    runicShearRecipes.put(recipe.getName(), recipe);
+    if (recipe.isEntityRecipe()) {
+      runicShearEntityRecipes.put(recipe.getEntity(), recipe);
+    } else {
+      runicShearRecipes.put(recipe.getName(), recipe);
+    }
   }
 
   public static RunicShearRecipe getRunicShearRecipe(Block block) {
@@ -367,13 +373,8 @@ public class ModRecipes {
     return null;
   }
 
-  public static RunicShearRecipe getRunicShearRecipe(EntityLiving entity) {
-    for (RunicShearRecipe recipe : runicShearRecipes.values()) {
-      if (recipe.isEntityRecipe() && recipe.getEntity() == entity.getClass()) {
-        return recipe;
-      }
-    }
-    return null;
+  public static RunicShearRecipe getRunicShearRecipe(EntityLivingBase entity) {
+    return runicShearEntityRecipes.get(entity.getClass());
   }
 
   public static RunicShearRecipe getRunicShearRecipe(String name) {

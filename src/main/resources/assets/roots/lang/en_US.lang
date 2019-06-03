@@ -321,3 +321,6 @@ roots.hud.top.pyre.recipe=Crafting:
 roots.hud.top.pyre.ritual=Ritual:
 roots.hud.top.pyre.progress=Progress:
 roots.hud.top.pyre.progress_info=minutes remaining
+
+# Runic Shears
+roots.runic_shears.cooldown=The fay has yet to regrow for this creature.

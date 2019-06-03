@@ -3,7 +3,7 @@ package epicsquid.roots.event.handlers;
 import com.google.common.collect.Sets;
 import epicsquid.mysticalworld.entity.EntityDeer;
 import epicsquid.roots.Roots;
-import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityHandler;
+import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityProvider;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityLlama;
@@ -21,7 +21,7 @@ public class CapabilityHandler {
   @SubscribeEvent
   public static void onAttachCapabilityEntity(AttachCapabilitiesEvent<Entity> event) {
     if (entityClasses.contains(event.getObject().getClass())) {
-      event.addCapability(RunicShearsCapabilityHandler.IDENTIFIER, new RunicShearsCapabilityHandler());
+      event.addCapability(RunicShearsCapabilityProvider.IDENTIFIER, new RunicShearsCapabilityProvider());
     }
   }
 }
