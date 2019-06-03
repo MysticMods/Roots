@@ -2,6 +2,8 @@ package epicsquid.roots.block;
 
 import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.roots.api.CustomPlantType;
+import epicsquid.roots.network.fx.ElementalSoilTransformFX;
+import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.util.EnumElementalSoilType;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
@@ -39,9 +41,9 @@ public class BlockElementalSoil extends BlockBase {
         return true;
     }
     return plant == CustomPlantType.ELEMENT_FIRE && soilType == EnumElementalSoilType.FIRE
-        || plant == CustomPlantType.ELEMENT_AIR && soilType == EnumElementalSoilType.AIR
-        || plant == CustomPlantType.ELEMENT_EARTH && soilType == EnumElementalSoilType.EARTH
-        || plant == CustomPlantType.ELEMENT_WATER && soilType == EnumElementalSoilType.WATER;
+            || plant == CustomPlantType.ELEMENT_AIR && soilType == EnumElementalSoilType.AIR
+            || plant == CustomPlantType.ELEMENT_EARTH && soilType == EnumElementalSoilType.EARTH
+            || plant == CustomPlantType.ELEMENT_WATER && soilType == EnumElementalSoilType.WATER;
   }
 
   @Override
@@ -56,6 +58,17 @@ public class BlockElementalSoil extends BlockBase {
     // TODO: Who knows if this value is any good
     if (rand.nextInt(5) == 0) {
       upBlock.randomTick(world, pos.up(), state, rand);
+    }
+  }
+
+  @Override
+  public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+    if (rand.nextBoolean())
+    {
+      int[] color = ElementalSoilTransformFX.getColor(soilType.ordinal());
+
+      ParticleUtil.spawnParticleGlow(worldIn, pos.getX() + rand.nextFloat(), pos.getY() + 0.75F, pos.getZ() + rand.nextFloat(),
+              0, 0.05F, 0, color[0], color[1], color[2], 0.75F, 2, 80);
     }
   }
 }

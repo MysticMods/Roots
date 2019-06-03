@@ -44,6 +44,36 @@ public class ElementalSoilTransformFX implements IMessage {
     byteBuf.writeInt(elementId);
   }
 
+  public static int[] getColor(int elementId)
+  {
+    int r, g, b;
+
+    switch (elementId)
+    {
+      //Fire
+      case 0:
+        r = 196; g = 90; b = 13;
+        break;
+      //Water
+      case 1:
+        r = 43; g = 159; b = 206;
+        break;
+      //Air
+      case 2:
+        r = 164; g = 196; b = 203;
+        break;
+      //Earth
+      case 3:
+        r = 81; g = 55; b = 8;
+        break;
+      //CHAOS (NULL) >:)
+      default:
+        r = 0; g = 0; b = 0;
+    }
+
+    return new int[] {r, g, b};
+  }
+
   public static class Handler implements IMessageHandler<ElementalSoilTransformFX, IMessage>
   {
     @SideOnly(Side.CLIENT)
@@ -52,39 +82,18 @@ public class ElementalSoilTransformFX implements IMessage {
 
       World world = Minecraft.getMinecraft().world;
 
-      int r, g, b;
-
-      switch (message.elementId)
-      {
-        //Fire
-        case 0:
-          r = 196; g = 90; b = 13;
-          break;
-        //Water
-        case 1:
-          r = 43; g = 159; b = 206;
-          break;
-        //Air
-        case 2:
-          r = 164; g = 196; b = 203;
-          break;
-        //Earth
-        case 3:
-          r = 81; g = 55; b = 8;
-          break;
-        //CHAOS (NULL) >:)
-        default:
-            r = 0; g = 0; b = 0;
-      }
-
-
+      int[] color = getColor(message.elementId);
 
       for (int k = 0; k < 10; k ++){
         if (random.nextBoolean()){
-          ParticleUtil.spawnParticleGlow(world, (float)message.x, (float)message.y + 0.5F, (float)message.z, 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), r, g, b, 0.75f, 9f, 30);
+          ParticleUtil.spawnParticleGlow(world, (float)message.x, (float)message.y + 0.5F, (float)message.z,
+                  0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f),
+                  color[0], color[1], color[2], 0.75f, 9f, 30);
         }
         else {
-          ParticleUtil.spawnParticleGlow(world, (float)message.x, (float)message.y + 0.5F, (float)message.z, 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f), r, g, b, 0.75f, 9f, 30);
+          ParticleUtil.spawnParticleGlow(world, (float)message.x, (float)message.y + 0.5F, (float)message.z, 0.125f*(random.nextFloat()-0.5f),
+                  0.125f*(random.nextFloat()-0.5f), 0.125f*(random.nextFloat()-0.5f),
+                  color[0], color[1], color[2], 0.75f, 9f, 30);
         }
       }
       return null;
