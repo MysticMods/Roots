@@ -41,6 +41,8 @@ public class ModItems {
 
   public static Item ritual_life, ritual_storm, ritual_light, ritual_fire_storm, ritual_regrowth, ritual_windwall, ritual_warden, ritual_natural_aura, ritual_purity, ritual_frost, ritual_animal_harvest, ritual_summoning, ritual_wild_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation;
 
+  public static Item item_block_elemental_soil, item_block_magmatic_soil, item_block_aqueous_soil, item_block_aeros_soil, item_block_terra_soil;
+
   // TODO: Refactor this out of this file
   //Armor Materials
   public static final ItemArmor.ArmorMaterial sylvanArmorMaterial = EnumHelper.addArmorMaterial("SYLVAN", Roots.MODID + ":sylvan", 12, new int[]{2, 4, 5, 3}, 20, SoundEvents.BLOCK_SNOW_PLACE, 0F);
@@ -150,6 +152,12 @@ public class ModItems {
     event.addItem(ritual_overgrowth = new ItemBase("ritual_overgrowth").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_flower_growth = new ItemBase("ritual_flower_growth").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_transmutation = new ItemBase("ritual_transmutation").setModelCustom(false).setCreativeTab(null));
+
+    event.addItem(item_block_elemental_soil = new ItemBlockElementalSoil(ModBlocks.elemental_soil, "elemental_soil"));
+    event.addItem(item_block_magmatic_soil = new ItemBlockElementalSoil(ModBlocks.elemental_soil_fire, "magmatic_soil"));
+    event.addItem(item_block_aqueous_soil = new ItemBlockElementalSoil(ModBlocks.elemental_soil_water, "aqueous_soil"));
+    event.addItem(item_block_aeros_soil = new ItemBlockElementalSoil(ModBlocks.elemental_soil_air, "aeros_soil"));
+    event.addItem(item_block_terra_soil = new ItemBlockElementalSoil(ModBlocks.elemental_soil_earth, "terra_soil"));
 
     // KEEP AT END
     registerSeedDrops();

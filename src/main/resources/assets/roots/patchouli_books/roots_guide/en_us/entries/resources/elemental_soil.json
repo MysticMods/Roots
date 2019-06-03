@@ -1,0 +1,38 @@
+{
+  "name": "Elemental Soil",
+  "icon": "roots:elemental_soil",
+  "category": "resources",
+  "priority": true,
+  "advancement": "roots:pyre",
+  
+  "pages": [
+    {
+      "type": "text",
+      "text": "Elementally attuned herbs are rather picky about what they will grow on, as fickle as the elements themselves. Elemental Soil is a special kind of soil that can be further refined into different forms, upon which a corresponding elemental plant may grow."
+    },
+    {
+      "type": "ritual_crafting_template",
+      "recipe": "elemental_soil"
+    },
+    {
+      "type": "spotlight",
+      "item": "roots:elemental_soil_fire",
+      "text": "$(l:herbs/infernal_bulb)Infernal Bulbs$() can grow in this magmatic soil.$(br2)Created by dropping a piece of neutral elemental soil into a pond of lava. (Such intense temperatures make this transmutation instantaneous)"
+    },
+    {
+      "type": "spotlight",
+      "item": "roots:elemental_soil_water",
+      "text": "$(l:herbs/dewgonia)Dewgonia$() can grow in this aquatic soil.$(br2)Created by dropping a piece of neutral elemental soil into a pond of water. (This transmutation may need some seconds to finish properly)"
+    },
+    {
+      "type": "spotlight",
+      "item": "roots:elemental_soil_air",
+      "text": "$(l:herbs/cloud_berry)Cloud Berries$() can grow in this air-infused soil.$(br2)Created by dropping a piece of neutral elemental soil at a really low Y level [less than 20]. (This transmutation may need some seconds to finish properly)"
+    },
+    {
+      "type": "spotlight",
+      "item": "roots:elemental_soil_earth",
+      "text": "$(l:herbs/stalicripe)Stalicripe$() can grow in this earthen soil.$(br2)Created by dropping a piece of neutral elemental soil at a really high Y level [more than 120]. (This transmutation may need some seconds to finish properly)"
+    }
+  ]
+}

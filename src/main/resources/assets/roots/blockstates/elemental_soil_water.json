@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "normal": { "model": "roots:elemental_soil_water" },
+        "handlers": { "model": "roots:elemental_soil_water" }
+    }
+}

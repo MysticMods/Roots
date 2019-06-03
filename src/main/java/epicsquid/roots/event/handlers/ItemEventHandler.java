@@ -18,13 +18,17 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 @SuppressWarnings("unused")
 public class ItemEventHandler {
+
   @SubscribeEvent(priority = EventPriority.HIGHEST)
-  public static void onInteract(PlayerInteractEvent.RightClickBlock event) {
-    if (event.getHand() != EnumHand.MAIN_HAND) return;
+  public static void onInteract(PlayerInteractEvent.RightClickBlock event)
+  {
+    if (event.getHand() != EnumHand.MAIN_HAND)
+      return;
 
     EntityPlayer player = event.getEntityPlayer();
     ItemStack main = player.getHeldItemMainhand();
-    if (main.getItem() != ModItems.runic_shears) return;
+    if (main.getItem() != ModItems.runic_shears)
+      return;
 
     event.setCanceled(true);
     ItemRunicShears item = (ItemRunicShears) ModItems.runic_shears;
@@ -32,7 +36,6 @@ public class ItemEventHandler {
     Vec3d hit = event.getHitVec();
     item.onItemUse(player, event.getWorld(), event.getPos(), event.getHand(), event.getFace(), (float) hit.x, (float) hit.y, (float) hit.z);
   }
-
   //@SubscribeEvent
   public static void onItemPickup(PlayerEvent.ItemPickupEvent event) {
   }

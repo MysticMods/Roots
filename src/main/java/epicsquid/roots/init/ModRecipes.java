@@ -648,13 +648,13 @@ public class ModRecipes {
             new ItemStack(ModItems.terra_moss),
             new ItemStack(ModItems.spirit_herb)));
 
-    addCraftingRecipe("runic_soil",
-        new GroveCraftingRecipe(new ItemStack(ModBlocks.runic_soil), 1).addIngredients(
-            new ItemStack(Blocks.DIRT),
-            new ItemStack(ModItems.terra_moss),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(Blocks.GRAVEL),
-            new ItemStack(Items.DYE, 1, 15)));
+    addCraftingRecipe("elemental_soil",
+        new GroveCraftingRecipe(new ItemStack(ModBlocks.elemental_soil), 1).addIngredients(
+          new ItemStack(Blocks.DIRT),
+          new ItemStack(ModItems.terra_moss),
+          new ItemStack(ModItems.wildroot),
+          new ItemStack(Blocks.GRAVEL),
+          new ItemStack(Items.DYE, 1, 15)));
 
     addCraftingRecipe("living_pickaxe",
         new GroveCraftingRecipe(new ItemStack(ModItems.living_pickaxe), 1).addIngredients(

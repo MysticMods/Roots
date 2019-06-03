@@ -3,19 +3,20 @@ package epicsquid.roots.init;
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.block.*;
 import epicsquid.mysticallib.event.RegisterContentEvent;
-import epicsquid.roots.block.runes.BlockWildwoodRune;
-import epicsquid.roots.util.EnumRunicSoilType;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.CustomPlantType;
 import epicsquid.roots.block.*;
 import epicsquid.roots.block.runes.BlockTrample;
+import epicsquid.roots.block.runes.BlockWildwoodRune;
 import epicsquid.roots.tileentity.*;
+import epicsquid.roots.util.EnumElementalSoilType;
 import epicsquid.roots.world.HugeBaffleCap;
 import epicsquid.roots.world.tree.WorldGenBigWildwoodTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -35,7 +36,10 @@ public class ModBlocks {
 
   // Runestones
   public static Block runestone, runestone_brick, runestone_brick_alt, chiseled_runestone, wildwood_log, wildwood_planks, wildwood_leaves, wildwood_sapling, baffle_cap_huge_stem, baffle_cap_huge_top,
-      baffle_cap_mushroom, runic_soil_fire, runic_soil_water, runic_soil_air, runic_soil_earth, runic_soil, trample_rune;
+      baffle_cap_mushroom, trample_rune;
+
+  //Elemental Soil
+  public static Block elemental_soil_fire, elemental_soil_water, elemental_soil_air, elemental_soil_earth, elemental_soil;
 
 
   // Decoration
@@ -72,12 +76,19 @@ public class ModBlocks {
     // TODO 1.13 make the dewgonia work only underwater
     event.addBlock(dewgonia = new BlockDewgoniaCrop("dewgonia_crop", CustomPlantType.ELEMENT_WATER));
     event.addBlock(stalicripe = new BlockStalicripeCrop("stalicripe_crop", CustomPlantType.ELEMENT_EARTH));
-    event.addBlock(runic_soil = new BlockBase(Material.GROUND, SoundType.GROUND, 0.8f, "runic_soil").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addBlock(elemental_soil = new BlockBase(Material.GROUND, SoundType.GROUND, 0.8f, "elemental_soil")
+    {
+      @Override
+      public Item getItemBlock() {
+        return ModItems.item_block_elemental_soil;
+      }
+    }
+    .setModelCustom(true).setCreativeTab(Roots.tab));
 
-    event.addBlock(runic_soil_air = new BlockRunicSoil(Material.GROUND, SoundType.GROUND, "runic_soil_air", EnumRunicSoilType.AIR).setModelCustom(false).setCreativeTab(Roots.tab));
-    event.addBlock(runic_soil_water = new BlockRunicSoil(Material.GROUND, SoundType.GROUND, "runic_soil_water", EnumRunicSoilType.WATER).setModelCustom(false).setCreativeTab(Roots.tab));
-    event.addBlock(runic_soil_fire = new BlockRunicSoil(Material.GROUND, SoundType.GROUND, "runic_soil_fire", EnumRunicSoilType.FIRE).setModelCustom(false).setCreativeTab(Roots.tab));
-    event.addBlock(runic_soil_earth = new BlockRunicSoil(Material.GROUND, SoundType.GROUND, "runic_soil_earth", EnumRunicSoilType.EARTH).setModelCustom(false).setCreativeTab(Roots.tab));
+    event.addBlock(elemental_soil_air = new BlockElementalSoil(Material.GROUND, SoundType.GROUND, "elemental_soil_air", EnumElementalSoilType.AIR).setModelCustom(false).setCreativeTab(Roots.tab));
+    event.addBlock(elemental_soil_water = new BlockElementalSoil(Material.GROUND, SoundType.GROUND, "elemental_soil_water", EnumElementalSoilType.WATER).setModelCustom(false).setCreativeTab(Roots.tab));
+    event.addBlock(elemental_soil_fire = new BlockElementalSoil(Material.GROUND, SoundType.GROUND, "elemental_soil_fire", EnumElementalSoilType.FIRE).setModelCustom(false).setCreativeTab(Roots.tab));
+    event.addBlock(elemental_soil_earth = new BlockElementalSoil(Material.GROUND, SoundType.GROUND, "elemental_soil_earth", EnumElementalSoilType.EARTH).setModelCustom(false).setCreativeTab(Roots.tab));
 
     // Post registration block setup
     ((BlockMushroomBase) baffle_cap_mushroom).setItemBlock(new ItemBlock(baffle_cap_mushroom).setRegistryName(LibRegistry.getActiveModid(), "baffle_cap_mushroom"));

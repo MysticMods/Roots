@@ -78,7 +78,7 @@ public class Roots {
     CapabilityManager.INSTANCE.register(IPlayerDataCapability.class, new PlayerDataCapabilityStorage(), PlayerDataCapability::new);
     CapabilityManager.INSTANCE.register(RunicShearsCapability.class, new RunicShearsCapabilityStorage(), RunicShearsCapability::new);
     MinecraftForge.EVENT_BUS.register(new RegistryManager());
-    MinecraftForge.EVENT_BUS.register(new EventManager());
+    MinecraftForge.EVENT_BUS.register(EventManager.class);
     MinecraftForge.EVENT_BUS.register(ConfigHandler.class);
     NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);
     logger = event.getModLog();

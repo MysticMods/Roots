@@ -58,7 +58,7 @@ public class EventManager {
   public static long ticks = 0;
 
   @SubscribeEvent
-  public void onBlockHarvested(HarvestDropsEvent event){
+  public static void onBlockHarvested(HarvestDropsEvent event){
     if (event.getHarvester() != null){
       ItemStack tool = event.getHarvester().getHeldItem(EnumHand.MAIN_HAND);
       if (!(tool.isEmpty())){
@@ -105,14 +105,14 @@ public class EventManager {
     }
   }
 
-  private int getBarkAmount(ItemStack stack)
+  private static int getBarkAmount(ItemStack stack)
   {
     int enchLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
     return ++enchLevel;
   }
 
   @SubscribeEvent(priority = EventPriority.HIGHEST)
-  public void onTick(TickEvent.ClientTickEvent event) {
+  public static void onTick(TickEvent.ClientTickEvent event) {
     if (event.side == Side.CLIENT) {
       ClientProxy.particleRenderer.updateParticles();
       ticks++;
@@ -120,7 +120,7 @@ public class EventManager {
   }
 
   @SubscribeEvent
-  public void copyCapabilities(PlayerEvent.Clone event) {
+  public static void copyCapabilities(PlayerEvent.Clone event) {
     if (event.isWasDeath()) {
       if (event.getOriginal().hasCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null)) {
         event.getEntityPlayer().getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null)
@@ -134,7 +134,7 @@ public class EventManager {
   }
 
   @SubscribeEvent
-  public void addCapabilities(AttachCapabilitiesEvent<Entity> event) {
+  public static void addCapabilities(AttachCapabilitiesEvent<Entity> event) {
     if (event.getObject() instanceof EntityPlayer) {
       event.addCapability(new ResourceLocation(Roots.MODID, "player_grove_capability"), new PlayerGroveCapabilityProvider());
       event.addCapability(new ResourceLocation(Roots.MODID, "player_data_capability"), new PlayerDataCapabilityProvider());
@@ -150,7 +150,7 @@ public class EventManager {
   }
 
   @SubscribeEvent
-  public void livingUpdate(LivingUpdateEvent event) {
+  public static void livingUpdate(LivingUpdateEvent event) {
     if (event.getEntity() instanceof EntityPlayer) {
       EntityPlayer player = (EntityPlayer) event.getEntity();
       if (player.hasCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null)) {
@@ -171,7 +171,7 @@ public class EventManager {
   }
 
   @SubscribeEvent(priority = EventPriority.HIGHEST)
-  public void onDamage(LivingHurtEvent event){
+  public static void onDamage(LivingHurtEvent event){
     if (EffectManager.hasEffect(event.getEntityLiving(), EffectManager.effect_time_stop.getName())){
       event.setAmount(event.getAmount()*0.1f);
     }
@@ -222,7 +222,7 @@ public class EventManager {
   }
 
   @SubscribeEvent
-  public void onEntityTick(LivingUpdateEvent event){
+  public static void onEntityTick(LivingUpdateEvent event){
     EffectManager.tickEffects(event.getEntityLiving());
     if (EffectManager.hasEffect(event.getEntityLiving(), EffectManager.effect_time_stop.getName())){
       event.setCanceled(true);
@@ -257,5 +257,4 @@ public class EventManager {
       }
     }
   }
-
 }
