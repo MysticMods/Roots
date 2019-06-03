@@ -8,6 +8,8 @@ import epicsquid.roots.capability.grove.PlayerGroveCapabilityStorage;
 import epicsquid.roots.capability.playerdata.IPlayerDataCapability;
 import epicsquid.roots.capability.playerdata.PlayerDataCapability;
 import epicsquid.roots.capability.playerdata.PlayerDataCapabilityStorage;
+import epicsquid.roots.capability.runic_shears.RunicShearsCapability;
+import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityHandler;
 import epicsquid.roots.gui.GuiHandler;
 import epicsquid.roots.handler.ConfigHandler;
 import epicsquid.roots.init.ModItems;
@@ -50,9 +52,11 @@ public class Roots {
 
   public static Logger logger;
 
-  @SidedProxy(clientSide = "epicsquid.roots.proxy.ClientProxy", serverSide = "epicsquid.roots.proxy.CommonProxy") public static CommonProxy proxy;
+  @SidedProxy(clientSide = "epicsquid.roots.proxy.ClientProxy", serverSide = "epicsquid.roots.proxy.CommonProxy")
+  public static CommonProxy proxy;
 
-  @Instance(MODID) public static Roots instance;
+  @Instance(MODID)
+  public static Roots instance;
 
   public static CreativeTabs tab = new CreativeTabs("roots") {
     @Override
@@ -72,6 +76,7 @@ public class Roots {
     CONTAINER = Loader.instance().activeModContainer();
     CapabilityManager.INSTANCE.register(IPlayerGroveCapability.class, new PlayerGroveCapabilityStorage(), PlayerGroveCapability::new);
     CapabilityManager.INSTANCE.register(IPlayerDataCapability.class, new PlayerDataCapabilityStorage(), PlayerDataCapability::new);
+    CapabilityManager.INSTANCE.register(RunicShearsCapability.class, new RunicShearsCapabilityHandler.RunicShearsCapabilityStorage(), RunicShearsCapability::new);
     MinecraftForge.EVENT_BUS.register(new RegistryManager());
     MinecraftForge.EVENT_BUS.register(new EventManager());
     MinecraftForge.EVENT_BUS.register(ConfigHandler.class);
