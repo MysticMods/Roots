@@ -6,6 +6,7 @@ import epicsquid.mysticallib.item.ItemArrowBase;
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.item.ItemFoodBase;
 import epicsquid.mysticallib.item.ItemSeedBase;
+import epicsquid.mysticallib.material.MaterialTypes;
 import epicsquid.roots.Roots;
 import epicsquid.roots.item.*;
 import net.minecraft.block.Block;
@@ -28,9 +29,9 @@ import java.util.Arrays;
 public class ModItems {
 
   // All mod items
-  public static Item pestle, component_pouch, spell_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, living_quiver,
+  public static Item pestle, component_pouch, spell_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, wildwood_quiver, wildwood_bow,
           sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, apothecary_pouch,
-  copper_knife, silver_knife, petals, flour, cooked_aubergine, stuffed_aubergine, living_arrow, runic_dust, seeds, cooked_seeds, cooked_pereskia;
+  petals, flour, cooked_aubergine, stuffed_aubergine, living_arrow, runic_dust, seeds, cooked_seeds, cooked_pereskia, fay_leather, wildewheet_bread;
 
   public static Item moonglow_leaf, aubergine, pereskia, terra_spores, terra_moss, spirit_herb, wildewheet,
           baffle_cap, bark_oak, bark_birch, bark_spruce, bark_jungle, bark_dark_oak, bark_acacia, bark_wildwood;
@@ -42,9 +43,10 @@ public class ModItems {
 
   public static Item item_block_elemental_soil, item_block_magmatic_soil, item_block_aqueous_soil, item_block_aeros_soil, item_block_terra_soil;
 
+  // TODO: Refactor this out of this file
   //Armor Materials
-  public static final ItemArmor.ArmorMaterial sylvanArmorMaterial = EnumHelper.addArmorMaterial("SYLVAN", Roots.MODID + ":sylvan", 8, new int[]{1, 3, 4, 2}, 20, SoundEvents.BLOCK_SNOW_PLACE, 0F);
-  public static final ItemArmor.ArmorMaterial wildwoodArmorMaterial = EnumHelper.addArmorMaterial("WILDWOOD", Roots.MODID + ":wildwood", 20, new int[]{3, 5, 6, 3}, 10, SoundEvents.BLOCK_WOOD_PLACE, 0F);
+  public static final ItemArmor.ArmorMaterial sylvanArmorMaterial = EnumHelper.addArmorMaterial("SYLVAN", Roots.MODID + ":sylvan", 12, new int[]{2, 4, 5, 3}, 20, SoundEvents.BLOCK_SNOW_PLACE, 0F);
+  public static final ItemArmor.ArmorMaterial wildwoodArmorMaterial = EnumHelper.addArmorMaterial("WILDWOOD", Roots.MODID + ":wildwood", 20, new int[]{3, 5, 6, 3}, 10, SoundEvents.BLOCK_WOOD_PLACE, 0.5F);
 
   /**
    * Register all items
@@ -79,6 +81,9 @@ public class ModItems {
     event.addItem(bark_acacia = new ItemBase("bark_acacia").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(bark_wildwood = new ItemBase("bark_wildwood").setModelCustom(true).setCreativeTab(Roots.tab));
 
+    // TODO: do this
+    event.addItem(fay_leather = new ItemBase("fay_leather").setModelCustom(true).setCreativeTab(Roots.tab));
+
     event.addItem(pestle = new ItemBase("pestle").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(component_pouch = new ItemPouch("component_pouch").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(apothecary_pouch = new ItemApothecaryPouch("apothecary_pouch").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
@@ -91,7 +96,8 @@ public class ModItems {
     event.addItem(living_hoe = new ItemLivingHoe(ToolMaterial.IRON, "living_hoe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_sword = new ItemLivingSword(ToolMaterial.IRON, "living_sword").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_arrow = new ItemArrowBase("living_arrow").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(living_quiver = new ItemQuiver("living_quiver").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(wildwood_quiver = new ItemQuiver("wildwood_quiver").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(wildwood_bow = new ItemWildwoodBow("wildwood_bow").setModelCustom(false).setCreativeTab(Roots.tab));
 
     event.addItem(sylvan_helmet = new ItemSylvanArmor(sylvanArmorMaterial, EntityEquipmentSlot.HEAD, "sylvan_helmet").setMaxStackSize(1));
     event.addItem(sylvan_chestplate = new ItemSylvanArmor(sylvanArmorMaterial, EntityEquipmentSlot.CHEST, "sylvan_chestplate").setMaxStackSize(1));
@@ -104,20 +110,20 @@ public class ModItems {
 
     event.addItem(runic_shears = new ItemRunicShears("runic_shears").setModelCustom(true).setCreativeTab(Roots.tab));
 
-    event.addItem(wood_knife = new ItemKnife("wood_knife", ToolMaterial.WOOD).setCreativeTab(Roots.tab));
-    event.addItem(stone_knife = new ItemKnife("stone_knife", ToolMaterial.STONE).setCreativeTab(Roots.tab));
-    event.addItem(iron_knife = new ItemKnife("iron_knife", ToolMaterial.IRON).setCreativeTab(Roots.tab));
-    event.addItem(diamond_knife = new ItemKnife("diamond_knife", ToolMaterial.DIAMOND).setCreativeTab(Roots.tab));
-    event.addItem(gold_knife = new ItemKnife("gold_knife", ToolMaterial.GOLD).setCreativeTab(Roots.tab));
+    MaterialTypes.addMaterial("vanilla:wood", ToolMaterial.WOOD, ToolMaterial.WOOD.getAttackDamage(), -1.7f);
+    MaterialTypes.addMaterial("vanilla:stone", ToolMaterial.STONE, ToolMaterial.STONE.getAttackDamage(), -1.7f);
+    MaterialTypes.addMaterial("vanilla:iron", ToolMaterial.IRON, ToolMaterial.IRON.getAttackDamage(), -1.5f);
+    MaterialTypes.addMaterial("vanilla:diamond", ToolMaterial.DIAMOND, ToolMaterial.DIAMOND.getAttackDamage(), -1.0f);
+    MaterialTypes.addMaterial("vanilla:gold", ToolMaterial.GOLD, ToolMaterial.GOLD.getAttackDamage(), -1.0f);
 
-    ToolMaterial COPPER = EnumHelper.addToolMaterial("ROOTS:COPPER", 1, 175, 4.0f, 1.0f, 7);
-    event.addItem(copper_knife = new ItemKnife("copper_knife", COPPER).setCreativeTab(Roots.tab));
-
-    ToolMaterial SILVER = EnumHelper.addToolMaterial("ROOTS:SILVER", 1, 75, 6.0f, 1.0f, 25);
-    event.addItem(silver_knife = new ItemKnife("silver_knife", SILVER).setCreativeTab(Roots.tab));
+    event.addItem(wood_knife = new ItemDruidKnife("wood_knife", ToolMaterial.WOOD).setCreativeTab(Roots.tab));
+    event.addItem(stone_knife = new ItemDruidKnife("stone_knife", ToolMaterial.STONE).setCreativeTab(Roots.tab));
+    event.addItem(iron_knife = new ItemDruidKnife("iron_knife", ToolMaterial.IRON).setCreativeTab(Roots.tab));
+    event.addItem(diamond_knife = new ItemDruidKnife("diamond_knife", ToolMaterial.DIAMOND).setCreativeTab(Roots.tab));
+    event.addItem(gold_knife = new ItemDruidKnife("gold_knife", ToolMaterial.GOLD).setCreativeTab(Roots.tab));
 
     event.addItem(cooked_aubergine = new ItemFoodBase("cooked_aubergine", 5, false).setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(stuffed_aubergine = new ItemFoodBase("stuffed_aubergine", 11, false).setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(stuffed_aubergine = new ItemFoodBase("stuffed_aubergine", 10, false).setModelCustom(true).setCreativeTab(Roots.tab));
 
     event.addItem(seeds = new ItemBase("assorted_seeds").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(cooked_seeds = new ItemFoodBase("cooked_seeds", 1, 0.4f, false) {
@@ -126,8 +132,9 @@ public class ModItems {
         return 8;
       }
     }.setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(cooked_pereskia = new ItemFoodBase("cooked_pereskia", 7, false).setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(cooked_pereskia = new ItemFoodBase("cooked_pereskia", 5, false).setModelCustom(true).setCreativeTab(Roots.tab));
 
+    event.addItem(wildewheet_bread = new ItemFoodBase("wildewheet_bread", 7, false).setModelCustom(true).setCreativeTab(Roots.tab));
     // Rituals
     event.addItem(ritual_life = new ItemBase("ritual_life").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_storm = new ItemBase("ritual_storm").setModelCustom(false).setCreativeTab(null));

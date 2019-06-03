@@ -1,0 +1,27 @@
+{
+  "type": "roots:grove_shaped",
+  "pattern": [
+    "SSS",
+    "SLS",
+    "SSS"
+  ],
+  "key": {
+    "S": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "stone"
+      }
+    ],
+    "L": [
+      {
+        "item": "minecraft:dye",
+        "data": 4
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:runestone",
+    "data": 0,
+    "count": 12
+  }
+}

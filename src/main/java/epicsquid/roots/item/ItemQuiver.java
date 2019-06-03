@@ -46,17 +46,14 @@ public class ItemQuiver extends ItemArrowBase {
     ItemStack normalArrow = findOtherArrow(stack);
     if (!normalArrow.isEmpty()) {
       EntityArrow arrow = ((ItemArrow) normalArrow.getItem()).createArrow(worldIn, normalArrow, shooter);
-      arrow.setDamage(arrow.getDamage() + 3.0D);
-      if (worldIn.rand.nextBoolean()) {
-        stack.damageItem(2, shooter);
-      }
       return arrow;
     }
 
     EntityArrow arrow = new EntityTippedArrow(worldIn, shooter);
     arrow.setDamage(1.5D);
     arrow.getEntityData().setBoolean("generated", true);
-    stack.damageItem(3, shooter);
+
+    stack.damageItem(itemRand.nextInt(2), shooter);
     return arrow;
   }
 

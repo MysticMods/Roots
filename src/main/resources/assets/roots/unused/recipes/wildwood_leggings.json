@@ -1,0 +1,31 @@
+{
+  "type": "roots:grove_shaped",
+  "pattern": [
+    "BHB",
+    "BDB",
+    "B B"
+  ],
+  "key": {
+    "H": [
+      {
+        "item": "minecraft:iron_leggings"
+      }
+    ],
+    "B": [
+      {
+        "item": "roots:bark_wildwood"
+
+      }
+    ],
+    "D": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "gemDiamond"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:wildwood_leggings",
+    "data": 0
+  }
+}

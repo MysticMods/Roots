@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "roots:runic_soil_fire",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "roots:runic_soil",
+    "data": 0
+  }
+}

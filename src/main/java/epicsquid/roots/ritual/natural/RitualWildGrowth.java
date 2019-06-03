@@ -20,7 +20,7 @@ public class RitualWildGrowth extends RitualBase {
                 new ItemStack(ModItems.bark_oak),
                 new ItemStack(ModItems.bark_oak),
                 new ItemStack(ModItems.bark_dark_oak),
-                new ItemStack(Items.DYE, 1, 15))
+                new ItemStack(ModItems.spirit_herb))
         );
         setIcon(ModItems.ritual_wild_growth);
         setColor(TextFormatting.DARK_GRAY);

@@ -1,28 +1,21 @@
 package epicsquid.roots.world.village;
 
-import epicsquid.roots.Roots;
-import javafx.geometry.BoundingBox;
-import net.minecraft.server.MinecraftServer;
+import epicsquid.roots.init.ModBlocks;
+import net.minecraft.block.BlockLog;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
-import net.minecraft.world.gen.structure.template.PlacementSettings;
-import net.minecraft.world.gen.structure.template.Template;
-import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
 import java.util.List;
 import java.util.Random;
 
 public class ComponentDruidHut extends StructureVillagePieces.Village {
-  private final ResourceLocation structure = new ResourceLocation(Roots.MODID, "druidhut");
-
   private EnumFacing facing;
 
   public ComponentDruidHut() {
@@ -42,61 +35,112 @@ public class ComponentDruidHut extends StructureVillagePieces.Village {
 
   @Override
   public boolean addComponentParts(World world, Random random, StructureBoundingBox bb) {
-    if (averageGroundLvl < 0) {
-      averageGroundLvl = getAverageGroundLevel(world, bb);
-      if (averageGroundLvl < 0) {
+    if (this.averageGroundLvl < 0) {
+      this.averageGroundLvl = this.getAverageGroundLevel(world, bb);
+
+      if (this.averageGroundLvl < 0) {
         return true;
       }
-      boundingBox.offset(0, averageGroundLvl - boundingBox.maxY + 10 - 1, 0);
+
+      this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 12 - 1, 0);
     }
 
-    fillWithAir(world, boundingBox, 0, 0, 0, 10, 7, 9);
+    IBlockState cobblestone = Blocks.COBBLESTONE.getDefaultState();
+    IBlockState stairs = ModBlocks.wildwood_stairs.getDefaultState(); // TODO: Facing
+    IBlockState door = ModBlocks.wildwood_door.getDefaultState(); // TODO: Facing
+    IBlockState wildwood_log_down = ModBlocks.wildwood_log.getDefaultState().withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Y);
+    IBlockState planks = ModBlocks.wildwood_planks.getDefaultState();
+    IBlockState thatch = epicsquid.mysticalworld.init.ModBlocks.thatch.getDefaultState();
+    IBlockState runestone = ModBlocks.chiseled_runestone.getDefaultState();
+    IBlockState air = Blocks.AIR.getDefaultState();
 
-    MinecraftServer minecraftServer = world.getMinecraftServer();
-    TemplateManager templateManager = world.getSaveHandler().getStructureTemplateManager();
-    Template template = templateManager.getTemplate(minecraftServer, structure);
+    this.fillWithAir(world, bb, 0, 0, 0, 8, 0, 0);
+    // YEP. Layer 1.
+    this.setBlockState(world, air, 0, 0, 1, bb);
+    this.setBlockState(world, air, 1, 0, 1, bb);
+    this.setBlockState(world, air, 2, 0, 1, bb);
+    this.setBlockState(world, cobblestone, 3, 0, 1, bb);
+    this.setBlockState(world, cobblestone, 4, 0, 1, bb);
+    this.setBlockState(world, cobblestone, 5, 0, 1, bb);
+    this.setBlockState(world, air, 6, 0, 1, bb);
+    this.setBlockState(world, air, 7, 0, 1, bb);
+    this.setBlockState(world, air, 8, 0, 1, bb);
+    // Layer 2
+    this.setBlockState(world, air, 0, 0, 2, bb);
+    this.setBlockState(world, air, 1, 0, 2, bb);
+    this.setBlockState(world, cobblestone, 2, 0, 2, bb);
+    this.setBlockState(world, planks, 3, 0, 2, bb);
+    this.setBlockState(world, planks, 4, 0, 2, bb);
+    this.setBlockState(world, planks, 5, 0, 2, bb);
+    this.setBlockState(world, cobblestone, 6, 0, 2, bb);
+    this.setBlockState(world, air, 7, 0, 2, bb);
+    this.setBlockState(world, air, 8, 0, 2, bb);
+    // Layer 3
+    this.setBlockState(world, air, 0, 0, 3, bb);
+    this.setBlockState(world, cobblestone, 2, 0, 3, bb);
+    this.setBlockState(world, planks, 3, 0, 3, bb);
+    this.setBlockState(world, planks, 4, 0, 3, bb);
+    this.setBlockState(world, planks, 5, 0, 3, bb);
+    this.setBlockState(world, planks, 6, 0, 3, bb);
+    this.setBlockState(world, planks, 7, 0, 3, bb);
+    this.setBlockState(world, cobblestone, 8, 0, 3, bb);
+    this.setBlockState(world, air, 9, 0, 3, bb);
+    // Layer 4
+     this.setBlockState(world, air, 0, 0, 4, bb);
+    this.setBlockState(world, cobblestone, 2, 0, 4, bb);
+    this.setBlockState(world, planks, 3, 0, 4, bb);
+    this.setBlockState(world, planks, 4, 0, 4, bb);
+    this.setBlockState(world, runestone, 5, 0, 4, bb);
+    this.setBlockState(world, planks, 6, 0, 4, bb);
+    this.setBlockState(world, planks, 7, 0, 4, bb);
+    this.setBlockState(world, cobblestone, 8, 0, 4, bb);
+    this.setBlockState(world, air, 9, 0, 4, bb);
+    // Layer 5
+    this.setBlockState(world, air, 0, 0, 5, bb);
+    this.setBlockState(world, cobblestone, 2, 0, 5, bb);
+    this.setBlockState(world, planks, 3, 0, 5, bb);
+    this.setBlockState(world, planks, 4, 0, 5, bb);
+    this.setBlockState(world, planks, 5, 0, 5, bb);
+    this.setBlockState(world, planks, 6, 0, 5, bb);
+    this.setBlockState(world, planks, 7, 0, 5, bb);
+    this.setBlockState(world, cobblestone, 8, 0, 5, bb);
+    this.setBlockState(world, air, 9, 0, 5, bb);
+    // Layer 6
+    this.setBlockState(world, air, 0, 0, 6, bb);
+    this.setBlockState(world, air, 1, 0, 6, bb);
+    this.setBlockState(world, cobblestone, 2, 0, 6, bb);
+    this.setBlockState(world, planks, 3, 0, 6, bb);
+    this.setBlockState(world, planks, 4, 0, 6, bb);
+    this.setBlockState(world, planks, 5, 0, 6, bb);
+    this.setBlockState(world, cobblestone, 6, 0, 6, bb);
+    this.setBlockState(world, air, 7, 0, 6, bb);
+    this.setBlockState(world, air, 8, 0, 6, bb);
+    // Layer 7
+    this.setBlockState(world, air, 0, 0, 7, bb);
+    this.setBlockState(world, air, 1, 0, 7, bb);
+    this.setBlockState(world, air, 2, 0, 7, bb);
+    this.setBlockState(world, cobblestone, 3, 0, 7, bb);
+    this.setBlockState(world, cobblestone, 4, 0, 7, bb);
+    this.setBlockState(world, cobblestone, 5, 0, 7, bb);
+    this.setBlockState(world, air, 6, 0, 7, bb);
+    this.setBlockState(world, air, 7, 0, 7, bb);
+    this.setBlockState(world, air, 8, 0, 7, bb);
+    // Layer 8
+    this.fillWithAir(world, bb, 0, 0, 8, 8, 0, 8);
 
-    PlacementSettings placementSettings = new PlacementSettings();
-
-    placementSettings.setBoundingBox(boundingBox);
-    Rotation rotation = Rotation.NONE;
-    switch (facing) {
-      case EAST:
-        break;
-      case WEST:
-        rotation = Rotation.CLOCKWISE_180;
-        break;
-      case SOUTH:
-        rotation = Rotation.COUNTERCLOCKWISE_90;
-        break;
-      case NORTH:
-        rotation = Rotation.CLOCKWISE_90;
-        break;
-    }
-    placementSettings.setRotation(rotation);
-    placementSettings.setIntegrity(1);
-    placementSettings.setRandom(random);
-
-    BlockPos pos = new BlockPos(boundingBox.minX, boundingBox.minY, boundingBox.minZ); //.down(4).offset(facing.getOpposite(), 4);
-
-    template.addBlocksToWorld(world, pos, placementSettings);
-    return false;
+    return true;
   }
 
   public static ComponentDruidHut create(StructureVillagePieces.PieceWeight piece, StructureVillagePieces.Start start, List<StructureComponent> pieces, Random random, int structMinX, int structMinY, int structMinZ, EnumFacing facing, int type) {
     StructureBoundingBox box = StructureBoundingBox.getComponentToAddBoundingBox(structMinX, structMinY, structMinZ, 0, 0, 0, 10, 7, 9, facing);
-    if (canVillageGoDeeper(box) && StructureComponent.findIntersecting(pieces, box) == null) {
-      return new ComponentDruidHut(start, type, random, box, facing);
-    }
-
-    return null;
+    return (canVillageGoDeeper(box) && StructureComponent.findIntersecting(pieces, box) == null) ? new ComponentDruidHut(start, type, random, box, facing) : null;
   }
 
   public static class CreationHandler implements VillagerRegistry.IVillageCreationHandler {
 
     @Override
     public StructureVillagePieces.PieceWeight getVillagePieceWeight(Random random, int i) {
-      return new StructureVillagePieces.PieceWeight(ComponentDruidHut.class, 5, MathHelper.getInt(random, i, 1 + i));
+      return new StructureVillagePieces.PieceWeight(ComponentDruidHut.class, 500, 1);
     }
 
     @Override

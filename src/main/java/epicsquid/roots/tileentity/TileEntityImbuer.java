@@ -38,7 +38,8 @@ public class TileEntityImbuer extends TileBase implements ITickable {
     protected void onContentsChanged(int slot) {
       TileEntityImbuer.this.markDirty();
       if (!world.isRemote) {
-        PacketHandler.sendToAllTracking(new MessageTEUpdate(TileEntityImbuer.this.getUpdateTag()), TileEntityImbuer.this);
+        TileEntityImbuer.this.updatePacketViaState();
+        //PacketHandler.sendToAllTracking(new MessageTEUpdate(TileEntityImbuer.this.getUpdateTag()), TileEntityImbuer.this);
       }
     }
   };
@@ -92,7 +93,8 @@ public class TileEntityImbuer extends TileBase implements ITickable {
           if (attemptedInsert.isEmpty()) {
             player.getHeldItem(hand).shrink(1);
             markDirty();
-            PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+            updatePacketViaState();
+            //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
             return true;
           }
         }
@@ -124,7 +126,8 @@ public class TileEntityImbuer extends TileBase implements ITickable {
               player.setHeldItem(hand, ItemStack.EMPTY);
             }
             markDirty();
-            PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+            updatePacketViaState();
+            //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
             return true;
           }
         }
@@ -192,7 +195,8 @@ public class TileEntityImbuer extends TileBase implements ITickable {
             inventory.extractItem(0, 1, false);
             inventory.extractItem(1, 1, false);
             markDirty();
-            PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+            updatePacketViaState();
+            //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
             PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(spell.getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
           }
           else{
@@ -201,21 +205,24 @@ public class TileEntityImbuer extends TileBase implements ITickable {
             capability.addModule(module);
             inventory.extractItem(1, 1, false);
             markDirty();
-            PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+            updatePacketViaState();
+            //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
             PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(capability.getSelectedSpell().getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
           }
         }
       }
       this.markDirty();
       if (!world.isRemote) {
-        PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+        updatePacketViaState();
+        //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
       }
     } else {
       if (progress != 0) {
         progress = 0;
         this.markDirty();
         if (!world.isRemote) {
-          PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+          updatePacketViaState();
+          //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
         }
       }
     }

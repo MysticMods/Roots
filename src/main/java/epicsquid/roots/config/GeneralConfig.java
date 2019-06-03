@@ -15,6 +15,15 @@ public class GeneralConfig {
 
   @Config.Comment(("Maximum nubmer of pulls for injected loot"))
   public static int InjectMaximum = 1;
+
+  @Config.Comment(("Set to true to automatically equip component and apothecary pouches when right-clicking"))
+  public static boolean AutoEquipPouches = false;
+
+  @Config.Comment(("Set to true to automatically refill your component and apothecary pouches when picking up herbs"))
+  public static boolean AutoRefillPouches = true;
+
+  @Config.Comment(("The aoe-radius for using runic shears to aoe-shear things"))
+  public static int RunicShearsRadius = 7;
 }
 
 

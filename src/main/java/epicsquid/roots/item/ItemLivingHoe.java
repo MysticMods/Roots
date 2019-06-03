@@ -1,25 +1,16 @@
 package epicsquid.roots.item;
 
-import epicsquid.mysticallib.LibRegistry;
-import epicsquid.mysticallib.model.CustomModelItem;
-import epicsquid.mysticallib.model.CustomModelLoader;
-import epicsquid.mysticallib.model.ICustomModeledObject;
-import epicsquid.mysticallib.model.IModeledObject;
-import epicsquid.mysticallib.util.Util;
+import epicsquid.mysticallib.item.ItemHoeBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -27,39 +18,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemLivingHoe extends ItemHoe implements IModeledObject, ICustomModeledObject, ILivingRepair {
-
-  private boolean hasCustomModel = false;
+public class ItemLivingHoe extends ItemHoeBase implements ILivingRepair {
 
   public ItemLivingHoe(ToolMaterial material, String name) {
-    super(material);
-    setTranslationKey(name);
-    setRegistryName(LibRegistry.getActiveModid(), name);
-    setHarvestLevel("hoe", 3);
-    setMaxDamage(192);
-  }
-
-  @Override
-  public int getItemEnchantability() {
-    return 22;
-  }
-
-  public ItemLivingHoe setModelCustom(boolean custom) {
-    this.hasCustomModel = custom;
-    return this;
-  }
-
-  @Override
-  public void initModel() {
-    ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "handlers"));
-  }
-
-  @Override
-  public void initCustomModel() {
-    if (this.hasCustomModel) {
-      CustomModelLoader.itemmodels.put(getRegistryName(),
-          new CustomModelItem(false, new ResourceLocation(getRegistryName().getNamespace() + ":items/" + getRegistryName().getPath())));
-    }
+    super(material, name, 3, 192, 22);
   }
 
   @Override

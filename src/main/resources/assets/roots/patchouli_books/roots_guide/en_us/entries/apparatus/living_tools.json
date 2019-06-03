@@ -10,23 +10,23 @@
       "text": "Living Tools are a druid's solution to making wooden tools less useless by encouraging the organic matter within to reach its maximum potential. Reinforcing the tool with tree bark and wildroot allows it to slowly regrow itself when worn down, and inlaying it with bits of gold seems to make it about as effective as an iron tool in most regards."
     },
     {
-      "type": "ritual_crafting_template",
+      "type": "grove_crafting_template",
       "recipe": "living_pickaxe"
     },
     {
-      "type": "ritual_crafting_template",
+      "type": "grove_crafting_template",
       "recipe": "living_axe"
     },
     {
-      "type": "ritual_crafting_template",
+      "type": "grove_crafting_template",
       "recipe": "living_shovel"
     },
     {
-      "type": "ritual_crafting_template",
+      "type": "grove_crafting_template",
       "recipe": "living_hoe"
     },
     {
-      "type": "ritual_crafting_template",
+      "type": "grove_crafting_template",
       "recipe": "living_sword"
     },
     {
@@ -35,7 +35,7 @@
       "text": "While too brittle and frail to be fully imbued with wildroot, these sturdy arrows should get you through the worst of fights."
     },
     {
-      "type": "ritual_crafting_template",
+      "type": "grove_crafting_template",
       "recipe": "living_arrow"
     }
   ]

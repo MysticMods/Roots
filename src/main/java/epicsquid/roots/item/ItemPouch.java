@@ -3,19 +3,30 @@ package epicsquid.roots.item;
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
+import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.gui.GuiHandler;
-import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.gui.Keybinds;
 import epicsquid.roots.handler.PouchHandler;
+import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.integration.baubles.pouch.PouchEquipHandler;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class ItemPouch extends ItemBase {
 
@@ -24,7 +35,7 @@ public class ItemPouch extends ItemBase {
     this.setMaxStackSize(1);
   }
 
-  public boolean isApothecary () {
+  public boolean isApothecary() {
     return false;
   }
 
@@ -49,8 +60,27 @@ public class ItemPouch extends ItemBase {
   @Override
   @Nonnull
   public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
-    player.openGui(Roots.getInstance(), GuiHandler.POUCH_ID, world, 0, 0, 0);
-    return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
+    ItemStack stack = player.getHeldItem(hand);
+    boolean isBaublesLoaded = Loader.isModLoaded("baubles");
+    boolean open_gui = false;
+    if (GeneralConfig.AutoEquipPouches) {
+      if (player.isSneaking()) {
+        open_gui = true;
+      }
+      if (isBaublesLoaded) {
+        if (!world.isRemote) {
+          if (!PouchEquipHandler.tryEquipPouch(player, stack)) {
+            open_gui = true;
+          }
+        }
+      }
+    } else {
+      open_gui = true;
+    }
+    if (!world.isRemote && open_gui) {
+      player.openGui(Roots.getInstance(), GuiHandler.POUCH_ID, world, 0, 0, 0);
+    }
+    return new ActionResult<>(EnumActionResult.SUCCESS, stack);
   }
 
   private static ItemStack createData(ItemStack stack, Herb herb, double quantity) {
@@ -95,16 +125,27 @@ public class ItemPouch extends ItemBase {
     PouchHandler pouchHandler = PouchHandler.getHandler(pouch);
     if (pouchHandler == null) return false;
     IItemHandler handler = pouchHandler.getHerbs();
-
     for (int i = 0; i < handler.getSlots(); i++) {
-        ItemStack stack = handler.getStackInSlot(i);
-        if (!stack.isEmpty() && HerbRegistry.containsHerbItem(stack.getItem()) && HerbRegistry.getHerbByItem(stack.getItem()).equals(herb)) {
-          if (!handler.extractItem(i, 1, false).isEmpty()) {
-            createData(pouch, herb, 1.0);
-            return true;
-          }
+      ItemStack stack = handler.getStackInSlot(i);
+      if (!stack.isEmpty() && HerbRegistry.containsHerbItem(stack.getItem()) && HerbRegistry.getHerbByItem(stack.getItem()).equals(herb)) {
+        if (!handler.extractItem(i, 1, false).isEmpty()) {
+          createData(pouch, herb, 1.0);
+          return true;
         }
       }
+    }
     return false;
+  }
+
+  @SideOnly(Side.CLIENT)
+  @Override
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+    if (GeneralConfig.AutoEquipPouches && Loader.isModLoaded("baubles")) {
+      tooltip.add(TextFormatting.GREEN + I18n.format("roots.tooltip.pouch", Keybinds.POUCH_KEYBIND.getDisplayName()));
+    } else {
+      tooltip.add(TextFormatting.GREEN + I18n.format("roots.tooltip.pouch2", Keybinds.POUCH_KEYBIND.getDisplayName()));
+    }
+
+    super.addInformation(stack, worldIn, tooltip, flagIn);
   }
 }

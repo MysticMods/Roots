@@ -48,7 +48,7 @@ public class ItemStaff extends ItemBase {
     SpellHandler oldCapability = SpellHandler.fromStack(oldStack);
     SpellHandler newCapability = SpellHandler.fromStack(newStack);
 
-    if(oldCapability != null && newCapability != null){
+    if (oldCapability != null && newCapability != null) {
       return slotChanged || oldCapability.getSelectedSlot() != newCapability.getSelectedSlot();
     }
 
@@ -131,9 +131,9 @@ public class ItemStaff extends ItemBase {
   @Override
   public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
     SpellHandler capability = SpellHandler.fromStack(stack);
-    if(capability.getCooldown() > 0){
+    if (capability.getCooldown() > 0) {
       capability.setCooldown(capability.getCooldown() - 1);
-      if(capability.getCooldown() <= 0){
+      if (capability.getCooldown() <= 0) {
         capability.setCooldown(0);
         capability.setLastCooldown(0);
       }
@@ -143,7 +143,7 @@ public class ItemStaff extends ItemBase {
   public static void createData(ItemStack stack, SpellHandler dustCapability) {
     SpellHandler capability = SpellHandler.fromStack(stack);
     capability.setSpellToSlot(dustCapability.getSelectedSpell());
-    for(SpellModule module : dustCapability.getSelectedModules()){
+    for (SpellModule module : dustCapability.getSelectedModules()) {
       capability.addModule(module);
     }
   }
@@ -162,19 +162,25 @@ public class ItemStaff extends ItemBase {
     if (spell != null) {
       tooltip.add("");
       spell.addToolTip(tooltip);
+      List<SpellModule> spellModules = capability.getSelectedModules();
+      if (!spellModules.isEmpty()) {
+        tooltip.add(I18n.format("roots.spell.module.description"));
+        String prefix = "roots.spell." + spell.getName();
+        for (SpellModule module : spellModules) {
+          tooltip.add(module.getFormat() + I18n.format("roots.spell.module." + module.getName() + ".name") + ": " + I18n.format(prefix + "." + module.getName() + ".description"));
+        }
+      }
     } else {
       tooltip.add("");
       tooltip.add("No spell.");
     }
     if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
       tooltip.add("");
-      int curSlot = capability.getSelectedSlot();
       for (int i = 0; i < 5; i++) {
         SpellBase other = capability.getSpellInSlot(i);
         if (other == null) {
           tooltip.add("" + (i + 1) + ": No spell.");
-        } else
-        {
+        } else {
           tooltip.add("" + (i + 1) + ": " + other.getTextColor() + TextFormatting.BOLD + I18n.format("roots.spell." + other.getName() + ".name"));
         }
       }
@@ -199,8 +205,8 @@ public class ItemStaff extends ItemBase {
     if (spell != null) {
       double factor = 0.5f * (Math.sin(6.0f * Math.toRadians(EventManager.ticks + Minecraft.getMinecraft().getRenderPartialTicks())) + 1.0f);
       return Util
-              .intColor((int) (255 * (spell.getRed1() * factor + spell.getRed2() * (1.0 - factor))), (int) (255 * (spell.getGreen1() * factor + spell.getGreen2() * (1.0 - factor))),
-                      (int) (255 * (spell.getBlue1() * factor + spell.getBlue2() * (1.0 - factor))));
+          .intColor((int) (255 * (spell.getRed1() * factor + spell.getRed2() * (1.0 - factor))), (int) (255 * (spell.getGreen1() * factor + spell.getGreen2() * (1.0 - factor))),
+              (int) (255 * (spell.getBlue1() * factor + spell.getBlue2() * (1.0 - factor))));
     }
     return Util.intColor(255, 255, 255);
   }
@@ -246,7 +252,7 @@ public class ItemStaff extends ItemBase {
       }
 
       SpellHandler capability = SpellHandler.fromStack(stack);
-      if(capability.hasSpellInSlot()){
+      if (capability.hasSpellInSlot()) {
         String s = capability.getSelectedSpell().getName();
         if (SpellRegistry.spellRegistry.containsKey(s)) {
           return new ModelResourceLocation(baseName.toString() + "_1");
@@ -300,5 +306,16 @@ public class ItemStaff extends ItemBase {
       }
       return Util.intColor(255, 255, 255);
     }
+  }
+
+  @Override
+  public String getHighlightTip(ItemStack stack, String displayName) {
+    SpellHandler capability = SpellHandler.fromStack(stack);
+    String additional = capability.formatSelectedSpell();
+    if (additional != null) {
+      return displayName + " " + additional;
+    }
+
+    return displayName;
   }
 }

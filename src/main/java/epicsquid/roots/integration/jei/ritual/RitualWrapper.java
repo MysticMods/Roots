@@ -1,6 +1,5 @@
 package epicsquid.roots.integration.jei.ritual;
 
-import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;

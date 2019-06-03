@@ -1,14 +1,14 @@
 package epicsquid.roots.integration.jei;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import epicsquid.roots.Roots;
+import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.jei.carving.RunicCarvingCategory;
 import epicsquid.roots.integration.jei.carving.RunicCarvingWrapper;
+import epicsquid.roots.integration.jei.grove.GroveCategory;
+import epicsquid.roots.integration.jei.grove.GroveWrapper;
 import epicsquid.roots.integration.jei.mortar.MortarCategory;
 import epicsquid.roots.integration.jei.mortar.MortarWrapper;
 import epicsquid.roots.integration.jei.ritual.RitualCategory;
@@ -17,11 +17,11 @@ import epicsquid.roots.integration.jei.ritual.RitualCraftingWrapper;
 import epicsquid.roots.integration.jei.ritual.RitualWrapper;
 import epicsquid.roots.integration.jei.shears.RunicShearsCategory;
 import epicsquid.roots.integration.jei.shears.RunicShearsWrapper;
-import epicsquid.roots.handler.SpellHandler;
-import epicsquid.roots.recipe.MortarRecipe;
-import epicsquid.roots.recipe.PyreCraftingRecipe;
-import epicsquid.roots.recipe.RunicCarvingRecipe;
-import epicsquid.roots.recipe.RunicShearRecipe;
+import epicsquid.roots.integration.jei.spell.SpellCostCategory;
+import epicsquid.roots.integration.jei.spell.SpellCostWrapper;
+import epicsquid.roots.integration.jei.spell.SpellModifierCategory;
+import epicsquid.roots.integration.jei.spell.SpellModifierWrapper;
+import epicsquid.roots.recipe.*;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellBase;
@@ -33,6 +33,12 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @JEIPlugin
 public class JEIRootsPlugin implements IModPlugin {
 
@@ -41,16 +47,21 @@ public class JEIRootsPlugin implements IModPlugin {
   public static final String RITUAL_CRAFTING = Roots.MODID + ".ritual_crafting";
   public static final String MORTAR_AND_PESTLE = Roots.MODID + ".mortar_and_pestle";
   public static final String RITUAL = Roots.MODID + ".ritual";
+  public static final String GROVE_CRAFTING = Roots.MODID + ".grove_crafting";
+  public static final String SPELL_COSTS = Roots.MODID + ".spell_costs";
+  public static final String SPELL_MODIFIERS = Roots.MODID + ".spell_modifiers";
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registry) {
     IGuiHelper helper = registry.getJeiHelpers().getGuiHelper();
-    registry.addRecipeCategories(
-        new RunicShearsCategory(helper),
+    registry.addRecipeCategories(new RunicShearsCategory(helper),
         new RunicCarvingCategory(helper),
         new RitualCraftingCategory(helper),
         new MortarCategory(helper),
-        new RitualCategory(helper)
+        new RitualCategory(helper),
+        new GroveCategory(helper),
+        new SpellCostCategory(helper),
+        new SpellModifierCategory(helper)
     );
   }
 
@@ -62,13 +73,27 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(MortarRecipe.class, MortarWrapper::new, MORTAR_AND_PESTLE);
     registry.handleRecipes(SpellBase.class, MortarWrapper::new, MORTAR_AND_PESTLE);
     registry.handleRecipes(RitualBase.class, RitualWrapper::new, RITUAL);
+    registry.handleRecipes(GroveCraftingRecipe.class, GroveWrapper::new, GROVE_CRAFTING);
+    registry.handleRecipes(SpellBase.class, SpellCostWrapper::new, SPELL_COSTS);
+    registry.handleRecipes(SpellBase.class, SpellModifierWrapper::new, SPELL_MODIFIERS);
 
-    registry.addRecipes(ModRecipes.getRunicShearRecipes().values(), RUNIC_SHEARS);
+    Collection<SpellBase> spells = SpellRegistry.spellRegistry.values();
+
+    Map<String, RunicShearRecipe> runicShearRecipes = ModRecipes.getRunicShearRecipes();
+    List<RunicShearRecipe> runicShearBlockRecipes = runicShearRecipes.values().stream().filter(RunicShearRecipe::isBlockRecipe).collect(Collectors.toList());
+
+    // TODO:
+    List<RunicShearRecipe> runicShearEntityRecipes = runicShearRecipes.values().stream().filter(RunicShearRecipe::isEntityRecipe).collect(Collectors.toList());
+
+    registry.addRecipes(runicShearBlockRecipes, RUNIC_SHEARS);
     registry.addRecipes(ModRecipes.getRunicCarvingRecipes(), RUNIC_CARVING);
     registry.addRecipes(ModRecipes.getPyreCraftingRecipes().values(), RITUAL_CRAFTING);
     registry.addRecipes(ModRecipes.getMortarRecipes(), MORTAR_AND_PESTLE);
-    registry.addRecipes(SpellRegistry.spellRegistry.values(), MORTAR_AND_PESTLE);
+    registry.addRecipes(spells, MORTAR_AND_PESTLE);
+    registry.addRecipes(spells, SPELL_COSTS);
     registry.addRecipes(RitualRegistry.ritualRegistry.values(), RITUAL);
+    registry.addRecipes(ModRecipes.getGroveCraftingRecipes().values(), GROVE_CRAFTING);
+    registry.addRecipes(spells.stream().filter(SpellBase::hasModules).collect(Collectors.toList()), SPELL_MODIFIERS);
 
     registry.addRecipeCatalyst(new ItemStack(ModItems.runic_shears), RUNIC_SHEARS);
     registry.addRecipeCatalyst(new ItemStack(ModItems.wood_knife), RUNIC_CARVING);
@@ -76,12 +101,16 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModItems.iron_knife), RUNIC_CARVING);
     registry.addRecipeCatalyst(new ItemStack(ModItems.gold_knife), RUNIC_CARVING);
     registry.addRecipeCatalyst(new ItemStack(ModItems.diamond_knife), RUNIC_CARVING);
-    registry.addRecipeCatalyst(new ItemStack(ModItems.copper_knife), RUNIC_CARVING);
-    registry.addRecipeCatalyst(new ItemStack(ModItems.silver_knife), RUNIC_CARVING);
+    registry.addRecipeCatalyst(new ItemStack(epicsquid.mysticalworld.init.ModItems.copper_knife), RUNIC_CARVING);
+    registry.addRecipeCatalyst(new ItemStack(epicsquid.mysticalworld.init.ModItems.silver_knife), RUNIC_CARVING);
+    registry.addRecipeCatalyst(new ItemStack(epicsquid.mysticalworld.init.ModItems.amethyst_knife), RUNIC_CARVING);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.bonfire), RITUAL_CRAFTING);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.mortar), MORTAR_AND_PESTLE);
     registry.addRecipeCatalyst(new ItemStack(ModItems.pestle), MORTAR_AND_PESTLE);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.bonfire), RITUAL);
+    registry.addRecipeCatalyst(new ItemStack(ModBlocks.grove_crafter), GROVE_CRAFTING);
+    registry.addRecipeCatalyst(new ItemStack(ModItems.staff), SPELL_COSTS);
+    registry.addRecipeCatalyst(new ItemStack(ModBlocks.imbuer), SPELL_MODIFIERS);
 
     registry.addIngredientInfo(new ItemStack(ModItems.terra_moss), VanillaTypes.ITEM, I18n.format("jei.roots.terra_moss.desc"));
     registry.addIngredientInfo(new ItemStack(ModItems.terra_spores), VanillaTypes.ITEM, I18n.format("jei.roots.terra_spores.desc"));
@@ -100,6 +129,8 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_log), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood.desc"));
     registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_sapling), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood_sapling.desc"));
     registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_leaves), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood_leaves.desc"));
+
+    registry.getRecipeTransferRegistry().addRecipeTransferHandler(new GroveCrafterTransfer());
   }
 
   @Override

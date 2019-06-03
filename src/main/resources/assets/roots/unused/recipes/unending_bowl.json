@@ -1,0 +1,39 @@
+{
+  "type": "roots:grove_shaped",
+  "pattern": [
+    " L ",
+    "TBS",
+    " M "
+  ],
+  "key": {
+    "L": [
+      {
+        "item": "roots:moonglow_leaf"
+      }
+    ],
+    "B": [
+      {
+        "item": "minecraft:water_bucket"
+      }
+    ],
+    "M": [
+      {
+        "item": "roots:mortar"
+      }
+    ],
+    "T": [
+      {
+        "item": "roots:terra_moss"
+      }
+    ],
+    "S": [
+      {
+        "item": "roots:spirit_herb"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:unending_bowl",
+    "data": 0
+  }
+}

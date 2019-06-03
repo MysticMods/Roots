@@ -16,7 +16,8 @@ item.living_shovel.name=Living Shovel
 item.living_hoe.name=Living Hoe
 item.living_sword.name=Living Sword
 item.living_arrow.name=Living Arrow
-item.living_quiver.name=Living Quiver
+item.wildwood_quiver.name=Wildwood Quiver
+item.wildwood_bow.name=Wildwood Bow
 item.aer_ash.name=Aer Ash
 item.terra_ash.name=Terra Ash
 item.runic_shears.name=Runic Shears
@@ -62,6 +63,9 @@ tile.runestone_brick_pressure_plate.name=Runestone Brick Pressure Plate
 tile.runestone_brick_alt_pressure_plate.name=Runestone Brick Pressure Plate
 tile.wildwood_sapling.name=Wildwood Sapling
 tile.wildwood_ladder.name=Wildwood Ladder
+tile.grove_stone.name=Grove Stone
+tile.grove_crafter.name=Grove Crafter
+tile.faerie_light_block.name=Fae Light
 
 roots.tooltip.petaldust.notag=This Petal Dust has no NBT data! It is potentially prone to errors and should not be used!
 roots.tooltip.staff.notag=This Staff has no NBT data! It is potentially prone to errors and should not be used!
@@ -69,6 +73,8 @@ roots.tooltip.staff.selected=Selected Slot:
 roots.tooltip.pouch_divider=: x
 roots.tooltip.trap_paper_health=Health: 
 roots.tooltip.trap_paper_health_divider= /
+roots.tooltip.pouch=Sneak-Right-Click or %s to open pouch.
+roots.tooltip.pouch2=Right-Click or %s to open pouch.
 
 roots.info.staff.slot_and_spell=Selected Slot (%d) has spell: %s
 roots.info.staff.no_slots=Your staff has no room for new spells!
@@ -78,6 +84,8 @@ roots.info.pyre.repeat1=Sneak-Right-Click
 roots.info.pyre.repeat2=to repeat ritual.
 roots.info.pyre.repeat3=to repeat craft.
 
+roots.spell.module.module_fire.name=Fire
+roots.spell.module.description=Spell module:
 roots.spell.spell_wild_fire.name=Wildfire
 roots.spell.spell_dandelion_winds.name=Dandelion Winds
 roots.spell.spell_sanctuary.name=Sanctuary
@@ -90,6 +98,7 @@ roots.spell.spell_time_stop.name=Time Stop
 roots.spell.spell_petal_shell.name=Petal Shell
 roots.spell.spell_rose_thorns.name=Rose's Thorns
 roots.spell.spell_acid_cloud.name=Acid Cloud
+roots.spell.spell_acid_cloud.module_fire.description=Sets targets on fire.
 roots.spell.spell_mind_ward.name=Mind Ward
 roots.spell.spell_growth_infusion.name=Growth Infusion
 roots.spell.spell_sense_animals.name=Sense Animals
@@ -101,6 +110,8 @@ roots.spell.spell_sense_danger.name=Sense Danger
 roots.spell.spell_harvest.name=Harvest
 roots.spell.spell_zephyr_slice.name=Zephyr's Slice
 roots.spell.spell_rampant_growth.name=Rampant Growth
+roots.spell.spell_supplication.name=Grove Supplication
+roots.spell.spell_fae_light.name=Fae Light
 
 roots.ritual.ritual_life.name=Healing Aura
 roots.ritual.ritual_storm.name=Heavy Storms
@@ -154,8 +165,6 @@ item.stone_knife.name=Stone Knife
 item.iron_knife.name=Iron Knife
 item.gold_knife.name=Golden Knife
 item.diamond_knife.name=Diamond Knife
-item.silver_knife.name=Silver Knife
-item.copper_knife.name=Copper Knife
 
 # Advancements
 advancement.roots.root=The Root of Magic
@@ -264,6 +273,7 @@ item.runic_dust.name=Runic Dust
 item.cooked_aubergine.name=Cooked Aubergine
 item.stuffed_aubergine.name=Stuffed Aubergine
 item.cooked_pereskia.name=Roasted Pereskia
+item.wildewheet_bread.name=Wildewheet Bread
 
 # JEI
 container.roots.runic_shears.name=Runic Shearing
@@ -271,6 +281,9 @@ container.roots.runic_carving.name=Runic Carving
 container.roots.ritual_crafting.name=Pyre Crafting Ritual
 container.roots.mortar_and_pestle.name=Mortar and Pestle
 container.roots.ritual.name=Pyre Ritual
+container.roots.grove_crafting.name=Grove Crafting
+container.roots.spell_costs.name=Spell Costs
+container.roots.spell_modifiers.name=Spell Modifiers
 jei.roots.terra_moss.desc=Scraped from moss cobblestone with a knife. Cobblestone infused with terra spores will grow moss when adjacent to water.
 jei.roots.terra_spores.desc=Dropped from broken tall grass; used on cobblestone adjacent allows the spores to grow, turning it into moss cobblestone.
 jei.roots.wildroot.desc=Dropped from broken tall grass and the extremely rare leaves of the wildwood tree.
@@ -297,3 +310,17 @@ config.roots.subcategory.disable_spells=Enable / Disable Spells
 config.roots.subcategory.spell_features=Spell Features
 config.roots.subcategory.disable_rituals=Enable / Disable Rituals
 config.roots.subcategory.worldgen=World Generation Settings
+
+# WAILA/TOP/etc
+roots.hud.grove_stone.valid=Valid stone
+roots.hud.pyre.recipe=Crafting: %s
+roots.hud.pyre.ritual=Ritual: %s
+roots.hud.pyre.progress=Progress: %.2f minutes remaining
+
+roots.hud.top.pyre.recipe=Crafting:
+roots.hud.top.pyre.ritual=Ritual:
+roots.hud.top.pyre.progress=Progress:
+roots.hud.top.pyre.progress_info=minutes remaining
+
+# Runic Shears
+roots.runic_shears.cooldown=The fay has yet to regrow for this creature.

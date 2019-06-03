@@ -7,193 +7,23 @@
   "pages": [
     {
       "type": "text",
-      "text": "Recent researches on cultivation have shown that you can interweave herbs with other materials to get a quite strong cloth; you might be able to make robes out of it, further inspection tells you that depending on the herb used to craft the armor you gain different abilities; this robes are stronger than leather but less strong than iron."
+      "text": "These robes definitely preferable to animal skins. In addition to the small amount of protection they give, the magical nature of their ingredients is also imparted onto the wearer and their possessions, reducing the cost of spells and other abilities that use herbs by 5%."
     },
     {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_helmet_terra_moss"
+      "type": "grove_crafting_template",
+      "recipe": "sylvan_helmet"
     },
     {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_chestplate_terra_moss"
+      "type": "grove_crafting_template",
+      "recipe": "sylvan_chestplate"
     },
     {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_leggings_terra_moss"
+      "type": "grove_crafting_template",
+      "recipe": "sylvan_leggings"
     },
     {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_boots_terra_moss"
-    },
-
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_helmet_baffle_cap"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_chestplate_baffle_cap"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_leggings_baffle_cap"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_boots_baffle_cap"
-    },
-
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_helmet_wildroot"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_chestplate_wildroot"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_leggings_wildroot"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_boots_wildroot"
-    },
-
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_helmet_moonglow_leaf"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_chestplate_moonglow_leaf"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_leggings_moonglow_leaf"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_boots_moonglow_leaf"
-    },
-
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_helmet_wildewheet"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_chestplate_wildewheet"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_leggings_wildewheet"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_boots_wildewheet"
-    },
-
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_helmet_spirit_herb"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_chestplate_spirit_herb"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_leggings_spirit_herb"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_boots_spirit_herb"
-    },
-
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_helmet_stalicripe"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_chestplate_stalicripe"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_leggings_stalicripe"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_boots_stalicripe"
-    },
-
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_helmet_pereskia"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_chestplate_pereskia"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_leggings_pereskia"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_boots_pereskia"
-    },
-
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_helmet_cloud_berry"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_chestplate_cloud_berry"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_leggings_cloud_berry"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_boots_cloud_berry"
-    },
-
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_helmet_dewgonia"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_chestplate_dewgonia"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_leggings_dewgonia"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_boots_dewgonia"
-    },
-
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_helmet_infernal_bulb"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_chestplate_infernal_bulb"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_leggings_infernal_bulb"
-    },
-    {
-      "type": "ritual_crafting_template",
-      "recipe": "sylvan_boots_infernal_bulb"
+      "type": "grove_crafting_template",
+      "recipe": "sylvan_boots"
     }
   ]
 }

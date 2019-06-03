@@ -1,0 +1,30 @@
+{
+  "type": "roots:grove_shaped",
+  "pattern": [
+    "BHB",
+    "BDB"
+  ],
+  "key": {
+    "H": [
+      {
+        "item": "minecraft:iron_boots"
+      }
+    ],
+    "B": [
+      {
+        "item": "roots:bark_wildwood"
+
+      }
+    ],
+    "D": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "gemDiamond"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:wildwood_boots",
+    "data": 0
+  }
+}

@@ -6,9 +6,13 @@ import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -82,6 +86,14 @@ public class SpellHandler implements INBTSerializable<NBTTagCompound> {
     @Nullable
     public SpellBase getSelectedSpell() {
         return spells.get(this.selectedSlot);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public String formatSelectedSpell () {
+        SpellBase spell = spells.get(this.selectedSlot);
+        if (spell == null) return "";
+
+        return "(" + spell.getTextColor() + TextFormatting.BOLD + I18n.format("roots.spell." + spell.getName() + ".name") + TextFormatting.RESET + ")";
     }
 
     public void clearSelectedSlot() {

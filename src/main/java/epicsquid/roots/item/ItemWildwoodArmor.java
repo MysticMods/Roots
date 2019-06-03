@@ -19,9 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public class ItemWildwoodArmor extends ItemArmor implements IModeledObject {
-
-    private int delayTicks = 0;
+public class ItemWildwoodArmor extends ItemArmor implements IModeledObject, ILivingRepair {
 
     public ItemWildwoodArmor(ArmorMaterial material, EntityEquipmentSlot slot, String name)
     {
@@ -56,10 +54,8 @@ public class ItemWildwoodArmor extends ItemArmor implements IModeledObject {
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
     {
-        delayTicks++;
-        if (delayTicks == 60 && player.shouldHeal())
+        if (itemRand.nextInt(60) == 0 && player.shouldHeal()) {
             player.heal(1);
-
-        delayTicks = 0;
+        }
     }
 }

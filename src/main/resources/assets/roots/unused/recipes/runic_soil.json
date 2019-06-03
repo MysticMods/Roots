@@ -1,0 +1,27 @@
+{
+  "type": "roots:grove_shapeless",
+  "ingredients": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "dirt"
+      },
+      {
+        "item": "roots:terra_moss"
+      },
+      {
+        "item": "roots:wildroot"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "gravel"
+      },
+      {
+        "item": "minecraft:dye",
+        "data": 15
+      }
+  ],
+  "result": {
+    "item": "roots:runic_soil",
+    "data": 0
+  }
+}

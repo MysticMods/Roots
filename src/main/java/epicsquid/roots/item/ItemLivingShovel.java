@@ -1,57 +1,45 @@
 package epicsquid.roots.item;
 
-import epicsquid.mysticallib.LibRegistry;
-import epicsquid.mysticallib.model.CustomModelItem;
-import epicsquid.mysticallib.model.CustomModelLoader;
-import epicsquid.mysticallib.model.ICustomModeledObject;
-import epicsquid.mysticallib.model.IModeledObject;
-import epicsquid.mysticallib.util.Util;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import epicsquid.mysticallib.item.ItemShovelBase;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemSpade;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 
-public class ItemLivingShovel extends ItemSpade implements IModeledObject, ICustomModeledObject, ILivingRepair {
-
-  private boolean hasCustomModel = false;
-
+public class ItemLivingShovel extends ItemShovelBase implements ILivingRepair {
   public ItemLivingShovel(ToolMaterial material, String name) {
-    super(material);
-    setTranslationKey(name);
-    setRegistryName(LibRegistry.getActiveModid(), name);
-    setHarvestLevel("shovel", 3);
-    setMaxDamage(192);
-  }
-
-  @Override
-  public int getItemEnchantability() {
-    return 22;
-  }
-
-  public ItemLivingShovel setModelCustom(boolean custom) {
-    this.hasCustomModel = custom;
-    return this;
-  }
-
-  @Override
-  public void initModel() {
-    ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "handlers"));
-  }
-
-  @Override
-  public void initCustomModel() {
-    if (this.hasCustomModel) {
-      CustomModelLoader.itemmodels.put(getRegistryName(),
-          new CustomModelItem(false, new ResourceLocation(getRegistryName().getNamespace() + ":items/" + getRegistryName().getPath())));
-    }
+    super(material, name, 3, 192, 22);
   }
 
   @Override
   public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
     update(stack, worldIn, entityIn, itemSlot, isSelected);
     super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
+  }
+
+  @Override
+  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    ItemStack stack = player.getHeldItem(hand);
+    Block block = worldIn.getBlockState(pos).getBlock();
+
+    if(facing != EnumFacing.DOWN && worldIn.isAirBlock(pos.up()) && (block == Blocks.GRASS || block == Blocks.DIRT)){
+      if(!worldIn.isRemote) {
+        worldIn.playSound(null, pos, Blocks.GRASS_PATH.getSoundType().getStepSound(), SoundCategory.BLOCKS,1F,1F);
+        worldIn.setBlockState(pos, Blocks.GRASS_PATH.getDefaultState());
+        if(!player.capabilities.isCreativeMode){
+          stack.damageItem(1,player);
+        }
+      }
+      return EnumActionResult.SUCCESS;
+    }
+
+    return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
   }
 }

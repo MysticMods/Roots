@@ -1,0 +1,36 @@
+{
+  "type": "roots:grove_shaped",
+  "pattern": [
+    "V V",
+    "BHB",
+    "BDB"
+  ],
+  "key": {
+    "H": [
+      {
+        "item": "minecraft:golden_chestplate"
+      }
+    ],
+    "B": [
+      {
+        "item": "roots:bark_birch"
+
+      }
+    ],
+    "D": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "gemDiamond"
+      }
+    ],
+    "V": [
+      {
+        "item": "minecraft:vine"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:sylvan_chestplate",
+    "data": 0
+  }
+}

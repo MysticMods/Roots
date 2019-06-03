@@ -12,6 +12,10 @@
     {
       "type": "spell_template",
       "spell": "spell_acid_cloud"
+    },
+    {
+      "type": "spell_modifiers_template",
+      "spell": "spell_acid_cloud"
     }
   ]
 }

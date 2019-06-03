@@ -1,6 +1,7 @@
 {
     "variants": {
-        "powered=false": { "model": "roots:wildwood_pressure_plate_up" },
-        "powered=true": { "model": "roots:wildwood_pressure_plate_down" }
+			"custom": {
+				"model": "roots:wildwood_pressure_plate"
+			}
     }
 }

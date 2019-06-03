@@ -2,8 +2,10 @@ package epicsquid.roots.util;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.integration.baubles.pouch.BaublePowderInventoryUtil;
 import epicsquid.roots.item.ItemPouch;
+import epicsquid.roots.item.ItemSylvanArmor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
@@ -28,13 +30,15 @@ public class PowderInventoryUtil {
   private static HerbAlert slot2 = null;
 
   public static ItemStack getPouch(EntityPlayer player) {
+    if (Loader.isModLoaded("baubles")) {
+      ItemStack stack = BaublePowderInventoryUtil.getPouch(player);
+      if (!stack.isEmpty()) return stack;
+    }
+
     for (int i = 0; i < 36; i++) {
       if (player.inventory.getStackInSlot(i).getItem() instanceof ItemPouch) {
         return player.inventory.getStackInSlot(i);
       }
-    }
-    if (Loader.isModLoaded("baubles")) {
-      return BaublePowderInventoryUtil.getPouch(player);
     }
 
     return ItemStack.EMPTY;
@@ -50,6 +54,9 @@ public class PowderInventoryUtil {
   public static void removePowder(EntityPlayer player, Herb herb, double amount) {
     ItemStack pouch = getPouch(player);
     if (pouch.isEmpty()) return;
+
+    // TODO: Cost reduction is calculated here
+    amount -= amount * ItemSylvanArmor.sylvanBonus(player);
 
     ItemPouch.useQuantity(pouch, herb, amount);
     resolveSlots(herb);

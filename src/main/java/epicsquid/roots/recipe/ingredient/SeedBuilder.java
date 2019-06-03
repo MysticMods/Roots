@@ -1,5 +1,6 @@
 package epicsquid.roots.recipe.ingredient;
 
+import com.google.gson.JsonObject;
 import epicsquid.roots.init.ModItems;
 import net.minecraft.block.BlockNetherWart;
 import net.minecraft.creativetab.CreativeTabs;
@@ -9,7 +10,10 @@ import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
+import net.minecraftforge.common.crafting.IIngredientFactory;
+import net.minecraftforge.common.crafting.JsonContext;
 
+import javax.annotation.Nonnull;
 import java.util.regex.Pattern;
 
 public class SeedBuilder {
@@ -37,5 +41,14 @@ public class SeedBuilder {
     }
 
     return SEEDS;
+  }
+
+  @SuppressWarnings("unused")
+  public static class Factory implements IIngredientFactory {
+    @Nonnull
+    @Override
+    public Ingredient parse(JsonContext context, JsonObject json) {
+      return get();
+    }
   }
 }
