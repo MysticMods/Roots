@@ -2,6 +2,7 @@ package epicsquid.roots.block;
 
 import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.roots.api.CustomPlantType;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.ElementalSoilTransformFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.util.EnumElementalSoilType;
@@ -10,6 +11,7 @@ import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -70,6 +72,22 @@ public class BlockElementalSoil extends BlockBase {
       ParticleUtil.spawnParticleGlow(worldIn, pos.getX() + rand.nextFloat(), pos.getY() + 0.75F, pos.getZ() + rand.nextFloat(),
               0, 0.05F, 0, color[0], color[1], color[2], 0.75F, 2, 80);
     }
+  }
+
+  @Override
+  public Item getItemBlock() {
+    switch (soilType)
+    {
+      case FIRE:
+        return ModItems.item_block_magmatic_soil;
+      case WATER:
+        return ModItems.item_block_aqueous_soil;
+      case AIR:
+        return ModItems.item_block_aeros_soil;
+      case EARTH:
+        return ModItems.item_block_terra_soil;
+    }
+    return null;
   }
 }
 

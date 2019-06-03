@@ -79,8 +79,7 @@ public class ModBlocks {
         return ModItems.item_block_elemental_soil;
       }
     }
-
-            .setModelCustom(true).setCreativeTab(Roots.tab));
+    .setModelCustom(true).setCreativeTab(Roots.tab));
 
     event.addBlock(elemental_soil_air = new BlockElementalSoil(Material.GROUND, SoundType.GROUND, "elemental_soil_air", EnumElementalSoilType.AIR).setModelCustom(false).setCreativeTab(Roots.tab));
     event.addBlock(elemental_soil_water = new BlockElementalSoil(Material.GROUND, SoundType.GROUND, "elemental_soil_water", EnumElementalSoilType.WATER).setModelCustom(false).setCreativeTab(Roots.tab));
