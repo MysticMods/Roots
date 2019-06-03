@@ -21,6 +21,9 @@ public class GeneralConfig {
 
   @Config.Comment(("Set to true to automatically refill your component and apothecary pouches when picking up herbs"))
   public static boolean AutoRefillPouches = true;
+
+  @Config.Comment(("The aoe-radius for using runic shears to aoe-shear things"))
+  public static int RunicShearsRadius = 7;
 }
 
 

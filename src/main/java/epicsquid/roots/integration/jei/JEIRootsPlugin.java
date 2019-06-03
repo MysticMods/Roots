@@ -36,6 +36,7 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @JEIPlugin
@@ -78,7 +79,13 @@ public class JEIRootsPlugin implements IModPlugin {
 
     Collection<SpellBase> spells = SpellRegistry.spellRegistry.values();
 
-    registry.addRecipes(ModRecipes.getRunicShearRecipes().values(), RUNIC_SHEARS);
+    Map<String, RunicShearRecipe> runicShearRecipes = ModRecipes.getRunicShearRecipes();
+    List<RunicShearRecipe> runicShearBlockRecipes = runicShearRecipes.values().stream().filter(RunicShearRecipe::isBlockRecipe).collect(Collectors.toList());
+
+    // TODO:
+    List<RunicShearRecipe> runicShearEntityRecipes = runicShearRecipes.values().stream().filter(RunicShearRecipe::isEntityRecipe).collect(Collectors.toList());
+
+    registry.addRecipes(runicShearBlockRecipes, RUNIC_SHEARS);
     registry.addRecipes(ModRecipes.getRunicCarvingRecipes(), RUNIC_CARVING);
     registry.addRecipes(ModRecipes.getPyreCraftingRecipes().values(), RITUAL_CRAFTING);
     registry.addRecipes(ModRecipes.getMortarRecipes(), MORTAR_AND_PESTLE);
