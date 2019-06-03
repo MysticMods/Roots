@@ -16,7 +16,7 @@ public class RootsChisel {
       FMLInterModComms.sendMessage("chisel", "add_variation", tag);
     }
 
-    for (Block block : Arrays.asList(ModBlocks.runic_soil_air, ModBlocks.runic_soil_earth, ModBlocks.runic_soil_fire, ModBlocks.runic_soil_water)) {
+    for (Block block : Arrays.asList(ModBlocks.elemental_soil_air, ModBlocks.elemental_soil_earth, ModBlocks.elemental_soil_fire, ModBlocks.elemental_soil_water)) {
       NBTTagCompound tag = new NBTTagCompound();
       tag.setString("group", "rootsRunicSoilTypes");
       tag.setString("block", block.getRegistryName().toString());
