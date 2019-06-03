@@ -65,13 +65,39 @@ public class BlockElementalSoil extends BlockBase {
 
   @Override
   public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-    if (rand.nextBoolean())
-    {
       int[] color = ElementalSoilTransformFX.getColor(soilType.ordinal());
 
-      ParticleUtil.spawnParticleGlow(worldIn, pos.getX() + rand.nextFloat(), pos.getY() + 0.75F, pos.getZ() + rand.nextFloat(),
-              0, 0.05F, 0, color[0], color[1], color[2], 0.75F, 2, 80);
-    }
+      if (soilType == EnumElementalSoilType.FIRE && worldIn.getTotalWorldTime() % 7 == 0)
+      {
+        ParticleUtil.spawnParticleFiery(worldIn, pos.getX() + 0.5F, pos.getY() + 1.5F, pos.getZ() + 0.5F,
+                0, -0.025F, 0,
+                color[0], color[1], color[2], 0.75F, 7, 100);
+      }
+
+      if (soilType == EnumElementalSoilType.WATER)
+      {
+        ParticleUtil.spawnParticleGlow(worldIn, pos.getX() + rand.nextFloat(), pos.getY() + 1F, pos.getZ() + rand.nextFloat(),
+                0, rand.nextFloat() * 0.05F, 0,
+                color[0], color[1], color[2], 0.75F, 2, 300);
+      }
+
+      if (soilType == EnumElementalSoilType.AIR)
+      {
+        ParticleUtil.spawnParticleGlow(worldIn, pos.getX() + rand.nextFloat(), pos.getY() + 1F, pos.getZ() + rand.nextFloat(),
+                0, rand.nextFloat() * 0.4F, 0,
+                color[0], color[1], color[2], 0.75F, 2, 80);
+      }
+
+      if (soilType == EnumElementalSoilType.EARTH)
+      {
+        ParticleUtil.spawnParticleFiery(worldIn, pos.getX() + rand.nextFloat(), pos.getY() + 1.1F, pos.getZ() + rand.nextFloat(),
+                0, 0, 0,
+                color[0], color[1], color[2], 1F, 2, 300);
+      }
+
+
+//      ParticleUtil.spawnParticleGlow(worldIn, pos.getX() + rand.nextFloat(), pos.getY() + 0.75F, pos.getZ() + rand.nextFloat(),
+//              0, 0.05F, 0, color[0], color[1], color[2], 0.75F, 2, 80);
   }
 
   @Override
