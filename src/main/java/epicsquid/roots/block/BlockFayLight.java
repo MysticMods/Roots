@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BlockFaerieLight extends BlockBase {
-    public BlockFaerieLight(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
+public class BlockFayLight extends BlockBase {
+    public BlockFayLight(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
         super(mat, type, hardness, name);
         this.setLightLevel(1.0f);
         this.setLightOpacity(0);
