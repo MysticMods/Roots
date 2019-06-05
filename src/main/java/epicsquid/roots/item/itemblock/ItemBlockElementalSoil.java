@@ -1,7 +1,8 @@
-package epicsquid.roots.item;
+package epicsquid.roots.item.itemblock;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
+import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.network.fx.ElementalSoilTransformFX;
 import net.minecraft.block.Block;
@@ -61,14 +62,14 @@ public class ItemBlockElementalSoil extends ItemBlock {
           entityItem.setDead();
           return true;
         }
-        else if (entityItem.posY <= 20) {
+        else if (entityItem.posY <= GeneralConfig.EarthSoilMinY) {
           world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
                   new ItemStack(ModBlocks.elemental_soil_earth, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 3), entityItem);
           entityItem.setDead();
           return true;
         }
-        else if (entityItem.posY >= 120) {
+        else if (entityItem.posY >= GeneralConfig.AirSoilMinY) {
           world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
                   new ItemStack(ModBlocks.elemental_soil_air, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 2), entityItem);
