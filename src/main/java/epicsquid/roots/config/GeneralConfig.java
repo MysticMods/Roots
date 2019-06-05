@@ -23,7 +23,7 @@ public class GeneralConfig {
   public static boolean AutoRefillPouches = true;
 
   @Config.Comment(("The aoe-radius for using runic shears to aoe-shear things"))
-  public static int RunicShearsRadius = 7;
+  public static int RunicShearsRadius = 15;
 }
 
 
