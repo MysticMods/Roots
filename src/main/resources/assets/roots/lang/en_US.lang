@@ -249,8 +249,8 @@ item.bark_wildwood.name=Wildwood Bark
 tile.elemental_soil.name=Elemental Soil
 tile.elemental_soil_fire.name=Magmatic Soil
 tile.elemental_soil_water.name=Aqueous Soil
-tile.elemental_soil_earth.name=Terra Soil
-tile.elemental_soil_air.name=Aeros Soil
+tile.elemental_soil_earth.name=Terran Soil
+tile.elemental_soil_air.name=Caelic Soil
 
 # Rune Stone
 tile.runestone_stairs.name=Runestone Stairs
