@@ -16,6 +16,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 
 import javax.annotation.Nonnull;
 
@@ -62,14 +63,27 @@ public class ItemBlockElementalSoil extends ItemBlock {
           entityItem.setDead();
           return true;
         }
-        else if (entityItem.posY <= GeneralConfig.EarthSoilMinY) {
+        if (entityItem.posY <= GeneralConfig.EarthSoilMinY) {
+          BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(entityItem.getPosition());
+          boolean found_roof = false;
+          for (int i = pos.getY(); i < Math.min(GeneralConfig.EarthSoilMinY + 20, world.getChunk(pos).getHeight(pos)); i++) {
+            pos.setY(i);
+            if (world.isAirBlock(pos)) continue;
+            found_roof = true;
+          }
+          if (!found_roof) return super.onEntityItemUpdate(entityItem);
+
           world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
                   new ItemStack(ModBlocks.elemental_soil_earth, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 3), entityItem);
           entityItem.setDead();
           return true;
         }
-        else if (entityItem.posY >= GeneralConfig.AirSoilMinY) {
+        if (entityItem.posY >= GeneralConfig.AirSoilMinY) {
+          BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(entityItem.getPosition());
+          int height = world.getChunk(pos).getHeight(pos);
+          if (pos.getY() < height) return super.onEntityItemUpdate(entityItem);
+
           world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
                   new ItemStack(ModBlocks.elemental_soil_air, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 2), entityItem);
