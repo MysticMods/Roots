@@ -505,7 +505,7 @@ public class ModRecipes {
       return;
     }
 
-    groveCraftingRecipes.put(recipeId, recipe);
+    groveCraftingRecipes.put(recipeId, recipe.setName(recipeName));
   }
 
   public static List<RunicCarvingRecipe> getRunicCarvingRecipes() {
