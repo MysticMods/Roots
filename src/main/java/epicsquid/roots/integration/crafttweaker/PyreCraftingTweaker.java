@@ -1,16 +1,9 @@
 package epicsquid.roots.integration.crafttweaker;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Stream;
-
 import com.blamejared.mtlib.helpers.InputHelper;
 import com.blamejared.mtlib.helpers.LogHelper;
 import com.blamejared.mtlib.utils.BaseMapAddition;
 import com.blamejared.mtlib.utils.BaseMapRemoval;
-
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
@@ -24,6 +17,11 @@ import net.minecraft.item.crafting.Ingredient;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Stream;
+
 @ZenRegister
 @ZenClass("mods." + Roots.MODID + ".Pyre")
 public class PyreCraftingTweaker {
@@ -33,13 +31,13 @@ public class PyreCraftingTweaker {
     if (inputs.length != 5) {
       CraftTweakerAPI.getLogger().logError("Pyre Crafting Ritual must have 5 items: " + name);
     }
-    CraftTweaker.LATE_ACTIONS.add(new Add(Collections.singletonMap(name + ".ct", new PyreCraftingRecipe(InputHelper.toStack(output)).addIngredients(Stream.of(inputs).map(CraftTweakerMC::getIngredient).toArray(Ingredient[]::new)).setName(name + ".ct"))));
+    CraftTweaker.LATE_ACTIONS.add(new Add(Collections.singletonMap(name + ".ct", new PyreCraftingRecipe(InputHelper.toStack(output)).addIngredients((Object) Stream.of(inputs).map(CraftTweakerMC::getIngredient).toArray(Ingredient[]::new)).setName(name + ".ct"))));
   }
 
   @ZenMethod
   public static void removeRecipe(IItemStack output) {
     Map<String, PyreCraftingRecipe> recipes = new HashMap<>();
-    for(PyreCraftingRecipe modRecipe : ModRecipes.getPyreCraftingRecipes().values()) {
+    for (PyreCraftingRecipe modRecipe : ModRecipes.getPyreCraftingRecipes().values()) {
       if (output.matches(InputHelper.toIItemStack(modRecipe.getResult()))) {
         recipes.put(modRecipe.getName(), modRecipe);
       }
