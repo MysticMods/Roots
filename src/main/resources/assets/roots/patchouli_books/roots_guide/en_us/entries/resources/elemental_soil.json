@@ -11,7 +11,7 @@
       "text": "Elementally attuned herbs are rather picky about what they will grow on, as fickle as the elements themselves. Elemental Soil is a special kind of soil that can be further refined into different forms, upon which a corresponding elemental plant may grow."
     },
     {
-      "type": "ritual_crafting_template",
+      "type": "grove_crafting_template",
       "recipe": "elemental_soil"
     },
     {
