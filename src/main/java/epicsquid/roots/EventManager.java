@@ -1,11 +1,14 @@
 package epicsquid.roots;
 
+import com.google.common.collect.Sets;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.proxy.ClientProxy;
+import epicsquid.mysticalworld.entity.EntityDeer;
 import epicsquid.roots.capability.grove.IPlayerGroveCapability;
 import epicsquid.roots.capability.grove.PlayerGroveCapabilityProvider;
 import epicsquid.roots.capability.playerdata.IPlayerDataCapability;
 import epicsquid.roots.capability.playerdata.PlayerDataCapabilityProvider;
+import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityProvider;
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.entity.spell.EntityPetalShell;
 import epicsquid.roots.init.ModBlocks;
@@ -27,6 +30,9 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityLlama;
+import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -52,6 +58,7 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class EventManager {
 
@@ -133,8 +140,13 @@ public class EventManager {
     }
   }
 
+  public static Set<Class<?>> entityClasses = Sets.newHashSet(EntityCow.class, EntityLlama.class, EntitySquid.class, EntityDeer.class);
+
   @SubscribeEvent
   public static void addCapabilities(AttachCapabilitiesEvent<Entity> event) {
+    if (entityClasses.contains(event.getObject().getClass())) {
+      event.addCapability(RunicShearsCapabilityProvider.IDENTIFIER, new RunicShearsCapabilityProvider());
+    }
     if (event.getObject() instanceof EntityPlayer) {
       event.addCapability(new ResourceLocation(Roots.MODID, "player_grove_capability"), new PlayerGroveCapabilityProvider());
       event.addCapability(new ResourceLocation(Roots.MODID, "player_data_capability"), new PlayerDataCapabilityProvider());
@@ -143,7 +155,7 @@ public class EventManager {
 
   @SubscribeEvent
   @Optional.Method(modid = "baubles")
-  public void addBaublesCapability (AttachCapabilitiesEvent<ItemStack> event) {
+  public static void addBaublesCapability (AttachCapabilitiesEvent<ItemStack> event) {
     if (event.getObject().getItem() instanceof ItemPouch) {
       event.addCapability(new ResourceLocation(Roots.MODID, "baubles_pouch"), BaubleBeltCapabilityHandler.instance);
     }
