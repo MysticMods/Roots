@@ -2,12 +2,12 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "roots:runic_soil_water",
+      "item": "roots:elemental_soil_air",
       "data": 0
     }
   ],
   "result": {
-    "item": "roots:runic_soil",
+    "item": "roots:elemental_soil",
     "data": 0
   }
 }

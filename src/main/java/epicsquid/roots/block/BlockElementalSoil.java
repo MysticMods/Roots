@@ -1,8 +1,9 @@
 package epicsquid.roots.block;
 
+import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.roots.api.CustomPlantType;
-import epicsquid.roots.init.ModItems;
+import epicsquid.roots.item.itemblock.ItemBlockElementalSoil;
 import epicsquid.roots.network.fx.ElementalSoilTransformFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.util.EnumElementalSoilType;
@@ -23,12 +24,13 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class BlockElementalSoil extends BlockBase {
-
+  private final @Nonnull Item itemBlock;
   private final EnumElementalSoilType soilType;
 
   public BlockElementalSoil(@Nonnull Material mat, @Nonnull SoundType type, @Nonnull String name, @Nonnull EnumElementalSoilType soilType) {
     super(mat, type, 0.8f, name);
     this.soilType = soilType;
+    this.itemBlock = new ItemBlockElementalSoil(this).setRegistryName(LibRegistry.getActiveModid(), name);
   }
 
   @Override
@@ -103,18 +105,7 @@ public class BlockElementalSoil extends BlockBase {
 
   @Override
   public Item getItemBlock() {
-    switch (soilType)
-    {
-      case FIRE:
-        return ModItems.item_block_magmatic_soil;
-      case WATER:
-        return ModItems.item_block_aqueous_soil;
-      case AIR:
-        return ModItems.item_block_aeros_soil;
-      case EARTH:
-        return ModItems.item_block_terra_soil;
-    }
-    return null;
+    return itemBlock;
   }
 }
 

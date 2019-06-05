@@ -1,7 +1,8 @@
-package epicsquid.roots.item;
+package epicsquid.roots.item.itemblock;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
+import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.network.fx.ElementalSoilTransformFX;
 import net.minecraft.block.Block;
@@ -15,17 +16,14 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 
 import javax.annotation.Nonnull;
 
 public class ItemBlockElementalSoil extends ItemBlock {
 
-  private Block block;
-
-  public ItemBlockElementalSoil(Block block, String name) {
+  public ItemBlockElementalSoil(Block block) {
     super(block);
-    this.block = block;
-    setRegistryName(new ResourceLocation(Roots.MODID, name));
   }
 
   @Override
@@ -58,24 +56,38 @@ public class ItemBlockElementalSoil extends ItemBlock {
 
       if (!world.isRemote && entityItem.ticksExisted >= 40)
       {
-        entityItem.setDead();
-
         if (entityItem.isInWater()) {
           world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
                   new ItemStack(ModBlocks.elemental_soil_water, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 1), entityItem);
+          entityItem.setDead();
           return true;
         }
-        else if (entityItem.posY <= 20) {
+        if (entityItem.posY <= GeneralConfig.EarthSoilMinY) {
+          BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(entityItem.getPosition());
+          boolean found_roof = false;
+          for (int i = pos.getY(); i < Math.min(GeneralConfig.EarthSoilMinY + 20, world.getChunk(pos).getHeight(pos)); i++) {
+            pos.setY(i);
+            if (world.isAirBlock(pos)) continue;
+            found_roof = true;
+          }
+          if (!found_roof) return super.onEntityItemUpdate(entityItem);
+
           world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
                   new ItemStack(ModBlocks.elemental_soil_earth, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 3), entityItem);
+          entityItem.setDead();
           return true;
         }
-        else if (entityItem.posY >= 120) {
+        if (entityItem.posY >= GeneralConfig.AirSoilMinY) {
+          BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(entityItem.getPosition());
+          int height = world.getChunk(pos).getHeight(pos);
+          if (pos.getY() < height) return super.onEntityItemUpdate(entityItem);
+
           world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
                   new ItemStack(ModBlocks.elemental_soil_air, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 2), entityItem);
+          entityItem.setDead();
           return true;
         }
       }

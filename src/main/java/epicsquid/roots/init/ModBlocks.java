@@ -13,14 +13,11 @@ import epicsquid.roots.util.EnumElementalSoilType;
 import epicsquid.roots.world.HugeBaffleCap;
 import epicsquid.roots.world.tree.WorldGenBigWildwoodTree;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockPressurePlate;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.EnumPlantType;
 
 import javax.annotation.Nonnull;
@@ -52,8 +49,7 @@ public class ModBlocks {
   public static Block wildwood_door, wildwood_trapdoor;
   public static Block wildwood_button, wildwood_pressure_plate, wildwood_fence, wildwood_ladder;
 
-  //Fae Blocks
-  public static Block faerie_light_block;
+  public static Block fay_light;
 
   /**
    * Register all block
@@ -76,15 +72,7 @@ public class ModBlocks {
     // TODO 1.13 make the dewgonia work only underwater
     event.addBlock(dewgonia = new BlockDewgoniaCrop("dewgonia_crop", CustomPlantType.ELEMENT_WATER));
     event.addBlock(stalicripe = new BlockStalicripeCrop("stalicripe_crop", CustomPlantType.ELEMENT_EARTH));
-    event.addBlock(elemental_soil = new BlockBase(Material.GROUND, SoundType.GROUND, 0.8f, "elemental_soil")
-    {
-      @Override
-      public Item getItemBlock() {
-        return ModItems.item_block_elemental_soil;
-      }
-    }
-    .setModelCustom(true).setCreativeTab(Roots.tab));
-
+    event.addBlock(elemental_soil = new BlockElementalSoil(Material.GROUND, SoundType.GROUND, "elemental_soil", EnumElementalSoilType.BASE).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addBlock(elemental_soil_air = new BlockElementalSoil(Material.GROUND, SoundType.GROUND, "elemental_soil_air", EnumElementalSoilType.AIR).setModelCustom(false).setCreativeTab(Roots.tab));
     event.addBlock(elemental_soil_water = new BlockElementalSoil(Material.GROUND, SoundType.GROUND, "elemental_soil_water", EnumElementalSoilType.WATER).setModelCustom(false).setCreativeTab(Roots.tab));
     event.addBlock(elemental_soil_fire = new BlockElementalSoil(Material.GROUND, SoundType.GROUND, "elemental_soil_fire", EnumElementalSoilType.FIRE).setModelCustom(false).setCreativeTab(Roots.tab));
@@ -160,9 +148,7 @@ public class ModBlocks {
     // Wild Crafter
     event.addBlock(grove_crafter = new BlockGroveCrafter(Material.WOOD, SoundType.WOOD, 2.5f, "grove_crafter", TileEntityGroveCrafter.class)).setCreativeTab(Roots.tab);
 
-    // Fae Blocks
-    event.addBlock(faerie_light_block = new BlockFaerieLight(Material.SNOW, SoundType.SNOW,0.0f,"faerie_light_block")).setCreativeTab(Roots.tab);
-
+    event.addBlock(fay_light = new BlockFayLight(Material.SNOW, SoundType.SNOW,0.0f,"fay_light")).setCreativeTab(Roots.tab);
   }
 
   private static Variants variants(RegisterContentEvent event, Block base, String name, SoundType sound, Material material) {
