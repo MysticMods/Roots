@@ -20,12 +20,8 @@ import javax.annotation.Nonnull;
 
 public class ItemBlockElementalSoil extends ItemBlock {
 
-  private Block block;
-
-  public ItemBlockElementalSoil(Block block, String name) {
+  public ItemBlockElementalSoil(Block block) {
     super(block);
-    this.block = block;
-    setRegistryName(new ResourceLocation(Roots.MODID, name));
   }
 
   @Override
@@ -58,24 +54,25 @@ public class ItemBlockElementalSoil extends ItemBlock {
 
       if (!world.isRemote && entityItem.ticksExisted >= 40)
       {
-        entityItem.setDead();
-
         if (entityItem.isInWater()) {
           world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
                   new ItemStack(ModBlocks.elemental_soil_water, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 1), entityItem);
+          entityItem.setDead();
           return true;
         }
         else if (entityItem.posY <= 20) {
           world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
                   new ItemStack(ModBlocks.elemental_soil_earth, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 3), entityItem);
+          entityItem.setDead();
           return true;
         }
         else if (entityItem.posY >= 120) {
           world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
                   new ItemStack(ModBlocks.elemental_soil_air, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 2), entityItem);
+          entityItem.setDead();
           return true;
         }
       }
