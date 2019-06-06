@@ -814,28 +814,28 @@ public class ModRecipes {
     ));
 
     addCraftingRecipe("sylvan_helmet", new GroveCraftingRecipe(new ItemStack(ModItems.sylvan_helmet), 1).addIngredients(
-        new ItemStack(Items.GOLDEN_HELMET),
+        new ItemStack(ModItems.fey_leather),
         new ItemStack(Blocks.VINE),
         new ItemStack(ModItems.bark_birch),
         new OreIngredient("gemAmethyst"),
         new ItemStack(ModItems.bark_birch)));
 
     addCraftingRecipe("sylvan_chestplate", new GroveCraftingRecipe(new ItemStack(ModItems.sylvan_chestplate), 1).addIngredients(
-        new ItemStack(Items.GOLDEN_CHESTPLATE),
+        new ItemStack(ModItems.fey_leather),
         new ItemStack(Blocks.VINE),
         new ItemStack(ModItems.bark_birch),
         new OreIngredient("gemAmethyst"),
         new ItemStack(ModItems.bark_birch)));
 
     addCraftingRecipe("sylvan_leggings", new GroveCraftingRecipe(new ItemStack(ModItems.sylvan_leggings), 1).addIngredients(
-        new ItemStack(Items.GOLDEN_LEGGINGS),
+        new ItemStack(ModItems.fey_leather),
         new ItemStack(Blocks.VINE),
         new ItemStack(ModItems.bark_birch),
         new OreIngredient("gemAmethyst"),
         new ItemStack(ModItems.bark_birch)));
 
     addCraftingRecipe("sylvan_boots", new GroveCraftingRecipe(new ItemStack(ModItems.sylvan_boots), 1).addIngredients(
-        new ItemStack(Items.GOLDEN_BOOTS),
+        new ItemStack(ModItems.fey_leather),
         new ItemStack(Blocks.VINE),
         new ItemStack(ModItems.bark_birch),
         new OreIngredient("gemAmethyst"),
