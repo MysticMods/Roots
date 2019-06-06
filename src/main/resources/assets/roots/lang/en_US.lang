@@ -274,6 +274,7 @@ item.cooked_aubergine.name=Cooked Aubergine
 item.stuffed_aubergine.name=Stuffed Aubergine
 item.cooked_pereskia.name=Roasted Pereskia
 item.wildewheet_bread.name=Wildewheet Bread
+item.fey_leather.name=Fey Leather
 
 # JEI
 container.roots.runic_shears.name=Runic Shearing
@@ -323,4 +324,4 @@ roots.hud.top.pyre.progress=Progress:
 roots.hud.top.pyre.progress_info=minutes remaining
 
 # Runic Shears
-roots.runic_shears.cooldown=The fey equivalent has nothing to gift you yet.
+roots.runic_shears.cooldown=The fey equivalent of this creature has nothing to gift you at this time.
