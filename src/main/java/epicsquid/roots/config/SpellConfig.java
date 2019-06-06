@@ -75,9 +75,9 @@ public class SpellConfig {
     @Config.Name("Disable Wild Fire Spell")
     @Config.Comment("Set to true to disable Wild Fire Spell")
     public boolean disableWildFire = false;
-    @Config.Name("Disable Fay Light Spell")
-    @Config.Comment("Set to true to disable Fay Light Spell")
-    public boolean disableFayLight = false;
+    @Config.Name("Disable Fey Light Spell")
+    @Config.Comment("Set to true to disable Fey Light Spell")
+    public boolean disableFeyLight = false;
 
   }
 

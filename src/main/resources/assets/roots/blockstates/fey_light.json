@@ -1,6 +1,6 @@
 {
   "variants":{
     "normal":  { "model": "roots:grove_padding" },
-    "inventory": {"model":  "roots:fay_light"}
+    "inventory": {"model":  "roots:fey_light"}
   }
 }
