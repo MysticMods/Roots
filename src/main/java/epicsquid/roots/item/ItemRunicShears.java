@@ -1,6 +1,7 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemBase;
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
@@ -9,11 +10,13 @@ import epicsquid.roots.capability.runic_shears.RunicShearsCapability;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityProvider;
 import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.network.fx.MessageRunicShearsFX;
 import epicsquid.roots.recipe.RunicShearRecipe;
 import epicsquid.roots.util.ItemSpawnUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -26,8 +29,12 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -40,7 +47,7 @@ public class ItemRunicShears extends ItemBase {
 
   public ItemRunicShears(@Nonnull String name) {
     super(name);
-    setMaxDamage(80);
+    setMaxDamage(357);
     setMaxStackSize(1);
     setHasSubtypes(false);
     random = new Random();
@@ -86,6 +93,7 @@ public class ItemRunicShears extends ItemBase {
       return false;
     }
 
+    World world = player.world;
     Random rand = itemRand;
 
     if (entity instanceof IShearable) {
@@ -110,6 +118,8 @@ public class ItemRunicShears extends ItemBase {
       // ??? Return false?
     }
 
+    if (entity.isChild()) return true;
+
     RunicShearRecipe recipe = ModRecipes.getRunicShearRecipe(entity);
     if (recipe != null) {
       RunicShearsCapability cap = entity.getCapability(RunicShearsCapabilityProvider.RUNIC_SHEARS_CAPABILITY, null);
@@ -123,13 +133,13 @@ public class ItemRunicShears extends ItemBase {
           if (!player.capabilities.isCreativeMode) {
             itemstack.damageItem(1, entity);
           }
-          // TODO: play particles
-          // TODO: play noise
+          world.playSound(player, entity.getPosition(), SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
+          IMessage packet = new MessageRunicShearsFX(entity);
+          PacketHandler.sendToAllTracking(packet, entity);
           return true;
         } else {
-          // TODO: play particles (failure)
-          // TODO: send message
-
+          // TODO: play particles (failure)?
+          player.sendStatusMessage(new TextComponentTranslation("roots.runic_shears.cooldown").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)), true);
         }
       }
     }
