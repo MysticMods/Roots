@@ -15,6 +15,7 @@ import net.minecraft.block.BlockCrops;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -29,6 +30,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -84,13 +86,33 @@ public class ItemRunicShears extends ItemBase {
       return false;
     }
 
+    Random rand = itemRand;
+
     if (entity instanceof IShearable) {
       int count = 0;
+      entity.captureDrops = true;
       if (Items.SHEARS.itemInteractionForEntity(itemstack, player, entity, hand)) count++;
+      entity.captureDrops = false;
+      List<EntityItem> drops = new ArrayList<>(entity.capturedDrops);
+
       float radius = GeneralConfig.RunicShearsRadius;
       List<EntityLiving> entities = Util.getEntitiesWithinRadius(entity.world, (Entity e) -> e instanceof IShearable, entity.getPosition(), radius, radius / 2, radius);
       for (EntityLiving e : entities) {
+        e.captureDrops = true;
         if (Items.SHEARS.itemInteractionForEntity(itemstack, player, e, hand)) count++;
+        e.captureDrops = false;
+        drops.addAll(entity.capturedDrops);
+      }
+      if (!drops.isEmpty()) {
+        for (EntityItem ent : drops) {
+          ent.posX = entity.posX;
+          ent.posY = entity.posY;
+          ent.posZ = entity.posZ;
+          ent.motionY += rand.nextFloat() * 0.05F;
+          ent.motionX += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
+          ent.motionZ += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
+          player.world.spawnEntity(ent);
+        }
       }
       if (count > 0) return true;
       // ??? Return false?
@@ -102,12 +124,13 @@ public class ItemRunicShears extends ItemBase {
       if (cap != null) {
         if (cap.canHarvest()) {
           cap.setCooldown(recipe.getCooldown());
-          Random rand = itemRand;
           net.minecraft.entity.item.EntityItem ent = entity.entityDropItem(recipe.getDrop().copy(), 1.0F);
           ent.motionY += rand.nextFloat() * 0.05F;
           ent.motionX += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
           ent.motionZ += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
-          itemstack.damageItem(1, entity);
+          if (!player.capabilities.isCreativeMode) {
+            itemstack.damageItem(1, entity);
+          }
           // TODO: play particles
           // TODO: play noise
           return true;

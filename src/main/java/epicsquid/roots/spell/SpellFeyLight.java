@@ -18,11 +18,11 @@ import net.minecraftforge.oredict.OreIngredient;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class SpellFayLight extends SpellBase {
-    public static String spellName = "spell_fay_light";
-    public static SpellFayLight instance = new SpellFayLight(spellName);
+public class SpellFeyLight extends SpellBase {
+    public static String spellName = "spell_fey_light";
+    public static SpellFeyLight instance = new SpellFeyLight(spellName);
 
-    public SpellFayLight(String name) {
+    public SpellFeyLight(String name) {
         super(name, TextFormatting.LIGHT_PURPLE, 247f / 255f, 246 / 255f, 210f / 255f, 227f / 255f, 81f / 255f, 244f / 255f);
         this.castType = EnumCastType.INSTANTANEOUS;
         this.cooldown = 20;
@@ -40,7 +40,7 @@ public class SpellFayLight extends SpellBase {
             BlockPos pos = result.getBlockPos().offset(result.sideHit);
             if (world.isAirBlock(pos)) {
                 if (!world.isRemote) {
-                    world.setBlockState(pos, ModBlocks.fay_light.getDefaultState());
+                    world.setBlockState(pos, ModBlocks.fey_light.getDefaultState());
                 } else {
                     player.playSound(SoundEvents.BLOCK_FIRE_EXTINGUISH, 0.5f, 1);
                 }

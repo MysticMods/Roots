@@ -16,6 +16,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor;
@@ -32,7 +33,7 @@ public class ModItems {
   // All mod items
   public static Item pestle, component_pouch, spell_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, wildwood_quiver, wildwood_bow,
           sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, apothecary_pouch,
-  petals, flour, cooked_aubergine, stuffed_aubergine, living_arrow, runic_dust, seeds, cooked_seeds, cooked_pereskia, fay_leather, wildewheet_bread;
+  petals, flour, cooked_aubergine, stuffed_aubergine, living_arrow, runic_dust, seeds, cooked_seeds, cooked_pereskia, fey_leather, wildewheet_bread;
 
   public static Item moonglow_leaf, aubergine, pereskia, terra_spores, terra_moss, spirit_herb, wildewheet,
           baffle_cap, bark_oak, bark_birch, bark_spruce, bark_jungle, bark_dark_oak, bark_acacia, bark_wildwood;
@@ -80,8 +81,13 @@ public class ModItems {
     event.addItem(bark_acacia = new ItemBase("bark_acacia").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(bark_wildwood = new ItemBase("bark_wildwood").setModelCustom(true).setCreativeTab(Roots.tab));
 
-    // TODO: do this
-    event.addItem(fay_leather = new ItemBase("fay_leather").setModelCustom(true).setCreativeTab(Roots.tab));
+    // TODO: Maybe not do this
+    event.addItem(fey_leather = new ItemBase("fey_leather") {
+      @Override
+      public EnumRarity getRarity(ItemStack stack) {
+        return EnumRarity.RARE;
+      }
+    }.setModelCustom(true).setCreativeTab(Roots.tab));
 
     event.addItem(pestle = new ItemBase("pestle").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(component_pouch = new ItemPouch("component_pouch").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
