@@ -13,6 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -183,6 +184,8 @@ public class ModItems {
     OreDictionary.registerOre("stairWood", ModBlocks.wildwood_stairs);
     OreDictionary.registerOre("slabWood", ModBlocks.wildwood_slab);
     OreDictionary.registerOre("doorWood", new ItemStack(((BlockDoorBase) ModBlocks.wildwood_door).getItemBlock()));
+    OreDictionary.registerOre("foodBread", Items.BREAD);
+    OreDictionary.registerOre("foodBread", ModItems.wildewheet_bread);
   }
 
   private static void registerSeedDrops() {
