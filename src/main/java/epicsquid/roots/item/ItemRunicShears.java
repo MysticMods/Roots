@@ -4,6 +4,7 @@ import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.Roots;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapability;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityProvider;
 import epicsquid.roots.config.GeneralConfig;
@@ -19,7 +20,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -90,10 +90,7 @@ public class ItemRunicShears extends ItemBase {
 
     if (entity instanceof IShearable) {
       int count = 0;
-      entity.captureDrops = true;
       if (Items.SHEARS.itemInteractionForEntity(itemstack, player, entity, hand)) count++;
-      entity.captureDrops = false;
-      List<EntityItem> drops = new ArrayList<>(entity.capturedDrops);
 
       float radius = GeneralConfig.RunicShearsRadius;
       List<EntityLiving> entities = Util.getEntitiesWithinRadius(entity.world, (Entity e) -> e instanceof IShearable, entity.getPosition(), radius, radius / 2, radius);
@@ -101,17 +98,12 @@ public class ItemRunicShears extends ItemBase {
         e.captureDrops = true;
         if (Items.SHEARS.itemInteractionForEntity(itemstack, player, e, hand)) count++;
         e.captureDrops = false;
-        drops.addAll(entity.capturedDrops);
-      }
-      if (!drops.isEmpty()) {
-        for (EntityItem ent : drops) {
-          ent.posX = entity.posX;
-          ent.posY = entity.posY;
-          ent.posZ = entity.posZ;
-          ent.motionY += rand.nextFloat() * 0.05F;
-          ent.motionX += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
-          ent.motionZ += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
-          player.world.spawnEntity(ent);
+        for (EntityItem ent : e.capturedDrops) {
+          ent.setPosition(entity.posX, entity.posY, entity.posZ);
+          ent.motionY = 0;
+          ent.motionX = 0;
+          ent.motionZ = 0;
+          ent.world.spawnEntity(ent);
         }
       }
       if (count > 0) return true;
