@@ -1,7 +1,7 @@
 {
-    "darkoAmbient":
+    "chimes":
     { 
     "category": "neutral",
-    "sounds": [ "roots:secret" ] 
+    "sounds": [ "roots:chimes" ]
     }
 }
