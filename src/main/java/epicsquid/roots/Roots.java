@@ -12,6 +12,7 @@ import epicsquid.roots.capability.runic_shears.RunicShearsCapability;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityStorage;
 import epicsquid.roots.gui.GuiHandler;
 import epicsquid.roots.handler.ConfigHandler;
+import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.proxy.CommonProxy;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -82,6 +83,7 @@ public class Roots {
     MinecraftForge.EVENT_BUS.register(ConfigHandler.class);
     NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);
     logger = event.getModLog();
+    ModDamage.init();
     proxy.preInit(event);
   }
 
