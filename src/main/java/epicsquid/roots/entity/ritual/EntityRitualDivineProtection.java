@@ -14,11 +14,11 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
 
-public class EntityRitualLight extends EntityRitualBase {
+public class EntityRitualDivineProtection extends EntityRitualBase {
 
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualLight.class, DataSerializers.VARINT);
+  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualDivineProtection.class, DataSerializers.VARINT);
 
-  public EntityRitualLight(World worldIn) {
+  public EntityRitualDivineProtection(World worldIn) {
     super(worldIn);
     getDataManager().register(lifetime, RitualRegistry.ritual_light.getDuration() + 20);
   }

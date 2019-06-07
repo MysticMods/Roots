@@ -1,6 +1,6 @@
 package epicsquid.roots.ritual;
 
-import epicsquid.roots.entity.ritual.EntityRitualLife;
+import epicsquid.roots.entity.ritual.EntityRitualHealingAura;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
 import epicsquid.roots.recipe.conditions.ConditionTrees;
@@ -11,9 +11,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-public class RitualLife extends RitualBase {
+public class RitualHealingAura extends RitualBase {
 
-  public RitualLife(String name, int duration) {
+  public RitualHealingAura(String name, int duration) {
     super(name, duration);
     addCondition(new ConditionItems(
             new ItemStack(ModItems.terra_moss),
@@ -29,6 +29,6 @@ public class RitualLife extends RitualBase {
 
   @Override
   public void doEffect(World world, BlockPos pos) {
-    this.spawnEntity(world, pos, EntityRitualLife.class);
+    this.spawnEntity(world, pos, EntityRitualHealingAura.class);
   }
 }

@@ -18,11 +18,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 @SuppressWarnings("deprecation")
-public class EntityRitualRegrowth extends EntityRitualBase {
+public class EntityRitualNaturalGrowth extends EntityRitualBase {
 
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualRegrowth.class, DataSerializers.VARINT);
+  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualNaturalGrowth.class, DataSerializers.VARINT);
 
-  public EntityRitualRegrowth(World worldIn) {
+  public EntityRitualNaturalGrowth(World worldIn) {
     super(worldIn);
     getDataManager().register(lifetime, RitualRegistry.ritual_regrowth.getDuration() + 20);
   }

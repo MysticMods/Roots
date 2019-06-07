@@ -12,11 +12,11 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
-public class EntityRitualLife extends EntityRitualBase {
+public class EntityRitualHealingAura extends EntityRitualBase {
 
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualLife.class, DataSerializers.VARINT);
+  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualHealingAura.class, DataSerializers.VARINT);
 
-  public EntityRitualLife(World worldIn) {
+  public EntityRitualHealingAura(World worldIn) {
     super(worldIn);
     getDataManager().register(lifetime, RitualRegistry.ritual_life.getDuration() + 20);
   }

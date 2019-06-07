@@ -11,11 +11,11 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
-public class EntityRitualStorm extends EntityRitualBase {
+public class EntityRitualHeavyStorms extends EntityRitualBase {
 
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualStorm.class, DataSerializers.VARINT);
+  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualHeavyStorms.class, DataSerializers.VARINT);
 
-  public EntityRitualStorm(World worldIn) {
+  public EntityRitualHeavyStorms(World worldIn) {
     super(worldIn);
     getDataManager().register(lifetime, RitualRegistry.ritual_storm.getDuration() + 20);
   }
