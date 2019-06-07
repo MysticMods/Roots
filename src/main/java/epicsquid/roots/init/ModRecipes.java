@@ -9,6 +9,7 @@ import epicsquid.mysticalworld.materials.Metal;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.recipe.*;
+import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.util.StateUtil;
@@ -643,9 +644,10 @@ public class ModRecipes {
         new GroveCraftingRecipe(new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.unending_bowl)), 2).addIngredients(
             new ItemStack(Items.WATER_BUCKET),
             new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.mortar)),
-            new ItemStack(ModItems.moonglow_leaf),
+            new ItemStack(ModItems.dewgonia),
             new ItemStack(ModItems.terra_moss),
-            new ItemStack(ModItems.spirit_herb)));
+            new ItemStack(ModItems.dewgonia)));
+    BlockSapling
 
     addCraftingRecipe("elemental_soil",
         new GroveCraftingRecipe(new ItemStack(ModBlocks.elemental_soil), 1).addIngredients(
@@ -657,15 +659,7 @@ public class ModRecipes {
 
     addCraftingRecipe("living_pickaxe",
         new GroveCraftingRecipe(new ItemStack(ModItems.living_pickaxe), 1).addIngredients(
-            new OreIngredient("ingotGold"),
-            new ItemStack(Items.WOODEN_PICKAXE),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak)));
-
-    addCraftingRecipe("living_pickaxe_silver",
-        new GroveCraftingRecipe(new ItemStack(ModItems.living_pickaxe), 1).addIngredients(
-            new OreIngredient("ingotSilver"),
+            new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_PICKAXE),
             new ItemStack(ModItems.wildroot),
             new ItemStack(ModItems.bark_oak),
@@ -673,15 +667,7 @@ public class ModRecipes {
 
     addCraftingRecipe("living_axe",
         new GroveCraftingRecipe(new ItemStack(ModItems.living_axe), 1).addIngredients(
-            new OreIngredient("ingotGold"),
-            new ItemStack(Items.WOODEN_AXE),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak)));
-
-    addCraftingRecipe("living_axe_silver",
-        new GroveCraftingRecipe(new ItemStack(ModItems.living_axe), 1).addIngredients(
-            new OreIngredient("ingotSilver"),
+            new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_AXE),
             new ItemStack(ModItems.wildroot),
             new ItemStack(ModItems.bark_oak),
@@ -689,15 +675,7 @@ public class ModRecipes {
 
     addCraftingRecipe("living_shovel",
         new GroveCraftingRecipe(new ItemStack(ModItems.living_shovel), 1).addIngredients(
-            new OreIngredient("ingotGold"),
-            new ItemStack(Items.WOODEN_SHOVEL),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak)));
-
-    addCraftingRecipe("living_shovel_silver",
-        new GroveCraftingRecipe(new ItemStack(ModItems.living_shovel), 1).addIngredients(
-            new OreIngredient("ingotSilver"),
+            new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_SHOVEL),
             new ItemStack(ModItems.wildroot),
             new ItemStack(ModItems.bark_oak),
@@ -705,15 +683,7 @@ public class ModRecipes {
 
     addCraftingRecipe("living_hoe",
         new GroveCraftingRecipe(new ItemStack(ModItems.living_hoe), 1).addIngredients(
-            new OreIngredient("ingotGold"),
-            new ItemStack(Items.WOODEN_HOE),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak)));
-
-    addCraftingRecipe("living_hoe_silver",
-        new GroveCraftingRecipe(new ItemStack(ModItems.living_hoe), 1).addIngredients(
-            new OreIngredient("ingotSilver"),
+            new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_HOE),
             new ItemStack(ModItems.wildroot),
             new ItemStack(ModItems.bark_oak),
@@ -721,20 +691,11 @@ public class ModRecipes {
 
     addCraftingRecipe("living_sword",
         new GroveCraftingRecipe(new ItemStack(ModItems.living_sword), 1).addIngredients(
-            new OreIngredient("ingotGold"),
+            new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_SWORD),
             new ItemStack(ModItems.wildroot),
             new ItemStack(ModItems.bark_oak),
             new ItemStack(ModItems.bark_oak)));
-
-    addCraftingRecipe("living_sword_silver",
-        new GroveCraftingRecipe(new ItemStack(ModItems.living_sword), 1).addIngredients(
-            new OreIngredient("ingotSilver"),
-            new ItemStack(Items.WOODEN_SWORD),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak)));
-
 
     addCraftingRecipe("living_arrow",
         new GroveCraftingRecipe(new ItemStack(ModItems.living_arrow, 6), 1).addIngredients(
