@@ -1,9 +1,9 @@
 package epicsquid.roots.recipe;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -17,7 +17,8 @@ public class RunicShearRecipe {
   private ItemStack optionalDisplayItem = ItemStack.EMPTY;
   private String name;
 
-  private Class<? extends EntityLivingBase> entity = null;
+  private EntityLivingBase entity = null;
+  private Class<? extends EntityLivingBase> clazz = null;
   private int cooldown = 0;
 
   public RunicShearRecipe(Block block, Block replacementBlock, ItemStack drop, String name, ItemStack optionalDisplayItem) {
@@ -32,9 +33,10 @@ public class RunicShearRecipe {
     this(block, replacementBlock, drop, name, null);
   }
 
-  public RunicShearRecipe(ItemStack drop, Class<? extends EntityLiving> entity, int cooldown, String name) {
+  public RunicShearRecipe(ItemStack drop, EntityLivingBase entity, int cooldown, String name) {
     this.drop = drop;
     this.entity = entity;
+    this.clazz = entity.getClass();
     this.name = name;
     this.cooldown = cooldown;
   }
@@ -44,7 +46,7 @@ public class RunicShearRecipe {
   }
 
   public boolean isEntityRecipe() {
-    return entity != null;
+    return clazz != null;
   }
 
   public Block getBlock() {
@@ -59,7 +61,11 @@ public class RunicShearRecipe {
     return drop;
   }
 
-  public Class<? extends EntityLivingBase> getEntity() {
+  public Class<? extends EntityLivingBase> getClazz() {
+    return clazz;
+  }
+
+  public EntityLivingBase getEntity () {
     return entity;
   }
 
