@@ -32,17 +32,17 @@ public class ModEntities {
     LibRegistry.registerEntity(EntityTimeStop.class);
     LibRegistry.registerEntity(EntityBoost.class);
 
-    LibRegistry.registerEntity(EntityRitualLife.class);
-    LibRegistry.registerEntity(EntityRitualStorm.class);
-    LibRegistry.registerEntity(EntityRitualLight.class);
+    LibRegistry.registerEntity(EntityRitualHealingAura.class);
+    LibRegistry.registerEntity(EntityRitualHeavyStorms.class);
+    LibRegistry.registerEntity(EntityRitualDivineProtection.class);
     LibRegistry.registerEntity(EntityRitualFireStorm.class);
     LibRegistry.registerEntity(EntityFlare.class);
-    LibRegistry.registerEntity(EntityRitualRegrowth.class);
+    LibRegistry.registerEntity(EntityRitualNaturalGrowth.class);
     LibRegistry.registerEntity(EntityRitualWindwall.class);
-    LibRegistry.registerEntity(EntityRitualWarden.class);
+    LibRegistry.registerEntity(EntityRitualWardingProtection.class);
     LibRegistry.registerEntity(EntitySpawnItem.class);
     LibRegistry.registerEntity(EntityRitualOvergrowth.class);
-    LibRegistry.registerEntity(EntityRitualFrost.class);
+    LibRegistry.registerEntity(EntityRitualFrostLands.class);
     LibRegistry.registerEntity(EntityRitualFlowerGrowth.class);
 
     LibRegistry.registerEntity(EntityWildGrove.class);
@@ -55,17 +55,17 @@ public class ModEntities {
       LibRegistry.registerEntityRenderer(EntityTimeStop.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityBoost.class, new RenderNull.Factory());
 
-      LibRegistry.registerEntityRenderer(EntityRitualLife.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityRitualStorm.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityRitualLight.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntityRitualHealingAura.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntityRitualHeavyStorms.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntityRitualDivineProtection.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualFireStorm.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityFlare.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityRitualRegrowth.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntityRitualNaturalGrowth.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualWindwall.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityRitualWarden.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntityRitualWardingProtection.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntitySpawnItem.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualOvergrowth.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityRitualFrost.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntityRitualFrostLands.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualFlowerGrowth.class, new RenderNull.Factory());
 
       LibRegistry.registerEntityRenderer(EntityWildGrove.class, new RenderNull.Factory());

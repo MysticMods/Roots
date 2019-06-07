@@ -30,11 +30,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-public class RitualSummoning extends RitualBase {
+public class RitualSummonCreatures extends RitualBase {
 
   private static Map<Class<? extends Entity>, List<ItemStack>> entityItem = new HashMap<>();
 
-  public RitualSummoning(String name, int duration) {
+  public RitualSummonCreatures(String name, int duration) {
     super(name, duration);
 
     addCondition(new ConditionItems(
@@ -47,6 +47,7 @@ public class RitualSummoning extends RitualBase {
 //    addCondition(new ConditionGroveFaith(GroveType.WILD, 0));
     addCondition(new ConditionStandingStones(3, 3));
 
+    // TODO: CraftTweaker support
     entityItem.put(EntityChicken.class, Lists.newArrayList(new ItemStack(Items.CHICKEN)));
     entityItem.put(EntityCow.class, Lists.newArrayList(new ItemStack(Items.BEEF)));
     entityItem.put(EntityPig.class, Lists.newArrayList(new ItemStack(Items.PORKCHOP)));

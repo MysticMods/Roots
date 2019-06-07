@@ -13,11 +13,11 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
-public class EntityRitualWarden extends EntityRitualBase {
+public class EntityRitualWardingProtection extends EntityRitualBase {
 
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualWarden.class, DataSerializers.VARINT);
+  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualWardingProtection.class, DataSerializers.VARINT);
 
-  public EntityRitualWarden(World worldIn) {
+  public EntityRitualWardingProtection(World worldIn) {
     super(worldIn);
     this.setInvisible(true);
     this.setSize(1, 1);

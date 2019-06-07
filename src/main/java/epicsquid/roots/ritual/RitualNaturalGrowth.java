@@ -1,6 +1,6 @@
 package epicsquid.roots.ritual;
 
-import epicsquid.roots.entity.ritual.EntityRitualRegrowth;
+import epicsquid.roots.entity.ritual.EntityRitualNaturalGrowth;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
 import net.minecraft.init.Blocks;
@@ -9,8 +9,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-public class RitualRegrowth extends RitualBase {
-  public RitualRegrowth(String name, int duration) {
+public class RitualNaturalGrowth extends RitualBase {
+  public RitualNaturalGrowth(String name, int duration) {
     super(name, duration);
     addCondition(new ConditionItems(
             new ItemStack(ModItems.terra_moss),
@@ -26,6 +26,6 @@ public class RitualRegrowth extends RitualBase {
 
   @Override
   public void doEffect(World world, BlockPos pos) {
-    this.spawnEntity(world, pos, EntityRitualRegrowth.class);
+    this.spawnEntity(world, pos, EntityRitualNaturalGrowth.class);
   }
 }
