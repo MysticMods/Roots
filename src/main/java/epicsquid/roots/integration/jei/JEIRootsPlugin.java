@@ -43,6 +43,7 @@ import java.util.stream.Collectors;
 public class JEIRootsPlugin implements IModPlugin {
 
   public static final String RUNIC_SHEARS = Roots.MODID + ".runic_shears";
+  public static final String RUNIC_SHEARS_ENTITY = Roots.MODID + ".runic_shears_entity";
   public static final String RUNIC_CARVING = Roots.MODID + ".runic_carving";
   public static final String RITUAL_CRAFTING = Roots.MODID + ".ritual_crafting";
   public static final String MORTAR_AND_PESTLE = Roots.MODID + ".mortar_and_pestle";

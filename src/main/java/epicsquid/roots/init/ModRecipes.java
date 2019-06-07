@@ -18,7 +18,6 @@ import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.*;
 import net.minecraft.init.Blocks;
@@ -352,13 +351,13 @@ public class ModRecipes {
       if (recipe.isBlockRecipe() && recipe.getBlock() == runicShearRecipe.getBlock()) {
         System.out.println("Recipe is already registered with block - " + recipe.getBlock().getTranslationKey());
         return;
-      } else if (recipe.isEntityRecipe() && recipe.getEntity() == runicShearRecipe.getEntity()) {
-        System.out.println("Recipe is already registered with entity - " + recipe.getEntity().getName());
+      } else if (recipe.isEntityRecipe() && recipe.getClazz() == runicShearRecipe.getClazz()) {
+        System.out.println("Recipe is already registered with entity - " + recipe.getClazz().getName());
         return;
       }
     }
     if (recipe.isEntityRecipe()) {
-      runicShearEntityRecipes.put(recipe.getEntity(), recipe);
+      runicShearEntityRecipes.put(recipe.getClazz(), recipe);
     } else {
       runicShearRecipes.put(recipe.getName(), recipe);
     }
