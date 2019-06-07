@@ -1,6 +1,6 @@
 {
   "name": "Divine Protection",
-  "icon": "roots:ritual_light",
+  "icon": "roots:ritual_divine_protection",
   "category": "rituals",
   "advancement": "roots:pereskia",
   "pages": [
@@ -10,7 +10,7 @@
     },
     {
       "type": "pyre_template",
-      "ritual": "ritual_light"
+      "ritual": "ritual_divine_protection"
     }
   ]
 }

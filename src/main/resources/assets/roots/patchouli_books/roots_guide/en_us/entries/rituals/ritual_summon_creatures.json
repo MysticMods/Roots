@@ -1,6 +1,6 @@
 {
   "name": "Summon Creatures",
-  "icon": "roots:ritual_summoning",
+  "icon": "roots:ritual_summon_creatures",
   "category": "rituals",
   "advancement": "roots:wildewheet",
   "pages": [
@@ -10,7 +10,7 @@
     },
     {
       "type": "pyre_template",
-      "ritual": "ritual_summoning"
+      "ritual": "ritual_summon_creatures"
     }
   ]
 }

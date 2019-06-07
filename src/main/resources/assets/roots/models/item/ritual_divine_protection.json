@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "roots:items/ritual_frost"
+    "layer0": "roots:items/ritual_divine_protection"
   }
 }

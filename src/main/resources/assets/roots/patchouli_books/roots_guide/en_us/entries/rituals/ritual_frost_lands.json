@@ -1,6 +1,6 @@
 {
   "name": "Frost Lands",
-  "icon": "roots:ritual_frost",
+  "icon": "roots:ritual_frost_lands",
   "category": "rituals",
   "advancement": "roots:dewgonia",
   
@@ -11,7 +11,7 @@
     },
     {
       "type": "pyre_template",
-      "ritual": "ritual_frost"
+      "ritual": "ritual_frost_lands"
     }
   ]
 }

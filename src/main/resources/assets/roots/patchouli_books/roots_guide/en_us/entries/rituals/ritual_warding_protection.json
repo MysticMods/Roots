@@ -1,6 +1,6 @@
 {
   "name": "Warding Protection",
-  "icon": "roots:ritual_warden",
+  "icon": "roots:ritual_warding_protection",
   "category": "rituals",
   "advancement": "roots:stalicripe",
   "pages": [
@@ -10,7 +10,7 @@
     },
     {
       "type": "pyre_template",
-      "ritual": "ritual_warden"
+      "ritual": "ritual_warding_protection"
     },
     {
       "type": "multiblock",

@@ -23,7 +23,7 @@ public class RitualHealingAura extends RitualBase {
             new ItemStack(Blocks.SAPLING, 1, 2)
     ));
     addCondition(new ConditionTrees(BlockPlanks.EnumType.BIRCH, 4));
-    setIcon(ModItems.ritual_life);
+    setIcon(ModItems.ritual_healing_aura);
     setColor(TextFormatting.GOLD);
   }
 

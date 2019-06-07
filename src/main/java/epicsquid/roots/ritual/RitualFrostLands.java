@@ -21,7 +21,7 @@ public class RitualFrostLands extends RitualBase {
         new ItemStack(ModItems.bark_spruce),
         new ItemStack(ModItems.bark_spruce)
     ));
-    setIcon(ModItems.ritual_frost);
+    setIcon(ModItems.ritual_frost_lands);
     setColor(TextFormatting.AQUA);
     setBold(true);
   }

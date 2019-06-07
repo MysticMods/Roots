@@ -1,6 +1,6 @@
 {
   "name": "Healing Aura",
-  "icon": "roots:ritual_life",
+  "icon": "roots:ritual_healing_aura",
   "category": "rituals",
   "advancement": "roots:pyre",
   
@@ -11,7 +11,7 @@
     },
     {
       "type": "pyre_template",
-      "ritual": "ritual_life"
+      "ritual": "ritual_healing_aura"
     }
   ]
 }

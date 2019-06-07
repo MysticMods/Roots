@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "roots:items/ritual_summoning"
+    "layer0": "roots:items/ritual_summon_creatures"
   }
 }
