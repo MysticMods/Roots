@@ -2,6 +2,7 @@ package epicsquid.roots.entity.ritual;
 
 import java.util.List;
 
+import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,6 +12,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Loader;
 
 public class EntityRitualLight extends EntityRitualBase {
 
@@ -62,7 +64,11 @@ public class EntityRitualLight extends EntityRitualBase {
           .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 15.5, posY - 15.5, posZ - 15.5, posX + 15.5, posY + 15.5, posZ + 15.5));
       for (EntityLivingBase e : entities) {
         if (e.isEntityUndead()) {
-          e.attackEntityFrom(DamageSource.IN_FIRE, 2.0f);
+          if (Loader.isModLoaded("consecration")) {
+            e.attackEntityFrom(ModDamage.radiantDamageFrom(null), 2.0f);
+          } else {
+            e.attackEntityFrom(DamageSource.IN_FIRE, 2.0f);
+          }
           e.setFire(2);
           if (world.isRemote) {
             for (float i = 0; i < 16; i++) {

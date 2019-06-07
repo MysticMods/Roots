@@ -2,6 +2,7 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageRadianceBeamFX;
 import epicsquid.roots.spell.modules.SpellModule;
@@ -10,7 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -123,9 +123,9 @@ public class SpellRadiance extends SpellBase {
             for (EntityLivingBase e : entities) {
               if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
                   && e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
-                e.attackEntityFrom(DamageSource.MAGIC.causeMobDamage(player), 4F);
+                e.attackEntityFrom(ModDamage.radiantDamageFrom(player), 4F);
                 if (e.isEntityUndead()) {
-                  e.attackEntityFrom(DamageSource.MAGIC.causeMobDamage(player), 2F);
+                  e.attackEntityFrom(ModDamage.radiantDamageFrom(player), 2F);
                 }
                 e.setRevengeTarget(player);
                 e.setLastAttackedEntity(player);

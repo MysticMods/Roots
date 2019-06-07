@@ -4,6 +4,7 @@ import epicsquid.roots.config.GroveCraftingConfig;
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.integration.chisel.RootsChisel;
+import epicsquid.roots.integration.consecration.Consecration;
 import epicsquid.roots.integration.endercore.EndercoreHarvest;
 import epicsquid.roots.integration.harvest.HarvestIntegration;
 import epicsquid.roots.integration.jer.JERIntegration;
@@ -40,6 +41,9 @@ public class CommonProxy {
     }
     if (Loader.isModLoaded("endercore")) {
       EndercoreHarvest.init();
+    }
+    if (Loader.isModLoaded("consecration")) {
+      Consecration.init();
     }
     //MapGenStructureIO.registerStructureComponent(ComponentDruidHut.class, Roots.MODID + ":" + "druidhut");
     //VillagerRegistry.instance().registerVillageCreationHandler(new ComponentDruidHut.CreationHandler());
