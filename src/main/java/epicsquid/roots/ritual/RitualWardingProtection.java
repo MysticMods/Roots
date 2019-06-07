@@ -23,7 +23,7 @@ public class RitualWardingProtection extends RitualBase {
     ));
     addCondition(new ConditionStandingStones(3, 3));
     addCondition(new ConditionStandingStones(4, 3));
-    setIcon(ModItems.ritual_warden);
+    setIcon(ModItems.ritual_warding_protection);
     setColor(TextFormatting.DARK_BLUE);
     setBold(true);
   }

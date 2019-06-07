@@ -19,7 +19,7 @@ public class RitualNaturalGrowth extends RitualBase {
             new ItemStack(Blocks.SAPLING), 
             new ItemStack(Blocks.SAPLING)
     ));
-    setIcon(ModItems.ritual_regrowth);
+    setIcon(ModItems.ritual_natural_growth);
     setColor(TextFormatting.GREEN);
     setBold(true);
   }

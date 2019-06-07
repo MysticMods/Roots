@@ -56,7 +56,7 @@ public class RitualSummonCreatures extends RitualBase {
     entityItem.put(EntityBeetle.class, Lists.newArrayList(new ItemStack(epicsquid.mysticalworld.init.ModItems.carapace)));
     entityItem.put(EntityDeer.class, Lists.newArrayList(new ItemStack(Items.LEATHER)));
 
-    setIcon(ModItems.ritual_summoning);
+    setIcon(ModItems.ritual_summon_creatures);
     setColor(TextFormatting.DARK_PURPLE);
     setBold(true);
   }

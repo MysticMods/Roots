@@ -20,7 +20,7 @@ public class RitualHeavyStorms extends RitualBase {
             new ItemStack(ModItems.cloud_berry),
             new ItemStack(Items.BEETROOT_SEEDS)
     ));
-    setIcon(ModItems.ritual_storm);
+    setIcon(ModItems.ritual_heavy_storms);
     setColor(TextFormatting.DARK_AQUA);
     setBold(true);
   }

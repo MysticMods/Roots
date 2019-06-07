@@ -1,6 +1,6 @@
 {
   "name": "Heavy Storms",
-  "icon": "roots:ritual_storm",
+  "icon": "roots:ritual_heavy_storms",
   "category": "rituals",
   "advancement": "roots:cloud_berry",
   "pages": [
@@ -10,7 +10,7 @@
     },
     {
       "type": "pyre_template",
-      "ritual": "ritual_storm"
+      "ritual": "ritual_heavy_storms"
     }
   ]
 }

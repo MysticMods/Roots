@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "roots:items/ritual_light"
+    "layer0": "roots:items/ritual_healing_aura"
   }
 }
