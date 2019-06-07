@@ -25,7 +25,7 @@ public class SpellLifeDrain extends SpellBase {
   public SpellLifeDrain(String name) {
     super(name, TextFormatting.DARK_GRAY, 144f / 255f, 32f / 255f, 64f / 255f, 255f / 255f, 196f / 255f, 240f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
-    this.cooldown = 28;
+    this.cooldown = 0;
 
     addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.25f);
     addCost(HerbRegistry.getHerbByName("baffle_cap"), 0.125f);

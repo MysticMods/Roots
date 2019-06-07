@@ -29,7 +29,7 @@ public class SpellRampantGrowth extends SpellBase {
   public SpellRampantGrowth(String name) {
     super(name, TextFormatting.DARK_AQUA, 224f / 255f, 135f / 255f, 40f / 255f, 46f / 255f, 94f / 255f, 93f / 255f);
     this.castType = EnumCastType.CONTINUOUS;
-    this.cooldown = 16;
+    this.cooldown = 0;
 
     addCost(HerbRegistry.getHerbByName("spirit_herb"), 0.65f);
     addCost(HerbRegistry.getHerbByName("pereskia"), 0.45f);
