@@ -7,6 +7,8 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 
@@ -83,9 +85,11 @@ public class BlockFeyLight extends BlockBase {
         for (int i = 0; i < 2; i ++){
             ParticleUtil.spawnParticleGlow(world, pos.getX()+0.5f, pos.getY()+0.5f, pos.getZ()+0.5f, (random.nextFloat()-0.5f)*0.003f, 0f, (random.nextFloat()-0.5f)*0.003f, r, g, b, 0.25f, 3.0f, 240);
         }
-     /*   for (int i = 0; i < 2; i ++){
-            ParticleUtil.spawnParticleStar(world, pos.getX()+0.5f, pos.getY()+0.5f, pos.getZ()+0.5f, (random.nextFloat()-0.5f)*0.003f, 0f, (random.nextFloat()-0.5f)*0.003f, r, g, b, 0.25f, 3.0f, 240);
-        }*/
+    }
+
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return Items.AIR;
     }
 }
 
