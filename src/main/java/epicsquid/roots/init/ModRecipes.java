@@ -37,10 +37,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ModRecipes {
 
@@ -55,6 +52,10 @@ public class ModRecipes {
   private static List<RunicCarvingRecipe> runicCarvingRecipes = new ArrayList<>();
   private static Map<ResourceLocation, PacifistEntry> pacifistEntities = new HashMap<>();
   private static Map<Class<? extends Entity>, PacifistEntry> pacifistClasses = new HashMap<>();
+  private static Map<ResourceLocation, BarkRecipe> barkRecipes = new HashMap<>();
+
+  /*
+  TODO: DON'T USE THESE >:0
 
   private static ResourceLocation getRL(@Nonnull String s) {
     return new ResourceLocation(Roots.MODID + ":" + s);
@@ -66,7 +67,7 @@ public class ModRecipes {
 
   private static void registerShaped(@Nonnull IForgeRegistry<IRecipe> registry, @Nonnull String name, @Nonnull ItemStack result, Object... ingredients) {
     registry.register(new ShapedOreRecipe(getRL(name), result, ingredients).setRegistryName(getRL(name)));
-  }
+  }*/
 
   public static PacifistEntry addPacifistEntry(String name, Class<? extends Entity> clazz) {
     PacifistEntry entry = new PacifistEntry(clazz, name);
@@ -118,6 +119,47 @@ public class ModRecipes {
     addPacifistEntry("deer", EntityDeer.class);
     addPacifistEntry("fox", EntityFox.class);
     addPacifistEntry("frog", EntityFrog.class);
+  }
+
+  public static void addVanillaBarkRecipe (String name, BlockPlanks.EnumType type, Item item) {
+    barkRecipes.put(new ResourceLocation(Roots.MODID, name), new BarkRecipe(type, item));
+  }
+
+  public static void initVanillaBarkRecipes() {
+    addVanillaBarkRecipe("oak", BlockPlanks.EnumType.OAK, ModItems.bark_oak);
+    addVanillaBarkRecipe("spruce", BlockPlanks.EnumType.SPRUCE, ModItems.bark_spruce);
+    addVanillaBarkRecipe("birch", BlockPlanks.EnumType.BIRCH, ModItems.bark_birch);
+    addVanillaBarkRecipe("jungle", BlockPlanks.EnumType.JUNGLE, ModItems.bark_jungle);
+    addVanillaBarkRecipe("acacia", BlockPlanks.EnumType.ACACIA, ModItems.bark_acacia);
+    addVanillaBarkRecipe("dark_oak", BlockPlanks.EnumType.DARK_OAK, ModItems.bark_dark_oak);
+  }
+
+  public static void initModdedBarkRecipes () {
+    addModdedBarkRecipe("wildwood", ModBlocks.wildwood_log, ModItems.bark_wildwood);
+  }
+
+  public static void addModdedBarkRecipe (String name, Block block, Item item) {
+    barkRecipes.put(new ResourceLocation(Roots.MODID, name), new BarkRecipe(block, item));
+  }
+
+  @Nullable
+  public static BarkRecipe getModdedBarkRecipe (Block block) {
+    for (BarkRecipe recipe : barkRecipes.values()) {
+      if (recipe.getBlock() == block) return recipe;
+    }
+    return null;
+  }
+
+  @Nullable
+  public static BarkRecipe getVanillaBarkRecipe (BlockPlanks.EnumType type) {
+    for (BarkRecipe recipe : barkRecipes.values()) {
+      if (recipe.getType() == type) return recipe;
+    }
+    return null;
+  }
+
+  public static Collection<BarkRecipe> getBarkRecipes () {
+    return barkRecipes.values();
   }
 
   public static void addTransmutationRecipe(String name, Block start, IBlockState endState, WorldPosStatePredicate condition) {
@@ -563,6 +605,8 @@ public class ModRecipes {
     initAnimalHarvestRecipes();
     initTransmutationRecipes();
     initPacifistEntities();
+    initVanillaBarkRecipes();
+    initModdedBarkRecipes();
 
     GameRegistry.addSmelting(ModItems.flour, new ItemStack(Items.BREAD), 0.125f);
     GameRegistry.addSmelting(epicsquid.mysticalworld.init.ModItems.iron_dust, new ItemStack(Items.IRON_INGOT), 0.125f);
@@ -650,11 +694,11 @@ public class ModRecipes {
 
     addCraftingRecipe("elemental_soil",
         new GroveCraftingRecipe(new ItemStack(ModBlocks.elemental_soil), 1).addIngredients(
-          new ItemStack(Blocks.DIRT),
-          new ItemStack(ModItems.terra_moss),
-          new ItemStack(ModItems.wildroot),
-          new ItemStack(Blocks.GRAVEL),
-          new ItemStack(Items.DYE, 1, 15)));
+            new ItemStack(Blocks.DIRT),
+            new ItemStack(ModItems.terra_moss),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(Blocks.GRAVEL),
+            new ItemStack(Items.DYE, 1, 15)));
 
     addCraftingRecipe("living_pickaxe",
         new GroveCraftingRecipe(new ItemStack(ModItems.living_pickaxe), 1).addIngredients(
