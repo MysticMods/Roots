@@ -29,7 +29,7 @@ public class SpellRadiance extends SpellBase {
   public SpellRadiance(String name) {
     super(name, TextFormatting.WHITE, 255f / 255f, 255f / 255f, 64f / 255f, 255f / 255f, 255f / 255f, 192f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
-    this.cooldown = 40;
+    this.cooldown = 0;
 
     addCost(HerbRegistry.getHerbByName("pereskia"), 0.5f);
     addCost(HerbRegistry.getHerbByName("infernal_bulb"), 0.25f);

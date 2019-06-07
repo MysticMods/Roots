@@ -26,7 +26,7 @@ public class SpellGrowthInfusion extends SpellBase {
   public SpellGrowthInfusion(String name) {
     super(name, TextFormatting.YELLOW, 48f / 255f, 255f / 255f, 48f / 255f, 192f / 255f, 255f / 255f, 192f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
-    this.cooldown = 16;
+    this.cooldown = 0;
 
     addCost(HerbRegistry.getHerbByName("terra_moss"), 0.08f);
     addIngredients(
