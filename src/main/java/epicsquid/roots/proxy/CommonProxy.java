@@ -1,5 +1,6 @@
 package epicsquid.roots.proxy;
 
+import epicsquid.roots.api.RunicShearsRecipeProcessor;
 import epicsquid.roots.config.GroveCraftingConfig;
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.init.HerbRegistry;
@@ -9,11 +10,14 @@ import epicsquid.roots.integration.endercore.EndercoreHarvest;
 import epicsquid.roots.integration.harvest.HarvestIntegration;
 import epicsquid.roots.integration.jer.JERIntegration;
 import epicsquid.roots.recipe.RunicCarvingRecipes;
+import epicsquid.roots.recipe.RunicShearRecipes;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.rune.RuneRegistry;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.util.OfferingUtil;
+import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
