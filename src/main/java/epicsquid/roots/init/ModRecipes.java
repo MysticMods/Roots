@@ -647,7 +647,6 @@ public class ModRecipes {
             new ItemStack(ModItems.dewgonia),
             new ItemStack(ModItems.terra_moss),
             new ItemStack(ModItems.dewgonia)));
-    BlockSapling
 
     addCraftingRecipe("elemental_soil",
         new GroveCraftingRecipe(new ItemStack(ModBlocks.elemental_soil), 1).addIngredients(
