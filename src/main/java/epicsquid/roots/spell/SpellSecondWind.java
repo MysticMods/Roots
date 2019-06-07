@@ -21,9 +21,9 @@ public class SpellSecondWind extends SpellBase {
     this.castType = EnumCastType.INSTANTANEOUS;
     this.cooldown = 24;
 
-    addCost(HerbRegistry.getHerbByName("terra_moss"), 0.125f);
+    addCost(HerbRegistry.getHerbByName("dewgonia"), 0.125f);
     addIngredients(
-        new ItemStack(ModItems.terra_spores),
+        new ItemStack(ModItems.dewgonia),
         new OreIngredient("sugarcane"),
         new ItemStack(Items.CLAY_BALL),
         new ItemStack(Items.GLASS_BOTTLE),
