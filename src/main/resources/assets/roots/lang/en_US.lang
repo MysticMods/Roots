@@ -167,8 +167,10 @@ item.gold_knife.name=Golden Knife
 item.diamond_knife.name=Diamond Knife
 
 # Advancements
-advancement.roots.root=The Root of Magic
-advancement.roots.root.desc=Forage amongst broken grass to find wildroot
+advancement.roots.root="The Root of it all"
+advancement.roots.root.desc=Embrace nature and feel its energies.
+advancement.roots.wildroot=The Root of Magic
+advancement.roots.wildroot.desc=Forage amongst broken grass to find wildroot
 advancement.roots.guide=Epi-Tome of Druidry
 advancement.roots.guide.desc=Combine wildroot and paper to obtain an essential guide book
 advancement.roots.terra_moss=Overgrown Nature
@@ -179,6 +181,8 @@ advancement.roots.staff=A druid's staff...
 advancement.roots.staff.desc=...has flowers on the end, but a lot of spells inside.
 advancement.roots.pyre=Bonfire of the Vanities
 advancement.roots.pyre.desc=Craft a pyre through which ingredients can be burned for magical purpose
+advancement.roots.grove_crafter=Druidic Altar
+advancement.roots.grove_crafter.desc=Craft a Druid's best friend, the grove crafter.
 advancement.roots.pereskia=Fey Circles
 advancement.roots.pereskia.desc=Imbue a plant with the magic of the fey inside a pyre
 advancement.roots.runic_shears=Shearing Across the Realms
