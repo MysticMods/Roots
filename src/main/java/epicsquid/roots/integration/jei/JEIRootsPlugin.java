@@ -1,7 +1,7 @@
 package epicsquid.roots.integration.jei;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.config.GeneralConfig;
+import epicsquid.roots.config.ElementalSoilConfig;
 import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
@@ -36,9 +36,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.fml.common.Loader;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -155,9 +153,9 @@ public class JEIRootsPlugin implements IModPlugin {
 
     //Elemental Soil Crafting Information Panels
     String airSoilLocalized = new TextComponentTranslation("jei.roots.elemental_soil_air.desc").getFormattedText();
-    airSoilLocalized = airSoilLocalized.replace("@LEVEL", ((Integer) GeneralConfig.AirSoilMinY).toString());
+    airSoilLocalized = airSoilLocalized.replace("@LEVEL", ((Integer) ElementalSoilConfig.AirSoilMinY).toString());
     String earthSoilLocalized = new TextComponentTranslation("jei.roots.elemental_soil_earth.desc").getFormattedText();
-    earthSoilLocalized = earthSoilLocalized.replace("@LEVEL", ((Integer) GeneralConfig.EarthSoilMaxY).toString());
+    earthSoilLocalized = earthSoilLocalized.replace("@LEVEL", ((Integer) ElementalSoilConfig.EarthSoilMaxY).toString());
 
     registry.addIngredientInfo(new ItemStack(ModBlocks.elemental_soil_fire), VanillaTypes.ITEM, I18n.format("jei.roots.elemental_soil_fire.desc"));
     registry.addIngredientInfo(new ItemStack(ModBlocks.elemental_soil_water), VanillaTypes.ITEM, I18n.format("jei.roots.elemental_soil_water.desc"));
