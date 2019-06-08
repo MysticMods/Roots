@@ -24,7 +24,7 @@ public class SpellSanctuary extends SpellBase {
   public SpellSanctuary(String name) {
     super(name, TextFormatting.DARK_PURPLE, 208f / 255f, 16f / 255f, 80f / 255f, 224f / 255f, 32f / 255f, 144f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
-    this.cooldown = 60;
+    this.cooldown = 0;
 
     addCost(HerbRegistry.getHerbByName("pereskia"), 0.125f);
     addCost(HerbRegistry.getHerbByName("wildroot"), 0.125f);

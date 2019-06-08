@@ -78,9 +78,11 @@ public class ItemStaff extends ItemBase {
             if (spell.costsMet(player)) {
               boolean result = spell.cast(player, capability.getSelectedModules());
               if (result) {
-                spell.enactCosts(player);
-                capability.setCooldown(event.getCooldown());
-                capability.setLastCooldown(event.getCooldown());
+                if (!player.capabilities.isCreativeMode) {
+                  spell.enactCosts(player);
+                  capability.setCooldown(event.getCooldown());
+                  capability.setLastCooldown(event.getCooldown());
+                }
               }
               return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
             }
@@ -122,8 +124,10 @@ public class ItemStaff extends ItemBase {
       SpellEvent event = new SpellEvent((EntityPlayer) entity, spell);
       MinecraftForge.EVENT_BUS.post(event);
       if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
-        capability.setCooldown(event.getCooldown());
-        capability.setLastCooldown(event.getCooldown());
+        if (!((EntityPlayer) entity).capabilities.isCreativeMode) {
+          capability.setCooldown(event.getCooldown());
+          capability.setLastCooldown(event.getCooldown());
+        }
       }
     }
   }

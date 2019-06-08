@@ -41,7 +41,7 @@ public class EntityRitualOvergrowth extends EntityRitualBase {
       setDead();
     }
     if (!world.isRemote) {
-      if (this.ticksExisted % 400 == 0) {
+      if (this.ticksExisted % 150 == 0) {
         List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), 10, 20, 10, Blocks.COBBLESTONE).stream().filter((pos) -> isAdjacentToWater(world, pos)).collect(Collectors.toList());
         if (eligiblePositions.isEmpty()) return;
 

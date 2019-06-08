@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 public class EntitySpawnItem extends EntityRitualBase {
 
-    protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualLife.class, DataSerializers.VARINT);
+    protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualHealingAura.class, DataSerializers.VARINT);
     private ItemStack spawnStack;
     private int dropTime, ticksTillDrop;
 

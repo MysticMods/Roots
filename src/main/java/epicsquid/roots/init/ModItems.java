@@ -16,6 +16,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor;
@@ -32,7 +33,7 @@ public class ModItems {
   // All mod items
   public static Item pestle, component_pouch, spell_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, wildwood_quiver, wildwood_bow,
           sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, apothecary_pouch,
-  petals, flour, cooked_aubergine, stuffed_aubergine, living_arrow, runic_dust, seeds, cooked_seeds, cooked_pereskia, fay_leather, wildewheet_bread;
+  petals, flour, cooked_aubergine, stuffed_aubergine, living_arrow, runic_dust, seeds, cooked_seeds, cooked_pereskia, fey_leather, wildewheet_bread;
 
   public static Item moonglow_leaf, aubergine, pereskia, terra_spores, terra_moss, spirit_herb, wildewheet,
           baffle_cap, bark_oak, bark_birch, bark_spruce, bark_jungle, bark_dark_oak, bark_acacia, bark_wildwood;
@@ -40,7 +41,7 @@ public class ModItems {
   public static Item moonglow_seed, aubergine_seed, pereskia_bulb, spirit_herb_seed, wildewheet_seed, cloud_berry, infernal_bulb,
       stalicripe, dewgonia, wildroot;
 
-  public static Item ritual_life, ritual_storm, ritual_light, ritual_fire_storm, ritual_regrowth, ritual_windwall, ritual_warden, ritual_natural_aura, ritual_purity, ritual_frost, ritual_animal_harvest, ritual_summoning, ritual_wild_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation;
+  public static Item ritual_healing_aura, ritual_heavy_storms, ritual_divine_protection, ritual_fire_storm, ritual_natural_growth, ritual_windwall, ritual_warding_protection, ritual_natural_aura, ritual_purity, ritual_frost_lands, ritual_animal_harvest, ritual_summon_creatures, ritual_wild_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation;
 
   // TODO: Refactor this out of this file
   //Armor Materials
@@ -80,8 +81,13 @@ public class ModItems {
     event.addItem(bark_acacia = new ItemBase("bark_acacia").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(bark_wildwood = new ItemBase("bark_wildwood").setModelCustom(true).setCreativeTab(Roots.tab));
 
-    // TODO: do this
-    event.addItem(fay_leather = new ItemBase("fay_leather").setModelCustom(true).setCreativeTab(Roots.tab));
+    // TODO: Maybe not do this
+    event.addItem(fey_leather = new ItemBase("fey_leather") {
+      @Override
+      public EnumRarity getRarity(ItemStack stack) {
+        return EnumRarity.RARE;
+      }
+    }.setModelCustom(true).setCreativeTab(Roots.tab));
 
     event.addItem(pestle = new ItemBase("pestle").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(component_pouch = new ItemPouch("component_pouch").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
@@ -135,18 +141,18 @@ public class ModItems {
 
     event.addItem(wildewheet_bread = new ItemFoodBase("wildewheet_bread", 7, false).setModelCustom(true).setCreativeTab(Roots.tab));
     // Rituals
-    event.addItem(ritual_life = new ItemBase("ritual_life").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_storm = new ItemBase("ritual_storm").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_light = new ItemBase("ritual_light").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_healing_aura = new ItemBase("ritual_healing_aura").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_heavy_storms = new ItemBase("ritual_heavy_storms").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_divine_protection = new ItemBase("ritual_divine_protection").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_fire_storm = new ItemBase("ritual_fire_storm").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_regrowth = new ItemBase("ritual_regrowth").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_natural_growth = new ItemBase("ritual_natural_growth").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_windwall = new ItemBase("ritual_windwall").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_warden = new ItemBase("ritual_warden").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_warding_protection = new ItemBase("ritual_warding_protection").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_natural_aura = new ItemBase("ritual_natural_aura").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_purity = new ItemBase("ritual_purity").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_frost = new ItemBase("ritual_frost").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_frost_lands = new ItemBase("ritual_frost_lands").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_animal_harvest = new ItemBase("ritual_animal_harvest").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_summoning = new ItemBase("ritual_summoning").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_summon_creatures = new ItemBase("ritual_summon_creatures").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_wild_growth = new ItemBase("ritual_wild_growth").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_overgrowth = new ItemBase("ritual_overgrowth").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_flower_growth = new ItemBase("ritual_flower_growth").setModelCustom(false).setCreativeTab(null));

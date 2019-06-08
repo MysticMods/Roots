@@ -1,0 +1,17 @@
+{
+  "name": "Healing Aura",
+  "icon": "roots:ritual_healing_aura",
+  "category": "rituals",
+  "advancement": "roots:pyre",
+  
+  "pages": [
+    {
+      "type": "text",
+      "text": "Living creatures close to the ritual are rejuvenated. $(br2)This ritual requires 4 birch trees to be present."
+    },
+    {
+      "type": "pyre_template",
+      "ritual": "ritual_healing_aura"
+    }
+  ]
+}

@@ -9,6 +9,7 @@ import epicsquid.mysticalworld.materials.Metal;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.recipe.*;
+import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.util.StateUtil;
@@ -18,7 +19,6 @@ import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.*;
 import net.minecraft.init.Blocks;
@@ -37,10 +37,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ModRecipes {
 
@@ -55,6 +52,10 @@ public class ModRecipes {
   private static List<RunicCarvingRecipe> runicCarvingRecipes = new ArrayList<>();
   private static Map<ResourceLocation, PacifistEntry> pacifistEntities = new HashMap<>();
   private static Map<Class<? extends Entity>, PacifistEntry> pacifistClasses = new HashMap<>();
+  private static Map<ResourceLocation, BarkRecipe> barkRecipes = new HashMap<>();
+
+  /*
+  TODO: DON'T USE THESE >:0
 
   private static ResourceLocation getRL(@Nonnull String s) {
     return new ResourceLocation(Roots.MODID + ":" + s);
@@ -66,7 +67,7 @@ public class ModRecipes {
 
   private static void registerShaped(@Nonnull IForgeRegistry<IRecipe> registry, @Nonnull String name, @Nonnull ItemStack result, Object... ingredients) {
     registry.register(new ShapedOreRecipe(getRL(name), result, ingredients).setRegistryName(getRL(name)));
-  }
+  }*/
 
   public static PacifistEntry addPacifistEntry(String name, Class<? extends Entity> clazz) {
     PacifistEntry entry = new PacifistEntry(clazz, name);
@@ -118,6 +119,47 @@ public class ModRecipes {
     addPacifistEntry("deer", EntityDeer.class);
     addPacifistEntry("fox", EntityFox.class);
     addPacifistEntry("frog", EntityFrog.class);
+  }
+
+  public static void addVanillaBarkRecipe (String name, BlockPlanks.EnumType type, Item item) {
+    barkRecipes.put(new ResourceLocation(Roots.MODID, name), new BarkRecipe(type, item));
+  }
+
+  public static void initVanillaBarkRecipes() {
+    addVanillaBarkRecipe("oak", BlockPlanks.EnumType.OAK, ModItems.bark_oak);
+    addVanillaBarkRecipe("spruce", BlockPlanks.EnumType.SPRUCE, ModItems.bark_spruce);
+    addVanillaBarkRecipe("birch", BlockPlanks.EnumType.BIRCH, ModItems.bark_birch);
+    addVanillaBarkRecipe("jungle", BlockPlanks.EnumType.JUNGLE, ModItems.bark_jungle);
+    addVanillaBarkRecipe("acacia", BlockPlanks.EnumType.ACACIA, ModItems.bark_acacia);
+    addVanillaBarkRecipe("dark_oak", BlockPlanks.EnumType.DARK_OAK, ModItems.bark_dark_oak);
+  }
+
+  public static void initModdedBarkRecipes () {
+    addModdedBarkRecipe("wildwood", ModBlocks.wildwood_log, ModItems.bark_wildwood);
+  }
+
+  public static void addModdedBarkRecipe (String name, Block block, Item item) {
+    barkRecipes.put(new ResourceLocation(Roots.MODID, name), new BarkRecipe(block, item));
+  }
+
+  @Nullable
+  public static BarkRecipe getModdedBarkRecipe (Block block) {
+    for (BarkRecipe recipe : barkRecipes.values()) {
+      if (recipe.getBlock() == block) return recipe;
+    }
+    return null;
+  }
+
+  @Nullable
+  public static BarkRecipe getVanillaBarkRecipe (BlockPlanks.EnumType type) {
+    for (BarkRecipe recipe : barkRecipes.values()) {
+      if (recipe.getType() == type) return recipe;
+    }
+    return null;
+  }
+
+  public static Collection<BarkRecipe> getBarkRecipes () {
+    return barkRecipes.values();
   }
 
   public static void addTransmutationRecipe(String name, Block start, IBlockState endState, WorldPosStatePredicate condition) {
@@ -352,13 +394,13 @@ public class ModRecipes {
       if (recipe.isBlockRecipe() && recipe.getBlock() == runicShearRecipe.getBlock()) {
         System.out.println("Recipe is already registered with block - " + recipe.getBlock().getTranslationKey());
         return;
-      } else if (recipe.isEntityRecipe() && recipe.getEntity() == runicShearRecipe.getEntity()) {
-        System.out.println("Recipe is already registered with entity - " + recipe.getEntity().getName());
+      } else if (recipe.isEntityRecipe() && recipe.getClazz() == runicShearRecipe.getClazz()) {
+        System.out.println("Recipe is already registered with entity - " + recipe.getClazz().getName());
         return;
       }
     }
     if (recipe.isEntityRecipe()) {
-      runicShearEntityRecipes.put(recipe.getEntity(), recipe);
+      runicShearEntityRecipes.put(recipe.getClazz(), recipe);
     } else {
       runicShearRecipes.put(recipe.getName(), recipe);
     }
@@ -563,6 +605,8 @@ public class ModRecipes {
     initAnimalHarvestRecipes();
     initTransmutationRecipes();
     initPacifistEntities();
+    initVanillaBarkRecipes();
+    initModdedBarkRecipes();
 
     GameRegistry.addSmelting(ModItems.flour, new ItemStack(Items.BREAD), 0.125f);
     GameRegistry.addSmelting(epicsquid.mysticalworld.init.ModItems.iron_dust, new ItemStack(Items.IRON_INGOT), 0.125f);
@@ -644,29 +688,21 @@ public class ModRecipes {
         new GroveCraftingRecipe(new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.unending_bowl)), 2).addIngredients(
             new ItemStack(Items.WATER_BUCKET),
             new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.mortar)),
-            new ItemStack(ModItems.moonglow_leaf),
+            new ItemStack(ModItems.dewgonia),
             new ItemStack(ModItems.terra_moss),
-            new ItemStack(ModItems.spirit_herb)));
+            new ItemStack(ModItems.dewgonia)));
 
     addCraftingRecipe("elemental_soil",
         new GroveCraftingRecipe(new ItemStack(ModBlocks.elemental_soil), 1).addIngredients(
-          new ItemStack(Blocks.DIRT),
-          new ItemStack(ModItems.terra_moss),
-          new ItemStack(ModItems.wildroot),
-          new ItemStack(Blocks.GRAVEL),
-          new ItemStack(Items.DYE, 1, 15)));
+            new ItemStack(Blocks.DIRT),
+            new ItemStack(ModItems.terra_moss),
+            new ItemStack(ModItems.wildroot),
+            new ItemStack(Blocks.GRAVEL),
+            new ItemStack(Items.DYE, 1, 15)));
 
     addCraftingRecipe("living_pickaxe",
         new GroveCraftingRecipe(new ItemStack(ModItems.living_pickaxe), 1).addIngredients(
-            new OreIngredient("ingotGold"),
-            new ItemStack(Items.WOODEN_PICKAXE),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak)));
-
-    addCraftingRecipe("living_pickaxe_silver",
-        new GroveCraftingRecipe(new ItemStack(ModItems.living_pickaxe), 1).addIngredients(
-            new OreIngredient("ingotSilver"),
+            new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_PICKAXE),
             new ItemStack(ModItems.wildroot),
             new ItemStack(ModItems.bark_oak),
@@ -674,15 +710,7 @@ public class ModRecipes {
 
     addCraftingRecipe("living_axe",
         new GroveCraftingRecipe(new ItemStack(ModItems.living_axe), 1).addIngredients(
-            new OreIngredient("ingotGold"),
-            new ItemStack(Items.WOODEN_AXE),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak)));
-
-    addCraftingRecipe("living_axe_silver",
-        new GroveCraftingRecipe(new ItemStack(ModItems.living_axe), 1).addIngredients(
-            new OreIngredient("ingotSilver"),
+            new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_AXE),
             new ItemStack(ModItems.wildroot),
             new ItemStack(ModItems.bark_oak),
@@ -690,15 +718,7 @@ public class ModRecipes {
 
     addCraftingRecipe("living_shovel",
         new GroveCraftingRecipe(new ItemStack(ModItems.living_shovel), 1).addIngredients(
-            new OreIngredient("ingotGold"),
-            new ItemStack(Items.WOODEN_SHOVEL),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak)));
-
-    addCraftingRecipe("living_shovel_silver",
-        new GroveCraftingRecipe(new ItemStack(ModItems.living_shovel), 1).addIngredients(
-            new OreIngredient("ingotSilver"),
+            new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_SHOVEL),
             new ItemStack(ModItems.wildroot),
             new ItemStack(ModItems.bark_oak),
@@ -706,15 +726,7 @@ public class ModRecipes {
 
     addCraftingRecipe("living_hoe",
         new GroveCraftingRecipe(new ItemStack(ModItems.living_hoe), 1).addIngredients(
-            new OreIngredient("ingotGold"),
-            new ItemStack(Items.WOODEN_HOE),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak)));
-
-    addCraftingRecipe("living_hoe_silver",
-        new GroveCraftingRecipe(new ItemStack(ModItems.living_hoe), 1).addIngredients(
-            new OreIngredient("ingotSilver"),
+            new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_HOE),
             new ItemStack(ModItems.wildroot),
             new ItemStack(ModItems.bark_oak),
@@ -722,20 +734,11 @@ public class ModRecipes {
 
     addCraftingRecipe("living_sword",
         new GroveCraftingRecipe(new ItemStack(ModItems.living_sword), 1).addIngredients(
-            new OreIngredient("ingotGold"),
+            new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_SWORD),
             new ItemStack(ModItems.wildroot),
             new ItemStack(ModItems.bark_oak),
             new ItemStack(ModItems.bark_oak)));
-
-    addCraftingRecipe("living_sword_silver",
-        new GroveCraftingRecipe(new ItemStack(ModItems.living_sword), 1).addIngredients(
-            new OreIngredient("ingotSilver"),
-            new ItemStack(Items.WOODEN_SWORD),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak)));
-
 
     addCraftingRecipe("living_arrow",
         new GroveCraftingRecipe(new ItemStack(ModItems.living_arrow, 6), 1).addIngredients(
@@ -814,28 +817,28 @@ public class ModRecipes {
     ));
 
     addCraftingRecipe("sylvan_helmet", new GroveCraftingRecipe(new ItemStack(ModItems.sylvan_helmet), 1).addIngredients(
-        new ItemStack(Items.GOLDEN_HELMET),
+        new ItemStack(ModItems.fey_leather),
         new ItemStack(Blocks.VINE),
         new ItemStack(ModItems.bark_birch),
         new OreIngredient("gemAmethyst"),
         new ItemStack(ModItems.bark_birch)));
 
     addCraftingRecipe("sylvan_chestplate", new GroveCraftingRecipe(new ItemStack(ModItems.sylvan_chestplate), 1).addIngredients(
-        new ItemStack(Items.GOLDEN_CHESTPLATE),
+        new ItemStack(ModItems.fey_leather),
         new ItemStack(Blocks.VINE),
         new ItemStack(ModItems.bark_birch),
         new OreIngredient("gemAmethyst"),
         new ItemStack(ModItems.bark_birch)));
 
     addCraftingRecipe("sylvan_leggings", new GroveCraftingRecipe(new ItemStack(ModItems.sylvan_leggings), 1).addIngredients(
-        new ItemStack(Items.GOLDEN_LEGGINGS),
+        new ItemStack(ModItems.fey_leather),
         new ItemStack(Blocks.VINE),
         new ItemStack(ModItems.bark_birch),
         new OreIngredient("gemAmethyst"),
         new ItemStack(ModItems.bark_birch)));
 
     addCraftingRecipe("sylvan_boots", new GroveCraftingRecipe(new ItemStack(ModItems.sylvan_boots), 1).addIngredients(
-        new ItemStack(Items.GOLDEN_BOOTS),
+        new ItemStack(ModItems.fey_leather),
         new ItemStack(Blocks.VINE),
         new ItemStack(ModItems.bark_birch),
         new OreIngredient("gemAmethyst"),

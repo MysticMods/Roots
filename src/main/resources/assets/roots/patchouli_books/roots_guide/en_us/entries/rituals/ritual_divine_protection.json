@@ -1,0 +1,16 @@
+{
+  "name": "Divine Protection",
+  "icon": "roots:ritual_divine_protection",
+  "category": "rituals",
+  "advancement": "roots:pereskia",
+  "pages": [
+    {
+      "type": "text",
+      "text": "$(o)'Banish the clouds from the skies,$(br)lengthen the light but shorter is the night.$(br)Will-O-Will-O-Wisp, undead be burning to crisp.'$()$(br2)Extends daytime and clears the weather.$(br2)This ritual will fail if it's nighttime."
+    },
+    {
+      "type": "pyre_template",
+      "ritual": "ritual_divine_protection"
+    }
+  ]
+}

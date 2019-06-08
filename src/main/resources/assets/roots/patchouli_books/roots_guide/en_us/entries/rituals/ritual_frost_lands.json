@@ -1,0 +1,17 @@
+{
+  "name": "Frost Lands",
+  "icon": "roots:ritual_frost_lands",
+  "category": "rituals",
+  "advancement": "roots:dewgonia",
+  
+  "pages": [
+    {
+      "type": "text",
+      "text": "The temperature around the ritual drops to below freezing.$(br2)This causes the moisture in the air to quickly condense into a more frosty form."
+    },
+    {
+      "type": "pyre_template",
+      "ritual": "ritual_frost_lands"
+    }
+  ]
+}

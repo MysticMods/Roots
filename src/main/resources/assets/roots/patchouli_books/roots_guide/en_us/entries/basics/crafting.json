@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "roots:grove_stone",
       "link_recipe": true,
-      "text": "A specially prepared crafting area consists of a Grove Stone and a Grove Crafter. The Grove Stone itself must be activated using a sufficient $(l:spells/spell_grove_supplication)Supplication$() spell, and when activated it will draw in fay particles to itself."
+      "text": "A specially prepared crafting area consists of a Grove Stone and a Grove Crafter. The Grove Stone itself must be activated using a sufficient $(l:spells/spell_grove_supplication)Supplication$() spell, and when activated it will draw in fey particles to itself."
     },
     {
       "type": "spotlight",

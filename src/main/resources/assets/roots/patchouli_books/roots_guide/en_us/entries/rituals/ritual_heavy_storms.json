@@ -1,0 +1,16 @@
+{
+  "name": "Heavy Storms",
+  "icon": "roots:ritual_heavy_storms",
+  "category": "rituals",
+  "advancement": "roots:cloud_berry",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Invokes a torrent of rain from the heavens.$(br2)Creatures within the ritual's radius are not affected by fire."
+    },
+    {
+      "type": "pyre_template",
+      "ritual": "ritual_heavy_storms"
+    }
+  ]
+}

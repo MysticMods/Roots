@@ -6,6 +6,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.block.BlockGroveStone;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.network.fx.MessageGrowthCrafterVisualFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.GroveCraftingRecipe;
@@ -19,6 +20,7 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -202,6 +204,7 @@ public class TileEntityGroveCrafter extends TileBase {
 
     MessageGrowthCrafterVisualFX packet = new MessageGrowthCrafterVisualFX(getPos(), world.provider.getDimension());
     PacketHandler.sendToAllTracking(packet, this);
+    world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), ModSounds.CHIMES, SoundCategory.NEUTRAL, 1f, 1f);
 
     return true;
   }

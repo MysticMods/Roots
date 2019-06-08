@@ -22,15 +22,15 @@ public class RitualConfig {
 
     @Config.Name("Disable Frost Ritual")
     @Config.Comment("Set to true to disable Frost Ritual")
-    public boolean disableFrost = false;
+    public boolean disableFrostLands = false;
 
     @Config.Name("Disable Life Ritual")
     @Config.Comment("Set to true to disable Life Ritual")
-    public boolean disableLife = false;
+    public boolean disableHealingAura = false;
 
     @Config.Name("Disable Light Ritual")
     @Config.Comment("Set to true to disable Light Ritual")
-    public boolean disableLight = false;
+    public boolean disableDivineProtection = false;
 
     @Config.Name("Disable Natural Aura Ritual")
     @Config.Comment("Set to true to disable Natural Aura Ritual")
@@ -46,11 +46,11 @@ public class RitualConfig {
 
     @Config.Name("Disable Regrowth Ritual")
     @Config.Comment("Set to true to disable Regrowth Ritual")
-    public boolean disableRegrowth = false;
+    public boolean disableNaturalGrowth = false;
 
     @Config.Name("Disable Storm Ritual")
     @Config.Comment("Set to true to disable Storm Ritual")
-    public boolean disableStorm = false;
+    public boolean disableHeavyStorms = false;
 
     @Config.Name("Disable Transmutation Ritual")
     @Config.Comment("Set to true to disable Transmutation Ritual")
@@ -58,7 +58,7 @@ public class RitualConfig {
 
     @Config.Name("Disable Warden Ritual")
     @Config.Comment("Set to true to disable Warden Ritual")
-    public boolean disableWarden = false;
+    public boolean disableWardingProtection = false;
 
     @Config.Name("Disable Windwall Ritual")
     @Config.Comment("Set to true to disable Windwall Ritual")
@@ -74,7 +74,7 @@ public class RitualConfig {
 
     @Config.Name("Disable Summoning Ritual")
     @Config.Comment("Set to true to disable Summoning Ritual")
-    public boolean disableSummoning = false;
+    public boolean disableSummonCreatures = false;
 
   }
 

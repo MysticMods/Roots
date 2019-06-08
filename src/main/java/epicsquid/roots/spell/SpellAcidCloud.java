@@ -29,7 +29,7 @@ public class SpellAcidCloud extends SpellBase {
   public SpellAcidCloud(String name) {
     super(name, TextFormatting.DARK_GREEN, 80f / 255f, 160f / 255f, 40f / 255f, 64f / 255f, 96f / 255f, 32f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
-    this.cooldown = 24;
+    this.cooldown = 0;
 
     addCost(HerbRegistry.getHerbByName("terra_moss"), 0.0625f);
     addCost(HerbRegistry.getHerbByName("baffle_cap"), 0.125f);
