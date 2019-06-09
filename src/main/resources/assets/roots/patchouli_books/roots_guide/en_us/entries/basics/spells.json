@@ -10,7 +10,7 @@
     },
     {
       "type": "text",
-      "text": "Once the spell dust has been crafted, it is imbued into the staff with an $(l:apparatus/imbuer)Imbuer.$() During the process, further reagents can be added to permanently modify the spell.$(br2)Imbuement will never override a old spell slot, instead placing the new spell in the first available empty slot, if there is one."
+      "text": "Once the spell dust has been crafted, it is imbued into the staff with an Imbuer. During the process, further reagents can be added to permanently modify the spell.$(br2)Imbuement will never override a old spell slot, instead placing the new spell in the first available empty slot, if there is one."
     },
     {
       "type": "crafting",
