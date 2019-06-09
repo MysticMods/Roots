@@ -40,13 +40,12 @@ public class ItemQuiver extends ItemArrowBase {
   public EntityArrow createArrow(World worldIn, ItemStack stack, EntityLivingBase shooter) {
     ItemStack livingArrow = findLivingArrow(stack);
     if (!livingArrow.isEmpty()) {
-      return ((ItemArrow) livingArrow.getItem()).createArrow(worldIn, livingArrow, shooter);
+      return ((ItemArrowBase) livingArrow.getItem()).createArrow(worldIn, livingArrow, shooter);
     }
 
     ItemStack normalArrow = findOtherArrow(stack);
     if (!normalArrow.isEmpty()) {
-      EntityArrow arrow = ((ItemArrow) normalArrow.getItem()).createArrow(worldIn, normalArrow, shooter);
-      return arrow;
+      return ((ItemArrow) normalArrow.getItem()).createArrow(worldIn, normalArrow, shooter);
     }
 
     EntityArrow arrow = new EntityTippedArrow(worldIn, shooter);
