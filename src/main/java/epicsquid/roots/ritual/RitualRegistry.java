@@ -51,7 +51,7 @@ public class RitualRegistry {
     if (!RitualConfig.disableRitualCategory.disableFireStorm)
       addRitual(ritual_fire_storm = new RitualFireStorm("ritual_fire_storm", 1200));
     if (!RitualConfig.disableRitualCategory.disableNaturalGrowth)
-      addRitual(ritual_regrowth = new RitualNaturalGrowth("ritual_natural_growth", 2400));
+      addRitual(ritual_regrowth = new RitualSpreadingForest("ritual_spreading_forest", 2400));
     if (!RitualConfig.disableRitualCategory.disableWindwall)
       addRitual(ritual_windwall = new RitualWindwall("ritual_windwall", 3000));
     if (!RitualConfig.disableRitualCategory.disableWardingProtection)
