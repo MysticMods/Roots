@@ -69,7 +69,7 @@ public class SpellShatter extends SpellBase {
           }
         } else if (result.typeOfHit == RayTraceResult.Type.ENTITY) {
           if (result.entityHit instanceof EntityLivingBase) {
-            result.entityHit.attackEntityFrom(DamageSource.causeMobDamage(player), 3.0f);
+            result.entityHit.attackEntityFrom(DamageSource.causeMobDamage(player), 5.0f);
             ((EntityLivingBase) result.entityHit).setLastAttackedEntity(player);
             ((EntityLivingBase) result.entityHit).setRevengeTarget(player);
             float offX = 0.5f * (float) Math.sin(Math.toRadians(-90.0f - player.rotationYaw));

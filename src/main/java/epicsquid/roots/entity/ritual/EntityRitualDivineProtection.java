@@ -65,9 +65,9 @@ public class EntityRitualDivineProtection extends EntityRitualBase {
       for (EntityLivingBase e : entities) {
         if (e.isEntityUndead()) {
           if (Loader.isModLoaded("consecration")) {
-            e.attackEntityFrom(ModDamage.radiantDamageFrom(null), 2.0f);
+            e.attackEntityFrom(ModDamage.radiantDamageFrom(null), 4.0f);
           } else {
-            e.attackEntityFrom(DamageSource.IN_FIRE, 2.0f);
+            e.attackEntityFrom(DamageSource.IN_FIRE, 4.0f);
           }
           e.setFire(2);
           if (world.isRemote) {
