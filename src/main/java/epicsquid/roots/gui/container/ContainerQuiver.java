@@ -111,6 +111,7 @@ public class ContainerQuiver extends Container {
       }
 
       if (stack.isEmpty()) {
+        handler.saveToStack();
         slot.putStack(ItemStack.EMPTY);
       }
 
