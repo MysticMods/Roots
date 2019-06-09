@@ -108,5 +108,36 @@ public class PouchHandler implements INBTSerializable<NBTTagCompound> {
 
       PouchHandler.this.saveToStack();
     }
+
+    @Override
+    public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
+      super.setStackInSlot(slot, stack);
+
+      PouchHandler.this.saveToStack();
+    }
+
+    @Nonnull
+    @Override
+    public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+      ItemStack result = super.insertItem(slot, stack, simulate);
+
+      if (!simulate) {
+        PouchHandler.this.saveToStack();
+      }
+
+      return result;
+    }
+
+    @Nonnull
+    @Override
+    public ItemStack extractItem(int slot, int amount, boolean simulate) {
+      ItemStack result = super.extractItem(slot, amount, simulate);
+
+      if (!simulate) {
+        PouchHandler.this.saveToStack();
+      }
+
+      return result;
+    }
   }
 }
