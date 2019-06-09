@@ -54,10 +54,10 @@ public class SpellLifeDrain extends SpellBase {
               && e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
             foundTarget = true;
             if (e.hurtTime <= 0 && !e.isDead) {
-              e.attackEntityFrom(DamageSource.WITHER.causeMobDamage(player), 1F);
+              e.attackEntityFrom(DamageSource.WITHER.causeMobDamage(player), 3F);
               e.setRevengeTarget(player);
               e.setLastAttackedEntity(player);
-              player.heal(0.5F);
+              player.heal(1.5F);
             }
           }
         }

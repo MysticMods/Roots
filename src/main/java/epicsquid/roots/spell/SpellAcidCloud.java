@@ -51,7 +51,7 @@ public class SpellAcidCloud extends SpellBase {
       for (EntityLivingBase e : entities) {
         if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
             && e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
-          e.attackEntityFrom(DamageSource.causeMobDamage(player), 1F);
+          e.attackEntityFrom(DamageSource.causeMobDamage(player), 6f);
           if (SpellConfig.spellFeaturesCategory.acidCloudPoisoningEffect)
             e.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("poison"), 80, 0));
           e.setRevengeTarget(player);
