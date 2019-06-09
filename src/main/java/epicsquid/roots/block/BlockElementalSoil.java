@@ -107,5 +107,9 @@ public class BlockElementalSoil extends BlockBase {
   public Item getItemBlock() {
     return itemBlock;
   }
+
+  public EnumElementalSoilType getSoilType() {
+    return soilType;
+  }
 }
 

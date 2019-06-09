@@ -25,11 +25,6 @@ public class GeneralConfig {
   @Config.Comment(("The aoe-radius for using runic shears to aoe-shear things"))
   public static int RunicShearsRadius = 15;
 
-  @Config.Comment(("Minimum Y-level to convert elemental soil into terra earth"))
-  public static int EarthSoilMinY = 40;
-
-  @Config.Comment(("Minimum Y-level to convert elemental soil into aeros soil"))
-  public static int AirSoilMinY = 90;
 }
 
 
