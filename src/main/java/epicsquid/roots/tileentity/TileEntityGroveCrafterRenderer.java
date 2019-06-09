@@ -3,7 +3,7 @@ package epicsquid.roots.tileentity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 
@@ -33,32 +33,30 @@ public class TileEntityGroveCrafterRenderer extends TileEntitySpecialRenderer<Ti
       switch (items.indexOf(item))
       {
         case 0:
-          GlStateManager.translate(x + 0.9, y + 1.2, z + 0.5);
+          GlStateManager.translate(x + 0.9, y + 1.1, z + 0.5);
           break;
         case 1:
-          GlStateManager.translate(x + 0.55, y + 1.2, z + 0.15);
+          GlStateManager.translate(x + 0.55, y + 1.1, z + 0.15);
           break;
         case 2:
-          GlStateManager.translate(x + 0.55, y + 1.2, z + 0.85);
+          GlStateManager.translate(x + 0.55, y + 1.1, z + 0.85);
           break;
         case 3:
-          GlStateManager.translate(x + 0.10, y + 1.2, z + 0.25);
+          GlStateManager.translate(x + 0.10, y + 1.1, z + 0.25);
           break;
         case 4:
-          GlStateManager.translate(x + 0.1, y + 1.2, z + 0.7);
+          GlStateManager.translate(x + 0.1, y + 1.1, z + 0.7);
           break;
       }
 
-      //TODO Fix item disappearing in particular player view angles
-      GlStateManager.scale(0.20, 0.20, 0.20);
+      GlStateManager.scale(0.4, 0.4, 0.4);
       GlStateManager.rotate((te.getWorld().getTotalWorldTime() + partialTicks) * 4, 0, 1, 0);
 
       // Old rotation (Items laid on the leaves)
 //      GlStateManager.rotate(90, 1, 0, 0);
 //      GlStateManager.rotate(-90, 0, 0, 1);
 
-      IBakedModel model = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(item, te.getWorld(), null);
-      Minecraft.getMinecraft().getRenderItem().renderItem(item, model);
+      Minecraft.getMinecraft().getRenderItem().renderItem(item, ItemCameraTransforms.TransformType.GROUND);
 
       RenderHelper.disableStandardItemLighting();
       GlStateManager.popMatrix();

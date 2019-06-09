@@ -78,7 +78,7 @@ public class EntityFireJet extends Entity {
             if (!(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
                 && entity.getUniqueID().compareTo(player.getUniqueID()) != 0) {
               entity.setFire(4);
-              entity.attackEntityFrom((DamageSource.IN_FIRE).causeMobDamage(player), 2.0f);
+              entity.attackEntityFrom((DamageSource.IN_FIRE).causeMobDamage(player), 4.5f);
               entity.setLastAttackedEntity(player);
               entity.setRevengeTarget(player);
             }

@@ -188,6 +188,7 @@ public class ContainerPouch extends Container {
 
       if (stack.isEmpty()) {
         slot.putStack(ItemStack.EMPTY);
+        handler.saveToStack();
       }
 
       slot.onSlotChanged();

@@ -1,25 +1,33 @@
 package epicsquid.roots.entity.ritual;
 
+import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
-import net.minecraft.block.BlockCrops;
-import net.minecraft.block.BlockSapling;
+import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.Arrays;
+import java.util.List;
+
 @SuppressWarnings("deprecation")
-public class EntityRitualNaturalAura extends EntityRitualBase {
+public class EntityRitualGermination extends EntityRitualBase {
 
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualNaturalAura.class, DataSerializers.VARINT);
+  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualGermination.class, DataSerializers.VARINT);
 
-  public EntityRitualNaturalAura(World worldIn) {
+  public EntityRitualGermination(World worldIn) {
     super(worldIn);
     getDataManager().register(lifetime, RitualRegistry.ritual_natural_aura.getDuration() + 20);
   }
+
+  private static List<Block> skips = Arrays.asList(Blocks.GRASS, Blocks.TALLGRASS, Blocks.DOUBLE_PLANT);
 
   @Override
   public void onUpdate() {
@@ -44,7 +52,7 @@ public class EntityRitualNaturalAura extends EntityRitualBase {
       }
     }
     if (this.ticksExisted % 5 == 0) {
-      BlockPos pos = world.getTopSolidOrLiquidBlock(getPosition().add(rand.nextInt(19) - 9, 0, rand.nextInt(19) - 9));
+      /*BlockPos pos = world.getTopSolidOrLiquidBlock(getPosition().add(rand.nextInt(19) - 9, 0, rand.nextInt(19) - 9));
       IBlockState state = world.getBlockState(pos);
       if (state.getBlock() instanceof BlockCrops) {
         if (((BlockCrops) state.getBlock()).canGrow(world, pos, state, world.isRemote)) {
@@ -57,15 +65,29 @@ public class EntityRitualNaturalAura extends EntityRitualBase {
             }
           }
         }
-      }
-      if (state.getBlock() instanceof BlockSapling) {
-        BlockSapling blockSapling = (BlockSapling) state.getBlock();
-        blockSapling.grow(world, pos, state, rand);
-        if (world.isRemote) {
-          for (float i = 0; i < 1; i += 0.125f) {
-            ParticleUtil.spawnParticleSpark(world, (pos.getX() + 0.5f), (pos.getY() + 0.5f) + i, (pos.getZ() + 0.5f), 0.125f * (rand.nextFloat() - 0.5f),
-                0.0625f * (rand.nextFloat()), 0.125f * (rand.nextFloat() - 0.5f), 100, 255, 100, 1.0f * (1.0f - i) * alpha, 3.0f * (1.0f - i), 40);
+      }*/
+      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), 19, 19, 19, (pos) -> {
+        IBlockState state = world.getBlockState(pos);
+        if (state.getBlock() instanceof IGrowable) {
+          Block block = state.getBlock();
+          if (skips.contains(block)) return false;
+          if (state.getBlock() instanceof BlockFlower) return false;
+          return ((IGrowable) state.getBlock()).canGrow(world, pos, state, false);
+        } else if (state.getBlock() == Blocks.NETHER_WART) {
+          return state.getValue(BlockNetherWart.AGE) < 3;
+        } else if (state.getBlock() instanceof BlockSapling) {
+          return true;
+        }
+        return false;
+      });
+      if (!world.isRemote) {
+        for (int i = 0; i < 2 + world.rand.nextInt(4); i++) {
+          BlockPos pos = positions.get(world.rand.nextInt(positions.size()));
+          IBlockState state = world.getBlockState(pos);
+          for (int j = 0; j < 3; j++) {
+            state.getBlock().randomTick(world, pos, state, world.rand);
           }
+          PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), this);
         }
       }
     }
@@ -75,5 +97,4 @@ public class EntityRitualNaturalAura extends EntityRitualBase {
   public DataParameter<Integer> getLifetime() {
     return lifetime;
   }
-
 }

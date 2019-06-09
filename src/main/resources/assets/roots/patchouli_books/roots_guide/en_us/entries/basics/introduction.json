@@ -3,14 +3,15 @@
     "icon": "roots:wildroot",
     "category": "basics",
     "advancement": "roots:root",
+    "priority": true,
     "pages": [
       {
         "type": "text",
-        "text": "Within nature there is much power to be discovered. From the creation of the world, the mystical energies that wove the land into existence have been left behind, accessible to those who know where they to find them."  
+        "text": "There is much that lies hidden in the forests and plains, at the tops of mountains and the bottom of oceans. In all of these expanses of nature, the Druid strives to learn all that they can about the natural world, and in these experiences learn how to manipulate nature in wondrous ways."
       },
       {
         "type": "text",
-        "text": "Begin by breaking some tall grass to obtain $(l:herbs/wildroot)Wildroot$() and some Terra Spores, with which you can grow $(l:herbs/terra_moss)Terra Moss$() to further your druidic discoveries."
+        "text": "To begin, start by breaking some tall grass. Look for $(l:herbs/wildroot)Wildroot$() and Terra Spores, with which you can grow $(l:herbs/terra_moss)Terra Moss$(), to begin your own journey."
       }
     ]
   }

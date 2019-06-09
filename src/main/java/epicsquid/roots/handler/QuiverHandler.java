@@ -23,6 +23,37 @@ public class QuiverHandler implements INBTSerializable<NBTTagCompound> {
 
       QuiverHandler.this.saveToStack();
     }
+
+    @Override
+    public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
+      super.setStackInSlot(slot, stack);
+
+      QuiverHandler.this.saveToStack();
+    }
+
+    @Nonnull
+    @Override
+    public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+      ItemStack result = super.insertItem(slot, stack, simulate);
+
+      if (!simulate) {
+        QuiverHandler.this.saveToStack();
+      }
+
+      return result;
+    }
+
+    @Nonnull
+    @Override
+    public ItemStack extractItem(int slot, int amount, boolean simulate) {
+      ItemStack result = super.extractItem(slot, amount, simulate);
+
+      if (!simulate) {
+        QuiverHandler.this.saveToStack();
+      }
+
+      return result;
+    }
   };
 
   public QuiverHandler(ItemStack quiver) {
@@ -64,7 +95,7 @@ public class QuiverHandler implements INBTSerializable<NBTTagCompound> {
     return false;
   }
 
-  public boolean consume () {
+  public boolean consume() {
     int arrowSlot = -1;
     int emptySlot = -1;
     for (int i = 0; i < 6; i++) {
