@@ -37,7 +37,7 @@ public class ModEntities {
     LibRegistry.registerEntity(EntityRitualDivineProtection.class);
     LibRegistry.registerEntity(EntityRitualFireStorm.class);
     LibRegistry.registerEntity(EntityFlare.class);
-    LibRegistry.registerEntity(EntityRitualNaturalGrowth.class);
+    LibRegistry.registerEntity(EntityRitualSpreadingForest.class);
     LibRegistry.registerEntity(EntityRitualWindwall.class);
     LibRegistry.registerEntity(EntityRitualWardingProtection.class);
     LibRegistry.registerEntity(EntitySpawnItem.class);
@@ -60,7 +60,7 @@ public class ModEntities {
       LibRegistry.registerEntityRenderer(EntityRitualDivineProtection.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualFireStorm.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityFlare.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityRitualNaturalGrowth.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntityRitualSpreadingForest.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualWindwall.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualWardingProtection.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntitySpawnItem.class, new RenderNull.Factory());
