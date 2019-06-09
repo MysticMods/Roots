@@ -12,11 +12,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 @SuppressWarnings("deprecation")
-public class EntityRitualNaturalAura extends EntityRitualBase {
+public class EntityRitualGermination extends EntityRitualBase {
 
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualNaturalAura.class, DataSerializers.VARINT);
+  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualGermination.class, DataSerializers.VARINT);
 
-  public EntityRitualNaturalAura(World worldIn) {
+  public EntityRitualGermination(World worldIn) {
     super(worldIn);
     getDataManager().register(lifetime, RitualRegistry.ritual_natural_aura.getDuration() + 20);
   }
