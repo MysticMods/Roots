@@ -57,7 +57,7 @@ public class RitualRegistry {
     if (!RitualConfig.disableRitualCategory.disableWardingProtection)
       addRitual(ritual_warden = new RitualWardingProtection("ritual_warding_protection", 1200));
     if (!RitualConfig.disableRitualCategory.disableNaturalAura)
-      addRitual(ritual_natural_aura = new RitualNaturalAura("ritual_natural_aura", 1200));
+      addRitual(ritual_natural_aura = new RitualGermination("ritual_germination", 1200));
     if (!RitualConfig.disableRitualCategory.disablePurity)
       addRitual(ritual_purity = new RitualPurity("ritual_purity", 1200));
     if (!RitualConfig.disableRitualCategory.disableFrostLands)
