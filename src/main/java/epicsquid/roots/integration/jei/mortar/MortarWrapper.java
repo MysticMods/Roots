@@ -1,6 +1,8 @@
 package epicsquid.roots.integration.jei.mortar;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemSpellDust;
@@ -29,17 +31,23 @@ public class MortarWrapper implements IRecipeWrapper {
 
   @Override
   public void getIngredients(IIngredients ingredients) {
+    List<List<ItemStack>> inputs = new ArrayList<>();
+
     if (recipe != null) {
       for (Ingredient ingredient : recipe.getIngredients()) {
-        if (ingredient == null || ingredient == Ingredient.EMPTY) continue;
-        ingredients.setInputs(VanillaTypes.ITEM, Arrays.asList(ingredient.getMatchingStacks()));
+        if (ingredient == null || ingredient == Ingredient.EMPTY) {
+          inputs.add(new ArrayList<>());
+        } else {
+          inputs.add(Arrays.asList(ingredient.getMatchingStacks()));
+        }
       }
       ingredients.setOutput(VanillaTypes.ITEM, this.recipe.getResult());
     } else if (spellBase != null) {
       for (Ingredient ingredient : spellBase.getIngredients()) {
-        ingredients.setInputs(VanillaTypes.ITEM, Arrays.asList(ingredient.getMatchingStacks()));
+        inputs.add(Arrays.asList(ingredient.getMatchingStacks()));
       }
       ingredients.setOutput(VanillaTypes.ITEM, spellBase.getResult());
     }
+    ingredients.setInputLists(VanillaTypes.ITEM, inputs);
   }
 }
