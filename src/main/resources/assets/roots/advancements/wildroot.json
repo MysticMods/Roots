@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "roots:wildroot"
+    },
+    "title": {
+      "translate": "advancement.roots.wildroot"
+    },
+    "description": {
+      "translate": "advancement.roots.wildroot.desc"
+    }
+  },
+  "parent": "roots:root",
+  "criteria": {
+    "book": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "roots:wildroot"
+          }
+        ]
+      }
+    }
+  }
+}
