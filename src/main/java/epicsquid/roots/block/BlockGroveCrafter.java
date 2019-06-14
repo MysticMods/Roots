@@ -24,12 +24,12 @@ import javax.annotation.Nonnull;
 
 public class BlockGroveCrafter extends BlockTEBase {
 
-  private static final PropertyDirection FACING = BlockHorizontal.FACING;
+  //private static final PropertyDirection FACING = BlockHorizontal.FACING;
 
   public BlockGroveCrafter(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
     super(mat, type, hardness, name, teClass);
     setLightOpacity(0);
-    this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+    //this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
   }
 
   @Override
@@ -55,7 +55,7 @@ public class BlockGroveCrafter extends BlockTEBase {
     return true;
   }
 
-  @Nonnull
+  /*@Nonnull
   @Override
   public IBlockState getStateForPlacement(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
     return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite().rotateY());
@@ -106,7 +106,7 @@ public class BlockGroveCrafter extends BlockTEBase {
       }
 
       return state;
-  }
+  }*/
 
   @Nonnull
   @Override
