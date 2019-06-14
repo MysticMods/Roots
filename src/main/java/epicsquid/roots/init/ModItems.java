@@ -41,7 +41,7 @@ public class ModItems {
   public static Item moonglow_seed, aubergine_seed, pereskia_bulb, spirit_herb_seed, wildewheet_seed, cloud_berry, infernal_bulb,
       stalicripe, dewgonia, wildroot;
 
-  public static Item ritual_healing_aura, ritual_heavy_storms, ritual_divine_protection, ritual_fire_storm, ritual_natural_growth, ritual_windwall, ritual_warding_protection, ritual_natural_aura, ritual_purity, ritual_frost_lands, ritual_animal_harvest, ritual_summon_creatures, ritual_wild_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation;
+  public static Item ritual_healing_aura, ritual_heavy_storms, ritual_divine_protection, ritual_fire_storm, ritual_spreading_forest, ritual_windwall, ritual_warding_protection, ritual_germination, ritual_purity, ritual_frost_lands, ritual_animal_harvest, ritual_summon_creatures, ritual_wild_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation;
 
   // TODO: Refactor this out of this file
   //Armor Materials
@@ -145,10 +145,10 @@ public class ModItems {
     event.addItem(ritual_heavy_storms = new ItemBase("ritual_heavy_storms").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_divine_protection = new ItemBase("ritual_divine_protection").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_fire_storm = new ItemBase("ritual_fire_storm").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_natural_growth = new ItemBase("ritual_natural_growth").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_spreading_forest = new ItemBase("ritual_spreading_forest").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_windwall = new ItemBase("ritual_windwall").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_warding_protection = new ItemBase("ritual_warding_protection").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_natural_aura = new ItemBase("ritual_natural_aura").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_germination = new ItemBase("ritual_germination").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_purity = new ItemBase("ritual_purity").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_frost_lands = new ItemBase("ritual_frost_lands").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_animal_harvest = new ItemBase("ritual_animal_harvest").setModelCustom(false).setCreativeTab(null));
