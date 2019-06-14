@@ -19,7 +19,7 @@ public class RitualSpreadingForest extends RitualBase {
             new ItemStack(Blocks.SAPLING), 
             new ItemStack(Blocks.SAPLING)
     ));
-    setIcon(ModItems.ritual_natural_growth);
+    setIcon(ModItems.ritual_spreading_forest);
     setColor(TextFormatting.GREEN);
     setBold(true);
   }

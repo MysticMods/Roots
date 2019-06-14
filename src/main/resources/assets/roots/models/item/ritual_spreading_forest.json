@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "roots:items/ritual_natural_growth"
+    "layer0": "roots:items/ritual_spreading_forest"
   }
 }

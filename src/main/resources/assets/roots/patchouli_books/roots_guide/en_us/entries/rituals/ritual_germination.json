@@ -1,6 +1,6 @@
 {
   "name": "Natural Aura",
-  "icon": "roots:ritual_natural_aura",
+  "icon": "roots:ritual_germination",
   "category": "rituals",
   "advancement": "roots:spirit_herb",
   "pages": [
@@ -10,7 +10,7 @@
     },
     {
       "type": "pyre_template",
-      "ritual": "ritual_natural_aura"
+      "ritual": "ritual_germination"
     }
   ]
 }
