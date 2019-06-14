@@ -22,7 +22,7 @@ public class RitualGermination extends RitualBase {
             new ItemStack(Items.DYE, 1, 15)
     ));
     addCondition(new ConditionStandingStones(3, 3));
-    setIcon(ModItems.ritual_natural_aura);
+    setIcon(ModItems.ritual_germination);
     setColor(TextFormatting.DARK_RED);
     setBold(true);
   }

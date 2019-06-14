@@ -1,6 +1,6 @@
 {
   "name": "Natural Growth",
-  "icon": "roots:ritual_natural_growth",
+  "icon": "roots:ritual_spreading_forest",
   "category": "rituals",
   "advancement": "roots:spirit_herb",
   "pages": [
@@ -10,7 +10,7 @@
     },
     {
       "type": "pyre_template",
-      "ritual": "ritual_natural_growth"
+      "ritual": "ritual_spreading_forest"
     }
   ]
 }
