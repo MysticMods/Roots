@@ -2,7 +2,7 @@
   "name": "Runestone",
   "icon": "roots:runestone",
   "category": "resources",
-  "advancement": "roots:pyre",
+  "advancement": "roots:grove_crafter",
   "secret": true,
   "pages": [
     {
