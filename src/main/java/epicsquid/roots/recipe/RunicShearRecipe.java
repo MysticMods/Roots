@@ -26,7 +26,6 @@ public class RunicShearRecipe {
   private ItemStack optionalDisplayItem = ItemStack.EMPTY;
   private String name;
 
-  @SideOnly(Side.CLIENT)
   private EntityLivingBase entity = null;
   private Class<? extends EntityLivingBase> clazz = null;
   private int cooldown = 0;
