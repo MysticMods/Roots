@@ -2,6 +2,7 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.Roots;
 import epicsquid.roots.block.BlockGroveStone;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModBlocks;
@@ -10,6 +11,7 @@ import epicsquid.roots.network.fx.MessageGroveCompleteFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -63,6 +65,7 @@ public class SpellGroveSupplication extends SpellBase {
 
       if (!player.world.isRemote) {
         player.world.setBlockState(pos, state.withProperty(BlockGroveStone.VALID, true));
+        Roots.GROVE_TRIGGER.trigger((EntityPlayerMP) player, null);
       }
     }
 
