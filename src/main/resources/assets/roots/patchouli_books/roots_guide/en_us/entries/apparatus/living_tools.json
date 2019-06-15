@@ -2,7 +2,7 @@
   "name": "Living Tools",
   "icon": "roots:living_pickaxe",
   "category": "apparatus",
-  "advancement": "roots:pyre",
+  "advancement": "roots:grove_crafter",
   "secret": true,
   "pages": [
     {

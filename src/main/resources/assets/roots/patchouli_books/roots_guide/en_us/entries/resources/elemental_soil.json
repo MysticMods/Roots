@@ -3,7 +3,7 @@
   "icon": "roots:elemental_soil",
   "category": "resources",
   "priority": true,
-  "advancement": "roots:pyre",
+  "advancement": "roots:grove_crafter",
   
   "pages": [
     {
