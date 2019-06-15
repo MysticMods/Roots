@@ -33,23 +33,23 @@ public class TileEntityGroveCrafterRenderer extends TileEntitySpecialRenderer<Ti
       switch (items.indexOf(item))
       {
         case 0:
-          GlStateManager.translate(x + 0.9, y + 1.1, z + 0.5);
+          GlStateManager.translate(x + 0.5, y + 1.1, z + 0.125);
           break;
         case 1:
-          GlStateManager.translate(x + 0.55, y + 1.1, z + 0.15);
+          GlStateManager.translate(x + 0.13, y + 1.1, z + 0.45);
           break;
         case 2:
-          GlStateManager.translate(x + 0.55, y + 1.1, z + 0.85);
+          GlStateManager.translate(x + 0.88, y + 1.1, z + 0.45);
           break;
         case 3:
-          GlStateManager.translate(x + 0.10, y + 1.1, z + 0.25);
+          GlStateManager.translate(x + 0.25, y + 1.1, z + 0.88);
           break;
         case 4:
-          GlStateManager.translate(x + 0.1, y + 1.1, z + 0.7);
+          GlStateManager.translate(x + 0.69, y + 1.1, z + 0.88);
           break;
       }
 
-      GlStateManager.scale(0.4, 0.4, 0.4);
+      GlStateManager.scale(0.45, 0.45, 0.45);
       GlStateManager.rotate((te.getWorld().getTotalWorldTime() + partialTicks) * 4, 0, 1, 0);
 
       // Old rotation (Items laid on the leaves)
