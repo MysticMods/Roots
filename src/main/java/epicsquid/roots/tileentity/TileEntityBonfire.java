@@ -16,6 +16,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -25,6 +27,7 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
@@ -76,6 +79,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     super();
   }
 
+  @Nonnull
   @Override
   public NBTTagCompound writeToNBT(NBTTagCompound tag) {
     super.writeToNBT(tag);
@@ -101,6 +105,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     this.lastRecipeUsed = ModRecipes.getCraftingRecipe(tag.getString("lastRecipeUsed"));
   }
 
+  @Nonnull
   @Override
   public NBTTagCompound getUpdateTag() {
     return writeToNBT(new NBTTagCompound());
@@ -112,16 +117,8 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   }
 
   @Override
-  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+  public void onDataPacket(@Nonnull NetworkManager net, SPacketUpdateTileEntity pkt) {
     readFromNBT(pkt.getNbtCompound());
-  }
-
-  public RitualBase getLastRitualUsed() {
-    return lastRitualUsed;
-  }
-
-  public PyreCraftingRecipe getLastRecipeUsed() {
-    return lastRecipeUsed;
   }
 
   public PyreCraftingRecipe getCurrentRecipe() {
@@ -177,6 +174,16 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
           return true; // Cf above
         }
+      } else if (heldItem.getItem() == Items.WATER_BUCKET && burnTime > 0) {
+        burnTime = 0;
+        lastRecipeUsed = null;
+        lastRitualUsed = null;
+        BlockBonfire.setState(false, world, pos);
+        world.playSound(player, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1F, 1.25F);
+        world.playSound(player, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.25F, 1F);
+        if (!player.isCreative())
+          player.setHeldItem(hand, new ItemStack(Items.BUCKET));
+        return true;
       } else {
         for (int i = 0; i < 5; i++) {
           if (inventory.getStackInSlot(i).isEmpty()) {
@@ -256,7 +263,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   }
 
   @Override
-  public void breakBlock(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+  public void breakBlock(World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, EntityPlayer player) {
     if (!world.isRemote) {
       Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
     }
@@ -417,6 +424,27 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         break;
       }
     }
+  }
+
+  public RitualBase getLastRitualUsed() {
+    return lastRitualUsed;
+  }
+
+  public PyreCraftingRecipe getLastRecipeUsed() {
+    return lastRecipeUsed;
+  }
+
+
+  public void setLastRitualUsed(RitualBase lastRitualUsed) {
+    this.lastRitualUsed = lastRitualUsed;
+  }
+
+  public void setLastRecipeUsed(PyreCraftingRecipe lastRecipeUsed) {
+    this.lastRecipeUsed = lastRecipeUsed;
+  }
+
+  public void setBurnTime(int burnTime) {
+    this.burnTime = burnTime;
   }
 
   public boolean getState() {

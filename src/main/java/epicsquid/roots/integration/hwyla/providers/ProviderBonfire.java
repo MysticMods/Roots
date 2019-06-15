@@ -1,6 +1,5 @@
 package epicsquid.roots.integration.hwyla.providers;
 
-import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import mcp.mobius.waila.api.IWailaConfigHandler;
@@ -10,14 +9,17 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public class ProviderBonfire implements IWailaDataProvider {
+
+  @Nonnull
   @Override
   public List<String> getWailaBody(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
     TileEntityBonfire te = (TileEntityBonfire) accessor.getTileEntity();
     if (te != null) {
-      int duration = 0;
+      int duration;
       if (te.getLastRecipeUsed() != null) {
         ItemStack result = te.getLastRecipeUsed().getResult();
         duration = te.getLastRecipeUsed().getBurnTime();
