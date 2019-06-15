@@ -10,7 +10,7 @@
             "translate": "advancement.roots.terra_moss.desc"
         }
     },
-    "parent": "roots:root",
+    "parent": "roots:guide",
     "criteria": {
         "book": {
             "trigger": "minecraft:inventory_changed",

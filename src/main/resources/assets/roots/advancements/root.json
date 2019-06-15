@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "roots:petals"
+            "item": "roots:living_hoe"
         },
         "title": {
             "translate": "advancement.roots.root"
@@ -9,7 +9,7 @@
         "description": {
             "translate": "advancement.roots.root.desc"
         },
-        "background": "mysticalworld:textures/blocks/thatch.png",
+        "background": "roots:textures/blocks/runestone.png",
         "show_toast": false,
         "announce_to_chat" : false
     },

@@ -167,7 +167,7 @@ item.gold_knife.name=Golden Knife
 item.diamond_knife.name=Diamond Knife
 
 # Advancements
-advancement.roots.root="The Root of it all"
+advancement.roots.root=Roots 3
 advancement.roots.root.desc=Embrace nature and feel its energies.
 advancement.roots.wildroot=The Root of Magic
 advancement.roots.wildroot.desc=Forage amongst broken grass to find wildroot
@@ -180,9 +180,11 @@ advancement.roots.aubergine.desc=Once, purple carrots were all the rage. But thi
 advancement.roots.staff=A druid's staff...
 advancement.roots.staff.desc=...has flowers on the end, but a lot of spells inside.
 advancement.roots.pyre=Bonfire of the Vanities
-advancement.roots.pyre.desc=Craft a pyre through which ingredients can be burned for magical purpose
-advancement.roots.grove_crafter=Druidic Altar
-advancement.roots.grove_crafter.desc=Craft a Druid's best friend, the grove crafter.
+advancement.roots.pyre.desc=Craft a pyre on which ingredients can be burned for magical purpose.
+advancement.roots.grove_crafter=Groves 101
+advancement.roots.grove_crafter.desc=Build a Grove Crafter to craft with the power of Groves.
+advancement.roots.grove_stone=I'm Still Standing
+advancement.roots.grove_stone.desc=Supplicate the fey with a spell and open a Grove Stone.
 advancement.roots.pereskia=Fey Circles
 advancement.roots.pereskia.desc=Imbue a plant with the magic of the fey inside a pyre
 advancement.roots.runic_shears=Shearing Across the Realms

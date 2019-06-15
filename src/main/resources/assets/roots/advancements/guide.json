@@ -11,7 +11,7 @@
             "translate": "advancement.roots.guide.desc"
         }
     },
-    "parent": "roots:root",
+    "parent": "roots:wildroot",
     "criteria": {
         "book": {
             "trigger": "minecraft:inventory_changed",
