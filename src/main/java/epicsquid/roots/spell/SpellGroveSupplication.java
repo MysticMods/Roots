@@ -3,6 +3,7 @@ package epicsquid.roots.spell;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
+import epicsquid.roots.advancements.Advancements;
 import epicsquid.roots.block.BlockGroveStone;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModBlocks;
@@ -65,7 +66,7 @@ public class SpellGroveSupplication extends SpellBase {
 
       if (!player.world.isRemote) {
         player.world.setBlockState(pos, state.withProperty(BlockGroveStone.VALID, true));
-        Roots.GROVE_TRIGGER.trigger((EntityPlayerMP) player, null);
+        Advancements.GROVE_TRIGGER.trigger((EntityPlayerMP) player, null);
       }
     }
 
