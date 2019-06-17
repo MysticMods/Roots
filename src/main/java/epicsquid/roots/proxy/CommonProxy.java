@@ -1,5 +1,6 @@
 package epicsquid.roots.proxy;
 
+import epicsquid.roots.advancements.Advancements;
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.integration.chisel.RootsChisel;
@@ -55,5 +56,6 @@ public class CommonProxy {
     if (Loader.isModLoaded("harvest")) {
       HarvestIntegration.init();
     }
+    Advancements.init();
   }
 }
