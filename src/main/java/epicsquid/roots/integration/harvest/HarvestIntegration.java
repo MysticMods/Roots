@@ -15,7 +15,7 @@ import java.util.Map;
 public class HarvestIntegration {
     public static void init() {
         List<BlockCropBase> crops = Arrays.asList(ModBlocks.moonglow,
-                ModBlocks.aubergine,
+                epicsquid.mysticalworld.init.ModBlocks.aubergine,
                 ModBlocks.pereskia,
                 ModBlocks.wildroot,
                 ModBlocks.spirit_herb,

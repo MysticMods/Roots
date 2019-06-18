@@ -31,9 +31,9 @@ public class JERIntegration {
     registry.register((ItemSeedBase) ModItems.spirit_herb_seed,
         new PlantDrop(new ItemStack(ModItems.spirit_herb), 1, 1),
         new PlantDrop(new ItemStack(ModItems.spirit_herb_seed), 1, 4));
-    registry.register((ItemSeedBase) ModItems.aubergine_seed,
-        new PlantDrop(new ItemStack(ModItems.aubergine), 1, 1),
-        new PlantDrop(new ItemStack(ModItems.aubergine_seed), 1, 4));
+    registry.register((ItemSeedBase) epicsquid.mysticalworld.init.ModItems.aubergine_seed,
+        new PlantDrop(new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine), 1, 1),
+        new PlantDrop(new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed), 1, 4));
     registry.register((ItemSeedBase) ModItems.infernal_bulb,
         new PlantDrop(new ItemStack(ModItems.infernal_bulb), 1, 4));
     registry.register((ItemSeedBase) ModItems.dewgonia,

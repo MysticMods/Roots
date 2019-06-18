@@ -175,8 +175,6 @@ advancement.roots.guide=Epi-Tome of Druidry
 advancement.roots.guide.desc=Combine wildroot and paper to obtain an essential guide book
 advancement.roots.terra_moss=Overgrown Nature
 advancement.roots.terra_moss.desc=Scrape the lichenous growth off mossy cobblestone
-advancement.roots.aubergine=That's No Carrot...
-advancement.roots.aubergine.desc=Once, purple carrots were all the rage. But this is an aubergine.
 advancement.roots.staff=A druid's staff...
 advancement.roots.staff.desc=...has flowers on the end, but a lot of spells inside.
 advancement.roots.pyre=Bonfire of the Vanities
@@ -223,8 +221,6 @@ advancement.roots.wildwood.desc=Acquire wildwood in any form through the Ritual 
 # Herbs
 item.moonglow_seed.name=Moonglow Seed
 item.moonglow_leaf.name=Moonglow Leaf
-item.aubergine_seed.name=Aubergine Seed
-item.aubergine.name=Aubergine
 item.pereskia_bulb.name=Pereskia Bulb
 item.pereskia.name=Pereskia
 item.terra_spores.name=Terra Spores
@@ -276,8 +272,6 @@ tile.wildwood_leaves.name=Wildwood Leaves
 
 item.petals.name=Petals
 item.runic_dust.name=Runic Dust
-item.cooked_aubergine.name=Cooked Aubergine
-item.stuffed_aubergine.name=Stuffed Aubergine
 item.cooked_pereskia.name=Roasted Pereskia
 item.wildewheet_bread.name=Wildewheet Bread
 item.fey_leather.name=Fey Leather

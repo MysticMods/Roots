@@ -17,7 +17,7 @@ public class RitualGermination extends RitualBase {
     addCondition(new ConditionItems(
             new ItemStack(ModItems.spirit_herb),
             new ItemStack(ModItems.wildroot), 
-            new ItemStack(ModItems.aubergine),
+            new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
             new ItemStack(Items.DYE, 1, 15),
             new ItemStack(Items.DYE, 1, 15)
     ));

@@ -1,8 +1,8 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.util.Util;
+import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.init.HerbRegistry;
-import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.monster.IMob;

@@ -25,7 +25,6 @@ public class AdvancementHandler {
   private static void grantXP (ResourceLocation adv, World world, BlockPos pos) {
     if (adv.getNamespace().equals(Roots.MODID)) {
       switch (adv.getPath()) {
-        case "aubergine":
         case "baffle_cap":
         case "cloud_berry":
         case "dewgonia":

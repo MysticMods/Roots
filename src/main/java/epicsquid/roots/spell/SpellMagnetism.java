@@ -31,7 +31,7 @@ public class SpellMagnetism extends SpellBase {
         new OreIngredient("dustRedstone"),
         new ItemStack(Items.MAP),
         new ItemStack(ModItems.wildroot),
-        new ItemStack(ModItems.aubergine)
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine)
     );
   }
 

@@ -16,7 +16,7 @@ public class RitualPurity extends RitualBase {
     super(name, duration);
     addCondition(new ConditionItems(
             new ItemStack(ModItems.terra_moss),
-            new ItemStack(ModItems.aubergine), 
+            new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
             new ItemStack(ModBlocks.baffle_cap_mushroom),
             new ItemStack(Items.MILK_BUCKET), 
             new ItemStack(Items.GLASS_BOTTLE)

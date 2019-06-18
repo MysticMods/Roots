@@ -611,7 +611,6 @@ public class ModRecipes {
     GameRegistry.addSmelting(ModItems.flour, new ItemStack(Items.BREAD), 0.125f);
     GameRegistry.addSmelting(epicsquid.mysticalworld.init.ModItems.iron_dust, new ItemStack(Items.IRON_INGOT), 0.125f);
     GameRegistry.addSmelting(epicsquid.mysticalworld.init.ModItems.gold_dust, new ItemStack(Items.GOLD_INGOT), 0.125f);
-    GameRegistry.addSmelting(ModItems.aubergine, new ItemStack(ModItems.cooked_aubergine), 0.125f);
     GameRegistry.addSmelting(ModItems.seeds, new ItemStack(ModItems.cooked_seeds), 0.05f);
     GameRegistry.addSmelting(ModItems.pereskia_bulb, new ItemStack(ModItems.cooked_pereskia), 0.125f);
 

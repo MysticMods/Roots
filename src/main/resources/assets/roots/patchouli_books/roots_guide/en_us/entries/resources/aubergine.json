@@ -1,11 +1,11 @@
 {
   "name": "Aubergine",
-  "icon": "roots:aubergine",
+  "icon": "mysticalworld:aubergine",
   "category": "resources",
   "pages": [
     {
       "type": "spotlight",
-      "item": "roots:aubergine",
+      "item": "mysticalworld:aubergine",
       "link_recipe": true,
       "text": "Aubergines are mostly used in the druidic arts for their seeds, which store potent amounts of energy - however, there are rituals that are only successful when performed with the entire aubergine."
     },
@@ -15,7 +15,7 @@
     },
     {
       "type": "crafting",
-      "recipe": "roots:aubergine_seed"
+      "recipe": "mysticalworld:aubergine_seed"
     },
     {
       "type": "text",
