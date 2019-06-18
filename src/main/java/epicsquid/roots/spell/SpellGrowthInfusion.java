@@ -33,7 +33,7 @@ public class SpellGrowthInfusion extends SpellBase {
         new OreIngredient("treeSapling"),
         new OreIngredient("treeSapling"),
         new ItemStack(ModItems.terra_moss),
-        new ItemStack(ModItems.aubergine),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
         new ItemStack(Items.WHEAT)
     );
   }

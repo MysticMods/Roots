@@ -26,7 +26,7 @@ public class SpellPetalShell extends SpellBase {
     addCost(HerbRegistry.getHerbByName("spirit_herb"), 0.75f);
     addIngredients(
         new ItemStack(Items.MELON),
-        new ItemStack(ModItems.aubergine),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
         new ItemStack(ModItems.spirit_herb),
         new ItemStack(Items.SHIELD),
         new ItemStack(ModItems.pereskia_bulb)

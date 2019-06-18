@@ -28,7 +28,7 @@ public class SpellMindWard extends SpellBase {
         new ItemStack(Items.ROTTEN_FLESH),
         new ItemStack(ModItems.wildewheet),
         new ItemStack(ModItems.wildewheet_seed),
-        new ItemStack(ModItems.aubergine_seed),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),
         new OreIngredient("enderpearl")
     );
   }

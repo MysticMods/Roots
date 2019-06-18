@@ -30,7 +30,7 @@ public class ModVillagers {
 
     druidCareer = new VillagerCareer(druidProfession, "druid").
         addTrade(1,
-            new EmeraldForRandomItem(new PriceInfo(5, 12), ModItems.wildroot, ModItems.terra_moss, ModItems.aubergine),
+            new EmeraldForRandomItem(new PriceInfo(5, 12), ModItems.wildroot, ModItems.terra_moss, epicsquid.mysticalworld.init.ModItems.aubergine),
             new EmeraldForRandomItem(new PriceInfo(5, 15), ModItems.bark_oak, ModItems.bark_birch, ModItems.bark_spruce, ModItems.bark_acacia, ModItems.bark_dark_oak, ModItems.bark_jungle),
             new EmeraldForRandomItem(new PriceInfo(5, 12), ModItems.runic_dust, ModItems.petals),
             new ListRandomItemForEmerald(new PriceInfo(2, 5), ModItems.dewgonia, ModItems.cloud_berry, ModItems.stalicripe, ModItems.infernal_bulb, ((IBlock) ModBlocks.baffle_cap_mushroom).getItemBlock()),
@@ -39,7 +39,7 @@ public class ModVillagers {
         ).
         addTrade(2,
             new EmeraldForRandomItem(new PriceInfo(3, 8), ModItems.dewgonia, ModItems.cloud_berry, ModItems.stalicripe, ModItems.infernal_bulb, ((IBlock) ModBlocks.baffle_cap_mushroom).getItemBlock()),
-            new EmeraldForRandomItem(new PriceInfo(7, 12), ModItems.aubergine_seed, ModItems.wildewheet_seed, ModItems.moonglow_seed, ModItems.spirit_herb_seed, ModItems.pereskia_bulb),
+            new EmeraldForRandomItem(new PriceInfo(7, 12), epicsquid.mysticalworld.init.ModItems.aubergine_seed, ModItems.wildewheet_seed, ModItems.moonglow_seed, ModItems.spirit_herb_seed, ModItems.pereskia_bulb),
             new EntityVillager.ListItemForEmeralds(ModItems.living_arrow, new EntityVillager.PriceInfo(8, 12)),
             new ListRandomItemWithPrice(new ItemAndPriceInfo(ModItems.component_pouch, 21, 35), new ItemAndPriceInfo(ModItems.runic_shears, 18, 27)),
             new ListRandomItemForEmerald(new PriceInfo(2, 5), ModItems.wildewheet, ModItems.spirit_herb, ModItems.moonglow_leaf, ModItems.pereskia)).
