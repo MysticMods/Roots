@@ -263,7 +263,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
 
   @Override
   public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
-    if (oldState.getBlock() == newState.getBlock() && newState.getBlock() == ModBlocks.bonfire) return true;
+    if (oldState.getBlock() == newState.getBlock() && newState.getBlock() == ModBlocks.bonfire) return false;
 
     return super.shouldRefresh(world, pos, oldState, newState);
   }
