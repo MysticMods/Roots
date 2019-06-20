@@ -54,7 +54,7 @@ public class BlockBonfire extends BlockTEBase {
   @Override
   public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
     if (state.getValue(BURNING))
-      return 12;
+      return 15;
     else
       return 0;
   }
@@ -85,17 +85,11 @@ public class BlockBonfire extends BlockTEBase {
   }
 
   public static void setState(boolean burning, World world, BlockPos pos) {
-    TileEntity te = world.getTileEntity(pos);
-
     if (burning) world.setBlockState(pos, ModBlocks.bonfire.getDefaultState().withProperty(BURNING, true), 3);
     else world.setBlockState(pos, ModBlocks.bonfire.getDefaultState().withProperty(BURNING, false), 3);
-
-    if (te != null) {
-      te.validate();
-      world.setTileEntity(pos, te);
-    }
-
   }
+
+
 
   @Nonnull
   @Override
@@ -152,19 +146,17 @@ public class BlockBonfire extends BlockTEBase {
       }
 
       // Check for crafting
-      if (ritual == null) {
-        PyreCraftingRecipe recipe = recipeCache.get(pdos);
-        if (recipe == null) {
-          recipe = bon.getCurrentRecipe();
-          if (recipe != null) {
-            recipeCache.put(pdos, recipe);
-          }
-        }
+      PyreCraftingRecipe recipe = recipeCache.get(pdos);
+      if (recipe == null) {
+        recipe = bon.getCurrentRecipe();
         if (recipe != null) {
+          recipeCache.put(pdos, recipe);
+        }
+      }
+      if (recipe != null) {
         if (bon.getLastRecipeUsed().equals(recipe) && lit) return 5;
 
-          return lit ? 4 : 1;
-        }
+        return lit ? 4 : 1;
       }
 
       return lit ? 3 : 0;
