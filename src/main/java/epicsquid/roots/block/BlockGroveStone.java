@@ -4,6 +4,8 @@ import epicsquid.mysticallib.block.BlockTEBase;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
+import net.minecraft.block.BlockDoublePlant;
+import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -159,21 +161,19 @@ public class BlockGroveStone extends BlockTEBase {
   }
 
   @Override
-  public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-    super.randomTick(worldIn, pos, state, random);
+  public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
+    super.randomTick(world, pos, state, random);
 
-    if (worldIn.isRemote) return;
-
-    if (state.getValue(HALF) != Half.BOTTOM) return;
+    if (world.isRemote) return;
 
     if (!state.getValue(VALID)) return;
 
-    if (random.nextInt(150) == 0) {
-      int effectsCount = 3 + random.nextInt(5);
+    if (random.nextBoolean()) {
+      int effectsCount = 1 + random.nextInt(1);
 
-      List<BlockPos> positions = Util.getBlocksWithinRadius(worldIn, pos.down(), 5, 3, 5, (p) -> {
-        if (worldIn.isAirBlock(p.up())) {
-          IBlockState s = worldIn.getBlockState(p);
+      List<BlockPos> positions = Util.getBlocksWithinRadius(world, pos.down(), 4, 5, 4, (p) -> {
+        if (world.isAirBlock(p.up())) {
+          IBlockState s = world.getBlockState(p);
           if (s.getMaterial() == Material.GRASS || s.getMaterial() == Material.GROUND) return true;
         }
         return false;
@@ -184,17 +184,36 @@ public class BlockGroveStone extends BlockTEBase {
       for (BlockPos p : positions) {
         if (effectsCount <= 0) break;
 
-        IBlockState s = worldIn.getBlockState(p);
+        IBlockState s = world.getBlockState(p);
         if (s.getMaterial() == Material.GROUND) {
-          worldIn.setBlockState(p, Blocks.GRASS.getDefaultState());
+          world.setBlockState(p, Blocks.GRASS.getDefaultState());
           effectsCount--;
           MessageOvergrowthEffectFX message = new MessageOvergrowthEffectFX(p.getX() + 0.5, p.getY() + 0.7, p.getZ() + 0.5);
-          PacketHandler.sendToAllTracking(message, worldIn, p);
+          PacketHandler.sendToAllTracking(message, world, p);
         } else if (s.getMaterial() == Material.GRASS) {
-          ItemStack bone = new ItemStack(Items.DYE, 1, 15);
-          ItemDye.applyBonemeal(bone, worldIn, p);
+          switch (random.nextInt(30)) {
+            case 0:
+              Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.ROSE, 3);
+              break;
+            case 1:
+              Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.SUNFLOWER, 3);
+              break;
+            case 2:
+            case 3:
+              Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.GRASS, 3);
+              break;
+            case 4:
+              Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.PAEONIA, 3);
+              break;
+            case 5:
+              Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.SYRINGA, 3);
+              break;
+            default:
+              world.setBlockState(p.up(), Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS), 3);
+              break;
+          }
           MessageOvergrowthEffectFX message = new MessageOvergrowthEffectFX(p.getX() + 0.5, p.getY() + 0.3, p.getZ() + 0.5);
-          PacketHandler.sendToAllTracking(message, worldIn, p.up());
+          PacketHandler.sendToAllTracking(message, world, p.up());
           effectsCount--;
         }
       }
