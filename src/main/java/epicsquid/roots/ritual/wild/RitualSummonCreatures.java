@@ -14,6 +14,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.entity.EntityBeetle;
 import epicsquid.mysticalworld.entity.EntityDeer;
 import epicsquid.mysticalworld.entity.EntityFox;
+import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.conditions.ConditionItems;
@@ -62,10 +63,10 @@ public class RitualSummonCreatures extends RitualBase {
   }
 
   @Override
-  public void doEffect(World world, BlockPos pos) {
+  public EntityRitualBase doEffect(World world, BlockPos pos) {
     List<TileEntityOffertoryPlate> plateList = Util.getTileEntitiesWithin(world, TileEntityOffertoryPlate.class, pos, OFFERTORY_RADIUS);
     if (plateList.size() <= 0) {
-      return;
+      return null;
     }
     List<ItemStack> offertoryItems = new ArrayList<>();
     for (TileEntityOffertoryPlate plate : plateList) {
@@ -85,7 +86,7 @@ public class RitualSummonCreatures extends RitualBase {
           e.printStackTrace();
         }
         if (entity == null) {
-          return;
+          return null;
         }
         entity.setPosition(pos.getX() + 1.5, pos.getY(), pos.getZ());
         if (!world.isRemote) {
@@ -104,6 +105,7 @@ public class RitualSummonCreatures extends RitualBase {
         }
       }
     }
-  }
 
+    return null;
+  }
 }

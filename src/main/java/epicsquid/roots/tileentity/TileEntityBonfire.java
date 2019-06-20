@@ -4,6 +4,7 @@ import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.block.BlockBonfire;
+import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.particle.ParticleUtil;
@@ -33,6 +34,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -52,6 +55,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   private RitualBase lastRitualUsed = null;
   private PyreCraftingRecipe lastRecipeUsed = null;
   private List<Ingredient> lastUsedIngredients = null;
+  private EntityRitualBase ritualEntity = null;
 
   private boolean isBurning = false;
 
@@ -140,8 +144,8 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       if (heldItem.getItem() instanceof ItemFlintAndSteel) {
         RitualBase ritual = RitualRegistry.getRitual(this, player);
         if (ritual != null) {
-          if (ritual.canFire(this, player)) {
-            ritual.doEffect(world, pos);
+          if ((ritualEntity == null || ritualEntity.isDead) && ritual.canFire(this, player)) {
+            ritualEntity = ritual.doEffect(world, pos);
             this.burnTime = ritual.getDuration();
             this.lastRitualUsed = ritual;
             this.lastRecipeUsed = null;
@@ -152,8 +156,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
             }
             markDirty();
             updatePacketViaState();
-            //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
-            return true; // It seems unlikely but is it possible for this to cascade in bad circumstances?
+            return true;
           }
         }
 
@@ -172,19 +175,24 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           }
           markDirty();
           updatePacketViaState();
-          //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
-          return true; // Cf above
+          return true;
         }
       } else if (heldItem.getItem() == Items.WATER_BUCKET && burnTime > 0) {
         burnTime = 0;
+        if (ritualEntity != null) {
+          ritualEntity.setDead();
+        }
         lastRecipeUsed = null;
         lastRitualUsed = null;
-        // TODO: Destroy the entity
         BlockBonfire.setState(false, world, pos);
         world.playSound(player, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1F, 1.25F);
         world.playSound(player, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.25F, 1F);
-        if (!player.isCreative())
-          player.setHeldItem(hand, new ItemStack(Items.BUCKET));
+        if (!player.isCreative()) {
+          IFluidHandlerItem handler = heldItem.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+          if (handler != null && handler.getTankProperties().length == 1) {
+            handler.drain(handler.getTankProperties()[0].getContents(), true);
+          }
+        }
         return true;
       } else {
         for (int i = 0; i < 5; i++) {

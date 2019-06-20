@@ -1,5 +1,6 @@
 package epicsquid.roots.ritual.natural;
 
+import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualFlowerGrowth;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
@@ -29,8 +30,8 @@ public class RitualFlowerGrowth extends RitualBase {
     }
 
     @Override
-    public void doEffect(World world, BlockPos pos)
+    public EntityRitualBase doEffect(World world, BlockPos pos)
     {
-        this.spawnEntity(world, pos, EntityRitualFlowerGrowth.class);
+        return this.spawnEntity(world, pos, EntityRitualFlowerGrowth.class);
     }
 }
