@@ -1,5 +1,6 @@
 package epicsquid.roots.ritual;
 
+import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualGermination;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
@@ -28,7 +29,7 @@ public class RitualGermination extends RitualBase {
   }
 
   @Override
-  public void doEffect(World world, BlockPos pos) {
-    this.spawnEntity(world, pos, EntityRitualGermination.class);
+  public EntityRitualBase doEffect(World world, BlockPos pos) {
+    return this.spawnEntity(world, pos, EntityRitualGermination.class);
   }
 }

@@ -1,5 +1,6 @@
 package epicsquid.roots.ritual;
 
+import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualHeavyStorms;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
@@ -26,7 +27,7 @@ public class RitualHeavyStorms extends RitualBase {
   }
 
   @Override
-  public void doEffect(World world, BlockPos pos) {
-    this.spawnEntity(world, pos, EntityRitualHeavyStorms.class);
+  public EntityRitualBase doEffect(World world, BlockPos pos) {
+    return this.spawnEntity(world, pos, EntityRitualHeavyStorms.class);
   }
 }

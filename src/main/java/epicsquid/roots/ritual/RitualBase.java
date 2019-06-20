@@ -92,9 +92,9 @@ public abstract class RitualBase {
     return true;
   }
 
-  public abstract void doEffect(World world, BlockPos pos);
+  public abstract EntityRitualBase doEffect(World world, BlockPos pos);
 
-  protected void spawnEntity(World world, BlockPos pos, Class<? extends EntityRitualBase> entity) {
+  protected EntityRitualBase spawnEntity(World world, BlockPos pos, Class<? extends EntityRitualBase> entity) {
     List<EntityRitualBase> pastRituals = world
         .getEntitiesWithinAABB(entity, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 100, pos.getZ() + 1));
     if (pastRituals.size() == 0 && !world.isRemote) {
@@ -106,7 +106,7 @@ public abstract class RitualBase {
         e.printStackTrace();
       }
       if (ritual == null) {
-        return;
+        return null;
       }
       ritual.setPosition(pos.getX() + 0.5, pos.getY() + 6.5, pos.getZ() + 0.5);
       world.spawnEntity(ritual);
@@ -116,6 +116,7 @@ public abstract class RitualBase {
         ritual.getDataManager().setDirty(ritual.getLifetime());
       }
     }
+    return null;
   }
 
   public int getDuration() {

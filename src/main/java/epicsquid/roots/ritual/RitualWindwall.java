@@ -1,5 +1,6 @@
 package epicsquid.roots.ritual;
 
+import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualWindwall;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
@@ -24,7 +25,7 @@ public class RitualWindwall extends RitualBase {
   }
 
   @Override
-  public void doEffect(World world, BlockPos pos) {
-    this.spawnEntity(world, pos, EntityRitualWindwall.class);
+  public EntityRitualBase doEffect(World world, BlockPos pos) {
+    return this.spawnEntity(world, pos, EntityRitualWindwall.class);
   }
 }
