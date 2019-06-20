@@ -32,6 +32,8 @@ import epicsquid.roots.spell.SpellRegistry;
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -40,6 +42,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @JEIPlugin
@@ -134,6 +137,20 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addIngredientInfo(new ItemStack(ModItems.terra_moss), VanillaTypes.ITEM, I18n.format("jei.roots.terra_moss.desc"));
     registry.addIngredientInfo(new ItemStack(ModItems.terra_spores), VanillaTypes.ITEM, I18n.format("jei.roots.terra_spores.desc"));
     registry.addIngredientInfo(new ItemStack(ModItems.wildroot), VanillaTypes.ITEM, I18n.format("jei.roots.wildroot.desc"));
+
+    for (TransmutationRecipe recipe : ModRecipes.getTransmutationRecipes()) {
+      IBlockState endState = recipe.getEndState();
+      ItemStack endStack = recipe.getEndStack();
+      if (endStack != null && !endStack.isEmpty()) {
+        registry.addIngredientInfo(endStack, VanillaTypes.ITEM, I18n.format(recipe.getKey()));
+      } else if (endState != null) {
+        Block endBlock = endState.getBlock();
+        ItemStack drop = new ItemStack(Item.getItemFromBlock(endBlock), 1, endBlock.damageDropped(endState));
+        if (drop != null && !drop.isEmpty()) {
+          registry.addIngredientInfo(drop, VanillaTypes.ITEM, I18n.format(recipe.getKey()));
+        }
+      }
+    }
 
     /*List<ItemStack> bark = new ArrayList<>();
     bark.add(new ItemStack(ModItems.bark_oak));

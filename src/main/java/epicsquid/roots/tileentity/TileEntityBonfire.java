@@ -108,7 +108,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     craftingXP = tag.getInteger("craftingXP");
     lastRitualUsed = RitualRegistry.getRitual(tag.getString("lastRitualUsed"));
     lastRecipeUsed = ModRecipes.getCraftingRecipe(tag.getString("lastRecipeUsed"));
-    ritualEntity = tag.getInteger("entity") != -1 ? (EntityRitualBase) world.getEntityByID(tag.getInteger("entity")) : null;
+    if (hasWorld()) {
+      ritualEntity = tag.getInteger("entity") != -1 ? (EntityRitualBase) world.getEntityByID(tag.getInteger("entity")) : null;
+    }
   }
 
   @Nonnull

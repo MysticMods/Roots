@@ -332,3 +332,10 @@ roots.hud.top.pyre.progress_info=minutes remaining
 
 # Runic Shears
 roots.runic_shears.cooldown=The fey's equivalent has nothing to gift you at this time.
+
+# Ritual of Transmutation
+roots.ritual.transmutation.deadbush_cocoa=Obtained through the Ritual of Transmutation. Nearby dead bushes will transform into cocoa beans.
+roots.ritual.transmutation.birch_jungle=Obtained through the Ritual of Transmutation. The wood of nearby birch trees will transform into that of jungle trees.
+roots.ritual.transmutation.birch_jungle_leaves=Obtained through the Ritual of Transmutation. The leaves of nearby birch trees will transform into those of a jungle tree.
+roots.ritual.transmutation.pumpkin_melon=Obtained through the Ritual of Transmutation. Pumpkins with water or flowing water below them will transform into melon blocks.
+roots.ritual.transmutation.pumpkin_cactus=Obtained through the Ritual of Transmutation. Pumpkins planted upon sand will turn into cactuses.

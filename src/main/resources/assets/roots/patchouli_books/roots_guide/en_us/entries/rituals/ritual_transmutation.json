@@ -28,6 +28,36 @@
           ["   R   ","       ","       ","   0   ","       ","       ","       "]
         ]
       }
+    },
+    {
+      "type": "spotlight",
+      "item": "minecraft:dye:3",
+      "link_recipe": true,
+      "text": "Dead bushes will turn into cocoa beans."
+    },
+    {
+      "type": "spotlight",
+      "item": "minecraft:log:3",
+      "link_recipe": true,
+      "text": "Birch logs will transform into jungle."
+    },
+    {
+      "type": "spotlight",
+      "item": "minecraft:leaves:3",
+      "link_recipe": true,
+      "text": "Birch leaves will transform into jungle."
+    },
+    {
+      "type": "spotlight",
+      "item": "minecraft:melon_block",
+      "link_recipe": true,
+      "text": "Pumpkins planted above still or flowing water will transform into melons."
+    },
+    {
+      "type": "spotlight",
+      "item": "minecraft:cactus",
+      "link_recipe": true,
+      "text": "Pumpkins planted on sand will turn into cactuses."
     }
   ]
 }

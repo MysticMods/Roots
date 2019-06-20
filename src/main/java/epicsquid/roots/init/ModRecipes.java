@@ -218,6 +218,10 @@ public class ModRecipes {
     return transmutationRecipes.getOrDefault(name, null);
   }
 
+  public static List<TransmutationRecipe> getTransmutationRecipes () {
+    return new ArrayList<>(transmutationRecipes.values());
+  }
+
   public static List<TransmutationRecipe> getTransmutationRecipes(IBlockState startState) {
     List<TransmutationRecipe> result = new ArrayList<>();
     for (TransmutationRecipe recipe : transmutationRecipes.values()) {
