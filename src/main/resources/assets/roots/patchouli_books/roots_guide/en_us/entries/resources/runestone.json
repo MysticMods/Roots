@@ -2,7 +2,7 @@
   "name": "Runestone",
   "icon": "roots:runestone",
   "category": "resources",
-  "advancement": "roots:grove_crafter",
+  "advancement": "roots:fey_crafter",
   "secret": true,
   "pages": [
     {
@@ -12,7 +12,7 @@
       "text": "Runestone is a magic-infused variety of stone that is often used in structures required by druidic rituals, or as a specialized crafting component where ordinary stone fails."
     },
     {
-      "type": "grove_crafting_template",
+      "type": "fey_crafting_template",
       "recipe": "runestone"
     },
     {

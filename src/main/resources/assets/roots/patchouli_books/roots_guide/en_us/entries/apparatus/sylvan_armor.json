@@ -2,7 +2,7 @@
   "name": "Sylvan Armor",
   "icon": "roots:sylvan_helmet",
   "category": "apparatus",
-  "advancement": "roots:grove_crafter",
+  "advancement": "roots:fey_crafter",
   "secret": true,
   "pages": [
     {
@@ -10,19 +10,19 @@
       "text": "These robes definitely preferable to animal skins. In addition to the small amount of protection they give, the magical nature of their ingredients is also imparted onto the wearer and their possessions, reducing the cost of spells and other abilities that use herbs by 5%."
     },
     {
-      "type": "grove_crafting_template",
+      "type": "fey_crafting_template",
       "recipe": "sylvan_helmet"
     },
     {
-      "type": "grove_crafting_template",
+      "type": "fey_crafting_template",
       "recipe": "sylvan_chestplate"
     },
     {
-      "type": "grove_crafting_template",
+      "type": "fey_crafting_template",
       "recipe": "sylvan_leggings"
     },
     {
-      "type": "grove_crafting_template",
+      "type": "fey_crafting_template",
       "recipe": "sylvan_boots"
     }
   ]

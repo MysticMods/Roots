@@ -11,7 +11,7 @@
         "text": "A vastly improved component pouch, the apothecary pouch can hold many more items and herbs, storing the herbs in small glass vials to maintain their ease of access."
       },
       {
-        "type": "grove_crafting_template",
+        "type": "fey_crafting_template",
         "recipe": "apothecary_pouch"
       }
     ]

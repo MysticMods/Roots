@@ -1,18 +1,11 @@
 package epicsquid.roots.network.fx;
 
-import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.FakeSpellRunicDust;
-import epicsquid.roots.spell.SpellBase;
-import epicsquid.roots.spell.SpellRegistry;
-import epicsquid.roots.tileentity.TileEntityGroveCrafter;
+import epicsquid.roots.tileentity.TileEntityFeyCrafter;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -54,8 +47,8 @@ public class MessageGrowthCrafterVisualFX implements IMessage {
       if (world.provider.getDimension() != message.dimension) return null;
 
       TileEntity te = world.getTileEntity(message.pos);
-      if (te instanceof TileEntityGroveCrafter) {
-        ((TileEntityGroveCrafter) te).doVisual();
+      if (te instanceof TileEntityFeyCrafter) {
+        ((TileEntityFeyCrafter) te).doVisual();
       }
 
       return null;

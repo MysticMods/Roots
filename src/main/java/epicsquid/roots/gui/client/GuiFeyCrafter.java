@@ -8,23 +8,20 @@
 package epicsquid.roots.gui.client;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.gui.container.ContainerGroveCrafter;
-import net.minecraft.client.gui.ScaledResolution;
+import epicsquid.roots.gui.container.ContainerFeyCrafter;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
-public class GuiGroveCrafter extends GuiContainer {
+public class GuiFeyCrafter extends GuiContainer {
 
-  private ContainerGroveCrafter container;
+  private ContainerFeyCrafter container;
 
-  public GuiGroveCrafter(@Nonnull ContainerGroveCrafter container) {
+  public GuiFeyCrafter(@Nonnull ContainerFeyCrafter container) {
     super(container);
     this.container = container;
     xSize = 176;
@@ -43,7 +40,7 @@ public class GuiGroveCrafter extends GuiContainer {
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
     GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-    this.mc.getTextureManager().bindTexture(new ResourceLocation(Roots.MODID, "textures/gui/grove_crafting_gui.png"));
+    this.mc.getTextureManager().bindTexture(new ResourceLocation(Roots.MODID, "textures/gui/fey_crafting_gui.png"));
     int i = (this.width - this.xSize) / 2;
     int j = (this.height - this.ySize) / 2;
     this.drawTexturedModalRect(i, j, 0, 0, 176, 207);
@@ -58,7 +55,7 @@ public class GuiGroveCrafter extends GuiContainer {
       mc.getRenderItem().renderItemOverlayIntoGUI(mc.fontRenderer, result, i3, j3, null);
       RenderHelper.disableStandardItemLighting();
     }
-    this.mc.getTextureManager().bindTexture(new ResourceLocation(Roots.MODID, "textures/gui/grove_crafting_gui.png"));
+    this.mc.getTextureManager().bindTexture(new ResourceLocation(Roots.MODID, "textures/gui/fey_crafting_gui.png"));
     if (!container.getValidStone()) {
       int i2 = i + 54;
       int j2 = j + 33;

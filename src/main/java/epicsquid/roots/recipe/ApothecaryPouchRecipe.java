@@ -5,7 +5,7 @@ import epicsquid.roots.init.ModItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
-public class ApothecaryPouchRecipe extends GroveCraftingRecipe {
+public class ApothecaryPouchRecipe extends FeyCraftingRecipe {
   public ApothecaryPouchRecipe(ItemStack result, int xp) {
     super(result, xp);
   }

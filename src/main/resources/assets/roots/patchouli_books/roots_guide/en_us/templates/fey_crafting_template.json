@@ -1,6 +1,6 @@
 
 {
-  "processor": "epicsquid.roots.api.GroveCraftingRecipeProcessor",
+  "processor": "epicsquid.roots.api.FeyCraftingRecipeProcessor",
   "components": [
     {
       "type": "item",
@@ -57,7 +57,7 @@
     },
     {
       "type": "header",
-      "text": "Grove Crafting",
+      "text": "Fey Crafting",
       "x": -1,
       "y": 0
     }

@@ -1,21 +1,21 @@
 package epicsquid.roots.api;
 
 import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.recipe.GroveCraftingRecipe;
+import epicsquid.roots.recipe.FeyCraftingRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariableProvider;
 import vazkii.patchouli.common.util.ItemStackUtil;
 
-public class GroveCraftingRecipeProcessor implements IComponentProcessor {
+public class FeyCraftingRecipeProcessor implements IComponentProcessor {
 
-  private GroveCraftingRecipe groveCraftingRecipe = null;
+  private FeyCraftingRecipe groveCraftingRecipe = null;
 
   @Override
   public void setup(IVariableProvider<String> iVariableProvider) {
     String recipeName = iVariableProvider.get("recipe");
-    groveCraftingRecipe = ModRecipes.getGroveCraftingRecipe(recipeName);
+    groveCraftingRecipe = ModRecipes.getFeyCraftingRecipe(recipeName);
   }
 
   @Override

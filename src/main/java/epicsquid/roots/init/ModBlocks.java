@@ -27,7 +27,7 @@ public class ModBlocks {
   // All block
   public static Block mortar, bonfire,imbuer, structure_marker, offertory_plate, unending_bowl;
   public static Block incense_burner, wildwood_rune;
-  public static Block grove_stone, grove_crafter;
+  public static Block grove_stone, fey_crafter;
 
   public static BlockCropBase moonglow, pereskia, wildroot, spirit_herb,wildewheet, cloud_berry, infernal_bulb, dewgonia, stalicripe;
 
@@ -145,7 +145,7 @@ public class ModBlocks {
     event.addBlock(grove_stone = new BlockGroveStone(Material.ROCK, SoundType.STONE, 2.5f, "grove_stone", TileEntityGroveStone.class)).setCreativeTab(Roots.tab);
 
     // Wild Crafter
-    event.addBlock(grove_crafter = new BlockGroveCrafter(Material.WOOD, SoundType.WOOD, 2.5f, "grove_crafter", TileEntityGroveCrafter.class)).setCreativeTab(Roots.tab);
+    event.addBlock(fey_crafter = new BlockFeyCrafter(Material.WOOD, SoundType.WOOD, 2.5f, "fey_crafter", TileEntityFeyCrafter.class)).setCreativeTab(Roots.tab);
 
     event.addBlock(fey_light = new BlockFeyLight(Material.SNOW, SoundType.SNOW,0.0f,"fey_light")).setCreativeTab(Roots.tab);
   }
