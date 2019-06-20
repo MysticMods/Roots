@@ -323,7 +323,7 @@ config.roots.subcategory.worldgen=World Generation Settings
 roots.hud.grove_stone.valid=Valid stone
 roots.hud.pyre.recipe=Crafting: %s
 roots.hud.pyre.ritual=Ritual: %s
-roots.hud.pyre.progress=Progress: %.2f minutes remaining
+roots.hud.pyre.progress=Progress: %s minutes remaining
 
 roots.hud.top.pyre.recipe=Crafting:
 roots.hud.top.pyre.ritual=Ritual:

@@ -18,7 +18,7 @@ public class ProviderBonfire implements IWailaDataProvider {
   @Override
   public List<String> getWailaBody(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
     TileEntityBonfire te = (TileEntityBonfire) accessor.getTileEntity();
-    if (te != null) {
+    if (te != null && te.getBurnTime() > 0) {
       int duration;
       if (te.getLastRecipeUsed() != null) {
         ItemStack result = te.getLastRecipeUsed().getResult();
@@ -31,8 +31,8 @@ public class ProviderBonfire implements IWailaDataProvider {
       } else {
         return tooltip;
       }
-      int remaining = duration - te.getBurnTime();
-      tooltip.add(I18n.format("roots.hud.pyre.progress", remaining / 20.0 / 60.0));
+      int remaining = duration - (duration - te.getBurnTime());
+      tooltip.add(I18n.format("roots.hud.pyre.progress", String.format("%.2f", remaining / 20.0 / 60.0)));
     }
     return tooltip;
   }
