@@ -1,6 +1,9 @@
 package epicsquid.roots.block;
 
 import epicsquid.mysticallib.block.BlockTEBase;
+import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -9,6 +12,9 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
@@ -23,6 +29,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class BlockGroveStone extends BlockTEBase {
@@ -147,6 +155,49 @@ public class BlockGroveStone extends BlockTEBase {
 
     public static Half fromInt(int x) {
       return values()[x];
+    }
+  }
+
+  @Override
+  public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
+    super.randomTick(worldIn, pos, state, random);
+
+    if (worldIn.isRemote) return;
+
+    if (state.getValue(HALF) != Half.BOTTOM) return;
+
+    if (!state.getValue(VALID)) return;
+
+    if (random.nextInt(150) == 0) {
+      int effectsCount = 3 + random.nextInt(5);
+
+      List<BlockPos> positions = Util.getBlocksWithinRadius(worldIn, pos.down(), 5, 3, 5, (p) -> {
+        if (worldIn.isAirBlock(p.up())) {
+          IBlockState s = worldIn.getBlockState(p);
+          if (s.getMaterial() == Material.GRASS || s.getMaterial() == Material.GROUND) return true;
+        }
+        return false;
+      });
+
+      Collections.shuffle(positions);
+
+      for (BlockPos p : positions) {
+        if (effectsCount <= 0) break;
+
+        IBlockState s = worldIn.getBlockState(p);
+        if (s.getMaterial() == Material.GROUND) {
+          worldIn.setBlockState(p, Blocks.GRASS.getDefaultState());
+          effectsCount--;
+          MessageOvergrowthEffectFX message = new MessageOvergrowthEffectFX(p.getX() + 0.5, p.getY() + 0.7, p.getZ() + 0.5);
+          PacketHandler.sendToAllTracking(message, worldIn, p);
+        } else if (s.getMaterial() == Material.GRASS) {
+          ItemStack bone = new ItemStack(Items.DYE, 1, 15);
+          ItemDye.applyBonemeal(bone, worldIn, p);
+          MessageOvergrowthEffectFX message = new MessageOvergrowthEffectFX(p.getX() + 0.5, p.getY() + 0.3, p.getZ() + 0.5);
+          PacketHandler.sendToAllTracking(message, worldIn, p.up());
+          effectsCount--;
+        }
+      }
     }
   }
 
