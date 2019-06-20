@@ -37,7 +37,7 @@
       },
       {
         "type": "multiblock",
-        "name": "Grove Crafter",
+        "name": "Fey Crafter",
         "multiblock": {
           "mapping": {
             "0": "roots:fey_crafter"

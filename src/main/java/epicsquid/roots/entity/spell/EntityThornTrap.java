@@ -10,10 +10,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -101,7 +103,9 @@ public class EntityThornTrap extends Entity {
           for (int j = 0; j < entities.size(); j++) {
             if (!(entities.get(j) instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
                 && entities.get(j).getUniqueID().compareTo(player.getUniqueID()) != 0) {
-              entities.get(j).attackEntityFrom((DamageSource.CACTUS).causeMobDamage(player), 6.0f);
+              entities.get(j).attackEntityFrom((DamageSource.CACTUS).causeMobDamage(player), 8.0f);
+              entities.get(j).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 80, 0));
+              entities.get(j).addPotionEffect(new PotionEffect(MobEffects.POISON, 80, 0));
               entities.get(j).setLastAttackedEntity(player);
               entities.get(j).setRevengeTarget(player);
             }

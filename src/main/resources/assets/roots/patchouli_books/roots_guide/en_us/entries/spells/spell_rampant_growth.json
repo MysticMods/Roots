@@ -1,6 +1,6 @@
 {
   "name": "Rampant Growth",
-  "icon": "minecraft:dye:15",
+  "icon": "roots:spell_dust",
   "category": "spells",
   "advancement": "roots:spirit_herb",
   

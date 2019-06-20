@@ -14,11 +14,11 @@ import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
-public class SpellMindWard extends SpellBase {
-  public static String spellName = "spell_mind_ward";
-  public static SpellMindWard instance = new SpellMindWard(spellName);
+public class SpellGeas extends SpellBase {
+  public static String spellName = "spell_geas";
+  public static SpellGeas instance = new SpellGeas(spellName);
 
-  public SpellMindWard(String name) {
+  public SpellGeas(String name) {
     super(name, TextFormatting.AQUA, 128f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 80;
@@ -46,7 +46,7 @@ public class SpellMindWard extends SpellBase {
           if (e.getUniqueID().compareTo(player.getUniqueID()) != 0 && !foundTarget) {
             foundTarget = true;
             if (!player.world.isRemote) {
-              e.getEntityData().setInteger(Constants.MIND_WARD_TAG, 400);
+              e.getEntityData().setInteger(Constants.GEAS_TAG, 400);
             }
           }
         }

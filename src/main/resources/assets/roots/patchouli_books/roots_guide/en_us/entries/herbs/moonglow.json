@@ -8,7 +8,8 @@
     {
       "type": "spotlight",
       "item": "roots:moonglow_leaf",
-      "text": "Moonglow, at a first glance, seems to glow in the dark at night; observant druids have noted that it actually emits no light at all if the moon is obscured."
+      "link_recipe": true,
+      "text": "Moonglow, at a first glance, seems to glow in the dark at night; observant druids have noted that it actually emits no light at all if the moon is obscured.$(br2)Moonglow seeds can be obtained and planted on normal farmland."
     },
     {
       "type": "ritual_crafting_template",

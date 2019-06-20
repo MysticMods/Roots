@@ -8,7 +8,8 @@
     {
       "type": "spotlight",
       "item": "roots:baffle_cap_mushroom",
-      "text": "Baffle Caps are a bizarre variety of fungus, the spores of which seem to confound those who mishandle it."
+      "link_recipe": true,
+      "text": "Baffle Caps are a bizarre variety of fungus, the spores of which seem to confound those who mishandle it.$(br2)Appropriately planted baffle caps may grow larger than you'd expect."
     },
     {
       "type": "ritual_crafting_template",

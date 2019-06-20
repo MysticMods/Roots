@@ -36,9 +36,9 @@ public class SpellConfig {
     @Config.Name("Disable Magnetism Spell")
     @Config.Comment("Set to true to disable Magnetism Spell")
     public boolean disableMagnetism = false;
-    @Config.Name("Disable Mind Ward Spell")
-    @Config.Comment("Set to true to disable Mind Ward Spell")
-    public boolean disableMindWard = false;
+    @Config.Name("Disable Geas Spell")
+    @Config.Comment("Set to true to disable Geas Spell")
+    public boolean disableGeas = false;
     @Config.Name("Disable Petal Shell Spell")
     @Config.Comment("Set to true to disable Petal Shell Spell")
     public boolean disablePetalShell = false;

@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Harness the fey and bring forth light."
+      "text": "This simple spell allows the creation of a permanent source of light on the nearest surface in the direction you're looking.$(br2)These lights are easily broken."
     },
     {
       "type": "spell_template",

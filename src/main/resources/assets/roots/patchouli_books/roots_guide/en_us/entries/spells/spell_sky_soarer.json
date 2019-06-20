@@ -7,7 +7,7 @@
     "pages": [
       {
         "type": "text",
-        "text": "Carries the caster forward upon a cloud, granting them the ability to soar briefly ... before they crash back down to the surface."
+        "text": "A burst of air draws you in the direction that you're looking. If you fly up too far, it's possible that you will damage yourself from the fall."
       },
       {
         "type": "spell_template",

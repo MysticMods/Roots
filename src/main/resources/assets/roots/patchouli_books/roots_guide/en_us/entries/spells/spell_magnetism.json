@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Iron and redstone are a strangely magnetic combination, and with the addition of wildroot and aubergine this magnetism becomes magical, drawing all nearby items to the caster."
+      "text": "While iron is known for its magnetic properties, combining it with redstone and wildroot allows for a more magical approach.$(br2)Instead of pulling items towards the caster, they are instantly teleported to your feet."
     },
     {
       "type": "spell_template",

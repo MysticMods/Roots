@@ -100,7 +100,7 @@ roots.spell.spell_petal_shell.name=Petal Shell
 roots.spell.spell_rose_thorns.name=Rose's Thorns
 roots.spell.spell_acid_cloud.name=Acid Cloud
 roots.spell.spell_acid_cloud.module_fire.description=Sets targets on fire.
-roots.spell.spell_mind_ward.name=Mind Ward
+roots.spell.spell_geas.name=Geas
 roots.spell.spell_growth_infusion.name=Growth Infusion
 roots.spell.spell_sense_animals.name=Sense Animals
 roots.spell.spell_terra_transmutation.name=Terra Transmutation
@@ -253,7 +253,7 @@ tile.elemental_soil.name=Elemental Soil
 tile.elemental_soil_fire.name=Magmatic Soil
 tile.elemental_soil_water.name=Aqueous Soil
 tile.elemental_soil_earth.name=Terran Soil
-tile.elemental_soil_air.name=Aeros Soil
+tile.elemental_soil_air.name=Caelic Soil
 
 # Rune Stone
 tile.runestone_stairs.name=Runestone Stairs
