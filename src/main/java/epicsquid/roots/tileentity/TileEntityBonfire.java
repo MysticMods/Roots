@@ -4,6 +4,7 @@ import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.block.BlockBonfire;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
@@ -59,10 +60,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   public ItemStackHandler inventory = new ItemStackHandler(5) {
     @Override
     protected void onContentsChanged(int slot) {
-      TileEntityBonfire.this.markDirty();
       if (!world.isRemote) {
+        TileEntityBonfire.this.markDirty();
         TileEntityBonfire.this.updatePacketViaState();
-        //PacketHandler.sendToAllTracking(new MessageTEUpdate(TileEntityBonfire.this.getUpdateTag()), TileEntityBonfire.this);
       }
     }
   };
@@ -124,7 +124,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   public PyreCraftingRecipe getCurrentRecipe() {
     List<ItemStack> stacks = new ArrayList<>();
     for (int i = 0; i < inventory.getSlots(); i++) {
-      ItemStack stack = inventory.extractItem(i, 1, false);
+      ItemStack stack = inventory.extractItem(i, 1, true);
       stacks.add(stack);
     }
 
@@ -134,6 +134,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand,
                           @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
+    if (world.isRemote) return true;
     ItemStack heldItem = player.getHeldItem(hand);
     if (!heldItem.isEmpty()) {
       if (heldItem.getItem() instanceof ItemFlintAndSteel) {
@@ -178,6 +179,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         burnTime = 0;
         lastRecipeUsed = null;
         lastRitualUsed = null;
+        // TODO: Destroy the entity
         BlockBonfire.setState(false, world, pos);
         world.playSound(player, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1F, 1.25F);
         world.playSound(player, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.25F, 1F);
@@ -207,14 +209,13 @@ public class TileEntityBonfire extends TileBase implements ITickable {
               }
               markDirty();
               updatePacketViaState();
-              // PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
               return true;
             }
           }
         }
       }
     }
-    if (player.isSneaking() && heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND) {
+    if (player.isSneaking() && heldItem.isEmpty() && hand == EnumHand.MAIN_HAND) {
       if (this.lastUsedIngredients == null) {
         if (this.lastRitualUsed != null) {
           this.lastUsedIngredients = this.lastRitualUsed.getIngredients();
@@ -245,21 +246,26 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       return true;
     }
 
-    if (heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND) {
+    if (heldItem.isEmpty() && hand == EnumHand.MAIN_HAND) {
       for (int i = 4; i >= 0; i--) {
         if (!inventory.getStackInSlot(i).isEmpty()) {
           ItemStack extracted = inventory.extractItem(i, inventory.getStackInSlot(i).getCount(), false);
           ItemSpawnUtil.spawnItem(world, player.posX, player.posY + 1, player.posZ, false, extracted, 0, -1);
           markDirty();
           updatePacketViaState();
-          // The above should do this -v
-          // PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
           pickupDelay = 40;
           return true;
         }
       }
     }
-    return false;
+    return true;
+  }
+
+  @Override
+  public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+    if (oldState.getBlock() == newState.getBlock() && newState.getBlock() == ModBlocks.bonfire) return true;
+
+    return super.shouldRefresh(world, pos, oldState, newState);
   }
 
   @Override
