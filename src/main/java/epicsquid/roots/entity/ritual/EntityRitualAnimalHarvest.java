@@ -16,6 +16,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
