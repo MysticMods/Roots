@@ -314,7 +314,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
     }
 
-    if (burnTime > 0 && (ritualEntity != null && ritualEntity.isDead) && craftingResult.isEmpty()) {
+    if ((ritualEntity != null && ritualEntity.isDead) && craftingResult.isEmpty()) {
       burnTime = 1;
     }
 

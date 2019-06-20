@@ -33,6 +33,7 @@ public class EntityRitualWildGrowth extends EntityRitualBase {
 
   @Override
   public void onUpdate() {
+    super.onUpdate();
     int curLifetime = getDataManager().get(lifetime);
     getDataManager().set(lifetime, curLifetime - 1);
     getDataManager().setDirty(lifetime);

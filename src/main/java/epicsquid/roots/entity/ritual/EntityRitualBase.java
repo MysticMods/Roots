@@ -1,5 +1,6 @@
 package epicsquid.roots.entity.ritual;
 
+import epicsquid.roots.init.ModBlocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -19,6 +20,8 @@ public abstract class EntityRitualBase extends Entity implements IRitualEntity {
     this.setInvisible(true);
     this.setSize(1, 1);
   }
+
+
 
   @Override
   public void setPosition(double x, double y, double z) {
@@ -52,6 +55,7 @@ public abstract class EntityRitualBase extends Entity implements IRitualEntity {
     this.x = compound.getDouble("x");
     this.y = compound.getDouble("y");
     this.z = compound.getDouble("z");
+    this.setEntityId(compound.getInteger("id"));
     this.setPosition(x, y, z);
     getDataManager().set(getLifetime(), compound.getInteger("lifetime"));
     getDataManager().setDirty(getLifetime());
@@ -62,7 +66,17 @@ public abstract class EntityRitualBase extends Entity implements IRitualEntity {
     compound.setDouble("x", x);
     compound.setDouble("y", y);
     compound.setDouble("z", z);
+    compound.setInteger("id", getEntityId());
     compound.setInteger("lifetime", getDataManager().get(getLifetime()));
+  }
+
+  @Override
+  public void onUpdate() {
+    super.onUpdate();
+
+    if (!world.isRemote && world.getBlockState(getPosition()).getBlock() != ModBlocks.bonfire) {
+      setDead();
+    }
   }
 
   public abstract DataParameter<Integer> getLifetime();
