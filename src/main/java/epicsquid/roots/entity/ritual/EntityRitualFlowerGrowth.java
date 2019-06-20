@@ -21,6 +21,7 @@ public class EntityRitualFlowerGrowth extends EntityRitualBase {
 
   @Override
   public void onUpdate() {
+    super.onUpdate();
     getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
     getDataManager().setDirty(lifetime);
     if (getDataManager().get(lifetime) < 0) {

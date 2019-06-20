@@ -108,8 +108,9 @@ public abstract class RitualBase {
       if (ritual == null) {
         return null;
       }
-      ritual.setPosition(pos.getX() + 0.5, pos.getY() + 6.5, pos.getZ() + 0.5);
+      ritual.setPosition(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
       world.spawnEntity(ritual);
+      return ritual;
     } else if (pastRituals.size() > 0) {
       for (EntityRitualBase ritual : pastRituals) {
         ritual.getDataManager().set(ritual.getLifetime(), duration + 20);

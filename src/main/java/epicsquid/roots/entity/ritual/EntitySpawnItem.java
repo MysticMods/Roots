@@ -8,6 +8,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 
+@Deprecated
 public class EntitySpawnItem extends EntityRitualBase {
 
     protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualHealingAura.class, DataSerializers.VARINT);
