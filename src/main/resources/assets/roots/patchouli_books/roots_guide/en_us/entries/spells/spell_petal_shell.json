@@ -3,7 +3,6 @@
   "icon": "roots:spell_dust",
   "category": "spells",
   "advancement": "roots:spirit_herb",
-  
   "pages": [
     {
       "type": "text",

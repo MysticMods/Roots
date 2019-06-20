@@ -8,6 +8,7 @@
     {
       "type": "spotlight",
       "item": "roots:infernal_bulb",
+      "link_recipe": true,
       "text": "A tough-budded flower which never seems to bloom. The bulbs from which these flowers bud are warm to the touch even after they are removed from the main plant. Can only be grown on $(l:resources/elemental_soil)Magmatic Soil.$()"
     },
     {

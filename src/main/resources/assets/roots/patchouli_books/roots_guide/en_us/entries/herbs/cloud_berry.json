@@ -8,7 +8,8 @@
     {
       "type": "spotlight",
       "item": "roots:cloud_berry",
-      "text": "Light and fluffy, cloudberries contain the very essence of the sky and are delicate to the touch. Can only be grown on $(l:resources/elemental_soil)Aeros Soil.$()"
+      "link_recipe": true,
+      "text": "Light and fluffy, cloud berries contain the very essence of the sky and are delicate to the touch. Can only be grown on $(l:resources/elemental_soil)Caelic Soil.$()"
     },
     {
       "type": "ritual_crafting_template",

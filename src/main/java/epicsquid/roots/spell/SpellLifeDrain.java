@@ -9,8 +9,10 @@ import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
@@ -55,6 +57,9 @@ public class SpellLifeDrain extends SpellBase {
             foundTarget = true;
             if (e.hurtTime <= 0 && !e.isDead) {
               e.attackEntityFrom(DamageSource.WITHER.causeMobDamage(player), 3F);
+              if (e.rand.nextInt(4) == 0) {
+                e.addPotionEffect(new PotionEffect(MobEffects.WITHER, 70, 0));
+              }
               e.setRevengeTarget(player);
               e.setLastAttackedEntity(player);
               player.heal(1.5F);

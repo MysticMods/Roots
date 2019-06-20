@@ -5,21 +5,16 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticallib.particle.particles.ParticleGlitter;
-import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.network.fx.MessageMindWardFX;
 import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
 public class EntityRitualOvergrowth extends EntityRitualBase {

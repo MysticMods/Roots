@@ -7,6 +7,7 @@
     {
       "type": "spotlight",
       "item": "roots:stalicripe",
+      "link_recipe": true,
       "text": "A rough, rugged plant that feels almost like it's made of stone when touched. Can only be grown on $(l:resources/elemental_soil)Terra Soil.$()"
     },
     {

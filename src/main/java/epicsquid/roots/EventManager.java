@@ -38,7 +38,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -195,19 +194,19 @@ public class EventManager {
         }
       }
     }
-    if (event.getEntity().getEntityData().hasKey(Constants.MIND_WARD_TAG)) {
+    if (event.getEntity().getEntityData().hasKey(Constants.GEAS_TAG)) {
       if (event.getSource().getTrueSource() instanceof EntityLivingBase) {
         if (event.getSource().getTrueSource().getUniqueID().compareTo(event.getEntity().getUniqueID()) != 0) {
-          event.getEntity().getEntityData().removeTag(Constants.MIND_WARD_TAG);
+          event.getEntity().getEntityData().removeTag(Constants.GEAS_TAG);
         }
       }
     }
     if (event.getSource().getTrueSource() instanceof EntityLivingBase) {
-      if (event.getSource().getTrueSource().getEntityData().hasKey(Constants.MIND_WARD_TAG)) {
+      if (event.getSource().getTrueSource().getEntityData().hasKey(Constants.GEAS_TAG)) {
         EntityLivingBase entity = (EntityLivingBase) event.getSource().getTrueSource();
         entity.attackEntityFrom(DamageSource.WITHER, event.getAmount() * 2.0f);
         event.setAmount(0);
-        PacketHandler.sendToAllTracking(new MessageMindWardRingFX(entity.posX, entity.posY + 1.0, entity.posZ), entity);
+        PacketHandler.sendToAllTracking(new MessageGeasRingFX(entity.posX, entity.posY + 1.0, entity.posZ), entity);
       }
     }
   }
@@ -218,12 +217,12 @@ public class EventManager {
     if (EffectManager.hasEffect(event.getEntityLiving(), EffectManager.effect_time_stop.getName())) {
       event.setCanceled(true);
     }
-    if (event.getEntity().getEntityData().hasKey(Constants.MIND_WARD_TAG) && !event.getEntity().getEntityWorld().isRemote) {
-      event.getEntity().getEntityData().setInteger(Constants.MIND_WARD_TAG, event.getEntity().getEntityData().getInteger(Constants.MIND_WARD_TAG) - 1);
-      if (event.getEntity().getEntityData().getInteger(Constants.MIND_WARD_TAG) <= 0) {
-        event.getEntity().getEntityData().removeTag(Constants.MIND_WARD_TAG);
+    if (event.getEntity().getEntityData().hasKey(Constants.GEAS_TAG) && !event.getEntity().getEntityWorld().isRemote) {
+      event.getEntity().getEntityData().setInteger(Constants.GEAS_TAG, event.getEntity().getEntityData().getInteger(Constants.GEAS_TAG) - 1);
+      if (event.getEntity().getEntityData().getInteger(Constants.GEAS_TAG) <= 0) {
+        event.getEntity().getEntityData().removeTag(Constants.GEAS_TAG);
       }
-      PacketHandler.sendToAllTracking(new MessageMindWardFX(event.getEntity().posX, event.getEntity().posY + event.getEntity().getEyeHeight() + 0.75f, event.getEntity().posZ), event.getEntity());
+      PacketHandler.sendToAllTracking(new MessageGeasFX(event.getEntity().posX, event.getEntity().posY + event.getEntity().getEyeHeight() + 0.75f, event.getEntity().posZ), event.getEntity());
     }
     if (event.getEntity().getEntityData().hasKey(Constants.LIGHT_DRIFTER_TAG) && !event.getEntity().getEntityWorld().isRemote) {
       event.getEntity().getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_TAG) - 1);

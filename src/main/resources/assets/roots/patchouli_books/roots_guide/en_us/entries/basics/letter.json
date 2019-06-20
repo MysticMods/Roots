@@ -22,7 +22,7 @@
       },
       {
         "type": "crafting",
-        "recipe": "roots:stuffed_aubergine",
+        "recipe": "mysticalworld:stuffed_aubergine",
         "title": "Aubergine",
         "text": "The humble $(l:resources/aubergine)aubergine$() is delicious when cooked, but when combined with other root vegetables becomes a great feast rather than a simple snack. Its latent magic is weak, but you will find uses for it in spells & rituals. Like wildroot, it can be cultivated."
       },

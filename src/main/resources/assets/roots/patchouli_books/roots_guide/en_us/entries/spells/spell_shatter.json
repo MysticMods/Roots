@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "A burst of tremendouse force is expelled, which instantly breaks blocks it collides with."
+      "text": "A burst of tremendous force hits whatever is being targeted, shattering stone, obsidian, ore, and so-on.$(br2)While the items themselves are not destroyed, they will fall on the ground below the original block."
     },
     {
       "type": "spell_template",

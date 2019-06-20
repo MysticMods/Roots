@@ -9,7 +9,7 @@
       "type": "spotlight",
       "item": "roots:wildewheet",
       "link_recipe": true,
-      "text": "Wildewheet is a lesser-known variety of wheat which many animals seem to adore - though many druids have long puzzled over $(o)why$(), since they do not consume it. It can be obtained by using Runic Shears on fully grown wheat, and can be crafted into seeds which will produce only Wildewheet thereon."
+      "text": "A lesser-known variety of the more common wheat beloved by animals, but seemingly never eaten by them. Once obtained, it can be crafted into seeds which can be planted on normal farmland."
     },
     {
       "type": "runic_shears_template",

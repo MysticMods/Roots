@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Temporarily halts the progress of time for all creatures in the vicinity of the caster, save for the caster themselves."
+      "text": "Temporarily halts the progress of time for all creatures in the vicinity of the caster, excluding the caster."
     },
     {
       "type": "spell_template",

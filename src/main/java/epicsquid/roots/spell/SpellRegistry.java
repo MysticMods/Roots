@@ -36,8 +36,8 @@ public class SpellRegistry {
       spellRegistry.put(SpellAcidCloud.spellName, SpellAcidCloud.instance);
     if (!SpellConfig.disableSpellsCategory.disableGrowthInfusion)
       spellRegistry.put(SpellGrowthInfusion.spellName, SpellGrowthInfusion.instance);
-    if (!SpellConfig.disableSpellsCategory.disableMindWard)
-      spellRegistry.put(SpellMindWard.spellName, SpellMindWard.instance);
+    if (!SpellConfig.disableSpellsCategory.disableGeas)
+      spellRegistry.put(SpellGeas.spellName, SpellGeas.instance);
     if (!SpellConfig.disableSpellsCategory.disableRadiance)
       spellRegistry.put(SpellRadiance.spellName, SpellRadiance.instance);
     if (!SpellConfig.disableSpellsCategory.disableLightDrifter)

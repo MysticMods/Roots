@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "A bottle of air stabilised with iron and imbued with terra spores is the perfect counter to running out of breath when you're underwater."
+      "text": "It is next to impossible to explore the ocean unless one can take the form of an aquatic creature.$(br2)This spell greatly helps with any aquatic adventure: casting it, even while underwater, will refill the caster's breath to full."
     },
     {
       "type": "spell_template",

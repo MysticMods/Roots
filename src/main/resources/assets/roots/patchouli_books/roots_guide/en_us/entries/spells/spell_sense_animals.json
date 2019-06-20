@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Animals relatively near to the caster will begin to glow, making it easier to pinpoint their location."
+      "text": "Animals near to the caster will begin glowing, making it easy to pinpoint their location.$(br2)Glowing animals can be seen through all solid objects."
     },
     {
       "type": "spell_template",
