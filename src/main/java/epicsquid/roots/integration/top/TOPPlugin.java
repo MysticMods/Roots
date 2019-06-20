@@ -7,7 +7,6 @@ import epicsquid.roots.tileentity.TileEntityBonfire;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -31,12 +30,12 @@ public class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfoProvid
       }
     } else if (block == ModBlocks.bonfire) {
       TileEntityBonfire te = (TileEntityBonfire) world.getTileEntity(data.getPos());
-      if (te != null) {
+      if (te != null && te.getBurnTime() > 0) {
         int duration = 0;
         if (te.getLastRecipeUsed() != null) {
           ItemStack result = te.getLastRecipeUsed().getResult();
           duration = te.getLastRecipeUsed().getBurnTime();
-          probeInfo.text(TextFormatting.GOLD + "{*roots.hud.top.pyre.recipe*} {*" +  result.getTranslationKey() + ".name*}");
+          probeInfo.text(TextFormatting.GOLD + "{*roots.hud.top.pyre.recipe*} {*" + result.getTranslationKey() + ".name*}");
         } else if (te.getLastRitualUsed() != null) {
           RitualBase ritual = te.getLastRitualUsed();
           duration = ritual.getDuration();
@@ -44,7 +43,7 @@ public class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfoProvid
         } else {
           return;
         }
-        int remaining = duration - te.getBurnTime();
+        int remaining = duration - (duration - te.getBurnTime());
         probeInfo.text("{*roots.hud.pyre.progress*}" + String.format("%.2f", remaining / 20.0 / 60.0) + " {*roots.hud.pyre.progress_info*}");
       }
     }
