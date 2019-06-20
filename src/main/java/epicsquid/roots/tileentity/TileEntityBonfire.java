@@ -94,6 +94,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     tag.setInteger("craftingXP", craftingXP);
     tag.setString("lastRitualUsed", (this.lastRitualUsed != null) ? this.lastRitualUsed.getName() : "");
     tag.setString("lastRecipeUsed", (this.lastRecipeUsed != null) ? this.lastRecipeUsed.getName() : "");
+    tag.setInteger("entity", (ritualEntity == null) ? -1 : ritualEntity.getEntityId());
     return tag;
   }
 
@@ -103,10 +104,11 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     inventory.deserializeNBT(tag.getCompoundTag("handler"));
     burnTime = tag.getInteger("burnTime");
     doBigFlame = tag.getBoolean("doBigFlame");
-    this.craftingResult = new ItemStack(tag.getCompoundTag("craftingResult"));
-    this.craftingXP = tag.getInteger("craftingXP");
-    this.lastRitualUsed = RitualRegistry.getRitual(tag.getString("lastRitualUsed"));
-    this.lastRecipeUsed = ModRecipes.getCraftingRecipe(tag.getString("lastRecipeUsed"));
+    craftingResult = new ItemStack(tag.getCompoundTag("craftingResult"));
+    craftingXP = tag.getInteger("craftingXP");
+    lastRitualUsed = RitualRegistry.getRitual(tag.getString("lastRitualUsed"));
+    lastRecipeUsed = ModRecipes.getCraftingRecipe(tag.getString("lastRecipeUsed"));
+    ritualEntity = tag.getInteger("entity") != -1 ? (EntityRitualBase) world.getEntityByID(tag.getInteger("entity")) : null;
   }
 
   @Nonnull
