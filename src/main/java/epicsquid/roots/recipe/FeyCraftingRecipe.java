@@ -9,22 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GroveCraftingRecipe {
+public class FeyCraftingRecipe {
   private List<Ingredient> ingredients = new ArrayList<>();
   private ItemStack result;
   private String name;
   private int xp;
 
-  public GroveCraftingRecipe(ItemStack result, int xp){
+  public FeyCraftingRecipe(ItemStack result, int xp){
     this.result = result;
     this.xp = xp;
   }
 
-  public GroveCraftingRecipe(ItemStack result) {
+  public FeyCraftingRecipe(ItemStack result) {
     this(result, 0);
   }
 
-  public GroveCraftingRecipe setName(String name) {
+  public FeyCraftingRecipe setName(String name) {
     this.name = name;
     return this;
   }
@@ -33,17 +33,17 @@ public class GroveCraftingRecipe {
     return name;
   }
 
-  public GroveCraftingRecipe addIngredient(Ingredient stack) {
+  public FeyCraftingRecipe addIngredient(Ingredient stack) {
     this.ingredients.add(stack);
     return this;
   }
 
-  public GroveCraftingRecipe addIngredient(ItemStack stack) {
+  public FeyCraftingRecipe addIngredient(ItemStack stack) {
     this.ingredients.add(Ingredient.fromStacks(stack));
     return this;
   }
 
-  public GroveCraftingRecipe addIngredients(Object... stacks) {
+  public FeyCraftingRecipe addIngredients(Object... stacks) {
     for (Object stack : stacks) {
       if (stack instanceof Ingredient) {
         ingredients.add((Ingredient) stack);

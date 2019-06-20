@@ -19,9 +19,9 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class BlockGroveCrafter extends BlockTEBase {
+public class BlockFeyCrafter extends BlockTEBase {
 
-  public BlockGroveCrafter(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
+  public BlockFeyCrafter(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
     super(mat, type, hardness, name, teClass);
     setLightOpacity(0);
     //No Facing edition :(

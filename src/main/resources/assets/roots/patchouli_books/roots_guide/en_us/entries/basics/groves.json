@@ -40,7 +40,7 @@
         "name": "Grove Crafter",
         "multiblock": {
           "mapping": {
-            "0": "roots:grove_crafter"
+            "0": "roots:fey_crafter"
           },
           "pattern": [
             [" ", "0", " "]

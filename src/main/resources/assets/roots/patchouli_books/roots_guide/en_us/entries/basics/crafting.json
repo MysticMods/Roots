@@ -1,6 +1,6 @@
 {
   "name": "Crafting in Groves",
-  "icon": "roots:grove_crafter",
+  "icon": "roots:fey_crafter",
   "category": "basics",
   "advancement": "roots:root",
   "pages": [
@@ -12,14 +12,14 @@
     },
     {
       "type": "spotlight",
-      "item": "roots:grove_crafter",
+      "item": "roots:fey_crafter",
       "link_recipe": true,
       "text": "Once activated, a Grove Stone can power any number of Grove Crafters within its radius. The crafter itself requires five ingredients to produce the desired result, and must be activated with the smallest sacrifice of blood using a $(l:apparatus/knives)Knife.$()"
     },
     {
       "type": "crafting",
       "recipe": "roots:grove_stone",
-      "recipe2": "roots:grove_crafter"
+      "recipe2": "roots:fey_crafter"
     }
   ]
 }

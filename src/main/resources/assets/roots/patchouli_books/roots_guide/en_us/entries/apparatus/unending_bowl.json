@@ -10,7 +10,7 @@
       "text": "The Unending Bowl, as its name suggests, never seems to run out of water no matter how much is taken from it once placed."
     },
     {
-      "type": "grove_crafting_template",
+      "type": "fey_crafting_template",
       "recipe": "unending_bowl"
     }
   ]

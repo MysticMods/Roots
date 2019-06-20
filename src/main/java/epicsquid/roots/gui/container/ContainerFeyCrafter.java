@@ -7,8 +7,8 @@
 
 package epicsquid.roots.gui.container;
 
-import epicsquid.roots.recipe.GroveCraftingRecipe;
-import epicsquid.roots.tileentity.TileEntityGroveCrafter;
+import epicsquid.roots.recipe.FeyCraftingRecipe;
+import epicsquid.roots.tileentity.TileEntityFeyCrafter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
@@ -20,16 +20,16 @@ import net.minecraftforge.items.SlotItemHandler;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class ContainerGroveCrafter extends Container {
+public class ContainerFeyCrafter extends Container {
 
-  private TileEntityGroveCrafter crafter;
+  private TileEntityFeyCrafter crafter;
   private EntityPlayer player;
 
-  private GroveCraftingRecipe recipe;
+  private FeyCraftingRecipe recipe;
 
   private final InventoryCraftResult craftResult;
 
-  public ContainerGroveCrafter(EntityPlayer player, TileEntityGroveCrafter crafter) {
+  public ContainerFeyCrafter(EntityPlayer player, TileEntityFeyCrafter crafter) {
     this.player = player;
     this.crafter = crafter;
 
@@ -236,7 +236,7 @@ public class ContainerGroveCrafter extends Container {
     return crafter.hasValidGroveStone();
   }
 
-  public GroveCraftingRecipe getRecipe() {
+  public FeyCraftingRecipe getRecipe() {
     return recipe;
   }
 

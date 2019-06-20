@@ -10,10 +10,10 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TileEntityGroveCrafterRenderer extends TileEntitySpecialRenderer<TileEntityGroveCrafter> {
+public class TileEntityFeyCrafterRenderer extends TileEntitySpecialRenderer<TileEntityFeyCrafter> {
 
   @Override
-  public void render(TileEntityGroveCrafter te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+  public void render(TileEntityFeyCrafter te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 
     List<ItemStack> items = new ArrayList<>();
 

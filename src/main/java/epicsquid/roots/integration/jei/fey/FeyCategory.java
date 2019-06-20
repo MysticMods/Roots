@@ -1,9 +1,7 @@
-package epicsquid.roots.integration.jei.grove;
+package epicsquid.roots.integration.jei.fey;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.integration.jei.JEIRootsPlugin;
-import epicsquid.roots.recipe.GroveCraftingRecipe;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;
@@ -13,28 +11,26 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.Arrays;
 import java.util.List;
 
-public class GroveCategory implements IRecipeCategory<GroveWrapper> {
+public class FeyCategory implements IRecipeCategory<FeyWrapper> {
 
   private final IDrawable background;
 
-  public GroveCategory(IGuiHelper helper) {
-    this.background = helper.createDrawable(new ResourceLocation(Roots.MODID, "textures/gui/jei/grove_crafting.png"), 0, 0, 121, 76);
+  public FeyCategory(IGuiHelper helper) {
+    this.background = helper.createDrawable(new ResourceLocation(Roots.MODID, "textures/gui/jei/fey_crafting.png"), 0, 0, 121, 76);
   }
 
   @Override
   public String getUid() {
-    return JEIRootsPlugin.GROVE_CRAFTING;
+    return JEIRootsPlugin.FEY_CRAFTING;
   }
 
   @Override
   public String getTitle() {
-    return I18n.format("container." + JEIRootsPlugin.GROVE_CRAFTING + ".name");
+    return I18n.format("container." + JEIRootsPlugin.FEY_CRAFTING + ".name");
   }
 
   @Override
@@ -48,7 +44,7 @@ public class GroveCategory implements IRecipeCategory<GroveWrapper> {
   }
 
   @Override
-  public void setRecipe(IRecipeLayout recipeLayout, GroveWrapper recipeWrapper, IIngredients ingredients) {
+  public void setRecipe(IRecipeLayout recipeLayout, FeyWrapper recipeWrapper, IIngredients ingredients) {
     IGuiItemStackGroup group = recipeLayout.getItemStacks();
     if (recipeWrapper.recipe != null) {
       List<List<ItemStack>> data = ingredients.getInputs(VanillaTypes.ITEM);

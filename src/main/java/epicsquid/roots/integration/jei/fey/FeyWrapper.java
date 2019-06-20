@@ -1,8 +1,6 @@
-package epicsquid.roots.integration.jei.grove;
+package epicsquid.roots.integration.jei.fey;
 
-import epicsquid.roots.recipe.GroveCraftingRecipe;
-import epicsquid.roots.recipe.MortarRecipe;
-import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.recipe.FeyCraftingRecipe;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -13,11 +11,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class GroveWrapper implements IRecipeWrapper {
+public class FeyWrapper implements IRecipeWrapper {
 
-  public GroveCraftingRecipe recipe;
+  public FeyCraftingRecipe recipe;
 
-  public GroveWrapper(GroveCraftingRecipe recipe) {
+  public FeyWrapper(FeyCraftingRecipe recipe) {
     this.recipe = recipe;
   }
 

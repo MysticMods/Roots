@@ -82,7 +82,7 @@ public class WorldGenNaturalGrove implements IWorldGenerator {
         IBlockState iblockstate = world.getBlockState(blockpos);
         world.notifyBlockUpdate(blockpos, iblockstate, iblockstate, 3);
 
-        //Spawn entity grove
+        //Spawn entity fey
         EntityNaturalGrove naturalGrove = new EntityNaturalGrove(world);
         naturalGrove.setPosition(blockpos.getX() +0.5f, blockpos.getY() + 2, blockpos.getZ() +0.5f);
         world.spawnEntity(naturalGrove);

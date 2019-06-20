@@ -12,7 +12,7 @@ import crafttweaker.api.minecraft.CraftTweakerMC;
 import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.recipe.GroveCraftingRecipe;
+import epicsquid.roots.recipe.FeyCraftingRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -32,13 +32,13 @@ public class GroveCraftingTweaker {
     if (inputs.length != 5) {
       CraftTweakerAPI.logError("Grove Crafting Ritual must have 5 items: " + name);
     }
-    CraftTweaker.LATE_ACTIONS.add(new Add(Collections.singletonMap(new ResourceLocation(Roots.MODID, name + ".ct"), new GroveCraftingRecipe(InputHelper.toStack(output)).addIngredients((Object) Stream.of(inputs).map(CraftTweakerMC::getIngredient).toArray(Ingredient[]::new)).setName(name + ".ct"))));
+    CraftTweaker.LATE_ACTIONS.add(new Add(Collections.singletonMap(new ResourceLocation(Roots.MODID, name + ".ct"), new FeyCraftingRecipe(InputHelper.toStack(output)).addIngredients((Object) Stream.of(inputs).map(CraftTweakerMC::getIngredient).toArray(Ingredient[]::new)).setName(name + ".ct"))));
   }
 
   @ZenMethod
   public static void removeRecipe(IItemStack output) {
-    Map<ResourceLocation, GroveCraftingRecipe> recipes = new HashMap<>();
-    for (Map.Entry<ResourceLocation, GroveCraftingRecipe> modRecipe : ModRecipes.getGroveCraftingRecipes().entrySet()) {
+    Map<ResourceLocation, FeyCraftingRecipe> recipes = new HashMap<>();
+    for (Map.Entry<ResourceLocation, FeyCraftingRecipe> modRecipe : ModRecipes.getFeyCraftingRecipes().entrySet()) {
       if (output.matches(InputHelper.toIItemStack(modRecipe.getValue().getResult()))) {
         recipes.put(modRecipe.getKey(), modRecipe.getValue());
       }
@@ -46,26 +46,26 @@ public class GroveCraftingTweaker {
     CraftTweaker.LATE_ACTIONS.add(new Remove(recipes));
   }
 
-  private static class Remove extends BaseMapRemoval<ResourceLocation, GroveCraftingRecipe> {
+  private static class Remove extends BaseMapRemoval<ResourceLocation, FeyCraftingRecipe> {
 
-    private Remove(Map<ResourceLocation, GroveCraftingRecipe> map) {
-      super("Grove Crafting Ritual", ModRecipes.getGroveCraftingRecipes(), map);
+    private Remove(Map<ResourceLocation, FeyCraftingRecipe> map) {
+      super("Grove Crafting Ritual", ModRecipes.getFeyCraftingRecipes(), map);
     }
 
     @Override
-    protected String getRecipeInfo(Map.Entry<ResourceLocation, GroveCraftingRecipe> recipe) {
+    protected String getRecipeInfo(Map.Entry<ResourceLocation, FeyCraftingRecipe> recipe) {
       return LogHelper.getStackDescription(recipe.getValue().getResult());
     }
   }
 
-  private static class Add extends BaseMapAddition<ResourceLocation, GroveCraftingRecipe> {
+  private static class Add extends BaseMapAddition<ResourceLocation, FeyCraftingRecipe> {
 
-    private Add(Map<ResourceLocation, GroveCraftingRecipe> map) {
-      super("Grove Crafting Ritual", ModRecipes.getGroveCraftingRecipes(), map);
+    private Add(Map<ResourceLocation, FeyCraftingRecipe> map) {
+      super("Grove Crafting Ritual", ModRecipes.getFeyCraftingRecipes(), map);
     }
 
     @Override
-    protected String getRecipeInfo(Map.Entry<ResourceLocation, GroveCraftingRecipe> recipe) {
+    protected String getRecipeInfo(Map.Entry<ResourceLocation, FeyCraftingRecipe> recipe) {
       return LogHelper.getStackDescription(recipe.getValue().getResult());
     }
   }

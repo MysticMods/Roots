@@ -10,8 +10,8 @@ import epicsquid.roots.integration.jei.carving.BarkRecipeCategory;
 import epicsquid.roots.integration.jei.carving.BarkRecipeWrapper;
 import epicsquid.roots.integration.jei.carving.RunicCarvingCategory;
 import epicsquid.roots.integration.jei.carving.RunicCarvingWrapper;
-import epicsquid.roots.integration.jei.grove.GroveCategory;
-import epicsquid.roots.integration.jei.grove.GroveWrapper;
+import epicsquid.roots.integration.jei.fey.FeyCategory;
+import epicsquid.roots.integration.jei.fey.FeyWrapper;
 import epicsquid.roots.integration.jei.mortar.MortarCategory;
 import epicsquid.roots.integration.jei.mortar.MortarWrapper;
 import epicsquid.roots.integration.jei.ritual.RitualCategory;
@@ -52,7 +52,7 @@ public class JEIRootsPlugin implements IModPlugin {
   public static final String RITUAL_CRAFTING = Roots.MODID + ".ritual_crafting";
   public static final String MORTAR_AND_PESTLE = Roots.MODID + ".mortar_and_pestle";
   public static final String RITUAL = Roots.MODID + ".ritual";
-  public static final String GROVE_CRAFTING = Roots.MODID + ".grove_crafting";
+  public static final String FEY_CRAFTING = Roots.MODID + ".fey_crafting";
   public static final String SPELL_COSTS = Roots.MODID + ".spell_costs";
   public static final String SPELL_MODIFIERS = Roots.MODID + ".spell_modifiers";
 
@@ -64,7 +64,7 @@ public class JEIRootsPlugin implements IModPlugin {
         new RitualCraftingCategory(helper),
         new MortarCategory(helper),
         new RitualCategory(helper),
-        new GroveCategory(helper),
+        new FeyCategory(helper),
         new SpellCostCategory(helper),
         new SpellModifierCategory(helper),
         new BarkRecipeCategory(helper)
@@ -79,7 +79,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(MortarRecipe.class, MortarWrapper::new, MORTAR_AND_PESTLE);
     registry.handleRecipes(SpellBase.class, MortarWrapper::new, MORTAR_AND_PESTLE);
     registry.handleRecipes(RitualBase.class, RitualWrapper::new, RITUAL);
-    registry.handleRecipes(GroveCraftingRecipe.class, GroveWrapper::new, GROVE_CRAFTING);
+    registry.handleRecipes(FeyCraftingRecipe.class, FeyWrapper::new, FEY_CRAFTING);
     registry.handleRecipes(SpellBase.class, SpellCostWrapper::new, SPELL_COSTS);
     registry.handleRecipes(SpellBase.class, SpellModifierWrapper::new, SPELL_MODIFIERS);
     registry.handleRecipes(BarkRecipe.class, BarkRecipeWrapper::new, BARK_CARVING);
@@ -99,7 +99,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipes(spells, MORTAR_AND_PESTLE);
     registry.addRecipes(spells, SPELL_COSTS);
     registry.addRecipes(RitualRegistry.ritualRegistry.values(), RITUAL);
-    registry.addRecipes(ModRecipes.getGroveCraftingRecipes().values(), GROVE_CRAFTING);
+    registry.addRecipes(ModRecipes.getFeyCraftingRecipes().values(), FEY_CRAFTING);
     registry.addRecipes(spells.stream().filter(SpellBase::hasModules).collect(Collectors.toList()), SPELL_MODIFIERS);
     registry.addRecipes(ModRecipes.getBarkRecipes(), BARK_CARVING);
 
@@ -127,7 +127,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.mortar), MORTAR_AND_PESTLE);
     registry.addRecipeCatalyst(new ItemStack(ModItems.pestle), MORTAR_AND_PESTLE);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.bonfire), RITUAL);
-    registry.addRecipeCatalyst(new ItemStack(ModBlocks.grove_crafter), GROVE_CRAFTING);
+    registry.addRecipeCatalyst(new ItemStack(ModBlocks.fey_crafter), FEY_CRAFTING);
     registry.addRecipeCatalyst(new ItemStack(ModItems.staff), SPELL_COSTS);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.imbuer), SPELL_MODIFIERS);
 
@@ -162,7 +162,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addIngredientInfo(new ItemStack(ModBlocks.elemental_soil_air), VanillaTypes.ITEM, airSoilLocalized);
     registry.addIngredientInfo(new ItemStack(ModBlocks.elemental_soil_earth), VanillaTypes.ITEM, earthSoilLocalized);
 
-    registry.getRecipeTransferRegistry().addRecipeTransferHandler(new GroveCrafterTransfer());
+    registry.getRecipeTransferRegistry().addRecipeTransferHandler(new FeyCrafterTransfer());
   }
 
   @Override

@@ -18,7 +18,7 @@ public class ClientProxy extends CommonProxy {
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOffertoryPlate.class, new TileEntityOffertoryPlateRenderer());
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityIncenseBurner.class, new TileEntityIncenseBurnerRenderer());
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWildrootRune.class, new TileEntityWildrootRuneRenderer());
-    ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGroveCrafter.class, new TileEntityGroveCrafterRenderer());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFeyCrafter.class, new TileEntityFeyCrafterRenderer());
 
     Keybinds.init();
   }

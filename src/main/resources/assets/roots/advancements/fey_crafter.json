@@ -1,13 +1,13 @@
 {
   "display": {
     "icon": {
-      "item": "roots:grove_crafter"
+      "item": "roots:fey_crafter"
     },
     "title": {
-      "translate": "advancement.roots.grove_crafter"
+      "translate": "advancement.roots.fey_crafter"
     },
     "description": {
-      "translate": "advancement.roots.grove_crafter.desc"
+      "translate": "advancement.roots.fey_crafter.desc"
     }
   },
   "parent": "roots:terra_moss",
@@ -17,7 +17,7 @@
       "conditions": {
         "items": [
           {
-            "item": "roots:grove_crafter"
+            "item": "roots:fey_crafter"
           }
         ]
       }

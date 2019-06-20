@@ -95,7 +95,7 @@ public class TileEntityOffertoryPlate extends TileBase {
             player.setHeldItem(hand, ItemStack.EMPTY);
           }
 
-          //Search for the grove and assigning this plate to the grove
+          //Search for the fey and assigning this plate to the fey
           List<EntityGrove> groveList = Util.getEntitiesWithinRadius(world, EntityGrove.class, getPos(), 10, 10, 10);
           if (groveList.size() > 0) {
             GroveType type = OfferingUtil.getGroveType(this.inventory.getStackInSlot(0));

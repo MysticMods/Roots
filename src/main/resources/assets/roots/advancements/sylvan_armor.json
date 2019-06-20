@@ -10,7 +10,7 @@
       "translate": "advancement.roots.sylvan_armor.desc"
     }
   },
-  "parent": "roots:grove_crafter",
+  "parent": "roots:fey_crafter",
   "criteria": {
     "book": {
       "trigger": "minecraft:inventory_changed",

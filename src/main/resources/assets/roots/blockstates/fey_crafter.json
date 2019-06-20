@@ -2,7 +2,7 @@
   "forge_marker": 1,
   "variants": {
     "normal": {
-      "model": "roots:grove_crafter"
+      "model": "roots:fey_crafter"
     }
   }
 }

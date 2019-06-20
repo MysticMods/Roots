@@ -9,7 +9,7 @@ import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.network.fx.MessageGrowthCrafterVisualFX;
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.recipe.GroveCraftingRecipe;
+import epicsquid.roots.recipe.FeyCraftingRecipe;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class TileEntityGroveCrafter extends TileBase {
+public class TileEntityFeyCrafter extends TileBase {
   public static int GROVE_STONE_RADIUS = 10;
 
   private Random random = new Random();
@@ -41,16 +41,16 @@ public class TileEntityGroveCrafter extends TileBase {
   public ItemStackHandler inventory = new ItemStackHandler(5) {
     @Override
     protected void onContentsChanged(int slot) {
-      TileEntityGroveCrafter.this.markDirty();
+      TileEntityFeyCrafter.this.markDirty();
       if (!world.isRemote) {
-        TileEntityGroveCrafter.this.updatePacketViaState();
+        TileEntityFeyCrafter.this.updatePacketViaState();
       }
     }
   };
 
   private BlockPos groveStone = null;
 
-  public TileEntityGroveCrafter() {
+  public TileEntityFeyCrafter() {
     super();
   }
 
@@ -121,7 +121,7 @@ public class TileEntityGroveCrafter extends TileBase {
   }
 
   public List<ItemStack> craft() {
-    GroveCraftingRecipe recipe = getRecipe();
+    FeyCraftingRecipe recipe = getRecipe();
     List<ItemStack> result = new ArrayList<>();
     ItemStack current = ItemStack.EMPTY;
     while (recipe != null) {
@@ -153,8 +153,8 @@ public class TileEntityGroveCrafter extends TileBase {
     return result;
   }
 
-  public GroveCraftingRecipe getRecipe() {
-    return ModRecipes.getGroveCraftingRecipe(getContents());
+  public FeyCraftingRecipe getRecipe() {
+    return ModRecipes.getFeyCraftingRecipe(getContents());
   }
 
   public List<ItemStack> getContents() {
