@@ -24,8 +24,8 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 @ZenRegister
-@ZenClass("mods." + Roots.MODID + ".Grove")
-public class GroveCraftingTweaker {
+@ZenClass("mods." + Roots.MODID + ".FeyCrafting")
+public class FeyCraftingTweaker {
 
   @ZenMethod
   public static void addRecipe(String name, IItemStack output, IIngredient[] inputs) {
