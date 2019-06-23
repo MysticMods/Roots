@@ -339,3 +339,5 @@ roots.ritual.transmutation.birch_jungle=Obtained through the Ritual of Transmuta
 roots.ritual.transmutation.birch_jungle_leaves=Obtained through the Ritual of Transmutation. The leaves of nearby birch trees will transform into those of a jungle tree.
 roots.ritual.transmutation.pumpkin_melon=Obtained through the Ritual of Transmutation. Pumpkins with water or flowing water below them will transform into melon blocks.
 roots.ritual.transmutation.pumpkin_cactus=Obtained through the Ritual of Transmutation. Pumpkins planted upon sand will turn into cactuses.
+
+jei.roots.fey_leather.source.desc=Obtained by reaching through the planes when using Runic Shears on an entity that normally drops leather. This is a gift willingly given, but it is not an infinite source.

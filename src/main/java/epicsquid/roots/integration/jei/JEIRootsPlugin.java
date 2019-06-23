@@ -152,6 +152,8 @@ public class JEIRootsPlugin implements IModPlugin {
       }
     }
 
+    registry.addIngredientInfo(new ItemStack(ModItems.fey_leather), VanillaTypes.ITEM, I18n.format("jei.roots.fey_leather.source.desc"));
+
     /*List<ItemStack> bark = new ArrayList<>();
     bark.add(new ItemStack(ModItems.bark_oak));
     bark.add(new ItemStack(ModItems.bark_acacia));
