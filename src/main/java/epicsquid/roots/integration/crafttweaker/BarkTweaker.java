@@ -3,7 +3,6 @@ package epicsquid.roots.integration.crafttweaker;
 import com.blamejared.mtlib.utils.BaseAction;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
-import crafttweaker.api.entity.IEntityDefinition;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import crafttweaker.mc1120.CraftTweaker;
@@ -12,7 +11,6 @@ import epicsquid.roots.init.ModRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.EntityEntry;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -27,7 +25,7 @@ public class BarkTweaker {
       CraftTweakerAPI.logError("Provided log " + woodLog + " is not an item block!");
       return;
     }
-    CraftTweaker.LATE_ACTIONS.add(new Add(name, ((ItemBlock)log.getItem()).getBlock(), CraftTweakerMC.getItemStack(bark)));
+    CraftTweaker.LATE_ACTIONS.add(new Add(name, ((ItemBlock) log.getItem()).getBlock(), CraftTweakerMC.getItemStack(bark)));
   }
 
   private static class Add extends BaseAction {
