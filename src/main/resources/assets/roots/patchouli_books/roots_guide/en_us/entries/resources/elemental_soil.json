@@ -31,13 +31,13 @@
       "type": "spotlight",
       "item": "roots:elemental_soil_air",
       "link_recipe": true,
-      "text": "$(l:herbs/cloud_berry)Cloud Berries$() can grow in this caelic soil.$(br2)Created by dropping a piece of elemental soil in an underground cave. (This transmutation may need some time to finish properly)"
+      "text": "$(l:herbs/cloud_berry)Cloud Berries$() can grow in this caelic soil.$(br2)Created by dropping a piece of elemental soil on top of the loftiest of trees or the peaks of the highest mountains. (This transmutation may need some time to finish properly)"
     },
     {
       "type": "spotlight",
       "item": "roots:elemental_soil_earth",
       "link_recipe": true,
-      "text": "$(l:herbs/stalicripe)Stalicripe$() can grow in this terran soil.$(br2)Created by dropping a piece of elemental soil on top of the loftiest of trees or the peaks of the highest mountains. (This transmutation may need some time to finish properly)"
+      "text": "$(l:herbs/stalicripe)Stalicripe$() can grow in this terran soil.$(br2)Created by dropping a piece of elemental soil in an underground cave. (This transmutation may need some time to finish properly)"
     }
   ]
 }
