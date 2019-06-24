@@ -6,6 +6,10 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockTallGrass;
+import epicsquid.mysticallib.particle.particles.ParticleGlitter;
+import epicsquid.mysticallib.particle.particles.ParticleLeafArc;
+import epicsquid.mysticallib.proxy.ClientProxy;
+import epicsquid.mysticallib.util.Util;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -238,7 +242,8 @@ public class BlockGroveStone extends BlockTEBase {
                 break;
               }
 
-              worldIn.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, (double) pos.getX() + 0.5D, (double) pos.getY() + 2.0D, (double) pos.getZ() + 0.5D, (double) ((float) i + rand.nextFloat()) - 0.5D, (double) ((float) k - rand.nextFloat() - 1.0F), (double) ((float) j + rand.nextFloat()) - 0.5D);
+              ClientProxy.particleRenderer.spawnParticle(worldIn, Util.getLowercaseClassName(ParticleLeafArc.class), (double) pos.getX() + 0.5D, (double) pos.getY() + 1.0D, (double) pos.getZ() + 0.5D, (i + rand.nextDouble() - 0.05) * 0.04, -0.0001, (j + rand.nextFloat() - 0.05) * 0.04,
+                  100, 0.14 + rand.nextDouble() * 0.05, 0.325, 0.117 + rand.nextDouble() * 0.05, 1, rand.nextDouble() + 0.5, rand.nextDouble() * 2);
             }
           }
         }
