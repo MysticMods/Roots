@@ -93,7 +93,7 @@ public class ModBlocks {
     event.addBlock(wildwood_sapling = new BlockSaplingBase("wildwood_sapling", () -> new WorldGenBigWildwoodTree(true)).setModelCustom(false).setCreativeTab(Roots.tab));
 
     event.addBlock(wildwood_door = new BlockDoorBase(wildwood_planks, SoundType.WOOD, 2.0f, "wildwood_door").setModelCustom(false).setLayer(BlockRenderLayer.TRANSLUCENT).setCreativeTab(Roots.tab));
-    event.addBlock(wildwood_trapdoor = new BlockTrapDoorBase(wildwood_planks, SoundType.WOOD, 2.0f, "wildwood_trapdoor").setModelCustom(true).setLayer(BlockRenderLayer.TRANSLUCENT).setCreativeTab(Roots.tab));
+    event.addBlock(wildwood_trapdoor = new BlockTrapDoorBase(wildwood_planks, SoundType.WOOD, 2.0f, "wildwood_trapdoor").setModelCustom(false).setLayer(BlockRenderLayer.TRANSLUCENT).setCreativeTab(Roots.tab));
     event.addBlock(wildwood_fence = new BlockFenceBase(wildwood_planks, SoundType.WOOD, 2.0f, "wildwood_fence").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addBlock(wildwood_ladder = new BlockLadderBase(wildwood_planks, 2.0f, "wildwood_ladder").setModelCustom(true).setCreativeTab(Roots.tab));
 
