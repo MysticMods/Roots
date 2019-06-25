@@ -31,7 +31,6 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
       TileEntityIncenseBurner.this.markDirty();
       if (!world.isRemote) {
         TileEntityIncenseBurner.this.updatePacketViaState();
-        //PacketHandler.sendToAllTracking(new MessageTEUpdate(TileEntityIncenseBurner.this.getUpdateTag()), TileEntityIncenseBurner.this);
       }
     }
   };
@@ -73,14 +72,12 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
         markDirty();
         if (!world.isRemote)
           updatePacketViaState();
-        //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
         return false;
       }
       ItemStack extracted = inventory.extractItem(0, inventory.getStackInSlot(0).getCount(), false);
       if (!world.isRemote) {
         ItemSpawnUtil.spawnItem(world, getPos(), extracted);
         updatePacketViaState();
-        //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
       }
       return false;
     }
@@ -90,7 +87,6 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
         markDirty();
         if (!world.isRemote)
           updatePacketViaState();
-        //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
         return false;
       }
     }
@@ -116,7 +112,6 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
     markDirty();
     if (!world.isRemote)
       updatePacketViaState();
-    //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
 
     return false;
   }
@@ -151,7 +146,6 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
         markDirty();
         if (!world.isRemote)
           updatePacketViaState();
-        //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
       }
 
 
