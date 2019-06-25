@@ -313,7 +313,6 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       markDirty();
       if (!world.isRemote)
         updatePacketViaState();
-      //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
     }
 
     if ((ritualEntity != null && ritualEntity.isDead) && craftingResult.isEmpty()) {
@@ -348,7 +347,6 @@ public class TileEntityBonfire extends TileBase implements ITickable {
             markDirty();
             if (!world.isRemote)
               updatePacketViaState();
-            //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
           }
         }
 
@@ -426,7 +424,6 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         markDirty();
         if (!world.isRemote)
           updatePacketViaState();
-        //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
       }
     }
   }
@@ -442,7 +439,6 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         markDirty();
         if (!world.isRemote)
           updatePacketViaState();
-        //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
         break;
       }
     }

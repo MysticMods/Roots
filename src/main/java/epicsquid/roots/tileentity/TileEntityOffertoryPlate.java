@@ -30,7 +30,6 @@ public class TileEntityOffertoryPlate extends TileBase {
       TileEntityOffertoryPlate.this.markDirty();
       if (!world.isRemote) {
         updatePacketViaState();
-        //PacketHandler.sendToAllTracking(new MessageTEUpdate(TileEntityOffertoryPlate.this.getUpdateTag()), TileEntityOffertoryPlate.this);
       }
     }
   };
@@ -112,7 +111,6 @@ public class TileEntityOffertoryPlate extends TileBase {
           }
           if (!world.isRemote)
             updatePacketViaState();
-          //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
           return true;
         }
       }
@@ -123,13 +121,9 @@ public class TileEntityOffertoryPlate extends TileBase {
         ItemSpawnUtil.spawnItem(world, getPos(), extracted);
         if (!world.isRemote)
           updatePacketViaState();
-        //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
         return true;
       }
     }
-    /*if (!world.isRemote) {
-      PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
-    }*/ // Nothing has changed, why send an update packet here?
     return false;
   }
 

@@ -32,7 +32,6 @@ public class TileEntityMortar extends TileBase {
       TileEntityMortar.this.markDirty();
       if (!world.isRemote) {
         updatePacketViaState();
-        //PacketHandler.sendToAllTracking(new MessageTEUpdate(TileEntityMortar.this.getUpdateTag()), TileEntityMortar.this);
       }
     }
   };
@@ -96,7 +95,6 @@ public class TileEntityMortar extends TileBase {
               }
               markDirty();
               updatePacketViaState();
-              //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
               return true;
             }
           }
@@ -108,7 +106,6 @@ public class TileEntityMortar extends TileBase {
             player.setHeldItem(hand, ItemStack.EMPTY);
             markDirty();
             updatePacketViaState();
-            //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
             return true;
           }
         }
@@ -140,7 +137,6 @@ public class TileEntityMortar extends TileBase {
             ItemSpawnUtil.spawnItem(world, getPos(), dust);
             markDirty();
             updatePacketViaState();
-            //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
           }
           for (int i = 0; i < inventory.getSlots(); i++) {
             inventory.extractItem(i, 1, false);
@@ -175,7 +171,6 @@ public class TileEntityMortar extends TileBase {
             ItemSpawnUtil.spawnItem(world, getPos(), mortarRecipe.getResult().copy());
             markDirty();
             updatePacketViaState();
-            //PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
           }
           for (int i = 0; i < inventory.getSlots(); i++) {
             inventory.extractItem(i, 1, false);
