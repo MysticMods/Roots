@@ -2,13 +2,13 @@
   "forge_marker": 1,
   "variants": {
     "facing=north,half=bottom,valid=true": {
-      "model": "roots:grove_stone"
+      "model": "roots:grove_stone_active"
     },
     "facing=north,half=bottom,valid=false": {
       "model": "roots:grove_stone"
     },
     "facing=south,half=bottom,valid=true": {
-      "model": "roots:grove_stone",
+      "model": "roots:grove_stone_active",
       "transform": {
         "rotation": {
           "y": 180
@@ -24,7 +24,7 @@
       }
     },
     "facing=east,half=bottom,valid=true": {
-      "model": "roots:grove_stone",
+      "model": "roots:grove_stone_active",
       "transform": {
         "rotation": {
           "y": 90
@@ -40,7 +40,7 @@
       }
     },
     "facing=west,half=bottom,valid=true": {
-      "model": "roots:grove_stone",
+      "model": "roots:grove_stone_active",
       "transform": {
         "rotation": {
           "y": -90
