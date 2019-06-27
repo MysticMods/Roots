@@ -165,4 +165,9 @@ public class BlockBonfire extends BlockTEBase {
     // Empty, no items in it
     return 0;
   }
+
+  @Override
+  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+    super.breakBlock(worldIn, pos, state);
+  }
 }

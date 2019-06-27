@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Call forth fire from the sky and burn Rains fire down from the heavens, burning creatures unfortunate to be near the ritual in a raging inferno.$(br2)This ritual requires the correct standing stones."
+      "text": "From the heavens spew forth a huge amount of fire, burning creatures near the ritual, setting the ground on fire, and slowly turning the surrounding area into a raging inferno.$(br2)This ritual requires the correct standing stones."
     },
     {
       "type": "pyre_template",
