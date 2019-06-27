@@ -37,7 +37,7 @@ dependencies {
     } else {
         compile project(':MysticalLib')
         compile project(':MysticalWorld')
-        compile "vazkii.patchouli:Patchouli:${patchouli_version}"
+        deobfCompile "vazkii.patchouli:Patchouli:${patchouli_version}"
         deobfCompile "info.tehnut.harvest:Harvest:1.12-1.2.7-20"
         deobfCompile "com.azanor:Baubles:${version_baubles}"
     }
