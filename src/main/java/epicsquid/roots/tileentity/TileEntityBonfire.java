@@ -5,6 +5,7 @@ import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.block.BlockBonfire;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
+import epicsquid.roots.entity.ritual.EntityRitualFrostLands;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.particle.ParticleUtil;
@@ -299,10 +300,18 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     }
     //Spawn the Ignite flame particle
     if (world.isRemote && this.doBigFlame) {
-      for (int i = 0; i < 40; i++) {
-        ParticleUtil.spawnParticleFiery(world, getPos().getX() + 0.125f + 0.75f * random.nextFloat(), getPos().getY() + 0.75f + 0.5f * random.nextFloat(),
-            getPos().getZ() + 0.125f + 0.75f * random.nextFloat(), 0.03125f * (random.nextFloat() - 0.5f), 0.125f * random.nextFloat(),
-            0.03125f * (random.nextFloat() - 0.5f), 255.0f, 224.0f, 32.0f, 0.75f, 9.0f + 9.0f * random.nextFloat(), 40);
+      if (ritualEntity instanceof EntityRitualFrostLands) {
+        for (int i = 0; i < 40; i++) {
+          ParticleUtil.spawnParticleFiery(world, getPos().getX() + 0.125f + 0.75f * random.nextFloat(), getPos().getY() + 0.75f + 0.5f * random.nextFloat(),
+              getPos().getZ() + 0.125f + 0.75f * random.nextFloat(), 0.03125f * (random.nextFloat() - 0.5f), 0.125f * random.nextFloat(),
+              0.03125f * (random.nextFloat() - 0.5f), 63.0f, 119.0f, 209.0f, 0.75f, 9.0f + 9.0f * random.nextFloat(), 40);
+        }
+      } else {
+        for (int i = 0; i < 40; i++) {
+          ParticleUtil.spawnParticleFiery(world, getPos().getX() + 0.125f + 0.75f * random.nextFloat(), getPos().getY() + 0.75f + 0.5f * random.nextFloat(),
+              getPos().getZ() + 0.125f + 0.75f * random.nextFloat(), 0.03125f * (random.nextFloat() - 0.5f), 0.125f * random.nextFloat(),
+              0.03125f * (random.nextFloat() - 0.5f), 255.0f, 224.0f, 32.0f, 0.75f, 9.0f + 9.0f * random.nextFloat(), 40);
+        }
       }
     }
     if (doBigFlame) {
@@ -325,7 +334,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       }
 
       if (burning && getTicker() % 20.0f == 0 && random.nextDouble() < 0.05) {
-        meltNearbySnow();
+        if (!(ritualEntity instanceof EntityRitualFrostLands)) {
+          meltNearbySnow();
+        }
       }
 
       if (!burning || burnTime == 0) {
@@ -371,10 +382,17 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         //Spawn Fire particles
         if (world.isRemote) {
           for (int i = 0; i < 2; i++) {
-            ParticleUtil
-                .spawnParticleFiery(world, getPos().getX() + 0.3125f + 0.375f * Util.rand.nextFloat(), getPos().getY() + 0.625f + 0.375f * Util.rand.nextFloat(),
-                    getPos().getZ() + 0.3125f + 0.375f * Util.rand.nextFloat(), 0.03125f * (Util.rand.nextFloat() - 0.5f), 0.125f * Util.rand.nextFloat(),
-                    0.03125f * (Util.rand.nextFloat() - 0.5f), 255.0f, 96.0f, 32.0f, 0.75f, 7.0f + 7.0f * Util.rand.nextFloat(), 40);
+            if (ritualEntity instanceof EntityRitualFrostLands) {
+              ParticleUtil
+                  .spawnParticleFiery(world, getPos().getX() + 0.3125f + 0.375f * Util.rand.nextFloat(), getPos().getY() + 0.625f + 0.375f * Util.rand.nextFloat(),
+                      getPos().getZ() + 0.3125f + 0.375f * Util.rand.nextFloat(), 0.03125f * (Util.rand.nextFloat() - 0.5f), 0.125f * Util.rand.nextFloat(),
+                      0.03125f * (Util.rand.nextFloat() - 0.5f), 90.0f, 134.0f, 204.0f, 0.75f, 7.0f + 7.0f * Util.rand.nextFloat(), 40);
+            } else {
+              ParticleUtil
+                  .spawnParticleFiery(world, getPos().getX() + 0.3125f + 0.375f * Util.rand.nextFloat(), getPos().getY() + 0.625f + 0.375f * Util.rand.nextFloat(),
+                      getPos().getZ() + 0.3125f + 0.375f * Util.rand.nextFloat(), 0.03125f * (Util.rand.nextFloat() - 0.5f), 0.125f * Util.rand.nextFloat(),
+                      0.03125f * (Util.rand.nextFloat() - 0.5f), 255.0f, 96.0f, 32.0f, 0.75f, 7.0f + 7.0f * Util.rand.nextFloat(), 40);
+            }
           }
         }
       }
