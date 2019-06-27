@@ -8,6 +8,7 @@ import epicsquid.roots.particle.ParticleUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -119,6 +120,7 @@ public class EntityFlare extends Entity {
 
   private void attackWithFire(List<EntityLivingBase> entities) {
     for (EntityLivingBase target : entities) {
+      if (target instanceof EntityPlayer) continue;
       DamageSource source = DamageSource.IN_FIRE;
       target.setFire(4);
       target.attackEntityFrom(source, getDataManager().get(value));
