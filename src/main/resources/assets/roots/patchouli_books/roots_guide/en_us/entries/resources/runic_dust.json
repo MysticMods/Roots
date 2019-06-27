@@ -8,7 +8,7 @@
     {
       "type": "spotlight",
       "item": "roots:runic_dust",
-      "text": "Although runestone is a hardy material, the correct amount of pressure applied at the correct angle will quickly reduce it to a powder form while still retaining its strong, magical essence.$(br2)This runic dust is most commonly used as a way of removing spells from the selected slot of a Staff with $(l:basics/spells)Imbuement$()."
+      "text": "Although runestone is a hardy material, the correct amount of pressure applied at the correct angle will quickly reduce it to a powder form while still retaining its strong, magical essence.$(br2)The most common use for this dustis to remove spells from the current slot of a $(l:basics/spells)Staff$()."
     },
     {
       "type": "mortar_template",

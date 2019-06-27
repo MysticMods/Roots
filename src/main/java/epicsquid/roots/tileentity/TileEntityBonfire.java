@@ -364,14 +364,15 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           this.craftingResult = ItemStack.EMPTY;
           clearStorage();
         }
-      }
-      //Spawn Fire particles
-      if (world.isRemote) {
-        for (int i = 0; i < 2; i++) {
-          ParticleUtil
-              .spawnParticleFiery(world, getPos().getX() + 0.3125f + 0.375f * Util.rand.nextFloat(), getPos().getY() + 0.625f + 0.375f * Util.rand.nextFloat(),
-                  getPos().getZ() + 0.3125f + 0.375f * Util.rand.nextFloat(), 0.03125f * (Util.rand.nextFloat() - 0.5f), 0.125f * Util.rand.nextFloat(),
-                  0.03125f * (Util.rand.nextFloat() - 0.5f), 255.0f, 96.0f, 32.0f, 0.75f, 7.0f + 7.0f * Util.rand.nextFloat(), 40);
+      } else {
+        //Spawn Fire particles
+        if (world.isRemote) {
+          for (int i = 0; i < 2; i++) {
+            ParticleUtil
+                .spawnParticleFiery(world, getPos().getX() + 0.3125f + 0.375f * Util.rand.nextFloat(), getPos().getY() + 0.625f + 0.375f * Util.rand.nextFloat(),
+                    getPos().getZ() + 0.3125f + 0.375f * Util.rand.nextFloat(), 0.03125f * (Util.rand.nextFloat() - 0.5f), 0.125f * Util.rand.nextFloat(),
+                    0.03125f * (Util.rand.nextFloat() - 0.5f), 255.0f, 96.0f, 32.0f, 0.75f, 7.0f + 7.0f * Util.rand.nextFloat(), 40);
+          }
         }
       }
     }
