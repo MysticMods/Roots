@@ -315,19 +315,21 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         updatePacketViaState();
     }
 
-    if ((ritualEntity != null && ritualEntity.isDead) && craftingResult.isEmpty()) {
-      burnTime = 1;
-    }
-
     if (burnTime > 0) {
-
       burnTime--;
 
-      if (getTicker() % 20.0f == 0 && random.nextDouble() < 0.05) {
+      boolean burning = burnTime > 0;
+
+      if ((ritualEntity != null && ritualEntity.isDead) && craftingResult.isEmpty()) {
+        burning = false;
+      }
+
+      if (burning && getTicker() % 20.0f == 0 && random.nextDouble() < 0.05) {
         meltNearbySnow();
       }
 
-      if (burnTime == 0) {
+      if (!burning || burnTime == 0) {
+        burnTime = 0;
         BlockBonfire.setState(false, world, pos);
         //Check if it is a ritual, if so try and see if it has new ritual fuel.
         if (this.craftingResult.isEmpty() && this.lastRitualUsed != null) {
@@ -364,7 +366,8 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           this.craftingResult = ItemStack.EMPTY;
           clearStorage();
         }
-      } else {
+      }
+      if (burning) {
         //Spawn Fire particles
         if (world.isRemote) {
           for (int i = 0; i < 2; i++) {
@@ -374,6 +377,12 @@ public class TileEntityBonfire extends TileBase implements ITickable {
                     0.03125f * (Util.rand.nextFloat() - 0.5f), 255.0f, 96.0f, 32.0f, 0.75f, 7.0f + 7.0f * Util.rand.nextFloat(), 40);
           }
         }
+      }
+      if (!burning || burnTime == 0) {
+        burnTime = 0;
+        markDirty();
+        if (!world.isRemote)
+          updatePacketViaState();
       }
     }
 
