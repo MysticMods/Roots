@@ -1,6 +1,5 @@
 {
-  "name": "Natural Aura",
-  "icon": "roots:ritual_germination",
+  "name": "Germination",
   "category": "rituals",
   "advancement": "roots:spirit_herb",
   "pages": [

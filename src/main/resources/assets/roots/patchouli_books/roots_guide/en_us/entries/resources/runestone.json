@@ -9,7 +9,7 @@
       "type": "spotlight",
       "item": "roots:runestone",
       "link_recipe": true,
-      "text": "Runestone is a magic-infused variety of stone that is often used in structures required by druidic rituals, or as a specialized crafting component where ordinary stone fails."
+      "text": "Ordinary stone transformed by magic & the power of the fey, runestone and its variants are often used in structures required for Druidic rituals.$(br2)While also serving a decorative purpose, you may find other uses in crafting for runestone and its byproducts."
     },
     {
       "type": "fey_crafting_template",
