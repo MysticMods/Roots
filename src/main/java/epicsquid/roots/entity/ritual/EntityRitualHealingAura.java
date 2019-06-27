@@ -44,14 +44,14 @@ public class EntityRitualHealingAura extends EntityRitualBase {
         ParticleUtil.spawnParticleGlow(world, tx, ty, tz, 0, 0, 0, 100, 255, 100, 0.5f * alpha, 8.0f, 40);
       }
     }
-    if (this.ticksExisted % 20 == 0) {
+    if (this.ticksExisted % 120 == 0) {
       List<EntityLivingBase> entities = world
           .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 15.5, posY - 15.5, posZ - 15.5, posX + 15.5, posY + 15.5, posZ + 15.5));
       for (EntityLivingBase e : entities) {
         if (e instanceof EntityPlayer) {
-          if (((EntityPlayer) e).getFoodStats().getFoodLevel() >= 18) {
-            e.heal(1.0f);
-          }
+          //if (((EntityPlayer) e).getFoodStats().getFoodLevel() >= 18) {
+          e.heal(1.0f);
+          //}
           if (world.isRemote) {
             for (float i = 0; i < 8; i++) {
               ParticleUtil
