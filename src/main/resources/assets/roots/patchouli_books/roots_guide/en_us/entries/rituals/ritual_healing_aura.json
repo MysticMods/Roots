@@ -7,11 +7,29 @@
   "pages": [
     {
       "type": "text",
-      "text": "Living creatures close to the ritual are rejuvenated. $(br2)This ritual requires 4 birch trees to be present."
+      "text": "Living creatures are slowly healed back to full health while in the proximity of this ritual.$(br2)This ritual requires the correct standing stones and a birch tree nearby to function properly."
     },
     {
       "type": "pyre_template",
       "ritual": "ritual_healing_aura"
+    },
+    {
+      "type": "multiblock",
+      "multiblock": {
+        "mapping": {
+          "0": "roots:bonfire",
+          "R": "roots:runestone",
+          "C": "roots:chiseled_runestone",
+          "L": "minecraft:leaves[variant=birch]",
+          "W": "minecraft:log[variant=birch]"
+        },
+        "pattern": [
+          ["       ","       ","       ","       ","       ","   L   ","       "],
+          ["   C   ","       ","       ","       ","  LLL  ","  LLL  ","  LLL  "],
+          ["   R   ","       ","       ","       ","       ","   W   ","       "],
+          ["   R   ","       ","       ","   0   ","       ","   W   ","       "]
+        ]
+      }
     }
   ]
 }
