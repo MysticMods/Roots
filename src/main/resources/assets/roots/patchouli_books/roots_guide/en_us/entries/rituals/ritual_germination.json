@@ -1,5 +1,6 @@
 {
   "name": "Germination",
+  "icon": "roots:ritual_germination",
   "category": "rituals",
   "advancement": "roots:spirit_herb",
   "pages": [
