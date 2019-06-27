@@ -1,6 +1,8 @@
 package epicsquid.roots.init;
 
+import com.google.common.collect.Lists;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
+import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.entity.EntityBeetle;
 import epicsquid.mysticalworld.entity.EntityDeer;
 import epicsquid.mysticalworld.entity.EntityFox;
@@ -30,6 +32,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreIngredient;
+import net.minecraft.block.BlockFlower.EnumFlowerType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -49,21 +52,7 @@ public class ModRecipes {
   private static Map<ResourceLocation, PacifistEntry> pacifistEntities = new HashMap<>();
   private static Map<Class<? extends Entity>, PacifistEntry> pacifistClasses = new HashMap<>();
   private static Map<ResourceLocation, BarkRecipe> barkRecipes = new HashMap<>();
-
-  /*
-  TODO: DON'T USE THESE >:0
-
-  private static ResourceLocation getRL(@Nonnull String s) {
-    return new ResourceLocation(Roots.MODID + ":" + s);
-  }
-
-  private static void registerShapeless(@Nonnull IForgeRegistry<IRecipe> registry, @Nonnull String name, @Nonnull ItemStack result, Object... ingredients) {
-    registry.register(new ShapelessOreRecipe(getRL(name), result, ingredients).setRegistryName(getRL(name)));
-  }
-
-  private static void registerShaped(@Nonnull IForgeRegistry<IRecipe> registry, @Nonnull String name, @Nonnull ItemStack result, Object... ingredients) {
-    registry.register(new ShapedOreRecipe(getRL(name), result, ingredients).setRegistryName(getRL(name)));
-  }*/
+  private static Map<ResourceLocation, FlowerRecipe> flowerRecipes = new HashMap<>();
 
   public static PacifistEntry addPacifistEntry(String name, Class<? extends Entity> clazz) {
     PacifistEntry entry = new PacifistEntry(clazz, name);
@@ -116,6 +105,44 @@ public class ModRecipes {
     addPacifistEntry("fox", EntityFox.class);
     addPacifistEntry("frog", EntityFrog.class);
   }
+
+  public static void addFlowerRecipe (String name, IBlockState state) {
+    ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
+    FlowerRecipe recipe = new FlowerRecipe(rl, state);
+    flowerRecipes.put(rl, recipe);
+  }
+
+  public static void addFlowerRecipe (String name, Block block, int meta) {
+    ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
+    FlowerRecipe recipe = new FlowerRecipe(rl, meta, block);
+    flowerRecipes.put(rl, recipe);
+  }
+
+  public static void removeFlowerRecipe (ResourceLocation name) {
+    flowerRecipes.remove(name);
+  }
+
+  @Nullable
+  public static FlowerRecipe getRandomFlowerRecipe () {
+    if (flowerRecipes.isEmpty()) return null;
+
+    return Lists.newArrayList(flowerRecipes.values()).get(Util.rand.nextInt(Math.max(1, flowerRecipes.size())));
+  }
+
+  public static void initFlowerRecipes () {
+    addFlowerRecipe("dandelion", Blocks.YELLOW_FLOWER.getStateFromMeta(EnumFlowerType.DANDELION.getMeta()));
+    addFlowerRecipe("poppy", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.POPPY.getMeta()));
+    addFlowerRecipe("blue_orchid", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.BLUE_ORCHID.getMeta()));
+    addFlowerRecipe("allium", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.ALLIUM.getMeta()));
+    addFlowerRecipe("houstonia", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.HOUSTONIA.getMeta()));
+    addFlowerRecipe("red_tulip", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.RED_TULIP.getMeta()));
+    addFlowerRecipe("orange_tulip", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.ORANGE_TULIP.getMeta()));
+    addFlowerRecipe("white_tulip", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.WHITE_TULIP.getMeta()));
+    addFlowerRecipe("pink_tulip", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.PINK_TULIP.getMeta()));
+    addFlowerRecipe("oxeye_daisy", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.OXEYE_DAISY.getMeta()));
+  }
+
+
 
   public static void addVanillaBarkRecipe (String name, BlockPlanks.EnumType type, Item item) {
     barkRecipes.put(new ResourceLocation(Roots.MODID, name), new BarkRecipe(type, item));
@@ -607,6 +634,7 @@ public class ModRecipes {
     initPacifistEntities();
     initVanillaBarkRecipes();
     initModdedBarkRecipes();
+    initFlowerRecipes();
 
     GameRegistry.addSmelting(ModItems.flour, new ItemStack(Items.BREAD), 0.125f);
     GameRegistry.addSmelting(epicsquid.mysticalworld.init.ModItems.iron_dust, new ItemStack(Items.IRON_INGOT), 0.125f);

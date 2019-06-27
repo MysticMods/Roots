@@ -1,9 +1,13 @@
 package epicsquid.roots.entity.ritual;
 
+import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.recipe.FlowerRecipe;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.RitualUtil;
+import net.minecraft.block.BlockFlower;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -50,22 +54,13 @@ public class EntityRitualFlowerGrowth extends EntityRitualBase {
   }
 
   private IBlockState getRandomFlower() {
-    int meta = rand.nextInt(9);
-    switch (meta) {
-      case 0:
-      case 1:
-      case 2:
-      case 3:
-      case 4:
-      case 5:
-      case 6:
-      case 7:
-      case 8:
-        return Blocks.RED_FLOWER.getStateFromMeta(meta);
-      case 9:
-        return Blocks.YELLOW_FLOWER.getStateFromMeta(meta - 9);
-    }
-    return Blocks.AIR.getDefaultState();
+    FlowerRecipe recipe = ModRecipes.getRandomFlowerRecipe();
+    if (recipe == null) return Blocks.YELLOW_FLOWER.getStateFromMeta(BlockFlower.EnumFlowerType.DANDELION.getMeta());
+
+    IBlockState state = recipe.getFlower();
+    if (state == null) return Blocks.AIR.getDefaultState();
+
+    return state;
   }
 
   @Override
