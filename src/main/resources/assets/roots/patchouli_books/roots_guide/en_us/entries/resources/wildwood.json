@@ -8,7 +8,7 @@
         "type": "spotlight",
         "item": "roots:wildwood_log",
         "link_recipe": true,
-        "text": "Wildwood trees are extinct in these lands, and all that remains of them are their tattered wildroots. $(l:rituals/ritual_wild_growth)Certain rituals, however$() can rejuvenate wildroot and cause trees to sprout forth."
+        "text": "Wildwood trees are extinct in these lands, and all that remains of them are their tattered wildroots, although $(l:rituals/ritual_wild_growth)certain rituals$() are able to rejuvenate these roots and sprout forth a single tree."
       },
       {
         "type": "spotlight",

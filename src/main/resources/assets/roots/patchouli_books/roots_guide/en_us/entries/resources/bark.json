@@ -5,7 +5,7 @@
     "pages": [
       {
         "type": "text",
-        "text": "A whole log contains far more energy than is needed for druidic rituals. The bark of a tree will be sufficient for most purposes, and is abudant in supply.$(br2)Breaking a log with a $(l:apparatus/knives)Knife$() will drop bark instead of the log."  
+        "text": "Much of the natural energy in wood comes from the bark, and a druid can strip away that bark by breaking a log with a $(l:apparatus/knives)knife$().$(br2)The amount of bark produced can be increased with the fortune enchantment."
       },
       {
         "type": "spotlight",

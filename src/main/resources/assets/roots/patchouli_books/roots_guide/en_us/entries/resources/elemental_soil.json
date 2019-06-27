@@ -9,7 +9,7 @@
       "type": "spotlight",
       "item": "roots:elemental_soil",
       "link_recipe": true,
-      "text": "Elementally attuned herbs are rather picky about what they will grow on, as fickle as the elements themselves. Elemental Soil is a special kind of soil that can be further refined into different forms, upon which a corresponding elemental plant may grow."
+      "text": "Elementally attuned herbs can be picky about where - as fickle as the elements themselves. Elemental soil itself increases the rate at which any plant grows, but it can also be imbued with an element to allow the corresponding plant to grow."
     },
     {
       "type": "fey_crafting_template",
@@ -19,25 +19,25 @@
       "type": "spotlight",
       "item": "roots:elemental_soil_fire",
       "link_recipe": true,
-      "text": "$(l:herbs/infernal_bulb)Infernal Bulbs$() can grow in this magmatic soil.$(br2)Created by dropping a piece of elemental soil into a pool of lava. (Such intense temperatures make this transmutation instantaneous)"
+      "text": "$(l:herbs/infernal_bulb)Infernal Bulbs$() grow on magmatic soil.$(br2)Obtained by dropping a piece of elemental soil into a pool of lava. The intense heats make this process instant."
     },
     {
       "type": "spotlight",
       "item": "roots:elemental_soil_water",
       "link_recipe": true,
-      "text": "$(l:herbs/dewgonia)Dewgonia$() can grow in this aquatic soil.$(br2)Created by dropping a piece of elemental soil into a pond of water. (This transmutation may need some time to finish properly)"
+      "text": "$(l:herbs/dewgonia)Dewgonia$() grow on aquatic soil.$(br2)Obtained by soaking elemental soil for a short period of time in water."
     },
     {
       "type": "spotlight",
       "item": "roots:elemental_soil_air",
       "link_recipe": true,
-      "text": "$(l:herbs/cloud_berry)Cloud Berries$() can grow in this caelic soil.$(br2)Created by dropping a piece of elemental soil on top of the loftiest of trees or the peaks of the highest mountains. (This transmutation may need some time to finish properly)"
+      "text": "$(l:herbs/cloud_berry)Cloud Berries$() grow on caelic, air-bound soil.$(br2)Obtained by exposing elemental soil to the airy heights and the open sky for a period of time."
     },
     {
       "type": "spotlight",
       "item": "roots:elemental_soil_earth",
       "link_recipe": true,
-      "text": "$(l:herbs/stalicripe)Stalicripe$() can grow in this terran soil.$(br2)Created by dropping a piece of elemental soil in an underground cave. (This transmutation may need some time to finish properly)"
+      "text": "$(l:herbs/stalicripe)Stalicripe$() grow on terran soil.$(br2)Obtained by exposing elemental soil to the dark, covered depths of underground caves and chasms."
     }
   ]
 }
