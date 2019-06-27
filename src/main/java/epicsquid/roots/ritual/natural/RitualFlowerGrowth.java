@@ -8,6 +8,7 @@ import epicsquid.roots.recipe.conditions.ConditionWorldTime;
 import epicsquid.roots.ritual.RitualBase;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockRedFlower;
+import net.minecraft.block.BlockYellowFlower;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -21,9 +22,9 @@ public class RitualFlowerGrowth extends RitualBase {
     {
         super(name, duration);
         addCondition(new ConditionItems(
-                new ItemStack(ModItems.cloud_berry),
+                new ItemStack(Blocks.YELLOW_FLOWER, 1, BlockYellowFlower.EnumFlowerType.DANDELION.getMeta()),
                 new ItemStack(ModItems.wildroot),
-                new ItemStack(ModItems.petals),
+                new ItemStack(ModItems.terra_moss),
                 new ItemStack(ModItems.petals),
                 new ItemStack(Blocks.RED_FLOWER, 1, BlockRedFlower.EnumFlowerType.POPPY.getMeta())
         ));
