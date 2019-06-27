@@ -81,6 +81,7 @@ public class EntityRitualGermination extends EntityRitualBase {
         }
         return false;
       });
+      if (positions.isEmpty()) return;
       if (!world.isRemote) {
         for (int i = 0; i < 2 + world.rand.nextInt(4); i++) {
           BlockPos pos = positions.get(world.rand.nextInt(positions.size()));
