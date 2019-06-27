@@ -2,6 +2,7 @@ package epicsquid.roots.entity.ritual;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
@@ -52,7 +53,7 @@ public class EntityRitualGermination extends EntityRitualBase {
         ParticleUtil.spawnParticleGlow(world, tx, ty, tz, 0, 0, 0, 100, 255, 100, 0.5f * alpha, 8.0f, 40);
       }
     }
-    if (this.ticksExisted % 5 == 0) {
+    if (this.ticksExisted % 40 == 0) {
       /*BlockPos pos = world.getTopSolidOrLiquidBlock(getPosition().add(rand.nextInt(19) - 9, 0, rand.nextInt(19) - 9));
       IBlockState state = world.getBlockState(pos);
       if (state.getBlock() instanceof BlockCrops) {
@@ -78,19 +79,19 @@ public class EntityRitualGermination extends EntityRitualBase {
           return state.getValue(BlockNetherWart.AGE) < 3;
         } else if (state.getBlock() instanceof BlockSapling) {
           return true;
+        } else if (state.getBlock() == ModBlocks.wildwood_sapling) {
+          return true;
         }
         return false;
       });
       if (positions.isEmpty()) return;
       if (!world.isRemote) {
-        for (int i = 0; i < 2 + world.rand.nextInt(4); i++) {
-          BlockPos pos = positions.get(world.rand.nextInt(positions.size()));
-          IBlockState state = world.getBlockState(pos);
-          for (int j = 0; j < 3; j++) {
-            state.getBlock().randomTick(world, pos, state, world.rand);
-          }
-          PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), this);
+        BlockPos pos = positions.get(world.rand.nextInt(positions.size()));
+        IBlockState state = world.getBlockState(pos);
+        for (int j = 0; j < 3; j++) {
+          state.getBlock().randomTick(world, pos, state, world.rand);
         }
+        PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), this);
       }
     }
   }
