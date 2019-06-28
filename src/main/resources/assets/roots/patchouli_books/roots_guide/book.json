@@ -10,5 +10,9 @@
 	"filler_texture": "roots:textures/gui/patchouli/book_filler.png",
 	"model": "roots:druid_handbook",
 	"version": 3,
-	"show_progress": false
+	"show_progress": false,
+	"macros": {
+		"$(info)": "$(thing)$(bold)$(t:Important Detail)[!]$()",
+		"$(warning)": "$(#f00)$(bold)$(t:Warning)[!]$()"
+	}
 }
