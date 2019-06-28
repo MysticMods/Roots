@@ -9,17 +9,21 @@
       "type": "spotlight",
       "item": "roots:wildewheet",
       "link_recipe": true,
-      "text": "A lesser-known variety of the more common wheat beloved by animals, but seemingly never eaten by them. Once obtained, it can be crafted into seeds which can be planted on normal farmland."
+      "text": "This lesser-known but hardy variety of wheat is adored by animals, although they are hesitant to eat it.$(br2)$(info) Wildewheet can be crafted into seeds, which can be planted on normal farmland."
     },
     {
       "type": "runic_shears_template",
       "recipe": "wildewheet",
       "name": "Wildewheet",
-      "text": "Use Runic Shears on a fully grown Wheat crop to obtain Wildewheet."
+      "text": "Use Runic Shears on a fully grown wheat crop to obtain your first wildewheet."
     },
     {
       "type": "crafting",
       "recipe": "roots:wildewheet_seed"
+    },
+    {
+      "type": "crafting",
+      "recipe": "roots:wildewheet_bread"
     }
   ]
 }

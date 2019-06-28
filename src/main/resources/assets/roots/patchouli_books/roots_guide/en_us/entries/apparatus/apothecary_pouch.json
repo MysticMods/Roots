@@ -8,7 +8,7 @@
       {
         "type": "spotlight",
         "item": "roots:apothecary_pouch",
-        "text": "A vastly improved component pouch, the apothecary pouch can hold many more items and herbs, storing the herbs in small glass vials to maintain their ease of access."
+        "text": "A vast improvement over the component pouch in capacity and usefulness: the pouch itself holds many more items.$(br2)Herbs are stored in small glass vials to keep them separate from each other, at the same time increasing the amount that can be stored."
       },
       {
         "type": "fey_crafting_template",

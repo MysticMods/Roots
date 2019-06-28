@@ -12,7 +12,7 @@
     },
     {
       "type": "text",
-      "text": "It is not possible to continuously gather fey leather, as the energies required vary per entity, and sometimes those entities are exhausted by the process.$(br2)Generally speaking, any creature that drops leather by default can be used to access fey leather."
+      "text": "$(info) It is not possible to continuously gather fey leather, as the energies required vary per entity, and sometimes those entities are exhausted by the process.$(br2)Generally speaking, any creature that drops leather by default can be used to access fey leather."
     },
     {
       "type": "entity",

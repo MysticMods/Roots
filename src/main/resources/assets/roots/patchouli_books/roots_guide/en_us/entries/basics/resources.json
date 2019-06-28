@@ -15,7 +15,7 @@
       {
         "type": "text",
         "title": "Renewables",
-        "text": "Almost every resource a druid has access to is a renewable one. Wildroot and almost every herb you discover can be planted and grown on farmland, although those herbs which touch the elemental plains require special support."
+        "text": "Almost every resource a druid has access to is a renewable one. Wildroot and almost every herb you discover $(info) can be planted and grown on farmland, although those herbs which touch the elemental plains require special support."
       },
       {
         "type": "text",

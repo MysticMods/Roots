@@ -7,7 +7,7 @@
     "pages": [
       {
         "type": "text",
-        "text": "Reinforced with wildwood, this quiver has the ability to augment normal arrows or even grow arrows from itself, at the cost of durability.$(br2)It can even consume arrows stuck into the ground nearby, although arrows may break in the process. It cannot consume arrows grown of itself."
+        "text": "Reinforced with wildwood, this quiver has the ability to grow arrows from itself when empty, at the cost of durability.$(br2)$(info) It can also consume arrows stuck into nearby ground, although they may break in the process. $(warning) It cannot consume arrows grown of itself."
       },
       {
         "type": "fey_crafting_template",

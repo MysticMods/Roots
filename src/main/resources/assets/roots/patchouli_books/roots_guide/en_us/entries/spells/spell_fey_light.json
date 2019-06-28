@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "This simple spell allows the creation of a permanent source of light on the nearest surface in the direction you're looking.$(br2)These lights are easily broken."
+      "text": "This simple spell allows the creation of a permanent source of light on the nearest surface in the direction you're looking.$(br2)$(info) These lights are easily broken by hand."
     },
     {
       "type": "spell_template",

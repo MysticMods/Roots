@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Summons forth a powerful jet of flame while channeled, dealing fire damage to and setting on fire any creature which it encounters."
+      "text": "Summons forth a powerful jet of flame while channeled, $(warning) dealing fire damage to and setting on fire any creature which it encounters."
     },
     {
       "type": "spell_template",

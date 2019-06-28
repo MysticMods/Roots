@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Invokes the intensity of the monsoon, causing continuous rain that cannot be disabled for the duration of the ritual. Likewise, all entities near the ritual will be extinguished if set on fire."
+      "text": "Invokes the intensity of the monsoon, causing continuous rain that $(warning) cannot be disabled for the duration of the ritual, unless the ritual itself were doused by a $(l:basics/bucket_of_water)bucket of water$().$(br2)Likewise, all entities near the ritual will be extinguished if set on fire."
     },
     {
       "type": "pyre_template",
