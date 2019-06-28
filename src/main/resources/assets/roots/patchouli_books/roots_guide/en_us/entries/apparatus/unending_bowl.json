@@ -2,7 +2,7 @@
   "name": "Unending Bowl",
   "icon": "roots:unending_bowl",
   "category": "apparatus",
-  "advancement": "roots:runestone",
+  "advancement": "roots:dewgonia",
   "pages": [
     {
       "type": "spotlight",
