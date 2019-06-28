@@ -9,7 +9,7 @@
       "type": "spotlight",
       "item": "roots:pereskia",
       "link_recipe": true,
-      "text": "Once called \"feyblossom\" due to the belief that they originated in the gardens of fairies, the flower of this plant is magically potent.$(br2)Pereskia bulbs can be planted in normal farmland."
+      "text": "Once called \"feyblossom\" due to the belief that they originated in the gardens of fairies, the flower of this plant is magically potent.$(br2)$(info) Pereskia bulbs can be planted in normal farmland.$(br2)$(info) This herb is very precious and used in a number of crafting recipes."
     },
     {
       "type": "ritual_crafting_template",

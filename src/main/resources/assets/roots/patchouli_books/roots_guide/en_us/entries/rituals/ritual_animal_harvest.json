@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Animals in the vicinity of the ritual will willingly give up part of their physical essence, although suffering no harm to themselves in the process. Affected animals will glow briefly.$(br2)This ritual requires the correct standing stones."
+      "text": "Animals in the vicinity of the ritual will willingly give up part of their physical essence, although suffering no harm to themselves in the process. $(info) Affected animals will glow briefly.$(br2)$(info) This ritual requires the correct standing stones."
     },
     {
       "type": "pyre_template",

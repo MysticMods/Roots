@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "It is possible to prevent the unwanted trampling of herbs by crafting the Sure-Footed Stone. All creatures treading on your precious crops will instead find themselves sure-footed, with even the most clumsy being guided by nature's hand to prevent damage."
+      "text": "It is possible to prevent the unwanted trampling of herbs by crafting the Sure-Footed Stone. All creatures treading through precious crops will be surefooted, with even the most clumsy being guided by nature's hand.$(br2)$(info) In addition, it will water nearby farmland."
     },
     {
       "type": "crafting",

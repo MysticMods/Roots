@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Living creatures are slowly healed back to full health while in the proximity of this ritual.$(br2)This ritual requires the correct standing stones and a birch tree nearby to function properly."
+      "text": "Living creatures are healed back to full health while in the proximity of this short ritual.$(br2)$(info) This ritual requires the correct standing stones and a birch tree nearby to function properly."
     },
     {
       "type": "pyre_template",

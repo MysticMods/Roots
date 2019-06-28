@@ -9,13 +9,13 @@
       {
         "type": "spotlight",
         "item": "roots:component_pouch",
-        "text": "All spells, however, require a special, easy-to-access pouch to be cast from. The Component Pouch is the most basic form of this, with a slots to carry your herbs and to carry your items."
+        "text": "$(warning) All spells, however, require a special, easy-to-access pouch to be cast from. The Component Pouch is the most basic form of this, with slots for your herbs and a small amount of items."
       },
       {
         "type":"crafting",
         "recipe": "roots:component_pouch",
         "title": "Component Pouch",
-        "text": "The larger, left side of the pouch can contain any items of your choosing, while the smaller right compartment is used to carry your herbs, always ready for casting."
+        "text": "The larger, left side of the pouch can contain any items of your choosing, while the right compartment is used to carry your herbs, ready for casting."
       }
     ]
   }

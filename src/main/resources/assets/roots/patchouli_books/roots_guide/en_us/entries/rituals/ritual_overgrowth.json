@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Natural energies spring forth from the pyre, bringing life to otherwise barren stone.$(br2)This causes moss to grow on nearby cobblestone, so long as it is touching water."
+      "text": "Natural energies spring forth from the pyre, bringing life to otherwise barren stone.$(br2)$(info) This causes moss to grow on nearby cobblestone, so long as that cobblestone touches water.$(br2)$(warning) Water above or below is not sufficient for this ritual, it must be adjacent."
     },
     {
       "type": "pyre_template",

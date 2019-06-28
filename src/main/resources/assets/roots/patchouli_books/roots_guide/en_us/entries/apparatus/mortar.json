@@ -8,7 +8,7 @@
     "pages": [
       {
         "type": "text",
-        "text": "Placed solidly in the world, up to five reagents can be added to it. Once they have been collected, applying the pestle by right-clicking will craft the desired output.$(br2)Recipes for the mortar & pestle can be found throughout the book. In addition, the pestle itself can be stored in an empty mortar."
+        "text": "Placed in the world, up to five reagents can be added. Once collected, $(info) apply the pestle by right-clicking to craft the desired output.$(br2)Recipes using the mortar & pestle can be found throughout this book.$(br2)$(info) In addition, the pestle itself can be stored in an empty mortar."
       },
       {
         "type":"crafting",

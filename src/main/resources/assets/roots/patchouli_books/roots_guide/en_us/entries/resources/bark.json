@@ -5,7 +5,7 @@
     "pages": [
       {
         "type": "text",
-        "text": "Much of the natural energy in wood comes from the bark, and a druid can strip away that bark by breaking a log with a $(l:apparatus/knives)knife$().$(br2)The amount of bark produced can be increased with the fortune enchantment."
+        "text": "Much of the natural energy in wood comes from the bark, and a druid can strip away that bark by breaking a log with a $(l:apparatus/knives)knife$().$(br2)$(info) The amount of bark produced can be increased with the fortune enchantment."
       },
       {
         "type": "spotlight",

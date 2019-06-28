@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Some natural delights are harder to find than others. Thankfully, with the energies of the pyre, you can convert more mundane objects into more precious items.$(br2)This ritual requires standing stones."
+      "text": "Some natural delights are harder to find than others. Thankfully, with the energies of the pyre, you can convert more mundane objects into more precious items.$(br2)$(info) This ritual requires standing stones."
     },
     {
       "type": "pyre_template",
@@ -51,13 +51,13 @@
       "type": "spotlight",
       "item": "minecraft:melon_block",
       "link_recipe": true,
-      "text": "Pumpkins planted above still or flowing water will transform into melons."
+      "text": "Pumpkins planted $(info) above still or flowing water will transform into melons."
     },
     {
       "type": "spotlight",
       "item": "minecraft:cactus",
       "link_recipe": true,
-      "text": "Pumpkins planted on sand will turn into cactuses."
+      "text": "Pumpkins planted $(info) on sand will turn into cactuses."
     }
   ]
 }

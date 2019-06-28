@@ -16,18 +16,18 @@
       "type": "crafting",
       "recipe": "roots:imbuer",
       "title": "Imbuer",
-      "text": "Staff and spell dust can be inserted into the imbuer to begin the process. It will take a short amount of time before the upgraded staff is returned, and during this time further reagents can be applied. Other uses for this device may be uncovered in the future."
+      "text": "Staff and spell dust can be inserted into the imbuer to begin the process. It will take a short amount of time before the upgraded staff is returned. $(info) Spell dust can be augmented with other reagents before it is inserted into a staff."
     },
     {
       "type": "crafting",
       "recipe": "roots:staff",
       "title": "Staff",
-      "text": "In addition to the staff and spell dust, material components in the form of herbs must be provided from a $(l:apparatus/component_pouch)Component Pouch$() or $(l:apparatus/apothecary_pouch)Apothecary Pouch$()."
+      "text": "In addition to the staff and spell dust, material components in the form of herbs $(warning) must be provided from a $(l:apparatus/component_pouch)Component Pouch$() or $(l:apparatus/apothecary_pouch)Apothecary Pouch$()."
     },
     {
       "type": "text",
       "title": "Manipulating the Staff",
-      "text": "The staff is capable of holding up to 5 spells. The currently selected spell is always displayed when the druid hovers over. Holding shift will allow show all imbued spells.$(br2)Sneaking while right-clicking will cycle through to the next available spells. Additional keybinds exist should you need them."
+      "text": "The staff is capable of holding up to 5 spells. The currently selected spell is always displayed when the druid hovers over it. Holding shift will allow show all imbued spells.$(br2)Sneaking while right-clicking will cycle through to the next available spells. Additional keybinds exist should you need them."
     },
     {
       "type": "text",
@@ -37,7 +37,7 @@
     {
       "type": "text",
       "title": "Removing Spells",
-      "text": "As the power of the staff is limited and can only maintain 5 spells, it may become necessary for you to remove a spell. Simply select the slot you wish to void, and imbue the staff with $(l:resources/runic_dust)Runic Dust$(). The returned staff will now be without that spell."
+      "text": "As the power of the staff is limited and can only maintain 5 spells, it may become necessary for you to remove a spell. Simply select the slot you wish to void, and $(info) imbue the staff with $(l:resources/runic_dust)Runic Dust$(). The returned staff will now be without that spell."
     },
     {
       "type": "empty"

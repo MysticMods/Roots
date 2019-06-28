@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "roots:terra_moss",
       "link_recipe": true,
-      "text": "Terra Moss is one of the most commonly available magical herbs, it is simply that few recognise its potential. You can grow it by obtaining Terra Moss Spores from broken tall grass, and then imbue it into cobblestone."
+      "text": "Terra Moss is one of the most commonly available magical herbs, it is simply that few recognise its potential. You can grow it by obtaining Terra Moss Spores from broken tall grass, $(info) and then imbue it into cobblestone."
     },
     {
       "type": "spotlight",
