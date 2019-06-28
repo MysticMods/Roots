@@ -4,6 +4,7 @@ import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualHealingAura;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
+import epicsquid.roots.recipe.conditions.ConditionStandingStones;
 import epicsquid.roots.recipe.conditions.ConditionTrees;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.init.Blocks;
@@ -23,7 +24,8 @@ public class RitualHealingAura extends RitualBase {
             new ItemStack(ModItems.wildroot), 
             new ItemStack(Blocks.SAPLING, 1, 2)
     ));
-    addCondition(new ConditionTrees(BlockPlanks.EnumType.BIRCH, 4));
+    addCondition(new ConditionStandingStones(3, 1));
+    addCondition(new ConditionTrees(BlockPlanks.EnumType.BIRCH, 1));
     setIcon(ModItems.ritual_healing_aura);
     setColor(TextFormatting.GOLD);
   }

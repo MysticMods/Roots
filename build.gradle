@@ -55,7 +55,7 @@ dependencies {
     compile("com.blamejared:MTLib:${mt_lib_version}") {
         exclude group: 'mezz.jei'
     }
-    compile("vazkii.botania:Botania:${botania_version}") {
+    compileOnly("vazkii.botania:Botania:${botania_version}") {
         exclude group: 'mezz.jei'
     }
 
