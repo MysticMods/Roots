@@ -19,7 +19,7 @@ public class RitualHealingAura extends RitualBase {
     super(name, duration);
     addCondition(new ConditionItems(
             new ItemStack(ModItems.terra_moss),
-            new ItemStack(ModItems.bark_oak), 
+            new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
             new ItemStack(ModItems.bark_birch),
             new ItemStack(ModItems.wildroot), 
             new ItemStack(Blocks.SAPLING, 1, 2)

@@ -44,7 +44,7 @@ public class EntityRitualHealingAura extends EntityRitualBase {
         ParticleUtil.spawnParticleGlow(world, tx, ty, tz, 0, 0, 0, 100, 255, 100, 0.5f * alpha, 8.0f, 40);
       }
     }
-    if (this.ticksExisted % 120 == 0) {
+    if (this.ticksExisted % 60 == 0) {
       List<EntityLivingBase> entities = world
           .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 15.5, posY - 15.5, posZ - 15.5, posX + 15.5, posY + 15.5, posZ + 15.5));
       for (EntityLivingBase e : entities) {

@@ -53,7 +53,7 @@ public class EntityRitualGermination extends EntityRitualBase {
         ParticleUtil.spawnParticleGlow(world, tx, ty, tz, 0, 0, 0, 100, 255, 100, 0.5f * alpha, 8.0f, 40);
       }
     }
-    if (this.ticksExisted % 40 == 0) {
+    if (this.ticksExisted % 120 == 0) {
       /*BlockPos pos = world.getTopSolidOrLiquidBlock(getPosition().add(rand.nextInt(19) - 9, 0, rand.nextInt(19) - 9));
       IBlockState state = world.getBlockState(pos);
       if (state.getBlock() instanceof BlockCrops) {
