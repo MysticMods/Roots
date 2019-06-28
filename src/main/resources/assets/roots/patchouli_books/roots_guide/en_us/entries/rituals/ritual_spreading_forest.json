@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "The forest is one of the most sacred places to be, and this ritual allows forests to spread, although it cannot create them directly. Existing trees will shed saplings, and those saplings will then be grown.$(br2)$(warning) A sapling or fully grown tree nearby is required to start the process."
+      "text": "The forest is one of the most sacred places to be, and this ritual allows forests to spread. Existing trees will shed saplings, and those saplings will be planted nearby and then grown.$(br2)$(warning) A sapling or fully grown tree nearby is required to start the process."
     },
     {
       "type": "pyre_template",
