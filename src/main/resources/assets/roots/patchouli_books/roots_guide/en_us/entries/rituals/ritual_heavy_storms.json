@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Invokes a torrent of rain from the heavens.$(br2)Creatures within the ritual's radius are not affected by fire."
+      "text": "Invokes the intensity of the monsoon, causing continuous rain that cannot be disabled for the duration of the ritual. Likewise, all entities near the ritual will be extinguished if set on fire."
     },
     {
       "type": "pyre_template",

@@ -1,8 +1,7 @@
 package epicsquid.roots.entity.ritual;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.google.common.collect.Lists;
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.block.Block;
@@ -10,6 +9,8 @@ import net.minecraft.block.BlockGrass;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -17,8 +18,11 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.*;
+
 @SuppressWarnings("deprecation")
 public class EntityRitualSpreadingForest extends EntityRitualBase {
+  private Set<Block> saplingBlocks = new HashSet<>();
 
   protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualSpreadingForest.class, DataSerializers.VARINT);
 
@@ -48,68 +52,42 @@ public class EntityRitualSpreadingForest extends EntityRitualBase {
           float ty = (float) posY;
           float tz = (float) posZ + 2.0f * (float) Math.cos(Math.toRadians(i));
           for (int j = 0; j < 4; j++) {
-            ParticleUtil.spawnParticleStar(world, tx, ty, tz, 0, rand.nextFloat() * 0.125f, 0, 100, 255, 50, 0.5f * alpha, 5.0f + rand.nextFloat() * 5.0f, 40);
+            ParticleUtil.spawnParticleStar(world, tx, ty + 0.2f, tz, 0, rand.nextFloat() * 0.125f, 0, 100, 255, 50, 0.5f * alpha, 5.0f + rand.nextFloat() * 5.0f, 90);
           }
         }
       }
     }
-    if (this.ticksExisted % 10 == 0) {
-      BlockPos pos = world.getTopSolidOrLiquidBlock(getPosition().add(rand.nextInt(97) - 48, 0, rand.nextInt(97) - 48)).down();
-      IBlockState state = world.getBlockState(pos);
-      if (state.getBlock() instanceof BlockGrass) {
-        if (rand.nextInt(5) == 0) {
-          ((BlockGrass) state.getBlock()).grow(world, rand, pos, state);
-          if (world.isRemote) {
-            for (int i = 0; i < 360; i += rand.nextFloat() * 45.0f) {
-              float tx = pos.getX() + 0.5f + (rand.nextFloat() - 0.5f) * 0.25f;
-              float ty = pos.getY() + 1.5f + (rand.nextFloat() - 0.5f) * 0.25f;
-              float tz = pos.getZ() + 0.5f + (rand.nextFloat() - 0.5f) * 0.25f;
-              float vx = 0.125f * (float) Math.sin(Math.toRadians(i));
-              float vz = 0.125f * (float) Math.cos(Math.toRadians(i));
-              ParticleUtil.spawnParticleSpark(world, tx, ty, tz, vx, rand.nextFloat() * 0.0625f + 0.0625f, vz, 150, 255, 100, 0.5f * alpha,
-                  6.0f + rand.nextFloat() * 6.0f, 40);
+    if (saplingBlocks.isEmpty()) {
+      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), 25, 20, 25, (BlockPos pos) -> world.getBlockState(pos).getBlock() instanceof BlockLeaves);
+      if (!positions.isEmpty()) {
+        for (BlockPos pos : positions) {
+          IBlockState state = world.getBlockState(pos);
+          Block block = state.getBlock();
+          List<ItemStack> drops = block.getDrops(world, pos, state, 0);
+          for (ItemStack s : drops) {
+            if (s.getItem() instanceof ItemBlock && ((ItemBlock) s.getItem()).getBlock() instanceof BlockSapling) {
+              saplingBlocks.add(((ItemBlock) s.getItem()).getBlock());
             }
           }
         }
-        if (rand.nextInt(1) == 0) {
-          List<IBlockState> saplingTypes = new ArrayList<IBlockState>();
-          for (int i = -8; i < 9; i++) {
-            for (int j = 1; j < 7; j++) {
-              for (int k = -8; k < 9; k++) {
-                if (Math.abs(i) >= 4 && Math.abs(k) >= 4) {
-                  BlockPos p = pos.add(i, j + 1, k);
-                  IBlockState state2 = world.getBlockState(p);
-                  if (state2.getBlock() instanceof BlockLeaves) {
-                    List<ItemStack> items = state2.getBlock().getDrops(world, p, state2, 0);
-                    items.addAll(state2.getBlock().getDrops(world, p, state2, 0));
-                    for (ItemStack s : items) {
-                      if (Block.getBlockFromItem(s.getItem()) instanceof BlockSapling) {
-                        Block b = Block.getBlockFromItem(s.getItem());
-                        saplingTypes.add(b.getStateFromMeta(s.getItemDamage()));
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-          if (saplingTypes.size() > 0 && !world.isRemote) {
-            IBlockState saplingState = saplingTypes.get(rand.nextInt(saplingTypes.size()));
-            boolean canGenerate = true;
-            for (int i = -2; i < 3; i++) {
-              for (int j = 1; j < 7; j++) {
-                for (int k = -2; k < 3; k++) {
-                  if (!world.isAirBlock(pos.add(i, j + 1, k))) {
-                    canGenerate = false;
-                  }
-                }
-              }
-            }
-            if (canGenerate) {
-              ((BlockSapling) saplingState.getBlock()).generateTree(world, pos.up(), saplingState, rand);
-            }
-          }
-        }
+      }
+    }
+
+    if (ticksExisted % 140 == 0 && !saplingBlocks.isEmpty()) {
+      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), 25, 20, 25, (BlockPos pos) -> world.isAirBlock(pos.up()) && world.getBlockState(pos).getBlock() == Blocks.GRASS);
+      if (!positions.isEmpty()) {
+        Block sapling = Lists.newArrayList(saplingBlocks).get(rand.nextInt(saplingBlocks.size()));
+        IBlockState state = sapling.getDefaultState();
+        BlockPos position = positions.get(rand.nextInt(positions.size()));
+        world.setBlockState(position.up(), state);
+      }
+    }
+    if (ticksExisted % 80 == 0) {
+      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), 25, 20, 25, (BlockPos pos) -> world.getBlockState(pos).getBlock() instanceof BlockSapling);
+      if (!positions.isEmpty()) {
+        BlockPos pos = positions.get(rand.nextInt(positions.size()));
+        IBlockState state = world.getBlockState(pos);
+        ((BlockSapling)state.getBlock()).grow(world, pos, state, rand);
       }
     }
   }
