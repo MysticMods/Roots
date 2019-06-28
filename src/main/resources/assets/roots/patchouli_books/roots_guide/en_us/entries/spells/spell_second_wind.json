@@ -2,7 +2,7 @@
   "name": "Second Wind",
   "icon": "roots:spell_dust",
   "category": "spells",
-  "advancement": "roots:staff",
+  "advancement": "roots:dewgonia",
   
   "pages": [
     {

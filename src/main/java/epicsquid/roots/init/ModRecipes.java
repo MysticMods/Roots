@@ -848,28 +848,28 @@ public class ModRecipes {
         new ItemStack(Blocks.VINE),
         new ItemStack(ModItems.bark_birch),
         new OreIngredient("gemAmethyst"),
-        new ItemStack(ModItems.bark_birch)));
+        new ItemStack(Items.IRON_HELMET)));
 
     addCraftingRecipe("sylvan_chestplate", new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_chestplate), 1).addIngredients(
         new ItemStack(ModItems.fey_leather),
         new ItemStack(Blocks.VINE),
         new ItemStack(ModItems.bark_birch),
         new OreIngredient("gemAmethyst"),
-        new ItemStack(ModItems.bark_birch)));
+        new ItemStack(Items.IRON_CHESTPLATE)));
 
     addCraftingRecipe("sylvan_leggings", new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_leggings), 1).addIngredients(
         new ItemStack(ModItems.fey_leather),
         new ItemStack(Blocks.VINE),
         new ItemStack(ModItems.bark_birch),
         new OreIngredient("gemAmethyst"),
-        new ItemStack(ModItems.bark_birch)));
+        new ItemStack(Items.IRON_LEGGINGS)));
 
     addCraftingRecipe("sylvan_boots", new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_boots), 1).addIngredients(
         new ItemStack(ModItems.fey_leather),
         new ItemStack(Blocks.VINE),
         new ItemStack(ModItems.bark_birch),
         new OreIngredient("gemAmethyst"),
-        new ItemStack(ModItems.bark_birch)));
+        new ItemStack(Items.IRON_BOOTS)));
   }
 
   public static void afterHerbRegisterInit() {

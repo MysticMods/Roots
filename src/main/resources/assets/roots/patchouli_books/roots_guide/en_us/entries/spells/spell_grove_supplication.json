@@ -3,6 +3,7 @@
     "icon": "roots:spell_dust",
     "category": "spells",
     "advancement": "roots:root",
+    "priority": true,
     "pages": [
       {
         "type": "text",

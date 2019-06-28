@@ -125,13 +125,14 @@ public class TileEntityFeyCrafter extends TileBase {
     List<ItemStack> result = new ArrayList<>();
     ItemStack current = ItemStack.EMPTY;
     while (recipe != null) {
-
+      boolean singleStack = false;
       for (int i = 0; i < 5; i++) {
         inventory.extractItem(i, 1, false);
       }
 
       if (current.isEmpty()) {
         current = recipe.getResult().copy();
+        if (current.getMaxStackSize() == 1) singleStack = true;
       } else {
         // TODO: If this ever becomes a problem in the future I will laugh
         // TODO: But technically if you run out of ingredients for one recipe and then shift down to another, the result could change
@@ -144,6 +145,7 @@ public class TileEntityFeyCrafter extends TileBase {
       }
 
       recipe = getRecipe();
+      if (singleStack) break;
     }
 
     if (!current.isEmpty()) {
