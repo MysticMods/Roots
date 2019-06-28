@@ -43,7 +43,7 @@ public class RitualRegistry {
 
   public static void init() {
     if (!RitualConfig.disableRitualCategory.disableHealingAura)
-      addRitual(ritual_life = new RitualHealingAura("ritual_healing_aura", 1200));
+      addRitual(ritual_life = new RitualHealingAura("ritual_healing_aura", 800));
     if (!RitualConfig.disableRitualCategory.disableHeavyStorms)
       addRitual(ritual_storm = new RitualHeavyStorms("ritual_heavy_storms", 2400));
     if (!RitualConfig.disableRitualCategory.disableDivineProtection)
@@ -57,7 +57,7 @@ public class RitualRegistry {
     if (!RitualConfig.disableRitualCategory.disableWardingProtection)
       addRitual(ritual_warden = new RitualWardingProtection("ritual_warding_protection", 1200));
     if (!RitualConfig.disableRitualCategory.disableNaturalAura)
-      addRitual(ritual_natural_aura = new RitualGermination("ritual_germination", 2400));
+      addRitual(ritual_natural_aura = new RitualGermination("ritual_germination", 6400));
     if (!RitualConfig.disableRitualCategory.disablePurity)
       addRitual(ritual_purity = new RitualPurity("ritual_purity", 1200));
     if (!RitualConfig.disableRitualCategory.disableFrostLands)
