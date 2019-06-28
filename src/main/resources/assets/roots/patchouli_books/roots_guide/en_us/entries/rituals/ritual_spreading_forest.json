@@ -1,12 +1,12 @@
 {
-  "name": "Natural Growth",
+  "name": "Spreading Forest",
   "icon": "roots:ritual_spreading_forest",
   "category": "rituals",
   "advancement": "roots:spirit_herb",
   "pages": [
     {
       "type": "text",
-      "text": "Existing trees near the ritual will propagate themselves, growing out into forests, while barren earth will easily grow to support grass and flowers."
+      "text": "The forest is one of the most sacred places to be, and this ritual allows forests to spread, although it cannot create them directly. Existing trees will shed saplings, and those saplings will then be grown.$(br2)$(warning) A sapling or fully grown tree nearby is required to start the process."
     },
     {
       "type": "pyre_template",
