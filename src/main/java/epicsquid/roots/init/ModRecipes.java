@@ -531,6 +531,18 @@ public class ModRecipes {
     return null;
   }
 
+  public static void addFeyCraftingRecipe (ResourceLocation name, FeyCraftingRecipe recipe) {
+    assert !feyCraftingRecipes.containsKey(name);
+
+    feyCraftingRecipes.put(name, recipe);
+  }
+
+  public static void addPyreCraftingRecipe (ResourceLocation name, PyreCraftingRecipe recipe) {
+    assert !pyreCraftingRecipes.containsKey(name.getPath());
+
+    pyreCraftingRecipes.put(name.getPath(), recipe);
+  }
+
   public static Map<ResourceLocation, FeyCraftingRecipe> getFeyCraftingRecipes() {
     return feyCraftingRecipes;
   }
@@ -555,6 +567,14 @@ public class ModRecipes {
 
   public static PyreCraftingRecipe getCraftingRecipe(String recipeName) {
     return pyreCraftingRecipes.get(recipeName);
+  }
+
+  public static void removePyreCraftingRecipe (ResourceLocation name) {
+    pyreCraftingRecipes.remove(name.getPath());
+  }
+
+  public static void removeFeyCraftingRecipe (ResourceLocation name) {
+    feyCraftingRecipes.remove(name);
   }
 
   private static void addCraftingRecipe(String recipeName, PyreCraftingRecipe pyreCraftingRecipe) {
