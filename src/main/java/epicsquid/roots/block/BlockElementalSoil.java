@@ -1,18 +1,21 @@
 package epicsquid.roots.block;
 
+import java.util.Random;
+
+import javax.annotation.Nonnull;
+
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.roots.api.CustomPlantType;
 import epicsquid.roots.item.itemblock.ItemBlockElementalSoil;
-import epicsquid.roots.network.fx.ElementalSoilTransformFX;
-import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.util.EnumElementalSoilType;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -24,30 +27,66 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
-import java.util.Random;
-
 public class BlockElementalSoil extends BlockBase {
-  private final @Nonnull
-  Item itemBlock;
+  public static final PropertyInteger waterSpeed = PropertyInteger.create("water_speed", 0, 3);
+  public static final PropertyInteger airRarity = PropertyInteger.create("air_rarity", 0, 3);
+  public static final PropertyInteger earthFertility = PropertyInteger.create("earth_fertility", 0, 3);
+  public static final PropertyInteger fireCookingMultiplier = PropertyInteger.create("fire_cooking_multiplier", 0, 3);
+
+  private final @Nonnull Item itemBlock;
   private final EnumElementalSoilType soilType;
 
   public BlockElementalSoil(@Nonnull Material mat, @Nonnull SoundType type, @Nonnull String name, @Nonnull EnumElementalSoilType soilType) {
     super(mat, type, 0.8f, name);
     this.soilType = soilType;
     this.itemBlock = new ItemBlockElementalSoil(this).setRegistryName(LibRegistry.getActiveModid(), name);
+
+    PropertyInteger property = this.soilType == EnumElementalSoilType.WATER ?
+        waterSpeed :
+        this.soilType == EnumElementalSoilType.EARTH ? earthFertility : this.soilType == EnumElementalSoilType.AIR ? airRarity : fireCookingMultiplier;
+
+    this.setDefaultState(this.blockState.getBaseState().withProperty(property, 0));
+  }
+
+  @Override
+  @Nonnull
+  public IBlockState getStateFromMeta(int meta) {
+    switch (soilType) {
+    case AIR:
+      return getDefaultState().withProperty(airRarity, meta);
+    case FIRE:
+      return getDefaultState().withProperty(fireCookingMultiplier, meta);
+    case EARTH:
+      return getDefaultState().withProperty(earthFertility, meta);
+    case WATER:
+      return getDefaultState().withProperty(waterSpeed, meta);
+    }
+    return super.getStateFromMeta(meta);
+  }
+
+  @Override
+  protected BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, airRarity, fireCookingMultiplier, earthFertility, waterSpeed);
+  }
+
+  @Override
+  public int getMetaFromState(IBlockState state) {
+    PropertyInteger property = this.soilType == EnumElementalSoilType.WATER ?
+        waterSpeed :
+        this.soilType == EnumElementalSoilType.EARTH ? earthFertility : this.soilType == EnumElementalSoilType.AIR ? airRarity : fireCookingMultiplier;
+    return state.getValue(property);
   }
 
   @Override
   public boolean canSustainPlant(@Nonnull IBlockState state, @Nonnull IBlockAccess world, BlockPos pos, @Nonnull EnumFacing direction, IPlantable plantable) {
     EnumPlantType plant = plantable.getPlantType(world, pos.offset(direction));
     switch (plant) {
-      case Nether:
-      case Cave:
-      case Crop:
-      case Desert:
-      case Plains:
-        return true;
+    case Nether:
+    case Cave:
+    case Crop:
+    case Desert:
+    case Plains:
+      return true;
     }
     return plant == CustomPlantType.ELEMENT_FIRE && soilType == EnumElementalSoilType.FIRE
         || plant == CustomPlantType.ELEMENT_AIR && soilType == EnumElementalSoilType.AIR
@@ -59,11 +98,13 @@ public class BlockElementalSoil extends BlockBase {
   public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
     super.updateTick(world, pos, state, rand);
 
-    if (world.isAirBlock(pos.up())) return;
+    if (world.isAirBlock(pos.up()))
+      return;
 
     IBlockState upState = world.getBlockState(pos.up());
     Block upBlock = upState.getBlock();
-    if (!(upBlock instanceof IGrowable)) return;
+    if (!(upBlock instanceof IGrowable))
+      return;
 
     // TODO: Who knows if this value is any good
     if (rand.nextInt(5) == 0) {
@@ -122,6 +163,11 @@ public class BlockElementalSoil extends BlockBase {
   @Override
   public Item getItemBlock() {
     return itemBlock;
+  }
+
+  @Override
+  public boolean isFertile(@Nonnull World world, @Nonnull BlockPos pos) {
+    return true;
   }
 }
 
