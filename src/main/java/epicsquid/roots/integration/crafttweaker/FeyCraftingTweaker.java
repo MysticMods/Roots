@@ -3,7 +3,6 @@ package epicsquid.roots.integration.crafttweaker;
 import com.blamejared.mtlib.helpers.InputHelper;
 import com.blamejared.mtlib.helpers.LogHelper;
 import com.blamejared.mtlib.utils.BaseAction;
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
@@ -27,14 +26,14 @@ import java.util.stream.Stream;
 public class FeyCraftingTweaker {
 
   @ZenMethod
-  public static void addRecipe(String name, IItemStack output, IIngredient[] inputs) throws InvalidArgumentException {
+  public static void addRecipe(String name, IItemStack output, IIngredient[] inputs) throws IllegalArgumentException {
     addRecipe(name, output, inputs, 0);
   }
 
   @ZenMethod
-  public static void addRecipe(String name, IItemStack output, IIngredient[] inputs, int xp) throws InvalidArgumentException {
+  public static void addRecipe(String name, IItemStack output, IIngredient[] inputs, int xp) throws IllegalArgumentException {
     if (inputs.length != 5) {
-      throw new InvalidArgumentException(new String[]{"Fey Crafting Ritual must have 5 items: " + name});
+      throw new IllegalArgumentException("Fey Crafting Ritual must have 5 items: " + name);
     }
     CraftTweaker.LATE_ACTIONS.add(new Add(name, CraftTweakerMC.getItemStack(output), Stream.of(inputs).map(CraftTweakerMC::getIngredient).toArray(Ingredient[]::new), xp));
   }
