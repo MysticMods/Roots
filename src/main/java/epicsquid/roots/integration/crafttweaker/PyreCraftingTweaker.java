@@ -3,10 +3,6 @@ package epicsquid.roots.integration.crafttweaker;
 import com.blamejared.mtlib.helpers.InputHelper;
 import com.blamejared.mtlib.helpers.LogHelper;
 import com.blamejared.mtlib.utils.BaseAction;
-import com.blamejared.mtlib.utils.BaseMapAddition;
-import com.blamejared.mtlib.utils.BaseMapRemoval;
-import com.google.common.collect.Lists;
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
@@ -19,15 +15,10 @@ import epicsquid.roots.recipe.PyreCraftingRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
-import scala.collection.script.Remove;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @ZenRegister
@@ -35,14 +26,14 @@ import java.util.stream.Stream;
 public class PyreCraftingTweaker {
 
   @ZenMethod
-  public static void addRecipe(String name, IItemStack output, IIngredient[] inputs) throws InvalidArgumentException {
+  public static void addRecipe(String name, IItemStack output, IIngredient[] inputs) throws IllegalArgumentException {
     addRecipe(name, output, inputs, 0);
   }
 
   @ZenMethod
-  public static void addRecipe(String name, IItemStack output, IIngredient[] inputs, int xp) throws InvalidArgumentException {
+  public static void addRecipe(String name, IItemStack output, IIngredient[] inputs, int xp) throws IllegalArgumentException {
     if (inputs.length != 5) {
-      throw new InvalidArgumentException(new String[] {"Pyre Crafting Ritual must have 5 items: " + name});
+      throw new IllegalArgumentException("Pyre Crafting Ritual must have 5 items: " + name);
     }
     CraftTweaker.LATE_ACTIONS.add(new Add(name, CraftTweakerMC.getItemStack(output), Stream.of(inputs).map(CraftTweakerMC::getIngredient).toArray(Ingredient[]::new), xp));
   }
@@ -100,7 +91,7 @@ public class PyreCraftingTweaker {
       return "Removing Pyre Altar Crafting recipe " + name.toString();
     }
 
-    private Remove (ResourceLocation recipeName) {
+    private Remove(ResourceLocation recipeName) {
       super("Pyre Crafting Ritual");
       this.name = recipeName;
     }
