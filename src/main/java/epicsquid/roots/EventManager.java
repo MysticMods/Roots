@@ -5,6 +5,7 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.entity.EntityDeer;
+import epicsquid.roots.block.BlockElementalSoil;
 import epicsquid.roots.capability.grove.IPlayerGroveCapability;
 import epicsquid.roots.capability.grove.PlayerGroveCapabilityProvider;
 import epicsquid.roots.capability.playerdata.IPlayerDataCapability;
@@ -41,16 +42,20 @@ import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.GameType;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.Optional;
+import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -58,6 +63,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 public class EventManager {
@@ -244,6 +250,19 @@ public class EventManager {
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_Y);
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_Z);
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_MODE);
+      }
+    }
+  }
+
+  @SubscribeEvent
+  public static void onCropsGrowPre(BlockEvent.CropGrowEvent.Pre cropGrowEvent) {
+    IBlockState soil = cropGrowEvent.getWorld().getBlockState(cropGrowEvent.getPos().offset(EnumFacing.DOWN));
+    IBlockState plant = cropGrowEvent.getWorld().getBlockState(cropGrowEvent.getPos());
+    if (soil.getBlock().canSustainPlant(soil, cropGrowEvent.getWorld(), cropGrowEvent.getPos().offset(EnumFacing.DOWN), EnumFacing.UP, (IPlantable) plant.getBlock())) {
+      if (soil.getPropertyKeys().contains(BlockElementalSoil.waterSpeed)) {
+        int speed = soil.getValue(BlockElementalSoil.waterSpeed);
+        Random rand = new Random();
+        cropGrowEvent.setResult(rand.nextInt(4) <= speed ? Event.Result.ALLOW : Event.Result.DEFAULT);
       }
     }
   }
