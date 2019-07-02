@@ -1,6 +1,7 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemBowBase;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.IItemPropertyGetter;
@@ -12,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public class ItemWildwoodBow extends ItemBowBase {
+public class ItemWildwoodBow extends ItemBowBase implements ILivingRepair {
   public ItemWildwoodBow(String name) {
     super(name, 920, 30);
 
@@ -37,5 +38,11 @@ public class ItemWildwoodBow extends ItemBowBase {
   @Override
   public EnumRarity getRarity(ItemStack stack) {
     return EnumRarity.RARE;
+  }
+
+  @Override
+  public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+    update(stack, worldIn, entityIn, itemSlot, isSelected, 120);
+    super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
   }
 }
