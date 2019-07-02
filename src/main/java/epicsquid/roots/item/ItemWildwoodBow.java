@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
 
 public class ItemWildwoodBow extends ItemBowBase {
   public ItemWildwoodBow(String name) {
-    super(name, 420, 22);
+    super(name, 920, 30);
 
     this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter() {
       @SideOnly(Side.CLIENT)
