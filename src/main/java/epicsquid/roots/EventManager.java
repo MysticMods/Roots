@@ -1,6 +1,12 @@
 package epicsquid.roots;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+
 import com.google.common.collect.Sets;
+
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
@@ -19,7 +25,11 @@ import epicsquid.roots.item.ItemDruidKnife;
 import epicsquid.roots.item.ItemPouch;
 import epicsquid.roots.network.MessagePlayerDataUpdate;
 import epicsquid.roots.network.MessagePlayerGroveUpdate;
-import epicsquid.roots.network.fx.*;
+import epicsquid.roots.network.fx.MessageGeasFX;
+import epicsquid.roots.network.fx.MessageGeasRingFX;
+import epicsquid.roots.network.fx.MessageLightDrifterFX;
+import epicsquid.roots.network.fx.MessageLightDrifterSync;
+import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
 import epicsquid.roots.recipe.BarkRecipe;
 import epicsquid.roots.util.Constants;
 import epicsquid.roots.util.ItemSpawnUtil;
@@ -40,6 +50,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
@@ -62,10 +73,6 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
 public class EventManager {
 
   public static long ticks = 0;
@@ -79,7 +86,9 @@ public class EventManager {
           event.getDrops().clear();
           IBlockState blockstate = event.getState();
           Block block = blockstate.getBlock();
-          EnumType type = (block == Blocks.LOG) ? blockstate.getValue(BlockOldLog.VARIANT) : (block == Blocks.LOG2) ? blockstate.getValue(BlockNewLog.VARIANT) : null;
+          EnumType type = (block == Blocks.LOG) ?
+              blockstate.getValue(BlockOldLog.VARIANT) :
+              (block == Blocks.LOG2) ? blockstate.getValue(BlockNewLog.VARIANT) : null;
           BarkRecipe bark;
           if (type == null) {
             bark = ModRecipes.getModdedBarkRecipe(block);
@@ -90,6 +99,35 @@ public class EventManager {
             ItemStack barkStack = bark.getBarkStack(Util.rand.nextInt(getBarkAmount(tool)) + 1);
             if (!event.getWorld().isRemote) {
               ItemSpawnUtil.spawnItem(event.getWorld(), event.getPos(), barkStack);
+            }
+          }
+        }
+      }
+      if (event.getState().getBlock() instanceof IPlantable) {
+        IBlockState soil = event.getWorld().getBlockState(event.getPos().offset(EnumFacing.DOWN));
+        if (event.getState().getBlock() instanceof IPlantable && soil.getBlock()
+            .canSustainPlant(soil, event.getWorld(), event.getPos().offset(EnumFacing.DOWN), EnumFacing.UP, (IPlantable) event.getState().getBlock())) {
+          if (soil.getPropertyKeys().contains(BlockElementalSoil.fireCookingMultiplier)) {
+            List<ItemStack> newDrops = new ArrayList<>();
+            int cookingMultiplier = soil.getValue(BlockElementalSoil.fireCookingMultiplier);
+            if (cookingMultiplier > 0) {
+              Random random = new Random();
+              boolean seed = false;
+              for (ItemStack stack : event.getDrops()) {
+                ItemStack result = FurnaceRecipes.instance().getSmeltingResult(stack);
+                if (!seed && stack.getItem() instanceof IPlantable) {
+                  seed = true;
+                  newDrops.add(stack);
+                  continue;
+                }
+                if (!result.isEmpty()) {
+                  newDrops.add(new ItemStack(result.getItem(), cookingMultiplier - 1 > 0 ? random.nextInt(cookingMultiplier - 1) + 1 : 1));
+                } else {
+                  newDrops.add(stack);
+                }
+              }
+              event.getDrops().clear();
+              event.getDrops().addAll(newDrops);
             }
           }
         }
@@ -159,7 +197,8 @@ public class EventManager {
       if (player.hasCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null)) {
         IPlayerDataCapability cap = player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null);
         if (cap != null && !player.world.isRemote && cap.isDirty()) {
-          PacketHandler.INSTANCE.sendToAllTracking(new MessagePlayerDataUpdate(player.getUniqueID(), cap.getData()), new NetworkRegistry.TargetPoint(player.dimension, player.posX, player.posY, player.posZ, 0));
+          PacketHandler.INSTANCE.sendToAllTracking(new MessagePlayerDataUpdate(player.getUniqueID(), cap.getData()),
+              new NetworkRegistry.TargetPoint(player.dimension, player.posX, player.posY, player.posZ, 0));
           cap.clean();
         }
       }
@@ -182,7 +221,8 @@ public class EventManager {
     }
     if (event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().getEntityWorld().isRemote) {
       EntityPlayer player = ((EntityPlayer) event.getEntityLiving());
-      List<EntityPetalShell> shells = player.getEntityWorld().getEntitiesWithinAABB(EntityPetalShell.class, new AxisAlignedBB(player.posX - 0.5, player.posY, player.posZ - 0.5, player.posX + 0.5, player.posY + 2.0, player.posZ + 0.5));
+      List<EntityPetalShell> shells = player.getEntityWorld().getEntitiesWithinAABB(EntityPetalShell.class,
+          new AxisAlignedBB(player.posX - 0.5, player.posY, player.posZ - 0.5, player.posX + 0.5, player.posY + 2.0, player.posZ + 0.5));
       if (shells.size() > 0) {
         for (EntityPetalShell shell : shells) {
           if (shell.getPlayerId().compareTo(player.getUniqueID()) == 0) {
@@ -228,7 +268,9 @@ public class EventManager {
       if (event.getEntity().getEntityData().getInteger(Constants.GEAS_TAG) <= 0) {
         event.getEntity().getEntityData().removeTag(Constants.GEAS_TAG);
       }
-      PacketHandler.sendToAllTracking(new MessageGeasFX(event.getEntity().posX, event.getEntity().posY + event.getEntity().getEyeHeight() + 0.75f, event.getEntity().posZ), event.getEntity());
+      PacketHandler.sendToAllTracking(
+          new MessageGeasFX(event.getEntity().posX, event.getEntity().posY + event.getEntity().getEyeHeight() + 0.75f, event.getEntity().posZ),
+          event.getEntity());
     }
     if (event.getEntity().getEntityData().hasKey(Constants.LIGHT_DRIFTER_TAG) && !event.getEntity().getEntityWorld().isRemote) {
       event.getEntity().getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_TAG) - 1);
@@ -237,14 +279,16 @@ public class EventManager {
         player.posX = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_X);
         player.posY = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_Y);
         player.posZ = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_Z);
-        PacketHandler.sendToAllTracking(new MessageLightDrifterSync(event.getEntity().getUniqueID(), player.posX, player.posY, player.posZ, false, event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE)), player);
+        PacketHandler.sendToAllTracking(new MessageLightDrifterSync(event.getEntity().getUniqueID(), player.posX, player.posY, player.posZ, false,
+            event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE)), player);
         player.capabilities.allowFlying = false;
         player.capabilities.disableDamage = false;
         player.noClip = false;
         player.capabilities.isFlying = false;
         player.setGameType(GameType.getByID(event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE)));
         player.setPositionAndUpdate(player.posX, player.posY, player.posZ);
-        PacketHandler.sendToAllTracking(new MessageLightDrifterFX(event.getEntity().posX, event.getEntity().posY + 1.0f, event.getEntity().posZ), event.getEntity());
+        PacketHandler
+            .sendToAllTracking(new MessageLightDrifterFX(event.getEntity().posX, event.getEntity().posY + 1.0f, event.getEntity().posZ), event.getEntity());
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_TAG);
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_X);
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_Y);
@@ -258,11 +302,14 @@ public class EventManager {
   public static void onCropsGrowPre(BlockEvent.CropGrowEvent.Pre cropGrowEvent) {
     IBlockState soil = cropGrowEvent.getWorld().getBlockState(cropGrowEvent.getPos().offset(EnumFacing.DOWN));
     IBlockState plant = cropGrowEvent.getWorld().getBlockState(cropGrowEvent.getPos());
-    if (soil.getBlock().canSustainPlant(soil, cropGrowEvent.getWorld(), cropGrowEvent.getPos().offset(EnumFacing.DOWN), EnumFacing.UP, (IPlantable) plant.getBlock())) {
+    if (plant.getBlock() instanceof IPlantable && soil.getBlock()
+        .canSustainPlant(soil, cropGrowEvent.getWorld(), cropGrowEvent.getPos().offset(EnumFacing.DOWN), EnumFacing.UP, (IPlantable) plant.getBlock())) {
       if (soil.getPropertyKeys().contains(BlockElementalSoil.waterSpeed)) {
         int speed = soil.getValue(BlockElementalSoil.waterSpeed);
-        Random rand = new Random();
-        cropGrowEvent.setResult(rand.nextInt(4) <= speed ? Event.Result.ALLOW : Event.Result.DEFAULT);
+        if (speed > 0) {
+          Random rand = new Random();
+          cropGrowEvent.setResult(rand.nextInt(3) + 1 <= speed ? Event.Result.ALLOW : Event.Result.DEFAULT);
+        }
       }
     }
   }
