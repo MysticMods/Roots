@@ -78,6 +78,9 @@ public class SpellConfig {
     @Config.Name("Disable Fey Light Spell")
     @Config.Comment("Set to true to disable Fey Light Spell")
     public boolean disableFeyLight = false;
+    @Config.Name("Disable Iced Touch Spell")
+    @Config.Comment("Set to true to disable the Iced Touch Spell")
+    public boolean disableIcedTouch = false;
 
   }
 

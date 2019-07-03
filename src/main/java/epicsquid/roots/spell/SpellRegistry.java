@@ -56,6 +56,8 @@ public class SpellRegistry {
       spellRegistry.put(SpellRampantGrowth.spellName, SpellRampantGrowth.instance);
     if (!SpellConfig.disableSpellsCategory.disableFeyLight)
       spellRegistry.put(SpellFeyLight.spellName, SpellFeyLight.instance);
+    if (!SpellConfig.disableSpellsCategory.disableIcedTouch)
+      spellRegistry.put(SpellIcedTouch.spellName, SpellIcedTouch.instance);
 
     // Cannot disable Grove-related spells
     spellRegistry.put(SpellGroveSupplication.spellName, SpellGroveSupplication.instance);
