@@ -34,6 +34,7 @@ import epicsquid.roots.recipe.BarkRecipe;
 import epicsquid.roots.util.Constants;
 import epicsquid.roots.util.ItemSpawnUtil;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockNewLog;
 import net.minecraft.block.BlockOldLog;
@@ -42,6 +43,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityLlama;
 import net.minecraft.entity.passive.EntitySquid;
@@ -57,6 +59,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -143,6 +146,25 @@ public class EventManager {
               }
               event.getDrops().clear();
               event.getDrops().addAll(newDrops);
+            }
+          }
+          if (soil.getPropertyKeys().contains(BlockElementalSoil.waterSpeed)) {
+            int speed = soil.getValue(BlockElementalSoil.waterSpeed);
+            if (speed > 0) {
+              List<ItemStack> drops = new ArrayList<>(event.getDrops());
+              event.getDrops().clear();
+              BlockPos dropPos = event.getPos().down().down();
+              boolean seed = false;
+              if (!event.getWorld().isRemote) {
+                for (ItemStack stack : drops) {
+                  if (!seed && stack.getItem() instanceof IPlantable) {
+                    seed = true;
+                    event.getDrops().add(stack);
+                    continue;
+                  }
+                  event.getWorld().spawnEntity(new EntityItem(event.getWorld(), dropPos.getX() + 0.5f, dropPos.getY() + 0.5f, dropPos.getZ() + 0.5f, stack));
+                }
+              }
             }
           }
         }
@@ -319,11 +341,27 @@ public class EventManager {
     IBlockState plant = cropGrowEvent.getWorld().getBlockState(cropGrowEvent.getPos());
     if (plant.getBlock() instanceof IPlantable && soil.getBlock()
         .canSustainPlant(soil, cropGrowEvent.getWorld(), cropGrowEvent.getPos().offset(EnumFacing.DOWN), EnumFacing.UP, (IPlantable) plant.getBlock())) {
-      if (soil.getPropertyKeys().contains(BlockElementalSoil.waterSpeed)) {
-        int speed = soil.getValue(BlockElementalSoil.waterSpeed);
+      if (soil.getPropertyKeys().contains(BlockElementalSoil.airSpeed)) {
+        int speed = soil.getValue(BlockElementalSoil.airSpeed);
         if (speed > 0) {
           Random rand = new Random();
           cropGrowEvent.setResult(rand.nextInt(3) + 1 <= speed ? Event.Result.ALLOW : Event.Result.DEFAULT);
+        }
+      }
+    }
+  }
+
+  @SubscribeEvent
+  public static void onCropsGrowPost(BlockEvent.CropGrowEvent.Post cropGrowEvent) {
+    IBlockState soil = cropGrowEvent.getWorld().getBlockState(cropGrowEvent.getPos().offset(EnumFacing.DOWN));
+    IBlockState plant = cropGrowEvent.getWorld().getBlockState(cropGrowEvent.getPos());
+    if (plant.getBlock() instanceof IPlantable && plant.getBlock() instanceof BlockCrops && ((BlockCrops) plant.getBlock()).isMaxAge(plant) && soil.getBlock()
+        .canSustainPlant(soil, cropGrowEvent.getWorld(), cropGrowEvent.getPos().offset(EnumFacing.DOWN), EnumFacing.UP, (IPlantable) plant.getBlock())) {
+      if (soil.getPropertyKeys().contains(BlockElementalSoil.waterSpeed)) {
+        int speed = soil.getValue(BlockElementalSoil.waterSpeed);
+        if (speed > 0 && cropGrowEvent.getWorld().isAirBlock(cropGrowEvent.getPos().offset(EnumFacing.DOWN).offset(EnumFacing.DOWN))) {
+          plant.getBlock().dropBlockAsItem(cropGrowEvent.getWorld(), cropGrowEvent.getPos(), plant, 0);
+          cropGrowEvent.getWorld().setBlockState(cropGrowEvent.getPos(), plant.withProperty(BlockCrops.AGE, 0));
         }
       }
     }

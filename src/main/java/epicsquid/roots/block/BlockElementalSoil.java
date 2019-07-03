@@ -29,7 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockElementalSoil extends BlockBase {
   public static final PropertyInteger waterSpeed = PropertyInteger.create("water", 0, 4);
-  public static final PropertyInteger airRarity = PropertyInteger.create("air", 0, 4);
+  public static final PropertyInteger airSpeed = PropertyInteger.create("air", 0, 4);
   public static final PropertyInteger earthFertility = PropertyInteger.create("earth", 0, 4);
   public static final PropertyInteger fireCookingMultiplier = PropertyInteger.create("fire", 0, 4);
 
@@ -43,7 +43,7 @@ public class BlockElementalSoil extends BlockBase {
 
     PropertyInteger property = this.soilType == EnumElementalSoilType.WATER ?
         waterSpeed :
-        this.soilType == EnumElementalSoilType.EARTH ? earthFertility : this.soilType == EnumElementalSoilType.AIR ? airRarity : fireCookingMultiplier;
+        this.soilType == EnumElementalSoilType.EARTH ? earthFertility : this.soilType == EnumElementalSoilType.AIR ? airSpeed : fireCookingMultiplier;
 
     this.setDefaultState(this.blockState.getBaseState().withProperty(property, 1));
   }
@@ -53,7 +53,7 @@ public class BlockElementalSoil extends BlockBase {
   public IBlockState getStateFromMeta(int meta) {
     switch (soilType) {
     case AIR:
-      return getDefaultState().withProperty(airRarity, meta + 1);
+      return getDefaultState().withProperty(airSpeed, meta + 1);
     case FIRE:
       return getDefaultState().withProperty(fireCookingMultiplier, meta + 1);
     case EARTH:
@@ -66,14 +66,14 @@ public class BlockElementalSoil extends BlockBase {
 
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, airRarity, fireCookingMultiplier, earthFertility, waterSpeed);
+    return new BlockStateContainer(this, airSpeed, fireCookingMultiplier, earthFertility, waterSpeed);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
     PropertyInteger property = this.soilType == EnumElementalSoilType.WATER ?
         waterSpeed :
-        this.soilType == EnumElementalSoilType.EARTH ? earthFertility : this.soilType == EnumElementalSoilType.AIR ? airRarity : fireCookingMultiplier;
+        this.soilType == EnumElementalSoilType.EARTH ? earthFertility : this.soilType == EnumElementalSoilType.AIR ? airSpeed : fireCookingMultiplier;
     return state.getValue(property) - 1 > 0 ? state.getValue(property) - 1 : 0;
   }
 
