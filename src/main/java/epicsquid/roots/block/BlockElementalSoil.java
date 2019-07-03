@@ -28,10 +28,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockElementalSoil extends BlockBase {
-  public static final PropertyInteger waterSpeed = PropertyInteger.create("water_speed", 0, 3);
-  public static final PropertyInteger airRarity = PropertyInteger.create("air_rarity", 0, 3);
-  public static final PropertyInteger earthFertility = PropertyInteger.create("earth_fertility", 0, 3);
-  public static final PropertyInteger fireCookingMultiplier = PropertyInteger.create("fire_cooking_multiplier", 0, 3);
+  public static final PropertyInteger waterSpeed = PropertyInteger.create("water_speed", 0, 4);
+  public static final PropertyInteger airRarity = PropertyInteger.create("air_rarity", 0, 4);
+  public static final PropertyInteger earthFertility = PropertyInteger.create("earth_fertility", 0, 4);
+  public static final PropertyInteger fireCookingMultiplier = PropertyInteger.create("fire_cooking_multiplier", 0, 4);
 
   private final @Nonnull Item itemBlock;
   private final EnumElementalSoilType soilType;
@@ -45,7 +45,7 @@ public class BlockElementalSoil extends BlockBase {
         waterSpeed :
         this.soilType == EnumElementalSoilType.EARTH ? earthFertility : this.soilType == EnumElementalSoilType.AIR ? airRarity : fireCookingMultiplier;
 
-    this.setDefaultState(this.blockState.getBaseState().withProperty(property, 0));
+    this.setDefaultState(this.blockState.getBaseState().withProperty(property, 1));
   }
 
   @Override
@@ -53,13 +53,13 @@ public class BlockElementalSoil extends BlockBase {
   public IBlockState getStateFromMeta(int meta) {
     switch (soilType) {
     case AIR:
-      return getDefaultState().withProperty(airRarity, meta);
+      return getDefaultState().withProperty(airRarity, meta + 1);
     case FIRE:
-      return getDefaultState().withProperty(fireCookingMultiplier, meta);
+      return getDefaultState().withProperty(fireCookingMultiplier, meta + 1);
     case EARTH:
-      return getDefaultState().withProperty(earthFertility, meta);
+      return getDefaultState().withProperty(earthFertility, meta + 1);
     case WATER:
-      return getDefaultState().withProperty(waterSpeed, meta);
+      return getDefaultState().withProperty(waterSpeed, meta + 1);
     }
     return super.getStateFromMeta(meta);
   }
@@ -74,7 +74,7 @@ public class BlockElementalSoil extends BlockBase {
     PropertyInteger property = this.soilType == EnumElementalSoilType.WATER ?
         waterSpeed :
         this.soilType == EnumElementalSoilType.EARTH ? earthFertility : this.soilType == EnumElementalSoilType.AIR ? airRarity : fireCookingMultiplier;
-    return state.getValue(property);
+    return state.getValue(property) - 1 > 0 ? state.getValue(property) - 1 : 0;
   }
 
   @Override
