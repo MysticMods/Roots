@@ -12,6 +12,10 @@
     {
       "type": "spell_template",
       "spell": "spell_iced_touch"
+		},
+		{
+      "type": "spell_modifiers_template",
+      "spell": "spell_iced_touch"
     }
   ]
 }

@@ -4,8 +4,13 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.network.fx.MessageAcidCloudFX;
+import epicsquid.roots.network.fx.MessageFrostTouchFX;
+import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,6 +18,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -26,36 +32,41 @@ public class SpellIcedTouch extends SpellBase {
   public SpellIcedTouch(String name) {
     super(name, TextFormatting.DARK_AQUA, 22f / 255f, 142f / 255f, 255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
     this.castType = EnumCastType.INSTANTANEOUS;
-    this.cooldown = 20;
+    this.cooldown = 100;
     addCost(HerbRegistry.getHerbByName("dewgonia"), 0.015f);
     addIngredients(new ItemStack(ModItems.dewgonia), new ItemStack(ModItems.bark_birch), new ItemStack(Items.SNOWBALL), new ItemStack(ModItems.bark_birch),
         new ItemStack(Items.SNOWBALL));
 
+    acceptModules(ModuleRegistry.module_touch);
   }
 
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     World world = player.world;
-    RayTraceResult result = this.rayTrace(player, player.isSneaking() ? 1 : 10);
-    if (result != null && (!player.isSneaking() && result.typeOfHit == RayTraceResult.Type.BLOCK)) {
-      BlockPos pos = result.getBlockPos().offset(result.sideHit);
-      IBlockState state = world.getBlockState(pos);
-      if (!world.isRemote) {
-        if (state.getBlock() == Blocks.FIRE) {
-          world.setBlockState(pos, Blocks.AIR.getDefaultState());
-        } else if (state.getBlock() == Blocks.LAVA) {
-          world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState());
-        } else if (state.getBlock() == Blocks.WATER) {
-          world.setBlockState(pos, Blocks.ICE.getDefaultState());
-        } else if (world.isAirBlock(pos)) {
-          world.setBlockState(result.getBlockPos().offset(result.sideHit), Blocks.SNOW_LAYER.getDefaultState());
+    if (modules.contains(ModuleRegistry.module_touch)) {
+      EffectManager.assignEffect(player, EffectManager.effect_freeze.getName(), 600, new NBTTagCompound());
+    } else {
+      RayTraceResult result = this.rayTrace(player, player.isSneaking() ? 1 : 10);
+      if (result != null && (!player.isSneaking() && result.typeOfHit == RayTraceResult.Type.BLOCK)) {
+        BlockPos pos = result.getBlockPos().offset(result.sideHit);
+        IBlockState state = world.getBlockState(pos);
+        if (!world.isRemote) {
+          if (state.getBlock() == Blocks.FIRE) {
+            world.setBlockState(pos, Blocks.AIR.getDefaultState());
+          } else if (state.getBlock() == Blocks.LAVA) {
+            world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState());
+          } else if (state.getBlock() == Blocks.WATER) {
+            world.setBlockState(pos, Blocks.ICE.getDefaultState());
+          } else if (world.isAirBlock(pos)) {
+            world.setBlockState(result.getBlockPos().offset(result.sideHit), Blocks.SNOW_LAYER.getDefaultState());
+          }
+        } else {
+          if (state.getBlock() == Blocks.FIRE || state.getBlock() == Blocks.LAVA) {
+            player.playSound(SoundEvents.BLOCK_FIRE_EXTINGUISH, 0.5f, 1);
+          }
         }
-      } else {
-        if (state.getBlock() == Blocks.FIRE || state.getBlock() == Blocks.LAVA) {
-          player.playSound(SoundEvents.BLOCK_FIRE_EXTINGUISH, 0.5f, 1);
-        }
+        return true;
       }
-      return true;
     }
     return false;
   }
