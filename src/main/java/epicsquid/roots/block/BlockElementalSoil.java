@@ -28,10 +28,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockElementalSoil extends BlockBase {
-  public static final PropertyInteger waterSpeed = PropertyInteger.create("water_speed", 0, 4);
-  public static final PropertyInteger airRarity = PropertyInteger.create("air_rarity", 0, 4);
-  public static final PropertyInteger earthFertility = PropertyInteger.create("earth_fertility", 0, 4);
-  public static final PropertyInteger fireCookingMultiplier = PropertyInteger.create("fire_cooking_multiplier", 0, 4);
+  public static final PropertyInteger waterSpeed = PropertyInteger.create("water", 0, 4);
+  public static final PropertyInteger airRarity = PropertyInteger.create("air", 0, 4);
+  public static final PropertyInteger earthFertility = PropertyInteger.create("earth", 0, 4);
+  public static final PropertyInteger fireCookingMultiplier = PropertyInteger.create("fire", 0, 4);
 
   private final @Nonnull Item itemBlock;
   private final EnumElementalSoilType soilType;

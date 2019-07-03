@@ -1,6 +1,18 @@
 {
     "variants": {
         "normal": { "model": "roots:elemental_soil_earth" },
-        "handlers": { "model": "roots:elemental_soil_earth" }
+				"handlers": { "model": "roots:elemental_soil_earth" },
+				"air=0,earth=1,fire=0,water=0": {
+					"model": "roots:elemental_soil_earth"
+				},
+				"air=0,earth=2,fire=0,water=0": {
+					"model": "roots:elemental_soil_earth"
+				},
+				"air=0,earth=3,fire=0,water=0": {
+					"model": "roots:elemental_soil_earth"
+				},
+				"air=0,earth=4,fire=0,water=0": {
+					"model": "roots:elemental_soil_earth"
+				}
     }
 }
