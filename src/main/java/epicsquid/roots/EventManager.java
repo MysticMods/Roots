@@ -108,9 +108,9 @@ public class EventManager {
         if (event.getState().getBlock() instanceof IPlantable && soil.getBlock()
             .canSustainPlant(soil, event.getWorld(), event.getPos().offset(EnumFacing.DOWN), EnumFacing.UP, (IPlantable) event.getState().getBlock())) {
           if (soil.getPropertyKeys().contains(BlockElementalSoil.fireCookingMultiplier)) {
-            List<ItemStack> newDrops = new ArrayList<>();
             int cookingMultiplier = soil.getValue(BlockElementalSoil.fireCookingMultiplier);
             if (cookingMultiplier > 0) {
+              List<ItemStack> newDrops = new ArrayList<>();
               Random random = new Random();
               boolean seed = false;
               for (ItemStack stack : event.getDrops()) {
@@ -124,6 +124,21 @@ public class EventManager {
                   newDrops.add(new ItemStack(result.getItem(), cookingMultiplier - 1 > 0 ? random.nextInt(cookingMultiplier - 1) + 1 : 1));
                 } else {
                   newDrops.add(stack);
+                }
+              }
+              event.getDrops().clear();
+              event.getDrops().addAll(newDrops);
+            }
+          }
+          if (soil.getPropertyKeys().contains(BlockElementalSoil.earthFertility)) {
+            int fertility = soil.getValue(BlockElementalSoil.earthFertility);
+            if (fertility > 0) {
+              List<ItemStack> newDrops = new ArrayList<>();
+              Random random = new Random();
+              for (ItemStack stack : event.getDrops()) {
+                newDrops.add(stack);
+                if (random.nextInt(3) < fertility) {
+                  newDrops.add(new ItemStack(stack.getItem(), fertility > 2 ? 2 : 1));
                 }
               }
               event.getDrops().clear();
