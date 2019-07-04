@@ -98,7 +98,7 @@ public class ModItems {
     event.addItem(living_shovel = new ItemLivingShovel(ToolMaterial.IRON, "living_shovel").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_hoe = new ItemLivingHoe(ToolMaterial.IRON, "living_hoe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_sword = new ItemLivingSword(ToolMaterial.IRON, "living_sword").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(living_arrow = new ItemArrowBase("living_arrow").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(living_arrow = new ItemLivingArrow("living_arrow").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(wildwood_quiver = new ItemQuiver("wildwood_quiver").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(wildwood_bow = new ItemWildwoodBow("wildwood_bow").setModelCustom(false).setCreativeTab(Roots.tab));
 
