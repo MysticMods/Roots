@@ -124,15 +124,18 @@ public class TileEntityFeyCrafter extends TileBase {
     FeyCraftingRecipe recipe = getRecipe();
     List<ItemStack> result = new ArrayList<>();
     ItemStack current = ItemStack.EMPTY;
+    List<ItemStack> inputItems = new ArrayList<>();
     while (recipe != null) {
+      inputItems.clear();
       boolean singleStack = false;
       for (int i = 0; i < 5; i++) {
-        inventory.extractItem(i, 1, false);
+        inputItems.add(inventory.extractItem(i, 1, false));
       }
 
       if (current.isEmpty()) {
         current = recipe.getResult().copy();
         if (current.getMaxStackSize() == 1) singleStack = true;
+        recipe.postCraft(current, inputItems);
       } else {
         // TODO: If this ever becomes a problem in the future I will laugh
         // TODO: But technically if you run out of ingredients for one recipe and then shift down to another, the result could change

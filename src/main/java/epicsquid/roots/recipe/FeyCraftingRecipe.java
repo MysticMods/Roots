@@ -74,6 +74,12 @@ public class FeyCraftingRecipe {
     return ingredients;
   }
 
-  public void postCraft (ItemStack output, IItemHandlerModifiable handler) {
+  /**
+   * This is only ever called when the output result has a maxStackSize of 1.
+   *
+   * @param output
+   * @param inputs
+   */
+  public void postCraft (ItemStack output, List<ItemStack> inputs) {
   }
 }
