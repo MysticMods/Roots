@@ -2,8 +2,8 @@
   "name": "Sense Danger",
   "icon": "roots:spell_dust",
   "category": "spells",
-  "advancement": "mysticalworld:aubergine",
-  
+  "advancement": "roots:staff",
+
   "pages": [
     {
       "type": "text",

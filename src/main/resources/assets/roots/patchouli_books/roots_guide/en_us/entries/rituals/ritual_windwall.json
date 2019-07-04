@@ -2,7 +2,7 @@
   "name": "Windwall",
   "icon": "roots:ritual_windwall",
   "category": "rituals",
-  "advancement": "roots:moonglow",
+  "advancement": "roots:moonglow_leaf",
   "pages": [
     {
       "type": "text",
