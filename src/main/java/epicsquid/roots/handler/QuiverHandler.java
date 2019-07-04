@@ -95,36 +95,6 @@ public class QuiverHandler implements INBTSerializable<NBTTagCompound> {
     return false;
   }
 
-  public boolean consume() {
-    int arrowSlot = -1;
-    int emptySlot = -1;
-    for (int i = 0; i < 6; i++) {
-      ItemStack stack = handler.getStackInSlot(i);
-      if (stack.getItem() == Items.ARROW) {
-        arrowSlot = i;
-        break;
-      } else if (stack.isEmpty() && emptySlot == -1) {
-        emptySlot = i;
-      }
-    }
-
-    if (arrowSlot == -1 && emptySlot == -1) {
-      return false;
-    }
-
-    ItemStack arrow = new ItemStack(Items.ARROW);
-    if (arrowSlot == -1) {
-      if (handler.insertItem(emptySlot, arrow, false).isEmpty()) {
-        return true;
-      }
-    } else {
-      if (handler.insertItem(arrowSlot, arrow, false).isEmpty()) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   public void saveToStack() {
     NBTTagCompound tag = quiver.getTagCompound();
     if (tag == null) {
