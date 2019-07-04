@@ -79,6 +79,7 @@ public class PyreCraftingTweaker {
     public void apply() {
       PyreCraftingRecipe recipe = new PyreCraftingRecipe(this.output, this.xp);
       recipe.addIngredients((Object[]) inputs);
+      recipe.setName(name);
       ModRecipes.addPyreCraftingRecipe(new ResourceLocation(Roots.MODID, name), recipe);
     }
   }
