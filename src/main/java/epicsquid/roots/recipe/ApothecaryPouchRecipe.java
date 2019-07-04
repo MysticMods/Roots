@@ -5,18 +5,19 @@ import epicsquid.roots.init.ModItems;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
+import java.util.List;
+
 public class ApothecaryPouchRecipe extends FeyCraftingRecipe {
   public ApothecaryPouchRecipe(ItemStack result, int xp) {
     super(result, xp);
   }
 
   @Override
-  public void postCraft(ItemStack output, IItemHandlerModifiable handler) {
+  public void postCraft(ItemStack output, List<ItemStack> inputs) {
     ItemStack oldPouch = null;
-    for (int i = 0; i < 5; i++) {
-      ItemStack slot = handler.getStackInSlot(i);
-      if (slot.getItem() == ModItems.component_pouch) {
-        oldPouch = slot;
+    for (ItemStack stack : inputs) {
+      if (stack.getItem() == ModItems.component_pouch) {
+        oldPouch = stack;
         break;
       }
     }
