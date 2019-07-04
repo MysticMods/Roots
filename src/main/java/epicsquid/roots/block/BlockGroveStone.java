@@ -5,6 +5,7 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
 import net.minecraft.block.BlockDoublePlant;
+import net.minecraft.block.BlockGrass;
 import net.minecraft.block.BlockTallGrass;
 import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.particle.particles.ParticleLeafArc;
@@ -178,7 +179,7 @@ public class BlockGroveStone extends BlockTEBase {
       List<BlockPos> positions = Util.getBlocksWithinRadius(world, pos.down(), 4, 5, 4, (p) -> {
         if (world.isAirBlock(p.up())) {
           IBlockState s = world.getBlockState(p);
-          if (s.getMaterial() == Material.GRASS || s.getMaterial() == Material.GROUND) return true;
+          return s.getMaterial() == Material.GRASS;
         }
         return false;
       });
@@ -189,13 +190,8 @@ public class BlockGroveStone extends BlockTEBase {
         if (effectsCount <= 0) break;
 
         IBlockState s = world.getBlockState(p);
-        if (s.getMaterial() == Material.GROUND) {
-          world.setBlockState(p, Blocks.GRASS.getDefaultState());
-          effectsCount--;
-          MessageOvergrowthEffectFX message = new MessageOvergrowthEffectFX(p.getX() + 0.5, p.getY() + 0.7, p.getZ() + 0.5);
-          PacketHandler.sendToAllTracking(message, world, p);
-        } else if (s.getMaterial() == Material.GRASS) {
-          switch (random.nextInt(30)) {
+        if (s.getMaterial() == Material.GRASS) {
+          switch (random.nextInt(50)) {
             case 0:
               Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.ROSE, 3);
               break;
@@ -215,6 +211,13 @@ public class BlockGroveStone extends BlockTEBase {
             default:
               world.setBlockState(p.up(), Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS), 3);
               break;
+          }
+          if (s.getBlock() instanceof BlockGrass) {
+            BlockGrass grass = (BlockGrass) s.getBlock();
+            for (int i = 0; i < 5; i++) {
+              // Try spreading!
+              grass.updateTick(world, pos, s, random);
+            }
           }
           MessageOvergrowthEffectFX message = new MessageOvergrowthEffectFX(p.getX() + 0.5, p.getY() + 0.3, p.getZ() + 0.5);
           PacketHandler.sendToAllTracking(message, world, p.up());
