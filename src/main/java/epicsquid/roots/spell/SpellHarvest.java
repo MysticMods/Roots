@@ -109,7 +109,11 @@ public class SpellHarvest extends SpellBase {
         6, 5, 6, (pos) -> {
           if (player.world.isAirBlock(pos)) return false;
           IBlockState state = player.world.getBlockState(pos);
-          if (skipBlocks.contains(state.getBlock())) return false;
+          Block block = state.getBlock();
+
+          if (skipBlocks.contains(block)) return false;
+
+          if (block.getRegistryName() != null && block.getRegistryName().getNamespace().equals("rustic")) return false;
 
           if (state.getBlock() == Blocks.PUMPKIN || state.getBlock() == Blocks.MELON_BLOCK) {
             pumpkinsAndMelons.add(pos);
