@@ -212,13 +212,6 @@ public class BlockGroveStone extends BlockTEBase {
               world.setBlockState(p.up(), Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS), 3);
               break;
           }
-          if (s.getBlock() instanceof BlockGrass) {
-            BlockGrass grass = (BlockGrass) s.getBlock();
-            for (int i = 0; i < 5; i++) {
-              // Try spreading!
-              grass.updateTick(world, pos, s, random);
-            }
-          }
           MessageOvergrowthEffectFX message = new MessageOvergrowthEffectFX(p.getX() + 0.5, p.getY() + 0.3, p.getZ() + 0.5);
           PacketHandler.sendToAllTracking(message, world, p.up());
           effectsCount--;
