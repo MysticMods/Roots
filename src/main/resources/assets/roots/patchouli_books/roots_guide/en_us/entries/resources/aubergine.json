@@ -7,7 +7,11 @@
       "type": "spotlight",
       "item": "mysticalworld:aubergine",
       "link_recipe": true,
-      "text": "Aubergines are mostly used in the druidic arts for their seeds, which store potent amounts of energy - however, some rituals are only successful when the entire aubergine is used.$(br2)Otherwise, they are commonly cooked and eaten, or stuffed with additional vegetables. Aubergine seeds are found in broken tall grass, and can be planted on any normal farmland."
+      "text": "Aubergines are mostly used in the druidic arts for their seeds, which store potent amounts of energy - however, some rituals are only successful when the entire aubergine is used."
+    },
+    {
+      "type": "text",
+      "text": "Otherwise, they are commonly cooked and eaten, or stuffed with additional vegetables.$(br)Aubergine seeds are found in broken tall grass, and can be planted on any normal farmland."
     },
     {
       "type": "text",
