@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.roots.RegistryManager;
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
@@ -19,6 +20,7 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -44,7 +46,8 @@ public class SpellIcedTouch extends SpellBase {
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     World world = player.world;
     if (modules.contains(ModuleRegistry.module_touch)) {
-      EffectManager.assignEffect(player, EffectManager.effect_freeze.getName(), 600, new NBTTagCompound());
+        player.addPotionEffect(new PotionEffect(RegistryManager.freeze, 600));
+//      EffectManager.assignEffect(player, EffectManager.effect_freeze.getName(), 600, new NBTTagCompound());
     } else {
       RayTraceResult result = this.rayTrace(player, player.isSneaking() ? 1 : 10);
       if (result != null && (!player.isSneaking() && result.typeOfHit == RayTraceResult.Type.BLOCK)) {
