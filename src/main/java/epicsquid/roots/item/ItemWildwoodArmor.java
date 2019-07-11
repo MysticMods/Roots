@@ -2,6 +2,7 @@ package epicsquid.roots.item;
 
 import epicsquid.mysticallib.model.IModeledObject;
 import epicsquid.roots.Roots;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.model.ModelWildwoodArmor;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -54,8 +55,16 @@ public class ItemWildwoodArmor extends ItemArmor implements IModeledObject, ILiv
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
     {
-        if (itemRand.nextInt(60) == 0 && player.shouldHeal()) {
+        if (itemRand.nextInt(60) == 0 && player.shouldHeal() && fullSet(player) && itemStack.getItem() == ModItems.wildwood_chestplate) {
             player.heal(1);
         }
     }
+
+  public static boolean fullSet(EntityPlayer player) {
+    for (ItemStack stack : player.getArmorInventoryList()) {
+      if (!(stack.getItem() instanceof ItemWildwoodArmor)) return false;
+    }
+
+    return true;
+  }
 }
