@@ -322,6 +322,7 @@ public class EventManager {
         player.capabilities.disableDamage = false;
         player.noClip = false;
         player.capabilities.isFlying = false;
+        player.extinguish();
         player.setGameType(GameType.getByID(event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE)));
         player.setPositionAndUpdate(player.posX, player.posY, player.posZ);
         PacketHandler
