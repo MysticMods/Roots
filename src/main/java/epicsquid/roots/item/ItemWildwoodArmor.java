@@ -55,7 +55,7 @@ public class ItemWildwoodArmor extends ItemArmor implements IModeledObject, ILiv
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
     {
-        if (itemRand.nextInt(60) == 0 && player.shouldHeal() && fullSet(player) && itemStack.getItem() == ModItems.wildwood_chestplate) {
+        if (itemRand.nextInt(40) == 0 && player.shouldHeal() && fullSet(player) && itemStack.getItem() == ModItems.wildwood_chestplate) {
             player.heal(1);
         }
     }
