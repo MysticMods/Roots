@@ -29,7 +29,7 @@ public class RitualFlowerGrowth extends RitualBase {
                 new ItemStack(Blocks.RED_FLOWER, 1, BlockRedFlower.EnumFlowerType.POPPY.getMeta())
         ));
 
-        addCondition(new ConditionWorldTime(0, 13000));
+        //addCondition(new ConditionWorldTime(0, 13000));
         setIcon(ModItems.ritual_flower_growth);
         setColor(TextFormatting.LIGHT_PURPLE);
     }
