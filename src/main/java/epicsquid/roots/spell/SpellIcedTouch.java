@@ -1,16 +1,10 @@
 package epicsquid.roots.spell;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.RegistryManager;
-import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.network.fx.MessageAcidCloudFX;
-import epicsquid.roots.network.fx.MessageFrostTouchFX;
+import epicsquid.roots.network.fx.MessageIcedTouchFX;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.block.state.IBlockState;
@@ -19,13 +13,15 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class SpellIcedTouch extends SpellBase {
   public static String spellName = "spell_iced_touch";
@@ -68,6 +64,7 @@ public class SpellIcedTouch extends SpellBase {
             player.playSound(SoundEvents.BLOCK_FIRE_EXTINGUISH, 0.5f, 1);
           }
         }
+        PacketHandler.sendToAllTracking(new MessageIcedTouchFX(pos.getX(), pos.getY(), pos.getZ()), player);
         return true;
       }
     }
