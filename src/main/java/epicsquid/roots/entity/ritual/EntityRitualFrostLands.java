@@ -40,7 +40,7 @@ public class EntityRitualFrostLands extends EntityRitualBase {
         snowman.heal(snowman.getMaxHealth() - snowman.getHealth());
       }
 
-      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), 10, 10, 10, (BlockPos pos) -> world.isAirBlock(pos.up()) && !world.isAirBlock(pos));
+      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), 10, 10, 10, (BlockPos pos) -> world.isAirBlock(pos.up()) && !world.isAirBlock(pos) && Blocks.SNOW_LAYER.canPlaceBlockAt(world, pos));
       int breakout = 0;
       while (!positions.isEmpty() && breakout < 20) {
         BlockPos choice = positions.get(rand.nextInt(positions.size()));
