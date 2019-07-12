@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "These robes definitely preferable to animal skins. In addition to the small amount of protection they give, the magical nature of their ingredients is also imparted onto the wearer and their possessions, $(info) reducing the cost of spells and other abilities that use herbs by 5%."
+      "text": "These robes definitely preferable to animal skins. In addition to the small amount of protection they give, the magical nature of their ingredients is also imparted onto the wearer and their possessions, $(info) reducing the cost of spells and other abilities that use herbs from 2% to 5% depending on how many pieces are worn."
     },
     {
       "type": "fey_crafting_template",
