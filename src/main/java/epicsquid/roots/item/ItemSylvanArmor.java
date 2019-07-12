@@ -48,10 +48,25 @@ public class ItemSylvanArmor extends ItemArmor implements IModeledObject {
   }
 
   public static double sylvanBonus(EntityPlayer player) {
+    int count = 0;
     for (ItemStack stack : player.getArmorInventoryList()) {
-      if (!(stack.getItem() instanceof ItemSylvanArmor)) return 0.0;
+      if (!(stack.getItem() instanceof ItemSylvanArmor))
+        count++;
     }
 
-    return BONUS;
+    switch (count)
+    {
+      case 1:
+        return BONUS - 0.03;
+
+      case 2:
+        return BONUS - 0.02;
+      case 3:
+        return BONUS - 0.01;
+      case 4:
+        return BONUS;
+      default:
+        return 0D;
+    }
   }
 }
