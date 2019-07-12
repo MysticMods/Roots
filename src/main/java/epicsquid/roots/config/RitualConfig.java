@@ -34,7 +34,7 @@ public class RitualConfig {
 
     @Config.Name("Disable Natural Aura Ritual")
     @Config.Comment("Set to true to disable Natural Aura Ritual")
-    public boolean disableNaturalAura = false;
+    public boolean disableGermination = false;
 
     @Config.Name("Disable Overgrowth Ritual")
     @Config.Comment("Set to true to disable Overgrowth Ritual")
@@ -46,7 +46,7 @@ public class RitualConfig {
 
     @Config.Name("Disable Regrowth Ritual")
     @Config.Comment("Set to true to disable Regrowth Ritual")
-    public boolean disableNaturalGrowth = false;
+    public boolean disableSpreadingForest = false;
 
     @Config.Name("Disable Storm Ritual")
     @Config.Comment("Set to true to disable Storm Ritual")
