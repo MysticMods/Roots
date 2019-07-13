@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 
 public class ItemLivingShovel extends ItemShovelBase implements ILivingRepair {
   public ItemLivingShovel(ToolMaterial material, String name) {
-    super(material, name, 3, 192, 22);
+    super(material, name, material.getHarvestLevel(), material.getMaxUses(), material.getEnchantability());
   }
 
   @Override
