@@ -1,8 +1,5 @@
 package epicsquid.roots;
 
-import epicsquid.mysticallib.advancement.GenericTrigger;
-import epicsquid.roots.advancements.ActivatePredicate;
-import epicsquid.roots.advancements.KillPredicate;
 import epicsquid.roots.capability.grove.IPlayerGroveCapability;
 import epicsquid.roots.capability.grove.PlayerGroveCapability;
 import epicsquid.roots.capability.grove.PlayerGroveCapabilityStorage;
@@ -15,14 +12,12 @@ import epicsquid.roots.gui.GuiHandler;
 import epicsquid.roots.handler.ConfigHandler;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.integration.botania.PetalApothecaryFiller;
 import epicsquid.roots.proxy.CommonProxy;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -80,6 +75,7 @@ public class Roots {
     MinecraftForge.EVENT_BUS.register(new RegistryManager());
     MinecraftForge.EVENT_BUS.register(EventManager.class);
     MinecraftForge.EVENT_BUS.register(ConfigHandler.class);
+    MinecraftForge.EVENT_BUS.register(PetalApothecaryFiller.class);
     NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);
     logger = event.getModLog();
     ModDamage.init();
