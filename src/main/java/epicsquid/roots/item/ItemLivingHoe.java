@@ -24,6 +24,12 @@ public class ItemLivingHoe extends ItemHoeBase implements ILivingRepair {
     super(material, name, material.getHarvestLevel(), material.getMaxUses(), material.getEnchantability());
   }
 
+  public ItemLivingHoe(ToolMaterial material, String name,  int miningLevel, int durability, int enchantablity) {
+    super(material, name, miningLevel, durability, enchantablity);
+  }
+
+
+
   @Override
   public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
     update(stack, worldIn, entityIn, itemSlot, isSelected);

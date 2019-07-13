@@ -14,8 +14,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class ItemLivingShovel extends ItemShovelBase implements ILivingRepair {
+
   public ItemLivingShovel(ToolMaterial material, String name) {
     super(material, name, material.getHarvestLevel(), material.getMaxUses(), material.getEnchantability());
+  }
+
+  public ItemLivingShovel(ToolMaterial material, String name, int miningLevel, int durability, int enchantablity) {
+    super(material, name, miningLevel, durability, enchantablity);
   }
 
   @Override
@@ -29,12 +34,12 @@ public class ItemLivingShovel extends ItemShovelBase implements ILivingRepair {
     ItemStack stack = player.getHeldItem(hand);
     Block block = worldIn.getBlockState(pos).getBlock();
 
-    if(facing != EnumFacing.DOWN && worldIn.isAirBlock(pos.up()) && (block == Blocks.GRASS || block == Blocks.DIRT)){
-      if(!worldIn.isRemote) {
-        worldIn.playSound(null, pos, Blocks.GRASS_PATH.getSoundType().getStepSound(), SoundCategory.BLOCKS,1F,1F);
+    if (facing != EnumFacing.DOWN && worldIn.isAirBlock(pos.up()) && (block == Blocks.GRASS || block == Blocks.DIRT)) {
+      if (!worldIn.isRemote) {
+        worldIn.playSound(null, pos, Blocks.GRASS_PATH.getSoundType().getStepSound(), SoundCategory.BLOCKS, 1F, 1F);
         worldIn.setBlockState(pos, Blocks.GRASS_PATH.getDefaultState());
-        if(!player.capabilities.isCreativeMode){
-          stack.damageItem(1,player);
+        if (!player.capabilities.isCreativeMode) {
+          stack.damageItem(1, player);
         }
       }
       return EnumActionResult.SUCCESS;

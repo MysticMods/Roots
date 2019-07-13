@@ -1,0 +1,33 @@
+{
+  "name": "Sylvan Tools",
+  "icon": "roots:sylvan_pickaxe",
+  "category": "apparatus",
+  "advancement": "roots:fey_crafter",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Enlivened with the magic contained within herbs and tipped with precious stone, sylvan tools will literally regrow any damage that they take, although slowly.$(br2)$(info) It has the effectiveness of an equivalent stone tool"
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "sylvan_pickaxe"
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "syvlan_axe"
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "sylvan_shovel"
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "sylvan_hoe"
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "sylvan_sword"
+    }
+  ]
+}

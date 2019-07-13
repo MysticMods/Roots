@@ -19,6 +19,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import java.util.List;
+import java.util.Random;
 
 public class SpellLifeDrain extends SpellBase {
   public static String spellName = "spell_life_drain";
