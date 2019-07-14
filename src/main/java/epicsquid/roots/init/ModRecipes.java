@@ -18,6 +18,7 @@ import epicsquid.roots.util.StateUtil;
 import epicsquid.roots.util.types.WorldPosStatePredicate;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.block.*;
+import net.minecraft.block.BlockFlower.EnumFlowerType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -32,7 +33,6 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreIngredient;
-import net.minecraft.block.BlockFlower.EnumFlowerType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -106,30 +106,30 @@ public class ModRecipes {
     addPacifistEntry("frog", EntityFrog.class);
   }
 
-  public static void addFlowerRecipe (String name, IBlockState state) {
+  public static void addFlowerRecipe(String name, IBlockState state) {
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
     FlowerRecipe recipe = new FlowerRecipe(rl, state);
     flowerRecipes.put(rl, recipe);
   }
 
-  public static void addFlowerRecipe (String name, Block block, int meta) {
+  public static void addFlowerRecipe(String name, Block block, int meta) {
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
     FlowerRecipe recipe = new FlowerRecipe(rl, meta, block);
     flowerRecipes.put(rl, recipe);
   }
 
-  public static void removeFlowerRecipe (ResourceLocation name) {
+  public static void removeFlowerRecipe(ResourceLocation name) {
     flowerRecipes.remove(name);
   }
 
   @Nullable
-  public static FlowerRecipe getRandomFlowerRecipe () {
+  public static FlowerRecipe getRandomFlowerRecipe() {
     if (flowerRecipes.isEmpty()) return null;
 
     return Lists.newArrayList(flowerRecipes.values()).get(Util.rand.nextInt(Math.max(1, flowerRecipes.size())));
   }
 
-  public static void initFlowerRecipes () {
+  public static void initFlowerRecipes() {
     addFlowerRecipe("dandelion", Blocks.YELLOW_FLOWER.getStateFromMeta(EnumFlowerType.DANDELION.getMeta()));
     addFlowerRecipe("poppy", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.POPPY.getMeta()));
     addFlowerRecipe("blue_orchid", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.BLUE_ORCHID.getMeta()));
@@ -143,8 +143,7 @@ public class ModRecipes {
   }
 
 
-
-  public static void addVanillaBarkRecipe (String name, BlockPlanks.EnumType type, Item item) {
+  public static void addVanillaBarkRecipe(String name, BlockPlanks.EnumType type, Item item) {
     barkRecipes.put(new ResourceLocation(Roots.MODID, name), new BarkRecipe(type, item));
   }
 
@@ -157,16 +156,16 @@ public class ModRecipes {
     addVanillaBarkRecipe("dark_oak", BlockPlanks.EnumType.DARK_OAK, ModItems.bark_dark_oak);
   }
 
-  public static void initModdedBarkRecipes () {
+  public static void initModdedBarkRecipes() {
     addModdedBarkRecipe("wildwood", ModBlocks.wildwood_log, ModItems.bark_wildwood);
   }
 
-  public static void addModdedBarkRecipe (String name, Block block, Item item) {
+  public static void addModdedBarkRecipe(String name, Block block, Item item) {
     barkRecipes.put(new ResourceLocation(Roots.MODID, name), new BarkRecipe(block, item));
   }
 
   @Nullable
-  public static BarkRecipe getModdedBarkRecipe (Block block) {
+  public static BarkRecipe getModdedBarkRecipe(Block block) {
     for (BarkRecipe recipe : barkRecipes.values()) {
       if (recipe.getBlock() == block) return recipe;
     }
@@ -174,14 +173,14 @@ public class ModRecipes {
   }
 
   @Nullable
-  public static BarkRecipe getVanillaBarkRecipe (BlockPlanks.EnumType type) {
+  public static BarkRecipe getVanillaBarkRecipe(BlockPlanks.EnumType type) {
     for (BarkRecipe recipe : barkRecipes.values()) {
       if (recipe.getType() == type) return recipe;
     }
     return null;
   }
 
-  public static Collection<BarkRecipe> getBarkRecipes () {
+  public static Collection<BarkRecipe> getBarkRecipes() {
     return barkRecipes.values();
   }
 
@@ -245,7 +244,7 @@ public class ModRecipes {
     return transmutationRecipes.getOrDefault(name, null);
   }
 
-  public static List<TransmutationRecipe> getTransmutationRecipes () {
+  public static List<TransmutationRecipe> getTransmutationRecipes() {
     return new ArrayList<>(transmutationRecipes.values());
   }
 
@@ -455,6 +454,26 @@ public class ModRecipes {
     return null;
   }
 
+  public static RunicShearRecipe getRunicShearRecipe(ItemStack stack) {
+    for (RunicShearRecipe recipe : runicShearRecipes.values()) {
+      if (ItemStack.areItemStacksEqual(recipe.getDrop(), stack)) {
+        return recipe;
+      }
+    }
+
+    return null;
+  }
+
+  public static RunicShearRecipe getRunicShearEntityRecipe(ItemStack stack) {
+    for (RunicShearRecipe recipe : runicShearEntityRecipes.values()) {
+      if (ItemStack.areItemStacksEqual(recipe.getDrop(), stack)) {
+        return recipe;
+      }
+    }
+
+    return null;
+  }
+
   public static MortarRecipe getMortarRecipe(List<ItemStack> items) {
     for (MortarRecipe mortarRecipe : mortarRecipes) {
       if (mortarRecipe.matches(items)) {
@@ -531,13 +550,13 @@ public class ModRecipes {
     return null;
   }
 
-  public static void addFeyCraftingRecipe (ResourceLocation name, FeyCraftingRecipe recipe) {
+  public static void addFeyCraftingRecipe(ResourceLocation name, FeyCraftingRecipe recipe) {
     assert !feyCraftingRecipes.containsKey(name);
 
     feyCraftingRecipes.put(name, recipe);
   }
 
-  public static void addPyreCraftingRecipe (ResourceLocation name, PyreCraftingRecipe recipe) {
+  public static void addPyreCraftingRecipe(ResourceLocation name, PyreCraftingRecipe recipe) {
     assert !pyreCraftingRecipes.containsKey(name.getPath());
 
     pyreCraftingRecipes.put(name.getPath(), recipe);
@@ -569,11 +588,11 @@ public class ModRecipes {
     return pyreCraftingRecipes.get(recipeName);
   }
 
-  public static void removePyreCraftingRecipe (ResourceLocation name) {
+  public static void removePyreCraftingRecipe(ResourceLocation name) {
     pyreCraftingRecipes.remove(name.getPath());
   }
 
-  public static void removeFeyCraftingRecipe (ResourceLocation name) {
+  public static void removeFeyCraftingRecipe(ResourceLocation name) {
     feyCraftingRecipes.remove(name);
   }
 
