@@ -28,8 +28,7 @@ public class RitualRegistry {
     if(ritualName == null){
       return null;
     }
-    for (int i = 0; i < ritualRegistry.size(); i++) {
-      RitualBase ritual = ritualRegistry.values().toArray(new RitualBase[ritualRegistry.size()])[i];
+    for (RitualBase ritual : ritualRegistry.values()) {
       if (ritual.getName().equalsIgnoreCase(ritualName)) {
         return ritual;
       }
