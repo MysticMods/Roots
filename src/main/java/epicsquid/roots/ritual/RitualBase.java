@@ -64,7 +64,11 @@ public abstract class RitualBase {
     this.icon = icon;
   }
 
-  protected void addCondition(Condition condition){
+  public List<Condition> getConditions () {
+    return this.conditions;
+  }
+
+  public void addCondition(Condition condition){
     this.conditions.add(condition);
   }
 
