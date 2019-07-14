@@ -1,0 +1,14 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:stone_pickaxe"
+    },
+    {
+      "item": "roots:terra_moss"
+    }
+  ],
+  "result": {
+    "item": "roots:terrastone_pickaxe"
+  }
+}

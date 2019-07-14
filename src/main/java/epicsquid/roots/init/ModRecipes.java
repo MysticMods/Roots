@@ -748,14 +748,6 @@ public class ModRecipes {
             new ItemStack(Blocks.GRAVEL),
             new ItemStack(Items.DYE, 1, 15)));
 
-    addCraftingRecipe("sylvan_pickaxe",
-        new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_pickaxe), 1).addIngredients(
-            new ItemStack(Blocks.MOSSY_COBBLESTONE),
-            new ItemStack(Items.STONE_PICKAXE),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.terra_moss),
-            new ItemStack(ModItems.terra_moss)));
-
     addCraftingRecipe("living_pickaxe",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_pickaxe), 1).addIngredients(
             new GoldOrSilverIngotIngredient(),
@@ -763,22 +755,6 @@ public class ModRecipes {
             new ItemStack(ModItems.wildroot),
             new ItemStack(ModItems.bark_oak),
             new ItemStack(ModItems.bark_oak)));
-
-    addCraftingRecipe("glistening_pickaxe",
-        new FeyCraftingRecipe(new ItemStack(ModItems.glistening_pickaxe), 1).addIngredients(
-            Gem.amethyst.getGem(),
-            new ItemStack(Items.DIAMOND_PICKAXE),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.moonglow_leaf),
-            new ItemStack(ModItems.moonglow_leaf)));
-
-    addCraftingRecipe("sylvan_axe",
-        new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_pickaxe), 1).addIngredients(
-            new ItemStack(Blocks.MOSSY_COBBLESTONE),
-            new ItemStack(Items.STONE_AXE),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.terra_moss),
-            new ItemStack(ModItems.terra_moss)));
 
     addCraftingRecipe("living_axe",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_axe), 1).addIngredients(
@@ -788,22 +764,6 @@ public class ModRecipes {
             new ItemStack(ModItems.bark_oak),
             new ItemStack(ModItems.bark_oak)));
 
-    addCraftingRecipe("glistening_axe",
-        new FeyCraftingRecipe(new ItemStack(ModItems.glistening_axe), 1).addIngredients(
-            Gem.amethyst.getGem(),
-            new ItemStack(Items.DIAMOND_AXE),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.moonglow_leaf),
-            new ItemStack(ModItems.moonglow_leaf)));
-
-    addCraftingRecipe("sylvan_shovel",
-        new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_shovel), 1).addIngredients(
-            new ItemStack(Blocks.MOSSY_COBBLESTONE),
-            new ItemStack(Items.STONE_SHOVEL),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.terra_moss),
-            new ItemStack(ModItems.terra_moss)));
-
     addCraftingRecipe("living_shovel",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_shovel), 1).addIngredients(
             new GoldOrSilverIngotIngredient(),
@@ -811,22 +771,6 @@ public class ModRecipes {
             new ItemStack(ModItems.wildroot),
             new ItemStack(ModItems.bark_oak),
             new ItemStack(ModItems.bark_oak)));
-
-    addCraftingRecipe("glistening_shovel",
-        new FeyCraftingRecipe(new ItemStack(ModItems.glistening_shovel), 1).addIngredients(
-            Gem.amethyst.getGem(),
-            new ItemStack(Items.DIAMOND_SHOVEL),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.moonglow_leaf),
-            new ItemStack(ModItems.moonglow_leaf)));
-
-    addCraftingRecipe("sylvan_hoe",
-        new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_hoe), 1).addIngredients(
-            new ItemStack(Blocks.MOSSY_COBBLESTONE),
-            new ItemStack(Items.STONE_HOE),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.terra_moss),
-            new ItemStack(ModItems.terra_moss)));
 
     addCraftingRecipe("living_hoe",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_hoe), 1).addIngredients(
@@ -836,22 +780,6 @@ public class ModRecipes {
             new ItemStack(ModItems.bark_oak),
             new ItemStack(ModItems.bark_oak)));
 
-    addCraftingRecipe("glistening_hoe",
-        new FeyCraftingRecipe(new ItemStack(ModItems.glistening_hoe), 1).addIngredients(
-            Gem.amethyst.getGem(),
-            new ItemStack(Items.DIAMOND_HOE),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.moonglow_leaf),
-            new ItemStack(ModItems.moonglow_leaf)));
-
-    addCraftingRecipe("sylvan_sword",
-        new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_sword), 1).addIngredients(
-            new ItemStack(Blocks.MOSSY_COBBLESTONE),
-            new ItemStack(Items.STONE_SWORD),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.terra_moss),
-            new ItemStack(ModItems.terra_moss)));
-
     addCraftingRecipe("living_sword",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_sword), 1).addIngredients(
             new GoldOrSilverIngotIngredient(),
@@ -859,14 +787,6 @@ public class ModRecipes {
             new ItemStack(ModItems.wildroot),
             new ItemStack(ModItems.bark_oak),
             new ItemStack(ModItems.bark_oak)));
-
-    addCraftingRecipe("glistening_sword",
-        new FeyCraftingRecipe(new ItemStack(ModItems.glistening_sword), 1).addIngredients(
-            Gem.amethyst.getGem(),
-            new ItemStack(Items.DIAMOND_SWORD),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.moonglow_leaf),
-            new ItemStack(ModItems.moonglow_leaf)));
 
     addCraftingRecipe("living_arrow",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_arrow, 6), 1).addIngredients(

@@ -1,0 +1,14 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:stone_shovel"
+    },
+    {
+      "item": "roots:terra_moss"
+    }
+  ],
+  "result": {
+    "item": "roots:terrastone_shovel"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "Terrastone Tools",
+  "icon": "roots:terrastone_pickaxe",
+  "category": "apparatus",
+  "advancement": "roots:terra_moss",
+  "secret": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Enlivened with the magic contained within herbs and tipped with precious stone, terrastone tools will literally regrow any damage that they take, although slowly.$(br2)$(info) It has the effectiveness of an equivalent stone tool"
+    },
+    {
+      "type": "crafting",
+      "recipe": "roots:terrastone_pickaxe"
+    },
+    {
+      "type": "crafting",
+      "recipe": "roots:terrastone_axe"
+    },
+    {
+      "type": "crafting",
+      "recipe": "roots:terrastone_shovel"
+    },
+    {
+      "type": "crafting",
+      "recipe": "roots:terrastone_hoe"
+    },
+    {
+      "type": "crafting",
+      "recipe": "roots:terrastone_sword"
+    }
+  ]
+}

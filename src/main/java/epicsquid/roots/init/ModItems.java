@@ -31,7 +31,7 @@ import java.util.Arrays;
 public class ModItems {
 
   // All mod items
-  public static Item pestle, component_pouch, spell_dust, staff, sylvan_pickaxe,  living_pickaxe, glistening_pickaxe, sylvan_axe, living_axe, glistening_axe, sylvan_shovel, living_shovel, glistening_shovel, sylvan_hoe, living_hoe, glistening_hoe, sylvan_sword,  living_sword, glistening_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, wildwood_quiver, wildwood_bow,
+  public static Item pestle, component_pouch, spell_dust, staff, terrastone_pickaxe,  living_pickaxe, terrastone_axe, living_axe, terrastone_shovel, living_shovel, terrastone_hoe, living_hoe, terrastone_sword,  living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, wildwood_quiver, wildwood_bow,
           sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, apothecary_pouch,
   petals, flour, living_arrow, runic_dust, seeds, cooked_seeds, cooked_pereskia, fey_leather, wildewheet_bread;
 
@@ -93,21 +93,16 @@ public class ModItems {
     event.addItem(spell_dust = new ItemSpellDust("spell_dust").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(flour = new ItemBase("flour").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(staff = new ItemStaff("staff").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(sylvan_pickaxe = new ItemLivingPickaxe(ToolMaterial.STONE, "sylvan_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(terrastone_pickaxe = new ItemLivingPickaxe(ToolMaterial.STONE, "terrastone_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_pickaxe = new ItemLivingPickaxe(ToolMaterial.IRON, "living_pickaxe",0, 192, 22).setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(glistening_pickaxe = new ItemLivingPickaxe(ToolMaterial.DIAMOND, "glistening_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(sylvan_axe = new ItemLivingAxe(ToolMaterial.STONE, "sylvan_axe").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(terrastone_axe = new ItemLivingAxe(ToolMaterial.STONE, "terrastone_axe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_axe = new ItemLivingAxe(ToolMaterial.IRON, "living_axe", 0, 192, 22).setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(glistening_axe = new ItemLivingAxe(ToolMaterial.DIAMOND, "glistening_axe").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(sylvan_shovel = new ItemLivingShovel(ToolMaterial.STONE, "sylvan_shovel").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(terrastone_shovel = new ItemLivingShovel(ToolMaterial.STONE, "terrastone_shovel").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_shovel = new ItemLivingShovel(ToolMaterial.IRON, "living_shovel", 0, 192, 22).setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(glistening_shovel = new ItemLivingShovel(ToolMaterial.DIAMOND, "glistening_shovel").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(sylvan_hoe = new ItemLivingHoe(ToolMaterial.STONE, "sylvan_hoe").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(terrastone_hoe = new ItemLivingHoe(ToolMaterial.STONE, "terrastone_hoe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_hoe = new ItemLivingHoe(ToolMaterial.IRON, "living_hoe", 0, 192, 22).setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(glistening_hoe = new ItemLivingHoe(ToolMaterial.DIAMOND, "glistening_hoe").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(sylvan_sword = new ItemLivingSword(ToolMaterial.STONE, "sylvan_sword").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(terrastone_sword = new ItemLivingSword(ToolMaterial.STONE, "terrastone_sword").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_sword = new ItemLivingSword(ToolMaterial.IRON, "living_sword", 0, 192, 22).setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(glistening_sword = new ItemLivingSword(ToolMaterial.DIAMOND, "glistening_sword").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_arrow = new ItemLivingArrow("living_arrow").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(wildwood_quiver = new ItemQuiver("wildwood_quiver").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(wildwood_bow = new ItemWildwoodBow("wildwood_bow").setModelCustom(false).setCreativeTab(Roots.tab));

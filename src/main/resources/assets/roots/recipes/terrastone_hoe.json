@@ -1,0 +1,14 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:stone_hoe"
+    },
+    {
+      "item": "roots:terra_moss"
+    }
+  ],
+  "result": {
+    "item": "roots:terrastone_hoe"
+  }
+}
