@@ -1,9 +1,5 @@
 package epicsquid.roots.block;
 
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.roots.api.CustomPlantType;
@@ -27,6 +23,9 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+import java.util.Random;
+
 public class BlockElementalSoil extends BlockBase {
   public static final PropertyInteger waterSpeed = PropertyInteger.create("water", 0, 4);
   public static final PropertyInteger airSpeed = PropertyInteger.create("air", 0, 4);
@@ -40,6 +39,7 @@ public class BlockElementalSoil extends BlockBase {
     super(mat, type, 0.8f, name);
     this.soilType = soilType;
     this.itemBlock = new ItemBlockElementalSoil(this).setRegistryName(LibRegistry.getActiveModid(), name);
+    this.setHarvestReqs("shovel", 0);
 
     PropertyInteger property = this.soilType == EnumElementalSoilType.WATER ?
         waterSpeed :
@@ -48,6 +48,7 @@ public class BlockElementalSoil extends BlockBase {
     this.setDefaultState(this.blockState.getBaseState().withProperty(property, 1));
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   @Nonnull
   public IBlockState getStateFromMeta(int meta) {
@@ -64,6 +65,7 @@ public class BlockElementalSoil extends BlockBase {
     return super.getStateFromMeta(meta);
   }
 
+  @Nonnull
   @Override
   protected BlockStateContainer createBlockState() {
     return new BlockStateContainer(this, airSpeed, fireCookingMultiplier, earthFertility, waterSpeed);

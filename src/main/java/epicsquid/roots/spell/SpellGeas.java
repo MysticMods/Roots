@@ -19,7 +19,7 @@ public class SpellGeas extends SpellBase {
   public static SpellGeas instance = new SpellGeas(spellName);
 
   public SpellGeas(String name) {
-    super(name, TextFormatting.AQUA, 128f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f);
+    super(name, TextFormatting.DARK_RED, 128f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 80;
 

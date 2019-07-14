@@ -2,7 +2,6 @@ package epicsquid.roots.item;
 
 import epicsquid.mysticallib.model.IModeledObject;
 import epicsquid.roots.Roots;
-import epicsquid.roots.init.ModItems;
 import epicsquid.roots.model.ModelWildwoodArmor;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -55,16 +54,34 @@ public class ItemWildwoodArmor extends ItemArmor implements IModeledObject, ILiv
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
     {
-        if (itemRand.nextInt(40) == 0 && player.shouldHeal() && fullSet(player) && itemStack.getItem() == ModItems.wildwood_chestplate) {
-            player.heal(1);
+        switch (piecesWorn(player))
+        {
+            case 1:
+                if (itemRand.nextInt(80) == 0 && player.shouldHeal())
+                    player.heal(1);
+                break;
+            case 2:
+                if (itemRand.nextInt(60) == 0 && player.shouldHeal())
+                    player.heal(1);
+                break;
+            case 3:
+                if (itemRand.nextInt(40) == 0 && player.shouldHeal())
+                    player.heal(1);
+                break;
+            case 4:
+                if (itemRand.nextInt(30) == 0 && player.shouldHeal())
+                    player.heal(2);
+                break;
+            default:
         }
     }
 
-  public static boolean fullSet(EntityPlayer player) {
-    for (ItemStack stack : player.getArmorInventoryList()) {
-      if (!(stack.getItem() instanceof ItemWildwoodArmor)) return false;
-    }
-
-    return true;
+  public static int piecesWorn(EntityPlayer player) {
+        int count = 0;
+      for (ItemStack stack : player.getArmorInventoryList()) {
+          if (stack.getItem() instanceof ItemWildwoodArmor)
+              count++;
+      }
+      return count;
   }
 }
