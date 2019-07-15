@@ -8,16 +8,30 @@ import crafttweaker.api.minecraft.CraftTweakerMC;
 import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.util.zen.ZenDocAppend;
+import epicsquid.roots.util.zen.ZenDocArg;
+import epicsquid.roots.util.zen.ZenDocClass;
+import epicsquid.roots.util.zen.ZenDocMethod;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+@ZenDocClass("mods.roots.Bark")
+@ZenDocAppend({"docs/include/bark.example.md"})
 @ZenRegister
 @ZenClass("mods." + Roots.MODID + ".Bark")
 public class BarkTweaker {
 
+  @ZenDocMethod(
+      order = 1,
+      args = {
+          @ZenDocArg(arg="name", info="the name of the recipe"),
+          @ZenDocArg(arg="woodLog", info="the itemstack equivalent of the wood log being broken"),
+          @ZenDocArg(arg="bark", info="the itemstack of the type of bark this log produces")
+      }
+  )
   @ZenMethod
   public static void addRecipe(String name, IItemStack woodLog, IItemStack bark) {
     ItemStack log = CraftTweakerMC.getItemStack(woodLog);

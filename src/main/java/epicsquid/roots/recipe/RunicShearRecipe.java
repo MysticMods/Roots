@@ -26,8 +26,8 @@ public class RunicShearRecipe {
   private ItemStack optionalDisplayItem = ItemStack.EMPTY;
   private String name;
 
-  private EntityLivingBase entity = null;
-  private Class<? extends EntityLivingBase> clazz = null;
+  private Entity entity = null;
+  private Class<? extends Entity> clazz = null;
   private int cooldown = 0;
 
   public RunicShearRecipe(Block block, Block replacementBlock, ItemStack drop, String name, ItemStack optionalDisplayItem) {
@@ -42,7 +42,7 @@ public class RunicShearRecipe {
     this(block, replacementBlock, drop, name, null);
   }
 
-  public RunicShearRecipe(ItemStack drop, Class<? extends EntityLivingBase> entity, int cooldown, String name) {
+  public RunicShearRecipe(ItemStack drop, Class<? extends Entity> entity, int cooldown, String name) {
     this.drop = drop;
     this.clazz = entity;
     this.name = name;
@@ -69,7 +69,7 @@ public class RunicShearRecipe {
     return drop;
   }
 
-  public Class<? extends EntityLivingBase> getClazz() {
+  public Class<? extends Entity> getClazz() {
     return clazz;
   }
 
@@ -87,7 +87,7 @@ public class RunicShearRecipe {
 
   @SideOnly(Side.CLIENT)
   @Nullable
-  public EntityLivingBase getEntity () {
+  public Entity getEntity () {
     if (entity == null) {
       Minecraft mc = Minecraft.getMinecraft();
       try {

@@ -1,12 +1,6 @@
 package epicsquid.roots;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
 import com.google.common.collect.Sets;
-
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
@@ -25,17 +19,12 @@ import epicsquid.roots.item.ItemDruidKnife;
 import epicsquid.roots.item.ItemPouch;
 import epicsquid.roots.network.MessagePlayerDataUpdate;
 import epicsquid.roots.network.MessagePlayerGroveUpdate;
-import epicsquid.roots.network.fx.MessageGeasFX;
-import epicsquid.roots.network.fx.MessageGeasRingFX;
-import epicsquid.roots.network.fx.MessageLightDrifterFX;
-import epicsquid.roots.network.fx.MessageLightDrifterSync;
-import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
+import epicsquid.roots.network.fx.*;
 import epicsquid.roots.recipe.BarkRecipe;
 import epicsquid.roots.util.Constants;
 import epicsquid.roots.util.ItemSpawnUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
-import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockNewLog;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks.EnumType;
@@ -76,6 +65,11 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+
 public class EventManager {
 
   public static long ticks = 0;
@@ -85,24 +79,22 @@ public class EventManager {
     if (event.getHarvester() != null) {
       ItemStack tool = event.getHarvester().getHeldItem(EnumHand.MAIN_HAND);
       if (tool.getItem() instanceof ItemDruidKnife) {
-        if (event.getState().getBlock() instanceof BlockLog) {
-          event.getDrops().clear();
-          IBlockState blockstate = event.getState();
-          Block block = blockstate.getBlock();
-          EnumType type = (block == Blocks.LOG) ?
-              blockstate.getValue(BlockOldLog.VARIANT) :
-              (block == Blocks.LOG2) ? blockstate.getValue(BlockNewLog.VARIANT) : null;
-          BarkRecipe bark;
-          if (type == null) {
-            bark = ModRecipes.getModdedBarkRecipe(block);
-          } else {
-            bark = ModRecipes.getVanillaBarkRecipe(type);
-          }
-          if (bark != null) {
-            ItemStack barkStack = bark.getBarkStack(Util.rand.nextInt(getBarkAmount(tool)) + 1);
-            if (!event.getWorld().isRemote) {
-              ItemSpawnUtil.spawnItem(event.getWorld(), event.getPos(), barkStack);
-            }
+        event.getDrops().clear();
+        IBlockState blockstate = event.getState();
+        Block block = blockstate.getBlock();
+        EnumType type = (block == Blocks.LOG) ?
+            blockstate.getValue(BlockOldLog.VARIANT) :
+            (block == Blocks.LOG2) ? blockstate.getValue(BlockNewLog.VARIANT) : null;
+        BarkRecipe bark;
+        if (type == null) {
+          bark = ModRecipes.getModdedBarkRecipe(block);
+        } else {
+          bark = ModRecipes.getVanillaBarkRecipe(type);
+        }
+        if (bark != null) {
+          ItemStack barkStack = bark.getBarkStack(Util.rand.nextInt(getBarkAmount(tool)) + 1);
+          if (!event.getWorld().isRemote) {
+            ItemSpawnUtil.spawnItem(event.getWorld(), event.getPos(), barkStack);
           }
         }
       }
@@ -199,11 +191,9 @@ public class EventManager {
     }
   }
 
-  public static Set<Class<?>> entityClasses = Sets.newHashSet(EntityCow.class, EntityLlama.class, EntitySquid.class, EntityDeer.class);
-
   @SubscribeEvent
   public static void addCapabilities(AttachCapabilitiesEvent<Entity> event) {
-    if (entityClasses.contains(event.getObject().getClass())) {
+    if (ModRecipes.getRunicShearEntities().contains(event.getObject().getClass())) {
       event.addCapability(RunicShearsCapabilityProvider.IDENTIFIER, new RunicShearsCapabilityProvider());
     }
     if (event.getObject() instanceof EntityPlayer) {
