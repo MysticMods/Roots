@@ -8,24 +8,52 @@ import crafttweaker.api.minecraft.CraftTweakerMC;
 import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.util.zen.ZenDocAppend;
+import epicsquid.roots.util.zen.ZenDocArg;
+import epicsquid.roots.util.zen.ZenDocClass;
+import epicsquid.roots.util.zen.ZenDocMethod;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+@ZenDocClass("mods.roots.Transmutation")
+@ZenDocAppend({"docs/include/transmutation.example.md"})
 @ZenRegister
 @ZenClass("mods." + Roots.MODID + ".Transmutation")
 public class TransmutationTweaker {
+  @ZenDocMethod(
+      order=1,
+      args= {
+          @ZenDocArg(arg="name", info="the name of the recipe being removed")
+      }
+  )
   @ZenMethod
   public static void removeRecipe(String name) {
     CraftTweaker.LATE_ACTIONS.add(new Remove(name));
   }
 
+  @ZenDocMethod(
+      order=2,
+      args = {
+          @ZenDocArg(arg="name", info="the name of the recipe being added (must be unique)"),
+          @ZenDocArg(arg="state1", info="the initial state of the block as defined as a blockstate"),
+          @ZenDocArg(arg="state2", info="the state that the initial state should be converted into")
+      }
+  )
   @ZenMethod
   public static void addBlockToBlockRecipe(String name, IBlockState state1, IBlockState state2) {
     CraftTweaker.LATE_ACTIONS.add(new BlockToBlock(name, CraftTweakerMC.getBlockState(state1), CraftTweakerMC.getBlockState(state2)));
   }
 
+  @ZenDocMethod(
+      order=3,
+      args = {
+          @ZenDocArg(arg="name", info="the name of the recipe being added (must be unique)"),
+          @ZenDocArg(arg="state", info="the initial state that is looked for when converting (as a block state)"),
+          @ZenDocArg(arg="stack", info="the item stack that replaces the block state")
+      }
+  )
   @ZenMethod
   public static void addBlockToItemRecipe(String name, IBlockState state, IItemStack stack) {
     CraftTweaker.LATE_ACTIONS.add(new BlockToItem(name, CraftTweakerMC.getBlockState(state), CraftTweakerMC.getItemStack(stack)));

@@ -14,6 +14,7 @@ import epicsquid.roots.recipe.*;
 import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.util.ItemUtil;
 import epicsquid.roots.util.StateUtil;
 import epicsquid.roots.util.types.WorldPosStatePredicate;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
@@ -47,7 +48,7 @@ public class ModRecipes {
   private static Map<String, PyreCraftingRecipe> pyreCraftingRecipes = new HashMap<>();
   private static Map<ResourceLocation, FeyCraftingRecipe> feyCraftingRecipes = new HashMap<>();
   private static Map<String, RunicShearRecipe> runicShearRecipes = new HashMap<>();
-  private static Map<Class<? extends EntityLivingBase>, RunicShearRecipe> runicShearEntityRecipes = new HashMap<>();
+  private static Map<Class<? extends Entity>, RunicShearRecipe> runicShearEntityRecipes = new HashMap<>();
   private static List<RunicCarvingRecipe> runicCarvingRecipes = new ArrayList<>();
   private static Map<ResourceLocation, PacifistEntry> pacifistEntities = new HashMap<>();
   private static Map<Class<? extends Entity>, PacifistEntry> pacifistClasses = new HashMap<>();
@@ -78,7 +79,11 @@ public class ModRecipes {
   }
 
   public static void removePacifistEntry(ResourceLocation name) {
-    pacifistEntities.remove(name);
+    PacifistEntry entry = getPacifistEntry(name);
+    if (entry != null) {
+      pacifistEntities.remove(name);
+      pacifistClasses.remove(entry.getEntityClass());
+    }
   }
 
   public static void initPacifistEntities() {
@@ -474,6 +479,14 @@ public class ModRecipes {
     return null;
   }
 
+  public static Set<Class<? extends Entity>> getRunicShearEntities () {
+    return runicShearEntityRecipes.keySet();
+  }
+
+  public static void addMortarRecipe (MortarRecipe recipe) {
+    mortarRecipes.add(recipe);
+  }
+
   public static MortarRecipe getMortarRecipe(List<ItemStack> items) {
     for (MortarRecipe mortarRecipe : mortarRecipes) {
       if (mortarRecipe.matches(items)) {
@@ -481,6 +494,10 @@ public class ModRecipes {
       }
     }
     return null;
+  }
+
+  public static void removeMortarRecipes (ItemStack output) {
+    mortarRecipes.removeIf(recipe -> ItemUtil.equalWithoutSize(recipe.getResult(), output));
   }
 
   public static MortarRecipe getMortarRecipe(ItemStack output) {
@@ -592,6 +609,10 @@ public class ModRecipes {
     pyreCraftingRecipes.remove(name.getPath());
   }
 
+  public static void removePyreCraftingRecipe(ItemStack output) {
+    pyreCraftingRecipes.entrySet().removeIf((recipe) -> ItemUtil.equalWithoutSize(recipe.getValue().getResult(), output));
+  }
+
   public static void removeFeyCraftingRecipe(ResourceLocation name) {
     feyCraftingRecipes.remove(name);
   }
@@ -622,6 +643,10 @@ public class ModRecipes {
 
   public static Map<String, RunicShearRecipe> getRunicShearRecipes() {
     return runicShearRecipes;
+  }
+
+  public static Map<Class<? extends Entity>, RunicShearRecipe> getRunicShearEntityRecipes () {
+    return runicShearEntityRecipes;
   }
 
   public static Map<String, PyreCraftingRecipe> getPyreCraftingRecipes() {

@@ -34,6 +34,10 @@ public class PacifistEntry {
     this.checkTarget = checkTarget;
   }
 
+  public Class<? extends Entity> getEntityClass() {
+    return entityClass;
+  }
+
   public boolean matches (Entity entity) {
     return this.entityClass.equals(entity.getClass());
   }

@@ -6,19 +6,37 @@ import crafttweaker.api.entity.IEntityDefinition;
 import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.util.zen.ZenDocAppend;
+import epicsquid.roots.util.zen.ZenDocArg;
+import epicsquid.roots.util.zen.ZenDocClass;
+import epicsquid.roots.util.zen.ZenDocMethod;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+@ZenDocClass("mods.roots.Pacifist")
+@ZenDocAppend({"docs/include/pacifist.example.md"})
 @ZenRegister
 @ZenClass("mods." + Roots.MODID + ".Pacifist")
 public class PacifistTweaker {
 
+  @ZenDocMethod(
+      order=1,
+      args = {
+          @ZenDocArg(arg="entity", info="the entity to add to the pacifist list")
+      }
+  )
   @ZenMethod
   public static void addEntity(IEntityDefinition entity) {
     CraftTweaker.LATE_ACTIONS.add(new Add((EntityEntry) entity.getInternal()));
   }
 
+  @ZenDocMethod(
+      order=2,
+      args = {
+          @ZenDocArg(arg="entity", info="the entity to remove from the pacifist list")
+      }
+  )
   @ZenMethod
   public static void removeEntity(IEntityDefinition entity) {
     CraftTweaker.LATE_ACTIONS.add(new Remove((EntityEntry) entity.getInternal()));
