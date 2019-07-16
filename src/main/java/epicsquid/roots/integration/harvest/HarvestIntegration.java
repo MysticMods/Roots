@@ -2,7 +2,6 @@ package epicsquid.roots.integration.harvest;
 
 import epicsquid.mysticallib.block.BlockCropBase;
 import epicsquid.roots.init.ModBlocks;
-import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.Loader;
 import tehnut.harvest.BlockStack;
 import tehnut.harvest.Crop;
@@ -15,7 +14,6 @@ import java.util.Map;
 public class HarvestIntegration {
     public static void init() {
         List<BlockCropBase> crops = Arrays.asList(ModBlocks.moonglow,
-                ModBlocks.aubergine,
                 ModBlocks.pereskia,
                 ModBlocks.wildroot,
                 ModBlocks.spirit_herb,

@@ -1,20 +1,21 @@
 package epicsquid.roots.effect;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 import epicsquid.roots.capability.playerdata.PlayerDataCapabilityProvider;
 import epicsquid.roots.util.Constants;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class EffectManager {
   private static Map<String, Effect> effects = new HashMap<>();
 
   public static Effect effect_time_stop,
       effect_invulnerability,
+      effect_freeze,
       effect_fireresist,
       effect_arcanism,
       effect_naturescure,

@@ -4,11 +4,11 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.network.fx.MessageLifeInfusionFX;
 import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
+import net.minecraft.block.BlockNetherWart;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,9 +27,9 @@ public class SpellRampantGrowth extends SpellBase {
   public static SpellRampantGrowth instance = new SpellRampantGrowth(spellName);
 
   public SpellRampantGrowth(String name) {
-    super(name, TextFormatting.DARK_GREEN, 224f / 255f, 135f / 255f, 40f / 255f, 46f / 255f, 94f / 255f, 93f / 255f);
+    super(name, TextFormatting.DARK_AQUA, 224f / 255f, 135f / 255f, 40f / 255f, 46f / 255f, 94f / 255f, 93f / 255f);
     this.castType = EnumCastType.CONTINUOUS;
-    this.cooldown = 16;
+    this.cooldown = 0;
 
     addCost(HerbRegistry.getHerbByName("spirit_herb"), 0.65f);
     addCost(HerbRegistry.getHerbByName("pereskia"), 0.45f);
@@ -53,6 +53,8 @@ public class SpellRampantGrowth extends SpellBase {
         if (skips.contains(block)) return false;
         if (state.getBlock() instanceof BlockFlower) return false;
         return ((IGrowable) state.getBlock()).canGrow(player.world, pos, state, false);
+      } else if (state.getBlock() == Blocks.NETHER_WART) {
+        return state.getValue(BlockNetherWart.AGE) < 3;
       }
       return false;
     });

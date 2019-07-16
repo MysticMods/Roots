@@ -1,8 +1,5 @@
 package epicsquid.roots.entity.spell;
 
-import java.util.List;
-import java.util.UUID;
-
 import epicsquid.roots.particle.ParticleUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,6 +12,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+
+import java.util.List;
+import java.util.UUID;
 
 public class EntityFireJet extends Entity {
   private static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityFireJet.class, DataSerializers.VARINT);
@@ -78,7 +78,7 @@ public class EntityFireJet extends Entity {
             if (!(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
                 && entity.getUniqueID().compareTo(player.getUniqueID()) != 0) {
               entity.setFire(4);
-              entity.attackEntityFrom((DamageSource.IN_FIRE).causeMobDamage(player), 2.0f);
+              entity.attackEntityFrom((DamageSource.IN_FIRE).causeMobDamage(player), 4.5f);
               entity.setLastAttackedEntity(player);
               entity.setRevengeTarget(player);
             }

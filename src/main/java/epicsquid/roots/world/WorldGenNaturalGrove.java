@@ -1,9 +1,5 @@
 package epicsquid.roots.world;
 
-import java.util.Random;
-
-import javax.vecmath.Vector2d;
-
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.entity.grove.EntityNaturalGrove;
@@ -26,6 +22,9 @@ import net.minecraft.world.gen.structure.template.PlacementSettings;
 import net.minecraft.world.gen.structure.template.Template;
 import net.minecraft.world.gen.structure.template.TemplateManager;
 import net.minecraftforge.fml.common.IWorldGenerator;
+
+import javax.vecmath.Vector2d;
+import java.util.Random;
 
 public class WorldGenNaturalGrove implements IWorldGenerator {
 
@@ -82,7 +81,7 @@ public class WorldGenNaturalGrove implements IWorldGenerator {
         IBlockState iblockstate = world.getBlockState(blockpos);
         world.notifyBlockUpdate(blockpos, iblockstate, iblockstate, 3);
 
-        //Spawn entity grove
+        //Spawn entity fey
         EntityNaturalGrove naturalGrove = new EntityNaturalGrove(world);
         naturalGrove.setPosition(blockpos.getX() +0.5f, blockpos.getY() + 2, blockpos.getZ() +0.5f);
         world.spawnEntity(naturalGrove);

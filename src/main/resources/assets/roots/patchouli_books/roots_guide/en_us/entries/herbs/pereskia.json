@@ -6,12 +6,23 @@
   
   "pages": [
     {
-      "type": "text",
-      "text": "A vibrant plant full of magical energy. Both the bulbs and the flowers that grow from them have different magical applications, which has earned this plant the nickname 'Feyblossom' among some circles - in reference to legends which state the flower was originally cultivated in the gardens of fairies."
+      "type": "spotlight",
+      "item": "roots:pereskia",
+      "link_recipe": true,
+      "text": "Once called \"feyblossom\" due to the belief that they originated in the gardens of fairies, the flower of this plant is magically potent.$(br2)$(info) Pereskia bulbs can be planted in normal farmland.$(br2)$(info) This herb is very precious and used in a number of crafting recipes."
     },
     {
       "type": "ritual_crafting_template",
       "recipe": "pereskia"
+    },
+    {
+      "type": "crafting",
+      "recipe": "roots:pereskia_seed"
+    },
+    {
+      "type": "smelting",
+      "recipe": "roots:pereskia_bulb",
+      "text": "The bulbs of the pereskia are quite delicious when cooked."
     }
   ]
 }

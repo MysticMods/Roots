@@ -1,22 +1,27 @@
 package epicsquid.roots.entity.ritual;
 
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
 import epicsquid.roots.ritual.RitualRegistry;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.MobEffects;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.storage.loot.LootContext;
+import net.minecraft.world.storage.loot.LootTable;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 import java.lang.reflect.InvocationTargetException;
@@ -38,6 +43,7 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
 
   @Override
   public void onUpdate() {
+    super.onUpdate();
     int curLifetime = getDataManager().get(lifetime);
     getDataManager().set(lifetime, curLifetime - 1);
     getDataManager().setDirty(lifetime);
@@ -56,12 +62,13 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
     if (entityList.isEmpty()) return false;
     EntityLiving entity = entityList.get(random.nextInt(entityList.size()));
 
+
     boolean didDrops = false;
 
     if (!world.isRemote) {
       entity.captureDrops = true;
       entity.capturedDrops.clear();
-      dropLoot(entity);
+      dropLoot(entity, true);
       entity.captureDrops = false;
       if (!ForgeHooks.onLivingDrops(entity, DamageSource.GENERIC, entity.capturedDrops, 0, false)) {
         for (EntityItem item : entity.capturedDrops) {
@@ -75,7 +82,7 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
     }
 
     if (didDrops) {
-      entity.addPotionEffect( new PotionEffect(MobEffects.GLOWING, 30, 0));
+      entity.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 30, 0));
     }
     return didDrops;
   }
@@ -85,17 +92,36 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
     return lifetime;
   }
 
-  private static Method dropLoot = null;
+  private static Method getLootTable = null;
 
-  public void dropLoot(EntityLiving entity) {
-    if (dropLoot == null) {
-      dropLoot = ReflectionHelper.findMethod(EntityLiving.class, "dropLoot", "func_184610_a", boolean.class, int.class, DamageSource.class);
+  public static ResourceLocation getLootTable(EntityLiving entity) {
+    if (getLootTable == null) {
+      getLootTable = ReflectionHelper.findMethod(EntityLiving.class, "getLootTable", "func_184647_J");
     }
 
     try {
-      dropLoot.invoke(entity, false, 0, DamageSource.GENERIC);
+      return (ResourceLocation) getLootTable.invoke(entity);
     } catch (IllegalAccessException | InvocationTargetException e) {
-      return;
+      return null;
+    }
+  }
+
+  public static void dropLoot(EntityLiving entity, boolean player) {
+    ResourceLocation resourcelocation = entity.deathLootTable;
+
+    if (resourcelocation == null) {
+      resourcelocation = getLootTable(entity);
+    }
+
+    if (resourcelocation != null) {
+      LootTable loottable = entity.world.getLootTableManager().getLootTableFromLocation(resourcelocation);
+      entity.deathLootTable = null;
+      FakePlayer fakePlayer = FakePlayerFactory.getMinecraft((WorldServer)entity.world);
+      LootContext context = new LootContext(random.nextInt(6) == 0 ? 1 : 0, (WorldServer) entity.world, entity.world.getLootTableManager(), entity, fakePlayer, DamageSource.GENERIC);
+
+      for (ItemStack itemstack : loottable.generateLootForPools(entity.deathLootTableSeed == 0L ? entity.rand : new Random(entity.deathLootTableSeed), context)) {
+        entity.entityDropItem(itemstack, 0.0F);
+      }
     }
   }
 }

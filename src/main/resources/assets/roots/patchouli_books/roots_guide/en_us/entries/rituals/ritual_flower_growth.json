@@ -1,13 +1,13 @@
 {
   "name": "Flower Growth",
-  "icon": "minecraft:red_flower",
+  "icon": "roots:ritual_flower_growth",
   "category": "rituals",
-  "advancement": "roots:pereskia",
+  "advancement": "roots:pyre",
 
   "pages": [
     {
       "type": "text",
-      "text": "The energy of fire mixed with sunbeams allows you to perform a ritual that makes many flowers sprout on the vivid grass"
+      "text": "Sprout forth a variety of beautiful flowers. They grow quickly in the area around the ritual, and can be used for many things.$(br2)$(info) This ritual is an excellent source of flowers in order to make $(l:resources/petals)petals$()."
     },
     {
       "type": "pyre_template",

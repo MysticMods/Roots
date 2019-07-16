@@ -1,0 +1,83 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "facing=north,half=bottom,valid=true": {
+      "model": "roots:grove_stone_active"
+    },
+    "facing=north,half=bottom,valid=false": {
+      "model": "roots:grove_stone"
+    },
+    "facing=south,half=bottom,valid=true": {
+      "model": "roots:grove_stone_active",
+      "transform": {
+        "rotation": {
+          "y": 180
+        }
+      }
+    },
+    "facing=south,half=bottom,valid=false": {
+      "model": "roots:grove_stone",
+      "transform": {
+        "rotation": {
+          "y": 180
+        }
+      }
+    },
+    "facing=east,half=bottom,valid=true": {
+      "model": "roots:grove_stone_active",
+      "transform": {
+        "rotation": {
+          "y": 90
+        }
+      }
+    },
+    "facing=east,half=bottom,valid=false": {
+      "model": "roots:grove_stone",
+      "transform": {
+        "rotation": {
+          "y": 90
+        }
+      }
+    },
+    "facing=west,half=bottom,valid=true": {
+      "model": "roots:grove_stone_active",
+      "transform": {
+        "rotation": {
+          "y": -90
+        }
+      }
+    },
+    "facing=west,half=bottom,valid=false": {
+      "model": "roots:grove_stone",
+      "transform": {
+        "rotation": {
+          "y": -90
+        }
+      }
+    },
+    "facing=north,half=top,valid=true": {
+      "model": "roots:grove_padding"
+    },
+    "facing=north,half=top,valid=false": {
+      "model": "roots:grove_padding"
+    },
+    "facing=south,half=top,valid=true": {
+      "model": "roots:grove_padding"
+    },
+    "facing=south,half=top,valid=false": {
+      "model": "roots:grove_padding"
+    },
+    "facing=east,half=top,valid=true": {
+      "model": "roots:grove_padding"
+    },
+    "facing=east,half=top,valid=false": {
+      "model": "roots:grove_padding"
+    },
+    "facing=west,half=top,valid=true": {
+      "model": "roots:grove_padding"
+    },
+    "facing=west,half=top,valid=false": {
+      "model": "roots:grove_padding"
+    }
+  }
+}

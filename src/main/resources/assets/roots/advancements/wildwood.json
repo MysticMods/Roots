@@ -1,0 +1,53 @@
+{
+    "display": {
+        "icon": {
+            "item": "roots:wildwood_log"
+        },
+        "title": {
+            "translate": "advancement.roots.wildwood"
+        },
+        "description": {
+            "translate": "advancement.roots.wildwood.desc"
+        }
+    },
+    "parent": "roots:spirit_herb",
+    "criteria": {
+        "log": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:wildwood_log"
+                    }
+                ]
+            }
+        },
+        "leaves": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:wildwood_leaves"
+                    }
+                ]
+            }
+        },
+        "bark": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "roots:bark_wildwood"
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "log",
+            "leaves",
+            "bark"
+        ]
+    ]
+}

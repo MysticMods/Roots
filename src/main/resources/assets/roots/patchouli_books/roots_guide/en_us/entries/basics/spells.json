@@ -1,34 +1,46 @@
 {
-  "name": "Creating Spells",
+  "name": "Spellcraft & Imbuing",
   "icon": "roots:staff",
   "category": "basics",
-  "priority": true,
   "advancement": "roots:root",
-  "secret": true,
-  "pages": [
+    "pages": [
     {
       "type": "text",
-      "text": "The most basic form of power available to a druid is through spellcraft. Each spell makes use of druid herbs to produce wonderous magic. To do this, a druid must break down reagents in a $(l:apparatus/mortar)Mortar & Pestle$() into a condensed Petal Dust which carries the essence of the spell."
+      "text": "The most basic power available to a druid is spellcraft. To make, each spell requires specific components, which are broken down in a $(l:apparatus/mortar)Mortar & Pestle$() into spell dust. This dust can then be imbued into a staff.$(br2)In addition to the creation, casting spells require material components in the form of herbs."
     },
     {
       "type": "text",
-      "text": "Once a Petal Dust has been crafted, it can be imbued into a simple staff for casting using an $(l:apparatus/imbuer)Imbuer.$() During the imbuement, further reagents can be added to modify the spells effects permenantly."
+      "text": "Once the spell dust has been crafted, it is imbued into the staff with an Imbuer. During the process, further reagents can be added to permanently modify the spell.$(br2)Imbuement will never override a old spell slot, instead placing the new spell in the first available empty slot, if there is one."
+    },
+    {
+      "type": "crafting",
+      "recipe": "roots:imbuer",
+      "title": "Imbuer",
+      "text": "Staff and spell dust can be inserted into the imbuer to begin the process. It will take a short amount of time before the upgraded staff is returned. $(info) Spell dust can be augmented with other reagents before it is inserted into a staff."
     },
     {
       "type": "crafting",
       "recipe": "roots:staff",
-      "title": "Spell Staff",
-      "text": "All spells require a druid to have various herbs in their inventory in order to cast them. These herbs can be provided to the staff through a $(l:apparatus/pouch)Petal Pouch.$()"
+      "title": "Staff",
+      "text": "In addition to the staff and spell dust, material components in the form of herbs $(warning) must be provided from a $(l:apparatus/component_pouch)Component Pouch$() or $(l:apparatus/apothecary_pouch)Apothecary Pouch$()."
+    },
+    {
+      "type": "text",
+      "title": "Manipulating the Staff",
+      "text": "The staff is capable of holding up to 5 spells. The currently selected spell is always displayed when the druid hovers over it. Holding shift will allow show all imbued spells.$(br2)Sneaking while right-clicking will cycle through to the next available spells. Additional keybinds exist should you need them."
     },
     {
       "type": "text",
       "title": "Casting",
-      "text": "Casting spells is quite simple. Hold the staff in either hand, right click, and the spell will cast!$(br2)Spells take form in different ways. Some may be brief, insant effects that incur a cooldown before they can be cast again(right-click), and others are only particularly useful if their effect is consistently channeled (hold right-click)."
+      "text": "Once a spell is selected, simply hold the staff in either hand. Depending on the type, be it one that triggers instantly or requires a period of concentration, right-click or hold right-click to activate respectively.$(br2)If the correct components are available, they will be consumed (and a visual alert will show you your remaining stock of these herbs) and the spell will be cast."
     },
     {
       "type": "text",
       "title": "Removing Spells",
-      "text": "In order to remove a spell from a slot in your staff, you can select the relevant slot and then imbue it with runic dust."
+      "text": "As the power of the staff is limited and can only maintain 5 spells, it may become necessary for you to remove a spell. Simply select the slot you wish to void, and $(info) imbue the staff with $(l:resources/runic_dust)Runic Dust$(). The returned staff will now be without that spell."
+    },
+    {
+      "type": "empty"
     }
   ]
 }

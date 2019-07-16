@@ -22,7 +22,7 @@ minecraft {
     version = "1.12.2-14.23.5.2768"
     runDir = "run"
 
-    mappings = "snapshot_20171003"
+    mappings = "stable_39"
 
     replace "@VERSION@", project.version
     replaceIn "Roots.java"
@@ -46,7 +46,7 @@ dependencies {
     deobfProvided "mezz.jei:jei_${minecraft_version}:${jei_version}:api"
     // at runtime, use the full JEI jar
     runtime "mezz.jei:jei_${minecraft_version}:${jei_version}"
-    compile("jeresources:JustEnoughResources-${minecraft_version}:${jer_version}") {
+    deobfCompile("jeresources:JustEnoughResources-${minecraft_version}:${jer_version}") {
         exclude group: 'mezz.jei'
     }
     compile("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${ct_version}") {
@@ -55,9 +55,12 @@ dependencies {
     compile("com.blamejared:MTLib:${mt_lib_version}") {
         exclude group: 'mezz.jei'
     }
-    compile("vazkii.botania:Botania:${botania_version}") {
+    compileOnly("vazkii.botania:Botania:${botania_version}") {
         exclude group: 'mezz.jei'
     }
+
+    deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}"
+    deobfCompile "mcjty.theoneprobe:TheOneProbe-${top_version}"
 }
 
 repositories {
@@ -90,6 +93,15 @@ repositories {
         name = "Jared"
         url = "https://maven.blamejared.com"
     }
+    maven {
+        url "http://maven.tterrag.com"
+    }
+}
+
+jar {
+    manifest {
+        attributes 'FMLAT': 'roots_at.cfg'
+    }
 }
 
 processResources {
@@ -109,6 +121,8 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+
+    rename '(.+_at.cfg)', 'META-INF/$1'
 }
 
 

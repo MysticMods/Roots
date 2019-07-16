@@ -1,6 +1,7 @@
 package epicsquid.roots.advancements;
 
 import com.google.gson.JsonElement;
+import epicsquid.mysticallib.advancement.IGenericPredicate;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 

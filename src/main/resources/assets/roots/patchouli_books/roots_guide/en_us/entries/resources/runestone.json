@@ -2,16 +2,27 @@
   "name": "Runestone",
   "icon": "roots:runestone",
   "category": "resources",
-  "advancement": "roots:pyre",
+  "advancement": "roots:fey_crafter",
   "secret": true,
   "pages": [
     {
-      "type": "text",
-      "text": "Runestone is a magic-infused variety of stone that is often used in structures required by druidic rituals, or as a specialized crafting component where ordinary stone fails."
+      "type": "spotlight",
+      "item": "roots:runestone",
+      "link_recipe": true,
+      "text": "Ordinary stone transformed by magic & the power of the fey, runestone and its variants are often used in structures required for Druidic rituals.$(br2)While also serving a decorative purpose, you may find other uses in crafting for runestone and its byproducts."
     },
     {
-      "type": "ritual_crafting_template",
-      "recipe": "rune_stone"
+      "type": "fey_crafting_template",
+      "recipe": "runestone"
+    },
+    {
+      "type": "crafting",
+      "recipe": "roots:runestone_brick",
+      "recipe2": "roots:runestone_chiseled"
+    },
+    {
+      "type": "crafting",
+      "recipe": "roots:runestone_brick_alt"
     }
   ]
 }

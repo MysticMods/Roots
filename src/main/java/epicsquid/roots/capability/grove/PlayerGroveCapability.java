@@ -1,11 +1,11 @@
 package epicsquid.roots.capability.grove;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import epicsquid.roots.grove.GroveType;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PlayerGroveCapability implements IPlayerGroveCapability {
 
@@ -36,7 +36,7 @@ public class PlayerGroveCapability implements IPlayerGroveCapability {
     int count = 0;
     for (Map.Entry<GroveType, Float> entry : groveTrust.entrySet()) {
       NBTTagCompound groveVariable = new NBTTagCompound();
-      groveVariable.setString("grove" + count, entry.getKey().toString());
+      groveVariable.setString("fey" + count, entry.getKey().toString());
       groveVariable.setFloat("trust" + count, entry.getValue());
       groveTagList.appendTag(groveVariable);
       count++;
@@ -53,7 +53,7 @@ public class PlayerGroveCapability implements IPlayerGroveCapability {
 
     for (int i = 0; i < groveTagList.tagCount(); i++) {
       NBTTagCompound groveTag = groveTagList.getCompoundTagAt(i);
-      String groveName = groveTag.getString("grove" + i);
+      String groveName = groveTag.getString("fey" + i);
       float trust = groveTag.getFloat("trust" + i);
       this.groveTrust.put(GroveType.valueOf(groveName.toUpperCase()), trust);
     }

@@ -1,12 +1,8 @@
 package epicsquid.roots.tileentity;
 
-import javax.annotation.Nonnull;
-
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.rune.RuneBase;
-import epicsquid.roots.rune.RuneRegistry;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -20,6 +16,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,6 +54,9 @@ public class TileEntityWildrootRune extends TileBase implements ITickable {
     @Override
     public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
         ItemStack heldItem = player.getHeldItem(hand);
+        if(incenseBurner == null){
+            return true;
+        }
         if(heldItem.isEmpty() && incenseBurner.isLit()){
             if(this.effectItemMap.getOrDefault(incenseBurner.burningItem(), null) != null){
                 player.addPotionEffect(this.effectItemMap.get(incenseBurner.burningItem()));

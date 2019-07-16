@@ -10,7 +10,7 @@
       "translate": "advancement.roots.wildwood_armor.desc"
     }
   },
-  "parent": "roots:pyre",
+  "parent": "roots:wildwood",
   "criteria": {
     "book": {
       "trigger": "minecraft:inventory_changed",

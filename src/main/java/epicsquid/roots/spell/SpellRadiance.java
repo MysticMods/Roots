@@ -1,10 +1,8 @@
 package epicsquid.roots.spell;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageRadianceBeamFX;
 import epicsquid.roots.spell.modules.SpellModule;
@@ -13,7 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -22,6 +19,9 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.oredict.OreIngredient;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SpellRadiance extends SpellBase {
   public static String spellName = "spell_radiance";
   public static SpellRadiance instance = new SpellRadiance(spellName);
@@ -29,16 +29,16 @@ public class SpellRadiance extends SpellBase {
   public SpellRadiance(String name) {
     super(name, TextFormatting.WHITE, 255f / 255f, 255f / 255f, 64f / 255f, 255f / 255f, 255f / 255f, 192f / 255f);
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
-    this.cooldown = 40;
+    this.cooldown = 0;
 
-    addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.5f);
+    addCost(HerbRegistry.getHerbByName("pereskia"), 0.5f);
     addCost(HerbRegistry.getHerbByName("infernal_bulb"), 0.25f);
     addIngredients(
         new OreIngredient("dustGlowstone"),
         new ItemStack(Blocks.MAGMA),
         new ItemStack(Items.DYE, 1, 11),
         new ItemStack(ModItems.infernal_bulb),
-        new ItemStack(ModItems.moonglow_leaf)
+        new ItemStack(ModItems.pereskia)
     );
   }
 
@@ -46,8 +46,8 @@ public class SpellRadiance extends SpellBase {
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote && player.ticksExisted % 2 == 0) {
       float distance = 32;
-      RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().addVector(0, player.getEyeHeight(), 0),
-          player.getPositionVector().addVector(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)));
+      RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0),
+          player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)));
       Vec3d direction = player.getLookVec();
       ArrayList<Vec3d> positions = new ArrayList<Vec3d>();
       float offX = 0.5f * (float) Math.sin(Math.toRadians(-90.0f - player.rotationYaw));
@@ -71,7 +71,7 @@ public class SpellRadiance extends SpellBase {
             zCoeff = -1f;
           }
           direction = new Vec3d(direction.x * xCoeff, direction.y * yCoeff, direction.z * zCoeff);
-          distance -= result.hitVec.subtract(player.getPositionVector()).lengthVector();
+          distance -= result.hitVec.subtract(player.getPositionVector()).length();
           if (distance > 0) {
             RayTraceResult result2 = player.world.rayTraceBlocks(result.hitVec, result.hitVec.add(direction.scale(distance)));
             if (result2 != null) {
@@ -91,7 +91,7 @@ public class SpellRadiance extends SpellBase {
                   zCoeff = -1f;
                 }
                 direction = new Vec3d(direction.x * xCoeff, direction.y * yCoeff, direction.z * zCoeff);
-                distance -= result2.hitVec.subtract(player.getPositionVector()).lengthVector();
+                distance -= result2.hitVec.subtract(player.getPositionVector()).length();
                 if (distance > 0) {
                   RayTraceResult result3 = player.world.rayTraceBlocks(result2.hitVec, result2.hitVec.add(direction.scale(distance)));
                   if (result3 != null) {
@@ -107,7 +107,7 @@ public class SpellRadiance extends SpellBase {
           }
         }
       } else {
-        positions.add(player.getPositionVector().addVector(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)));
+        positions.add(player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)));
       }
       if (positions.size() > 1) {
         for (int i = 0; i < positions.size() - 1; i++) {
@@ -123,9 +123,9 @@ public class SpellRadiance extends SpellBase {
             for (EntityLivingBase e : entities) {
               if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
                   && e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
-                e.attackEntityFrom(DamageSource.MAGIC.causeMobDamage(player), 4.0f);
+                e.attackEntityFrom(ModDamage.radiantDamageFrom(player), 5F);
                 if (e.isEntityUndead()) {
-                  e.attackEntityFrom(DamageSource.MAGIC.causeMobDamage(player), 2.0f);
+                  e.attackEntityFrom(ModDamage.radiantDamageFrom(player), 3F);
                 }
                 e.setRevengeTarget(player);
                 e.setLastAttackedEntity(player);

@@ -1,12 +1,12 @@
 {
   "name": "Purify",
-  "icon": "minecraft:red_flower:6",
+  "icon": "roots:ritual_purity",
   "category": "rituals",
   "advancement": "roots:baffle_cap",
   "pages": [
     {
       "type": "text",
-      "text": "Ailments are cleansed from creatures near the ritual."
+      "text": "Removes ailments and negative effects from all creatures near the ritual, for the duration of the ritual. This includes the druid casting the ritual, but $(warning) also any hostile creatures that may wander nearby."
     },
     {
       "type": "pyre_template",

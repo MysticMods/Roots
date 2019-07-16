@@ -1,9 +1,7 @@
 package epicsquid.roots.integration.jei.ritual;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.integration.jei.JEIRootsPlugin;
-import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
@@ -58,7 +56,5 @@ public class RitualCategory implements IRecipeCategory<RitualWrapper> {
     group.set(4, recipe.getRecipe().get(4));
     group.init(5, false, 99, 23);
     group.set(5, new ItemStack(recipe.getIcon()));
-    group.init(6, true, 26, 30);
-    group.set(6, new ItemStack(ModBlocks.bonfire));
   }
 }

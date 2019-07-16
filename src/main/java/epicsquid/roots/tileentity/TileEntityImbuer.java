@@ -1,14 +1,9 @@
 package epicsquid.roots.tileentity;
 
-import javax.annotation.Nonnull;
-
-import epicsquid.mysticallib.network.MessageTEUpdate;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.capability.spell.ISpellHolderCapability;
-import epicsquid.roots.capability.spell.SpellHolderCapability;
-import epicsquid.roots.capability.spell.SpellHolderCapabilityProvider;
+import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.network.fx.MessageImbueCompleteFX;
@@ -34,13 +29,15 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nonnull;
+
 public class TileEntityImbuer extends TileBase implements ITickable {
   public ItemStackHandler inventory = new ItemStackHandler(2) {
     @Override
     protected void onContentsChanged(int slot) {
       TileEntityImbuer.this.markDirty();
       if (!world.isRemote) {
-        PacketHandler.sendToAllTracking(new MessageTEUpdate(TileEntityImbuer.this.getUpdateTag()), TileEntityImbuer.this);
+        TileEntityImbuer.this.updatePacketViaState();
       }
     }
   };
@@ -54,7 +51,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
   @Override
   public NBTTagCompound writeToNBT(NBTTagCompound tag) {
     super.writeToNBT(tag);
-    tag.setTag("inventory", inventory.serializeNBT());
+    tag.setTag("handler", inventory.serializeNBT());
     tag.setInteger("progress", progress);
     return tag;
   }
@@ -62,7 +59,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
   @Override
   public void readFromNBT(NBTTagCompound tag) {
     super.readFromNBT(tag);
-    inventory.deserializeNBT(tag.getCompoundTag("inventory"));
+    inventory.deserializeNBT(tag.getCompoundTag("handler"));
     progress = tag.getInteger("progress");
   }
 
@@ -94,14 +91,13 @@ public class TileEntityImbuer extends TileBase implements ITickable {
           if (attemptedInsert.isEmpty()) {
             player.getHeldItem(hand).shrink(1);
             markDirty();
-            PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+            updatePacketViaState();
             return true;
           }
         }
       } else if(heldItem.getItem() == ModItems.staff || ModuleRegistry.isModule(heldItem)){
-        if (heldItem.hasCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null)) {
-          ISpellHolderCapability cap = heldItem.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-          assert cap != null;
+        if (heldItem.getItem() == ModItems.staff) {
+          SpellHandler cap = SpellHandler.fromStack(heldItem);
           if (!cap.hasFreeSlot() && inventory.getStackInSlot(0).getItem() != ModItems.runic_dust) {
             if (world.isRemote) {
               player.sendMessage(new TextComponentTranslation("roots.info.staff.no_slots").setStyle(new Style().setColor(TextFormatting.GOLD)));
@@ -127,7 +123,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
               player.setHeldItem(hand, ItemStack.EMPTY);
             }
             markDirty();
-            PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+            updatePacketViaState();
             return true;
           }
         }
@@ -158,8 +154,8 @@ public class TileEntityImbuer extends TileBase implements ITickable {
       angle += 2.0f;
       ItemStack spellDust = inventory.getStackInSlot(0);
       boolean clearSlot = spellDust.getItem() == ModItems.runic_dust;
-      ISpellHolderCapability capability = spellDust.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-      if((capability != null && capability.getSelectedSpell() != null) || clearSlot){
+      SpellHandler capability = SpellHandler.fromStack(spellDust);
+      if ((capability.getSelectedSpell() != null) || clearSlot) {
         SpellBase spell;
         if (clearSlot) {
           spell = new FakeSpellRunicDust();
@@ -184,7 +180,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
           if(inventory.getStackInSlot(1).getItem() == ModItems.staff){
             ItemStack staff = inventory.getStackInSlot(1);
             SpellBase spell;
-            if(!clearSlot && capability != null && capability.getSelectedSpell() != null) {
+            if (!clearSlot && capability.getSelectedSpell() != null) {
               ItemStaff.createData(staff, capability);
               spell = capability.getSelectedSpell();
             } else {
@@ -195,7 +191,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
             inventory.extractItem(0, 1, false);
             inventory.extractItem(1, 1, false);
             markDirty();
-            PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+            updatePacketViaState();
             PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(spell.getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
           }
           else{
@@ -204,21 +200,21 @@ public class TileEntityImbuer extends TileBase implements ITickable {
             capability.addModule(module);
             inventory.extractItem(1, 1, false);
             markDirty();
-            PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+            updatePacketViaState();
             PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(capability.getSelectedSpell().getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
           }
         }
       }
       this.markDirty();
       if (!world.isRemote) {
-        PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+        updatePacketViaState();
       }
     } else {
       if (progress != 0) {
         progress = 0;
         this.markDirty();
         if (!world.isRemote) {
-          PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+          updatePacketViaState();
         }
       }
     }

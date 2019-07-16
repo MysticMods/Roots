@@ -2,19 +2,21 @@
   "name": "Pyre",
   "icon": "roots:bonfire",
   "category": "basics",
-  "priority": true,
   "advancement": "roots:root",
-  "secret": true,
   "pages": [
     {
       "type": "text",
-      "text": "The Pyre has a variety of uses for the aspiring druid, and is used for crafting as well as performing powerful rituals. In all usage cases, the Pyre is typically activated by placing the required combination of items onto the pyre itself and then igniting it with a flint and steel. Various resources that may be necessary for a ritual are listed elsewhere in this book."
+      "text": "The Pyre has a variety of uses for the aspiring druid, and is used for crafting herbs as well as performing powerful rituals. Various resources that may be necessary for a ritual are listed elsewhere in this book.$(br2)In all usage cases, the Pyre is typically activated by placing the required combination of items onto the pyre itself and then igniting"
+    },
+    {
+      "type": "text",
+      "text": "it with a $(info) flint and steel.$(br2)Moreover, ongoing rituals (crafting included) can be canceled by applying a $(l:basics/bucket_of_water)bucket of water$() to the pyre."
     },
     {
       "type":"crafting",
       "recipe": "roots:pyre",
       "title": "Pyre",
-      "text": "Some rituals require runestone in specific configurations in addition to the pyre or have other requirements, in which case the required structure(s) will be listed alongside the ritual."
+      "text": "$(info) Some rituals require runestone in specific configurations in addition to the pyre or have other requirements, in which case the required structure(s) will be listed alongside the ritual."
     }
   ]
 }

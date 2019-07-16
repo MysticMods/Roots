@@ -2,27 +2,27 @@
   "name": "Wildwood Armor",
   "icon": "roots:wildwood_helmet",
   "category": "apparatus",
-  "advancement": "roots:pyre",
+  "advancement": "roots:wildwood",
   "secret": true,
   "pages": [
     {
       "type": "text",
-      "text": "While mastering the abilities of extracting bark from logs you also learned how to pick the best pieces; you are now able to choose the most hardened ones to create a new armor that is stronger than iron and that has some regeneration effects due to the nature of wood."
+      "text": "While mastering the abilities of extracting bark from logs you also learned how to pick the best pieces; you are now able to choose the most hardened ones to create armor that is stronger than iron and with regenerative effects of growing trees and healing yourself depending on how many pieces are worn."
     },
     {
-      "type": "ritual_crafting_template",
+      "type": "fey_crafting_template",
       "recipe": "wildwood_helmet"
     },
     {
-      "type": "ritual_crafting_template",
+      "type": "fey_crafting_template",
       "recipe": "wildwood_chestplate"
     },
     {
-      "type": "ritual_crafting_template",
+      "type": "fey_crafting_template",
       "recipe": "wildwood_leggings"
     },
     {
-      "type": "ritual_crafting_template",
+      "type": "fey_crafting_template",
       "recipe": "wildwood_boots"
     }
   ]

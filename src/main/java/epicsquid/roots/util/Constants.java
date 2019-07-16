@@ -4,7 +4,7 @@ import epicsquid.roots.Roots;
 
 public class Constants {
   public static String TIME_STOP_TAG = Roots.MODID+":time_stop";
-  public static String MIND_WARD_TAG = Roots.MODID+":mind_ward";
+  public static String GEAS_TAG = Roots.MODID+":geas";
   public static String LIGHT_DRIFTER_TAG = Roots.MODID+":light_drifter";
   public static String LIGHT_DRIFTER_X = Roots.MODID+":light_drifter_x";
   public static String LIGHT_DRIFTER_Y = Roots.MODID+":light_drifter_y";

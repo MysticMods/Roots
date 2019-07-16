@@ -2,12 +2,13 @@
   "name": "Runic Dust",
   "icon": "roots:runic_dust",
   "category": "resources",
-  "advancement": "roots:pyre",
+  "advancement": "roots:runestone",
   "secret": true,
   "pages": [
     {
-      "type": "text",
-      "text": "While made of hardy stuff, the magic of the Mortar and Pestle can break most types of runestone down into a fine powder, which can be used in rituals or crafting."
+      "type": "spotlight",
+      "item": "roots:runic_dust",
+      "text": "Although runestone is a hardy material, the correct amount of pressure applied at the correct angle will quickly reduce it to a powder form while still retaining its strong, magical essence.$(br2)$(info) The most common use for this dustis to remove spells from the current slot of a $(l:basics/spells)Staff$()."
     },
     {
       "type": "mortar_template",

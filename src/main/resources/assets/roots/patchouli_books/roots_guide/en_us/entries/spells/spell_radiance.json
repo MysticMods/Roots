@@ -1,13 +1,13 @@
 {
   "name": "Radiance",
-  "icon": "roots:petal_dust",
+  "icon": "roots:spell_dust",
   "category": "spells",
   "advancement": "roots:infernal_bulb",
   
   "pages": [
     {
       "type": "text",
-      "text": "The power of the sun is focused into a radiant beam of light, as directed by the caster - a powerful force that seems especially effective against the undead."
+      "text": "A radiant beam of fire & sunlight strikes all targets in the direction you're facing.$(br2)$(info) This energy is especially effective against the undead."
     },
     {
       "type": "spell_template",

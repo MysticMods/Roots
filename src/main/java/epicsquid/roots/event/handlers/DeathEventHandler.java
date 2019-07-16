@@ -1,11 +1,11 @@
 package epicsquid.roots.event.handlers;
 
 import epicsquid.roots.Roots;
+import epicsquid.roots.advancements.Advancements;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.PacifistEntry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.DamageSource;
@@ -30,6 +30,6 @@ public class DeathEventHandler {
 
     if (!entry.matches(entity, (EntityPlayer) trueSource)) return;
 
-    Roots.PACIFIST_TRIGGER.trigger((EntityPlayerMP) trueSource, event);
+    Advancements.PACIFIST_TRIGGER.trigger((EntityPlayerMP) trueSource, event);
   }
 }

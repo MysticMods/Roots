@@ -1,7 +1,5 @@
 package epicsquid.roots.spell;
 
-import java.util.List;
-
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
@@ -15,6 +13,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
+
+import java.util.List;
 
 public class SpellDandelionWinds extends SpellBase {
   public static String spellName = "spell_dandelion_winds";
@@ -45,9 +45,9 @@ public class SpellDandelionWinds extends SpellBase {
     if (entities.size() > 0) {
       for (EntityLivingBase e : entities) {
         if (e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
-          e.motionX += player.getLookVec().x;
-          e.motionY += 0.75f;
-          e.motionZ += player.getLookVec().z;
+          e.motionX += (player.getLookVec().x);
+          e.motionY += (0.75f);
+          e.motionZ += (player.getLookVec().z);
           e.velocityChanged = true;
         }
       }

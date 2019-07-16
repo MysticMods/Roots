@@ -1,13 +1,13 @@
 {
     "name": "Sky Soarer",
-    "icon": "roots:petal_dust",
+    "icon": "roots:spell_dust",
     "category": "spells",
     "advancement": "roots:cloud_berry",
     
     "pages": [
       {
         "type": "text",
-        "text": "Carries the caster forward upon a cloud, granting them the ability to soar briefly ... before they crash back down to the surface."
+        "text": "A burst of air draws you in the direction that you're looking, up, down, or in any direction.$(br2)$(warning) If you fly up too far, you will most likely take damage from the fall."
       },
       {
         "type": "spell_template",

@@ -1,22 +1,20 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemBase;
-import epicsquid.roots.capability.spell.ISpellHolderCapability;
-import epicsquid.roots.capability.spell.SpellHolderCapabilityProvider;
+import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.spell.modules.SpellModule;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Map;
 
 public class ItemSpellDust extends ItemBase {
   public ItemSpellDust(String name) {
@@ -28,69 +26,28 @@ public class ItemSpellDust extends ItemBase {
   @Override
   public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
     if (tab == this.getCreativeTab()) {
-      for(Map.Entry<String, SpellBase> entry : SpellRegistry.spellRegistry.entrySet()){
-        ItemStack stack = new ItemStack(this, 1);
-        createData(stack, entry.getValue());
-        subItems.add(stack);
+      for (SpellBase entry : SpellRegistry.spellRegistry.values()) {
+        subItems.add(entry.getResult());
       }
     }
-  }
-
-  @Override
-  public void readNBTShareTag(ItemStack stack, @Nullable NBTTagCompound nbt) {
-    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-    if (capability != null && nbt != null && nbt.hasKey("spell_capability")) {
-      capability.setData(nbt.getCompoundTag("spell_capability"));
-      nbt.removeTag("spell_capability");
-    }
-    super.readNBTShareTag(stack, nbt);
-  }
-
-  public static ItemStack createData(ItemStack stack, SpellBase spell) {
-    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-    if (capability == null) return stack;
-
-    capability.setSpellToSlot(spell);
-    NBTTagCompound tag = stack.getTagCompound();
-    if (tag == null) {
-      tag = new NBTTagCompound();
-      stack.setTagCompound(tag);
-    }
-
-    tag.setString("spell_name", spell.getName());
-    return stack;
   }
 
   @SideOnly(Side.CLIENT)
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
-    ISpellHolderCapability capability = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-    if (capability == null) return;
+    SpellHandler capability = SpellHandler.fromStack(stack);
 
     SpellBase spell = capability.getSelectedSpell();
     if (spell == null) return;
 
     spell.addToolTip(tooltip);
-  }
-
-  @Override
-  public boolean getShareTag() {
-    return true;
-  }
-
-  @Nullable
-  @Override
-  public NBTTagCompound getNBTShareTag(ItemStack stack) {
-    NBTTagCompound result = super.getNBTShareTag(stack);
-
-    if (result == null) result = new NBTTagCompound();
-
-    ISpellHolderCapability cap = stack.getCapability(SpellHolderCapabilityProvider.ENERGY_CAPABILITY, null);
-    if (cap != null) {
-      NBTTagCompound cap_tag = cap.getData();
-      result.setTag("spell_capability", cap_tag);
+    List<SpellModule> spellModules = capability.getSelectedModules();
+    if (!spellModules.isEmpty()) {
+      tooltip.add(I18n.format("roots.spell.module.description"));
+      String prefix = "roots.spell." + spell.getName();
+      for (SpellModule module : spellModules) {
+        tooltip.add(module.getFormat() + I18n.format("roots.spell.module." + module.getName() + ".name") + ": " + I18n.format(prefix + "." + module.getName() + ".description"));
+      }
     }
-
-    return result;
   }
 }

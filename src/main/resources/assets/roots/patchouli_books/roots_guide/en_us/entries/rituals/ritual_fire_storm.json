@@ -1,13 +1,13 @@
 {
   "name": "Storm of Fire",
-  "icon": "minecraft:fire_charge",
+  "icon": "roots:ritual_fire_storm",
   "category": "rituals",
   "advancement": "roots:infernal_bulb",
   
   "pages": [
     {
       "type": "text",
-      "text": "Rains fire down from the heavens, burning creatures unfortunate to be near the ritual in a raging inferno."
+      "text": "From the heavens spew forth a huge amount of sentient fire, burning creatures near the ritual, setting the ground on fire, and slowly turning the surrounding area into a raging inferno, but at the same time protecting players from directly taking damage.$(br2)$(info) This ritual requires the correct standing stones."
     },
     {
       "type": "pyre_template",

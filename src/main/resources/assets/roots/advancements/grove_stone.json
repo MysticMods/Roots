@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "roots:grove_stone"
+    },
+    "title": {
+      "translate": "advancement.roots.grove_stone"
+    },
+    "description": {
+      "translate": "advancement.roots.grove_stone.desc"
+    }
+  },
+  "parent": "roots:terra_moss",
+  "criteria": {
+    "book": {
+      "trigger": "roots:grove_activate"
+    }
+  }
+}

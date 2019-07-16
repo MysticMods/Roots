@@ -1,0 +1,18 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "R"
+    ],
+  "key": {
+    "R": [
+      {
+        "item": "roots:runestone_brick_alt"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:runestone_brick_alt_button",
+    "data": 0,
+    "count": 1
+  }
+}

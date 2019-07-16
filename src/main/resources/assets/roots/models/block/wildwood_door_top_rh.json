@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_top_rh",
+    "textures": {
+        "bottom": "roots:blocks/wildwood_door_bottom",
+        "top": "roots:blocks/wildwood_door_top"
+    }
+}

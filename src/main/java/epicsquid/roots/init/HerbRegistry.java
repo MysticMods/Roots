@@ -69,7 +69,7 @@ public class HerbRegistry {
         return herb;
       }
     }
-    Roots.logger.warn("Herb \"" + item.getRegistryName() + "\" not found in HerbRegistry");
+    // Roots.logger.warn("Herb \"" + item.getRegistryName() + "\" not found in HerbRegistry");
     return null;
   }
 

@@ -8,7 +8,7 @@
     "pages": [
       {
         "type": "text",
-        "text": "The mortar is placed in-world, and different combinations of reagents may be placed inside to designated the desired spell to be crafted - a list of such combinations may be found elsewhere in this book. Once the required reagents have been gathered, they are placed into the mortar one at a time by right-clicking. Right-clicking a valid combination with the pestle will produce special 'petal dust' associated with the spell."
+        "text": "Placed in the world, up to five reagents can be added. Once collected, $(info) apply the pestle by right-clicking to craft the desired output.$(br2)Recipes using the mortar & pestle can be found throughout this book.$(br2)$(info) In addition, the pestle itself can be stored in an empty mortar."
       },
       {
         "type":"crafting",

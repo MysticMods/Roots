@@ -1,12 +1,9 @@
 package epicsquid.roots.tileentity;
 
-import epicsquid.mysticallib.network.MessageTEUpdate;
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.item.ItemSpellDust;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.spell.SpellBase;
@@ -34,7 +31,7 @@ public class TileEntityMortar extends TileBase {
     protected void onContentsChanged(int slot) {
       TileEntityMortar.this.markDirty();
       if (!world.isRemote) {
-        PacketHandler.sendToAllTracking(new MessageTEUpdate(TileEntityMortar.this.getUpdateTag()), TileEntityMortar.this);
+        updatePacketViaState();
       }
     }
   };
@@ -46,14 +43,14 @@ public class TileEntityMortar extends TileBase {
   @Override
   public NBTTagCompound writeToNBT(NBTTagCompound tag) {
     super.writeToNBT(tag);
-    tag.setTag("inventory", inventory.serializeNBT());
+    tag.setTag("handler", inventory.serializeNBT());
     return tag;
   }
 
   @Override
   public void readFromNBT(NBTTagCompound tag) {
     super.readFromNBT(tag);
-    inventory.deserializeNBT(tag.getCompoundTag("inventory"));
+    inventory.deserializeNBT(tag.getCompoundTag("handler"));
   }
 
   @Override
@@ -73,7 +70,7 @@ public class TileEntityMortar extends TileBase {
 
   @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand,
-      @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
+                          @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
     ItemStack offHand = player.getHeldItemOffhand();
     List<ItemStack> ingredients = new ArrayList<>();
@@ -97,7 +94,7 @@ public class TileEntityMortar extends TileBase {
                 player.setHeldItem(hand, ItemStack.EMPTY);
               }
               markDirty();
-              PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+              updatePacketViaState();
               return true;
             }
           }
@@ -108,7 +105,7 @@ public class TileEntityMortar extends TileBase {
           if (mortar.isEmpty()) {
             player.setHeldItem(hand, ItemStack.EMPTY);
             markDirty();
-            PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+            updatePacketViaState();
             return true;
           }
         }
@@ -135,12 +132,11 @@ public class TileEntityMortar extends TileBase {
               }
             }
           }
-          ItemStack dust = new ItemStack(ModItems.spell_dust, 1);
-          ItemSpellDust.createData(dust, spell);
+          ItemStack dust = spell.getResult();
           if (!world.isRemote) {
             ItemSpawnUtil.spawnItem(world, getPos(), dust);
             markDirty();
-            PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+            updatePacketViaState();
           }
           for (int i = 0; i < inventory.getSlots(); i++) {
             inventory.extractItem(i, 1, false);
@@ -174,7 +170,7 @@ public class TileEntityMortar extends TileBase {
           if (!world.isRemote) {
             ItemSpawnUtil.spawnItem(world, getPos(), mortarRecipe.getResult().copy());
             markDirty();
-            PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+            updatePacketViaState();
           }
           for (int i = 0; i < inventory.getSlots(); i++) {
             inventory.extractItem(i, 1, false);

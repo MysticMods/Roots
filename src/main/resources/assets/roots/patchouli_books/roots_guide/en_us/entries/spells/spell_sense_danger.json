@@ -1,13 +1,13 @@
 {
   "name": "Sense Danger",
-  "icon": "roots:petal_dust",
+  "icon": "roots:spell_dust",
   "category": "spells",
-  "advancement": "roots:aubergine",
-  
+  "advancement": "roots:staff",
+
   "pages": [
     {
       "type": "text",
-      "text": "There's a certain aura that creatures with ill-intent emit. This spell allows you to sense this, as well as see into the darkest depths -- but only for a short while."
+      "text": "Reveals the evil aura and intent of monstrous creatures, causing all nearby to glow brightly.$(br2)$(info) Glowing creatures can be seen through all solid objects."
     },
     {
       "type": "spell_template",

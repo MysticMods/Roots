@@ -10,7 +10,7 @@
             "translate": "advancement.roots.living.desc"
         }
     },
-    "parent": "roots:pyre",
+    "parent": "roots:fey_crafter",
     "criteria": {
         "book": {
             "trigger": "minecraft:inventory_changed",

@@ -5,12 +5,28 @@
   "priority": true,
   "pages": [
     {
-      "type": "text",
-      "text": "Terra Moss is one of the two herbs initially available to a budding druid, with an affinity for the connection between plants and the earth. Terra Moss Spores can be found by breaking tall grass - however, Terra Moss does not grow like a conventional crop."
+      "type": "spotlight",
+      "item": "roots:terra_moss",
+      "link_recipe": true,
+      "text": "Terra Moss is one of the most commonly available magical herbs, it is simply that few recognise its potential. You can grow it by obtaining Terra Moss Spores from broken tall grass, $(info) and then imbue it into cobblestone $(warning) horizontally adjacent to water."
     },
     {
-      "type": "text",
-      "text": "Terra Moss Spores can be planted on cobblestone that is adjacent to water to transform the cobblestone into moss stone - and Terra Moss itself can be harvested from moss stone by using a knife on the block. This process changes the moss stone back into cobblestone.$(br2)Moss stone found through other means may also be harvested for Terra Moss."
+      "type": "multiblock",
+      "multiblock": {
+        "mapping": {
+          "0": "minecraft:water",
+          "M": "minecraft:cobblestone"
+        },
+        "pattern": [
+          ["   M   ","  M0M  ","   M   "]
+        ]
+      }
+    },
+    {
+      "type": "spotlight",
+      "item": "minecraft:mossy_cobblestone",
+      "link_recipe": true,
+      "text": "Once imbued into cobblestone that is adjacent to water, it will appear like any other mossy stone. Carefully scraping with a knife will give you Terra Moss, and indeed, this process can be performed even on mossy stones not imbued by you."
     },
     {
       "type": "runic_carving_terra_moss_template",
@@ -18,7 +34,7 @@
       "block": "minecraft:mossy_cobblestone",
       "rune": "roots:terra_moss",
       "name": "Terra Moss",
-      "text": "Right click a block of mossy cobblestone with a knife in hand to get Terra Moss."
+      "text": "Right click a block of moss cobblestone with a knife in hand to get Terra Moss."
     }
   ]
 }

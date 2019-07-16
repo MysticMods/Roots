@@ -1,13 +1,13 @@
 {
   "name": "Sanctuary",
-  "icon": "roots:petal_dust",
+  "icon": "roots:spell_dust",
   "category": "spells",
   "advancement": "roots:pereskia",
   
   "pages": [
     {
       "type": "text",
-      "text": "A protective shield is conjured around the caster as long as the spell is channeled.$(br2)This shield deflects both creatures and projectiles that approach the caster."
+      "text": "While channeled, produces a protective shield around the caster, deflecting both creatures and projectiles that attempt to hit the caster."
     },
     {
       "type": "spell_template",

@@ -1,13 +1,13 @@
 {
   "name": "Sense Animals",
-  "icon": "roots:petal_dust",
+  "icon": "roots:spell_dust",
   "category": "spells",
   "advancement": "roots:wildewheet",
   
   "pages": [
     {
       "type": "text",
-      "text": "Animals relatively near to the caster will begin to glow, making it easier to pinpoint their location."
+      "text": "Animals near to the caster will begin glowing, making it easy to pinpoint their location.$(br2)$(info) Glowing animals can be seen through all solid objects."
     },
     {
       "type": "spell_template",

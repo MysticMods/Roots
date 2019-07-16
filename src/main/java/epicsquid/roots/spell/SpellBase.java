@@ -1,20 +1,27 @@
 package epicsquid.roots.spell;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import epicsquid.mysticallib.util.ListUtil;
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.api.Herb;
+import epicsquid.roots.handler.SpellHandler;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.PowderInventoryUtil;
+import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public abstract class SpellBase {
   private float red1, green1, blue1;
@@ -24,8 +31,9 @@ public abstract class SpellBase {
 
   private TextFormatting textColor;
   protected EnumCastType castType = EnumCastType.INSTANTANEOUS;
-  private Map<Herb, Double> costs = new HashMap<>();
+  private Object2DoubleOpenHashMap<Herb> costs = new Object2DoubleOpenHashMap<>();
   private List<Ingredient> ingredients = new ArrayList<>();
+  private List<SpellModule> acceptedModules = new ArrayList<>();
 
   public enum EnumCastType {
     INSTANTANEOUS, CONTINUOUS
@@ -40,6 +48,20 @@ public abstract class SpellBase {
     this.green2 = g2;
     this.blue2 = b2;
     this.textColor = textColor;
+  }
+
+  public boolean hasModules () {
+    return !acceptedModules.isEmpty();
+  }
+
+  public SpellBase acceptModules(SpellModule ... modules) {
+    assert modules.length < 5;
+    acceptedModules.addAll(Arrays.asList(modules));
+    return this;
+  }
+
+  public List<SpellModule> getModules() {
+    return acceptedModules;
   }
 
   public SpellBase addIngredients(Object... stacks) {
@@ -61,7 +83,7 @@ public abstract class SpellBase {
       if (matches) {
         double r = PowderInventoryUtil.getPowderTotal(player, herb);
         matches = r >= d;
-        if (!matches) {
+        if (!matches && !player.isCreative()) {
           player.sendStatusMessage(new TextComponentTranslation("roots.info.pouch.no_herbs", new TextComponentTranslation(String.format("item.%s.name", herb.getName()))), true);
         }
       }
@@ -85,13 +107,35 @@ public abstract class SpellBase {
     }
   }
 
+  @SideOnly(Side.CLIENT)
   public void addToolTip(List<String> tooltip) {
-    tooltip.add("" + textColor + TextFormatting.BOLD + I18n.format("roots.spell." + name + ".name") + TextFormatting.RESET);
-    for(Map.Entry<Herb, Double> entry : this.costs.entrySet()){
+    String prefix = "roots.spell." + name;
+    tooltip.add("" + textColor + TextFormatting.BOLD + I18n.format(prefix + ".name") + TextFormatting.RESET);
+    for(Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
       Herb herb = entry.getKey();
-      String d = String.format("%.3f", entry.getValue());
-      tooltip.add(I18n.format(herb.getItem().getUnlocalizedName() + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
+      String d = String.format("%.4f", entry.getValue());
+      tooltip.add(I18n.format(herb.getItem().getTranslationKey() + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
     }
+  }
+
+  private List<ItemStack> moduleItems = null;
+
+  @SideOnly(Side.CLIENT)
+  public List<ItemStack> getModuleStacks () {
+    if (moduleItems == null) {
+      moduleItems = new ArrayList<>();
+      String prefix = "roots.spell." + name + ".";
+      String mod = I18n.format("roots.spell.module.description");
+
+      for (SpellModule module : getModules()) {
+        ItemStack stack = module.getIngredient().copy();
+        String description = I18n.format(prefix + module.getName() + ".description");
+        Util.appendLoreTag(stack, mod, description);
+        moduleItems.add(stack);
+      }
+    }
+
+    return moduleItems;
   }
 
   public SpellBase addCost(Herb herb, double amount) {
@@ -149,7 +193,7 @@ public abstract class SpellBase {
     return castType;
   }
 
-  public Map<Herb, Double> getCosts() {
+  public Object2DoubleOpenHashMap<Herb> getCosts() {
     return costs;
   }
 
@@ -159,5 +203,15 @@ public abstract class SpellBase {
 
   public void setIngredients (List<Ingredient> ingredients) {
     this.ingredients = ingredients;
+  }
+
+  public ItemStack getResult () {
+    ItemStack stack = new ItemStack(ModItems.spell_dust);
+    SpellHandler.fromStack(stack).setSpellToSlot(this);
+    return stack;
+  }
+
+  public List<ItemStack> getCostItems () {
+    return costs.keySet().stream().map((herb) -> new ItemStack(herb.getItem())).collect(Collectors.toList());
   }
 }

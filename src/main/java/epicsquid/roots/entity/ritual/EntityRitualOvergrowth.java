@@ -1,26 +1,21 @@
 package epicsquid.roots.entity.ritual;
 
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
-
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticallib.particle.particles.ParticleGlitter;
-import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.network.fx.MessageMindWardFX;
 import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 public class EntityRitualOvergrowth extends EntityRitualBase {
 
@@ -34,13 +29,15 @@ public class EntityRitualOvergrowth extends EntityRitualBase {
 
   @Override
   public void onUpdate() {
-    getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
+    super.onUpdate();
+    int curLifetime = getDataManager().get(lifetime);
+    getDataManager().set(lifetime, curLifetime - 1);
     getDataManager().setDirty(lifetime);
     if (getDataManager().get(lifetime) < 0) {
       setDead();
     }
     if (!world.isRemote) {
-      if (this.ticksExisted % 400 == 0) {
+      if (this.ticksExisted % 150 == 0) {
         List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), 10, 20, 10, Blocks.COBBLESTONE).stream().filter((pos) -> isAdjacentToWater(world, pos)).collect(Collectors.toList());
         if (eligiblePositions.isEmpty()) return;
 

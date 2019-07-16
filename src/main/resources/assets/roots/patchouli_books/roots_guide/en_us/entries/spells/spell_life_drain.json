@@ -1,13 +1,12 @@
 {
     "name": "Life Drain",
-    "icon": "roots:petal_dust",
+    "icon": "roots:spell_dust",
     "category": "spells",
     "advancement": "roots:baffle_cap",
-    
     "pages": [
       {
         "type": "text",
-        "text": "Drains the essence of life from surrounding friend or foe to replenish your own.$(br2)Why nurse nature, when nature can nurse you?"
+        "text": "Drains the life essence from other creatures, healing you in the process. The amount healed is considerably less than the damage done.$(br2)In addition, each use of the spell has a chance to wither the soul of the target, $(warning) causing further damage (which does not heal you)."
       },
       {
         "type": "spell_template",

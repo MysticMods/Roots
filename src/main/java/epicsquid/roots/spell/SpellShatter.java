@@ -1,8 +1,5 @@
 package epicsquid.roots.spell;
 
-import java.util.List;
-import java.util.Random;
-
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
@@ -19,6 +16,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
+
+import java.util.List;
+import java.util.Random;
 
 public class SpellShatter extends SpellBase {
   public static String spellName = "spell_shatter";
@@ -42,8 +42,8 @@ public class SpellShatter extends SpellBase {
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
-      RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().addVector(0, player.getEyeHeight(), 0),
-          player.getLookVec().scale(8.0f).add(player.getPositionVector().addVector(0, player.getEyeHeight(), 0)));
+      RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0),
+          player.getLookVec().scale(8.0f).add(player.getPositionVector().add(0, player.getEyeHeight(), 0)));
       if (result != null) {
         if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
           BlockPos pos = result.getBlockPos();
@@ -55,7 +55,7 @@ public class SpellShatter extends SpellBase {
             doParticles = true;
           }
           for (int i = 0; i < 4; i++) {
-            pos = result.getBlockPos().offset(EnumFacing.getFront(new Random().nextInt(6)));
+            pos = result.getBlockPos().offset(EnumFacing.byIndex(new Random().nextInt(6)));
             state = player.world.getBlockState(pos);
             if (state.getBlockHardness(player.world, pos) > 0) {
               player.world.destroyBlock(pos, true);
@@ -69,7 +69,7 @@ public class SpellShatter extends SpellBase {
           }
         } else if (result.typeOfHit == RayTraceResult.Type.ENTITY) {
           if (result.entityHit instanceof EntityLivingBase) {
-            result.entityHit.attackEntityFrom(DamageSource.causeMobDamage(player), 3.0f);
+            result.entityHit.attackEntityFrom(DamageSource.causeMobDamage(player), 5.0f);
             ((EntityLivingBase) result.entityHit).setLastAttackedEntity(player);
             ((EntityLivingBase) result.entityHit).setRevengeTarget(player);
             float offX = 0.5f * (float) Math.sin(Math.toRadians(-90.0f - player.rotationYaw));

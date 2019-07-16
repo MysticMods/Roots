@@ -1,9 +1,6 @@
 package epicsquid.roots.entity.spell;
 
-import java.util.UUID;
-
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.SpellSkySoarer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,6 +9,8 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
+
+import java.util.UUID;
 
 public class EntityBoost extends Entity {
   private static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityBoost.class, DataSerializers.VARINT);
@@ -63,17 +62,25 @@ public class EntityBoost extends Entity {
     if (playerId != null) {
       EntityPlayer player = world.getPlayerEntityByUUID(playerId);
       if (player != null) {
+        Entity riding = player.getLowestRidingEntity();
+        Entity target;
+        if (riding != null) {
+          target = riding;
+        } else {
+          target = player;
+        }
+
         this.posX = player.posX;
         this.posY = player.posY + 1.0;
         this.posZ = player.posZ;
-        player.motionX = player.getLookVec().x * 0.8;
-        player.motionY = player.getLookVec().y * 0.8;
-        player.motionZ = player.getLookVec().z * 0.8;
+        target.motionX = player.getLookVec().x * 0.8;
+        target.motionY = player.getLookVec().y * 0.8;
+        target.motionZ = player.getLookVec().z * 0.8;
         this.motionX = player.getLookVec().x;
         this.motionY = player.getLookVec().y;
         this.motionZ = player.getLookVec().z;
-        player.fallDistance = 0;
-        player.velocityChanged = true;
+        target.fallDistance = 0;
+        target.velocityChanged = true;
       }
     }
   }

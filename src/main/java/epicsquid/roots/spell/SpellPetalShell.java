@@ -1,7 +1,5 @@
 package epicsquid.roots.spell;
 
-import java.util.List;
-
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.entity.spell.EntityPetalShell;
 import epicsquid.roots.init.HerbRegistry;
@@ -13,6 +11,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
+
+import java.util.List;
 
 public class SpellPetalShell extends SpellBase {
   public static String spellName = "spell_petal_shell";
@@ -26,7 +26,7 @@ public class SpellPetalShell extends SpellBase {
     addCost(HerbRegistry.getHerbByName("spirit_herb"), 0.75f);
     addIngredients(
         new ItemStack(Items.MELON),
-        new ItemStack(ModItems.aubergine),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
         new ItemStack(ModItems.spirit_herb),
         new ItemStack(Items.SHIELD),
         new ItemStack(ModItems.pereskia_bulb)

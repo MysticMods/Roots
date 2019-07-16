@@ -1,9 +1,14 @@
 package epicsquid.roots.recipe;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.item.Item;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
 
 /**
  * Transmutation recipe for Runic Shears
@@ -16,7 +21,9 @@ public class RunicShearRecipe {
   private ItemStack optionalDisplayItem = ItemStack.EMPTY;
   private String name;
 
-  private Class<? extends EntityLiving> entity = null;
+  private Entity entity = null;
+  private Class<? extends Entity> clazz = null;
+  private int cooldown = 0;
 
   public RunicShearRecipe(Block block, Block replacementBlock, ItemStack drop, String name, ItemStack optionalDisplayItem) {
     this.block = block;
@@ -30,10 +37,11 @@ public class RunicShearRecipe {
     this(block, replacementBlock, drop, name, null);
   }
 
-  public RunicShearRecipe(ItemStack drop, EntityLiving entity, String name) {
+  public RunicShearRecipe(ItemStack drop, Class<? extends Entity> entity, int cooldown, String name) {
     this.drop = drop;
-    this.entity = entity.getClass();
+    this.clazz = entity;
     this.name = name;
+    this.cooldown = cooldown;
   }
 
   public boolean isBlockRecipe() {
@@ -41,7 +49,7 @@ public class RunicShearRecipe {
   }
 
   public boolean isEntityRecipe() {
-    return entity != null;
+    return clazz != null;
   }
 
   public Block getBlock() {
@@ -56,15 +64,34 @@ public class RunicShearRecipe {
     return drop;
   }
 
-  public Class getEntity() {
-    return entity;
+  public Class<? extends Entity> getClazz() {
+    return clazz;
   }
 
   public String getName() {
     return name;
   }
 
+  public int getCooldown() {
+    return cooldown;
+  }
+
   public ItemStack getOptionalDisplayItem() {
     return optionalDisplayItem;
+  }
+
+  @SideOnly(Side.CLIENT)
+  @Nullable
+  public Entity getEntity () {
+    if (entity == null) {
+      Minecraft mc = Minecraft.getMinecraft();
+      try {
+        entity = clazz.getConstructor(World.class).newInstance(mc.world);
+      } catch (Exception e) {
+        return null;
+      }
+    }
+
+    return entity;
   }
 }

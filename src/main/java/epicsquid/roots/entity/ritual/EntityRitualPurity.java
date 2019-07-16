@@ -1,16 +1,18 @@
 package epicsquid.roots.entity.ritual;
 
-import java.util.List;
-
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EntityRitualPurity extends EntityRitualBase {
 
@@ -23,6 +25,7 @@ public class EntityRitualPurity extends EntityRitualBase {
 
   @Override
   public void onUpdate() {
+    super.onUpdate();
     float alpha = (float) Math.min(40, (RitualRegistry.ritual_life.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
     getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
     getDataManager().setDirty(lifetime);
@@ -47,10 +50,14 @@ public class EntityRitualPurity extends EntityRitualBase {
       List<EntityLivingBase> entities = world
           .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 15.5, posY - 15.5, posZ - 15.5, posX + 15.5, posY + 15.5, posZ + 15.5));
       for (EntityLivingBase e : entities) {
+        List<Potion> toRemove = new ArrayList<>();
         for (PotionEffect potionEffect : e.getActivePotionEffects()) {
           if (potionEffect.getPotion().isBadEffect()) {
-            e.removePotionEffect(potionEffect.getPotion());
+            toRemove.add(potionEffect.getPotion());
           }
+        }
+        for (Potion potion : toRemove) {
+          e.removePotionEffect(potion);
         }
         if (world.isRemote) {
           for (float i = 0; i < 8; i++) {

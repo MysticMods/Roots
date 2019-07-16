@@ -1,13 +1,13 @@
 {
   "name": "Magnetism",
-  "icon": "roots:petal_dust",
+  "icon": "roots:spell_dust",
   "category": "spells",
   "advancement": "roots:staff",
   
   "pages": [
     {
       "type": "text",
-      "text": "Iron and redstone are a strangely magnetic combination, and with the addition of wildroot and aubergine this magnetism becomes magical, drawing all nearby items to the caster."
+      "text": "While iron is known for its magnetic properties, combining it with redstone and wildroot allows for a more magical approach to the concept of item retrieval.$(br2)Instead of pulling items towards the caster, they are instantly teleported to your feet.$(br2)$(info) Experience orbs may also be collected with this spell."
     },
     {
       "type": "spell_template",

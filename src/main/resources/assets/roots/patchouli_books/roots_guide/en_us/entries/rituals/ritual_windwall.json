@@ -1,12 +1,12 @@
 {
   "name": "Windwall",
-  "icon": "minecraft:feather",
+  "icon": "roots:ritual_windwall",
   "category": "rituals",
-  "advancement": "roots:cloud_berry",
+  "advancement": "roots:moonglow_leaf",
   "pages": [
     {
       "type": "text",
-      "text": "All creatures with the mark of evil are forced away from the ritual's location."
+      "text": "All creatures hostile towards you are pushed away from the ritual location."
     },
     {
       "type": "pyre_template",

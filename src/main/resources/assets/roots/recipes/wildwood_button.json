@@ -1,0 +1,18 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "R"
+    ],
+  "key": {
+    "R": [
+      {
+        "item": "roots:wildwood_slab"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:wildwood_button",
+    "data": 0,
+    "count": 1
+  }
+}

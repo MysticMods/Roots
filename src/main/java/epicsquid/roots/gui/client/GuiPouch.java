@@ -7,14 +7,13 @@
 
 package epicsquid.roots.gui.client;
 
-import javax.annotation.Nonnull;
-
 import epicsquid.roots.Roots;
-import epicsquid.roots.capability.pouch.PouchItemHandler;
 import epicsquid.roots.gui.container.ContainerPouch;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.Nonnull;
 
 public class GuiPouch extends GuiContainer {
 
@@ -44,6 +43,6 @@ public class GuiPouch extends GuiContainer {
   }
 
   private boolean isComponentPouch() {
-    return containerPouch.getInvSlots() == PouchItemHandler.COMPONENT_POUCH_INVENTORY_SLOTS && containerPouch.getHerbSlots() == PouchItemHandler.COMPONENT_POUCH_HERB_SLOTS;
+    return containerPouch.componentPouch;
   }
 }

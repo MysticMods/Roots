@@ -18,8 +18,7 @@
     ],
     "M": [
       {
-      "type": "forge:ore_dict",
-      "ore": "blockGold"
+      "item": "roots:unending_bowl"
       }
     ]
   },

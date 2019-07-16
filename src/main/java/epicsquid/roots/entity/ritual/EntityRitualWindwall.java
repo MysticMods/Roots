@@ -1,16 +1,17 @@
 package epicsquid.roots.entity.ritual;
 
-import java.util.List;
-
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class EntityRitualWindwall extends EntityRitualBase {
 
@@ -23,6 +24,7 @@ public class EntityRitualWindwall extends EntityRitualBase {
 
   @Override
   public void onUpdate() {
+    super.onUpdate();
     float alpha = (float) Math.min(40, (RitualRegistry.ritual_windwall.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
     getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
     getDataManager().setDirty(lifetime);
@@ -47,7 +49,7 @@ public class EntityRitualWindwall extends EntityRitualBase {
       List<EntityLivingBase> entities = world
           .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 31.5, posY - 31.5, posZ - 31.5, posX + 31.5, posY + 31.5, posZ + 31.5));
       for (EntityLivingBase e : entities) {
-        if (e instanceof EntityMob && Math.pow((posX - e.posX), 2) + Math.pow((posY - e.posY), 2) + Math.pow((posZ - e.posZ), 2) < 1000) {
+        if ((e.isCreatureType(EnumCreatureType.MONSTER, false) || e instanceof EntityMob) && Math.pow((posX - e.posX), 2) + Math.pow((posY - e.posY), 2) + Math.pow((posZ - e.posZ), 2) < 1000) {
           e.knockBack(this, 1.0f, posX - e.posX, posZ - e.posZ);
           if (world.isRemote) {
             for (int i = 0; i < 10; i++) {

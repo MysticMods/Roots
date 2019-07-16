@@ -2,14 +2,15 @@
   "name": "Unending Bowl",
   "icon": "roots:unending_bowl",
   "category": "apparatus",
-  "advancement": "roots:runestone",
+  "advancement": "roots:dewgonia",
   "pages": [
     {
-      "type": "text",
-      "text": "The Unending Bowl, as its name suggests, never seems to run out of water no matter how much is taken from it once placed."
+      "type": "spotlight",
+      "item": "roots:unending_bowl",
+      "text": "Once placed, the unending bowl, as its name suggests, will never run out of water, no matter how much is taken from it."
     },
     {
-      "type": "ritual_crafting_template",
+      "type": "fey_crafting_template",
       "recipe": "unending_bowl"
     }
   ]

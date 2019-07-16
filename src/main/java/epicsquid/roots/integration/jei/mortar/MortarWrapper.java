@@ -1,18 +1,16 @@
 package epicsquid.roots.integration.jei.mortar;
 
-import java.util.Arrays;
-
-import epicsquid.roots.init.ModItems;
-import epicsquid.roots.item.ItemSpellDust;
 import epicsquid.roots.recipe.MortarRecipe;
-import epicsquid.roots.recipe.RunicShearRecipe;
-import epicsquid.roots.recipe.SpellRecipe;
 import epicsquid.roots.spell.SpellBase;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MortarWrapper implements IRecipeWrapper {
 
@@ -29,19 +27,23 @@ public class MortarWrapper implements IRecipeWrapper {
 
   @Override
   public void getIngredients(IIngredients ingredients) {
+    List<List<ItemStack>> inputs = new ArrayList<>();
+
     if (recipe != null) {
       for (Ingredient ingredient : recipe.getIngredients()) {
-        if (ingredient == null || ingredient == Ingredient.EMPTY) continue;
-        ingredients.setInputs(VanillaTypes.ITEM, Arrays.asList(ingredient.getMatchingStacks()));
+        if (ingredient == null || ingredient == Ingredient.EMPTY) {
+          inputs.add(new ArrayList<>());
+        } else {
+          inputs.add(Arrays.asList(ingredient.getMatchingStacks()));
+        }
       }
       ingredients.setOutput(VanillaTypes.ITEM, this.recipe.getResult());
     } else if (spellBase != null) {
       for (Ingredient ingredient : spellBase.getIngredients()) {
-        ingredients.setInputs(VanillaTypes.ITEM, Arrays.asList(ingredient.getMatchingStacks()));
+        inputs.add(Arrays.asList(ingredient.getMatchingStacks()));
       }
-      ItemStack spellDust = new ItemStack(ModItems.spell_dust);
-      ItemSpellDust.createData(spellDust, spellBase);
-      ingredients.setOutput(VanillaTypes.ITEM, spellDust);
+      ingredients.setOutput(VanillaTypes.ITEM, spellBase.getResult());
     }
+    ingredients.setInputLists(VanillaTypes.ITEM, inputs);
   }
 }

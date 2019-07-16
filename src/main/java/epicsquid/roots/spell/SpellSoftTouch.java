@@ -42,7 +42,7 @@ public class SpellSoftTouch extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
-    RayTraceResult result = caster.world.rayTraceBlocks(caster.getPositionVector().addVector(0, caster.getEyeHeight(), 0), caster.getLookVec().scale(8.0f).add(caster.getPositionVector().addVector(0, caster.getEyeHeight(), 0)));
+    RayTraceResult result = caster.world.rayTraceBlocks(caster.getPositionVector().add(0, caster.getEyeHeight(), 0), caster.getLookVec().scale(8.0f).add(caster.getPositionVector().add(0, caster.getEyeHeight(), 0)));
     if (result != null && !caster.world.isRemote) {
       if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
         BlockPos pos = result.getBlockPos();

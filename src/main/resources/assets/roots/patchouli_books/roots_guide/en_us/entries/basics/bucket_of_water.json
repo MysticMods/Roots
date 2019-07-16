@@ -1,0 +1,14 @@
+{
+  "name": "A Bucket of Water",
+  "icon": "minecraft:water_bucket",
+  "category": "basics",
+  "advancement": "roots:root",
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "minecraft:water_bucket",
+      "link_recipe": true,
+      "text": "A surprisingly versatile tool, this ingenious device can be used to cancel any $(l:basics/pyre)pyre ritual$() that is in progress, quenching the flames and immediately settling the magical energies.$(br2)$(info) The ingredients used for the ritual are still consumed."
+    }
+  ]
+}

@@ -1,13 +1,13 @@
 {
   "name": "Wildfire",
-  "icon": "roots:petal_dust",
+  "icon": "roots:spell_dust",
   "category": "spells",
   "advancement": "roots:infernal_bulb",
   
   "pages": [
     {
       "type": "text",
-      "text": "Spews forth a brief jet of fire from the tip of the staff."
+      "text": "Summons forth a powerful jet of flame while channeled, $(warning) dealing fire damage to and setting on fire any creature which it encounters."
     },
     {
       "type": "spell_template",

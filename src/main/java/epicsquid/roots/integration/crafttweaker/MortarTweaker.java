@@ -1,10 +1,7 @@
 package epicsquid.roots.integration.crafttweaker;
 
-import com.blamejared.mtlib.helpers.InputHelper;
 import com.blamejared.mtlib.helpers.LogHelper;
 import com.blamejared.mtlib.utils.BaseAction;
-import com.blamejared.mtlib.utils.BaseListAddition;
-import com.blamejared.mtlib.utils.BaseListRemoval;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
@@ -16,21 +13,52 @@ import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.util.zen.ZenDocAppend;
+import epicsquid.roots.util.zen.ZenDocArg;
+import epicsquid.roots.util.zen.ZenDocClass;
+import epicsquid.roots.util.zen.ZenDocMethod;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@ZenDocClass("mods.roots.Mortar")
+@ZenDocAppend({"docs/include/mortar.example.md"})
 @ZenRegister
 @ZenClass("mods." + Roots.MODID + ".Mortar")
 public class MortarTweaker {
 
+  @ZenDocMethod(
+      order = 1,
+      args = {
+          @ZenDocArg(arg = "output", info = "the item output of this recipe"),
+          @ZenDocArg(arg = "inputs", info = "an array of ingredients that is either 5 long or 1 long")
+      }
+  )
+  @ZenMethod
+  public static void addRecipe(IItemStack output, IIngredient[] inputs) {
+    if (inputs.length != 5) {
+      if (inputs.length == 1) {
+        CraftTweaker.LATE_ACTIONS.add(new AddMultiple(ModRecipes.getMortarRecipeList(CraftTweakerMC.getItemStack(output), CraftTweakerMC.getIngredient(inputs[0]))));
+      } else {
+        CraftTweakerAPI.getLogger().logError("Mortar recipe must have 5 items total, or 1 single item.");
+      }
+    } else {
+      CraftTweaker.LATE_ACTIONS.add(new Add(CraftTweakerMC.getItemStack(output), Stream.of(inputs).map(CraftTweakerMC::getIngredient).toArray(Ingredient[]::new)));
+    }
+  }
+
+  @ZenDocMethod(
+      order = 2,
+      args = {
+          @ZenDocArg(arg = "spellName", info = "the name of the spell as in the spell registry"),
+          @ZenDocArg(arg = "inputs", info = "an array of 5 items that are the new ingredients for the recipe")
+      }
+  )
   @ZenMethod
   public static void changeSpell(String spellName, IIngredient[] inputs) {
     if (inputs.length != 5) {
@@ -41,54 +69,55 @@ public class MortarTweaker {
     }
   }
 
-  @ZenMethod
-  public static void addRecipe(IItemStack output, IIngredient[] inputs) {
-    if (inputs.length != 5) {
-      if (inputs.length == 1) {
-        CraftTweaker.LATE_ACTIONS.add(new AddMultiple(ModRecipes.getMortarRecipeList(CraftTweakerMC.getItemStack(output), CraftTweakerMC.getIngredient(inputs[0]))));
-      } else {
-        CraftTweakerAPI.getLogger().logError("Mortar recipe must have 5 items total, or 1 single item.");
+  @ZenDocMethod(
+      order = 3,
+      args = {
+          @ZenDocArg(arg = "output", info = "the item stack produced by the recipe")
       }
-    } else {
-      CraftTweaker.LATE_ACTIONS.add(new Add(Collections.singletonList(new MortarRecipe(
-              CraftTweakerMC.getItemStack(output),
-              Arrays.stream(inputs).map(CraftTweakerMC::getIngredient).toArray(Ingredient[]::new))))
-      );
-    }
-  }
-
+  )
   @ZenMethod
   public static void removeRecipe(IItemStack output) {
-    List<MortarRecipe> recipes = new ArrayList<>();
-    for(MortarRecipe recipe : ModRecipes.getMortarRecipes()) {
-      if (output.matches(InputHelper.toIItemStack(recipe.getResult()))) {
-        recipes.add(recipe);
-      }
-    }
-    CraftTweaker.LATE_ACTIONS.add(new Remove(recipes));
+    CraftTweaker.LATE_ACTIONS.add(new Remove(CraftTweakerMC.getItemStack(output)));
   }
 
-  private static class Remove extends BaseListRemoval<MortarRecipe> {
+  private static class Remove extends BaseAction {
+    private ItemStack output;
 
-    private Remove(List<MortarRecipe> list) {
-      super("MortarRecipe", ModRecipes.getMortarRecipes(), list);
+    private Remove(ItemStack output) {
+      super("MortarRecipe");
+      this.output = output;
     }
 
     @Override
-    protected String getRecipeInfo(MortarRecipe recipe) {
-      return LogHelper.getStackDescription(recipe.getResult());
-    }
-  }
-
-  private static class Add extends BaseListAddition<MortarRecipe> {
-
-    private Add(List<MortarRecipe> list) {
-      super("MortarRecipe", ModRecipes.getMortarRecipes(), list);
+    public String describe() {
+      return "Removing Mortar Recipe for item output: " + LogHelper.getStackDescription(output);
     }
 
     @Override
-    protected String getRecipeInfo(MortarRecipe recipe) {
-      return LogHelper.getStackDescription(recipe.getResult());
+    public void apply() {
+      ModRecipes.removeMortarRecipes(output);
+    }
+  }
+
+  private static class Add extends BaseAction {
+    private ItemStack output;
+    private Ingredient[] inputs;
+
+    private Add(ItemStack output, Ingredient[] inputs) {
+      super("MortarRecipe");
+      this.output = output;
+      this.inputs = inputs;
+    }
+
+    @Override
+    public void apply() {
+      MortarRecipe recipe = new MortarRecipe(output, inputs);
+      ModRecipes.addMortarRecipe(recipe);
+    }
+
+    @Override
+    public String describe() {
+      return "Adding MortarRecipe to make " + LogHelper.getStackDescription(output);
     }
   }
 
@@ -116,14 +145,14 @@ public class MortarTweaker {
     private String spell;
     private List<Ingredient> ingredients;
 
-    private ChangeSpell (String spell, List<Ingredient> ingredients) {
+    private ChangeSpell(String spell, List<Ingredient> ingredients) {
       super("ChangeSpellRecipe");
       this.spell = spell;
       this.ingredients = ingredients;
     }
 
     @Override
-    public void apply () {
+    public void apply() {
       SpellBase spell = SpellRegistry.getSpell(this.spell);
       if (spell == null) {
         CraftTweakerAPI.logError("Invalid spell name: %s" + this.spell);
@@ -133,7 +162,7 @@ public class MortarTweaker {
     }
 
     @Override
-    public String getRecipeInfo () {
+    public String getRecipeInfo() {
       return String.format("ChangeSpellRecipe to change spell %s", spell);
     }
   }

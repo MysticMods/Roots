@@ -2,39 +2,40 @@
   "name": "Living Tools",
   "icon": "roots:living_pickaxe",
   "category": "apparatus",
-  "advancement": "roots:pyre",
+  "advancement": "roots:fey_crafter",
   "secret": true,
   "pages": [
     {
       "type": "text",
-      "text": "Living Tools are a druid's solution to making wooden tools less useless by encouraging the organic matter within to reach its maximum potential. Reinforcing the tool with tree bark and wildroot allows it to slowly regrow itself when worn down, and inlaying it with bits of gold seems to make it about as effective as an iron tool in most regards."
+      "text": "Enlivened with the magic contained within herbs and tipped with precious metals, living tools will literally regrow any damage that they take, although slowly.$(br2)$(info) It has the effectiveness of an equivalent iron tool, but is as enchantable as the golden version."
     },
     {
-      "type": "ritual_crafting_template",
+      "type": "fey_crafting_template",
       "recipe": "living_pickaxe"
     },
     {
-      "type": "ritual_crafting_template",
+      "type": "fey_crafting_template",
       "recipe": "living_axe"
     },
     {
-      "type": "ritual_crafting_template",
+      "type": "fey_crafting_template",
       "recipe": "living_shovel"
     },
     {
-      "type": "ritual_crafting_template",
+      "type": "fey_crafting_template",
       "recipe": "living_hoe"
     },
     {
-      "type": "ritual_crafting_template",
+      "type": "fey_crafting_template",
       "recipe": "living_sword"
     },
     {
-      "type": "text",
-      "text": "While too brittle and frail to be fully imbued with wildroot, these sturdy arrows should get you through the worst of fights."
+      "type": "spotlight",
+      "item": "roots:living_arrow",
+      "text": "While too brittle to regrow themselves, these sturdy arrows pack a punch."
     },
     {
-      "type": "ritual_crafting_template",
+      "type": "fey_crafting_template",
       "recipe": "living_arrow"
     }
   ]

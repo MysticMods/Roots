@@ -1,5 +1,6 @@
 package epicsquid.roots.ritual;
 
+import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualPurity;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
@@ -16,7 +17,7 @@ public class RitualPurity extends RitualBase {
     super(name, duration);
     addCondition(new ConditionItems(
             new ItemStack(ModItems.terra_moss),
-            new ItemStack(ModItems.aubergine), 
+            new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
             new ItemStack(ModBlocks.baffle_cap_mushroom),
             new ItemStack(Items.MILK_BUCKET), 
             new ItemStack(Items.GLASS_BOTTLE)
@@ -27,7 +28,7 @@ public class RitualPurity extends RitualBase {
   }
 
   @Override
-  public void doEffect(World world, BlockPos pos) {
-    this.spawnEntity(world, pos, EntityRitualPurity.class);
+  public EntityRitualBase doEffect(World world, BlockPos pos) {
+    return this.spawnEntity(world, pos, EntityRitualPurity.class);
   }
 }

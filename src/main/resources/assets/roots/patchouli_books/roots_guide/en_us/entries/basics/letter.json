@@ -1,0 +1,65 @@
+{
+    "name": "Letter from a Druid",
+    "icon": "minecraft:paper",
+    "category": "basics",
+    "advancement": "roots:root",
+    "priority": true,
+    "pages": [
+      {
+        "type": "text",
+        "title": "To my fellow druid,",
+        "text": "It can often times be difficult to start out in the world. The process of living in harmony with nature may seem like a pleasant ideal when things are going well, but when the sun sets and darkness rules the land, respecting nature may become a difficult task."
+      },
+      {
+        "type": "crafting",
+        "recipe": "roots:assorted_seeds",
+        "text": "It will certainly be difficult, when faced with certain starvation, to avoid harming the peaceful creatures of the world. I implore you not to, however! Even at the worst of times, combining and toasting a few scraps of seeds will supply you with nourishment."
+      },
+      {
+        "type": "text",
+        "title": "Wildroot",
+        "text": "I have learnt much on the matter of $(l:herbs/wildroot)wildroot$(), that wondrous, magic-filled root that litters the land and lurks in the tall grasses. It was once the roots of vast trees known as wildwood, forever lost from the land. It still retains vitality & life however, and can be cultivated as per any other crop."
+      },
+      {
+        "type": "crafting",
+        "recipe": "mysticalworld:stuffed_aubergine",
+        "title": "Aubergine",
+        "text": "The humble $(l:resources/aubergine)aubergine$() is delicious when cooked, but when combined with other root vegetables becomes a great feast rather than a simple snack. Its latent magic is weak, but you will find uses for it in spells & rituals. Like wildroot, it can be cultivated."
+      },
+      {
+        "type": "text",
+        "title": "Terra Moss",
+        "text": "The $(l:herbs/terra_moss)strange spores$() which may be found in tall grass grow best when placed on rough stone near water. When scraped away carefully with a knife, it is clear that magic suffuses them. However, fear not that you will spend your days breaking grass in search of spores, for there is a ritual, that of $(l:rituals/ritual_overgrowth)Overgrowth$(), which will magically grow this moss on suitable stone."
+      },
+      {
+        "type": "text",
+        "title": "Other Crops",
+        "text": "Fear not sacrificing the space around you for the cultivation of other crops, such as wheat and beetroot, carrots and potatoes: while these mundane seem as though they would merely supply sustenance, you may find encampments of villagers willing to trade for currency.$(br2)A well-kept garden will forever be a boon."
+      },
+      {
+        "type": "text",
+        "title": "Other Druids",
+        "text": "Indeed, within these encampments you may find like-minded druids more progressed in the arts, who may be willing to trade essential items and resources in return for this currency. This may give you a needed boost in items, or perhaps, if discovered early enough, unlock new ideas and concepts."
+      },
+      {
+        "type": "text",
+        "title": "Rarer Resources",
+        "text": "My research into the various spells & rituals has found that some require rare resources, be they from tropical climes, the wettest swamps or from the driest deserts. Being older, I anguished over my inability to make such journeys.$(br2)However, I was heartened to discover legend of ritual that harnesses runestones to turn mundane things into others."
+      },
+      {
+        "type": "text",
+        "text": "As I have mentioned my advancing years, the passage of time begins to feel like a closing loop that will end my current cycle on the land. There have been times when I have had urgent need for a crop not yet ripened, and at a lack of the common fertilizer which all herbs seem to respond to."
+      },
+      {
+        "type": "text",
+        "text": "In these times of need, I found the spell of Growth Infusion useful, though tedious by nature. Other texts speak of greater spells to grow entire fields & forests, and then others yet to harvest them, but these are beyond my meagre skills."
+      },
+      {
+        "type": "text",
+        "text": "Some final words: Do not despair, young druid! If you ever find yourself at a loss, and my above words were unable to help you, ensure that you have exhausted every possible avenue of research and discovery.$(br2)Many times I felt the frustration of realising that I simply needed a herb I had yet to craft or discover.$(br2)Fare thee well!"
+      },
+      {
+        "type": "empty"
+      }
+    ]
+  }

@@ -7,10 +7,7 @@ import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
 import epicsquid.roots.recipe.TransmutationRecipe;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.ItemSpawnUtil;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -18,8 +15,10 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 public class EntityRitualTransmutation extends EntityRitualBase {
 
@@ -34,6 +33,7 @@ public class EntityRitualTransmutation extends EntityRitualBase {
 
   @Override
   public void onUpdate() {
+    super.onUpdate();
     int curLifetime = getDataManager().get(lifetime);
     getDataManager().set(lifetime, curLifetime - 1);
     getDataManager().setDirty(lifetime);
@@ -43,7 +43,7 @@ public class EntityRitualTransmutation extends EntityRitualBase {
     if (world.isRemote) return;
 
     if (this.ticksExisted % 100 == 0) {
-      List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), 16, 16, 8, (pos) -> {
+      List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), 8, 8, 8, (pos) -> {
         if (world.isAirBlock(pos)) return false;
         IBlockState state = world.getBlockState(pos);
         List<TransmutationRecipe> stateRecipes = ModRecipes.getTransmutationRecipes(state);

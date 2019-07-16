@@ -1,7 +1,5 @@
 package epicsquid.roots.entity.ritual;
 
-import java.util.List;
-
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.network.datasync.DataParameter;
@@ -9,6 +7,8 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class EntityRitualFireStorm extends EntityRitualBase {
 
@@ -21,6 +21,7 @@ public class EntityRitualFireStorm extends EntityRitualBase {
 
   @Override
   public void onUpdate() {
+    super.onUpdate();
     float alpha = (float) Math.min(40, (RitualRegistry.ritual_light.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
     getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
     getDataManager().setDirty(lifetime);

@@ -120,4 +120,8 @@ public class TransmutationRecipe extends RegistryItem {
   public boolean matches (World world, BlockPos pos) {
     return matches(world, pos, world.getBlockState(pos));
   }
+
+  public String getKey () {
+    return "roots.ritual.transmutation." + getRegistryName().getPath();
+  }
 }

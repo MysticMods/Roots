@@ -26,7 +26,7 @@ public class SpellSkySoarer extends SpellBase {
         new ItemStack(Items.SUGAR),
         new ItemStack(ModItems.petals),
         new OreIngredient("string"),
-        new ItemStack(ModItems.aubergine_seed),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),
         new ItemStack(ModItems.cloud_berry)
     );
   }

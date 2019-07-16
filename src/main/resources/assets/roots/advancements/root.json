@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "roots:wildroot"
+            "item": "roots:living_hoe"
         },
         "title": {
             "translate": "advancement.roots.root"
@@ -9,18 +9,13 @@
         "description": {
             "translate": "advancement.roots.root.desc"
         },
-        "background": "roots:textures/blocks/thatch.png"
+        "background": "roots:textures/blocks/runestone.png",
+        "show_toast": false,
+        "announce_to_chat" : false
     },
     "criteria": {
-        "book": {
-            "trigger": "minecraft:inventory_changed",
-            "conditions": {
-                "items": [
-                    {
-                        "item": "roots:wildroot"
-                    }
-                ]
-            }
+        "auto": {
+            "trigger": "minecraft:location"
         }
     }
 }

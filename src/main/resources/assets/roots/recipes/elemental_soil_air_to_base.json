@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "roots:elemental_soil_air",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "roots:elemental_soil",
+    "data": 0
+  }
+}

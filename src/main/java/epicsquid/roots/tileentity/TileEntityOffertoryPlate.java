@@ -1,7 +1,5 @@
 package epicsquid.roots.tileentity;
 
-import epicsquid.mysticallib.network.MessageTEUpdate;
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.entity.grove.EntityGrove;
@@ -31,7 +29,7 @@ public class TileEntityOffertoryPlate extends TileBase {
     protected void onContentsChanged(int slot) {
       TileEntityOffertoryPlate.this.markDirty();
       if (!world.isRemote) {
-        PacketHandler.sendToAllTracking(new MessageTEUpdate(TileEntityOffertoryPlate.this.getUpdateTag()), TileEntityOffertoryPlate.this);
+        updatePacketViaState();
       }
     }
   };
@@ -45,7 +43,7 @@ public class TileEntityOffertoryPlate extends TileBase {
   @Override
   public NBTTagCompound writeToNBT(NBTTagCompound tag) {
     super.writeToNBT(tag);
-    tag.setTag("inventory", inventory.serializeNBT());
+    tag.setTag("handler", inventory.serializeNBT());
     tag.setInteger("progress", progress);
     if (lastPlayer != null) {
       tag.setTag("lastPlayer", NBTUtil.createUUIDTag(lastPlayer));
@@ -59,7 +57,7 @@ public class TileEntityOffertoryPlate extends TileBase {
     if (tag.hasKey("lastPlayer")) {
       lastPlayer = NBTUtil.getUUIDFromTag(tag.getCompoundTag("lastPlayer"));
     }
-    inventory.deserializeNBT(tag.getCompoundTag("inventory"));
+    inventory.deserializeNBT(tag.getCompoundTag("handler"));
     progress = tag.getInteger("progress");
   }
 
@@ -80,7 +78,7 @@ public class TileEntityOffertoryPlate extends TileBase {
 
   @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand,
-      @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
+                          @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
     this.lastPlayer = player.getUniqueID();
     markDirty();
@@ -96,7 +94,7 @@ public class TileEntityOffertoryPlate extends TileBase {
             player.setHeldItem(hand, ItemStack.EMPTY);
           }
 
-          //Search for the grove and assigning this plate to the grove
+          //Search for the fey and assigning this plate to the fey
           List<EntityGrove> groveList = Util.getEntitiesWithinRadius(world, EntityGrove.class, getPos(), 10, 10, 10);
           if (groveList.size() > 0) {
             GroveType type = OfferingUtil.getGroveType(this.inventory.getStackInSlot(0));
@@ -111,7 +109,8 @@ public class TileEntityOffertoryPlate extends TileBase {
               grove.addActiveOffering(this);
             }
           }
-          PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+          if (!world.isRemote)
+            updatePacketViaState();
           return true;
         }
       }
@@ -120,13 +119,11 @@ public class TileEntityOffertoryPlate extends TileBase {
       if (!inventory.getStackInSlot(0).isEmpty()) {
         ItemStack extracted = inventory.extractItem(0, inventory.getStackInSlot(0).getCount(), false);
         ItemSpawnUtil.spawnItem(world, getPos(), extracted);
-        PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
+        if (!world.isRemote)
+          updatePacketViaState();
         return true;
       }
     }
-    /*if (!world.isRemote) {
-      PacketHandler.sendToAllTracking(new MessageTEUpdate(this.getUpdateTag()), this);
-    }*/ // Nothing has changed, why send an update packet here?
     return false;
   }
 

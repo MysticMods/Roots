@@ -1,34 +1,42 @@
 package epicsquid.roots.item;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
-import epicsquid.roots.capability.pouch.PouchItemHandler;
+import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.gui.GuiHandler;
+import epicsquid.roots.gui.Keybinds;
+import epicsquid.roots.handler.PouchHandler;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.integration.baubles.pouch.PouchEquipHandler;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.IItemHandler;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class ItemPouch extends ItemBase {
 
-  private int inventorySlots;
-  private int herbSlots;
-
-  public ItemPouch(@Nonnull String name, int inventorySlots, int herbSlots) {
+  public ItemPouch(@Nonnull String name) {
     super(name);
-    this.inventorySlots = inventorySlots;
-    this.herbSlots = herbSlots;
     this.setMaxStackSize(1);
+  }
+
+  public boolean isApothecary() {
+    return false;
   }
 
   public static boolean hasHerb(@Nonnull ItemStack pouch, Herb herb) {
@@ -36,30 +44,43 @@ public class ItemPouch extends ItemBase {
   }
 
   public static double getHerbQuantity(@Nonnull ItemStack pouch, Herb herb) {
-    if (!pouch.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
-      return 0.0;
-    }
-    PouchItemHandler handler = (PouchItemHandler) pouch.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-    for (int i = handler.getInventorySlots(); i < handler.getInventorySlots() + handler.getHerbSlots(); i++) {
+    PouchHandler pouchHandler = PouchHandler.getHandler(pouch);
+    if (pouchHandler == null) return 0.0;
+    double count = getNbtQuantity(pouch, herb.getName());
+    IItemHandler handler = pouchHandler.getHerbs();
+    for (int i = 0; i < handler.getSlots(); i++) {
       ItemStack stack = handler.getStackInSlot(i);
-      if (!stack.isEmpty() && HerbRegistry.containsHerbItem(stack.getItem()) && HerbRegistry.getHerbByItem(stack.getItem()).equals(herb)) {
-        return stack.getCount() + getNbtQuantity(pouch, herb.getName());
+      if (!stack.isEmpty() && herb.equals(HerbRegistry.getHerbByItem(stack.getItem()))) {
+        count += stack.getCount();
       }
     }
-    return getNbtQuantity(pouch, herb.getName());
-  }
-
-  @Nullable
-  @Override
-  public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
-    return new PouchItemHandler(inventorySlots, herbSlots);
+    return count;
   }
 
   @Override
   @Nonnull
   public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
-    player.openGui(Roots.getInstance(), GuiHandler.POUCH_ID, world, 0, 0, 0);
-    return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
+    ItemStack stack = player.getHeldItem(hand);
+    boolean isBaublesLoaded = Loader.isModLoaded("baubles");
+    boolean open_gui = false;
+    if (GeneralConfig.AutoEquipPouches) {
+      if (player.isSneaking()) {
+        open_gui = true;
+      }
+      if (isBaublesLoaded) {
+        if (!world.isRemote) {
+          if (!PouchEquipHandler.tryEquipPouch(player, stack)) {
+            open_gui = true;
+          }
+        }
+      }
+    } else {
+      open_gui = true;
+    }
+    if (!world.isRemote && open_gui) {
+      player.openGui(Roots.getInstance(), GuiHandler.POUCH_ID, world, 0, 0, 0);
+    }
+    return new ActionResult<>(EnumActionResult.SUCCESS, stack);
   }
 
   private static ItemStack createData(ItemStack stack, Herb herb, double quantity) {
@@ -101,17 +122,30 @@ public class ItemPouch extends ItemBase {
   }
 
   private static boolean addHerbToNbt(@Nonnull ItemStack pouch, Herb herb) {
-    if (pouch.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
-      PouchItemHandler handler = (PouchItemHandler) pouch.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-      for (int i = handler.getInventorySlots(); i < handler.getInventorySlots() + handler.getHerbSlots(); i++) {
-        ItemStack stack = handler.getStackInSlot(i);
-        if (!stack.isEmpty() && HerbRegistry.containsHerbItem(stack.getItem()) && HerbRegistry.getHerbByItem(stack.getItem()).equals(herb)) {
+    PouchHandler pouchHandler = PouchHandler.getHandler(pouch);
+    if (pouchHandler == null) return false;
+    IItemHandler handler = pouchHandler.getHerbs();
+    for (int i = 0; i < handler.getSlots(); i++) {
+      ItemStack stack = handler.getStackInSlot(i);
+      if (!stack.isEmpty() && HerbRegistry.containsHerbItem(stack.getItem()) && HerbRegistry.getHerbByItem(stack.getItem()).equals(herb)) {
+        if (!handler.extractItem(i, 1, false).isEmpty()) {
           createData(pouch, herb, 1.0);
-          stack.shrink(1);
           return true;
         }
       }
     }
     return false;
+  }
+
+  @SideOnly(Side.CLIENT)
+  @Override
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+    if (GeneralConfig.AutoEquipPouches && Loader.isModLoaded("baubles")) {
+      tooltip.add(TextFormatting.GREEN + I18n.format("roots.tooltip.pouch", Keybinds.POUCH_KEYBIND.getDisplayName()));
+    } else {
+      tooltip.add(TextFormatting.GREEN + I18n.format("roots.tooltip.pouch2", Keybinds.POUCH_KEYBIND.getDisplayName()));
+    }
+
+    super.addInformation(stack, worldIn, tooltip, flagIn);
   }
 }
