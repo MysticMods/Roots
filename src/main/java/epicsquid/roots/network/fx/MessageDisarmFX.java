@@ -14,13 +14,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessageDisarmFX implements IMessage {
 
-  private int x;
-  private int y;
-  private int z;
+  private double x;
+  private double y;
+  private double z;
 
   public MessageDisarmFX() { }
 
-  public MessageDisarmFX(int x, int y, int z) {
+  public MessageDisarmFX(double x, double y, double z) {
     this.x = x;
     this.y = y;
     this.z = z;
@@ -28,16 +28,16 @@ public class MessageDisarmFX implements IMessage {
 
   @Override
   public void fromBytes(ByteBuf buf) {
-    x = buf.readInt();
-    y = buf.readInt();
-    z = buf.readInt();
+    x = buf.readDouble();
+    y = buf.readDouble();
+    z = buf.readDouble();
   }
 
   @Override
   public void toBytes(ByteBuf buf) {
-    buf.writeInt(x);
-    buf.writeInt(y);
-    buf.writeInt(z);
+    buf.writeDouble(x);
+    buf.writeDouble(y);
+    buf.writeDouble(z);
   }
 
   public static class Handler implements IMessageHandler<MessageDisarmFX, IMessage>
@@ -48,10 +48,11 @@ public class MessageDisarmFX implements IMessage {
       World world = Minecraft.getMinecraft().world;
 
       ParticleUtil.spawnParticleSmoke(
-              world, (float) message.x, (float) message.y + 2,(float) message.z,
-              (float) message.x, (float)message.y + 4, (float) message.z,
+              world, (float) message.x + 0.5F, (float) message.y + 3,(float) message.z + 0.5F,
+              0, 0, 0,
               SpellDisarm.instance.getRed1(), 0, 0, 1.0f,
-              6.0f + 6.0f * Util.rand.nextFloat(), 40, false);
+              6.0f + 6.0f * Util.rand.nextFloat(), 60, false);
+
 
       return null;
     }

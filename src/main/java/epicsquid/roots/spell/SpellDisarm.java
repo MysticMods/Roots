@@ -68,12 +68,13 @@ public class SpellDisarm extends SpellBase{
             for (ItemStack stack : inventory)
               if (Math.random() * 100 < 15)
                 caster.world.spawnEntity(new EntityItem(caster.world, entity.posX, entity.posY, entity.posZ, stack));
+
+            PacketHandler.sendToAllTracking(new MessageDisarmFX(entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ()), caster);
           }
           //Removes Armor
           //for (int i = 0; i < 4; i++)
           //  entity.replaceItemInInventory(i + 5, ItemStack.EMPTY);
 
-          PacketHandler.sendToAllTracking(new MessageDisarmFX(entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ()), caster);
         }
         return true;
       } else

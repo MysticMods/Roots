@@ -1,12 +1,14 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageScatterPlantFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -39,36 +41,34 @@ public class SpellScatter extends SpellBase {
     );
   }
 
-  //Something tells me this method is completely broken :c
   @Override
   public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
 
-    for (int i = -7; i < 8; i++)
+    List<BlockPos> blocks = Util.getBlocksWithinRadius(caster.world, caster.getPosition().down(), 7, 1, 7, Blocks.FARMLAND);
+    boolean hadEffect = false;
+
+    for (BlockPos pos : blocks)
     {
-      for (int j = -7; j < 8; j++)
+      if (caster.getHeldItemOffhand() != ItemStack.EMPTY && caster.getHeldItemOffhand().getItem() instanceof ItemSeeds)
       {
-        BlockPos pos = new BlockPos(caster.posX + i, caster.posY - 1, caster.posZ + j);
+        ItemSeeds  seeds = (ItemSeeds) caster.getHeldItemOffhand().getItem();
+        IBlockState plant = seeds.getPlant(caster.world, pos);
 
-        if (caster.getHeldItemOffhand() != ItemStack.EMPTY && caster.getHeldItemOffhand().getItem() instanceof ItemSeeds)
+        if(canPlacePlant(caster.world, plant, pos, seeds)/* && caster.world.getBlockState(pos.up()) == Blocks.AIR*/)
         {
-          ItemSeeds  seeds = (ItemSeeds) caster.getHeldItemOffhand().getItem();
-          IBlockState plant = seeds.getPlant(caster.world, pos);
+          caster.world.setBlockState(pos.up(), plant);
 
-          if(canPlacePlant(caster.world, plant, pos, seeds)/* && caster.world.getBlockState(pos.up()) == Blocks.AIR*/)
-          {
-            caster.world.setBlockState(pos.up(), plant);
+          if (!caster.isCreative())
             caster.getHeldItemOffhand().shrink(1);
 
-            MessageScatterPlantFX fx = new MessageScatterPlantFX(pos.getX(), pos.getY() + 1, pos.getZ());
-            PacketHandler.sendToAllTracking(fx, caster);
-          }
+          MessageScatterPlantFX fx = new MessageScatterPlantFX(pos.getX(), pos.getY() + 1, pos.getZ());
+          PacketHandler.sendToAllTracking(fx, caster);
+
+          hadEffect = true;
         }
-        else
-          return false;
       }
     }
-
-    return true;
+    return hadEffect;
   }
 
   private boolean canPlacePlant(World world, IBlockState plant, BlockPos pos, ItemSeeds seeds)
