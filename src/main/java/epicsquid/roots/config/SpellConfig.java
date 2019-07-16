@@ -21,6 +21,9 @@ public class SpellConfig {
     @Config.Name("Disable Dandelion Winds Spell")
     @Config.Comment("Set to true to disable Dandelion Winds Spell")
     public boolean disableDandelionWinds = false;
+    @Config.Name("Disable Disarm Spell")
+    @Config.Comment("Set to true to disable Disarm Spell")
+    public boolean disableDisarm = false;
     @Config.Name("Disable Growth Infusion Spell")
     @Config.Comment("Set to true to disable Growth Infusion Spell")
     public boolean disableGrowthInfusion = false;
@@ -54,6 +57,9 @@ public class SpellConfig {
     @Config.Name("Disable Sanctuary Spell")
     @Config.Comment("Set to true to disable Sanctuary Spell")
     public boolean disableSanctuary = false;
+    @Config.Name("Disable Scatter Spell")
+    @Config.Comment("Set to true to disable Scatter Spell")
+    public boolean disableScatter = false;
     @Config.Name("Disable Second Wind Spell")
     @Config.Comment("Set to true to disable Second Wind Spell")
     public boolean disableSecondWind = false;
@@ -69,9 +75,15 @@ public class SpellConfig {
     @Config.Name("Disable Sky Soarer Spell")
     @Config.Comment("Set to true to disable Sky Soarer Spell")
     public boolean disableSkySoarer = false;
+    @Config.Name("Disable Soft Touch Spell")
+    @Config.Comment("Set to true to disable Soft Touch Spell")
+    public boolean disableSoftTouch = false;
     @Config.Name("Disable Time Stop Spell")
     @Config.Comment("Set to true to disable Time Stop Spell")
     public boolean disableTimeStop = false;
+    @Config.Name("Disable Thaw Spell")
+    @Config.Comment("Set to true to disable Thaw Spell")
+    public boolean disableThaw = false;
     @Config.Name("Disable Wild Fire Spell")
     @Config.Comment("Set to true to disable Wild Fire Spell")
     public boolean disableWildFire = false;

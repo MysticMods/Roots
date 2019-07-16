@@ -58,6 +58,14 @@ public class SpellRegistry {
       spellRegistry.put(SpellFeyLight.spellName, SpellFeyLight.instance);
     if (!SpellConfig.disableSpellsCategory.disableIcedTouch)
       spellRegistry.put(SpellIcedTouch.spellName, SpellIcedTouch.instance);
+    if (!SpellConfig.disableSpellsCategory.disableScatter)
+      spellRegistry.put(SpellScatter.spellName, SpellScatter.instance);
+    if (!SpellConfig.disableSpellsCategory.disableThaw)
+      spellRegistry.put(SpellThaw.spellName, SpellThaw.instance);
+    if (!SpellConfig.disableSpellsCategory.disableDisarm)
+      spellRegistry.put(SpellDisarm.spellName, SpellDisarm.instance);
+    if (!SpellConfig.disableSpellsCategory.disableSoftTouch)
+      spellRegistry.put(SpellSoftTouch.spellName, SpellSoftTouch.instance);
 
     // Cannot disable Grove-related spells
     spellRegistry.put(SpellGroveSupplication.spellName, SpellGroveSupplication.instance);
