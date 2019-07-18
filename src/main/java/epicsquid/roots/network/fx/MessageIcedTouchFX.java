@@ -7,6 +7,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /*************************************************
  * Author: Davoleo
@@ -47,6 +49,7 @@ public class MessageIcedTouchFX implements IMessage {
   public static class Handler implements IMessageHandler<MessageIcedTouchFX, IMessage> {
 
     @Override
+    @SideOnly(Side.CLIENT)
     public IMessage onMessage(MessageIcedTouchFX message, MessageContext context) {
       World world = Minecraft.getMinecraft().world;
       ParticleUtil.spawnParticleSmoke(world, message.x + 0.5F, message.y + 0.9F, message.z + 0.5F, 0, 0.01F, 0, 180, 255, 255, 0.30F, 15F, 40, true);
