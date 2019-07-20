@@ -1,21 +1,20 @@
 package epicsquid.roots.spell;
 
-import java.util.List;
-
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageSanctuaryBurstFX;
 import epicsquid.roots.network.fx.MessageSanctuaryRingFX;
 import epicsquid.roots.spell.modules.SpellModule;
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
+
+import java.util.List;
 
 public class SpellSanctuary extends SpellBase {
   public static String spellName = "spell_sanctuary";
@@ -39,10 +38,11 @@ public class SpellSanctuary extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
-    List<Entity> entities = player.world.getEntitiesWithinAABB(Entity.class,
-        new AxisAlignedBB(player.posX - 4.0, player.posY - 4.0, player.posZ - 4.0, player.posX + 4.0, player.posY + 5.0, player.posZ + 4.0));
+
+    List<EntityLiving> entities =  Util.getEntitiesWithinRadius(player.world, EntityLiving.class, player.getPosition(), 4, 5, 4);
+
     if (entities.size() > 0) {
-      for (Entity e : entities) {
+      for (EntityLiving e : entities) {
         if (e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
           if (Math.pow((e.posX - player.posX), 2) + Math.pow((e.posY - player.posY), 2) + Math.pow((e.posZ - player.posZ), 2) < 9.0f) {
             e.motionX = 0.125f * (e.posX - player.posX);
