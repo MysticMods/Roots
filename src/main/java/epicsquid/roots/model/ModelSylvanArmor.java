@@ -3,7 +3,12 @@ package epicsquid.roots.model;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 
+import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
+
 public class ModelSylvanArmor extends ModelArmorBase {
+    public static Map<EntityEquipmentSlot, ModelSylvanArmor> SINGLETONS = new HashMap<>();
 
     public EntityEquipmentSlot slot;
     ModelRenderer head1;
@@ -463,4 +468,12 @@ public class ModelSylvanArmor extends ModelArmorBase {
         this.armorScale = 1.1f;
     }
 
+    @Nullable
+    public static ModelSylvanArmor getInstance(EntityEquipmentSlot slot) {
+        if (slot.getSlotType() != EntityEquipmentSlot.Type.ARMOR) {
+            return null;
+        }
+
+        return SINGLETONS.computeIfAbsent(slot, ModelSylvanArmor::new);
+    }
 }

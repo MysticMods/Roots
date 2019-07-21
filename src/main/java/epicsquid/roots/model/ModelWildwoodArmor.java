@@ -2,8 +2,14 @@ package epicsquid.roots.model;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import vazkii.botania.client.model.armor.ModelArmor;
+
+import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ModelWildwoodArmor extends ModelArmorBase {
+    public static Map<EntityEquipmentSlot, ModelWildwoodArmor> SINGLETONS = new HashMap<>();
 
     public EntityEquipmentSlot slot;
     ModelRenderer head1;
@@ -519,4 +525,12 @@ public class ModelWildwoodArmor extends ModelArmorBase {
         this.armorScale = 1.2f;
     }
 
+    @Nullable
+    public static ModelWildwoodArmor getInstance(EntityEquipmentSlot slot) {
+        if (slot.getSlotType() != EntityEquipmentSlot.Type.ARMOR) {
+            return null;
+        }
+
+        return SINGLETONS.computeIfAbsent(slot, ModelWildwoodArmor::new);
+    }
 }
