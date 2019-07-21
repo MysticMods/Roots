@@ -237,5 +237,4 @@ public class ModelArmorBase extends ModelBiped {
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
-
 }

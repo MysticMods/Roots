@@ -44,7 +44,7 @@ public class ItemSylvanArmor extends ItemArmor implements IModeledObject {
   @Override
   @SideOnly(Side.CLIENT)
   public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
-    return new ModelSylvanArmor(armorSlot);
+    return ModelSylvanArmor.getInstance(armorSlot);
   }
 
   public static double sylvanBonus(EntityPlayer player) {
