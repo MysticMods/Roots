@@ -1,8 +1,5 @@
 package epicsquid.roots.spell;
 
-import java.util.List;
-import java.util.Random;
-
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
@@ -19,6 +16,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
+
+import java.util.List;
 
 public class SpellShatter extends SpellBase {
   public static String spellName = "spell_shatter";
@@ -54,14 +53,18 @@ public class SpellShatter extends SpellBase {
             player.world.notifyBlockUpdate(pos, state, Blocks.AIR.getDefaultState(), 8);
             doParticles = true;
           }
-          for (int i = 0; i < 4; i++) {
-            pos = result.getBlockPos().offset(EnumFacing.byIndex(new Random().nextInt(6)));
+//          for (int i = 0; i < 4; i++) {
+            if (result.sideHit.getAxis() != EnumFacing.Axis.Y)
+              pos = result.getBlockPos().down();
+            else {
+              pos = pos.offset(player.getHorizontalFacing().getOpposite());
+            }
             state = player.world.getBlockState(pos);
             if (state.getBlockHardness(player.world, pos) > 0) {
               player.world.destroyBlock(pos, true);
               player.world.notifyBlockUpdate(pos, state, Blocks.AIR.getDefaultState(), 8);
-            }
-          }
+           }
+//          }
           if (doParticles) {
             float offX = 0.5f * (float) Math.sin(Math.toRadians(-90.0f - player.rotationYaw));
             float offZ = 0.5f * (float) Math.cos(Math.toRadians(-90.0f - player.rotationYaw));
