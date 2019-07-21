@@ -94,6 +94,10 @@ public class SpellConfig {
     @Config.Comment("Set to true to allow the spell to attract xp orbs as well")
     public boolean shouldMagnetismAttractXP = true;
 
+    @Config.Name("Should Sanctuary Repulse non-living entities")
+    @Config.Comment("Set to true to make this spell work with any kind of entity")
+    public String[] sanctuaryEntitiesBlacklist = {"minecraft:creeper"};
+
   }
 
 }
