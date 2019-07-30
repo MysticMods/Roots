@@ -7,7 +7,7 @@ import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.spell.SpellBase;
-import epicsquid.roots.util.ItemSpawnUtil;
+import epicsquid.roots.util.ItemUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -134,7 +134,7 @@ public class TileEntityMortar extends TileBase {
           }
           ItemStack dust = spell.getResult();
           if (!world.isRemote) {
-            ItemSpawnUtil.spawnItem(world, getPos(), dust);
+            ItemUtil.spawnItem(world, getPos(), dust);
             markDirty();
             updatePacketViaState();
           }
@@ -168,7 +168,7 @@ public class TileEntityMortar extends TileBase {
             }
           }
           if (!world.isRemote) {
-            ItemSpawnUtil.spawnItem(world, getPos(), mortarRecipe.getResult().copy());
+            ItemUtil.spawnItem(world, getPos(), mortarRecipe.getResult().copy());
             markDirty();
             updatePacketViaState();
           }

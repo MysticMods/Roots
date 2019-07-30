@@ -23,6 +23,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public abstract class RitualBase {
   protected static int OFFERTORY_RADIUS = 6;
   protected static Random random = new Random();
@@ -72,7 +74,7 @@ public abstract class RitualBase {
     this.conditions.add(condition);
   }
 
-  public boolean isRitualRecipe(TileEntityBonfire tileEntityBonfire, EntityPlayer player){
+  public boolean isRitualRecipe(TileEntityBonfire tileEntityBonfire, @Nullable EntityPlayer player){
     for(Condition condition : this.conditions){
       if(condition instanceof ConditionItems){
         ConditionItems conditionItems = (ConditionItems) condition;

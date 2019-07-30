@@ -12,8 +12,10 @@ import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
-import epicsquid.roots.util.ItemSpawnUtil;
+import epicsquid.roots.util.ItemHandlerUtil;
+import epicsquid.roots.util.ItemUtil;
 import epicsquid.roots.util.XPUtil;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -27,6 +29,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
@@ -42,6 +45,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -140,48 +144,70 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     return ModRecipes.getCraftingRecipe(stacks);
   }
 
+  private void validateEntity () {
+    if (ritualEntity == null) return;
+
+    if (ritualEntity.isDead) return;
+
+    int lifetime = ritualEntity.getDataManager().get(ritualEntity.getLifetime());
+
+    if (lifetime <= 0) {
+      ritualEntity.setDead();
+    }
+
+    if (burnTime <= 0) {
+      ritualEntity.setDead();
+    }
+  }
+
+  private boolean startRitual(@Nullable EntityPlayer player) {
+    RitualBase ritual = RitualRegistry.getRitual(this, player);
+    validateEntity();
+    if (ritual != null) {
+      if ((ritualEntity == null || ritualEntity.isDead) && ritual.canFire(this, player)) {
+        ritualEntity = ritual.doEffect(world, pos);
+        this.burnTime = ritual.getDuration();
+        this.lastRitualUsed = ritual;
+        this.lastRecipeUsed = null;
+        this.lastUsedIngredients = ritual.getIngredients();
+        this.doBigFlame = true;
+        for (int i = 0; i < inventory.getSlots(); i++) {
+          inventory.extractItem(i, 1, false);
+        }
+        markDirty();
+        updatePacketViaState();
+        return true;
+      }
+    }
+
+    PyreCraftingRecipe recipe = getCurrentRecipe();
+    if (recipe != null) {
+      this.lastRecipeUsed = recipe;
+      this.lastRitualUsed = null;
+      this.lastUsedIngredients = recipe.getIngredients();
+      this.craftingResult = recipe.getResult();
+      this.craftingXP = recipe.getXP();
+      this.burnTime = recipe.getBurnTime();
+      this.doBigFlame = true;
+      for (int i = 0; i < inventory.getSlots(); i++) {
+        ItemStack item = inventory.extractItem(i, 1, false);
+        inventory_storage.insertItem(i, item, false);
+      }
+      markDirty();
+      updatePacketViaState();
+      return true;
+    }
+
+    return false;
+  }
+
   @Override
-  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand,
-                          @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
+  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
     if (world.isRemote) return true;
     ItemStack heldItem = player.getHeldItem(hand);
     if (!heldItem.isEmpty()) {
       if (heldItem.getItem() instanceof ItemFlintAndSteel) {
-        RitualBase ritual = RitualRegistry.getRitual(this, player);
-        if (ritual != null) {
-          if ((ritualEntity == null || ritualEntity.isDead) && ritual.canFire(this, player)) {
-            ritualEntity = ritual.doEffect(world, pos);
-            this.burnTime = ritual.getDuration();
-            this.lastRitualUsed = ritual;
-            this.lastRecipeUsed = null;
-            this.lastUsedIngredients = ritual.getIngredients();
-            this.doBigFlame = true;
-            for (int i = 0; i < inventory.getSlots(); i++) {
-              inventory.extractItem(i, 1, false);
-            }
-            markDirty();
-            updatePacketViaState();
-            return true;
-          }
-        }
-
-        PyreCraftingRecipe recipe = getCurrentRecipe();
-        if (recipe != null) {
-          this.lastRecipeUsed = recipe;
-          this.lastRitualUsed = null;
-          this.lastUsedIngredients = recipe.getIngredients();
-          this.craftingResult = recipe.getResult();
-          this.craftingXP = recipe.getXP();
-          this.burnTime = recipe.getBurnTime();
-          this.doBigFlame = true;
-          for (int i = 0; i < inventory.getSlots(); i++) {
-            ItemStack item = inventory.extractItem(i, 1, false);
-            inventory_storage.insertItem(i, item, false);
-          }
-          markDirty();
-          updatePacketViaState();
-          return true;
-        }
+        return startRitual(player);
       } else if (heldItem.getItem() == Items.WATER_BUCKET && burnTime > 0) {
         burnTime = 0;
         if (ritualEntity != null) {
@@ -263,7 +289,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       for (int i = 4; i >= 0; i--) {
         if (!inventory.getStackInSlot(i).isEmpty()) {
           ItemStack extracted = inventory.extractItem(i, inventory.getStackInSlot(i).getCount(), false);
-          ItemSpawnUtil.spawnItem(world, player.posX, player.posY + 1, player.posZ, false, extracted, 0, -1);
+          ItemUtil.spawnItem(world, player.posX, player.posY + 1, player.posZ, false, extracted, 0, -1);
           markDirty();
           updatePacketViaState();
           pickupDelay = 40;
@@ -294,6 +320,33 @@ public class TileEntityBonfire extends TileBase implements ITickable {
 
   @Override
   public void update() {
+    // Potentially update from stuff below
+    if (lastUsedIngredients != null && !lastUsedIngredients.isEmpty() && ItemHandlerUtil.isEmpty(inventory_storage) && ItemHandlerUtil.isEmpty(inventory)) {
+      TileEntity te = world.getTileEntity(getPos().down());
+      if (te != null) {
+        IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        if (cap != null) {
+          IntArrayList slots = new IntArrayList();
+          for (Ingredient ingredient : lastUsedIngredients) {
+            for (int i = 0; i < cap.getSlots(); i++) {
+              if (ingredient.apply(cap.getStackInSlot(i))) {
+                slots.add(i);
+                break;
+              }
+            }
+          }
+          List<ItemStack> temp = ItemHandlerUtil.getItemsInSlots(cap, slots, true);
+          if (temp.size() == 5) {
+            temp = ItemHandlerUtil.getItemsInSlots(cap, slots, false);
+            for (int i = 0; i < 5; i++) {
+              ItemStack stack = temp.get(i);
+              inventory.setStackInSlot(i, stack);
+            }
+          }
+        }
+      }
+    }
+
     this.ticker += 1.0f;
     if (pickupDelay > 0) {
       pickupDelay--;
@@ -352,6 +405,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           }
           if (ListUtil.stackListsMatch(stacks, this.lastRitualUsed.getRecipe())) {
             lastRitualUsed.doEffect(world, getPos());
+            burning = true;
             this.burnTime = this.lastRitualUsed.getDuration();
             this.doBigFlame = true;
             for (int i = 0; i < inventory.getSlots(); i++) {
@@ -372,7 +426,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
 
           EntityItem item = new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 1, getPos().getZ() + 0.5, result);
           item.setCustomNameTag("bonfire");
-          ItemSpawnUtil.spawnItem(world, item);
+          ItemUtil.spawnItem(world, item);
           XPUtil.spawnXP(world, getPos(), this.craftingXP);
           this.craftingResult = ItemStack.EMPTY;
           clearStorage();

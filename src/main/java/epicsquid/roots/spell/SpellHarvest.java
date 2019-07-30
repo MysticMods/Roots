@@ -6,7 +6,7 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageHarvestCompleteFX;
 import epicsquid.roots.spell.modules.SpellModule;
-import epicsquid.roots.util.ItemSpawnUtil;
+import epicsquid.roots.util.ItemUtil;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.block.*;
 import net.minecraft.block.properties.IProperty;
@@ -162,7 +162,7 @@ public class SpellHarvest extends SpellBase {
         player.world.setBlockState(pos, newState);
         for (ItemStack stack : drops) {
           if (stack.isEmpty()) continue;
-          ItemSpawnUtil.spawnItem(player.world, pos, stack);
+          ItemUtil.spawnItem(player.world, pos, stack);
         }
         affectedPositions.add(pos);
       }

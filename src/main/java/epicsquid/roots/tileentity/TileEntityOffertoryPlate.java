@@ -4,7 +4,7 @@ import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.entity.grove.EntityGrove;
 import epicsquid.roots.grove.GroveType;
-import epicsquid.roots.util.ItemSpawnUtil;
+import epicsquid.roots.util.ItemUtil;
 import epicsquid.roots.util.OfferingUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -118,7 +118,7 @@ public class TileEntityOffertoryPlate extends TileBase {
     if (heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND) {
       if (!inventory.getStackInSlot(0).isEmpty()) {
         ItemStack extracted = inventory.extractItem(0, inventory.getStackInSlot(0).getCount(), false);
-        ItemSpawnUtil.spawnItem(world, getPos(), extracted);
+        ItemUtil.spawnItem(world, getPos(), extracted);
         if (!world.isRemote)
           updatePacketViaState();
         return true;
