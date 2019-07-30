@@ -6,11 +6,8 @@ import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
 import epicsquid.roots.recipe.TransmutationRecipe;
 import epicsquid.roots.ritual.RitualRegistry;
-import epicsquid.roots.util.ItemSpawnUtil;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import net.minecraft.block.Block;
+import epicsquid.roots.util.ItemUtil;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -19,7 +16,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class EntityRitualTransmutation extends EntityRitualBase {
 
@@ -88,7 +84,7 @@ public class EntityRitualTransmutation extends EntityRitualBase {
 
     if (recipe.itemOutput()) {
       world.setBlockState(pos, Blocks.AIR.getDefaultState());
-      ItemSpawnUtil.spawnItem(world, pos, recipe.getEndStack().copy());
+      ItemUtil.spawnItem(world, pos, recipe.getEndStack().copy());
     } else {
       world.setBlockState(pos, recipe.getEndState());
     }

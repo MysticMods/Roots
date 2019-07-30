@@ -1,10 +1,8 @@
 package epicsquid.roots;
 
-import com.google.common.collect.Sets;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.mysticalworld.entity.EntityDeer;
 import epicsquid.roots.block.BlockElementalSoil;
 import epicsquid.roots.capability.grove.IPlayerGroveCapability;
 import epicsquid.roots.capability.grove.PlayerGroveCapabilityProvider;
@@ -22,7 +20,7 @@ import epicsquid.roots.network.MessagePlayerGroveUpdate;
 import epicsquid.roots.network.fx.*;
 import epicsquid.roots.recipe.BarkRecipe;
 import epicsquid.roots.util.Constants;
-import epicsquid.roots.util.ItemSpawnUtil;
+import epicsquid.roots.util.ItemUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockNewLog;
@@ -33,9 +31,6 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.passive.EntityLlama;
-import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -68,7 +63,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 public class EventManager {
 
@@ -94,7 +88,7 @@ public class EventManager {
         if (bark != null) {
           ItemStack barkStack = bark.getBarkStack(Util.rand.nextInt(getBarkAmount(tool)) + 1);
           if (!event.getWorld().isRemote) {
-            ItemSpawnUtil.spawnItem(event.getWorld(), event.getPos(), barkStack);
+            ItemUtil.spawnItem(event.getWorld(), event.getPos(), barkStack);
           }
         }
       }

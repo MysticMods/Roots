@@ -5,18 +5,16 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.Roots;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapability;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityProvider;
 import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.network.fx.MessageRunicShearsFX;
 import epicsquid.roots.recipe.RunicShearRecipe;
-import epicsquid.roots.util.ItemSpawnUtil;
+import epicsquid.roots.util.ItemUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -37,7 +35,6 @@ import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -72,7 +69,7 @@ public class ItemRunicShears extends ItemBase {
         } else {
           world.setBlockState(pos, recipe.getReplacementBlock().getDefaultState());
         }
-        ItemSpawnUtil.spawnItem(world, pos.add(0, 1, 0), recipe.getDrop().copy());
+        ItemUtil.spawnItem(world, pos.add(0, 1, 0), recipe.getDrop().copy());
         if (!player.capabilities.isCreativeMode) {
           player.getHeldItem(hand).damageItem(1, player);
         }

@@ -5,7 +5,7 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.RunicCarvingRecipe;
-import epicsquid.roots.util.ItemSpawnUtil;
+import epicsquid.roots.util.ItemUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -48,7 +48,7 @@ public class ItemDruidKnife extends ItemKnifeBase {
         if (block.getBlock() == Blocks.MOSSY_COBBLESTONE) {
           if (!world.isRemote) {
             world.setBlockState(pos, Blocks.COBBLESTONE.getDefaultState());
-            ItemSpawnUtil.spawnItem(world, player.getPosition().add(0, 1, 0), new ItemStack(ModItems.terra_moss));
+            ItemUtil.spawnItem(world, player.getPosition().add(0, 1, 0), new ItemStack(ModItems.terra_moss));
             if (!player.capabilities.isCreativeMode) {
               player.getHeldItem(hand).damageItem(1, player);
             }

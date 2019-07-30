@@ -7,6 +7,7 @@ import epicsquid.roots.ritual.wild.RitualSummonCreatures;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.entity.player.EntityPlayer;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,9 +19,9 @@ public class RitualRegistry {
           ritual_warden, ritual_natural_aura, ritual_purity, ritual_frost, ritual_animal_harvest, ritual_summoning,
           ritual_wild_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation;
 
-  public static RitualBase getRitual(TileEntityBonfire tileEntity, EntityPlayer player) {
+  public static RitualBase getRitual(TileEntityBonfire tileEntity, @Nullable EntityPlayer player) {
     for (int i = 0; i < ritualRegistry.size(); i++) {
-      RitualBase ritual = ritualRegistry.values().toArray(new RitualBase[ritualRegistry.size()])[i];
+      RitualBase ritual = ritualRegistry.values().toArray(new RitualBase[0])[i];
       if (ritual.isRitualRecipe(tileEntity, player)) {
         return ritual;
       }
