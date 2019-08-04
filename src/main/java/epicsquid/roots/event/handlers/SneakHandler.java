@@ -38,7 +38,6 @@ public class SneakHandler {
       if (quiver.isEmpty()) return;
 
       QuiverHandler handler = QuiverHandler.getHandler(quiver);
-      if (!handler.canConsume()) return;
 
       MessageServerTryPickupArrows packet = new MessageServerTryPickupArrows();
       PacketHandler.INSTANCE.sendToServer(packet);
