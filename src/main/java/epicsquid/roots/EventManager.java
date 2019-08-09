@@ -45,6 +45,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameType;
+import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -344,8 +345,13 @@ public class EventManager {
         .canSustainPlant(soil, cropGrowEvent.getWorld(), cropGrowEvent.getPos().offset(EnumFacing.DOWN), EnumFacing.UP, (IPlantable) plant.getBlock())) {
       if (soil.getPropertyKeys().contains(BlockElementalSoil.waterSpeed)) {
         int speed = soil.getValue(BlockElementalSoil.waterSpeed);
-        if (speed > 0 && cropGrowEvent.getWorld().isAirBlock(cropGrowEvent.getPos().offset(EnumFacing.DOWN).offset(EnumFacing.DOWN))) {
-          plant.getBlock().dropBlockAsItem(cropGrowEvent.getWorld(), cropGrowEvent.getPos(), plant, 0);
+        BlockPos placement = cropGrowEvent.getPos();
+        World world = cropGrowEvent.getWorld();
+        if (world.isAirBlock(placement.offset(EnumFacing.DOWN, 2))) {
+          placement = placement.offset(EnumFacing.DOWN, 2);
+        }
+        if (speed > 0) {
+          plant.getBlock().dropBlockAsItem(cropGrowEvent.getWorld(), placement, plant, 0);
           cropGrowEvent.getWorld().setBlockState(cropGrowEvent.getPos(), plant.withProperty(BlockCrops.AGE, 0));
         }
       }
