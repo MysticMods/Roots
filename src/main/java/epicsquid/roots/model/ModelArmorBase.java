@@ -156,11 +156,9 @@ public class ModelArmorBase extends ModelBiped {
         armR.rotationPointX = bipedRightArm.rotationPointX + 5;
         armR.rotationPointY = bipedRightArm.rotationPointY - 1;
         armR.rotationPointZ = bipedRightArm.rotationPointZ;
-        armR.offsetY -= 0;
         armL.rotationPointX = bipedLeftArm.rotationPointX - 5;
         armL.rotationPointY = bipedLeftArm.rotationPointY - 1;
         armL.rotationPointZ = bipedLeftArm.rotationPointZ;
-        armL.offsetY -= 0;
         setRotation(chest, bipedBody.rotateAngleX, bipedBody.rotateAngleY, bipedBody.rotateAngleZ);
         setRotation(armR, bipedRightArm.rotateAngleX, bipedRightArm.rotateAngleY, bipedRightArm.rotateAngleZ);
         setRotation(armL, bipedLeftArm.rotateAngleX, bipedLeftArm.rotateAngleY, bipedLeftArm.rotateAngleZ);
