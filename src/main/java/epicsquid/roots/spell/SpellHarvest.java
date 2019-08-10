@@ -51,7 +51,7 @@ public class SpellHarvest extends SpellBase {
   }
 
   private static List<Block> skipBlocks = Arrays.asList(Blocks.BEDROCK, Blocks.GRASS, Blocks.DIRT, Blocks.STONE, Blocks.TALLGRASS, Blocks.WATER, Blocks.LAVA, Blocks.DOUBLE_PLANT, Blocks.MELON_STEM, Blocks.PUMPKIN_STEM);
-  private static Map<IProperty<Integer>, Integer> stateMax = new Object2IntOpenHashMap<>();
+
 
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
@@ -77,16 +77,11 @@ public class SpellHarvest extends SpellBase {
             reedsAndCactus.add(pos);
             return false;
           }
-          for (IProperty<?> prop : state.getPropertyKeys()) {
-            if ((prop.getName().equals("age") || prop.getName().equals("growth")) && prop.getValueClass() == Integer.class) {
-              int max = stateMax.getOrDefault(prop, -1);
-              if (max == -1) {
-                max = Collections.max((Collection<Integer>) prop.getAllowedValues());
-                stateMax.put((IProperty<Integer>) prop, max);
-              }
-              if (state.getValue((IProperty<Integer>) prop) == max) {
-                return true;
-              }
+          IProperty<?> prop = HarvestUtil.resolveStates(state);
+          if (prop != null) {
+            int max = HarvestUtil.getMaxState(prop);
+            if (state.getValue((IProperty<Integer>) prop) == max) {
+              return true;
             }
           }
           return false;
@@ -98,8 +93,8 @@ public class SpellHarvest extends SpellBase {
       IBlockState state = player.world.getBlockState(pos);
       ItemStack seed = HarvestUtil.getSeed(state);
       // Do do do the harvest!
-      IProperty<Integer> prop = null;
-      for (IProperty<Integer> entry : stateMax.keySet()) {
+      IProperty<?> prop = null;
+      for (IProperty<?> entry : HarvestUtil.getStateKeys()) {
         if (state.getPropertyKeys().contains(entry)) {
           prop = entry;
         }
@@ -108,16 +103,7 @@ public class SpellHarvest extends SpellBase {
       assert prop != null;
 
       if (!player.world.isRemote) {
-        IBlockState newState = state.withProperty(prop, 0);
-        NonNullList<ItemStack> drops = NonNullList.create();
-        HarvestUtil.add(seed, player.dimension, pos, state);
-        state.getBlock().getDrops(drops, player.world, pos, state, 0);
-        ForgeEventFactory.fireBlockHarvesting(drops, player.world, pos, state, 0, 1.0f, false, player);
-        player.world.setBlockState(pos, newState);
-        for (ItemStack stack : drops) {
-          if (stack.isEmpty()) continue;
-          ItemUtil.spawnItem(player.world, pos, stack);
-        }
+        HarvestUtil.doHarvest(state, prop, seed, player.dimension, pos, player.world, player);
         affectedPositions.add(pos);
       }
       count++;

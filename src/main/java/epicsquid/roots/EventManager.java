@@ -20,12 +20,14 @@ import epicsquid.roots.network.MessagePlayerGroveUpdate;
 import epicsquid.roots.network.fx.*;
 import epicsquid.roots.recipe.BarkRecipe;
 import epicsquid.roots.util.Constants;
+import epicsquid.roots.util.HarvestUtil;
 import epicsquid.roots.util.ItemUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockNewLog;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks.EnumType;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -346,13 +348,13 @@ public class EventManager {
       if (soil.getPropertyKeys().contains(BlockElementalSoil.waterSpeed)) {
         int speed = soil.getValue(BlockElementalSoil.waterSpeed);
         BlockPos placement = cropGrowEvent.getPos();
-        World world = cropGrowEvent.getWorld();
-        if (world.isAirBlock(placement.offset(EnumFacing.DOWN, 2))) {
-          placement = placement.offset(EnumFacing.DOWN, 2);
-        }
         if (speed > 0) {
-          plant.getBlock().dropBlockAsItem(cropGrowEvent.getWorld(), placement, plant, 0);
-          cropGrowEvent.getWorld().setBlockState(cropGrowEvent.getPos(), plant.withProperty(BlockCrops.AGE, 0));
+          ItemStack seed = HarvestUtil.getSeed(plant);
+          World world = cropGrowEvent.getWorld();
+          IProperty<?> prop = HarvestUtil.resolveStates(plant);
+          if (prop != null) {
+            HarvestUtil.doHarvest(plant, prop, seed, world.provider.getDimension(), placement, world, null);
+          }
         }
       }
     }
