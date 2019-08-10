@@ -6,6 +6,7 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageHarvestCompleteFX;
 import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.util.HarvestUtil;
 import epicsquid.roots.util.ItemUtil;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.block.*;
@@ -34,21 +35,6 @@ public class SpellHarvest extends SpellBase {
   public static String spellName = "spell_harvest";
   public static SpellHarvest instance = new SpellHarvest(spellName);
 
-  private static Method getSeed;
-
-  {
-    getSeed = ReflectionHelper.findMethod(BlockCrops.class, "getSeed", "func_149866_i");
-  }
-
-  public Deque<HarvestEntry> queue = new ArrayDeque<>();
-  public static HashMap<Block, ItemStack> seedCache = new HashMap<>();
-
-  static {
-    seedCache.put(Blocks.NETHER_WART, new ItemStack(Items.NETHER_WART));
-  }
-
-  public HashMap<Block, IProperty<Integer>> propertyMap = new HashMap<>();
-
   public SpellHarvest(String name) {
     super(name, TextFormatting.GREEN, 57f / 255f, 253f / 255f, 28f / 255f, 197f / 255f, 233f / 255f, 28f / 255f);
     this.castType = EnumCastType.INSTANTANEOUS;
@@ -62,39 +48,6 @@ public class SpellHarvest extends SpellBase {
         new ItemStack(ModItems.terra_moss),
         new ItemStack(Items.WHEAT_SEEDS)
     );
-
-    // This is so harvest drops can be monitored.
-    MinecraftForge.EVENT_BUS.register(this);
-
-    // For sanity
-    propertyMap.put(Blocks.BEETROOTS, BlockBeetroot.BEETROOT_AGE);
-    propertyMap.put(Blocks.COCOA, BlockCocoa.AGE);
-    propertyMap.put(Blocks.NETHER_WART, BlockNetherWart.AGE);
-  }
-
-  @SubscribeEvent(priority = EventPriority.HIGHEST)
-  public void onHarvestDrops(BlockEvent.HarvestDropsEvent event) {
-    if (queue.peek() == null) return;
-
-    HarvestEntry ref = queue.pop();
-    HarvestEntry me = new HarvestEntry(null, event.getWorld().provider.getDimension(), event.getPos(), event.getState());
-    if (!ref.equals(me)) return;
-
-    ItemStack seed = ref.getSeed();
-
-    List<ItemStack> drops = event.getDrops();
-    Iterator<ItemStack> dropIter = drops.listIterator();
-    while (dropIter.hasNext()) {
-      ItemStack copy = dropIter.next().copy();
-      copy.setCount(1);
-      if (ItemStack.areItemStacksEqual(copy, seed)) {
-        dropIter.remove();
-        break;
-      } else if (copy.getItem() instanceof IPlantable) {
-        dropIter.remove();
-        break;
-      }
-    }
   }
 
   private static List<Block> skipBlocks = Arrays.asList(Blocks.BEDROCK, Blocks.GRASS, Blocks.DIRT, Blocks.STONE, Blocks.TALLGRASS, Blocks.WATER, Blocks.LAVA, Blocks.DOUBLE_PLANT, Blocks.MELON_STEM, Blocks.PUMPKIN_STEM);
@@ -102,6 +55,7 @@ public class SpellHarvest extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+    HarvestUtil.prepare();
     List<BlockPos> affectedPositions = new ArrayList<>();
     List<BlockPos> pumpkinsAndMelons = new ArrayList<>();
     List<BlockPos> reedsAndCactus = new ArrayList<>();
@@ -142,7 +96,7 @@ public class SpellHarvest extends SpellBase {
 
     for (BlockPos pos : crops) {
       IBlockState state = player.world.getBlockState(pos);
-      ItemStack seed = getSeed(state);
+      ItemStack seed = HarvestUtil.getSeed(state);
       // Do do do the harvest!
       IProperty<Integer> prop = null;
       for (IProperty<Integer> entry : stateMax.keySet()) {
@@ -156,7 +110,7 @@ public class SpellHarvest extends SpellBase {
       if (!player.world.isRemote) {
         IBlockState newState = state.withProperty(prop, 0);
         NonNullList<ItemStack> drops = NonNullList.create();
-        queue.push(new HarvestEntry(seed, player.dimension, pos, state));
+        HarvestUtil.add(seed, player.dimension, pos, state);
         state.getBlock().getDrops(drops, player.world, pos, state, 0);
         ForgeEventFactory.fireBlockHarvesting(drops, player.world, pos, state, 0, 1.0f, false, player);
         player.world.setBlockState(pos, newState);
@@ -210,51 +164,5 @@ public class SpellHarvest extends SpellBase {
     }
 
     return count != 0;
-  }
-
-  public ItemStack getSeed(IBlockState state) {
-    Block block = state.getBlock();
-    ItemStack seed = seedCache.get(block);
-    if (seed != null) return seed;
-    try {
-      seed = new ItemStack((Item) getSeed.invoke(state.getBlock()));
-    } catch (Exception e) {
-      seed = ItemStack.EMPTY;
-    }
-    seedCache.put(state.getBlock(), seed);
-    return seed;
-  }
-
-  private class HarvestEntry {
-    private ItemStack seed;
-    private int dimension;
-    private BlockPos position;
-    private IBlockState block;
-
-    public HarvestEntry(ItemStack seed, int dimension, BlockPos position, IBlockState block) {
-      this.seed = seed;
-      this.dimension = dimension;
-      this.position = position;
-      this.block = block;
-    }
-
-    public ItemStack getSeed() {
-      return seed;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
-      HarvestEntry that = (HarvestEntry) o;
-      return dimension == that.dimension &&
-          Objects.equals(position, that.position) &&
-          Objects.equals(block, that.block);
-    }
-
-    @Override
-    public int hashCode() {
-      return Objects.hash(seed, dimension, position, block);
-    }
   }
 }
