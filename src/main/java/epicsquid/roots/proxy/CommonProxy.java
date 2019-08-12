@@ -1,6 +1,7 @@
 package epicsquid.roots.proxy;
 
 import epicsquid.roots.advancements.Advancements;
+import epicsquid.roots.command.CommandStaff;
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.integration.chisel.RootsChisel;
@@ -15,10 +16,7 @@ import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.util.OfferingUtil;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.*;
 
 public class CommonProxy {
   public void preInit(FMLPreInitializationEvent event) {
@@ -57,5 +55,9 @@ public class CommonProxy {
       HarvestIntegration.init();
     }
     Advancements.init();
+  }
+
+  public void serverStarting (FMLServerStartingEvent event) {
+    event.registerServerCommand(new CommandStaff());
   }
 }
