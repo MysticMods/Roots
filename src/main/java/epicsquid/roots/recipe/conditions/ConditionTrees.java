@@ -1,6 +1,7 @@
 package epicsquid.roots.recipe.conditions;
 
 import epicsquid.roots.tileentity.TileEntityBonfire;
+import net.minecraft.block.BlockNewLog;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
@@ -18,6 +19,14 @@ public class ConditionTrees implements Condition {
         this.amount = amount;
     }
 
+    public BlockPlanks.EnumType getTreeType() {
+        return treeType;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
     @Override
     public boolean checkCondition(TileEntityBonfire tile, EntityPlayer player) {
         return getTreeAmount(tile.getWorld(), tile.getPos()) >= this.amount;
@@ -30,6 +39,10 @@ public class ConditionTrees implements Condition {
                 IBlockState state = world.getBlockState(pos.add(i, 1, j));
                 if (state.getBlock() instanceof BlockOldLog) {
                     if (state.getValue(BlockOldLog.VARIANT) == treeType) {
+                        treeCount++;
+                    }
+                } else if (state.getBlock() instanceof BlockNewLog) {
+                    if (state.getValue(BlockNewLog.VARIANT) == treeType) {
                         treeCount++;
                     }
                 }
