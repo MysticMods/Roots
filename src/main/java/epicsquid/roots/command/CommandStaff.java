@@ -48,7 +48,11 @@ public class CommandStaff extends CommandBase {
   public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
     if (sender instanceof EntityPlayer && args.length != 0) {
       EntityPlayer player = (EntityPlayer) sender;
-      SpellBase spell = SpellRegistry.getSpell(args[0]);
+      String spellName = args[0];
+      if (!spellName.startsWith("spell")) {
+        spellName = "spell_" + spellName;
+      }
+      SpellBase spell = SpellRegistry.getSpell(spellName);
       if (spell == null) {
         player.sendMessage(new TextComponentString("Invalid spell: " + args[0]));
       }

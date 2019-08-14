@@ -1,6 +1,8 @@
 package epicsquid.roots.proxy;
 
 import epicsquid.roots.advancements.Advancements;
+import epicsquid.roots.command.CommandRitual;
+import epicsquid.roots.command.CommandRoots;
 import epicsquid.roots.command.CommandStaff;
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.init.HerbRegistry;
@@ -59,5 +61,7 @@ public class CommonProxy {
 
   public void serverStarting (FMLServerStartingEvent event) {
     event.registerServerCommand(new CommandStaff());
+    event.registerServerCommand(new CommandRoots());
+    event.registerServerCommand(new CommandRitual());
   }
 }
