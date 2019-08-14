@@ -94,7 +94,6 @@ public class ContainerQuiver extends Container {
 
     if (slot != null && slot.getHasStack()) {
       ItemStack stack = slot.getStack();
-      slotStack = stack.copy();
 
       boolean isArrow = stack.getItem() instanceof ItemArrow;
 
