@@ -44,8 +44,10 @@ public class SpellMagnetism extends SpellBase {
       for (EntityItem item : items) {
         if (SolegnoliaHelper.hasBotania() && SolegnoliaHelper.hasSolegnoliaAround(item)) continue;
 
-        item.setPickupDelay(0);
-        item.moveToBlockPosAndAngles(player.getPosition(), 0f, 0f);
+        if (!player.world.isRemote) {
+          item.setPickupDelay(0);
+          item.moveToBlockPosAndAngles(player.getPosition(), 0f, 0f);
+        }
         i++;
       }
     }
@@ -54,7 +56,9 @@ public class SpellMagnetism extends SpellBase {
       for (EntityXPOrb orb : orbs) {
         if (SolegnoliaHelper.hasBotania() && SolegnoliaHelper.hasSolegnoliaAround(orb)) continue;
 
-        orb.moveToBlockPosAndAngles(player.getPosition(), 0f, 0f);
+        if (!player.world.isRemote) {
+          orb.moveToBlockPosAndAngles(player.getPosition(), 0f, 0f);
+        }
         i++;
       }
     }

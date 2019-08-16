@@ -7,6 +7,7 @@ import epicsquid.roots.entity.item.EntityLivingArrow;
 import epicsquid.roots.gui.GuiHandler;
 import epicsquid.roots.handler.QuiverHandler;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.util.ItemUtil;
 import epicsquid.roots.util.QuiverInventoryUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -105,11 +106,6 @@ public class ItemQuiver extends ItemArrowBase {
     if (arrows.isEmpty()) return;
 
     QuiverHandler handler = QuiverHandler.getHandler(quiver);
-    if (!handler.canConsume()) {
-      player.sendStatusMessage(new TextComponentTranslation("roots.quiver.quiver_full").setStyle(new Style().setColor(TextFormatting.RED).setBold(true)), true);
-      return;
-    }
-
     int consumed = 0;
     int generated = 0;
     for (EntityArrow arrow : arrows) {
@@ -125,8 +121,14 @@ public class ItemQuiver extends ItemArrowBase {
         continue;
       }
       if (Util.rand.nextInt(3) != 0 || stack.getItem() == ModItems.living_arrow) {
-        if (ItemHandlerHelper.insertItemStacked(handler.getInventory(), stack, false).isEmpty()) {
+        ItemStack result = ItemHandlerHelper.insertItemStacked(handler.getInventory(), stack, false);
+        if (result.isEmpty()) {
           consumed++;
+        } else {
+          result = ItemHandlerHelper.insertItemStacked(player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP), result, false);
+          if (!result.isEmpty()) {
+            ItemUtil.spawnItem(player.world, player.getPosition(), result);
+          }
         }
       }
     }

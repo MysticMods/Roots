@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class ConditionItems implements Condition {
     }
 
     @Override
-    public boolean checkCondition(TileEntityBonfire tile, EntityPlayer player) {
+    public boolean checkCondition(TileEntityBonfire tile, @Nullable EntityPlayer player) {
         List<ItemStack> stacks = new ArrayList<>();
         for (int i = 0; i < tile.inventory.getSlots(); i++) {
             stacks.add(tile.inventory.extractItem(i, 1, true));

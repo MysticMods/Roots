@@ -94,28 +94,17 @@ public class ContainerQuiver extends Container {
 
     if (slot != null && slot.getHasStack()) {
       ItemStack stack = slot.getStack();
-      slotStack = stack.copy();
 
       boolean isArrow = stack.getItem() instanceof ItemArrow;
 
-      if (isArrow && index < 36) { // Player Inventory -> Quiver
-        if (!mergeItemStack(stack, 36, 42, false)) {
-          handler.saveToStack();
-          return ItemStack.EMPTY;
-        }
-      } else {
-        if (!mergeItemStack(stack, 0, 36, false)) {
-          handler.saveToStack();
-          return ItemStack.EMPTY;
-        }
-      }
-
-      if (stack.isEmpty()) {
+      if (isArrow && index < 36 && !mergeItemStack(stack, 36, 42, false)) {
+        slot.onSlotChanged();
         handler.saveToStack();
-        slot.putStack(ItemStack.EMPTY);
+        return ItemStack.EMPTY;
+      } else {
+        handler.saveToStack();
+        return ItemStack.EMPTY;
       }
-
-      slot.onSlotChanged();
     }
 
     handler.saveToStack();

@@ -10,7 +10,6 @@ import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.conditions.ConditionItems;
-import epicsquid.roots.recipe.conditions.ConditionStandingStones;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.tileentity.TileEntityOffertoryPlate;
 import net.minecraft.entity.Entity;
@@ -45,7 +44,6 @@ public class RitualSummonCreatures extends RitualBase {
             new ItemStack(ModItems.moonglow_leaf)
     ));
 //    addCondition(new ConditionGroveFaith(GroveType.WILD, 0));
-    addCondition(new ConditionStandingStones(3, 3));
 
     // TODO: CraftTweaker support
     entityItem.put(EntityChicken.class, Lists.newArrayList(new ItemStack(Items.CHICKEN)));

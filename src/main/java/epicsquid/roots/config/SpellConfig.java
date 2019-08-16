@@ -106,6 +106,11 @@ public class SpellConfig {
     @Config.Comment("Set to true to allow the spell to attract xp orbs as well")
     public boolean shouldMagnetismAttractXP = true;
 
+    @Config.RequiresMcRestart
+    @Config.Name("Sanctuary Spell Entities Blacklist")
+    @Config.Comment("Entities in this list will be excluded by Sanctuary Spell when repelling entities")
+    public String[] sanctuaryEntitiesBlacklist = {};
+
   }
 
 }

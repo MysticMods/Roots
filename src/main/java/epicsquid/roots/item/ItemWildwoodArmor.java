@@ -20,7 +20,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 
 public class ItemWildwoodArmor extends ItemArmor implements IModeledObject, ILivingRepair {
-
     public ItemWildwoodArmor(ArmorMaterial material, EntityEquipmentSlot slot, String name)
     {
         super(material, 0, slot);
@@ -48,7 +47,7 @@ public class ItemWildwoodArmor extends ItemArmor implements IModeledObject, ILiv
     @SideOnly(Side.CLIENT)
     public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default)
     {
-        return new ModelWildwoodArmor(armorSlot);
+        return ModelWildwoodArmor.getInstance(armorSlot);
     }
 
     @Override

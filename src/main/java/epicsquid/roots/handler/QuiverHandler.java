@@ -1,10 +1,10 @@
 package epicsquid.roots.handler;
 
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
@@ -85,14 +85,8 @@ public class QuiverHandler implements INBTSerializable<NBTTagCompound> {
     return handler;
   }
 
-  public boolean canConsume() {
-    for (int i = 0; i < 6; i++) {
-      ItemStack stack = handler.getStackInSlot(i);
-      if (stack.isEmpty()) return true;
-      if (stack.getItem() == Items.ARROW && stack.getCount() < stack.getMaxStackSize()) return true;
-    }
-
-    return false;
+  public boolean canConsume(ItemStack stack) {
+    return ItemHandlerHelper.insertItemStacked(handler, stack, true).isEmpty();
   }
 
   public void saveToStack() {

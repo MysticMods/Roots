@@ -4,7 +4,7 @@ import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.init.HerbRegistry;
-import epicsquid.roots.util.ItemSpawnUtil;
+import epicsquid.roots.util.ItemUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -76,7 +76,7 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
       }
       ItemStack extracted = inventory.extractItem(0, inventory.getStackInSlot(0).getCount(), false);
       if (!world.isRemote) {
-        ItemSpawnUtil.spawnItem(world, getPos(), extracted);
+        ItemUtil.spawnItem(world, getPos(), extracted);
         updatePacketViaState();
       }
       return false;

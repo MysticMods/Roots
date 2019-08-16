@@ -68,7 +68,7 @@ public abstract class RitualBase {
     this.conditions.add(condition);
   }
 
-  public boolean isRitualRecipe(TileEntityBonfire tileEntityBonfire, EntityPlayer player){
+  public boolean isRitualRecipe(TileEntityBonfire tileEntityBonfire, @Nullable EntityPlayer player){
     for(Condition condition : this.conditions){
       if(condition instanceof ConditionItems){
         ConditionItems conditionItems = (ConditionItems) condition;

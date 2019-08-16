@@ -38,6 +38,7 @@ public class ModelArmorBase extends ModelBiped {
         legL = new ModelRenderer(this);
         bootR = new ModelRenderer(this);
         bootL = new ModelRenderer(this);
+        chest.offsetY -= 0.125;
     }
 
     /**
@@ -152,15 +153,12 @@ public class ModelArmorBase extends ModelBiped {
         chest.rotationPointX = bipedBody.rotationPointX;
         chest.rotationPointY = bipedBody.rotationPointY - 1;
         chest.rotationPointZ = bipedBody.rotationPointZ;
-        chest.offsetY -= 0.125;
         armR.rotationPointX = bipedRightArm.rotationPointX + 5;
         armR.rotationPointY = bipedRightArm.rotationPointY - 1;
         armR.rotationPointZ = bipedRightArm.rotationPointZ;
-        armR.offsetY -= 0;
         armL.rotationPointX = bipedLeftArm.rotationPointX - 5;
         armL.rotationPointY = bipedLeftArm.rotationPointY - 1;
         armL.rotationPointZ = bipedLeftArm.rotationPointZ;
-        armL.offsetY -= 0;
         setRotation(chest, bipedBody.rotateAngleX, bipedBody.rotateAngleY, bipedBody.rotateAngleZ);
         setRotation(armR, bipedRightArm.rotateAngleX, bipedRightArm.rotateAngleY, bipedRightArm.rotateAngleZ);
         setRotation(armL, bipedLeftArm.rotateAngleX, bipedLeftArm.rotateAngleY, bipedLeftArm.rotateAngleZ);
@@ -237,5 +235,4 @@ public class ModelArmorBase extends ModelBiped {
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
-
 }

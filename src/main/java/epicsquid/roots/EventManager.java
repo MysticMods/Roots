@@ -20,12 +20,14 @@ import epicsquid.roots.network.MessagePlayerGroveUpdate;
 import epicsquid.roots.network.fx.*;
 import epicsquid.roots.recipe.BarkRecipe;
 import epicsquid.roots.util.Constants;
-import epicsquid.roots.util.ItemSpawnUtil;
+import epicsquid.roots.util.HarvestUtil;
+import epicsquid.roots.util.ItemUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockNewLog;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks.EnumType;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -45,6 +47,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameType;
+import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -88,7 +91,7 @@ public class EventManager {
         if (bark != null) {
           ItemStack barkStack = bark.getBarkStack(Util.rand.nextInt(getBarkAmount(tool)) + 1);
           if (!event.getWorld().isRemote) {
-            ItemSpawnUtil.spawnItem(event.getWorld(), event.getPos(), barkStack);
+            ItemUtil.spawnItem(event.getWorld(), event.getPos(), barkStack);
           }
         }
       }
@@ -344,9 +347,14 @@ public class EventManager {
         .canSustainPlant(soil, cropGrowEvent.getWorld(), cropGrowEvent.getPos().offset(EnumFacing.DOWN), EnumFacing.UP, (IPlantable) plant.getBlock())) {
       if (soil.getPropertyKeys().contains(BlockElementalSoil.waterSpeed)) {
         int speed = soil.getValue(BlockElementalSoil.waterSpeed);
-        if (speed > 0 && cropGrowEvent.getWorld().isAirBlock(cropGrowEvent.getPos().offset(EnumFacing.DOWN).offset(EnumFacing.DOWN))) {
-          plant.getBlock().dropBlockAsItem(cropGrowEvent.getWorld(), cropGrowEvent.getPos(), plant, 0);
-          cropGrowEvent.getWorld().setBlockState(cropGrowEvent.getPos(), plant.withProperty(BlockCrops.AGE, 0));
+        BlockPos placement = cropGrowEvent.getPos();
+        if (speed > 0) {
+          ItemStack seed = HarvestUtil.getSeed(plant);
+          World world = cropGrowEvent.getWorld();
+          IProperty<?> prop = HarvestUtil.resolveStates(plant);
+          if (prop != null) {
+            HarvestUtil.doHarvest(plant, prop, seed, world.provider.getDimension(), placement, world, null);
+          }
         }
       }
     }
