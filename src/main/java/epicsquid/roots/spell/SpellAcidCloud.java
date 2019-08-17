@@ -8,6 +8,7 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageAcidCloudFX;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -24,15 +25,26 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import java.util.List;
 
 public class SpellAcidCloud extends SpellBase {
+  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(0);
+  public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost("cost_1", new SpellCost("baffle_cap", 0.250));
+  public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(5f);
+  public static Property<Integer> PROP_POISON_DURATION = new Property<>("poison_duration", 80);
+  public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 5);
+  public static Property<Integer> PROP_POISON_AMPLIFICATION = new Property<>("poison_amplification", 0);
+
   public static String spellName = "spell_acid_cloud";
   public static SpellAcidCloud instance = new SpellAcidCloud(spellName);
 
+  private float damage;
+  private int poisonDuration;
+  private int poisonAmplification;
+  private int fireDuration;
+
   public SpellAcidCloud(String name) {
     super(name, TextFormatting.DARK_GREEN, 80f / 255f, 160f / 255f, 40f / 255f, 64f / 255f, 96f / 255f, 32f / 255f);
-    this.castType = SpellBase.EnumCastType.CONTINUOUS;
-    this.cooldown = 0;
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_POISON_DURATION, PROP_FIRE_DURATION, PROP_POISON_AMPLIFICATION);
 
-    addCost(HerbRegistry.getHerbByName("baffle_cap"), 0.250f);
     addIngredients(
         new ItemStack(Items.SPIDER_EYE),
         new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom)),
@@ -51,16 +63,15 @@ public class SpellAcidCloud extends SpellBase {
       for (EntityLivingBase e : entities) {
         if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
             && !e.getUniqueID().equals(player.getUniqueID())) {
-          e.attackEntityFrom(DamageSource.causeMobDamage(player), 5f);
+          e.attackEntityFrom(DamageSource.causeMobDamage(player), damage);
           if (SpellConfig.spellFeaturesCategory.acidCloudPoisoningEffect)
-            e.addPotionEffect(new PotionEffect(MobEffects.POISON, 80, 0));
+            e.addPotionEffect(new PotionEffect(MobEffects.POISON, poisonDuration, poisonAmplification));
           e.setRevengeTarget(player);
           e.setLastAttackedEntity(player);
 
           if(modules.contains(ModuleRegistry.module_fire)){
-            e.setFire(5);
+            e.setFire(fireDuration);
           }
-
         }
       }
       PacketHandler.sendToAllTracking(new MessageAcidCloudFX(player.posX, player.posY + player.getEyeHeight(), player.posZ), player);
@@ -68,4 +79,16 @@ public class SpellAcidCloud extends SpellBase {
     return true;
   }
 
+  @Override
+  public void finalise() {
+    this.castType = properties.getProperty(PROP_CAST_TYPE);
+    this.cooldown = properties.getProperty(PROP_COOLDOWN);
+    this.damage = properties.getProperty(PROP_DAMAGE);
+    this.poisonAmplification = properties.getProperty(PROP_POISON_AMPLIFICATION);
+    this.poisonDuration = properties.getProperty(PROP_POISON_DURATION);
+    this.fireDuration = properties.getProperty(PROP_FIRE_DURATION);
+
+    SpellCost cost = properties.getProperty(PROP_COST_1);
+    addCost(cost.getHerb(), cost.getCost());
+  }
 }

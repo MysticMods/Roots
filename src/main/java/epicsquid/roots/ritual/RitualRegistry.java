@@ -80,4 +80,8 @@ public class RitualRegistry {
     ritualRegistry.put(ritual.getName(), ritual);
   }
 
+  public static void finalise () {
+
+  }
+
 }
