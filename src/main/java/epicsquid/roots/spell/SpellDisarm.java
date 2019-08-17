@@ -30,8 +30,9 @@ public class SpellDisarm extends SpellBase{
     this.castType = EnumCastType.INSTANTANEOUS;
     this.cooldown = 100;
 
-    addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.5F);
-    addCost(HerbRegistry.getHerbByName("spirit_herb"), 0.5F);
+    addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.25F);
+    addCost(HerbRegistry.getHerbByName("spirit_herb"), 0.25F);
+
     addIngredients(
             new ItemStack(Items.IRON_SWORD),
             new ItemStack(ModItems.bark_dark_oak),

@@ -24,6 +24,9 @@ public class SpellConfig {
     @Config.Name("Disable Disarm Spell")
     @Config.Comment("Set to true to disable Disarm Spell")
     public boolean disableDisarm = false;
+    @Config.Name("Disable Fall Spell")
+    @Config.Comment("Set to true to disable Fall Spell")
+    public boolean disableFall = false;
     @Config.Name("Disable Growth Infusion Spell")
     @Config.Comment("Set to true to disable Growth Infusion Spell")
     public boolean disableGrowthInfusion = false;

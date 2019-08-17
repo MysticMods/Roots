@@ -66,6 +66,8 @@ public class SpellRegistry {
       spellRegistry.put(SpellDisarm.spellName, SpellDisarm.instance);
     if (!SpellConfig.disableSpellsCategory.disableSoftTouch)
       spellRegistry.put(SpellSoftTouch.spellName, SpellSoftTouch.instance);
+    if (!SpellConfig.disableSpellsCategory.disableFall)
+      spellRegistry.put(SpellFall.spellName, SpellFall.instance);
 
     // Cannot disable Grove-related spells
     spellRegistry.put(SpellGroveSupplication.spellName, SpellGroveSupplication.instance);
