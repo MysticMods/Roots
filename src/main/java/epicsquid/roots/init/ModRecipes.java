@@ -2,6 +2,7 @@ package epicsquid.roots.init;
 
 import com.google.common.collect.Lists;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
+import epicsquid.mysticallib.recipe.factories.OreFallbackIngredient;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.entity.EntityBeetle;
 import epicsquid.mysticalworld.entity.EntityDeer;
@@ -931,28 +932,28 @@ public class ModRecipes {
         new ItemStack(ModItems.fey_leather),
         new ItemStack(Blocks.VINE),
         new ItemStack(ModItems.bark_birch),
-        new OreIngredient("gemAmethyst"),
+        new OreFallbackIngredient("gemAmethyst", "gemDiamond"),
         new ItemStack(Items.IRON_HELMET)));
 
     addCraftingRecipe("sylvan_chestplate", new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_chestplate), 1).addIngredients(
         new ItemStack(ModItems.fey_leather),
         new ItemStack(Blocks.VINE),
         new ItemStack(ModItems.bark_birch),
-        new OreIngredient("gemAmethyst"),
+        new OreFallbackIngredient("gemAmethyst", "gemDiamond"),
         new ItemStack(Items.IRON_CHESTPLATE)));
 
     addCraftingRecipe("sylvan_leggings", new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_leggings), 1).addIngredients(
         new ItemStack(ModItems.fey_leather),
         new ItemStack(Blocks.VINE),
         new ItemStack(ModItems.bark_birch),
-        new OreIngredient("gemAmethyst"),
+        new OreFallbackIngredient("gemAmethyst", "gemDiamond"),
         new ItemStack(Items.IRON_LEGGINGS)));
 
     addCraftingRecipe("sylvan_boots", new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_boots), 1).addIngredients(
         new ItemStack(ModItems.fey_leather),
         new ItemStack(Blocks.VINE),
         new ItemStack(ModItems.bark_birch),
-        new OreIngredient("gemAmethyst"),
+        new OreFallbackIngredient("gemAmethyst", "gemDiamond"),
         new ItemStack(Items.IRON_BOOTS)));
   }
 
