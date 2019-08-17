@@ -5,22 +5,26 @@ import net.minecraft.block.BlockPlanks;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 public class BarkRecipe {
+  private final ResourceLocation name;
   private final Block block;
-  private final Item item;
+  private final ItemStack item;
   private final BlockPlanks.EnumType type;
 
-  public BarkRecipe(Block block, Item item) {
+  public BarkRecipe(ResourceLocation name, Block block, ItemStack item) {
     this.block = block;
     this.item = item;
     this.type = null;
+    this.name = name;
   }
 
-  public BarkRecipe(BlockPlanks.EnumType type, Item item) {
+  public BarkRecipe(ResourceLocation name, BlockPlanks.EnumType type, ItemStack item) {
     this.item = item;
     this.type = type;
     this.block = null;
+    this.name = name;
   }
 
   public ItemStack getBlockStack () {
@@ -36,18 +40,24 @@ public class BarkRecipe {
   }
 
   public ItemStack getBarkStack (int count) {
-    return new ItemStack(this.item, count);
+    ItemStack copy = this.item.copy();
+    copy.setCount(count);
+    return copy;
   }
 
   public Block getBlock() {
     return block;
   }
 
-  public Item getItem() {
+  public ItemStack getItem() {
     return item;
   }
 
   public BlockPlanks.EnumType getType() {
     return type;
+  }
+
+  public ResourceLocation getName() {
+    return name;
   }
 }

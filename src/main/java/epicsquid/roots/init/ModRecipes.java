@@ -2,6 +2,7 @@ package epicsquid.roots.init;
 
 import com.google.common.collect.Lists;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
+import epicsquid.mysticallib.recipe.factories.OreFallbackIngredient;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.entity.EntityBeetle;
 import epicsquid.mysticalworld.entity.EntityDeer;
@@ -147,26 +148,27 @@ public class ModRecipes {
     addFlowerRecipe("oxeye_daisy", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.OXEYE_DAISY.getMeta()));
   }
 
-
-  public static void addVanillaBarkRecipe(String name, BlockPlanks.EnumType type, Item item) {
-    barkRecipes.put(new ResourceLocation(Roots.MODID, name), new BarkRecipe(type, item));
+  public static void addVanillaBarkRecipe(String name, BlockPlanks.EnumType type, ItemStack item) {
+    ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
+    barkRecipes.put(rl, new BarkRecipe(rl, type, item));
   }
 
   public static void initVanillaBarkRecipes() {
-    addVanillaBarkRecipe("oak", BlockPlanks.EnumType.OAK, ModItems.bark_oak);
-    addVanillaBarkRecipe("spruce", BlockPlanks.EnumType.SPRUCE, ModItems.bark_spruce);
-    addVanillaBarkRecipe("birch", BlockPlanks.EnumType.BIRCH, ModItems.bark_birch);
-    addVanillaBarkRecipe("jungle", BlockPlanks.EnumType.JUNGLE, ModItems.bark_jungle);
-    addVanillaBarkRecipe("acacia", BlockPlanks.EnumType.ACACIA, ModItems.bark_acacia);
-    addVanillaBarkRecipe("dark_oak", BlockPlanks.EnumType.DARK_OAK, ModItems.bark_dark_oak);
+    addVanillaBarkRecipe("oak", BlockPlanks.EnumType.OAK, new ItemStack(ModItems.bark_oak));
+    addVanillaBarkRecipe("spruce", BlockPlanks.EnumType.SPRUCE, new ItemStack(ModItems.bark_spruce));
+    addVanillaBarkRecipe("birch", BlockPlanks.EnumType.BIRCH, new ItemStack(ModItems.bark_birch));
+    addVanillaBarkRecipe("jungle", BlockPlanks.EnumType.JUNGLE, new ItemStack(ModItems.bark_jungle));
+    addVanillaBarkRecipe("acacia", BlockPlanks.EnumType.ACACIA, new ItemStack(ModItems.bark_acacia));
+    addVanillaBarkRecipe("dark_oak", BlockPlanks.EnumType.DARK_OAK, new ItemStack(ModItems.bark_dark_oak));
   }
 
   public static void initModdedBarkRecipes() {
-    addModdedBarkRecipe("wildwood", ModBlocks.wildwood_log, ModItems.bark_wildwood);
+    addModdedBarkRecipe("wildwood", ModBlocks.wildwood_log, new ItemStack(ModItems.bark_wildwood));
   }
 
-  public static void addModdedBarkRecipe(String name, Block block, Item item) {
-    barkRecipes.put(new ResourceLocation(Roots.MODID, name), new BarkRecipe(block, item));
+  public static void addModdedBarkRecipe(String name, Block block, ItemStack item) {
+    ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
+    barkRecipes.put(rl, new BarkRecipe(rl, block, item));
   }
 
   @Nullable
@@ -185,8 +187,27 @@ public class ModRecipes {
     return null;
   }
 
-  public static Collection<BarkRecipe> getBarkRecipes() {
+  public static Collection<BarkRecipe> getBarkRecipes () {
     return barkRecipes.values();
+  }
+
+  public static boolean removeBarkRecipe (ItemStack stack) {
+    List<BarkRecipe> toRemove = new ArrayList<>();
+    for (BarkRecipe recipe : barkRecipes.values()) {
+      if (ItemUtil.equalWithoutSize(stack, recipe.getItem())) {
+        toRemove.add(recipe);
+        break;
+      }
+    }
+
+    if (!toRemove.isEmpty()) {
+      for (BarkRecipe removing : toRemove) {
+        barkRecipes.remove(removing.getName());
+      }
+      return true;
+    }
+
+    return false;
   }
 
   public static void addTransmutationRecipe(String name, Block start, IBlockState endState, WorldPosStatePredicate condition) {
@@ -911,28 +932,28 @@ public class ModRecipes {
         new ItemStack(ModItems.fey_leather),
         new ItemStack(Blocks.VINE),
         new ItemStack(ModItems.bark_birch),
-        new OreIngredient("gemAmethyst"),
+        new OreFallbackIngredient("gemAmethyst", "gemDiamond"),
         new ItemStack(Items.IRON_HELMET)));
 
     addCraftingRecipe("sylvan_chestplate", new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_chestplate), 1).addIngredients(
         new ItemStack(ModItems.fey_leather),
         new ItemStack(Blocks.VINE),
         new ItemStack(ModItems.bark_birch),
-        new OreIngredient("gemAmethyst"),
+        new OreFallbackIngredient("gemAmethyst", "gemDiamond"),
         new ItemStack(Items.IRON_CHESTPLATE)));
 
     addCraftingRecipe("sylvan_leggings", new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_leggings), 1).addIngredients(
         new ItemStack(ModItems.fey_leather),
         new ItemStack(Blocks.VINE),
         new ItemStack(ModItems.bark_birch),
-        new OreIngredient("gemAmethyst"),
+        new OreFallbackIngredient("gemAmethyst", "gemDiamond"),
         new ItemStack(Items.IRON_LEGGINGS)));
 
     addCraftingRecipe("sylvan_boots", new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_boots), 1).addIngredients(
         new ItemStack(ModItems.fey_leather),
         new ItemStack(Blocks.VINE),
         new ItemStack(ModItems.bark_birch),
-        new OreIngredient("gemAmethyst"),
+        new OreFallbackIngredient("gemAmethyst", "gemDiamond"),
         new ItemStack(Items.IRON_BOOTS)));
   }
 

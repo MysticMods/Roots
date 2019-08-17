@@ -12,6 +12,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -90,6 +91,10 @@ public class BlockElementalSoil extends BlockBase {
 
   @Override
   public boolean canSustainPlant(@Nonnull IBlockState state, @Nonnull IBlockAccess world, BlockPos pos, @Nonnull EnumFacing direction, IPlantable plantable) {
+    if (soilType == EnumElementalSoilType.WATER && plantable == Blocks.REEDS) {
+      return true;
+    }
+
     EnumPlantType plant = plantable.getPlantType(world, pos.offset(direction));
     switch (plant) {
     case Nether:
