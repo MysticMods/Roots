@@ -4,9 +4,11 @@ import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.handler.SpellHandler;
+import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.PowderInventoryUtil;
+import epicsquid.roots.util.types.PropertyTable;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +26,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public abstract class SpellBase {
+  protected PropertyTable properties = new PropertyTable();
+
   private float red1, green1, blue1;
   private float red2, green2, blue2;
   private String name;
@@ -52,6 +56,10 @@ public abstract class SpellBase {
 
   public boolean hasModules () {
     return !acceptedModules.isEmpty();
+  }
+
+  public PropertyTable getProperties () {
+    return properties;
   }
 
   public SpellBase acceptModules(SpellModule ... modules) {
@@ -213,5 +221,25 @@ public abstract class SpellBase {
 
   public List<ItemStack> getCostItems () {
     return costs.keySet().stream().map((herb) -> new ItemStack(herb.getItem())).collect(Collectors.toList());
+  }
+
+  public abstract void finalise ();
+
+  public static class SpellCost {
+    private String herb;
+    private double cost;
+
+    public SpellCost(String herb, double cost) {
+      this.herb = herb;
+      this.cost = cost;
+    }
+
+    public Herb getHerb () {
+      return HerbRegistry.getHerbByName(herb);
+    }
+
+    public double getCost() {
+      return cost;
+    }
   }
 }
