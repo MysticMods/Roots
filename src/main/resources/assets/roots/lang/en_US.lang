@@ -116,6 +116,7 @@ roots.spell.spell_fey_light.name=Fey Light
 roots.spell.spell_iced_touch.name=Iced Touch
 roots.spell.spell_thaw.name=Thaw
 roots.spell.spell_disarm.name=Disarm
+roots.spell.spell_soft_touch.name=Soft Touch
 
 roots.ritual.ritual_healing_aura.name=Healing Aura
 roots.ritual.ritual_heavy_storms.name=Heavy Storms

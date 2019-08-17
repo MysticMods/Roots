@@ -27,7 +27,7 @@ public class SpellSoftTouch extends SpellBase {
   public SpellSoftTouch(String name) {
     super(name, TextFormatting.GRAY, 64F/255F, 232F/255F, 159F/255F, 209F/255F, 209F/255F, 209F/255F);
 
-    this.cooldown = 40;
+    this.cooldown = 20;
     this.castType = EnumCastType.INSTANTANEOUS;
 
     addCost(HerbRegistry.getHerbByName("terra_moss"), 0.125F);

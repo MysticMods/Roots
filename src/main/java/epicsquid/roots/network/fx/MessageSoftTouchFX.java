@@ -1,6 +1,8 @@
 package epicsquid.roots.network.fx;
 
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.spell.SpellSoftTouch;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -42,8 +44,23 @@ public class MessageSoftTouchFX implements IMessage {
     @SideOnly(Side.CLIENT)
     @Override
     public IMessage onMessage(MessageSoftTouchFX message, MessageContext ctx) {
-      ParticleUtil.spawnParticleGlow(Minecraft.getMinecraft().world, message.x, message.y, message.z, message.x, message.y, message.z,
-              1, 1, 1, 0.75F, 1F, 20);
+      for (int i = 0; i < 10; i++)
+      {
+        if (Util.rand.nextBoolean())
+        {
+          ParticleUtil.spawnParticleGlow(Minecraft.getMinecraft().world, message.x + ((float) Math.random()), message.y + ((float) Math.random()), message.z + ((float) Math.random()),
+                  0, 0, 0,
+                  SpellSoftTouch.instance.getRed1(), SpellSoftTouch.instance.getGreen1(), SpellSoftTouch.instance.getBlue1(),
+                  0.75F, 1F, 80);
+        }
+        else
+        {
+          ParticleUtil.spawnParticleGlow(Minecraft.getMinecraft().world, message.x + ((float) Math.random()), message.y + ((float) Math.random()), message.z + ((float) Math.random()),
+                  0, 0, 0,
+                  SpellSoftTouch.instance.getRed2(), SpellSoftTouch.instance.getGreen2(), SpellSoftTouch.instance.getBlue2(),
+                  0.75F, 1F, 80);
+        }
+      }
       return null;
     }
   }
