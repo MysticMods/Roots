@@ -42,6 +42,34 @@ public class BarkTweaker {
     CraftTweaker.LATE_ACTIONS.add(new Add(name, ((ItemBlock) log.getItem()).getBlock(), CraftTweakerMC.getItemStack(bark)));
   }
 
+  @ZenDocMethod
+      (
+
+      )
+  @ZenMethod
+  public static void removeRecipe (IItemStack bark) {
+    CraftTweaker.LATE_ACTIONS.add(new Remove(CraftTweakerMC.getItemStack(bark)));
+  }
+
+  private static class Remove extends BaseAction {
+    private final ItemStack bark;
+
+    public Remove(ItemStack bark) {
+      super("remove_bark_recipe");
+      this.bark = bark;
+    }
+
+    @Override
+    public void apply() {
+      ModRecipes.removeBarkRecipe(bark);
+    }
+
+    @Override
+    protected String getRecipeInfo() {
+      return String.format("Recipe to remove %s from Bark Recipes", bark.toString());
+    }
+  }
+
   private static class Add extends BaseAction {
     private final Block woodLog;
     private final ItemStack bark;

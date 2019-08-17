@@ -147,9 +147,9 @@ public class ModRecipes {
     addFlowerRecipe("oxeye_daisy", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.OXEYE_DAISY.getMeta()));
   }
 
-
   public static void addVanillaBarkRecipe(String name, BlockPlanks.EnumType type, ItemStack item) {
-    barkRecipes.put(new ResourceLocation(Roots.MODID, name), new BarkRecipe(type, item));
+    ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
+    barkRecipes.put(rl, new BarkRecipe(rl, type, item));
   }
 
   public static void initVanillaBarkRecipes() {
@@ -166,7 +166,8 @@ public class ModRecipes {
   }
 
   public static void addModdedBarkRecipe(String name, Block block, ItemStack item) {
-    barkRecipes.put(new ResourceLocation(Roots.MODID, name), new BarkRecipe(block, item));
+    ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
+    barkRecipes.put(rl, new BarkRecipe(rl, block, item));
   }
 
   @Nullable
@@ -185,8 +186,27 @@ public class ModRecipes {
     return null;
   }
 
-  public static Collection<BarkRecipe> getBarkRecipes() {
+  public static Collection<BarkRecipe> getBarkRecipes () {
     return barkRecipes.values();
+  }
+
+  public static boolean removeBarkRecipe (ItemStack stack) {
+    List<BarkRecipe> toRemove = new ArrayList<>();
+    for (BarkRecipe recipe : barkRecipes.values()) {
+      if (ItemUtil.equalWithoutSize(stack, recipe.getItem())) {
+        toRemove.add(recipe);
+        break;
+      }
+    }
+
+    if (!toRemove.isEmpty()) {
+      for (BarkRecipe removing : toRemove) {
+        barkRecipes.remove(removing.getName());
+      }
+      return true;
+    }
+
+    return false;
   }
 
   public static void addTransmutationRecipe(String name, Block start, IBlockState endState, WorldPosStatePredicate condition) {
