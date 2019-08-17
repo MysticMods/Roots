@@ -56,7 +56,7 @@ public class BarkTweaker {
 
     @Override
     public void apply() {
-      ModRecipes.addModdedBarkRecipe(name, woodLog, bark.getItem());
+      ModRecipes.addModdedBarkRecipe(name, woodLog, bark);
     }
 
     @Override

@@ -9,16 +9,16 @@ import net.minecraft.item.ItemStack;
 
 public class BarkRecipe {
   private final Block block;
-  private final Item item;
+  private final ItemStack item;
   private final BlockPlanks.EnumType type;
 
-  public BarkRecipe(Block block, Item item) {
+  public BarkRecipe(Block block, ItemStack item) {
     this.block = block;
     this.item = item;
     this.type = null;
   }
 
-  public BarkRecipe(BlockPlanks.EnumType type, Item item) {
+  public BarkRecipe(BlockPlanks.EnumType type, ItemStack item) {
     this.item = item;
     this.type = type;
     this.block = null;
@@ -37,14 +37,16 @@ public class BarkRecipe {
   }
 
   public ItemStack getBarkStack (int count) {
-    return new ItemStack(this.item, count);
+    ItemStack copy = this.item.copy();
+    copy.setCount(count);
+    return copy;
   }
 
   public Block getBlock() {
     return block;
   }
 
-  public Item getItem() {
+  public ItemStack getItem() {
     return item;
   }
 
