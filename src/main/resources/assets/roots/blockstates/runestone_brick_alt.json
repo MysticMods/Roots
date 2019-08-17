@@ -1,5 +1,5 @@
 {
     "variants":{
-        "custom":  { "model": "roots:runestone_brick" }
+        "custom":  { "model": "roots:runestone_brick_alt" }
     }
 }
