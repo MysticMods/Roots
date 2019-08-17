@@ -6,6 +6,7 @@ import epicsquid.roots.gui.GuiHandler;
 import epicsquid.roots.item.ItemDruidKnife;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -60,5 +61,14 @@ public class BlockFeyCrafter extends BlockTEBase {
   @Override
   public BlockRenderLayer getRenderLayer() {
     return BlockRenderLayer.CUTOUT;
+  }
+
+  @Override
+  @Nonnull
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+    if (face == EnumFacing.UP) {
+      return BlockFaceShape.UNDEFINED;
+    }
+    return super.getBlockFaceShape(worldIn, state, pos, face);
   }
 }
