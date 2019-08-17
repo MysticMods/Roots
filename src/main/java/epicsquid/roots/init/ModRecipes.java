@@ -148,24 +148,24 @@ public class ModRecipes {
   }
 
 
-  public static void addVanillaBarkRecipe(String name, BlockPlanks.EnumType type, Item item) {
+  public static void addVanillaBarkRecipe(String name, BlockPlanks.EnumType type, ItemStack item) {
     barkRecipes.put(new ResourceLocation(Roots.MODID, name), new BarkRecipe(type, item));
   }
 
   public static void initVanillaBarkRecipes() {
-    addVanillaBarkRecipe("oak", BlockPlanks.EnumType.OAK, ModItems.bark_oak);
-    addVanillaBarkRecipe("spruce", BlockPlanks.EnumType.SPRUCE, ModItems.bark_spruce);
-    addVanillaBarkRecipe("birch", BlockPlanks.EnumType.BIRCH, ModItems.bark_birch);
-    addVanillaBarkRecipe("jungle", BlockPlanks.EnumType.JUNGLE, ModItems.bark_jungle);
-    addVanillaBarkRecipe("acacia", BlockPlanks.EnumType.ACACIA, ModItems.bark_acacia);
-    addVanillaBarkRecipe("dark_oak", BlockPlanks.EnumType.DARK_OAK, ModItems.bark_dark_oak);
+    addVanillaBarkRecipe("oak", BlockPlanks.EnumType.OAK, new ItemStack(ModItems.bark_oak));
+    addVanillaBarkRecipe("spruce", BlockPlanks.EnumType.SPRUCE, new ItemStack(ModItems.bark_spruce));
+    addVanillaBarkRecipe("birch", BlockPlanks.EnumType.BIRCH, new ItemStack(ModItems.bark_birch));
+    addVanillaBarkRecipe("jungle", BlockPlanks.EnumType.JUNGLE, new ItemStack(ModItems.bark_jungle));
+    addVanillaBarkRecipe("acacia", BlockPlanks.EnumType.ACACIA, new ItemStack(ModItems.bark_acacia));
+    addVanillaBarkRecipe("dark_oak", BlockPlanks.EnumType.DARK_OAK, new ItemStack(ModItems.bark_dark_oak));
   }
 
   public static void initModdedBarkRecipes() {
-    addModdedBarkRecipe("wildwood", ModBlocks.wildwood_log, ModItems.bark_wildwood);
+    addModdedBarkRecipe("wildwood", ModBlocks.wildwood_log, new ItemStack(ModItems.bark_wildwood));
   }
 
-  public static void addModdedBarkRecipe(String name, Block block, Item item) {
+  public static void addModdedBarkRecipe(String name, Block block, ItemStack item) {
     barkRecipes.put(new ResourceLocation(Roots.MODID, name), new BarkRecipe(block, item));
   }
 
