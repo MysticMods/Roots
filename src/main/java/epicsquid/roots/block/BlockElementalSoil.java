@@ -93,6 +93,9 @@ public class BlockElementalSoil extends BlockBase {
   public boolean canSustainPlant(@Nonnull IBlockState state, @Nonnull IBlockAccess world, BlockPos pos, @Nonnull EnumFacing direction, IPlantable plantable) {
     if (soilType == EnumElementalSoilType.WATER && plantable == Blocks.REEDS) {
       return true;
+    } else if (plantable == Blocks.CACTUS) {
+      if (soilType == EnumElementalSoilType.EARTH) return true;
+      return false;
     }
 
     EnumPlantType plant = plantable.getPlantType(world, pos.offset(direction));
