@@ -52,16 +52,22 @@ public class EntityRitualGermination extends EntityRitualBase {
         ParticleUtil.spawnParticleGlow(world, tx, ty, tz, 0, 0, 0, 100, 255, 100, 0.5f * alpha, 8.0f, 40);
       }
     }
-    if (this.ticksExisted % 100 == 0) {
+    if (this.ticksExisted % 80 == 0) {
       List<BlockPos> positions = Growth.collect(world, getPosition(), 19, 19, 19);
       if (positions.isEmpty()) return;
       if (!world.isRemote) {
-        BlockPos pos = positions.get(world.rand.nextInt(positions.size()));
-        IBlockState state = world.getBlockState(pos);
-        for (int j = 0; j < 3; j++) {
-          state.getBlock().randomTick(world, pos, state, world.rand);
+        for (int i = 0; i < 5; i++) {
+          BlockPos pos = positions.get(world.rand.nextInt(positions.size()));
+          IBlockState state = world.getBlockState(pos);
+          int x = 0;
+          if (state.getBlock() == Blocks.REEDS || state.getBlock() == Blocks.CACTUS) {
+            x += 15;
+          }
+          for (int j = 0; j < 3 + x; j++) {
+            state.getBlock().randomTick(world, pos, state, world.rand);
+          }
+          PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), this);
         }
-        PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), this);
       }
     }
   }

@@ -14,6 +14,7 @@ import net.minecraftforge.common.IPlantable;
 import java.util.*;
 
 public class Growth {
+  private static Set<Block> BLACKLIST = new HashSet();
   private static Set<IProperty<?>> AGE_PROPERTIES = new HashSet<>();
   private static Object2IntOpenHashMap<PropertyInteger> AGE_MAP = new Object2IntOpenHashMap();
   static {
@@ -37,6 +38,12 @@ public class Growth {
     AGE_MAP.put(BlockNetherWart.AGE, 3);
     AGE_MAP.put(BlockCrops.AGE, 7);
     AGE_MAP.put(BlockCocoa.AGE, 2);
+
+    addBlacklist(Blocks.TALLGRASS, Blocks.DOUBLE_PLANT, Blocks.GRASS, Blocks.DOUBLE_PLANT, Blocks.RED_FLOWER, Blocks.YELLOW_FLOWER);
+  }
+
+  public static void addBlacklist (Block... blocks) {
+    BLACKLIST.addAll(Arrays.asList(blocks));
   }
 
   public static List<BlockPos> collect (World world, BlockPos startPosition, int radiusX, int radiusY, int radiusZ) {
@@ -44,6 +51,8 @@ public class Growth {
   }
 
   public static boolean canGrow (World world, BlockPos pos, IBlockState state) {
+    if (BLACKLIST.contains(state.getBlock())) return false;
+
     if (state.getBlock() instanceof IGrowable) {
       return ((IGrowable) state.getBlock()).canGrow(world, pos, state, true);
     }
