@@ -55,6 +55,7 @@ public class CommandStaff extends CommandBase {
       SpellBase spell = SpellRegistry.getSpell(spellName);
       if (spell == null) {
         player.sendMessage(new TextComponentString("Invalid spell: " + args[0]));
+        return;
       }
 
       SpellHandler cap = SpellHandler.fromStack(spell.getResult());
