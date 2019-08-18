@@ -3,6 +3,7 @@ package epicsquid.roots.block;
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.roots.api.CustomPlantType;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.item.itemblock.ItemBlockElementalSoil;
 import epicsquid.roots.util.EnumElementalSoilType;
 import net.minecraft.block.Block;
@@ -12,11 +13,16 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
@@ -25,6 +31,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Random;
 
 public class BlockElementalSoil extends BlockBase {
@@ -33,7 +41,8 @@ public class BlockElementalSoil extends BlockBase {
   public static final PropertyInteger earthFertility = PropertyInteger.create("earth", 0, 4);
   public static final PropertyInteger fireCookingMultiplier = PropertyInteger.create("fire", 0, 4);
 
-  private final @Nonnull Item itemBlock;
+  private final @Nonnull
+  Item itemBlock;
   private final EnumElementalSoilType soilType;
 
   public BlockElementalSoil(@Nonnull Material mat, @Nonnull SoundType type, @Nonnull String name, @Nonnull EnumElementalSoilType soilType) {
@@ -56,18 +65,18 @@ public class BlockElementalSoil extends BlockBase {
   @Nonnull
   public IBlockState getStateFromMeta(int meta) {
     switch (soilType) {
-    case BASE:
-      return getDefaultState();
-    case AIR:
-      return getDefaultState().withProperty(airSpeed, meta + 1);
-    case FIRE:
-      return getDefaultState().withProperty(fireCookingMultiplier, meta + 1);
-    case EARTH:
-      return getDefaultState().withProperty(earthFertility, meta + 1);
-    case WATER:
-      return getDefaultState().withProperty(waterSpeed, meta + 1);
-    default:
-      return getDefaultState();
+      case BASE:
+        return getDefaultState();
+      case AIR:
+        return getDefaultState().withProperty(airSpeed, meta + 1);
+      case FIRE:
+        return getDefaultState().withProperty(fireCookingMultiplier, meta + 1);
+      case EARTH:
+        return getDefaultState().withProperty(earthFertility, meta + 1);
+      case WATER:
+        return getDefaultState().withProperty(waterSpeed, meta + 1);
+      default:
+        return getDefaultState();
     }
   }
 
@@ -100,12 +109,12 @@ public class BlockElementalSoil extends BlockBase {
 
     EnumPlantType plant = plantable.getPlantType(world, pos.offset(direction));
     switch (plant) {
-    case Nether:
-    case Cave:
-    case Crop:
-    case Desert:
-    case Plains:
-      return true;
+      case Nether:
+      case Cave:
+      case Crop:
+      case Desert:
+      case Plains:
+        return true;
     }
     return plant == CustomPlantType.ELEMENT_FIRE && soilType == EnumElementalSoilType.FIRE
         || plant == CustomPlantType.ELEMENT_AIR && soilType == EnumElementalSoilType.AIR
@@ -187,6 +196,27 @@ public class BlockElementalSoil extends BlockBase {
   @Override
   public boolean isFertile(@Nonnull World world, @Nonnull BlockPos pos) {
     return true;
+  }
+
+  @Override
+  @SideOnly(Side.CLIENT)
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+    if (stack.getItem() instanceof ItemBlock) {
+      Block type = ((ItemBlock) stack.getItem()).getBlock();
+      if (type == ModBlocks.elemental_soil_fire) {
+        tooltip.add("");
+        tooltip.add(TextFormatting.RED + "" + TextFormatting.BOLD + I18n.format("tile.magmatic_soil.effect"));
+      } else if (type == ModBlocks.elemental_soil_air) {
+        tooltip.add("");
+        tooltip.add(TextFormatting.AQUA + "" + TextFormatting.BOLD + I18n.format("tile.caelic_soil.effect"));
+      } else if (type == ModBlocks.elemental_soil_earth) {
+        tooltip.add("");
+        tooltip.add(TextFormatting.YELLOW + "" + TextFormatting.BOLD + I18n.format("tile.terran_soil.effect"));
+      } else if (type == ModBlocks.elemental_soil_water) {
+        tooltip.add("");
+        tooltip.add(TextFormatting.BLUE + "" + TextFormatting.BOLD + I18n.format("tile.aqueous_soil.effect"));
+      }
+    }
   }
 }
 
