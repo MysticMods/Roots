@@ -130,6 +130,7 @@ roots.ritual.ritual_wild_growth.name=Wildroot Growth
 roots.ritual.ritual_overgrowth.name=Overgrowth
 roots.ritual.ritual_flower_growth.name=Flower Growth
 roots.ritual.ritual_transmutation.name=Transmutation
+roots.ritual.ritual_gathering.name=Gathering
 
 roots.keybinds.group=Roots
 roots.keybinds.pouch=Open Pouch

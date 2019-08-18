@@ -6,29 +6,17 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageHarvestCompleteFX;
 import epicsquid.roots.spell.modules.SpellModule;
-import epicsquid.roots.util.HarvestUtil;
-import epicsquid.roots.util.ItemUtil;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import epicsquid.roots.mechanics.Harvest;
 import net.minecraft.block.*;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
-import java.lang.reflect.Method;
 import java.util.*;
 
 public class SpellHarvest extends SpellBase {
@@ -55,7 +43,7 @@ public class SpellHarvest extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
-    HarvestUtil.prepare();
+    Harvest.prepare();
     List<BlockPos> affectedPositions = new ArrayList<>();
     List<BlockPos> pumpkinsAndMelons = new ArrayList<>();
     List<BlockPos> reedsAndCactus = new ArrayList<>();
@@ -77,9 +65,9 @@ public class SpellHarvest extends SpellBase {
             reedsAndCactus.add(pos);
             return false;
           }
-          IProperty<?> prop = HarvestUtil.resolveStates(state);
+          IProperty<?> prop = Harvest.resolveStates(state);
           if (prop != null) {
-            int max = HarvestUtil.getMaxState(prop);
+            int max = Harvest.getMaxState(prop);
             if (state.getValue((IProperty<Integer>) prop) == max) {
               return true;
             }
@@ -91,10 +79,10 @@ public class SpellHarvest extends SpellBase {
 
     for (BlockPos pos : crops) {
       IBlockState state = player.world.getBlockState(pos);
-      ItemStack seed = HarvestUtil.getSeed(state);
+      ItemStack seed = Harvest.getSeed(state);
       // Do do do the harvest!
       IProperty<?> prop = null;
-      for (IProperty<?> entry : HarvestUtil.getStateKeys()) {
+      for (IProperty<?> entry : Harvest.getStateKeys()) {
         if (state.getPropertyKeys().contains(entry)) {
           prop = entry;
         }
@@ -103,7 +91,7 @@ public class SpellHarvest extends SpellBase {
       assert prop != null;
 
       if (!player.world.isRemote) {
-        HarvestUtil.doHarvest(state, prop, seed, player.dimension, pos, player.world, player);
+        Harvest.doHarvest(state, prop, seed, player.dimension, pos, player.world, player);
         affectedPositions.add(pos);
       }
       count++;
