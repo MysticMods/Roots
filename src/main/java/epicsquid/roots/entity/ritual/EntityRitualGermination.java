@@ -3,6 +3,7 @@ package epicsquid.roots.entity.ritual;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
@@ -28,8 +29,6 @@ public class EntityRitualGermination extends EntityRitualBase {
     getDataManager().register(lifetime, RitualRegistry.ritual_natural_aura.getDuration() + 20);
   }
 
-  private static List<Block> skips = Arrays.asList(Blocks.GRASS, Blocks.TALLGRASS, Blocks.DOUBLE_PLANT);
-
   @Override
   public void onUpdate() {
     super.onUpdate();
@@ -54,36 +53,7 @@ public class EntityRitualGermination extends EntityRitualBase {
       }
     }
     if (this.ticksExisted % 100 == 0) {
-      /*BlockPos pos = world.getTopSolidOrLiquidBlock(getPosition().add(rand.nextInt(19) - 9, 0, rand.nextInt(19) - 9));
-      IBlockState state = world.getBlockState(pos);
-      if (state.getBlock() instanceof BlockCrops) {
-        if (((BlockCrops) state.getBlock()).canGrow(world, pos, state, world.isRemote)) {
-          world.setBlockState(pos, state.getBlock().getStateFromMeta(state.getBlock().getMetaFromState(state) + 1));
-          world.notifyBlockUpdate(pos, state, state.getBlock().getStateFromMeta(state.getBlock().getMetaFromState(state) + 1), 8);
-          if (world.isRemote) {
-            for (float i = 0; i < 1; i += 0.125f) {
-              ParticleUtil.spawnParticleSpark(world, (pos.getX() + 0.5f), (pos.getY() + 0.5f) + i, (pos.getZ() + 0.5f), 0.125f * (rand.nextFloat() - 0.5f),
-                  0.0625f * (rand.nextFloat()), 0.125f * (rand.nextFloat() - 0.5f), 100, 255, 100, 1.0f * (1.0f - i) * alpha, 3.0f * (1.0f - i), 40);
-            }
-          }
-        }
-      }*/
-      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), 19, 19, 19, (pos) -> {
-        IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof IGrowable) {
-          Block block = state.getBlock();
-          if (skips.contains(block)) return false;
-          if (state.getBlock() instanceof BlockFlower) return false;
-          return ((IGrowable) state.getBlock()).canGrow(world, pos, state, false);
-        } else if (state.getBlock() == Blocks.NETHER_WART) {
-          return state.getValue(BlockNetherWart.AGE) < 3;
-        } else if (state.getBlock() instanceof BlockSapling) {
-          return true;
-        } else if (state.getBlock() == ModBlocks.wildwood_sapling) {
-          return true;
-        }
-        return false;
-      });
+      List<BlockPos> positions = Growth.collect(world, getPosition(), 19, 19, 19);
       if (positions.isEmpty()) return;
       if (!world.isRemote) {
         BlockPos pos = positions.get(world.rand.nextInt(positions.size()));

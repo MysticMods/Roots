@@ -3,6 +3,7 @@ package epicsquid.roots.spell;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.network.fx.MessageLifeInfusionFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.block.Block;
@@ -45,16 +46,17 @@ public class SpellGrowthInfusion extends SpellBase {
       if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
         BlockPos pos = result.getBlockPos();
         IBlockState state = player.world.getBlockState(pos);
-        Block block = state.getBlock();
-        if (block instanceof IGrowable && !((IGrowable) block).canGrow(player.world, pos, state, player.world.isRemote)) return false;
-        if (!player.world.isRemote) {
-          for (int i = 0; i < 1; i++) {
-            state.getBlock().randomTick(player.world, pos, state, new Random());
+        if (Growth.canGrow(player.world, pos, state)) {
+          if (!player.world.isRemote) {
+            for (int i = 0; i < 1; i++) {
+              state.getBlock().randomTick(player.world, pos, state, new Random());
+            }
+            PacketHandler.sendToAllTracking(new MessageLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);
+            return true;
           }
-          PacketHandler.sendToAllTracking(new MessageLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);
         }
       }
     }
-    return true;
+    return false;
   }
 }

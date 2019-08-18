@@ -4,6 +4,7 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.block.Block;
@@ -42,22 +43,9 @@ public class SpellRampantGrowth extends SpellBase {
     );
   }
 
-  private static List<Block> skips = Arrays.asList(Blocks.GRASS, Blocks.TALLGRASS, Blocks.DOUBLE_PLANT);
-
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
-    List<BlockPos> positions = Util.getBlocksWithinRadius(player.world, player.getPosition(), 6, 3, 6, (pos) -> {
-      IBlockState state = player.world.getBlockState(pos);
-      if (state.getBlock() instanceof IGrowable) {
-        Block block = state.getBlock();
-        if (skips.contains(block)) return false;
-        if (state.getBlock() instanceof BlockFlower) return false;
-        return ((IGrowable) state.getBlock()).canGrow(player.world, pos, state, false);
-      } else if (state.getBlock() == Blocks.NETHER_WART) {
-        return state.getValue(BlockNetherWart.AGE) < 3;
-      }
-      return false;
-    });
+    List<BlockPos> positions = Growth.collect(player.world, player.getPosition(), 6, 3, 6);
     if (positions.isEmpty()) return false;
     if (!player.world.isRemote) {
       for (int i = 0; i < 2 + player.world.rand.nextInt(4); i++) {
