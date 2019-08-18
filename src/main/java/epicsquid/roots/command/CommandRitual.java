@@ -81,6 +81,7 @@ public class CommandRitual extends CommandBase {
 
       if (ritual == null) {
         player.sendMessage(new TextComponentString("Invalid ritual: " + args[0]));
+        return;
       }
 
       WorldServer world = player.getServerWorld();
