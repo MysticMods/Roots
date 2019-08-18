@@ -1,6 +1,7 @@
-package epicsquid.roots.util;
+package epicsquid.roots.mechanics;
 
 import epicsquid.roots.Roots;
+import epicsquid.roots.util.ItemUtil;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.block.*;
 import net.minecraft.block.properties.IProperty;
@@ -26,7 +27,7 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
-public class HarvestUtil {
+public class Harvest {
   private static Method getSeed;
   private static Map<IProperty<?>, Integer> stateMax = new Object2IntOpenHashMap<>();
   private static Deque<HarvestEntry> queue = new ArrayDeque<>();
@@ -48,10 +49,10 @@ public class HarvestUtil {
   public static IProperty<?> resolveStates(IBlockState state) {
     for (IProperty<?> prop : state.getPropertyKeys()) {
       if ((prop.getName().equals("age") || prop.getName().equals("growth")) && prop.getValueClass() == Integer.class) {
-        int max = HarvestUtil.getMaxState(prop);
+        int max = Harvest.getMaxState(prop);
         if (max == -1) {
           max = Collections.max((Collection<Integer>) prop.getAllowedValues());
-          HarvestUtil.setMaxState(prop, max);
+          Harvest.setMaxState(prop, max);
         }
         return prop;
       }
@@ -117,7 +118,7 @@ public class HarvestUtil {
   public static void doHarvest(IBlockState state, IProperty<?> prop, ItemStack seed, int dimension, BlockPos pos, World world, @Nullable EntityPlayer player) {
     IBlockState newState = state.withProperty((IProperty<Integer>) prop, 0);
     NonNullList<ItemStack> drops = NonNullList.create();
-    HarvestUtil.add(seed, dimension, pos, state);
+    Harvest.add(seed, dimension, pos, state);
     state.getBlock().getDrops(drops, world, pos, state, 0);
     ForgeEventFactory.fireBlockHarvesting(drops, world, pos, state, 0, 1.0f, false, player);
     world.setBlockState(pos, newState);

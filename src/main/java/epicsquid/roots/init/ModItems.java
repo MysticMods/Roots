@@ -41,7 +41,7 @@ public class ModItems {
   public static Item moonglow_seed, pereskia_bulb, spirit_herb_seed, wildewheet_seed, cloud_berry, infernal_bulb,
       stalicripe, dewgonia, wildroot;
 
-  public static Item ritual_healing_aura, ritual_heavy_storms, ritual_divine_protection, ritual_fire_storm, ritual_spreading_forest, ritual_windwall, ritual_warding_protection, ritual_germination, ritual_purity, ritual_frost_lands, ritual_animal_harvest, ritual_summon_creatures, ritual_wild_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation;
+  public static Item ritual_healing_aura, ritual_heavy_storms, ritual_divine_protection, ritual_fire_storm, ritual_spreading_forest, ritual_windwall, ritual_warding_protection, ritual_germination, ritual_purity, ritual_frost_lands, ritual_animal_harvest, ritual_summon_creatures, ritual_wild_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation, ritual_gathering;
 
   // TODO: Refactor this out of this file
   //Armor Materials
@@ -152,6 +152,7 @@ public class ModItems {
     event.addItem(ritual_overgrowth = new ItemBase("ritual_overgrowth").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_flower_growth = new ItemBase("ritual_flower_growth").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_transmutation = new ItemBase("ritual_transmutation").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_gathering = new ItemBase("ritual_gathering").setModelCustom(false).setCreativeTab(null));
 
     // KEEP AT END
     registerSeedDrops();

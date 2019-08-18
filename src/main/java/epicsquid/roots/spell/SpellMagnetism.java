@@ -1,10 +1,8 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.integration.botania.SolegnoliaHelper;
+import epicsquid.roots.mechanics.Magnetize;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
@@ -38,31 +36,10 @@ public class SpellMagnetism extends SpellBase {
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     // TODO: Check to see what the potential standard is for "unmagnetising" things
-    List<EntityItem> items = Util.getEntitiesWithinRadius(player.getEntityWorld(), EntityItem.class, player.getPosition(), 15, 15, 15);
-    int i = 0;
-    if (!items.isEmpty()) {
-      for (EntityItem item : items) {
-        if (SolegnoliaHelper.hasBotania() && SolegnoliaHelper.hasSolegnoliaAround(item)) continue;
+    int count = 0;
+    count += Magnetize.pull(EntityItem.class, player.world, player.getPosition(), 15, 15, 15);
+    count += Magnetize.pull(EntityXPOrb.class, player.world, player.getPosition(), 15, 15, 15);
 
-        if (!player.world.isRemote) {
-          item.setPickupDelay(0);
-          item.moveToBlockPosAndAngles(player.getPosition(), 0f, 0f);
-        }
-        i++;
-      }
-    }
-    List<EntityXPOrb> orbs = Util.getEntitiesWithinRadius(player.getEntityWorld(), EntityXPOrb.class, player.getPosition(), 15, 15, 15);
-    if (!orbs.isEmpty() && SpellConfig.spellFeaturesCategory.shouldMagnetismAttractXP) {
-      for (EntityXPOrb orb : orbs) {
-        if (SolegnoliaHelper.hasBotania() && SolegnoliaHelper.hasSolegnoliaAround(orb)) continue;
-
-        if (!player.world.isRemote) {
-          orb.moveToBlockPosAndAngles(player.getPosition(), 0f, 0f);
-        }
-        i++;
-      }
-    }
-
-    return i != 0;
+    return count != 0;
   }
 }

@@ -20,7 +20,7 @@ import epicsquid.roots.network.MessagePlayerGroveUpdate;
 import epicsquid.roots.network.fx.*;
 import epicsquid.roots.recipe.BarkRecipe;
 import epicsquid.roots.util.Constants;
-import epicsquid.roots.util.HarvestUtil;
+import epicsquid.roots.mechanics.Harvest;
 import epicsquid.roots.util.ItemUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
@@ -349,11 +349,11 @@ public class EventManager {
         int speed = soil.getValue(BlockElementalSoil.waterSpeed);
         BlockPos placement = cropGrowEvent.getPos();
         if (speed > 0) {
-          ItemStack seed = HarvestUtil.getSeed(plant);
+          ItemStack seed = Harvest.getSeed(plant);
           World world = cropGrowEvent.getWorld();
-          IProperty<?> prop = HarvestUtil.resolveStates(plant);
+          IProperty<?> prop = Harvest.resolveStates(plant);
           if (prop != null) {
-            HarvestUtil.doHarvest(plant, prop, seed, world.provider.getDimension(), placement, world, null);
+            Harvest.doHarvest(plant, prop, seed, world.provider.getDimension(), placement, world, null);
           }
         }
       }

@@ -76,6 +76,10 @@ public class RitualConfig {
     @Config.Comment("Set to true to disable Summoning Ritual")
     public boolean disableSummonCreatures = false;
 
+    @Config.Name("Disable Gathering Ritual")
+    @Config.Comment("Set to true to disable Gathering Ritual")
+    public boolean disableGathering = false;
+
   }
 
 
