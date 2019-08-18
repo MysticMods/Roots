@@ -6,6 +6,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
@@ -45,6 +46,11 @@ public class Growth {
   public static boolean canGrow (World world, BlockPos pos, IBlockState state) {
     if (state.getBlock() instanceof IGrowable) {
       return ((IGrowable) state.getBlock()).canGrow(world, pos, state, true);
+    }
+
+    // Hard-code this for some dumb reason as max age doesn't mean grown
+    if (state.getBlock() == Blocks.REEDS || state.getBlock() == Blocks.CACTUS) {
+      return world.isAirBlock(pos.up());
     }
 
     if (state.getBlock() instanceof IPlantable) {
