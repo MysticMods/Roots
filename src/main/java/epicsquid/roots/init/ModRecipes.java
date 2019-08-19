@@ -108,6 +108,8 @@ public class ModRecipes {
     addPacifistEntry("deer", EntityDeer.class);
     addPacifistEntry("fox", EntityFox.class);
     addPacifistEntry("frog", EntityFrog.class);
+    addPacifistEntry("owl", EntityOwl.class);
+    addPacifistEntry("sprout", EntitySprout.class);
   }
 
   public static void addFlowerRecipe(String name, IBlockState state) {
