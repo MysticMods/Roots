@@ -4,10 +4,7 @@ import com.google.common.collect.Lists;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticallib.recipe.factories.OreFallbackIngredient;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.mysticalworld.entity.EntityBeetle;
-import epicsquid.mysticalworld.entity.EntityDeer;
-import epicsquid.mysticalworld.entity.EntityFox;
-import epicsquid.mysticalworld.entity.EntityFrog;
+import epicsquid.mysticalworld.entity.*;
 import epicsquid.mysticalworld.materials.Metal;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
@@ -25,6 +22,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityPolarBear;
 import net.minecraft.entity.passive.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -401,12 +399,15 @@ public class ModRecipes {
     addAnimalHarvestRecipe("sheep", EntitySheep.class);
     addAnimalHarvestRecipe("squid", EntitySquid.class);
     addAnimalHarvestRecipe("wolf", EntityWolf.class);
+    addAnimalHarvestRecipe("polar_bear", EntityPolarBear.class);
     // No villager or skeletal/zombie horses.
     // Mystical World
     addAnimalHarvestRecipe("beetle", EntityBeetle.class);
     addAnimalHarvestRecipe("deer", EntityDeer.class);
     addAnimalHarvestRecipe("fox", EntityFox.class);
     addAnimalHarvestRecipe("frog", EntityFrog.class);
+    addAnimalHarvestRecipe("owl", EntityOwl.class);
+    addAnimalHarvestRecipe("sprout", EntitySprout.class);
   }
 
   public static void addRunicCarvingRecipe(RunicCarvingRecipe recipe) {
