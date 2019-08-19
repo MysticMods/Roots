@@ -62,6 +62,10 @@ public class Growth {
       return world.isAirBlock(pos.up());
     }
 
+    if (state.getBlock() instanceof BlockStem) {
+      return true;
+    }
+
     if (state.getBlock() instanceof IPlantable) {
       Collection<IProperty<?>> keys = state.getPropertyKeys();
       IProperty<?> toCheck = null;
