@@ -1,5 +1,6 @@
 package epicsquid.roots.spell;
 
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
@@ -37,35 +38,30 @@ public class SpellThaw extends SpellBase{
 
   @Override
   public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
-    BlockPos pos = RitualUtil.getRandomPosRadial(caster.getPosition(), 5, 5);
 
-    //FIXME the boolean system to avoid useless herb cost doesn't work
+    BlockPos pos = RitualUtil.getRandomPosRadialXYZ(caster.getPosition(), 5, 2,  5);
     boolean applied = false;
 
-    //FIXME this for idea doesn't work yet
-    for (int i = 0; i <= 1; i++) {
-      pos = pos.down(i);
-      if (caster.world.getBlockState(pos) == Blocks.SNOW_LAYER.getDefaultState()) {
-        caster.world.setBlockState(pos, Blocks.AIR.getBlockState().getBaseState());
+      if (caster.world.getBlockState(pos).getBlock() == Blocks.SNOW_LAYER) {
+        caster.world.setBlockState(pos, Blocks.AIR.getDefaultState());
         applied = true;
       }
-      //had .down() originally
-      if (caster.world.getBlockState(pos) == Blocks.SNOW.getDefaultState() || caster.world.getBlockState(pos) == Blocks.ICE.getDefaultState()) {
-        caster.world.setBlockState(pos, Blocks.WATER.getBlockState().getBaseState());
+
+      if (caster.world.getBlockState(pos).getBlock() == Blocks.SNOW || caster.world.getBlockState(pos).getBlock() == Blocks.ICE) {
+        caster.world.setBlockState(pos, Blocks.WATER.getDefaultState());
         applied = true;
       }
-      //had .down() originally
-      if (caster.world.getBlockState(pos) == Blocks.PACKED_ICE.getDefaultState()) {
-        caster.world.setBlockState(pos, Blocks.ICE.getBlockState().getBaseState());
+
+      if (caster.world.getBlockState(pos).getBlock() == Blocks.PACKED_ICE) {
+        caster.world.setBlockState(pos, Blocks.ICE.getDefaultState());
         applied = true;
       }
-      //had .down() originally
-      //FIXME (probably broken condition)
-      if (caster.world.getBlockState(pos).getBlock().isFertile(caster.world, pos)) {
-        caster.world.setBlockState(pos, Blocks.FARMLAND.getBlockState().getBaseState().withProperty(BlockFarmland.MOISTURE, 4));
+
+      if ((caster.world.getBlockState(pos).getBlock() == Blocks.FARMLAND) && (caster.world.getBlockState(pos).getValue(BlockFarmland.MOISTURE) < 7)) {
+        caster.world.setBlockState(pos, Blocks.FARMLAND.getDefaultState().withProperty(BlockFarmland.MOISTURE, 7));
         applied = true;
       }
-    }
-      return applied;
+
+    return applied;
   }
 }
