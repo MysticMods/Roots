@@ -11,6 +11,7 @@ import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
@@ -19,14 +20,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import java.util.List;
-
-/*************************************************
- * Author: Davoleo
- * Date / Hour: 17/08/2019 / 14:47
- * Class: SpellFall
- * Project: Mystic Mods
- * Copyright - © - Davoleo - 2019
- **************************************************/
 
 public class SpellFall extends SpellBase {
 
@@ -54,7 +47,7 @@ public class SpellFall extends SpellBase {
 
     @Override
     public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
-        //caster.world.setBlockState(caster.getPosition().up(2), Blocks.GRASS.getDefaultState());
+
         count++;
         boolean hadEffect = false;
         List<BlockPos> blocks = Util.getBlocksWithinRadius(caster.world, caster.getPosition(), 10, 10, 10, blockPos -> isAffectedByFallSpell(caster.world, blockPos));
@@ -72,11 +65,15 @@ public class SpellFall extends SpellBase {
 
         if (count % 3 == 0)
         {
-            if (block instanceof BlockLeaves || block instanceof BlockGrass) {
+            if (block instanceof BlockLeaves || block instanceof BlockTallGrass) {
                 block.dropBlockAsItemWithChance(caster.world, pos, blockstate, 0.75F, 0);
                 caster.world.setBlockToAir(pos);
                 caster.world.playSound(caster, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1F, 1F);
                 return true;
+            } else if (block instanceof BlockGrass)
+            {
+                caster.world.setBlockState(pos, Blocks.DIRT.getDefaultState());
+                caster.world.playSound(caster, pos, SoundEvents.BLOCK_GRAVEL_BREAK, SoundCategory.BLOCKS, 0.5F, 1F);
             }
         }
         return false;
