@@ -1,5 +1,6 @@
 package epicsquid.roots.spell;
 
+import epicsquid.mysticallib.recipe.factories.OreFallbackIngredient;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
@@ -27,9 +28,8 @@ public class SpellFeyLight extends SpellBase {
         this.castType = EnumCastType.INSTANTANEOUS;
         this.cooldown = 20;
         addCost(HerbRegistry.getHerbByName("cloud_berry"), 0.015f);
-        addIngredients(new ItemStack(ModItems.cloud_berry), new OreIngredient("dustGold"), new ItemStack(Items.GUNPOWDER), new ItemStack(ModItems.bark_birch), new ItemStack(Items.FLINT_AND_STEEL)
+        addIngredients(new ItemStack(ModItems.cloud_berry), new OreFallbackIngredient("dustGold", "gunpowder"), new ItemStack(Items.GUNPOWDER), new ItemStack(ModItems.bark_birch), new ItemStack(Items.FLINT_AND_STEEL)
         );
-
 }
 
     @Override
