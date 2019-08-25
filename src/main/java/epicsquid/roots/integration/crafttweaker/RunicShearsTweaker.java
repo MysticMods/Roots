@@ -2,7 +2,6 @@ package epicsquid.roots.integration.crafttweaker;
 
 import com.blamejared.mtlib.helpers.InputHelper;
 import com.blamejared.mtlib.helpers.LogHelper;
-import com.blamejared.mtlib.utils.BaseAction;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.entity.IEntityDefinition;
@@ -18,7 +17,6 @@ import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -76,7 +74,7 @@ public class RunicShearsTweaker {
     CraftTweaker.LATE_ACTIONS.add(new Remove(CraftTweakerMC.getItemStack(output)));
   }
 
-  private static class Remove extends BaseAction {
+  private static class Remove extends Action {
     private ItemStack output;
 
     private Remove(ItemStack output) {
@@ -108,7 +106,7 @@ public class RunicShearsTweaker {
     }
   }
 
-  private static class Add extends BaseAction {
+  private static class Add extends Action {
     private String name;
     private ItemStack displayItem;
     private ItemStack outputItem;
@@ -137,7 +135,7 @@ public class RunicShearsTweaker {
     }
   }
 
-  private static class AddEntity extends BaseAction {
+  private static class AddEntity extends Action {
     private String name;
     private Class<? extends Entity> entity;
     private ItemStack outputItem;

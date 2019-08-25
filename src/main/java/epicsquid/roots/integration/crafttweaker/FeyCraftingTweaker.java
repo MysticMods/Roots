@@ -2,7 +2,6 @@ package epicsquid.roots.integration.crafttweaker;
 
 import com.blamejared.mtlib.helpers.InputHelper;
 import com.blamejared.mtlib.helpers.LogHelper;
-import com.blamejared.mtlib.utils.BaseAction;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
@@ -84,7 +83,7 @@ public class FeyCraftingTweaker {
     }
   }
 
-  private static class Add extends BaseAction {
+  private static class Add extends Action {
     private String name;
     private ItemStack output;
     private Ingredient[] inputs;
@@ -112,7 +111,7 @@ public class FeyCraftingTweaker {
     }
   }
 
-  private static class Remove extends BaseAction {
+  private static class Remove extends Action {
     private ResourceLocation name;
 
     @Override

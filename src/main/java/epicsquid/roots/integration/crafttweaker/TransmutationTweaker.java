@@ -1,6 +1,5 @@
 package epicsquid.roots.integration.crafttweaker;
 
-import com.blamejared.mtlib.utils.BaseAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.block.IBlockState;
 import crafttweaker.api.item.IItemStack;
@@ -59,7 +58,7 @@ public class TransmutationTweaker {
     CraftTweaker.LATE_ACTIONS.add(new BlockToItem(name, CraftTweakerMC.getBlockState(state), CraftTweakerMC.getItemStack(stack)));
   }
 
-  private static class Remove extends BaseAction {
+  private static class Remove extends Action {
     private final ResourceLocation name;
 
     public Remove(String name) {
@@ -77,12 +76,12 @@ public class TransmutationTweaker {
     }
 
     @Override
-    protected String getRecipeInfo() {
+    public String describe () {
       return String.format("Recipe to remove %s from Transmutation", name);
     }
   }
 
-  private static class BlockToBlock extends BaseAction {
+  private static class BlockToBlock extends Action {
     private final net.minecraft.block.state.IBlockState state1;
     private final net.minecraft.block.state.IBlockState state2;
     private final String name;
@@ -100,12 +99,12 @@ public class TransmutationTweaker {
     }
 
     @Override
-    protected String getRecipeInfo() {
+    public String describe () {
       return String.format("Recipe to add %s->%s to Transmutation", state1, state2);
     }
   }
 
-  private static class BlockToItem extends BaseAction {
+  private static class BlockToItem extends Action {
     private final net.minecraft.block.state.IBlockState state;
     private final ItemStack stack;
     private final String name;
@@ -123,7 +122,7 @@ public class TransmutationTweaker {
     }
 
     @Override
-    protected String getRecipeInfo() {
+    public String describe () {
       return String.format("Recipe to turn %s->%s to Transmutation", state, stack);
     }
   }
