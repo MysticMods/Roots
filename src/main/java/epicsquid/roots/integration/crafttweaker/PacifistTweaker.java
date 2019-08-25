@@ -1,6 +1,5 @@
 package epicsquid.roots.integration.crafttweaker;
 
-import com.blamejared.mtlib.utils.BaseAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.entity.IEntityDefinition;
 import crafttweaker.mc1120.CraftTweaker;
@@ -42,7 +41,7 @@ public class PacifistTweaker {
     CraftTweaker.LATE_ACTIONS.add(new Remove((EntityEntry) entity.getInternal()));
   }
 
-  private static class Remove extends BaseAction {
+  private static class Remove extends Action {
     private final EntityEntry entry;
 
     public Remove(EntityEntry entry) {
@@ -56,12 +55,12 @@ public class PacifistTweaker {
     }
 
     @Override
-    protected String getRecipeInfo() {
+    public String describe () {
       return String.format("Recipe to remove %s from Pacifist", entry.getName());
     }
   }
 
-  private static class Add extends BaseAction {
+  private static class Add extends Action {
     private final EntityEntry entry;
 
     public Add(EntityEntry entry) {
@@ -75,7 +74,7 @@ public class PacifistTweaker {
     }
 
     @Override
-    protected String getRecipeInfo() {
+    public String describe () {
       return String.format("Recipe to add %s to Pacifism", entry.getName());
     }
   }

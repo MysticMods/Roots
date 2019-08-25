@@ -1,6 +1,5 @@
 package epicsquid.roots.integration.crafttweaker;
 
-import com.blamejared.mtlib.utils.BaseAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.block.IBlock;
 import crafttweaker.api.block.IBlockState;
@@ -58,7 +57,7 @@ public class FlowerTweaker {
     CraftTweaker.LATE_ACTIONS.add(new FlowerBlockMeta(name, CraftTweakerMC.getBlock(block), meta));
   }
 
-  private static class Remove extends BaseAction {
+  private static class Remove extends Action {
     private final ResourceLocation name;
 
     public Remove(String name) {
@@ -76,12 +75,12 @@ public class FlowerTweaker {
     }
 
     @Override
-    protected String getRecipeInfo() {
+    public String describe () {
       return String.format("Recipe to remove %s from FlowerGrowth", name);
     }
   }
 
-  private static class FlowerBlockState extends BaseAction {
+  private static class FlowerBlockState extends Action {
     private final net.minecraft.block.state.IBlockState state;
     private final String name;
 
@@ -97,12 +96,12 @@ public class FlowerTweaker {
     }
 
     @Override
-    protected String getRecipeInfo() {
+    public String describe () {
       return String.format("Recipe to add %s to FlowerGrowth", state);
     }
   }
 
-  private static class FlowerBlockMeta extends BaseAction {
+  private static class FlowerBlockMeta extends Action {
     private final Block block;
     private final int meta;
     private final String name;
@@ -120,7 +119,7 @@ public class FlowerTweaker {
     }
 
     @Override
-    protected String getRecipeInfo() {
+    public String describe () {
       return String.format("Recipe to produce %s:%s with FlowerGrowth", block, meta);
     }
   }

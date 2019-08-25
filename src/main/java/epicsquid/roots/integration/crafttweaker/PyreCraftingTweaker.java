@@ -1,7 +1,6 @@
 package epicsquid.roots.integration.crafttweaker;
 
 import com.blamejared.mtlib.helpers.LogHelper;
-import com.blamejared.mtlib.utils.BaseAction;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
@@ -71,7 +70,7 @@ public class PyreCraftingTweaker {
     CraftTweaker.LATE_ACTIONS.add(new Remove(CraftTweakerMC.getItemStack(output)));
   }
 
-  private static class Add extends BaseAction {
+  private static class Add extends Action {
     private String name;
     private ItemStack output;
     private Ingredient[] inputs;
@@ -100,7 +99,7 @@ public class PyreCraftingTweaker {
     }
   }
 
-  private static class Remove extends BaseAction {
+  private static class Remove extends Action {
     private ItemStack output;
 
     @Override

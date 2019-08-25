@@ -1,6 +1,5 @@
 package epicsquid.roots.integration.crafttweaker;
 
-import com.blamejared.mtlib.utils.BaseAction;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
@@ -12,8 +11,6 @@ import epicsquid.roots.util.zen.ZenDocAppend;
 import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -52,7 +49,7 @@ public class BarkTweaker {
     CraftTweaker.LATE_ACTIONS.add(new Remove(CraftTweakerMC.getItemStack(bark)));
   }
 
-  private static class Remove extends BaseAction {
+  private static class Remove extends Action {
     private final ItemStack bark;
 
     public Remove(ItemStack bark) {
@@ -66,12 +63,12 @@ public class BarkTweaker {
     }
 
     @Override
-    protected String getRecipeInfo() {
+    public String describe () {
       return String.format("Recipe to remove %s from Bark Recipes", bark.toString());
     }
   }
 
-  private static class Add extends BaseAction {
+  private static class Add extends Action {
     private final ItemStack woodLog;
     private final ItemStack bark;
     private final String name;
@@ -89,7 +86,7 @@ public class BarkTweaker {
     }
 
     @Override
-    protected String getRecipeInfo() {
+    public String describe () {
       return String.format("Recipe to add %s->%s to Bark Recipes", woodLog, bark);
     }
   }

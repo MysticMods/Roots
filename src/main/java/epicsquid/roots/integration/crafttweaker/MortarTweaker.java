@@ -1,7 +1,6 @@
 package epicsquid.roots.integration.crafttweaker;
 
 import com.blamejared.mtlib.helpers.LogHelper;
-import com.blamejared.mtlib.utils.BaseAction;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
@@ -80,7 +79,7 @@ public class MortarTweaker {
     CraftTweaker.LATE_ACTIONS.add(new Remove(CraftTweakerMC.getItemStack(output)));
   }
 
-  private static class Remove extends BaseAction {
+  private static class Remove extends Action {
     private ItemStack output;
 
     private Remove(ItemStack output) {
@@ -99,7 +98,7 @@ public class MortarTweaker {
     }
   }
 
-  private static class Add extends BaseAction {
+  private static class Add extends Action {
     private ItemStack output;
     private Ingredient[] inputs;
 
@@ -121,7 +120,7 @@ public class MortarTweaker {
     }
   }
 
-  private static class AddMultiple extends BaseAction {
+  private static class AddMultiple extends Action {
 
     private List<MortarRecipe> multiRecipes;
 
@@ -136,12 +135,12 @@ public class MortarTweaker {
     }
 
     @Override
-    public String getRecipeInfo() {
+    public String describe() {
       return String.format("MultiMortarRecipe for variable input of %s into variable output of %s.", multiRecipes.get(0).getIngredients().get(0).getMatchingStacks()[0].getDisplayName(), multiRecipes.get(0).getResult().getDisplayName());
     }
   }
 
-  private static class ChangeSpell extends BaseAction {
+  private static class ChangeSpell extends Action {
     private String spell;
     private List<Ingredient> ingredients;
 
@@ -162,7 +161,7 @@ public class MortarTweaker {
     }
 
     @Override
-    public String getRecipeInfo() {
+    public String describe() {
       return String.format("ChangeSpellRecipe to change spell %s", spell);
     }
   }

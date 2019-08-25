@@ -1,6 +1,5 @@
 package epicsquid.roots.integration.crafttweaker;
 
-import com.blamejared.mtlib.utils.BaseAction;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
@@ -45,7 +44,7 @@ public class RitualTweaker {
     CraftTweaker.LATE_ACTIONS.add(new Modify(name, Stream.of(inputs).map(CraftTweakerMC::getIngredient).toArray(Ingredient[]::new)));
   }
 
-  private static class Modify extends BaseAction {
+  private static class Modify extends Action {
     private String name;
     private Ingredient[] inputs;
 
