@@ -65,6 +65,7 @@ public class BlockFeyCrafter extends BlockTEBase {
 
   @Override
   @Nonnull
+  @SuppressWarnings("deprecation")
   public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
     if (face == EnumFacing.UP) {
       return BlockFaceShape.UNDEFINED;

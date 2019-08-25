@@ -40,7 +40,7 @@ public class ModEntities {
     LibRegistry.registerEntity(EntityRitualSpreadingForest.class);
     LibRegistry.registerEntity(EntityRitualWindwall.class);
     LibRegistry.registerEntity(EntityRitualWardingProtection.class);
-    LibRegistry.registerEntity(EntitySpawnItem.class);
+    //LibRegistry.registerEntity(EntitySpawnItem.class);
     LibRegistry.registerEntity(EntityRitualOvergrowth.class);
     LibRegistry.registerEntity(EntityRitualFrostLands.class);
     LibRegistry.registerEntity(EntityRitualFlowerGrowth.class);
@@ -63,7 +63,7 @@ public class ModEntities {
       LibRegistry.registerEntityRenderer(EntityRitualSpreadingForest.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualWindwall.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualWardingProtection.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntitySpawnItem.class, new RenderNull.Factory());
+      //LibRegistry.registerEntityRenderer(EntitySpawnItem.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualOvergrowth.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualFrostLands.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualFlowerGrowth.class, new RenderNull.Factory());

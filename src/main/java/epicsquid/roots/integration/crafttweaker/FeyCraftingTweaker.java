@@ -1,7 +1,5 @@
 package epicsquid.roots.integration.crafttweaker;
 
-import com.blamejared.mtlib.helpers.InputHelper;
-import com.blamejared.mtlib.helpers.LogHelper;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
@@ -69,15 +67,16 @@ public class FeyCraftingTweaker {
   @ZenMethod
   public static void removeRecipe(IItemStack output) {
     ResourceLocation recipeName = null;
+    Ingredient out = CraftTweakerMC.getIngredient(output);
     for (Map.Entry<ResourceLocation, FeyCraftingRecipe> r : ModRecipes.getFeyCraftingRecipes().entrySet()) {
-      if (output.matches(InputHelper.toIItemStack(r.getValue().getResult()))) {
+      if (out.apply(r.getValue().getResult())) {
         recipeName = r.getKey();
         break;
       }
     }
 
     if (recipeName == null) {
-      CraftTweakerAPI.logError("No Fey Crafting recipe found for output: " + LogHelper.getStackDescription(output));
+      CraftTweakerAPI.logError("No Fey Crafting recipe found for output: " + output);
     } else {
       CraftTweaker.LATE_ACTIONS.add(new Remove(recipeName));
     }
@@ -100,7 +99,7 @@ public class FeyCraftingTweaker {
 
     @Override
     public String describe() {
-      return "Adding Fey Crafting Ritual for " + LogHelper.getStackDescription(output);
+      return "Adding Fey Crafting Ritual for " + output;
     }
 
     @Override

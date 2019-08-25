@@ -1,6 +1,5 @@
 package epicsquid.roots.integration.crafttweaker;
 
-import com.blamejared.mtlib.helpers.LogHelper;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
@@ -16,6 +15,7 @@ import epicsquid.roots.util.zen.ZenDocAppend;
 import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
+import jeresources.util.LogHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -89,7 +89,7 @@ public class MortarTweaker {
 
     @Override
     public String describe() {
-      return "Removing Mortar Recipe for item output: " + LogHelper.getStackDescription(output);
+      return "Removing Mortar Recipe for item output: " + output;
     }
 
     @Override
@@ -116,7 +116,7 @@ public class MortarTweaker {
 
     @Override
     public String describe() {
-      return "Adding MortarRecipe to make " + LogHelper.getStackDescription(output);
+      return "Adding MortarRecipe to make " + output;
     }
   }
 
