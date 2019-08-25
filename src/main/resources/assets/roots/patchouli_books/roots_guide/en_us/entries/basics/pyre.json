@@ -10,10 +10,10 @@
     },
     {
       "type": "text",
-      "text": "it with a $(info) flint and steel.$(br2)Moreover, ongoing rituals (crafting included) can be canceled by applying a $(l:basics/bucket_of_water)bucket of water$() to the pyre."
+      "text": "it with a $(info) flint and steel.$(br2)Moreover, ongoing rituals (crafting included) can be canceled by applying a $(l:basics/bucket_of_water)bucket of water$() to the pyre.$(br2) $(info) Rituals will automatically consume relevant ingredients from an inventory placed underneath."
     },
     {
-      "type":"crafting",
+      "type": "crafting",
       "recipe": "roots:pyre",
       "title": "Pyre",
       "text": "$(info) Some rituals require runestone in specific configurations in addition to the pyre or have other requirements, in which case the required structure(s) will be listed alongside the ritual."

@@ -160,6 +160,7 @@ item.ritual_wild_growth.name=Ritual: Wildroot Growth
 item.ritual_overgrowth.name=Ritual: Overgrowth
 item.ritual_flower_growth.name=Ritual: Flower Growth
 item.ritual_transmutation.name=Ritual: Transmutation
+item.ritual_gathering.name=Ritual: Gathering
 
 #Knifes
 item.wood_knife.name=Wooden Knife
