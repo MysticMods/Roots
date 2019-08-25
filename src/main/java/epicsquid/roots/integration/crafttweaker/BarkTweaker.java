@@ -13,6 +13,7 @@ import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -39,7 +40,7 @@ public class BarkTweaker {
       CraftTweakerAPI.logError("Provided log " + woodLog + " is not an item block!");
       return;
     }
-    CraftTweaker.LATE_ACTIONS.add(new Add(name, ((ItemBlock) log.getItem()).getBlock(), CraftTweakerMC.getItemStack(bark)));
+    CraftTweaker.LATE_ACTIONS.add(new Add(name, CraftTweakerMC.getItemStack(bark), log));
   }
 
   @ZenDocMethod
@@ -71,11 +72,11 @@ public class BarkTweaker {
   }
 
   private static class Add extends BaseAction {
-    private final Block woodLog;
+    private final ItemStack woodLog;
     private final ItemStack bark;
     private final String name;
 
-    public Add(String name, Block woodLog, ItemStack bark) {
+    public Add(String name, ItemStack bark, ItemStack woodLog) {
       super("add_bark_recipe");
       this.woodLog = woodLog;
       this.bark = bark;
@@ -84,7 +85,7 @@ public class BarkTweaker {
 
     @Override
     public void apply() {
-      ModRecipes.addModdedBarkRecipe(name, woodLog, bark);
+      ModRecipes.addModdedBarkRecipe(name, bark, woodLog);
     }
 
     @Override

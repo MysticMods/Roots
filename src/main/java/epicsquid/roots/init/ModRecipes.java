@@ -38,6 +38,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 
+@SuppressWarnings({"unused", "WeakerAccess", "UnusedReturnValue"})
 public class ModRecipes {
 
   private static Map<ResourceLocation, AnimalHarvestRecipe> harvestRecipes = new HashMap<>();
@@ -150,7 +151,7 @@ public class ModRecipes {
 
   public static void addVanillaBarkRecipe(String name, BlockPlanks.EnumType type, ItemStack item) {
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
-    barkRecipes.put(rl, new BarkRecipe(rl, type, item));
+    barkRecipes.put(rl, new BarkRecipe(rl, item, type));
   }
 
   public static void initVanillaBarkRecipes() {
@@ -163,18 +164,19 @@ public class ModRecipes {
   }
 
   public static void initModdedBarkRecipes() {
-    addModdedBarkRecipe("wildwood", ModBlocks.wildwood_log, new ItemStack(ModItems.bark_wildwood));
+    addModdedBarkRecipe("wildwood", new ItemStack(ModItems.bark_wildwood), new ItemStack(ModBlocks.wildwood_log));
   }
 
-  public static void addModdedBarkRecipe(String name, Block block, ItemStack item) {
+  public static void addModdedBarkRecipe(String name, ItemStack item, ItemStack blockStack) {
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
-    barkRecipes.put(rl, new BarkRecipe(rl, block, item));
+    barkRecipes.put(rl, new BarkRecipe(rl, item, blockStack));
   }
 
   @Nullable
-  public static BarkRecipe getModdedBarkRecipe(Block block) {
+  public static BarkRecipe getModdedBarkRecipe(IBlockState block) {
+    ItemStack stack = new ItemStack(block.getBlock(), block.getBlock().damageDropped(block));
     for (BarkRecipe recipe : barkRecipes.values()) {
-      if (recipe.getBlock() == block) return recipe;
+
     }
     return null;
   }
@@ -537,7 +539,7 @@ public class ModRecipes {
     ResourceLocation item = new ResourceLocation(name);
     for (MortarRecipe mortarRecipe : mortarRecipes) {
       ItemStack output = mortarRecipe.getResult();
-      if (output.getItem().getRegistryName().equals(item) && output.getMetadata() == meta) {
+      if (Objects.equals(output.getItem().getRegistryName(), item) && output.getMetadata() == meta) {
         return mortarRecipe;
       }
     }
