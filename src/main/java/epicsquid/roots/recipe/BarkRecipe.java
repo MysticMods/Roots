@@ -3,40 +3,46 @@ package epicsquid.roots.recipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockNewLog;
 import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+
 public class BarkRecipe {
   private final ResourceLocation name;
-  private final Block block;
+  private final ItemStack blockStack;
   private final ItemStack item;
   private final BlockPlanks.EnumType type;
 
-  public BarkRecipe(ResourceLocation name, Block block, ItemStack item) {
-    this.block = block;
-    this.item = item;
+  public BarkRecipe(ResourceLocation name, ItemStack result, ItemStack blockStack) {
+    this.blockStack = blockStack;
+    this.item = result;
     this.type = null;
     this.name = name;
   }
 
-  public BarkRecipe(ResourceLocation name, BlockPlanks.EnumType type, ItemStack item) {
-    this.item = item;
+  public BarkRecipe(ResourceLocation name, ItemStack result, BlockPlanks.EnumType type) {
+    this.item = result;
     this.type = type;
-    this.block = null;
     this.name = name;
+    this.blockStack = null;
   }
 
   public ItemStack getBlockStack () {
-    if (this.block == null) {
+    if (this.blockStack == null) {
       if (this.type == BlockPlanks.EnumType.ACACIA || this.type == BlockPlanks.EnumType.DARK_OAK) {
         return new ItemStack(Blocks.LOG2, 1, this.type.getMetadata() - 4);
       } else {
-        return new ItemStack(Blocks.LOG, 1, this.type.getMetadata());
+        return new ItemStack(Blocks.LOG, 1, Objects.requireNonNull(this.type).getMetadata());
       }
     } else {
-      return new ItemStack(this.block);
+      return this.blockStack;
     }
   }
 
@@ -44,10 +50,6 @@ public class BarkRecipe {
     ItemStack copy = this.item.copy();
     copy.setCount(count);
     return copy;
-  }
-
-  public Block getBlock() {
-    return block;
   }
 
   public ItemStack getItem() {

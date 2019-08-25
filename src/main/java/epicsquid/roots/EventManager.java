@@ -84,7 +84,7 @@ public class EventManager {
             (block == Blocks.LOG2) ? blockstate.getValue(BlockNewLog.VARIANT) : null;
         BarkRecipe bark;
         if (type == null) {
-          bark = ModRecipes.getModdedBarkRecipe(block);
+          bark = ModRecipes.getModdedBarkRecipe(blockstate);
         } else {
           bark = ModRecipes.getVanillaBarkRecipe(type);
         }
