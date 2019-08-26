@@ -13,8 +13,8 @@ import net.minecraft.world.World;
 
 public class RitualFireStorm extends RitualBase {
 
-  public RitualFireStorm(String name, int duration) {
-    super(name, duration);
+  public RitualFireStorm(String name, int duration, boolean disabled) {
+    super(name, duration, disabled);
     addCondition(new ConditionItems(
         new ItemStack(ModItems.infernal_bulb),
         new ItemStack(ModItems.bark_acacia),

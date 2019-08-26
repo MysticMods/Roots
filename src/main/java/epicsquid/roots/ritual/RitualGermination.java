@@ -13,8 +13,8 @@ import net.minecraft.world.World;
 
 public class RitualGermination extends RitualBase {
 
-  public RitualGermination(String name, int duration) {
-    super(name, duration);
+  public RitualGermination(String name, int duration, boolean disabled) {
+    super(name, duration, disabled);
     addCondition(new ConditionItems(
         new ItemStack(ModItems.spirit_herb),
         new ItemStack(ModItems.wildroot),
