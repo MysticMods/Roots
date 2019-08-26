@@ -41,6 +41,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+@SuppressWarnings("deprecation")
 public class BlockGroveStone extends BlockTEBase {
   public static final PropertyEnum<Half> HALF = PropertyEnum.create("half", Half.class);
   public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
