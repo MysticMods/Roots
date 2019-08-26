@@ -4,13 +4,10 @@ import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualFlowerGrowth;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
-import epicsquid.roots.recipe.conditions.ConditionWorldTime;
 import epicsquid.roots.ritual.RitualBase;
-import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockRedFlower;
 import net.minecraft.block.BlockYellowFlower;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -18,8 +15,8 @@ import net.minecraft.world.World;
 
 public class RitualFlowerGrowth extends RitualBase {
 
-  public RitualFlowerGrowth(String name, int duration) {
-    super(name, duration);
+  public RitualFlowerGrowth(String name, int duration, boolean disabled) {
+    super(name, duration, disabled);
     addCondition(new ConditionItems(
         new ItemStack(Blocks.YELLOW_FLOWER, 1, BlockYellowFlower.EnumFlowerType.DANDELION.getMeta()),
         new ItemStack(ModItems.wildroot),

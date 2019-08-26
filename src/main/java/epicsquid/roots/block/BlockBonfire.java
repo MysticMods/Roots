@@ -134,7 +134,7 @@ public class BlockBonfire extends BlockTEBase {
       RitualBase ritual = ritualCache.get(pdos);
       if (ritual == null || !ritual.isRitualRecipe(bon, null)) {
         ritual = RitualRegistry.getRitual(bon, null);
-        if (ritual != null) {
+        if (ritual != null && !ritual.isDisabled()) {
           ritualCache.put(pdos, ritual);
         }
       }

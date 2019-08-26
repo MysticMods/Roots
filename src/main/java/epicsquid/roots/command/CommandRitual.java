@@ -79,8 +79,8 @@ public class CommandRitual extends CommandBase {
 
       RitualBase ritual = RitualRegistry.getRitual(ritualName);
 
-      if (ritual == null) {
-        player.sendMessage(new TextComponentString("Invalid ritual: " + args[0]));
+      if (ritual == null || ritual.isDisabled()) {
+        player.sendMessage(new TextComponentString("Invalid or disabled ritual: " + args[0]));
         return;
       }
 

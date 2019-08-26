@@ -63,8 +63,8 @@ public class RitualTweaker {
     @Override
     public void apply() {
       RitualBase ritual = RitualRegistry.getRitual(name);
-      if (ritual == null) {
-        CraftTweakerAPI.logError("Invalid ritual or no ritual by the name of \"" + name + "\" exists.");
+      if (ritual == null || ritual.isDisabled()) {
+        CraftTweakerAPI.logError("Invalid or disabled ritual or no ritual by the name of \"" + name + "\" exists.");
         return;
       }
       ConditionItems newRecipe = new ConditionItems((Object[]) inputs);

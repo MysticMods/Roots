@@ -12,8 +12,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class RitualHeavyStorms extends RitualBase {
-  public RitualHeavyStorms(String name, int duration) {
-    super(name, duration);
+  public RitualHeavyStorms(String name, int duration, boolean disabled) {
+    super(name, duration, disabled);
     addCondition(new ConditionItems(
         new ItemStack(Blocks.WATERLILY),
         new ItemStack(ModItems.dewgonia),

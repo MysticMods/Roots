@@ -163,7 +163,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   private boolean startRitual(@Nullable EntityPlayer player) {
     RitualBase ritual = RitualRegistry.getRitual(this, player);
     validateEntity();
-    if (ritual != null) {
+    if (ritual != null && !ritual.isDisabled()) {
       if ((ritualEntity == null || ritualEntity.isDead) && ritual.canFire(this, player)) {
         ritualEntity = ritual.doEffect(world, pos);
         this.burnTime = ritual.getDuration();
