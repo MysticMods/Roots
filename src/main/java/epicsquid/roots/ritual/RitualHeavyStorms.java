@@ -15,11 +15,11 @@ public class RitualHeavyStorms extends RitualBase {
   public RitualHeavyStorms(String name, int duration) {
     super(name, duration);
     addCondition(new ConditionItems(
-            new ItemStack(Blocks.WATERLILY),
-            new ItemStack(ModItems.dewgonia),
-            new ItemStack(Blocks.VINE),
-            new ItemStack(ModItems.cloud_berry),
-            new ItemStack(Items.BEETROOT_SEEDS)
+        new ItemStack(Blocks.WATERLILY),
+        new ItemStack(ModItems.dewgonia),
+        new ItemStack(Blocks.VINE),
+        new ItemStack(ModItems.cloud_berry),
+        new ItemStack(Items.BEETROOT_SEEDS)
     ));
     setIcon(ModItems.ritual_heavy_storms);
     setColor(TextFormatting.DARK_AQUA);

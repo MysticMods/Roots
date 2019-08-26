@@ -12,7 +12,7 @@ public class Advancements {
   public static GenericTrigger<LivingDeathEvent> PACIFIST_TRIGGER;
   public static GenericTrigger<Void> GROVE_TRIGGER;
 
-  public static void init () {
+  public static void init() {
     PACIFIST_TRIGGER = CriteriaTriggers.register(new GenericTrigger<>(PACIFIST_ID, new KillPredicate()));
     GROVE_TRIGGER = CriteriaTriggers.register(new GenericTrigger<>(ACTIVATE_ID, new ActivatePredicate()));
   }

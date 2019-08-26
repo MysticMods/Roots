@@ -80,7 +80,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
 
   @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand,
-      @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
+                          @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
     if (!heldItem.isEmpty()) {
       if (heldItem.getItem() == ModItems.spell_dust || heldItem.getItem() == ModItems.runic_dust) {
@@ -95,7 +95,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
             return true;
           }
         }
-      } else if(heldItem.getItem() == ModItems.staff || ModuleRegistry.isModule(heldItem)){
+      } else if (heldItem.getItem() == ModItems.staff || ModuleRegistry.isModule(heldItem)) {
         if (heldItem.getItem() == ModItems.staff) {
           SpellHandler cap = SpellHandler.fromStack(heldItem);
           if (!cap.hasFreeSlot() && inventory.getStackInSlot(0).getItem() != ModItems.runic_dust) {
@@ -165,19 +165,19 @@ public class TileEntityImbuer extends TileBase implements ITickable {
         if (world.isRemote) {
           if (Util.rand.nextInt(2) == 0) {
             ParticleUtil.spawnParticleLineGlow(world, getPos().getX() + 0.5f, getPos().getY() + 0.125f, getPos().getZ() + 0.5f,
-                    getPos().getX() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), getPos().getY() + 1.0f,
-                    getPos().getZ() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), spell.getRed1(), spell.getGreen1(), spell.getBlue1(), 0.25f, 4.0f, 40);
+                getPos().getX() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), getPos().getY() + 1.0f,
+                getPos().getZ() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), spell.getRed1(), spell.getGreen1(), spell.getBlue1(), 0.25f, 4.0f, 40);
           } else {
             ParticleUtil.spawnParticleLineGlow(world, getPos().getX() + 0.5f, getPos().getY() + 0.125f, getPos().getZ() + 0.5f,
-                    getPos().getX() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), getPos().getY() + 1.0f,
-                    getPos().getZ() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), spell.getRed2(), spell.getGreen2(), spell.getBlue2(), 0.25f, 4.0f, 40);
+                getPos().getX() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), getPos().getY() + 1.0f,
+                getPos().getZ() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), spell.getRed2(), spell.getGreen2(), spell.getBlue2(), 0.25f, 4.0f, 40);
           }
         }
       }
       if (progress > 200) {
         progress = 0;
         if (!world.isRemote) {
-          if(inventory.getStackInSlot(1).getItem() == ModItems.staff){
+          if (inventory.getStackInSlot(1).getItem() == ModItems.staff) {
             ItemStack staff = inventory.getStackInSlot(1);
             SpellBase spell;
             if (!clearSlot && capability.getSelectedSpell() != null) {
@@ -193,8 +193,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
             markDirty();
             updatePacketViaState();
             PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(spell.getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
-          }
-          else{
+          } else {
             ItemStack stack = inventory.getStackInSlot(1);
             SpellModule module = ModuleRegistry.getModule(stack);
             capability.addModule(module);

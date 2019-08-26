@@ -17,6 +17,7 @@ public class Growth {
   private static Set<Block> BLACKLIST = new HashSet();
   private static Set<IProperty<?>> AGE_PROPERTIES = new HashSet<>();
   private static Object2IntOpenHashMap<PropertyInteger> AGE_MAP = new Object2IntOpenHashMap();
+
   static {
     AGE_MAP.defaultReturnValue(-1);
 
@@ -42,15 +43,15 @@ public class Growth {
     addBlacklist(Blocks.TALLGRASS, Blocks.DOUBLE_PLANT, Blocks.GRASS, Blocks.DOUBLE_PLANT, Blocks.RED_FLOWER, Blocks.YELLOW_FLOWER);
   }
 
-  public static void addBlacklist (Block... blocks) {
+  public static void addBlacklist(Block... blocks) {
     BLACKLIST.addAll(Arrays.asList(blocks));
   }
 
-  public static List<BlockPos> collect (World world, BlockPos startPosition, int radiusX, int radiusY, int radiusZ) {
+  public static List<BlockPos> collect(World world, BlockPos startPosition, int radiusX, int radiusY, int radiusZ) {
     return Util.getBlocksWithinRadius(world, startPosition, radiusX, radiusY, radiusZ, (pos) -> canGrow(world, pos, world.getBlockState(pos)));
   }
 
-  public static boolean canGrow (World world, BlockPos pos, IBlockState state) {
+  public static boolean canGrow(World world, BlockPos pos, IBlockState state) {
     if (BLACKLIST.contains(state.getBlock())) return false;
 
     if (state.getBlock() instanceof IGrowable) {

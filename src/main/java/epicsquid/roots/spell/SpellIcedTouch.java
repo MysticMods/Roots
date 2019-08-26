@@ -42,7 +42,7 @@ public class SpellIcedTouch extends SpellBase {
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     World world = player.world;
     if (modules.contains(ModuleRegistry.module_touch)) {
-        player.addPotionEffect(new PotionEffect(RegistryManager.freeze, 600));
+      player.addPotionEffect(new PotionEffect(RegistryManager.freeze, 600));
 //      EffectManager.assignEffect(player, EffectManager.effect_freeze.getName(), 600, new NBTTagCompound());
     } else {
       RayTraceResult result = this.rayTrace(player, player.isSneaking() ? 1 : 10);

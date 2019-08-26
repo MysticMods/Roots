@@ -50,8 +50,7 @@ public class TileEntityBonfireRenderer extends TileEntitySpecialRenderer<TileEnt
       renderResult(tem, x, y, z, new ItemStack(ritual.getIcon()), 1f);
   }
 
-  private void renderResult(TileEntityBonfire tem, double x, double y, double z, ItemStack result, float alpha)
-  {
+  private void renderResult(TileEntityBonfire tem, double x, double y, double z, ItemStack result, float alpha) {
     GlStateManager.enableBlend();
     RenderHelper.enableStandardItemLighting();
     GlStateManager.pushMatrix();

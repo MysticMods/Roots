@@ -28,11 +28,11 @@ public class HugeBaffleCap {
     // . . S . .
     // . . S . .
 
-    data.addLayer(new String[] { "AAAAA", "AAAAA", "AASAA", "AAAAA", "AAAAA" }, 0);
-    data.addLayer(new String[] { "AAAAA", "AAAAA", "AASAA", "AAAAA", "AAAAA" }, 1);
-    data.addLayer(new String[] { "ATTTA", "TAAAT", "TASAT", "TAAAT", "ATTTA" }, 2);
-    data.addLayer(new String[] { "ATTTA", "TAAAT", "TASAT", "TAAAT", "ATTTA" }, 3);
-    data.addLayer(new String[] { "AAAAA", "ATTTA", "ATTTA", "ATTTA", "AAAAA" }, 4);
+    data.addLayer(new String[]{"AAAAA", "AAAAA", "AASAA", "AAAAA", "AAAAA"}, 0);
+    data.addLayer(new String[]{"AAAAA", "AAAAA", "AASAA", "AAAAA", "AAAAA"}, 1);
+    data.addLayer(new String[]{"ATTTA", "TAAAT", "TASAT", "TAAAT", "ATTTA"}, 2);
+    data.addLayer(new String[]{"ATTTA", "TAAAT", "TASAT", "TAAAT", "ATTTA"}, 3);
+    data.addLayer(new String[]{"AAAAA", "ATTTA", "ATTTA", "ATTTA", "AAAAA"}, 4);
 
     data.addBlock("S", ModBlocks.baffle_cap_huge_stem.getDefaultState());
     data.addBlock("T", ModBlocks.baffle_cap_huge_top.getDefaultState());

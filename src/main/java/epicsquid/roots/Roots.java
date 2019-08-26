@@ -99,7 +99,7 @@ public class Roots {
   }
 
   @EventHandler
-  public void serverStarting (FMLServerStartingEvent event) {
+  public void serverStarting(FMLServerStartingEvent event) {
     proxy.serverStarting(event);
   }
 }

@@ -54,16 +54,16 @@ public class SpellShatter extends SpellBase {
             doParticles = true;
           }
 //          for (int i = 0; i < 4; i++) {
-            if (result.sideHit.getAxis() != EnumFacing.Axis.Y)
-              pos = result.getBlockPos().down();
-            else {
-              pos = pos.offset(player.getHorizontalFacing().getOpposite());
-            }
-            state = player.world.getBlockState(pos);
-            if (state.getBlockHardness(player.world, pos) > 0) {
-              player.world.destroyBlock(pos, true);
-              player.world.notifyBlockUpdate(pos, state, Blocks.AIR.getDefaultState(), 8);
-           }
+          if (result.sideHit.getAxis() != EnumFacing.Axis.Y)
+            pos = result.getBlockPos().down();
+          else {
+            pos = pos.offset(player.getHorizontalFacing().getOpposite());
+          }
+          state = player.world.getBlockState(pos);
+          if (state.getBlockHardness(player.world, pos) > 0) {
+            player.world.destroyBlock(pos, true);
+            player.world.notifyBlockUpdate(pos, state, Blocks.AIR.getDefaultState(), 8);
+          }
 //          }
           if (doParticles) {
             float offX = 0.5f * (float) Math.sin(Math.toRadians(-90.0f - player.rotationYaw));

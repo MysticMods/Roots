@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Map;
 
-@Mod.EventBusSubscriber(modid= Roots.MODID)
+@Mod.EventBusSubscriber(modid = Roots.MODID)
 public class Keybinds {
   private static final String ROOTS_BASE = "roots.keybinds.";
   private static final String ROOTS_GROUP = ROOTS_BASE + "group";
@@ -37,7 +37,7 @@ public class Keybinds {
 
   private static Object2IntOpenHashMap<KeyBinding> SLOT_MAP = new Object2IntOpenHashMap<>();
 
-  public static void init () {
+  public static void init() {
     POUCH_KEYBIND = new KeyBinding(ROOTS_BASE + "pouch", 0, ROOTS_GROUP);
     QUIVER_KEYBIND = new KeyBinding(ROOTS_BASE + "quiver", 0, ROOTS_GROUP);
 
@@ -59,7 +59,7 @@ public class Keybinds {
 
   @SubscribeEvent
   @SideOnly(Side.CLIENT)
-  public static void onKeyInput (InputEvent.KeyInputEvent event) {
+  public static void onKeyInput(InputEvent.KeyInputEvent event) {
     Minecraft mc = Minecraft.getMinecraft();
     if (POUCH_KEYBIND.isKeyDown() && mc.inGameHasFocus) {
       MessageServerOpenPouch packet = new MessageServerOpenPouch();

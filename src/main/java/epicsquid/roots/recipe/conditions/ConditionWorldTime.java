@@ -5,16 +5,16 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class ConditionWorldTime implements Condition {
 
-    private final int first, second;
+  private final int first, second;
 
-    public ConditionWorldTime(int first, int second){
-        this.first = first;
-        this.second = second;
-    }
+  public ConditionWorldTime(int first, int second) {
+    this.first = first;
+    this.second = second;
+  }
 
 
-    @Override
-    public boolean checkCondition(TileEntityBonfire tile, EntityPlayer player) {
-        return tile.getWorld().getWorldTime() % 24000 >= first && tile.getWorld().getWorldTime() % 24000 <= second;
-    }
+  @Override
+  public boolean checkCondition(TileEntityBonfire tile, EntityPlayer player) {
+    return tile.getWorld().getWorldTime() % 24000 >= first && tile.getWorld().getWorldTime() % 24000 <= second;
+  }
 }

@@ -64,7 +64,7 @@ public class CommandRitual extends CommandBase {
     return 2;
   }
 
-  private ItemStack resolveStack (Ingredient ing) {
+  private ItemStack resolveStack(Ingredient ing) {
     return ing.getMatchingStacks()[0].copy();
   }
 

@@ -54,8 +54,7 @@ public class ItemSylvanArmor extends ItemArmor implements IModeledObject {
         count++;
     }
 
-    switch (count)
-    {
+    switch (count) {
       case 1:
         return BONUS - 0.03;
 

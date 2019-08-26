@@ -53,7 +53,7 @@ public class SpellSanctuary extends SpellBase {
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
 
-    List<Entity> entities =  Util.getEntitiesWithinRadius(player.world, Entity.class, player.getPosition(), 4, 5, 4);
+    List<Entity> entities = Util.getEntitiesWithinRadius(player.world, Entity.class, player.getPosition(), 4, 5, 4);
 
     if (entities.size() > 0) {
       for (Entity e : entities) {

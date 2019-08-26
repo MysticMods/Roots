@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class BlockUnendingBowl extends BlockTEBase {
-  
+
   public BlockUnendingBowl(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
     super(mat, type, hardness, name, teClass);
   }

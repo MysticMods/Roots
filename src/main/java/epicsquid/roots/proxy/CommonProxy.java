@@ -59,7 +59,7 @@ public class CommonProxy {
     Advancements.init();
   }
 
-  public void serverStarting (FMLServerStartingEvent event) {
+  public void serverStarting(FMLServerStartingEvent event) {
     event.registerServerCommand(new CommandStaff());
     event.registerServerCommand(new CommandRoots());
     event.registerServerCommand(new CommandRitual());

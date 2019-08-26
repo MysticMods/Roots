@@ -90,7 +90,6 @@ public class BlockBonfire extends BlockTEBase {
   }
 
 
-
   @Nonnull
   @Override
   public IBlockState getStateFromMeta(int meta) {

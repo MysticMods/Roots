@@ -17,14 +17,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid= Roots.MODID)
+@Mod.EventBusSubscriber(modid = Roots.MODID)
 @SuppressWarnings("unused")
 public class SneakHandler {
   private static boolean lastSneak = false;
 
   @SubscribeEvent
   @SideOnly(Side.CLIENT)
-  public static void onPlayerSneak (TickEvent.ClientTickEvent event) {
+  public static void onPlayerSneak(TickEvent.ClientTickEvent event) {
     Minecraft mc = Minecraft.getMinecraft();
     if (mc.player == null) return;
 

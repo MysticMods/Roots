@@ -14,7 +14,7 @@ import java.util.List;
 public class RitualWrapper implements IRecipeWrapper {
   public final RitualBase recipe;
 
-  public RitualWrapper (RitualBase recipe) {
+  public RitualWrapper(RitualBase recipe) {
     this.recipe = recipe;
   }
 

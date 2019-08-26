@@ -53,7 +53,7 @@ public class EntityRitualFrostLands extends EntityRitualBase {
         BlockPos choice = positions.get(rand.nextInt(positions.size()));
         if (world.getBlockState(choice).getBlock() == Blocks.SNOW_LAYER) {
           breakout++;
-        } else if (Blocks.SNOW_LAYER.canPlaceBlockAt(world, choice.up())){
+        } else if (Blocks.SNOW_LAYER.canPlaceBlockAt(world, choice.up())) {
           world.setBlockState(choice.up(), Blocks.SNOW_LAYER.getDefaultState());
           affectedPositions.add(choice.up());
           break;

@@ -57,7 +57,7 @@ public class SpellAcidCloud extends SpellBase {
           e.setRevengeTarget(player);
           e.setLastAttackedEntity(player);
 
-          if(modules.contains(ModuleRegistry.module_fire)){
+          if (modules.contains(ModuleRegistry.module_fire)) {
             e.setFire(5);
           }
 

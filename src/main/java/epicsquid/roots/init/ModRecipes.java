@@ -189,11 +189,11 @@ public class ModRecipes {
     return null;
   }
 
-  public static Collection<BarkRecipe> getBarkRecipes () {
+  public static Collection<BarkRecipe> getBarkRecipes() {
     return barkRecipes.values();
   }
 
-  public static boolean removeBarkRecipe (ItemStack stack) {
+  public static boolean removeBarkRecipe(ItemStack stack) {
     List<BarkRecipe> toRemove = new ArrayList<>();
     for (BarkRecipe recipe : barkRecipes.values()) {
       if (ItemUtil.equalWithoutSize(stack, recipe.getItem())) {
@@ -505,11 +505,11 @@ public class ModRecipes {
     return null;
   }
 
-  public static Set<Class<? extends Entity>> getRunicShearEntities () {
+  public static Set<Class<? extends Entity>> getRunicShearEntities() {
     return runicShearEntityRecipes.keySet();
   }
 
-  public static void addMortarRecipe (MortarRecipe recipe) {
+  public static void addMortarRecipe(MortarRecipe recipe) {
     mortarRecipes.add(recipe);
   }
 
@@ -522,7 +522,7 @@ public class ModRecipes {
     return null;
   }
 
-  public static void removeMortarRecipes (ItemStack output) {
+  public static void removeMortarRecipes(ItemStack output) {
     mortarRecipes.removeIf(recipe -> ItemUtil.equalWithoutSize(recipe.getResult(), output));
   }
 
@@ -671,7 +671,7 @@ public class ModRecipes {
     return runicShearRecipes;
   }
 
-  public static Map<Class<? extends Entity>, RunicShearRecipe> getRunicShearEntityRecipes () {
+  public static Map<Class<? extends Entity>, RunicShearRecipe> getRunicShearEntityRecipes() {
     return runicShearEntityRecipes;
   }
 

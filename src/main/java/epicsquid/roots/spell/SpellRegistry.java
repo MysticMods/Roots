@@ -8,7 +8,7 @@ import java.util.Map;
 public class SpellRegistry {
   public static Map<String, SpellBase> spellRegistry = new HashMap<>();
 
-  public static SpellBase getSpell(String s){
+  public static SpellBase getSpell(String s) {
     return spellRegistry.getOrDefault(s, null);
   }
 

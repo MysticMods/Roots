@@ -16,6 +16,6 @@ public class ModDamage {
     return source;
   }
 
-  public static void init () {
+  public static void init() {
   }
 }

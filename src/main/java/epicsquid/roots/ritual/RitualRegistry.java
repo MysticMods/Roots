@@ -16,8 +16,8 @@ public class RitualRegistry {
   public static Map<String, RitualBase> ritualRegistry = new HashMap<>();
 
   public static RitualBase ritual_life, ritual_storm, ritual_light, ritual_fire_storm, ritual_regrowth, ritual_windwall,
-          ritual_warden, ritual_natural_aura, ritual_purity, ritual_frost, ritual_animal_harvest, ritual_summoning,
-          ritual_wild_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation, ritual_gathering;
+      ritual_warden, ritual_natural_aura, ritual_purity, ritual_frost, ritual_animal_harvest, ritual_summoning,
+      ritual_wild_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation, ritual_gathering;
 
   public static RitualBase getRitual(TileEntityBonfire tileEntity, @Nullable EntityPlayer player) {
     for (int i = 0; i < ritualRegistry.size(); i++) {
@@ -30,7 +30,7 @@ public class RitualRegistry {
   }
 
   public static RitualBase getRitual(String ritualName) {
-    if(ritualName == null){
+    if (ritualName == null) {
       return null;
     }
     for (RitualBase ritual : ritualRegistry.values()) {

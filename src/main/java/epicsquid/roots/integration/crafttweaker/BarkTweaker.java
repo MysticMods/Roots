@@ -25,9 +25,9 @@ public class BarkTweaker {
   @ZenDocMethod(
       order = 1,
       args = {
-          @ZenDocArg(arg="name", info="the name of the recipe"),
-          @ZenDocArg(arg="woodLog", info="the itemstack equivalent of the wood log being broken"),
-          @ZenDocArg(arg="bark", info="the itemstack of the type of bark this log produces")
+          @ZenDocArg(arg = "name", info = "the name of the recipe"),
+          @ZenDocArg(arg = "woodLog", info = "the itemstack equivalent of the wood log being broken"),
+          @ZenDocArg(arg = "bark", info = "the itemstack of the type of bark this log produces")
       }
   )
   @ZenMethod
@@ -45,7 +45,7 @@ public class BarkTweaker {
 
       )
   @ZenMethod
-  public static void removeRecipe (IItemStack bark) {
+  public static void removeRecipe(IItemStack bark) {
     CraftTweaker.LATE_ACTIONS.add(new Remove(CraftTweakerMC.getItemStack(bark)));
   }
 
@@ -63,7 +63,7 @@ public class BarkTweaker {
     }
 
     @Override
-    public String describe () {
+    public String describe() {
       return String.format("Recipe to remove %s from Bark Recipes", bark.toString());
     }
   }
@@ -86,7 +86,7 @@ public class BarkTweaker {
     }
 
     @Override
-    public String describe () {
+    public String describe() {
       return String.format("Recipe to add %s->%s to Bark Recipes", woodLog, bark);
     }
   }

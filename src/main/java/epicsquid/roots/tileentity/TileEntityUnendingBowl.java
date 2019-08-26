@@ -18,11 +18,11 @@ public class TileEntityUnendingBowl extends TileBase {
 
   @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand,
-      @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
+                          @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
     // TODO: FLUID CAPABILITIES ARE A THING YO
     if (!heldItem.isEmpty()) {
-      if(heldItem.getItem() == Items.BUCKET){
+      if (heldItem.getItem() == Items.BUCKET) {
         player.getHeldItem(hand).shrink(1);
         if (player.getHeldItem(hand).getCount() == 0) {
           player.setHeldItem(hand, ItemStack.EMPTY);

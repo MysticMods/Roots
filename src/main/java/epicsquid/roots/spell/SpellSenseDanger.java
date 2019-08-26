@@ -40,10 +40,10 @@ public class SpellSenseDanger extends SpellBase {
   @Override
   public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
     List<EntityCreature> creatures = Util.getEntitiesWithinRadius(caster.getEntityWorld(), EntityCreature.class, caster.getPosition(), 40, 40, 40);
-    caster.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 40*20));
-    for(EntityCreature creature : creatures){
+    caster.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 40 * 20));
+    for (EntityCreature creature : creatures) {
       if (!(creature instanceof IMob)) continue;
-      creature.addPotionEffect( new PotionEffect(MobEffects.GLOWING, 40*20, 0));
+      creature.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 40 * 20, 0));
     }
     return true;
   }

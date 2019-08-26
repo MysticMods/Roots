@@ -14,11 +14,11 @@ public class RitualWindwall extends RitualBase {
   public RitualWindwall(String name, int duration) {
     super(name, duration);
     addCondition(new ConditionItems(
-            new ItemStack(ModItems.cloud_berry),
-            new ItemStack(ModItems.moonglow_leaf),
-            new ItemStack(ModItems.bark_spruce),
-            new ItemStack(ModItems.bark_birch),
-            new ItemStack(Items.FEATHER)
+        new ItemStack(ModItems.cloud_berry),
+        new ItemStack(ModItems.moonglow_leaf),
+        new ItemStack(ModItems.bark_spruce),
+        new ItemStack(ModItems.bark_birch),
+        new ItemStack(Items.FEATHER)
     ));
     setIcon(ModItems.ritual_windwall);
     setColor(TextFormatting.DARK_AQUA);

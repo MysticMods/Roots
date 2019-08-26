@@ -38,7 +38,7 @@ public class Magnetize {
   }
 
   // Plz only call this on the remote
-  public static List<BlockPos> store (World world, BlockPos startPosition, IItemHandler handler, int radiusX, int radiusY, int radiusZ) {
+  public static List<BlockPos> store(World world, BlockPos startPosition, IItemHandler handler, int radiusX, int radiusY, int radiusZ) {
     List<EntityItem> items = collect(EntityItem.class, world, startPosition, radiusX, radiusY, radiusZ);
     Iterator<EntityItem> iterator = items.iterator();
     List<BlockPos> positions = new ArrayList<>();

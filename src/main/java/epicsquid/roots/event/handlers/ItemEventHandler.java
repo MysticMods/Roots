@@ -27,8 +27,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 public class ItemEventHandler {
 
   @SubscribeEvent(priority = EventPriority.HIGHEST)
-  public static void onInteract(PlayerInteractEvent.RightClickBlock event)
-  {
+  public static void onInteract(PlayerInteractEvent.RightClickBlock event) {
     if (event.getHand() != EnumHand.MAIN_HAND)
       return;
 
@@ -43,6 +42,7 @@ public class ItemEventHandler {
     Vec3d hit = event.getHitVec();
     item.onItemUse(player, event.getWorld(), event.getPos(), event.getHand(), event.getFace(), (float) hit.x, (float) hit.y, (float) hit.z);
   }
+
   //@SubscribeEvent
   public static void onItemPickup(PlayerEvent.ItemPickupEvent event) {
   }
@@ -50,7 +50,7 @@ public class ItemEventHandler {
   public static Item MAGMATIC_SOIL = null;
 
   @SubscribeEvent
-  public static void onEntityItemJoinWorld (EntityJoinWorldEvent event) {
+  public static void onEntityItemJoinWorld(EntityJoinWorldEvent event) {
     if (MAGMATIC_SOIL == null) {
       MAGMATIC_SOIL = ((BlockBase) ModBlocks.elemental_soil_fire).getItemBlock();
     }

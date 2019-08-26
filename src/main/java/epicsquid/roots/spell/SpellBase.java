@@ -50,11 +50,11 @@ public abstract class SpellBase {
     this.textColor = textColor;
   }
 
-  public boolean hasModules () {
+  public boolean hasModules() {
     return !acceptedModules.isEmpty();
   }
 
-  public SpellBase acceptModules(SpellModule ... modules) {
+  public SpellBase acceptModules(SpellModule... modules) {
     assert modules.length < 5;
     acceptedModules.addAll(Arrays.asList(modules));
     return this;
@@ -77,7 +77,7 @@ public abstract class SpellBase {
 
   public boolean costsMet(EntityPlayer player) {
     boolean matches = true;
-    for(Map.Entry<Herb, Double> entry : this.costs.entrySet()){
+    for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
       Herb herb = entry.getKey();
       double d = entry.getValue();
       if (matches) {
@@ -92,7 +92,7 @@ public abstract class SpellBase {
   }
 
   public void enactCosts(EntityPlayer player) {
-    for(Map.Entry<Herb, Double> entry : this.costs.entrySet()){
+    for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
       Herb herb = entry.getKey();
       double d = entry.getValue();
       PowderInventoryUtil.removePowder(player, herb, d);
@@ -100,7 +100,7 @@ public abstract class SpellBase {
   }
 
   public void enactTickCosts(EntityPlayer player) {
-    for(Map.Entry<Herb, Double> entry : this.costs.entrySet()){
+    for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
       Herb herb = entry.getKey();
       double d = entry.getValue();
       PowderInventoryUtil.removePowder(player, herb, d / 20.0);
@@ -111,7 +111,7 @@ public abstract class SpellBase {
   public void addToolTip(List<String> tooltip) {
     String prefix = "roots.spell." + name;
     tooltip.add("" + textColor + TextFormatting.BOLD + I18n.format(prefix + ".name") + TextFormatting.RESET);
-    for(Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
+    for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
       Herb herb = entry.getKey();
       String d = String.format("%.4f", entry.getValue());
       tooltip.add(I18n.format(herb.getItem().getTranslationKey() + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
@@ -121,7 +121,7 @@ public abstract class SpellBase {
   private List<ItemStack> moduleItems = null;
 
   @SideOnly(Side.CLIENT)
-  public List<ItemStack> getModuleStacks () {
+  public List<ItemStack> getModuleStacks() {
     if (moduleItems == null) {
       moduleItems = new ArrayList<>();
       String prefix = "roots.spell." + name + ".";
@@ -201,17 +201,17 @@ public abstract class SpellBase {
     return ingredients;
   }
 
-  public void setIngredients (List<Ingredient> ingredients) {
+  public void setIngredients(List<Ingredient> ingredients) {
     this.ingredients = ingredients;
   }
 
-  public ItemStack getResult () {
+  public ItemStack getResult() {
     ItemStack stack = new ItemStack(ModItems.spell_dust);
     SpellHandler.fromStack(stack).setSpellToSlot(this);
     return stack;
   }
 
-  public List<ItemStack> getCostItems () {
+  public List<ItemStack> getCostItems() {
     return costs.keySet().stream().map((herb) -> new ItemStack(herb.getItem())).collect(Collectors.toList());
   }
 }

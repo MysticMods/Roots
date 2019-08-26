@@ -22,9 +22,9 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenClass("mods." + Roots.MODID + ".Transmutation")
 public class TransmutationTweaker {
   @ZenDocMethod(
-      order=1,
-      args= {
-          @ZenDocArg(arg="name", info="the name of the recipe being removed")
+      order = 1,
+      args = {
+          @ZenDocArg(arg = "name", info = "the name of the recipe being removed")
       }
   )
   @ZenMethod
@@ -33,11 +33,11 @@ public class TransmutationTweaker {
   }
 
   @ZenDocMethod(
-      order=2,
+      order = 2,
       args = {
-          @ZenDocArg(arg="name", info="the name of the recipe being added (must be unique)"),
-          @ZenDocArg(arg="state1", info="the initial state of the block as defined as a blockstate"),
-          @ZenDocArg(arg="state2", info="the state that the initial state should be converted into")
+          @ZenDocArg(arg = "name", info = "the name of the recipe being added (must be unique)"),
+          @ZenDocArg(arg = "state1", info = "the initial state of the block as defined as a blockstate"),
+          @ZenDocArg(arg = "state2", info = "the state that the initial state should be converted into")
       }
   )
   @ZenMethod
@@ -46,11 +46,11 @@ public class TransmutationTweaker {
   }
 
   @ZenDocMethod(
-      order=3,
+      order = 3,
       args = {
-          @ZenDocArg(arg="name", info="the name of the recipe being added (must be unique)"),
-          @ZenDocArg(arg="state", info="the initial state that is looked for when converting (as a block state)"),
-          @ZenDocArg(arg="stack", info="the item stack that replaces the block state")
+          @ZenDocArg(arg = "name", info = "the name of the recipe being added (must be unique)"),
+          @ZenDocArg(arg = "state", info = "the initial state that is looked for when converting (as a block state)"),
+          @ZenDocArg(arg = "stack", info = "the item stack that replaces the block state")
       }
   )
   @ZenMethod
@@ -76,7 +76,7 @@ public class TransmutationTweaker {
     }
 
     @Override
-    public String describe () {
+    public String describe() {
       return String.format("Recipe to remove %s from Transmutation", name);
     }
   }
@@ -99,7 +99,7 @@ public class TransmutationTweaker {
     }
 
     @Override
-    public String describe () {
+    public String describe() {
       return String.format("Recipe to add %s->%s to Transmutation", state1, state2);
     }
   }
@@ -122,7 +122,7 @@ public class TransmutationTweaker {
     }
 
     @Override
-    public String describe () {
+    public String describe() {
       return String.format("Recipe to turn %s->%s to Transmutation", state, stack);
     }
   }
