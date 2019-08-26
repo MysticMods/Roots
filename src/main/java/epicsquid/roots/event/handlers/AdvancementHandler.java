@@ -17,12 +17,12 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid= Roots.MODID)
+@Mod.EventBusSubscriber(modid = Roots.MODID)
 @SuppressWarnings("unused")
 public class AdvancementHandler {
   public static int FIRST_CRAFT_XP = 4;
 
-  private static void grantXP (ResourceLocation adv, World world, BlockPos pos) {
+  private static void grantXP(ResourceLocation adv, World world, BlockPos pos) {
     if (adv.getNamespace().equals(Roots.MODID)) {
       switch (adv.getPath()) {
         case "baffle_cap":
@@ -40,7 +40,7 @@ public class AdvancementHandler {
   }
 
   @SubscribeEvent
-  public static void onAdvancement (AdvancementEvent event) {
+  public static void onAdvancement(AdvancementEvent event) {
     if (event.getEntityPlayer().world.isRemote) return;
 
     ResourceLocation adv = event.getAdvancement().getId();

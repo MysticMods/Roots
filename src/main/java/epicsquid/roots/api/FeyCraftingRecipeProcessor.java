@@ -20,10 +20,10 @@ public class FeyCraftingRecipeProcessor implements IComponentProcessor {
 
   @Override
   public String process(String s) {
-    if(s.startsWith("item")) {
+    if (s.startsWith("item")) {
       int index = Integer.parseInt(s.substring(4)) - 1;
 
-      if(index >= groveCraftingRecipe.getIngredients().size()){
+      if (index >= groveCraftingRecipe.getIngredients().size()) {
         return ItemStackUtil.serializeStack(ItemStack.EMPTY);
       }
 
@@ -32,7 +32,7 @@ public class FeyCraftingRecipeProcessor implements IComponentProcessor {
       return ItemStackUtil.serializeIngredient(ingredient);
     }
 
-    if(s.equalsIgnoreCase("result")){
+    if (s.equalsIgnoreCase("result")) {
       return ItemStackUtil.serializeStack(groveCraftingRecipe.getResult());
     }
     return null;

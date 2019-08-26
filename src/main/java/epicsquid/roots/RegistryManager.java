@@ -22,58 +22,58 @@ import javax.annotation.Nonnull;
 
 public class RegistryManager {
 
-	public static Potion freeze;
+  public static Potion freeze;
 
-	@SubscribeEvent
-	public void init(@Nonnull RegisterContentEvent event) {
-		LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
+  @SubscribeEvent
+  public void init(@Nonnull RegisterContentEvent event) {
+    LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
 
-		ModBlocks.registerBlocks(event);
-		ModSounds.initSounds(event);
-		ModItems.registerItems(event);
+    ModBlocks.registerBlocks(event);
+    ModSounds.initSounds(event);
+    ModItems.registerItems(event);
 
-		ModEntities.registerMobs();
-		ModEntities.registerMobSpawn();
-		PacketHandler.registerMessages();
-	}
+    ModEntities.registerMobs();
+    ModEntities.registerMobSpawn();
+    PacketHandler.registerMessages();
+  }
 
-	@SubscribeEvent
-	public void initRecipes(@Nonnull RegisterModRecipesEvent event) {
-		LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
+  @SubscribeEvent
+  public void initRecipes(@Nonnull RegisterModRecipesEvent event) {
+    LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
 
-		ModItems.registerOredict();
-		ModRecipes.initRecipes(event);
-	}
+    ModItems.registerOredict();
+    ModRecipes.initRecipes(event);
+  }
 
-	@SubscribeEvent
-	public void worldGenInit(RegisterWorldGenEvent event) {
-		LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
+  @SubscribeEvent
+  public void worldGenInit(RegisterWorldGenEvent event) {
+    LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
 
     /*GameRegistry.registerWorldGenerator(new WorldGenWildlandGrove(), 102);
     GameRegistry.registerWorldGenerator(new WorldGenNaturalGrove(), 103);*/
-	}
+  }
 
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void onRegisterCustomModels(@Nonnull RegisterParticleEvent event) {
-		ModParticles.init();
-	}
+  @SideOnly(Side.CLIENT)
+  @SubscribeEvent
+  public void onRegisterCustomModels(@Nonnull RegisterParticleEvent event) {
+    ModParticles.init();
+  }
 
-	@SubscribeEvent(priority = EventPriority.LOWEST)
-	public void registerOredict(@Nonnull RegistryEvent.Register<Item> event) {
-		LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
+  @SubscribeEvent(priority = EventPriority.LOWEST)
+  public void registerOredict(@Nonnull RegistryEvent.Register<Item> event) {
+    LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
 
-		ModItems.registerOredict();
-	}
+    ModItems.registerOredict();
+  }
 
-	@SideOnly(Side.CLIENT)
-	public static void registerColorHandlers() {
-		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemStaff.StaffColorHandler(), ModItems.staff);
-	}
+  @SideOnly(Side.CLIENT)
+  public static void registerColorHandlers() {
+    Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemStaff.StaffColorHandler(), ModItems.staff);
+  }
 
-	@SubscribeEvent
-	public void registerPotions(RegistryEvent.Register<Potion> event) {
-		event.getRegistry().register(freeze = new PotionFreeze(0xFFFFFF).setRegistryName("freeze"));
-	}
+  @SubscribeEvent
+  public void registerPotions(RegistryEvent.Register<Potion> event) {
+    event.getRegistry().register(freeze = new PotionFreeze(0xFFFFFF).setRegistryName("freeze"));
+  }
 
 }

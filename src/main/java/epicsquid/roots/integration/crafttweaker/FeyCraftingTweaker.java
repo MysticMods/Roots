@@ -31,9 +31,9 @@ public class FeyCraftingTweaker {
   @ZenDocMethod(
       order = 1,
       args = {
-          @ZenDocArg(arg="name", info="the name of the recipe; if replacing an existing recipe, be sure to use the same name to ensure Patchouli continuity"),
-          @ZenDocArg(arg="output", info="the itemstack produced by this recipe"),
-          @ZenDocArg(arg="inputs", info="an array of IIngredients that make up the recipe; must contain 5 items")
+          @ZenDocArg(arg = "name", info = "the name of the recipe; if replacing an existing recipe, be sure to use the same name to ensure Patchouli continuity"),
+          @ZenDocArg(arg = "output", info = "the itemstack produced by this recipe"),
+          @ZenDocArg(arg = "inputs", info = "an array of IIngredients that make up the recipe; must contain 5 items")
       }
   )
   @ZenMethod
@@ -44,10 +44,10 @@ public class FeyCraftingTweaker {
   @ZenDocMethod(
       order = 2,
       args = {
-          @ZenDocArg(arg="name", info="the name of the recipe; if replacing an existing recipe, be sure to use the same name to ensure Patchouli continuity"),
-          @ZenDocArg(arg="output", info="the itemstack produced by this recipe"),
-          @ZenDocArg(arg="inputs", info="an array of IIngredients that make up the recipe; must contain 5 items"),
-          @ZenDocArg(arg="xp", info="the amount of xp (in levels) to reward the player for crafting this recipe")
+          @ZenDocArg(arg = "name", info = "the name of the recipe; if replacing an existing recipe, be sure to use the same name to ensure Patchouli continuity"),
+          @ZenDocArg(arg = "output", info = "the itemstack produced by this recipe"),
+          @ZenDocArg(arg = "inputs", info = "an array of IIngredients that make up the recipe; must contain 5 items"),
+          @ZenDocArg(arg = "xp", info = "the amount of xp (in levels) to reward the player for crafting this recipe")
       }
   )
   @ZenMethod
@@ -59,9 +59,9 @@ public class FeyCraftingTweaker {
   }
 
   @ZenDocMethod(
-      order=3,
+      order = 3,
       args = {
-          @ZenDocArg(arg="output", info="the item produced by the recipe you wish to remove")
+          @ZenDocArg(arg = "output", info = "the item produced by the recipe you wish to remove")
       }
   )
   @ZenMethod

@@ -21,15 +21,18 @@ public class CustomPlantType {
    */
   public static final EnumPlantType ELEMENT_EARTH = EnumPlantType.getPlantType("element_earth");
 
-  public static EnumPlantType getTypeFromId(int id)
-  {
-    switch (id)
-    {
-      case 0: return ELEMENT_FIRE;
-      case 1: return ELEMENT_WATER;
-      case 2: return ELEMENT_AIR;
-      case 3: return ELEMENT_EARTH;
-      default: return null;
+  public static EnumPlantType getTypeFromId(int id) {
+    switch (id) {
+      case 0:
+        return ELEMENT_FIRE;
+      case 1:
+        return ELEMENT_WATER;
+      case 2:
+        return ELEMENT_AIR;
+      case 3:
+        return ELEMENT_EARTH;
+      default:
+        return null;
     }
   }
 }

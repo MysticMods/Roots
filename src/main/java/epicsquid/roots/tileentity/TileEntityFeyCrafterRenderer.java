@@ -18,7 +18,7 @@ public class TileEntityFeyCrafterRenderer extends TileEntitySpecialRenderer<Tile
     List<ItemStack> items = new ArrayList<>();
 
     for (int i = 0; i < te.inventory.getSlots(); i++)
-        items.add(te.inventory.getStackInSlot(i));
+      items.add(te.inventory.getStackInSlot(i));
 
     for (ItemStack item : items) {
 
@@ -30,8 +30,7 @@ public class TileEntityFeyCrafterRenderer extends TileEntitySpecialRenderer<Tile
       //Dunno how much I need this ^^^
 
 
-      switch (items.indexOf(item))
-      {
+      switch (items.indexOf(item)) {
         case 0:
           GlStateManager.translate(x + 0.5, y + 1.1, z + 0.125);
           break;

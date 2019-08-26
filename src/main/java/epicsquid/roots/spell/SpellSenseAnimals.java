@@ -38,8 +38,8 @@ public class SpellSenseAnimals extends SpellBase {
   @Override
   public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
     List<EntityAnimal> animals = Util.getEntitiesWithinRadius(caster.getEntityWorld(), EntityAnimal.class, caster.getPosition(), 50, 25, 50);
-    for(EntityAnimal animal : animals){
-      animal.addPotionEffect( new PotionEffect(MobEffects.GLOWING, 20*20, 0));
+    for (EntityAnimal animal : animals) {
+      animal.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 20 * 20, 0));
     }
     return true;
   }

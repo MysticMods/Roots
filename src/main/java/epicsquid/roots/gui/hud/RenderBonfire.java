@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
 public class RenderBonfire {
-  public static void render (Minecraft mc, BlockPos pos, IBlockState state, RenderGameOverlayEvent.Post event) {
+  public static void render(Minecraft mc, BlockPos pos, IBlockState state, RenderGameOverlayEvent.Post event) {
     World world = mc.world;
     if (!(world.getTileEntity(pos) instanceof TileEntityBonfire)) return;
 
@@ -44,7 +44,7 @@ public class RenderBonfire {
         mc.getRenderItem().renderItemIntoGUI(new ItemStack(ritual.getIcon()), x + 40, y);
       }
       String s = I18n.format("roots.ritual." + ritual.getName() + ".name");
-      mc.fontRenderer.drawStringWithShadow(ritual.getFormat() + s, (float) x + 40,  y + 22, 16777215);
+      mc.fontRenderer.drawStringWithShadow(ritual.getFormat() + s, (float) x + 40, y + 22, 16777215);
       mc.fontRenderer.drawStringWithShadow(I18n.format("roots.info.pyre.repeat1"), x + 40, y + 37, 16777215);
       mc.fontRenderer.drawStringWithShadow(I18n.format("roots.info.pyre.repeat2"), x + 40, y + 49, 16777215);
       mc.fontRenderer.drawStringWithShadow(I18n.format("roots.info.pyre.repeat3"), x + 40, y + 61, 16777215);

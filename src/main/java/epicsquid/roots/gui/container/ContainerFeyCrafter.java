@@ -232,7 +232,7 @@ public class ContainerFeyCrafter extends Container {
     }
   }
 
-  public boolean getValidStone () {
+  public boolean getValidStone() {
     return crafter.hasValidGroveStone();
   }
 

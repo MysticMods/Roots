@@ -32,17 +32,17 @@ public class GuiHandler implements IGuiHandler {
   @Override
   public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
     switch (id) {
-    case POUCH_ID:
-      return new ContainerPouch(player);
-    case QUIVER_ID:
-      return new ContainerQuiver(player);
-    case CRAFTER_ID:
-      TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
-      if (te instanceof TileEntityFeyCrafter) {
-        return new ContainerFeyCrafter(player, (TileEntityFeyCrafter) te);
-      }
-    default:
-      return null;
+      case POUCH_ID:
+        return new ContainerPouch(player);
+      case QUIVER_ID:
+        return new ContainerQuiver(player);
+      case CRAFTER_ID:
+        TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
+        if (te instanceof TileEntityFeyCrafter) {
+          return new ContainerFeyCrafter(player, (TileEntityFeyCrafter) te);
+        }
+      default:
+        return null;
     }
   }
 
@@ -50,17 +50,17 @@ public class GuiHandler implements IGuiHandler {
   @Override
   public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
     switch (id) {
-    case POUCH_ID:
-      return new GuiPouch(new ContainerPouch(player));
-    case QUIVER_ID:
-      return new GuiQuiver(new ContainerQuiver(player));
-    case CRAFTER_ID:
-      TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
-      if (te instanceof TileEntityFeyCrafter) {
-        return new GuiFeyCrafter(new ContainerFeyCrafter(player, (TileEntityFeyCrafter) te));
-      }
-    default:
-      return null;
+      case POUCH_ID:
+        return new GuiPouch(new ContainerPouch(player));
+      case QUIVER_ID:
+        return new GuiQuiver(new ContainerQuiver(player));
+      case CRAFTER_ID:
+        TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
+        if (te instanceof TileEntityFeyCrafter) {
+          return new GuiFeyCrafter(new ContainerFeyCrafter(player, (TileEntityFeyCrafter) te));
+        }
+      default:
+        return null;
     }
   }
 }

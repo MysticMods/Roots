@@ -35,11 +35,11 @@ public class SpellRampantGrowth extends SpellBase {
     addCost(HerbRegistry.getHerbByName("spirit_herb"), 0.65f);
     addCost(HerbRegistry.getHerbByName("pereskia"), 0.45f);
     addIngredients(
-            new ItemStack(Blocks.SAPLING, 1, 5),
-            new ItemStack(Items.GOLDEN_APPLE),
-            new ItemStack(Blocks.SAPLING, 1, 4),
-            new ItemStack(ModItems.spirit_herb),
-            new ItemStack(ModItems.pereskia)
+        new ItemStack(Blocks.SAPLING, 1, 5),
+        new ItemStack(Items.GOLDEN_APPLE),
+        new ItemStack(Blocks.SAPLING, 1, 4),
+        new ItemStack(ModItems.spirit_herb),
+        new ItemStack(ModItems.pereskia)
     );
   }
 

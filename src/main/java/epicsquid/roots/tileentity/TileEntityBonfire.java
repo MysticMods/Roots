@@ -144,7 +144,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     return ModRecipes.getCraftingRecipe(stacks);
   }
 
-  private void validateEntity () {
+  private void validateEntity() {
     if (ritualEntity == null) return;
 
     if (ritualEntity.isDead) return;

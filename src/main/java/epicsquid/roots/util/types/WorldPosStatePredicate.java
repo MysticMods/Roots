@@ -8,18 +8,18 @@ import java.util.Objects;
 
 @FunctionalInterface
 public interface WorldPosStatePredicate {
-  boolean test (World t, BlockPos u, IBlockState v);
+  boolean test(World t, BlockPos u, IBlockState v);
 
   default WorldPosStatePredicate and(WorldPosStatePredicate other) {
     Objects.requireNonNull(other);
     return (World t, BlockPos u, IBlockState v) -> test(t, u, v) && other.test(t, u, v);
   }
 
-  default WorldPosStatePredicate negate () {
+  default WorldPosStatePredicate negate() {
     return (World t, BlockPos u, IBlockState v) -> !test(t, u, v);
   }
 
-  default WorldPosStatePredicate or (WorldPosStatePredicate other) {
+  default WorldPosStatePredicate or(WorldPosStatePredicate other) {
     Objects.requireNonNull(other);
     return (World t, BlockPos u, IBlockState v) -> test(t, u, v) || other.test(t, u, v);
   }

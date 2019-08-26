@@ -19,7 +19,7 @@ public class PetalApothecaryFiller {
   private static boolean flag = false;
   private static Random random;
 
-  public static boolean hasBotania () {
+  public static boolean hasBotania() {
     if (flag) return hasBotania;
 
     flag = true;
@@ -29,21 +29,17 @@ public class PetalApothecaryFiller {
   }
 
   public static void getAdjacentApothecary(World world, BlockPos pos) {
-    for (EnumFacing side : EnumFacing.Plane.HORIZONTAL)
-    {
+    for (EnumFacing side : EnumFacing.Plane.HORIZONTAL) {
       TileEntity te = world.getTileEntity(pos.offset(side));
       fillApothecary(te, world);
     }
   }
 
-  private static boolean fillApothecary(TileEntity te, World world)
-  {
-    if (te instanceof TileAltar)
-    {
+  private static boolean fillApothecary(TileEntity te, World world) {
+    if (te instanceof TileAltar) {
       TileAltar apothecary = ((TileAltar) te);
 
-      if (apothecary.isEmpty())
-      {
+      if (apothecary.isEmpty()) {
         apothecary.setWater(true);
         return true;
 
@@ -57,10 +53,8 @@ public class PetalApothecaryFiller {
   }
 
   @SubscribeEvent
-  public static void rightClickFill(PlayerInteractEvent.RightClickBlock event)
-  {
-    if (hasBotania() && event.getItemStack().getItem() == Item.getItemFromBlock(ModBlocks.unending_bowl))
-    {
+  public static void rightClickFill(PlayerInteractEvent.RightClickBlock event) {
+    if (hasBotania() && event.getItemStack().getItem() == Item.getItemFromBlock(ModBlocks.unending_bowl)) {
       TileEntity te = event.getEntityPlayer().world.getTileEntity(event.getPos());
       if (fillApothecary(te, event.getEntityPlayer().world))
         event.setCanceled(true);

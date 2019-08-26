@@ -20,9 +20,9 @@ import stanhebben.zenscript.annotations.ZenMethod;
 public class PacifistTweaker {
 
   @ZenDocMethod(
-      order=1,
+      order = 1,
       args = {
-          @ZenDocArg(arg="entity", info="the entity to add to the pacifist list")
+          @ZenDocArg(arg = "entity", info = "the entity to add to the pacifist list")
       }
   )
   @ZenMethod
@@ -31,9 +31,9 @@ public class PacifistTweaker {
   }
 
   @ZenDocMethod(
-      order=2,
+      order = 2,
       args = {
-          @ZenDocArg(arg="entity", info="the entity to remove from the pacifist list")
+          @ZenDocArg(arg = "entity", info = "the entity to remove from the pacifist list")
       }
   )
   @ZenMethod
@@ -55,7 +55,7 @@ public class PacifistTweaker {
     }
 
     @Override
-    public String describe () {
+    public String describe() {
       return String.format("Recipe to remove %s from Pacifist", entry.getName());
     }
   }
@@ -74,7 +74,7 @@ public class PacifistTweaker {
     }
 
     @Override
-    public String describe () {
+    public String describe() {
       return String.format("Recipe to add %s to Pacifism", entry.getName());
     }
   }

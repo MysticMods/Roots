@@ -10,28 +10,28 @@ import java.util.Objects;
  * into cross-dimensional conflicts.
  */
 public class BlockPosDimension {
-	public BlockPos pos;
-	public int dimension;
+  public BlockPos pos;
+  public int dimension;
 
-	public BlockPosDimension (BlockPos pos, int dimension) {
-		this.pos = pos;
-		this.dimension = dimension;
-	}
+  public BlockPosDimension(BlockPos pos, int dimension) {
+    this.pos = pos;
+    this.dimension = dimension;
+  }
 
-	@Override
-	public boolean equals (Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		BlockPosDimension that = (BlockPosDimension) o;
-		return dimension == that.dimension && Objects.equals(pos, that.pos);
-	}
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    BlockPosDimension that = (BlockPosDimension) o;
+    return dimension == that.dimension && Objects.equals(pos, that.pos);
+  }
 
-	@Override
-	public int hashCode () {
-		return Objects.hash(pos, dimension);
-	}
+  @Override
+  public int hashCode() {
+    return Objects.hash(pos, dimension);
+  }
 }

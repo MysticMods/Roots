@@ -53,7 +53,7 @@ public class ItemHandlerUtil {
     }
   }
 
-  public static boolean isEmpty (IItemHandler handler) {
+  public static boolean isEmpty(IItemHandler handler) {
     for (ItemStack stack : new Iterable(handler)) {
       if (!stack.isEmpty()) return false;
     }
@@ -61,7 +61,7 @@ public class ItemHandlerUtil {
     return true;
   }
 
-  public static List<ItemStack> getItemsInSlots (IItemHandler handler, List<Integer> slotList, boolean simulate) {
+  public static List<ItemStack> getItemsInSlots(IItemHandler handler, List<Integer> slotList, boolean simulate) {
     List<ItemStack> result = new ArrayList<>();
     for (int slot : slotList) {
       if (slot < handler.getSlots()) {

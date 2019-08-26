@@ -76,7 +76,7 @@ public class TransmutationRecipe extends RegistryItem {
     }
   }
 
-  public boolean itemOutput () {
+  public boolean itemOutput() {
     return this.endStack != null;
   }
 
@@ -101,11 +101,11 @@ public class TransmutationRecipe extends RegistryItem {
     return condition;
   }
 
-  public boolean matches (Block block) {
+  public boolean matches(Block block) {
     return matches(block.getDefaultState());
   }
 
-  public boolean matches (IBlockState start) {
+  public boolean matches(IBlockState start) {
     if (this.startState != null) {
       return StateUtil.compareStates(this.startState, start);
     } else {
@@ -113,15 +113,15 @@ public class TransmutationRecipe extends RegistryItem {
     }
   }
 
-  public boolean matches (World world, BlockPos pos, IBlockState state) {
+  public boolean matches(World world, BlockPos pos, IBlockState state) {
     return (this.startBlock != null && this.startBlock == state.getBlock() || this.startState != null && StateUtil.compareStates(this.startState, state)) && (this.condition == null || this.condition.test(world, pos, state));
   }
 
-  public boolean matches (World world, BlockPos pos) {
+  public boolean matches(World world, BlockPos pos) {
     return matches(world, pos, world.getBlockState(pos));
   }
 
-  public String getKey () {
+  public String getKey() {
     return "roots.ritual.transmutation." + getRegistryName().getPath();
   }
 }

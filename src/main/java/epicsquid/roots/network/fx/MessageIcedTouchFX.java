@@ -24,7 +24,8 @@ public class MessageIcedTouchFX implements IMessage {
   private float y;
   private float z;
 
-  public MessageIcedTouchFX() {}
+  public MessageIcedTouchFX() {
+  }
 
   public MessageIcedTouchFX(float x, float y, float z) {
     this.x = x;

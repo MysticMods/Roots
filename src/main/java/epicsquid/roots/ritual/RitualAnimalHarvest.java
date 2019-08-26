@@ -20,11 +20,11 @@ public class RitualAnimalHarvest extends RitualBase {
     super(name, duration);
 
     addCondition(new ConditionItems(
-            new ItemStack(ModItems.wildewheet),
-            new OreIngredient("blockWool"),
-            new ItemStack(Items.MELON),
-            new ItemStack(Items.CARROT),
-            new ItemStack(ModItems.wildroot)
+        new ItemStack(ModItems.wildewheet),
+        new OreIngredient("blockWool"),
+        new ItemStack(Items.MELON),
+        new ItemStack(Items.CARROT),
+        new ItemStack(ModItems.wildroot)
     ));
     addCondition(new ConditionStandingStones(3, 3));
     setIcon(ModItems.ritual_animal_harvest);

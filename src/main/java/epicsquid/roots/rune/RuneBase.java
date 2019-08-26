@@ -10,62 +10,62 @@ import net.minecraft.world.World;
 
 public abstract class RuneBase {
 
-    private Item incense;
-    private RgbColor color = new RgbColor(0, 0, 0);
-    private String runeName;
+  private Item incense;
+  private RgbColor color = new RgbColor(0, 0, 0);
+  private String runeName;
 
-    public RuneBase(){
+  public RuneBase() {
 
-    }
+  }
 
-    public void saveToEntity(NBTTagCompound tag){
-        tag.setString("rune", getRuneName());
-    }
+  public void saveToEntity(NBTTagCompound tag) {
+    tag.setString("rune", getRuneName());
+  }
 
-    public void readFromEntity(NBTTagCompound tag){
+  public void readFromEntity(NBTTagCompound tag) {
 
-    }
+  }
 
-    public abstract void activate(TileEntityWildrootRune entity, EntityPlayer player);
+  public abstract void activate(TileEntityWildrootRune entity, EntityPlayer player);
 
-    public boolean isCharged(TileEntityWildrootRune entity){
-        if(incense != null){
-            if(entity.getIncenseBurner() == null){
-                return false;
-            }
-            if(entity.getIncenseBurner().isLit() && entity.getIncenseBurner().inventory.getStackInSlot(0).getItem() == incense){
-                return true;
-            }
-        }
-
+  public boolean isCharged(TileEntityWildrootRune entity) {
+    if (incense != null) {
+      if (entity.getIncenseBurner() == null) {
         return false;
+      }
+      if (entity.getIncenseBurner().isLit() && entity.getIncenseBurner().inventory.getStackInSlot(0).getItem() == incense) {
+        return true;
+      }
     }
 
-    public void update(World world, BlockPos pos){
+    return false;
+  }
 
-    }
+  public void update(World world, BlockPos pos) {
 
-    public Item getIncense() {
-        return incense;
-    }
+  }
 
-    public void setIncense(Item incense) {
-        this.incense = incense;
-    }
+  public Item getIncense() {
+    return incense;
+  }
 
-    public RgbColor getColor() {
-        return color;
-    }
+  public void setIncense(Item incense) {
+    this.incense = incense;
+  }
 
-    public void setColor(RgbColor color) {
-        this.color = color;
-    }
+  public RgbColor getColor() {
+    return color;
+  }
 
-    public void setRuneName(String runeName) {
-        this.runeName = runeName;
-    }
+  public void setColor(RgbColor color) {
+    this.color = color;
+  }
 
-    public String getRuneName() {
-        return runeName;
-    }
+  public void setRuneName(String runeName) {
+    this.runeName = runeName;
+  }
+
+  public String getRuneName() {
+    return runeName;
+  }
 }

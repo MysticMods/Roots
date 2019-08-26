@@ -25,11 +25,11 @@ import javax.annotation.Nonnull;
 public class ModBlocks {
 
   // All block
-  public static Block mortar, bonfire,imbuer, structure_marker, offertory_plate, unending_bowl;
+  public static Block mortar, bonfire, imbuer, structure_marker, offertory_plate, unending_bowl;
   public static Block incense_burner, wildwood_rune;
   public static Block grove_stone, fey_crafter;
 
-  public static BlockCropBase moonglow, pereskia, wildroot, spirit_herb,wildewheet, cloud_berry, infernal_bulb, dewgonia, stalicripe;
+  public static BlockCropBase moonglow, pereskia, wildroot, spirit_herb, wildewheet, cloud_berry, infernal_bulb, dewgonia, stalicripe;
 
   // Runestones
   public static Block runestone, runestone_brick, runestone_brick_alt, chiseled_runestone, wildwood_log, wildwood_planks, wildwood_leaves, wildwood_sapling, baffle_cap_huge_stem, baffle_cap_huge_top,
@@ -147,7 +147,7 @@ public class ModBlocks {
     // Wild Crafter
     event.addBlock(fey_crafter = new BlockFeyCrafter(Material.WOOD, SoundType.WOOD, 2.5f, "fey_crafter", TileEntityFeyCrafter.class)).setCreativeTab(Roots.tab);
 
-    event.addBlock(fey_light = new BlockFeyLight(Material.SNOW, SoundType.SNOW,0.0f,"fey_light")).setCreativeTab(Roots.tab);
+    event.addBlock(fey_light = new BlockFeyLight(Material.SNOW, SoundType.SNOW, 0.0f, "fey_light")).setCreativeTab(Roots.tab);
   }
 
   private static Variants variants(RegisterContentEvent event, Block base, String name, SoundType sound, Material material) {
@@ -180,7 +180,7 @@ public class ModBlocks {
     public Block button;
     public Block pressure_plate;
 
-    public Variants (Block[] slabs, Block stairs, Block wall, Block button, Block pressure_plate) {
+    public Variants(Block[] slabs, Block stairs, Block wall, Block button, Block pressure_plate) {
       this.slab = slabs[0];
       this.double_slab = slabs[1];
       this.stairs = stairs;

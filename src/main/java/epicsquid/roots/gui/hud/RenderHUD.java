@@ -14,14 +14,14 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod.EventBusSubscriber(value= Side.CLIENT, modid= Roots.MODID)
+@Mod.EventBusSubscriber(value = Side.CLIENT, modid = Roots.MODID)
 public class RenderHUD {
-  private RenderHUD () {
+  private RenderHUD() {
   }
 
   @SideOnly(Side.CLIENT)
-  @SubscribeEvent(priority= EventPriority.HIGHEST)
-  public static void onDrawScreenPost (RenderGameOverlayEvent.Post event) {
+  @SubscribeEvent(priority = EventPriority.HIGHEST)
+  public static void onDrawScreenPost(RenderGameOverlayEvent.Post event) {
     if (event.getType() != RenderGameOverlayEvent.ElementType.ALL) return;
 
     Minecraft mc = Minecraft.getMinecraft();

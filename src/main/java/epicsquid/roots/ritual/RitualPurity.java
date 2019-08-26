@@ -16,11 +16,11 @@ public class RitualPurity extends RitualBase {
   public RitualPurity(String name, int duration) {
     super(name, duration);
     addCondition(new ConditionItems(
-            new ItemStack(ModItems.terra_moss),
-            new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
-            new ItemStack(ModBlocks.baffle_cap_mushroom),
-            new ItemStack(Items.MILK_BUCKET), 
-            new ItemStack(Items.GLASS_BOTTLE)
+        new ItemStack(ModItems.terra_moss),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
+        new ItemStack(ModBlocks.baffle_cap_mushroom),
+        new ItemStack(Items.MILK_BUCKET),
+        new ItemStack(Items.GLASS_BOTTLE)
     ));
     setIcon(ModItems.ritual_purity);
     setColor(TextFormatting.LIGHT_PURPLE);

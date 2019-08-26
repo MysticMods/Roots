@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 @Config.LangKey("config.roots.category.general")
-@Config(modid= Roots.MODID, name = "roots/general")
+@Config(modid = Roots.MODID, name = "roots/general")
 @SuppressWarnings("unused")
 public class GeneralConfig {
   @Config.Comment(("Inject some items from Roots into dungeon & other loot chests"))
@@ -41,7 +41,7 @@ public class GeneralConfig {
   @Config.Ignore
   private static Set<Block> growthBlacklist = null;
 
-  public static Set<Block> getGrowthBlacklist () {
+  public static Set<Block> getGrowthBlacklist() {
     if (growthBlacklist == null) {
       growthParsed = true;
       growthBlacklist = new HashSet<>();

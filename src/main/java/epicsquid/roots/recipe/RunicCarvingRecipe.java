@@ -17,9 +17,10 @@ public class RunicCarvingRecipe {
 
   /**
    * Defines a runic carving recipe
+   *
    * @param carvingBlock The block the recipe starts with
-   * @param runeBlock The block the recipe creates
-   * @param herb The herb needed
+   * @param runeBlock    The block the recipe creates
+   * @param herb         The herb needed
    */
   public RunicCarvingRecipe(@Nonnull IBlockState carvingBlock, @Nonnull IBlockState runeBlock, @Nonnull Herb herb, @Nonnull String name) {
     this.carvingBlock = carvingBlock;

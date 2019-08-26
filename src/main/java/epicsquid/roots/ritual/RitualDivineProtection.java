@@ -15,11 +15,11 @@ public class RitualDivineProtection extends RitualBase {
   public RitualDivineProtection(String name, int duration) {
     super(name, duration);
     addCondition(new ConditionItems(
-            new ItemStack(ModItems.pereskia),
-            new ItemStack(ModItems.cloud_berry),
-            new ItemStack(ModItems.bark_birch),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(Items.GLOWSTONE_DUST)
+        new ItemStack(ModItems.pereskia),
+        new ItemStack(ModItems.cloud_berry),
+        new ItemStack(ModItems.bark_birch),
+        new ItemStack(ModItems.bark_oak),
+        new ItemStack(Items.GLOWSTONE_DUST)
     ));
     addCondition(new ConditionWorldTime(0, 13000));
     setIcon(ModItems.ritual_divine_protection);

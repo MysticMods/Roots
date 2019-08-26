@@ -34,7 +34,7 @@ public class BarkRecipe {
     this.blockStack = null;
   }
 
-  public ItemStack getBlockStack () {
+  public ItemStack getBlockStack() {
     if (this.blockStack == null) {
       if (this.type == BlockPlanks.EnumType.ACACIA || this.type == BlockPlanks.EnumType.DARK_OAK) {
         return new ItemStack(Blocks.LOG2, 1, this.type.getMetadata() - 4);
@@ -46,7 +46,7 @@ public class BarkRecipe {
     }
   }
 
-  public ItemStack getBarkStack (int count) {
+  public ItemStack getBarkStack(int count) {
     ItemStack copy = this.item.copy();
     copy.setCount(count);
     return copy;

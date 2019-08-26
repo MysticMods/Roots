@@ -9,8 +9,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class ConfigHandler {
 
   @SubscribeEvent
-  public static void syncConfig(ConfigChangedEvent.OnConfigChangedEvent event)
-  {
+  public static void syncConfig(ConfigChangedEvent.OnConfigChangedEvent event) {
     if (event.getModID().equals(Roots.MODID))
       ConfigManager.sync(Roots.MODID, Config.Type.INSTANCE);
   }

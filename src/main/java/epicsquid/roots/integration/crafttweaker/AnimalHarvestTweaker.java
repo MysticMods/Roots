@@ -23,7 +23,7 @@ public class AnimalHarvestTweaker {
   @ZenDocMethod(
       order = 1,
       args = {
-          @ZenDocArg(arg="entity", info="the entity to generate drops for")
+          @ZenDocArg(arg = "entity", info = "the entity to generate drops for")
       }
   )
   @ZenMethod
@@ -34,7 +34,7 @@ public class AnimalHarvestTweaker {
   @ZenDocMethod(
       order = 2,
       args = {
-          @ZenDocArg(arg="entity", info="the entity to stop generating drops for")
+          @ZenDocArg(arg = "entity", info = "the entity to stop generating drops for")
       }
   )
   @ZenMethod
@@ -57,7 +57,7 @@ public class AnimalHarvestTweaker {
     }
 
     @Override
-    public String describe () {
+    public String describe() {
       return String.format("Recipe to remove %s from AnimalHarvest", entry.getName());
     }
   }
@@ -76,7 +76,7 @@ public class AnimalHarvestTweaker {
     }
 
     @Override
-    public String describe () {
+    public String describe() {
       return String.format("Recipe to add %s to AnimalHarvest", entry.getName());
     }
   }

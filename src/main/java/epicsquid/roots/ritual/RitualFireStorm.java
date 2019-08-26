@@ -16,11 +16,11 @@ public class RitualFireStorm extends RitualBase {
   public RitualFireStorm(String name, int duration) {
     super(name, duration);
     addCondition(new ConditionItems(
-            new ItemStack(ModItems.infernal_bulb),
-            new ItemStack(ModItems.bark_acacia), 
-            new ItemStack(Items.COAL),
-            new ItemStack(ModItems.bark_acacia), 
-            new ItemStack(Items.BLAZE_POWDER)
+        new ItemStack(ModItems.infernal_bulb),
+        new ItemStack(ModItems.bark_acacia),
+        new ItemStack(Items.COAL),
+        new ItemStack(ModItems.bark_acacia),
+        new ItemStack(Items.BLAZE_POWDER)
     ));
     addCondition(new ConditionStandingStones(3, 3));
     setIcon(ModItems.ritual_fire_storm);

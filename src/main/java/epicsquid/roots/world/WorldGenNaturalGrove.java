@@ -33,7 +33,7 @@ public class WorldGenNaturalGrove implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-    if(random.nextInt(70) != 0){
+    if (random.nextInt(70) != 0) {
       return;
     }
     if (!isNumberAwayOf(5, chunkX, (int) this.lastChunkGenerated.x) || !isNumberAwayOf(5, chunkZ, (int) this.lastChunkGenerated.y)) {
@@ -53,26 +53,26 @@ public class WorldGenNaturalGrove implements IWorldGenerator {
       //Check if there is enough ground for the structure to spawn on;
       BlockPos checkForGroundPos = blockpos.add(0, -1, 0);
       int airBlocks = 0;
-      for(int x = -2; x < 3; x++){
-        for(int z = -2; z < 3; z++){
+      for (int x = -2; x < 3; x++) {
+        for (int z = -2; z < 3; z++) {
           Block checkBlock = world.getBlockState(checkForGroundPos.add(x, 0, z)).getBlock();
-          if(checkBlock != Blocks.DIRT && checkBlock != Blocks.GRASS && checkBlock != Blocks.TALLGRASS && checkBlock != Blocks.STONE && checkBlock != Blocks.SAND){
+          if (checkBlock != Blocks.DIRT && checkBlock != Blocks.GRASS && checkBlock != Blocks.TALLGRASS && checkBlock != Blocks.STONE && checkBlock != Blocks.SAND) {
             airBlocks++;
           }
-          if(airBlocks > 3){
+          if (airBlocks > 3) {
             return;
           }
         }
       }
 
       //Check for biomes
-      if(biome == Biomes.FOREST || biome == Biomes.BIRCH_FOREST || biome == Biomes.PLAINS  ){
+      if (biome == Biomes.FOREST || biome == Biomes.BIRCH_FOREST || biome == Biomes.PLAINS) {
         this.lastChunkGenerated = new Vector2d(chunkX, chunkZ);
 
         WorldServer worldserver = (WorldServer) world;
         MinecraftServer minecraftserver = world.getMinecraftServer();
         TemplateManager templatemanager = worldserver.getStructureTemplateManager();
-        ResourceLocation loc = new ResourceLocation(Roots.MODID,"natural_grove");
+        ResourceLocation loc = new ResourceLocation(Roots.MODID, "natural_grove");
         Template template = templatemanager.getTemplate(minecraftserver, loc);
         PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE)
             .setRotation(Rotation.NONE).setIgnoreEntities(false).setChunk(null)
@@ -84,7 +84,7 @@ public class WorldGenNaturalGrove implements IWorldGenerator {
 
         //Spawn entity fey
         EntityNaturalGrove naturalGrove = new EntityNaturalGrove(world);
-        naturalGrove.setPosition(blockpos.getX() +0.5f, blockpos.getY() + 2, blockpos.getZ() +0.5f);
+        naturalGrove.setPosition(blockpos.getX() + 0.5f, blockpos.getY() + 2, blockpos.getZ() + 0.5f);
         world.spawnEntity(naturalGrove);
       }
     }

@@ -29,10 +29,10 @@ import java.util.stream.Stream;
 public class RitualTweaker {
 
   @ZenDocMethod(
-      order=1,
+      order = 1,
       args = {
-          @ZenDocArg(arg="name", info="the name of the ritual whose ingredients you wish to modify"),
-          @ZenDocArg(arg="inputs", info="a list of five ingredients (no more, no less)")
+          @ZenDocArg(arg = "name", info = "the name of the ritual whose ingredients you wish to modify"),
+          @ZenDocArg(arg = "inputs", info = "a list of five ingredients (no more, no less)")
       }
   )
   @ZenMethod

@@ -16,7 +16,7 @@ public class PyreCraftingRecipe {
   private int xp;
   private int burnTime;
 
-  public PyreCraftingRecipe(ItemStack result, int xp){
+  public PyreCraftingRecipe(ItemStack result, int xp) {
     this.result = result;
     this.xp = xp;
     this.burnTime = 200;
@@ -77,14 +77,14 @@ public class PyreCraftingRecipe {
     return xp;
   }
 
-  public List<ItemStack> getRecipe(){
+  public List<ItemStack> getRecipe() {
     return ingredients.stream().map(ingredient -> ingredient.getMatchingStacks()[0]).collect(Collectors.toList());
   }
 
-  public List<Ingredient> getIngredients(){
+  public List<Ingredient> getIngredients() {
     return ingredients;
   }
 
-  public void postCraft (ItemStack output, IItemHandlerModifiable handler) {
+  public void postCraft(ItemStack output, IItemHandlerModifiable handler) {
   }
 }

@@ -10,12 +10,13 @@ public interface ILivingRepair {
   default void update(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
     update(stack, worldIn, entityIn, itemSlot, isSelected, 40);
   }
+
   default void update(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected, int bound) {
     if (entityIn instanceof EntityPlayer) {
       if (stack.equals(((EntityPlayer) entityIn).getActiveItemStack())) return;
     }
-    if(Util.rand.nextInt(Math.max(1, bound)) == 0){
-      stack.setItemDamage(stack.getItemDamage()-1);
+    if (Util.rand.nextInt(Math.max(1, bound)) == 0) {
+      stack.setItemDamage(stack.getItemDamage() - 1);
     }
   }
 }
