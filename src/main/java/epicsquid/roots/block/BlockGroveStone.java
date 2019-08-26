@@ -52,6 +52,7 @@ public class BlockGroveStone extends BlockTEBase {
 
     this.setDefaultState(this.blockState.getBaseState().withProperty(VALID, false).withProperty(HALF, Half.BOTTOM).withProperty(FACING, EnumFacing.NORTH));
     this.setTickRandomly(true);
+    useNeighborBrightness = true;
   }
 
   @Nonnull
