@@ -42,40 +42,23 @@ public class RitualRegistry {
   }
 
   public static void init() {
-    if (!RitualConfig.disableRitualCategory.disableHealingAura)
-      addRitual(ritual_life = new RitualHealingAura("ritual_healing_aura", 800));
-    if (!RitualConfig.disableRitualCategory.disableHeavyStorms)
-      addRitual(ritual_storm = new RitualHeavyStorms("ritual_heavy_storms", 2400));
-    if (!RitualConfig.disableRitualCategory.disableDivineProtection)
-      addRitual(ritual_light = new RitualDivineProtection("ritual_divine_protection", 1200));
-    if (!RitualConfig.disableRitualCategory.disableFireStorm)
-      addRitual(ritual_fire_storm = new RitualFireStorm("ritual_fire_storm", 1200));
-    if (!RitualConfig.disableRitualCategory.disableNaturalGrowth)
-      addRitual(ritual_regrowth = new RitualSpreadingForest("ritual_spreading_forest", 2400));
-    if (!RitualConfig.disableRitualCategory.disableWindwall)
-      addRitual(ritual_windwall = new RitualWindwall("ritual_windwall", 3000));
-    if (!RitualConfig.disableRitualCategory.disableWardingProtection)
-      addRitual(ritual_warden = new RitualWardingProtection("ritual_warding_protection", 1200));
-    if (!RitualConfig.disableRitualCategory.disableNaturalAura)
-      addRitual(ritual_natural_aura = new RitualGermination("ritual_germination", 6400));
-    if (!RitualConfig.disableRitualCategory.disablePurity)
-      addRitual(ritual_purity = new RitualPurity("ritual_purity", 1200));
-    if (!RitualConfig.disableRitualCategory.disableFrostLands)
-      addRitual(ritual_frost = new RitualFrostLands("ritual_frost_lands", 6400));
-    if (!RitualConfig.disableRitualCategory.disableAnimalHarvest)
-      addRitual(ritual_animal_harvest = new RitualAnimalHarvest("ritual_animal_harvest", 3200));
-    if (!RitualConfig.disableRitualCategory.disableSummonCreatures)
-      addRitual(ritual_summoning = new RitualSummonCreatures("ritual_summon_creatures", 0));
-    if (!RitualConfig.disableRitualCategory.disableWildGrowth)
-      addRitual(ritual_wild_growth = new RitualWildGrowth("ritual_wild_growth", 300));
-    if (!RitualConfig.disableRitualCategory.disableOvergrowth)
-      addRitual(ritual_overgrowth = new RitualOvergrowth("ritual_overgrowth", 4500));
-    if (!RitualConfig.disableRitualCategory.disableFlowerGrowth)
-      addRitual(ritual_flower_growth = new RitualFlowerGrowth("ritual_flower_growth", 3200));
-    if (!RitualConfig.disableRitualCategory.disableTransmutation)
-      addRitual(ritual_transmutation = new RitualTransmutation("ritual_transmutation", 2400));
-    if (!RitualConfig.disableRitualCategory.disableGathering)
-      addRitual(ritual_gathering = new RitualGathering("ritual_gathering", 6000));
+    addRitual(ritual_life = new RitualHealingAura("ritual_healing_aura", 800, RitualConfig.disableRitualCategory.disableHealingAura));
+    addRitual(ritual_storm = new RitualHeavyStorms("ritual_heavy_storms", 2400, RitualConfig.disableRitualCategory.disableHeavyStorms));
+    addRitual(ritual_light = new RitualDivineProtection("ritual_divine_protection", 1200, RitualConfig.disableRitualCategory.disableDivineProtection));
+    addRitual(ritual_fire_storm = new RitualFireStorm("ritual_fire_storm", 1200, RitualConfig.disableRitualCategory.disableFireStorm));
+    addRitual(ritual_regrowth = new RitualSpreadingForest("ritual_spreading_forest", 2400, RitualConfig.disableRitualCategory.disableNaturalGrowth));
+    addRitual(ritual_windwall = new RitualWindwall("ritual_windwall", 3000, RitualConfig.disableRitualCategory.disableWindwall));
+    addRitual(ritual_warden = new RitualWardingProtection("ritual_warding_protection", 1200, RitualConfig.disableRitualCategory.disableWardingProtection));
+    addRitual(ritual_natural_aura = new RitualGermination("ritual_germination", 6400, RitualConfig.disableRitualCategory.disableNaturalAura));
+    addRitual(ritual_purity = new RitualPurity("ritual_purity", 1200, RitualConfig.disableRitualCategory.disablePurity));
+    addRitual(ritual_frost = new RitualFrostLands("ritual_frost_lands", 6400, RitualConfig.disableRitualCategory.disableFrostLands));
+    addRitual(ritual_animal_harvest = new RitualAnimalHarvest("ritual_animal_harvest", 3200, RitualConfig.disableRitualCategory.disableAnimalHarvest));
+    addRitual(ritual_summoning = new RitualSummonCreatures("ritual_summon_creatures", 0, RitualConfig.disableRitualCategory.disableSummonCreatures));
+    addRitual(ritual_wild_growth = new RitualWildGrowth("ritual_wild_growth", 300, RitualConfig.disableRitualCategory.disableWildGrowth));
+    addRitual(ritual_overgrowth = new RitualOvergrowth("ritual_overgrowth", 4500, RitualConfig.disableRitualCategory.disableOvergrowth));
+    addRitual(ritual_flower_growth = new RitualFlowerGrowth("ritual_flower_growth", 3200, RitualConfig.disableRitualCategory.disableFlowerGrowth));
+    addRitual(ritual_transmutation = new RitualTransmutation("ritual_transmutation", 2400, RitualConfig.disableRitualCategory.disableTransmutation));
+    addRitual(ritual_gathering = new RitualGathering("ritual_gathering", 6000, RitualConfig.disableRitualCategory.disableGathering));
   }
 
   public static void addRitual(RitualBase ritual) {

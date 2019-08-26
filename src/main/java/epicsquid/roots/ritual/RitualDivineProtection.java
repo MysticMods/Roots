@@ -12,8 +12,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class RitualDivineProtection extends RitualBase {
-  public RitualDivineProtection(String name, int duration) {
-    super(name, duration);
+  public RitualDivineProtection(String name, int duration, boolean disabled) {
+    super(name, duration, disabled);
     addCondition(new ConditionItems(
         new ItemStack(ModItems.pereskia),
         new ItemStack(ModItems.cloud_berry),

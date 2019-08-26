@@ -37,7 +37,9 @@ public abstract class RitualBase {
   private TextFormatting color;
   private boolean bold;
 
-  public RitualBase(String name, int duration) {
+  protected boolean disabled;
+
+  public RitualBase(String name, int duration, boolean disabled) {
     this.name = name;
     this.duration = duration;
   }
@@ -66,6 +68,10 @@ public abstract class RitualBase {
     this.icon = icon;
   }
 
+  public boolean isDisabled() {
+    return disabled;
+  }
+
   public List<Condition> getConditions() {
     return this.conditions;
   }
@@ -75,6 +81,7 @@ public abstract class RitualBase {
   }
 
   public boolean isRitualRecipe(TileEntityBonfire tileEntityBonfire, @Nullable EntityPlayer player) {
+    if (isDisabled()) return false;
     for (Condition condition : this.conditions) {
       if (condition instanceof ConditionItems) {
         ConditionItems conditionItems = (ConditionItems) condition;

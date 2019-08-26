@@ -13,8 +13,8 @@ import net.minecraft.world.World;
 
 public class RitualFrostLands extends RitualBase {
 
-  public RitualFrostLands(String name, int duration) {
-    super(name, duration);
+  public RitualFrostLands(String name, int duration, boolean disabled) {
+    super(name, duration, disabled);
     addCondition(new ConditionItems(
         new ItemStack(Items.SNOWBALL),
         new ItemStack(ModItems.dewgonia),

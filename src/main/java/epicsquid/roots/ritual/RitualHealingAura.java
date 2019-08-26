@@ -15,8 +15,8 @@ import net.minecraft.world.World;
 
 public class RitualHealingAura extends RitualBase {
 
-  public RitualHealingAura(String name, int duration) {
-    super(name, duration);
+  public RitualHealingAura(String name, int duration, boolean disabled) {
+    super(name, duration, disabled);
     addCondition(new ConditionItems(
         new ItemStack(ModItems.terra_moss),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),

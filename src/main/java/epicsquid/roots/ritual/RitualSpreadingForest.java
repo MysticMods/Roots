@@ -11,8 +11,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class RitualSpreadingForest extends RitualBase {
-  public RitualSpreadingForest(String name, int duration) {
-    super(name, duration);
+  public RitualSpreadingForest(String name, int duration, boolean disabled) {
+    super(name, duration, disabled);
     addCondition(new ConditionItems(
         new ItemStack(ModItems.terra_moss),
         new ItemStack(ModItems.spirit_herb),

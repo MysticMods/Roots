@@ -13,8 +13,8 @@ import net.minecraft.world.World;
 
 public class RitualOvergrowth extends RitualBase {
 
-  public RitualOvergrowth(String name, int duration) {
-    super(name, duration);
+  public RitualOvergrowth(String name, int duration, boolean disabled) {
+    super(name, duration, disabled);
     addCondition(
         new ConditionItems(
             new ItemStack(Items.REEDS),

@@ -13,8 +13,8 @@ import net.minecraft.world.World;
 
 public class RitualWardingProtection extends RitualBase {
 
-  public RitualWardingProtection(String name, int duration) {
-    super(name, duration);
+  public RitualWardingProtection(String name, int duration, boolean disabled) {
+    super(name, duration, disabled);
     addCondition(new ConditionItems(
         new ItemStack(Items.SPECKLED_MELON),
         new ItemStack(ModItems.stalicripe),
