@@ -28,6 +28,7 @@ public abstract class SpellBase {
   private float red2, green2, blue2;
   private String name;
   protected int cooldown = 20;
+  protected boolean disabled = false;
 
   private TextFormatting textColor;
   protected EnumCastType castType = EnumCastType.INSTANTANEOUS;
@@ -48,6 +49,14 @@ public abstract class SpellBase {
     this.green2 = g2;
     this.blue2 = b2;
     this.textColor = textColor;
+  }
+
+  public boolean isDisabled() {
+    return disabled;
+  }
+
+  public void setDisabled(boolean disabled) {
+    this.disabled = disabled;
   }
 
   public boolean hasModules() {
