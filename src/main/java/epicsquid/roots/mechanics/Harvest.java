@@ -26,13 +26,13 @@ import javax.annotation.Nullable;
 import java.lang.reflect.Method;
 import java.util.*;
 
+@SuppressWarnings("unchecked")
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 public class Harvest {
   private static Method getSeed;
   private static Map<IProperty<?>, Integer> stateMax = new Object2IntOpenHashMap<>();
   private static Deque<HarvestEntry> queue = new ArrayDeque<>();
   private static HashMap<Block, ItemStack> seedCache = new HashMap<>();
-  private static HashMap<Block, IProperty<Integer>> propertyMap = new HashMap<>();
 
   public static int getMaxState(IProperty<?> prop) {
     return stateMax.getOrDefault(prop, -1);
@@ -67,10 +67,6 @@ public class Harvest {
   public static void prepare() {
     seedCache.clear();
     seedCache.put(Blocks.NETHER_WART, new ItemStack(Items.NETHER_WART));
-    propertyMap.clear();
-    propertyMap.put(Blocks.BEETROOTS, BlockBeetroot.BEETROOT_AGE);
-    propertyMap.put(Blocks.COCOA, BlockCocoa.AGE);
-    propertyMap.put(Blocks.NETHER_WART, BlockNetherWart.AGE);
   }
 
   public static void add(ItemStack seed, int dimension, BlockPos position, IBlockState block) {
