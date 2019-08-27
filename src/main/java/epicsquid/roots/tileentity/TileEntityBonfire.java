@@ -450,7 +450,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
             stack.setCount(1);
             stacks.add(stack);
           }
-          if (ListUtil.stackListsMatch(stacks, this.lastRitualUsed.getRecipe())) {
+          if (ListUtil.matchesIngredients(stacks, this.lastRitualUsed.getIngredients())) {
             lastRitualUsed.doEffect(world, getPos());
             burning = true;
             this.burnTime = this.lastRitualUsed.getDuration();
