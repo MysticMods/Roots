@@ -30,6 +30,9 @@ public class BlockFeyLight extends BlockBase {
     super(mat, type, hardness, name);
     this.setLightLevel(1.0f);
     this.setLightOpacity(0);
+
+    // This prevents this from being registered as an itemblock
+    this.setItemBlock(null);
   }
 
   public BlockFaceShape getBlockFaceShape(final IBlockAccess worldIn, final IBlockState state, final BlockPos pos, final EnumFacing face) {

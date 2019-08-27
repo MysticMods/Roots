@@ -25,6 +25,10 @@ public class MappingsEvent {
             break;
           case "grove_crafter":
             mapping.remap(epicsquid.roots.init.ModBlocks.fey_crafter);
+            break;
+          case "fey_light":
+            mapping.ignore();
+            break;
         }
       }
     }
@@ -41,6 +45,9 @@ public class MappingsEvent {
             break;
           case "grove_crafter":
             mapping.remap(((BlockBase) epicsquid.roots.init.ModBlocks.fey_crafter).getItemBlock());
+            break;
+          case "fey_light":
+            mapping.ignore();
             break;
         }
       }
