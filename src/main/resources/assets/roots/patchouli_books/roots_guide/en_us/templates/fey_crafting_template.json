@@ -1,6 +1,6 @@
 
 {
-  "processor": "epicsquid.roots.api.FeyCraftingRecipeProcessor",
+  "processor": "epicsquid.roots.integration.patchouli.FeyCraftingRecipeProcessor",
   "components": [
     {
       "type": "item",

@@ -1,6 +1,6 @@
 
 {
-  "processor": "epicsquid.roots.api.RitualCraftingRecipeProcessor",
+  "processor": "epicsquid.roots.integration.patchouli.RitualCraftingRecipeProcessor",
   "components": [
     {
       "type": "item",

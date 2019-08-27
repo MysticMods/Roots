@@ -1,4 +1,4 @@
-package epicsquid.roots.api;
+package epicsquid.roots.integration.patchouli;
 
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.MortarRecipe;

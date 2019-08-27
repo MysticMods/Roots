@@ -3,6 +3,7 @@
   "icon": "roots:ritual_wild_growth",
   "category": "rituals",
   "advancement": "roots:spirit_herb",
+  "flag": "roots:ritual_wild_growth",
   "pages": [
     {
       "type": "text",

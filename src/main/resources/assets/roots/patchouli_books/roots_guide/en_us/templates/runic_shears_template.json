@@ -1,6 +1,6 @@
 
 {
-  "processor": "epicsquid.roots.api.RunicShearsRecipeProcessor",
+  "processor": "epicsquid.roots.integration.patchouli.RunicShearsRecipeProcessor",
   "components": [
     {
       "type": "item",

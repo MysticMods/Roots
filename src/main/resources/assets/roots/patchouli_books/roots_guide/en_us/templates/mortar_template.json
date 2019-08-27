@@ -1,6 +1,6 @@
 
 {
-  "processor": "epicsquid.roots.api.MortarRecipeProcessor",
+  "processor": "epicsquid.roots.integration.patchouli.MortarRecipeProcessor",
   "components": [
     {
       "type": "item",

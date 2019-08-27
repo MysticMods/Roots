@@ -3,6 +3,7 @@
   "icon": "roots:ritual_summon_creatures",
   "category": "rituals",
   "advancement": "roots:wildewheet",
+  "flag": "roots:ritual_summon_creatures",
   "pages": [
     {
       "type": "text",

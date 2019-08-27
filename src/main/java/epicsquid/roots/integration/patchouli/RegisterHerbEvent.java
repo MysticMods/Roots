@@ -1,8 +1,9 @@
-package epicsquid.roots.api;
+package epicsquid.roots.integration.patchouli;
 
 import javax.annotation.Nonnull;
 
 import epicsquid.roots.Roots;
+import epicsquid.roots.api.Herb;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.eventhandler.GenericEvent;

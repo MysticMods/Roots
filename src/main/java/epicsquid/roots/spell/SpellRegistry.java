@@ -10,7 +10,7 @@ public class SpellRegistry {
 
   public static SpellBase getSpell(String s) {
     SpellBase spell = spellRegistry.get(s);
-    if (spell == null || spell.isDisabled()) {
+    if (spell == null) {
       return null;
     }
 
@@ -65,5 +65,6 @@ public class SpellRegistry {
 
     // Cannot disable Grove-related spells
     spellRegistry.put(SpellGroveSupplication.spellName, SpellGroveSupplication.instance);
+    SpellGroveSupplication.instance.setDisabled(false);
   }
 }

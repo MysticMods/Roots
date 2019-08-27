@@ -1,4 +1,4 @@
-package epicsquid.roots.api;
+package epicsquid.roots.integration.patchouli;
 
 import java.util.ArrayList;
 import java.util.List;

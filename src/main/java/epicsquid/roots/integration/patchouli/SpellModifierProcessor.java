@@ -1,4 +1,4 @@
-package epicsquid.roots.api;
+package epicsquid.roots.integration.patchouli;
 
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;

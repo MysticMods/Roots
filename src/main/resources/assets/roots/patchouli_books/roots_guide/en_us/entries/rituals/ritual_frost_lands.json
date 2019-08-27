@@ -3,7 +3,7 @@
   "icon": "roots:ritual_frost_lands",
   "category": "rituals",
   "advancement": "roots:dewgonia",
-  
+  "flag": "roots:ritual_frost_lands",
   "pages": [
     {
       "type": "text",
