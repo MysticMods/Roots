@@ -48,22 +48,17 @@ public class ItemQuiver extends ItemArrowBase {
 
   @Override
   public EntityArrow createArrow(World worldIn, ItemStack stack, EntityLivingBase shooter) {
-    ItemStack livingArrow = findLivingArrow(stack);
-    if (!livingArrow.isEmpty()) {
-      return ((ItemLivingArrow) livingArrow.getItem()).createArrow(worldIn, livingArrow, shooter);
+    ItemStack arrow = findArrow(stack);
+    if (!arrow.isEmpty()) {
+      return ((ItemArrow) arrow.getItem()).createArrow(worldIn, arrow, shooter);
     }
 
-    ItemStack normalArrow = findOtherArrow(stack);
-    if (!normalArrow.isEmpty()) {
-      return ((ItemArrow) normalArrow.getItem()).createArrow(worldIn, normalArrow, shooter);
-    }
-
-    EntityArrow arrow = new EntityTippedArrow(worldIn, shooter);
-    arrow.setDamage(1.5D);
-    arrow.getEntityData().setBoolean("generated", true);
+    EntityArrow entityArrow = new EntityTippedArrow(worldIn, shooter);
+    entityArrow.setDamage(1.5D);
+    entityArrow.getEntityData().setBoolean("generated", true);
 
     stack.damageItem(itemRand.nextInt(2), shooter);
-    return arrow;
+    return entityArrow;
   }
 
   @Override
@@ -71,30 +66,16 @@ public class ItemQuiver extends ItemArrowBase {
     return true;
   }
 
-  public static ItemStack findLivingArrow(ItemStack quiver) {
+  public static ItemStack findArrow(ItemStack quiver) {
     QuiverHandler handler = QuiverHandler.getHandler(quiver);
     ItemStack result = ItemStack.EMPTY;
     for (int i = 0; i < handler.getInventory().getSlots(); i++) {
       ItemStack stack = handler.getInventory().getStackInSlot(i);
       if (stack.isEmpty()) continue;
-      if (stack.getItem() != ModItems.living_arrow) continue;
       result = handler.getInventory().extractItem(i, 1, false);
       break;
     }
 
-    return result;
-  }
-
-  public static ItemStack findOtherArrow(ItemStack quiver) {
-    QuiverHandler handler = QuiverHandler.getHandler(quiver);
-    ItemStack result = ItemStack.EMPTY;
-    for (int i = 0; i < handler.getInventory().getSlots(); i++) {
-      ItemStack stack = handler.getInventory().getStackInSlot(i);
-      if (stack.isEmpty() || !(stack.getItem() instanceof ItemArrow) || stack.getItem() == ModItems.living_arrow)
-        continue;
-      result = handler.getInventory().extractItem(i, 1, false);
-      break;
-    }
     return result;
   }
 
