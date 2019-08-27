@@ -120,11 +120,7 @@ public class PouchHandler implements INBTSerializable<NBTTagCompound> {
     @Override
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
       ItemStack result = super.insertItem(slot, stack, simulate);
-
-      if (!simulate) {
-        PouchHandler.this.saveToStack();
-      }
-
+      PouchHandler.this.saveToStack();
       return result;
     }
 
@@ -133,10 +129,7 @@ public class PouchHandler implements INBTSerializable<NBTTagCompound> {
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
       ItemStack result = super.extractItem(slot, amount, simulate);
 
-      if (!simulate) {
-        PouchHandler.this.saveToStack();
-      }
-
+      PouchHandler.this.saveToStack();
       return result;
     }
   }
