@@ -102,13 +102,20 @@ public class EventManager {
           if (soil.getPropertyKeys().contains(BlockElementalSoil.fireCookingMultiplier)) {
             int cookingMultiplier = soil.getValue(BlockElementalSoil.fireCookingMultiplier);
             if (cookingMultiplier > 0) {
+              ItemStack seed = Harvest.getSeed(event.getState());
+
               List<ItemStack> newDrops = new ArrayList<>();
               Random random = new Random();
-              boolean seed = false;
+              boolean foundSeed = false;
               for (ItemStack stack : event.getDrops()) {
                 ItemStack result = FurnaceRecipes.instance().getSmeltingResult(stack);
-                if (!seed && stack.getItem() instanceof IPlantable) {
-                  seed = true;
+                if (!foundSeed && ItemUtil.equalWithoutSize(seed, stack)) {
+                  foundSeed = true;
+                  newDrops.add(stack);
+                  continue;
+                } else if (!foundSeed && seed.isEmpty() && stack.getItem() instanceof IPlantable) {
+                  foundSeed = true;
+                  seed = stack;
                   newDrops.add(stack);
                   continue;
                 }

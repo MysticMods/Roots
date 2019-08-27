@@ -50,6 +50,7 @@ public class BlockElementalSoil extends BlockBase {
     this.soilType = soilType;
     this.itemBlock = new ItemBlockElementalSoil(this).setRegistryName(LibRegistry.getActiveModid(), name);
     this.setHarvestReqs("shovel", 0);
+    this.setTickRandomly(true);
 
     if (this.soilType != EnumElementalSoilType.BASE) {
       PropertyInteger property = this.soilType == EnumElementalSoilType.WATER ?
@@ -138,6 +139,8 @@ public class BlockElementalSoil extends BlockBase {
     if (rand.nextInt(5) == 0) {
       upBlock.randomTick(world, pos.up(), upState, rand);
     }
+
+
   }
 
   @SideOnly(Side.CLIENT)
@@ -217,6 +220,13 @@ public class BlockElementalSoil extends BlockBase {
         tooltip.add(TextFormatting.BLUE + "" + TextFormatting.BOLD + I18n.format("tile.aqueous_soil.effect"));
       }
     }
+  }
+
+  @Override
+  @SuppressWarnings("deprecation")
+  public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+    worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
+    super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
   }
 }
 
