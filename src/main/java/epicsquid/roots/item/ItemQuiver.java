@@ -50,7 +50,9 @@ public class ItemQuiver extends ItemArrowBase {
   public EntityArrow createArrow(World worldIn, ItemStack stack, EntityLivingBase shooter) {
     ItemStack arrow = findArrow(stack);
     if (!arrow.isEmpty()) {
-      return ((ItemArrow) arrow.getItem()).createArrow(worldIn, arrow, shooter);
+      EntityArrow entityArrow = ((ItemArrow) arrow.getItem()).createArrow(worldIn, arrow, shooter);
+      entityArrow.getEntityData().setBoolean("return", true);
+      return entityArrow;
     }
 
     EntityArrow entityArrow = new EntityTippedArrow(worldIn, shooter);
@@ -112,7 +114,7 @@ public class ItemQuiver extends ItemArrowBase {
         generated++;
         continue;
       }
-      if (Util.rand.nextInt(3) != 0 || stack.getItem() == ModItems.living_arrow) {
+      if (Util.rand.nextInt(3) != 0 || arrow.getEntityData().hasKey("return")) {
         ItemStack result = ItemHandlerHelper.insertItemStacked(handler.getInventory(), stack, false);
         if (result.isEmpty()) {
           consumed++;
