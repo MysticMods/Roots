@@ -3,9 +3,26 @@ package epicsquid.roots.config;
 import epicsquid.roots.Roots;
 import net.minecraftforge.common.config.Config;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Config.LangKey("config.roots.category.rituals")
 @Config(modid = Roots.MODID, name = "roots/rituals")
 public class RitualConfig {
+
+  @Config.Name("Fluids to extinguish rituals")
+  @Config.Comment("List of fluid names that can be used to extinguish ritual fires if their default temperature doesn't work")
+  public static String[] ritualExtinguishFluids = new String[]{};
+
+  @Config.Ignore
+  private static List<String> extinguishFluids = null;
+
+  public static List<String> getExtinguishFluids () {
+    if (extinguishFluids == null) {
+      extinguishFluids = Arrays.asList(ritualExtinguishFluids);
+    }
+    return extinguishFluids;
+  }
 
   @Config.LangKey("config.roots.subcategory.disable_rituals")
   public static DisableRitualCategory disableRitualCategory = new DisableRitualCategory();
