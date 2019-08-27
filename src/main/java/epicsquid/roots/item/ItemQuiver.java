@@ -31,10 +31,14 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 
 public class ItemQuiver extends ItemArrowBase {
   public static AxisAlignedBB bounding = new AxisAlignedBB(-2.5, -2.5, -2.5, 2.5, 2.5, 2.5);
+
+  public static Method getArrowStack = null;
 
   public ItemQuiver(@Nonnull String name) {
     super(name);
@@ -112,10 +116,14 @@ public class ItemQuiver extends ItemArrowBase {
     int consumed = 0;
     int generated = 0;
     for (EntityArrow arrow : arrows) {
-      ItemStack stack = new ItemStack(Items.ARROW);
+      ItemStack stack = getArrowStack(arrow);
 
-      if (arrow instanceof EntityLivingArrow) {
-        stack = new ItemStack(ModItems.living_arrow);
+      if (stack.isEmpty()) {
+        if (arrow instanceof EntityLivingArrow) {
+          stack = new ItemStack(ModItems.living_arrow);
+        } else {
+          stack = new ItemStack(Items.ARROW);
+        }
       }
 
       arrow.setDead();
@@ -172,5 +180,21 @@ public class ItemQuiver extends ItemArrowBase {
   @Override
   public boolean isRepairable() {
     return true;
+  }
+
+  public static ItemStack getArrowStack (EntityArrow arrow) {
+    if (getArrowStack == null) {
+      try {
+        getArrowStack = EntityArrow.class.getDeclaredMethod("getArrowStack");
+      } catch (NoSuchMethodException e) {
+        return ItemStack.EMPTY;
+      }
+      getArrowStack.setAccessible(true);
+    }
+    try {
+      return (ItemStack) getArrowStack.invoke(arrow);
+    } catch (IllegalAccessException | InvocationTargetException e) {
+      return ItemStack.EMPTY;
+    }
   }
 }
