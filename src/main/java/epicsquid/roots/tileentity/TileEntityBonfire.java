@@ -51,6 +51,8 @@ import java.util.List;
 import java.util.Random;
 
 public class TileEntityBonfire extends TileBase implements ITickable {
+  public static AxisAlignedBB bounding = new AxisAlignedBB(-1, -1, -1, 1, 1, 1);
+
   private float ticker = 0;
   private float pickupDelay = 0;
   private int burnTime = 0;
@@ -163,6 +165,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   private boolean startRitual(@Nullable EntityPlayer player) {
     RitualBase ritual = RitualRegistry.getRitual(this, player);
     validateEntity();
+
     if (ritual != null && !ritual.isDisabled()) {
       if ((ritualEntity == null || ritualEntity.isDead) && ritual.canFire(this, player)) {
         ritualEntity = ritual.doEffect(world, pos);
@@ -344,6 +347,22 @@ public class TileEntityBonfire extends TileBase implements ITickable {
             }
           }
         }
+      }
+    }
+
+    if (ticker % 10 == 0) {
+      AxisAlignedBB bounds = bounding.offset(getPos());
+      BlockPos start = new BlockPos(bounds.minX, bounds.minY, bounds.minZ);
+      BlockPos stop = new BlockPos(bounds.maxX, bounds.maxY, bounds.maxZ);
+      boolean fire = false;
+      for (BlockPos.MutableBlockPos pos : BlockPos.getAllInBoxMutable(start, stop)) {
+        if (world.getBlockState(pos).getBlock() == Blocks.FIRE) {
+          fire = true;
+          world.setBlockToAir(pos);
+        }
+      }
+      if (fire) {
+        startRitual(null);
       }
     }
 
