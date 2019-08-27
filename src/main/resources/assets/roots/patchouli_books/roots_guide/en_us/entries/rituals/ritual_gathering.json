@@ -3,7 +3,7 @@
   "icon": "roots:ritual_gathering",
   "category": "rituals",
   "advancement": "roots:wildewheet",
-  
+  "flag": "roots:ritual_gathering",
   "pages": [
     {
       "type": "text",

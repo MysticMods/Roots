@@ -1,21 +1,21 @@
-package epicsquid.roots.api;
+package epicsquid.roots.integration.patchouli;
 
 import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.recipe.PyreCraftingRecipe;
+import epicsquid.roots.recipe.FeyCraftingRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariableProvider;
 import vazkii.patchouli.common.util.ItemStackUtil;
 
-public class RitualCraftingRecipeProcessor implements IComponentProcessor {
+public class FeyCraftingRecipeProcessor implements IComponentProcessor {
 
-  private PyreCraftingRecipe pyreCraftingRecipe = null;
+  private FeyCraftingRecipe groveCraftingRecipe = null;
 
   @Override
   public void setup(IVariableProvider<String> iVariableProvider) {
-    String ritualName = iVariableProvider.get("recipe");
-    pyreCraftingRecipe = ModRecipes.getCraftingRecipe(ritualName);
+    String recipeName = iVariableProvider.get("recipe");
+    groveCraftingRecipe = ModRecipes.getFeyCraftingRecipe(recipeName);
   }
 
   @Override
@@ -23,19 +23,18 @@ public class RitualCraftingRecipeProcessor implements IComponentProcessor {
     if (s.startsWith("item")) {
       int index = Integer.parseInt(s.substring(4)) - 1;
 
-      if (index >= pyreCraftingRecipe.getIngredients().size()) {
+      if (index >= groveCraftingRecipe.getIngredients().size()) {
         return ItemStackUtil.serializeStack(ItemStack.EMPTY);
       }
 
-      Ingredient ingredient = pyreCraftingRecipe.getIngredients().get(index);
+      Ingredient ingredient = groveCraftingRecipe.getIngredients().get(index);
 
       return ItemStackUtil.serializeIngredient(ingredient);
     }
 
     if (s.equalsIgnoreCase("result")) {
-      return ItemStackUtil.serializeStack(pyreCraftingRecipe.getResult());
+      return ItemStackUtil.serializeStack(groveCraftingRecipe.getResult());
     }
     return null;
   }
-
 }

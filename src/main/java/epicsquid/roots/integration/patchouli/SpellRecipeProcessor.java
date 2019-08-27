@@ -1,9 +1,10 @@
-package epicsquid.roots.api;
+package epicsquid.roots.integration.patchouli;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import epicsquid.roots.api.Herb;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemSpellDust;
 import epicsquid.roots.spell.SpellBase;

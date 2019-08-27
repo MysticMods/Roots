@@ -1,6 +1,6 @@
 
 {
-  "processor": "epicsquid.roots.api.SpellModifierProcessor",
+  "processor": "epicsquid.roots.integration.patchouli.SpellModifierProcessor",
   "components": [
     {
       "type": "item",

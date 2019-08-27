@@ -2,7 +2,7 @@ package epicsquid.roots.init;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
-import epicsquid.roots.api.RegisterHerbEvent;
+import epicsquid.roots.integration.patchouli.RegisterHerbEvent;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;

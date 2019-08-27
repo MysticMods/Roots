@@ -3,6 +3,7 @@
   "icon": "roots:ritual_windwall",
   "category": "rituals",
   "advancement": "roots:moonglow_leaf",
+  "flag": "roots:ritual_windwall",
   "pages": [
     {
       "type": "text",

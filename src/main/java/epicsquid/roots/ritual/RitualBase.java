@@ -42,6 +42,7 @@ public abstract class RitualBase {
   public RitualBase(String name, int duration, boolean disabled) {
     this.name = name;
     this.duration = duration;
+    this.disabled = disabled;
   }
 
   public String getFormat() {
