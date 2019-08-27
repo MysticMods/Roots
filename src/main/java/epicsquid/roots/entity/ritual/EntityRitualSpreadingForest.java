@@ -111,7 +111,7 @@ public class EntityRitualSpreadingForest extends EntityRitualBase {
                   }
                 }
               }
-              count++;
+              count--;
             }
             if (!validPos && type != BlockPlanks.EnumType.DARK_OAK) {
               planted = true;
