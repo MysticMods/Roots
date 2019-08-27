@@ -4,6 +4,7 @@ import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.block.BlockBonfire;
+import epicsquid.roots.config.RitualConfig;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualFrostLands;
 import epicsquid.roots.init.ModBlocks;
@@ -20,9 +21,11 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -38,8 +41,10 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
+import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -48,6 +53,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class TileEntityBonfire extends TileBase implements ITickable {
@@ -209,9 +215,37 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     if (world.isRemote) return true;
     ItemStack heldItem = player.getHeldItem(hand);
     if (!heldItem.isEmpty()) {
+      boolean extinguish = false;
+      IFluidHandlerItem cap = heldItem.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+      if (cap != null) {
+        IFluidTankProperties[] props = cap.getTankProperties();
+        if (props != null && props.length >= 1) {
+          for (IFluidTankProperties prop : props) {
+            FluidStack stack = prop.getContents();
+            if (stack != null) {
+              if (stack.getFluid().getTemperature() <= 300) {
+                extinguish = true;
+              } else if (RitualConfig.getExtinguishFluids().contains(stack.getFluid().getName())) {
+                extinguish = true;
+              }
+            }
+            if (extinguish) {
+              if (stack.amount > 1000) {
+                stack.amount = 1000;
+              }
+              cap.drain(stack, true);
+              if (heldItem.getItem() instanceof ItemBucket) {
+                player.setHeldItem(hand, new ItemStack(Items.BUCKET));
+                ((EntityPlayerMP) player).sendAllContents(player.openContainer, player.openContainer.getInventory());
+              }
+              break;
+            }
+          }
+        }
+      }
       if (heldItem.getItem() instanceof ItemFlintAndSteel) {
         return startRitual(player);
-      } else if (heldItem.getItem() == Items.WATER_BUCKET && burnTime > 0) {
+      } else if (extinguish && burnTime > 0) {
         burnTime = 0;
         if (ritualEntity != null) {
           ritualEntity.setDead();
@@ -219,14 +253,8 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         lastRecipeUsed = null;
         lastRitualUsed = null;
         BlockBonfire.setState(false, world, pos);
-        world.playSound(player, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1F, 1.25F);
-        world.playSound(player, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.25F, 1F);
-        if (!player.isCreative()) {
-          IFluidHandlerItem handler = heldItem.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-          if (handler != null && handler.getTankProperties().length == 1) {
-            handler.drain(handler.getTankProperties()[0].getContents(), true);
-          }
-        }
+        world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1F, 1F);
+        world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1F, 1F);
         return true;
       } else {
         for (int i = 0; i < 5; i++) {
