@@ -101,7 +101,7 @@ public class Harvest {
   public static ItemStack getSeed(IBlockState state) {
     Block block = state.getBlock();
     ItemStack seed = seedCache.get(block);
-    if (seed != null) return seed;
+    if (seed != null && !seed.isEmpty()) return seed;
     try {
       seed = new ItemStack((Item) getSeed.invoke(state.getBlock()));
     } catch (Exception e) {
