@@ -18,6 +18,7 @@ public class MessageFallFX implements IMessage {
     private double y;
     private double z;
 
+    @SuppressWarnings("unused")
     public MessageFallFX() { }
 
     public MessageFallFX(double x, double y, double z) {
@@ -56,7 +57,7 @@ public class MessageFallFX implements IMessage {
                             world, (float) message.x + Util.rand.nextFloat(), (float) message.y + Util.rand.nextFloat(), (float) message.z + Util.rand.nextFloat(),
                             0, -0.05F, 0,
                             SpellFall.instance.getRed1(), SpellFall.instance.getGreen1(), SpellFall.instance.getBlue1(), 1.0f,
-                            6.0f + 6.0f * Util.rand.nextFloat(), 120);
+                            1F, 160);
                 }
 
                 if (Util.rand.nextBoolean())
@@ -65,7 +66,7 @@ public class MessageFallFX implements IMessage {
                             world, (float) message.x + Util.rand.nextFloat(), (float) message.y + Util.rand.nextFloat(), (float) message.z + Util.rand.nextFloat(),
                             0, -0.05F, 0,
                             SpellFall.instance.getRed2(), SpellFall.instance.getGreen2(), SpellFall.instance.getBlue2(), 1.0f,
-                            1F, 120);
+                            0.5F, 160);
                 }
             }
 

@@ -125,4 +125,6 @@ processResources {
     rename '(.+_at.cfg)', 'META-INF/$1'
 }
 
-
+sourceSets {
+    main { output.resourcesDir = output.classesDir }
+}

@@ -1,6 +1,5 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
@@ -43,22 +42,22 @@ public class SpellThaw extends SpellBase{
     boolean applied = false;
 
       if (caster.world.getBlockState(pos).getBlock() == Blocks.SNOW_LAYER) {
-        caster.world.setBlockState(pos, Blocks.AIR.getDefaultState());
+        caster.world.setBlockToAir(pos);
         applied = true;
       }
 
       if (caster.world.getBlockState(pos).getBlock() == Blocks.SNOW || caster.world.getBlockState(pos).getBlock() == Blocks.ICE) {
-        caster.world.setBlockState(pos, Blocks.WATER.getDefaultState());
+        caster.world.setBlockState(pos, Blocks.WATER.getDefaultState(), 3);
         applied = true;
       }
 
       if (caster.world.getBlockState(pos).getBlock() == Blocks.PACKED_ICE) {
-        caster.world.setBlockState(pos, Blocks.ICE.getDefaultState());
+        caster.world.setBlockState(pos, Blocks.ICE.getDefaultState(), 3);
         applied = true;
       }
 
       if ((caster.world.getBlockState(pos).getBlock() == Blocks.FARMLAND) && (caster.world.getBlockState(pos).getValue(BlockFarmland.MOISTURE) < 7)) {
-        caster.world.setBlockState(pos, Blocks.FARMLAND.getDefaultState().withProperty(BlockFarmland.MOISTURE, 7));
+        caster.world.setBlockState(pos, Blocks.FARMLAND.getDefaultState().withProperty(BlockFarmland.MOISTURE, 7), 3);
         applied = true;
       }
 

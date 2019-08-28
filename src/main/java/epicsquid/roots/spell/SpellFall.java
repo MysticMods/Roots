@@ -1,9 +1,11 @@
 package epicsquid.roots.spell;
 
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.init.ModBlocks;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.network.fx.MessageFallFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
@@ -63,17 +65,18 @@ public class SpellFall extends SpellBase {
         IBlockState blockstate = caster.world.getBlockState(pos);
         Block block = blockstate.getBlock();
 
-        if (count % 3 == 0)
+        if (count % 2 == 0)
         {
             if (block instanceof BlockLeaves || block instanceof BlockTallGrass) {
-                block.dropBlockAsItemWithChance(caster.world, pos, blockstate, 0.75F, 0);
-                caster.world.setBlockToAir(pos);
-                caster.world.playSound(caster, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1F, 1F);
+                caster.world.destroyBlock(pos, true);
+                caster.world.notifyBlockUpdate(pos, blockstate, Blocks.AIR.getDefaultState(), 8);
+                PacketHandler.sendToAllTracking(new MessageFallFX(pos.getX(), pos.getY(), pos.getZ()), caster.world, pos);
                 return true;
             } else if (block instanceof BlockGrass)
             {
-                caster.world.setBlockState(pos, Blocks.DIRT.getDefaultState());
+                caster.world.setBlockState(pos, Blocks.DIRT.getDefaultState(), 3);
                 caster.world.playSound(caster, pos, SoundEvents.BLOCK_GRAVEL_BREAK, SoundCategory.BLOCKS, 0.5F, 1F);
+                PacketHandler.sendToAllTracking(new MessageFallFX(pos.getX(), pos.getY() + 1, pos.getZ()), caster.world, pos);
             }
         }
         return false;
