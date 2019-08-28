@@ -162,11 +162,11 @@ public class ModBlocks {
     Block button;
     Block pressure_plate;
     LibRegistry.addSlabPair(material, sound, 1.7f, name, base.getDefaultState(), slabs, true,
-        base.getCreativeTab());
+        Roots.tab);
     event.addBlock(stairs = new BlockStairsBase(base.getDefaultState(), sound, 1.7f, name + "_stairs").setModelCustom(true)
-        .setCreativeTab(base.getCreativeTab()));
+        .setCreativeTab(Roots.tab));
     event.addBlock(
-        wall = new BlockWallBase(base, sound, 1.7f, name + "_wall").setModelCustom(true).setCreativeTab(base.getCreativeTab()));
+        wall = new BlockWallBase(base, sound, 1.7f, name + "_wall").setModelCustom(true).setCreativeTab(Roots.tab));
     if (material.equals(Material.ROCK)) {
       event.addBlock(button = new BlockButtonStoneBase(base, sound, 1.7f, name + "_button").setModelCustom(true).setCreativeTab(Roots.tab));
       event.addBlock(pressure_plate = new BlockPressurePlateBase(base, BlockPressurePlateBase.PressurePlateType.MOBS, sound, 1.7f, name + "_pressure_plate").setModelCustom(true).setCreativeTab(Roots.tab));
