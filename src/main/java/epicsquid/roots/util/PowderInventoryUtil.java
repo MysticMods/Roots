@@ -59,10 +59,15 @@ public class PowderInventoryUtil {
     amount -= amount * ItemSylvanArmor.sylvanBonus(player);
 
     ItemPouch.useQuantity(pouch, herb, amount);
-    resolveSlots(herb);
+    resolveSlots(player, herb);
   }
 
-  public static void resolveSlots(Herb herb) {
+  public static void resolveSlots(EntityPlayer player, Herb herb) {
+    if (!player.world.isRemote) return;
+
+    Minecraft mc = Minecraft.getMinecraft();
+    if (player.getUniqueID() != mc.player.getUniqueID()) return;
+
     if (slot1 != null && !slot1.active()) {
       slot1.setSlot(-1);
       slot1 = null;
