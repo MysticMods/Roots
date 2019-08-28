@@ -3,7 +3,6 @@ package epicsquid.roots;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.block.BlockElementalSoil;
 import epicsquid.roots.capability.grove.IPlayerGroveCapability;
 import epicsquid.roots.capability.grove.PlayerGroveCapabilityProvider;
 import epicsquid.roots.capability.playerdata.IPlayerDataCapability;
@@ -13,69 +12,54 @@ import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.entity.spell.EntityPetalShell;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.baubles.pouch.BaubleBeltCapabilityHandler;
-import epicsquid.roots.item.ItemDruidKnife;
 import epicsquid.roots.item.ItemPouch;
 import epicsquid.roots.network.MessagePlayerDataUpdate;
 import epicsquid.roots.network.MessagePlayerGroveUpdate;
 import epicsquid.roots.network.fx.*;
 import epicsquid.roots.recipe.BarkRecipe;
 import epicsquid.roots.util.Constants;
-import epicsquid.roots.mechanics.Harvest;
 import epicsquid.roots.util.ItemUtil;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockNewLog;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks.EnumType;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameType;
-import net.minecraft.world.World;
-import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.Optional;
-import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class EventManager {
-
   public static long ticks = 0;
 
   @SubscribeEvent
-  public static void onBlockHarvested(HarvestDropsEvent event) {
+  public static void barkHarvested(HarvestDropsEvent event) {
     if (event.getHarvester() != null) {
       ItemStack tool = event.getHarvester().getHeldItem(EnumHand.MAIN_HAND);
-      if (tool.getItem() instanceof ItemDruidKnife) {
+      if (tool.getItem().getToolClasses(tool).contains("druidKnife")) {
         event.getDrops().clear();
         IBlockState blockstate = event.getState();
         Block block = blockstate.getBlock();
@@ -89,88 +73,17 @@ public class EventManager {
           bark = ModRecipes.getVanillaBarkRecipe(type);
         }
         if (bark != null) {
-          ItemStack barkStack = bark.getBarkStack(Util.rand.nextInt(getBarkAmount(tool)) + 1);
+          ItemStack barkStack = bark.getBarkStack(4 + Util.rand.nextInt(getAdditionalBarkAmount(tool)) + 1);
           if (!event.getWorld().isRemote) {
             ItemUtil.spawnItem(event.getWorld(), event.getPos(), barkStack);
-          }
-        }
-      }
-      if (event.getState().getBlock() instanceof IPlantable) {
-        IBlockState soil = event.getWorld().getBlockState(event.getPos().offset(EnumFacing.DOWN));
-        if (event.getState().getBlock() instanceof IPlantable && soil.getBlock()
-            .canSustainPlant(soil, event.getWorld(), event.getPos().offset(EnumFacing.DOWN), EnumFacing.UP, (IPlantable) event.getState().getBlock())) {
-          if (soil.getPropertyKeys().contains(BlockElementalSoil.fireCookingMultiplier)) {
-            int cookingMultiplier = soil.getValue(BlockElementalSoil.fireCookingMultiplier);
-            if (cookingMultiplier > 0) {
-              ItemStack seed = Harvest.getSeed(event.getState());
-
-              List<ItemStack> newDrops = new ArrayList<>();
-              Random random = new Random();
-              boolean foundSeed = false;
-              for (ItemStack stack : event.getDrops()) {
-                ItemStack result = FurnaceRecipes.instance().getSmeltingResult(stack);
-                if (!foundSeed && ItemUtil.equalWithoutSize(seed, stack)) {
-                  foundSeed = true;
-                  newDrops.add(stack);
-                  continue;
-                } else if (!foundSeed && seed.isEmpty() && stack.getItem() instanceof IPlantable) {
-                  foundSeed = true;
-                  seed = stack;
-                  newDrops.add(stack);
-                  continue;
-                }
-                if (!result.isEmpty()) {
-                  newDrops.add(new ItemStack(result.getItem(), cookingMultiplier - 1 > 0 ? random.nextInt(cookingMultiplier - 1) + 1 : 1));
-                } else {
-                  newDrops.add(stack);
-                }
-              }
-              event.getDrops().clear();
-              event.getDrops().addAll(newDrops);
-            }
-          }
-          if (soil.getPropertyKeys().contains(BlockElementalSoil.earthFertility)) {
-            int fertility = soil.getValue(BlockElementalSoil.earthFertility);
-            if (fertility > 0) {
-              List<ItemStack> newDrops = new ArrayList<>();
-              Random random = new Random();
-              for (ItemStack stack : event.getDrops()) {
-                newDrops.add(stack);
-                if (random.nextInt(3) < fertility) {
-                  newDrops.add(new ItemStack(stack.getItem(), fertility > 2 ? 2 : 1));
-                }
-              }
-              event.getDrops().clear();
-              event.getDrops().addAll(newDrops);
-            }
-          }
-          if (soil.getPropertyKeys().contains(BlockElementalSoil.waterSpeed)) {
-            int speed = soil.getValue(BlockElementalSoil.waterSpeed);
-            if (speed > 0) {
-              List<ItemStack> drops = new ArrayList<>(event.getDrops());
-              event.getDrops().clear();
-              BlockPos dropPos = event.getPos().down().down();
-              boolean seed = false;
-              if (!event.getWorld().isRemote) {
-                for (ItemStack stack : drops) {
-                  if (!seed && stack.getItem() instanceof IPlantable) {
-                    seed = true;
-                    event.getDrops().add(stack);
-                    continue;
-                  }
-                  event.getWorld().spawnEntity(new EntityItem(event.getWorld(), dropPos.getX() + 0.5f, dropPos.getY() + 0.5f, dropPos.getZ() + 0.5f, stack));
-                }
-              }
-            }
           }
         }
       }
     }
   }
 
-  private static int getBarkAmount(ItemStack stack) {
-    int enchLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
-    return ++enchLevel;
+  private static int getAdditionalBarkAmount(ItemStack stack) {
+    return Math.max(EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack) + 1, EnchantmentHelper.getEnchantmentLevel(Enchantments.LOOTING, stack) + 1);
   }
 
   @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -180,6 +93,8 @@ public class EventManager {
       ticks++;
     }
   }
+
+  // TODO: Handle Player Teleport
 
   @SubscribeEvent
   public static void copyCapabilities(PlayerEvent.Clone event) {
@@ -330,40 +245,4 @@ public class EventManager {
     }
   }
 
-  @SubscribeEvent
-  public static void onCropsGrowPre(BlockEvent.CropGrowEvent.Pre cropGrowEvent) {
-    IBlockState soil = cropGrowEvent.getWorld().getBlockState(cropGrowEvent.getPos().offset(EnumFacing.DOWN));
-    IBlockState plant = cropGrowEvent.getWorld().getBlockState(cropGrowEvent.getPos());
-    if (plant.getBlock() instanceof IPlantable && soil.getBlock()
-        .canSustainPlant(soil, cropGrowEvent.getWorld(), cropGrowEvent.getPos().offset(EnumFacing.DOWN), EnumFacing.UP, (IPlantable) plant.getBlock())) {
-      if (soil.getPropertyKeys().contains(BlockElementalSoil.airSpeed)) {
-        int speed = soil.getValue(BlockElementalSoil.airSpeed);
-        if (speed > 0) {
-          Random rand = new Random();
-          cropGrowEvent.setResult(rand.nextInt(3) + 1 <= speed ? Event.Result.ALLOW : Event.Result.DEFAULT);
-        }
-      }
-    }
-  }
-
-  @SubscribeEvent
-  public static void onCropsGrowPost(BlockEvent.CropGrowEvent.Post cropGrowEvent) {
-    IBlockState soil = cropGrowEvent.getWorld().getBlockState(cropGrowEvent.getPos().offset(EnumFacing.DOWN));
-    IBlockState plant = cropGrowEvent.getWorld().getBlockState(cropGrowEvent.getPos());
-    if (plant.getBlock() instanceof IPlantable && plant.getBlock() instanceof BlockCrops && ((BlockCrops) plant.getBlock()).isMaxAge(plant) && soil.getBlock()
-        .canSustainPlant(soil, cropGrowEvent.getWorld(), cropGrowEvent.getPos().offset(EnumFacing.DOWN), EnumFacing.UP, (IPlantable) plant.getBlock())) {
-      if (soil.getPropertyKeys().contains(BlockElementalSoil.waterSpeed)) {
-        int speed = soil.getValue(BlockElementalSoil.waterSpeed);
-        BlockPos placement = cropGrowEvent.getPos();
-        if (speed > 0) {
-          ItemStack seed = Harvest.getSeed(plant);
-          World world = cropGrowEvent.getWorld();
-          IProperty<?> prop = Harvest.resolveStates(plant);
-          if (prop != null) {
-            Harvest.doHarvest(plant, prop, seed, world.provider.getDimension(), placement, world, null);
-          }
-        }
-      }
-    }
-  }
 }

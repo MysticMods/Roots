@@ -67,10 +67,7 @@ public class SpellHarvest extends SpellBase {
           }
           IProperty<?> prop = Harvest.resolveStates(state);
           if (prop != null) {
-            int max = Harvest.getMaxState(prop);
-            if (state.getValue((IProperty<Integer>) prop) == max) {
-              return true;
-            }
+            return Harvest.isGrown(state);
           }
           return false;
         });
@@ -79,19 +76,9 @@ public class SpellHarvest extends SpellBase {
 
     for (BlockPos pos : crops) {
       IBlockState state = player.world.getBlockState(pos);
-      ItemStack seed = Harvest.getSeed(state);
-      // Do do do the harvest!
-      IProperty<?> prop = null;
-      for (IProperty<?> entry : Harvest.getStateKeys()) {
-        if (state.getPropertyKeys().contains(entry)) {
-          prop = entry;
-        }
-      }
-
-      assert prop != null;
 
       if (!player.world.isRemote) {
-        Harvest.doHarvest(state, prop, seed, player.dimension, pos, player.world, player);
+        Harvest.doHarvest(state, pos, player.world, player);
         affectedPositions.add(pos);
       }
       count++;
