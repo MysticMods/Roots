@@ -45,14 +45,16 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockElementalSoil extends BlockBase {
-  public static final PropertyInteger waterSpeed = PropertyInteger.create("water", 0, 4);
-  public static final PropertyInteger airSpeed = PropertyInteger.create("air", 0, 4);
-  public static final PropertyInteger earthFertility = PropertyInteger.create("earth", 0, 4);
-  public static final PropertyInteger fireCookingMultiplier = PropertyInteger.create("fire", 0, 4);
+  public static final PropertyInteger WATER_SPEED = PropertyInteger.create("water", 0, 4);
+  public static final PropertyInteger AIR_SPEED = PropertyInteger.create("air", 0, 4);
+  public static final PropertyInteger EARTH_FERTILITY = PropertyInteger.create("earth", 0, 4);
+  public static final PropertyInteger FIRE_MULTIPLIER = PropertyInteger.create("fire", 0, 4);
 
   private final @Nonnull
   Item itemBlock;
-  private final EnumElementalSoilType soilType;
+  private EnumElementalSoilType soilType;
+
+  public static EnumElementalSoilType SOIL_INIT = EnumElementalSoilType.BASE;
 
   public BlockElementalSoil(@Nonnull Material mat, @Nonnull SoundType type, @Nonnull String name, @Nonnull EnumElementalSoilType soilType) {
     super(mat, type, 0.8f, name);
@@ -63,8 +65,8 @@ public class BlockElementalSoil extends BlockBase {
 
     if (this.soilType != EnumElementalSoilType.BASE) {
       PropertyInteger property = this.soilType == EnumElementalSoilType.WATER ?
-          waterSpeed :
-          this.soilType == EnumElementalSoilType.EARTH ? earthFertility : this.soilType == EnumElementalSoilType.AIR ? airSpeed : fireCookingMultiplier;
+          WATER_SPEED :
+          this.soilType == EnumElementalSoilType.EARTH ? EARTH_FERTILITY : this.soilType == EnumElementalSoilType.AIR ? AIR_SPEED : FIRE_MULTIPLIER;
 
       this.setDefaultState(this.blockState.getBaseState().withProperty(property, 1));
     }
@@ -88,7 +90,7 @@ public class BlockElementalSoil extends BlockBase {
 
     if (shouldHarvest(world, pos) && plant.getBlock() instanceof IPlantable && Harvest.isGrown(plant) && soil.getBlock().canSustainPlant(soil, world, pos.down(), EnumFacing.UP, (IPlantable) plant.getBlock())) {
       if (soil.getBlock() == ModBlocks.elemental_soil_water) {
-        int speed = soil.getValue(BlockElementalSoil.waterSpeed);
+        int speed = soil.getValue(BlockElementalSoil.WATER_SPEED);
         if (speed > 0) {
           List<ItemStack> drops = Harvest.harvestReturnDrops(plant, pos, world, null);
           handleDrops(world, pos, drops);
@@ -130,17 +132,19 @@ public class BlockElementalSoil extends BlockBase {
   @Override
   @Nonnull
   public IBlockState getStateFromMeta(int meta) {
+    if (soilType == null) {
+      soilType = SOIL_INIT;
+    }
     switch (soilType) {
-      case BASE:
-        return getDefaultState();
       case AIR:
-        return getDefaultState().withProperty(airSpeed, meta + 1);
+        return getDefaultState().withProperty(AIR_SPEED, meta + 1);
       case FIRE:
-        return getDefaultState().withProperty(fireCookingMultiplier, meta + 1);
+        return getDefaultState().withProperty(FIRE_MULTIPLIER, meta + 1);
       case EARTH:
-        return getDefaultState().withProperty(earthFertility, meta + 1);
+        return getDefaultState().withProperty(EARTH_FERTILITY, meta + 1);
       case WATER:
-        return getDefaultState().withProperty(waterSpeed, meta + 1);
+        return getDefaultState().withProperty(WATER_SPEED, meta + 1);
+      case BASE:
       default:
         return getDefaultState();
     }
@@ -149,15 +153,30 @@ public class BlockElementalSoil extends BlockBase {
   @Nonnull
   @Override
   protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, airSpeed, fireCookingMultiplier, earthFertility, waterSpeed);
+    if (soilType == null) {
+      soilType = SOIL_INIT;
+    }
+    switch (soilType) {
+      case AIR:
+        return new BlockStateContainer(this, AIR_SPEED);
+      case FIRE:
+        return new BlockStateContainer(this, FIRE_MULTIPLIER);
+      case EARTH:
+        return new BlockStateContainer(this, EARTH_FERTILITY);
+      case WATER:
+        return new BlockStateContainer(this, WATER_SPEED);
+      case BASE:
+      default:
+        return new BlockStateContainer(this);
+    }
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
     PropertyInteger property = this.soilType == EnumElementalSoilType.WATER ?
-        waterSpeed :
-        this.soilType == EnumElementalSoilType.EARTH ? earthFertility : this.soilType == EnumElementalSoilType.AIR ? airSpeed :
-            this.soilType == EnumElementalSoilType.BASE ? null : fireCookingMultiplier;
+        WATER_SPEED :
+        this.soilType == EnumElementalSoilType.EARTH ? EARTH_FERTILITY : this.soilType == EnumElementalSoilType.AIR ? AIR_SPEED :
+            this.soilType == EnumElementalSoilType.BASE ? null : FIRE_MULTIPLIER;
 
     if (property == null) return 0;
 
