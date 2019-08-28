@@ -1,11 +1,14 @@
 package epicsquid.roots.block;
 
+import com.google.common.collect.Lists;
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.roots.api.CustomPlantType;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.item.itemblock.ItemBlockElementalSoil;
+import epicsquid.roots.mechanics.Harvest;
 import epicsquid.roots.util.EnumElementalSoilType;
+import epicsquid.roots.util.ItemUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -19,6 +22,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -27,11 +31,16 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -58,6 +67,62 @@ public class BlockElementalSoil extends BlockBase {
           this.soilType == EnumElementalSoilType.EARTH ? earthFertility : this.soilType == EnumElementalSoilType.AIR ? airSpeed : fireCookingMultiplier;
 
       this.setDefaultState(this.blockState.getBaseState().withProperty(property, 1));
+    }
+  }
+
+  public void doHarvest(BlockEvent.CropGrowEvent.Post cropGrowEvent) {
+    BlockPos pos = cropGrowEvent.getPos();
+    IBlockState soil = cropGrowEvent.getWorld().getBlockState(pos.down());
+    IBlockState plant = cropGrowEvent.getWorld().getBlockState(pos);
+    World world = cropGrowEvent.getWorld();
+    doHarvest(world, pos, soil, plant);
+  }
+
+  private boolean shouldHarvest(World world, BlockPos pos) {
+    // Assume pos is the location of the crop
+    return world.getBlockState(pos.down().down()).getBlock() != Blocks.GRAVEL;
+  }
+
+  private void doHarvest(World world, BlockPos pos, IBlockState soil, IBlockState plant) {
+    if (soil.getBlock() != ModBlocks.elemental_soil_water) return;
+
+    if (shouldHarvest(world, pos) && plant.getBlock() instanceof IPlantable && Harvest.isGrown(plant) && soil.getBlock().canSustainPlant(soil, world, pos.down(), EnumFacing.UP, (IPlantable) plant.getBlock())) {
+      if (soil.getBlock() == ModBlocks.elemental_soil_water) {
+        int speed = soil.getValue(BlockElementalSoil.waterSpeed);
+        if (speed > 0) {
+          List<ItemStack> drops = Harvest.harvestReturnDrops(plant, pos, world, null);
+          handleDrops(world, pos, drops);
+        }
+      }
+    }
+  }
+
+  private void handleDrops(World world, BlockPos pos, List<ItemStack> drops) {
+    List<ItemStack> dropsList = Lists.newArrayList(drops);
+    BlockPos under = pos.down().down();
+    TileEntity te = world.getTileEntity(under);
+    if (te != null) {
+      IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+      if (cap != null) {
+        List<ItemStack> remainder = new ArrayList<>();
+        for (ItemStack next : dropsList) {
+          if (next.isEmpty()) continue;
+
+          ItemStack remains = ItemHandlerHelper.insertItemStacked(cap, next, false);
+          if (!remains.isEmpty()) {
+            remainder.add(remains);
+          }
+        }
+        dropsList.clear();
+        if (!remainder.isEmpty()) {
+          dropsList.addAll(remainder);
+        }
+      }
+    }
+    if (!dropsList.isEmpty()) {
+      for (ItemStack stack : dropsList) {
+        ItemUtil.spawnItem(world, pos, stack);
+      }
     }
   }
 
@@ -104,8 +169,7 @@ public class BlockElementalSoil extends BlockBase {
     if (soilType == EnumElementalSoilType.WATER && plantable == Blocks.REEDS) {
       return true;
     } else if (plantable == Blocks.CACTUS) {
-      if (soilType == EnumElementalSoilType.EARTH) return true;
-      return false;
+      return soilType == EnumElementalSoilType.EARTH;
     }
 
     EnumPlantType plant = plantable.getPlantType(world, pos.offset(direction));
@@ -132,6 +196,10 @@ public class BlockElementalSoil extends BlockBase {
 
     IBlockState upState = world.getBlockState(pos.up());
     Block upBlock = upState.getBlock();
+    if (Harvest.isGrown(upState)) {
+      doHarvest(world, pos.up(), world.getBlockState(pos), upState);
+    }
+
     if (!(upBlock instanceof IGrowable))
       return;
 
@@ -139,8 +207,6 @@ public class BlockElementalSoil extends BlockBase {
     if (rand.nextInt(5) == 0) {
       upBlock.randomTick(world, pos.up(), upState, rand);
     }
-
-
   }
 
   @SideOnly(Side.CLIENT)

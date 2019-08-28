@@ -111,17 +111,43 @@ public class Harvest {
     return seed;
   }
 
-  public static void doHarvest(IBlockState state, IProperty<?> prop, ItemStack seed, int dimension, BlockPos pos, World world, @Nullable EntityPlayer player) {
+  public static List<ItemStack> harvestReturnDrops (IBlockState state, IProperty<?> prop, ItemStack seed, BlockPos pos, World world, @Nullable EntityPlayer player) {
     IBlockState newState = state.withProperty((IProperty<Integer>) prop, 0);
     NonNullList<ItemStack> drops = NonNullList.create();
-    Harvest.add(seed, dimension, pos, state);
+    Harvest.add(seed, world.provider.getDimension(), pos, state);
     state.getBlock().getDrops(drops, world, pos, state, 0);
     ForgeEventFactory.fireBlockHarvesting(drops, world, pos, state, 0, 1.0f, false, player);
     world.setBlockState(pos, newState);
+    return drops;
+  }
+
+  public static void doHarvest (IBlockState state, IProperty<?> prop, ItemStack seed, BlockPos pos, World world, @Nullable EntityPlayer player) {
+    List<ItemStack> drops = harvestReturnDrops(state, prop, seed, pos, world, player);
     for (ItemStack stack : drops) {
       if (stack.isEmpty()) continue;
       ItemUtil.spawnItem(world, pos, stack);
     }
+  }
+
+  public static List<ItemStack> harvestReturnDrops (IBlockState state, BlockPos pos, World world, @Nullable EntityPlayer player) {
+    ItemStack seed = Harvest.getSeed(state);
+    IProperty<?> prop = Harvest.resolveStates(state);
+    return harvestReturnDrops(state, prop, seed, pos, world, player);
+  }
+
+  public static void doHarvest (IBlockState state, BlockPos pos, World world, @Nullable EntityPlayer player) {
+    List<ItemStack> drops = harvestReturnDrops(state, pos, world, player);
+    for (ItemStack stack : drops) {
+      if (stack.isEmpty()) continue;
+      ItemUtil.spawnItem(world, pos, stack);
+    }
+  }
+
+  public static boolean isGrown (IBlockState state) {
+    IProperty<?> prop = resolveStates(state);
+    if (prop == null) return false;
+
+    return state.getValue((IProperty<Integer>) prop) == getMaxState(prop);
   }
 
   public static class HarvestEntry {
