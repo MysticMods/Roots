@@ -71,10 +71,15 @@ public class ModBlocks {
     // TODO 1.13 make the dewgonia work only underwater
     event.addBlock(dewgonia = new BlockDewgoniaCrop("dewgonia_crop", CustomPlantType.ELEMENT_WATER));
     event.addBlock(stalicripe = new BlockStalicripeCrop("stalicripe_crop", CustomPlantType.ELEMENT_EARTH));
+    BlockElementalSoil.SOIL_INIT = EnumElementalSoilType.BASE;
     event.addBlock(elemental_soil = new BlockElementalSoil(Material.GROUND, SoundType.GROUND, "elemental_soil", EnumElementalSoilType.BASE).setModelCustom(true).setCreativeTab(Roots.tab));
+    BlockElementalSoil.SOIL_INIT = EnumElementalSoilType.AIR;
     event.addBlock(elemental_soil_air = new BlockElementalSoil(Material.GROUND, SoundType.GROUND, "elemental_soil_air", EnumElementalSoilType.AIR).setModelCustom(false).setCreativeTab(Roots.tab));
+    BlockElementalSoil.SOIL_INIT = EnumElementalSoilType.WATER;
     event.addBlock(elemental_soil_water = new BlockElementalSoil(Material.GROUND, SoundType.GROUND, "elemental_soil_water", EnumElementalSoilType.WATER).setModelCustom(false).setCreativeTab(Roots.tab));
+    BlockElementalSoil.SOIL_INIT = EnumElementalSoilType.FIRE;
     event.addBlock(elemental_soil_fire = new BlockElementalSoil(Material.GROUND, SoundType.GROUND, "elemental_soil_fire", EnumElementalSoilType.FIRE).setModelCustom(false).setCreativeTab(Roots.tab));
+    BlockElementalSoil.SOIL_INIT = EnumElementalSoilType.EARTH;
     event.addBlock(elemental_soil_earth = new BlockElementalSoil(Material.GROUND, SoundType.GROUND, "elemental_soil_earth", EnumElementalSoilType.EARTH).setModelCustom(false).setCreativeTab(Roots.tab));
 
     // Post registration block setup

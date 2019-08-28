@@ -1,18 +1,26 @@
 {
-    "variants": {
-        "normal": { "model": "roots:elemental_soil_water" },
-				"handlers": { "model": "roots:elemental_soil_water" },
-				"air=0,earth=0,fire=0,water=1": {
-					"model": "roots:elemental_soil_water"
-				},
-				"air=0,earth=0,fire=0,water=2": {
-					"model": "roots:elemental_soil_water"
-				},
-				"air=0,earth=0,fire=0,water=3": {
-					"model": "roots:elemental_soil_water"
-				},
-				"air=0,earth=0,fire=0,water=4": {
-					"model": "roots:elemental_soil_water"
-				}
+  "forge_market": 1,
+  "variants": {
+    "normal": {
+      "model": "roots:elemental_soil_water"
+    },
+    "handlers": {
+      "model": "roots:elemental_soil_water"
+    },
+    "water=4": {
+      "model": "roots:elemental_soil_water"
+    },
+    "water=3": {
+      "model": "roots:elemental_soil_water"
+    },
+    "water=2": {
+      "model": "roots:elemental_soil_water"
+    },
+    "water=1": {
+      "model": "roots:elemental_soil_water"
+    },
+    "water=0": {
+      "model": "roots:elemental_soil_water"
     }
+  }
 }

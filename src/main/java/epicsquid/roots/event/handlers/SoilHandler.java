@@ -8,7 +8,6 @@ import epicsquid.roots.mechanics.Harvest;
 import epicsquid.roots.util.ItemUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityXPOrb;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.EnumFacing;
@@ -36,8 +35,8 @@ public class SoilHandler {
         IBlockState soil = event.getWorld().getBlockState(event.getPos().offset(EnumFacing.DOWN));
         if (event.getState().getBlock() instanceof IPlantable && soil.getBlock()
             .canSustainPlant(soil, event.getWorld(), event.getPos().offset(EnumFacing.DOWN), EnumFacing.UP, (IPlantable) event.getState().getBlock())) {
-          if (soil.getPropertyKeys().contains(BlockElementalSoil.fireCookingMultiplier)) {
-            int cookingMultiplier = soil.getValue(BlockElementalSoil.fireCookingMultiplier);
+          if (soil.getBlock() == ModBlocks.elemental_soil_fire) {
+            int cookingMultiplier = soil.getValue(BlockElementalSoil.FIRE_MULTIPLIER);
             if (cookingMultiplier > 0) {
               ItemStack seed = Harvest.getSeed(event.getState());
 
@@ -75,8 +74,8 @@ public class SoilHandler {
               event.getDrops().addAll(newDrops);
             }
           }
-          if (soil.getPropertyKeys().contains(BlockElementalSoil.earthFertility)) {
-            int fertility = soil.getValue(BlockElementalSoil.earthFertility);
+          if (soil.getBlock() == ModBlocks.elemental_soil_earth) {
+            int fertility = soil.getValue(BlockElementalSoil.EARTH_FERTILITY);
             if (fertility > 0) {
               List<ItemStack> newDrops = new ArrayList<>();
               Random random = new Random();
@@ -106,8 +105,8 @@ public class SoilHandler {
     IBlockState plant = cropGrowEvent.getWorld().getBlockState(cropGrowEvent.getPos());
     if (plant.getBlock() instanceof IPlantable && soil.getBlock()
         .canSustainPlant(soil, cropGrowEvent.getWorld(), cropGrowEvent.getPos().offset(EnumFacing.DOWN), EnumFacing.UP, (IPlantable) plant.getBlock())) {
-      if (soil.getPropertyKeys().contains(BlockElementalSoil.airSpeed)) {
-        int speed = soil.getValue(BlockElementalSoil.airSpeed);
+      if (soil.getBlock() == ModBlocks.elemental_soil_air) {
+        int speed = soil.getValue(BlockElementalSoil.AIR_SPEED);
         if (speed > 0) {
           cropGrowEvent.setResult(Util.rand.nextInt(3) == 0 ? Event.Result.ALLOW : Event.Result.DEFAULT);
         }
