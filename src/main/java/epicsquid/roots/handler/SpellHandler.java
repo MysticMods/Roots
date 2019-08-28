@@ -244,7 +244,6 @@ public class SpellHandler implements INBTSerializable<NBTTagCompound> {
   @Nonnull
   public static SpellHandler fromStack(ItemStack stack) {
     boolean correct = stack.getItem() == ModItems.spell_dust || stack.getItem() == ModItems.staff;
-    assert correct;
 
     SpellHandler result = new SpellHandler(stack);
     NBTTagCompound tag = stack.getTagCompound();

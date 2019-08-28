@@ -1,0 +1,15 @@
+{
+  "name": "Other Imbuements",
+  "icon": "roots:imbuer",
+  "category": "basics",
+  "advancement": "roots:root",
+    "pages": [
+    {
+      "type": "text",
+      "text": "In addition to imbuing spells and removing spells, the Imbuer can also be used to repair items.$(br2)Placing a damaged item in the Imbuer will then allow you to add the appropriate repair items. These are consumed once the process is complete, and the damaged item repaired & returned."
+    },
+    {
+      "type": "empty"
+    }
+  ]
+}
