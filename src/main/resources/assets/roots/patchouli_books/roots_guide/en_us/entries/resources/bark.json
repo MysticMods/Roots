@@ -49,6 +49,19 @@
         "title": "Wildwood Bark",
         "advancement": "roots:spirit_herb",
         "text": "Dropped when breaking a Wildwood Log with a $(l:apparatus/knives)Knife.$()"
+      },
+      {
+        "type": "relations",
+        "entries": [
+          "basics/other_imbuer",
+          "basics/letter",
+          "apparatus/knives",
+          "apparatus/apothecary_pouch",
+          "apparatus/living_tools",
+          "apparatus/wildwood_armor",
+          "apparatus/wildwood_bow",
+          "apparatus/wildwood_quiver"
+        ]
       }
     ]
   }

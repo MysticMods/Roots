@@ -24,6 +24,12 @@
       "type": "crafting",
       "recipe": "mysticalworld:blockamethystcompression",
       "text": "Multiple amethysts can be combined into decorative blocks."
+    },
+    {
+      "type": "releations",
+      "entries": [
+        "apparatus/sylvan_armor"
+      ]
     }
   ]
 }

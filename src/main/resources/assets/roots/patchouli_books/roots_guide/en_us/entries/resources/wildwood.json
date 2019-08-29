@@ -31,6 +31,16 @@
         "item": "roots:wildwood_leaves",
         "link_recipe": true,
         "text": "$(info) Unlike normal trees, the leaves of the wildwood tree drop wildroot instead of saplings."
+      },
+      {
+        "type": "relations",
+        "entries": [
+          "apparatus/wildwood_armor",
+          "apparatus/wildwood_bow",
+          "apparatus/wildwood_quiver",
+          "ritual/ritual_wild_growth",
+          "herbs/wildroot"
+        ]
       }
     ]
   }

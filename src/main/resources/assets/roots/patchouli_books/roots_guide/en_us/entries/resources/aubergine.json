@@ -35,6 +35,12 @@
       "type": "crafting",
       "recipe": "mysticalworld:aubergine_stuffed",
       "text": "A meal fit for royalty!"
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "basics/letter"
+      ]
     }
   ]
 }
