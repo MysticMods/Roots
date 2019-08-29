@@ -36,14 +36,11 @@ public class GeneralConfig {
   public static String[] GrowthBlacklist = new String[]{"minecraft:tallgrass"};
 
   @Config.Ignore
-  private static boolean growthParsed = false;
-
-  @Config.Ignore
   private static Set<Block> growthBlacklist = null;
 
+  @SuppressWarnings("ConstantConditions")
   public static Set<Block> getGrowthBlacklist() {
     if (growthBlacklist == null) {
-      growthParsed = true;
       growthBlacklist = new HashSet<>();
       for (String ref : GrowthBlacklist) {
         ResourceLocation res = new ResourceLocation(ref);
