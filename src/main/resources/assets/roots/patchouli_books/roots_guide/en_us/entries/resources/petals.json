@@ -11,6 +11,12 @@
     {
       "type": "mortar_template",
       "item": "roots:petals"
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "rituals/ritual_flower_growth"
+      ]
     }
   ]
 }

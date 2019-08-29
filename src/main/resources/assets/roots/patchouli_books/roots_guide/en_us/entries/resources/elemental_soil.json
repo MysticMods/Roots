@@ -38,6 +38,15 @@
       "item": "roots:elemental_soil_earth",
       "link_recipe": true,
       "text": "$(l:herbs/stalicripe)Stalicripe$() grow on terran soil. Obtained by exposing elemental soil to the dark, covered depths of underground caves and chasms.$(br2)Normal plants can also be grown on terran soil, and the fertile earth will yield much more for the crop."
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "herbs/cloud_berry",
+        "herbs/infernal_bulb",
+        "herbs/dewgonia",
+        "herbs/stalicripe"
+      ]
     }
   ]
 }

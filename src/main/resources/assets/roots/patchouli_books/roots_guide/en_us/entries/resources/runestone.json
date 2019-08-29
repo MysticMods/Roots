@@ -23,6 +23,15 @@
     {
       "type": "crafting",
       "recipe": "roots:runestone_brick_alt"
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "resources/runic_dust",
+        "apparatus/runic_shears",
+        "apparatus/offering_plate",
+        "apparatus/runestone"
+      ]
     }
   ]
 }

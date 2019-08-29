@@ -13,6 +13,13 @@
     {
       "type": "mortar_template",
       "item": "roots:runic_dust"
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "resources/runestone",
+        "basics/spells"
+      ]
     }
   ]
 }
