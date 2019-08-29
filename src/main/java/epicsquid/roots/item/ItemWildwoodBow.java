@@ -1,6 +1,7 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemBowBase;
+import epicsquid.roots.init.ModItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.EnumRarity;
@@ -44,5 +45,10 @@ public class ItemWildwoodBow extends ItemBowBase implements ILivingRepair {
   public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
     update(stack, worldIn, entityIn, itemSlot, isSelected, 120);
     super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
+  }
+
+  @Override
+  public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+    return toRepair.getItem() == this && repair.getItem() == ModItems.bark_wildwood;
   }
 }

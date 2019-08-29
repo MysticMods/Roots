@@ -27,6 +27,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
+import java.util.List;
 
 public class ModItems {
 
@@ -42,6 +43,8 @@ public class ModItems {
       stalicripe, dewgonia, wildroot;
 
   public static Item ritual_healing_aura, ritual_heavy_storms, ritual_divine_protection, ritual_fire_storm, ritual_spreading_forest, ritual_windwall, ritual_warding_protection, ritual_germination, ritual_purity, ritual_frost_lands, ritual_animal_harvest, ritual_summon_creatures, ritual_wild_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation, ritual_gathering;
+
+  public static List<Item> barks;
 
   // TODO: Refactor this out of this file
   //Armor Materials
@@ -78,6 +81,8 @@ public class ModItems {
     event.addItem(bark_dark_oak = new ItemBase("bark_dark_oak").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(bark_acacia = new ItemBase("bark_acacia").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(bark_wildwood = new ItemBase("bark_wildwood").setModelCustom(true).setCreativeTab(Roots.tab));
+
+    barks = Arrays.asList(bark_oak, bark_spruce, bark_birch, bark_jungle, bark_dark_oak, bark_acacia, bark_wildwood);
 
     // TODO: Maybe not do this
     event.addItem(fey_leather = new ItemBase("fey_leather") {

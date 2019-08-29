@@ -153,11 +153,7 @@ public class ItemQuiver extends ItemArrowBase {
 
   @Override
   public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-    if (repair.getItem() == ModItems.bark_wildwood) {
-      return true;
-    }
-
-    return super.getIsRepairable(toRepair, repair);
+    return toRepair.getItem() == this && repair.getItem() == ModItems.bark_wildwood;
   }
 
   @Override
