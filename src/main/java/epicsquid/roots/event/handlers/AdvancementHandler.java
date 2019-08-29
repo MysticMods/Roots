@@ -45,6 +45,9 @@ public class AdvancementHandler {
 
     ResourceLocation adv = event.getAdvancement().getId();
     if (adv.getNamespace().equals(Roots.MODID)) {
+      if (adv.getPath().equals("pacifist")) {
+        return;
+      }
       World world = event.getEntityPlayer().world;
       BlockPos pos = event.getEntityPlayer().getPosition();
       grantXP(adv, world, pos);
