@@ -1,6 +1,7 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemHoeBase;
+import epicsquid.roots.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -60,5 +61,10 @@ public class ItemLivingHoe extends ItemHoeBase implements ILivingRepair {
     tooltip.add("");
     tooltip.add(TextFormatting.GREEN + "Breaks plants in a large radius.");
     super.addInformation(stack, worldIn, tooltip, flagIn);
+  }
+
+  @Override
+  public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+    return toRepair.getItem() == this && ModItems.barks.contains(repair.getItem());
   }
 }

@@ -2,6 +2,7 @@ package epicsquid.roots.item;
 
 import epicsquid.mysticallib.model.IModeledObject;
 import epicsquid.roots.Roots;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.model.ModelWildwoodArmor;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -76,5 +77,10 @@ public class ItemWildwoodArmor extends ItemArmor implements IModeledObject, ILiv
         count++;
     }
     return count;
+  }
+
+  @Override
+  public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+    return toRepair.getItem() == this && repair.getItem() == ModItems.bark_wildwood;
   }
 }

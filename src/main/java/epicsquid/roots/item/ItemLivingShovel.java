@@ -1,6 +1,7 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemShovelBase;
+import epicsquid.roots.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -42,5 +43,10 @@ public class ItemLivingShovel extends ItemShovelBase implements ILivingRepair {
     }
 
     return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+  }
+
+  @Override
+  public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+    return toRepair.getItem() == this && ModItems.barks.contains(repair.getItem());
   }
 }
