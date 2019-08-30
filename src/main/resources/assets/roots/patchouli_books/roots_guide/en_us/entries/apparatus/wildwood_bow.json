@@ -12,6 +12,13 @@
       {
         "type": "fey_crafting_template",
         "recipe": "wildwood_bow"
+      },
+      {
+        "type": "relations",
+        "entries": [
+          "basics/other_imbuer",
+          "rituals/ritual_wild_growth"
+        ]
       }
     ]
   }

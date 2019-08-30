@@ -15,6 +15,12 @@
         "recipe": "roots:pestle",
         "recipe2": "roots:mortar",
         "title": "Mortar & Pestle"
+      },
+      {
+        "type": "relations",
+        "entries": [
+          "basics/spells"
+        ]
       }
     ]
   }

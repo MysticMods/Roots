@@ -24,6 +24,13 @@
     {
       "type": "fey_crafting_template",
       "recipe": "wildwood_boots"
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "basics/other_imbuer",
+        "rituals/ritual_wild_growth"
+      ]
     }
   ]
 }

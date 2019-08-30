@@ -12,6 +12,14 @@
       {
         "type": "fey_crafting_template",
         "recipe": "wildwood_quiver"
+      },
+      {
+        "type": "relations",
+        "entries": [
+          "basics/other_imbuer",
+          "apparatus/living_tools",
+          "rituals/ritual_wild_growth"
+        ]
       }
     ]
   }

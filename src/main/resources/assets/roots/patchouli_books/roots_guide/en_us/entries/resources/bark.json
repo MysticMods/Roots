@@ -56,11 +56,8 @@
           "basics/other_imbuer",
           "basics/letter",
           "apparatus/knives",
-          "apparatus/apothecary_pouch",
-          "apparatus/living_tools",
-          "apparatus/wildwood_armor",
-          "apparatus/wildwood_bow",
-          "apparatus/wildwood_quiver"
+          "rituals/ritual_spreading_forest",
+          "rituals/ritual_wild_growth"
         ]
       }
     ]

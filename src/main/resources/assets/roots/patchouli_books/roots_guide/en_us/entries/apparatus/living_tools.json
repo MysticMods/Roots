@@ -36,7 +36,16 @@
     },
     {
       "type": "fey_crafting_template",
+      "anchor": "living_arrow",
       "recipe": "living_arrow"
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "basics/other_imbuer",
+        "apparatus/wildwood_bow",
+        "apparatus/wildwood_quiver"
+      ]
     }
   ]
 }

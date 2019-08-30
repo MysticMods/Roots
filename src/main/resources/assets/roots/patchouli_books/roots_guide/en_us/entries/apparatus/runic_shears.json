@@ -13,6 +13,15 @@
     {
       "type": "fey_crafting_template",
       "recipe": "runic_shears"
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "herbs/pereskia",
+        "herbs/wildewheet",
+        "herbs/spirit_herb",
+        "resources/runestone"
+      ]
     }
   ]
 }
