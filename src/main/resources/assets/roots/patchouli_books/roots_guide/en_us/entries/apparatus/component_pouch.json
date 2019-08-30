@@ -20,7 +20,8 @@
       {
         "type": "relations",
         "entries": [
-          "basics/spells"
+          "basics/spells",
+          "apparatus/apothecary_pouch"
         ]
       }
     ]

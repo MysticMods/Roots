@@ -2,17 +2,19 @@
   "name": "A Bucket of Water",
   "icon": "minecraft:water_bucket",
   "category": "basics",
-  "advancement": "roots:root",
+  "advancement": "roots:pyre",
   "pages": [
     {
       "type": "spotlight",
       "item": "minecraft:water_bucket",
       "link_recipe": true,
-      "text": "A surprisingly versatile tool, this ingenious device can be used to cancel any $(l:basics/pyre)pyre ritual$() that is in progress, quenching the flames and immediately settling the magical energies.$(br2)$(info) The ingredients used for the ritual are still consumed."
+      "text": "A versatile tool, buckets of water will cancel any $(l:basics/pyre)pyre ritual$() in progress, quenching the flames and immediately settling the magical energy.$(br2)$(info) The ingredients used for the ritual are still consumed.$(br2)$(info) Any container with a cool liquid in it is suitable."
     },
     {
-      "type": "text",
-      "text": "$(info) In addition to buckets, any container of fluid with a cool liquid in it is suitable for this purpose."
+      "type": "relations",
+      "entries": [
+        "basics/pyre"
+      ]
     }
   ]
 }

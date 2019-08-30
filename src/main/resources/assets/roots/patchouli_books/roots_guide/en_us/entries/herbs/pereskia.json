@@ -23,6 +23,14 @@
       "type": "smelting",
       "recipe": "roots:pereskia_bulb",
       "text": "The bulbs of the pereskia are quite delicious when cooked."
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "apparatus/runic_shears",
+        "herbs/wildewheet",
+        "herbs/spirit_herb"
+      ]
     }
   ]
 }

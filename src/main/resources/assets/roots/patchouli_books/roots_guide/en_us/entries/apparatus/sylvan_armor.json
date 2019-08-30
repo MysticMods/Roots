@@ -24,6 +24,12 @@
     {
       "type": "fey_crafting_template",
       "recipe": "sylvan_boots"
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "resources/fey_leather"
+      ]
     }
   ]
 }
