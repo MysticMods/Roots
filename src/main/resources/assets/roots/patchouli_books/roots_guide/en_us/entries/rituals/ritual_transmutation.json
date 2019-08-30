@@ -15,6 +15,7 @@
     },
     {
       "type": "multiblock",
+      "enable_visualize": false,
       "multiblock": {
         "mapping": {
           "0": "roots:bonfire",

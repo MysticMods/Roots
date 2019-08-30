@@ -16,10 +16,13 @@
       "type": "crafting",
       "recipe": "roots:pyre",
       "title": "Pyre",
-      "text": "$(info) Some rituals require runestone in specific configurations in addition to the pyre or have other requirements, in which case the required structure(s) will be listed alongside the ritual."
+      "text": "Some rituals require runestones placed in specific configurations in addition to the pyre, or have other requirements.$(br2)$(info) In all cases, these will be displayed on the page after the ingredients of the ritual."
     },
     {
-      "type": "empty"
+      "type": "relations",
+      "entries": [
+        "basics/bucket_of_water"
+      ]
     }
   ]
 }

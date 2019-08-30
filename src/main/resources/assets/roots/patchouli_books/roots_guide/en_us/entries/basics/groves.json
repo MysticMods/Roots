@@ -49,6 +49,13 @@
         },
         "enable_visualize": false,
         "text": "$(o)A hand-woven Fey Crafter, 356 AC$()"
+      },
+      {
+        "type": "relations",
+        "entries": [
+          "basics/crafting",
+          "basics/introduction"
+        ]
       }
     ]
   }

@@ -10,16 +10,19 @@
       },
       {
         "type": "text",
+        "title": "Mundane",
         "text": "Other resources are far more mundane, but still critical to unlocking the full potential of the natural arts. Resources like $(l:resources/bark)bark$() and $(l:resources/aubergine)aubergine$() allow a druid access to the energies of nature itself. All of these resources are documented within this book."
       },
       {
-        "type": "text",
+        "type": "spotlight",
+        "item": "minecraft:farmland",
         "title": "Renewables",
         "text": "Almost every resource a druid has access to is a renewable one. Wildroot and almost every herb you discover $(info) can be planted and grown on farmland, although those herbs which touch the elemental plains require special support."
       },
       {
-        "type": "text",
+        "type": "spotlight",
         "title": " ",
+        "item": "minecraft:mossy_cobblestone",
         "text": "Even with resources that might seem tedious to obtain, an insightful druid might discover a ritual, spell or other process that allows for their creation. As always, be open to new ways of learning and explore every option available until you are certain you have exhausted everything."
       },
       {
@@ -28,7 +31,17 @@
         "text": "Worry not! You may find in this book $(l:basics/letter)a letter written to you$() from a fellow druid which outlines the ways they overcame obstacles similar to the ones you might face."
       },
       {
-        "type": "empty"
+        "type": "relations",
+        "entries": [
+          "basics/letter",
+          "basics/introduction",
+          "rituals/ritual_overgrowth",
+          "rituals/ritual_germination",
+          "spells/spell_harvest",
+          "spells/spell_growth_infusion",
+          "spells/spell_rampant_growth",
+          "apparatus/elemental_soil"
+        ]
       }
     ]
   }

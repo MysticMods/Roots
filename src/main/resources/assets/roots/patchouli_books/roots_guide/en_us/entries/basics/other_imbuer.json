@@ -25,6 +25,12 @@
       "type": "spotlight",
       "item": "minecraft:iron_helmet",
       "text": "Standard vanilla items can be repaired with their relevant anvil repair item, but without the repair cost.$(br2)In addition, many other modded items can also be repaired -- if they can be repaired in an anvil."
-    }
+    },
+      {
+        "type": "relations",
+        "entries": [
+          "basics/spells"
+        ]
+      }
   ]
 }

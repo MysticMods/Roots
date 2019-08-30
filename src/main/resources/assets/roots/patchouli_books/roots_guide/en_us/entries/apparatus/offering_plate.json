@@ -17,7 +17,7 @@
     {
       "type": "relations",
       "entries": [
-        "rituals/ritual_summon_creature"
+        "rituals/ritual_summon_creatures"
     ]
     }
   ]

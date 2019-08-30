@@ -20,6 +20,12 @@
     {
       "type": "crafting",
       "recipe": "roots:spirit_herb_seed"
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "apparatus/runic_shears"
+      ]
     }
   ]
 }
