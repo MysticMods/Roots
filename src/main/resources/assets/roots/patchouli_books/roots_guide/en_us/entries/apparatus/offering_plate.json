@@ -13,6 +13,12 @@
       "type":"crafting",
       "recipe": "roots:offertory_plate",
       "title": "Offering Plate"
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "rituals/ritual_summon_creature"
+    ]
     }
   ]
 }

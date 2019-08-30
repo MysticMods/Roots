@@ -22,7 +22,9 @@
       "recipe": "mysticalworld:aubergine_seed"
     },
     {
-      "type": "text",
+      "type": "runic_shears_template",
+      "recipe": "aubergine",
+      "name": "Aubergine",
       "text": "Aubergines can additionally be obtained by using Runic Shears on fully grown carrots.",
       "advancement": "roots:runic_shears"
     },
@@ -33,7 +35,7 @@
     },
     {
       "type": "crafting",
-      "recipe": "mysticalworld:aubergine_stuffed",
+      "recipe": "mysticalworld:stuffed_aubergine",
       "text": "A meal fit for royalty!"
     },
     {

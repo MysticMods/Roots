@@ -26,6 +26,13 @@
         "type": "crafting",
         "recipe": "roots:diamond_knife",
         "recipe2": "mysticalworld:amethyst_knife"
+      },
+      {
+        "type": "relations",
+        "entries": [
+          "resources/bark",
+          "herbs/terra_moss"
+        ]
       }
     ]
   }

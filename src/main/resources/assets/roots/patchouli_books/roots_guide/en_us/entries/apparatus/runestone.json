@@ -12,6 +12,12 @@
     {
       "type": "crafting",
       "recipe": "roots:runestone_trample"
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "resources/runestone"
+      ]
     }
   ]
 }

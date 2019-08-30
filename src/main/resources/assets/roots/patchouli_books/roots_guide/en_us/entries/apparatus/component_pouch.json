@@ -16,6 +16,12 @@
         "recipe": "roots:component_pouch",
         "title": "Component Pouch",
         "text": "The right compartment carries herbs, while the left can hold any item of your choice.$(br2)$(info) A summary of what remains of the herbs used to cast a spell is displayed in the bottom left of the screen, after casting."
+      },
+      {
+        "type": "relations",
+        "entries": [
+          "basics/spells"
+        ]
       }
     ]
   }

@@ -13,6 +13,15 @@
       {
         "type": "fey_crafting_template",
         "recipe": "apothecary_pouch"
+      },
+      {
+        "type": "relations",
+        "entries": [
+          "apparatus/component_pouch",
+          "basics/spells",
+          "herbs/spirit_herb",
+          "resources/wildwood"
+        ]
       }
     ]
   }
