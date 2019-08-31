@@ -58,6 +58,8 @@ public class CommonProxy {
     if (Loader.isModLoaded("harvest")) {
       HarvestIntegration.init();
     }
+    SpellRegistry.finalise();
+    RitualRegistry.finalise();
     Advancements.init();
   }
 

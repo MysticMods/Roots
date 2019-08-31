@@ -67,4 +67,8 @@ public class SpellRegistry {
     spellRegistry.put(SpellGroveSupplication.spellName, SpellGroveSupplication.instance);
     SpellGroveSupplication.instance.setDisabled(false);
   }
+
+  public static void finalise () {
+    spellRegistry.values().forEach(SpellBase::finalise);
+  }
 }
