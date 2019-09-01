@@ -15,4 +15,9 @@ public class FakeSpellRunicDust extends SpellBase {
   public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
     return false;
   }
+
+  @Override
+  public void finalise() {
+
+  }
 }

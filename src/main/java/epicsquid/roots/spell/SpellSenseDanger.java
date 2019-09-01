@@ -4,6 +4,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -19,15 +20,24 @@ import net.minecraftforge.oredict.OreIngredient;
 import java.util.List;
 
 public class SpellSenseDanger extends SpellBase {
+  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(190);
+  public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost("cost_1", new SpellCost("wildroot", 0.285));
+  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 40);
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 40);
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 40);
+  public static Property<Integer> PROP_GLOW_DURATION = new Property<>("glow_duration", 40 * 20);
+  public static Property<Integer> PROP_NV_DURATION = new Property<>("night_vision_duration", 40 * 20);
+
   public static String spellName = "spell_sense_danger";
   public static SpellSenseDanger instance = new SpellSenseDanger(spellName);
 
+  private int radius_x, radius_y, radius_z, glowDuration, nvDuration;
+
   public SpellSenseDanger(String name) {
     super(name, TextFormatting.DARK_RED, 255f / 255f, 0f / 255f, 0f / 255f, 60f / 255f, 0f / 255f, 60f / 255f);
-    this.castType = EnumCastType.INSTANTANEOUS;
-    this.cooldown = 190;
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_NV_DURATION, PROP_GLOW_DURATION);
 
-    addCost(HerbRegistry.getHerbByName("wildroot"), 0.285f);
     addIngredients(
         new ItemStack(Items.GOLDEN_CARROT),
         new ItemStack(Items.COMPASS),
@@ -39,12 +49,26 @@ public class SpellSenseDanger extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
-    List<EntityCreature> creatures = Util.getEntitiesWithinRadius(caster.getEntityWorld(), EntityCreature.class, caster.getPosition(), 40, 40, 40);
-    caster.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 40 * 20));
+    List<EntityCreature> creatures = Util.getEntitiesWithinRadius(caster.getEntityWorld(), EntityCreature.class, caster.getPosition(), radius_x, radius_y, radius_z);
+    caster.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, nvDuration));
     for (EntityCreature creature : creatures) {
       if (!(creature instanceof IMob)) continue;
-      creature.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 40 * 20, 0));
+      creature.addPotionEffect(new PotionEffect(MobEffects.GLOWING, glowDuration, 0));
     }
     return true;
+  }
+
+  @Override
+  public void finalise() {
+    this.castType = properties.getProperty(PROP_CAST_TYPE);
+    this.cooldown = properties.getProperty(PROP_COOLDOWN);
+
+    SpellCost cost = properties.getProperty(PROP_COST_1);
+    addCost(cost.getHerb(), cost.getCost());
+    this.nvDuration = properties.getProperty(PROP_NV_DURATION);
+    this.glowDuration = properties.getProperty(PROP_GLOW_DURATION);
+    this.radius_x = properties.getProperty(PROP_RADIUS_X);
+    this.radius_y = properties.getProperty(PROP_RADIUS_Y);
+    this.radius_z = properties.getProperty(PROP_RADIUS_Z);
   }
 }

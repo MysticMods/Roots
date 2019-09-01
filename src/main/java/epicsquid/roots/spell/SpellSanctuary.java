@@ -8,6 +8,7 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageSanctuaryBurstFX;
 import epicsquid.roots.network.fx.MessageSanctuaryRingFX;
 import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EnumCreatureType;
@@ -25,18 +26,27 @@ import java.util.List;
 import java.util.Set;
 
 public class SpellSanctuary extends SpellBase {
+  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(0);
+  public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost("cost_1", new SpellCost("pereskia", 0.125));
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost("cost_2", new SpellCost("wildroot", 0.125));
+  public static Property<Float> PROP_VELOCITY = new Property<>("push_velocity", 0.125f);
+  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 4);
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5);
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 4);
+
   public static String spellName = "spell_sanctuary";
   public static SpellSanctuary instance = new SpellSanctuary(spellName);
+
+  private float velocity;
+  private int radius_x, radius_y, radius_z;
 
   private static Set<String> entitiesBlackList = new HashSet<>();
 
   public SpellSanctuary(String name) {
     super(name, TextFormatting.DARK_PURPLE, 208f / 255f, 16f / 255f, 80f / 255f, 224f / 255f, 32f / 255f, 144f / 255f);
-    this.castType = SpellBase.EnumCastType.CONTINUOUS;
-    this.cooldown = 0;
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_VELOCITY, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
 
-    addCost(HerbRegistry.getHerbByName("pereskia"), 0.125f);
-    addCost(HerbRegistry.getHerbByName("wildroot"), 0.125f);
     addIngredients(
         new ItemStack(Items.DYE, 1, 1),
         new ItemStack(ModItems.pereskia),
@@ -53,16 +63,16 @@ public class SpellSanctuary extends SpellBase {
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
 
-    List<Entity> entities = Util.getEntitiesWithinRadius(player.world, Entity.class, player.getPosition(), 4, 5, 4);
+    List<Entity> entities = Util.getEntitiesWithinRadius(player.world, Entity.class, player.getPosition(), radius_x, radius_y, radius_z);
 
     if (entities.size() > 0) {
       for (Entity e : entities) {
-        if (e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
+        if (e.getUniqueID() != player.getUniqueID()) {
           if ((e instanceof IProjectile || e instanceof IMob || e.isCreatureType(EnumCreatureType.MONSTER, false)) && (!entitiesBlackList.contains(EntityList.getKey(e).toString()))) {
             if (Math.pow((e.posX - player.posX), 2) + Math.pow((e.posY - player.posY), 2) + Math.pow((e.posZ - player.posZ), 2) < 9.0f) {
-              e.motionX = 0.125f * (e.posX - player.posX);
-              e.motionY = 0.125f * (e.posY - player.posY);
-              e.motionZ = 0.125f * (e.posZ - player.posZ);
+              e.motionX = velocity * (e.posX - player.posX);
+              e.motionY = velocity * (e.posY - player.posY);
+              e.motionZ = velocity * (e.posZ - player.posZ);
               e.velocityChanged = true;
               if (!e.isInvisible()) {
                 PacketHandler.sendToAllTracking(new MessageSanctuaryBurstFX(e.posX, e.posY + 0.6f * e.getEyeHeight(), e.posZ), e);
@@ -76,6 +86,22 @@ public class SpellSanctuary extends SpellBase {
       PacketHandler.sendToAllTracking(new MessageSanctuaryRingFX(player.posX, player.posY + 0.875f, player.posZ), player);
     }
     return true;
+  }
+
+  @Override
+  public void finalise() {
+    this.castType = properties.getProperty(PROP_CAST_TYPE);
+    this.cooldown = properties.getProperty(PROP_COOLDOWN);
+
+    SpellCost cost = properties.getProperty(PROP_COST_1);
+    addCost(cost.getHerb(), cost.getCost());
+    cost = properties.getProperty(PROP_COST_2);
+    addCost(cost.getHerb(), cost.getCost());
+
+    this.radius_x = properties.getProperty(PROP_RADIUS_X);
+    this.radius_y = properties.getProperty(PROP_RADIUS_Y);
+    this.radius_z = properties.getProperty(PROP_RADIUS_Z);
+    this.velocity = properties.getProperty(PROP_VELOCITY);
   }
 
 

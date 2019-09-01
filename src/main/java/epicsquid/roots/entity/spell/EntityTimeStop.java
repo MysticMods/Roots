@@ -1,11 +1,7 @@
 package epicsquid.roots.entity.spell;
 
-import java.util.List;
-import java.util.UUID;
-
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.SpellTimeStop;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,15 +12,25 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
+import java.util.List;
+import java.util.UUID;
+
 public class EntityTimeStop extends Entity {
   private static final DataParameter<Integer> lifetime = EntityDataManager.<Integer>createKey(EntityTimeStop.class, DataSerializers.VARINT);
   private UUID playerId = null;
 
+  private int duration;
+
   public EntityTimeStop(World worldIn) {
-    super(worldIn);
+    this(worldIn, SpellTimeStop.duration);
+  }
+
+  public EntityTimeStop(World world, int duration) {
+    super(world);
     this.setInvisible(true);
     this.setSize(1, 1);
-    getDataManager().register(lifetime, 200);
+    this.duration = duration;
+    getDataManager().register(lifetime, duration);
   }
 
   public void setPlayer(UUID id) {
@@ -67,8 +73,7 @@ public class EntityTimeStop extends Entity {
         }
       }
     }
-    List<EntityLivingBase> entities = world
-        .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 9.0, posY - 1.0, posZ - 9.0, posX + 9.0, posY + 19.0, posZ + 9.0));
+    List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 9.0, posY - 1.0, posZ - 9.0, posX + 9.0, posY + 19.0, posZ + 9.0));
     for (EntityLivingBase e : entities) {
       if (playerId != null) {
         if (e.getUniqueID().compareTo(playerId) != 0) {

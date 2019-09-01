@@ -7,6 +7,7 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageHarvestCompleteFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.mechanics.Harvest;
+import epicsquid.roots.util.types.Property;
 import net.minecraft.block.*;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
@@ -20,15 +21,22 @@ import net.minecraft.util.text.TextFormatting;
 import java.util.*;
 
 public class SpellHarvest extends SpellBase {
+  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(25);
+  public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost("cost_1", new SpellCost("wildewheet", 0.55));
+  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 6);
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5);
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 6);
+
   public static String spellName = "spell_harvest";
   public static SpellHarvest instance = new SpellHarvest(spellName);
 
+  private int radius_x, radius_y, radius_z;
+
   public SpellHarvest(String name) {
     super(name, TextFormatting.GREEN, 57f / 255f, 253f / 255f, 28f / 255f, 197f / 255f, 233f / 255f, 28f / 255f);
-    this.castType = EnumCastType.INSTANTANEOUS;
-    this.cooldown = 25;
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
 
-    addCost(HerbRegistry.getHerbByName("wildewheet"), 0.55f);
     addIngredients(
         new ItemStack(Items.GOLDEN_HOE),
         new ItemStack(ModItems.spirit_herb),
@@ -40,7 +48,6 @@ public class SpellHarvest extends SpellBase {
 
   private static List<Block> skipBlocks = Arrays.asList(Blocks.BEDROCK, Blocks.GRASS, Blocks.DIRT, Blocks.STONE, Blocks.TALLGRASS, Blocks.WATER, Blocks.LAVA, Blocks.DOUBLE_PLANT, Blocks.MELON_STEM, Blocks.PUMPKIN_STEM);
 
-
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     Harvest.prepare();
@@ -48,7 +55,7 @@ public class SpellHarvest extends SpellBase {
     List<BlockPos> pumpkinsAndMelons = new ArrayList<>();
     List<BlockPos> reedsAndCactus = new ArrayList<>();
     List<BlockPos> crops = Util.getBlocksWithinRadius(player.world, player.getPosition(),
-        6, 5, 6, (pos) -> {
+        radius_x, radius_y, radius_z, (pos) -> {
           if (player.world.isAirBlock(pos)) return false;
           IBlockState state = player.world.getBlockState(pos);
           Block block = state.getBlock();
@@ -125,5 +132,18 @@ public class SpellHarvest extends SpellBase {
     }
 
     return count != 0;
+  }
+
+  @Override
+  public void finalise() {
+    this.castType = properties.getProperty(PROP_CAST_TYPE);
+    this.cooldown = properties.getProperty(PROP_COOLDOWN);
+
+    SpellCost cost = properties.getProperty(PROP_COST_1);
+    addCost(cost.getHerb(), cost.getCost());
+
+    this.radius_x = properties.getProperty(PROP_RADIUS_X);
+    this.radius_y = properties.getProperty(PROP_RADIUS_Y);
+    this.radius_z = properties.getProperty(PROP_RADIUS_Z);
   }
 }
