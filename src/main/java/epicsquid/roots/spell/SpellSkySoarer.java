@@ -4,6 +4,7 @@ import epicsquid.roots.entity.spell.EntityBoost;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -13,15 +14,17 @@ import net.minecraftforge.oredict.OreIngredient;
 import java.util.List;
 
 public class SpellSkySoarer extends SpellBase {
+  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(39);
+  public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost("cost_1", new SpellCost("cloud_berry", 0.15));
+
   public static String spellName = "spell_sky_soarer";
   public static SpellSkySoarer instance = new SpellSkySoarer(spellName);
 
   public SpellSkySoarer(String name) {
     super(name, TextFormatting.BLUE, 32f / 255f, 200f / 255f, 255f / 255f, 32f / 255f, 64f / 255f, 255f / 255f);
-    this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
-    this.cooldown = 39;
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1);
 
-    addCost(HerbRegistry.getHerbByName("cloud_berry"), 0.15f);
     addIngredients(
         new ItemStack(Items.SUGAR),
         new ItemStack(ModItems.petals),
@@ -42,4 +45,12 @@ public class SpellSkySoarer extends SpellBase {
     return true;
   }
 
+  @Override
+  public void finalise() {
+    this.castType = properties.getProperty(PROP_CAST_TYPE);
+    this.cooldown = properties.getProperty(PROP_COOLDOWN);
+
+    SpellCost cost = properties.getProperty(PROP_COST_1);
+    addCost(cost.getHerb(), cost.getCost());
+  }
 }

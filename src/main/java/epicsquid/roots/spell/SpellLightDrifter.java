@@ -7,6 +7,7 @@ import epicsquid.roots.network.fx.MessageLightDrifterFX;
 import epicsquid.roots.network.fx.MessageLightDrifterSync;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.Constants;
+import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -16,16 +17,21 @@ import net.minecraftforge.oredict.OreIngredient;
 import java.util.List;
 
 public class SpellLightDrifter extends SpellBase {
+  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(400);
+  public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost("cost_1", new SpellCost("pereskia", 0.5));
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost("cost_2", new SpellCost("moonglow_leaf", 0.25));
+  public static Property<Integer> PROP_DURATION = new Property<>("duration", 280);
+
   public static String spellName = "spell_light_drifter";
   public static SpellLightDrifter instance = new SpellLightDrifter(spellName);
 
+  private int duration;
+
   public SpellLightDrifter(String name) {
     super(name, TextFormatting.AQUA, 196f / 255f, 240f / 255f, 255f / 255f, 32f / 255f, 64f / 255f, 96f / 255f);
-    this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
-    this.cooldown = 200;
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DURATION);
 
-    addCost(HerbRegistry.getHerbByName("pereskia"), 0.5f);
-    addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.25f);
     addIngredients(
         new OreIngredient("enderpearl"),
         new ItemStack(ModItems.moonglow_leaf),
@@ -41,7 +47,7 @@ public class SpellLightDrifter extends SpellBase {
       player.capabilities.disableDamage = true;
       player.capabilities.allowFlying = true;
       player.noClip = true;
-      player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, 100);
+      player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, duration);
       player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_X, player.posX);
       player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_Y, player.posY);
       player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_Z, player.posZ);
@@ -57,4 +63,16 @@ public class SpellLightDrifter extends SpellBase {
     return true;
   }
 
+  @Override
+  public void finalise() {
+    this.castType = properties.getProperty(PROP_CAST_TYPE);
+    this.cooldown = properties.getProperty(PROP_COOLDOWN);
+
+    SpellCost cost = properties.getProperty(PROP_COST_1);
+    addCost(cost.getHerb(), cost.getCost());
+    cost = properties.getProperty(PROP_COST_2);
+    addCost(cost.getHerb(), cost.getCost());
+
+    this.duration = properties.getProperty(PROP_DURATION);
+  }
 }

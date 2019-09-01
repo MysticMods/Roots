@@ -6,6 +6,7 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageTimeStopStartFX;
 import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -15,16 +16,21 @@ import net.minecraftforge.oredict.OreIngredient;
 import java.util.List;
 
 public class SpellTimeStop extends SpellBase {
+  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(320);
+  public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost("cost_1", new SpellCost("pereskia", 0.5));
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost("cost_2", new SpellCost("moonglow_leaf", 0.5));
+  public static Property<Integer> PROP_DURATION = new Property<>("duration", 200);
+
   public static String spellName = "spell_time_stop";
   public static SpellTimeStop instance = new SpellTimeStop(spellName);
 
+  public static int duration;
+
   public SpellTimeStop(String name) {
     super(name, TextFormatting.DARK_BLUE, 64f / 255f, 64f / 255f, 64f / 255f, 192f / 255f, 32f / 255f, 255f / 255f);
-    this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
-    this.cooldown = 320;
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DURATION);
 
-    addCost(HerbRegistry.getHerbByName("pereskia"), 0.5f);
-    addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.5f);
     addIngredients(
         new OreIngredient("enderpearl"),
         new ItemStack(ModItems.moonglow_leaf),
@@ -37,7 +43,7 @@ public class SpellTimeStop extends SpellBase {
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
-      EntityTimeStop timeStop = new EntityTimeStop(player.world);
+      EntityTimeStop timeStop = new EntityTimeStop(player.world, duration);
       timeStop.setPlayer(player.getUniqueID());
       timeStop.setPosition(player.posX, player.posY, player.posZ);
       player.world.spawnEntity(timeStop);
@@ -46,4 +52,16 @@ public class SpellTimeStop extends SpellBase {
     return true;
   }
 
+  @Override
+  public void finalise() {
+    this.castType = properties.getProperty(PROP_CAST_TYPE);
+    this.cooldown = properties.getProperty(PROP_COOLDOWN);
+
+    SpellCost cost = properties.getProperty(PROP_COST_1);
+    addCost(cost.getHerb(), cost.getCost());
+    cost = properties.getProperty(PROP_COST_2);
+    addCost(cost.getHerb(), cost.getCost());
+
+    duration = properties.getProperty(PROP_DURATION);
+  }
 }
