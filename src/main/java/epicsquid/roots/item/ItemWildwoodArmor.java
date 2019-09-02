@@ -51,20 +51,20 @@ public class ItemWildwoodArmor extends ItemArmor implements IModeledObject, ILiv
   public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
     switch (piecesWorn(player)) {
       case 1:
-        if (itemRand.nextInt(80) == 0 && player.shouldHeal())
+        if (itemRand.nextInt(8 * 20) == 0 && player.shouldHeal())
           player.heal(1);
         break;
       case 2:
-        if (itemRand.nextInt(60) == 0 && player.shouldHeal())
+        if (itemRand.nextInt(6 * 20) == 0 && player.shouldHeal())
           player.heal(1);
         break;
       case 3:
-        if (itemRand.nextInt(40) == 0 && player.shouldHeal())
+        if (itemRand.nextInt(5 * 20) == 0 && player.shouldHeal())
           player.heal(1);
         break;
       case 4:
-        if (itemRand.nextInt(30) == 0 && player.shouldHeal())
-          player.heal(2);
+        if (itemRand.nextInt((int) 2.5 * 20) == 0 && player.shouldHeal())
+          player.heal(1);
         break;
       default:
     }
