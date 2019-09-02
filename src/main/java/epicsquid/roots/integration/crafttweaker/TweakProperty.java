@@ -1,0 +1,36 @@
+package epicsquid.roots.integration.crafttweaker;
+
+import crafttweaker.annotations.ZenRegister;
+import epicsquid.roots.Roots;
+import epicsquid.roots.util.types.Property;
+import epicsquid.roots.util.types.PropertyTable;
+import stanhebben.zenscript.annotations.ZenClass;
+import stanhebben.zenscript.annotations.ZenMethod;
+
+@SuppressWarnings("unchecked")
+@ZenRegister
+@ZenClass("mods." + Roots.MODID + ".Property")
+public class TweakProperty {
+  private Property<?> original;
+  private PropertyTable table;
+
+  public TweakProperty(Property<?> original, PropertyTable table) {
+    this.original = original;
+    this.table = table;
+  }
+
+  @ZenMethod
+  public <T> T getValue () {
+    return (T) table.getProperty(original);
+  }
+
+  @ZenMethod
+  public <T> T getDefaultValue () {
+    return (T) original.defaultValue;
+  }
+
+  @ZenMethod
+  public <T> void setValue (T value) {
+    table.setProperty((Property<T>) original, value);
+  }
+}
