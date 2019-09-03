@@ -25,7 +25,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import java.util.List;
 
 public class SpellAcidCloud extends SpellBase {
-  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(0);
+  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(10);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost("cost_1", new SpellCost("baffle_cap", 0.250));
   public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(5f);
