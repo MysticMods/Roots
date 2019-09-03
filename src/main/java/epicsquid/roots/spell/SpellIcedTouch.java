@@ -17,6 +17,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -50,32 +51,49 @@ public class SpellIcedTouch extends SpellBase {
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     World world = player.world;
     if (modules.contains(ModuleRegistry.module_touch)) {
-      player.addPotionEffect(new PotionEffect(RegistryManager.freeze, touchDuration));
+      if (!world.isRemote) {
+        player.addPotionEffect(new PotionEffect(RegistryManager.freeze, touchDuration));
+        world.playSound(null, player.getPosition(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 2f);
+      }
+      return true;
     } else {
       RayTraceResult result = this.rayTrace(player, player.isSneaking() ? 1 : 10);
       if (result != null && (!player.isSneaking() && result.typeOfHit == RayTraceResult.Type.BLOCK)) {
         BlockPos pos = result.getBlockPos().offset(result.sideHit);
         IBlockState state = world.getBlockState(pos);
-        if (!world.isRemote) {
-          if (state.getBlock() == Blocks.FIRE) {
+        boolean didSpell = false;
+        if (state.getBlock() == Blocks.FIRE) {
+          didSpell = true;
+          if (!world.isRemote) {
             world.setBlockState(pos, Blocks.AIR.getDefaultState());
-          } else if (state.getBlock() == Blocks.LAVA) {
+            world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 1);
+          }
+        } else if (state.getBlock() == Blocks.LAVA) {
+          didSpell = true;
+          if (!world.isRemote) {
             world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState());
-          } else if (state.getBlock() == Blocks.WATER) {
+            world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 1);
+          }
+        } else if (state.getBlock() == Blocks.WATER) {
+          didSpell = true;
+          if (!world.isRemote) {
             world.setBlockState(pos, Blocks.ICE.getDefaultState());
-          } else if (world.isAirBlock(pos)) {
-            IBlockState down = world.getBlockState(pos.down());
-            if (down.getBlockFaceShape(world, pos, EnumFacing.UP) == BlockFaceShape.SOLID) {
+            world.playSound(null, pos, SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.PLAYERS, 0.3f, 1);
+          }
+        } else if (world.isAirBlock(pos)) {
+          IBlockState down = world.getBlockState(pos.down());
+          if (down.getBlockFaceShape(world, pos, EnumFacing.UP) == BlockFaceShape.SOLID) {
+            didSpell = true;
+            if (!world.isRemote) {
               world.setBlockState(pos, Blocks.SNOW_LAYER.getDefaultState());
+              world.playSound(null, pos, SoundEvents.BLOCK_CLOTH_PLACE, SoundCategory.PLAYERS, 0.3f, 1);
             }
           }
-        } else {
-          if (state.getBlock() == Blocks.FIRE || state.getBlock() == Blocks.LAVA) {
-            player.playSound(SoundEvents.BLOCK_FIRE_EXTINGUISH, 0.5f, 1);
-          }
         }
-        PacketHandler.sendToAllTracking(new MessageIcedTouchFX(pos.getX(), pos.getY(), pos.getZ()), player);
-        return true;
+        if (didSpell) {
+          PacketHandler.sendToAllTracking(new MessageIcedTouchFX(pos.getX(), pos.getY(), pos.getZ()), player);
+        }
+        return didSpell;
       }
     }
     return false;
