@@ -7,6 +7,7 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageIcedTouchFX;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -14,6 +15,7 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -57,7 +59,10 @@ public class SpellIcedTouch extends SpellBase {
           } else if (state.getBlock() == Blocks.WATER) {
             world.setBlockState(pos, Blocks.ICE.getDefaultState());
           } else if (world.isAirBlock(pos)) {
-            world.setBlockState(result.getBlockPos().offset(result.sideHit), Blocks.SNOW_LAYER.getDefaultState());
+            IBlockState down = world.getBlockState(pos.down());
+            if (down.getBlockFaceShape(world, pos, EnumFacing.UP) == BlockFaceShape.SOLID) {
+              world.setBlockState(pos, Blocks.SNOW_LAYER.getDefaultState());
+            }
           }
         } else {
           if (state.getBlock() == Blocks.FIRE || state.getBlock() == Blocks.LAVA) {
