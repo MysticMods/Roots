@@ -174,9 +174,11 @@ public class ModRecipes {
 
   @Nullable
   public static BarkRecipe getModdedBarkRecipe(IBlockState block) {
-    ItemStack stack = new ItemStack(block.getBlock(), block.getBlock().damageDropped(block));
+    ItemStack stack = new ItemStack(block.getBlock(), 1, block.getBlock().damageDropped(block));
     for (BarkRecipe recipe : barkRecipes.values()) {
-
+      if (ItemUtil.equalWithoutSize(recipe.getBlockStack(), stack)) {
+        return recipe;
+      }
     }
     return null;
   }

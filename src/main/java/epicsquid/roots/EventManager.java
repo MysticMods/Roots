@@ -55,37 +55,6 @@ import java.util.List;
 public class EventManager {
   public static long ticks = 0;
 
-  @SubscribeEvent
-  public static void barkHarvested(HarvestDropsEvent event) {
-    if (event.getHarvester() != null) {
-      ItemStack tool = event.getHarvester().getHeldItem(EnumHand.MAIN_HAND);
-      if (tool.getItem().getToolClasses(tool).contains("druidKnife")) {
-        event.getDrops().clear();
-        IBlockState blockstate = event.getState();
-        Block block = blockstate.getBlock();
-        EnumType type = (block == Blocks.LOG) ?
-            blockstate.getValue(BlockOldLog.VARIANT) :
-            (block == Blocks.LOG2) ? blockstate.getValue(BlockNewLog.VARIANT) : null;
-        BarkRecipe bark;
-        if (type == null) {
-          bark = ModRecipes.getModdedBarkRecipe(blockstate);
-        } else {
-          bark = ModRecipes.getVanillaBarkRecipe(type);
-        }
-        if (bark != null) {
-          ItemStack barkStack = bark.getBarkStack(4 + Util.rand.nextInt(getAdditionalBarkAmount(tool)) + 1);
-          if (!event.getWorld().isRemote) {
-            ItemUtil.spawnItem(event.getWorld(), event.getPos(), barkStack);
-          }
-        }
-      }
-    }
-  }
-
-  private static int getAdditionalBarkAmount(ItemStack stack) {
-    return Math.max(EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack) + 1, EnchantmentHelper.getEnchantmentLevel(Enchantments.LOOTING, stack) + 1);
-  }
-
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public static void onTick(TickEvent.ClientTickEvent event) {
     if (event.side == Side.CLIENT) {
