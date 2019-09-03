@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SpellRadiance extends SpellBase {
-  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(0);
+  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(10);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost("cost_1", new SpellCost("pereskia", 0.5));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost("cost_2", new SpellCost("infernal_bulb", 0.25));
