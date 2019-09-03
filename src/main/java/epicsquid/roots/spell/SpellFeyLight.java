@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -48,8 +49,7 @@ public class SpellFeyLight extends SpellBase {
       if (world.isAirBlock(pos)) {
         if (!world.isRemote) {
           world.setBlockState(pos, ModBlocks.fey_light.getDefaultState());
-        } else {
-          player.playSound(SoundEvents.BLOCK_FIRE_EXTINGUISH, 0.5f, 1);
+          world.playSound(null, pos, SoundEvents.BLOCK_CLOTH_PLACE, SoundCategory.PLAYERS, 0.25f, 1);
         }
         return true;
       }
