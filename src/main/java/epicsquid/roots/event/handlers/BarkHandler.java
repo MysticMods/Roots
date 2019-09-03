@@ -41,7 +41,7 @@ public class BarkHandler {
           bark = ModRecipes.getVanillaBarkRecipe(type);
         }
         if (bark != null) {
-          ItemStack barkStack = bark.getBarkStack(4 + Util.rand.nextInt(getAdditionalBarkAmount(tool)) + 1);
+          ItemStack barkStack = bark.getBarkStack(4 + (Util.rand.nextInt(getAdditionalBarkAmount(tool))));
           if (!event.getWorld().isRemote) {
             ItemUtil.spawnItem(event.getWorld(), event.getPos(), barkStack);
           }
@@ -51,6 +51,6 @@ public class BarkHandler {
   }
 
   private static int getAdditionalBarkAmount(ItemStack stack) {
-    return Math.max(EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack) + 1, EnchantmentHelper.getEnchantmentLevel(Enchantments.LOOTING, stack) + 1);
+    return Math.max(EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack) + 2, EnchantmentHelper.getEnchantmentLevel(Enchantments.LOOTING, stack) + 2);
   }
 }

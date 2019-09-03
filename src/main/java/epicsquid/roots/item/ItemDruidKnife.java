@@ -24,6 +24,7 @@ public class ItemDruidKnife extends ItemKnifeBase {
 
   public ItemDruidKnife(String name, ToolMaterial material) {
     super(name, material);
+    ModItems.knives.add(this);
   }
 
   @Override

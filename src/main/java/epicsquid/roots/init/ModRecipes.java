@@ -2,12 +2,14 @@ package epicsquid.roots.init;
 
 import com.google.common.collect.Lists;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
+import epicsquid.mysticallib.item.ItemKnifeBase;
 import epicsquid.mysticallib.recipe.factories.OreFallbackIngredient;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.entity.*;
 import epicsquid.mysticalworld.materials.Metal;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
+import epicsquid.roots.item.ItemDruidKnife;
 import epicsquid.roots.recipe.*;
 import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
 import epicsquid.roots.spell.SpellBase;
@@ -168,6 +170,11 @@ public class ModRecipes {
   }
 
   public static void addModdedBarkRecipe(String name, ItemStack item, ItemStack blockStack) {
+    if (blockStack.getItem() instanceof ItemBlock) {
+      for (Item knife : ModItems.knives) {
+        ((ItemDruidKnife) knife).addEffectiveBlock(((ItemBlock) blockStack.getItem()).getBlock());
+      }
+    }
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
     barkRecipes.put(rl, new BarkRecipe(rl, item, blockStack));
   }
