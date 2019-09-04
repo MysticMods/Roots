@@ -19,6 +19,10 @@
       "text": "Some rituals require runestones placed in specific configurations in addition to the pyre, or have other requirements.$(br2)$(info) In all cases, these will be displayed on the page after the ingredients of the ritual."
     },
     {
+      "type": "text",
+      "text": "$(warning) Standing stones must be place so the bottom-most block is at the same level as the pyre to be valid."
+    },
+    {
       "type": "relations",
       "entries": [
         "basics/bucket_of_water"
