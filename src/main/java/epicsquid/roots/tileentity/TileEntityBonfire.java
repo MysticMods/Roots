@@ -53,7 +53,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 public class TileEntityBonfire extends TileBase implements ITickable {
@@ -386,7 +385,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       for (BlockPos.MutableBlockPos pos : BlockPos.getAllInBoxMutable(start, stop)) {
         if (world.getBlockState(pos).getBlock() == Blocks.FIRE) {
           fire = true;
-          world.setBlockToAir(pos);
+          if (!world.getBlockState(pos.down()).getBlock().isFireSource(world, pos.down(), EnumFacing.UP)) {
+            world.setBlockToAir(pos);
+          }
         }
       }
       if (fire) {
