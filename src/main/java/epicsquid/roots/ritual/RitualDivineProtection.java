@@ -21,7 +21,6 @@ public class RitualDivineProtection extends RitualBase {
         new ItemStack(ModItems.bark_oak),
         new ItemStack(Items.GLOWSTONE_DUST)
     ));
-    addCondition(new ConditionWorldTime(0, 13000));
     setIcon(ModItems.ritual_divine_protection);
     setColor(TextFormatting.YELLOW);
     setBold(true);
