@@ -16,7 +16,7 @@ import java.util.List;
 public class SpellSkySoarer extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(39);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost("cost_1", new SpellCost("cloud_berry", 0.15));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("cloud_berry", 0.15));
 
   public static String spellName = "spell_sky_soarer";
   public static SpellSkySoarer instance = new SpellSkySoarer(spellName);

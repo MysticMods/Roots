@@ -23,7 +23,7 @@ import java.util.List;
 public class SpellShatter extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(20);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost("cost_1", new SpellCost("stalicripe", 0.0625));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("stalicripe", 0.0625));
 
   public static String spellName = "spell_shatter";
   public static SpellShatter instance = new SpellShatter(spellName);

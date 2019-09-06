@@ -22,7 +22,7 @@ import java.util.List;
 public class SpellFeyLight extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(20);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost("cost_1", new SpellCost("cloud_berry", 0.125));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("cloud_berry", 0.125));
 
   public static String spellName = "spell_fey_light";
   public static SpellFeyLight instance = new SpellFeyLight(spellName);

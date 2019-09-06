@@ -17,7 +17,7 @@ import java.util.List;
 public class SpellGeas extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(80);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost("cost_1", new SpellCost("wildewheet", 0.5));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("wildewheet", 0.5));
   public static Property<Integer> PROP_DURATION = new Property<>("geas_duration", 400);
 
   public static String spellName = "spell_geas";

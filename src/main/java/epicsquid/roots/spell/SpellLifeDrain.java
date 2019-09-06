@@ -24,8 +24,8 @@ import java.util.List;
 public class SpellLifeDrain extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(0);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost("cost_1", new SpellCost("moonglow_leaf", 0.25));
-  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost("cost_2", new SpellCost("baffle_cap", 0.125));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("moonglow_leaf", 0.25));
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("baffle_cap", 0.125));
   public static Property<Float> PROP_WITHER_DAMAGE = new Property<>("wither_damage", 3f);
   public static Property<Float> PROP_HEAL = new Property<>("heal", 1.5f);
   public static Property<Integer> PROP_WITHER_DURATION = new Property<>("wither_duration", 70);

@@ -15,7 +15,7 @@ import java.util.List;
 public class SpellSecondWind extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(24);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost("cost_1", new SpellCost("dewgonia", 0.125));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("dewgonia", 0.125));
 
   public static String spellName = "spell_second_wind";
   public static SpellSecondWind instance = new SpellSecondWind(spellName);

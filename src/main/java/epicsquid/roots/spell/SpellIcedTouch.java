@@ -30,7 +30,7 @@ import java.util.List;
 public class SpellIcedTouch extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(100);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost("cost_1", new SpellCost("dewgonia", 0.015));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("dewgonia", 0.015));
   public static Property<Integer> PROP_TOUCH_DURATION = new Property<>("touch_duration", 600);
 
   public static String spellName = "spell_iced_touch";
