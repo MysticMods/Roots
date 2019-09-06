@@ -26,8 +26,8 @@ import java.util.List;
 public class SpellGroveSupplication extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(10);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost("cost_1", new SpellCost("wildroot", 0.1));
-  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost("cost_2", new SpellCost("terra_moss", 0.1));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("wildroot", 0.1));
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("terra_moss", 0.1));
 
   public static String spellName = "spell_supplication";
   public static SpellGroveSupplication instance = new SpellGroveSupplication(spellName);

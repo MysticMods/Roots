@@ -24,7 +24,7 @@ import java.util.Random;
 public class SpellGrowthInfusion extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(0);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost("cost_1", new SpellCost("terra_moss", 0.08));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("terra_moss", 0.08));
   public static Property<Integer> PROP_TICK_COUNT = new Property<>("tick_count", 1);
 
   public static String spellName = "spell_growth_infusion";

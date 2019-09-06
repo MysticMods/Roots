@@ -17,7 +17,7 @@ import java.util.List;
 public class SpellRoseThorns extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(24);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost("cost_1", new SpellCost("terra_moss", 0.25));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("terra_moss", 0.25));
   public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(8f);
   public static Property<Integer> PROP_SLOWNESS_DURATION = new Property<>("slowness_duration", 80);
   public static Property<Integer> PROP_SLOWNESS_AMPLIFIER = new Property<>("slowness_amplifier", 0);

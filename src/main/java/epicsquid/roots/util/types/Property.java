@@ -31,8 +31,8 @@ public class Property<T> {
   }
 
   public static class PropertyCost extends Property<SpellBase.SpellCost> {
-    public PropertyCost(String name, SpellBase.SpellCost defaultValue) {
-      super(name, defaultValue);
+    public PropertyCost(int index, SpellBase.SpellCost defaultValue) {
+      super("cost_" + index, defaultValue);
     }
   }
 

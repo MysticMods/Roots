@@ -21,8 +21,8 @@ import java.util.Random;
 public class SpellRampantGrowth extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(0);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost("cost_1", new SpellCost("spirit_herb", 0.65));
-  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost("cost_2", new SpellCost("pereskia", 0.45));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("spirit_herb", 0.65));
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("pereskia", 0.45));
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15);
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 15);
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15);
