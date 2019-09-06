@@ -17,6 +17,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.HashSet;
 import java.util.List;
@@ -80,6 +81,16 @@ public class EntityRitualSpreadingForest extends EntityRitualBase {
           for (ItemStack s : drops) {
             if (s.getItem() instanceof ItemBlock && ((ItemBlock) s.getItem()).getBlock() instanceof BlockSapling) {
               saplingBlocks.add(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()));
+            } else {
+              int[] ids = OreDictionary.getOreIDs(s);
+              if (ids.length == 0) {
+                continue;
+              }
+              for (int id : ids) {
+                if (OreDictionary.getOreName(id).equals("treeSapling")) {
+                  saplingBlocks.add(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()));
+                }
+              }
             }
           }
         }
