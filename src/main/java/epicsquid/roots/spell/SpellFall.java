@@ -7,6 +7,7 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageFallFX;
 import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.util.types.Property;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.BlockLeaves;
@@ -25,19 +26,21 @@ import java.util.List;
 
 public class SpellFall extends SpellBase {
 
+    public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(120);
+    public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
+    public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("stalicripe", 0.05));
+    public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("wildewheet", 0.025));
+    public static Property<Integer> PROP_RADIUS = new Property<>("radius", 10);
+
     public static String spellName = "spell_fall";
     public static SpellFall instance = new SpellFall(spellName);
+
+    private int radius;
 
     private int count;
 
     public SpellFall(String name) {
         super(name, TextFormatting.GOLD, 227/255F, 179/255F, 66/255F, 209/255F, 113/255F, 10/255F);
-
-        this.castType = EnumCastType.CONTINUOUS;
-        this.cooldown = 120;
-
-        addCost(HerbRegistry.getHerbByName("stalicripe"), 0.05F);
-        addCost(HerbRegistry.getHerbByName("wildewheet"), 0.025F);
 
         addIngredients(
                 new ItemStack(ModItems.stalicripe),
@@ -51,8 +54,7 @@ public class SpellFall extends SpellBase {
     public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
 
         count++;
-        boolean hadEffect = false;
-        List<BlockPos> blocks = Util.getBlocksWithinRadius(caster.world, caster.getPosition(), 10, 10, 10, blockPos -> isAffectedByFallSpell(caster.world, blockPos));
+        List<BlockPos> blocks = Util.getBlocksWithinRadius(caster.world, caster.getPosition(), radius, radius, radius, blockPos -> isAffectedByFallSpell(caster.world, blockPos));
 
         BlockPos pos;
         if (blocks.size() > 1)
@@ -88,5 +90,18 @@ public class SpellFall extends SpellBase {
         Block block = state.getBlock();
 
         return block instanceof BlockLeaves || block instanceof BlockGrass || block instanceof BlockTallGrass;
+    }
+
+    @Override
+    public void finalise() {
+        this.castType = properties.getProperty(PROP_CAST_TYPE);
+        this.cooldown = properties.getProperty(PROP_COOLDOWN);
+
+        SpellCost cost1 = properties.getProperty(PROP_COST_1);
+        SpellCost cost2 = properties.getProperty(PROP_COST_2);
+        this.addCost(cost1.getHerb(), cost1.getCost());
+        this.addCost(cost2.getHerb(), cost2.getCost());
+
+        this.radius = properties.getProperty(PROP_RADIUS);
     }
 }

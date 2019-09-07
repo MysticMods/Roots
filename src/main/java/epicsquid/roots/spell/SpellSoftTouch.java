@@ -1,10 +1,14 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageSoftTouchFX;
 import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.util.types.Property;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,16 +25,16 @@ import java.util.Random;
 
 public class SpellSoftTouch extends SpellBase {
 
+  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(20);
+  public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("terra_moss", 0.125));
+
   public static String spellName = "spell_soft_touch";
   public static SpellSoftTouch instance = new SpellSoftTouch(spellName);
 
   public SpellSoftTouch(String name) {
     super(name, TextFormatting.GRAY, 64F/255F, 232F/255F, 159F/255F, 209F/255F, 209F/255F, 209F/255F);
 
-    this.cooldown = 20;
-    this.castType = EnumCastType.INSTANTANEOUS;
-
-    addCost(HerbRegistry.getHerbByName("terra_moss"), 0.125F);
     addIngredients(
             new ItemStack(ModItems.bark_birch),
             new ItemStack(ModItems.terra_moss),
@@ -49,7 +53,8 @@ public class SpellSoftTouch extends SpellBase {
         IBlockState state = caster.world.getBlockState(pos);
         if (canApplySpell(state))
         {
-          caster.world.setBlockState(pos, Blocks.AIR.getBlockState().getBaseState());
+          // FIXME: 07/09/2019 dropping sunflowers with tall grass
+          caster.world.setBlockToAir(pos);
           caster.world.spawnEntity(new EntityItem(caster.world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(state.getBlock())));
 
           PacketHandler.sendToAllTracking(new MessageSoftTouchFX(pos.getX(), pos.getY(), pos.getZ()), caster);
@@ -62,13 +67,26 @@ public class SpellSoftTouch extends SpellBase {
 
   private boolean canApplySpell(IBlockState state)
   {
-    return (Item.getItemFromBlock(state.getBlock()) != (state.getBlock().getItemDropped(state, new Random(), 0))
-            || state.getBlock().equals(Blocks.ICE)
-            || state.getBlock().equals(Blocks.PACKED_ICE)
-            || state.getBlock().equals(Blocks.GLASS)
-            || state.getBlock().equals(Blocks.GLASS_PANE)
-            || state.getBlock().equals(Blocks.STAINED_GLASS)
-            || state.getBlock().equals(Blocks.STAINED_GLASS_PANE));
+    Block block = state.getBlock();
+
+    return (Item.getItemFromBlock(block) != (block.getItemDropped(state, Util.rand, 0))
+            || block.equals(Blocks.ICE)
+            || block.equals(Blocks.PACKED_ICE)
+            || block.equals(Blocks.GLASS)
+            || block.equals(Blocks.GLASS_PANE)
+            || block.equals(Blocks.STAINED_GLASS)
+            || block.equals(Blocks.STAINED_GLASS_PANE));
 
   }
+
+  @Override
+  public void finalise() {
+
+    this.castType = properties.getProperty(PROP_CAST_TYPE);
+    this.cooldown = properties.getProperty(PROP_COOLDOWN);
+
+    SpellCost cost1 = properties.getProperty(PROP_COST_1);
+    this.addCost(cost1.getHerb(), cost1.getCost());
+  }
+
 }

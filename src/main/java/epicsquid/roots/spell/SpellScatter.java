@@ -6,6 +6,7 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageScatterPlantFX;
 import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.util.types.Property;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -23,16 +24,19 @@ import java.util.List;
 
 public class SpellScatter extends SpellBase {
 
+  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(60);
+  public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("wildroot", 0.25));
+  public static Property<Integer> PROP_RADIUS = new Property<>("radius", 7);
+
   public static String spellName = "spell_scatter";
   public static SpellScatter instance = new SpellScatter(spellName);
+
+  private int radius;
 
   public SpellScatter(String name) {
     super(name, TextFormatting.DARK_GREEN, 188F/255F, 244F/255F, 151F/255F, 71F/255F, 132F/255F, 30F/255F);
 
-    this.castType = EnumCastType.INSTANTANEOUS;
-    this.cooldown = 60;
-
-    addCost(HerbRegistry.getHerbByName("wildroot"), 0.25F);
     addIngredients(
             new ItemStack(ModItems.terra_spores),
             new ItemStack(ModItems.wildroot),
@@ -44,7 +48,7 @@ public class SpellScatter extends SpellBase {
   @Override
   public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
 
-    List<BlockPos> blocks = Util.getBlocksWithinRadius(caster.world, caster.getPosition().down(), 7, 1, 7, Blocks.FARMLAND);
+    List<BlockPos> blocks = Util.getBlocksWithinRadius(caster.world, caster.getPosition().down(), radius, 1, radius, Blocks.FARMLAND);
     boolean hadEffect = false;
 
     for (BlockPos pos : blocks)
@@ -86,4 +90,16 @@ public class SpellScatter extends SpellBase {
       }
       });
   }
+
+  @Override
+  public void finalise() {
+    this.castType = properties.getProperty(PROP_CAST_TYPE);
+    this.cooldown = properties.getProperty(PROP_COOLDOWN);
+
+    SpellCost cost1 = properties.getProperty(PROP_COST_1);
+    this.addCost(cost1.getHerb(), cost1.getCost());
+
+    this.radius = properties.getProperty(PROP_RADIUS);
+  }
+
 }

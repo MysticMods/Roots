@@ -5,6 +5,7 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageDisarmFX;
 import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,17 +22,20 @@ import java.util.UUID;
 
 public class SpellDisarm extends SpellBase{
 
+  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(100);
+  public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("moonglow_leaf", 0.25));
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("spirit_herb", 0.25));
+  public static Property<Integer> PROP_RADIUS = new Property<>("radius", 20);
+
   public static String spellName = "spell_disarm";
   public static SpellDisarm instance = new SpellDisarm(spellName);
 
+  private int radius;
+
   private SpellDisarm(String name) {
     super(name, TextFormatting.DARK_RED, 122F/255F, 0F, 0F, 58F/255F, 58F/255F, 58F/255F);
-
-    this.castType = EnumCastType.INSTANTANEOUS;
-    this.cooldown = 100;
-
-    addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.25F);
-    addCost(HerbRegistry.getHerbByName("spirit_herb"), 0.25F);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2);
 
     addIngredients(
             new ItemStack(Items.IRON_SWORD),
@@ -45,7 +49,6 @@ public class SpellDisarm extends SpellBase{
   public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
     BlockPos playerPos =  caster.getPosition();
     UUID playerId = caster.getUniqueID();
-    int radius = 20;
 
     if (!caster.world.isRemote) {
       List<EntityLivingBase> entities = caster.world.getEntitiesWithinAABB(EntityLivingBase.class,
@@ -83,4 +86,18 @@ public class SpellDisarm extends SpellBase{
     }
     return false;
   }
+
+  @Override
+  public void finalise() {
+    this.castType = properties.getProperty(PROP_CAST_TYPE);
+    this.cooldown = properties.getProperty(PROP_COOLDOWN);
+
+    SpellCost cost1 = properties.getProperty(PROP_COST_1);
+    SpellCost cost2 = properties.getProperty(PROP_COST_2);
+    this.addCost(cost1.getHerb(), cost1.getCost());
+    this.addCost(cost2.getHerb(), cost2.getCost());
+
+    this.radius = properties.getProperty(PROP_RADIUS);
+  }
+
 }
