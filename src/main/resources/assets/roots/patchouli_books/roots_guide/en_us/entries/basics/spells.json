@@ -3,6 +3,7 @@
   "icon": "roots:staff",
   "category": "basics",
   "advancement": "roots:root",
+  "sortnum": 4,
     "pages": [
     {
       "type": "text",

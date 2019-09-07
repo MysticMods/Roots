@@ -3,6 +3,8 @@
   "icon": "roots:fey_crafter",
   "category": "basics",
   "advancement": "roots:root",
+  "priority": true,
+  "sortnum": 1,
   "pages": [
     {
       "type": "spotlight",
