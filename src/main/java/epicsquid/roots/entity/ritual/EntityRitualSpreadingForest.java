@@ -155,7 +155,7 @@ public class EntityRitualSpreadingForest extends EntityRitualBase {
       }
     }
 
-    if (ticksExisted % 70 == 0 && !saplingBlocks.isEmpty()) {
+    if (ticksExisted % 30 == 0 && !saplingBlocks.isEmpty()) {
       IBlockState state = Lists.newArrayList(saplingBlocks).get(rand.nextInt(saplingBlocks.size()));
 
       List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), 35, 30, 35, pos -> this.validSpot(world, pos, state));
@@ -211,7 +211,7 @@ public class EntityRitualSpreadingForest extends EntityRitualBase {
         }
       }
     }
-    if (ticksExisted % 40 == 0) {
+    if (ticksExisted % 20 == 0) {
       List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), 35, 30, 35, (BlockPos pos) -> {
         IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
