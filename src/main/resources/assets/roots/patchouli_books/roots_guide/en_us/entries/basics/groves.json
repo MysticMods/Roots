@@ -3,8 +3,7 @@
     "icon": "roots:grove_stone",
     "category": "basics",
     "advancement": "roots:root",
-    "priority": true,
-    "sortnum": 3,
+    "sortnum": 7,
     "pages": [
       {
         "type": "text",
@@ -16,7 +15,7 @@
       },
       {
         "type": "text",
-        "text": "$(o)Extract from the notes of the Master of Crafting, 241 AC:$()$(br2)... The combination of plentiful moss moss with our dwindling supply of wildroot have proven sufficient to imbue the correctly-shaped monolith, and allow it to act as an anchor for the Fey. The slightly larger spirits magnetized to this provide enough energy for a specially-created imbuer.$(br2)This current process is rough and simple, and much refinement..."
+        "text": "$(o)Extract from the notes of the Master of Crafting, 241 AC:$()$(br2)... The combination of plentiful moss with our dwindling supply of wildroot have proven sufficient to imbue the correctly-shaped monolith, and allow it to act as an anchor for the Fey. The slightly larger spirits magnetized to this provide enough energy for a specially-created imbuer.$(br2)This current process is rough and simple, and much refinement..."
       },
       {
         "type": "text",
