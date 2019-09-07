@@ -8,7 +8,7 @@ import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.item.itemblock.ItemBlockElementalSoil;
 import epicsquid.roots.mechanics.Harvest;
 import epicsquid.roots.util.EnumElementalSoilType;
-import epicsquid.roots.util.ItemUtil;
+import epicsquid.mysticallib.util.ItemUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;

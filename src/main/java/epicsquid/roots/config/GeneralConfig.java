@@ -1,7 +1,9 @@
 package epicsquid.roots.config;
 
+import epicsquid.mysticallib.util.ConfigUtil;
 import epicsquid.roots.Roots;
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Config;
 
@@ -41,16 +43,37 @@ public class GeneralConfig {
   @SuppressWarnings("ConstantConditions")
   public static Set<Block> getGrowthBlacklist() {
     if (growthBlacklist == null) {
-      growthBlacklist = new HashSet<>();
-      for (String ref : GrowthBlacklist) {
-        ResourceLocation res = new ResourceLocation(ref);
-        Block block = Block.REGISTRY.getObject(res);
-        if (block != null) {
-          growthBlacklist.add(block);
-        }
-      }
+      growthBlacklist = ConfigUtil.parseBlocksSet(GrowthBlacklist);
     }
     return growthBlacklist;
+  }
+
+  @Config.Comment(("List of mod:item:meta (meta optional) of saplings that should be planted in 2x2 by the Spreading Forest ritual"))
+  public static String[] TwoByTwoSaplings = new String[]{"thaumcraft:sapling_greatwood"};
+
+  @Config.Ignore
+  private static Set<ItemStack> twoByTwoSaplings = null;
+
+  public static Set<ItemStack> getTwoByTwoSaplings () {
+    if (twoByTwoSaplings == null) {
+      twoByTwoSaplings = ConfigUtil.parseItemStacksSet(TwoByTwoSaplings);
+    }
+
+    return twoByTwoSaplings;
+  }
+
+  @Config.Comment(("List of mod:item:meta (meta option) of saplings that should be blacklisted from the Spreading Forest ritual"))
+  public static String[] SaplingBlacklist = new String[]{"roots:wildwood_sapling"};
+
+  @Config.Ignore
+  private static Set<ItemStack> saplingBlacklist = null;
+
+  public static Set<ItemStack> getSaplingBlacklist () {
+    if (saplingBlacklist == null) {
+      saplingBlacklist = ConfigUtil.parseItemStacksSet(SaplingBlacklist);
+    }
+
+    return saplingBlacklist;
   }
 }
 

@@ -14,7 +14,7 @@ import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.ItemHandlerUtil;
-import epicsquid.roots.util.ItemUtil;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.util.XPUtil;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import net.minecraft.block.material.Material;
