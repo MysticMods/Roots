@@ -6,10 +6,7 @@ import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.integration.jei.carving.BarkRecipeCategory;
-import epicsquid.roots.integration.jei.carving.BarkRecipeWrapper;
-import epicsquid.roots.integration.jei.carving.RunicCarvingCategory;
-import epicsquid.roots.integration.jei.carving.RunicCarvingWrapper;
+import epicsquid.roots.integration.jei.carving.*;
 import epicsquid.roots.integration.jei.fey.FeyCategory;
 import epicsquid.roots.integration.jei.fey.FeyWrapper;
 import epicsquid.roots.integration.jei.mortar.MortarCategory;
@@ -58,6 +55,7 @@ public class JEIRootsPlugin implements IModPlugin {
   public static final String FEY_CRAFTING = Roots.MODID + ".fey_crafting";
   public static final String SPELL_COSTS = Roots.MODID + ".spell_costs";
   public static final String SPELL_MODIFIERS = Roots.MODID + ".spell_modifiers";
+  public static final String TERRA_MOSS = Roots.MODID + ".terra_moss";
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registry) {
@@ -70,7 +68,8 @@ public class JEIRootsPlugin implements IModPlugin {
         new FeyCategory(helper),
         new SpellCostCategory(helper),
         new SpellModifierCategory(helper),
-        new BarkRecipeCategory(helper)
+        new BarkRecipeCategory(helper),
+        new MossRecipeCategory(helper)
     );
   }
 
@@ -86,6 +85,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(SpellBase.class, SpellCostWrapper::new, SPELL_COSTS);
     registry.handleRecipes(SpellBase.class, SpellModifierWrapper::new, SPELL_MODIFIERS);
     registry.handleRecipes(BarkRecipe.class, BarkRecipeWrapper::new, BARK_CARVING);
+    registry.handleRecipes(MossRecipe.class, MossRecipeWrapper::new, TERRA_MOSS);
 
     Collection<SpellBase> spells = SpellRegistry.spellRegistry.values();
 
@@ -105,9 +105,17 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipes(ModRecipes.getFeyCraftingRecipes().values(), FEY_CRAFTING);
     registry.addRecipes(spells.stream().filter(SpellBase::hasModules).collect(Collectors.toList()), SPELL_MODIFIERS);
     registry.addRecipes(ModRecipes.getBarkRecipes(), BARK_CARVING);
+    registry.addRecipes(MossRecipe.getRecipeList(), TERRA_MOSS);
 
     registry.addRecipeCatalyst(new ItemStack(ModItems.runic_shears), RUNIC_SHEARS);
-    registry.addRecipeCatalyst(new ItemStack(ModItems.wood_knife), RUNIC_CARVING);
+
+    for (Item knife : ModItems.knives) {
+      registry.addRecipeCatalyst(new ItemStack(knife), RUNIC_CARVING);
+      registry.addRecipeCatalyst(new ItemStack(knife), BARK_CARVING);
+      registry.addRecipeCatalyst(new ItemStack(knife), TERRA_MOSS);
+    }
+
+    /*registry.addRecipeCatalyst(new ItemStack(ModItems.wood_knife), RUNIC_CARVING);
     registry.addRecipeCatalyst(new ItemStack(ModItems.stone_knife), RUNIC_CARVING);
     registry.addRecipeCatalyst(new ItemStack(ModItems.iron_knife), RUNIC_CARVING);
     registry.addRecipeCatalyst(new ItemStack(ModItems.gold_knife), RUNIC_CARVING);
@@ -119,13 +127,20 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModItems.gold_knife), BARK_CARVING);
     registry.addRecipeCatalyst(new ItemStack(ModItems.diamond_knife), BARK_CARVING);
 
+    registry.addRecipeCatalyst(new ItemStack(ModItems.wood_knife), TERRA_MOSS);
+    registry.addRecipeCatalyst(new ItemStack(ModItems.stone_knife), TERRA_MOSS);
+    registry.addRecipeCatalyst(new ItemStack(ModItems.iron_knife), TERRA_MOSS);
+    registry.addRecipeCatalyst(new ItemStack(ModItems.gold_knife), TERRA_MOSS);
+    registry.addRecipeCatalyst(new ItemStack(ModItems.diamond_knife), TERRA_MOSS);
+
     registry.addRecipeCatalyst(new ItemStack(epicsquid.mysticalworld.init.ModItems.copper_knife), RUNIC_CARVING);
     registry.addRecipeCatalyst(new ItemStack(epicsquid.mysticalworld.init.ModItems.silver_knife), RUNIC_CARVING);
     registry.addRecipeCatalyst(new ItemStack(epicsquid.mysticalworld.init.ModItems.amethyst_knife), RUNIC_CARVING);
 
     registry.addRecipeCatalyst(new ItemStack(epicsquid.mysticalworld.init.ModItems.copper_knife), BARK_CARVING);
     registry.addRecipeCatalyst(new ItemStack(epicsquid.mysticalworld.init.ModItems.silver_knife), BARK_CARVING);
-    registry.addRecipeCatalyst(new ItemStack(epicsquid.mysticalworld.init.ModItems.amethyst_knife), BARK_CARVING);
+    registry.addRecipeCatalyst(new ItemStack(epicsquid.mysticalworld.init.ModItems.amethyst_knife), BARK_CARVING);*/
+
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.bonfire), RITUAL_CRAFTING);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.mortar), MORTAR_AND_PESTLE);
     registry.addRecipeCatalyst(new ItemStack(ModItems.pestle), MORTAR_AND_PESTLE);
@@ -146,7 +161,7 @@ public class JEIRootsPlugin implements IModPlugin {
       } else if (endState != null) {
         Block endBlock = endState.getBlock();
         ItemStack drop = new ItemStack(Item.getItemFromBlock(endBlock), 1, endBlock.damageDropped(endState));
-        if (drop != null && !drop.isEmpty()) {
+        if (!drop.isEmpty()) {
           registry.addIngredientInfo(drop, VanillaTypes.ITEM, I18n.format(recipe.getKey()));
         }
       }
