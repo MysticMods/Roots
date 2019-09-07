@@ -4,6 +4,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.block.BlockElementalSoil;
 import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.mechanics.Harvest;
 import epicsquid.mysticallib.util.ItemUtil;
 import net.minecraft.block.state.IBlockState;
@@ -66,8 +67,10 @@ public class SoilHandler {
               World world = event.getWorld();
               BlockPos pos = event.getPos();
 
-              if (Util.rand.nextInt(3) == 0 && !world.isRemote) {
-                world.spawnEntity(new EntityXPOrb(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1));
+              if (Harvest.isGrown(event.getState())) {
+                if (Util.rand.nextInt(3) == 0 && !world.isRemote) {
+                  world.spawnEntity(new EntityXPOrb(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1));
+                }
               }
 
               event.getDrops().clear();
