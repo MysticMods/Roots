@@ -197,6 +197,8 @@ public class ModItems {
     OreDictionary.registerOre("doorWood", new ItemStack(((BlockDoorBase) ModBlocks.wildwood_door).getItemBlock()));
     OreDictionary.registerOre("foodBread", Items.BREAD);
     OreDictionary.registerOre("foodBread", ModItems.wildewheet_bread);
+    OreDictionary.registerOre("foodFloud", ModItems.flour);
+    OreDictionary.registerOre("dustWheat", ModItems.flour);
   }
 
   private static void registerSeedDrops() {
