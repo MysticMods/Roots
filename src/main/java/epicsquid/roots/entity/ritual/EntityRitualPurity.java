@@ -3,6 +3,7 @@ package epicsquid.roots.entity.ritual;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityZombieVillager;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -58,6 +59,10 @@ public class EntityRitualPurity extends EntityRitualBase {
         }
         for (Potion potion : toRemove) {
           e.removePotionEffect(potion);
+        }
+        e.extinguish();
+        if (e instanceof EntityZombieVillager && ((EntityZombieVillager)e).isConverting()) {
+          ((EntityZombieVillager)e).conversionTime -= 1;
         }
         if (world.isRemote) {
           for (float i = 0; i < 8; i++) {
