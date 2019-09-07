@@ -70,6 +70,10 @@ public class Growth {
       return true;
     }
 
+    if (state.getBlock() instanceof BlockMushroom) {
+      return true;
+    }
+
     if (state.getBlock() instanceof IPlantable) {
       Collection<IProperty<?>> keys = state.getPropertyKeys();
       IProperty<?> toCheck = null;
