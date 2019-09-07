@@ -40,33 +40,29 @@ public class ItemBlockElementalSoil extends ItemBlock {
     if (block == ModBlocks.elemental_soil) {
       World world = entityItem.world;
 
-      if (!world.isRemote)
-      {
+      if (!world.isRemote) {
         int count = entityItem.getItem().getCount();
 
         //Magmatic Soil Crafting
-        if (entityItem.isInLava())
-        {
+        if (entityItem.isInLava()) {
           world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY + 0.5, entityItem.posZ,
-                  new ItemStack(ModBlocks.elemental_soil_fire, count)));
+              new ItemStack(ModBlocks.elemental_soil_fire, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 0), entityItem);
           entityItem.setDead();
           return true;
         }
 
         //Aqueous Soil Crafting
-        if (entityItem.isInWater() && entityItem.ticksExisted >= ElementalSoilConfig.WaterSoilDelay)
-        {
+        if (entityItem.isInWater() && entityItem.ticksExisted >= ElementalSoilConfig.WaterSoilDelay) {
           world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
-                  new ItemStack(ModBlocks.elemental_soil_water, count)));
+              new ItemStack(ModBlocks.elemental_soil_water, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 1), entityItem);
           entityItem.setDead();
           return true;
         }
 
         //Terran Soil Crafting
-        if (entityItem.posY <= ElementalSoilConfig.EarthSoilMaxY && entityItem.ticksExisted >= ElementalSoilConfig.EarthSoilDelay)
-        {
+        if (entityItem.posY <= ElementalSoilConfig.EarthSoilMaxY && entityItem.ticksExisted >= ElementalSoilConfig.EarthSoilDelay) {
           BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(entityItem.getPosition());
           boolean found_roof = false;
           for (int i = pos.getY(); i < Math.min(ElementalSoilConfig.EarthSoilMaxY + 20, world.getChunk(pos).getHeight(pos)); i++) {
@@ -77,21 +73,20 @@ public class ItemBlockElementalSoil extends ItemBlock {
           if (!found_roof) return super.onEntityItemUpdate(entityItem);
 
           world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
-                  new ItemStack(ModBlocks.elemental_soil_earth, count)));
+              new ItemStack(ModBlocks.elemental_soil_earth, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 3), entityItem);
           entityItem.setDead();
           return true;
         }
 
         //Aeros Soil Crafting
-        if (entityItem.posY >= ElementalSoilConfig.AirSoilMinY && entityItem.ticksExisted >= ElementalSoilConfig.AirSoilDelay)
-        {
+        if (entityItem.posY >= ElementalSoilConfig.AirSoilMinY && entityItem.ticksExisted >= ElementalSoilConfig.AirSoilDelay) {
           BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(entityItem.getPosition());
           int height = world.getChunk(pos).getHeight(pos);
           if (pos.getY() < height) return super.onEntityItemUpdate(entityItem);
 
           world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
-                  new ItemStack(ModBlocks.elemental_soil_air, count)));
+              new ItemStack(ModBlocks.elemental_soil_air, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 2), entityItem);
           entityItem.setDead();
           return true;

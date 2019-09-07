@@ -1,8 +1,5 @@
 package epicsquid.roots.integration.crafttweaker;
 
-import com.blamejared.mtlib.helpers.InputHelper;
-import com.blamejared.mtlib.helpers.LogHelper;
-import com.blamejared.mtlib.utils.BaseAction;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
@@ -34,9 +31,9 @@ public class FeyCraftingTweaker {
   @ZenDocMethod(
       order = 1,
       args = {
-          @ZenDocArg(arg="name", info="the name of the recipe; if replacing an existing recipe, be sure to use the same name to ensure Patchouli continuity"),
-          @ZenDocArg(arg="output", info="the itemstack produced by this recipe"),
-          @ZenDocArg(arg="inputs", info="an array of IIngredients that make up the recipe; must contain 5 items")
+          @ZenDocArg(arg = "name", info = "the name of the recipe; if replacing an existing recipe, be sure to use the same name to ensure Patchouli continuity"),
+          @ZenDocArg(arg = "output", info = "the itemstack produced by this recipe"),
+          @ZenDocArg(arg = "inputs", info = "an array of IIngredients that make up the recipe; must contain 5 items")
       }
   )
   @ZenMethod
@@ -47,10 +44,10 @@ public class FeyCraftingTweaker {
   @ZenDocMethod(
       order = 2,
       args = {
-          @ZenDocArg(arg="name", info="the name of the recipe; if replacing an existing recipe, be sure to use the same name to ensure Patchouli continuity"),
-          @ZenDocArg(arg="output", info="the itemstack produced by this recipe"),
-          @ZenDocArg(arg="inputs", info="an array of IIngredients that make up the recipe; must contain 5 items"),
-          @ZenDocArg(arg="xp", info="the amount of xp (in levels) to reward the player for crafting this recipe")
+          @ZenDocArg(arg = "name", info = "the name of the recipe; if replacing an existing recipe, be sure to use the same name to ensure Patchouli continuity"),
+          @ZenDocArg(arg = "output", info = "the itemstack produced by this recipe"),
+          @ZenDocArg(arg = "inputs", info = "an array of IIngredients that make up the recipe; must contain 5 items"),
+          @ZenDocArg(arg = "xp", info = "the amount of xp (in levels) to reward the player for crafting this recipe")
       }
   )
   @ZenMethod
@@ -62,29 +59,30 @@ public class FeyCraftingTweaker {
   }
 
   @ZenDocMethod(
-      order=3,
+      order = 3,
       args = {
-          @ZenDocArg(arg="output", info="the item produced by the recipe you wish to remove")
+          @ZenDocArg(arg = "output", info = "the item produced by the recipe you wish to remove")
       }
   )
   @ZenMethod
   public static void removeRecipe(IItemStack output) {
     ResourceLocation recipeName = null;
+    Ingredient out = CraftTweakerMC.getIngredient(output);
     for (Map.Entry<ResourceLocation, FeyCraftingRecipe> r : ModRecipes.getFeyCraftingRecipes().entrySet()) {
-      if (output.matches(InputHelper.toIItemStack(r.getValue().getResult()))) {
+      if (out.apply(r.getValue().getResult())) {
         recipeName = r.getKey();
         break;
       }
     }
 
     if (recipeName == null) {
-      CraftTweakerAPI.logError("No Fey Crafting recipe found for output: " + LogHelper.getStackDescription(output));
+      CraftTweakerAPI.logError("No Fey Crafting recipe found for output: " + output);
     } else {
       CraftTweaker.LATE_ACTIONS.add(new Remove(recipeName));
     }
   }
 
-  private static class Add extends BaseAction {
+  private static class Add extends Action {
     private String name;
     private ItemStack output;
     private Ingredient[] inputs;
@@ -101,7 +99,7 @@ public class FeyCraftingTweaker {
 
     @Override
     public String describe() {
-      return "Adding Fey Crafting Ritual for " + LogHelper.getStackDescription(output);
+      return "Adding Fey Crafting Ritual for " + output;
     }
 
     @Override
@@ -112,7 +110,7 @@ public class FeyCraftingTweaker {
     }
   }
 
-  private static class Remove extends BaseAction {
+  private static class Remove extends Action {
     private ResourceLocation name;
 
     @Override

@@ -3,6 +3,7 @@
   "icon": "roots:spell_dust",
   "category": "spells",
   "advancement": "roots:spirit_herb",
+  "flag": "roots:spell_petal_shell",
   "pages": [
     {
       "type": "text",

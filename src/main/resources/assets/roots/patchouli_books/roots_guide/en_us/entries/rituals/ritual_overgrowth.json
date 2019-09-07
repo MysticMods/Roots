@@ -3,7 +3,7 @@
   "icon": "roots:ritual_overgrowth",
   "category": "rituals",
   "advancement": "roots:pyre",
-  
+  "flag": "roots:ritual_overgrowth",
   "pages": [
     {
       "type": "text",

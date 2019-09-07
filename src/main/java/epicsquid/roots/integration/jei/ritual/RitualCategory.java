@@ -16,7 +16,7 @@ import net.minecraft.util.ResourceLocation;
 public class RitualCategory implements IRecipeCategory<RitualWrapper> {
   private final IDrawable background;
 
-  public RitualCategory (IGuiHelper helper) {
+  public RitualCategory(IGuiHelper helper) {
     this.background = helper.createDrawable(new ResourceLocation(Roots.MODID, "textures/gui/jei/ritual_crafting.png"), 0, 0, 121, 76);
   }
 

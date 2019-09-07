@@ -52,9 +52,6 @@ dependencies {
     compile("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${ct_version}") {
         exclude group: 'mezz.jei'
     }
-    compile("com.blamejared:MTLib:${mt_lib_version}") {
-        exclude group: 'mezz.jei'
-    }
     compileOnly("vazkii.botania:Botania:${botania_version}") {
         exclude group: 'mezz.jei'
     }

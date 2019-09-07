@@ -75,5 +75,4 @@ public class ParticleLineGlow extends ParticleBase {
   public boolean isAdditive() {
     return true;
   }
-
 }

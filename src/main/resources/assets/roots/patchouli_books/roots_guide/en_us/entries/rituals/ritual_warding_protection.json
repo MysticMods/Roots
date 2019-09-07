@@ -3,6 +3,7 @@
   "icon": "roots:ritual_warding_protection",
   "category": "rituals",
   "advancement": "roots:stalicripe",
+  "flag": "roots:ritual_warding_protection",
   "pages": [
     {
       "type": "text",
@@ -14,6 +15,7 @@
     },
     {
       "type": "multiblock",
+      "enable_visualize": false,
       "multiblock": {
         "mapping": {
           "0": "roots:bonfire",

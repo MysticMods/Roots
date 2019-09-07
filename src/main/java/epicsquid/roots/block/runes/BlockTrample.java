@@ -11,6 +11,7 @@ import net.minecraft.world.IBlockAccess;
 
 import javax.annotation.Nonnull;
 
+@SuppressWarnings("deprecation")
 public class BlockTrample extends BlockBase {
   public static int SAFE_RANGE_X = 30;
   public static int SAFE_RANGE_Y = 5;

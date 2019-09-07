@@ -46,12 +46,11 @@ public class TileEntityBonfireRenderer extends TileEntitySpecialRenderer<TileEnt
     if (recipe != null)
       renderResult(tem, x, y, z, recipe.getResult(), 0.8f);
     RitualBase ritual = RitualRegistry.getRitual(tem, Minecraft.getMinecraft().player);
-    if (ritual != null)
+    if (ritual != null && !ritual.isDisabled())
       renderResult(tem, x, y, z, new ItemStack(ritual.getIcon()), 1f);
   }
 
-  private void renderResult(TileEntityBonfire tem, double x, double y, double z, ItemStack result, float alpha)
-  {
+  private void renderResult(TileEntityBonfire tem, double x, double y, double z, ItemStack result, float alpha) {
     GlStateManager.enableBlend();
     RenderHelper.enableStandardItemLighting();
     GlStateManager.pushMatrix();

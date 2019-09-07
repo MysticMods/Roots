@@ -1,8 +1,5 @@
 package epicsquid.roots.integration.crafttweaker;
 
-import com.blamejared.mtlib.helpers.InputHelper;
-import com.blamejared.mtlib.helpers.LogHelper;
-import com.blamejared.mtlib.utils.BaseAction;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.entity.IEntityDefinition;
@@ -16,8 +13,10 @@ import epicsquid.roots.util.zen.ZenDocAppend;
 import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
+import jeresources.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -43,7 +42,7 @@ public class RunicShearsTweaker {
   )
   @ZenMethod
   public static void addRecipe(String name, IItemStack outputDrop, IItemStack replacementBlock, IItemStack inputBlock, IItemStack jeiDisplayItem) {
-    if (!InputHelper.isABlock(inputBlock) || (replacementBlock != null && !InputHelper.isABlock(replacementBlock))) {
+    if (!(CraftTweakerMC.getItemStack(inputBlock).getItem() instanceof ItemBlock) || (replacementBlock != null && !(CraftTweakerMC.getItemStack(replacementBlock).getItem() instanceof ItemBlock))) {
       CraftTweakerAPI.logError("Runic Shears require input and replacement to be blocks. Recipe: " + name);
       return;
     }
@@ -75,7 +74,7 @@ public class RunicShearsTweaker {
     CraftTweaker.LATE_ACTIONS.add(new Remove(CraftTweakerMC.getItemStack(output)));
   }
 
-  private static class Remove extends BaseAction {
+  private static class Remove extends Action {
     private ItemStack output;
 
     private Remove(ItemStack output) {
@@ -85,7 +84,7 @@ public class RunicShearsTweaker {
 
     @Override
     public String describe() {
-      return "Removing all Runic Shears recipes involving " + LogHelper.getStackDescription(output) + " as its output";
+      return "Removing all Runic Shears recipes involving " + output + " as its output";
     }
 
     @Override
@@ -102,12 +101,12 @@ public class RunicShearsTweaker {
         removed = true;
       }
       if (!removed) {
-        CraftTweakerAPI.logError("No runic shear recipe found for " + LogHelper.getStackDescription(output));
+        CraftTweakerAPI.logError("No runic shear recipe found for " + output);
       }
     }
   }
 
-  private static class Add extends BaseAction {
+  private static class Add extends Action {
     private String name;
     private ItemStack displayItem;
     private ItemStack outputItem;
@@ -126,7 +125,7 @@ public class RunicShearsTweaker {
 
     @Override
     public String describe() {
-      return "Adding a recipe to create " + LogHelper.getStackDescription(outputItem);
+      return "Adding a recipe to create " + outputItem;
     }
 
     @Override
@@ -136,7 +135,7 @@ public class RunicShearsTweaker {
     }
   }
 
-  private static class AddEntity extends BaseAction {
+  private static class AddEntity extends Action {
     private String name;
     private Class<? extends Entity> entity;
     private ItemStack outputItem;
@@ -153,7 +152,7 @@ public class RunicShearsTweaker {
 
     @Override
     public String describe() {
-      return "Adding a recipe to create " + LogHelper.getStackDescription(outputItem) + " from entity " + name;
+      return "Adding a recipe to create " + outputItem + " from entity " + name;
     }
 
     @Override

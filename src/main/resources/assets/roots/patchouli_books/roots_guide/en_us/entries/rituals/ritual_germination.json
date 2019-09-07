@@ -3,6 +3,7 @@
   "icon": "roots:ritual_germination",
   "category": "rituals",
   "advancement": "roots:spirit_herb",
+  "flag": "roots:ritual_germination",
   "pages": [
     {
       "type": "text",
@@ -14,6 +15,7 @@
     },
     {
       "type": "multiblock",
+      "enable_visualize": false,
       "multiblock": {
         "mapping": {
           "0": "roots:bonfire",

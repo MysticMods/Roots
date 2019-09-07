@@ -14,6 +14,12 @@
     {
       "type": "ritual_crafting_template",
       "recipe": "dewgonia"
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "resources/elemental_soil"
+      ]
     }
   ]
 }

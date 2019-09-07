@@ -5,6 +5,7 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageShatterBurstFX;
 import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.util.types.Property;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,15 +21,16 @@ import net.minecraft.util.text.TextFormatting;
 import java.util.List;
 
 public class SpellShatter extends SpellBase {
+  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(20);
+  public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("stalicripe", 0.0625));
+
   public static String spellName = "spell_shatter";
   public static SpellShatter instance = new SpellShatter(spellName);
 
   public SpellShatter(String name) {
     super(name, TextFormatting.GRAY, 96f / 255f, 96f / 255f, 96f / 255f, 192f / 255f, 192f / 255f, 192f / 255f);
-    this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
-    this.cooldown = 20;
 
-    addCost(HerbRegistry.getHerbByName("stalicripe"), 0.0625f);
     addIngredients(
         new ItemStack(Items.FLINT),
         new ItemStack(Items.STONE_PICKAXE),
@@ -54,16 +56,16 @@ public class SpellShatter extends SpellBase {
             doParticles = true;
           }
 //          for (int i = 0; i < 4; i++) {
-            if (result.sideHit.getAxis() != EnumFacing.Axis.Y)
-              pos = result.getBlockPos().down();
-            else {
-              pos = pos.offset(player.getHorizontalFacing().getOpposite());
-            }
-            state = player.world.getBlockState(pos);
-            if (state.getBlockHardness(player.world, pos) > 0) {
-              player.world.destroyBlock(pos, true);
-              player.world.notifyBlockUpdate(pos, state, Blocks.AIR.getDefaultState(), 8);
-           }
+          if (result.sideHit.getAxis() != EnumFacing.Axis.Y)
+            pos = result.getBlockPos().down();
+          else {
+            pos = pos.offset(player.getHorizontalFacing().getOpposite());
+          }
+          state = player.world.getBlockState(pos);
+          if (state.getBlockHardness(player.world, pos) > 0) {
+            player.world.destroyBlock(pos, true);
+            player.world.notifyBlockUpdate(pos, state, Blocks.AIR.getDefaultState(), 8);
+          }
 //          }
           if (doParticles) {
             float offX = 0.5f * (float) Math.sin(Math.toRadians(-90.0f - player.rotationYaw));
@@ -85,4 +87,12 @@ public class SpellShatter extends SpellBase {
     return true;
   }
 
+  @Override
+  public void finalise() {
+    this.castType = properties.getProperty(PROP_CAST_TYPE);
+    this.cooldown = properties.getProperty(PROP_COOLDOWN);
+
+    SpellCost cost = properties.getProperty(PROP_COST_1);
+    addCost(cost.getHerb(), cost.getCost());
+  }
 }

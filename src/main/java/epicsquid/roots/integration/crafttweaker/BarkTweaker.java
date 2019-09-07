@@ -1,6 +1,5 @@
 package epicsquid.roots.integration.crafttweaker;
 
-import com.blamejared.mtlib.utils.BaseAction;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
@@ -12,7 +11,6 @@ import epicsquid.roots.util.zen.ZenDocAppend;
 import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -27,9 +25,9 @@ public class BarkTweaker {
   @ZenDocMethod(
       order = 1,
       args = {
-          @ZenDocArg(arg="name", info="the name of the recipe"),
-          @ZenDocArg(arg="woodLog", info="the itemstack equivalent of the wood log being broken"),
-          @ZenDocArg(arg="bark", info="the itemstack of the type of bark this log produces")
+          @ZenDocArg(arg = "name", info = "the name of the recipe"),
+          @ZenDocArg(arg = "woodLog", info = "the itemstack equivalent of the wood log being broken"),
+          @ZenDocArg(arg = "bark", info = "the itemstack of the type of bark this log produces")
       }
   )
   @ZenMethod
@@ -39,7 +37,7 @@ public class BarkTweaker {
       CraftTweakerAPI.logError("Provided log " + woodLog + " is not an item block!");
       return;
     }
-    CraftTweaker.LATE_ACTIONS.add(new Add(name, ((ItemBlock) log.getItem()).getBlock(), CraftTweakerMC.getItemStack(bark)));
+    CraftTweaker.LATE_ACTIONS.add(new Add(name, CraftTweakerMC.getItemStack(bark), log));
   }
 
   @ZenDocMethod
@@ -47,11 +45,11 @@ public class BarkTweaker {
 
       )
   @ZenMethod
-  public static void removeRecipe (IItemStack bark) {
+  public static void removeRecipe(IItemStack bark) {
     CraftTweaker.LATE_ACTIONS.add(new Remove(CraftTweakerMC.getItemStack(bark)));
   }
 
-  private static class Remove extends BaseAction {
+  private static class Remove extends Action {
     private final ItemStack bark;
 
     public Remove(ItemStack bark) {
@@ -65,17 +63,17 @@ public class BarkTweaker {
     }
 
     @Override
-    protected String getRecipeInfo() {
+    public String describe() {
       return String.format("Recipe to remove %s from Bark Recipes", bark.toString());
     }
   }
 
-  private static class Add extends BaseAction {
-    private final Block woodLog;
+  private static class Add extends Action {
+    private final ItemStack woodLog;
     private final ItemStack bark;
     private final String name;
 
-    public Add(String name, Block woodLog, ItemStack bark) {
+    public Add(String name, ItemStack bark, ItemStack woodLog) {
       super("add_bark_recipe");
       this.woodLog = woodLog;
       this.bark = bark;
@@ -84,11 +82,11 @@ public class BarkTweaker {
 
     @Override
     public void apply() {
-      ModRecipes.addModdedBarkRecipe(name, woodLog, bark);
+      ModRecipes.addModdedBarkRecipe(name, bark, woodLog);
     }
 
     @Override
-    protected String getRecipeInfo() {
+    public String describe() {
       return String.format("Recipe to add %s->%s to Bark Recipes", woodLog, bark);
     }
   }

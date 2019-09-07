@@ -1,6 +1,5 @@
 package epicsquid.roots.integration.crafttweaker;
 
-import com.blamejared.mtlib.utils.BaseAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.entity.IEntityDefinition;
 import crafttweaker.mc1120.CraftTweaker;
@@ -24,7 +23,7 @@ public class AnimalHarvestTweaker {
   @ZenDocMethod(
       order = 1,
       args = {
-          @ZenDocArg(arg="entity", info="the entity to generate drops for")
+          @ZenDocArg(arg = "entity", info = "the entity to generate drops for")
       }
   )
   @ZenMethod
@@ -35,7 +34,7 @@ public class AnimalHarvestTweaker {
   @ZenDocMethod(
       order = 2,
       args = {
-          @ZenDocArg(arg="entity", info="the entity to stop generating drops for")
+          @ZenDocArg(arg = "entity", info = "the entity to stop generating drops for")
       }
   )
   @ZenMethod
@@ -43,7 +42,7 @@ public class AnimalHarvestTweaker {
     CraftTweaker.LATE_ACTIONS.add(new Remove((EntityEntry) entity.getInternal()));
   }
 
-  private static class Remove extends BaseAction {
+  private static class Remove extends Action {
     private final EntityEntry entry;
 
     public Remove(EntityEntry entry) {
@@ -58,12 +57,12 @@ public class AnimalHarvestTweaker {
     }
 
     @Override
-    protected String getRecipeInfo() {
+    public String describe() {
       return String.format("Recipe to remove %s from AnimalHarvest", entry.getName());
     }
   }
 
-  private static class Add extends BaseAction {
+  private static class Add extends Action {
     private final EntityEntry entry;
 
     public Add(EntityEntry entry) {
@@ -77,7 +76,7 @@ public class AnimalHarvestTweaker {
     }
 
     @Override
-    protected String getRecipeInfo() {
+    public String describe() {
       return String.format("Recipe to add %s to AnimalHarvest", entry.getName());
     }
   }

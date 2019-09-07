@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class RitualUtil {
 
-    private static Random rand = new Random();
+  private static Random rand = new Random();
 
     public static BlockPos getRandomPosRadialXZ(BlockPos centerPos, int xRadius, int zRadius)
     {

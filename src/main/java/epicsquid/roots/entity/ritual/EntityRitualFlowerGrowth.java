@@ -31,11 +31,9 @@ public class EntityRitualFlowerGrowth extends EntityRitualBase {
       setDead();
     }
 
-    if (this.ticksExisted % 100 == 0)
-    {
-      BlockPos topBlockPos = RitualUtil.getRandomPosRadialXZ(new BlockPos(getPosition().getX(), getPosition().getY() - 20, getPosition().getZ()), 10, 10);
-      while (!generateFlower(topBlockPos))
-      {
+    if (this.ticksExisted % 100 == 0) {
+      BlockPos topBlockPos = RitualUtil.getRandomPosRadial(new BlockPos(getPosition().getX(), getPosition().getY() - 20, getPosition().getZ()), 10, 10);
+      while (!generateFlower(topBlockPos)) {
         topBlockPos = topBlockPos.up();
         if (topBlockPos.getY() > 256)
           break;

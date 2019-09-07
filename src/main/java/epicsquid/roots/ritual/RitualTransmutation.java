@@ -14,8 +14,8 @@ import net.minecraft.world.World;
 
 public class RitualTransmutation extends RitualBase {
 
-  public RitualTransmutation(String name, int duration) {
-    super(name, duration);
+  public RitualTransmutation(String name, int duration, boolean disabled) {
+    super(name, duration, disabled);
     addCondition(
         new ConditionItems(
             new ItemStack(Blocks.FURNACE),

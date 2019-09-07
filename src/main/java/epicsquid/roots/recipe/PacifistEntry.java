@@ -11,13 +11,12 @@ public class PacifistEntry {
   private boolean checkTarget = false;
   private ResourceLocation name;
 
-  public PacifistEntry (Entity entity) {
+  public PacifistEntry(Entity entity) {
     this.entityClass = entity.getClass();
     this.name = new ResourceLocation(Roots.MODID, entity.getName());
   }
 
-  public PacifistEntry (Class<? extends Entity> entity, String name)
-  {
+  public PacifistEntry(Class<? extends Entity> entity, String name) {
     this.entityClass = entity;
     this.name = new ResourceLocation(Roots.MODID, name);
   }
@@ -38,11 +37,11 @@ public class PacifistEntry {
     return entityClass;
   }
 
-  public boolean matches (Entity entity) {
+  public boolean matches(Entity entity) {
     return this.entityClass.equals(entity.getClass());
   }
 
-  public boolean matches (Entity entity, EntityPlayer player) {
+  public boolean matches(Entity entity, EntityPlayer player) {
     if (!matches(entity)) return false;
 
     if (!getCheckTarget()) return true;

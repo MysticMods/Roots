@@ -11,14 +11,14 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class RitualWindwall extends RitualBase {
-  public RitualWindwall(String name, int duration) {
-    super(name, duration);
+  public RitualWindwall(String name, int duration, boolean disabled) {
+    super(name, duration, disabled);
     addCondition(new ConditionItems(
-            new ItemStack(ModItems.cloud_berry),
-            new ItemStack(ModItems.moonglow_leaf),
-            new ItemStack(ModItems.bark_spruce),
-            new ItemStack(ModItems.bark_birch),
-            new ItemStack(Items.FEATHER)
+        new ItemStack(ModItems.cloud_berry),
+        new ItemStack(ModItems.moonglow_leaf),
+        new ItemStack(ModItems.bark_spruce),
+        new ItemStack(ModItems.bark_birch),
+        new ItemStack(Items.FEATHER)
     ));
     setIcon(ModItems.ritual_windwall);
     setColor(TextFormatting.DARK_AQUA);

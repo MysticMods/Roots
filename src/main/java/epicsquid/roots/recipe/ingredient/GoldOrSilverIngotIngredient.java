@@ -32,7 +32,7 @@ public class GoldOrSilverIngotIngredient extends Ingredient {
     return silver;
   }
 
-  public GoldOrSilverIngotIngredient () {
+  public GoldOrSilverIngotIngredient() {
   }
 
   @Override

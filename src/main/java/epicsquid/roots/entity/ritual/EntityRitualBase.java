@@ -22,7 +22,6 @@ public abstract class EntityRitualBase extends Entity implements IRitualEntity {
   }
 
 
-
   @Override
   public void setPosition(double x, double y, double z) {
     super.setPosition(x, y, z);
@@ -33,8 +32,7 @@ public abstract class EntityRitualBase extends Entity implements IRitualEntity {
 
   @Nonnull
   @Override
-  public BlockPos getPosition()
-  {
+  public BlockPos getPosition() {
     return new BlockPos(x, y, z);
   }
 

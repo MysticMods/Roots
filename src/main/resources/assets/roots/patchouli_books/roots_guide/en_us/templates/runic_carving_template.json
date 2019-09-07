@@ -1,6 +1,6 @@
 
 {
-  "processor": "epicsquid.roots.api.RunicCarvingRecipeProcessor",
+  "processor": "epicsquid.roots.integration.patchouli.RunicCarvingRecipeProcessor",
   "components": [
     {
       "type": "item",

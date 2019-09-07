@@ -6,6 +6,7 @@ import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageRadianceBeamFX;
 import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -23,16 +24,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SpellRadiance extends SpellBase {
+  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(10);
+  public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("pereskia", 0.5));
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("infernal_bulb", 0.25));
+  public static Property<Float> PROP_DISTANCE = new Property<>("distance", 32f);
+  public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(5f);
+  public static Property<Float> PROP_UNDEAD_DAMAGE = new Property<>("undead_damage", 3f);
+
   public static String spellName = "spell_radiance";
   public static SpellRadiance instance = new SpellRadiance(spellName);
 
+  private float distance;
+  private float damage;
+  private float undeadDamage;
+
   public SpellRadiance(String name) {
     super(name, TextFormatting.WHITE, 255f / 255f, 255f / 255f, 64f / 255f, 255f / 255f, 255f / 255f, 192f / 255f);
-    this.castType = SpellBase.EnumCastType.CONTINUOUS;
-    this.cooldown = 0;
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DISTANCE, PROP_DAMAGE, PROP_UNDEAD_DAMAGE);
 
-    addCost(HerbRegistry.getHerbByName("pereskia"), 0.5f);
-    addCost(HerbRegistry.getHerbByName("infernal_bulb"), 0.25f);
     addIngredients(
         new OreIngredient("dustGlowstone"),
         new ItemStack(Blocks.MAGMA),
@@ -45,7 +55,6 @@ public class SpellRadiance extends SpellBase {
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
     if (!player.world.isRemote && player.ticksExisted % 2 == 0) {
-      float distance = 32;
       RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0),
           player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)));
       Vec3d direction = player.getLookVec();
@@ -123,9 +132,9 @@ public class SpellRadiance extends SpellBase {
             for (EntityLivingBase e : entities) {
               if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
                   && e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
-                e.attackEntityFrom(ModDamage.radiantDamageFrom(player), 5F);
+                e.attackEntityFrom(ModDamage.radiantDamageFrom(player), damage);
                 if (e.isEntityUndead()) {
-                  e.attackEntityFrom(ModDamage.radiantDamageFrom(player), 3F);
+                  e.attackEntityFrom(ModDamage.radiantDamageFrom(player), undeadDamage);
                 }
                 e.setRevengeTarget(player);
                 e.setLastAttackedEntity(player);
@@ -138,4 +147,18 @@ public class SpellRadiance extends SpellBase {
     return true;
   }
 
+  @Override
+  public void finalise() {
+    this.castType = properties.getProperty(PROP_CAST_TYPE);
+    this.cooldown = properties.getProperty(PROP_COOLDOWN);
+
+    SpellCost cost = properties.getProperty(PROP_COST_1);
+    addCost(cost.getHerb(), cost.getCost());
+    cost = properties.getProperty(PROP_COST_2);
+    addCost(cost.getHerb(), cost.getCost());
+
+    this.distance = properties.getProperty(PROP_DISTANCE);
+    this.damage = properties.getProperty(PROP_DAMAGE);
+    this.undeadDamage = properties.getProperty(PROP_UNDEAD_DAMAGE);
+  }
 }

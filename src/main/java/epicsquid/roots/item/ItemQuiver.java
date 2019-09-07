@@ -7,7 +7,7 @@ import epicsquid.roots.entity.item.EntityLivingArrow;
 import epicsquid.roots.gui.GuiHandler;
 import epicsquid.roots.handler.QuiverHandler;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.util.ItemUtil;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.util.QuiverInventoryUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,10 +30,14 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 
 public class ItemQuiver extends ItemArrowBase {
   public static AxisAlignedBB bounding = new AxisAlignedBB(-2.5, -2.5, -2.5, 2.5, 2.5, 2.5);
+
+  public static Method getArrowStack = null;
 
   public ItemQuiver(@Nonnull String name) {
     super(name);
@@ -43,22 +47,19 @@ public class ItemQuiver extends ItemArrowBase {
 
   @Override
   public EntityArrow createArrow(World worldIn, ItemStack stack, EntityLivingBase shooter) {
-    ItemStack livingArrow = findLivingArrow(stack);
-    if (!livingArrow.isEmpty()) {
-      return ((ItemLivingArrow) livingArrow.getItem()).createArrow(worldIn, livingArrow, shooter);
+    ItemStack arrow = findArrow(stack);
+    if (!arrow.isEmpty()) {
+      EntityArrow entityArrow = ((ItemArrow) arrow.getItem()).createArrow(worldIn, arrow, shooter);
+      entityArrow.getEntityData().setBoolean("return", true);
+      return entityArrow;
     }
 
-    ItemStack normalArrow = findOtherArrow(stack);
-    if (!normalArrow.isEmpty()) {
-      return ((ItemArrow) normalArrow.getItem()).createArrow(worldIn, normalArrow, shooter);
-    }
-
-    EntityArrow arrow = new EntityTippedArrow(worldIn, shooter);
-    arrow.setDamage(1.5D);
-    arrow.getEntityData().setBoolean("generated", true);
+    EntityArrow entityArrow = new EntityTippedArrow(worldIn, shooter);
+    entityArrow.setDamage(1.5D);
+    entityArrow.getEntityData().setBoolean("generated", true);
 
     stack.damageItem(itemRand.nextInt(2), shooter);
-    return arrow;
+    return entityArrow;
   }
 
   @Override
@@ -66,30 +67,16 @@ public class ItemQuiver extends ItemArrowBase {
     return true;
   }
 
-  public static ItemStack findLivingArrow(ItemStack quiver) {
+  public static ItemStack findArrow(ItemStack quiver) {
     QuiverHandler handler = QuiverHandler.getHandler(quiver);
     ItemStack result = ItemStack.EMPTY;
     for (int i = 0; i < handler.getInventory().getSlots(); i++) {
       ItemStack stack = handler.getInventory().getStackInSlot(i);
       if (stack.isEmpty()) continue;
-      if (stack.getItem() != ModItems.living_arrow) continue;
       result = handler.getInventory().extractItem(i, 1, false);
       break;
     }
 
-    return result;
-  }
-
-  public static ItemStack findOtherArrow(ItemStack quiver) {
-    QuiverHandler handler = QuiverHandler.getHandler(quiver);
-    ItemStack result = ItemStack.EMPTY;
-    for (int i = 0; i < handler.getInventory().getSlots(); i++) {
-      ItemStack stack = handler.getInventory().getStackInSlot(i);
-      if (stack.isEmpty() || !(stack.getItem() instanceof ItemArrow) || stack.getItem() == ModItems.living_arrow)
-        continue;
-      result = handler.getInventory().extractItem(i, 1, false);
-      break;
-    }
     return result;
   }
 
@@ -111,10 +98,14 @@ public class ItemQuiver extends ItemArrowBase {
     int consumed = 0;
     int generated = 0;
     for (EntityArrow arrow : arrows) {
-      ItemStack stack = new ItemStack(Items.ARROW);
+      ItemStack stack = getArrowStack(arrow);
 
-      if (arrow instanceof EntityLivingArrow) {
-        stack = new ItemStack(ModItems.living_arrow);
+      if (stack.isEmpty()) {
+        if (arrow instanceof EntityLivingArrow) {
+          stack = new ItemStack(ModItems.living_arrow);
+        } else {
+          stack = new ItemStack(Items.ARROW);
+        }
       }
 
       arrow.setDead();
@@ -122,7 +113,7 @@ public class ItemQuiver extends ItemArrowBase {
         generated++;
         continue;
       }
-      if (Util.rand.nextInt(3) != 0 || stack.getItem() == ModItems.living_arrow) {
+      if (Util.rand.nextInt(3) != 0 || arrow.getEntityData().hasKey("return")) {
         ItemStack result = ItemHandlerHelper.insertItemStacked(handler.getInventory(), stack, false);
         if (result.isEmpty()) {
           consumed++;
@@ -161,15 +152,27 @@ public class ItemQuiver extends ItemArrowBase {
 
   @Override
   public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-    if (repair.getItem() == ModItems.bark_wildwood) {
-      return true;
-    }
-
-    return super.getIsRepairable(toRepair, repair);
+    return toRepair.getItem() == this && repair.getItem() == ModItems.bark_wildwood;
   }
 
   @Override
   public boolean isRepairable() {
     return true;
+  }
+
+  public static ItemStack getArrowStack (EntityArrow arrow) {
+    if (getArrowStack == null) {
+      try {
+        getArrowStack = EntityArrow.class.getDeclaredMethod("getArrowStack");
+      } catch (NoSuchMethodException e) {
+        return ItemStack.EMPTY;
+      }
+      getArrowStack.setAccessible(true);
+    }
+    try {
+      return (ItemStack) getArrowStack.invoke(arrow);
+    } catch (IllegalAccessException | InvocationTargetException e) {
+      return ItemStack.EMPTY;
+    }
   }
 }

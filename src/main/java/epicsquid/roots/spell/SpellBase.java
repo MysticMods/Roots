@@ -4,9 +4,11 @@ import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.handler.SpellHandler;
+import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.PowderInventoryUtil;
+import epicsquid.roots.util.types.PropertyTable;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,10 +26,13 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public abstract class SpellBase {
+  protected PropertyTable properties = new PropertyTable();
+
   private float red1, green1, blue1;
   private float red2, green2, blue2;
   private String name;
   protected int cooldown = 20;
+  protected boolean disabled = false;
 
   private TextFormatting textColor;
   protected EnumCastType castType = EnumCastType.INSTANTANEOUS;
@@ -50,8 +55,20 @@ public abstract class SpellBase {
     this.textColor = textColor;
   }
 
-  public boolean hasModules () {
+  public boolean isDisabled() {
+    return disabled;
+  }
+
+  public void setDisabled(boolean disabled) {
+    this.disabled = disabled;
+  }
+
+  public boolean hasModules() {
     return !acceptedModules.isEmpty();
+  }
+
+  public PropertyTable getProperties () {
+    return properties;
   }
 
   public SpellBase acceptModules(SpellModule ... modules) {
@@ -77,7 +94,7 @@ public abstract class SpellBase {
 
   public boolean costsMet(EntityPlayer player) {
     boolean matches = true;
-    for(Map.Entry<Herb, Double> entry : this.costs.entrySet()){
+    for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
       Herb herb = entry.getKey();
       double d = entry.getValue();
       if (matches) {
@@ -92,7 +109,7 @@ public abstract class SpellBase {
   }
 
   public void enactCosts(EntityPlayer player) {
-    for(Map.Entry<Herb, Double> entry : this.costs.entrySet()){
+    for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
       Herb herb = entry.getKey();
       double d = entry.getValue();
       PowderInventoryUtil.removePowder(player, herb, d);
@@ -100,7 +117,7 @@ public abstract class SpellBase {
   }
 
   public void enactTickCosts(EntityPlayer player) {
-    for(Map.Entry<Herb, Double> entry : this.costs.entrySet()){
+    for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
       Herb herb = entry.getKey();
       double d = entry.getValue();
       PowderInventoryUtil.removePowder(player, herb, d / 20.0);
@@ -111,7 +128,7 @@ public abstract class SpellBase {
   public void addToolTip(List<String> tooltip) {
     String prefix = "roots.spell." + name;
     tooltip.add("" + textColor + TextFormatting.BOLD + I18n.format(prefix + ".name") + TextFormatting.RESET);
-    for(Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
+    for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
       Herb herb = entry.getKey();
       String d = String.format("%.4f", entry.getValue());
       tooltip.add(I18n.format(herb.getItem().getTranslationKey() + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
@@ -121,7 +138,7 @@ public abstract class SpellBase {
   private List<ItemStack> moduleItems = null;
 
   @SideOnly(Side.CLIENT)
-  public List<ItemStack> getModuleStacks () {
+  public List<ItemStack> getModuleStacks() {
     if (moduleItems == null) {
       moduleItems = new ArrayList<>();
       String prefix = "roots.spell." + name + ".";
@@ -201,17 +218,37 @@ public abstract class SpellBase {
     return ingredients;
   }
 
-  public void setIngredients (List<Ingredient> ingredients) {
+  public void setIngredients(List<Ingredient> ingredients) {
     this.ingredients = ingredients;
   }
 
-  public ItemStack getResult () {
+  public ItemStack getResult() {
     ItemStack stack = new ItemStack(ModItems.spell_dust);
     SpellHandler.fromStack(stack).setSpellToSlot(this);
     return stack;
   }
 
-  public List<ItemStack> getCostItems () {
+  public List<ItemStack> getCostItems() {
     return costs.keySet().stream().map((herb) -> new ItemStack(herb.getItem())).collect(Collectors.toList());
+  }
+
+  public abstract void finalise ();
+
+  public static class SpellCost {
+    private String herb;
+    private double cost;
+
+    public SpellCost(String herb, double cost) {
+      this.herb = herb;
+      this.cost = cost;
+    }
+
+    public Herb getHerb () {
+      return HerbRegistry.getHerbByName(herb);
+    }
+
+    public double getCost() {
+      return cost;
+    }
   }
 }

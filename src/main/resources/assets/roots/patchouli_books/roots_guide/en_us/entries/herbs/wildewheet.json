@@ -19,11 +19,14 @@
     },
     {
       "type": "crafting",
-      "recipe": "roots:wildewheet_seed"
+      "recipe": "roots:wildewheet_seed",
+      "recipe2": "roots:wildewheet_bread"
     },
     {
-      "type": "crafting",
-      "recipe": "roots:wildewheet_bread"
+      "type": "relations",
+      "entries": [
+        "apparatus/runic_shears"
+      ]
     }
   ]
 }

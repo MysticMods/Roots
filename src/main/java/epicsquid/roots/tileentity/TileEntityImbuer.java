@@ -13,6 +13,7 @@ import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -80,7 +81,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
 
   @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand,
-      @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
+                          @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
     if (!heldItem.isEmpty()) {
       if (heldItem.getItem() == ModItems.spell_dust || heldItem.getItem() == ModItems.runic_dust) {
@@ -95,7 +96,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
             return true;
           }
         }
-      } else if(heldItem.getItem() == ModItems.staff || ModuleRegistry.isModule(heldItem)){
+      } else if (heldItem.getItem() == ModItems.staff || ModuleRegistry.isModule(heldItem)) {
         if (heldItem.getItem() == ModItems.staff) {
           SpellHandler cap = SpellHandler.fromStack(heldItem);
           if (!cap.hasFreeSlot() && inventory.getStackInSlot(0).getItem() != ModItems.runic_dust) {
@@ -127,6 +128,46 @@ public class TileEntityImbuer extends TileBase implements ITickable {
             return true;
           }
         }
+      } else {
+        // Check for a damaged item in the other slot and see if this matches
+        if (inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(1).isEmpty()) {
+          if (heldItem.isItemStackDamageable()) {
+            ItemStack toInsert = heldItem.copy(); // <-- Pretty sure this gets copied anyway?
+            ItemStack attemptedInsert = inventory.insertItem(1, toInsert, true);
+            if (attemptedInsert.isEmpty()) {
+              inventory.insertItem(1, toInsert, false);
+              player.getHeldItem(hand).shrink(1);
+              if (player.getHeldItem(hand).getCount() == 0) {
+                player.setHeldItem(hand, ItemStack.EMPTY);
+              }
+              markDirty();
+              updatePacketViaState();
+              return true;
+            }
+          }
+        } else {
+          ItemStack toRepair = inventory.getStackInSlot(1);
+          if (!toRepair.isEmpty() && toRepair.isItemStackDamageable() && toRepair.getItem().getIsRepairable(toRepair, heldItem)) {
+            ItemStack repairItem = heldItem.copy();
+            repairItem.setCount(1);
+            int repairAmount = Math.min(toRepair.getItemDamage(), toRepair.getMaxDamage() / 4);
+            if (repairAmount > 0) {
+              ItemStack result = inventory.insertItem(0, repairItem, true);
+              if (result.isEmpty()) {
+                inventory.insertItem(0, repairItem, false);
+                player.getHeldItem(hand).shrink(1);
+                if (player.getHeldItem(hand).getCount() == 0) {
+                  player.setHeldItem(hand, ItemStack.EMPTY);
+                }
+                markDirty();
+                updatePacketViaState();
+                return true;
+                // actual repair doesn't occur here
+                // toRepair.setItemDamage(toRepair.getItemDamage() - repairAmount);
+              }
+            }
+          }
+        }
       }
     }
     if (heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND) {
@@ -153,7 +194,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
       progress++;
       angle += 2.0f;
       ItemStack spellDust = inventory.getStackInSlot(0);
-      boolean clearSlot = spellDust.getItem() == ModItems.runic_dust;
+      boolean clearSlot = spellDust.getItem() != ModItems.spell_dust;
       SpellHandler capability = SpellHandler.fromStack(spellDust);
       if ((capability.getSelectedSpell() != null) || clearSlot) {
         SpellBase spell;
@@ -165,19 +206,19 @@ public class TileEntityImbuer extends TileBase implements ITickable {
         if (world.isRemote) {
           if (Util.rand.nextInt(2) == 0) {
             ParticleUtil.spawnParticleLineGlow(world, getPos().getX() + 0.5f, getPos().getY() + 0.125f, getPos().getZ() + 0.5f,
-                    getPos().getX() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), getPos().getY() + 1.0f,
-                    getPos().getZ() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), spell.getRed1(), spell.getGreen1(), spell.getBlue1(), 0.25f, 4.0f, 40);
+                getPos().getX() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), getPos().getY() + 1.0f,
+                getPos().getZ() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), spell.getRed1(), spell.getGreen1(), spell.getBlue1(), 0.25f, 4.0f, 40);
           } else {
             ParticleUtil.spawnParticleLineGlow(world, getPos().getX() + 0.5f, getPos().getY() + 0.125f, getPos().getZ() + 0.5f,
-                    getPos().getX() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), getPos().getY() + 1.0f,
-                    getPos().getZ() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), spell.getRed2(), spell.getGreen2(), spell.getBlue2(), 0.25f, 4.0f, 40);
+                getPos().getX() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), getPos().getY() + 1.0f,
+                getPos().getZ() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), spell.getRed2(), spell.getGreen2(), spell.getBlue2(), 0.25f, 4.0f, 40);
           }
         }
       }
       if (progress > 200) {
         progress = 0;
         if (!world.isRemote) {
-          if(inventory.getStackInSlot(1).getItem() == ModItems.staff){
+          if (inventory.getStackInSlot(1).getItem() == ModItems.staff) {
             ItemStack staff = inventory.getStackInSlot(1);
             SpellBase spell;
             if (!clearSlot && capability.getSelectedSpell() != null) {
@@ -193,8 +234,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
             markDirty();
             updatePacketViaState();
             PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(spell.getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
-          }
-          else{
+          } else if (inventory.getStackInSlot(0).getItem() == ModItems.spell_dust) {
             ItemStack stack = inventory.getStackInSlot(1);
             SpellModule module = ModuleRegistry.getModule(stack);
             capability.addModule(module);
@@ -202,6 +242,18 @@ public class TileEntityImbuer extends TileBase implements ITickable {
             markDirty();
             updatePacketViaState();
             PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(capability.getSelectedSpell().getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
+          } else {
+            // Handle the repair
+            ItemStack toRepair = inventory.extractItem(1, 1, false);
+            inventory.extractItem(0, 1, false);
+            int repairAmount = Math.min(toRepair.getItemDamage(), toRepair.getMaxDamage() / 4);
+            if (repairAmount > 0) {
+              toRepair.setItemDamage(toRepair.getItemDamage() - repairAmount);
+            }
+            world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, toRepair));
+            markDirty();
+            updatePacketViaState();
+            PacketHandler.sendToAllTracking(new MessageImbueCompleteFX("fake_spell", getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
           }
         }
       }

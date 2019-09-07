@@ -1,6 +1,5 @@
 package epicsquid.roots.integration.crafttweaker;
 
-import com.blamejared.mtlib.utils.BaseAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.block.IBlockState;
 import crafttweaker.api.item.IItemStack;
@@ -23,9 +22,9 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenClass("mods." + Roots.MODID + ".Transmutation")
 public class TransmutationTweaker {
   @ZenDocMethod(
-      order=1,
-      args= {
-          @ZenDocArg(arg="name", info="the name of the recipe being removed")
+      order = 1,
+      args = {
+          @ZenDocArg(arg = "name", info = "the name of the recipe being removed")
       }
   )
   @ZenMethod
@@ -34,11 +33,11 @@ public class TransmutationTweaker {
   }
 
   @ZenDocMethod(
-      order=2,
+      order = 2,
       args = {
-          @ZenDocArg(arg="name", info="the name of the recipe being added (must be unique)"),
-          @ZenDocArg(arg="state1", info="the initial state of the block as defined as a blockstate"),
-          @ZenDocArg(arg="state2", info="the state that the initial state should be converted into")
+          @ZenDocArg(arg = "name", info = "the name of the recipe being added (must be unique)"),
+          @ZenDocArg(arg = "state1", info = "the initial state of the block as defined as a blockstate"),
+          @ZenDocArg(arg = "state2", info = "the state that the initial state should be converted into")
       }
   )
   @ZenMethod
@@ -47,11 +46,11 @@ public class TransmutationTweaker {
   }
 
   @ZenDocMethod(
-      order=3,
+      order = 3,
       args = {
-          @ZenDocArg(arg="name", info="the name of the recipe being added (must be unique)"),
-          @ZenDocArg(arg="state", info="the initial state that is looked for when converting (as a block state)"),
-          @ZenDocArg(arg="stack", info="the item stack that replaces the block state")
+          @ZenDocArg(arg = "name", info = "the name of the recipe being added (must be unique)"),
+          @ZenDocArg(arg = "state", info = "the initial state that is looked for when converting (as a block state)"),
+          @ZenDocArg(arg = "stack", info = "the item stack that replaces the block state")
       }
   )
   @ZenMethod
@@ -59,7 +58,7 @@ public class TransmutationTweaker {
     CraftTweaker.LATE_ACTIONS.add(new BlockToItem(name, CraftTweakerMC.getBlockState(state), CraftTweakerMC.getItemStack(stack)));
   }
 
-  private static class Remove extends BaseAction {
+  private static class Remove extends Action {
     private final ResourceLocation name;
 
     public Remove(String name) {
@@ -77,12 +76,12 @@ public class TransmutationTweaker {
     }
 
     @Override
-    protected String getRecipeInfo() {
+    public String describe() {
       return String.format("Recipe to remove %s from Transmutation", name);
     }
   }
 
-  private static class BlockToBlock extends BaseAction {
+  private static class BlockToBlock extends Action {
     private final net.minecraft.block.state.IBlockState state1;
     private final net.minecraft.block.state.IBlockState state2;
     private final String name;
@@ -100,12 +99,12 @@ public class TransmutationTweaker {
     }
 
     @Override
-    protected String getRecipeInfo() {
+    public String describe() {
       return String.format("Recipe to add %s->%s to Transmutation", state1, state2);
     }
   }
 
-  private static class BlockToItem extends BaseAction {
+  private static class BlockToItem extends Action {
     private final net.minecraft.block.state.IBlockState state;
     private final ItemStack stack;
     private final String name;
@@ -123,7 +122,7 @@ public class TransmutationTweaker {
     }
 
     @Override
-    protected String getRecipeInfo() {
+    public String describe() {
       return String.format("Recipe to turn %s->%s to Transmutation", state, stack);
     }
   }

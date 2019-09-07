@@ -36,7 +36,6 @@ public class GuiFeyCrafter extends GuiContainer {
   }
 
 
-
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
     GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

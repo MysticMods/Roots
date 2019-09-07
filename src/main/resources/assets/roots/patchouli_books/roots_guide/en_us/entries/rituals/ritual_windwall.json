@@ -3,10 +3,11 @@
   "icon": "roots:ritual_windwall",
   "category": "rituals",
   "advancement": "roots:moonglow_leaf",
+  "flag": "roots:ritual_windwall",
   "pages": [
     {
       "type": "text",
-      "text": "All creatures hostile towards you are pushed away from the ritual location."
+      "text": "All potentially hostile creatures are pushed rapidly away from the ritual location."
     },
     {
       "type": "pyre_template",

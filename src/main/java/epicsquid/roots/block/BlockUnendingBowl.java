@@ -1,6 +1,8 @@
 package epicsquid.roots.block;
 
+import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.block.BlockTEBase;
+import epicsquid.roots.block.itemblock.ItemBlockUnendingBowl;
 import epicsquid.roots.integration.botania.PetalApothecaryFiller;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -18,9 +20,10 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class BlockUnendingBowl extends BlockTEBase {
-  
+
   public BlockUnendingBowl(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
     super(mat, type, hardness, name, teClass);
+    this.setItemBlock(new ItemBlockUnendingBowl(this)).setRegistryName(LibRegistry.getActiveModid(), name);
   }
 
   @Override
@@ -54,16 +57,18 @@ public class BlockUnendingBowl extends BlockTEBase {
 
   @Override
   public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-    if (PetalApothecaryFiller.hasBotania())
+    if (PetalApothecaryFiller.hasBotania()) {
       PetalApothecaryFiller.getAdjacentApothecary(worldIn, pos);
+    }
     worldIn.scheduleUpdate(pos, this, tickRate(worldIn));
   }
 
   @Override
   public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
     worldIn.scheduleUpdate(pos, this, tickRate(worldIn));
-    if (PetalApothecaryFiller.hasBotania())
+    if (PetalApothecaryFiller.hasBotania()) {
       PetalApothecaryFiller.getAdjacentApothecary(worldIn, pos);
+    }
   }
 
   @Override

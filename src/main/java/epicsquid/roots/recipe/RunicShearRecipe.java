@@ -82,7 +82,7 @@ public class RunicShearRecipe {
 
   @SideOnly(Side.CLIENT)
   @Nullable
-  public Entity getEntity () {
+  public Entity getEntity() {
     if (entity == null) {
       Minecraft mc = Minecraft.getMinecraft();
       try {

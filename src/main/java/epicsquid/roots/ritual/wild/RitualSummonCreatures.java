@@ -33,15 +33,15 @@ public class RitualSummonCreatures extends RitualBase {
 
   private static Map<Class<? extends Entity>, List<ItemStack>> entityItem = new HashMap<>();
 
-  public RitualSummonCreatures(String name, int duration) {
-    super(name, duration);
+  public RitualSummonCreatures(String name, int duration, boolean disabled) {
+    super(name, duration, disabled);
 
     addCondition(new ConditionItems(
-            new ItemStack(ModItems.wildewheet),
-            new ItemStack(Items.WHEAT),
-            new ItemStack(Items.EGG),
-            new ItemStack(Items.ROTTEN_FLESH),
-            new ItemStack(ModItems.moonglow_leaf)
+        new ItemStack(ModItems.wildewheet),
+        new ItemStack(Items.WHEAT),
+        new ItemStack(Items.EGG),
+        new ItemStack(Items.ROTTEN_FLESH),
+        new ItemStack(ModItems.moonglow_leaf)
     ));
 //    addCondition(new ConditionGroveFaith(GroveType.WILD, 0));
 
@@ -93,7 +93,7 @@ public class RitualSummonCreatures extends RitualBase {
             plate.removeItem();
           }
         } else {
-          for(int i = 0; i < 10; i++){
+          for (int i = 0; i < 10; i++) {
             ParticleUtil.spawnParticleStar(world, (float) entity.posX + 0.5f * (Util.rand.nextFloat() - 0.5f),
                 (float) (entity.posY + entity.height / 2.5f + (Util.rand.nextFloat())), (float) entity.posZ + 0.5f * (Util.rand.nextFloat() - 0.5f),
                 0.125f * (Util.rand.nextFloat() - 0.5f), 0.01875f * (Util.rand.nextFloat()), 0.125f * (Util.rand.nextFloat() - 0.5f), 100, 255, 100, 1.0f,

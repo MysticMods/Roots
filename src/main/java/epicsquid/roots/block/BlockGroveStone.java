@@ -35,6 +35,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+@SuppressWarnings("deprecation")
 public class BlockGroveStone extends BlockTEBase {
   public static final PropertyEnum<Half> HALF = PropertyEnum.create("half", Half.class);
   public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
@@ -45,6 +46,7 @@ public class BlockGroveStone extends BlockTEBase {
 
     this.setDefaultState(this.blockState.getBaseState().withProperty(VALID, false).withProperty(HALF, Half.BOTTOM).withProperty(FACING, EnumFacing.NORTH));
     this.setTickRandomly(true);
+    useNeighborBrightness = true;
   }
 
   @Nonnull

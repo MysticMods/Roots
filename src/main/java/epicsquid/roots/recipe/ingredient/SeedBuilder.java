@@ -20,7 +20,7 @@ public class SeedBuilder {
   private static final Pattern SEED_PATTERN = Pattern.compile("(?:(?:(?:[A-Z-_.:]|^)seed)|(?:(?:[a-z-_.:]|^)Seed))(?:[sA-Z-_.:]|$)");
   private static Ingredient SEEDS = null;
 
-  public static Ingredient get () {
+  public static Ingredient get() {
     if (SEEDS == null) {
       NonNullList<ItemStack> matchingStacks = NonNullList.create();
       for (Item item : Item.REGISTRY) {

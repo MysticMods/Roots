@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "While mastering the abilities of extracting bark from logs you also learned how to pick the best pieces; you are now able to choose the most hardened ones to create armor that is stronger than iron and with regenerative effects of growing trees and healing yourself depending on how many pieces are worn."
+      "text": "While mastering the process of scraping bark from wildwood logs, you have come up with a design for a set of strong armor.$(br2)While it does not have the self-repairing quality of $(l:apparatus/living_tools)Living Tools$(), it does have the nurturing nature of the forest. $(info) Wearing it will occasionally heal you, with the chance to be healed increasing with each piece worn."
     },
     {
       "type": "fey_crafting_template",
@@ -24,6 +24,13 @@
     {
       "type": "fey_crafting_template",
       "recipe": "wildwood_boots"
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "basics/other_imbuer",
+        "rituals/ritual_wild_growth"
+      ]
     }
   ]
 }

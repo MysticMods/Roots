@@ -1,6 +1,5 @@
 package epicsquid.roots.integration.crafttweaker;
 
-import com.blamejared.mtlib.utils.BaseAction;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
@@ -30,10 +29,10 @@ import java.util.stream.Stream;
 public class RitualTweaker {
 
   @ZenDocMethod(
-      order=1,
+      order = 1,
       args = {
-          @ZenDocArg(arg="name", info="the name of the ritual whose ingredients you wish to modify"),
-          @ZenDocArg(arg="inputs", info="a list of five ingredients (no more, no less)")
+          @ZenDocArg(arg = "name", info = "the name of the ritual whose ingredients you wish to modify"),
+          @ZenDocArg(arg = "inputs", info = "a list of five ingredients (no more, no less)")
       }
   )
   @ZenMethod
@@ -45,7 +44,7 @@ public class RitualTweaker {
     CraftTweaker.LATE_ACTIONS.add(new Modify(name, Stream.of(inputs).map(CraftTweakerMC::getIngredient).toArray(Ingredient[]::new)));
   }
 
-  private static class Modify extends BaseAction {
+  private static class Modify extends Action {
     private String name;
     private Ingredient[] inputs;
 
@@ -64,8 +63,8 @@ public class RitualTweaker {
     @Override
     public void apply() {
       RitualBase ritual = RitualRegistry.getRitual(name);
-      if (ritual == null) {
-        CraftTweakerAPI.logError("Invalid ritual or no ritual by the name of \"" + name + "\" exists.");
+      if (ritual == null || ritual.isDisabled()) {
+        CraftTweakerAPI.logError("Invalid or disabled ritual or no ritual by the name of \"" + name + "\" exists.");
         return;
       }
       ConditionItems newRecipe = new ConditionItems((Object[]) inputs);

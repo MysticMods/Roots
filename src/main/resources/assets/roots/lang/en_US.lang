@@ -134,6 +134,7 @@ roots.ritual.ritual_wild_growth.name=Wildroot Growth
 roots.ritual.ritual_overgrowth.name=Overgrowth
 roots.ritual.ritual_flower_growth.name=Flower Growth
 roots.ritual.ritual_transmutation.name=Transmutation
+roots.ritual.ritual_gathering.name=Gathering
 
 roots.keybinds.group=Roots
 roots.keybinds.pouch=Open Pouch
@@ -163,6 +164,7 @@ item.ritual_wild_growth.name=Ritual: Wildroot Growth
 item.ritual_overgrowth.name=Ritual: Overgrowth
 item.ritual_flower_growth.name=Ritual: Flower Growth
 item.ritual_transmutation.name=Ritual: Transmutation
+item.ritual_gathering.name=Ritual: Gathering
 
 #Knifes
 item.wood_knife.name=Wooden Knife
@@ -239,6 +241,7 @@ item.infernal_bulb.name=Infernal Bulb
 item.dewgonia.name=Dewgonia
 item.stalicripe.name=Stalicripe
 item.cloud_berry.name=Cloud Berry
+tile.baffle_cap.name=Baffle Cap
 tile.baffle_cap_mushroom.name=Baffle Cap
 tile.baffle_cap_huge_stem.name=Huge Baffle Cap Stem
 tile.baffle_cap_huge_top.name=Huge Baffle Cap
@@ -280,6 +283,11 @@ item.runic_dust.name=Runic Dust
 item.cooked_pereskia.name=Roasted Pereskia
 item.wildewheet_bread.name=Wildewheet Bread
 item.fey_leather.name=Fey Leather
+
+tile.magmatic_soil.effect=Cooks some of the drops from plants when harvesting.
+tile.aqueous_soil.effect=Automatically harvests plants when they reach maturity.
+tile.caelic_soil.effect=Increases the rate at which plants grow.
+tile.terran_soil.effect=Increases the yield of plants grown on it.
 
 # JEI
 container.roots.runic_shears.name=Runic Shearing

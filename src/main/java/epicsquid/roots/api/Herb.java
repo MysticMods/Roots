@@ -8,7 +8,7 @@ import javax.annotation.Nonnull;
 
 /**
  * Registery class for herbs. Acts as a wrapper for an item that is a herb.
- *
+ * <p>
  * See RegisterHerbEvent and HerbRegistery for how to add a herb
  */
 public class Herb extends IForgeRegistryEntry.Impl<Herb> {

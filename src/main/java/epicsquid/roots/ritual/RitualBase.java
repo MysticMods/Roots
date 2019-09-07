@@ -32,12 +32,15 @@ public abstract class RitualBase {
   private TextFormatting color;
   private boolean bold;
 
-  public RitualBase(String name, int duration) {
+  protected boolean disabled;
+
+  public RitualBase(String name, int duration, boolean disabled) {
     this.name = name;
     this.duration = duration;
+    this.disabled = disabled;
   }
 
-  public String getFormat () {
+  public String getFormat() {
     String format = this.color + "";
     if (this.bold) {
       format += TextFormatting.BOLD;
@@ -61,17 +64,22 @@ public abstract class RitualBase {
     this.icon = icon;
   }
 
-  public List<Condition> getConditions () {
+  public boolean isDisabled() {
+    return disabled;
+  }
+
+  public List<Condition> getConditions() {
     return this.conditions;
   }
 
-  public void addCondition(Condition condition){
+  public void addCondition(Condition condition) {
     this.conditions.add(condition);
   }
 
-  public boolean isRitualRecipe(TileEntityBonfire tileEntityBonfire, @Nullable EntityPlayer player){
-    for(Condition condition : this.conditions){
-      if(condition instanceof ConditionItems){
+  public boolean isRitualRecipe(TileEntityBonfire tileEntityBonfire, @Nullable EntityPlayer player) {
+    if (isDisabled()) return false;
+    for (Condition condition : this.conditions) {
+      if (condition instanceof ConditionItems) {
         ConditionItems conditionItems = (ConditionItems) condition;
         return conditionItems.checkCondition(tileEntityBonfire, player);
       }
@@ -85,8 +93,8 @@ public abstract class RitualBase {
       return false;
     }
 
-    for(Condition condition : this.conditions){
-      if(!condition.checkCondition(tileEntityBonfire, player)){
+    for (Condition condition : this.conditions) {
+      if (!condition.checkCondition(tileEntityBonfire, player)) {
         return false;
       }
     }
@@ -130,9 +138,9 @@ public abstract class RitualBase {
   }
 
   @SuppressWarnings("unchecked")
-  public List<ItemStack> getRecipe(){
-    for(Condition condition : this.conditions){
-      if(condition instanceof ConditionItems){
+  public List<ItemStack> getRecipe() {
+    for (Condition condition : this.conditions) {
+      if (condition instanceof ConditionItems) {
         ConditionItems conditionItems = (ConditionItems) condition;
         ItemStack[] stacks = conditionItems.getIngredients().stream()
             .map(ingredient -> ingredient.getMatchingStacks()[0])

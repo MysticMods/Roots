@@ -24,13 +24,26 @@ public class EntityThornTrap extends Entity {
   private static final DataParameter<Integer> lifetime = EntityDataManager.<Integer>createKey(EntityThornTrap.class, DataSerializers.VARINT);
   private UUID playerId = null;
 
+  private float damage;
+  private int slownessDuration, slownessAmplifier, poisonDuration, poisonAmplifier, duration;
+
   public EntityThornTrap(World worldIn) {
-    super(worldIn);
+    this(worldIn, SpellRoseThorns.damage, SpellRoseThorns.duration, SpellRoseThorns.slownessDuration, SpellRoseThorns.slownessAmplifier, SpellRoseThorns.poisonDuration, SpellRoseThorns.poisonAmplifier);
+  }
+
+  public EntityThornTrap(World world, float damage, int duration, int slownessDuration, int slownessAmplifier, int poisonDuration, int poisonAmplifier) {
+    super(world);
     this.setInvisible(false);
     this.setSize(1, 1);
-    getDataManager().register(lifetime, 600);
+    getDataManager().register(lifetime, duration);
     this.setNoGravity(false);
     this.noClip = false;
+    this.damage = damage;
+    this.slownessDuration = slownessDuration;
+    this.slownessAmplifier = slownessAmplifier;
+    this.poisonDuration = poisonDuration;
+    this.poisonAmplifier = poisonAmplifier;
+    this.duration = duration;
   }
 
   public void setPlayer(UUID id) {
@@ -99,14 +112,14 @@ public class EntityThornTrap extends Entity {
             }
           }
           setDead();
-          for (int j = 0; j < entities.size(); j++) {
-            if (!(entities.get(j) instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
-                && entities.get(j).getUniqueID().compareTo(player.getUniqueID()) != 0) {
-              entities.get(j).attackEntityFrom((DamageSource.CACTUS).causeMobDamage(player), 8.0f);
-              entities.get(j).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 80, 0));
-              entities.get(j).addPotionEffect(new PotionEffect(MobEffects.POISON, 80, 0));
-              entities.get(j).setLastAttackedEntity(player);
-              entities.get(j).setRevengeTarget(player);
+          for (EntityLivingBase entity : entities) {
+            if (!(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
+                && entity.getUniqueID().compareTo(player.getUniqueID()) != 0) {
+              entity.attackEntityFrom((DamageSource.CACTUS).causeMobDamage(player), damage);
+              entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, slownessDuration, slownessAmplifier));
+              entity.addPotionEffect(new PotionEffect(MobEffects.POISON, poisonDuration, poisonAmplifier));
+              entity.setLastAttackedEntity(player);
+              entity.setRevengeTarget(player);
             }
           }
           if (world.isRemote) {

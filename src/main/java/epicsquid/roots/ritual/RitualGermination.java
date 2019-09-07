@@ -13,14 +13,14 @@ import net.minecraft.world.World;
 
 public class RitualGermination extends RitualBase {
 
-  public RitualGermination(String name, int duration) {
-    super(name, duration);
+  public RitualGermination(String name, int duration, boolean disabled) {
+    super(name, duration, disabled);
     addCondition(new ConditionItems(
-            new ItemStack(ModItems.spirit_herb),
-            new ItemStack(ModItems.wildroot), 
-            new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
-            new ItemStack(Items.DYE, 1, 15),
-            new ItemStack(Items.DYE, 1, 15)
+        new ItemStack(ModItems.spirit_herb),
+        new ItemStack(ModItems.wildroot),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
+        new ItemStack(Items.DYE, 1, 15),
+        new ItemStack(Items.DYE, 1, 15)
     ));
     addCondition(new ConditionStandingStones(3, 2));
     setIcon(ModItems.ritual_germination);

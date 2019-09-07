@@ -3,7 +3,7 @@
     "icon": "roots:spell_dust",
     "category": "spells",
     "advancement": "roots:cloud_berry",
-    
+    "flag": "roots:spell_sky_soarer",
     "pages": [
       {
         "type": "text",

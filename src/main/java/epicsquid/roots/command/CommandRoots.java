@@ -3,11 +3,12 @@ package epicsquid.roots.command;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.network.MessageClearToasts;
-import epicsquid.roots.util.ItemUtil;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementManager;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.advancements.PlayerAdvancements;
+import net.minecraft.block.Block;
+import net.minecraft.block.IGrowable;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -16,9 +17,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.WorldServer;
 import vazkii.patchouli.common.handler.AdvancementSyncHandler;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -33,7 +41,7 @@ public class CommandRoots extends CommandBase {
 
   @Override
   public String getUsage(ICommandSender sender) {
-    return "/roots book";
+    return "/roots book | /roots growables";
   }
 
   @Override
@@ -49,9 +57,9 @@ public class CommandRoots extends CommandBase {
   @Override
   public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
     if (sender instanceof EntityPlayerMP && args.length != 0) {
+      EntityPlayerMP player = (EntityPlayerMP) sender;
+      WorldServer world = player.getServerWorld();
       if (args[0].equalsIgnoreCase("book")) {
-        EntityPlayerMP player = (EntityPlayerMP) sender;
-        WorldServer world = player.getServerWorld();
         AdvancementManager manager = world.getAdvancementManager();
         PlayerAdvancements advancements = player.getAdvancements();
         for (Advancement adv : manager.getAdvancements()) {
@@ -77,6 +85,21 @@ public class CommandRoots extends CommandBase {
           ItemUtil.spawnItem(world, player.getPosition(), book);
         }
         AdvancementSyncHandler.syncPlayer(player, false);
+      } else if (args[0].equalsIgnoreCase("growables")) {
+        List<String> growablesList = new ArrayList<>();
+        for (Block block : Block.REGISTRY) {
+          if (block instanceof IGrowable) {
+            growablesList.add(block.getRegistryName().toString());
+          }
+        }
+        Path path = Paths.get("roots.log");
+        try {
+          Files.write(path, growablesList, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+          player.sendMessage(new TextComponentString("Unable to write roots.log"));
+          return;
+        }
+        player.sendMessage(new TextComponentString("Growables written to roots.log"));
       }
     }
   }

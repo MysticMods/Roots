@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-@Mod.EventBusSubscriber(modid= Roots.MODID)
+@Mod.EventBusSubscriber(modid = Roots.MODID)
 public class ClientTickHandler {
   private static final Lock lock = new Lock();
   private static boolean ticking = false;

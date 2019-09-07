@@ -4,18 +4,16 @@ import com.google.common.collect.Lists;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticallib.recipe.factories.OreFallbackIngredient;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.mysticalworld.entity.EntityBeetle;
-import epicsquid.mysticalworld.entity.EntityDeer;
-import epicsquid.mysticalworld.entity.EntityFox;
-import epicsquid.mysticalworld.entity.EntityFrog;
+import epicsquid.mysticalworld.entity.*;
 import epicsquid.mysticalworld.materials.Metal;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
+import epicsquid.roots.item.ItemDruidKnife;
 import epicsquid.roots.recipe.*;
 import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
-import epicsquid.roots.util.ItemUtil;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.util.StateUtil;
 import epicsquid.roots.util.types.WorldPosStatePredicate;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
@@ -25,6 +23,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityPolarBear;
 import net.minecraft.entity.passive.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -40,6 +39,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 
+@SuppressWarnings({"unused", "WeakerAccess", "UnusedReturnValue"})
 public class ModRecipes {
 
   private static Map<ResourceLocation, AnimalHarvestRecipe> harvestRecipes = new HashMap<>();
@@ -110,6 +110,8 @@ public class ModRecipes {
     addPacifistEntry("deer", EntityDeer.class);
     addPacifistEntry("fox", EntityFox.class);
     addPacifistEntry("frog", EntityFrog.class);
+    addPacifistEntry("owl", EntityOwl.class);
+    addPacifistEntry("sprout", EntitySprout.class);
   }
 
   public static void addFlowerRecipe(String name, IBlockState state) {
@@ -150,7 +152,7 @@ public class ModRecipes {
 
   public static void addVanillaBarkRecipe(String name, BlockPlanks.EnumType type, ItemStack item) {
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
-    barkRecipes.put(rl, new BarkRecipe(rl, type, item));
+    barkRecipes.put(rl, new BarkRecipe(rl, item, type));
   }
 
   public static void initVanillaBarkRecipes() {
@@ -163,18 +165,26 @@ public class ModRecipes {
   }
 
   public static void initModdedBarkRecipes() {
-    addModdedBarkRecipe("wildwood", ModBlocks.wildwood_log, new ItemStack(ModItems.bark_wildwood));
+    addModdedBarkRecipe("wildwood", new ItemStack(ModItems.bark_wildwood), new ItemStack(ModBlocks.wildwood_log));
   }
 
-  public static void addModdedBarkRecipe(String name, Block block, ItemStack item) {
+  public static void addModdedBarkRecipe(String name, ItemStack item, ItemStack blockStack) {
+    if (blockStack.getItem() instanceof ItemBlock) {
+      for (Item knife : ModItems.knives) {
+        ((ItemDruidKnife) knife).addEffectiveBlock(((ItemBlock) blockStack.getItem()).getBlock());
+      }
+    }
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
-    barkRecipes.put(rl, new BarkRecipe(rl, block, item));
+    barkRecipes.put(rl, new BarkRecipe(rl, item, blockStack));
   }
 
   @Nullable
-  public static BarkRecipe getModdedBarkRecipe(Block block) {
+  public static BarkRecipe getModdedBarkRecipe(IBlockState block) {
+    ItemStack stack = new ItemStack(block.getBlock(), 1, block.getBlock().damageDropped(block));
     for (BarkRecipe recipe : barkRecipes.values()) {
-      if (recipe.getBlock() == block) return recipe;
+      if (ItemUtil.equalWithoutSize(recipe.getBlockStack(), stack)) {
+        return recipe;
+      }
     }
     return null;
   }
@@ -187,11 +197,11 @@ public class ModRecipes {
     return null;
   }
 
-  public static Collection<BarkRecipe> getBarkRecipes () {
+  public static Collection<BarkRecipe> getBarkRecipes() {
     return barkRecipes.values();
   }
 
-  public static boolean removeBarkRecipe (ItemStack stack) {
+  public static boolean removeBarkRecipe(ItemStack stack) {
     List<BarkRecipe> toRemove = new ArrayList<>();
     for (BarkRecipe recipe : barkRecipes.values()) {
       if (ItemUtil.equalWithoutSize(stack, recipe.getItem())) {
@@ -401,12 +411,15 @@ public class ModRecipes {
     addAnimalHarvestRecipe("sheep", EntitySheep.class);
     addAnimalHarvestRecipe("squid", EntitySquid.class);
     addAnimalHarvestRecipe("wolf", EntityWolf.class);
+    addAnimalHarvestRecipe("polar_bear", EntityPolarBear.class);
     // No villager or skeletal/zombie horses.
     // Mystical World
     addAnimalHarvestRecipe("beetle", EntityBeetle.class);
     addAnimalHarvestRecipe("deer", EntityDeer.class);
     addAnimalHarvestRecipe("fox", EntityFox.class);
     addAnimalHarvestRecipe("frog", EntityFrog.class);
+    addAnimalHarvestRecipe("owl", EntityOwl.class);
+    addAnimalHarvestRecipe("sprout", EntitySprout.class);
   }
 
   public static void addRunicCarvingRecipe(RunicCarvingRecipe recipe) {
@@ -500,11 +513,11 @@ public class ModRecipes {
     return null;
   }
 
-  public static Set<Class<? extends Entity>> getRunicShearEntities () {
+  public static Set<Class<? extends Entity>> getRunicShearEntities() {
     return runicShearEntityRecipes.keySet();
   }
 
-  public static void addMortarRecipe (MortarRecipe recipe) {
+  public static void addMortarRecipe(MortarRecipe recipe) {
     mortarRecipes.add(recipe);
   }
 
@@ -517,7 +530,7 @@ public class ModRecipes {
     return null;
   }
 
-  public static void removeMortarRecipes (ItemStack output) {
+  public static void removeMortarRecipes(ItemStack output) {
     mortarRecipes.removeIf(recipe -> ItemUtil.equalWithoutSize(recipe.getResult(), output));
   }
 
@@ -534,7 +547,7 @@ public class ModRecipes {
     ResourceLocation item = new ResourceLocation(name);
     for (MortarRecipe mortarRecipe : mortarRecipes) {
       ItemStack output = mortarRecipe.getResult();
-      if (output.getItem().getRegistryName().equals(item) && output.getMetadata() == meta) {
+      if (Objects.equals(output.getItem().getRegistryName(), item) && output.getMetadata() == meta) {
         return mortarRecipe;
       }
     }
@@ -666,7 +679,7 @@ public class ModRecipes {
     return runicShearRecipes;
   }
 
-  public static Map<Class<? extends Entity>, RunicShearRecipe> getRunicShearEntityRecipes () {
+  public static Map<Class<? extends Entity>, RunicShearRecipe> getRunicShearEntityRecipes() {
     return runicShearEntityRecipes;
   }
 

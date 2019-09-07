@@ -45,6 +45,12 @@
       "scale": 0.8,
       "offset": 0.25,
       "text": "This creature can be used as a source of fey leather using $(l:apparatus/runic_shears)Runic Shears$()."
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "apparatus/sylvan_armor"
+      ]
     }
   ]
 }

@@ -73,7 +73,7 @@ public class ContainerPouch extends Container {
     int xOffset = -13;
     int yOffset = -55;
     int q = 0;
-    for (int i = 0; i < inventoryHandler.getSlots(); i++ ) {
+    for (int i = 0; i < inventoryHandler.getSlots(); i++) {
       // Top Row
       if (i < 5) {
         addSlotToContainer(new SlotItemHandler(inventoryHandler, q++, xOffset + 11 + (i * 21), yOffset + 23));

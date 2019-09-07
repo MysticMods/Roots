@@ -4,6 +4,7 @@ import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.block.BlockBonfire;
+import epicsquid.roots.config.RitualConfig;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualFrostLands;
 import epicsquid.roots.init.ModBlocks;
@@ -13,16 +14,18 @@ import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.ItemHandlerUtil;
-import epicsquid.roots.util.ItemUtil;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.util.XPUtil;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -38,8 +41,10 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
+import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -51,6 +56,8 @@ import java.util.List;
 import java.util.Random;
 
 public class TileEntityBonfire extends TileBase implements ITickable {
+  public static AxisAlignedBB bounding = new AxisAlignedBB(-1, -1, -1, 1, 1, 1);
+
   private float ticker = 0;
   private float pickupDelay = 0;
   private int burnTime = 0;
@@ -144,7 +151,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     return ModRecipes.getCraftingRecipe(stacks);
   }
 
-  private void validateEntity () {
+  private void validateEntity() {
     if (ritualEntity == null) return;
 
     if (ritualEntity.isDead) return;
@@ -163,7 +170,8 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   private boolean startRitual(@Nullable EntityPlayer player) {
     RitualBase ritual = RitualRegistry.getRitual(this, player);
     validateEntity();
-    if (ritual != null) {
+
+    if (ritual != null && !ritual.isDisabled()) {
       if ((ritualEntity == null || ritualEntity.isDead) && ritual.canFire(this, player)) {
         ritualEntity = ritual.doEffect(world, pos);
         this.burnTime = ritual.getDuration();
@@ -206,9 +214,37 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     if (world.isRemote) return true;
     ItemStack heldItem = player.getHeldItem(hand);
     if (!heldItem.isEmpty()) {
+      boolean extinguish = false;
+      IFluidHandlerItem cap = heldItem.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+      if (cap != null) {
+        IFluidTankProperties[] props = cap.getTankProperties();
+        if (props != null && props.length >= 1) {
+          for (IFluidTankProperties prop : props) {
+            FluidStack stack = prop.getContents();
+            if (stack != null) {
+              if (stack.getFluid().getTemperature() <= 300) {
+                extinguish = true;
+              } else if (RitualConfig.getExtinguishFluids().contains(stack.getFluid().getName())) {
+                extinguish = true;
+              }
+            }
+            if (extinguish) {
+              if (stack.amount > 1000) {
+                stack.amount = 1000;
+              }
+              cap.drain(stack, true);
+              if (heldItem.getItem() instanceof ItemBucket) {
+                player.setHeldItem(hand, new ItemStack(Items.BUCKET));
+                ((EntityPlayerMP) player).sendAllContents(player.openContainer, player.openContainer.getInventory());
+              }
+              break;
+            }
+          }
+        }
+      }
       if (heldItem.getItem() instanceof ItemFlintAndSteel) {
         return startRitual(player);
-      } else if (heldItem.getItem() == Items.WATER_BUCKET && burnTime > 0) {
+      } else if (extinguish && burnTime > 0) {
         burnTime = 0;
         if (ritualEntity != null) {
           ritualEntity.setDead();
@@ -216,14 +252,8 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         lastRecipeUsed = null;
         lastRitualUsed = null;
         BlockBonfire.setState(false, world, pos);
-        world.playSound(player, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1F, 1.25F);
-        world.playSound(player, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.25F, 1F);
-        if (!player.isCreative()) {
-          IFluidHandlerItem handler = heldItem.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
-          if (handler != null && handler.getTankProperties().length == 1) {
-            handler.drain(handler.getTankProperties()[0].getContents(), true);
-          }
-        }
+        world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1F, 1F);
+        world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1F, 1F);
         return true;
       } else {
         for (int i = 0; i < 5; i++) {
@@ -347,6 +377,24 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       }
     }
 
+    if (ticker % 10 == 0) {
+      AxisAlignedBB bounds = bounding.offset(getPos());
+      BlockPos start = new BlockPos(bounds.minX, bounds.minY, bounds.minZ);
+      BlockPos stop = new BlockPos(bounds.maxX, bounds.maxY, bounds.maxZ);
+      boolean fire = false;
+      for (BlockPos.MutableBlockPos pos : BlockPos.getAllInBoxMutable(start, stop)) {
+        if (world.getBlockState(pos).getBlock() == Blocks.FIRE) {
+          fire = true;
+          if (!world.getBlockState(pos.down()).getBlock().isFireSource(world, pos.down(), EnumFacing.UP)) {
+            world.setBlockToAir(pos);
+          }
+        }
+      }
+      if (fire) {
+        startRitual(null);
+      }
+    }
+
     this.ticker += 1.0f;
     if (pickupDelay > 0) {
       pickupDelay--;
@@ -403,7 +451,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
             stack.setCount(1);
             stacks.add(stack);
           }
-          if (ListUtil.stackListsMatch(stacks, this.lastRitualUsed.getRecipe())) {
+          if (ListUtil.matchesIngredients(stacks, this.lastRitualUsed.getIngredients())) {
             lastRitualUsed.doEffect(world, getPos());
             burning = true;
             this.burnTime = this.lastRitualUsed.getDuration();

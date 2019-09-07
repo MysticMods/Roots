@@ -74,7 +74,7 @@ public class SpellConfig {
     public boolean disableSenseDanger = false;
     @Config.Name("Disable Shatter Spell")
     @Config.Comment("Set to true to disable Shatter Spell")
-    public boolean disableShatter= false;
+    public boolean disableShatter = false;
     @Config.Name("Disable Sky Soarer Spell")
     @Config.Comment("Set to true to disable Sky Soarer Spell")
     public boolean disableSkySoarer = false;

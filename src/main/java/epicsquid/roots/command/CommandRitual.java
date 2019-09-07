@@ -7,7 +7,6 @@ import epicsquid.roots.recipe.conditions.ConditionTrees;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.tileentity.TileEntityBonfire;
-import epicsquid.roots.util.ItemUtil;
 import net.minecraft.block.BlockNewLog;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks;
@@ -51,7 +50,7 @@ public class CommandRitual extends CommandBase {
     return 2;
   }
 
-  private ItemStack resolveStack (Ingredient ing) {
+  private ItemStack resolveStack(Ingredient ing) {
     return ing.getMatchingStacks()[0].copy();
   }
 
@@ -66,8 +65,9 @@ public class CommandRitual extends CommandBase {
 
       RitualBase ritual = RitualRegistry.getRitual(ritualName);
 
-      if (ritual == null) {
-        player.sendMessage(new TextComponentString("Invalid ritual: " + args[0]));
+      if (ritual == null || ritual.isDisabled()) {
+        player.sendMessage(new TextComponentString("Invalid or disabled ritual: " + args[0]));
+        return;
       }
 
       WorldServer world = player.getServerWorld();

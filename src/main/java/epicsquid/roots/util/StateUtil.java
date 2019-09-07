@@ -13,7 +13,7 @@ import java.util.Map;
 public class StateUtil {
   public static Map<Block, List<IProperty<?>>> skipProperties = new HashMap<>();
 
-  public static void ignoreState (Block state, IProperty<?> property) {
+  public static void ignoreState(Block state, IProperty<?> property) {
     List<IProperty<?>> thisProperty = skipProperties.computeIfAbsent(state, (block) -> new ArrayList<>());
     thisProperty.add(property);
   }
@@ -22,8 +22,8 @@ public class StateUtil {
    * @param state1 Reference state
    * @param state2 State we're comparing to
    * @return Returns true if the states are of the same block, and state2 contains
-   *         all of the same property keys as state2, and that the values of these
-   *         properties match.
+   * all of the same property keys as state2, and that the values of these
+   * properties match.
    */
   public static boolean compareStates(IBlockState state1, IBlockState state2) {
     // This should cover most options

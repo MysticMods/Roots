@@ -11,6 +11,7 @@ import epicsquid.roots.integration.consecration.Consecration;
 import epicsquid.roots.integration.endercore.EndercoreHarvest;
 import epicsquid.roots.integration.harvest.HarvestIntegration;
 import epicsquid.roots.integration.jer.JERIntegration;
+import epicsquid.roots.integration.patchouli.ConfigKeys;
 import epicsquid.roots.recipe.RunicCarvingRecipes;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.rune.RuneRegistry;
@@ -45,6 +46,7 @@ public class CommonProxy {
     if (Loader.isModLoaded("consecration")) {
       Consecration.init();
     }
+    ConfigKeys.init();
     //MapGenStructureIO.registerStructureComponent(ComponentDruidHut.class, Roots.MODID + ":" + "druidhut");
     //VillagerRegistry.instance().registerVillageCreationHandler(new ComponentDruidHut.CreationHandler());
   }
@@ -56,10 +58,12 @@ public class CommonProxy {
     if (Loader.isModLoaded("harvest")) {
       HarvestIntegration.init();
     }
+    SpellRegistry.finalise();
+    RitualRegistry.finalise();
     Advancements.init();
   }
 
-  public void serverStarting (FMLServerStartingEvent event) {
+  public void serverStarting(FMLServerStartingEvent event) {
     event.registerServerCommand(new CommandStaff());
     event.registerServerCommand(new CommandRoots());
     event.registerServerCommand(new CommandRitual());

@@ -1,4 +1,4 @@
-package epicsquid.roots.api;
+package epicsquid.roots.integration.patchouli;
 
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
@@ -29,7 +29,7 @@ public class RitualRecipeProcessor implements IComponentProcessor {
   public String process(String s) {
     if (icon == null || ingredients.isEmpty()) return null;
 
-    if(s.startsWith("item")) {
+    if (s.startsWith("item")) {
       int index = Integer.parseInt(s.substring(4)) - 1;
       Ingredient ingredient = ingredients.get(index);
 

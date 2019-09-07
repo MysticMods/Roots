@@ -8,7 +8,7 @@ public class SolegnoliaHelper {
   private static boolean hasBotania = false;
   private static boolean flag = false;
 
-  public static boolean hasBotania () {
+  public static boolean hasBotania() {
     if (flag) return hasBotania;
 
     flag = true;
@@ -17,7 +17,7 @@ public class SolegnoliaHelper {
     return hasBotania;
   }
 
-  public static boolean hasSolegnoliaAround (Entity entity) {
+  public static boolean hasSolegnoliaAround(Entity entity) {
     return BotaniaAPI.internalHandler.hasSolegnoliaAround(entity);
   }
 }

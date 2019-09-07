@@ -23,7 +23,7 @@ import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class RenderMortar {
-  public static void render (Minecraft mc, BlockPos pos, IBlockState state, RenderGameOverlayEvent.Post event) {
+  public static void render(Minecraft mc, BlockPos pos, IBlockState state, RenderGameOverlayEvent.Post event) {
     World world = mc.world;
 
     if (!(world.getTileEntity(pos) instanceof TileEntityMortar)) return;
@@ -62,7 +62,7 @@ public class RenderMortar {
       RenderHelper.enableGUIStandardItemLighting();
       mc.getRenderItem().renderItemIntoGUI(output, x + radius + 24, y - 14);
       String s = spellRecipe.getTextColor() + I18n.format("roots.spell." + spellRecipe.getName() + ".name");
-      mc.fontRenderer.drawStringWithShadow(s, (float) x + radius + 24,  y + 5, 16777215);
+      mc.fontRenderer.drawStringWithShadow(s, (float) x + radius + 24, y + 5, 16777215);
       RenderHelper.disableStandardItemLighting();
     }
 

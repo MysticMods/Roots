@@ -1,7 +1,9 @@
 package epicsquid.roots.item;
 
+import com.google.common.collect.Lists;
 import epicsquid.mysticallib.model.IModeledObject;
 import epicsquid.roots.Roots;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.model.ModelSylvanArmor;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -17,6 +19,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+import java.util.stream.Stream;
 
 public class ItemSylvanArmor extends ItemArmor implements IModeledObject {
   public static double BONUS = 0.05;
@@ -48,25 +51,24 @@ public class ItemSylvanArmor extends ItemArmor implements IModeledObject {
   }
 
   public static double sylvanBonus(EntityPlayer player) {
-    int count = 0;
-    for (ItemStack stack : player.getArmorInventoryList()) {
-      if (!(stack.getItem() instanceof ItemSylvanArmor))
-        count++;
-    }
+    int count = (int) Lists.newArrayList(player.getArmorInventoryList()).stream().filter((o) -> o.getItem() instanceof ItemSylvanArmor).count();
 
-    switch (count)
-    {
+    switch (count) {
       case 1:
-        return BONUS - 0.03;
-
+        return 0.02;
       case 2:
-        return BONUS - 0.02;
+        return 0.04;
       case 3:
-        return BONUS - 0.01;
+        return 0.06;
       case 4:
-        return BONUS;
+        return 0.08;
       default:
-        return 0D;
+        return 0.0;
     }
+  }
+
+  @Override
+  public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+    return toRepair.getItem() == this && repair.getItem() == ModItems.fey_leather;
   }
 }

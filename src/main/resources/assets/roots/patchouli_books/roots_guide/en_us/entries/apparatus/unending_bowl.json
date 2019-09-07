@@ -12,6 +12,12 @@
     {
       "type": "fey_crafting_template",
       "recipe": "unending_bowl"
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "herbs/dewgonia"
+      ]
     }
   ]
 }

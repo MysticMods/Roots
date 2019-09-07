@@ -85,7 +85,7 @@ public class ComponentDruidHut extends StructureVillagePieces.Village {
     this.setBlockState(world, cobblestone, 8, 0, 3, bb);
     this.setBlockState(world, air, 9, 0, 3, bb);
     // Layer 4
-     this.setBlockState(world, air, 0, 0, 4, bb);
+    this.setBlockState(world, air, 0, 0, 4, bb);
     this.setBlockState(world, cobblestone, 2, 0, 4, bb);
     this.setBlockState(world, planks, 3, 0, 4, bb);
     this.setBlockState(world, planks, 4, 0, 4, bb);

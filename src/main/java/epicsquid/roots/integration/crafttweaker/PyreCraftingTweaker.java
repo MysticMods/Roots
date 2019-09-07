@@ -1,7 +1,5 @@
 package epicsquid.roots.integration.crafttweaker;
 
-import com.blamejared.mtlib.helpers.LogHelper;
-import com.blamejared.mtlib.utils.BaseAction;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
@@ -15,6 +13,7 @@ import epicsquid.roots.util.zen.ZenDocAppend;
 import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
+import jeresources.util.LogHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
@@ -71,7 +70,7 @@ public class PyreCraftingTweaker {
     CraftTweaker.LATE_ACTIONS.add(new Remove(CraftTweakerMC.getItemStack(output)));
   }
 
-  private static class Add extends BaseAction {
+  private static class Add extends Action {
     private String name;
     private ItemStack output;
     private Ingredient[] inputs;
@@ -88,7 +87,7 @@ public class PyreCraftingTweaker {
 
     @Override
     public String describe() {
-      return "Adding Pyre Crafting Ritual for " + LogHelper.getStackDescription(output);
+      return "Adding Pyre Crafting Ritual for " + output;
     }
 
     @Override
@@ -100,12 +99,12 @@ public class PyreCraftingTweaker {
     }
   }
 
-  private static class Remove extends BaseAction {
+  private static class Remove extends Action {
     private ItemStack output;
 
     @Override
     public String describe() {
-      return "Removing Pyre Altar Crafting recipe " + LogHelper.getStackDescription(output);
+      return "Removing Pyre Altar Crafting recipe " + output;
     }
 
     private Remove(ItemStack output) {

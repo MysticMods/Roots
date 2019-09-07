@@ -3,7 +3,7 @@
   "icon": "roots:spell_dust",
   "category": "spells",
   "advancement": "roots:staff",
-
+  "flag": "roots:spell_sense_danger",
   "pages": [
     {
       "type": "text",

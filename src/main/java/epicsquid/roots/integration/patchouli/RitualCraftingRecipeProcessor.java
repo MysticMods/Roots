@@ -1,4 +1,4 @@
-package epicsquid.roots.api;
+package epicsquid.roots.integration.patchouli;
 
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
@@ -20,10 +20,10 @@ public class RitualCraftingRecipeProcessor implements IComponentProcessor {
 
   @Override
   public String process(String s) {
-    if(s.startsWith("item")) {
+    if (s.startsWith("item")) {
       int index = Integer.parseInt(s.substring(4)) - 1;
 
-      if(index >= pyreCraftingRecipe.getIngredients().size()){
+      if (index >= pyreCraftingRecipe.getIngredients().size()) {
         return ItemStackUtil.serializeStack(ItemStack.EMPTY);
       }
 
@@ -32,7 +32,7 @@ public class RitualCraftingRecipeProcessor implements IComponentProcessor {
       return ItemStackUtil.serializeIngredient(ingredient);
     }
 
-    if(s.equalsIgnoreCase("result")){
+    if (s.equalsIgnoreCase("result")) {
       return ItemStackUtil.serializeStack(pyreCraftingRecipe.getResult());
     }
     return null;

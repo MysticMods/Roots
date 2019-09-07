@@ -39,7 +39,7 @@ public class MessageRunicShearsFX implements IMessage {
 
   @SideOnly(Side.CLIENT)
   @Nullable
-  public Entity getEntity (World world) {
+  public Entity getEntity(World world) {
     return world.getEntityByID(this.entityId);
   }
 

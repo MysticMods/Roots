@@ -15,25 +15,23 @@ import net.minecraft.world.World;
 
 public class RitualFlowerGrowth extends RitualBase {
 
-    public RitualFlowerGrowth(String name, int duration)
-    {
-        super(name, duration);
-        addCondition(new ConditionItems(
-                new ItemStack(Blocks.YELLOW_FLOWER, 1, BlockYellowFlower.EnumFlowerType.DANDELION.getMeta()),
-                new ItemStack(ModItems.wildroot),
-                new ItemStack(ModItems.terra_moss),
-                new ItemStack(ModItems.petals),
-                new ItemStack(Blocks.RED_FLOWER, 1, BlockRedFlower.EnumFlowerType.POPPY.getMeta())
-        ));
+  public RitualFlowerGrowth(String name, int duration, boolean disabled) {
+    super(name, duration, disabled);
+    addCondition(new ConditionItems(
+        new ItemStack(Blocks.YELLOW_FLOWER, 1, BlockYellowFlower.EnumFlowerType.DANDELION.getMeta()),
+        new ItemStack(ModItems.wildroot),
+        new ItemStack(ModItems.terra_moss),
+        new ItemStack(ModItems.petals),
+        new ItemStack(Blocks.RED_FLOWER, 1, BlockRedFlower.EnumFlowerType.POPPY.getMeta())
+    ));
 
-        //addCondition(new ConditionWorldTime(0, 13000));
-        setIcon(ModItems.ritual_flower_growth);
-        setColor(TextFormatting.LIGHT_PURPLE);
-    }
+    //addCondition(new ConditionWorldTime(0, 13000));
+    setIcon(ModItems.ritual_flower_growth);
+    setColor(TextFormatting.LIGHT_PURPLE);
+  }
 
-    @Override
-    public EntityRitualBase doEffect(World world, BlockPos pos)
-    {
-        return this.spawnEntity(world, pos, EntityRitualFlowerGrowth.class);
-    }
+  @Override
+  public EntityRitualBase doEffect(World world, BlockPos pos) {
+    return this.spawnEntity(world, pos, EntityRitualFlowerGrowth.class);
+  }
 }

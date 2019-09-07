@@ -14,7 +14,7 @@ public class FeyCraftingRecipe {
   private String name;
   private int xp;
 
-  public FeyCraftingRecipe(ItemStack result, int xp){
+  public FeyCraftingRecipe(ItemStack result, int xp) {
     this.result = result;
     this.xp = xp;
   }
@@ -65,11 +65,11 @@ public class FeyCraftingRecipe {
     return xp;
   }
 
-  public List<ItemStack> getRecipe(){
+  public List<ItemStack> getRecipe() {
     return ingredients.stream().map(ingredient -> ingredient.getMatchingStacks()[0]).collect(Collectors.toList());
   }
 
-  public List<Ingredient> getIngredients(){
+  public List<Ingredient> getIngredients() {
     return ingredients;
   }
 
@@ -79,6 +79,6 @@ public class FeyCraftingRecipe {
    * @param output
    * @param inputs
    */
-  public void postCraft (ItemStack output, List<ItemStack> inputs) {
+  public void postCraft(ItemStack output, List<ItemStack> inputs) {
   }
 }

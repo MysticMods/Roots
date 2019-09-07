@@ -21,7 +21,7 @@ public class PouchHandler implements INBTSerializable<NBTTagCompound> {
 
   private boolean isApoth = false;
 
-  public PouchHandler (ItemStack pouch, int inventorySlots, int herbSlots) {
+  public PouchHandler(ItemStack pouch, int inventorySlots, int herbSlots) {
     this.pouch = pouch;
     if (inventorySlots == APOTHECARY_POUCH_INVENTORY_SLOTS) {
       isApoth = true;
@@ -35,11 +35,11 @@ public class PouchHandler implements INBTSerializable<NBTTagCompound> {
     };
   }
 
-  public PouchItemHandler getInventory () {
+  public PouchItemHandler getInventory() {
     return inventorySlots;
   }
 
-  public PouchItemHandler getHerbs () {
+  public PouchItemHandler getHerbs() {
     return herbSlots;
   }
 
@@ -67,7 +67,7 @@ public class PouchHandler implements INBTSerializable<NBTTagCompound> {
     herbSlots.deserializeNBT(herb);
   }
 
-  public static PouchHandler getHandler (ItemStack stack) {
+  public static PouchHandler getHandler(ItemStack stack) {
     PouchHandler handler;
     boolean isApoth = ((ItemPouch) stack.getItem()).isApothecary();
     if (isApoth) {
@@ -85,7 +85,7 @@ public class PouchHandler implements INBTSerializable<NBTTagCompound> {
     return handler;
   }
 
-  public void saveToStack () {
+  public void saveToStack() {
     NBTTagCompound tag = pouch.getTagCompound();
     if (tag == null) {
       tag = new NBTTagCompound();
@@ -119,11 +119,7 @@ public class PouchHandler implements INBTSerializable<NBTTagCompound> {
     @Override
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
       ItemStack result = super.insertItem(slot, stack, simulate);
-
-      if (!simulate) {
-        PouchHandler.this.saveToStack();
-      }
-
+      PouchHandler.this.saveToStack();
       return result;
     }
 
@@ -132,10 +128,7 @@ public class PouchHandler implements INBTSerializable<NBTTagCompound> {
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
       ItemStack result = super.extractItem(slot, amount, simulate);
 
-      if (!simulate) {
-        PouchHandler.this.saveToStack();
-      }
-
+      PouchHandler.this.saveToStack();
       return result;
     }
   }

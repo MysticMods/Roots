@@ -13,13 +13,13 @@ import net.minecraft.world.World;
 
 public class BlockOvergrowthRune extends BlockTEBase {
 
-    public BlockOvergrowthRune(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
-        super(mat, type, hardness, name, teClass);
-    }
+  public BlockOvergrowthRune(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
+    super(mat, type, hardness, name, teClass);
+  }
 
-    @Override
-    @Nullable
-    public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
-        return new TileEntityWildrootRune();
-    }
+  @Override
+  @Nullable
+  public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
+    return new TileEntityWildrootRune();
+  }
 }

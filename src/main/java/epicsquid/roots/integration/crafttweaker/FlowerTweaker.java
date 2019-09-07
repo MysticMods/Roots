@@ -1,6 +1,5 @@
 package epicsquid.roots.integration.crafttweaker;
 
-import com.blamejared.mtlib.utils.BaseAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.block.IBlock;
 import crafttweaker.api.block.IBlockState;
@@ -23,9 +22,9 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenClass("mods." + Roots.MODID + ".FlowerGrowth")
 public class FlowerTweaker {
   @ZenDocMethod(
-      order=1,
+      order = 1,
       args = {
-          @ZenDocArg(arg="name", info="The name of the recipe you wish to remove")
+          @ZenDocArg(arg = "name", info = "The name of the recipe you wish to remove")
       }
   )
   @ZenMethod
@@ -34,10 +33,10 @@ public class FlowerTweaker {
   }
 
   @ZenDocMethod(
-      order=2,
+      order = 2,
       args = {
-          @ZenDocArg(arg="name", info="The name of the recipe that you're adding"),
-          @ZenDocArg(arg="state", info="The state of the block of the flower")
+          @ZenDocArg(arg = "name", info = "The name of the recipe that you're adding"),
+          @ZenDocArg(arg = "state", info = "The state of the block of the flower")
       }
   )
   @ZenMethod
@@ -46,11 +45,11 @@ public class FlowerTweaker {
   }
 
   @ZenDocMethod(
-      order=3,
+      order = 3,
       args = {
-          @ZenDocArg(arg="name", info="The name of the recipe that you're adding"),
-          @ZenDocArg(arg="block", info="The block of the flower to be placed"),
-          @ZenDocArg(arg="meta", info="The meta of the state of the flower block")
+          @ZenDocArg(arg = "name", info = "The name of the recipe that you're adding"),
+          @ZenDocArg(arg = "block", info = "The block of the flower to be placed"),
+          @ZenDocArg(arg = "meta", info = "The meta of the state of the flower block")
       }
   )
   @ZenMethod
@@ -58,7 +57,7 @@ public class FlowerTweaker {
     CraftTweaker.LATE_ACTIONS.add(new FlowerBlockMeta(name, CraftTweakerMC.getBlock(block), meta));
   }
 
-  private static class Remove extends BaseAction {
+  private static class Remove extends Action {
     private final ResourceLocation name;
 
     public Remove(String name) {
@@ -76,12 +75,12 @@ public class FlowerTweaker {
     }
 
     @Override
-    protected String getRecipeInfo() {
+    public String describe() {
       return String.format("Recipe to remove %s from FlowerGrowth", name);
     }
   }
 
-  private static class FlowerBlockState extends BaseAction {
+  private static class FlowerBlockState extends Action {
     private final net.minecraft.block.state.IBlockState state;
     private final String name;
 
@@ -97,12 +96,12 @@ public class FlowerTweaker {
     }
 
     @Override
-    protected String getRecipeInfo() {
+    public String describe() {
       return String.format("Recipe to add %s to FlowerGrowth", state);
     }
   }
 
-  private static class FlowerBlockMeta extends BaseAction {
+  private static class FlowerBlockMeta extends Action {
     private final Block block;
     private final int meta;
     private final String name;
@@ -120,7 +119,7 @@ public class FlowerTweaker {
     }
 
     @Override
-    protected String getRecipeInfo() {
+    public String describe() {
       return String.format("Recipe to produce %s:%s with FlowerGrowth", block, meta);
     }
   }

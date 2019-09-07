@@ -5,6 +5,7 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageDandelionCastFX;
 import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -17,15 +18,20 @@ import net.minecraftforge.oredict.OreIngredient;
 import java.util.List;
 
 public class SpellDandelionWinds extends SpellBase {
+  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(20);
+  public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("cloud_berry", 0.125));
+  public static Property<Float> PROP_DISTANCE = new Property<>("distance", 0.75f);
+
   public static String spellName = "spell_dandelion_winds";
   public static SpellDandelionWinds instance = new SpellDandelionWinds(spellName);
 
+  private float distance;
+
   public SpellDandelionWinds(String name) {
     super(name, TextFormatting.YELLOW, 255f / 255f, 255f / 255f, 32f / 255f, 255f / 255f, 176f / 255f, 32f / 255f);
-    this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
-    this.cooldown = 20;
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DISTANCE);
 
-    addCost(HerbRegistry.getHerbByName("cloud_berry"), 0.125f);
     addIngredients(
         new ItemStack(ModItems.petals),
         new ItemStack(Blocks.YELLOW_FLOWER),
@@ -46,7 +52,7 @@ public class SpellDandelionWinds extends SpellBase {
       for (EntityLivingBase e : entities) {
         if (e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
           e.motionX += (player.getLookVec().x);
-          e.motionY += (0.75f);
+          e.motionY += (distance);
           e.motionZ += (player.getLookVec().z);
           e.velocityChanged = true;
         }
@@ -55,4 +61,14 @@ public class SpellDandelionWinds extends SpellBase {
     return true;
   }
 
+  @Override
+  public void finalise() {
+    this.castType = properties.getProperty(PROP_CAST_TYPE);
+    this.cooldown = properties.getProperty(PROP_COOLDOWN);
+
+    SpellCost cost = properties.getProperty(PROP_COST_1);
+    addCost(cost.getHerb(), cost.getCost());
+
+    this.distance = properties.getProperty(PROP_DISTANCE);
+  }
 }

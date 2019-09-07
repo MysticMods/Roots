@@ -1,8 +1,8 @@
 package epicsquid.roots.spell;
 
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -13,15 +13,17 @@ import net.minecraftforge.oredict.OreIngredient;
 import java.util.List;
 
 public class SpellSecondWind extends SpellBase {
+  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(24);
+  public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("dewgonia", 0.125));
+
   public static String spellName = "spell_second_wind";
   public static SpellSecondWind instance = new SpellSecondWind(spellName);
 
   public SpellSecondWind(String name) {
     super(name, TextFormatting.BLUE, 64f / 255f, 64f / 255f, 64f / 255f, 192f / 255f, 32f / 255f, 255f / 255f);
-    this.castType = EnumCastType.INSTANTANEOUS;
-    this.cooldown = 24;
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1);
 
-    addCost(HerbRegistry.getHerbByName("dewgonia"), 0.125f);
     addIngredients(
         new ItemStack(ModItems.dewgonia),
         new OreIngredient("sugarcane"),
@@ -38,5 +40,14 @@ public class SpellSecondWind extends SpellBase {
       player.playSound(SoundEvents.ENTITY_BOAT_PADDLE_WATER, 1, 1);
     }
     return true;
+  }
+
+  @Override
+  public void finalise() {
+    this.castType = properties.getProperty(PROP_CAST_TYPE);
+    this.cooldown = properties.getProperty(PROP_COOLDOWN);
+
+    SpellCost cost = properties.getProperty(PROP_COST_1);
+    addCost(cost.getHerb(), cost.getCost());
   }
 }

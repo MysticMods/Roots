@@ -5,7 +5,7 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
-import epicsquid.roots.util.ItemUtil;
+import epicsquid.mysticallib.util.ItemUtil;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
@@ -55,6 +55,7 @@ public class CommandStaff extends CommandBase {
       SpellBase spell = SpellRegistry.getSpell(spellName);
       if (spell == null) {
         player.sendMessage(new TextComponentString("Invalid spell: " + args[0]));
+        return;
       }
 
       SpellHandler cap = SpellHandler.fromStack(spell.getResult());

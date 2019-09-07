@@ -12,29 +12,29 @@ import java.util.List;
 
 public class ConditionItems implements Condition {
 
-    final private List<Ingredient> ingredients;
+  final private List<Ingredient> ingredients;
 
-    public ConditionItems(Object... stacks){
-        ingredients = new ArrayList<>();
-        for (Object stack : stacks) {
-            if (stack instanceof Ingredient) {
-                ingredients.add((Ingredient) stack);
-            } else if (stack instanceof ItemStack) {
-                ingredients.add(Ingredient.fromStacks((ItemStack) stack));
-            }
-        }
+  public ConditionItems(Object... stacks) {
+    ingredients = new ArrayList<>();
+    for (Object stack : stacks) {
+      if (stack instanceof Ingredient) {
+        ingredients.add((Ingredient) stack);
+      } else if (stack instanceof ItemStack) {
+        ingredients.add(Ingredient.fromStacks((ItemStack) stack));
+      }
     }
+  }
 
-    @Override
-    public boolean checkCondition(TileEntityBonfire tile, @Nullable EntityPlayer player) {
-        List<ItemStack> stacks = new ArrayList<>();
-        for (int i = 0; i < tile.inventory.getSlots(); i++) {
-            stacks.add(tile.inventory.extractItem(i, 1, true));
-        }
-        return ListUtil.matchesIngredients(stacks, ingredients);
+  @Override
+  public boolean checkCondition(TileEntityBonfire tile, @Nullable EntityPlayer player) {
+    List<ItemStack> stacks = new ArrayList<>();
+    for (int i = 0; i < tile.inventory.getSlots(); i++) {
+      stacks.add(tile.inventory.extractItem(i, 1, true));
     }
+    return ListUtil.matchesIngredients(stacks, ingredients);
+  }
 
-    public List<Ingredient> getIngredients() {
-        return ingredients;
-    }
+  public List<Ingredient> getIngredients() {
+    return ingredients;
+  }
 }

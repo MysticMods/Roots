@@ -22,7 +22,7 @@ public class BlockOffertoryPlate extends BlockTEBase {
   public static final PropertyDirection FACING = PropertyDirection.create("facing");
 
   public BlockOffertoryPlate(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name,
-      @Nonnull Class<? extends TileEntity> teClass) {
+                             @Nonnull Class<? extends TileEntity> teClass) {
     super(mat, type, hardness, name, teClass);
   }
 
