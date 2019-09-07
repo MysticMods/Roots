@@ -3,6 +3,7 @@
     "icon": "roots:wildroot",
     "category": "basics",
     "advancement": "roots:root",
+    "sortnum": 5,
     "pages": [
       {
         "type": "text",

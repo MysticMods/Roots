@@ -4,7 +4,7 @@
     "category": "basics",
     "advancement": "roots:root",
     "priority": true,
-    "sortnum": 1,
+    "sortnum": 0,
     "pages": [
       {
         "type": "text",
