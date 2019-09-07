@@ -1,13 +1,13 @@
 package epicsquid.roots.entity.ritual;
 
 import com.google.common.collect.Lists;
+import epicsquid.mysticallib.util.ConfigUtil;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.Roots;
+import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.BlockSapling;
+import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
@@ -15,10 +15,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.oredict.OreDictionary;
 
+import javax.annotation.Nullable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,8 +29,10 @@ import java.util.Set;
 @SuppressWarnings("deprecation")
 public class EntityRitualSpreadingForest extends EntityRitualBase {
   private Set<IBlockState> saplingBlocks = new HashSet<>();
+  private Set<Block> saplings = new HashSet<>();
 
   protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualSpreadingForest.class, DataSerializers.VARINT);
+  private static int SAPLING_OREDICT = -1;
 
   public EntityRitualSpreadingForest(World worldIn) {
     super(worldIn);
@@ -42,12 +47,29 @@ public class EntityRitualSpreadingForest extends EntityRitualBase {
   }
 
   private boolean validSpot(World world, BlockPos pos) {
-    return world.isAirBlock(pos.up()) && world.getBlockState(pos).getBlock() == Blocks.GRASS;
+    return validSpot(world, pos, null);
+  }
+
+  private boolean validSpot(World world, BlockPos pos, @Nullable IBlockState plantableState) {
+    IBlockState state = world.getBlockState(pos);
+    Block block = state.getBlock();
+    // TODO: Add an additional whitelist block
+    IPlantable plantable;
+    if (plantableState == null || !(plantableState.getBlock() instanceof IPlantable)) {
+      plantable = (IPlantable) Blocks.SAPLING;
+    } else {
+      plantable = (IPlantable) plantableState.getBlock();
+    }
+    return world.isAirBlock(pos.up()) && block.canSustainPlant(state, world, pos, EnumFacing.UP, plantable);
   }
 
   @Override
   public void onUpdate() {
     super.onUpdate();
+    if (SAPLING_OREDICT == -1) {
+      SAPLING_OREDICT = OreDictionary.getOreID("treeSapling");
+    }
+
     float alpha = (float) Math.min(40, (RitualRegistry.ritual_regrowth.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
     getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
     getDataManager().setDirty(lifetime);
@@ -72,24 +94,60 @@ public class EntityRitualSpreadingForest extends EntityRitualBase {
       }
     }
     if (saplingBlocks.isEmpty()) {
-      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), 25, 20, 25, (BlockPos pos) -> world.getBlockState(pos).getBlock() instanceof BlockLeaves);
+      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), 35, 30, 35, (BlockPos pos) -> world.getBlockState(pos).getBlock() instanceof BlockLeaves);
       if (!positions.isEmpty()) {
         for (BlockPos pos : positions) {
           IBlockState state = world.getBlockState(pos);
           Block block = state.getBlock();
           List<ItemStack> drops = block.getDrops(world, pos, state, 0);
           for (ItemStack s : drops) {
-            if (s.getItem() instanceof ItemBlock && ((ItemBlock) s.getItem()).getBlock() instanceof BlockSapling) {
-              saplingBlocks.add(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()));
-            } else {
-              int[] ids = OreDictionary.getOreIDs(s);
-              if (ids.length == 0) {
-                continue;
-              }
-              for (int id : ids) {
-                if (OreDictionary.getOreName(id).equals("treeSapling")) {
-                  saplingBlocks.add(((ItemBlock) s.getItem()).getBlock().getStateFromMeta(s.getMetadata()));
+            if (ConfigUtil.setContainsItemStack(GeneralConfig.getSaplingBlacklist(), s)) {
+              continue;
+            }
+
+            if (s.getItem() instanceof ItemBlock) {
+              if (((ItemBlock) s.getItem()).getBlock() instanceof BlockSapling) {
+                Block sap = ((ItemBlock) s.getItem()).getBlock();
+                saplings.add(sap);
+                saplingBlocks.add(sap.getStateFromMeta(s.getMetadata()));
+              } else {
+                boolean isSapling = false;
+                for (int id : OreDictionary.getOreIDs(s)) {
+                  if (id == SAPLING_OREDICT && id != -1) {
+                    isSapling = true;
+                    break;
+                  }
                 }
+                if (isSapling) {
+                  Block sap = ((ItemBlock) s.getItem()).getBlock();
+                  saplingBlocks.add(sap.getStateFromMeta(s.getMetadata()));
+                  saplings.add(sap);
+                }
+              }
+            }
+          }
+        }
+      }
+      List<BlockPos> positions2 = Util.getBlocksWithinRadius(world, getPosition(), 35, 30, 35, (BlockPos pos) -> {
+        if (world.isAirBlock(pos)) return false;
+        return world.getBlockState(pos).getBlock() instanceof IGrowable;
+      });
+      if (!positions2.isEmpty()) {
+        for (BlockPos pos : positions) {
+          IBlockState state = world.getBlockState(pos);
+          Block block = state.getBlock();
+          ItemStack stack = block.getItem(world, pos, state);
+          if (ConfigUtil.setContainsItemStack(GeneralConfig.getSaplingBlacklist(), stack)) {
+            continue;
+          }
+          if (state.getPropertyKeys().contains(BlockSapling.STAGE)) {
+            saplingBlocks.add(state);
+            saplings.add(state.getBlock());
+          } else {
+            for (int id : OreDictionary.getOreIDs(stack)) {
+              if (id == SAPLING_OREDICT && id != -1) {
+                saplingBlocks.add(state);
+                saplings.add(block);
               }
             }
           }
@@ -98,45 +156,53 @@ public class EntityRitualSpreadingForest extends EntityRitualBase {
     }
 
     if (ticksExisted % 70 == 0 && !saplingBlocks.isEmpty()) {
-      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), 25, 20, 25, pos -> this.validSpot(world, pos));
+      IBlockState state = Lists.newArrayList(saplingBlocks).get(rand.nextInt(saplingBlocks.size()));
+
+      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), 35, 30, 35, pos -> this.validSpot(world, pos, state));
       if (!positions.isEmpty() && !world.isRemote) {
         boolean planted = false;
-        IBlockState state = Lists.newArrayList(saplingBlocks).get(rand.nextInt(saplingBlocks.size()));
+        boolean twoByTwo = false;
+        BlockPlanks.EnumType type = null;
         if (state.getPropertyKeys().contains(BlockSapling.TYPE)) {
-          BlockPlanks.EnumType type = state.getValue(BlockSapling.TYPE);
+          type = state.getValue(BlockSapling.TYPE);
           if (type == BlockPlanks.EnumType.DARK_OAK || ((type == BlockPlanks.EnumType.JUNGLE || type == BlockPlanks.EnumType.SPRUCE) && rand.nextInt(20) == 0)) {
-            // Plant 2-by-2
-            boolean validPos = false;
-            BlockPos pos = null;
-            int count = 30;
-            int i = 0;
-            int j = 0;
-            planter:
-            while (count >= 0) {
-              pos = positions.get(rand.nextInt(positions.size()));
-              for (i = 0; i >= -1; --i) {
-                for (j = 0; j >= -1; --j) {
-                  if (this.canTwoByTwo(world, pos, i, j)) {
-                    validPos = true;
-                    break planter;
-                  }
+            twoByTwo = true;
+          }
+        } else if (ConfigUtil.setContainsItemStack(GeneralConfig.getTwoByTwoSaplings(), state.getBlock().getItem(world, BlockPos.ORIGIN, state))) {
+          twoByTwo = true;
+        }
+        if (twoByTwo) {
+          // Plant 2-by-2
+          boolean validPos = false;
+          BlockPos pos = null;
+          int count = 30;
+          int i = 0;
+          int j = 0;
+          planter:
+          while (count >= 0) {
+            pos = positions.get(rand.nextInt(positions.size()));
+            for (i = 0; i >= -1; --i) {
+              for (j = 0; j >= -1; --j) {
+                if (this.canTwoByTwo(world, pos, i, j)) {
+                  validPos = true;
+                  break planter;
                 }
               }
-              count--;
             }
-            if (!validPos && type != BlockPlanks.EnumType.DARK_OAK) {
-              planted = true;
-            }
-            if (validPos && pos != null) {
-              world.setBlockState(pos.up(), state);
-              BlockPos pos2 = pos.up().add(i, 0, j + 1);
-              world.setBlockState(pos2, state);
-              BlockPos pos3 = pos.up().add(i + 1, 0, j);
-              world.setBlockState(pos3, state);
-              BlockPos pos4 = pos.up().add(i + 1, 0, j + 1);
-              world.setBlockState(pos4, state);
-              planted = true;
-            }
+            count--;
+          }
+          if (!validPos && type != BlockPlanks.EnumType.DARK_OAK) {
+            planted = true;
+          }
+          if (validPos) {
+            world.setBlockState(pos.up(), state);
+            BlockPos pos2 = pos.up().add(i, 0, j + 1);
+            world.setBlockState(pos2, state);
+            BlockPos pos3 = pos.up().add(i + 1, 0, j);
+            world.setBlockState(pos3, state);
+            BlockPos pos4 = pos.up().add(i + 1, 0, j + 1);
+            world.setBlockState(pos4, state);
+            planted = true;
           }
         }
         if (!planted) {
@@ -146,11 +212,21 @@ public class EntityRitualSpreadingForest extends EntityRitualBase {
       }
     }
     if (ticksExisted % 40 == 0) {
-      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), 25, 20, 25, (BlockPos pos) -> world.getBlockState(pos).getBlock() instanceof BlockSapling);
+      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), 35, 30, 35, (BlockPos pos) -> {
+        IBlockState state = world.getBlockState(pos);
+        Block block = state.getBlock();
+        if (block instanceof BlockSapling || saplings.contains(block)) return true;
+
+        return state.getPropertyKeys().contains(BlockSapling.STAGE);
+      });
       if (!positions.isEmpty() && !world.isRemote) {
         BlockPos pos = positions.get(rand.nextInt(positions.size()));
         IBlockState state = world.getBlockState(pos);
-        ((BlockSapling) state.getBlock()).grow(world, pos, state, rand);
+        if (state.getBlock() instanceof IGrowable) {
+          ((IGrowable) state.getBlock()).grow(world, rand, pos, state);
+        } else {
+          Roots.logger.error("'Sapling' at " + pos.toString() + " is not IGrowable!");
+        }
       }
     }
   }
