@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Removes ailments and negative effects from all creatures near the ritual, for the duration of the ritual.$(br2)This includes the druid casting the ritual, but $(warning) also any hostile creatures that may wander nearby."
+      "text": "Removes ailments, fire and negative effects from all creatures near the ritual, for the duration of the ritual.$(br2)This includes the druid casting the ritual, but $(warning) also any hostile creatures that may wander nearby.$(br2)$(info) Villagers already recovering from the Zombie curse will do so quicker while this ritual is active."
     },
     {
       "type": "pyre_template",
