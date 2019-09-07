@@ -237,6 +237,7 @@ item.infernal_bulb.name=Infernal Bulb
 item.dewgonia.name=Dewgonia
 item.stalicripe.name=Stalicripe
 item.cloud_berry.name=Cloud Berry
+item.baffle_cap.name=Baffle Cap
 tile.baffle_cap.name=Baffle Cap
 tile.baffle_cap_mushroom.name=Baffle Cap
 tile.baffle_cap_huge_stem.name=Huge Baffle Cap Stem
