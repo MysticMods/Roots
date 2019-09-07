@@ -1,6 +1,6 @@
 package epicsquid.roots.entity.ritual;
 
-import epicsquid.roots.util.ItemUtil;
+import epicsquid.mysticallib.util.ItemUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;

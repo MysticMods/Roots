@@ -1,7 +1,7 @@
 package epicsquid.roots.mechanics;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.util.ItemUtil;
+import epicsquid.mysticallib.util.ItemUtil;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.block.*;
 import net.minecraft.block.properties.IProperty;

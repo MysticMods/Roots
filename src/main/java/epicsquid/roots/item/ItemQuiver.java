@@ -7,7 +7,7 @@ import epicsquid.roots.entity.item.EntityLivingArrow;
 import epicsquid.roots.gui.GuiHandler;
 import epicsquid.roots.handler.QuiverHandler;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.util.ItemUtil;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.util.QuiverInventoryUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,7 +27,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;

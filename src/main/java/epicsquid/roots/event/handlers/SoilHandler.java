@@ -5,7 +5,7 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.block.BlockElementalSoil;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.mechanics.Harvest;
-import epicsquid.roots.util.ItemUtil;
+import epicsquid.mysticallib.util.ItemUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.item.ItemStack;
