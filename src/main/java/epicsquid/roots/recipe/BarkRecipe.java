@@ -1,17 +1,10 @@
 package epicsquid.roots.recipe;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockNewLog;
 import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 public class BarkRecipe {
@@ -48,7 +41,7 @@ public class BarkRecipe {
 
   public ItemStack getBarkStack(int count) {
     ItemStack copy = this.item.copy();
-    copy.setCount(count);
+    copy.setCount(copy.getCount() + count);
     return copy;
   }
 
