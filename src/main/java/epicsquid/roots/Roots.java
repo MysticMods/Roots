@@ -37,6 +37,7 @@ public class Roots {
   public static final String NAME = "Roots";
   public static final String VERSION = "@VERSION@";
 
+  // Modify dependencies in gradle.properties
   public static final String DEPENDENCIES = "after:maindependencies";
 
   public static final GuiHandler GUI_HANDLER = new GuiHandler();
