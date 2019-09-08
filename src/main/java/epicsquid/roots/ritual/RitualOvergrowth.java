@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualOvergrowth extends RitualBase {
 
@@ -20,8 +21,8 @@ public class RitualOvergrowth extends RitualBase {
             new ItemStack(Items.REEDS),
             new ItemStack(ModItems.terra_moss),
             new ItemStack(Blocks.TALLGRASS, 1, 1),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak)));
+            new OreIngredient("rootsBark"),
+            new OreIngredient("rootsBark")));
     setIcon(ModItems.ritual_overgrowth);
     setColor(TextFormatting.DARK_GREEN);
     setBold(true);

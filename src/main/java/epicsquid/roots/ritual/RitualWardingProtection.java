@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualWardingProtection extends RitualBase {
 
@@ -19,7 +20,7 @@ public class RitualWardingProtection extends RitualBase {
         new ItemStack(Items.SPECKLED_MELON),
         new ItemStack(ModItems.stalicripe),
         new ItemStack(ModItems.wildroot),
-        new ItemStack(ModItems.bark_oak),
+        new OreIngredient("rootsBark"),
         new ItemStack(Items.IRON_CHESTPLATE)
     ));
     addCondition(new ConditionStandingStones(3, 3));
