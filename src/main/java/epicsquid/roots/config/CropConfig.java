@@ -37,7 +37,7 @@ public class CropConfig {
   }
 
   @Config.Comment(("List of modids that should be excluded from Harvesting (for complete mods)"))
-  public static String[] HarvestModBlacklist = new String[]{"rustic"};
+  public static String[] HarvestModBlacklist = new String[]{"rustic", "simplecorn", "teastory"};
 
   @Config.Ignore
   public static Set<String> harvestModBlacklist = null;
