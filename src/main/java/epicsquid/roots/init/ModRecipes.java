@@ -156,16 +156,16 @@ public class ModRecipes {
   }
 
   public static void initVanillaBarkRecipes() {
-    addVanillaBarkRecipe("oak", BlockPlanks.EnumType.OAK, new ItemStack(ModItems.bark_oak));
-    addVanillaBarkRecipe("spruce", BlockPlanks.EnumType.SPRUCE, new ItemStack(ModItems.bark_spruce));
-    addVanillaBarkRecipe("birch", BlockPlanks.EnumType.BIRCH, new ItemStack(ModItems.bark_birch));
-    addVanillaBarkRecipe("jungle", BlockPlanks.EnumType.JUNGLE, new ItemStack(ModItems.bark_jungle));
-    addVanillaBarkRecipe("acacia", BlockPlanks.EnumType.ACACIA, new ItemStack(ModItems.bark_acacia));
-    addVanillaBarkRecipe("dark_oak", BlockPlanks.EnumType.DARK_OAK, new ItemStack(ModItems.bark_dark_oak));
+    addVanillaBarkRecipe("oak", BlockPlanks.EnumType.OAK, new ItemStack(ModItems.bark_oak, 4));
+    addVanillaBarkRecipe("spruce", BlockPlanks.EnumType.SPRUCE, new ItemStack(ModItems.bark_spruce, 4));
+    addVanillaBarkRecipe("birch", BlockPlanks.EnumType.BIRCH, new ItemStack(ModItems.bark_birch, 4));
+    addVanillaBarkRecipe("jungle", BlockPlanks.EnumType.JUNGLE, new ItemStack(ModItems.bark_jungle, 4));
+    addVanillaBarkRecipe("acacia", BlockPlanks.EnumType.ACACIA, new ItemStack(ModItems.bark_acacia, 4));
+    addVanillaBarkRecipe("dark_oak", BlockPlanks.EnumType.DARK_OAK, new ItemStack(ModItems.bark_dark_oak, 4));
   }
 
   public static void initModdedBarkRecipes() {
-    addModdedBarkRecipe("wildwood", new ItemStack(ModItems.bark_wildwood), new ItemStack(ModBlocks.wildwood_log));
+    addModdedBarkRecipe("wildwood", new ItemStack(ModItems.bark_wildwood, 4), new ItemStack(ModBlocks.wildwood_log));
   }
 
   public static void addModdedBarkRecipe(String name, ItemStack item, ItemStack blockStack) {

@@ -41,7 +41,7 @@ public class BarkHandler {
           bark = ModRecipes.getVanillaBarkRecipe(type);
         }
         if (bark != null) {
-          ItemStack barkStack = bark.getBarkStack(4 + (Util.rand.nextInt(getAdditionalBarkAmount(tool))));
+          ItemStack barkStack = bark.getBarkStack(Util.rand.nextInt(getAdditionalBarkAmount(tool)));
           if (!event.getWorld().isRemote) {
             ItemUtil.spawnItem(event.getWorld(), event.getPos(), barkStack);
           }

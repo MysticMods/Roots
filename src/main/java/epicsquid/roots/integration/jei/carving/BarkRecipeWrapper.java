@@ -21,6 +21,6 @@ public class BarkRecipeWrapper implements IRecipeWrapper {
   @Override
   public void getIngredients(IIngredients ingredients) {
     ingredients.setInput(VanillaTypes.ITEM, recipe.getBlockStack());
-    ingredients.setOutput(VanillaTypes.ITEM, recipe.getBarkStack(1));
+    ingredients.setOutput(VanillaTypes.ITEM, recipe.getBarkStack(0));
   }
 }
