@@ -75,6 +75,7 @@ roots.tooltip.trap_paper_health=Health:
 roots.tooltip.trap_paper_health_divider= /
 roots.tooltip.pouch=Sneak-Right-Click or %s to open pouch.
 roots.tooltip.pouch2=Right-Click or %s to open pouch.
+roots.tooltip.refill=Automatically refilling herbs to full stacks from picked-up items. [Disable in config]
 
 roots.info.staff.slot_and_spell=Selected Slot (%d) has spell: %s
 roots.info.staff.no_slots=Your staff has no room for new spells!
