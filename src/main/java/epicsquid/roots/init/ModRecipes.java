@@ -830,40 +830,40 @@ public class ModRecipes {
             new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_PICKAXE),
             new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak)));
+            new OreIngredient("rootsBark"),
+            new OreIngredient("rootsBark")));
 
     addCraftingRecipe("living_axe",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_axe), 1).addIngredients(
             new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_AXE),
             new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak)));
+            new OreIngredient("rootsBark"),
+            new OreIngredient("rootsBark")));
 
     addCraftingRecipe("living_shovel",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_shovel), 1).addIngredients(
             new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_SHOVEL),
             new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak)));
+            new OreIngredient("rootsBark"),
+            new OreIngredient("rootsBark")));
 
     addCraftingRecipe("living_hoe",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_hoe), 1).addIngredients(
             new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_HOE),
             new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak)));
+            new OreIngredient("rootsBark"),
+            new OreIngredient("rootsBark")));
 
     addCraftingRecipe("living_sword",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_sword), 1).addIngredients(
             new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_SWORD),
             new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak)));
+            new OreIngredient("rootsBark"),
+            new OreIngredient("rootsBark")));
 
     addCraftingRecipe("living_arrow",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_arrow, 6), 1).addIngredients(
