@@ -40,4 +40,14 @@ Some of the configuration options are too complex or ill-suited for a configurat
 
 - Creatures can be added and removed to those eligible for the [Animal Harvest ritual](https://docs.blamejared.com/en/#Mods/Roots_3/animalharvest/).
 - Logs (or other breakable objects) can be specified for the creation of [Bark](https://docs.blamejared.com/en/#Mods/Roots_3/bark/).
-- 
+- Recipes can be added or removed to [the Fey Crafter](https://docs.blamejared.com/en/#Mods/Roots_3/fey/).
+- Additional flower types can be specified for the [Ritual of Flower Growth](https://docs.blamejared.com/en/#Mods/Roots_3/flowergrowth/).
+- Recipes can be added or removed from the [Mortar and Pestle](https://docs.blamejared.com/en/#Mods/Roots_3/mortar/).
+- Spell recipes made in a [Mortar and Pestle](https://docs.blamejared.com/en/#Mods/Roots_3/mortar/) can also be modified.
+- Creatures considered animals that grant the ["Untrue Pacifist" advancement can be specified](https://docs.blamejared.com/en/#Mods/Roots_3/pacifist/).
+- Crafting recipes performed on a [Pyre](https://docs.blamejared.com/en/#Mods/Roots_3/pyre/) can be modified.
+- The ingredients for [Pyre Rituals](https://docs.blamejared.com/en/#Mods/Roots_3/ritual/) can be modified.
+- The results of using [Runic Shears on entities or blocks](https://docs.blamejared.com/en/#Mods/Roots_3/runicshears/) can be specified.
+- Recipes for the [Ritual of Transmutation](https://docs.blamejared.com/en/#Mods/Roots_3/transmutation/) can be removed or added.
+
+If there's anything that you'd like to modify that isn't currently available, you can open an issue or ask on Discord.
