@@ -1,14 +1,17 @@
 package epicsquid.roots.recipe;
 
-import epicsquid.roots.config.GeneralConfig;
+import epicsquid.roots.config.MossConfig;
+import epicsquid.roots.init.ModItems;
 import net.minecraft.item.ItemStack;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MossRecipe {
+  private static ItemStack TERRA_MOSS = ItemStack.EMPTY;
+  private static List<MossRecipe> RECIPE_LIST = null;
+
   private ItemStack input;
   private ItemStack output;
 
@@ -31,10 +34,24 @@ public class MossRecipe {
   }
 
   public static List<MossRecipe> getRecipeList (Map<ItemStack, ItemStack> recipes) {
-    return recipes.entrySet().stream().map(MossRecipe::new).collect(Collectors.toList());
+    if (RECIPE_LIST == null) {
+      RECIPE_LIST = recipes.entrySet().stream().map(MossRecipe::new).collect(Collectors.toList());
+    }
+    return RECIPE_LIST;
   }
 
   public static List<MossRecipe> getRecipeList () {
-    return getRecipeList(GeneralConfig.getMossyCobblestones());
+    if (RECIPE_LIST == null) {
+      return getRecipeList(MossConfig.getMossyCobblestones());
+    }
+
+    return RECIPE_LIST;
+  }
+
+  public static ItemStack getTerraMoss () {
+    if (TERRA_MOSS.isEmpty()) {
+      TERRA_MOSS = new ItemStack(ModItems.terra_moss);
+    }
+    return TERRA_MOSS;
   }
 }

@@ -319,9 +319,13 @@ roots.quiver.broke=All of the arrows broke.
 # Config
 # Categories
 config.roots.category.general=General
+config.roots.category.general.tooltip=General settings related to Roots 3.
 config.roots.category.rituals=Rituals
+config.roots.category.rituals.tooltip=Configuration for enabling/disabling individual rituals, and other ritual-related settings.
 config.roots.category.spells=Spells
-config.roots.category.worldgen=World
+config.roots.category.spells.tooltip=Configuration for enabling/disabling individual spells, and other spell-releated settings.
+config.roots.category.moss=Terra Moss
+config.roots.category.moss.tooltip=Configuration for growing and gather terra moss.
 
 # SubCategories
 config.roots.subcategory.disable_spells=Enable / Disable Spells

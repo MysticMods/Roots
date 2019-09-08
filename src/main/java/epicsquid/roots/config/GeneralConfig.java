@@ -2,6 +2,7 @@ package epicsquid.roots.config;
 
 import epicsquid.mysticallib.util.ConfigUtil;
 import epicsquid.roots.Roots;
+import it.unimi.dsi.fastutil.Hash;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemBlock;
@@ -73,52 +74,6 @@ public class GeneralConfig {
     }
 
     return saplingBlacklist;
-  }
-
-  @Config.Comment(("List of mod:item:meta,mod:item:meta (meta optional) of mossy blocks and what to convert them into when scraping with knives"))
-  public static String[] MossyCobblestones = new String[]{"minecraft:mossy_cobblestone,minecraft:cobblestone", "minecraft:stonebrick:1,minecraft:stonebrick", "minecraft:monster_egg:3,minecraft:monster_egg:2"};
-
-  @Config.Ignore
-  private static Map<ItemStack, ItemStack> mossyCobblestones = null;
-
-  @Config.Ignore
-  private static Set<Block> mossyBlocks = new HashSet<>();
-
-  public static Map<ItemStack, ItemStack> getMossyCobblestones() {
-    if (mossyCobblestones == null) {
-      mossyCobblestones = ConfigUtil.parseMap(new HashMap<>(), ConfigUtil::parseItemStack, ConfigUtil::parseItemStack, ",", MossyCobblestones);
-
-      mossyBlocks.clear();
-      for (ItemStack stack : mossyCobblestones.keySet()) {
-        if (stack.getItem() instanceof ItemBlock) {
-          mossyBlocks.add(((ItemBlock)stack.getItem()).getBlock());
-        }
-      }
-    }
-
-    return mossyCobblestones;
-  }
-
-  public static ItemStack scrapeResult (IBlockState state) {
-    Map<ItemStack, ItemStack> mossy = getMossyCobblestones();
-
-    if (!mossyBlocks.contains(state.getBlock())) {
-      return ItemStack.EMPTY;
-    }
-
-    for (Map.Entry<ItemStack, ItemStack> entry : mossy.entrySet()) {
-      ItemStack moss = entry.getKey();
-      ItemStack clean = entry.getValue();
-      if (!(moss.getItem() instanceof ItemBlock)) {
-        continue;
-      }
-
-      if (((ItemBlock) moss.getItem()).getBlock() == state.getBlock()) {
-        return clean;
-      }
-    }
-
-    return ItemStack.EMPTY;
   }
 }
 
