@@ -2,6 +2,7 @@ package epicsquid.roots.mechanics;
 
 import epicsquid.roots.Roots;
 import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.roots.config.CropConfig;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.block.*;
 import net.minecraft.block.properties.IProperty;
@@ -12,6 +13,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
@@ -47,6 +49,12 @@ public class Harvest {
   }
 
   public static IProperty<?> resolveStates(IBlockState state) {
+    Block block = state.getBlock();
+    ResourceLocation rl = block.getRegistryName();
+    if (CropConfig.getHarvestModBlacklist().contains(Objects.requireNonNull(rl).getNamespace()) || CropConfig.getHarvestBlacklist().contains(rl)) {
+      return null;
+    }
+
     for (IProperty<?> prop : state.getPropertyKeys()) {
       if ((prop.getName().equals("age") || prop.getName().equals("growth")) && prop.getValueClass() == Integer.class) {
         int max = Harvest.getMaxState(prop);

@@ -34,20 +34,6 @@ public class GeneralConfig {
   @Config.Comment(("The aoe-radius for using runic shears to aoe-shear things"))
   public static int RunicShearsRadius = 15;
 
-  @Config.Comment(("List of mod:blocks to ignore when growing crops, etc; use /roots growables for a complete list"))
-  public static String[] GrowthBlacklist = new String[]{"minecraft:tallgrass"};
-
-  @Config.Ignore
-  private static Set<Block> growthBlacklist = null;
-
-  @SuppressWarnings("ConstantConditions")
-  public static Set<Block> getGrowthBlacklist() {
-    if (growthBlacklist == null) {
-      growthBlacklist = ConfigUtil.parseBlocksSet(GrowthBlacklist);
-    }
-    return growthBlacklist;
-  }
-
   @Config.Comment(("List of mod:item:meta (meta optional) of saplings that should be planted in 2x2 by the Spreading Forest ritual"))
   public static String[] TwoByTwoSaplings = new String[]{"thaumcraft:sapling_greatwood"};
 
