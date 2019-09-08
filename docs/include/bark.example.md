@@ -3,9 +3,8 @@
 ```java
 import mods.roots.Bark;
 
-// Note that quantities on the output are currently ignored and the
-// number of items produced is relative to your fortune level.
-Bark.addRecipe("melon", <minecraft:melon_block>, <minecraft:sand>);
+// Will produce 2 sand from a melon block broken by a knife.
+Bark.addRecipe("melon", <minecraft:melon_block>, <minecraft:sand>*2);
 ```
 
 ### Notes
