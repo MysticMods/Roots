@@ -55,8 +55,6 @@ public class SpellHarvest extends SpellBase {
 
           if (skipBlocks.contains(block)) return false;
 
-          if (block.getRegistryName() != null && block.getRegistryName().getNamespace().equals("rustic")) return false;
-
           if (state.getBlock() == Blocks.PUMPKIN || state.getBlock() == Blocks.MELON_BLOCK) {
             pumpkinsAndMelons.add(pos);
             return false;
