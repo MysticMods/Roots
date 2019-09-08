@@ -3,6 +3,7 @@ package epicsquid.roots.block;
 import epicsquid.mysticallib.block.BlockTEBase;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockGrass;
@@ -172,11 +173,13 @@ public class BlockGroveStone extends BlockTEBase {
   public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
     super.randomTick(world, pos, state, random);
 
+    if (!GeneralConfig.EnableGroveStoneEnvironment) return;
+
     if (world.isRemote) return;
 
     if (!state.getValue(VALID)) return;
 
-    if (random.nextBoolean()) {
+    if (random.nextInt(GeneralConfig.GroveStoneChance) == 1) {
       int effectsCount = 1 + random.nextInt(1);
 
       List<BlockPos> positions = Util.getBlocksWithinRadius(world, pos.down(), 4, 5, 4, (p) -> {
