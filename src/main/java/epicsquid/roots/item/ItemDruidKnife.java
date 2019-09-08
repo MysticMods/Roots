@@ -1,18 +1,15 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemKnifeBase;
-import epicsquid.roots.config.GeneralConfig;
+import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.roots.config.MossConfig;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.RunicCarvingRecipe;
-import epicsquid.mysticallib.util.ItemUtil;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -50,13 +47,13 @@ public class ItemDruidKnife extends ItemKnifeBase {
       } else {
         // Used to get terramoss from a block of cobble. This can also be done using runic shears.
         IBlockState state = world.getBlockState(pos);
-        ItemStack result = GeneralConfig.scrapeResult(state);
-        if (!result.isEmpty()) {
+        IBlockState result = MossConfig.scrapeResult(state);
+        if (result != null) {
           if (!world.isRemote) {
-            Block block = ((ItemBlock) result.getItem()).getBlock();
-            IBlockState newState = block.getStateFromMeta(result.getMetadata());
-            world.setBlockState(pos, newState);
-            ItemUtil.spawnItem(world, player.getPosition().add(0, 1, 0), new ItemStack(ModItems.terra_moss));
+            world.setBlockState(pos, result);
+            if (!player.addItemStackToInventory(new ItemStack(ModItems.terra_moss))) {
+              ItemUtil.spawnItem(world, player.getPosition().add(0, 1, 0), new ItemStack(ModItems.terra_moss));
+            }
             if (!player.capabilities.isCreativeMode) {
               player.getHeldItem(hand).damageItem(1, player);
             }

@@ -9,7 +9,7 @@ import vazkii.patchouli.api.PatchouliAPI;
 import java.util.Map;
 
 public class ConfigKeys {
-  public static void init () {
+  public static void init() {
     for (Map.Entry<String, SpellBase> spell : SpellRegistry.spellRegistry.entrySet()) {
       PatchouliAPI.instance.setConfigFlag("roots:" + spell.getKey(), !spell.getValue().isDisabled());
     }
