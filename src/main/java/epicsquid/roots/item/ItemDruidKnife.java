@@ -33,7 +33,7 @@ public class ItemDruidKnife extends ItemKnifeBase {
   public EnumActionResult onItemUse(@Nonnull EntityPlayer player, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (hand == EnumHand.MAIN_HAND) {
       ItemStack offhand = player.getHeldItemOffhand();
-      if (!offhand.isEmpty() && HerbRegistry.containsHerbItem(offhand.getItem())) {
+      if (!offhand.isEmpty() && HerbRegistry.isHerb(offhand.getItem())) {
         RunicCarvingRecipe recipe = ModRecipes.getRunicCarvingRecipe(world.getBlockState(pos), HerbRegistry.getHerbByItem(offhand.getItem()));
         if (recipe != null) {
           world.setBlockState(pos, recipe.getRuneBlock());

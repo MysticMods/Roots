@@ -169,7 +169,7 @@ public class ContainerPouch extends Container {
       ItemStack stack = slot.getStack();
       slotStack = stack.copy();
 
-      boolean herb = HerbRegistry.containsHerbItem(slotStack.getItem());
+      boolean herb = HerbRegistry.isHerb(slotStack.getItem());
 
       if (index < 36) { // Player Inventory -> Inventory/herbs
         if (herb && !mergeItemStack(stack, herbStart, herbStop, false)) {

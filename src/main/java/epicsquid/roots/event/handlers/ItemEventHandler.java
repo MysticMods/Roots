@@ -2,17 +2,24 @@ package epicsquid.roots.event.handlers;
 
 import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.roots.Roots;
+import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.entity.item.EntityItemMagmaticSoil;
+import epicsquid.roots.handler.PouchHandler;
+import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemRunicShears;
+import epicsquid.roots.util.PowderInventoryUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
@@ -21,6 +28,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.items.ItemHandlerHelper;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 @SuppressWarnings("unused")
@@ -43,8 +51,39 @@ public class ItemEventHandler {
     item.onItemUse(player, event.getWorld(), event.getPos(), event.getHand(), event.getFace(), (float) hit.x, (float) hit.y, (float) hit.z);
   }
 
-  //@SubscribeEvent
-  public static void onItemPickup(PlayerEvent.ItemPickupEvent event) {
+  @SubscribeEvent
+  public static void onEntityItemPickup (EntityItemPickupEvent event) {
+    if (GeneralConfig.AutoRefillPouches) {
+      EntityPlayer player = event.getEntityPlayer();
+      EntityItem entity = event.getItem();
+      if (!entity.world.isRemote) {
+        ItemStack stack = entity.getItem().copy();
+        Item item = stack.getItem();
+        int original = stack.getCount();
+        if (HerbRegistry.isHerb(item)) {
+          ItemStack pouch = PowderInventoryUtil.getPouch(player);
+          if (!pouch.isEmpty()) {
+            PouchHandler handler = PouchHandler.getHandler(pouch);
+            PouchHandler.PouchHerbHandler herbs = handler.getHerbs();
+            int refill = herbs.refill(stack);
+            if (refill < original) {
+              event.setCanceled(true);
+              entity.setDead();
+              if (refill != 0) {
+                stack.setCount(refill);
+                EntityItem newEntity = new EntityItem(entity.world, entity.posX, entity.posY, entity.posZ, stack);
+                newEntity.motionX = entity.motionX;
+                newEntity.motionY = entity.motionY;
+                newEntity.motionZ = entity.motionZ;
+                newEntity.setPickupDelay(0);
+                entity.world.spawnEntity(newEntity);
+              }
+              entity.world.playSound(null, player.getPosition(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 1, 0.5f);
+            }
+          }
+        }
+      }
+    }
   }
 
   public static Item MAGMATIC_SOIL = null;
