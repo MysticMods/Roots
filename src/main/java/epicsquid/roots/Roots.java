@@ -36,7 +36,8 @@ public class Roots {
   public static final String DOMAIN = "roots";
   public static final String NAME = "Roots";
   public static final String VERSION = "@VERSION@";
-  public static final String DEPENDENCIES = "required-before:mysticallib@[1.3.6,);required-before:mysticalworld@[1.4.3,);before:harvest;before:chisel;before:endercore;required:patchouli";
+
+  public static final String DEPENDENCIES = "after:maindependencies";
 
   public static final GuiHandler GUI_HANDLER = new GuiHandler();
 
