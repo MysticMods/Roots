@@ -27,7 +27,7 @@ public class BarkTweaker {
       args = {
           @ZenDocArg(arg = "name", info = "the name of the recipe"),
           @ZenDocArg(arg = "woodLog", info = "the itemstack equivalent of the wood log being broken"),
-          @ZenDocArg(arg = "bark", info = "the itemstack of the type of bark this log produces")
+          @ZenDocArg(arg = "bark", info = "the itemstack of the type of bark this log produces (including stack count)")
       }
   )
   @ZenMethod
@@ -40,10 +40,12 @@ public class BarkTweaker {
     CraftTweaker.LATE_ACTIONS.add(new Add(name, CraftTweakerMC.getItemStack(bark), log));
   }
 
-  @ZenDocMethod
-      (
-
-      )
+  @ZenDocMethod(
+      order=2,
+      args = {
+        @ZenDocArg(arg="bark", info="the itemstack of the type of bark to remove (excluding stack size)")
+    }
+  )
   @ZenMethod
   public static void removeRecipe(IItemStack bark) {
     CraftTweaker.LATE_ACTIONS.add(new Remove(CraftTweakerMC.getItemStack(bark)));
