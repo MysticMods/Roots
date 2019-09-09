@@ -312,7 +312,7 @@ jei.roots.elemental_soil_air.desc=Created by dropping a piece of Elemental Soil 
 jei.roots.elemental_soil_earth.desc=Created by dropping a piece of Elemental Soil onto a surface covered from the sky and in the depth's of the ground.
 
 # Quiver
-roots.quiver.picked_up_arrow=Retrieved some arrows.
+roots.quiver.picked_up_arrow=Retrieved arrows.
 roots.quiver.quiver_full=Your quiver is full.
 roots.quiver.fragile=This grown arrow cannot be picked up.
 roots.quiver.broke=All of the arrows broke.
