@@ -46,6 +46,7 @@ public class EntityRitualFlowerGrowth extends EntityRitualBase {
     IBlockState flower = getRandomFlower();
     if (world.isAirBlock(pos) && flower.getBlock().canPlaceBlockAt(world, pos)) {
       if (!world.isRemote) {
+        // TODO: Particles
         world.setBlockState(pos, flower);
       }
       return true;
