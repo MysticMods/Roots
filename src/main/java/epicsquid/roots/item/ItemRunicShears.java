@@ -69,7 +69,7 @@ public class ItemRunicShears extends ItemBase {
         } else {
           world.setBlockState(pos, recipe.getReplacementBlock().getDefaultState());
         }
-        ItemUtil.spawnItem(world, pos.add(0, 1, 0), recipe.getDrop().copy());
+        ItemUtil.spawnItem(world, player.getPosition().add(0, 1, 0), recipe.getDrop().copy());
         if (!player.capabilities.isCreativeMode) {
           player.getHeldItem(hand).damageItem(1, player);
         }
