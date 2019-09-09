@@ -17,6 +17,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
@@ -48,7 +49,10 @@ public class ItemEventHandler {
     ItemRunicShears item = (ItemRunicShears) ModItems.runic_shears;
 
     Vec3d hit = event.getHitVec();
-    item.onItemUse(player, event.getWorld(), event.getPos(), event.getHand(), event.getFace(), (float) hit.x, (float) hit.y, (float) hit.z);
+    EnumActionResult result = item.onItemUse(player, event.getWorld(), event.getPos(), event.getHand(), event.getFace(), (float) hit.x, (float) hit.y, (float) hit.z);
+    if (result == EnumActionResult.SUCCESS) {
+      event.setCanceled(true);
+    }
   }
 
   @SubscribeEvent
