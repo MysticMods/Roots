@@ -9,13 +9,26 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.*;
 
+@Mod.EventBusSubscriber(modid=Roots.MODID)
 @Config.LangKey("config.roots.category.general")
-@Config(modid = Roots.MODID, name = "roots/general")
+@Config(modid = Roots.MODID, name = "roots/general", category="main")
 @SuppressWarnings("unused")
 public class GeneralConfig {
+  @SubscribeEvent(priority = EventPriority.HIGH)
+  public static void onConfigChanged (ConfigChangedEvent.OnConfigChangedEvent event) {
+    if (event.getModID().equals(Roots.MODID)) {
+      ConfigManager.sync(Roots.MODID, Config.Type.INSTANCE);
+    }
+  }
+
   @Config.Comment(("Inject some items from Roots into dungeon & other loot chests"))
   public static boolean InjectLoot = true;
 

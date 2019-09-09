@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Config.LangKey("config.roots.category.moss")
-@Config(modid = Roots.MODID, name = "roots/moss")
+@Config(modid = Roots.MODID, name = "roots/moss", category="moss")
 @SuppressWarnings("unused")
 public class MossConfig {
   @Config.Comment(("List of mod:item:meta,mod:item:meta (meta optional) of mossy blocks and what to convert them into when scraping with knives [note that logs or blocks with positional data are unsuited for this purpose]"))

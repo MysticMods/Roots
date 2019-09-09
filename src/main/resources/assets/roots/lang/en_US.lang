@@ -327,12 +327,10 @@ config.roots.category.spells=Spells
 config.roots.category.spells.tooltip=Configuration for enabling/disabling individual spells, and other spell-releated settings.
 config.roots.category.moss=Terra Moss
 config.roots.category.moss.tooltip=Configuration for growing and gather terra moss.
-
-# SubCategories
-config.roots.subcategory.disable_spells=Enable / Disable Spells
-config.roots.subcategory.spell_features=Spell Features
-config.roots.subcategory.disable_rituals=Enable / Disable Rituals
-config.roots.subcategory.worldgen=World Generation Settings
+config.roots.category.elemental_soil=Elemental Soil
+config.roots.category.elemental_soil.tooltip=Configuration settings related to elemental soil conversion.
+config.roots.category.crops=Growing & Harvesting
+config.roots.category.crops.tooltip=Settings relating to growth & harvesting spells
 
 # WAILA/TOP/etc
 roots.hud.grove_stone.valid=Valid stone

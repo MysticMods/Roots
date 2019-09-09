@@ -2,12 +2,19 @@ package epicsquid.roots.config;
 
 import com.google.common.collect.Sets;
 import epicsquid.mysticallib.util.ConfigUtil;
+import epicsquid.roots.Roots;
 import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Set;
 
+@Config.LangKey("config.roots.category.crops")
+@Config(modid = Roots.MODID, name = "roots/crops", category = "crops")
 public class CropConfig {
   @Config.Comment(("List of mod:blocks to ignore when growing crops, etc; use /roots growables for a complete list (for individual blocks)"))
   public static String[] GrowthBlacklist = new String[]{"minecraft:tallgrass"};
