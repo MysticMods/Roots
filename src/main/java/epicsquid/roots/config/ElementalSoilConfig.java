@@ -4,7 +4,7 @@ import epicsquid.roots.Roots;
 import net.minecraftforge.common.config.Config;
 
 @Config.LangKey("config.roots.category.elemental_soil")
-@Config(modid = Roots.MODID, name = "roots/general", category = "elemental_soil")
+@Config(modid = Roots.MODID, name = "roots/elemental_soil", category = "elemental_soil")
 public class ElementalSoilConfig {
 
   @Config.Comment("Maximum Y-level to convert elemental soil into terran soil")

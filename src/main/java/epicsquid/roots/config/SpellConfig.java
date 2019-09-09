@@ -4,7 +4,7 @@ import epicsquid.roots.Roots;
 import net.minecraftforge.common.config.Config;
 
 @Config.LangKey("config.roots.category.spells")
-@Config(modid = Roots.MODID, name = "roots/spells")
+@Config(modid = Roots.MODID, name = "roots/spells", category="spells")
 public class SpellConfig {
 
 
