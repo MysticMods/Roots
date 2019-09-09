@@ -41,8 +41,6 @@ public class ItemDruidKnife extends ItemKnifeBase {
           if (!player.isCreative()) {
             player.getHeldItemMainhand().damageItem(1, player);
           }
-
-          return EnumActionResult.SUCCESS;
         }
       } else {
         // Used to get terramoss from a block of cobble. This can also be done using runic shears.
@@ -59,6 +57,7 @@ public class ItemDruidKnife extends ItemKnifeBase {
           world.playSound(player, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
         }
       }
+      return EnumActionResult.SUCCESS;
     }
     return EnumActionResult.PASS;
   }
