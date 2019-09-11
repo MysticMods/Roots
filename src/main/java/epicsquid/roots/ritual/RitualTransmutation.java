@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualTransmutation extends RitualBase {
 
@@ -21,7 +22,7 @@ public class RitualTransmutation extends RitualBase {
             new ItemStack(Blocks.FURNACE),
             new ItemStack(Blocks.MOSSY_COBBLESTONE),
             new ItemStack(ModItems.cloud_berry),
-            new ItemStack(ModItems.bark_birch),
+            new OreIngredient("rootsBark"),
             new ItemStack(ModBlocks.chiseled_runestone)));
     addCondition(new ConditionStandingStones(3, 1));
     setIcon(ModItems.ritual_transmutation);

@@ -243,6 +243,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         }
       }
       if (heldItem.getItem() instanceof ItemFlintAndSteel) {
+        heldItem.damageItem(1, player);
         return startRitual(player);
       } else if (extinguish && burnTime > 0) {
         burnTime = 0;

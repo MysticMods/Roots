@@ -28,7 +28,6 @@ public class BarkHandler {
     if (event.getHarvester() != null) {
       ItemStack tool = event.getHarvester().getHeldItem(EnumHand.MAIN_HAND);
       if (tool.getItem().getToolClasses(tool).contains("druidKnife")) {
-        event.getDrops().clear();
         IBlockState blockstate = event.getState();
         Block block = blockstate.getBlock();
         BlockPlanks.EnumType type = (block == Blocks.LOG) ?
@@ -41,7 +40,8 @@ public class BarkHandler {
           bark = ModRecipes.getVanillaBarkRecipe(type);
         }
         if (bark != null) {
-          ItemStack barkStack = bark.getBarkStack(4 + (Util.rand.nextInt(getAdditionalBarkAmount(tool))));
+          event.getDrops().clear();
+          ItemStack barkStack = bark.getBarkStack(Util.rand.nextInt(getAdditionalBarkAmount(tool)));
           if (!event.getWorld().isRemote) {
             ItemUtil.spawnItem(event.getWorld(), event.getPos(), barkStack);
           }

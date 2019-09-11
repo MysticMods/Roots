@@ -8,6 +8,9 @@ import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.config.GeneralConfig;
+import epicsquid.roots.config.MossConfig;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumActionResult;
@@ -28,8 +31,10 @@ public class ItemTerraSpore extends ItemBase {
   @Override
   @Nonnull
   public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-    if (world.getBlockState(pos).getBlock() == Blocks.COBBLESTONE && isWaterAround(pos, world)) {
-      world.setBlockState(pos, Blocks.MOSSY_COBBLESTONE.getDefaultState());
+    IBlockState state = world.getBlockState(pos);
+    IBlockState mossified = MossConfig.mossConversion(state);
+    if (mossified != null && isWaterAround(pos, world)) {
+      world.setBlockState(pos, mossified);
 
       if (world.isRemote) {
         for (int i = 0; i < 50; i++) {
@@ -41,8 +46,6 @@ public class ItemTerraSpore extends ItemBase {
       if (!player.isCreative()) {
         player.getHeldItem(hand).shrink(1);
       }
-
-      return EnumActionResult.SUCCESS;
     }
     return EnumActionResult.SUCCESS;
   }

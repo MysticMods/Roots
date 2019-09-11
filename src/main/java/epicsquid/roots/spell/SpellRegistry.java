@@ -77,6 +77,8 @@ public class SpellRegistry {
     // Cannot disable Grove-related spells
     spellRegistry.put(SpellGroveSupplication.spellName, SpellGroveSupplication.instance);
     SpellGroveSupplication.instance.setDisabled(false);
+    spellRegistry.put(SpellFairySupplication.spellName, SpellFairySupplication.instance);
+    SpellFairySupplication.instance.setDisabled(false);
   }
 
   public static void finalise () {

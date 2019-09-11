@@ -2,6 +2,7 @@ package epicsquid.roots.handler;
 
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.item.ItemPouch;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -16,7 +17,7 @@ public class PouchHandler implements INBTSerializable<NBTTagCompound> {
   public static final int APOTHECARY_POUCH_INVENTORY_SLOTS = 18;
 
   private PouchItemHandler inventorySlots;
-  private PouchItemHandler herbSlots;
+  private PouchHerbHandler herbSlots;
   private ItemStack pouch;
 
   private boolean isApoth = false;
@@ -27,19 +28,14 @@ public class PouchHandler implements INBTSerializable<NBTTagCompound> {
       isApoth = true;
     }
     this.inventorySlots = new PouchItemHandler(inventorySlots);
-    this.herbSlots = new PouchItemHandler(herbSlots) {
-      @Override
-      public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-        return HerbRegistry.containsHerbItem(stack.getItem());
-      }
-    };
+    this.herbSlots = new PouchHerbHandler(herbSlots);
   }
 
   public PouchItemHandler getInventory() {
     return inventorySlots;
   }
 
-  public PouchItemHandler getHerbs() {
+  public PouchHerbHandler getHerbs() {
     return herbSlots;
   }
 
@@ -130,6 +126,54 @@ public class PouchHandler implements INBTSerializable<NBTTagCompound> {
 
       PouchHandler.this.saveToStack();
       return result;
+    }
+  }
+
+  public class PouchHerbHandler extends PouchItemHandler {
+    public PouchHerbHandler(int size) {
+      super(size);
+    }
+
+    @Override
+    public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+      return HerbRegistry.isHerb(stack.getItem());
+    }
+
+    public int refill (ItemStack herbStack) {
+      if (!containsHerb(herbStack.getItem())) {
+        return herbStack.getCount();
+      }
+
+      Item herb = herbStack.getItem();
+      int count = herbStack.getCount();
+
+      for (ItemStack stack : stacks) {
+        if (stack.getItem() == herb) {
+          if (stack.getCount() < stack.getMaxStackSize()) {
+            int consumed = Math.min(count, stack.getMaxStackSize() - stack.getCount());
+            if (consumed > 0) {
+              stack.grow(consumed);
+              count = Math.max(0, count - consumed);
+              PouchHandler.this.saveToStack();
+            }
+          }
+        }
+        if (count == 0) {
+          return 0;
+        }
+      }
+
+      return count;
+    }
+
+    public boolean containsHerb(Item item) {
+      for (ItemStack stack : stacks) {
+        if (stack.getItem() == item) {
+          return true;
+        }
+      }
+
+      return false;
     }
   }
 }

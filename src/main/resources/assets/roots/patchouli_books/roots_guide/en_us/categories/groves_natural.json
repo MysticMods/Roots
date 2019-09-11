@@ -1,0 +1,7 @@
+{
+  "name": "Natural Grove",
+  "sortnum" : 4,
+  "description": "",
+  "icon": "roots:spirit_herb",
+  "parent": "groves"
+}

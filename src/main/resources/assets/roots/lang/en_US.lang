@@ -75,6 +75,7 @@ roots.tooltip.trap_paper_health=Health:
 roots.tooltip.trap_paper_health_divider= /
 roots.tooltip.pouch=Sneak-Right-Click or %s to open pouch.
 roots.tooltip.pouch2=Right-Click or %s to open pouch.
+roots.tooltip.refill=Automatically refilling herbs to full stacks from picked-up items. [Disable in config]
 
 roots.info.staff.slot_and_spell=Selected Slot (%d) has spell: %s
 roots.info.staff.no_slots=Your staff has no room for new spells!
@@ -241,6 +242,7 @@ item.infernal_bulb.name=Infernal Bulb
 item.dewgonia.name=Dewgonia
 item.stalicripe.name=Stalicripe
 item.cloud_berry.name=Cloud Berry
+item.baffle_cap.name=Baffle Cap
 tile.baffle_cap.name=Baffle Cap
 tile.baffle_cap_mushroom.name=Baffle Cap
 tile.baffle_cap_huge_stem.name=Huge Baffle Cap Stem
@@ -300,6 +302,7 @@ container.roots.spell_costs.name=Spell Costs
 container.roots.spell_modifiers.name=Spell Modifiers
 container.roots.bark_carving.name=Bark Carving
 container.roots.runic_shears_entity.name=Runic Shearing Entities
+container.roots.terra_moss.name=Moss Scraping
 jei.roots.terra_moss.desc=Scraped from moss cobblestone with a knife. Cobblestone infused with terra spores will grow moss when adjacent to water.
 jei.roots.terra_spores.desc=Dropped from broken tall grass; used on cobblestone adjacent water grows sportes, turning it into moss cobblestone.
 jei.roots.wildroot.desc=Dropped from broken tall grass and the extremely rare leaves of the wildwood tree.
@@ -313,7 +316,7 @@ jei.roots.elemental_soil_air.desc=Created by dropping a piece of Elemental Soil 
 jei.roots.elemental_soil_earth.desc=Created by dropping a piece of Elemental Soil onto a surface covered from the sky and in the depth's of the ground.
 
 # Quiver
-roots.quiver.picked_up_arrow=Retrieved some arrows.
+roots.quiver.picked_up_arrow=Retrieved arrows.
 roots.quiver.quiver_full=Your quiver is full.
 roots.quiver.fragile=This grown arrow cannot be picked up.
 roots.quiver.broke=All of the arrows broke.
@@ -321,15 +324,17 @@ roots.quiver.broke=All of the arrows broke.
 # Config
 # Categories
 config.roots.category.general=General
+config.roots.category.general.tooltip=General settings related to Roots 3.
 config.roots.category.rituals=Rituals
+config.roots.category.rituals.tooltip=Configuration for enabling/disabling individual rituals, and other ritual-related settings.
 config.roots.category.spells=Spells
-config.roots.category.worldgen=World
-
-# SubCategories
-config.roots.subcategory.disable_spells=Enable / Disable Spells
-config.roots.subcategory.spell_features=Spell Features
-config.roots.subcategory.disable_rituals=Enable / Disable Rituals
-config.roots.subcategory.worldgen=World Generation Settings
+config.roots.category.spells.tooltip=Configuration for enabling/disabling individual spells, and other spell-releated settings.
+config.roots.category.moss=Terra Moss
+config.roots.category.moss.tooltip=Configuration for growing and gather terra moss.
+config.roots.category.elemental_soil=Elemental Soil
+config.roots.category.elemental_soil.tooltip=Configuration settings related to elemental soil conversion.
+config.roots.category.crops=Growing & Harvesting
+config.roots.category.crops.tooltip=Settings relating to growth & harvesting spells
 
 # WAILA/TOP/etc
 roots.hud.grove_stone.valid=Valid stone

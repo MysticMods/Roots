@@ -1,0 +1,7 @@
+{
+  "name": "Fungal Grove",
+  "sortnum" : 2,
+  "description": "",
+  "icon": "roots:bafflecap",
+  "parent": "groves"
+}

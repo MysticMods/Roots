@@ -156,16 +156,16 @@ public class ModRecipes {
   }
 
   public static void initVanillaBarkRecipes() {
-    addVanillaBarkRecipe("oak", BlockPlanks.EnumType.OAK, new ItemStack(ModItems.bark_oak));
-    addVanillaBarkRecipe("spruce", BlockPlanks.EnumType.SPRUCE, new ItemStack(ModItems.bark_spruce));
-    addVanillaBarkRecipe("birch", BlockPlanks.EnumType.BIRCH, new ItemStack(ModItems.bark_birch));
-    addVanillaBarkRecipe("jungle", BlockPlanks.EnumType.JUNGLE, new ItemStack(ModItems.bark_jungle));
-    addVanillaBarkRecipe("acacia", BlockPlanks.EnumType.ACACIA, new ItemStack(ModItems.bark_acacia));
-    addVanillaBarkRecipe("dark_oak", BlockPlanks.EnumType.DARK_OAK, new ItemStack(ModItems.bark_dark_oak));
+    addVanillaBarkRecipe("oak", BlockPlanks.EnumType.OAK, new ItemStack(ModItems.bark_oak, 4));
+    addVanillaBarkRecipe("spruce", BlockPlanks.EnumType.SPRUCE, new ItemStack(ModItems.bark_spruce, 4));
+    addVanillaBarkRecipe("birch", BlockPlanks.EnumType.BIRCH, new ItemStack(ModItems.bark_birch, 4));
+    addVanillaBarkRecipe("jungle", BlockPlanks.EnumType.JUNGLE, new ItemStack(ModItems.bark_jungle, 4));
+    addVanillaBarkRecipe("acacia", BlockPlanks.EnumType.ACACIA, new ItemStack(ModItems.bark_acacia, 4));
+    addVanillaBarkRecipe("dark_oak", BlockPlanks.EnumType.DARK_OAK, new ItemStack(ModItems.bark_dark_oak, 4));
   }
 
   public static void initModdedBarkRecipes() {
-    addModdedBarkRecipe("wildwood", new ItemStack(ModItems.bark_wildwood), new ItemStack(ModBlocks.wildwood_log));
+    addModdedBarkRecipe("wildwood", new ItemStack(ModItems.bark_wildwood, 4), new ItemStack(ModBlocks.wildwood_log));
   }
 
   public static void addModdedBarkRecipe(String name, ItemStack item, ItemStack blockStack) {
@@ -830,40 +830,40 @@ public class ModRecipes {
             new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_PICKAXE),
             new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak)));
+            new OreIngredient("rootsBark"),
+            new OreIngredient("rootsBark")));
 
     addCraftingRecipe("living_axe",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_axe), 1).addIngredients(
             new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_AXE),
             new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak)));
+            new OreIngredient("rootsBark"),
+            new OreIngredient("rootsBark")));
 
     addCraftingRecipe("living_shovel",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_shovel), 1).addIngredients(
             new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_SHOVEL),
             new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak)));
+            new OreIngredient("rootsBark"),
+            new OreIngredient("rootsBark")));
 
     addCraftingRecipe("living_hoe",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_hoe), 1).addIngredients(
             new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_HOE),
             new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak)));
+            new OreIngredient("rootsBark"),
+            new OreIngredient("rootsBark")));
 
     addCraftingRecipe("living_sword",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_sword), 1).addIngredients(
             new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_SWORD),
             new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.bark_oak),
-            new ItemStack(ModItems.bark_oak)));
+            new OreIngredient("rootsBark"),
+            new OreIngredient("rootsBark")));
 
     addCraftingRecipe("living_arrow",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_arrow, 6), 1).addIngredients(
@@ -904,6 +904,14 @@ public class ModRecipes {
             new OreIngredient("stone"),
             new OreIngredient("stone"),
             new OreIngredient("stone")));
+
+    addCraftingRecipe("fairy_grove_stone",
+        new FeyCraftingRecipe(new ItemStack(ModBlocks.fairy_grove_stone)).addIngredients(
+            new ItemStack(ModBlocks.grove_stone),
+            new ItemStack(ModItems.pereskia),
+            new ItemStack(ModItems.pereskia),
+            new ItemStack(ModItems.pereskia_bulb),
+            new ItemStack(ModItems.petals)));
 
     addCraftingRecipe("wildwood_helmet", new FeyCraftingRecipe(new ItemStack(ModItems.wildwood_helmet), 1).addIngredients(
         new ItemStack(Items.IRON_HELMET),

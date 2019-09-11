@@ -1,0 +1,7 @@
+{
+  "name": "Wild Grove",
+  "sortnum" : 5,
+  "description": "",
+  "icon": "roots:wildewheet",
+  "parent": "groves"
+}

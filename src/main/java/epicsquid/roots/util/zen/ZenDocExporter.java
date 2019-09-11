@@ -149,9 +149,9 @@ public class ZenDocExporter {
 
     out.append("```java").append("\n");
 
-    if (Modifier.isStatic(method.getModifiers())) {
+    /*if (Modifier.isStatic(method.getModifiers())) {
       out.append("static ");
-    }
+    }*/
 
     // Method return type and name
     out.append(returnTypeString).append(" ").append(methodName).append("(");

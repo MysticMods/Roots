@@ -1,14 +1,14 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemKnifeBase;
+import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.roots.config.MossConfig;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.RunicCarvingRecipe;
-import epicsquid.mysticallib.util.ItemUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
@@ -29,10 +29,11 @@ public class ItemDruidKnife extends ItemKnifeBase {
 
   @Override
   @Nonnull
+  @SuppressWarnings("deprecation")
   public EnumActionResult onItemUse(@Nonnull EntityPlayer player, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (hand == EnumHand.MAIN_HAND) {
       ItemStack offhand = player.getHeldItemOffhand();
-      if (!offhand.isEmpty() && HerbRegistry.containsHerbItem(offhand.getItem())) {
+      if (!offhand.isEmpty() && HerbRegistry.isHerb(offhand.getItem())) {
         RunicCarvingRecipe recipe = ModRecipes.getRunicCarvingRecipe(world.getBlockState(pos), HerbRegistry.getHerbByItem(offhand.getItem()));
         if (recipe != null) {
           world.setBlockState(pos, recipe.getRuneBlock());
@@ -40,15 +41,14 @@ public class ItemDruidKnife extends ItemKnifeBase {
           if (!player.isCreative()) {
             player.getHeldItemMainhand().damageItem(1, player);
           }
-
-          return EnumActionResult.SUCCESS;
         }
       } else {
         // Used to get terramoss from a block of cobble. This can also be done using runic shears.
-        IBlockState block = world.getBlockState(pos);
-        if (block.getBlock() == Blocks.MOSSY_COBBLESTONE) {
+        IBlockState state = world.getBlockState(pos);
+        IBlockState result = MossConfig.scrapeResult(state);
+        if (result != null) {
           if (!world.isRemote) {
-            world.setBlockState(pos, Blocks.COBBLESTONE.getDefaultState());
+            world.setBlockState(pos, result);
             ItemUtil.spawnItem(world, player.getPosition().add(0, 1, 0), new ItemStack(ModItems.terra_moss));
             if (!player.capabilities.isCreativeMode) {
               player.getHeldItem(hand).damageItem(1, player);
@@ -57,6 +57,7 @@ public class ItemDruidKnife extends ItemKnifeBase {
           world.playSound(player, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
         }
       }
+      return EnumActionResult.SUCCESS;
     }
     return EnumActionResult.PASS;
   }

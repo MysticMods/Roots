@@ -1,0 +1,7 @@
+{
+  "name": "Fairy Grove",
+  "sortnum" : 0,
+  "description": "",
+  "icon": "roots:pereskia",
+  "parent": "groves"
+}

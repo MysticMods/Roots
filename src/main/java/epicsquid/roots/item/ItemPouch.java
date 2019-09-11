@@ -127,7 +127,7 @@ public class ItemPouch extends ItemBase {
     IItemHandler handler = pouchHandler.getHerbs();
     for (int i = 0; i < handler.getSlots(); i++) {
       ItemStack stack = handler.getStackInSlot(i);
-      if (!stack.isEmpty() && HerbRegistry.containsHerbItem(stack.getItem()) && HerbRegistry.getHerbByItem(stack.getItem()).equals(herb)) {
+      if (!stack.isEmpty() && HerbRegistry.isHerb(stack.getItem()) && HerbRegistry.getHerbByItem(stack.getItem()).equals(herb)) {
         if (!handler.extractItem(i, 1, false).isEmpty()) {
           createData(pouch, herb, 1.0);
           return true;
@@ -144,6 +144,10 @@ public class ItemPouch extends ItemBase {
       tooltip.add(TextFormatting.GREEN + I18n.format("roots.tooltip.pouch", Keybinds.POUCH_KEYBIND.getDisplayName()));
     } else {
       tooltip.add(TextFormatting.GREEN + I18n.format("roots.tooltip.pouch2", Keybinds.POUCH_KEYBIND.getDisplayName()));
+    }
+    if (GeneralConfig.AutoRefillPouches) {
+      tooltip.add("");
+      tooltip.add(TextFormatting.LIGHT_PURPLE + I18n.format("roots.tooltip.refill"));
     }
 
     super.addInformation(stack, worldIn, tooltip, flagIn);

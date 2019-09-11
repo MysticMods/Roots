@@ -14,16 +14,20 @@ import net.minecraftforge.registries.RegistryBuilder;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Collection;
+import java.util.*;
 
 @EventBusSubscriber(modid = Roots.MODID)
 public class HerbRegistry {
 
   private static final ResourceLocation NAME = new ResourceLocation(Roots.DOMAIN, "herb");
   public static IForgeRegistry<Herb> REGISTRY = null;
+  public static Set<Item> HERB_ITEMS = new HashSet<>();
 
   public static void init() {
     MinecraftForge.EVENT_BUS.post(new RegisterHerbEvent(NAME, REGISTRY));
+    for (Herb herb : REGISTRY.getValuesCollection()) {
+      HERB_ITEMS.add(herb.getItem());
+    }
   }
 
   @SubscribeEvent
@@ -63,6 +67,10 @@ public class HerbRegistry {
 
   @Nullable
   public static Herb getHerbByItem(@Nonnull Item item) {
+    if (!isHerb(item)) {
+      return null;
+    }
+
     Collection<Herb> herbs = REGISTRY.getValuesCollection();
     for (Herb herb : herbs) {
       if (herb.getItem() == item) {
@@ -73,8 +81,10 @@ public class HerbRegistry {
     return null;
   }
 
-  public static boolean containsHerbItem(@Nonnull Item item) {
-    return REGISTRY.getValuesCollection().stream()
-        .anyMatch(herb -> herb.getItem() == item);
+  public static boolean isHerb(@Nonnull Item item) {
+    // I feel like this is faster than streams
+    return HERB_ITEMS.contains(item);
+    //return REGISTRY.getValuesCollection().stream()
+    //    .anyMatch(herb -> herb.getItem() == item);
   }
 }

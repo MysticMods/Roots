@@ -1,10 +1,12 @@
 package epicsquid.roots.block;
 
+import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.mysticallib.block.BlockTEBase;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.particle.particles.ParticleLeafArc;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockTallGrass;
@@ -36,13 +38,13 @@ import java.util.List;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public class BlockGroveStone extends BlockTEBase {
+public class BlockGroveStone extends BlockBase {
   public static final PropertyEnum<Half> HALF = PropertyEnum.create("half", Half.class);
   public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
   public static final PropertyBool VALID = PropertyBool.create("valid");
 
-  public BlockGroveStone(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
-    super(mat, type, hardness, name, teClass);
+  public BlockGroveStone(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
+    super(mat, type, hardness, name);
 
     this.setDefaultState(this.blockState.getBaseState().withProperty(VALID, false).withProperty(HALF, Half.BOTTOM).withProperty(FACING, EnumFacing.NORTH));
     this.setTickRandomly(true);
@@ -166,11 +168,13 @@ public class BlockGroveStone extends BlockTEBase {
   public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
     super.randomTick(world, pos, state, random);
 
+    if (!GeneralConfig.EnableGroveStoneEnvironment) return;
+
     if (world.isRemote) return;
 
     if (!state.getValue(VALID)) return;
 
-    if (random.nextBoolean()) {
+    if (random.nextInt(GeneralConfig.GroveStoneChance) == 1) {
       int effectsCount = 1 + random.nextInt(1);
 
       List<BlockPos> positions = Util.getBlocksWithinRadius(world, pos.down(), 4, 5, 4, (p) -> {
