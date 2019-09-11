@@ -5,6 +5,7 @@
   "sortnum": 1,
   "pages": [
     {
+      "title": "Fairy Grove Stone",
       "type": "spotlight",
       "item": "roots:grove_stone",
       "link_recipe": true,
