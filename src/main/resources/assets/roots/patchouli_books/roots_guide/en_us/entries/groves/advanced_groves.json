@@ -1,0 +1,20 @@
+{
+ "name": "Advanced Groves",
+ "icon": "roots:grove_stone",
+ "category": "groves",
+ "priority": true,
+ "sortnum": 1,
+ "pages": [
+  {
+   "type": "text",
+   "text": "While simple Grove Stones will empower a $(l:basics/crafting)Fey Crafter$() sufficiently for many creations, further power requires dedicating an area to one of the six primary areas of the Fey (the Twilight, the Wilds, the Natural, the Fungal, the Elemental or the Fairy).$(br2)Sufficient supplication to a sufficient stone must then be made."
+  },
+  {
+   "type": "relations",
+   "entries": [
+    "basics/crafting",
+    "groves/fairy/fairy_grove"
+   ]
+  }
+ ]
+}

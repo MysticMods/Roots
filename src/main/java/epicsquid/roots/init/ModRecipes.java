@@ -905,6 +905,14 @@ public class ModRecipes {
             new OreIngredient("stone"),
             new OreIngredient("stone")));
 
+    addCraftingRecipe("fairy_grove_stone",
+        new FeyCraftingRecipe(new ItemStack(ModBlocks.fairy_grove_stone)).addIngredients(
+            new ItemStack(ModBlocks.grove_stone),
+            new ItemStack(ModItems.pereskia),
+            new ItemStack(ModItems.pereskia),
+            new ItemStack(ModItems.pereskia_bulb),
+            new ItemStack(ModItems.petals)));
+
     addCraftingRecipe("wildwood_helmet", new FeyCraftingRecipe(new ItemStack(ModItems.wildwood_helmet), 1).addIngredients(
         new ItemStack(Items.IRON_HELMET),
         new ItemStack(ModItems.bark_wildwood),

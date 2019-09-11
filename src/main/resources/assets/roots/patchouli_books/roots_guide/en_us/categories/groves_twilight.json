@@ -1,0 +1,7 @@
+{
+  "name": "Twilight Grove",
+  "sortnum" : 1,
+  "description": "",
+  "icon": "roots:moonglow_leaf",
+  "parent": "groves"
+}

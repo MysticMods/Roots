@@ -1,0 +1,26 @@
+{
+  "name": "Grove Stone (Fairy Dedication)",
+  "icon": "roots:grove_stone",
+  "category": "groves_fairy",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "roots:grove_stone",
+      "link_recipe": true,
+      "text": "A grove stone should be prepared in the normal fashion, and then imbued with elements familiar to the fairies of the Fey World.$(br2)In addition to a $(l:groves/fairy/supplication.json)special spell of Fairy Supplication$(), the stone must be empowered with sufficient fairy energy, $(l:groves/fairy/fairy_grove)as outlined in another entry$()."
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "fairy_grove_stone"
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "basics/crafting",
+        "basics/groves",
+        "basics/knives"
+      ]
+    }
+  ]
+}

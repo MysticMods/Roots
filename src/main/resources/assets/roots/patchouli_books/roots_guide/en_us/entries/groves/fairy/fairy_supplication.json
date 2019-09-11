@@ -1,0 +1,20 @@
+{
+  "name": "Supplication to Fairies",
+  "icon": "roots:spell_dust",
+  "category": "groves_fairy",
+  "priority": true,
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "text",
+      "text": ""
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "groves/fairy/fairy_grove",
+        "groves/fairy/fairy_grove_stone"
+      ]
+    }
+  ]
+}
