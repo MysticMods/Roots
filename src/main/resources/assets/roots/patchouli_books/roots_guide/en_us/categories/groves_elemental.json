@@ -1,0 +1,7 @@
+{
+  "name": "Elemental Grove",
+  "sortnum" : 3,
+  "description": "",
+  "icon": "roots:infernal_bulb",
+  "parent": "groves"
+}
