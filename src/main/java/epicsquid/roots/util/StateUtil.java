@@ -1,14 +1,12 @@
 package epicsquid.roots.util;
 
 import com.google.common.collect.ImmutableMap;
+import javafx.beans.property.Property;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class StateUtil {
   public static Map<Block, List<IProperty<?>>> skipProperties = new HashMap<>();
@@ -45,6 +43,34 @@ public class StateUtil {
 
       if (entry.getKey().getValueClass().cast(entry.getValue()) != entry.getKey().getValueClass().cast(comp2))
         return false;
+    }
+
+    return true;
+  }
+
+  /**
+   * Returns true if all of the state's values contained in stateWithValues are present and
+   * are equal in the stateBeingChecked.
+   *
+   * @param stateBeingChecked
+   * @param stateWithValues
+   * @return
+   */
+  public static boolean stateContainsValues (IBlockState stateBeingChecked, IBlockState stateWithValues) {
+    // If they aren't the same block then they aren't the same state
+    if (stateBeingChecked.getBlock() != stateWithValues.getBlock()) return false;
+
+    Collection<IProperty<?>> keys = stateBeingChecked.getPropertyKeys();
+
+    // If stateWithValues has no keys then this is a noop
+    for (IProperty<?> prop : stateWithValues.getPropertyKeys()) {
+      if (!keys.contains(prop)) {
+        return false;
+      }
+
+      if (stateBeingChecked.getValue(prop) != stateWithValues.getValue(prop)) {
+        return false;
+      }
     }
 
     return true;
