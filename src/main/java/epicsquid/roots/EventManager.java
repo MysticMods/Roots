@@ -9,15 +9,13 @@ import epicsquid.roots.capability.playerdata.PlayerDataCapabilityProvider;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityProvider;
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.entity.spell.EntityPetalShell;
+import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.baubles.pouch.BaubleBeltCapabilityHandler;
 import epicsquid.roots.item.ItemPouch;
 import epicsquid.roots.network.MessagePlayerDataUpdate;
 import epicsquid.roots.network.MessagePlayerGroveUpdate;
-import epicsquid.roots.network.fx.MessageGeasRingFX;
-import epicsquid.roots.network.fx.MessageLightDrifterFX;
-import epicsquid.roots.network.fx.MessageLightDrifterSync;
-import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
+import epicsquid.roots.network.fx.*;
 import epicsquid.roots.util.Constants;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -39,6 +37,7 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.List;
@@ -118,6 +117,7 @@ public class EventManager {
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public static void onDamage(LivingHurtEvent event) {
     EntityLivingBase entity = event.getEntityLiving();
+    Entity trueSource = event.getSource().getTrueSource();
 
     if (EffectManager.hasEffect(entity, EffectManager.effect_time_stop.getName())) {
       event.setAmount(event.getAmount() * 0.1f);
@@ -157,19 +157,15 @@ public class EventManager {
         }
       }
     }
-    if (event.getEntity().getEntityData().hasKey(Constants.GEAS_TAG)) {
-      if (event.getSource().getTrueSource() instanceof EntityLivingBase) {
-        if (event.getSource().getTrueSource().getUniqueID().compareTo(event.getEntity().getUniqueID()) != 0) {
-          event.getEntity().getEntityData().removeTag(Constants.GEAS_TAG);
-        }
-      }
+    if (entity.getActivePotionEffect(ModPotions.geas) != null && trueSource != entity)  {
+      entity.removePotionEffect(ModPotions.geas);
     }
-    if (event.getSource().getTrueSource() instanceof EntityLivingBase) {
-      if (event.getSource().getTrueSource().getEntityData().hasKey(Constants.GEAS_TAG)) {
-        EntityLivingBase caster = (EntityLivingBase) event.getSource().getTrueSource();
-        caster.attackEntityFrom(DamageSource.WITHER, event.getAmount() * 2.0f);
+    if (trueSource instanceof EntityLivingBase) {
+      EntityLivingBase trueLiving = (EntityLivingBase) trueSource;
+      if (trueLiving.getActivePotionEffect(ModPotions.geas) != null) {
+        trueLiving.attackEntityFrom(DamageSource.WITHER, event.getAmount() * 2.0f);
         event.setAmount(0);
-        PacketHandler.sendToAllTracking(new MessageGeasRingFX(caster.posX, caster.posY + 1.0, caster.posZ), caster);
+        PacketHandler.sendToAllTracking(new MessageGeasRingFX(trueLiving.posX, trueLiving.posY + 1.0, trueLiving.posZ), trueLiving);
       }
     }
   }
@@ -177,6 +173,7 @@ public class EventManager {
   @SubscribeEvent
   public static void onEntityTick(LivingUpdateEvent event) {
     EffectManager.tickEffects(event.getEntityLiving());
+    EntityLivingBase entity = event.getEntityLiving();
     if (EffectManager.hasEffect(event.getEntityLiving(), EffectManager.effect_time_stop.getName())) {
       event.setCanceled(true);
     }
@@ -196,8 +193,7 @@ public class EventManager {
         player.extinguish();
         player.setGameType(GameType.getByID(event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE)));
         player.setPositionAndUpdate(player.posX, player.posY, player.posZ);
-        PacketHandler
-            .sendToAllTracking(new MessageLightDrifterFX(event.getEntity().posX, event.getEntity().posY + 1.0f, event.getEntity().posZ), event.getEntity());
+        PacketHandler.sendToAllTracking(new MessageLightDrifterFX(event.getEntity().posX, event.getEntity().posY + 1.0f, event.getEntity().posZ), event.getEntity());
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_TAG);
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_X);
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_Y);
@@ -205,6 +201,8 @@ public class EventManager {
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_MODE);
       }
     }
+    if (entity.getActivePotionEffect(ModPotions.geas) != null) {
+      PacketHandler.sendToAllTracking(new MessageGeasFX(entity.posX, entity.posY + entity.getEyeHeight() + 0.75f, entity.posZ), entity);
+    }
   }
-
 }
