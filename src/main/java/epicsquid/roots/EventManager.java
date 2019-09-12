@@ -26,12 +26,10 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -39,15 +37,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 public class EventManager {
@@ -78,54 +72,6 @@ public class EventManager {
         dataNew.setData(dataOrig.getData());
       }
     }
-  }
-
-  private static Map<UUID, Map<ResourceLocation, NBTTagCompound>> savedCapabilityData = new HashMap<>();
-
-  @SubscribeEvent
-  public static void saveCapabilitiesBeforeTeleport(EntityTravelToDimensionEvent event) {
-    if (!(event.getEntity() instanceof EntityPlayer)) {
-      return;
-    }
-
-    EntityPlayer player = (EntityPlayer) event.getEntity();
-
-    if (player.world.isRemote) return;
-
-    Map<ResourceLocation, NBTTagCompound> saveData = savedCapabilityData.computeIfAbsent(player.getUniqueID(), o -> new HashMap<>());
-
-    IPlayerGroveCapability groveCapability = player.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null);
-    if (groveCapability != null) {
-      saveData.put(PlayerGroveCapabilityProvider.IDENTIFIER, groveCapability.getData());
-    }
-
-    IPlayerDataCapability dataCapability = player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null);
-    if (dataCapability != null) {
-      saveData.put(PlayerDataCapabilityProvider.IDENTIFIER, dataCapability.getData());
-    }
-  }
-
-  @SubscribeEvent
-  public static void restoreCapabilitiesAfterTeleport (PlayerChangedDimensionEvent event) {
-    EntityPlayer player = event.player;
-    if (player.world.isRemote) return;
-
-    Map<ResourceLocation, NBTTagCompound> saveData = savedCapabilityData.computeIfAbsent(player.getUniqueID(), o -> new HashMap<>());
-    if (saveData.isEmpty()) return;
-
-    IPlayerGroveCapability groveCapability = player.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null);
-    NBTTagCompound groveData = saveData.get(PlayerGroveCapabilityProvider.IDENTIFIER);
-    if (groveCapability != null && groveData != null) {
-      groveCapability.setData(groveData);
-    }
-
-    IPlayerDataCapability dataCapability = player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null);
-    NBTTagCompound dataData = saveData.get(PlayerDataCapabilityProvider.IDENTIFIER);
-    if (dataCapability != null && dataData != null) {
-      dataCapability.setData(dataData);
-    }
-
-    savedCapabilityData.remove(player.getUniqueID());
   }
 
   @SubscribeEvent
