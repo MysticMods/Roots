@@ -6,6 +6,7 @@ import epicsquid.roots.spell.SpellTimeStop;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -76,7 +77,7 @@ public class EntityTimeStop extends Entity {
     List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 9.0, posY - 1.0, posZ - 9.0, posX + 9.0, posY + 19.0, posZ + 9.0));
     for (EntityLivingBase e : entities) {
       if (playerId != null) {
-        if (e.getUniqueID().compareTo(playerId) != 0) {
+        if (e.getUniqueID() != playerId) {
           EffectManager.assignEffect(e, EffectManager.effect_time_stop.getName(), 40, new NBTTagCompound());
         }
       }
@@ -85,12 +86,12 @@ public class EntityTimeStop extends Entity {
 
   @Override
   protected void readEntityFromNBT(NBTTagCompound compound) {
-    this.playerId = net.minecraft.nbt.NBTUtil.getUUIDFromTag(compound.getCompoundTag("id"));
+    this.playerId = NBTUtil.getUUIDFromTag(compound.getCompoundTag("id"));
   }
 
   @Override
   protected void writeEntityToNBT(NBTTagCompound compound) {
-    compound.setTag("id", net.minecraft.nbt.NBTUtil.createUUIDTag(playerId));
+    compound.setTag("id", NBTUtil.createUUIDTag(playerId));
   }
 
 }
