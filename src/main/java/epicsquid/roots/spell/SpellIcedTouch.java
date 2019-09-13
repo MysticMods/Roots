@@ -1,9 +1,9 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.RegistryManager;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.network.fx.MessageIcedTouchFX;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
@@ -22,6 +22,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.registries.RegistryManager;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -46,8 +47,7 @@ public class SpellIcedTouch extends SpellBase {
     World world = player.world;
     if (modules.contains(ModuleRegistry.module_touch)) {
       if (!world.isRemote) {
-        player.addPotionEffect(new PotionEffect(RegistryManager.freeze, 600));
-        world.playSound(null, player.getPosition(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 2f);
+        player.addPotionEffect(new PotionEffect(ModPotions.freeze, 600));
       }
       return true;
     } else {

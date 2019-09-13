@@ -14,7 +14,10 @@ import epicsquid.roots.integration.baubles.pouch.BaubleBeltCapabilityHandler;
 import epicsquid.roots.item.ItemPouch;
 import epicsquid.roots.network.MessagePlayerDataUpdate;
 import epicsquid.roots.network.MessagePlayerGroveUpdate;
-import epicsquid.roots.network.fx.*;
+import epicsquid.roots.network.fx.MessageGeasRingFX;
+import epicsquid.roots.network.fx.MessageLightDrifterFX;
+import epicsquid.roots.network.fx.MessageLightDrifterSync;
+import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
 import epicsquid.roots.util.Constants;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -26,19 +29,27 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.GameType;
+import net.minecraft.world.World;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
+@Mod.EventBusSubscriber(modid = Roots.MODID)
 public class EventManager {
   public static long ticks = 0;
 
@@ -50,20 +61,71 @@ public class EventManager {
     }
   }
 
-  // TODO: Handle Player Teleport
-
   @SubscribeEvent
   public static void copyCapabilities(PlayerEvent.Clone event) {
     if (event.isWasDeath()) {
-      if (event.getOriginal().hasCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null)) {
-        event.getEntityPlayer().getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null)
-            .setData(event.getOriginal().getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null).getData());
+      EntityPlayer player = event.getOriginal();
+      EntityPlayer newPlayer = event.getEntityPlayer();
+      IPlayerGroveCapability groveOrig = player.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null);
+      IPlayerGroveCapability groveNew = newPlayer.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null);
+      if (groveOrig != null && groveNew != null) {
+        groveNew.setData(groveOrig.getData());
       }
-      if (event.getOriginal().hasCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null)) {
-        event.getEntityPlayer().getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null)
-            .setData(event.getOriginal().getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null).getData());
+
+      IPlayerDataCapability dataOrig = player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null);
+      IPlayerDataCapability dataNew = newPlayer.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null);
+      if (dataOrig != null && dataNew != null) {
+        dataNew.setData(dataOrig.getData());
       }
     }
+  }
+
+  private static Map<UUID, Map<ResourceLocation, NBTTagCompound>> savedCapabilityData = new HashMap<>();
+
+  @SubscribeEvent
+  public static void saveCapabilitiesBeforeTeleport(EntityTravelToDimensionEvent event) {
+    if (!(event.getEntity() instanceof EntityPlayer)) {
+      return;
+    }
+
+    EntityPlayer player = (EntityPlayer) event.getEntity();
+
+    if (player.world.isRemote) return;
+
+    Map<ResourceLocation, NBTTagCompound> saveData = savedCapabilityData.computeIfAbsent(player.getUniqueID(), o -> new HashMap<>());
+
+    IPlayerGroveCapability groveCapability = player.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null);
+    if (groveCapability != null) {
+      saveData.put(PlayerGroveCapabilityProvider.IDENTIFIER, groveCapability.getData());
+    }
+
+    IPlayerDataCapability dataCapability = player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null);
+    if (dataCapability != null) {
+      saveData.put(PlayerDataCapabilityProvider.IDENTIFIER, dataCapability.getData());
+    }
+  }
+
+  @SubscribeEvent
+  public static void restoreCapabilitiesAfterTeleport (PlayerChangedDimensionEvent event) {
+    EntityPlayer player = event.player;
+    if (player.world.isRemote) return;
+
+    Map<ResourceLocation, NBTTagCompound> saveData = savedCapabilityData.computeIfAbsent(player.getUniqueID(), o -> new HashMap<>());
+    if (saveData.isEmpty()) return;
+
+    IPlayerGroveCapability groveCapability = player.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null);
+    NBTTagCompound groveData = saveData.get(PlayerGroveCapabilityProvider.IDENTIFIER);
+    if (groveCapability != null && groveData != null) {
+      groveCapability.setData(groveData);
+    }
+
+    IPlayerDataCapability dataCapability = player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null);
+    NBTTagCompound dataData = saveData.get(PlayerDataCapabilityProvider.IDENTIFIER);
+    if (dataCapability != null && dataData != null) {
+      dataCapability.setData(dataData);
+    }
+
+    savedCapabilityData.remove(player.getUniqueID());
   }
 
   @SubscribeEvent
@@ -72,8 +134,8 @@ public class EventManager {
       event.addCapability(RunicShearsCapabilityProvider.IDENTIFIER, new RunicShearsCapabilityProvider());
     }
     if (event.getObject() instanceof EntityPlayer) {
-      event.addCapability(new ResourceLocation(Roots.MODID, "player_grove_capability"), new PlayerGroveCapabilityProvider());
-      event.addCapability(new ResourceLocation(Roots.MODID, "player_data_capability"), new PlayerDataCapabilityProvider());
+      event.addCapability(PlayerGroveCapabilityProvider.IDENTIFIER, new PlayerGroveCapabilityProvider());
+      event.addCapability(PlayerDataCapabilityProvider.IDENTIFIER, new PlayerDataCapabilityProvider());
     }
   }
 
@@ -81,7 +143,7 @@ public class EventManager {
   @Optional.Method(modid = "baubles")
   public static void addBaublesCapability(AttachCapabilitiesEvent<ItemStack> event) {
     if (event.getObject().getItem() instanceof ItemPouch) {
-      event.addCapability(new ResourceLocation(Roots.MODID, "baubles_pouch"), BaubleBeltCapabilityHandler.instance);
+      event.addCapability(BaubleBeltCapabilityHandler.IDENTIFIER, BaubleBeltCapabilityHandler.instance);
     }
   }
 
@@ -109,25 +171,32 @@ public class EventManager {
 
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public static void onDamage(LivingHurtEvent event) {
-    if (EffectManager.hasEffect(event.getEntityLiving(), EffectManager.effect_time_stop.getName())) {
+    EntityLivingBase entity = event.getEntityLiving();
+
+    if (EffectManager.hasEffect(entity, EffectManager.effect_time_stop.getName())) {
       event.setAmount(event.getAmount() * 0.1f);
     }
-    if (EffectManager.hasEffect(event.getEntityLiving(), EffectManager.effect_invulnerability.getName())) {
+    if (EffectManager.hasEffect(entity, EffectManager.effect_invulnerability.getName())) {
       event.setCanceled(true);
     }
-    if (event.getEntityLiving().getEntityData().hasKey(Constants.EFFECT_TAG)) {
-      NBTTagCompound tag = event.getEntityLiving().getEntityData().getCompoundTag(Constants.EFFECT_TAG);
+
+    NBTTagCompound data = entity.getEntityData();
+
+    World world = entity.getEntityWorld();
+
+    if (data.hasKey(Constants.EFFECT_TAG)) {
+      NBTTagCompound tag = data.getCompoundTag(Constants.EFFECT_TAG);
       if (tag.hasKey(EffectManager.effect_invulnerability.getName())) {
         event.setCanceled(true);
       }
     }
-    if (event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().getEntityWorld().isRemote) {
-      EntityPlayer player = ((EntityPlayer) event.getEntityLiving());
+    if (entity instanceof EntityPlayer && !world.isRemote) {
+      EntityPlayer player = ((EntityPlayer) entity);
       List<EntityPetalShell> shells = player.getEntityWorld().getEntitiesWithinAABB(EntityPetalShell.class,
           new AxisAlignedBB(player.posX - 0.5, player.posY, player.posZ - 0.5, player.posX + 0.5, player.posY + 2.0, player.posZ + 0.5));
       if (shells.size() > 0) {
         for (EntityPetalShell shell : shells) {
-          if (shell.getPlayerId().compareTo(player.getUniqueID()) == 0) {
+          if (shell.getPlayerId() == player.getUniqueID()) {
             if (shell.getDataManager().get(shell.getCharge()) > 0) {
               event.setAmount(0);
               event.setCanceled(true);
@@ -151,10 +220,10 @@ public class EventManager {
     }
     if (event.getSource().getTrueSource() instanceof EntityLivingBase) {
       if (event.getSource().getTrueSource().getEntityData().hasKey(Constants.GEAS_TAG)) {
-        EntityLivingBase entity = (EntityLivingBase) event.getSource().getTrueSource();
-        entity.attackEntityFrom(DamageSource.WITHER, event.getAmount() * 2.0f);
+        EntityLivingBase caster = (EntityLivingBase) event.getSource().getTrueSource();
+        caster.attackEntityFrom(DamageSource.WITHER, event.getAmount() * 2.0f);
         event.setAmount(0);
-        PacketHandler.sendToAllTracking(new MessageGeasRingFX(entity.posX, entity.posY + 1.0, entity.posZ), entity);
+        PacketHandler.sendToAllTracking(new MessageGeasRingFX(caster.posX, caster.posY + 1.0, caster.posZ), caster);
       }
     }
   }
@@ -164,15 +233,6 @@ public class EventManager {
     EffectManager.tickEffects(event.getEntityLiving());
     if (EffectManager.hasEffect(event.getEntityLiving(), EffectManager.effect_time_stop.getName())) {
       event.setCanceled(true);
-    }
-    if (event.getEntity().getEntityData().hasKey(Constants.GEAS_TAG) && !event.getEntity().getEntityWorld().isRemote) {
-      event.getEntity().getEntityData().setInteger(Constants.GEAS_TAG, event.getEntity().getEntityData().getInteger(Constants.GEAS_TAG) - 1);
-      if (event.getEntity().getEntityData().getInteger(Constants.GEAS_TAG) <= 0) {
-        event.getEntity().getEntityData().removeTag(Constants.GEAS_TAG);
-      }
-      PacketHandler.sendToAllTracking(
-          new MessageGeasFX(event.getEntity().posX, event.getEntity().posY + event.getEntity().getEyeHeight() + 0.75f, event.getEntity().posZ),
-          event.getEntity());
     }
     if (event.getEntity().getEntityData().hasKey(Constants.LIGHT_DRIFTER_TAG) && !event.getEntity().getEntityWorld().isRemote) {
       event.getEntity().getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_TAG) - 1);

@@ -1,4 +1,4 @@
-package epicsquid.roots.effect;
+package epicsquid.roots.potion;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
