@@ -9,6 +9,7 @@ import epicsquid.roots.capability.playerdata.PlayerDataCapabilityProvider;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityProvider;
 import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.entity.spell.EntityPetalShell;
+import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.baubles.pouch.BaubleBeltCapabilityHandler;
@@ -18,7 +19,9 @@ import epicsquid.roots.network.MessagePlayerGroveUpdate;
 import epicsquid.roots.network.fx.*;
 import epicsquid.roots.util.Constants;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -30,6 +33,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional;
@@ -37,7 +41,6 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.List;
@@ -157,15 +160,25 @@ public class EventManager {
         }
       }
     }
-    if (entity.getActivePotionEffect(ModPotions.geas) != null && trueSource != entity)  {
+    if (entity.getActivePotionEffect(ModPotions.geas) != null && event.getSource() != ModDamage.PSYCHIC_DAMAGE && trueSource != null && trueSource != entity)  {
       entity.removePotionEffect(ModPotions.geas);
     }
     if (trueSource instanceof EntityLivingBase) {
       EntityLivingBase trueLiving = (EntityLivingBase) trueSource;
       if (trueLiving.getActivePotionEffect(ModPotions.geas) != null) {
-        trueLiving.attackEntityFrom(DamageSource.WITHER, event.getAmount() * 2.0f);
+        trueLiving.attackEntityFrom(ModDamage.PSYCHIC_DAMAGE, 3);
         event.setAmount(0);
         PacketHandler.sendToAllTracking(new MessageGeasRingFX(trueLiving.posX, trueLiving.posY + 1.0, trueLiving.posZ), trueLiving);
+      }
+    }
+  }
+
+  @SubscribeEvent
+  public static void onEntityTarget (LivingSetAttackTargetEvent event) {
+    EntityLivingBase entity = event.getEntityLiving();
+    if (entity.getActivePotionEffect(ModPotions.geas) != null && entity instanceof EntityLiving) {
+      if (((EntityLiving) entity).getAttackTarget() != null) {
+        ((EntityLiving) entity).setAttackTarget(null);
       }
     }
   }
