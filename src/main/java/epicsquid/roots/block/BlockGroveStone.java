@@ -197,7 +197,8 @@ public class BlockGroveStone extends BlockBase {
         if (effectsCount <= 0) break;
 
         IBlockState s = world.getBlockState(p);
-        if (s.getMaterial() == Material.GRASS) {
+        // TODO: Improve this somehow
+        if (s.getMaterial() == Material.GRASS && world.isAirBlock(p.up().up())) {
           switch (random.nextInt(50)) {
             case 0:
               Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.ROSE, 3);
