@@ -10,6 +10,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Config;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,6 +57,7 @@ public class MossConfig {
     return mossyCobblestones;
   }
 
+  @Nullable
   public static IBlockState scrapeResult (IBlockState state) {
     Map<ItemStack, ItemStack> mossy = getMossyCobblestones();
 
@@ -70,6 +72,7 @@ public class MossConfig {
     return null;
   }
 
+  @Nullable
   public static IBlockState mossConversion (IBlockState state) {
     Map<ItemStack, ItemStack> mossy = getMossyCobblestones();
 
