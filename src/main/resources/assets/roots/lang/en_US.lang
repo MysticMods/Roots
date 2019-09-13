@@ -30,6 +30,7 @@ item.wildwood_chestplate.name=Wildwood Chestplate
 item.wildwood_leggings.name=Wildwood Leggings
 item.wildwood_boots.name=Wildwood Boots
 item.component_pouch.name=Component Pouch
+item.creative_pouch.name=Creative Component Pouch
 item.apothecary_pouch.name=Apothecary Pouch
 item.wildwood_door.name=Wildwood Door
 
@@ -76,6 +77,8 @@ roots.tooltip.trap_paper_health_divider= /
 roots.tooltip.pouch=Sneak-Right-Click or %s to open pouch.
 roots.tooltip.pouch2=Right-Click or %s to open pouch.
 roots.tooltip.refill=Automatically refilling herbs to full stacks from picked-up items. [Disable in config]
+roots.tooltip.creative_pouch1=Creative mode only.
+roots.tooltip.creative_pouch2=Contains an infinite number of every herb.
 
 roots.info.staff.slot_and_spell=Selected Slot (%d) has spell: %s
 roots.info.staff.no_slots=Your staff has no room for new spells!
