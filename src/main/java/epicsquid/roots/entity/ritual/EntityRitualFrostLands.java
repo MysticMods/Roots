@@ -5,12 +5,15 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.network.fx.MessageFrosLandsProgressFX;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.block.BlockFarmland;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -74,11 +77,24 @@ public class EntityRitualFrostLands extends EntityRitualBase {
       if (!positions.isEmpty()) {
         BlockPos choice = positions.get(rand.nextInt(positions.size()));
         IBlockState state = world.getBlockState(choice);
+
         if (state.getBlock() == Blocks.WATER) {
-          world.setBlockState(choice, Blocks.ICE.getDefaultState());
-          affectedPositions.add(choice);
+          if (state.getValue(BlockLiquid.LEVEL) == 0) {
+            world.setBlockState(choice, Blocks.ICE.getDefaultState());
+            affectedPositions.add(choice);
+          }
         } else if (state.getBlock() == Blocks.LAVA) {
-          world.setBlockState(choice, Blocks.OBSIDIAN.getDefaultState());
+          if (state.getValue(BlockLiquid.LEVEL) == 0) {
+            if (!world.isRemote) {
+              world.setBlockState(choice, Blocks.OBSIDIAN.getDefaultState());
+              //world.playSound(null, choice, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 1);
+            }
+          } else {
+            if (!world.isRemote) {
+              world.setBlockState(choice, Blocks.COBBLESTONE.getDefaultState());
+              //world.playSound(null, choice, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 1);
+            }
+          }
           affectedPositions.add(choice);
         }
       }
