@@ -2,7 +2,9 @@ package epicsquid.roots.spell;
 
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.spell.modules.SpellModule;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -17,9 +19,6 @@ import java.util.List;
 public class SpellGeas extends SpellBase {
   public static String spellName = "spell_geas";
   public static SpellGeas instance = new SpellGeas(spellName);
-
-  private int duration;
-  private PotionEffect geasEffect;
 
   public SpellGeas(String name) {
     super(name, TextFormatting.DARK_RED, 128f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f);
@@ -44,12 +43,17 @@ public class SpellGeas extends SpellBase {
       double y = player.posY + player.getEyeHeight() + player.getLookVec().y * 3.0 * (float) i;
       double z = player.posZ + player.getLookVec().z * 3.0 * (float) i;
       List<EntityLivingBase> entities = player.world
-          .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 2.0, y - 2.0, z - 2.0, x + 2.0, y + 2.0, z + 2.0));
+          .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 4.0, y - 4.0, z - 4.0, x + 4.0, y + 4.0, z + 4.0));
       for (EntityLivingBase e : entities) {
-        if (e != player && !player.world.isRemote) {
+        if (e != player && e.getActivePotionEffect(ModPotions.geas) == null) {
           foundTarget = true;
-          e.addPotionEffect(geasEffect);
-          break;
+          if (!player.world.isRemote) {
+            e.addPotionEffect(new PotionEffect(ModPotions.geas, 400));
+            if (e instanceof EntityLiving) {
+              ((EntityLiving) e).setAttackTarget(null);
+            }
+            break;
+          }
         }
       }
     }
