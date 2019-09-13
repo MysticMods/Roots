@@ -48,12 +48,15 @@ public class PowderInventoryUtil {
     ItemStack pouch = getPouch(player);
     if (pouch.isEmpty()) return 0.0;
 
+    // Hard-coding for creative pouch
+    if (pouch.getItem() == ModItems.creative_pouch) return 999;
+
     return ItemPouch.getHerbQuantity(pouch, herb);
   }
 
   public static void removePowder(EntityPlayer player, Herb herb, double amount) {
     ItemStack pouch = getPouch(player);
-    if (pouch.isEmpty()) return;
+    if (pouch.isEmpty() || pouch.getItem() == ModItems.creative_pouch) return;
 
     // TODO: Cost reduction is calculated here
     amount -= amount * ItemSylvanArmor.sylvanBonus(player);

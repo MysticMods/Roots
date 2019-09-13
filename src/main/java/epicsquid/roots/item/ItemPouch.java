@@ -39,6 +39,10 @@ public class ItemPouch extends ItemBase {
     return false;
   }
 
+  public boolean isCreative () {
+    return false;
+  }
+
   public static boolean hasHerb(@Nonnull ItemStack pouch, Herb herb) {
     return getHerbQuantity(pouch, herb) > 0;
   }
