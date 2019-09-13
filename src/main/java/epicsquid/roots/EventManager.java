@@ -160,9 +160,9 @@ public class EventManager {
         }
       }
     }
-    if (entity.getActivePotionEffect(ModPotions.geas) != null && event.getSource() != ModDamage.PSYCHIC_DAMAGE && trueSource != null && trueSource != entity)  {
+    /*if (entity.getActivePotionEffect(ModPotions.geas) != null && event.getSource() != ModDamage.PSYCHIC_DAMAGE && trueSource != null && trueSource != entity)  {
       entity.removePotionEffect(ModPotions.geas);
-    }
+    }*/
     if (trueSource instanceof EntityLivingBase) {
       EntityLivingBase trueLiving = (EntityLivingBase) trueSource;
       if (trueLiving.getActivePotionEffect(ModPotions.geas) != null) {
