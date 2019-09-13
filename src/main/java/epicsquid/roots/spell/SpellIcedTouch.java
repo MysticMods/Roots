@@ -7,6 +7,7 @@ import epicsquid.roots.network.fx.MessageIcedTouchFX;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -68,16 +69,26 @@ public class SpellIcedTouch extends SpellBase {
             world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 1);
           }
         } else if (state.getBlock() == Blocks.LAVA) {
-          didSpell = true;
-          if (!world.isRemote) {
-            world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState());
-            world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 1);
+          if (state.getValue(BlockLiquid.LEVEL) == 0) {
+            didSpell = true;
+            if (!world.isRemote) {
+              world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState());
+              world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 1);
+            }
+          } else {
+            didSpell = true;
+            if (!world.isRemote) {
+              world.setBlockState(pos, Blocks.COBBLESTONE.getDefaultState());
+              world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 1);
+            }
           }
         } else if (state.getBlock() == Blocks.WATER) {
-          didSpell = true;
-          if (!world.isRemote) {
-            world.setBlockState(pos, Blocks.ICE.getDefaultState());
-            world.playSound(null, pos, SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.PLAYERS, 0.3f, 1);
+          if (state.getValue(BlockLiquid.LEVEL) == 0) {
+            didSpell = true;
+            if (!world.isRemote) {
+              world.setBlockState(pos, Blocks.ICE.getDefaultState());
+              world.playSound(null, pos, SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.PLAYERS, 0.3f, 1);
+            }
           }
         } else if (world.isAirBlock(pos)) {
           IBlockState down = world.getBlockState(pos.down());
