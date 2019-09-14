@@ -34,6 +34,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
+import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional;
@@ -216,6 +217,13 @@ public class EventManager {
     }
     if (entity.getActivePotionEffect(ModPotions.geas) != null) {
       PacketHandler.sendToAllTracking(new MessageGeasFX(entity.posX, entity.posY + entity.getEyeHeight() + 0.75f, entity.posZ), entity);
+    }
+  }
+
+  @SubscribeEvent
+  public static void onLooting (LootingLevelEvent event) {
+    if (event.getDamageSource().damageType.equals(ModDamage.FEY_FIRE)) {
+      event.setLootingLevel(event.getLootingLevel()+2);
     }
   }
 }

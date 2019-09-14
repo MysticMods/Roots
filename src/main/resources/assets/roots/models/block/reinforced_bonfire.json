@@ -1,0 +1,7 @@
+{
+    "parent": "roots:block/bonfire",
+	"textures": {
+		"particle": "roots:blocks/reinforced_bonfire",
+		"texture": "roots:blocks/reinforced_bonfire"
+	}
+}

@@ -905,6 +905,15 @@ public class ModRecipes {
             new OreIngredient("stone"),
             new OreIngredient("stone")));
 
+    addCraftingRecipe("runed_obsidian",
+        new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(ModBlocks.runed_obsidian), 4), 1).addIngredients(
+            new ItemStack(ModItems.runic_dust),
+            new OreIngredient("obsidian"),
+            new OreIngredient("runestone"),
+            new OreIngredient("obsidian"),
+            new OreIngredient("runestone")));
+
+
     addCraftingRecipe("fairy_grove_stone",
         new FeyCraftingRecipe(new ItemStack(ModBlocks.fairy_grove_stone)).addIngredients(
             new ItemStack(ModBlocks.grove_stone),
@@ -912,6 +921,22 @@ public class ModRecipes {
             new ItemStack(ModItems.pereskia),
             new ItemStack(ModItems.pereskia_bulb),
             new ItemStack(ModItems.petals)));
+
+    addCraftingRecipe("fairy_house_red",
+        new FeyCraftingRecipe(new ItemStack(ModBlocks.fairy_house_red)).addIngredients(
+            new ItemStack(ModItems.pereskia),
+            new ItemStack(Item.getItemFromBlock(Blocks.RED_MUSHROOM)),
+            new ItemStack(Item.getItemFromBlock(Blocks.RED_MUSHROOM)),
+            new ItemStack(Item.getItemFromBlock(Blocks.RED_MUSHROOM)),
+            new ItemStack(Item.getItemFromBlock(Blocks.RED_MUSHROOM))));
+
+    addCraftingRecipe("fairy_house_brown",
+        new FeyCraftingRecipe(new ItemStack(ModBlocks.fairy_house_brown)).addIngredients(
+            new ItemStack(ModItems.pereskia),
+            new ItemStack(Item.getItemFromBlock(Blocks.BROWN_MUSHROOM)),
+            new ItemStack(Item.getItemFromBlock(Blocks.BROWN_MUSHROOM)),
+            new ItemStack(Item.getItemFromBlock(Blocks.BROWN_MUSHROOM)),
+            new ItemStack(Item.getItemFromBlock(Blocks.BROWN_MUSHROOM))));
 
     addCraftingRecipe("wildwood_helmet", new FeyCraftingRecipe(new ItemStack(ModItems.wildwood_helmet), 1).addIngredients(
         new ItemStack(Items.IRON_HELMET),
