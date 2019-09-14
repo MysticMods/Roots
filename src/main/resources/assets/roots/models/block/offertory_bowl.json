@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench",
+	"parent": "block/block",
 	"textures": {
 		"0": "roots:blocks/runestone",
 		"particle": "roots:blocks/runestone"
@@ -362,7 +363,8 @@
 		},
 		"gui": {
 			"rotation": [30, 225, 0],
-			"translation": [0, 3, 0]
+			"translation": [0, 3, 0],
+			"scale": [0.8, 0.8, 0.8]
 		},
 		"fixed": {
 			"scale": [0.5, 0.5, 0.5]

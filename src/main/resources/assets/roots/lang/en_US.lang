@@ -1,6 +1,7 @@
 itemGroup.roots=Roots
 
 entity.Villager.druid=Druid
+entity.entity_fairy.name=Fairy
 
 item.assorted_seeds.name=Mixed Seeds
 item.cooked_seeds.name=Toasted Seeds

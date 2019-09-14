@@ -1,4 +1,4 @@
-package epicsquid.roots.model;
+package epicsquid.roots.model.armor;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
