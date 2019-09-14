@@ -31,7 +31,7 @@ public class ModBlocks {
   public static Block grove_stone, fey_crafter;
   public static Block fairy_grove_stone;
 
-  public static Block fey_fire, offertory_bowl, fairy_house_red, fairy_house_brown;
+  public static Block fey_fire, offertory_bowl, fairy_house_red, fairy_house_brown, fairy_house_baffle;
 
   public static BlockCropBase moonglow, pereskia, wildroot, spirit_herb, wildewheet, cloud_berry, infernal_bulb, dewgonia, stalicripe;
 
@@ -160,11 +160,11 @@ public class ModBlocks {
     event.addBlock(grove_stone = new BlockGroveStone(Material.ROCK, SoundType.STONE, 2.5f, "grove_stone")).setCreativeTab(Roots.tab);
     event.addBlock(fairy_grove_stone = new BlockFairyGroveStone(Material.ROCK, SoundType.STONE, 2.5f, "fairy_grove_stone")).setCreativeTab(Roots.tab);
 
-    // Wild Crafter
     event.addBlock(fey_crafter = new BlockFeyCrafter(Material.WOOD, SoundType.WOOD, 2.5f, "fey_crafter", TileEntityFeyCrafter.class)).setCreativeTab(Roots.tab);
 
     event.addBlock(fairy_house_brown = new BlockMushroomHouse(Material.PLANTS, SoundType.WOOD, 1.4f, "fairy_house_brown")).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(fairy_house_red = new BlockMushroomHouse(Material.PLANTS, SoundType.WOOD, 1.4f, "fairy_house_red")).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(fairy_house_baffle = new BlockMushroomHouse(Material.PLANTS, SoundType.WOOD, 1.4f, "fairy_house_baffle")).setCreativeTab(Roots.tab).setLightOpacity(0);
 
     event.addBlock(fey_light = new BlockFeyLight(Material.SNOW, SoundType.SNOW, 0.0f, "fey_light")).setCreativeTab(Roots.tab);
     event.addBlock(fey_fire = new BlockWildFire("fey_fire")).setCreativeTab(Roots.tab);

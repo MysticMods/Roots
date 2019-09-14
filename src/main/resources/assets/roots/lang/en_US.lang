@@ -72,8 +72,9 @@ tile.grove_stone.name=Grove Stone
 tile.fairy_grove_stone.name=Fairy Grove Stone
 tile.fey_crafter.name=Fey Crafter
 tile.fey_light.name=Fey Light
-tile.fairy_house_brown.name=Fairy House (Brown)
-tile.fairy_house_red.name=Fairy House (Red)
+tile.fairy_house_brown.name=Fairy House
+tile.fairy_house_red.name=Fairy House
+tile.fairy_house_baffle.name=Fairy House
 
 roots.tooltip.petaldust.notag=This Spell Dust has no NBT data! It is potentially prone to errors and should not be used!
 roots.tooltip.staff.notag=This Staff has no NBT data! It is potentially prone to errors and should not be used!
