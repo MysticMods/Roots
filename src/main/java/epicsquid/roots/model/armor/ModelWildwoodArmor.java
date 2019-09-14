@@ -1,8 +1,7 @@
-package epicsquid.roots.model;
+package epicsquid.roots.model.armor;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import vazkii.botania.client.model.armor.ModelArmor;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;

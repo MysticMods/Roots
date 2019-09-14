@@ -132,6 +132,7 @@ public class BlockWildFire extends BlockFire implements IBlock, IModeledObject, 
     worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn) + rand.nextInt(10));
   }
 
+  @Override
   @SideOnly(Side.CLIENT)
   public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     if (rand.nextInt(24) == 0) {

@@ -1,4 +1,4 @@
-package epicsquid.roots.model;
+package epicsquid.roots.model.armor;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("WeakerAccess")
 public class ModelSylvanArmor extends ModelArmorBase {
   public static Map<EntityEquipmentSlot, ModelSylvanArmor> SINGLETONS = new HashMap<>();
 

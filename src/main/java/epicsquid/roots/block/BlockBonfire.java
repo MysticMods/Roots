@@ -101,6 +101,7 @@ public class BlockBonfire extends BlockTEBase {
     return state.getValue(BURNING) ? 1 : 0;
   }
 
+  @Override
   @SideOnly(Side.CLIENT)
   public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     if (stateIn.getValue(BURNING)) {
