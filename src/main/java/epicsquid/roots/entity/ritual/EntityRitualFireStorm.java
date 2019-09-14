@@ -43,12 +43,12 @@ public class EntityRitualFireStorm extends EntityRitualBase {
         }
       }
     }
-    if (this.ticksExisted % 10 == 0) {
+    if (this.ticksExisted % 2 == 0) {
       List<EntityFlare> projectiles = world
-          .getEntitiesWithinAABB(EntityFlare.class, new AxisAlignedBB(posX - 15.5f, posY - 15.5, posZ - 15.5, posX + 15.5, posY + 15.5, posZ + 15.5));
-      if (projectiles.size() < 20 && !world.isRemote) {
+          .getEntitiesWithinAABB(EntityFlare.class, new AxisAlignedBB(posX - 10.5f, posY - 10.5, posZ - 10.5, posX + 10.5, posY + 10.5, posZ + 10.5));
+      if (projectiles.size() < 40 && !world.isRemote) {
         EntityFlare flare = new EntityFlare(world);
-        flare.initCustom(posX + 21.0f * (rand.nextFloat() - 0.5f), posY + 43.0f, posZ + 21.0f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f),
+        flare.initCustom(posX + 16.0f * (rand.nextFloat() - 0.5f), posY + 43.0f, posZ + 16.0f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f),
             -0.5f - rand.nextFloat() * 0.5f, 0.125f * (rand.nextFloat() - 0.5f), 4.0f + 8.0f * rand.nextFloat());
         world.spawnEntity(flare);
       }

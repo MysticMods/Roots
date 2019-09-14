@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.UUID;
 
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.particle.ParticleUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -91,7 +92,7 @@ public class EntityFlare extends Entity {
           .getEntitiesWithinRadius(getEntityWorld(), EntityLivingBase.class, this.getPosition(), (float) (getDataManager().get(value) * 0.125), (float) (getDataManager().get(value) * 0.125), (float) (getDataManager().get(value) * 0.125));
       this.attackWithFire(entities);
       if (world.isAirBlock(getPosition().up())) {
-        world.setBlockState(getPosition().up(), Blocks.FIRE.getDefaultState());
+        world.setBlockState(getPosition().up(), ModBlocks.fey_fire.getDefaultState());
       }
       this.setDead();
     }
@@ -121,9 +122,11 @@ public class EntityFlare extends Entity {
   private void attackWithFire(List<EntityLivingBase> entities) {
     for (EntityLivingBase target : entities) {
       if (target instanceof EntityPlayer) continue;
-      DamageSource source = DamageSource.IN_FIRE;
-      target.setFire(4);
-      target.attackEntityFrom(source, getDataManager().get(value));
+      DamageSource source = ModDamage.wildfireDamage(target.world);
+      if (source == null) {
+        continue;
+      }
+      target.attackEntityFrom(source, 4f);
       target.knockBack(this, 0.5f, -motionX, -motionZ);
     }
   }

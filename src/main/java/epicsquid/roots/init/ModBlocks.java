@@ -6,6 +6,7 @@ import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.CustomPlantType;
 import epicsquid.roots.block.*;
+import epicsquid.roots.block.runes.BlockReinforcedBonfire;
 import epicsquid.roots.block.runes.BlockTrample;
 import epicsquid.roots.block.runes.BlockWildwoodRune;
 import epicsquid.roots.tileentity.*;
@@ -25,10 +26,12 @@ import javax.annotation.Nonnull;
 public class ModBlocks {
 
   // All block
-  public static Block mortar, bonfire, imbuer, structure_marker, offertory_plate, unending_bowl;
+  public static Block mortar, bonfire, imbuer, structure_marker, offertory_plate, unending_bowl, reinforced_bonfire;
   public static Block incense_burner, wildwood_rune;
   public static Block grove_stone, fey_crafter;
   public static Block fairy_grove_stone;
+
+  public static Block fey_fire, offertory_bowl, fairy_house_red, fairy_house_brown;
 
   public static BlockCropBase moonglow, pereskia, wildroot, spirit_herb, wildewheet, cloud_berry, infernal_bulb, dewgonia, stalicripe;
 
@@ -44,6 +47,8 @@ public class ModBlocks {
   public static Block runestone_slab, runestone_double_slab, runestone_stairs, runestone_wall, runestone_button, runestone_pressure_plate;
   public static Block runestone_brick_slab, runestone_brick_double_slab, runestone_brick_stairs, runestone_brick_wall, runestone_brick_button, runestone_brick_pressure_plate;
   public static Block runestone_brick_alt_slab, runestone_brick_alt_double_slab, runestone_brick_alt_stairs, runestone_brick_alt_wall, runestone_brick_alt_button, runestone_brick_alt_pressure_plate;
+
+  public static Block runed_obsidian, chiseled_runed_obsidian;
 
   // Wildwood
   public static Block wildwood_slab, wildwood_double_slab, wildwood_stairs, wildwood_wall;
@@ -91,6 +96,8 @@ public class ModBlocks {
     event.addBlock(runestone_brick = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_brick").setModelCustom(true)).setCreativeTab(Roots.tab);
     event.addBlock(runestone_brick_alt = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_brick_alt").setModelCustom(true)).setCreativeTab(Roots.tab);
     event.addBlock(chiseled_runestone = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "chiseled_runestone").setModelCustom(true)).setCreativeTab(Roots.tab);
+    event.addBlock(runed_obsidian = new BlockRunedObsidian(Material.ROCK, SoundType.METAL, 8.5f, "runed_obsidian").setModelCustom(true)).setCreativeTab(Roots.tab);
+    event.addBlock(chiseled_runed_obsidian = new BlockRunedObsidian(Material.ROCK, SoundType.METAL, 8.5f, "chiseled_runed_obsidian").setModelCustom(true)).setCreativeTab(Roots.tab);
     event.addBlock(trample_rune = new BlockTrample(Material.WATER, SoundType.METAL, 1.4f, "runestone_trample").setModelCustom(true)).setCreativeTab(Roots.tab);
 
     event.addBlock(wildwood_leaves = new BlockLeavesBase(0.8f, "wildwood_leaves", () -> new ItemStack(ModItems.wildroot), 50).setFlammable(true).setModelCustom(true).setCreativeTab(Roots.tab));
@@ -139,8 +146,10 @@ public class ModBlocks {
     event.addBlock(structure_marker = new BlockStructureMarker());
     event.addBlock(mortar = new BlockMortar(Material.ROCK, SoundType.STONE, 1.4f, "mortar", TileEntityMortar.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(bonfire = new BlockBonfire(Material.WOOD, SoundType.WOOD, 1.4f, "bonfire", TileEntityBonfire.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(reinforced_bonfire = new BlockReinforcedBonfire(Material.ROCK, SoundType.STONE, 8.4f, "reinforced_bonfire", TileEntityBonfire.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(imbuer = new BlockImbuer(Material.WOOD, SoundType.WOOD, 1.4f, "imbuer", TileEntityImbuer.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(offertory_plate = new BlockOffertoryPlate(Material.ROCK, SoundType.STONE, 1.4f, "offertory_plate", TileEntityOffertoryPlate.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(offertory_bowl = new BlockOffertoryBowl(Material.ROCK, SoundType.STONE, 1.4f, "offertory_bowl")).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(unending_bowl = new BlockUnendingBowl(Material.ROCK, SoundType.STONE, 1.4f, "unending_bowl", TileEntityUnendingBowl.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(incense_burner = new BlockIncenseBurner(Material.ROCK, SoundType.STONE, 1.4f, "incense_burner", TileEntityIncenseBurner.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
 
@@ -154,7 +163,11 @@ public class ModBlocks {
     // Wild Crafter
     event.addBlock(fey_crafter = new BlockFeyCrafter(Material.WOOD, SoundType.WOOD, 2.5f, "fey_crafter", TileEntityFeyCrafter.class)).setCreativeTab(Roots.tab);
 
+    event.addBlock(fairy_house_brown = new BlockMushroomHouse(Material.PLANTS, SoundType.WOOD, 1.4f, "fairy_house_brown")).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(fairy_house_red = new BlockMushroomHouse(Material.PLANTS, SoundType.WOOD, 1.4f, "fairy_house_red")).setCreativeTab(Roots.tab).setLightOpacity(0);
+
     event.addBlock(fey_light = new BlockFeyLight(Material.SNOW, SoundType.SNOW, 0.0f, "fey_light")).setCreativeTab(Roots.tab);
+    event.addBlock(fey_fire = new BlockWildFire("fey_fire")).setCreativeTab(Roots.tab);
   }
 
   private static Variants variants(RegisterContentEvent event, Block base, String name, SoundType sound, Material material) {

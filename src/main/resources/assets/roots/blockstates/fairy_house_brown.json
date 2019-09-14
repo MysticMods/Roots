@@ -1,0 +1,10 @@
+{
+  "forge_marker": 1,
+  "variants":{
+        "normal": {"model":  "roots:fairy_house_brown"},
+        "occupied": {
+            "false":  { "model": "roots:fairy_house_brown" },
+            "true": { "model": "roots:fairy_house_brown"}
+        }
+    }
+}

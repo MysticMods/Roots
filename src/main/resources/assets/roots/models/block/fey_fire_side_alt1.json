@@ -1,0 +1,7 @@
+{
+    "parent": "roots:block/fey_fire_side_alt",
+    "textures": {
+        "particle": "roots:blocks/fey_fire_layer_1",
+        "fire": "roots:blocks/fey_fire_layer_1"
+    }
+}

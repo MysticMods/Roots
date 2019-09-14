@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "RR",
+    "RR"
+    ],
+  "key": {
+    "R": [
+      {
+        "item": "roots:runed_obsidian"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:chiseled_runed_obsidian",
+    "data": 0,
+    "count": 4
+  }
+}
