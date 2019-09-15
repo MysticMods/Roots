@@ -23,16 +23,18 @@ import net.minecraftforge.fml.common.event.*;
 
 public class CommonProxy {
   public void preInit(FMLPreInitializationEvent event) {
-  }
-
-  public void init(FMLInitializationEvent event) {
+    ModuleRegistry.init();
+    SpellRegistry.preInit();
     HerbRegistry.init();
     RitualRegistry.init();
-    ModuleRegistry.init();
-    SpellRegistry.init();
     OfferingUtil.init();
     EffectManager.init();
     RuneRegistry.init();
+  }
+
+  public void init(FMLInitializationEvent event) {
+    SpellRegistry.init();
+    ConfigKeys.init();
     RunicCarvingRecipes.initRecipes();
     if (Loader.isModLoaded("jeresources")) {
       JERIntegration.init();
@@ -46,7 +48,6 @@ public class CommonProxy {
     if (Loader.isModLoaded("consecration")) {
       Consecration.init();
     }
-    ConfigKeys.init();
     //MapGenStructureIO.registerStructureComponent(ComponentDruidHut.class, Roots.MODID + ":" + "druidhut");
     //VillagerRegistry.instance().registerVillageCreationHandler(new ComponentDruidHut.CreationHandler());
   }

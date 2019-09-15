@@ -23,7 +23,10 @@ public class SpellSecondWind extends SpellBase {
   public SpellSecondWind(String name) {
     super(name, TextFormatting.BLUE, 64f / 255f, 64f / 255f, 64f / 255f, 192f / 255f, 32f / 255f, 255f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1);
+  }
 
+  @Override
+  public void init () {
     addIngredients(
         new ItemStack(ModItems.dewgonia),
         new OreIngredient("sugarcane"),
@@ -46,8 +49,5 @@ public class SpellSecondWind extends SpellBase {
   public void finalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
-
-    SpellCost cost = properties.getProperty(PROP_COST_1);
-    addCost(cost.getHerb(), cost.getCost());
   }
 }

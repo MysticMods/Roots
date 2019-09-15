@@ -34,7 +34,10 @@ public class SpellSenseAnimals extends SpellBase {
   public SpellSenseAnimals(String name) {
     super(name, TextFormatting.WHITE, 255f / 255f, 255f / 255f, 255f / 255f, 10f / 255f, 196f / 255f, 10f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_DURATION);
+  }
 
+  @Override
+  public void init () {
     addIngredients(
         new OreIngredient("cropCarrot"),
         new ItemStack(Blocks.RED_FLOWER),
@@ -57,9 +60,6 @@ public class SpellSenseAnimals extends SpellBase {
   public void finalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
-
-    SpellCost cost = properties.getProperty(PROP_COST_1);
-    addCost(cost.getHerb(), cost.getCost());
     this.duration = properties.getProperty(PROP_DURATION);
     this.radius_x = properties.getProperty(PROP_RADIUS_X);
     this.radius_y = properties.getProperty(PROP_RADIUS_Y);

@@ -20,4 +20,9 @@ public class FakeSpellRunicDust extends SpellBase {
   public void finalise() {
 
   }
+
+  @Override
+  public void init () {
+
+  }
 }

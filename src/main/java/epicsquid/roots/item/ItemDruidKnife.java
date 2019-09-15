@@ -49,6 +49,7 @@ public class ItemDruidKnife extends ItemKnifeBase {
         if (result != null) {
           if (!world.isRemote) {
             world.setBlockState(pos, result);
+            world.scheduleBlockUpdate(pos, result.getBlock(), 1, result.getBlock().tickRate(world));
             ItemUtil.spawnItem(world, player.getPosition().add(0, 1, 0), new ItemStack(ModItems.terra_moss));
             if (!player.capabilities.isCreativeMode) {
               player.getHeldItem(hand).damageItem(1, player);

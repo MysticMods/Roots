@@ -35,7 +35,10 @@ public class SpellGrowthInfusion extends SpellBase {
   public SpellGrowthInfusion(String name) {
     super(name, TextFormatting.YELLOW, 48f / 255f, 255f / 255f, 48f / 255f, 192f / 255f, 255f / 255f, 192f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_TICK_COUNT);
+  }
 
+  @Override
+  public void init () {
     addIngredients(
         new OreIngredient("treeSapling"),
         new OreIngredient("treeSapling"),
@@ -70,10 +73,6 @@ public class SpellGrowthInfusion extends SpellBase {
   public void finalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
-
-    SpellCost cost = properties.getProperty(PROP_COST_1);
-    addCost(cost.getHerb(), cost.getCost());
-
     this.tickCount = properties.getProperty(PROP_TICK_COUNT);
   }
 }

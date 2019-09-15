@@ -40,8 +40,16 @@ public class SpellIcedTouch extends SpellBase {
 
   public SpellIcedTouch(String name) {
     super(name, TextFormatting.DARK_AQUA, 22f / 255f, 142f / 255f, 255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_TOUCH_DURATION);
+  }
 
-    addIngredients(new ItemStack(ModItems.dewgonia), new ItemStack(ModItems.bark_birch), new ItemStack(Items.SNOWBALL), new ItemStack(ModItems.bark_birch),
+  @Override
+  public void init () {
+    addIngredients(
+        new ItemStack(ModItems.dewgonia),
+        new ItemStack(ModItems.bark_birch),
+        new ItemStack(Items.SNOWBALL),
+        new ItemStack(ModItems.bark_birch),
         new ItemStack(Items.SNOWBALL));
 
     acceptModules(ModuleRegistry.module_touch);
@@ -113,10 +121,6 @@ public class SpellIcedTouch extends SpellBase {
   public void finalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
-
-    SpellCost cost = properties.getProperty(PROP_COST_1);
-    addCost(cost.getHerb(), cost.getCost());
-
     this.touchDuration = properties.getProperty(PROP_TOUCH_DURATION);
   }
 

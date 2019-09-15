@@ -10,6 +10,8 @@ import net.minecraftforge.fml.common.eventhandler.GenericEvent;
 import net.minecraftforge.fml.common.eventhandler.IContextSetter;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import java.util.function.Supplier;
+
 /**
  * Subscribe to this event if you want to add your own herbs
  */
@@ -44,7 +46,7 @@ public class RegisterHerbEvent extends GenericEvent<Herb> implements IContextSet
   /**
    * Register and item as a herb. Will be automatically wrapped for registering.
    */
-  public void register(@Nonnull Item item, String registryName) {
+  public void register(@Nonnull Supplier<Item> item, String registryName) {
     registry.register(new Herb(item, new ResourceLocation(Roots.MODID, registryName)));
   }
 }
