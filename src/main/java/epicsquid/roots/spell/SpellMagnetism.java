@@ -30,7 +30,10 @@ public class SpellMagnetism extends SpellBase {
   public SpellMagnetism(String name) {
     super(name, TextFormatting.DARK_GRAY, 255f / 255f, 130f / 255f, 130f / 255f, 130f / 255f, 130f / 255f, 255f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
+  }
 
+  @Override
+  public void init () {
     addIngredients(
         new OreIngredient("ingotIron"),
         new OreIngredient("dustRedstone"),
@@ -54,10 +57,6 @@ public class SpellMagnetism extends SpellBase {
   public void finalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
-
-    SpellCost cost = properties.getProperty(PROP_COST_1);
-    addCost(cost.getHerb(), cost.getCost());
-
     this.radius_x = properties.getProperty(PROP_RADIUS_X);
     this.radius_y = properties.getProperty(PROP_RADIUS_Y);
     this.radius_z = properties.getProperty(PROP_RADIUS_Z);

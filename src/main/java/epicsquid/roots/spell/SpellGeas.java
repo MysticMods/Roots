@@ -31,7 +31,10 @@ public class SpellGeas extends SpellBase {
   public SpellGeas(String name) {
     super(name, TextFormatting.DARK_RED, 128f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DURATION);
+  }
 
+  @Override
+  public void init () {
     addIngredients(
         new ItemStack(Items.ROTTEN_FLESH),
         new ItemStack(ModItems.wildewheet),
@@ -70,10 +73,6 @@ public class SpellGeas extends SpellBase {
   public void finalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
-
-    SpellCost cost = properties.getProperty(PROP_COST_1);
-    addCost(cost.getHerb(), cost.getCost());
-
     this.duration = properties.getProperty(PROP_DURATION);
   }
 }

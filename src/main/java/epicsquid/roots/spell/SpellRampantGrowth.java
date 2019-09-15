@@ -38,7 +38,10 @@ public class SpellRampantGrowth extends SpellBase {
   public SpellRampantGrowth(String name) {
     super(name, TextFormatting.DARK_AQUA, 224f / 255f, 135f / 255f, 40f / 255f, 46f / 255f, 94f / 255f, 93f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_TICKS, PROP_ADDITIONAL_COUNT, PROP_COUNT);
+  }
 
+  @Override
+  public void init () {
     addIngredients(
         new ItemStack(Blocks.SAPLING, 1, 5),
         new ItemStack(Items.GOLDEN_APPLE),
@@ -71,12 +74,6 @@ public class SpellRampantGrowth extends SpellBase {
   public void finalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
-
-    SpellCost cost = properties.getProperty(PROP_COST_1);
-    addCost(cost.getHerb(), cost.getCost());
-    cost = properties.getProperty(PROP_COST_2);
-    addCost(cost.getHerb(), cost.getCost());
-
     this.radius_x = properties.getProperty(PROP_RADIUS_X);
     this.radius_y = properties.getProperty(PROP_RADIUS_Y);
     this.radius_z = properties.getProperty(PROP_RADIUS_Z);

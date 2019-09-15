@@ -8,6 +8,7 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.PowderInventoryUtil;
+import epicsquid.roots.util.types.Property;
 import epicsquid.roots.util.types.PropertyTable;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.client.resources.I18n;
@@ -27,6 +28,8 @@ import java.util.stream.Collectors;
 
 public abstract class SpellBase {
   protected PropertyTable properties = new PropertyTable();
+
+  private boolean finalised = false;
 
   private float red1, green1, blue1;
   private float red2, green2, blue2;
@@ -54,6 +57,8 @@ public abstract class SpellBase {
     this.blue2 = b2;
     this.textColor = textColor;
   }
+
+  public abstract void init ();
 
   public boolean isDisabled() {
     return disabled;
@@ -128,10 +133,12 @@ public abstract class SpellBase {
   public void addToolTip(List<String> tooltip) {
     String prefix = "roots.spell." + name;
     tooltip.add("" + textColor + TextFormatting.BOLD + I18n.format(prefix + ".name") + TextFormatting.RESET);
-    for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
-      Herb herb = entry.getKey();
-      String d = String.format("%.4f", entry.getValue());
-      tooltip.add(I18n.format(herb.getItem().getTranslationKey() + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
+    if (finalised()) {
+      for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
+        Herb herb = entry.getKey();
+        String d = String.format("%.4f", entry.getValue());
+        tooltip.add(I18n.format(herb.getItem().getTranslationKey() + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
+      }
     }
   }
 
@@ -153,6 +160,10 @@ public abstract class SpellBase {
     }
 
     return moduleItems;
+  }
+
+  public SpellBase addCost (SpellCost cost) {
+    return addCost(cost.getHerb(), cost.getCost());
   }
 
   public SpellBase addCost(Herb herb, double amount) {
@@ -233,6 +244,27 @@ public abstract class SpellBase {
   }
 
   public abstract void finalise ();
+
+  @SuppressWarnings("unchecked")
+  public void finaliseCosts () {
+    for (Map.Entry<String, Property<?>> entry : getProperties()) {
+      if (!entry.getKey().startsWith("cost_")) {
+        continue;
+      }
+
+      Property<SpellCost> prop = (Property<SpellCost>) entry.getValue();
+      SpellCost cost = properties.getProperty(prop);
+
+      if (cost != null) {
+        addCost(cost);
+      }
+    }
+    this.finalised = true;
+  }
+
+  public boolean finalised () {
+    return finalised;
+  }
 
   public static class SpellCost {
     private String herb;

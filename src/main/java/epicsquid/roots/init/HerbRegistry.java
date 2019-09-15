@@ -38,17 +38,17 @@ public class HerbRegistry {
   // Register all herbs
   @SubscribeEvent
   public static void registerHerbs(@Nonnull RegisterHerbEvent event) {
-    event.register(ModItems.spirit_herb, "spirit_herb");
-    event.register(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom), "baffle_cap");
-    event.register(ModItems.moonglow_leaf, "moonglow_leaf");
-    event.register(ModItems.pereskia, "pereskia");
-    event.register(ModItems.terra_moss, "terra_moss");
-    event.register(ModItems.wildroot, "wildroot");
-    event.register(ModItems.wildewheet, "wildewheet");
-    event.register(ModItems.infernal_bulb, "infernal_bulb");
-    event.register(ModItems.dewgonia, "dewgonia");
-    event.register(ModItems.stalicripe, "stalicripe");
-    event.register(ModItems.cloud_berry, "cloud_berry");
+    event.register(() -> ModItems.spirit_herb, "spirit_herb");
+    event.register(() -> Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom), "baffle_cap");
+    event.register(() -> ModItems.moonglow_leaf, "moonglow_leaf");
+    event.register(() -> ModItems.pereskia, "pereskia");
+    event.register(() -> ModItems.terra_moss, "terra_moss");
+    event.register(() -> ModItems.wildroot, "wildroot");
+    event.register(() -> ModItems.wildewheet, "wildewheet");
+    event.register(() -> ModItems.infernal_bulb, "infernal_bulb");
+    event.register(() -> ModItems.dewgonia, "dewgonia");
+    event.register(() -> ModItems.stalicripe, "stalicripe");
+    event.register(() -> ModItems.cloud_berry, "cloud_berry");
 
     ModRecipes.afterHerbRegisterInit();
   }

@@ -29,7 +29,10 @@ public class SpellPetalShell extends SpellBase {
   public SpellPetalShell(String name) {
     super(name, TextFormatting.LIGHT_PURPLE, 255f / 255f, 192f / 255f, 240f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_MAXIMUM);
+  }
 
+  @Override
+  public void init () {
     addIngredients(
         new ItemStack(Items.MELON),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
@@ -67,10 +70,6 @@ public class SpellPetalShell extends SpellBase {
   public void finalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
-
-    SpellCost cost = properties.getProperty(PROP_COST_1);
-    addCost(cost.getHerb(), cost.getCost());
-
     this.maxShells = properties.getProperty(PROP_MAXIMUM);
   }
 }

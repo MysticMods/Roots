@@ -1,8 +1,10 @@
 package epicsquid.roots.util.types;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
-public class PropertyTable {
+public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
   private final HashMap<Property<?>, Object> map = new HashMap<>();
   private final HashMap<String, Property<?>> reverseMap = new HashMap<>();
 
@@ -40,6 +42,11 @@ public class PropertyTable {
 
   public boolean hasProperty (Property<?> property) {
     return map.containsKey(property);
+  }
+
+  @Override
+  public Iterator<Map.Entry<String, Property<?>>> iterator() {
+    return reverseMap.entrySet().iterator();
   }
 }
 

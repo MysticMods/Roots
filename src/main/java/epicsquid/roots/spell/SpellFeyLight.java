@@ -30,7 +30,10 @@ public class SpellFeyLight extends SpellBase {
   public SpellFeyLight(String name) {
     super(name, TextFormatting.LIGHT_PURPLE, 247f / 255f, 246 / 255f, 210f / 255f, 227f / 255f, 81f / 255f, 244f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1);
+  }
 
+  @Override
+  public void init () {
     addIngredients(
         new ItemStack(ModItems.cloud_berry),
         new OreFallbackIngredient("dustGold", "gunpowder"),
@@ -61,9 +64,6 @@ public class SpellFeyLight extends SpellBase {
   public void finalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
-
-    SpellCost cost = properties.getProperty(PROP_COST_1);
-    addCost(cost.getHerb(), cost.getCost());
   }
 
   @Nullable

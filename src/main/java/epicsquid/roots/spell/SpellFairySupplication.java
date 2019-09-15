@@ -30,7 +30,10 @@ public class SpellFairySupplication extends SpellBase {
   public SpellFairySupplication(String name) {
     super(name, TextFormatting.LIGHT_PURPLE, 66f / 255f, 40f / 255f, 7f / 255f, 218f / 255f, 106f / 255f, 24f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2);
+  }
 
+  @Override
+  public void init () {
     addIngredients(
         new OreIngredient("doorWood"),
         new ItemStack(ModBlocks.chiseled_runestone),
@@ -79,10 +82,5 @@ public class SpellFairySupplication extends SpellBase {
   public void finalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
-
-    SpellCost cost = properties.getProperty(PROP_COST_1);
-    addCost(cost.getHerb(), cost.getCost());
-    cost = properties.getProperty(PROP_COST_2);
-    addCost(cost.getHerb(), cost.getCost());
   }
 }

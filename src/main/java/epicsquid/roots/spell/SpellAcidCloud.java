@@ -44,7 +44,10 @@ public class SpellAcidCloud extends SpellBase {
   public SpellAcidCloud(String name) {
     super(name, TextFormatting.DARK_GREEN, 80f / 255f, 160f / 255f, 40f / 255f, 64f / 255f, 96f / 255f, 32f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_POISON_DURATION, PROP_FIRE_DURATION, PROP_POISON_AMPLIFICATION);
+  }
 
+  @Override
+  public void init () {
     addIngredients(
         new ItemStack(Items.SPIDER_EYE),
         new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom)),
@@ -87,8 +90,5 @@ public class SpellAcidCloud extends SpellBase {
     this.poisonAmplification = properties.getProperty(PROP_POISON_AMPLIFICATION);
     this.poisonDuration = properties.getProperty(PROP_POISON_DURATION);
     this.fireDuration = properties.getProperty(PROP_FIRE_DURATION);
-
-    SpellCost cost = properties.getProperty(PROP_COST_1);
-    addCost(cost.getHerb(), cost.getCost());
   }
 }
