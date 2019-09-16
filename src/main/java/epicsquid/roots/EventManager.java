@@ -7,7 +7,6 @@ import epicsquid.roots.capability.grove.PlayerGroveCapabilityProvider;
 import epicsquid.roots.capability.playerdata.IPlayerDataCapability;
 import epicsquid.roots.capability.playerdata.PlayerDataCapabilityProvider;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityProvider;
-import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.entity.spell.EntityPetalShell;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModPotions;
@@ -21,12 +20,9 @@ import epicsquid.roots.util.Constants;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
@@ -123,23 +119,15 @@ public class EventManager {
     EntityLivingBase entity = event.getEntityLiving();
     Entity trueSource = event.getSource().getTrueSource();
 
-    if (EffectManager.hasEffect(entity, EffectManager.effect_time_stop.getName())) {
+    if (entity.getActivePotionEffect(ModPotions.time_stop) != null) {
       event.setAmount(event.getAmount() * 0.1f);
     }
-    if (EffectManager.hasEffect(entity, EffectManager.effect_invulnerability.getName())) {
+    if (entity.getActivePotionEffect(ModPotions.invulnerability) != null) {
       event.setCanceled(true);
     }
 
-    NBTTagCompound data = entity.getEntityData();
-
     World world = entity.getEntityWorld();
 
-    if (data.hasKey(Constants.EFFECT_TAG)) {
-      NBTTagCompound tag = data.getCompoundTag(Constants.EFFECT_TAG);
-      if (tag.hasKey(EffectManager.effect_invulnerability.getName())) {
-        event.setCanceled(true);
-      }
-    }
     if (entity instanceof EntityPlayer && !world.isRemote) {
       EntityPlayer player = ((EntityPlayer) entity);
       List<EntityPetalShell> shells = player.getEntityWorld().getEntitiesWithinAABB(EntityPetalShell.class,
@@ -161,9 +149,6 @@ public class EventManager {
         }
       }
     }
-    /*if (entity.getActivePotionEffect(ModPotions.geas) != null && event.getSource() != ModDamage.PSYCHIC_DAMAGE && trueSource != null && trueSource != entity)  {
-      entity.removePotionEffect(ModPotions.geas);
-    }*/
     if (trueSource instanceof EntityLivingBase) {
       EntityLivingBase trueLiving = (EntityLivingBase) trueSource;
       if (trueLiving.getActivePotionEffect(ModPotions.geas) != null) {
@@ -175,7 +160,7 @@ public class EventManager {
   }
 
   @SubscribeEvent
-  public static void onEntityTarget (LivingSetAttackTargetEvent event) {
+  public static void onEntityTarget(LivingSetAttackTargetEvent event) {
     EntityLivingBase entity = event.getEntityLiving();
     if (entity.getActivePotionEffect(ModPotions.geas) != null && entity instanceof EntityLiving) {
       if (((EntityLiving) entity).getAttackTarget() != null) {
@@ -186,9 +171,8 @@ public class EventManager {
 
   @SubscribeEvent
   public static void onEntityTick(LivingUpdateEvent event) {
-    EffectManager.tickEffects(event.getEntityLiving());
     EntityLivingBase entity = event.getEntityLiving();
-    if (EffectManager.hasEffect(event.getEntityLiving(), EffectManager.effect_time_stop.getName())) {
+    if (entity.getActivePotionEffect(ModPotions.time_stop) != null) {
       event.setCanceled(true);
     }
     if (event.getEntity().getEntityData().hasKey(Constants.LIGHT_DRIFTER_TAG) && !event.getEntity().getEntityWorld().isRemote) {
@@ -221,9 +205,9 @@ public class EventManager {
   }
 
   @SubscribeEvent
-  public static void onLooting (LootingLevelEvent event) {
+  public static void onLooting(LootingLevelEvent event) {
     if (event.getDamageSource().damageType.equals(ModDamage.FEY_FIRE)) {
-      event.setLootingLevel(event.getLootingLevel()+2);
+      event.setLootingLevel(event.getLootingLevel() + 2);
     }
   }
 }
