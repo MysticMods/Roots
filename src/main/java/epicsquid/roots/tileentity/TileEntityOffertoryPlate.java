@@ -1,11 +1,8 @@
 package epicsquid.roots.tileentity;
 
 import epicsquid.mysticallib.tile.TileBase;
-import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.entity.grove.EntityGrove;
-import epicsquid.roots.grove.GroveType;
 import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.roots.util.OfferingUtil;
+import epicsquid.mysticallib.util.Util;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,7 +17,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
-import java.util.List;
 import java.util.UUID;
 
 public class TileEntityOffertoryPlate extends TileBase {
@@ -94,21 +90,6 @@ public class TileEntityOffertoryPlate extends TileBase {
             player.setHeldItem(hand, ItemStack.EMPTY);
           }
 
-          //Search for the fey and assigning this plate to the fey
-          List<EntityGrove> groveList = Util.getEntitiesWithinRadius(world, EntityGrove.class, getPos(), 10, 10, 10);
-          if (groveList.size() > 0) {
-            GroveType type = OfferingUtil.getGroveType(this.inventory.getStackInSlot(0));
-            EntityGrove grove = null;
-            for (EntityGrove entityGrove : groveList) {
-              if (entityGrove.getType() == type) {
-                grove = entityGrove;
-                break;
-              }
-            }
-            if (grove != null) {
-              grove.addActiveOffering(this);
-            }
-          }
           if (!world.isRemote)
             updatePacketViaState();
           return true;
