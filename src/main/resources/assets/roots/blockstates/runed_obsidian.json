@@ -1,5 +1,16 @@
 {
-    "variants":{
-        "custom" :{  "model": "roots:runed_obsidian" }
+    "forge_marker": 1,
+    "defaults": {
+        "model": "cube_all",
+        "textures": {
+            "all": "roots:blocks/runed_obsidian"
+        },
+        "uvlock": true
+    },
+    "variants": {
+        "normal": [{}],
+        "inventory": [{}],
+        "handlers": [{}]
     }
 }
+

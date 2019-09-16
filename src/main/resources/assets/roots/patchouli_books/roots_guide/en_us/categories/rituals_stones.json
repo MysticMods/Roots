@@ -1,0 +1,7 @@
+{
+  "name": "Standing Stones",
+  "sortnum" : 0,
+  "description": "",
+  "icon": "roots:runestone",
+  "parent": "rituals"
+}
