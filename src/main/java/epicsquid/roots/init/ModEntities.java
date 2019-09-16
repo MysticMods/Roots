@@ -4,6 +4,7 @@ import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.entity.RenderNull;
 import epicsquid.roots.Roots;
 import epicsquid.roots.entity.EntityFairy;
+import epicsquid.roots.entity.projectile.EntityFlare;
 import epicsquid.roots.entity.render.RenderPetalShell;
 import epicsquid.roots.entity.ritual.*;
 import epicsquid.roots.entity.spell.*;
@@ -62,7 +63,6 @@ public class ModEntities {
       LibRegistry.registerEntityRenderer(EntityRitualSpreadingForest.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualWindwall.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualWardingProtection.class, new RenderNull.Factory());
-      //LibRegistry.registerEntityRenderer(EntitySpawnItem.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualOvergrowth.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualFrostLands.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualFlowerGrowth.class, new RenderNull.Factory());

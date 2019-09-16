@@ -1,4 +1,4 @@
-package epicsquid.roots.entity.item;
+package epicsquid.roots.entity.projectile;
 
 import epicsquid.roots.init.ModItems;
 import net.minecraft.entity.EntityLivingBase;
