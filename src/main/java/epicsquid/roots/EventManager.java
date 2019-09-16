@@ -23,6 +23,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
@@ -173,6 +174,7 @@ public class EventManager {
   public static void onEntityTick(LivingUpdateEvent event) {
     EntityLivingBase entity = event.getEntityLiving();
     if (entity.getActivePotionEffect(ModPotions.time_stop) != null) {
+      entity.removePotionEffect(ModPotions.time_stop);
       event.setCanceled(true);
     }
     if (event.getEntity().getEntityData().hasKey(Constants.LIGHT_DRIFTER_TAG) && !event.getEntity().getEntityWorld().isRemote) {
