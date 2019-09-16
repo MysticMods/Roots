@@ -1,17 +1,17 @@
 package epicsquid.roots.entity.ritual;
 
-import java.util.List;
-
-import epicsquid.roots.effect.EffectManager;
+import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class EntityRitualWardingProtection extends EntityRitualBase {
 
@@ -51,7 +51,7 @@ public class EntityRitualWardingProtection extends EntityRitualBase {
       List<EntityLivingBase> entities = world
           .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 15.5, posY - 15.5, posZ - 15.5, posX + 15.5, posY + 15.5, posZ + 15.5));
       for (EntityLivingBase e : entities) {
-        EffectManager.assignEffect(e, EffectManager.effect_invulnerability.getName(), 22, new NBTTagCompound());
+        e.addPotionEffect(new PotionEffect(ModPotions.invulnerability, 22));
       }
     }
   }

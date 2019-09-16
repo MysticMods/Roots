@@ -4,7 +4,6 @@ import epicsquid.roots.advancements.Advancements;
 import epicsquid.roots.command.CommandRitual;
 import epicsquid.roots.command.CommandRoots;
 import epicsquid.roots.command.CommandStaff;
-import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.integration.chisel.RootsChisel;
 import epicsquid.roots.integration.consecration.Consecration;
@@ -28,7 +27,6 @@ public class CommonProxy {
     HerbRegistry.init();
     RitualRegistry.init();
     OfferingUtil.init();
-    EffectManager.init();
     RuneRegistry.init();
   }
 
