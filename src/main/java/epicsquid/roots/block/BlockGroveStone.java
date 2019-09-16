@@ -4,6 +4,7 @@ import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.mysticallib.block.BlockTEBase;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.Roots;
 import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
 import net.minecraft.block.BlockDoublePlant;
@@ -46,7 +47,7 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public class BlockGroveStone extends BlockBase {
   public static final PropertyEnum<Half> HALF = PropertyEnum.create("half", Half.class);
-  public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+  public static final PropertyDirection FACING = PropertyDirection.create("facing", (facing) -> facing == EnumFacing.NORTH || facing == EnumFacing.EAST);
   public static final PropertyBool VALID = PropertyBool.create("valid");
 
   public BlockGroveStone(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
@@ -82,12 +83,13 @@ public class BlockGroveStone extends BlockBase {
   @Override
   @SuppressWarnings("deprecation")
   public IBlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(VALID, (meta & 1) == 1).withProperty(HALF, Half.fromInt((meta >> 1 & 1))).withProperty(FACING, EnumFacing.byIndex(((meta >> 2) + 2)));
+    return getDefaultState().withProperty(VALID, (meta & 1) == 1).withProperty(HALF, Half.fromInt((meta & 7) >> 1)).withProperty(FACING, (meta >> 3) == 0 ? EnumFacing.NORTH : EnumFacing.EAST);
   }
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    return (state.getValue(FACING).ordinal() - 2) << 2 | state.getValue(HALF).ordinal() << 1 | (state.getValue(VALID) ? 1 : 0);
+    int meta = (((state.getValue(FACING) == EnumFacing.NORTH ? 0 : 1) << 2 ^ state.getValue(HALF).ordinal())) << 1 ^ (state.getValue(VALID) ? 1 : 0);
+    return meta;
   }
 
   @Override
@@ -108,8 +110,8 @@ public class BlockGroveStone extends BlockBase {
   @Override
   public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-    worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(HALF, Half.TOP));
-    worldIn.setBlockState(pos.up().up(), this.getDefaultState().withProperty(HALF, Half.TOP));
+    worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(HALF, Half.MIDDLE).withProperty(FACING, state.getValue(FACING)));
+    worldIn.setBlockState(pos.up().up(), this.getDefaultState().withProperty(HALF, Half.TOP).withProperty(FACING, state.getValue(FACING)));
   }
 
   @Override
@@ -117,8 +119,10 @@ public class BlockGroveStone extends BlockBase {
   public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
     // Work out the facing
     EnumFacing f = EnumFacing.fromAngle(placer.rotationYaw).getOpposite();
-    if (f == EnumFacing.UP || f == EnumFacing.DOWN) {
+    if (f == EnumFacing.NORTH || f == EnumFacing.SOUTH || f == EnumFacing.DOWN || f == EnumFacing.UP) {
       f = EnumFacing.NORTH;
+    } else {
+      f = EnumFacing.EAST;
     }
     return this.getDefaultState().withProperty(HALF, Half.BOTTOM).withProperty(FACING, f);
   }
@@ -153,6 +157,7 @@ public class BlockGroveStone extends BlockBase {
 
   public enum Half implements IStringSerializable {
     TOP,
+    MIDDLE,
     BOTTOM;
 
     @Override
@@ -160,13 +165,20 @@ public class BlockGroveStone extends BlockBase {
       switch (this) {
         case TOP:
           return "top";
+        case MIDDLE:
+          return "middle";
         default:
           return "bottom";
       }
     }
 
     public static Half fromInt(int x) {
-      return values()[x];
+      for (Half half : values()) {
+        if (half.ordinal() == x) {
+          return half;
+        }
+      }
+      return BOTTOM;
     }
   }
 
@@ -233,7 +245,7 @@ public class BlockGroveStone extends BlockBase {
   public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     super.randomDisplayTick(stateIn, worldIn, pos, rand);
 
-    if (stateIn.getValue(VALID)) {
+    if (stateIn.getValue(VALID) && stateIn.getValue(HALF) == Half.MIDDLE) {
       for (int i = -2; i <= 2; ++i) {
         for (int j = -2; j <= 2; ++j) {
           if (i > -2 && i < 2 && j == -1) {
@@ -244,7 +256,7 @@ public class BlockGroveStone extends BlockBase {
               if (!worldIn.isAirBlock(pos.add(i / 2, 0, j / 2))) {
                 break;
               }
-              ClientProxy.particleRenderer.spawnParticle(worldIn, Util.getLowercaseClassName(ParticleLeafArc.class), (double) pos.getX() + 0.5D, (double) pos.getY() + 1.0D, (double) pos.getZ() + 0.5D, (i + rand.nextDouble() - 0.05) * 0.04, -0.0001, (j + rand.nextFloat() - 0.05) * 0.04,
+              ClientProxy.particleRenderer.spawnParticle(worldIn, Util.getLowercaseClassName(ParticleLeafArc.class), (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, (i + rand.nextDouble() - 0.05) * 0.04, -0.0001, (j + rand.nextFloat() - 0.05) * 0.04,
                   100, 0.14 + rand.nextDouble() * 0.05, 0.385, 0.117 + rand.nextDouble() * 0.05, 1, rand.nextDouble() + 0.5, rand.nextDouble() * 2);
             }
           }
