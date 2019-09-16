@@ -25,13 +25,14 @@ public class CommonProxy {
     ModuleRegistry.init();
     SpellRegistry.preInit();
     HerbRegistry.init();
-    RitualRegistry.init();
+    RitualRegistry.preInit();
     OfferingUtil.init();
     RuneRegistry.init();
   }
 
   public void init(FMLInitializationEvent event) {
     SpellRegistry.init();
+    RitualRegistry.init();
     ConfigKeys.init();
     RunicCarvingRecipes.initRecipes();
     if (Loader.isModLoaded("jeresources")) {

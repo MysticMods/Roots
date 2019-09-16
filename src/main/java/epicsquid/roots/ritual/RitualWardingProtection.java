@@ -16,6 +16,10 @@ public class RitualWardingProtection extends RitualBase {
 
   public RitualWardingProtection(String name, int duration, boolean disabled) {
     super(name, duration, disabled);
+  }
+
+  @Override
+  public void init () {
     addCondition(new ConditionItems(
         new ItemStack(Items.SPECKLED_MELON),
         new ItemStack(ModItems.stalicripe),

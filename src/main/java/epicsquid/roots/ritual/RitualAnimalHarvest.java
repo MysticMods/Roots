@@ -15,7 +15,10 @@ import net.minecraftforge.oredict.OreIngredient;
 public class RitualAnimalHarvest extends RitualBase {
   public RitualAnimalHarvest(String name, int duration, boolean disabled) {
     super(name, duration, disabled);
+  }
 
+  @Override
+  public void init () {
     addCondition(new ConditionItems(
         new ItemStack(ModItems.wildewheet),
         new OreIngredient("blockWool"),

@@ -14,6 +14,10 @@ import net.minecraft.world.World;
 public class RitualDivineProtection extends RitualBase {
   public RitualDivineProtection(String name, int duration, boolean disabled) {
     super(name, duration, disabled);
+  }
+
+  @Override
+  public void init () {
     addCondition(new ConditionItems(
         new ItemStack(ModItems.pereskia),
         new ItemStack(ModItems.cloud_berry),

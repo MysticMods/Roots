@@ -1,4 +1,4 @@
-package epicsquid.roots.ritual.natural;
+package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualFlowerGrowth;
@@ -17,6 +17,10 @@ public class RitualFlowerGrowth extends RitualBase {
 
   public RitualFlowerGrowth(String name, int duration, boolean disabled) {
     super(name, duration, disabled);
+  }
+
+  @Override
+  public void init () {
     addCondition(new ConditionItems(
         new ItemStack(Blocks.YELLOW_FLOWER, 1, BlockYellowFlower.EnumFlowerType.DANDELION.getMeta()),
         new ItemStack(ModItems.wildroot),

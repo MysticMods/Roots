@@ -14,6 +14,10 @@ import net.minecraft.world.World;
 public class RitualHeavyStorms extends RitualBase {
   public RitualHeavyStorms(String name, int duration, boolean disabled) {
     super(name, duration, disabled);
+  }
+
+  @Override
+  public void init () {
     addCondition(new ConditionItems(
         new ItemStack(Blocks.WATERLILY),
         new ItemStack(ModItems.dewgonia),
