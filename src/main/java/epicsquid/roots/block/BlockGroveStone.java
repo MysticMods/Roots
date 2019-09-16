@@ -1,19 +1,14 @@
 package epicsquid.roots.block;
 
 import epicsquid.mysticallib.block.BlockBase;
-import epicsquid.mysticallib.block.BlockTEBase;
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.Roots;
-import epicsquid.roots.config.GeneralConfig;
-import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
-import net.minecraft.block.BlockDoublePlant;
-import net.minecraft.block.BlockGrass;
-import net.minecraft.block.BlockTallGrass;
-import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.particle.particles.ParticleLeafArc;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.config.GeneralConfig;
+import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
+import net.minecraft.block.BlockDoublePlant;
+import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -24,13 +19,9 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -77,7 +68,19 @@ public class BlockGroveStone extends BlockBase {
   @Nonnull
   @Override
   public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
-    return new AxisAlignedBB(0, 0, 0, 1, 1, 1);
+    if (state.getValue(FACING) == EnumFacing.NORTH) {
+      if (state.getValue(HALF) == Half.TOP) {
+        return new AxisAlignedBB(0.15, 0, 0.2, 0.85, 0.7, 0.8);
+      } else /*if (state.getValue(HALF) == Half.BOTTOM)*/ {
+        return new AxisAlignedBB(0.15, 0, 0.2, 0.85, 1, 0.8);
+      }
+    } else {
+      if (state.getValue(HALF) == Half.TOP) {
+        return new AxisAlignedBB(0.2, 0, 0.15, 0.8, 0.7, 0.85);
+      } else /*if (state.getValue(HALF) == Half.BOTTOM)*/ {
+        return new AxisAlignedBB(0.2, 0, 0.15, 0.8, 1, 0.85);
+      }
+    }
   }
 
   @Override
