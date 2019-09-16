@@ -2,6 +2,7 @@ package epicsquid.roots.entity.ritual;
 
 import java.util.List;
 
+import epicsquid.roots.entity.projectile.EntityFlare;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.network.datasync.DataParameter;

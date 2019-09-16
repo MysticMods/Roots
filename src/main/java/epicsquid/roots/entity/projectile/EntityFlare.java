@@ -1,4 +1,4 @@
-package epicsquid.roots.entity.ritual;
+package epicsquid.roots.entity.projectile;
 
 import java.util.List;
 import java.util.UUID;

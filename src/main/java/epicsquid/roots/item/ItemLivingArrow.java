@@ -1,7 +1,7 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemArrowBase;
-import epicsquid.roots.entity.item.EntityLivingArrow;
+import epicsquid.roots.entity.projectile.EntityLivingArrow;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;

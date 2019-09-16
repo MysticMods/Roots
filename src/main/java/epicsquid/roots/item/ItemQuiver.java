@@ -3,7 +3,7 @@ package epicsquid.roots.item;
 import epicsquid.mysticallib.item.ItemArrowBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
-import epicsquid.roots.entity.item.EntityLivingArrow;
+import epicsquid.roots.entity.projectile.EntityLivingArrow;
 import epicsquid.roots.gui.GuiHandler;
 import epicsquid.roots.handler.QuiverHandler;
 import epicsquid.roots.init.ModItems;
