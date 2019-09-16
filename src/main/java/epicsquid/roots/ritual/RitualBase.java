@@ -142,6 +142,8 @@ public abstract class RitualBase {
     return name;
   }
 
+  public abstract void init ();
+
   @SuppressWarnings("unchecked")
   public List<ItemStack> getRecipe() {
     for (Condition condition : this.conditions) {

@@ -1,4 +1,4 @@
-package epicsquid.roots.ritual.wild;
+package epicsquid.roots.ritual;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -36,7 +36,10 @@ public class RitualSummonCreatures extends RitualBase {
 
   public RitualSummonCreatures(String name, int duration, boolean disabled) {
     super(name, duration, disabled);
+  }
 
+  @Override
+  public void init () {
     addCondition(new ConditionItems(
         new ItemStack(ModItems.wildewheet),
         new ItemStack(Items.WHEAT),

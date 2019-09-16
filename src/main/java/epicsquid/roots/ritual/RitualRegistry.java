@@ -1,9 +1,6 @@
 package epicsquid.roots.ritual;
 
 import epicsquid.roots.config.RitualConfig;
-import epicsquid.roots.ritual.natural.RitualFlowerGrowth;
-import epicsquid.roots.ritual.natural.RitualWildGrowth;
-import epicsquid.roots.ritual.wild.RitualSummonCreatures;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -41,7 +38,7 @@ public class RitualRegistry {
     return null;
   }
 
-  public static void init() {
+  public static void preInit() {
     addRitual(ritual_life = new RitualHealingAura("ritual_healing_aura", 800, RitualConfig.disableRitualCategory.disableHealingAura));
     addRitual(ritual_storm = new RitualHeavyStorms("ritual_heavy_storms", 2400, RitualConfig.disableRitualCategory.disableHeavyStorms));
     addRitual(ritual_light = new RitualDivineProtection("ritual_divine_protection", 1200, RitualConfig.disableRitualCategory.disableDivineProtection));
@@ -59,6 +56,10 @@ public class RitualRegistry {
     addRitual(ritual_flower_growth = new RitualFlowerGrowth("ritual_flower_growth", 3200, RitualConfig.disableRitualCategory.disableFlowerGrowth));
     addRitual(ritual_transmutation = new RitualTransmutation("ritual_transmutation", 2400, RitualConfig.disableRitualCategory.disableTransmutation));
     addRitual(ritual_gathering = new RitualGathering("ritual_gathering", 6000, RitualConfig.disableRitualCategory.disableGathering));
+  }
+
+  public static void init () {
+    ritualRegistry.values().forEach(RitualBase::init);
   }
 
   public static void addRitual(RitualBase ritual) {

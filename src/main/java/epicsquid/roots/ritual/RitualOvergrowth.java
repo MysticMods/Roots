@@ -16,6 +16,10 @@ public class RitualOvergrowth extends RitualBase {
 
   public RitualOvergrowth(String name, int duration, boolean disabled) {
     super(name, duration, disabled);
+  }
+
+  @Override
+  public void init () {
     addCondition(
         new ConditionItems(
             new ItemStack(Items.REEDS),

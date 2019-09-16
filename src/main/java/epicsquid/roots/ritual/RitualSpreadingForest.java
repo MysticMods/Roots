@@ -14,6 +14,10 @@ import net.minecraftforge.oredict.OreIngredient;
 public class RitualSpreadingForest extends RitualBase {
   public RitualSpreadingForest(String name, int duration, boolean disabled) {
     super(name, duration, disabled);
+  }
+
+  @Override
+  public void init () {
     addCondition(new ConditionItems(
         new ItemStack(ModItems.terra_moss),
         new ItemStack(ModItems.spirit_herb),

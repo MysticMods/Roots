@@ -17,6 +17,10 @@ public class RitualHealingAura extends RitualBase {
 
   public RitualHealingAura(String name, int duration, boolean disabled) {
     super(name, duration, disabled);
+  }
+
+  @Override
+  public void init () {
     addCondition(new ConditionItems(
         new ItemStack(ModItems.terra_moss),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),

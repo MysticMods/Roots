@@ -15,6 +15,10 @@ public class RitualFireStorm extends RitualBase {
 
   public RitualFireStorm(String name, int duration, boolean disabled) {
     super(name, duration, disabled);
+  }
+
+  @Override
+  public void init () {
     addCondition(new ConditionItems(
         new ItemStack(ModItems.infernal_bulb),
         new ItemStack(ModItems.bark_acacia),
