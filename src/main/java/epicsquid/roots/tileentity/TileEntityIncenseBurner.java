@@ -117,6 +117,7 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
   }
 
   private boolean isHerb(@Nonnull ItemStack stack) {
+    // TODO: Improve this
     for (Herb herb : HerbRegistry.REGISTRY.getValuesCollection()) {
       if (stack.getItem() == herb.getItem()) {
         return true;
