@@ -34,6 +34,7 @@ item.component_pouch.name=Component Pouch
 item.creative_pouch.name=Creative Component Pouch
 item.apothecary_pouch.name=Apothecary Pouch
 item.wildwood_door.name=Wildwood Door
+item.fairy_dust.name=Fairy Dust
 
 tile.mortar.name=Mortar
 tile.imbuer.name=Imbuer
@@ -128,6 +129,7 @@ roots.spell.spell_supplication.name=Grove Supplication
 roots.spell.spell_fey_light.name=Fey Light
 roots.spell.spell_iced_touch.name=Iced Touch
 roots.spell.spell_iced_touch.module_touch.description=Surrounds you with freezing clouds
+roots.spell.spell_fairy_supplication.name=Fairy Supplication
 
 roots.ritual.ritual_healing_aura.name=Healing Aura
 roots.ritual.ritual_heavy_storms.name=Heavy Storms
