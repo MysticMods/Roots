@@ -9,6 +9,7 @@ import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -28,7 +29,7 @@ public class ItemBlockElementalSoil extends ItemBlock {
 
     Block oldblock = world.getBlockState(pos.offset(side.getOpposite())).getBlock();
 
-    if (oldblock instanceof BlockFarmland && player.inventory.addItemStackToInventory(new ItemStack(oldblock))) {
+    if (oldblock instanceof BlockFarmland && player.inventory.addItemStackToInventory(new ItemStack(Blocks.DIRT))) {
       pos = pos.offset(side.getOpposite());
     }
     return super.placeBlockAt(stack, player, world, pos, side, hitX, hitY, hitZ, newState);
