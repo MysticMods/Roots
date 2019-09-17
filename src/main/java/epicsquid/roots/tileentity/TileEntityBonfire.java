@@ -387,7 +387,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         if (world.getBlockState(pos).getBlock() == Blocks.FIRE) {
           fire = true;
           if (!world.getBlockState(pos.down()).getBlock().isFireSource(world, pos.down(), EnumFacing.UP)) {
-            world.setBlockToAir(pos);
+            for (int i = 0; i < 1 + Util.rand.nextInt(3); i++) {
+              world.getBlockState(pos).getBlock().randomTick(world, pos, world.getBlockState(pos), Util.rand);
+            }
           }
         }
       }

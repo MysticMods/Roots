@@ -7,6 +7,8 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.ritual.RitualFireStorm;
+import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -126,8 +128,8 @@ public class EntityFlare extends Entity {
       if (source == null) {
         continue;
       }
-      target.attackEntityFrom(source, 4f);
-      target.knockBack(this, 0.5f, -motionX, -motionZ);
+      target.attackEntityFrom(source, ((RitualFireStorm) RitualRegistry.ritual_fire_storm).projectile_damage);
+      target.knockBack(this, ((RitualFireStorm) RitualRegistry.ritual_fire_storm).projectile_knockback, -motionX, -motionZ);
     }
   }
 }
