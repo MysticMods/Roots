@@ -1,5 +1,6 @@
 package epicsquid.roots.integration.top;
 
+import epicsquid.roots.block.BlockBonfire;
 import epicsquid.roots.block.BlockGroveStone;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.ritual.RitualBase;
@@ -28,7 +29,7 @@ public class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfoProvid
       if (blockState.getValue(BlockGroveStone.VALID)) {
         probeInfo.text(TextFormatting.GREEN + "" + TextFormatting.BOLD + "{*roots.hud.grove_stone.valid*}");
       }
-    } else if (block == ModBlocks.bonfire) {
+    } else if (block instanceof BlockBonfire) {
       TileEntityBonfire te = (TileEntityBonfire) world.getTileEntity(data.getPos());
       if (te != null && te.getBurnTime() > 0) {
         int duration = 0;
