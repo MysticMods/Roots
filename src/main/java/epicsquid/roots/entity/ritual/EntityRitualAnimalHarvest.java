@@ -32,7 +32,6 @@ import java.util.Random;
 public class EntityRitualAnimalHarvest extends EntityRitualBase {
 
   protected static Random random = new Random();
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualAnimalHarvest.class, DataSerializers.VARINT);
   private ObjectOpenHashSet<Class<? extends Entity>> harvestClasses;
 
   public EntityRitualAnimalHarvest(World worldIn) {
@@ -44,12 +43,7 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
   @Override
   public void onUpdate() {
     super.onUpdate();
-    int curLifetime = getDataManager().get(lifetime);
-    getDataManager().set(lifetime, curLifetime - 1);
-    getDataManager().setDirty(lifetime);
-    if (getDataManager().get(lifetime) < 0) {
-      setDead();
-    }
+
     if (this.ticksExisted % 110 == 0) {
       for (int i = 0; i < 5; i++) {
         if (doHarvest()) break;
@@ -85,11 +79,6 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
       entity.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 30, 0));
     }
     return didDrops;
-  }
-
-  @Override
-  public DataParameter<Integer> getLifetime() {
-    return lifetime;
   }
 
   private static Method getLootTable = null;

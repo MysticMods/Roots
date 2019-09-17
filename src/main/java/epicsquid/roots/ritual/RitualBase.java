@@ -13,6 +13,8 @@ import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.recipe.conditions.Condition;
 import epicsquid.roots.recipe.conditions.ConditionItems;
 import epicsquid.roots.tileentity.TileEntityBonfire;
+import epicsquid.roots.util.types.NoDefaultProperty;
+import epicsquid.roots.util.types.PropertyTable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -29,8 +31,11 @@ public abstract class RitualBase {
   protected static int OFFERTORY_RADIUS = 6;
   protected static Random random = new Random();
 
-  private List<Condition> conditions = new ArrayList<>();
+  public static NoDefaultProperty<Integer> PROP_DURATION = new NoDefaultProperty<>("duration", Integer.class);
 
+  protected PropertyTable properties = new PropertyTable();
+
+  private List<Condition> conditions = new ArrayList<>();
   private Item icon;
   private String name;
   private int duration;
@@ -43,6 +48,7 @@ public abstract class RitualBase {
     this.name = name;
     this.duration = duration;
     this.disabled = disabled;
+    this.properties.addProperties(PROP_DURATION);
   }
 
   public String getFormat() {
@@ -127,14 +133,23 @@ public abstract class RitualBase {
       return ritual;
     } else if (pastRituals.size() > 0) {
       for (EntityRitualBase ritual : pastRituals) {
-        ritual.getDataManager().set(ritual.getLifetime(), duration + 20);
-        ritual.getDataManager().setDirty(ritual.getLifetime());
+        ritual.getDataManager().set(EntityRitualBase.lifetime, getDuration() + 20);
+        ritual.getDataManager().setDirty(EntityRitualBase.lifetime);
       }
     }
     return null;
   }
 
   public int getDuration() {
+    Integer durationOverride = properties.getProperty(PROP_DURATION);
+    if (durationOverride == null) {
+      return getDefaultDuration();
+    } else {
+      return durationOverride;
+    }
+  }
+
+  public int getDefaultDuration () {
     return duration;
   }
 

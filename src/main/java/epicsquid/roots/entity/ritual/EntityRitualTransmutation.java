@@ -18,9 +18,6 @@ import net.minecraft.world.World;
 import java.util.*;
 
 public class EntityRitualTransmutation extends EntityRitualBase {
-
-  protected static Random random = new Random();
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualTransmutation.class, DataSerializers.VARINT);
   private Set<TransmutationRecipe> recipes = new HashSet<>();
 
   public EntityRitualTransmutation(World worldIn) {
@@ -31,12 +28,7 @@ public class EntityRitualTransmutation extends EntityRitualBase {
   @Override
   public void onUpdate() {
     super.onUpdate();
-    int curLifetime = getDataManager().get(lifetime);
-    getDataManager().set(lifetime, curLifetime - 1);
-    getDataManager().setDirty(lifetime);
-    if (getDataManager().get(lifetime) < 0) {
-      setDead();
-    }
+
     if (world.isRemote) return;
 
     if (this.ticksExisted % 100 == 0) {
@@ -59,15 +51,10 @@ public class EntityRitualTransmutation extends EntityRitualBase {
         return false;
       });
       if (eligiblePositions.isEmpty()) return;
-      BlockPos pos = eligiblePositions.get(random.nextInt(eligiblePositions.size()));
+      BlockPos pos = eligiblePositions.get(Util.rand.nextInt(eligiblePositions.size()));
       transmuteBlock(world, pos);
       PacketHandler.sendToAllTracking(new MessageOvergrowthEffectFX(pos.getX(), pos.getY(), pos.getZ()), this);
     }
-  }
-
-  @Override
-  public DataParameter<Integer> getLifetime() {
-    return lifetime;
   }
 
   private void transmuteBlock(World world, BlockPos pos) {

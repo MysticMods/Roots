@@ -156,7 +156,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
 
     if (ritualEntity.isDead) return;
 
-    int lifetime = ritualEntity.getDataManager().get(ritualEntity.getLifetime());
+    int lifetime = ritualEntity.getDataManager().get(EntityRitualBase.lifetime);
 
     if (lifetime <= 0) {
       ritualEntity.setDead();
