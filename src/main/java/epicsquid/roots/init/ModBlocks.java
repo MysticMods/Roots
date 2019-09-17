@@ -6,7 +6,7 @@ import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.CustomPlantType;
 import epicsquid.roots.block.*;
-import epicsquid.roots.block.runes.BlockReinforcedBonfire;
+import epicsquid.roots.block.BlockReinforcedBonfire;
 import epicsquid.roots.block.runes.BlockTrample;
 import epicsquid.roots.block.runes.BlockWildwoodRune;
 import epicsquid.roots.tileentity.*;

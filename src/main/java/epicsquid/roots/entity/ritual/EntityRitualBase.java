@@ -1,5 +1,6 @@
 package epicsquid.roots.entity.ritual;
 
+import epicsquid.roots.block.BlockBonfire;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.util.types.PropertyTable;
 import net.minecraft.entity.Entity;
@@ -91,7 +92,7 @@ public abstract class EntityRitualBase extends Entity implements IRitualEntity {
       setDead();
     }
 
-    if (!world.isRemote && world.getBlockState(getPosition()).getBlock() != ModBlocks.bonfire) {
+    if (!world.isRemote && !(world.getBlockState(getPosition()).getBlock() instanceof BlockBonfire)) {
       setDead();
     }
   }

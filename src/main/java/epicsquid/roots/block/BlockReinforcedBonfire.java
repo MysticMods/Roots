@@ -1,6 +1,5 @@
-package epicsquid.roots.block.runes;
+package epicsquid.roots.block;
 
-import epicsquid.roots.block.BlockBonfire;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
