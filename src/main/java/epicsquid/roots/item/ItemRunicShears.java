@@ -73,6 +73,7 @@ public class ItemRunicShears extends ItemBase {
         if (!player.capabilities.isCreativeMode) {
           player.getHeldItem(hand).damageItem(1, player);
         }
+        player.swingArm(hand);
       } else {
         for (int i = 0; i < 50; i++) {
           ClientProxy.particleRenderer.spawnParticle(world, Util.getLowercaseClassName(ParticleGlitter.class), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, random.nextDouble() * 0.1 * (random.nextDouble() > 0.5 ? -1 : 1), random.nextDouble() * 0.1 * (random.nextDouble() > 0.5 ? -1 : 1),
@@ -86,10 +87,6 @@ public class ItemRunicShears extends ItemBase {
 
   @Override
   public boolean itemInteractionForEntity(ItemStack itemstack, EntityPlayer player, EntityLivingBase entity, EnumHand hand) {
-    if (entity.world.isRemote) {
-      return false;
-    }
-
     World world = player.world;
     Random rand = itemRand;
 
@@ -103,40 +100,47 @@ public class ItemRunicShears extends ItemBase {
         e.captureDrops = true;
         if (Items.SHEARS.itemInteractionForEntity(itemstack, player, e, hand)) count++;
         e.captureDrops = false;
-        for (EntityItem ent : e.capturedDrops) {
-          ent.setPosition(entity.posX, entity.posY, entity.posZ);
-          ent.motionY = 0;
-          ent.motionX = 0;
-          ent.motionZ = 0;
-          ent.world.spawnEntity(ent);
+        if (!world.isRemote) {
+          for (EntityItem ent : e.capturedDrops) {
+            ent.setPosition(entity.posX, entity.posY, entity.posZ);
+            ent.motionY = 0;
+            ent.motionX = 0;
+            ent.motionZ = 0;
+            ent.world.spawnEntity(ent);
+          }
         }
       }
-      if (count > 0) return true;
-      // ??? Return false?
+      if (count > 0) {
+        player.swingArm(hand);
+        return true;
+      }
     }
 
     if (entity.isChild()) return true;
 
     RunicShearRecipe recipe = ModRecipes.getRunicShearRecipe(entity);
     if (recipe != null) {
-      RunicShearsCapability cap = entity.getCapability(RunicShearsCapabilityProvider.RUNIC_SHEARS_CAPABILITY, null);
-      if (cap != null) {
-        if (cap.canHarvest()) {
-          cap.setCooldown(recipe.getCooldown());
-          net.minecraft.entity.item.EntityItem ent = entity.entityDropItem(recipe.getDrop().copy(), 1.0F);
-          ent.motionY += rand.nextFloat() * 0.05F;
-          ent.motionX += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
-          ent.motionZ += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
-          if (!player.capabilities.isCreativeMode) {
-            itemstack.damageItem(1, entity);
+      player.swingArm(hand);
+      if (!world.isRemote) {
+        RunicShearsCapability cap = entity.getCapability(RunicShearsCapabilityProvider.RUNIC_SHEARS_CAPABILITY, null);
+        if (cap != null) {
+          if (cap.canHarvest()) {
+            cap.setCooldown(recipe.getCooldown());
+            net.minecraft.entity.item.EntityItem ent = entity.entityDropItem(recipe.getDrop().copy(), 1.0F);
+            ent.motionY += rand.nextFloat() * 0.05F;
+            ent.motionX += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
+            ent.motionZ += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
+            if (!player.capabilities.isCreativeMode) {
+              itemstack.damageItem(1, entity);
+            }
+            world.playSound(player, entity.getPosition(), SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
+            IMessage packet = new MessageRunicShearsFX(entity);
+            PacketHandler.sendToAllTracking(packet, entity);
+            return true;
+          } else {
+            // TODO: play particles (failure)?
+            player.sendStatusMessage(new TextComponentTranslation("roots.runic_shears.cooldown").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)), true);
           }
-          world.playSound(player, entity.getPosition(), SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
-          IMessage packet = new MessageRunicShearsFX(entity);
-          PacketHandler.sendToAllTracking(packet, entity);
-          return true;
-        } else {
-          // TODO: play particles (failure)?
-          player.sendStatusMessage(new TextComponentTranslation("roots.runic_shears.cooldown").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)), true);
         }
       }
     }
