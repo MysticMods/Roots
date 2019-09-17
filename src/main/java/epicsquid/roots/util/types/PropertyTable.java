@@ -14,7 +14,7 @@ public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
   public void addProperties (Property<?>... properties) {
     for (Property prop : properties) {
       map.put(prop, null);
-      reverseMap.put(prop.name, prop);
+      reverseMap.put(prop.getName(), prop);
     }
   }
 
@@ -30,10 +30,11 @@ public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
 
   public <T> T getProperty (Property<T> property) {
     T result = property.cast(map.get(property));
-    if (result == null) {
-      return property.defaultValue;
+    if (result == null && property.hasDefaultValue()) {
+      return property.getDefaultValue();
+    } else {
+      return result;
     }
-    return result;
   }
 
   public <T> void setProperty (Property<T> property, T value) {

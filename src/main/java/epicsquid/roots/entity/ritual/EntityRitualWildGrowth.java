@@ -22,10 +22,6 @@ import java.util.List;
 import java.util.Random;
 
 public class EntityRitualWildGrowth extends EntityRitualBase {
-
-  protected static Random random = new Random();
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualWildGrowth.class, DataSerializers.VARINT);
-
   public EntityRitualWildGrowth(World worldIn) {
     super(worldIn);
     this.getDataManager().register(lifetime, RitualRegistry.ritual_wild_growth.getDuration() + 20);
@@ -34,12 +30,7 @@ public class EntityRitualWildGrowth extends EntityRitualBase {
   @Override
   public void onUpdate() {
     super.onUpdate();
-    int curLifetime = getDataManager().get(lifetime);
-    getDataManager().set(lifetime, curLifetime - 1);
-    getDataManager().setDirty(lifetime);
-    if (getDataManager().get(lifetime) < 0) {
-      setDead();
-    }
+
     if (!world.isRemote) {
       if (this.ticksExisted % 250 == 0) {
         List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), 10, 20, 10, (pos) -> {
@@ -48,15 +39,10 @@ public class EntityRitualWildGrowth extends EntityRitualBase {
         });
         if (eligiblePositions.isEmpty()) return;
 
-        BlockPos pos = eligiblePositions.get(random.nextInt(eligiblePositions.size()));
-        generateTree(world, pos, world.getBlockState(pos), random);
+        BlockPos pos = eligiblePositions.get(Util.rand.nextInt(eligiblePositions.size()));
+        generateTree(world, pos, world.getBlockState(pos), Util.rand);
       }
     }
-  }
-
-  @Override
-  public DataParameter<Integer> getLifetime() {
-    return lifetime;
   }
 
   private void generateTree(World worldIn, BlockPos pos, IBlockState state, Random rand) {

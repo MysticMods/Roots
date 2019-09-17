@@ -15,23 +15,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
 
 public class EntityRitualDivineProtection extends EntityRitualBase {
-
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualDivineProtection.class, DataSerializers.VARINT);
-
   public EntityRitualDivineProtection(World worldIn) {
     super(worldIn);
-    getDataManager().register(lifetime, RitualRegistry.ritual_light.getDuration() + 20);
+    getDataManager().register(lifetime, RitualRegistry.ritual_divine_protection.getDuration() + 20);
   }
 
   @Override
   public void onUpdate() {
     super.onUpdate();
-    float alpha = (float) Math.min(40, (RitualRegistry.ritual_light.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
-    getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
-    getDataManager().setDirty(lifetime);
-    if (getDataManager().get(lifetime) < 0) {
-      setDead();
-    }
+
+    float alpha = (float) Math.min(40, (RitualRegistry.ritual_divine_protection.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
     if (world.isRemote && getDataManager().get(lifetime) > 0) {
       ParticleUtil.spawnParticleStar(world, (float) posX, (float) posY, (float) posZ, 0, 0, 0, 255, 255, 75, 0.5f * alpha, 20.0f, 40);
       if (rand.nextInt(5) == 0) {
@@ -83,10 +76,4 @@ public class EntityRitualDivineProtection extends EntityRitualBase {
       }
     }
   }
-
-  @Override
-  public DataParameter<Integer> getLifetime() {
-    return lifetime;
-  }
-
 }

@@ -14,9 +14,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class EntityRitualWindwall extends EntityRitualBase {
-
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualWindwall.class, DataSerializers.VARINT);
-
   public EntityRitualWindwall(World worldIn) {
     super(worldIn);
     getDataManager().register(lifetime, RitualRegistry.ritual_windwall.getDuration() + 20);
@@ -25,12 +22,8 @@ public class EntityRitualWindwall extends EntityRitualBase {
   @Override
   public void onUpdate() {
     super.onUpdate();
+
     float alpha = (float) Math.min(40, (RitualRegistry.ritual_windwall.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
-    getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
-    getDataManager().setDirty(lifetime);
-    if (getDataManager().get(lifetime) < 0) {
-      setDead();
-    }
     if (world.isRemote && getDataManager().get(lifetime) > 0) {
       ParticleUtil.spawnParticleStar(world, (float) posX, (float) posY, (float) posZ, 0, 0, 0, 70, 70, 70, 0.5f * alpha, 20.0f, 40);
       for (float i = 0; i < 360; i += 120) {
@@ -62,10 +55,4 @@ public class EntityRitualWindwall extends EntityRitualBase {
       }
     }
   }
-
-  @Override
-  public DataParameter<Integer> getLifetime() {
-    return lifetime;
-  }
-
 }

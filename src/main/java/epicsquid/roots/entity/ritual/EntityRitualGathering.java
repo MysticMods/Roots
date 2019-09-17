@@ -24,10 +24,6 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class EntityRitualGathering extends EntityRitualBase {
-
-  protected static Random random = new Random();
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualGathering.class, DataSerializers.VARINT);
-
   public EntityRitualGathering(World worldIn) {
     super(worldIn);
     this.getDataManager().register(lifetime, RitualRegistry.ritual_gathering.getDuration() + 20);
@@ -36,12 +32,7 @@ public class EntityRitualGathering extends EntityRitualBase {
   @Override
   public void onUpdate() {
     super.onUpdate();
-    int curLifetime = getDataManager().get(lifetime);
-    getDataManager().set(lifetime, curLifetime - 1);
-    getDataManager().setDirty(lifetime);
-    if (getDataManager().get(lifetime) < 0) {
-      setDead();
-    }
+
     if (!world.isRemote) {
       if (this.ticksExisted % 80 == 0) {
         TileEntity te = world.getTileEntity(getPosition().down()); // Hope that it's in the right position these days
@@ -54,10 +45,5 @@ public class EntityRitualGathering extends EntityRitualBase {
         }
       }
     }
-  }
-
-  @Override
-  public DataParameter<Integer> getLifetime() {
-    return lifetime;
   }
 }

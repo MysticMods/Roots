@@ -21,10 +21,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityRitualOvergrowth extends EntityRitualBase {
-
-  protected static Random random = new Random();
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualOvergrowth.class, DataSerializers.VARINT);
-
   public EntityRitualOvergrowth(World worldIn) {
     super(worldIn);
     this.getDataManager().register(lifetime, RitualRegistry.ritual_overgrowth.getDuration() + 20);
@@ -33,12 +29,7 @@ public class EntityRitualOvergrowth extends EntityRitualBase {
   @Override
   public void onUpdate() {
     super.onUpdate();
-    int curLifetime = getDataManager().get(lifetime);
-    getDataManager().set(lifetime, curLifetime - 1);
-    getDataManager().setDirty(lifetime);
-    if (getDataManager().get(lifetime) < 0) {
-      setDead();
-    }
+
     if (!world.isRemote) {
       if (this.ticksExisted % 150 == 0) {
         List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), 10, 20, 10, pos -> {
@@ -49,18 +40,14 @@ public class EntityRitualOvergrowth extends EntityRitualBase {
         });
         if (eligiblePositions.isEmpty()) return;
 
-        BlockPos pos = eligiblePositions.get(random.nextInt(eligiblePositions.size()));
+        BlockPos pos = eligiblePositions.get(Util.rand.nextInt(eligiblePositions.size()));
         world.setBlockState(pos, Objects.requireNonNull(MossConfig.mossConversion(world.getBlockState(pos))));
         PacketHandler.sendToAllTracking(new MessageOvergrowthEffectFX(pos.getX(), pos.getY(), pos.getZ()), this);
       }
     }
   }
 
-  @Override
-  public DataParameter<Integer> getLifetime() {
-    return lifetime;
-  }
-
+  // TODO: MOVE THIS TO A UTILITY CLASS
   /**
    * Checks if the given block has water adjacent to it
    *

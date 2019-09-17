@@ -9,11 +9,9 @@ import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -22,24 +20,16 @@ import java.util.List;
 import java.util.Random;
 
 public class EntityRitualFrostLands extends EntityRitualBase {
-
-  protected static Random random = new Random();
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualFrostLands.class, DataSerializers.VARINT);
-
   public EntityRitualFrostLands(World worldIn) {
     super(worldIn);
-    this.getDataManager().register(lifetime, RitualRegistry.ritual_frost.getDuration() + 20);
+    this.getDataManager().register(lifetime, RitualRegistry.ritual_frost_lands.getDuration() + 20);
 
   }
 
   @Override
   public void onUpdate() {
     super.onUpdate();
-    getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
-    getDataManager().setDirty(lifetime);
-    if (getDataManager().get(lifetime) < 0) {
-      setDead();
-    }
+
     if (world.isRemote) return;
     List<BlockPos> affectedPositions = new ArrayList<>();
 
@@ -63,10 +53,10 @@ public class EntityRitualFrostLands extends EntityRitualBase {
         }
       }
 
-      if (random.nextInt(150) == 0) {
+      if (Util.rand.nextInt(150) == 0) {
         EntitySnowman snowy = new EntitySnowman(world);
         if (!positions.isEmpty()) {
-          BlockPos chosen = positions.get(random.nextInt(positions.size()));
+          BlockPos chosen = positions.get(Util.rand.nextInt(positions.size()));
           snowy.setPosition(chosen.getX() + 0.5, chosen.getY() + 1, chosen.getZ());
           world.spawnEntity(snowy);
           affectedPositions.add(snowy.getPosition());
@@ -120,11 +110,5 @@ public class EntityRitualFrostLands extends EntityRitualBase {
       PacketHandler.sendToAllTracking(progress, this);
     }
   }
-
-  @Override
-  public DataParameter<Integer> getLifetime() {
-    return lifetime;
-  }
-
 }
 

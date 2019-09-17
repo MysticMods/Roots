@@ -31,12 +31,11 @@ public class EntityRitualSpreadingForest extends EntityRitualBase {
   private Set<IBlockState> saplingBlocks = new HashSet<>();
   private Set<Block> saplings = new HashSet<>();
 
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualSpreadingForest.class, DataSerializers.VARINT);
   private static int SAPLING_OREDICT = -1;
 
   public EntityRitualSpreadingForest(World worldIn) {
     super(worldIn);
-    getDataManager().register(lifetime, RitualRegistry.ritual_regrowth.getDuration() + 20);
+    getDataManager().register(lifetime, RitualRegistry.ritual_spreading_forest.getDuration() + 20);
   }
 
   private boolean canTwoByTwo(World world, BlockPos pos1, int offsetX, int offsetZ) {
@@ -70,12 +69,8 @@ public class EntityRitualSpreadingForest extends EntityRitualBase {
       SAPLING_OREDICT = OreDictionary.getOreID("treeSapling");
     }
 
-    float alpha = (float) Math.min(40, (RitualRegistry.ritual_regrowth.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
-    getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
-    getDataManager().setDirty(lifetime);
-    if (getDataManager().get(lifetime) < 0) {
-      setDead();
-    }
+    float alpha = (float) Math.min(40, (RitualRegistry.ritual_spreading_forest.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
+
     if (world.isRemote && getDataManager().get(lifetime) > 0) {
       ParticleUtil.spawnParticleStar(world, (float) posX, (float) posY, (float) posZ, 0, 0, 0, 150, 255, 100, 0.5f * alpha, 20.0f, 40);
       if (rand.nextInt(5) == 0) {
@@ -230,10 +225,4 @@ public class EntityRitualSpreadingForest extends EntityRitualBase {
       }
     }
   }
-
-  @Override
-  public DataParameter<Integer> getLifetime() {
-    return lifetime;
-  }
-
 }

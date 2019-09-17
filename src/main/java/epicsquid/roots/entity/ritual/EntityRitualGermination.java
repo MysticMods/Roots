@@ -1,13 +1,10 @@
 package epicsquid.roots.entity.ritual;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
-import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.datasync.DataParameter;
@@ -16,28 +13,20 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.Arrays;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class EntityRitualGermination extends EntityRitualBase {
-
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualGermination.class, DataSerializers.VARINT);
-
   public EntityRitualGermination(World worldIn) {
     super(worldIn);
-    getDataManager().register(lifetime, RitualRegistry.ritual_natural_aura.getDuration() + 20);
+    getDataManager().register(lifetime, RitualRegistry.ritual_germination.getDuration() + 20);
   }
 
   @Override
   public void onUpdate() {
     super.onUpdate();
     float alpha = (float) Math.min(40, (RitualRegistry.ritual_life.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
-    getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
-    getDataManager().setDirty(lifetime);
-    if (getDataManager().get(lifetime) < 0) {
-      setDead();
-    }
+
     if (world.isRemote && getDataManager().get(lifetime) > 0) {
       ParticleUtil.spawnParticleStar(world, (float) posX, (float) posY, (float) posZ, 0, 0, 0, 100, 255, 100, 0.5f * alpha, 20.0f, 40);
       if (rand.nextInt(5) == 0) {
@@ -70,10 +59,5 @@ public class EntityRitualGermination extends EntityRitualBase {
         }
       }
     }
-  }
-
-  @Override
-  public DataParameter<Integer> getLifetime() {
-    return lifetime;
   }
 }
