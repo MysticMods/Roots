@@ -2,6 +2,7 @@ package epicsquid.roots.entity.ritual;
 
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.FlowerRecipe;
+import epicsquid.roots.ritual.RitualFlowerGrowth;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.RitualUtil;
 import net.minecraft.block.BlockFlower;
@@ -15,17 +16,20 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityRitualFlowerGrowth extends EntityRitualBase {
+  private RitualFlowerGrowth ritual;
+
   public EntityRitualFlowerGrowth(World worldIn) {
     super(worldIn);
     getDataManager().register(lifetime, RitualRegistry.ritual_flower_growth.getDuration() + 20);
+    this.ritual = (RitualFlowerGrowth) RitualRegistry.ritual_flower_growth;
   }
 
   @Override
   public void onUpdate() {
     super.onUpdate();
 
-    if (this.ticksExisted % 100 == 0) {
-      BlockPos topBlockPos = RitualUtil.getRandomPosRadial(new BlockPos(getPosition().getX(), getPosition().getY() - 20, getPosition().getZ()), 10, 10);
+    if (this.ticksExisted % ritual.interval == 0) {
+      BlockPos topBlockPos = RitualUtil.getRandomPosRadial(new BlockPos(getPosition().getX(), getPosition().getY() - ritual.radius_y, getPosition().getZ()), ritual.radius_x, ritual.radius_z);
       while (!generateFlower(topBlockPos)) {
         topBlockPos = topBlockPos.up();
         if (topBlockPos.getY() > 256)

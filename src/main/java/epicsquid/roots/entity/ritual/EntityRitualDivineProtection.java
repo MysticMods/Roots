@@ -4,6 +4,7 @@ import java.util.List;
 
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.ritual.RitualDivineProtection;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.network.datasync.DataParameter;
@@ -15,9 +16,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
 
 public class EntityRitualDivineProtection extends EntityRitualBase {
+  private RitualDivineProtection ritual;
+
   public EntityRitualDivineProtection(World worldIn) {
     super(worldIn);
     getDataManager().register(lifetime, RitualRegistry.ritual_divine_protection.getDuration() + 20);
+    this.ritual = (RitualDivineProtection) RitualRegistry.ritual_divine_protection;
   }
 
   @Override
@@ -44,26 +48,30 @@ public class EntityRitualDivineProtection extends EntityRitualBase {
       }
     }
     if (this.ticksExisted % 20 == 0) {
-      if (world.getWorldInfo().isRaining()) {
-        world.getWorldInfo().setRaining(false);
-      }
-      if (world.getWorldTime() % 24000 >= 0 && world.getWorldTime() % 24000 < 12000) {
-        if (rand.nextInt(3) == 0) {
-          world.setWorldTime(world.getWorldTime() - 1);
+      if (ritual.rain) {
+        if (world.getWorldInfo().isRaining()) {
+          world.getWorldInfo().setRaining(false);
         }
-      } else {
-        world.setWorldTime(world.getWorldTime() + 1);
+      }
+      if (ritual.time) {
+        if (world.getWorldTime() % ritual.day_length >= 0 && world.getWorldTime() % ritual.day_length < ritual.night_threshold) {
+          if (rand.nextInt(ritual.day_extension) == 0) {
+            world.setWorldTime(world.getWorldTime() - 1);
+          }
+        } else {
+          world.setWorldTime(world.getWorldTime() + ritual.night_reduction);
+        }
       }
       List<EntityLivingBase> entities = world
-          .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 15.5, posY - 15.5, posZ - 15.5, posX + 15.5, posY + 15.5, posZ + 15.5));
+          .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
       for (EntityLivingBase e : entities) {
         if (e.isEntityUndead()) {
           if (Loader.isModLoaded("consecration")) {
-            e.attackEntityFrom(ModDamage.radiantDamageFrom(null), 4.0f);
+            e.attackEntityFrom(ModDamage.radiantDamageFrom(null), ritual.consecration_damage);
           } else {
-            e.attackEntityFrom(DamageSource.IN_FIRE, 4.0f);
+            e.attackEntityFrom(DamageSource.IN_FIRE, ritual.fire_damage);
           }
-          e.setFire(2);
+          e.setFire(ritual.fire_duration);
           if (world.isRemote) {
             for (float i = 0; i < 16; i++) {
               ParticleUtil

@@ -1,7 +1,6 @@
 package epicsquid.roots.entity.ritual;
 
 import epicsquid.roots.block.BlockBonfire;
-import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.util.types.PropertyTable;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,21 +18,11 @@ public abstract class EntityRitualBase extends Entity implements IRitualEntity {
   private double x = 0;
   private double y = 0;
   private double z = 0;
-  private PropertyTable props;
 
   public EntityRitualBase (World worldIn) {
-    this(worldIn, null);
-  }
-
-  public EntityRitualBase(World worldIn, PropertyTable props) {
     super(worldIn);
     this.setInvisible(true);
     this.setSize(1, 1);
-    this.props = props;
-  }
-
-  public void setProps(PropertyTable props) {
-    this.props = props;
   }
 
   @Override

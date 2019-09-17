@@ -40,10 +40,10 @@ public class RitualRegistry {
 
   public static void preInit() {
     // TODO: Move all of these ritual name declarations as static members
-    addRitual(ritual_animal_harvest = new RitualAnimalHarvest("ritual_animal_harvest", 3200, RitualConfig.disableRitualCategory.disableAnimalHarvest));
-    addRitual(ritual_divine_protection = new RitualDivineProtection("ritual_divine_protection", 1200, RitualConfig.disableRitualCategory.disableDivineProtection));
-    addRitual(ritual_fire_storm = new RitualFireStorm("ritual_fire_storm", 600, RitualConfig.disableRitualCategory.disableFireStorm));
-    addRitual(ritual_flower_growth = new RitualFlowerGrowth("ritual_flower_growth", 3200, RitualConfig.disableRitualCategory.disableFlowerGrowth));
+    addRitual(ritual_animal_harvest = new RitualAnimalHarvest("ritual_animal_harvest", RitualConfig.disableRitualCategory.disableAnimalHarvest));
+    addRitual(ritual_divine_protection = new RitualDivineProtection("ritual_divine_protection", RitualConfig.disableRitualCategory.disableDivineProtection));
+    addRitual(ritual_fire_storm = new RitualFireStorm("ritual_fire_storm", RitualConfig.disableRitualCategory.disableFireStorm));
+    addRitual(ritual_flower_growth = new RitualFlowerGrowth("ritual_flower_growth", RitualConfig.disableRitualCategory.disableFlowerGrowth));
     addRitual(ritual_frost_lands = new RitualFrostLands("ritual_frost_lands", 6400, RitualConfig.disableRitualCategory.disableFrostLands));
     addRitual(ritual_gathering = new RitualGathering("ritual_gathering", 6000, RitualConfig.disableRitualCategory.disableGathering));
     addRitual(ritual_germination = new RitualGermination("ritual_germination", 6400, RitualConfig.disableRitualCategory.disableNaturalAura));
@@ -68,7 +68,6 @@ public class RitualRegistry {
   }
 
   public static void finalise () {
-
+    ritualRegistry.values().forEach(RitualBase::finalise);
   }
-
 }

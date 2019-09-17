@@ -38,16 +38,18 @@ public abstract class RitualBase {
   private List<Condition> conditions = new ArrayList<>();
   private Item icon;
   private String name;
-  private int duration;
   private TextFormatting color;
   private boolean bold;
 
-  protected boolean disabled;
+  protected int duration;
 
-  public RitualBase(String name, int duration, boolean disabled) {
+  protected boolean disabled;
+  protected boolean finalised;
+
+  public RitualBase(String name, boolean disabled) {
     this.name = name;
-    this.duration = duration;
     this.disabled = disabled;
+    this.duration = 0;
     this.properties.addProperties(PROP_DURATION);
   }
 
@@ -135,21 +137,14 @@ public abstract class RitualBase {
       for (EntityRitualBase ritual : pastRituals) {
         ritual.getDataManager().set(EntityRitualBase.lifetime, getDuration() + 20);
         ritual.getDataManager().setDirty(EntityRitualBase.lifetime);
+        // TODO:
+        // return ritual; ???
       }
     }
     return null;
   }
 
   public int getDuration() {
-    Integer durationOverride = properties.getProperty(PROP_DURATION);
-    if (durationOverride == null) {
-      return getDefaultDuration();
-    } else {
-      return durationOverride;
-    }
-  }
-
-  public int getDefaultDuration () {
     return duration;
   }
 
@@ -181,5 +176,11 @@ public abstract class RitualBase {
       }
     }
     return Collections.EMPTY_LIST;
+  }
+
+  public abstract void finalise ();
+
+  public boolean finalised () {
+    return finalised;
   }
 }

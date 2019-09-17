@@ -63,4 +63,16 @@ public class Property<T> {
       super("damage", defaultValue);
     }
   }
+
+  public static class PropertyDuration extends Property<Integer> {
+    public PropertyDuration(Integer defaultValue) {
+      super("duration", defaultValue);
+    }
+  }
+
+  public static class PropertyInterval extends Property<Integer> {
+    public PropertyInterval(Integer defaultValue) {
+      super("interval", defaultValue);
+    }
+  }
 }
