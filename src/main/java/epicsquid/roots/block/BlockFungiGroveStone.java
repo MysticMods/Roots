@@ -17,8 +17,8 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public class BlockFungiGroveStone1 extends BlockGroveStone {
-  public BlockFungiGroveStone1(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
+public class BlockFungiGroveStone extends BlockGroveStone {
+  public BlockFungiGroveStone(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
     super(mat, type, hardness, name);
 
     this.setDefaultState(this.blockState.getBaseState().withProperty(VALID, false).withProperty(HALF, Half.BOTTOM).withProperty(FACING, EnumFacing.NORTH));
