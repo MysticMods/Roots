@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class RitualHealingAura extends RitualBase {
 
   public RitualHealingAura(String name, int duration, boolean disabled) {
-    super(name, duration, disabled);
+    super(name, disabled);
   }
 
   @Override
@@ -32,6 +32,11 @@ public class RitualHealingAura extends RitualBase {
     addCondition(new ConditionTrees(BlockPlanks.EnumType.BIRCH, 1));
     setIcon(ModItems.ritual_healing_aura);
     setColor(TextFormatting.GOLD);
+  }
+
+  @Override
+  public void finalise() {
+
   }
 
   @Override

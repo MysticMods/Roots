@@ -18,8 +18,6 @@ import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class BlockFairyGroveStone extends BlockGroveStone {
-  public static final PropertyBool VALID = PropertyBool.create("valid");
-
   public BlockFairyGroveStone(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
     super(mat, type, hardness, name);
 

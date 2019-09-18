@@ -16,7 +16,7 @@ import net.minecraftforge.oredict.OreIngredient;
 public class RitualTransmutation extends RitualBase {
 
   public RitualTransmutation(String name, int duration, boolean disabled) {
-    super(name, duration, disabled);
+    super(name, disabled);
   }
 
   @Override
@@ -31,6 +31,11 @@ public class RitualTransmutation extends RitualBase {
     addCondition(new ConditionStandingStones(3, 1));
     setIcon(ModItems.ritual_transmutation);
     setColor(TextFormatting.DARK_PURPLE);
+  }
+
+  @Override
+  public void finalise() {
+
   }
 
   @Override

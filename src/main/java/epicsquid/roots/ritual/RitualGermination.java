@@ -15,7 +15,7 @@ import net.minecraftforge.oredict.OreIngredient;
 public class RitualGermination extends RitualBase {
 
   public RitualGermination(String name, int duration, boolean disabled) {
-    super(name, duration, disabled);
+    super(name, disabled);
   }
 
   @Override
@@ -31,6 +31,11 @@ public class RitualGermination extends RitualBase {
     setIcon(ModItems.ritual_germination);
     setColor(TextFormatting.DARK_RED);
     setBold(true);
+  }
+
+  @Override
+  public void finalise() {
+
   }
 
   @Override

@@ -35,7 +35,7 @@ public class RitualSummonCreatures extends RitualBase {
   private static Map<Class<? extends Entity>, List<ItemStack>> entityItem = new HashMap<>();
 
   public RitualSummonCreatures(String name, int duration, boolean disabled) {
-    super(name, duration, disabled);
+    super(name, disabled);
   }
 
   @Override
@@ -61,6 +61,11 @@ public class RitualSummonCreatures extends RitualBase {
     setIcon(ModItems.ritual_summon_creatures);
     setColor(TextFormatting.DARK_PURPLE);
     setBold(true);
+  }
+
+  @Override
+  public void finalise() {
+
   }
 
   @Override

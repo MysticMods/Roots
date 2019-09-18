@@ -29,7 +29,7 @@ public class ModBlocks {
   public static Block mortar, bonfire, imbuer, structure_marker, offertory_plate, unending_bowl, reinforced_bonfire;
   public static Block incense_burner, wildwood_rune;
   public static Block grove_stone, fey_crafter;
-  public static Block fairy_grove_stone;
+  public static Block fairy_grove_stone, fungi_grove_stone;
 
   public static Block fey_fire, offertory_bowl, fairy_house_red, fairy_house_brown, fairy_house_baffle;
 
@@ -159,6 +159,7 @@ public class ModBlocks {
     // Grove Stones
     event.addBlock(grove_stone = new BlockGroveStone(Material.ROCK, SoundType.STONE, 2.5f, "grove_stone")).setCreativeTab(Roots.tab);
     event.addBlock(fairy_grove_stone = new BlockFairyGroveStone(Material.ROCK, SoundType.STONE, 2.5f, "fairy_grove_stone")).setCreativeTab(Roots.tab);
+    event.addBlock(fungi_grove_stone = new BlockFungiGroveStone(Material.ROCK, SoundType.STONE, 2.5f, "fungi_grove_stone")).setCreativeTab(Roots.tab);
 
     event.addBlock(fey_crafter = new BlockFeyCrafter(Material.WOOD, SoundType.WOOD, 2.5f, "fey_crafter", TileEntityFeyCrafter.class)).setCreativeTab(Roots.tab);
 

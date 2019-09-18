@@ -14,7 +14,7 @@ import net.minecraftforge.common.EnumPlantType;
 
 public class RitualWildGrowth extends RitualBase {
   public RitualWildGrowth(String name, int duration, boolean disabled) {
-    super(name, duration, disabled);
+    super(name, disabled);
   }
 
   @Override
@@ -29,6 +29,11 @@ public class RitualWildGrowth extends RitualBase {
     setIcon(ModItems.ritual_wild_growth);
     setColor(TextFormatting.DARK_GRAY);
     setBold(true);
+  }
+
+  @Override
+  public void finalise() {
+
   }
 
   @Override
