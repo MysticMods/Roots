@@ -96,6 +96,9 @@ public class SpellConfig {
     @Config.Name("Disable Iced Touch Spell")
     @Config.Comment("Set to true to disable the Iced Touch Spell")
     public boolean disableIcedTouch = false;
+    @Config.Name("Disable Mark Spell")
+    @Config.Comment("Set to true to disable the Mark Spell")
+    public boolean disableMark = false;
 
   }
 

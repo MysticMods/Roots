@@ -47,6 +47,7 @@ public class SpellThaw extends SpellBase {
     BlockPos pos = RitualUtil.getRandomPosRadialXYZ(caster.getPosition(), radius, 2,  radius);
     boolean applied = false;
 
+    if (!caster.world.isRemote) {
       if (caster.world.getBlockState(pos).getBlock() == Blocks.SNOW_LAYER) {
         caster.world.setBlockToAir(pos);
         applied = true;
@@ -66,6 +67,7 @@ public class SpellThaw extends SpellBase {
         caster.world.setBlockState(pos, Blocks.FARMLAND.getDefaultState().withProperty(BlockFarmland.MOISTURE, 7), 3);
         applied = true;
       }
+    }
 
     return applied;
   }

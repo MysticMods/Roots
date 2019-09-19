@@ -71,7 +71,7 @@ public class SpellFall extends SpellBase {
         IBlockState blockstate = caster.world.getBlockState(pos);
         Block block = blockstate.getBlock();
 
-        if (count % 2 == 0)
+        if (!caster.world.isRemote && count % 2 == 0)
         {
             if (block instanceof BlockLeaves || block instanceof BlockTallGrass) {
                 caster.world.destroyBlock(pos, true);

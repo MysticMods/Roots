@@ -72,6 +72,8 @@ public class SpellRegistry {
     SpellSoftTouch.instance.setDisabled(SpellConfig.disableSpellsCategory.disableSoftTouch);
     spellRegistry.put(SpellThaw.spellName, SpellThaw.instance);
     SpellThaw.instance.setDisabled(SpellConfig.disableSpellsCategory.disableThaw);
+    spellRegistry.put(SpellMark.spellName, SpellMark.instance);
+    SpellMark.instance.setDisabled(SpellConfig.disableSpellsCategory.disableMark);
 
 
     // Cannot disable Grove-related spells
