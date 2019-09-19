@@ -55,7 +55,7 @@ public class BlockMushroomHouse extends BlockBase {
   @Nonnull
   @Override
   public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
-    return new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 0.95, 0.875);
+    return new AxisAlignedBB(0, 0, 0, 1, 1.5, 1);
   }
 
   @Nonnull
