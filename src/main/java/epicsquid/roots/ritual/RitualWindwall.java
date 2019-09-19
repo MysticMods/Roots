@@ -12,7 +12,11 @@ import net.minecraft.world.World;
 
 public class RitualWindwall extends RitualBase {
   public RitualWindwall(String name, int duration, boolean disabled) {
-    super(name, duration, disabled);
+    super(name, disabled);
+  }
+
+  @Override
+  public void init () {
     addCondition(new ConditionItems(
         new ItemStack(ModItems.cloud_berry),
         new ItemStack(ModItems.moonglow_leaf),
@@ -22,6 +26,11 @@ public class RitualWindwall extends RitualBase {
     ));
     setIcon(ModItems.ritual_windwall);
     setColor(TextFormatting.DARK_AQUA);
+  }
+
+  @Override
+  public void finalise() {
+
   }
 
   @Override

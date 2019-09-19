@@ -5,6 +5,8 @@ import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.recipe.conditions.Condition;
 import epicsquid.roots.recipe.conditions.ConditionItems;
 import epicsquid.roots.tileentity.TileEntityBonfire;
+import epicsquid.roots.util.types.NoDefaultProperty;
+import epicsquid.roots.util.types.PropertyTable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -24,20 +26,26 @@ public abstract class RitualBase {
   protected static int OFFERTORY_RADIUS = 6;
   protected static Random random = new Random();
 
-  private List<Condition> conditions = new ArrayList<>();
+  public static NoDefaultProperty<Integer> PROP_DURATION = new NoDefaultProperty<>("duration", Integer.class);
 
+  protected PropertyTable properties = new PropertyTable();
+
+  private List<Condition> conditions = new ArrayList<>();
   private Item icon;
   private String name;
-  private int duration;
   private TextFormatting color;
   private boolean bold;
 
-  protected boolean disabled;
+  protected int duration;
 
-  public RitualBase(String name, int duration, boolean disabled) {
+  protected boolean disabled;
+  protected boolean finalised;
+
+  public RitualBase(String name, boolean disabled) {
     this.name = name;
-    this.duration = duration;
     this.disabled = disabled;
+    this.duration = 0;
+    this.properties.addProperties(PROP_DURATION);
   }
 
   public String getFormat() {
@@ -122,8 +130,10 @@ public abstract class RitualBase {
       return ritual;
     } else if (pastRituals.size() > 0) {
       for (EntityRitualBase ritual : pastRituals) {
-        ritual.getDataManager().set(ritual.getLifetime(), duration + 20);
-        ritual.getDataManager().setDirty(ritual.getLifetime());
+        ritual.getDataManager().set(EntityRitualBase.lifetime, getDuration() + 20);
+        ritual.getDataManager().setDirty(EntityRitualBase.lifetime);
+        // TODO:
+        // return ritual; ???
       }
     }
     return null;
@@ -136,6 +146,8 @@ public abstract class RitualBase {
   public String getName() {
     return name;
   }
+
+  public abstract void init ();
 
   @SuppressWarnings("unchecked")
   public List<ItemStack> getRecipe() {
@@ -159,5 +171,11 @@ public abstract class RitualBase {
       }
     }
     return Collections.EMPTY_LIST;
+  }
+
+  public abstract void finalise ();
+
+  public boolean finalised () {
+    return finalised;
   }
 }

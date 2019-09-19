@@ -44,7 +44,10 @@ public class SpellLifeDrain extends SpellBase {
   public SpellLifeDrain(String name) {
     super(name, TextFormatting.DARK_GRAY, 144f / 255f, 32f / 255f, 64f / 255f, 255f / 255f, 196f / 255f, 240f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_WITHER_DAMAGE, PROP_HEAL, PROP_WITHER_DURATION, PROP_WITHER_AMPLIFICATION, PROP_WITHER_CHANCE);
+  }
 
+  @Override
+  public void init () {
     addIngredients(
         new ItemStack(Items.BEETROOT),
         new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom)),
@@ -89,12 +92,6 @@ public class SpellLifeDrain extends SpellBase {
   public void finalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
-
-    SpellCost cost = properties.getProperty(PROP_COST_1);
-    addCost(cost.getHerb(), cost.getCost());
-    cost = properties.getProperty(PROP_COST_2);
-    addCost(cost.getHerb(), cost.getCost());
-
     this.witherDamage = properties.getProperty(PROP_WITHER_DAMAGE);
     this.heal = properties.getProperty(PROP_HEAL);
     this.witherDuration = properties.getProperty(PROP_WITHER_DURATION);

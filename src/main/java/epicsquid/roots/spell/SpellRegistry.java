@@ -17,7 +17,7 @@ public class SpellRegistry {
     return spell;
   }
 
-  public static void init() {
+  public static void preInit() {
     spellRegistry.put(SpellWildfire.spellName, SpellWildfire.instance);
     SpellWildfire.instance.setDisabled(SpellConfig.disableSpellsCategory.disableWildFire);
     spellRegistry.put(SpellSanctuary.spellName, SpellSanctuary.instance);
@@ -81,7 +81,12 @@ public class SpellRegistry {
     SpellFairySupplication.instance.setDisabled(false);
   }
 
+  public static void init () {
+    spellRegistry.values().forEach(SpellBase::init);
+  }
+
   public static void finalise () {
     spellRegistry.values().forEach(SpellBase::finalise);
+    spellRegistry.values().forEach(SpellBase::finaliseCosts);
   }
 }

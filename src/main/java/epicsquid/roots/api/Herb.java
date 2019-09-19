@@ -4,6 +4,8 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import java.util.function.Supplier;
+
 import javax.annotation.Nonnull;
 
 /**
@@ -16,9 +18,9 @@ public class Herb extends IForgeRegistryEntry.Impl<Herb> {
   /**
    * Herb Items
    */
-  private Item item;
+  private Supplier<Item> item;
 
-  public Herb(@Nonnull Item item, ResourceLocation resourceLocation) {
+  public Herb(@Nonnull Supplier<Item> item, ResourceLocation resourceLocation) {
     super();
     this.item = item;
     setRegistryName(resourceLocation);
@@ -31,11 +33,11 @@ public class Herb extends IForgeRegistryEntry.Impl<Herb> {
 
   @Nonnull
   public Item getItem() {
-    return item;
+    return item.get();
   }
 
   public void setItem(@Nonnull Item item) {
-    this.item = item;
+    this.item = () -> item;
   }
 
   @Override

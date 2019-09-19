@@ -1,38 +1,31 @@
 package epicsquid.roots.entity.ritual;
 
-import epicsquid.roots.effect.EffectManager;
+import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 import java.util.List;
 
 public class EntityRitualWardingProtection extends EntityRitualBase {
-
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualWardingProtection.class, DataSerializers.VARINT);
-
   public EntityRitualWardingProtection(World worldIn) {
     super(worldIn);
     this.setInvisible(true);
     this.setSize(1, 1);
-    getDataManager().register(lifetime, RitualRegistry.ritual_warden.getDuration() + 20);
+    getDataManager().register(lifetime, RitualRegistry.ritual_warding_protection.getDuration() + 20);
   }
 
   @Override
   public void onUpdate() {
     super.onUpdate();
-    float alpha = (float) Math.min(40, (RitualRegistry.ritual_warden.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
-    getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
-    getDataManager().setDirty(lifetime);
-    if (getDataManager().get(lifetime) < 0) {
-      setDead();
-    }
+    float alpha = (float) Math.min(40, (RitualRegistry.ritual_warding_protection.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
+
     if (world.isRemote && getDataManager().get(lifetime) > 0) {
       ParticleUtil.spawnParticleStar(world, (float) posX, (float) posY, (float) posZ, 0, 0, 0, 100, 255, 235, 0.5f * alpha, 20.0f, 40);
       if (rand.nextInt(5) == 0) {
@@ -51,14 +44,8 @@ public class EntityRitualWardingProtection extends EntityRitualBase {
       List<EntityLivingBase> entities = world
           .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 15.5, posY - 15.5, posZ - 15.5, posX + 15.5, posY + 15.5, posZ + 15.5));
       for (EntityLivingBase e : entities) {
-        EffectManager.assignEffect(e, EffectManager.effect_invulnerability.getName(), 22, new NBTTagCompound());
+        e.addPotionEffect(new PotionEffect(ModPotions.invulnerability, 200));
       }
     }
   }
-
-  @Override
-  public DataParameter<Integer> getLifetime() {
-    return lifetime;
-  }
-
 }

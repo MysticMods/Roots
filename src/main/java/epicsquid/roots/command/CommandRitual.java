@@ -97,15 +97,17 @@ public class CommandRitual extends CommandBase {
         ItemUtil.spawnItem(world, pos, flint);
       }
 
+      int runePos = 0;
       for (Condition condition : ritual.getConditions()) {
         if (condition instanceof ConditionStandingStones) {
           ConditionStandingStones stones = (ConditionStandingStones) condition;
           for (i = 0; i < stones.getAmount(); i++) {
-            BlockPos base = pos.add(i + 1, 0, 0);
+            BlockPos base = pos.add(runePos + i + 1, 0, 0);
             for (int j = 0; j < stones.getHeight(); j++) {
               world.setBlockState(base.add(0, j, 0), j == stones.getHeight() - 1 ? ModBlocks.chiseled_runestone.getDefaultState() : ModBlocks.runestone.getDefaultState());
             }
           }
+          runePos += stones.getAmount();
         } else if (condition instanceof ConditionTrees) {
           ConditionTrees trees = (ConditionTrees) condition;
           BlockPlanks.EnumType type = trees.getTreeType();

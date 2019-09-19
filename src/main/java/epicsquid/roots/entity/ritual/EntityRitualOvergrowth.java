@@ -1,10 +1,17 @@
 package epicsquid.roots.entity.ritual;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.Random;
+import java.util.stream.Collectors;
+
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.config.MossConfig;
 import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -18,10 +25,6 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class EntityRitualOvergrowth extends EntityRitualBase {
-
-  protected static Random random = new Random();
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualOvergrowth.class, DataSerializers.VARINT);
-
   public EntityRitualOvergrowth(World worldIn) {
     super(worldIn);
     this.getDataManager().register(lifetime, RitualRegistry.ritual_overgrowth.getDuration() + 20);
@@ -30,29 +33,25 @@ public class EntityRitualOvergrowth extends EntityRitualBase {
   @Override
   public void onUpdate() {
     super.onUpdate();
-    int curLifetime = getDataManager().get(lifetime);
-    getDataManager().set(lifetime, curLifetime - 1);
-    getDataManager().setDirty(lifetime);
-    if (getDataManager().get(lifetime) < 0) {
-      setDead();
-    }
+
     if (!world.isRemote) {
       if (this.ticksExisted % 150 == 0) {
-        List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), 10, 20, 10, Blocks.COBBLESTONE).stream().filter((pos) -> isAdjacentToWater(world, pos)).collect(Collectors.toList());
+        List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), 10, 20, 10, pos -> {
+          if (world.isAirBlock(pos)) return false;
+          IBlockState state = world.getBlockState(pos);
+          IBlockState mossified = MossConfig.mossConversion(state);
+          return mossified != null && isAdjacentToWater(world, pos);
+        });
         if (eligiblePositions.isEmpty()) return;
 
-        BlockPos pos = eligiblePositions.get(random.nextInt(eligiblePositions.size()));
-        world.setBlockState(pos, Blocks.MOSSY_COBBLESTONE.getDefaultState());
+        BlockPos pos = eligiblePositions.get(Util.rand.nextInt(eligiblePositions.size()));
+        world.setBlockState(pos, Objects.requireNonNull(MossConfig.mossConversion(world.getBlockState(pos))));
         PacketHandler.sendToAllTracking(new MessageOvergrowthEffectFX(pos.getX(), pos.getY(), pos.getZ()), this);
       }
     }
   }
 
-  @Override
-  public DataParameter<Integer> getLifetime() {
-    return lifetime;
-  }
-
+  // TODO: MOVE THIS TO A UTILITY CLASS
   /**
    * Checks if the given block has water adjacent to it
    *

@@ -14,7 +14,11 @@ import net.minecraftforge.oredict.OreIngredient;
 public class RitualGathering extends RitualBase {
 
   public RitualGathering(String name, int duration, boolean disabled) {
-    super(name, duration, disabled);
+    super(name, disabled);
+  }
+
+  @Override
+  public void init () {
     addCondition(new ConditionItems(
         new ItemStack(ModItems.wildewheet),
         new ItemStack(ModItems.wildewheet),
@@ -26,6 +30,11 @@ public class RitualGathering extends RitualBase {
     setIcon(ModItems.ritual_gathering);
     setColor(TextFormatting.YELLOW);
     setBold(true);
+  }
+
+  @Override
+  public void finalise() {
+
   }
 
   @Override

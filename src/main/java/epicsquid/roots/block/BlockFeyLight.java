@@ -34,26 +34,32 @@ public class BlockFeyLight extends BlockBase {
     this.setItemBlock(null);
   }
 
+  @Override
   public BlockFaceShape getBlockFaceShape(final IBlockAccess worldIn, final IBlockState state, final BlockPos pos, final EnumFacing face) {
     return BlockFaceShape.UNDEFINED;
   }
 
+  @Override
   public EnumBlockRenderType getRenderType(final IBlockState state) {
     return EnumBlockRenderType.INVISIBLE;
   }
 
+  @Override
   public AxisAlignedBB getBoundingBox(final IBlockState state, final IBlockAccess source, final BlockPos pos) {
     return new AxisAlignedBB(0.33, 0.33, 0.33, 0.66, 0.66, 0.66);
   }
 
+  @Override
   public AxisAlignedBB getCollisionBoundingBox(final IBlockState state, final IBlockAccess worldIn, final BlockPos pos) {
     return null;
   }
 
+  @Override
   public boolean isFullCube(final IBlockState state) {
     return false;
   }
 
+  @Override
   public boolean isOpaqueCube(final IBlockState state) {
     return false;
   }

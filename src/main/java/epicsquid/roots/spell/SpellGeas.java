@@ -1,13 +1,16 @@
 package epicsquid.roots.spell;
 
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.Constants;
 import epicsquid.roots.util.types.Property;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
@@ -28,7 +31,10 @@ public class SpellGeas extends SpellBase {
   public SpellGeas(String name) {
     super(name, TextFormatting.DARK_RED, 128f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DURATION);
+  }
 
+  @Override
+  public void init () {
     addIngredients(
         new ItemStack(Items.ROTTEN_FLESH),
         new ItemStack(ModItems.wildewheet),
@@ -46,12 +52,16 @@ public class SpellGeas extends SpellBase {
       double y = player.posY + player.getEyeHeight() + player.getLookVec().y * 3.0 * (float) i;
       double z = player.posZ + player.getLookVec().z * 3.0 * (float) i;
       List<EntityLivingBase> entities = player.world
-          .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 2.0, y - 2.0, z - 2.0, x + 2.0, y + 2.0, z + 2.0));
+          .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 4.0, y - 4.0, z - 4.0, x + 4.0, y + 4.0, z + 4.0));
       for (EntityLivingBase e : entities) {
-        if (e.getUniqueID().compareTo(player.getUniqueID()) != 0 && !foundTarget) {
+        if (e != player && e.getActivePotionEffect(ModPotions.geas) == null) {
           foundTarget = true;
           if (!player.world.isRemote) {
-            e.getEntityData().setInteger(Constants.GEAS_TAG, duration);
+            e.addPotionEffect(new PotionEffect(ModPotions.geas, duration));
+            if (e instanceof EntityLiving) {
+              ((EntityLiving) e).setAttackTarget(null);
+            }
+            break;
           }
         }
       }
@@ -63,10 +73,6 @@ public class SpellGeas extends SpellBase {
   public void finalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
-
-    SpellCost cost = properties.getProperty(PROP_COST_1);
-    addCost(cost.getHerb(), cost.getCost());
-
     this.duration = properties.getProperty(PROP_DURATION);
   }
 }

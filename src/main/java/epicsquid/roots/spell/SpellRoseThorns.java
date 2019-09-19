@@ -34,7 +34,10 @@ public class SpellRoseThorns extends SpellBase {
   public SpellRoseThorns(String name) {
     super(name, TextFormatting.RED, 255f / 255f, 32f / 255f, 64f / 255f, 32f / 255f, 255f / 255f, 96f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_SLOWNESS_AMPLIFIER, PROP_SLOWNESS_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_DURATION);
+  }
 
+  @Override
+  public void init () {
     addIngredients(
         new OreIngredient("blockCactus"),
         new ItemStack(Blocks.DOUBLE_PLANT, 1, 4),
@@ -62,10 +65,6 @@ public class SpellRoseThorns extends SpellBase {
   public void finalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
-
-    SpellCost cost = properties.getProperty(PROP_COST_1);
-    addCost(cost.getHerb(), cost.getCost());
-
     damage = properties.getProperty(PROP_DAMAGE);
     poisonAmplifier = properties.getProperty(PROP_POISON_AMPLIFIER);
     poisonDuration = properties.getProperty(PROP_POISON_DURATION);

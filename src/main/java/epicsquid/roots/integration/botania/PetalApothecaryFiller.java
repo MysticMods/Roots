@@ -1,5 +1,6 @@
 package epicsquid.roots.integration.botania;
 
+import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModBlocks;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -8,11 +9,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import vazkii.botania.common.block.tile.TileAltar;
 
 import java.util.Random;
 
+@Mod.EventBusSubscriber(modid= Roots.MODID)
 public class PetalApothecaryFiller {
 
   private static boolean hasBotania = false;

@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import epicsquid.mysticallib.model.IModeledObject;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.model.ModelSylvanArmor;
+import epicsquid.roots.model.armor.ModelSylvanArmor;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
@@ -19,7 +19,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
-import java.util.stream.Stream;
 
 public class ItemSylvanArmor extends ItemArmor implements IModeledObject {
   public static double BONUS = 0.05;

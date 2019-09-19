@@ -31,7 +31,10 @@ public class SpellLightDrifter extends SpellBase {
   public SpellLightDrifter(String name) {
     super(name, TextFormatting.AQUA, 196f / 255f, 240f / 255f, 255f / 255f, 32f / 255f, 64f / 255f, 96f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DURATION);
+  }
 
+  @Override
+  public void init () {
     addIngredients(
         new OreIngredient("enderpearl"),
         new ItemStack(ModItems.moonglow_leaf),
@@ -67,12 +70,6 @@ public class SpellLightDrifter extends SpellBase {
   public void finalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
-
-    SpellCost cost = properties.getProperty(PROP_COST_1);
-    addCost(cost.getHerb(), cost.getCost());
-    cost = properties.getProperty(PROP_COST_2);
-    addCost(cost.getHerb(), cost.getCost());
-
     this.duration = properties.getProperty(PROP_DURATION);
   }
 }

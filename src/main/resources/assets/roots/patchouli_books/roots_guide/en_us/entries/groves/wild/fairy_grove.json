@@ -1,0 +1,19 @@
+{
+  "name": "The Fairy",
+  "icon": "roots:pereskia",
+  "category": "groves_wild",
+  "priority": true,
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Within the Fey World, the gardens of the Fairy are a delightful but potentially dangerous place. Their inhabitants are primarily $(l:groves/fairy/fairies)fairies$(), whose love for the $(l:herbs/pereskia)pereskia flower$() has become legend.$(br2)Well-kept gardens, flowers and flowing water will increase the connection between our world and theirs."
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "groves/fairy/fairy_grove_stone"
+      ]
+    }
+  ]
+}

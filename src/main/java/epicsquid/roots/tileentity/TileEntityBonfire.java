@@ -156,7 +156,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
 
     if (ritualEntity.isDead) return;
 
-    int lifetime = ritualEntity.getDataManager().get(ritualEntity.getLifetime());
+    int lifetime = ritualEntity.getDataManager().get(EntityRitualBase.lifetime);
 
     if (lifetime <= 0) {
       ritualEntity.setDead();
@@ -333,7 +333,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
 
   @Override
   public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
-    if (oldState.getBlock() == newState.getBlock() && newState.getBlock() == ModBlocks.bonfire) return false;
+    if (oldState.getBlock() == newState.getBlock() && newState.getBlock() instanceof BlockBonfire) return false;
 
     return super.shouldRefresh(world, pos, oldState, newState);
   }
@@ -387,7 +387,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         if (world.getBlockState(pos).getBlock() == Blocks.FIRE) {
           fire = true;
           if (!world.getBlockState(pos.down()).getBlock().isFireSource(world, pos.down(), EnumFacing.UP)) {
-            world.setBlockToAir(pos);
+            for (int i = 0; i < 1 + Util.rand.nextInt(3); i++) {
+              world.getBlockState(pos).getBlock().randomTick(world, pos, world.getBlockState(pos), Util.rand);
+            }
           }
         }
       }

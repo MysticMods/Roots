@@ -35,7 +35,10 @@ public class SpellSenseDanger extends SpellBase {
   public SpellSenseDanger(String name) {
     super(name, TextFormatting.DARK_RED, 255f / 255f, 0f / 255f, 0f / 255f, 60f / 255f, 0f / 255f, 60f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_NV_DURATION, PROP_GLOW_DURATION);
+  }
 
+  @Override
+  public void init () {
     addIngredients(
         new ItemStack(Items.GOLDEN_CARROT),
         new ItemStack(Items.COMPASS),
@@ -60,9 +63,6 @@ public class SpellSenseDanger extends SpellBase {
   public void finalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
-
-    SpellCost cost = properties.getProperty(PROP_COST_1);
-    addCost(cost.getHerb(), cost.getCost());
     this.nvDuration = properties.getProperty(PROP_NV_DURATION);
     this.glowDuration = properties.getProperty(PROP_GLOW_DURATION);
     this.radius_x = properties.getProperty(PROP_RADIUS_X);

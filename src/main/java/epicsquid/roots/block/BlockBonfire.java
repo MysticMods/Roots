@@ -85,8 +85,8 @@ public class BlockBonfire extends BlockTEBase {
   }
 
   public static void setState(boolean burning, World world, BlockPos pos) {
-    if (burning) world.setBlockState(pos, ModBlocks.bonfire.getDefaultState().withProperty(BURNING, true), 3);
-    else world.setBlockState(pos, ModBlocks.bonfire.getDefaultState().withProperty(BURNING, false), 3);
+    if (burning) world.setBlockState(pos, world.getBlockState(pos).withProperty(BURNING, true), 3);
+    else world.setBlockState(pos, world.getBlockState(pos).withProperty(BURNING, false), 3);
   }
 
 
@@ -101,6 +101,7 @@ public class BlockBonfire extends BlockTEBase {
     return state.getValue(BURNING) ? 1 : 0;
   }
 
+  @Override
   @SideOnly(Side.CLIENT)
   public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     if (stateIn.getValue(BURNING)) {

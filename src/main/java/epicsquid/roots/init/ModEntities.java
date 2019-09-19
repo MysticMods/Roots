@@ -3,11 +3,12 @@ package epicsquid.roots.init;
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.entity.RenderNull;
 import epicsquid.roots.Roots;
-import epicsquid.roots.entity.grove.EntityNaturalGrove;
-import epicsquid.roots.entity.grove.EntityWildGrove;
+import epicsquid.roots.entity.EntityFairy;
+import epicsquid.roots.entity.projectile.EntityFlare;
 import epicsquid.roots.entity.render.RenderPetalShell;
 import epicsquid.roots.entity.ritual.*;
 import epicsquid.roots.entity.spell.*;
+import epicsquid.roots.entity.render.RenderFairy;
 import epicsquid.roots.proxy.ClientProxy;
 
 public class ModEntities {
@@ -45,8 +46,7 @@ public class ModEntities {
     LibRegistry.registerEntity(EntityRitualFrostLands.class);
     LibRegistry.registerEntity(EntityRitualFlowerGrowth.class);
 
-    LibRegistry.registerEntity(EntityWildGrove.class);
-    LibRegistry.registerEntity(EntityNaturalGrove.class);
+    LibRegistry.registerEntity(EntityFairy.class, 0xf542e3, 0xdb7fa1);
 
     if (Roots.proxy instanceof ClientProxy) {
       LibRegistry.registerEntityRenderer(EntityFireJet.class, new RenderNull.Factory());
@@ -63,13 +63,11 @@ public class ModEntities {
       LibRegistry.registerEntityRenderer(EntityRitualSpreadingForest.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualWindwall.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualWardingProtection.class, new RenderNull.Factory());
-      //LibRegistry.registerEntityRenderer(EntitySpawnItem.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualOvergrowth.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualFrostLands.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityRitualFlowerGrowth.class, new RenderNull.Factory());
 
-      LibRegistry.registerEntityRenderer(EntityWildGrove.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityNaturalGrove.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(EntityFairy.class, new RenderFairy.Factory());
     }
   }
 

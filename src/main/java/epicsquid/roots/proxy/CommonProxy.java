@@ -4,7 +4,6 @@ import epicsquid.roots.advancements.Advancements;
 import epicsquid.roots.command.CommandRitual;
 import epicsquid.roots.command.CommandRoots;
 import epicsquid.roots.command.CommandStaff;
-import epicsquid.roots.effect.EffectManager;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.integration.chisel.RootsChisel;
 import epicsquid.roots.integration.consecration.Consecration;
@@ -23,16 +22,18 @@ import net.minecraftforge.fml.common.event.*;
 
 public class CommonProxy {
   public void preInit(FMLPreInitializationEvent event) {
+    ModuleRegistry.init();
+    SpellRegistry.preInit();
+    HerbRegistry.init();
+    RitualRegistry.preInit();
+    OfferingUtil.init();
+    RuneRegistry.init();
   }
 
   public void init(FMLInitializationEvent event) {
-    HerbRegistry.init();
-    RitualRegistry.init();
-    ModuleRegistry.init();
     SpellRegistry.init();
-    OfferingUtil.init();
-    EffectManager.init();
-    RuneRegistry.init();
+    RitualRegistry.init();
+    ConfigKeys.init();
     RunicCarvingRecipes.initRecipes();
     if (Loader.isModLoaded("jeresources")) {
       JERIntegration.init();
@@ -46,7 +47,6 @@ public class CommonProxy {
     if (Loader.isModLoaded("consecration")) {
       Consecration.init();
     }
-    ConfigKeys.init();
     //MapGenStructureIO.registerStructureComponent(ComponentDruidHut.class, Roots.MODID + ":" + "druidhut");
     //VillagerRegistry.instance().registerVillageCreationHandler(new ComponentDruidHut.CreationHandler());
   }

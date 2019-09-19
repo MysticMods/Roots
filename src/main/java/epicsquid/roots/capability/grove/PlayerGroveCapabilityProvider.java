@@ -2,13 +2,17 @@ package epicsquid.roots.capability.grove;
 
 import javax.annotation.Nonnull;
 
+import epicsquid.roots.Roots;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 public class PlayerGroveCapabilityProvider implements ICapabilitySerializable<NBTTagCompound> {
+
+  public static ResourceLocation IDENTIFIER = new ResourceLocation(Roots.MODID, "player_grove_capability");
 
   @CapabilityInject(IPlayerGroveCapability.class)
   public static final Capability<PlayerGroveCapability> PLAYER_GROVE_CAPABILITY = injected();

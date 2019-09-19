@@ -26,7 +26,7 @@ public class TweakProperty {
 
   @ZenMethod
   public <T> T getDefaultValue () {
-    return (T) original.defaultValue;
+    return (T) original.getDefaultValue();
   }
 
   @ZenMethod

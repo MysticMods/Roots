@@ -37,7 +37,8 @@ public class ModItems {
       petals, flour, living_arrow, runic_dust, seeds, cooked_seeds, cooked_pereskia, fey_leather, wildewheet_bread;
 
   public static Item moonglow_leaf, pereskia, terra_spores, terra_moss, spirit_herb, wildewheet,
-      baffle_cap, bark_oak, bark_birch, bark_spruce, bark_jungle, bark_dark_oak, bark_acacia, bark_wildwood;
+      baffle_cap, bark_oak, bark_birch, bark_spruce, bark_jungle, bark_dark_oak, bark_acacia, bark_wildwood,
+      fairy_dust;
 
   public static Item moonglow_seed, pereskia_bulb, spirit_herb_seed, wildewheet_seed, cloud_berry, infernal_bulb,
       stalicripe, dewgonia, wildroot;
@@ -45,6 +46,8 @@ public class ModItems {
   public static Item ritual_healing_aura, ritual_heavy_storms, ritual_divine_protection, ritual_fire_storm, ritual_spreading_forest, ritual_windwall, ritual_warding_protection, ritual_germination, ritual_purity, ritual_frost_lands, ritual_animal_harvest, ritual_summon_creatures, ritual_wild_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation, ritual_gathering;
 
   public static Item grove_fairy_text, grove_fairy_icon;
+
+  public static Item creative_pouch;
 
   public static List<Item> barks;
 
@@ -63,7 +66,7 @@ public class ModItems {
     event.addItem(moonglow_seed = new ItemSeedBase("moonglow_seed", ModBlocks.moonglow, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(moonglow_leaf = new ItemBase("moonglow_leaf").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(pereskia_bulb = new ItemSeedBase("pereskia_bulb", ModBlocks.pereskia, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(pereskia = new ItemBase("pereskia").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(pereskia = new ItemBase("pereskia").setModelCustom(true).setCreativeTab(Roots.tab)); // 0xff8cc2
     event.addItem(terra_moss = new ItemBase("terra_moss").setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(spirit_herb_seed = new ItemSeedBase("spirit_herb_seed", ModBlocks.spirit_herb, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
     event.addItem(spirit_herb = new ItemBase("spirit_herb").setModelCustom(true).setCreativeTab(Roots.tab));
@@ -99,6 +102,7 @@ public class ModItems {
 
     event.addItem(pestle = new ItemBase("pestle").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(component_pouch = new ItemPouch("component_pouch").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(creative_pouch = new ItemCreativePouch("creative_pouch").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(apothecary_pouch = new ItemApothecaryPouch("apothecary_pouch").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(spell_dust = new ItemSpellDust("spell_dust").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(flour = new ItemBase("flour").setModelCustom(true).setCreativeTab(Roots.tab));
@@ -145,6 +149,10 @@ public class ModItems {
     event.addItem(cooked_pereskia = new ItemFoodBase("cooked_pereskia", 5, false).setModelCustom(true).setCreativeTab(Roots.tab));
 
     event.addItem(wildewheet_bread = new ItemFoodBase("wildewheet_bread", 7, false).setModelCustom(true).setCreativeTab(Roots.tab));
+
+    // Fairy dust
+    event.addItem(fairy_dust = new ItemBase("fairy_dust").setModelCustom(false).setCreativeTab(Roots.tab));
+
     // Rituals
     event.addItem(ritual_healing_aura = new ItemBase("ritual_healing_aura").setModelCustom(false).setCreativeTab(null));
     event.addItem(ritual_heavy_storms = new ItemBase("ritual_heavy_storms").setModelCustom(false).setCreativeTab(null));

@@ -2,6 +2,7 @@ package epicsquid.roots.entity.ritual;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.ritual.RitualAnimalHarvest;
 import epicsquid.roots.ritual.RitualRegistry;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.entity.Entity;
@@ -31,46 +32,41 @@ import java.util.Random;
 
 public class EntityRitualAnimalHarvest extends EntityRitualBase {
 
-  protected static Random random = new Random();
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualAnimalHarvest.class, DataSerializers.VARINT);
   private ObjectOpenHashSet<Class<? extends Entity>> harvestClasses;
+  private RitualAnimalHarvest ritual;
 
   public EntityRitualAnimalHarvest(World worldIn) {
     super(worldIn);
     this.getDataManager().register(lifetime, RitualRegistry.ritual_animal_harvest.getDuration() + 20);
     this.harvestClasses = ModRecipes.getAnimalHarvestClasses();
+    this.ritual = (RitualAnimalHarvest) RitualRegistry.ritual_animal_harvest;
   }
 
   @Override
   public void onUpdate() {
     super.onUpdate();
-    int curLifetime = getDataManager().get(lifetime);
-    getDataManager().set(lifetime, curLifetime - 1);
-    getDataManager().setDirty(lifetime);
-    if (getDataManager().get(lifetime) < 0) {
-      setDead();
-    }
-    if (this.ticksExisted % 110 == 0) {
-      for (int i = 0; i < 5; i++) {
+
+    if (this.ticksExisted % ritual.interval == 0) {
+      for (int i = 0; i < ritual.count; i++) {
         if (doHarvest()) break;
       }
     }
   }
 
-  public boolean doHarvest() {
-    List<EntityLiving> entityList = Util.getEntitiesWithinRadius(world, (entity) -> harvestClasses.contains(entity.getClass()), getPosition(), 15, 10, 15);
+  private boolean doHarvest() {
+    List<EntityLiving> entityList = Util.getEntitiesWithinRadius(world, (entity) -> harvestClasses.contains(entity.getClass()), getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z);
     if (entityList.isEmpty()) return false;
-    EntityLiving entity = entityList.get(random.nextInt(entityList.size()));
-
+    EntityLiving entity = entityList.get(Util.rand.nextInt(entityList.size()));
 
     boolean didDrops = false;
 
     if (!world.isRemote) {
       entity.captureDrops = true;
       entity.capturedDrops.clear();
-      dropLoot(entity, true);
+      int looting = Util.rand.nextInt(ritual.looting_chance) == 0 ? ritual.looting_value : 0;
+      dropLoot(entity, looting);
       entity.captureDrops = false;
-      if (!ForgeHooks.onLivingDrops(entity, DamageSource.GENERIC, entity.capturedDrops, 0, false)) {
+      if (!ForgeHooks.onLivingDrops(entity, DamageSource.GENERIC, entity.capturedDrops, looting, false)) {
         for (EntityItem item : entity.capturedDrops) {
           item.motionY = 0;
           item.motionX = 0;
@@ -82,19 +78,14 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
     }
 
     if (didDrops) {
-      entity.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 30, 0));
+      entity.addPotionEffect(new PotionEffect(MobEffects.GLOWING, ritual.glowing, 0));
     }
     return didDrops;
   }
 
-  @Override
-  public DataParameter<Integer> getLifetime() {
-    return lifetime;
-  }
-
   private static Method getLootTable = null;
 
-  public static ResourceLocation getLootTable(EntityLiving entity) {
+  private ResourceLocation getLootTable(EntityLiving entity) {
     if (getLootTable == null) {
       getLootTable = ReflectionHelper.findMethod(EntityLiving.class, "getLootTable", "func_184647_J");
     }
@@ -106,7 +97,7 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
     }
   }
 
-  public static void dropLoot(EntityLiving entity, boolean player) {
+  private void dropLoot(EntityLiving entity, int looting) {
     ResourceLocation resourcelocation = entity.deathLootTable;
 
     if (resourcelocation == null) {
@@ -117,7 +108,7 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
       LootTable loottable = entity.world.getLootTableManager().getLootTableFromLocation(resourcelocation);
       entity.deathLootTable = null;
       FakePlayer fakePlayer = FakePlayerFactory.getMinecraft((WorldServer) entity.world);
-      LootContext context = new LootContext(random.nextInt(6) == 0 ? 1 : 0, (WorldServer) entity.world, entity.world.getLootTableManager(), entity, fakePlayer, DamageSource.GENERIC);
+      LootContext context = new LootContext(looting, (WorldServer) entity.world, entity.world.getLootTableManager(), entity, fakePlayer, DamageSource.GENERIC);
 
       for (ItemStack itemstack : loottable.generateLootForPools(entity.deathLootTableSeed == 0L ? entity.rand : new Random(entity.deathLootTableSeed), context)) {
         entity.entityDropItem(itemstack, 0.0F);

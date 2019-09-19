@@ -14,7 +14,11 @@ import net.minecraft.world.World;
 public class RitualPurity extends RitualBase {
 
   public RitualPurity(String name, int duration, boolean disabled) {
-    super(name, duration, disabled);
+    super(name, disabled);
+  }
+
+  @Override
+  public void init () {
     addCondition(new ConditionItems(
         new ItemStack(ModItems.terra_moss),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
@@ -25,6 +29,11 @@ public class RitualPurity extends RitualBase {
     setIcon(ModItems.ritual_purity);
     setColor(TextFormatting.LIGHT_PURPLE);
     setBold(true);
+  }
+
+  @Override
+  public void finalise() {
+
   }
 
   @Override

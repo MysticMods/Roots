@@ -46,7 +46,10 @@ public class SpellSanctuary extends SpellBase {
   public SpellSanctuary(String name) {
     super(name, TextFormatting.DARK_PURPLE, 208f / 255f, 16f / 255f, 80f / 255f, 224f / 255f, 32f / 255f, 144f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_VELOCITY, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
+  }
 
+  @Override
+  public void init () {
     addIngredients(
         new ItemStack(Items.DYE, 1, 1),
         new ItemStack(ModItems.pereskia),
@@ -92,12 +95,6 @@ public class SpellSanctuary extends SpellBase {
   public void finalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
-
-    SpellCost cost = properties.getProperty(PROP_COST_1);
-    addCost(cost.getHerb(), cost.getCost());
-    cost = properties.getProperty(PROP_COST_2);
-    addCost(cost.getHerb(), cost.getCost());
-
     this.radius_x = properties.getProperty(PROP_RADIUS_X);
     this.radius_y = properties.getProperty(PROP_RADIUS_Y);
     this.radius_z = properties.getProperty(PROP_RADIUS_Z);

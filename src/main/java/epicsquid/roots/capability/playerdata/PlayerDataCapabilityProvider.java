@@ -2,14 +2,18 @@ package epicsquid.roots.capability.playerdata;
 
 import javax.annotation.Nonnull;
 
+import epicsquid.roots.Roots;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 public class PlayerDataCapabilityProvider implements ICapabilityProvider, ICapabilitySerializable<NBTTagCompound> {
+  public static ResourceLocation IDENTIFIER = new ResourceLocation(Roots.MODID, "player_data_capability");
+
   @CapabilityInject(IPlayerDataCapability.class)
   public static final Capability<PlayerDataCapability> PLAYER_DATA_CAPABILITY = injected();
 

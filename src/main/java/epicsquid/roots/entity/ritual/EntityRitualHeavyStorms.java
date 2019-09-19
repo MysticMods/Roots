@@ -12,23 +12,16 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class EntityRitualHeavyStorms extends EntityRitualBase {
-
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualHeavyStorms.class, DataSerializers.VARINT);
-
   public EntityRitualHeavyStorms(World worldIn) {
     super(worldIn);
-    getDataManager().register(lifetime, RitualRegistry.ritual_storm.getDuration() + 20);
+    getDataManager().register(lifetime, RitualRegistry.ritual_heavy_storms.getDuration() + 20);
   }
 
   @Override
   public void onUpdate() {
     super.onUpdate();
-    float alpha = (float) Math.min(40, (RitualRegistry.ritual_storm.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
-    getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
-    getDataManager().setDirty(lifetime);
-    if (getDataManager().get(lifetime) < 0) {
-      setDead();
-    }
+    float alpha = (float) Math.min(40, (RitualRegistry.ritual_heavy_storms.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
+
     if (world.isRemote && getDataManager().get(lifetime) > 0) {
       ParticleUtil.spawnParticleStar(world, (float) posX, (float) posY, (float) posZ, 0, 0, 0, 50, 50, 255, 0.5f * alpha, 20.0f, 40);
       if (rand.nextInt(5) == 0) {
@@ -77,10 +70,4 @@ public class EntityRitualHeavyStorms extends EntityRitualBase {
       }
     }
   }
-
-  @Override
-  public DataParameter<Integer> getLifetime() {
-    return lifetime;
-  }
-
 }

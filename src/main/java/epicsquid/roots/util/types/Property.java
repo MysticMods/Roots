@@ -3,14 +3,36 @@ package epicsquid.roots.util.types;
 import epicsquid.roots.spell.SpellBase;
 
 public class Property<T> {
-  public final Class<?> type;
-  public final String name;
-  public final T defaultValue;
+  protected Class<?> type;
+  protected String name;
+  protected T defaultValue;
+
+  public Property (String name, Class<?> clazz) {
+    this.type = clazz;
+    this.name = name;
+    this.defaultValue = null;
+  }
 
   public Property(String name, T defaultValue) {
     this.type = defaultValue.getClass();
     this.name = name;
     this.defaultValue = defaultValue;
+  }
+
+  public Class<?> getType() {
+    return type;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public T getDefaultValue() {
+    return defaultValue;
+  }
+
+  public boolean hasDefaultValue () {
+    return true;
   }
 
   @SuppressWarnings("unchecked")
@@ -39,6 +61,18 @@ public class Property<T> {
   public static class PropertyDamage extends Property<Float> {
     public PropertyDamage(Float defaultValue) {
       super("damage", defaultValue);
+    }
+  }
+
+  public static class PropertyDuration extends Property<Integer> {
+    public PropertyDuration(Integer defaultValue) {
+      super("duration", defaultValue);
+    }
+  }
+
+  public static class PropertyInterval extends Property<Integer> {
+    public PropertyInterval(Integer defaultValue) {
+      super("interval", defaultValue);
     }
   }
 }

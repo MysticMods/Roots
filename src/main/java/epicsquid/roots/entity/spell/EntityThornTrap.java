@@ -17,9 +17,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
-import java.util.List;
-import java.util.UUID;
-
+@SuppressWarnings("AccessStaticViaInstance")
 public class EntityThornTrap extends Entity {
   private static final DataParameter<Integer> lifetime = EntityDataManager.<Integer>createKey(EntityThornTrap.class, DataSerializers.VARINT);
   private UUID playerId = null;
@@ -105,17 +103,12 @@ public class EntityThornTrap extends Entity {
       if (player != null) {
         List<EntityLivingBase> entities = world
             .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 1.5, posY - 1.5, posZ - 1.5, posX + 1.5, posY + 1.5, posZ + 1.5));
+        entities.remove(player);
         if (entities.size() > 0) {
-          if (entities.size() == 1) {
-            if (entities.get(0).getUniqueID().compareTo(player.getUniqueID()) == 0) {
-              return;
-            }
-          }
           setDead();
           for (EntityLivingBase entity : entities) {
-            if (!(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
-                && entity.getUniqueID().compareTo(player.getUniqueID()) != 0) {
-              entity.attackEntityFrom((DamageSource.CACTUS).causeMobDamage(player), damage);
+            if (!(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
+              entity.attackEntityFrom(DamageSource.CACTUS.causeMobDamage(player), damage);
               entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, slownessDuration, slownessAmplifier));
               entity.addPotionEffect(new PotionEffect(MobEffects.POISON, poisonDuration, poisonAmplifier));
               entity.setLastAttackedEntity(player);

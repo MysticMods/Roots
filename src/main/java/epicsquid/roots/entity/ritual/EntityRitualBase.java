@@ -1,26 +1,29 @@
 package epicsquid.roots.entity.ritual;
 
-import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.block.BlockBonfire;
+import epicsquid.roots.util.types.PropertyTable;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
 public abstract class EntityRitualBase extends Entity implements IRitualEntity {
+  public static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualBase.class, DataSerializers.VARINT);
 
   private double x = 0;
   private double y = 0;
   private double z = 0;
 
-  public EntityRitualBase(World worldIn) {
+  public EntityRitualBase (World worldIn) {
     super(worldIn);
     this.setInvisible(true);
     this.setSize(1, 1);
   }
-
 
   @Override
   public void setPosition(double x, double y, double z) {
@@ -55,8 +58,8 @@ public abstract class EntityRitualBase extends Entity implements IRitualEntity {
     this.z = compound.getDouble("z");
     this.setEntityId(compound.getInteger("id"));
     this.setPosition(x, y, z);
-    getDataManager().set(getLifetime(), compound.getInteger("lifetime"));
-    getDataManager().setDirty(getLifetime());
+    getDataManager().set(lifetime, compound.getInteger("lifetime"));
+    getDataManager().setDirty(lifetime);
   }
 
   @Override
@@ -65,17 +68,21 @@ public abstract class EntityRitualBase extends Entity implements IRitualEntity {
     compound.setDouble("y", y);
     compound.setDouble("z", z);
     compound.setInteger("id", getEntityId());
-    compound.setInteger("lifetime", getDataManager().get(getLifetime()));
+    compound.setInteger("lifetime", getDataManager().get(lifetime));
   }
 
   @Override
   public void onUpdate() {
     super.onUpdate();
 
-    if (!world.isRemote && world.getBlockState(getPosition()).getBlock() != ModBlocks.bonfire) {
+    getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
+    getDataManager().setDirty(lifetime);
+    if (getDataManager().get(lifetime) < 0) {
+      setDead();
+    }
+
+    if (!world.isRemote && !(world.getBlockState(getPosition()).getBlock() instanceof BlockBonfire)) {
       setDead();
     }
   }
-
-  public abstract DataParameter<Integer> getLifetime();
 }

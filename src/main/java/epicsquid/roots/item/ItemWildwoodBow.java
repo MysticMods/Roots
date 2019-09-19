@@ -19,6 +19,7 @@ public class ItemWildwoodBow extends ItemBowBase implements ILivingRepair {
     super(name, 920, 30);
 
     this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter() {
+      @Override
       @SideOnly(Side.CLIENT)
       public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
         if (entityIn == null) {
@@ -29,6 +30,7 @@ public class ItemWildwoodBow extends ItemBowBase implements ILivingRepair {
       }
     });
     this.addPropertyOverride(new ResourceLocation("pulling"), new IItemPropertyGetter() {
+      @Override
       @SideOnly(Side.CLIENT)
       public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
         return entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack ? 1.0F : 0.0F;

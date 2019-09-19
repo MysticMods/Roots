@@ -15,7 +15,11 @@ import net.minecraftforge.oredict.OreIngredient;
 public class RitualWardingProtection extends RitualBase {
 
   public RitualWardingProtection(String name, int duration, boolean disabled) {
-    super(name, duration, disabled);
+    super(name, disabled);
+  }
+
+  @Override
+  public void init () {
     addCondition(new ConditionItems(
         new ItemStack(Items.SPECKLED_MELON),
         new ItemStack(ModItems.stalicripe),
@@ -28,6 +32,11 @@ public class RitualWardingProtection extends RitualBase {
     setIcon(ModItems.ritual_warding_protection);
     setColor(TextFormatting.DARK_BLUE);
     setBold(true);
+  }
+
+  @Override
+  public void finalise() {
+
   }
 
   @Override

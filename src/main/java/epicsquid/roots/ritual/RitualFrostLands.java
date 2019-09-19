@@ -14,7 +14,11 @@ import net.minecraft.world.World;
 public class RitualFrostLands extends RitualBase {
 
   public RitualFrostLands(String name, int duration, boolean disabled) {
-    super(name, duration, disabled);
+    super(name, disabled);
+  }
+
+  @Override
+  public void init () {
     addCondition(new ConditionItems(
         new ItemStack(Items.SNOWBALL),
         new ItemStack(ModItems.dewgonia),
@@ -25,6 +29,11 @@ public class RitualFrostLands extends RitualBase {
     setIcon(ModItems.ritual_frost_lands);
     setColor(TextFormatting.AQUA);
     setBold(true);
+  }
+
+  @Override
+  public void finalise() {
+
   }
 
   @Override

@@ -30,7 +30,11 @@ public class SpellShatter extends SpellBase {
 
   public SpellShatter(String name) {
     super(name, TextFormatting.GRAY, 96f / 255f, 96f / 255f, 96f / 255f, 192f / 255f, 192f / 255f, 192f / 255f);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1);
+  }
 
+  @Override
+  public void init () {
     addIngredients(
         new ItemStack(Items.FLINT),
         new ItemStack(Items.STONE_PICKAXE),
@@ -91,8 +95,5 @@ public class SpellShatter extends SpellBase {
   public void finalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
-
-    SpellCost cost = properties.getProperty(PROP_COST_1);
-    addCost(cost.getHerb(), cost.getCost());
   }
 }

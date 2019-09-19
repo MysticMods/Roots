@@ -114,36 +114,12 @@ public class JEIRootsPlugin implements IModPlugin {
       registry.addRecipeCatalyst(new ItemStack(knife), TERRA_MOSS);
     }
 
-    /*registry.addRecipeCatalyst(new ItemStack(ModItems.wood_knife), RUNIC_CARVING);
-    registry.addRecipeCatalyst(new ItemStack(ModItems.stone_knife), RUNIC_CARVING);
-    registry.addRecipeCatalyst(new ItemStack(ModItems.iron_knife), RUNIC_CARVING);
-    registry.addRecipeCatalyst(new ItemStack(ModItems.gold_knife), RUNIC_CARVING);
-    registry.addRecipeCatalyst(new ItemStack(ModItems.diamond_knife), RUNIC_CARVING);
-
-    registry.addRecipeCatalyst(new ItemStack(ModItems.wood_knife), BARK_CARVING);
-    registry.addRecipeCatalyst(new ItemStack(ModItems.stone_knife), BARK_CARVING);
-    registry.addRecipeCatalyst(new ItemStack(ModItems.iron_knife), BARK_CARVING);
-    registry.addRecipeCatalyst(new ItemStack(ModItems.gold_knife), BARK_CARVING);
-    registry.addRecipeCatalyst(new ItemStack(ModItems.diamond_knife), BARK_CARVING);
-
-    registry.addRecipeCatalyst(new ItemStack(ModItems.wood_knife), TERRA_MOSS);
-    registry.addRecipeCatalyst(new ItemStack(ModItems.stone_knife), TERRA_MOSS);
-    registry.addRecipeCatalyst(new ItemStack(ModItems.iron_knife), TERRA_MOSS);
-    registry.addRecipeCatalyst(new ItemStack(ModItems.gold_knife), TERRA_MOSS);
-    registry.addRecipeCatalyst(new ItemStack(ModItems.diamond_knife), TERRA_MOSS);
-
-    registry.addRecipeCatalyst(new ItemStack(epicsquid.mysticalworld.init.ModItems.copper_knife), RUNIC_CARVING);
-    registry.addRecipeCatalyst(new ItemStack(epicsquid.mysticalworld.init.ModItems.silver_knife), RUNIC_CARVING);
-    registry.addRecipeCatalyst(new ItemStack(epicsquid.mysticalworld.init.ModItems.amethyst_knife), RUNIC_CARVING);
-
-    registry.addRecipeCatalyst(new ItemStack(epicsquid.mysticalworld.init.ModItems.copper_knife), BARK_CARVING);
-    registry.addRecipeCatalyst(new ItemStack(epicsquid.mysticalworld.init.ModItems.silver_knife), BARK_CARVING);
-    registry.addRecipeCatalyst(new ItemStack(epicsquid.mysticalworld.init.ModItems.amethyst_knife), BARK_CARVING);*/
-
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.bonfire), RITUAL_CRAFTING);
+    registry.addRecipeCatalyst(new ItemStack(ModBlocks.reinforced_bonfire), RITUAL_CRAFTING);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.mortar), MORTAR_AND_PESTLE);
     registry.addRecipeCatalyst(new ItemStack(ModItems.pestle), MORTAR_AND_PESTLE);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.bonfire), RITUAL);
+    registry.addRecipeCatalyst(new ItemStack(ModBlocks.reinforced_bonfire), RITUAL);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.fey_crafter), FEY_CRAFTING);
     registry.addRecipeCatalyst(new ItemStack(ModItems.staff), SPELL_COSTS);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.imbuer), SPELL_MODIFIERS);

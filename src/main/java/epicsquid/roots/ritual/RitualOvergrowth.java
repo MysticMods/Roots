@@ -15,7 +15,11 @@ import net.minecraftforge.oredict.OreIngredient;
 public class RitualOvergrowth extends RitualBase {
 
   public RitualOvergrowth(String name, int duration, boolean disabled) {
-    super(name, duration, disabled);
+    super(name, disabled);
+  }
+
+  @Override
+  public void init () {
     addCondition(
         new ConditionItems(
             new ItemStack(Items.REEDS),
@@ -26,6 +30,11 @@ public class RitualOvergrowth extends RitualBase {
     setIcon(ModItems.ritual_overgrowth);
     setColor(TextFormatting.DARK_GREEN);
     setBold(true);
+  }
+
+  @Override
+  public void finalise() {
+
   }
 
   @Override

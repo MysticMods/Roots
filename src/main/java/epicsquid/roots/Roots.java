@@ -70,10 +70,6 @@ public class Roots {
     CapabilityManager.INSTANCE.register(IPlayerGroveCapability.class, new PlayerGroveCapabilityStorage(), PlayerGroveCapability::new);
     CapabilityManager.INSTANCE.register(IPlayerDataCapability.class, new PlayerDataCapabilityStorage(), PlayerDataCapability::new);
     CapabilityManager.INSTANCE.register(RunicShearsCapability.class, new RunicShearsCapabilityStorage(), RunicShearsCapability::new);
-    MinecraftForge.EVENT_BUS.register(new RegistryManager());
-    MinecraftForge.EVENT_BUS.register(EventManager.class);
-    MinecraftForge.EVENT_BUS.register(ConfigHandler.class);
-    MinecraftForge.EVENT_BUS.register(PetalApothecaryFiller.class);
     NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);
     logger = event.getModLog();
     ModDamage.init();

@@ -18,8 +18,6 @@ import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class BlockFairyGroveStone extends BlockGroveStone {
-  public static final PropertyBool VALID = PropertyBool.create("valid");
-
   public BlockFairyGroveStone(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
     super(mat, type, hardness, name);
 
@@ -30,7 +28,7 @@ public class BlockFairyGroveStone extends BlockGroveStone {
 
   @Override
   public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
-    super.randomTick(world, pos, state, random);
+    this.updateTick(world, pos, state, random);
 
     /*if (!GeneralConfig.EnableGroveStoneEnvironment) return;
 
@@ -88,8 +86,6 @@ public class BlockFairyGroveStone extends BlockGroveStone {
   @Override
   @SideOnly(Side.CLIENT)
   public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-    super.randomDisplayTick(stateIn, worldIn, pos, rand);
-
     if (stateIn.getValue(VALID)) {
       for (int i = -2; i <= 2; ++i) {
         for (int j = -2; j <= 2; ++j) {
@@ -102,7 +98,7 @@ public class BlockFairyGroveStone extends BlockGroveStone {
                 break;
               }
               ClientProxy.particleRenderer.spawnParticle(worldIn, Util.getLowercaseClassName(ParticleLeafArc.class), (double) pos.getX() + 0.5D, (double) pos.getY() + 1.0D, (double) pos.getZ() + 0.5D, (i + rand.nextDouble() - 0.05) * 0.04, -0.0001, (j + rand.nextFloat() - 0.05) * 0.04,
-                  100, 0.14 + rand.nextDouble() * 0.05, 0.385, 0.117 + rand.nextDouble() * 0.05, 1, rand.nextDouble() + 0.5, rand.nextDouble() * 2);
+                  100, 1, 0.54 + rand.nextDouble() * 0.05, 0.76 + rand.nextDouble() * 0.05, 1, rand.nextDouble() + 0.5, rand.nextDouble() * 2);
             }
           }
         }

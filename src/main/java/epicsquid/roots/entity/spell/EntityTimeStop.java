@@ -1,14 +1,16 @@
 package epicsquid.roots.entity.spell;
 
-import epicsquid.roots.effect.EffectManager;
+import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellTimeStop;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
@@ -75,22 +77,20 @@ public class EntityTimeStop extends Entity {
     }
     List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 9.0, posY - 1.0, posZ - 9.0, posX + 9.0, posY + 19.0, posZ + 9.0));
     for (EntityLivingBase e : entities) {
-      if (playerId != null) {
-        if (e.getUniqueID().compareTo(playerId) != 0) {
-          EffectManager.assignEffect(e, EffectManager.effect_time_stop.getName(), 40, new NBTTagCompound());
-        }
+      if (playerId != null && e.getUniqueID() != playerId) {
+        e.addPotionEffect(new PotionEffect(ModPotions.time_stop, 40));
       }
     }
   }
 
   @Override
   protected void readEntityFromNBT(NBTTagCompound compound) {
-    this.playerId = net.minecraft.nbt.NBTUtil.getUUIDFromTag(compound.getCompoundTag("id"));
+    this.playerId = NBTUtil.getUUIDFromTag(compound.getCompoundTag("id"));
   }
 
   @Override
   protected void writeEntityToNBT(NBTTagCompound compound) {
-    compound.setTag("id", net.minecraft.nbt.NBTUtil.createUUIDTag(playerId));
+    compound.setTag("id", NBTUtil.createUUIDTag(playerId));
   }
 
 }

@@ -2,6 +2,7 @@ package epicsquid.roots.entity.ritual;
 
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
+import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityZombieVillager;
 import net.minecraft.network.datasync.DataParameter;
@@ -16,9 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntityRitualPurity extends EntityRitualBase {
-
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualPurity.class, DataSerializers.VARINT);
-
   public EntityRitualPurity(World worldIn) {
     super(worldIn);
     getDataManager().register(lifetime, RitualRegistry.ritual_purity.getDuration() + 20);
@@ -28,11 +26,7 @@ public class EntityRitualPurity extends EntityRitualBase {
   public void onUpdate() {
     super.onUpdate();
     float alpha = (float) Math.min(40, (RitualRegistry.ritual_life.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
-    getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
-    getDataManager().setDirty(lifetime);
-    if (getDataManager().get(lifetime) < 0) {
-      setDead();
-    }
+
     if (world.isRemote && getDataManager().get(lifetime) > 0) {
       ParticleUtil.spawnParticleStar(world, (float) posX, (float) posY, (float) posZ, 0, 0, 0, 100, 255, 100, 0.5f * alpha, 20.0f, 40);
       if (rand.nextInt(5) == 0) {
@@ -51,6 +45,14 @@ public class EntityRitualPurity extends EntityRitualBase {
       List<EntityLivingBase> entities = world
           .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 15.5, posY - 15.5, posZ - 15.5, posX + 15.5, posY + 15.5, posZ + 15.5));
       for (EntityLivingBase e : entities) {
+        if (EntityUtil.isHostile(e)) {
+          if (e instanceof EntityZombieVillager && ((EntityZombieVillager)e).isConverting()) {
+            ((EntityZombieVillager)e).conversionTime -= 1;
+            e.extinguish();
+          }
+          continue;
+        }
+
         List<Potion> toRemove = new ArrayList<>();
         for (PotionEffect potionEffect : e.getActivePotionEffects()) {
           if (potionEffect.getPotion().isBadEffect()) {
@@ -61,24 +63,12 @@ public class EntityRitualPurity extends EntityRitualBase {
           e.removePotionEffect(potion);
         }
         e.extinguish();
-        if (e instanceof EntityZombieVillager && ((EntityZombieVillager)e).isConverting()) {
-          ((EntityZombieVillager)e).conversionTime -= 1;
-        }
         if (world.isRemote) {
           for (float i = 0; i < 8; i++) {
-            ParticleUtil
-                .spawnParticleStar(world, (float) e.posX + 0.5f * (rand.nextFloat() - 0.5f), (float) e.posY + e.height / 2.5f + (rand.nextFloat() - 0.5f),
-                    (float) e.posZ + 0.5f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), 0.01875f * (rand.nextFloat()),
-                    0.125f * (rand.nextFloat() - 0.5f), 100, 255, 100, 1.0f * alpha, 1.0f + 2.0f * rand.nextFloat(), 40);
+            ParticleUtil.spawnParticleStar(world, (float) e.posX + 0.5f * (rand.nextFloat() - 0.5f), (float) e.posY + e.height / 2.5f + (rand.nextFloat() - 0.5f), (float) e.posZ + 0.5f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), 0.01875f * (rand.nextFloat()), 0.125f * (rand.nextFloat() - 0.5f), 100, 255, 100, 1.0f * alpha, 1.0f + 2.0f * rand.nextFloat(), 40);
           }
         }
       }
     }
   }
-
-  @Override
-  public DataParameter<Integer> getLifetime() {
-    return lifetime;
-  }
-
 }

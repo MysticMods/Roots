@@ -1,5 +1,16 @@
+
 {
-    "variants":{
-        "custom":  { "model": "roots:chiseled_runestone" }
+    "forge_marker": 1,
+    "defaults": {
+        "model": "cube_all",
+        "textures": {
+            "all": "roots:blocks/chiseled_runestone"
+        },
+        "uvlock": true
+    },
+    "variants": {
+        "normal": [{}],
+        "inventory": [{}],
+        "handlers": [{}]
     }
 }
