@@ -1,6 +1,5 @@
 package epicsquid.roots.spell;
 
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.RitualUtil;
@@ -28,12 +27,11 @@ public class SpellThaw extends SpellBase {
 
   public SpellThaw(String name) {
     super(name, TextFormatting.AQUA, 25F/255F, 1F, 235F/255F, 252F/255F, 166F/255F, 37F/255F);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS);
+  }
 
-    this.castType = EnumCastType.CONTINUOUS;
-    this.cooldown = 20;
-
-    addCost(HerbRegistry.getHerbByName("wildewheet"), 0.25F);
-
+  @Override
+  public void init() {
     addIngredients(
             new ItemStack(ModItems.bark_acacia),
             new ItemStack(Blocks.TORCH),

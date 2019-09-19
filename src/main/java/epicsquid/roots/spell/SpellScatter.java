@@ -36,7 +36,11 @@ public class SpellScatter extends SpellBase {
 
   public SpellScatter(String name) {
     super(name, TextFormatting.DARK_GREEN, 188F/255F, 244F/255F, 151F/255F, 71F/255F, 132F/255F, 30F/255F);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS);
+  }
 
+  @Override
+  public void init() {
     addIngredients(
             new ItemStack(ModItems.terra_spores),
             new ItemStack(ModItems.wildroot),

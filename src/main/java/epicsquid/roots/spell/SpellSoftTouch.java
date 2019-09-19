@@ -34,7 +34,11 @@ public class SpellSoftTouch extends SpellBase {
 
   public SpellSoftTouch(String name) {
     super(name, TextFormatting.GRAY, 64F/255F, 232F/255F, 159F/255F, 209F/255F, 209F/255F, 209F/255F);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1);
+  }
 
+  @Override
+  public void init() {
     addIngredients(
             new ItemStack(ModItems.bark_birch),
             new ItemStack(ModItems.terra_moss),

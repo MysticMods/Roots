@@ -2,6 +2,7 @@ package epicsquid.roots.util;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.integration.baubles.pouch.BaublePowderInventoryUtil;
 import epicsquid.roots.item.ItemPouch;
 import epicsquid.roots.item.ItemSylvanArmor;

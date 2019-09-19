@@ -41,7 +41,11 @@ public class SpellFall extends SpellBase {
 
     public SpellFall(String name) {
         super(name, TextFormatting.GOLD, 227/255F, 179/255F, 66/255F, 209/255F, 113/255F, 10/255F);
+        properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_RADIUS);
+    }
 
+    @Override
+    public void init() {
         addIngredients(
                 new ItemStack(ModItems.stalicripe),
                 new ItemStack(ModBlocks.thatch),

@@ -17,6 +17,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
+import java.util.List;
+import java.util.UUID;
+
 @SuppressWarnings("AccessStaticViaInstance")
 public class EntityThornTrap extends Entity {
   private static final DataParameter<Integer> lifetime = EntityDataManager.<Integer>createKey(EntityThornTrap.class, DataSerializers.VARINT);

@@ -36,7 +36,10 @@ public class SpellDisarm extends SpellBase{
   private SpellDisarm(String name) {
     super(name, TextFormatting.DARK_RED, 122F/255F, 0F, 0F, 58F/255F, 58F/255F, 58F/255F);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2);
+  }
 
+  @Override
+  public void init() {
     addIngredients(
             new ItemStack(Items.IRON_SWORD),
             new ItemStack(ModItems.bark_dark_oak),
