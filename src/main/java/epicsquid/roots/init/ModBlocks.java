@@ -32,6 +32,7 @@ public class ModBlocks {
   public static Block fairy_grove_stone, fungi_grove_stone;
 
   public static Block fey_fire, offertory_bowl, fairy_house_red, fairy_house_brown, fairy_house_baffle;
+  public static Block mark;
 
   public static BlockCropBase moonglow, pereskia, wildroot, spirit_herb, wildewheet, cloud_berry, infernal_bulb, dewgonia, stalicripe;
 
@@ -169,6 +170,7 @@ public class ModBlocks {
 
     event.addBlock(fey_light = new BlockFeyLight(Material.SNOW, SoundType.SNOW, 0.0f, "fey_light")).setCreativeTab(Roots.tab);
     event.addBlock(fey_fire = new BlockWildFire("fey_fire")).setCreativeTab(Roots.tab);
+    event.addBlock(mark = new BlockMark("mark")).setCreativeTab(Roots.tab);
   }
 
   private static Variants variants(RegisterContentEvent event, Block base, String name, SoundType sound, Material material) {

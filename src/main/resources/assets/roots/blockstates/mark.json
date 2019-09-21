@@ -1,0 +1,25 @@
+{
+  "variants": {
+    "inventory": {
+      "model": "roots:fey_light"
+    },
+    "facing=north": {
+      "model": "roots:grove_padding"
+    },
+    "facing=east": {
+      "model": "roots:grove_padding"
+    },
+    "facing=south": {
+      "model": "roots:grove_padding"
+    },
+    "facing=west": {
+      "model": "roots:grove_padding"
+    },
+    "facing=up": {
+      "model": "roots:grove_padding"
+    },
+    "facing=down": {
+      "model": "roots:grove_padding"
+    }
+  }
+}
