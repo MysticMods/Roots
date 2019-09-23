@@ -55,7 +55,7 @@ public class ModBlocks {
   public static Block wildwood_door, wildwood_trapdoor;
   public static Block wildwood_button, wildwood_pressure_plate, wildwood_fence, wildwood_ladder;
 
-  public static Block fey_light;
+  public static Block fey_light, decorative_bonfire;
 
   /**
    * Register all block
@@ -147,6 +147,7 @@ public class ModBlocks {
     event.addBlock(mortar = new BlockMortar(Material.ROCK, SoundType.STONE, 1.4f, "mortar", TileEntityMortar.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(bonfire = new BlockBonfire(Material.WOOD, SoundType.WOOD, 1.4f, "bonfire", TileEntityBonfire.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(reinforced_bonfire = new BlockReinforcedBonfire(Material.ROCK, SoundType.STONE, 8.4f, "reinforced_bonfire", TileEntityBonfire.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(decorative_bonfire = new BlockDecorativeBonfire(Material.WOOD, SoundType.WOOD, 1.4f, "decorative_bonfire", TileEntityDecorativeBonfire.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(imbuer = new BlockImbuer(Material.WOOD, SoundType.WOOD, 1.4f, "imbuer", TileEntityImbuer.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(offertory_plate = new BlockOffertoryPlate(Material.ROCK, SoundType.STONE, 1.4f, "offertory_plate", TileEntityOffertoryPlate.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(offertory_bowl = new BlockOffertoryBowl(Material.ROCK, SoundType.STONE, 1.4f, "offertory_bowl")).setCreativeTab(Roots.tab).setLightOpacity(0);
