@@ -6,7 +6,7 @@ import epicsquid.mysticallib.entity.villager.ListRandomItemForEmerald;
 import epicsquid.mysticallib.entity.villager.ListRandomItemForRandomEmeralds;
 import epicsquid.mysticallib.entity.villager.ListRandomItemWithPrice;
 import epicsquid.mysticallib.entity.villager.ListRandomItemWithPrice.ItemAndPriceInfo;
-import epicsquid.mysticalworld.materials.Gem;
+import epicsquid.mysticalworld.materials.Materials;
 import epicsquid.roots.Roots;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.passive.EntityVillager.PriceInfo;
@@ -44,7 +44,7 @@ public class ModVillagers {
             new ListRandomItemWithPrice(new ItemAndPriceInfo(ModItems.component_pouch, 21, 35), new ItemAndPriceInfo(ModItems.runic_shears, 18, 27)),
             new ListRandomItemForEmerald(new PriceInfo(2, 5), ModItems.wildewheet, ModItems.spirit_herb, ModItems.moonglow_leaf, ModItems.pereskia)).
         addTrade(3,
-            new ListRandomItemForRandomEmeralds(new PriceInfo(8, 13), Gem.amethyst.getGem(), Items.DIAMOND),
+            new ListRandomItemForRandomEmeralds(new PriceInfo(8, 13), Materials.amethyst.getItem(), Items.DIAMOND),
             new EntityVillager.ListItemForEmeralds(new ItemStack(ModBlocks.wildwood_sapling), new EntityVillager.PriceInfo(42, 64)));
   }
 }
