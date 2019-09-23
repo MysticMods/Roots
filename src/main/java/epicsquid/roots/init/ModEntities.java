@@ -2,6 +2,7 @@ package epicsquid.roots.init;
 
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.entity.RenderNull;
+import epicsquid.mysticalworld.entity.*;
 import epicsquid.roots.Roots;
 import epicsquid.roots.entity.EntityFairy;
 import epicsquid.roots.entity.projectile.EntityFlare;
@@ -10,6 +11,9 @@ import epicsquid.roots.entity.ritual.*;
 import epicsquid.roots.entity.spell.*;
 import epicsquid.roots.entity.render.RenderFairy;
 import epicsquid.roots.proxy.ClientProxy;
+import net.minecraft.world.storage.loot.LootTableList;
+
+import java.util.stream.Stream;
 
 public class ModEntities {
 
@@ -41,7 +45,6 @@ public class ModEntities {
     LibRegistry.registerEntity(EntityRitualSpreadingForest.class);
     LibRegistry.registerEntity(EntityRitualWindwall.class);
     LibRegistry.registerEntity(EntityRitualWardingProtection.class);
-    //LibRegistry.registerEntity(EntitySpawnItem.class);
     LibRegistry.registerEntity(EntityRitualOvergrowth.class);
     LibRegistry.registerEntity(EntityRitualFrostLands.class);
     LibRegistry.registerEntity(EntityRitualFlowerGrowth.class);
@@ -71,10 +74,7 @@ public class ModEntities {
     }
   }
 
-  /**
-   * Registers the spawns of a mob in the world
-   */
-  public static void registerMobSpawn() {
-
+  public static void registerLootTables () {
+    Stream.of(EntityFairy.LOOT_TABLE).forEach(LootTableList::register);
   }
 }

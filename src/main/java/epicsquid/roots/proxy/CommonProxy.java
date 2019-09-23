@@ -5,6 +5,7 @@ import epicsquid.roots.command.CommandRitual;
 import epicsquid.roots.command.CommandRoots;
 import epicsquid.roots.command.CommandStaff;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.init.ModEntities;
 import epicsquid.roots.integration.chisel.RootsChisel;
 import epicsquid.roots.integration.consecration.Consecration;
 import epicsquid.roots.integration.endercore.EndercoreHarvest;
@@ -28,6 +29,7 @@ public class CommonProxy {
     RitualRegistry.preInit();
     OfferingUtil.init();
     RuneRegistry.init();
+    ModEntities.registerLootTables();
   }
 
   public void init(FMLInitializationEvent event) {
