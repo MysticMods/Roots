@@ -34,7 +34,6 @@ public class RegistryManager {
     ModItems.registerItems(event);
 
     ModEntities.registerMobs();
-    ModEntities.registerMobSpawn();
     PacketHandler.registerMessages();
   }
 
