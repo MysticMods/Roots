@@ -1,11 +1,14 @@
 package epicsquid.roots.init;
 
 import com.google.common.collect.Lists;
+import com.sun.swing.internal.plaf.metal.resources.metal;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticallib.recipe.factories.OreFallbackIngredient;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.mysticalworld.config.ConfigManager;
 import epicsquid.mysticalworld.entity.*;
-import epicsquid.mysticalworld.materials.Metal;
+import epicsquid.mysticalworld.materials.Material;
+import epicsquid.mysticalworld.materials.Materials;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.item.ItemDruidKnife;
@@ -27,6 +30,7 @@ import net.minecraft.entity.monster.EntityPolarBear;
 import net.minecraft.entity.passive.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -696,13 +700,24 @@ public class ModRecipes {
   }
 
   public static void initMortarRecipes() {
-    addMortarRecipe(new ItemStack(Items.DYE, 1, 12), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.carapace), 1, 1, 1, 1, 1, 1);
-    addMortarRecipe(new ItemStack(ModItems.flour), Ingredient.fromItem(Items.WHEAT), 1f, 1f, 0f, 1f, 1f, 0f);
-    addMortarRecipe(new ItemStack(ModItems.flour), Ingredient.fromItem(Items.POTATO), 1f, 1f, 0, 1f, 1f, 0f);
-    addMortarRecipe(new ItemStack(Items.DYE, 4, 15), Ingredient.fromItem(Items.BONE), 0f, 0f, 0f, 0f, 0f, 0f);
+    // Maybe
+    /*addMortarRecipe(new MortarRecipe(new ItemStack(Items.GUNPOWDER, 5), new Ingredient[]{
+        Ingredient.fromItem(Items.FLINT),
+        Ingredient.fromItem(Items.BLAZE_POWDER),
+        Ingredient.fromItem(Items.FLINT),
+        Ingredient.fromItem(Items.BLAZE_ROD),
+        Ingredient.fromItem(Items.FLINT)}, 1, 1, 1, 1, 1, 1));*/
+    addMortarRecipe(new ItemStack(Items.DYE, 1, EnumDyeColor.BLUE.getMetadata()), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.carapace), 1, 1, 1, 1, 1, 1);
+    addMortarRecipe(new ItemStack(Items.DYE, 1, EnumDyeColor.ORANGE.getMetadata()), new OreIngredient("cropCarrot"), 1, 1, 1, 1, 1, 1);
+    addMortarRecipe(new ItemStack(ModItems.flour), new OreIngredient("cropWheat"), 1f, 1f, 0f, 1f, 1f, 0f);
+    addMortarRecipe(new ItemStack(ModItems.flour), new OreIngredient("cropPotato"), 1f, 1f, 0, 1f, 1f, 0f);
+    addMortarRecipe(new ItemStack(Items.DYE, 4, 15), new OreIngredient("bone"), 0f, 0f, 0f, 0f, 0f, 0f);
     addMortarRecipe(new ItemStack(Items.SUGAR, 2), new OreIngredient("sugarcane"), 0f, 0f, 0f, 1f, 1f, 1f);
+    addMortarRecipe(new ItemStack(Items.BLAZE_POWDER, 5), Ingredient.fromItem(Items.BLAZE_ROD), 1, 1, 1, 1, 1, 1);
+    addMortarRecipe(new ItemStack(Items.STRING, 3), new OreIngredient("wool"), 1, 1, 1, 1, 1, 1);
+    addMortarRecipe(new ItemStack(Items.STRING, 5), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.silk_cocoon), 0, 0, 0, 0, 0, 0);
 
-    for (Metal metal : Metal.values()) {
+    for (Material metal : Materials.getMaterials()) {
       if (!metal.isEnabled()) continue;
 
       Item metalDust = metal.getDust();
@@ -713,10 +728,15 @@ public class ModRecipes {
       addMortarRecipe(new ItemStack(metalDust), new OreIngredient("ingot" + metal.getOredictNameSuffix()), 82f / 255f, 92f / 255f, 114f / 255f, 160f / 255f, 167f / 255f, 183f / 255f);
     }
 
-    addMortarRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.gold_dust), new OreIngredient("ingotGold"), 82f / 255f, 92f / 255f, 114f / 255f, 160f / 255f, 167f / 255f, 183f / 255f);
-    addMortarRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.iron_dust), new OreIngredient("ingotIron"), 82f / 255f, 92f / 255f, 114f / 255f, 160f / 255f, 167f / 255f, 183f / 255f);
+    if (ConfigManager.gold.enableDusts) {
+      addMortarRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.gold_dust), new OreIngredient("ingotGold"), 82f / 255f, 92f / 255f, 114f / 255f, 160f / 255f, 167f / 255f, 183f / 255f);
+    }
+    if (ConfigManager.iron.enableDusts) {
+      addMortarRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.iron_dust), new OreIngredient("ingotIron"), 82f / 255f, 92f / 255f, 114f / 255f, 160f / 255f, 167f / 255f, 183f / 255f);
+    }
 
     addMortarRecipe(new ItemStack(ModItems.petals), new OreIngredient("allFlowers"), 1f, 0f, 0f, 0f, 1f, 0f);
+    addMortarRecipe(new ItemStack(ModItems.petals, 2), new OreIngredient("allTallFlowers"), 1f, 0f, 0f, 0f, 1f, 0f);
     addMortarRecipe(new ItemStack(ModItems.runic_dust), new OreIngredient("runestone"), 0f, 0f, 1f, 60 / 255f, 0f, 1f);
   }
 
