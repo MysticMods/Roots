@@ -193,7 +193,7 @@ public class ModItems {
     for (BlockDoublePlant.EnumPlantType type : BlockDoublePlant.EnumPlantType.values()) {
       if (type == BlockDoublePlant.EnumPlantType.FERN || type == BlockDoublePlant.EnumPlantType.GRASS) continue;
 
-      OreDictionary.registerOre("allFlowers", new ItemStack(Blocks.DOUBLE_PLANT, 1, type.getMeta()));
+      OreDictionary.registerOre("allTallFlowers", new ItemStack(Blocks.DOUBLE_PLANT, 1, type.getMeta()));
     }
 
     for (Item bark : Arrays.asList(bark_oak, bark_wildwood, bark_birch, bark_spruce, bark_acacia, bark_dark_oak, bark_jungle)) {
@@ -211,8 +211,10 @@ public class ModItems {
     OreDictionary.registerOre("doorWood", new ItemStack(((BlockDoorBase) ModBlocks.wildwood_door).getItemBlock()));
     OreDictionary.registerOre("foodBread", Items.BREAD);
     OreDictionary.registerOre("foodBread", ModItems.wildewheet_bread);
-    OreDictionary.registerOre("foodFloud", ModItems.flour);
+    OreDictionary.registerOre("foodFlour", ModItems.flour);
     OreDictionary.registerOre("dustWheat", ModItems.flour);
+    OreDictionary.registerOre("treeLeaves", ModBlocks.wildwood_leaves);
+    OreDictionary.registerOre("leather", ModItems.fey_leather);
   }
 
   private static void registerSeedDrops() {
