@@ -17,26 +17,6 @@ public class TransmutationRecipe extends RegistryItem {
   private ItemStack endStack;
   private WorldPosStatePredicate condition = (a, b, c) -> true;
 
-  public TransmutationRecipe(ResourceLocation name, Block startBlock, Block endState) {
-    this(name, startBlock, endState.getDefaultState(), null);
-  }
-
-  public TransmutationRecipe(ResourceLocation name, Block startBlock, Block endState, WorldPosStatePredicate condition) {
-    this(name, startBlock, endState.getDefaultState(), condition);
-  }
-
-  public TransmutationRecipe(ResourceLocation name, Block startBlock, IBlockState endState) {
-    this(name, startBlock, endState, null);
-  }
-
-  public TransmutationRecipe(ResourceLocation name, IBlockState startState, IBlockState endState) {
-    this(name, startState, endState, null);
-  }
-
-  public TransmutationRecipe(ResourceLocation name, Block startBlock, ItemStack endState) {
-    this(name, startBlock, endState, null);
-  }
-
   public TransmutationRecipe(ResourceLocation name, Block startBlock, ItemStack endState, WorldPosStatePredicate condition) {
     this.setRegistryName(name);
     this.startBlock = startBlock;
@@ -114,7 +94,7 @@ public class TransmutationRecipe extends RegistryItem {
   }
 
   public boolean matches(World world, BlockPos pos, IBlockState state) {
-    return (this.startBlock != null && this.startBlock == state.getBlock() || this.startState != null && StateUtil.compareStates(this.startState, state)) && (this.condition == null || this.condition.test(world, pos, state));
+    return (this.startBlock != null && this.startBlock == state.getBlock() || this.startState != null && StateUtil.compareStates(this.startState, state)) && (this.getCondition() == null || this.getCondition().test(world, pos, state));
   }
 
   public boolean matches(World world, BlockPos pos) {
