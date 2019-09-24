@@ -15,9 +15,9 @@ import net.minecraftforge.common.IPlantable;
 import java.util.*;
 
 public class Growth {
-  private static Set<Block> BLACKLIST = new HashSet();
+  private static Set<Block> BLACKLIST = new HashSet<>();
   private static Set<IProperty<?>> AGE_PROPERTIES = new HashSet<>();
-  private static Object2IntOpenHashMap<PropertyInteger> AGE_MAP = new Object2IntOpenHashMap();
+  private static Object2IntOpenHashMap<PropertyInteger> AGE_MAP = new Object2IntOpenHashMap<>();
 
   static {
     AGE_MAP.defaultReturnValue(-1);
