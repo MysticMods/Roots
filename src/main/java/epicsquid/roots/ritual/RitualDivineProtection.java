@@ -4,7 +4,6 @@ import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualDivineProtection;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
-import epicsquid.roots.recipe.conditions.ConditionWorldTime;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -37,7 +36,7 @@ public class RitualDivineProtection extends RitualBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addCondition(new ConditionItems(
         new ItemStack(ModItems.pereskia),
         new ItemStack(ModItems.cloud_berry),
