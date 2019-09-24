@@ -3,6 +3,8 @@ package epicsquid.roots.recipe.conditions;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.entity.player.EntityPlayer;
 
+// Time-based rituals aren't fun in the slightest.
+@Deprecated
 public class ConditionWorldTime implements Condition {
 
   private final int first, second;
