@@ -22,7 +22,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
-@Mod.EventBusSubscriber(modid=Roots.MODID)
 public class RegistryManager {
 
   @SubscribeEvent
