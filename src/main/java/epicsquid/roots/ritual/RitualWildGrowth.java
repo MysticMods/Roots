@@ -4,13 +4,10 @@ import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualWildGrowth;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
-import epicsquid.roots.ritual.RitualBase;
-import javafx.beans.property.Property;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.common.EnumPlantType;
 
 public class RitualWildGrowth extends RitualBase {
   public RitualWildGrowth(String name, int duration, boolean disabled) {
@@ -18,7 +15,7 @@ public class RitualWildGrowth extends RitualBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addCondition(new ConditionItems(
         new ItemStack(ModItems.wildroot),
         new ItemStack(ModItems.bark_oak),
@@ -33,7 +30,6 @@ public class RitualWildGrowth extends RitualBase {
 
   @Override
   public void finalise() {
-
   }
 
   @Override

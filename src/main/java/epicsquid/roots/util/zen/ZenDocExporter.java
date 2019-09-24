@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 // Licensed with the Apache License and used with permission
 // https://github.com/codetaylor/athenaeum/tree/master/src/main/java/com/codetaylor/mc/athenaeum/tools
 
+@SuppressWarnings("unchecked")
 public class ZenDocExporter {
 
   public void export(Path path, Class[] classes) {
@@ -253,11 +254,11 @@ public class ZenDocExporter {
 
     List<MethodAnnotationPair> methodList = new ArrayList<>();
 
-    for (int j = 0; j < methods.length; j++) {
-      ZenDocMethod annotation = methods[j].getDeclaredAnnotation(ZenDocMethod.class);
+    for (Method method : methods) {
+      ZenDocMethod annotation = method.getDeclaredAnnotation(ZenDocMethod.class);
 
       if (annotation != null) {
-        methodList.add(new MethodAnnotationPair(methods[j], annotation));
+        methodList.add(new MethodAnnotationPair(method, annotation));
       }
     }
 

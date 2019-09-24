@@ -109,6 +109,7 @@ public class BlockWildFire extends BlockFire implements IBlock, IModeledObject, 
 
   @Nullable
   @Override
+  @SuppressWarnings("deprecation")
   public net.minecraft.pathfinding.PathNodeType getAiPathNodeType(IBlockState state, IBlockAccess world, BlockPos pos) {
     return PathNodeType.DAMAGE_FIRE;
   }
