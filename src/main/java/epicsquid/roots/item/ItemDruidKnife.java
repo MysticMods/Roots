@@ -6,7 +6,9 @@ import epicsquid.roots.config.MossConfig;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.item.dispenser.DispenseKnife;
 import epicsquid.roots.recipe.RunicCarvingRecipe;
+import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -25,6 +27,8 @@ public class ItemDruidKnife extends ItemKnifeBase {
   public ItemDruidKnife(String name, ToolMaterial material) {
     super(name, material);
     ModItems.knives.add(this);
+
+    BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DispenseKnife.getInstance());
   }
 
   @Override
