@@ -1,4 +1,4 @@
-package epicsquid.roots.ritual.natural;
+package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualFlowerGrowth;

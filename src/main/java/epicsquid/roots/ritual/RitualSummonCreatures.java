@@ -1,4 +1,4 @@
-package epicsquid.roots.ritual.wild;
+package epicsquid.roots.ritual;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

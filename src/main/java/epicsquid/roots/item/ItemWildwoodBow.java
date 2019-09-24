@@ -37,6 +37,7 @@ public class ItemWildwoodBow extends ItemBowBase implements ILivingRepair {
   }
 
   @Override
+  @SuppressWarnings("deprecation")
   public EnumRarity getRarity(ItemStack stack) {
     return EnumRarity.RARE;
   }

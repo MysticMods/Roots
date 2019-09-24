@@ -1,9 +1,7 @@
 package epicsquid.roots.ritual;
 
 import epicsquid.roots.config.RitualConfig;
-import epicsquid.roots.ritual.natural.RitualFlowerGrowth;
 import epicsquid.roots.ritual.natural.RitualWildGrowth;
-import epicsquid.roots.ritual.wild.RitualSummonCreatures;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.entity.player.EntityPlayer;
 

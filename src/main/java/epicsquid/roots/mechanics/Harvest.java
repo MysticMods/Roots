@@ -1,10 +1,11 @@
 package epicsquid.roots.mechanics;
 
-import epicsquid.roots.Roots;
 import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.roots.Roots;
 import epicsquid.roots.config.CropConfig;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockCrops;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,9 +21,9 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.Method;
@@ -69,7 +70,8 @@ public class Harvest {
   }
 
   static {
-    getSeed = ReflectionHelper.findMethod(BlockCrops.class, "getSeed", "func_149866_i");
+    getSeed = ObfuscationReflectionHelper.findMethod(BlockCrops.class, "func_149866_i", Item.class);
+    getSeed.setAccessible(true);
   }
 
   public static void prepare() {
@@ -119,7 +121,7 @@ public class Harvest {
     return seed;
   }
 
-  public static List<ItemStack> harvestReturnDrops (IBlockState state, IProperty<?> prop, ItemStack seed, BlockPos pos, World world, @Nullable EntityPlayer player) {
+  public static List<ItemStack> harvestReturnDrops(IBlockState state, IProperty<?> prop, ItemStack seed, BlockPos pos, World world, @Nullable EntityPlayer player) {
     IBlockState newState = state.withProperty((IProperty<Integer>) prop, 0);
     NonNullList<ItemStack> drops = NonNullList.create();
     Harvest.add(seed, world.provider.getDimension(), pos, state);
@@ -129,7 +131,7 @@ public class Harvest {
     return drops;
   }
 
-  public static void doHarvest (IBlockState state, IProperty<?> prop, ItemStack seed, BlockPos pos, World world, @Nullable EntityPlayer player) {
+  public static void doHarvest(IBlockState state, IProperty<?> prop, ItemStack seed, BlockPos pos, World world, @Nullable EntityPlayer player) {
     List<ItemStack> drops = harvestReturnDrops(state, prop, seed, pos, world, player);
     for (ItemStack stack : drops) {
       if (stack.isEmpty()) continue;
@@ -137,13 +139,13 @@ public class Harvest {
     }
   }
 
-  public static List<ItemStack> harvestReturnDrops (IBlockState state, BlockPos pos, World world, @Nullable EntityPlayer player) {
+  public static List<ItemStack> harvestReturnDrops(IBlockState state, BlockPos pos, World world, @Nullable EntityPlayer player) {
     ItemStack seed = Harvest.getSeed(state);
     IProperty<?> prop = Harvest.resolveStates(state);
     return harvestReturnDrops(state, prop, seed, pos, world, player);
   }
 
-  public static void doHarvest (IBlockState state, BlockPos pos, World world, @Nullable EntityPlayer player) {
+  public static void doHarvest(IBlockState state, BlockPos pos, World world, @Nullable EntityPlayer player) {
     List<ItemStack> drops = harvestReturnDrops(state, pos, world, player);
     for (ItemStack stack : drops) {
       if (stack.isEmpty()) continue;
@@ -151,7 +153,7 @@ public class Harvest {
     }
   }
 
-  public static boolean isGrown (IBlockState state) {
+  public static boolean isGrown(IBlockState state) {
     IProperty<?> prop = resolveStates(state);
     if (prop == null) return false;
 

@@ -90,9 +90,9 @@ public class ModItems {
 
     barks = Arrays.asList(bark_oak, bark_spruce, bark_birch, bark_jungle, bark_dark_oak, bark_acacia, bark_wildwood);
 
-    // TODO: Maybe not do this
     event.addItem(fey_leather = new ItemBase("fey_leather") {
       @Override
+      @SuppressWarnings("deprecation")
       public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.RARE;
       }
