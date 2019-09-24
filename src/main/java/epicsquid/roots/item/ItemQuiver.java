@@ -136,6 +136,7 @@ public class ItemQuiver extends ItemArrowBase {
   }
 
   @Override
+  @SuppressWarnings("deprecation")
   public EnumRarity getRarity(ItemStack stack) {
     return EnumRarity.RARE;
   }

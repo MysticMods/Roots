@@ -40,6 +40,7 @@ public class ItemCreativePouch extends ItemPouch {
   }
 
   @Override
+  @SuppressWarnings("deprecation")
   public EnumRarity getRarity(ItemStack stack) {
     return EnumRarity.EPIC;
   }
