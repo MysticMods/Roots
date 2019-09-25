@@ -1,7 +1,6 @@
 {
   "name": "Natural Grove",
-  "sortnum" : 4,
+  "sortnum" : 10,
   "description": "",
-  "icon": "roots:spirit_herb",
-  "parent": "groves"
+  "icon": "roots:natural_grove_stone"
 }

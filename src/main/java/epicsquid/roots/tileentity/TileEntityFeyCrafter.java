@@ -3,7 +3,7 @@ package epicsquid.roots.tileentity;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.block.BlockGroveStone;
+import epicsquid.roots.block.groves.BlockGroveStone;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.init.ModSounds;

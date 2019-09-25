@@ -1,7 +1,6 @@
 {
   "name": "Wild Grove",
-  "sortnum" : 5,
+  "sortnum" : 11,
   "description": "",
-  "icon": "roots:wildewheet",
-  "parent": "groves"
+  "icon": "roots:wild_grove_stone"
 }

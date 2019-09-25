@@ -1,0 +1,36 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "facing": {
+        "north": { },
+        "east": { 
+            "transform": {
+                "rotation": {
+                    "y": 90
+                }
+            }
+        }
+    },
+    "valid": {
+        "true": {
+        	"textures": {
+    	    	"monolith": "roots:blocks/ob_stone_active_twilight",
+    		    "particle": "roots:blocks/ob_stone_active_twilight"
+        	}
+        },
+        "false": {
+        }
+    },
+    "half": {
+        "top": { 
+            "model": "roots:grove_stone_top"
+        },
+        "middle": {
+            "model": "roots:grove_stone_middle"
+        },
+        "bottom": {
+            "model": "roots:grove_stone_bottom"
+        }
+    }
+  }
+}
