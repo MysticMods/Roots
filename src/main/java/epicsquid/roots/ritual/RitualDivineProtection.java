@@ -4,7 +4,6 @@ import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualDivineProtection;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
-import epicsquid.roots.recipe.conditions.ConditionWorldTime;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -14,6 +13,7 @@ import net.minecraft.world.World;
 public class RitualDivineProtection extends RitualBase {
   public RitualDivineProtection(String name, int duration, boolean disabled) {
     super(name, duration, disabled);
+
     addCondition(new ConditionItems(
         new ItemStack(ModItems.pereskia),
         new ItemStack(ModItems.cloud_berry),
