@@ -57,7 +57,7 @@ public class SpellGeas extends SpellBase {
         if (e != player && e.getActivePotionEffect(ModPotions.geas) == null) {
           foundTarget = true;
           if (!player.world.isRemote) {
-            e.addPotionEffect(new PotionEffect(ModPotions.geas, duration));
+            e.addPotionEffect(new PotionEffect(ModPotions.geas, duration, 0, false, false));
             if (e instanceof EntityLiving) {
               ((EntityLiving) e).setAttackTarget(null);
             }

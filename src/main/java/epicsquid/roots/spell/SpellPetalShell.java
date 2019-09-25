@@ -1,16 +1,16 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.entity.spell.EntityPetalShell;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.List;
@@ -44,26 +44,16 @@ public class SpellPetalShell extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
-    if (!player.world.isRemote) {
-      List<EntityPetalShell> shells = player.world.getEntitiesWithinAABB(EntityPetalShell.class,
-          new AxisAlignedBB(player.posX - 0.5, player.posY, player.posZ - 0.5, player.posX + 0.5, player.posY + 2.0, player.posZ + 0.5));
-      boolean hasShell = false;
-      for (EntityPetalShell s : shells) {
-        if (s.getPlayerId().compareTo(player.getUniqueID()) == 0) {
-          hasShell = true;
-          s.getDataManager().set(s.getCharge(), Math.min(maxShells, s.getDataManager().get(s.getCharge()) + 1));
-          s.getDataManager().setDirty(s.getCharge());
-        }
+    PotionEffect shell = player.getActivePotionEffect(ModPotions.petal_shell);
+    int amp = shell == null ? 0 : shell.getAmplifier() + 1;
+    if (amp < 3) {
+      if (!player.world.isRemote) {
+        player.addPotionEffect(new PotionEffect(ModPotions.petal_shell, 60 * 20, amp, false, false));
+        PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ), player);
       }
-      if (!hasShell) {
-        EntityPetalShell shell = new EntityPetalShell(player.world);
-        shell.setPosition(player.posX, player.posY + 1.0f, player.posZ);
-        shell.setPlayer(player.getUniqueID());
-        player.world.spawnEntity(shell);
-      }
-      PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ), player);
+      return true;
     }
-    return true;
+    return false;
   }
 
   @Override

@@ -42,6 +42,8 @@ public abstract class SpellBase {
   private Object2DoubleOpenHashMap<Herb> costs = new Object2DoubleOpenHashMap<>();
   private List<Ingredient> ingredients = new ArrayList<>();
   private List<SpellModule> acceptedModules = new ArrayList<>();
+  private float[] firstColours;
+  private float[] secondColours;
 
   public enum EnumCastType {
     INSTANTANEOUS, CONTINUOUS
@@ -56,6 +58,16 @@ public abstract class SpellBase {
     this.green2 = g2;
     this.blue2 = b2;
     this.textColor = textColor;
+    this.firstColours = new float[]{r1, g1, b1};
+    this.secondColours = new float[]{r2, g2, b2};
+  }
+
+  public float[] getFirstColours() {
+    return firstColours;
+  }
+
+  public float[] getSecondColours() {
+    return secondColours;
   }
 
   public abstract void init ();
