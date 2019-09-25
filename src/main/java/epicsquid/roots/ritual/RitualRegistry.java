@@ -47,6 +47,7 @@ public class RitualRegistry {
     addRitual(ritual_windwall = new RitualWindwall("ritual_windwall", 3000, RitualConfig.disableRitualCategory.disableWindwall));
     addRitual(ritual_warden = new RitualWardingProtection("ritual_warding_protection", 1200, RitualConfig.disableRitualCategory.disableWardingProtection));
     addRitual(ritual_natural_aura = new RitualGermination("ritual_germination", 6400, RitualConfig.disableRitualCategory.disableNaturalAura));
+    addRitual(ritual_overgrowth = new RitualOvergrowth("ritual_overgrowth", 3000, RitualConfig.disableRitualCategory.disableOvergrowth));
     addRitual(ritual_purity = new RitualPurity("ritual_purity", 1200, RitualConfig.disableRitualCategory.disablePurity));
     addRitual(ritual_frost = new RitualFrostLands("ritual_frost_lands", 6400, RitualConfig.disableRitualCategory.disableFrostLands));
     addRitual(ritual_animal_harvest = new RitualAnimalHarvest("ritual_animal_harvest", 3200, RitualConfig.disableRitualCategory.disableAnimalHarvest));
