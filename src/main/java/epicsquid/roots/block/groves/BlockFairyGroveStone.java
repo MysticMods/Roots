@@ -1,11 +1,10 @@
-package epicsquid.roots.block;
+package epicsquid.roots.block.groves;
 
 import epicsquid.mysticallib.particle.particles.ParticleLeafArc;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -17,13 +16,9 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public class BlockFungiGroveStone extends BlockGroveStone {
-  public BlockFungiGroveStone(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
-    super(mat, type, hardness, name);
-
-    this.setDefaultState(this.blockState.getBaseState().withProperty(VALID, false).withProperty(HALF, Half.BOTTOM).withProperty(FACING, EnumFacing.NORTH));
-    this.setTickRandomly(true);
-    useNeighborBrightness = true;
+public class BlockFairyGroveStone extends BlockGroveStone {
+  public BlockFairyGroveStone(@Nonnull String name) {
+    super(name);
   }
 
   @Override

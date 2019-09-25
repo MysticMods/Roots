@@ -1,11 +1,10 @@
-package epicsquid.roots.block;
+package epicsquid.roots.block.groves;
 
 import epicsquid.mysticallib.particle.particles.ParticleLeafArc;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -17,13 +16,9 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public class BlockFairyGroveStone extends BlockGroveStone {
-  public BlockFairyGroveStone(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
-    super(mat, type, hardness, name);
-
-    this.setDefaultState(this.blockState.getBaseState().withProperty(VALID, false).withProperty(HALF, Half.BOTTOM).withProperty(FACING, EnumFacing.NORTH));
-    this.setTickRandomly(true);
-    useNeighborBrightness = true;
+public class BlockNaturalGroveStone extends BlockGroveStone {
+  public BlockNaturalGroveStone(@Nonnull String name) {
+    super(name);
   }
 
   @Override
@@ -97,8 +92,8 @@ public class BlockFairyGroveStone extends BlockGroveStone {
               if (!worldIn.isAirBlock(pos.add(i / 2, 0, j / 2))) {
                 break;
               }
-              ClientProxy.particleRenderer.spawnParticle(worldIn, Util.getLowercaseClassName(ParticleLeafArc.class), (double) pos.getX() + 0.5D, (double) pos.getY() + 1.0D, (double) pos.getZ() + 0.5D, (i + rand.nextDouble() - 0.05) * 0.04, -0.0001, (j + rand.nextFloat() - 0.05) * 0.04,
-                  100, 1, 0.54 + rand.nextDouble() * 0.05, 0.76 + rand.nextDouble() * 0.05, 1, rand.nextDouble() + 0.5, rand.nextDouble() * 2);
+            ClientProxy.particleRenderer.spawnParticle(worldIn, Util.getLowercaseClassName(ParticleLeafArc.class), (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, (i + rand.nextDouble() - 0.05) * 0.04, -0.0001, (j + rand.nextFloat() - 0.05) * 0.04,
+                  100, 0.14 + rand.nextDouble() * 0.05, 0.385, 0.117 + rand.nextDouble() * 0.05, 1, rand.nextDouble() + 0.5, rand.nextDouble() * 2);
             }
           }
         }

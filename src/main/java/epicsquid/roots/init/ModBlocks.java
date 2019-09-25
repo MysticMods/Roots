@@ -7,6 +7,7 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.api.CustomPlantType;
 import epicsquid.roots.block.*;
 import epicsquid.roots.block.BlockReinforcedBonfire;
+import epicsquid.roots.block.groves.*;
 import epicsquid.roots.block.runes.BlockTrample;
 import epicsquid.roots.block.runes.BlockWildwoodRune;
 import epicsquid.roots.tileentity.*;
@@ -29,7 +30,7 @@ public class ModBlocks {
   public static Block mortar, bonfire, imbuer, structure_marker, offertory_plate, unending_bowl, reinforced_bonfire;
   public static Block incense_burner, wildwood_rune;
   public static Block grove_stone, fey_crafter;
-  public static Block fairy_grove_stone, fungi_grove_stone;
+  public static Block fairy_grove_stone, fungi_grove_stone, natural_grove_stone, wild_grove_stone, twilight_grove_stone, elemental_grove_stone;
 
   public static Block fey_fire, offertory_bowl, fairy_house_red, fairy_house_brown, fairy_house_baffle;
 
@@ -158,9 +159,13 @@ public class ModBlocks {
     event.addBlock(wildwood_rune = new BlockWildwoodRune(Material.WOOD, SoundType.WOOD, 1.4f, "wildwood_rune", TileEntityWildrootRune.class)).setCreativeTab(Roots.tab);
 
     // Grove Stones
-    event.addBlock(grove_stone = new BlockGroveStone(Material.ROCK, SoundType.STONE, 2.5f, "grove_stone")).setCreativeTab(Roots.tab);
-    event.addBlock(fairy_grove_stone = new BlockFairyGroveStone(Material.ROCK, SoundType.STONE, 2.5f, "fairy_grove_stone")).setCreativeTab(Roots.tab);
-    event.addBlock(fungi_grove_stone = new BlockFungiGroveStone(Material.ROCK, SoundType.STONE, 2.5f, "fungi_grove_stone")).setCreativeTab(Roots.tab);
+    event.addBlock(grove_stone = new BlockGroveStone("grove_stone")).setCreativeTab(Roots.tab);
+    event.addBlock(fairy_grove_stone = new BlockFairyGroveStone("fairy_grove_stone")).setCreativeTab(Roots.tab);
+    event.addBlock(fungi_grove_stone = new BlockFungiGroveStone("fungi_grove_stone")).setCreativeTab(Roots.tab);
+    event.addBlock(natural_grove_stone = new BlockNaturalGroveStone("natural_grove_stone")).setCreativeTab(Roots.tab);
+    event.addBlock(wild_grove_stone = new BlockWildGroveStone("wild_grove_stone")).setCreativeTab(Roots.tab);
+    event.addBlock(twilight_grove_stone = new BlockTwilightGroveStone("twilight_grove_stone")).setCreativeTab(Roots.tab);
+    event.addBlock(elemental_grove_stone = new BlockElementalGroveStone("elemental_grove_stone")).setCreativeTab(Roots.tab);
 
     event.addBlock(fey_crafter = new BlockFeyCrafter(Material.WOOD, SoundType.WOOD, 2.5f, "fey_crafter", TileEntityFeyCrafter.class)).setCreativeTab(Roots.tab);
 

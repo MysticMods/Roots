@@ -1,6 +1,6 @@
 package epicsquid.roots.integration.hwyla;
 
-import epicsquid.roots.block.BlockGroveStone;
+import epicsquid.roots.block.groves.BlockGroveStone;
 import epicsquid.roots.integration.hwyla.providers.ProviderBonfire;
 import epicsquid.roots.integration.hwyla.providers.ProviderGroveStone;
 import epicsquid.roots.tileentity.TileEntityBonfire;
