@@ -7,7 +7,6 @@ import epicsquid.roots.capability.grove.PlayerGroveCapabilityProvider;
 import epicsquid.roots.capability.playerdata.IPlayerDataCapability;
 import epicsquid.roots.capability.playerdata.PlayerDataCapabilityProvider;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityProvider;
-import epicsquid.roots.entity.spell.EntityPetalShell;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.init.ModRecipes;
@@ -24,7 +23,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -40,8 +38,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-
-import java.util.List;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 public class EventManager {
@@ -131,23 +127,16 @@ public class EventManager {
 
     if (entity instanceof EntityPlayer && !world.isRemote) {
       EntityPlayer player = ((EntityPlayer) entity);
-      List<EntityPetalShell> shells = player.getEntityWorld().getEntitiesWithinAABB(EntityPetalShell.class,
-          new AxisAlignedBB(player.posX - 0.5, player.posY, player.posZ - 0.5, player.posX + 0.5, player.posY + 2.0, player.posZ + 0.5));
-      if (shells.size() > 0) {
-        for (EntityPetalShell shell : shells) {
-          if (shell.getPlayerId() == player.getUniqueID()) {
-            if (shell.getDataManager().get(shell.getCharge()) > 0) {
-              event.setAmount(0);
-              event.setCanceled(true);
-              shell.getDataManager().set(shell.getCharge(), shell.getDataManager().get(shell.getCharge()) - 1);
-              shell.getDataManager().setDirty(shell.getCharge());
-              PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ), player);
-              if (shell.getDataManager().get(shell.getCharge()) <= 0) {
-                player.world.removeEntity(shell);
-              }
-            }
-          }
+      PotionEffect effect = player.getActivePotionEffect(ModPotions.petal_shell);
+      if (effect != null) {
+        int newCount = effect.getAmplifier() - 1;
+        player.removePotionEffect(ModPotions.petal_shell);
+        if (newCount > 0) {
+          player.addPotionEffect(new PotionEffect(ModPotions.petal_shell, 60 * 20, newCount, false, false));
         }
+        event.setAmount(0);
+        event.setCanceled(true);
+        PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ), player);
       }
     }
     if (trueSource instanceof EntityLivingBase) {

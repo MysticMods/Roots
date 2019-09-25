@@ -2,14 +2,15 @@ package epicsquid.roots.init;
 
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.entity.RenderNull;
-import epicsquid.mysticalworld.entity.*;
 import epicsquid.roots.Roots;
 import epicsquid.roots.entity.EntityFairy;
 import epicsquid.roots.entity.projectile.EntityFlare;
-import epicsquid.roots.entity.render.RenderPetalShell;
-import epicsquid.roots.entity.ritual.*;
-import epicsquid.roots.entity.spell.*;
 import epicsquid.roots.entity.render.RenderFairy;
+import epicsquid.roots.entity.ritual.*;
+import epicsquid.roots.entity.spell.EntityBoost;
+import epicsquid.roots.entity.spell.EntityFireJet;
+import epicsquid.roots.entity.spell.EntityThornTrap;
+import epicsquid.roots.entity.spell.EntityTimeStop;
 import epicsquid.roots.proxy.ClientProxy;
 import net.minecraft.world.storage.loot.LootTableList;
 
@@ -33,7 +34,6 @@ public class ModEntities {
     //Spell & Ritual Entities
     LibRegistry.registerEntity(EntityFireJet.class);
     LibRegistry.registerEntity(EntityThornTrap.class);
-    LibRegistry.registerEntity(EntityPetalShell.class);
     LibRegistry.registerEntity(EntityTimeStop.class);
     LibRegistry.registerEntity(EntityBoost.class);
 
@@ -54,7 +54,6 @@ public class ModEntities {
     if (Roots.proxy instanceof ClientProxy) {
       LibRegistry.registerEntityRenderer(EntityFireJet.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityThornTrap.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityPetalShell.class, new RenderPetalShell.Factory());
       LibRegistry.registerEntityRenderer(EntityTimeStop.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityBoost.class, new RenderNull.Factory());
 
@@ -74,7 +73,7 @@ public class ModEntities {
     }
   }
 
-  public static void registerLootTables () {
+  public static void registerLootTables() {
     Stream.of(EntityFairy.LOOT_TABLE).forEach(LootTableList::register);
   }
 }

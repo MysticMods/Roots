@@ -60,7 +60,7 @@ public class SpellIcedTouch extends SpellBase {
     World world = player.world;
     if (modules.contains(ModuleRegistry.module_touch)) {
       if (!world.isRemote) {
-        player.addPotionEffect(new PotionEffect(ModPotions.freeze, touchDuration));
+        player.addPotionEffect(new PotionEffect(ModPotions.freeze, touchDuration, 0, false, false));
         world.playSound(null, player.getPosition(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 2f);
       }
       return true;
