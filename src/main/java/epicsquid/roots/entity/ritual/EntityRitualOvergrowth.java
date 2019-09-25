@@ -31,7 +31,7 @@ public class EntityRitualOvergrowth extends EntityRitualBase {
     super.onUpdate();
 
     if (!world.isRemote) {
-      if (this.ticksExisted % 150 == 0) {
+      if (this.ticksExisted % 100 == 0) {
         List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), 10, 20, 10, pos -> {
           if (world.isAirBlock(pos)) return false;
           IBlockState state = world.getBlockState(pos);
