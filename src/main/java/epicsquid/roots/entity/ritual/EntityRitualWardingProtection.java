@@ -51,7 +51,7 @@ public class EntityRitualWardingProtection extends EntityRitualBase {
       List<EntityLivingBase> entities = world
           .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 15.5, posY - 15.5, posZ - 15.5, posX + 15.5, posY + 15.5, posZ + 15.5));
       for (EntityLivingBase e : entities) {
-        e.addPotionEffect(new PotionEffect(ModPotions.invulnerability, 22));
+        e.addPotionEffect(new PotionEffect(ModPotions.invulnerability, 22, 0, false, false));
       }
     }
   }

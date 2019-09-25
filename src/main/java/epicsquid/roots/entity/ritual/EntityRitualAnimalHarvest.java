@@ -82,7 +82,7 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
     }
 
     if (didDrops) {
-      entity.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 30, 0));
+      entity.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 30, 0, false, false));
     }
     return didDrops;
   }

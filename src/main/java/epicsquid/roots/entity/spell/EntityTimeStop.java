@@ -71,7 +71,7 @@ public class EntityTimeStop extends Entity {
         .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 9.0, posY - 1.0, posZ - 9.0, posX + 9.0, posY + 19.0, posZ + 9.0));
     for (EntityLivingBase e : entities) {
       if (playerId != null && e.getUniqueID() != playerId) {
-        e.addPotionEffect(new PotionEffect(ModPotions.time_stop, 40));
+        e.addPotionEffect(new PotionEffect(ModPotions.time_stop, 40, 0, false, false));
       }
     }
   }
