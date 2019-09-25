@@ -204,6 +204,8 @@ public class ModItems {
       OreDictionary.registerOre("runestone", rune);
     }
 
+    OreDictionary.registerOre("wildroot", ModItems.wildroot);
+
     OreDictionary.registerOre("logWood", ModBlocks.wildwood_log);
     OreDictionary.registerOre("plankWood", ModBlocks.wildwood_planks);
     OreDictionary.registerOre("stairWood", ModBlocks.wildwood_stairs);

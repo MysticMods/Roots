@@ -37,6 +37,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nonnull;
@@ -700,13 +701,6 @@ public class ModRecipes {
   }
 
   public static void initMortarRecipes() {
-    // Maybe
-    /*addMortarRecipe(new MortarRecipe(new ItemStack(Items.GUNPOWDER, 5), new Ingredient[]{
-        Ingredient.fromItem(Items.FLINT),
-        Ingredient.fromItem(Items.BLAZE_POWDER),
-        Ingredient.fromItem(Items.FLINT),
-        Ingredient.fromItem(Items.BLAZE_ROD),
-        Ingredient.fromItem(Items.FLINT)}, 1, 1, 1, 1, 1, 1));*/
     addMortarRecipe(new ItemStack(Items.DYE, 1, EnumDyeColor.BLUE.getMetadata()), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.carapace), 1, 1, 1, 1, 1, 1);
     addMortarRecipe(new ItemStack(Items.DYE, 1, EnumDyeColor.ORANGE.getMetadata()), new OreIngredient("cropCarrot"), 1, 1, 1, 1, 1, 1);
     addMortarRecipe(new ItemStack(ModItems.flour), new OreIngredient("cropWheat"), 1f, 1f, 0f, 1f, 1f, 0f);
@@ -716,6 +710,7 @@ public class ModRecipes {
     addMortarRecipe(new ItemStack(Items.BLAZE_POWDER, 5), Ingredient.fromItem(Items.BLAZE_ROD), 1, 1, 1, 1, 1, 1);
     addMortarRecipe(new ItemStack(Items.STRING, 3), new OreIngredient("wool"), 1, 1, 1, 1, 1, 1);
     addMortarRecipe(new ItemStack(Items.STRING, 5), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.silk_cocoon), 0, 0, 0, 0, 0, 0);
+    addMortarRecipe(new ItemStack(Items.MAGMA_CREAM, 2), Ingredient.fromItem(Item.getItemFromBlock(Blocks.MAGMA)), 1, 0, 0, 1, 0, 0);
 
     for (Material metal : Materials.getMaterials()) {
       if (!metal.isEnabled()) continue;
@@ -766,11 +761,11 @@ public class ModRecipes {
   private static void initCraftingRecipes() {
     addCraftingRecipe("infernal_bulb",
         new PyreCraftingRecipe(new ItemStack(ModItems.infernal_bulb, 3), 1).addIngredients(
-            new ItemStack(Items.NETHER_WART),
-            new ItemStack(ItemBlock.getItemFromBlock(Blocks.MAGMA)),
-            new ItemStack(Items.BLAZE_ROD),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(Items.GUNPOWDER)));
+            new OreIngredient("wildroot"),
+            new ItemStack(Items.MAGMA_CREAM),
+            new OreIngredient("gunpowder"),
+            new ItemStack(Items.LAVA_BUCKET),
+            new OreIngredient("dustGlowstone")));
 
     addCraftingRecipe("dewgonia",
         new PyreCraftingRecipe(new ItemStack(ModItems.dewgonia, 3), 1).addIngredients(
