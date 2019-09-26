@@ -5,9 +5,6 @@ import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityZombieVillager;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -25,7 +22,7 @@ public class EntityRitualPurity extends EntityRitualBase {
   @Override
   public void onUpdate() {
     super.onUpdate();
-    float alpha = (float) Math.min(40, (RitualRegistry.ritual_life.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
+    float alpha = (float) Math.min(40, (RitualRegistry.ritual_healing_aura.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
 
     if (world.isRemote && getDataManager().get(lifetime) > 0) {
       ParticleUtil.spawnParticleStar(world, (float) posX, (float) posY, (float) posZ, 0, 0, 0, 100, 255, 100, 0.5f * alpha, 20.0f, 40);
