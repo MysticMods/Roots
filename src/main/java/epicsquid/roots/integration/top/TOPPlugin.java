@@ -1,6 +1,6 @@
 package epicsquid.roots.integration.top;
 
-import epicsquid.roots.block.BlockGroveStone;
+import epicsquid.roots.block.groves.BlockGroveStone;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.tileentity.TileEntityBonfire;

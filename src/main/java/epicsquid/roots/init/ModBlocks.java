@@ -6,6 +6,7 @@ import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.CustomPlantType;
 import epicsquid.roots.block.*;
+import epicsquid.roots.block.groves.BlockGroveStone;
 import epicsquid.roots.block.runes.BlockTrample;
 import epicsquid.roots.block.runes.BlockWildwoodRune;
 import epicsquid.roots.tileentity.*;
@@ -148,7 +149,7 @@ public class ModBlocks {
     event.addBlock(wildwood_rune = new BlockWildwoodRune(Material.WOOD, SoundType.WOOD, 1.4f, "wildwood_rune", TileEntityWildrootRune.class)).setCreativeTab(Roots.tab);
 
     // Grove Stones
-    event.addBlock(grove_stone = new BlockGroveStone(Material.ROCK, SoundType.STONE, 2.5f, "grove_stone")).setCreativeTab(Roots.tab);
+    event.addBlock(grove_stone = new BlockGroveStone("grove_stone")).setCreativeTab(Roots.tab);
 
     // Wild Crafter
     event.addBlock(fey_crafter = new BlockFeyCrafter(Material.WOOD, SoundType.WOOD, 2.5f, "fey_crafter", TileEntityFeyCrafter.class)).setCreativeTab(Roots.tab);

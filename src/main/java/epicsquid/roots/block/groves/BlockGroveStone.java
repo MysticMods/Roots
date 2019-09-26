@@ -1,7 +1,6 @@
-package epicsquid.roots.block;
+package epicsquid.roots.block.groves;
 
 import epicsquid.mysticallib.block.BlockBase;
-import epicsquid.mysticallib.block.BlockTEBase;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.particle.particles.ParticleLeafArc;
 import epicsquid.mysticallib.proxy.ClientProxy;
@@ -43,8 +42,8 @@ public class BlockGroveStone extends BlockBase {
   public static final PropertyDirection FACING = PropertyDirection.create("facing", (facing) -> facing == EnumFacing.NORTH || facing == EnumFacing.EAST);
   public static final PropertyBool VALID = PropertyBool.create("valid");
 
-  public BlockGroveStone(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
-    super(mat, type, hardness, name);
+  public BlockGroveStone(@Nonnull String name) {
+    super(Material.ROCK, SoundType.STONE, 2.5f, name);
 
     this.setDefaultState(this.blockState.getBaseState().withProperty(VALID, false).withProperty(HALF, Half.BOTTOM).withProperty(FACING, EnumFacing.NORTH));
     this.setTickRandomly(true);
@@ -249,7 +248,7 @@ public class BlockGroveStone extends BlockBase {
                 world.setBlockState(p.up(), Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS), 3);
                 break;
               }
-              continue;
+              return;
           }
           MessageOvergrowthEffectFX message = new MessageOvergrowthEffectFX(p.getX() + 0.5, p.getY() + 0.3, p.getZ() + 0.5);
           PacketHandler.sendToAllTracking(message, world, p.up());
@@ -276,7 +275,8 @@ public class BlockGroveStone extends BlockBase {
                 break;
               }
               ClientProxy.particleRenderer.spawnParticle(worldIn, Util.getLowercaseClassName(ParticleLeafArc.class), (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, (i + rand.nextDouble() - 0.05) * 0.04, -0.0001, (j + rand.nextFloat() - 0.05) * 0.04,
-                  100, 0.14 + rand.nextDouble() * 0.05, 0.385, 0.117 + rand.nextDouble() * 0.05, 1, rand.nextDouble() + 0.5, rand.nextDouble() * 2);
+                  100, (232 / 255.0) + rand.nextDouble() * 0.05, 167 / 255.0, 111 / 255.0, 0.385, 0.117 + rand.nextDouble() * 0.05, 1, rand.nextDouble() + 0.5, rand.nextDouble() * 2);
+
             }
           }
         }

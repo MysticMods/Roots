@@ -1,6 +1,6 @@
 package epicsquid.roots.integration.hwyla.providers;
 
-import epicsquid.roots.block.BlockGroveStone;
+import epicsquid.roots.block.groves.BlockGroveStone;
 import epicsquid.roots.init.ModBlocks;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
