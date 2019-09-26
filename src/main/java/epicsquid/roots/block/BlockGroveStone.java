@@ -249,7 +249,7 @@ public class BlockGroveStone extends BlockBase {
                 world.setBlockState(p.up(), Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS), 3);
                 break;
               }
-              return;
+              continue;
           }
           MessageOvergrowthEffectFX message = new MessageOvergrowthEffectFX(p.getX() + 0.5, p.getY() + 0.3, p.getZ() + 0.5);
           PacketHandler.sendToAllTracking(message, world, p.up());
