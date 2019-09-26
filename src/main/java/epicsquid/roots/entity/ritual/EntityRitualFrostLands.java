@@ -3,6 +3,7 @@ package epicsquid.roots.entity.ritual;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.network.fx.MessageFrosLandsProgressFX;
+import epicsquid.roots.ritual.RitualFrostLands;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.BlockLiquid;
@@ -20,10 +21,13 @@ import java.util.List;
 import java.util.Random;
 
 public class EntityRitualFrostLands extends EntityRitualBase {
+
+  private RitualFrostLands ritual;
+
   public EntityRitualFrostLands(World worldIn) {
     super(worldIn);
     this.getDataManager().register(lifetime, RitualRegistry.ritual_frost_lands.getDuration() + 20);
-
+    this.ritual = (RitualFrostLands) RitualRegistry.ritual_frost_lands;
   }
 
   @Override
@@ -33,14 +37,14 @@ public class EntityRitualFrostLands extends EntityRitualBase {
     if (world.isRemote) return;
     List<BlockPos> affectedPositions = new ArrayList<>();
 
-    if (this.ticksExisted % 30 == 0) {
-      List<EntitySnowman> snowmen = Util.getEntitiesWithinRadius(world, EntitySnowman.class, getPosition(), 10, 10, 10);
+    if (this.ticksExisted % ritual.interval_heal == 0) {
+      List<EntitySnowman> snowmen = Util.getEntitiesWithinRadius(world, EntitySnowman.class, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z);
       for (EntitySnowman snowman : snowmen) {
         snowman.heal(snowman.getMaxHealth() - snowman.getHealth());
         affectedPositions.add(snowman.getPosition());
       }
 
-      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), 10, 10, 10, (BlockPos pos) -> world.isAirBlock(pos.up()) && !world.isAirBlock(pos) && Blocks.SNOW_LAYER.canPlaceBlockAt(world, pos));
+      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, (BlockPos pos) -> world.isAirBlock(pos.up()) && !world.isAirBlock(pos) && Blocks.SNOW_LAYER.canPlaceBlockAt(world, pos));
       int breakout = 0;
       while (!positions.isEmpty() && breakout < 20) {
         BlockPos choice = positions.get(rand.nextInt(positions.size()));
@@ -53,7 +57,7 @@ public class EntityRitualFrostLands extends EntityRitualBase {
         }
       }
 
-      if (Util.rand.nextInt(150) == 0) {
+      if (Util.rand.nextInt(ritual.interval_spawn) == 0) {
         EntitySnowman snowy = new EntitySnowman(world);
         if (!positions.isEmpty()) {
           BlockPos chosen = positions.get(Util.rand.nextInt(positions.size()));
@@ -63,7 +67,7 @@ public class EntityRitualFrostLands extends EntityRitualBase {
         }
       }
 
-      positions = Util.getBlocksWithinRadius(world, getPosition(), 10, 10, 10, (BlockPos pos) -> (world.getBlockState(pos).getBlock() == Blocks.WATER || world.getBlockState(pos).getBlock() == Blocks.LAVA) && world.isAirBlock(pos.up()));
+      positions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, (BlockPos pos) -> (world.getBlockState(pos).getBlock() == Blocks.WATER || world.getBlockState(pos).getBlock() == Blocks.LAVA) && world.isAirBlock(pos.up()));
       if (!positions.isEmpty()) {
         BlockPos choice = positions.get(rand.nextInt(positions.size()));
         IBlockState state = world.getBlockState(choice);
@@ -89,13 +93,13 @@ public class EntityRitualFrostLands extends EntityRitualBase {
         }
       }
 
-      positions = Util.getBlocksWithinRadius(world, getPosition(), 10, 10, 10, Blocks.FIRE);
+      positions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, Blocks.FIRE);
       for (BlockPos pos : positions) {
         world.setBlockToAir(pos);
         affectedPositions.add(pos);
       }
 
-      positions = Util.getBlocksWithinRadius(world, getPosition(), 10, 10, 10, Blocks.FARMLAND);
+      positions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, Blocks.FARMLAND);
       for (BlockPos pos : positions) {
         IBlockState state = world.getBlockState(pos);
         if (state.getValue(BlockFarmland.MOISTURE) != 7) {
