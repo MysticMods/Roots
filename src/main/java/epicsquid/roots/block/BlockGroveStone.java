@@ -8,6 +8,7 @@ import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.SoundType;
@@ -213,28 +214,42 @@ public class BlockGroveStone extends BlockBase {
         if (effectsCount <= 0) break;
 
         IBlockState s = world.getBlockState(p);
+        Block b = s.getBlock();
         // TODO: Improve this somehow
         if (s.getMaterial() == Material.GRASS && world.isAirBlock(p.up().up())) {
           switch (random.nextInt(50)) {
             case 0:
-              Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.ROSE, 3);
-              break;
+              if (b.canSustainPlant(s, world, p, EnumFacing.UP, Blocks.DOUBLE_PLANT)) {
+                Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.ROSE, 3);
+                break;
+              }
             case 1:
-              Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.SUNFLOWER, 3);
-              break;
+              if (b.canSustainPlant(s, world, p, EnumFacing.UP, Blocks.DOUBLE_PLANT)) {
+                Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.SUNFLOWER, 3);
+                break;
+              }
             case 2:
             case 3:
-              Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.GRASS, 3);
-              break;
+              if (b.canSustainPlant(s, world, p, EnumFacing.UP, Blocks.DOUBLE_PLANT)) {
+                Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.GRASS, 3);
+                break;
+              }
             case 4:
-              Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.PAEONIA, 3);
-              break;
+              if (b.canSustainPlant(s, world, p, EnumFacing.UP, Blocks.DOUBLE_PLANT)) {
+                Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.PAEONIA, 3);
+                break;
+              }
             case 5:
-              Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.SYRINGA, 3);
-              break;
+              if (b.canSustainPlant(s, world, p, EnumFacing.UP, Blocks.DOUBLE_PLANT)) {
+                Blocks.DOUBLE_PLANT.placeAt(world, p.up(), BlockDoublePlant.EnumPlantType.SYRINGA, 3);
+                break;
+              }
             default:
-              world.setBlockState(p.up(), Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS), 3);
-              break;
+              if (b.canSustainPlant(s, world, p, EnumFacing.UP, Blocks.TALLGRASS)) {
+                world.setBlockState(p.up(), Blocks.TALLGRASS.getDefaultState().withProperty(BlockTallGrass.TYPE, BlockTallGrass.EnumType.GRASS), 3);
+                break;
+              }
+              return;
           }
           MessageOvergrowthEffectFX message = new MessageOvergrowthEffectFX(p.getX() + 0.5, p.getY() + 0.3, p.getZ() + 0.5);
           PacketHandler.sendToAllTracking(message, world, p.up());
