@@ -3,6 +3,7 @@ package epicsquid.roots.entity.ritual;
 import java.util.List;
 
 import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.ritual.RitualHeavyStorms;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.network.datasync.DataParameter;
@@ -12,9 +13,12 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class EntityRitualHeavyStorms extends EntityRitualBase {
+  private RitualHeavyStorms ritual;
+
   public EntityRitualHeavyStorms(World worldIn) {
     super(worldIn);
     getDataManager().register(lifetime, RitualRegistry.ritual_heavy_storms.getDuration() + 20);
+    ritual = (RitualHeavyStorms) RitualRegistry.ritual_heavy_storms;
   }
 
   @Override
@@ -54,7 +58,7 @@ public class EntityRitualHeavyStorms extends EntityRitualBase {
         world.getWorldInfo().setRaining(true);
       }
       List<EntityLivingBase> entities = world
-          .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 15.5, posY - 15.5, posZ - 15.5, posX + 15.5, posY + 15.5, posZ + 15.5));
+          .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
       for (EntityLivingBase e : entities) {
         if (e.isBurning()) {
           e.extinguish();
