@@ -17,6 +17,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.ArrayList;
@@ -31,13 +32,13 @@ public class SpellRadiance extends SpellBase {
     this.castType = SpellBase.EnumCastType.CONTINUOUS;
     this.cooldown = 10;
 
-    addCost(HerbRegistry.getHerbByName("pereskia"), 0.5f);
-    addCost(HerbRegistry.getHerbByName("infernal_bulb"), 0.25f);
+    addCost(HerbRegistry.getHerbByName("cloud_berry"), 0.5f);
+    addCost(HerbRegistry.getHerbByName("pereskia"), 0.25f);
     addIngredients(
         new OreIngredient("dustGlowstone"),
-        new ItemStack(Blocks.MAGMA),
+        new OreIngredient("torch"),
         new ItemStack(Items.DYE, 1, 11),
-        new ItemStack(ModItems.infernal_bulb),
+        new ItemStack(ModItems.cloud_berry),
         new ItemStack(ModItems.pereskia)
     );
   }
