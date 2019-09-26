@@ -7,6 +7,7 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.network.fx.MessageTreeCompleteFX;
 import epicsquid.roots.ritual.RitualRegistry;
+import epicsquid.roots.ritual.RitualWildGrowth;
 import epicsquid.roots.world.tree.WorldGenBigWildwoodTree;
 import epicsquid.roots.world.tree.WorldGenWildwoodTree;
 import net.minecraft.block.state.IBlockState;
@@ -22,9 +23,12 @@ import java.util.List;
 import java.util.Random;
 
 public class EntityRitualWildGrowth extends EntityRitualBase {
+  private RitualWildGrowth ritual;
+
   public EntityRitualWildGrowth(World worldIn) {
     super(worldIn);
     this.getDataManager().register(lifetime, RitualRegistry.ritual_wild_growth.getDuration() + 20);
+    ritual = (RitualWildGrowth) RitualRegistry.ritual_wild_growth;
   }
 
   @Override
@@ -32,8 +36,8 @@ public class EntityRitualWildGrowth extends EntityRitualBase {
     super.onUpdate();
 
     if (!world.isRemote) {
-      if (this.ticksExisted % 250 == 0) {
-        List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), 10, 20, 10, (pos) -> {
+      if (this.ticksExisted % ritual.interval == 0) {
+        List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, (pos) -> {
           IBlockState state = world.getBlockState(pos);
           return state.getBlock() == ModBlocks.wildroot && state.getValue(BlockCropBase.AGE) == 7;
         });
