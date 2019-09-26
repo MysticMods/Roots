@@ -6,6 +6,7 @@ import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
 import epicsquid.roots.recipe.conditions.ConditionStandingStones;
+import epicsquid.roots.util.types.Property;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -14,9 +15,17 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualTransmutation extends RitualBase {
+  public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(2400);
+  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 8);
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 8);
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 8);
+  public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(100);
 
-  public RitualTransmutation(String name, int duration, boolean disabled) {
+  public int radius_x, radius_y, radius_z, interval;
+
+  public RitualTransmutation(String name, boolean disabled) {
     super(name, disabled);
+    properties.addProperties(PROP_DURATION, PROP_INTERVAL, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
   }
 
   @Override
@@ -35,7 +44,11 @@ public class RitualTransmutation extends RitualBase {
 
   @Override
   public void finalise() {
-
+    int[] radius = properties.getRadius();
+    radius_x = radius[0];
+    radius_y = radius[1];
+    radius_z = radius[2];
+    interval = properties.getProperty(PROP_INTERVAL);
   }
 
   @Override
