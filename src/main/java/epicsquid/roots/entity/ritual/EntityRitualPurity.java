@@ -1,6 +1,7 @@
 package epicsquid.roots.entity.ritual;
 
 import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.ritual.RitualPurity;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,9 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntityRitualPurity extends EntityRitualBase {
+  private RitualPurity ritual;
+
   public EntityRitualPurity(World worldIn) {
     super(worldIn);
     getDataManager().register(lifetime, RitualRegistry.ritual_purity.getDuration() + 20);
+    ritual = (RitualPurity) RitualRegistry.ritual_purity;
   }
 
   @Override
@@ -38,13 +42,13 @@ public class EntityRitualPurity extends EntityRitualBase {
         ParticleUtil.spawnParticleGlow(world, tx, ty, tz, 0, 0, 0, 255, 255, 255, 0.5f * alpha, 8.0f, 40);
       }
     }
-    if (this.ticksExisted % 20 == 0) {
+    if (this.ticksExisted % ritual.interval == 0) {
       List<EntityLivingBase> entities = world
-          .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 15.5, posY - 15.5, posZ - 15.5, posX + 15.5, posY + 15.5, posZ + 15.5));
+          .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
       for (EntityLivingBase e : entities) {
         if (EntityUtil.isHostile(e)) {
           if (e instanceof EntityZombieVillager && ((EntityZombieVillager)e).isConverting()) {
-            ((EntityZombieVillager)e).conversionTime -= 1;
+            ((EntityZombieVillager)e).conversionTime -= ritual.zombie_count;
             e.extinguish();
           }
           continue;
