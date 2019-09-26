@@ -51,7 +51,7 @@ public class RitualRegistry {
     addRitual(ritual_heavy_storms = new RitualHeavyStorms("ritual_heavy_storms", RitualConfig.disableRitualCategory.disableHeavyStorms));
     addRitual(ritual_overgrowth = new RitualOvergrowth("ritual_overgrowth", RitualConfig.disableRitualCategory.disableOvergrowth));
     addRitual(ritual_purity = new RitualPurity("ritual_purity", RitualConfig.disableRitualCategory.disablePurity));
-    addRitual(ritual_spreading_forest = new RitualSpreadingForest("ritual_spreading_forest", 2400, RitualConfig.disableRitualCategory.disableNaturalGrowth));
+    addRitual(ritual_spreading_forest = new RitualSpreadingForest("ritual_spreading_forest", RitualConfig.disableRitualCategory.disableNaturalGrowth));
     addRitual(ritual_summon_creatures = new RitualSummonCreatures("ritual_summon_creatures", 0, RitualConfig.disableRitualCategory.disableSummonCreatures));
     addRitual(ritual_transmutation = new RitualTransmutation("ritual_transmutation", 2400, RitualConfig.disableRitualCategory.disableTransmutation));
     addRitual(ritual_warding_protection = new RitualWardingProtection("ritual_warding_protection", 1200, RitualConfig.disableRitualCategory.disableWardingProtection));
