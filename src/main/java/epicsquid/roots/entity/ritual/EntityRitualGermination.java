@@ -4,6 +4,7 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.ritual.RitualGermination;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -17,9 +18,12 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class EntityRitualGermination extends EntityRitualBase {
+  private RitualGermination ritual;
+
   public EntityRitualGermination(World worldIn) {
     super(worldIn);
     getDataManager().register(lifetime, RitualRegistry.ritual_germination.getDuration() + 20);
+    ritual = (RitualGermination) RitualRegistry.ritual_germination;
   }
 
   @Override
@@ -41,18 +45,18 @@ public class EntityRitualGermination extends EntityRitualBase {
         ParticleUtil.spawnParticleGlow(world, tx, ty, tz, 0, 0, 0, 100, 255, 100, 0.5f * alpha, 8.0f, 40);
       }
     }
-    if (this.ticksExisted % 80 == 0) {
-      List<BlockPos> positions = Growth.collect(world, getPosition(), 19, 19, 19);
+    if (this.ticksExisted % ritual.interval == 0) {
+      List<BlockPos> positions = Growth.collect(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z);
       if (positions.isEmpty()) return;
       if (!world.isRemote) {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < ritual.count; i++) {
           BlockPos pos = positions.get(world.rand.nextInt(positions.size()));
           IBlockState state = world.getBlockState(pos);
-          int x = 0;
+          int x = ritual.bonus_ticks;
           if (state.getBlock() == Blocks.REEDS || state.getBlock() == Blocks.CACTUS) {
-            x += 15;
+            x += ritual.crop_ticks;
           }
-          for (int j = 0; j < 3 + x; j++) {
+          for (int j = 0; j < ritual.ticks + x; j++) {
             state.getBlock().randomTick(world, pos, state, world.rand);
           }
           PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), this);
