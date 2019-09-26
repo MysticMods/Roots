@@ -8,9 +8,6 @@ import epicsquid.roots.ritual.RitualGermination;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -29,7 +26,7 @@ public class EntityRitualGermination extends EntityRitualBase {
   @Override
   public void onUpdate() {
     super.onUpdate();
-    float alpha = (float) Math.min(40, (RitualRegistry.ritual_life.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
+    float alpha = (float) Math.min(40, (RitualRegistry.ritual_healing_aura.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
 
     if (world.isRemote && getDataManager().get(lifetime) > 0) {
       ParticleUtil.spawnParticleStar(world, (float) posX, (float) posY, (float) posZ, 0, 0, 0, 100, 255, 100, 0.5f * alpha, 20.0f, 40);
