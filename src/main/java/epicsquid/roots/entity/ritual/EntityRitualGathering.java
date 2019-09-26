@@ -5,6 +5,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.mechanics.Magnetize;
 import epicsquid.roots.network.fx.MessageItemGatheredFX;
 import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
+import epicsquid.roots.ritual.RitualGathering;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -24,9 +25,12 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class EntityRitualGathering extends EntityRitualBase {
+  private RitualGathering ritual;
+
   public EntityRitualGathering(World worldIn) {
     super(worldIn);
     this.getDataManager().register(lifetime, RitualRegistry.ritual_gathering.getDuration() + 20);
+    ritual = (RitualGathering) RitualRegistry.ritual_gathering;
   }
 
   @Override
@@ -34,11 +38,11 @@ public class EntityRitualGathering extends EntityRitualBase {
     super.onUpdate();
 
     if (!world.isRemote) {
-      if (this.ticksExisted % 80 == 0) {
+      if (this.ticksExisted % ritual.interval == 0) {
         TileEntity te = world.getTileEntity(getPosition().down()); // Hope that it's in the right position these days
         IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (cap != null) {
-          List<BlockPos> transferredItems = Magnetize.store(world, getPosition(), cap, 15, 15, 15);
+          List<BlockPos> transferredItems = Magnetize.store(world, getPosition(), cap, ritual.radius_x, ritual.radius_y, ritual.radius_z);
           if (!transferredItems.isEmpty()) {
             PacketHandler.sendToAllTracking(new MessageItemGatheredFX(transferredItems), this);
           }
