@@ -7,6 +7,7 @@ import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
 import epicsquid.roots.recipe.TransmutationRecipe;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.roots.ritual.RitualTransmutation;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.datasync.DataParameter;
@@ -19,10 +20,12 @@ import java.util.*;
 
 public class EntityRitualTransmutation extends EntityRitualBase {
   private Set<TransmutationRecipe> recipes = new HashSet<>();
+  private RitualTransmutation ritual;
 
   public EntityRitualTransmutation(World worldIn) {
     super(worldIn);
     this.getDataManager().register(lifetime, RitualRegistry.ritual_transmutation.getDuration() + 20);
+    ritual = (RitualTransmutation) RitualRegistry.ritual_transmutation;
   }
 
   @Override
@@ -31,8 +34,8 @@ public class EntityRitualTransmutation extends EntityRitualBase {
 
     if (world.isRemote) return;
 
-    if (this.ticksExisted % 100 == 0) {
-      List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), 8, 8, 8, (pos) -> {
+    if (this.ticksExisted % ritual.interval == 0) {
+      List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, (pos) -> {
         if (world.isAirBlock(pos)) return false;
         IBlockState state = world.getBlockState(pos);
         List<TransmutationRecipe> stateRecipes = ModRecipes.getTransmutationRecipes(state);
