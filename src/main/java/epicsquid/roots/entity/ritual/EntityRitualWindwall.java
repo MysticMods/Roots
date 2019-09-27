@@ -4,6 +4,7 @@ import java.util.List;
 
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
+import epicsquid.roots.ritual.RitualWindwall;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntityMob;
@@ -14,9 +15,12 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class EntityRitualWindwall extends EntityRitualBase {
+  private RitualWindwall ritual;
+
   public EntityRitualWindwall(World worldIn) {
     super(worldIn);
     getDataManager().register(lifetime, RitualRegistry.ritual_windwall.getDuration() + 20);
+    ritual = (RitualWindwall) RitualRegistry.ritual_windwall;
   }
 
   @Override
@@ -38,12 +42,12 @@ public class EntityRitualWindwall extends EntityRitualBase {
             0.125f * (rand.nextFloat() - 0.5f), 70, 70, 70, 1.0f * alpha, 1.0f + rand.nextFloat(), 160);
       }
     }
-    if (this.ticksExisted % 5 == 0) {
+    if (this.ticksExisted % ritual.interval == 0) {
       List<EntityLivingBase> entities = world
-          .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 31.5, posY - 31.5, posZ - 31.5, posX + 31.5, posY + 31.5, posZ + 31.5));
+          .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
       for (EntityLivingBase e : entities) {
-        if ((e.isCreatureType(EnumCreatureType.MONSTER, false) || e instanceof EntityMob) && Math.pow((posX - e.posX), 2) + Math.pow((posY - e.posY), 2) + Math.pow((posZ - e.posZ), 2) < 1000) {
-          e.knockBack(this, 1.0f, posX - e.posX, posZ - e.posZ);
+        if ((e.isCreatureType(EnumCreatureType.MONSTER, false) || e instanceof EntityMob) && Math.pow((posX - e.posX), 2) + Math.pow((posY - e.posY), 2) + Math.pow((posZ - e.posZ), 2) < ritual.distance) {
+          e.knockBack(this, ritual.knockback, posX - e.posX, posZ - e.posZ);
           if (world.isRemote) {
             for (int i = 0; i < 10; i++) {
               ParticleUtil.spawnParticleSmoke(world, (float) e.posX, (float) e.posY, (float) e.posZ, (float) e.motionX * rand.nextFloat() * 0.5f,

@@ -57,7 +57,7 @@ public class RitualRegistry {
     addRitual(ritual_transmutation = new RitualTransmutation("ritual_transmutation", RitualConfig.disableRitualCategory.disableTransmutation));
     addRitual(ritual_warding_protection = new RitualWardingProtection("ritual_warding_protection", RitualConfig.disableRitualCategory.disableWardingProtection));
     addRitual(ritual_wild_growth = new RitualWildGrowth("ritual_wild_growth", RitualConfig.disableRitualCategory.disableWildGrowth));
-    addRitual(ritual_windwall = new RitualWindwall("ritual_windwall", 3000, RitualConfig.disableRitualCategory.disableWindwall));
+    addRitual(ritual_windwall = new RitualWindwall("ritual_windwall", RitualConfig.disableRitualCategory.disableWindwall));
   }
 
   public static void init () {
