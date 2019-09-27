@@ -5,6 +5,7 @@ import java.util.List;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.ritual.RitualWindwall;
+import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.monster.EntityMob;
@@ -46,7 +47,7 @@ public class EntityRitualWindwall extends EntityRitualBase {
       List<EntityLivingBase> entities = world
           .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
       for (EntityLivingBase e : entities) {
-        if ((e.isCreatureType(EnumCreatureType.MONSTER, false) || e instanceof EntityMob) && Math.pow((posX - e.posX), 2) + Math.pow((posY - e.posY), 2) + Math.pow((posZ - e.posZ), 2) < ritual.distance) {
+        if (EntityUtil.isHostile(e) && (Math.pow((posX - e.posX), 2) + Math.pow((posY - e.posY), 2) + Math.pow((posZ - e.posZ), 2)) < ritual.distance) {
           e.knockBack(this, ritual.knockback, posX - e.posX, posZ - e.posZ);
           if (world.isRemote) {
             for (int i = 0; i < 10; i++) {
