@@ -44,6 +44,7 @@ public class RitualFlowerGrowth extends RitualBase {
 
   @Override
   public void finalise() {
+    duration = properties.getProperty(PROP_DURATION);
     int[] radius = properties.getRadius();
     radius_x = radius[0];
     radius_y = radius[1];

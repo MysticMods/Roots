@@ -31,8 +31,6 @@ public abstract class RitualBase {
   protected static int OFFERTORY_RADIUS = 6;
   protected static Random random = new Random();
 
-  public static NoDefaultProperty<Integer> PROP_DURATION = new NoDefaultProperty<>("duration", Integer.class);
-
   protected PropertyTable properties = new PropertyTable();
 
   private List<Condition> conditions = new ArrayList<>();
@@ -50,7 +48,6 @@ public abstract class RitualBase {
     this.name = name;
     this.disabled = disabled;
     this.duration = 0;
-    this.properties.addProperties(PROP_DURATION);
   }
 
   public String getFormat() {
