@@ -7,10 +7,16 @@ import epicsquid.roots.network.fx.MessageLightDrifterFX;
 import epicsquid.roots.network.fx.MessageLightDrifterSync;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.Constants;
+import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameType;
+import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
@@ -22,16 +28,16 @@ public class SpellLightDrifter extends SpellBase {
   public SpellLightDrifter(String name) {
     super(name, TextFormatting.AQUA, 196f / 255f, 240f / 255f, 255f / 255f, 32f / 255f, 64f / 255f, 96f / 255f);
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
-    this.cooldown = 200;
+    this.cooldown = 250;
 
     addCost(HerbRegistry.getHerbByName("pereskia"), 0.5f);
-    addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.25f);
+    addCost(HerbRegistry.getHerbByName("wildewheet"), 0.25f);
     addIngredients(
         new OreIngredient("enderpearl"),
         new ItemStack(ModItems.moonglow_leaf),
-        new OreIngredient("string"),
-        new ItemStack(ModItems.moonglow_leaf),
-        new ItemStack(ModItems.pereskia)
+        new ItemStack(Item.getItemFromBlock(Blocks.DOUBLE_PLANT), 1, BlockDoublePlant.EnumPlantType.SUNFLOWER.getMeta()),
+        new ItemStack(Items.DYE, 1, EnumDyeColor.YELLOW.getMetadata()),
+        new ItemStack(ModItems.wildewheet)
     );
   }
 
@@ -41,7 +47,7 @@ public class SpellLightDrifter extends SpellBase {
       player.capabilities.disableDamage = true;
       player.capabilities.allowFlying = true;
       player.noClip = true;
-      player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, 100);
+      player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, 200);
       player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_X, player.posX);
       player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_Y, player.posY);
       player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_Z, player.posZ);

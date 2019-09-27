@@ -27,11 +27,11 @@ public class SpellDandelionWinds extends SpellBase {
 
     addCost(HerbRegistry.getHerbByName("cloud_berry"), 0.125f);
     addIngredients(
-        new ItemStack(ModItems.petals),
         new ItemStack(Blocks.YELLOW_FLOWER),
-        new ItemStack(Items.SNOWBALL),
+        new OreIngredient("treeLeaves"),
+        new ItemStack(ModItems.runic_dust),
         new ItemStack(ModItems.cloud_berry),
-        new OreIngredient("cropWheat")
+        new ItemStack(ModItems.terra_spores)
     );
   }
 

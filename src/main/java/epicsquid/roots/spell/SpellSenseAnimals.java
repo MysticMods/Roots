@@ -28,7 +28,7 @@ public class SpellSenseAnimals extends SpellBase {
     addCost(HerbRegistry.getHerbByName("wildewheet"), 0.25f);
     addIngredients(
         new OreIngredient("cropCarrot"),
-        new ItemStack(Blocks.RED_FLOWER),
+        new ItemStack(Items.LEAD),
         new ItemStack(ModItems.wildewheet),
         new OreIngredient("cropWheat"),
         new OreIngredient("nuggetGold")

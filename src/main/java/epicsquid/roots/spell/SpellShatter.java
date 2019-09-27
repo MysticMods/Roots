@@ -10,12 +10,14 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
@@ -32,9 +34,9 @@ public class SpellShatter extends SpellBase {
     addIngredients(
         new ItemStack(Items.FLINT),
         new ItemStack(Items.STONE_PICKAXE),
-        new ItemStack(Items.DYE, 1, 15),
         new ItemStack(ModItems.stalicripe),
-        new ItemStack(ModItems.stalicripe)
+        new ItemStack(Item.getItemFromBlock(Blocks.TNT)),
+        new OreIngredient("cobblestone")
     );
   }
 

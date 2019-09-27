@@ -8,6 +8,7 @@ import epicsquid.roots.network.fx.MessageLifeDrainAbsorbFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
@@ -17,6 +18,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
@@ -32,11 +34,11 @@ public class SpellLifeDrain extends SpellBase {
     addCost(HerbRegistry.getHerbByName("moonglow_leaf"), 0.25f);
     addCost(HerbRegistry.getHerbByName("baffle_cap"), 0.125f);
     addIngredients(
-        new ItemStack(Items.BEETROOT),
         new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom)),
-        new ItemStack(Items.DYE, 1, 15),
-        new ItemStack(Items.ROTTEN_FLESH),
-        new ItemStack(ModItems.moonglow_leaf)
+        new ItemStack(ModItems.moonglow_leaf),
+        new ItemStack(ModItems.moonglow_seed),
+        new ItemStack(Items.IRON_SWORD),
+        new OreIngredient("blockCactus")
     );
   }
 

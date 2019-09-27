@@ -14,7 +14,9 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
@@ -38,10 +40,10 @@ public class SpellSanctuary extends SpellBase {
     addCost(HerbRegistry.getHerbByName("pereskia"), 0.125f);
     addCost(HerbRegistry.getHerbByName("wildroot"), 0.125f);
     addIngredients(
-        new ItemStack(Items.DYE, 1, 1),
+        new ItemStack(Items.ARMOR_STAND),
         new ItemStack(ModItems.pereskia),
-        new OreIngredient("vine"),
-        new ItemStack(ModItems.pereskia),
+        new ItemStack(Items.MILK_BUCKET),
+        new ItemStack(ModItems.bark_spruce),
         new ItemStack(ModItems.wildroot)
     );
   }

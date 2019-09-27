@@ -18,6 +18,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,9 +36,9 @@ public class SpellRampantGrowth extends SpellBase {
     addCost(HerbRegistry.getHerbByName("spirit_herb"), 0.65f);
     addCost(HerbRegistry.getHerbByName("pereskia"), 0.45f);
     addIngredients(
-        new ItemStack(Blocks.SAPLING, 1, 5),
+        new OreIngredient("treeSapling"),
         new ItemStack(Items.GOLDEN_APPLE),
-        new ItemStack(Blocks.SAPLING, 1, 4),
+        new OreIngredient("treeSapling"),
         new ItemStack(ModItems.spirit_herb),
         new ItemStack(ModItems.pereskia)
     );

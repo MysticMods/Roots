@@ -29,7 +29,7 @@ public class SpellSenseDanger extends SpellBase {
 
     addCost(HerbRegistry.getHerbByName("wildroot"), 0.285f);
     addIngredients(
-        new ItemStack(Items.GOLDEN_CARROT),
+        new OreIngredient("nuggetGold"),
         new ItemStack(Items.COMPASS),
         new ItemStack(Items.SPIDER_EYE),
         new OreIngredient("rootsBark"),

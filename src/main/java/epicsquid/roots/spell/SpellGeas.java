@@ -1,13 +1,16 @@
 package epicsquid.roots.spell;
 
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -25,13 +28,13 @@ public class SpellGeas extends SpellBase {
     this.castType = SpellBase.EnumCastType.INSTANTANEOUS;
     this.cooldown = 80;
 
-    addCost(HerbRegistry.getHerbByName("wildewheet"), 0.5f);
+    addCost(HerbRegistry.getHerbByName("baffle_cap"), 0.5f);
     addIngredients(
-        new ItemStack(Items.ROTTEN_FLESH),
-        new ItemStack(ModItems.wildewheet),
-        new ItemStack(ModItems.wildewheet_seed),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),
-        new OreIngredient("enderpearl")
+        new ItemStack(Item.getItemFromBlock(Blocks.WEB)),
+        new ItemStack(Items.LEAD),
+        new ItemStack(Items.CARROT_ON_A_STICK),
+        new ItemStack(ModItems.terra_spores),
+        new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom))
     );
   }
 

@@ -8,7 +8,9 @@ import epicsquid.roots.network.fx.MessageTimeStopStartFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.PotionTypes;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
 
@@ -28,10 +30,11 @@ public class SpellTimeStop extends SpellBase {
     addIngredients(
         new OreIngredient("enderpearl"),
         new ItemStack(ModItems.moonglow_leaf),
-        new ItemStack(ModItems.moonglow_leaf),
+        PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.SLOWNESS),
         new ItemStack(ModItems.pereskia),
         new ItemStack(Items.CLOCK)
     );
+
   }
 
   @Override

@@ -31,9 +31,9 @@ public class SpellHarvest extends SpellBase {
     addCost(HerbRegistry.getHerbByName("wildewheet"), 0.55f);
     addIngredients(
         new ItemStack(Items.GOLDEN_HOE),
-        new ItemStack(ModItems.spirit_herb),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),
         new ItemStack(ModItems.wildewheet),
-        new ItemStack(ModItems.terra_moss),
+        new ItemStack(Items.BEETROOT_SEEDS),
         new ItemStack(Items.WHEAT_SEEDS)
     );
   }
