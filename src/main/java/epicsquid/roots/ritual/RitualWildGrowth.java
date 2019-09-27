@@ -22,6 +22,7 @@ public class RitualWildGrowth extends RitualBase {
 
   public RitualWildGrowth(String name, boolean disabled) {
     super(name, disabled);
+    properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL);
   }
 
   @Override
