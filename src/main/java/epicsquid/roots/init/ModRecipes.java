@@ -326,7 +326,7 @@ public class ModRecipes {
     addTransmutationRecipe("pumpkin_cactus", Blocks.PUMPKIN, Blocks.CACTUS.getDefaultState(), (t, u, v) -> t.getBlockState(u.down()).getBlock() instanceof BlockSand);
     addTransmutationRecipe("cocoa_to_carrot", Blocks.COCOA, new ItemStack(Items.CARROT));
     addTransmutationRecipe("carrot_to_beetroot", Blocks.CARROTS, Blocks.BEETROOTS.getDefaultState(), (t, u, v) -> ((BlockCarrot) v.getBlock()).isMaxAge(v));
-    addTransmutationRecipe("carpet_to_lilybad", Blocks.CARPET, Blocks.WATERLILY.getDefaultState(), water_below);
+    addTransmutationRecipe("carpet_to_lilypad", Blocks.CARPET, Blocks.WATERLILY.getDefaultState(), water_below);
     addTransmutationRecipe("trapdoor_to_cobweb", Blocks.TRAPDOOR, Blocks.WEB.getDefaultState(), wool_below);
     addTransmutationRecipe("redstone_to_vines", Blocks.REDSTONE_WIRE, new ItemStack(Blocks.VINE), leaves_below);
     StateUtil.ignoreState(Blocks.LEAVES, BlockLeaves.CHECK_DECAY);

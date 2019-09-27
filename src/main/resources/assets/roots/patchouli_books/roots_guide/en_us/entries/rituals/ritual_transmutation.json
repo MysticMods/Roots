@@ -58,6 +58,36 @@
       "item": "minecraft:cactus",
       "link_recipe": true,
       "text": "Pumpkins planted $(info) on sand will turn into cactuses."
+    },
+    {
+      "type": "spotlight",
+      "item": "minecraft:waterlily",
+      "link_recipe": true,
+      "text": "Carpets (of any colour) placed over water $(info) by placing carpet on the next block and then sneak-right-clicking the edge of the carpet on top of the water will be converted into lilypads."
+    },
+    {
+      "type": "spotlight",
+      "item": "minecraft:web",
+      "link_recipe": true,
+      "text": "Trapdoors placed on top of wool blocks will be turned into cobwebs."
+    },
+    {
+      "type": "spotlight",
+      "item": "minecraft:carrot",
+      "link_recipe": true,
+      "text": "Cocoa beens (of any growth stage) will be converted to carrots."
+    },
+    {
+      "type": "spotlight",
+      "item": "minecraft:beetroot",
+      "link_recipe": true,
+      "text": "Fully-grown carrot crops will be converted into newly-planted beetroot crops."
+    },
+    {
+      "type": "spotlight",
+      "item": "minecraft:vine",
+      "link_recipe": true,
+      "text": "Redstone dust placed on top of leaves will be converted to vines."
     }
   ]
 }
