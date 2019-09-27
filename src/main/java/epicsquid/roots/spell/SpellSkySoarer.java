@@ -6,7 +6,9 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
@@ -29,9 +31,9 @@ public class SpellSkySoarer extends SpellBase {
   @Override
   public void init () {
     addIngredients(
-        new ItemStack(Items.SUGAR),
+        new ItemStack(Item.getItemFromBlock(Blocks.LADDER)),
         new ItemStack(ModItems.petals),
-        new OreIngredient("string"),
+        new ItemStack(Items.ARROW),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),
         new ItemStack(ModItems.cloud_berry)
     );
