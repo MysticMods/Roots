@@ -183,4 +183,8 @@ public abstract class RitualBase {
   public boolean finalised () {
     return finalised;
   }
+
+  public PropertyTable getProperties() {
+    return properties;
+  }
 }
