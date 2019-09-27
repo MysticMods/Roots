@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualWildGrowth extends RitualBase {
 
@@ -16,8 +17,8 @@ public class RitualWildGrowth extends RitualBase {
 
     addCondition(new ConditionItems(
         new ItemStack(ModItems.wildroot),
-        new ItemStack(ModItems.bark_oak),
-        new ItemStack(ModItems.bark_oak),
+        new OreIngredient("rootsBark"),
+        new OreIngredient("rootsBark"),
         new ItemStack(ModItems.bark_dark_oak),
         new ItemStack(ModItems.spirit_herb))
     );
