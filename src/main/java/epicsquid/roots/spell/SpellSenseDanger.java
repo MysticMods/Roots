@@ -42,7 +42,7 @@ public class SpellSenseDanger extends SpellBase {
   @Override
   public void init () {
     addIngredients(
-        new ItemStack(Items.GOLDEN_CARROT),
+        new OreIngredient("nuggetGold"),
         new ItemStack(Items.COMPASS),
         new ItemStack(Items.SPIDER_EYE),
         new OreIngredient("rootsBark"),

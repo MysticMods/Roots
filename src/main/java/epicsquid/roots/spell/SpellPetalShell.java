@@ -35,11 +35,11 @@ public class SpellPetalShell extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new ItemStack(Items.MELON),
+        new ItemStack(ModItems.petals),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
         new ItemStack(ModItems.spirit_herb),
         new ItemStack(Items.SHIELD),
-        new ItemStack(ModItems.pereskia_bulb)
+        new ItemStack(ModItems.pereskia)
     );
   }
 

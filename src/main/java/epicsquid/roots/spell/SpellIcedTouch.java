@@ -7,6 +7,7 @@ import epicsquid.roots.network.fx.MessageIcedTouchFX;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
+import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
@@ -14,6 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
@@ -47,10 +49,11 @@ public class SpellIcedTouch extends SpellBase {
   public void init () {
     addIngredients(
         new ItemStack(ModItems.dewgonia),
-        new ItemStack(ModItems.bark_birch),
+        new ItemStack(Item.getItemFromBlock(Blocks.SNOW)),
+        new ItemStack(Item.getItemFromBlock(Blocks.SNOW_LAYER)),
         new ItemStack(Items.SNOWBALL),
-        new ItemStack(ModItems.bark_birch),
-        new ItemStack(Items.SNOWBALL));
+        new ItemStack(Item.getItemFromBlock(Blocks.RED_FLOWER), 1, BlockFlower.EnumFlowerType.BLUE_ORCHID.getMeta())
+    );
 
     acceptModules(ModuleRegistry.module_touch);
   }

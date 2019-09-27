@@ -1,26 +1,27 @@
 package epicsquid.roots.spell;
 
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.spell.modules.SpellModule;
-import epicsquid.roots.util.Constants;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
 public class SpellGeas extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(80);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("wildewheet", 0.5));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("baffle_cap", 0.5));
   public static Property<Integer> PROP_DURATION = new Property<>("geas_duration", 400);
 
   public static String spellName = "spell_geas";
@@ -34,13 +35,13 @@ public class SpellGeas extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
-        new ItemStack(Items.ROTTEN_FLESH),
-        new ItemStack(ModItems.wildewheet),
-        new ItemStack(ModItems.wildewheet_seed),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),
-        new OreIngredient("enderpearl")
+        new ItemStack(Item.getItemFromBlock(Blocks.WEB)),
+        new ItemStack(Items.LEAD),
+        new ItemStack(Items.CARROT_ON_A_STICK),
+        new ItemStack(ModItems.terra_spores),
+        new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom))
     );
   }
 

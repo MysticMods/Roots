@@ -6,7 +6,9 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
@@ -33,7 +35,7 @@ public class SpellWildfire extends SpellBase {
         new ItemStack(Items.COAL, 1, 1),
         new OreIngredient("gunpowder"),
         new ItemStack(ModItems.infernal_bulb),
-        new ItemStack(ModItems.infernal_bulb)
+        new ItemStack(Item.getItemFromBlock(Blocks.TNT))
     );
   }
 

@@ -40,7 +40,7 @@ public class SpellSenseAnimals extends SpellBase {
   public void init () {
     addIngredients(
         new OreIngredient("cropCarrot"),
-        new ItemStack(Blocks.RED_FLOWER),
+        new ItemStack(Items.LEAD),
         new ItemStack(ModItems.wildewheet),
         new OreIngredient("cropWheat"),
         new OreIngredient("nuggetGold")
