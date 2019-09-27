@@ -47,6 +47,7 @@ public class RitualWardingProtection extends RitualBase {
 
   @Override
   public void finalise() {
+    duration = properties.getProperty(PROP_DURATION);
     int[] radius = properties.getRadius();
     radius_x = radius[0] + 0.5;
     radius_y = radius[1] + 0.5;
