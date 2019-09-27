@@ -309,13 +309,26 @@ public class ModRecipes {
       return b == Blocks.WATER || b == Blocks.FLOWING_WATER;
     };
 
+    WorldPosStatePredicate wool_below = (t, u, v) -> {
+      Block b = t.getBlockState(u.down()).getBlock();
+      return b == Blocks.WOOL;
+    };
+
+    WorldPosStatePredicate leaves_below = (t, u, v) -> {
+      Block b = t.getBlockState(u.down()).getBlock();
+      return b.isLeaves(v, t, u);
+    };
+
     addTransmutationRecipe("deadbush_cocoa", Blocks.DEADBUSH, new ItemStack(Items.DYE, 3, 3));
     addTransmutationRecipe("birch_jungle", Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH), Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE));
     addTransmutationRecipe("birch_jungle_leaves", Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.BIRCH), Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE));
     addTransmutationRecipe("pumpkin_melon", Blocks.PUMPKIN, Blocks.MELON_BLOCK.getDefaultState(), water_below);
     addTransmutationRecipe("pumpkin_cactus", Blocks.PUMPKIN, Blocks.CACTUS.getDefaultState(), (t, u, v) -> t.getBlockState(u.down()).getBlock() instanceof BlockSand);
     addTransmutationRecipe("cocoa_to_carrot", Blocks.COCOA, new ItemStack(Items.CARROT));
-    addTransmutationRecipe("carrot_to_beetroot", Blocks.CARROTS, Blocks.BEETROOTS.getDefaultState(), (t, u, v) -> ((BlockPotato) v.getBlock()).isMaxAge(v));
+    addTransmutationRecipe("carrot_to_beetroot", Blocks.CARROTS, Blocks.BEETROOTS.getDefaultState(), (t, u, v) -> ((BlockCarrot) v.getBlock()).isMaxAge(v));
+    addTransmutationRecipe("carpet_to_lilybad", Blocks.CARPET, Blocks.WATERLILY.getDefaultState(), water_below);
+    addTransmutationRecipe("trapdoor_to_cobweb", Blocks.TRAPDOOR, Blocks.WEB.getDefaultState(), wool_below);
+    addTransmutationRecipe("redstone_to_vines", Blocks.REDSTONE_WIRE, new ItemStack(Blocks.VINE), leaves_below);
     StateUtil.ignoreState(Blocks.LEAVES, BlockLeaves.CHECK_DECAY);
     StateUtil.ignoreState(Blocks.LEAVES, BlockLeaves.DECAYABLE);
   }
