@@ -1,10 +1,18 @@
 package epicsquid.roots.entity.ritual;
 
+import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.config.RitualConfig;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
+import epicsquid.roots.recipe.AnimalHarvestFishRecipe;
 import epicsquid.roots.ritual.RitualAnimalHarvest;
 import epicsquid.roots.ritual.RitualRegistry;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
@@ -13,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.loot.LootContext;
@@ -20,6 +29,7 @@ import net.minecraft.world.storage.loot.LootTable;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
+import net.minecraftforge.fluids.capability.wrappers.FluidBlockWrapper;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import java.lang.reflect.InvocationTargetException;
@@ -52,6 +62,25 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
 
   private boolean doHarvest() {
     List<EntityLiving> entityList = Util.getEntitiesWithinRadius(world, (entity) -> harvestClasses.contains(entity.getClass()), getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z);
+    if (RitualConfig.animalHarvestDoFish) {
+      List<BlockPos> waterSourceBlocks = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, (p) -> {
+        IBlockState state = world.getBlockState(p);
+        return (state.getMaterial() == Material.WATER && state.getPropertyKeys().contains(BlockLiquid.LEVEL) && state.getValue(BlockLiquid.LEVEL) == 0);
+      });
+      List<AnimalHarvestFishRecipe> recipes = ModRecipes.getFishRecipes();
+      if (!recipes.isEmpty() && !waterSourceBlocks.isEmpty() && (rand.nextInt(ritual.fish_chance) == 0 || entityList.isEmpty())) {
+        AnimalHarvestFishRecipe recipe = recipes.get(rand.nextInt(recipes.size()));
+        BlockPos pos = waterSourceBlocks.get(rand.nextInt(waterSourceBlocks.size()));
+        ItemStack stack = recipe.getItemStack().copy();
+        // Protection against those nasty "must be positive" errors
+        if (ritual.fish_count > 0) {
+          stack.setCount(1 + rand.nextInt(ritual.fish_count));
+        }
+        ItemUtil.spawnItem(world, pos.add(0, 1, 0), stack);
+        PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY() + 1, pos.getZ()), this);
+        return true;
+      }
+    }
     if (entityList.isEmpty()) return false;
     EntityLiving entity = entityList.get(Util.rand.nextInt(entityList.size()));
 

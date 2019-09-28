@@ -30,10 +30,7 @@ import net.minecraft.entity.monster.EntityPolarBear;
 import net.minecraft.entity.passive.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -50,6 +47,7 @@ import java.util.*;
 public class ModRecipes {
 
   private static Map<ResourceLocation, AnimalHarvestRecipe> harvestRecipes = new HashMap<>();
+  private static Map<ResourceLocation, AnimalHarvestFishRecipe> fishRecipes = new HashMap<>();
   private static ObjectOpenHashSet<Class<? extends Entity>> harvestClasses = null;
   private static Map<ResourceLocation, TransmutationRecipe> transmutationRecipes = new HashMap<>();
   private static List<MortarRecipe> mortarRecipes = new ArrayList<>();
@@ -391,8 +389,8 @@ public class ModRecipes {
     }
   }
 
-  public static void getAnimalHarvestRecipe(ResourceLocation location) {
-    harvestRecipes.getOrDefault(location, null);
+  public static AnimalHarvestRecipe getAnimalHarvestRecipe(ResourceLocation location) {
+    return harvestRecipes.getOrDefault(location, null);
   }
 
   public static AnimalHarvestRecipe getAnimalHarvestRecipe(Entity entity) {
@@ -415,6 +413,51 @@ public class ModRecipes {
       }
     }
     return harvestClasses;
+  }
+
+  public static void addAnimalHarvestFishRecipe (String name, ItemStack item) {
+    ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
+    if (getAnimalHarvestFishRecipe(rl) != null) {
+      return;
+    }
+    if (getAnimalHarvestFishRecipe(item) != null) {
+      return;
+    }
+    AnimalHarvestFishRecipe recipe = new AnimalHarvestFishRecipe(rl, item);
+    fishRecipes.put(rl, recipe);
+  }
+
+  @Nullable
+  public static AnimalHarvestFishRecipe getAnimalHarvestFishRecipe (ItemStack item) {
+    for (AnimalHarvestFishRecipe recipe : fishRecipes.values()) {
+      if (ItemUtil.equalWithoutSize(recipe.getItemStack(), item)) {
+        return recipe;
+      }
+    }
+
+    return null;
+  }
+
+  public static AnimalHarvestFishRecipe getAnimalHarvestFishRecipe (ResourceLocation resource) {
+    return fishRecipes.get(resource);
+  }
+
+  public static boolean removeAnimalHarvestFishRecipe (ResourceLocation resource) {
+    return fishRecipes.remove(resource) != null;
+  }
+
+  public static boolean removeAnimalHarvestFishRecipe (ItemStack item) {
+    AnimalHarvestFishRecipe recipe = getAnimalHarvestFishRecipe(item);
+    if (recipe == null) return false;
+    return fishRecipes.remove(recipe.getRegistryName()) != null;
+  }
+
+  public static List<AnimalHarvestFishRecipe> getFishRecipes () {
+    return Lists.newArrayList(fishRecipes.values());
+  }
+
+  public static void clearFishRecipes () {
+    fishRecipes.clear();
   }
 
 
@@ -444,6 +487,10 @@ public class ModRecipes {
     addAnimalHarvestRecipe("frog", EntityFrog.class);
     addAnimalHarvestRecipe("owl", EntityOwl.class);
     addAnimalHarvestRecipe("sprout", EntitySprout.class);
+    // Fish recipes
+    for (ItemFishFood.FishType type : ItemFishFood.FishType.values()) {
+      addAnimalHarvestFishRecipe(type.getTranslationKey(), new ItemStack(Items.FISH, 1, type.getMetadata()));
+    }
   }
 
   public static void addRunicCarvingRecipe(RunicCarvingRecipe recipe) {
