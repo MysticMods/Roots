@@ -59,14 +59,14 @@ public class CommonProxy {
   }
 
   public void postInit(FMLPostInitializationEvent event) {
+    SpellRegistry.finalise();
+    RitualRegistry.finalise();
   }
 
   public void loadComplete(FMLLoadCompleteEvent event) {
     if (Loader.isModLoaded("harvest")) {
       HarvestIntegration.init();
     }
-    SpellRegistry.finalise();
-    RitualRegistry.finalise();
     Advancements.init();
   }
 
