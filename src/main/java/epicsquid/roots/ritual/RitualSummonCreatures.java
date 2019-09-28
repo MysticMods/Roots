@@ -18,7 +18,6 @@ import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.conditions.ConditionItems;
-import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.tileentity.TileEntityOffertoryPlate;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityChicken;
@@ -64,7 +63,7 @@ public class RitualSummonCreatures extends RitualBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
 
   }
 

@@ -55,7 +55,7 @@ public class SpellPetalShell extends SpellBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
     this.maxShells = properties.getProperty(PROP_MAXIMUM);

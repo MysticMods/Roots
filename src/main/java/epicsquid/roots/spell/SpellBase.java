@@ -2,6 +2,7 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.init.HerbRegistry;
@@ -20,10 +21,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public abstract class SpellBase {
@@ -255,7 +253,7 @@ public abstract class SpellBase {
     return costs.keySet().stream().map((herb) -> new ItemStack(herb.getItem())).collect(Collectors.toList());
   }
 
-  public abstract void finalise ();
+  public abstract void doFinalise();
 
   @SuppressWarnings("unchecked")
   public void finaliseCosts () {
@@ -272,6 +270,21 @@ public abstract class SpellBase {
       }
     }
     this.finalised = true;
+  }
+
+  public void finalise () {
+    doFinalise();
+    finaliseCosts();
+    validateProperties();
+  }
+
+  public void validateProperties () {
+    List<String> values = properties.finalise();
+    if (!values.isEmpty()) {
+      StringJoiner join = new StringJoiner(",");
+      values.forEach(join::add);
+      Roots.logger.error("Spell '" + name + "' property table has the following keys inserted but not fetched: |" + join.toString() + "|");
+    }
   }
 
   public boolean finalised () {

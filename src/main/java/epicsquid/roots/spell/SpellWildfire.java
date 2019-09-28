@@ -1,7 +1,6 @@
 package epicsquid.roots.spell;
 
 import epicsquid.roots.entity.spell.EntityFireJet;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
@@ -51,7 +50,7 @@ public class SpellWildfire extends SpellBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
   }

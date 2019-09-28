@@ -2,18 +2,14 @@ package epicsquid.roots.ritual;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
+import epicsquid.roots.Roots;
 import epicsquid.roots.block.BlockBonfire;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.recipe.conditions.Condition;
 import epicsquid.roots.recipe.conditions.ConditionItems;
 import epicsquid.roots.tileentity.TileEntityBonfire;
-import epicsquid.roots.util.types.NoDefaultProperty;
 import epicsquid.roots.util.types.PropertyTable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -175,7 +171,21 @@ public abstract class RitualBase {
     return Collections.EMPTY_LIST;
   }
 
-  public abstract void finalise ();
+  public void finalise () {
+    doFinalise();
+    validateProperties();
+  }
+
+  public abstract void doFinalise();
+
+  public void validateProperties () {
+    List<String> values = properties.finalise();
+    if (!values.isEmpty()) {
+      StringJoiner join = new StringJoiner(",");
+      values.forEach(join::add);
+      Roots.logger.error("Ritual '" + name + "' property table has the following keys inserted but not fetched: |" + join.toString() + "|");
+    }
+  }
 
   public boolean finalised () {
     return finalised;
