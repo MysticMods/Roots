@@ -23,20 +23,23 @@ public class RitualAnimalHarvest extends RitualBase {
   public static Property<Integer> PROP_GLOW_DURATION = new Property<>("glowing", 30).setDescription("duration (in ticks) mobs will glow after being harvested");
   public static Property<Integer> PROP_LOOTING_CHANCE = new Property<>("looting_chance", 6).setDescription("chance (1 in X) that the the looting chance will be set to looting_value");
   public static Property<Integer> PROP_LOOTING_VALUE = new Property<>("looting_value", 1).setDescription("the value passed to the loot function for 'looting' if looting_chance was successful");
+  public static Property<Integer> PROP_FISH_CHANCE = new Property<>("fish_chance", 5).setDescription("chance (1 in X) that, if suitable water source blocks are found, fish will be produced instead of animal drops being produced");
+  public static Property<Integer> PROP_FISH_COUNT = new Property<>("fish_count", 1).setDescription("additional fish (random 0-X) that are produced if fish are produced");
 
   public int interval;
   public int count;
   public int radius_x, radius_y, radius_z;
   public int looting_chance, looting_value;
   public int glowing;
+  public int fish_chance, fish_count;
 
   public RitualAnimalHarvest(String name, boolean disabled) {
     super(name, disabled);
-    properties.addProperties(PROP_DURATION, PROP_INTERVAL, PROP_COUNT, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_LOOTING_CHANCE, PROP_LOOTING_VALUE, PROP_GLOW_DURATION);
+    properties.addProperties(PROP_DURATION, PROP_INTERVAL, PROP_COUNT, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_LOOTING_CHANCE, PROP_LOOTING_VALUE, PROP_GLOW_DURATION, PROP_FISH_CHANCE, PROP_FISH_COUNT);
   }
 
   @Override
-  public void init () {
+  public void init() {
     addCondition(new ConditionItems(
         new ItemStack(ModItems.wildewheet),
         new OreIngredient("blockWool"),
@@ -51,7 +54,7 @@ public class RitualAnimalHarvest extends RitualBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     duration = properties.getProperty(PROP_DURATION);
     interval = properties.getProperty(PROP_INTERVAL);
     int[] radius = properties.getRadius();
@@ -61,6 +64,9 @@ public class RitualAnimalHarvest extends RitualBase {
     looting_chance = properties.getProperty(PROP_LOOTING_CHANCE);
     looting_value = properties.getProperty(PROP_LOOTING_VALUE);
     glowing = properties.getProperty(PROP_GLOW_DURATION);
+    fish_chance = properties.getProperty(PROP_FISH_CHANCE);
+    fish_count = properties.getProperty(PROP_FISH_COUNT);
+    count = properties.getProperty(PROP_COUNT);
   }
 
   @Override

@@ -24,6 +24,10 @@ public class RitualConfig {
     return extinguishFluids;
   }
 
+  @Config.Name("Animal Harvest produces fish")
+  @Config.Comment("Whether or not the Animal Harvest recipe should produce fish in water source blocks")
+  public static boolean animalHarvestDoFish = true;
+
   @Config.LangKey("config.roots.subcategory.disable_rituals")
   public static DisableRitualCategory disableRitualCategory = new DisableRitualCategory();
 
