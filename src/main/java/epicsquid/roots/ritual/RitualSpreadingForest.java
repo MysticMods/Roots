@@ -5,7 +5,6 @@ import epicsquid.roots.entity.ritual.EntityRitualSpreadingForest;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -43,7 +42,7 @@ public class RitualSpreadingForest extends RitualBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     duration = properties.getProperty(PROP_DURATION);
     int[] radius = properties.getRadius();
     radius_x = radius[0];

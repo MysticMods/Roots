@@ -2,14 +2,11 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.init.ModItems;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
@@ -62,7 +59,7 @@ public class SpellSenseDanger extends SpellBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
     this.nvDuration = properties.getProperty(PROP_NV_DURATION);

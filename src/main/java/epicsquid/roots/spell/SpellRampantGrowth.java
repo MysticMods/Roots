@@ -1,7 +1,6 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
@@ -9,7 +8,6 @@ import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -72,7 +70,7 @@ public class SpellRampantGrowth extends SpellBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
     this.radius_x = properties.getProperty(PROP_RADIUS_X);

@@ -1,7 +1,6 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageLifeDrainAbsorbFX;
@@ -9,7 +8,6 @@ import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
@@ -91,7 +89,7 @@ public class SpellLifeDrain extends SpellBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
     this.witherDamage = properties.getProperty(PROP_WITHER_DAMAGE);

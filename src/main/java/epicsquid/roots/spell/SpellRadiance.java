@@ -1,7 +1,6 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageRadianceBeamFX;
@@ -9,7 +8,6 @@ import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -18,7 +16,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.ArrayList;
@@ -152,7 +149,7 @@ public class SpellRadiance extends SpellBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
     this.distance = properties.getProperty(PROP_DISTANCE);

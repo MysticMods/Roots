@@ -54,7 +54,7 @@ public class SpellMagnetism extends SpellBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
     this.radius_x = properties.getProperty(PROP_RADIUS_X);

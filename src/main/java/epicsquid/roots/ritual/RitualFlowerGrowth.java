@@ -4,7 +4,6 @@ import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualFlowerGrowth;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.conditions.ConditionItems;
-import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.BlockRedFlower;
 import net.minecraft.block.BlockYellowFlower;
@@ -43,7 +42,7 @@ public class RitualFlowerGrowth extends RitualBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     duration = properties.getProperty(PROP_DURATION);
     int[] radius = properties.getRadius();
     radius_x = radius[0];

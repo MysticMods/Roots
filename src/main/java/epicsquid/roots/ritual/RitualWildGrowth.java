@@ -40,7 +40,7 @@ public class RitualWildGrowth extends RitualBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     duration = properties.getProperty(PROP_DURATION);
     int[] radius = properties.getRadius();
     radius_x = radius[0];

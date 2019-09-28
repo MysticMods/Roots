@@ -50,7 +50,7 @@ public class RitualDivineProtection extends RitualBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     duration = properties.getProperty(PROP_DURATION);
     rain = properties.getProperty(PROP_RAIN);
     time = properties.getProperty(PROP_TIME);

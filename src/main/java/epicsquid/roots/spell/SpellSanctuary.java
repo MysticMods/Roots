@@ -3,7 +3,6 @@ package epicsquid.roots.spell;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.config.SpellConfig;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageSanctuaryBurstFX;
 import epicsquid.roots.network.fx.MessageSanctuaryRingFX;
@@ -15,12 +14,9 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -94,7 +90,7 @@ public class SpellSanctuary extends SpellBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
     this.radius_x = properties.getProperty(PROP_RADIUS_X);

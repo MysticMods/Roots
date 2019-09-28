@@ -42,7 +42,7 @@ public class RitualFireStorm extends RitualBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     duration = properties.getProperty(PROP_DURATION);
     projectile_damage = properties.getProperty(PROP_PROJECTILE_DAMAGE);
     projectile_count = properties.getProperty(PROP_PROJECTILE_COUNT);
