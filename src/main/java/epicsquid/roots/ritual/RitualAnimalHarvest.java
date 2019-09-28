@@ -29,7 +29,6 @@ public class RitualAnimalHarvest extends RitualBase {
     setBold(true);
   }
 
-
   @Override
   public EntityRitualBase doEffect(World world, BlockPos pos) {
     return this.spawnEntity(world, pos, EntityRitualAnimalHarvest.class);

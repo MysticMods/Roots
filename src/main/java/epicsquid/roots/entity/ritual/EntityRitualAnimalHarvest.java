@@ -1,9 +1,17 @@
 package epicsquid.roots.entity.ritual;
 
+import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.config.RitualConfig;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
+import epicsquid.roots.recipe.AnimalHarvestFishRecipe;
 import epicsquid.roots.ritual.RitualRegistry;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
@@ -15,6 +23,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.loot.LootContext;
@@ -59,6 +68,23 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
 
   public boolean doHarvest() {
     List<EntityLiving> entityList = Util.getEntitiesWithinRadius(world, (entity) -> harvestClasses.contains(entity.getClass()), getPosition(), 15, 10, 15);
+    if (RitualConfig.animalHarvestDoFish) {
+      List<BlockPos> waterSourceBlocks = Util.getBlocksWithinRadius(world, getPosition(), 15, 10, 15, (p) -> {
+        IBlockState state = world.getBlockState(p);
+        return (state.getMaterial() == Material.WATER && state.getPropertyKeys().contains(BlockLiquid.LEVEL) && state.getValue(BlockLiquid.LEVEL) == 0);
+      });
+      List<AnimalHarvestFishRecipe> recipes = ModRecipes.getFishRecipes();
+      if (!recipes.isEmpty() && !waterSourceBlocks.isEmpty() && (rand.nextInt(5) == 0 || entityList.isEmpty())) {
+        AnimalHarvestFishRecipe recipe = recipes.get(rand.nextInt(recipes.size()));
+        BlockPos pos = waterSourceBlocks.get(rand.nextInt(waterSourceBlocks.size()));
+        ItemStack stack = recipe.getItemStack().copy();
+        // Protection against those nasty "must be positive" errors
+        stack.setCount(1 + rand.nextInt(2));
+        ItemUtil.spawnItem(world, pos.add(0, 1, 0), stack);
+        PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY() + 1, pos.getZ()), this);
+        return true;
+      }
+    }
     if (entityList.isEmpty()) return false;
     EntityLiving entity = entityList.get(random.nextInt(entityList.size()));
 

@@ -2,6 +2,8 @@ package epicsquid.roots.integration.crafttweaker;
 
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.entity.IEntityDefinition;
+import crafttweaker.api.item.IItemStack;
+import crafttweaker.api.minecraft.CraftTweakerMC;
 import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
@@ -10,6 +12,7 @@ import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -40,6 +43,27 @@ public class AnimalHarvestTweaker {
   @ZenMethod
   public static void removeEntity(IEntityDefinition entity) {
     CraftTweaker.LATE_ACTIONS.add(new Remove((EntityEntry) entity.getInternal()));
+  }
+
+  @ZenDocMethod(
+      order = 3,
+      args = {
+          @ZenDocArg(arg = "name", info = "the name of the type of fish"),
+          @ZenDocArg(arg = "fish", info = "the type of fish as an item stack")
+      }
+  )
+  public static void addFish(String name, IItemStack fish) {
+    CraftTweaker.LATE_ACTIONS.add(new AddFish(name, CraftTweakerMC.getItemStack(fish)));
+  }
+
+  @ZenDocMethod(
+      order = 4,
+      args = {
+          @ZenDocArg(arg = "fish", info = "the type of fish to remove as an item stack")
+      }
+  )
+  public static void removeFish(IItemStack fish) {
+    CraftTweaker.LATE_ACTIONS.add(new RemoveFish(CraftTweakerMC.getItemStack(fish)));
   }
 
   private static class Remove extends Action {
@@ -78,6 +102,46 @@ public class AnimalHarvestTweaker {
     @Override
     public String describe() {
       return String.format("Recipe to add %s to AnimalHarvest", entry.getName());
+    }
+  }
+
+  private static class AddFish extends Action {
+    private final ItemStack stack;
+    private final String name;
+
+    public AddFish(String name, ItemStack stack) {
+      super("add_animal_harvest_fish");
+      this.name = name;
+      this.stack = stack;
+    }
+
+    @Override
+    public void apply() {
+      ModRecipes.addAnimalHarvestFishRecipe(name, stack);
+    }
+
+    @Override
+    public String describe() {
+      return String.format("Recipe to add %s to AnimalHarvest fish recipes", name);
+    }
+  }
+
+  private static class RemoveFish extends Action {
+    private final ItemStack stack;
+
+    public RemoveFish(ItemStack stack) {
+      super("remove_animal_harvest_fish");
+      this.stack = stack;
+    }
+
+    @Override
+    public void apply() {
+      ModRecipes.removeAnimalHarvestFishRecipe(stack);
+    }
+
+    @Override
+    public String describe() {
+      return String.format("Recipe to remove %s from AnimalHarvest fish recipes", stack);
     }
   }
 }
