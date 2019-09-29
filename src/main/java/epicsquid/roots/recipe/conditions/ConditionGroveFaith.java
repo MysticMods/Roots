@@ -6,6 +6,7 @@ import epicsquid.roots.grove.GroveType;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.entity.player.EntityPlayer;
 
+@Deprecated
 public class ConditionGroveFaith implements Condition {
 
   private final GroveType type;
