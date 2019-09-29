@@ -233,7 +233,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
               if (stack.amount > 1000) {
                 stack.amount = 1000;
               }
-              cap.drain(stack, true);
+              if (!player.capabilities.isCreativeMode) {
+                cap.drain(stack, true);
+              }
               if (heldItem.getItem() instanceof ItemBucket) {
                 player.setHeldItem(hand, new ItemStack(Items.BUCKET));
                 ((EntityPlayerMP) player).sendAllContents(player.openContainer, player.openContainer.getInventory());
