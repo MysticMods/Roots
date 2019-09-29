@@ -92,7 +92,7 @@ public abstract class RitualBase {
     return false;
   }
 
-  public boolean canFire(TileEntityBonfire tileEntityBonfire, EntityPlayer player) {
+  public boolean canFire(TileEntityBonfire tileEntityBonfire, @Nullable EntityPlayer player) {
     IBlockState state = tileEntityBonfire.getWorld().getBlockState(tileEntityBonfire.getPos());
     if (state.getValue(BlockBonfire.BURNING)) {
       return false;
