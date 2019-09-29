@@ -3,7 +3,7 @@ package epicsquid.roots.ritual;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualFrostLands;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.recipe.conditions.ConditionItems;
+import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

@@ -3,7 +3,7 @@ package epicsquid.roots.ritual;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualFlowerGrowth;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.recipe.conditions.ConditionItems;
+import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.BlockRedFlower;
 import net.minecraft.block.BlockYellowFlower;

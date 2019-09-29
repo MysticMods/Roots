@@ -1,9 +1,9 @@
 package epicsquid.roots.command;
 
 import epicsquid.roots.init.ModBlocks;
-import epicsquid.roots.recipe.conditions.Condition;
-import epicsquid.roots.recipe.conditions.ConditionStandingStones;
-import epicsquid.roots.recipe.conditions.ConditionTrees;
+import epicsquid.roots.ritual.conditions.Condition;
+import epicsquid.roots.ritual.conditions.ConditionStandingStones;
+import epicsquid.roots.ritual.conditions.ConditionTrees;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.tileentity.TileEntityBonfire;

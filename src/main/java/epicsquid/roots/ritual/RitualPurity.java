@@ -4,7 +4,7 @@ import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualPurity;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.recipe.conditions.ConditionItems;
+import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
