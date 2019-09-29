@@ -1,17 +1,16 @@
 package epicsquid.roots.block;
 
 import epicsquid.mysticallib.block.BlockBase;
-import epicsquid.roots.particle.ParticleUtil;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -24,6 +23,7 @@ import java.util.Random;
 public class BlockMark extends BlockBase {
 
     public static final PropertyDirection FACING = PropertyDirection.create("facing");
+    public static final PropertyEnum<EnumDyeColor> COLOR = PropertyEnum.create("color", EnumDyeColor.class);
 
     public BlockMark(@Nonnull String name) {
         super(Material.GRASS, SoundType.CLOTH, 0F, name);
@@ -59,13 +59,6 @@ public class BlockMark extends BlockBase {
     @Nonnull
     @SuppressWarnings("deprecation")
     @Override
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.INVISIBLE;
-    }
-
-    @Nonnull
-    @SuppressWarnings("deprecation")
-    @Override
     public BlockFaceShape getBlockFaceShape(final IBlockAccess worldIn, final IBlockState state, final BlockPos pos, final EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
     }
@@ -73,7 +66,7 @@ public class BlockMark extends BlockBase {
     // TODO: 21/09/2019 TBD
     @Override
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-        ParticleUtil.spawnParticlePetal(worldIn, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, 0F, 0F, 0F, 1, 1, 1, 0.75F, 3.0F, 240);
+        //ParticleUtil.spawnParticlePetal(worldIn, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, 0F, 0F, 0F, 1, 1, 1, 0.75F, 3.0F, 240);
     }
 
     @Nonnull
@@ -82,12 +75,7 @@ public class BlockMark extends BlockBase {
         return new BlockStateContainer(this, FACING);
     }
 
-    @Nonnull
-    @Override
-    public IBlockState getStateForPlacement(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, @Nonnull EntityLivingBase placer, EnumHand hand) {
-        return this.getDefaultState().withProperty(FACING, facing.getOpposite());
-    }
-
+    //Shouldn't be necessary, cause the only way to place the marker should be the spell staff
     @Override
     public int getMetaFromState(IBlockState state)
     {
@@ -146,5 +134,15 @@ public class BlockMark extends BlockBase {
         }
 
         return state;
+    }
+
+
+
+    public static class MarkColorHandler implements IBlockColor {
+
+        @Override
+        public int colorMultiplier(@Nonnull IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) {
+            return state.getValue(COLOR).getColorValue();
+        }
     }
 }
