@@ -11,6 +11,7 @@ import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
+import epicsquid.roots.ritual.IColdRitual;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.ItemHandlerUtil;
@@ -404,7 +405,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     }
     //Spawn the Ignite flame particle
     if (world.isRemote && this.doBigFlame) {
-      if (ritualEntity instanceof EntityRitualFrostLands) {
+      if (ritualEntity instanceof IColdRitual) {
         for (int i = 0; i < 40; i++) {
           ParticleUtil.spawnParticleFiery(world, getPos().getX() + 0.125f + 0.75f * random.nextFloat(), getPos().getY() + 0.75f + 0.5f * random.nextFloat(),
               getPos().getZ() + 0.125f + 0.75f * random.nextFloat(), 0.03125f * (random.nextFloat() - 0.5f), 0.125f * random.nextFloat(),
@@ -437,10 +438,8 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         burning = false;
       }
 
-      if (burning && getTicker() % 20.0f == 0 && random.nextDouble() < 0.05) {
-        if (!(ritualEntity instanceof EntityRitualFrostLands)) {
-          meltNearbySnow();
-        }
+      if (burning && getTicker() % 20.0f == 0 && random.nextDouble() < 0.05 && !(ritualEntity instanceof IColdRitual)) {
+        meltNearbySnow();
       }
 
       if (!burning || burnTime == 0) {
@@ -504,8 +503,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       if (!burning || burnTime == 0) {
         burnTime = 0;
         markDirty();
-        if (!world.isRemote)
+        if (!world.isRemote) {
           updatePacketViaState();
+        }
       }
     }
 

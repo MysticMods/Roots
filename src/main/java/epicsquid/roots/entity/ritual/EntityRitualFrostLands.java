@@ -3,17 +3,16 @@ package epicsquid.roots.entity.ritual;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.network.fx.MessageFrosLandsProgressFX;
+import epicsquid.roots.ritual.IColdRitual;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -21,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class EntityRitualFrostLands extends EntityRitualBase {
+public class EntityRitualFrostLands extends EntityRitualBase implements IColdRitual {
 
   protected static Random random = new Random();
   protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualFrostLands.class, DataSerializers.VARINT);

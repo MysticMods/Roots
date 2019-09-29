@@ -11,8 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-public class RitualFrostLands extends RitualBase {
-
+public class RitualFrostLands extends RitualBase implements IColdRitual {
   public RitualFrostLands(String name, int duration, boolean disabled) {
     super(name, duration, disabled);
     addCondition(new ConditionItems(
