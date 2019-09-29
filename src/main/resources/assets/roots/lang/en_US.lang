@@ -149,6 +149,13 @@ roots.ritual.ritual_flower_growth.name=Flower Growth
 roots.ritual.ritual_transmutation.name=Transmutation
 roots.ritual.ritual_gathering.name=Gathering
 
+roots.ritual.condition.items=Failed to start ritual: invalid items.
+roots.ritual.condition.standing_stones=Failed to start ritual: requires %s.
+roots.ritual.condition.standing_stones.types=%d of %d-high stones
+roots.ritual.condition.trees=Failed to start ritual: invalid trees, requires %s.
+roots.ritual.condition.trees.types=%d of %s.
+roots.ritual.condition.invalid=Failed to start ritual: unknown reason
+
 roots.keybinds.group=Roots
 roots.keybinds.pouch=Open Pouch
 roots.keybinds.quiver=Open Quiver
