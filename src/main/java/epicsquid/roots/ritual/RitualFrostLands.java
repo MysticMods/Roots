@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-public class RitualFrostLands extends RitualBase {
+public class RitualFrostLands extends RitualBase implements IColdRitual {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(6400);
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 10);
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 10);

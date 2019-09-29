@@ -3,6 +3,7 @@ package epicsquid.roots.entity.ritual;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.network.fx.MessageFrosLandsProgressFX;
+import epicsquid.roots.ritual.IColdRitual;
 import epicsquid.roots.ritual.RitualFrostLands;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.block.BlockFarmland;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class EntityRitualFrostLands extends EntityRitualBase {
+public class EntityRitualFrostLands extends EntityRitualBase implements IColdRitual {
 
   private RitualFrostLands ritual;
 
