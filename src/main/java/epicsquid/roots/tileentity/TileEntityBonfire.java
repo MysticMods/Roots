@@ -8,6 +8,7 @@ import epicsquid.roots.block.BlockBonfire;
 import epicsquid.roots.config.RitualConfig;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualFrostLands;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
