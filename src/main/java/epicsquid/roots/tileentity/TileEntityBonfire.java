@@ -1,13 +1,13 @@
 package epicsquid.roots.tileentity;
 
 import epicsquid.mysticallib.tile.TileBase;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.block.BlockBonfire;
 import epicsquid.roots.config.RitualConfig;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualFrostLands;
-import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
@@ -15,7 +15,6 @@ import epicsquid.roots.ritual.IColdRitual;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.ItemHandlerUtil;
-import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.util.XPUtil;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import net.minecraft.block.material.Material;
@@ -210,6 +209,16 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     return false;
   }
 
+  private void resolveLastIngredients() {
+    if (this.lastUsedIngredients == null || this.lastUsedIngredients.isEmpty()) {
+      if (this.lastRitualUsed != null) {
+        this.lastUsedIngredients = this.lastRitualUsed.getIngredients();
+      } else if (this.lastRecipeUsed != null) {
+        this.lastUsedIngredients = this.lastRecipeUsed.getIngredients();
+      }
+    }
+  }
+
   @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
     if (world.isRemote) return true;
@@ -245,6 +254,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           }
         }
       }
+      // TODO: Make this a configurable array of items or extensible classes
       if (heldItem.getItem() instanceof ItemFlintAndSteel) {
         heldItem.damageItem(1, player);
         return startRitual(player);
@@ -289,13 +299,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       }
     }
     if (player.isSneaking() && heldItem.isEmpty() && hand == EnumHand.MAIN_HAND) {
-      if (this.lastUsedIngredients == null) {
-        if (this.lastRitualUsed != null) {
-          this.lastUsedIngredients = this.lastRitualUsed.getIngredients();
-        } else if (this.lastRecipeUsed != null) {
-          this.lastUsedIngredients = this.lastRecipeUsed.getIngredients();
-        }
-      }
+      resolveLastIngredients();
       if (this.lastUsedIngredients != null) {
         if (player.capabilities.isCreativeMode) {
           int i = 0;
@@ -355,6 +359,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   @Override
   public void update() {
     // Potentially update from stuff below
+    resolveLastIngredients();
     if (lastUsedIngredients != null && !lastUsedIngredients.isEmpty() && ItemHandlerUtil.isEmpty(inventory_storage) && ItemHandlerUtil.isEmpty(inventory)) {
       TileEntity te = world.getTileEntity(getPos().down());
       if (te != null) {
