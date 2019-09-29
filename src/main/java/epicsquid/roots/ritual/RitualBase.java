@@ -10,8 +10,8 @@ import java.util.Random;
 
 import epicsquid.roots.block.BlockBonfire;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
-import epicsquid.roots.recipe.conditions.Condition;
-import epicsquid.roots.recipe.conditions.ConditionItems;
+import epicsquid.roots.ritual.conditions.Condition;
+import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -98,12 +98,13 @@ public abstract class RitualBase {
       return false;
     }
 
+    boolean success = true;
     for (Condition condition : this.conditions) {
-      if (!condition.checkCondition(tileEntityBonfire, player)) {
-        return false;
+      if (!condition.check(tileEntityBonfire, player)) {
+        success = false;
       }
     }
-    return true;
+    return success;
   }
 
   public abstract EntityRitualBase doEffect(World world, BlockPos pos);

@@ -245,10 +245,10 @@ public class TileEntityBonfire extends TileBase implements ITickable {
               }
               if (!player.capabilities.isCreativeMode) {
                 cap.drain(stack, true);
-              }
-              if (heldItem.getItem() instanceof ItemBucket) {
-                player.setHeldItem(hand, new ItemStack(Items.BUCKET));
-                ((EntityPlayerMP) player).sendAllContents(player.openContainer, player.openContainer.getInventory());
+                if (heldItem.getItem() instanceof ItemBucket) {
+                  player.setHeldItem(hand, new ItemStack(Items.BUCKET));
+                  ((EntityPlayerMP) player).sendAllContents(player.openContainer, player.openContainer.getInventory());
+                }
               }
               break;
             }
