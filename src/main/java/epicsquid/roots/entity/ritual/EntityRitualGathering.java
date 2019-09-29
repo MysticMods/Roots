@@ -15,6 +15,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -25,6 +26,8 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class EntityRitualGathering extends EntityRitualBase {
+  public static AxisAlignedBB bounding = new AxisAlignedBB(-1, -1, -1, 1, 1, 1);
+
   private RitualGathering ritual;
 
   public EntityRitualGathering(World worldIn) {
@@ -39,12 +42,25 @@ public class EntityRitualGathering extends EntityRitualBase {
 
     if (!world.isRemote) {
       if (this.ticksExisted % ritual.interval == 0) {
-        TileEntity te = world.getTileEntity(getPosition().down()); // Hope that it's in the right position these days
-        IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if (cap != null) {
-          List<BlockPos> transferredItems = Magnetize.store(world, getPosition(), cap, ritual.radius_x, ritual.radius_y, ritual.radius_z);
-          if (!transferredItems.isEmpty()) {
-            PacketHandler.sendToAllTracking(new MessageItemGatheredFX(transferredItems), this);
+        AxisAlignedBB bounds = bounding.offset(getPosition());
+        BlockPos start = new BlockPos(bounds.minX, bounds.minY, bounds.minZ);
+        BlockPos stop = new BlockPos(bounds.maxX, bounds.maxY, bounds.maxZ);
+        TileEntity te = null;
+        boolean found = false;
+        for (BlockPos.MutableBlockPos pos : BlockPos.getAllInBoxMutable(start, stop)) {
+          te = world.getTileEntity(pos);
+          if (te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
+            found = true;
+            break;
+          }
+        }
+        if (found && te != null) {
+          IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+          if (cap != null) {
+            List<BlockPos> transferredItems = Magnetize.store(world, getPosition(), cap, ritual.radius_x, ritual.radius_y, ritual.radius_z);
+            if (!transferredItems.isEmpty()) {
+              PacketHandler.sendToAllTracking(new MessageItemGatheredFX(transferredItems), this);
+            }
           }
         }
       }
