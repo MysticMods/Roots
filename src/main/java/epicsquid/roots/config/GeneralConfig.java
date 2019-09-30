@@ -29,6 +29,9 @@ public class GeneralConfig {
     }
   }
 
+  @Config.Comment(("Set to true to give players the Roots Guide Book upon joining the server"))
+  public static boolean GiveBook = false;
+
   @Config.Comment(("Inject some items from Roots into dungeon & other loot chests"))
   public static boolean InjectLoot = true;
 
