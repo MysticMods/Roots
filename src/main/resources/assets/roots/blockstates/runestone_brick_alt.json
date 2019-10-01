@@ -1,16 +1,21 @@
-
 {
-    "forge_marker": 1,
-    "defaults": {
-        "model": "cube_all",
-        "textures": {
-            "all": "roots:blocks/runestone_brick_alt"
-        },
-        "uvlock": true
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "roots:blocks/runestone_brick_alt"
     },
-    "variants": {
-        "normal": [{}],
-        "inventory": [{}],
-        "handlers": [{}]
-    }
+    "uvlock": true
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "handlers": [
+      {}
+    ]
+  }
 }

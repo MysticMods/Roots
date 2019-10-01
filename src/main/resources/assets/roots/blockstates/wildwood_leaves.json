@@ -1,5 +1,21 @@
 {
-  "variants":{
-      "custom":  { "model": "roots:wildwood_leaves" }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "roots:blocks/wildwood_leaves"
+    },
+    "uvlock": true
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "handlers": [
+      {}
+    ]
   }
 }

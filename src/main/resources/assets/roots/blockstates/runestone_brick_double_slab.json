@@ -1,5 +1,25 @@
 {
-    "variants":{
-        "custom":  { "model": "roots:runestone_brick_double_slab" }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "roots:blocks/runestone_brick"
+    },
+    "uvlock": true
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "handlers": [
+      {}
+    ],
+    "half": {
+      "top": {},
+      "bottom": {}
     }
+  }
 }
