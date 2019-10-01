@@ -1,5 +1,26 @@
 {
-    "variants":{
-        "custom":  { "model": "roots:runestone_brick_alt_slab" }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "half_slab",
+    "textures": {
+      "bottom": "roots:blocks/runestone_brick_alt",
+      "top": "roots:blocks/runestone_brick_alt",
+      "side": "roots:blocks/runestone_brick_alt"
     }
+  },
+  "variants": {
+    "half": {
+      "bottom": {
+      },
+      "top": {
+        "model": "upper_slab"
+      }
+    },
+    "inventory": [
+      {}
+    ],
+    "handlers": [
+      {}
+    ]
+  }
 }

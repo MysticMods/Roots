@@ -1,5 +1,21 @@
 {
-    "variants":{
-        "custom":  { "model": "roots:elemental_soil" }
-    }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "roots:blocks/elemental_soil"
+    },
+    "uvlock": true
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "handlers": [
+      {}
+    ]
+  }
 }
