@@ -46,7 +46,7 @@ public class PowderInventoryUtil {
 
   public static double getPowderTotal(EntityPlayer player, Herb herb) {
     ItemStack pouch = getPouch(player);
-    if (pouch.isEmpty()) return 0.0;
+    if (pouch.isEmpty()) return -1.0;
 
     // Hard-coding for creative pouch
     if (pouch.getItem() == ModItems.creative_pouch) return 999;
