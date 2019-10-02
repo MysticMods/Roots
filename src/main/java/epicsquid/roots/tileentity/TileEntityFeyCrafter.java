@@ -4,8 +4,11 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.Roots;
 import epicsquid.roots.block.groves.BlockGroveStone;
+import epicsquid.roots.gui.GuiHandler;
 import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.network.fx.MessageGrowthCrafterVisualFX;
@@ -180,15 +183,33 @@ public class TileEntityFeyCrafter extends TileBase {
   @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand,
                           @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
+
+    boolean shouldGui = false;
+
     // Knife detection is already handled
-    if (!hasValidGroveStone()) return false;
+    if (!hasValidGroveStone()) {
+      shouldGui = true;
+    }
 
     if (player.world.isRemote) {
       return true;
     }
 
-    List<ItemStack> items = craft();
-    if (items.isEmpty()) {
+    List<ItemStack> items = new ArrayList<>();
+
+    if (!ModItems.knives.contains(player.getHeldItem(hand).getItem())) {
+      shouldGui = true;
+    }
+
+    if (!shouldGui) {
+      items = craft();
+      if (items.isEmpty()) {
+        shouldGui = true;
+      }
+    }
+
+    if (shouldGui) {
+      player.openGui(Roots.instance, GuiHandler.CRAFTER_ID, world, pos.getX(), pos.getY(), pos.getZ());
       return true;
     }
 
