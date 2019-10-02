@@ -49,11 +49,12 @@ public class AnimalHarvestTweaker {
       order = 3,
       args = {
           @ZenDocArg(arg = "name", info = "the name of the type of fish"),
-          @ZenDocArg(arg = "fish", info = "the type of fish as an item stack")
+          @ZenDocArg(arg = "fish", info = "the type of fish as an item stack"),
+          @ZenDocArg(arg = "weight", info = "the weight of the fish as an integer")
       }
   )
-  public static void addFish(String name, IItemStack fish) {
-    CraftTweaker.LATE_ACTIONS.add(new AddFish(name, CraftTweakerMC.getItemStack(fish)));
+  public static void addFish(String name, IItemStack fish, int weight) {
+    CraftTweaker.LATE_ACTIONS.add(new AddFish(name, CraftTweakerMC.getItemStack(fish), weight));
   }
 
   @ZenDocMethod(
@@ -108,16 +109,18 @@ public class AnimalHarvestTweaker {
   private static class AddFish extends Action {
     private final ItemStack stack;
     private final String name;
+    private final int weight;
 
-    public AddFish(String name, ItemStack stack) {
+    public AddFish(String name, ItemStack stack, int weight) {
       super("add_animal_harvest_fish");
       this.name = name;
       this.stack = stack;
+      this.weight = weight;
     }
 
     @Override
     public void apply() {
-      ModRecipes.addAnimalHarvestFishRecipe(name, stack);
+      ModRecipes.addAnimalHarvestFishRecipe(name, stack, weight);
     }
 
     @Override
