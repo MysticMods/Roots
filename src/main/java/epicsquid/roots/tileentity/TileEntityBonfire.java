@@ -42,6 +42,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
@@ -181,7 +182,11 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         this.lastUsedIngredients = ritual.getIngredients();
         this.doBigFlame = true;
         for (int i = 0; i < inventory.getSlots(); i++) {
-          inventory.extractItem(i, 1, false);
+          ItemStack item = inventory.extractItem(i, 1, false);
+          if (item.getItem().hasContainerItem(item)) {
+            ItemStack container = ForgeHooks.getContainerItem(item);
+            ItemUtil.spawnItem(world, getPos().add(1, 0, -1), container);
+          }
         }
         markDirty();
         updatePacketViaState();
@@ -201,6 +206,10 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       for (int i = 0; i < inventory.getSlots(); i++) {
         ItemStack item = inventory.extractItem(i, 1, false);
         inventory_storage.insertItem(i, item, false);
+        if (item.getItem().hasContainerItem(item)) {
+          ItemStack container = ForgeHooks.getContainerItem(item);
+          ItemUtil.spawnItem(world, getPos().add(1, 0, -1), container);
+        }
       }
       markDirty();
       updatePacketViaState();
@@ -479,7 +488,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         if (!world.isRemote && !this.craftingResult.isEmpty()) {
           ItemStack result = this.craftingResult.copy();
           if (this.lastRecipeUsed != null) {
-            this.lastRecipeUsed.postCraft(result, inventory_storage);
+            this.lastRecipeUsed.postCraft(result, inventory_storage, this);
           }
 
           EntityItem item = new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 1, getPos().getZ() + 0.5, result);

@@ -18,6 +18,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
@@ -139,7 +140,11 @@ public class TileEntityMortar extends TileBase {
             updatePacketViaState();
           }
           for (int i = 0; i < inventory.getSlots(); i++) {
-            inventory.extractItem(i, 1, false);
+            ItemStack item = inventory.extractItem(i, 1, false);
+            if (item.getItem().hasContainerItem(item)) {
+              ItemStack container = ForgeHooks.getContainerItem(item);
+              ItemUtil.spawnItem(world, getPos().add(0, 1, 0), container);
+            }
           }
           return true;
         }
