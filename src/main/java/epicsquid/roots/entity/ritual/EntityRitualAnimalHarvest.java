@@ -9,6 +9,7 @@ import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.recipe.AnimalHarvestFishRecipe;
 import epicsquid.roots.ritual.RitualAnimalHarvest;
 import epicsquid.roots.ritual.RitualRegistry;
+import epicsquid.roots.util.types.WeightedRegistry;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
@@ -31,6 +32,7 @@ import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.fluids.capability.wrappers.FluidBlockWrapper;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import org.apache.http.client.methods.Configurable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -67,16 +69,16 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
         IBlockState state = world.getBlockState(p);
         return (state.getMaterial() == Material.WATER && state.getPropertyKeys().contains(BlockLiquid.LEVEL) && state.getValue(BlockLiquid.LEVEL) == 0);
       });
-      List<AnimalHarvestFishRecipe> recipes = ModRecipes.getFishRecipes();
+      WeightedRegistry<AnimalHarvestFishRecipe> recipes = new WeightedRegistry<>(ModRecipes.getFishRecipes());
       if (!recipes.isEmpty() && !waterSourceBlocks.isEmpty() && (rand.nextInt(ritual.fish_chance) == 0 || entityList.isEmpty())) {
-        AnimalHarvestFishRecipe recipe = recipes.get(rand.nextInt(recipes.size()));
+        AnimalHarvestFishRecipe recipe = recipes.getRandomItem(rand);
         BlockPos pos = waterSourceBlocks.get(rand.nextInt(waterSourceBlocks.size()));
-        ItemStack stack = recipe.getItemStack().copy();
-        // Protection against those nasty "must be positive" errors
-        if (ritual.fish_count > 0) {
-          stack.setCount(1 + rand.nextInt(ritual.fish_count));
+        if (!world.isRemote) {
+          ItemStack stack = recipe.getItemStack().copy();
+          // Protection against those nasty "must be positive" errors
+          stack.setCount(ritual.fish_count + Math.max(0, (rand.nextInt(ritual.fish_additional) - 2)));
+          ItemUtil.spawnItem(world, pos.add(0, 1, 0), stack);
         }
-        ItemUtil.spawnItem(world, pos.add(0, 1, 0), stack);
         PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY() + 1, pos.getZ()), this);
         return true;
       }
