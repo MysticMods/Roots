@@ -2,6 +2,7 @@ package epicsquid.roots.tileentity;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.block.groves.BlockGroveStone;
 import epicsquid.roots.init.ModBlocks;
@@ -23,6 +24,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -129,7 +131,12 @@ public class TileEntityFeyCrafter extends TileBase {
       inputItems.clear();
       boolean singleStack = false;
       for (int i = 0; i < 5; i++) {
-        inputItems.add(inventory.extractItem(i, 1, false));
+        ItemStack stack = inventory.extractItem(i, 1, false);
+        if (stack.getItem().hasContainerItem(stack)) {
+          ItemStack containerResult = ForgeHooks.getContainerItem(stack);
+          ItemUtil.spawnItem(world, getPos().add(0, 1, 0), containerResult);
+        }
+        inputItems.add(stack);
       }
 
       if (current.isEmpty()) {
