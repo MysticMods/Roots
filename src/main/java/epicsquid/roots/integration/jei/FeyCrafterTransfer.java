@@ -35,7 +35,7 @@ public class FeyCrafterTransfer implements IRecipeTransferInfo<ContainerFeyCraft
   @Override
   public List<Slot> getInventorySlots(ContainerFeyCrafter container) {
     List<Slot> slots = new ArrayList<>();
-    for (int i = 5; i < 40; i++) {
+    for (int i = 5; i <= 40; i++) {
       slots.add(container.getSlot(i));
     }
     return slots;
