@@ -12,15 +12,11 @@ public class RunicShearsCapabilityStorage implements Capability.IStorage<RunicSh
   @Nullable
   @Override
   public NBTBase writeNBT(Capability<RunicShearsCapability> capability, RunicShearsCapability instance, EnumFacing side) {
-    return new NBTTagLong(instance.getCooldown());
+    return instance.writeNBT();
   }
 
   @Override
   public void readNBT(Capability<RunicShearsCapability> capability, RunicShearsCapability instance, EnumFacing side, NBTBase nbt) {
-    if (nbt.getId() == Constants.NBT.TAG_LONG) {
-      instance.setCooldown(((NBTTagLong) nbt).getLong());
-    } else {
-      instance.setCooldown(0);
-    }
+    instance.readNBT(nbt);
   }
 }
