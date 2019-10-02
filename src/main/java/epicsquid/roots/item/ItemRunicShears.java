@@ -64,8 +64,9 @@ public class ItemRunicShears extends ItemBase {
     Block block = state.getBlock();
 
     IBlockState moss = MossConfig.scrapeResult(state);
+    IBlockState moss2 = MossConfig.mossConversion(state);
 
-    if (moss != null) {
+    if (moss != null || moss2 != null) {
       if (!world.isRemote) {
         AxisAlignedBB bounds = bounding.offset(pos);
         BlockPos start = new BlockPos(bounds.minX, bounds.minY, bounds.minZ);
@@ -83,7 +84,7 @@ public class ItemRunicShears extends ItemBase {
         }
         if (!affectedBlocks.isEmpty()) {
           if (!player.capabilities.isCreativeMode) {
-            player.getHeldItem(hand).damageItem(1, player);
+            player.getHeldItem(hand).damageItem(1 + Math.min(6, random.nextInt(affectedBlocks.size())), player);
           }
           MessageRunicShearsAOEFX message = new MessageRunicShearsAOEFX(affectedBlocks);
           PacketHandler.sendToAllTracking(message, world.provider.getDimension(), pos);
