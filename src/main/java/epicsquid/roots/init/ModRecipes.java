@@ -415,7 +415,7 @@ public class ModRecipes {
     return harvestClasses;
   }
 
-  public static void addAnimalHarvestFishRecipe (String name, ItemStack item) {
+  public static void addAnimalHarvestFishRecipe (String name, ItemStack item, int weight) {
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
     if (getAnimalHarvestFishRecipe(rl) != null) {
       return;
@@ -423,7 +423,7 @@ public class ModRecipes {
     if (getAnimalHarvestFishRecipe(item) != null) {
       return;
     }
-    AnimalHarvestFishRecipe recipe = new AnimalHarvestFishRecipe(rl, item);
+    AnimalHarvestFishRecipe recipe = new AnimalHarvestFishRecipe(rl, item, weight);
     fishRecipes.put(rl, recipe);
   }
 
@@ -488,9 +488,10 @@ public class ModRecipes {
     addAnimalHarvestRecipe("owl", EntityOwl.class);
     addAnimalHarvestRecipe("sprout", EntitySprout.class);
     // Fish recipes
-    for (ItemFishFood.FishType type : ItemFishFood.FishType.values()) {
-      addAnimalHarvestFishRecipe(type.getTranslationKey(), new ItemStack(Items.FISH, 1, type.getMetadata()));
-    }
+    addAnimalHarvestFishRecipe("cod", new ItemStack(Items.FISH, 1, ItemFishFood.FishType.COD.getMetadata()), 60);
+    addAnimalHarvestFishRecipe("salmon", new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()), 25);
+    addAnimalHarvestFishRecipe("clownfish", new ItemStack(Items.FISH, 1, ItemFishFood.FishType.CLOWNFISH.getMetadata()), 2);
+    addAnimalHarvestFishRecipe("pufferfish", new ItemStack(Items.FISH, 1, ItemFishFood.FishType.PUFFERFISH.getMetadata()), 13);
   }
 
   public static void addRunicCarvingRecipe(RunicCarvingRecipe recipe) {
