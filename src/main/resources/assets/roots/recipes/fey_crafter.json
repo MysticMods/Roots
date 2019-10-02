@@ -7,7 +7,7 @@
   "key": {
     "S": [
       {
-        "type":  "ore",
+        "type":  "forge:ore_dict",
         "ore":  "treeSapling"
       }
     ],

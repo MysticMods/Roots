@@ -21,9 +21,9 @@ public class RunicShearRecipes {
     ModRecipes.addRunicShearRecipe(new RunicShearRecipe(Blocks.CARROTS, null, new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine), "aubergine", new ItemStack(Items.CARROT)));
     ModRecipes.addRunicShearRecipe(new RunicShearRecipe(Blocks.BEETROOTS, null, new ItemStack(ModItems.spirit_herb), "spirit_herb", new ItemStack(Items.BEETROOT)));
 
-    ModRecipes.addRunicShearRecipe(new RunicShearRecipe(new ItemStack(ModItems.fey_leather, 1), EntityCow.class, 20 * 60, "cow_fey_leather"));
-    ModRecipes.addRunicShearRecipe(new RunicShearRecipe(new ItemStack(ModItems.fey_leather, 1), EntityDeer.class, 20 * 60, "deer_fey_leather"));
-    ModRecipes.addRunicShearRecipe(new RunicShearRecipe(new ItemStack(ModItems.fey_leather, 1), EntityLlama.class, 20 * 60, "llama_fey_leather"));
-    ModRecipes.addRunicShearRecipe(new RunicShearRecipe(new ItemStack(ModItems.fey_leather, 1), EntityHorse.class, 20 * 60, "horse_fey_leather"));
+    ModRecipes.addRunicShearRecipe(new RunicShearRecipe(new ItemStack(ModItems.fey_leather, 1), EntityCow.class, 20 * 30, "cow_fey_leather"));
+    ModRecipes.addRunicShearRecipe(new RunicShearRecipe(new ItemStack(ModItems.fey_leather, 1), EntityDeer.class, 20 * 30, "deer_fey_leather"));
+    ModRecipes.addRunicShearRecipe(new RunicShearRecipe(new ItemStack(ModItems.fey_leather, 1), EntityLlama.class, 20 * 30, "llama_fey_leather"));
+    ModRecipes.addRunicShearRecipe(new RunicShearRecipe(new ItemStack(ModItems.fey_leather, 1), EntityHorse.class, 20 * 30, "horse_fey_leather"));
   }
 }
