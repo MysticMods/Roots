@@ -248,7 +248,7 @@ public class TileEntityFeyCrafter extends TileBase {
         // TODO: Use whirlwind of leaf particles!
         ParticleUtil.spawnParticleFiery(world, getPos().getX() + 0.125f + 0.75f * random.nextFloat(), getPos().getY() + 1.25f + 0.5f * random.nextFloat(),
             getPos().getZ() + 0.125f + 0.75f * random.nextFloat(), 0.03125f * (random.nextFloat() - 0.5f), 0.125f * random.nextFloat(),
-            0.03125f * (random.nextFloat() - 0.5f), 255.0f, 224.0f, 32.0f, 0.75f, 9.0f + 9.0f * random.nextFloat(), 40);
+            0.03125f * (random.nextFloat() - 0.5f), 64.0f, 125.0f, 57.0f, 0.75f, 9.0f + 9.0f * random.nextFloat(), 40);
       }
     }
   }
