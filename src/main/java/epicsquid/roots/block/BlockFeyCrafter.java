@@ -38,19 +38,6 @@ public class BlockFeyCrafter extends BlockTEBase {
     return false;
   }
 
-  @Override
-  public boolean onBlockActivated(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing face, float hitX, float hitY, float hitZ) {
-    if (player.getHeldItem(hand).getItem() instanceof ItemDruidKnife) {
-      if (super.onBlockActivated(world, pos, state, player, hand, face, hitX, hitY, hitZ)) return true;
-    }
-
-    if (!world.isRemote) {
-      player.openGui(Roots.instance, GuiHandler.CRAFTER_ID, world, pos.getX(), pos.getY(), pos.getZ());
-    }
-
-    return true;
-  }
-
   @Nonnull
   @Override
   public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
