@@ -1,6 +1,7 @@
 package epicsquid.roots.entity;
 
 import epicsquid.mysticalworld.MysticalWorld;
+import epicsquid.roots.Roots;
 import epicsquid.roots.particle.ParticleUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -26,7 +27,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class EntityFairy extends EntityFlying {
-  public static ResourceLocation LOOT_TABLE = new ResourceLocation(MysticalWorld.MODID,  "entity/fairy");
+  public static ResourceLocation LOOT_TABLE = new ResourceLocation(Roots.MODID,  "entity/fairy");
 
   public static final DataParameter<BlockPos> spawnPosition = EntityDataManager.<BlockPos>createKey(EntityFairy.class, DataSerializers.BLOCK_POS);
   public static final DataParameter<BlockPos> targetPosition = EntityDataManager.<BlockPos>createKey(EntityFairy.class, DataSerializers.BLOCK_POS);
