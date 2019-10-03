@@ -13,6 +13,7 @@
 	"show_progress": false,
 	"macros": {
 		"$(info)": "$(thing)$(bold)$(t:Important Detail)[!]$()",
-		"$(warning)": "$(#f00)$(bold)$(t:Warning)[!]$()"
+		"$(warning)": "$(#f00)$(bold)$(t:Warning)[!]$()",
+		"$(standing_stones)": "$(#aa0)$(bold)$(t:Standing Stones Required!)[!]$()"
 	}
 }

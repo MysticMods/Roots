@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Items that litter the ground will be picked up at regular intervals and deposited into an inventory placed directly beneath the pyre."
+      "text": "Items that litter the ground will be picked up at regular intervals and deposited into an inventory placed directly beneath the pyre.$(br2)$(standing_stones) $(l:rituals/ritual_gathering#multiblock)This ritual requires standing stones.$()"
     },
     {
       "type": "pyre_template",
@@ -15,6 +15,7 @@
     },
     {
       "type": "multiblock",
+      "anchor": "multiblock",
       "multiblock": {
         "mapping": {
           "0": "roots:bonfire",

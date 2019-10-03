@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "The energy of nature is a huge thing, even when found in the tiniest seeds, though it may lay dormant there. This ritual finds that dormant energy and sparks germination, causing crops & trees to slowly grow as long as the ritual persists.$(br2)$(info) This ritual requires standing stones."
+      "text": "The energy of nature is a huge thing, even when found in the tiniest seeds, though it may lay dormant there. This ritual finds that dormant energy and sparks germination, causing crops & trees to slowly grow as long as the ritual persists.$(br2)$(standing_stones) $(l:rituals/ritual_germination#multiblock)This ritual requires standing stones.$()"
     },
     {
       "type": "pyre_template",
@@ -15,6 +15,7 @@
     },
     {
       "type": "multiblock",
+      "anchor": "multiblock",
       "enable_visualize": false,
       "multiblock": {
         "mapping": {

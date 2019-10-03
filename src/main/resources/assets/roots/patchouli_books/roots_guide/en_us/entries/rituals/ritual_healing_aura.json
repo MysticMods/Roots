@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Nearby creatures are healed back to full health while in the proximity of this short ritual.$(br2)$(info) This ritual requires the correct standing stones and a birch tree nearby to function properly.$(br2)$(warning) Hostile creatures will also be healed. Be wary!"
+      "text": "Nearby creatures are healed back to full health while in the proximity of this short ritual.$(br2)$(warning) Hostile creatures will also be healed. Be wary!$(br2)$(standing_stones) $(l:rituals/ritual_healing_aura#multiblock)This ritual requires standing stones.$()"
     },
     {
       "type": "pyre_template",
@@ -15,6 +15,7 @@
     },
     {
       "type": "multiblock",
+      "anchor": "multiblock",
       "multiblock": {
         "mapping": {
           "0": "roots:bonfire",
