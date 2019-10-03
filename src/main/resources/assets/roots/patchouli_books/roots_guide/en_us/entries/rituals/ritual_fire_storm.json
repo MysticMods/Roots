@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "From the heavens spew forth a huge amount of sentient fire, burning creatures near the ritual, setting the ground on fire, and slowly turning the surrounding area into a raging inferno, but at the same time protecting players from directly taking damage.$(br2)$(info) This ritual requires the correct standing stones."
+      "text": "From the heavens spew forth a huge amount of sentient fire, burning creatures near the ritual, setting the ground on fire, and slowly turning the surrounding area into a raging inferno, but at the same time protecting players from directly taking damage.$(br2)$(standing_stones) $(l:rituals/ritual_fire_storm#multiblock)This ritual requires standing stones.$()"
     },
     {
       "type": "pyre_template",
@@ -15,6 +15,7 @@
     },
     {
       "type": "multiblock",
+      "anchor": "multiblock",
       "multiblock": {
         "mapping": {
           "0": "roots:bonfire",

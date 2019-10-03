@@ -17,6 +17,7 @@
     },
     {
       "type": "crafting",
+      "anchor": "chiseled",
       "recipe": "roots:runestone_brick",
       "recipe2": "roots:runestone_chiseled"
     },
