@@ -103,7 +103,7 @@ roots.info.pyre.repeat4=per ripetere il processo di crafting.
 
 roots.spell.module.module_fire.name=Fuoco
 roots.spell.module.module_touch.name=Tocco
-roots.spell.module.description=Mosulo Incantesimo:
+roots.spell.module.description=Modulo Incantesimo:
 roots.spell.spell_wild_fire.name=Fuoco Selvaggio
 roots.spell.spell_dandelion_winds.name=Venti del Dente di Leone
 roots.spell.spell_sanctuary.name=Santuario
@@ -308,73 +308,73 @@ tile.caelic_soil.effect=Aumenta il ratio di velocità al quale le piante crescon
 tile.terran_soil.effect=Aumenta il rendimento delle piante che ci crescono sopra.
 
 # JEI
-container.roots.runic_shears.name=Runic Shearing
-container.roots.runic_carving.name=Runic Carving
-container.roots.ritual_crafting.name=Pyre Crafting Ritual
-container.roots.mortar_and_pestle.name=Mortar and Pestle
-container.roots.ritual.name=Pyre Ritual
-container.roots.fey_crafting.name=Fey Crafting
-container.roots.spell_costs.name=Spell Costs
-container.roots.spell_modifiers.name=Spell Modifiers
-container.roots.bark_carving.name=Bark Carving
-container.roots.runic_shears_entity.name=Runic Shearing Entities
-container.roots.terra_moss.name=Moss Scraping
-jei.roots.terra_moss.desc=Scraped from moss cobblestone with a knife. Cobblestone infused with terra spores will grow moss when adjacent to water.
-jei.roots.terra_spores.desc=Dropped from broken tall grass; used on cobblestone adjacent water grows sportes, turning it into moss cobblestone.
-jei.roots.wildroot.desc=Dropped from broken tall grass and the extremely rare leaves of the wildwood tree.
-jei.roots.bark.desc=Obtained by breaking the relevant log with a knife.
-jei.roots.wildwood.desc=Once a sacred tree of druidry, the only remnant of these that remain in the world are their wildroots. From these a skilled druid, with the correct words and ingredients, can invoke the ritual of Wildroot Growth.
-jei.roots.wildwood_sapling.desc=A rare, treasured young of a tree that does not itself bear children. No longer born, almost all of them have been secreted away by the druids of old.
-jei.roots.wildwood_leaves.desc=Unlike the leaves of other trees, the sacred wildwood has no longer the strength to bear saplings. Instead, the kernel of life common to all parts of the wildwood - the wildroot - may be found tucked amongst its leaves and its branches.
-jei.roots.elemental_soil_fire.desc=Created by tossing a piece of Elemental Soil into a pool of lava.
-jei.roots.elemental_soil_water.desc=Created by tossing a piece of Elemental Soil into a pool of water and waiting a few seconds.
-jei.roots.elemental_soil_air.desc=Created by dropping a piece of Elemental Soil onto a surface closer to the sky, and unobscured from it.
-jei.roots.elemental_soil_earth.desc=Created by dropping a piece of Elemental Soil onto a surface covered from the sky and in the depth's of the ground.
+container.roots.runic_shears.name=Tosaggio Runico
+container.roots.runic_carving.name=Intaglio Runico
+container.roots.ritual_crafting.name=Rituale di Creazione sul Falò
+container.roots.mortar_and_pestle.name=Mortaio e Pestello
+container.roots.ritual.name=Rituale sul Falò
+container.roots.fey_crafting.name=Crafting Fey
+container.roots.spell_costs.name=Costo dell'Incantesimo
+container.roots.spell_modifiers.name=Modificatori di Incantesimo
+container.roots.bark_carving.name=Intaglio della Corteccia
+container.roots.runic_shears_entity.name=Tosaggio Runico di Entità
+container.roots.terra_moss.name=Raschiare Muschio
+jei.roots.terra_moss.desc=Raschiato dalla pietra con un coltello. La Pietra infusa con le Spore di Terra Moss cresceranno muschio quando adiacenti all'acqua.
+jei.roots.terra_spores.desc=Droppato dall'erba alta; utilizzato sulla pietra adiacente all'acqua per far crescere il muschio su di essa .
+jei.roots.wildroot.desc=Droppato dall'erba alta e le estremamente rare foglie dell'albero di legno selvaggio.
+jei.roots.bark.desc=Ottenuta rompendo il tronco rilevante con un coltello
+jei.roots.wildwood.desc=Una volta un sacro albero per i druidi, l'unica cosa rimananente nel mondo sono le loro radici selvagge. Da queste un druido capace, con le corrette parole e ingredienti, può invocare il rituale della Crescita della Radice Selvaggia.
+jei.roots.wildwood_sapling.desc=Un raro giovane alberello che non ha figli da solo. Non più nati, quasi tutti sono stati nascosti dai druidi antichi.
+jei.roots.wildwood_leaves.desc=Al contrario delle foglie di altri alberi, il sacro legno selvaggio non ha più la forza di droppare alberelli. Invece, il nocciolo della vita comune a tutte le parti del legno selvaggio - la radice selvaggia - potrebbe essere trovata tra le sue foglie e i suoi rami.
+jei.roots.elemental_soil_fire.desc=Creato gettando un pezzo di Suolo Elementale in una pozza di lava.
+jei.roots.elemental_soil_water.desc=Creato gettando un pezzo di Suolo Elementale in una pozza di acqua e aspettando qualche secondo.
+jei.roots.elemental_soil_air.desc=Creato gettando un pezzo di Suolo Elementale su una superficie più vicina al cielo, e non oscura da esso.
+jei.roots.elemental_soil_earth.desc=Creato gettando un pezzo di Suolo Elementale su una superficie coperta dal cielo e nelle profondità della terra.
 
 # Quiver
-roots.quiver.picked_up_arrow=Retrieved arrows.
-roots.quiver.quiver_full=Your quiver is full.
-roots.quiver.fragile=This grown arrow cannot be picked up.
-roots.quiver.broke=All of the arrows broke.
+roots.quiver.picked_up_arrow=Frecce Recuperate.
+roots.quiver.quiver_full=La tua Faretra è piena.
+roots.quiver.fragile=Questa Freccia Cresciuta non può essere raccolta.
+roots.quiver.broke=Tutte le frecce sono rotte.
 
 # Config
 # Categories
-config.roots.category.general=General
-config.roots.category.general.tooltip=General settings related to Roots 3.
-config.roots.category.rituals=Rituals
-config.roots.category.rituals.tooltip=Configuration for enabling/disabling individual rituals, and other ritual-related settings.
-config.roots.category.spells=Spells
-config.roots.category.spells.tooltip=Configuration for enabling/disabling individual spells, and other spell-releated settings.
+config.roots.category.general=Generale
+config.roots.category.general.tooltip=Impostazioni Generali inerenti a Roots 3
+config.roots.category.rituals=Rituali
+config.roots.category.rituals.tooltip=Configurazione per abilitare/disabilitare rituali individuali, e altre impostazioni inerenti i rituali.
+config.roots.category.spells=Incantesimi
+config.roots.category.spells.tooltip=Configurazione per abilitare/disabilitare incantesimi individuali, e altre impostazioni inerenti gli incantesimi.
 config.roots.category.moss=Terra Moss
-config.roots.category.moss.tooltip=Configuration for growing and gather terra moss.
-config.roots.category.elemental_soil=Elemental Soil
-config.roots.category.elemental_soil.tooltip=Configuration settings related to elemental soil conversion.
-config.roots.category.crops=Growing & Harvesting
-config.roots.category.crops.tooltip=Settings relating to growth & harvesting spells
+config.roots.category.moss.tooltip=Configurazione per crescere e raccogliere la Terra Moss.
+config.roots.category.elemental_soil=Suolo Elementale
+config.roots.category.elemental_soil.tooltip=Impostazioni di Configurazione inerenti le conversioni del suolo elementale.
+config.roots.category.crops=Crescere e Raccogliere
+config.roots.category.crops.tooltip=Impostazioni Inerenti incantesimi di crescita e di raccolta.
 
 # WAILA/TOP/etc
-roots.hud.grove_stone.valid=Valid stone
-roots.hud.pyre.recipe=Crafting: %s
-roots.hud.pyre.ritual=Ritual: %s
-roots.hud.pyre.progress=Progress: %s minutes remaining
+roots.hud.grove_stone.valid=Pietra Valida
+roots.hud.pyre.recipe=Ricetta: %s
+roots.hud.pyre.ritual=Rituale: %s
+roots.hud.pyre.progress=Progresso: %s minuti rimanenti
 
-roots.hud.top.pyre.recipe=Crafting:
-roots.hud.top.pyre.ritual=Ritual:
-roots.hud.top.pyre.progress=Progress:
-roots.hud.top.pyre.progress_info=minutes remaining
+roots.hud.top.pyre.recipe=Ricetta:
+roots.hud.top.pyre.ritual=Rituale:
+roots.hud.top.pyre.progress=Progresso:
+roots.hud.top.pyre.progress_info=minuti rimanenti
 
 # Runic Shears
-roots.runic_shears.cooldown=The fey's equivalent has nothing to gift you at this time.
+roots.runic_shears.cooldown=L'equivalente del Fey non ha nulla da donarti per ora.
 
 # Ritual of Transmutation
-roots.ritual.transmutation.deadbush_cocoa=Obtained through the Ritual of Transmutation. Nearby dead bushes will transform into cocoa beans.
-roots.ritual.transmutation.birch_jungle=Obtained through the Ritual of Transmutation. The wood of nearby birch trees will transform into that of jungle trees.
-roots.ritual.transmutation.birch_jungle_leaves=Obtained through the Ritual of Transmutation. The leaves of nearby birch trees will transform into those of a jungle tree.
-roots.ritual.transmutation.pumpkin_melon=Obtained through the Ritual of Transmutation. Pumpkins with water or flowing water below them will transform into melon blocks.
-roots.ritual.transmutation.pumpkin_cactus=Obtained through the Ritual of Transmutation. Pumpkins planted upon sand will turn into cactuses.
+roots.ritual.transmutation.deadbush_cocoa=Ottenuto tramite il rituale di Trasmutazione. I cespugli morti nelle vicinanze si trasformeranno in Fave di Cacao.
+roots.ritual.transmutation.birch_jungle=Ottenuto tramite il rituale di Trasmutazione. Il legno nelle vicinanze si trasformerà in legno della Giungla.
+roots.ritual.transmutation.birch_jungle_leaves=Ottenuto tramite il rituale di Trasmutazione. Le foglie nelle vicinanze si trasformeranno in foglie della Giungla.
+roots.ritual.transmutation.pumpkin_melon=Ottenuto tramite il rituale di Trasmutazione. Le zucche con sorgenti d'acqua o acqua che scorre sotto si trasformeranno in Meloni.
+roots.ritual.transmutation.pumpkin_cactus=Ottenuto tramite il rituale di Trasmutazione. Le zucche piantate sulla sabbia si trasformaranno in cactus.
 
-jei.roots.fey_leather.source.desc=Obtained by reaching through the planes when using Runic Shears on an entity that normally drops leather. This is a gift willingly given, but it is not an infinite source.
+jei.roots.fey_leather.source.desc=Ottenuto passando attraverso i piani dimensionali usando le Cesoie Runiche su di un entità che normalmente droppa pelle. Questa però non è una risorsa infinita.
 
 # CraftTweaker commands
-roots.commands.dump.desc=§2/ct properties_roots [mode]\n§3Dumps the specified property table(s) to the log.
-roots.commands.dump.usage=Usage: ct properties_roots [mode]\nModes: all | ritual | spell
+roots.commands.dump.desc=§2/ct properties_roots [mode]\n§3Scarica la/le tabella/e di proprietà specificate sul log.
+roots.commands.dump.usage=Utilizzo: ct properties_roots [mode]\nModalità: all | ritual | spell
