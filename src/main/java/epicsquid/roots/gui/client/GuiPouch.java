@@ -22,7 +22,11 @@ public class GuiPouch extends GuiContainer {
   public GuiPouch(@Nonnull ContainerPouch containerPouch) {
     super(containerPouch);
     this.containerPouch = containerPouch;
-    xSize = 150;
+    if (isComponentPouch()) {
+      xSize = 150;
+    } else {
+      xSize = 170;
+    }
     ySize = 100;
   }
 
