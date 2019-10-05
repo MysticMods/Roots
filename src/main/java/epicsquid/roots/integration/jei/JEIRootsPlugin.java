@@ -1,5 +1,6 @@
 package epicsquid.roots.integration.jei;
 
+import com.google.common.collect.Lists;
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.ElementalSoilConfig;
 import epicsquid.roots.handler.SpellHandler;
@@ -16,6 +17,8 @@ import epicsquid.roots.integration.jei.ritual.RitualCraftingCategory;
 import epicsquid.roots.integration.jei.ritual.RitualCraftingWrapper;
 import epicsquid.roots.integration.jei.ritual.RitualWrapper;
 import epicsquid.roots.integration.jei.shears.RunicShearsCategory;
+import epicsquid.roots.integration.jei.shears.RunicShearsEntityCategory;
+import epicsquid.roots.integration.jei.shears.RunicShearsEntityWrapper;
 import epicsquid.roots.integration.jei.shears.RunicShearsWrapper;
 import epicsquid.roots.integration.jei.spell.SpellCostCategory;
 import epicsquid.roots.integration.jei.spell.SpellCostWrapper;
@@ -34,6 +37,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 
 import java.util.Collection;
@@ -69,13 +73,15 @@ public class JEIRootsPlugin implements IModPlugin {
         new SpellCostCategory(helper),
         new SpellModifierCategory(helper),
         new BarkRecipeCategory(helper),
-        new MossRecipeCategory(helper)
+        new MossRecipeCategory(helper),
+        new RunicShearsEntityCategory(helper)
     );
   }
 
   @Override
   public void register(IModRegistry registry) {
     registry.handleRecipes(RunicShearRecipe.class, RunicShearsWrapper::new, RUNIC_SHEARS);
+    registry.handleRecipes(RunicShearEntityRecipe.class, RunicShearsEntityWrapper::new, RUNIC_SHEARS_ENTITY);
     registry.handleRecipes(RunicCarvingRecipe.class, RunicCarvingWrapper::new, RUNIC_CARVING);
     registry.handleRecipes(PyreCraftingRecipe.class, RitualCraftingWrapper::new, RITUAL_CRAFTING);
     registry.handleRecipes(MortarRecipe.class, MortarWrapper::new, MORTAR_AND_PESTLE);
@@ -89,13 +95,11 @@ public class JEIRootsPlugin implements IModPlugin {
 
     Collection<SpellBase> spells = SpellRegistry.spellRegistry.values();
 
-    Map<String, RunicShearRecipe> runicShearRecipes = ModRecipes.getRunicShearRecipes();
-    List<RunicShearRecipe> runicShearBlockRecipes = runicShearRecipes.values().stream().filter(RunicShearRecipe::isBlockRecipe).collect(Collectors.toList());
-
     // TODO:
-    List<RunicShearRecipe> runicShearEntityRecipes = runicShearRecipes.values().stream().filter(RunicShearRecipe::isEntityRecipe).collect(Collectors.toList());
+    //List<RunicShearRecipe> runicShearEntityRecipes = runicShearRecipes.values().stream().filter(RunicShearRecipe::isEntityRecipe).collect(Collectors.toList());
 
-    registry.addRecipes(runicShearBlockRecipes, RUNIC_SHEARS);
+    registry.addRecipes(ModRecipes.getRunicShearRecipes().values(), RUNIC_SHEARS);
+    registry.addRecipes(ModRecipes.getRunicShearEntityRecipes().values(), RUNIC_SHEARS_ENTITY);
     registry.addRecipes(ModRecipes.getRunicCarvingRecipes(), RUNIC_CARVING);
     registry.addRecipes(ModRecipes.getPyreCraftingRecipes().values(), RITUAL_CRAFTING);
     registry.addRecipes(ModRecipes.getMortarRecipes(), MORTAR_AND_PESTLE);
@@ -108,6 +112,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipes(MossRecipe.getRecipeList(), TERRA_MOSS);
 
     registry.addRecipeCatalyst(new ItemStack(ModItems.runic_shears), RUNIC_SHEARS);
+    registry.addRecipeCatalyst(new ItemStack(ModItems.runic_shears), RUNIC_SHEARS_ENTITY);
 
     for (Item knife : ModItems.knives) {
       registry.addRecipeCatalyst(new ItemStack(knife), RUNIC_CARVING);
@@ -167,18 +172,7 @@ public class JEIRootsPlugin implements IModPlugin {
       }
     }
 
-    registry.addIngredientInfo(new ItemStack(ModItems.fey_leather), VanillaTypes.ITEM, I18n.format("jei.roots.fey_leather.source.desc"));
-
-    /*List<ItemStack> bark = new ArrayList<>();
-    bark.add(new ItemStack(ModItems.bark_oak));
-    bark.add(new ItemStack(ModItems.bark_acacia));
-    bark.add(new ItemStack(ModItems.bark_birch));
-    bark.add(new ItemStack(ModItems.bark_dark_oak));
-    bark.add(new ItemStack(ModItems.bark_jungle));
-    bark.add(new ItemStack(ModItems.bark_spruce));
-    bark.add(new ItemStack(ModItems.bark_wildwood));
-
-    registry.addIngredientInfo(bark, VanillaTypes.ITEM, I18n.format("jei.roots.bark.desc"));*/
+    //registry.addIngredientInfo(new ItemStack(ModItems.fey_leather), VanillaTypes.ITEM, I18n.format("jei.roots.fey_leather.source.desc"));
 
     registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_log), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood.desc"));
     registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_sapling), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood_sapling.desc"));

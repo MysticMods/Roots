@@ -8,6 +8,7 @@ import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
@@ -17,17 +18,17 @@ public class RunicShearsEntityCategory implements IRecipeCategory<RunicShearsEnt
   private final IDrawable background;
 
   public RunicShearsEntityCategory(IGuiHelper helper) {
-    this.background = helper.createDrawable(new ResourceLocation(Roots.MODID, "textures/gui/jei/runic_shears.png"), 0, 0, 78, 22);
+    this.background = helper.createDrawable(new ResourceLocation(Roots.MODID, "textures/gui/jei/runic_shears_entity.png"), 0, 0, 122, 84);
   }
 
   @Override
   public String getUid() {
-    return JEIRootsPlugin.RUNIC_SHEARS;
+    return JEIRootsPlugin.RUNIC_SHEARS_ENTITY;
   }
 
   @Override
   public String getTitle() {
-    return I18n.format("container." + JEIRootsPlugin.RUNIC_SHEARS + ".name");
+    return I18n.format("container." + JEIRootsPlugin.RUNIC_SHEARS_ENTITY + ".name");
   }
 
   @Override
@@ -43,10 +44,7 @@ public class RunicShearsEntityCategory implements IRecipeCategory<RunicShearsEnt
   @Override
   public void setRecipe(IRecipeLayout recipeLayout, RunicShearsEntityWrapper recipeWrapper, IIngredients ingredients) {
     IGuiItemStackGroup group = recipeLayout.getItemStacks();
-    RunicShearRecipe recipe = recipeWrapper.recipe;
-    group.init(0, true, 0, 2);
-    group.set(0, recipe.getOptionalDisplayItem());
-    group.init(1, false, 60, 2);
-    group.set(1, recipe.getDrop());
+    group.init(0, true, 104, 32);
+    group.set(0, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
   }
 }
