@@ -94,7 +94,8 @@ public class ModRecipes {
   }
 
   public static void initPacifistEntities() {
-    addPacifistEntry("bat", EntityBat.class);
+    // Bats are too easily killed.
+    //addPacifistEntry("bat", EntityBat.class);
     addPacifistEntry("chicken", EntityChicken.class);
     addPacifistEntry("cow", EntityCow.class);
     addPacifistEntry("donkey", EntityDonkey.class);
@@ -109,6 +110,7 @@ public class ModRecipes {
     addPacifistEntry("sheep", EntitySheep.class);
     addPacifistEntry("squid", EntitySquid.class);
     addPacifistEntry("villager", EntityVillager.class).setCheckTarget(true);
+    // TODO: Conditional non-hostile
     addPacifistEntry("wolf", EntityWolf.class);
 
     // Mystical Worlds
@@ -118,6 +120,9 @@ public class ModRecipes {
     addPacifistEntry("frog", EntityFrog.class);
     addPacifistEntry("owl", EntityOwl.class);
     addPacifistEntry("sprout", EntitySprout.class);
+    addPacifistEntry("silkworm", EntitySilkworm.class);
+    // TODO: Conditional non-hostile
+    addPacifistEntry("lava_cat", EntityLavaCat.class);
   }
 
   public static void addFlowerRecipe(String name, IBlockState state) {
