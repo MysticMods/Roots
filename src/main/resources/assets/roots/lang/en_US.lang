@@ -336,7 +336,7 @@ jei.roots.elemental_soil_fire.desc=Created by tossing a piece of Elemental Soil 
 jei.roots.elemental_soil_water.desc=Created by tossing a piece of Elemental Soil into a pool of water and waiting a few seconds.
 jei.roots.elemental_soil_air.desc=Created by dropping a piece of Elemental Soil onto a surface closer to the sky, and unobscured from it.
 jei.roots.elemental_soil_earth.desc=Created by dropping a piece of Elemental Soil onto a surface covered from the sky and in the depth's of the ground.
-
+jei.roots.runic_shears.cooldown=Item can be obtained every %d seconds.
 # Quiver
 roots.quiver.picked_up_arrow=Retrieved arrows.
 roots.quiver.quiver_full=Your quiver is full.
@@ -378,8 +378,6 @@ roots.ritual.transmutation.birch_jungle=Obtained through the Ritual of Transmuta
 roots.ritual.transmutation.birch_jungle_leaves=Obtained through the Ritual of Transmutation. The leaves of nearby birch trees will transform into those of a jungle tree.
 roots.ritual.transmutation.pumpkin_melon=Obtained through the Ritual of Transmutation. Pumpkins with water or flowing water below them will transform into melon blocks.
 roots.ritual.transmutation.pumpkin_cactus=Obtained through the Ritual of Transmutation. Pumpkins planted upon sand will turn into cactuses.
-
-jei.roots.fey_leather.source.desc=Obtained by reaching through the planes when using Runic Shears on an entity that normally drops leather. This is a gift willingly given, but it is not an infinite source.
 
 # CraftTweaker commands
 roots.commands.dump.desc=§2/ct properties_roots [mode]\n§3Dumps the specified property table(s) to the log.

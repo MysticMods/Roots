@@ -2,13 +2,18 @@ package epicsquid.roots.integration.jei.shears;
 
 import epicsquid.roots.recipe.RunicShearEntityRecipe;
 import jeresources.util.RenderHelper;
+import mezz.jei.api.gui.ITooltipCallback;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 
-public class RunicShearsEntityWrapper implements IRecipeWrapper /*, ITooltipCallback<ItemStack>*/ {
+import java.util.List;
+
+public class RunicShearsEntityWrapper implements IRecipeWrapper {
   public EntityLivingBase entity = null;
   public final RunicShearEntityRecipe recipe;
 
@@ -19,6 +24,10 @@ public class RunicShearsEntityWrapper implements IRecipeWrapper /*, ITooltipCall
   @Override
   public void getIngredients(IIngredients ingredients) {
     ingredients.setOutput(VanillaTypes.ITEM, this.recipe.getDrop());
+  }
+
+  public int getCooldown () {
+    return recipe.getCooldown() / 20;
   }
 
   @Override
