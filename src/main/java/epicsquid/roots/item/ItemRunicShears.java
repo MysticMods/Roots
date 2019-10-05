@@ -15,6 +15,7 @@ import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.network.fx.MessageRunicShearsAOEFX;
 import epicsquid.roots.network.fx.MessageRunicShearsFX;
 import epicsquid.roots.network.fx.MessageTreeCompleteFX;
+import epicsquid.roots.recipe.RunicShearEntityRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
@@ -158,7 +159,7 @@ public class ItemRunicShears extends ItemBase {
 
     if (entity.isChild()) return true;
 
-    RunicShearRecipe recipe = ModRecipes.getRunicShearRecipe(entity);
+    RunicShearEntityRecipe recipe = ModRecipes.getRunicShearRecipe(entity);
     if (recipe != null) {
       player.swingArm(hand);
       if (!world.isRemote) {

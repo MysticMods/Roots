@@ -1,5 +1,6 @@
 package epicsquid.roots.recipe;
 
+import epicsquid.roots.util.types.RegistryItem;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -7,6 +8,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -18,43 +20,19 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * Transmutation recipe for Runic Shears
  */
-public class RunicShearRecipe {
+public class RunicShearRecipe extends RegistryItem {
 
   private Block block;
   private Block replacementBlock;
   private ItemStack drop;
-  private ItemStack optionalDisplayItem = ItemStack.EMPTY;
-  private String name;
+  private ItemStack optionalDisplayItem;
 
-  private Entity entity = null;
-  private Class<? extends Entity> clazz = null;
-  private int cooldown = 0;
-
-  public RunicShearRecipe(Block block, Block replacementBlock, ItemStack drop, String name, ItemStack optionalDisplayItem) {
+  public RunicShearRecipe(ResourceLocation name, Block block, Block replacementBlock, ItemStack drop, ItemStack optionalDisplayItem) {
+    setRegistryName(name);
     this.block = block;
     this.replacementBlock = replacementBlock;
     this.drop = drop;
-    this.name = name;
     this.optionalDisplayItem = optionalDisplayItem;
-  }
-
-  public RunicShearRecipe(Block block, Block replacementBlock, ItemStack drop, String name) {
-    this(block, replacementBlock, drop, name, null);
-  }
-
-  public RunicShearRecipe(ItemStack drop, Class<? extends Entity> entity, int cooldown, String name) {
-    this.drop = drop;
-    this.clazz = entity;
-    this.name = name;
-    this.cooldown = cooldown;
-  }
-
-  public boolean isBlockRecipe() {
-    return block != null;
-  }
-
-  public boolean isEntityRecipe() {
-    return clazz != null;
   }
 
   public Block getBlock() {
@@ -69,34 +47,7 @@ public class RunicShearRecipe {
     return drop;
   }
 
-  public Class<? extends Entity> getClazz() {
-    return clazz;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public int getCooldown() {
-    return cooldown;
-  }
-
   public ItemStack getOptionalDisplayItem() {
     return optionalDisplayItem;
-  }
-
-  @SideOnly(Side.CLIENT)
-  @Nullable
-  public Entity getEntity() {
-    if (entity == null) {
-      Minecraft mc = Minecraft.getMinecraft();
-      try {
-        entity = clazz.getConstructor(World.class).newInstance(mc.world);
-      } catch (Exception e) {
-        return null;
-      }
-    }
-
-    return entity;
   }
 }
