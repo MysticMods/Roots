@@ -53,8 +53,9 @@ public class ModRecipes {
   private static List<MortarRecipe> mortarRecipes = new ArrayList<>();
   private static Map<String, PyreCraftingRecipe> pyreCraftingRecipes = new HashMap<>();
   private static Map<ResourceLocation, FeyCraftingRecipe> feyCraftingRecipes = new HashMap<>();
-  private static Map<String, RunicShearRecipe> runicShearRecipes = new HashMap<>();
-  private static Map<Class<? extends Entity>, RunicShearRecipe> runicShearEntityRecipes = new HashMap<>();
+  private static Map<ResourceLocation, RunicShearRecipe> runicShearRecipes = new HashMap<>();
+  private static Map<ResourceLocation, RunicShearEntityRecipe> runicShearEntityRecipes = new HashMap<>();
+  private static Map<Class<? extends Entity>, RunicShearEntityRecipe> generatedEntityRecipes = null;
   private static List<RunicCarvingRecipe> runicCarvingRecipes = new ArrayList<>();
   private static Map<ResourceLocation, PacifistEntry> pacifistEntities = new HashMap<>();
   private static Map<Class<? extends Entity>, PacifistEntry> pacifistClasses = new HashMap<>();
@@ -527,42 +528,55 @@ public class ModRecipes {
   }
 
   public static void addRunicShearRecipe(RunicShearRecipe recipe) {
-    for (RunicShearRecipe runicShearRecipe : runicShearRecipes.values()) {
-      if (recipe.isBlockRecipe() && recipe.getBlock() == runicShearRecipe.getBlock()) {
-        System.out.println("Recipe is already registered with block - " + recipe.getBlock().getTranslationKey());
-        return;
-      } else if (recipe.isEntityRecipe() && recipe.getClazz() == runicShearRecipe.getClazz()) {
-        System.out.println("Recipe is already registered with entity - " + recipe.getClazz().getName());
-        return;
+    if (recipe instanceof RunicShearEntityRecipe) {
+      RunicShearEntityRecipe eRecipe = (RunicShearEntityRecipe) recipe;
+      for (RunicShearEntityRecipe entityRecipe : runicShearEntityRecipes.values()) {
+        if (entityRecipe.getClazz().equals(eRecipe.getClazz())) {
+          Roots.logger.error("RunicShearEntityRecipe duplicate found for class " + eRecipe.getClazz().getSimpleName());
+          return;
+        }
       }
-    }
-    if (recipe.isEntityRecipe()) {
-      runicShearEntityRecipes.put(recipe.getClazz(), recipe);
+
+      runicShearEntityRecipes.put(eRecipe.getRegistryName(), eRecipe);
     } else {
-      runicShearRecipes.put(recipe.getName(), recipe);
+      for (RunicShearRecipe blockRecipe : runicShearRecipes.values()) {
+        if (recipe.getBlock() == blockRecipe.getBlock()) {
+          Roots.logger.error("RunicShearRecipe duplicate found for block " + recipe.getBlock().getRegistryName());
+          return;
+        }
+      }
+
+      runicShearRecipes.put(recipe.getRegistryName(), recipe);
     }
   }
 
   public static RunicShearRecipe getRunicShearRecipe(Block block) {
     for (RunicShearRecipe recipe : runicShearRecipes.values()) {
-      if (recipe.isBlockRecipe() && recipe.getBlock() == block) {
+      if (recipe.getBlock() == block) {
         return recipe;
       }
     }
     return null;
   }
 
-  public static RunicShearRecipe getRunicShearRecipe(EntityLivingBase entity) {
-    return runicShearEntityRecipes.get(entity.getClass());
+  private static void generateEntityRecipes () {
+    generatedEntityRecipes = new HashMap<>();
+    for (RunicShearEntityRecipe recipe : runicShearEntityRecipes.values()) {
+      generatedEntityRecipes.put(recipe.getClazz(), recipe);
+    }
+  }
+
+
+  public static RunicShearEntityRecipe getRunicShearRecipe(EntityLivingBase entity) {
+    if (generatedEntityRecipes == null) {
+      generateEntityRecipes();
+    }
+    return generatedEntityRecipes.get(entity.getClass());
   }
 
   public static RunicShearRecipe getRunicShearRecipe(String name) {
-    for (RunicShearRecipe recipe : runicShearRecipes.values()) {
-      if (recipe.getName().equals(name)) {
-        return recipe;
-      }
-    }
-    return null;
+    ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
+    return runicShearRecipes.get(rl);
   }
 
   public static RunicShearRecipe getRunicShearRecipe(ItemStack stack) {
@@ -575,8 +589,8 @@ public class ModRecipes {
     return null;
   }
 
-  public static RunicShearRecipe getRunicShearEntityRecipe(ItemStack stack) {
-    for (RunicShearRecipe recipe : runicShearEntityRecipes.values()) {
+  public static RunicShearEntityRecipe getRunicShearEntityRecipe(ItemStack stack) {
+    for (RunicShearEntityRecipe recipe : runicShearEntityRecipes.values()) {
       if (ItemStack.areItemStacksEqual(recipe.getDrop(), stack)) {
         return recipe;
       }
@@ -586,7 +600,10 @@ public class ModRecipes {
   }
 
   public static Set<Class<? extends Entity>> getRunicShearEntities() {
-    return runicShearEntityRecipes.keySet();
+    if (generatedEntityRecipes == null) {
+      generateEntityRecipes();
+    }
+    return generatedEntityRecipes.keySet();
   }
 
   public static void addMortarRecipe(MortarRecipe recipe) {
@@ -747,12 +764,20 @@ public class ModRecipes {
     return runicCarvingRecipes;
   }
 
-  public static Map<String, RunicShearRecipe> getRunicShearRecipes() {
+  public static Map<ResourceLocation, RunicShearRecipe> getRunicShearRecipes() {
     return runicShearRecipes;
   }
 
-  public static Map<Class<? extends Entity>, RunicShearRecipe> getRunicShearEntityRecipes() {
+  public static Map<ResourceLocation, RunicShearEntityRecipe> getRunicShearEntityRecipes() {
     return runicShearEntityRecipes;
+  }
+
+  public static Map<Class<? extends Entity>, RunicShearEntityRecipe> getGeneratedEntityRecipes () {
+    if (generatedEntityRecipes == null) {
+      generateEntityRecipes();
+    }
+
+    return generatedEntityRecipes;
   }
 
   public static Map<String, PyreCraftingRecipe> getPyreCraftingRecipes() {
