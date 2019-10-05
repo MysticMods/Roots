@@ -1,6 +1,5 @@
-package epicsquid.roots.entity;
+package epicsquid.roots.entity.fairy;
 
-import epicsquid.mysticalworld.MysticalWorld;
 import epicsquid.roots.Roots;
 import epicsquid.roots.particle.ParticleUtil;
 import net.minecraft.block.state.IBlockState;
