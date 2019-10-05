@@ -2,6 +2,7 @@ package epicsquid.roots.proxy;
 
 import epicsquid.roots.RegistryManager;
 import epicsquid.roots.gui.Keybinds;
+import epicsquid.roots.model.entity.ModelHolder;
 import epicsquid.roots.tileentity.*;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -21,6 +22,7 @@ public class ClientProxy extends CommonProxy {
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFeyCrafter.class, new TileEntityFeyCrafterRenderer());
 
     Keybinds.init();
+    ModelHolder.init();
   }
 
   @Override
