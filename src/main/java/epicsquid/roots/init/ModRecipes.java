@@ -1,9 +1,9 @@
 package epicsquid.roots.init;
 
 import com.google.common.collect.Lists;
-import com.sun.swing.internal.plaf.metal.resources.metal;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticallib.recipe.factories.OreFallbackIngredient;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.config.ConfigManager;
 import epicsquid.mysticalworld.entity.*;
@@ -16,7 +16,6 @@ import epicsquid.roots.recipe.*;
 import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
-import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.util.StateUtil;
 import epicsquid.roots.util.types.WorldPosStatePredicate;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
@@ -33,10 +32,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nonnull;
@@ -421,7 +417,7 @@ public class ModRecipes {
     return harvestClasses;
   }
 
-  public static void addAnimalHarvestFishRecipe (String name, ItemStack item, int weight) {
+  public static void addAnimalHarvestFishRecipe(String name, ItemStack item, int weight) {
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
     if (getAnimalHarvestFishRecipe(rl) != null) {
       return;
@@ -434,7 +430,7 @@ public class ModRecipes {
   }
 
   @Nullable
-  public static AnimalHarvestFishRecipe getAnimalHarvestFishRecipe (ItemStack item) {
+  public static AnimalHarvestFishRecipe getAnimalHarvestFishRecipe(ItemStack item) {
     for (AnimalHarvestFishRecipe recipe : fishRecipes.values()) {
       if (ItemUtil.equalWithoutSize(recipe.getItemStack(), item)) {
         return recipe;
@@ -444,25 +440,25 @@ public class ModRecipes {
     return null;
   }
 
-  public static AnimalHarvestFishRecipe getAnimalHarvestFishRecipe (ResourceLocation resource) {
+  public static AnimalHarvestFishRecipe getAnimalHarvestFishRecipe(ResourceLocation resource) {
     return fishRecipes.get(resource);
   }
 
-  public static boolean removeAnimalHarvestFishRecipe (ResourceLocation resource) {
+  public static boolean removeAnimalHarvestFishRecipe(ResourceLocation resource) {
     return fishRecipes.remove(resource) != null;
   }
 
-  public static boolean removeAnimalHarvestFishRecipe (ItemStack item) {
+  public static boolean removeAnimalHarvestFishRecipe(ItemStack item) {
     AnimalHarvestFishRecipe recipe = getAnimalHarvestFishRecipe(item);
     if (recipe == null) return false;
     return fishRecipes.remove(recipe.getRegistryName()) != null;
   }
 
-  public static List<AnimalHarvestFishRecipe> getFishRecipes () {
+  public static List<AnimalHarvestFishRecipe> getFishRecipes() {
     return Lists.newArrayList(fishRecipes.values());
   }
 
-  public static void clearFishRecipes () {
+  public static void clearFishRecipes() {
     fishRecipes.clear();
   }
 
@@ -564,7 +560,7 @@ public class ModRecipes {
     return null;
   }
 
-  private static void generateEntityRecipes () {
+  private static void generateEntityRecipes() {
     generatedEntityRecipes = new HashMap<>();
     for (RunicShearEntityRecipe recipe : runicShearEntityRecipes.values()) {
       generatedEntityRecipes.put(recipe.getClazz(), recipe);
@@ -777,7 +773,7 @@ public class ModRecipes {
     return runicShearEntityRecipes;
   }
 
-  public static Map<Class<? extends Entity>, RunicShearEntityRecipe> getGeneratedEntityRecipes () {
+  public static Map<Class<? extends Entity>, RunicShearEntityRecipe> getGeneratedEntityRecipes() {
     if (generatedEntityRecipes == null) {
       generateEntityRecipes();
     }
