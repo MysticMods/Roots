@@ -489,6 +489,8 @@ public class ModRecipes {
     addAnimalHarvestRecipe("frog", EntityFrog.class);
     addAnimalHarvestRecipe("owl", EntityOwl.class);
     addAnimalHarvestRecipe("sprout", EntitySprout.class);
+    addAnimalHarvestRecipe("lava_cat", EntityLavaCat.class);
+    addAnimalHarvestRecipe("silkworm", EntitySilkworm.class);
     // Fish recipes
     addAnimalHarvestFishRecipe("cod", new ItemStack(Items.FISH, 1, ItemFishFood.FishType.COD.getMetadata()), 60);
     addAnimalHarvestFishRecipe("salmon", new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()), 25);
