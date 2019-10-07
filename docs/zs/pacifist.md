@@ -1,4 +1,3 @@
-# "Untrue Pacifist" Advancement Creatures
 
 ### Class
 
@@ -9,7 +8,7 @@ import mods.roots.Pacifist;
 #### Methods
 
 ```java
-static void addEntity(
+void addEntity(
   IEntityDefinition entity // the entity to add to the pacifist list
 );
 ```
@@ -19,7 +18,7 @@ static void addEntity(
 
 
 ```java
-static void removeEntity(
+void removeEntity(
   IEntityDefinition entity // the entity to remove from the pacifist list
 );
 ```

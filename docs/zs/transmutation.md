@@ -1,4 +1,3 @@
-# Ritual of Transmutation
 
 ### Class
 
@@ -9,7 +8,7 @@ import mods.roots.Transmutation;
 #### Methods
 
 ```java
-static void removeRecipe(
+void removeRecipe(
   string name // the name of the recipe being removed
 );
 ```
@@ -19,7 +18,7 @@ static void removeRecipe(
 
 
 ```java
-static void addBlockToBlockRecipe(
+void addBlockToBlockRecipe(
   string name,        // the name of the recipe being added (must be unique)
   IBlockState state1, // the initial state of the block as defined as a blockstate
   IBlockState state2  // the state that the initial state should be converted into
@@ -31,7 +30,7 @@ static void addBlockToBlockRecipe(
 
 
 ```java
-static void addBlockToItemRecipe(
+void addBlockToItemRecipe(
   string name,       // the name of the recipe being added (must be unique)
   IBlockState state, // the initial state that is looked for when converting (as a block state)
   IItemStack stack   // the item stack that replaces the block state
