@@ -13,7 +13,7 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import javax.annotation.Nonnull;
 
 public class RunicShearsCapabilityProvider implements ICapabilityProvider, ICapabilitySerializable<NBTTagCompound> {
-  public static final ResourceLocation IDENTIFIER = new ResourceLocation(Roots.MODID, "runic_shears_capability");
+  public static final ResourceLocation IDENTIFIER = new ResourceLocation(Roots.MODID, "new_runic_shears_capability");
 
   @CapabilityInject(RunicShearsCapability.class)
   public static final Capability<RunicShearsCapability> RUNIC_SHEARS_CAPABILITY = injected();
