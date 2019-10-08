@@ -1,17 +1,12 @@
 package epicsquid.roots.integration.jei.shears;
 
 import epicsquid.roots.recipe.RunicShearEntityRecipe;
-import jeresources.util.RenderHelper;
-import mezz.jei.api.gui.ITooltipCallback;
+import epicsquid.roots.util.EntityRenderHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
-
-import java.util.List;
 
 public class RunicShearsEntityWrapper implements IRecipeWrapper {
   public EntityLivingBase entity = null;
@@ -26,7 +21,7 @@ public class RunicShearsEntityWrapper implements IRecipeWrapper {
     ingredients.setOutput(VanillaTypes.ITEM, this.recipe.getDrop());
   }
 
-  public int getCooldown () {
+  public int getCooldown() {
     return recipe.getCooldown() / 20;
   }
 
@@ -35,11 +30,8 @@ public class RunicShearsEntityWrapper implements IRecipeWrapper {
     if (entity == null) {
       entity = recipe.getEntity(minecraft.world);
     }
-    RenderHelper.scissor(minecraft, 0, 0, 61, 81);
     float scale = getScale(entity);
-    int offsetY = 1;
-    RenderHelper.renderEntity(30, 70, scale, 38 - mouseX, 70 - offsetY - mouseY, entity);
-    RenderHelper.stopScissor();
+    EntityRenderHelper.drawEntityOnScreen(30, 70, scale, 38 - mouseX, 70 - mouseY, entity);
   }
 
   private float getScale(EntityLivingBase entityLivingBase) {
