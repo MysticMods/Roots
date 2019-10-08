@@ -43,7 +43,7 @@ void addBlockToItemRecipe(
 
 ### Examples
 
-```java
+```zenscript
 import mods.roots.Transmutation;
 
 // Removes the default pumpkin-over-water-to-melon recipe

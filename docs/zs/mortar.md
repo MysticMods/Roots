@@ -41,7 +41,7 @@ void removeRecipe(
 
 ### Examples
 
-```java
+```zenscript
 import mods.roots.Mortar;
 
 // Adds a recipe that makes gunpowder out of flint
