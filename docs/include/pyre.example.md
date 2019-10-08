@@ -1,6 +1,6 @@
 ### Examples
 
-```java
+```zenscript
 import mods.roots.Pyre;
 
 // Removes the recipe for stalicripe; note that the quantity is not considered

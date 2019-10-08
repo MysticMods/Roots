@@ -1,6 +1,6 @@
 ### Examples
 
-```java
+```zenscript
 import mods.roots.AnimalHarvest;
 
 // Adds an enderman as a target for the Animal Harvest ritual.

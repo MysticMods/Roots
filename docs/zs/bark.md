@@ -31,7 +31,7 @@ void removeRecipe(
 
 ### Examples
 
-```java
+```zenscript
 import mods.roots.Bark;
 
 // Will produce 2 sand from a melon block broken by a knife.

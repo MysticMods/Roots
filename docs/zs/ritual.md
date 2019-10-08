@@ -20,7 +20,7 @@ void modifyRitual(
 
 ### Examples
 
-```java
+```zenscript
 import mods.roots.Ritual;
 
 // Changes the ingredients required to perform the windwall ritual
