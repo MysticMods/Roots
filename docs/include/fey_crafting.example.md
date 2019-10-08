@@ -1,6 +1,6 @@
 ### Examples
 
-```java
+```zenscript
 import mods.roots.Fey;
 
 // Adds a recipe for TNT using 4 gunpowder and red wool
