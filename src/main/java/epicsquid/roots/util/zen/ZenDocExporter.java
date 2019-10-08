@@ -48,7 +48,7 @@ public class ZenDocExporter {
 
       // --- Import
 
-      out.append("```java").append("\n");
+      out.append("```zenscript").append("\n");
       out.append("import ").append(zenClass.value()).append(";").append("\n");
       out.append("```").append("\n");
       out.append("\n");
@@ -148,7 +148,7 @@ public class ZenDocExporter {
     Class<?> returnType = method.getReturnType();
     String returnTypeString = this.getSimpleTypeString(returnType);
 
-    out.append("```java").append("\n");
+    out.append("```zenscript").append("\n");
 
     /*if (Modifier.isStatic(method.getModifiers())) {
       out.append("static ");
