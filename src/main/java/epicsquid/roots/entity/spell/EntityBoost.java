@@ -1,9 +1,6 @@
 package epicsquid.roots.entity.spell;
 
-import java.util.UUID;
-
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.SpellSkySoarer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,9 +10,15 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+import java.util.UUID;
+
 public class EntityBoost extends Entity {
   private static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityBoost.class, DataSerializers.VARINT);
   private UUID playerId = null;
+  private double origX;
+  private double origY;
+  private double origZ;
 
   public EntityBoost(World worldIn) {
     super(worldIn);
@@ -26,6 +29,29 @@ public class EntityBoost extends Entity {
 
   public void setPlayer(UUID id) {
     this.playerId = id;
+    Entity[] result = getTargets();
+    if (result != null) {
+      origX = result[1].motionX;
+      origY = result[1].motionY;
+      origZ = result[1].motionZ;
+    }
+  }
+
+  @Nullable
+  private Entity[] getTargets() {
+    if (this.playerId != null) {
+      EntityPlayer player = world.getPlayerEntityByUUID(playerId);
+      if (player != null) {
+        Entity riding = player.getLowestRidingEntity();
+        if (riding != null) {
+          return new Entity[]{player, riding};
+        } else {
+          return new Entity[]{player, player};
+        }
+      }
+    }
+
+    return null;
   }
 
   @Override
@@ -44,6 +70,14 @@ public class EntityBoost extends Entity {
     getDataManager().setDirty(lifetime);
     if (getDataManager().get(lifetime) <= 0) {
       setDead();
+      if (!world.isRemote) {
+        Entity[] target = getTargets();
+        if (target != null) {
+          target[1].motionX = origX;
+          target[1].motionY = origY;
+          target[1].motionZ = origZ;
+        }
+      }
     }
     if (world.isRemote) {
       for (int i = 0; i < 4; i++) {
@@ -59,29 +93,24 @@ public class EntityBoost extends Entity {
               5.0f * rand.nextFloat() + 5.0f, 40);
         }
       }
-    }
-    if (playerId != null) {
-      EntityPlayer player = world.getPlayerEntityByUUID(playerId);
-      if (player != null) {
-        Entity riding = player.getLowestRidingEntity();
-        Entity target;
-        if (riding != null) {
-          target = riding;
-        } else {
-          target = player;
+    } else {
+      if (playerId != null) {
+        Entity[] result = getTargets();
+        if (result != null) {
+          EntityPlayer player = (EntityPlayer) result[0];
+          Entity target = result[1];
+          this.posX = player.posX;
+          this.posY = player.posY + 1.0;
+          this.posZ = player.posZ;
+          target.motionX = player.getLookVec().x * 0.8;
+          target.motionY = player.getLookVec().y * 0.8;
+          target.motionZ = player.getLookVec().z * 0.8;
+          this.motionX = player.getLookVec().x;
+          this.motionY = player.getLookVec().y;
+          this.motionZ = player.getLookVec().z;
+          target.fallDistance = 0;
+          target.velocityChanged = true;
         }
-
-        this.posX = player.posX;
-        this.posY = player.posY + 1.0;
-        this.posZ = player.posZ;
-        target.motionX = player.getLookVec().x * 0.8;
-        target.motionY = player.getLookVec().y * 0.8;
-        target.motionZ = player.getLookVec().z * 0.8;
-        this.motionX = player.getLookVec().x;
-        this.motionY = player.getLookVec().y;
-        this.motionZ = player.getLookVec().z;
-        target.fallDistance = 0;
-        target.velocityChanged = true;
       }
     }
   }
