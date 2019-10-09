@@ -50,7 +50,7 @@ public class SpellAcidCloud extends SpellBase {
     addIngredients(
         new ItemStack(Items.SPIDER_EYE),
         new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom)),
-        new ItemStack(Items.DYE, 1, EnumDyeColor.LIME.getMetadata()),
+        new ItemStack(Items.DYE, 1, EnumDyeColor.LIME.getDyeDamage()),
         new OreIngredient("blockCactus"),
         new ItemStack(Items.ROTTEN_FLESH)
     );
