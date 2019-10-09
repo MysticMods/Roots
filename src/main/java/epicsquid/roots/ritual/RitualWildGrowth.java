@@ -29,9 +29,9 @@ public class RitualWildGrowth extends RitualBase {
   public void init() {
     addCondition(new ConditionItems(
         new ItemStack(ModItems.wildroot),
-        new OreIngredient("rootsBark"),
-        new OreIngredient("rootsBark"),
         new ItemStack(ModItems.bark_dark_oak),
+        new OreIngredient("rootsBark"),
+        new OreIngredient("rootsBark"),
         new ItemStack(ModItems.spirit_herb))
     );
     setIcon(ModItems.ritual_wild_growth);
