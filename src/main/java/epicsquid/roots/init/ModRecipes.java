@@ -796,8 +796,8 @@ public class ModRecipes {
   }
 
   public static void initMortarRecipes() {
-    addMortarRecipe(new ItemStack(Items.DYE, 1, EnumDyeColor.BLUE.getMetadata()), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.carapace), 1, 1, 1, 1, 1, 1);
-    addMortarRecipe(new ItemStack(Items.DYE, 1, EnumDyeColor.ORANGE.getMetadata()), new OreIngredient("cropCarrot"), 1, 1, 1, 1, 1, 1);
+    addMortarRecipe(new ItemStack(Items.DYE, 1, EnumDyeColor.LIGHT_BLUE.getDyeDamage()), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.carapace), 1, 1, 1, 1, 1, 1);
+    addMortarRecipe(new ItemStack(Items.DYE, 1, EnumDyeColor.ORANGE.getDyeDamage()), new OreIngredient("cropCarrot"), 1, 1, 1, 1, 1, 1);
     addMortarRecipe(new ItemStack(ModItems.flour), new OreIngredient("cropWheat"), 1f, 1f, 0f, 1f, 1f, 0f);
     addMortarRecipe(new ItemStack(ModItems.flour), new OreIngredient("cropPotato"), 1f, 1f, 0, 1f, 1f, 0f);
     addMortarRecipe(new ItemStack(Items.DYE, 4, 15), new OreIngredient("bone"), 0f, 0f, 0f, 0f, 0f, 0f);

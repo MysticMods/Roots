@@ -29,7 +29,7 @@ public class SpellRoseThorns extends SpellBase {
         new OreIngredient("blockCactus"),
         new ItemStack(Blocks.DOUBLE_PLANT, 1, BlockDoublePlant.EnumPlantType.ROSE.getMeta()),
         new OreIngredient("bone"),
-        new ItemStack(Items.DYE, 1, EnumDyeColor.RED.getMetadata()),
+        new ItemStack(Items.DYE, 1, EnumDyeColor.RED.getDyeDamage()),
         new ItemStack(ModItems.terra_moss)
     );
   }
