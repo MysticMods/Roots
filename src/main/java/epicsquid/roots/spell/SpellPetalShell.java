@@ -18,7 +18,7 @@ public class SpellPetalShell extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(120);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("spirit_herb", 0.75));
-  public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(60 * 20);
+  public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(120 * 20);
   public static Property<Integer> PROP_MAXIMUM = new Property<>("maximum_shells", 3);
 
   public static String spellName = "spell_petal_shell";
@@ -45,10 +45,8 @@ public class SpellPetalShell extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer player, List<SpellModule> modules) {
-    PotionEffect shell = player.getActivePotionEffect(ModPotions.petal_shell);
-    int amp = shell == null ? 0 : shell.getAmplifier() == maxShells ? maxShells : shell.getAmplifier() + 1;
     if (!player.world.isRemote) {
-      player.addPotionEffect(new PotionEffect(ModPotions.petal_shell, duration, amp, false, false));
+      player.addPotionEffect(new PotionEffect(ModPotions.petal_shell, duration, maxShells, false, false));
       PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ), player);
     }
     return true;
