@@ -803,8 +803,8 @@ public class ModRecipes {
     addMortarRecipe(new ItemStack(Items.DYE, 4, 15), new OreIngredient("bone"), 0f, 0f, 0f, 0f, 0f, 0f);
     addMortarRecipe(new ItemStack(Items.SUGAR, 2), new OreIngredient("sugarcane"), 0f, 0f, 0f, 1f, 1f, 1f);
     addMortarRecipe(new ItemStack(Items.BLAZE_POWDER, 5), Ingredient.fromItem(Items.BLAZE_ROD), 1, 1, 1, 1, 1, 1);
-    addMortarRecipe(new ItemStack(Items.STRING, 3), new OreIngredient("wool"), 1, 1, 1, 1, 1, 1);
-    addMortarRecipe(new ItemStack(Items.STRING, 5), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.silk_cocoon), 0, 0, 0, 0, 0, 0);
+    addMortarRecipe(new ItemStack(Items.STRING, 4), new OreIngredient("wool"), 1, 1, 1, 1, 1, 1);
+    addMortarRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.silk_thread, 5), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.silk_cocoon), 0, 0, 0, 0, 0, 0);
     addMortarRecipe(new ItemStack(Items.MAGMA_CREAM, 2), Ingredient.fromItem(Item.getItemFromBlock(Blocks.MAGMA)), 1, 0, 0, 1, 0, 0);
 
     for (Material metal : Materials.getMaterials()) {
