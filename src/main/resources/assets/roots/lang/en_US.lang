@@ -196,6 +196,7 @@ item.ritual_transmutation.name=Ritual: Transmutation
 item.ritual_gathering.name=Ritual: Gathering
 item.grove_fairy_icon.name=Fairy Grove
 item.grove_fairy_text.name=Fairy Grove
+item.fey_fire.name=Fey Fire
 
 #Knifes
 item.wood_knife.name=Wooden Knife

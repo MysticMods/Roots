@@ -46,9 +46,7 @@ public class ModItems {
 
   public static Item ritual_healing_aura, ritual_heavy_storms, ritual_divine_protection, ritual_fire_storm, ritual_spreading_forest, ritual_windwall, ritual_warding_protection, ritual_germination, ritual_purity, ritual_frost_lands, ritual_animal_harvest, ritual_summon_creatures, ritual_wild_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation, ritual_gathering;
 
-  public static Item grove_fairy_text, grove_fairy_icon;
-
-  public static Item creative_pouch;
+  public static Item creative_pouch, fey_fire;
 
   public static List<Item> barks;
 
@@ -172,6 +170,8 @@ public class ModItems {
     event.addItem(ritual_flower_growth = new ItemBase("ritual_flower_growth").setCreativeTab(null));
     event.addItem(ritual_transmutation = new ItemBase("ritual_transmutation").setCreativeTab(null));
     event.addItem(ritual_gathering = new ItemBase("ritual_gathering").setCreativeTab(null));
+
+    event.addItem(fey_fire = new ItemBase("fey_fire").setCreativeTab(null));
 
     // KEEP AT END
     registerSeedDrops();
