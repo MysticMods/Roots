@@ -277,6 +277,10 @@
     {
       "type": "tool",
       "base": "wildwood_quiver"
+    },
+    {
+      "type": "item",
+      "base": "spell_dust"
     }
   ]
 }
