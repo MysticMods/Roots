@@ -10,6 +10,7 @@ import epicsquid.roots.capability.runic_shears.RunicShearsCapability;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityProvider;
 import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.config.MossConfig;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.network.fx.MessageRunicShearsAOEFX;
@@ -27,6 +28,8 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -59,10 +62,24 @@ public class ItemRunicShears extends ItemBase {
   }
 
   @Override
+  public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+    Item item = repair.getItem();
+    if (item instanceof ItemBlock) {
+      Block block = ((ItemBlock) item).getBlock();
+      return ModBlocks.runestoneBlocks.contains(block);
+    }
+
+    return false;
+  }
+
+  @Override
   @Nonnull
   public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     IBlockState state = world.getBlockState(pos);
     Block block = state.getBlock();
+    if (block == ModBlocks.imbuer) {
+      return EnumActionResult.PASS;
+    }
 
     IBlockState moss = MossConfig.scrapeResult(state);
     IBlockState moss2 = MossConfig.mossConversion(state);
