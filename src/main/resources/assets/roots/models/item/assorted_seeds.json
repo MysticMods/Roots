@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "roots:items/assorted_seeds"
-    }
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "roots:items/assorted_seeds"
+  }
 }
