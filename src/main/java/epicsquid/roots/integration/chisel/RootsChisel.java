@@ -9,9 +9,16 @@ import java.util.Arrays;
 
 public class RootsChisel {
   public static void init() {
-    for (Block block : Arrays.asList(ModBlocks.runestone, ModBlocks.runestone_brick, ModBlocks.runestone_brick_alt, ModBlocks.chiseled_runestone)) {
+    for (Block block : ModBlocks.runestoneBlocks) {
       NBTTagCompound tag = new NBTTagCompound();
       tag.setString("group", "rootsRunestone");
+      tag.setString("block", block.getRegistryName().toString());
+      FMLInterModComms.sendMessage("chisel", "add_variation", tag);
+    }
+
+    for (Block block : ModBlocks.runedObsidianBlocks) {
+      NBTTagCompound tag = new NBTTagCompound();
+      tag.setString("group", "rootsRunedObsidian");
       tag.setString("block", block.getRegistryName().toString());
       FMLInterModComms.sendMessage("chisel", "add_variation", tag);
     }
