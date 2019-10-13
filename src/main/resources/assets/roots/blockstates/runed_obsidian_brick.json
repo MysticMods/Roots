@@ -3,7 +3,7 @@
   "defaults": {
     "model": "cube_all",
     "textures": {
-      "all": "roots:blocks/runed_obsidian"
+      "all": "roots:blocks/runed_obsidian_brick"
     },
     "uvlock": true
   },
