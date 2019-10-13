@@ -7,12 +7,12 @@
   "key": {
     "R": [
       {
-        "item": "roots:chiseled_runestone"
+        "item": "roots:chiseled_runed_obsidian"
       }
     ]
   },
   "result": {
-    "item": "roots:runestone_brick_alt",
+    "item": "roots:runed_obsidian_brick_alt",
     "data": 0,
     "count": 4
   }
