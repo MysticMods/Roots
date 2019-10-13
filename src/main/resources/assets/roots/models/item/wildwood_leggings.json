@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "roots:items/wildwood_leggings"
-    }
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "roots:items/wildwood_leggings"
+  }
 }

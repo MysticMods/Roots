@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "roots:items/wildewheet_bread"
-    }
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "roots:items/wildewheet_bread"
+  }
 }
