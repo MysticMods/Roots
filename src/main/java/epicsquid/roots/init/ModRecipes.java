@@ -319,6 +319,11 @@ public class ModRecipes {
       return b.isLeaves(v, t, u);
     };
 
+    WorldPosStatePredicate stone_below = (t, u, v) -> {
+      Block b = t.getBlockState(u.down()).getBlock();
+      return b == Blocks.COBBLESTONE;
+    };
+
     addTransmutationRecipe("deadbush_cocoa", Blocks.DEADBUSH, new ItemStack(Items.DYE, 3, 3));
     addTransmutationRecipe("birch_jungle", Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH), Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE));
     addTransmutationRecipe("birch_jungle_leaves", Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.BIRCH), Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE));
@@ -329,6 +334,7 @@ public class ModRecipes {
     addTransmutationRecipe("carpet_to_lilypad", Blocks.CARPET, Blocks.WATERLILY.getDefaultState(), water_below);
     addTransmutationRecipe("trapdoor_to_cobweb", Blocks.TRAPDOOR, Blocks.WEB.getDefaultState(), wool_below);
     addTransmutationRecipe("redstone_to_vines", Blocks.REDSTONE_WIRE, new ItemStack(Blocks.VINE), leaves_below);
+    addTransmutationRecipe("melon_to_pumpkin", Blocks.MELON_BLOCK, Blocks.PUMPKIN.getDefaultState(), stone_below);
     StateUtil.ignoreState(Blocks.LEAVES, BlockLeaves.CHECK_DECAY);
     StateUtil.ignoreState(Blocks.LEAVES, BlockLeaves.DECAYABLE);
   }
