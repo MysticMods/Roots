@@ -23,6 +23,9 @@ import net.minecraftforge.common.EnumPlantType;
 import scala.tools.ant.sabbus.Make;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ModBlocks {
 
@@ -52,6 +55,9 @@ public class ModBlocks {
   public static Block wildwood_button, wildwood_pressure_plate, wildwood_fence, wildwood_fence_gate, wildwood_ladder;
 
   public static Block fey_light;
+
+  // Lists of blcoks
+  public static List<Block> runestoneBlocks;
 
   /**
    * Register all block
@@ -93,6 +99,8 @@ public class ModBlocks {
     event.addBlock(runestone_brick_alt = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_brick_alt")).setCreativeTab(Roots.tab);
     event.addBlock(chiseled_runestone = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "chiseled_runestone")).setCreativeTab(Roots.tab);
     event.addBlock(trample_rune = new BlockTrample(Material.WATER, SoundType.METAL, 1.4f, "runestone_trample")).setCreativeTab(Roots.tab);
+
+    runestoneBlocks = Arrays.asList(runestone, runestone_brick, runestone_brick_alt, chiseled_runestone);
 
     event.addBlock(wildwood_leaves = new BlockLeavesBase(0.8f, "wildwood_leaves", () -> new ItemStack(ModItems.wildroot), 50).setFlammable(true).setCreativeTab(Roots.tab));
     event.addBlock(wildwood_log = new BlockLogBase("wildwood_log").setCreativeTab(Roots.tab));

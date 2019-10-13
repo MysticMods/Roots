@@ -1,0 +1,21 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "roots:blocks/chiseled_runed_obsidian"
+    },
+    "uvlock": true
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "handlers": [
+      {}
+    ]
+  }
+}
