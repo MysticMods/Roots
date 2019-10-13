@@ -1,37 +1,34 @@
 {
-  "name": "Runestone",
-  "icon": "roots:runestone",
+  "name": "Runed Obsidian",
+  "icon": "roots:runed_obsidian",
   "category": "resources",
-  "advancement": "roots:fey_crafter",
+  "advancement": "roots:runestone",
   "secret": true,
   "pages": [
     {
       "type": "spotlight",
-      "item": "roots:runestone",
+      "item": "roots:runed_obsidian",
       "link_recipe": true,
-      "text": "Ordinary stone transformed by magic & the power of the fey, runestone and its variants are often used in structures required for Druidic rituals.$(br2)While also serving a decorative purpose, you may find other uses in crafting for runestone and its byproducts."
+      "text": "Reinforced with the strength of obsidian, this runestone is extraordinarily strong: it's capable of withstanding the blows of almost any creature, and can also be used in standing stones."
     },
     {
       "type": "fey_crafting_template",
-      "recipe": "runestone"
+      "recipe": "runed_obsidian"
     },
     {
       "type": "crafting",
       "anchor": "chiseled",
-      "recipe": "roots:runestone_brick",
-      "recipe2": "roots:runestone_chiseled"
+      "recipe": "roots:runed_obsidian_brick",
+      "recipe2": "roots:runed_obsidian_chiseled"
     },
     {
       "type": "crafting",
-      "recipe": "roots:runestone_brick_alt"
+      "recipe": "roots:runed_obsidian_brick_alt"
     },
     {
       "type": "relations",
       "entries": [
-        "resources/runic_dust",
-        "apparatus/runic_shears",
-        "apparatus/offering_plate",
-        "apparatus/runestone"
+        "resources/runestone"
       ]
     }
   ]
