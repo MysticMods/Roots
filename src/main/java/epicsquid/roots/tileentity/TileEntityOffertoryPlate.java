@@ -119,8 +119,7 @@ public class TileEntityOffertoryPlate extends TileBase {
       if (!inventory.getStackInSlot(0).isEmpty()) {
         ItemStack extracted = inventory.extractItem(0, inventory.getStackInSlot(0).getCount(), false);
         ItemUtil.spawnItem(world, getPos(), extracted);
-        if (!world.isRemote)
-          updatePacketViaState();
+        updatePacketViaState();
         return true;
       }
     }

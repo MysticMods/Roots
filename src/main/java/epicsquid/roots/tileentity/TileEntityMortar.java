@@ -141,9 +141,11 @@ public class TileEntityMortar extends TileBase {
           }
           for (int i = 0; i < inventory.getSlots(); i++) {
             ItemStack item = inventory.extractItem(i, 1, false);
-            if (item.getItem().hasContainerItem(item)) {
-              ItemStack container = ForgeHooks.getContainerItem(item);
-              ItemUtil.spawnItem(world, getPos().add(0, 1, 0), container);
+            if (!world.isRemote) {
+              if (item.getItem().hasContainerItem(item)) {
+                ItemStack container = ForgeHooks.getContainerItem(item);
+                ItemUtil.spawnItem(world, getPos().add(0, 1, 0), container);
+              }
             }
           }
           return true;

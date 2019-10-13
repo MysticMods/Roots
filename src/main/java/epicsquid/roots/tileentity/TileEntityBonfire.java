@@ -183,9 +183,11 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         this.doBigFlame = true;
         for (int i = 0; i < inventory.getSlots(); i++) {
           ItemStack item = inventory.extractItem(i, 1, false);
-          if (item.getItem().hasContainerItem(item)) {
-            ItemStack container = ForgeHooks.getContainerItem(item);
-            ItemUtil.spawnItem(world, getPos().add(1, 0, -1), container);
+          if (!world.isRemote) {
+            if (item.getItem().hasContainerItem(item)) {
+              ItemStack container = ForgeHooks.getContainerItem(item);
+              ItemUtil.spawnItem(world, getPos().add(1, 0, -1), container);
+            }
           }
         }
         markDirty();
@@ -206,9 +208,11 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       for (int i = 0; i < inventory.getSlots(); i++) {
         ItemStack item = inventory.extractItem(i, 1, false);
         inventory_storage.insertItem(i, item, false);
-        if (item.getItem().hasContainerItem(item)) {
-          ItemStack container = ForgeHooks.getContainerItem(item);
-          ItemUtil.spawnItem(world, getPos().add(1, 0, -1), container);
+        if (!world.isRemote) {
+          if (item.getItem().hasContainerItem(item)) {
+            ItemStack container = ForgeHooks.getContainerItem(item);
+            ItemUtil.spawnItem(world, getPos().add(1, 0, -1), container);
+          }
         }
       }
       markDirty();
