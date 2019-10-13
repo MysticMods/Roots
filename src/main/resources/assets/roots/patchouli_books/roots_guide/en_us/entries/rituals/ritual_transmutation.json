@@ -89,6 +89,12 @@
       "item": "minecraft:vine",
       "link_recipe": true,
       "text": "Redstone dust placed on top of leaves will be converted to vines."
+    },
+    {
+      "type": "spotlight",
+      "item": "minecraft:pumpkin",
+      "link_recipe": true,
+      "text": "Melons placed on top of cobblestone will revert to pumpkins."
     }
   ]
 }
