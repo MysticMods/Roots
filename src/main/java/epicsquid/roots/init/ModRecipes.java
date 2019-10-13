@@ -939,12 +939,21 @@ public class ModRecipes {
         new ItemStack(Items.CHICKEN),
         new ItemStack(Items.CHICKEN)).setBurnTime(300));
 
+    Ingredient acceptableFish = Ingredient.fromStacks(new ItemStack(Items.FISH, 1, ItemFishFood.FishType.CLOWNFISH.getMetadata()), new ItemStack(Items.FISH, 1, ItemFishFood.FishType.COD.getMetadata()));
+
     addCraftingRecipe("fish", new PyreCraftingRecipe(new ItemStack(Items.COOKED_FISH, 5), 1).addIngredients(
-        Ingredient.fromItem(Items.FISH),
-        Ingredient.fromItem(Items.FISH),
-        Ingredient.fromItem(Items.FISH),
-        Ingredient.fromItem(Items.FISH),
-        Ingredient.fromItem(Items.FISH)).setBurnTime(300));
+        acceptableFish,
+        acceptableFish,
+        acceptableFish,
+        acceptableFish,
+        acceptableFish).setBurnTime(300));
+
+    addCraftingRecipe("salmon", new PyreCraftingRecipe(new ItemStack(Items.COOKED_FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()), 1).addIngredients(
+        new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
+        new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
+        new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
+        new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
+        new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata())).setBurnTime(300));
 
     addCraftingRecipe("steak", new PyreCraftingRecipe(new ItemStack(Items.COOKED_BEEF, 5), 1).addIngredients(
         new ItemStack(Items.BEEF),
@@ -988,14 +997,14 @@ public class ModRecipes {
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine)).setBurnTime(300));
 
-    addCraftingRecipe("aubergine", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_squid, 10), 1).addIngredients(
+    addCraftingRecipe("squid", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_squid, 10), 1).addIngredients(
         new ItemStack(epicsquid.mysticalworld.init.ModItems.raw_squid),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.raw_squid),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.raw_squid),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.raw_squid),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.raw_squid)).setBurnTime(300));
 
-    addCraftingRecipe("aubergine", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_venison, 5), 1).addIngredients(
+    addCraftingRecipe("venison", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_venison, 5), 1).addIngredients(
         new ItemStack(epicsquid.mysticalworld.init.ModItems.venison),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.venison),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.venison),
