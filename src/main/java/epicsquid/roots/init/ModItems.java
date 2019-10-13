@@ -115,7 +115,7 @@ public class ModItems {
     event.addItem(living_sword = new ItemLivingSword(ToolMaterial.IRON, "living_sword").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_arrow = new ItemLivingArrow("living_arrow").setCreativeTab(Roots.tab));
     event.addItem(wildwood_quiver = new ItemQuiver("wildwood_quiver").setCreativeTab(Roots.tab));
-    event.addItem(wildwood_bow = new ItemWildwoodBow("wildwood_bow").setModelCustom(false).setCreativeTab(Roots.tab));
+    event.addItem(wildwood_bow = new ItemWildwoodBow("wildwood_bow").setCreativeTab(Roots.tab));
 
     event.addItem(sylvan_helmet = new ItemSylvanArmor(sylvanArmorMaterial, EntityEquipmentSlot.HEAD, "sylvan_helmet").setMaxStackSize(1));
     event.addItem(sylvan_chestplate = new ItemSylvanArmor(sylvanArmorMaterial, EntityEquipmentSlot.CHEST, "sylvan_chestplate").setMaxStackSize(1));
@@ -152,30 +152,30 @@ public class ModItems {
     event.addItem(wildewheet_bread = new ItemFoodBase("wildewheet_bread", 7, false).setCreativeTab(Roots.tab));
 
     // Fairy dust
-    event.addItem(fairy_dust = new ItemBase("fairy_dust").setModelCustom(false).setCreativeTab(Roots.tab));
+    event.addItem(fairy_dust = new ItemBase("fairy_dust").setCreativeTab(Roots.tab));
 
     // Rituals
-    event.addItem(ritual_healing_aura = new ItemBase("ritual_healing_aura").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_heavy_storms = new ItemBase("ritual_heavy_storms").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_divine_protection = new ItemBase("ritual_divine_protection").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_fire_storm = new ItemBase("ritual_fire_storm").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_spreading_forest = new ItemBase("ritual_spreading_forest").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_windwall = new ItemBase("ritual_windwall").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_warding_protection = new ItemBase("ritual_warding_protection").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_germination = new ItemBase("ritual_germination").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_purity = new ItemBase("ritual_purity").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_frost_lands = new ItemBase("ritual_frost_lands").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_animal_harvest = new ItemBase("ritual_animal_harvest").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_summon_creatures = new ItemBase("ritual_summon_creatures").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_wild_growth = new ItemBase("ritual_wild_growth").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_overgrowth = new ItemBase("ritual_overgrowth").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_flower_growth = new ItemBase("ritual_flower_growth").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_transmutation = new ItemBase("ritual_transmutation").setModelCustom(false).setCreativeTab(null));
-    event.addItem(ritual_gathering = new ItemBase("ritual_gathering").setModelCustom(false).setCreativeTab(null));
+    event.addItem(ritual_healing_aura = new ItemBase("ritual_healing_aura").setCreativeTab(null));
+    event.addItem(ritual_heavy_storms = new ItemBase("ritual_heavy_storms").setCreativeTab(null));
+    event.addItem(ritual_divine_protection = new ItemBase("ritual_divine_protection").setCreativeTab(null));
+    event.addItem(ritual_fire_storm = new ItemBase("ritual_fire_storm").setCreativeTab(null));
+    event.addItem(ritual_spreading_forest = new ItemBase("ritual_spreading_forest").setCreativeTab(null));
+    event.addItem(ritual_windwall = new ItemBase("ritual_windwall").setCreativeTab(null));
+    event.addItem(ritual_warding_protection = new ItemBase("ritual_warding_protection").setCreativeTab(null));
+    event.addItem(ritual_germination = new ItemBase("ritual_germination").setCreativeTab(null));
+    event.addItem(ritual_purity = new ItemBase("ritual_purity").setCreativeTab(null));
+    event.addItem(ritual_frost_lands = new ItemBase("ritual_frost_lands").setCreativeTab(null));
+    event.addItem(ritual_animal_harvest = new ItemBase("ritual_animal_harvest").setCreativeTab(null));
+    event.addItem(ritual_summon_creatures = new ItemBase("ritual_summon_creatures").setCreativeTab(null));
+    event.addItem(ritual_wild_growth = new ItemBase("ritual_wild_growth").setCreativeTab(null));
+    event.addItem(ritual_overgrowth = new ItemBase("ritual_overgrowth").setCreativeTab(null));
+    event.addItem(ritual_flower_growth = new ItemBase("ritual_flower_growth").setCreativeTab(null));
+    event.addItem(ritual_transmutation = new ItemBase("ritual_transmutation").setCreativeTab(null));
+    event.addItem(ritual_gathering = new ItemBase("ritual_gathering").setCreativeTab(null));
 
     // Groves
-    event.addItem(grove_fairy_icon = new ItemBase("grove_fairy_icon").setModelCustom(false).setCreativeTab(null));
-    event.addItem(grove_fairy_text = new ItemBase("grove_fairy_text").setModelCustom(false).setCreativeTab(null));
+    event.addItem(grove_fairy_icon = new ItemBase("grove_fairy_icon").setCreativeTab(null));
+    event.addItem(grove_fairy_text = new ItemBase("grove_fairy_text").setCreativeTab(null));
 
     // KEEP AT END
     registerSeedDrops();
