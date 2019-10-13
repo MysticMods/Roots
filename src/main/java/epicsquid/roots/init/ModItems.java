@@ -64,32 +64,32 @@ public class ModItems {
    * Register all items
    */
   public static void registerItems(@Nonnull RegisterContentEvent event) {
-    event.addItem(moonglow_seed = new ItemSeedBase("moonglow_seed", ModBlocks.moonglow, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(moonglow_leaf = new ItemBase("moonglow_leaf").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(pereskia_bulb = new ItemSeedBase("pereskia_bulb", ModBlocks.pereskia, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(pereskia = new ItemBase("pereskia").setModelCustom(true).setCreativeTab(Roots.tab)); // 0xff8cc2
-    event.addItem(terra_moss = new ItemBase("terra_moss").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(spirit_herb_seed = new ItemSeedBase("spirit_herb_seed", ModBlocks.spirit_herb, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(spirit_herb = new ItemBase("spirit_herb").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(wildroot = new ItemSeedBase("wildroot", ModBlocks.wildroot, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(wildewheet = new ItemBase("wildewheet").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(wildewheet_seed = new ItemSeedBase("wildewheet_seed", ModBlocks.wildewheet, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(cloud_berry = new ItemSeedBase("cloud_berry", ModBlocks.cloud_berry, Blocks.DIRT).setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(infernal_bulb = new ItemSeedBase("infernal_bulb", ModBlocks.infernal_bulb, Blocks.MAGMA).setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(dewgonia = new ItemSeedBase("dewgonia", ModBlocks.dewgonia, Blocks.SAND).setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(stalicripe = new ItemSeedBase("stalicripe", ModBlocks.stalicripe, Blocks.STONE).setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(terra_spores = new ItemTerraSpore("terra_spores").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(petals = new ItemBase("petals").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(runic_dust = new ItemBase("runic_dust").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(moonglow_seed = new ItemSeedBase("moonglow_seed", ModBlocks.moonglow, Blocks.DIRT).setCreativeTab(Roots.tab));
+    event.addItem(moonglow_leaf = new ItemBase("moonglow_leaf").setCreativeTab(Roots.tab));
+    event.addItem(pereskia_bulb = new ItemSeedBase("pereskia_bulb", ModBlocks.pereskia, Blocks.DIRT).setCreativeTab(Roots.tab));
+    event.addItem(pereskia = new ItemBase("pereskia").setCreativeTab(Roots.tab)); // 0xff8cc2
+    event.addItem(terra_moss = new ItemBase("terra_moss").setCreativeTab(Roots.tab));
+    event.addItem(spirit_herb_seed = new ItemSeedBase("spirit_herb_seed", ModBlocks.spirit_herb, Blocks.DIRT).setCreativeTab(Roots.tab));
+    event.addItem(spirit_herb = new ItemBase("spirit_herb").setCreativeTab(Roots.tab));
+    event.addItem(wildroot = new ItemSeedBase("wildroot", ModBlocks.wildroot, Blocks.DIRT).setCreativeTab(Roots.tab));
+    event.addItem(wildewheet = new ItemBase("wildewheet").setCreativeTab(Roots.tab));
+    event.addItem(wildewheet_seed = new ItemSeedBase("wildewheet_seed", ModBlocks.wildewheet, Blocks.DIRT).setCreativeTab(Roots.tab));
+    event.addItem(cloud_berry = new ItemSeedBase("cloud_berry", ModBlocks.cloud_berry, Blocks.DIRT).setCreativeTab(Roots.tab));
+    event.addItem(infernal_bulb = new ItemSeedBase("infernal_bulb", ModBlocks.infernal_bulb, Blocks.MAGMA).setCreativeTab(Roots.tab));
+    event.addItem(dewgonia = new ItemSeedBase("dewgonia", ModBlocks.dewgonia, Blocks.SAND).setCreativeTab(Roots.tab));
+    event.addItem(stalicripe = new ItemSeedBase("stalicripe", ModBlocks.stalicripe, Blocks.STONE).setCreativeTab(Roots.tab));
+    event.addItem(terra_spores = new ItemTerraSpore("terra_spores").setCreativeTab(Roots.tab));
+    event.addItem(petals = new ItemBase("petals").setCreativeTab(Roots.tab));
+    event.addItem(runic_dust = new ItemBase("runic_dust").setCreativeTab(Roots.tab));
 
     // Barks and Knifes
-    event.addItem(bark_oak = new ItemBase("bark_oak").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(bark_spruce = new ItemBase("bark_spruce").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(bark_birch = new ItemBase("bark_birch").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(bark_jungle = new ItemBase("bark_jungle").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(bark_dark_oak = new ItemBase("bark_dark_oak").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(bark_acacia = new ItemBase("bark_acacia").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(bark_wildwood = new ItemBase("bark_wildwood").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(bark_oak = new ItemBase("bark_oak").setCreativeTab(Roots.tab));
+    event.addItem(bark_spruce = new ItemBase("bark_spruce").setCreativeTab(Roots.tab));
+    event.addItem(bark_birch = new ItemBase("bark_birch").setCreativeTab(Roots.tab));
+    event.addItem(bark_jungle = new ItemBase("bark_jungle").setCreativeTab(Roots.tab));
+    event.addItem(bark_dark_oak = new ItemBase("bark_dark_oak").setCreativeTab(Roots.tab));
+    event.addItem(bark_acacia = new ItemBase("bark_acacia").setCreativeTab(Roots.tab));
+    event.addItem(bark_wildwood = new ItemBase("bark_wildwood").setCreativeTab(Roots.tab));
 
     barks = Arrays.asList(bark_oak, bark_spruce, bark_birch, bark_jungle, bark_dark_oak, bark_acacia, bark_wildwood);
 
@@ -99,22 +99,22 @@ public class ModItems {
       public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.RARE;
       }
-    }.setModelCustom(true).setCreativeTab(Roots.tab));
+    }.setCreativeTab(Roots.tab));
 
-    event.addItem(pestle = new ItemBase("pestle").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(component_pouch = new ItemPouch("component_pouch").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(creative_pouch = new ItemCreativePouch("creative_pouch").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(apothecary_pouch = new ItemApothecaryPouch("apothecary_pouch").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(spell_dust = new ItemSpellDust("spell_dust").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(flour = new ItemBase("flour").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(staff = new ItemStaff("staff").setModelCustom(true).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(pestle = new ItemBase("pestle").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(component_pouch = new ItemPouch("component_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(creative_pouch = new ItemCreativePouch("creative_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(apothecary_pouch = new ItemApothecaryPouch("apothecary_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(spell_dust = new ItemSpellDust("spell_dust").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(flour = new ItemBase("flour").setCreativeTab(Roots.tab));
+    event.addItem(staff = new ItemStaff("staff").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_pickaxe = new ItemLivingPickaxe(ToolMaterial.IRON, "living_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_axe = new ItemLivingAxe(ToolMaterial.IRON, "living_axe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_shovel = new ItemLivingShovel(ToolMaterial.IRON, "living_shovel").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_hoe = new ItemLivingHoe(ToolMaterial.IRON, "living_hoe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_sword = new ItemLivingSword(ToolMaterial.IRON, "living_sword").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(living_arrow = new ItemLivingArrow("living_arrow").setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(wildwood_quiver = new ItemQuiver("wildwood_quiver").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(living_arrow = new ItemLivingArrow("living_arrow").setCreativeTab(Roots.tab));
+    event.addItem(wildwood_quiver = new ItemQuiver("wildwood_quiver").setCreativeTab(Roots.tab));
     event.addItem(wildwood_bow = new ItemWildwoodBow("wildwood_bow").setModelCustom(false).setCreativeTab(Roots.tab));
 
     event.addItem(sylvan_helmet = new ItemSylvanArmor(sylvanArmorMaterial, EntityEquipmentSlot.HEAD, "sylvan_helmet").setMaxStackSize(1));
@@ -126,7 +126,7 @@ public class ModItems {
     event.addItem(wildwood_leggings = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.LEGS, "wildwood_leggings").setMaxStackSize(1));
     event.addItem(wildwood_boots = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.FEET, "wildwood_boots").setMaxStackSize(1));
 
-    event.addItem(runic_shears = new ItemRunicShears("runic_shears").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(runic_shears = new ItemRunicShears("runic_shears").setCreativeTab(Roots.tab));
 
     MaterialTypes.addMaterial("vanilla:wood", ToolMaterial.WOOD, ToolMaterial.WOOD.getAttackDamage(), -1.7f);
     MaterialTypes.addMaterial("vanilla:stone", ToolMaterial.STONE, ToolMaterial.STONE.getAttackDamage(), -1.7f);
@@ -140,16 +140,16 @@ public class ModItems {
     event.addItem(diamond_knife = new ItemDruidKnife("diamond_knife", ToolMaterial.DIAMOND).setCreativeTab(Roots.tab));
     event.addItem(gold_knife = new ItemDruidKnife("gold_knife", ToolMaterial.GOLD).setCreativeTab(Roots.tab));
 
-    event.addItem(seeds = new ItemBase("assorted_seeds").setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(seeds = new ItemBase("assorted_seeds").setCreativeTab(Roots.tab));
     event.addItem(cooked_seeds = new ItemFoodBase("cooked_seeds", 1, 0.4f, false) {
       @Override
       public int getMaxItemUseDuration(ItemStack stack) {
         return 8;
       }
-    }.setModelCustom(true).setCreativeTab(Roots.tab));
-    event.addItem(cooked_pereskia = new ItemFoodBase("cooked_pereskia", 5, false).setModelCustom(true).setCreativeTab(Roots.tab));
+    }.setCreativeTab(Roots.tab));
+    event.addItem(cooked_pereskia = new ItemFoodBase("cooked_pereskia", 5, false).setCreativeTab(Roots.tab));
 
-    event.addItem(wildewheet_bread = new ItemFoodBase("wildewheet_bread", 7, false).setModelCustom(true).setCreativeTab(Roots.tab));
+    event.addItem(wildewheet_bread = new ItemFoodBase("wildewheet_bread", 7, false).setCreativeTab(Roots.tab));
 
     // Fairy dust
     event.addItem(fairy_dust = new ItemBase("fairy_dust").setModelCustom(false).setCreativeTab(Roots.tab));
