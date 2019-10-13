@@ -154,6 +154,22 @@
     {
       "type": "block",
       "base": "wildwood_leaves"
+    },
+    {
+      "type": "block",
+      "base": "runed_obsidian_brick"
+    },
+    {
+      "type": "block",
+      "base": "runed_obsidian_brick_alt"
+    },
+    {
+      "type": "block",
+      "base": "runed_obsidian"
+    },
+    {
+      "type": "block",
+      "base": "chiseled_runed_obsidian"
     }
   ]
 }

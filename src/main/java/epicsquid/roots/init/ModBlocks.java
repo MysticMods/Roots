@@ -23,6 +23,9 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.common.EnumPlantType;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ModBlocks {
 
@@ -49,7 +52,7 @@ public class ModBlocks {
   public static Block runestone_brick_slab, runestone_brick_double_slab, runestone_brick_stairs, runestone_brick_wall, runestone_brick_button, runestone_brick_pressure_plate;
   public static Block runestone_brick_alt_slab, runestone_brick_alt_double_slab, runestone_brick_alt_stairs, runestone_brick_alt_wall, runestone_brick_alt_button, runestone_brick_alt_pressure_plate;
 
-  public static Block runed_obsidian, chiseled_runed_obsidian;
+  public static Block runed_obsidian, chiseled_runed_obsidian, runed_obsidian_brick, runed_obsidian_brick_alt;
 
   // Wildwood
   public static Block wildwood_slab, wildwood_double_slab, wildwood_stairs, wildwood_wall;
@@ -57,6 +60,10 @@ public class ModBlocks {
   public static Block wildwood_button, wildwood_pressure_plate, wildwood_fence, wildwood_fence_gate, wildwood_ladder;
 
   public static Block fey_light, decorative_bonfire;
+
+  // Lists of blcoks
+  public static List<Block> runestoneBlocks;
+  public static List<Block> runedObsidianBlocks;
 
   /**
    * Register all block
@@ -98,8 +105,13 @@ public class ModBlocks {
     event.addBlock(runestone_brick_alt = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_brick_alt")).setCreativeTab(Roots.tab);
     event.addBlock(chiseled_runestone = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "chiseled_runestone")).setCreativeTab(Roots.tab);
     event.addBlock(runed_obsidian = new BlockRunedObsidian(Material.ROCK, SoundType.METAL, 8.5f, "runed_obsidian")).setCreativeTab(Roots.tab);
+    event.addBlock(runed_obsidian_brick = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runed_obsidian_brick")).setCreativeTab(Roots.tab);
+    event.addBlock(runed_obsidian_brick_alt = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runed_obsidian_brick_alt")).setCreativeTab(Roots.tab);
     event.addBlock(chiseled_runed_obsidian = new BlockRunedObsidian(Material.ROCK, SoundType.METAL, 8.5f, "chiseled_runed_obsidian")).setCreativeTab(Roots.tab);
     event.addBlock(trample_rune = new BlockTrample(Material.WATER, SoundType.METAL, 1.4f, "runestone_trample")).setCreativeTab(Roots.tab);
+
+    runestoneBlocks = Arrays.asList(runestone, runestone_brick, runestone_brick_alt, chiseled_runestone);
+    runedObsidianBlocks = Arrays.asList(runed_obsidian, runed_obsidian_brick, runed_obsidian_brick_alt, chiseled_runed_obsidian);
 
     event.addBlock(wildwood_leaves = new BlockLeavesBase(0.8f, "wildwood_leaves", () -> new ItemStack(ModItems.wildroot), 50).setFlammable(true).setCreativeTab(Roots.tab));
     event.addBlock(wildwood_log = new BlockLogBase("wildwood_log").setCreativeTab(Roots.tab));
