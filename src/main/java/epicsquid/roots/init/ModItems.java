@@ -173,10 +173,6 @@ public class ModItems {
     event.addItem(ritual_transmutation = new ItemBase("ritual_transmutation").setCreativeTab(null));
     event.addItem(ritual_gathering = new ItemBase("ritual_gathering").setCreativeTab(null));
 
-    // Groves
-    event.addItem(grove_fairy_icon = new ItemBase("grove_fairy_icon").setCreativeTab(null));
-    event.addItem(grove_fairy_text = new ItemBase("grove_fairy_text").setCreativeTab(null));
-
     // KEEP AT END
     registerSeedDrops();
   }
