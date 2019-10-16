@@ -2,6 +2,7 @@ package epicsquid.roots.util;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -13,6 +14,8 @@ public class EntityUtil {
   private static Set<ResourceLocation> forcedHostile = new HashSet<>();
 
   public static boolean isHostile (Entity entity) {
+    if (entity instanceof EntityPlayer) return false;
+
     ResourceLocation rl = EntityList.getKey(entity);
 
     if (forcedFriendly.contains(rl)) {
@@ -36,6 +39,30 @@ public class EntityUtil {
     }
 
     return false;
+  }
+
+  public static boolean isFriendly (Entity entity) {
+    if (entity instanceof EntityPlayer) return false;
+
+    ResourceLocation rl = EntityList.getKey(entity);
+
+    if (forcedFriendly.contains(rl)) {
+      return true;
+    }
+
+    if (forcedHostile.contains(rl)) {
+      return false;
+    }
+
+    if (entity instanceof EntityAnimal) {
+      return true;
+    }
+
+    if (entity.isCreatureType(EnumCreatureType.AMBIENT, false) || entity.isCreatureType(EnumCreatureType.WATER_CREATURE, false) || entity.isCreatureType(EnumCreatureType.CREATURE, false)) {
+      return true;
+    }
+
+    return !isHostile(entity);
   }
 
   public static boolean isHostile (Entity entity, EntityPlayer player) {

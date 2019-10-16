@@ -15,6 +15,7 @@ public class PotionTimeStop extends Potion {
     super(false, 0x737373);
     setPotionName("Time Stop");
     setIconIndex(1, 0);
+    setBeneficial();
   }
 
   @Override

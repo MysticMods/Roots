@@ -1,14 +1,10 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.spell.modules.SpellModule;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
@@ -28,6 +24,7 @@ public class SpellSenseDanger extends SpellBase {
     this.cooldown = 190;
 
     addCost(HerbRegistry.getHerbByName("wildroot"), 0.285f);
+
     addIngredients(
         new OreIngredient("nuggetGold"),
         new ItemStack(Items.COMPASS),
@@ -39,12 +36,12 @@ public class SpellSenseDanger extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
-    List<EntityCreature> creatures = Util.getEntitiesWithinRadius(caster.getEntityWorld(), EntityCreature.class, caster.getPosition(), 40, 40, 40);
-    caster.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 40 * 20));
-    for (EntityCreature creature : creatures) {
-      if (!(creature instanceof IMob)) continue;
-      creature.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 40 * 20, 0));
-    }
+    caster.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 40 * 20 + 5, 0, false, false));
+    caster.addPotionEffect(new PotionEffect(ModPotions.danger_sense, 40 * 20, 0, false, false));
     return true;
+  }
+
+  public int[] getRadius() {
+    return new int[]{40, 40, 40};
   }
 }

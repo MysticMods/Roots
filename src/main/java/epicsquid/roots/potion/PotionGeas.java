@@ -8,6 +8,7 @@ public class PotionGeas extends Potion {
     super(false, 0xffe100);
     setPotionName("Geas");
     setIconIndex(0, 0);
+    setBeneficial();
   }
 
   @Override
