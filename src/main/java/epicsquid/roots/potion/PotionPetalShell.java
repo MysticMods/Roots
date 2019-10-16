@@ -19,6 +19,7 @@ public class PotionPetalShell extends Potion {
   public PotionPetalShell() {
     super(false, 0xcd9dc6);
     setPotionName("Petal Shell");
+    setBeneficial();
     setIconIndex(3, 0);
   }
 

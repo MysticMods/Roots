@@ -21,9 +21,10 @@ public class PotionFreeze extends Potion {
 
   private ResourceLocation texture = new ResourceLocation(Roots.MODID, "textures/gui/potions.png");
 
-  public PotionFreeze(int liquidColorIn) {
-    super(false, liquidColorIn);
+  public PotionFreeze() {
+    super(false, 0xffffff);
     setPotionName("Freeze");
+    setBeneficial();
     setIconIndex(0, 0);
   }
 
