@@ -1,15 +1,14 @@
-# Pyre Crafting
 
 ### Class
 
-```java
+```zenscript
 import mods.roots.Pyre;
 ```
 
 #### Methods
 
-```java
-static void addRecipe(
+```zenscript
+void addRecipe(
   string name,         // the name of the recipe being added; if replacing an existing game recipe, ensure the correct name is used
   IItemStack output,   // the output of this recipe
   IIngredient[] inputs // a list of five ingredients (no more, no less)
@@ -20,8 +19,8 @@ static void addRecipe(
 ---
 
 
-```java
-static void addRecipe(
+```zenscript
+void addRecipe(
   string name,          // the name of the recipe being added; if replacing an existing game recipe, ensure the correct name is used
   IItemStack output,    // the output of this recipe
   IIngredient[] inputs, // a list of five ingredients
@@ -33,8 +32,8 @@ static void addRecipe(
 ---
 
 
-```java
-static void removeRecipe(
+```zenscript
+void removeRecipe(
   IItemStack output // the output of the recipe to remove
 );
 ```
@@ -45,7 +44,7 @@ static void removeRecipe(
 
 ### Examples
 
-```java
+```zenscript
 import mods.roots.Pyre;
 
 // Removes the recipe for stalicripe; note that the quantity is not considered

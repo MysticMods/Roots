@@ -1,12 +1,9 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.init.ModItems;
-import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
@@ -38,9 +35,9 @@ public class SpellSenseDanger extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
-        new ItemStack(Items.GOLDEN_CARROT),
+        new OreIngredient("nuggetGold"),
         new ItemStack(Items.COMPASS),
         new ItemStack(Items.SPIDER_EYE),
         new OreIngredient("rootsBark"),
@@ -50,17 +47,17 @@ public class SpellSenseDanger extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
-    List<EntityCreature> creatures = Util.getEntitiesWithinRadius(caster.getEntityWorld(), EntityCreature.class, caster.getPosition(), radius_x, radius_y, radius_z);
-    caster.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, nvDuration));
-    for (EntityCreature creature : creatures) {
-      if (!(creature instanceof IMob)) continue;
-      creature.addPotionEffect(new PotionEffect(MobEffects.GLOWING, glowDuration, 0));
-    }
+    caster.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, nvDuration, 0, false, false));
+    caster.addPotionEffect(new PotionEffect(ModPotions.danger_sense, glowDuration, 0, false, false));
     return true;
   }
 
+  public int[] getRadius() {
+    return new int[]{radius_x, radius_y, radius_z};
+  }
+
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
     this.nvDuration = properties.getProperty(PROP_NV_DURATION);

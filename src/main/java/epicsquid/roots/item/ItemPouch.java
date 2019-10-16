@@ -28,7 +28,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemPouch extends ItemBase {
+public class ItemPouch extends ItemBase implements IItemPouch {
 
   public ItemPouch(@Nonnull String name) {
     super(name);

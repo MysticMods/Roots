@@ -3,10 +3,8 @@ package epicsquid.roots.entity.ritual;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
+import epicsquid.roots.ritual.RitualWardingProtection;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -14,11 +12,14 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class EntityRitualWardingProtection extends EntityRitualBase {
+  private RitualWardingProtection ritual;
+
   public EntityRitualWardingProtection(World worldIn) {
     super(worldIn);
     this.setInvisible(true);
     this.setSize(1, 1);
     getDataManager().register(lifetime, RitualRegistry.ritual_warding_protection.getDuration() + 20);
+    ritual = (RitualWardingProtection) RitualRegistry.ritual_warding_protection;
   }
 
   @Override
@@ -40,11 +41,11 @@ public class EntityRitualWardingProtection extends EntityRitualBase {
         ParticleUtil.spawnParticleGlow(world, tx, ty, tz, 0, 0, 0, 100, 255, 235, 0.5f * alpha, 8.0f, 40);
       }
     }
-    if (this.ticksExisted % 20 == 0) {
+    if (this.ticksExisted % ritual.interval == 0) {
       List<EntityLivingBase> entities = world
-          .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 15.5, posY - 15.5, posZ - 15.5, posX + 15.5, posY + 15.5, posZ + 15.5));
+          .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
       for (EntityLivingBase e : entities) {
-        e.addPotionEffect(new PotionEffect(ModPotions.invulnerability, 200));
+        e.addPotionEffect(new PotionEffect(ModPotions.invulnerability, ritual.invuln_duration, 0, false, false));
       }
     }
   }

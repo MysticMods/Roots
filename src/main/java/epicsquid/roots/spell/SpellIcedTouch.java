@@ -7,6 +7,7 @@ import epicsquid.roots.network.fx.MessageIcedTouchFX;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
+import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
@@ -14,6 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
@@ -47,10 +49,11 @@ public class SpellIcedTouch extends SpellBase {
   public void init () {
     addIngredients(
         new ItemStack(ModItems.dewgonia),
-        new ItemStack(ModItems.bark_birch),
+        new ItemStack(Item.getItemFromBlock(Blocks.SNOW)),
+        new ItemStack(Item.getItemFromBlock(Blocks.SNOW_LAYER)),
         new ItemStack(Items.SNOWBALL),
-        new ItemStack(ModItems.bark_birch),
-        new ItemStack(Items.SNOWBALL));
+        new ItemStack(Item.getItemFromBlock(Blocks.RED_FLOWER), 1, BlockFlower.EnumFlowerType.BLUE_ORCHID.getMeta())
+    );
 
     acceptModules(ModuleRegistry.module_touch);
   }
@@ -60,7 +63,7 @@ public class SpellIcedTouch extends SpellBase {
     World world = player.world;
     if (modules.contains(ModuleRegistry.module_touch)) {
       if (!world.isRemote) {
-        player.addPotionEffect(new PotionEffect(ModPotions.freeze, touchDuration));
+        player.addPotionEffect(new PotionEffect(ModPotions.freeze, touchDuration, 0, false, false));
         world.playSound(null, player.getPosition(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 2f);
       }
       return true;
@@ -118,7 +121,7 @@ public class SpellIcedTouch extends SpellBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
     this.touchDuration = properties.getProperty(PROP_TOUCH_DURATION);

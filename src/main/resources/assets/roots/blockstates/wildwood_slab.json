@@ -1,5 +1,26 @@
 {
-    "variants":{
-        "custom":  { "model": "roots:wildwood_slab" }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "half_slab",
+    "textures": {
+      "bottom": "roots:blocks/wildwood_planks",
+      "top": "roots:blocks/wildwood_planks",
+      "side": "roots:blocks/wildwood_planks"
     }
+  },
+  "variants": {
+    "half": {
+      "bottom": {
+      },
+      "top": {
+        "model": "upper_slab"
+      }
+    },
+    "inventory": [
+      {}
+    ],
+    "handlers": [
+      {}
+    ]
+  }
 }

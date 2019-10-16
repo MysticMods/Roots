@@ -1,7 +1,6 @@
 {
   "name": "Fairy Grove",
-  "sortnum" : 0,
+  "sortnum" : 6,
   "description": "",
-  "icon": "roots:pereskia",
-  "parent": "groves"
+  "icon": "roots:fairy_grove_stone"
 }

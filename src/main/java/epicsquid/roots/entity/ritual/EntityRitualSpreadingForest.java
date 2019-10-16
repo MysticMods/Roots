@@ -7,14 +7,12 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
+import epicsquid.roots.ritual.RitualSpreadingForest;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -28,6 +26,8 @@ import java.util.Set;
 
 @SuppressWarnings("deprecation")
 public class EntityRitualSpreadingForest extends EntityRitualBase {
+  private RitualSpreadingForest ritual;
+
   private Set<IBlockState> saplingBlocks = new HashSet<>();
   private Set<Block> saplings = new HashSet<>();
 
@@ -36,6 +36,7 @@ public class EntityRitualSpreadingForest extends EntityRitualBase {
   public EntityRitualSpreadingForest(World worldIn) {
     super(worldIn);
     getDataManager().register(lifetime, RitualRegistry.ritual_spreading_forest.getDuration() + 20);
+    ritual = (RitualSpreadingForest) RitualRegistry.ritual_spreading_forest;
   }
 
   private boolean canTwoByTwo(World world, BlockPos pos1, int offsetX, int offsetZ) {
@@ -89,7 +90,7 @@ public class EntityRitualSpreadingForest extends EntityRitualBase {
       }
     }
     if (saplingBlocks.isEmpty()) {
-      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), 35, 30, 35, (BlockPos pos) -> world.getBlockState(pos).getBlock() instanceof BlockLeaves);
+      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, (BlockPos pos) -> world.getBlockState(pos).getBlock() instanceof BlockLeaves);
       if (!positions.isEmpty()) {
         for (BlockPos pos : positions) {
           IBlockState state = world.getBlockState(pos);
@@ -123,7 +124,7 @@ public class EntityRitualSpreadingForest extends EntityRitualBase {
           }
         }
       }
-      List<BlockPos> positions2 = Util.getBlocksWithinRadius(world, getPosition(), 35, 30, 35, (BlockPos pos) -> {
+      List<BlockPos> positions2 = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, (BlockPos pos) -> {
         if (world.isAirBlock(pos)) return false;
         return world.getBlockState(pos).getBlock() instanceof IGrowable;
       });
@@ -150,17 +151,17 @@ public class EntityRitualSpreadingForest extends EntityRitualBase {
       }
     }
 
-    if (ticksExisted % 30 == 0 && !saplingBlocks.isEmpty()) {
+    if (ticksExisted % ritual.place_interval == 0 && !saplingBlocks.isEmpty()) {
       IBlockState state = Lists.newArrayList(saplingBlocks).get(rand.nextInt(saplingBlocks.size()));
 
-      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), 35, 30, 35, pos -> this.validSpot(world, pos, state));
+      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, pos -> this.validSpot(world, pos, state));
       if (!positions.isEmpty() && !world.isRemote) {
         boolean planted = false;
         boolean twoByTwo = false;
         BlockPlanks.EnumType type = null;
         if (state.getPropertyKeys().contains(BlockSapling.TYPE)) {
           type = state.getValue(BlockSapling.TYPE);
-          if (type == BlockPlanks.EnumType.DARK_OAK || ((type == BlockPlanks.EnumType.JUNGLE || type == BlockPlanks.EnumType.SPRUCE) && rand.nextInt(20) == 0)) {
+          if (type == BlockPlanks.EnumType.DARK_OAK || ((type == BlockPlanks.EnumType.JUNGLE || type == BlockPlanks.EnumType.SPRUCE) && rand.nextInt(ritual.double_chance) == 0)) {
             twoByTwo = true;
           }
         } else if (ConfigUtil.setContainsItemStack(GeneralConfig.getTwoByTwoSaplings(), state.getBlock().getItem(world, BlockPos.ORIGIN, state))) {
@@ -206,8 +207,8 @@ public class EntityRitualSpreadingForest extends EntityRitualBase {
         }
       }
     }
-    if (ticksExisted % 20 == 0) {
-      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), 35, 30, 35, (BlockPos pos) -> {
+    if (ticksExisted % ritual.growth_interval == 0) {
+      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, (BlockPos pos) -> {
         IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
         if (block instanceof BlockSapling || saplings.contains(block)) return true;

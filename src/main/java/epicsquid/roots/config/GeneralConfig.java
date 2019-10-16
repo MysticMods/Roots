@@ -2,12 +2,7 @@ package epicsquid.roots.config;
 
 import epicsquid.mysticallib.util.ConfigUtil;
 import epicsquid.roots.Roots;
-import it.unimi.dsi.fastutil.Hash;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -15,7 +10,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.*;
+import java.util.Set;
 
 @Mod.EventBusSubscriber(modid=Roots.MODID)
 @Config.LangKey("config.roots.category.general")
@@ -28,6 +23,9 @@ public class GeneralConfig {
       ConfigManager.sync(Roots.MODID, Config.Type.INSTANCE);
     }
   }
+
+  @Config.Comment(("Set to true to give players the Roots Guide Book upon joining the server"))
+  public static boolean GiveBook = false;
 
   @Config.Comment(("Inject some items from Roots into dungeon & other loot chests"))
   public static boolean InjectLoot = true;

@@ -3,8 +3,8 @@ package epicsquid.roots.ritual;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualFireStorm;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.recipe.conditions.ConditionItems;
-import epicsquid.roots.recipe.conditions.ConditionStandingStones;
+import epicsquid.roots.ritual.conditions.ConditionItems;
+import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -42,7 +42,8 @@ public class RitualFireStorm extends RitualBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
+    duration = properties.getProperty(PROP_DURATION);
     projectile_damage = properties.getProperty(PROP_PROJECTILE_DAMAGE);
     projectile_count = properties.getProperty(PROP_PROJECTILE_COUNT);
     projectile_knockback = properties.getProperty(PROP_PROJECTILE_KNOCKBACK);

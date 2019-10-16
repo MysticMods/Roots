@@ -1,13 +1,13 @@
 package epicsquid.roots.tileentity;
 
 import epicsquid.mysticallib.tile.TileBase;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.spell.SpellBase;
-import epicsquid.mysticallib.util.ItemUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -18,6 +18,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
@@ -139,7 +140,13 @@ public class TileEntityMortar extends TileBase {
             updatePacketViaState();
           }
           for (int i = 0; i < inventory.getSlots(); i++) {
-            inventory.extractItem(i, 1, false);
+            ItemStack item = inventory.extractItem(i, 1, false);
+            if (!world.isRemote) {
+              if (item.getItem().hasContainerItem(item)) {
+                ItemStack container = ForgeHooks.getContainerItem(item);
+                ItemUtil.spawnItem(world, getPos().add(0, 1, 0), container);
+              }
+            }
           }
           return true;
         }

@@ -1,6 +1,0 @@
-{
-  "name": "Groves",
-  "sortnum" : 6,
-  "description": "While the simplest $(l:basics/crafting)Grove Stone$() will suffice for basic crafting, more $(l:groves/advanced_groves)Advanced Groves$() are required for powerful objects.",
-  "icon": "roots:grove_stone"
-}

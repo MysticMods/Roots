@@ -1,22 +1,16 @@
 package epicsquid.roots.block;
 
 import epicsquid.mysticallib.block.BlockTEBase;
-import epicsquid.roots.Roots;
-import epicsquid.roots.gui.GuiHandler;
-import epicsquid.roots.item.ItemDruidKnife;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
@@ -36,19 +30,6 @@ public class BlockFeyCrafter extends BlockTEBase {
   @Override
   public boolean isOpaqueCube(@Nonnull IBlockState state) {
     return false;
-  }
-
-  @Override
-  public boolean onBlockActivated(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing face, float hitX, float hitY, float hitZ) {
-    if (player.getHeldItem(hand).getItem() instanceof ItemDruidKnife) {
-      if (super.onBlockActivated(world, pos, state, player, hand, face, hitX, hitY, hitZ)) return true;
-    }
-
-    if (!world.isRemote) {
-      player.openGui(Roots.instance, GuiHandler.CRAFTER_ID, world, pos.getX(), pos.getY(), pos.getZ());
-    }
-
-    return true;
   }
 
   @Nonnull

@@ -3,9 +3,12 @@ package epicsquid.roots.init;
 import com.google.common.collect.Lists;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticallib.recipe.factories.OreFallbackIngredient;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.mysticalworld.config.ConfigManager;
 import epicsquid.mysticalworld.entity.*;
-import epicsquid.mysticalworld.materials.Metal;
+import epicsquid.mysticalworld.materials.Material;
+import epicsquid.mysticalworld.materials.Materials;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.item.ItemDruidKnife;
@@ -13,7 +16,6 @@ import epicsquid.roots.recipe.*;
 import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
-import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.util.StateUtil;
 import epicsquid.roots.util.types.WorldPosStatePredicate;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
@@ -27,9 +29,7 @@ import net.minecraft.entity.monster.EntityPolarBear;
 import net.minecraft.entity.passive.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -43,13 +43,15 @@ import java.util.*;
 public class ModRecipes {
 
   private static Map<ResourceLocation, AnimalHarvestRecipe> harvestRecipes = new HashMap<>();
+  private static Map<ResourceLocation, AnimalHarvestFishRecipe> fishRecipes = new HashMap<>();
   private static ObjectOpenHashSet<Class<? extends Entity>> harvestClasses = null;
   private static Map<ResourceLocation, TransmutationRecipe> transmutationRecipes = new HashMap<>();
   private static List<MortarRecipe> mortarRecipes = new ArrayList<>();
   private static Map<String, PyreCraftingRecipe> pyreCraftingRecipes = new HashMap<>();
   private static Map<ResourceLocation, FeyCraftingRecipe> feyCraftingRecipes = new HashMap<>();
-  private static Map<String, RunicShearRecipe> runicShearRecipes = new HashMap<>();
-  private static Map<Class<? extends Entity>, RunicShearRecipe> runicShearEntityRecipes = new HashMap<>();
+  private static Map<ResourceLocation, RunicShearRecipe> runicShearRecipes = new HashMap<>();
+  private static Map<ResourceLocation, RunicShearEntityRecipe> runicShearEntityRecipes = new HashMap<>();
+  private static Map<Class<? extends Entity>, RunicShearEntityRecipe> generatedEntityRecipes = null;
   private static List<RunicCarvingRecipe> runicCarvingRecipes = new ArrayList<>();
   private static Map<ResourceLocation, PacifistEntry> pacifistEntities = new HashMap<>();
   private static Map<Class<? extends Entity>, PacifistEntry> pacifistClasses = new HashMap<>();
@@ -88,7 +90,8 @@ public class ModRecipes {
   }
 
   public static void initPacifistEntities() {
-    addPacifistEntry("bat", EntityBat.class);
+    // Bats are too easily killed.
+    //addPacifistEntry("bat", EntityBat.class);
     addPacifistEntry("chicken", EntityChicken.class);
     addPacifistEntry("cow", EntityCow.class);
     addPacifistEntry("donkey", EntityDonkey.class);
@@ -103,6 +106,7 @@ public class ModRecipes {
     addPacifistEntry("sheep", EntitySheep.class);
     addPacifistEntry("squid", EntitySquid.class);
     addPacifistEntry("villager", EntityVillager.class).setCheckTarget(true);
+    // TODO: Conditional non-hostile
     addPacifistEntry("wolf", EntityWolf.class);
 
     // Mystical Worlds
@@ -112,6 +116,9 @@ public class ModRecipes {
     addPacifistEntry("frog", EntityFrog.class);
     addPacifistEntry("owl", EntityOwl.class);
     addPacifistEntry("sprout", EntitySprout.class);
+    addPacifistEntry("silkworm", EntitySilkworm.class);
+    // TODO: Conditional non-hostile
+    addPacifistEntry("lava_cat", EntityLavaCat.class);
   }
 
   public static void addFlowerRecipe(String name, IBlockState state) {
@@ -297,14 +304,37 @@ public class ModRecipes {
   }
 
   public static void initTransmutationRecipes() {
+    WorldPosStatePredicate water_below = (t, u, v) -> {
+      Block b = t.getBlockState(u.down()).getBlock();
+      return b == Blocks.WATER || b == Blocks.FLOWING_WATER;
+    };
+
+    WorldPosStatePredicate wool_below = (t, u, v) -> {
+      Block b = t.getBlockState(u.down()).getBlock();
+      return b == Blocks.WOOL;
+    };
+
+    WorldPosStatePredicate leaves_below = (t, u, v) -> {
+      Block b = t.getBlockState(u.down()).getBlock();
+      return b.isLeaves(v, t, u);
+    };
+
+    WorldPosStatePredicate stone_below = (t, u, v) -> {
+      Block b = t.getBlockState(u.down()).getBlock();
+      return b == Blocks.COBBLESTONE;
+    };
+
     addTransmutationRecipe("deadbush_cocoa", Blocks.DEADBUSH, new ItemStack(Items.DYE, 3, 3));
     addTransmutationRecipe("birch_jungle", Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH), Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE));
     addTransmutationRecipe("birch_jungle_leaves", Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.BIRCH), Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE));
-    addTransmutationRecipe("pumpkin_melon", Blocks.PUMPKIN, Blocks.MELON_BLOCK.getDefaultState(), (t, u, v) -> {
-      Block b = t.getBlockState(u.down()).getBlock();
-      return b == Blocks.WATER || b == Blocks.FLOWING_WATER;
-    });
+    addTransmutationRecipe("pumpkin_melon", Blocks.PUMPKIN, Blocks.MELON_BLOCK.getDefaultState(), water_below);
     addTransmutationRecipe("pumpkin_cactus", Blocks.PUMPKIN, Blocks.CACTUS.getDefaultState(), (t, u, v) -> t.getBlockState(u.down()).getBlock() instanceof BlockSand);
+    addTransmutationRecipe("cocoa_to_carrot", Blocks.COCOA, new ItemStack(Items.CARROT));
+    addTransmutationRecipe("carrot_to_beetroot", Blocks.CARROTS, Blocks.BEETROOTS.getDefaultState(), (t, u, v) -> ((BlockCarrot) v.getBlock()).isMaxAge(v));
+    addTransmutationRecipe("carpet_to_lilypad", Blocks.CARPET, Blocks.WATERLILY.getDefaultState(), water_below);
+    addTransmutationRecipe("trapdoor_to_cobweb", Blocks.TRAPDOOR, Blocks.WEB.getDefaultState(), wool_below);
+    addTransmutationRecipe("redstone_to_vines", Blocks.REDSTONE_WIRE, new ItemStack(Blocks.VINE), leaves_below);
+    addTransmutationRecipe("melon_to_pumpkin", Blocks.MELON_BLOCK, Blocks.PUMPKIN.getDefaultState(), stone_below);
     StateUtil.ignoreState(Blocks.LEAVES, BlockLeaves.CHECK_DECAY);
     StateUtil.ignoreState(Blocks.LEAVES, BlockLeaves.DECAYABLE);
   }
@@ -367,8 +397,8 @@ public class ModRecipes {
     }
   }
 
-  public static void getAnimalHarvestRecipe(ResourceLocation location) {
-    harvestRecipes.getOrDefault(location, null);
+  public static AnimalHarvestRecipe getAnimalHarvestRecipe(ResourceLocation location) {
+    return harvestRecipes.getOrDefault(location, null);
   }
 
   public static AnimalHarvestRecipe getAnimalHarvestRecipe(Entity entity) {
@@ -391,6 +421,51 @@ public class ModRecipes {
       }
     }
     return harvestClasses;
+  }
+
+  public static void addAnimalHarvestFishRecipe(String name, ItemStack item, int weight) {
+    ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
+    if (getAnimalHarvestFishRecipe(rl) != null) {
+      return;
+    }
+    if (getAnimalHarvestFishRecipe(item) != null) {
+      return;
+    }
+    AnimalHarvestFishRecipe recipe = new AnimalHarvestFishRecipe(rl, item, weight);
+    fishRecipes.put(rl, recipe);
+  }
+
+  @Nullable
+  public static AnimalHarvestFishRecipe getAnimalHarvestFishRecipe(ItemStack item) {
+    for (AnimalHarvestFishRecipe recipe : fishRecipes.values()) {
+      if (ItemUtil.equalWithoutSize(recipe.getItemStack(), item)) {
+        return recipe;
+      }
+    }
+
+    return null;
+  }
+
+  public static AnimalHarvestFishRecipe getAnimalHarvestFishRecipe(ResourceLocation resource) {
+    return fishRecipes.get(resource);
+  }
+
+  public static boolean removeAnimalHarvestFishRecipe(ResourceLocation resource) {
+    return fishRecipes.remove(resource) != null;
+  }
+
+  public static boolean removeAnimalHarvestFishRecipe(ItemStack item) {
+    AnimalHarvestFishRecipe recipe = getAnimalHarvestFishRecipe(item);
+    if (recipe == null) return false;
+    return fishRecipes.remove(recipe.getRegistryName()) != null;
+  }
+
+  public static List<AnimalHarvestFishRecipe> getFishRecipes() {
+    return Lists.newArrayList(fishRecipes.values());
+  }
+
+  public static void clearFishRecipes() {
+    fishRecipes.clear();
   }
 
 
@@ -420,6 +495,13 @@ public class ModRecipes {
     addAnimalHarvestRecipe("frog", EntityFrog.class);
     addAnimalHarvestRecipe("owl", EntityOwl.class);
     addAnimalHarvestRecipe("sprout", EntitySprout.class);
+    addAnimalHarvestRecipe("lava_cat", EntityLavaCat.class);
+    addAnimalHarvestRecipe("silkworm", EntitySilkworm.class);
+    // Fish recipes
+    addAnimalHarvestFishRecipe("cod", new ItemStack(Items.FISH, 1, ItemFishFood.FishType.COD.getMetadata()), 60);
+    addAnimalHarvestFishRecipe("salmon", new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()), 25);
+    addAnimalHarvestFishRecipe("clownfish", new ItemStack(Items.FISH, 1, ItemFishFood.FishType.CLOWNFISH.getMetadata()), 2);
+    addAnimalHarvestFishRecipe("pufferfish", new ItemStack(Items.FISH, 1, ItemFishFood.FishType.PUFFERFISH.getMetadata()), 13);
   }
 
   public static void addRunicCarvingRecipe(RunicCarvingRecipe recipe) {
@@ -455,42 +537,55 @@ public class ModRecipes {
   }
 
   public static void addRunicShearRecipe(RunicShearRecipe recipe) {
-    for (RunicShearRecipe runicShearRecipe : runicShearRecipes.values()) {
-      if (recipe.isBlockRecipe() && recipe.getBlock() == runicShearRecipe.getBlock()) {
-        System.out.println("Recipe is already registered with block - " + recipe.getBlock().getTranslationKey());
-        return;
-      } else if (recipe.isEntityRecipe() && recipe.getClazz() == runicShearRecipe.getClazz()) {
-        System.out.println("Recipe is already registered with entity - " + recipe.getClazz().getName());
-        return;
+    if (recipe instanceof RunicShearEntityRecipe) {
+      RunicShearEntityRecipe eRecipe = (RunicShearEntityRecipe) recipe;
+      for (RunicShearEntityRecipe entityRecipe : runicShearEntityRecipes.values()) {
+        if (entityRecipe.getClazz().equals(eRecipe.getClazz())) {
+          Roots.logger.error("RunicShearEntityRecipe duplicate found for class " + eRecipe.getClazz().getSimpleName());
+          return;
+        }
       }
-    }
-    if (recipe.isEntityRecipe()) {
-      runicShearEntityRecipes.put(recipe.getClazz(), recipe);
+
+      runicShearEntityRecipes.put(eRecipe.getRegistryName(), eRecipe);
     } else {
-      runicShearRecipes.put(recipe.getName(), recipe);
+      for (RunicShearRecipe blockRecipe : runicShearRecipes.values()) {
+        if (recipe.getBlock() == blockRecipe.getBlock()) {
+          Roots.logger.error("RunicShearRecipe duplicate found for block " + recipe.getBlock().getRegistryName());
+          return;
+        }
+      }
+
+      runicShearRecipes.put(recipe.getRegistryName(), recipe);
     }
   }
 
   public static RunicShearRecipe getRunicShearRecipe(Block block) {
     for (RunicShearRecipe recipe : runicShearRecipes.values()) {
-      if (recipe.isBlockRecipe() && recipe.getBlock() == block) {
+      if (recipe.getBlock() == block) {
         return recipe;
       }
     }
     return null;
   }
 
-  public static RunicShearRecipe getRunicShearRecipe(EntityLivingBase entity) {
-    return runicShearEntityRecipes.get(entity.getClass());
+  private static void generateEntityRecipes() {
+    generatedEntityRecipes = new HashMap<>();
+    for (RunicShearEntityRecipe recipe : runicShearEntityRecipes.values()) {
+      generatedEntityRecipes.put(recipe.getClazz(), recipe);
+    }
+  }
+
+
+  public static RunicShearEntityRecipe getRunicShearRecipe(EntityLivingBase entity) {
+    if (generatedEntityRecipes == null) {
+      generateEntityRecipes();
+    }
+    return generatedEntityRecipes.get(entity.getClass());
   }
 
   public static RunicShearRecipe getRunicShearRecipe(String name) {
-    for (RunicShearRecipe recipe : runicShearRecipes.values()) {
-      if (recipe.getName().equals(name)) {
-        return recipe;
-      }
-    }
-    return null;
+    ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
+    return runicShearRecipes.get(rl);
   }
 
   public static RunicShearRecipe getRunicShearRecipe(ItemStack stack) {
@@ -503,8 +598,8 @@ public class ModRecipes {
     return null;
   }
 
-  public static RunicShearRecipe getRunicShearEntityRecipe(ItemStack stack) {
-    for (RunicShearRecipe recipe : runicShearEntityRecipes.values()) {
+  public static RunicShearEntityRecipe getRunicShearEntityRecipe(ItemStack stack) {
+    for (RunicShearEntityRecipe recipe : runicShearEntityRecipes.values()) {
       if (ItemStack.areItemStacksEqual(recipe.getDrop(), stack)) {
         return recipe;
       }
@@ -514,7 +609,10 @@ public class ModRecipes {
   }
 
   public static Set<Class<? extends Entity>> getRunicShearEntities() {
-    return runicShearEntityRecipes.keySet();
+    if (generatedEntityRecipes == null) {
+      generateEntityRecipes();
+    }
+    return generatedEntityRecipes.keySet();
   }
 
   public static void addMortarRecipe(MortarRecipe recipe) {
@@ -675,12 +773,20 @@ public class ModRecipes {
     return runicCarvingRecipes;
   }
 
-  public static Map<String, RunicShearRecipe> getRunicShearRecipes() {
+  public static Map<ResourceLocation, RunicShearRecipe> getRunicShearRecipes() {
     return runicShearRecipes;
   }
 
-  public static Map<Class<? extends Entity>, RunicShearRecipe> getRunicShearEntityRecipes() {
+  public static Map<ResourceLocation, RunicShearEntityRecipe> getRunicShearEntityRecipes() {
     return runicShearEntityRecipes;
+  }
+
+  public static Map<Class<? extends Entity>, RunicShearEntityRecipe> getGeneratedEntityRecipes() {
+    if (generatedEntityRecipes == null) {
+      generateEntityRecipes();
+    }
+
+    return generatedEntityRecipes;
   }
 
   public static Map<String, PyreCraftingRecipe> getPyreCraftingRecipes() {
@@ -696,13 +802,19 @@ public class ModRecipes {
   }
 
   public static void initMortarRecipes() {
-    addMortarRecipe(new ItemStack(Items.DYE, 1, 12), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.carapace), 1, 1, 1, 1, 1, 1);
-    addMortarRecipe(new ItemStack(ModItems.flour), Ingredient.fromItem(Items.WHEAT), 1f, 1f, 0f, 1f, 1f, 0f);
-    addMortarRecipe(new ItemStack(ModItems.flour), Ingredient.fromItem(Items.POTATO), 1f, 1f, 0, 1f, 1f, 0f);
-    addMortarRecipe(new ItemStack(Items.DYE, 4, 15), Ingredient.fromItem(Items.BONE), 0f, 0f, 0f, 0f, 0f, 0f);
+    addMortarRecipe(new ItemStack(Items.DYE, 1, EnumDyeColor.LIGHT_BLUE.getDyeDamage()), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.carapace), 1, 1, 1, 1, 1, 1);
+    addMortarRecipe(new ItemStack(Items.DYE, 1, EnumDyeColor.ORANGE.getDyeDamage()), new OreIngredient("cropCarrot"), 1, 1, 1, 1, 1, 1);
+    addMortarRecipe(new ItemStack(ModItems.flour), new OreIngredient("cropWheat"), 1f, 1f, 0f, 1f, 1f, 0f);
+    addMortarRecipe(new ItemStack(ModItems.flour), new OreIngredient("cropPotato"), 1f, 1f, 0, 1f, 1f, 0f);
+    addMortarRecipe(new ItemStack(Items.DYE, 4, 15), new OreIngredient("bone"), 0f, 0f, 0f, 0f, 0f, 0f);
     addMortarRecipe(new ItemStack(Items.SUGAR, 2), new OreIngredient("sugarcane"), 0f, 0f, 0f, 1f, 1f, 1f);
+    addMortarRecipe(new ItemStack(Items.BLAZE_POWDER, 5), Ingredient.fromItem(Items.BLAZE_ROD), 1, 1, 1, 1, 1, 1);
+    addMortarRecipe(new ItemStack(Items.STRING, 4), new OreIngredient("wool"), 1, 1, 1, 1, 1, 1);
+    addMortarRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.silk_thread, 5), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.silk_cocoon), 0, 0, 0, 0, 0, 0);
+    addMortarRecipe(new ItemStack(Items.MAGMA_CREAM, 2), Ingredient.fromItem(Item.getItemFromBlock(Blocks.MAGMA)), 1, 0, 0, 1, 0, 0);
+    addMortarRecipe(new ItemStack(Items.FLINT), Ingredient.fromItem(Item.getItemFromBlock(Blocks.GRAVEL)), 1, 1, 1, 1, 1, 1);
 
-    for (Metal metal : Metal.values()) {
+    for (Material metal : Materials.getMaterials()) {
       if (!metal.isEnabled()) continue;
 
       Item metalDust = metal.getDust();
@@ -713,10 +825,15 @@ public class ModRecipes {
       addMortarRecipe(new ItemStack(metalDust), new OreIngredient("ingot" + metal.getOredictNameSuffix()), 82f / 255f, 92f / 255f, 114f / 255f, 160f / 255f, 167f / 255f, 183f / 255f);
     }
 
-    addMortarRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.gold_dust), new OreIngredient("ingotGold"), 82f / 255f, 92f / 255f, 114f / 255f, 160f / 255f, 167f / 255f, 183f / 255f);
-    addMortarRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.iron_dust), new OreIngredient("ingotIron"), 82f / 255f, 92f / 255f, 114f / 255f, 160f / 255f, 167f / 255f, 183f / 255f);
+    if (ConfigManager.gold.enableDusts) {
+      addMortarRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.gold_dust), new OreIngredient("ingotGold"), 82f / 255f, 92f / 255f, 114f / 255f, 160f / 255f, 167f / 255f, 183f / 255f);
+    }
+    if (ConfigManager.iron.enableDusts) {
+      addMortarRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.iron_dust), new OreIngredient("ingotIron"), 82f / 255f, 92f / 255f, 114f / 255f, 160f / 255f, 167f / 255f, 183f / 255f);
+    }
 
     addMortarRecipe(new ItemStack(ModItems.petals), new OreIngredient("allFlowers"), 1f, 0f, 0f, 0f, 1f, 0f);
+    addMortarRecipe(new ItemStack(ModItems.petals, 2), new OreIngredient("allTallFlowers"), 1f, 0f, 0f, 0f, 1f, 0f);
     addMortarRecipe(new ItemStack(ModItems.runic_dust), new OreIngredient("runestone"), 0f, 0f, 1f, 60 / 255f, 0f, 1f);
   }
 
@@ -735,8 +852,6 @@ public class ModRecipes {
     initFlowerRecipes();
 
     GameRegistry.addSmelting(ModItems.flour, new ItemStack(Items.BREAD), 0.125f);
-    GameRegistry.addSmelting(epicsquid.mysticalworld.init.ModItems.iron_dust, new ItemStack(Items.IRON_INGOT), 0.125f);
-    GameRegistry.addSmelting(epicsquid.mysticalworld.init.ModItems.gold_dust, new ItemStack(Items.GOLD_INGOT), 0.125f);
     GameRegistry.addSmelting(ModItems.seeds, new ItemStack(ModItems.cooked_seeds), 0.05f);
     GameRegistry.addSmelting(ModItems.pereskia_bulb, new ItemStack(ModItems.cooked_pereskia), 0.125f);
 
@@ -748,11 +863,11 @@ public class ModRecipes {
   private static void initCraftingRecipes() {
     addCraftingRecipe("infernal_bulb",
         new PyreCraftingRecipe(new ItemStack(ModItems.infernal_bulb, 3), 1).addIngredients(
-            new ItemStack(Items.NETHER_WART),
-            new ItemStack(ItemBlock.getItemFromBlock(Blocks.MAGMA)),
-            new ItemStack(Items.BLAZE_ROD),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(Items.GUNPOWDER)));
+            new OreIngredient("wildroot"),
+            new ItemStack(Items.MAGMA_CREAM),
+            new OreIngredient("gunpowder"),
+            new ItemStack(Items.LAVA_BUCKET),
+            new OreIngredient("dustGlowstone")));
 
     addCraftingRecipe("dewgonia",
         new PyreCraftingRecipe(new ItemStack(ModItems.dewgonia, 3), 1).addIngredients(
@@ -802,12 +917,108 @@ public class ModRecipes {
             new ItemStack(Blocks.RED_MUSHROOM),
             new ItemStack(Blocks.BROWN_MUSHROOM)));
 
+    // Cooking!!!
     addCraftingRecipe("seeds", new PyreCraftingRecipe(new ItemStack(ModItems.cooked_seeds, 5), 1).addIngredients(
         new ItemStack(ModItems.seeds),
         new ItemStack(ModItems.seeds),
         new ItemStack(ModItems.seeds),
         new ItemStack(ModItems.seeds),
         new ItemStack(ModItems.seeds)).setBurnTime(20));
+
+    addCraftingRecipe("potato", new PyreCraftingRecipe(new ItemStack(Items.BAKED_POTATO, 5), 1).addIngredients(
+        new ItemStack(Items.POTATO),
+        new ItemStack(Items.POTATO),
+        new ItemStack(Items.POTATO),
+        new ItemStack(Items.POTATO),
+        new ItemStack(Items.POTATO)).setBurnTime(300));
+
+    addCraftingRecipe("chicken", new PyreCraftingRecipe(new ItemStack(Items.COOKED_CHICKEN, 5), 1).addIngredients(
+        new ItemStack(Items.CHICKEN),
+        new ItemStack(Items.CHICKEN),
+        new ItemStack(Items.CHICKEN),
+        new ItemStack(Items.CHICKEN),
+        new ItemStack(Items.CHICKEN)).setBurnTime(300));
+
+    Ingredient acceptableFish = Ingredient.fromStacks(new ItemStack(Items.FISH, 1, ItemFishFood.FishType.CLOWNFISH.getMetadata()), new ItemStack(Items.FISH, 1, ItemFishFood.FishType.COD.getMetadata()));
+
+    addCraftingRecipe("fish", new PyreCraftingRecipe(new ItemStack(Items.COOKED_FISH, 5), 1).addIngredients(
+        acceptableFish,
+        acceptableFish,
+        acceptableFish,
+        acceptableFish,
+        acceptableFish).setBurnTime(300));
+
+    addCraftingRecipe("salmon", new PyreCraftingRecipe(new ItemStack(Items.COOKED_FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()), 1).addIngredients(
+        new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
+        new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
+        new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
+        new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
+        new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata())).setBurnTime(300));
+
+    addCraftingRecipe("steak", new PyreCraftingRecipe(new ItemStack(Items.COOKED_BEEF, 5), 1).addIngredients(
+        new ItemStack(Items.BEEF),
+        new ItemStack(Items.BEEF),
+        new ItemStack(Items.BEEF),
+        new ItemStack(Items.BEEF),
+        new ItemStack(Items.BEEF)).setBurnTime(300));
+
+    addCraftingRecipe("mutton", new PyreCraftingRecipe(new ItemStack(Items.COOKED_MUTTON, 5), 1).addIngredients(
+        new ItemStack(Items.MUTTON),
+        new ItemStack(Items.MUTTON),
+        new ItemStack(Items.MUTTON),
+        new ItemStack(Items.MUTTON),
+        new ItemStack(Items.MUTTON)).setBurnTime(300));
+
+    addCraftingRecipe("porkchop", new PyreCraftingRecipe(new ItemStack(Items.COOKED_PORKCHOP, 5), 1).addIngredients(
+        new ItemStack(Items.PORKCHOP),
+        new ItemStack(Items.PORKCHOP),
+        new ItemStack(Items.PORKCHOP),
+        new ItemStack(Items.PORKCHOP),
+        new ItemStack(Items.PORKCHOP)).setBurnTime(300));
+
+    addCraftingRecipe("rabbit", new PyreCraftingRecipe(new ItemStack(Items.COOKED_RABBIT, 5), 1).addIngredients(
+        new ItemStack(Items.RABBIT),
+        new ItemStack(Items.RABBIT),
+        new ItemStack(Items.RABBIT),
+        new ItemStack(Items.RABBIT),
+        new ItemStack(Items.RABBIT)).setBurnTime(300));
+
+    addCraftingRecipe("pereskia", new PyreCraftingRecipe(new ItemStack(ModItems.cooked_pereskia, 5), 1).addIngredients(
+        new ItemStack(ModItems.pereskia_bulb),
+        new ItemStack(ModItems.pereskia_bulb),
+        new ItemStack(ModItems.pereskia_bulb),
+        new ItemStack(ModItems.pereskia_bulb),
+        new ItemStack(ModItems.pereskia_bulb)).setBurnTime(300));
+
+    addCraftingRecipe("aubergine", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_aubergine, 5), 1).addIngredients(
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine)).setBurnTime(300));
+
+    addCraftingRecipe("squid", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_squid, 10), 1).addIngredients(
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.raw_squid),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.raw_squid),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.raw_squid),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.raw_squid),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.raw_squid)).setBurnTime(300));
+
+    addCraftingRecipe("venison", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_venison, 5), 1).addIngredients(
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.venison),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.venison),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.venison),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.venison),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.venison)).setBurnTime(300));
+
+    addCraftingRecipe("apple", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_apple, 5), 1).addIngredients(
+        new ItemStack(Items.APPLE),
+        new ItemStack(Items.APPLE),
+        new ItemStack(Items.APPLE),
+        new ItemStack(Items.APPLE),
+        new ItemStack(Items.APPLE)).setBurnTime(300));
+
+    // END OF COOKING
 
     addCraftingRecipe("unending_bowl",
         new FeyCraftingRecipe(new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.unending_bowl)), 2).addIngredients(
@@ -818,7 +1029,7 @@ public class ModRecipes {
             new ItemStack(ModItems.dewgonia)));
 
     addCraftingRecipe("elemental_soil",
-        new FeyCraftingRecipe(new ItemStack(ModBlocks.elemental_soil), 1).addIngredients(
+        new FeyCraftingRecipe(new ItemStack(ModBlocks.elemental_soil), 4).addIngredients(
             new ItemStack(Blocks.DIRT),
             new ItemStack(ModItems.terra_moss),
             new ItemStack(ModItems.wildroot),

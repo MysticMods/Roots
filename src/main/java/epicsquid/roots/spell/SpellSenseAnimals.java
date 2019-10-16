@@ -1,14 +1,11 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.MobEffects;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextFormatting;
@@ -23,7 +20,7 @@ public class SpellSenseAnimals extends SpellBase {
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 50);
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 25);
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 50);
-  public static Property<Integer> PROP_DURATION = new Property<>("duration", 20 * 20);
+  public static Property<Integer> PROP_DURATION = new Property<>("duration", 40 * 20);
 
   public static String spellName = "spell_sense_animals";
   public static SpellSenseAnimals instance = new SpellSenseAnimals(spellName);
@@ -36,10 +33,10 @@ public class SpellSenseAnimals extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
         new OreIngredient("cropCarrot"),
-        new ItemStack(Blocks.RED_FLOWER),
+        new ItemStack(Items.LEAD),
         new ItemStack(ModItems.wildewheet),
         new OreIngredient("cropWheat"),
         new OreIngredient("nuggetGold")
@@ -48,15 +45,16 @@ public class SpellSenseAnimals extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
-    List<EntityAnimal> animals = Util.getEntitiesWithinRadius(caster.getEntityWorld(), EntityAnimal.class, caster.getPosition(), radius_x, radius_y, radius_z);
-    for (EntityAnimal animal : animals) {
-      animal.addPotionEffect(new PotionEffect(MobEffects.GLOWING, duration, 0));
-    }
+    caster.addPotionEffect(new PotionEffect(ModPotions.animal_sense, duration, 0, false, false));
     return true;
   }
 
+  public int[] getRadius() {
+    return new int[]{radius_x, radius_y, radius_z};
+  }
+
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
     this.duration = properties.getProperty(PROP_DURATION);

@@ -1,7 +1,7 @@
 package epicsquid.roots.capability.runic_shears;
 
 import epicsquid.roots.Roots;
-import net.minecraft.nbt.NBTTagLong;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
@@ -11,8 +11,8 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 import javax.annotation.Nonnull;
 
-public class RunicShearsCapabilityProvider implements ICapabilityProvider, ICapabilitySerializable<NBTTagLong> {
-  public static final ResourceLocation IDENTIFIER = new ResourceLocation(Roots.MODID, "runic_shears_capability");
+public class RunicShearsCapabilityProvider implements ICapabilityProvider, ICapabilitySerializable<NBTTagCompound> {
+  public static final ResourceLocation IDENTIFIER = new ResourceLocation(Roots.MODID, "new_runic_shears_capability");
 
   @CapabilityInject(RunicShearsCapability.class)
   public static final Capability<RunicShearsCapability> RUNIC_SHEARS_CAPABILITY = injected();
@@ -20,12 +20,12 @@ public class RunicShearsCapabilityProvider implements ICapabilityProvider, ICapa
   private final RunicShearsCapability instance = RUNIC_SHEARS_CAPABILITY.getDefaultInstance();
 
   @Override
-  public NBTTagLong serializeNBT() {
-    return (NBTTagLong) RUNIC_SHEARS_CAPABILITY.getStorage().writeNBT(RUNIC_SHEARS_CAPABILITY, this.instance, null);
+  public NBTTagCompound serializeNBT() {
+    return (NBTTagCompound) RUNIC_SHEARS_CAPABILITY.getStorage().writeNBT(RUNIC_SHEARS_CAPABILITY, this.instance, null);
   }
 
   @Override
-  public void deserializeNBT(NBTTagLong nbt) {
+  public void deserializeNBT(NBTTagCompound nbt) {
     RUNIC_SHEARS_CAPABILITY.getStorage().readNBT(RUNIC_SHEARS_CAPABILITY, this.instance, null, nbt);
   }
 

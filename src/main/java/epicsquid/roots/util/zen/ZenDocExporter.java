@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 // Licensed with the Apache License and used with permission
 // https://github.com/codetaylor/athenaeum/tree/master/src/main/java/com/codetaylor/mc/athenaeum/tools
 
+@SuppressWarnings("unchecked")
 public class ZenDocExporter {
 
   public void export(Path path, Class[] classes) {
@@ -47,7 +48,7 @@ public class ZenDocExporter {
 
       // --- Import
 
-      out.append("```java").append("\n");
+      out.append("```zenscript").append("\n");
       out.append("import ").append(zenClass.value()).append(";").append("\n");
       out.append("```").append("\n");
       out.append("\n");
@@ -147,7 +148,7 @@ public class ZenDocExporter {
     Class<?> returnType = method.getReturnType();
     String returnTypeString = this.getSimpleTypeString(returnType);
 
-    out.append("```java").append("\n");
+    out.append("```zenscript").append("\n");
 
     /*if (Modifier.isStatic(method.getModifiers())) {
       out.append("static ");
@@ -253,11 +254,11 @@ public class ZenDocExporter {
 
     List<MethodAnnotationPair> methodList = new ArrayList<>();
 
-    for (int j = 0; j < methods.length; j++) {
-      ZenDocMethod annotation = methods[j].getDeclaredAnnotation(ZenDocMethod.class);
+    for (Method method : methods) {
+      ZenDocMethod annotation = method.getDeclaredAnnotation(ZenDocMethod.class);
 
       if (annotation != null) {
-        methodList.add(new MethodAnnotationPair(methods[j], annotation));
+        methodList.add(new MethodAnnotationPair(method, annotation));
       }
     }
 

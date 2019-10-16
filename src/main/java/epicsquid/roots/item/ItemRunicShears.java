@@ -4,16 +4,22 @@ import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.proxy.ClientProxy;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapability;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityProvider;
 import epicsquid.roots.config.GeneralConfig;
+import epicsquid.roots.config.MossConfig;
+import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.network.fx.MessageRunicShearsAOEFX;
 import epicsquid.roots.network.fx.MessageRunicShearsFX;
+import epicsquid.roots.recipe.RunicShearEntityRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
-import epicsquid.mysticallib.util.ItemUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,11 +27,14 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -35,11 +44,12 @@ import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class ItemRunicShears extends ItemBase {
-
+  public static AxisAlignedBB bounding = new AxisAlignedBB(-2, -2, -2, 2, 2, 2);
   private Random random;
 
   public ItemRunicShears(@Nonnull String name) {
@@ -51,9 +61,56 @@ public class ItemRunicShears extends ItemBase {
   }
 
   @Override
+  public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+    Item item = repair.getItem();
+    if (item instanceof ItemBlock) {
+      Block block = ((ItemBlock) item).getBlock();
+      return ModBlocks.runestoneBlocks.contains(block);
+    }
+
+    return false;
+  }
+
+  @Override
   @Nonnull
   public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-    Block block = world.getBlockState(pos).getBlock();
+    IBlockState state = world.getBlockState(pos);
+    Block block = state.getBlock();
+    if (block == ModBlocks.imbuer) {
+      return EnumActionResult.PASS;
+    }
+
+    IBlockState moss = MossConfig.scrapeResult(state);
+    IBlockState moss2 = MossConfig.mossConversion(state);
+
+    if (moss != null || moss2 != null) {
+      if (!world.isRemote) {
+        AxisAlignedBB bounds = bounding.offset(pos);
+        BlockPos start = new BlockPos(bounds.minX, bounds.minY, bounds.minZ);
+        BlockPos stop = new BlockPos(bounds.maxX, bounds.maxY, bounds.maxZ);
+        List<BlockPos> affectedBlocks = new ArrayList<>();
+        for (BlockPos.MutableBlockPos p : BlockPos.getAllInBoxMutable(start, stop)) {
+          IBlockState pState = world.getBlockState(p);
+          IBlockState m = MossConfig.scrapeResult(pState);
+          if (m != null) {
+            affectedBlocks.add(p.toImmutable());
+            world.setBlockState(p, m);
+            world.scheduleBlockUpdate(p, m.getBlock(), 1, m.getBlock().tickRate(world));
+            ItemUtil.spawnItem(world, player.getPosition().add(0, 1, 0), new ItemStack(ModItems.terra_moss));
+          }
+        }
+        if (!affectedBlocks.isEmpty()) {
+          if (!player.capabilities.isCreativeMode) {
+            player.getHeldItem(hand).damageItem(1 + Math.min(6, random.nextInt(affectedBlocks.size())), player);
+          }
+          MessageRunicShearsAOEFX message = new MessageRunicShearsAOEFX(affectedBlocks);
+          PacketHandler.sendToAllTracking(message, world.provider.getDimension(), pos);
+        }
+      }
+      player.swingArm(hand);
+      world.playSound(null, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
+      return EnumActionResult.SUCCESS;
+    }
 
     RunicShearRecipe recipe = ModRecipes.getRunicShearRecipe(block);
 
@@ -74,13 +131,13 @@ public class ItemRunicShears extends ItemBase {
           player.getHeldItem(hand).damageItem(1, player);
         }
         player.swingArm(hand);
+        world.playSound(null, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
       } else {
         for (int i = 0; i < 50; i++) {
           ClientProxy.particleRenderer.spawnParticle(world, Util.getLowercaseClassName(ParticleGlitter.class), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, random.nextDouble() * 0.1 * (random.nextDouble() > 0.5 ? -1 : 1), random.nextDouble() * 0.1 * (random.nextDouble() > 0.5 ? -1 : 1),
               random.nextDouble() * 0.1 * (random.nextDouble() > 0.5 ? -1 : 1), 120, 0.855 + random.nextDouble() * 0.05, 0.710, 0.943 - random.nextDouble() * 0.05, 1, random.nextDouble() + 0.5, random.nextDouble() * 2);
         }
       }
-      world.playSound(player, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
     }
     return EnumActionResult.SUCCESS;
   }
@@ -118,7 +175,7 @@ public class ItemRunicShears extends ItemBase {
 
     if (entity.isChild()) return true;
 
-    RunicShearRecipe recipe = ModRecipes.getRunicShearRecipe(entity);
+    RunicShearEntityRecipe recipe = ModRecipes.getRunicShearRecipe(entity);
     if (recipe != null) {
       player.swingArm(hand);
       if (!world.isRemote) {

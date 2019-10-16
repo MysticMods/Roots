@@ -1,11 +1,11 @@
 package epicsquid.roots.ritual;
 
+import epicsquid.roots.Roots;
 import epicsquid.roots.block.BlockBonfire;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
-import epicsquid.roots.recipe.conditions.Condition;
-import epicsquid.roots.recipe.conditions.ConditionItems;
+import epicsquid.roots.ritual.conditions.Condition;
+import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.tileentity.TileEntityBonfire;
-import epicsquid.roots.util.types.NoDefaultProperty;
 import epicsquid.roots.util.types.PropertyTable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,8 +26,6 @@ public abstract class RitualBase {
   protected static int OFFERTORY_RADIUS = 6;
   protected static Random random = new Random();
 
-  public static NoDefaultProperty<Integer> PROP_DURATION = new NoDefaultProperty<>("duration", Integer.class);
-
   protected PropertyTable properties = new PropertyTable();
 
   private List<Condition> conditions = new ArrayList<>();
@@ -45,7 +43,6 @@ public abstract class RitualBase {
     this.name = name;
     this.disabled = disabled;
     this.duration = 0;
-    this.properties.addProperties(PROP_DURATION);
   }
 
   public String getFormat() {
@@ -95,18 +92,19 @@ public abstract class RitualBase {
     return false;
   }
 
-  public boolean canFire(TileEntityBonfire tileEntityBonfire, EntityPlayer player) {
+  public boolean canFire(TileEntityBonfire tileEntityBonfire, @Nullable EntityPlayer player) {
     IBlockState state = tileEntityBonfire.getWorld().getBlockState(tileEntityBonfire.getPos());
     if (state.getValue(BlockBonfire.BURNING)) {
       return false;
     }
 
+    boolean success = true;
     for (Condition condition : this.conditions) {
-      if (!condition.checkCondition(tileEntityBonfire, player)) {
-        return false;
+      if (!condition.check(tileEntityBonfire, player)) {
+        success = false;
       }
     }
-    return true;
+    return success;
   }
 
   public abstract EntityRitualBase doEffect(World world, BlockPos pos);
@@ -173,9 +171,27 @@ public abstract class RitualBase {
     return Collections.EMPTY_LIST;
   }
 
-  public abstract void finalise ();
+  public void finalise () {
+    doFinalise();
+    validateProperties();
+  }
+
+  public abstract void doFinalise();
+
+  public void validateProperties () {
+    List<String> values = properties.finalise();
+    if (!values.isEmpty()) {
+      StringJoiner join = new StringJoiner(",");
+      values.forEach(join::add);
+      Roots.logger.error("Ritual '" + name + "' property table has the following keys inserted but not fetched: |" + join.toString() + "|");
+    }
+  }
 
   public boolean finalised () {
     return finalised;
+  }
+
+  public PropertyTable getProperties() {
+    return properties;
   }
 }

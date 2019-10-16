@@ -1,7 +1,6 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageRadianceBeamFX;
@@ -9,7 +8,6 @@ import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -26,8 +24,8 @@ import java.util.List;
 public class SpellRadiance extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(10);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("pereskia", 0.5));
-  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("infernal_bulb", 0.25));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("cloud_berry", 0.5));
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("pereskia", 0.25));
   public static Property<Float> PROP_DISTANCE = new Property<>("distance", 32f);
   public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(5f);
   public static Property<Float> PROP_UNDEAD_DAMAGE = new Property<>("undead_damage", 3f);
@@ -48,9 +46,9 @@ public class SpellRadiance extends SpellBase {
   public void init () {
     addIngredients(
         new OreIngredient("dustGlowstone"),
-        new ItemStack(Blocks.MAGMA),
+        new OreIngredient("torch"),
         new ItemStack(Items.DYE, 1, 11),
-        new ItemStack(ModItems.infernal_bulb),
+        new ItemStack(ModItems.cloud_berry),
         new ItemStack(ModItems.pereskia)
     );
   }
@@ -151,7 +149,7 @@ public class SpellRadiance extends SpellBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
     this.distance = properties.getProperty(PROP_DISTANCE);

@@ -2,13 +2,12 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.mechanics.Harvest;
 import epicsquid.roots.network.fx.MessageHarvestCompleteFX;
 import epicsquid.roots.spell.modules.SpellModule;
-import epicsquid.roots.mechanics.Harvest;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -42,9 +41,9 @@ public class SpellHarvest extends SpellBase {
   public void init () {
     addIngredients(
         new ItemStack(Items.GOLDEN_HOE),
-        new ItemStack(ModItems.spirit_herb),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),
         new ItemStack(ModItems.wildewheet),
-        new ItemStack(ModItems.terra_moss),
+        new ItemStack(Items.BEETROOT_SEEDS),
         new ItemStack(Items.WHEAT_SEEDS)
     );
   }
@@ -136,7 +135,7 @@ public class SpellHarvest extends SpellBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
     this.radius_x = properties.getProperty(PROP_RADIUS_X);

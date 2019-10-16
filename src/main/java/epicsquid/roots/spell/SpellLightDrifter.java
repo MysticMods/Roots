@@ -1,14 +1,18 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageLightDrifterFX;
 import epicsquid.roots.network.fx.MessageLightDrifterSync;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.Constants;
 import epicsquid.roots.util.types.Property;
+import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameType;
@@ -17,11 +21,11 @@ import net.minecraftforge.oredict.OreIngredient;
 import java.util.List;
 
 public class SpellLightDrifter extends SpellBase {
-  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(400);
+  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(250);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("pereskia", 0.5));
-  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("moonglow_leaf", 0.25));
-  public static Property<Integer> PROP_DURATION = new Property<>("duration", 280);
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("wildewheet", 0.25));
+  public static Property<Integer> PROP_DURATION = new Property<>("duration", 200);
 
   public static String spellName = "spell_light_drifter";
   public static SpellLightDrifter instance = new SpellLightDrifter(spellName);
@@ -34,13 +38,13 @@ public class SpellLightDrifter extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
         new OreIngredient("enderpearl"),
         new ItemStack(ModItems.moonglow_leaf),
-        new OreIngredient("string"),
-        new ItemStack(ModItems.moonglow_leaf),
-        new ItemStack(ModItems.pereskia)
+        new ItemStack(Item.getItemFromBlock(Blocks.DOUBLE_PLANT), 1, BlockDoublePlant.EnumPlantType.SUNFLOWER.getMeta()),
+        new ItemStack(Items.DYE, 1, EnumDyeColor.YELLOW.getDyeDamage()),
+        new ItemStack(ModItems.wildewheet)
     );
   }
 
@@ -67,7 +71,7 @@ public class SpellLightDrifter extends SpellBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
     this.duration = properties.getProperty(PROP_DURATION);

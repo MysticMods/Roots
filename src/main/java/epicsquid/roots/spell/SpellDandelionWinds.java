@@ -1,7 +1,6 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageDandelionCastFX;
 import epicsquid.roots.spell.modules.SpellModule;
@@ -9,7 +8,6 @@ import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
@@ -36,11 +34,11 @@ public class SpellDandelionWinds extends SpellBase {
   @Override
   public void init () {
     addIngredients(
-        new ItemStack(ModItems.petals),
         new ItemStack(Blocks.YELLOW_FLOWER),
-        new ItemStack(Items.SNOWBALL),
+        new OreIngredient("treeLeaves"),
+        new ItemStack(ModItems.runic_dust),
         new ItemStack(ModItems.cloud_berry),
-        new OreIngredient("cropWheat")
+        new ItemStack(ModItems.terra_spores)
     );
   }
 
@@ -65,7 +63,7 @@ public class SpellDandelionWinds extends SpellBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
     this.distance = properties.getProperty(PROP_DISTANCE);

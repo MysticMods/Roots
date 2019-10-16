@@ -3,8 +3,7 @@ package epicsquid.roots.ritual;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualDivineProtection;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.recipe.conditions.ConditionItems;
-import epicsquid.roots.recipe.conditions.ConditionWorldTime;
+import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -14,18 +13,18 @@ import net.minecraft.world.World;
 
 public class RitualDivineProtection extends RitualBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(1200);
-  public static Property<Boolean> PROP_RAIN = new Property<>("rain", true);
-  public static Property<Boolean> PROP_TIME = new Property<>("time", true);
-  public static Property<Integer> PROP_NIGHT_REDUCTION = new Property<>("night_reduction", 1);
-  public static Property<Integer> PROP_DAY_EXTENSION = new Property<>("day_extension", 3);
-  public static Property<Float> PROP_CONSECRATION_DAMAGE = new Property<>("consecration_damage", 4.0f);
-  public static Property<Float> PROP_FIRE_DAMAGE = new Property<>("fire_damage", 4.0f);
-  public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 2);
+  public static Property<Boolean> PROP_RAIN = new Property<>("rain", true).setDescription("whether or not rain should be disabled");
+  public static Property<Boolean> PROP_TIME = new Property<>("time", true).setDescription("whether or not time should be accelerated or slowed");
+  public static Property<Integer> PROP_NIGHT_REDUCTION = new Property<>("night_reduction", 1).setDescription("the number of additional ticks (per tick) added to night");
+  public static Property<Integer> PROP_DAY_EXTENSION = new Property<>("day_extension", 3).setDescription("the chance (1 in X) that ticks will be subtracted, lengthening the day");
+  public static Property<Float> PROP_CONSECRATION_DAMAGE = new Property<>("consecration_damage", 4.0f).setDescription("damage done to undead creatures if Consecration is installed");
+  public static Property<Float> PROP_FIRE_DAMAGE = new Property<>("fire_damage", 4.0f).setDescription("amount of fire damage done to undead creatures");
+  public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 2).setDescription("duration in SECONDS undead creatures will be set on fire for");
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15);
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 15);
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15);
-  public static Property<Integer> PROP_DAY_LENGTH = new Property<>("day_length", 24000);
-  public static Property<Integer> PROP_NIGHT_THRESHOLD = new Property<>("night_threshold", 12000);
+  public static Property<Integer> PROP_DAY_LENGTH = new Property<>("day_length", 24000).setDescription("the length of the day for use in calculating addition/subtraction (modify if you have mods that adjust day/night length");
+  public static Property<Integer> PROP_NIGHT_THRESHOLD = new Property<>("night_threshold", 12000).setDescription("the point at which day transitions into night (modify if you have mods that adjust day/night length");
 
   public boolean rain, time;
   public float radius_x, radius_y, radius_z, consecration_damage, fire_damage;
@@ -37,7 +36,7 @@ public class RitualDivineProtection extends RitualBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addCondition(new ConditionItems(
         new ItemStack(ModItems.pereskia),
         new ItemStack(ModItems.cloud_berry),
@@ -51,7 +50,7 @@ public class RitualDivineProtection extends RitualBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     duration = properties.getProperty(PROP_DURATION);
     rain = properties.getProperty(PROP_RAIN);
     time = properties.getProperty(PROP_TIME);

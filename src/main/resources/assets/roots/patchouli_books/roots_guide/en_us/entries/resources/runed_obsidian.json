@@ -1,0 +1,35 @@
+{
+  "name": "Runed Obsidian",
+  "icon": "roots:runed_obsidian",
+  "category": "resources",
+  "advancement": "roots:runestone",
+  "secret": true,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "roots:runed_obsidian",
+      "link_recipe": true,
+      "text": "Reinforced with the strength of obsidian, this runestone is extraordinarily strong: it's capable of withstanding the blows of almost any creature, and can also be used in standing stones."
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "runed_obsidian"
+    },
+    {
+      "type": "crafting",
+      "anchor": "chiseled",
+      "recipe": "roots:runed_obsidian_brick",
+      "recipe2": "roots:runed_obsidian_chiseled"
+    },
+    {
+      "type": "crafting",
+      "recipe": "roots:runed_obsidian_brick_alt"
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "resources/runestone"
+      ]
+    }
+  ]
+}

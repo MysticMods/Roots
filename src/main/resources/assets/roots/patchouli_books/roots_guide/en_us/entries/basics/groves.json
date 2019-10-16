@@ -26,10 +26,16 @@
         "name": "Grove Stone",
         "multiblock": {
           "mapping": {
-            "0": "roots:grove_stone"
+            "0": "roots:grove_stone",
+            "M": "roots:grove_stone[half=middle]",
+            "T": "roots:grove_stone[half=top]"
           },
           "pattern": [
-            [" ", "0", " "]
+            [" ", "T", " "],
+            [" ", "M", " "],
+            [" ", "0", " "],
+            [" ", " ", " "],
+            [" ", " ", " "]
           ]
         },
         "enable_visualize": false,

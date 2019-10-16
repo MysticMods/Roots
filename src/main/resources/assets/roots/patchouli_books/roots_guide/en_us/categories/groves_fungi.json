@@ -1,7 +1,6 @@
 {
   "name": "Fungal Grove",
-  "sortnum" : 2,
+  "sortnum" : 8,
   "description": "",
-  "icon": "roots:bafflecap",
-  "parent": "groves"
+  "icon": "roots:fungi_grove_stone"
 }

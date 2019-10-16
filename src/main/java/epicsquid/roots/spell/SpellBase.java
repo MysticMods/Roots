@@ -2,6 +2,7 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.init.HerbRegistry;
@@ -15,15 +16,13 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public abstract class SpellBase {
@@ -42,6 +41,8 @@ public abstract class SpellBase {
   private Object2DoubleOpenHashMap<Herb> costs = new Object2DoubleOpenHashMap<>();
   private List<Ingredient> ingredients = new ArrayList<>();
   private List<SpellModule> acceptedModules = new ArrayList<>();
+  private float[] firstColours;
+  private float[] secondColours;
 
   public enum EnumCastType {
     INSTANTANEOUS, CONTINUOUS
@@ -56,6 +57,16 @@ public abstract class SpellBase {
     this.green2 = g2;
     this.blue2 = b2;
     this.textColor = textColor;
+    this.firstColours = new float[]{r1, g1, b1};
+    this.secondColours = new float[]{r2, g2, b2};
+  }
+
+  public float[] getFirstColours() {
+    return firstColours;
+  }
+
+  public float[] getSecondColours() {
+    return secondColours;
   }
 
   public abstract void init ();
@@ -106,7 +117,11 @@ public abstract class SpellBase {
         double r = PowderInventoryUtil.getPowderTotal(player, herb);
         matches = r >= d;
         if (!matches && !player.isCreative()) {
-          player.sendStatusMessage(new TextComponentTranslation("roots.info.pouch.no_herbs", new TextComponentTranslation(String.format("item.%s.name", herb.getName()))), true);
+          if (r == -1.0) {
+            player.sendStatusMessage(new TextComponentTranslation("roots.info.pouch.no_pouch").setStyle(new Style().setColor(TextFormatting.RED)), true);
+          } else {
+            player.sendStatusMessage(new TextComponentTranslation("roots.info.pouch.no_herbs", new TextComponentTranslation(String.format("item.%s.name", herb.getName()))), true);
+          }
         }
       }
     }
@@ -243,7 +258,7 @@ public abstract class SpellBase {
     return costs.keySet().stream().map((herb) -> new ItemStack(herb.getItem())).collect(Collectors.toList());
   }
 
-  public abstract void finalise ();
+  public abstract void doFinalise();
 
   @SuppressWarnings("unchecked")
   public void finaliseCosts () {
@@ -260,6 +275,21 @@ public abstract class SpellBase {
       }
     }
     this.finalised = true;
+  }
+
+  public void finalise () {
+    doFinalise();
+    finaliseCosts();
+    validateProperties();
+  }
+
+  public void validateProperties () {
+    List<String> values = properties.finalise();
+    if (!values.isEmpty()) {
+      StringJoiner join = new StringJoiner(",");
+      values.forEach(join::add);
+      Roots.logger.error("Spell '" + name + "' property table has the following keys inserted but not fetched: |" + join.toString() + "|");
+    }
   }
 
   public boolean finalised () {

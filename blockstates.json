@@ -1,0 +1,175 @@
+{
+  "directory": "src\\main\\resources\\assets\\roots\\blockstates",
+  "texture_base": "roots:blocks/",
+  "models": [
+    {
+      "type": "block",
+      "base": "baffle_cap_huge_stem"
+    },
+    {
+      "type": "block",
+      "base": "baffle_cap_huge_top"
+    },
+    {
+      "type": "block",
+      "base": "chiseled_runestone"
+    },
+    {
+      "type": "block",
+      "base": "elemental_soil"
+    },
+    {
+      "type": "block",
+      "base": "runestone"
+    },
+    {
+      "type": "button",
+      "base": "runestone"
+    },
+    {
+      "type": "double_slab",
+      "base": "runestone"
+    },
+    {
+      "type": "pressure_plate",
+      "base": "runestone"
+    },
+    {
+      "type": "slab",
+      "base": "runestone"
+    },
+    {
+      "type": "stairs",
+      "base": "runestone"
+    },
+    {
+      "type": "wall",
+      "base": "runestone"
+    },
+    {
+      "type": "block",
+      "base": "runestone_brick"
+    },
+    {
+      "type": "button",
+      "base": "runestone_brick"
+    },
+    {
+      "type": "double_slab",
+      "base": "runestone_brick"
+    },
+    {
+      "type": "pressure_plate",
+      "base": "runestone_brick"
+    },
+    {
+      "type": "slab",
+      "base": "runestone_brick"
+    },
+    {
+      "type": "stairs",
+      "base": "runestone_brick"
+    },
+    {
+      "type": "wall",
+      "base": "runestone_brick"
+    },
+    {
+      "type": "block",
+      "base": "runestone_brick_alt"
+    },
+    {
+      "type": "button",
+      "base": "runestone_brick_alt"
+    },
+    {
+      "type": "double_slab",
+      "base": "runestone_brick_alt"
+    },
+    {
+      "type": "pressure_plate",
+      "base": "runestone_brick_alt"
+    },
+    {
+      "type": "slab",
+      "base": "runestone_brick_alt"
+    },
+    {
+      "type": "stairs",
+      "base": "runestone_brick_alt"
+    },
+    {
+      "type": "wall",
+      "base": "runestone_brick_alt"
+    },
+    {
+      "type": "block",
+      "base": "wildwood_planks",
+      "texture": "wildwood_planks"
+    },
+    {
+      "type": "button",
+      "base": "wildwood",
+      "texture": "wildwood_planks"
+    },
+    {
+      "type": "double_slab",
+      "base": "wildwood",
+      "texture": "wildwood_planks"
+    },
+    {
+      "type": "pressure_plate",
+      "base": "wildwood",
+      "texture": "wildwood_planks"
+    },
+    {
+      "type": "slab",
+      "base": "wildwood",
+      "texture": "wildwood_planks"
+    },
+    {
+      "type": "stairs",
+      "base": "wildwood",
+      "texture": "wildwood_planks"
+    },
+    {
+      "type": "wall",
+      "base": "wildwood",
+      "texture": "wildwood_planks"
+    },
+    {
+      "type": "fence",
+      "base": "wildwood",
+      "texture": "wildwood_planks"
+    },
+    {
+      "type": "fence_gate",
+      "base": "wildwood",
+      "texture": "wildwood_planks"
+    },
+    {
+      "type": "block",
+      "base": "runestone_trample"
+    },
+    {
+      "type": "block",
+      "base": "wildwood_leaves"
+    },
+    {
+      "type": "block",
+      "base": "runed_obsidian_brick"
+    },
+    {
+      "type": "block",
+      "base": "runed_obsidian_brick_alt"
+    },
+    {
+      "type": "block",
+      "base": "runed_obsidian"
+    },
+    {
+      "type": "block",
+      "base": "chiseled_runed_obsidian"
+    }
+  ]
+}

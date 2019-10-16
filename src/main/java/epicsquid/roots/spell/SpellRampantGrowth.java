@@ -1,7 +1,6 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
@@ -9,11 +8,11 @@ import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 import java.util.Random;
@@ -43,9 +42,9 @@ public class SpellRampantGrowth extends SpellBase {
   @Override
   public void init () {
     addIngredients(
-        new ItemStack(Blocks.SAPLING, 1, 5),
+        new OreIngredient("treeSapling"),
         new ItemStack(Items.GOLDEN_APPLE),
-        new ItemStack(Blocks.SAPLING, 1, 4),
+        new OreIngredient("treeSapling"),
         new ItemStack(ModItems.spirit_herb),
         new ItemStack(ModItems.pereskia)
     );
@@ -71,7 +70,7 @@ public class SpellRampantGrowth extends SpellBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
     this.radius_x = properties.getProperty(PROP_RADIUS_X);

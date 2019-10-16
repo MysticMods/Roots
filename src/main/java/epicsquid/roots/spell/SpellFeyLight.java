@@ -1,13 +1,14 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.recipe.factories.OreFallbackIngredient;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
+import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
@@ -33,13 +34,13 @@ public class SpellFeyLight extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
+        new ItemStack(Item.getItemFromBlock(Blocks.LIT_PUMPKIN)),
+        new ItemStack(Item.getItemFromBlock(Blocks.DOUBLE_PLANT), 1, BlockDoublePlant.EnumPlantType.SUNFLOWER.getMeta()),
         new ItemStack(ModItems.cloud_berry),
-        new OreFallbackIngredient("dustGold", "gunpowder"),
-        new ItemStack(Items.GUNPOWDER),
-        new ItemStack(ModItems.bark_birch),
-        new ItemStack(Items.FLINT_AND_STEEL)
+        new ItemStack(ModItems.bark_acacia),
+        new ItemStack(ModItems.cloud_berry)
     );
   }
 
@@ -61,7 +62,7 @@ public class SpellFeyLight extends SpellBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
   }

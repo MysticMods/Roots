@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Prevents injury to those near the ritual.$(br2)This ritual requires standing stones."
+      "text": "Prevents injury to those near the ritual.$(br2)$(standing_stones) $(l:rituals/ritual_warding_protection#multiblock)This ritual requires standing stones.$()"
     },
     {
       "type": "pyre_template",
@@ -15,6 +15,7 @@
     },
     {
       "type": "multiblock",
+      "anchor": "multiblock",
       "multiblock": {
         "mapping": {
           "0": "roots:bonfire",

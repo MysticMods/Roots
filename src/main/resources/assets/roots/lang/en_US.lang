@@ -42,6 +42,8 @@ tile.thatch.name=Thatch
 tile.bonfire.name=Pyre
 tile.reinforced_bonfire.name=Reinforced Pyre
 tile.runed_obsidian.name=Runed Obsidian
+tile.runed_obsidian_brick.name=Runed Obsidian Brick
+tile.runed_obsidian_brick_alt.name=Runed Obsidian Brick
 tile.chiseled_runed_obsidian.name=Chiseled Runed Obsidian
 tile.runestone.name=Runestone
 tile.runestone_brick.name=Runestone Brick
@@ -60,6 +62,7 @@ tile.wildwood_trapdoor.name=Wildwood Trapdoor
 tile.wildwood_button.name=Wildwood Button
 tile.wildwood_pressure_plate.name=Wildwood Pressure Plate
 tile.wildwood_fence.name=Wildwood Fence
+tile.wildwood_fence_gate.name=Wildwood Fence Gate
 tile.wildwood_slab.name=Wildwood Slab
 tile.wildwood_wall.name=Wildwood Wall
 tile.runestone_button.name=Runestone Button
@@ -72,6 +75,11 @@ tile.wildwood_sapling.name=Wildwood Sapling
 tile.wildwood_ladder.name=Wildwood Ladder
 tile.grove_stone.name=Grove Stone
 tile.fairy_grove_stone.name=Fairy Grove Stone
+tile.fungi_grove_stone.name=Fungal Grove Stone
+tile.natural_grove_stone.name=Natural Grove Stone
+tile.wild_grove_stone.name=Wild Grove Stone
+tile.twilight_grove_stone.name=Twilight Grove Stone
+tile.elemental_grove_stone.name=Elemental Grove Stone
 tile.fey_crafter.name=Fey Crafter
 tile.fey_light.name=Fey Light
 tile.fairy_house_brown.name=Fairy House
@@ -94,6 +102,7 @@ roots.info.staff.slot_and_spell=Selected Slot (%d) has spell: %s
 roots.info.staff.no_slots=Your staff has no room for new spells!
 roots.info.staff.empty_slot=That staff slot is already empty.
 roots.info.pouch.no_herbs=You don't have enough %s in your component pouch!
+roots.info.pouch.no_pouch=You need a component pouch with your herbs stored inside to cast spells!
 roots.info.pyre.repeat1=Sneak-Right-Click
 roots.info.pyre.repeat2=with empty hand
 roots.info.pyre.repeat3=to repeat ritual.
@@ -154,6 +163,13 @@ roots.ritual.ritual_flower_growth.name=Flower Growth
 roots.ritual.ritual_transmutation.name=Transmutation
 roots.ritual.ritual_gathering.name=Gathering
 
+roots.ritual.condition.items=Failed to start ritual: invalid items.
+roots.ritual.condition.standing_stones=Failed to start ritual: requires %s.
+roots.ritual.condition.standing_stones.types=%d of %d-high stones
+roots.ritual.condition.trees=Failed to start ritual: invalid trees, requires %s.
+roots.ritual.condition.trees.types=%d of %s.
+roots.ritual.condition.invalid=Failed to start ritual: unknown reason
+
 roots.keybinds.group=Roots
 roots.keybinds.pouch=Open Pouch
 roots.keybinds.quiver=Open Quiver
@@ -185,6 +201,7 @@ item.ritual_transmutation.name=Ritual: Transmutation
 item.ritual_gathering.name=Ritual: Gathering
 item.grove_fairy_icon.name=Fairy Grove
 item.grove_fairy_text.name=Fairy Grove
+item.fey_fire.name=Fey Fire
 
 #Knifes
 item.wood_knife.name=Wooden Knife
@@ -312,6 +329,7 @@ tile.terran_soil.effect=Increases the yield of plants grown on it.
 
 # JEI
 container.roots.runic_shears.name=Runic Shearing
+container.roots.runic_shears_entity.name=Runic Entity Shearing
 container.roots.runic_carving.name=Runic Carving
 container.roots.ritual_crafting.name=Pyre Crafting Ritual
 container.roots.mortar_and_pestle.name=Mortar and Pestle
@@ -320,7 +338,6 @@ container.roots.fey_crafting.name=Fey Crafting
 container.roots.spell_costs.name=Spell Costs
 container.roots.spell_modifiers.name=Spell Modifiers
 container.roots.bark_carving.name=Bark Carving
-container.roots.runic_shears_entity.name=Runic Shearing Entities
 container.roots.terra_moss.name=Moss Scraping
 jei.roots.terra_moss.desc=Scraped from moss cobblestone with a knife. Cobblestone infused with terra spores will grow moss when adjacent to water.
 jei.roots.terra_spores.desc=Dropped from broken tall grass; used on cobblestone adjacent water grows sportes, turning it into moss cobblestone.
@@ -333,7 +350,7 @@ jei.roots.elemental_soil_fire.desc=Created by tossing a piece of Elemental Soil 
 jei.roots.elemental_soil_water.desc=Created by tossing a piece of Elemental Soil into a pool of water and waiting a few seconds.
 jei.roots.elemental_soil_air.desc=Created by dropping a piece of Elemental Soil onto a surface closer to the sky, and unobscured from it.
 jei.roots.elemental_soil_earth.desc=Created by dropping a piece of Elemental Soil onto a surface covered from the sky and in the depth's of the ground.
-
+jei.roots.runic_shears.cooldown=Item can be obtained every %d seconds.
 # Quiver
 roots.quiver.picked_up_arrow=Retrieved arrows.
 roots.quiver.quiver_full=Your quiver is full.
@@ -376,4 +393,6 @@ roots.ritual.transmutation.birch_jungle_leaves=Obtained through the Ritual of Tr
 roots.ritual.transmutation.pumpkin_melon=Obtained through the Ritual of Transmutation. Pumpkins with water or flowing water below them will transform into melon blocks.
 roots.ritual.transmutation.pumpkin_cactus=Obtained through the Ritual of Transmutation. Pumpkins planted upon sand will turn into cactuses.
 
-jei.roots.fey_leather.source.desc=Obtained by reaching through the planes when using Runic Shears on an entity that normally drops leather. This is a gift willingly given, but it is not an infinite source.
+# CraftTweaker commands
+roots.commands.dump.desc=§2/ct properties_roots [mode]\n§3Dumps the specified property table(s) to the log.
+roots.commands.dump.usage=Usage: ct properties_roots [mode]\nModes: all | ritual | spell

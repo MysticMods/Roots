@@ -1,13 +1,14 @@
 package epicsquid.roots.spell;
 
 import epicsquid.roots.entity.spell.EntityThornTrap;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
+import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
@@ -40,9 +41,9 @@ public class SpellRoseThorns extends SpellBase {
   public void init () {
     addIngredients(
         new OreIngredient("blockCactus"),
-        new ItemStack(Blocks.DOUBLE_PLANT, 1, 4),
+        new ItemStack(Blocks.DOUBLE_PLANT, 1, BlockDoublePlant.EnumPlantType.ROSE.getMeta()),
         new OreIngredient("bone"),
-        new ItemStack(Items.FERMENTED_SPIDER_EYE),
+        new ItemStack(Items.DYE, 1, EnumDyeColor.RED.getDyeDamage()),
         new ItemStack(ModItems.terra_moss)
     );
   }
@@ -62,7 +63,7 @@ public class SpellRoseThorns extends SpellBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
     damage = properties.getProperty(PROP_DAMAGE);

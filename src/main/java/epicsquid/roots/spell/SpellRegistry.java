@@ -89,6 +89,5 @@ public class SpellRegistry {
 
   public static void finalise () {
     spellRegistry.values().forEach(SpellBase::finalise);
-    spellRegistry.values().forEach(SpellBase::finaliseCosts);
   }
 }

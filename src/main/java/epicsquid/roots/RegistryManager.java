@@ -6,16 +6,13 @@ import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticallib.event.RegisterParticleEvent;
 import epicsquid.mysticallib.event.RegisterWorldGenEvent;
 import epicsquid.roots.block.BlockMark;
-import epicsquid.roots.potion.PotionFreeze;
 import epicsquid.roots.init.*;
 import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.network.PacketHandler;
-import epicsquid.roots.potion.PotionGeas;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -23,7 +20,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
-@Mod.EventBusSubscriber(modid=Roots.MODID)
 public class RegistryManager {
 
   @SubscribeEvent
@@ -35,7 +31,6 @@ public class RegistryManager {
     ModItems.registerItems(event);
 
     ModEntities.registerMobs();
-    ModEntities.registerMobSpawn();
     PacketHandler.registerMessages();
   }
 

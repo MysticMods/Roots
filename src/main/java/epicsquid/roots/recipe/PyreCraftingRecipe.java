@@ -1,13 +1,14 @@
 package epicsquid.roots.recipe;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import epicsquid.mysticallib.util.ListUtil;
+import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.items.IItemHandlerModifiable;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PyreCraftingRecipe {
   private List<Ingredient> ingredients = new ArrayList<>();
@@ -85,6 +86,6 @@ public class PyreCraftingRecipe {
     return ingredients;
   }
 
-  public void postCraft(ItemStack output, IItemHandlerModifiable handler) {
+  public void postCraft(ItemStack output, IItemHandlerModifiable handler, TileEntityBonfire bonfire) {
   }
 }

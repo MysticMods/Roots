@@ -3,13 +3,23 @@ package epicsquid.roots.init;
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.entity.RenderNull;
 import epicsquid.roots.Roots;
-import epicsquid.roots.entity.EntityFairy;
+import epicsquid.roots.entity.fairy.EntityFairy;
+import epicsquid.roots.entity.fairy.render.RenderFairy;
 import epicsquid.roots.entity.projectile.EntityFlare;
-import epicsquid.roots.entity.render.RenderPetalShell;
 import epicsquid.roots.entity.ritual.*;
-import epicsquid.roots.entity.spell.*;
-import epicsquid.roots.entity.render.RenderFairy;
+import epicsquid.roots.entity.spell.EntityBoost;
+import epicsquid.roots.entity.spell.EntityFireJet;
+import epicsquid.roots.entity.spell.EntityThornTrap;
+import epicsquid.roots.entity.spell.EntityTimeStop;
+import epicsquid.roots.entity.wild.EntityWhiteStag;
+import epicsquid.roots.entity.wild.render.RenderWhiteStag;
 import epicsquid.roots.proxy.ClientProxy;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.storage.loot.LootTableList;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class ModEntities {
 
@@ -26,55 +36,56 @@ public class ModEntities {
    * LibRegistry.registerEntityRenderer(Entity.class, new RenderEntity.Factory());
    */
   public static void registerMobs() {
-    //Spell & Ritual Entities
+    // Helper entities
     LibRegistry.registerEntity(EntityFireJet.class);
     LibRegistry.registerEntity(EntityThornTrap.class);
-    LibRegistry.registerEntity(EntityPetalShell.class);
     LibRegistry.registerEntity(EntityTimeStop.class);
     LibRegistry.registerEntity(EntityBoost.class);
-
-    LibRegistry.registerEntity(EntityRitualHealingAura.class);
-    LibRegistry.registerEntity(EntityRitualHeavyStorms.class);
-    LibRegistry.registerEntity(EntityRitualDivineProtection.class);
-    LibRegistry.registerEntity(EntityRitualFireStorm.class);
     LibRegistry.registerEntity(EntityFlare.class);
-    LibRegistry.registerEntity(EntityRitualSpreadingForest.class);
-    LibRegistry.registerEntity(EntityRitualWindwall.class);
-    LibRegistry.registerEntity(EntityRitualWardingProtection.class);
-    //LibRegistry.registerEntity(EntitySpawnItem.class);
-    LibRegistry.registerEntity(EntityRitualOvergrowth.class);
-    LibRegistry.registerEntity(EntityRitualFrostLands.class);
-    LibRegistry.registerEntity(EntityRitualFlowerGrowth.class);
 
+    // Actual entities
     LibRegistry.registerEntity(EntityFairy.class, 0xf542e3, 0xdb7fa1);
+    LibRegistry.registerEntity(EntityWhiteStag.class, 0xe0caba, 0x473124);
+
+    // Ritual entities
+    List<Class<? extends Entity>> ritualClasses = Arrays.asList(
+        EntityRitualAnimalHarvest.class,
+        EntityRitualDivineProtection.class,
+        EntityRitualFireStorm.class,
+        EntityRitualFlowerGrowth.class,
+        EntityRitualFrostLands.class,
+        EntityRitualGathering.class,
+        EntityRitualGermination.class,
+        EntityRitualHealingAura.class,
+        EntityRitualHeavyStorms.class,
+        EntityRitualOvergrowth.class,
+        EntityRitualPurity.class,
+        EntityRitualSpreadingForest.class,
+        EntityRitualTransmutation.class,
+        EntityRitualWardingProtection.class,
+        EntityRitualWildGrowth.class,
+        EntityRitualWindwall.class
+    );
+
+    ritualClasses.forEach(LibRegistry::registerEntity);
 
     if (Roots.proxy instanceof ClientProxy) {
       LibRegistry.registerEntityRenderer(EntityFireJet.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityThornTrap.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityPetalShell.class, new RenderPetalShell.Factory());
       LibRegistry.registerEntityRenderer(EntityTimeStop.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityBoost.class, new RenderNull.Factory());
-
-      LibRegistry.registerEntityRenderer(EntityRitualHealingAura.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityRitualHeavyStorms.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityRitualDivineProtection.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityRitualFireStorm.class, new RenderNull.Factory());
       LibRegistry.registerEntityRenderer(EntityFlare.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityRitualSpreadingForest.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityRitualWindwall.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityRitualWardingProtection.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityRitualOvergrowth.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityRitualFrostLands.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityRitualFlowerGrowth.class, new RenderNull.Factory());
 
       LibRegistry.registerEntityRenderer(EntityFairy.class, new RenderFairy.Factory());
+      LibRegistry.registerEntityRenderer(EntityWhiteStag.class, new RenderWhiteStag.Factory());
+
+      ritualClasses.forEach(c -> LibRegistry.registerEntityRenderer(c, new RenderNull.Factory()));
     }
   }
 
-  /**
-   * Registers the spawns of a mob in the world
-   */
-  public static void registerMobSpawn() {
+  public static List<ResourceLocation> LOOT_TABLES = Arrays.asList(EntityFairy.LOOT_TABLE, EntityWhiteStag.LOOT_TABLE);
 
+  public static void registerLootTables() {
+    LOOT_TABLES.forEach(LootTableList::register);
   }
 }

@@ -12,7 +12,7 @@ public class RitualRegistry {
 
   public static Map<String, RitualBase> ritualRegistry = new HashMap<>();
 
-  public static RitualBase ritual_life, ritual_heavy_storms, ritual_divine_protection, ritual_fire_storm, ritual_spreading_forest, ritual_windwall,
+  public static RitualBase ritual_healing_aura, ritual_heavy_storms, ritual_divine_protection, ritual_fire_storm, ritual_spreading_forest, ritual_windwall,
       ritual_warding_protection, ritual_germination, ritual_purity, ritual_frost_lands, ritual_animal_harvest, ritual_summon_creatures,
       ritual_wild_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation, ritual_gathering;
 
@@ -44,19 +44,20 @@ public class RitualRegistry {
     addRitual(ritual_divine_protection = new RitualDivineProtection("ritual_divine_protection", RitualConfig.disableRitualCategory.disableDivineProtection));
     addRitual(ritual_fire_storm = new RitualFireStorm("ritual_fire_storm", RitualConfig.disableRitualCategory.disableFireStorm));
     addRitual(ritual_flower_growth = new RitualFlowerGrowth("ritual_flower_growth", RitualConfig.disableRitualCategory.disableFlowerGrowth));
-    addRitual(ritual_frost_lands = new RitualFrostLands("ritual_frost_lands", 6400, RitualConfig.disableRitualCategory.disableFrostLands));
-    addRitual(ritual_gathering = new RitualGathering("ritual_gathering", 6000, RitualConfig.disableRitualCategory.disableGathering));
-    addRitual(ritual_germination = new RitualGermination("ritual_germination", 6400, RitualConfig.disableRitualCategory.disableNaturalAura));
-    addRitual(ritual_heavy_storms = new RitualHeavyStorms("ritual_heavy_storms", 2400, RitualConfig.disableRitualCategory.disableHeavyStorms));
-    addRitual(ritual_life = new RitualHealingAura("ritual_healing_aura", 800, RitualConfig.disableRitualCategory.disableHealingAura));
-    addRitual(ritual_overgrowth = new RitualOvergrowth("ritual_overgrowth", 4500, RitualConfig.disableRitualCategory.disableOvergrowth));
-    addRitual(ritual_purity = new RitualPurity("ritual_purity", 1200, RitualConfig.disableRitualCategory.disablePurity));
-    addRitual(ritual_spreading_forest = new RitualSpreadingForest("ritual_spreading_forest", 2400, RitualConfig.disableRitualCategory.disableNaturalGrowth));
+    addRitual(ritual_frost_lands = new RitualFrostLands("ritual_frost_lands", RitualConfig.disableRitualCategory.disableFrostLands));
+    addRitual(ritual_gathering = new RitualGathering("ritual_gathering", RitualConfig.disableRitualCategory.disableGathering));
+    addRitual(ritual_germination = new RitualGermination("ritual_germination", RitualConfig.disableRitualCategory.disableNaturalAura));
+    addRitual(ritual_healing_aura = new RitualHealingAura("ritual_healing_aura", RitualConfig.disableRitualCategory.disableHealingAura));
+    addRitual(ritual_heavy_storms = new RitualHeavyStorms("ritual_heavy_storms", RitualConfig.disableRitualCategory.disableHeavyStorms));
+    addRitual(ritual_overgrowth = new RitualOvergrowth("ritual_overgrowth", RitualConfig.disableRitualCategory.disableOvergrowth));
+    addRitual(ritual_purity = new RitualPurity("ritual_purity", RitualConfig.disableRitualCategory.disablePurity));
+    addRitual(ritual_spreading_forest = new RitualSpreadingForest("ritual_spreading_forest", RitualConfig.disableRitualCategory.disableNaturalGrowth));
+    // TODO:
     addRitual(ritual_summon_creatures = new RitualSummonCreatures("ritual_summon_creatures", 0, RitualConfig.disableRitualCategory.disableSummonCreatures));
-    addRitual(ritual_transmutation = new RitualTransmutation("ritual_transmutation", 2400, RitualConfig.disableRitualCategory.disableTransmutation));
-    addRitual(ritual_warding_protection = new RitualWardingProtection("ritual_warding_protection", 1200, RitualConfig.disableRitualCategory.disableWardingProtection));
-    addRitual(ritual_wild_growth = new RitualWildGrowth("ritual_wild_growth", 300, RitualConfig.disableRitualCategory.disableWildGrowth));
-    addRitual(ritual_windwall = new RitualWindwall("ritual_windwall", 3000, RitualConfig.disableRitualCategory.disableWindwall));
+    addRitual(ritual_transmutation = new RitualTransmutation("ritual_transmutation", RitualConfig.disableRitualCategory.disableTransmutation));
+    addRitual(ritual_warding_protection = new RitualWardingProtection("ritual_warding_protection", RitualConfig.disableRitualCategory.disableWardingProtection));
+    addRitual(ritual_wild_growth = new RitualWildGrowth("ritual_wild_growth", RitualConfig.disableRitualCategory.disableWildGrowth));
+    addRitual(ritual_windwall = new RitualWindwall("ritual_windwall", RitualConfig.disableRitualCategory.disableWindwall));
   }
 
   public static void init () {

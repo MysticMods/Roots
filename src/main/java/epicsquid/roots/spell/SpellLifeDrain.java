@@ -1,7 +1,6 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageLifeDrainAbsorbFX;
@@ -18,6 +17,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
@@ -49,11 +49,11 @@ public class SpellLifeDrain extends SpellBase {
   @Override
   public void init () {
     addIngredients(
-        new ItemStack(Items.BEETROOT),
         new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom)),
-        new ItemStack(Items.DYE, 1, 15),
-        new ItemStack(Items.ROTTEN_FLESH),
-        new ItemStack(ModItems.moonglow_leaf)
+        new ItemStack(ModItems.moonglow_leaf),
+        new ItemStack(ModItems.moonglow_seed),
+        new ItemStack(Items.IRON_SWORD),
+        new OreIngredient("blockCactus")
     );
   }
 
@@ -89,7 +89,7 @@ public class SpellLifeDrain extends SpellBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
     this.witherDamage = properties.getProperty(PROP_WITHER_DAMAGE);

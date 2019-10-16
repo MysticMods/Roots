@@ -1,13 +1,12 @@
 package epicsquid.roots.util.types;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
-  private final HashMap<Property<?>, Object> map = new HashMap<>();
-  private final HashMap<String, Property<?>> reverseMap = new HashMap<>();
+  private final Map<Property<?>, Object> map = new HashMap<>();
+  private final Map<String, Property<?>> reverseMap = new HashMap<>();
+  private final Set<String> fetchedKeys = new HashSet<>();
 
   public PropertyTable() {
   }
@@ -21,6 +20,7 @@ public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
 
   @SuppressWarnings("unchecked")
   public <T> Property<T> getProperty (String propertyName) {
+    fetchedKeys.add(propertyName);
     Property<?> prop = reverseMap.get(propertyName);
     if (prop == null) {
       return null;
@@ -30,6 +30,7 @@ public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
   }
 
   public <T> T getProperty (Property<T> property) {
+    fetchedKeys.add(property.getName());
     T result = property.cast(map.get(property));
     if (result == null && property.hasDefaultValue()) {
       return property.getDefaultValue();
@@ -78,6 +79,16 @@ public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
   @Override
   public Iterator<Map.Entry<String, Property<?>>> iterator() {
     return reverseMap.entrySet().iterator();
+  }
+
+  public List<String> finalise () {
+    ArrayList<String> result = new ArrayList<>();
+    for (String key : reverseMap.keySet()) {
+      if (!fetchedKeys.contains(key)) {
+        result.add(key);
+      }
+    }
+    return result;
   }
 }
 

@@ -1,7 +1,6 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageShatterBurstFX;
 import epicsquid.roots.spell.modules.SpellModule;
@@ -11,12 +10,14 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
@@ -38,9 +39,9 @@ public class SpellShatter extends SpellBase {
     addIngredients(
         new ItemStack(Items.FLINT),
         new ItemStack(Items.STONE_PICKAXE),
-        new ItemStack(Items.DYE, 1, 15),
         new ItemStack(ModItems.stalicripe),
-        new ItemStack(ModItems.stalicripe)
+        new ItemStack(Item.getItemFromBlock(Blocks.TNT)),
+        new OreIngredient("cobblestone")
     );
   }
 
@@ -92,7 +93,7 @@ public class SpellShatter extends SpellBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
   }

@@ -1,5 +1,21 @@
 {
-    "variants":{
-        "custom":  { "model": "roots:baffle_cap_huge_stem" }
-    }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "roots:blocks/baffle_cap_huge_stem"
+    },
+    "uvlock": true
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ],
+    "handlers": [
+      {}
+    ]
+  }
 }

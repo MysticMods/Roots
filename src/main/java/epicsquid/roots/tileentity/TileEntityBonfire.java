@@ -1,20 +1,20 @@
 package epicsquid.roots.tileentity;
 
 import epicsquid.mysticallib.tile.TileBase;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.block.BlockBonfire;
 import epicsquid.roots.config.RitualConfig;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualFrostLands;
-import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
+import epicsquid.roots.ritual.IColdRitual;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.ItemHandlerUtil;
-import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.util.XPUtil;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import net.minecraft.block.material.Material;
@@ -41,6 +41,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
@@ -180,7 +181,13 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         this.lastUsedIngredients = ritual.getIngredients();
         this.doBigFlame = true;
         for (int i = 0; i < inventory.getSlots(); i++) {
-          inventory.extractItem(i, 1, false);
+          ItemStack item = inventory.extractItem(i, 1, false);
+          if (!world.isRemote) {
+            if (item.getItem().hasContainerItem(item)) {
+              ItemStack container = ForgeHooks.getContainerItem(item);
+              ItemUtil.spawnItem(world, getPos().add(1, 0, -1), container);
+            }
+          }
         }
         markDirty();
         updatePacketViaState();
@@ -200,6 +207,12 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       for (int i = 0; i < inventory.getSlots(); i++) {
         ItemStack item = inventory.extractItem(i, 1, false);
         inventory_storage.insertItem(i, item, false);
+        if (!world.isRemote) {
+          if (item.getItem().hasContainerItem(item)) {
+            ItemStack container = ForgeHooks.getContainerItem(item);
+            ItemUtil.spawnItem(world, getPos().add(1, 0, -1), container);
+          }
+        }
       }
       markDirty();
       updatePacketViaState();
@@ -207,6 +220,16 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     }
 
     return false;
+  }
+
+  private void resolveLastIngredients() {
+    if (this.lastUsedIngredients == null || this.lastUsedIngredients.isEmpty()) {
+      if (this.lastRitualUsed != null) {
+        this.lastUsedIngredients = this.lastRitualUsed.getIngredients();
+      } else if (this.lastRecipeUsed != null) {
+        this.lastUsedIngredients = this.lastRecipeUsed.getIngredients();
+      }
+    }
   }
 
   @Override
@@ -232,16 +255,19 @@ public class TileEntityBonfire extends TileBase implements ITickable {
               if (stack.amount > 1000) {
                 stack.amount = 1000;
               }
-              cap.drain(stack, true);
-              if (heldItem.getItem() instanceof ItemBucket) {
-                player.setHeldItem(hand, new ItemStack(Items.BUCKET));
-                ((EntityPlayerMP) player).sendAllContents(player.openContainer, player.openContainer.getInventory());
+              if (!player.capabilities.isCreativeMode) {
+                cap.drain(stack, true);
+                if (heldItem.getItem() instanceof ItemBucket) {
+                  player.setHeldItem(hand, new ItemStack(Items.BUCKET));
+                  ((EntityPlayerMP) player).sendAllContents(player.openContainer, player.openContainer.getInventory());
+                }
               }
               break;
             }
           }
         }
       }
+      // TODO: Make this a configurable array of items or extensible classes
       if (heldItem.getItem() instanceof ItemFlintAndSteel) {
         heldItem.damageItem(1, player);
         return startRitual(player);
@@ -286,13 +312,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       }
     }
     if (player.isSneaking() && heldItem.isEmpty() && hand == EnumHand.MAIN_HAND) {
-      if (this.lastUsedIngredients == null) {
-        if (this.lastRitualUsed != null) {
-          this.lastUsedIngredients = this.lastRitualUsed.getIngredients();
-        } else if (this.lastRecipeUsed != null) {
-          this.lastUsedIngredients = this.lastRecipeUsed.getIngredients();
-        }
-      }
+      resolveLastIngredients();
       if (this.lastUsedIngredients != null) {
         if (player.capabilities.isCreativeMode) {
           int i = 0;
@@ -352,6 +372,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   @Override
   public void update() {
     // Potentially update from stuff below
+    resolveLastIngredients();
     if (lastUsedIngredients != null && !lastUsedIngredients.isEmpty() && ItemHandlerUtil.isEmpty(inventory_storage) && ItemHandlerUtil.isEmpty(inventory)) {
       TileEntity te = world.getTileEntity(getPos().down());
       if (te != null) {
@@ -404,7 +425,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     }
     //Spawn the Ignite flame particle
     if (world.isRemote && this.doBigFlame) {
-      if (ritualEntity instanceof EntityRitualFrostLands) {
+      if (ritualEntity instanceof IColdRitual) {
         for (int i = 0; i < 40; i++) {
           ParticleUtil.spawnParticleFiery(world, getPos().getX() + 0.125f + 0.75f * random.nextFloat(), getPos().getY() + 0.75f + 0.5f * random.nextFloat(),
               getPos().getZ() + 0.125f + 0.75f * random.nextFloat(), 0.03125f * (random.nextFloat() - 0.5f), 0.125f * random.nextFloat(),
@@ -437,10 +458,8 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         burning = false;
       }
 
-      if (burning && getTicker() % 20.0f == 0 && random.nextDouble() < 0.05) {
-        if (!(ritualEntity instanceof EntityRitualFrostLands)) {
-          meltNearbySnow();
-        }
+      if (burning && getTicker() % 20.0f == 0 && random.nextDouble() < 0.05 && !(ritualEntity instanceof IColdRitual)) {
+        meltNearbySnow();
       }
 
       if (!burning || burnTime == 0) {
@@ -472,7 +491,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         if (!world.isRemote && !this.craftingResult.isEmpty()) {
           ItemStack result = this.craftingResult.copy();
           if (this.lastRecipeUsed != null) {
-            this.lastRecipeUsed.postCraft(result, inventory_storage);
+            this.lastRecipeUsed.postCraft(result, inventory_storage, this);
           }
 
           EntityItem item = new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 1, getPos().getZ() + 0.5, result);
@@ -504,8 +523,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       if (!burning || burnTime == 0) {
         burnTime = 0;
         markDirty();
-        if (!world.isRemote)
+        if (!world.isRemote) {
           updatePacketViaState();
+        }
       }
     }
 

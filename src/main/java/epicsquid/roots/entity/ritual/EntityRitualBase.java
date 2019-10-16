@@ -1,7 +1,6 @@
 package epicsquid.roots.entity.ritual;
 
 import epicsquid.roots.block.BlockBonfire;
-import epicsquid.roots.util.types.PropertyTable;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -56,7 +55,7 @@ public abstract class EntityRitualBase extends Entity implements IRitualEntity {
     this.x = compound.getDouble("x");
     this.y = compound.getDouble("y");
     this.z = compound.getDouble("z");
-    this.setEntityId(compound.getInteger("id"));
+    this.setEntityId(compound.getInteger("entity_id"));
     this.setPosition(x, y, z);
     getDataManager().set(lifetime, compound.getInteger("lifetime"));
     getDataManager().setDirty(lifetime);
@@ -67,7 +66,7 @@ public abstract class EntityRitualBase extends Entity implements IRitualEntity {
     compound.setDouble("x", x);
     compound.setDouble("y", y);
     compound.setDouble("z", z);
-    compound.setInteger("id", getEntityId());
+    compound.setInteger("entity_id", getEntityId());
     compound.setInteger("lifetime", getDataManager().get(lifetime));
   }
 

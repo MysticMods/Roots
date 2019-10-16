@@ -1,16 +1,46 @@
 {
-    "variants": {
-        "facing=up,powered=false":    { "model": "roots:runestone_brick_button", "uvlock": true },
-        "facing=down,powered=false":  { "model": "roots:runestone_brick_button", "uvlock": true, "x": 180 },
-        "facing=east,powered=false":  { "model": "roots:runestone_brick_button", "uvlock": true, "x": 90, "y": 90 },
-        "facing=west,powered=false":  { "model": "roots:runestone_brick_button", "uvlock": true, "x": 90, "y": 270 },
-        "facing=south,powered=false": { "model": "roots:runestone_brick_button", "uvlock": true, "x": 90, "y": 180 },
-        "facing=north,powered=false": { "model": "roots:runestone_brick_button", "uvlock": true, "x": 90 },
-        "facing=up,powered=true":     { "model": "roots:runestone_brick_button_pressed", "uvlock": true },
-        "facing=down,powered=true":   { "model": "roots:runestone_brick_button_pressed", "uvlock": true, "x": 180 },
-        "facing=east,powered=true":   { "model": "roots:runestone_brick_button_pressed", "uvlock": true, "x": 90, "y": 90 },
-        "facing=west,powered=true":   { "model": "roots:runestone_brick_button_pressed", "uvlock": true, "x": 90, "y": 270 },
-        "facing=south,powered=true":  { "model": "roots:runestone_brick_button_pressed", "uvlock": true, "x": 90, "y": 180 },
-        "facing=north,powered=true":  { "model": "roots:runestone_brick_button_pressed", "uvlock": true, "x": 90 }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "button",
+    "textures": {
+      "texture": "roots:blocks/runestone_brick"
+    },
+    "uvlock": true
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "powered": {
+      "true": {
+        "model": "button_pressed"
+      },
+      "false": {}
+    },
+    "inventory": {
+      "model": "button_inventory"
+    },
+    "facing": {
+      "up": {},
+      "down": {
+        "x": 180
+      },
+      "east": {
+        "x": 90,
+        "y": 90
+      },
+      "west": {
+        "x": 90,
+        "y": 270
+      },
+      "south": {
+        "x": 90,
+        "y": 180
+      },
+      "north": {
+        "x": 90
+      }
     }
+  }
 }
+

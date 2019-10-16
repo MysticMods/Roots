@@ -1,6 +1,6 @@
 ### Examples
 
-```java
+```zenscript
 import mods.roots.RunicShears;
 
 // Creates a recipe that obtains nether wart from red nether bricks

@@ -30,7 +30,6 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public class BlockWildFire extends BlockFire implements IBlock, IModeledObject, ICustomModeledObject, INoCullBlock {
-  private boolean hasCustomModel = false;
   public @Nonnull
   String name;
 
@@ -41,14 +40,14 @@ public class BlockWildFire extends BlockFire implements IBlock, IModeledObject, 
     setRegistryName(LibRegistry.getActiveModid(), name);
     setLightOpacity(15);
     setLightLevel(1.0f);
-    this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, 0).withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, false).withProperty(SOUTH, false).withProperty(WEST, false).withProperty(UPPER, false));
+    this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, 0).withProperty(NORTH, false).withProperty(EAST, false).withProperty(SOUTH, false).withProperty(WEST, false).withProperty(UPPER, false));
     //itemBlock = new ItemBlock(this).setRegistryName(LibRegistry.getActiveModid(), name);
   }
 
   @Nullable
   @Override
   public Item getItemBlock() {
-    return null;
+    return null; //itemBlock;
   }
 
   @Override
@@ -109,6 +108,7 @@ public class BlockWildFire extends BlockFire implements IBlock, IModeledObject, 
 
   @Nullable
   @Override
+  @SuppressWarnings("deprecation")
   public net.minecraft.pathfinding.PathNodeType getAiPathNodeType(IBlockState state, IBlockAccess world, BlockPos pos) {
     return PathNodeType.DAMAGE_FIRE;
   }

@@ -17,7 +17,7 @@ public class FakeSpellRunicDust extends SpellBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
 
   }
 

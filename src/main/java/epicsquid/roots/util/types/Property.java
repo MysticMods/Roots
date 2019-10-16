@@ -6,6 +6,7 @@ public class Property<T> {
   protected Class<?> type;
   protected String name;
   protected T defaultValue;
+  protected String description = "unknown";
 
   public Property (String name, Class<?> clazz) {
     this.type = clazz;
@@ -17,6 +18,15 @@ public class Property<T> {
     this.type = defaultValue.getClass();
     this.name = name;
     this.defaultValue = defaultValue;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public Property<T> setDescription(String description) {
+    this.description = description;
+    return this;
   }
 
   public Class<?> getType() {

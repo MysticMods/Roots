@@ -1,7 +1,6 @@
 {
   "name": "Elemental Grove",
-  "sortnum" : 3,
+  "sortnum" : 9,
   "description": "",
-  "icon": "roots:infernal_bulb",
-  "parent": "groves"
+  "icon": "roots:elemental_grove_stone"
 }

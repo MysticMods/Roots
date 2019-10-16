@@ -1,12 +1,15 @@
 package epicsquid.roots.proxy;
 
+import crafttweaker.mc1120.commands.CTChatCommand;
 import epicsquid.roots.advancements.Advancements;
 import epicsquid.roots.command.CommandRitual;
 import epicsquid.roots.command.CommandRoots;
 import epicsquid.roots.command.CommandStaff;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.init.ModEntities;
 import epicsquid.roots.integration.chisel.RootsChisel;
 import epicsquid.roots.integration.consecration.Consecration;
+import epicsquid.roots.integration.crafttweaker.CommandProperties;
 import epicsquid.roots.integration.endercore.EndercoreHarvest;
 import epicsquid.roots.integration.harvest.HarvestIntegration;
 import epicsquid.roots.integration.jer.JERIntegration;
@@ -28,6 +31,7 @@ public class CommonProxy {
     RitualRegistry.preInit();
     OfferingUtil.init();
     RuneRegistry.init();
+    ModEntities.registerLootTables();
   }
 
   public void init(FMLInitializationEvent event) {
@@ -49,17 +53,20 @@ public class CommonProxy {
     }
     //MapGenStructureIO.registerStructureComponent(ComponentDruidHut.class, Roots.MODID + ":" + "druidhut");
     //VillagerRegistry.instance().registerVillageCreationHandler(new ComponentDruidHut.CreationHandler());
+    if (Loader.isModLoaded("crafttweaker")) {
+      CTChatCommand.registerCommand(new CommandProperties());
+    }
   }
 
   public void postInit(FMLPostInitializationEvent event) {
+    SpellRegistry.finalise();
+    RitualRegistry.finalise();
   }
 
   public void loadComplete(FMLLoadCompleteEvent event) {
     if (Loader.isModLoaded("harvest")) {
       HarvestIntegration.init();
     }
-    SpellRegistry.finalise();
-    RitualRegistry.finalise();
     Advancements.init();
   }
 

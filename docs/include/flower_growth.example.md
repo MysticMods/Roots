@@ -1,6 +1,6 @@
 ### Examples
 
-```java
+```zenscript
 import mods.roots.FlowerGrowth;
 
 // Removes the default recipe for dandelion

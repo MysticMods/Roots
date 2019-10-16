@@ -1,6 +1,6 @@
 ### Examples
 
-```java
+```zenscript
 import mods.roots.Pacifist;
 
 // Adds an enderman as a pacifist creature
