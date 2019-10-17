@@ -1,9 +1,7 @@
 package epicsquid.roots.integration.jei.ritual;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.integration.jei.JEIRootsPlugin;
-import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
@@ -19,7 +17,7 @@ public class RitualCategory implements IRecipeCategory<RitualWrapper> {
   private final IDrawable background;
 
   public RitualCategory(IGuiHelper helper) {
-    this.background = helper.createDrawable(new ResourceLocation(Roots.MODID, "textures/gui/jei/ritual_crafting.png"), 0, 0, 121, 76);
+    this.background = helper.createDrawable(new ResourceLocation(Roots.MODID, "textures/gui/jei/ritual_crafting.png"), 0, 0, 140, 76);
   }
 
   @Override
