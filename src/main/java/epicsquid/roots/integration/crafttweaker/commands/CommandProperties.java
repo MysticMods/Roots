@@ -1,4 +1,4 @@
-package epicsquid.roots.integration.crafttweaker;
+package epicsquid.roots.integration.crafttweaker.commands;
 
 import com.google.common.base.Enums;
 import com.google.common.base.Optional;

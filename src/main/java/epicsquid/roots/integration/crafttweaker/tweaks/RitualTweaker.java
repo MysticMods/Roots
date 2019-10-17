@@ -1,4 +1,4 @@
-package epicsquid.roots.integration.crafttweaker;
+package epicsquid.roots.integration.crafttweaker.tweaks;
 
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
@@ -6,6 +6,7 @@ import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
+import epicsquid.roots.integration.crafttweaker.Action;
 import epicsquid.roots.ritual.conditions.Condition;
 import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.ritual.RitualBase;
