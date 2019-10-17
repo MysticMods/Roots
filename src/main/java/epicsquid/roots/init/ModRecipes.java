@@ -42,17 +42,24 @@ import java.util.*;
 @SuppressWarnings({"unused", "WeakerAccess", "UnusedReturnValue"})
 public class ModRecipes {
 
+  // TODO: Registries
   private static Map<ResourceLocation, AnimalHarvestRecipe> harvestRecipes = new HashMap<>();
   private static Map<ResourceLocation, AnimalHarvestFishRecipe> fishRecipes = new HashMap<>();
   private static ObjectOpenHashSet<Class<? extends Entity>> harvestClasses = null;
   private static Map<ResourceLocation, TransmutationRecipe> transmutationRecipes = new HashMap<>();
+
+  // TODO: ResourceLocation-based
   private static List<MortarRecipe> mortarRecipes = new ArrayList<>();
   private static Map<String, PyreCraftingRecipe> pyreCraftingRecipes = new HashMap<>();
+
   private static Map<ResourceLocation, FeyCraftingRecipe> feyCraftingRecipes = new HashMap<>();
   private static Map<ResourceLocation, RunicShearRecipe> runicShearRecipes = new HashMap<>();
   private static Map<ResourceLocation, RunicShearEntityRecipe> runicShearEntityRecipes = new HashMap<>();
   private static Map<Class<? extends Entity>, RunicShearEntityRecipe> generatedEntityRecipes = null;
+
+  // TODO: Resource-location based
   private static List<RunicCarvingRecipe> runicCarvingRecipes = new ArrayList<>();
+
   private static Map<ResourceLocation, PacifistEntry> pacifistEntities = new HashMap<>();
   private static Map<Class<? extends Entity>, PacifistEntry> pacifistClasses = new HashMap<>();
   private static Map<ResourceLocation, BarkRecipe> barkRecipes = new HashMap<>();
@@ -87,6 +94,10 @@ public class ModRecipes {
       pacifistEntities.remove(name);
       pacifistClasses.remove(entry.getEntityClass());
     }
+  }
+
+  public static Map<ResourceLocation, PacifistEntry> getPacifistEntities() {
+    return pacifistEntities;
   }
 
   public static void initPacifistEntities() {
@@ -142,6 +153,10 @@ public class ModRecipes {
     if (flowerRecipes.isEmpty()) return null;
 
     return Lists.newArrayList(flowerRecipes.values()).get(Util.rand.nextInt(Math.max(1, flowerRecipes.size())));
+  }
+
+  public static Map<ResourceLocation, FlowerRecipe> getFlowerRecipes () {
+    return flowerRecipes;
   }
 
   public static void initFlowerRecipes() {
@@ -206,6 +221,10 @@ public class ModRecipes {
 
   public static Collection<BarkRecipe> getBarkRecipes() {
     return barkRecipes.values();
+  }
+
+  public static Map<ResourceLocation, BarkRecipe> getBarkRecipeMap () {
+    return barkRecipes;
   }
 
   public static boolean removeBarkRecipe(ItemStack stack) {
@@ -395,6 +414,14 @@ public class ModRecipes {
         harvestClasses = null;
       }
     }
+  }
+
+  public static Map<ResourceLocation, AnimalHarvestRecipe> getAnimalHarvestRecipes () {
+    return harvestRecipes;
+  }
+
+  public static Map<ResourceLocation, AnimalHarvestFishRecipe> getAnimalHarvestFishRecipes () {
+    return fishRecipes;
   }
 
   public static AnimalHarvestRecipe getAnimalHarvestRecipe(ResourceLocation location) {

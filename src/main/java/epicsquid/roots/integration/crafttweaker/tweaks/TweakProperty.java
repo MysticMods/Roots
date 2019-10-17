@@ -1,4 +1,4 @@
-package epicsquid.roots.integration.crafttweaker;
+package epicsquid.roots.integration.crafttweaker.tweaks;
 
 import crafttweaker.annotations.ZenRegister;
 import epicsquid.roots.Roots;
