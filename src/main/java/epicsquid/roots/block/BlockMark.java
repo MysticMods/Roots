@@ -4,12 +4,10 @@ import epicsquid.mysticallib.block.BlockBase;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -23,7 +21,8 @@ import java.util.Random;
 public class BlockMark extends BlockBase {
 
     public static final PropertyDirection FACING = PropertyDirection.create("facing");
-    public static final PropertyEnum<EnumDyeColor> COLOR = PropertyEnum.create("color", EnumDyeColor.class);
+
+    //public static final PropertyEnum<EnumDyeColor> COLOR = PropertyEnum.create("color", EnumDyeColor.class);
 
     public BlockMark(@Nonnull String name) {
         super(Material.GRASS, SoundType.CLOTH, 0F, name);
@@ -142,7 +141,8 @@ public class BlockMark extends BlockBase {
 
         @Override
         public int colorMultiplier(@Nonnull IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) {
-            return state.getValue(COLOR).getColorValue();
+            //return state.getValue(COLOR).getColorValue();
+            return 0;
         }
     }
 }

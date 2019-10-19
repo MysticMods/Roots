@@ -61,7 +61,7 @@ public class SpellScatter extends SpellBase {
         ItemSeeds  seeds = (ItemSeeds) caster.getHeldItemOffhand().getItem();
         IBlockState plant = seeds.getPlant(caster.world, pos);
 
-        if(canPlacePlant(caster.world, plant, pos, seeds)/* && caster.world.getBlockState(pos.up()) == Blocks.AIR*/)
+        if(canPlacePlant(caster.world, plant, pos, seeds) && caster.world.isAirBlock(pos.up()))
         {
           caster.world.setBlockState(pos.up(), plant);
 

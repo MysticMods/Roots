@@ -19,16 +19,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-import static epicsquid.roots.block.BlockMark.COLOR;
 import static epicsquid.roots.block.BlockMark.FACING;
-
-/*************************************************
- * Author: Davoleo
- * Date / Hour: 19/09/2019 / 21:48
- * Class: SpellMark
- * Project: Mystic Mods
- * Copyright - © - Davoleo - 2019
- **************************************************/
 
 public class SpellMark extends SpellBase {
 
@@ -60,11 +51,11 @@ public class SpellMark extends SpellBase {
     public boolean cast(EntityPlayer player, List<SpellModule> modules) {
         World world = player.world;
         RayTraceResult result = SpellFeyLight.instance.rayTrace(player, player.isSneaking() ? 1 : 10);
-        if (result != null && (!player.isSneaking() && result.typeOfHit == RayTraceResult.Type.BLOCK)) {
+        if (result != null && (!player.isSneaking() && result.typeOfHit == RayTraceResult.Type.BLOCK && player.world.getBlockState(result.getBlockPos()).isSideSolid(player.world, result.getBlockPos(), result.sideHit))) {
             BlockPos pos = result.getBlockPos().offset(result.sideHit);
             if (world.isAirBlock(pos)) {
                 if (!world.isRemote) {
-                    IBlockState state = ModBlocks.mark.getDefaultState().withProperty(FACING, result.sideHit.getOpposite()).withProperty(COLOR, generateRandomDye());
+                    IBlockState state = ModBlocks.mark.getDefaultState().withProperty(FACING, result.sideHit.getOpposite()) /*.withProperty(COLOR, generateRandomDye())*/;
                     world.setBlockState(pos, state);
                     world.playSound(null, pos, SoundEvents.BLOCK_CLOTH_PLACE, SoundCategory.PLAYERS, 0.50f, 1.25F);
                 }
