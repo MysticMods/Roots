@@ -351,6 +351,7 @@ jei.roots.elemental_soil_water.desc=Created by tossing a piece of Elemental Soil
 jei.roots.elemental_soil_air.desc=Created by dropping a piece of Elemental Soil onto a surface closer to the sky, and unobscured from it.
 jei.roots.elemental_soil_earth.desc=Created by dropping a piece of Elemental Soil onto a surface covered from the sky and in the depth's of the ground.
 jei.roots.runic_shears.cooldown=Item can be obtained every %d seconds.
+jei.roots.open_book_button_text=Open Book
 # Quiver
 roots.quiver.picked_up_arrow=Retrieved arrows.
 roots.quiver.quiver_full=Your quiver is full.
@@ -394,5 +395,8 @@ roots.ritual.transmutation.pumpkin_melon=Obtained through the Ritual of Transmut
 roots.ritual.transmutation.pumpkin_cactus=Obtained through the Ritual of Transmutation. Pumpkins planted upon sand will turn into cactuses.
 
 # CraftTweaker commands
-roots.commands.dump.desc=§2/ct properties_roots [mode]\n§3Dumps the specified property table(s) to the log.
-roots.commands.dump.usage=Usage: ct properties_roots [mode]\nModes: all | ritual | spell
+roots.commands.dump.desc=§2/ct roots_properties [mode]\n§3Dumps the specified property table(s) to the log.
+roots.commands.dump.usage=Usage: ct roots_properties [mode]\nModes: all | ritual | spell
+
+roots.commands.dump_recipes.desc=§2/ct roots_recipes [category]\n§3Dumps a list of ResourceLocations of registered recipes.
+roots.commands.dump_recipes.usage=Usage: ct roots_recipes [mode]\nModes: all | animal_harvest | bark | fey_crafting | flower_growth | mortar | pacifist | pyre_crafting | runic_shears | transmutaiton

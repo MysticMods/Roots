@@ -1,10 +1,11 @@
-package epicsquid.roots.integration.crafttweaker;
+package epicsquid.roots.integration.crafttweaker.tweaks;
 
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.entity.IEntityDefinition;
 import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.integration.crafttweaker.Action;
 import epicsquid.roots.util.zen.ZenDocAppend;
 import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
