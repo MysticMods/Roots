@@ -1,9 +1,7 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageSoftTouchFX;
 import epicsquid.roots.spell.modules.SpellModule;
@@ -21,7 +19,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.List;
-import java.util.Random;
 
 public class SpellSoftTouch extends SpellBase {
 
@@ -84,13 +81,11 @@ public class SpellSoftTouch extends SpellBase {
   }
 
   @Override
-  public void finalise() {
-
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
 
     SpellCost cost1 = properties.getProperty(PROP_COST_1);
     this.addCost(cost1.getHerb(), cost1.getCost());
   }
-
 }

@@ -2,7 +2,6 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageScatterPlantFX;
 import epicsquid.roots.spell.modules.SpellModule;
@@ -96,13 +95,9 @@ public class SpellScatter extends SpellBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
-
-    SpellCost cost1 = properties.getProperty(PROP_COST_1);
-    this.addCost(cost1.getHerb(), cost1.getCost());
-
     this.radius = properties.getProperty(PROP_RADIUS);
   }
 

@@ -73,13 +73,9 @@ public class SpellThaw extends SpellBase {
   }
 
   @Override
-  public void finalise() {
+  public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
-
-    SpellCost cost1 = properties.getProperty(PROP_COST_1);
-    this.addCost(cost1.getHerb(), cost1.getCost());
-
     this.radius = properties.getProperty(PROP_RADIUS);
   }
 
