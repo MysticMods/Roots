@@ -1,5 +1,6 @@
 package epicsquid.roots.util;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -12,30 +13,45 @@ import vazkii.patchouli.client.book.gui.GuiBookEntry;
 import vazkii.patchouli.common.book.Book;
 import vazkii.patchouli.common.book.BookRegistry;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class RitualUtil {
 
   private static Random rand = new Random();
 
-    public static BlockPos getRandomPosRadialXZ(BlockPos centerPos, int xRadius, int zRadius)
-    {
-        BlockPos pos = centerPos.add(-xRadius, 0, -zRadius);
+  public static BlockPos getRandomPosRadialXZ(BlockPos centerPos, int xRadius, int zRadius)
+  {
+      BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(centerPos.getX() -xRadius, centerPos.getY(), centerPos.getZ() -zRadius);
 
-        pos = pos.add(rand.nextInt(xRadius*2), 0, rand.nextInt(zRadius*2));
+      return pos.add(rand.nextInt(xRadius * 2), 0, rand.nextInt(zRadius * 2));
+  }
 
-        //System.out.println("Pos: " +  pos.getX() +  " | " + pos.getY() + " | " + pos.getZ());
-        return pos;
-    }
+  public static BlockPos getRandomPosRadialXYZ(BlockPos centerPos, int xRadius, int yRadius, int zRadius)
+  {
+      BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(centerPos.getX() -xRadius, centerPos.getY() -yRadius, centerPos.getZ() -zRadius);
 
-    public static BlockPos getRandomPosRadialXYZ(BlockPos centerPos, int xRadius, int yRadius, int zRadius)
-    {
-        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(centerPos.getX() -xRadius, centerPos.getY() -yRadius, centerPos.getZ() -zRadius);
+      BlockPos pos2 = pos.add(rand.nextInt(xRadius * 2), rand.nextInt(yRadius * 2), rand.nextInt(zRadius * 2));
 
-        BlockPos pos2 = pos.add(rand.nextInt(xRadius * 2), rand.nextInt(yRadius * 2), rand.nextInt(zRadius * 2));
-        //System.out.println("Pos: " +  pos.getX() +  " | " + pos.getY() + " | " + pos.getZ());
-        return pos2;
-    }
+      //Debug Print
+      //System.out.println("Pos: " +  pos.getX() +  " | " + pos.getY() + " | " + pos.getZ());
+      return pos2;
+  }
+
+  public static BlockPos getRandomPosRadialXYZ(World world, BlockPos centerPos, int xRadius, int yRadius, int zRadius, Block... whitelistedBlocks)
+  {
+    BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(centerPos.getX() -xRadius, centerPos.getY() -yRadius, centerPos.getZ() -zRadius);
+
+    BlockPos pos2 = pos.add(rand.nextInt(xRadius * 2), rand.nextInt(yRadius * 2), rand.nextInt(zRadius * 2));
+    //System.out.println("Pos: " +  pos.getX() +  " | " + pos.getY() + " | " + pos.getZ());
+    List<Block> blocks = Arrays.asList(whitelistedBlocks);
+
+    if (blocks.contains(world.getBlockState(pos)))
+      return pos2;
+
+    return null;
+  }
 
   /**
    * Opens a patchouli book GUI with a specific book entry
