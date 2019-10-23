@@ -18,6 +18,9 @@ public class SpellConfig {
     @Config.Name("Disable Acid Cloud Spell")
     @Config.Comment("Set to true to disable Acid Cloud Spell")
     public boolean disableAcidCloud = false;
+    @Config.Name("Disable Blades Spell")
+    @Config.Comment("Set to true to disable Blades Spell")
+    public boolean disableBlades = false;
     @Config.Name("Disable Dandelion Winds Spell")
     @Config.Comment("Set to true to disable Dandelion Winds Spell")
     public boolean disableDandelionWinds = false;

@@ -74,7 +74,8 @@ public class SpellRegistry {
     SpellThaw.instance.setDisabled(SpellConfig.disableSpellsCategory.disableThaw);
     spellRegistry.put(SpellMark.spellName, SpellMark.instance);
     SpellMark.instance.setDisabled(SpellConfig.disableSpellsCategory.disableMark);
-
+    spellRegistry.put(SpellBlades.spellName, SpellBlades.instance);
+    SpellBlades.instance.setDisabled(SpellConfig.disableSpellsCategory.disableBlades);
 
     // Cannot disable Grove-related spells
     spellRegistry.put(SpellGroveSupplication.spellName, SpellGroveSupplication.instance);

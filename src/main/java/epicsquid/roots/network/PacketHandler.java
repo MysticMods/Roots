@@ -49,7 +49,7 @@ public class PacketHandler {
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessagePlayerGroveUpdate.MessageHolder.class, MessagePlayerGroveUpdate.class, Side.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessagePlayerDataUpdate.MessageHolder.class, MessagePlayerDataUpdate.class, Side.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageDisarmFX.Handler.class, MessageDisarmFX.class, Side.CLIENT);
-    epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageFallFX.Handler.class, MessageFallFX.class, Side.CLIENT);
+    epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageFallBladesFX.Handler.class, MessageFallBladesFX.class, Side.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageSoftTouchFX.Handler.class, MessageSoftTouchFX.class, Side.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageClearToasts.MessageHolder.class, MessageClearToasts.class, Side.CLIENT);
 

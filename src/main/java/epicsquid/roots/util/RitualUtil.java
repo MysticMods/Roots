@@ -43,7 +43,11 @@ public class RitualUtil {
   {
     BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(centerPos.getX() -xRadius, centerPos.getY() -yRadius, centerPos.getZ() -zRadius);
 
-    BlockPos pos2 = pos.add(rand.nextInt(xRadius * 2), rand.nextInt(yRadius * 2), rand.nextInt(zRadius * 2));
+    BlockPos pos2 = pos.add(
+            xRadius > 0 ? rand.nextInt(xRadius * 2) : 0,
+            yRadius > 0 ? rand.nextInt(yRadius * 2) : 0,
+            zRadius > 0 ? rand.nextInt(zRadius * 2) : 0);
+
     //System.out.println("Pos: " +  pos.getX() +  " | " + pos.getY() + " | " + pos.getZ());
     List<Block> blocks = Arrays.asList(whitelistedBlocks);
 
@@ -63,7 +67,6 @@ public class RitualUtil {
    * @param entryLocation patchouli entry resourceLocation
    * @param page the page number
    */
-  //@SideOnly(Side.CLIENT)
   public static void openBook(World world, EntityPlayer player, ResourceLocation resourceLocation, ResourceLocation entryLocation, int page) {
     if (world.isRemote) {
       PatchouliAPI.instance.openBookGUI(resourceLocation);
