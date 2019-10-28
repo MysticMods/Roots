@@ -7,6 +7,7 @@ import epicsquid.roots.command.CommandRoots;
 import epicsquid.roots.command.CommandStaff;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModEntities;
+import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.chisel.RootsChisel;
 import epicsquid.roots.integration.consecration.Consecration;
 import epicsquid.roots.integration.crafttweaker.commands.CommandProperties;
@@ -70,6 +71,7 @@ public class CommonProxy {
       HarvestIntegration.init();
     }
     Advancements.init();
+    ModRecipes.clearGeneratedEntityRecipes();
   }
 
   public void serverStarting(FMLServerStartingEvent event) {
