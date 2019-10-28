@@ -9,6 +9,7 @@ import epicsquid.mysticalworld.config.ConfigManager;
 import epicsquid.mysticalworld.entity.*;
 import epicsquid.mysticalworld.materials.Material;
 import epicsquid.mysticalworld.materials.Materials;
+import epicsquid.mysticalworld.recipe.Ingredients;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.item.ItemDruidKnife;
@@ -1018,11 +1019,11 @@ public class ModRecipes {
         new ItemStack(ModItems.pereskia_bulb)).setBurnTime(300));
 
     addCraftingRecipe("aubergine", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_aubergine, 5), 1).addIngredients(
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine)).setBurnTime(300));
+        Ingredients.AUBERGINE,
+        Ingredients.AUBERGINE,
+        Ingredients.AUBERGINE,
+        Ingredients.AUBERGINE,
+        Ingredients.AUBERGINE).setBurnTime(300));
 
     addCraftingRecipe("squid", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_squid, 10), 1).addIngredients(
         new ItemStack(epicsquid.mysticalworld.init.ModItems.raw_squid),
