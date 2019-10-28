@@ -1,6 +1,8 @@
 package epicsquid.roots.spell;
 
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.network.fx.MessageIcedTouchThawFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.RitualUtil;
 import epicsquid.roots.util.types.Property;
@@ -66,6 +68,10 @@ public class SpellThaw extends SpellBase {
       if ((caster.world.getBlockState(pos).getBlock() == Blocks.FARMLAND) && (caster.world.getBlockState(pos).getValue(BlockFarmland.MOISTURE) < 7)) {
         caster.world.setBlockState(pos, Blocks.FARMLAND.getDefaultState().withProperty(BlockFarmland.MOISTURE, 7), 3);
         applied = true;
+      }
+
+      if (applied) {
+        PacketHandler.sendToAllTracking(new MessageIcedTouchThawFX(pos.getX(), pos.getY(), pos.getZ(), true), caster);
       }
     }
 

@@ -76,67 +76,53 @@ public class SpellIcedTouch extends SpellBase {
         BlockPos posNoOffset = result.getBlockPos();
         IBlockState stateNoOffset = world.getBlockState(posNoOffset);
 
-        if (state.getBlock() == Blocks.FIRE) {
-          didSpell = true;
-          if (!world.isRemote) {
+        if (!world.isRemote) {
+          if (state.getBlock() == Blocks.FIRE) {
+            didSpell = true;
             world.setBlockState(pos, Blocks.AIR.getDefaultState());
             world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 1);
-          }
-        } else if (state.getBlock() == Blocks.LAVA) {
-          if (state.getValue(BlockLiquid.LEVEL) == 0) {
-            didSpell = true;
-            if (!world.isRemote) {
+          } else if (state.getBlock() == Blocks.LAVA) {
+            if (state.getValue(BlockLiquid.LEVEL) == 0) {
+              didSpell = true;
               world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState());
               world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 1);
-            }
-          } else {
-            didSpell = true;
-            if (!world.isRemote) {
+            } else {
+              didSpell = true;
               world.setBlockState(pos, Blocks.COBBLESTONE.getDefaultState());
               world.playSound(null, pos, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 1);
             }
-          }
-        } else if (state.getBlock() == Blocks.WATER) {
-          if (state.getValue(BlockLiquid.LEVEL) == 0) {
-            didSpell = true;
-            if (!world.isRemote) {
+          } else if (state.getBlock() == Blocks.WATER) {
+            if (state.getValue(BlockLiquid.LEVEL) == 0) {
+              didSpell = true;
               world.setBlockState(pos, Blocks.ICE.getDefaultState());
               world.playSound(null, pos, SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.PLAYERS, 0.3f, 1);
             }
-          }
-        }else if (stateNoOffset.getBlock() == Blocks.SNOW_LAYER) {
-          didSpell = true;
-          if (!world.isRemote) {
+          }else if (stateNoOffset.getBlock() == Blocks.SNOW_LAYER) {
+            didSpell = true;
             world.setBlockState(posNoOffset, Blocks.SNOW.getDefaultState());
             world.playSound(null, posNoOffset, SoundEvents.BLOCK_SNOW_PLACE, SoundCategory.PLAYERS, 0.5F, 1);
           }
-        }
-        else if (stateNoOffset.getBlock() == Blocks.SNOW) {
-          didSpell = true;
-          if (!world.isRemote) {
+          else if (stateNoOffset.getBlock() == Blocks.SNOW) {
+            didSpell = true;
             world.setBlockState(posNoOffset, Blocks.ICE.getDefaultState());
             world.playSound(null, posNoOffset, SoundEvents.BLOCK_GLASS_PLACE, SoundCategory.PLAYERS, 0.5F, 1);
           }
-        }
-        else if (stateNoOffset.getBlock() == Blocks.ICE) {
-          didSpell = true;
-          if (!world.isRemote) {
+          else if (stateNoOffset.getBlock() == Blocks.ICE) {
+            didSpell = true;
             world.setBlockState(posNoOffset, Blocks.PACKED_ICE.getDefaultState());
             world.playSound(null, posNoOffset, SoundEvents.BLOCK_STONE_PLACE, SoundCategory.PLAYERS, 0.5F, 1);
           }
-        }
-        else if (world.isAirBlock(pos)) {
-          IBlockState down = world.getBlockState(pos.down());
-          if (down.getBlockFaceShape(world, pos, EnumFacing.UP) == BlockFaceShape.SOLID) {
-            didSpell = true;
-            if (!world.isRemote) {
+          else if (world.isAirBlock(pos)) {
+            IBlockState down = world.getBlockState(pos.down());
+            if (down.getBlockFaceShape(world, pos, EnumFacing.UP) == BlockFaceShape.SOLID) {
+              didSpell = true;
               world.setBlockState(pos, Blocks.SNOW_LAYER.getDefaultState());
               world.playSound(null, pos, SoundEvents.BLOCK_CLOTH_PLACE, SoundCategory.PLAYERS, 0.3f, 1);
             }
           }
-        }
-        if (didSpell) {
-          PacketHandler.sendToAllTracking(new MessageIcedTouchThawFX(pos.getX(), pos.getY(), pos.getZ(), false), player);
+          if (didSpell) {
+            PacketHandler.sendToAllTracking(new MessageIcedTouchThawFX(pos.getX(), pos.getY(), pos.getZ(), false), player);
+          }
         }
         return didSpell;
       }
