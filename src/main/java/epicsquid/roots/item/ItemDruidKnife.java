@@ -47,19 +47,21 @@ public class ItemDruidKnife extends ItemKnifeBase {
           }
         }
       } else {
-        // Used to get terramoss from a block of cobble. This can also be done using runic shears.
-        IBlockState state = world.getBlockState(pos);
-        IBlockState result = MossConfig.scrapeResult(state);
-        if (result != null) {
-          if (!world.isRemote) {
-            world.setBlockState(pos, result);
-            world.scheduleBlockUpdate(pos, result.getBlock(), 1, result.getBlock().tickRate(world));
-            ItemUtil.spawnItem(world, player.getPosition().add(0, 1, 0), new ItemStack(ModItems.terra_moss));
-            if (!player.capabilities.isCreativeMode) {
-              player.getHeldItem(hand).damageItem(1, player);
+        if (!MossConfig.getBlacklistDimensions().contains(world.provider.getDimension())) {
+          // Used to get terramoss from a block of cobble. This can also be done using runic shears.
+          IBlockState state = world.getBlockState(pos);
+          IBlockState result = MossConfig.scrapeResult(state);
+          if (result != null) {
+            if (!world.isRemote) {
+              world.setBlockState(pos, result);
+              world.scheduleBlockUpdate(pos, result.getBlock(), 1, result.getBlock().tickRate(world));
+              ItemUtil.spawnItem(world, player.getPosition().add(0, 1, 0), new ItemStack(ModItems.terra_moss));
+              if (!player.capabilities.isCreativeMode) {
+                player.getHeldItem(hand).damageItem(1, player);
+              }
             }
+            world.playSound(player, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
           }
-          world.playSound(player, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
         }
       }
       return EnumActionResult.SUCCESS;
