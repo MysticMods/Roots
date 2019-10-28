@@ -1,10 +1,14 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "mysticalworld:cooked_aubergine",
-      "data": 0
+    [{
+      "type": "forge:ore_dict",
+      "ore": "cropAubergine"
     },
+    {
+      "type": "forge:ore_dict",
+      "ore": "cropEggplant"
+    }],
     {
       "item": "minecraft:carrot",
       "data": 0
