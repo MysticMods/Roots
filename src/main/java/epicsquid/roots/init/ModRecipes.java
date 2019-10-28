@@ -1061,7 +1061,7 @@ public class ModRecipes {
             new ItemStack(ModItems.dewgonia)));
 
     addCraftingRecipe("elemental_soil",
-        new FeyCraftingRecipe(new ItemStack(ModBlocks.elemental_soil), 4).addIngredients(
+        new FeyCraftingRecipe(new ItemStack(ModBlocks.elemental_soil, 4), 4).addIngredients(
             new ItemStack(Blocks.DIRT),
             new ItemStack(ModItems.terra_moss),
             new ItemStack(ModItems.wildroot),
