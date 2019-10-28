@@ -10,6 +10,7 @@ import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.chisel.RootsChisel;
 import epicsquid.roots.integration.consecration.Consecration;
 import epicsquid.roots.integration.crafttweaker.commands.CommandRecipes;
+import epicsquid.roots.integration.crafttweaker.commands.Inject;
 import epicsquid.roots.integration.endercore.EndercoreHarvest;
 import epicsquid.roots.integration.harvest.HarvestIntegration;
 import epicsquid.roots.integration.jer.JERIntegration;
@@ -51,7 +52,7 @@ public class CommonProxy {
     //MapGenStructureIO.registerStructureComponent(ComponentDruidHut.class, Roots.MODID + ":" + "druidhut");
     //VillagerRegistry.instance().registerVillageCreationHandler(new ComponentDruidHut.CreationHandler());
     if (Loader.isModLoaded("crafttweaker")) {
-      CTChatCommand.registerCommand(new CommandRecipes());
+      Inject.inject();
     }
   }
 
