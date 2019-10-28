@@ -30,20 +30,20 @@ public class RitualUtil {
 
   public static BlockPos getRandomPosRadialXYZ(BlockPos centerPos, int xRadius, int yRadius, int zRadius)
   {
-      BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(centerPos.getX() -xRadius, centerPos.getY() -yRadius, centerPos.getZ() -zRadius);
+      BlockPos pos = new BlockPos(centerPos.getX() -xRadius, centerPos.getY() -yRadius, centerPos.getZ() -zRadius);
 
-      BlockPos pos2 = pos.add(rand.nextInt(xRadius * 2), rand.nextInt(yRadius * 2), rand.nextInt(zRadius * 2));
+      pos = pos.add(rand.nextInt(xRadius * 2), rand.nextInt(yRadius * 2), rand.nextInt(zRadius * 2));
 
       //Debug Print
       //System.out.println("Pos: " +  pos.getX() +  " | " + pos.getY() + " | " + pos.getZ());
-      return pos2;
+      return pos;
   }
 
   public static BlockPos getRandomPosRadialXYZ(World world, BlockPos centerPos, int xRadius, int yRadius, int zRadius, Block... whitelistedBlocks)
   {
-    BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(centerPos.getX() -xRadius, centerPos.getY() -yRadius, centerPos.getZ() -zRadius);
+    BlockPos pos = new BlockPos(centerPos.getX() -xRadius, centerPos.getY() -yRadius, centerPos.getZ() -zRadius);
 
-    BlockPos pos2 = pos.add(
+    pos = pos.add(
             xRadius > 0 ? rand.nextInt(xRadius * 2) : 0,
             yRadius > 0 ? rand.nextInt(yRadius * 2) : 0,
             zRadius > 0 ? rand.nextInt(zRadius * 2) : 0);
@@ -52,7 +52,7 @@ public class RitualUtil {
     List<Block> blocks = Arrays.asList(whitelistedBlocks);
 
     if (blocks.contains(world.getBlockState(pos)))
-      return pos2;
+      return pos;
 
     return null;
   }
