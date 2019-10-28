@@ -1,6 +1,7 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticalworld.recipe.Ingredients;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.network.fx.MessageLifeInfusionFX;
@@ -40,7 +41,7 @@ public class SpellGrowthInfusion extends SpellBase {
         new OreIngredient("treeSapling"),
         new OreIngredient("treeSapling"),
         new ItemStack(ModItems.terra_moss),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
+        Ingredients.AUBERGINE,
         new ItemStack(Items.WHEAT)
     );
   }

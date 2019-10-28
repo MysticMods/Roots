@@ -11,13 +11,31 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Config;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Config.LangKey("config.roots.category.moss")
-@Config(modid = Roots.MODID, name = "roots/moss", category="moss")
+@Config(modid = Roots.MODID, name = "roots/moss", category = "moss")
 @SuppressWarnings("unused")
 public class MossConfig {
+  @Config.Comment(("List of dimension IDs where terra moss harvesting shouldn't work"))
+  public static String[] BlacklistDimensions = new String[]{};
+
+  @Config.Ignore
+  public static List<Integer> blacklistDimensions = null;
+
+  public static List<Integer> getBlacklistDimensions() {
+    if (blacklistDimensions == null) {
+      blacklistDimensions = new ArrayList<>();
+      for (String dim : BlacklistDimensions) {
+        blacklistDimensions.add(Integer.parseInt(dim));
+      }
+    }
+    return blacklistDimensions;
+  }
+
   @Config.Comment(("List of mod:item:meta,mod:item:meta (meta optional) of mossy blocks and what to convert them into when scraping with knives [note that logs or blocks with positional data are unsuited for this purpose]"))
   public static String[] MossyCobblestones = new String[]{"minecraft:mossy_cobblestone,minecraft:cobblestone", "minecraft:stonebrick:1,minecraft:stonebrick", "minecraft:monster_egg:3,minecraft:monster_egg:2"};
 
@@ -58,7 +76,7 @@ public class MossConfig {
   }
 
   @Nullable
-  public static IBlockState scrapeResult (IBlockState state) {
+  public static IBlockState scrapeResult(IBlockState state) {
     Map<ItemStack, ItemStack> mossy = getMossyCobblestones();
 
     if (mossyStates.containsKey(state)) {
@@ -73,7 +91,7 @@ public class MossConfig {
   }
 
   @Nullable
-  public static IBlockState mossConversion (IBlockState state) {
+  public static IBlockState mossConversion(IBlockState state) {
     Map<ItemStack, ItemStack> mossy = getMossyCobblestones();
 
     if (mossyStates.inverse().containsKey(state)) {
