@@ -3,7 +3,7 @@ package epicsquid.roots.spell;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
-import epicsquid.roots.network.fx.MessageIcedTouchFX;
+import epicsquid.roots.network.fx.MessageIcedTouchThawFX;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
@@ -73,6 +73,9 @@ public class SpellIcedTouch extends SpellBase {
         BlockPos pos = result.getBlockPos().offset(result.sideHit);
         IBlockState state = world.getBlockState(pos);
         boolean didSpell = false;
+        BlockPos posNoOffset = result.getBlockPos();
+        IBlockState stateNoOffset = world.getBlockState(posNoOffset);
+
         if (state.getBlock() == Blocks.FIRE) {
           didSpell = true;
           if (!world.isRemote) {
@@ -101,7 +104,28 @@ public class SpellIcedTouch extends SpellBase {
               world.playSound(null, pos, SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.PLAYERS, 0.3f, 1);
             }
           }
-        } else if (world.isAirBlock(pos)) {
+        }else if (stateNoOffset.getBlock() == Blocks.SNOW_LAYER) {
+          didSpell = true;
+          if (!world.isRemote) {
+            world.setBlockState(posNoOffset, Blocks.SNOW.getDefaultState());
+            world.playSound(null, posNoOffset, SoundEvents.BLOCK_SNOW_PLACE, SoundCategory.PLAYERS, 0.5F, 1);
+          }
+        }
+        else if (stateNoOffset.getBlock() == Blocks.SNOW) {
+          didSpell = true;
+          if (!world.isRemote) {
+            world.setBlockState(posNoOffset, Blocks.ICE.getDefaultState());
+            world.playSound(null, posNoOffset, SoundEvents.BLOCK_GLASS_PLACE, SoundCategory.PLAYERS, 0.5F, 1);
+          }
+        }
+        else if (stateNoOffset.getBlock() == Blocks.ICE) {
+          didSpell = true;
+          if (!world.isRemote) {
+            world.setBlockState(posNoOffset, Blocks.PACKED_ICE.getDefaultState());
+            world.playSound(null, posNoOffset, SoundEvents.BLOCK_STONE_PLACE, SoundCategory.PLAYERS, 0.5F, 1);
+          }
+        }
+        else if (world.isAirBlock(pos)) {
           IBlockState down = world.getBlockState(pos.down());
           if (down.getBlockFaceShape(world, pos, EnumFacing.UP) == BlockFaceShape.SOLID) {
             didSpell = true;
@@ -112,7 +136,7 @@ public class SpellIcedTouch extends SpellBase {
           }
         }
         if (didSpell) {
-          PacketHandler.sendToAllTracking(new MessageIcedTouchFX(pos.getX(), pos.getY(), pos.getZ()), player);
+          PacketHandler.sendToAllTracking(new MessageIcedTouchThawFX(pos.getX(), pos.getY(), pos.getZ(), false), player);
         }
         return didSpell;
       }
