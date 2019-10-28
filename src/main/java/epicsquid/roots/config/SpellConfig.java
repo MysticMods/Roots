@@ -99,9 +99,9 @@ public class SpellConfig {
     @Config.Name("Disable Iced Touch Spell")
     @Config.Comment("Set to true to disable the Iced Touch Spell")
     public boolean disableIcedTouch = false;
-    @Config.Name("Disable Mark Spell")
-    @Config.Comment("Set to true to disable the Mark Spell")
-    public boolean disableMark = false;
+    @Config.Name("Disable Drizzle Spell")
+    @Config.Comment("Set to true to disable the Drizzle Spell")
+    public boolean disableDrizzle = false;
 
   }
 
@@ -119,6 +119,10 @@ public class SpellConfig {
     @Config.Name("Sanctuary Spell Entities Blacklist")
     @Config.Comment("Entities in this list will be excluded by Sanctuary Spell when repelling entities")
     public String[] sanctuaryEntitiesBlacklist = {};
+
+    @Config.Name("Should Drizzle Boost Crops Growth")
+    @Config.Comment("Set to true make the Drizzle Spell boost crops growth")
+    public boolean shouldDrizzleBoostCrops = true;
 
   }
 

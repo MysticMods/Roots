@@ -187,7 +187,6 @@ public class ModBlocks {
 
     event.addBlock(fey_light = new BlockFeyLight(Material.SNOW, SoundType.SNOW, 0.0f, "fey_light")).setCreativeTab(Roots.tab);
     event.addBlock(fey_fire = new BlockWildFire("fey_fire")).setCreativeTab(Roots.tab);
-    event.addBlock(mark = new BlockMark("mark")).setCreativeTab(Roots.tab);
   }
 
   private static Variants variants(RegisterContentEvent event, Block base, String name, SoundType sound, Material material) {

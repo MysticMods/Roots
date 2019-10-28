@@ -5,7 +5,6 @@ import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticallib.event.RegisterParticleEvent;
 import epicsquid.mysticallib.event.RegisterWorldGenEvent;
-import epicsquid.roots.block.BlockMark;
 import epicsquid.roots.init.*;
 import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.network.PacketHandler;
@@ -68,7 +67,6 @@ public class RegistryManager {
     LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
 
     Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemStaff.StaffColorHandler(), ModItems.staff);
-    Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(new BlockMark.MarkColorHandler(), ModBlocks.mark);
   }
 
   @SubscribeEvent
