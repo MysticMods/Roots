@@ -1,14 +1,24 @@
 package epicsquid.roots.spell;
 
+import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.network.fx.MessageDrizzleFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
+import net.minecraft.block.BlockFarmland;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 
 import java.util.List;
 
@@ -35,14 +45,27 @@ public class SpellDrizzle extends SpellBase {
         addIngredients(
                 new ItemStack(Items.BUCKET),
                 new ItemStack(ModItems.dewgonia),
-                new ItemStack(Items.DYE, 1, 0),
+                new ItemStack(Items.DYE, 1, 15),
                 new ItemStack(Item.getItemFromBlock(Blocks.VINE))
         );
     }
 
     @Override
     public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
-        return false;
+        World world = caster.world;
+        List<BlockPos> farmlandBlocks = Util.getBlocksWithinRadius(world, caster.getPosition(), radius, 3, radius, Blocks.FARMLAND);
+
+        if (!world.isRemote && !farmlandBlocks.isEmpty()) {
+            for (BlockPos pos : farmlandBlocks) {
+                world.setBlockState(pos, Blocks.FARMLAND.getDefaultState().withProperty(BlockFarmland.MOISTURE, 7));
+                if (SpellConfig.spellFeaturesCategory.shouldDrizzleBoostCrops) {
+                    ItemDye.applyBonemeal(ItemStack.EMPTY, world, pos);
+                }
+                PacketHandler.sendToAllTracking(new MessageDrizzleFX(pos.getX(), pos.getY() + 1, pos.getZ()), caster);
+            }
+            world.playSound(caster, caster.getPosition(), SoundEvents.ENTITY_PLAYER_SPLASH, SoundCategory.PLAYERS, 2F, 1F);
+        }
+        return !farmlandBlocks.isEmpty();
     }
 
     @Override
