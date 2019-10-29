@@ -596,6 +596,10 @@ public class ModRecipes {
     return null;
   }
 
+  public static void clearGeneratedEntityRecipes () {
+    generatedEntityRecipes = null;
+  }
+
   private static void generateEntityRecipes() {
     generatedEntityRecipes = new HashMap<>();
     for (RunicShearEntityRecipe recipe : runicShearEntityRecipes.values()) {
@@ -605,7 +609,7 @@ public class ModRecipes {
 
 
   public static RunicShearEntityRecipe getRunicShearRecipe(EntityLivingBase entity) {
-    if (generatedEntityRecipes == null) {
+    if (generatedEntityRecipes == null || generatedEntityRecipes.isEmpty()) {
       generateEntityRecipes();
     }
     return generatedEntityRecipes.get(entity.getClass());
@@ -1057,7 +1061,7 @@ public class ModRecipes {
             new ItemStack(ModItems.dewgonia)));
 
     addCraftingRecipe("elemental_soil",
-        new FeyCraftingRecipe(new ItemStack(ModBlocks.elemental_soil), 4).addIngredients(
+        new FeyCraftingRecipe(new ItemStack(ModBlocks.elemental_soil, 4), 4).addIngredients(
             new ItemStack(Blocks.DIRT),
             new ItemStack(ModItems.terra_moss),
             new ItemStack(ModItems.wildroot),

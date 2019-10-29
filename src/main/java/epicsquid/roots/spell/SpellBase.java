@@ -1,5 +1,6 @@
 package epicsquid.roots.spell;
 
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
@@ -7,6 +8,7 @@ import epicsquid.roots.api.Herb;
 import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.network.MessageUpdateHerb;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.PowderInventoryUtil;
 import epicsquid.roots.util.types.Property;
@@ -14,6 +16,7 @@ import epicsquid.roots.util.types.PropertyTable;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.text.Style;
@@ -141,6 +144,10 @@ public abstract class SpellBase {
       Herb herb = entry.getKey();
       double d = entry.getValue();
       PowderInventoryUtil.removePowder(player, herb, d / 20.0);
+      if (player instanceof EntityPlayerMP) {
+        MessageUpdateHerb packet = new MessageUpdateHerb(herb);
+        PacketHandler.INSTANCE.sendTo(packet, (EntityPlayerMP) player);
+      }
     }
   }
 

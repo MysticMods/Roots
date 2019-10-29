@@ -54,6 +54,11 @@ public class HerbRegistry {
   }
 
   @Nullable
+  public static Herb getHerb (@Nonnull ResourceLocation key) {
+    return REGISTRY.getValue(key);
+  }
+
+  @Nullable
   public static Herb getHerbByName(@Nonnull String name) {
     Collection<Herb> herbs = REGISTRY.getValuesCollection();
     for (Herb herb : herbs) {
