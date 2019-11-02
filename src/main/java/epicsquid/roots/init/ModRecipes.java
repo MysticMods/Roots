@@ -950,21 +950,21 @@ public class ModRecipes {
             new ItemStack(Blocks.BROWN_MUSHROOM)));
 
     // Cooking!!!
-    addCraftingRecipe("seeds", new PyreCraftingRecipe(new ItemStack(ModItems.cooked_seeds, 5), 1).addIngredients(
+    addCraftingRecipe("cooked_seeds", new PyreCraftingRecipe(new ItemStack(ModItems.cooked_seeds, 5), 1).addIngredients(
         new ItemStack(ModItems.seeds),
         new ItemStack(ModItems.seeds),
         new ItemStack(ModItems.seeds),
         new ItemStack(ModItems.seeds),
         new ItemStack(ModItems.seeds)).setBurnTime(20));
 
-    addCraftingRecipe("potato", new PyreCraftingRecipe(new ItemStack(Items.BAKED_POTATO, 5), 1).addIngredients(
+    addCraftingRecipe("cooked_potato", new PyreCraftingRecipe(new ItemStack(Items.BAKED_POTATO, 5), 1).addIngredients(
         new ItemStack(Items.POTATO),
         new ItemStack(Items.POTATO),
         new ItemStack(Items.POTATO),
         new ItemStack(Items.POTATO),
         new ItemStack(Items.POTATO)).setBurnTime(300));
 
-    addCraftingRecipe("chicken", new PyreCraftingRecipe(new ItemStack(Items.COOKED_CHICKEN, 5), 1).addIngredients(
+    addCraftingRecipe("cooked_chicken", new PyreCraftingRecipe(new ItemStack(Items.COOKED_CHICKEN, 5), 1).addIngredients(
         new ItemStack(Items.CHICKEN),
         new ItemStack(Items.CHICKEN),
         new ItemStack(Items.CHICKEN),
@@ -973,14 +973,14 @@ public class ModRecipes {
 
     Ingredient acceptableFish = Ingredient.fromStacks(new ItemStack(Items.FISH, 1, ItemFishFood.FishType.CLOWNFISH.getMetadata()), new ItemStack(Items.FISH, 1, ItemFishFood.FishType.COD.getMetadata()));
 
-    addCraftingRecipe("fish", new PyreCraftingRecipe(new ItemStack(Items.COOKED_FISH, 5), 1).addIngredients(
+    addCraftingRecipe("cooked_fish", new PyreCraftingRecipe(new ItemStack(Items.COOKED_FISH, 5), 1).addIngredients(
         acceptableFish,
         acceptableFish,
         acceptableFish,
         acceptableFish,
         acceptableFish).setBurnTime(300));
 
-    addCraftingRecipe("salmon", new PyreCraftingRecipe(new ItemStack(Items.COOKED_FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()), 1).addIngredients(
+    addCraftingRecipe("cooked_salmon", new PyreCraftingRecipe(new ItemStack(Items.COOKED_FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()), 1).addIngredients(
         new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
         new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
         new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
@@ -994,56 +994,56 @@ public class ModRecipes {
         new ItemStack(Items.BEEF),
         new ItemStack(Items.BEEF)).setBurnTime(300));
 
-    addCraftingRecipe("mutton", new PyreCraftingRecipe(new ItemStack(Items.COOKED_MUTTON, 5), 1).addIngredients(
+    addCraftingRecipe("cooked_mutton", new PyreCraftingRecipe(new ItemStack(Items.COOKED_MUTTON, 5), 1).addIngredients(
         new ItemStack(Items.MUTTON),
         new ItemStack(Items.MUTTON),
         new ItemStack(Items.MUTTON),
         new ItemStack(Items.MUTTON),
         new ItemStack(Items.MUTTON)).setBurnTime(300));
 
-    addCraftingRecipe("porkchop", new PyreCraftingRecipe(new ItemStack(Items.COOKED_PORKCHOP, 5), 1).addIngredients(
+    addCraftingRecipe("cooked_porkchop", new PyreCraftingRecipe(new ItemStack(Items.COOKED_PORKCHOP, 5), 1).addIngredients(
         new ItemStack(Items.PORKCHOP),
         new ItemStack(Items.PORKCHOP),
         new ItemStack(Items.PORKCHOP),
         new ItemStack(Items.PORKCHOP),
         new ItemStack(Items.PORKCHOP)).setBurnTime(300));
 
-    addCraftingRecipe("rabbit", new PyreCraftingRecipe(new ItemStack(Items.COOKED_RABBIT, 5), 1).addIngredients(
+    addCraftingRecipe("cooked_rabbit", new PyreCraftingRecipe(new ItemStack(Items.COOKED_RABBIT, 5), 1).addIngredients(
         new ItemStack(Items.RABBIT),
         new ItemStack(Items.RABBIT),
         new ItemStack(Items.RABBIT),
         new ItemStack(Items.RABBIT),
         new ItemStack(Items.RABBIT)).setBurnTime(300));
 
-    addCraftingRecipe("pereskia", new PyreCraftingRecipe(new ItemStack(ModItems.cooked_pereskia, 5), 1).addIngredients(
+    addCraftingRecipe("cooked_pereskia", new PyreCraftingRecipe(new ItemStack(ModItems.cooked_pereskia, 5), 1).addIngredients(
         new ItemStack(ModItems.pereskia_bulb),
         new ItemStack(ModItems.pereskia_bulb),
         new ItemStack(ModItems.pereskia_bulb),
         new ItemStack(ModItems.pereskia_bulb),
         new ItemStack(ModItems.pereskia_bulb)).setBurnTime(300));
 
-    addCraftingRecipe("aubergine", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_aubergine, 5), 1).addIngredients(
+    addCraftingRecipe("cooked_aubergine", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_aubergine, 5), 1).addIngredients(
         Ingredients.AUBERGINE,
         Ingredients.AUBERGINE,
         Ingredients.AUBERGINE,
         Ingredients.AUBERGINE,
         Ingredients.AUBERGINE).setBurnTime(300));
 
-    addCraftingRecipe("squid", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_squid, 10), 1).addIngredients(
+    addCraftingRecipe("cooked_squid", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_squid, 10), 1).addIngredients(
         new ItemStack(epicsquid.mysticalworld.init.ModItems.raw_squid),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.raw_squid),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.raw_squid),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.raw_squid),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.raw_squid)).setBurnTime(300));
 
-    addCraftingRecipe("venison", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_venison, 5), 1).addIngredients(
+    addCraftingRecipe("cooked_venison", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_venison, 5), 1).addIngredients(
         new ItemStack(epicsquid.mysticalworld.init.ModItems.venison),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.venison),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.venison),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.venison),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.venison)).setBurnTime(300));
 
-    addCraftingRecipe("apple", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_apple, 5), 1).addIngredients(
+    addCraftingRecipe("cooked_apple", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_apple, 5), 1).addIngredients(
         new ItemStack(Items.APPLE),
         new ItemStack(Items.APPLE),
         new ItemStack(Items.APPLE),
