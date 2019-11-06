@@ -1,8 +1,8 @@
 package epicsquid.roots.integration.jei.ritual;
 
 import epicsquid.roots.Roots;
+import epicsquid.roots.integration.patchouli.Util;
 import epicsquid.roots.ritual.RitualBase;
-import epicsquid.roots.util.RitualUtil;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -39,7 +39,7 @@ public class RitualWrapper implements IRecipeWrapper {
       //Old Attempt
       //ResourceLocation entryPath = new ResourceLocation(Roots.MODID, "roots_guide/" + minecraft.getLanguageManager().getCurrentLanguage().getLanguageCode() + "/entries/rituals/" + this.recipe.getName() + ".json");
 
-      RitualUtil.openBook(minecraft.world, minecraft.player, bookPath, entryPath, 0);
+      Util.openBook(minecraft.world, minecraft.player, bookPath, entryPath, 0);
       return true;
     }
 
