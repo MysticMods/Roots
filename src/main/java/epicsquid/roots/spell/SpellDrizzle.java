@@ -52,22 +52,26 @@ public class SpellDrizzle extends SpellBase {
 
     @Override
     public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
+        boolean hadEffect = false;
         World world = caster.world;
-        List<BlockPos> farmlandBlocks = Util.getBlocksWithinRadius(world, caster.getPosition(), radius, 3, radius, Blocks.FARMLAND);
+        List<BlockPos> blocks = Util.getBlocksWithinRadius(world, caster.getPosition(), radius, 3, radius);
 
-        if (!farmlandBlocks.isEmpty()) {
-            for (BlockPos pos : farmlandBlocks) {
-                if (!world.isRemote && world.getBlockState(pos).getValue(BlockFarmland.MOISTURE) < 7)
-                    world.setBlockState(pos, Blocks.FARMLAND.getDefaultState().withProperty(BlockFarmland.MOISTURE, 7));
+        if (!blocks.isEmpty()) {
+            for (BlockPos pos : blocks) {
+                if (world.getBlockState(pos).getBlock() == Blocks.FARMLAND) {
+                    if (!world.isRemote && world.getBlockState(pos).getValue(BlockFarmland.MOISTURE) < 7) {
+                        world.setBlockState(pos, Blocks.FARMLAND.getDefaultState().withProperty(BlockFarmland.MOISTURE, 7));
+                    }
 
-                if (SpellConfig.spellFeaturesCategory.shouldDrizzleBoostCrops) {
-                    ItemDye.applyBonemeal(ItemStack.EMPTY, world, pos.up(), caster, null);
+                    if (SpellConfig.spellFeaturesCategory.shouldDrizzleBoostCrops) {
+                        ItemDye.applyBonemeal(ItemStack.EMPTY, world, pos.up(), caster, null);
+                    }
                 }
                 PacketHandler.sendToAllTracking(new MessageDrizzleFX(pos.getX(), pos.getY() + 1, pos.getZ()), caster);
             }
             world.playSound(caster, caster.getPosition(), SoundEvents.ENTITY_PLAYER_SPLASH, SoundCategory.PLAYERS, 2F, 1F);
         }
-        return !farmlandBlocks.isEmpty();
+        return hadEffect;
     }
 
     @Override
