@@ -27,8 +27,7 @@ public class SpellFall extends SpellBase {
 
     public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(120);
     public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
-    public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("stalicripe", 0.05));
-    public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("wildewheet", 0.025));
+    public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(1, new SpellCost("wildewheet", 0.025));
     public static Property<Integer> PROP_RADIUS = new Property<>("radius", 10);
 
     public static String spellName = "spell_fall";
@@ -40,7 +39,7 @@ public class SpellFall extends SpellBase {
 
     public SpellFall(String name) {
         super(name, TextFormatting.GOLD, 227/255F, 179/255F, 66/255F, 209/255F, 113/255F, 10/255F);
-        properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_RADIUS);
+        properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS);
     }
 
     @Override
