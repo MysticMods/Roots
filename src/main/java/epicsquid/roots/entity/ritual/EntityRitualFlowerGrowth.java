@@ -8,9 +8,6 @@ import epicsquid.roots.util.RitualUtil;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -41,7 +38,6 @@ public class EntityRitualFlowerGrowth extends EntityRitualBase {
     IBlockState flower = getRandomFlower();
     if (world.isAirBlock(pos) && flower.getBlock().canPlaceBlockAt(world, pos)) {
       if (!world.isRemote) {
-        // TODO: Particles
         world.setBlockState(pos, flower);
       }
       return true;
