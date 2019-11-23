@@ -24,7 +24,6 @@ public class SpellDisarm extends SpellBase{
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(100);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("moonglow_leaf", 0.25));
-  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("spirit_herb", 0.25));
   public static Property<Integer> PROP_RADIUS = new Property<>("radius", 20);
 
   public static String spellName = "spell_disarm";
@@ -34,7 +33,7 @@ public class SpellDisarm extends SpellBase{
 
   private SpellDisarm(String name) {
     super(name, TextFormatting.DARK_RED, 122F/255F, 0F, 0F, 58F/255F, 58F/255F, 58F/255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1);
   }
 
   @Override
