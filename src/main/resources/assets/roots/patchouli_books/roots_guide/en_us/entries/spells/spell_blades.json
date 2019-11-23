@@ -1,0 +1,17 @@
+{
+    "name": "Blades",
+    "icon": "roots:spell_dust",
+    "category": "spells",
+    "advancement": "roots:wildroot",
+    "flag": "roots:spell_blades",
+    "pages": [
+      {
+        "type": "text",
+        "text": "This spell has the effect of growing grass on dirt blocks (even the ones that are not connected to grass blocks at all)"
+      },
+      {
+        "type": "spell_template",
+        "spell": "spell_blades"
+      }
+    ]
+  }
