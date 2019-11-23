@@ -55,11 +55,13 @@ public class SpellDrizzle extends SpellBase {
         World world = caster.world;
         List<BlockPos> farmlandBlocks = Util.getBlocksWithinRadius(world, caster.getPosition(), radius, 3, radius, Blocks.FARMLAND);
 
-        if (!world.isRemote && !farmlandBlocks.isEmpty()) {
+        if (!farmlandBlocks.isEmpty()) {
             for (BlockPos pos : farmlandBlocks) {
-                world.setBlockState(pos, Blocks.FARMLAND.getDefaultState().withProperty(BlockFarmland.MOISTURE, 7));
+                if (!world.isRemote && world.getBlockState(pos).getValue(BlockFarmland.MOISTURE) < 7)
+                    world.setBlockState(pos, Blocks.FARMLAND.getDefaultState().withProperty(BlockFarmland.MOISTURE, 7));
+
                 if (SpellConfig.spellFeaturesCategory.shouldDrizzleBoostCrops) {
-                    ItemDye.applyBonemeal(ItemStack.EMPTY, world, pos);
+                    ItemDye.applyBonemeal(ItemStack.EMPTY, world, pos.up(), caster, null);
                 }
                 PacketHandler.sendToAllTracking(new MessageDrizzleFX(pos.getX(), pos.getY() + 1, pos.getZ()), caster);
             }
