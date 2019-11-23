@@ -1,16 +1,16 @@
 package epicsquid.roots.network.fx;
 
-import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.SpellDrizzle;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemDye;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+
+import java.util.Random;
 
 public class MessageDrizzleFX implements IMessage {
 
@@ -45,23 +45,15 @@ public class MessageDrizzleFX implements IMessage {
         public IMessage onMessage(MessageDrizzleFX message, MessageContext ctx) {
             World world = Minecraft.getMinecraft().world;
             BlockPos pos = new BlockPos(message.x, message.y, message.z);
-            int y = pos.getY() + 10;
+            Random random = new Random();
 
-            if (Util.rand.nextBoolean()) {
-                for (int i = 0; i < 100; i++) {
-                    ParticleUtil.spawnParticleGlow(world, pos.getX(), y - (i / 10F), pos.getZ(),
-                            0, 0.025F, 0, SpellDrizzle.instance.getRed1(), SpellDrizzle.instance.getGreen1(), SpellDrizzle.instance.getBlue1(),
-                            0.75F, 5F, 20);
-                }
-            } else {
-                for (int i = 0; i < 100; i++) {
-                    ParticleUtil.spawnParticleGlow(world, pos.getX(), y - (i / 10F), pos.getZ(),
-                            0, 0.025F, 0, SpellDrizzle.instance.getRed2(), SpellDrizzle.instance.getGreen2(), SpellDrizzle.instance.getBlue2(),
-                            0.75F, 5F, 20);
-                }
+            for (int i = 0; i < 50; i++) {
+                world.spawnParticle(EnumParticleTypes.WATER_SPLASH,
+                        pos.getX() + random.nextDouble(), pos.getY() + 2D, pos.getZ() + random.nextDouble(),
+                        0, 0,0);
             }
 
-            ItemDye.spawnBonemealParticles(world, pos, 0);
+            ItemDye.spawnBonemealParticles(world, pos.up(), 0);
 
             return null;
         }
