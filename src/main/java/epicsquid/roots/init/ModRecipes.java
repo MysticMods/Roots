@@ -980,7 +980,7 @@ public class ModRecipes {
         acceptableFish,
         acceptableFish).setBurnTime(300));
 
-    addCraftingRecipe("cooked_salmon", new PyreCraftingRecipe(new ItemStack(Items.COOKED_FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()), 1).addIngredients(
+    addCraftingRecipe("cooked_salmon", new PyreCraftingRecipe(new ItemStack(Items.COOKED_FISH, 5, ItemFishFood.FishType.SALMON.getMetadata()), 1).addIngredients(
         new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
         new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
         new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
