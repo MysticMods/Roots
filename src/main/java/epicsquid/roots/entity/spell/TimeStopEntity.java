@@ -4,9 +4,11 @@ import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellTimeStop;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.NBTUtil;
+import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -18,21 +20,23 @@ import java.util.List;
 import java.util.UUID;
 
 public class TimeStopEntity extends Entity {
-  private static final DataParameter<Integer> lifetime = EntityDataManager.<Integer>createKey(TimeStopEntity.class, DataSerializers.VARINT);
+  private static final DataParameter<Integer> lifetime = EntityDataManager.createKey(TimeStopEntity.class, DataSerializers.VARINT);
   private UUID playerId = null;
 
   private int duration;
+
+  public TimeStopEntity(EntityType<?> entityTypeIn, World worldIn) {
+    super(entityTypeIn, worldIn);
+  }
 
   public TimeStopEntity(World worldIn) {
     this(worldIn, SpellTimeStop.duration);
   }
 
   public TimeStopEntity(World world, int duration) {
-    super(world);
+    this(null, null);
     this.setInvisible(true);
-    this.setSize(1, 1);
     this.duration = duration;
-    getDataManager().register(lifetime, duration);
   }
 
   public void setPlayer(UUID id) {
@@ -44,17 +48,23 @@ public class TimeStopEntity extends Entity {
     return false;
   }
 
-  @Override
-  protected void entityInit() {
+  // TODO: Custom packet
 
+  @Override
+  public IPacket<?> createSpawnPacket() {
+    return null;
+  }
+
+  @Override
+  protected void registerData() {
+    getDataManager().register(lifetime, duration);
   }
 
   @Override
   public void tick() {
     getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
-    getDataManager().setDirty(lifetime);
     if (getDataManager().get(lifetime) <= 0) {
-      setDead();
+      remove();
     }
     if (world.isRemote) {
       for (float i = 0; i < 360; i += 24.0f) {
@@ -84,13 +94,13 @@ public class TimeStopEntity extends Entity {
   }
 
   @Override
-  protected void readEntityFromNBT(CompoundNBT compound) {
-    this.playerId = NBTUtil.getUUIDFromTag(compound.getCompound("id"));
+  protected void readAdditional(CompoundNBT compound) {
+    this.playerId = NBTUtil.readUniqueId(compound.getCompound("id"));
   }
 
   @Override
-  protected void writeEntityToNBT(CompoundNBT compound) {
-    compound.put("id", NBTUtil.createUUIDTag(playerId));
+  protected void writeAdditional(CompoundNBT compound) {
+    compound.put("id", NBTUtil.writeUniqueId(playerId));
   }
 
 }

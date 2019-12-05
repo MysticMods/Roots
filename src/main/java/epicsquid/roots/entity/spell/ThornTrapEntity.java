@@ -1,24 +1,27 @@
 package epicsquid.roots.entity.spell;
 
-import java.util.List;
-import java.util.UUID;
-
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRoseThorns;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.NBTUtil;
+import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
+
+import java.util.List;
+import java.util.UUID;
 
 @SuppressWarnings("AccessStaticViaInstance")
 public class ThornTrapEntity extends Entity {
@@ -28,15 +31,17 @@ public class ThornTrapEntity extends Entity {
   private float damage;
   private int slownessDuration, slownessAmplifier, poisonDuration, poisonAmplifier, duration;
 
+  public ThornTrapEntity(EntityType<?> entityTypeIn, World worldIn) {
+    super(entityTypeIn, worldIn);
+  }
+
   public ThornTrapEntity(World worldIn) {
     this(worldIn, SpellRoseThorns.damage, SpellRoseThorns.duration, SpellRoseThorns.slownessDuration, SpellRoseThorns.slownessAmplifier, SpellRoseThorns.poisonDuration, SpellRoseThorns.poisonAmplifier);
   }
 
   public ThornTrapEntity(World world, float damage, int duration, int slownessDuration, int slownessAmplifier, int poisonDuration, int poisonAmplifier) {
-    super(world);
+    this(null, null);
     this.setInvisible(false);
-    this.setSize(1, 1);
-    getDataManager().register(lifetime, duration);
     this.setNoGravity(false);
     this.noClip = false;
     this.damage = damage;
@@ -47,6 +52,12 @@ public class ThornTrapEntity extends Entity {
     this.duration = duration;
   }
 
+  @Override
+  protected void registerData() {
+    getDataManager().register(lifetime, duration);
+  }
+
+
   public void setPlayer(UUID id) {
     this.playerId = id;
   }
@@ -56,23 +67,27 @@ public class ThornTrapEntity extends Entity {
     return false;
   }
 
+  // TODO: Custom packet
+
   @Override
-  protected void entityInit() {
+  public IPacket<?> createSpawnPacket() {
+    return null;
   }
 
   @Override
   public void tick() {
     super.tick();
-    this.move(MoverType.SELF, motionX, motionY, motionZ);
-    this.motionY -= 0.04f;
+    Vec3d motion = getMotion();
+    this.move(MoverType.SELF, motion);
+
     if (this.onGround) {
-      this.motionX = 0;
-      this.motionZ = 0;
+      this.setMotion(0, motion.y - 0.04, 0);
+    } else {
+      this.setMotion(motion.x, motion.y - 0.04, motion.z);
     }
     getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
-    getDataManager().setDirty(lifetime);
     if (getDataManager().get(lifetime) <= 0) {
-      setDead();
+      remove();
     }
     if (world.isRemote) {
       if (onGround) {
@@ -102,15 +117,15 @@ public class ThornTrapEntity extends Entity {
       }
     }
     if (playerId != null) {
-      PlayerEntity player = world.getPlayerEntityByUUID(playerId);
+      PlayerEntity player = world.getPlayerByUuid(playerId);
       if (player != null) {
         List<LivingEntity> entities = world
             .getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(posX - 1.5, posY - 1.5, posZ - 1.5, posX + 1.5, posY + 1.5, posZ + 1.5));
         entities.remove(player);
         if (entities.size() > 0) {
-          setDead();
+          remove();
           for (LivingEntity entity : entities) {
-            if (!(entity instanceof PlayerEntity && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
+            if (!(entity instanceof PlayerEntity && world.getServer().isPVPEnabled())) {
               entity.attackEntityFrom(DamageSource.CACTUS.causeMobDamage(player), damage);
               entity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, slownessDuration, slownessAmplifier));
               entity.addPotionEffect(new EffectInstance(Effects.POISON, poisonDuration, poisonAmplifier));
@@ -139,13 +154,12 @@ public class ThornTrapEntity extends Entity {
   }
 
   @Override
-  protected void readEntityFromNBT(CompoundNBT compound) {
-    this.playerId = net.minecraft.nbt.NBTUtil.getUUIDFromTag(compound.getCompound("id"));
+  protected void readAdditional(CompoundNBT compound) {
+    this.playerId = NBTUtil.readUniqueId(compound.getCompound("id"));
   }
 
   @Override
-  protected void writeEntityToNBT(CompoundNBT compound) {
-    compound.put("id", net.minecraft.nbt.NBTUtil.createUUIDTag(playerId));
+  protected void writeAdditional(CompoundNBT compound) {
+    compound.put("id", NBTUtil.writeUniqueId(playerId));
   }
-
 }
