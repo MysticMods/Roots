@@ -1,10 +1,9 @@
 package epicsquid.roots.util;
 
 import com.google.common.collect.ImmutableMap;
-import javafx.beans.property.Property;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.IBlockState;
 
 import java.util.*;
 
@@ -23,7 +22,7 @@ public class StateUtil {
    * all of the same property keys as state2, and that the values of these
    * properties match.
    */
-  public static boolean compareStates(IBlockState state1, IBlockState state2) {
+  public static boolean compareStates(BlockState state1, BlockState state2) {
     // This should cover most options
     if (state1.getBlock() != state2.getBlock()) return false;
 
@@ -56,7 +55,7 @@ public class StateUtil {
    * @param stateWithValues
    * @return
    */
-  public static boolean stateContainsValues (IBlockState stateBeingChecked, IBlockState stateWithValues) {
+  public static boolean stateContainsValues (BlockState stateBeingChecked, BlockState stateWithValues) {
     // If they aren't the same block then they aren't the same state
     if (stateBeingChecked.getBlock() != stateWithValues.getBlock()) return false;
 

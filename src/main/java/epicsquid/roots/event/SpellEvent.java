@@ -1,24 +1,24 @@
 package epicsquid.roots.event;
 
 import epicsquid.roots.spell.SpellBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
 // TODO: Actually do something interesting with this. At the minute it's split between onItemUse/onItemStoppedUsing -- there's nothing to differentiate between those two events, however. Additionally, if we are going to have an event, it would make more sense for the event to be "on start, on tick, on stop".
 @Deprecated
 public class SpellEvent extends Event {
-  private EntityPlayer player;
+  private PlayerEntity player;
   private SpellBase spell;
   private int cooldown;
 
-  public SpellEvent(EntityPlayer player, SpellBase spell) {
+  public SpellEvent(PlayerEntity player, SpellBase spell) {
     super();
     this.player = player;
     this.spell = spell;
     this.cooldown = spell.getCooldown();
   }
 
-  public EntityPlayer getPlayer() {
+  public PlayerEntity getPlayer() {
     return player;
   }
 

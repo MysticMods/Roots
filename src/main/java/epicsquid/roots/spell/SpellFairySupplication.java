@@ -2,14 +2,14 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.block.groves.BlockGroveStone;
+import epicsquid.roots.block.groves.GroveStoneBlock;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageGroveCompleteFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -44,7 +44,7 @@ public class SpellFairySupplication extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     List<BlockPos> positions = Util.getBlocksWithinRadius(player.world, player.getPosition(), 15, 10, 15, ModBlocks.fairy_grove_stone);
     if (positions.isEmpty()) return false;
 
@@ -53,12 +53,12 @@ public class SpellFairySupplication extends SpellBase {
     List<BlockPos> changed = new ArrayList<>();
 
     for (BlockPos pos : positions) {
-      IBlockState state = player.world.getBlockState(pos);
+      BlockState state = player.world.getBlockState(pos);
       if (state.getBlock() != ModBlocks.fairy_grove_stone) {
         continue;
       }
 
-      if (state.getValue(BlockGroveStone.VALID)) {
+      if (state.getValue(GroveStoneBlock.VALID)) {
         continue;
       }
 
@@ -66,7 +66,7 @@ public class SpellFairySupplication extends SpellBase {
       changed.add(pos);
 
       if (!player.world.isRemote) {
-        player.world.setBlockState(pos, state.withProperty(BlockGroveStone.VALID, true));
+        player.world.setBlockState(pos, state.withProperty(GroveStoneBlock.VALID, true));
       }
     }
 

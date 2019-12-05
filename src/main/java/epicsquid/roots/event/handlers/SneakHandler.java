@@ -3,11 +3,11 @@ package epicsquid.roots.event.handlers;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.handler.QuiverHandler;
-import epicsquid.roots.item.ItemQuiver;
+import epicsquid.roots.item.QuiverItem;
 import epicsquid.roots.network.MessageServerTryPickupArrows;
 import epicsquid.roots.util.QuiverInventoryUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -23,7 +23,7 @@ public class SneakHandler {
   private static boolean lastSneak = false;
 
   @SubscribeEvent
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public static void onPlayerSneak(TickEvent.ClientTickEvent event) {
     Minecraft mc = Minecraft.getMinecraft();
     if (mc.player == null) return;
@@ -31,7 +31,7 @@ public class SneakHandler {
     if (lastSneak != mc.player.isSneaking() && !lastSneak) {
       lastSneak = mc.player.isSneaking();
 
-      List<EntityArrow> arrows = mc.world.getEntitiesWithinAABB(EntityArrow.class, ItemQuiver.bounding.offset(mc.player.getPosition()));
+      List<AbstractArrowEntity> arrows = mc.world.getEntitiesWithinAABB(AbstractArrowEntity.class, QuiverItem.bounding.offset(mc.player.getPosition()));
       if (arrows.isEmpty()) return;
 
       ItemStack quiver = QuiverInventoryUtil.getQuiver(mc.player);

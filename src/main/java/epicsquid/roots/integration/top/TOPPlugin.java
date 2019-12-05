@@ -1,35 +1,20 @@
 package epicsquid.roots.integration.top;
 
-import epicsquid.roots.block.BlockBonfire;
-import epicsquid.roots.block.groves.BlockGroveStone;
-import epicsquid.roots.init.ModBlocks;
-import epicsquid.roots.ritual.RitualBase;
-import epicsquid.roots.tileentity.TileEntityBonfire;
-import mcjty.theoneprobe.api.*;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
-
-import java.util.function.Function;
-
 @SuppressWarnings("unused")
-public class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfoProvider {
-  @Override
+public class TOPPlugin { //implements Function<ITheOneProbe, Void>, IProbeInfoProvider {
+/*  @Override
   public String getID() {
     return "roots:top_integration";
   }
 
   @Override
-  public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
+  public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, BlockState blockState, IProbeHitData data) {
     Block block = blockState.getBlock();
     if (block == ModBlocks.grove_stone) {
-      if (blockState.getValue(BlockGroveStone.VALID)) {
+      if (blockState.getValue(GroveStoneBlock.VALID)) {
         probeInfo.text(TextFormatting.GREEN + "" + TextFormatting.BOLD + "{*roots.hud.grove_stone.valid*}");
       }
-    } else if (block instanceof BlockBonfire) {
+    } else if (block instanceof BonfireBlock) {
       TileEntityBonfire te = (TileEntityBonfire) world.getTileEntity(data.getPos());
       if (te != null && te.getBurnTime() > 0) {
         int duration = 0;
@@ -58,5 +43,5 @@ public class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfoProvid
 
   public void init(ITheOneProbe top) {
     top.registerProvider(this);
-  }
+  }*/
 }

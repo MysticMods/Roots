@@ -1,11 +1,11 @@
 package epicsquid.roots.ritual;
 
-import epicsquid.roots.entity.ritual.EntityRitualBase;
-import epicsquid.roots.entity.ritual.EntityRitualDivineProtection;
+import epicsquid.roots.entity.ritual.BaseRitualEntity;
+import epicsquid.roots.entity.ritual.DivineProtectionRitualEntity;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.init.Items;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -68,7 +68,7 @@ public class RitualDivineProtection extends RitualBase {
   }
 
   @Override
-  public EntityRitualBase doEffect(World world, BlockPos pos) {
-    return this.spawnEntity(world, pos, EntityRitualDivineProtection.class);
+  public BaseRitualEntity doEffect(World world, BlockPos pos) {
+    return this.spawnEntity(world, pos, DivineProtectionRitualEntity.class);
   }
 }

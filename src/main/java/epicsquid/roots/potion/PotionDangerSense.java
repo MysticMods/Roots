@@ -2,21 +2,20 @@ package epicsquid.roots.potion;
 
 import epicsquid.mysticallib.util.AABBUtil;
 import epicsquid.roots.Roots;
-import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.SpellSenseDanger;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
+import net.minecraft.potion.Effect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class PotionDangerSense extends Potion {
+public class PotionDangerSense extends Effect {
   private ResourceLocation texture = new ResourceLocation(Roots.MODID, "textures/gui/potions.png");
 
   public PotionDangerSense() {
@@ -32,32 +31,32 @@ public class PotionDangerSense extends Potion {
   }
 
   @Override
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public int getStatusIconIndex() {
     Minecraft.getMinecraft().renderEngine.bindTexture(texture);
     return super.getStatusIconIndex();
   }
 
   @Override
-  public void performEffect(EntityLivingBase entity, int amplifier) {
+  public void performEffect(LivingEntity entity, int amplifier) {
     if (entity.world.isRemote) return;
 
-    if (entity instanceof EntityPlayer) {
+    if (entity instanceof PlayerEntity) {
       int[] radius = SpellSenseDanger.instance.getRadius();
       AxisAlignedBB aabb = AABBUtil.buildFromEntity(entity).grow(radius[0], radius[1], radius[2]);
-      for (EntityLivingBase mob : entity.world.getEntitiesWithinAABB(EntityLivingBase.class, aabb, EntityUtil::isHostile)) {
-        mob.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 10, 0, false, false));
+      for (LivingEntity mob : entity.world.getEntitiesWithinAABB(LivingEntity.class, aabb, EntityUtil::isHostile)) {
+        mob.addPotionEffect(new EffectInstance(Effects.GLOWING, 10, 0, false, false));
       }
     }
   }
 
   @Override
-  public boolean shouldRenderHUD(PotionEffect effect) {
+  public boolean shouldRenderHUD(EffectInstance effect) {
     return false;
   }
 
   @Override
-  public boolean shouldRenderInvText(PotionEffect effect) {
+  public boolean shouldRenderInvText(EffectInstance effect) {
     return true;
   }
 }

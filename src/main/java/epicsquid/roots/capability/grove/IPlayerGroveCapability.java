@@ -1,7 +1,7 @@
 package epicsquid.roots.capability.grove;
 
 import epicsquid.roots.grove.GroveType;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 public interface IPlayerGroveCapability {
 
@@ -9,9 +9,9 @@ public interface IPlayerGroveCapability {
 
   float getTrust(GroveType type);
 
-  NBTTagCompound getData();
+  CompoundNBT getData();
 
-  void setData(NBTTagCompound tag);
+  void setData(CompoundNBT tag);
 
   void markDirty();
 

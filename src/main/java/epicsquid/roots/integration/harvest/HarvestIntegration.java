@@ -1,19 +1,7 @@
 package epicsquid.roots.integration.harvest;
 
-import epicsquid.mysticallib.block.BlockCropBase;
-import epicsquid.roots.init.ModBlocks;
-import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fml.common.Loader;
-import tehnut.harvest.BlockStack;
-import tehnut.harvest.Crop;
-import tehnut.harvest.Harvest;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
 public class HarvestIntegration {
-  public static void init() {
+  /*public static void init() {
     List<BlockCropBase> crops = Arrays.asList(ModBlocks.moonglow,
         ModBlocks.pereskia,
         ModBlocks.wildroot,
@@ -32,5 +20,5 @@ public class HarvestIntegration {
         map.put(blockStack, crop);
       }
     }
-  }
+  }*/
 }

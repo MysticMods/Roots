@@ -47,7 +47,7 @@ public class Spells {
     }
 
     @ZenMethod
-    public Spell setInteger (String propertyName, int value) {
+    public Spell putInt (String propertyName, int value) {
       PropertyTable props = original.getProperties();
       Property<Integer> prop = props.getProperty(propertyName);
       props.setProperty(prop, value);
@@ -56,7 +56,7 @@ public class Spells {
 
     @ZenMethod
     public Spell setCooldown (int value) {
-      return setInteger("cooldown", value);
+      return putInt("cooldown", value);
     }
 
     @ZenMethod
@@ -65,7 +65,7 @@ public class Spells {
     }
 
     @ZenMethod
-    public Spell setString (String propertyName, String value) {
+    public Spell putString (String propertyName, String value) {
       PropertyTable props = original.getProperties();
       Property<String> prop = props.getProperty(propertyName);
       props.setProperty(prop, value);

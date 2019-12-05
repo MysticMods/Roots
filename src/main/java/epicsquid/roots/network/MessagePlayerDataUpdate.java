@@ -5,8 +5,8 @@ import java.util.UUID;
 import epicsquid.roots.capability.playerdata.PlayerDataCapabilityProvider;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -17,13 +17,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessagePlayerDataUpdate implements IMessage {
   private UUID id = null;
-  private NBTTagCompound tag = new NBTTagCompound();
+  private CompoundNBT tag = new CompoundNBT();
 
   public MessagePlayerDataUpdate() {
     //
   }
 
-  public MessagePlayerDataUpdate(UUID id, NBTTagCompound tag) {
+  public MessagePlayerDataUpdate(UUID id, CompoundNBT tag) {
     this.tag = tag;
     this.id = id;
   }
@@ -42,14 +42,14 @@ public class MessagePlayerDataUpdate implements IMessage {
   }
 
   public static class MessageHolder implements IMessageHandler<MessagePlayerDataUpdate, IMessage> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessagePlayerDataUpdate message, final MessageContext ctx) {
       if (message != null) {
         World w = Minecraft.getMinecraft().world;
         if (w != null) {
           if (w.getPlayerEntityByUUID(message.id) != null) {
-            EntityPlayer player = w.getPlayerEntityByUUID(message.id);
+            PlayerEntity player = w.getPlayerEntityByUUID(message.id);
             if (player != null && player.hasCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null)) {
               player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null).setData(message.tag);
             }

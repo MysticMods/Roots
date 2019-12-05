@@ -15,12 +15,12 @@ import epicsquid.roots.util.types.Property;
 import epicsquid.roots.util.types.PropertyTable;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -111,7 +111,7 @@ public abstract class SpellBase {
     return this;
   }
 
-  public boolean costsMet(EntityPlayer player) {
+  public boolean costsMet(PlayerEntity player) {
     boolean matches = true;
     for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
       Herb herb = entry.getKey();
@@ -121,9 +121,9 @@ public abstract class SpellBase {
         matches = r >= d;
         if (!matches && !player.isCreative()) {
           if (r == -1.0) {
-            player.sendStatusMessage(new TextComponentTranslation("roots.info.pouch.no_pouch").setStyle(new Style().setColor(TextFormatting.RED)), true);
+            player.sendStatusMessage(new TranslationTextComponent("roots.info.pouch.no_pouch").setStyle(new Style().setColor(TextFormatting.RED)), true);
           } else {
-            player.sendStatusMessage(new TextComponentTranslation("roots.info.pouch.no_herbs", new TextComponentTranslation(String.format("item.%s.name", herb.getName()))), true);
+            player.sendStatusMessage(new TranslationTextComponent("roots.info.pouch.no_herbs", new TranslationTextComponent(String.format("item.%s.name", herb.getName()))), true);
           }
         }
       }
@@ -131,7 +131,7 @@ public abstract class SpellBase {
     return matches && costs.size() > 0 || player.capabilities.isCreativeMode;
   }
 
-  public void enactCosts(EntityPlayer player) {
+  public void enactCosts(PlayerEntity player) {
     for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
       Herb herb = entry.getKey();
       double d = entry.getValue();
@@ -139,19 +139,19 @@ public abstract class SpellBase {
     }
   }
 
-  public void enactTickCosts(EntityPlayer player) {
+  public void enactTickCosts(PlayerEntity player) {
     for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
       Herb herb = entry.getKey();
       double d = entry.getValue();
       PowderInventoryUtil.removePowder(player, herb, d / 20.0);
-      if (player instanceof EntityPlayerMP) {
+      if (player instanceof ServerPlayerEntity) {
         MessageUpdateHerb packet = new MessageUpdateHerb(herb);
-        PacketHandler.INSTANCE.sendTo(packet, (EntityPlayerMP) player);
+        PacketHandler.INSTANCE.sendTo(packet, (ServerPlayerEntity) player);
       }
     }
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public void addToolTip(List<String> tooltip) {
     String prefix = "roots.spell." + name;
     tooltip.add("" + textColor + TextFormatting.BOLD + I18n.format(prefix + ".name") + TextFormatting.RESET);
@@ -166,7 +166,7 @@ public abstract class SpellBase {
 
   private List<ItemStack> moduleItems = null;
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public List<ItemStack> getModuleStacks() {
     if (moduleItems == null) {
       moduleItems = new ArrayList<>();
@@ -201,7 +201,7 @@ public abstract class SpellBase {
     return ListUtil.matchesIngredients(ingredients, this.ingredients);
   }
 
-  public abstract boolean cast(EntityPlayer caster, List<SpellModule> modules);
+  public abstract boolean cast(PlayerEntity caster, List<SpellModule> modules);
 
   public float getRed1() {
     return red1;

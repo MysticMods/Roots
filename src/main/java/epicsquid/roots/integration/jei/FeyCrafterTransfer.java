@@ -2,7 +2,8 @@ package epicsquid.roots.integration.jei;
 
 import epicsquid.roots.gui.container.ContainerFeyCrafter;
 import mezz.jei.api.recipe.transfer.IRecipeTransferInfo;
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.container.Slot;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ public class FeyCrafterTransfer implements IRecipeTransferInfo<ContainerFeyCraft
   }
 
   @Override
-  public String getRecipeCategoryUid() {
+  public ResourceLocation getRecipeCategoryUid() {
     return JEIRootsPlugin.FEY_CRAFTING;
   }
 

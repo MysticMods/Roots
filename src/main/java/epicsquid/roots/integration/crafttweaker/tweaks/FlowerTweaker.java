@@ -13,6 +13,7 @@ import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.ResourceLocation;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -82,10 +83,10 @@ public class FlowerTweaker {
   }
 
   private static class FlowerBlockState extends Action {
-    private final net.minecraft.block.state.IBlockState state;
+    private final BlockState state;
     private final String name;
 
-    protected FlowerBlockState(String name, net.minecraft.block.state.IBlockState state) {
+    protected FlowerBlockState(String name, BlockState state) {
       super("add_flower_block_state");
       this.name = name;
       this.state = state;

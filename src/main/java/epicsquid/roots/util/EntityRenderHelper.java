@@ -4,11 +4,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.entity.LivingEntity;
 
 public class EntityRenderHelper {
-  public static void drawEntityOnScreen(int posX, int posY, float scale, float mouseX, float mouseY, EntityLivingBase ent) {
+  public static void drawEntityOnScreen(int posX, int posY, float scale, float mouseX, float mouseY, LivingEntity ent) {
     if (ent.world == null) {
       ent.world = Minecraft.getMinecraft().world;
     }
@@ -33,7 +33,7 @@ public class EntityRenderHelper {
     ent.rotationYawHead = ent.rotationYaw;
     ent.prevRotationYawHead = ent.rotationYaw;
     GlStateManager.translate(0.0F, 0.0F, 0.0F);
-    RenderManager rendermanager = Minecraft.getMinecraft().getRenderManager();
+    EntityRendererManager rendermanager = Minecraft.getMinecraft().getRenderManager();
     rendermanager.setPlayerViewY(180.0F);
     rendermanager.setRenderShadow(false);
     rendermanager.renderEntity(ent, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, false);

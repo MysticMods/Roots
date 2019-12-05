@@ -1,27 +1,26 @@
 package epicsquid.roots.world.village;
 
 import epicsquid.roots.init.ModBlocks;
-import net.minecraft.block.BlockLog;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.block.LogBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.structure.StructureBoundingBox;
-import net.minecraft.world.gen.structure.StructureComponent;
-import net.minecraft.world.gen.structure.StructureVillagePieces;
+import net.minecraft.world.gen.feature.StructurePiece;
+import net.minecraft.world.gen.feature.VillagePieces;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
 import java.util.List;
 import java.util.Random;
 
-public class ComponentDruidHut extends StructureVillagePieces.Village {
-  private EnumFacing facing;
+public class ComponentDruidHut extends VillagePieces.Village {
+  private Direction facing;
 
   public ComponentDruidHut() {
   }
 
-  public ComponentDruidHut(StructureVillagePieces.Start start, int type, Random random, StructureBoundingBox box, EnumFacing facing) {
+  public ComponentDruidHut(VillagePieces.Start start, int type, Random random, MutableBoundingBox box, Direction facing) {
     super(start, type);
     this.boundingBox = box;
     this.facing = facing;
@@ -34,7 +33,7 @@ public class ComponentDruidHut extends StructureVillagePieces.Village {
   }
 
   @Override
-  public boolean addComponentParts(World world, Random random, StructureBoundingBox bb) {
+  public boolean addComponentParts(World world, Random random, MutableBoundingBox bb) {
     if (this.averageGroundLvl < 0) {
       this.averageGroundLvl = this.getAverageGroundLevel(world, bb);
 
@@ -45,14 +44,14 @@ public class ComponentDruidHut extends StructureVillagePieces.Village {
       this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 12 - 1, 0);
     }
 
-    IBlockState cobblestone = Blocks.COBBLESTONE.getDefaultState();
-    IBlockState stairs = ModBlocks.wildwood_stairs.getDefaultState(); // TODO: Facing
-    IBlockState door = ModBlocks.wildwood_door.getDefaultState(); // TODO: Facing
-    IBlockState wildwood_log_down = ModBlocks.wildwood_log.getDefaultState().withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Y);
-    IBlockState planks = ModBlocks.wildwood_planks.getDefaultState();
-    IBlockState thatch = epicsquid.mysticalworld.init.ModBlocks.thatch.getDefaultState();
-    IBlockState runestone = ModBlocks.chiseled_runestone.getDefaultState();
-    IBlockState air = Blocks.AIR.getDefaultState();
+    BlockState cobblestone = Blocks.COBBLESTONE.getDefaultState();
+    BlockState stairs = ModBlocks.wildwood_stairs.getDefaultState(); // TODO: Facing
+    BlockState door = ModBlocks.wildwood_door.getDefaultState(); // TODO: Facing
+    BlockState wildwood_log_down = ModBlocks.wildwood_log.getDefaultState().withProperty(LogBlock.LOG_AXIS, LogBlock.EnumAxis.Y);
+    BlockState planks = ModBlocks.wildwood_planks.getDefaultState();
+    BlockState thatch = epicsquid.mysticalworld.init.ModBlocks.thatch.getDefaultState();
+    BlockState runestone = ModBlocks.chiseled_runestone.getDefaultState();
+    BlockState air = Blocks.AIR.getDefaultState();
 
     this.fillWithAir(world, bb, 0, 0, 0, 8, 0, 0);
     // YEP. Layer 1.
@@ -131,16 +130,16 @@ public class ComponentDruidHut extends StructureVillagePieces.Village {
     return true;
   }
 
-  public static ComponentDruidHut create(StructureVillagePieces.PieceWeight piece, StructureVillagePieces.Start start, List<StructureComponent> pieces, Random random, int structMinX, int structMinY, int structMinZ, EnumFacing facing, int type) {
-    StructureBoundingBox box = StructureBoundingBox.getComponentToAddBoundingBox(structMinX, structMinY, structMinZ, 0, 0, 0, 10, 7, 9, facing);
-    return (canVillageGoDeeper(box) && StructureComponent.findIntersecting(pieces, box) == null) ? new ComponentDruidHut(start, type, random, box, facing) : null;
+  public static ComponentDruidHut create(VillagePieces.PieceWeight piece, VillagePieces.Start start, List<StructurePiece> pieces, Random random, int structMinX, int structMinY, int structMinZ, Direction facing, int type) {
+    MutableBoundingBox box = MutableBoundingBox.getComponentToAddBoundingBox(structMinX, structMinY, structMinZ, 0, 0, 0, 10, 7, 9, facing);
+    return (canVillageGoDeeper(box) && StructurePiece.findIntersecting(pieces, box) == null) ? new ComponentDruidHut(start, type, random, box, facing) : null;
   }
 
   public static class CreationHandler implements VillagerRegistry.IVillageCreationHandler {
 
     @Override
-    public StructureVillagePieces.PieceWeight getVillagePieceWeight(Random random, int i) {
-      return new StructureVillagePieces.PieceWeight(ComponentDruidHut.class, 500, 1);
+    public VillagePieces.PieceWeight getVillagePieceWeight(Random random, int i) {
+      return new VillagePieces.PieceWeight(ComponentDruidHut.class, 500, 1);
     }
 
     @Override
@@ -149,7 +148,7 @@ public class ComponentDruidHut extends StructureVillagePieces.Village {
     }
 
     @Override
-    public StructureVillagePieces.Village buildComponent(StructureVillagePieces.PieceWeight villagePiece, StructureVillagePieces.Start startPiece, List<StructureComponent> pieces, Random random, int p1, int p2, int p3, EnumFacing facing, int p5) {
+    public VillagePieces.Village buildComponent(VillagePieces.PieceWeight villagePiece, VillagePieces.Start startPiece, List<StructurePiece> pieces, Random random, int p1, int p2, int p3, Direction facing, int p5) {
       return ComponentDruidHut.create(villagePiece, startPiece, pieces, random, p1, p2, p3, facing, p5);
     }
   }

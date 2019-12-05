@@ -1,14 +1,14 @@
 package epicsquid.roots.ritual;
 
-import epicsquid.roots.entity.ritual.EntityRitualBase;
-import epicsquid.roots.entity.ritual.EntityRitualHealingAura;
+import epicsquid.roots.entity.ritual.BaseRitualEntity;
+import epicsquid.roots.entity.ritual.HealingAuraRitualEntity;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.ritual.conditions.ConditionTrees;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.BlockPlanks;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -58,7 +58,7 @@ public class RitualHealingAura extends RitualBase {
   }
 
   @Override
-  public EntityRitualBase doEffect(World world, BlockPos pos) {
-    return this.spawnEntity(world, pos, EntityRitualHealingAura.class);
+  public BaseRitualEntity doEffect(World world, BlockPos pos) {
+    return this.spawnEntity(world, pos, HealingAuraRitualEntity.class);
   }
 }

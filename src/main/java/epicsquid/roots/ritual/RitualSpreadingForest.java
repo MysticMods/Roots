@@ -1,7 +1,7 @@
 package epicsquid.roots.ritual;
 
-import epicsquid.roots.entity.ritual.EntityRitualBase;
-import epicsquid.roots.entity.ritual.EntityRitualSpreadingForest;
+import epicsquid.roots.entity.ritual.BaseRitualEntity;
+import epicsquid.roots.entity.ritual.SpreadingForestRitualEntity;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.util.types.Property;
@@ -54,7 +54,7 @@ public class RitualSpreadingForest extends RitualBase {
   }
 
   @Override
-  public EntityRitualBase doEffect(World world, BlockPos pos) {
-    return this.spawnEntity(world, pos, EntityRitualSpreadingForest.class);
+  public BaseRitualEntity doEffect(World world, BlockPos pos) {
+    return this.spawnEntity(world, pos, SpreadingForestRitualEntity.class);
   }
 }

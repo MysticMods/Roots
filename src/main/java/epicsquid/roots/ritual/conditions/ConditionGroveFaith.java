@@ -4,7 +4,7 @@ import epicsquid.roots.capability.grove.IPlayerGroveCapability;
 import epicsquid.roots.capability.grove.PlayerGroveCapabilityProvider;
 import epicsquid.roots.grove.GroveType;
 import epicsquid.roots.tileentity.TileEntityBonfire;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.ITextComponent;
 
 import javax.annotation.Nullable;
@@ -21,7 +21,7 @@ public class ConditionGroveFaith implements Condition {
   }
 
   @Override
-  public boolean checkCondition(TileEntityBonfire tile, EntityPlayer player) {
+  public boolean checkCondition(TileEntityBonfire tile, PlayerEntity player) {
     IPlayerGroveCapability capability = player.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null);
     if (capability == null) {
       return false;

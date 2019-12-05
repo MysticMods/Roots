@@ -1,7 +1,7 @@
 package epicsquid.roots.ritual;
 
-import epicsquid.roots.entity.ritual.EntityRitualBase;
-import epicsquid.roots.entity.ritual.EntityRitualGathering;
+import epicsquid.roots.entity.ritual.BaseRitualEntity;
+import epicsquid.roots.entity.ritual.GatheringRitualEntity;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.ritual.conditions.ConditionStandingStones;
@@ -52,7 +52,7 @@ public class RitualGathering extends RitualBase {
   }
 
   @Override
-  public EntityRitualBase doEffect(World world, BlockPos pos) {
-    return this.spawnEntity(world, pos, EntityRitualGathering.class);
+  public BaseRitualEntity doEffect(World world, BlockPos pos) {
+    return this.spawnEntity(world, pos, GatheringRitualEntity.class);
   }
 }

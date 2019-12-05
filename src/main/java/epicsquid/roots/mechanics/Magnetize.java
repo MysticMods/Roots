@@ -4,8 +4,8 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.integration.botania.SolegnoliaHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.entity.item.ExperienceOrbEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -28,8 +28,8 @@ public class Magnetize {
     if (entities.isEmpty()) return 0;
     for (Entity entity : entities) {
       if (!world.isRemote) {
-        if (entity instanceof EntityItem) {
-          ((EntityItem) entity).setPickupDelay(0);
+        if (entity instanceof ItemEntity) {
+          ((ItemEntity) entity).setPickupDelay(0);
         }
         entity.moveToBlockPosAndAngles(startPosition, 0f, 0f);
       }
@@ -39,16 +39,16 @@ public class Magnetize {
 
   // Plz only call this on the remote
   public static List<BlockPos> store(World world, BlockPos startPosition, IItemHandler handler, int radiusX, int radiusY, int radiusZ) {
-    List<EntityItem> items = collect(EntityItem.class, world, startPosition, radiusX, radiusY, radiusZ);
-    Iterator<EntityItem> iterator = items.iterator();
+    List<ItemEntity> items = collect(ItemEntity.class, world, startPosition, radiusX, radiusY, radiusZ);
+    Iterator<ItemEntity> iterator = items.iterator();
     List<BlockPos> positions = new ArrayList<>();
     while (iterator.hasNext()) {
-      EntityItem entity = iterator.next();
+      ItemEntity entity = iterator.next();
       ItemStack item = entity.getItem();
       ItemStack result = ItemHandlerHelper.insertItemStacked(handler, item, false);
       if (result.isEmpty()) {
         positions.add(entity.getPosition());
-        entity.setDead();
+        entity.remove();
       }
     }
     return positions;
@@ -57,14 +57,16 @@ public class Magnetize {
   public static boolean skipPull(Entity entity) {
     // Supporting Demagnetize
     // https://www.curseforge.com/minecraft/mc-mods/demagnetize
-    if (entity instanceof EntityItem && entity.getEntityData().hasKey("PreventRemoteMovement")) {
+    if (entity instanceof ItemEntity && entity.getPersistentData().contains("PreventRemoteMovement")) {
       return true;
     }
 
-    if (!SpellConfig.spellFeaturesCategory.shouldMagnetismAttractXP && entity instanceof EntityXPOrb) {
+    if (!SpellConfig.spellFeaturesCategory.shouldMagnetismAttractXP && entity instanceof ExperienceOrbEntity) {
       return true;
     }
 
-    return SolegnoliaHelper.hasBotania() && SolegnoliaHelper.hasSolegnoliaAround(entity);
+    // return SolegnoliaHelper.hasBotania() && SolegnoliaHelper.hasSolegnoliaAround(entity);
+    // TODO: When Botania returns
+    return false;
   }
 }

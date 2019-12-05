@@ -1,19 +1,8 @@
 package epicsquid.roots.integration.jei.ritual;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+public class RitualCraftingWrapper { // implements IRecipeWrapper {
 
-import epicsquid.roots.recipe.PyreCraftingRecipe;
-import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.ingredients.VanillaTypes;
-import mezz.jei.api.recipe.IRecipeWrapper;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-
-public class RitualCraftingWrapper implements IRecipeWrapper {
-
-  public final PyreCraftingRecipe recipe;
+/*  public final PyreCraftingRecipe recipe;
 
   public RitualCraftingWrapper(PyreCraftingRecipe recipe) {
     this.recipe = recipe;
@@ -28,5 +17,5 @@ public class RitualCraftingWrapper implements IRecipeWrapper {
     }
     ingredients.setInputLists(VanillaTypes.ITEM, inputs);
     ingredients.setOutput(VanillaTypes.ITEM, recipe.getResult());
-  }
+  }*/
 }

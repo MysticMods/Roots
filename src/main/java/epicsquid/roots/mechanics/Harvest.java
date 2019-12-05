@@ -1,18 +1,18 @@
 package epicsquid.roots.mechanics;
 
-import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.CropConfig;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockCrops;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.CropsBlock;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.state.IProperty;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -20,10 +20,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.Method;
@@ -49,14 +49,14 @@ public class Harvest {
     return stateMax.keySet();
   }
 
-  public static IProperty<?> resolveStates(IBlockState state) {
+  public static IProperty<?> resolveStates(BlockState state) {
     Block block = state.getBlock();
     ResourceLocation rl = block.getRegistryName();
     if (CropConfig.getHarvestModBlacklist().contains(Objects.requireNonNull(rl).getNamespace()) || CropConfig.getHarvestBlacklist().contains(rl)) {
       return null;
     }
 
-    for (IProperty<?> prop : state.getPropertyKeys()) {
+    for (IProperty<?> prop : state.getProperties()) {
       if ((prop.getName().equals("age") || prop.getName().equals("growth")) && prop.getValueClass() == Integer.class) {
         int max = Harvest.getMaxState(prop);
         if (max == -1) {
@@ -70,7 +70,7 @@ public class Harvest {
   }
 
   static {
-    getSeed = ObfuscationReflectionHelper.findMethod(BlockCrops.class, "func_149866_i", Item.class);
+    getSeed = ObfuscationReflectionHelper.findMethod(CropsBlock.class, "func_149866_i", Item.class);
     getSeed.setAccessible(true);
   }
 
@@ -79,7 +79,7 @@ public class Harvest {
     seedCache.put(Blocks.NETHER_WART, new ItemStack(Items.NETHER_WART));
   }
 
-  public static void add(ItemStack seed, int dimension, BlockPos position, IBlockState block) {
+  public static void add(ItemStack seed, int dimension, BlockPos position, BlockState block) {
     queue.add(new HarvestEntry(seed, dimension, position, block));
   }
 
@@ -88,7 +88,8 @@ public class Harvest {
     if (queue.peek() == null) return;
 
     HarvestEntry ref = queue.pop();
-    HarvestEntry me = new HarvestEntry(null, event.getWorld().provider.getDimension(), event.getPos(), event.getState());
+    // Fix this
+    HarvestEntry me = new HarvestEntry(null, event.getWorld().getDimension().getType().getId(), event.getPos(), event.getState());
     if (!ref.equals(me)) return;
 
     ItemStack seed = ref.getSeed();
@@ -108,7 +109,7 @@ public class Harvest {
     }
   }
 
-  public static ItemStack getSeed(IBlockState state) {
+  public static ItemStack getSeed(BlockState state) {
     Block block = state.getBlock();
     ItemStack seed = seedCache.get(block);
     if (seed != null && !seed.isEmpty()) return seed;
@@ -121,52 +122,54 @@ public class Harvest {
     return seed;
   }
 
-  public static List<ItemStack> harvestReturnDrops(IBlockState state, IProperty<?> prop, ItemStack seed, BlockPos pos, World world, @Nullable EntityPlayer player) {
-    IBlockState newState = state.withProperty((IProperty<Integer>) prop, 0);
+  public static List<ItemStack> harvestReturnDrops(BlockState state, IProperty<?> prop, ItemStack seed, BlockPos pos, World world, @Nullable PlayerEntity player) {
+    BlockState newState = state.with((IProperty<Integer>) prop, 0);
     NonNullList<ItemStack> drops = NonNullList.create();
-    Harvest.add(seed, world.provider.getDimension(), pos, state);
+    // check dimension
+    Harvest.add(seed, world.getDimension().getType().getId(), pos, state);
     state.getBlock().getDrops(drops, world, pos, state, 0);
+    // Requires a loot context
     ForgeEventFactory.fireBlockHarvesting(drops, world, pos, state, 0, 1.0f, false, player);
     world.setBlockState(pos, newState);
     return drops;
   }
 
-  public static void doHarvest(IBlockState state, IProperty<?> prop, ItemStack seed, BlockPos pos, World world, @Nullable EntityPlayer player) {
+  public static void doHarvest(BlockState state, IProperty<?> prop, ItemStack seed, BlockPos pos, World world, @Nullable PlayerEntity player) {
     List<ItemStack> drops = harvestReturnDrops(state, prop, seed, pos, world, player);
     for (ItemStack stack : drops) {
       if (stack.isEmpty()) continue;
-      ItemUtil.spawnItem(world, pos, stack);
+      InventoryHelper.spawnItemStack(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);
     }
   }
 
-  public static List<ItemStack> harvestReturnDrops(IBlockState state, BlockPos pos, World world, @Nullable EntityPlayer player) {
+  public static List<ItemStack> harvestReturnDrops(BlockState state, BlockPos pos, World world, @Nullable PlayerEntity player) {
     ItemStack seed = Harvest.getSeed(state);
     IProperty<?> prop = Harvest.resolveStates(state);
     return harvestReturnDrops(state, prop, seed, pos, world, player);
   }
 
-  public static void doHarvest(IBlockState state, BlockPos pos, World world, @Nullable EntityPlayer player) {
+  public static void doHarvest(BlockState state, BlockPos pos, World world, @Nullable PlayerEntity player) {
     List<ItemStack> drops = harvestReturnDrops(state, pos, world, player);
     for (ItemStack stack : drops) {
       if (stack.isEmpty()) continue;
-      ItemUtil.spawnItem(world, pos, stack);
+      InventoryHelper.spawnItemStack(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);
     }
   }
 
-  public static boolean isGrown(IBlockState state) {
+  public static boolean isGrown(BlockState state) {
     IProperty<?> prop = resolveStates(state);
     if (prop == null) return false;
 
-    return state.getValue((IProperty<Integer>) prop) == getMaxState(prop);
+    return state.get((IProperty<Integer>) prop) == getMaxState(prop);
   }
 
   public static class HarvestEntry {
     private ItemStack seed;
     private int dimension;
     private BlockPos position;
-    private IBlockState block;
+    private BlockState block;
 
-    public HarvestEntry(ItemStack seed, int dimension, BlockPos position, IBlockState block) {
+    public HarvestEntry(ItemStack seed, int dimension, BlockPos position, BlockState block) {
       this.seed = seed;
       this.dimension = dimension;
       this.position = position;

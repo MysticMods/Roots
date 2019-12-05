@@ -12,7 +12,7 @@ import epicsquid.roots.util.types.Property;
 import epicsquid.roots.util.types.PropertyTable;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import java.util.Map;
 
@@ -27,7 +27,7 @@ public class CommandProperties extends CraftTweakerCommand {
 
   @Override
   protected void init() {
-    setDescription(new TextComponentTranslation("roots.commands.dump.desc"));
+    setDescription(new TranslationTextComponent("roots.commands.dump.desc"));
   }
 
   private void logProperty(Map.Entry<String, Property<?>> entry) {
@@ -74,7 +74,7 @@ public class CommandProperties extends CraftTweakerCommand {
   @Override
   public void executeCommand(MinecraftServer server, ICommandSender sender, String[] args) {
     if (args.length < 1) {
-      sender.sendMessage(new TextComponentTranslation("roots.commands.dump.usage"));
+      sender.sendMessage(new TranslationTextComponent("roots.commands.dump.usage"));
       return;
     }
     Optional<SubCommand> command = Enums.getIfPresent(SubCommand.class, args[0]);

@@ -3,24 +3,23 @@ package epicsquid.roots.init;
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.entity.RenderNull;
 import epicsquid.roots.Roots;
-import epicsquid.roots.entity.fairy.EntityFairy;
-import epicsquid.roots.entity.projectile.EntityFlare;
-import epicsquid.roots.entity.fairy.render.RenderFairy;
+import epicsquid.roots.entity.fairy.FairyEntity;
+import epicsquid.roots.entity.projectile.FlareEntity;
+import epicsquid.roots.entity.fairy.render.FairyRenderer;
 import epicsquid.roots.entity.ritual.*;
-import epicsquid.roots.entity.spell.EntityBoost;
-import epicsquid.roots.entity.spell.EntityFireJet;
-import epicsquid.roots.entity.spell.EntityThornTrap;
-import epicsquid.roots.entity.spell.EntityTimeStop;
-import epicsquid.roots.entity.wild.EntityWhiteStag;
-import epicsquid.roots.entity.wild.render.RenderWhiteStag;
+import epicsquid.roots.entity.spell.BoostEntity;
+import epicsquid.roots.entity.spell.FireJetEntity;
+import epicsquid.roots.entity.spell.ThornTrapEntity;
+import epicsquid.roots.entity.spell.TimeStopEntity;
+import epicsquid.roots.entity.wild.WhiteStagEntity;
+import epicsquid.roots.entity.wild.render.WhiteStagRenderer;
 import epicsquid.roots.proxy.ClientProxy;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraft.world.storage.loot.LootTables;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class ModEntities {
 
@@ -38,55 +37,55 @@ public class ModEntities {
    */
   public static void registerMobs() {
     // Helper entities
-    LibRegistry.registerEntity(EntityFireJet.class);
-    LibRegistry.registerEntity(EntityThornTrap.class);
-    LibRegistry.registerEntity(EntityTimeStop.class);
-    LibRegistry.registerEntity(EntityBoost.class);
-    LibRegistry.registerEntity(EntityFlare.class);
+    LibRegistry.registerEntity(FireJetEntity.class);
+    LibRegistry.registerEntity(ThornTrapEntity.class);
+    LibRegistry.registerEntity(TimeStopEntity.class);
+    LibRegistry.registerEntity(BoostEntity.class);
+    LibRegistry.registerEntity(FlareEntity.class);
 
     // Actual entities
-    LibRegistry.registerEntity(EntityFairy.class, 0xf542e3, 0xdb7fa1);
-    LibRegistry.registerEntity(EntityWhiteStag.class, 0xe0caba, 0x473124);
+    LibRegistry.registerEntity(FairyEntity.class, 0xf542e3, 0xdb7fa1);
+    LibRegistry.registerEntity(WhiteStagEntity.class, 0xe0caba, 0x473124);
 
     // Ritual entities
     List<Class<? extends Entity>> ritualClasses = Arrays.asList(
-        EntityRitualAnimalHarvest.class,
-        EntityRitualDivineProtection.class,
-        EntityRitualFireStorm.class,
-        EntityRitualFlowerGrowth.class,
-        EntityRitualFrostLands.class,
-        EntityRitualGathering.class,
-        EntityRitualGermination.class,
-        EntityRitualHealingAura.class,
-        EntityRitualHeavyStorms.class,
-        EntityRitualOvergrowth.class,
-        EntityRitualPurity.class,
-        EntityRitualSpreadingForest.class,
-        EntityRitualTransmutation.class,
-        EntityRitualWardingProtection.class,
-        EntityRitualWildGrowth.class,
-        EntityRitualWindwall.class
+        AnimalHarvestRitualEntity.class,
+        DivineProtectionRitualEntity.class,
+        FireStormRitualEntity.class,
+        FlowerGrowthRitualEntity.class,
+        FrostLandsRitualEntity.class,
+        GatheringRitualEntity.class,
+        GerminationRitualEntity.class,
+        HealingAuraRitualEntity.class,
+        HeavyStormsRitualEntity.class,
+        OvergrowthRitualEntity.class,
+        PurityRitualEntity.class,
+        SpreadingForestRitualEntity.class,
+        TransmutationRitualEntity.class,
+        WardingProtectionRitualEntity.class,
+        WildGrowthRitualEntity.class,
+        WindwallRitualEntity.class
     );
 
     ritualClasses.forEach(LibRegistry::registerEntity);
 
     if (Roots.proxy instanceof ClientProxy) {
-      LibRegistry.registerEntityRenderer(EntityFireJet.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityThornTrap.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityTimeStop.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityBoost.class, new RenderNull.Factory());
-      LibRegistry.registerEntityRenderer(EntityFlare.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(FireJetEntity.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(ThornTrapEntity.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(TimeStopEntity.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(BoostEntity.class, new RenderNull.Factory());
+      LibRegistry.registerEntityRenderer(FlareEntity.class, new RenderNull.Factory());
 
-      LibRegistry.registerEntityRenderer(EntityFairy.class, new RenderFairy.Factory());
-      LibRegistry.registerEntityRenderer(EntityWhiteStag.class, new RenderWhiteStag.Factory());
+      LibRegistry.registerEntityRenderer(FairyEntity.class, new FairyRenderer.Factory());
+      LibRegistry.registerEntityRenderer(WhiteStagEntity.class, new WhiteStagRenderer.Factory());
 
       ritualClasses.forEach(c -> LibRegistry.registerEntityRenderer(c, new RenderNull.Factory()));
     }
   }
 
-  public static List<ResourceLocation> LOOT_TABLES = Arrays.asList(EntityFairy.LOOT_TABLE, EntityWhiteStag.LOOT_TABLE);
+  public static List<ResourceLocation> LOOT_TABLES = Arrays.asList(FairyEntity.LOOT_TABLE, WhiteStagEntity.LOOT_TABLE);
 
   public static void registerLootTables() {
-    LOOT_TABLES.forEach(LootTableList::register);
+    LOOT_TABLES.forEach(LootTables::register);
   }
 }

@@ -1,67 +1,25 @@
 package epicsquid.roots.integration.jei;
 
-import com.google.common.collect.Lists;
 import epicsquid.roots.Roots;
-import epicsquid.roots.config.ElementalSoilConfig;
-import epicsquid.roots.handler.SpellHandler;
-import epicsquid.roots.init.ModBlocks;
-import epicsquid.roots.init.ModItems;
-import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.integration.jei.carving.*;
-import epicsquid.roots.integration.jei.fey.FeyCategory;
-import epicsquid.roots.integration.jei.fey.FeyWrapper;
-import epicsquid.roots.integration.jei.mortar.MortarCategory;
-import epicsquid.roots.integration.jei.mortar.MortarWrapper;
-import epicsquid.roots.integration.jei.ritual.RitualCategory;
-import epicsquid.roots.integration.jei.ritual.RitualCraftingCategory;
-import epicsquid.roots.integration.jei.ritual.RitualCraftingWrapper;
-import epicsquid.roots.integration.jei.ritual.RitualWrapper;
-import epicsquid.roots.integration.jei.shears.RunicShearsCategory;
-import epicsquid.roots.integration.jei.shears.RunicShearsEntityCategory;
-import epicsquid.roots.integration.jei.shears.RunicShearsEntityWrapper;
-import epicsquid.roots.integration.jei.shears.RunicShearsWrapper;
-import epicsquid.roots.integration.jei.spell.SpellCostCategory;
-import epicsquid.roots.integration.jei.spell.SpellCostWrapper;
-import epicsquid.roots.integration.jei.spell.SpellModifierCategory;
-import epicsquid.roots.integration.jei.spell.SpellModifierWrapper;
-import epicsquid.roots.recipe.*;
-import epicsquid.roots.ritual.RitualBase;
-import epicsquid.roots.ritual.RitualRegistry;
-import epicsquid.roots.spell.SpellBase;
-import epicsquid.roots.spell.SpellRegistry;
-import mezz.jei.api.*;
-import mezz.jei.api.ingredients.VanillaTypes;
-import mezz.jei.api.recipe.IRecipeCategoryRegistration;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import mezz.jei.api.IModPlugin;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentTranslation;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.stream.Collectors;
+//@JEIPlugin
+public abstract class JEIRootsPlugin implements IModPlugin {
 
-@JEIPlugin
-public class JEIRootsPlugin implements IModPlugin {
+  public static final ResourceLocation RUNIC_SHEARS = new ResourceLocation(Roots.MODID, "runic_shears");
+  public static final ResourceLocation RUNIC_SHEARS_ENTITY = new ResourceLocation(Roots.MODID, "runic_shears_entity");
+  public static final ResourceLocation BARK_CARVING = new ResourceLocation(Roots.MODID, "bark_carving");
+  public static final ResourceLocation RUNIC_CARVING = new ResourceLocation(Roots.MODID, "runic_carving");
+  public static final ResourceLocation RITUAL_CRAFTING = new ResourceLocation(Roots.MODID, "ritual_crafting");
+  public static final ResourceLocation MORTAR_AND_PESTLE = new ResourceLocation(Roots.MODID, "mortar_and_pestle");
+  public static final ResourceLocation RITUAL = new ResourceLocation(Roots.MODID, "ritual");
+  public static final ResourceLocation FEY_CRAFTING = new ResourceLocation(Roots.MODID, "fey_crafting");
+  public static final ResourceLocation SPELL_COSTS = new ResourceLocation(Roots.MODID, "spell_costs");
+  public static final ResourceLocation SPELL_MODIFIERS = new ResourceLocation(Roots.MODID, "spell_modifiers");
+  public static final ResourceLocation TERRA_MOSS = new ResourceLocation(Roots.MODID, "terra_moss");
 
-  public static final String RUNIC_SHEARS = Roots.MODID + ".runic_shears";
-  public static final String RUNIC_SHEARS_ENTITY = Roots.MODID + ".runic_shears_entity";
-  public static final String BARK_CARVING = Roots.MODID + ".bark_carving";
-  public static final String RUNIC_CARVING = Roots.MODID + ".runic_carving";
-  public static final String RITUAL_CRAFTING = Roots.MODID + ".ritual_crafting";
-  public static final String MORTAR_AND_PESTLE = Roots.MODID + ".mortar_and_pestle";
-  public static final String RITUAL = Roots.MODID + ".ritual";
-  public static final String FEY_CRAFTING = Roots.MODID + ".fey_crafting";
-  public static final String SPELL_COSTS = Roots.MODID + ".spell_costs";
-  public static final String SPELL_MODIFIERS = Roots.MODID + ".spell_modifiers";
-  public static final String TERRA_MOSS = Roots.MODID + ".terra_moss";
-
-  @Override
+/*  @Override
   public void registerCategories(IRecipeCategoryRegistration registry) {
     IGuiHelper helper = registry.getJeiHelpers().getGuiHelper();
     registry.addRecipeCategories(new RunicShearsCategory(helper),
@@ -135,7 +93,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addIngredientInfo(new ItemStack(ModItems.wildroot), VanillaTypes.ITEM, I18n.format("jei.roots.wildroot.desc"));
 
     for (TransmutationRecipe recipe : ModRecipes.getTransmutationRecipes()) {
-      IBlockState endState = recipe.getEndState();
+      BlockState endState = recipe.getEndState();
       ItemStack endStack = recipe.getEndStack();
       if (endStack != null && !endStack.isEmpty()) {
         registry.addIngredientInfo(endStack, VanillaTypes.ITEM, I18n.format(recipe.getKey()));
@@ -156,9 +114,9 @@ public class JEIRootsPlugin implements IModPlugin {
 
 
     //Elemental Soil Crafting Information Panels
-    String airSoilLocalized = new TextComponentTranslation("jei.roots.elemental_soil_air.desc").getFormattedText();
+    String airSoilLocalized = new TranslationTextComponent("jei.roots.elemental_soil_air.desc").getFormattedText();
     airSoilLocalized = airSoilLocalized.replace("@LEVEL", ((Integer) ElementalSoilConfig.AirSoilMinY).toString());
-    String earthSoilLocalized = new TextComponentTranslation("jei.roots.elemental_soil_earth.desc").getFormattedText();
+    String earthSoilLocalized = new TranslationTextComponent("jei.roots.elemental_soil_earth.desc").getFormattedText();
     earthSoilLocalized = earthSoilLocalized.replace("@LEVEL", ((Integer) ElementalSoilConfig.EarthSoilMaxY).toString());
 
     registry.addIngredientInfo(new ItemStack(ModBlocks.elemental_soil_fire), VanillaTypes.ITEM, I18n.format("jei.roots.elemental_soil_fire.desc"));
@@ -183,5 +141,5 @@ public class JEIRootsPlugin implements IModPlugin {
     };
 
     subtypeRegistry.registerSubtypeInterpreter(ModItems.spell_dust, spellInterpreter);
-  }
+  }*/
 }

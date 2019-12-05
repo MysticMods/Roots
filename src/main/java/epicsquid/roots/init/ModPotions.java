@@ -2,19 +2,19 @@ package epicsquid.roots.init;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.potion.*;
-import net.minecraft.potion.Potion;
+import net.minecraft.potion.Effect;
 import net.minecraftforge.event.RegistryEvent;
 
 public class ModPotions {
-  public static Potion freeze;
-  public static Potion geas;
-  public static Potion time_stop;
-  public static Potion invulnerability;
-  public static Potion petal_shell;
-  public static Potion danger_sense;
-  public static Potion animal_sense;
+  public static Effect freeze;
+  public static Effect geas;
+  public static Effect time_stop;
+  public static Effect invulnerability;
+  public static Effect petal_shell;
+  public static Effect danger_sense;
+  public static Effect animal_sense;
 
-  public static void registerPotions(RegistryEvent.Register<Potion> event) {
+  public static void registerPotions(RegistryEvent.Register<Effect> event) {
     event.getRegistry().register(freeze = new PotionFreeze().setRegistryName(Roots.MODID, "freeze"));
     event.getRegistry().register(geas = new PotionGeas().setRegistryName(Roots.MODID, "geas"));
     event.getRegistry().register(time_stop = new PotionTimeStop().setRegistryName(Roots.MODID, "time_stop"));

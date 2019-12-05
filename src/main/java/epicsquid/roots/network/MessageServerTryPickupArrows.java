@@ -1,8 +1,8 @@
 package epicsquid.roots.network;
 
-import epicsquid.roots.item.ItemQuiver;
+import epicsquid.roots.item.QuiverItem;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -29,8 +29,8 @@ public class MessageServerTryPickupArrows implements IMessage {
     }
 
     private void handleMessage(MessageServerTryPickupArrows message, MessageContext ctx) {
-      EntityPlayerMP player = ctx.getServerHandler().player;
-      ItemQuiver.tryPickupArrows(player);
+      ServerPlayerEntity player = ctx.getServerHandler().player;
+      QuiverItem.tryPickupArrows(player);
     }
   }
 }

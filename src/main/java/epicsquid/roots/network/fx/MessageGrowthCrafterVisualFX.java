@@ -39,7 +39,7 @@ public class MessageGrowthCrafterVisualFX implements IMessage {
   }
 
   public static class MessageHolder implements IMessageHandler<MessageGrowthCrafterVisualFX, IMessage> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageGrowthCrafterVisualFX message, final MessageContext ctx) {
       Minecraft mc = Minecraft.getMinecraft();

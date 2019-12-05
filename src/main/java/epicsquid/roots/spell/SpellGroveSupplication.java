@@ -3,16 +3,16 @@ package epicsquid.roots.spell;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.advancements.Advancements;
-import epicsquid.roots.block.groves.BlockGroveStone;
+import epicsquid.roots.block.groves.GroveStoneBlock;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageGroveCompleteFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -47,7 +47,7 @@ public class SpellGroveSupplication extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     List<BlockPos> positions = Util.getBlocksWithinRadius(player.world, player.getPosition(), 15, 10, 15, ModBlocks.grove_stone);
     if (positions.isEmpty()) return false;
 
@@ -56,12 +56,12 @@ public class SpellGroveSupplication extends SpellBase {
     List<BlockPos> changed = new ArrayList<>();
 
     for (BlockPos pos : positions) {
-      IBlockState state = player.world.getBlockState(pos);
+      BlockState state = player.world.getBlockState(pos);
       if (state.getBlock() != ModBlocks.grove_stone) {
         continue;
       }
 
-      if (state.getValue(BlockGroveStone.VALID)) {
+      if (state.getValue(GroveStoneBlock.VALID)) {
         continue;
       }
 
@@ -69,8 +69,8 @@ public class SpellGroveSupplication extends SpellBase {
       changed.add(pos);
 
       if (!player.world.isRemote) {
-        player.world.setBlockState(pos, state.withProperty(BlockGroveStone.VALID, true));
-        Advancements.GROVE_TRIGGER.trigger((EntityPlayerMP) player, null);
+        player.world.setBlockState(pos, state.withProperty(GroveStoneBlock.VALID, true));
+        Advancements.GROVE_TRIGGER.trigger((ServerPlayerEntity) player, null);
       }
     }
 

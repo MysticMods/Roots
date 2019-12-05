@@ -12,14 +12,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.world.WorldServer;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.ServerWorld;
 import vazkii.patchouli.common.handler.AdvancementSyncHandler;
 
 import java.io.IOException;
@@ -57,9 +57,9 @@ public class CommandRoots extends CommandBase {
 
   @Override
   public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
-    if (sender instanceof EntityPlayerMP && args.length != 0) {
-      EntityPlayerMP player = (EntityPlayerMP) sender;
-      WorldServer world = player.getServerWorld();
+    if (sender instanceof ServerPlayerEntity && args.length != 0) {
+      ServerPlayerEntity player = (ServerPlayerEntity) sender;
+      ServerWorld world = player.getServerWorld();
       if (args[0].equalsIgnoreCase("book")) {
         AdvancementManager manager = world.getAdvancementManager();
         PlayerAdvancements advancements = player.getAdvancements();
@@ -79,9 +79,9 @@ public class CommandRoots extends CommandBase {
         PacketHandler.INSTANCE.sendTo(message, player);
         Item guide = Item.REGISTRY.getObject(new ResourceLocation("patchouli", "guide_book"));
         ItemStack book = new ItemStack(guide);
-        NBTTagCompound tag = new NBTTagCompound();
-        tag.setString("patchouli:book", "roots:roots_guide");
-        book.setTagCompound(tag);
+        CompoundNBT tag = new CompoundNBT();
+        tag.putString("patchouli:book", "roots:roots_guide");
+        book.setTag(tag);
         if (!player.addItemStackToInventory(book)) {
           ItemUtil.spawnItem(world, player.getPosition(), book);
         }
@@ -97,10 +97,10 @@ public class CommandRoots extends CommandBase {
         try {
           Files.write(path, growablesList, StandardCharsets.UTF_8);
         } catch (IOException e) {
-          player.sendMessage(new TextComponentString("Unable to write roots.log"));
+          player.sendMessage(new StringTextComponent("Unable to write roots.log"));
           return;
         }
-        player.sendMessage(new TextComponentString("Growables written to roots.log"));
+        player.sendMessage(new StringTextComponent("Growables written to roots.log"));
       }
     }
   }

@@ -2,9 +2,9 @@ package epicsquid.roots.network;
 
 import epicsquid.roots.util.PowderInventoryUtil;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -32,10 +32,10 @@ public class MessageServerOpenPouch implements IMessage {
     }
 
     private void handleMessage(MessageServerOpenPouch message, MessageContext ctx) {
-      EntityPlayerMP player = ctx.getServerHandler().player;
+      ServerPlayerEntity player = ctx.getServerHandler().player;
       ItemStack pouch = PowderInventoryUtil.getPouch(player);
       if (!pouch.isEmpty()) {
-        pouch.getItem().onItemRightClick(player.world, player, EnumHand.MAIN_HAND);
+        pouch.getItem().onItemRightClick(player.world, player, Hand.MAIN_HAND);
       }
     }
   }

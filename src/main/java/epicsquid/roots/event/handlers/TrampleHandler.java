@@ -2,9 +2,9 @@ package epicsquid.roots.event.handlers;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
-import epicsquid.roots.block.runes.BlockTrample;
+import epicsquid.roots.block.runes.TrampleBlock;
 import epicsquid.roots.init.ModBlocks;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -21,7 +21,7 @@ import java.util.List;
 public class TrampleHandler {
   @SubscribeEvent
   public static void onTrample(BlockEvent.FarmlandTrampleEvent event) {
-    List<BlockPos> nearbyRune = Util.getBlocksWithinRadius(event.getWorld(), event.getPos(), BlockTrample.SAFE_RANGE_X, BlockTrample.SAFE_RANGE_Y, BlockTrample.SAFE_RANGE_Z, ModBlocks.trample_rune);
+    List<BlockPos> nearbyRune = Util.getBlocksWithinRadius(event.getWorld(), event.getPos(), TrampleBlock.SAFE_RANGE_X, TrampleBlock.SAFE_RANGE_Y, TrampleBlock.SAFE_RANGE_Z, ModBlocks.trample_rune);
     if (!nearbyRune.isEmpty()) {
       event.setCanceled(true);
     }
@@ -33,7 +33,7 @@ public class TrampleHandler {
     if (result != null) {
       BlockPos pos = result.getBlockPos();
       World world = event.getWorld();
-      IBlockState state = world.getBlockState(pos);
+      BlockState state = world.getBlockState(pos);
       if (state.getBlock() == ModBlocks.trample_rune) {
         event.setCanceled(true);
       }

@@ -2,8 +2,8 @@ package epicsquid.roots.util;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.HashSet;
@@ -14,7 +14,7 @@ public class EntityUtil {
   private static Set<ResourceLocation> forcedHostile = new HashSet<>();
 
   public static boolean isHostile (Entity entity) {
-    if (entity instanceof EntityPlayer) return false;
+    if (entity instanceof PlayerEntity) return false;
 
     ResourceLocation rl = EntityList.getKey(entity);
 
@@ -30,7 +30,7 @@ public class EntityUtil {
       return true;
     }
 
-    if (entity.isCreatureType(EnumCreatureType.MONSTER, false)) {
+    if (entity.isCreatureType(EntityClassification.MONSTER, false)) {
       return true;
     }
 
@@ -42,7 +42,7 @@ public class EntityUtil {
   }
 
   public static boolean isFriendly (Entity entity) {
-    if (entity instanceof EntityPlayer) return false;
+    if (entity instanceof PlayerEntity) return false;
 
     ResourceLocation rl = EntityList.getKey(entity);
 
@@ -54,22 +54,22 @@ public class EntityUtil {
       return false;
     }
 
-    if (entity instanceof EntityAnimal) {
+    if (entity instanceof AnimalEntity) {
       return true;
     }
 
-    if (entity.isCreatureType(EnumCreatureType.AMBIENT, false) || entity.isCreatureType(EnumCreatureType.WATER_CREATURE, false) || entity.isCreatureType(EnumCreatureType.CREATURE, false)) {
+    if (entity.isCreatureType(EntityClassification.AMBIENT, false) || entity.isCreatureType(EntityClassification.WATER_CREATURE, false) || entity.isCreatureType(EntityClassification.CREATURE, false)) {
       return true;
     }
 
     return !isHostile(entity);
   }
 
-  public static boolean isHostile (Entity entity, EntityPlayer player) {
+  public static boolean isHostile (Entity entity, PlayerEntity player) {
     if (isHostile(entity)) return true;
 
-    if (entity instanceof EntityLiving) {
-      EntityLiving living = (EntityLiving) entity;
+    if (entity instanceof MobEntity) {
+      MobEntity living = (MobEntity) entity;
       if (living.getAttackTarget() == player) {
         return true;
       }

@@ -6,9 +6,9 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageRadianceBeamFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
@@ -54,7 +54,7 @@ public class SpellRadiance extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     if (!player.world.isRemote && player.ticksExisted % 2 == 0) {
       RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0),
           player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)));
@@ -128,10 +128,10 @@ public class SpellRadiance extends SpellBase {
             double x = positions.get(i).x * (1.0f - j) + positions.get(i + 1).x * j;
             double y = positions.get(i).y * (1.0f - j) + positions.get(i + 1).y * j;
             double z = positions.get(i).z * (1.0f - j) + positions.get(i + 1).z * j;
-            List<EntityLivingBase> entities = player.world
-                .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - bx, y - by, z - bz, x + bx, y + by, z + bz));
-            for (EntityLivingBase e : entities) {
-              if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
+            List<LivingEntity> entities = player.world
+                .getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(x - bx, y - by, z - bz, x + bx, y + by, z + bz));
+            for (LivingEntity e : entities) {
+              if (!(e instanceof PlayerEntity && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
                   && e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
                 e.attackEntityFrom(ModDamage.radiantDamageFrom(player), damage);
                 if (e.isEntityUndead()) {

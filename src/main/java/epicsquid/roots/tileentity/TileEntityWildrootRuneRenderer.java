@@ -2,11 +2,9 @@ package epicsquid.roots.tileentity;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.util.RgbColor;
-import epicsquid.roots.util.RgbColorUtil;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 
-public class TileEntityWildrootRuneRenderer extends TileEntitySpecialRenderer<TileEntityWildrootRune> {
+public class TileEntityWildrootRuneRenderer extends TileEntityRenderer<TileEntityWildrootRune> {
 
   @Override
   public void render(TileEntityWildrootRune tei, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {

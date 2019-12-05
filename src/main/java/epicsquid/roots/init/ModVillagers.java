@@ -8,9 +8,9 @@ import epicsquid.mysticallib.entity.villager.ListRandomItemWithPrice;
 import epicsquid.mysticallib.entity.villager.ListRandomItemWithPrice.ItemAndPriceInfo;
 import epicsquid.mysticalworld.materials.Materials;
 import epicsquid.roots.Roots;
-import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.entity.passive.EntityVillager.PriceInfo;
-import net.minecraft.init.Items;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.merchant.villager.VillagerEntity.PriceInfo;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -40,11 +40,11 @@ public class ModVillagers {
         addTrade(2,
             new EmeraldForRandomItem(new PriceInfo(3, 8), ModItems.dewgonia, ModItems.cloud_berry, ModItems.stalicripe, ModItems.infernal_bulb, ((IBlock) ModBlocks.baffle_cap_mushroom).getItemBlock()),
             new EmeraldForRandomItem(new PriceInfo(7, 12), epicsquid.mysticalworld.init.ModItems.aubergine_seed, ModItems.wildewheet_seed, ModItems.moonglow_seed, ModItems.spirit_herb_seed, ModItems.pereskia_bulb),
-            new EntityVillager.ListItemForEmeralds(ModItems.living_arrow, new EntityVillager.PriceInfo(8, 12)),
+            new VillagerEntity.ListItemForEmeralds(ModItems.living_arrow, new VillagerEntity.PriceInfo(8, 12)),
             new ListRandomItemWithPrice(new ItemAndPriceInfo(ModItems.component_pouch, 21, 35), new ItemAndPriceInfo(ModItems.runic_shears, 18, 27)),
             new ListRandomItemForEmerald(new PriceInfo(2, 5), ModItems.wildewheet, ModItems.spirit_herb, ModItems.moonglow_leaf, ModItems.pereskia)).
         addTrade(3,
             new ListRandomItemForRandomEmeralds(new PriceInfo(8, 13), Materials.amethyst.getItem(), Items.DIAMOND),
-            new EntityVillager.ListItemForEmeralds(new ItemStack(ModBlocks.wildwood_sapling), new EntityVillager.PriceInfo(42, 64)));
+            new VillagerEntity.ListItemForEmeralds(new ItemStack(ModBlocks.wildwood_sapling), new VillagerEntity.PriceInfo(42, 64)));
   }
 }

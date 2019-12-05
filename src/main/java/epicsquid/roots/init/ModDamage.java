@@ -1,11 +1,11 @@
 package epicsquid.roots.init;
 
 import com.mojang.authlib.GameProfile;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
+import net.minecraft.world.ServerWorld;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.fml.common.Loader;
@@ -25,7 +25,7 @@ public class ModDamage {
 
   public static DamageSource PSYCHIC_DAMAGE = (new DamageSource("psychic_damage")).setDamageBypassesArmor().setMagicDamage();
 
-  public static DamageSource radiantDamageFrom(EntityPlayer player) {
+  public static DamageSource radiantDamageFrom(PlayerEntity player) {
     DamageSource source = new EntityDamageSource("holy_damage", player).setDamageBypassesArmor().setMagicDamage();
     if (Loader.isModLoaded("consecration")) {
       source.setFireDamage();
@@ -37,7 +37,7 @@ public class ModDamage {
   public static DamageSource wildfireDamage (World world) {
     if (world.isRemote) return null;
 
-    WorldServer server = (WorldServer) world;
+    ServerWorld server = (ServerWorld) world;
     FakePlayer player = FakePlayerFactory.get(server, FAKE_PLAYER);
 
     return new EntityDamageSource(FEY_FIRE, player).setDamageBypassesArmor().setMagicDamage().setFireDamage();

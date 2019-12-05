@@ -26,7 +26,7 @@ public class ApothecaryPouchRecipe extends FeyCraftingRecipe {
       Roots.logger.error("Couldn't find original Component Pouch!");
     } else {
       // Copy nbt!
-      output.setTagCompound(oldPouch.getTagCompound());
+      output.setTag(oldPouch.getTag());
     }
   }
 }

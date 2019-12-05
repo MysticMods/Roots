@@ -1,33 +1,26 @@
 package epicsquid.roots.integration.patchouli;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.patchouli.api.PatchouliAPI;
-import vazkii.patchouli.client.book.BookEntry;
-import vazkii.patchouli.client.book.gui.GuiBookEntry;
-import vazkii.patchouli.common.book.Book;
-import vazkii.patchouli.common.book.BookRegistry;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class Util {
 
   /**
-     * Opens a patchouli book GUI with a specific book entry
-     * Written by codetaylor & adapted by Davoleo
-     *
-     * @param world the world you want to open the page in
-     * @param player the player that is opening the page
-     * @param resourceLocation patchouli book resourceLocation (the path of this RL is the book ID)
-     * @param entryLocation patchouli entry resourceLocation
-     * @param page the page number
-     */
-    @SideOnly(Side.CLIENT)
-    public static void openBook(World world, EntityPlayer player, ResourceLocation resourceLocation, ResourceLocation entryLocation, int page) {
-      if (world.isRemote) {
+   * Opens a patchouli book GUI with a specific book entry
+   * Written by codetaylor & adapted by Davoleo
+   *
+   * @param world            the world you want to open the page in
+   * @param player           the player that is opening the page
+   * @param resourceLocation patchouli book resourceLocation (the path of this RL is the book ID)
+   * @param entryLocation    patchouli entry resourceLocation
+   * @param page             the page number
+   */
+  @OnlyIn(Dist.CLIENT)
+  public static void openBook(World world, PlayerEntity player, ResourceLocation resourceLocation, ResourceLocation entryLocation, int page) {
+/*      if (world.isRemote) {
         PatchouliAPI.instance.openBookGUI(resourceLocation);
         SoundEvent sfx = SoundEvent.REGISTRY.getObject(new ResourceLocation("patchouli", "book_open"));
 
@@ -58,6 +51,6 @@ public class Util {
       }
       else {
         System.out.println("THE BOOK IS NULL");
-      }
-    }
+      }*/
+  }
 }

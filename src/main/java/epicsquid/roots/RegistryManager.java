@@ -5,16 +5,13 @@ import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticallib.event.RegisterParticleEvent;
 import epicsquid.mysticallib.event.RegisterWorldGenEvent;
-import epicsquid.roots.potion.PotionFreeze;
 import epicsquid.roots.init.*;
-import epicsquid.roots.item.ItemStaff;
+import epicsquid.roots.item.StaffItem;
 import epicsquid.roots.network.PacketHandler;
-import epicsquid.roots.potion.PotionGeas;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
-import net.minecraft.potion.Potion;
+import net.minecraft.potion.Effect;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -52,7 +49,7 @@ public class RegistryManager {
     GameRegistry.registerWorldGenerator(new WorldGenNaturalGrove(), 103);*/
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @SubscribeEvent
   public static void onRegisterCustomModels(@Nonnull RegisterParticleEvent event) {
     ModParticles.init();
@@ -65,15 +62,15 @@ public class RegistryManager {
     ModItems.registerOredict();
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public static void registerColorHandlers() {
     LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
 
-    Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemStaff.StaffColorHandler(), ModItems.staff);
+    Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new StaffItem.StaffColorHandler(), ModItems.staff);
   }
 
   @SubscribeEvent
-  public static void registerPotions(RegistryEvent.Register<Potion> event) {
+  public static void registerPotions(RegistryEvent.Register<Effect> event) {
     LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
 
     ModPotions.registerPotions(event);

@@ -1,18 +1,8 @@
 package epicsquid.roots.integration.patchouli;
 
-import java.util.ArrayList;
-import java.util.List;
+public class RitualRecipeProcessor { // implements IComponentProcessor {
 
-import epicsquid.roots.ritual.RitualBase;
-import epicsquid.roots.ritual.RitualRegistry;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import vazkii.patchouli.api.IComponentProcessor;
-import vazkii.patchouli.api.IVariableProvider;
-import vazkii.patchouli.common.util.ItemStackUtil;
-
-public class RitualRecipeProcessor implements IComponentProcessor {
-
+/*
   private List<Ingredient> ingredients = new ArrayList<>();
   private ItemStack icon;
 
@@ -40,5 +30,6 @@ public class RitualRecipeProcessor implements IComponentProcessor {
 
     return null;
   }
+*/
 
 }

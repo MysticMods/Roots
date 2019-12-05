@@ -3,9 +3,8 @@ package epicsquid.roots.network.fx;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellGrowthInfusion;
-import epicsquid.roots.spell.SpellRegistry;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -49,12 +48,12 @@ public class MessageLifeInfusionFX implements IMessage {
   }
 
   public static class MessageHolder implements IMessageHandler<MessageLifeInfusionFX, IMessage> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageLifeInfusionFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       BlockPos pos = new BlockPos(message.posX, message.posY, message.posZ);
-      IBlockState state = world.getBlockState(pos);
+      BlockState state = world.getBlockState(pos);
       state.getBlock().randomDisplayTick(state, world, pos, Util.rand);
       for (int k = 0; k < 10; k++) {
         if (Util.rand.nextBoolean()) {

@@ -1,7 +1,7 @@
 package epicsquid.roots.ritual;
 
-import epicsquid.roots.entity.ritual.EntityRitualBase;
-import epicsquid.roots.entity.ritual.EntityRitualWildGrowth;
+import epicsquid.roots.entity.ritual.BaseRitualEntity;
+import epicsquid.roots.entity.ritual.WildGrowthRitualEntity;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.util.types.Property;
@@ -50,7 +50,7 @@ public class RitualWildGrowth extends RitualBase {
   }
 
   @Override
-  public EntityRitualBase doEffect(World world, BlockPos pos) {
-    return this.spawnEntity(world, pos, EntityRitualWildGrowth.class);
+  public BaseRitualEntity doEffect(World world, BlockPos pos) {
+    return this.spawnEntity(world, pos, WildGrowthRitualEntity.class);
   }
 }

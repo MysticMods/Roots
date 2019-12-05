@@ -53,7 +53,7 @@ public class MessageImbueCompleteFX implements IMessage {
   }
 
   public static class MessageHolder implements IMessageHandler<MessageImbueCompleteFX, IMessage> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageImbueCompleteFX message, final MessageContext ctx) {
       SpellBase spell = (message.spellName.equals("fake_spell")) ? new FakeSpellRunicDust() : SpellRegistry.spellRegistry.get(message.spellName);

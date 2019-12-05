@@ -45,7 +45,7 @@ public class MessageRunicShearsAOEFX implements IMessage {
   }
 
   public static class MessageHolder implements IMessageHandler<MessageRunicShearsAOEFX, IMessage> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageRunicShearsAOEFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

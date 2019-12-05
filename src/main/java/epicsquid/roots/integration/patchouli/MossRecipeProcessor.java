@@ -1,15 +1,7 @@
 package epicsquid.roots.integration.patchouli;
 
-import epicsquid.roots.config.MossConfig;
-import epicsquid.roots.recipe.MossRecipe;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import vazkii.patchouli.api.IComponentProcessor;
-import vazkii.patchouli.api.IVariableProvider;
-import vazkii.patchouli.common.util.ItemStackUtil;
-
-public class MossRecipeProcessor implements IComponentProcessor {
-  private static Ingredient INPUTS = Ingredient.EMPTY;
+public class MossRecipeProcessor { // implements IComponentProcessor {
+/*  private static Ingredient INPUTS = Ingredient.EMPTY;
   private static Ingredient OUTPUTS = Ingredient.EMPTY;
 
   @Override
@@ -39,5 +31,5 @@ public class MossRecipeProcessor implements IComponentProcessor {
     }
 
     return null;
-  }
+  }*/
 }

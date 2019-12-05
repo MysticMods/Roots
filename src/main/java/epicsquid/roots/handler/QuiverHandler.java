@@ -1,21 +1,20 @@
 package epicsquid.roots.handler;
 
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemArrow;
+import net.minecraft.item.ArrowItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 
-public class QuiverHandler implements INBTSerializable<NBTTagCompound> {
+public class QuiverHandler implements INBTSerializable<CompoundNBT> {
   private ItemStack quiver;
   private ItemStackHandler handler = new ItemStackHandler(6) {
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-      return stack.getItem() instanceof ItemArrow;
+      return stack.getItem() instanceof ArrowItem;
     }
 
     @Override
@@ -62,12 +61,12 @@ public class QuiverHandler implements INBTSerializable<NBTTagCompound> {
   }
 
   @Override
-  public NBTTagCompound serializeNBT() {
+  public CompoundNBT serializeNBT() {
     return handler.serializeNBT();
   }
 
   @Override
-  public void deserializeNBT(NBTTagCompound nbt) {
+  public void deserializeNBT(CompoundNBT nbt) {
     handler.deserializeNBT(nbt);
   }
 
@@ -77,9 +76,9 @@ public class QuiverHandler implements INBTSerializable<NBTTagCompound> {
 
   public static QuiverHandler getHandler(ItemStack stack) {
     QuiverHandler handler = new QuiverHandler(stack);
-    if (stack.hasTagCompound()) {
-      if (stack.getTagCompound().hasKey("quiver")) {
-        handler.deserializeNBT(stack.getTagCompound().getCompoundTag("quiver"));
+    if (stack.hasTag()) {
+      if (stack.getTag().contains("quiver")) {
+        handler.deserializeNBT(stack.getTag().getCompound("quiver"));
       }
     }
 
@@ -91,12 +90,12 @@ public class QuiverHandler implements INBTSerializable<NBTTagCompound> {
   }
 
   public void saveToStack() {
-    NBTTagCompound tag = quiver.getTagCompound();
+    CompoundNBT tag = quiver.getTag();
     if (tag == null) {
-      tag = new NBTTagCompound();
-      quiver.setTagCompound(tag);
+      tag = new CompoundNBT();
+      quiver.setTag(tag);
     }
 
-    tag.setTag("quiver", serializeNBT());
+    tag.put("quiver", serializeNBT());
   }
 }

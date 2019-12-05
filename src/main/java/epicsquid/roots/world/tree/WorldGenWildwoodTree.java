@@ -3,13 +3,13 @@ package epicsquid.roots.world.tree;
 import java.util.Random;
 
 import epicsquid.roots.init.ModBlocks;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+import net.minecraft.world.gen.feature.AbstractTreeFeature;
 
-public class WorldGenWildwoodTree extends WorldGenAbstractTree {
-  private static final IBlockState LOG = ModBlocks.wildwood_log.getDefaultState();
+public class WorldGenWildwoodTree extends AbstractTreeFeature {
+  private static final BlockState LOG = ModBlocks.wildwood_log.getDefaultState();
   private final boolean useExtraRandomHeight;
 
   public WorldGenWildwoodTree(boolean notify, boolean useExtraRandomHeightIn) {

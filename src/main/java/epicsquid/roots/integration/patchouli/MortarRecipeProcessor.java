@@ -1,19 +1,8 @@
 package epicsquid.roots.integration.patchouli;
 
-import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.recipe.MortarRecipe;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import vazkii.patchouli.api.IComponentProcessor;
-import vazkii.patchouli.api.IVariableProvider;
-import vazkii.patchouli.common.util.ItemStackUtil;
+public class MortarRecipeProcessor { //implements IComponentProcessor {
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MortarRecipeProcessor implements IComponentProcessor {
-
-  private List<Ingredient> ingredients = new ArrayList<>();
+/*  private List<Ingredient> ingredients = new ArrayList<>();
   private ItemStack output = null;
 
   @Override
@@ -42,6 +31,6 @@ public class MortarRecipeProcessor implements IComponentProcessor {
       return ItemStackUtil.serializeStack(output);
     }
     return null;
-  }
+  }*/
 
 }

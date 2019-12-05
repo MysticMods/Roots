@@ -4,10 +4,10 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
 
@@ -44,8 +44,8 @@ public class SpellSenseAnimals extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
-    caster.addPotionEffect(new PotionEffect(ModPotions.animal_sense, duration, 0, false, false));
+  public boolean cast(PlayerEntity caster, List<SpellModule> modules) {
+    caster.addPotionEffect(new EffectInstance(ModPotions.animal_sense, duration, 0, false, false));
     return true;
   }
 

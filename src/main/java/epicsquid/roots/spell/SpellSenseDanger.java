@@ -4,11 +4,11 @@ import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
 
@@ -46,9 +46,9 @@ public class SpellSenseDanger extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
-    caster.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, nvDuration, 0, false, false));
-    caster.addPotionEffect(new PotionEffect(ModPotions.danger_sense, glowDuration, 0, false, false));
+  public boolean cast(PlayerEntity caster, List<SpellModule> modules) {
+    caster.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, nvDuration, 0, false, false));
+    caster.addPotionEffect(new EffectInstance(ModPotions.danger_sense, glowDuration, 0, false, false));
     return true;
   }
 

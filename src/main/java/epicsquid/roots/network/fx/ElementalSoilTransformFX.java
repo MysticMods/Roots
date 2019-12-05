@@ -84,7 +84,7 @@ public class ElementalSoilTransformFX implements IMessage {
   }
 
   public static class Handler implements IMessageHandler<ElementalSoilTransformFX, IMessage> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(ElementalSoilTransformFX message, MessageContext ctx) {
 

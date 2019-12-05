@@ -1,28 +1,8 @@
 package epicsquid.roots.integration.jei.mortar;
 
-import java.util.Arrays;
+public class MortarCategory { //implements IRecipeCategory<MortarWrapper> {
 
-import epicsquid.roots.Roots;
-import epicsquid.roots.init.ModItems;
-import epicsquid.roots.integration.jei.JEIRootsPlugin;
-import epicsquid.roots.item.ItemSpellDust;
-import epicsquid.roots.recipe.MortarRecipe;
-import epicsquid.roots.recipe.RunicShearRecipe;
-import epicsquid.roots.spell.SpellBase;
-import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.gui.IDrawable;
-import mezz.jei.api.gui.IGuiItemStackGroup;
-import mezz.jei.api.gui.IRecipeLayout;
-import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.IRecipeCategory;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
-
-public class MortarCategory implements IRecipeCategory<MortarWrapper> {
-
-  private final IDrawable background;
+/*  private final IDrawable background;
 
   public MortarCategory(IGuiHelper helper) {
     this.background = helper.createDrawable(new ResourceLocation(Roots.MODID, "textures/gui/jei/mortar_and_pestle.png"), 0, 0, 90, 53);
@@ -71,5 +51,5 @@ public class MortarCategory implements IRecipeCategory<MortarWrapper> {
       group.init(5, false, 72, 27);
       group.set(5, spell.getResult());
     }
-  }
+  }*/
 }

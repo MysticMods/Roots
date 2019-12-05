@@ -47,7 +47,7 @@ public class MessageSanctuaryRingFX implements IMessage {
   }
 
   public static class MessageHolder implements IMessageHandler<MessageSanctuaryRingFX, IMessage> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageSanctuaryRingFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

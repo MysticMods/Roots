@@ -10,13 +10,13 @@ package epicsquid.roots.gui.container;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.handler.PouchHandler;
-import epicsquid.roots.item.ItemPouch;
+import epicsquid.roots.item.Pouch;
 import epicsquid.roots.util.PowderInventoryUtil;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.ClickType;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;
 
@@ -27,7 +27,7 @@ public class ContainerPouch extends Container {
   private PouchHandler.PouchItemHandler inventoryHandler;
   private PouchHandler.PouchItemHandler herbsHandler;
   private PouchHandler handler;
-  private EntityPlayer player;
+  private PlayerEntity player;
   private ItemStack pouch;
 
   public boolean componentPouch = false;
@@ -35,18 +35,18 @@ public class ContainerPouch extends Container {
   private int inventoryEnd;
   private int herbsEnd;
 
-  public ContainerPouch(EntityPlayer player) {
+  public ContainerPouch(PlayerEntity player) {
     this.player = player;
     ItemStack main = player.getHeldItemMainhand();
     ItemStack off = player.getHeldItemOffhand();
     ItemStack first = PowderInventoryUtil.getPouch(player);
 
     ItemStack use = ItemStack.EMPTY;
-    if (main.getItem() instanceof ItemPouch) {
+    if (main.getItem() instanceof Pouch) {
       use = main;
-    } else if (off.getItem() instanceof ItemPouch) {
+    } else if (off.getItem() instanceof Pouch) {
       use = off;
-    } else if (first.getItem() instanceof ItemPouch) {
+    } else if (first.getItem() instanceof Pouch) {
       use = first;
     }
 
@@ -136,7 +136,7 @@ public class ContainerPouch extends Container {
     herbsEnd = q + 1;
   }
 
-  private void createPlayerInventory(InventoryPlayer inventoryPlayer) {
+  private void createPlayerInventory(PlayerInventory inventoryPlayer) {
 
     int xOffset = -5;
     int yOffset = 70;
@@ -152,13 +152,13 @@ public class ContainerPouch extends Container {
   }
 
   @Override
-  public boolean canInteractWith(@Nonnull EntityPlayer player) {
+  public boolean canInteractWith(@Nonnull PlayerEntity player) {
     return true;
   }
 
   @Override
   @Nonnull
-  public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+  public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
     ItemStack slotStack = ItemStack.EMPTY;
 
     Slot slot = inventorySlots.get(index);
@@ -200,10 +200,10 @@ public class ContainerPouch extends Container {
 
   @Override
   @Nonnull
-  public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
+  public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player) {
     if (slotId >= 0) {
       ItemStack stack = getSlot(slotId).getStack();
-      if (stack.getItem() instanceof ItemPouch) {
+      if (stack.getItem() instanceof Pouch) {
         return ItemStack.EMPTY;
       }
     }

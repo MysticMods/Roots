@@ -1,11 +1,11 @@
 package epicsquid.roots.capability;
 
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 public interface ICapability {
-  NBTTagCompound getData();
+  CompoundNBT getData();
 
-  void setData(NBTTagCompound tag);
+  void setData(CompoundNBT tag);
 
   void markDirty();
 

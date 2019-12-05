@@ -1,23 +1,8 @@
 package epicsquid.roots.integration.botania;
 
-import epicsquid.roots.Roots;
-import epicsquid.roots.init.ModBlocks;
-import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import vazkii.botania.common.block.tile.TileAltar;
-
-import java.util.Random;
-
-@Mod.EventBusSubscriber(modid= Roots.MODID)
+//@Mod.EventBusSubscriber(modid= Roots.MODID)
 public class PetalApothecaryFiller {
-
+/*
   private static boolean hasBotania = false;
   private static boolean flag = false;
   private static Random random;
@@ -32,7 +17,7 @@ public class PetalApothecaryFiller {
   }
 
   public static void getAdjacentApothecary(World world, BlockPos pos) {
-    for (EnumFacing side : EnumFacing.Plane.HORIZONTAL) {
+    for (Direction side : Direction.Plane.HORIZONTAL) {
       TileEntity te = world.getTileEntity(pos.offset(side));
       fillApothecary(te, world);
     }
@@ -62,5 +47,5 @@ public class PetalApothecaryFiller {
       if (fillApothecary(te, event.getEntityPlayer().world))
         event.setCanceled(true);
     }
-  }
+  }*/
 }

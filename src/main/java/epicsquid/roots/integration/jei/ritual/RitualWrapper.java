@@ -1,32 +1,15 @@
 package epicsquid.roots.integration.jei.ritual;
 
-import epicsquid.roots.Roots;
-import epicsquid.roots.integration.patchouli.Util;
-import epicsquid.roots.ritual.RitualBase;
-import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.ingredients.VanillaTypes;
-import mezz.jei.api.recipe.IRecipeWrapper;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
+public class RitualWrapper { //implements IRecipeWrapper {
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+/*  public final RitualBase recipe;
 
-public class RitualWrapper implements IRecipeWrapper {
-
-  public final RitualBase recipe;
-
-  private final GuiButton button;
+  private final Button button;
 
   public RitualWrapper(RitualBase recipe) {
     this.recipe = recipe;
 
-    button = new GuiButton(2020, 75, 55, 60, 20,  I18n.format("jei.roots.open_book_button_text"));
+    button = new Button(2020, 75, 55, 60, 20,  I18n.format("jei.roots.open_book_button_text"));
   }
 
   @Override
@@ -60,5 +43,5 @@ public class RitualWrapper implements IRecipeWrapper {
     }
     ingredients.setInputLists(VanillaTypes.ITEM, inputs);
     ingredients.setOutput(VanillaTypes.ITEM, new ItemStack(recipe.getIcon()));
-  }
+  }*/
 }

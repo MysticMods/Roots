@@ -58,7 +58,7 @@ public class Keybinds {
   }
 
   @SubscribeEvent
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public static void onKeyInput(InputEvent.KeyInputEvent event) {
     Minecraft mc = Minecraft.getMinecraft();
     if (POUCH_KEYBIND.isKeyDown() && mc.inGameHasFocus) {

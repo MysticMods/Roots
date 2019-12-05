@@ -1,14 +1,14 @@
 package epicsquid.roots.spell;
 
-import epicsquid.roots.entity.spell.EntityThornTrap;
+import epicsquid.roots.entity.spell.ThornTrapEntity;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.block.BlockDoublePlant;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
+import net.minecraft.block.DoublePlantBlock;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.Items;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
@@ -41,17 +41,17 @@ public class SpellRoseThorns extends SpellBase {
   public void init () {
     addIngredients(
         new OreIngredient("blockCactus"),
-        new ItemStack(Blocks.DOUBLE_PLANT, 1, BlockDoublePlant.EnumPlantType.ROSE.getMeta()),
+        new ItemStack(Blocks.DOUBLE_PLANT, 1, DoublePlantBlock.EnumPlantType.ROSE.getMeta()),
         new OreIngredient("bone"),
-        new ItemStack(Items.DYE, 1, EnumDyeColor.RED.getDyeDamage()),
+        new ItemStack(Items.DYE, 1, DyeColor.RED.getDyeDamage()),
         new ItemStack(ModItems.terra_moss)
     );
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
-      EntityThornTrap trap = new EntityThornTrap(player.world, damage, duration, slownessDuration, slownessAmplifier, poisonDuration, poisonAmplifier);
+      ThornTrapEntity trap = new ThornTrapEntity(player.world, damage, duration, slownessDuration, slownessAmplifier, poisonDuration, poisonAmplifier);
       trap.setPlayer(player.getUniqueID());
       trap.setPosition(player.posX + player.getLookVec().x, player.posY + player.getEyeHeight() + player.getLookVec().y, player.posZ + player.getLookVec().z);
       trap.motionX = player.getLookVec().x * 0.75f;

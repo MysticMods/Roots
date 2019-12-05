@@ -2,16 +2,15 @@ package epicsquid.roots.event.handlers;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
-import epicsquid.roots.block.BlockElementalSoil;
+import epicsquid.roots.block.ElementalSoilBlock;
 import epicsquid.roots.init.ModBlocks;
-import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.mechanics.Harvest;
 import epicsquid.mysticallib.util.ItemUtil;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
@@ -33,11 +32,11 @@ public class SoilHandler {
   public static void onCropHarvest (BlockEvent.HarvestDropsEvent event) {
     if (event.getHarvester() != null) {
       if (event.getState().getBlock() instanceof IPlantable) {
-        IBlockState soil = event.getWorld().getBlockState(event.getPos().offset(EnumFacing.DOWN));
+        BlockState soil = event.getWorld().getBlockState(event.getPos().offset(Direction.DOWN));
         if (event.getState().getBlock() instanceof IPlantable && soil.getBlock()
-            .canSustainPlant(soil, event.getWorld(), event.getPos().offset(EnumFacing.DOWN), EnumFacing.UP, (IPlantable) event.getState().getBlock())) {
+            .canSustainPlant(soil, event.getWorld(), event.getPos().offset(Direction.DOWN), Direction.UP, (IPlantable) event.getState().getBlock())) {
           if (soil.getBlock() == ModBlocks.elemental_soil_fire) {
-            int cookingMultiplier = soil.getValue(BlockElementalSoil.FIRE_MULTIPLIER);
+            int cookingMultiplier = soil.getValue(ElementalSoilBlock.FIRE_MULTIPLIER);
             if (cookingMultiplier > 0) {
               ItemStack seed = Harvest.getSeed(event.getState());
 
@@ -69,7 +68,7 @@ public class SoilHandler {
 
               if (Harvest.isGrown(event.getState())) {
                 if (Util.rand.nextInt(3) == 0 && !world.isRemote) {
-                  world.spawnEntity(new EntityXPOrb(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1));
+                  world.spawnEntity(new ExperienceOrbEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1));
                 }
               }
 
@@ -78,7 +77,7 @@ public class SoilHandler {
             }
           }
           if (soil.getBlock() == ModBlocks.elemental_soil_earth) {
-            int fertility = soil.getValue(BlockElementalSoil.EARTH_FERTILITY);
+            int fertility = soil.getValue(ElementalSoilBlock.EARTH_FERTILITY);
             if (fertility > 0) {
               List<ItemStack> newDrops = new ArrayList<>();
               Random random = new Random();
@@ -99,17 +98,17 @@ public class SoilHandler {
 
   @SubscribeEvent
   public static void onCropsGrowPost(BlockEvent.CropGrowEvent.Post cropGrowEvent) {
-    ((BlockElementalSoil) ModBlocks.elemental_soil_water).doHarvest(cropGrowEvent);
+    ((ElementalSoilBlock) ModBlocks.elemental_soil_water).doHarvest(cropGrowEvent);
   }
 
   @SubscribeEvent
   public static void onCropsGrowPre(BlockEvent.CropGrowEvent.Pre cropGrowEvent) {
-    IBlockState soil = cropGrowEvent.getWorld().getBlockState(cropGrowEvent.getPos().offset(EnumFacing.DOWN));
-    IBlockState plant = cropGrowEvent.getWorld().getBlockState(cropGrowEvent.getPos());
+    BlockState soil = cropGrowEvent.getWorld().getBlockState(cropGrowEvent.getPos().offset(Direction.DOWN));
+    BlockState plant = cropGrowEvent.getWorld().getBlockState(cropGrowEvent.getPos());
     if (plant.getBlock() instanceof IPlantable && soil.getBlock()
-        .canSustainPlant(soil, cropGrowEvent.getWorld(), cropGrowEvent.getPos().offset(EnumFacing.DOWN), EnumFacing.UP, (IPlantable) plant.getBlock())) {
+        .canSustainPlant(soil, cropGrowEvent.getWorld(), cropGrowEvent.getPos().offset(Direction.DOWN), Direction.UP, (IPlantable) plant.getBlock())) {
       if (soil.getBlock() == ModBlocks.elemental_soil_air) {
-        int speed = soil.getValue(BlockElementalSoil.AIR_SPEED);
+        int speed = soil.getValue(ElementalSoilBlock.AIR_SPEED);
         if (speed > 0) {
           cropGrowEvent.setResult(Util.rand.nextInt(3) == 0 ? Event.Result.ALLOW : Event.Result.DEFAULT);
         }

@@ -5,11 +5,11 @@ import java.util.List;
 
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.roots.tileentity.TileEntityBonfire;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import javax.annotation.Nullable;
 
@@ -29,7 +29,7 @@ public class ConditionItems implements Condition {
   }
 
   @Override
-  public boolean checkCondition(TileEntityBonfire tile, @Nullable EntityPlayer player) {
+  public boolean checkCondition(TileEntityBonfire tile, @Nullable PlayerEntity player) {
     List<ItemStack> stacks = new ArrayList<>();
     for (int i = 0; i < tile.inventory.getSlots(); i++) {
       stacks.add(tile.inventory.extractItem(i, 1, true));
@@ -39,7 +39,7 @@ public class ConditionItems implements Condition {
 
   @Override
   public ITextComponent failMessage() {
-    return new TextComponentTranslation("roots.ritual.condition.items");
+    return new TranslationTextComponent("roots.ritual.condition.items");
   }
 
   public List<Ingredient> getIngredients() {

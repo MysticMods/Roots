@@ -1,14 +1,14 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.entity.spell.EntityTimeStop;
+import epicsquid.roots.entity.spell.TimeStopEntity;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageTimeStopStartFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.init.PotionTypes;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
+import net.minecraft.potion.Potions;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.text.TextFormatting;
@@ -38,7 +38,7 @@ public class SpellTimeStop extends SpellBase {
     addIngredients(
         new OreIngredient("enderpearl"),
         new ItemStack(ModItems.moonglow_leaf),
-        PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.SLOWNESS),
+        PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), Potions.SLOWNESS),
         new ItemStack(ModItems.pereskia),
         new ItemStack(Items.CLOCK)
     );
@@ -46,9 +46,9 @@ public class SpellTimeStop extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
-      EntityTimeStop timeStop = new EntityTimeStop(player.world, duration);
+      TimeStopEntity timeStop = new TimeStopEntity(player.world, duration);
       timeStop.setPlayer(player.getUniqueID());
       timeStop.setPosition(player.posX, player.posY, player.posZ);
       player.world.spawnEntity(timeStop);

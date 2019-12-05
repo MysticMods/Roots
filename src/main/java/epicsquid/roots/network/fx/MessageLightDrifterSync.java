@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
@@ -60,11 +60,11 @@ public class MessageLightDrifterSync implements IMessage {
   }
 
   public static class MessageHolder implements IMessageHandler<MessageLightDrifterSync, IMessage> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageLightDrifterSync message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
-      EntityPlayer player = world.getPlayerEntityByUUID(message.id);
+      PlayerEntity player = world.getPlayerEntityByUUID(message.id);
       if (player != null) {
         player.capabilities.disableDamage = message.enable;
         player.capabilities.allowFlying = message.enable;

@@ -1,20 +1,8 @@
 package epicsquid.roots.integration.jei.spell;
 
-import epicsquid.roots.spell.SpellBase;
-import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.ingredients.VanillaTypes;
-import mezz.jei.api.recipe.IRecipeWrapper;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TextFormatting;
+public class SpellCostWrapper { //implements IRecipeWrapper {
 
-import java.awt.*;
-import java.util.List;
-
-public class SpellCostWrapper implements IRecipeWrapper {
-
-  public final SpellBase recipe;
+/*  public final SpellBase recipe;
 
   public SpellCostWrapper(SpellBase recipe) {
     this.recipe = recipe;
@@ -40,5 +28,5 @@ public class SpellCostWrapper implements IRecipeWrapper {
       minecraft.fontRenderer.drawString(c, 82, row == 0 ? 20 : 40, Color.BLACK.getRGB());
       row++;
     }
-  }
+  }*/
 }

@@ -5,9 +5,9 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageDandelionCastFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
@@ -43,14 +43,14 @@ public class SpellDandelionWinds extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     PacketHandler.sendToAllTracking(new MessageDandelionCastFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ), player);
-    List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class,
+    List<LivingEntity> entities = player.world.getEntitiesWithinAABB(LivingEntity.class,
         new AxisAlignedBB(player.posX + player.getLookVec().x * 6.0 - 6.0, player.posY + player.getLookVec().y * 6.0 - 6.0,
             player.posZ + player.getLookVec().z * 6.0 - 4.0, player.posX + player.getLookVec().x * 6.0 + 6.0, player.posY + player.getLookVec().y * 6.0 + 6.0,
             player.posZ + player.getLookVec().z * 6.0 + 6.0));
     if (entities.size() > 0) {
-      for (EntityLivingBase e : entities) {
+      for (LivingEntity e : entities) {
         if (e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
           e.motionX += (player.getLookVec().x);
           e.motionY += (distance);

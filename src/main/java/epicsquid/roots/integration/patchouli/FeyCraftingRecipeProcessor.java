@@ -1,14 +1,6 @@
 package epicsquid.roots.integration.patchouli;
 
-import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.recipe.FeyCraftingRecipe;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import vazkii.patchouli.api.IComponentProcessor;
-import vazkii.patchouli.api.IVariableProvider;
-import vazkii.patchouli.common.util.ItemStackUtil;
-
-public class FeyCraftingRecipeProcessor implements IComponentProcessor {
+public class FeyCraftingRecipeProcessor {/* implements IComponentProcessor {
 
   private FeyCraftingRecipe groveCraftingRecipe = null;
 
@@ -36,5 +28,5 @@ public class FeyCraftingRecipeProcessor implements IComponentProcessor {
       return ItemStackUtil.serializeStack(groveCraftingRecipe.getResult());
     }
     return null;
-  }
+  }*/
 }

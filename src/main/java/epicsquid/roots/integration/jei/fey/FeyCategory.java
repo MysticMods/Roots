@@ -1,23 +1,8 @@
 package epicsquid.roots.integration.jei.fey;
 
-import epicsquid.roots.Roots;
-import epicsquid.roots.integration.jei.JEIRootsPlugin;
-import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.gui.IDrawable;
-import mezz.jei.api.gui.IGuiItemStackGroup;
-import mezz.jei.api.gui.IRecipeLayout;
-import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.ingredients.VanillaTypes;
-import mezz.jei.api.recipe.IRecipeCategory;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+public class FeyCategory { //implements IRecipeCategory<FeyWrapper> {
 
-import java.util.List;
-
-public class FeyCategory implements IRecipeCategory<FeyWrapper> {
-
-  private final IDrawable background;
+/*  private final IDrawable background;
 
   public FeyCategory(IGuiHelper helper) {
     this.background = helper.createDrawable(new ResourceLocation(Roots.MODID, "textures/gui/jei/fey_crafting.png"), 0, 0, 121, 76);
@@ -61,5 +46,5 @@ public class FeyCategory implements IRecipeCategory<FeyWrapper> {
       group.init(5, false, 99, 23);
       group.set(5, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
     }
-  }
+  }*/
 }

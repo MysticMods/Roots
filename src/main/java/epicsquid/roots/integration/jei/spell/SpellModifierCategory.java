@@ -1,20 +1,8 @@
 package epicsquid.roots.integration.jei.spell;
 
-import epicsquid.roots.Roots;
-import epicsquid.roots.integration.jei.JEIRootsPlugin;
-import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.gui.IDrawable;
-import mezz.jei.api.gui.IGuiItemStackGroup;
-import mezz.jei.api.gui.IRecipeLayout;
-import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.IRecipeCategory;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+public class SpellModifierCategory { // implements IRecipeCategory<SpellModifierWrapper> {
 
-public class SpellModifierCategory implements IRecipeCategory<SpellModifierWrapper> {
-
-  private final IDrawable background;
+/*  private final IDrawable background;
 
   public SpellModifierCategory(IGuiHelper helper) {
     this.background = helper.createDrawable(new ResourceLocation(Roots.MODID, "textures/gui/jei/spell_modifiers.png"), 0, 0, 90, 91);
@@ -61,5 +49,5 @@ public class SpellModifierCategory implements IRecipeCategory<SpellModifierWrapp
     for (int i = count; i < 5; i++) {
       group.set(i, ItemStack.EMPTY);
     }
-  }
+  }*/
 }

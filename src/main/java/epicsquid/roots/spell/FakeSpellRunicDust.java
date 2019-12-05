@@ -1,7 +1,7 @@
 package epicsquid.roots.spell;
 
 import epicsquid.roots.spell.modules.SpellModule;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public class FakeSpellRunicDust extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
+  public boolean cast(PlayerEntity caster, List<SpellModule> modules) {
     return false;
   }
 

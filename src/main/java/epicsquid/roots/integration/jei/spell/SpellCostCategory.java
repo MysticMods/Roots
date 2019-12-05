@@ -1,24 +1,8 @@
 package epicsquid.roots.integration.jei.spell;
 
-import epicsquid.roots.Roots;
-import epicsquid.roots.integration.jei.JEIRootsPlugin;
-import epicsquid.roots.recipe.RunicShearRecipe;
-import epicsquid.roots.spell.SpellBase;
-import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.gui.IDrawable;
-import mezz.jei.api.gui.IGuiItemStackGroup;
-import mezz.jei.api.gui.IRecipeLayout;
-import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.IRecipeCategory;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+public class SpellCostCategory { //implements IRecipeCategory<SpellCostWrapper> {
 
-import java.util.List;
-
-public class SpellCostCategory implements IRecipeCategory<SpellCostWrapper> {
-
-  private final IDrawable background;
+/*  private final IDrawable background;
 
   public SpellCostCategory(IGuiHelper helper) {
     this.background = helper.createDrawable(new ResourceLocation(Roots.MODID, "textures/gui/jei/spell_costs.png"), 0, 0, 125, 53);
@@ -57,5 +41,5 @@ public class SpellCostCategory implements IRecipeCategory<SpellCostWrapper> {
     }
     group.init(2, false, 0, 25);
     group.set(2, recipe.getResult());
-  }
+  }*/
 }

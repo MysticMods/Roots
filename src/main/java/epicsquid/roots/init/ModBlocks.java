@@ -1,15 +1,14 @@
 package epicsquid.roots.init;
 
 import epicsquid.mysticallib.LibRegistry;
-import epicsquid.mysticallib.block.*;
 import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.CustomPlantType;
 import epicsquid.roots.block.*;
-import epicsquid.roots.block.BlockReinforcedBonfire;
+import epicsquid.roots.block.ReinforcedBonfireBlock;
 import epicsquid.roots.block.groves.*;
-import epicsquid.roots.block.runes.BlockTrample;
-import epicsquid.roots.block.runes.BlockWildwoodRune;
+import epicsquid.roots.block.runes.TrampleBlock;
+import epicsquid.roots.block.runes.WildwoodRuneBlock;
 import epicsquid.roots.tileentity.*;
 import epicsquid.roots.util.EnumElementalSoilType;
 import epicsquid.roots.world.HugeBaffleCap;
@@ -17,13 +16,12 @@ import epicsquid.roots.world.tree.WorldGenBigWildwoodTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.common.EnumPlantType;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -70,45 +68,45 @@ public class ModBlocks {
    */
   public static void registerBlocks(@Nonnull RegisterContentEvent event) {
     // Roots
-    event.addBlock(moonglow = new BlockMoonglowCrop("moonglow_crop", EnumPlantType.Crop));
-    event.addBlock(pereskia = new BlockPereskiaCrop("pereskia_crop", EnumPlantType.Crop));
-    event.addBlock(wildroot = new BlockWildrootCrop("wildroot_crop", EnumPlantType.Crop));
-    event.addBlock(spirit_herb = new BlockSpiritHerbCrop("spirit_herb_crop", EnumPlantType.Crop));
+    event.addBlock(moonglow = new MoonglowCropBlock("moonglow_crop", EnumPlantType.Crop));
+    event.addBlock(pereskia = new PereskiaCropBlock("pereskia_crop", EnumPlantType.Crop));
+    event.addBlock(wildroot = new WildrootCropBlock("wildroot_crop", EnumPlantType.Crop));
+    event.addBlock(spirit_herb = new SpiritHerbCropBlock("spirit_herb_crop", EnumPlantType.Crop));
     event.addBlock(baffle_cap_huge_stem = new BlockHugeMushroomBase(Material.WOOD, SoundType.WOOD, 0.8f, "baffle_cap_huge_stem").setCreativeTab(Roots.tab));
     event.addBlock(baffle_cap_huge_top = new BlockHugeMushroomBase(Material.WOOD, SoundType.WOOD, 0.8f, "baffle_cap_huge_top").setCreativeTab(Roots.tab));
     event.addBlock(baffle_cap_mushroom = new BlockMushroomBase("baffle_cap_mushroom", new HugeBaffleCap().getData()));
     ((BlockHugeMushroomBase) baffle_cap_huge_stem).setSmallBlock(baffle_cap_mushroom);
     ((BlockHugeMushroomBase) baffle_cap_huge_top).setSmallBlock(baffle_cap_mushroom);
-    event.addBlock(wildewheet = new BlockWildewheetCrop("wildewheet_crop", EnumPlantType.Crop));
-    event.addBlock(cloud_berry = new BlockCloudBerryCrop("cloud_berry_crop", CustomPlantType.ELEMENT_AIR));
-    event.addBlock(infernal_bulb = new BlockInfernalBulbCrop("infernal_bulb_crop", CustomPlantType.ELEMENT_FIRE));
+    event.addBlock(wildewheet = new WildewheetCropBlock("wildewheet_crop", EnumPlantType.Crop));
+    event.addBlock(cloud_berry = new CloudBerryCropBlock("cloud_berry_crop", CustomPlantType.ELEMENT_AIR));
+    event.addBlock(infernal_bulb = new InfernalBulbCropBlock("infernal_bulb_crop", CustomPlantType.ELEMENT_FIRE));
     // TODO 1.13 make the dewgonia work only underwater
-    event.addBlock(dewgonia = new BlockDewgoniaCrop("dewgonia_crop", CustomPlantType.ELEMENT_WATER));
-    event.addBlock(stalicripe = new BlockStalicripeCrop("stalicripe_crop", CustomPlantType.ELEMENT_EARTH));
-    BlockElementalSoil.SOIL_INIT = EnumElementalSoilType.BASE;
-    event.addBlock(elemental_soil = new BlockElementalSoil(Material.GROUND, SoundType.GROUND, "elemental_soil", EnumElementalSoilType.BASE).setCreativeTab(Roots.tab));
-    BlockElementalSoil.SOIL_INIT = EnumElementalSoilType.AIR;
-    event.addBlock(elemental_soil_air = new BlockElementalSoil(Material.GROUND, SoundType.GROUND, "elemental_soil_air", EnumElementalSoilType.AIR).setModelCustom(false).setCreativeTab(Roots.tab));
-    BlockElementalSoil.SOIL_INIT = EnumElementalSoilType.WATER;
-    event.addBlock(elemental_soil_water = new BlockElementalSoil(Material.GROUND, SoundType.GROUND, "elemental_soil_water", EnumElementalSoilType.WATER).setModelCustom(false).setCreativeTab(Roots.tab));
-    BlockElementalSoil.SOIL_INIT = EnumElementalSoilType.FIRE;
-    event.addBlock(elemental_soil_fire = new BlockElementalSoil(Material.GROUND, SoundType.GROUND, "elemental_soil_fire", EnumElementalSoilType.FIRE).setModelCustom(false).setCreativeTab(Roots.tab));
-    BlockElementalSoil.SOIL_INIT = EnumElementalSoilType.EARTH;
-    event.addBlock(elemental_soil_earth = new BlockElementalSoil(Material.GROUND, SoundType.GROUND, "elemental_soil_earth", EnumElementalSoilType.EARTH).setModelCustom(false).setCreativeTab(Roots.tab));
+    event.addBlock(dewgonia = new DewgoniaCropBlock("dewgonia_crop", CustomPlantType.ELEMENT_WATER));
+    event.addBlock(stalicripe = new StalicripeCropBlock("stalicripe_crop", CustomPlantType.ELEMENT_EARTH));
+    ElementalSoilBlock.SOIL_INIT = EnumElementalSoilType.BASE;
+    event.addBlock(elemental_soil = new ElementalSoilBlock(Material.GROUND, SoundType.GROUND, "elemental_soil", EnumElementalSoilType.BASE).setCreativeTab(Roots.tab));
+    ElementalSoilBlock.SOIL_INIT = EnumElementalSoilType.AIR;
+    event.addBlock(elemental_soil_air = new ElementalSoilBlock(Material.GROUND, SoundType.GROUND, "elemental_soil_air", EnumElementalSoilType.AIR).setModelCustom(false).setCreativeTab(Roots.tab));
+    ElementalSoilBlock.SOIL_INIT = EnumElementalSoilType.WATER;
+    event.addBlock(elemental_soil_water = new ElementalSoilBlock(Material.GROUND, SoundType.GROUND, "elemental_soil_water", EnumElementalSoilType.WATER).setModelCustom(false).setCreativeTab(Roots.tab));
+    ElementalSoilBlock.SOIL_INIT = EnumElementalSoilType.FIRE;
+    event.addBlock(elemental_soil_fire = new ElementalSoilBlock(Material.GROUND, SoundType.GROUND, "elemental_soil_fire", EnumElementalSoilType.FIRE).setModelCustom(false).setCreativeTab(Roots.tab));
+    ElementalSoilBlock.SOIL_INIT = EnumElementalSoilType.EARTH;
+    event.addBlock(elemental_soil_earth = new ElementalSoilBlock(Material.GROUND, SoundType.GROUND, "elemental_soil_earth", EnumElementalSoilType.EARTH).setModelCustom(false).setCreativeTab(Roots.tab));
 
     // Post registration block setup
-    ((BlockMushroomBase) baffle_cap_mushroom).setItemBlock(new ItemBlock(baffle_cap_mushroom).setRegistryName(LibRegistry.getActiveModid(), "baffle_cap_mushroom"));
+    ((BlockMushroomBase) baffle_cap_mushroom).setItemBlock(new BlockItem(baffle_cap_mushroom).setRegistryName(LibRegistry.getActiveModid(), "baffle_cap_mushroom"));
 
     //Runestones
     event.addBlock(runestone = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone")).setCreativeTab(Roots.tab);
     event.addBlock(runestone_brick = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_brick")).setCreativeTab(Roots.tab);
     event.addBlock(runestone_brick_alt = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_brick_alt")).setCreativeTab(Roots.tab);
     event.addBlock(chiseled_runestone = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "chiseled_runestone")).setCreativeTab(Roots.tab);
-    event.addBlock(runed_obsidian = new BlockRunedObsidian(Material.ROCK, SoundType.METAL, 8.5f, "runed_obsidian")).setCreativeTab(Roots.tab);
+    event.addBlock(runed_obsidian = new RunedObsidianBlock(Material.ROCK, SoundType.METAL, 8.5f, "runed_obsidian")).setCreativeTab(Roots.tab);
     event.addBlock(runed_obsidian_brick = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runed_obsidian_brick")).setCreativeTab(Roots.tab);
     event.addBlock(runed_obsidian_brick_alt = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runed_obsidian_brick_alt")).setCreativeTab(Roots.tab);
-    event.addBlock(chiseled_runed_obsidian = new BlockRunedObsidian(Material.ROCK, SoundType.METAL, 8.5f, "chiseled_runed_obsidian")).setCreativeTab(Roots.tab);
-    event.addBlock(trample_rune = new BlockTrample(Material.WATER, SoundType.METAL, 1.4f, "runestone_trample")).setCreativeTab(Roots.tab);
+    event.addBlock(chiseled_runed_obsidian = new RunedObsidianBlock(Material.ROCK, SoundType.METAL, 8.5f, "chiseled_runed_obsidian")).setCreativeTab(Roots.tab);
+    event.addBlock(trample_rune = new TrampleBlock(Material.WATER, SoundType.METAL, 1.4f, "runestone_trample")).setCreativeTab(Roots.tab);
 
     runestoneBlocks = Arrays.asList(runestone, runestone_brick, runestone_brick_alt, chiseled_runestone);
     runedObsidianBlocks = Arrays.asList(runed_obsidian, runed_obsidian_brick, runed_obsidian_brick_alt, chiseled_runed_obsidian);
@@ -158,36 +156,36 @@ public class ModBlocks {
     runestone_brick_alt_pressure_plate = runes.pressure_plate;
 
     event.addBlock(structure_marker = new BlockStructureMarker());
-    event.addBlock(mortar = new BlockMortar(Material.ROCK, SoundType.STONE, 1.4f, "mortar", TileEntityMortar.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(bonfire = new BlockBonfire(Material.WOOD, SoundType.WOOD, 1.4f, "bonfire", TileEntityBonfire.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(reinforced_bonfire = new BlockReinforcedBonfire(Material.ROCK, SoundType.STONE, 8.4f, "reinforced_bonfire", TileEntityBonfire.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(decorative_bonfire = new BlockDecorativeBonfire(Material.WOOD, SoundType.WOOD, 1.4f, "decorative_bonfire", TileEntityDecorativeBonfire.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(imbuer = new BlockImbuer(Material.WOOD, SoundType.WOOD, 1.4f, "imbuer", TileEntityImbuer.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(offertory_plate = new BlockOffertoryPlate(Material.ROCK, SoundType.STONE, 1.4f, "offertory_plate", TileEntityOffertoryPlate.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(offertory_bowl = new BlockOffertoryBowl(Material.ROCK, SoundType.STONE, 1.4f, "offertory_bowl")).setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(unending_bowl = new BlockUnendingBowl(Material.ROCK, SoundType.STONE, 1.4f, "unending_bowl", TileEntityUnendingBowl.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(incense_burner = new BlockIncenseBurner(Material.ROCK, SoundType.STONE, 1.4f, "incense_burner", TileEntityIncenseBurner.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(mortar = new MortarBlock(Material.ROCK, SoundType.STONE, 1.4f, "mortar", TileEntityMortar.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(bonfire = new BonfireBlock(Material.WOOD, SoundType.WOOD, 1.4f, "bonfire", TileEntityBonfire.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(reinforced_bonfire = new ReinforcedBonfireBlock(Material.ROCK, SoundType.STONE, 8.4f, "reinforced_bonfire", TileEntityBonfire.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(decorative_bonfire = new DecorativeBonfireBlock(Material.WOOD, SoundType.WOOD, 1.4f, "decorative_bonfire", TileEntityDecorativeBonfire.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(imbuer = new ImbuerBlock(Material.WOOD, SoundType.WOOD, 1.4f, "imbuer", TileEntityImbuer.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(offertory_plate = new OffertoryPlateBlock(Material.ROCK, SoundType.STONE, 1.4f, "offertory_plate", TileEntityOffertoryPlate.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(offertory_bowl = new OffertoryBowlBlock(Material.ROCK, SoundType.STONE, 1.4f, "offertory_bowl")).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(unending_bowl = new UnendingBowlBlock(Material.ROCK, SoundType.STONE, 1.4f, "unending_bowl", TileEntityUnendingBowl.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(incense_burner = new IncenseBurnerBlock(Material.ROCK, SoundType.STONE, 1.4f, "incense_burner", TileEntityIncenseBurner.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
 
     //Runes
-    event.addBlock(wildwood_rune = new BlockWildwoodRune(Material.WOOD, SoundType.WOOD, 1.4f, "wildwood_rune", TileEntityWildrootRune.class)).setCreativeTab(Roots.tab);
+    event.addBlock(wildwood_rune = new WildwoodRuneBlock(Material.WOOD, SoundType.WOOD, 1.4f, "wildwood_rune", TileEntityWildrootRune.class)).setCreativeTab(Roots.tab);
 
     // Grove Stones
-    event.addBlock(grove_stone = new BlockGroveStone("grove_stone")).setCreativeTab(Roots.tab);
-    event.addBlock(fairy_grove_stone = new BlockFairyGroveStone("fairy_grove_stone")).setCreativeTab(Roots.tab);
-    event.addBlock(fungi_grove_stone = new BlockFungiGroveStone("fungi_grove_stone")).setCreativeTab(Roots.tab);
-    event.addBlock(natural_grove_stone = new BlockNaturalGroveStone("natural_grove_stone")).setCreativeTab(Roots.tab);
-    event.addBlock(wild_grove_stone = new BlockWildGroveStone("wild_grove_stone")).setCreativeTab(Roots.tab);
-    event.addBlock(twilight_grove_stone = new BlockTwilightGroveStone("twilight_grove_stone")).setCreativeTab(Roots.tab);
-    event.addBlock(elemental_grove_stone = new BlockElementalGroveStone("elemental_grove_stone")).setCreativeTab(Roots.tab);
+    event.addBlock(grove_stone = new GroveStoneBlock("grove_stone")).setCreativeTab(Roots.tab);
+    event.addBlock(fairy_grove_stone = new FairyGroveStoneBlock("fairy_grove_stone")).setCreativeTab(Roots.tab);
+    event.addBlock(fungi_grove_stone = new FungiGroveStoneBlock("fungi_grove_stone")).setCreativeTab(Roots.tab);
+    event.addBlock(natural_grove_stone = new NaturalGroveStoneBlock("natural_grove_stone")).setCreativeTab(Roots.tab);
+    event.addBlock(wild_grove_stone = new WildGroveStoneBlock("wild_grove_stone")).setCreativeTab(Roots.tab);
+    event.addBlock(twilight_grove_stone = new TwilightGroveStoneBlock("twilight_grove_stone")).setCreativeTab(Roots.tab);
+    event.addBlock(elemental_grove_stone = new ElementalGroveStoneBlock("elemental_grove_stone")).setCreativeTab(Roots.tab);
 
-    event.addBlock(fey_crafter = new BlockFeyCrafter(Material.WOOD, SoundType.WOOD, 2.5f, "fey_crafter", TileEntityFeyCrafter.class)).setCreativeTab(Roots.tab);
+    event.addBlock(fey_crafter = new FeyCrafterBlock(Material.WOOD, SoundType.WOOD, 2.5f, "fey_crafter", TileEntityFeyCrafter.class)).setCreativeTab(Roots.tab);
 
-    event.addBlock(fairy_house_brown = new BlockMushroomHouse(Material.PLANTS, SoundType.WOOD, 1.4f, "fairy_house_brown")).setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(fairy_house_red = new BlockMushroomHouse(Material.PLANTS, SoundType.WOOD, 1.4f, "fairy_house_red")).setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(fairy_house_baffle = new BlockMushroomHouse(Material.PLANTS, SoundType.WOOD, 1.4f, "fairy_house_baffle")).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(fairy_house_brown = new MushroomHouseBlock(Material.PLANTS, SoundType.WOOD, 1.4f, "fairy_house_brown")).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(fairy_house_red = new MushroomHouseBlock(Material.PLANTS, SoundType.WOOD, 1.4f, "fairy_house_red")).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(fairy_house_baffle = new MushroomHouseBlock(Material.PLANTS, SoundType.WOOD, 1.4f, "fairy_house_baffle")).setCreativeTab(Roots.tab).setLightOpacity(0);
 
-    event.addBlock(fey_light = new BlockFeyLight(Material.SNOW, SoundType.SNOW, 0.0f, "fey_light")).setCreativeTab(Roots.tab);
-    event.addBlock(fey_fire = new BlockWildFire("fey_fire")).setCreativeTab(Roots.tab);
+    event.addBlock(fey_light = new FeyLightBlock(Material.SNOW, SoundType.SNOW, 0.0f, "fey_light")).setCreativeTab(Roots.tab);
+    event.addBlock(fey_fire = new WildFireBlock("fey_fire")).setCreativeTab(Roots.tab);
   }
 
   private static Variants variants(RegisterContentEvent event, Block base, String name, SoundType sound, Material material) {

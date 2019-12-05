@@ -1,6 +1,6 @@
 package epicsquid.roots.grove;
 
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 
 public class GrovePower {
@@ -12,7 +12,7 @@ public class GrovePower {
     this.grove = grove;
     this.type = type;
     this.item = item;
-    if (!(this.item.getItem() instanceof ItemBlock)) {
+    if (!(this.item.getItem() instanceof BlockItem)) {
       throw new InvalidGroveBlockException("GrovePower item must be an itemblock: " + this.item.toString());
     }
   }

@@ -1,15 +1,8 @@
 package epicsquid.roots.integration.patchouli;
 
-import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.recipe.RunicCarvingRecipe;
-import net.minecraft.item.ItemStack;
-import vazkii.patchouli.api.IComponentProcessor;
-import vazkii.patchouli.api.IVariableProvider;
-import vazkii.patchouli.common.util.ItemStackUtil;
+public class RunicCarvingRecipeProcessor { //implements IComponentProcessor {
 
-public class RunicCarvingRecipeProcessor implements IComponentProcessor {
-
-  private RunicCarvingRecipe recipe;
+/*  private RunicCarvingRecipe recipe;
 
   @Override
   public void setup(IVariableProvider<String> iVariableProvider) {
@@ -27,6 +20,6 @@ public class RunicCarvingRecipeProcessor implements IComponentProcessor {
       return ItemStackUtil.serializeStack(new ItemStack(recipe.getHerb().getItem()));
     }
     return null;
-  }
+  }*/
 
 }

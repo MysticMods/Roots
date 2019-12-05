@@ -47,7 +47,7 @@ public class MessageFrostTouchFX implements IMessage {
   }
 
   public static class MessageHolder implements IMessageHandler<MessageFrostTouchFX, IMessage> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageFrostTouchFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

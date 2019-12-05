@@ -4,16 +4,16 @@ import epicsquid.roots.util.StateUtil;
 import epicsquid.roots.util.types.RegistryItem;
 import epicsquid.roots.util.types.WorldPosStatePredicate;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class TransmutationRecipe extends RegistryItem {
-  private IBlockState startState;
+  private BlockState startState;
   private Block startBlock;
-  private IBlockState endState;
+  private BlockState endState;
   private ItemStack endStack;
   private WorldPosStatePredicate condition = (a, b, c) -> true;
 
@@ -26,7 +26,7 @@ public class TransmutationRecipe extends RegistryItem {
       this.condition = condition;
   }
 
-  public TransmutationRecipe(ResourceLocation name, Block startBlock, IBlockState endState, WorldPosStatePredicate condition) {
+  public TransmutationRecipe(ResourceLocation name, Block startBlock, BlockState endState, WorldPosStatePredicate condition) {
     this.setRegistryName(name);
     this.startBlock = startBlock;
     this.endState = endState;
@@ -35,7 +35,7 @@ public class TransmutationRecipe extends RegistryItem {
     }
   }
 
-  public TransmutationRecipe(ResourceLocation name, IBlockState startState, IBlockState endState, WorldPosStatePredicate condition) {
+  public TransmutationRecipe(ResourceLocation name, BlockState startState, BlockState endState, WorldPosStatePredicate condition) {
     this.setRegistryName(name);
     this.startBlock = null;
     this.startState = startState;
@@ -45,7 +45,7 @@ public class TransmutationRecipe extends RegistryItem {
     }
   }
 
-  public TransmutationRecipe(ResourceLocation name, IBlockState startState, ItemStack endState, WorldPosStatePredicate condition) {
+  public TransmutationRecipe(ResourceLocation name, BlockState startState, ItemStack endState, WorldPosStatePredicate condition) {
     this.setRegistryName(name);
     this.startBlock = null;
     this.startState = startState;
@@ -64,7 +64,7 @@ public class TransmutationRecipe extends RegistryItem {
     return startBlock;
   }
 
-  public IBlockState getStartState() {
+  public BlockState getStartState() {
     if (startState == null && startBlock != null) return startBlock.getDefaultState();
     return startState;
   }
@@ -73,7 +73,7 @@ public class TransmutationRecipe extends RegistryItem {
     return endStack;
   }
 
-  public IBlockState getEndState() {
+  public BlockState getEndState() {
     return endState;
   }
 
@@ -85,7 +85,7 @@ public class TransmutationRecipe extends RegistryItem {
     return matches(block.getDefaultState());
   }
 
-  public boolean matches(IBlockState start) {
+  public boolean matches(BlockState start) {
     if (this.startState != null) {
       return StateUtil.compareStates(this.startState, start);
     } else {
@@ -93,7 +93,7 @@ public class TransmutationRecipe extends RegistryItem {
     }
   }
 
-  public boolean matches(World world, BlockPos pos, IBlockState state) {
+  public boolean matches(World world, BlockPos pos, BlockState state) {
     return (this.startBlock != null && this.startBlock == state.getBlock() || this.startState != null && StateUtil.compareStates(this.startState, state)) && (this.getCondition() == null || this.getCondition().test(world, pos, state));
   }
 

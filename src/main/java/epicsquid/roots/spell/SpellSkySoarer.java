@@ -1,12 +1,12 @@
 package epicsquid.roots.spell;
 
-import epicsquid.roots.entity.spell.EntityBoost;
+import epicsquid.roots.entity.spell.BoostEntity;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -38,9 +38,9 @@ public class SpellSkySoarer extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
-      EntityBoost boost = new EntityBoost(player.world);
+      BoostEntity boost = new BoostEntity(player.world);
       boost.setPlayer(player.getUniqueID());
       boost.setPosition(player.posX, player.posY, player.posZ);
       player.world.spawnEntity(boost);

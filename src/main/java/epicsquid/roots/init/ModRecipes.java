@@ -6,13 +6,12 @@ import epicsquid.mysticallib.recipe.factories.OreFallbackIngredient;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.config.ConfigManager;
-import epicsquid.mysticalworld.entity.*;
 import epicsquid.mysticalworld.materials.Material;
 import epicsquid.mysticalworld.materials.Materials;
 import epicsquid.mysticalworld.recipe.Ingredients;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
-import epicsquid.roots.item.ItemDruidKnife;
+import epicsquid.roots.item.DruidKnifeItem;
 import epicsquid.roots.recipe.*;
 import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
 import epicsquid.roots.spell.SpellBase;
@@ -21,15 +20,21 @@ import epicsquid.roots.util.StateUtil;
 import epicsquid.roots.util.types.WorldPosStatePredicate;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.block.*;
-import net.minecraft.block.BlockFlower.EnumFlowerType;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.FlowerBlock.EnumFlowerType;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityPolarBear;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.passive.FoxEntity;
+import net.minecraft.entity.passive.PolarBearEntity;
 import net.minecraft.entity.passive.*;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.entity.passive.horse.DonkeyEntity;
+import net.minecraft.entity.passive.horse.HorseEntity;
+import net.minecraft.entity.passive.horse.LlamaEntity;
+import net.minecraft.entity.passive.horse.MuleEntity;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.Items;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
@@ -104,27 +109,27 @@ public class ModRecipes {
   public static void initPacifistEntities() {
     // Bats are too easily killed.
     //addPacifistEntry("bat", EntityBat.class);
-    addPacifistEntry("chicken", EntityChicken.class);
-    addPacifistEntry("cow", EntityCow.class);
-    addPacifistEntry("donkey", EntityDonkey.class);
-    addPacifistEntry("horse", EntityHorse.class);
-    addPacifistEntry("llama", EntityLlama.class);
-    addPacifistEntry("mooshroom", EntityMooshroom.class);
-    addPacifistEntry("mule", EntityMule.class);
-    addPacifistEntry("ocelot", EntityOcelot.class);
-    addPacifistEntry("parrot", EntityParrot.class);
-    addPacifistEntry("pig", EntityPig.class);
-    addPacifistEntry("rabbit", EntityRabbit.class);
-    addPacifistEntry("sheep", EntitySheep.class);
-    addPacifistEntry("squid", EntitySquid.class);
-    addPacifistEntry("villager", EntityVillager.class).setCheckTarget(true);
+    addPacifistEntry("chicken", ChickenEntity.class);
+    addPacifistEntry("cow", CowEntity.class);
+    addPacifistEntry("donkey", DonkeyEntity.class);
+    addPacifistEntry("horse", HorseEntity.class);
+    addPacifistEntry("llama", LlamaEntity.class);
+    addPacifistEntry("mooshroom", MooshroomEntity.class);
+    addPacifistEntry("mule", MuleEntity.class);
+    addPacifistEntry("ocelot", OcelotEntity.class);
+    addPacifistEntry("parrot", ParrotEntity.class);
+    addPacifistEntry("pig", PigEntity.class);
+    addPacifistEntry("rabbit", RabbitEntity.class);
+    addPacifistEntry("sheep", SheepEntity.class);
+    addPacifistEntry("squid", SquidEntity.class);
+    addPacifistEntry("villager", VillagerEntity.class).setCheckTarget(true);
     // TODO: Conditional non-hostile
-    addPacifistEntry("wolf", EntityWolf.class);
+    addPacifistEntry("wolf", WolfEntity.class);
 
     // Mystical Worlds
     addPacifistEntry("beetle", EntityBeetle.class);
     addPacifistEntry("deer", EntityDeer.class);
-    addPacifistEntry("fox", EntityFox.class);
+    addPacifistEntry("fox", FoxEntity.class);
     addPacifistEntry("frog", EntityFrog.class);
     addPacifistEntry("owl", EntityOwl.class);
     addPacifistEntry("sprout", EntitySprout.class);
@@ -133,7 +138,7 @@ public class ModRecipes {
     addPacifistEntry("lava_cat", EntityLavaCat.class);
   }
 
-  public static void addFlowerRecipe(String name, IBlockState state) {
+  public static void addFlowerRecipe(String name, BlockState state) {
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
     FlowerRecipe recipe = new FlowerRecipe(rl, state);
     flowerRecipes.put(rl, recipe);
@@ -192,9 +197,9 @@ public class ModRecipes {
   }
 
   public static void addModdedBarkRecipe(String name, ItemStack item, ItemStack blockStack) {
-    if (blockStack.getItem() instanceof ItemBlock) {
+    if (blockStack.getItem() instanceof BlockItem) {
       for (Item knife : ModItems.knives) {
-        ((ItemDruidKnife) knife).addEffectiveBlock(((ItemBlock) blockStack.getItem()).getBlock());
+        ((DruidKnifeItem) knife).addEffectiveBlock(((BlockItem) blockStack.getItem()).getBlock());
       }
     }
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
@@ -202,7 +207,7 @@ public class ModRecipes {
   }
 
   @Nullable
-  public static BarkRecipe getModdedBarkRecipe(IBlockState block) {
+  public static BarkRecipe getModdedBarkRecipe(BlockState block) {
     ItemStack stack = new ItemStack(block.getBlock(), 1, block.getBlock().damageDropped(block));
     for (BarkRecipe recipe : barkRecipes.values()) {
       if (ItemUtil.equalWithoutSize(recipe.getBlockStack(), stack)) {
@@ -247,27 +252,27 @@ public class ModRecipes {
     return false;
   }
 
-  public static void addTransmutationRecipe(String name, Block start, IBlockState endState, WorldPosStatePredicate condition) {
+  public static void addTransmutationRecipe(String name, Block start, BlockState endState, WorldPosStatePredicate condition) {
     ResourceLocation n = new ResourceLocation(Roots.MODID, name);
     TransmutationRecipe recipe = new TransmutationRecipe(n, start, endState, condition);
     transmutationRecipes.put(n, recipe);
   }
 
-  public static void addTransmutationRecipe(String name, IBlockState start, IBlockState endState) {
+  public static void addTransmutationRecipe(String name, BlockState start, BlockState endState) {
     addTransmutationRecipe(name, start, endState, null);
   }
 
-  public static void addTransmutationRecipe(String name, IBlockState start, IBlockState endState, WorldPosStatePredicate condition) {
+  public static void addTransmutationRecipe(String name, BlockState start, BlockState endState, WorldPosStatePredicate condition) {
     ResourceLocation n = new ResourceLocation(Roots.MODID, name);
     TransmutationRecipe recipe = new TransmutationRecipe(n, start, endState, condition);
     transmutationRecipes.put(n, recipe);
   }
 
-  public static void addTransmutationRecipe(String name, IBlockState start, ItemStack endState) {
+  public static void addTransmutationRecipe(String name, BlockState start, ItemStack endState) {
     addTransmutationRecipe(name, start, endState, null);
   }
 
-  public static void addTransmutationRecipe(String name, IBlockState start, ItemStack endState, WorldPosStatePredicate condition) {
+  public static void addTransmutationRecipe(String name, BlockState start, ItemStack endState, WorldPosStatePredicate condition) {
     ResourceLocation n = new ResourceLocation(Roots.MODID, name);
     TransmutationRecipe recipe = new TransmutationRecipe(n, start, endState, condition);
     transmutationRecipes.put(n, recipe);
@@ -283,7 +288,7 @@ public class ModRecipes {
     transmutationRecipes.put(n, recipe);
   }
 
-  public static void addTransmutationRecipe(String name, Block start, IBlockState endState) {
+  public static void addTransmutationRecipe(String name, Block start, BlockState endState) {
     addTransmutationRecipe(name, start, endState, null);
   }
 
@@ -311,7 +316,7 @@ public class ModRecipes {
     return new ArrayList<>(transmutationRecipes.values());
   }
 
-  public static List<TransmutationRecipe> getTransmutationRecipes(IBlockState startState) {
+  public static List<TransmutationRecipe> getTransmutationRecipes(BlockState startState) {
     List<TransmutationRecipe> result = new ArrayList<>();
     for (TransmutationRecipe recipe : transmutationRecipes.values()) {
       if (recipe.matches(startState)) result.add(recipe);
@@ -348,15 +353,15 @@ public class ModRecipes {
     addTransmutationRecipe("birch_jungle", Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH), Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE));
     addTransmutationRecipe("birch_jungle_leaves", Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.BIRCH), Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE));
     addTransmutationRecipe("pumpkin_melon", Blocks.PUMPKIN, Blocks.MELON_BLOCK.getDefaultState(), water_below);
-    addTransmutationRecipe("pumpkin_cactus", Blocks.PUMPKIN, Blocks.CACTUS.getDefaultState(), (t, u, v) -> t.getBlockState(u.down()).getBlock() instanceof BlockSand);
+    addTransmutationRecipe("pumpkin_cactus", Blocks.PUMPKIN, Blocks.CACTUS.getDefaultState(), (t, u, v) -> t.getBlockState(u.down()).getBlock() instanceof SandBlock);
     addTransmutationRecipe("cocoa_to_carrot", Blocks.COCOA, new ItemStack(Items.CARROT));
-    addTransmutationRecipe("carrot_to_beetroot", Blocks.CARROTS, Blocks.BEETROOTS.getDefaultState(), (t, u, v) -> ((BlockCarrot) v.getBlock()).isMaxAge(v));
+    addTransmutationRecipe("carrot_to_beetroot", Blocks.CARROTS, Blocks.BEETROOTS.getDefaultState(), (t, u, v) -> ((CarrotBlock) v.getBlock()).isMaxAge(v));
     addTransmutationRecipe("carpet_to_lilypad", Blocks.CARPET, Blocks.WATERLILY.getDefaultState(), water_below);
     addTransmutationRecipe("trapdoor_to_cobweb", Blocks.TRAPDOOR, Blocks.WEB.getDefaultState(), wool_below);
     addTransmutationRecipe("redstone_to_vines", Blocks.REDSTONE_WIRE, new ItemStack(Blocks.VINE), leaves_below);
     addTransmutationRecipe("melon_to_pumpkin", Blocks.MELON_BLOCK, Blocks.PUMPKIN.getDefaultState(), stone_below);
-    StateUtil.ignoreState(Blocks.LEAVES, BlockLeaves.CHECK_DECAY);
-    StateUtil.ignoreState(Blocks.LEAVES, BlockLeaves.DECAYABLE);
+    StateUtil.ignoreState(Blocks.LEAVES, LeavesBlock.CHECK_DECAY);
+    StateUtil.ignoreState(Blocks.LEAVES, LeavesBlock.DECAYABLE);
   }
 
   public static void addAnimalHarvestRecipe(Entity entity) {
@@ -499,27 +504,27 @@ public class ModRecipes {
 
   public static void initAnimalHarvestRecipes() {
     // Vanilla
-    addAnimalHarvestRecipe("bat", EntityBat.class);
-    addAnimalHarvestRecipe("chicken", EntityChicken.class);
-    addAnimalHarvestRecipe("cow", EntityCow.class);
-    addAnimalHarvestRecipe("donkey", EntityDonkey.class);
-    addAnimalHarvestRecipe("horse", EntityHorse.class);
-    addAnimalHarvestRecipe("llama", EntityLlama.class);
-    addAnimalHarvestRecipe("mooshroom", EntityMooshroom.class);
-    addAnimalHarvestRecipe("mule", EntityMule.class);
-    addAnimalHarvestRecipe("ocelot", EntityOcelot.class);
-    addAnimalHarvestRecipe("parrot", EntityParrot.class);
-    addAnimalHarvestRecipe("pig", EntityPig.class);
-    addAnimalHarvestRecipe("rabbit", EntityRabbit.class);
-    addAnimalHarvestRecipe("sheep", EntitySheep.class);
-    addAnimalHarvestRecipe("squid", EntitySquid.class);
-    addAnimalHarvestRecipe("wolf", EntityWolf.class);
-    addAnimalHarvestRecipe("polar_bear", EntityPolarBear.class);
+    addAnimalHarvestRecipe("bat", BatEntity.class);
+    addAnimalHarvestRecipe("chicken", ChickenEntity.class);
+    addAnimalHarvestRecipe("cow", CowEntity.class);
+    addAnimalHarvestRecipe("donkey", DonkeyEntity.class);
+    addAnimalHarvestRecipe("horse", HorseEntity.class);
+    addAnimalHarvestRecipe("llama", LlamaEntity.class);
+    addAnimalHarvestRecipe("mooshroom", MooshroomEntity.class);
+    addAnimalHarvestRecipe("mule", MuleEntity.class);
+    addAnimalHarvestRecipe("ocelot", OcelotEntity.class);
+    addAnimalHarvestRecipe("parrot", ParrotEntity.class);
+    addAnimalHarvestRecipe("pig", PigEntity.class);
+    addAnimalHarvestRecipe("rabbit", RabbitEntity.class);
+    addAnimalHarvestRecipe("sheep", SheepEntity.class);
+    addAnimalHarvestRecipe("squid", SquidEntity.class);
+    addAnimalHarvestRecipe("wolf", WolfEntity.class);
+    addAnimalHarvestRecipe("polar_bear", PolarBearEntity.class);
     // No villager or skeletal/zombie horses.
     // Mystical World
     addAnimalHarvestRecipe("beetle", EntityBeetle.class);
     addAnimalHarvestRecipe("deer", EntityDeer.class);
-    addAnimalHarvestRecipe("fox", EntityFox.class);
+    addAnimalHarvestRecipe("fox", FoxEntity.class);
     addAnimalHarvestRecipe("frog", EntityFrog.class);
     addAnimalHarvestRecipe("owl", EntityOwl.class);
     addAnimalHarvestRecipe("sprout", EntitySprout.class);
@@ -542,7 +547,7 @@ public class ModRecipes {
     runicCarvingRecipes.add(recipe);
   }
 
-  public static RunicCarvingRecipe getRunicCarvingRecipe(IBlockState carvingBlock, Herb herb) {
+  public static RunicCarvingRecipe getRunicCarvingRecipe(BlockState carvingBlock, Herb herb) {
     if (carvingBlock != null && herb != null) {
       for (RunicCarvingRecipe recipe : runicCarvingRecipes) {
         if (recipe.getHerb().equals(herb) && recipe.getCarvingBlock().equals(carvingBlock)) {
@@ -608,7 +613,7 @@ public class ModRecipes {
   }
 
 
-  public static RunicShearEntityRecipe getRunicShearRecipe(EntityLivingBase entity) {
+  public static RunicShearEntityRecipe getRunicShearRecipe(LivingEntity entity) {
     if (generatedEntityRecipes == null || generatedEntityRecipes.isEmpty()) {
       generateEntityRecipes();
     }
@@ -834,8 +839,8 @@ public class ModRecipes {
   }
 
   public static void initMortarRecipes() {
-    addMortarRecipe(new ItemStack(Items.DYE, 1, EnumDyeColor.LIGHT_BLUE.getDyeDamage()), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.carapace), 1, 1, 1, 1, 1, 1);
-    addMortarRecipe(new ItemStack(Items.DYE, 1, EnumDyeColor.ORANGE.getDyeDamage()), new OreIngredient("cropCarrot"), 1, 1, 1, 1, 1, 1);
+    addMortarRecipe(new ItemStack(Items.DYE, 1, DyeColor.LIGHT_BLUE.getDyeDamage()), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.carapace), 1, 1, 1, 1, 1, 1);
+    addMortarRecipe(new ItemStack(Items.DYE, 1, DyeColor.ORANGE.getDyeDamage()), new OreIngredient("cropCarrot"), 1, 1, 1, 1, 1, 1);
     addMortarRecipe(new ItemStack(ModItems.flour), new OreIngredient("cropWheat"), 1f, 1f, 0f, 1f, 1f, 0f);
     addMortarRecipe(new ItemStack(ModItems.flour), new OreIngredient("cropPotato"), 1f, 1f, 0, 1f, 1f, 0f);
     addMortarRecipe(new ItemStack(Items.DYE, 4, 15), new OreIngredient("bone"), 0f, 0f, 0f, 0f, 0f, 0f);
@@ -1053,9 +1058,9 @@ public class ModRecipes {
     // END OF COOKING
 
     addCraftingRecipe("unending_bowl",
-        new FeyCraftingRecipe(new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.unending_bowl)), 2).addIngredients(
+        new FeyCraftingRecipe(new ItemStack(BlockItem.getItemFromBlock(ModBlocks.unending_bowl)), 2).addIngredients(
             new ItemStack(Items.WATER_BUCKET),
-            new ItemStack(ItemBlock.getItemFromBlock(ModBlocks.mortar)),
+            new ItemStack(BlockItem.getItemFromBlock(ModBlocks.mortar)),
             new ItemStack(ModItems.dewgonia),
             new ItemStack(ModItems.terra_moss),
             new ItemStack(ModItems.dewgonia)));

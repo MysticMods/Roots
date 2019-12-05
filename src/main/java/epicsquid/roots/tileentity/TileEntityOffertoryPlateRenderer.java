@@ -3,35 +3,35 @@ package epicsquid.roots.tileentity;
 import java.util.Random;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.block.BlockOffertoryPlate;
+import epicsquid.roots.block.OffertoryPlateBlock;
 import epicsquid.roots.init.ModBlocks;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderItem;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 
-public class TileEntityOffertoryPlateRenderer extends TileEntitySpecialRenderer<TileEntityOffertoryPlate> {
+public class TileEntityOffertoryPlateRenderer extends TileEntityRenderer<TileEntityOffertoryPlate> {
 
   @Override
   public void render(TileEntityOffertoryPlate tei, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     if (!tei.inventory.getStackInSlot(0).isEmpty()) {
       int count = getCount(tei.inventory.getStackInSlot(0));
-      RenderItem r = Minecraft.getMinecraft().getRenderItem();
-      IBlockState state = tei.getWorld().getBlockState(tei.getPos());
+      ItemRenderer r = Minecraft.getMinecraft().getRenderItem();
+      BlockState state = tei.getWorld().getBlockState(tei.getPos());
       if (state.getBlock() != ModBlocks.offertory_plate) {
         Roots.logger.error("Fatal error rendering offertory plate, block state was " + state.toString() + " when offertory plate was expected.");
         return;
       }
-      EnumFacing f = state.getValue(BlockOffertoryPlate.FACING);
+      Direction f = state.getValue(OffertoryPlateBlock.FACING);
       for (int i = 0; i < count; i++) {
         GlStateManager.pushMatrix();
         GlStateManager
-            .translate(x + 0.5, y + 0.8125 + 0.0625 * (double) i + 0.0625 * (tei.inventory.getStackInSlot(0).getItem() instanceof ItemBlock ? 1.0 : 0),
+            .translate(x + 0.5, y + 0.8125 + 0.0625 * (double) i + 0.0625 * (tei.inventory.getStackInSlot(0).getItem() instanceof BlockItem ? 1.0 : 0),
                 z + 0.5);
         GlStateManager.rotate(180 - f.getHorizontalAngle(), 0, 1, 0);
         GlStateManager.rotate(67.5f, 1.0f, 0, 0);

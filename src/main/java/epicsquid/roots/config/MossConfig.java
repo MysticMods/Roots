@@ -5,8 +5,8 @@ import com.google.common.collect.HashBiMap;
 import epicsquid.mysticallib.util.ConfigUtil;
 import epicsquid.roots.Roots;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Config;
 
@@ -46,7 +46,7 @@ public class MossConfig {
   private static BiMap<Block, Block> mossyBlocks = HashBiMap.create();
 
   @Config.Ignore
-  private static BiMap<IBlockState, IBlockState> mossyStates = HashBiMap.create();
+  private static BiMap<BlockState, BlockState> mossyStates = HashBiMap.create();
 
   @SuppressWarnings("deprecation")
   public static Map<ItemStack, ItemStack> getMossyCobblestones() {
@@ -58,12 +58,12 @@ public class MossConfig {
       for (Map.Entry<ItemStack, ItemStack> entry : mossyCobblestones.entrySet()) {
         ItemStack in = entry.getKey();
         ItemStack out = entry.getValue();
-        if (in.getItem() instanceof ItemBlock && out.getItem() instanceof ItemBlock) {
-          Block blockIn = ((ItemBlock) in.getItem()).getBlock();
-          Block blockOut = ((ItemBlock) out.getItem()).getBlock();
+        if (in.getItem() instanceof BlockItem && out.getItem() instanceof BlockItem) {
+          Block blockIn = ((BlockItem) in.getItem()).getBlock();
+          Block blockOut = ((BlockItem) out.getItem()).getBlock();
           if (in.getMetadata() != 0 || out.getMetadata() != 0) {
-            IBlockState stateIn = blockIn.getStateFromMeta(in.getMetadata());
-            IBlockState stateOut = blockOut.getStateFromMeta(out.getMetadata());
+            BlockState stateIn = blockIn.getStateFromMeta(in.getMetadata());
+            BlockState stateOut = blockOut.getStateFromMeta(out.getMetadata());
             mossyStates.put(stateIn, stateOut);
           } else {
             mossyBlocks.put(blockIn, blockOut);
@@ -76,7 +76,7 @@ public class MossConfig {
   }
 
   @Nullable
-  public static IBlockState scrapeResult(IBlockState state) {
+  public static BlockState scrapeResult(BlockState state) {
     Map<ItemStack, ItemStack> mossy = getMossyCobblestones();
 
     if (mossyStates.containsKey(state)) {
@@ -91,7 +91,7 @@ public class MossConfig {
   }
 
   @Nullable
-  public static IBlockState mossConversion(IBlockState state) {
+  public static BlockState mossConversion(BlockState state) {
     Map<ItemStack, ItemStack> mossy = getMossyCobblestones();
 
     if (mossyStates.inverse().containsKey(state)) {

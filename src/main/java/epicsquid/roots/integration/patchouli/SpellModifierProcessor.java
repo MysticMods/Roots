@@ -1,17 +1,8 @@
 package epicsquid.roots.integration.patchouli;
 
-import epicsquid.roots.spell.SpellBase;
-import epicsquid.roots.spell.SpellRegistry;
-import net.minecraft.item.ItemStack;
-import vazkii.patchouli.api.IComponentProcessor;
-import vazkii.patchouli.api.IVariableProvider;
-import vazkii.patchouli.common.util.ItemStackUtil;
+public class SpellModifierProcessor { //implements IComponentProcessor {
 
-import java.util.List;
-
-public class SpellModifierProcessor implements IComponentProcessor {
-
-  private SpellBase recipe = null;
+/*  private SpellBase recipe = null;
   private List<ItemStack> stacks = null;
 
   @Override
@@ -33,5 +24,5 @@ public class SpellModifierProcessor implements IComponentProcessor {
     }
 
     return null;
-  }
+  }*/
 }

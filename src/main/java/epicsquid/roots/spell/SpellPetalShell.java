@@ -6,10 +6,10 @@ import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.List;
@@ -44,9 +44,9 @@ public class SpellPetalShell extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
-      player.addPotionEffect(new PotionEffect(ModPotions.petal_shell, duration, maxShells, false, false));
+      player.addPotionEffect(new EffectInstance(ModPotions.petal_shell, duration, maxShells, false, false));
       PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ), player);
     }
     return true;

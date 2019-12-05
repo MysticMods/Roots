@@ -9,7 +9,7 @@ package epicsquid.roots.gui.client;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.gui.container.ContainerFeyCrafter;
-import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
@@ -17,7 +17,7 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
-public class GuiFeyCrafter extends GuiContainer {
+public class GuiFeyCrafter extends ContainerScreen {
 
   private ContainerFeyCrafter container;
 

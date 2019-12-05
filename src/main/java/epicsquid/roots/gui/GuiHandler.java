@@ -16,7 +16,7 @@ import epicsquid.roots.gui.container.ContainerPouch;
 import epicsquid.roots.gui.container.ContainerQuiver;
 import epicsquid.roots.gui.container.ContainerFeyCrafter;
 import epicsquid.roots.tileentity.TileEntityFeyCrafter;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -30,7 +30,7 @@ public class GuiHandler implements IGuiHandler {
 
   @Nullable
   @Override
-  public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+  public Object getServerGuiElement(int id, PlayerEntity player, World world, int x, int y, int z) {
     switch (id) {
       case POUCH_ID:
         return new ContainerPouch(player);
@@ -48,7 +48,7 @@ public class GuiHandler implements IGuiHandler {
 
   @Nullable
   @Override
-  public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+  public Object getClientGuiElement(int id, PlayerEntity player, World world, int x, int y, int z) {
     switch (id) {
       case POUCH_ID:
         return new GuiPouch(new ContainerPouch(player));

@@ -1,15 +1,7 @@
 package epicsquid.roots.integration.patchouli;
 
-import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.recipe.PyreCraftingRecipe;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import vazkii.patchouli.api.IComponentProcessor;
-import vazkii.patchouli.api.IVariableProvider;
-import vazkii.patchouli.common.util.ItemStackUtil;
-
-public class RitualCraftingRecipeProcessor implements IComponentProcessor {
-
+public class RitualCraftingRecipeProcessor { //implements IComponentProcessor {
+/*
   private PyreCraftingRecipe pyreCraftingRecipe = null;
 
   @Override
@@ -36,6 +28,6 @@ public class RitualCraftingRecipeProcessor implements IComponentProcessor {
       return ItemStackUtil.serializeStack(pyreCraftingRecipe.getResult());
     }
     return null;
-  }
+  }*/
 
 }

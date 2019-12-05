@@ -3,24 +3,21 @@ package epicsquid.roots.event.handlers;
 import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.GeneralConfig;
-import epicsquid.roots.entity.item.EntityItemMagmaticSoil;
+import epicsquid.roots.entity.item.MagmaticSoilEntityItem;
 import epicsquid.roots.handler.PouchHandler;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.item.ItemRunicShears;
+import epicsquid.roots.item.RunicShearsItem;
 import epicsquid.roots.util.PowderInventoryUtil;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.*;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
@@ -30,7 +27,6 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
-import net.minecraftforge.items.ItemHandlerHelper;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 @SuppressWarnings("unused")
@@ -38,19 +34,19 @@ public class ItemEventHandler {
 
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public static void onInteract(PlayerInteractEvent.RightClickBlock event) {
-    if (event.getHand() != EnumHand.MAIN_HAND)
+    if (event.getHand() != Hand.MAIN_HAND)
       return;
 
-    EntityPlayer player = event.getEntityPlayer();
+    PlayerEntity player = event.getEntityPlayer();
     ItemStack main = player.getHeldItemMainhand();
     if (main.getItem() != ModItems.runic_shears)
       return;
 
-    ItemRunicShears item = (ItemRunicShears) ModItems.runic_shears;
+    RunicShearsItem item = (RunicShearsItem) ModItems.runic_shears;
 
     Vec3d hit = event.getHitVec();
-    EnumActionResult result = item.onItemUse(player, event.getWorld(), event.getPos(), event.getHand(), event.getFace(), (float) hit.x, (float) hit.y, (float) hit.z);
-    if (result == EnumActionResult.SUCCESS) {
+    ActionResultType result = item.onItemUse(player, event.getWorld(), event.getPos(), event.getHand(), event.getFace(), (float) hit.x, (float) hit.y, (float) hit.z);
+    if (result == ActionResultType.SUCCESS) {
       event.setCanceled(true);
     }
   }
@@ -58,8 +54,8 @@ public class ItemEventHandler {
   @SubscribeEvent
   public static void onEntityItemPickup (EntityItemPickupEvent event) {
     if (GeneralConfig.AutoRefillPouches) {
-      EntityPlayer player = event.getEntityPlayer();
-      EntityItem entity = event.getItem();
+      PlayerEntity player = event.getEntityPlayer();
+      ItemEntity entity = event.getItem();
       if (!entity.world.isRemote) {
         ItemStack stack = entity.getItem().copy();
         Item item = stack.getItem();
@@ -75,7 +71,7 @@ public class ItemEventHandler {
               entity.setDead();
               if (refill != 0) {
                 stack.setCount(refill);
-                EntityItem newEntity = new EntityItem(entity.world, entity.posX, entity.posY, entity.posZ, stack);
+                ItemEntity newEntity = new ItemEntity(entity.world, entity.posX, entity.posY, entity.posZ, stack);
                 newEntity.motionX = entity.motionX;
                 newEntity.motionY = entity.motionY;
                 newEntity.motionZ = entity.motionZ;
@@ -100,11 +96,11 @@ public class ItemEventHandler {
     Entity entity = event.getEntity();
     if (event.getWorld().isRemote) return;
 
-    if (entity instanceof EntityItem && !(entity instanceof EntityItemMagmaticSoil)) {
-      EntityItem entityItem = (EntityItem) entity;
+    if (entity instanceof ItemEntity && !(entity instanceof MagmaticSoilEntityItem)) {
+      ItemEntity entityItem = (ItemEntity) entity;
       ItemStack stack = entityItem.getItem();
       if (stack.getItem() == MAGMATIC_SOIL) {
-        EntityItemMagmaticSoil soil = new EntityItemMagmaticSoil(event.getWorld(), entity.posX, entity.posY, entity.posZ, stack);
+        MagmaticSoilEntityItem soil = new MagmaticSoilEntityItem(event.getWorld(), entity.posX, entity.posY, entity.posZ, stack);
         soil.setPickupDelay(40);
         soil.motionX = entity.motionX;
         soil.motionY = entity.motionY;

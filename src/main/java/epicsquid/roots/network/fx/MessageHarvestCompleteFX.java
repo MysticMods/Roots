@@ -45,7 +45,7 @@ public class MessageHarvestCompleteFX implements IMessage {
 
   public static class MessageHolder implements IMessageHandler<MessageHarvestCompleteFX, IMessage> {
 
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(MessageHarvestCompleteFX message, MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

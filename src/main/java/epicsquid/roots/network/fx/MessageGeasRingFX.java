@@ -48,7 +48,7 @@ public class MessageGeasRingFX implements IMessage {
   }
 
   public static class MessageHolder implements IMessageHandler<MessageGeasRingFX, IMessage> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageGeasRingFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

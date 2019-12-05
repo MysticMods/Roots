@@ -43,7 +43,7 @@ public class MessageTreeCompleteFX implements IMessage {
   }
 
   public static class MessageHolder implements IMessageHandler<MessageTreeCompleteFX, IMessage> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageTreeCompleteFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

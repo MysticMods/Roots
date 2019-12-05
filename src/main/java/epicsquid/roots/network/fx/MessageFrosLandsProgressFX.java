@@ -44,7 +44,7 @@ public class MessageFrosLandsProgressFX implements IMessage {
   }
 
   public static class MessageHolder implements IMessageHandler<MessageFrosLandsProgressFX, IMessage> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageFrosLandsProgressFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

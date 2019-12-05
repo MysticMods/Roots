@@ -1,20 +1,8 @@
 package epicsquid.roots.integration.hwyla.providers;
 
-import epicsquid.roots.ritual.RitualBase;
-import epicsquid.roots.tileentity.TileEntityBonfire;
-import mcp.mobius.waila.api.IWailaConfigHandler;
-import mcp.mobius.waila.api.IWailaDataAccessor;
-import mcp.mobius.waila.api.IWailaDataProvider;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.TextFormatting;
+public class ProviderBonfire { // implements IWailaDataProvider {
 
-import javax.annotation.Nonnull;
-import java.util.List;
-
-public class ProviderBonfire implements IWailaDataProvider {
-
-  @Nonnull
+  /*@Nonnull
   @Override
   public List<String> getWailaBody(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
     TileEntityBonfire te = (TileEntityBonfire) accessor.getTileEntity();
@@ -35,5 +23,5 @@ public class ProviderBonfire implements IWailaDataProvider {
       tooltip.add(I18n.format("roots.hud.pyre.progress", String.format("%.2f", remaining / 20.0 / 60.0)));
     }
     return tooltip;
-  }
+  }*/
 }

@@ -9,13 +9,13 @@ package epicsquid.roots.gui.client;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.gui.container.ContainerQuiver;
-import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
-public class GuiQuiver extends GuiContainer {
+public class GuiQuiver extends ContainerScreen {
 
   private ContainerQuiver containerQuiver;
 

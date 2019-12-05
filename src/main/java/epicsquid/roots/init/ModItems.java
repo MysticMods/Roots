@@ -9,18 +9,16 @@ import epicsquid.mysticallib.item.ItemSeedBase;
 import epicsquid.mysticallib.material.MaterialTypes;
 import epicsquid.roots.Roots;
 import epicsquid.roots.item.*;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockDoublePlant;
-import net.minecraft.block.BlockFlower;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
+import net.minecraft.block.*;
+import net.minecraft.block.DoublePlantBlock;
+import net.minecraft.block.FlowerBlock;
+import net.minecraft.block.Blocks;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.*;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.item.Rarity;
 import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.ArmorItem;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
@@ -55,8 +53,8 @@ public class ModItems {
 
   // TODO: Refactor this out of this file
   //Armor Materials
-  public static final ItemArmor.ArmorMaterial sylvanArmorMaterial = EnumHelper.addArmorMaterial("SYLVAN", Roots.MODID + ":sylvan", 12, new int[]{2, 4, 5, 3}, 20, SoundEvents.BLOCK_SNOW_PLACE, 0F);
-  public static final ItemArmor.ArmorMaterial wildwoodArmorMaterial = EnumHelper.addArmorMaterial("WILDWOOD", Roots.MODID + ":wildwood", 20, new int[]{2, 6, 7, 2}, 20, SoundEvents.BLOCK_WOOD_PLACE, 1F);
+  public static final ArmorItem.ArmorMaterial sylvanArmorMaterial = EnumHelper.addArmorMaterial("SYLVAN", Roots.MODID + ":sylvan", 12, new int[]{2, 4, 5, 3}, 20, SoundEvents.BLOCK_SNOW_PLACE, 0F);
+  public static final ArmorItem.ArmorMaterial wildwoodArmorMaterial = EnumHelper.addArmorMaterial("WILDWOOD", Roots.MODID + ":wildwood", 20, new int[]{2, 6, 7, 2}, 20, SoundEvents.BLOCK_WOOD_PLACE, 1F);
 
   /**
    * Register all items
@@ -76,7 +74,7 @@ public class ModItems {
     event.addItem(infernal_bulb = new ItemSeedBase("infernal_bulb", ModBlocks.infernal_bulb, Blocks.MAGMA).setCreativeTab(Roots.tab));
     event.addItem(dewgonia = new ItemSeedBase("dewgonia", ModBlocks.dewgonia, Blocks.SAND).setCreativeTab(Roots.tab));
     event.addItem(stalicripe = new ItemSeedBase("stalicripe", ModBlocks.stalicripe, Blocks.STONE).setCreativeTab(Roots.tab));
-    event.addItem(terra_spores = new ItemTerraSpore("terra_spores").setCreativeTab(Roots.tab));
+    event.addItem(terra_spores = new TerraSporeItem("terra_spores").setCreativeTab(Roots.tab));
     event.addItem(petals = new ItemBase("petals").setCreativeTab(Roots.tab));
     event.addItem(runic_dust = new ItemBase("runic_dust").setCreativeTab(Roots.tab));
 
@@ -94,37 +92,37 @@ public class ModItems {
     event.addItem(fey_leather = new ItemBase("fey_leather") {
       @Override
       @SuppressWarnings("deprecation")
-      public EnumRarity getRarity(ItemStack stack) {
-        return EnumRarity.RARE;
+      public Rarity getRarity(ItemStack stack) {
+        return Rarity.RARE;
       }
     }.setCreativeTab(Roots.tab));
 
     event.addItem(pestle = new ItemBase("pestle").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(component_pouch = new ItemPouch("component_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(creative_pouch = new ItemCreativePouch("creative_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(apothecary_pouch = new ItemApothecaryPouch("apothecary_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(spell_dust = new ItemSpellDust("spell_dust").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(component_pouch = new Pouch("component_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(creative_pouch = new CreativePouchItem("creative_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(apothecary_pouch = new ApothecaryPouchItem("apothecary_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(spell_dust = new SpellDustItem("spell_dust").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(flour = new ItemBase("flour").setCreativeTab(Roots.tab));
-    event.addItem(staff = new ItemStaff("staff").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(living_pickaxe = new ItemLivingPickaxe(ToolMaterial.IRON, "living_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(living_axe = new ItemLivingAxe(ToolMaterial.IRON, "living_axe").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(living_shovel = new ItemLivingShovel(ToolMaterial.IRON, "living_shovel").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(living_hoe = new ItemLivingHoe(ToolMaterial.IRON, "living_hoe").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(living_sword = new ItemLivingSword(ToolMaterial.IRON, "living_sword").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(living_arrow = new ItemLivingArrow("living_arrow").setCreativeTab(Roots.tab));
-    event.addItem(wildwood_quiver = new ItemQuiver("wildwood_quiver").setCreativeTab(Roots.tab));
-    event.addItem(wildwood_bow = new ItemWildwoodBow("wildwood_bow").setCreativeTab(Roots.tab));
+    event.addItem(staff = new StaffItem("staff").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(living_pickaxe = new LivingPickaxeItem(ToolMaterial.IRON, "living_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(living_axe = new LivingAxeItem(ToolMaterial.IRON, "living_axe").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(living_shovel = new LivingShovelItem(ToolMaterial.IRON, "living_shovel").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(living_hoe = new LivingHoeItem(ToolMaterial.IRON, "living_hoe").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(living_sword = new LivingSwordItem(ToolMaterial.IRON, "living_sword").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(living_arrow = new LivingArrowItem("living_arrow").setCreativeTab(Roots.tab));
+    event.addItem(wildwood_quiver = new QuiverItem("wildwood_quiver").setCreativeTab(Roots.tab));
+    event.addItem(wildwood_bow = new WildwoodBowItem("wildwood_bow").setCreativeTab(Roots.tab));
 
-    event.addItem(sylvan_helmet = new ItemSylvanArmor(sylvanArmorMaterial, EntityEquipmentSlot.HEAD, "sylvan_helmet").setMaxStackSize(1));
-    event.addItem(sylvan_chestplate = new ItemSylvanArmor(sylvanArmorMaterial, EntityEquipmentSlot.CHEST, "sylvan_chestplate").setMaxStackSize(1));
-    event.addItem(sylvan_leggings = new ItemSylvanArmor(sylvanArmorMaterial, EntityEquipmentSlot.LEGS, "sylvan_leggings").setMaxStackSize(1));
-    event.addItem(sylvan_boots = new ItemSylvanArmor(sylvanArmorMaterial, EntityEquipmentSlot.FEET, "sylvan_boots").setMaxStackSize(1));
-    event.addItem(wildwood_helmet = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.HEAD, "wildwood_helmet").setMaxStackSize(1));
-    event.addItem(wildwood_chestplate = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.CHEST, "wildwood_chestplate").setMaxStackSize(1));
-    event.addItem(wildwood_leggings = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.LEGS, "wildwood_leggings").setMaxStackSize(1));
-    event.addItem(wildwood_boots = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.FEET, "wildwood_boots").setMaxStackSize(1));
+    event.addItem(sylvan_helmet = new SylvanArmorItem(sylvanArmorMaterial, EquipmentSlotType.HEAD, "sylvan_helmet").setMaxStackSize(1));
+    event.addItem(sylvan_chestplate = new SylvanArmorItem(sylvanArmorMaterial, EquipmentSlotType.CHEST, "sylvan_chestplate").setMaxStackSize(1));
+    event.addItem(sylvan_leggings = new SylvanArmorItem(sylvanArmorMaterial, EquipmentSlotType.LEGS, "sylvan_leggings").setMaxStackSize(1));
+    event.addItem(sylvan_boots = new SylvanArmorItem(sylvanArmorMaterial, EquipmentSlotType.FEET, "sylvan_boots").setMaxStackSize(1));
+    event.addItem(wildwood_helmet = new WildwoodArmorItem(wildwoodArmorMaterial, EquipmentSlotType.HEAD, "wildwood_helmet").setMaxStackSize(1));
+    event.addItem(wildwood_chestplate = new WildwoodArmorItem(wildwoodArmorMaterial, EquipmentSlotType.CHEST, "wildwood_chestplate").setMaxStackSize(1));
+    event.addItem(wildwood_leggings = new WildwoodArmorItem(wildwoodArmorMaterial, EquipmentSlotType.LEGS, "wildwood_leggings").setMaxStackSize(1));
+    event.addItem(wildwood_boots = new WildwoodArmorItem(wildwoodArmorMaterial, EquipmentSlotType.FEET, "wildwood_boots").setMaxStackSize(1));
 
-    event.addItem(runic_shears = new ItemRunicShears("runic_shears").setCreativeTab(Roots.tab));
+    event.addItem(runic_shears = new RunicShearsItem("runic_shears").setCreativeTab(Roots.tab));
 
     MaterialTypes.addMaterial("vanilla:wood", ToolMaterial.WOOD, ToolMaterial.WOOD.getAttackDamage(), -1.7f);
     MaterialTypes.addMaterial("vanilla:stone", ToolMaterial.STONE, ToolMaterial.STONE.getAttackDamage(), -1.7f);
@@ -132,11 +130,11 @@ public class ModItems {
     MaterialTypes.addMaterial("vanilla:diamond", ToolMaterial.DIAMOND, ToolMaterial.DIAMOND.getAttackDamage(), -1.0f);
     MaterialTypes.addMaterial("vanilla:gold", ToolMaterial.GOLD, ToolMaterial.GOLD.getAttackDamage(), -1.0f);
 
-    event.addItem(wood_knife = new ItemDruidKnife("wood_knife", ToolMaterial.WOOD).setCreativeTab(Roots.tab));
-    event.addItem(stone_knife = new ItemDruidKnife("stone_knife", ToolMaterial.STONE).setCreativeTab(Roots.tab));
-    event.addItem(iron_knife = new ItemDruidKnife("iron_knife", ToolMaterial.IRON).setCreativeTab(Roots.tab));
-    event.addItem(diamond_knife = new ItemDruidKnife("diamond_knife", ToolMaterial.DIAMOND).setCreativeTab(Roots.tab));
-    event.addItem(gold_knife = new ItemDruidKnife("gold_knife", ToolMaterial.GOLD).setCreativeTab(Roots.tab));
+    event.addItem(wood_knife = new DruidKnifeItem("wood_knife", ToolMaterial.WOOD).setCreativeTab(Roots.tab));
+    event.addItem(stone_knife = new DruidKnifeItem("stone_knife", ToolMaterial.STONE).setCreativeTab(Roots.tab));
+    event.addItem(iron_knife = new DruidKnifeItem("iron_knife", ToolMaterial.IRON).setCreativeTab(Roots.tab));
+    event.addItem(diamond_knife = new DruidKnifeItem("diamond_knife", ToolMaterial.DIAMOND).setCreativeTab(Roots.tab));
+    event.addItem(gold_knife = new DruidKnifeItem("gold_knife", ToolMaterial.GOLD).setCreativeTab(Roots.tab));
 
     event.addItem(seeds = new ItemBase("assorted_seeds").setCreativeTab(Roots.tab));
     event.addItem(cooked_seeds = new ItemFoodBase("cooked_seeds", 1, 0.4f, false) {
@@ -183,11 +181,11 @@ public class ModItems {
   public static void registerOredict() {
     OreDictionary.registerOre("blockWool", new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE));
 
-    for (BlockFlower.EnumFlowerType type : BlockFlower.EnumFlowerType.values()) {
+    for (FlowerBlock.EnumFlowerType type : FlowerBlock.EnumFlowerType.values()) {
       OreDictionary.registerOre("allFlowers", new ItemStack(type.getBlockType().getBlock(), 1, type.getMeta()));
     }
-    for (BlockDoublePlant.EnumPlantType type : BlockDoublePlant.EnumPlantType.values()) {
-      if (type == BlockDoublePlant.EnumPlantType.FERN || type == BlockDoublePlant.EnumPlantType.GRASS) continue;
+    for (DoublePlantBlock.EnumPlantType type : DoublePlantBlock.EnumPlantType.values()) {
+      if (type == DoublePlantBlock.EnumPlantType.FERN || type == DoublePlantBlock.EnumPlantType.GRASS) continue;
 
       OreDictionary.registerOre("allTallFlowers", new ItemStack(Blocks.DOUBLE_PLANT, 1, type.getMeta()));
     }

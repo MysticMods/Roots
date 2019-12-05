@@ -9,12 +9,10 @@ import epicsquid.roots.capability.playerdata.PlayerDataCapabilityStorage;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapability;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityStorage;
 import epicsquid.roots.gui.GuiHandler;
-import epicsquid.roots.handler.ConfigHandler;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.integration.botania.PetalApothecaryFiller;
 import epicsquid.roots.proxy.CommonProxy;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -51,14 +49,14 @@ public class Roots {
   @Instance(MODID)
   public static Roots instance;
 
-  public static CreativeTabs tab = new CreativeTabs("roots") {
+  public static ItemGroup tab = new ItemGroup("roots") {
     @Override
     public String getTabLabel() {
       return "roots";
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public ItemStack createIcon() {
       return new ItemStack(ModItems.pestle, 1);
     }

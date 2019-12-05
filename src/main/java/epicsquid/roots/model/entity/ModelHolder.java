@@ -17,11 +17,11 @@ public class ModelHolder implements IResourceManagerReloadListener {
   public static Map<String, ModelBase> models = new HashMap<>();
 
   public static void init() {
-    models.put("fairy", new ModelFairy());
-    models.put("white_stag", new ModelWhiteStag());
+    models.put("fairy", new FairyModel());
+    models.put("white_stag", new WhiteStagModel());
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Override
   public void onResourceManagerReload(@Nonnull IResourceManager resourceManager) {
     models.clear();

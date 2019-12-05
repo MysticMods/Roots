@@ -12,6 +12,7 @@ import epicsquid.roots.util.zen.ZenDocAppend;
 import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -83,11 +84,11 @@ public class TransmutationTweaker {
   }
 
   private static class BlockToBlock extends Action {
-    private final net.minecraft.block.state.IBlockState state1;
-    private final net.minecraft.block.state.IBlockState state2;
+    private final BlockState state1;
+    private final BlockState state2;
     private final String name;
 
-    protected BlockToBlock(String name, net.minecraft.block.state.IBlockState state1, net.minecraft.block.state.IBlockState state2) {
+    protected BlockToBlock(String name, BlockState state1, BlockState state2) {
       super("add_block_to_block_transmutation");
       this.name = name;
       this.state1 = state1;
@@ -106,11 +107,11 @@ public class TransmutationTweaker {
   }
 
   private static class BlockToItem extends Action {
-    private final net.minecraft.block.state.IBlockState state;
+    private final BlockState state;
     private final ItemStack stack;
     private final String name;
 
-    protected BlockToItem(String name, net.minecraft.block.state.IBlockState state1, ItemStack stack) {
+    protected BlockToItem(String name, BlockState state1, ItemStack stack) {
       super("add_block_to_item_transmutation");
       this.state = state1;
       this.stack = stack;

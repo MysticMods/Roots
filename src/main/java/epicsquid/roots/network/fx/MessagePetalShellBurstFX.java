@@ -47,7 +47,7 @@ public class MessagePetalShellBurstFX implements IMessage {
   }
 
   public static class MessageHolder implements IMessageHandler<MessagePetalShellBurstFX, IMessage> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessagePetalShellBurstFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

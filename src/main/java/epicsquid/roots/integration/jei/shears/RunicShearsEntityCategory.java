@@ -1,24 +1,8 @@
 package epicsquid.roots.integration.jei.shears;
 
-import epicsquid.roots.Roots;
-import epicsquid.roots.integration.jei.JEIRootsPlugin;
-import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.gui.IDrawable;
-import mezz.jei.api.gui.IGuiItemStackGroup;
-import mezz.jei.api.gui.IRecipeLayout;
-import mezz.jei.api.gui.ITooltipCallback;
-import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.ingredients.VanillaTypes;
-import mezz.jei.api.recipe.IRecipeCategory;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+public class RunicShearsEntityCategory { // implements IRecipeCategory<RunicShearsEntityWrapper> {
 
-import java.util.List;
-
-public class RunicShearsEntityCategory implements IRecipeCategory<RunicShearsEntityWrapper> {
-
-  private final IDrawable background;
+/*  private final IDrawable background;
 
   public RunicShearsEntityCategory(IGuiHelper helper) {
     this.background = helper.createDrawable(new ResourceLocation(Roots.MODID, "textures/gui/jei/runic_shears_entity.png"), 0, 0, 122, 84);
@@ -53,5 +37,5 @@ public class RunicShearsEntityCategory implements IRecipeCategory<RunicShearsEnt
     });
     group.init(0, true, 104, 32);
     group.set(0, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
-  }
+  }*/
 }

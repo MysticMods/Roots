@@ -47,7 +47,7 @@ public class MessageSanctuaryBurstFX implements IMessage {
   }
 
   public static class MessageHolder implements IMessageHandler<MessageSanctuaryBurstFX, IMessage> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageSanctuaryBurstFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

@@ -1,15 +1,7 @@
 package epicsquid.roots.integration.jei.shears;
 
-import epicsquid.roots.recipe.RunicShearEntityRecipe;
-import epicsquid.roots.util.EntityRenderHelper;
-import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.ingredients.VanillaTypes;
-import mezz.jei.api.recipe.IRecipeWrapper;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLivingBase;
-
-public class RunicShearsEntityWrapper implements IRecipeWrapper {
-  public EntityLivingBase entity = null;
+public class RunicShearsEntityWrapper { //implements IRecipeWrapper {
+/*  public LivingEntity entity = null;
   public final RunicShearEntityRecipe recipe;
 
   public RunicShearsEntityWrapper(RunicShearEntityRecipe recipe) {
@@ -34,7 +26,7 @@ public class RunicShearsEntityWrapper implements IRecipeWrapper {
     EntityRenderHelper.drawEntityOnScreen(30, 70, scale, 38 - mouseX, 70 - mouseY, entity);
   }
 
-  private float getScale(EntityLivingBase entityLivingBase) {
+  private float getScale(LivingEntity entityLivingBase) {
     float width = entityLivingBase.width;
     float height = entityLivingBase.height;
     if (width <= height) {
@@ -51,5 +43,5 @@ public class RunicShearsEntityWrapper implements IRecipeWrapper {
       else if (width < 3) return 3.0F;
       else return -1.0F;
     }
-  }
+  }*/
 }

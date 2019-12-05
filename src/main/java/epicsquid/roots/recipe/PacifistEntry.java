@@ -2,8 +2,8 @@ package epicsquid.roots.recipe;
 
 import epicsquid.roots.Roots;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 
 public class PacifistEntry {
@@ -41,13 +41,13 @@ public class PacifistEntry {
     return this.entityClass.equals(entity.getClass());
   }
 
-  public boolean matches(Entity entity, EntityPlayer player) {
+  public boolean matches(Entity entity, PlayerEntity player) {
     if (!matches(entity)) return false;
 
     if (!getCheckTarget()) return true;
 
-    if (entity instanceof EntityLiving) {
-      EntityLiving en = (EntityLiving) entity;
+    if (entity instanceof MobEntity) {
+      MobEntity en = (MobEntity) entity;
       if (en.getAttackTarget() != null && en.getAttackTarget().equals(player)) {
         return false;
       }

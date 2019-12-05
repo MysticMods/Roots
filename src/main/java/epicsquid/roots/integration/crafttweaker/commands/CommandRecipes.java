@@ -6,16 +6,10 @@ import crafttweaker.CraftTweakerAPI;
 import crafttweaker.mc1120.commands.CraftTweakerCommand;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.*;
-import epicsquid.roots.ritual.RitualBase;
-import epicsquid.roots.ritual.RitualRegistry;
-import epicsquid.roots.spell.SpellBase;
-import epicsquid.roots.spell.SpellRegistry;
-import epicsquid.roots.util.types.Property;
-import epicsquid.roots.util.types.PropertyTable;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import java.util.Map;
 
@@ -30,13 +24,13 @@ public class CommandRecipes extends CraftTweakerCommand {
 
   @Override
   protected void init() {
-    setDescription(new TextComponentTranslation("roots.commands.dump_recipes.desc"));
+    setDescription(new TranslationTextComponent("roots.commands.dump_recipes.desc"));
   }
 
   @Override
   public void executeCommand(MinecraftServer server, ICommandSender sender, String[] args) {
     if (args.length < 1) {
-      sender.sendMessage(new TextComponentTranslation("roots.commands.dump_recipes.usage"));
+      sender.sendMessage(new TranslationTextComponent("roots.commands.dump_recipes.usage"));
       return;
     }
     Optional<SubCommand> command = Enums.getIfPresent(SubCommand.class, args[0]);

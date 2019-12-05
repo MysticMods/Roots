@@ -57,7 +57,7 @@ public class MessageShatterBurstFX implements IMessage {
   }
 
   public static class MessageHolder implements IMessageHandler<MessageShatterBurstFX, IMessage> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageShatterBurstFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

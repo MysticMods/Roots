@@ -1,24 +1,9 @@
 package epicsquid.roots.integration.patchouli;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import epicsquid.roots.api.Herb;
-import epicsquid.roots.init.ModItems;
-import epicsquid.roots.item.ItemSpellDust;
-import epicsquid.roots.spell.SpellBase;
-import epicsquid.roots.spell.SpellRegistry;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import vazkii.patchouli.api.IComponentProcessor;
-import vazkii.patchouli.api.IVariableProvider;
-import vazkii.patchouli.common.util.ItemStackUtil;
-
 @SuppressWarnings("unused")
-public class SpellRecipeProcessor implements IComponentProcessor {
+public class SpellRecipeProcessor { //implements IComponentProcessor {
 
-  private List<Ingredient> ingredients = new ArrayList<>();
+/*  private List<Ingredient> ingredients = new ArrayList<>();
   private List<ItemStack> herbs = new ArrayList<>();
   private List<String> costs = new ArrayList<>();
   private String spellName = null;
@@ -62,5 +47,5 @@ public class SpellRecipeProcessor implements IComponentProcessor {
       return costs.get(1);
     }
     return null;
-  }
+  }*/
 }

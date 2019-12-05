@@ -37,14 +37,14 @@ public class MessageRunicShearsFX implements IMessage {
     buf.writeInt(this.entityId);
   }
 
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   @Nullable
   public Entity getEntity(World world) {
     return world.getEntityByID(this.entityId);
   }
 
   public static class MessageHolder implements IMessageHandler<MessageRunicShearsFX, IMessage> {
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageRunicShearsFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;

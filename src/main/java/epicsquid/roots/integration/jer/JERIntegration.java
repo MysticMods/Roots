@@ -1,17 +1,8 @@
 package epicsquid.roots.integration.jer;
 
-import epicsquid.mysticallib.item.ItemSeedBase;
-import epicsquid.roots.init.ModBlocks;
-import epicsquid.roots.init.ModItems;
-import jeresources.api.IJERAPI;
-import jeresources.api.IPlantRegistry;
-import jeresources.api.JERPlugin;
-import jeresources.api.drop.PlantDrop;
-import net.minecraft.item.ItemStack;
-
 public class JERIntegration {
 
-  @JERPlugin
+  /*@JERPlugin
   public static IJERAPI JERApi;
 
   public static void init() {
@@ -43,5 +34,5 @@ public class JERIntegration {
         new PlantDrop(new ItemStack(ModItems.stalicripe), 1, 4));
     registry.registerWithSoil((ItemSeedBase) ModItems.cloud_berry, ModBlocks.elemental_soil_air.getDefaultState(),
         new PlantDrop(new ItemStack(ModItems.cloud_berry), 1, 4));
-  }
+  }*/
 }

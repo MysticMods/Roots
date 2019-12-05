@@ -5,14 +5,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.block.BlockBonfire;
-import epicsquid.roots.entity.ritual.EntityRitualBase;
+import epicsquid.roots.block.BonfireBlock;
+import epicsquid.roots.entity.ritual.BaseRitualEntity;
 import epicsquid.roots.ritual.conditions.Condition;
 import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import epicsquid.roots.util.types.PropertyTable;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -82,7 +82,7 @@ public abstract class RitualBase {
     this.conditions.add(condition);
   }
 
-  public boolean isRitualRecipe(TileEntityBonfire tileEntityBonfire, @Nullable EntityPlayer player) {
+  public boolean isRitualRecipe(TileEntityBonfire tileEntityBonfire, @Nullable PlayerEntity player) {
     if (isDisabled()) return false;
     for (Condition condition : this.conditions) {
       if (condition instanceof ConditionItems) {
@@ -93,9 +93,9 @@ public abstract class RitualBase {
     return false;
   }
 
-  public boolean canFire(TileEntityBonfire tileEntityBonfire, @Nullable EntityPlayer player) {
-    IBlockState state = tileEntityBonfire.getWorld().getBlockState(tileEntityBonfire.getPos());
-    if (state.getValue(BlockBonfire.BURNING)) {
+  public boolean canFire(TileEntityBonfire tileEntityBonfire, @Nullable PlayerEntity player) {
+    BlockState state = tileEntityBonfire.getWorld().getBlockState(tileEntityBonfire.getPos());
+    if (state.getValue(BonfireBlock.BURNING)) {
       return false;
     }
 
@@ -108,15 +108,15 @@ public abstract class RitualBase {
     return success;
   }
 
-  public abstract EntityRitualBase doEffect(World world, BlockPos pos);
+  public abstract BaseRitualEntity doEffect(World world, BlockPos pos);
 
-  protected EntityRitualBase spawnEntity(World world, BlockPos pos, Class<? extends EntityRitualBase> entity) {
-    List<EntityRitualBase> pastRituals = world
+  protected BaseRitualEntity spawnEntity(World world, BlockPos pos, Class<? extends BaseRitualEntity> entity) {
+    List<BaseRitualEntity> pastRituals = world
         .getEntitiesWithinAABB(entity, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 100, pos.getZ() + 1));
     if (pastRituals.size() == 0 && !world.isRemote) {
-      EntityRitualBase ritual = null;
+      BaseRitualEntity ritual = null;
       try {
-        Constructor<? extends EntityRitualBase> cons = entity.getDeclaredConstructor(World.class);
+        Constructor<? extends BaseRitualEntity> cons = entity.getDeclaredConstructor(World.class);
         ritual = cons.newInstance(world);
       } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
         e.printStackTrace();
@@ -128,9 +128,9 @@ public abstract class RitualBase {
       world.spawnEntity(ritual);
       return ritual;
     } else if (pastRituals.size() > 0) {
-      for (EntityRitualBase ritual : pastRituals) {
-        ritual.getDataManager().set(EntityRitualBase.lifetime, getDuration() + 20);
-        ritual.getDataManager().setDirty(EntityRitualBase.lifetime);
+      for (BaseRitualEntity ritual : pastRituals) {
+        ritual.getDataManager().set(BaseRitualEntity.lifetime, getDuration() + 20);
+        ritual.getDataManager().setDirty(BaseRitualEntity.lifetime);
         // TODO:
         // return ritual; ???
       }

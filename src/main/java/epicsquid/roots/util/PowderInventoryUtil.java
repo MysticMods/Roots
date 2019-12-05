@@ -4,13 +4,13 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.integration.baubles.pouch.BaublePowderInventoryUtil;
-import epicsquid.roots.item.ItemPouch;
-import epicsquid.roots.item.ItemSylvanArmor;
+import epicsquid.roots.item.Pouch;
+import epicsquid.roots.item.SylvanArmorItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.Loader;
@@ -29,14 +29,14 @@ public class PowderInventoryUtil {
   private static HerbAlert slot1 = null;
   private static HerbAlert slot2 = null;
 
-  public static ItemStack getPouch(EntityPlayer player) {
+  public static ItemStack getPouch(PlayerEntity player) {
     if (Loader.isModLoaded("baubles")) {
       ItemStack stack = BaublePowderInventoryUtil.getPouch(player);
       if (!stack.isEmpty()) return stack;
     }
 
     for (int i = 0; i < 36; i++) {
-      if (player.inventory.getStackInSlot(i).getItem() instanceof ItemPouch) {
+      if (player.inventory.getStackInSlot(i).getItem() instanceof Pouch) {
         return player.inventory.getStackInSlot(i);
       }
     }
@@ -44,28 +44,28 @@ public class PowderInventoryUtil {
     return ItemStack.EMPTY;
   }
 
-  public static double getPowderTotal(EntityPlayer player, Herb herb) {
+  public static double getPowderTotal(PlayerEntity player, Herb herb) {
     ItemStack pouch = getPouch(player);
     if (pouch.isEmpty()) return -1.0;
 
     // Hard-coding for creative pouch
     if (pouch.getItem() == ModItems.creative_pouch) return 999;
 
-    return ItemPouch.getHerbQuantity(pouch, herb);
+    return Pouch.getHerbQuantity(pouch, herb);
   }
 
-  public static void removePowder(EntityPlayer player, Herb herb, double amount) {
+  public static void removePowder(PlayerEntity player, Herb herb, double amount) {
     ItemStack pouch = getPouch(player);
     if (pouch.isEmpty() || pouch.getItem() == ModItems.creative_pouch) return;
 
     // TODO: Cost reduction is calculated here
-    amount -= amount * ItemSylvanArmor.sylvanBonus(player);
+    amount -= amount * SylvanArmorItem.sylvanBonus(player);
 
-    ItemPouch.useQuantity(pouch, herb, amount);
+    Pouch.useQuantity(pouch, herb, amount);
     resolveSlots(player, herb);
   }
 
-  public static void resolveSlots(EntityPlayer player, Herb herb) {
+  public static void resolveSlots(PlayerEntity player, Herb herb) {
     if (!player.world.isRemote) return;
 
     Minecraft mc = Minecraft.getMinecraft();
@@ -115,7 +115,7 @@ public class PowderInventoryUtil {
 
   // TODO: THIS SHOULD NOT BE HERE
   @SubscribeEvent
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public static void renderHUD(RenderGameOverlayEvent.Post event) {
     if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
       ScaledResolution res = event.getResolution();
@@ -140,7 +140,7 @@ public class PowderInventoryUtil {
   }
 
   @SubscribeEvent
-  @SideOnly(Side.CLIENT)
+  @OnlyIn(Dist.CLIENT)
   public static void clientTick(TickEvent.ClientTickEvent event) {
     if (slot1 != null) {
       slot1.tick(event);
@@ -188,14 +188,14 @@ public class PowderInventoryUtil {
       return slot != -1 && ticks > 0;
     }
 
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public void tick(TickEvent.ClientTickEvent event) {
       if (ticks == -1) return;
 
       ticks--;
     }
 
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public void render(ScaledResolution res, float partialTicks) {
       if (ticks == 0) return;
 

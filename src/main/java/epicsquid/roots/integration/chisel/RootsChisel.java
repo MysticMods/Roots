@@ -1,33 +1,26 @@
 package epicsquid.roots.integration.chisel;
 
-import epicsquid.roots.init.ModBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fml.common.event.FMLInterModComms;
-
-import java.util.Arrays;
-
 public class RootsChisel {
-  public static void init() {
+  /*public static void init() {
     for (Block block : ModBlocks.runestoneBlocks) {
-      NBTTagCompound tag = new NBTTagCompound();
-      tag.setString("group", "rootsRunestone");
-      tag.setString("block", block.getRegistryName().toString());
+      CompoundNBT tag = new CompoundNBT();
+      tag.putString("group", "rootsRunestone");
+      tag.putString("block", block.getRegistryName().toString());
       FMLInterModComms.sendMessage("chisel", "add_variation", tag);
     }
 
     for (Block block : ModBlocks.runedObsidianBlocks) {
-      NBTTagCompound tag = new NBTTagCompound();
-      tag.setString("group", "rootsRunedObsidian");
-      tag.setString("block", block.getRegistryName().toString());
+      CompoundNBT tag = new CompoundNBT();
+      tag.putString("group", "rootsRunedObsidian");
+      tag.putString("block", block.getRegistryName().toString());
       FMLInterModComms.sendMessage("chisel", "add_variation", tag);
     }
 
     for (Block block : Arrays.asList(ModBlocks.elemental_soil_air, ModBlocks.elemental_soil_earth, ModBlocks.elemental_soil_fire, ModBlocks.elemental_soil_water)) {
-      NBTTagCompound tag = new NBTTagCompound();
-      tag.setString("group", "rootsRunicSoilTypes");
-      tag.setString("block", block.getRegistryName().toString());
+      CompoundNBT tag = new CompoundNBT();
+      tag.putString("group", "rootsRunicSoilTypes");
+      tag.putString("block", block.getRegistryName().toString());
       FMLInterModComms.sendMessage("chisel", "add_variation", tag);
     }
-  }
+  }*/
 }

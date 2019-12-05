@@ -1,0 +1,70 @@
+package epicsquid.roots.block;
+
+import javax.annotation.Nonnull;
+
+import epicsquid.mysticallib.block.BlockTEBase;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockFaceShape;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+
+@SuppressWarnings("deprecation")
+public class OffertoryPlateBlock extends BlockTEBase {
+  public static final PropertyDirection FACING = PropertyDirection.create("facing");
+
+  public OffertoryPlateBlock(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name,
+                             @Nonnull Class<? extends TileEntity> teClass) {
+    super(mat, type, hardness, name, teClass);
+  }
+
+  @Override
+  public BlockStateContainer createBlockState() {
+    return new BlockStateContainer(this, FACING);
+  }
+
+  @Override
+  public int getMetaFromState(BlockState state) {
+    return state.getValue(FACING).getIndex();
+  }
+
+  @Override
+  public boolean isFullCube(@Nonnull BlockState state) {
+    return false;
+  }
+
+  @Override
+  public boolean isOpaqueCube(@Nonnull BlockState state) {
+    return false;
+  }
+
+  @Override
+  public BlockState getStateFromMeta(int meta) {
+    return getDefaultState().withProperty(FACING, Direction.byIndex(meta));
+  }
+
+  @Override
+  public BlockState getStateForPlacement(World world, BlockPos pos, Direction face, float hitX, float hitY, float hitZ, int meta, LivingEntity placer) {
+    return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+  }
+
+  @Nonnull
+  @Override
+  public AxisAlignedBB getBoundingBox(@Nonnull BlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+    return new AxisAlignedBB(0.125, 0.0, 0.125, 0.875, 0.875, 0.875);
+  }
+
+  @Override
+  @Nonnull
+  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, BlockState state, BlockPos pos, Direction face) {
+    return BlockFaceShape.BOWL;
+  }
+}

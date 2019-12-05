@@ -3,14 +3,14 @@ package epicsquid.roots.tileentity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TileEntityFeyCrafterRenderer extends TileEntitySpecialRenderer<TileEntityFeyCrafter> {
+public class TileEntityFeyCrafterRenderer extends TileEntityRenderer<TileEntityFeyCrafter> {
 
   @Override
   public void render(TileEntityFeyCrafter te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {

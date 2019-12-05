@@ -1,18 +1,18 @@
 package epicsquid.roots.capability.playerdata;
 
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 public class PlayerDataCapability implements IPlayerDataCapability {
-  public NBTTagCompound tag = new NBTTagCompound();
+  public CompoundNBT tag = new CompoundNBT();
   public boolean dirty = true;
 
   @Override
-  public NBTTagCompound getData() {
+  public CompoundNBT getData() {
     return tag;
   }
 
   @Override
-  public void setData(NBTTagCompound tag) {
+  public void setData(CompoundNBT tag) {
     this.tag = tag;
     markDirty();
   }
