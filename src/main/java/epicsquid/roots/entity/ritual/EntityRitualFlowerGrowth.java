@@ -5,9 +5,9 @@ import epicsquid.roots.recipe.FlowerRecipe;
 import epicsquid.roots.ritual.RitualFlowerGrowth;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.RitualUtil;
-import net.minecraft.block.BlockFlower;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.FlowerBlock;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -35,7 +35,7 @@ public class EntityRitualFlowerGrowth extends EntityRitualBase {
   }
 
   private boolean generateFlower(BlockPos pos) {
-    IBlockState flower = getRandomFlower();
+    BlockState flower = getRandomFlower();
     if (world.isAirBlock(pos) && flower.getBlock().canPlaceBlockAt(world, pos)) {
       if (!world.isRemote) {
         world.setBlockState(pos, flower);
@@ -45,11 +45,11 @@ public class EntityRitualFlowerGrowth extends EntityRitualBase {
     return false;
   }
 
-  private IBlockState getRandomFlower() {
+  private BlockState getRandomFlower() {
     FlowerRecipe recipe = ModRecipes.getRandomFlowerRecipe();
-    if (recipe == null) return Blocks.YELLOW_FLOWER.getStateFromMeta(BlockFlower.EnumFlowerType.DANDELION.getMeta());
+    if (recipe == null) return Blocks.YELLOW_FLOWER.getStateFromMeta(FlowerBlock.EnumFlowerType.DANDELION.getMeta());
 
-    IBlockState state = recipe.getFlower();
+    BlockState state = recipe.getFlower();
     if (state == null) return Blocks.AIR.getDefaultState();
 
     return state;

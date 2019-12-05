@@ -6,12 +6,12 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.model.armor.ModelSylvanArmor;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemArmor;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
@@ -20,10 +20,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public class ItemSylvanArmor extends ItemArmor implements IModeledObject {
+public class ItemSylvanArmor extends ArmorItem implements IModeledObject {
   public static double BONUS = 0.05;
 
-  public ItemSylvanArmor(ArmorMaterial material, EntityEquipmentSlot slot, String name) {
+  public ItemSylvanArmor(ArmorMaterial material, EquipmentSlotType slot, String name) {
     super(material, 0, slot);
     setTranslationKey(name);
     setRegistryName(new ResourceLocation(Roots.MODID, name));
@@ -38,18 +38,18 @@ public class ItemSylvanArmor extends ItemArmor implements IModeledObject {
 
   @Nullable
   @Override
-  public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
+  public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type) {
     return Roots.MODID + ":textures/models/armor/sylvan_armor.png";
   }
 
   @Nullable
   @Override
   @SideOnly(Side.CLIENT)
-  public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
+  public ModelBiped getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, ModelBiped _default) {
     return ModelSylvanArmor.getInstance(armorSlot);
   }
 
-  public static double sylvanBonus(EntityPlayer player) {
+  public static double sylvanBonus(PlayerEntity player) {
     int count = (int) Lists.newArrayList(player.getArmorInventoryList()).stream().filter((o) -> o.getItem() instanceof ItemSylvanArmor).count();
 
     switch (count) {

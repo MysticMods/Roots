@@ -8,8 +8,8 @@ import epicsquid.roots.recipe.TransmutationRecipe;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.ritual.RitualTransmutation;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -37,7 +37,7 @@ public class EntityRitualTransmutation extends EntityRitualBase {
     if (this.ticksExisted % ritual.interval == 0) {
       List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, (pos) -> {
         if (world.isAirBlock(pos)) return false;
-        IBlockState state = world.getBlockState(pos);
+        BlockState state = world.getBlockState(pos);
         List<TransmutationRecipe> stateRecipes = ModRecipes.getTransmutationRecipes(state);
         if (stateRecipes == null) return false;
         boolean foundMatch = false;
@@ -61,7 +61,7 @@ public class EntityRitualTransmutation extends EntityRitualBase {
   }
 
   private void transmuteBlock(World world, BlockPos pos) {
-    IBlockState state = world.getBlockState(pos);
+    BlockState state = world.getBlockState(pos);
 
     TransmutationRecipe recipe = null;
     for (TransmutationRecipe r : recipes) {

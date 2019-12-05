@@ -1,9 +1,9 @@
 package epicsquid.roots.potion;
 
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectInstance;
 
-public class PotionGeas extends Potion {
+public class PotionGeas extends Effect {
   public PotionGeas() {
     super(false, 0xffe100);
     setPotionName("Geas");
@@ -17,7 +17,7 @@ public class PotionGeas extends Potion {
   }
 
   @Override
-  public boolean shouldRender(PotionEffect effect) {
+  public boolean shouldRender(EffectInstance effect) {
     return false;
   }
 }

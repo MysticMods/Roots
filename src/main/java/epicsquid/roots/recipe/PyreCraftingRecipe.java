@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.roots.tileentity.TileEntityBonfire;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.items.IItemHandlerModifiable;

@@ -3,14 +3,14 @@ package epicsquid.roots.integration.baubles.pouch;
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import baubles.api.cap.IBaublesItemHandler;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 
 public class PouchEquipHandler {
 
-  public static boolean tryEquipPouch(EntityPlayer player, ItemStack stack) {
+  public static boolean tryEquipPouch(PlayerEntity player, ItemStack stack) {
     IBaublesItemHandler baubles = BaublesApi.getBaublesHandler(player);
     ItemStack copy = stack.copy();
 

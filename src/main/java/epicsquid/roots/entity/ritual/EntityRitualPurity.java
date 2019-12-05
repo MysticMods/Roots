@@ -4,10 +4,10 @@ import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualPurity;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.EntityUtil;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityZombieVillager;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.monster.ZombieVillagerEntity;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
@@ -43,24 +43,24 @@ public class EntityRitualPurity extends EntityRitualBase {
       }
     }
     if (this.ticksExisted % ritual.interval == 0) {
-      List<EntityLivingBase> entities = world
-          .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
-      for (EntityLivingBase e : entities) {
+      List<LivingEntity> entities = world
+          .getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
+      for (LivingEntity e : entities) {
         if (EntityUtil.isHostile(e)) {
-          if (e instanceof EntityZombieVillager && ((EntityZombieVillager)e).isConverting()) {
-            ((EntityZombieVillager)e).conversionTime -= ritual.zombie_count;
+          if (e instanceof ZombieVillagerEntity && ((ZombieVillagerEntity)e).isConverting()) {
+            ((ZombieVillagerEntity)e).conversionTime -= ritual.zombie_count;
             e.extinguish();
           }
           continue;
         }
 
-        List<Potion> toRemove = new ArrayList<>();
-        for (PotionEffect potionEffect : e.getActivePotionEffects()) {
+        List<Effect> toRemove = new ArrayList<>();
+        for (EffectInstance potionEffect : e.getActivePotionEffects()) {
           if (potionEffect.getPotion().isBadEffect()) {
             toRemove.add(potionEffect.getPotion());
           }
         }
-        for (Potion potion : toRemove) {
+        for (Effect potion : toRemove) {
           e.removePotionEffect(potion);
         }
         e.extinguish();

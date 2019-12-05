@@ -9,9 +9,11 @@ package epicsquid.roots.gui.container;
 
 import epicsquid.roots.recipe.FeyCraftingRecipe;
 import epicsquid.roots.tileentity.TileEntityFeyCrafter;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.*;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
@@ -23,17 +25,17 @@ import java.util.List;
 public class ContainerFeyCrafter extends Container {
 
   private TileEntityFeyCrafter crafter;
-  private EntityPlayer player;
+  private PlayerEntity player;
 
   private FeyCraftingRecipe recipe;
 
-  private final InventoryCraftResult craftResult;
+  private final CraftResultInventory craftResult;
 
-  public ContainerFeyCrafter(EntityPlayer player, TileEntityFeyCrafter crafter) {
+  public ContainerFeyCrafter(PlayerEntity player, TileEntityFeyCrafter crafter) {
     this.player = player;
     this.crafter = crafter;
 
-    craftResult = new InventoryCraftResult();
+    craftResult = new CraftResultInventory();
 
     createCrafterSlots();
     createPlayerInventory(player.inventory);
@@ -47,7 +49,7 @@ public class ContainerFeyCrafter extends Container {
     addSlotToContainer(new SlotGrid(crafter.inventory, this, 4, 75, 64));
   }
 
-  private void createPlayerInventory(InventoryPlayer inventoryPlayer) {
+  private void createPlayerInventory(PlayerInventory inventoryPlayer) {
     int xOffset = 8;
     int yOffset = 105;
 
@@ -63,7 +65,7 @@ public class ContainerFeyCrafter extends Container {
 
   @Nonnull
   @Override
-  public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+  public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
     Slot slot = this.inventorySlots.get(index);
 
     if (slot == null || !slot.getHasStack()) {
@@ -224,7 +226,7 @@ public class ContainerFeyCrafter extends Container {
   }
 
   @Override
-  protected void slotChangedCraftingGrid(World world, EntityPlayer player, InventoryCrafting inv, InventoryCraftResult result) {
+  protected void slotChangedCraftingGrid(World world, PlayerEntity player, CraftingInventory inv, CraftResultInventory result) {
     List<ItemStack> items = crafter.getContents();
 
     if (recipe == null || !recipe.matches(items)) {
@@ -241,7 +243,7 @@ public class ContainerFeyCrafter extends Container {
   }
 
   @Override
-  public boolean canInteractWith(@Nonnull EntityPlayer player) {
+  public boolean canInteractWith(@Nonnull PlayerEntity player) {
     return true;
   }
 

@@ -8,7 +8,7 @@ import epicsquid.roots.spell.SpellLifeDrain;
 import epicsquid.roots.spell.SpellRegistry;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -59,7 +59,7 @@ public class MessageLifeDrainAbsorbFX implements IMessage {
     @Override
     public IMessage onMessage(final MessageLifeDrainAbsorbFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
-      EntityPlayer player = world.getPlayerEntityByUUID(message.id);
+      PlayerEntity player = world.getPlayerEntityByUUID(message.id);
       if (player != null) {
         for (int i = 0; i < 4; i++) {
           float x = (float) player.posX + (float) player.getLookVec().x * (6.0f + Util.rand.nextFloat() * 9.0f) + 2.0f * (Util.rand.nextFloat() - 0.5f);

@@ -8,7 +8,7 @@ import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.ritual.conditions.ConditionTrees;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.BlockPlanks;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;

@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import epicsquid.roots.grove.GroveType;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 
 public class PlayerGroveCapability implements IPlayerGroveCapability {
 
@@ -29,13 +29,13 @@ public class PlayerGroveCapability implements IPlayerGroveCapability {
   }
 
   @Override
-  public NBTTagCompound getData() {
-    NBTTagCompound nbtTagCompound = new NBTTagCompound();
+  public CompoundNBT getData() {
+    CompoundNBT nbtTagCompound = new CompoundNBT();
 
-    NBTTagList groveTagList = new NBTTagList();
+    ListNBT groveTagList = new ListNBT();
     int count = 0;
     for (Map.Entry<GroveType, Float> entry : groveTrust.entrySet()) {
-      NBTTagCompound groveVariable = new NBTTagCompound();
+      CompoundNBT groveVariable = new CompoundNBT();
       groveVariable.setString("fey" + count, entry.getKey().toString());
       groveVariable.setFloat("trust" + count, entry.getValue());
       groveTagList.appendTag(groveVariable);
@@ -48,11 +48,11 @@ public class PlayerGroveCapability implements IPlayerGroveCapability {
   }
 
   @Override
-  public void setData(NBTTagCompound tag) {
-    NBTTagList groveTagList = (NBTTagList) tag.getTag("groveList");
+  public void setData(CompoundNBT tag) {
+    ListNBT groveTagList = (ListNBT) tag.getTag("groveList");
 
     for (int i = 0; i < groveTagList.tagCount(); i++) {
-      NBTTagCompound groveTag = groveTagList.getCompoundTagAt(i);
+      CompoundNBT groveTag = groveTagList.getCompoundTagAt(i);
       String groveName = groveTag.getString("fey" + i);
       float trust = groveTag.getFloat("trust" + i);
       this.groveTrust.put(GroveType.valueOf(groveName.toUpperCase()), trust);

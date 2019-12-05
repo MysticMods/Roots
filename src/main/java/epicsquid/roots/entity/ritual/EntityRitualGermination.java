@@ -6,8 +6,8 @@ import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualGermination;
 import epicsquid.roots.ritual.RitualRegistry;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -48,7 +48,7 @@ public class EntityRitualGermination extends EntityRitualBase {
       if (!world.isRemote) {
         for (int i = 0; i < ritual.count; i++) {
           BlockPos pos = positions.get(world.rand.nextInt(positions.size()));
-          IBlockState state = world.getBlockState(pos);
+          BlockState state = world.getBlockState(pos);
           int x = ritual.bonus_ticks;
           if (state.getBlock() == Blocks.REEDS || state.getBlock() == Blocks.CACTUS) {
             x += ritual.crop_ticks;

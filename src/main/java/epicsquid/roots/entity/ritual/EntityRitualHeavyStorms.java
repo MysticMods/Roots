@@ -5,7 +5,7 @@ import java.util.List;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualHeavyStorms;
 import epicsquid.roots.ritual.RitualRegistry;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -57,9 +57,9 @@ public class EntityRitualHeavyStorms extends EntityRitualBase {
       if (!world.getWorldInfo().isRaining()) {
         world.getWorldInfo().setRaining(true);
       }
-      List<EntityLivingBase> entities = world
-          .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
-      for (EntityLivingBase e : entities) {
+      List<LivingEntity> entities = world
+          .getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
+      for (LivingEntity e : entities) {
         if (e.isBurning()) {
           e.extinguish();
           if (world.isRemote) {

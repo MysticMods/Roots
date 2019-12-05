@@ -19,26 +19,27 @@ import epicsquid.roots.network.fx.MessageTreeCompleteFX;
 import epicsquid.roots.recipe.RunicShearEntityRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockCrops;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.CropsBlock;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
+import net.minecraft.util.*;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
@@ -64,8 +65,8 @@ public class ItemRunicShears extends ItemBase {
   @Override
   public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
     Item item = repair.getItem();
-    if (item instanceof ItemBlock) {
-      Block block = ((ItemBlock) item).getBlock();
+    if (item instanceof BlockItem) {
+      Block block = ((BlockItem) item).getBlock();
       return ModBlocks.runestoneBlocks.contains(block);
     }
 
@@ -74,15 +75,15 @@ public class ItemRunicShears extends ItemBase {
 
   @Override
   @Nonnull
-  public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-    IBlockState state = world.getBlockState(pos);
+  public ActionResultType onItemUse(PlayerEntity player, World world, BlockPos pos, Hand hand, Direction facing, float hitX, float hitY, float hitZ) {
+    BlockState state = world.getBlockState(pos);
     Block block = state.getBlock();
     if (block == ModBlocks.imbuer) {
-      return EnumActionResult.PASS;
+      return ActionResultType.PASS;
     }
 
-    IBlockState moss = MossConfig.scrapeResult(state);
-    IBlockState moss2 = MossConfig.mossConversion(state);
+    BlockState moss = MossConfig.scrapeResult(state);
+    BlockState moss2 = MossConfig.mossConversion(state);
 
     if (moss != null || moss2 != null) {
       if (!world.isRemote) {
@@ -91,8 +92,8 @@ public class ItemRunicShears extends ItemBase {
         BlockPos stop = new BlockPos(bounds.maxX, bounds.maxY, bounds.maxZ);
         List<BlockPos> affectedBlocks = new ArrayList<>();
         for (BlockPos.MutableBlockPos p : BlockPos.getAllInBoxMutable(start, stop)) {
-          IBlockState pState = world.getBlockState(p);
-          IBlockState m = MossConfig.scrapeResult(pState);
+          BlockState pState = world.getBlockState(p);
+          BlockState m = MossConfig.scrapeResult(pState);
           if (m != null) {
             affectedBlocks.add(p.toImmutable());
             world.setBlockState(p, m);
@@ -110,7 +111,7 @@ public class ItemRunicShears extends ItemBase {
       }
       player.swingArm(hand);
       world.playSound(null, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
-      return EnumActionResult.SUCCESS;
+      return ActionResultType.SUCCESS;
     }
 
     RunicShearRecipe recipe = ModRecipes.getRunicShearRecipe(block);
@@ -118,11 +119,11 @@ public class ItemRunicShears extends ItemBase {
     if (recipe != null) {
       if (!world.isRemote) {
 
-        if (block instanceof BlockCrops) {
-          if (((BlockCrops) block).isMaxAge(world.getBlockState(pos))) {
-            world.setBlockState(pos, ((BlockCrops) block).withAge(0));
+        if (block instanceof CropsBlock) {
+          if (((CropsBlock) block).isMaxAge(world.getBlockState(pos))) {
+            world.setBlockState(pos, ((CropsBlock) block).withAge(0));
           } else {
-            return EnumActionResult.SUCCESS;
+            return ActionResultType.SUCCESS;
           }
         } else {
           world.setBlockState(pos, recipe.getReplacementBlock().getDefaultState());
@@ -140,11 +141,11 @@ public class ItemRunicShears extends ItemBase {
         }
       }
     }
-    return EnumActionResult.SUCCESS;
+    return ActionResultType.SUCCESS;
   }
 
   @Override
-  public boolean itemInteractionForEntity(ItemStack itemstack, EntityPlayer player, EntityLivingBase entity, EnumHand hand) {
+  public boolean itemInteractionForEntity(ItemStack itemstack, PlayerEntity player, LivingEntity entity, Hand hand) {
     World world = player.world;
     Random rand = itemRand;
 
@@ -153,13 +154,13 @@ public class ItemRunicShears extends ItemBase {
       if (Items.SHEARS.itemInteractionForEntity(itemstack, player, entity, hand)) count++;
 
       float radius = GeneralConfig.RunicShearsRadius;
-      List<EntityLiving> entities = Util.getEntitiesWithinRadius(entity.world, (Entity e) -> e instanceof IShearable, entity.getPosition(), radius, radius / 2, radius);
-      for (EntityLiving e : entities) {
+      List<MobEntity> entities = Util.getEntitiesWithinRadius(entity.world, (Entity e) -> e instanceof IShearable, entity.getPosition(), radius, radius / 2, radius);
+      for (MobEntity e : entities) {
         e.captureDrops = true;
         if (Items.SHEARS.itemInteractionForEntity(itemstack, player, e, hand)) count++;
         e.captureDrops = false;
         if (!world.isRemote) {
-          for (EntityItem ent : e.capturedDrops) {
+          for (ItemEntity ent : e.capturedDrops) {
             ent.setPosition(entity.posX, entity.posY, entity.posZ);
             ent.motionY = 0;
             ent.motionX = 0;
@@ -184,7 +185,7 @@ public class ItemRunicShears extends ItemBase {
         if (cap != null) {
           if (cap.canHarvest()) {
             cap.setCooldown(recipe.getCooldown());
-            net.minecraft.entity.item.EntityItem ent = entity.entityDropItem(recipe.getDrop().copy(), 1.0F);
+            ItemEntity ent = entity.entityDropItem(recipe.getDrop().copy(), 1.0F);
             ent.motionY += rand.nextFloat() * 0.05F;
             ent.motionX += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
             ent.motionZ += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
@@ -197,7 +198,7 @@ public class ItemRunicShears extends ItemBase {
             return true;
           } else {
             // TODO: play particles (failure)?
-            player.sendStatusMessage(new TextComponentTranslation("roots.runic_shears.cooldown").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)), true);
+            player.sendStatusMessage(new TranslationTextComponent("roots.runic_shears.cooldown").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)), true);
           }
         }
       }

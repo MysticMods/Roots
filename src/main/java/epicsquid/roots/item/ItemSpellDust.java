@@ -7,7 +7,7 @@ import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
@@ -24,7 +24,7 @@ public class ItemSpellDust extends ItemBase {
   }
 
   @Override
-  public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
+  public void getSubItems(ItemGroup tab, NonNullList<ItemStack> subItems) {
     if (tab == this.getCreativeTab()) {
       for (SpellBase entry : SpellRegistry.spellRegistry.values()) {
         subItems.add(entry.getResult());

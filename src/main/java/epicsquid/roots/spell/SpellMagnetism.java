@@ -4,10 +4,10 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.mechanics.Magnetize;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.item.EntityXPOrb;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.item.ExperienceOrbEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
@@ -44,11 +44,11 @@ public class SpellMagnetism extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     // TODO: Check to see what the potential standard is for "unmagnetising" things
     int count = 0;
-    count += Magnetize.pull(EntityItem.class, player.world, player.getPosition(), radius_x, radius_y, radius_z);
-    count += Magnetize.pull(EntityXPOrb.class, player.world, player.getPosition(), radius_x, radius_y, radius_z);
+    count += Magnetize.pull(ItemEntity.class, player.world, player.getPosition(), radius_x, radius_y, radius_z);
+    count += Magnetize.pull(ExperienceOrbEntity.class, player.world, player.getPosition(), radius_x, radius_y, radius_z);
 
     return count != 0;
   }

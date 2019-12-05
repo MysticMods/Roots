@@ -3,10 +3,11 @@ package epicsquid.roots.entity.wild;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
-import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -14,7 +15,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class EntityWhiteStag extends EntityAnimal {
+public class EntityWhiteStag extends AnimalEntity {
   public static final ResourceLocation LOOT_TABLE = new ResourceLocation(Roots.MODID, "entity/white_stag");
 
   public EntityWhiteStag(@Nonnull World world) {
@@ -25,7 +26,7 @@ public class EntityWhiteStag extends EntityAnimal {
 
   @Nullable
   @Override
-  public EntityAgeable createChild(EntityAgeable ageable) {
+  public AgeableEntity createChild(AgeableEntity ageable) {
     return null;
   }
 
@@ -36,15 +37,15 @@ public class EntityWhiteStag extends EntityAnimal {
 
   @Override
   protected void initEntityAI() {
-    this.tasks.addTask(0, new EntityAISwimming(this));
-    this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
-    this.tasks.addTask(3, new EntityAITempt(this, 1.25D, ModItems.wildewheet, false));
+    this.tasks.addTask(0, new SwimGoal(this));
+    this.tasks.addTask(2, new BreedGoal(this, 1.0D));
+    this.tasks.addTask(3, new TemptGoal(this, 1.25D, ModItems.wildewheet, false));
     // TODO: Charge
-    this.tasks.addTask(4, new EntityAIFollowParent(this, 1.25D));
-    this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
-    this.tasks.addTask(7, new EntityAILookIdle(this));
-    this.tasks.addTask(5, new EntityAIAttackMelee(this, 1.5D, true));
-    this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, false));
+    this.tasks.addTask(4, new FollowParentGoal(this, 1.25D));
+    this.tasks.addTask(5, new RandomWalkingGoal(this, 1.0D));
+    this.tasks.addTask(7, new LookRandomlyGoal(this));
+    this.tasks.addTask(5, new MeleeAttackGoal(this, 1.5D, true));
+    this.targetTasks.addTask(3, new HurtByTargetGoal(this, false));
   }
 
   @Override

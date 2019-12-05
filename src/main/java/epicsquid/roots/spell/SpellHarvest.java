@@ -9,11 +9,11 @@ import epicsquid.roots.mechanics.Harvest;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.*;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 
@@ -51,7 +51,7 @@ public class SpellHarvest extends SpellBase {
   private static List<Block> skipBlocks = Arrays.asList(Blocks.BEDROCK, Blocks.GRASS, Blocks.DIRT, Blocks.STONE, Blocks.TALLGRASS, Blocks.WATER, Blocks.LAVA, Blocks.DOUBLE_PLANT, Blocks.MELON_STEM, Blocks.PUMPKIN_STEM);
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     Harvest.prepare();
     List<BlockPos> affectedPositions = new ArrayList<>();
     List<BlockPos> pumpkinsAndMelons = new ArrayList<>();
@@ -59,7 +59,7 @@ public class SpellHarvest extends SpellBase {
     List<BlockPos> crops = Util.getBlocksWithinRadius(player.world, player.getPosition(),
         radius_x, radius_y, radius_z, (pos) -> {
           if (player.world.isAirBlock(pos)) return false;
-          IBlockState state = player.world.getBlockState(pos);
+          BlockState state = player.world.getBlockState(pos);
           Block block = state.getBlock();
 
           if (skipBlocks.contains(block)) return false;
@@ -82,7 +82,7 @@ public class SpellHarvest extends SpellBase {
     int count = 0;
 
     for (BlockPos pos : crops) {
-      IBlockState state = player.world.getBlockState(pos);
+      BlockState state = player.world.getBlockState(pos);
 
       if (!player.world.isRemote) {
         Harvest.doHarvest(state, pos, player.world, player);
@@ -93,7 +93,7 @@ public class SpellHarvest extends SpellBase {
     for (BlockPos pos : pumpkinsAndMelons) {
       count++;
       if (!player.world.isRemote) {
-        IBlockState state = player.world.getBlockState(pos);
+        BlockState state = player.world.getBlockState(pos);
         player.world.setBlockState(pos, Blocks.AIR.getDefaultState());
         state.getBlock().harvestBlock(player.world, player, pos, state, null, player.getHeldItemMainhand());
         affectedPositions.add(pos);
@@ -105,7 +105,7 @@ public class SpellHarvest extends SpellBase {
       if (done.contains(pos)) continue;
 
       BlockPos down = pos.down();
-      IBlockState downState = player.world.getBlockState(down);
+      BlockState downState = player.world.getBlockState(down);
       while (downState.getBlock() == Blocks.CACTUS || downState.getBlock() == Blocks.REEDS) {
         done.add(down);
         down = down.down();
@@ -115,7 +115,7 @@ public class SpellHarvest extends SpellBase {
       done.add(pos);
     }
     for (BlockPos pos : lowest) {
-      IBlockState state = player.world.getBlockState(pos.up());
+      BlockState state = player.world.getBlockState(pos.up());
       if (state.getBlock() == Blocks.CACTUS || state.getBlock() == Blocks.REEDS) {
         count++;
         if (!player.world.isRemote) {

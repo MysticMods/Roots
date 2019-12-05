@@ -7,19 +7,19 @@ import epicsquid.roots.network.fx.MessageIcedTouchFX;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.block.BlockFlower;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FlowerBlock;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -52,18 +52,18 @@ public class SpellIcedTouch extends SpellBase {
         new ItemStack(Item.getItemFromBlock(Blocks.SNOW)),
         new ItemStack(Item.getItemFromBlock(Blocks.SNOW_LAYER)),
         new ItemStack(Items.SNOWBALL),
-        new ItemStack(Item.getItemFromBlock(Blocks.RED_FLOWER), 1, BlockFlower.EnumFlowerType.BLUE_ORCHID.getMeta())
+        new ItemStack(Item.getItemFromBlock(Blocks.RED_FLOWER), 1, FlowerBlock.EnumFlowerType.BLUE_ORCHID.getMeta())
     );
 
     acceptModules(ModuleRegistry.module_touch);
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     World world = player.world;
     if (modules.contains(ModuleRegistry.module_touch)) {
       if (!world.isRemote) {
-        player.addPotionEffect(new PotionEffect(ModPotions.freeze, touchDuration, 0, false, false));
+        player.addPotionEffect(new EffectInstance(ModPotions.freeze, touchDuration, 0, false, false));
         world.playSound(null, player.getPosition(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 2f);
       }
       return true;
@@ -71,7 +71,7 @@ public class SpellIcedTouch extends SpellBase {
       RayTraceResult result = this.rayTrace(player, player.isSneaking() ? 1 : 10);
       if (result != null && (!player.isSneaking() && result.typeOfHit == RayTraceResult.Type.BLOCK)) {
         BlockPos pos = result.getBlockPos().offset(result.sideHit);
-        IBlockState state = world.getBlockState(pos);
+        BlockState state = world.getBlockState(pos);
         boolean didSpell = false;
         if (state.getBlock() == Blocks.FIRE) {
           didSpell = true;
@@ -102,8 +102,8 @@ public class SpellIcedTouch extends SpellBase {
             }
           }
         } else if (world.isAirBlock(pos)) {
-          IBlockState down = world.getBlockState(pos.down());
-          if (down.getBlockFaceShape(world, pos, EnumFacing.UP) == BlockFaceShape.SOLID) {
+          BlockState down = world.getBlockState(pos.down());
+          if (down.getBlockFaceShape(world, pos, Direction.UP) == BlockFaceShape.SOLID) {
             didSpell = true;
             if (!world.isRemote) {
               world.setBlockState(pos, Blocks.SNOW_LAYER.getDefaultState());
@@ -128,7 +128,7 @@ public class SpellIcedTouch extends SpellBase {
   }
 
   @Nullable
-  public RayTraceResult rayTrace(EntityPlayer player, double blockReachDistance) {
+  public RayTraceResult rayTrace(PlayerEntity player, double blockReachDistance) {
     Vec3d vec3d = player.getPositionEyes(1.0F);
     Vec3d vec3d1 = player.getLook(1.0F);
     Vec3d vec3d2 = vec3d.add(vec3d1.x * blockReachDistance, vec3d1.y * blockReachDistance, vec3d1.z * blockReachDistance);

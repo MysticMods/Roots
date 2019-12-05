@@ -1,9 +1,9 @@
 package epicsquid.roots.block.itemblock;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -12,14 +12,14 @@ import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ItemBlockUnendingBowl extends ItemBlock {
+public class ItemBlockUnendingBowl extends BlockItem {
   public ItemBlockUnendingBowl(Block block) {
     super(block);
   }
 
   @Nullable
   @Override
-  public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable NBTTagCompound nbt) {
+  public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
     return new UnendingBowlItemHandler(stack);
   }
 

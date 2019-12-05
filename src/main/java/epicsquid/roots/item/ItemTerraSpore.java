@@ -10,12 +10,12 @@ import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.config.MossConfig;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -30,9 +30,9 @@ public class ItemTerraSpore extends ItemBase {
 
   @Override
   @Nonnull
-  public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-    IBlockState state = world.getBlockState(pos);
-    IBlockState mossified = MossConfig.mossConversion(state);
+  public ActionResultType onItemUse(PlayerEntity player, World world, BlockPos pos, Hand hand, Direction facing, float hitX, float hitY, float hitZ) {
+    BlockState state = world.getBlockState(pos);
+    BlockState mossified = MossConfig.mossConversion(state);
     if (mossified != null && isWaterAround(pos, world)) {
       world.setBlockState(pos, mossified);
 
@@ -47,11 +47,11 @@ public class ItemTerraSpore extends ItemBase {
         player.getHeldItem(hand).shrink(1);
       }
     }
-    return EnumActionResult.SUCCESS;
+    return ActionResultType.SUCCESS;
   }
 
   private boolean isWaterAround(BlockPos pos, World world) {
-    for (EnumFacing dir : EnumFacing.HORIZONTALS) {
+    for (Direction dir : Direction.HORIZONTALS) {
       if (world.getBlockState(pos.offset(dir)).getBlock() == Blocks.WATER) {
         return true;
       }

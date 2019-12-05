@@ -4,15 +4,15 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellPetalShell;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class PotionPetalShell extends Potion {
+public class PotionPetalShell extends Effect {
 
   private ResourceLocation texture = new ResourceLocation(Roots.MODID, "textures/gui/potions.png");
 
@@ -29,15 +29,15 @@ public class PotionPetalShell extends Potion {
   }
 
   @Override
-  public boolean shouldRender(PotionEffect effect) {
+  public boolean shouldRender(EffectInstance effect) {
     return true;
   }
 
   @Override
-  public void performEffect(EntityLivingBase entityLivingBaseIn, int amplifier) {
-    if (entityLivingBaseIn instanceof EntityPlayer && entityLivingBaseIn.world.isRemote) {
+  public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
+    if (entityLivingBaseIn instanceof PlayerEntity && entityLivingBaseIn.world.isRemote) {
       int count = amplifier;
-      EntityPlayer player = (EntityPlayer) entityLivingBaseIn;
+      PlayerEntity player = (PlayerEntity) entityLivingBaseIn;
       float r, g, b;
       r = SpellPetalShell.instance.getFirstColours()[0];
       g = SpellPetalShell.instance.getFirstColours()[1];

@@ -33,12 +33,12 @@ import mezz.jei.api.*;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import java.util.Collection;
 import java.util.List;
@@ -135,7 +135,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addIngredientInfo(new ItemStack(ModItems.wildroot), VanillaTypes.ITEM, I18n.format("jei.roots.wildroot.desc"));
 
     for (TransmutationRecipe recipe : ModRecipes.getTransmutationRecipes()) {
-      IBlockState endState = recipe.getEndState();
+      BlockState endState = recipe.getEndState();
       ItemStack endStack = recipe.getEndStack();
       if (endStack != null && !endStack.isEmpty()) {
         registry.addIngredientInfo(endStack, VanillaTypes.ITEM, I18n.format(recipe.getKey()));
@@ -156,9 +156,9 @@ public class JEIRootsPlugin implements IModPlugin {
 
 
     //Elemental Soil Crafting Information Panels
-    String airSoilLocalized = new TextComponentTranslation("jei.roots.elemental_soil_air.desc").getFormattedText();
+    String airSoilLocalized = new TranslationTextComponent("jei.roots.elemental_soil_air.desc").getFormattedText();
     airSoilLocalized = airSoilLocalized.replace("@LEVEL", ((Integer) ElementalSoilConfig.AirSoilMinY).toString());
-    String earthSoilLocalized = new TextComponentTranslation("jei.roots.elemental_soil_earth.desc").getFormattedText();
+    String earthSoilLocalized = new TranslationTextComponent("jei.roots.elemental_soil_earth.desc").getFormattedText();
     earthSoilLocalized = earthSoilLocalized.replace("@LEVEL", ((Integer) ElementalSoilConfig.EarthSoilMaxY).toString());
 
     registry.addIngredientInfo(new ItemStack(ModBlocks.elemental_soil_fire), VanillaTypes.ITEM, I18n.format("jei.roots.elemental_soil_fire.desc"));

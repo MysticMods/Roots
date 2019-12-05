@@ -7,10 +7,10 @@ import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.network.fx.MessageLifeInfusionFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
@@ -47,12 +47,12 @@ public class SpellGrowthInfusion extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0), player.getLookVec().scale(8.0f).add(player.getPositionVector().add(0, player.getEyeHeight(), 0)));
     if (result != null) {
       if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
         BlockPos pos = result.getBlockPos();
-        IBlockState state = player.world.getBlockState(pos);
+        BlockState state = player.world.getBlockState(pos);
         if (Growth.canGrow(player.world, pos, state)) {
           if (!player.world.isRemote) {
             for (int i = 0; i < tickCount; i++) {

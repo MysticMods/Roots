@@ -20,10 +20,11 @@ import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.tileentity.TileEntityOffertoryPlate;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.init.Items;
+import net.minecraft.entity.passive.*;
+import net.minecraft.entity.passive.ChickenEntity;
+import net.minecraft.entity.passive.CowEntity;
+import net.minecraft.entity.passive.PigEntity;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -49,9 +50,9 @@ public class RitualSummonCreatures extends RitualBase {
 //    addCondition(new ConditionGroveFaith(GroveType.WILD, 0));
 
     // TODO: CraftTweaker support
-    entityItem.put(EntityChicken.class, Lists.newArrayList(new ItemStack(Items.CHICKEN)));
-    entityItem.put(EntityCow.class, Lists.newArrayList(new ItemStack(Items.BEEF)));
-    entityItem.put(EntityPig.class, Lists.newArrayList(new ItemStack(Items.PORKCHOP)));
+    entityItem.put(ChickenEntity.class, Lists.newArrayList(new ItemStack(Items.CHICKEN)));
+    entityItem.put(CowEntity.class, Lists.newArrayList(new ItemStack(Items.BEEF)));
+    entityItem.put(PigEntity.class, Lists.newArrayList(new ItemStack(Items.PORKCHOP)));
 
     entityItem.put(EntityFox.class, Lists.newArrayList(new ItemStack(epicsquid.mysticalworld.init.ModItems.pelt)));
     entityItem.put(EntityBeetle.class, Lists.newArrayList(new ItemStack(epicsquid.mysticalworld.init.ModItems.carapace)));

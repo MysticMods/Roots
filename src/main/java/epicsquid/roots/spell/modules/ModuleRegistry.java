@@ -1,8 +1,8 @@
 package epicsquid.roots.spell.modules;
 
 import epicsquid.roots.init.ModItems;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.HashMap;

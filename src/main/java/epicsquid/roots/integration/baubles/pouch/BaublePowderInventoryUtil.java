@@ -5,11 +5,11 @@ import baubles.api.BaublesApi;
 import baubles.api.cap.IBaublesItemHandler;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.item.ItemPouch;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
 public class BaublePowderInventoryUtil {
-  public static ItemStack getPouch(EntityPlayer player) {
+  public static ItemStack getPouch(PlayerEntity player) {
     IBaublesItemHandler handler = BaublesApi.getBaublesHandler(player);
     for (int i : BaubleType.BELT.getValidSlots()) {
       ItemStack stack = handler.getStackInSlot(i);

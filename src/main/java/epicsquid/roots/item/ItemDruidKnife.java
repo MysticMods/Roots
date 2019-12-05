@@ -8,15 +8,16 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.item.dispenser.DispenseKnife;
 import epicsquid.roots.recipe.RunicCarvingRecipe;
-import net.minecraft.block.BlockDispenser;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.*;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -28,14 +29,14 @@ public class ItemDruidKnife extends ItemKnifeBase {
     super(name, material);
     ModItems.knives.add(this);
 
-    BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DispenseKnife.getInstance());
+    DispenserBlock.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DispenseKnife.getInstance());
   }
 
   @Override
   @Nonnull
   @SuppressWarnings("deprecation")
-  public EnumActionResult onItemUse(@Nonnull EntityPlayer player, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
-    if (hand == EnumHand.MAIN_HAND) {
+  public ActionResultType onItemUse(@Nonnull PlayerEntity player, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull Hand hand, @Nonnull Direction facing, float hitX, float hitY, float hitZ) {
+    if (hand == Hand.MAIN_HAND) {
       ItemStack offhand = player.getHeldItemOffhand();
       if (!offhand.isEmpty() && HerbRegistry.isHerb(offhand.getItem())) {
         RunicCarvingRecipe recipe = ModRecipes.getRunicCarvingRecipe(world.getBlockState(pos), HerbRegistry.getHerbByItem(offhand.getItem()));
@@ -49,8 +50,8 @@ public class ItemDruidKnife extends ItemKnifeBase {
       } else {
         if (!MossConfig.getBlacklistDimensions().contains(world.provider.getDimension())) {
           // Used to get terramoss from a block of cobble. This can also be done using runic shears.
-          IBlockState state = world.getBlockState(pos);
-          IBlockState result = MossConfig.scrapeResult(state);
+          BlockState state = world.getBlockState(pos);
+          BlockState result = MossConfig.scrapeResult(state);
           if (result != null) {
             if (!world.isRemote) {
               world.setBlockState(pos, result);
@@ -64,8 +65,8 @@ public class ItemDruidKnife extends ItemKnifeBase {
           }
         }
       }
-      return EnumActionResult.SUCCESS;
+      return ActionResultType.SUCCESS;
     }
-    return EnumActionResult.PASS;
+    return ActionResultType.PASS;
   }
 }

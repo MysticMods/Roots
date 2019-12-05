@@ -4,10 +4,10 @@ import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.SpellBase;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -48,7 +48,7 @@ public class MessageServerUpdateStaff implements IMessage {
 
     private void handleMessage(MessageServerUpdateStaff message, MessageContext ctx) {
       int opcode = message.getOpcode();
-      EntityPlayerMP player = ctx.getServerHandler().player;
+      ServerPlayerEntity player = ctx.getServerHandler().player;
       ItemStack staff = null;
       for (ItemStack s : player.getHeldEquipment()) {
         if (s.getItem() == ModItems.staff) {
@@ -73,7 +73,7 @@ public class MessageServerUpdateStaff implements IMessage {
       }
 
       SpellBase spell = handler.getSelectedSpell();
-      player.sendMessage(new TextComponentTranslation("roots.info.staff.slot_and_spell", handler.getSelectedSlot() + 1, spell == null ? "none" : new TextComponentTranslation("roots.spell." + spell.getName() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))).setStyle(new Style().setColor(TextFormatting.GOLD)));
+      player.sendMessage(new TranslationTextComponent("roots.info.staff.slot_and_spell", handler.getSelectedSlot() + 1, spell == null ? "none" : new TranslationTextComponent("roots.spell." + spell.getName() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))).setStyle(new Style().setColor(TextFormatting.GOLD)));
     }
   }
 }

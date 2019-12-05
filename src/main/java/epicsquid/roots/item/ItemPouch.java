@@ -11,12 +11,12 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.integration.baubles.pouch.PouchEquipHandler;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
@@ -63,7 +63,7 @@ public class ItemPouch extends ItemBase implements IItemPouch {
 
   @Override
   @Nonnull
-  public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
+  public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, @Nonnull Hand hand) {
     ItemStack stack = player.getHeldItem(hand);
     boolean isBaublesLoaded = Loader.isModLoaded("baubles");
     boolean open_gui = false;
@@ -84,12 +84,12 @@ public class ItemPouch extends ItemBase implements IItemPouch {
     if (!world.isRemote && open_gui) {
       player.openGui(Roots.getInstance(), GuiHandler.POUCH_ID, world, 0, 0, 0);
     }
-    return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+    return new ActionResult<>(ActionResultType.SUCCESS, stack);
   }
 
   private static ItemStack createData(ItemStack stack, Herb herb, double quantity) {
     if (!stack.hasTagCompound()) {
-      stack.setTagCompound(new NBTTagCompound());
+      stack.setTagCompound(new CompoundNBT());
     }
     stack.getTagCompound().setDouble(herb.getName(), quantity);
     return stack;

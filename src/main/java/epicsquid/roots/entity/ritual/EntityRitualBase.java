@@ -3,7 +3,7 @@ package epicsquid.roots.entity.ritual;
 import epicsquid.roots.block.BlockBonfire;
 import epicsquid.roots.util.types.PropertyTable;
 import net.minecraft.entity.Entity;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -52,7 +52,7 @@ public abstract class EntityRitualBase extends Entity implements IRitualEntity {
   }
 
   @Override
-  protected void readEntityFromNBT(NBTTagCompound compound) {
+  protected void readEntityFromNBT(CompoundNBT compound) {
     this.x = compound.getDouble("x");
     this.y = compound.getDouble("y");
     this.z = compound.getDouble("z");
@@ -63,7 +63,7 @@ public abstract class EntityRitualBase extends Entity implements IRitualEntity {
   }
 
   @Override
-  protected void writeEntityToNBT(NBTTagCompound compound) {
+  protected void writeEntityToNBT(CompoundNBT compound) {
     compound.setDouble("x", x);
     compound.setDouble("y", y);
     compound.setDouble("z", z);

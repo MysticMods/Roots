@@ -3,10 +3,10 @@ package epicsquid.roots.block.groves;
 import epicsquid.mysticallib.particle.particles.ParticleLeafArc;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -22,7 +22,7 @@ public class BlockNaturalGroveStone extends BlockGroveStone {
   }
 
   @Override
-  public void randomTick(World world, BlockPos pos, IBlockState state, Random random) {
+  public void randomTick(World world, BlockPos pos, BlockState state, Random random) {
     this.updateTick(world, pos, state, random);
 
     /*if (!GeneralConfig.EnableGroveStoneEnvironment) return;
@@ -80,7 +80,7 @@ public class BlockNaturalGroveStone extends BlockGroveStone {
 
   @Override
   @SideOnly(Side.CLIENT)
-  public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+  public void randomDisplayTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     if (stateIn.getValue(VALID)) {
       for (int i = -2; i <= 2; ++i) {
         for (int j = -2; j <= 2; ++j) {

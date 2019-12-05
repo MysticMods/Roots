@@ -11,8 +11,8 @@ import epicsquid.roots.ritual.conditions.Condition;
 import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import epicsquid.roots.util.types.PropertyTable;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -82,7 +82,7 @@ public abstract class RitualBase {
     this.conditions.add(condition);
   }
 
-  public boolean isRitualRecipe(TileEntityBonfire tileEntityBonfire, @Nullable EntityPlayer player) {
+  public boolean isRitualRecipe(TileEntityBonfire tileEntityBonfire, @Nullable PlayerEntity player) {
     if (isDisabled()) return false;
     for (Condition condition : this.conditions) {
       if (condition instanceof ConditionItems) {
@@ -93,8 +93,8 @@ public abstract class RitualBase {
     return false;
   }
 
-  public boolean canFire(TileEntityBonfire tileEntityBonfire, @Nullable EntityPlayer player) {
-    IBlockState state = tileEntityBonfire.getWorld().getBlockState(tileEntityBonfire.getPos());
+  public boolean canFire(TileEntityBonfire tileEntityBonfire, @Nullable PlayerEntity player) {
+    BlockState state = tileEntityBonfire.getWorld().getBlockState(tileEntityBonfire.getPos());
     if (state.getValue(BlockBonfire.BURNING)) {
       return false;
     }

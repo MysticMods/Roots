@@ -4,7 +4,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.AnimalEntity;
 
 import javax.annotation.Nonnull;
 
@@ -153,7 +153,7 @@ public class ModelWhiteStag extends ModelBase {
     GlStateManager.pushMatrix();
     super.render(entity, f, limbSwingAmount, age, f3, f4, f5);
     setRotationAngles(f, limbSwingAmount, age, f3, f4, f5);
-    if (((EntityAnimal) entity).getGrowingAge() < 0) {
+    if (((AnimalEntity) entity).getGrowingAge() < 0) {
       GlStateManager.scale(0.5, 0.5, 0.5);
       GlStateManager.translate(0, 1.5, 0);
     }

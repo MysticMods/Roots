@@ -6,10 +6,10 @@ import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
@@ -51,13 +51,13 @@ public class SpellRampantGrowth extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     List<BlockPos> positions = Growth.collect(player.world, player.getPosition(), radius_x, radius_y, radius_z);
     if (positions.isEmpty()) return false;
     if (!player.world.isRemote) {
       for (int i = 0; i < count + player.world.rand.nextInt(additionalCount); i++) {
         BlockPos pos = positions.get(player.world.rand.nextInt(positions.size()));
-        IBlockState state = player.world.getBlockState(pos);
+        BlockState state = player.world.getBlockState(pos);
         for (int j = 0; j < ticks; j++) {
           state.getBlock().randomTick(player.world, pos, state, new Random());
         }

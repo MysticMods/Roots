@@ -4,10 +4,10 @@ import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.block.BlockDoublePlant;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.block.DoublePlantBlock;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
@@ -37,7 +37,7 @@ public class SpellFeyLight extends SpellBase {
   public void init() {
     addIngredients(
         new ItemStack(Item.getItemFromBlock(Blocks.LIT_PUMPKIN)),
-        new ItemStack(Item.getItemFromBlock(Blocks.DOUBLE_PLANT), 1, BlockDoublePlant.EnumPlantType.SUNFLOWER.getMeta()),
+        new ItemStack(Item.getItemFromBlock(Blocks.DOUBLE_PLANT), 1, DoublePlantBlock.EnumPlantType.SUNFLOWER.getMeta()),
         new ItemStack(ModItems.cloud_berry),
         new ItemStack(ModItems.bark_acacia),
         new ItemStack(ModItems.cloud_berry)
@@ -45,7 +45,7 @@ public class SpellFeyLight extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     World world = player.world;
     RayTraceResult result = this.rayTrace(player, player.isSneaking() ? 1 : 10);
     if (result != null && (!player.isSneaking() && result.typeOfHit == RayTraceResult.Type.BLOCK)) {
@@ -68,7 +68,7 @@ public class SpellFeyLight extends SpellBase {
   }
 
   @Nullable
-  public RayTraceResult rayTrace(EntityPlayer player, double blockReachDistance) {
+  public RayTraceResult rayTrace(PlayerEntity player, double blockReachDistance) {
     Vec3d vec3d = player.getPositionEyes(1.0F);
     Vec3d vec3d1 = player.getLook(1.0F);
     Vec3d vec3d2 = vec3d.add(vec3d1.x * blockReachDistance, vec3d1.y * blockReachDistance, vec3d1.z * blockReachDistance);

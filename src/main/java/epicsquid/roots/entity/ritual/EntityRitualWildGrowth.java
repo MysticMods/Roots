@@ -10,14 +10,14 @@ import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.ritual.RitualWildGrowth;
 import epicsquid.roots.world.tree.WorldGenBigWildwoodTree;
 import epicsquid.roots.world.tree.WorldGenWildwoodTree;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraft.world.gen.feature.Feature;
 
 import java.util.List;
 import java.util.Random;
@@ -38,7 +38,7 @@ public class EntityRitualWildGrowth extends EntityRitualBase {
     if (!world.isRemote) {
       if (this.ticksExisted % ritual.interval == 0) {
         List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, (pos) -> {
-          IBlockState state = world.getBlockState(pos);
+          BlockState state = world.getBlockState(pos);
           return state.getBlock() == ModBlocks.wildroot && state.getValue(BlockCropBase.AGE) == 7;
         });
         if (eligiblePositions.isEmpty()) return;
@@ -49,9 +49,9 @@ public class EntityRitualWildGrowth extends EntityRitualBase {
     }
   }
 
-  private void generateTree(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+  private void generateTree(World worldIn, BlockPos pos, BlockState state, Random rand) {
     WorldGenBigWildwoodTree worldgenerator = new WorldGenBigWildwoodTree(true);
-    IBlockState iblockstate2 = Blocks.AIR.getDefaultState();
+    BlockState iblockstate2 = Blocks.AIR.getDefaultState();
     worldIn.setBlockState(pos, iblockstate2, 4);
     if (!worldgenerator.generate(worldIn, rand, pos)) {
       worldIn.setBlockState(pos, state, 4);

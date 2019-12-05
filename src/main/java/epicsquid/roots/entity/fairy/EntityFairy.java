@@ -2,20 +2,20 @@ package epicsquid.roots.entity.fairy;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.particle.ParticleUtil;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityFlying;
+import net.minecraft.entity.FlyingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class EntityFairy extends EntityFlying {
+public class EntityFairy extends FlyingEntity {
   public static ResourceLocation LOOT_TABLE = new ResourceLocation(Roots.MODID,  "entity/fairy");
 
   public static final DataParameter<BlockPos> spawnPosition = EntityDataManager.<BlockPos>createKey(EntityFairy.class, DataSerializers.BLOCK_POS);
@@ -41,7 +41,7 @@ public class EntityFairy extends EntityFlying {
   }
 
   @Override
-  public boolean processInteract(EntityPlayer player, EnumHand hand) {
+  public boolean processInteract(PlayerEntity player, Hand hand) {
     /*if (player.getHeldItem(hand).isEmpty()) {
       getDataManager().set(sitting, !getDataManager().get(sitting));
       getDataManager().setDirty(sitting);
@@ -144,7 +144,7 @@ public class EntityFairy extends EntityFlying {
 
     if (getDataManager().get(tame) && owner != null) {
       this.noClip = true;
-      EntityPlayer p = world.getPlayerEntityByUUID(owner);
+      PlayerEntity p = world.getPlayerEntityByUUID(owner);
       if (getDataManager().get(sitting)) {
         motionX *= 0.9;
         motionY *= 0.9;
@@ -278,7 +278,7 @@ public class EntityFairy extends EntityFlying {
   }
 
   @Override
-  protected void updateFallState(double y, boolean onGroundIn, IBlockState state, BlockPos pos) {
+  protected void updateFallState(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
   }
 
   @Override
@@ -292,8 +292,8 @@ public class EntityFairy extends EntityFlying {
 
   @Override
   protected void initEntityAI() {
-    this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-    this.tasks.addTask(7, new EntityAILookIdle(this));
+    this.tasks.addTask(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
+    this.tasks.addTask(7, new LookRandomlyGoal(this));
   }
 
   @Override
@@ -323,7 +323,7 @@ public class EntityFairy extends EntityFlying {
   }
 
   @Override
-  public void readEntityFromNBT(NBTTagCompound compound) {
+  public void readEntityFromNBT(CompoundNBT compound) {
     super.readEntityFromNBT(compound);
     if (compound.hasKey("owner")) {
       owner = NBTUtil.getUUIDFromTag(compound.getCompoundTag("owner"));
@@ -342,7 +342,7 @@ public class EntityFairy extends EntityFlying {
   }
 
   @Override
-  public void writeEntityToNBT(NBTTagCompound compound) {
+  public void writeEntityToNBT(CompoundNBT compound) {
     super.writeEntityToNBT(compound);
     if (owner != null) {
       compound.setTag("owner", NBTUtil.createUUIDTag(owner));

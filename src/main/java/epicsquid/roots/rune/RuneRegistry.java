@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 public class RuneRegistry {
   public static Map<String, Class<? extends RuneBase>> runeRegistry = new HashMap<>();
@@ -13,7 +13,7 @@ public class RuneRegistry {
     runeRegistry.put("fleetness_rune", FleetnessRune.class);
   }
 
-  public static RuneBase getRune(NBTTagCompound compound) {
+  public static RuneBase getRune(CompoundNBT compound) {
     String runeString = compound.getString("rune");
     RuneBase rune = null;
     if (runeRegistry.get(runeString) != null) {

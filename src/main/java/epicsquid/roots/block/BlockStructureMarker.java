@@ -5,8 +5,8 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.block.BlockState;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
@@ -23,7 +23,7 @@ public class BlockStructureMarker extends BlockBase {
 
   @SideOnly(Side.CLIENT)
   @Override
-  public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+  public void getSubBlocks(ItemGroup tab, NonNullList<ItemStack> list) {
     if (tab == this.getCreativeTab()) {
       list.clear();
     }
@@ -35,12 +35,12 @@ public class BlockStructureMarker extends BlockBase {
   }
 
   @Override
-  public int getMetaFromState(IBlockState state) {
+  public int getMetaFromState(BlockState state) {
     return state.getValue(marker_value);
   }
 
   @Override
-  public IBlockState getStateFromMeta(int meta) {
+  public BlockState getStateFromMeta(int meta) {
     return getDefaultState().withProperty(marker_value, meta);
   }
 

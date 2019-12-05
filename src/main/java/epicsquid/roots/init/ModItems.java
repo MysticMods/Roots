@@ -10,16 +10,16 @@ import epicsquid.mysticallib.material.MaterialTypes;
 import epicsquid.roots.Roots;
 import epicsquid.roots.item.*;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDoublePlant;
-import net.minecraft.block.BlockFlower;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumRarity;
+import net.minecraft.block.DoublePlantBlock;
+import net.minecraft.block.FlowerBlock;
+import net.minecraft.block.Blocks;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.Items;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.item.Rarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
@@ -55,8 +55,8 @@ public class ModItems {
 
   // TODO: Refactor this out of this file
   //Armor Materials
-  public static final ItemArmor.ArmorMaterial sylvanArmorMaterial = EnumHelper.addArmorMaterial("SYLVAN", Roots.MODID + ":sylvan", 12, new int[]{2, 4, 5, 3}, 20, SoundEvents.BLOCK_SNOW_PLACE, 0F);
-  public static final ItemArmor.ArmorMaterial wildwoodArmorMaterial = EnumHelper.addArmorMaterial("WILDWOOD", Roots.MODID + ":wildwood", 20, new int[]{2, 6, 7, 2}, 20, SoundEvents.BLOCK_WOOD_PLACE, 1F);
+  public static final ArmorItem.ArmorMaterial sylvanArmorMaterial = EnumHelper.addArmorMaterial("SYLVAN", Roots.MODID + ":sylvan", 12, new int[]{2, 4, 5, 3}, 20, SoundEvents.BLOCK_SNOW_PLACE, 0F);
+  public static final ArmorItem.ArmorMaterial wildwoodArmorMaterial = EnumHelper.addArmorMaterial("WILDWOOD", Roots.MODID + ":wildwood", 20, new int[]{2, 6, 7, 2}, 20, SoundEvents.BLOCK_WOOD_PLACE, 1F);
 
   /**
    * Register all items
@@ -94,8 +94,8 @@ public class ModItems {
     event.addItem(fey_leather = new ItemBase("fey_leather") {
       @Override
       @SuppressWarnings("deprecation")
-      public EnumRarity getRarity(ItemStack stack) {
-        return EnumRarity.RARE;
+      public Rarity getRarity(ItemStack stack) {
+        return Rarity.RARE;
       }
     }.setCreativeTab(Roots.tab));
 
@@ -115,14 +115,14 @@ public class ModItems {
     event.addItem(wildwood_quiver = new ItemQuiver("wildwood_quiver").setCreativeTab(Roots.tab));
     event.addItem(wildwood_bow = new ItemWildwoodBow("wildwood_bow").setCreativeTab(Roots.tab));
 
-    event.addItem(sylvan_helmet = new ItemSylvanArmor(sylvanArmorMaterial, EntityEquipmentSlot.HEAD, "sylvan_helmet").setMaxStackSize(1));
-    event.addItem(sylvan_chestplate = new ItemSylvanArmor(sylvanArmorMaterial, EntityEquipmentSlot.CHEST, "sylvan_chestplate").setMaxStackSize(1));
-    event.addItem(sylvan_leggings = new ItemSylvanArmor(sylvanArmorMaterial, EntityEquipmentSlot.LEGS, "sylvan_leggings").setMaxStackSize(1));
-    event.addItem(sylvan_boots = new ItemSylvanArmor(sylvanArmorMaterial, EntityEquipmentSlot.FEET, "sylvan_boots").setMaxStackSize(1));
-    event.addItem(wildwood_helmet = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.HEAD, "wildwood_helmet").setMaxStackSize(1));
-    event.addItem(wildwood_chestplate = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.CHEST, "wildwood_chestplate").setMaxStackSize(1));
-    event.addItem(wildwood_leggings = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.LEGS, "wildwood_leggings").setMaxStackSize(1));
-    event.addItem(wildwood_boots = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.FEET, "wildwood_boots").setMaxStackSize(1));
+    event.addItem(sylvan_helmet = new ItemSylvanArmor(sylvanArmorMaterial, EquipmentSlotType.HEAD, "sylvan_helmet").setMaxStackSize(1));
+    event.addItem(sylvan_chestplate = new ItemSylvanArmor(sylvanArmorMaterial, EquipmentSlotType.CHEST, "sylvan_chestplate").setMaxStackSize(1));
+    event.addItem(sylvan_leggings = new ItemSylvanArmor(sylvanArmorMaterial, EquipmentSlotType.LEGS, "sylvan_leggings").setMaxStackSize(1));
+    event.addItem(sylvan_boots = new ItemSylvanArmor(sylvanArmorMaterial, EquipmentSlotType.FEET, "sylvan_boots").setMaxStackSize(1));
+    event.addItem(wildwood_helmet = new ItemWildwoodArmor(wildwoodArmorMaterial, EquipmentSlotType.HEAD, "wildwood_helmet").setMaxStackSize(1));
+    event.addItem(wildwood_chestplate = new ItemWildwoodArmor(wildwoodArmorMaterial, EquipmentSlotType.CHEST, "wildwood_chestplate").setMaxStackSize(1));
+    event.addItem(wildwood_leggings = new ItemWildwoodArmor(wildwoodArmorMaterial, EquipmentSlotType.LEGS, "wildwood_leggings").setMaxStackSize(1));
+    event.addItem(wildwood_boots = new ItemWildwoodArmor(wildwoodArmorMaterial, EquipmentSlotType.FEET, "wildwood_boots").setMaxStackSize(1));
 
     event.addItem(runic_shears = new ItemRunicShears("runic_shears").setCreativeTab(Roots.tab));
 
@@ -183,11 +183,11 @@ public class ModItems {
   public static void registerOredict() {
     OreDictionary.registerOre("blockWool", new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE));
 
-    for (BlockFlower.EnumFlowerType type : BlockFlower.EnumFlowerType.values()) {
+    for (FlowerBlock.EnumFlowerType type : FlowerBlock.EnumFlowerType.values()) {
       OreDictionary.registerOre("allFlowers", new ItemStack(type.getBlockType().getBlock(), 1, type.getMeta()));
     }
-    for (BlockDoublePlant.EnumPlantType type : BlockDoublePlant.EnumPlantType.values()) {
-      if (type == BlockDoublePlant.EnumPlantType.FERN || type == BlockDoublePlant.EnumPlantType.GRASS) continue;
+    for (DoublePlantBlock.EnumPlantType type : DoublePlantBlock.EnumPlantType.values()) {
+      if (type == DoublePlantBlock.EnumPlantType.FERN || type == DoublePlantBlock.EnumPlantType.GRASS) continue;
 
       OreDictionary.registerOre("allTallFlowers", new ItemStack(Blocks.DOUBLE_PLANT, 1, type.getMeta()));
     }

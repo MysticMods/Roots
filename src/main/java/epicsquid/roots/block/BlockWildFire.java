@@ -8,13 +8,13 @@ import epicsquid.mysticallib.model.IModeledObject;
 import epicsquid.mysticallib.model.block.BakedModelBlock;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.util.EntityUtil;
-import net.minecraft.block.BlockFire;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.FireBlock;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.BlockItem;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
@@ -29,7 +29,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockWildFire extends BlockFire implements IBlock, IModeledObject, ICustomModeledObject, INoCullBlock {
+public class BlockWildFire extends FireBlock implements IBlock, IModeledObject, ICustomModeledObject, INoCullBlock {
   public @Nonnull
   String name;
 
@@ -51,7 +51,7 @@ public class BlockWildFire extends BlockFire implements IBlock, IModeledObject, 
   }
 
   @Override
-  public ItemBlock setItemBlock(ItemBlock block) {
+  public BlockItem setItemBlock(BlockItem block) {
     return block;
   }
 
@@ -61,7 +61,7 @@ public class BlockWildFire extends BlockFire implements IBlock, IModeledObject, 
   }
 
   @Nullable
-  protected IBlockState getParentState() {
+  protected BlockState getParentState() {
     return null;
   }
 
@@ -86,7 +86,7 @@ public class BlockWildFire extends BlockFire implements IBlock, IModeledObject, 
   }
 
   @Override
-  public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+  public void onEntityCollision(World worldIn, BlockPos pos, BlockState state, Entity entityIn) {
     // TODO: Maybe make it not affect immunity to fire; but it's FEY fire.
     /*if (entityIn.isImmuneToFire()) {
       return;
@@ -109,12 +109,12 @@ public class BlockWildFire extends BlockFire implements IBlock, IModeledObject, 
   @Nullable
   @Override
   @SuppressWarnings("deprecation")
-  public net.minecraft.pathfinding.PathNodeType getAiPathNodeType(IBlockState state, IBlockAccess world, BlockPos pos) {
+  public net.minecraft.pathfinding.PathNodeType getAiPathNodeType(BlockState state, IBlockAccess world, BlockPos pos) {
     return PathNodeType.DAMAGE_FIRE;
   }
 
   @Override
-  public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+  public void updateTick(World worldIn, BlockPos pos, BlockState state, Random rand) {
     if (!worldIn.isAreaLoaded(pos, 2)) return; // Forge: prevent loading unloaded chunks when spreading fire
     if (!this.canPlaceBlockAt(worldIn, pos)) {
       worldIn.setBlockToAir(pos);
@@ -134,7 +134,7 @@ public class BlockWildFire extends BlockFire implements IBlock, IModeledObject, 
 
   @Override
   @SideOnly(Side.CLIENT)
-  public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+  public void randomDisplayTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     if (rand.nextInt(24) == 0) {
       worldIn.playSound((double) ((float) pos.getX() + 0.5F), (double) ((float) pos.getY() + 0.5F), (double) ((float) pos.getZ() + 0.5F), SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 1.0F + rand.nextFloat(), rand.nextFloat() * 0.7F + 0.3F, false);
     }

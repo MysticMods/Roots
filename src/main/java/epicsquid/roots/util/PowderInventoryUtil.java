@@ -10,7 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.Loader;
@@ -29,7 +29,7 @@ public class PowderInventoryUtil {
   private static HerbAlert slot1 = null;
   private static HerbAlert slot2 = null;
 
-  public static ItemStack getPouch(EntityPlayer player) {
+  public static ItemStack getPouch(PlayerEntity player) {
     if (Loader.isModLoaded("baubles")) {
       ItemStack stack = BaublePowderInventoryUtil.getPouch(player);
       if (!stack.isEmpty()) return stack;
@@ -44,7 +44,7 @@ public class PowderInventoryUtil {
     return ItemStack.EMPTY;
   }
 
-  public static double getPowderTotal(EntityPlayer player, Herb herb) {
+  public static double getPowderTotal(PlayerEntity player, Herb herb) {
     ItemStack pouch = getPouch(player);
     if (pouch.isEmpty()) return -1.0;
 
@@ -54,7 +54,7 @@ public class PowderInventoryUtil {
     return ItemPouch.getHerbQuantity(pouch, herb);
   }
 
-  public static void removePowder(EntityPlayer player, Herb herb, double amount) {
+  public static void removePowder(PlayerEntity player, Herb herb, double amount) {
     ItemStack pouch = getPouch(player);
     if (pouch.isEmpty() || pouch.getItem() == ModItems.creative_pouch) return;
 
@@ -65,7 +65,7 @@ public class PowderInventoryUtil {
     resolveSlots(player, herb);
   }
 
-  public static void resolveSlots(EntityPlayer player, Herb herb) {
+  public static void resolveSlots(PlayerEntity player, Herb herb) {
     if (!player.world.isRemote) return;
 
     Minecraft mc = Minecraft.getMinecraft();

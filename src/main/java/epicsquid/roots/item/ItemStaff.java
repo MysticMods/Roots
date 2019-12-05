@@ -10,22 +10,22 @@ import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.ModelBakery;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.model.ModelBakery;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.UseAction;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -57,16 +57,16 @@ public class ItemStaff extends ItemBase {
 
   @Nonnull
   @Override
-  public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
+  public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, @Nonnull Hand hand) {
     ItemStack stack = player.getHeldItem(hand);
     SpellHandler capability = SpellHandler.fromStack(stack);
     if (player.isSneaking()) {
       capability.nextSlot();
       if (world.isRemote) {
         SpellBase spell = capability.getSelectedSpell();
-        player.sendStatusMessage(new TextComponentTranslation("roots.info.staff.slot_and_spell", capability.getSelectedSlot() + 1, spell == null ? "none" : new TextComponentTranslation("roots.spell." + spell.getName() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))).setStyle(new Style().setColor(TextFormatting.GOLD)), true);
+        player.sendStatusMessage(new TranslationTextComponent("roots.info.staff.slot_and_spell", capability.getSelectedSlot() + 1, spell == null ? "none" : new TranslationTextComponent("roots.spell." + spell.getName() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))).setStyle(new Style().setColor(TextFormatting.GOLD)), true);
       }
-      return new ActionResult<>(EnumActionResult.PASS, player.getHeldItem(hand));
+      return new ActionResult<>(ActionResultType.PASS, player.getHeldItem(hand));
     } else {
       if (capability.getCooldown() <= 0) {
         SpellBase spell = capability.getSelectedSpell();
@@ -84,30 +84,30 @@ public class ItemStaff extends ItemBase {
                   capability.setLastCooldown(event.getCooldown());
                 }
               }
-              return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
+              return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
             }
           } else if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
             player.setActiveHand(hand);
-            return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+            return new ActionResult<>(ActionResultType.SUCCESS, stack);
           }
         }
       }
     }
-    return new ActionResult<>(EnumActionResult.FAIL, player.getHeldItem(hand));
+    return new ActionResult<>(ActionResultType.FAIL, player.getHeldItem(hand));
   }
 
   @Override
-  public void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
+  public void onUsingTick(ItemStack stack, LivingEntity player, int count) {
     SpellHandler capability = SpellHandler.fromStack(stack);
-    if (player instanceof EntityPlayer) {
+    if (player instanceof PlayerEntity) {
       if (capability.getCooldown() <= 0) {
         SpellBase spell = capability.getSelectedSpell();
         if (spell != null) {
           if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
-            if (spell.costsMet((EntityPlayer) player)) {
-              boolean result = spell.cast((EntityPlayer) player, capability.getSelectedModules());
+            if (spell.costsMet((PlayerEntity) player)) {
+              boolean result = spell.cast((PlayerEntity) player, capability.getSelectedModules());
               if (result) {
-                spell.enactTickCosts((EntityPlayer) player);
+                spell.enactTickCosts((PlayerEntity) player);
               }
             }
           }
@@ -117,14 +117,14 @@ public class ItemStaff extends ItemBase {
   }
 
   @Override
-  public void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase entity, int timeLeft) {
+  public void onPlayerStoppedUsing(ItemStack stack, World world, LivingEntity entity, int timeLeft) {
     SpellHandler capability = SpellHandler.fromStack(stack);
     SpellBase spell = capability.getSelectedSpell();
     if (spell != null) {
-      SpellEvent event = new SpellEvent((EntityPlayer) entity, spell);
+      SpellEvent event = new SpellEvent((PlayerEntity) entity, spell);
       MinecraftForge.EVENT_BUS.post(event);
       if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
-        if (!((EntityPlayer) entity).capabilities.isCreativeMode) {
+        if (!((PlayerEntity) entity).capabilities.isCreativeMode) {
           capability.setCooldown(event.getCooldown());
           capability.setLastCooldown(event.getCooldown());
         }
@@ -228,17 +228,17 @@ public class ItemStaff extends ItemBase {
 
   @Nonnull
   @Override
-  public EnumAction getItemUseAction(ItemStack stack) {
+  public UseAction getItemUseAction(ItemStack stack) {
     SpellHandler capability = SpellHandler.fromStack(stack);
     SpellBase spell = capability.getSelectedSpell();
     if (spell != null) {
       if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
-        return EnumAction.BOW;
+        return UseAction.BOW;
       } else {
-        return EnumAction.NONE;
+        return UseAction.NONE;
       }
     }
-    return EnumAction.NONE;
+    return UseAction.NONE;
   }
 
   @SideOnly(Side.CLIENT)

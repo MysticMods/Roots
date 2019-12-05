@@ -5,14 +5,14 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.mysticallib.util.ItemUtil;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
@@ -44,7 +44,7 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
   }
 
   @Override
-  public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+  public CompoundNBT writeToNBT(CompoundNBT compound) {
     compound.setInteger("burnTick", this.burnTick);
     compound.setBoolean("lit", this.lit);
     compound.setTag("handler", inventory.serializeNBT());
@@ -52,7 +52,7 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
   }
 
   @Override
-  public void readFromNBT(NBTTagCompound compound) {
+  public void readFromNBT(CompoundNBT compound) {
     this.burnTick = compound.getInteger("burnTick");
     this.lit = compound.getBoolean("lit");
     inventory.deserializeNBT(compound.getCompoundTag("handler"));
@@ -60,8 +60,8 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
   }
 
   @Override
-  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
-    if (hand != EnumHand.MAIN_HAND) {
+  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull Direction side, float hitX, float hitY, float hitZ) {
+    if (hand != Hand.MAIN_HAND) {
       return false;
     }
     ItemStack stack = player.getHeldItem(hand);
@@ -154,7 +154,7 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
   }
 
   @Override
-  public void breakBlock(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+  public void breakBlock(World world, BlockPos pos, BlockState state, PlayerEntity player) {
     if (!world.isRemote) {
       Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
     }

@@ -12,19 +12,19 @@ import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.types.WeightedRegistry;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.MobEffects;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.potion.Effects;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
+import net.minecraft.world.ServerWorld;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootTable;
 import net.minecraftforge.common.ForgeHooks;
@@ -63,10 +63,10 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
   }
 
   private boolean doHarvest() {
-    List<EntityLiving> entityList = Util.getEntitiesWithinRadius(world, (entity) -> harvestClasses.contains(entity.getClass()), getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z);
+    List<MobEntity> entityList = Util.getEntitiesWithinRadius(world, (entity) -> harvestClasses.contains(entity.getClass()), getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z);
     if (RitualConfig.animalHarvestDoFish) {
       List<BlockPos> waterSourceBlocks = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, (p) -> {
-        IBlockState state = world.getBlockState(p);
+        BlockState state = world.getBlockState(p);
         return (state.getMaterial() == Material.WATER && state.getPropertyKeys().contains(BlockLiquid.LEVEL) && state.getValue(BlockLiquid.LEVEL) == 0);
       });
       WeightedRegistry<AnimalHarvestFishRecipe> recipes = new WeightedRegistry<>(ModRecipes.getFishRecipes());
@@ -84,7 +84,7 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
       }
     }
     if (entityList.isEmpty()) return false;
-    EntityLiving entity = entityList.get(Util.rand.nextInt(entityList.size()));
+    MobEntity entity = entityList.get(Util.rand.nextInt(entityList.size()));
 
     boolean didDrops = false;
 
@@ -95,7 +95,7 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
       dropLoot(entity, looting);
       entity.captureDrops = false;
       if (!ForgeHooks.onLivingDrops(entity, DamageSource.GENERIC, entity.capturedDrops, looting, false)) {
-        for (EntityItem item : entity.capturedDrops) {
+        for (ItemEntity item : entity.capturedDrops) {
           item.motionY = 0;
           item.motionX = 0;
           item.motionZ = 0;
@@ -106,16 +106,16 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
     }
 
     if (didDrops) {
-      entity.addPotionEffect(new PotionEffect(MobEffects.GLOWING, ritual.glowing, 0, false, false));
+      entity.addPotionEffect(new EffectInstance(Effects.GLOWING, ritual.glowing, 0, false, false));
     }
     return didDrops;
   }
 
   private static Method getLootTable = null;
 
-  private ResourceLocation getLootTable(EntityLiving entity) {
+  private ResourceLocation getLootTable(MobEntity entity) {
     if (getLootTable == null) {
-      getLootTable = ObfuscationReflectionHelper.findMethod(EntityLiving.class, "func_184647_J", ResourceLocation.class);
+      getLootTable = ObfuscationReflectionHelper.findMethod(MobEntity.class, "func_184647_J", ResourceLocation.class);
       getLootTable.setAccessible(true);
     }
 
@@ -126,7 +126,7 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
     }
   }
 
-  private void dropLoot(EntityLiving entity, int looting) {
+  private void dropLoot(MobEntity entity, int looting) {
     ResourceLocation resourcelocation = entity.deathLootTable;
 
     if (resourcelocation == null) {
@@ -136,8 +136,8 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
     if (resourcelocation != null) {
       LootTable loottable = entity.world.getLootTableManager().getLootTableFromLocation(resourcelocation);
       entity.deathLootTable = null;
-      FakePlayer fakePlayer = FakePlayerFactory.getMinecraft((WorldServer) entity.world);
-      LootContext context = new LootContext(looting, (WorldServer) entity.world, entity.world.getLootTableManager(), entity, fakePlayer, DamageSource.GENERIC);
+      FakePlayer fakePlayer = FakePlayerFactory.getMinecraft((ServerWorld) entity.world);
+      LootContext context = new LootContext(looting, (ServerWorld) entity.world, entity.world.getLootTableManager(), entity, fakePlayer, DamageSource.GENERIC);
 
       for (ItemStack itemstack : loottable.generateLootForPools(entity.deathLootTableSeed == 0L ? entity.rand : new Random(entity.deathLootTableSeed), context)) {
         entity.entityDropItem(itemstack, 0.0F);

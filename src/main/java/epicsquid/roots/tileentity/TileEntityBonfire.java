@@ -17,24 +17,24 @@ import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.ItemHandlerUtil;
 import epicsquid.roots.util.XPUtil;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemBucket;
-import net.minecraft.item.ItemFlintAndSteel;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.FlintAndSteelItem;
+import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -98,7 +98,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
 
   @Nonnull
   @Override
-  public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+  public CompoundNBT writeToNBT(CompoundNBT tag) {
     super.writeToNBT(tag);
     tag.setTag("handler", inventory.serializeNBT());
     tag.setInteger("burnTime", burnTime);
@@ -112,7 +112,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   }
 
   @Override
-  public void readFromNBT(NBTTagCompound tag) {
+  public void readFromNBT(CompoundNBT tag) {
     super.readFromNBT(tag);
     inventory.deserializeNBT(tag.getCompoundTag("handler"));
     burnTime = tag.getInteger("burnTime");
@@ -128,17 +128,17 @@ public class TileEntityBonfire extends TileBase implements ITickable {
 
   @Nonnull
   @Override
-  public NBTTagCompound getUpdateTag() {
-    return writeToNBT(new NBTTagCompound());
+  public CompoundNBT getUpdateTag() {
+    return writeToNBT(new CompoundNBT());
   }
 
   @Override
-  public SPacketUpdateTileEntity getUpdatePacket() {
-    return new SPacketUpdateTileEntity(getPos(), 0, getUpdateTag());
+  public SUpdateTileEntityPacket getUpdatePacket() {
+    return new SUpdateTileEntityPacket(getPos(), 0, getUpdateTag());
   }
 
   @Override
-  public void onDataPacket(@Nonnull NetworkManager net, SPacketUpdateTileEntity pkt) {
+  public void onDataPacket(@Nonnull NetworkManager net, SUpdateTileEntityPacket pkt) {
     readFromNBT(pkt.getNbtCompound());
   }
 
@@ -168,7 +168,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     }
   }
 
-  private boolean startRitual(@Nullable EntityPlayer player) {
+  private boolean startRitual(@Nullable PlayerEntity player) {
     RitualBase ritual = RitualRegistry.getRitual(this, player);
     validateEntity();
 
@@ -233,7 +233,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   }
 
   @Override
-  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
+  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull Direction side, float hitX, float hitY, float hitZ) {
     if (world.isRemote) return true;
     ItemStack heldItem = player.getHeldItem(hand);
     if (!heldItem.isEmpty()) {
@@ -257,9 +257,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
               }
               if (!player.capabilities.isCreativeMode) {
                 cap.drain(stack, true);
-                if (heldItem.getItem() instanceof ItemBucket) {
+                if (heldItem.getItem() instanceof BucketItem) {
                   player.setHeldItem(hand, new ItemStack(Items.BUCKET));
-                  ((EntityPlayerMP) player).sendAllContents(player.openContainer, player.openContainer.getInventory());
+                  ((ServerPlayerEntity) player).sendAllContents(player.openContainer, player.openContainer.getInventory());
                 }
               }
               break;
@@ -268,7 +268,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         }
       }
       // TODO: Make this a configurable array of items or extensible classes
-      if (heldItem.getItem() instanceof ItemFlintAndSteel) {
+      if (heldItem.getItem() instanceof FlintAndSteelItem) {
         heldItem.damageItem(1, player);
         return startRitual(player);
       } else if (extinguish && burnTime > 0) {
@@ -311,7 +311,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         }
       }
     }
-    if (player.isSneaking() && heldItem.isEmpty() && hand == EnumHand.MAIN_HAND) {
+    if (player.isSneaking() && heldItem.isEmpty() && hand == Hand.MAIN_HAND) {
       resolveLastIngredients();
       if (this.lastUsedIngredients != null) {
         if (player.capabilities.isCreativeMode) {
@@ -320,7 +320,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
             inventory.setStackInSlot(i++, ingredient.getMatchingStacks()[0]);
           }
         } else {
-          IItemHandler inventory = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+          IItemHandler inventory = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP);
           assert inventory != null;
           for (Ingredient ingredient : lastUsedIngredients) {
             for (int i = 0; i < inventory.getSlots(); i++) {
@@ -336,7 +336,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       return true;
     }
 
-    if (heldItem.isEmpty() && hand == EnumHand.MAIN_HAND) {
+    if (heldItem.isEmpty() && hand == Hand.MAIN_HAND) {
       for (int i = 4; i >= 0; i--) {
         if (!inventory.getStackInSlot(i).isEmpty()) {
           ItemStack extracted = inventory.extractItem(i, inventory.getStackInSlot(i).getCount(), false);
@@ -352,14 +352,14 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   }
 
   @Override
-  public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+  public boolean shouldRefresh(World world, BlockPos pos, BlockState oldState, BlockState newState) {
     if (oldState.getBlock() == newState.getBlock() && newState.getBlock() instanceof BlockBonfire) return false;
 
     return super.shouldRefresh(world, pos, oldState, newState);
   }
 
   @Override
-  public void breakBlock(World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, EntityPlayer player) {
+  public void breakBlock(World world, @Nonnull BlockPos pos, @Nonnull BlockState state, PlayerEntity player) {
     if (!world.isRemote) {
       Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
     }
@@ -407,7 +407,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       for (BlockPos.MutableBlockPos pos : BlockPos.getAllInBoxMutable(start, stop)) {
         if (world.getBlockState(pos).getBlock() == Blocks.FIRE) {
           fire = true;
-          if (!world.getBlockState(pos.down()).getBlock().isFireSource(world, pos.down(), EnumFacing.UP)) {
+          if (!world.getBlockState(pos.down()).getBlock().isFireSource(world, pos.down(), Direction.UP)) {
             for (int i = 0; i < 1 + Util.rand.nextInt(3); i++) {
               world.getBlockState(pos).getBlock().randomTick(world, pos, world.getBlockState(pos), Util.rand);
             }
@@ -494,7 +494,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
             this.lastRecipeUsed.postCraft(result, inventory_storage, this);
           }
 
-          EntityItem item = new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 1, getPos().getZ() + 0.5, result);
+          ItemEntity item = new ItemEntity(world, getPos().getX() + 0.5, getPos().getY() + 1, getPos().getZ() + 0.5, result);
           item.setCustomNameTag("bonfire");
           ItemUtil.spawnItem(world, item);
           XPUtil.spawnXP(world, getPos(), this.craftingXP);
@@ -538,7 +538,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       for (int z = -4; z < 5; z++) {
         BlockPos topBlockPos = world.getTopSolidOrLiquidBlock(new BlockPos(pos.getX() + x, pos.getY(), pos.getZ() + z));
         topBlockPos = topBlockPos.subtract(new Vec3i(0, 1, 0));
-        IBlockState topBlockState = world.getBlockState(topBlockPos);
+        BlockState topBlockState = world.getBlockState(topBlockPos);
         if (topBlockState.getMaterial() == Material.SNOW || topBlockState.getMaterial() == Material.ICE) {
           nearbySnowOrIce.add(topBlockPos);
         }
@@ -558,9 +558,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
 
   private void pickupItem() {
     if ((int) this.ticker % 20 == 0 && pickupDelay == 0) {
-      List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class,
+      List<ItemEntity> items = world.getEntitiesWithinAABB(ItemEntity.class,
           new AxisAlignedBB(getPos().getX(), getPos().getY(), getPos().getZ(), getPos().getX() + 1, getPos().getY() + 1, getPos().getZ() + 1));
-      for (EntityItem item : items) {
+      for (ItemEntity item : items) {
         ItemStack stack = item.getItem();
         if (item.getCustomNameTag().equalsIgnoreCase("bonfire")) {
           continue;
@@ -581,7 +581,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     }
   }
 
-  private void insertItemFromPlayerInventory(ItemStack stack, EntityPlayer player, int slot) {
+  private void insertItemFromPlayerInventory(ItemStack stack, PlayerEntity player, int slot) {
     for (int i = 0; i < 5; i++) {
       if (inventory.getStackInSlot(i).isEmpty()) {
         ItemStack toInsert = stack.copy();

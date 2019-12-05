@@ -3,8 +3,8 @@ package epicsquid.roots.item;
 import epicsquid.mysticallib.item.ItemBowBase;
 import epicsquid.roots.init.ModItems;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.EnumRarity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.Rarity;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -21,7 +21,7 @@ public class ItemWildwoodBow extends ItemBowBase implements ILivingRepair {
     this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter() {
       @Override
       @SideOnly(Side.CLIENT)
-      public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+      public float apply(ItemStack stack, @Nullable World worldIn, @Nullable LivingEntity entityIn) {
         if (entityIn == null) {
           return 0.0F;
         } else {
@@ -32,7 +32,7 @@ public class ItemWildwoodBow extends ItemBowBase implements ILivingRepair {
     this.addPropertyOverride(new ResourceLocation("pulling"), new IItemPropertyGetter() {
       @Override
       @SideOnly(Side.CLIENT)
-      public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+      public float apply(ItemStack stack, @Nullable World worldIn, @Nullable LivingEntity entityIn) {
         return entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack ? 1.0F : 0.0F;
       }
     });
@@ -40,8 +40,8 @@ public class ItemWildwoodBow extends ItemBowBase implements ILivingRepair {
 
   @Override
   @SuppressWarnings("deprecation")
-  public EnumRarity getRarity(ItemStack stack) {
-    return EnumRarity.RARE;
+  public Rarity getRarity(ItemStack stack) {
+    return Rarity.RARE;
   }
 
   @Override

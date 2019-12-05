@@ -5,38 +5,38 @@ import epicsquid.roots.config.ElementalSoilConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.network.fx.ElementalSoilTransformFX;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFarmland;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.FarmlandBlock;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class ItemBlockElementalSoil extends ItemBlock {
+public class ItemBlockElementalSoil extends BlockItem {
 
   public ItemBlockElementalSoil(Block block) {
     super(block);
   }
 
   @Override
-  public boolean placeBlockAt(@Nonnull ItemStack stack, @Nonnull EntityPlayer player, World world, @Nonnull BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, @Nonnull IBlockState newState) {
+  public boolean placeBlockAt(@Nonnull ItemStack stack, @Nonnull PlayerEntity player, World world, @Nonnull BlockPos pos, Direction side, float hitX, float hitY, float hitZ, @Nonnull BlockState newState) {
 
     Block oldblock = world.getBlockState(pos.offset(side.getOpposite())).getBlock();
 
-    if (oldblock instanceof BlockFarmland && player.inventory.addItemStackToInventory(new ItemStack(Blocks.DIRT))) {
+    if (oldblock instanceof FarmlandBlock && player.inventory.addItemStackToInventory(new ItemStack(Blocks.DIRT))) {
       pos = pos.offset(side.getOpposite());
     }
     return super.placeBlockAt(stack, player, world, pos, side, hitX, hitY, hitZ, newState);
   }
 
   @Override
-  public boolean onEntityItemUpdate(EntityItem entityItem) {
+  public boolean onEntityItemUpdate(ItemEntity entityItem) {
 
     if (block == ModBlocks.elemental_soil) {
       World world = entityItem.world;
@@ -46,7 +46,7 @@ public class ItemBlockElementalSoil extends ItemBlock {
 
         //Magmatic Soil Crafting
         if (entityItem.isInLava()) {
-          world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY + 0.5, entityItem.posZ,
+          world.spawnEntity(new ItemEntity(world, entityItem.posX, entityItem.posY + 0.5, entityItem.posZ,
               new ItemStack(ModBlocks.elemental_soil_fire, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 0), entityItem);
           entityItem.setDead();
@@ -55,7 +55,7 @@ public class ItemBlockElementalSoil extends ItemBlock {
 
         //Aqueous Soil Crafting
         if (entityItem.isInWater() && entityItem.ticksExisted >= ElementalSoilConfig.WaterSoilDelay) {
-          world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
+          world.spawnEntity(new ItemEntity(world, entityItem.posX, entityItem.posY, entityItem.posZ,
               new ItemStack(ModBlocks.elemental_soil_water, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 1), entityItem);
           entityItem.setDead();
@@ -73,7 +73,7 @@ public class ItemBlockElementalSoil extends ItemBlock {
           }
           if (!found_roof) return super.onEntityItemUpdate(entityItem);
 
-          world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
+          world.spawnEntity(new ItemEntity(world, entityItem.posX, entityItem.posY, entityItem.posZ,
               new ItemStack(ModBlocks.elemental_soil_earth, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 3), entityItem);
           entityItem.setDead();
@@ -86,7 +86,7 @@ public class ItemBlockElementalSoil extends ItemBlock {
           int height = world.getChunk(pos).getHeight(pos);
           if (pos.getY() < height) return super.onEntityItemUpdate(entityItem);
 
-          world.spawnEntity(new EntityItem(world, entityItem.posX, entityItem.posY, entityItem.posZ,
+          world.spawnEntity(new ItemEntity(world, entityItem.posX, entityItem.posY, entityItem.posZ,
               new ItemStack(ModBlocks.elemental_soil_air, count)));
           PacketHandler.sendToAllTracking(new ElementalSoilTransformFX(entityItem.posX, entityItem.posY, entityItem.posZ, 2), entityItem);
           entityItem.setDead();

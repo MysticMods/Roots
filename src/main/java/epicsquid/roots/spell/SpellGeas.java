@@ -5,14 +5,14 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 
@@ -46,21 +46,21 @@ public class SpellGeas extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     boolean foundTarget = false;
     for (int i = 0; i < 4 && !foundTarget; i++) {
       double x = player.posX + player.getLookVec().x * 3.0 * (float) i;
       double y = player.posY + player.getEyeHeight() + player.getLookVec().y * 3.0 * (float) i;
       double z = player.posZ + player.getLookVec().z * 3.0 * (float) i;
-      List<EntityLivingBase> entities = player.world
-          .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 4.0, y - 4.0, z - 4.0, x + 4.0, y + 4.0, z + 4.0));
-      for (EntityLivingBase e : entities) {
+      List<LivingEntity> entities = player.world
+          .getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(x - 4.0, y - 4.0, z - 4.0, x + 4.0, y + 4.0, z + 4.0));
+      for (LivingEntity e : entities) {
         if (e != player && e.getActivePotionEffect(ModPotions.geas) == null) {
           foundTarget = true;
           if (!player.world.isRemote) {
-            e.addPotionEffect(new PotionEffect(ModPotions.geas, duration, 0, false, false));
-            if (e instanceof EntityLiving) {
-              ((EntityLiving) e).setAttackTarget(null);
+            e.addPotionEffect(new EffectInstance(ModPotions.geas, duration, 0, false, false));
+            if (e instanceof MobEntity) {
+              ((MobEntity) e).setAttackTarget(null);
             }
             break;
           }

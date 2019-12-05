@@ -1,7 +1,7 @@
 package epicsquid.roots.recipe;
 
 import net.minecraft.block.BlockPlanks;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 

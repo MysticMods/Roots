@@ -2,7 +2,7 @@ package epicsquid.roots.recipe;
 
 import epicsquid.roots.util.types.WorldPosStatePredicate;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -14,17 +14,17 @@ public class TransmutationAboveBlockRecipe extends TransmutationRecipe {
     this.below = below;
   }
 
-  public TransmutationAboveBlockRecipe(ResourceLocation name, Block startBlock, IBlockState endState, Block below) {
+  public TransmutationAboveBlockRecipe(ResourceLocation name, Block startBlock, BlockState endState, Block below) {
     super(name, startBlock, endState, null);
     this.below = below;
   }
 
-  public TransmutationAboveBlockRecipe(ResourceLocation name, IBlockState startState, IBlockState endState, Block below) {
+  public TransmutationAboveBlockRecipe(ResourceLocation name, BlockState startState, BlockState endState, Block below) {
     super(name, startState, endState, null);
     this.below = below;
   }
 
-  public TransmutationAboveBlockRecipe(ResourceLocation name, IBlockState startState, ItemStack endState, Block below) {
+  public TransmutationAboveBlockRecipe(ResourceLocation name, BlockState startState, ItemStack endState, Block below) {
     super(name, startState, endState, null);
     this.below = below;
   }

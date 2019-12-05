@@ -5,8 +5,8 @@ import java.util.UUID;
 import epicsquid.roots.capability.grove.PlayerGroveCapabilityProvider;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -17,13 +17,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessagePlayerGroveUpdate implements IMessage {
   private UUID id = null;
-  private NBTTagCompound tag = new NBTTagCompound();
+  private CompoundNBT tag = new CompoundNBT();
 
   public MessagePlayerGroveUpdate() {
 
   }
 
-  public MessagePlayerGroveUpdate(UUID id, NBTTagCompound tag) {
+  public MessagePlayerGroveUpdate(UUID id, CompoundNBT tag) {
     this.tag = tag;
     this.id = id;
   }
@@ -46,7 +46,7 @@ public class MessagePlayerGroveUpdate implements IMessage {
     @Override
     public IMessage onMessage(final MessagePlayerGroveUpdate message, final MessageContext ctx) {
       if (message != null) {
-        EntityPlayer player = Minecraft.getMinecraft().player;
+        PlayerEntity player = Minecraft.getMinecraft().player;
         if (player != null) {
           if (player.hasCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null)) {
             player.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null).setData(message.tag);

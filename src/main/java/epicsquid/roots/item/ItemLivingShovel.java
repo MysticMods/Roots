@@ -4,12 +4,13 @@ import epicsquid.mysticallib.item.ItemShovelBase;
 import epicsquid.roots.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.*;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -27,11 +28,11 @@ public class ItemLivingShovel extends ItemShovelBase implements ILivingRepair {
   }
 
   @Override
-  public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+  public ActionResultType onItemUse(PlayerEntity player, World worldIn, BlockPos pos, Hand hand, Direction facing, float hitX, float hitY, float hitZ) {
     ItemStack stack = player.getHeldItem(hand);
     Block block = worldIn.getBlockState(pos).getBlock();
 
-    if (facing != EnumFacing.DOWN && worldIn.isAirBlock(pos.up()) && (block == Blocks.GRASS || block == Blocks.DIRT)) {
+    if (facing != Direction.DOWN && worldIn.isAirBlock(pos.up()) && (block == Blocks.GRASS || block == Blocks.DIRT)) {
       if (!worldIn.isRemote) {
         worldIn.playSound(null, pos, Blocks.GRASS_PATH.getSoundType().getStepSound(), SoundCategory.BLOCKS, 1F, 1F);
         worldIn.setBlockState(pos, Blocks.GRASS_PATH.getDefaultState());
@@ -39,7 +40,7 @@ public class ItemLivingShovel extends ItemShovelBase implements ILivingRepair {
           stack.damageItem(1, player);
         }
       }
-      return EnumActionResult.SUCCESS;
+      return ActionResultType.SUCCESS;
     }
 
     return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);

@@ -1,16 +1,16 @@
 package epicsquid.roots.model.armor;
 
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.inventory.EquipmentSlotType;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ModelWildwoodArmor extends ModelArmorBase {
-  public static Map<EntityEquipmentSlot, ModelWildwoodArmor> SINGLETONS = new HashMap<>();
+  public static Map<EquipmentSlotType, ModelWildwoodArmor> SINGLETONS = new HashMap<>();
 
-  public EntityEquipmentSlot slot;
+  public EquipmentSlotType slot;
   ModelRenderer head1;
   ModelRenderer head2;
   ModelRenderer head3;
@@ -72,7 +72,7 @@ public class ModelWildwoodArmor extends ModelArmorBase {
   ModelRenderer bootL2;
   ModelRenderer bootL3;
 
-  public ModelWildwoodArmor(EntityEquipmentSlot slot) {
+  public ModelWildwoodArmor(EquipmentSlotType slot) {
     super(slot);
     head1 = new ModelRenderer(this, 48, 16);
     head1.addBox(-1F, -8F, -1F, 2, 8, 2);
@@ -525,8 +525,8 @@ public class ModelWildwoodArmor extends ModelArmorBase {
   }
 
   @Nullable
-  public static ModelWildwoodArmor getInstance(EntityEquipmentSlot slot) {
-    if (slot.getSlotType() != EntityEquipmentSlot.Type.ARMOR) {
+  public static ModelWildwoodArmor getInstance(EquipmentSlotType slot) {
+    if (slot.getSlotType() != EquipmentSlotType.Type.ARMOR) {
       return null;
     }
 

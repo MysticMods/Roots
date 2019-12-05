@@ -1,7 +1,7 @@
 package epicsquid.roots.ritual.conditions;
 
 import epicsquid.roots.tileentity.TileEntityBonfire;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.ITextComponent;
 
 import javax.annotation.Nullable;
@@ -19,7 +19,7 @@ public class ConditionWorldTime implements Condition {
 
 
   @Override
-  public boolean checkCondition(TileEntityBonfire tile, EntityPlayer player) {
+  public boolean checkCondition(TileEntityBonfire tile, PlayerEntity player) {
     return tile.getWorld().getWorldTime() % 24000 >= first && tile.getWorld().getWorldTime() % 24000 <= second;
   }
 

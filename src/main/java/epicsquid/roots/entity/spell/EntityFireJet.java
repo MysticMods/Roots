@@ -5,9 +5,9 @@ import java.util.UUID;
 
 import epicsquid.roots.particle.ParticleUtil;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -59,7 +59,7 @@ public class EntityFireJet extends Entity {
       }
     }
     if (this.playerId != null) {
-      EntityPlayer player = world.getPlayerEntityByUUID(this.playerId);
+      PlayerEntity player = world.getPlayerEntityByUUID(this.playerId);
       if (player != null) {
         this.posX = player.posX;
         this.posY = player.posY;
@@ -72,10 +72,10 @@ public class EntityFireJet extends Entity {
           float vx = (float) player.getLookVec().x * 3.0f;
           float vy = (float) player.getLookVec().y * 3.0f;
           float vz = (float) player.getLookVec().z * 3.0f;
-          List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class,
+          List<LivingEntity> entities = world.getEntitiesWithinAABB(LivingEntity.class,
               new AxisAlignedBB(posX + vx * i - 1.5, posY + vy * i - 1.5, posZ + vz * i - 1.5, posX + vx * i + 1.5, posY + vy * i + 1.5, posZ + vz * i + 1.5));
-          for (EntityLivingBase entity : entities) {
-            if (!(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
+          for (LivingEntity entity : entities) {
+            if (!(entity instanceof PlayerEntity && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
                 && entity.getUniqueID().compareTo(player.getUniqueID()) != 0) {
               entity.setFire(4);
               entity.attackEntityFrom((DamageSource.IN_FIRE).causeMobDamage(player), 4.5f);
@@ -89,12 +89,12 @@ public class EntityFireJet extends Entity {
   }
 
   @Override
-  protected void readEntityFromNBT(NBTTagCompound compound) {
+  protected void readEntityFromNBT(CompoundNBT compound) {
     this.playerId = net.minecraft.nbt.NBTUtil.getUUIDFromTag(compound.getCompoundTag("id"));
   }
 
   @Override
-  protected void writeEntityToNBT(NBTTagCompound compound) {
+  protected void writeEntityToNBT(CompoundNBT compound) {
     compound.setTag("id", net.minecraft.nbt.NBTUtil.createUUIDTag(playerId));
   }
 

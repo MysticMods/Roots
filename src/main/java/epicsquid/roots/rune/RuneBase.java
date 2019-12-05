@@ -2,9 +2,9 @@ package epicsquid.roots.rune;
 
 import epicsquid.roots.tileentity.TileEntityWildrootRune;
 import epicsquid.roots.util.RgbColor;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -18,15 +18,15 @@ public abstract class RuneBase {
 
   }
 
-  public void saveToEntity(NBTTagCompound tag) {
+  public void saveToEntity(CompoundNBT tag) {
     tag.setString("rune", getRuneName());
   }
 
-  public void readFromEntity(NBTTagCompound tag) {
+  public void readFromEntity(CompoundNBT tag) {
 
   }
 
-  public abstract void activate(TileEntityWildrootRune entity, EntityPlayer player);
+  public abstract void activate(TileEntityWildrootRune entity, PlayerEntity player);
 
   public boolean isCharged(TileEntityWildrootRune entity) {
     if (incense != null) {

@@ -1,7 +1,7 @@
 package epicsquid.roots.model.armor;
 
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.inventory.EquipmentSlotType;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -9,9 +9,9 @@ import java.util.Map;
 
 @SuppressWarnings("WeakerAccess")
 public class ModelSylvanArmor extends ModelArmorBase {
-  public static Map<EntityEquipmentSlot, ModelSylvanArmor> SINGLETONS = new HashMap<>();
+  public static Map<EquipmentSlotType, ModelSylvanArmor> SINGLETONS = new HashMap<>();
 
-  public EntityEquipmentSlot slot;
+  public EquipmentSlotType slot;
   ModelRenderer head1;
   ModelRenderer head2;
   ModelRenderer head3;
@@ -66,7 +66,7 @@ public class ModelSylvanArmor extends ModelArmorBase {
   ModelRenderer bootL5;
   ModelRenderer bootL6;
 
-  public ModelSylvanArmor(EntityEquipmentSlot slot) {
+  public ModelSylvanArmor(EquipmentSlotType slot) {
     super(slot);
     head1 = new ModelRenderer(this, 32, 0);
     head1.addBox(-3F, 0F, 0F, 6, 4, 2);
@@ -470,8 +470,8 @@ public class ModelSylvanArmor extends ModelArmorBase {
   }
 
   @Nullable
-  public static ModelSylvanArmor getInstance(EntityEquipmentSlot slot) {
-    if (slot.getSlotType() != EntityEquipmentSlot.Type.ARMOR) {
+  public static ModelSylvanArmor getInstance(EquipmentSlotType slot) {
+    if (slot.getSlotType() != EquipmentSlotType.Type.ARMOR) {
       return null;
     }
 

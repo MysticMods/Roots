@@ -4,7 +4,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.block.runes.BlockTrample;
 import epicsquid.roots.init.ModBlocks;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -33,7 +33,7 @@ public class TrampleHandler {
     if (result != null) {
       BlockPos pos = result.getBlockPos();
       World world = event.getWorld();
-      IBlockState state = world.getBlockState(pos);
+      BlockState state = world.getBlockState(pos);
       if (state.getBlock() == ModBlocks.trample_rune) {
         event.setCanceled(true);
       }

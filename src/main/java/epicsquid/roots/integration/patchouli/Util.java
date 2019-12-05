@@ -1,6 +1,6 @@
 package epicsquid.roots.integration.patchouli;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
@@ -26,7 +26,7 @@ public class Util {
      * @param page the page number
      */
     @SideOnly(Side.CLIENT)
-    public static void openBook(World world, EntityPlayer player, ResourceLocation resourceLocation, ResourceLocation entryLocation, int page) {
+    public static void openBook(World world, PlayerEntity player, ResourceLocation resourceLocation, ResourceLocation entryLocation, int page) {
       if (world.isRemote) {
         PatchouliAPI.instance.openBookGUI(resourceLocation);
         SoundEvent sfx = SoundEvent.REGISTRY.getObject(new ResourceLocation("patchouli", "book_open"));

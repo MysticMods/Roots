@@ -1,18 +1,18 @@
 package epicsquid.roots.recipe;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
 
 public class FlowerRecipe {
-  private final IBlockState flower;
+  private final BlockState flower;
   private final ResourceLocation registryName;
   private final int meta;
   private final Block block;
 
-  public FlowerRecipe(ResourceLocation name, IBlockState flower) {
+  public FlowerRecipe(ResourceLocation name, BlockState flower) {
     this.flower = flower;
     this.registryName = name;
     this.meta = -1;
@@ -28,7 +28,7 @@ public class FlowerRecipe {
 
   @Nullable
   @SuppressWarnings("deprecation")
-  public IBlockState getFlower() {
+  public BlockState getFlower() {
     if (flower == null && block != null && meta != -1) {
       return block.getStateFromMeta(meta);
     }

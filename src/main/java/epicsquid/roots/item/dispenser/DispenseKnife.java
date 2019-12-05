@@ -3,20 +3,20 @@ package epicsquid.roots.item.dispenser;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.config.MossConfig;
 import epicsquid.roots.init.ModItems;
-import net.minecraft.block.BlockDispenser;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.dispenser.IBehaviorDispenseItem;
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.BlockState;
 import net.minecraft.dispenser.IBlockSource;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.dispenser.IDispenseItemBehavior;
+import net.minecraft.util.Direction;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ServerWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 
-public class DispenseKnife implements IBehaviorDispenseItem {
+public class DispenseKnife implements IDispenseItemBehavior {
   private static final DispenseKnife INSTANCE = new DispenseKnife();
 
   public static DispenseKnife getInstance() {
@@ -29,16 +29,16 @@ public class DispenseKnife implements IBehaviorDispenseItem {
   @Override
   public ItemStack dispense(IBlockSource source, ItemStack stack) {
     World world = source.getWorld();
-    EnumFacing facing = source.getBlockState().getValue(BlockDispenser.FACING);
+    Direction facing = source.getBlockState().getValue(DispenserBlock.FACING);
     BlockPos target = source.getBlockPos().offset(facing);
-    IBlockState targetState = world.getBlockState(target);
-    IBlockState result = MossConfig.scrapeResult(targetState);
+    BlockState targetState = world.getBlockState(target);
+    BlockState result = MossConfig.scrapeResult(targetState);
 
     if (result != null) {
       world.setBlockState(target, result);
       world.scheduleBlockUpdate(target, result.getBlock(), 1, result.getBlock().tickRate(world));
       ItemUtil.spawnItem(world, source.getBlockPos().add(0, 1, 0), new ItemStack(ModItems.terra_moss));
-      stack.damageItem(1, FakePlayerFactory.getMinecraft((WorldServer) world));
+      stack.damageItem(1, FakePlayerFactory.getMinecraft((ServerWorld) world));
       source.getWorld().playSound(null, source.getBlockPos(), SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
     }
 

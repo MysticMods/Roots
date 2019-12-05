@@ -12,7 +12,7 @@ import epicsquid.roots.network.PacketHandler;
 import epicsquid.roots.potion.PotionGeas;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
-import net.minecraft.potion.Potion;
+import net.minecraft.potion.Effect;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -73,7 +73,7 @@ public class RegistryManager {
   }
 
   @SubscribeEvent
-  public static void registerPotions(RegistryEvent.Register<Potion> event) {
+  public static void registerPotions(RegistryEvent.Register<Effect> event) {
     LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
 
     ModPotions.registerPotions(event);

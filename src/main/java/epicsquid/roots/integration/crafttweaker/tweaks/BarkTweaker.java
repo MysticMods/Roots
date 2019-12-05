@@ -12,7 +12,7 @@ import epicsquid.roots.util.zen.ZenDocAppend;
 import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -34,7 +34,7 @@ public class BarkTweaker {
   @ZenMethod
   public static void addRecipe(String name, IItemStack woodLog, IItemStack bark) {
     ItemStack log = CraftTweakerMC.getItemStack(woodLog);
-    if (!(log.getItem() instanceof ItemBlock)) {
+    if (!(log.getItem() instanceof BlockItem)) {
       CraftTweakerAPI.logError("Provided log " + woodLog + " is not an item block!");
       return;
     }

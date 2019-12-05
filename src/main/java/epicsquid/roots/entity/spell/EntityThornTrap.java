@@ -7,15 +7,15 @@ import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.SpellRoseThorns;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MoverType;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.potion.Effects;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -103,18 +103,18 @@ public class EntityThornTrap extends Entity {
       }
     }
     if (playerId != null) {
-      EntityPlayer player = world.getPlayerEntityByUUID(playerId);
+      PlayerEntity player = world.getPlayerEntityByUUID(playerId);
       if (player != null) {
-        List<EntityLivingBase> entities = world
-            .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 1.5, posY - 1.5, posZ - 1.5, posX + 1.5, posY + 1.5, posZ + 1.5));
+        List<LivingEntity> entities = world
+            .getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(posX - 1.5, posY - 1.5, posZ - 1.5, posX + 1.5, posY + 1.5, posZ + 1.5));
         entities.remove(player);
         if (entities.size() > 0) {
           setDead();
-          for (EntityLivingBase entity : entities) {
-            if (!(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
+          for (LivingEntity entity : entities) {
+            if (!(entity instanceof PlayerEntity && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
               entity.attackEntityFrom(DamageSource.CACTUS.causeMobDamage(player), damage);
-              entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, slownessDuration, slownessAmplifier));
-              entity.addPotionEffect(new PotionEffect(MobEffects.POISON, poisonDuration, poisonAmplifier));
+              entity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, slownessDuration, slownessAmplifier));
+              entity.addPotionEffect(new EffectInstance(Effects.POISON, poisonDuration, poisonAmplifier));
               entity.setLastAttackedEntity(player);
               entity.setRevengeTarget(player);
             }
@@ -140,12 +140,12 @@ public class EntityThornTrap extends Entity {
   }
 
   @Override
-  protected void readEntityFromNBT(NBTTagCompound compound) {
+  protected void readEntityFromNBT(CompoundNBT compound) {
     this.playerId = net.minecraft.nbt.NBTUtil.getUUIDFromTag(compound.getCompoundTag("id"));
   }
 
   @Override
-  protected void writeEntityToNBT(NBTTagCompound compound) {
+  protected void writeEntityToNBT(CompoundNBT compound) {
     compound.setTag("id", net.minecraft.nbt.NBTUtil.createUUIDTag(playerId));
   }
 

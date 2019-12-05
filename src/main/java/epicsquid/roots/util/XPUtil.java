@@ -1,6 +1,6 @@
 package epicsquid.roots.util;
 
-import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -46,9 +46,9 @@ public class XPUtil {
     xp = getExperienceForLevel(xp);
 
     while (xp > 0) {
-      int k = EntityXPOrb.getXPSplit(xp);
+      int k = ExperienceOrbEntity.getXPSplit(xp);
       xp -= k;
-      world.spawnEntity(new EntityXPOrb(world, pos.getX(), pos.getY() + 0.5D, pos.getZ() + 0.5D, k));
+      world.spawnEntity(new ExperienceOrbEntity(world, pos.getX(), pos.getY() + 0.5D, pos.getZ() + 0.5D, k));
     }
   }
 }

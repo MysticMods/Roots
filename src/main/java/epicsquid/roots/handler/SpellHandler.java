@@ -8,7 +8,7 @@ import epicsquid.roots.spell.modules.SpellModule;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.relauncher.Side;
@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class SpellHandler implements INBTSerializable<NBTTagCompound> {
+public class SpellHandler implements INBTSerializable<CompoundNBT> {
 
   private Map<Integer, SpellBase> spells = new Int2ObjectOpenHashMap<>();
   private Map<Integer, List<SpellModule>> spellModules = new Int2ObjectOpenHashMap<>();
@@ -197,8 +197,8 @@ public class SpellHandler implements INBTSerializable<NBTTagCompound> {
   }
 
   @Override
-  public NBTTagCompound serializeNBT() {
-    NBTTagCompound compound = new NBTTagCompound();
+  public CompoundNBT serializeNBT() {
+    CompoundNBT compound = new CompoundNBT();
     for (Map.Entry<Integer, SpellBase> entry : this.spells.entrySet()) {
       compound.setString("spell_" + entry.getKey(), (entry.getValue() == null) ? "" : entry.getValue().getName());
     }
@@ -217,7 +217,7 @@ public class SpellHandler implements INBTSerializable<NBTTagCompound> {
   }
 
   @Override
-  public void deserializeNBT(NBTTagCompound tag) {
+  public void deserializeNBT(CompoundNBT tag) {
     for (int i = 0; i < 5; i++) {
       if (!tag.getString("spell_" + i).isEmpty()) {
         spells.put(i, SpellRegistry.getSpell(tag.getString("spell_" + i)));
@@ -246,7 +246,7 @@ public class SpellHandler implements INBTSerializable<NBTTagCompound> {
     boolean correct = stack.getItem() == ModItems.spell_dust || stack.getItem() == ModItems.staff;
 
     SpellHandler result = new SpellHandler(stack);
-    NBTTagCompound tag = stack.getTagCompound();
+    CompoundNBT tag = stack.getTagCompound();
     if (tag != null && tag.hasKey("spell_holder")) {
       result.deserializeNBT(tag.getCompoundTag("spell_holder"));
     }
@@ -257,9 +257,9 @@ public class SpellHandler implements INBTSerializable<NBTTagCompound> {
     boolean correct = stack.getItem() == ModItems.spell_dust || stack.getItem() == ModItems.staff;
     assert correct;
 
-    NBTTagCompound tag = stack.getTagCompound();
+    CompoundNBT tag = stack.getTagCompound();
     if (tag == null) {
-      tag = new NBTTagCompound();
+      tag = new CompoundNBT();
       stack.setTagCompound(tag);
     }
     tag.setTag("spell_holder", this.serializeNBT());

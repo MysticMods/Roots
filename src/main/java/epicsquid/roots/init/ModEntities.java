@@ -16,7 +16,7 @@ import epicsquid.roots.entity.wild.render.RenderWhiteStag;
 import epicsquid.roots.proxy.ClientProxy;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraft.world.storage.loot.LootTables;
 
 import java.util.Arrays;
 import java.util.List;
@@ -87,6 +87,6 @@ public class ModEntities {
   public static List<ResourceLocation> LOOT_TABLES = Arrays.asList(EntityFairy.LOOT_TABLE, EntityWhiteStag.LOOT_TABLE);
 
   public static void registerLootTables() {
-    LOOT_TABLES.forEach(LootTableList::register);
+    LOOT_TABLES.forEach(LootTables::register);
   }
 }

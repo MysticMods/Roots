@@ -1,11 +1,11 @@
 package epicsquid.roots.entity.item;
 
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class EntityItemMagmaticSoil extends EntityItem {
+public class EntityItemMagmaticSoil extends ItemEntity {
   public EntityItemMagmaticSoil(World worldIn, double x, double y, double z) {
     super(worldIn, x, y, z);
   }

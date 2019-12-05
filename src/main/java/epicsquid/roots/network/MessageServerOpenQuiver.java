@@ -3,9 +3,9 @@ package epicsquid.roots.network;
 import epicsquid.roots.util.PowderInventoryUtil;
 import epicsquid.roots.util.QuiverInventoryUtil;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -33,10 +33,10 @@ public class MessageServerOpenQuiver implements IMessage {
     }
 
     private void handleMessage(MessageServerOpenQuiver message, MessageContext ctx) {
-      EntityPlayerMP player = ctx.getServerHandler().player;
+      ServerPlayerEntity player = ctx.getServerHandler().player;
       ItemStack quiver = QuiverInventoryUtil.getQuiver(player);
       if (!quiver.isEmpty()) {
-        quiver.getItem().onItemRightClick(player.world, player, EnumHand.MAIN_HAND);
+        quiver.getItem().onItemRightClick(player.world, player, Hand.MAIN_HAND);
       }
     }
   }

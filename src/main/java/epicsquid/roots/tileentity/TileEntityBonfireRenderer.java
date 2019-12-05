@@ -7,15 +7,15 @@ import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.client.renderer.model.IBakedModel;
+import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class TileEntityBonfireRenderer extends TileEntitySpecialRenderer<TileEntityBonfire> {
+public class TileEntityBonfireRenderer extends TileEntityRenderer<TileEntityBonfire> {
 
   @Override
   public void render(TileEntityBonfire tem, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
@@ -29,7 +29,7 @@ public class TileEntityBonfireRenderer extends TileEntitySpecialRenderer<TileEnt
 
     for (int i = 0; i < renderItems.size(); i++) {
       GlStateManager.pushMatrix();
-      EntityItem item = new EntityItem(Minecraft.getMinecraft().world, x, y, z, renderItems.get(i));
+      ItemEntity item = new ItemEntity(Minecraft.getMinecraft().world, x, y, z, renderItems.get(i));
       item.hoverStart = 0;
       float shifted = (float) (tem.getTicker() + partialTicks + i * (360.0 / renderItems.size()));
       Random random = new Random();

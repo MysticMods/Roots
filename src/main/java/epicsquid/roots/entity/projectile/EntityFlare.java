@@ -9,11 +9,11 @@ import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualFireStorm;
 import epicsquid.roots.ritual.RitualRegistry;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -49,7 +49,7 @@ public class EntityFlare extends Entity {
   }
 
   @Override
-  protected void readEntityFromNBT(NBTTagCompound compound) {
+  protected void readEntityFromNBT(CompoundNBT compound) {
     getDataManager().set(EntityFlare.value, compound.getFloat("value"));
     getDataManager().setDirty(EntityFlare.value);
     if (compound.hasKey("UUIDmost")) {
@@ -58,7 +58,7 @@ public class EntityFlare extends Entity {
   }
 
   @Override
-  protected void writeEntityToNBT(NBTTagCompound compound) {
+  protected void writeEntityToNBT(CompoundNBT compound) {
     compound.setFloat("value", getDataManager().get(value));
     if (id != null) {
       compound.setLong("UUIDmost", id.getMostSignificantBits());
@@ -81,7 +81,7 @@ public class EntityFlare extends Entity {
     this.posX += this.motionX;
     this.posY += this.motionY;
     this.posZ += this.motionZ;
-    IBlockState state = getEntityWorld().getBlockState(getPosition());
+    BlockState state = getEntityWorld().getBlockState(getPosition());
     if (state.isFullCube() && state.isOpaqueCube()) {
       if (getEntityWorld().isRemote) {
         for (int i = 0; i < 40; i++) {
@@ -90,8 +90,8 @@ public class EntityFlare extends Entity {
               getDataManager().get(value) + rand.nextFloat() * getDataManager().get(value), 40);
         }
       }
-      List<EntityLivingBase> entities = Util
-          .getEntitiesWithinRadius(getEntityWorld(), EntityLivingBase.class, this.getPosition(), (float) (getDataManager().get(value) * 0.125), (float) (getDataManager().get(value) * 0.125), (float) (getDataManager().get(value) * 0.125));
+      List<LivingEntity> entities = Util
+          .getEntitiesWithinRadius(getEntityWorld(), LivingEntity.class, this.getPosition(), (float) (getDataManager().get(value) * 0.125), (float) (getDataManager().get(value) * 0.125), (float) (getDataManager().get(value) * 0.125));
       this.attackWithFire(entities);
       if (world.isAirBlock(getPosition().up())) {
         world.setBlockState(getPosition().up(), ModBlocks.fey_fire.getDefaultState());
@@ -106,8 +106,8 @@ public class EntityFlare extends Entity {
             0.0125f * (rand.nextFloat() - 0.5f), 255, 96, 32, 0.5f * alpha, getDataManager().get(value) + rand.nextFloat() * getDataManager().get(value), 40);
       }
     }
-    List<EntityLivingBase> entities = Util
-        .getEntitiesWithinRadius(getEntityWorld(), EntityLivingBase.class, this.getPosition(), (float) (getDataManager().get(value) * 0.125), (float) (getDataManager().get(value) * 0.125), (float) (getDataManager().get(value) * 0.125));
+    List<LivingEntity> entities = Util
+        .getEntitiesWithinRadius(getEntityWorld(), LivingEntity.class, this.getPosition(), (float) (getDataManager().get(value) * 0.125), (float) (getDataManager().get(value) * 0.125), (float) (getDataManager().get(value) * 0.125));
     if (entities.size() > 0) {
       this.attackWithFire(entities);
       if (getEntityWorld().isRemote) {
@@ -121,9 +121,9 @@ public class EntityFlare extends Entity {
     }
   }
 
-  private void attackWithFire(List<EntityLivingBase> entities) {
-    for (EntityLivingBase target : entities) {
-      if (target instanceof EntityPlayer) continue;
+  private void attackWithFire(List<LivingEntity> entities) {
+    for (LivingEntity target : entities) {
+      if (target instanceof PlayerEntity) continue;
       DamageSource source = ModDamage.wildfireDamage(target.world);
       if (source == null) {
         continue;

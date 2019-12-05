@@ -7,14 +7,14 @@ import epicsquid.roots.network.fx.MessageAcidCloudFX;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
-import net.minecraft.item.EnumDyeColor;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
+import net.minecraft.potion.Effects;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
@@ -50,7 +50,7 @@ public class SpellAcidCloud extends SpellBase {
     addIngredients(
         new ItemStack(Items.SPIDER_EYE),
         new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom)),
-        new ItemStack(Items.DYE, 1, EnumDyeColor.LIME.getDyeDamage()),
+        new ItemStack(Items.DYE, 1, DyeColor.LIME.getDyeDamage()),
         new OreIngredient("blockCactus"),
         new ItemStack(Items.ROTTEN_FLESH)
     );
@@ -58,16 +58,16 @@ public class SpellAcidCloud extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
-      List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class,
+      List<LivingEntity> entities = player.world.getEntitiesWithinAABB(LivingEntity.class,
           new AxisAlignedBB(player.posX - 4.0, player.posY - 1.0, player.posZ - 4.0, player.posX + 4.0, player.posY + 3.0, player.posZ + 4.0));
-      for (EntityLivingBase e : entities) {
-        if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
+      for (LivingEntity e : entities) {
+        if (!(e instanceof PlayerEntity && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
             && !e.getUniqueID().equals(player.getUniqueID())) {
           e.attackEntityFrom(DamageSource.causeMobDamage(player), damage);
           if (SpellConfig.spellFeaturesCategory.acidCloudPoisoningEffect)
-            e.addPotionEffect(new PotionEffect(MobEffects.POISON, poisonDuration, poisonAmplification));
+            e.addPotionEffect(new EffectInstance(Effects.POISON, poisonDuration, poisonAmplification));
           e.setRevengeTarget(player);
           e.setLastAttackedEntity(player);
 

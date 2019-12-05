@@ -6,8 +6,8 @@ import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.block.*;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
@@ -23,23 +23,23 @@ public class Growth {
     AGE_MAP.defaultReturnValue(-1);
 
     // Initialise some vanilla values
-    AGE_PROPERTIES.add(BlockReed.AGE);
-    AGE_PROPERTIES.add(BlockChorusFlower.AGE);
-    AGE_PROPERTIES.add(BlockCactus.AGE);
-    AGE_PROPERTIES.add(BlockBeetroot.BEETROOT_AGE);
-    AGE_PROPERTIES.add(BlockStem.AGE);
-    AGE_PROPERTIES.add(BlockNetherWart.AGE);
-    AGE_PROPERTIES.add(BlockCrops.AGE);
-    AGE_PROPERTIES.add(BlockCocoa.AGE);
+    AGE_PROPERTIES.add(SugarCaneBlock.AGE);
+    AGE_PROPERTIES.add(ChorusFlowerBlock.AGE);
+    AGE_PROPERTIES.add(CactusBlock.AGE);
+    AGE_PROPERTIES.add(BeetrootBlock.BEETROOT_AGE);
+    AGE_PROPERTIES.add(StemBlock.AGE);
+    AGE_PROPERTIES.add(NetherWartBlock.AGE);
+    AGE_PROPERTIES.add(CropsBlock.AGE);
+    AGE_PROPERTIES.add(CocoaBlock.AGE);
 
-    AGE_MAP.put(BlockReed.AGE, 15);
-    AGE_MAP.put(BlockChorusFlower.AGE, 5);
-    AGE_MAP.put(BlockCactus.AGE, 15);
-    AGE_MAP.put(BlockBeetroot.BEETROOT_AGE, 3);
-    AGE_MAP.put(BlockStem.AGE, 7);
-    AGE_MAP.put(BlockNetherWart.AGE, 3);
-    AGE_MAP.put(BlockCrops.AGE, 7);
-    AGE_MAP.put(BlockCocoa.AGE, 2);
+    AGE_MAP.put(SugarCaneBlock.AGE, 15);
+    AGE_MAP.put(ChorusFlowerBlock.AGE, 5);
+    AGE_MAP.put(CactusBlock.AGE, 15);
+    AGE_MAP.put(BeetrootBlock.BEETROOT_AGE, 3);
+    AGE_MAP.put(StemBlock.AGE, 7);
+    AGE_MAP.put(NetherWartBlock.AGE, 3);
+    AGE_MAP.put(CropsBlock.AGE, 7);
+    AGE_MAP.put(CocoaBlock.AGE, 2);
 
     addBlacklist(Blocks.TALLGRASS, Blocks.DOUBLE_PLANT, Blocks.GRASS, Blocks.DOUBLE_PLANT, Blocks.RED_FLOWER, Blocks.YELLOW_FLOWER);
   }
@@ -52,7 +52,7 @@ public class Growth {
     return Util.getBlocksWithinRadius(world, startPosition, radiusX, radiusY, radiusZ, (pos) -> canGrow(world, pos, world.getBlockState(pos)));
   }
 
-  public static boolean canGrow(World world, BlockPos pos, IBlockState state) {
+  public static boolean canGrow(World world, BlockPos pos, BlockState state) {
     if (BLACKLIST.contains(state.getBlock())) return false;
 
     if (CropConfig.getGrowthBlacklist().contains(state.getBlock())) return false;
@@ -68,11 +68,11 @@ public class Growth {
       return world.isAirBlock(pos.up());
     }
 
-    if (state.getBlock() instanceof BlockStem) {
+    if (state.getBlock() instanceof StemBlock) {
       return true;
     }
 
-    if (state.getBlock() instanceof BlockMushroom) {
+    if (state.getBlock() instanceof MushroomBlock) {
       return true;
     }
 

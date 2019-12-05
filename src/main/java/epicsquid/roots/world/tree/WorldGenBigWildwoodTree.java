@@ -2,18 +2,18 @@ package epicsquid.roots.world.tree;
 
 import epicsquid.roots.init.ModBlocks;
 import net.minecraft.block.*;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+import net.minecraft.world.gen.feature.AbstractTreeFeature;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class WorldGenBigWildwoodTree extends WorldGenAbstractTree {
+public class WorldGenBigWildwoodTree extends AbstractTreeFeature {
   private Random rand;
   private World world;
   private BlockPos basePos = BlockPos.ORIGIN;
@@ -83,14 +83,14 @@ public class WorldGenBigWildwoodTree extends WorldGenAbstractTree {
     }
   }
 
-  private void crosSection(BlockPos pos, float p_181631_2_, IBlockState p_181631_3_) {
+  private void crosSection(BlockPos pos, float p_181631_2_, BlockState p_181631_3_) {
     int i = (int) ((double) p_181631_2_ + 0.618D);
 
     for (int j = -i; j <= i; ++j) {
       for (int k = -i; k <= i; ++k) {
         if (Math.pow((double) Math.abs(j) + 0.5D, 2.0D) + Math.pow((double) Math.abs(k) + 0.5D, 2.0D) <= (double) (p_181631_2_ * p_181631_2_)) {
           BlockPos blockpos = pos.add(j, 0, k);
-          IBlockState state = this.world.getBlockState(blockpos);
+          BlockState state = this.world.getBlockState(blockpos);
 
           if (state.getBlock().isAir(state, world, blockpos) || state.getBlock().isLeaves(state, world, blockpos)) {
             this.setBlockAndNotifyAdequately(this.world, blockpos, p_181631_3_);
@@ -135,7 +135,7 @@ public class WorldGenBigWildwoodTree extends WorldGenAbstractTree {
    */
   private void generateLeafNode(BlockPos pos) {
     for (int i = 0; i < this.leafDistanceLimit; ++i) {
-      this.crosSection(pos.up(i), this.leafSize(i), ModBlocks.wildwood_leaves.getDefaultState().withProperty(BlockLeaves.CHECK_DECAY, false));
+      this.crosSection(pos.up(i), this.leafSize(i), ModBlocks.wildwood_leaves.getDefaultState().withProperty(LeavesBlock.CHECK_DECAY, false));
     }
   }
 
@@ -148,8 +148,8 @@ public class WorldGenBigWildwoodTree extends WorldGenAbstractTree {
 
     for (int j = 0; j <= i; ++j) {
       BlockPos blockpos1 = p_175937_1_.add((double) (0.5F + (float) j * f), (double) (0.5F + (float) j * f1), (double) (0.5F + (float) j * f2));
-      BlockLog.EnumAxis blocklog$enumaxis = this.getLogAxis(p_175937_1_, blockpos1);
-      this.setBlockAndNotifyAdequately(this.world, blockpos1, p_175937_3_.getDefaultState().withProperty(BlockLog.LOG_AXIS, blocklog$enumaxis));
+      LogBlock.EnumAxis blocklog$enumaxis = this.getLogAxis(p_175937_1_, blockpos1);
+      this.setBlockAndNotifyAdequately(this.world, blockpos1, p_175937_3_.getDefaultState().withProperty(LogBlock.LOG_AXIS, blocklog$enumaxis));
       affectedBlocks.add(blockpos1);
     }
   }
@@ -169,17 +169,17 @@ public class WorldGenBigWildwoodTree extends WorldGenAbstractTree {
     }
   }
 
-  private BlockLog.EnumAxis getLogAxis(BlockPos p_175938_1_, BlockPos p_175938_2_) {
-    BlockLog.EnumAxis blocklog$enumaxis = BlockLog.EnumAxis.Y;
+  private LogBlock.EnumAxis getLogAxis(BlockPos p_175938_1_, BlockPos p_175938_2_) {
+    LogBlock.EnumAxis blocklog$enumaxis = LogBlock.EnumAxis.Y;
     int i = Math.abs(p_175938_2_.getX() - p_175938_1_.getX());
     int j = Math.abs(p_175938_2_.getZ() - p_175938_1_.getZ());
     int k = Math.max(i, j);
 
     if (k > 0) {
       if (i == k) {
-        blocklog$enumaxis = BlockLog.EnumAxis.X;
+        blocklog$enumaxis = LogBlock.EnumAxis.X;
       } else if (j == k) {
-        blocklog$enumaxis = BlockLog.EnumAxis.Z;
+        blocklog$enumaxis = LogBlock.EnumAxis.Z;
       }
     }
 

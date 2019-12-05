@@ -2,10 +2,10 @@ package epicsquid.roots.recipe.ingredient;
 
 import com.google.gson.JsonObject;
 import epicsquid.roots.init.ModItems;
-import net.minecraft.block.BlockNetherWart;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.block.NetherWartBlock;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -28,12 +28,12 @@ public class SeedBuilder {
           continue;
         }
 
-        if (item instanceof ItemBlock && ((ItemBlock) item).getBlock() instanceof BlockNetherWart) {
+        if (item instanceof BlockItem && ((BlockItem) item).getBlock() instanceof NetherWartBlock) {
           continue;
         }
 
         if (item instanceof ItemSeeds) {
-          item.getSubItems(CreativeTabs.SEARCH, matchingStacks);
+          item.getSubItems(ItemGroup.SEARCH, matchingStacks);
         }
       }
       matchingStacks.add(new ItemStack(ModItems.terra_spores));

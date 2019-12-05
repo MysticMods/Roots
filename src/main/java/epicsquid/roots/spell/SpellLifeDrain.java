@@ -6,13 +6,13 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageLifeDrainAbsorbFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
@@ -58,7 +58,7 @@ public class SpellLifeDrain extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
       boolean foundTarget = false;
       PacketHandler.sendToAllTracking(new MessageLifeDrainAbsorbFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ), player);
@@ -66,16 +66,16 @@ public class SpellLifeDrain extends SpellBase {
         double x = player.posX + player.getLookVec().x * 3.0 * (float) i;
         double y = player.posY + player.getEyeHeight() + player.getLookVec().y * 3.0 * (float) i;
         double z = player.posZ + player.getLookVec().z * 3.0 * (float) i;
-        List<EntityLivingBase> entities = player.world
-            .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 2.0, y - 2.0, z - 2.0, x + 2.0, y + 2.0, z + 2.0));
-        for (EntityLivingBase e : entities) {
-          if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
+        List<LivingEntity> entities = player.world
+            .getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(x - 2.0, y - 2.0, z - 2.0, x + 2.0, y + 2.0, z + 2.0));
+        for (LivingEntity e : entities) {
+          if (!(e instanceof PlayerEntity && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
               && e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
             foundTarget = true;
             if (e.hurtTime <= 0 && !e.isDead) {
               e.attackEntityFrom(DamageSource.WITHER.causeMobDamage(player), witherDamage);
               if (e.rand.nextInt(witherChance) == 0) {
-                e.addPotionEffect(new PotionEffect(MobEffects.WITHER, witherDuration, witherAmplification));
+                e.addPotionEffect(new EffectInstance(Effects.WITHER, witherDuration, witherAmplification));
               }
               e.setRevengeTarget(player);
               e.setLastAttackedEntity(player);

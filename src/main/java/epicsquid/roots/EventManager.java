@@ -18,12 +18,12 @@ import epicsquid.roots.network.MessagePlayerGroveUpdate;
 import epicsquid.roots.network.fx.*;
 import epicsquid.roots.util.Constants;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -56,8 +56,8 @@ public class EventManager {
   @SubscribeEvent
   public static void copyCapabilities(PlayerEvent.Clone event) {
     if (event.isWasDeath()) {
-      EntityPlayer player = event.getOriginal();
-      EntityPlayer newPlayer = event.getEntityPlayer();
+      PlayerEntity player = event.getOriginal();
+      PlayerEntity newPlayer = event.getEntityPlayer();
       IPlayerGroveCapability groveOrig = player.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null);
       IPlayerGroveCapability groveNew = newPlayer.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null);
       if (groveOrig != null && groveNew != null) {
@@ -77,7 +77,7 @@ public class EventManager {
     if (ModRecipes.getRunicShearEntities().contains(event.getObject().getClass())) {
       event.addCapability(RunicShearsCapabilityProvider.IDENTIFIER, new RunicShearsCapabilityProvider());
     }
-    if (event.getObject() instanceof EntityPlayer) {
+    if (event.getObject() instanceof PlayerEntity) {
       event.addCapability(PlayerGroveCapabilityProvider.IDENTIFIER, new PlayerGroveCapabilityProvider());
       event.addCapability(PlayerDataCapabilityProvider.IDENTIFIER, new PlayerDataCapabilityProvider());
     }
@@ -93,12 +93,12 @@ public class EventManager {
 
   @SubscribeEvent
   public static void livingUpdate(LivingUpdateEvent event) {
-    if (event.getEntity() instanceof EntityPlayer) {
-      EntityPlayer player = (EntityPlayer) event.getEntity();
+    if (event.getEntity() instanceof PlayerEntity) {
+      PlayerEntity player = (PlayerEntity) event.getEntity();
       if (player.hasCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null)) {
         IPlayerGroveCapability cap = player.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null);
         if (cap != null && !player.world.isRemote && cap.isDirty()) {
-          PacketHandler.INSTANCE.sendTo(new MessagePlayerGroveUpdate(player.getUniqueID(), cap.getData()), (EntityPlayerMP) player);
+          PacketHandler.INSTANCE.sendTo(new MessagePlayerGroveUpdate(player.getUniqueID(), cap.getData()), (ServerPlayerEntity) player);
           cap.clean();
         }
       }
@@ -115,7 +115,7 @@ public class EventManager {
 
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public static void onDamage(LivingHurtEvent event) {
-    EntityLivingBase entity = event.getEntityLiving();
+    LivingEntity entity = event.getEntityLiving();
     Entity trueSource = event.getSource().getTrueSource();
 
     if (entity.getActivePotionEffect(ModPotions.time_stop) != null) {
@@ -127,22 +127,22 @@ public class EventManager {
 
     World world = entity.getEntityWorld();
 
-    if (entity instanceof EntityPlayer && !world.isRemote) {
-      EntityPlayer player = ((EntityPlayer) entity);
-      PotionEffect effect = player.getActivePotionEffect(ModPotions.petal_shell);
+    if (entity instanceof PlayerEntity && !world.isRemote) {
+      PlayerEntity player = ((PlayerEntity) entity);
+      EffectInstance effect = player.getActivePotionEffect(ModPotions.petal_shell);
       if (effect != null) {
         int newCount = effect.getAmplifier() - 1;
         player.removePotionEffect(ModPotions.petal_shell);
         if (newCount > 0) {
-          player.addPotionEffect(new PotionEffect(ModPotions.petal_shell, 60 * 20, newCount, false, false));
+          player.addPotionEffect(new EffectInstance(ModPotions.petal_shell, 60 * 20, newCount, false, false));
         }
         event.setAmount(0);
         event.setCanceled(true);
         PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ), player);
       }
     }
-    if (trueSource instanceof EntityLivingBase) {
-      EntityLivingBase trueLiving = (EntityLivingBase) trueSource;
+    if (trueSource instanceof LivingEntity) {
+      LivingEntity trueLiving = (LivingEntity) trueSource;
       if (trueLiving.getActivePotionEffect(ModPotions.geas) != null) {
         trueLiving.attackEntityFrom(ModDamage.PSYCHIC_DAMAGE, 3);
         event.setAmount(0);
@@ -153,17 +153,17 @@ public class EventManager {
 
   @SubscribeEvent
   public static void onEntityTarget(LivingSetAttackTargetEvent event) {
-    EntityLivingBase entity = event.getEntityLiving();
-    if (entity.getActivePotionEffect(ModPotions.geas) != null && entity instanceof EntityLiving) {
-      if (((EntityLiving) entity).getAttackTarget() != null) {
-        ((EntityLiving) entity).setAttackTarget(null);
+    LivingEntity entity = event.getEntityLiving();
+    if (entity.getActivePotionEffect(ModPotions.geas) != null && entity instanceof MobEntity) {
+      if (((MobEntity) entity).getAttackTarget() != null) {
+        ((MobEntity) entity).setAttackTarget(null);
       }
     }
   }
 
   @SubscribeEvent
   public static void onEntityTick(LivingUpdateEvent event) {
-    EntityLivingBase entity = event.getEntityLiving();
+    LivingEntity entity = event.getEntityLiving();
     if (entity.getActivePotionEffect(ModPotions.time_stop) != null) {
       entity.removePotionEffect(ModPotions.time_stop);
       event.setCanceled(true);
@@ -171,7 +171,7 @@ public class EventManager {
     if (event.getEntity().getEntityData().hasKey(Constants.LIGHT_DRIFTER_TAG) && !event.getEntity().getEntityWorld().isRemote) {
       event.getEntity().getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_TAG) - 1);
       if (event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_TAG) <= 0) {
-        EntityPlayer player = ((EntityPlayer) event.getEntity());
+        PlayerEntity player = ((PlayerEntity) event.getEntity());
         player.posX = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_X);
         player.posY = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_Y);
         player.posZ = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_Z);

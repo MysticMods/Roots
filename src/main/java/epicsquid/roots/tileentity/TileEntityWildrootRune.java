@@ -7,15 +7,15 @@ import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.rune.RuneBase;
 import epicsquid.roots.rune.RuneRegistry;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.potion.Effects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -28,34 +28,34 @@ public class TileEntityWildrootRune extends TileBase implements ITickable {
   private TileEntityIncenseBurner incenseBurner;
   private static final BlockPos[] INCENSE_POSITIONS = new BlockPos[]{new BlockPos(0, -1, 1), new BlockPos(0, -1, -1), new BlockPos(1, -1, 0), new BlockPos(-1, -1, 0)};
 
-  public final Map<Item, PotionEffect> effectItemMap = new HashMap<>();
+  public final Map<Item, EffectInstance> effectItemMap = new HashMap<>();
 
   public TileEntityWildrootRune() {
     this.incenseBurner = null;
 
-    effectItemMap.put(ModItems.moonglow_leaf, new PotionEffect(MobEffects.SPEED, 2400, 1));
-    effectItemMap.put(ModItems.spirit_herb, new PotionEffect(MobEffects.NIGHT_VISION, 2400, 1));
-    effectItemMap.put(ModItems.infernal_bulb, new PotionEffect(MobEffects.FIRE_RESISTANCE, 2400, 1));
-    effectItemMap.put(ModItems.dewgonia, new PotionEffect(MobEffects.WATER_BREATHING, 3600, 1));
-    effectItemMap.put(ModItems.stalicripe, new PotionEffect(MobEffects.STRENGTH, 1200, 1));
-    effectItemMap.put(ModItems.spirit_herb, new PotionEffect(MobEffects.INVISIBILITY, 2400, 1));
-    effectItemMap.put(ModItems.cloud_berry, new PotionEffect(MobEffects.JUMP_BOOST, 1200, 1));
-    effectItemMap.put(ModItems.pereskia, new PotionEffect(MobEffects.REGENERATION, 200, 1));
+    effectItemMap.put(ModItems.moonglow_leaf, new EffectInstance(Effects.SPEED, 2400, 1));
+    effectItemMap.put(ModItems.spirit_herb, new EffectInstance(Effects.NIGHT_VISION, 2400, 1));
+    effectItemMap.put(ModItems.infernal_bulb, new EffectInstance(Effects.FIRE_RESISTANCE, 2400, 1));
+    effectItemMap.put(ModItems.dewgonia, new EffectInstance(Effects.WATER_BREATHING, 3600, 1));
+    effectItemMap.put(ModItems.stalicripe, new EffectInstance(Effects.STRENGTH, 1200, 1));
+    effectItemMap.put(ModItems.spirit_herb, new EffectInstance(Effects.INVISIBILITY, 2400, 1));
+    effectItemMap.put(ModItems.cloud_berry, new EffectInstance(Effects.JUMP_BOOST, 1200, 1));
+    effectItemMap.put(ModItems.pereskia, new EffectInstance(Effects.REGENERATION, 200, 1));
 
   }
 
   @Override
-  public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+  public CompoundNBT writeToNBT(CompoundNBT compound) {
     return super.writeToNBT(compound);
   }
 
   @Override
-  public void readFromNBT(NBTTagCompound compound) {
+  public void readFromNBT(CompoundNBT compound) {
     super.readFromNBT(compound);
   }
 
   @Override
-  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
+  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull Direction side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
     if (incenseBurner == null) {
       return true;

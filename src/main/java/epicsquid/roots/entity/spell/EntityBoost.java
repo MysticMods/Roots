@@ -3,8 +3,8 @@ package epicsquid.roots.entity.spell;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellSkySoarer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -40,7 +40,7 @@ public class EntityBoost extends Entity {
   @Nullable
   private Entity[] getTargets() {
     if (this.playerId != null) {
-      EntityPlayer player = world.getPlayerEntityByUUID(playerId);
+      PlayerEntity player = world.getPlayerEntityByUUID(playerId);
       if (player != null) {
         Entity riding = player.getLowestRidingEntity();
         if (riding != null) {
@@ -97,7 +97,7 @@ public class EntityBoost extends Entity {
       if (playerId != null) {
         Entity[] result = getTargets();
         if (result != null) {
-          EntityPlayer player = (EntityPlayer) result[0];
+          PlayerEntity player = (PlayerEntity) result[0];
           Entity target = result[1];
           this.posX = player.posX;
           this.posY = player.posY + 1.0;
@@ -116,12 +116,12 @@ public class EntityBoost extends Entity {
   }
 
   @Override
-  protected void readEntityFromNBT(NBTTagCompound compound) {
+  protected void readEntityFromNBT(CompoundNBT compound) {
     this.playerId = net.minecraft.nbt.NBTUtil.getUUIDFromTag(compound.getCompoundTag("id"));
   }
 
   @Override
-  protected void writeEntityToNBT(NBTTagCompound compound) {
+  protected void writeEntityToNBT(CompoundNBT compound) {
     compound.setTag("id", net.minecraft.nbt.NBTUtil.createUUIDTag(playerId));
   }
 

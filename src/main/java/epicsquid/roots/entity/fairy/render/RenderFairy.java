@@ -5,14 +5,14 @@ import epicsquid.roots.entity.wild.render.RenderWhiteStag;
 import epicsquid.roots.model.entity.ModelFairy;
 import epicsquid.roots.model.entity.ModelHolder;
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
-public class RenderFairy extends RenderLiving<EntityFairy> {
-  public RenderFairy(RenderManager renderManager, ModelBase modelBase, float shadowSize) {
+public class RenderFairy extends MobRenderer<EntityFairy> {
+  public RenderFairy(EntityRendererManager renderManager, ModelBase modelBase, float shadowSize) {
     super(renderManager, modelBase, shadowSize);
   }
 
@@ -39,7 +39,7 @@ public class RenderFairy extends RenderLiving<EntityFairy> {
 
   public static class Factory implements IRenderFactory<EntityFairy> {
     @Override
-    public Render<EntityFairy> createRenderFor(RenderManager manager) {
+    public EntityRenderer<EntityFairy> createRenderFor(EntityRendererManager manager) {
       return new RenderFairy(manager, ModelHolder.models.get("fairy"), 0f);
     }
   }

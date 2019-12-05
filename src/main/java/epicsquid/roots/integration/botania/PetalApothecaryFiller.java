@@ -4,7 +4,7 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModBlocks;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -32,7 +32,7 @@ public class PetalApothecaryFiller {
   }
 
   public static void getAdjacentApothecary(World world, BlockPos pos) {
-    for (EnumFacing side : EnumFacing.Plane.HORIZONTAL) {
+    for (Direction side : Direction.Plane.HORIZONTAL) {
       TileEntity te = world.getTileEntity(pos.offset(side));
       fillApothecary(te, world);
     }

@@ -10,11 +10,11 @@ import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 
@@ -62,14 +62,14 @@ public class SpellSanctuary extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(PlayerEntity player, List<SpellModule> modules) {
 
     List<Entity> entities = Util.getEntitiesWithinRadius(player.world, Entity.class, player.getPosition(), radius_x, radius_y, radius_z);
 
     if (entities.size() > 0) {
       for (Entity e : entities) {
         if (e.getUniqueID() != player.getUniqueID()) {
-          if ((e instanceof IProjectile || e instanceof IMob || e.isCreatureType(EnumCreatureType.MONSTER, false)) && (!entitiesBlackList.contains(EntityList.getKey(e).toString()))) {
+          if ((e instanceof IProjectile || e instanceof IMob || e.isCreatureType(EntityClassification.MONSTER, false)) && (!entitiesBlackList.contains(EntityList.getKey(e).toString()))) {
             if (Math.pow((e.posX - player.posX), 2) + Math.pow((e.posY - player.posY), 2) + Math.pow((e.posZ - player.posZ), 2) < 9.0f) {
               e.motionX = velocity * (e.posX - player.posX);
               e.motionY = velocity * (e.posY - player.posY);
