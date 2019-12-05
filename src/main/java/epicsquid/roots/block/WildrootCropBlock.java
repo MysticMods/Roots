@@ -1,4 +1,4 @@
-package epicsquid.roots.block;
+/*package epicsquid.roots.block;
 
 import javax.annotation.Nonnull;
 
@@ -13,22 +13,22 @@ public class WildrootCropBlock extends BlockCropBase {
     super(name, plantType);
   }
 
-  /**
+  *//**
    * Gets the seed to drop for the crop
-   */
+   *//*
   @Override
   @Nonnull
   public Item getSeed() {
     return ModItems.wildroot;
   }
 
-  /**
+  *//**
    * Gets the crop to drop for the plant
-   */
+   *//*
   @Override
   @Nonnull
   public Item getCrop() {
     return ModItems.wildroot;
   }
 
-}
+}*/

@@ -1,13 +1,10 @@
 package epicsquid.roots.block.groves;
 
-import epicsquid.mysticallib.particle.particles.ParticleLeafArc;
-import epicsquid.mysticallib.proxy.ClientProxy;
-import epicsquid.mysticallib.util.Util;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -20,7 +17,7 @@ public class WildGroveStoneBlock extends GroveStoneBlock {
 
   @Override
   public void randomTick(World world, BlockPos pos, BlockState state, Random random) {
-    this.updateTick(world, pos, state, random);
+    //this.updateTick(world, pos, state, random);
 
     /*if (!GeneralConfig.EnableGroveStoneEnvironment) return;
 
@@ -78,7 +75,7 @@ public class WildGroveStoneBlock extends GroveStoneBlock {
   @Override
   @OnlyIn(Dist.CLIENT)
   public void randomDisplayTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-    if (stateIn.getValue(VALID)) {
+    if (stateIn.get(VALID)) {
       for (int i = -2; i <= 2; ++i) {
         for (int j = -2; j <= 2; ++j) {
           if (i > -2 && i < 2 && j == -1) {
@@ -89,8 +86,7 @@ public class WildGroveStoneBlock extends GroveStoneBlock {
               if (!worldIn.isAirBlock(pos.add(i / 2, 0, j / 2))) {
                 break;
               }
-              ClientProxy.particleRenderer.spawnParticle(worldIn, Util.getLowercaseClassName(ParticleLeafArc.class), (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, (i + rand.nextDouble() - 0.05) * 0.04, -0.0001, (j + rand.nextFloat() - 0.05) * 0.04,
-                  100, (153 / 255.0) + rand.nextDouble() * 0.05, (111 / 255.0) + rand.nextDouble() * 0.05, 22 / 255.0, 0.385, 0.117 + rand.nextDouble() * 0.05, 1, rand.nextDouble() + 0.5, rand.nextDouble() * 2);
+              //ClientProxy.particleRenderer.spawnParticle(worldIn, Util.getLowercaseClassName(ParticleLeafArc.class), (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, (i + rand.nextDouble() - 0.05) * 0.04, -0.0001, (j + rand.nextFloat() - 0.05) * 0.04,                  100, (153 / 255.0) + rand.nextDouble() * 0.05, (111 / 255.0) + rand.nextDouble() * 0.05, 22 / 255.0, 0.385, 0.117 + rand.nextDouble() * 0.05, 1, rand.nextDouble() + 0.5, rand.nextDouble() * 2);
             }
           }
         }

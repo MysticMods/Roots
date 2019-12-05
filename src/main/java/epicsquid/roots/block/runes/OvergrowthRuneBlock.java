@@ -1,25 +1,22 @@
 package epicsquid.roots.block.runes;
 
-import javax.annotation.Nonnull;
+import epicsquid.roots.tileentity.TileEntityWildrootRune;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockReader;
+
 import javax.annotation.Nullable;
 
-import epicsquid.mysticallib.block.BlockTEBase;
-import epicsquid.roots.rune.RuneRegistry;
-import epicsquid.roots.tileentity.TileEntityWildrootRune;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
+public class OvergrowthRuneBlock extends Block {
 
-public class OvergrowthRuneBlock extends BlockTEBase {
-
-  public OvergrowthRuneBlock(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
-    super(mat, type, hardness, name, teClass);
+  public OvergrowthRuneBlock(Properties properties) {
+    super(properties);
   }
 
-  @Override
   @Nullable
-  public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
+  @Override
+  public TileEntity createTileEntity(BlockState state, IBlockReader world) {
     return new TileEntityWildrootRune();
   }
 }

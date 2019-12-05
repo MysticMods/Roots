@@ -1,6 +1,9 @@
-package epicsquid.roots.block;
+// TODO:
+
+/*package epicsquid.roots.block;
 
 import epicsquid.mysticallib.block.BlockBase;
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.BlockState;
@@ -13,7 +16,7 @@ import net.minecraft.world.IBlockAccess;
 
 import javax.annotation.Nonnull;
 
-public class RunedObsidianBlock extends BlockBase {
+public class RunedObsidianBlock extends Block {
   public RunedObsidianBlock(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
     super(mat, type, hardness, name);
     setResistance(5000f);
@@ -27,4 +30,4 @@ public class RunedObsidianBlock extends BlockBase {
 
     return super.canEntityDestroy(state, world, pos, entity);
   }
-}
+}*/

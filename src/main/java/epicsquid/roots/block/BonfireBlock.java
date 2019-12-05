@@ -1,112 +1,60 @@
 package epicsquid.roots.block;
 
-import epicsquid.mysticallib.block.BlockTEBase;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import epicsquid.roots.util.types.BlockPosDimension;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public class BonfireBlock extends BlockTEBase {
+public class BonfireBlock extends Block {
 
-  public static PropertyBool BURNING = PropertyBool.create("burning");
+  public static BooleanProperty BURNING = BooleanProperty.create("burning");
 
-  public BonfireBlock(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
-    super(mat, type, hardness, name, teClass);
-    setDefaultState(blockState.getBaseState().withProperty(BURNING, false));
+  public BonfireBlock(Properties properties) {
+    super(properties);
   }
 
-  @Override
-  public boolean isFullCube(@Nonnull BlockState state) {
-    return false;
-  }
+  // TODO: Light
+  // TODO: Voxel shape
 
-  @Override
-  public boolean isOpaqueCube(@Nonnull BlockState state) {
-    return false;
-  }
-
-  @Override
+  /*@Override
   public int getLightValue(BlockState state, IBlockAccess world, BlockPos pos) {
     if (state.getValue(BURNING))
       return 15;
     else
       return 0;
-  }
+  }*/
 
-  @Override
+  /*@Override
   @Nonnull
   public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, BlockState state, BlockPos pos, Direction face) {
     return BlockFaceShape.BOWL;
-  }
-
-  @Nonnull
-  @Override
-  public AxisAlignedBB getBoundingBox(@Nonnull BlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
-    return new AxisAlignedBB(-0.125, 0, -0.125, 1.125, 0.25, 1.125);
-  }
-
-  //Concerning the blockstate --------------------
-  @Nonnull
-  @Override
-  protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, BURNING);
-  }
-
-  @Nonnull
-  @Override
-  public BlockState getStateForPlacement(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull Direction facing, float hitX, float hitY, float hitZ, int meta, @Nonnull LivingEntity placer, Hand hand) {
-    return this.getDefaultState().withProperty(BURNING, false);
-  }
+  }*/
 
   public static void setState(boolean burning, World world, BlockPos pos) {
-    if (burning) world.setBlockState(pos, world.getBlockState(pos).withProperty(BURNING, true), 3);
-    else world.setBlockState(pos, world.getBlockState(pos).withProperty(BURNING, false), 3);
+    if (burning) world.setBlockState(pos, world.getBlockState(pos).with(BURNING, true), 3);
+    else world.setBlockState(pos, world.getBlockState(pos).with(BURNING, false), 3);
   }
 
+  // TODO
 
-  @Nonnull
-  @Override
-  public BlockState getStateFromMeta(int meta) {
-    return this.getDefaultState().withProperty(BURNING, meta == 1);
-  }
-
-  @Override
-  public int getMetaFromState(BlockState state) {
-    return state.getValue(BURNING) ? 1 : 0;
-  }
-
-  @Override
+/*  @Override
   @OnlyIn(Dist.CLIENT)
   public void randomDisplayTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-    if (stateIn.getValue(BURNING)) {
+    if (stateIn.get(BURNING)) {
       worldIn.playSound((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.5F, 1.0F, false);
     }
-  }
+  }*/
 
   @Override
   public boolean hasComparatorInputOverride(BlockState state) {
@@ -130,7 +78,7 @@ public class BonfireBlock extends BlockTEBase {
       TileEntityBonfire bon = (TileEntityBonfire) te;
       boolean lit = bon.getBurnTime() != 0;
 
-      BlockPosDimension pdos = new BlockPosDimension(pos, worldIn.provider.getDimension());
+      BlockPosDimension pdos = new BlockPosDimension(pos, worldIn.getDimension().getType().getId());
       RitualBase ritual = ritualCache.get(pdos);
       if (ritual == null || !ritual.isRitualRecipe(bon, null)) {
         ritual = RitualRegistry.getRitual(bon, null);
@@ -163,10 +111,5 @@ public class BonfireBlock extends BlockTEBase {
 
     // Empty, no items in it
     return 0;
-  }
-
-  @Override
-  public void breakBlock(World worldIn, BlockPos pos, BlockState state) {
-    super.breakBlock(worldIn, pos, state);
   }
 }

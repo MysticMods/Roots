@@ -11,7 +11,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.TallGrassBlock;
 import net.minecraft.block.DoublePlantBlock;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.BooleanProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
@@ -39,7 +39,7 @@ import java.util.Random;
 public class GroveStoneBlock extends BlockBase {
   public static final PropertyEnum<Half> HALF = PropertyEnum.create("half", Half.class);
   public static final PropertyDirection FACING = PropertyDirection.create("facing", (facing) -> facing == Direction.NORTH || facing == Direction.EAST);
-  public static final PropertyBool VALID = PropertyBool.create("valid");
+  public static final BooleanProperty VALID = BooleanProperty.create("valid");
 
   public GroveStoneBlock(@Nonnull String name) {
     super(Material.ROCK, SoundType.STONE, 2.5f, name);

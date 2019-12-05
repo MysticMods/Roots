@@ -1,4 +1,6 @@
-package epicsquid.roots.block;
+// TODO: Directly copy this from fire
+
+/*package epicsquid.roots.block;
 
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.block.IBlock;
@@ -88,9 +90,9 @@ public class WildFireBlock extends FireBlock implements IBlock, IModeledObject, 
   @Override
   public void onEntityCollision(World worldIn, BlockPos pos, BlockState state, Entity entityIn) {
     // TODO: Maybe make it not affect immunity to fire; but it's FEY fire.
-    /*if (entityIn.isImmuneToFire()) {
+    *//*if (entityIn.isImmuneToFire()) {
       return;
-    }*/
+    }*//*
 
     if (!EntityUtil.isHostile(entityIn)) {
       return;
@@ -148,4 +150,4 @@ public class WildFireBlock extends FireBlock implements IBlock, IModeledObject, 
       }
     }
   }
-}
+}*/

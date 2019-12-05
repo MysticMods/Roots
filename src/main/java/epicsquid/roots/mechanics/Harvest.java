@@ -127,7 +127,8 @@ public class Harvest {
     NonNullList<ItemStack> drops = NonNullList.create();
     // check dimension
     Harvest.add(seed, world.getDimension().getType().getId(), pos, state);
-    state.getBlock().getDrops(drops, world, pos, state, 0);
+    // TODO:
+/*    state.getBlock().getDrops(drops, world, pos, state, 0);*/
     // Requires a loot context
     ForgeEventFactory.fireBlockHarvesting(drops, world, pos, state, 0, 1.0f, false, player);
     world.setBlockState(pos, newState);

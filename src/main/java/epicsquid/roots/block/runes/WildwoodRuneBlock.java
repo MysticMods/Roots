@@ -1,34 +1,28 @@
 package epicsquid.roots.block.runes;
 
-import javax.annotation.Nonnull;
+import epicsquid.roots.tileentity.TileEntityWildrootRune;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockReader;
+
 import javax.annotation.Nullable;
 
-import epicsquid.mysticallib.block.BlockTEBase;
-import epicsquid.roots.init.ModBlocks;
-import epicsquid.roots.tileentity.TileEntityWildrootRune;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
+public class WildwoodRuneBlock extends Block {
 
-import java.util.Random;
 
-public class WildwoodRuneBlock extends BlockTEBase {
-
-  public WildwoodRuneBlock(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
-    super(mat, type, hardness, name, teClass);
+  public WildwoodRuneBlock(Properties properties) {
+    super(properties);
   }
 
-  @Override
   @Nullable
-  public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
+  @Override
+  public TileEntity createTileEntity(BlockState state, IBlockReader world) {
     return new TileEntityWildrootRune();
   }
 
-  @Override
-  public Item getItemDropped(BlockState state, Random rand, int fortune) {
-    return Item.getItemFromBlock(ModBlocks.wildwood_log);
-  }
+  // TODO: @Override
+  //public Item getItemDropped(BlockState state, Random rand, int fortune) {
+  //  return Item.getItemFromBlock(ModBlocks.wildwood_log);
+  //}
 }

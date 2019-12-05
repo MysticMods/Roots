@@ -1,71 +1,33 @@
 package epicsquid.roots.block;
 
-import epicsquid.mysticallib.block.BlockBase;
-import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.particle.ParticleUtil;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.item.Items;
-import net.minecraft.item.Item;
-import net.minecraft.util.Direction;
-
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public class FeyLightBlock extends BlockBase {
-  public FeyLightBlock(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
+public class FeyLightBlock extends Block {
+  public FeyLightBlock(Properties properties) {
+    super(properties);
+  }
+/*  public FeyLightBlock(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
     super(mat, type, hardness, name);
     this.setLightLevel(1.0f);
     this.setLightOpacity(0);
 
     // This prevents this from being registered as an itemblock
     this.setItemBlock(null);
-  }
+  }*/
 
-  @Override
-  public BlockFaceShape getBlockFaceShape(final IBlockAccess worldIn, final BlockState state, final BlockPos pos, final Direction face) {
-    return BlockFaceShape.UNDEFINED;
-  }
+  // TODO: Voxel
 
   @Override
   public BlockRenderType getRenderType(final BlockState state) {
     return BlockRenderType.INVISIBLE;
   }
 
-  @Override
-  public AxisAlignedBB getBoundingBox(final BlockState state, final IBlockAccess source, final BlockPos pos) {
-    return new AxisAlignedBB(0.33, 0.33, 0.33, 0.66, 0.66, 0.66);
-  }
+  // TODO: Visual tick
 
-  @Override
-  public AxisAlignedBB getCollisionBoundingBox(final BlockState state, final IBlockAccess worldIn, final BlockPos pos) {
-    return null;
-  }
-
-  @Override
-  public boolean isFullCube(final BlockState state) {
-    return false;
-  }
-
-  @Override
-  public boolean isOpaqueCube(final BlockState state) {
-    return false;
-  }
-
-  @OnlyIn(Dist.CLIENT)
+/*  @OnlyIn(Dist.CLIENT)
   @Override
   public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
     List<Float> reds = new ArrayList<Float>();
@@ -95,11 +57,13 @@ public class FeyLightBlock extends BlockBase {
     for (int i = 0; i < 2; i++) {
       ParticleUtil.spawnParticleGlow(world, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, (random.nextFloat() - 0.5f) * 0.003f, 0f, (random.nextFloat() - 0.5f) * 0.003f, r, g, b, 0.25f, 3.0f, 240);
     }
-  }
+  }*/
 
-  @Override
+  // TODO: Loot table
+
+/*  @Override
   public Item getItemDropped(BlockState state, Random rand, int fortune) {
     return Items.AIR;
-  }
+  }*/
 }
 

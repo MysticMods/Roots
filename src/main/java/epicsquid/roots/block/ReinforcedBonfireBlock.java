@@ -1,4 +1,4 @@
-package epicsquid.roots.block;
+/*package epicsquid.roots.block;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -28,4 +28,4 @@ public class ReinforcedBonfireBlock extends BonfireBlock {
 
     return super.canEntityDestroy(state, world, pos, entity);
   }
-}
+}*/
