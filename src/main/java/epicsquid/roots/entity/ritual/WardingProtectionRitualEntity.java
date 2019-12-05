@@ -4,6 +4,7 @@ import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.ritual.RitualWardingProtection;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -14,12 +15,20 @@ import java.util.List;
 public class WardingProtectionRitualEntity extends BaseRitualEntity {
   private RitualWardingProtection ritual;
 
-  public WardingProtectionRitualEntity(World worldIn) {
+  public WardingProtectionRitualEntity(EntityType<?> entityTypeIn, World worldIn) {
+    super(entityTypeIn, worldIn);
+    ritual = (RitualWardingProtection) RitualRegistry.ritual_warding_protection;
+  }
+
+/*  public WardingProtectionRitualEntity(World worldIn) {
     super(worldIn);
     this.setInvisible(true);
     this.setSize(1, 1);
+  }*/
+
+  @Override
+  protected void registerData() {
     getDataManager().register(lifetime, RitualRegistry.ritual_warding_protection.getDuration() + 20);
-    ritual = (RitualWardingProtection) RitualRegistry.ritual_warding_protection;
   }
 
   @Override

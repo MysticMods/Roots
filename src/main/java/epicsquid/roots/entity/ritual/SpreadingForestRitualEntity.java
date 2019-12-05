@@ -1,27 +1,18 @@
 package epicsquid.roots.entity.ritual;
 
-import com.google.common.collect.Lists;
-import epicsquid.mysticallib.util.ConfigUtil;
-import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.Roots;
-import epicsquid.roots.config.GeneralConfig;
-import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.ritual.RitualSpreadingForest;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nullable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @SuppressWarnings("deprecation")
@@ -33,10 +24,14 @@ public class SpreadingForestRitualEntity extends BaseRitualEntity {
 
   private static int SAPLING_OREDICT = -1;
 
-  public SpreadingForestRitualEntity(World worldIn) {
-    super(worldIn);
-    getDataManager().register(lifetime, RitualRegistry.ritual_spreading_forest.getDuration() + 20);
+  public SpreadingForestRitualEntity(EntityType<?> entityTypeIn, World worldIn) {
+    super(entityTypeIn, worldIn);
     ritual = (RitualSpreadingForest) RitualRegistry.ritual_spreading_forest;
+  }
+
+  @Override
+  protected void registerData() {
+    getDataManager().register(lifetime, RitualRegistry.ritual_spreading_forest.getDuration() + 20);
   }
 
   private boolean canTwoByTwo(World world, BlockPos pos1, int offsetX, int offsetZ) {
@@ -56,17 +51,18 @@ public class SpreadingForestRitualEntity extends BaseRitualEntity {
     // TODO: Add an additional whitelist block
     IPlantable plantable;
     if (plantableState == null || !(plantableState.getBlock() instanceof IPlantable)) {
-      plantable = (IPlantable) Blocks.SAPLING;
+      plantable = (IPlantable) Blocks.OAK_SAPLING;
     } else {
       plantable = (IPlantable) plantableState.getBlock();
     }
     return world.isAirBlock(pos.up()) && block.canSustainPlant(state, world, pos, Direction.UP, plantable);
   }
 
+
   @Override
   public void tick() {
     super.tick();
-    if (SAPLING_OREDICT == -1) {
+/*    if (SAPLING_OREDICT == -1) {
       SAPLING_OREDICT = OreDictionary.getOreID("treeSapling");
     }
 
@@ -224,6 +220,6 @@ public class SpreadingForestRitualEntity extends BaseRitualEntity {
           Roots.logger.error("'Sapling' at " + pos.toString() + " is not IGrowable!");
         }
       }
-    }
+    }*/
   }
 }

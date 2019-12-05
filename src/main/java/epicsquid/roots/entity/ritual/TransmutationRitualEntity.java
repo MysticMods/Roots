@@ -10,6 +10,8 @@ import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.ritual.RitualTransmutation;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntityType;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -19,10 +21,18 @@ public class TransmutationRitualEntity extends BaseRitualEntity {
   private Set<TransmutationRecipe> recipes = new HashSet<>();
   private RitualTransmutation ritual;
 
-  public TransmutationRitualEntity(World worldIn) {
-    super(worldIn);
-    this.getDataManager().register(lifetime, RitualRegistry.ritual_transmutation.getDuration() + 20);
+  public TransmutationRitualEntity(EntityType<?> entityTypeIn, World worldIn) {
+    super(entityTypeIn, worldIn);
     ritual = (RitualTransmutation) RitualRegistry.ritual_transmutation;
+  }
+
+/*  public TransmutationRitualEntity(World worldIn) {
+    super(worldIn);
+  }*/
+
+  @Override
+  protected void registerData() {
+    this.getDataManager().register(lifetime, RitualRegistry.ritual_transmutation.getDuration() + 20);
   }
 
   @Override
@@ -53,7 +63,8 @@ public class TransmutationRitualEntity extends BaseRitualEntity {
       if (eligiblePositions.isEmpty()) return;
       BlockPos pos = eligiblePositions.get(Util.rand.nextInt(eligiblePositions.size()));
       transmuteBlock(world, pos);
-      PacketHandler.sendToAllTracking(new MessageOvergrowthEffectFX(pos.getX(), pos.getY(), pos.getZ()), this);
+      // TODO: When packets are in
+      //PacketHandler.sendToAllTracking(new MessageOvergrowthEffectFX(pos.getX(), pos.getY(), pos.getZ()), this);
     }
   }
 
@@ -71,7 +82,7 @@ public class TransmutationRitualEntity extends BaseRitualEntity {
 
     if (recipe.itemOutput()) {
       world.setBlockState(pos, Blocks.AIR.getDefaultState());
-      ItemUtil.spawnItem(world, pos, recipe.getEndStack().copy());
+      InventoryHelper.spawnItemStack(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, recipe.getEndStack().copy());
     } else {
       world.setBlockState(pos, recipe.getEndState());
     }

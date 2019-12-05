@@ -4,24 +4,37 @@ import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualPurity;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.EntityUtil;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.monster.ZombieVillagerEntity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PurityRitualEntity extends BaseRitualEntity {
   private RitualPurity ritual;
 
-  public PurityRitualEntity(World worldIn) {
-    super(worldIn);
-    getDataManager().register(lifetime, RitualRegistry.ritual_purity.getDuration() + 20);
+  public PurityRitualEntity(EntityType<?> entityTypeIn, World worldIn) {
+    super(entityTypeIn, worldIn);
     ritual = (RitualPurity) RitualRegistry.ritual_purity;
   }
+
+/*  public PurityRitualEntity(World worldIn) {
+    super(worldIn);
+  }*/
+
+  @Override
+  protected void registerData() {
+    getDataManager().register(lifetime, RitualRegistry.ritual_purity.getDuration() + 20);
+  }
+
+  public static Field zombieConversion = ObfuscationReflectionHelper.findField(ZombieVillagerEntity.class, "field_82234_d");
 
   @Override
   public void tick() {
@@ -48,7 +61,10 @@ public class PurityRitualEntity extends BaseRitualEntity {
       for (LivingEntity e : entities) {
         if (EntityUtil.isHostile(e)) {
           if (e instanceof ZombieVillagerEntity && ((ZombieVillagerEntity)e).isConverting()) {
-            ((ZombieVillagerEntity)e).conversionTime -= ritual.zombie_count;
+            try {
+              zombieConversion.set(e, (int) zombieConversion.get(e) - ritual.zombie_count);
+            } catch (IllegalAccessException e1) {
+            }
             e.extinguish();
           }
           continue;
@@ -56,7 +72,7 @@ public class PurityRitualEntity extends BaseRitualEntity {
 
         List<Effect> toRemove = new ArrayList<>();
         for (EffectInstance potionEffect : e.getActivePotionEffects()) {
-          if (potionEffect.getPotion().isBadEffect()) {
+          if (!potionEffect.getPotion().isBeneficial()) {
             toRemove.add(potionEffect.getPotion());
           }
         }
@@ -66,7 +82,7 @@ public class PurityRitualEntity extends BaseRitualEntity {
         e.extinguish();
         if (world.isRemote) {
           for (float i = 0; i < 8; i++) {
-            ParticleUtil.spawnParticleStar(world, (float) e.posX + 0.5f * (rand.nextFloat() - 0.5f), (float) e.posY + e.height / 2.5f + (rand.nextFloat() - 0.5f), (float) e.posZ + 0.5f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), 0.01875f * (rand.nextFloat()), 0.125f * (rand.nextFloat() - 0.5f), 100, 255, 100, 1.0f * alpha, 1.0f + 2.0f * rand.nextFloat(), 40);
+            ParticleUtil.spawnParticleStar(world, (float) e.posX + 0.5f * (rand.nextFloat() - 0.5f), (float) e.posY + e.getHeight() / 2.5f + (rand.nextFloat() - 0.5f), (float) e.posZ + 0.5f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), 0.01875f * (rand.nextFloat()), 0.125f * (rand.nextFloat() - 0.5f), 100, 255, 100, 1.0f * alpha, 1.0f + 2.0f * rand.nextFloat(), 40);
           }
         }
       }

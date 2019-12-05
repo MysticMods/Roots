@@ -3,6 +3,7 @@ package epicsquid.roots.entity.ritual;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualHealingAura;
 import epicsquid.roots.ritual.RitualRegistry;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -12,10 +13,14 @@ import java.util.List;
 public class HealingAuraRitualEntity extends BaseRitualEntity {
   private RitualHealingAura ritual;
 
-  public HealingAuraRitualEntity(World worldIn) {
-    super(worldIn);
-    getDataManager().register(lifetime, RitualRegistry.ritual_healing_aura.getDuration() + 20);
+  public HealingAuraRitualEntity(EntityType<?> entityTypeIn, World worldIn) {
+    super(entityTypeIn, worldIn);
     ritual = (RitualHealingAura) RitualRegistry.ritual_healing_aura;
+  }
+
+  @Override
+  protected void registerData() {
+    getDataManager().register(lifetime, RitualRegistry.ritual_healing_aura.getDuration() + 20);
   }
 
   @Override
@@ -44,7 +49,7 @@ public class HealingAuraRitualEntity extends BaseRitualEntity {
         if (world.isRemote) {
           for (float i = 0; i < 8; i++) {
             ParticleUtil
-                .spawnParticleStar(world, (float) e.posX + 0.5f * (rand.nextFloat() - 0.5f), (float) e.posY + e.height / 2.5f + (rand.nextFloat() - 0.5f),
+                .spawnParticleStar(world, (float) e.posX + 0.5f * (rand.nextFloat() - 0.5f), (float) e.posY + e.getHeight() / 2.5f + (rand.nextFloat() - 0.5f),
                     (float) e.posZ + 0.5f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), 0.01875f * (rand.nextFloat()),
                     0.125f * (rand.nextFloat() - 0.5f), 100, 255, 100, 1.0f * alpha, 1.0f + 2.0f * rand.nextFloat(), 40);
           }

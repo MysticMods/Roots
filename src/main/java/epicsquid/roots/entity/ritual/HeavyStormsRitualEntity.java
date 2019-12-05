@@ -5,6 +5,7 @@ import java.util.List;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualHeavyStorms;
 import epicsquid.roots.ritual.RitualRegistry;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -12,10 +13,14 @@ import net.minecraft.world.World;
 public class HeavyStormsRitualEntity extends BaseRitualEntity {
   private RitualHeavyStorms ritual;
 
-  public HeavyStormsRitualEntity(World worldIn) {
-    super(worldIn);
-    getDataManager().register(lifetime, RitualRegistry.ritual_heavy_storms.getDuration() + 20);
+  public HeavyStormsRitualEntity(EntityType<?> entityTypeIn, World worldIn) {
+    super(entityTypeIn, worldIn);
     ritual = (RitualHeavyStorms) RitualRegistry.ritual_heavy_storms;
+  }
+
+  @Override
+  protected void registerData() {
+    getDataManager().register(lifetime, RitualRegistry.ritual_heavy_storms.getDuration() + 20);
   }
 
   @Override
@@ -62,7 +67,7 @@ public class HeavyStormsRitualEntity extends BaseRitualEntity {
           if (world.isRemote) {
             for (float i = 0; i < 24; i++) {
               ParticleUtil
-                  .spawnParticleGlow(world, (float) e.posX + 0.5f * (rand.nextFloat() - 0.5f), (float) e.posY + e.height / 2.5f + (rand.nextFloat() - 0.5f),
+                  .spawnParticleGlow(world, (float) e.posX + 0.5f * (rand.nextFloat() - 0.5f), (float) e.posY + e.getHeight() / 2.5f + (rand.nextFloat() - 0.5f),
                       (float) e.posZ + 0.5f * (rand.nextFloat() - 0.5f), 0.0625f * (rand.nextFloat() - 0.5f), 0.009375f * (rand.nextFloat()),
                       0.0625f * (rand.nextFloat() - 0.5f), 50, 50, 255, 0.25f * alpha, 2.0f + 4.0f * rand.nextFloat(), 80);
             }
