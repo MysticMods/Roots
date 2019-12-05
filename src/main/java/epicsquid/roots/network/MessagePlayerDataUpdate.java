@@ -1,3 +1,4 @@
+/*
 package epicsquid.roots.network;
 
 import java.util.UUID;
@@ -59,4 +60,4 @@ public class MessagePlayerDataUpdate implements IMessage {
       return null;
     }
   }
-}
+}*/

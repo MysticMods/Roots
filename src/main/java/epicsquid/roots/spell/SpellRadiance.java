@@ -1,24 +1,10 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.init.ModDamage;
-import epicsquid.roots.init.ModItems;
-import epicsquid.roots.network.fx.MessageRadianceBeamFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.oredict.OreIngredient;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SpellRadiance extends SpellBase {
@@ -43,20 +29,22 @@ public class SpellRadiance extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
-        new OreIngredient("dustGlowstone"),
+/*        new OreIngredient("dustGlowstone"),
         new OreIngredient("torch"),
         new ItemStack(Items.DYE, 1, 11),
         new ItemStack(ModItems.cloud_berry),
-        new ItemStack(ModItems.pereskia)
+        new ItemStack(ModItems.pereskia)*/
     );
   }
 
+  // TODO: EVERYTHING
+
   @Override
   public boolean cast(PlayerEntity player, List<SpellModule> modules) {
-    if (!player.world.isRemote && player.ticksExisted % 2 == 0) {
-      RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0),
+    //if (!player.world.isRemote && player.ticksExisted % 2 == 0) {
+/*      RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0),
           player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)));
       Vec3d direction = player.getLookVec();
       ArrayList<Vec3d> positions = new ArrayList<Vec3d>();
@@ -144,7 +132,7 @@ public class SpellRadiance extends SpellBase {
           }
         }
       }
-    }
+    }*/
     return true;
   }
 

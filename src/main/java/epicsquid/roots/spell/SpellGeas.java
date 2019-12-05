@@ -9,9 +9,9 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
@@ -37,7 +37,7 @@ public class SpellGeas extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new ItemStack(Item.getItemFromBlock(Blocks.WEB)),
+        new ItemStack(Item.getItemFromBlock(Blocks.COBWEB)),
         new ItemStack(Items.LEAD),
         new ItemStack(Items.CARROT_ON_A_STICK),
         new ItemStack(ModItems.terra_spores),

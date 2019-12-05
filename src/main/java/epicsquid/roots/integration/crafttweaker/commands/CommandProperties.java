@@ -1,4 +1,4 @@
-package epicsquid.roots.integration.crafttweaker.commands;
+/*package epicsquid.roots.integration.crafttweaker.commands;
 
 import com.google.common.base.Enums;
 import com.google.common.base.Optional;
@@ -106,4 +106,4 @@ public class CommandProperties extends CraftTweakerCommand {
       }
     }
   }
-}
+}*/

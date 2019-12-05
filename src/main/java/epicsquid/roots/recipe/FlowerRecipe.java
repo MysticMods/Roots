@@ -29,9 +29,9 @@ public class FlowerRecipe {
   @Nullable
   @SuppressWarnings("deprecation")
   public BlockState getFlower() {
-    if (flower == null && block != null && meta != -1) {
+/*    if (flower == null && block != null && meta != -1) {
       return block.getStateFromMeta(meta);
-    }
+    }*/
     return flower;
   }
 

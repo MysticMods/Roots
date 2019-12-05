@@ -10,9 +10,9 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.List;
 
@@ -21,17 +21,21 @@ import java.util.List;
 public class TrampleHandler {
   @SubscribeEvent
   public static void onTrample(BlockEvent.FarmlandTrampleEvent event) {
-    List<BlockPos> nearbyRune = Util.getBlocksWithinRadius(event.getWorld(), event.getPos(), TrampleBlock.SAFE_RANGE_X, TrampleBlock.SAFE_RANGE_Y, TrampleBlock.SAFE_RANGE_Z, ModBlocks.trample_rune);
+    // TODO: Should be resolved by modifying ModBlocks
+
+    /*List<BlockPos> nearbyRune = Util.getBlocksWithinRadius(event.getWorld(), event.getPos(), TrampleBlock.SAFE_RANGE_X, TrampleBlock.SAFE_RANGE_Y, TrampleBlock.SAFE_RANGE_Z, ModBlocks.trample_rune);
     if (!nearbyRune.isEmpty()) {
       event.setCanceled(true);
-    }
+    }*/
   }
 
-  @SubscribeEvent(priority= EventPriority.HIGHEST)
-  public static void onBucketUse (FillBucketEvent event) {
+  // TODO: Replace this with better logic for moisturizing
+
+  @SubscribeEvent(priority = EventPriority.HIGHEST)
+  public static void onBucketUse(FillBucketEvent event) {
     RayTraceResult result = event.getTarget();
     if (result != null) {
-      BlockPos pos = result.getBlockPos();
+      BlockPos pos = new BlockPos(result.getHitVec());
       World world = event.getWorld();
       BlockState state = world.getBlockState(pos);
       if (state.getBlock() == ModBlocks.trample_rune) {
@@ -40,8 +44,8 @@ public class TrampleHandler {
     }
   }
 
-  @SubscribeEvent(priority=EventPriority.HIGHEST)
-  public static void onFluidPlaceBlock (BlockEvent.FluidPlaceBlockEvent event) {
+  @SubscribeEvent(priority = EventPriority.HIGHEST)
+  public static void onFluidPlaceBlock(BlockEvent.FluidPlaceBlockEvent event) {
     if (event.getOriginalState().getBlock() == ModBlocks.trample_rune) {
       event.setNewState(event.getOriginalState());
     }

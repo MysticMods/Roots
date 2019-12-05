@@ -1,3 +1,4 @@
+/*
 package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
@@ -73,4 +74,4 @@ public class MessageFrostTouchFX implements IMessage {
     }
   }
 
-}
+}*/

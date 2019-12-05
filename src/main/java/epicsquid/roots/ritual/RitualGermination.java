@@ -6,12 +6,10 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualGermination extends RitualBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(6400);
@@ -33,13 +31,14 @@ public class RitualGermination extends RitualBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addCondition(new ConditionItems(
         new ItemStack(ModItems.spirit_herb),
         new ItemStack(ModItems.wildroot),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
+        null, null, null
+/*        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
         new ItemStack(Items.DYE, 1, 15),
-        new OreIngredient("rootsBark")
+        new OreIngredient("rootsBark")*/
     ));
     addCondition(new ConditionStandingStones(3, 2));
     setIcon(ModItems.ritual_germination);

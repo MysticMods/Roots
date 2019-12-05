@@ -1,4 +1,4 @@
-package epicsquid.roots.network;
+/*package epicsquid.roots.network;
 
 import epicsquid.roots.network.fx.*;
 import net.minecraftforge.fml.relauncher.Side;
@@ -55,4 +55,4 @@ public class PacketHandler {
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageRunicShearsFX.MessageHolder.class, MessageRunicShearsFX.class, Dist.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageFrosLandsProgressFX.MessageHolder.class, MessageFrosLandsProgressFX.class, Dist.CLIENT);
   }
-}
+}*/

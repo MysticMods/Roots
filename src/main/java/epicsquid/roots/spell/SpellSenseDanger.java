@@ -1,16 +1,12 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
@@ -37,11 +33,11 @@ public class SpellSenseDanger extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new OreIngredient("nuggetGold"),
+/*        new OreIngredient("nuggetGold"),
         new ItemStack(Items.COMPASS),
         new ItemStack(Items.SPIDER_EYE),
         new OreIngredient("rootsBark"),
-        new ItemStack(ModItems.aubergine)
+        new ItemStack(ModItems.aubergine)*/
     );
   }
 

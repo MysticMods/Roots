@@ -4,11 +4,9 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
@@ -26,13 +24,13 @@ public class SpellSecondWind extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
-        new ItemStack(ModItems.dewgonia),
-        new OreIngredient("sugarcane"),
+        new ItemStack(ModItems.dewgonia)
+/*        new OreIngredient("sugarcane"),
         new ItemStack(Items.CLAY_BALL),
         new ItemStack(Items.GLASS_BOTTLE),
-        new OreIngredient("ingotIron")
+        new OreIngredient("ingotIron")*/
     );
   }
 

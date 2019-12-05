@@ -1,4 +1,4 @@
-package epicsquid.roots.integration.crafttweaker.tweaks;
+/*package epicsquid.roots.integration.crafttweaker.tweaks;
 
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.block.IBlock;
@@ -125,4 +125,4 @@ public class FlowerTweaker {
       return String.format("Recipe to produce %s:%s with FlowerGrowth", block, meta);
     }
   }
-}
+}*/

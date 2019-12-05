@@ -9,12 +9,12 @@ package epicsquid.roots.gui;
 
 import javax.annotation.Nullable;
 
-import epicsquid.roots.gui.client.GuiPouch;
-import epicsquid.roots.gui.client.GuiQuiver;
-import epicsquid.roots.gui.client.GuiFeyCrafter;
-import epicsquid.roots.gui.container.ContainerPouch;
-import epicsquid.roots.gui.container.ContainerQuiver;
-import epicsquid.roots.gui.container.ContainerFeyCrafter;
+import epicsquid.roots.gui.client.PouchScreen;
+import epicsquid.roots.gui.client.QuiverScreen;
+import epicsquid.roots.gui.client.FeyCrafterScreen;
+import epicsquid.roots.gui.container.PouchContainer;
+import epicsquid.roots.gui.container.QuiverContainer;
+import epicsquid.roots.gui.container.FeyCrafterContainer;
 import epicsquid.roots.tileentity.TileEntityFeyCrafter;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -33,13 +33,13 @@ public class GuiHandler implements IGuiHandler {
   public Object getServerGuiElement(int id, PlayerEntity player, World world, int x, int y, int z) {
     switch (id) {
       case POUCH_ID:
-        return new ContainerPouch(player);
+        return new PouchContainer(player);
       case QUIVER_ID:
-        return new ContainerQuiver(player);
+        return new QuiverContainer(player);
       case CRAFTER_ID:
         TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
         if (te instanceof TileEntityFeyCrafter) {
-          return new ContainerFeyCrafter(player, (TileEntityFeyCrafter) te);
+          return new FeyCrafterContainer(player, (TileEntityFeyCrafter) te);
         }
       default:
         return null;
@@ -51,13 +51,13 @@ public class GuiHandler implements IGuiHandler {
   public Object getClientGuiElement(int id, PlayerEntity player, World world, int x, int y, int z) {
     switch (id) {
       case POUCH_ID:
-        return new GuiPouch(new ContainerPouch(player));
+        return new PouchScreen(new PouchContainer(player));
       case QUIVER_ID:
-        return new GuiQuiver(new ContainerQuiver(player));
+        return new QuiverScreen(new QuiverContainer(player));
       case CRAFTER_ID:
         TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
         if (te instanceof TileEntityFeyCrafter) {
-          return new GuiFeyCrafter(new ContainerFeyCrafter(player, (TileEntityFeyCrafter) te));
+          return new FeyCrafterScreen(new FeyCrafterContainer(player, (TileEntityFeyCrafter) te));
         }
       default:
         return null;

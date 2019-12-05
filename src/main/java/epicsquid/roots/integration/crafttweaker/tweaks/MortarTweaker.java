@@ -1,4 +1,4 @@
-package epicsquid.roots.integration.crafttweaker.tweaks;
+/*package epicsquid.roots.integration.crafttweaker.tweaks;
 
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
@@ -166,4 +166,4 @@ public class MortarTweaker {
       return String.format("ChangeSpellRecipe to change spell %s", spell);
     }
   }
-}
+}*/

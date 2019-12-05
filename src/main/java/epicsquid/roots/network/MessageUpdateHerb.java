@@ -1,3 +1,4 @@
+/*
 package epicsquid.roots.network;
 
 import epicsquid.roots.api.Herb;
@@ -42,4 +43,4 @@ public class MessageUpdateHerb implements IMessage {
       return null;
     }
   }
-}
+}*/

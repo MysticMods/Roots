@@ -1,19 +1,17 @@
 package epicsquid.roots.event.handlers;
 
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.handler.QuiverHandler;
 import epicsquid.roots.item.QuiverItem;
-import epicsquid.roots.network.MessageServerTryPickupArrows;
 import epicsquid.roots.util.QuiverInventoryUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -25,7 +23,7 @@ public class SneakHandler {
   @SubscribeEvent
   @OnlyIn(Dist.CLIENT)
   public static void onPlayerSneak(TickEvent.ClientTickEvent event) {
-    Minecraft mc = Minecraft.getMinecraft();
+    Minecraft mc = Minecraft.getInstance();
     if (mc.player == null) return;
 
     if (lastSneak != mc.player.isSneaking() && !lastSneak) {
@@ -39,8 +37,10 @@ public class SneakHandler {
 
       QuiverHandler handler = QuiverHandler.getHandler(quiver);
 
-      MessageServerTryPickupArrows packet = new MessageServerTryPickupArrows();
-      PacketHandler.INSTANCE.sendToServer(packet);
+      // TODO: When packets are handled
+
+      //MessageServerTryPickupArrows packet = new MessageServerTryPickupArrows();
+      //PacketHandler.INSTANCE.sendToServer(packet);
     }
 
     lastSneak = mc.player.isSneaking();

@@ -1,7 +1,5 @@
 package epicsquid.roots.spell;
 
-import epicsquid.roots.config.SpellConfig;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +16,7 @@ public class SpellRegistry {
   }
 
   public static void preInit() {
-    spellRegistry.put(SpellWildfire.spellName, SpellWildfire.instance);
+/*    spellRegistry.put(SpellWildfire.spellName, SpellWildfire.instance);
     SpellWildfire.instance.setDisabled(SpellConfig.disableSpellsCategory.disableWildFire);
     spellRegistry.put(SpellSanctuary.spellName, SpellSanctuary.instance);
     SpellSanctuary.instance.setDisabled(SpellConfig.disableSpellsCategory.disableSanctuary);
@@ -67,14 +65,14 @@ public class SpellRegistry {
     spellRegistry.put(SpellGroveSupplication.spellName, SpellGroveSupplication.instance);
     SpellGroveSupplication.instance.setDisabled(false);
     spellRegistry.put(SpellFairySupplication.spellName, SpellFairySupplication.instance);
-    SpellFairySupplication.instance.setDisabled(false);
+    SpellFairySupplication.instance.setDisabled(false);*/
   }
 
-  public static void init () {
+  public static void init() {
     spellRegistry.values().forEach(SpellBase::init);
   }
 
-  public static void finalise () {
+  public static void finalise() {
     spellRegistry.values().forEach(SpellBase::finalise);
   }
 }

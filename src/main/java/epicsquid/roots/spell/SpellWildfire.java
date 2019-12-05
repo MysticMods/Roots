@@ -1,16 +1,10 @@
 package epicsquid.roots.spell;
 
 import epicsquid.roots.entity.spell.FireJetEntity;
-import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
@@ -28,23 +22,24 @@ public class SpellWildfire extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
-        new ItemStack(Items.DYE, 1, 14),
+/*        new ItemStack(Items.DYE, 1, 14),
         new ItemStack(Items.COAL, 1, 1),
         new OreIngredient("gunpowder"),
         new ItemStack(ModItems.infernal_bulb),
-        new ItemStack(Item.getItemFromBlock(Blocks.TNT))
+        new ItemStack(Item.getItemFromBlock(Blocks.TNT))*/
     );
   }
 
   @Override
   public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
-      FireJetEntity fireJet = new FireJetEntity(player.world);
+      // TODO: Do this properly
+      FireJetEntity fireJet = new FireJetEntity(null, player.world);
       fireJet.setPlayer(player.getUniqueID());
       fireJet.setPosition(player.posX, player.posY, player.posZ);
-      player.world.spawnEntity(fireJet);
+      player.world.addEntity(fireJet);
     }
     return true;
   }

@@ -1,6 +1,5 @@
 package epicsquid.roots.ritual;
 
-import epicsquid.roots.config.RitualConfig;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.entity.player.PlayerEntity;
 
@@ -40,7 +39,7 @@ public class RitualRegistry {
 
   public static void preInit() {
     // TODO: Move all of these ritual name declarations as static members
-    addRitual(ritual_animal_harvest = new RitualAnimalHarvest("ritual_animal_harvest", RitualConfig.disableRitualCategory.disableAnimalHarvest));
+/*    addRitual(ritual_animal_harvest = new RitualAnimalHarvest("ritual_animal_harvest", RitualConfig.disableRitualCategory.disableAnimalHarvest));
     addRitual(ritual_divine_protection = new RitualDivineProtection("ritual_divine_protection", RitualConfig.disableRitualCategory.disableDivineProtection));
     addRitual(ritual_fire_storm = new RitualFireStorm("ritual_fire_storm", RitualConfig.disableRitualCategory.disableFireStorm));
     addRitual(ritual_flower_growth = new RitualFlowerGrowth("ritual_flower_growth", RitualConfig.disableRitualCategory.disableFlowerGrowth));
@@ -57,10 +56,10 @@ public class RitualRegistry {
     addRitual(ritual_transmutation = new RitualTransmutation("ritual_transmutation", RitualConfig.disableRitualCategory.disableTransmutation));
     addRitual(ritual_warding_protection = new RitualWardingProtection("ritual_warding_protection", RitualConfig.disableRitualCategory.disableWardingProtection));
     addRitual(ritual_wild_growth = new RitualWildGrowth("ritual_wild_growth", RitualConfig.disableRitualCategory.disableWildGrowth));
-    addRitual(ritual_windwall = new RitualWindwall("ritual_windwall", RitualConfig.disableRitualCategory.disableWindwall));
+    addRitual(ritual_windwall = new RitualWindwall("ritual_windwall", RitualConfig.disableRitualCategory.disableWindwall));*/
   }
 
-  public static void init () {
+  public static void init() {
     ritualRegistry.values().forEach(RitualBase::init);
   }
 
@@ -68,7 +67,7 @@ public class RitualRegistry {
     ritualRegistry.put(ritual.getName(), ritual);
   }
 
-  public static void finalise () {
+  public static void finalise() {
     ritualRegistry.values().forEach(RitualBase::finalise);
   }
 }

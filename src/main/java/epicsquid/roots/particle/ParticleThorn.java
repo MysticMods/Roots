@@ -27,8 +27,8 @@ public class ParticleThorn extends ParticleBase {
       this.colorB = this.colorB / 255.0f;
     }
     this.initAlpha = (float) data[4];
-    this.setRBGColorF(colorR, colorG, colorB);
-    this.particleMaxAge = (int) data[0];
+    this.setColor(colorR, colorG, colorB);
+    this.setMaxAge((int) data[0]);
     this.particleScale = (float) data[5];
     this.initScale = (float) data[5];
     this.motionX = vx;
@@ -43,15 +43,15 @@ public class ParticleThorn extends ParticleBase {
     return 255;
   }
 
-  @Override
+/*  @Override
   public boolean shouldDisableDepth() {
     return true;
-  }
+  }*/
 
   @Override
-  public void onUpdate() {
-    super.onUpdate();
-    float lifeCoeff = (float) this.particleAge / (float) this.particleMaxAge;
+  public void tick() {
+    super.tick();
+    float lifeCoeff = (float) this.age / (float) this.maxAge;
     this.particleScale = initScale - initScale * lifeCoeff;
     this.particleAlpha = (1.0f - lifeCoeff) * initAlpha;
   }

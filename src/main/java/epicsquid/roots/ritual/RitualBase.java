@@ -1,9 +1,5 @@
 package epicsquid.roots.ritual;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
-
 import epicsquid.roots.Roots;
 import epicsquid.roots.block.BonfireBlock;
 import epicsquid.roots.entity.ritual.BaseRitualEntity;
@@ -22,6 +18,9 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
 
 public abstract class RitualBase {
   protected static int OFFERTORY_RADIUS = 6;
@@ -95,7 +94,7 @@ public abstract class RitualBase {
 
   public boolean canFire(TileEntityBonfire tileEntityBonfire, @Nullable PlayerEntity player) {
     BlockState state = tileEntityBonfire.getWorld().getBlockState(tileEntityBonfire.getPos());
-    if (state.getValue(BonfireBlock.BURNING)) {
+    if (state.get(BonfireBlock.BURNING)) {
       return false;
     }
 
@@ -125,12 +124,11 @@ public abstract class RitualBase {
         return null;
       }
       ritual.setPosition(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
-      world.spawnEntity(ritual);
+      world.addEntity(ritual);
       return ritual;
     } else if (pastRituals.size() > 0) {
       for (BaseRitualEntity ritual : pastRituals) {
         ritual.getDataManager().set(BaseRitualEntity.lifetime, getDuration() + 20);
-        ritual.getDataManager().setDirty(BaseRitualEntity.lifetime);
         // TODO:
         // return ritual; ???
       }
@@ -146,7 +144,7 @@ public abstract class RitualBase {
     return name;
   }
 
-  public abstract void init ();
+  public abstract void init();
 
   @SuppressWarnings("unchecked")
   public List<ItemStack> getRecipe() {
@@ -172,14 +170,14 @@ public abstract class RitualBase {
     return Collections.EMPTY_LIST;
   }
 
-  public void finalise () {
+  public void finalise() {
     doFinalise();
     validateProperties();
   }
 
   public abstract void doFinalise();
 
-  public void validateProperties () {
+  public void validateProperties() {
     List<String> values = properties.finalise();
     if (!values.isEmpty()) {
       StringJoiner join = new StringJoiner(",");
@@ -188,7 +186,7 @@ public abstract class RitualBase {
     }
   }
 
-  public boolean finalised () {
+  public boolean finalised() {
     return finalised;
   }
 

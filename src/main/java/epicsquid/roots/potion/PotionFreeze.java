@@ -1,4 +1,4 @@
-package epicsquid.roots.potion;
+/*package epicsquid.roots.potion;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
@@ -70,4 +70,4 @@ public class PotionFreeze extends Effect {
     Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
     return super.getStatusIconIndex();
   }
-}
+}*/

@@ -1,19 +1,17 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.network.fx.MessageHarvestCompleteFX;
-import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.mechanics.Harvest;
+import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.block.*;
-import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.block.Blocks;
-import net.minecraft.item.Items;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.state.IProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 
@@ -38,17 +36,17 @@ public class SpellHarvest extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
         new ItemStack(Items.GOLDEN_HOE),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),
+        /*        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),*/
         new ItemStack(ModItems.wildewheet),
         new ItemStack(Items.BEETROOT_SEEDS),
         new ItemStack(Items.WHEAT_SEEDS)
     );
   }
 
-  private static List<Block> skipBlocks = Arrays.asList(Blocks.BEDROCK, Blocks.GRASS, Blocks.DIRT, Blocks.STONE, Blocks.TALLGRASS, Blocks.WATER, Blocks.LAVA, Blocks.DOUBLE_PLANT, Blocks.MELON_STEM, Blocks.PUMPKIN_STEM);
+  private static List<Block> skipBlocks = Arrays.asList(Blocks.BEDROCK, Blocks.GRASS, Blocks.DIRT, Blocks.STONE, Blocks.WATER, Blocks.LAVA, Blocks.MELON_STEM, Blocks.PUMPKIN_STEM);
 
   @Override
   public boolean cast(PlayerEntity player, List<SpellModule> modules) {
@@ -64,11 +62,11 @@ public class SpellHarvest extends SpellBase {
 
           if (skipBlocks.contains(block)) return false;
 
-          if (state.getBlock() == Blocks.PUMPKIN || state.getBlock() == Blocks.MELON_BLOCK) {
+          if (state.getBlock() == Blocks.PUMPKIN || state.getBlock() == Blocks.MELON) {
             pumpkinsAndMelons.add(pos);
             return false;
           }
-          if (state.getBlock() == Blocks.REEDS || state.getBlock() == Blocks.CACTUS) {
+          if (state.getBlock() == Blocks.SUGAR_CANE || state.getBlock() == Blocks.CACTUS) {
             reedsAndCactus.add(pos);
             return false;
           }
@@ -106,7 +104,7 @@ public class SpellHarvest extends SpellBase {
 
       BlockPos down = pos.down();
       BlockState downState = player.world.getBlockState(down);
-      while (downState.getBlock() == Blocks.CACTUS || downState.getBlock() == Blocks.REEDS) {
+      while (downState.getBlock() == Blocks.CACTUS || downState.getBlock() == Blocks.SUGAR_CANE) {
         done.add(down);
         down = down.down();
         downState = player.world.getBlockState(down);
@@ -116,7 +114,7 @@ public class SpellHarvest extends SpellBase {
     }
     for (BlockPos pos : lowest) {
       BlockState state = player.world.getBlockState(pos.up());
-      if (state.getBlock() == Blocks.CACTUS || state.getBlock() == Blocks.REEDS) {
+      if (state.getBlock() == Blocks.CACTUS || state.getBlock() == Blocks.SUGAR_CANE) {
         count++;
         if (!player.world.isRemote) {
           state.getBlock().harvestBlock(player.world, player, pos.up(), state, null, player.getHeldItemMainhand());
@@ -127,8 +125,8 @@ public class SpellHarvest extends SpellBase {
     }
 
     if (!affectedPositions.isEmpty() && !player.world.isRemote) {
-      MessageHarvestCompleteFX message = new MessageHarvestCompleteFX(affectedPositions);
-      PacketHandler.sendToAllTracking(message, player);
+/*      MessageHarvestCompleteFX message = new MessageHarvestCompleteFX(affectedPositions);
+      PacketHandler.sendToAllTracking(message, player);*/
     }
 
     return count != 0;

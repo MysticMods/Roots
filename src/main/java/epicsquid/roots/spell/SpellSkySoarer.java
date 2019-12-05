@@ -1,14 +1,9 @@
 package epicsquid.roots.spell;
 
 import epicsquid.roots.entity.spell.BoostEntity;
-import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.List;
@@ -27,23 +22,23 @@ public class SpellSkySoarer extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
-        new ItemStack(Item.getItemFromBlock(Blocks.LADDER)),
+/*        new ItemStack(Item.getItemFromBlock(Blocks.LADDER)),
         new ItemStack(ModItems.petals),
         new ItemStack(Items.ARROW),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),
-        new ItemStack(ModItems.cloud_berry)
+        new ItemStack(ModItems.cloud_berry)*/
     );
   }
 
   @Override
   public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
-      BoostEntity boost = new BoostEntity(player.world);
+      BoostEntity boost = new BoostEntity(null, player.world);
       boost.setPlayer(player.getUniqueID());
       boost.setPosition(player.posX, player.posY, player.posZ);
-      player.world.spawnEntity(boost);
+      player.world.addEntity(boost);
     }
     return true;
   }

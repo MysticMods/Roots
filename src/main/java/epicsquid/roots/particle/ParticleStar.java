@@ -26,7 +26,7 @@ public class ParticleStar extends ParticleBase {
     if (this.colorB > 1.0) {
       this.colorB = this.colorB / 255.0f;
     }
-    this.setRBGColorF(colorR, colorG, colorB);
+    this.setColor(colorR, colorG, colorB);
     this.setAlphaF((float) data[4]);
     this.initAlpha = (float) data[4];
     this.particleScale = (float) data[5];
@@ -42,20 +42,22 @@ public class ParticleStar extends ParticleBase {
     return 255;
   }
 
-  @Override
+/*  @Override
   public boolean shouldDisableDepth() {
     return true;
-  }
+  }*/
 
-  @Override
+  // TODO: What did these two become?
+
+/*  @Override
   public int getFXLayer() {
     return 1;
-  }
+  }*/
 
   @Override
-  public void onUpdate() {
-    super.onUpdate();
-    float lifeCoeff = (float) this.particleAge / (float) this.particleMaxAge;
+  public void tick() {
+    super.tick();
+    float lifeCoeff = (float) this.age / (float) this.maxAge;
     this.particleScale = initScale - initScale * lifeCoeff;
     this.particleAlpha = (1.0f - lifeCoeff) * initAlpha;
     prevParticleAngle = particleAngle;
@@ -64,7 +66,7 @@ public class ParticleStar extends ParticleBase {
 
   @Override
   public boolean alive() {
-    return this.particleAge < this.particleMaxAge;
+    return this.age < this.maxAge;
   }
 
   @Override

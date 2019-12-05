@@ -1,16 +1,12 @@
 package epicsquid.roots.spell;
 
-import epicsquid.roots.init.ModItems;
 import epicsquid.roots.mechanics.Magnetize;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.item.ExperienceOrbEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
@@ -33,13 +29,13 @@ public class SpellMagnetism extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
-        new OreIngredient("ingotIron"),
+/*        new OreIngredient("ingotIron"),
         new OreIngredient("dustRedstone"),
         new ItemStack(Items.PAPER),
         new ItemStack(ModItems.wildroot),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine)
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine)*/
     );
   }
 

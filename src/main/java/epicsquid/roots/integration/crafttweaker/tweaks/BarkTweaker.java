@@ -1,4 +1,4 @@
-package epicsquid.roots.integration.crafttweaker.tweaks;
+/*package epicsquid.roots.integration.crafttweaker.tweaks;
 
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
@@ -93,4 +93,4 @@ public class BarkTweaker {
       return String.format("Recipe to add %s->%s to Bark Recipes", woodLog, bark);
     }
   }
-}
+}*/

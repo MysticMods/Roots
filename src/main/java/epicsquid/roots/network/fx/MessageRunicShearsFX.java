@@ -1,3 +1,4 @@
+/*
 package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.particle.particles.ParticleGlitter;
@@ -65,4 +66,4 @@ public class MessageRunicShearsFX implements IMessage {
     }
   }
 
-}
+}*/

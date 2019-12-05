@@ -1,4 +1,4 @@
-package epicsquid.roots.potion;
+/*package epicsquid.roots.potion;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.particle.ParticleUtil;
@@ -64,4 +64,4 @@ public class PotionPetalShell extends Effect {
     Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
     return super.getStatusIconIndex();
   }
-}
+}*/

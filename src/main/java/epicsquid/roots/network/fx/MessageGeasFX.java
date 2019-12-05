@@ -1,3 +1,4 @@
+/*
 package epicsquid.roots.network.fx;
 
 import epicsquid.roots.particle.ParticleUtil;
@@ -66,4 +67,4 @@ public class MessageGeasFX implements IMessage {
     }
   }
 
-}
+}*/

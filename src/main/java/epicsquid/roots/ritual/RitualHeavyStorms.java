@@ -30,7 +30,7 @@ public class RitualHeavyStorms extends RitualBase {
   @Override
   public void init () {
     addCondition(new ConditionItems(
-        new ItemStack(Blocks.WATERLILY),
+        new ItemStack(Blocks.LILY_PAD),
         new ItemStack(ModItems.dewgonia),
         new ItemStack(Blocks.VINE),
         new ItemStack(ModItems.cloud_berry),

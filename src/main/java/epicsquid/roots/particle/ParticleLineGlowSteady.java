@@ -32,9 +32,9 @@ public class ParticleLineGlowSteady extends ParticleBase {
       this.colorB = this.colorB / 255.0f;
     }
     this.initAlpha = (float) data[4];
-    this.setRBGColorF(colorR, colorG, colorB);
+    this.setColor(colorR, colorG, colorB);
     this.setAlphaF(0);
-    this.particleMaxAge = (int) data[0];
+    this.setMaxAge((int) data[0]);
     this.particleScale = (float) data[5];
     this.initScale = (float) data[5];
     this.targetPosX = vx;
@@ -52,16 +52,16 @@ public class ParticleLineGlowSteady extends ParticleBase {
     return 255;
   }
 
-  @Override
+/*  @Override
   public boolean shouldDisableDepth() {
     return true;
-  }
+  }*/
 
   @Override
-  public void onUpdate() {
-    super.onUpdate();
+  public void tick() {
+    super.tick();
 
-    float lifeCoeff = (float) this.particleAge / (float) this.particleMaxAge;
+    float lifeCoeff = (float) this.age / (float) this.maxAge;
     this.posX = ((1.0f - lifeCoeff * lifeCoeff) * initPosX + (lifeCoeff * lifeCoeff) * targetPosX);
     this.posY = ((1.0f - lifeCoeff * lifeCoeff) * initPosY + (lifeCoeff * lifeCoeff) * targetPosY);
     this.posZ = ((1.0f - lifeCoeff * lifeCoeff) * initPosZ + (lifeCoeff * lifeCoeff) * targetPosZ);

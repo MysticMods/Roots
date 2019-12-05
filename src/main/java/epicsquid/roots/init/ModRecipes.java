@@ -13,7 +13,6 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.item.DruidKnifeItem;
 import epicsquid.roots.recipe.*;
-import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.util.StateUtil;

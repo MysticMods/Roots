@@ -1,4 +1,4 @@
-package epicsquid.roots.potion;
+/*package epicsquid.roots.potion;
 
 import epicsquid.mysticallib.util.AABBUtil;
 import epicsquid.roots.Roots;
@@ -61,4 +61,4 @@ public class PotionAnimalSense extends Effect {
   public boolean shouldRenderInvText(EffectInstance effect) {
     return true;
   }
-}
+}*/

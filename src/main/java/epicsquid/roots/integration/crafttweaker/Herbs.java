@@ -1,4 +1,4 @@
-package epicsquid.roots.integration.crafttweaker;
+/*package epicsquid.roots.integration.crafttweaker;
 
 import crafttweaker.annotations.ZenRegister;
 import epicsquid.roots.Roots;
@@ -54,4 +54,4 @@ public class Herbs {
   }
 
 
-}
+}*/

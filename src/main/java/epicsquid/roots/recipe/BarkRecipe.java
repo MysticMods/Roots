@@ -1,4 +1,4 @@
-package epicsquid.roots.recipe;
+/*package epicsquid.roots.recipe;
 
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.Blocks;
@@ -56,4 +56,4 @@ public class BarkRecipe {
   public ResourceLocation getName() {
     return name;
   }
-}
+}*/

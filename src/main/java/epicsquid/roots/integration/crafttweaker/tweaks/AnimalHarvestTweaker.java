@@ -1,4 +1,4 @@
-package epicsquid.roots.integration.crafttweaker.tweaks;
+/*package epicsquid.roots.integration.crafttweaker.tweaks;
 
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.entity.IEntityDefinition;
@@ -148,4 +148,4 @@ public class AnimalHarvestTweaker {
       return String.format("Recipe to remove %s from AnimalHarvest fish recipes", stack);
     }
   }
-}
+}*/

@@ -1,22 +1,9 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.init.ModItems;
-import epicsquid.roots.network.fx.MessageLightDrifterFX;
-import epicsquid.roots.network.fx.MessageLightDrifterSync;
 import epicsquid.roots.spell.modules.SpellModule;
-import epicsquid.roots.util.Constants;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.DoublePlantBlock;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.DyeColor;
-import net.minecraft.item.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.GameType;
-import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
@@ -40,18 +27,18 @@ public class SpellLightDrifter extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new OreIngredient("enderpearl"),
+/*        new OreIngredient("enderpearl"),
         new ItemStack(ModItems.moonglow_leaf),
         new ItemStack(Item.getItemFromBlock(Blocks.DOUBLE_PLANT), 1, DoublePlantBlock.EnumPlantType.SUNFLOWER.getMeta()),
         new ItemStack(Items.DYE, 1, DyeColor.YELLOW.getDyeDamage()),
-        new ItemStack(ModItems.wildewheet)
+        new ItemStack(ModItems.wildewheet)*/
     );
   }
 
   @Override
   public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
-      player.capabilities.disableDamage = true;
+/*      player.capabilities.disableDamage = true;
       player.capabilities.allowFlying = true;
       player.noClip = true;
       player.getEntityData().putInt(Constants.LIGHT_DRIFTER_TAG, duration);
@@ -65,7 +52,7 @@ public class SpellLightDrifter extends SpellBase {
       }
       player.setGameType(GameType.SPECTATOR);
       PacketHandler.sendToAllTracking(new MessageLightDrifterSync(player.getUniqueID(), player.posX, player.posY, player.posZ, true, GameType.SPECTATOR.getID()), player);
-      PacketHandler.sendToAllTracking(new MessageLightDrifterFX(player.posX, player.posY + 1.0f, player.posZ), player);
+      PacketHandler.sendToAllTracking(new MessageLightDrifterFX(player.posX, player.posY + 1.0f, player.posZ), player);*/
     }
     return true;
   }

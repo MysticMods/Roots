@@ -1,4 +1,4 @@
-package epicsquid.roots.network;
+/*package epicsquid.roots.network;
 
 import java.util.UUID;
 
@@ -56,4 +56,4 @@ public class MessagePlayerGroveUpdate implements IMessage {
       return null;
     }
   }
-}
+}*/

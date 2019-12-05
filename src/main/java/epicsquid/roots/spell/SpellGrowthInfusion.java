@@ -1,23 +1,11 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticalworld.recipe.Ingredients;
-import epicsquid.roots.init.ModItems;
-import epicsquid.roots.mechanics.Growth;
-import epicsquid.roots.network.fx.MessageLifeInfusionFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
-import java.util.Random;
 
 public class SpellGrowthInfusion extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(0);
@@ -36,19 +24,20 @@ public class SpellGrowthInfusion extends SpellBase {
   }
 
   @Override
-  public void init () {
-    addIngredients(
+  public void init() {
+/*    addIngredients(
         new OreIngredient("treeSapling"),
         new OreIngredient("treeSapling"),
         new ItemStack(ModItems.terra_moss),
         Ingredients.AUBERGINE,
         new ItemStack(Items.WHEAT)
-    );
+    );*/
   }
 
   @Override
   public boolean cast(PlayerEntity player, List<SpellModule> modules) {
-    RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0), player.getLookVec().scale(8.0f).add(player.getPositionVector().add(0, player.getEyeHeight(), 0)));
+    // TODO: Particles, ray trace
+/*    RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0), player.getLookVec().scale(8.0f).add(player.getPositionVector().add(0, player.getEyeHeight(), 0)));
     if (result != null) {
       if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
         BlockPos pos = result.getBlockPos();
@@ -63,7 +52,7 @@ public class SpellGrowthInfusion extends SpellBase {
           }
         }
       }
-    }
+    }*/
     return false;
   }
 

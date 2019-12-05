@@ -1,14 +1,9 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
-import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.text.TextFormatting;
 
@@ -35,11 +30,11 @@ public class SpellPetalShell extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new ItemStack(ModItems.petals),
+/*        new ItemStack(ModItems.petals),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
         new ItemStack(ModItems.spirit_herb),
         new ItemStack(Items.SHIELD),
-        new ItemStack(ModItems.pereskia)
+        new ItemStack(ModItems.pereskia)*/
     );
   }
 
@@ -47,7 +42,7 @@ public class SpellPetalShell extends SpellBase {
   public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
       player.addPotionEffect(new EffectInstance(ModPotions.petal_shell, duration, maxShells, false, false));
-      PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ), player);
+      /*      PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ), player);*/
     }
     return true;
   }

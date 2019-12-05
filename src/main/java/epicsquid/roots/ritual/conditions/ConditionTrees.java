@@ -1,4 +1,4 @@
-package epicsquid.roots.ritual.conditions;
+/*package epicsquid.roots.ritual.conditions;
 
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.block.BlockNewLog;
@@ -60,4 +60,4 @@ public class ConditionTrees implements Condition {
     }
     return treeCount;
   }
-}
+}*/

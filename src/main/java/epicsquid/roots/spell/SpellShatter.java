@@ -1,23 +1,9 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.init.ModItems;
-import epicsquid.roots.network.fx.MessageShatterBurstFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
@@ -35,20 +21,20 @@ public class SpellShatter extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
-        new ItemStack(Items.FLINT),
+/*        new ItemStack(Items.FLINT),
         new ItemStack(Items.STONE_PICKAXE),
         new ItemStack(ModItems.stalicripe),
         new ItemStack(Item.getItemFromBlock(Blocks.TNT)),
-        new OreIngredient("cobblestone")
+        new OreIngredient("cobblestone")*/
     );
   }
 
   @Override
   public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
-      RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0),
+/*      RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0),
           player.getLookVec().scale(8.0f).add(player.getPositionVector().add(0, player.getEyeHeight(), 0)));
       if (result != null) {
         if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
@@ -87,7 +73,7 @@ public class SpellShatter extends SpellBase {
             PacketHandler.sendToAllTracking(new MessageShatterBurstFX(player.posX + offX, player.posY + player.getEyeHeight(), player.posZ + offZ, result.hitVec.x, result.hitVec.y, result.hitVec.z), player);
           }
         }
-      }
+      }*/
     }
     return true;
   }

@@ -4,8 +4,8 @@ import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -21,7 +21,7 @@ public class RenderBonfire {
     TileEntityBonfire te = (TileEntityBonfire) world.getTileEntity(pos);
     if (te == null) return;
 
-    ScaledResolution res = event.getResolution();
+    MainWindow res = event.getWindow();
 
     int x = res.getScaledWidth() / 2;
     int y = res.getScaledHeight() / 2;
@@ -30,9 +30,9 @@ public class RenderBonfire {
       PyreCraftingRecipe recipe = te.getLastRecipeUsed();
       ItemStack output = recipe.getResult();
       RenderHelper.enableGUIStandardItemLighting();
-      mc.getRenderItem().renderItemIntoGUI(output, x + 40, y);
+      mc.getItemRenderer().renderItemIntoGUI(output, x + 40, y);
       if (output.getCount() > 1) {
-        mc.getRenderItem().renderItemOverlayIntoGUI(mc.fontRenderer, output, x + 40, y, null);
+        mc.getItemRenderer().renderItemOverlayIntoGUI(mc.fontRenderer, output, x + 40, y, null);
       }
       RenderHelper.disableStandardItemLighting();
       mc.fontRenderer.drawStringWithShadow(I18n.format("roots.info.pyre.repeat1"), x + 40, y + 22, 16777215);
@@ -41,7 +41,7 @@ public class RenderBonfire {
     } else if (te.getLastRitualUsed() != null) {
       RitualBase ritual = te.getLastRitualUsed();
       if (ritual.getIcon() != null) {
-        mc.getRenderItem().renderItemIntoGUI(new ItemStack(ritual.getIcon()), x + 40, y);
+        mc.getItemRenderer().renderItemIntoGUI(new ItemStack(ritual.getIcon()), x + 40, y);
       }
       String s = I18n.format("roots.ritual." + ritual.getName() + ".name");
       mc.fontRenderer.drawStringWithShadow(ritual.getFormat() + s, (float) x + 40, y + 22, 16777215);

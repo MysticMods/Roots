@@ -2,14 +2,11 @@ package epicsquid.roots.event.handlers;
 
 import com.google.common.collect.Sets;
 import epicsquid.mysticalworld.MysticalWorld;
-import epicsquid.roots.Roots;
-import epicsquid.roots.config.GeneralConfig;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.*;
-import net.minecraft.world.storage.loot.conditions.ILootCondition;
+import net.minecraft.world.storage.loot.LootTables;
 import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Set;
 
@@ -20,7 +17,9 @@ public class LootHandler {
 
   @SubscribeEvent
   public static void onLootLoad(LootTableLoadEvent event) {
-    if (GeneralConfig.InjectLoot) {
+    // TODO: Injection
+
+/*    if (GeneralConfig.InjectLoot) {
       RandomValueRange range = new RandomValueRange(GeneralConfig.InjectMinimum, GeneralConfig.InjectMaximum);
       if (tables.contains(event.getName())) {
         LootPool pool = new LootPool(new ILootGenerator[]{
@@ -28,6 +27,6 @@ public class LootHandler {
         }, new ILootCondition[]{}, range, range, "Roots");
         event.getTable().addPool(pool);
       }
-    }
+    }*/
   }
 }

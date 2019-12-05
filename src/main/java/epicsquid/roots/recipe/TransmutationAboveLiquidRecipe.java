@@ -1,4 +1,4 @@
-package epicsquid.roots.recipe;
+/*package epicsquid.roots.recipe;
 
 import epicsquid.roots.util.types.WorldPosStatePredicate;
 import net.minecraft.block.Block;
@@ -61,4 +61,4 @@ public class TransmutationAboveLiquidRecipe extends TransmutationRecipe {
       return false;
     };
   }
-}
+}*/

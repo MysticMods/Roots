@@ -1,4 +1,4 @@
-package epicsquid.roots.integration.crafttweaker.tweaks;
+/*package epicsquid.roots.integration.crafttweaker.tweaks;
 
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
@@ -83,4 +83,4 @@ public class RitualTweaker {
       ritual.addCondition(newRecipe);
     }
   }
-}
+}*/

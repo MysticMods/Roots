@@ -1,3 +1,4 @@
+/*
 package epicsquid.roots.network.fx;
 
 import java.util.ArrayList;
@@ -159,4 +160,4 @@ public class MessageRadianceBeamFX implements IMessage {
     }
   }
 
-}
+}*/

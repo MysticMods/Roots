@@ -1,4 +1,4 @@
-package epicsquid.roots.network;
+/*package epicsquid.roots.network;
 
 import epicsquid.roots.item.QuiverItem;
 import io.netty.buffer.ByteBuf;
@@ -33,4 +33,4 @@ public class MessageServerTryPickupArrows implements IMessage {
       QuiverItem.tryPickupArrows(player);
     }
   }
-}
+}*/

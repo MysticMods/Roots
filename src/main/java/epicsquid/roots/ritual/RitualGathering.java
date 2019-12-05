@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualGathering extends RitualBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(6000);
@@ -27,13 +26,14 @@ public class RitualGathering extends RitualBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addCondition(new ConditionItems(
         new ItemStack(ModItems.wildewheet),
         new ItemStack(ModItems.wildewheet),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),
+        null, null, null
+/*  new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),
         new OreIngredient("ingotIron"),
-        new OreIngredient("dustRedstone")
+        new OreIngredient("dustRedstone")*/
     ));
     addCondition(new ConditionStandingStones(3, 1));
     setIcon(ModItems.ritual_gathering);

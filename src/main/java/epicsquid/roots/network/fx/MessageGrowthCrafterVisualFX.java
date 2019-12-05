@@ -1,3 +1,4 @@
+/*
 package epicsquid.roots.network.fx;
 
 import epicsquid.roots.tileentity.TileEntityFeyCrafter;
@@ -54,4 +55,4 @@ public class MessageGrowthCrafterVisualFX implements IMessage {
       return null;
     }
   }
-}
+}*/

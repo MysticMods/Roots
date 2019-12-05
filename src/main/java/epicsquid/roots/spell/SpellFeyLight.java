@@ -12,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
@@ -36,8 +37,9 @@ public class SpellFeyLight extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new ItemStack(Item.getItemFromBlock(Blocks.LIT_PUMPKIN)),
-        new ItemStack(Item.getItemFromBlock(Blocks.DOUBLE_PLANT), 1, DoublePlantBlock.EnumPlantType.SUNFLOWER.getMeta()),
+        null, null,
+/*        new ItemStack(Item.getItemFromBlock(Blocks.LIT_PUMPKIN)),
+        new ItemStack(Item.getItemFromBlock(Blocks.DOUBLE_PLANT), 1, DoublePlantBlock.EnumPlantType.SUNFLOWER.getMeta()),*/
         new ItemStack(ModItems.cloud_berry),
         new ItemStack(ModItems.bark_acacia),
         new ItemStack(ModItems.cloud_berry)
@@ -48,12 +50,12 @@ public class SpellFeyLight extends SpellBase {
   public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     World world = player.world;
     RayTraceResult result = this.rayTrace(player, player.isSneaking() ? 1 : 10);
-    if (result != null && (!player.isSneaking() && result.typeOfHit == RayTraceResult.Type.BLOCK)) {
-      BlockPos pos = result.getBlockPos().offset(result.sideHit);
+    if (result != null && (!player.isSneaking() && result.getType() == RayTraceResult.Type.BLOCK)) {
+      BlockPos pos = ((BlockRayTraceResult) result).getPos().offset(((BlockRayTraceResult) result).getFace());
       if (world.isAirBlock(pos)) {
         if (!world.isRemote) {
           world.setBlockState(pos, ModBlocks.fey_light.getDefaultState());
-          world.playSound(null, pos, SoundEvents.BLOCK_CLOTH_PLACE, SoundCategory.PLAYERS, 0.25f, 1);
+          world.playSound(null, pos, SoundEvents.BLOCK_WOOL_PLACE, SoundCategory.PLAYERS, 0.25f, 1);
         }
         return true;
       }
@@ -67,12 +69,15 @@ public class SpellFeyLight extends SpellBase {
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
   }
 
+  // TODO: Reimplement this raytrace
+
   @Nullable
   public RayTraceResult rayTrace(PlayerEntity player, double blockReachDistance) {
-    Vec3d vec3d = player.getPositionEyes(1.0F);
+    Vec3d vec3d = player.getEyePosition(1.0f);
     Vec3d vec3d1 = player.getLook(1.0F);
     Vec3d vec3d2 = vec3d.add(vec3d1.x * blockReachDistance, vec3d1.y * blockReachDistance, vec3d1.z * blockReachDistance);
-    return player.world.rayTraceBlocks(vec3d, vec3d2, false, false, true);
+    //return player.world.rayTraceBlocks(vec3d, vec3d2, false, false, true);
+    return null;
   }
 }
 

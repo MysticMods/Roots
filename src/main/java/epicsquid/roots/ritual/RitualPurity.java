@@ -33,10 +33,11 @@ public class RitualPurity extends RitualBase {
   public void init () {
     addCondition(new ConditionItems(
         new ItemStack(ModItems.terra_moss),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
+/*        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),*/
         new ItemStack(ModBlocks.baffle_cap_mushroom),
         new ItemStack(Items.MILK_BUCKET),
-        new ItemStack(Items.GLASS_BOTTLE)
+        new ItemStack(Items.GLASS_BOTTLE),
+        null
     ));
     setIcon(ModItems.ritual_purity);
     setColor(TextFormatting.LIGHT_PURPLE);

@@ -1,4 +1,4 @@
-package epicsquid.roots.network.fx;
+/*package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.proxy.ClientProxy;
@@ -60,4 +60,4 @@ public class MessageHarvestCompleteFX implements IMessage {
       return null;
     }
   }
-}
+}*/

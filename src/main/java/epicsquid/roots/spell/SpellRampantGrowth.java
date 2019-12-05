@@ -1,21 +1,14 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.init.ModItems;
 import epicsquid.roots.mechanics.Growth;
-import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
-import java.util.Random;
 
 public class SpellRampantGrowth extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(0);
@@ -40,15 +33,17 @@ public class SpellRampantGrowth extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
-        new OreIngredient("treeSapling"),
+/*        new OreIngredient("treeSapling"),
         new ItemStack(Items.GOLDEN_APPLE),
         new OreIngredient("treeSapling"),
         new ItemStack(ModItems.spirit_herb),
-        new ItemStack(ModItems.pereskia)
+        new ItemStack(ModItems.pereskia)*/
     );
   }
+
+  // TODO: Packets, functionality
 
   @Override
   public boolean cast(PlayerEntity player, List<SpellModule> modules) {
@@ -59,10 +54,10 @@ public class SpellRampantGrowth extends SpellBase {
         BlockPos pos = positions.get(player.world.rand.nextInt(positions.size()));
         BlockState state = player.world.getBlockState(pos);
         for (int j = 0; j < ticks; j++) {
-          state.getBlock().randomTick(player.world, pos, state, new Random());
+          /*          state.getBlock().randomTick(player.world, pos, state, new Random());*/
         }
         if (player.world.rand.nextInt(3) == 0) {
-          PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);
+          /*          PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);*/
         }
       }
     }

@@ -22,14 +22,14 @@ import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 
-public class ContainerQuiver extends Container {
+public class QuiverContainer extends Container {
 
   private ItemStackHandler quiverHandler;
   private QuiverHandler handler;
   private PlayerEntity player;
   private ItemStack quiver;
 
-  public ContainerQuiver(PlayerEntity player) {
+  public QuiverContainer(PlayerEntity player) {
     this.player = player;
     ItemStack main = player.getHeldItemMainhand();
     ItemStack off = player.getHeldItemOffhand();

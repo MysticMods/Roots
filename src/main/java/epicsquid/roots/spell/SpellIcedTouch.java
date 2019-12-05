@@ -1,32 +1,21 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
-import epicsquid.roots.network.fx.MessageIcedTouchFX;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.FlowerBlock;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.block.Blocks;
-import net.minecraft.item.Items;
-import net.minecraft.util.Direction;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class SpellIcedTouch extends SpellBase {
@@ -46,13 +35,13 @@ public class SpellIcedTouch extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
         new ItemStack(ModItems.dewgonia),
+        new ItemStack(Item.getItemFromBlock(Blocks.SNOW_BLOCK)),
         new ItemStack(Item.getItemFromBlock(Blocks.SNOW)),
-        new ItemStack(Item.getItemFromBlock(Blocks.SNOW_LAYER)),
         new ItemStack(Items.SNOWBALL),
-        new ItemStack(Item.getItemFromBlock(Blocks.RED_FLOWER), 1, FlowerBlock.EnumFlowerType.BLUE_ORCHID.getMeta())
+        new ItemStack(Item.getItemFromBlock(Blocks.POPPY))
     );
 
     acceptModules(ModuleRegistry.module_touch);
@@ -68,7 +57,8 @@ public class SpellIcedTouch extends SpellBase {
       }
       return true;
     } else {
-      RayTraceResult result = this.rayTrace(player, player.isSneaking() ? 1 : 10);
+      // TODO: Raytrace, packets
+/*      RayTraceResult result = this.rayTrace(player, player.isSneaking() ? 1 : 10);
       if (result != null && (!player.isSneaking() && result.typeOfHit == RayTraceResult.Type.BLOCK)) {
         BlockPos pos = result.getBlockPos().offset(result.sideHit);
         BlockState state = world.getBlockState(pos);
@@ -114,8 +104,7 @@ public class SpellIcedTouch extends SpellBase {
         if (didSpell) {
           PacketHandler.sendToAllTracking(new MessageIcedTouchFX(pos.getX(), pos.getY(), pos.getZ()), player);
         }
-        return didSpell;
-      }
+        return didSpell;*/
     }
     return false;
   }
@@ -125,14 +114,6 @@ public class SpellIcedTouch extends SpellBase {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
     this.touchDuration = properties.getProperty(PROP_TOUCH_DURATION);
-  }
-
-  @Nullable
-  public RayTraceResult rayTrace(PlayerEntity player, double blockReachDistance) {
-    Vec3d vec3d = player.getPositionEyes(1.0F);
-    Vec3d vec3d1 = player.getLook(1.0F);
-    Vec3d vec3d2 = vec3d.add(vec3d1.x * blockReachDistance, vec3d1.y * blockReachDistance, vec3d1.z * blockReachDistance);
-    return player.world.rayTraceBlocks(vec3d, vec3d2, false, false, true);
   }
 }
 

@@ -1,3 +1,4 @@
+/*
 package epicsquid.roots.network;
 
 import epicsquid.roots.event.handlers.ClientTickHandler;
@@ -34,4 +35,4 @@ public class MessageClearToasts implements IMessage {
       return null;
     }
   }
-}
+}*/

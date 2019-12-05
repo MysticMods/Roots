@@ -1,3 +1,4 @@
+/*
 package epicsquid.roots.integration.crafttweaker.tweaks;
 
 import crafttweaker.CraftTweakerAPI;
@@ -130,4 +131,5 @@ public class FeyCraftingTweaker {
     }
   }
 }
+*/
 

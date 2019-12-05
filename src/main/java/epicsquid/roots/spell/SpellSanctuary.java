@@ -1,24 +1,15 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.network.fx.MessageSanctuaryBurstFX;
-import epicsquid.roots.network.fx.MessageSanctuaryRingFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.IProjectile;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.text.TextFormatting;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -47,7 +38,7 @@ public class SpellSanctuary extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
         new ItemStack(Items.ARMOR_STAND),
         new ItemStack(ModItems.pereskia),
@@ -58,7 +49,7 @@ public class SpellSanctuary extends SpellBase {
   }
 
   static {
-    entitiesBlackList.addAll(Arrays.asList(SpellConfig.spellFeaturesCategory.sanctuaryEntitiesBlacklist));
+    /*    entitiesBlackList.addAll(Arrays.asList(SpellConfig.spellFeaturesCategory.sanctuaryEntitiesBlacklist));*/
   }
 
   @Override
@@ -66,7 +57,9 @@ public class SpellSanctuary extends SpellBase {
 
     List<Entity> entities = Util.getEntitiesWithinRadius(player.world, Entity.class, player.getPosition(), radius_x, radius_y, radius_z);
 
-    if (entities.size() > 0) {
+
+    // TODO: Everything
+/*    if (entities.size() > 0) {
       for (Entity e : entities) {
         if (e.getUniqueID() != player.getUniqueID()) {
           if ((e instanceof IProjectile || e instanceof IMob || e.isCreatureType(EntityClassification.MONSTER, false)) && (!entitiesBlackList.contains(EntityList.getKey(e).toString()))) {
@@ -85,7 +78,7 @@ public class SpellSanctuary extends SpellBase {
     }
     if (player.ticksExisted % 2 == 0) {
       PacketHandler.sendToAllTracking(new MessageSanctuaryRingFX(player.posX, player.posY + 0.875f, player.posZ), player);
-    }
+    }*/
     return true;
   }
 

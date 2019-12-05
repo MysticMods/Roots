@@ -1,4 +1,4 @@
-package epicsquid.roots.network.fx;
+/*package epicsquid.roots.network.fx;
 
 import epicsquid.roots.particle.ParticleUtil;
 import io.netty.buffer.ByteBuf;
@@ -10,13 +10,13 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-/*************************************************
+*//*************************************************
  * Author: Davoleo
  * Date / Hour: 04/07/2019 / 15:53
  * Class: MessageIcedTouchFX
  * Project: Mystic Mods
  * Copyright - © - Davoleo - 2019
- **************************************************/
+ **************************************************//*
 
 public class MessageIcedTouchFX implements IMessage {
 
@@ -57,4 +57,4 @@ public class MessageIcedTouchFX implements IMessage {
       return null;
     }
   }
-}
+}*/

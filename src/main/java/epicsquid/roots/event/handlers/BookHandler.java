@@ -1,15 +1,9 @@
 package epicsquid.roots.event.handlers;
 
-import epicsquid.mysticallib.world.books.BookRegistry;
-import epicsquid.mysticalworld.MysticalWorld;
-import epicsquid.mysticalworld.config.ConfigManager;
 import epicsquid.roots.Roots;
-import epicsquid.roots.config.GeneralConfig;
-import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
-import vazkii.patchouli.api.PatchouliAPI;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = Roots.MODID)
@@ -18,16 +12,17 @@ public class BookHandler {
 
   @SubscribeEvent
   public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-    if (GeneralConfig.GiveBook) {
-      if (event.player.isServerWorld()) {
-        BookRegistry registry = BookRegistry.getBookRegistry(BOOK_IDENTIFIER, event.player);
-        if (!registry.hasBook) {
-          ItemStack stack = PatchouliAPI.instance.getBookStack("roots:roots_guide");
-          event.player.addItemStackToInventory(stack);
+    if (true) {
+      if (event.getPlayer().isServerWorld()) {
+        // TODO: Port this from MysticalLib 1.12
+        //BookRegistry registry = BookRegistry.getBookRegistry(BOOK_IDENTIFIER, event.player);
+       /* if (!registry.hasBook) {
+          ItemStack stack = new ItemStack(Items.BOOK); // PatchouliAPI.instance.getBookStack("roots:roots_guide");
+          event.getPlayer().addItemStackToInventory(stack);
           registry.hasBook = true;
           registry.markDirty();
           event.player.world.getMapStorage().saveAllData();
-        }
+        }*/
       }
     }
   }

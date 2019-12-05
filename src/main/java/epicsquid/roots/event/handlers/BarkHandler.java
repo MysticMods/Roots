@@ -1,33 +1,24 @@
 package epicsquid.roots.event.handlers;
 
-import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
-import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.recipe.BarkRecipe;
-import epicsquid.mysticallib.util.ItemUtil;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockNewLog;
-import net.minecraft.block.BlockOldLog;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Mod.EventBusSubscriber(modid= Roots.MODID)
+@Mod.EventBusSubscriber(modid = Roots.MODID)
 @SuppressWarnings("unused")
 public class BarkHandler {
-  @SubscribeEvent(priority= EventPriority.HIGHEST)
+  @SubscribeEvent(priority = EventPriority.HIGHEST)
   public static void barkHarvested(BlockEvent.HarvestDropsEvent event) {
     if (event.getHarvester() != null) {
       ItemStack tool = event.getHarvester().getHeldItem(Hand.MAIN_HAND);
-      if (tool.getItem().getToolClasses(tool).contains("druidKnife")) {
+/*      // TODO: Handle this with  better stuff
+      if (tool.getItem().getToolTypes(tool).contains(ToolType.AXE)) { // getToolClasses(tool).contains("druidKnife")) {
         BlockState blockstate = event.getState();
         Block block = blockstate.getBlock();
         BlockPlanks.EnumType type = (block == Blocks.LOG) ?
@@ -46,7 +37,7 @@ public class BarkHandler {
             ItemUtil.spawnItem(event.getWorld(), event.getPos(), barkStack);
           }
         }
-      }
+      }*/
     }
   }
 

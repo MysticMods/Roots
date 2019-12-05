@@ -1,4 +1,4 @@
-package epicsquid.roots.network;
+/*package epicsquid.roots.network;
 
 import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.init.ModItems;
@@ -76,4 +76,4 @@ public class MessageServerUpdateStaff implements IMessage {
       player.sendMessage(new TranslationTextComponent("roots.info.staff.slot_and_spell", handler.getSelectedSlot() + 1, spell == null ? "none" : new TranslationTextComponent("roots.spell." + spell.getName() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))).setStyle(new Style().setColor(TextFormatting.GOLD)));
     }
   }
-}
+}*/

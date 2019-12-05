@@ -1,21 +1,16 @@
 package epicsquid.roots.gui;
 
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.network.MessageServerOpenPouch;
-import epicsquid.roots.network.MessageServerOpenQuiver;
-import epicsquid.roots.network.MessageServerUpdateStaff;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.InputEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Map;
 
@@ -60,22 +55,25 @@ public class Keybinds {
   @SubscribeEvent
   @OnlyIn(Dist.CLIENT)
   public static void onKeyInput(InputEvent.KeyInputEvent event) {
-    Minecraft mc = Minecraft.getMinecraft();
-    if (POUCH_KEYBIND.isKeyDown() && mc.inGameHasFocus) {
-      MessageServerOpenPouch packet = new MessageServerOpenPouch();
-      PacketHandler.INSTANCE.sendToServer(packet);
-    } else if (QUIVER_KEYBIND.isKeyDown() && mc.inGameHasFocus) {
-      MessageServerOpenQuiver packet = new MessageServerOpenQuiver();
-      PacketHandler.INSTANCE.sendToServer(packet);
-    } else if (mc.inGameHasFocus) {
+    Minecraft mc = Minecraft.getInstance();
+    if (POUCH_KEYBIND.isKeyDown() && mc.isGameFocused()) {
+      // TODO: Packets
+      /*MessageServerOpenPouch packet = new MessageServerOpenPouch();
+      PacketHandler.INSTANCE.sendToServer(packet);*/
+    } else if (QUIVER_KEYBIND.isKeyDown() && mc.isGameFocused()) {
+      // TODO: Packets
+ /*     MessageServerOpenQuiver packet = new MessageServerOpenQuiver();
+      PacketHandler.INSTANCE.sendToServer(packet);*/
+    } else if (mc.isGameFocused()) {
       if (mc.player.getHeldItemOffhand().getItem() != ModItems.staff && mc.player.getHeldItemMainhand().getItem() != ModItems.staff) {
         return;
       }
 
-      for (Map.Entry<KeyBinding, Integer> spell : SLOT_MAP.entrySet()) {
+      for (Map.Entry<KeyBinding, Integer> spell : SLOT_MAP.object2IntEntrySet()) {
         if (spell.getKey().isKeyDown()) {
-          MessageServerUpdateStaff packet = new MessageServerUpdateStaff(spell.getValue());
-          PacketHandler.INSTANCE.sendToServer(packet);
+          //  TODO: Packets
+/*          MessageServerUpdateStaff packet = new MessageServerUpdateStaff(spell.getValue());
+          PacketHandler.INSTANCE.sendToServer(packet);*/
           break;
         }
       }

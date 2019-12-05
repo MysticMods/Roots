@@ -12,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualTransmutation extends RitualBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(2400);
@@ -29,13 +28,14 @@ public class RitualTransmutation extends RitualBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addCondition(
         new ConditionItems(
             new ItemStack(Blocks.FURNACE),
             new ItemStack(Blocks.MOSSY_COBBLESTONE),
             new ItemStack(ModItems.cloud_berry),
-            new OreIngredient("rootsBark"),
+            //new OreIngredient("rootsBark"),
+            null,
             new ItemStack(ModBlocks.chiseled_runestone)));
     addCondition(new ConditionStandingStones(3, 1));
     setIcon(ModItems.ritual_transmutation);

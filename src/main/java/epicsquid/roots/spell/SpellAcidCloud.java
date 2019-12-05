@@ -1,24 +1,17 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.config.SpellConfig;
-import epicsquid.roots.init.ModBlocks;
-import epicsquid.roots.network.fx.MessageAcidCloudFX;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.item.DyeColor;
-import net.minecraft.item.Items;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
@@ -45,12 +38,13 @@ public class SpellAcidCloud extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
         new ItemStack(Items.SPIDER_EYE),
-        new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom)),
+        null, null, null,
+/*        new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom)),
         new ItemStack(Items.DYE, 1, DyeColor.LIME.getDyeDamage()),
-        new OreIngredient("blockCactus"),
+        new OreIngredient("blockCactus"),*/
         new ItemStack(Items.ROTTEN_FLESH)
     );
     acceptModules(ModuleRegistry.module_fire);
@@ -62,20 +56,21 @@ public class SpellAcidCloud extends SpellBase {
       List<LivingEntity> entities = player.world.getEntitiesWithinAABB(LivingEntity.class,
           new AxisAlignedBB(player.posX - 4.0, player.posY - 1.0, player.posZ - 4.0, player.posX + 4.0, player.posY + 3.0, player.posZ + 4.0));
       for (LivingEntity e : entities) {
-        if (!(e instanceof PlayerEntity && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
+        if (!(e instanceof PlayerEntity && player.world.getServer().isPVPEnabled())
             && !e.getUniqueID().equals(player.getUniqueID())) {
           e.attackEntityFrom(DamageSource.causeMobDamage(player), damage);
-          if (SpellConfig.spellFeaturesCategory.acidCloudPoisoningEffect)
+          if (true /*SpellConfig.spellFeaturesCategory.acidCloudPoisoningEffect*/)
             e.addPotionEffect(new EffectInstance(Effects.POISON, poisonDuration, poisonAmplification));
           e.setRevengeTarget(player);
           e.setLastAttackedEntity(player);
 
-          if(modules.contains(ModuleRegistry.module_fire)){
+          if (modules.contains(ModuleRegistry.module_fire)) {
             e.setFire(fireDuration);
           }
         }
       }
-      PacketHandler.sendToAllTracking(new MessageAcidCloudFX(player.posX, player.posY + player.getEyeHeight(), player.posZ), player);
+      // TODO: PAckets, particles
+      //PacketHandler.sendToAllTracking(new MessageAcidCloudFX(player.posX, player.posY + player.getEyeHeight(), player.posZ), player);
     }
     return true;
   }

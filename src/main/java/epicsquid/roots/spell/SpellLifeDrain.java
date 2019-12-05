@@ -1,23 +1,19 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.network.fx.MessageLifeDrainAbsorbFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.potion.Effects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
@@ -47,13 +43,13 @@ public class SpellLifeDrain extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
         new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom)),
         new ItemStack(ModItems.moonglow_leaf),
         new ItemStack(ModItems.moonglow_seed),
-        new ItemStack(Items.IRON_SWORD),
-        new OreIngredient("blockCactus")
+        new ItemStack(Items.IRON_SWORD)
+        /*        new OreIngredient("blockCactus")*/
     );
   }
 
@@ -61,7 +57,8 @@ public class SpellLifeDrain extends SpellBase {
   public boolean cast(PlayerEntity player, List<SpellModule> modules) {
     if (!player.world.isRemote) {
       boolean foundTarget = false;
-      PacketHandler.sendToAllTracking(new MessageLifeDrainAbsorbFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ), player);
+      // TODO: Packets
+      /*      PacketHandler.sendToAllTracking(new MessageLifeDrainAbsorbFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ), player);*/
       for (int i = 0; i < 4 && !foundTarget; i++) {
         double x = player.posX + player.getLookVec().x * 3.0 * (float) i;
         double y = player.posY + player.getEyeHeight() + player.getLookVec().y * 3.0 * (float) i;
@@ -69,12 +66,12 @@ public class SpellLifeDrain extends SpellBase {
         List<LivingEntity> entities = player.world
             .getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(x - 2.0, y - 2.0, z - 2.0, x + 2.0, y + 2.0, z + 2.0));
         for (LivingEntity e : entities) {
-          if (!(e instanceof PlayerEntity && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
+          if (!(e instanceof PlayerEntity && !player.world.getServer().isPVPEnabled())
               && e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
             foundTarget = true;
-            if (e.hurtTime <= 0 && !e.isDead) {
+            if (e.hurtTime <= 0 && e.isAlive()) {
               e.attackEntityFrom(DamageSource.WITHER.causeMobDamage(player), witherDamage);
-              if (e.rand.nextInt(witherChance) == 0) {
+              if (player.getRNG().nextInt(witherChance) == 0) {
                 e.addPotionEffect(new EffectInstance(Effects.WITHER, witherDuration, witherAmplification));
               }
               e.setRevengeTarget(player);

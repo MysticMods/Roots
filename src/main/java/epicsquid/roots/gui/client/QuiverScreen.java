@@ -7,38 +7,38 @@
 
 package epicsquid.roots.gui.client;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import epicsquid.roots.Roots;
-import epicsquid.roots.gui.container.ContainerQuiver;
+import epicsquid.roots.gui.container.QuiverContainer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
 
-import javax.annotation.Nonnull;
+public class QuiverScreen extends ContainerScreen<QuiverContainer> {
 
-public class GuiQuiver extends ContainerScreen {
+  private QuiverContainer containerQuiver;
 
-  private ContainerQuiver containerQuiver;
-
-  public GuiQuiver(@Nonnull ContainerQuiver containerQuiver) {
-    super(containerQuiver);
-    this.containerQuiver = containerQuiver;
+  public QuiverScreen(QuiverContainer containerScreen, PlayerInventory inv, ITextComponent titleIn) {
+    super(containerScreen, inv, titleIn);
+    this.containerQuiver = containerScreen;
     xSize = 176;
     ySize = 149;
   }
 
-  @Override
+/*  @Override
   public void drawScreen(int mouseX, int mouseY, float partialTicks) {
     drawDefaultBackground();
     super.drawScreen(mouseX, mouseY, partialTicks);
     this.renderHoveredToolTip(mouseX, mouseY);
-  }
+  }*/
 
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-    this.mc.getTextureManager().bindTexture(new ResourceLocation(Roots.MODID, "textures/gui/quiver_gui.png"));
+    GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+    this.minecraft.getTextureManager().bindTexture(new ResourceLocation(Roots.MODID, "textures/gui/quiver_gui.png"));
     int i = (this.width - this.xSize) / 2;
     int j = (this.height - this.ySize) / 2;
-    this.drawTexturedModalRect(i, j, 0, 0, 176, 149);
+    this.blit(i, j, 0, 0, 176, 149);
   }
 }

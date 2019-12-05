@@ -1,4 +1,4 @@
-package epicsquid.roots.potion;
+/*package epicsquid.roots.potion;
 
 import epicsquid.roots.Roots;
 import net.minecraft.client.Minecraft;
@@ -34,4 +34,4 @@ public class PotionTimeStop extends Effect {
     Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
     return super.getStatusIconIndex();
   }
-}
+}*/

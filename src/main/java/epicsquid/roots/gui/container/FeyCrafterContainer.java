@@ -22,7 +22,7 @@ import net.minecraftforge.items.SlotItemHandler;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class ContainerFeyCrafter extends Container {
+public class FeyCrafterContainer extends Container {
 
   private TileEntityFeyCrafter crafter;
   private PlayerEntity player;
@@ -31,7 +31,7 @@ public class ContainerFeyCrafter extends Container {
 
   private final CraftResultInventory craftResult;
 
-  public ContainerFeyCrafter(PlayerEntity player, TileEntityFeyCrafter crafter) {
+  public FeyCrafterContainer(PlayerEntity player, TileEntityFeyCrafter crafter) {
     this.player = player;
     this.crafter = crafter;
 

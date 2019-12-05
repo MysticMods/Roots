@@ -1,4 +1,4 @@
-package epicsquid.roots.potion;
+/*package epicsquid.roots.potion;
 
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
@@ -20,4 +20,4 @@ public class PotionGeas extends Effect {
   public boolean shouldRender(EffectInstance effect) {
     return false;
   }
-}
+}*/

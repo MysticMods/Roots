@@ -1,4 +1,4 @@
-package epicsquid.roots.integration.crafttweaker.tweaks;
+/*package epicsquid.roots.integration.crafttweaker.tweaks;
 
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.entity.IEntityDefinition;
@@ -79,4 +79,4 @@ public class PacifistTweaker {
       return String.format("Recipe to add %s to Pacifism", entry.getName());
     }
   }
-}
+}*/

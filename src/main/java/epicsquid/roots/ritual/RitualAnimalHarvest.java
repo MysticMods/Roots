@@ -6,12 +6,11 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualAnimalHarvest extends RitualBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(3200);
@@ -39,11 +38,13 @@ public class RitualAnimalHarvest extends RitualBase {
     properties.addProperties(PROP_DURATION, PROP_INTERVAL, PROP_COUNT, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_LOOTING_CHANCE, PROP_LOOTING_VALUE, PROP_GLOW_DURATION, PROP_FISH_CHANCE, PROP_FISH_COUNT, PROP_FISH_ADDITIONAL);
   }
 
+  // TODO: Replace all recipes with tag-suitable ingredients
+
   @Override
   public void init() {
     addCondition(new ConditionItems(
         new ItemStack(ModItems.wildewheet),
-        new OreIngredient("blockWool"),
+        null, // new OreIngredient("blockWool"),
         new ItemStack(Items.MELON),
         new ItemStack(Items.CARROT),
         new ItemStack(ModItems.wildroot)

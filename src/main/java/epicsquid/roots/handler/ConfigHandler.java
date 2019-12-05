@@ -1,4 +1,6 @@
-package epicsquid.roots.handler;
+// TODO: Is this needed?
+
+/*package epicsquid.roots.handler;
 
 import epicsquid.roots.Roots;
 import net.minecraftforge.common.config.Config;
@@ -17,4 +19,4 @@ public class ConfigHandler {
       ConfigManager.sync(Roots.MODID, Config.Type.INSTANCE);
   }
 
-}
+}*/

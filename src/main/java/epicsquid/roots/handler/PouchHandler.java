@@ -65,7 +65,8 @@ public class PouchHandler implements INBTSerializable<CompoundNBT> {
 
   public static PouchHandler getHandler(ItemStack stack) {
     PouchHandler handler;
-    boolean isApoth = ((Pouch) stack.getItem()).isApothecary();
+    // TODO: Stuff
+    boolean isApoth = false; // ((Pouch) stack.getItem()).isApothecary();
     if (isApoth) {
       handler = new PouchHandler(stack, APOTHECARY_POUCH_INVENTORY_SLOTS, APOTHECARY_POUCH_HERB_SLOTS);
     } else {

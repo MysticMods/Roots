@@ -1,4 +1,4 @@
-package epicsquid.roots.integration.crafttweaker;
+/*package epicsquid.roots.integration.crafttweaker;
 
 import crafttweaker.IAction;
 
@@ -8,4 +8,4 @@ public abstract class Action implements IAction {
   public Action(String name) {
     this.name = name;
   }
-}
+}*/

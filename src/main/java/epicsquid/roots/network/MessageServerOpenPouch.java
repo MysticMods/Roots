@@ -1,4 +1,4 @@
-package epicsquid.roots.network;
+/*package epicsquid.roots.network;
 
 import epicsquid.roots.util.PowderInventoryUtil;
 import io.netty.buffer.ByteBuf;
@@ -39,4 +39,4 @@ public class MessageServerOpenPouch implements IMessage {
       }
     }
   }
-}
+}*/

@@ -1,3 +1,4 @@
+/*
 package epicsquid.roots.network.fx;
 
 import java.util.UUID;
@@ -79,4 +80,4 @@ public class MessageLifeDrainAbsorbFX implements IMessage {
     }
   }
 
-}
+}*/

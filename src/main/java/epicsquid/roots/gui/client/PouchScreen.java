@@ -7,21 +7,21 @@
 
 package epicsquid.roots.gui.client;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import epicsquid.roots.Roots;
-import epicsquid.roots.gui.container.ContainerPouch;
+import epicsquid.roots.gui.container.PouchContainer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
 
-import javax.annotation.Nonnull;
+public class PouchScreen extends ContainerScreen<PouchContainer> {
 
-public class GuiPouch extends ContainerScreen {
+  private PouchContainer containerPouch;
 
-  private ContainerPouch containerPouch;
-
-  public GuiPouch(@Nonnull ContainerPouch containerPouch) {
-    super(containerPouch);
-    this.containerPouch = containerPouch;
+  public PouchScreen(PouchContainer containerScreen, PlayerInventory inv, ITextComponent titleIn) {
+    super(containerScreen, inv, titleIn);
+    this.containerPouch = containerScreen;
     if (isComponentPouch()) {
       xSize = 150;
     } else {
@@ -30,20 +30,20 @@ public class GuiPouch extends ContainerScreen {
     ySize = 100;
   }
 
-  @Override
+/*  @Override
   public void drawScreen(int mouseX, int mouseY, float partialTicks) {
     drawDefaultBackground();
     super.drawScreen(mouseX, mouseY, partialTicks);
     this.renderHoveredToolTip(mouseX, mouseY);
-  }
+  }*/
 
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-    this.mc.getTextureManager().bindTexture(new ResourceLocation(Roots.MODID, isComponentPouch() ? "textures/gui/component_pouch_gui.png" : "textures/gui/apothecary_pouch_gui.png"));
+    GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+    this.minecraft.getTextureManager().bindTexture(new ResourceLocation(Roots.MODID, isComponentPouch() ? "textures/gui/component_pouch_gui.png" : "textures/gui/apothecary_pouch_gui.png"));
     int i = (this.width - this.xSize) / 2;
     int j = (this.height - this.ySize) / 2;
-    this.drawTexturedModalRect(i - (isComponentPouch() ? 13 : 35), j - (isComponentPouch() ? 55 : 63), 0, 0, isComponentPouch() ? 176 : 213, isComponentPouch() ? 207 : 215);
+    this.blit(i - (isComponentPouch() ? 13 : 35), j - (isComponentPouch() ? 55 : 63), 0, 0, isComponentPouch() ? 176 : 213, isComponentPouch() ? 207 : 215);
   }
 
   private boolean isComponentPouch() {

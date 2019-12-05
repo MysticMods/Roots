@@ -1,8 +1,6 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.network.fx.MessageDandelionCastFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.Blocks;
@@ -11,7 +9,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
@@ -32,10 +29,11 @@ public class SpellDandelionWinds extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
-        new ItemStack(Blocks.YELLOW_FLOWER),
-        new OreIngredient("treeLeaves"),
+        new ItemStack(Blocks.DANDELION),
+        /*        new OreIngredient("treeLeaves"),*/
+        null,
         new ItemStack(ModItems.runic_dust),
         new ItemStack(ModItems.cloud_berry),
         new ItemStack(ModItems.terra_spores)
@@ -44,7 +42,8 @@ public class SpellDandelionWinds extends SpellBase {
 
   @Override
   public boolean cast(PlayerEntity player, List<SpellModule> modules) {
-    PacketHandler.sendToAllTracking(new MessageDandelionCastFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ), player);
+    // TODO: Packets
+    /*    PacketHandler.sendToAllTracking(new MessageDandelionCastFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ), player);*/
     List<LivingEntity> entities = player.world.getEntitiesWithinAABB(LivingEntity.class,
         new AxisAlignedBB(player.posX + player.getLookVec().x * 6.0 - 6.0, player.posY + player.getLookVec().y * 6.0 - 6.0,
             player.posZ + player.getLookVec().z * 6.0 - 4.0, player.posX + player.getLookVec().x * 6.0 + 6.0, player.posY + player.getLookVec().y * 6.0 + 6.0,
@@ -52,9 +51,7 @@ public class SpellDandelionWinds extends SpellBase {
     if (entities.size() > 0) {
       for (LivingEntity e : entities) {
         if (e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
-          e.motionX += (player.getLookVec().x);
-          e.motionY += (distance);
-          e.motionZ += (player.getLookVec().z);
+          e.setMotion(player.getLookVec().x, distance, player.getLookVec().z);
           e.velocityChanged = true;
         }
       }

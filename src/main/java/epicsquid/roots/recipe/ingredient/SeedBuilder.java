@@ -1,4 +1,6 @@
-package epicsquid.roots.recipe.ingredient;
+// TODO: Move this into Mystical World instead
+
+/*package epicsquid.roots.recipe.ingredient;
 
 import com.google.gson.JsonObject;
 import epicsquid.roots.init.ModItems;
@@ -51,4 +53,4 @@ public class SeedBuilder {
       return get();
     }
   }
-}
+}*/

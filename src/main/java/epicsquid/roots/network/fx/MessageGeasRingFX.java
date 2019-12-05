@@ -1,3 +1,4 @@
+/*
 package epicsquid.roots.network.fx;
 
 import java.util.Random;
@@ -72,4 +73,4 @@ public class MessageGeasRingFX implements IMessage {
     }
   }
 
-}
+}*/

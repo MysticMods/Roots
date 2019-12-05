@@ -1,4 +1,4 @@
-package epicsquid.roots.integration.crafttweaker.tweaks;
+/*package epicsquid.roots.integration.crafttweaker.tweaks;
 
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
@@ -118,4 +118,4 @@ public class PyreCraftingTweaker {
       ModRecipes.removePyreCraftingRecipe(output);
     }
   }
-}
+}*/

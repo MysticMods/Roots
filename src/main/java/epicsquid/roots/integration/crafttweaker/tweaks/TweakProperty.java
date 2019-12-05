@@ -1,4 +1,4 @@
-package epicsquid.roots.integration.crafttweaker.tweaks;
+/*package epicsquid.roots.integration.crafttweaker.tweaks;
 
 import crafttweaker.annotations.ZenRegister;
 import epicsquid.roots.Roots;
@@ -33,4 +33,4 @@ public class TweakProperty {
   public <T> void setValue (T value) {
     table.setProperty((Property<T>) original, value);
   }
-}
+}*/

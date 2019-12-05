@@ -1,32 +1,23 @@
 package epicsquid.roots.event.handlers;
 
-import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.roots.Roots;
-import epicsquid.roots.config.GeneralConfig;
-import epicsquid.roots.entity.item.MagmaticSoilEntityItem;
 import epicsquid.roots.handler.PouchHandler;
 import epicsquid.roots.init.HerbRegistry;
-import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.item.RunicShearsItem;
 import epicsquid.roots.util.PowderInventoryUtil;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.Event;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 @SuppressWarnings("unused")
@@ -42,18 +33,19 @@ public class ItemEventHandler {
     if (main.getItem() != ModItems.runic_shears)
       return;
 
-    RunicShearsItem item = (RunicShearsItem) ModItems.runic_shears;
+    //RunicShearsItem item = (RunicShearsItem) ModItems.runic_shears;
 
-    Vec3d hit = event.getHitVec();
+
+/*    Vec3d hit = event.getHitVec();
     ActionResultType result = item.onItemUse(player, event.getWorld(), event.getPos(), event.getHand(), event.getFace(), (float) hit.x, (float) hit.y, (float) hit.z);
     if (result == ActionResultType.SUCCESS) {
       event.setCanceled(true);
-    }
+    }*/
   }
 
   @SubscribeEvent
-  public static void onEntityItemPickup (EntityItemPickupEvent event) {
-    if (GeneralConfig.AutoRefillPouches) {
+  public static void onEntityItemPickup(EntityItemPickupEvent event) {
+    if (true /*GeneralConfig.AutoRefillPouches*/) {
       PlayerEntity player = event.getEntityPlayer();
       ItemEntity entity = event.getItem();
       if (!entity.world.isRemote) {
@@ -68,15 +60,13 @@ public class ItemEventHandler {
             int refill = herbs.refill(stack);
             if (refill < original) {
               event.setCanceled(true);
-              entity.setDead();
+              entity.remove();
               if (refill != 0) {
                 stack.setCount(refill);
                 ItemEntity newEntity = new ItemEntity(entity.world, entity.posX, entity.posY, entity.posZ, stack);
-                newEntity.motionX = entity.motionX;
-                newEntity.motionY = entity.motionY;
-                newEntity.motionZ = entity.motionZ;
+                newEntity.setMotion(entity.getMotion());
                 newEntity.setPickupDelay(0);
-                entity.world.spawnEntity(newEntity);
+                entity.world.addEntity(newEntity);
               }
               entity.world.playSound(null, player.getPosition(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 1, 0.5f);
             }
@@ -90,8 +80,10 @@ public class ItemEventHandler {
 
   @SubscribeEvent
   public static void onEntityItemJoinWorld(EntityJoinWorldEvent event) {
-    if (MAGMATIC_SOIL == null) {
-      MAGMATIC_SOIL = ((BlockBase) ModBlocks.elemental_soil_fire).getItemBlock();
+    // TODO: In the future
+
+/*    if (MAGMATIC_SOIL == null) {
+      MAGMATIC_SOIL = (ModBlocks.elemental_soil_fire).getItemBlock();
     }
     Entity entity = event.getEntity();
     if (event.getWorld().isRemote) return;
@@ -108,6 +100,6 @@ public class ItemEventHandler {
         entity.setDead();
         event.getWorld().spawnEntity(soil);
       }
-    }
+    }*/
   }
 }

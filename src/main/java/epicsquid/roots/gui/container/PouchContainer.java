@@ -22,7 +22,7 @@ import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 
-public class ContainerPouch extends Container {
+public class PouchContainer extends Container {
 
   private PouchHandler.PouchItemHandler inventoryHandler;
   private PouchHandler.PouchItemHandler herbsHandler;
@@ -35,7 +35,7 @@ public class ContainerPouch extends Container {
   private int inventoryEnd;
   private int herbsEnd;
 
-  public ContainerPouch(PlayerEntity player) {
+  public PouchContainer(PlayerEntity player) {
     this.player = player;
     ItemStack main = player.getHeldItemMainhand();
     ItemStack off = player.getHeldItemOffhand();

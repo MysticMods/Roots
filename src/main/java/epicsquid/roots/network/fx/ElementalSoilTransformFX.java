@@ -1,4 +1,4 @@
-package epicsquid.roots.network.fx;
+/*package epicsquid.roots.network.fx;
 
 import epicsquid.roots.particle.ParticleUtil;
 import io.netty.buffer.ByteBuf;
@@ -106,4 +106,4 @@ public class ElementalSoilTransformFX implements IMessage {
       return null;
     }
   }
-}
+}*/

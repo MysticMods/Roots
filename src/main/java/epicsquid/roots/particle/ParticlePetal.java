@@ -26,7 +26,7 @@ public class ParticlePetal extends ParticleBase {
       this.colorB = this.colorB / 255.0f;
     }
     this.initAlpha = (float) data[4];
-    this.setRBGColorF(colorR, colorG, colorB);
+    this.setColor(colorR, colorG, colorB);
     this.setAlphaF((float) data[4]);
     this.particleScale = (float) data[5];
     this.initScale = (float) data[5];
@@ -41,15 +41,15 @@ public class ParticlePetal extends ParticleBase {
     return 255;
   }
 
-  @Override
+/*  @Override
   public boolean shouldDisableDepth() {
     return true;
-  }
+  }*/
 
   @Override
-  public void onUpdate() {
-    super.onUpdate();
-    float lifeCoeff = (float) this.particleAge / (float) this.particleMaxAge;
+  public void tick() {
+    super.tick();
+    float lifeCoeff = (float) this.age / (float) this.maxAge;
     this.particleScale = initScale - initScale * lifeCoeff;
     this.particleAlpha = (1.0f - lifeCoeff) * initAlpha;
     prevParticleAngle = particleAngle;
@@ -58,7 +58,7 @@ public class ParticlePetal extends ParticleBase {
 
   @Override
   public boolean alive() {
-    return this.particleAge < this.particleMaxAge;
+    return this.age < this.maxAge;
   }
 
   @Override

@@ -13,7 +13,7 @@ public class PacifistEntry {
 
   public PacifistEntry(Entity entity) {
     this.entityClass = entity.getClass();
-    this.name = new ResourceLocation(Roots.MODID, entity.getName());
+    this.name = new ResourceLocation(Roots.MODID, entity.getType().getRegistryName().getPath());
   }
 
   public PacifistEntry(Class<? extends Entity> entity, String name) {

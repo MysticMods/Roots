@@ -4,7 +4,6 @@ import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.EventManager;
 import epicsquid.roots.Roots;
-import epicsquid.roots.event.SpellEvent;
 import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;

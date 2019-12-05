@@ -1,29 +1,21 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
-import epicsquid.roots.api.Herb;
 import epicsquid.roots.handler.SpellHandler;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.network.MessageUpdateHerb;
 import epicsquid.roots.spell.modules.SpellModule;
-import epicsquid.roots.util.PowderInventoryUtil;
 import epicsquid.roots.util.types.Property;
 import epicsquid.roots.util.types.PropertyTable;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -41,7 +33,7 @@ public abstract class SpellBase {
 
   private TextFormatting textColor;
   protected EnumCastType castType = EnumCastType.INSTANTANEOUS;
-  private Object2DoubleOpenHashMap<Herb> costs = new Object2DoubleOpenHashMap<>();
+  private Object2DoubleOpenHashMap<ItemStack> costs = new Object2DoubleOpenHashMap<>();
   private List<Ingredient> ingredients = new ArrayList<>();
   private List<SpellModule> acceptedModules = new ArrayList<>();
   private float[] firstColours;
@@ -72,7 +64,7 @@ public abstract class SpellBase {
     return secondColours;
   }
 
-  public abstract void init ();
+  public abstract void init();
 
   public boolean isDisabled() {
     return disabled;
@@ -86,11 +78,11 @@ public abstract class SpellBase {
     return !acceptedModules.isEmpty();
   }
 
-  public PropertyTable getProperties () {
+  public PropertyTable getProperties() {
     return properties;
   }
 
-  public SpellBase acceptModules(SpellModule ... modules) {
+  public SpellBase acceptModules(SpellModule... modules) {
     assert modules.length < 5;
     acceptedModules.addAll(Arrays.asList(modules));
     return this;
@@ -113,7 +105,7 @@ public abstract class SpellBase {
 
   public boolean costsMet(PlayerEntity player) {
     boolean matches = true;
-    for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
+/*    for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
       Herb herb = entry.getKey();
       double d = entry.getValue();
       if (matches) {
@@ -127,20 +119,20 @@ public abstract class SpellBase {
           }
         }
       }
-    }
-    return matches && costs.size() > 0 || player.capabilities.isCreativeMode;
+    }*/
+    return matches && costs.size() > 0 || player.isCreative();
   }
 
   public void enactCosts(PlayerEntity player) {
-    for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
+/*    for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
       Herb herb = entry.getKey();
       double d = entry.getValue();
       PowderInventoryUtil.removePowder(player, herb, d);
-    }
+    }*/
   }
 
   public void enactTickCosts(PlayerEntity player) {
-    for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
+/*    for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
       Herb herb = entry.getKey();
       double d = entry.getValue();
       PowderInventoryUtil.removePowder(player, herb, d / 20.0);
@@ -148,7 +140,7 @@ public abstract class SpellBase {
         MessageUpdateHerb packet = new MessageUpdateHerb(herb);
         PacketHandler.INSTANCE.sendTo(packet, (ServerPlayerEntity) player);
       }
-    }
+    }*/
   }
 
   @OnlyIn(Dist.CLIENT)
@@ -156,11 +148,11 @@ public abstract class SpellBase {
     String prefix = "roots.spell." + name;
     tooltip.add("" + textColor + TextFormatting.BOLD + I18n.format(prefix + ".name") + TextFormatting.RESET);
     if (finalised()) {
-      for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
+/*      for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
         Herb herb = entry.getKey();
         String d = String.format("%.4f", entry.getValue());
         tooltip.add(I18n.format(herb.getItem().getTranslationKey() + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
-      }
+      }*/
     }
   }
 
@@ -184,18 +176,19 @@ public abstract class SpellBase {
     return moduleItems;
   }
 
-  public SpellBase addCost (SpellCost cost) {
-    return addCost(cost.getHerb(), cost.getCost());
+  public SpellBase addCost(SpellCost cost) {
+    /*    return addCost(cost.getHerb(), cost.getCost());*/
+    return this;
   }
 
-  public SpellBase addCost(Herb herb, double amount) {
+/*  public SpellBase addCost(Herb herb, double amount) {
     if (herb == null) {
       System.out.println("Spell - " + this.getClass().getName() + " - added a null herb ingredient. This is a bug.");
       return this;
     }
     costs.put(herb, amount);
     return this;
-  }
+  }*/
 
   public boolean matchesIngredients(List<ItemStack> ingredients) {
     return ListUtil.matchesIngredients(ingredients, this.ingredients);
@@ -243,9 +236,9 @@ public abstract class SpellBase {
     return castType;
   }
 
-  public Object2DoubleOpenHashMap<Herb> getCosts() {
+/*  public Object2DoubleOpenHashMap<Herb> getCosts() {
     return costs;
-  }
+  }*/
 
   public List<Ingredient> getIngredients() {
     return ingredients;
@@ -268,7 +261,7 @@ public abstract class SpellBase {
   public abstract void doFinalise();
 
   @SuppressWarnings("unchecked")
-  public void finaliseCosts () {
+  public void finaliseCosts() {
     for (Map.Entry<String, Property<?>> entry : getProperties()) {
       if (!entry.getKey().startsWith("cost_")) {
         continue;
@@ -284,13 +277,13 @@ public abstract class SpellBase {
     this.finalised = true;
   }
 
-  public void finalise () {
+  public void finalise() {
     doFinalise();
     finaliseCosts();
     validateProperties();
   }
 
-  public void validateProperties () {
+  public void validateProperties() {
     List<String> values = properties.finalise();
     if (!values.isEmpty()) {
       StringJoiner join = new StringJoiner(",");
@@ -299,7 +292,7 @@ public abstract class SpellBase {
     }
   }
 
-  public boolean finalised () {
+  public boolean finalised() {
     return finalised;
   }
 
@@ -312,9 +305,9 @@ public abstract class SpellBase {
       this.cost = cost;
     }
 
-    public Herb getHerb () {
+/*    public Herb getHerb () {
       return HerbRegistry.getHerbByName(herb);
-    }
+    }*/
 
     public double getCost() {
       return cost;

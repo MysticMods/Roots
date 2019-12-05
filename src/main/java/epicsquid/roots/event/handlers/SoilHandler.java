@@ -1,4 +1,6 @@
-package epicsquid.roots.event.handlers;
+// TODO: Just rewrite all of this/redo the concepts
+
+/*package epicsquid.roots.event.handlers;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
@@ -15,6 +17,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -36,7 +40,7 @@ public class SoilHandler {
         if (event.getState().getBlock() instanceof IPlantable && soil.getBlock()
             .canSustainPlant(soil, event.getWorld(), event.getPos().offset(Direction.DOWN), Direction.UP, (IPlantable) event.getState().getBlock())) {
           if (soil.getBlock() == ModBlocks.elemental_soil_fire) {
-            int cookingMultiplier = soil.getValue(ElementalSoilBlock.FIRE_MULTIPLIER);
+            int cookingMultiplier = soil.get(ElementalSoilBlock.FIRE_MULTIPLIER);
             if (cookingMultiplier > 0) {
               ItemStack seed = Harvest.getSeed(event.getState());
 
@@ -115,4 +119,4 @@ public class SoilHandler {
       }
     }
   }
-}
+}*/

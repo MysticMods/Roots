@@ -1,19 +1,8 @@
 package epicsquid.roots.ritual;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Lists;
-
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.mysticalworld.entity.EntityBeetle;
-import epicsquid.mysticalworld.entity.EntityDeer;
-import epicsquid.mysticalworld.entity.EntityFox;
 import epicsquid.roots.entity.ritual.BaseRitualEntity;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.particle.ParticleUtil;
@@ -23,11 +12,18 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.PigEntity;
-import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class RitualSummonCreatures extends RitualBase {
 
@@ -38,7 +34,7 @@ public class RitualSummonCreatures extends RitualBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addCondition(new ConditionItems(
         new ItemStack(ModItems.wildewheet),
         new ItemStack(Items.WHEAT),
@@ -53,9 +49,9 @@ public class RitualSummonCreatures extends RitualBase {
     entityItem.put(CowEntity.class, Lists.newArrayList(new ItemStack(Items.BEEF)));
     entityItem.put(PigEntity.class, Lists.newArrayList(new ItemStack(Items.PORKCHOP)));
 
-    entityItem.put(EntityFox.class, Lists.newArrayList(new ItemStack(epicsquid.mysticalworld.init.ModItems.pelt)));
-    entityItem.put(EntityBeetle.class, Lists.newArrayList(new ItemStack(epicsquid.mysticalworld.init.ModItems.carapace)));
-    entityItem.put(EntityDeer.class, Lists.newArrayList(new ItemStack(Items.LEATHER)));
+/*    entityItem.put(FoxEntity.class, Lists.newArrayList(new ItemStack(epicsquid.mysticalworld.init.ModItems.pelt)));
+    entityItem.put(BeetleEntity.class, Lists.newArrayList(new ItemStack(epicsquid.mysticalworld.init.ModItems.carapace)));
+    entityItem.put(DeerEntity.class, Lists.newArrayList(new ItemStack(Items.LEATHER)));*/
 
     setIcon(ModItems.ritual_summon_creatures);
     setColor(TextFormatting.DARK_PURPLE);
@@ -95,7 +91,7 @@ public class RitualSummonCreatures extends RitualBase {
         }
         entity.setPosition(pos.getX() + 1.5, pos.getY(), pos.getZ());
         if (!world.isRemote) {
-          world.spawnEntity(entity);
+          world.addEntity(entity);
 
           for (TileEntityOffertoryPlate plate : plateList) {
             plate.removeItem();
@@ -103,7 +99,7 @@ public class RitualSummonCreatures extends RitualBase {
         } else {
           for (int i = 0; i < 10; i++) {
             ParticleUtil.spawnParticleStar(world, (float) entity.posX + 0.5f * (Util.rand.nextFloat() - 0.5f),
-                (float) (entity.posY + entity.height / 2.5f + (Util.rand.nextFloat())), (float) entity.posZ + 0.5f * (Util.rand.nextFloat() - 0.5f),
+                (float) (entity.posY + entity.getHeight() / 2.5f + (Util.rand.nextFloat())), (float) entity.posZ + 0.5f * (Util.rand.nextFloat() - 0.5f),
                 0.125f * (Util.rand.nextFloat() - 0.5f), 0.01875f * (Util.rand.nextFloat()), 0.125f * (Util.rand.nextFloat() - 0.5f), 100, 255, 100, 1.0f,
                 1.0f + 2.0f * Util.rand.nextFloat(), 40);
           }

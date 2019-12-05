@@ -1,6 +1,6 @@
 package epicsquid.roots.integration.jei;
 
-import epicsquid.roots.gui.container.ContainerFeyCrafter;
+import epicsquid.roots.gui.container.FeyCrafterContainer;
 import mezz.jei.api.recipe.transfer.IRecipeTransferInfo;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.util.ResourceLocation;
@@ -8,10 +8,10 @@ import net.minecraft.util.ResourceLocation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FeyCrafterTransfer implements IRecipeTransferInfo<ContainerFeyCrafter> {
+public class FeyCrafterTransfer implements IRecipeTransferInfo<FeyCrafterContainer> {
   @Override
-  public Class<ContainerFeyCrafter> getContainerClass() {
-    return ContainerFeyCrafter.class;
+  public Class<FeyCrafterContainer> getContainerClass() {
+    return FeyCrafterContainer.class;
   }
 
   @Override
@@ -20,12 +20,12 @@ public class FeyCrafterTransfer implements IRecipeTransferInfo<ContainerFeyCraft
   }
 
   @Override
-  public boolean canHandle(ContainerFeyCrafter container) {
+  public boolean canHandle(FeyCrafterContainer container) {
     return true;
   }
 
   @Override
-  public List<Slot> getRecipeSlots(ContainerFeyCrafter container) {
+  public List<Slot> getRecipeSlots(FeyCrafterContainer container) {
     List<Slot> slots = new ArrayList<>();
     for (int i = 0; i < 5; i++) {
       slots.add(container.getSlot(i));
@@ -34,7 +34,7 @@ public class FeyCrafterTransfer implements IRecipeTransferInfo<ContainerFeyCraft
   }
 
   @Override
-  public List<Slot> getInventorySlots(ContainerFeyCrafter container) {
+  public List<Slot> getInventorySlots(FeyCrafterContainer container) {
     List<Slot> slots = new ArrayList<>();
     for (int i = 5; i <= 40; i++) {
       slots.add(container.getSlot(i));
