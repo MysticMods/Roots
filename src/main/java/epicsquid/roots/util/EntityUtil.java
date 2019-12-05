@@ -16,7 +16,7 @@ public class EntityUtil {
   public static boolean isHostile (Entity entity) {
     if (entity instanceof PlayerEntity) return false;
 
-    ResourceLocation rl = EntityList.getKey(entity);
+    ResourceLocation rl = entity.getType().getRegistryName();
 
     if (forcedFriendly.contains(rl)) {
       return false;
@@ -30,7 +30,7 @@ public class EntityUtil {
       return true;
     }
 
-    if (entity.isCreatureType(EntityClassification.MONSTER, false)) {
+    if (entity.getType().getClassification() == EntityClassification.MONSTER) {
       return true;
     }
 
@@ -44,7 +44,7 @@ public class EntityUtil {
   public static boolean isFriendly (Entity entity) {
     if (entity instanceof PlayerEntity) return false;
 
-    ResourceLocation rl = EntityList.getKey(entity);
+    ResourceLocation rl = entity.getType().getRegistryName();
 
     if (forcedFriendly.contains(rl)) {
       return true;
@@ -58,7 +58,8 @@ public class EntityUtil {
       return true;
     }
 
-    if (entity.isCreatureType(EntityClassification.AMBIENT, false) || entity.isCreatureType(EntityClassification.WATER_CREATURE, false) || entity.isCreatureType(EntityClassification.CREATURE, false)) {
+    EntityClassification classification = entity.getType().getClassification();
+    if (classification == EntityClassification.AMBIENT || classification == EntityClassification.WATER_CREATURE || classification == EntityClassification.CREATURE) {
       return true;
     }
 

@@ -1,24 +1,22 @@
 package epicsquid.roots.util;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.integration.baubles.pouch.BaublePowderInventoryUtil;
 import epicsquid.roots.item.Pouch;
 import epicsquid.roots.item.SylvanArmorItem;
+import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,10 +28,10 @@ public class PowderInventoryUtil {
   private static HerbAlert slot2 = null;
 
   public static ItemStack getPouch(PlayerEntity player) {
-    if (Loader.isModLoaded("baubles")) {
+/*    if (Loader.isModLoaded("baubles")) {
       ItemStack stack = BaublePowderInventoryUtil.getPouch(player);
       if (!stack.isEmpty()) return stack;
-    }
+    }*/
 
     for (int i = 0; i < 36; i++) {
       if (player.inventory.getStackInSlot(i).getItem() instanceof Pouch) {
@@ -68,7 +66,7 @@ public class PowderInventoryUtil {
   public static void resolveSlots(PlayerEntity player, Herb herb) {
     if (!player.world.isRemote) return;
 
-    Minecraft mc = Minecraft.getMinecraft();
+    Minecraft mc = Minecraft.getInstance();
     if (player.getUniqueID() != mc.player.getUniqueID()) return;
 
     if (slot1 != null && !slot1.active()) {
@@ -118,7 +116,7 @@ public class PowderInventoryUtil {
   @OnlyIn(Dist.CLIENT)
   public static void renderHUD(RenderGameOverlayEvent.Post event) {
     if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
-      ScaledResolution res = event.getResolution();
+      MainWindow res = event.getWindow();
       float partial = event.getPartialTicks();
       if (slot1 != null) {
         if (slot1.active()) {
@@ -196,10 +194,10 @@ public class PowderInventoryUtil {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void render(ScaledResolution res, float partialTicks) {
+    public void render(MainWindow res, float partialTicks) {
       if (ticks == 0) return;
 
-      Minecraft mc = Minecraft.getMinecraft();
+      Minecraft mc = Minecraft.getInstance();
 
       float progress;
 
@@ -224,16 +222,16 @@ public class PowderInventoryUtil {
       ItemStack stack = getStack();
 
       GlStateManager.pushMatrix();
-      GlStateManager.translate(x, y, 0);
+      GlStateManager.translated(x, y, 0);
       RenderHelper.enableGUIStandardItemLighting();
-      mc.getRenderItem().renderItemAndEffectIntoGUI(stack, 0, 0);
+      mc.getItemRenderer().renderItemAndEffectIntoGUI(stack, 0, 0);
       String s = String.format("%.1f", getPowderTotal(mc.player, herb));
       GlStateManager.disableLighting();
-      GlStateManager.disableDepth();
+      GlStateManager.disableDepthTest();
       GlStateManager.disableBlend();
       mc.fontRenderer.drawStringWithShadow(s, 18.0f, 3.5f, 16777215);
       GlStateManager.enableLighting();
-      GlStateManager.enableDepth();
+      GlStateManager.enableDepthTest();
       // Fixes opaque cooldown overlay a bit lower
       // TODO: check if enabled blending still screws things up down the line.
       GlStateManager.enableBlend();

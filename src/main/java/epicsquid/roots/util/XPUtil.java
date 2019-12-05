@@ -48,7 +48,7 @@ public class XPUtil {
     while (xp > 0) {
       int k = ExperienceOrbEntity.getXPSplit(xp);
       xp -= k;
-      world.spawnEntity(new ExperienceOrbEntity(world, pos.getX(), pos.getY() + 0.5D, pos.getZ() + 0.5D, k));
+      world.addEntity(new ExperienceOrbEntity(world, pos.getX(), pos.getY() + 0.5D, pos.getZ() + 0.5D, k));
     }
   }
 }

@@ -1,8 +1,8 @@
 package epicsquid.roots.util.zen;
 
+import com.google.common.base.Optional;
 import epicsquid.roots.util.StringHelper;
 import org.apache.commons.lang3.StringUtils;
-import stanhebben.zenscript.annotations.Optional;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
