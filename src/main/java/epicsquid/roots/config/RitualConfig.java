@@ -1,4 +1,4 @@
-package epicsquid.roots.config;
+/*package epicsquid.roots.config;
 
 import epicsquid.roots.Roots;
 import net.minecraftforge.common.config.Config;
@@ -104,4 +104,4 @@ public class RitualConfig {
   }
 
 
-}
+}*/

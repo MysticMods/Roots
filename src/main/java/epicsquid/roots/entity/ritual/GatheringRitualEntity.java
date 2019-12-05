@@ -5,6 +5,7 @@ import epicsquid.roots.mechanics.Magnetize;
 import epicsquid.roots.network.fx.MessageItemGatheredFX;
 import epicsquid.roots.ritual.RitualGathering;
 import epicsquid.roots.ritual.RitualRegistry;
+import net.minecraft.entity.EntityType;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -19,15 +20,23 @@ public class GatheringRitualEntity extends BaseRitualEntity {
 
   private RitualGathering ritual;
 
-  public GatheringRitualEntity(World worldIn) {
-    super(worldIn);
-    this.getDataManager().register(lifetime, RitualRegistry.ritual_gathering.getDuration() + 20);
+  public GatheringRitualEntity(EntityType<?> entityTypeIn, World worldIn) {
+    super(entityTypeIn, worldIn);
     ritual = (RitualGathering) RitualRegistry.ritual_gathering;
   }
 
+/*  public GatheringRitualEntity(World worldIn) {
+    super(worldIn);
+  }*/
+
   @Override
-  public void onUpdate() {
-    super.onUpdate();
+  protected void registerData() {
+    this.getDataManager().register(lifetime, RitualRegistry.ritual_gathering.getDuration() + 20);
+  }
+
+  @Override
+  public void tick() {
+    super.tick();
 
     if (!world.isRemote) {
       if (this.ticksExisted % ritual.interval == 0) {
@@ -36,21 +45,21 @@ public class GatheringRitualEntity extends BaseRitualEntity {
         BlockPos stop = new BlockPos(bounds.maxX, bounds.maxY, bounds.maxZ);
         TileEntity te = null;
         boolean found = false;
-        for (BlockPos.MutableBlockPos pos : BlockPos.getAllInBoxMutable(start, stop)) {
+        for (BlockPos pos : BlockPos.getAllInBoxMutable(start, stop)) {
           te = world.getTileEntity(pos);
-          if (te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
+          if (te != null && te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).isPresent()) {
             found = true;
             break;
           }
         }
-        if (found && te != null) {
-          IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-          if (cap != null) {
+        if (found) {
+          te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).ifPresent((cap) -> {
             List<BlockPos> transferredItems = Magnetize.store(world, getPosition(), cap, ritual.radius_x, ritual.radius_y, ritual.radius_z);
             if (!transferredItems.isEmpty()) {
-              PacketHandler.sendToAllTracking(new MessageItemGatheredFX(transferredItems), this);
+              // TODO: When we add the packets
+              //PacketHandler.sendToAllTracking(new MessageItemGatheredFX(transferredItems), this);
             }
-          }
+          });
         }
       }
     }

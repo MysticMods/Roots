@@ -11,13 +11,16 @@ import epicsquid.roots.ritual.RitualFireStorm;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class FlareEntity extends Entity {
@@ -25,64 +28,47 @@ public class FlareEntity extends Entity {
   private int lifetime = 320;
   private UUID id = null;
 
-  public FlareEntity(World worldIn) {
+  public FlareEntity(EntityType<?> entityTypeIn, World worldIn) {
+    super(entityTypeIn, worldIn);
+  }
+
+  // TODO: Custom spawn particle
+
+/*  public FlareEntity(World worldIn) {
     super(worldIn);
     this.setInvisible(true);
     this.getDataManager().register(value, 0f);
-  }
+  }*/
 
   public void initCustom(double x, double y, double z, double vx, double vy, double vz, double value) {
     this.posX = x;
     this.posY = y;
     this.posZ = z;
-    this.motionX = vx;
-    this.motionY = vy;
-    this.motionZ = vz;
-    this.setSize((float) value / 10.0f, (float) value / 10.0f);
+    this.setMotion(vx, vy, vz);
+    // TODO: Custom sizes?
+    //this.setSize((float) value / 10.0f, (float) value / 10.0f);
     this.getDataManager().set(FlareEntity.value, (float) value);
-    this.getDataManager().setDirty(FlareEntity.value);
-    this.setSize((float) value / 10.0f, (float) value / 10.0f);
+    //this.setSize((float) value / 10.0f, (float) value / 10.0f);
   }
 
   @Override
-  protected void entityInit() {
-  }
-
-  @Override
-  protected void readEntityFromNBT(CompoundNBT compound) {
-    getDataManager().set(FlareEntity.value, compound.getFloat("value"));
-    getDataManager().setDirty(FlareEntity.value);
-    if (compound.contains("UUIDmost")) {
-      id = new UUID(compound.getLong("UUIDmost"), compound.getLong("UUIDleast"));
-    }
-  }
-
-  @Override
-  protected void writeEntityToNBT(CompoundNBT compound) {
-    compound.setFloat("value", getDataManager().get(value));
-    if (id != null) {
-      compound.setLong("UUIDmost", id.getMostSignificantBits());
-      compound.setLong("UUIDleast", id.getLeastSignificantBits());
-    }
-  }
-
-  @Override
-  public void onUpdate() {
-    super.onUpdate();
+  public void tick() {
+    super.tick();
     float alpha = Math.min(40, (320.0f - (float) lifetime)) / 40.0f;
     this.lifetime--;
     this.getDataManager().set(value, this.getDataManager().get(value) - 0.025f);
 
     if (this.lifetime <= 0 || this.getDataManager().get(value) <= 0) {
-      this.getEntityWorld().removeEntity(this);
-      this.setDead();
+      this.remove();
     }
 
-    this.posX += this.motionX;
-    this.posY += this.motionY;
-    this.posZ += this.motionZ;
+    Vec3d motion = this.getMotion();
+
+    this.posX += motion.x;
+    this.posY += motion.y;
+    this.posZ += motion.z;
     BlockState state = getEntityWorld().getBlockState(getPosition());
-    if (state.isFullCube() && state.isOpaqueCube()) {
+    if (state.isSolid() && state.isOpaqueCube(getEntityWorld(), getPosition())) {
       if (getEntityWorld().isRemote) {
         for (int i = 0; i < 40; i++) {
           ParticleUtil.spawnParticleFiery(getEntityWorld(), (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f),
@@ -96,7 +82,7 @@ public class FlareEntity extends Entity {
       if (world.isAirBlock(getPosition().up())) {
         world.setBlockState(getPosition().up(), ModBlocks.fey_fire.getDefaultState());
       }
-      this.setDead();
+      this.remove();
     }
     if (getEntityWorld().isRemote) {
       for (double i = 0; i < 3; i++) {
@@ -117,7 +103,7 @@ public class FlareEntity extends Entity {
               getDataManager().get(value) + rand.nextFloat() * getDataManager().get(value), 40);
         }
       }
-      this.setDead();
+      this.remove();
     }
   }
 
@@ -129,7 +115,37 @@ public class FlareEntity extends Entity {
         continue;
       }
       target.attackEntityFrom(source, ((RitualFireStorm) RitualRegistry.ritual_fire_storm).projectile_damage);
-      target.knockBack(this, ((RitualFireStorm) RitualRegistry.ritual_fire_storm).projectile_knockback, -motionX, -motionZ);
+      Vec3d motion = this.getMotion();
+      target.knockBack(this, ((RitualFireStorm) RitualRegistry.ritual_fire_storm).projectile_knockback, -motion.x, -motion.z);
     }
+  }
+
+  @Override
+  protected void registerData() {
+    this.getDataManager().register(value, 0f);
+  }
+
+  @Override
+  protected void readAdditional(CompoundNBT compound) {
+    getDataManager().set(FlareEntity.value, compound.getFloat("value"));
+    if (compound.contains("UUIDmost")) {
+      id = new UUID(compound.getLong("UUIDmost"), compound.getLong("UUIDleast"));
+    }
+  }
+
+  @Override
+  protected void writeAdditional(CompoundNBT compound) {
+    compound.putFloat("value", getDataManager().get(value));
+    if (id != null) {
+      compound.putLong("UUIDmost", id.getMostSignificantBits());
+      compound.putLong("UUIDleast", id.getLeastSignificantBits());
+    }
+  }
+
+  // TODO: This
+
+  @Override
+  public IPacket<?> createSpawnPacket() {
+    return null;
   }
 }

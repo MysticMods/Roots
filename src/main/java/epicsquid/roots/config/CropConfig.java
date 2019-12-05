@@ -1,4 +1,4 @@
-package epicsquid.roots.config;
+/*package epicsquid.roots.config;
 
 import com.google.common.collect.Sets;
 import epicsquid.mysticallib.util.ConfigUtil;
@@ -70,4 +70,4 @@ public class CropConfig {
 
     return harvestBlacklist;
   }
-}
+}*/

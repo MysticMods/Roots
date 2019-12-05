@@ -1,4 +1,4 @@
-package epicsquid.roots.config;
+/*package epicsquid.roots.config;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -104,4 +104,4 @@ public class MossConfig {
 
     return null;
   }
-}
+}*/

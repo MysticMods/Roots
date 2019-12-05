@@ -8,6 +8,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
+import net.minecraftforge.common.util.LazyOptional;
 
 import javax.annotation.Nonnull;
 
@@ -30,13 +31,13 @@ public class RunicShearsCapabilityProvider implements ICapabilityProvider, ICapa
   }
 
   @Override
-  public boolean hasCapability(Capability<?> capability, Direction facing) {
-    return capability == RUNIC_SHEARS_CAPABILITY;
+  public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, Direction facing) {
+    return getCapability(capability);
   }
 
   @Override
-  public <T> T getCapability(@Nonnull Capability<T> capability, Direction facing) {
-    return capability == RUNIC_SHEARS_CAPABILITY ? RUNIC_SHEARS_CAPABILITY.cast(this.instance) : null;
+  public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability) {
+    return capability == RUNIC_SHEARS_CAPABILITY ? LazyOptional.of(() -> (T) this.instance).cast() : LazyOptional.empty();
   }
 
   //This is here to get rid of all the ugly PLAYER_GROVE might be null

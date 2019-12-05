@@ -1,27 +1,27 @@
 package epicsquid.roots.api;
 
-import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.PlantType;
 
 public class CustomPlantType {
 
   /**
    * ID: 0
    */
-  public static final EnumPlantType ELEMENT_FIRE = EnumPlantType.getPlantType("element_fire");
+  public static final PlantType ELEMENT_FIRE = PlantType.create("element_fire");
   /**
    * ID: 1
    */
-  public static final EnumPlantType ELEMENT_WATER = EnumPlantType.getPlantType("element_water");
+  public static final PlantType ELEMENT_WATER = PlantType.create("element_water");
   /**
    * ID: 2
    */
-  public static final EnumPlantType ELEMENT_AIR = EnumPlantType.getPlantType("element_air");
+  public static final PlantType ELEMENT_AIR = PlantType.create("element_air");
   /**
    * ID: 3
    */
-  public static final EnumPlantType ELEMENT_EARTH = EnumPlantType.getPlantType("element_earth");
+  public static final PlantType ELEMENT_EARTH = PlantType.create("element_earth");
 
-  public static EnumPlantType getTypeFromId(int id) {
+  public static PlantType getTypeFromId(int id) {
     switch (id) {
       case 0:
         return ELEMENT_FIRE;

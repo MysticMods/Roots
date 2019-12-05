@@ -1,4 +1,6 @@
-package epicsquid.roots.entity.projectile;
+// TODO: Just replicate the Arrow class
+
+/*package epicsquid.roots.entity.projectile;
 
 import epicsquid.roots.init.ModItems;
 import net.minecraft.entity.LivingEntity;
@@ -23,4 +25,4 @@ public class LivingArrowEntity extends ArrowEntity {
   protected ItemStack getArrowStack() {
     return new ItemStack(ModItems.living_arrow);
   }
-}
+}*/

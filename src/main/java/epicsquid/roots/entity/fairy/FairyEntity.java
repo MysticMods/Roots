@@ -1,16 +1,11 @@
 package epicsquid.roots.entity.fairy;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.particle.ParticleUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FlyingEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.goal.LookAtGoal;
-import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -18,15 +13,12 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public class FairyEntity extends FlyingEntity {
-  public static ResourceLocation LOOT_TABLE = new ResourceLocation(Roots.MODID,  "entity/fairy");
+  public static ResourceLocation LOOT_TABLE = new ResourceLocation(Roots.MODID, "entity/fairy");
 
   public static final DataParameter<BlockPos> spawnPosition = EntityDataManager.<BlockPos>createKey(FairyEntity.class, DataSerializers.BLOCK_POS);
   public static final DataParameter<BlockPos> targetPosition = EntityDataManager.<BlockPos>createKey(FairyEntity.class, DataSerializers.BLOCK_POS);
@@ -34,11 +26,15 @@ public class FairyEntity extends FlyingEntity {
   public static final DataParameter<Boolean> sitting = EntityDataManager.<Boolean>createKey(FairyEntity.class, DataSerializers.BOOLEAN);
   public static UUID owner = null;
 
-  public FairyEntity(World world) {
+  protected FairyEntity(EntityType<? extends FlyingEntity> type, World worldIn) {
+    super(type, worldIn);
+  }
+
+/*  public FairyEntity(World world) {
     super(world);
     setSize(0.45f, 0.6f);
     this.experienceValue = 10;
-  }
+  }*/
 
   @Override
   public boolean processInteract(PlayerEntity player, Hand hand) {
@@ -91,7 +87,7 @@ public class FairyEntity extends FlyingEntity {
   }
 
   public int getVariant() {
-    return (int) (Math.abs(getPersistentID().getMostSignificantBits()) % 4);
+    return (int) (Math.abs(getUniqueID().getMostSignificantBits()) % 4);
   }
 
   public float getBlue() {
@@ -125,9 +121,11 @@ public class FairyEntity extends FlyingEntity {
   protected void collideWithNearbyEntities() {
   }
 
-  @Override
-  public void onUpdate() {
-    super.onUpdate();
+  // TODO: This is just the visual
+
+/*  @Override
+  public void tick() {
+    super.tick();
     if (world.isRemote) {
       for (int i = 0; i < 2; i++) {
         float x = (float) posX + 0.25f * (rand.nextFloat() - 0.5f);
@@ -136,9 +134,11 @@ public class FairyEntity extends FlyingEntity {
         ParticleUtil.spawnParticleGlow(world, x, y, z, 0.0375f * (rand.nextFloat() - 0.5f), 0.0375f * (rand.nextFloat() - 0.5f), 0.0375f * (rand.nextFloat() - 0.5f), getRed(), getGreen(), getBlue(), 0.125f, 6.0f + 6.0f * rand.nextFloat(), 20);
       }
     }
-  }
+  }*/
 
-  @Override
+  // TODO: THIS IS CANCEROUS
+
+/*  @Override
   protected void updateAITasks() {
     super.updateAITasks();
 
@@ -184,27 +184,27 @@ public class FairyEntity extends FlyingEntity {
 
         switch (getVariant()) {
           case 0: {
-            /*if (EffectManager.getDuration(p, EffectManager.effect_naturescure.name) < 2) {
+            *//*if (EffectManager.getDuration(p, EffectManager.effect_naturescure.name) < 2) {
               EffectManager.assignEffect(p, EffectManager.effect_naturescure.name, 22, EffectNaturesCure.createData(count));
-            }*/
+            }*//*
             break;
           }
           case 1: {
-            /*if (EffectManager.getDuration(p, EffectManager.effect_arcanism.name) < 2) {
+            *//*if (EffectManager.getDuration(p, EffectManager.effect_arcanism.name) < 2) {
               EffectManager.assignEffect(p, EffectManager.effect_arcanism.name, 22, EffectArcanism.createData(count));
-            }*/
+            }*//*
             break;
           }
           case 2: {
-            /*if (EffectManager.getDuration(p, EffectManager.effect_regen.name) < 2) {
+            *//*if (EffectManager.getDuration(p, EffectManager.effect_regen.name) < 2) {
               EffectManager.assignEffect(p, EffectManager.effect_regen.name, 22, EffectRegen.createData(count));
-            }*/
+            }*//*
             break;
           }
           case 3: {
-            /*if (EffectManager.getDuration(p, EffectManager.effect_fireresist.name) < 2) {
+            *//*if (EffectManager.getDuration(p, EffectManager.effect_fireresist.name) < 2) {
               EffectManager.assignEffect(p, EffectManager.effect_fireresist.name, 22, EffectFireResist.createData(count));
-            }*/
+            }*//*
             break;
           }
         }
@@ -253,7 +253,7 @@ public class FairyEntity extends FlyingEntity {
       this.moveForward = 0.5F;
       this.rotationYaw += f1;
     }
-  }
+  }*/
 
   @Override
   public void damageEntity(DamageSource source, float amount) {
@@ -281,7 +281,9 @@ public class FairyEntity extends FlyingEntity {
   protected void updateFallState(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
   }
 
-  @Override
+  // TODO: Properly initialise these
+
+/*  @Override
   protected void entityInit() {
     super.entityInit();
     this.getDataManager().register(tame, false);
@@ -294,25 +296,24 @@ public class FairyEntity extends FlyingEntity {
   protected void initEntityAI() {
     this.tasks.addTask(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
     this.tasks.addTask(7, new LookRandomlyGoal(this));
-  }
+  }*/
 
-  @Override
-  public boolean isAIDisabled() {
-    return false;
-  }
-
-  @Override
+/*  @Override
   protected void applyEntityAttributes() {
     super.applyEntityAttributes();
     this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(18.0D);
-  }
+  }*/
+
+  // TODO: This isn't the right thing for the loot table
 
   @Override
   public ResourceLocation getLootTable() {
     return new ResourceLocation("roots:entity/fairy");
   }
 
-  @Override
+  // TODO ???
+
+/*  @Override
   public float getEyeHeight() {
     return this.height;
   }
@@ -320,9 +321,9 @@ public class FairyEntity extends FlyingEntity {
   @Override
   public int getBrightnessForRender() {
     return 255;
-  }
+  }*/
 
-  @Override
+/*  @Override
   public void readEntityFromNBT(CompoundNBT compound) {
     super.readEntityFromNBT(compound);
     if (compound.contains("owner")) {
@@ -356,5 +357,5 @@ public class FairyEntity extends FlyingEntity {
     compound.putInt("targetX", getDataManager().get(targetPosition).getX());
     compound.putInt("targetY", getDataManager().get(targetPosition).getY());
     compound.putInt("targetZ", getDataManager().get(targetPosition).getZ());
-  }
+  }*/
 }

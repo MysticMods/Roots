@@ -1,16 +1,15 @@
 package epicsquid.roots.entity.ritual;
 
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.network.fx.MessageFrosLandsProgressFX;
 import epicsquid.roots.ritual.IColdRitual;
 import epicsquid.roots.ritual.RitualFrostLands;
 import epicsquid.roots.ritual.RitualRegistry;
-import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.FarmlandBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.passive.SnowGolemEntity;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.FarmlandBlock;
+import net.minecraft.block.FlowingFluidBlock;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.passive.SnowGolemEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -21,15 +20,19 @@ public class FrostLandsRitualEntity extends BaseRitualEntity implements IColdRit
 
   private RitualFrostLands ritual;
 
-  public FrostLandsRitualEntity(World worldIn) {
-    super(worldIn);
-    this.getDataManager().register(lifetime, RitualRegistry.ritual_frost_lands.getDuration() + 20);
+  public FrostLandsRitualEntity(EntityType<?> entityTypeIn, World worldIn) {
+    super(entityTypeIn, worldIn);
     this.ritual = (RitualFrostLands) RitualRegistry.ritual_frost_lands;
   }
 
   @Override
-  public void onUpdate() {
-    super.onUpdate();
+  protected void registerData() {
+    this.getDataManager().register(lifetime, RitualRegistry.ritual_frost_lands.getDuration() + 20);
+  }
+
+  @Override
+  public void tick() {
+    super.tick();
 
     if (world.isRemote) return;
     List<BlockPos> affectedPositions = new ArrayList<>();
@@ -41,9 +44,11 @@ public class FrostLandsRitualEntity extends BaseRitualEntity implements IColdRit
         affectedPositions.add(snowman.getPosition());
       }
 
-      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, (BlockPos pos) -> world.isAirBlock(pos.up()) && !world.isAirBlock(pos) && Blocks.SNOW_LAYER.canPlaceBlockAt(world, pos));
+      // TODO: How do you place snow layers down?
+
+      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, (BlockPos pos) -> world.isAirBlock(pos.up()) && !world.isAirBlock(pos) /*&& Blocks.SNOW_LAYER.canPlaceBlockAt(world, pos)*/);
       int breakout = 0;
-      while (!positions.isEmpty() && breakout < 20) {
+      /*while (!positions.isEmpty() && breakout < 20) {
         BlockPos choice = positions.get(rand.nextInt(positions.size()));
         if (world.getBlockState(choice).getBlock() == Blocks.SNOW_LAYER) {
           breakout++;
@@ -52,14 +57,14 @@ public class FrostLandsRitualEntity extends BaseRitualEntity implements IColdRit
           affectedPositions.add(choice.up());
           break;
         }
-      }
+      }*/
 
       if (Util.rand.nextInt(ritual.interval_spawn) == 0) {
-        SnowGolemEntity snowy = new SnowGolemEntity(world);
-        if (!positions.isEmpty()) {
+        SnowGolemEntity snowy = EntityType.SNOW_GOLEM.create(world);
+        if (!positions.isEmpty() && snowy != null) {
           BlockPos chosen = positions.get(Util.rand.nextInt(positions.size()));
           snowy.setPosition(chosen.getX() + 0.5, chosen.getY() + 1, chosen.getZ());
-          world.spawnEntity(snowy);
+          world.addEntity(snowy);
           affectedPositions.add(snowy.getPosition());
         }
       }
@@ -70,12 +75,12 @@ public class FrostLandsRitualEntity extends BaseRitualEntity implements IColdRit
         BlockState state = world.getBlockState(choice);
 
         if (state.getBlock() == Blocks.WATER) {
-          if (state.getValue(BlockLiquid.LEVEL) == 0) {
+          if (state.get(FlowingFluidBlock.LEVEL) == 0) {
             world.setBlockState(choice, Blocks.ICE.getDefaultState());
             affectedPositions.add(choice);
           }
         } else if (state.getBlock() == Blocks.LAVA) {
-          if (state.getValue(BlockLiquid.LEVEL) == 0) {
+          if (state.get(FlowingFluidBlock.LEVEL) == 0) {
             if (!world.isRemote) {
               world.setBlockState(choice, Blocks.OBSIDIAN.getDefaultState());
               //world.playSound(null, choice, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 1);
@@ -92,23 +97,25 @@ public class FrostLandsRitualEntity extends BaseRitualEntity implements IColdRit
 
       positions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, Blocks.FIRE);
       for (BlockPos pos : positions) {
-        world.setBlockToAir(pos);
+        // TODO: Is there no alternative to setBlockToAir?
+        //world.setBlockToAir(pos);
         affectedPositions.add(pos);
       }
 
       positions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, Blocks.FARMLAND);
       for (BlockPos pos : positions) {
         BlockState state = world.getBlockState(pos);
-        if (state.getValue(FarmlandBlock.MOISTURE) != 7) {
-          world.setBlockState(pos, state.withProperty(FarmlandBlock.MOISTURE, state.getValue(FarmlandBlock.MOISTURE) + 1));
+        if (state.get(FarmlandBlock.MOISTURE) != 7) {
+          world.setBlockState(pos, state.with(FarmlandBlock.MOISTURE, state.get(FarmlandBlock.MOISTURE) + 1));
           affectedPositions.add(pos);
         }
       }
     }
 
     if (!affectedPositions.isEmpty()) {
-      MessageFrosLandsProgressFX progress = new MessageFrosLandsProgressFX(affectedPositions);
-      PacketHandler.sendToAllTracking(progress, this);
+      // TODO: Reinstate this when we do packets
+      /*MessageFrosLandsProgressFX progress = new MessageFrosLandsProgressFX(affectedPositions);
+      PacketHandler.sendToAllTracking(progress, this);*/
     }
   }
 }

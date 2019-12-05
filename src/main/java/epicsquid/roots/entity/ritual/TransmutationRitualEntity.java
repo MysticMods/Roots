@@ -26,8 +26,8 @@ public class TransmutationRitualEntity extends BaseRitualEntity {
   }
 
   @Override
-  public void onUpdate() {
-    super.onUpdate();
+  public void tick() {
+    super.tick();
 
     if (world.isRemote) return;
 

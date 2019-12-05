@@ -1,4 +1,4 @@
-package epicsquid.roots.config;
+/*package epicsquid.roots.config;
 
 import epicsquid.roots.Roots;
 import net.minecraftforge.common.config.Config;
@@ -19,4 +19,4 @@ public class ElementalSoilConfig {
   @Config.Comment("The delay you have to wait before the transmutation takes place (in ticks)")
   public static int EarthSoilDelay = 50;
 
-}
+}*/

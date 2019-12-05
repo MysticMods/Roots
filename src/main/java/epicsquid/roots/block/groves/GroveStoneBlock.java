@@ -1,34 +1,18 @@
 package epicsquid.roots.block.groves;
 
-import epicsquid.mysticallib.block.BlockBase;
-import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticallib.particle.particles.ParticleLeafArc;
-import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.config.GeneralConfig;
-import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
-import net.minecraft.block.*;
-import net.minecraft.block.TallGrassBlock;
-import net.minecraft.block.DoublePlantBlock;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.BooleanProperty;
-import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.ItemStack;
+import net.minecraft.block.material.Material;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.EnumProperty;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.Collections;
@@ -36,18 +20,24 @@ import java.util.List;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public class GroveStoneBlock extends BlockBase {
-  public static final PropertyEnum<Half> HALF = PropertyEnum.create("half", Half.class);
-  public static final PropertyDirection FACING = PropertyDirection.create("facing", (facing) -> facing == Direction.NORTH || facing == Direction.EAST);
+public class GroveStoneBlock extends Block {
+  public static final EnumProperty<Half> HALF = EnumProperty.create("half", Half.class);
+  public static final DirectionProperty FACING = DirectionProperty.create("facing", (facing) -> facing == Direction.NORTH || facing == Direction.EAST);
   public static final BooleanProperty VALID = BooleanProperty.create("valid");
 
-  public GroveStoneBlock(@Nonnull String name) {
+  public GroveStoneBlock(Properties properties) {
+    super(properties);
+  }
+
+/*  public GroveStoneBlock(@Nonnull String name) {
     super(Material.ROCK, SoundType.STONE, 2.5f, name);
 
     this.setDefaultState(this.blockState.getBaseState().withProperty(VALID, false).withProperty(HALF, Half.BOTTOM).withProperty(FACING, Direction.NORTH));
     this.setTickRandomly(true);
+
+    TODO:
     useNeighborBrightness = true;
-  }
+  }*/
 
   @Nonnull
   @Override
@@ -55,52 +45,9 @@ public class GroveStoneBlock extends BlockBase {
     return BlockRenderLayer.CUTOUT;
   }
 
-  @Override
-  public boolean isFullCube(@Nonnull BlockState state) {
-    return false;
-  }
+  // TODO: Handle placement and states
 
-  @Override
-  public boolean isOpaqueCube(@Nonnull BlockState state) {
-    return false;
-  }
-
-  @Nonnull
-  @Override
-  public AxisAlignedBB getBoundingBox(@Nonnull BlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
-    if (state.getValue(FACING) == Direction.NORTH) {
-      if (state.getValue(HALF) == Half.TOP) {
-        return new AxisAlignedBB(0.15, 0, 0.2, 0.85, 0.7, 0.8);
-      } else /*if (state.getValue(HALF) == Half.BOTTOM)*/ {
-        return new AxisAlignedBB(0.15, 0, 0.2, 0.85, 1, 0.8);
-      }
-    } else {
-      if (state.getValue(HALF) == Half.TOP) {
-        return new AxisAlignedBB(0.2, 0, 0.15, 0.8, 0.7, 0.85);
-      } else /*if (state.getValue(HALF) == Half.BOTTOM)*/ {
-        return new AxisAlignedBB(0.2, 0, 0.15, 0.8, 1, 0.85);
-      }
-    }
-  }
-
-  @Override
-  @SuppressWarnings("deprecation")
-  public BlockState getStateFromMeta(int meta) {
-    return getDefaultState().withProperty(VALID, (meta & 1) == 1).withProperty(HALF, Half.fromInt((meta & 7) >> 1)).withProperty(FACING, (meta >> 3) == 0 ? Direction.NORTH : Direction.EAST);
-  }
-
-  @Override
-  public int getMetaFromState(BlockState state) {
-    int meta = (((state.getValue(FACING) == Direction.NORTH ? 0 : 1) << 2 ^ state.getValue(HALF).ordinal())) << 1 ^ (state.getValue(VALID) ? 1 : 0);
-    return meta;
-  }
-
-  @Override
-  protected BlockStateContainer createBlockState() {
-    return new BlockStateContainer(this, HALF, VALID, FACING);
-  }
-
-  @Override
+/*  @Override
   public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
     if (worldIn.getBlockState(pos.down()).getBlock() == this) return false;
 
@@ -115,9 +62,9 @@ public class GroveStoneBlock extends BlockBase {
     super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
     worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(HALF, Half.MIDDLE).withProperty(FACING, state.getValue(FACING)));
     worldIn.setBlockState(pos.up().up(), this.getDefaultState().withProperty(HALF, Half.TOP).withProperty(FACING, state.getValue(FACING)));
-  }
+  }*/
 
-  @Override
+/*  @Override
   @SuppressWarnings("deprecation")
   public BlockState getStateForPlacement(World worldIn, BlockPos pos, Direction facing, float hitX, float hitY, float hitZ, int meta, LivingEntity placer) {
     // Work out the facing
@@ -128,9 +75,11 @@ public class GroveStoneBlock extends BlockBase {
       f = Direction.EAST;
     }
     return this.getDefaultState().withProperty(HALF, Half.BOTTOM).withProperty(FACING, f);
-  }
+  }*/
 
-  @Override
+  // TODO: Handle clearing of accessors/multiblocks
+
+/*  @Override
   public void breakBlock(World worldIn, BlockPos pos, BlockState state) {
     super.breakBlock(worldIn, pos, state);
 
@@ -151,12 +100,7 @@ public class GroveStoneBlock extends BlockBase {
     if (upup.getBlock() == this) {
       worldIn.setBlockToAir(pos.up());
     }
-  }
-
-  @Override
-  public int damageDropped(BlockState state) {
-    return 0;
-  }
+  }*/
 
   public enum Half implements IStringSerializable {
     TOP,
@@ -185,15 +129,17 @@ public class GroveStoneBlock extends BlockBase {
     }
   }
 
-  @Override
+
+  // TODO: Override correctly
+  //@Override
   public void randomTick(World world, BlockPos pos, BlockState state, Random random) {
-    super.randomTick(world, pos, state, random);
+    //super.randomTick(world, pos, state, random);
 
     if (!GeneralConfig.EnableGroveStoneEnvironment) return;
 
     if (world.isRemote) return;
 
-    if (!state.getValue(VALID)) return;
+    if (!state.get(VALID)) return;
 
     if (random.nextInt(GeneralConfig.GroveStoneChance) == 1) {
       int effectsCount = 1 + random.nextInt(1);
@@ -201,7 +147,7 @@ public class GroveStoneBlock extends BlockBase {
       List<BlockPos> positions = Util.getBlocksWithinRadius(world, pos.down(), 4, 5, 4, (p) -> {
         if (world.isAirBlock(p.up())) {
           BlockState s = world.getBlockState(p);
-          return s.getMaterial() == Material.GRASS;
+          return s.getMaterial() == Material.EARTH;
         }
         return false;
       });
@@ -214,7 +160,7 @@ public class GroveStoneBlock extends BlockBase {
         BlockState s = world.getBlockState(p);
         Block b = s.getBlock();
         // TODO: Improve this somehow
-        if (s.getMaterial() == Material.GRASS && world.isAirBlock(p.up().up())) {
+/*        if (s.getMaterial() == Material.EARTH && world.isAirBlock(p.up().up())) {
           switch (random.nextInt(50)) {
             case 0:
               if (b.canSustainPlant(s, world, p, Direction.UP, Blocks.DOUBLE_PLANT)) {
@@ -250,14 +196,14 @@ public class GroveStoneBlock extends BlockBase {
               continue;
           }
           MessageOvergrowthEffectFX message = new MessageOvergrowthEffectFX(p.getX() + 0.5, p.getY() + 0.3, p.getZ() + 0.5);
-          PacketHandler.sendToAllTracking(message, world, p.up());
-          effectsCount--;
-        }
+          PacketHandler.sendToAllTracking(message, world, p.up());*/
+        effectsCount--;
       }
     }
   }
+}
 
-  @Override
+/*  @Override
   @OnlyIn(Dist.CLIENT)
   public void randomDisplayTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     super.randomDisplayTick(stateIn, worldIn, pos, rand);
@@ -281,14 +227,4 @@ public class GroveStoneBlock extends BlockBase {
         }
       }
     }
-  }
-
-  @Override
-  @Nonnull
-  public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, BlockState state, BlockPos pos, Direction face) {
-    if (face == Direction.UP) {
-      return BlockFaceShape.UNDEFINED;
-    }
-    return super.getBlockFaceShape(worldIn, state, pos, face);
-  }
-}
+  }*/

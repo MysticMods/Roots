@@ -23,8 +23,8 @@ public class WardingProtectionRitualEntity extends BaseRitualEntity {
   }
 
   @Override
-  public void onUpdate() {
-    super.onUpdate();
+  public void tick() {
+    super.tick();
     float alpha = (float) Math.min(40, (RitualRegistry.ritual_warding_protection.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
 
     if (world.isRemote && getDataManager().get(lifetime) > 0) {

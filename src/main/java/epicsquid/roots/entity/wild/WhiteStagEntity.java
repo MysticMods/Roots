@@ -56,8 +56,8 @@ public class WhiteStagEntity extends AnimalEntity {
   }
 
   @Override
-  public void onUpdate() {
-    super.onUpdate();
+  public void tick() {
+    super.tick();
     this.rotationYaw = this.rotationYawHead;
   }
 

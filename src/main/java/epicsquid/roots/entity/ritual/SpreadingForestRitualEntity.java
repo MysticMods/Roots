@@ -64,8 +64,8 @@ public class SpreadingForestRitualEntity extends BaseRitualEntity {
   }
 
   @Override
-  public void onUpdate() {
-    super.onUpdate();
+  public void tick() {
+    super.tick();
     if (SAPLING_OREDICT == -1) {
       SAPLING_OREDICT = OreDictionary.getOreID("treeSapling");
     }

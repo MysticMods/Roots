@@ -2,7 +2,9 @@ package epicsquid.roots.entity.ritual;
 
 import epicsquid.roots.block.BonfireBlock;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.IPacket;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -18,11 +20,18 @@ public abstract class BaseRitualEntity extends Entity implements IRitualEntity {
   private double y = 0;
   private double z = 0;
 
-  public BaseRitualEntity(World worldIn) {
+  public BaseRitualEntity(EntityType<?> entityTypeIn, World worldIn) {
+    super(entityTypeIn, worldIn);
+  }
+
+/*  public BaseRitualEntity(World worldIn) {
     super(worldIn);
     this.setInvisible(true);
     this.setSize(1, 1);
-  }
+  }*/
+
+  @Override
+  protected abstract void registerData();
 
   @Override
   public void setPosition(double x, double y, double z) {
@@ -32,6 +41,25 @@ public abstract class BaseRitualEntity extends Entity implements IRitualEntity {
     this.z = z;
   }
 
+  @Override
+  protected void readAdditional(CompoundNBT compound) {
+    this.x = compound.getDouble("x");
+    this.y = compound.getDouble("y");
+    this.z = compound.getDouble("z");
+    this.setEntityId(compound.getInt("entity_id"));
+    this.setPosition(x, y, z);
+    getDataManager().set(lifetime, compound.getInt("lifetime"));
+  }
+
+  @Override
+  protected void writeAdditional(CompoundNBT compound) {
+    compound.putDouble("x", x);
+    compound.putDouble("y", y);
+    compound.putDouble("z", z);
+    compound.putInt("entity_id", getEntityId());
+    compound.putInt("lifetime", getDataManager().get(lifetime));
+  }
+
   @Nonnull
   @Override
   public BlockPos getPosition() {
@@ -39,49 +67,35 @@ public abstract class BaseRitualEntity extends Entity implements IRitualEntity {
   }
 
   @Override
+  public IPacket<?> createSpawnPacket() {
+    return null;
+  }
+
+  @Override
   public boolean isEntityInsideOpaqueBlock() {
     return false;
   }
 
-  @Override
+  // TODO: What does this do -> how to replicate
+
+/*  @Override
   protected void entityInit() {
     this.posY = y;
     this.posX = x;
     this.posZ = z;
-  }
+  }*/
 
   @Override
-  protected void readEntityFromNBT(CompoundNBT compound) {
-    this.x = compound.getDouble("x");
-    this.y = compound.getDouble("y");
-    this.z = compound.getDouble("z");
-    this.setEntityId(compound.getInt("entity_id"));
-    this.setPosition(x, y, z);
-    getDataManager().set(lifetime, compound.getInt("lifetime"));
-    getDataManager().setDirty(lifetime);
-  }
-
-  @Override
-  protected void writeEntityToNBT(CompoundNBT compound) {
-    compound.setDouble("x", x);
-    compound.setDouble("y", y);
-    compound.setDouble("z", z);
-    compound.putInt("entity_id", getEntityId());
-    compound.putInt("lifetime", getDataManager().get(lifetime));
-  }
-
-  @Override
-  public void onUpdate() {
-    super.onUpdate();
+  public void tick() {
+    super.tick();
 
     getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
-    getDataManager().setDirty(lifetime);
     if (getDataManager().get(lifetime) < 0) {
-      setDead();
+      remove();
     }
 
     if (!world.isRemote && !(world.getBlockState(getPosition()).getBlock() instanceof BonfireBlock)) {
-      setDead();
+      remove();
     }
   }
 }

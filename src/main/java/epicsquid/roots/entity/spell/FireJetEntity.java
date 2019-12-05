@@ -42,7 +42,7 @@ public class FireJetEntity extends Entity {
   }
 
   @Override
-  public void onUpdate() {
+  public void tick() {
     getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
     getDataManager().setDirty(lifetime);
     if (getDataManager().get(lifetime) <= 0) {

@@ -1,16 +1,16 @@
 package epicsquid.roots.entity.fairy.render;
 
 import epicsquid.roots.entity.fairy.FairyEntity;
+import epicsquid.roots.model.entity.FairyModel;
 import epicsquid.roots.model.entity.ModelHolder;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
-public class FairyRenderer extends MobRenderer<FairyEntity> {
-  public FairyRenderer(EntityRendererManager renderManager, ModelBase modelBase, float shadowSize) {
+public class FairyRenderer extends MobRenderer<FairyEntity, FairyModel> {
+  public FairyRenderer(EntityRendererManager renderManager, FairyModel modelBase, float shadowSize) {
     super(renderManager, modelBase, shadowSize);
   }
 
@@ -38,7 +38,7 @@ public class FairyRenderer extends MobRenderer<FairyEntity> {
   public static class Factory implements IRenderFactory<FairyEntity> {
     @Override
     public EntityRenderer<FairyEntity> createRenderFor(EntityRendererManager manager) {
-      return new FairyRenderer(manager, ModelHolder.models.get("fairy"), 0f);
+      return new FairyRenderer(manager, ModelHolder.fairyModel, 0f);
     }
   }
 }

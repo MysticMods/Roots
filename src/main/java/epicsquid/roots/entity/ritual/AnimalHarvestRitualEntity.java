@@ -1,58 +1,56 @@
 package epicsquid.roots.entity.ritual;
 
-import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.config.RitualConfig;
 import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.recipe.AnimalHarvestFishRecipe;
 import epicsquid.roots.ritual.RitualAnimalHarvest;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.types.WeightedRegistry;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.ServerWorld;
-import net.minecraft.world.storage.loot.LootContext;
-import net.minecraft.world.storage.loot.LootTable;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.common.util.FakePlayerFactory;
-import net.minecraftforge.fluids.capability.wrappers.FluidBlockWrapper;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
-import java.util.Random;
 
 public class AnimalHarvestRitualEntity extends BaseRitualEntity {
 
   private ObjectOpenHashSet<Class<? extends Entity>> harvestClasses;
   private RitualAnimalHarvest ritual;
 
-  public AnimalHarvestRitualEntity(World worldIn) {
+  public AnimalHarvestRitualEntity(EntityType<?> entityTypeIn, World worldIn) {
+    super(entityTypeIn, worldIn);
+  }
+
+/*  public AnimalHarvestRitualEntity(World worldIn) {
     super(worldIn);
-    this.getDataManager().register(lifetime, RitualRegistry.ritual_animal_harvest.getDuration() + 20);
+
     this.harvestClasses = ModRecipes.getAnimalHarvestClasses();
     this.ritual = (RitualAnimalHarvest) RitualRegistry.ritual_animal_harvest;
+  }*/
+
+  @Override
+  protected void registerData() {
+    this.getDataManager().register(lifetime, RitualRegistry.ritual_animal_harvest.getDuration() + 20);
   }
 
   @Override
-  public void onUpdate() {
-    super.onUpdate();
+  public void tick() {
+    super.tick();
 
     if (this.ticksExisted % ritual.interval == 0) {
       for (int i = 0; i < ritual.count; i++) {
@@ -62,11 +60,11 @@ public class AnimalHarvestRitualEntity extends BaseRitualEntity {
   }
 
   private boolean doHarvest() {
-    List<MobEntity> entityList = Util.getEntitiesWithinRadius(world, (entity) -> harvestClasses.contains(entity.getClass()), getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z);
-    if (RitualConfig.animalHarvestDoFish) {
+    List<LivingEntity> entityList = Util.getEntitiesWithinRadius(world, (entity) -> harvestClasses.contains(entity.getClass()), getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z);
+    if (true /*RitualConfig.animalHarvestDoFish*/) {
       List<BlockPos> waterSourceBlocks = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, (p) -> {
         BlockState state = world.getBlockState(p);
-        return (state.getMaterial() == Material.WATER && state.getPropertyKeys().contains(BlockLiquid.LEVEL) && state.getValue(BlockLiquid.LEVEL) == 0);
+        return (state.getMaterial() == Material.WATER && state.getProperties().contains(FlowingFluidBlock.LEVEL) && state.get(FlowingFluidBlock.LEVEL) == 0);
       });
       WeightedRegistry<AnimalHarvestFishRecipe> recipes = new WeightedRegistry<>(ModRecipes.getFishRecipes());
       if (!recipes.isEmpty() && !waterSourceBlocks.isEmpty() && (rand.nextInt(ritual.fish_chance) == 0 || entityList.isEmpty())) {
@@ -76,19 +74,20 @@ public class AnimalHarvestRitualEntity extends BaseRitualEntity {
           ItemStack stack = recipe.getItemStack().copy();
           // Protection against those nasty "must be positive" errors
           stack.setCount(ritual.fish_count + Math.max(0, (rand.nextInt(ritual.fish_additional) - 2)));
-          ItemUtil.spawnItem(world, pos.add(0, 1, 0), stack);
+          InventoryHelper.spawnItemStack(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, stack);
         }
-        PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY() + 1, pos.getZ()), this);
+        //PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY() + 1, pos.getZ()), this);
         return true;
       }
     }
     if (entityList.isEmpty()) return false;
-    MobEntity entity = entityList.get(Util.rand.nextInt(entityList.size()));
+    LivingEntity entity = entityList.get(Util.rand.nextInt(entityList.size()));
 
     boolean didDrops = false;
 
     if (!world.isRemote) {
-      entity.captureDrops = true;
+      // TODO: What replaced capture drops?
+/*      entity.captureDrops = true;
       entity.capturedDrops.clear();
       int looting = Util.rand.nextInt(ritual.looting_chance) == 0 ? ritual.looting_value : 0;
       dropLoot(entity, looting);
@@ -101,7 +100,7 @@ public class AnimalHarvestRitualEntity extends BaseRitualEntity {
           world.spawnEntity(item);
           didDrops = true;
         }
-      }
+      }*/
     }
 
     if (didDrops) {
@@ -125,7 +124,9 @@ public class AnimalHarvestRitualEntity extends BaseRitualEntity {
     }
   }
 
-  private void dropLoot(MobEntity entity, int looting) {
+  // TODO: Reimplement this
+
+/*  private void dropLoot(MobEntity entity, int looting) {
     ResourceLocation resourcelocation = entity.deathLootTable;
 
     if (resourcelocation == null) {
@@ -142,5 +143,5 @@ public class AnimalHarvestRitualEntity extends BaseRitualEntity {
         entity.entityDropItem(itemstack, 0.0F);
       }
     }
-  }
+  }*/
 }

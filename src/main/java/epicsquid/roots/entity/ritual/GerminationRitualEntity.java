@@ -8,6 +8,7 @@ import epicsquid.roots.ritual.RitualGermination;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -17,15 +18,19 @@ import java.util.List;
 public class GerminationRitualEntity extends BaseRitualEntity {
   private RitualGermination ritual;
 
-  public GerminationRitualEntity(World worldIn) {
-    super(worldIn);
-    getDataManager().register(lifetime, RitualRegistry.ritual_germination.getDuration() + 20);
+  public GerminationRitualEntity(EntityType<?> entityTypeIn, World worldIn) {
+    super(entityTypeIn, worldIn);
     ritual = (RitualGermination) RitualRegistry.ritual_germination;
   }
 
   @Override
-  public void onUpdate() {
-    super.onUpdate();
+  protected void registerData() {
+    getDataManager().register(lifetime, RitualRegistry.ritual_germination.getDuration() + 20);
+  }
+
+  @Override
+  public void tick() {
+    super.tick();
     float alpha = (float) Math.min(40, (RitualRegistry.ritual_healing_aura.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
 
     if (world.isRemote && getDataManager().get(lifetime) > 0) {
@@ -50,13 +55,14 @@ public class GerminationRitualEntity extends BaseRitualEntity {
           BlockPos pos = positions.get(world.rand.nextInt(positions.size()));
           BlockState state = world.getBlockState(pos);
           int x = ritual.bonus_ticks;
-          if (state.getBlock() == Blocks.REEDS || state.getBlock() == Blocks.CACTUS) {
+          if (state.getBlock() == Blocks.SUGAR_CANE || state.getBlock() == Blocks.CACTUS) {
             x += ritual.crop_ticks;
           }
           for (int j = 0; j < ritual.ticks + x; j++) {
-            state.getBlock().randomTick(world, pos, state, world.rand);
+            state.getBlock().randomTick(state, world, pos, world.rand);
           }
-          PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), this);
+          // TODO: Reinstate when packets are done
+          //PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), this);
         }
       }
     }

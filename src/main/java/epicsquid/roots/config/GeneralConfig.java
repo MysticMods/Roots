@@ -1,3 +1,4 @@
+/*
 package epicsquid.roots.config;
 
 import epicsquid.mysticallib.util.ConfigUtil;
@@ -80,4 +81,5 @@ public class GeneralConfig {
   }
 }
 
+*/
 

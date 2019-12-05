@@ -61,8 +61,8 @@ public class ThornTrapEntity extends Entity {
   }
 
   @Override
-  public void onUpdate() {
-    super.onUpdate();
+  public void tick() {
+    super.tick();
     this.move(MoverType.SELF, motionX, motionY, motionZ);
     this.motionY -= 0.04f;
     if (this.onGround) {
