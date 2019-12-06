@@ -98,7 +98,7 @@ public class ModItems {
     }.setCreativeTab(Roots.tab));
 
     event.addItem(pestle = new ItemBase("pestle").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(component_pouch = new Pouch("component_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(component_pouch = new PouchItem("component_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(creative_pouch = new CreativePouchItem("creative_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(apothecary_pouch = new ApothecaryPouchItem("apothecary_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(spell_dust = new SpellDustItem("spell_dust").setCreativeTab(Roots.tab).setMaxStackSize(1));

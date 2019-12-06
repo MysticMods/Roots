@@ -1,10 +1,8 @@
 package epicsquid.roots.item;
 
-import javax.annotation.Nonnull;
-
-public class ApothecaryPouchItem extends Pouch {
-  public ApothecaryPouchItem(@Nonnull String name) {
-    super(name);
+public class ApothecaryPouchItem extends PouchItem {
+  public ApothecaryPouchItem(Properties properties) {
+    super(properties);
   }
 
   @Override

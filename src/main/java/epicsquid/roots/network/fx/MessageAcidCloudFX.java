@@ -51,7 +51,7 @@ public class MessageAcidCloudFX implements IMessage {
     @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageAcidCloudFX message, final MessageContext ctx) {
-      World world = Minecraft.getMinecraft().world;
+      World world = Minecraft.getInstance().world;
       for (float i = 0; i < 360; i += Util.rand.nextInt(40)) {
         float x = (float) message.posX + (1.5f * Util.rand.nextFloat() + 2.0f) * (float) Math.sin(Math.toRadians(i));
         float y = (float) message.posY + (Util.rand.nextFloat() - 1.5f);

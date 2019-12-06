@@ -1,19 +1,20 @@
 package epicsquid.roots.tileentity;
 
 import epicsquid.mysticallib.tile.TileBase;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.spell.SpellBase;
-import epicsquid.mysticallib.util.ItemUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -37,26 +38,27 @@ public class TileEntityMortar extends TileBase {
     }
   };
 
-  public TileEntityMortar() {
-    super();
+  public TileEntityMortar(TileEntityType<?> type) {
+    super(type);
   }
 
+
   @Override
-  public CompoundNBT writeToNBT(CompoundNBT tag) {
-    super.writeToNBT(tag);
+  public CompoundNBT write(CompoundNBT tag) {
+    super.write(tag);
     tag.put("handler", inventory.serializeNBT());
     return tag;
   }
 
   @Override
-  public void readFromNBT(CompoundNBT tag) {
-    super.readFromNBT(tag);
+  public void read(CompoundNBT tag) {
+    super.read(tag);
     inventory.deserializeNBT(tag.getCompound("handler"));
   }
 
   @Override
   public CompoundNBT getUpdateTag() {
-    return writeToNBT(new CompoundNBT());
+    return write(new CompoundNBT());
   }
 
   @Override
@@ -66,12 +68,11 @@ public class TileEntityMortar extends TileBase {
 
   @Override
   public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-    readFromNBT(pkt.getNbtCompound());
+    read(pkt.getNbtCompound());
   }
 
   @Override
-  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull PlayerEntity player, @Nonnull Hand hand,
-                          @Nonnull Direction side, float hitX, float hitY, float hitZ) {
+  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull Direction side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
     ItemStack offHand = player.getHeldItemOffhand();
     List<ItemStack> ingredients = new ArrayList<>();

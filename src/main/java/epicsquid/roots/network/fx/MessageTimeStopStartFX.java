@@ -51,7 +51,7 @@ public class MessageTimeStopStartFX implements IMessage {
     @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageTimeStopStartFX message, final MessageContext ctx) {
-      World world = Minecraft.getMinecraft().world;
+      World world = Minecraft.getInstance().world;
       for (float k = 0; k < 360; k += Util.rand.nextInt(4)) {
         if (Util.rand.nextBoolean()) {
           if (Util.rand.nextBoolean()) {

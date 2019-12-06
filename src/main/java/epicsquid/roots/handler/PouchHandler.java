@@ -1,7 +1,6 @@
 package epicsquid.roots.handler;
 
 import epicsquid.roots.init.HerbRegistry;
-import epicsquid.roots.item.Pouch;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;

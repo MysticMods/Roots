@@ -1,6 +1,5 @@
 package epicsquid.roots.item;
 
-import epicsquid.mysticallib.item.ItemHoeBase;
 import epicsquid.roots.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -8,27 +7,32 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.HoeItem;
+import net.minecraft.item.IItemTier;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class LivingHoeItem extends ItemHoeBase implements ILivingRepair {
+public class LivingHoeItem extends HoeItem implements ILivingRepair {
 
-  public LivingHoeItem(ToolMaterial material, String name) {
-    super(material, name, 3, 192, 22);
+  public LivingHoeItem(IItemTier tier, float attackSpeedIn, Item.Properties builder) {
+    super(tier, attackSpeedIn, builder);
+    // material, name, 3, 192, 22);
   }
 
   @Override
-  public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+  public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
     update(stack, worldIn, entityIn, itemSlot, isSelected);
-    super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
+    super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
   }
 
   @Override
@@ -44,9 +48,10 @@ public class LivingHoeItem extends ItemHoeBase implements ILivingRepair {
             block = state2.getBlock();
             if (!(block instanceof IPlantable)) continue;
             block.harvestBlock(worldIn, player, nPos, state2, worldIn.getTileEntity(nPos), stack);
-            worldIn.setBlockToAir(nPos);
+            worldIn.removeBlock(nPos, false);
             // Honestly I don't know what this does
-            worldIn.playEvent(2001, nPos, Block.getIdFromBlock(block) + (block.getMetaFromState(state2) << 12));
+            // TODO: Find out what this did
+            /*            worldIn.playEvent(2001, nPos, Block.getIdFromBlock(block) + (block.getMetaFromState(state2) << 12));*/
           }
         }
       }
@@ -55,12 +60,12 @@ public class LivingHoeItem extends ItemHoeBase implements ILivingRepair {
     return super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
   }
 
-  @OnlyIn(Dist.CLIENT)
   @Override
-  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-    tooltip.add("");
-    tooltip.add(TextFormatting.GREEN + "Breaks plants in a large radius.");
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
     super.addInformation(stack, worldIn, tooltip, flagIn);
+    tooltip.add(new StringTextComponent(""));
+    // TODO: Translate this
+    tooltip.add(new StringTextComponent("Breaks plants in a large radius.").setStyle(new Style().setColor(TextFormatting.GREEN)));
   }
 
   @Override

@@ -14,7 +14,7 @@ public class ExportDocumentation {
 
     String targetPath = "docs/zs/";
     Class[] classes = {
-        AnimalHarvestTweaker.class,
+/*        AnimalHarvestTweaker.class,
         BarkTweaker.class,
         FeyCraftingTweaker.class,
         FlowerTweaker.class,
@@ -23,7 +23,7 @@ public class ExportDocumentation {
         PyreCraftingTweaker.class,
         RitualTweaker.class,
         RunicShearsTweaker.class,
-        TransmutationTweaker.class
+        TransmutationTweaker.class*/
     };
 
     ZenDocExporter export = new ZenDocExporter();

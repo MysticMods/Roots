@@ -206,7 +206,7 @@ public class StaffItem extends ItemBase {
     SpellHandler capability = SpellHandler.fromStack(stack);
     SpellBase spell = capability.getSelectedSpell();
     if (spell != null) {
-      double factor = 0.5f * (Math.sin(6.0f * Math.toRadians(EventManager.ticks + Minecraft.getMinecraft().getRenderPartialTicks())) + 1.0f);
+      double factor = 0.5f * (Math.sin(6.0f * Math.toRadians(EventManager.ticks + Minecraft.getInstance().getRenderPartialTicks())) + 1.0f);
       return Util
           .intColor((int) (255 * (spell.getRed1() * factor + spell.getRed2() * (1.0 - factor))), (int) (255 * (spell.getGreen1() * factor + spell.getGreen2() * (1.0 - factor))),
               (int) (255 * (spell.getBlue1() * factor + spell.getBlue2() * (1.0 - factor))));

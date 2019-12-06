@@ -4,27 +4,31 @@ import epicsquid.mysticallib.tile.TileBase;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.tileentity.TileEntityType;
+
+// TODO: Currently unused
 
 public class TileEntityGroveStone extends TileBase {
 
-  public TileEntityGroveStone() {
-    super();
+
+  public TileEntityGroveStone(TileEntityType<?> type) {
+    super(type);
   }
 
   @Override
-  public CompoundNBT writeToNBT(CompoundNBT tag) {
-    super.writeToNBT(tag);
+  public CompoundNBT write(CompoundNBT tag) {
+    super.write(tag);
     return tag;
   }
 
   @Override
-  public void readFromNBT(CompoundNBT tag) {
-    super.readFromNBT(tag);
+  public void read(CompoundNBT tag) {
+    super.read(tag);
   }
 
   @Override
   public CompoundNBT getUpdateTag() {
-    return writeToNBT(new CompoundNBT());
+    return write(new CompoundNBT());
   }
 
   @Override
@@ -34,7 +38,7 @@ public class TileEntityGroveStone extends TileBase {
 
   @Override
   public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-    readFromNBT(pkt.getNbtCompound());
+    read(pkt.getNbtCompound());
   }
 }
 

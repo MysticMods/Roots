@@ -1,3 +1,6 @@
+// TODO: Redo this
+
+/*
 package epicsquid.roots.world.tree;
 
 import epicsquid.roots.init.ModBlocks;
@@ -23,9 +26,11 @@ public class WorldGenBigWildwoodTree extends AbstractTreeFeature {
   private double scaleWidth = 1.0D;
   private double leafDensity = 1.0D;
   public List<BlockPos> affectedBlocks;
-  /**
+  */
+/**
    * Sets the distance limit for how far away the generator will populate leaves from the base leaf node.
-   */
+   *//*
+
   int leafDistanceLimit = 4;
   List<FoliageCoordinates> foliageCoords;
 
@@ -33,9 +38,11 @@ public class WorldGenBigWildwoodTree extends AbstractTreeFeature {
     super(notify);
   }
 
-  /**
+  */
+/**
    * Generates a list of leaf nodes for the tree, to be populated by generateLeaves.
-   */
+   *//*
+
   private void generateLeafNodeList() {
     this.height = (int) ((double) this.heightLimit * this.heightAttenuation);
 
@@ -100,9 +107,11 @@ public class WorldGenBigWildwoodTree extends AbstractTreeFeature {
     }
   }
 
-  /**
+  */
+/**
    * Gets the rough size of a layer of the tree.
-   */
+   *//*
+
   private float layerSize(int y) {
     if ((float) y < (float) this.heightLimit * 0.3F) {
       return -1.0F;
@@ -129,9 +138,11 @@ public class WorldGenBigWildwoodTree extends AbstractTreeFeature {
     }
   }
 
-  /**
+  */
+/**
    * Generates the leaves surrounding an individual entry in the leafNodes list.
-   */
+   *//*
+
   private void generateLeafNode(BlockPos pos) {
     for (int i = 0; i < this.leafDistanceLimit; ++i) {
       this.crosSection(pos.up(i), this.leafSize(i), ModBlocks.wildwood_leaves.getDefaultState().withProperty(LeavesBlock.CHECK_DECAY, false));
@@ -153,9 +164,11 @@ public class WorldGenBigWildwoodTree extends AbstractTreeFeature {
     }
   }
 
-  /**
+  */
+/**
    * Returns the absolute greatest distance in the BlockPos object.
-   */
+   *//*
+
   private int getGreatestDistance(BlockPos posIn) {
     int i = MathHelper.abs(posIn.getX());
     int j = MathHelper.abs(posIn.getY());
@@ -185,26 +198,32 @@ public class WorldGenBigWildwoodTree extends AbstractTreeFeature {
     return blocklog$enumaxis;
   }
 
-  /**
+  */
+/**
    * Generates the leaf portion of the tree as specified by the leafNodes list.
-   */
+   *//*
+
   private void generateLeaves() {
     for (FoliageCoordinates worldgenbigtree$foliagecoordinates : this.foliageCoords) {
       this.generateLeafNode(worldgenbigtree$foliagecoordinates);
     }
   }
 
-  /**
+  */
+/**
    * Indicates whether or not a leaf node requires additional wood to be added to preserve integrity.
-   */
+   *//*
+
   private boolean leafNodeNeedsBase(int p_76493_1_) {
     return (double) p_76493_1_ >= (double) this.heightLimit * 0.2D;
   }
 
-  /**
+  */
+/**
    * Places the trunk for the big tree that is being generated. Able to generate double-sized trunks by changing a
    * field that is always 1 to 2.
-   */
+   *//*
+
   private void generateTrunk() {
     BlockPos blockpos = this.basePos;
     BlockPos blockpos1 = this.basePos.up(this.height);
@@ -212,9 +231,11 @@ public class WorldGenBigWildwoodTree extends AbstractTreeFeature {
     this.limb(blockpos, blockpos1, block);
   }
 
-  /**
+  */
+/**
    * Generates additional wood blocks to fill out the bases of different leaf nodes that would otherwise degrade.
-   */
+   *//*
+
   private void generateLeafNodeBases() {
     for (FoliageCoordinates worldgenbigtree$foliagecoordinates : this.foliageCoords) {
       int i = worldgenbigtree$foliagecoordinates.getBranchBase();
@@ -226,10 +247,12 @@ public class WorldGenBigWildwoodTree extends AbstractTreeFeature {
     }
   }
 
-  /**
+  */
+/**
    * Checks a line of blocks in the world from the first coordinate to triplet to the second, returning the distance
    * (in blocks) before a non-air, non-leaf block is encountered and/or the end is encountered.
-   */
+   *//*
+
   private int checkBlockLine(BlockPos posOne, BlockPos posTwo) {
     BlockPos blockpos = posTwo.add(-posOne.getX(), -posOne.getY(), -posOne.getZ());
     int i = this.getGreatestDistance(blockpos);
@@ -285,4 +308,5 @@ public class WorldGenBigWildwoodTree extends AbstractTreeFeature {
     }
   }
 }
+*/
 

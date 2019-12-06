@@ -52,7 +52,7 @@ public class MessageItemGatheredFX implements IMessage {
     @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageItemGatheredFX message, final MessageContext ctx) {
-      World world = Minecraft.getMinecraft().world;
+      World world = Minecraft.getInstance().world;
       for (BlockPos pos : message.positions) {
         for (int i = 0; i < 15; i++) {
           ClientProxy.particleRenderer

@@ -51,7 +51,7 @@ public class MessagePetalShellBurstFX implements IMessage {
     @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessagePetalShellBurstFX message, final MessageContext ctx) {
-      World world = Minecraft.getMinecraft().world;
+      World world = Minecraft.getInstance().world;
       for (int k = 0; k < 10; k++) {
         if (Util.rand.nextBoolean()) {
           ParticleUtil.spawnParticlePetal(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f),

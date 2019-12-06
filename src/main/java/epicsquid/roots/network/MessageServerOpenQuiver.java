@@ -26,7 +26,7 @@ public class MessageServerOpenQuiver implements IMessage {
 
     @Override
     public IMessage onMessage(MessageServerOpenQuiver message, MessageContext ctx) {
-      FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> handleMessage(message, ctx));
+      FMLCommonHandler.instance().getInstanceServerInstance().addScheduledTask(() -> handleMessage(message, ctx));
 
       return null;
     }

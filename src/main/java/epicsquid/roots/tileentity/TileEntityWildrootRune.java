@@ -1,34 +1,35 @@
 package epicsquid.roots.tileentity;
 
-import javax.annotation.Nonnull;
-
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TileEntityWildrootRune extends TileBase implements ITickable {
+public class TileEntityWildrootRune extends TileBase implements ITickableTileEntity {
 
   private TileEntityIncenseBurner incenseBurner;
   private static final BlockPos[] INCENSE_POSITIONS = new BlockPos[]{new BlockPos(0, -1, 1), new BlockPos(0, -1, -1), new BlockPos(1, -1, 0), new BlockPos(-1, -1, 0)};
 
   public final Map<Item, EffectInstance> effectItemMap = new HashMap<>();
 
-  public TileEntityWildrootRune() {
+  public TileEntityWildrootRune(TileEntityType<?> type) {
+    super(type);
     this.incenseBurner = null;
 
     effectItemMap.put(ModItems.moonglow_leaf, new EffectInstance(Effects.SPEED, 2400, 1));
@@ -43,13 +44,13 @@ public class TileEntityWildrootRune extends TileBase implements ITickable {
   }
 
   @Override
-  public CompoundNBT writeToNBT(CompoundNBT compound) {
-    return super.writeToNBT(compound);
+  public CompoundNBT write(CompoundNBT compound) {
+    return super.write(compound);
   }
 
   @Override
-  public void readFromNBT(CompoundNBT compound) {
-    super.readFromNBT(compound);
+  public void read(CompoundNBT compound) {
+    super.read(compound);
   }
 
   @Override
@@ -67,8 +68,8 @@ public class TileEntityWildrootRune extends TileBase implements ITickable {
   }
 
   @Override
-  public void update() {
-    if (world.getWorldTime() % 20 == 0) {
+  public void tick() {
+    if (world.getGameTime() % 20 == 0) {
       if (this.incenseBurner != null) {
         if (!this.incenseBurner.isLit()) {
           this.incenseBurner = null;

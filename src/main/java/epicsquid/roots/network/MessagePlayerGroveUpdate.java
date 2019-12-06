@@ -45,7 +45,7 @@ public class MessagePlayerGroveUpdate implements IMessage {
     @Override
     public IMessage onMessage(final MessagePlayerGroveUpdate message, final MessageContext ctx) {
       if (message != null) {
-        PlayerEntity player = Minecraft.getMinecraft().player;
+        PlayerEntity player = Minecraft.getInstance().player;
         if (player != null) {
           if (player.hasCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null)) {
             player.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null).setData(message.tag);

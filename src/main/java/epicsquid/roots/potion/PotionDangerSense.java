@@ -33,7 +33,7 @@ public class PotionDangerSense extends Effect {
   @Override
   @OnlyIn(Dist.CLIENT)
   public int getStatusIconIndex() {
-    Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+    Minecraft.getInstance().renderEngine.bindTexture(texture);
     return super.getStatusIconIndex();
   }
 

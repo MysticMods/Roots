@@ -31,7 +31,7 @@ public class PotionTimeStop extends Effect {
   @OnlyIn(Dist.CLIENT)
   @Override
   public int getStatusIconIndex() {
-    Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
+    Minecraft.getInstance().getTextureManager().bindTexture(texture);
     return super.getStatusIconIndex();
   }
 }*/

@@ -38,7 +38,7 @@ public class KnifeDispenser implements IDispenseItemBehavior {
       world.setBlockState(target, result);
       world.scheduleBlockUpdate(target, result.getBlock(), 1, result.getBlock().tickRate(world));
       ItemUtil.spawnItem(world, source.getBlockPos().add(0, 1, 0), new ItemStack(ModItems.terra_moss));
-      stack.damageItem(1, FakePlayerFactory.getMinecraft((ServerWorld) world));
+      stack.damageItem(1, FakePlayerFactory.getInstance((ServerWorld) world));
       source.getWorld().playSound(null, source.getBlockPos(), SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
     }
 

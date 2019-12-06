@@ -88,7 +88,7 @@ public class ElementalSoilTransformFX implements IMessage {
     @Override
     public IMessage onMessage(ElementalSoilTransformFX message, MessageContext ctx) {
 
-      World world = Minecraft.getMinecraft().world;
+      World world = Minecraft.getInstance().world;
 
       int[] color = getColor(message.elementId);
 

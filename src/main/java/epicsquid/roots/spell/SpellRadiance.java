@@ -119,7 +119,7 @@ public class SpellRadiance extends SpellBase {
             List<LivingEntity> entities = player.world
                 .getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(x - bx, y - by, z - bz, x + bx, y + by, z + bz));
             for (LivingEntity e : entities) {
-              if (!(e instanceof PlayerEntity && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
+              if (!(e instanceof PlayerEntity && !FMLCommonHandler.instance().getInstanceServerInstance().isPVPEnabled())
                   && e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
                 e.attackEntityFrom(ModDamage.radiantDamageFrom(player), damage);
                 if (e.isEntityUndead()) {

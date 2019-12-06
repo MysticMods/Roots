@@ -1,29 +1,20 @@
 package epicsquid.roots.item;
 
-import epicsquid.mysticallib.item.ItemBase;
-import epicsquid.roots.handler.SpellHandler;
-import epicsquid.roots.spell.SpellBase;
-import epicsquid.roots.spell.SpellRegistry;
-import epicsquid.roots.spell.modules.SpellModule;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.item.Item;
 
-import java.util.List;
+// TODO: Rethink this entirely/redo this
 
-public class SpellDustItem extends ItemBase {
-  public SpellDustItem(String name) {
+public class SpellDustItem extends Item {
+  public SpellDustItem(Properties properties) {
+    super(properties);
+  }
+/*  public SpellDustItem(String name) {
     super(name);
     this.hasSubtypes = true;
     this.setHasSubtypes(true);
-  }
+  }*/
 
-  @Override
+/*  @Override
   public void getSubItems(ItemGroup tab, NonNullList<ItemStack> subItems) {
     if (tab == this.getCreativeTab()) {
       for (SpellBase entry : SpellRegistry.spellRegistry.values()) {
@@ -49,5 +40,5 @@ public class SpellDustItem extends ItemBase {
         tooltip.add(module.getFormat() + I18n.format("roots.spell.module." + module.getName() + ".name") + ": " + I18n.format(prefix + "." + module.getName() + ".description"));
       }
     }
-  }
+  }*/
 }

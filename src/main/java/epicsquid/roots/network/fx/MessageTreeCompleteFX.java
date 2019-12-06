@@ -46,7 +46,7 @@ public class MessageTreeCompleteFX implements IMessage {
     @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageTreeCompleteFX message, final MessageContext ctx) {
-      World world = Minecraft.getMinecraft().world;
+      World world = Minecraft.getInstance().world;
       for (BlockPos pos : message.affectedBlocks) {
         for (int k = 0; k < 2 + Util.rand.nextInt(2); k++) {
           ParticleUtil.spawnParticleGlow(world, (float) pos.getX(), (float) pos.getY(), (float) pos.getZ(), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 204f, 196f, 35f, 0.5f, 2.5f, 48);

@@ -52,7 +52,7 @@ public class MessageIcedTouchFX implements IMessage {
     @Override
     @OnlyIn(Dist.CLIENT)
     public IMessage onMessage(MessageIcedTouchFX message, MessageContext context) {
-      World world = Minecraft.getMinecraft().world;
+      World world = Minecraft.getInstance().world;
       ParticleUtil.spawnParticleSmoke(world, message.x + 0.5F, message.y + 0.9F, message.z + 0.5F, 0, 0.01F, 0, 180, 255, 255, 0.30F, 15F, 40, true);
       return null;
     }

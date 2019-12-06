@@ -1,49 +1,21 @@
 package epicsquid.roots.item;
 
-import epicsquid.mysticallib.item.ItemBase;
-import epicsquid.roots.Roots;
-import epicsquid.roots.api.Herb;
-import epicsquid.roots.config.GeneralConfig;
-import epicsquid.roots.gui.GuiHandler;
-import epicsquid.roots.gui.Keybinds;
-import epicsquid.roots.handler.PouchHandler;
-import epicsquid.roots.init.HerbRegistry;
-import epicsquid.roots.integration.baubles.pouch.PouchEquipHandler;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.items.IItemHandler;
+import net.minecraft.item.Item;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.List;
-
-public class Pouch extends ItemBase implements IPouch {
-
-  public Pouch(@Nonnull String name) {
-    super(name);
-    this.setMaxStackSize(1);
+public class PouchItem extends Item implements IPouch {
+  public PouchItem(Properties properties) {
+    super(properties);
   }
 
   public boolean isApothecary() {
     return false;
   }
 
-  public boolean isCreative () {
+  public boolean isCreative() {
     return false;
   }
 
-  public static boolean hasHerb(@Nonnull ItemStack pouch, Herb herb) {
+/*  public static boolean hasHerb(@Nonnull ItemStack pouch, Herb herb) {
     return getHerbQuantity(pouch, herb) > 0;
   }
 
@@ -59,9 +31,9 @@ public class Pouch extends ItemBase implements IPouch {
       }
     }
     return count;
-  }
+  }*/
 
-  @Override
+/*  @Override
   @Nonnull
   public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, @Nonnull Hand hand) {
     ItemStack stack = player.getHeldItem(hand);
@@ -155,5 +127,5 @@ public class Pouch extends ItemBase implements IPouch {
     }
 
     super.addInformation(stack, worldIn, tooltip, flagIn);
-  }
+  }*/
 }

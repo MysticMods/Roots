@@ -59,7 +59,7 @@ public class MessageImbueCompleteFX implements IMessage {
     public IMessage onMessage(final MessageImbueCompleteFX message, final MessageContext ctx) {
       SpellBase spell = (message.spellName.equals("fake_spell")) ? new FakeSpellRunicDust() : SpellRegistry.spellRegistry.get(message.spellName);
       if (spell != null) {
-        World world = Minecraft.getMinecraft().world;
+        World world = Minecraft.getInstance().world;
         for (int k = 0; k < 40; k++) {
           if (Util.rand.nextBoolean()) {
             ParticleUtil.spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f),

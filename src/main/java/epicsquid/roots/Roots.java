@@ -1,34 +1,15 @@
 package epicsquid.roots;
 
-import epicsquid.roots.capability.grove.IPlayerGroveCapability;
-import epicsquid.roots.capability.grove.PlayerGroveCapability;
-import epicsquid.roots.capability.grove.PlayerGroveCapabilityStorage;
-import epicsquid.roots.capability.playerdata.IPlayerDataCapability;
-import epicsquid.roots.capability.playerdata.PlayerDataCapability;
-import epicsquid.roots.capability.playerdata.PlayerDataCapabilityStorage;
-import epicsquid.roots.capability.runic_shears.RunicShearsCapability;
-import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityStorage;
 import epicsquid.roots.gui.GuiHandler;
-import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.proxy.CommonProxy;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.Mod.Instance;
-import net.minecraftforge.fml.common.ModContainer;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.*;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = Roots.MODID, version = Roots.VERSION, name = Roots.NAME, dependencies = Roots.DEPENDENCIES)
+@Mod(Roots.MODID)
 public class Roots {
   public static final String MODID = "roots";
   public static final String DOMAIN = "roots";
@@ -39,15 +20,7 @@ public class Roots {
 
   public static final GuiHandler GUI_HANDLER = new GuiHandler();
 
-  public static ModContainer CONTAINER = null;
-
   public static Logger logger;
-
-  @SidedProxy(clientSide = "epicsquid.roots.proxy.ClientProxy", serverSide = "epicsquid.roots.proxy.CommonProxy")
-  public static CommonProxy proxy;
-
-  @Instance(MODID)
-  public static Roots instance;
 
   public static ItemGroup tab = new ItemGroup("roots") {
     @Override
@@ -62,41 +35,11 @@ public class Roots {
     }
   };
 
-  @EventHandler
-  public void preInit(FMLPreInitializationEvent event) {
-    CONTAINER = Loader.instance().activeModContainer();
+/*  public void preInit(FMLPreInitializationEvent event) {
     // We load before MysticalLib so we can't use an annotation or it will crash
-    MinecraftForge.EVENT_BUS.register(RegistryManager.class);
-    CapabilityManager.INSTANCE.register(IPlayerGroveCapability.class, new PlayerGroveCapabilityStorage(), PlayerGroveCapability::new);
-    CapabilityManager.INSTANCE.register(IPlayerDataCapability.class, new PlayerDataCapabilityStorage(), PlayerDataCapability::new);
     CapabilityManager.INSTANCE.register(RunicShearsCapability.class, new RunicShearsCapabilityStorage(), RunicShearsCapability::new);
-    NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);
+*//*    NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);*//*
     logger = event.getModLog();
     ModDamage.init();
-    proxy.preInit(event);
-  }
-
-  public static Roots getInstance() {
-    return instance;
-  }
-
-  @EventHandler
-  public void init(FMLInitializationEvent event) {
-    proxy.init(event);
-  }
-
-  @EventHandler
-  public void postInit(FMLPostInitializationEvent event) {
-    proxy.postInit(event);
-  }
-
-  @EventHandler
-  public void loadComplete(FMLLoadCompleteEvent event) {
-    proxy.loadComplete(event);
-  }
-
-  @EventHandler
-  public void serverStarting(FMLServerStartingEvent event) {
-    proxy.serverStarting(event);
-  }
+  }*/
 }

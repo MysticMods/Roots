@@ -4,7 +4,7 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.item.Pouch;
+import epicsquid.roots.item.PouchItem;
 import epicsquid.roots.item.SylvanArmorItem;
 import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
@@ -34,7 +34,7 @@ public class PowderInventoryUtil {
     }*/
 
     for (int i = 0; i < 36; i++) {
-      if (player.inventory.getStackInSlot(i).getItem() instanceof Pouch) {
+      if (player.inventory.getStackInSlot(i).getItem() instanceof PouchItem) {
         return player.inventory.getStackInSlot(i);
       }
     }
@@ -49,7 +49,7 @@ public class PowderInventoryUtil {
     // Hard-coding for creative pouch
     if (pouch.getItem() == ModItems.creative_pouch) return 999;
 
-    return Pouch.getHerbQuantity(pouch, herb);
+    return PouchItem.getHerbQuantity(pouch, herb);
   }
 
   public static void removePowder(PlayerEntity player, Herb herb, double amount) {
@@ -59,7 +59,7 @@ public class PowderInventoryUtil {
     // TODO: Cost reduction is calculated here
     amount -= amount * SylvanArmorItem.sylvanBonus(player);
 
-    Pouch.useQuantity(pouch, herb, amount);
+    PouchItem.useQuantity(pouch, herb, amount);
     resolveSlots(player, herb);
   }
 

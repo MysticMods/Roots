@@ -1,27 +1,26 @@
 package epicsquid.roots.tileentity;
 
 import epicsquid.mysticallib.tile.TileBase;
-import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.api.Herb;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.mysticallib.util.Util;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.particles.ParticleTypes;
+import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 
-public class TileEntityIncenseBurner extends TileBase implements ITickable {
+public class TileEntityIncenseBurner extends TileBase implements ITickableTileEntity {
 
   public static final int BURN_TICKS = 1200;
 
@@ -38,25 +37,26 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
   private int burnTick;
   private boolean lit;
 
-  public TileEntityIncenseBurner() {
+  public TileEntityIncenseBurner(TileEntityType<?> type) {
+    super(type);
     burnTick = 0;
     lit = false;
   }
 
   @Override
-  public CompoundNBT writeToNBT(CompoundNBT compound) {
+  public CompoundNBT write(CompoundNBT compound) {
     compound.putInt("burnTick", this.burnTick);
-    compound.setBoolean("lit", this.lit);
+    compound.putBoolean("lit", this.lit);
     compound.put("handler", inventory.serializeNBT());
-    return super.writeToNBT(compound);
+    return super.write(compound);
   }
 
   @Override
-  public void readFromNBT(CompoundNBT compound) {
+  public void read(CompoundNBT compound) {
     this.burnTick = compound.getInt("burnTick");
     this.lit = compound.getBoolean("lit");
     inventory.deserializeNBT(compound.getCompound("handler"));
-    super.readFromNBT(compound);
+    super.read(compound);
   }
 
   @Override
@@ -118,21 +118,21 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
 
   private boolean isHerb(@Nonnull ItemStack stack) {
     // TODO: Improve this
-    for (Herb herb : HerbRegistry.REGISTRY.getValuesCollection()) {
+/*    for (Herb herb : HerbRegistry.REGISTRY.getValuesCollection()) {
       if (stack.getItem() == herb.getItem()) {
         return true;
       }
-    }
+    }*/
     return false;
   }
 
   @Override
-  public void update() {
+  public void tick() {
     if (this.lit) {
       double d3 = (double) pos.getX() + 0.5 + Util.rand.nextDouble() * 0.10000000149011612D;
       double d8 = (double) pos.getY() + 0.6;
       double d13 = (double) pos.getZ() + 0.5;
-      world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d3, d8, d13, 0.0D, 0.0D, 0.0D);
+      world.addParticle(ParticleTypes.SMOKE, d3, d8, d13, 0.0D, 0.0D, 0.0D);
 
       burnTick++;
 

@@ -31,7 +31,7 @@ public class MessageClearToasts implements IMessage {
     @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageClearToasts message, final MessageContext ctx) {
-      ClientTickHandler.addRunnable(() -> Minecraft.getMinecraft().getToastGui().clear(), 20);
+      ClientTickHandler.addRunnable(() -> Minecraft.getInstance().getToastGui().clear(), 20);
       return null;
     }
   }

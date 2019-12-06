@@ -39,7 +39,7 @@ public class MessageUpdateHerb implements IMessage {
     @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageUpdateHerb message, final MessageContext ctx) {
-      ClientTickHandler.addRunnable(() -> PowderInventoryUtil.resolveSlots(Minecraft.getMinecraft().player, message.herb));
+      ClientTickHandler.addRunnable(() -> PowderInventoryUtil.resolveSlots(Minecraft.getInstance().player, message.herb));
       return null;
     }
   }

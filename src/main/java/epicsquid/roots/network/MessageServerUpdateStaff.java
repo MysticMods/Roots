@@ -42,7 +42,7 @@ public class MessageServerUpdateStaff implements IMessage {
 
     @Override
     public IMessage onMessage(MessageServerUpdateStaff message, MessageContext ctx) {
-      FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> handleMessage(message, ctx));
+      FMLCommonHandler.instance().getInstanceServerInstance().addScheduledTask(() -> handleMessage(message, ctx));
       return null;
     }
 

@@ -52,7 +52,7 @@ public class MessageGeasRingFX implements IMessage {
     @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageGeasRingFX message, final MessageContext ctx) {
-      World world = Minecraft.getMinecraft().world;
+      World world = Minecraft.getInstance().world;
       for (int k = 0; k < 20; k++) {
         if (random.nextBoolean()) {
           ParticleUtil.spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (random.nextFloat() - 0.5f), 0.125f * (random.nextFloat() - 0.5f), 0.125f * (random.nextFloat() - 0.5f), SpellGeas.instance.getRed1() * 255.0f, SpellGeas.instance.getGreen1() * 255.0f, SpellGeas.instance.getBlue1() * 255.0f, 0.75f, 7.5f, 24);

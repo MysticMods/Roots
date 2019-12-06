@@ -10,7 +10,7 @@ package epicsquid.roots.gui.container;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.handler.PouchHandler;
-import epicsquid.roots.item.Pouch;
+import epicsquid.roots.item.PouchItem;
 import epicsquid.roots.util.PowderInventoryUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -42,11 +42,11 @@ public class PouchContainer extends Container {
     ItemStack first = PowderInventoryUtil.getPouch(player);
 
     ItemStack use = ItemStack.EMPTY;
-    if (main.getItem() instanceof Pouch) {
+    if (main.getItem() instanceof PouchItem) {
       use = main;
-    } else if (off.getItem() instanceof Pouch) {
+    } else if (off.getItem() instanceof PouchItem) {
       use = off;
-    } else if (first.getItem() instanceof Pouch) {
+    } else if (first.getItem() instanceof PouchItem) {
       use = first;
     }
 
@@ -203,7 +203,7 @@ public class PouchContainer extends Container {
   public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player) {
     if (slotId >= 0) {
       ItemStack stack = getSlot(slotId).getStack();
-      if (stack.getItem() instanceof Pouch) {
+      if (stack.getItem() instanceof PouchItem) {
         return ItemStack.EMPTY;
       }
     }

@@ -61,7 +61,7 @@ public class MessageShatterBurstFX implements IMessage {
     @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageShatterBurstFX message, final MessageContext ctx) {
-      World world = Minecraft.getMinecraft().world;
+      World world = Minecraft.getInstance().world;
       for (float i = 0; i < 40; i++) {
         double x = (1.0f - i / 40.0f) * message.srcX + (i / 40.0f) * message.posX;
         double y = (1.0f - i / 40.0f) * message.srcY + (i / 40.0f) * message.posY;

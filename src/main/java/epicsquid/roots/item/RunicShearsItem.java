@@ -1,63 +1,59 @@
 package epicsquid.roots.item;
 
-import epicsquid.mysticallib.item.ItemBase;
-import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticallib.particle.particles.ParticleGlitter;
-import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.capability.runic_shears.RunicShearsCapability;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityProvider;
-import epicsquid.roots.config.GeneralConfig;
-import epicsquid.roots.config.MossConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.network.fx.MessageRunicShearsAOEFX;
-import epicsquid.roots.network.fx.MessageRunicShearsFX;
 import epicsquid.roots.recipe.RunicShearEntityRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.CropsBlock;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.util.*;
-import net.minecraft.item.Item;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.TickPriority;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
-public class RunicShearsItem extends ItemBase {
+public class RunicShearsItem extends Item {
   public static AxisAlignedBB bounding = new AxisAlignedBB(-2, -2, -2, 2, 2, 2);
+
+  // TODO: Doesn't this already exist in the item by default?
   private Random random;
 
-  public RunicShearsItem(@Nonnull String name) {
+  public RunicShearsItem(Properties properties) {
+    super(properties);
+  }
+
+/*  public RunicShearsItem(@Nonnull String name) {
     super(name);
     setMaxDamage(357);
     setMaxStackSize(1);
     setHasSubtypes(false);
     random = new Random();
-  }
+  }*/
 
   @Override
   public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
@@ -72,15 +68,23 @@ public class RunicShearsItem extends ItemBase {
 
   @Override
   @Nonnull
-  public ActionResultType onItemUse(PlayerEntity player, World world, BlockPos pos, Hand hand, Direction facing, float hitX, float hitY, float hitZ) {
+  public ActionResultType onItemUse(ItemUseContext context) {
+/*    PlayerEntity player, World
+  } world, BlockPos pos, Hand hand, Direction facing, float hitX, float hitY, float hitZ) {*/
+    World world = context.getWorld();
+    BlockPos pos = context.getPos();
     BlockState state = world.getBlockState(pos);
     Block block = state.getBlock();
+    PlayerEntity player = context.getPlayer();
+    Hand hand = context.getHand();
     if (block == ModBlocks.imbuer) {
       return ActionResultType.PASS;
     }
 
-    BlockState moss = MossConfig.scrapeResult(state);
-    BlockState moss2 = MossConfig.mossConversion(state);
+    // TODO: Once moss configuration is reinstated as a JSON recipe
+
+    BlockState moss = Blocks.AIR.getDefaultState(); // MossConfig.scrapeResult(state);
+    BlockState moss2 = moss; // MossConfig.mossConversion(state);
 
     if (moss != null || moss2 != null) {
       if (!world.isRemote) {
@@ -88,22 +92,25 @@ public class RunicShearsItem extends ItemBase {
         BlockPos start = new BlockPos(bounds.minX, bounds.minY, bounds.minZ);
         BlockPos stop = new BlockPos(bounds.maxX, bounds.maxY, bounds.maxZ);
         List<BlockPos> affectedBlocks = new ArrayList<>();
-        for (BlockPos.MutableBlockPos p : BlockPos.getAllInBoxMutable(start, stop)) {
+        for (BlockPos p : BlockPos.getAllInBoxMutable(start, stop)) {
           BlockState pState = world.getBlockState(p);
-          BlockState m = MossConfig.scrapeResult(pState);
+          BlockState m = Blocks.AIR.getDefaultState(); // MossConfig.scrapeResult(pState);
           if (m != null) {
             affectedBlocks.add(p.toImmutable());
             world.setBlockState(p, m);
-            world.scheduleBlockUpdate(p, m.getBlock(), 1, m.getBlock().tickRate(world));
+            world.getPendingBlockTicks().scheduleTick(p, m.getBlock(), 1, TickPriority.NORMAL);
             ItemUtil.spawnItem(world, player.getPosition().add(0, 1, 0), new ItemStack(ModItems.terra_moss));
           }
         }
         if (!affectedBlocks.isEmpty()) {
-          if (!player.capabilities.isCreativeMode) {
-            player.getHeldItem(hand).damageItem(1 + Math.min(6, random.nextInt(affectedBlocks.size())), player);
+          if (!player.isCreative()) {
+            player.getHeldItem(hand).damageItem(1 + Math.min(6, random.nextInt(affectedBlocks.size())), player, (p_220282_1_) -> {
+              p_220282_1_.sendBreakAnimation(hand);
+            });
           }
-          MessageRunicShearsAOEFX message = new MessageRunicShearsAOEFX(affectedBlocks);
-          PacketHandler.sendToAllTracking(message, world.provider.getDimension(), pos);
+          // TODO: Packets
+/*          MessageRunicShearsAOEFX message = new MessageRunicShearsAOEFX(affectedBlocks);
+          PacketHandler.sendToAllTracking(message, world.provider.getDimension(), pos);*/
         }
       }
       player.swingArm(hand);
@@ -126,15 +133,17 @@ public class RunicShearsItem extends ItemBase {
           world.setBlockState(pos, recipe.getReplacementBlock().getDefaultState());
         }
         ItemUtil.spawnItem(world, player.getPosition().add(0, 1, 0), recipe.getDrop().copy());
-        if (!player.capabilities.isCreativeMode) {
-          player.getHeldItem(hand).damageItem(1, player);
+        if (!player.isCreative()) {
+          player.getHeldItem(hand).damageItem(1, player, (p_220282_1_) -> {
+            p_220282_1_.sendBreakAnimation(hand);
+          });
         }
         player.swingArm(hand);
         world.playSound(null, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
       } else {
         for (int i = 0; i < 50; i++) {
-          ClientProxy.particleRenderer.spawnParticle(world, Util.getLowercaseClassName(ParticleGlitter.class), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, random.nextDouble() * 0.1 * (random.nextDouble() > 0.5 ? -1 : 1), random.nextDouble() * 0.1 * (random.nextDouble() > 0.5 ? -1 : 1),
-              random.nextDouble() * 0.1 * (random.nextDouble() > 0.5 ? -1 : 1), 120, 0.855 + random.nextDouble() * 0.05, 0.710, 0.943 - random.nextDouble() * 0.05, 1, random.nextDouble() + 0.5, random.nextDouble() * 2);
+          // TODO: Something about this
+          /*          ClientProxy.particleRenderer.spawnParticle(world, Util.getLowercaseClassName(ParticleGlitter.class), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, random.nextDouble() * 0.1 * (random.nextDouble() > 0.5 ? -1 : 1), random.nextDouble() * 0.1 * (random.nextDouble() > 0.5 ? -1 : 1), random.nextDouble() * 0.1 * (random.nextDouble() > 0.5 ? -1 : 1), 120, 0.855 + random.nextDouble() * 0.05, 0.710, 0.943 - random.nextDouble() * 0.05, 1, random.nextDouble() + 0.5, random.nextDouble() * 2);*/
         }
       }
     }
@@ -144,25 +153,23 @@ public class RunicShearsItem extends ItemBase {
   @Override
   public boolean itemInteractionForEntity(ItemStack itemstack, PlayerEntity player, LivingEntity entity, Hand hand) {
     World world = player.world;
-    Random rand = itemRand;
+    Random rand = random;
 
     if (entity instanceof IShearable) {
       int count = 0;
       if (Items.SHEARS.itemInteractionForEntity(itemstack, player, entity, hand)) count++;
 
-      float radius = GeneralConfig.RunicShearsRadius;
-      List<MobEntity> entities = Util.getEntitiesWithinRadius(entity.world, (Entity e) -> e instanceof IShearable, entity.getPosition(), radius, radius / 2, radius);
-      for (MobEntity e : entities) {
-        e.captureDrops = true;
+      float radius = 20; // TODO: update with config GeneralConfig.RunicShearsRadius;
+      List<LivingEntity> entities = Util.getEntitiesWithinRadius(entity.world, (Entity e) -> e instanceof IShearable, entity.getPosition(), radius, radius / 2, radius);
+      for (LivingEntity e : entities) {
+        e.captureDrops(new ArrayList<>());
         if (Items.SHEARS.itemInteractionForEntity(itemstack, player, e, hand)) count++;
-        e.captureDrops = false;
+        Collection<ItemEntity> items = e.captureDrops();
         if (!world.isRemote) {
-          for (ItemEntity ent : e.capturedDrops) {
+          for (ItemEntity ent : items) {
             ent.setPosition(entity.posX, entity.posY, entity.posZ);
-            ent.motionY = 0;
-            ent.motionX = 0;
-            ent.motionZ = 0;
-            ent.world.spawnEntity(ent);
+            ent.setMotion(0, 0, 0);
+            ent.world.addEntity(ent);
           }
         }
       }
@@ -178,25 +185,28 @@ public class RunicShearsItem extends ItemBase {
     if (recipe != null) {
       player.swingArm(hand);
       if (!world.isRemote) {
-        RunicShearsCapability cap = entity.getCapability(RunicShearsCapabilityProvider.RUNIC_SHEARS_CAPABILITY, null);
-        if (cap != null) {
+        entity.getCapability(RunicShearsCapabilityProvider.RUNIC_SHEARS_CAPABILITY).ifPresent((cap) -> {
           if (cap.canHarvest()) {
             cap.setCooldown(recipe.getCooldown());
             ItemEntity ent = entity.entityDropItem(recipe.getDrop().copy(), 1.0F);
-            ent.motionY += rand.nextFloat() * 0.05F;
-            ent.motionX += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
-            ent.motionZ += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
-            if (!player.capabilities.isCreativeMode) {
-              itemstack.damageItem(1, entity);
+            Vec3d motion = ent.getMotion();
+            ent.setMotion(motion.y + (rand.nextFloat() - rand.nextFloat()) * 0.1f, motion.x + rand.nextFloat() * 0.05f, motion.y + (rand.nextFloat() - rand.nextFloat()) * 0.1f);
+            if (!player.isCreative()) {
+              itemstack.damageItem(1, entity, (p_220282_1_) -> {
+                p_220282_1_.sendBreakAnimation(hand);
+              });
             }
             world.playSound(player, entity.getPosition(), SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
-            IMessage packet = new MessageRunicShearsFX(entity);
-            PacketHandler.sendToAllTracking(packet, entity);
-            return true;
+            // TODO: Packets
+/*            IMessage packet = new MessageRunicShearsFX(entity);
+            PacketHandler.sendToAllTracking(packet, entity);*/
           } else {
             // TODO: play particles (failure)?
             player.sendStatusMessage(new TranslationTextComponent("roots.runic_shears.cooldown").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)), true);
           }
+        });
+        if (entity.getCapability(RunicShearsCapabilityProvider.RUNIC_SHEARS_CAPABILITY).isPresent()) {
+          return true;
         }
       }
     }

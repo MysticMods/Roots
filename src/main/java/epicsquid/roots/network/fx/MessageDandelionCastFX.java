@@ -52,7 +52,7 @@ public class MessageDandelionCastFX implements IMessage {
     @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageDandelionCastFX message, final MessageContext ctx) {
-      World world = Minecraft.getMinecraft().world;
+      World world = Minecraft.getInstance().world;
       PlayerEntity player = world.getPlayerEntityByUUID(message.id);
       if (player != null) {
         for (int k = 0; k < 40; k++) {

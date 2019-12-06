@@ -48,7 +48,7 @@ public class MessageHarvestCompleteFX implements IMessage {
     @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(MessageHarvestCompleteFX message, MessageContext ctx) {
-      World world = Minecraft.getMinecraft().world;
+      World world = Minecraft.getInstance().world;
       for (BlockPos pos : message.affectedBlocks) {
         for (int k = 0; k < 5 + Util.rand.nextInt(2); k++) {
           ClientProxy.particleRenderer.spawnParticle(world, Util.getLowercaseClassName(ParticleGlitter.class), (float) pos.getX(), (float) pos.getY(), (float) pos.getZ(),

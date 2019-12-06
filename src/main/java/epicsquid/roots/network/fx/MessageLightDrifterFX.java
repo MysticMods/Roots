@@ -51,7 +51,7 @@ public class MessageLightDrifterFX implements IMessage {
     @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageLightDrifterFX message, final MessageContext ctx) {
-      World world = Minecraft.getMinecraft().world;
+      World world = Minecraft.getInstance().world;
       for (float i = 0; i < 360; i += Util.rand.nextInt(12)) {
         float x = (float) message.posX + (0.5f * Util.rand.nextFloat()) * (float) Math.sin(Math.toRadians(i));
         float y = (float) message.posY + (Util.rand.nextFloat() - 0.5f);

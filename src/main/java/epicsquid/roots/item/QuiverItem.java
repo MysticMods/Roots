@@ -1,32 +1,30 @@
 package epicsquid.roots.item;
 
-import epicsquid.mysticallib.item.ItemArrowBase;
+import epicsquid.mysticallib.item.BaseArrowItem;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.Roots;
-import epicsquid.roots.entity.projectile.LivingArrowEntity;
-import epicsquid.roots.gui.GuiHandler;
 import epicsquid.roots.handler.QuiverHandler;
 import epicsquid.roots.init.ModItems;
-import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.util.QuiverInventoryUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.item.ArrowItem;
-import net.minecraft.item.Items;
-import net.minecraft.item.Rarity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Rarity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;
@@ -34,31 +32,40 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 
-public class QuiverItem extends ItemArrowBase {
+public class QuiverItem extends BaseArrowItem {
   public static AxisAlignedBB bounding = new AxisAlignedBB(-2.5, -2.5, -2.5, 2.5, 2.5, 2.5);
 
   public static Method getArrowStack = null;
 
-  public QuiverItem(@Nonnull String name) {
+  public QuiverItem(Properties props, double damage) {
+    super(props, damage);
+  }
+
+  // TODO: PROPS
+/*  public QuiverItem(@Nonnull String name) {
     super(name);
     this.setMaxStackSize(1);
     this.setMaxDamage(256);
-  }
+  }*/
 
   @Override
   public AbstractArrowEntity createArrow(World worldIn, ItemStack stack, LivingEntity shooter) {
     ItemStack arrow = findArrow(stack);
     if (!arrow.isEmpty()) {
       AbstractArrowEntity entityArrow = ((ArrowItem) arrow.getItem()).createArrow(worldIn, arrow, shooter);
-      entityArrow.getEntityData().setBoolean("return", true);
+      entityArrow.getPersistentData().putBoolean("return", true);
       return entityArrow;
     }
 
     AbstractArrowEntity entityArrow = new ArrowEntity(worldIn, shooter);
     entityArrow.setDamage(1.5D);
-    entityArrow.getEntityData().setBoolean("generated", true);
+    entityArrow.getPersistentData().putBoolean("generated", true);
 
-    stack.damageItem(itemRand.nextInt(2), shooter);
+    if (!(shooter instanceof PlayerEntity) || !((PlayerEntity) shooter).isCreative()) {
+      stack.damageItem(1, shooter, (p_220282_1_) -> {
+        p_220282_1_.sendBreakAnimation(Hand.MAIN_HAND);
+      });
+    }
     return entityArrow;
   }
 
@@ -83,7 +90,8 @@ public class QuiverItem extends ItemArrowBase {
   @Override
   @Nonnull
   public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, @Nonnull Hand hand) {
-    player.openGui(Roots.getInstance(), GuiHandler.QUIVER_ID, world, 0, 0, 0);
+    // TODO: GUI
+    /*    player.openGui(Roots.getInstance(), GuiHandler.QUIVER_ID, world, 0, 0, 0);*/
     return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
   }
 
@@ -101,26 +109,31 @@ public class QuiverItem extends ItemArrowBase {
       ItemStack stack = getArrowStack(arrow);
 
       if (stack.isEmpty()) {
-        if (arrow instanceof LivingArrowEntity) {
+        // TODO: Recreate LivingArrowEntity
+/*        if (arrow instanceof LivingArrowEntity) {
           stack = new ItemStack(ModItems.living_arrow);
         } else {
           stack = new ItemStack(Items.ARROW);
-        }
+        }*/
       }
 
-      arrow.setDead();
-      if (arrow.getEntityData().contains("generated")) {
+      arrow.remove();
+      if (arrow.getPersistentData().contains("generated")) {
         generated++;
         continue;
       }
-      if (Util.rand.nextInt(3) != 0 || arrow.getEntityData().contains("return")) {
+      if (Util.rand.nextInt(3) != 0 || arrow.getPersistentData().contains("return")) {
         ItemStack result = ItemHandlerHelper.insertItemStacked(handler.getInventory(), stack, false);
         if (result.isEmpty()) {
           consumed++;
         } else {
-          result = ItemHandlerHelper.insertItemStacked(player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP), result, false);
-          if (!result.isEmpty()) {
-            ItemUtil.spawnItem(player.world, player.getPosition(), result);
+          LazyOptional<IItemHandler> cap = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP);
+          if (cap.isPresent()) {
+            IItemHandler capability = cap.orElseThrow(IllegalStateException::new);
+            result = ItemHandlerHelper.insertItemStacked(capability, result, false);
+            if (!result.isEmpty()) {
+              ItemUtil.spawnItem(player.world, player.getPosition(), result);
+            }
           }
         }
       }
@@ -156,12 +169,7 @@ public class QuiverItem extends ItemArrowBase {
     return toRepair.getItem() == this && repair.getItem() == ModItems.bark_wildwood;
   }
 
-  @Override
-  public boolean isRepairable() {
-    return true;
-  }
-
-  public static ItemStack getArrowStack (AbstractArrowEntity arrow) {
+  public static ItemStack getArrowStack(AbstractArrowEntity arrow) {
     if (getArrowStack == null) {
       try {
         getArrowStack = AbstractArrowEntity.class.getDeclaredMethod("getArrowStack");

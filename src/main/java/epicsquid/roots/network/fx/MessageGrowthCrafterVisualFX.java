@@ -43,7 +43,7 @@ public class MessageGrowthCrafterVisualFX implements IMessage {
     @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageGrowthCrafterVisualFX message, final MessageContext ctx) {
-      Minecraft mc = Minecraft.getMinecraft();
+      Minecraft mc = Minecraft.getInstance();
       World world = mc.world;
       if (world.provider.getDimension() != message.dimension) return null;
 

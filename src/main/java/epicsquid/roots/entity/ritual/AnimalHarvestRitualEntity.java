@@ -136,7 +136,7 @@ public class AnimalHarvestRitualEntity extends BaseRitualEntity {
     if (resourcelocation != null) {
       LootTable loottable = entity.world.getLootTableManager().getLootTableFromLocation(resourcelocation);
       entity.deathLootTable = null;
-      FakePlayer fakePlayer = FakePlayerFactory.getMinecraft((ServerWorld) entity.world);
+      FakePlayer fakePlayer = FakePlayerFactory.getInstance((ServerWorld) entity.world);
       LootContext context = new LootContext(looting, (ServerWorld) entity.world, entity.world.getLootTableManager(), entity, fakePlayer, DamageSource.GENERIC);
 
       for (ItemStack itemstack : loottable.generateLootForPools(entity.deathLootTableSeed == 0L ? entity.rand : new Random(entity.deathLootTableSeed), context)) {

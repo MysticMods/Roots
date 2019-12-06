@@ -52,7 +52,7 @@ public class MessageRampantLifeInfusionFX implements IMessage {
     @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageRampantLifeInfusionFX message, final MessageContext ctx) {
-      World world = Minecraft.getMinecraft().world;
+      World world = Minecraft.getInstance().world;
       BlockPos pos = new BlockPos(message.posX, message.posY, message.posZ);
       BlockState state = world.getBlockState(pos);
       state.getBlock().randomDisplayTick(state, world, pos, Util.rand);

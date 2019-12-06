@@ -3,18 +3,19 @@ package epicsquid.roots.tileentity;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
-import net.minecraft.util.ITickable;
+import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.TileEntityType;
 
-public class TileEntityDecorativeBonfire extends TileBase implements ITickable {
+public class TileEntityDecorativeBonfire extends TileBase implements ITickableTileEntity {
 
   private boolean doBigFlame = true;
 
-  public TileEntityDecorativeBonfire() {
-    super();
+  public TileEntityDecorativeBonfire(TileEntityType<?> type) {
+    super(type);
   }
 
   @Override
-  public void update() {
+  public void tick() {
     //Spawn the Ignite flame particle
     if (world.isRemote && this.doBigFlame) {
       for (int i = 0; i < 40; i++) {

@@ -16,7 +16,7 @@ public interface ILivingRepair {
       if (stack.equals(((PlayerEntity) entityIn).getActiveItemStack())) return;
     }
     if (Util.rand.nextInt(Math.max(1, bound)) == 0) {
-      stack.setItemDamage(stack.getItemDamage() - 1);
+      stack.setDamage(stack.getDamage() - 1);
     }
   }
 }

@@ -47,7 +47,7 @@ public class MessageFrosLandsProgressFX implements IMessage {
     @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageFrosLandsProgressFX message, final MessageContext ctx) {
-      World world = Minecraft.getMinecraft().world;
+      World world = Minecraft.getInstance().world;
       for (BlockPos pos : message.affectedBlocks) {
         for (int k = 0; k < 20 + Util.rand.nextInt(15); k++) {
           ClientProxy.particleRenderer

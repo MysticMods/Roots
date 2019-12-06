@@ -47,7 +47,7 @@ public class MessagePlayerDataUpdate implements IMessage {
     @Override
     public IMessage onMessage(final MessagePlayerDataUpdate message, final MessageContext ctx) {
       if (message != null) {
-        World w = Minecraft.getMinecraft().world;
+        World w = Minecraft.getInstance().world;
         if (w != null) {
           if (w.getPlayerEntityByUUID(message.id) != null) {
             PlayerEntity player = w.getPlayerEntityByUUID(message.id);

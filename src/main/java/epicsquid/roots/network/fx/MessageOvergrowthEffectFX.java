@@ -45,7 +45,7 @@ public class MessageOvergrowthEffectFX implements IMessage {
     @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageOvergrowthEffectFX message, final MessageContext ctx) {
-      World world = Minecraft.getMinecraft().world;
+      World world = Minecraft.getInstance().world;
       for (int i = 0; i < 50; i++) {
         ClientProxy.particleRenderer
             .spawnParticle(world, Util.getLowercaseClassName(ParticleGlitter.class), message.posX + 0.5, message.posY + 0.5, message.posZ + 0.5,

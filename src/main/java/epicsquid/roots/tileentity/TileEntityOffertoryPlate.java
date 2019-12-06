@@ -10,6 +10,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -32,26 +33,26 @@ public class TileEntityOffertoryPlate extends TileBase {
   private UUID lastPlayer = null;
   private int progress = 0;
 
-  public TileEntityOffertoryPlate() {
-    super();
+  public TileEntityOffertoryPlate(TileEntityType<?> type) {
+    super(type);
   }
 
   @Override
-  public CompoundNBT writeToNBT(CompoundNBT tag) {
-    super.writeToNBT(tag);
+  public CompoundNBT write(CompoundNBT tag) {
+    super.write(tag);
     tag.put("handler", inventory.serializeNBT());
     tag.putInt("progress", progress);
     if (lastPlayer != null) {
-      tag.put("lastPlayer", NBTUtil.createUUIDTag(lastPlayer));
+      tag.put("lastPlayer", NBTUtil.writeUniqueId(lastPlayer));
     }
     return tag;
   }
 
   @Override
-  public void readFromNBT(CompoundNBT tag) {
-    super.readFromNBT(tag);
+  public void read(CompoundNBT tag) {
+    super.read(tag);
     if (tag.contains("lastPlayer")) {
-      lastPlayer = NBTUtil.getUUIDFromTag(tag.getCompound("lastPlayer"));
+      lastPlayer = NBTUtil.readUniqueId(tag.getCompound("lastPlayer"));
     }
     inventory.deserializeNBT(tag.getCompound("handler"));
     progress = tag.getInt("progress");
@@ -59,7 +60,7 @@ public class TileEntityOffertoryPlate extends TileBase {
 
   @Override
   public CompoundNBT getUpdateTag() {
-    return writeToNBT(new CompoundNBT());
+    return write(new CompoundNBT());
   }
 
   @Override
@@ -69,12 +70,11 @@ public class TileEntityOffertoryPlate extends TileBase {
 
   @Override
   public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-    readFromNBT(pkt.getNbtCompound());
+    read(pkt.getNbtCompound());
   }
 
   @Override
-  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull PlayerEntity player, @Nonnull Hand hand,
-                          @Nonnull Direction side, float hitX, float hitY, float hitZ) {
+  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull Direction side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
     this.lastPlayer = player.getUniqueID();
     markDirty();

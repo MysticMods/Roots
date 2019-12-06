@@ -46,7 +46,7 @@ public class MessageGroveCompleteFX implements IMessage {
     @OnlyIn(Dist.CLIENT)
     @Override
     public IMessage onMessage(final MessageGroveCompleteFX message, final MessageContext ctx) {
-      World world = Minecraft.getMinecraft().world;
+      World world = Minecraft.getInstance().world;
       for (BlockPos pos : message.affectedBlocks) {
         for (int k = 0; k < 30; k++) {
           ParticleUtil.spawnParticleGlow(world, (float) pos.getX() + 0.5f, (float) pos.getY() + 0.5f, (float) pos.getZ() + 0.5f, 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 36f, 119f, 52f, 0.5f, 2.5f, 200);

@@ -26,7 +26,7 @@ public class MessageServerOpenPouch implements IMessage {
 
     @Override
     public IMessage onMessage(MessageServerOpenPouch message, MessageContext ctx) {
-      FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> handleMessage(message, ctx));
+      FMLCommonHandler.instance().getInstanceServerInstance().addScheduledTask(() -> handleMessage(message, ctx));
 
       return null;
     }

@@ -41,14 +41,14 @@ public class SpellLightDrifter extends SpellBase {
 /*      player.capabilities.disableDamage = true;
       player.capabilities.allowFlying = true;
       player.noClip = true;
-      player.getEntityData().putInt(Constants.LIGHT_DRIFTER_TAG, duration);
-      player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_X, player.posX);
-      player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_Y, player.posY);
-      player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_Z, player.posZ);
+      player.getPersistentData().putInt(Constants.LIGHT_DRIFTER_TAG, duration);
+      player.getPersistentData().setDouble(Constants.LIGHT_DRIFTER_X, player.posX);
+      player.getPersistentData().setDouble(Constants.LIGHT_DRIFTER_Y, player.posY);
+      player.getPersistentData().setDouble(Constants.LIGHT_DRIFTER_Z, player.posZ);
       if (player.capabilities.isCreativeMode) {
-        player.getEntityData().putInt(Constants.LIGHT_DRIFTER_MODE, GameType.CREATIVE.getID());
+        player.getPersistentData().putInt(Constants.LIGHT_DRIFTER_MODE, GameType.CREATIVE.getID());
       } else {
-        player.getEntityData().putInt(Constants.LIGHT_DRIFTER_MODE, GameType.SURVIVAL.getID());
+        player.getPersistentData().putInt(Constants.LIGHT_DRIFTER_MODE, GameType.SURVIVAL.getID());
       }
       player.setGameType(GameType.SPECTATOR);
       PacketHandler.sendToAllTracking(new MessageLightDrifterSync(player.getUniqueID(), player.posX, player.posY, player.posZ, true, GameType.SPECTATOR.getID()), player);

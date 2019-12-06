@@ -3,20 +3,29 @@ package epicsquid.roots.tileentity;
 import epicsquid.mysticallib.tile.TileBase;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fluids.*;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class TileEntityUnendingBowl extends TileBase {
   public static UnendingBowlFluidHandler HANDLER = new UnendingBowlFluidHandler();
+
+  public TileEntityUnendingBowl(TileEntityType<?> type) {
+    super(type);
+  }
 
   @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull Direction side, float hitX, float hitY, float hitZ) {
@@ -29,18 +38,12 @@ public class TileEntityUnendingBowl extends TileBase {
   }
 
   @Override
-  public boolean hasCapability(Capability<?> capability, @Nullable Direction facing) {
-    return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY;
-  }
-
-  @Nullable
-  @Override
-  public <T> T getCapability(Capability<T> capability, @Nullable Direction facing) {
+  public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
     if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-      return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(HANDLER);
+      return LazyOptional.of(() -> HANDLER).cast();
     }
 
-    return null;
+    return LazyOptional.empty();
   }
 
   public static class UnendingBowlFluidHandler extends FluidTank {
@@ -49,7 +52,7 @@ public class TileEntityUnendingBowl extends TileBase {
     public UnendingBowlFluidHandler() {
       super(Integer.MAX_VALUE);
       // TODO: Also handle potential different fluid names in the item stack handler
-      this.fluid = FluidRegistry.getFluidStack(FLUID_NAME, Integer.MAX_VALUE);
+      this.fluid = new FluidStack(Fluids.WATER, Integer.MAX_VALUE);
     }
 
     @Override
@@ -64,7 +67,7 @@ public class TileEntityUnendingBowl extends TileBase {
 
     @Override
     public FluidStack getFluid() {
-      return FluidRegistry.getFluidStack(FLUID_NAME, Integer.MAX_VALUE);
+      return new FluidStack(Fluids.WATER, Integer.MAX_VALUE);
     }
 
     @Override
@@ -73,8 +76,8 @@ public class TileEntityUnendingBowl extends TileBase {
     }
 
     @Override
-    public int fillInternal(FluidStack resource, boolean doFill) {
-      if (resource == null || resource.amount <= 0) {
+    public int fill(FluidStack resource, FluidAction action) {
+      if (resource == null || resource.getAmount() <= 0) {
         return 0;
       }
 
@@ -82,12 +85,8 @@ public class TileEntityUnendingBowl extends TileBase {
         return 0;
       }
 
-      if (!doFill) {
+      if (action == FluidAction.SIMULATE) {
         return capacity;
-      }
-
-      if (tile != null) {
-        FluidEvent.fireEvent(new FluidEvent.FluidFillingEvent(fluid, tile.getWorld(), tile.getPos(), this, capacity));
       }
 
       return capacity;
@@ -95,33 +94,13 @@ public class TileEntityUnendingBowl extends TileBase {
 
     @Override
     @Nullable
-    public FluidStack drainInternal(int maxDrain, boolean doDrain) {
-      if (doDrain) {
-        if (tile != null) {
-          FluidEvent.fireEvent(new FluidEvent.FluidDrainingEvent(fluid, tile.getWorld(), tile.getPos(), this, maxDrain));
-        }
-      }
+    public FluidStack drain(int maxDrain, FluidAction action) {
       return new FluidStack(fluid, maxDrain);
     }
 
     @Override
-    public boolean canFill() {
+    public boolean isFluidValid(FluidStack fluid) {
       return true;
-    }
-
-    @Override
-    public boolean canDrain() {
-      return true;
-    }
-
-    @Override
-    public boolean canFillFluidType(FluidStack fluid) {
-      return true;
-    }
-
-    @Override
-    public boolean canDrainFluidType(@Nullable FluidStack fluid) {
-      return fluid.getFluid() == FluidRegistry.getFluid(FLUID_NAME);
     }
 
     @Override

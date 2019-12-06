@@ -1,20 +1,23 @@
 package epicsquid.roots.item;
 
-import epicsquid.mysticallib.item.ItemSwordBase;
 import epicsquid.roots.init.ModItems;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.IItemTier;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.SwordItem;
 import net.minecraft.world.World;
 
-public class LivingSwordItem extends ItemSwordBase implements ILivingRepair {
-  public LivingSwordItem(ToolMaterial material, String name) {
-    super(material, name, 0, 192, 22);
+public class LivingSwordItem extends SwordItem implements ILivingRepair {
+  public LivingSwordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Item.Properties builder) {
+    super(tier, attackDamageIn, attackSpeedIn, builder);
+    //super(material, name, 0, 192, 22);
   }
 
   @Override
-  public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+  public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
     update(stack, worldIn, entityIn, itemSlot, isSelected);
-    super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
+    super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
   }
 
   @Override
