@@ -1,24 +1,19 @@
 package epicsquid.roots.item;
 
-import epicsquid.mysticallib.item.ItemBowBase;
 import epicsquid.roots.init.ModItems;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.Rarity;
-import net.minecraft.item.IItemPropertyGetter;
+import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.item.Rarity;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
+public class WildwoodBowItem extends BowItem implements ILivingRepair {
+  public WildwoodBowItem(Properties builder) {
+    super(builder);
+  }
 
-public class WildwoodBowItem extends ItemBowBase implements ILivingRepair {
-  public WildwoodBowItem(String name) {
-    super(name, 920, 30);
-
-    this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter() {
+  // How to properly handle bows
+/*    this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter() {
       @Override
       @OnlyIn(Dist.CLIENT)
       public float apply(ItemStack stack, @Nullable World worldIn, @Nullable LivingEntity entityIn) {
@@ -35,8 +30,7 @@ public class WildwoodBowItem extends ItemBowBase implements ILivingRepair {
       public float apply(ItemStack stack, @Nullable World worldIn, @Nullable LivingEntity entityIn) {
         return entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack ? 1.0F : 0.0F;
       }
-    });
-  }
+    });*/
 
   @Override
   @SuppressWarnings("deprecation")
@@ -45,9 +39,9 @@ public class WildwoodBowItem extends ItemBowBase implements ILivingRepair {
   }
 
   @Override
-  public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-    update(stack, worldIn, entityIn, itemSlot, isSelected, 120);
-    super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
+  public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+    update(stack, worldIn, entityIn, itemSlot, isSelected);
+    super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
   }
 
   @Override

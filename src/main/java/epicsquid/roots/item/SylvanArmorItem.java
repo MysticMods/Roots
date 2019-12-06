@@ -1,39 +1,30 @@
 package epicsquid.roots.item;
 
 import com.google.common.collect.Lists;
-import epicsquid.mysticallib.model.IModeledObject;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.model.armor.SylvanArmorModel;
-import net.minecraft.client.model.BipedModel;
-import net.minecraft.client.renderer.model.ModelResourceLocation;
+import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
+import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public class SylvanArmorItem extends ArmorItem implements IModeledObject {
+public class SylvanArmorItem extends ArmorItem {
   public static double BONUS = 0.05;
 
-  public SylvanArmorItem(ArmorMaterial material, EquipmentSlotType slot, String name) {
-    super(material, 0, slot);
+  public SylvanArmorItem(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builder) {
+    super(materialIn, slot, builder);
+/*    super(material, 0, slot);
     setTranslationKey(name);
     setRegistryName(new ResourceLocation(Roots.MODID, name));
     setMaxDamage(750);
-    setCreativeTab(Roots.tab);
-  }
-
-  @Override
-  public void initModel() {
-    ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "handler"));
+    setCreativeTab(Roots.tab);*/
   }
 
   @Nullable
@@ -44,9 +35,9 @@ public class SylvanArmorItem extends ArmorItem implements IModeledObject {
 
   @Nullable
   @Override
-  @OnlyIn(Dist.CLIENT)
-  public BipedModel getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, BipedModel _default) {
-    return SylvanArmorModel.getInstance(armorSlot);
+  public <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default) {
+    // TODO: This is probably unsafe
+    return (A) SylvanArmorModel.getInstance(armorSlot);
   }
 
   public static double sylvanBonus(PlayerEntity player) {

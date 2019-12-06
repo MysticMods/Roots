@@ -1,46 +1,42 @@
 package epicsquid.roots.item;
 
-import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.EventManager;
-import epicsquid.roots.Roots;
 import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.spell.SpellBase;
-import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.model.ModelBakery;
-import net.minecraft.client.renderer.model.ModelResourceLocation;
-import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.UseAction;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.UseAction;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.input.Keyboard;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
 
-public class StaffItem extends ItemBase {
-  public StaffItem(String name) {
+public class StaffItem extends Item {
+
+  public StaffItem(Properties properties) {
+    super(properties);
+  }
+/*  public StaffItem(String name) {
     super(name);
     setMaxStackSize(1);
-  }
+  }*/
 
   @Override
   public boolean shouldCauseReequipAnimation(ItemStack oldStack, @Nonnull ItemStack newStack, boolean slotChanged) {
@@ -70,17 +66,15 @@ public class StaffItem extends ItemBase {
       if (capability.getCooldown() <= 0) {
         SpellBase spell = capability.getSelectedSpell();
         if (spell != null) {
-          SpellEvent event = new SpellEvent(player, spell);
-          MinecraftForge.EVENT_BUS.post(event);
-          spell = event.getSpell();
+          // TODO: Reinstate spell event
           if (spell.getCastType() == SpellBase.EnumCastType.INSTANTANEOUS) {
             if (spell.costsMet(player)) {
               boolean result = spell.cast(player, capability.getSelectedModules());
               if (result) {
-                if (!player.capabilities.isCreativeMode) {
+                if (!player.isCreative()) {
                   spell.enactCosts(player);
-                  capability.setCooldown(event.getCooldown());
-                  capability.setLastCooldown(event.getCooldown());
+                  capability.setCooldown(spell.getCooldown());
+                  capability.setLastCooldown(spell.getCooldown());
                 }
               }
               return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
@@ -120,19 +114,20 @@ public class StaffItem extends ItemBase {
     SpellHandler capability = SpellHandler.fromStack(stack);
     SpellBase spell = capability.getSelectedSpell();
     if (spell != null) {
-      SpellEvent event = new SpellEvent((PlayerEntity) entity, spell);
-      MinecraftForge.EVENT_BUS.post(event);
+      // TODO: Reinstate this in a saner fashion
+/*      SpellEvent event = new SpellEvent((PlayerEntity) entity, spell);
+      MinecraftForge.EVENT_BUS.post(event);*/
       if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
-        if (!((PlayerEntity) entity).capabilities.isCreativeMode) {
-          capability.setCooldown(event.getCooldown());
-          capability.setLastCooldown(event.getCooldown());
+        if (!((PlayerEntity) entity).isCreative()) {
+          capability.setCooldown(spell.getCooldown());
+          capability.setLastCooldown(spell.getCooldown());
         }
       }
     }
   }
 
   @Override
-  public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+  public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
     SpellHandler capability = SpellHandler.fromStack(stack);
     if (capability.getCooldown() > 0) {
       capability.setCooldown(capability.getCooldown() - 1);
@@ -156,11 +151,11 @@ public class StaffItem extends ItemBase {
     capability.clearSelectedSlot();
   }
 
-  @OnlyIn(Dist.CLIENT)
   @Override
-  public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
     SpellHandler capability = SpellHandler.fromStack(stack);
-    tooltip.add(I18n.format("roots.tooltip.staff.selected") + (capability.getSelectedSlot() + 1));
+    // TODO: EURGH
+/*    tooltip.add(I18n.format("roots.tooltip.staff.selected") + (capability.getSelectedSlot() + 1));
     SpellBase spell = capability.getSelectedSpell();
     if (spell != null) {
       tooltip.add("");
@@ -187,7 +182,7 @@ public class StaffItem extends ItemBase {
           tooltip.add("" + (i + 1) + ": " + other.getTextColor() + TextFormatting.BOLD + I18n.format("roots.spell." + other.getName() + ".name"));
         }
       }
-    }
+    }*/
   }
 
   @Override
@@ -221,13 +216,13 @@ public class StaffItem extends ItemBase {
   }
 
   @Override
-  public int getMaxItemUseDuration(ItemStack stack) {
+  public int getUseDuration(ItemStack stack) {
     return 72000;
   }
 
   @Nonnull
   @Override
-  public UseAction getItemUseAction(ItemStack stack) {
+  public UseAction getUseAction(ItemStack stack) {
     SpellHandler capability = SpellHandler.fromStack(stack);
     SpellBase spell = capability.getSelectedSpell();
     if (spell != null) {
@@ -240,7 +235,8 @@ public class StaffItem extends ItemBase {
     return UseAction.NONE;
   }
 
-  @OnlyIn(Dist.CLIENT)
+  // TODO: This has to be redone
+/*  @OnlyIn(Dist.CLIENT)
   @Override
   public void initModel() {
     ModelBakery
@@ -265,9 +261,9 @@ public class StaffItem extends ItemBase {
       }
       return new ModelResourceLocation(baseName.toString());
     });
-  }
+  }*/
 
-  public static class StaffColorHandler implements IItemColor {
+/*  public static class StaffColorHandler implements IItemColor {
 
     @Override
     public int colorMultiplier(@Nonnull ItemStack stack, int tintIndex) {
@@ -309,7 +305,7 @@ public class StaffItem extends ItemBase {
       }
       return Util.intColor(255, 255, 255);
     }
-  }
+  }*/
 
   @Override
   public String getHighlightTip(ItemStack stack, String displayName) {

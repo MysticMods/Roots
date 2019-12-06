@@ -1,5 +1,6 @@
 package epicsquid.roots.model.armor;
 
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.inventory.EquipmentSlotType;
 
@@ -8,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("WeakerAccess")
-public class SylvanArmorModel extends ArmorBaseModel {
+public class SylvanArmorModel extends ArmorBaseModel<ClientPlayerEntity> {
   public static Map<EquipmentSlotType, SylvanArmorModel> SINGLETONS = new HashMap<>();
 
   public EquipmentSlotType slot;
