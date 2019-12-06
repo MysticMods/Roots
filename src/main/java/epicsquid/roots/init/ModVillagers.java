@@ -1,4 +1,4 @@
-package epicsquid.roots.init;
+/*package epicsquid.roots.init;
 
 import epicsquid.mysticallib.block.IBlock;
 import epicsquid.mysticallib.entity.villager.EmeraldForRandomItem;
@@ -10,8 +10,8 @@ import epicsquid.mysticalworld.materials.Materials;
 import epicsquid.roots.Roots;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity.PriceInfo;
-import net.minecraft.item.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -47,4 +47,4 @@ public class ModVillagers {
             new ListRandomItemForRandomEmeralds(new PriceInfo(8, 13), Materials.amethyst.getItem(), Items.DIAMOND),
             new VillagerEntity.ListItemForEmeralds(new ItemStack(ModBlocks.wildwood_sapling), new VillagerEntity.PriceInfo(42, 64)));
   }
-}
+}*/

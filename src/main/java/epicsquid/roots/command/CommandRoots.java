@@ -1,4 +1,4 @@
-package epicsquid.roots.command;
+/*package epicsquid.roots.command;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
@@ -104,4 +104,4 @@ public class CommandRoots extends CommandBase {
       }
     }
   }
-}
+}*/

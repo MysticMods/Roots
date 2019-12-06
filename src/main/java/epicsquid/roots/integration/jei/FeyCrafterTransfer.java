@@ -1,4 +1,4 @@
-package epicsquid.roots.integration.jei;
+/*package epicsquid.roots.integration.jei;
 
 import epicsquid.roots.gui.container.FeyCrafterContainer;
 import mezz.jei.api.recipe.transfer.IRecipeTransferInfo;
@@ -41,4 +41,4 @@ public class FeyCrafterTransfer implements IRecipeTransferInfo<FeyCrafterContain
     }
     return slots;
   }
-}
+}*/

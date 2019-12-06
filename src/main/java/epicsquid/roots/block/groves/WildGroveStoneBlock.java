@@ -6,13 +6,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import javax.annotation.Nonnull;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class WildGroveStoneBlock extends GroveStoneBlock {
-  public WildGroveStoneBlock(@Nonnull String name) {
-    super(name);
+  public WildGroveStoneBlock(Properties properties) {
+    super(properties);
   }
 
   @Override
@@ -72,7 +71,7 @@ public class WildGroveStoneBlock extends GroveStoneBlock {
     }*/
   }
 
-  @Override
+/*  @Override
   @OnlyIn(Dist.CLIENT)
   public void randomDisplayTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     if (stateIn.get(VALID)) {
@@ -92,5 +91,5 @@ public class WildGroveStoneBlock extends GroveStoneBlock {
         }
       }
     }
-  }
+  }*/
 }

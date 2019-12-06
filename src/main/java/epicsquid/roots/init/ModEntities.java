@@ -1,4 +1,4 @@
-package epicsquid.roots.init;
+/*package epicsquid.roots.init;
 
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.entity.RenderNull;
@@ -23,7 +23,7 @@ import java.util.List;
 
 public class ModEntities {
 
-  /**
+  *//**
    * Registers mobs in the game
    * <p>
    * Egg colours are defined as Background colour then Foreground (spots) colour
@@ -34,7 +34,7 @@ public class ModEntities {
    * LibRegistry.registerEntity(Entity.class, BackgroundColour, ForegroundColour);
    * if (Mod.proxy instanceof ClientProxy)
    * LibRegistry.registerEntityRenderer(Entity.class, new RenderEntity.Factory());
-   */
+   *//*
   public static void registerMobs() {
     // Helper entities
     LibRegistry.registerEntity(FireJetEntity.class);
@@ -88,4 +88,4 @@ public class ModEntities {
   public static void registerLootTables() {
     LOOT_TABLES.forEach(LootTables::register);
   }
-}
+}*/

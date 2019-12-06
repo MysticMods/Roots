@@ -1,6 +1,5 @@
 package epicsquid.roots.handler;
 
-import epicsquid.roots.init.HerbRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -136,7 +135,8 @@ public class PouchHandler implements INBTSerializable<CompoundNBT> {
 
     @Override
     public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-      return HerbRegistry.isHerb(stack.getItem());
+      return false;
+      /*      return HerbRegistry.isHerb(stack.getItem());*/
     }
 
     public int refill(ItemStack herbStack) {

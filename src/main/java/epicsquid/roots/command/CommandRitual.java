@@ -1,4 +1,4 @@
-package epicsquid.roots.command;
+/*package epicsquid.roots.command;
 
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.ritual.conditions.Condition;
@@ -123,4 +123,4 @@ public class CommandRitual extends CommandBase {
       }
     }
   }
-}
+}*/

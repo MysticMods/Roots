@@ -1,7 +1,6 @@
 package epicsquid.roots.mechanics;
 
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.config.CropConfig;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.block.*;
 import net.minecraft.state.IProperty;
@@ -53,10 +52,10 @@ public class Growth {
   public static boolean canGrow(World world, BlockPos pos, BlockState state) {
     if (BLACKLIST.contains(state.getBlock())) return false;
 
-    if (CropConfig.getGrowthBlacklist().contains(state.getBlock())) return false;
+/*    if (CropConfig.getGrowthBlacklist().contains(state.getBlock())) return false;
 
     if (CropConfig.getGrowthModBlacklist().contains(Objects.requireNonNull(state.getBlock().getRegistryName()).getNamespace()))
-      return false;
+      return false;*/
 
     if (state.getBlock() instanceof IGrowable) {
       return ((IGrowable) state.getBlock()).canGrow(world, pos, state, true);

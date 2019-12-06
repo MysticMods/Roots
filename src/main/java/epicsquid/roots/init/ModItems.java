@@ -1,31 +1,8 @@
 package epicsquid.roots.init;
 
-import epicsquid.mysticallib.block.BlockDoorBase;
-import epicsquid.mysticallib.event.RegisterContentEvent;
-import epicsquid.mysticallib.item.ItemArrowBase;
-import epicsquid.mysticallib.item.ItemBase;
-import epicsquid.mysticallib.item.ItemFoodBase;
-import epicsquid.mysticallib.item.ItemSeedBase;
-import epicsquid.mysticallib.material.MaterialTypes;
-import epicsquid.roots.Roots;
-import epicsquid.roots.item.*;
-import net.minecraft.block.*;
-import net.minecraft.block.DoublePlantBlock;
-import net.minecraft.block.FlowerBlock;
-import net.minecraft.block.Blocks;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.item.Rarity;
-import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ArmorItem;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.oredict.OreDictionary;
+import net.minecraft.item.Item;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ModItems {
@@ -53,12 +30,12 @@ public class ModItems {
 
   // TODO: Refactor this out of this file
   //Armor Materials
-  public static final ArmorItem.ArmorMaterial sylvanArmorMaterial = EnumHelper.addArmorMaterial("SYLVAN", Roots.MODID + ":sylvan", 12, new int[]{2, 4, 5, 3}, 20, SoundEvents.BLOCK_SNOW_PLACE, 0F);
+/*  public static final ArmorItem.ArmorMaterial sylvanArmorMaterial = EnumHelper.addArmorMaterial("SYLVAN", Roots.MODID + ":sylvan", 12, new int[]{2, 4, 5, 3}, 20, SoundEvents.BLOCK_SNOW_PLACE, 0F);
   public static final ArmorItem.ArmorMaterial wildwoodArmorMaterial = EnumHelper.addArmorMaterial("WILDWOOD", Roots.MODID + ":wildwood", 20, new int[]{2, 6, 7, 2}, 20, SoundEvents.BLOCK_WOOD_PLACE, 1F);
 
-  /**
+  *//**
    * Register all items
-   */
+   *//*
   public static void registerItems(@Nonnull RegisterContentEvent event) {
     event.addItem(moonglow_seed = new ItemSeedBase("moonglow_seed", ModBlocks.moonglow, Blocks.DIRT).setCreativeTab(Roots.tab));
     event.addItem(moonglow_leaf = new ItemBase("moonglow_leaf").setCreativeTab(Roots.tab));
@@ -175,9 +152,9 @@ public class ModItems {
     registerSeedDrops();
   }
 
-  /**
+  *//**
    * Register item oredicts here
-   */
+   *//*
   public static void registerOredict() {
     OreDictionary.registerOre("blockWool", new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE));
 
@@ -216,5 +193,5 @@ public class ModItems {
   private static void registerSeedDrops() {
     MinecraftForge.addGrassSeed(new ItemStack(terra_spores, 1), 5);
     MinecraftForge.addGrassSeed(new ItemStack(wildroot, 1), 5);
-  }
+  }*/
 }

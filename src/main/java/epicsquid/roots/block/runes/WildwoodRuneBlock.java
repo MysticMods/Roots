@@ -1,6 +1,5 @@
 package epicsquid.roots.block.runes;
 
-import epicsquid.roots.tileentity.TileEntityWildrootRune;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
@@ -18,7 +17,8 @@ public class WildwoodRuneBlock extends Block {
   @Nullable
   @Override
   public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-    return new TileEntityWildrootRune();
+    return null;
+    /*    return new TileEntityWildrootRune();*/
   }
 
   // TODO: @Override

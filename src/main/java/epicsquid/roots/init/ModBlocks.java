@@ -1,28 +1,7 @@
 package epicsquid.roots.init;
 
-import epicsquid.mysticallib.LibRegistry;
-import epicsquid.mysticallib.event.RegisterContentEvent;
-import epicsquid.roots.Roots;
-import epicsquid.roots.api.CustomPlantType;
-import epicsquid.roots.block.*;
-import epicsquid.roots.block.ReinforcedBonfireBlock;
-import epicsquid.roots.block.groves.*;
-import epicsquid.roots.block.runes.TrampleBlock;
-import epicsquid.roots.block.runes.WildwoodRuneBlock;
-import epicsquid.roots.tileentity.*;
-import epicsquid.roots.util.EnumElementalSoilType;
-import epicsquid.roots.world.HugeBaffleCap;
-import epicsquid.roots.world.tree.WorldGenBigWildwoodTree;
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraftforge.common.EnumPlantType;
 
-import javax.annotation.Nonnull;
-import java.util.Arrays;
 import java.util.List;
 
 public class ModBlocks {
@@ -35,7 +14,7 @@ public class ModBlocks {
 
   public static Block fey_fire, offertory_bowl, fairy_house_red, fairy_house_brown, fairy_house_baffle;
 
-  public static BlockCropBase moonglow, pereskia, wildroot, spirit_herb, wildewheet, cloud_berry, infernal_bulb, dewgonia, stalicripe;
+  public static Block moonglow, pereskia, wildroot, spirit_herb, wildewheet, cloud_berry, infernal_bulb, dewgonia, stalicripe;
 
   // Runestones
   public static Block runestone, runestone_brick, runestone_brick_alt, chiseled_runestone, wildwood_log, wildwood_planks, wildwood_leaves, wildwood_sapling, baffle_cap_huge_stem, baffle_cap_huge_top,
@@ -63,9 +42,9 @@ public class ModBlocks {
   public static List<Block> runestoneBlocks;
   public static List<Block> runedObsidianBlocks;
 
-  /**
+  /*  *//**
    * Register all block
-   */
+   *//*
   public static void registerBlocks(@Nonnull RegisterContentEvent event) {
     // Roots
     event.addBlock(moonglow = new MoonglowCropBlock("moonglow_crop", EnumPlantType.Crop));
@@ -224,5 +203,5 @@ public class ModBlocks {
       this.button = button;
       this.pressure_plate = pressure_plate;
     }
-  }
+  }*/
 }

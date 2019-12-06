@@ -1,8 +1,6 @@
 package epicsquid.roots.entity.ritual;
 
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.mechanics.Growth;
-import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualGermination;
 import epicsquid.roots.ritual.RitualRegistry;

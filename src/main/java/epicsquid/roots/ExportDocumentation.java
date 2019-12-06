@@ -1,6 +1,5 @@
 package epicsquid.roots;
 
-import epicsquid.roots.integration.crafttweaker.tweaks.*;
 import epicsquid.roots.util.zen.ZenDocExporter;
 
 import java.io.IOException;

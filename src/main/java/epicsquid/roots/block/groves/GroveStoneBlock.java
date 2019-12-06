@@ -1,7 +1,6 @@
 package epicsquid.roots.block.groves;
 
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.config.GeneralConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -135,13 +134,13 @@ public class GroveStoneBlock extends Block {
   public void randomTick(World world, BlockPos pos, BlockState state, Random random) {
     //super.randomTick(world, pos, state, random);
 
-    if (!GeneralConfig.EnableGroveStoneEnvironment) return;
+    /*    if (!GeneralConfig.EnableGroveStoneEnvironment) return;*/
 
     if (world.isRemote) return;
 
     if (!state.get(VALID)) return;
 
-    if (random.nextInt(GeneralConfig.GroveStoneChance) == 1) {
+    if (random.nextInt(10 /*GeneralConfig.GroveStoneChance*/) == 1) {
       int effectsCount = 1 + random.nextInt(1);
 
       List<BlockPos> positions = Util.getBlocksWithinRadius(world, pos.down(), 4, 5, 4, (p) -> {

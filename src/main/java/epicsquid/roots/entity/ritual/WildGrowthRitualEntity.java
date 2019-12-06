@@ -3,9 +3,7 @@ package epicsquid.roots.entity.ritual;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.ritual.RitualWildGrowth;
-import epicsquid.roots.world.tree.WorldGenBigWildwoodTree;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -50,7 +48,8 @@ public class WildGrowthRitualEntity extends BaseRitualEntity {
   }
 
   private void generateTree(World worldIn, BlockPos pos, BlockState state, Random rand) {
-    WorldGenBigWildwoodTree worldgenerator = new WorldGenBigWildwoodTree(true);
+    // TODO: When tree
+/*    WorldGenBigWildwoodTree worldgenerator = new WorldGenBigWildwoodTree(true);
     BlockState iblockstate2 = Blocks.AIR.getDefaultState();
     worldIn.setBlockState(pos, iblockstate2, 4);
     if (!worldgenerator.generate(worldIn, rand, pos)) {
@@ -59,6 +58,6 @@ public class WildGrowthRitualEntity extends BaseRitualEntity {
       // TODO: When packets
       // MessageTreeCompleteFX message = new MessageTreeCompleteFX(worldgenerator.affectedBlocks);
       //PacketHandler.sendToAllTracking(message, this);
-    }
+    }*/
   }
 }

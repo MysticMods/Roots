@@ -3,16 +3,15 @@ package epicsquid.roots.block.groves;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
-import javax.annotation.Nonnull;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class NaturalGroveStoneBlock extends GroveStoneBlock {
-  public NaturalGroveStoneBlock(@Nonnull String name) {
-    super(name);
+
+
+  public NaturalGroveStoneBlock(Properties properties) {
+    super(properties);
   }
 
   @Override
@@ -70,7 +69,7 @@ public class NaturalGroveStoneBlock extends GroveStoneBlock {
     }*/
   }
 
-  @Override
+/*  @Override
   @OnlyIn(Dist.CLIENT)
   public void randomDisplayTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     if (stateIn.get(VALID)) {
@@ -90,5 +89,5 @@ public class NaturalGroveStoneBlock extends GroveStoneBlock {
         }
       }
     }
-  }
+  }*/
 }

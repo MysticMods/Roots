@@ -1,6 +1,5 @@
 package epicsquid.roots;
 
-import epicsquid.roots.gui.GuiHandler;
 import epicsquid.roots.init.ModItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -17,8 +16,6 @@ public class Roots {
   public static final String VERSION = "@VERSION@";
 
   public static final String DEPENDENCIES = "after:maindependencies";
-
-  public static final GuiHandler GUI_HANDLER = new GuiHandler();
 
   public static Logger logger;
 

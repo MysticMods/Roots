@@ -1,30 +1,16 @@
 package epicsquid.roots.item.blockitem;
 
-import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.config.ElementalSoilConfig;
-import epicsquid.roots.init.ModBlocks;
-import epicsquid.roots.network.fx.ElementalSoilTransformFX;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FarmlandBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-
-import javax.annotation.Nonnull;
 
 public class ElementalSoilBlockItem extends BlockItem {
 
-  public ElementalSoilBlockItem(Block block) {
-    super(block);
+
+  public ElementalSoilBlockItem(Block blockIn, Properties builder) {
+    super(blockIn, builder);
   }
 
-  @Override
+/*  @Override
   public boolean placeBlockAt(@Nonnull ItemStack stack, @Nonnull PlayerEntity player, World world, @Nonnull BlockPos pos, Direction side, float hitX, float hitY, float hitZ, @Nonnull BlockState newState) {
 
     Block oldblock = world.getBlockState(pos.offset(side.getOpposite())).getBlock();
@@ -95,5 +81,6 @@ public class ElementalSoilBlockItem extends BlockItem {
       }
     }
     return super.onEntityItemUpdate(entityItem);
-  }
+    }
+    */
 }

@@ -17,6 +17,7 @@ public class OvergrowthRuneBlock extends Block {
   @Nullable
   @Override
   public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-    return new TileEntityWildrootRune();
+    return null;
+/*    return new TileEntityWildrootRune();*/
   }
 }

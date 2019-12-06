@@ -1,8 +1,6 @@
 package epicsquid.roots.entity.ritual;
 
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.mechanics.Magnetize;
-import epicsquid.roots.network.fx.MessageItemGatheredFX;
 import epicsquid.roots.ritual.RitualGathering;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.entity.EntityType;
@@ -11,7 +9,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 
 import java.util.List;
 

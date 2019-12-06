@@ -3,7 +3,7 @@
  * Copyright (C) 2019, Horizon Studio <contact@hrznstudio.com>, All rights reserved.
  *
  * This means no, you cannot steal this code. This is licensed for sole use by Horizon Studio and its subsidiaries, you MUST be granted specific written permission by Horizon Studio to use this code, thinking you have permission IS NOT PERMISSION!
- */
+ *//*
 
 package epicsquid.roots.gui;
 
@@ -63,4 +63,4 @@ public class GuiHandler implements IGuiHandler {
         return null;
     }
   }
-}
+}*/

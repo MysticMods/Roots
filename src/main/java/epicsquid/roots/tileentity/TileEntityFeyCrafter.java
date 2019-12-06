@@ -4,11 +4,11 @@ import com.google.common.collect.Lists;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.mysticalworld.init.ModSounds;
 import epicsquid.roots.block.groves.GroveStoneBlock;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.FeyCraftingRecipe;
 import net.minecraft.block.BlockState;
@@ -237,7 +237,7 @@ public class TileEntityFeyCrafter extends TileBase {
 /*    MessageGrowthCrafterVisualFX packet = new MessageGrowthCrafterVisualFX(getPos(), world.provider.getDimension());
     PacketHandler.sendToAllTracking(packet, this);*/
     // TODO: Better sound design
-    world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), ModSounds.CHIMES, SoundCategory.NEUTRAL, 1f, 1f);
+/*    world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), ModSounds.CHIMES, SoundCategory.NEUTRAL, 1f, 1f);*/
 
     return true;
   }

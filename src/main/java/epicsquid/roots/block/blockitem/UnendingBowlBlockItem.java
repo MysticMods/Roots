@@ -1,11 +1,11 @@
 package epicsquid.roots.block.blockitem;
 
 import net.minecraft.block.Block;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
 
@@ -13,8 +13,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class UnendingBowlBlockItem extends BlockItem {
-  public UnendingBowlBlockItem(Block block) {
-    super(block);
+  public UnendingBowlBlockItem(Block blockIn, Properties builder) {
+    super(blockIn, builder);
   }
 
   @Nullable
@@ -31,7 +31,7 @@ public class UnendingBowlBlockItem extends BlockItem {
     @Nullable
     @Override
     public FluidStack getFluid() {
-      return new FluidStack(FluidRegistry.getFluid("water"), Integer.MAX_VALUE);
+      return new FluidStack(Fluids.WATER, Integer.MAX_VALUE);
     }
 
     @Override
@@ -39,18 +39,18 @@ public class UnendingBowlBlockItem extends BlockItem {
     }
 
     @Override
-    public int fill(FluidStack resource, boolean doFill) {
+    public int fill(FluidStack resource, FluidAction action) {
       return 0;
     }
 
     @Override
-    public FluidStack drain(FluidStack resource, boolean doDrain) {
+    public FluidStack drain(FluidStack resource, FluidAction doDrain) {
       return resource.copy();
     }
 
     @Override
-    public FluidStack drain(int maxDrain, boolean doDrain) {
-      return new FluidStack(FluidRegistry.getFluid("water"), maxDrain);
+    public FluidStack drain(int maxDrain, FluidAction drain) {
+      return new FluidStack(Fluids.WATER, maxDrain);
     }
 
     @Override
@@ -60,8 +60,7 @@ public class UnendingBowlBlockItem extends BlockItem {
 
     @Override
     public boolean canDrainFluidType(FluidStack fluid) {
-      return fluid.getFluid() == FluidRegistry.getFluid("water");
-
+      return fluid.getFluid() == Fluids.WATER;
     }
 
     @Override

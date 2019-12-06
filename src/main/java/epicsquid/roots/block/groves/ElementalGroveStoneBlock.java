@@ -1,27 +1,21 @@
 package epicsquid.roots.block.groves;
 
-import epicsquid.mysticallib.particle.particles.ParticleLeafArc;
-import epicsquid.mysticallib.proxy.ClientProxy;
-import epicsquid.mysticallib.util.Util;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nonnull;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class ElementalGroveStoneBlock extends GroveStoneBlock {
-  public ElementalGroveStoneBlock(@Nonnull String name) {
-    super(name);
+
+
+  public ElementalGroveStoneBlock(Properties properties) {
+    super(properties);
   }
 
   @Override
   public void randomTick(World world, BlockPos pos, BlockState state, Random random) {
-    this.updateTick(world, pos, state, random);
-
     /*if (!GeneralConfig.EnableGroveStoneEnvironment) return;
 
     if (world.isRemote) return;
@@ -75,7 +69,7 @@ public class ElementalGroveStoneBlock extends GroveStoneBlock {
     }*/
   }
 
-  @Override
+/*  @Override
   @OnlyIn(Dist.CLIENT)
   public void randomDisplayTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     if (stateIn.getValue(VALID)) {
@@ -112,5 +106,5 @@ public class ElementalGroveStoneBlock extends GroveStoneBlock {
         }
       }
     }
-  }
+  }*/
 }

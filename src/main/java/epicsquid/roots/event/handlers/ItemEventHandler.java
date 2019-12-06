@@ -1,17 +1,12 @@
 package epicsquid.roots.event.handlers;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.handler.PouchHandler;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.util.PowderInventoryUtil;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -52,7 +47,7 @@ public class ItemEventHandler {
         ItemStack stack = entity.getItem().copy();
         Item item = stack.getItem();
         int original = stack.getCount();
-        if (HerbRegistry.isHerb(item)) {
+/*        if (HerbRegistry.isHerb(item)) {
           ItemStack pouch = PowderInventoryUtil.getPouch(player);
           if (!pouch.isEmpty()) {
             PouchHandler handler = PouchHandler.getHandler(pouch);
@@ -71,7 +66,7 @@ public class ItemEventHandler {
               entity.world.playSound(null, player.getPosition(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 1, 0.5f);
             }
           }
-        }
+        }*/
       }
     }
   }

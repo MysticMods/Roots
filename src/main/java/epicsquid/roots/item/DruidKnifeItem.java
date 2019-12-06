@@ -1,7 +1,6 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.KnifeItem;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.dispenser.KnifeDispenser;
 import net.minecraft.block.DispenserBlock;
@@ -32,17 +31,17 @@ public class DruidKnifeItem extends KnifeItem {
   } @Nonnull World world, @Nonnull BlockPos pos, @Nonnull Hand hand, @Nonnull Direction facing, float hitX, float hitY, float hitZ) {*/
     if (context.getHand() == Hand.MAIN_HAND) {
       ItemStack offhand = context.getPlayer().getHeldItemOffhand();
-      if (!offhand.isEmpty() && HerbRegistry.isHerb(offhand.getItem())) {
-        /*RunicCarvingRecipe recipe = ModRecipes.getRunicCarvingRecipe(world.getBlockState(pos), HerbRegistry.getHerbByItem(offhand.getItem()));
+/*      if (!offhand.isEmpty() && HerbRegistry.isHerb(offhand.getItem())) {
+        RunicCarvingRecipe recipe = ModRecipes.getRunicCarvingRecipe(world.getBlockState(pos), HerbRegistry.getHerbByItem(offhand.getItem()));
         if (recipe != null) {
           world.setBlockState(pos, recipe.getRuneBlock());
 
           if (!player.isCreative()) {
             player.getHeldItemMainhand().damageItem(1, player);
           }
-        }*/
+        }
       } else {
-/*        if (!MossConfig.getBlacklistDimensions().contains(world.provider.getDimension())) {
+        if (!MossConfig.getBlacklistDimensions().contains(world.provider.getDimension())) {
           // Used to get terramoss from a block of cobble. This can also be done using runic shears.
           BlockState state = world.getBlockState(pos);
           BlockState result = MossConfig.scrapeResult(state);
@@ -57,8 +56,8 @@ public class DruidKnifeItem extends KnifeItem {
             }
             world.playSound(player, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
           }
-        }*/
-      }
+        }
+      }*/
       return ActionResultType.SUCCESS;
     }
     return ActionResultType.PASS;

@@ -3,7 +3,7 @@
  * Copyright (C) 2019, Horizon Studio <contact@hrznstudio.com>, All rights reserved.
  *
  * This means no, you cannot steal this code. This is licensed for sole use by Horizon Studio and its subsidiaries, you MUST be granted specific written permission by Horizon Studio to use this code, thinking you have permission IS NOT PERMISSION!
- */
+ *//*
 
 package epicsquid.roots.gui.client;
 
@@ -30,12 +30,12 @@ public class FeyCrafterScreen extends ContainerScreen<FeyCrafterContainer> {
 
   // TODO: What's the new value?
 
-/*  @Override
+*//*  @Override
   public void drawScreen(int mouseX, int mouseY, float partialTicks) {
     drawDefaultBackground();
     super.drawScreen(mouseX, mouseY, partialTicks);
     this.renderHoveredToolTip(mouseX, mouseY);
-  }*/
+  }*//*
 
 
   @Override
@@ -69,4 +69,4 @@ public class FeyCrafterScreen extends ContainerScreen<FeyCrafterContainer> {
       }
     }
   }
-}
+}*/

@@ -3,7 +3,7 @@
  * Copyright (C) 2019, Horizon Studio <contact@hrznstudio.com>, All rights reserved.
  *
  * This means no, you cannot steal this code. This is licensed for sole use by Horizon Studio and its subsidiaries, you MUST be granted specific written permission by Horizon Studio to use this code, thinking you have permission IS NOT PERMISSION!
- */
+ *//*
 
 package epicsquid.roots.gui.client;
 
@@ -30,12 +30,12 @@ public class PouchScreen extends ContainerScreen<PouchContainer> {
     ySize = 100;
   }
 
-/*  @Override
+*//*  @Override
   public void drawScreen(int mouseX, int mouseY, float partialTicks) {
     drawDefaultBackground();
     super.drawScreen(mouseX, mouseY, partialTicks);
     this.renderHoveredToolTip(mouseX, mouseY);
-  }*/
+  }*//*
 
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
@@ -49,4 +49,4 @@ public class PouchScreen extends ContainerScreen<PouchContainer> {
   private boolean isComponentPouch() {
     return containerPouch.componentPouch;
   }
-}
+}*/

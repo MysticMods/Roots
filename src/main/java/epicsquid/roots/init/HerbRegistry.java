@@ -1,4 +1,4 @@
-package epicsquid.roots.init;
+/*package epicsquid.roots.init;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
@@ -92,4 +92,4 @@ public class HerbRegistry {
     //return REGISTRY.getValuesCollection().stream()
     //    .anyMatch(herb -> herb.getItem() == item);
   }
-}
+}*/

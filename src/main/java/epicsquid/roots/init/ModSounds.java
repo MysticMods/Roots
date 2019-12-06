@@ -1,4 +1,4 @@
-package epicsquid.roots.init;
+/*package epicsquid.roots.init;
 
 import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.mysticalworld.MysticalWorld;
@@ -20,4 +20,4 @@ public class ModSounds {
     result.setRegistryName(name);
     return result;
   }
-}
+}*/

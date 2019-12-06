@@ -1,7 +1,6 @@
 package epicsquid.roots.mechanics;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.config.CropConfig;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -52,9 +51,9 @@ public class Harvest {
   public static IProperty<?> resolveStates(BlockState state) {
     Block block = state.getBlock();
     ResourceLocation rl = block.getRegistryName();
-    if (CropConfig.getHarvestModBlacklist().contains(Objects.requireNonNull(rl).getNamespace()) || CropConfig.getHarvestBlacklist().contains(rl)) {
+/*    if (CropConfig.getHarvestModBlacklist().contains(Objects.requireNonNull(rl).getNamespace()) || CropConfig.getHarvestBlacklist().contains(rl)) {
       return null;
-    }
+    }*/
 
     for (IProperty<?> prop : state.getProperties()) {
       if ((prop.getName().equals("age") || prop.getName().equals("growth")) && prop.getValueClass() == Integer.class) {
@@ -128,7 +127,7 @@ public class Harvest {
     // check dimension
     Harvest.add(seed, world.getDimension().getType().getId(), pos, state);
     // TODO:
-/*    state.getBlock().getDrops(drops, world, pos, state, 0);*/
+    /*    state.getBlock().getDrops(drops, world, pos, state, 0);*/
     // Requires a loot context
     ForgeEventFactory.fireBlockHarvesting(drops, world, pos, state, 0, 1.0f, false, player);
     world.setBlockState(pos, newState);

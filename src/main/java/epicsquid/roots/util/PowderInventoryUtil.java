@@ -1,3 +1,4 @@
+/*
 package epicsquid.roots.util;
 
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -28,10 +29,12 @@ public class PowderInventoryUtil {
   private static HerbAlert slot2 = null;
 
   public static ItemStack getPouch(PlayerEntity player) {
+*/
 /*    if (Loader.isModLoaded("baubles")) {
       ItemStack stack = BaublePowderInventoryUtil.getPouch(player);
       if (!stack.isEmpty()) return stack;
-    }*/
+    }*//*
+
 
     for (int i = 0; i < 36; i++) {
       if (player.inventory.getStackInSlot(i).getItem() instanceof PouchItem) {
@@ -239,4 +242,4 @@ public class PowderInventoryUtil {
       GlStateManager.popMatrix();
     }
   }
-}
+}*/

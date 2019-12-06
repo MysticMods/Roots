@@ -1,4 +1,4 @@
-package epicsquid.roots.command;
+/*package epicsquid.roots.command;
 
 import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.init.ModItems;
@@ -70,4 +70,4 @@ public class CommandStaff extends CommandBase {
       }
     }
   }
-}
+}*/

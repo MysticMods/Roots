@@ -5,10 +5,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.world.World;
-import net.minecraft.world.ServerWorld;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
-import net.minecraftforge.fml.common.Loader;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -27,14 +26,14 @@ public class ModDamage {
 
   public static DamageSource radiantDamageFrom(PlayerEntity player) {
     DamageSource source = new EntityDamageSource("holy_damage", player).setDamageBypassesArmor().setMagicDamage();
-    if (Loader.isModLoaded("consecration")) {
+/*    if (Loader.isModLoaded("consecration")) {
       source.setFireDamage();
-    }
+    }*/
     return source;
   }
 
   @Nullable
-  public static DamageSource wildfireDamage (World world) {
+  public static DamageSource wildfireDamage(World world) {
     if (world.isRemote) return null;
 
     ServerWorld server = (ServerWorld) world;

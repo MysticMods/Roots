@@ -11,8 +11,10 @@ import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class TwilightGroveStoneBlock extends GroveStoneBlock {
-  public TwilightGroveStoneBlock(@Nonnull String name) {
-    super(name);
+
+
+  public TwilightGroveStoneBlock(Properties properties) {
+    super(properties);
   }
 
   @Override
@@ -72,7 +74,7 @@ public class TwilightGroveStoneBlock extends GroveStoneBlock {
     }*/
   }
 
-  @Override
+/*  @Override
   @OnlyIn(Dist.CLIENT)
   public void randomDisplayTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
     if (stateIn.get(VALID)) {
@@ -92,5 +94,5 @@ public class TwilightGroveStoneBlock extends GroveStoneBlock {
         }
       }
     }
-  }
+  }*/
 }
