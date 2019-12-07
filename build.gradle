@@ -45,7 +45,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                MysticalMachinery {
+                Roots {
                     source sourceSets.main
                 }
             }
@@ -61,7 +61,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                MysticalMachinery {
+                Roots {
                     source sourceSets.main
                 }
             }
@@ -77,7 +77,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                MysticalMachinery {
+                Roots {
                     source sourceSets.main
                 }
             }
