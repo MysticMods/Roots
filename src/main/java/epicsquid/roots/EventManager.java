@@ -2,26 +2,18 @@ package epicsquid.roots;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.proxy.ClientProxy;
-import epicsquid.roots.capability.grove.IPlayerGroveCapability;
-import epicsquid.roots.capability.grove.PlayerGroveCapabilityProvider;
-import epicsquid.roots.capability.playerdata.IPlayerDataCapability;
-import epicsquid.roots.capability.playerdata.PlayerDataCapabilityProvider;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityProvider;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.baubles.pouch.BaubleBeltCapabilityHandler;
 import epicsquid.roots.item.IItemPouch;
-import epicsquid.roots.item.ItemPouch;
-import epicsquid.roots.network.MessagePlayerDataUpdate;
-import epicsquid.roots.network.MessagePlayerGroveUpdate;
 import epicsquid.roots.network.fx.*;
 import epicsquid.roots.util.Constants;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.GameType;
@@ -31,14 +23,11 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
@@ -54,32 +43,9 @@ public class EventManager {
   }
 
   @SubscribeEvent
-  public static void copyCapabilities(PlayerEvent.Clone event) {
-    if (event.isWasDeath()) {
-      EntityPlayer player = event.getOriginal();
-      EntityPlayer newPlayer = event.getEntityPlayer();
-      IPlayerGroveCapability groveOrig = player.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null);
-      IPlayerGroveCapability groveNew = newPlayer.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null);
-      if (groveOrig != null && groveNew != null) {
-        groveNew.setData(groveOrig.getData());
-      }
-
-      IPlayerDataCapability dataOrig = player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null);
-      IPlayerDataCapability dataNew = newPlayer.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null);
-      if (dataOrig != null && dataNew != null) {
-        dataNew.setData(dataOrig.getData());
-      }
-    }
-  }
-
-  @SubscribeEvent
   public static void addCapabilities(AttachCapabilitiesEvent<Entity> event) {
     if (ModRecipes.getRunicShearEntities().contains(event.getObject().getClass())) {
       event.addCapability(RunicShearsCapabilityProvider.IDENTIFIER, new RunicShearsCapabilityProvider());
-    }
-    if (event.getObject() instanceof EntityPlayer) {
-      event.addCapability(PlayerGroveCapabilityProvider.IDENTIFIER, new PlayerGroveCapabilityProvider());
-      event.addCapability(PlayerDataCapabilityProvider.IDENTIFIER, new PlayerDataCapabilityProvider());
     }
   }
 
@@ -88,28 +54,6 @@ public class EventManager {
   public static void addBaublesCapability(AttachCapabilitiesEvent<ItemStack> event) {
     if (event.getObject().getItem() instanceof IItemPouch) {
       event.addCapability(BaubleBeltCapabilityHandler.IDENTIFIER, BaubleBeltCapabilityHandler.instance);
-    }
-  }
-
-  @SubscribeEvent
-  public static void livingUpdate(LivingUpdateEvent event) {
-    if (event.getEntity() instanceof EntityPlayer) {
-      EntityPlayer player = (EntityPlayer) event.getEntity();
-      if (player.hasCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null)) {
-        IPlayerGroveCapability cap = player.getCapability(PlayerGroveCapabilityProvider.PLAYER_GROVE_CAPABILITY, null);
-        if (cap != null && !player.world.isRemote && cap.isDirty()) {
-          PacketHandler.INSTANCE.sendTo(new MessagePlayerGroveUpdate(player.getUniqueID(), cap.getData()), (EntityPlayerMP) player);
-          cap.clean();
-        }
-      }
-      if (player.hasCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null)) {
-        IPlayerDataCapability cap = player.getCapability(PlayerDataCapabilityProvider.PLAYER_DATA_CAPABILITY, null);
-        if (cap != null && !player.world.isRemote && cap.isDirty()) {
-          PacketHandler.INSTANCE.sendToAllTracking(new MessagePlayerDataUpdate(player.getUniqueID(), cap.getData()),
-              new NetworkRegistry.TargetPoint(player.dimension, player.posX, player.posY, player.posZ, 0));
-          cap.clean();
-        }
-      }
     }
   }
 

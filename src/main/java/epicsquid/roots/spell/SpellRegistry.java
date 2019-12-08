@@ -62,19 +62,13 @@ public class SpellRegistry {
     SpellFeyLight.instance.setDisabled(SpellConfig.disableSpellsCategory.disableFeyLight);
     spellRegistry.put(SpellIcedTouch.spellName, SpellIcedTouch.instance);
     SpellIcedTouch.instance.setDisabled(SpellConfig.disableSpellsCategory.disableIcedTouch);
-
-    // Cannot disable Grove-related spells
-    spellRegistry.put(SpellGroveSupplication.spellName, SpellGroveSupplication.instance);
-    SpellGroveSupplication.instance.setDisabled(false);
-    spellRegistry.put(SpellFairySupplication.spellName, SpellFairySupplication.instance);
-    SpellFairySupplication.instance.setDisabled(false);
   }
 
-  public static void init () {
+  public static void init() {
     spellRegistry.values().forEach(SpellBase::init);
   }
 
-  public static void finalise () {
+  public static void finalise() {
     spellRegistry.values().forEach(SpellBase::finalise);
   }
 }

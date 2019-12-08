@@ -4,7 +4,6 @@ import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.EventManager;
 import epicsquid.roots.Roots;
-import epicsquid.roots.event.SpellEvent;
 import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
@@ -29,7 +28,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
@@ -71,17 +69,14 @@ public class ItemStaff extends ItemBase {
       if (capability.getCooldown() <= 0) {
         SpellBase spell = capability.getSelectedSpell();
         if (spell != null) {
-          SpellEvent event = new SpellEvent(player, spell);
-          MinecraftForge.EVENT_BUS.post(event);
-          spell = event.getSpell();
           if (spell.getCastType() == SpellBase.EnumCastType.INSTANTANEOUS) {
             if (spell.costsMet(player)) {
               boolean result = spell.cast(player, capability.getSelectedModules());
               if (result) {
                 if (!player.capabilities.isCreativeMode) {
                   spell.enactCosts(player);
-                  capability.setCooldown(event.getCooldown());
-                  capability.setLastCooldown(event.getCooldown());
+                  capability.setCooldown(spell.getCooldown());
+                  capability.setLastCooldown(spell.getCooldown());
                 }
               }
               return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
@@ -121,12 +116,10 @@ public class ItemStaff extends ItemBase {
     SpellHandler capability = SpellHandler.fromStack(stack);
     SpellBase spell = capability.getSelectedSpell();
     if (spell != null) {
-      SpellEvent event = new SpellEvent((EntityPlayer) entity, spell);
-      MinecraftForge.EVENT_BUS.post(event);
       if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
         if (!((EntityPlayer) entity).capabilities.isCreativeMode) {
-          capability.setCooldown(event.getCooldown());
-          capability.setLastCooldown(event.getCooldown());
+          capability.setCooldown(spell.getCooldown());
+          capability.setLastCooldown(spell.getCooldown());
         }
       }
     }
