@@ -25,6 +25,7 @@ public class RitualSpreadingForest extends RitualBase {
   public RitualSpreadingForest(String name, boolean disabled) {
     super(name, disabled);
     properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_PLACE_INTERVAL, PROP_GROWTH_INTERVAL, PROP_DOUBLE_CHANCE);
+    setEntityClass(EntityRitualSpreadingForest.class);
   }
 
   @Override
@@ -51,10 +52,5 @@ public class RitualSpreadingForest extends RitualBase {
     place_interval = properties.getProperty(PROP_PLACE_INTERVAL);
     growth_interval = properties.getProperty(PROP_GROWTH_INTERVAL);
     double_chance = properties.getProperty(PROP_DOUBLE_CHANCE);
-  }
-
-  @Override
-  public EntityRitualBase doEffect(World world, BlockPos pos) {
-    return this.spawnEntity(world, pos, EntityRitualSpreadingForest.class);
   }
 }

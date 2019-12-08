@@ -134,11 +134,9 @@ roots.spell.spell_magnetism.name=Magnetism
 roots.spell.spell_sense_danger.name=Sense Danger
 roots.spell.spell_harvest.name=Harvest
 roots.spell.spell_rampant_growth.name=Rampant Growth
-roots.spell.spell_supplication.name=Grove Supplication
 roots.spell.spell_fey_light.name=Fey Light
 roots.spell.spell_iced_touch.name=Iced Touch
 roots.spell.spell_iced_touch.module_touch.description=Surrounds you with freezing clouds
-roots.spell.spell_fairy_supplication.name=Fairy Supplication
 
 roots.ritual.ritual_healing_aura.name=Healing Aura
 roots.ritual.ritual_heavy_storms.name=Heavy Storms
@@ -157,6 +155,7 @@ roots.ritual.ritual_overgrowth.name=Overgrowth
 roots.ritual.ritual_flower_growth.name=Flower Growth
 roots.ritual.ritual_transmutation.name=Transmutation
 roots.ritual.ritual_gathering.name=Gathering
+roots.ritual.ritual_grove_supplication.name=Grove Supplication
 
 roots.ritual.condition.items=Failed to start ritual: invalid items.
 roots.ritual.condition.standing_stones=Failed to start ritual: requires %s.

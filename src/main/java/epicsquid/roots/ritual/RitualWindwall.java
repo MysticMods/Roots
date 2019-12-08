@@ -27,6 +27,7 @@ public class RitualWindwall extends RitualBase {
   public RitualWindwall(String name, boolean disabled) {
     super(name, disabled);
     properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL, PROP_DISTANCE, PROP_KNOCKBACK);
+    setEntityClass(EntityRitualWindwall.class);
   }
 
   @Override
@@ -52,10 +53,5 @@ public class RitualWindwall extends RitualBase {
     interval = properties.getProperty(PROP_INTERVAL);
     distance = (int) Math.pow(properties.getProperty(PROP_DISTANCE), 2);
     knockback = properties.getProperty(PROP_KNOCKBACK);
-  }
-
-  @Override
-  public EntityRitualBase doEffect(World world, BlockPos pos) {
-    return this.spawnEntity(world, pos, EntityRitualWindwall.class);
   }
 }

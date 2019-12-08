@@ -25,6 +25,7 @@ public class RitualHeavyStorms extends RitualBase {
   public RitualHeavyStorms(String name, boolean disabled) {
     super(name, disabled);
     properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL);
+    setEntityClass(EntityRitualHeavyStorms.class);
   }
 
   @Override
@@ -49,10 +50,5 @@ public class RitualHeavyStorms extends RitualBase {
     radius_y = radius[1] + 0.5;
     radius_z = radius[2] + 0.5;
     interval = properties.getProperty(PROP_INTERVAL);
-  }
-
-  @Override
-  public EntityRitualBase doEffect(World world, BlockPos pos) {
-    return this.spawnEntity(world, pos, EntityRitualHeavyStorms.class);
   }
 }

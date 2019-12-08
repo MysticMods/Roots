@@ -174,7 +174,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
 
     if (ritual != null && !ritual.isDisabled()) {
       if ((ritualEntity == null || ritualEntity.isDead) && ritual.canFire(this, player)) {
-        ritualEntity = ritual.doEffect(world, pos);
+        ritualEntity = ritual.doEffect(world, pos, player);
         this.burnTime = ritual.getDuration();
         this.lastRitualUsed = ritual;
         this.lastRecipeUsed = null;
@@ -474,7 +474,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
             stacks.add(stack);
           }
           if (ListUtil.matchesIngredients(stacks, this.lastRitualUsed.getIngredients())) {
-            lastRitualUsed.doEffect(world, getPos());
+            lastRitualUsed.doEffect(world, getPos(), null);
             burning = true;
             this.burnTime = this.lastRitualUsed.getDuration();
             this.doBigFlame = true;

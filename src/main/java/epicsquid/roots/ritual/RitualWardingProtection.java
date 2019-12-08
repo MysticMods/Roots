@@ -27,6 +27,7 @@ public class RitualWardingProtection extends RitualBase {
   public RitualWardingProtection(String name, boolean disabled) {
     super(name, disabled);
     properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL, PROP_INVULN_DURATION);
+    setEntityClass(EntityRitualWardingProtection.class);
   }
 
   @Override
@@ -54,10 +55,5 @@ public class RitualWardingProtection extends RitualBase {
     radius_z = radius[2] + 0.5;
     interval = properties.getProperty(PROP_INTERVAL);
     invuln_duration = properties.getProperty(PROP_INVULN_DURATION);
-  }
-
-  @Override
-  public EntityRitualBase doEffect(World world, BlockPos pos) {
-    return this.spawnEntity(world, pos, EntityRitualWardingProtection.class);
   }
 }

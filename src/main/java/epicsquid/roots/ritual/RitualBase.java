@@ -7,6 +7,7 @@ import java.util.*;
 import epicsquid.roots.Roots;
 import epicsquid.roots.block.BlockBonfire;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
+import epicsquid.roots.entity.ritual.IRitualEntity;
 import epicsquid.roots.ritual.conditions.Condition;
 import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.tileentity.TileEntityBonfire;
@@ -28,6 +29,7 @@ public abstract class RitualBase {
   protected static Random random = new Random();
 
   protected PropertyTable properties = new PropertyTable();
+  public Class<? extends EntityRitualBase> entityClass;
 
   private List<Condition> conditions = new ArrayList<>();
   private Item icon;
@@ -44,6 +46,14 @@ public abstract class RitualBase {
     this.name = name;
     this.disabled = disabled;
     this.duration = 0;
+  }
+
+  public Class<? extends EntityRitualBase> getEntityClass () {
+    return this.entityClass;
+  }
+
+  public void setEntityClass (Class<? extends EntityRitualBase> entityClass) {
+    this.entityClass = entityClass;
   }
 
   public String getFormat() {
@@ -108,9 +118,11 @@ public abstract class RitualBase {
     return success;
   }
 
-  public abstract EntityRitualBase doEffect(World world, BlockPos pos);
+  public EntityRitualBase doEffect(World world, BlockPos pos, @Nullable EntityPlayer player) {
+    return this.spawnEntity(world, pos, getEntityClass(), player);
+  }
 
-  protected EntityRitualBase spawnEntity(World world, BlockPos pos, Class<? extends EntityRitualBase> entity) {
+  protected EntityRitualBase spawnEntity(World world, BlockPos pos, Class<? extends EntityRitualBase> entity, @Nullable EntityPlayer player) {
     List<EntityRitualBase> pastRituals = world
         .getEntitiesWithinAABB(entity, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 100, pos.getZ() + 1));
     if (pastRituals.size() == 0 && !world.isRemote) {
@@ -125,6 +137,9 @@ public abstract class RitualBase {
         return null;
       }
       ritual.setPosition(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+      if (player != null) {
+        ritual.setPlayer(player.getUniqueID());
+      }
       world.spawnEntity(ritual);
       return ritual;
     } else if (pastRituals.size() > 0) {

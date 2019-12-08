@@ -80,10 +80,6 @@
     },
     {
       "type": "item",
-      "base": "fairy_dust"
-    },
-    {
-      "type": "item",
       "base": "fey_leather"
     },
     {
@@ -156,39 +152,11 @@
     },
     {
       "type": "item",
-      "base": "rune_tablet"
-    },
-    {
-      "type": "item",
       "base": "runic_dust"
     },
     {
       "type": "tool",
-      "base": "runic_axe"
-    },
-    {
-      "type": "tool",
-      "base": "runic_dagger"
-    },
-    {
-      "type": "tool",
       "base": "runic_shears"
-    },
-    {
-      "type": "tool",
-      "base": "runic_hoe"
-    },
-    {
-      "type": "tool",
-      "base": "runic_smasher"
-    },
-    {
-      "type": "tool",
-      "base": "runic_sword"
-    },
-    {
-      "type": "tool",
-      "base": "runic_shovel"
     },
     {
       "type": "item",
@@ -209,10 +177,6 @@
     {
       "type": "tool",
       "base": "stone_knife"
-    },
-    {
-      "type": "item",
-      "base": "strange_spores"
     },
     {
       "type": "item",

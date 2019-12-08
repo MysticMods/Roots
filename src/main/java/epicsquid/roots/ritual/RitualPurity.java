@@ -27,6 +27,7 @@ public class RitualPurity extends RitualBase {
   public RitualPurity(String name, boolean disabled) {
     super(name, disabled);
     properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL, PROP_ZOMBIE_COUNT);
+    setEntityClass(EntityRitualPurity.class);
   }
 
   @Override
@@ -52,10 +53,5 @@ public class RitualPurity extends RitualBase {
     radius_z = radius[2] + 0.5;
     interval = properties.getProperty(PROP_INTERVAL);
     zombie_count = properties.getProperty(PROP_ZOMBIE_COUNT);
-  }
-
-  @Override
-  public EntityRitualBase doEffect(World world, BlockPos pos) {
-    return this.spawnEntity(world, pos, EntityRitualPurity.class);
   }
 }
