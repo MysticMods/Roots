@@ -1,18 +1,10 @@
 package epicsquid.roots;
 
-import epicsquid.roots.capability.grove.IPlayerGroveCapability;
-import epicsquid.roots.capability.grove.PlayerGroveCapability;
-import epicsquid.roots.capability.grove.PlayerGroveCapabilityStorage;
-import epicsquid.roots.capability.playerdata.IPlayerDataCapability;
-import epicsquid.roots.capability.playerdata.PlayerDataCapability;
-import epicsquid.roots.capability.playerdata.PlayerDataCapabilityStorage;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapability;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityStorage;
 import epicsquid.roots.gui.GuiHandler;
-import epicsquid.roots.handler.ConfigHandler;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.integration.botania.PetalApothecaryFiller;
 import epicsquid.roots.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -69,8 +61,6 @@ public class Roots {
     CONTAINER = Loader.instance().activeModContainer();
     // We load before MysticalLib so we can't use an annotation or it will crash
     MinecraftForge.EVENT_BUS.register(RegistryManager.class);
-    CapabilityManager.INSTANCE.register(IPlayerGroveCapability.class, new PlayerGroveCapabilityStorage(), PlayerGroveCapability::new);
-    CapabilityManager.INSTANCE.register(IPlayerDataCapability.class, new PlayerDataCapabilityStorage(), PlayerDataCapability::new);
     CapabilityManager.INSTANCE.register(RunicShearsCapability.class, new RunicShearsCapabilityStorage(), RunicShearsCapability::new);
     NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);
     logger = event.getModLog();

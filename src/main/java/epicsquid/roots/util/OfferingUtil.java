@@ -1,25 +1,26 @@
 package epicsquid.roots.util;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import epicsquid.roots.grove.GroveType;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class OfferingUtil {
   private static Map<Item, Float> values = new HashMap<>();
-  private static Map<Item, GroveType> groveItems = new HashMap<>();
+  /*  private static Map<Item, GroveType> groveItems = new HashMap<>();*/
 
   public static void init() {
     //Wild Grove
     values.put(Items.WHEAT, 1f);
     values.put(Items.MELON, 0.5f);
     values.put(Items.CHICKEN, 1f);
+/*
     groveItems.put(Items.WHEAT, GroveType.WILD);
     groveItems.put(Items.MELON, GroveType.WILD);
     groveItems.put(Items.CHICKEN, GroveType.WILD);
+*/
 
     //    values.put(ModItems.moonglow_leaf, 2f);
     //    values.put(ModItems.terra_moss, 2f);
@@ -59,7 +60,7 @@ public class OfferingUtil {
     return 0;
   }
 
-  public static GroveType getGroveType(ItemStack heldItem) {
+/*  public static GroveType getGroveType(ItemStack heldItem) {
     if (!heldItem.isEmpty()) {
       if (groveItems.containsKey(heldItem.getItem())) {
         return groveItems.get(heldItem.getItem());
@@ -67,6 +68,6 @@ public class OfferingUtil {
     }
 
     return null;
-  }
+  }*/
 
 }
