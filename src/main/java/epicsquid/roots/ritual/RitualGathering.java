@@ -24,6 +24,7 @@ public class RitualGathering extends RitualBase {
   public RitualGathering(String name, boolean disabled) {
     super(name, disabled);
     this.properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL);
+    setEntityClass(EntityRitualGathering.class);
   }
 
   @Override
@@ -49,10 +50,5 @@ public class RitualGathering extends RitualBase {
     radius_y = radius[1];
     radius_z = radius[2];
     interval = properties.getProperty(PROP_INTERVAL);
-  }
-
-  @Override
-  public EntityRitualBase doEffect(World world, BlockPos pos) {
-    return this.spawnEntity(world, pos, EntityRitualGathering.class);
   }
 }

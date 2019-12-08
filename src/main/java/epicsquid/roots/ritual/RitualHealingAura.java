@@ -29,6 +29,7 @@ public class RitualHealingAura extends RitualBase {
   public RitualHealingAura(String name, boolean disabled) {
     super(name, disabled);
     properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL, PROP_AMOUNT);
+    setEntityClass(EntityRitualHealingAura.class);
   }
 
   @Override
@@ -55,10 +56,5 @@ public class RitualHealingAura extends RitualBase {
     radius_z = radius[2] + 0.5;
     amount = properties.getProperty(PROP_AMOUNT);
     interval = properties.getProperty(PROP_INTERVAL);
-  }
-
-  @Override
-  public EntityRitualBase doEffect(World world, BlockPos pos) {
-    return this.spawnEntity(world, pos, EntityRitualHealingAura.class);
   }
 }

@@ -14,7 +14,7 @@ public class RitualRegistry {
 
   public static RitualBase ritual_healing_aura, ritual_heavy_storms, ritual_divine_protection, ritual_fire_storm, ritual_spreading_forest, ritual_windwall,
       ritual_warding_protection, ritual_germination, ritual_purity, ritual_frost_lands, ritual_animal_harvest, ritual_summon_creatures,
-      ritual_wild_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation, ritual_gathering;
+      ritual_wild_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation, ritual_gathering, ritual_grove_supplication;
 
   public static RitualBase getRitual(TileEntityBonfire tileEntity, @Nullable EntityPlayer player) {
     for (int i = 0; i < ritualRegistry.size(); i++) {
@@ -58,6 +58,8 @@ public class RitualRegistry {
     addRitual(ritual_warding_protection = new RitualWardingProtection("ritual_warding_protection", RitualConfig.disableRitualCategory.disableWardingProtection));
     addRitual(ritual_wild_growth = new RitualWildGrowth("ritual_wild_growth", RitualConfig.disableRitualCategory.disableWildGrowth));
     addRitual(ritual_windwall = new RitualWindwall("ritual_windwall", RitualConfig.disableRitualCategory.disableWindwall));
+    // This cannot be disabled
+    addRitual(ritual_grove_supplication = new RitualGroveSupplication("ritual_grove_supplication", false));
   }
 
   public static void init () {

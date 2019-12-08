@@ -1,8 +1,8 @@
 {
     "name": "Grove Supplication",
-    "icon": "roots:spell_dust",
-    "category": "spells",
-    "advancement": "roots:root",
+    "icon": "roots:ritual_grove_supplication",
+    "category": "rituals",
+    "advancement": "roots:pyre",
     "priority": true,
     "pages": [
       {
@@ -10,8 +10,8 @@
         "text": "Supplicates and entreats the spirits of the fey to come forth to a nearby, anchoring Grove Stone. After its activation, the stone itself, acting as an anchor or a gateway, will visibly pull energy towards itself.$(br2)As time progresses, the activated Stone will begin transforming the world around it."
       },
       {
-        "type": "spell_template",
-        "spell": "spell_supplication"
+        "type": "pyre_template",
+        "ritual": "ritual_grove_supplication"
       }
     ]
   }

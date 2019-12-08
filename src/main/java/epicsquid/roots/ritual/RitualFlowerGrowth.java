@@ -25,6 +25,7 @@ public class RitualFlowerGrowth extends RitualBase {
   public RitualFlowerGrowth(String name, boolean disabled) {
     super(name, disabled);
     properties.addProperties(PROP_DURATION, PROP_INTERVAL, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
+    setEntityClass(EntityRitualFlowerGrowth.class);
   }
 
   @Override
@@ -49,10 +50,5 @@ public class RitualFlowerGrowth extends RitualBase {
     radius_y = radius[1];
     radius_z = radius[2];
     interval = properties.getProperty(PROP_INTERVAL);
-  }
-
-  @Override
-  public EntityRitualBase doEffect(World world, BlockPos pos) {
-    return this.spawnEntity(world, pos, EntityRitualFlowerGrowth.class);
   }
 }

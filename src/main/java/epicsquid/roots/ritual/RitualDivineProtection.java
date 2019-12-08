@@ -33,6 +33,7 @@ public class RitualDivineProtection extends RitualBase {
   public RitualDivineProtection(String name, boolean disabled) {
     super(name, disabled);
     properties.addProperties(PROP_DURATION, PROP_RAIN, PROP_TIME, PROP_NIGHT_REDUCTION, PROP_DAY_EXTENSION, PROP_CONSECRATION_DAMAGE, PROP_FIRE_DAMAGE, PROP_FIRE_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_DAY_LENGTH, PROP_NIGHT_THRESHOLD);
+    setEntityClass(EntityRitualDivineProtection.class);
   }
 
   @Override
@@ -65,10 +66,5 @@ public class RitualDivineProtection extends RitualBase {
     radius_z = radius[2] + 0.5f;
     day_length = properties.getProperty(PROP_DAY_LENGTH);
     night_threshold = properties.getProperty(PROP_NIGHT_THRESHOLD);
-  }
-
-  @Override
-  public EntityRitualBase doEffect(World world, BlockPos pos) {
-    return this.spawnEntity(world, pos, EntityRitualDivineProtection.class);
   }
 }

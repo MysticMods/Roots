@@ -30,6 +30,7 @@ public class RitualGermination extends RitualBase {
   public RitualGermination(String name, boolean disabled) {
     super(name, disabled);
     properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL, PROP_COUNT, PROP_TICKS, PROP_BONUS_TICKS, PROP_BLOCK_CROP_TICKS);
+    setEntityClass(EntityRitualGermination.class);
   }
 
   @Override
@@ -59,10 +60,5 @@ public class RitualGermination extends RitualBase {
     ticks = properties.getProperty(PROP_TICKS);
     bonus_ticks = properties.getProperty(PROP_BONUS_TICKS);
     crop_ticks = properties.getProperty(PROP_BLOCK_CROP_TICKS);
-  }
-
-  @Override
-  public EntityRitualBase doEffect(World world, BlockPos pos) {
-    return this.spawnEntity(world, pos, EntityRitualGermination.class);
   }
 }

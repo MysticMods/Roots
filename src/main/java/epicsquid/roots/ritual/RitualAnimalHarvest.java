@@ -1,16 +1,13 @@
 package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualAnimalHarvest;
-import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualAnimalHarvest extends RitualBase {
@@ -37,6 +34,7 @@ public class RitualAnimalHarvest extends RitualBase {
   public RitualAnimalHarvest(String name, boolean disabled) {
     super(name, disabled);
     properties.addProperties(PROP_DURATION, PROP_INTERVAL, PROP_COUNT, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_LOOTING_CHANCE, PROP_LOOTING_VALUE, PROP_GLOW_DURATION, PROP_FISH_CHANCE, PROP_FISH_COUNT, PROP_FISH_ADDITIONAL);
+    setEntityClass(EntityRitualAnimalHarvest.class);
   }
 
   @Override
@@ -71,10 +69,10 @@ public class RitualAnimalHarvest extends RitualBase {
     count = properties.getProperty(PROP_COUNT);
   }
 
-  @Override
+/*  @Override
   public EntityRitualBase doEffect(World world, BlockPos pos) {
     return this.spawnEntity(world, pos, EntityRitualAnimalHarvest.class);
-  }
+  }*/
 
 
 }

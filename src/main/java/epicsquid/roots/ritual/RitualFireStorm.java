@@ -24,6 +24,7 @@ public class RitualFireStorm extends RitualBase {
   public RitualFireStorm(String name, boolean disabled) {
     super(name, disabled);
     properties.addProperties(PROP_DURATION, PROP_PROJECTILE_COUNT, PROP_PROJECTILE_DAMAGE, PROP_PROJECTILE_KNOCKBACK);
+    setEntityClass(EntityRitualFireStorm.class);
   }
 
   @Override
@@ -47,10 +48,5 @@ public class RitualFireStorm extends RitualBase {
     projectile_damage = properties.getProperty(PROP_PROJECTILE_DAMAGE);
     projectile_count = properties.getProperty(PROP_PROJECTILE_COUNT);
     projectile_knockback = properties.getProperty(PROP_PROJECTILE_KNOCKBACK);
-  }
-
-  @Override
-  public EntityRitualBase doEffect(World world, BlockPos pos) {
-    return this.spawnEntity(world, pos, EntityRitualFireStorm.class);
   }
 }
