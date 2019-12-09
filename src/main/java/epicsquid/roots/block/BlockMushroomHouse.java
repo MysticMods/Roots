@@ -1,16 +1,12 @@
 package epicsquid.roots.block;
 
 import epicsquid.mysticallib.block.BlockBase;
-import epicsquid.mysticallib.block.BlockTEBase;
-import epicsquid.roots.Roots;
-import epicsquid.roots.gui.GuiHandler;
 import epicsquid.roots.item.ItemDruidKnife;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;

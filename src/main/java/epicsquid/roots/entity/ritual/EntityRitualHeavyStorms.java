@@ -1,16 +1,13 @@
 package epicsquid.roots.entity.ritual;
 
-import java.util.List;
-
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualHeavyStorms;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class EntityRitualHeavyStorms extends EntityRitualBase {
   private RitualHeavyStorms ritual;

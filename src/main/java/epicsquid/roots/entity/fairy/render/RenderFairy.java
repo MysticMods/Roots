@@ -1,8 +1,6 @@
 package epicsquid.roots.entity.fairy.render;
 
 import epicsquid.roots.entity.fairy.EntityFairy;
-import epicsquid.roots.entity.wild.render.RenderWhiteStag;
-import epicsquid.roots.model.entity.ModelFairy;
 import epicsquid.roots.model.entity.ModelHolder;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;

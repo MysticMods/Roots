@@ -6,7 +6,6 @@ import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.PacifistEntry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.DamageSource;

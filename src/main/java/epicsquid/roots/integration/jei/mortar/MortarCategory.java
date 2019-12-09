@@ -1,13 +1,8 @@
 package epicsquid.roots.integration.jei.mortar;
 
-import java.util.Arrays;
-
 import epicsquid.roots.Roots;
-import epicsquid.roots.init.ModItems;
 import epicsquid.roots.integration.jei.JEIRootsPlugin;
-import epicsquid.roots.item.ItemSpellDust;
 import epicsquid.roots.recipe.MortarRecipe;
-import epicsquid.roots.recipe.RunicShearRecipe;
 import epicsquid.roots.spell.SpellBase;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
@@ -16,9 +11,10 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.Arrays;
 
 public class MortarCategory implements IRecipeCategory<MortarWrapper> {
 

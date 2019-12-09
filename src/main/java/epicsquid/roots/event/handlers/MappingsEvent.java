@@ -1,12 +1,10 @@
 package epicsquid.roots.event.handlers;
 
 import epicsquid.mysticallib.block.BlockBase;
-import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticalworld.init.ModBlocks;
 import epicsquid.roots.Roots;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;

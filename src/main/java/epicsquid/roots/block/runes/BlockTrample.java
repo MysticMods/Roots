@@ -1,7 +1,6 @@
 package epicsquid.roots.block.runes;
 
 import epicsquid.mysticallib.block.BlockBase;
-import epicsquid.mysticallib.block.CustomStateMapper;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

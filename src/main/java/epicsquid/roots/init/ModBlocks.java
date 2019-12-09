@@ -6,7 +6,6 @@ import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.CustomPlantType;
 import epicsquid.roots.block.*;
-import epicsquid.roots.block.BlockReinforcedBonfire;
 import epicsquid.roots.block.groves.*;
 import epicsquid.roots.block.runes.BlockTrample;
 import epicsquid.roots.block.runes.BlockWildwoodRune;
@@ -23,7 +22,6 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.common.EnumPlantType;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,6 +34,7 @@ public class ModBlocks {
   public static Block fairy_grove_stone, fungi_grove_stone, natural_grove_stone, wild_grove_stone, twilight_grove_stone, elemental_grove_stone;
 
   public static Block fey_fire, offertory_bowl, fairy_house_red, fairy_house_brown, fairy_house_baffle;
+  public static Block mark;
 
   public static BlockCropBase moonglow, pereskia, wildroot, spirit_herb, wildewheet, cloud_berry, infernal_bulb, dewgonia, stalicripe;
 

@@ -12,6 +12,8 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 public class EntityRitualFireStorm extends EntityRitualBase {
   private RitualFireStorm ritual;
 

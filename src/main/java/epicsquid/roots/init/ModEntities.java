@@ -4,8 +4,8 @@ import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.entity.RenderNull;
 import epicsquid.roots.Roots;
 import epicsquid.roots.entity.fairy.EntityFairy;
-import epicsquid.roots.entity.projectile.EntityFlare;
 import epicsquid.roots.entity.fairy.render.RenderFairy;
+import epicsquid.roots.entity.projectile.EntityFlare;
 import epicsquid.roots.entity.ritual.*;
 import epicsquid.roots.entity.spell.EntityBoost;
 import epicsquid.roots.entity.spell.EntityFireJet;
@@ -20,7 +20,6 @@ import net.minecraft.world.storage.loot.LootTableList;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class ModEntities {
 

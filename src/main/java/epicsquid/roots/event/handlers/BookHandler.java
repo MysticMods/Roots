@@ -1,8 +1,6 @@
 package epicsquid.roots.event.handlers;
 
 import epicsquid.mysticallib.world.books.BookRegistry;
-import epicsquid.mysticalworld.MysticalWorld;
-import epicsquid.mysticalworld.config.ConfigManager;
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.GeneralConfig;
 import net.minecraft.item.ItemStack;

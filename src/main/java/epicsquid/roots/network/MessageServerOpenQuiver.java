@@ -1,6 +1,5 @@
 package epicsquid.roots.network;
 
-import epicsquid.roots.util.PowderInventoryUtil;
 import epicsquid.roots.util.QuiverInventoryUtil;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;

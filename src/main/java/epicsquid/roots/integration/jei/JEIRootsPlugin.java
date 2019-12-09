@@ -1,6 +1,5 @@
 package epicsquid.roots.integration.jei;
 
-import com.google.common.collect.Lists;
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.ElementalSoilConfig;
 import epicsquid.roots.handler.SpellHandler;
@@ -37,13 +36,9 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 @JEIPlugin

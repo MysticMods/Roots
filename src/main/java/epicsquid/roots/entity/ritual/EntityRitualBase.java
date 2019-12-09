@@ -1,7 +1,6 @@
 package epicsquid.roots.entity.ritual;
 
 import epicsquid.roots.block.BlockBonfire;
-import epicsquid.roots.util.types.PropertyTable;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;

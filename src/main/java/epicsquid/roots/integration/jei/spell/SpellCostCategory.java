@@ -2,7 +2,6 @@ package epicsquid.roots.integration.jei.spell;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.integration.jei.JEIRootsPlugin;
-import epicsquid.roots.recipe.RunicShearRecipe;
 import epicsquid.roots.spell.SpellBase;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;

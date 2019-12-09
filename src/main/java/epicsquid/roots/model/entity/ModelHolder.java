@@ -1,6 +1,5 @@
 package epicsquid.roots.model.entity;
 
-import epicsquid.mysticalworld.entity.model.ModelDeer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.IResourceManagerReloadListener;

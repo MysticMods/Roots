@@ -1,9 +1,7 @@
 package epicsquid.roots.integration.jei.ritual;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.integration.jei.JEIRootsPlugin;
-import epicsquid.roots.recipe.PyreCraftingRecipe;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;

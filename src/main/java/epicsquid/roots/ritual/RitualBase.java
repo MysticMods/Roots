@@ -1,9 +1,5 @@
 package epicsquid.roots.ritual;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
-
 import epicsquid.roots.Roots;
 import epicsquid.roots.block.BlockBonfire;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
@@ -22,6 +18,9 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
 
 public abstract class RitualBase {
   protected static int OFFERTORY_RADIUS = 6;

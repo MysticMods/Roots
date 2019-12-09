@@ -1,11 +1,11 @@
 package epicsquid.roots.capability.grove;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import epicsquid.roots.grove.GroveType;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PlayerGroveCapability implements IPlayerGroveCapability {
 

@@ -1,20 +1,11 @@
 package epicsquid.roots.entity.ritual;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.mechanics.Magnetize;
 import epicsquid.roots.network.fx.MessageItemGatheredFX;
-import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
 import epicsquid.roots.ritual.RitualGathering;
 import epicsquid.roots.ritual.RitualRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -22,8 +13,6 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
 
 public class EntityRitualGathering extends EntityRitualBase {
   public static AxisAlignedBB bounding = new AxisAlignedBB(-1, -1, -1, 1, 1, 1);

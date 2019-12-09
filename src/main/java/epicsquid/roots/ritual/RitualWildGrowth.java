@@ -49,8 +49,8 @@ public class RitualWildGrowth extends RitualBase {
     interval = properties.getProperty(PROP_INTERVAL);
   }
 
-  @Override
-  public EntityRitualBase doEffect(World world, BlockPos pos) {
-    return this.spawnEntity(world, pos, EntityRitualWildGrowth.class);
-  }
+    @Override
+    public EntityRitualBase doEffect(World world, BlockPos pos) {
+        return this.spawnEntity(world, pos, EntityRitualWildGrowth.class);
+    }
 }

@@ -2,9 +2,7 @@ package epicsquid.roots.potion;
 
 import epicsquid.mysticallib.util.AABBUtil;
 import epicsquid.roots.Roots;
-import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.SpellSenseAnimals;
-import epicsquid.roots.spell.SpellSenseDanger;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
