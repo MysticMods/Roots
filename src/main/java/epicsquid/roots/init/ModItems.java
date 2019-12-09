@@ -2,7 +2,6 @@ package epicsquid.roots.init;
 
 import epicsquid.mysticallib.block.BlockDoorBase;
 import epicsquid.mysticallib.event.RegisterContentEvent;
-import epicsquid.mysticallib.item.ItemArrowBase;
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.item.ItemFoodBase;
 import epicsquid.mysticallib.item.ItemSeedBase;

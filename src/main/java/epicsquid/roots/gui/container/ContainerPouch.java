@@ -7,9 +7,9 @@
 
 package epicsquid.roots.gui.container;
 
+import epicsquid.roots.handler.PouchHandler;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.handler.PouchHandler;
 import epicsquid.roots.item.ItemPouch;
 import epicsquid.roots.util.PowderInventoryUtil;
 import net.minecraft.entity.player.EntityPlayer;

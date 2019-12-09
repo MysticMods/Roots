@@ -1,14 +1,9 @@
 package epicsquid.roots.integration.jei.carving;
 
 import epicsquid.roots.recipe.BarkRecipe;
-import epicsquid.roots.recipe.RunicCarvingRecipe;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import net.minecraft.item.ItemStack;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class BarkRecipeWrapper implements IRecipeWrapper {
 

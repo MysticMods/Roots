@@ -3,7 +3,6 @@ package epicsquid.roots.recipe;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.recipe.RunicCarvingRecipe;
 
 public class RunicCarvingRecipes {
 

@@ -34,6 +34,7 @@ public class ModBlocks {
   public static Block fairy_grove_stone, fungi_grove_stone, natural_grove_stone, wild_grove_stone, twilight_grove_stone, elemental_grove_stone;
 
   public static Block fey_fire, offertory_bowl, fairy_house_red, fairy_house_brown, fairy_house_baffle;
+  public static Block mark;
 
   public static BlockCropBase moonglow, pereskia, wildroot, spirit_herb, wildewheet, cloud_berry, infernal_bulb, dewgonia, stalicripe;
 

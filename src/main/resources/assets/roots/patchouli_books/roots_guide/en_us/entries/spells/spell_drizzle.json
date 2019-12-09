@@ -1,0 +1,17 @@
+{
+  "name": "Drizzle",
+  "icon": "roots:spell_dust",
+  "category": "spells",
+  "advancement": "roots:dewgonia",
+  "flag": "roots:spell_drizzle",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Makes a heavy rainfall suddenly fall around the caster hydrating farmland and giving an instantaneous grow boost."
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_drizzle"
+    }
+  ]
+}

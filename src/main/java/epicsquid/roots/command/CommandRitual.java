@@ -1,13 +1,13 @@
 package epicsquid.roots.command;
 
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.ritual.RitualBase;
+import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.ritual.conditions.Condition;
 import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.ritual.conditions.ConditionTrees;
-import epicsquid.roots.ritual.RitualBase;
-import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.tileentity.TileEntityBonfire;
-import epicsquid.mysticallib.util.ItemUtil;
 import net.minecraft.block.BlockNewLog;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks;

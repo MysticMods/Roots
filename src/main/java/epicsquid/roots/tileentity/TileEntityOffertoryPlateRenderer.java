@@ -1,7 +1,5 @@
 package epicsquid.roots.tileentity;
 
-import java.util.Random;
-
 import epicsquid.roots.Roots;
 import epicsquid.roots.block.BlockOffertoryPlate;
 import epicsquid.roots.init.ModBlocks;
@@ -14,6 +12,8 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+
+import java.util.Random;
 
 public class TileEntityOffertoryPlateRenderer extends TileEntitySpecialRenderer<TileEntityOffertoryPlate> {
 

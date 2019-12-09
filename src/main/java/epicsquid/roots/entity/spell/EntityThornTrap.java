@@ -1,10 +1,6 @@
 package epicsquid.roots.entity.spell;
 
-import java.util.List;
-import java.util.UUID;
-
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.SpellRoseThorns;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,6 +16,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+
+import java.util.List;
+import java.util.UUID;
 
 @SuppressWarnings("AccessStaticViaInstance")
 public class EntityThornTrap extends Entity {

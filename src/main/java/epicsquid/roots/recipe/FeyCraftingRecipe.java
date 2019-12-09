@@ -3,7 +3,6 @@ package epicsquid.roots.recipe;
 import epicsquid.mysticallib.util.ListUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraftforge.items.IItemHandlerModifiable;
 
 import java.util.ArrayList;
 import java.util.List;

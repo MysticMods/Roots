@@ -1,8 +1,5 @@
 package epicsquid.roots.ritual.conditions;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,6 +9,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConditionItems implements Condition {
 

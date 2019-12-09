@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "inventory": {
+      "model": "roots:mark"
+    },
+    "facing=north": {
+      "model": "roots:mark"
+    },
+    "facing=east": {
+      "model": "roots:mark",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "roots:mark",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "roots:mark",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "roots:mark",
+      "x": -90
+    },
+    "facing=down": {
+      "model": "roots:mark",
+      "x": 90
+    }
+  }
+}

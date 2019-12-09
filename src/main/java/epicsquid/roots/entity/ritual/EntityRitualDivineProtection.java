@@ -1,7 +1,5 @@
 package epicsquid.roots.entity.ritual;
 
-import java.util.List;
-
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualDivineProtection;
@@ -14,6 +12,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
+
+import java.util.List;
 
 public class EntityRitualDivineProtection extends EntityRitualBase {
   private RitualDivineProtection ritual;

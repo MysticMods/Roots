@@ -25,7 +25,7 @@ public class EntityRitualFlowerGrowth extends EntityRitualBase {
     super.onUpdate();
 
     if (this.ticksExisted % ritual.interval == 0) {
-      BlockPos topBlockPos = RitualUtil.getRandomPosRadial(new BlockPos(getPosition().getX(), getPosition().getY() - ritual.radius_y, getPosition().getZ()), ritual.radius_x, ritual.radius_z);
+      BlockPos topBlockPos = RitualUtil.getRandomPosRadialXZ(new BlockPos(getPosition().getX(), getPosition().getY() - ritual.radius_y, getPosition().getZ()), ritual.radius_x, ritual.radius_z);
       while (!generateFlower(topBlockPos)) {
         topBlockPos = topBlockPos.up();
         if (topBlockPos.getY() > 256)

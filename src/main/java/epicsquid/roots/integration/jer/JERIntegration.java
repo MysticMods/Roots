@@ -35,13 +35,13 @@ public class JERIntegration {
     registry.register((ItemSeedBase) epicsquid.mysticalworld.init.ModItems.aubergine_seed,
         new PlantDrop(new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine), 1, 1),
         new PlantDrop(new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed), 1, 4));
-    registry.registerWithSoil((ItemSeedBase) ModItems.infernal_bulb, ModBlocks.elemental_soil_fire.getDefaultState(),
-        new PlantDrop(new ItemStack(ModItems.infernal_bulb), 1, 4));
-    registry.registerWithSoil((ItemSeedBase) ModItems.dewgonia, ModBlocks.elemental_soil_water.getDefaultState(),
-        new PlantDrop(new ItemStack(ModItems.dewgonia), 1, 4));
-    registry.registerWithSoil((ItemSeedBase) ModItems.stalicripe, ModBlocks.elemental_soil_earth.getDefaultState(),
-        new PlantDrop(new ItemStack(ModItems.stalicripe), 1, 4));
-    registry.registerWithSoil((ItemSeedBase) ModItems.cloud_berry, ModBlocks.elemental_soil_air.getDefaultState(),
-        new PlantDrop(new ItemStack(ModItems.cloud_berry), 1, 4));
+    //registry.registerWithSoil((ItemSeedBase) ModItems.infernal_bulb, ModBlocks.elemental_soil_fire.getDefaultState(),
+    //    new PlantDrop(new ItemStack(ModItems.infernal_bulb), 1, 4));
+    //registry.registerWithSoil((ItemSeedBase) ModItems.dewgonia, ModBlocks.elemental_soil_water.getDefaultState(),
+    //    new PlantDrop(new ItemStack(ModItems.dewgonia), 1, 4));
+    //registry.registerWithSoil((ItemSeedBase) ModItems.stalicripe, ModBlocks.elemental_soil_earth.getDefaultState(),
+    //    new PlantDrop(new ItemStack(ModItems.stalicripe), 1, 4));
+    //registry.registerWithSoil((ItemSeedBase) ModItems.cloud_berry, ModBlocks.elemental_soil_air.getDefaultState(),
+    //    new PlantDrop(new ItemStack(ModItems.cloud_berry), 1, 4));
   }
 }

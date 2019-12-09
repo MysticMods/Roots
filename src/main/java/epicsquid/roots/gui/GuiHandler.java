@@ -7,20 +7,20 @@
 
 package epicsquid.roots.gui;
 
-import javax.annotation.Nullable;
-
+import epicsquid.roots.gui.client.GuiFeyCrafter;
 import epicsquid.roots.gui.client.GuiPouch;
 import epicsquid.roots.gui.client.GuiQuiver;
-import epicsquid.roots.gui.client.GuiFeyCrafter;
+import epicsquid.roots.gui.container.ContainerFeyCrafter;
 import epicsquid.roots.gui.container.ContainerPouch;
 import epicsquid.roots.gui.container.ContainerQuiver;
-import epicsquid.roots.gui.container.ContainerFeyCrafter;
 import epicsquid.roots.tileentity.TileEntityFeyCrafter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+
+import javax.annotation.Nullable;
 
 public class GuiHandler implements IGuiHandler {
 

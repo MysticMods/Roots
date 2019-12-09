@@ -1,8 +1,5 @@
 package epicsquid.roots.entity.projectile;
 
-import java.util.List;
-import java.util.UUID;
-
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModDamage;
@@ -19,6 +16,9 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+
+import java.util.List;
+import java.util.UUID;
 
 public class EntityFlare extends Entity {
   private static final DataParameter<Float> value = EntityDataManager.createKey(EntityFlare.class, DataSerializers.FLOAT);
