@@ -1,0 +1,17 @@
+{
+  "name": "Scatter",
+  "icon": "roots:spell_dust",
+  "category": "spells",
+  "advancement": "roots:terra_moss",
+  "flag": "roots:spell_scatter",
+  "pages": [
+    {
+      "type": "text",
+      "text": "When cast it plants all the seeds you have in your off-hand rapidly on farmland blocks around you under the default radius of 7 blocks"
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_scatter"
+    }
+  ]
+}

@@ -30,9 +30,7 @@ import net.minecraft.world.storage.loot.LootTable;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
-import net.minecraftforge.fluids.capability.wrappers.FluidBlockWrapper;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
-import org.apache.http.client.methods.Configurable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

@@ -4,13 +4,11 @@ import epicsquid.mysticalworld.entity.EntityDeer;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
-import jeresources.util.LootTableHelper;
 import net.minecraft.entity.passive.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 
 public class RunicShearRecipes {
 

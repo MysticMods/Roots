@@ -1,7 +1,5 @@
 package epicsquid.roots.network.fx;
 
-import java.util.Random;
-
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellGeas;
 import io.netty.buffer.ByteBuf;
@@ -13,6 +11,8 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 public class MessageGeasRingFX implements IMessage {
   private static Random random = new Random();

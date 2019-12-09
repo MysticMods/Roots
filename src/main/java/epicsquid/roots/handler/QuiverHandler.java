@@ -1,6 +1,5 @@
 package epicsquid.roots.handler;
 
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

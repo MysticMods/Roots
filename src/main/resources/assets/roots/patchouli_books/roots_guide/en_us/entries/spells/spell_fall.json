@@ -1,0 +1,17 @@
+{
+    "name": "Fall",
+    "icon": "roots:spell_dust",
+    "category": "spells",
+    "advancement": "roots:stalicripe",
+    "flag": "roots:spell_fall",
+    "pages": [
+      {
+        "type": "text",
+        "text": "This spell has the same effect Autumn would have on nature around you in a default radius of 10 blocks.$(br2)$(info) Tree leaves and grass will progressively dry out and drop their bounty"
+      },
+      {
+        "type": "spell_template",
+        "spell": "spell_fall"
+      }
+    ]
+  }

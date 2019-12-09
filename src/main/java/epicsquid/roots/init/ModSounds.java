@@ -1,7 +1,6 @@
 package epicsquid.roots.init;
 
 import epicsquid.mysticallib.event.RegisterContentEvent;
-import epicsquid.mysticalworld.MysticalWorld;
 import epicsquid.roots.Roots;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;

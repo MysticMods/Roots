@@ -2,7 +2,6 @@ package epicsquid.roots.integration.harvest;
 
 import epicsquid.mysticallib.block.BlockCropBase;
 import epicsquid.roots.init.ModBlocks;
-import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.Loader;
 import tehnut.harvest.BlockStack;
 import tehnut.harvest.Crop;
