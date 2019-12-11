@@ -6,7 +6,7 @@ import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.OnlyIn;
 
 public class PotionTimeStop extends Effect {
   private ResourceLocation texture = new ResourceLocation(Roots.MODID, "textures/gui/potions.png");

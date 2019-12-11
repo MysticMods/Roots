@@ -23,7 +23,7 @@ public class ItemEventHandler {
     if (event.getHand() != Hand.MAIN_HAND)
       return;
 
-    PlayerEntity player = event.getEntityPlayer();
+    PlayerEntity player = event.getPlayer();
     ItemStack main = player.getHeldItemMainhand();
     if (main.getItem() != ModItems.runic_shears)
       return;
@@ -41,7 +41,7 @@ public class ItemEventHandler {
   @SubscribeEvent
   public static void onEntityItemPickup(EntityItemPickupEvent event) {
     if (true /*GeneralConfig.AutoRefillPouches*/) {
-      PlayerEntity player = event.getEntityPlayer();
+      PlayerEntity player = event.getPlayer();
       ItemEntity entity = event.getItem();
       if (!entity.world.isRemote) {
         ItemStack stack = entity.getItem().copy();

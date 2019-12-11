@@ -17,11 +17,11 @@ public class ParticleLineGlowSteady extends ParticleBase {
 
   private float initScale;
 
-  public ParticleLineGlowSteady(World world, double x, double y, double z, double vx, double vy, double vz, double[] data) {
+  public ParticleLineGlowSteady(World world, double x, double y, double z, double vx, double vy, double vz, float[] data) {
     super(world, x, y, z, vx, vy, vz, data);
-    this.colorR = (float) data[1];
-    this.colorG = (float) data[2];
-    this.colorB = (float) data[3];
+    this.colorR = data[1];
+    this.colorG = data[2];
+    this.colorB = data[3];
     if (this.colorR > 1.0) {
       this.colorR = this.colorR / 255.0f;
     }
@@ -31,12 +31,12 @@ public class ParticleLineGlowSteady extends ParticleBase {
     if (this.colorB > 1.0) {
       this.colorB = this.colorB / 255.0f;
     }
-    this.initAlpha = (float) data[4];
+    this.initAlpha = data[4];
     this.setColor(colorR, colorG, colorB);
     this.setAlphaF(0);
     this.setMaxAge((int) data[0]);
-    this.particleScale = (float) data[5];
-    this.initScale = (float) data[5];
+    this.particleScale = data[5];
+    this.initScale = data[5];
     this.targetPosX = vx;
     this.targetPosY = vy;
     this.targetPosZ = vz;
@@ -71,9 +71,8 @@ public class ParticleLineGlowSteady extends ParticleBase {
     particleAngle += 1.0f;
   }
 
-  @Override
+/*  @Override
   public boolean isAdditive() {
     return true;
-  }
-
+  }*/
 }

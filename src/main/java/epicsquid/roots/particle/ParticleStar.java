@@ -12,11 +12,11 @@ public class ParticleStar extends ParticleBase {
   private float initAlpha;
   private float angularVelocity;
 
-  public ParticleStar(World world, double x, double y, double z, double vx, double vy, double vz, double[] data) {
+  public ParticleStar(World world, double x, double y, double z, double vx, double vy, double vz, float[] data) {
     super(world, x, y, z, vx, vy, vz, data);
-    this.colorR = (float) data[1];
-    this.colorG = (float) data[2];
-    this.colorB = (float) data[3];
+    this.colorR = data[1];
+    this.colorG = data[2];
+    this.colorB = data[3];
     if (this.colorR > 1.0) {
       this.colorR = this.colorR / 255.0f;
     }
@@ -27,11 +27,11 @@ public class ParticleStar extends ParticleBase {
       this.colorB = this.colorB / 255.0f;
     }
     this.setColor(colorR, colorG, colorB);
-    this.setAlphaF((float) data[4]);
-    this.initAlpha = (float) data[4];
-    this.particleScale = (float) data[5];
-    this.initScale = (float) data[5];
-    this.angularVelocity = (float) data[6] * (Util.rand.nextFloat() - 0.5f);
+    this.setAlphaF(data[4]);
+    this.initAlpha = data[4];
+    this.particleScale = data[5];
+    this.initScale = data[5];
+    this.angularVelocity = data[6] * (Util.rand.nextFloat() - 0.5f);
     this.prevParticleAngle = particleAngle;
     this.particleAngle = Util.rand.nextFloat() * 2.0f * (float) Math.PI;
     this.particleGravity = 0.6f;
@@ -69,9 +69,9 @@ public class ParticleStar extends ParticleBase {
     return this.age < this.maxAge;
   }
 
-  @Override
+/*  @Override
   public boolean isAdditive() {
     return true;
-  }
+  }*/
 
 }

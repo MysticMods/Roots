@@ -12,11 +12,11 @@ public class ParticleThorn extends ParticleBase {
   private float initScale;
   private boolean isAdditive = false;
 
-  public ParticleThorn(World worldIn, double x, double y, double z, double vx, double vy, double vz, double[] data) {
+  public ParticleThorn(World worldIn, double x, double y, double z, double vx, double vy, double vz, float[] data) {
     super(worldIn, x, y, z, 0, 0, 0, data);
-    this.colorR = (float) data[1];
-    this.colorG = (float) data[2];
-    this.colorB = (float) data[3];
+    this.colorR = data[1];
+    this.colorG = data[2];
+    this.colorB = data[3];
     if (this.colorR > 1.0) {
       this.colorR = this.colorR / 255.0f;
     }
@@ -26,11 +26,11 @@ public class ParticleThorn extends ParticleBase {
     if (this.colorB > 1.0) {
       this.colorB = this.colorB / 255.0f;
     }
-    this.initAlpha = (float) data[4];
+    this.initAlpha = data[4];
     this.setColor(colorR, colorG, colorB);
     this.setMaxAge((int) data[0]);
-    this.particleScale = (float) data[5];
-    this.initScale = (float) data[5];
+    this.particleScale = data[5];
+    this.initScale = data[5];
     this.motionX = vx;
     this.motionY = vy;
     this.motionZ = vz;
@@ -56,9 +56,9 @@ public class ParticleThorn extends ParticleBase {
     this.particleAlpha = (1.0f - lifeCoeff) * initAlpha;
   }
 
-  @Override
+/*  @Override
   public boolean isAdditive() {
     return true;
-  }
+  }*/
 
 }

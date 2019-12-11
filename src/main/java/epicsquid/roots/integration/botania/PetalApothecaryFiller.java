@@ -43,8 +43,8 @@ public class PetalApothecaryFiller {
   @SubscribeEvent
   public static void rightClickFill(PlayerInteractEvent.RightClickBlock event) {
     if (hasBotania() && event.getItemStack().getItem() == Item.getItemFromBlock(ModBlocks.unending_bowl)) {
-      TileEntity te = event.getEntityPlayer().world.getTileEntity(event.getPos());
-      if (fillApothecary(te, event.getEntityPlayer().world))
+      TileEntity te = event.getPlayerEntity().world.getTileEntity(event.getPos());
+      if (fillApothecary(te, event.getPlayerEntity().world))
         event.setCanceled(true);
     }
   }*/

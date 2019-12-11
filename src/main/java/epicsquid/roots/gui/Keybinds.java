@@ -55,15 +55,18 @@ public class Keybinds {
   @SubscribeEvent
   @OnlyIn(Dist.CLIENT)
   public static void onKeyInput(InputEvent.KeyInputEvent event) {
-    Minecraft mc = Minecraft.getInstance();
+/*    Minecraft mc = Minecraft.getInstance();
+    if (mc == null) {
+      return;
+    }
     if (POUCH_KEYBIND.isKeyDown() && mc.isGameFocused()) {
       // TODO: Packets
-      /*MessageServerOpenPouch packet = new MessageServerOpenPouch();
-      PacketHandler.INSTANCE.sendToServer(packet);*/
+      *//*MessageServerOpenPouch packet = new MessageServerOpenPouch();
+      PacketHandler.INSTANCE.sendToServer(packet);*//*
     } else if (QUIVER_KEYBIND.isKeyDown() && mc.isGameFocused()) {
       // TODO: Packets
- /*     MessageServerOpenQuiver packet = new MessageServerOpenQuiver();
-      PacketHandler.INSTANCE.sendToServer(packet);*/
+ *//*     MessageServerOpenQuiver packet = new MessageServerOpenQuiver();
+      PacketHandler.INSTANCE.sendToServer(packet);*//*
     } else if (mc.isGameFocused()) {
       if (mc.player.getHeldItemOffhand().getItem() != ModItems.staff && mc.player.getHeldItemMainhand().getItem() != ModItems.staff) {
         return;
@@ -72,12 +75,12 @@ public class Keybinds {
       for (Map.Entry<KeyBinding, Integer> spell : SLOT_MAP.object2IntEntrySet()) {
         if (spell.getKey().isKeyDown()) {
           //  TODO: Packets
-/*          MessageServerUpdateStaff packet = new MessageServerUpdateStaff(spell.getValue());
-          PacketHandler.INSTANCE.sendToServer(packet);*/
+*//*          MessageServerUpdateStaff packet = new MessageServerUpdateStaff(spell.getValue());
+          PacketHandler.INSTANCE.sendToServer(packet);*//*
           break;
         }
       }
-    }
+    }*/
   }
 
 }

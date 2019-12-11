@@ -153,7 +153,7 @@ public class WhiteStagModel extends EntityModel<WhiteStagEntity> {
     GlStateManager.pushMatrix();
     super.render(entity, f, limbSwingAmount, age, f3, f4, f5);
     setRotationAngles(f, limbSwingAmount, age, f3, f4, f5);
-    if (((AnimalEntity) entity).getGrowingAge() < 0) {
+    if (entity.getGrowingAge() < 0) {
       GlStateManager.scaled(0.5, 0.5, 0.5);
       GlStateManager.translated(0, 1.5, 0);
     }

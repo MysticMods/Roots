@@ -12,6 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -40,7 +41,7 @@ public class EventManager {
   public static void copyCapabilities(PlayerEvent.Clone event) {
     if (event.isWasDeath()) {
       PlayerEntity player = event.getOriginal();
-      PlayerEntity newPlayer = event.getEntityPlayer();
+      PlayerEntity newPlayer = event.getPlayer();
     }
   }
 

@@ -146,7 +146,7 @@ public class ArmorBaseModel<T extends LivingEntity> extends BipedModel<T> {
   }
 
   public void setChestRotation(Entity e) {
-    /* if (e instanceof EntityPlayer){ ((EntityPlayer)e).get } */
+    /* if (e instanceof PlayerEntity){ ((PlayerEntity)e).get } */
     chest.rotationPointX = bipedBody.rotationPointX;
     chest.rotationPointY = bipedBody.rotationPointY - 1;
     chest.rotationPointZ = bipedBody.rotationPointZ;

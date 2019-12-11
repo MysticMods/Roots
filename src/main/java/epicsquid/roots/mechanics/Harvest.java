@@ -12,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.state.IProperty;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -69,7 +70,7 @@ public class Harvest {
   }
 
   static {
-    getSeed = ObfuscationReflectionHelper.findMethod(CropsBlock.class, "func_149866_i", Item.class);
+    getSeed = ObfuscationReflectionHelper.findMethod(CropsBlock.class, "func_199772_f");
     getSeed.setAccessible(true);
   }
 
@@ -113,7 +114,7 @@ public class Harvest {
     ItemStack seed = seedCache.get(block);
     if (seed != null && !seed.isEmpty()) return seed;
     try {
-      seed = new ItemStack((Item) getSeed.invoke(state.getBlock()));
+      seed = new ItemStack(((IItemProvider) getSeed.invoke(state.getBlock())).asItem());
     } catch (Exception e) {
       seed = ItemStack.EMPTY;
     }
@@ -129,6 +130,7 @@ public class Harvest {
     // TODO:
     /*    state.getBlock().getDrops(drops, world, pos, state, 0);*/
     // Requires a loot context
+    // TODO: This never fires
     ForgeEventFactory.fireBlockHarvesting(drops, world, pos, state, 0, 1.0f, false, player);
     world.setBlockState(pos, newState);
     return drops;

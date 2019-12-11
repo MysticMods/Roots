@@ -38,19 +38,19 @@ public class AdvancementHandler {
 
   @SubscribeEvent
   public static void onAdvancement(AdvancementEvent event) {
-    if (event.getEntityPlayer().world.isRemote) return;
+    if (event.getPlayer().world.isRemote) return;
 
     ResourceLocation adv = event.getAdvancement().getId();
     if (adv.getNamespace().equals(Roots.MODID)) {
       if (adv.getPath().equals("pacifist")) {
         return;
       }
-      World world = event.getEntityPlayer().world;
-      BlockPos pos = event.getEntityPlayer().getPosition();
+      World world = event.getPlayer().world;
+      BlockPos pos = event.getPlayer().getPosition();
       grantXP(adv, world, pos);
 
       Advancement advancement = event.getAdvancement();
-      PlayerEntity player = event.getEntityPlayer();
+      PlayerEntity player = event.getPlayer();
       if (player.world.isRemote) return;
 
       PlayerAdvancements advancements = ((ServerPlayerEntity) player).getAdvancements();
