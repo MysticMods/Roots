@@ -140,6 +140,9 @@ public class EntityRitualSpreadingForest extends EntityRitualBase {
           if (ConfigUtil.setContainsItemStack(GeneralConfig.getSaplingBlacklist(), stack)) {
             continue;
           }
+          if (stack.isEmpty()) {
+            continue;
+          }
           if (state.getPropertyKeys().contains(BlockSapling.STAGE)) {
             saplingBlocks.add(state);
             saplings.add(state.getBlock());
