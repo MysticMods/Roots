@@ -140,6 +140,10 @@ public class RunicShearsTweaker {
     @Override
     public void apply() {
       ResourceLocation name = new ResourceLocation(Roots.MODID, this.name);
+      if (ModRecipes.getRunicShearRecipe(this.name) != null) {
+        CraftTweakerAPI.logError("Couldn't add Runic Shear recipe for " + name.toString() + ": already exists!");
+        return;
+      }
       RunicShearRecipe recipe = new RunicShearRecipe(name, inputBlock, outputBlock, outputItem, displayItem);
       ModRecipes.addRunicShearRecipe(recipe);
     }
@@ -168,6 +172,10 @@ public class RunicShearsTweaker {
     @Override
     public void apply() {
       ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
+      if (ModRecipes.getRunicShearRecipe(this.name) != null) {
+        CraftTweakerAPI.logError("Couldn't add Runic Shear recipe for " + name.toString() + ": already exists!");
+        return;
+      }
       RunicShearEntityRecipe recipe = new RunicShearEntityRecipe(rl, outputItem, entity, cooldown);
       ModRecipes.addRunicShearRecipe(recipe);
     }
