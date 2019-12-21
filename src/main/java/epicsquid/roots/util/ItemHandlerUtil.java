@@ -1,6 +1,10 @@
 package epicsquid.roots.util;
 
+import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.items.IItemHandler;
 
 import java.util.ArrayList;
@@ -61,11 +65,42 @@ public class ItemHandlerUtil {
     return true;
   }
 
-  public static List<ItemStack> getItemsInSlots(IItemHandler handler, List<Integer> slotList, boolean simulate) {
+  public static class IngredientWithStack {
+    private final Ingredient ingredient;
+    private int count;
+
+    public IngredientWithStack(Ingredient ingredient, int count) {
+      this.ingredient = ingredient;
+      this.count = count;
+    }
+
+    public Ingredient getIngredient() {
+      return ingredient;
+    }
+
+    public int getCount() {
+      return count;
+    }
+
+    public void increment () {
+      count++;
+    }
+  }
+
+  public static List<ItemStack> getItemsInSlots(IItemHandler handler, Int2ObjectOpenHashMap<IngredientWithStack> slotToIngredients, boolean simulate) {
     List<ItemStack> result = new ArrayList<>();
-    for (int slot : slotList) {
+    int runningCount = 0;
+    for (Int2ObjectMap.Entry<IngredientWithStack> entry : slotToIngredients.int2ObjectEntrySet()) {
+      int slot = entry.getIntKey();
+      IngredientWithStack ing = entry.getValue();
       if (slot < handler.getSlots()) {
-        result.add(handler.extractItem(slot, 1, simulate));
+        for (int i = 0; i < ing.getCount(); i++) {
+          result.add(handler.extractItem(slot, 1, simulate));
+          runningCount++;
+        }
+      }
+      if (runningCount > 5) {
+        throw new IllegalStateException("Somehow managed to collect more than 5 ingredients total. This should never happen.");
       }
     }
     result.removeIf(ItemStack::isEmpty);
