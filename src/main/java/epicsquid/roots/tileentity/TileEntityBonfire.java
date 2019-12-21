@@ -1,5 +1,6 @@
 package epicsquid.roots.tileentity;
 
+import crafttweaker.api.item.IItemStack;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.ListUtil;
@@ -17,7 +18,10 @@ import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.ItemHandlerUtil;
 import epicsquid.roots.util.XPUtil;
+import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntCollection;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -373,50 +377,65 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   @Override
   public void update() {
     // Potentially update from stuff below
-    resolveLastIngredients();
-    if (lastUsedIngredients != null && !lastUsedIngredients.isEmpty() && ItemHandlerUtil.isEmpty(inventory_storage) && ItemHandlerUtil.isEmpty(inventory)) {
-      TileEntity te = world.getTileEntity(getPos().down());
-      if (te != null) {
-        IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if (cap != null) {
-          IntArrayList slots = new IntArrayList();
-          for (Ingredient ingredient : lastUsedIngredients) {
-            for (int i = 0; i < cap.getSlots(); i++) {
-              if (ingredient.apply(cap.getStackInSlot(i))) {
-                slots.add(i);
-                break;
+    if (!world.isRemote) {
+      resolveLastIngredients();
+      if (lastUsedIngredients != null && !lastUsedIngredients.isEmpty() && ItemHandlerUtil.isEmpty(inventory_storage) && ItemHandlerUtil.isEmpty(inventory)) {
+        TileEntity te = world.getTileEntity(getPos().down());
+        if (te != null) {
+          IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+          if (cap != null) {
+            Int2ObjectOpenHashMap<ItemHandlerUtil.IngredientWithStack> slotsToIngredient = new Int2ObjectOpenHashMap<>();
+            int amount = 0;
+            for (Ingredient ingredient : lastUsedIngredients) {
+              for (int i = 0; i < cap.getSlots(); i++) {
+                ItemStack inSlot = cap.getStackInSlot(i);
+                if (ingredient.apply(inSlot)) {
+                  if (slotsToIngredient.containsKey(i)) {
+                    if (inSlot.getCount() > slotsToIngredient.get(i).getCount()) {
+                      amount++;
+                      slotsToIngredient.get(i).increment();
+                      break;
+                    }
+                  } else {
+                    amount++;
+                    slotsToIngredient.put(i, new ItemHandlerUtil.IngredientWithStack(ingredient, 1));
+                    break;
+                  }
+                }
+              }
+            }
+            if (amount == 5) {
+              List<ItemStack> temp = ItemHandlerUtil.getItemsInSlots(cap, slotsToIngredient, true);
+              if (temp.size() == 5) {
+                temp = ItemHandlerUtil.getItemsInSlots(cap, slotsToIngredient, false);
+                for (int i = 0; i < temp.size(); i++) {
+                  ItemStack stack = temp.get(i);
+                  inventory.setStackInSlot(i, stack);
+                }
               }
             }
           }
-          List<ItemStack> temp = ItemHandlerUtil.getItemsInSlots(cap, slots, true);
-          if (temp.size() == 5) {
-            temp = ItemHandlerUtil.getItemsInSlots(cap, slots, false);
-            for (int i = 0; i < 5; i++) {
-              ItemStack stack = temp.get(i);
-              inventory.setStackInSlot(i, stack);
-            }
-          }
         }
       }
-    }
 
-    if (ticker % 10 == 0) {
-      AxisAlignedBB bounds = bounding.offset(getPos());
-      BlockPos start = new BlockPos(bounds.minX, bounds.minY, bounds.minZ);
-      BlockPos stop = new BlockPos(bounds.maxX, bounds.maxY, bounds.maxZ);
-      boolean fire = false;
-      for (BlockPos.MutableBlockPos pos : BlockPos.getAllInBoxMutable(start, stop)) {
-        if (world.getBlockState(pos).getBlock() == Blocks.FIRE) {
-          fire = true;
-          if (!world.getBlockState(pos.down()).getBlock().isFireSource(world, pos.down(), EnumFacing.UP)) {
-            for (int i = 0; i < 1 + Util.rand.nextInt(3); i++) {
-              world.getBlockState(pos).getBlock().randomTick(world, pos, world.getBlockState(pos), Util.rand);
+      if (ticker % 10 == 0) {
+        AxisAlignedBB bounds = bounding.offset(getPos());
+        BlockPos start = new BlockPos(bounds.minX, bounds.minY, bounds.minZ);
+        BlockPos stop = new BlockPos(bounds.maxX, bounds.maxY, bounds.maxZ);
+        boolean fire = false;
+        for (BlockPos.MutableBlockPos pos : BlockPos.getAllInBoxMutable(start, stop)) {
+          if (world.getBlockState(pos).getBlock() == Blocks.FIRE) {
+            fire = true;
+            if (!world.getBlockState(pos.down()).getBlock().isFireSource(world, pos.down(), EnumFacing.UP)) {
+              for (int i = 0; i < 1 + Util.rand.nextInt(3); i++) {
+                world.getBlockState(pos).getBlock().randomTick(world, pos, world.getBlockState(pos), Util.rand);
+              }
             }
           }
         }
-      }
-      if (fire) {
-        startRitual(null);
+        if (fire) {
+          startRitual(null);
+        }
       }
     }
 
