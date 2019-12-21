@@ -78,18 +78,20 @@ public class SoilHandler {
             }
           }
           if (soil.getBlock() == ModBlocks.elemental_soil_earth) {
-            int fertility = soil.getValue(BlockElementalSoil.EARTH_FERTILITY);
-            if (fertility > 0) {
-              List<ItemStack> newDrops = new ArrayList<>();
-              Random random = new Random();
-              for (ItemStack stack : event.getDrops()) {
-                newDrops.add(stack);
-                if (random.nextInt(3) < fertility) {
-                  newDrops.add(new ItemStack(stack.getItem(), fertility > 2 ? 2 : 1));
+            if (Harvest.isGrown(event.getState())) {
+              int fertility = soil.getValue(BlockElementalSoil.EARTH_FERTILITY);
+              if (fertility > 0) {
+                List<ItemStack> newDrops = new ArrayList<>();
+                Random random = new Random();
+                for (ItemStack stack : event.getDrops()) {
+                  newDrops.add(stack);
+                  if (random.nextInt(3) < fertility) {
+                    newDrops.add(new ItemStack(stack.getItem(), fertility > 2 ? 2 : 1));
+                  }
                 }
+                event.getDrops().clear();
+                event.getDrops().addAll(newDrops);
               }
-              event.getDrops().clear();
-              event.getDrops().addAll(newDrops);
             }
           }
         }
