@@ -47,6 +47,8 @@ public class ModItems {
 
   public static Item creative_pouch;
 
+  public static Item life_essence;
+
   public static List<Item> barks;
 
   // Auto-populated
@@ -147,6 +149,8 @@ public class ModItems {
     event.addItem(cooked_pereskia = new ItemFoodBase("cooked_pereskia", 5, false).setCreativeTab(Roots.tab));
 
     event.addItem(wildewheet_bread = new ItemFoodBase("wildewheet_bread", 7, false).setCreativeTab(Roots.tab));
+
+    event.addItem(life_essence = new ItemLifeEssence("life_essence").setCreativeTab(Roots.tab));
 
     // Rituals
     event.addItem(ritual_healing_aura = new ItemBase("ritual_healing_aura").setCreativeTab(null));

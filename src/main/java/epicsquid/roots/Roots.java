@@ -3,6 +3,8 @@ package epicsquid.roots;
 import epicsquid.roots.capability.grove.IPlayerGroveCapability;
 import epicsquid.roots.capability.grove.PlayerGroveCapability;
 import epicsquid.roots.capability.grove.PlayerGroveCapabilityStorage;
+import epicsquid.roots.capability.life_essence.LifeEssenceCapability;
+import epicsquid.roots.capability.life_essence.LifeEssenceCapabilityStorage;
 import epicsquid.roots.capability.playerdata.IPlayerDataCapability;
 import epicsquid.roots.capability.playerdata.PlayerDataCapability;
 import epicsquid.roots.capability.playerdata.PlayerDataCapabilityStorage;
@@ -73,6 +75,7 @@ public class Roots {
     CapabilityManager.INSTANCE.register(IPlayerGroveCapability.class, new PlayerGroveCapabilityStorage(), PlayerGroveCapability::new);
     CapabilityManager.INSTANCE.register(IPlayerDataCapability.class, new PlayerDataCapabilityStorage(), PlayerDataCapability::new);
     CapabilityManager.INSTANCE.register(RunicShearsCapability.class, new RunicShearsCapabilityStorage(), RunicShearsCapability::new);
+    CapabilityManager.INSTANCE.register(LifeEssenceCapability.class, new LifeEssenceCapabilityStorage(), LifeEssenceCapability::new);
     NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);
     logger = event.getModLog();
     ModDamage.init();

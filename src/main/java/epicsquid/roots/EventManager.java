@@ -4,6 +4,8 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.roots.capability.grove.IPlayerGroveCapability;
 import epicsquid.roots.capability.grove.PlayerGroveCapabilityProvider;
+import epicsquid.roots.capability.life_essence.LifeEssenceCapability;
+import epicsquid.roots.capability.life_essence.LifeEssenceCapabilityProvider;
 import epicsquid.roots.capability.playerdata.IPlayerDataCapability;
 import epicsquid.roots.capability.playerdata.PlayerDataCapabilityProvider;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityProvider;
@@ -75,6 +77,9 @@ public class EventManager {
   public static void addCapabilities(AttachCapabilitiesEvent<Entity> event) {
     if (ModRecipes.getRunicShearEntities().contains(event.getObject().getClass())) {
       event.addCapability(RunicShearsCapabilityProvider.IDENTIFIER, new RunicShearsCapabilityProvider());
+    }
+    if (ModRecipes.getAnimalHarvestClasses().contains(event.getObject().getClass())) {
+      event.addCapability(LifeEssenceCapabilityProvider.IDENTIFIER, new LifeEssenceCapabilityProvider());
     }
     if (event.getObject() instanceof EntityPlayer) {
       event.addCapability(PlayerGroveCapabilityProvider.IDENTIFIER, new PlayerGroveCapabilityProvider());
