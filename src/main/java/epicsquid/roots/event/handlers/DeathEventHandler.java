@@ -6,6 +6,7 @@ import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.PacifistEntry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -30,6 +31,8 @@ public class DeathEventHandler {
     if (!(trueSource instanceof EntityPlayerMP)) return;
 
     if (!entry.matches(entity, (EntityPlayer) trueSource)) return;
+
+    if (entity.getControllingPassenger() != null) return;
 
     Advancements.PACIFIST_TRIGGER.trigger((EntityPlayerMP) trueSource, event);
   }
