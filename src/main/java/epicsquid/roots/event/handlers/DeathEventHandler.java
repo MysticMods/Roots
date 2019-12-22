@@ -30,6 +30,8 @@ public class DeathEventHandler {
 
     if (!entry.matches(entity, (EntityPlayer) trueSource)) return;
 
+    if (entity.getControllingPassenger() != null) return;
+
     Advancements.PACIFIST_TRIGGER.trigger((EntityPlayerMP) trueSource, event);
   }
 }
