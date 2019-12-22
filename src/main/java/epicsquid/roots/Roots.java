@@ -1,5 +1,7 @@
 package epicsquid.roots;
 
+import epicsquid.roots.capability.life_essence.LifeEssenceCapability;
+import epicsquid.roots.capability.life_essence.LifeEssenceCapabilityStorage;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapability;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityStorage;
 import epicsquid.roots.gui.GuiHandler;
@@ -62,6 +64,7 @@ public class Roots {
     // We load before MysticalLib so we can't use an annotation or it will crash
     MinecraftForge.EVENT_BUS.register(RegistryManager.class);
     CapabilityManager.INSTANCE.register(RunicShearsCapability.class, new RunicShearsCapabilityStorage(), RunicShearsCapability::new);
+    CapabilityManager.INSTANCE.register(LifeEssenceCapability.class, new LifeEssenceCapabilityStorage(), LifeEssenceCapability::new);
     NetworkRegistry.INSTANCE.registerGuiHandler(instance, GUI_HANDLER);
     logger = event.getModLog();
     ModDamage.init();
