@@ -35,6 +35,8 @@ item.creative_pouch.name=Creative Component Pouch
 item.apothecary_pouch.name=Apothecary Pouch
 item.wildwood_door.name=Wildwood Door
 item.fairy_dust.name=Fairy Dust
+item.life_essence.name=Unknown Life Essence
+item.life_essence.entity_name=%s Life Essence
 
 tile.mortar.name=Mortar
 tile.imbuer.name=Imbuer
@@ -74,12 +76,6 @@ tile.runestone_brick_alt_pressure_plate.name=Runestone Brick Pressure Plate
 tile.wildwood_sapling.name=Wildwood Sapling
 tile.wildwood_ladder.name=Wildwood Ladder
 tile.grove_stone.name=Grove Stone
-tile.fairy_grove_stone.name=Fairy Grove Stone
-tile.fungi_grove_stone.name=Fungal Grove Stone
-tile.natural_grove_stone.name=Natural Grove Stone
-tile.wild_grove_stone.name=Wild Grove Stone
-tile.twilight_grove_stone.name=Twilight Grove Stone
-tile.elemental_grove_stone.name=Elemental Grove Stone
 tile.fey_crafter.name=Fey Crafter
 tile.fey_light.name=Fey Light
 tile.fairy_house_brown.name=Fairy House
@@ -387,6 +383,13 @@ roots.hud.top.pyre.progress_info=minutes remaining
 
 # Runic Shears
 roots.runic_shears.cooldown=The fey's equivalent has nothing to gift you at this time.
+roots.life_essence.cooldown=You can't extract this creature's essence for a while yet.
+roots.life_essence.invalid=This creature's life essence cannot be extracted.
+
+roots.runic_shears.right_click=Right-Click
+roots.runic_shears.sneak_right_click=Sneak-Right-Click
+roots.runic_shears.tooltip1=%s a block or entity to attempt to collect a Fey Gift.
+roots.runic_shears.tooltip2=%s an entity to attempt to extract its Life Essence.
 
 # Ritual of Transmutation
 roots.ritual.transmutation.deadbush_cocoa=Obtained through the Ritual of Transmutation. Nearby dead bushes will transform into cocoa beans.
