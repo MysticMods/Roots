@@ -1,6 +1,5 @@
 package epicsquid.roots.tileentity;
 
-import crafttweaker.api.item.IItemStack;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.ListUtil;
@@ -17,10 +16,7 @@ import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.ItemHandlerUtil;
 import epicsquid.roots.util.XPUtil;
-import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import it.unimi.dsi.fastutil.ints.IntArrayList;
-import it.unimi.dsi.fastutil.ints.IntCollection;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -378,7 +374,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     // Potentially update from stuff below
     if (!world.isRemote) {
       resolveLastIngredients();
-      if (lastUsedIngredients != null && !lastUsedIngredients.isEmpty() && ItemHandlerUtil.isEmpty(inventory_storage) && ItemHandlerUtil.isEmpty(inventory)) {
+      if (lastUsedIngredients != null && !lastUsedIngredients.isEmpty() && ItemHandlerUtil.isEmpty(inventory)) {
         TileEntity te = world.getTileEntity(getPos().down());
         if (te != null) {
           IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
@@ -484,18 +480,30 @@ public class TileEntityBonfire extends TileBase implements ITickable {
       if (!burning || burnTime == 0) {
         burnTime = 0;
         BlockBonfire.setState(false, world, pos);
+        List<ItemStack> stacks = new ArrayList<>();
+        for (int i = 0; i < inventory.getSlots(); i++) {
+          ItemStack stack = inventory.getStackInSlot(i).copy();
+          stack.setCount(1);
+          stacks.add(stack);
+        }
         //Check if it is a ritual, if so try and see if it has new ritual fuel.
         if (this.craftingResult.isEmpty() && this.lastRitualUsed != null) {
-          List<ItemStack> stacks = new ArrayList<>();
-          for (int i = 0; i < inventory.getSlots(); i++) {
-            ItemStack stack = inventory.getStackInSlot(i).copy();
-            stack.setCount(1);
-            stacks.add(stack);
-          }
           if (ListUtil.matchesIngredients(stacks, this.lastRitualUsed.getIngredients())) {
             lastRitualUsed.doEffect(world, getPos(), null);
             burning = true;
             this.burnTime = this.lastRitualUsed.getDuration();
+            this.doBigFlame = true;
+            for (int i = 0; i < inventory.getSlots(); i++) {
+              inventory.extractItem(i, 1, false);
+            }
+            markDirty();
+            if (!world.isRemote)
+              updatePacketViaState();
+          }
+        } else if (this.lastRecipeUsed != null) {
+          if (this.lastRecipeUsed.matches(stacks)) {
+            burning = true;
+            this.burnTime = this.lastRecipeUsed.getBurnTime();
             this.doBigFlame = true;
             for (int i = 0; i < inventory.getSlots(); i++) {
               inventory.extractItem(i, 1, false);
