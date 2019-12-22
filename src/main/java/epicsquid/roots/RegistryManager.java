@@ -6,15 +6,12 @@ import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticallib.event.RegisterParticleEvent;
 import epicsquid.mysticallib.event.RegisterWorldGenEvent;
 import epicsquid.roots.init.*;
+import epicsquid.roots.item.ItemLifeEssence;
 import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.network.PacketHandler;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.EntityList;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemMonsterPlacer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -73,16 +70,13 @@ public class RegistryManager {
 
     Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemStaff.StaffColorHandler(), ModItems.staff);
     Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
-        EntityList.EntityEggInfo info = EntityList.ENTITY_EGGS.get(ItemMonsterPlacer.getNamedIdFrom(stack));
+      EntityList.EntityEggInfo info = EntityList.ENTITY_EGGS.get(((ItemLifeEssence) ModItems.life_essence).getEntityID(stack));
 
-        if (info == null)
-        {
-            return -1;
-        }
-        else
-        {
-            return tintIndex == 0 ? info.primaryColor : info.secondaryColor;
-        }
+      if (info == null) {
+        return -1;
+      } else {
+        return tintIndex == 0 ? info.primaryColor : info.secondaryColor;
+      }
     }, ModItems.life_essence);
   }
 
