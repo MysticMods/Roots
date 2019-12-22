@@ -107,7 +107,7 @@ public class ModBlocks {
     event.addBlock(runed_obsidian_brick = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runed_obsidian_brick")).setCreativeTab(Roots.tab);
     event.addBlock(runed_obsidian_brick_alt = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runed_obsidian_brick_alt")).setCreativeTab(Roots.tab);
     event.addBlock(chiseled_runed_obsidian = new BlockRunedObsidian(Material.ROCK, SoundType.METAL, 8.5f, "chiseled_runed_obsidian")).setCreativeTab(Roots.tab);
-    event.addBlock(trample_rune = new BlockTrample(Material.WATER, SoundType.METAL, 1.4f, "runestone_trample")).setCreativeTab(Roots.tab);
+    event.addBlock(trample_rune = new BlockTrample(Material.ROCK, SoundType.METAL, 1.4f, "runestone_trample", TileEntityTrample.class)).setCreativeTab(Roots.tab);
 
     runestoneBlocks = Arrays.asList(runestone, runestone_brick, runestone_brick_alt, chiseled_runestone);
     runedObsidianBlocks = Arrays.asList(runed_obsidian, runed_obsidian_brick, runed_obsidian_brick_alt, chiseled_runed_obsidian);
