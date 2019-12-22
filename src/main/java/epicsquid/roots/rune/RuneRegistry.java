@@ -15,14 +15,7 @@ public class RuneRegistry {
 
   public static RuneBase getRune(NBTTagCompound compound) {
     String runeString = compound.getString("rune");
-    RuneBase rune = null;
-    if (runeRegistry.get(runeString) != null) {
-      try {
-        rune = runeRegistry.get(runeString).getDeclaredConstructor().newInstance();
-      } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
-        e.printStackTrace();
-      }
-    }
+    RuneBase rune = getRune(runeString);
 
     if (rune != null) {
       rune.readFromEntity(compound);
