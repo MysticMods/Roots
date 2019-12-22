@@ -1,13 +1,11 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemBase;
-import epicsquid.mysticallib.util.ItemUtil;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
@@ -22,11 +20,16 @@ public class ItemLifeEssence extends ItemBase {
 
   @Override
   public String getItemStackDisplayName(ItemStack stack) {
-    return super.getItemStackDisplayName(stack);
+    ResourceLocation id = getEntityID(stack);
+    if (id == null) {
+      return super.getItemStackDisplayName(stack);
+    } else {
+      return I18n.format(this.getTranslationKey() + ".entity_name", I18n.format("entity." + EntityList.getTranslationName(id) + ".name"));
+    }
   }
 
   @Nullable
-  public Class<? extends Entity> getEntityClass (ItemStack stack) {
+  public Class<? extends Entity> getEntityClass(ItemStack stack) {
     ResourceLocation location = getEntityID(stack);
     if (location == null) {
       return null;
@@ -35,7 +38,7 @@ public class ItemLifeEssence extends ItemBase {
   }
 
   @Nullable
-  public ResourceLocation getEntityID (ItemStack stack) {
+  public ResourceLocation getEntityID(ItemStack stack) {
     NBTTagCompound tag = stack.getTagCompound();
     if (tag == null) {
       tag = new NBTTagCompound();

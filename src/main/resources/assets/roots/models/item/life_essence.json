@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "roots:items/life_essence",
+        "layer1": "roots:items/life_essence_overlay"
+    }
+}

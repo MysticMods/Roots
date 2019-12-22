@@ -5,6 +5,7 @@ import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticallib.event.RegisterParticleEvent;
 import epicsquid.mysticallib.event.RegisterWorldGenEvent;
+import epicsquid.roots.item.ItemLifeEssence;
 import epicsquid.roots.potion.PotionFreeze;
 import epicsquid.roots.init.*;
 import epicsquid.roots.item.ItemStaff;
@@ -76,7 +77,7 @@ public class RegistryManager {
 
     Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemStaff.StaffColorHandler(), ModItems.staff);
     Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
-        EntityList.EntityEggInfo info = EntityList.ENTITY_EGGS.get(ItemMonsterPlacer.getNamedIdFrom(stack));
+        EntityList.EntityEggInfo info = EntityList.ENTITY_EGGS.get(((ItemLifeEssence) ModItems.life_essence).getEntityID(stack));
 
         if (info == null)
         {

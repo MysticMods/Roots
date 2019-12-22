@@ -6,6 +6,8 @@ import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.capability.life_essence.LifeEssenceCapability;
+import epicsquid.roots.capability.life_essence.LifeEssenceCapabilityProvider;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapability;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityProvider;
 import epicsquid.roots.config.GeneralConfig;
@@ -15,13 +17,15 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.network.fx.MessageRunicShearsAOEFX;
 import epicsquid.roots.network.fx.MessageRunicShearsFX;
-import epicsquid.roots.network.fx.MessageTreeCompleteFX;
 import epicsquid.roots.recipe.RunicShearEntityRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -31,6 +35,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -43,8 +48,11 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -148,6 +156,69 @@ public class ItemRunicShears extends ItemBase {
     World world = player.world;
     Random rand = itemRand;
 
+    if (entity.isChild()) return true;
+
+    if (!player.isSneaking()) {
+      RunicShearEntityRecipe recipe = ModRecipes.getRunicShearRecipe(entity);
+      if (recipe != null) {
+        player.swingArm(hand);
+        if (!world.isRemote) {
+          RunicShearsCapability cap = entity.getCapability(RunicShearsCapabilityProvider.RUNIC_SHEARS_CAPABILITY, null);
+          if (cap != null) {
+            if (cap.canHarvest()) {
+              cap.setCooldown(recipe.getCooldown());
+              EntityItem ent = entity.entityDropItem(recipe.getDrop().copy(), 1.0F);
+              ent.motionY += rand.nextFloat() * 0.05F;
+              ent.motionX += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
+              ent.motionZ += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
+              if (!player.capabilities.isCreativeMode) {
+                itemstack.damageItem(1, entity);
+              }
+              world.playSound(player, entity.getPosition(), SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
+              IMessage packet = new MessageRunicShearsFX(entity);
+              PacketHandler.sendToAllTracking(packet, entity);
+              return true;
+            } else {
+              // TODO: play particles (failure)?
+              player.sendStatusMessage(new TextComponentTranslation("roots.runic_shears.cooldown").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)), true);
+            }
+          }
+        }
+      }
+    } else {
+      LifeEssenceCapability cap = entity.getCapability(LifeEssenceCapabilityProvider.LIFE_ESSENCE_CAPABILITY, null);
+      if (cap != null) {
+        if (cap.canHarvest()) {
+          player.swingArm(hand);
+          if (!world.isRemote) {
+            cap.setCooldown(20 * 360);
+            ItemStack stack = new ItemStack(ModItems.life_essence);
+            NBTTagCompound tag = stack.getTagCompound();
+            if (tag == null) {
+              tag = new NBTTagCompound();
+              stack.setTagCompound(tag);
+            }
+            tag.setString("id", EntityList.getKey(entity).toString());
+            EntityItem ent = entity.entityDropItem(stack, 1.0F);
+            ent.motionY += rand.nextFloat() * 0.05F;
+            ent.motionX += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
+            ent.motionZ += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
+            if (!player.capabilities.isCreativeMode) {
+              itemstack.damageItem(1, entity);
+            }
+            world.playSound(player, entity.getPosition(), SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
+            IMessage packet = new MessageRunicShearsFX(entity);
+            PacketHandler.sendToAllTracking(packet, entity);
+            return true;
+          }
+        } else {
+          player.sendStatusMessage(new TextComponentTranslation("roots.life_essence.cooldown").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)), true);
+        }
+      } else {
+        player.sendStatusMessage(new TextComponentTranslation("roots.life_essence.invalid").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)), true);
+      }
+    }
+
     if (entity instanceof IShearable) {
       int count = 0;
       if (Items.SHEARS.itemInteractionForEntity(itemstack, player, entity, hand)) count++;
@@ -174,35 +245,16 @@ public class ItemRunicShears extends ItemBase {
       }
     }
 
-    if (entity.isChild()) return true;
-
-    RunicShearEntityRecipe recipe = ModRecipes.getRunicShearRecipe(entity);
-    if (recipe != null) {
-      player.swingArm(hand);
-      if (!world.isRemote) {
-        RunicShearsCapability cap = entity.getCapability(RunicShearsCapabilityProvider.RUNIC_SHEARS_CAPABILITY, null);
-        if (cap != null) {
-          if (cap.canHarvest()) {
-            cap.setCooldown(recipe.getCooldown());
-            net.minecraft.entity.item.EntityItem ent = entity.entityDropItem(recipe.getDrop().copy(), 1.0F);
-            ent.motionY += rand.nextFloat() * 0.05F;
-            ent.motionX += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
-            ent.motionZ += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
-            if (!player.capabilities.isCreativeMode) {
-              itemstack.damageItem(1, entity);
-            }
-            world.playSound(player, entity.getPosition(), SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
-            IMessage packet = new MessageRunicShearsFX(entity);
-            PacketHandler.sendToAllTracking(packet, entity);
-            return true;
-          } else {
-            // TODO: play particles (failure)?
-            player.sendStatusMessage(new TextComponentTranslation("roots.runic_shears.cooldown").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE)), true);
-          }
-        }
-      }
-    }
-
     return false;
+  }
+
+  @Override
+  @SideOnly(Side.CLIENT)
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+    super.addInformation(stack, worldIn, tooltip, flagIn);
+
+    tooltip.add("");
+    tooltip.add(I18n.format("roots.runic_shears.tooltip1", TextFormatting.BOLD + "" + TextFormatting.AQUA + I18n.format("roots.runic_shears.right_click") + TextFormatting.RESET + TextFormatting.GREEN));
+    tooltip.add(I18n.format("roots.runic_shears.tooltip2", TextFormatting.BOLD + "" + TextFormatting.AQUA + I18n.format("roots.runic_shears.sneak_right_click") + TextFormatting.RESET + TextFormatting.GREEN));
   }
 }
