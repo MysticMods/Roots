@@ -2,6 +2,7 @@ package epicsquid.roots;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.proxy.ClientProxy;
+import epicsquid.roots.capability.life_essence.LifeEssenceCapabilityProvider;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityProvider;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModPotions;
@@ -46,6 +47,9 @@ public class EventManager {
   public static void addCapabilities(AttachCapabilitiesEvent<Entity> event) {
     if (ModRecipes.getRunicShearEntities().contains(event.getObject().getClass())) {
       event.addCapability(RunicShearsCapabilityProvider.IDENTIFIER, new RunicShearsCapabilityProvider());
+    }
+    if (ModRecipes.getAnimalHarvestClasses().contains(event.getObject().getClass())) {
+      event.addCapability(LifeEssenceCapabilityProvider.IDENTIFIER, new LifeEssenceCapabilityProvider());
     }
   }
 

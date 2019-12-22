@@ -47,6 +47,8 @@ public class ModItems {
 
   public static Item creative_pouch, fey_fire;
 
+  public static Item life_essence;
+
   public static List<Item> barks;
 
   // Auto-populated
@@ -150,6 +152,7 @@ public class ModItems {
 
     // Fairy dust
     event.addItem(fairy_dust = new ItemBase("fairy_dust").setCreativeTab(Roots.tab));
+    event.addItem(life_essence = new ItemLifeEssence("life_essence").setCreativeTab(Roots.tab));
 
     // Rituals
     event.addItem(ritual_healing_aura = new ItemBase("ritual_healing_aura").setCreativeTab(null));
