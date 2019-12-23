@@ -15,6 +15,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
@@ -43,7 +44,7 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
 
   protected static Random random = new Random();
   protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualAnimalHarvest.class, DataSerializers.VARINT);
-  private ObjectOpenHashSet<Class<? extends Entity>> harvestClasses;
+  private ObjectOpenHashSet<Class<? extends EntityLivingBase>> harvestClasses;
 
   public EntityRitualAnimalHarvest(World worldIn) {
     super(worldIn);

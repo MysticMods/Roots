@@ -1,9 +1,9 @@
 package epicsquid.roots.integration.crafttweaker.tweaks;
 
+import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.entity.IEntityDefinition;
 import crafttweaker.api.item.IIngredient;
-import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
@@ -13,8 +13,7 @@ import epicsquid.roots.util.zen.ZenDocAppend;
 import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -56,24 +55,44 @@ public class SummonCreaturesTweaker {
   @ZenDocMethod(
       order = 3,
       args = {
-          @ZenDocArg(arg = "entity", info = "the entity to disable life essence for")
+          @ZenDocArg(arg = "entity", info = "the entity to remove life essence for")
       }
   )
-  public static void blacklistEntity(IEntityDefinition entity) {
-    CraftTweaker.LATE_ACTIONS.add(new Blacklist((EntityEntry) entity.getInternal()));
+  public static void removeLifeEssence(IEntityDefinition entity) {
+    CraftTweaker.LATE_ACTIONS.add(new RemoveLifeEssence((EntityEntry) entity.getInternal()));
+  }
+
+  @ZenDocMethod(
+      order = 4,
+      args = {
+          @ZenDocArg(arg = "entity", info = "the entity to add life essence for")
+      }
+  )
+  public static void addLifeEssence(IEntityDefinition entity) {
+    CraftTweaker.LATE_ACTIONS.add(new AddLifeEssence((EntityEntry) entity.getInternal()));
+  }
+
+  @ZenDocMethod(
+      order = 5
+  )
+  public static void clearLifeEssence() {
+    CraftTweaker.LATE_ACTIONS.add(new ClearLifeEssence());
   }
 
   private static class Remove extends Action {
     private final EntityEntry entry;
 
     public Remove(EntityEntry entry) {
-      super("remove_animal_harvest");
+      super("remove_summon_creature");
       this.entry = entry;
+      if (!EntityLivingBase.class.isAssignableFrom(this.entry.getEntityClass())) {
+        CraftTweakerAPI.logError("Invalid Summon Creature entity class to remove: " + this.entry.getEntityClass().getSimpleName());
+      }
     }
 
     @Override
     public void apply() {
-      Class<? extends Entity> clz = entry.getEntityClass();
+      Class<? extends EntityLivingBase> clz = (Class<? extends EntityLivingBase>) entry.getEntityClass();
       ModRecipes.removeSummonCreatureEntry(clz);
     }
 
@@ -83,18 +102,21 @@ public class SummonCreaturesTweaker {
     }
   }
 
-  private static class Blacklist extends Action {
+  private static class RemoveLifeEssence extends Action {
     private final EntityEntry entry;
 
-    public Blacklist(EntityEntry entry) {
-      super("blacklist_animal_harvest");
+    public RemoveLifeEssence(EntityEntry entry) {
+      super("remove_life_essence");
       this.entry = entry;
+      if (!EntityLivingBase.class.isAssignableFrom(this.entry.getEntityClass())) {
+        CraftTweakerAPI.logError("Invalid Summon Creature entity class to remove: " + this.entry.getEntityClass().getSimpleName());
+      }
     }
 
     @Override
     public void apply() {
-      Class<? extends Entity> clz = entry.getEntityClass();
-      ModRecipes.blacklistLifeEssenceClass(clz);
+      Class<? extends EntityLivingBase> clz = (Class<? extends EntityLivingBase>) entry.getEntityClass();
+      ModRecipes.removeLifeEssence(clz);
     }
 
     @Override
@@ -103,22 +125,65 @@ public class SummonCreaturesTweaker {
     }
   }
 
-  private static class Add extends Action {
-    private final EntityEntry entry;
-
-    public Add(EntityEntry entry, List<Ingredient> ingredients) {
-      super("add_summon_creature");
-      this.entry = entry;
+  private static class ClearLifeEssence extends Action {
+    public ClearLifeEssence() {
+      super("clear_life_essences");
     }
 
     @Override
     public void apply() {
-      ModRecipes.addAnimalHarvestRecipe(entry.getName(), entry.getEntityClass());
+      ModRecipes.clearLifeEssence();
     }
 
     @Override
     public String describe() {
-      return String.format("Recipe to add %s to AnimalHarvest", entry.getName());
+      return String.format("Recipe to clear all life essences");
+    }
+  }
+
+  private static class Add extends Action {
+    private final EntityEntry entry;
+    private List<Ingredient> ingredients;
+
+    public Add(EntityEntry entry, List<Ingredient> ingredients) {
+      super("add_summon_creature");
+      this.entry = entry;
+      this.ingredients = ingredients;
+      if (!EntityLivingBase.class.isAssignableFrom(this.entry.getEntityClass())) {
+        CraftTweakerAPI.logError("Invalid Summon Creature entity class to add: " + this.entry.getEntityClass().getSimpleName());
+      }
+    }
+
+    @Override
+    public void apply() {
+      ModRecipes.addSummonCreatureEntry(entry.getName(), (Class<? extends EntityLivingBase>) entry.getEntityClass(), ingredients);
+    }
+
+    @Override
+    public String describe() {
+      return String.format("Recipe to add %s to Summon Creatures", entry.getName());
+    }
+  }
+
+  private static class AddLifeEssence extends Action {
+    private final EntityEntry entry;
+
+    public AddLifeEssence(EntityEntry entry) {
+      super("add_life_essence");
+      this.entry = entry;
+      if (!EntityLivingBase.class.isAssignableFrom(this.entry.getEntityClass())) {
+        CraftTweakerAPI.logError("Invalid Summon Creature life essence entity class to add: " + this.entry.getEntityClass().getSimpleName());
+      }
+    }
+
+    @Override
+    public void apply() {
+      ModRecipes.addLifeEssence((Class<? extends EntityLivingBase>) entry.getEntityClass());
+    }
+
+    @Override
+    public String describe() {
+      return String.format("Recipe to add %s to Life Essence", entry.getName());
     }
   }
 }

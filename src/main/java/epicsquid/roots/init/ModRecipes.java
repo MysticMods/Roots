@@ -47,13 +47,12 @@ public class ModRecipes {
   // TODO: Registries
   private static Map<ResourceLocation, AnimalHarvestRecipe> harvestRecipes = new HashMap<>();
   private static Map<ResourceLocation, AnimalHarvestFishRecipe> fishRecipes = new HashMap<>();
-  private static ObjectOpenHashSet<Class<? extends Entity>> harvestClasses = null;
+  private static ObjectOpenHashSet<Class<? extends EntityLivingBase>> harvestClasses = null;
   private static Map<ResourceLocation, TransmutationRecipe> transmutationRecipes = new HashMap<>();
 
   // TODO: REGISTRIES FUCKING REGISTRIES PLEASE OH GOD REGISTRIES
   private static Map<ResourceLocation, SummonCreatureRecipe> summonCreatureRecipes = new HashMap<>();
-  private static Map<Class<? extends Entity>, SummonCreatureRecipe> summonCreatureClasses = new HashMap<>();
-  private static Set<Class<? extends Entity>> lifeEssenceBlacklist = new HashSet<>();
+  private static Map<Class<? extends EntityLivingBase>, SummonCreatureRecipe> summonCreatureClasses = new HashMap<>();
 
   // TODO: ResourceLocation-based
   private static List<MortarRecipe> mortarRecipes = new ArrayList<>();
@@ -72,13 +71,19 @@ public class ModRecipes {
   private static Map<ResourceLocation, BarkRecipe> barkRecipes = new HashMap<>();
   private static Map<ResourceLocation, FlowerRecipe> flowerRecipes = new HashMap<>();
 
-  public static SummonCreatureRecipe addSummonCreatureEntry (String name, Class<? extends Entity> clazz, Ingredient ... ingredients) {
+  public static SummonCreatureRecipe addSummonCreatureEntry(String name, Class<? extends EntityLivingBase> clazz, Ingredient... ingredients) {
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
     SummonCreatureRecipe recipe = new SummonCreatureRecipe(rl, clazz, ingredients);
     return addSummonCreatureEntry(recipe);
   }
 
-  public static SummonCreatureRecipe addSummonCreatureEntry (SummonCreatureRecipe recipe) {
+  public static SummonCreatureRecipe addSummonCreatureEntry(String name, Class<? extends EntityLivingBase> clazz, List<Ingredient> ingredients) {
+    ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
+    SummonCreatureRecipe recipe = new SummonCreatureRecipe(rl, clazz, ingredients);
+    return addSummonCreatureEntry(recipe);
+  }
+
+  public static SummonCreatureRecipe addSummonCreatureEntry(SummonCreatureRecipe recipe) {
     ResourceLocation rl = recipe.getRegistryName();
     if (summonCreatureRecipes.containsKey(rl)) {
       throw new IllegalArgumentException("Resource location " + rl.toString() + " already contained within the Summon Creatures registry.");
@@ -94,27 +99,27 @@ public class ModRecipes {
   }
 
   @Nullable
-  public static SummonCreatureRecipe getSummonCreatureEntry (String name) {
+  public static SummonCreatureRecipe getSummonCreatureEntry(String name) {
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
     return getSummonCreatureEntry(rl);
   }
 
   @Nullable
-  public static SummonCreatureRecipe getSummonCreatureEntry (ResourceLocation location) {
+  public static SummonCreatureRecipe getSummonCreatureEntry(ResourceLocation location) {
     return summonCreatureRecipes.get(location);
   }
 
   @Nullable
-  public static SummonCreatureRecipe getSummonCreatureEntry (Class<? extends Entity> clazz) {
+  public static SummonCreatureRecipe getSummonCreatureEntry(Class<? extends Entity> clazz) {
     return summonCreatureClasses.get(clazz);
   }
 
-  public static Collection<SummonCreatureRecipe> getSummonCreatureEntries () {
+  public static Collection<SummonCreatureRecipe> getSummonCreatureEntries() {
     return summonCreatureRecipes.values();
   }
 
   @Nullable
-  public static SummonCreatureRecipe findSummonCreatureEntry (List<ItemStack> ingredients) {
+  public static SummonCreatureRecipe findSummonCreatureEntry(List<ItemStack> ingredients) {
     for (SummonCreatureRecipe recipe : getSummonCreatureEntries()) {
       if (recipe.matches(ingredients)) {
         return recipe;
@@ -124,31 +129,56 @@ public class ModRecipes {
     return null;
   }
 
-  public static void blacklistLifeEssenceClass (Class<? extends Entity> clzz) {
-    lifeEssenceBlacklist.add(clzz);
+  public static boolean lifeEssenceCleared = false;
+  public static Set<Class<? extends EntityLivingBase>> lifeEssenceAdditions = new HashSet<>();
+  public static Set<Class<? extends EntityLivingBase>> lifeEssenceRemovals = new HashSet<>();
+
+  private static Set<Class<? extends EntityLivingBase>> lifeEssenceList = new HashSet<>();
+
+  public static void removeLifeEssence(Class<? extends EntityLivingBase> clzz) {
+    lifeEssenceRemovals.add(clzz);
   }
 
-  public static boolean isLifeEssenceBlacklisted (Class<? extends Entity> clzz) {
-    return lifeEssenceBlacklist.contains(clzz);
+  public static void addLifeEssence(Class<? extends EntityLivingBase> clazz) {
+    lifeEssenceAdditions.add(clazz);
   }
 
-  public static boolean isLifeEssenceBlacklisted (Entity entity) {
-    return isLifeEssenceBlacklisted(entity.getClass());
+  public static void clearLifeEssence() {
+    lifeEssenceCleared = true;
   }
 
-  public static void removeSummonCreatureEntry (Class<? extends Entity> clazz) {
+  public static void generateLifeEssence() {
+    lifeEssenceList.clear();
+
+    if (!lifeEssenceCleared) {
+      lifeEssenceList.retainAll(getAnimalHarvestClasses());
+    }
+
+    lifeEssenceList.retainAll(lifeEssenceAdditions);
+    lifeEssenceList.removeAll(lifeEssenceRemovals);
+  }
+
+  public static boolean isLifeEssenceAllowed(Class<? extends EntityLivingBase> clzz) {
+    return lifeEssenceList.contains(clzz);
+  }
+
+  public static boolean isLifeEssenceAllowed(EntityLivingBase entity) {
+    return isLifeEssenceAllowed(entity.getClass());
+  }
+
+  public static void removeSummonCreatureEntry(Class<? extends EntityLivingBase> clazz) {
     SummonCreatureRecipe recipe = summonCreatureClasses.remove(clazz);
     if (recipe != null) {
       summonCreatureRecipes.remove(recipe.getRegistryName());
     }
   }
 
-  public static void removeSummonCreatureEntry (String name) {
+  public static void removeSummonCreatureEntry(String name) {
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
     removeSummonCreatureEntry(rl);
   }
 
-  public static void removeSummonCreatureEntry (ResourceLocation location) {
+  public static void removeSummonCreatureEntry(ResourceLocation location) {
     SummonCreatureRecipe recipe = summonCreatureRecipes.get(location);
     if (recipe == null) {
       return;
@@ -247,7 +277,7 @@ public class ModRecipes {
     return Lists.newArrayList(flowerRecipes.values()).get(Util.rand.nextInt(Math.max(1, flowerRecipes.size())));
   }
 
-  public static Map<ResourceLocation, FlowerRecipe> getFlowerRecipes () {
+  public static Map<ResourceLocation, FlowerRecipe> getFlowerRecipes() {
     return flowerRecipes;
   }
 
@@ -315,7 +345,7 @@ public class ModRecipes {
     return barkRecipes.values();
   }
 
-  public static Map<ResourceLocation, BarkRecipe> getBarkRecipeMap () {
+  public static Map<ResourceLocation, BarkRecipe> getBarkRecipeMap() {
     return barkRecipes;
   }
 
@@ -450,15 +480,15 @@ public class ModRecipes {
     StateUtil.ignoreState(Blocks.LEAVES, BlockLeaves.DECAYABLE);
   }
 
-  public static void addAnimalHarvestRecipe(Entity entity) {
+  public static void addAnimalHarvestRecipe(EntityLivingBase entity) {
     addAnimalHarvestRecipe(EntityList.getEntityString(entity), entity);
   }
 
-  public static void addAnimalHarvestRecipe(String name, Entity entity) {
+  public static void addAnimalHarvestRecipe(String name, EntityLivingBase entity) {
     addAnimalHarvestRecipe(name, entity.getClass());
   }
 
-  public static void addAnimalHarvestRecipe(String name, Class<? extends Entity> clazz) {
+  public static void addAnimalHarvestRecipe(String name, Class<? extends EntityLivingBase> clazz) {
     ResourceLocation n = new ResourceLocation(Roots.MODID, name);
     if (harvestRecipes.containsKey(n)) {
       System.out.println("Animal Harvest recipe name is already registered: " + n.toString());
@@ -508,11 +538,11 @@ public class ModRecipes {
     }
   }
 
-  public static Map<ResourceLocation, AnimalHarvestRecipe> getAnimalHarvestRecipes () {
+  public static Map<ResourceLocation, AnimalHarvestRecipe> getAnimalHarvestRecipes() {
     return harvestRecipes;
   }
 
-  public static Map<ResourceLocation, AnimalHarvestFishRecipe> getAnimalHarvestFishRecipes () {
+  public static Map<ResourceLocation, AnimalHarvestFishRecipe> getAnimalHarvestFishRecipes() {
     return fishRecipes;
   }
 
@@ -532,7 +562,7 @@ public class ModRecipes {
     return null;
   }
 
-  public static ObjectOpenHashSet<Class<? extends Entity>> getAnimalHarvestClasses() {
+  public static ObjectOpenHashSet<Class<? extends EntityLivingBase>> getAnimalHarvestClasses() {
     if (harvestClasses == null || harvestClasses.size() != harvestRecipes.size()) {
       harvestClasses = new ObjectOpenHashSet<>();
       for (AnimalHarvestRecipe recipe : harvestRecipes.values()) {
@@ -687,7 +717,7 @@ public class ModRecipes {
     return null;
   }
 
-  public static void clearGeneratedEntityRecipes () {
+  public static void clearGeneratedEntityRecipes() {
     generatedEntityRecipes = null;
   }
 

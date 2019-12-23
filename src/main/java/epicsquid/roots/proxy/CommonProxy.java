@@ -1,6 +1,5 @@
 package epicsquid.roots.proxy;
 
-import crafttweaker.mc1120.commands.CTChatCommand;
 import epicsquid.roots.advancements.Advancements;
 import epicsquid.roots.command.CommandRitual;
 import epicsquid.roots.command.CommandRoots;
@@ -9,7 +8,6 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.chisel.RootsChisel;
 import epicsquid.roots.integration.consecration.Consecration;
-import epicsquid.roots.integration.crafttweaker.commands.CommandRecipes;
 import epicsquid.roots.integration.crafttweaker.commands.Inject;
 import epicsquid.roots.integration.endercore.EndercoreHarvest;
 import epicsquid.roots.integration.harvest.HarvestIntegration;
@@ -65,6 +63,7 @@ public class CommonProxy {
     }
     Advancements.init();
     ModRecipes.clearGeneratedEntityRecipes();
+    ModRecipes.generateLifeEssence();
   }
 
   public void serverStarting(FMLServerStartingEvent event) {
