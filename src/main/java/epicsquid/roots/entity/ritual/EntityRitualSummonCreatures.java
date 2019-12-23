@@ -52,16 +52,13 @@ public class EntityRitualSummonCreatures extends EntityRitualBase {
     super.onUpdate();
     float alpha = (float) Math.min(40, (RitualRegistry.ritual_summon_creatures.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
     if (world.isRemote && getDataManager().get(lifetime) > 0) {
-      ParticleUtil.spawnParticleStar(world, (float) posX, (float) posY, (float) posZ, 0, 0, 0, 70, 70, 70, 0.5f * alpha, 20.0f, 40);
-      for (float i = 0; i < 360; i += 120) {
-        float ang = (float) (ticksExisted % 360);
-        float tx = (float) posX + 2.5f * (float) Math.sin(Math.toRadians(2.0f * (i + ang)));
-        float ty = (float) posY + 0.5f * (float) Math.sin(Math.toRadians(4.0f * (i + ang)));
-        float tz = (float) posZ + 2.5f * (float) Math.cos(Math.toRadians(2.0f * (i + ang)));
-        ParticleUtil.spawnParticleStar(world, tx, ty, tz, 0, 0, 0, 70, 70, 70, 0.5f * alpha, 10.0f, 40);
-      }
-      if (rand.nextInt(5) == 0) {
-        ParticleUtil.spawnParticleSpark(world, (float) posX, (float) posY, (float) posZ, -(0.125f * (rand.nextFloat() - 0.5f)), -(0.0625f * (rand.nextFloat())), -(0.125f * (rand.nextFloat() - 0.5f)), 70, 70, 70, 1.0f * alpha, 1.0f + rand.nextFloat(), 160);
+      for (float i = 0; i < 360; i += rand.nextFloat() * 90.0f) {
+        float vx = -(0.09f * (float) Math.sin(Math.toRadians(i)));
+        float vz = -(0.09f * (float) Math.cos(Math.toRadians(i)));
+        float tx = (float) posX + 2.5f * (float) Math.sin(Math.toRadians(i));
+        float ty = (float) posY;
+        float tz = (float) posZ + 2.5f * (float) Math.cos(Math.toRadians(i));
+        ParticleUtil.spawnParticleSmoke(world, tx, ty, tz, vx, 0, vz, 67, 0, 87, 0.065f * alpha, 5.0f, 125, true);
       }
     }
     if (this.ticksExisted % ritual.interval == 0) {
@@ -130,19 +127,19 @@ public class EntityRitualSummonCreatures extends EntityRitualBase {
 
   @Override
   protected void readEntityFromNBT(NBTTagCompound compound) {
-    super.readEntityFromNBT(compound);
     if (compound.hasKey("summonRecipe")) {
       this.summonRecipe = ModRecipes.getSummonCreatureEntry(new ResourceLocation(compound.getString("summonRecipe")));
     }
     this.essence = new ItemStack(compound.getCompoundTag("essence"));
+    super.readEntityFromNBT(compound);
   }
 
   @Override
   protected void writeEntityToNBT(NBTTagCompound compound) {
-    super.writeEntityToNBT(compound);
     if (this.summonRecipe != null) {
       compound.setString("summonRecipe", this.summonRecipe.getRegistryName().toString());
     }
     compound.setTag("essence", this.essence.serializeNBT());
+    super.writeEntityToNBT(compound);
   }
 }

@@ -38,11 +38,11 @@ public class RitualSummonCreatures extends RitualBase {
   @Override
   public void init() {
     addCondition(new ConditionItems(
-        new ItemStack(ModItems.wildewheet),
+        new ItemStack(Items.WHEAT_SEEDS),
         new ItemStack(Items.WHEAT),
         new ItemStack(Items.EGG),
         new ItemStack(Items.ROTTEN_FLESH),
-        new ItemStack(ModItems.moonglow_leaf)
+        new ItemStack(Items.WHEAT_SEEDS)
     ));
     addCondition(new ConditionValidSummon());
     setIcon(ModItems.ritual_summon_creatures);
