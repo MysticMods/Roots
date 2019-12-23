@@ -69,6 +69,7 @@ public class CommonProxy {
     }
     Advancements.init();
     ModRecipes.clearGeneratedEntityRecipes();
+    ModRecipes.generateLifeEssence();
   }
 
   public void serverStarting(FMLServerStartingEvent event) {

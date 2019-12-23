@@ -187,7 +187,7 @@ public class ItemRunicShears extends ItemBase {
       }
     } else {
       LifeEssenceCapability cap = entity.getCapability(LifeEssenceCapabilityProvider.LIFE_ESSENCE_CAPABILITY, null);
-      if (cap != null && !ModRecipes.isLifeEssenceBlacklisted(entity)) {
+      if (cap != null) {
         if (cap.canHarvest()) {
           player.swingArm(hand);
           if (!world.isRemote) {
