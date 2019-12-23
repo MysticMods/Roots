@@ -7,12 +7,10 @@ import crafttweaker.api.minecraft.CraftTweakerMC;
 import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
 import epicsquid.roots.integration.crafttweaker.Action;
-import epicsquid.roots.ritual.conditions.Condition;
+import epicsquid.roots.ritual.conditions.ICondition;
 import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
-import epicsquid.roots.ritual.conditions.Condition;
-import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.util.zen.ZenDocAppend;
 import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
@@ -71,10 +69,10 @@ public class RitualTweaker {
         return;
       }
       ConditionItems newRecipe = new ConditionItems((Object[]) inputs);
-      List<Condition> conditions = ritual.getConditions();
-      ListIterator<Condition> iterator = conditions.listIterator();
+      List<ICondition> conditions = ritual.getConditions();
+      ListIterator<ICondition> iterator = conditions.listIterator();
       while (iterator.hasNext()) {
-        Condition cond = iterator.next();
+        ICondition cond = iterator.next();
         if (cond instanceof ConditionItems) {
           iterator.remove();
           iterator.add(newRecipe);

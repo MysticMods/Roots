@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConditionItems implements Condition {
+public class ConditionItems implements ICondition {
 
   final private List<Ingredient> ingredients;
 

@@ -6,7 +6,7 @@ import net.minecraft.util.text.ITextComponent;
 
 import javax.annotation.Nullable;
 
-public interface Condition {
+public interface ICondition {
 
   default boolean check (TileEntityBonfire tile, @Nullable EntityPlayer player) {
     if (!checkCondition(tile, player)) {
