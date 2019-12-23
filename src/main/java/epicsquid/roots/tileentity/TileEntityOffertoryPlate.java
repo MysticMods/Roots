@@ -119,11 +119,24 @@ public class TileEntityOffertoryPlate extends TileBase {
         inventory.setStackInSlot(0, ItemStack.EMPTY);
       }
     } else {
-      stack.shrink(1);
-      if (stack.getCount() == 0 || stack.isEmpty()) {
-        inventory.setStackInSlot(0, ItemStack.EMPTY);
+      if (stack.getItem().hasContainerItem(stack)) {
+        ItemStack container = stack.getItem().getContainerItem(stack);
+        if (stack.getMaxStackSize() != 1 && stack.getCount() > 0) {
+          stack.shrink(1);
+          inventory.setStackInSlot(0, stack);
+        } else {
+          inventory.setStackInSlot(0, ItemStack.EMPTY);
+          if (!world.isRemote) {
+            ItemUtil.spawnItem(world, getPos().up(), container);
+          }
+        }
       } else {
-        inventory.setStackInSlot(0, stack);
+        stack.shrink(1);
+        if (stack.getCount() == 0 || stack.isEmpty()) {
+          inventory.setStackInSlot(0, ItemStack.EMPTY);
+        } else {
+          inventory.setStackInSlot(0, stack);
+        }
       }
     }
   }
