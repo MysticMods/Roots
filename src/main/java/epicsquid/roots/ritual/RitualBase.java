@@ -114,6 +114,7 @@ public abstract class RitualBase {
   protected EntityRitualBase spawnEntity(World world, BlockPos pos, Class<? extends EntityRitualBase> entity) {
     List<EntityRitualBase> pastRituals = world
         .getEntitiesWithinAABB(entity, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 100, pos.getZ() + 1));
+    pastRituals.removeIf(o -> !o.getClass().equals(entity));
     if (pastRituals.size() == 0 && !world.isRemote) {
       EntityRitualBase ritual = null;
       try {
@@ -129,9 +130,12 @@ public abstract class RitualBase {
       world.spawnEntity(ritual);
       return ritual;
     } else if (pastRituals.size() > 0) {
+
       for (EntityRitualBase ritual : pastRituals) {
-        ritual.getDataManager().set(ritual.getLifetime(), duration + 20);
-        ritual.getDataManager().setDirty(ritual.getLifetime());
+        if (ritual.getClass().equals(entity)) {
+          ritual.getDataManager().set(ritual.getLifetime(), duration + 20);
+          ritual.getDataManager().setDirty(ritual.getLifetime());
+        }
       }
       return pastRituals.get(0);
     }

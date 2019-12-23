@@ -53,7 +53,8 @@ public class ModEntities {
         EntityRitualTransmutation.class,
         EntityRitualWardingProtection.class,
         EntityRitualWildGrowth.class,
-        EntityRitualWindwall.class
+        EntityRitualWindwall.class,
+        EntityRitualSummonCreatures.class
     );
 
     ritualClasses.forEach(LibRegistry::registerEntity);
