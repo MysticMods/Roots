@@ -71,6 +71,31 @@ public class ModRecipes {
   private static Map<ResourceLocation, BarkRecipe> barkRecipes = new HashMap<>();
   private static Map<ResourceLocation, FlowerRecipe> flowerRecipes = new HashMap<>();
 
+  public static void initSummonCreatureEntries () {
+    addSummonCreatureEntry("owl", EntityOwl.class, new OreIngredient("treeSapling"), new OreIngredient("treeLeaves"));
+    addSummonCreatureEntry("deer", EntityDeer.class, Ingredient.fromItem(ModItems.petals), Ingredient.fromItem(ModItems.bark_oak));
+    addSummonCreatureEntry("sprout", EntitySprout.class, Ingredient.fromItem(ModItems.bark_birch), Ingredients.AUBERGINE);
+    addSummonCreatureEntry("beetle", EntityBeetle.class, new OreIngredient("grass"), Ingredient.fromItem(Item.getItemFromBlock(Blocks.RED_FLOWER)));
+    addSummonCreatureEntry("frog", EntityFrog.class, new OreIngredient("grass"), Ingredient.fromItem(Items.CLAY_BALL));
+    addSummonCreatureEntry("fox", EntityFox.class, Ingredient.fromItem(ModItems.bark_spruce), Ingredient.fromItem(Items.REDSTONE));
+    addSummonCreatureEntry("wolf", EntityWolf.class, new OreIngredient("bone"), Ingredient.fromItem(Items.FLINT));
+    addSummonCreatureEntry("squid", EntitySquid.class, new OreIngredient("sugarcane"), new OreIngredient("paper"));
+    addSummonCreatureEntry("sheep", EntitySheep.class, Ingredient.fromItem(Items.WHEAT_SEEDS), new OreIngredient("wool"));
+    addSummonCreatureEntry("rabbit", EntityRabbit.class, new OreIngredient("cropCarrot"), new OreIngredient("string"));
+    addSummonCreatureEntry("polar_bear", EntityPolarBear.class, new OreIngredient("stone"), Ingredient.fromItem(Items.SNOWBALL));
+    addSummonCreatureEntry("pig", EntityPig.class, Ingredient.fromItem(Items.BEETROOT), Ingredient.fromItem(Item.getItemFromBlock(epicsquid.mysticalworld.init.ModBlocks.wet_mud_block)));
+    addSummonCreatureEntry("mooshroom", EntityMooshroom.class, new OreIngredient("cropWheat"), Ingredient.fromItem(Item.getItemFromBlock(Blocks.RED_MUSHROOM)));
+    addSummonCreatureEntry("cow", EntityCow.class, new OreIngredient("cropWheat"), Ingredient.fromItem(Items.DYE));
+    addSummonCreatureEntry("horse", EntityHorse.class, new OreIngredient("cropWheat"), Ingredient.fromItem(Items.APPLE));
+    addSummonCreatureEntry("llama", EntityLlama.class, new OreIngredient("cropWheat"), new OreIngredient("wool"));
+    addSummonCreatureEntry("bat", EntityBat.class, new OreIngredient("treeSapling"), Ingredient.fromItem(Item.getItemFromBlock(Blocks.WEB)));
+    addSummonCreatureEntry("chicken", EntityChicken.class, new OreIngredient("egg"), Ingredient.fromItem(Items.WHEAT_SEEDS));
+    addSummonCreatureEntry("donkey", EntityDonkey.class, new OreIngredient("cropCarrot"), new OreIngredient("chestWood"));
+    addSummonCreatureEntry("parrot", EntityParrot.class, Ingredient.fromItem(ModItems.bark_jungle), Ingredient.fromItem(Items.BEETROOT_SEEDS));
+    addSummonCreatureEntry("ocelot", EntityOcelot.class, new OreIngredient("grass"), Ingredient.fromItem(Items.SUGAR));
+    addSummonCreatureEntry("mule", EntityMule.class, new OreIngredient("cropWheat"), Ingredient.fromItem(Items.COAL));
+  }
+
   public static SummonCreatureRecipe addSummonCreatureEntry(String name, Class<? extends EntityLivingBase> clazz, Ingredient... ingredients) {
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
     SummonCreatureRecipe recipe = new SummonCreatureRecipe(rl, clazz, ingredients);
@@ -90,8 +115,12 @@ public class ModRecipes {
     } else if (summonCreatureClasses.containsKey(recipe.getClazz())) {
       throw new IllegalArgumentException("Class " + recipe.getClazz().toString() + " already contained within the Summon Creatures registry.");
     }
-    if (findSummonCreatureEntry(recipe.getIngredients().stream().map(Ingredient::getMatchingStacks).map(o -> o[0]).collect(Collectors.toList())) != null) {
-      throw new IllegalArgumentException("Combination of ingredients for recipe (" + rl.toString() + "/" + recipe.getClazz().toString() + ") is already in use!");
+    try {
+      if (findSummonCreatureEntry(recipe.getIngredients().stream().map(Ingredient::getMatchingStacks).map(o -> o[0]).collect(Collectors.toList())) != null) {
+        throw new IllegalArgumentException("Combination of ingredients for recipe (" + rl.toString() + "/" + recipe.getClazz().toString() + ") is already in use!");
+      }
+    } catch (ArrayIndexOutOfBoundsException e)  {
+      throw new IllegalArgumentException("Invalid ingredient for recipe " + rl.toString());
     }
     summonCreatureRecipes.put(rl, recipe);
     summonCreatureClasses.put(recipe.getClazz(), recipe);
@@ -1007,6 +1036,7 @@ public class ModRecipes {
     initVanillaBarkRecipes();
     initModdedBarkRecipes();
     initFlowerRecipes();
+    initSummonCreatureEntries();
 
     GameRegistry.addSmelting(ModItems.flour, new ItemStack(Items.BREAD), 0.125f);
     GameRegistry.addSmelting(ModItems.seeds, new ItemStack(ModItems.cooked_seeds), 0.05f);
