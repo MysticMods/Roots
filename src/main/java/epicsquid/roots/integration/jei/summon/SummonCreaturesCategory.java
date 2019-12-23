@@ -67,5 +67,25 @@ public class SummonCreaturesCategory implements IRecipeCategory<SummonCreaturesW
     if (data.size() >= 5) {
       group.set(4, data.get(4));
     }
+    group.init(5, true, 3, 63);
+    if (data.size() >= 6) {
+      group.set(5, data.get(5));
+    }
+    group.init(6, true, 24, 63);
+    if (data.size() >= 7) {
+      group.set(6, data.get(6));
+    }
+    group.init(7, true, 45, 3);
+    if (data.size() >= 8) {
+      group.set(7, data.get(7));
+    }
+    group.init(8, true, 66, 3);
+    if (data.size() >= 9) {
+      group.set(8, data.get(8));
+    }
+    group.init(9, true, 87, 3);
+    if (data.size() >= 10) {
+      group.set(9, data.get(9));
+    }
   }
 }
