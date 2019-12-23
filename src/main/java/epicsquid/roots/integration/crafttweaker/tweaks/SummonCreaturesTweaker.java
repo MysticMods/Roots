@@ -58,6 +58,7 @@ public class SummonCreaturesTweaker {
           @ZenDocArg(arg = "entity", info = "the entity to remove life essence for")
       }
   )
+  @ZenMethod
   public static void removeLifeEssence(IEntityDefinition entity) {
     CraftTweaker.LATE_ACTIONS.add(new RemoveLifeEssence((EntityEntry) entity.getInternal()));
   }
@@ -68,6 +69,7 @@ public class SummonCreaturesTweaker {
           @ZenDocArg(arg = "entity", info = "the entity to add life essence for")
       }
   )
+  @ZenMethod
   public static void addLifeEssence(IEntityDefinition entity) {
     CraftTweaker.LATE_ACTIONS.add(new AddLifeEssence((EntityEntry) entity.getInternal()));
   }
@@ -75,6 +77,7 @@ public class SummonCreaturesTweaker {
   @ZenDocMethod(
       order = 5
   )
+  @ZenMethod
   public static void clearLifeEssence() {
     CraftTweaker.LATE_ACTIONS.add(new ClearLifeEssence());
   }

@@ -34,7 +34,7 @@ public class RunicShearsEntityWrapper implements IRecipeWrapper {
     EntityRenderHelper.drawEntityOnScreen(30, 70, scale, 38 - mouseX, 70 - mouseY, entity);
   }
 
-  private float getScale(EntityLivingBase entityLivingBase) {
+  public static float getScale(EntityLivingBase entityLivingBase) {
     float width = entityLivingBase.width;
     float height = entityLivingBase.height;
     if (width <= height) {

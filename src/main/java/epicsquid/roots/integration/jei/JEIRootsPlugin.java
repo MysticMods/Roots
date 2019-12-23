@@ -92,6 +92,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(BarkRecipe.class, BarkRecipeWrapper::new, BARK_CARVING);
     registry.handleRecipes(MossRecipe.class, MossRecipeWrapper::new, TERRA_MOSS);
     registry.handleRecipes(SummonCreatureRecipe.class, SummonCreaturesWrapper::new, SUMMON_CREATURES);
+    registry.handleRecipes(SummonCreatureIntermediate.class, SummonCreaturesWrapper::new, SUMMON_CREATURES);
 
     Collection<SpellBase> spells = SpellRegistry.spellRegistry.values();
 
@@ -110,6 +111,11 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipes(spells.stream().filter(SpellBase::hasModules).collect(Collectors.toList()), SPELL_MODIFIERS);
     registry.addRecipes(ModRecipes.getBarkRecipes(), BARK_CARVING);
     registry.addRecipes(MossRecipe.getRecipeList(), TERRA_MOSS);
+    registry.addRecipes(ModRecipes.getSummonCreatureEntries(), SUMMON_CREATURES);
+
+    ModRecipes.generateLifeEssence();
+    List<SummonCreatureIntermediate> summonGenerated = ModRecipes.getLifeEssenceList().stream().map(SummonCreatureIntermediate::create).collect(Collectors.toList());
+    registry.addRecipes(summonGenerated, SUMMON_CREATURES);
 
     registry.addRecipeCatalyst(new ItemStack(ModItems.runic_shears), RUNIC_SHEARS);
     registry.addRecipeCatalyst(new ItemStack(ModItems.runic_shears), RUNIC_SHEARS_ENTITY);
