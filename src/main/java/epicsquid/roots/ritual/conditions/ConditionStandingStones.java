@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class ConditionStandingStones implements Condition {
+public class ConditionStandingStones implements ICondition {
 
   private final int height;
   private final int amount;

@@ -1,50 +1,102 @@
 package epicsquid.roots.util;
 
+import com.google.common.collect.Sets;
+import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.tileentity.TileEntityOffertoryPlate;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import javax.annotation.Nullable;
+import java.util.*;
 
 public class RitualUtil {
 
   private static Random rand = new Random();
 
-  public static BlockPos getRandomPosRadialXZ(BlockPos centerPos, int xRadius, int zRadius)
-  {
-    BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(centerPos.getX() -xRadius, centerPos.getY(), centerPos.getZ() -zRadius);
+  public static BlockPos getRandomPosRadialXZ(BlockPos centerPos, int xRadius, int zRadius) {
+    BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(centerPos.getX() - xRadius, centerPos.getY(), centerPos.getZ() - zRadius);
 
     return pos.add(rand.nextInt(xRadius * 2), 0, rand.nextInt(zRadius * 2));
   }
 
-  public static BlockPos getRandomPosRadialXYZ(BlockPos centerPos, int xRadius, int yRadius, int zRadius)
-  {
-    BlockPos pos = new BlockPos(centerPos.getX() -xRadius, centerPos.getY() -yRadius, centerPos.getZ() -zRadius);
+  public static BlockPos getRandomPosRadialXYZ(BlockPos centerPos, int xRadius, int yRadius, int zRadius) {
+    BlockPos pos = new BlockPos(centerPos.getX() - xRadius, centerPos.getY() - yRadius, centerPos.getZ() - zRadius);
 
     pos = pos.add(rand.nextInt(xRadius * 2), rand.nextInt(yRadius * 2), rand.nextInt(zRadius * 2));
 
-    //Debug Print
-    //System.out.println("Pos: " +  pos.getX() +  " | " + pos.getY() + " | " + pos.getZ());
     return pos;
   }
 
-  public static BlockPos getRandomPosRadialXYZ(World world, BlockPos centerPos, int xRadius, int yRadius, int zRadius, Block... whitelistedBlocks)
-  {
-    BlockPos pos = new BlockPos(centerPos.getX() -xRadius, centerPos.getY() -yRadius, centerPos.getZ() -zRadius);
+  @Nullable
+  public static BlockPos getRandomPosRadialXYZ(World world, BlockPos centerPos, int xRadius, int yRadius, int zRadius, Block... whitelistedBlocks) {
+    BlockPos pos = new BlockPos(centerPos.getX() - xRadius, centerPos.getY() - yRadius, centerPos.getZ() - zRadius);
 
-    pos = pos.add(
-            xRadius > 0 ? rand.nextInt(xRadius * 2) : 0,
-            yRadius > 0 ? rand.nextInt(yRadius * 2) : 0,
-            zRadius > 0 ? rand.nextInt(zRadius * 2) : 0);
+    Set<Block> blocks = Sets.newHashSet(whitelistedBlocks);
 
-    //System.out.println("Pos: " +  pos.getX() +  " | " + pos.getY() + " | " + pos.getZ());
-    List<Block> blocks = Arrays.asList(whitelistedBlocks);
+    for (int i = 0; i < xRadius * yRadius * zRadius; i++) {
+      pos = pos.add(
+          xRadius > 0 ? rand.nextInt(xRadius * 2) : 0,
+          yRadius > 0 ? rand.nextInt(yRadius * 2) : 0,
+          zRadius > 0 ? rand.nextInt(zRadius * 2) : 0);
 
-    if (blocks.contains(world.getBlockState(pos)))
-      return pos;
+      IBlockState state = world.getBlockState(pos);
+
+      if (blocks.contains(state.getBlock())) {
+        return pos;
+      }
+    }
 
     return null;
   }
+
+  public static AxisAlignedBB BOUNDING = new AxisAlignedBB(-6, -6, -6, 6, 6, 6);
+
+  public static List<TileEntityOffertoryPlate> getNearbyOfferingPlates(World world, BlockPos pos) {
+    AxisAlignedBB bounds = BOUNDING.offset(pos);
+    BlockPos max = max(bounds);
+    BlockPos min = min(bounds);
+
+    List<TileEntityOffertoryPlate> result = new ArrayList<>();
+
+    for (BlockPos p : BlockPos.getAllInBoxMutable(max, min)) {
+      if (world.isAirBlock(p)) {
+        continue;
+      }
+
+      IBlockState state = world.getBlockState(p);
+      if (state.getBlock() == ModBlocks.offertory_plate) {
+        TileEntity te = world.getTileEntity(p);
+        if (te instanceof TileEntityOffertoryPlate) {
+          result.add((TileEntityOffertoryPlate) te);
+        }
+      }
+    }
+
+    return result;
+  }
+
+  public static List<ItemStack> getItemsFromNearbyPlates(List<TileEntityOffertoryPlate> plates) {
+    List<ItemStack> stacks = new ArrayList<>();
+    for (TileEntityOffertoryPlate plate : plates) {
+      ItemStack stack = plate.getHeldItem();
+      if (!stack.isEmpty()) {
+        stacks.add(stack);
+      }
+    }
+    return stacks;
+  }
+
+  public static BlockPos min(AxisAlignedBB box) {
+    return new BlockPos(box.minX, box.minY, box.minZ);
+  }
+
+  public static BlockPos max(AxisAlignedBB box) {
+    return new BlockPos(box.maxX, box.maxY, box.maxZ);
+  }
+
 }

@@ -3,6 +3,7 @@ package epicsquid.roots.tileentity;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.init.ModItems;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -108,16 +109,22 @@ public class TileEntityOffertoryPlate extends TileBase {
   }
 
   public ItemStack getHeldItem() {
-    return this.inventory.getStackInSlot(0);
+    return this.inventory.getStackInSlot(0).copy();
   }
 
   public void removeItem() {
     ItemStack stack = this.inventory.getStackInSlot(0);
-    stack.setCount(stack.getCount() - 1);
-    if (stack.getCount() == 0) {
-      inventory.setStackInSlot(0, ItemStack.EMPTY);
+    if (stack.getItem() == ModItems.life_essence) {
+      if (stack.attemptDamageItem(1, Util.rand, null)) {
+        inventory.setStackInSlot(0, ItemStack.EMPTY);
+      }
     } else {
-      inventory.setStackInSlot(0, stack);
+      stack.shrink(1);
+      if (stack.getCount() == 0 || stack.isEmpty()) {
+        inventory.setStackInSlot(0, ItemStack.EMPTY);
+      } else {
+        inventory.setStackInSlot(0, stack);
+      }
     }
   }
 

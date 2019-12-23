@@ -166,6 +166,7 @@ roots.ritual.condition.standing_stones.types=%d of %d-high stones
 roots.ritual.condition.trees=Failed to start ritual: invalid trees, requires %s.
 roots.ritual.condition.trees.types=%d of %s.
 roots.ritual.condition.invalid=Failed to start ritual: unknown reason
+roots.ritual.condition.invalid_summon=Failed to start ritual: no valid combination of summoning items found on nearby offering plates.
 
 roots.keybinds.group=Roots
 roots.keybinds.pouch=Open Pouch

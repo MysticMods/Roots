@@ -3,15 +3,13 @@ package epicsquid.roots.ritual;
 import epicsquid.roots.Roots;
 import epicsquid.roots.block.BlockBonfire;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
-import epicsquid.roots.entity.ritual.IRitualEntity;
-import epicsquid.roots.ritual.conditions.Condition;
 import epicsquid.roots.ritual.conditions.ConditionItems;
+import epicsquid.roots.ritual.conditions.ICondition;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import epicsquid.roots.util.types.PropertyTable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -29,8 +27,7 @@ public abstract class RitualBase {
 
   protected PropertyTable properties = new PropertyTable();
   public Class<? extends EntityRitualBase> entityClass;
-
-  private List<Condition> conditions = new ArrayList<>();
+  private List<ICondition> conditions = new ArrayList<>();
   private Item icon;
   private String name;
   private TextFormatting color;
@@ -47,11 +44,11 @@ public abstract class RitualBase {
     this.duration = 0;
   }
 
-  public Class<? extends EntityRitualBase> getEntityClass () {
+  public Class<? extends EntityRitualBase> getEntityClass() {
     return this.entityClass;
   }
 
-  public void setEntityClass (Class<? extends EntityRitualBase> entityClass) {
+  public void setEntityClass(Class<? extends EntityRitualBase> entityClass) {
     this.entityClass = entityClass;
   }
 
@@ -83,17 +80,17 @@ public abstract class RitualBase {
     return disabled;
   }
 
-  public List<Condition> getConditions() {
+  public List<ICondition> getConditions() {
     return this.conditions;
   }
 
-  public void addCondition(Condition condition) {
+  public void addCondition(ICondition condition) {
     this.conditions.add(condition);
   }
 
   public boolean isRitualRecipe(TileEntityBonfire tileEntityBonfire, @Nullable EntityPlayer player) {
     if (isDisabled()) return false;
-    for (Condition condition : this.conditions) {
+    for (ICondition condition : this.conditions) {
       if (condition instanceof ConditionItems) {
         ConditionItems conditionItems = (ConditionItems) condition;
         return conditionItems.checkCondition(tileEntityBonfire, player);
@@ -109,7 +106,7 @@ public abstract class RitualBase {
     }
 
     boolean success = true;
-    for (Condition condition : this.conditions) {
+    for (ICondition condition : this.conditions) {
       if (!condition.check(tileEntityBonfire, player)) {
         success = false;
       }
@@ -117,10 +114,12 @@ public abstract class RitualBase {
     return success;
   }
 
+  @Nullable
   public EntityRitualBase doEffect(World world, BlockPos pos, @Nullable EntityPlayer player) {
     return this.spawnEntity(world, pos, getEntityClass(), player);
   }
 
+  @Nullable
   protected EntityRitualBase spawnEntity(World world, BlockPos pos, Class<? extends EntityRitualBase> entity, @Nullable EntityPlayer player) {
     List<EntityRitualBase> pastRituals = world
         .getEntitiesWithinAABB(entity, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 100, pos.getZ() + 1));
@@ -148,6 +147,7 @@ public abstract class RitualBase {
         // TODO:
         // return ritual; ???
       }
+      return pastRituals.get(0);
     }
     return null;
   }
@@ -160,25 +160,11 @@ public abstract class RitualBase {
     return name;
   }
 
-  public abstract void init ();
-
-  @SuppressWarnings("unchecked")
-  public List<ItemStack> getRecipe() {
-    for (Condition condition : this.conditions) {
-      if (condition instanceof ConditionItems) {
-        ConditionItems conditionItems = (ConditionItems) condition;
-        ItemStack[] stacks = conditionItems.getIngredients().stream()
-            .map(ingredient -> ingredient.getMatchingStacks()[0])
-            .toArray(ItemStack[]::new);
-        return Arrays.asList(stacks);
-      }
-    }
-    return new ArrayList<>();
-  }
+  public abstract void init();
 
   @SuppressWarnings("unchecked")
   public List<Ingredient> getIngredients() {
-    for (Condition condition : this.conditions) {
+    for (ICondition condition : this.conditions) {
       if (condition instanceof ConditionItems) {
         return ((ConditionItems) condition).getIngredients();
       }
@@ -186,14 +172,14 @@ public abstract class RitualBase {
     return Collections.EMPTY_LIST;
   }
 
-  public void finalise () {
+  public void finalise() {
     doFinalise();
     validateProperties();
   }
 
   public abstract void doFinalise();
 
-  public void validateProperties () {
+  public void validateProperties() {
     List<String> values = properties.finalise();
     if (!values.isEmpty()) {
       StringJoiner join = new StringJoiner(",");
@@ -202,7 +188,7 @@ public abstract class RitualBase {
     }
   }
 
-  public boolean finalised () {
+  public boolean finalised() {
     return finalised;
   }
 

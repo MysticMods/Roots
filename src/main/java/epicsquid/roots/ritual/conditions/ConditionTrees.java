@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class ConditionTrees implements Condition {
+public class ConditionTrees implements ICondition {
 
   private final BlockPlanks.EnumType treeType;
   private final int amount;
