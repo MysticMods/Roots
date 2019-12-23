@@ -13,7 +13,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 import javax.annotation.Nullable;
 
-public class ConditionItems implements Condition {
+public class ConditionItems implements ICondition {
 
   final private List<Ingredient> ingredients;
 

@@ -39,6 +39,7 @@ import net.minecraftforge.oredict.OreIngredient;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @SuppressWarnings({"unused", "WeakerAccess", "UnusedReturnValue"})
 public class ModRecipes {
@@ -48,6 +49,10 @@ public class ModRecipes {
   private static Map<ResourceLocation, AnimalHarvestFishRecipe> fishRecipes = new HashMap<>();
   private static ObjectOpenHashSet<Class<? extends Entity>> harvestClasses = null;
   private static Map<ResourceLocation, TransmutationRecipe> transmutationRecipes = new HashMap<>();
+
+  // TODO: REGISTRIES FUCKING REGISTRIES PLEASE OH GOD REGISTRIES
+  private static Map<ResourceLocation, SummonCreatureRecipe> summonCreatureRecipes = new HashMap<>();
+  private static Map<Class<? extends Entity>, SummonCreatureRecipe> summonCreatureClasses = new HashMap<>();
 
   // TODO: ResourceLocation-based
   private static List<MortarRecipe> mortarRecipes = new ArrayList<>();
@@ -65,6 +70,72 @@ public class ModRecipes {
   private static Map<Class<? extends Entity>, PacifistEntry> pacifistClasses = new HashMap<>();
   private static Map<ResourceLocation, BarkRecipe> barkRecipes = new HashMap<>();
   private static Map<ResourceLocation, FlowerRecipe> flowerRecipes = new HashMap<>();
+
+  public static SummonCreatureRecipe addSummonCreatureEntry (String name, Class<? extends Entity> clazz, Ingredient ... ingredients) {
+    ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
+    SummonCreatureRecipe recipe = new SummonCreatureRecipe(rl, clazz, ingredients);
+    return addSummonCreatureEntry(recipe);
+  }
+
+  public static SummonCreatureRecipe addSummonCreatureEntry (SummonCreatureRecipe recipe) {
+    ResourceLocation rl = recipe.getRegistryName();
+    if (summonCreatureRecipes.containsKey(rl)) {
+      throw new IllegalArgumentException("Resource location " + rl.toString() + " already contained within the Summon Creatures registry.");
+    } else if (summonCreatureClasses.containsKey(recipe.getClazz())) {
+      throw new IllegalArgumentException("Class " + recipe.getClazz().toString() + " already contained within the Summon Creatures registry.");
+    }
+    if (findSummonCreatureEntry(recipe.getIngredients().stream().map(Ingredient::getMatchingStacks).map(o -> o[0]).collect(Collectors.toList())) != null) {
+      throw new IllegalArgumentException("Combination of ingredients for recipe (" + rl.toString() + "/" + recipe.getClazz().toString() + ") is already in use!");
+    }
+    summonCreatureRecipes.put(rl, recipe);
+    summonCreatureClasses.put(recipe.getClazz(), recipe);
+    return recipe;
+  }
+
+  @Nullable
+  public static SummonCreatureRecipe getSummonCreatureEntry (String name) {
+    ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
+    return getSummonCreatureEntry(rl);
+  }
+
+  @Nullable
+  public static SummonCreatureRecipe getSummonCreatureEntry (ResourceLocation location) {
+    return summonCreatureRecipes.get(location);
+  }
+
+  @Nullable
+  public static SummonCreatureRecipe getSummonCreatureEntry (Class<? extends Entity> clazz) {
+    return summonCreatureClasses.get(clazz);
+  }
+
+  public static Collection<SummonCreatureRecipe> getSummonCreatureEntries () {
+    return summonCreatureRecipes.values();
+  }
+
+  @Nullable
+  public static SummonCreatureRecipe findSummonCreatureEntry (List<ItemStack> ingredients) {
+    for (SummonCreatureRecipe recipe : getSummonCreatureEntries()) {
+      if (recipe.matches(ingredients)) {
+        return recipe;
+      }
+    }
+
+    return null;
+  }
+
+  public static void removeSummonCreatureEntry (String name) {
+    ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
+    removeSummonCreatureEntry(rl);
+  }
+
+  public static void removeSummonCreatureEntry (ResourceLocation location) {
+    SummonCreatureRecipe recipe = summonCreatureRecipes.get(location);
+    if (recipe == null) {
+      return;
+    }
+    summonCreatureRecipes.remove(location);
+    summonCreatureClasses.remove(recipe.getClazz());
+  }
 
   public static PacifistEntry addPacifistEntry(String name, Class<? extends Entity> clazz) {
     PacifistEntry entry = new PacifistEntry(clazz, name);

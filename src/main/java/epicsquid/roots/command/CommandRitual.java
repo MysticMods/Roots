@@ -1,7 +1,7 @@
 package epicsquid.roots.command;
 
 import epicsquid.roots.init.ModBlocks;
-import epicsquid.roots.ritual.conditions.Condition;
+import epicsquid.roots.ritual.conditions.ICondition;
 import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.ritual.conditions.ConditionTrees;
 import epicsquid.roots.ritual.RitualBase;
@@ -98,7 +98,7 @@ public class CommandRitual extends CommandBase {
       }
 
       int runePos = 0;
-      for (Condition condition : ritual.getConditions()) {
+      for (ICondition condition : ritual.getConditions()) {
         if (condition instanceof ConditionStandingStones) {
           ConditionStandingStones stones = (ConditionStandingStones) condition;
           for (i = 0; i < stones.getAmount(); i++) {

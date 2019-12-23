@@ -10,7 +10,7 @@ import java.util.Random;
 
 import epicsquid.roots.block.BlockBonfire;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
-import epicsquid.roots.ritual.conditions.Condition;
+import epicsquid.roots.ritual.conditions.ICondition;
 import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.block.state.IBlockState;
@@ -29,7 +29,7 @@ public abstract class RitualBase {
   protected static int OFFERTORY_RADIUS = 6;
   protected static Random random = new Random();
 
-  private List<Condition> conditions = new ArrayList<>();
+  private List<ICondition> conditions = new ArrayList<>();
 
   private Item icon;
   private String name;
@@ -73,17 +73,17 @@ public abstract class RitualBase {
     return disabled;
   }
 
-  public List<Condition> getConditions() {
+  public List<ICondition> getConditions() {
     return this.conditions;
   }
 
-  public void addCondition(Condition condition) {
+  public void addCondition(ICondition condition) {
     this.conditions.add(condition);
   }
 
   public boolean isRitualRecipe(TileEntityBonfire tileEntityBonfire, @Nullable EntityPlayer player) {
     if (isDisabled()) return false;
-    for (Condition condition : this.conditions) {
+    for (ICondition condition : this.conditions) {
       if (condition instanceof ConditionItems) {
         ConditionItems conditionItems = (ConditionItems) condition;
         return conditionItems.checkCondition(tileEntityBonfire, player);
@@ -99,7 +99,7 @@ public abstract class RitualBase {
     }
 
     boolean success = true;
-    for (Condition condition : this.conditions) {
+    for (ICondition condition : this.conditions) {
       if (!condition.check(tileEntityBonfire, player)) {
         success = false;
       }
@@ -107,8 +107,10 @@ public abstract class RitualBase {
     return success;
   }
 
+  @Nullable
   public abstract EntityRitualBase doEffect(World world, BlockPos pos);
 
+  @Nullable
   protected EntityRitualBase spawnEntity(World world, BlockPos pos, Class<? extends EntityRitualBase> entity) {
     List<EntityRitualBase> pastRituals = world
         .getEntitiesWithinAABB(entity, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 100, pos.getZ() + 1));
@@ -131,6 +133,7 @@ public abstract class RitualBase {
         ritual.getDataManager().set(ritual.getLifetime(), duration + 20);
         ritual.getDataManager().setDirty(ritual.getLifetime());
       }
+      return pastRituals.get(0);
     }
     return null;
   }
@@ -144,22 +147,8 @@ public abstract class RitualBase {
   }
 
   @SuppressWarnings("unchecked")
-  public List<ItemStack> getRecipe() {
-    for (Condition condition : this.conditions) {
-      if (condition instanceof ConditionItems) {
-        ConditionItems conditionItems = (ConditionItems) condition;
-        ItemStack[] stacks = conditionItems.getIngredients().stream()
-            .map(ingredient -> ingredient.getMatchingStacks()[0])
-            .toArray(ItemStack[]::new);
-        return Arrays.asList(stacks);
-      }
-    }
-    return new ArrayList<>();
-  }
-
-  @SuppressWarnings("unchecked")
   public List<Ingredient> getIngredients() {
-    for (Condition condition : this.conditions) {
+    for (ICondition condition : this.conditions) {
       if (condition instanceof ConditionItems) {
         return ((ConditionItems) condition).getIngredients();
       }

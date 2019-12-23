@@ -51,7 +51,7 @@ public class RitualRegistry {
     addRitual(ritual_purity = new RitualPurity("ritual_purity", 1200, RitualConfig.disableRitualCategory.disablePurity));
     addRitual(ritual_frost = new RitualFrostLands("ritual_frost_lands", 6400, RitualConfig.disableRitualCategory.disableFrostLands));
     addRitual(ritual_animal_harvest = new RitualAnimalHarvest("ritual_animal_harvest", 3200, RitualConfig.disableRitualCategory.disableAnimalHarvest));
-    addRitual(ritual_summoning = new RitualSummonCreatures("ritual_summon_creatures", 0, RitualConfig.disableRitualCategory.disableSummonCreatures));
+    addRitual(ritual_summoning = new RitualSummonCreatures("ritual_summon_creatures", 200, RitualConfig.disableRitualCategory.disableSummonCreatures));
     addRitual(ritual_wild_growth = new RitualWildGrowth("ritual_wild_growth", 300, RitualConfig.disableRitualCategory.disableWildGrowth));
     addRitual(ritual_overgrowth = new RitualOvergrowth("ritual_overgrowth", 4500, RitualConfig.disableRitualCategory.disableOvergrowth));
     addRitual(ritual_flower_growth = new RitualFlowerGrowth("ritual_flower_growth", 3200, RitualConfig.disableRitualCategory.disableFlowerGrowth));
