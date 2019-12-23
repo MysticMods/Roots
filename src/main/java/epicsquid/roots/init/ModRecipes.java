@@ -53,6 +53,7 @@ public class ModRecipes {
   // TODO: REGISTRIES FUCKING REGISTRIES PLEASE OH GOD REGISTRIES
   private static Map<ResourceLocation, SummonCreatureRecipe> summonCreatureRecipes = new HashMap<>();
   private static Map<Class<? extends Entity>, SummonCreatureRecipe> summonCreatureClasses = new HashMap<>();
+  private static Set<Class<? extends Entity>> lifeEssenceBlacklist = new HashSet<>();
 
   // TODO: ResourceLocation-based
   private static List<MortarRecipe> mortarRecipes = new ArrayList<>();
@@ -121,6 +122,25 @@ public class ModRecipes {
     }
 
     return null;
+  }
+
+  public static void blacklistLifeEssenceClass (Class<? extends Entity> clzz) {
+    lifeEssenceBlacklist.add(clzz);
+  }
+
+  public static boolean isLifeEssenceBlacklisted (Class<? extends Entity> clzz) {
+    return lifeEssenceBlacklist.contains(clzz);
+  }
+
+  public static boolean isLifeEssenceBlacklisted (Entity entity) {
+    return isLifeEssenceBlacklisted(entity.getClass());
+  }
+
+  public static void removeSummonCreatureEntry (Class<? extends Entity> clazz) {
+    SummonCreatureRecipe recipe = summonCreatureClasses.remove(clazz);
+    if (recipe != null) {
+      summonCreatureRecipes.remove(recipe.getRegistryName());
+    }
   }
 
   public static void removeSummonCreatureEntry (String name) {
