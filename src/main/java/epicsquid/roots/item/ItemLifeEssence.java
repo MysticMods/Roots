@@ -2,14 +2,20 @@ package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemBase;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class ItemLifeEssence extends ItemBase {
   public ItemLifeEssence(@Nonnull String name) {
@@ -50,5 +56,14 @@ public class ItemLifeEssence extends ItemBase {
     }
 
     return null;
+  }
+
+  @Override
+  @SideOnly(Side.CLIENT)
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+    super.addInformation(stack, worldIn, tooltip, flagIn);
+
+    tooltip.add("");
+    tooltip.add(TextFormatting.AQUA + I18n.format("roots.tooltip.life_essence"));
   }
 }
