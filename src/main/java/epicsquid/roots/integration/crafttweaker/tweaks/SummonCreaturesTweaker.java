@@ -159,7 +159,12 @@ public class SummonCreaturesTweaker {
 
     @Override
     public void apply() {
-      ModRecipes.addSummonCreatureEntry(entry.getName(), (Class<? extends EntityLivingBase>) entry.getEntityClass(), ingredients);
+      Class<? extends EntityLivingBase> elb = (Class<? extends EntityLivingBase>) entry.getEntityClass();
+      if (ModRecipes.getSummonCreatureEntry(elb) != null) {
+        CraftTweakerAPI.logError("Summon Creature Recipe already exists for entity: " + entry.getName());
+        return;
+      }
+      ModRecipes.addSummonCreatureEntry(entry.getName(), elb, ingredients);
     }
 
     @Override
