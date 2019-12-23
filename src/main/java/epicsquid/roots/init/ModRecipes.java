@@ -151,11 +151,15 @@ public class ModRecipes {
     lifeEssenceList.clear();
 
     if (!lifeEssenceCleared) {
-      lifeEssenceList.retainAll(getAnimalHarvestClasses());
+      lifeEssenceList.addAll(getAnimalHarvestClasses());
     }
 
-    lifeEssenceList.retainAll(lifeEssenceAdditions);
+    lifeEssenceList.addAll(lifeEssenceAdditions);
     lifeEssenceList.removeAll(lifeEssenceRemovals);
+  }
+
+  public static Set<Class<? extends EntityLivingBase>> getLifeEssenceList () {
+    return lifeEssenceList;
   }
 
   public static boolean isLifeEssenceAllowed(Class<? extends EntityLivingBase> clzz) {
