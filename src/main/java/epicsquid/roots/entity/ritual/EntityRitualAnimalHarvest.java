@@ -14,8 +14,8 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
@@ -39,8 +39,8 @@ import java.util.Random;
 
 public class EntityRitualAnimalHarvest extends EntityRitualBase {
 
-  private ObjectOpenHashSet<Class<? extends Entity>> harvestClasses;
   private RitualAnimalHarvest ritual;
+  private ObjectOpenHashSet<Class<? extends EntityLivingBase>> harvestClasses;
 
   public EntityRitualAnimalHarvest(World worldIn) {
     super(worldIn);

@@ -23,6 +23,8 @@ import epicsquid.roots.integration.jei.spell.SpellCostCategory;
 import epicsquid.roots.integration.jei.spell.SpellCostWrapper;
 import epicsquid.roots.integration.jei.spell.SpellModifierCategory;
 import epicsquid.roots.integration.jei.spell.SpellModifierWrapper;
+import epicsquid.roots.integration.jei.summon.SummonCreaturesCategory;
+import epicsquid.roots.integration.jei.summon.SummonCreaturesWrapper;
 import epicsquid.roots.recipe.*;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
@@ -55,6 +57,7 @@ public class JEIRootsPlugin implements IModPlugin {
   public static final String SPELL_COSTS = Roots.MODID + ".spell_costs";
   public static final String SPELL_MODIFIERS = Roots.MODID + ".spell_modifiers";
   public static final String TERRA_MOSS = Roots.MODID + ".terra_moss";
+  public static final String SUMMON_CREATURES = Roots.MODID + ".summon_creatures";
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registry) {
@@ -69,7 +72,8 @@ public class JEIRootsPlugin implements IModPlugin {
         new SpellModifierCategory(helper),
         new BarkRecipeCategory(helper),
         new MossRecipeCategory(helper),
-        new RunicShearsEntityCategory(helper)
+        new RunicShearsEntityCategory(helper),
+        new SummonCreaturesCategory(helper)
     );
   }
 
@@ -87,6 +91,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(SpellBase.class, SpellModifierWrapper::new, SPELL_MODIFIERS);
     registry.handleRecipes(BarkRecipe.class, BarkRecipeWrapper::new, BARK_CARVING);
     registry.handleRecipes(MossRecipe.class, MossRecipeWrapper::new, TERRA_MOSS);
+    registry.handleRecipes(SummonCreatureRecipe.class, SummonCreaturesWrapper::new, SUMMON_CREATURES);
 
     Collection<SpellBase> spells = SpellRegistry.spellRegistry.values();
 
@@ -108,6 +113,7 @@ public class JEIRootsPlugin implements IModPlugin {
 
     registry.addRecipeCatalyst(new ItemStack(ModItems.runic_shears), RUNIC_SHEARS);
     registry.addRecipeCatalyst(new ItemStack(ModItems.runic_shears), RUNIC_SHEARS_ENTITY);
+    registry.addRecipeCatalyst(new ItemStack(ModItems.ritual_summon_creatures), SUMMON_CREATURES);
 
     for (Item knife : ModItems.knives) {
       registry.addRecipeCatalyst(new ItemStack(knife), RUNIC_CARVING);
@@ -143,12 +149,9 @@ public class JEIRootsPlugin implements IModPlugin {
       }
     }
 
-    //registry.addIngredientInfo(new ItemStack(ModItems.fey_leather), VanillaTypes.ITEM, I18n.format("jei.roots.fey_leather.source.desc"));
-
     registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_log), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood.desc"));
     registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_sapling), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood_sapling.desc"));
     registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_leaves), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood_leaves.desc"));
-
 
     //Elemental Soil Crafting Information Panels
     String airSoilLocalized = new TextComponentTranslation("jei.roots.elemental_soil_air.desc").getFormattedText();
@@ -178,5 +181,7 @@ public class JEIRootsPlugin implements IModPlugin {
     };
 
     subtypeRegistry.registerSubtypeInterpreter(ModItems.spell_dust, spellInterpreter);
+
+    // TODO: Handler for Life Essence
   }
 }
