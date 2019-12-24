@@ -144,11 +144,11 @@ public class MessageRadianceBeamFX implements IMessage {
               alphaDist += 0.15;
 
               if (Util.rand.nextBoolean()) {
-                ParticleUtil.spawnParticleStar(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellRadiance.instance.getRed1() * 255.0f,
+                ParticleUtil.spawnParticleStarNoGravity(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellRadiance.instance.getRed1() * 255.0f,
                     SpellRadiance.instance.getGreen1() * 255.0f, SpellRadiance.instance.getBlue1() * 255.0f, 0.75f * (float) (1.0f - alphaDist / totalDist),
                     3f + 3f * Util.rand.nextFloat(), 14);
               } else {
-                ParticleUtil.spawnParticleStar(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellRadiance.instance.getRed2() * 255.0f,
+                ParticleUtil.spawnParticleStarNoGravity(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellRadiance.instance.getRed2() * 255.0f,
                     SpellRadiance.instance.getGreen2() * 255.0f, SpellRadiance.instance.getBlue2() * 255.0f, 0.75f * (float) (1.0f - alphaDist / totalDist),
                     3f + 3f * Util.rand.nextFloat(), 14);
               }

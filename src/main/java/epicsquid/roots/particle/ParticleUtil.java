@@ -13,12 +13,20 @@ public class ParticleUtil {
   public static Random random = new Random();
   public static int counter = 0;
 
-  public static void spawnParticleStar(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale,
-                                       int lifetime) {
+  public static void spawnParticleStar(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale, int lifetime) {
     if (MysticalLib.proxy instanceof ClientProxy) {
       counter += random.nextInt(3);
       if (counter % (Minecraft.getMinecraft().gameSettings.particleSetting == 0 ? 1 : 2 * Minecraft.getMinecraft().gameSettings.particleSetting) == 0) {
         ClientProxy.particleRenderer.spawnParticle(world, ModParticles.PARTICLE_STAR, x, y, z, vx, vy, vz, lifetime, r, g, b, a, scale, 1);
+      }
+    }
+  }
+
+  public static void spawnParticleStarNoGravity(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale, int lifetime) {
+    if (MysticalLib.proxy instanceof ClientProxy) {
+      counter += random.nextInt(3);
+      if (counter % (Minecraft.getMinecraft().gameSettings.particleSetting == 0 ? 1 : 2 * Minecraft.getMinecraft().gameSettings.particleSetting) == 0) {
+        ClientProxy.particleRenderer.spawnParticle(world, ModParticles.PARTICLE_STAR_NO_GRAVITY, x, y, z, vx, vy, vz, lifetime, r, g, b, a, scale, 1);
       }
     }
   }
