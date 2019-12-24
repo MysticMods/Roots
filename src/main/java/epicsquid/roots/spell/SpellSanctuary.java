@@ -7,12 +7,11 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageSanctuaryBurstFX;
 import epicsquid.roots.network.fx.MessageSanctuaryRingFX;
 import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.util.EntityUtil;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IProjectile;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -47,7 +46,7 @@ public class SpellSanctuary extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
         new ItemStack(Items.ARMOR_STAND),
         new ItemStack(ModItems.pereskia),
@@ -68,8 +67,8 @@ public class SpellSanctuary extends SpellBase {
 
     if (entities.size() > 0) {
       for (Entity e : entities) {
-        if (e.getUniqueID() != player.getUniqueID()) {
-          if ((e instanceof IProjectile || e instanceof IMob || e.isCreatureType(EnumCreatureType.MONSTER, false)) && (!entitiesBlackList.contains(EntityList.getKey(e).toString()))) {
+        if (e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
+          if ((e instanceof IProjectile || EntityUtil.isHostile(e)) && (!entitiesBlackList.contains(EntityList.getKey(e).toString()))) {
             if (Math.pow((e.posX - player.posX), 2) + Math.pow((e.posY - player.posY), 2) + Math.pow((e.posZ - player.posZ), 2) < 9.0f) {
               e.motionX = velocity * (e.posX - player.posX);
               e.motionY = velocity * (e.posY - player.posY);
@@ -98,31 +97,5 @@ public class SpellSanctuary extends SpellBase {
     this.radius_z = properties.getProperty(PROP_RADIUS_Z);
     this.velocity = properties.getProperty(PROP_VELOCITY);
   }
-
-
-// THIS IS THE RESULT OF MY WORK, I'M GONNA KEEP IT AS A TROPHY - Davoleo
-//  private boolean checkInterfaces(Entity e, Set<Class<?>> whiteList) {
-//    Class<?> class1 = e.getClass();
-//    for (Class<?> class2 : whiteList)
-//    {
-//      if (class1.isAssignableFrom(class2))
-//        return true;
-//    }
-//    return false;
-//  }
-//
-//  private static Set<Class<?>> readConfigWhitelist() {
-//
-//    for (String className : SpellConfig.spellFeaturesCategory.sanctuaryEntitiesBlacklist)
-//    {
-//      try {
-//        entitiesBlackList.add(Class.forName(className));
-//      }catch (ClassNotFoundException exception) {
-//        Roots.logger.error("ERROR: One of the Sanctuary whitelist classes does not exist!");
-//      }
-//    }
-//    return entitiesBlackList;
-//  }
-
 }
 
