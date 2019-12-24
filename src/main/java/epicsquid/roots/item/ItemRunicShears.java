@@ -174,7 +174,7 @@ public class ItemRunicShears extends ItemBase {
               if (!player.capabilities.isCreativeMode) {
                 itemstack.damageItem(1, entity);
               }
-              world.playSound(player, entity.getPosition(), SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
+              world.playSound(null, entity.getPosition(), SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
               IMessage packet = new MessageRunicShearsFX(entity);
               PacketHandler.sendToAllTracking(packet, entity);
               return true;
