@@ -68,7 +68,6 @@ public class JEIRootsPlugin implements IModPlugin {
   public void registerCategories(IRecipeCategoryRegistration registry) {
     IGuiHelper helper = registry.getJeiHelpers().getGuiHelper();
     registry.addRecipeCategories(new RunicShearsCategory(helper),
-        new RunicCarvingCategory(helper),
         new RitualCraftingCategory(helper),
         new MortarCategory(helper),
         new RitualCategory(helper),
@@ -86,7 +85,6 @@ public class JEIRootsPlugin implements IModPlugin {
   public void register(IModRegistry registry) {
     registry.handleRecipes(RunicShearRecipe.class, RunicShearsWrapper::new, RUNIC_SHEARS);
     registry.handleRecipes(RunicShearEntityRecipe.class, RunicShearsEntityWrapper::new, RUNIC_SHEARS_ENTITY);
-    registry.handleRecipes(RunicCarvingRecipe.class, RunicCarvingWrapper::new, RUNIC_CARVING);
     registry.handleRecipes(PyreCraftingRecipe.class, RitualCraftingWrapper::new, RITUAL_CRAFTING);
     registry.handleRecipes(MortarRecipe.class, MortarWrapper::new, MORTAR_AND_PESTLE);
     registry.handleRecipes(SpellBase.class, MortarWrapper::new, MORTAR_AND_PESTLE);
@@ -106,7 +104,6 @@ public class JEIRootsPlugin implements IModPlugin {
 
     registry.addRecipes(ModRecipes.getRunicShearRecipes().values(), RUNIC_SHEARS);
     registry.addRecipes(ModRecipes.getRunicShearEntityRecipes().values(), RUNIC_SHEARS_ENTITY);
-    registry.addRecipes(ModRecipes.getRunicCarvingRecipes(), RUNIC_CARVING);
     registry.addRecipes(ModRecipes.getPyreCraftingRecipes().values(), RITUAL_CRAFTING);
     registry.addRecipes(ModRecipes.getMortarRecipes(), MORTAR_AND_PESTLE);
     registry.addRecipes(spells, MORTAR_AND_PESTLE);
