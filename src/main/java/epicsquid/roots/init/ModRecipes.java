@@ -63,9 +63,6 @@ public class ModRecipes {
   private static Map<ResourceLocation, RunicShearEntityRecipe> runicShearEntityRecipes = new HashMap<>();
   private static Map<Class<? extends Entity>, RunicShearEntityRecipe> generatedEntityRecipes = null;
 
-  // TODO: Resource-location based
-  private static List<RunicCarvingRecipe> runicCarvingRecipes = new ArrayList<>();
-
   private static Map<ResourceLocation, PacifistEntry> pacifistEntities = new HashMap<>();
   private static Map<Class<? extends Entity>, PacifistEntry> pacifistClasses = new HashMap<>();
   private static Map<ResourceLocation, BarkRecipe> barkRecipes = new HashMap<>();
@@ -686,38 +683,6 @@ public class ModRecipes {
     addAnimalHarvestFishRecipe("pufferfish", new ItemStack(Items.FISH, 1, ItemFishFood.FishType.PUFFERFISH.getMetadata()), 13);
   }
 
-  public static void addRunicCarvingRecipe(RunicCarvingRecipe recipe) {
-    for (RunicCarvingRecipe runicCarvingRecipe : runicCarvingRecipes) {
-      if (runicCarvingRecipe.matches(recipe)) {
-        System.out.println("Recipe is already registered with carving block - " + recipe.getCarvingBlock() + ", rune block - " + recipe.getRuneBlock() + ", herb - " + recipe.getHerb().getItem());
-        return;
-      }
-    }
-    runicCarvingRecipes.add(recipe);
-  }
-
-  public static RunicCarvingRecipe getRunicCarvingRecipe(IBlockState carvingBlock, Herb herb) {
-    if (carvingBlock != null && herb != null) {
-      for (RunicCarvingRecipe recipe : runicCarvingRecipes) {
-        if (recipe.getHerb().equals(herb) && recipe.getCarvingBlock().equals(carvingBlock)) {
-          return recipe;
-        }
-      }
-    }
-    return null;
-  }
-
-  public static RunicCarvingRecipe getRunicCarvingRecipe(String name) {
-    if (name != null) {
-      for (RunicCarvingRecipe recipe : runicCarvingRecipes) {
-        if (recipe.getName().equals(name)) {
-          return recipe;
-        }
-      }
-    }
-    return null;
-  }
-
   public static void addRunicShearRecipe(RunicShearRecipe recipe) {
     if (recipe instanceof RunicShearEntityRecipe) {
       RunicShearEntityRecipe eRecipe = (RunicShearEntityRecipe) recipe;
@@ -953,10 +918,6 @@ public class ModRecipes {
     }
 
     feyCraftingRecipes.put(recipeId, recipe.setName(recipeName));
-  }
-
-  public static List<RunicCarvingRecipe> getRunicCarvingRecipes() {
-    return runicCarvingRecipes;
   }
 
   public static Map<ResourceLocation, RunicShearRecipe> getRunicShearRecipes() {
