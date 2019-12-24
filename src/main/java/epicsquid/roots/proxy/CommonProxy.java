@@ -14,7 +14,6 @@ import epicsquid.roots.integration.endercore.EndercoreHarvest;
 import epicsquid.roots.integration.harvest.HarvestIntegration;
 import epicsquid.roots.integration.jer.JERIntegration;
 import epicsquid.roots.integration.patchouli.ConfigKeys;
-import epicsquid.roots.recipe.RunicCarvingRecipes;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.modules.ModuleRegistry;
@@ -37,7 +36,6 @@ public class CommonProxy {
     RitualRegistry.init();
     ConfigKeys.init();
     OfferingUtil.init();
-    RunicCarvingRecipes.initRecipes();
     if (Loader.isModLoaded("jeresources")) {
       JERIntegration.init();
     }
