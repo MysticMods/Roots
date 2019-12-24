@@ -489,7 +489,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         }
         //Check if it is a ritual, if so try and see if it has new ritual fuel.
         if (this.craftingResult.isEmpty() && this.lastRitualUsed != null) {
-          if (ListUtil.matchesIngredients(stacks, this.lastRitualUsed.getIngredients())) {
+          if (ListUtil.matchesIngredients(stacks, this.lastRitualUsed.getIngredients()) && this.lastRitualUsed.checkTileConditions(this, null)) {
             lastRitualUsed.doEffect(world, getPos());
             burning = true;
             this.burnTime = this.lastRitualUsed.getDuration();

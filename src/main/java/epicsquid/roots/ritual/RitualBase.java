@@ -98,6 +98,10 @@ public abstract class RitualBase {
       return false;
     }
 
+    return checkTileConditions(tileEntityBonfire, player);
+  }
+
+  public boolean checkTileConditions (TileEntityBonfire tileEntityBonfire, @Nullable EntityPlayer player) {
     boolean success = true;
     for (ICondition condition : this.conditions) {
       if (!condition.check(tileEntityBonfire, player)) {
