@@ -1,4 +1,4 @@
-package epicsquid.roots.block.runes;
+package epicsquid.roots.block;
 
 import epicsquid.mysticallib.block.BlockTEBase;
 import net.minecraft.block.SoundType;

@@ -7,8 +7,8 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.api.CustomPlantType;
 import epicsquid.roots.block.*;
 import epicsquid.roots.block.groves.BlockGroveStone;
-import epicsquid.roots.block.runes.BlockTrample;
-import epicsquid.roots.block.runes.BlockWildwoodRune;
+import epicsquid.roots.block.BlockTrample;
+import epicsquid.roots.block.BlockWildwoodRune;
 import epicsquid.roots.tileentity.*;
 import epicsquid.roots.util.EnumElementalSoilType;
 import epicsquid.roots.world.HugeBaffleCap;
@@ -167,7 +167,7 @@ public class ModBlocks {
     event.addBlock(incense_burner = new BlockIncenseBurner(Material.ROCK, SoundType.STONE, 1.4f, "incense_burner", TileEntityIncenseBurner.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
 
     //Runes
-    event.addBlock(wildwood_rune = new BlockWildwoodRune(Material.WOOD, SoundType.WOOD, 1.4f, "wildwood_rune", TileEntityWildrootRune.class)).setCreativeTab(Roots.tab);
+    event.addBlock(wildwood_rune = new BlockWildwoodRune(Material.WOOD, SoundType.WOOD, 1.4f, "wildwood_rune")).setCreativeTab(Roots.tab);
 
     // Grove Stones
     event.addBlock(grove_stone = new BlockGroveStone("grove_stone")).setCreativeTab(Roots.tab);

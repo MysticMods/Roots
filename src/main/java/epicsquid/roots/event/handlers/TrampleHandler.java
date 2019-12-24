@@ -2,7 +2,7 @@ package epicsquid.roots.event.handlers;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
-import epicsquid.roots.block.runes.BlockTrample;
+import epicsquid.roots.block.BlockTrample;
 import epicsquid.roots.init.ModBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;

@@ -16,7 +16,6 @@ import epicsquid.roots.integration.jer.JERIntegration;
 import epicsquid.roots.integration.patchouli.ConfigKeys;
 import epicsquid.roots.recipe.RunicCarvingRecipes;
 import epicsquid.roots.ritual.RitualRegistry;
-import epicsquid.roots.rune.RuneRegistry;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.util.OfferingUtil;
@@ -30,7 +29,6 @@ public class CommonProxy {
     HerbRegistry.init();
     RitualRegistry.preInit();
     OfferingUtil.init();
-    RuneRegistry.init();
     ModEntities.registerLootTables();
   }
 
@@ -38,6 +36,7 @@ public class CommonProxy {
     SpellRegistry.init();
     RitualRegistry.init();
     ConfigKeys.init();
+    OfferingUtil.init();
     RunicCarvingRecipes.initRecipes();
     if (Loader.isModLoaded("jeresources")) {
       JERIntegration.init();
