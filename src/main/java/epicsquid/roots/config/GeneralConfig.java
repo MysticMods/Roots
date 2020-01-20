@@ -24,6 +24,9 @@ public class GeneralConfig {
     }
   }
 
+  @Config.Comment(("Client side only: disable elemental soil particles"))
+  public static boolean DisableParticles = false;
+
   @Config.Comment(("Set to true to give players the Roots Guide Book upon joining the server"))
   public static boolean GiveBook = false;
 
