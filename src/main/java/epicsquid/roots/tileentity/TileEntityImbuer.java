@@ -4,6 +4,7 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.Roots;
 import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemStaff;
@@ -258,6 +259,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
             if (module != null) {
               capability.addModule(module);
             } else {
+              Roots.logger.error("Unable to imbue " + modifier + " into spell dust!?");
               ItemUtil.spawnItem(world, pos, modifier);
             }
             PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(capability.getSelectedSpell().getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
