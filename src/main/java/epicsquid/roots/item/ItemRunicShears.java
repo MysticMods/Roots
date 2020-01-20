@@ -1,6 +1,7 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemBase;
+import epicsquid.mysticallib.item.ItemShearsBase;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.proxy.ClientProxy;
@@ -21,21 +22,25 @@ import epicsquid.roots.recipe.RunicShearEntityRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.stats.StatList;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -55,9 +60,10 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
-public class ItemRunicShears extends ItemBase {
+public class ItemRunicShears extends ItemShearsBase {
   public static AxisAlignedBB bounding = new AxisAlignedBB(-2, -2, -2, 2, 2, 2);
   private Random random;
 
