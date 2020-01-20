@@ -2,6 +2,7 @@ package epicsquid.roots.tileentity;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.init.ModItems;
@@ -248,10 +249,15 @@ public class TileEntityImbuer extends TileBase implements ITickable {
           } else if (inventory.getStackInSlot(0).getItem() == ModItems.spell_dust) {
             ItemStack stack = inventory.getStackInSlot(1);
             SpellModule module = ModuleRegistry.getModule(stack);
-            capability.addModule(module);
-            inventory.extractItem(1, 1, false);
+            // TODO: Why is there no check to see if this is actually a module or not?
+            ItemStack modifier = inventory.extractItem(1, 1, false);
             markDirty();
             updatePacketViaState();
+            if (module != null) {
+              capability.addModule(module);
+            } else {
+              ItemUtil.spawnItem(world, pos, modifier);
+            }
             PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(capability.getSelectedSpell().getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
           } else {
             // Handle the repair
