@@ -33,21 +33,18 @@ item.component_pouch.name=Component Pouch
 item.creative_pouch.name=Creative Component Pouch
 item.apothecary_pouch.name=Apothecary Pouch
 item.wildwood_door.name=Wildwood Door
-item.life_essence.name=Unknown Life Essence
-item.life_essence.entity_name=%s Life Essence
+item.life_essence.name=Essence of Unknown Life
+item.life_essence.entity_name=Life-Essence of %s
 
 tile.mortar.name=Mortar
 tile.imbuer.name=Imbuer
 tile.thatch.name=Thatch
 tile.bonfire.name=Pyre
-<<<<<<< HEAD
-=======
 tile.reinforced_bonfire.name=Reinforced Pyre
 tile.runed_obsidian.name=Runed Obsidian
 tile.runed_obsidian_brick.name=Runed Obsidian Brick
 tile.runed_obsidian_brick_alt.name=Runed Obsidian Brick
 tile.chiseled_runed_obsidian.name=Chiseled Runed Obsidian
->>>>>>> 09e5ede... Deal with runed obsidian blockstates.
 tile.runestone.name=Runestone
 tile.runestone_brick.name=Runestone Brick
 tile.runestone_brick_alt.name=Runestone Brick
@@ -91,6 +88,7 @@ roots.tooltip.refill=Automatically refilling herbs to full stacks from picked-up
 roots.tooltip.creative_pouch1=Creative mode only.
 roots.tooltip.creative_pouch2=Contains an infinite number of every herb.
 roots.tooltip.life_essence=Obtained with Runic Shears.
+roots.tooltip.life_essence.uses=Uses: %s/%s
 
 roots.info.staff.slot_and_spell=Selected Slot (%d) has spell: %s
 roots.info.staff.no_slots=Your staff has no room for new spells!
