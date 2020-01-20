@@ -5,6 +5,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,10 +24,12 @@ public class ModuleRegistry {
     moduleRegistry.put(module.getName(), module);
   }
 
+  @Nullable
   public static SpellModule getModule(String string) {
-    return moduleRegistry.getOrDefault(string, null);
+    return moduleRegistry.get(string);
   }
 
+  @Nullable
   public static SpellModule getModule(ItemStack stack) {
     for (Map.Entry<String, SpellModule> entry : moduleRegistry.entrySet()) {
       if (entry.getValue().getIngredient().isItemEqual(stack)) {
