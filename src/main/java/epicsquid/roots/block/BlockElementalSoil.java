@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.roots.api.CustomPlantType;
+import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.item.itemblock.ItemBlockElementalSoil;
 import epicsquid.roots.mechanics.Harvest;
@@ -231,6 +232,10 @@ public class BlockElementalSoil extends BlockBase {
   @SideOnly(Side.CLIENT)
   @Override
   public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+    if (GeneralConfig.DisableParticles) {
+      return;
+    }
+
     if (soilType == EnumElementalSoilType.FIRE && rand.nextInt(5) == 0) {
       double d8 = pos.getX() + (double) rand.nextFloat();
       double d4 = pos.getY() + stateIn.getBoundingBox(worldIn, pos).maxY - 0.2f;
