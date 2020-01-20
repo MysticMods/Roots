@@ -20,7 +20,7 @@ import java.util.List;
 public class ItemLifeEssence extends ItemBase {
   public ItemLifeEssence(@Nonnull String name) {
     super(name);
-    setMaxDamage(8);
+    setMaxDamage(5);
     setMaxStackSize(1);
   }
 
@@ -64,6 +64,9 @@ public class ItemLifeEssence extends ItemBase {
     super.addInformation(stack, worldIn, tooltip, flagIn);
 
     tooltip.add("");
+    int max_uses = stack.getMaxDamage();
+    int uses_left = max_uses - stack.getItemDamage();
+    tooltip.add(TextFormatting.AQUA + I18n.format("roots.tooltip.life_essence.uses", uses_left, max_uses));
     tooltip.add(TextFormatting.AQUA + I18n.format("roots.tooltip.life_essence"));
   }
 }

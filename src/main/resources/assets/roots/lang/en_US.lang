@@ -34,9 +34,8 @@ item.component_pouch.name=Component Pouch
 item.creative_pouch.name=Creative Component Pouch
 item.apothecary_pouch.name=Apothecary Pouch
 item.wildwood_door.name=Wildwood Door
-item.fairy_dust.name=Fairy Dust
-item.life_essence.name=Unknown Life Essence
-item.life_essence.entity_name=%s Life Essence
+item.life_essence.name=Essence of Unknown Life
+item.life_essence.entity_name=Life-Essence of %s
 
 tile.mortar.name=Mortar
 tile.imbuer.name=Imbuer
@@ -94,6 +93,7 @@ roots.tooltip.refill=Automatically refilling herbs to full stacks from picked-up
 roots.tooltip.creative_pouch1=Creative mode only.
 roots.tooltip.creative_pouch2=Contains an infinite number of every herb.
 roots.tooltip.life_essence=Obtained with Runic Shears.
+roots.tooltip.life_essence.uses=Uses: %s/%s
 
 roots.info.staff.slot_and_spell=Selected Slot (%d) has spell: %s
 roots.info.staff.no_slots=Your staff has no room for new spells!
