@@ -11,7 +11,6 @@ import epicsquid.mysticalworld.materials.Material;
 import epicsquid.mysticalworld.materials.Materials;
 import epicsquid.mysticalworld.recipe.Ingredients;
 import epicsquid.roots.Roots;
-import epicsquid.roots.api.Herb;
 import epicsquid.roots.item.ItemDruidKnife;
 import epicsquid.roots.recipe.*;
 import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
@@ -68,7 +67,7 @@ public class ModRecipes {
   private static Map<ResourceLocation, BarkRecipe> barkRecipes = new HashMap<>();
   private static Map<ResourceLocation, FlowerRecipe> flowerRecipes = new HashMap<>();
 
-  public static void initSummonCreatureEntries () {
+  public static void initSummonCreatureEntries() {
     addSummonCreatureEntry("owl", EntityOwl.class, new OreIngredient("treeSapling"), new OreIngredient("treeLeaves"));
     addSummonCreatureEntry("deer", EntityDeer.class, Ingredient.fromItem(ModItems.petals), Ingredient.fromItem(ModItems.bark_oak));
     addSummonCreatureEntry("sprout", EntitySprout.class, Ingredient.fromItem(ModItems.bark_birch), Ingredients.AUBERGINE);
@@ -116,7 +115,7 @@ public class ModRecipes {
       if (findSummonCreatureEntry(recipe.getIngredients().stream().map(Ingredient::getMatchingStacks).map(o -> o[0]).collect(Collectors.toList())) != null) {
         throw new IllegalArgumentException("Combination of ingredients for recipe (" + rl.toString() + "/" + recipe.getClazz().toString() + ") is already in use!");
       }
-    } catch (ArrayIndexOutOfBoundsException e)  {
+    } catch (ArrayIndexOutOfBoundsException e) {
       throw new IllegalArgumentException("Invalid ingredient for recipe " + rl.toString());
     }
     summonCreatureRecipes.put(rl, recipe);
@@ -184,7 +183,7 @@ public class ModRecipes {
     lifeEssenceList.removeAll(lifeEssenceRemovals);
   }
 
-  public static Set<Class<? extends EntityLivingBase>> getLifeEssenceList () {
+  public static Set<Class<? extends EntityLivingBase>> getLifeEssenceList() {
     return lifeEssenceList;
   }
 
