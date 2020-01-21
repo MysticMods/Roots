@@ -48,7 +48,6 @@ public class EventManager {
     if (ModRecipes.getRunicShearEntities().contains(event.getObject().getClass())) {
       event.addCapability(RunicShearsCapabilityProvider.IDENTIFIER, new RunicShearsCapabilityProvider());
     }
-    ModRecipes.generateLifeEssence();
     if (event.getObject() instanceof EntityLivingBase) {
       if (ModRecipes.isLifeEssenceAllowed((EntityLivingBase) event.getObject())) {
         event.addCapability(LifeEssenceCapabilityProvider.IDENTIFIER, new LifeEssenceCapabilityProvider());
