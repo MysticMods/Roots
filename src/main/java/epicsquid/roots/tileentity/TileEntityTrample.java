@@ -13,7 +13,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class TileEntityTrample extends TileBase {
-  public static AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(-4, -1, -4, 4, 1, 4);
+  public static AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(-4, -1, -4, 5, 1, 5);
 
   private AABBTicket ticket = null;
 
