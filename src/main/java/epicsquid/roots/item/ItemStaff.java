@@ -95,7 +95,7 @@ public class ItemStaff extends ItemBase {
   public void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
     SpellHandler capability = SpellHandler.fromStack(stack);
     if (player instanceof EntityPlayer) {
-      if (capability.getCooldown() <= 0) {
+      if (capability.getCooldown() <= 0 && count % 20 == 0) {
         SpellBase spell = capability.getSelectedSpell();
         if (spell != null) {
           if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
