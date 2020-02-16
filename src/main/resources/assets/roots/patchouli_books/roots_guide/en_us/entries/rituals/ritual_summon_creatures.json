@@ -7,11 +7,30 @@
   "pages": [
     {
       "type": "text",
-      "text": "Summons a creature from beyond the grave to return to the land of the living. The creature summoned is determined by what item is placed on $(l:apparatus/offering_plate)a nearby offering plate$().$(br2)$(info) (Current valid items: raw chicken, raw porkchop, raw beef, pelt, carapace, and leather.)"
+      "text": "Summons a creature's spirit from beyond and returns it to a fleshly body in this world. The creature summoned is determined by what items are placed on various $(l:apparatus/offering_plate)offering plates$() placed nearby ($(l:rituals/ritual_summon_creatures#multiblock)see layout$()).$(br2)$(warning) Unfortunately, due to limitations of this guide, a complete list of creatures and items can only be found in JEI."
     },
     {
       "type": "pyre_template",
       "ritual": "ritual_summon_creatures"
+    },
+    {
+      "type": "multiblock",
+      "anchor": "multiblock",
+      "multiblock": {
+        "mapping": {
+          "0": "roots:bonfire",
+          "W": "roots:offertory_plate[facing=west]",
+          "E": "roots:offertory_plate[facing=east]",
+          "N": "roots:offertory_plate[facing=north]",
+          "S": "roots:offertory_plate[facing=south]"
+        },
+        "pattern": [
+          ["       ","       ","       ","       ","       ","       ","       "],
+          ["       ","       ","       ","       ","       ","       ","       "],
+          ["   W   ","       ","       ","N  0  S","       ","       ","   E   "]
+        ]
+      },
+      "text": "Up to ten Offering Plates may be placed nearby (up to six blocks away)."
     },
     {
       "type": "relations",
