@@ -26,18 +26,20 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;
-import java.lang.reflect.InvocationTargetException;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Method;
 import java.util.List;
 
 public class ItemQuiver extends ItemArrowBase {
   public static AxisAlignedBB bounding = new AxisAlignedBB(-2.5, -2.5, -2.5, 2.5, 2.5, 2.5);
 
-  public static Method getArrowStack = null;
+  private static MethodHandle arrowStack = null;
 
   public ItemQuiver(@Nonnull String name) {
     super(name);
@@ -161,19 +163,26 @@ public class ItemQuiver extends ItemArrowBase {
     return true;
   }
 
-  public static ItemStack getArrowStack (EntityArrow arrow) {
-    if (getArrowStack == null) {
+  private static ItemStack getArrowStack(EntityArrow arrow) {
+    if (arrowStack == null) {
+      Method method = ObfuscationReflectionHelper.findMethod(EntityArrow.class, "func_184550_j", ItemStack.class);
+      method.setAccessible(true);
+
+      MethodHandles.Lookup lookup = MethodHandles.lookup();
       try {
-        getArrowStack = EntityArrow.class.getDeclaredMethod("getArrowStack");
-      } catch (NoSuchMethodException e) {
+        arrowStack = lookup.unreflect(method);
+      } catch (IllegalAccessException e) {
+        Roots.logger.error("Unable to reflect/method handler getArrowStack", e);
         return ItemStack.EMPTY;
       }
-      getArrowStack.setAccessible(true);
     }
+
     try {
-      return (ItemStack) getArrowStack.invoke(arrow);
-    } catch (IllegalAccessException | InvocationTargetException e) {
-      return ItemStack.EMPTY;
+      return (ItemStack) arrowStack.invoke(arrow);
+    } catch (Throwable throwable) {
+      Roots.logger.error("Unable to get arrowStack from " + arrow.getCachedUniqueIdString(), throwable);
     }
+
+    return ItemStack.EMPTY;
   }
 }
