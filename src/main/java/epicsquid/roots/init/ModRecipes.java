@@ -738,6 +738,7 @@ public class ModRecipes {
     return runicShearRecipes.get(rl);
   }
 
+  @Nullable
   public static RunicShearRecipe getRunicShearRecipe(ItemStack stack) {
     for (RunicShearRecipe recipe : runicShearRecipes.values()) {
       if (ItemStack.areItemStacksEqual(recipe.getDrop(), stack)) {

@@ -2,7 +2,7 @@ package epicsquid.roots.entity.ritual;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.network.fx.MessageFrosLandsProgressFX;
+import epicsquid.roots.network.fx.MessageFrostLandsProgressFX;
 import epicsquid.roots.ritual.IColdRitual;
 import epicsquid.roots.ritual.RitualFrostLands;
 import epicsquid.roots.ritual.RitualRegistry;
@@ -107,7 +107,7 @@ public class EntityRitualFrostLands extends EntityRitualBase implements IColdRit
     }
 
     if (!affectedPositions.isEmpty()) {
-      MessageFrosLandsProgressFX progress = new MessageFrosLandsProgressFX(affectedPositions);
+      MessageFrostLandsProgressFX progress = new MessageFrostLandsProgressFX(affectedPositions);
       PacketHandler.sendToAllTracking(progress, this);
     }
   }

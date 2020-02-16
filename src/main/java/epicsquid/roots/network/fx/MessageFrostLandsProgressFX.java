@@ -16,13 +16,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MessageFrosLandsProgressFX implements IMessage {
+public class MessageFrostLandsProgressFX implements IMessage {
   public List<BlockPos> affectedBlocks = new ArrayList<>();
 
-  public MessageFrosLandsProgressFX() {
+  public MessageFrostLandsProgressFX() {
   }
 
-  public MessageFrosLandsProgressFX(List<BlockPos> affectedBlocks) {
+  public MessageFrostLandsProgressFX(List<BlockPos> affectedBlocks) {
     this.affectedBlocks = affectedBlocks;
   }
 
@@ -43,10 +43,10 @@ public class MessageFrosLandsProgressFX implements IMessage {
     }
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageFrosLandsProgressFX, IMessage> {
+  public static class MessageHolder implements IMessageHandler<MessageFrostLandsProgressFX, IMessage> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageFrosLandsProgressFX message, final MessageContext ctx) {
+    public IMessage onMessage(final MessageFrostLandsProgressFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       for (BlockPos pos : message.affectedBlocks) {
         for (int k = 0; k < 20 + Util.rand.nextInt(15); k++) {
