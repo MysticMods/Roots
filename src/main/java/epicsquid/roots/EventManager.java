@@ -9,6 +9,7 @@ import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.baubles.pouch.BaubleBeltCapabilityHandler;
 import epicsquid.roots.item.IItemPouch;
+import epicsquid.roots.network.MessageLightDrifterSync;
 import epicsquid.roots.network.fx.*;
 import epicsquid.roots.util.Constants;
 import net.minecraft.entity.Entity;
