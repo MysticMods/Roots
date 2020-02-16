@@ -1,4 +1,4 @@
-package epicsquid.roots.network.fx;
+package epicsquid.roots.network;
 
 import java.util.UUID;
 
@@ -66,12 +66,18 @@ public class MessageLightDrifterSync implements IMessage {
       World world = Minecraft.getMinecraft().world;
       EntityPlayer player = world.getPlayerEntityByUUID(message.id);
       if (player != null) {
-        player.capabilities.disableDamage = message.enable;
-        player.capabilities.allowFlying = message.enable;
-        player.noClip = message.enable;
+        if (!message.enable) {
+          player.setPositionAndUpdate(message.x, message.y, message.z);
+          player.noClip = message.enable;
+        } else {
+          player.noClip = true;
+          player.setPositionAndUpdate(message.x, message.y, message.z);
+        }
+
         player.capabilities.isFlying = message.enable;
         player.setGameType(GameType.getByID(message.mode));
-        player.setPositionAndUpdate(message.x, message.y, message.z);
+        player.capabilities.disableDamage = message.enable;
+        player.capabilities.allowFlying = message.enable;
       }
       return null;
     }
