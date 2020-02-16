@@ -16,12 +16,15 @@ import epicsquid.roots.config.MossConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.item.dispenser.DispenseKnife;
+import epicsquid.roots.item.dispenser.DispenseRunicShears;
 import epicsquid.roots.network.fx.MessageRunicShearsAOEFX;
 import epicsquid.roots.network.fx.MessageRunicShearsFX;
 import epicsquid.roots.recipe.RunicShearEntityRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
+import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -73,6 +76,8 @@ public class ItemRunicShears extends ItemShearsBase {
     setMaxStackSize(1);
     setHasSubtypes(false);
     random = new Random();
+
+    BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DispenseRunicShears.getInstance());
   }
 
   @Override
