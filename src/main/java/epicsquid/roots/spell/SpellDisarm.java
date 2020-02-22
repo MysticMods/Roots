@@ -42,6 +42,7 @@ public class SpellDisarm extends SpellBase{
             new ItemStack(Items.IRON_SWORD),
             new ItemStack(ModItems.bark_dark_oak),
             new ItemStack(ModItems.bark_spruce),
+            new ItemStack(ModItems.petals),
             new ItemStack(ModItems.petals)
     );
   }

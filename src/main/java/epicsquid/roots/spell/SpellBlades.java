@@ -40,6 +40,7 @@ public class SpellBlades extends SpellBase {
     public void init() {
         addIngredients(
                 new ItemStack(ModItems.wildroot),
+                new ItemStack(ModItems.wildroot),
                 new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
                 new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds),
                 new ItemStack(Items.STONE_HOE)

@@ -45,6 +45,7 @@ public class SpellDrizzle extends SpellBase {
         addIngredients(
                 new ItemStack(Items.BUCKET),
                 new ItemStack(ModItems.dewgonia),
+                new ItemStack(ModItems.dewgonia),
                 new ItemStack(Items.DYE, 1, 15),
                 new ItemStack(Item.getItemFromBlock(Blocks.VINE))
         );
