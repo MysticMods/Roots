@@ -8,10 +8,6 @@
     },
     {
       "type": "item",
-      "base": "assorted_seeds"
-    },
-    {
-      "type": "item",
       "base": "baffle_cap"
     },
     {
@@ -53,10 +49,6 @@
     {
       "type": "item",
       "base": "cooked_pereskia"
-    },
-    {
-      "type": "item",
-      "base": "cooked_seeds"
     },
     {
       "type": "item",
