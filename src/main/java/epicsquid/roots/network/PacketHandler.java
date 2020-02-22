@@ -28,7 +28,7 @@ public class PacketHandler {
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageTreeCompleteFX.MessageHolder.class, MessageTreeCompleteFX.class, Side.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageHarvestCompleteFX.MessageHolder.class, MessageHarvestCompleteFX.class, Side.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageFrostTouchFX.MessageHolder.class, MessageFrostTouchFX.class, Side.CLIENT);
-    epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageIcedTouchThawFX.Handler.class, MessageIcedTouchThawFX.class, Side.CLIENT);
+    epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageIcedTouchFX.Handler.class, MessageIcedTouchFX.class, Side.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageDrizzleFX.Handler.class, MessageDrizzleFX.class, Side.CLIENT);
 
     //Other Effects
