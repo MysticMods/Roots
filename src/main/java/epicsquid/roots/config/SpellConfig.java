@@ -102,6 +102,9 @@ public class SpellConfig {
     @Config.Name("Disable Drizzle Spell")
     @Config.Comment("Set to true to disable the Drizzle Spell")
     public boolean disableDrizzle = false;
+    @Config.Name("Disable Reach Spell")
+    @Config.Comment("Set to true to disable the Reach Spell")
+    public boolean disableReach = false;
 
   }
 
