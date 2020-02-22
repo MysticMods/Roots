@@ -62,6 +62,8 @@ public class SpellRegistry {
     SpellFeyLight.instance.setDisabled(SpellConfig.disableSpellsCategory.disableFeyLight);
     spellRegistry.put(SpellIcedTouch.spellName, SpellIcedTouch.instance);
     SpellIcedTouch.instance.setDisabled(SpellConfig.disableSpellsCategory.disableIcedTouch);
+    SpellReach.instance.setDisabled(SpellConfig.disableSpellsCategory.disableReach);
+    spellRegistry.put(SpellReach.spellName, SpellReach.instance);
 
     spellRegistry.put(SpellDisarm.spellName, SpellDisarm.instance);
     SpellDisarm.instance.setDisabled(SpellConfig.disableSpellsCategory.disableDisarm);
