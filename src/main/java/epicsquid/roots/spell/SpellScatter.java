@@ -43,6 +43,7 @@ public class SpellScatter extends SpellBase {
     addIngredients(
             new ItemStack(ModItems.terra_spores),
             new ItemStack(ModItems.wildroot),
+            new ItemStack(ModItems.wildroot),
             new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
             new ItemStack(ModItems.terra_moss)
     );

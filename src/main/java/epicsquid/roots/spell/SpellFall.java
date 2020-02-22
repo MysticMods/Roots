@@ -46,6 +46,7 @@ public class SpellFall extends SpellBase {
     public void init() {
         addIngredients(
                 new ItemStack(ModItems.stalicripe),
+                new ItemStack(ModItems.stalicripe),
                 new ItemStack(ModBlocks.thatch),
                 new ItemStack(ModItems.living_hoe),
                 new ItemStack(epicsquid.mysticalworld.init.ModItems.copper_knife)

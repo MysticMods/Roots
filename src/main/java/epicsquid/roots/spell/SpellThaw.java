@@ -6,9 +6,11 @@ import epicsquid.roots.network.fx.MessageIcedTouchThawFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.RitualUtil;
 import epicsquid.roots.util.types.Property;
+import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -38,8 +40,8 @@ public class SpellThaw extends SpellBase {
             new ItemStack(ModItems.bark_acacia),
             new ItemStack(Blocks.TORCH),
             new ItemStack(Blocks.TORCH),
-            new ItemStack(ModItems.bark_acacia)
-            //MAYBE sunflowers (?)
+            new ItemStack(ModItems.bark_acacia),
+            new ItemStack(Blocks.DOUBLE_PLANT, 1, BlockDoublePlant.EnumPlantType.SUNFLOWER.getMeta())
     );
   }
 
