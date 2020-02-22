@@ -15,11 +15,11 @@ import net.minecraftforge.oredict.OreIngredient;
 import java.util.List;
 
 public class SpellReach extends SpellBase {
-  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(350);
+  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(800);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("wildroot", 0.285));
-  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("wildroot", 0.285));
-  public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(200);
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("degonia", 0.450));
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("pereskia", 0.250));
+  public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(600);
   public static Property<Double> PROP_REACH = new Property<>("reach", 5.0);
 
   public static String spellName = "spell_reach";
@@ -36,11 +36,11 @@ public class SpellReach extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new OreIngredient("nuggetGold"),
-        new ItemStack(Items.COMPASS),
-        new ItemStack(Items.SPIDER_EYE),
-        new OreIngredient("rootsBark"),
-        new ItemStack(ModItems.aubergine)
+        new OreIngredient("dustRedstone"),
+        new ItemStack(Items.LEAD),
+        new ItemStack(Items.CARROT_ON_A_STICK),
+        new OreIngredient("vine"),
+        new OreIngredient("stairWood")
     );
   }
 
