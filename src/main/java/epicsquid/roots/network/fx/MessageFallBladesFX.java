@@ -2,8 +2,8 @@ package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.SpellBlades;
-import epicsquid.roots.spell.SpellFall;
+import epicsquid.roots.spell.SpellNaturesBlades;
+import epicsquid.roots.spell.SpellAutumnsFall;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
@@ -59,7 +59,7 @@ public class MessageFallBladesFX implements IMessage {
                         ParticleUtil.spawnParticlePetal(
                                 world, (float) message.x + Util.rand.nextFloat(), (float) message.y + Util.rand.nextFloat(), (float) message.z + Util.rand.nextFloat(),
                                 0, -0.05F, 0,
-                                SpellFall.instance.getRed1(), SpellFall.instance.getGreen1(), SpellFall.instance.getBlue1(), 1.0f,
+                                SpellAutumnsFall.instance.getRed1(), SpellAutumnsFall.instance.getGreen1(), SpellAutumnsFall.instance.getBlue1(), 1.0f,
                                 1F, 160);
                     }
 
@@ -67,7 +67,7 @@ public class MessageFallBladesFX implements IMessage {
                         ParticleUtil.spawnParticlePetal(
                                 world, (float) message.x + Util.rand.nextFloat(), (float) message.y + Util.rand.nextFloat(), (float) message.z + Util.rand.nextFloat(),
                                 0, -0.05F, 0,
-                                SpellFall.instance.getRed2(), SpellFall.instance.getGreen2(), SpellFall.instance.getBlue2(), 1.0f,
+                                SpellAutumnsFall.instance.getRed2(), SpellAutumnsFall.instance.getGreen2(), SpellAutumnsFall.instance.getBlue2(), 1.0f,
                                 0.5F, 160);
                     }
                 } else {
@@ -75,7 +75,7 @@ public class MessageFallBladesFX implements IMessage {
                         ParticleUtil.spawnParticlePetal(
                                 world, (float) message.x + Util.rand.nextFloat(), (float) message.y + Util.rand.nextFloat(), (float) message.z + Util.rand.nextFloat(),
                                 0, 0.05F, 0,
-                                SpellBlades.instance.getRed1(), SpellBlades.instance.getGreen1(), SpellBlades.instance.getBlue1(), 1.0f,
+                                SpellNaturesBlades.instance.getRed1(), SpellNaturesBlades.instance.getGreen1(), SpellNaturesBlades.instance.getBlue1(), 1.0f,
                                 1F, 160);
                     }
 
@@ -83,7 +83,7 @@ public class MessageFallBladesFX implements IMessage {
                         ParticleUtil.spawnParticlePetal(
                                 world, (float) message.x + Util.rand.nextFloat(), (float) message.y + Util.rand.nextFloat(), (float) message.z + Util.rand.nextFloat(),
                                 0, 0.05F, 0,
-                                SpellBlades.instance.getRed2(), SpellBlades.instance.getGreen2(), SpellBlades.instance.getBlue2(), 1.0f,
+                                SpellNaturesBlades.instance.getRed2(), SpellNaturesBlades.instance.getGreen2(), SpellNaturesBlades.instance.getBlue2(), 1.0f,
                                 0.5F, 160);
                     }
                 }

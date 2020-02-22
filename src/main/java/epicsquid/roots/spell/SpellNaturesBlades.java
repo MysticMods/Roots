@@ -19,19 +19,19 @@ import net.minecraft.util.text.TextFormatting;
 
 import java.util.List;
 
-public class SpellBlades extends SpellBase {
+public class SpellNaturesBlades extends SpellBase {
 
     public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(160);
     public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
     public static Property.PropertyCost PROP_COST = new Property.PropertyCost(0, new SpellCost("wildroot", 0.05));
     public static Property<Integer> PROP_RADIUS = new Property<>("radius", 10);
 
-    public static String spellName = "spell_blades";
-    public static SpellBlades instance = new SpellBlades(spellName);
+    public static String spellName = "spell_natures_blades";
+    public static SpellNaturesBlades instance = new SpellNaturesBlades(spellName);
 
     private int radius;
 
-    public SpellBlades(String name) {
+    public SpellNaturesBlades(String name) {
         super(name, TextFormatting.DARK_GREEN, 64/255F, 240/255F, 24/255F, 26/255F, 110/255F, 13/255F);
         properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST, PROP_RADIUS);
     }

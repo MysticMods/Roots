@@ -17,19 +17,19 @@ import net.minecraft.util.text.TextFormatting;
 
 import java.util.List;
 
-public class SpellThaw extends SpellBase {
+public class SpellSummersThaw extends SpellBase {
 
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(20);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("wildewheet", 0.25));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("infernal_bulb", 0.25));
   public static Property<Integer> PROP_RADIUS = new Property<>("radius", 5);
 
   public static String spellName = "spell_thaw";
-  public static SpellThaw instance = new SpellThaw(spellName);
+  public static SpellSummersThaw instance = new SpellSummersThaw(spellName);
 
   private int radius;
 
-  public SpellThaw(String name) {
+  public SpellSummersThaw(String name) {
     super(name, TextFormatting.AQUA, 25F/255F, 1F, 235F/255F, 252F/255F, 166F/255F, 37F/255F);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS);
   }
@@ -39,8 +39,8 @@ public class SpellThaw extends SpellBase {
     addIngredients(
             new ItemStack(ModItems.bark_acacia),
             new ItemStack(Blocks.TORCH),
-            new ItemStack(Blocks.TORCH),
-            new ItemStack(ModItems.bark_acacia),
+            new ItemStack(ModItems.infernal_bulb),
+            new ItemStack(Items.GUNPOWDER),
             new ItemStack(Blocks.DOUBLE_PLANT, 1, BlockDoublePlant.EnumPlantType.SUNFLOWER.getMeta())
     );
   }

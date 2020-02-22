@@ -3,7 +3,7 @@ package epicsquid.roots.network.fx;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellIcedTouch;
-import epicsquid.roots.spell.SpellThaw;
+import epicsquid.roots.spell.SpellSummersThaw;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
@@ -54,7 +54,7 @@ public class MessageIcedTouchThawFX implements IMessage {
       World world = Minecraft.getMinecraft().world;
       if (message.isThaw) {
         for (int i = 0; i < 4; i++) {
-            ParticleUtil.spawnParticleFiery(world, message.x + 0.45F, message.y + 0.9F, message.z + 0.45F, 0, 0.01F, 0, SpellThaw.instance.getRed2(),  SpellThaw.instance.getGreen2(),  SpellThaw.instance.getBlue2(), 0.30F, 10F, 40);
+            ParticleUtil.spawnParticleFiery(world, message.x + 0.45F, message.y + 0.9F, message.z + 0.45F, 0, 0.01F, 0, SpellSummersThaw.instance.getRed2(),  SpellSummersThaw.instance.getGreen2(),  SpellSummersThaw.instance.getBlue2(), 0.30F, 10F, 40);
         }
       }
       else {
