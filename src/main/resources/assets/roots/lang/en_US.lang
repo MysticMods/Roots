@@ -140,6 +140,7 @@ roots.spell.spell_soft_touch.name=Soft Touch
 roots.spell.spell_mark.name=Mark
 roots.spell.spell_blades.name=Blades
 roots.spell.spell_iced_touch.module_touch.description=Surrounds you with freezing clouds
+roots.spell.spell_reach.name=Reach
 
 roots.ritual.ritual_healing_aura.name=Healing Aura
 roots.ritual.ritual_heavy_storms.name=Heavy Storms
