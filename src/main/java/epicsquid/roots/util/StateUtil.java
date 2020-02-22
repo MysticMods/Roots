@@ -1,7 +1,6 @@
 package epicsquid.roots.util;
 
 import com.google.common.collect.ImmutableMap;
-import javafx.beans.property.Property;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;

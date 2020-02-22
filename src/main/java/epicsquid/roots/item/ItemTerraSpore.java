@@ -1,14 +1,9 @@
 package epicsquid.roots.item;
 
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.config.MossConfig;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,6 +13,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import java.util.Random;
 
 public class ItemTerraSpore extends ItemBase {
 

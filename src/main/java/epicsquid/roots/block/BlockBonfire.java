@@ -1,7 +1,6 @@
 package epicsquid.roots.block;
 
 import epicsquid.mysticallib.block.BlockTEBase;
-import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;

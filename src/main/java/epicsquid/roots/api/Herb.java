@@ -4,9 +4,8 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import java.util.function.Supplier;
-
 import javax.annotation.Nonnull;
+import java.util.function.Supplier;
 
 /**
  * Registery class for herbs. Acts as a wrapper for an item that is a herb.

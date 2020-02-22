@@ -1,7 +1,5 @@
 package epicsquid.roots.integration.patchouli;
 
-import javax.annotation.Nonnull;
-
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import net.minecraft.item.Item;
@@ -10,6 +8,7 @@ import net.minecraftforge.fml.common.eventhandler.GenericEvent;
 import net.minecraftforge.fml.common.eventhandler.IContextSetter;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 /**

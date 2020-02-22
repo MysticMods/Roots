@@ -14,7 +14,9 @@ import net.minecraftforge.registries.RegistryBuilder;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @EventBusSubscriber(modid = Roots.MODID)
 public class HerbRegistry {

@@ -1,6 +1,5 @@
 package epicsquid.roots.ritual;
 
-import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualHeavyStorms;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.ritual.conditions.ConditionItems;
@@ -8,9 +7,7 @@ import epicsquid.roots.util.types.Property;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
 
 public class RitualHeavyStorms extends RitualBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(2400);
@@ -29,7 +26,7 @@ public class RitualHeavyStorms extends RitualBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addCondition(new ConditionItems(
         new ItemStack(Blocks.WATERLILY),
         new ItemStack(ModItems.dewgonia),

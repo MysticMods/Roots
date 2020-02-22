@@ -7,8 +7,6 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.api.CustomPlantType;
 import epicsquid.roots.block.*;
 import epicsquid.roots.block.groves.BlockGroveStone;
-import epicsquid.roots.block.BlockTrample;
-import epicsquid.roots.block.BlockWildwoodRune;
 import epicsquid.roots.tileentity.*;
 import epicsquid.roots.util.EnumElementalSoilType;
 import epicsquid.roots.world.HugeBaffleCap;
@@ -31,9 +29,9 @@ public class ModBlocks {
   public static Block mortar, bonfire, imbuer, structure_marker, offertory_plate, unending_bowl, reinforced_bonfire;
   public static Block incense_burner, wildwood_rune;
   public static Block grove_stone, fey_crafter;
-  public static Block fairy_grove_stone, fungi_grove_stone, natural_grove_stone, wild_grove_stone, twilight_grove_stone, elemental_grove_stone;
+  public static Block fairy_grove_stone;
 
-  public static Block fey_fire, offertory_bowl, fairy_house_red, fairy_house_brown, fairy_house_baffle;
+  public static Block fey_fire;
   public static Block mark;
 
   public static BlockCropBase moonglow, pereskia, wildroot, spirit_herb, wildewheet, cloud_berry, infernal_bulb, dewgonia, stalicripe;

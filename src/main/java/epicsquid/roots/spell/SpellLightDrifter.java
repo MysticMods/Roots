@@ -2,8 +2,8 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.network.fx.MessageLightDrifterFX;
 import epicsquid.roots.network.MessageLightDrifterSync;
+import epicsquid.roots.network.fx.MessageLightDrifterFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.Constants;
 import epicsquid.roots.util.types.Property;

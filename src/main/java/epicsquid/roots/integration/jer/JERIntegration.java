@@ -1,7 +1,6 @@
 package epicsquid.roots.integration.jer;
 
 import epicsquid.mysticallib.item.ItemSeedBase;
-import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import jeresources.api.IJERAPI;
 import jeresources.api.IPlantRegistry;

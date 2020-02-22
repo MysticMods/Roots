@@ -9,7 +9,6 @@ import epicsquid.roots.network.fx.MessageGroveCompleteFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualGroveSupplication;
 import epicsquid.roots.ritual.RitualRegistry;
-import epicsquid.roots.tileentity.TileEntityBonfire;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;

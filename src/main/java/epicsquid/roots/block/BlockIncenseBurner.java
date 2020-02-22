@@ -1,7 +1,5 @@
 package epicsquid.roots.block;
 
-import javax.annotation.Nonnull;
-
 import epicsquid.mysticallib.block.BlockTEBase;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -10,6 +8,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+
+import javax.annotation.Nonnull;
 
 public class BlockIncenseBurner extends BlockTEBase {
 

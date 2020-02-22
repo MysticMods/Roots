@@ -1,13 +1,13 @@
 package epicsquid.roots.tileentity;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class TileEntityMortarRenderer extends TileEntitySpecialRenderer<TileEntityMortar> {
 

@@ -1,11 +1,11 @@
 package epicsquid.roots.block;
 
-import javax.annotation.Nonnull;
-
 import epicsquid.mysticallib.block.BlockCropBase;
 import epicsquid.roots.init.ModItems;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.EnumPlantType;
+
+import javax.annotation.Nonnull;
 
 public class BlockWildewheetCrop extends BlockCropBase {
 
