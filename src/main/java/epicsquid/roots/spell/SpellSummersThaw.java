@@ -2,7 +2,6 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.network.fx.MessageIcedTouchFX;
 import epicsquid.roots.network.fx.MessageThawFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;

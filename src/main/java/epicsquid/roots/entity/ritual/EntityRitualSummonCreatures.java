@@ -23,7 +23,6 @@ import net.minecraft.world.World;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Random;
 
 public class EntityRitualSummonCreatures extends EntityRitualBase {
   private RitualSummonCreatures ritual;

@@ -1,12 +1,12 @@
 package epicsquid.roots.recipe;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import epicsquid.mysticallib.util.ListUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MortarRecipe {
 

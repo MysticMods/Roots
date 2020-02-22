@@ -2,7 +2,6 @@ package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.SpellGrowthInfusion;
 import epicsquid.roots.spell.SpellRampantGrowth;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.state.IBlockState;

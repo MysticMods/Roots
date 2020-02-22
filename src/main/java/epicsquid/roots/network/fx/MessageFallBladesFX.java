@@ -2,8 +2,8 @@ package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.SpellNaturesBlades;
 import epicsquid.roots.spell.SpellAutumnsFall;
+import epicsquid.roots.spell.SpellNaturesBlades;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;

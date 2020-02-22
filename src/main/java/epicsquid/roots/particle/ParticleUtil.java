@@ -1,13 +1,13 @@
 package epicsquid.roots.particle;
 
-import java.util.Random;
-
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.MysticalLib;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.roots.init.ModParticles;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class ParticleUtil {
   public static Random random = new Random();

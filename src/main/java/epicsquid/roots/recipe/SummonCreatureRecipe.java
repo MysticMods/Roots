@@ -3,7 +3,6 @@ package epicsquid.roots.recipe;
 import com.google.common.collect.Lists;
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.roots.util.types.RegistryItem;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;

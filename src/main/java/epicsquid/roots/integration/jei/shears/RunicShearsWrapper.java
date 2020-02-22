@@ -4,7 +4,6 @@ import epicsquid.roots.recipe.RunicShearRecipe;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import net.minecraft.item.ItemStack;
 
 public class RunicShearsWrapper implements IRecipeWrapper {
 

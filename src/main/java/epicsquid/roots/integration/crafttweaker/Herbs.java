@@ -3,7 +3,9 @@ package epicsquid.roots.integration.crafttweaker;
 import crafttweaker.annotations.ZenRegister;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.HerbRegistry;
-import stanhebben.zenscript.annotations.*;
+import stanhebben.zenscript.annotations.ZenClass;
+import stanhebben.zenscript.annotations.ZenMethod;
+import stanhebben.zenscript.annotations.ZenProperty;
 
 @ZenRegister
 @ZenClass("mods." + Roots.MODID + ".Herbs")

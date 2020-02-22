@@ -1,12 +1,11 @@
 package epicsquid.roots.event.handlers;
 
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.block.BlockElementalSoil;
 import epicsquid.roots.init.ModBlocks;
-import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.mechanics.Harvest;
-import epicsquid.mysticallib.util.ItemUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.item.ItemStack;
