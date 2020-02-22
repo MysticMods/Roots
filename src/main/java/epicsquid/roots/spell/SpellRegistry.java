@@ -67,16 +67,14 @@ public class SpellRegistry {
 
     spellRegistry.put(SpellDisarm.spellName, SpellDisarm.instance);
     SpellDisarm.instance.setDisabled(SpellConfig.disableSpellsCategory.disableDisarm);
-    spellRegistry.put(SpellFall.spellName, SpellFall.instance);
-    SpellFall.instance.setDisabled(SpellConfig.disableSpellsCategory.disableFall);
+    spellRegistry.put(SpellAutumnsFall.spellName, SpellAutumnsFall.instance);
+    SpellAutumnsFall.instance.setDisabled(SpellConfig.disableSpellsCategory.disableFall);
     spellRegistry.put(SpellScatter.spellName, SpellScatter.instance);
     SpellScatter.instance.setDisabled(SpellConfig.disableSpellsCategory.disableScatter);
-    spellRegistry.put(SpellSoftTouch.spellName, SpellSoftTouch.instance);
-    SpellSoftTouch.instance.setDisabled(SpellConfig.disableSpellsCategory.disableSoftTouch);
-    spellRegistry.put(SpellThaw.spellName, SpellThaw.instance);
-    SpellThaw.instance.setDisabled(SpellConfig.disableSpellsCategory.disableThaw);
-    spellRegistry.put(SpellBlades.spellName, SpellBlades.instance);
-    SpellBlades.instance.setDisabled(SpellConfig.disableSpellsCategory.disableBlades);
+    spellRegistry.put(SpellSummersThaw.spellName, SpellSummersThaw.instance);
+    SpellSummersThaw.instance.setDisabled(SpellConfig.disableSpellsCategory.disableThaw);
+    spellRegistry.put(SpellNaturesBlades.spellName, SpellNaturesBlades.instance);
+    SpellNaturesBlades.instance.setDisabled(SpellConfig.disableSpellsCategory.disableBlades);
     spellRegistry.put(SpellDrizzle.spellName, SpellDrizzle.instance);
     SpellDrizzle.instance.setDisabled(SpellConfig.disableSpellsCategory.disableDrizzle);
   }

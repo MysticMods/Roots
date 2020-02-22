@@ -1,5 +1,5 @@
 {
-    "name": "Blades",
+    "name": "Nature's Blades",
     "icon": "roots:spell_dust",
     "category": "spells",
     "advancement": "roots:wildroot",
@@ -7,11 +7,11 @@
     "pages": [
       {
         "type": "text",
-        "text": "This spell has the effect of growing grass on dirt blocks (even the ones that are not connected to grass blocks at all)"
+        "text": "This spell causes grass to sprout forth from dirt, and also encourages already existing grass to grow longer and become more luxurious."
       },
       {
         "type": "spell_template",
-        "spell": "spell_blades"
+        "spell": "spell_natures_blades"
       }
     ]
   }

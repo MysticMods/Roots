@@ -1,8 +1,8 @@
 {
-    "name": "Fall",
+    "name": "Autumn's Fall",
     "icon": "roots:spell_dust",
     "category": "spells",
-    "advancement": "roots:stalicripe",
+    "advancement": "roots:cloud_berry",
     "flag": "roots:spell_fall",
     "pages": [
       {
@@ -11,7 +11,7 @@
       },
       {
         "type": "spell_template",
-        "spell": "spell_fall"
+        "spell": "spell_autumns_fall"
       }
     ]
   }

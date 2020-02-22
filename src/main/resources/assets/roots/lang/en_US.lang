@@ -134,11 +134,11 @@ roots.spell.spell_harvest.name=Harvest
 roots.spell.spell_rampant_growth.name=Rampant Growth
 roots.spell.spell_fey_light.name=Fey Light
 roots.spell.spell_iced_touch.name=Iced Touch
-roots.spell.spell_thaw.name=Thaw
+roots.spell.spell_summers_thaw.name=Summer's Thaw
 roots.spell.spell_disarm.name=Disarm
 roots.spell.spell_soft_touch.name=Soft Touch
 roots.spell.spell_mark.name=Mark
-roots.spell.spell_blades.name=Blades
+roots.spell.spell_natures_blades.name=Nature's Blades
 roots.spell.spell_iced_touch.module_touch.description=Surrounds you with freezing clouds
 roots.spell.spell_reach.name=Reach
 
