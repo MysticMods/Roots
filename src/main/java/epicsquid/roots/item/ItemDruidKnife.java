@@ -7,6 +7,8 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.dispenser.DispenseKnife;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -15,9 +17,14 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class ItemDruidKnife extends ItemKnifeBase {
 
@@ -52,5 +59,19 @@ public class ItemDruidKnife extends ItemKnifeBase {
       return EnumActionResult.SUCCESS;
     }
     return EnumActionResult.PASS;
+  }
+
+  @Override
+  @SideOnly(Side.CLIENT)
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+    super.addInformation(stack, worldIn, tooltip, flagIn);
+
+    tooltip.add("");
+    tooltip.add(I18n.format("roots.tooltip.knife1", TextFormatting.GOLD + I18n.format("roots.tooltip.logs") + TextFormatting.RESET, TextFormatting.GOLD + I18n.format("roots.tooltip.bark") + TextFormatting.RESET));
+    tooltip.add(I18n.format("roots.tooltip.knife2", TextFormatting.DARK_GREEN + I18n.format("roots.tooltip.eligible") + TextFormatting.RESET, TextFormatting.GREEN + "" + TextFormatting.BOLD + I18n.format("roots.tooltip.terra_moss") + TextFormatting.RESET));
+
+    if (ItemUtil.shouldDisplayMore(stack, worldIn, tooltip, flagIn, "roots.tooltip.shift", TextFormatting.DARK_GRAY)) {
+      tooltip.add(I18n.format("roots.tooltip.knife_dispenser"));
+    }
   }
 }

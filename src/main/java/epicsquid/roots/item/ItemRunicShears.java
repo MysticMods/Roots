@@ -1,6 +1,5 @@
 package epicsquid.roots.item;
 
-import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.item.ItemShearsBase;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.particle.particles.ParticleGlitter;
@@ -16,7 +15,6 @@ import epicsquid.roots.config.MossConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.item.dispenser.DispenseKnife;
 import epicsquid.roots.item.dispenser.DispenseRunicShears;
 import epicsquid.roots.network.fx.MessageRunicShearsAOEFX;
 import epicsquid.roots.network.fx.MessageRunicShearsFX;
@@ -25,25 +23,21 @@ import epicsquid.roots.recipe.RunicShearRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockDispenser;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.stats.StatList;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -63,7 +57,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 public class ItemRunicShears extends ItemShearsBase {
@@ -259,13 +252,17 @@ public class ItemRunicShears extends ItemShearsBase {
     return false;
   }
 
+
   @Override
   @SideOnly(Side.CLIENT)
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
     super.addInformation(stack, worldIn, tooltip, flagIn);
 
-    tooltip.add("");
     tooltip.add(I18n.format("roots.runic_shears.tooltip1", TextFormatting.BOLD + "" + TextFormatting.AQUA + I18n.format("roots.runic_shears.right_click") + TextFormatting.RESET + TextFormatting.GREEN));
     tooltip.add(I18n.format("roots.runic_shears.tooltip2", TextFormatting.BOLD + "" + TextFormatting.AQUA + I18n.format("roots.runic_shears.sneak_right_click") + TextFormatting.RESET + TextFormatting.GREEN));
+
+    if (ItemUtil.shouldDisplayMore(stack, worldIn, tooltip, flagIn, "roots.tooltip.shift", TextFormatting.DARK_GRAY)) {
+      tooltip.add(I18n.format("roots.tooltip.runic_shears"));
+    }
   }
 }

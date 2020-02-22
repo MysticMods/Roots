@@ -100,7 +100,6 @@ public class DispenseRunicShears implements IBehaviorDispenseItem {
             BlockCrops crop = (BlockCrops) block;
             if (crop.isMaxAge(world.getBlockState(pos))) {
               world.setBlockState(pos, crop.withAge(0));
-              world.setBlockState(pos, recipe.getReplacementBlock().getDefaultState());
               successful = true;
             }
           } else {
