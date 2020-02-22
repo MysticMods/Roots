@@ -1159,12 +1159,12 @@ public class ModRecipes {
         new ItemStack(epicsquid.mysticalworld.init.ModItems.venison),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.venison)).setBurnTime(300));
 
-    addCraftingRecipe("cooked_apple", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_apple, 5), 1).addIngredients(
+/*    addCraftingRecipe("cooked_apple", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_apple, 5), 1).addIngredients(
         new ItemStack(Items.APPLE),
         new ItemStack(Items.APPLE),
         new ItemStack(Items.APPLE),
         new ItemStack(Items.APPLE),
-        new ItemStack(Items.APPLE)).setBurnTime(300));
+        new ItemStack(Items.APPLE)).setBurnTime(300));*/
 
     // END OF COOKING
 
