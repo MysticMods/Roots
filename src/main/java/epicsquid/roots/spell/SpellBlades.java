@@ -54,12 +54,11 @@ public class SpellBlades extends SpellBase {
 
         BlockPos pos;
 
-        if (blocks.size() > 1)
-            pos = blocks.get(Util.rand.nextInt(blocks.size() - 1));
-        else if (!blocks.isEmpty())
-            pos = blocks.get(0);
-        else
+        if (blocks.size() > 1) {
+            pos = blocks.get(Util.rand.nextInt(blocks.size()));
+        } else {
             return false;
+        }
 
         if (pos != null) {
             IBlockState blockstate = caster.world.getBlockState(pos);
