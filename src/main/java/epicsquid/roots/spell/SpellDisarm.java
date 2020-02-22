@@ -1,90 +1,89 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageDisarmFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreIngredient;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-public class SpellDisarm extends SpellBase{
+public class SpellDisarm extends SpellBase {
 
-  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(100);
+  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(350);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("moonglow_leaf", 0.25));
-  public static Property<Integer> PROP_RADIUS = new Property<>("radius", 20);
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("moonglow_leaf", 0.50));
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("dewgonia", 0.25));
+  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 2);
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 2);
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 2);
 
   public static String spellName = "spell_disarm";
   public static SpellDisarm instance = new SpellDisarm(spellName);
 
-  private int radius;
+  private int radius_x, radius_y, radius_z;
 
   private SpellDisarm(String name) {
-    super(name, TextFormatting.DARK_RED, 122F/255F, 0F, 0F, 58F/255F, 58F/255F, 58F/255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1);
+    super(name, TextFormatting.DARK_RED, 122F / 255F, 0F, 0F, 58F / 255F, 58F / 255F, 58F / 255F);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
   }
 
   @Override
   public void init() {
     addIngredients(
-            new ItemStack(Items.IRON_SWORD),
-            new ItemStack(ModItems.bark_dark_oak),
-            new ItemStack(ModItems.bark_spruce),
-            new ItemStack(ModItems.petals),
-            new ItemStack(ModItems.petals)
+        new ItemStack(Items.SHIELD),
+        new OreIngredient("gemDiamond"),
+        new OreIngredient("bone"),
+        new ItemStack(Item.getItemFromBlock(Blocks.TRIPWIRE_HOOK)),
+        new ItemStack(ModItems.moonglow_leaf)
     );
   }
 
   @Override
   public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
-    BlockPos playerPos =  caster.getPosition();
-    UUID playerId = caster.getUniqueID();
+    BlockPos playerPos = caster.getPosition();
+    World world = caster.world;
 
-    if (!caster.world.isRemote) {
-      List<EntityLivingBase> entities = caster.world.getEntitiesWithinAABB(EntityLivingBase.class,
-              new AxisAlignedBB(playerPos.getX() - radius, playerPos.getY() - 3, playerPos.getZ() - radius, playerPos.getX() + radius, playerPos.getY() + 3, playerPos.getZ() + radius));
-      entities.remove(caster.world.getPlayerEntityByUUID(playerId));
+    List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(playerPos.getX() - radius_x, playerPos.getY() - radius_y, playerPos.getZ() - radius_z, playerPos.getX() + radius_x, playerPos.getY() + radius_y, playerPos.getZ() + radius_z));
+    entities.remove(caster);
 
-      if (!entities.isEmpty()) {
-        for (EntityLivingBase entity : entities) {
+    if (entities.isEmpty()) {
+      return false;
+    }
 
-          List<ItemStack> inventory = new ArrayList<>();
-          if (!entity.getHeldItem(EnumHand.MAIN_HAND).isEmpty())
-            inventory.add(entity.getHeldItemMainhand());
-          if (!entity.getHeldItem(EnumHand.OFF_HAND).isEmpty())
-            inventory.add(entity.getHeldItemOffhand());
+    for (EntityLivingBase entity : entities) {
+      int pieces = 0;
+      for (EntityEquipmentSlot slot : EntityEquipmentSlot.values()) {
+        ItemStack stack = entity.getItemStackFromSlot(slot);
+        if (stack.isEmpty()) {
+          continue;
+        }
+        pieces++;
+        if (!world.isRemote) {
+          entity.setItemStackToSlot(slot, ItemStack.EMPTY);
+          ItemUtil.spawnItem(world, entity.getPosition(), stack);
+        }
+      }
 
-          entity.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
-          entity.setHeldItem(EnumHand.OFF_HAND, ItemStack.EMPTY);
-
-          if (!inventory.isEmpty())
-          {
-            for (ItemStack stack : inventory)
-              if (Math.random() * 100 < 15)
-                caster.world.spawnEntity(new EntityItem(caster.world, entity.posX, entity.posY, entity.posZ, stack));
-
-            PacketHandler.sendToAllTracking(new MessageDisarmFX(entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ()), caster);
-          }
-          //Removes Armor
-          //for (int i = 0; i < 4; i++)
-          //  entity.replaceItemInInventory(i + 5, ItemStack.EMPTY);
-
+      if (pieces != 0) {
+        if (!world.isRemote) {
+          PacketHandler.sendToAllTracking(new MessageDisarmFX(entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ()), caster);
         }
         return true;
-      } else
-        return false;
+      }
     }
     return false;
   }
@@ -93,7 +92,8 @@ public class SpellDisarm extends SpellBase{
   public void doFinalise() {
     this.castType = properties.getProperty(PROP_CAST_TYPE);
     this.cooldown = properties.getProperty(PROP_COOLDOWN);
-    this.radius = properties.getProperty(PROP_RADIUS);
+    this.radius_x = properties.getProperty(PROP_RADIUS_X);
+    this.radius_y = properties.getProperty(PROP_RADIUS_Y);
+    this.radius_z = properties.getProperty(PROP_RADIUS_Z);
   }
-
 }
