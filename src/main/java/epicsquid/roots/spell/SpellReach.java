@@ -1,12 +1,10 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextFormatting;
@@ -17,7 +15,7 @@ import java.util.List;
 public class SpellReach extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(800);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("degonia", 0.750));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("dewgonia", 0.750));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("stalicripe", 0.750));
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(600);
   public static Property<Double> PROP_REACH = new Property<>("reach", 5.0);

@@ -3,7 +3,7 @@ package epicsquid.roots.spell;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
-import epicsquid.roots.network.fx.MessageIcedTouchThawFX;
+import epicsquid.roots.network.fx.MessageIcedTouchFX;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
@@ -121,7 +121,7 @@ public class SpellIcedTouch extends SpellBase {
             }
           }
           if (didSpell) {
-            PacketHandler.sendToAllTracking(new MessageIcedTouchThawFX(pos.getX(), pos.getY(), pos.getZ(), false), player);
+            PacketHandler.sendToAllTracking(new MessageIcedTouchFX(pos.getX(), pos.getY(), pos.getZ()), player);
           }
         }
         return didSpell;
