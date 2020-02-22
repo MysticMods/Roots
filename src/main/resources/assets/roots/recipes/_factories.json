@@ -1,6 +1,5 @@
 {
   "ingredients": {
-    "seed": "epicsquid.roots.recipe.ingredient.SeedBuilder$Factory",
     "gold_or_silver": "epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient$Factory"
   }
 }
