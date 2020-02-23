@@ -37,7 +37,7 @@ public class RitualGroveSupplication extends RitualBase {
 
   @Override
   public void doFinalise() {
-    duration = properties.getProperty(PROP_DURATION);
-    interval = properties.getProperty(PROP_INTERVAL);
+    duration = properties.get(PROP_DURATION);
+    interval = properties.get(PROP_INTERVAL);
   }
 }

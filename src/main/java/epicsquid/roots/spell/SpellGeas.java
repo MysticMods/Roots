@@ -72,8 +72,8 @@ public class SpellGeas extends SpellBase {
 
   @Override
   public void doFinalise() {
-    this.castType = properties.getProperty(PROP_CAST_TYPE);
-    this.cooldown = properties.getProperty(PROP_COOLDOWN);
-    this.duration = properties.getProperty(PROP_DURATION);
+    this.castType = properties.get(PROP_CAST_TYPE);
+    this.cooldown = properties.get(PROP_COOLDOWN);
+    this.duration = properties.get(PROP_DURATION);
   }
 }

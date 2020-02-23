@@ -54,19 +54,19 @@ public class RitualAnimalHarvest extends RitualBase {
 
   @Override
   public void doFinalise() {
-    duration = properties.getProperty(PROP_DURATION);
-    interval = properties.getProperty(PROP_INTERVAL);
+    duration = properties.get(PROP_DURATION);
+    interval = properties.get(PROP_INTERVAL);
     int[] radius = properties.getRadius();
     radius_x = radius[0];
     radius_y = radius[1];
     radius_z = radius[2];
-    looting_chance = properties.getProperty(PROP_LOOTING_CHANCE);
-    looting_value = properties.getProperty(PROP_LOOTING_VALUE);
-    glowing = properties.getProperty(PROP_GLOW_DURATION);
-    fish_chance = properties.getProperty(PROP_FISH_CHANCE);
-    fish_count = properties.getProperty(PROP_FISH_COUNT);
-    fish_additional = properties.getProperty(PROP_FISH_ADDITIONAL);
-    count = properties.getProperty(PROP_COUNT);
+    looting_chance = properties.get(PROP_LOOTING_CHANCE);
+    looting_value = properties.get(PROP_LOOTING_VALUE);
+    glowing = properties.get(PROP_GLOW_DURATION);
+    fish_chance = properties.get(PROP_FISH_CHANCE);
+    fish_count = properties.get(PROP_FISH_COUNT);
+    fish_additional = properties.get(PROP_FISH_ADDITIONAL);
+    count = properties.get(PROP_COUNT);
   }
 
 /*  @Override

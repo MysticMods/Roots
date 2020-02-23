@@ -10,6 +10,4 @@ public abstract class EntitySpellBase<T extends SpellBase> extends EntityLifetim
   public EntitySpellBase(World worldIn) {
     super(worldIn);
   }
-
-
 }

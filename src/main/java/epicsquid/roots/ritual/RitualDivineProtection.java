@@ -49,19 +49,19 @@ public class RitualDivineProtection extends RitualBase {
 
   @Override
   public void doFinalise() {
-    duration = properties.getProperty(PROP_DURATION);
-    rain = properties.getProperty(PROP_RAIN);
-    time = properties.getProperty(PROP_TIME);
-    night_reduction = properties.getProperty(PROP_NIGHT_REDUCTION);
-    day_extension = properties.getProperty(PROP_DAY_EXTENSION);
-    consecration_damage = properties.getProperty(PROP_CONSECRATION_DAMAGE);
-    fire_damage = properties.getProperty(PROP_FIRE_DAMAGE);
-    fire_duration = properties.getProperty(PROP_FIRE_DURATION);
+    duration = properties.get(PROP_DURATION);
+    rain = properties.get(PROP_RAIN);
+    time = properties.get(PROP_TIME);
+    night_reduction = properties.get(PROP_NIGHT_REDUCTION);
+    day_extension = properties.get(PROP_DAY_EXTENSION);
+    consecration_damage = properties.get(PROP_CONSECRATION_DAMAGE);
+    fire_damage = properties.get(PROP_FIRE_DAMAGE);
+    fire_duration = properties.get(PROP_FIRE_DURATION);
     int[] radius = properties.getRadius();
     radius_x = radius[0] + 0.5f;
     radius_y = radius[1] + 0.5f;
     radius_z = radius[2] + 0.5f;
-    day_length = properties.getProperty(PROP_DAY_LENGTH);
-    night_threshold = properties.getProperty(PROP_NIGHT_THRESHOLD);
+    day_length = properties.get(PROP_DAY_LENGTH);
+    night_threshold = properties.get(PROP_NIGHT_THRESHOLD);
   }
 }

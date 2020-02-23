@@ -5,6 +5,7 @@ import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
+import epicsquid.roots.entity.spell.EntitySpellBase;
 import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
@@ -19,15 +20,22 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("Duplicates")
 public abstract class SpellBase {
   protected PropertyTable properties = new PropertyTable();
 
@@ -275,7 +283,7 @@ public abstract class SpellBase {
       }
 
       Property<SpellCost> prop = (Property<SpellCost>) entry.getValue();
-      SpellCost cost = properties.getProperty(prop);
+      SpellCost cost = properties.get(prop);
 
       if (cost != null) {
         addCost(cost);
@@ -301,6 +309,30 @@ public abstract class SpellBase {
 
   public boolean finalised () {
     return finalised;
+  }
+
+  @Nullable
+  protected EntitySpellBase spawnEntity(World world, BlockPos pos, Class<? extends EntitySpellBase> entity, @Nullable EntityPlayer player) {
+    List<EntitySpellBase> pastRituals = world.getEntitiesWithinAABB(entity, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 100, pos.getZ() + 1), o -> o != null && o.getClass().equals(entity));
+    if (pastRituals.isEmpty() && !world.isRemote) {
+      EntitySpellBase spell = null;
+      try {
+        Constructor<? extends EntitySpellBase> cons = entity.getDeclaredConstructor(World.class);
+        spell = cons.newInstance(world);
+      } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+        e.printStackTrace();
+      }
+      if (spell == null) {
+        return null;
+      }
+      spell.setPosition(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+      if (player != null) {
+        spell.setPlayer(player.getUniqueID());
+      }
+      world.spawnEntity(spell);
+      return spell;
+    }
+    return null;
   }
 
   public static class SpellCost {

@@ -64,13 +64,13 @@ public class SpellRoseThorns extends SpellBase {
 
   @Override
   public void doFinalise() {
-    this.castType = properties.getProperty(PROP_CAST_TYPE);
-    this.cooldown = properties.getProperty(PROP_COOLDOWN);
-    damage = properties.getProperty(PROP_DAMAGE);
-    poisonAmplifier = properties.getProperty(PROP_POISON_AMPLIFIER);
-    poisonDuration = properties.getProperty(PROP_POISON_DURATION);
-    slownessAmplifier = properties.getProperty(PROP_SLOWNESS_AMPLIFIER);
-    slownessDuration = properties.getProperty(PROP_SLOWNESS_DURATION);
-    duration = properties.getProperty(PROP_DURATION);
+    this.castType = properties.get(PROP_CAST_TYPE);
+    this.cooldown = properties.get(PROP_COOLDOWN);
+    damage = properties.get(PROP_DAMAGE);
+    poisonAmplifier = properties.get(PROP_POISON_AMPLIFIER);
+    poisonDuration = properties.get(PROP_POISON_DURATION);
+    slownessAmplifier = properties.get(PROP_SLOWNESS_AMPLIFIER);
+    slownessDuration = properties.get(PROP_SLOWNESS_DURATION);
+    duration = properties.get(PROP_DURATION);
   }
 }

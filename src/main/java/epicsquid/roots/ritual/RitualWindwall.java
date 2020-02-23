@@ -42,13 +42,13 @@ public class RitualWindwall extends RitualBase {
 
   @Override
   public void doFinalise() {
-    duration = properties.getProperty(PROP_DURATION);
+    duration = properties.get(PROP_DURATION);
     int[] radius = properties.getRadius();
     radius_x = radius[0] + 0.5;
     radius_y = radius[1] + 0.5;
     radius_z = radius[2] + 0.5;
-    interval = properties.getProperty(PROP_INTERVAL);
-    distance = (int) Math.pow(properties.getProperty(PROP_DISTANCE), 2);
-    knockback = properties.getProperty(PROP_KNOCKBACK);
+    interval = properties.get(PROP_INTERVAL);
+    distance = (int) Math.pow(properties.get(PROP_DISTANCE), 2);
+    knockback = properties.get(PROP_KNOCKBACK);
   }
 }

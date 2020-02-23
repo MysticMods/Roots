@@ -83,11 +83,11 @@ public class SpellAcidCloud extends SpellBase {
 
   @Override
   public void doFinalise() {
-    this.castType = properties.getProperty(PROP_CAST_TYPE);
-    this.cooldown = properties.getProperty(PROP_COOLDOWN);
-    this.damage = properties.getProperty(PROP_DAMAGE);
-    this.poisonAmplification = properties.getProperty(PROP_POISON_AMPLIFICATION);
-    this.poisonDuration = properties.getProperty(PROP_POISON_DURATION);
-    this.fireDuration = properties.getProperty(PROP_FIRE_DURATION);
+    this.castType = properties.get(PROP_CAST_TYPE);
+    this.cooldown = properties.get(PROP_COOLDOWN);
+    this.damage = properties.get(PROP_DAMAGE);
+    this.poisonAmplification = properties.get(PROP_POISON_AMPLIFICATION);
+    this.poisonDuration = properties.get(PROP_POISON_DURATION);
+    this.fireDuration = properties.get(PROP_FIRE_DURATION);
   }
 }

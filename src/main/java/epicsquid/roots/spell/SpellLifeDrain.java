@@ -90,12 +90,12 @@ public class SpellLifeDrain extends SpellBase {
 
   @Override
   public void doFinalise() {
-    this.castType = properties.getProperty(PROP_CAST_TYPE);
-    this.cooldown = properties.getProperty(PROP_COOLDOWN);
-    this.witherDamage = properties.getProperty(PROP_WITHER_DAMAGE);
-    this.heal = properties.getProperty(PROP_HEAL);
-    this.witherDuration = properties.getProperty(PROP_WITHER_DURATION);
-    this.witherAmplification = properties.getProperty(PROP_WITHER_AMPLIFICATION);
-    this.witherChance = properties.getProperty(PROP_WITHER_CHANCE);
+    this.castType = properties.get(PROP_CAST_TYPE);
+    this.cooldown = properties.get(PROP_COOLDOWN);
+    this.witherDamage = properties.get(PROP_WITHER_DAMAGE);
+    this.heal = properties.get(PROP_HEAL);
+    this.witherDuration = properties.get(PROP_WITHER_DURATION);
+    this.witherAmplification = properties.get(PROP_WITHER_AMPLIFICATION);
+    this.witherChance = properties.get(PROP_WITHER_CHANCE);
   }
 }

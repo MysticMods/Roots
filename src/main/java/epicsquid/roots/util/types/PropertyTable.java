@@ -19,7 +19,7 @@ public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
   }
 
   @SuppressWarnings("unchecked")
-  public <T> Property<T> getProperty (String propertyName) {
+  public <T> Property<T> get(String propertyName) {
     fetchedKeys.add(propertyName);
     Property<?> prop = reverseMap.get(propertyName);
     if (prop == null) {
@@ -29,7 +29,7 @@ public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
     return (Property<T>) prop;
   }
 
-  public <T> T getProperty (Property<T> property) {
+  public <T> T get(Property<T> property) {
     fetchedKeys.add(property.getName());
     T result = property.cast(map.get(property));
     if (result == null && property.hasDefaultValue()) {
@@ -39,7 +39,7 @@ public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
     }
   }
 
-  public <T> void setProperty (Property<T> property, T value) {
+  public <T> void set(Property<T> property, T value) {
     map.put(property, value);
   }
 
@@ -54,17 +54,17 @@ public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
   @SuppressWarnings("unchecked")
   @Nullable
   public int[] getRadius (String radiusPrefix) {
-    Property<?> pX = getProperty(radiusPrefix + "_x");
-    Property<?> pY = getProperty(radiusPrefix + "_y");
-    Property<?> pZ = getProperty(radiusPrefix + "_z");
+    Property<?> pX = get(radiusPrefix + "_x");
+    Property<?> pY = get(radiusPrefix + "_y");
+    Property<?> pZ = get(radiusPrefix + "_z");
     if (pX == null || pY == null || pZ == null) {
       return null;
     }
     int x, y, z;
     try {
-      x = getProperty((Property<Integer>) pX);
-      y = getProperty((Property<Integer>) pY);
-      z = getProperty((Property<Integer>) pZ);
+      x = get((Property<Integer>) pX);
+      y = get((Property<Integer>) pY);
+      z = get((Property<Integer>) pZ);
     } catch (ClassCastException ignored) {
       return null;
     }

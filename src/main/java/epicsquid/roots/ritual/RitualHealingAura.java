@@ -46,12 +46,12 @@ public class RitualHealingAura extends RitualBase {
 
   @Override
   public void doFinalise() {
-    duration = properties.getProperty(PROP_DURATION);
+    duration = properties.get(PROP_DURATION);
     int[] radius = properties.getRadius();
     radius_x = radius[0] + 0.5;
     radius_y = radius[1] + 0.5;
     radius_z = radius[2] + 0.5;
-    amount = properties.getProperty(PROP_AMOUNT);
-    interval = properties.getProperty(PROP_INTERVAL);
+    amount = properties.get(PROP_AMOUNT);
+    interval = properties.get(PROP_INTERVAL);
   }
 }
