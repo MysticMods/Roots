@@ -150,10 +150,10 @@ public class SpellRadiance extends SpellBase {
 
   @Override
   public void doFinalise() {
-    this.castType = properties.getProperty(PROP_CAST_TYPE);
-    this.cooldown = properties.getProperty(PROP_COOLDOWN);
-    this.distance = properties.getProperty(PROP_DISTANCE);
-    this.damage = properties.getProperty(PROP_DAMAGE);
-    this.undeadDamage = properties.getProperty(PROP_UNDEAD_DAMAGE);
+    this.castType = properties.get(PROP_CAST_TYPE);
+    this.cooldown = properties.get(PROP_COOLDOWN);
+    this.distance = properties.get(PROP_DISTANCE);
+    this.damage = properties.get(PROP_DAMAGE);
+    this.undeadDamage = properties.get(PROP_UNDEAD_DAMAGE);
   }
 }

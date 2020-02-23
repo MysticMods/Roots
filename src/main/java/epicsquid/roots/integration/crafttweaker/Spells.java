@@ -41,16 +41,16 @@ public class Spells {
     @ZenMethod
     public Spell setFloat (String propertyName, float value) {
       PropertyTable props = original.getProperties();
-      Property<Float> prop = props.getProperty(propertyName);
-      props.setProperty(prop, value);
+      Property<Float> prop = props.get(propertyName);
+      props.set(prop, value);
       return this;
     }
 
     @ZenMethod
     public Spell setInteger (String propertyName, int value) {
       PropertyTable props = original.getProperties();
-      Property<Integer> prop = props.getProperty(propertyName);
-      props.setProperty(prop, value);
+      Property<Integer> prop = props.get(propertyName);
+      props.set(prop, value);
       return this;
     }
 
@@ -67,17 +67,17 @@ public class Spells {
     @ZenMethod
     public Spell setString (String propertyName, String value) {
       PropertyTable props = original.getProperties();
-      Property<String> prop = props.getProperty(propertyName);
-      props.setProperty(prop, value);
+      Property<String> prop = props.get(propertyName);
+      props.set(prop, value);
       return this;
     }
 
     @ZenMethod
     public Spell setCost (int cost, Herbs.Herb herb, double amount) {
       PropertyTable props = original.getProperties();
-      Property<SpellBase.SpellCost> prop = props.getProperty("cost_" + cost);
+      Property<SpellBase.SpellCost> prop = props.get("cost_" + cost);
       SpellBase.SpellCost newCost = new SpellBase.SpellCost(herb.getHerbName(), amount);
-      props.setProperty(prop, newCost);
+      props.set(prop, newCost);
       return this;
     }
   }

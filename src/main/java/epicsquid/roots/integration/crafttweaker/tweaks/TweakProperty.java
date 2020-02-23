@@ -21,7 +21,7 @@ public class TweakProperty {
 
   @ZenMethod
   public <T> T getValue () {
-    return (T) table.getProperty(original);
+    return (T) table.get(original);
   }
 
   @ZenMethod
@@ -31,6 +31,6 @@ public class TweakProperty {
 
   @ZenMethod
   public <T> void setValue (T value) {
-    table.setProperty((Property<T>) original, value);
+    table.set((Property<T>) original, value);
   }
 }

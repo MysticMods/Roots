@@ -43,12 +43,12 @@ public class RitualPurity extends RitualBase {
 
   @Override
   public void doFinalise() {
-    duration = properties.getProperty(PROP_DURATION);
+    duration = properties.get(PROP_DURATION);
     int[] radius = properties.getRadius();
     radius_x = radius[0] + 0.5;
     radius_y = radius[1] + 0.5;
     radius_z = radius[2] + 0.5;
-    interval = properties.getProperty(PROP_INTERVAL);
-    zombie_count = properties.getProperty(PROP_ZOMBIE_COUNT);
+    interval = properties.get(PROP_INTERVAL);
+    zombie_count = properties.get(PROP_ZOMBIE_COUNT);
   }
 }

@@ -41,13 +41,13 @@ public class RitualSpreadingForest extends RitualBase {
 
   @Override
   public void doFinalise() {
-    duration = properties.getProperty(PROP_DURATION);
+    duration = properties.get(PROP_DURATION);
     int[] radius = properties.getRadius();
     radius_x = radius[0];
     radius_y = radius[1];
     radius_z = radius[2];
-    place_interval = properties.getProperty(PROP_PLACE_INTERVAL);
-    growth_interval = properties.getProperty(PROP_GROWTH_INTERVAL);
-    double_chance = properties.getProperty(PROP_DOUBLE_CHANCE);
+    place_interval = properties.get(PROP_PLACE_INTERVAL);
+    growth_interval = properties.get(PROP_GROWTH_INTERVAL);
+    double_chance = properties.get(PROP_DOUBLE_CHANCE);
   }
 }

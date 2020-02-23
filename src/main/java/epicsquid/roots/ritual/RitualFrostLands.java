@@ -42,12 +42,12 @@ public class RitualFrostLands extends RitualBase implements IColdRitual {
 
   @Override
   public void doFinalise() {
-    duration = properties.getProperty(PROP_DURATION);
+    duration = properties.get(PROP_DURATION);
     int[] radius = properties.getRadius();
     radius_x = radius[0];
     radius_y = radius[1];
     radius_z = radius[2];
-    interval_heal = properties.getProperty(PROP_INTERVAL_HEAL);
-    interval_spawn = properties.getProperty(PROP_INTERVAL_SPAWN);
+    interval_heal = properties.get(PROP_INTERVAL_HEAL);
+    interval_spawn = properties.get(PROP_INTERVAL_SPAWN);
   }
 }

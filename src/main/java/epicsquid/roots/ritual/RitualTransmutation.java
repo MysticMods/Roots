@@ -42,11 +42,11 @@ public class RitualTransmutation extends RitualBase {
 
   @Override
   public void doFinalise() {
-    duration = properties.getProperty(PROP_DURATION);
+    duration = properties.get(PROP_DURATION);
     int[] radius = properties.getRadius();
     radius_x = radius[0];
     radius_y = radius[1];
     radius_z = radius[2];
-    interval = properties.getProperty(PROP_INTERVAL);
+    interval = properties.get(PROP_INTERVAL);
   }
 }

@@ -52,11 +52,11 @@ public class RitualSummonCreatures extends RitualBase {
 
   @Override
   public void doFinalise() {
-    duration = properties.getProperty(PROP_DURATION);
-    radius_x = properties.getProperty(PROP_RADIUS_X);
-    radius_z = properties.getProperty(PROP_RADIUS_Z);
-    interval = properties.getProperty(PROP_INTERVAL);
-    tries = properties.getProperty(PROP_TRIES);
+    duration = properties.get(PROP_DURATION);
+    radius_x = properties.get(PROP_RADIUS_X);
+    radius_z = properties.get(PROP_RADIUS_Z);
+    interval = properties.get(PROP_INTERVAL);
+    tries = properties.get(PROP_TRIES);
   }
 
   @Override

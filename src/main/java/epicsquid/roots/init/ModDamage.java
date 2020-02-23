@@ -25,12 +25,27 @@ public class ModDamage {
 
   public static DamageSource PSYCHIC_DAMAGE = (new DamageSource("psychic_damage")).setDamageBypassesArmor().setMagicDamage();
 
-  public static DamageSource radiantDamageFrom(EntityPlayer player) {
-    DamageSource source = new EntityDamageSource("holy_damage", player).setDamageBypassesArmor().setMagicDamage();
+  public static DamageSource WATER_DAMAGE = (new DamageSource("water_damage")).setDamageBypassesArmor().setMagicDamage();
+
+  public static DamageSource radiantDamageFrom(@Nullable EntityPlayer player) {
+    DamageSource source;
+    if (player == null) {
+      source = RADIANT_DAMAGE;
+    } else {
+      source = new EntityDamageSource("holy_damage", player).setDamageBypassesArmor().setMagicDamage();
+    }
     if (Loader.isModLoaded("consecration")) {
       source.setFireDamage();
     }
     return source;
+  }
+
+  public static DamageSource waterDamageSource(@Nullable EntityPlayer player) {
+    if (player == null) {
+      return WATER_DAMAGE;
+    }
+
+    return new EntityDamageSource("water_damage", player).setDamageBypassesArmor().setMagicDamage();
   }
 
   @Nullable

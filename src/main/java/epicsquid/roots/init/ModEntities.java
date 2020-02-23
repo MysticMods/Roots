@@ -5,10 +5,7 @@ import epicsquid.mysticallib.entity.RenderNull;
 import epicsquid.roots.Roots;
 import epicsquid.roots.entity.projectile.EntityFlare;
 import epicsquid.roots.entity.ritual.*;
-import epicsquid.roots.entity.spell.EntityBoost;
-import epicsquid.roots.entity.spell.EntityFireJet;
-import epicsquid.roots.entity.spell.EntityThornTrap;
-import epicsquid.roots.entity.spell.EntityTimeStop;
+import epicsquid.roots.entity.spell.*;
 import epicsquid.roots.proxy.ClientProxy;
 import net.minecraft.entity.Entity;
 
@@ -55,7 +52,8 @@ public class ModEntities {
         EntityRitualWardingProtection.class,
         EntityRitualWildGrowth.class,
         EntityRitualWindwall.class,
-        EntityRitualSummonCreatures.class
+        EntityRitualSummonCreatures.class,
+        EntitySpellDrizzle.class
     );
 
     ritualClasses.forEach(LibRegistry::registerEntity);

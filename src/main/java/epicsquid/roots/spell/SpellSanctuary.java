@@ -90,12 +90,12 @@ public class SpellSanctuary extends SpellBase {
 
   @Override
   public void doFinalise() {
-    this.castType = properties.getProperty(PROP_CAST_TYPE);
-    this.cooldown = properties.getProperty(PROP_COOLDOWN);
-    this.radius_x = properties.getProperty(PROP_RADIUS_X);
-    this.radius_y = properties.getProperty(PROP_RADIUS_Y);
-    this.radius_z = properties.getProperty(PROP_RADIUS_Z);
-    this.velocity = properties.getProperty(PROP_VELOCITY);
+    this.castType = properties.get(PROP_CAST_TYPE);
+    this.cooldown = properties.get(PROP_COOLDOWN);
+    this.radius_x = properties.get(PROP_RADIUS_X);
+    this.radius_y = properties.get(PROP_RADIUS_Y);
+    this.radius_z = properties.get(PROP_RADIUS_Z);
+    this.velocity = properties.get(PROP_VELOCITY);
   }
 }
 

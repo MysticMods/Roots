@@ -47,15 +47,15 @@ public class RitualGermination extends RitualBase {
 
   @Override
   public void doFinalise() {
-    duration = properties.getProperty(PROP_DURATION);
+    duration = properties.get(PROP_DURATION);
     int[] radius = properties.getRadius();
     radius_x = radius[0];
     radius_y = radius[1];
     radius_z = radius[2];
-    interval = properties.getProperty(PROP_INTERVAL);
-    count = properties.getProperty(PROP_COUNT);
-    ticks = properties.getProperty(PROP_TICKS);
-    bonus_ticks = properties.getProperty(PROP_BONUS_TICKS);
-    crop_ticks = properties.getProperty(PROP_BLOCK_CROP_TICKS);
+    interval = properties.get(PROP_INTERVAL);
+    count = properties.get(PROP_COUNT);
+    ticks = properties.get(PROP_TICKS);
+    bonus_ticks = properties.get(PROP_BONUS_TICKS);
+    crop_ticks = properties.get(PROP_BLOCK_CROP_TICKS);
   }
 }
