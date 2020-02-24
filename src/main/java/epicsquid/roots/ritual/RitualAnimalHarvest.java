@@ -68,11 +68,4 @@ public class RitualAnimalHarvest extends RitualBase {
     fish_additional = properties.get(PROP_FISH_ADDITIONAL);
     count = properties.get(PROP_COUNT);
   }
-
-/*  @Override
-  public EntityRitualBase doEffect(World world, BlockPos pos) {
-    return this.spawnEntity(world, pos, EntityRitualAnimalHarvest.class);
-  }*/
-
-
 }
