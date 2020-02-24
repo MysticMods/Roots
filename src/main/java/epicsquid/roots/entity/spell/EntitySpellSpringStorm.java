@@ -1,5 +1,7 @@
 package epicsquid.roots.entity.spell;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.entity.EntityEndermini;
 import epicsquid.roots.init.ModDamage;
@@ -22,11 +24,19 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class EntitySpellSpringStorm extends EntitySpellBase<SpellSpringStorm> {
   public static AxisAlignedBB BOUNDING_BOX = null;
+  public static BiMap<UUID, UUID> playerToEntity = HashBiMap.create();
+
+  public static boolean hasCloud (EntityPlayer player) {
+    return hasCloud(player.getUniqueID());
+  }
+
+  public static boolean hasCloud (UUID uuid) {
+    return playerToEntity.containsKey(uuid);
+  }
 
   private List<BlockPos> groundLevel = null;
   private int strikes = 0;
@@ -64,6 +74,15 @@ public class EntitySpellSpringStorm extends EntitySpellBase<SpellSpringStorm> {
   @Override
   public void onUpdate() {
     super.onUpdate();
+    if (isDead) {
+      if (playerToEntity.containsValue(this.getUniqueID())) {
+        playerToEntity.remove(getPlayer(), this.getUniqueID());
+      }
+    } else {
+      if (!hasCloud(getPlayer())) {
+        playerToEntity.put(getPlayer(), this.getUniqueID());
+      }
+    }
 
     if (ticksExisted % 20 == 0) {
       if (!world.isRemote) {
@@ -151,21 +170,21 @@ public class EntitySpellSpringStorm extends EntitySpellBase<SpellSpringStorm> {
           world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, (double) pos.getX() + d3, (double) ((float) pos.getY() + 0.1F) + box.maxY, (double) pos.getZ() + d4, 0.0D, 0.0D, 0.0D);
         }
 
-        if (rand.nextInt(20) == 0) {
-          ParticleUtil.spawnParticleRain(world, pos.getX() + rand.nextFloat(), (float) posY + 2.75f, pos.getZ() + rand.nextFloat(), 0, 0.005f, 0, 0, 54, 204, 0.7f, 7 * (1+Util.rand.nextFloat()), 60);
+        if (rand.nextInt(40) == 0) {
+          ParticleUtil.spawnParticleRain(world, pos.getX() + rand.nextFloat(), (float) posY + 2.75f, pos.getZ() + rand.nextFloat(), 0, 0.005f, 0, 0, 54, 204, 0.7f, 3 * (1+Util.rand.nextFloat()), 30);
         }
 
         if (rand.nextInt(20) == 0) {
           world.playSound(posX, posY, posZ, SoundEvents.WEATHER_RAIN, SoundCategory.WEATHER, 0.2F, 1.0F, false);
         }
 
-        if (ticksExisted % 5 == 0) {
-          for (float j = 0.4f; j < SpellSpringStorm.instance.radius + 1; j += 0.75f) {
-            for (float i = Util.rand.nextInt(45); i <= 360 - Util.rand.nextInt(20); i += Util.rand.nextFloat() * 140f) {
+        if (ticksExisted % 3 == 0) {
+          for (float j = 0f; j < SpellSpringStorm.instance.radius; j += 0.5f) {
+            for (float i = Util.rand.nextInt(45); i <= 360 - Util.rand.nextInt(20); i += Util.rand.nextFloat() * 110f) {
               float tx = (float) posX + (j + 0.5f) * (float) Math.sin(Math.toRadians(i));
-              float ty = (float) posY + 3.55f;
+              float ty = (float) posY + 3.95f;
               float tz = (float) posZ + (j + 0.5f) * (float) Math.cos(Math.toRadians(i));
-              ParticleUtil.spawnParticleCloud(world, tx, ty, tz, 0, 0, 0, 50, 54, 180, 0.12f, 16, 40, false);
+              ParticleUtil.spawnParticleCloud(world, tx, ty, tz, 0, 0, 0, 0, 0, 10, 0.5f, 12.5f, 10, false);
             }
           }
         }

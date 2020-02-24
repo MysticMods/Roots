@@ -9,6 +9,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.FakePlayerFactory;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -16,6 +17,8 @@ import java.util.UUID;
 
 public abstract class EntityLifetimeBase extends Entity {
   public static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityLifetimeBase.class, DataSerializers.VARINT);
+
+  private static final UUID FakePlayer = UUID.fromString("41C82C87-7AfB-4024-BA57-13D2C99CAE77");
 
   private UUID player;
 
@@ -30,6 +33,9 @@ public abstract class EntityLifetimeBase extends Entity {
   }
 
   public UUID getPlayer() {
+    if (player == null) {
+      return FakePlayer;
+    }
     return player;
   }
 
