@@ -47,9 +47,9 @@ public class BlockDecorativeBonfire extends BlockBonfire {
 
   @Override
   @SideOnly(Side.CLIENT)
-  public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+  public void randomDisplayTick(IBlockState stateIn, World world, BlockPos pos, Random rand) {
     if (stateIn.getValue(BURNING)) {
-      worldIn.playSound((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.5F, 1.0F, false);
+      world.playSound((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.5F, 1.0F, false);
     }
   }
 }

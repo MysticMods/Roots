@@ -57,10 +57,10 @@ public class RitualUtil {
     return null;
   }
 
-  public static AxisAlignedBB BOUNDING = new AxisAlignedBB(-6, -6, -6, 6, 6, 6);
+  public static AxisAlignedBB OFFERING = new AxisAlignedBB(-6, -6, -6, 7, 7, 7);
 
   public static List<TileEntityOffertoryPlate> getNearbyOfferingPlates(World world, BlockPos pos) {
-    AxisAlignedBB bounds = BOUNDING.offset(pos);
+    AxisAlignedBB bounds = OFFERING.offset(pos);
     BlockPos max = max(bounds);
     BlockPos min = min(bounds);
 
@@ -92,6 +92,48 @@ public class RitualUtil {
       }
     }
     return stacks;
+  }
+
+  public static AxisAlignedBB STONES = new AxisAlignedBB(-9, -9, -9, 10, 10, 10);
+
+  public static int getNearbyStandingStones (World world, BlockPos pos, int height) {
+    return getNearbyStandingStonePositions(world, pos, height).size();
+  }
+
+  public static List<BlockPos> getNearbyStandingStonePositions (World world, BlockPos pos, int height) {
+    List<BlockPos> positions = new ArrayList<>();
+    Set<Block> toppers = Sets.newHashSet(ModBlocks.chiseled_runestone, ModBlocks.chiseled_runed_obsidian);
+    Set<Block> basis = Sets.newHashSet(ModBlocks.runestone, ModBlocks.runed_obsidian);
+
+    AxisAlignedBB bounds = STONES.offset(pos);
+    BlockPos max = max(bounds);
+    BlockPos min = min(bounds);
+
+    int count = 0;
+    for (BlockPos p : BlockPos.getAllInBoxMutable(max, min)) {
+      IBlockState state = world.getBlockState(p);
+      if (toppers.contains(state.getBlock())) {
+        BlockPos start = p.toImmutable().down();
+        IBlockState startState;
+        int column = 0;
+
+        while (start.getY() > (p.getY() - 10)) {
+          startState = world.getBlockState(start);
+          if (!basis.contains(startState.getBlock())) {
+            break;
+          }
+
+          start = start.down();
+          column++;
+        }
+
+        if (column == height || (height == -1 && column >= 3)) {
+          positions.add(p.toImmutable());
+        }
+      }
+    }
+
+    return positions;
   }
 
   public static BlockPos min(AxisAlignedBB box) {
