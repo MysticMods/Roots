@@ -12,7 +12,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -24,7 +26,7 @@ public class ItemBlockElementalSoil extends ItemBlock {
     super(block);
   }
 
-  @Override
+/*  @Override
   public boolean placeBlockAt(@Nonnull ItemStack stack, @Nonnull EntityPlayer player, World world, @Nonnull BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, @Nonnull IBlockState newState) {
 
     Block oldblock = world.getBlockState(pos.offset(side.getOpposite())).getBlock();
@@ -33,6 +35,32 @@ public class ItemBlockElementalSoil extends ItemBlock {
       pos = pos.offset(side.getOpposite());
     }
     return super.placeBlockAt(stack, player, world, pos, side, hitX, hitY, hitZ, newState);
+  }*/
+
+  @Override
+  public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    BlockPos opposite = pos.offset(facing);
+    IBlockState state = world.getBlockState(opposite);
+    IBlockState stateDown = world.getBlockState(opposite.down());
+    if (state.getBlock() == Blocks.FARMLAND || stateDown.getBlock() == Blocks.FARMLAND) {
+      if (stateDown.getBlock() == Blocks.FARMLAND) {
+        opposite = opposite.down();
+      }
+      ItemStack stack = player.getHeldItem(hand);
+      world.setBlockToAir(opposite);
+      boolean placed = false;
+      if (player.canPlayerEdit(opposite, facing, stack) && world.mayPlace(this.block, opposite, false, facing, player)) {
+        placed = world.setBlockState(opposite, this.block.getDefaultState(), 11);
+      }
+      if (!placed) {
+        world.setBlockState(opposite, state);
+        return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
+      } else {
+        return EnumActionResult.SUCCESS;
+      }
+    }
+
+    return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
   }
 
   @Override

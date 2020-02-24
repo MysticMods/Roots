@@ -122,7 +122,7 @@ public class EventManager {
       entity.removePotionEffect(ModPotions.time_stop);
       event.setCanceled(true);
     }
-    if (event.getEntity().getEntityData().hasKey(Constants.LIGHT_DRIFTER_TAG) && !event.getEntity().getEntityWorld().isRemote) {
+    if (entity instanceof EntityPlayer && event.getEntity().getEntityData().hasKey(Constants.LIGHT_DRIFTER_TAG) && !event.getEntity().getEntityWorld().isRemote) {
       event.getEntity().getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_TAG) - 1);
       if (event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_TAG) <= 0) {
         EntityPlayer player = ((EntityPlayer) event.getEntity());
