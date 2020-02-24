@@ -7,7 +7,7 @@
     "pages": [
       {
         "type": "text",
-        "text": "This spell has the same effect Autumn would have on nature around you in a default radius of 10 blocks.$(br2)$(info) Tree leaves and grass will progressively dry out and drop their bounty"
+        "text": "While continuously cast, both leaves and grass will have their lifespan quickened, dying and drying out as in autumn, dropping their fruit as though broken by hand."
       },
       {
         "type": "spell_template",

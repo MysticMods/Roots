@@ -27,15 +27,16 @@ public class SpellSummersThaw extends SpellBase {
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 5);
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5);
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 5);
+  public static Property<Integer> PROP_MAX_AFFECTED = new Property<>("max_affected", 5);
 
   public static String spellName = "spell_summers_thaw";
   public static SpellSummersThaw instance = new SpellSummersThaw(spellName);
 
-  private int radius_x, radius_y, radius_z;
+  private int radius_x, radius_y, radius_z, max;
 
   public SpellSummersThaw(String name) {
-    super(name, TextFormatting.AQUA, 25F/255F, 1F, 235F/255F, 252F/255F, 166F/255F, 37F/255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
+    super(name, TextFormatting.RED, 25F/255F, 1F, 235F/255F, 252F/255F, 166F/255F, 37F/255F);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_MAX_AFFECTED);
   }
 
   @Override
@@ -74,7 +75,7 @@ public class SpellSummersThaw extends SpellBase {
 
     List<BlockPos> affectedBlocks = new ArrayList<>();
 
-    for (int x = mX - radius_x; x < mX + radius_x; x++) {
+    outer: for (int x = mX - radius_x; x < mX + radius_x; x++) {
       for (int y = mY - radius_y; y < mY + radius_y; y++) {
         for (int z = mZ - radius_z; z < mZ + radius_z; z++) {
           BlockPos thisPos = new BlockPos(x, y, z);
@@ -90,7 +91,9 @@ public class SpellSummersThaw extends SpellBase {
             world.setBlockState(thisPos, mutated, 3);
           }
 
-
+          if (affectedBlocks.size() >= max) {
+            break outer;
+          }
         }
       }
     }
@@ -113,5 +116,6 @@ public class SpellSummersThaw extends SpellBase {
     this.radius_x = properties.get(PROP_RADIUS_X);
     this.radius_y = properties.get(PROP_RADIUS_Y);
     this.radius_z = properties.get(PROP_RADIUS_Z);
+    this.max = properties.get(PROP_MAX_AFFECTED);
   }
 }

@@ -20,7 +20,7 @@ public class SpellConfig {
     public boolean disableAcidCloud = false;
     @Config.Name("Disable Blades Spell")
     @Config.Comment("Set to true to disable Blades Spell")
-    public boolean disableBlades = false;
+    public boolean disableNaturesBlades = false;
     @Config.Name("Disable Dandelion Winds Spell")
     @Config.Comment("Set to true to disable Dandelion Winds Spell")
     public boolean disableDandelionWinds = false;
@@ -89,7 +89,7 @@ public class SpellConfig {
     public boolean disableTimeStop = false;
     @Config.Name("Disable Thaw Spell")
     @Config.Comment("Set to true to disable Thaw Spell")
-    public boolean disableThaw = false;
+    public boolean disableSummersThaw = false;
     @Config.Name("Disable Wild Fire Spell")
     @Config.Comment("Set to true to disable Wild Fire Spell")
     public boolean disableWildFire = false;
@@ -101,7 +101,7 @@ public class SpellConfig {
     public boolean disableIcedTouch = false;
     @Config.Name("Disable Drizzle Spell")
     @Config.Comment("Set to true to disable the Drizzle Spell")
-    public boolean disableDrizzle = false;
+    public boolean disableSpringStorm = false;
     @Config.Name("Disable Reach Spell")
     @Config.Comment("Set to true to disable the Reach Spell")
     public boolean disableReach = false;
