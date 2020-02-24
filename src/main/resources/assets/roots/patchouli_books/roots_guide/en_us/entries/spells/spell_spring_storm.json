@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Summons a protective storm cloud above the caster, extinguishing passive and friendly creatures while damaging hostile creatures.$(br2)In addition, it provides Fire Resistance to all players standing within it and it also has a chance to strike hostile creatures with lightning.$(br2)$(info) The damage taken by creatures is amplified if they are standing in water, or are of a fiery or water-hating nature."
+      "text": "Summons a protective storm cloud above the caster, extinguishing fires and providing players within it resistances to damage, especially fire.$(br2)In addition, it has a chance to strike hostile creatures with lightning.$(br2)$(warning) The world can only sustain one of these storm cloud per player, lest the entire weather system be thrown into chaos."
     },
     {
       "type": "spell_template",
