@@ -5,6 +5,7 @@ import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.tileentity.TileEntityBonfire;
+import epicsquid.roots.util.RitualUtil;
 import epicsquid.roots.util.types.BlockPosDimension;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -20,6 +21,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -27,6 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -70,7 +73,6 @@ public class BlockBonfire extends BlockTEBase {
     return new AxisAlignedBB(-0.125, 0, -0.125, 1.125, 0.25, 1.125);
   }
 
-  //Concerning the blockstate --------------------
   @Nonnull
   @Override
   protected BlockStateContainer createBlockState() {
@@ -102,10 +104,27 @@ public class BlockBonfire extends BlockTEBase {
 
   @Override
   @SideOnly(Side.CLIENT)
-  public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+  public void randomDisplayTick(IBlockState stateIn, World world, BlockPos pos, Random rand) {
     if (stateIn.getValue(BURNING)) {
-      worldIn.playSound((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.5F, 1.0F, false);
+      world.playSound((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.5F, 1.0F, false);
     }
+
+/*    List<BlockPos> standingStones = RitualUtil.getNearbyStandingStonePositions(world, pos, -1);
+    if (standingStones.isEmpty()) {
+      return;
+    }
+
+    Vec3d me = new Vec3d(pos).add(0.5, 0.5, 0.5);
+    for (BlockPos runestone : standingStones) {
+      Vec3d thisSpot = new Vec3d(pos).add(0.5, 0.5, 0.5);
+      double stone = me.dotProduct(thisSpot);
+
+      double denom = Math.sqrt(me.x * me.x + me.y * me.y + me.z * me.z) * Math.sqrt(thisSpot.x * thisSpot.x + thisSpot.y * thisSpot.y + thisSpot.z * thisSpot.z);
+      double angle = 0;
+      if (denom != 0) {
+        angle = Math.asin(stone/denom);
+      }
+    }*/
   }
 
   @Override
