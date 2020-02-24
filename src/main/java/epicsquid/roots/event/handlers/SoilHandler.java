@@ -85,7 +85,9 @@ public class SoilHandler {
                 for (ItemStack stack : event.getDrops()) {
                   newDrops.add(stack);
                   if (random.nextInt(3) < fertility) {
-                    newDrops.add(new ItemStack(stack.getItem(), fertility > 2 ? 2 : 1));
+                    ItemStack copy = stack.copy();
+                    copy.setCount(fertility > 2 ? 2 : 1);
+                    newDrops.add(stack.copy());
                   }
                 }
                 event.getDrops().clear();
