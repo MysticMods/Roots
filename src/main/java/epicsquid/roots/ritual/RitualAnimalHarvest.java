@@ -41,7 +41,7 @@ public class RitualAnimalHarvest extends RitualBase {
   public void init() {
     addCondition(new ConditionItems(
         new ItemStack(ModItems.wildewheet),
-        new OreIngredient("blockWool"),
+        new OreIngredient("wool"),
         new ItemStack(Items.MELON),
         new ItemStack(Items.CARROT),
         new ItemStack(ModItems.wildroot)

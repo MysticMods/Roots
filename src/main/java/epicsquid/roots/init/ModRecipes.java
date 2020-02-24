@@ -1029,7 +1029,7 @@ public class ModRecipes {
         new PyreCraftingRecipe(new ItemStack(ModItems.cloud_berry, 3), 1).addIngredients(
             new OreIngredient("treeLeaves"),
             new ItemStack(Item.getItemFromBlock(Blocks.TALLGRASS), 1, 1),
-            new OreIngredient("blockWool"),
+            new OreIngredient("wool"),
             new ItemStack(ModItems.terra_moss),
             new ItemStack(ModItems.terra_moss)));
 
