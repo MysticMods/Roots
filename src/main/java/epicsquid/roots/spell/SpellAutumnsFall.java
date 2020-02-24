@@ -26,7 +26,7 @@ public class SpellAutumnsFall extends SpellBase {
 
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(120);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(1, new SpellCost("wildewheet", 0.025));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(1, new SpellCost("wildewheet", 0.250));
   public static Property<Integer> PROP_RADIUS = new Property<>("radius", 10);
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 3);
   public static Property<Integer> PROP_MAX_AFFECTED = new Property<>("max_affected", 1);
