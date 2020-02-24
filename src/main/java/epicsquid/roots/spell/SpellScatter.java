@@ -9,16 +9,17 @@ import epicsquid.roots.util.types.Property;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemSeeds;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.oredict.OreIngredient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SpellScatter extends SpellBase {
@@ -27,72 +28,77 @@ public class SpellScatter extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("wildroot", 0.25));
   public static Property<Integer> PROP_RADIUS = new Property<>("radius", 7);
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 3);
+  public static Property<Integer> PROP_MAX_SEEDS = new Property<>("max_seeds", 16);
 
   public static String spellName = "spell_scatter";
   public static SpellScatter instance = new SpellScatter(spellName);
 
-  private int radius;
+  private int radius, radius_y, max_seeds;
 
   public SpellScatter(String name) {
-    super(name, TextFormatting.DARK_GREEN, 188F/255F, 244F/255F, 151F/255F, 71F/255F, 132F/255F, 30F/255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS);
+    super(name, TextFormatting.DARK_GREEN, 188F / 255F, 244F / 255F, 151F / 255F, 71F / 255F, 132F / 255F, 30F / 255F);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS, PROP_RADIUS_Y, PROP_MAX_SEEDS);
   }
 
   @Override
   public void init() {
     addIngredients(
-            new ItemStack(ModItems.terra_spores),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(ModItems.wildroot),
-            new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
-            new ItemStack(ModItems.terra_moss)
+        new OreIngredient("cropWheat"),
+        new OreIngredient("cropPotato"),
+        new ItemStack(Items.GOLDEN_HOE),
+        new ItemStack(Items.WHEAT_SEEDS),
+        new OreIngredient("rootsBark")
     );
   }
 
   @Override
   public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
+    World world = caster.world;
+    BlockPos pos = caster.getPosition();
 
-    List<BlockPos> blocks = Util.getBlocksWithinRadius(caster.world, caster.getPosition().down(), radius, 1, radius, Blocks.FARMLAND);
-    boolean hadEffect = false;
+    ItemStack offhand = caster.getHeldItemOffhand();
+    if (offhand.isEmpty() || !(offhand.getItem() instanceof IPlantable)) {
+      return false;
+    }
 
-    for (BlockPos pos : blocks)
-    {
-      if (caster.getHeldItemOffhand() != ItemStack.EMPTY && caster.getHeldItemOffhand().getItem() instanceof ItemSeeds)
-      {
-        ItemSeeds  seeds = (ItemSeeds) caster.getHeldItemOffhand().getItem();
-        IBlockState plant = seeds.getPlant(caster.world, pos);
+    List<BlockPos> blocks = Util.getBlocksWithinRadius(world, pos.down(), radius, radius_y, radius, Blocks.FARMLAND);
+    if (blocks.isEmpty()) {
+      return false;
+    }
 
-        if(canPlacePlant(caster.world, plant, pos, seeds) && caster.world.isAirBlock(pos.up()))
-        {
-          caster.world.setBlockState(pos.up(), plant);
+    List<BlockPos> affectedPositions = new ArrayList<>();
 
-          if (!caster.isCreative())
-            caster.getHeldItemOffhand().shrink(1);
+    for (BlockPos p : blocks) {
+      IPlantable plantable = (IPlantable) offhand.getItem();
+      IBlockState planted = plantable.getPlant(world, p);
 
-          MessageScatterPlantFX fx = new MessageScatterPlantFX(pos.getX(), pos.getY() + 1, pos.getZ());
-          PacketHandler.sendToAllTracking(fx, caster);
+      if (Blocks.FARMLAND.canSustainPlant(planted, world, p, EnumFacing.UP, plantable)) {
+        if (!world.isRemote) {
+          world.setBlockState(p.up(), planted);
 
-          hadEffect = true;
+          if (!caster.isCreative()) {
+            offhand.shrink(1);
+          }
         }
+        affectedPositions.add(p);
+      }
+
+      if (affectedPositions.size() >= max_seeds || offhand.isEmpty()) {
+        break;
       }
     }
-    return hadEffect;
-  }
 
-  private boolean canPlacePlant(World world, IBlockState plant, BlockPos pos, ItemSeeds seeds)
-  {
-      return world.getBlockState(pos).getBlock().canSustainPlant(plant, world, pos, EnumFacing.UP,
-              new IPlantable() {
-      @Override
-      public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
-        return seeds.getPlantType(world, pos);
-      }
+    if (!world.isRemote) {
+      caster.setHeldItem(EnumHand.OFF_HAND, offhand);
 
-      @Override
-      public IBlockState getPlant(IBlockAccess world, BlockPos pos) {
-        return seeds.getPlant(world, pos);
+      if (!affectedPositions.isEmpty()) {
+        MessageScatterPlantFX fx = new MessageScatterPlantFX(affectedPositions);
+        PacketHandler.sendToAllTracking(fx, caster);
       }
-      });
+    }
+
+    return !affectedPositions.isEmpty();
   }
 
   @Override
@@ -100,6 +106,8 @@ public class SpellScatter extends SpellBase {
     this.castType = properties.get(PROP_CAST_TYPE);
     this.cooldown = properties.get(PROP_COOLDOWN);
     this.radius = properties.get(PROP_RADIUS);
+    this.radius_y = properties.get(PROP_RADIUS_Y);
+    this.max_seeds = properties.get(PROP_MAX_SEEDS);
   }
 
 }
