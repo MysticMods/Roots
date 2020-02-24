@@ -72,13 +72,13 @@ public class BlockGroveStone extends BlockBase {
     if (state.getValue(FACING) == EnumFacing.NORTH) {
       if (state.getValue(HALF) == Half.TOP) {
         return new AxisAlignedBB(0.15, 0, 0.2, 0.85, 0.7, 0.8);
-      } else /*if (state.getValue(HALF) == Half.BOTTOM)*/ {
+      } else {
         return new AxisAlignedBB(0.15, 0, 0.2, 0.85, 1, 0.8);
       }
     } else {
       if (state.getValue(HALF) == Half.TOP) {
         return new AxisAlignedBB(0.2, 0, 0.15, 0.8, 0.7, 0.85);
-      } else /*if (state.getValue(HALF) == Half.BOTTOM)*/ {
+      } else {
         return new AxisAlignedBB(0.2, 0, 0.15, 0.8, 1, 0.85);
       }
     }
@@ -92,8 +92,7 @@ public class BlockGroveStone extends BlockBase {
 
   @Override
   public int getMetaFromState(IBlockState state) {
-    int meta = (((state.getValue(FACING) == EnumFacing.NORTH ? 0 : 1) << 2 ^ state.getValue(HALF).ordinal())) << 1 ^ (state.getValue(VALID) ? 1 : 0);
-    return meta;
+    return (((state.getValue(FACING) == EnumFacing.NORTH ? 0 : 1) << 2 ^ state.getValue(HALF).ordinal())) << 1 ^ (state.getValue(VALID) ? 1 : 0);
   }
 
   @Override
@@ -269,15 +268,11 @@ public class BlockGroveStone extends BlockBase {
           if (i > -2 && i < 2 && j == -1) {
             j = 2;
           }
-          if (rand.nextInt(32) == 0) {
-            for (int k = 0; k <= 1; ++k) {
-              if (!worldIn.isAirBlock(pos.add(i / 2, 0, j / 2))) {
-                break;
-              }
-              ClientProxy.particleRenderer.spawnParticle(worldIn, Util.getLowercaseClassName(ParticleLeafArc.class), (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, (i + rand.nextDouble() - 0.05) * 0.04, -0.0001, (j + rand.nextFloat() - 0.05) * 0.04,
-                  100, (232 / 255.0) + rand.nextDouble() * 0.05, 167 / 255.0, 111 / 255.0, 0.385, 0.117 + rand.nextDouble() * 0.05, 1, rand.nextDouble() + 0.5, rand.nextDouble() * 2);
-
+          if (rand.nextInt(12) == 0) {
+            if (!worldIn.isAirBlock(pos.add(i / 2, 0, j / 2))) {
+              break;
             }
+            ClientProxy.particleRenderer.spawnParticle(worldIn, Util.getLowercaseClassName(ParticleLeafArc.class), (double) pos.getX() + 0.5D, (double) pos.getY() + 0.75D, (double) pos.getZ() + 0.5D, (i + rand.nextDouble() - 0.05) * 0.025, 0, (j + rand.nextFloat() - 0.05) * 0.025, 100, (232 / 255.0) + rand.nextDouble() * 0.05, 167 / 255.0, 111 / 255.0, 0.385, 0.117 + rand.nextDouble() * 0.05, 1, rand.nextDouble() + 0.5, rand.nextDouble() * 2);
           }
         }
       }

@@ -2,6 +2,7 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageDisarmFX;
 import epicsquid.roots.spell.modules.SpellModule;
@@ -25,20 +26,20 @@ public class SpellDisarm extends SpellBase {
 
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(350);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("moonglow_leaf", 0.50));
-  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("dewgonia", 0.25));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("moonglow_leaf", 1.0));
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 2);
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 2);
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 2);
+  public static Property<Integer> PROP_DROP_CHANCE = new Property<>("drop_chance", 4);
 
   public static String spellName = "spell_disarm";
   public static SpellDisarm instance = new SpellDisarm(spellName);
 
-  private int radius_x, radius_y, radius_z;
+  private int radius_x, radius_y, radius_z, drop_chance;
 
   private SpellDisarm(String name) {
     super(name, TextFormatting.DARK_RED, 122F / 255F, 0F, 0F, 58F / 255F, 58F / 255F, 58F / 255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
   }
 
   @Override
@@ -65,20 +66,22 @@ public class SpellDisarm extends SpellBase {
     }
 
     for (EntityLivingBase entity : entities) {
-      int pieces = 0;
+      boolean disarmed = false;
       for (EntityEquipmentSlot slot : EntityEquipmentSlot.values()) {
         ItemStack stack = entity.getItemStackFromSlot(slot);
         if (stack.isEmpty()) {
           continue;
         }
-        pieces++;
+        disarmed = true;
         if (!world.isRemote) {
           entity.setItemStackToSlot(slot, ItemStack.EMPTY);
-          ItemUtil.spawnItem(world, entity.getPosition(), stack);
+          if (drop_chance == 1 || drop_chance > 1 && Util.rand.nextInt(drop_chance) == 0) {
+            ItemUtil.spawnItem(world, entity.getPosition(), stack);
+          }
         }
       }
 
-      if (pieces != 0) {
+      if (disarmed) {
         if (!world.isRemote) {
           PacketHandler.sendToAllTracking(new MessageDisarmFX(entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ()), caster);
         }
@@ -95,5 +98,6 @@ public class SpellDisarm extends SpellBase {
     this.radius_x = properties.get(PROP_RADIUS_X);
     this.radius_y = properties.get(PROP_RADIUS_Y);
     this.radius_z = properties.get(PROP_RADIUS_Z);
+    this.drop_chance = properties.get(PROP_DROP_CHANCE);
   }
 }

@@ -1,0 +1,17 @@
+{
+  "name": "Summers' Thaw",
+  "icon": "roots:spell_dust",
+  "category": "spells",
+  "advancement": "roots:infernal_bulb",
+  "flag": "roots:spell_summers_thaw",
+  "pages": [
+    {
+      "type": "text",
+      "text": "With each cast, a number of nearby blocks will be thawed with the heat of summer, melting away thin layers of snow and turning larger clusters of ice and snow into water."
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_summers_thaw"
+    }
+  ]
+}

@@ -13,6 +13,15 @@ public class ParticleUtil {
   public static Random random = new Random();
   public static int counter = 0;
 
+  public static void spawnParticleRain(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale, int lifetime) {
+    if (MysticalLib.proxy instanceof ClientProxy) {
+      counter += random.nextInt(3);
+      if (counter % (Minecraft.getMinecraft().gameSettings.particleSetting == 0 ? 1 : 2 * Minecraft.getMinecraft().gameSettings.particleSetting) == 0) {
+        ClientProxy.particleRenderer.spawnParticle(world, LibRegistry.PARTICLE_RAIN, x, y, z, vx, vy, vz, lifetime, a, scale, 1);
+      }
+    }
+  }
+
   public static void spawnParticleStar(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale, int lifetime) {
     if (MysticalLib.proxy instanceof ClientProxy) {
       counter += random.nextInt(3);
@@ -40,8 +49,7 @@ public class ParticleUtil {
     }
   }
 
-  public static void spawnParticleLineGlow(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a,
-                                           float scale, int lifetime) {
+  public static void spawnParticleLineGlow(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale, int lifetime) {
     if (MysticalLib.proxy instanceof ClientProxy) {
       counter += random.nextInt(3);
       if (counter % (Minecraft.getMinecraft().gameSettings.particleSetting == 0 ? 1 : 2 * Minecraft.getMinecraft().gameSettings.particleSetting) == 0) {
@@ -50,8 +58,7 @@ public class ParticleUtil {
     }
   }
 
-  public static void spawnParticleLineGlowSteady(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a,
-                                                 float scale, int lifetime) {
+  public static void spawnParticleLineGlowSteady(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale, int lifetime) {
     if (MysticalLib.proxy instanceof ClientProxy) {
       counter += random.nextInt(3);
       if (counter % (Minecraft.getMinecraft().gameSettings.particleSetting == 0 ? 1 : 2 * Minecraft.getMinecraft().gameSettings.particleSetting) == 0) {
@@ -60,8 +67,7 @@ public class ParticleUtil {
     }
   }
 
-  public static void spawnParticleSmoke(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale,
-                                        int lifetime, boolean additive) {
+  public static void spawnParticleSmoke(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale, int lifetime, boolean additive) {
     if (MysticalLib.proxy instanceof ClientProxy) {
       counter += random.nextInt(3);
       if (counter % (Minecraft.getMinecraft().gameSettings.particleSetting == 0 ? 1 : 2 * Minecraft.getMinecraft().gameSettings.particleSetting) == 0) {
@@ -70,8 +76,16 @@ public class ParticleUtil {
     }
   }
 
-  public static void spawnParticleGlow(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale,
-                                       int lifetime) {
+  public static void spawnParticleCloud(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale, int lifetime, boolean additive) {
+    if (MysticalLib.proxy instanceof ClientProxy) {
+      counter += random.nextInt(3);
+      if (counter % (Minecraft.getMinecraft().gameSettings.particleSetting == 0 ? 1 : 2 * Minecraft.getMinecraft().gameSettings.particleSetting) == 0) {
+        ClientProxy.particleRenderer.spawnParticle(world, LibRegistry.PARTICLE_CLOUD, x, y, z, vx, vy, vz, lifetime, r, g, b, a, scale, 1);
+      }
+    }
+  }
+
+  public static void spawnParticleGlow(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale, int lifetime) {
     if (MysticalLib.proxy instanceof ClientProxy) {
       counter += random.nextInt(3);
       if (counter % (Minecraft.getMinecraft().gameSettings.particleSetting == 0 ? 1 : 2 * Minecraft.getMinecraft().gameSettings.particleSetting) == 0) {
@@ -80,8 +94,7 @@ public class ParticleUtil {
     }
   }
 
-  public static void spawnParticleSpark(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale,
-                                        int lifetime) {
+  public static void spawnParticleSpark(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale, int lifetime) {
     if (MysticalLib.proxy instanceof ClientProxy) {
       counter += random.nextInt(3);
       if (counter % (Minecraft.getMinecraft().gameSettings.particleSetting == 0 ? 1 : 2 * Minecraft.getMinecraft().gameSettings.particleSetting) == 0) {
@@ -90,8 +103,7 @@ public class ParticleUtil {
     }
   }
 
-  public static void spawnParticleThorn(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale,
-                                        int lifetime, boolean additive) {
+  public static void spawnParticleThorn(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale, int lifetime, boolean additive) {
     if (MysticalLib.proxy instanceof ClientProxy) {
       counter += random.nextInt(3);
       if (counter % (Minecraft.getMinecraft().gameSettings.particleSetting == 0 ? 1 : 2 * Minecraft.getMinecraft().gameSettings.particleSetting) == 0) {
@@ -100,8 +112,7 @@ public class ParticleUtil {
     }
   }
 
-  public static void spawnParticlePetal(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale,
-                                        int lifetime) {
+  public static void spawnParticlePetal(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale, int lifetime) {
     if (MysticalLib.proxy instanceof ClientProxy) {
       counter += random.nextInt(3);
       if (counter % (Minecraft.getMinecraft().gameSettings.particleSetting == 0 ? 1 : 2 * Minecraft.getMinecraft().gameSettings.particleSetting) == 0) {

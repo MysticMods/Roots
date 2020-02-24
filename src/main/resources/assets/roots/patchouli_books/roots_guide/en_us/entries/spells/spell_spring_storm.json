@@ -1,0 +1,17 @@
+{
+  "name": "Spring Storm",
+  "icon": "roots:spell_dust",
+  "category": "spells",
+  "advancement": "roots:dewgonia",
+  "flag": "roots:spell_spring_storm",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Summons a protective storm cloud above the caster, extinguishing passive and friendly creatures while damaging hostile creatures.$(br2)In addition, it provides Fire Resistance to all players standing within it and it also has a chance to strike hostile creatures with lightning.$(br2)$(info) The damage taken by creatures is amplified if they are standing in water, or are of a fiery or water-hating nature."
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_spring_storm"
+    }
+  ]
+}
