@@ -5,29 +5,25 @@
  * This means no, you cannot steal this code. This is licensed for sole use by Horizon Studio and its subsidiaries, you MUST be granted specific written permission by Horizon Studio to use this code, thinking you have permission IS NOT PERMISSION!
  */
 
-package epicsquid.roots.gui.client;
+package epicsquid.roots.client.gui;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.gui.container.ContainerPouch;
+import epicsquid.roots.container.ContainerQuiver;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
-public class GuiPouch extends GuiContainer {
+public class GuiQuiver extends GuiContainer {
 
-  private ContainerPouch containerPouch;
+  private ContainerQuiver containerQuiver;
 
-  public GuiPouch(@Nonnull ContainerPouch containerPouch) {
-    super(containerPouch);
-    this.containerPouch = containerPouch;
-    if (isComponentPouch()) {
-      xSize = 150;
-    } else {
-      xSize = 170;
-    }
-    ySize = 100;
+  public GuiQuiver(@Nonnull ContainerQuiver containerQuiver) {
+    super(containerQuiver);
+    this.containerQuiver = containerQuiver;
+    xSize = 176;
+    ySize = 149;
   }
 
   @Override
@@ -40,13 +36,9 @@ public class GuiPouch extends GuiContainer {
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
     GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-    this.mc.getTextureManager().bindTexture(new ResourceLocation(Roots.MODID, isComponentPouch() ? "textures/gui/component_pouch_gui.png" : "textures/gui/apothecary_pouch_gui.png"));
+    this.mc.getTextureManager().bindTexture(new ResourceLocation(Roots.MODID, "textures/gui/quiver_gui.png"));
     int i = (this.width - this.xSize) / 2;
     int j = (this.height - this.ySize) / 2;
-    this.drawTexturedModalRect(i - (isComponentPouch() ? 13 : 35), j - (isComponentPouch() ? 55 : 63), 0, 0, isComponentPouch() ? 176 : 213, isComponentPouch() ? 207 : 215);
-  }
-
-  private boolean isComponentPouch() {
-    return containerPouch.componentPouch;
+    this.drawTexturedModalRect(i, j, 0, 0, 176, 149);
   }
 }

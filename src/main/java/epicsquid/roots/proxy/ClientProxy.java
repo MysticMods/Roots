@@ -1,7 +1,7 @@
 package epicsquid.roots.proxy;
 
 import epicsquid.roots.RegistryManager;
-import epicsquid.roots.gui.Keybinds;
+import epicsquid.roots.client.Keybinds;
 import epicsquid.roots.tileentity.*;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;

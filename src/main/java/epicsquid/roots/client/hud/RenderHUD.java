@@ -1,4 +1,4 @@
-package epicsquid.roots.gui.hud;
+package epicsquid.roots.client.hud;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.block.BlockBonfire;
