@@ -1,6 +1,7 @@
 package epicsquid.roots.block;
 
 import epicsquid.mysticallib.block.BlockTEBase;
+import epicsquid.mysticallib.particle.particles.ParticleLeaf;
 import epicsquid.mysticallib.particle.particles.ParticleLeafArc;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
@@ -116,20 +117,21 @@ public class BlockBonfire extends BlockTEBase {
         Vec3d me = new Vec3d(pos).add(0.5, 0.5, 0.5);
         for (BlockPos runestone : standingStones) {
           if (rand.nextInt(6) == 0) {
-            Vec3d angle = me.subtract(new Vec3d(runestone).add(0.5, 0.5, 0.5)).normalize().scale(0.05);
-            ClientProxy.particleRenderer.spawnParticle(world, ParticleLeafArc.class,
+            Vec3d origAngle = me.subtract(new Vec3d(runestone).add(0.5 + rand.nextDouble() - 0.5, 0.5 + rand.nextDouble() - 0.5, 0.5 + rand.nextDouble() - 0.5));
+            Vec3d angle = origAngle.normalize().scale(0.05);
+            ClientProxy.particleRenderer.spawnParticle(world, ParticleLeaf.class,
                 (double) runestone.getX() + 0.5D,
                 (double) runestone.getY() + 0.5D,
                 (double) runestone.getZ() + 0.5D,
-                angle.x,
-                0,
-                angle.z,
-                100,
-                39 / 255.0 + rand.nextDouble() * 0.05,
-                90 / 255.0 + rand.nextDouble() * 0.05,
-                41 / 255.0 + rand.nextDouble() * 0.05,
-                1,
-                2,
+                angle.x * 0.5f,
+                angle.y * 0.5f,
+                angle.z * 0.5f,
+                (origAngle.lengthSquared() * 10) - 5,
+                60 / 255.0 + rand.nextDouble() * 0.05,
+                120 / 255.0 + rand.nextDouble() * 0.05,
+                60 / 255.0 + rand.nextDouble() * 0.05,
+                1f,
+                2.5f,
                 1,
                 rand.nextDouble() + 0.5,
                 rand.nextDouble() * 2);
