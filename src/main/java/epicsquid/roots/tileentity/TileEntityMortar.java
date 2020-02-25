@@ -19,9 +19,12 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +37,16 @@ public class TileEntityMortar extends TileBase {
       if (!world.isRemote) {
         updatePacketViaState();
       }
+    }
+
+    @Override
+    public int getSlotLimit(int slot) {
+      return 1;
+    }
+
+    @Override
+    protected int getStackLimit(int slot, @Nonnull ItemStack stack) {
+      return 1;
     }
   };
 
@@ -70,15 +83,122 @@ public class TileEntityMortar extends TileBase {
   }
 
   @Override
-  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand,
-                          @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
-    ItemStack heldItem = player.getHeldItem(hand);
-    ItemStack offHand = player.getHeldItemOffhand();
+  public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+    return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing == EnumFacing.UP;
+  }
+
+  @Nullable
+  @Override
+  public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+    if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing == EnumFacing.UP) {
+      return (T) inventory;
+    }
+
+    return super.getCapability(capability, facing);
+  }
+
+  public boolean handleCraft(BlockPos crafterPos) {
+    List<ItemStack> ingredients = getIngredients();
+    SpellBase spell = ModRecipes.getSpellRecipe(ingredients);
+    if (spell != null) {
+      if (world.isRemote) {
+        for (int i = 0; i < 8; i++) {
+          int chance = Util.rand.nextInt(3);
+          if (chance == 0) {
+            ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
+                getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
+                0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), spell.getRed1(),
+                spell.getGreen1(), spell.getBlue1(), 0.25f, 1.5f, 24, false);
+          } else if (chance == 1) {
+            ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
+                getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
+                0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), spell.getRed2(),
+                spell.getGreen2(), spell.getBlue2(), 0.25f, 1.5f, 24, false);
+          } else if (chance == 2) {
+            ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
+                getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
+                0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.5f, 0.5f,
+                0.5f, 0.5f, 2.5f, 24, false);
+          }
+        }
+      }
+      ItemStack dust = spell.getResult();
+      if (!world.isRemote) {
+        ItemUtil.spawnItem(world, crafterPos.add(0, 1, 0), dust);
+        markDirty();
+        updatePacketViaState();
+      }
+      for (int i = 0; i < inventory.getSlots(); i++) {
+        ItemStack item = inventory.extractItem(i, 1, false);
+        if (!world.isRemote) {
+          if (item.getItem().hasContainerItem(item)) {
+            ItemStack container = ForgeHooks.getContainerItem(item);
+            ItemUtil.spawnItem(world, crafterPos.add(0, 1, 0), container);
+          }
+        }
+      }
+      return true;
+    }
+    MortarRecipe mortarRecipe = ModRecipes.getMortarRecipe(ingredients);
+
+    if (mortarRecipe != null) {
+      if (world.isRemote) {
+        for (int i = 0; i < 8; i++) {
+          int chance = Util.rand.nextInt(3);
+          if (chance == 0) {
+            ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
+                getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
+                0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f),
+                mortarRecipe.getR1(), mortarRecipe.getG1(), mortarRecipe.getB1(), 0.25f, 1.5f, 24, false);
+          } else if (chance == 1) {
+            ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
+                getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
+                0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f),
+                mortarRecipe.getR2(), mortarRecipe.getG2(), mortarRecipe.getB2(), 0.25f, 1.5f, 24, false);
+          } else if (chance == 2) {
+            ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
+                getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
+                0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.5f, 0.5f,
+                0.5f, 0.5f, 2.5f, 24, false);
+          }
+        }
+      }
+      if (!world.isRemote) {
+        ItemUtil.spawnItem(world, crafterPos.add(0, 1, 0), mortarRecipe.getResult().copy());
+        markDirty();
+        updatePacketViaState();
+      }
+      for (int i = 0; i < inventory.getSlots(); i++) {
+        ItemStack item = inventory.extractItem(i, 1, false);
+        if (!world.isRemote) {
+          if (item.getItem().hasContainerItem(item)) {
+            ItemStack container = ForgeHooks.getContainerItem(item);
+            ItemUtil.spawnItem(world, crafterPos.add(0, 1, 0), container);
+          }
+        }
+      }
+      for (int i = 0; i < inventory.getSlots(); i++) {
+        inventory.extractItem(i, 1, false);
+      }
+      return true;
+    }
+    return false;
+  }
+
+  public List<ItemStack> getIngredients() {
     List<ItemStack> ingredients = new ArrayList<>();
     for (int i = 0; i < inventory.getSlots(); i++) {
       ItemStack stack = inventory.getStackInSlot(i);
       if (!stack.isEmpty()) ingredients.add(stack);
     }
+    return ingredients;
+  }
+
+  @Override
+  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
+    ItemStack heldItem = player.getHeldItem(hand);
+    ItemStack offHand = player.getHeldItemOffhand();
+    List<ItemStack> ingredients = getIngredients();
     if (!heldItem.isEmpty()) {
       ItemStack slot0 = inventory.getStackInSlot(0);
       if (heldItem.getItem() != ModItems.pestle && !(ingredients.size() == 5 && offHand.getItem() == ModItems.pestle)) {
@@ -110,82 +230,8 @@ public class TileEntityMortar extends TileBase {
             return true;
           }
         }
-        SpellBase spell = ModRecipes.getSpellRecipe(ingredients);
-        if (spell != null) {
-          if (world.isRemote) {
-            for (int i = 0; i < 8; i++) {
-              int chance = Util.rand.nextInt(3);
-              if (chance == 0) {
-                ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
-                    getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
-                    0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), spell.getRed1(),
-                    spell.getGreen1(), spell.getBlue1(), 0.25f, 1.5f, 24, false);
-              } else if (chance == 1) {
-                ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
-                    getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
-                    0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), spell.getRed2(),
-                    spell.getGreen2(), spell.getBlue2(), 0.25f, 1.5f, 24, false);
-              } else if (chance == 2) {
-                ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
-                    getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
-                    0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.5f, 0.5f,
-                    0.5f, 0.5f, 2.5f, 24, false);
-              }
-            }
-          }
-          ItemStack dust = spell.getResult();
-          if (!world.isRemote) {
-            ItemUtil.spawnItem(world, getPos(), dust);
-            markDirty();
-            updatePacketViaState();
-          }
-          for (int i = 0; i < inventory.getSlots(); i++) {
-            ItemStack item = inventory.extractItem(i, 1, false);
-            if (!world.isRemote) {
-              if (item.getItem().hasContainerItem(item)) {
-                ItemStack container = ForgeHooks.getContainerItem(item);
-                ItemUtil.spawnItem(world, getPos().add(0, 1, 0), container);
-              }
-            }
-          }
-          return true;
-        }
-        MortarRecipe mortarRecipe = ModRecipes.getMortarRecipe(ingredients);
-
-        if (mortarRecipe != null) {
-          if (world.isRemote) {
-            for (int i = 0; i < 8; i++) {
-              int chance = Util.rand.nextInt(3);
-              if (chance == 0) {
-                ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
-                    getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
-                    0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f),
-                    mortarRecipe.getR1(), mortarRecipe.getG1(), mortarRecipe.getB1(), 0.25f, 1.5f, 24, false);
-              } else if (chance == 1) {
-                ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
-                    getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
-                    0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f),
-                    mortarRecipe.getR2(), mortarRecipe.getG2(), mortarRecipe.getB2(), 0.25f, 1.5f, 24, false);
-              } else if (chance == 2) {
-                ParticleUtil.spawnParticleSmoke(world, getPos().getX() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
-                    getPos().getY() + 0.4375f + 0.125f * (Util.rand.nextFloat() - 0.5f), getPos().getZ() + 0.5f + 0.25f * (Util.rand.nextFloat() - 0.5f),
-                    0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.0125f * (Util.rand.nextFloat() - 0.5f), 0.5f, 0.5f,
-                    0.5f, 0.5f, 2.5f, 24, false);
-              }
-            }
-          }
-          if (!world.isRemote) {
-            ItemUtil.spawnItem(world, getPos(), mortarRecipe.getResult().copy());
-            markDirty();
-            updatePacketViaState();
-          }
-          for (int i = 0; i < inventory.getSlots(); i++) {
-            inventory.extractItem(i, 1, false);
-          }
-          return true;
-        }
+        return handleCraft(player.getPosition());
       }
-
     }
     if (heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND) {
       for (int i = inventory.getSlots() - 1; i >= 0; i--) {

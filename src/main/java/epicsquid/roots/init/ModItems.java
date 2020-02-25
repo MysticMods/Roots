@@ -99,7 +99,7 @@ public class ModItems {
       }
     }.setCreativeTab(Roots.tab));
 
-    event.addItem(pestle = new ItemBase("pestle").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(pestle = new ItemPestle("pestle").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(component_pouch = new ItemPouch("component_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(creative_pouch = new ItemCreativePouch("creative_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(apothecary_pouch = new ItemApothecaryPouch("apothecary_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
