@@ -3,8 +3,11 @@ package epicsquid.roots.item;
 import epicsquid.mysticallib.item.ItemBase;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -16,6 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Map;
 
 public class ItemLifeEssence extends ItemBase {
   public ItemLifeEssence(@Nonnull String name) {
@@ -68,5 +72,41 @@ public class ItemLifeEssence extends ItemBase {
     int uses_left = max_uses - stack.getItemDamage();
     tooltip.add(TextFormatting.AQUA + I18n.format("roots.tooltip.life_essence.uses", uses_left, max_uses));
     tooltip.add(TextFormatting.AQUA + I18n.format("roots.tooltip.life_essence"));
+  }
+
+  @Override
+  public boolean isEnchantable(ItemStack stack) {
+    return true;
+  }
+
+  @Override
+  public int getItemEnchantability() {
+    return 5;
+  }
+
+  @Override
+  public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+    Map<Enchantment, Integer> enchants = EnchantmentHelper.getEnchantments(book);
+    if (enchants.isEmpty()) {
+      return false;
+    }
+
+    for (Enchantment ench : enchants.keySet()) {
+      if (ench != Enchantments.UNBREAKING) {
+        return false;
+      }
+    }
+
+    return super.isBookEnchantable(stack, book);
+  }
+
+  @Override
+  public int getItemEnchantability(ItemStack stack) {
+    return getItemEnchantability();
+  }
+
+  @Override
+  public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+    return stack.getItem() == this && enchantment == Enchantments.UNBREAKING;
   }
 }
