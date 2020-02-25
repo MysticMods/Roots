@@ -48,7 +48,7 @@ public class SpellNaturesBlades extends SpellBase {
     }
 
     @Override
-    public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
+    public boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks) {
 
         List<BlockPos> blocks = Util.getBlocksWithinRadius(caster.world, caster.getPosition(), radius, 2, radius,
                 pos -> caster.world.isAirBlock(pos.up()) && caster.world.getBlockState(pos).getBlock() instanceof BlockDirt);

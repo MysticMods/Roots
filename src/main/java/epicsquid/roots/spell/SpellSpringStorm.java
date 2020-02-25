@@ -50,7 +50,7 @@ public class SpellSpringStorm extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks) {
     World world = caster.world;
     BlockPos pos = caster.getPosition();
 

@@ -59,7 +59,7 @@ public class SpellIcedTouch extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer player, List<SpellModule> modules, int ticks) {
     World world = player.world;
     if (modules.contains(ModuleRegistry.module_touch)) {
       if (!world.isRemote) {

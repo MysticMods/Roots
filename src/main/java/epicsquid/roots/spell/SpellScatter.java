@@ -2,7 +2,6 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageScatterPlantFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
@@ -53,7 +52,7 @@ public class SpellScatter extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks) {
     World world = caster.world;
     BlockPos pos = caster.getPosition();
 

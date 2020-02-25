@@ -209,7 +209,7 @@ public abstract class SpellBase {
     return ListUtil.matchesIngredients(ingredients, this.ingredients);
   }
 
-  public abstract boolean cast(EntityPlayer caster, List<SpellModule> modules);
+  public abstract boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks);
 
   public float getRed1() {
     return red1;

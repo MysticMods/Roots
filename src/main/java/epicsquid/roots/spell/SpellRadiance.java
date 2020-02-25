@@ -54,7 +54,7 @@ public class SpellRadiance extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer player, List<SpellModule> modules, int ticks) {
     if (!player.world.isRemote && player.ticksExisted % 2 == 0) {
       RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0),
           player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)));
@@ -119,6 +119,7 @@ public class SpellRadiance extends SpellBase {
       } else {
         positions.add(player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)));
       }
+      int count = 0;
       if (positions.size() > 1) {
         for (int i = 0; i < positions.size() - 1; i++) {
           double bx = Math.abs(positions.get(i + 1).x - positions.get(i).x) * 0.1f;
@@ -133,19 +134,23 @@ public class SpellRadiance extends SpellBase {
             for (EntityLivingBase e : entities) {
               if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
                   && e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
-                e.attackEntityFrom(ModDamage.radiantDamageFrom(player), damage);
-                if (e.isEntityUndead()) {
-                  e.attackEntityFrom(ModDamage.radiantDamageFrom(player), undeadDamage);
+                if (e.hurtTime <= 0 && !e.isDead) {
+                  e.attackEntityFrom(ModDamage.radiantDamageFrom(player), damage);
+                  if (e.isEntityUndead()) {
+                    e.attackEntityFrom(ModDamage.radiantDamageFrom(player), undeadDamage);
+                  }
+                  e.setRevengeTarget(player);
+                  e.setLastAttackedEntity(player);
+                  count++;
                 }
-                e.setRevengeTarget(player);
-                e.setLastAttackedEntity(player);
               }
             }
           }
         }
       }
+      return count > 0;
     }
-    return true;
+    return false;
   }
 
   @Override

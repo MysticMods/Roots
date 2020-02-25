@@ -44,7 +44,7 @@ public class SpellPetalShell extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer player, List<SpellModule> modules, int ticks) {
     if (!player.world.isRemote) {
       player.addPotionEffect(new PotionEffect(ModPotions.petal_shell, duration, maxShells, false, false));
       PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ), player);

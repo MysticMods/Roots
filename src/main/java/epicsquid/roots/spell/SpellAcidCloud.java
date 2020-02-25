@@ -58,21 +58,23 @@ public class SpellAcidCloud extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer player, List<SpellModule> modules, int ticks) {
     if (!player.world.isRemote) {
       List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class,
           new AxisAlignedBB(player.posX - 4.0, player.posY - 1.0, player.posZ - 4.0, player.posX + 4.0, player.posY + 3.0, player.posZ + 4.0));
       for (EntityLivingBase e : entities) {
         if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
             && !e.getUniqueID().equals(player.getUniqueID())) {
-          e.attackEntityFrom(DamageSource.causeMobDamage(player), damage);
-          if (SpellConfig.spellFeaturesCategory.acidCloudPoisoningEffect)
-            e.addPotionEffect(new PotionEffect(MobEffects.POISON, poisonDuration, poisonAmplification));
-          e.setRevengeTarget(player);
-          e.setLastAttackedEntity(player);
+          if (e.hurtTime <= 0 && !e.isDead) {
+            e.attackEntityFrom(DamageSource.causeMobDamage(player), damage);
+            if (SpellConfig.spellFeaturesCategory.acidCloudPoisoningEffect)
+              e.addPotionEffect(new PotionEffect(MobEffects.POISON, poisonDuration, poisonAmplification));
+            e.setRevengeTarget(player);
+            e.setLastAttackedEntity(player);
 
-          if(modules.contains(ModuleRegistry.module_fire)){
-            e.setFire(fireDuration);
+            if (modules.contains(ModuleRegistry.module_fire)) {
+              e.setFire(fireDuration);
+            }
           }
         }
       }

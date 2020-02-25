@@ -54,7 +54,7 @@ public class SpellDisarm extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks) {
     BlockPos playerPos = caster.getPosition();
     World world = caster.world;
 

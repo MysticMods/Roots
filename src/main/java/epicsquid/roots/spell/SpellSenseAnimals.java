@@ -44,7 +44,7 @@ public class SpellSenseAnimals extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks) {
     caster.addPotionEffect(new PotionEffect(ModPotions.animal_sense, duration, 0, false, false));
     return true;
   }
