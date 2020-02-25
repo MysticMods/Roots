@@ -1,6 +1,9 @@
 package epicsquid.roots.item.itemblock;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.roots.Roots;
+import epicsquid.roots.block.BlockElementalSoil;
 import epicsquid.roots.config.ElementalSoilConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.network.fx.ElementalSoilTransformFX;
@@ -10,6 +13,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
@@ -38,14 +42,18 @@ public class ItemBlockElementalSoil extends ItemBlock {
   }*/
 
   @Override
-  public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-    BlockPos opposite = pos.offset(facing);
+  public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, EnumHand hand) {
+    BlockPos opposite = pos; // .offset(facing);
     IBlockState state = world.getBlockState(opposite);
     IBlockState stateDown = world.getBlockState(opposite.down());
-    if (state.getBlock() == Blocks.FARMLAND || stateDown.getBlock() == Blocks.FARMLAND) {
-      if (stateDown.getBlock() == Blocks.FARMLAND) {
+    Roots.logger.info("BlockPos is " + pos.toString() + " while facing is " + facing.toString() + ". Pos state is " + state.toString() + ". State down is " + stateDown.toString());
+    if (state.getBlock() == Blocks.FARMLAND || state.getBlock() instanceof BlockElementalSoil || stateDown.getBlock() == Blocks.FARMLAND || stateDown.getBlock() instanceof BlockElementalSoil) {
+      if (stateDown.getBlock() == Blocks.FARMLAND || stateDown.getBlock() instanceof BlockElementalSoil) {
         opposite = opposite.down();
+        state = stateDown;
       }
+      IBlockState stateUp = world.getBlockState(opposite.up());
+      world.setBlockToAir(opposite.up());
       ItemStack stack = player.getHeldItem(hand);
       world.setBlockToAir(opposite);
       boolean placed = false;
@@ -54,13 +62,23 @@ public class ItemBlockElementalSoil extends ItemBlock {
       }
       if (!placed) {
         world.setBlockState(opposite, state);
+        world.setBlockState(opposite.up(), stateUp);
         return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
       } else {
+        Block block = stateDown.getBlock();
+        if (block == Blocks.FARMLAND) {
+          block = Blocks.DIRT;
+        }
+        ItemStack drop = new ItemStack(Item.getItemFromBlock(block), 1, stateDown.getBlock().damageDropped(stateDown));
+        if (!player.addItemStackToInventory(drop)) {
+          ItemUtil.spawnItem(world, player.getPosition(), drop);
+        }
+        world.setBlockState(opposite.up(), stateUp);
         return EnumActionResult.SUCCESS;
       }
     }
 
-    return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
+    return super.onItemUseFirst(player, world, pos, facing, hitX, hitY, hitZ, hand);
   }
 
   @Override
