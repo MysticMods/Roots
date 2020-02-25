@@ -1,6 +1,9 @@
 package epicsquid.roots.block;
 
 import epicsquid.mysticallib.block.BlockTEBase;
+import epicsquid.mysticallib.particle.particles.ParticleLeafArc;
+import epicsquid.mysticallib.proxy.ClientProxy;
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
@@ -107,24 +110,33 @@ public class BlockBonfire extends BlockTEBase {
   public void randomDisplayTick(IBlockState stateIn, World world, BlockPos pos, Random rand) {
     if (stateIn.getValue(BURNING)) {
       world.playSound((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.5F, 1.0F, false);
-    }
 
-/*    List<BlockPos> standingStones = RitualUtil.getNearbyStandingStonePositions(world, pos, -1);
-    if (standingStones.isEmpty()) {
-      return;
-    }
-
-    Vec3d me = new Vec3d(pos).add(0.5, 0.5, 0.5);
-    for (BlockPos runestone : standingStones) {
-      Vec3d thisSpot = new Vec3d(pos).add(0.5, 0.5, 0.5);
-      double stone = me.dotProduct(thisSpot);
-
-      double denom = Math.sqrt(me.x * me.x + me.y * me.y + me.z * me.z) * Math.sqrt(thisSpot.x * thisSpot.x + thisSpot.y * thisSpot.y + thisSpot.z * thisSpot.z);
-      double angle = 0;
-      if (denom != 0) {
-        angle = Math.asin(stone/denom);
+      List<BlockPos> standingStones = RitualUtil.getNearbyStandingStonePositions(world, pos, -1);
+      if (!standingStones.isEmpty()) {
+        Vec3d me = new Vec3d(pos).add(0.5, 0.5, 0.5);
+        for (BlockPos runestone : standingStones) {
+          if (rand.nextInt(6) == 0) {
+            Vec3d angle = me.subtract(new Vec3d(runestone).add(0.5, 0.5, 0.5)).normalize().scale(0.05);
+            ClientProxy.particleRenderer.spawnParticle(world, ParticleLeafArc.class,
+                (double) runestone.getX() + 0.5D,
+                (double) runestone.getY() + 0.5D,
+                (double) runestone.getZ() + 0.5D,
+                angle.x,
+                0,
+                angle.z,
+                100,
+                39 / 255.0 + rand.nextDouble() * 0.05,
+                90 / 255.0 + rand.nextDouble() * 0.05,
+                41 / 255.0 + rand.nextDouble() * 0.05,
+                1,
+                2,
+                1,
+                rand.nextDouble() + 0.5,
+                rand.nextDouble() * 2);
+          }
+        }
       }
-    }*/
+    }
   }
 
   @Override

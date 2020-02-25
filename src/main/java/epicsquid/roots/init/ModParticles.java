@@ -1,13 +1,14 @@
 package epicsquid.roots.init;
 
 import epicsquid.mysticallib.MysticalLib;
+import epicsquid.mysticallib.particle.ParticleBase;
 import epicsquid.mysticallib.particle.ParticleRegistry;
 import epicsquid.roots.particle.*;
 import net.minecraft.util.ResourceLocation;
 
 public class ModParticles {
 
-  public static String PARTICLE_PETAL, PARTICLE_STAR, PARTICLE_LINE_GLOW, PARTICLE_THORN, PARTICLE_LINE_GLOW_STEADY, PARTICLE_STAR_NO_GRAVITY;
+  public static Class<? extends ParticleBase> PARTICLE_PETAL, PARTICLE_STAR, PARTICLE_LINE_GLOW, PARTICLE_THORN, PARTICLE_LINE_GLOW_STEADY, PARTICLE_STAR_NO_GRAVITY;
 
   public static void init() {
     PARTICLE_PETAL = ParticleRegistry.registerParticle(MysticalLib.MODID, ParticlePetal.class, new ResourceLocation("roots:particle/particle_petal"));

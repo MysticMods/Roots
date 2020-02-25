@@ -51,7 +51,7 @@ public class MessageRunicShearsFX implements IMessage {
       Entity entity = message.getEntity(world);
       for (int i = 0; i < 50; i++) {
         ClientProxy.particleRenderer
-            .spawnParticle(world, Util.getLowercaseClassName(ParticleGlitter.class), entity.posX, entity.posY + 0.9f, entity.posZ,
+            .spawnParticle(world, ParticleGlitter.class, entity.posX, entity.posY + 0.9f, entity.posZ,
                 Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1),
                 Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), 120,
                 100f / 255f,

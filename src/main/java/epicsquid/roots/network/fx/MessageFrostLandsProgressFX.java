@@ -51,7 +51,7 @@ public class MessageFrostLandsProgressFX implements IMessage {
       for (BlockPos pos : message.affectedBlocks) {
         for (int k = 0; k < 20 + Util.rand.nextInt(15); k++) {
           ClientProxy.particleRenderer
-              .spawnParticle(world, Util.getLowercaseClassName(ParticleGlitter.class), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+              .spawnParticle(world, ParticleGlitter.class, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
                   Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1),
                   Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), 120, 0.619, 0.72, 0.90 + Util.rand.nextDouble() * 0.05, 1,
                   Util.rand.nextDouble() + 0.5, Util.rand.nextDouble() * 2);

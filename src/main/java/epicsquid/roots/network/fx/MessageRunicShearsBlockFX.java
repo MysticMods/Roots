@@ -39,7 +39,7 @@ public class MessageRunicShearsBlockFX implements IMessage {
     public IMessage onMessage(final MessageRunicShearsBlockFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       for (int k = 0; k < 2 + Util.rand.nextInt(2); k++) {
-        ClientProxy.particleRenderer.spawnParticle(world, Util.getLowercaseClassName(ParticleGlitter.class), message.position.getX() + 0.5, message.position.getY() + 0.5, message.position.getZ() + 0.5, Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1),
+        ClientProxy.particleRenderer.spawnParticle(world, ParticleGlitter.class, message.position.getX() + 0.5, message.position.getY() + 0.5, message.position.getZ() + 0.5, Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1),
             Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), 120, 0.855 + Util.rand.nextDouble() * 0.05, 0.710, 0.943 - Util.rand.nextDouble() * 0.05, 1, Util.rand.nextDouble() + 0.5, Util.rand.nextDouble() * 2);
       }
       return null;

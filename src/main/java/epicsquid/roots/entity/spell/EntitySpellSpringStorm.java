@@ -21,13 +21,11 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class EntitySpellSpringStorm extends EntitySpellBase<SpellSpringStorm> {
   public static AxisAlignedBB BOUNDING_BOX = null;
-  public static BiMap<UUID, UUID> playerToEntity = HashBiMap.create();
+  public static Map<UUID, UUID> playerToEntity = new HashMap<>();
 
   public static boolean hasCloud(EntityPlayer player) {
     return hasCloud(player.getUniqueID());

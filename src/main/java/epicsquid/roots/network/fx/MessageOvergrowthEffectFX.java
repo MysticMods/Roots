@@ -47,7 +47,7 @@ public class MessageOvergrowthEffectFX implements IMessage {
       World world = Minecraft.getMinecraft().world;
       for (int i = 0; i < 50; i++) {
         ClientProxy.particleRenderer
-            .spawnParticle(world, Util.getLowercaseClassName(ParticleGlitter.class), message.posX + 0.5, message.posY + 0.5, message.posZ + 0.5,
+            .spawnParticle(world, ParticleGlitter.class, message.posX + 0.5, message.posY + 0.5, message.posZ + 0.5,
                 Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1),
                 Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), 120, 0.607, 0.698 + Util.rand.nextDouble() * 0.05, 0.306, 1,
                 Util.rand.nextDouble() + 0.5, Util.rand.nextDouble() * 2);

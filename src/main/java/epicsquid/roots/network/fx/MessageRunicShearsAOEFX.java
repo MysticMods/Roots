@@ -50,7 +50,7 @@ public class MessageRunicShearsAOEFX implements IMessage {
       World world = Minecraft.getMinecraft().world;
       for (BlockPos pos : message.affectedBlocks) {
         for (int k = 0; k < 2 + Util.rand.nextInt(2); k++) {
-          ClientProxy.particleRenderer.spawnParticle(world, Util.getLowercaseClassName(ParticleGlitter.class), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), 120, 0.855 + Util.rand.nextDouble() * 0.05, 0.710, 0.943 - Util.rand.nextDouble() * 0.05, 1, Util.rand.nextDouble() + 0.5, Util.rand.nextDouble() * 2);
+          ClientProxy.particleRenderer.spawnParticle(world, ParticleGlitter.class, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), 120, 0.855 + Util.rand.nextDouble() * 0.05, 0.710, 0.943 - Util.rand.nextDouble() * 0.05, 1, Util.rand.nextDouble() + 0.5, Util.rand.nextDouble() * 2);
         }
       }
       return null;

@@ -115,7 +115,7 @@ public class RitualUtil {
       if (toppers.contains(state.getBlock())) {
         BlockPos start = p.toImmutable().down();
         IBlockState startState;
-        int column = 0;
+        int column = 1;
 
         while (start.getY() > (p.getY() - 10)) {
           startState = world.getBlockState(start);
