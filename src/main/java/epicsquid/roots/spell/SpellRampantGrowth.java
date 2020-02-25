@@ -51,14 +51,14 @@ public class SpellRampantGrowth extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer player, List<SpellModule> modules, int ticks) {
     List<BlockPos> positions = Growth.collect(player.world, player.getPosition(), radius_x, radius_y, radius_z);
     if (positions.isEmpty()) return false;
     if (!player.world.isRemote) {
       for (int i = 0; i < count + player.world.rand.nextInt(additionalCount); i++) {
         BlockPos pos = positions.get(player.world.rand.nextInt(positions.size()));
         IBlockState state = player.world.getBlockState(pos);
-        for (int j = 0; j < ticks; j++) {
+        for (int j = 0; j < this.ticks; j++) {
           state.getBlock().randomTick(player.world, pos, state, new Random());
         }
         if (player.world.rand.nextInt(3) == 0) {

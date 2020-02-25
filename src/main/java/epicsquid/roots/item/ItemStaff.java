@@ -71,7 +71,7 @@ public class ItemStaff extends ItemBase {
         if (spell != null) {
           if (spell.getCastType() == SpellBase.EnumCastType.INSTANTANEOUS) {
             if (spell.costsMet(player)) {
-              boolean result = spell.cast(player, capability.getSelectedModules());
+              boolean result = spell.cast(player, capability.getSelectedModules(), 0);
               if (result) {
                 if (!player.capabilities.isCreativeMode) {
                   spell.enactCosts(player);
@@ -95,12 +95,12 @@ public class ItemStaff extends ItemBase {
   public void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
     SpellHandler capability = SpellHandler.fromStack(stack);
     if (player instanceof EntityPlayer) {
-      if (capability.getCooldown() <= 0 && count % 20 == 0) {
+      if (capability.getCooldown() <= 0) {
         SpellBase spell = capability.getSelectedSpell();
         if (spell != null) {
           if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
             if (spell.costsMet((EntityPlayer) player)) {
-              boolean result = spell.cast((EntityPlayer) player, capability.getSelectedModules());
+              boolean result = spell.cast((EntityPlayer) player, capability.getSelectedModules(), count);
               if (result) {
                 spell.enactTickCosts((EntityPlayer) player);
               }

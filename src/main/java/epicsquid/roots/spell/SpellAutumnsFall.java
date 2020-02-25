@@ -53,7 +53,7 @@ public class SpellAutumnsFall extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks) {
     List<BlockPos> blocks = Util.getBlocksWithinRadius(caster.world, caster.getPosition(), radius, radius_y, radius, blockPos -> isAffectedByFallSpell(caster.world, blockPos));
 
     if (blocks.isEmpty()) {

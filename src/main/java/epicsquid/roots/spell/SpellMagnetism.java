@@ -44,7 +44,7 @@ public class SpellMagnetism extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer player, List<SpellModule> modules, int ticks) {
     // TODO: Check to see what the potential standard is for "unmagnetising" things
     int count = 0;
     count += Magnetize.pull(EntityItem.class, player.world, player.getPosition(), radius_x, radius_y, radius_z);

@@ -46,7 +46,7 @@ public class SpellGeas extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules) {
+  public boolean cast(EntityPlayer player, List<SpellModule> modules, int ticks) {
     boolean foundTarget = false;
     for (int i = 0; i < 4 && !foundTarget; i++) {
       double x = player.posX + player.getLookVec().x * 3.0 * (float) i;
