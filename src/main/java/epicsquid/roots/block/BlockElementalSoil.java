@@ -211,14 +211,13 @@ public class BlockElementalSoil extends BlockBase {
   public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
     super.updateTick(world, pos, state, rand);
 
-    if (world.isAirBlock(pos.up()))
+    if (world.isAirBlock(pos.up())) {
       return;
+    }
 
     IBlockState upState = world.getBlockState(pos.up());
     Block upBlock = upState.getBlock();
-    if (Harvest.isGrown(upState)) {
-      doHarvest(world, pos.up(), world.getBlockState(pos), upState);
-    }
+    doHarvest(world, pos.up(), world.getBlockState(pos), upState);
 
     if (!(upBlock instanceof IGrowable))
       return;
