@@ -5,14 +5,14 @@
  * This means no, you cannot steal this code. This is licensed for sole use by Horizon Studio and its subsidiaries, you MUST be granted specific written permission by Horizon Studio to use this code, thinking you have permission IS NOT PERMISSION!
  */
 
-package epicsquid.roots.gui;
+package epicsquid.roots;
 
-import epicsquid.roots.gui.client.GuiFeyCrafter;
-import epicsquid.roots.gui.client.GuiPouch;
-import epicsquid.roots.gui.client.GuiQuiver;
-import epicsquid.roots.gui.container.ContainerFeyCrafter;
-import epicsquid.roots.gui.container.ContainerPouch;
-import epicsquid.roots.gui.container.ContainerQuiver;
+import epicsquid.roots.container.ContainerFeyCrafter;
+import epicsquid.roots.container.ContainerPouch;
+import epicsquid.roots.container.ContainerQuiver;
+import epicsquid.roots.client.gui.GuiFeyCrafter;
+import epicsquid.roots.client.gui.GuiPouch;
+import epicsquid.roots.client.gui.GuiQuiver;
 import epicsquid.roots.tileentity.TileEntityFeyCrafter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;

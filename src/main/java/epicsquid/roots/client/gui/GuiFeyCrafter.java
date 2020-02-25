@@ -5,10 +5,10 @@
  * This means no, you cannot steal this code. This is licensed for sole use by Horizon Studio and its subsidiaries, you MUST be granted specific written permission by Horizon Studio to use this code, thinking you have permission IS NOT PERMISSION!
  */
 
-package epicsquid.roots.gui.client;
+package epicsquid.roots.client.gui;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.gui.container.ContainerFeyCrafter;
+import epicsquid.roots.container.ContainerFeyCrafter;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;

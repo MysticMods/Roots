@@ -1,4 +1,4 @@
-package epicsquid.roots.gui;
+package epicsquid.roots.client;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;

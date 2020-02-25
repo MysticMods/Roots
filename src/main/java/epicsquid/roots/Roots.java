@@ -4,7 +4,6 @@ import epicsquid.roots.capability.life_essence.LifeEssenceCapability;
 import epicsquid.roots.capability.life_essence.LifeEssenceCapabilityStorage;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapability;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityStorage;
-import epicsquid.roots.gui.GuiHandler;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.proxy.CommonProxy;

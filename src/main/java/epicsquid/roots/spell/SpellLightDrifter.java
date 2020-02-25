@@ -1,6 +1,8 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.roots.client.SpectatorHandler;
+import epicsquid.roots.client.gui.GuiFakeSpectator;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.MessageLightDrifterSync;
 import epicsquid.roots.network.fx.MessageLightDrifterFX;
@@ -66,6 +68,8 @@ public class SpellLightDrifter extends SpellBase {
       player.setGameType(GameType.SPECTATOR);
       PacketHandler.sendToAllTracking(new MessageLightDrifterSync(player.getUniqueID(), player.posX, player.posY, player.posZ, true, GameType.SPECTATOR.getID()), player);
       PacketHandler.sendToAllTracking(new MessageLightDrifterFX(player.posX, player.posY + 1.0f, player.posZ), player);
+    } else {
+      SpectatorHandler.setFake();
     }
     return true;
   }

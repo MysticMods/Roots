@@ -19,6 +19,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.GameType;
@@ -126,11 +127,11 @@ public class EventManager {
       event.getEntity().getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_TAG) - 1);
       if (event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_TAG) <= 0) {
         EntityPlayer player = ((EntityPlayer) event.getEntity());
+        player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 40, 10, false, false));
         player.posX = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_X);
         player.posY = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_Y);
         player.posZ = event.getEntity().getEntityData().getDouble(Constants.LIGHT_DRIFTER_Z);
-        PacketHandler.sendToAllTracking(new MessageLightDrifterSync(event.getEntity().getUniqueID(), player.posX, player.posY, player.posZ, false,
-            event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE)), player);
+        PacketHandler.sendToAllTracking(new MessageLightDrifterSync(event.getEntity().getUniqueID(), player.posX, player.posY, player.posZ, false, event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE)), player);
         player.capabilities.allowFlying = false;
         player.capabilities.disableDamage = false;
         player.noClip = false;

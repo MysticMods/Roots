@@ -1,5 +1,6 @@
 package epicsquid.roots.network;
 
+import epicsquid.roots.client.SpectatorHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -68,6 +69,9 @@ public class MessageLightDrifterSync implements IMessage {
       if (player != null) {
         if (!message.enable) {
           player.setPositionAndUpdate(message.x, message.y, message.z);
+          if (player == Minecraft.getMinecraft().player) {
+            SpectatorHandler.setReal();
+          }
           player.noClip = message.enable;
         } else {
           player.noClip = true;

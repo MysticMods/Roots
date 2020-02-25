@@ -1,6 +1,6 @@
 package epicsquid.roots.integration.jei;
 
-import epicsquid.roots.gui.container.ContainerFeyCrafter;
+import epicsquid.roots.container.ContainerFeyCrafter;
 import mezz.jei.api.recipe.transfer.IRecipeTransferInfo;
 import net.minecraft.inventory.Slot;
 

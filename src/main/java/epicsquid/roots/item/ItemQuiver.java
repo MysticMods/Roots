@@ -5,7 +5,7 @@ import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.entity.projectile.EntityLivingArrow;
-import epicsquid.roots.gui.GuiHandler;
+import epicsquid.roots.GuiHandler;
 import epicsquid.roots.handler.QuiverHandler;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.util.QuiverInventoryUtil;
