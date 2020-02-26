@@ -7,6 +7,7 @@ import epicsquid.roots.util.types.Property;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualDivineProtection extends RitualBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(1200);
@@ -40,7 +41,7 @@ public class RitualDivineProtection extends RitualBase {
         new ItemStack(ModItems.cloud_berry),
         new ItemStack(ModItems.bark_birch),
         new ItemStack(ModItems.bark_oak),
-        new ItemStack(Items.GLOWSTONE_DUST)
+        new OreIngredient("dustGlowstone")
     ));
     setIcon(ModItems.ritual_divine_protection);
     setColor(TextFormatting.YELLOW);

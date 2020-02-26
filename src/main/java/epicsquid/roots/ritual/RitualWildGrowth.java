@@ -26,7 +26,7 @@ public class RitualWildGrowth extends RitualBase {
   @Override
   public void init() {
     addCondition(new ConditionItems(
-        new ItemStack(ModItems.wildroot),
+        new OreIngredient("wildroot"),
         new ItemStack(ModItems.bark_dark_oak),
         new OreIngredient("rootsBark"),
         new OreIngredient("rootsBark"),

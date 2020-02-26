@@ -42,7 +42,7 @@ public class SpellGrowthInfusion extends SpellBase {
         new OreIngredient("treeSapling"),
         new ItemStack(ModItems.terra_moss),
         Ingredients.AUBERGINE,
-        new ItemStack(Items.WHEAT)
+        new OreIngredient("cropWheat")
     );
   }
 

@@ -10,6 +10,7 @@ import net.minecraft.block.BlockPlanks;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualHealingAura extends RitualBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(800);
@@ -35,7 +36,7 @@ public class RitualHealingAura extends RitualBase {
         new ItemStack(ModItems.terra_moss),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
         new ItemStack(ModItems.bark_birch),
-        new ItemStack(ModItems.wildroot),
+        new OreIngredient("wildroot"),
         new ItemStack(Blocks.SAPLING, 1, 2)
     ));
     addCondition(new ConditionStandingStones(3, 1));

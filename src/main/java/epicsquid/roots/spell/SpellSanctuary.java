@@ -16,6 +16,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -52,7 +53,7 @@ public class SpellSanctuary extends SpellBase {
         new ItemStack(ModItems.pereskia),
         new ItemStack(Items.MILK_BUCKET),
         new ItemStack(ModItems.bark_spruce),
-        new ItemStack(ModItems.wildroot)
+        new OreIngredient("wildroot")
     );
   }
 

@@ -8,6 +8,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualHeavyStorms extends RitualBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(2400);
@@ -30,7 +31,7 @@ public class RitualHeavyStorms extends RitualBase {
     addCondition(new ConditionItems(
         new ItemStack(Blocks.WATERLILY),
         new ItemStack(ModItems.dewgonia),
-        new ItemStack(Blocks.VINE),
+        new OreIngredient("vine"),
         new ItemStack(ModItems.cloud_berry),
         new ItemStack(Items.BEETROOT_SEEDS)
     ));
