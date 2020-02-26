@@ -5,14 +5,18 @@ import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticallib.event.RegisterParticleEvent;
 import epicsquid.mysticallib.event.RegisterWorldGenEvent;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.init.*;
 import epicsquid.roots.item.ItemLifeEssence;
 import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.network.PacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityList;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -78,6 +82,18 @@ public class RegistryManager {
         return tintIndex == 0 ? info.primaryColor : info.secondaryColor;
       }
     }, ModItems.life_essence);
+    Minecraft.getMinecraft().getItemColors().registerItemColorHandler((stack, tintIndex) -> {
+      if (tintIndex == 0) {
+        NBTTagCompound tag = stack.getTagCompound();
+        if (stack.hasTagCompound() && tag != null && tag.hasKey("color", Constants.NBT.TAG_INT)) {
+          return EnumDyeColor.byMetadata(tag.getInteger("color")).getColorValue();
+        } else {
+          return EnumDyeColor.BROWN.getColorValue();
+        }
+      } else {
+        return 0xFFFFFF;
+      }
+    }, ModItems.component_pouch, ModItems.apothecary_pouch);
   }
 
   @SubscribeEvent

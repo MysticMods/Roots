@@ -20,7 +20,9 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
@@ -29,39 +31,63 @@ public class PowderInventoryUtil {
   private static HerbAlert slot1 = null;
   private static HerbAlert slot2 = null;
 
-  public static ItemStack getPouch(EntityPlayer player) {
+  public static ItemStack getFirstPouch (EntityPlayer player) {
+    List<ItemStack> pouches = getPouches(player);
+    if (pouches.isEmpty()) {
+      return ItemStack.EMPTY;
+    }
+
+    return pouches.get(0);
+  }
+
+  public static List<ItemStack> getPouches(EntityPlayer player) {
+    List<ItemStack> result = new ArrayList<>();
     if (Loader.isModLoaded("baubles")) {
       ItemStack stack = BaublePowderInventoryUtil.getPouch(player);
-      if (!stack.isEmpty()) return stack;
+      if (!stack.isEmpty()) {
+        result.add(stack);
+      }
     }
 
     for (int i = 0; i < 36; i++) {
       if (player.inventory.getStackInSlot(i).getItem() instanceof ItemPouch) {
-        return player.inventory.getStackInSlot(i);
+        result.add(player.inventory.getStackInSlot(i));
       }
     }
 
-    return ItemStack.EMPTY;
+    return result;
   }
 
   public static double getPowderTotal(EntityPlayer player, Herb herb) {
-    ItemStack pouch = getPouch(player);
-    if (pouch.isEmpty()) return -1.0;
+    List<ItemStack> pouches = getPouches(player);
+    if (pouches.isEmpty()) return -1.0;
 
-    // Hard-coding for creative pouch
-    if (pouch.getItem() == ModItems.creative_pouch) return 999;
+    double quantity = 0;
+    for (ItemStack pouch : pouches) {
+      // Hard-coding for creative pouch
+      if (pouch.getItem() == ModItems.creative_pouch) {
+        quantity += 999;
+      } else {
+        quantity += ItemPouch.getHerbQuantity(pouch, herb);
+      }
+    }
 
-    return ItemPouch.getHerbQuantity(pouch, herb);
+    return quantity;
   }
 
   public static void removePowder(EntityPlayer player, Herb herb, double amount) {
-    ItemStack pouch = getPouch(player);
-    if (pouch.isEmpty() || pouch.getItem() == ModItems.creative_pouch) return;
-
+    List<ItemStack> pouches = getPouches(player);
     // TODO: Cost reduction is calculated here
     amount -= amount * ItemSylvanArmor.sylvanBonus(player);
+    for (ItemStack pouch : pouches) {
+      if (pouch.getItem() == ModItems.creative_pouch) return;
 
-    ItemPouch.useQuantity(pouch, herb, amount);
+      amount = ItemPouch.useQuantity(pouch, herb, amount);
+      if (amount <= 0) {
+        break;
+      }
+    }
+
     resolveSlots(player, herb);
   }
 
