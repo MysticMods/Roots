@@ -18,9 +18,12 @@ public class SpellConfig {
     @Config.Name("Disable Acid Cloud Spell")
     @Config.Comment("Set to true to disable Acid Cloud Spell")
     public boolean disableAcidCloud = false;
-    @Config.Name("Disable Blades Spell")
-    @Config.Comment("Set to true to disable Blades Spell")
+    @Config.Name("Disable Nature's Blades Spell")
+    @Config.Comment("Set to true to disable Nature's Blades Spell")
     public boolean disableNaturesBlades = false;
+    @Config.Name("Disable Nature's Scythe")
+    @Config.Comment("Set to true to disable Nature's Scythe Spell")
+    public boolean disableNaturesScythe = false;
     @Config.Name("Disable Dandelion Winds Spell")
     @Config.Comment("Set to true to disable Dandelion Winds Spell")
     public boolean disableDandelionWinds = false;
@@ -81,9 +84,6 @@ public class SpellConfig {
     @Config.Name("Disable Sky Soarer Spell")
     @Config.Comment("Set to true to disable Sky Soarer Spell")
     public boolean disableSkySoarer = false;
-    @Config.Name("Disable Soft Touch Spell")
-    @Config.Comment("Set to true to disable Soft Touch Spell")
-    public boolean disableSoftTouch = false;
     @Config.Name("Disable Time Stop Spell")
     @Config.Comment("Set to true to disable Time Stop Spell")
     public boolean disableTimeStop = false;
@@ -122,11 +122,6 @@ public class SpellConfig {
     @Config.Name("Sanctuary Spell Entities Blacklist")
     @Config.Comment("Entities in this list will be excluded by Sanctuary Spell when repelling entities")
     public String[] sanctuaryEntitiesBlacklist = {};
-
-    @Config.Name("Should Drizzle Boost Crops Growth")
-    @Config.Comment("Set to true make the Drizzle Spell boost crops growth")
-    public boolean shouldDrizzleBoostCrops = true;
-
   }
 
 }

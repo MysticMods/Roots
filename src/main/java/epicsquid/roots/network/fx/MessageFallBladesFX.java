@@ -3,7 +3,7 @@ package epicsquid.roots.network.fx;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellAutumnsFall;
-import epicsquid.roots.spell.SpellNaturesBlades;
+import epicsquid.roots.spell.SpellNaturesScythe;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
@@ -75,7 +75,7 @@ public class MessageFallBladesFX implements IMessage {
                         ParticleUtil.spawnParticlePetal(
                                 world, (float) message.x + Util.rand.nextFloat(), (float) message.y + Util.rand.nextFloat(), (float) message.z + Util.rand.nextFloat(),
                                 0, 0.05F, 0,
-                                SpellNaturesBlades.instance.getRed1(), SpellNaturesBlades.instance.getGreen1(), SpellNaturesBlades.instance.getBlue1(), 1.0f,
+                                SpellNaturesScythe.instance.getRed1(), SpellNaturesScythe.instance.getGreen1(), SpellNaturesScythe.instance.getBlue1(), 1.0f,
                                 1F, 160);
                     }
 
@@ -83,7 +83,7 @@ public class MessageFallBladesFX implements IMessage {
                         ParticleUtil.spawnParticlePetal(
                                 world, (float) message.x + Util.rand.nextFloat(), (float) message.y + Util.rand.nextFloat(), (float) message.z + Util.rand.nextFloat(),
                                 0, 0.05F, 0,
-                                SpellNaturesBlades.instance.getRed2(), SpellNaturesBlades.instance.getGreen2(), SpellNaturesBlades.instance.getBlue2(), 1.0f,
+                                SpellNaturesScythe.instance.getRed2(), SpellNaturesScythe.instance.getGreen2(), SpellNaturesScythe.instance.getBlue2(), 1.0f,
                                 0.5F, 160);
                     }
                 }
