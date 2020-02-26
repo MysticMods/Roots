@@ -39,7 +39,7 @@ public class ContainerPouch extends Container {
     this.player = player;
     ItemStack main = player.getHeldItemMainhand();
     ItemStack off = player.getHeldItemOffhand();
-    ItemStack first = PowderInventoryUtil.getPouch(player);
+    ItemStack first = PowderInventoryUtil.getFirstPouch(player);
 
     ItemStack use = ItemStack.EMPTY;
     if (main.getItem() instanceof ItemPouch) {

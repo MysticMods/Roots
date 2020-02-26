@@ -27,6 +27,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.List;
+
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 @SuppressWarnings("unused")
 public class ItemEventHandler {
@@ -51,7 +53,7 @@ public class ItemEventHandler {
   }
 
   @SubscribeEvent
-  public static void onEntityItemPickup (EntityItemPickupEvent event) {
+  public static void onEntityItemPickup(EntityItemPickupEvent event) {
     if (GeneralConfig.AutoRefillPouches) {
       EntityPlayer player = event.getEntityPlayer();
       EntityItem entity = event.getItem();
@@ -60,24 +62,29 @@ public class ItemEventHandler {
         Item item = stack.getItem();
         int original = stack.getCount();
         if (HerbRegistry.isHerb(item)) {
-          ItemStack pouch = PowderInventoryUtil.getPouch(player);
-          if (!pouch.isEmpty()) {
+          boolean modified = false;
+          List<ItemStack> pouches = PowderInventoryUtil.getPouches(player);
+          for (ItemStack pouch : pouches) {
             PouchHandler handler = PouchHandler.getHandler(pouch);
             PouchHandler.PouchHerbHandler herbs = handler.getHerbs();
             int refill = herbs.refill(stack);
             if (refill < original) {
-              event.setCanceled(true);
-              entity.setDead();
-              if (refill != 0) {
-                stack.setCount(refill);
-                EntityItem newEntity = new EntityItem(entity.world, entity.posX, entity.posY, entity.posZ, stack);
-                newEntity.motionX = entity.motionX;
-                newEntity.motionY = entity.motionY;
-                newEntity.motionZ = entity.motionZ;
-                newEntity.setPickupDelay(0);
-                entity.world.spawnEntity(newEntity);
-              }
-              entity.world.playSound(null, player.getPosition(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 1, 0.5f);
+              modified = true;
+              stack.setCount(refill);
+              original = refill;
+            }
+          }
+          if (modified) {
+            event.setCanceled(true);
+            entity.setDead();
+            entity.world.playSound(null, player.getPosition(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 1, 0.5f);
+            if (!stack.isEmpty()) {
+              EntityItem newEntity = new EntityItem(entity.world, entity.posX, entity.posY, entity.posZ, stack);
+              newEntity.motionX = entity.motionX;
+              newEntity.motionY = entity.motionY;
+              newEntity.motionZ = entity.motionZ;
+              newEntity.setPickupDelay(0);
+              entity.world.spawnEntity(newEntity);
             }
           }
         }

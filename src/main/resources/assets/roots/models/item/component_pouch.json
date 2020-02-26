@@ -1,6 +1,7 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "roots:items/component_pouch"
+    "layer0": "roots:items/component_pouch_main_layer",
+    "layer1": "roots:items/component_pouch_clasp_layer"
   }
 }

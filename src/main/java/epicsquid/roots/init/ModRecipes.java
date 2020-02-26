@@ -1006,6 +1006,7 @@ public class ModRecipes {
     initCraftingRecipes();
     RunicShearRecipes.initRecipes();
 
+    event.getRegistry().register(new DyeRecipe().setRegistryName(new ResourceLocation(Roots.MODID, "pouch_dye_recipe")));
   }
 
   private static void initCraftingRecipes() {
