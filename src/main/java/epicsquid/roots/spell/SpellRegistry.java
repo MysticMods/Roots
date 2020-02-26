@@ -73,10 +73,12 @@ public class SpellRegistry {
     SpellScatter.instance.setDisabled(SpellConfig.disableSpellsCategory.disableScatter);
     spellRegistry.put(SpellSummersThaw.spellName, SpellSummersThaw.instance);
     SpellSummersThaw.instance.setDisabled(SpellConfig.disableSpellsCategory.disableSummersThaw);
-    spellRegistry.put(SpellNaturesBlades.spellName, SpellNaturesBlades.instance);
-    SpellNaturesBlades.instance.setDisabled(SpellConfig.disableSpellsCategory.disableNaturesBlades);
+    spellRegistry.put(SpellNaturesScythe.spellName, SpellNaturesScythe.instance);
+    SpellNaturesScythe.instance.setDisabled(SpellConfig.disableSpellsCategory.disableNaturesScythe);
     spellRegistry.put(SpellSpringStorm.spellName, SpellSpringStorm.instance);
     SpellSpringStorm.instance.setDisabled(SpellConfig.disableSpellsCategory.disableSpringStorm);
+    spellRegistry.put(SpellNaturesBlades.spellName, SpellNaturesBlades.instance);
+    SpellNaturesBlades.instance.setDisabled(SpellConfig.disableSpellsCategory.disableNaturesBlades);
   }
 
   public static void init() {
