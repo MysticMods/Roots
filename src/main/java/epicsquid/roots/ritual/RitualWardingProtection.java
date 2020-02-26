@@ -32,7 +32,7 @@ public class RitualWardingProtection extends RitualBase {
     addCondition(new ConditionItems(
         new ItemStack(Items.SPECKLED_MELON),
         new ItemStack(ModItems.stalicripe),
-        new ItemStack(ModItems.wildroot),
+        new OreIngredient("wildroot"),
         new OreIngredient("rootsBark"),
         new ItemStack(Items.IRON_CHESTPLATE)
     ));

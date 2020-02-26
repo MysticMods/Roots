@@ -33,7 +33,7 @@ public class MessageServerOpenPouch implements IMessage {
 
     private void handleMessage(MessageServerOpenPouch message, MessageContext ctx) {
       EntityPlayerMP player = ctx.getServerHandler().player;
-      ItemStack pouch = PowderInventoryUtil.getPouch(player);
+      ItemStack pouch = PowderInventoryUtil.getFirstPouch(player);
       if (!pouch.isEmpty()) {
         pouch.getItem().onItemRightClick(player.world, player, EnumHand.MAIN_HAND);
       }

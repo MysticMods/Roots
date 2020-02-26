@@ -81,6 +81,9 @@ public class GeneralConfig {
 
     return saplingBlacklist;
   }
+
+  @Config.Comment(("Name of the liquid as per the Forge registry to provide from the Unending Bowl"))
+  public static String FluidName = "water";
 }
 
 

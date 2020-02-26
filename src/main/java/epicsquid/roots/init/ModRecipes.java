@@ -73,7 +73,7 @@ public class ModRecipes {
     addSummonCreatureEntry("sprout", EntitySprout.class, Ingredient.fromItem(ModItems.bark_birch), Ingredients.AUBERGINE);
     addSummonCreatureEntry("beetle", EntityBeetle.class, new OreIngredient("grass"), Ingredient.fromItem(Item.getItemFromBlock(Blocks.RED_FLOWER)));
     addSummonCreatureEntry("frog", EntityFrog.class, new OreIngredient("grass"), Ingredient.fromItem(Items.CLAY_BALL));
-    addSummonCreatureEntry("fox", EntityFox.class, Ingredient.fromItem(ModItems.bark_spruce), Ingredient.fromItem(Items.REDSTONE));
+    addSummonCreatureEntry("fox", EntityFox.class, Ingredient.fromItem(ModItems.bark_spruce), new OreIngredient("dustRedstone"));
     addSummonCreatureEntry("wolf", EntityWolf.class, new OreIngredient("bone"), Ingredient.fromItem(Items.FLINT));
     addSummonCreatureEntry("squid", EntitySquid.class, new OreIngredient("sugarcane"), new OreIngredient("paper"));
     addSummonCreatureEntry("sheep", EntitySheep.class, Ingredient.fromItem(Items.WHEAT_SEEDS), new OreIngredient("wool"));
@@ -1006,6 +1006,7 @@ public class ModRecipes {
     initCraftingRecipes();
     RunicShearRecipes.initRecipes();
 
+    event.getRegistry().register(new DyeRecipe().setRegistryName(new ResourceLocation(Roots.MODID, "pouch_dye_recipe")));
   }
 
   private static void initCraftingRecipes() {
@@ -1019,16 +1020,16 @@ public class ModRecipes {
 
     addCraftingRecipe("dewgonia",
         new PyreCraftingRecipe(new ItemStack(ModItems.dewgonia, 3), 1).addIngredients(
-            new ItemStack(Item.getItemFromBlock(Blocks.TALLGRASS), 1, 1),
+            new OreIngredient("grass"),
             new ItemStack(Items.SUGAR),
-            new ItemStack(Items.DYE, 1, 4),
+            new OreIngredient("dyeBlue"),
             new ItemStack(ModItems.terra_moss),
             new ItemStack(Item.getItemFromBlock(Blocks.WATERLILY))));
 
     addCraftingRecipe("cloud_berry",
         new PyreCraftingRecipe(new ItemStack(ModItems.cloud_berry, 3), 1).addIngredients(
             new OreIngredient("treeLeaves"),
-            new ItemStack(Item.getItemFromBlock(Blocks.TALLGRASS), 1, 1),
+            new OreIngredient("grass"),
             new OreIngredient("wool"),
             new ItemStack(ModItems.terra_moss),
             new ItemStack(ModItems.terra_moss)));
@@ -1038,7 +1039,7 @@ public class ModRecipes {
             new ItemStack(Items.FLINT),
             new OreIngredient("stone"),
             new OreIngredient("ingotIron"),
-            new ItemStack(ModItems.wildroot),
+            new OreIngredient("wildroot"),
             new OreIngredient("dustRedstone")));
 
     addCraftingRecipe("moonglow_leaf",
@@ -1051,11 +1052,11 @@ public class ModRecipes {
 
     addCraftingRecipe("pereskia",
         new PyreCraftingRecipe(new ItemStack(ModItems.pereskia, 3), 1).addIngredients(
-            new ItemStack(ModItems.wildroot),
+            new OreIngredient("wildroot"),
             new ItemStack(Items.SPECKLED_MELON),
             new OreIngredient("dustRedstone"),
             new ItemStack(Items.BEETROOT),
-            new ItemStack(Items.REEDS)));
+            new OreIngredient("sugarcane")));
 
     addCraftingRecipe("baffle_cap",
         new PyreCraftingRecipe(new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom), 3), 1).addIngredients(
@@ -1074,11 +1075,11 @@ public class ModRecipes {
         new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds)).setBurnTime(20));
 
     addCraftingRecipe("cooked_potato", new PyreCraftingRecipe(new ItemStack(Items.BAKED_POTATO, 5), 1).addIngredients(
-        new ItemStack(Items.POTATO),
-        new ItemStack(Items.POTATO),
-        new ItemStack(Items.POTATO),
-        new ItemStack(Items.POTATO),
-        new ItemStack(Items.POTATO)).setBurnTime(300));
+        new OreIngredient("cropPotato"),
+        new OreIngredient("cropPotato"),
+        new OreIngredient("cropPotato"),
+        new OreIngredient("cropPotato"),
+        new OreIngredient("cropPotato")).setBurnTime(300));
 
     addCraftingRecipe("cooked_chicken", new PyreCraftingRecipe(new ItemStack(Items.COOKED_CHICKEN, 5), 1).addIngredients(
         new ItemStack(Items.CHICKEN),
@@ -1171,17 +1172,17 @@ public class ModRecipes {
 
     addCraftingRecipe("elemental_soil",
         new FeyCraftingRecipe(new ItemStack(ModBlocks.elemental_soil, 4), 4).addIngredients(
-            new ItemStack(Blocks.DIRT),
+            new OreIngredient("dirt"),
             new ItemStack(ModItems.terra_moss),
-            new ItemStack(ModItems.wildroot),
+            new OreIngredient("wildroot"),
             new ItemStack(Blocks.GRAVEL),
-            new ItemStack(Items.DYE, 1, 15)));
+            new OreIngredient("dyeWhite")));
 
     addCraftingRecipe("living_pickaxe",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_pickaxe), 1).addIngredients(
             new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_PICKAXE),
-            new ItemStack(ModItems.wildroot),
+            new OreIngredient("wildroot"),
             new OreIngredient("rootsBark"),
             new OreIngredient("rootsBark")));
 
@@ -1189,7 +1190,7 @@ public class ModRecipes {
         new FeyCraftingRecipe(new ItemStack(ModItems.living_axe), 1).addIngredients(
             new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_AXE),
-            new ItemStack(ModItems.wildroot),
+            new OreIngredient("wildroot"),
             new OreIngredient("rootsBark"),
             new OreIngredient("rootsBark")));
 
@@ -1197,7 +1198,7 @@ public class ModRecipes {
         new FeyCraftingRecipe(new ItemStack(ModItems.living_shovel), 1).addIngredients(
             new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_SHOVEL),
-            new ItemStack(ModItems.wildroot),
+            new OreIngredient("wildroot"),
             new OreIngredient("rootsBark"),
             new OreIngredient("rootsBark")));
 
@@ -1205,7 +1206,7 @@ public class ModRecipes {
         new FeyCraftingRecipe(new ItemStack(ModItems.living_hoe), 1).addIngredients(
             new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_HOE),
-            new ItemStack(ModItems.wildroot),
+            new OreIngredient("wildroot"),
             new OreIngredient("rootsBark"),
             new OreIngredient("rootsBark")));
 
@@ -1213,7 +1214,7 @@ public class ModRecipes {
         new FeyCraftingRecipe(new ItemStack(ModItems.living_sword), 1).addIngredients(
             new GoldOrSilverIngotIngredient(),
             new ItemStack(Items.WOODEN_SWORD),
-            new ItemStack(ModItems.wildroot),
+            new OreIngredient("wildroot"),
             new OreIngredient("rootsBark"),
             new OreIngredient("rootsBark")));
 
@@ -1222,7 +1223,7 @@ public class ModRecipes {
             new OreIngredient("treeLeaves"),
             new OreIngredient("treeLeaves"),
             new OreIngredient("rootsBark"),
-            new ItemStack(ModItems.wildroot),
+            new OreIngredient("wildroot"),
             new ItemStack(Items.FLINT)));
 
     addCraftingRecipe("wildwood_quiver",
@@ -1246,12 +1247,12 @@ public class ModRecipes {
             new ItemStack(Items.SHEARS),
             new ItemStack(ModItems.pereskia),
             new ItemStack(ModItems.pereskia),
-            new ItemStack(ModBlocks.runestone),
-            new ItemStack(ModBlocks.runestone)));
+            new OreIngredient("runestone"),
+            new OreIngredient("runestone")));
 
     addCraftingRecipe("runestone",
         new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(ModBlocks.runestone), 8), 1).addIngredients(
-            new ItemStack(Items.DYE, 1, 4),
+            new OreIngredient("dyeBlue"),
             new OreIngredient("stone"),
             new OreIngredient("stone"),
             new OreIngredient("stone"),
@@ -1294,7 +1295,7 @@ public class ModRecipes {
         new OreIngredient("gemDiamond")));
 
     addCraftingRecipe("apothecary_pouch", new ApothecaryPouchRecipe(new ItemStack(ModItems.apothecary_pouch), 1).addIngredients(
-        new ItemStack(Blocks.ENDER_CHEST),
+        new OreIngredient("chestEnder"),
         new ItemStack(ModItems.bark_wildwood),
         new ItemStack(ModItems.bark_wildwood),
         new ItemStack(ModItems.spirit_herb),
@@ -1303,28 +1304,28 @@ public class ModRecipes {
 
     addCraftingRecipe("sylvan_helmet", new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_helmet), 1).addIngredients(
         new ItemStack(ModItems.fey_leather),
-        new ItemStack(Blocks.VINE),
+        new OreIngredient("vine"),
         new ItemStack(ModItems.bark_birch),
         new OreFallbackIngredient("gemAmethyst", "gemDiamond"),
         new ItemStack(Items.IRON_HELMET)));
 
     addCraftingRecipe("sylvan_chestplate", new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_chestplate), 1).addIngredients(
         new ItemStack(ModItems.fey_leather),
-        new ItemStack(Blocks.VINE),
+        new OreIngredient("vine"),
         new ItemStack(ModItems.bark_birch),
         new OreFallbackIngredient("gemAmethyst", "gemDiamond"),
         new ItemStack(Items.IRON_CHESTPLATE)));
 
     addCraftingRecipe("sylvan_leggings", new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_leggings), 1).addIngredients(
         new ItemStack(ModItems.fey_leather),
-        new ItemStack(Blocks.VINE),
+        new OreIngredient("vine"),
         new ItemStack(ModItems.bark_birch),
         new OreFallbackIngredient("gemAmethyst", "gemDiamond"),
         new ItemStack(Items.IRON_LEGGINGS)));
 
     addCraftingRecipe("sylvan_boots", new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_boots), 1).addIngredients(
         new ItemStack(ModItems.fey_leather),
-        new ItemStack(Blocks.VINE),
+        new OreIngredient("vine"),
         new ItemStack(ModItems.bark_birch),
         new OreFallbackIngredient("gemAmethyst", "gemDiamond"),
         new ItemStack(Items.IRON_BOOTS)));

@@ -7,6 +7,7 @@ import epicsquid.roots.util.types.Property;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualWindwall extends RitualBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(3000);
@@ -34,7 +35,7 @@ public class RitualWindwall extends RitualBase {
         new ItemStack(ModItems.moonglow_leaf),
         new ItemStack(ModItems.bark_spruce),
         new ItemStack(ModItems.bark_birch),
-        new ItemStack(Items.FEATHER)
+        new OreIngredient("feather")
     ));
     setIcon(ModItems.ritual_windwall);
     setColor(TextFormatting.DARK_AQUA);

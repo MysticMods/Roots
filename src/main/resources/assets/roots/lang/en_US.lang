@@ -142,6 +142,10 @@ roots.spell.spell_natures_blades.name=Nature's Blades
 roots.spell.spell_iced_touch.module_touch.description=Surrounds you with freezing clouds
 roots.spell.spell_reach.name=Reach
 roots.spell.spell_autumns_fall.name=Autumn's Fall
+roots.spell.spell_natures_scythe=Nature's Scythe
+roots.spell.spell_saturate=Saturate
+roots.spell.spell_desaturate=Desaturate
+roots.spell.spell_transubstantiate=Transubstantiate
 
 roots.ritual.ritual_healing_aura.name=Healing Aura
 roots.ritual.ritual_heavy_storms.name=Heavy Storms

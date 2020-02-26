@@ -27,7 +27,7 @@ public class RitualGroveSupplication extends RitualBase {
         new OreIngredient("doorWood"),
         new ItemStack(Blocks.MOSSY_COBBLESTONE),
         new OreIngredient("treeSapling"),
-        new ItemStack(ModItems.wildroot),
+        new OreIngredient("wildroot"),
         new ItemStack(ModItems.petals)
     ));
     setIcon(ModItems.ritual_grove_supplication);

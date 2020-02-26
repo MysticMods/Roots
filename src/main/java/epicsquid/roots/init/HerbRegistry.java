@@ -17,19 +17,18 @@ import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 @EventBusSubscriber(modid = Roots.MODID)
 public class HerbRegistry {
 
   private static final ResourceLocation NAME = new ResourceLocation(Roots.DOMAIN, "herb");
   public static IForgeRegistry<Herb> REGISTRY = null;
-  public static Set<Item> HERB_ITEMS = new HashSet<>();
+  public static Set<Item> HERB_ITEMS = null;
 
   public static void init() {
     MinecraftForge.EVENT_BUS.post(new RegisterHerbEvent(NAME, REGISTRY));
-    for (Herb herb : REGISTRY.getValuesCollection()) {
-      HERB_ITEMS.add(herb.getItem());
-    }
   }
 
   @SubscribeEvent
@@ -89,9 +88,9 @@ public class HerbRegistry {
   }
 
   public static boolean isHerb(@Nonnull Item item) {
-    // I feel like this is faster than streams
+    if (HERB_ITEMS == null) {
+      HERB_ITEMS = REGISTRY.getValuesCollection().stream().map(Herb::getItem).collect(Collectors.toSet());
+    }
     return HERB_ITEMS.contains(item);
-    //return REGISTRY.getValuesCollection().stream()
-    //    .anyMatch(herb -> herb.getItem() == item);
   }
 }

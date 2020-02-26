@@ -29,9 +29,9 @@ public class RitualOvergrowth extends RitualBase {
   public void init () {
     addCondition(
         new ConditionItems(
-            new ItemStack(Items.REEDS),
+            new OreIngredient("sugarcane"),
             new ItemStack(ModItems.terra_moss),
-            new ItemStack(Blocks.TALLGRASS, 1, 1),
+            new OreIngredient("grass"),
             new OreIngredient("rootsBark"),
             new OreIngredient("rootsBark")));
     setIcon(ModItems.ritual_overgrowth);

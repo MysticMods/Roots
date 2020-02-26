@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,7 @@ public class SpellSummersThaw extends SpellBase {
             new ItemStack(ModItems.bark_acacia),
             new ItemStack(Blocks.TORCH),
             new ItemStack(ModItems.infernal_bulb),
-            new ItemStack(Items.GUNPOWDER),
+            new OreIngredient("gunpowder"),
             new ItemStack(Blocks.DOUBLE_PLANT, 1, BlockDoublePlant.EnumPlantType.SUNFLOWER.getMeta())
     );
   }

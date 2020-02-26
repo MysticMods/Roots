@@ -64,19 +64,27 @@ public class SpellRegistry {
     SpellIcedTouch.instance.setDisabled(SpellConfig.disableSpellsCategory.disableIcedTouch);
     SpellReach.instance.setDisabled(SpellConfig.disableSpellsCategory.disableReach);
     spellRegistry.put(SpellReach.spellName, SpellReach.instance);
+    SpellSaturate.instance.setDisabled(SpellConfig.disableSpellsCategory.disableSaturate);
+    spellRegistry.put(SpellSaturate.spellName, SpellSaturate.instance);
+    SpellDesaturate.instance.setDisabled(SpellConfig.disableSpellsCategory.disableDesaturate);
+    spellRegistry.put(SpellDesaturate.spellName, SpellDesaturate.instance);
+    SpellTransubstantiate.instance.setDisabled(SpellConfig.disableSpellsCategory.disableTransubstantiate);
+    spellRegistry.put(SpellTransubstantiate.spellName, SpellTransubstantiate.instance);
 
     spellRegistry.put(SpellDisarm.spellName, SpellDisarm.instance);
     SpellDisarm.instance.setDisabled(SpellConfig.disableSpellsCategory.disableDisarm);
     spellRegistry.put(SpellAutumnsFall.spellName, SpellAutumnsFall.instance);
-    SpellAutumnsFall.instance.setDisabled(SpellConfig.disableSpellsCategory.disableFall);
+    SpellAutumnsFall.instance.setDisabled(SpellConfig.disableSpellsCategory.disableAutumnsFall);
     spellRegistry.put(SpellScatter.spellName, SpellScatter.instance);
     SpellScatter.instance.setDisabled(SpellConfig.disableSpellsCategory.disableScatter);
     spellRegistry.put(SpellSummersThaw.spellName, SpellSummersThaw.instance);
     SpellSummersThaw.instance.setDisabled(SpellConfig.disableSpellsCategory.disableSummersThaw);
-    spellRegistry.put(SpellNaturesBlades.spellName, SpellNaturesBlades.instance);
-    SpellNaturesBlades.instance.setDisabled(SpellConfig.disableSpellsCategory.disableNaturesBlades);
+    spellRegistry.put(SpellNaturesScythe.spellName, SpellNaturesScythe.instance);
+    SpellNaturesScythe.instance.setDisabled(SpellConfig.disableSpellsCategory.disableNaturesScythe);
     spellRegistry.put(SpellSpringStorm.spellName, SpellSpringStorm.instance);
     SpellSpringStorm.instance.setDisabled(SpellConfig.disableSpellsCategory.disableSpringStorm);
+    spellRegistry.put(SpellNaturesBlades.spellName, SpellNaturesBlades.instance);
+    SpellNaturesBlades.instance.setDisabled(SpellConfig.disableSpellsCategory.disableNaturesBlades);
   }
 
   public static void init() {
