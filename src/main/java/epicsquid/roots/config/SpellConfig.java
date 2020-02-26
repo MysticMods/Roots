@@ -30,9 +30,9 @@ public class SpellConfig {
     @Config.Name("Disable Disarm Spell")
     @Config.Comment("Set to true to disable Disarm Spell")
     public boolean disableDisarm = false;
-    @Config.Name("Disable Fall Spell")
-    @Config.Comment("Set to true to disable Fall Spell")
-    public boolean disableFall = false;
+    @Config.Name("Disable Autumn's Fall Spell")
+    @Config.Comment("Set to true to disable Autumn's Fall Spell")
+    public boolean disableAutumnsFall = false;
     @Config.Name("Disable Growth Infusion Spell")
     @Config.Comment("Set to true to disable Growth Infusion Spell")
     public boolean disableGrowthInfusion = false;
@@ -87,8 +87,8 @@ public class SpellConfig {
     @Config.Name("Disable Time Stop Spell")
     @Config.Comment("Set to true to disable Time Stop Spell")
     public boolean disableTimeStop = false;
-    @Config.Name("Disable Thaw Spell")
-    @Config.Comment("Set to true to disable Thaw Spell")
+    @Config.Name("Disable Summer's Thaw Spell")
+    @Config.Comment("Set to true to disable Summer's Thaw Spell")
     public boolean disableSummersThaw = false;
     @Config.Name("Disable Wild Fire Spell")
     @Config.Comment("Set to true to disable Wild Fire Spell")
@@ -99,13 +99,21 @@ public class SpellConfig {
     @Config.Name("Disable Iced Touch Spell")
     @Config.Comment("Set to true to disable the Iced Touch Spell")
     public boolean disableIcedTouch = false;
-    @Config.Name("Disable Drizzle Spell")
-    @Config.Comment("Set to true to disable the Drizzle Spell")
+    @Config.Name("Disable Spring Storm Spell")
+    @Config.Comment("Set to true to disable the Spring Storm Spell")
     public boolean disableSpringStorm = false;
     @Config.Name("Disable Reach Spell")
     @Config.Comment("Set to true to disable the Reach Spell")
     public boolean disableReach = false;
-
+    @Config.Name("Disable Saturate Spell")
+    @Config.Comment("Set to true to disable the Saturate Spell")
+    public boolean disableSaturate = false;
+    @Config.Name("Disable Desaturate Spell")
+    @Config.Comment("Set to true to disable the Desaturate Spell")
+    public boolean disableDesaturate = false;
+    @Config.Name("Disable Transubstantiate Spell")
+    @Config.Comment("Set to true to disable the Transubstantiate Spell")
+    public boolean disableTransubstantiate = false;
   }
 
   public static class SpellFeaturesCategory {
