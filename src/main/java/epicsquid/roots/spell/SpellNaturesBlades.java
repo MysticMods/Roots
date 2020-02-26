@@ -16,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
 
@@ -39,8 +40,8 @@ public class SpellNaturesBlades extends SpellBase {
     @Override
     public void init() {
         addIngredients(
-                new ItemStack(ModItems.wildroot),
-                new ItemStack(ModItems.wildroot),
+                new OreIngredient("wildroot"),
+                new OreIngredient("wildroot"),
                 new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
                 new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds),
                 new ItemStack(Items.STONE_HOE)

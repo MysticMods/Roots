@@ -47,7 +47,7 @@ public class SpellRadiance extends SpellBase {
     addIngredients(
         new OreIngredient("dustGlowstone"),
         new OreIngredient("torch"),
-        new ItemStack(Items.DYE, 1, 11),
+        new OreIngredient("dyeYellow"),
         new ItemStack(ModItems.cloud_berry),
         new ItemStack(ModItems.pereskia)
     );

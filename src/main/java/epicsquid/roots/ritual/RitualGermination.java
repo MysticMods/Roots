@@ -36,7 +36,7 @@ public class RitualGermination extends RitualBase {
         new ItemStack(ModItems.spirit_herb),
         new ItemStack(ModItems.wildroot),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
-        new ItemStack(Items.DYE, 1, 15),
+        new OreIngredient("dyeWhite"),
         new OreIngredient("rootsBark")
     ));
     addCondition(new ConditionStandingStones(3, 2));

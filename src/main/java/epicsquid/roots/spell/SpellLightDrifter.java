@@ -45,7 +45,7 @@ public class SpellLightDrifter extends SpellBase {
         new OreIngredient("enderpearl"),
         new ItemStack(ModItems.moonglow_leaf),
         new ItemStack(Item.getItemFromBlock(Blocks.DOUBLE_PLANT), 1, BlockDoublePlant.EnumPlantType.SUNFLOWER.getMeta()),
-        new ItemStack(Items.DYE, 1, EnumDyeColor.YELLOW.getDyeDamage()),
+        new OreIngredient("dyeYellow"),
         new ItemStack(ModItems.wildewheet)
     );
   }

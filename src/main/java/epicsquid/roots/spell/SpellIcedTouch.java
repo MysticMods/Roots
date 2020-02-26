@@ -50,7 +50,7 @@ public class SpellIcedTouch extends SpellBase {
     addIngredients(
         new ItemStack(ModItems.dewgonia),
         new ItemStack(Item.getItemFromBlock(Blocks.SNOW)),
-        new ItemStack(Item.getItemFromBlock(Blocks.SNOW_LAYER)),
+        new ItemStack(Item.getItemFromBlock(Blocks.SNOW)),
         new ItemStack(Items.SNOWBALL),
         new ItemStack(Item.getItemFromBlock(Blocks.RED_FLOWER), 1, BlockFlower.EnumFlowerType.BLUE_ORCHID.getMeta())
     );

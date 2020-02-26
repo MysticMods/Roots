@@ -16,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -39,8 +40,8 @@ public class RitualSummonCreatures extends RitualBase {
   public void init() {
     addCondition(new ConditionItems(
         new ItemStack(Items.WHEAT_SEEDS),
-        new ItemStack(Items.WHEAT),
-        new ItemStack(Items.EGG),
+        new OreIngredient("cropWheat"),
+        new OreIngredient("egg"),
         new ItemStack(Items.ROTTEN_FLESH),
         new ItemStack(Items.WHEAT_SEEDS)
     ));
