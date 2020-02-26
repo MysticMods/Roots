@@ -13,7 +13,6 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-@SuppressWarnings("deprecation")
 public class EntityRitualGermination extends EntityRitualBase {
   private RitualGermination ritual;
 

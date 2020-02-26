@@ -10,9 +10,9 @@ import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualWildGrowth extends RitualBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(300);
-  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 10);
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 20);
-  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 10);
+  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 10).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 20).setDescription("Radius on the Y Axis of the cube in which the ritual takes place");
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 10).setDescription("Radius on the Z Axis of the cube in which the ritual takes place");
   public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(250);
 
   public int radius_x, radius_y, radius_z, interval;

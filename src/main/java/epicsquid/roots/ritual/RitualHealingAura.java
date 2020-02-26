@@ -13,11 +13,11 @@ import net.minecraft.util.text.TextFormatting;
 
 public class RitualHealingAura extends RitualBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(800);
-  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15);
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 15);
-  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15);
+  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 15).setDescription("Radius on the Y Axis of the cube in which the ritual takes place");
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15).setDescription("Radius on the Z Axis of the cube in which the ritual takes place");
   public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(60);
-  public static Property<Float> PROP_AMOUNT = new Property<>("amount", 1.0f);
+  public static Property<Float> PROP_AMOUNT = new Property<>("amount", 1.0f).setDescription("the amount of life points an entity is healed of each ritual pulse");
 
   public double radius_x, radius_y, radius_z;
   public float amount;
