@@ -1,6 +1,7 @@
 package epicsquid.roots.tileentity;
 
 import epicsquid.mysticallib.tile.TileBase;
+import epicsquid.roots.config.GeneralConfig;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -44,13 +45,11 @@ public class TileEntityUnendingBowl extends TileBase {
   }
 
   public static class UnendingBowlFluidHandler extends FluidTank {
-    public static final String FLUID_NAME = "water";
-
     public UnendingBowlFluidHandler() {
       super(Integer.MAX_VALUE);
       // TODO: Also handle potential different fluid names in the item stack handler
-      this.fluid = FluidRegistry.getFluidStack(FLUID_NAME, Integer.MAX_VALUE);
     }
+
 
     @Override
     public FluidTank readFromNBT(NBTTagCompound nbt) {
@@ -64,7 +63,10 @@ public class TileEntityUnendingBowl extends TileBase {
 
     @Override
     public FluidStack getFluid() {
-      return FluidRegistry.getFluidStack(FLUID_NAME, Integer.MAX_VALUE);
+      if (this.fluid == null) {
+        this.fluid = FluidRegistry.getFluidStack(GeneralConfig.FluidName, Integer.MAX_VALUE);
+      }
+      return this.fluid;
     }
 
     @Override
@@ -78,7 +80,7 @@ public class TileEntityUnendingBowl extends TileBase {
         return 0;
       }
 
-      if (!fluid.isFluidEqual(resource)) {
+      if (!getFluid().isFluidEqual(resource)) {
         return 0;
       }
 
@@ -87,7 +89,7 @@ public class TileEntityUnendingBowl extends TileBase {
       }
 
       if (tile != null) {
-        FluidEvent.fireEvent(new FluidEvent.FluidFillingEvent(fluid, tile.getWorld(), tile.getPos(), this, capacity));
+        FluidEvent.fireEvent(new FluidEvent.FluidFillingEvent(getFluid(), tile.getWorld(), tile.getPos(), this, capacity));
       }
 
       return capacity;
@@ -98,10 +100,10 @@ public class TileEntityUnendingBowl extends TileBase {
     public FluidStack drainInternal(int maxDrain, boolean doDrain) {
       if (doDrain) {
         if (tile != null) {
-          FluidEvent.fireEvent(new FluidEvent.FluidDrainingEvent(fluid, tile.getWorld(), tile.getPos(), this, maxDrain));
+          FluidEvent.fireEvent(new FluidEvent.FluidDrainingEvent(getFluid(), tile.getWorld(), tile.getPos(), this, maxDrain));
         }
       }
-      return new FluidStack(fluid, maxDrain);
+      return new FluidStack(getFluid(), maxDrain);
     }
 
     @Override
@@ -121,7 +123,7 @@ public class TileEntityUnendingBowl extends TileBase {
 
     @Override
     public boolean canDrainFluidType(@Nullable FluidStack fluid) {
-      return fluid.getFluid() == FluidRegistry.getFluid(FLUID_NAME);
+      return fluid.getFluid() == FluidRegistry.getFluid(GeneralConfig.FluidName);
     }
 
     @Override

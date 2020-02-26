@@ -1,5 +1,6 @@
 package epicsquid.roots.block.itemblock;
 
+import epicsquid.roots.config.GeneralConfig;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -31,7 +32,7 @@ public class ItemBlockUnendingBowl extends ItemBlock {
     @Nullable
     @Override
     public FluidStack getFluid() {
-      return new FluidStack(FluidRegistry.getFluid("water"), Integer.MAX_VALUE);
+      return new FluidStack(FluidRegistry.getFluid(GeneralConfig.FluidName), Integer.MAX_VALUE);
     }
 
     @Override
@@ -50,7 +51,7 @@ public class ItemBlockUnendingBowl extends ItemBlock {
 
     @Override
     public FluidStack drain(int maxDrain, boolean doDrain) {
-      return new FluidStack(FluidRegistry.getFluid("water"), maxDrain);
+      return new FluidStack(FluidRegistry.getFluid(GeneralConfig.FluidName), maxDrain);
     }
 
     @Override
@@ -60,7 +61,7 @@ public class ItemBlockUnendingBowl extends ItemBlock {
 
     @Override
     public boolean canDrainFluidType(FluidStack fluid) {
-      return fluid.getFluid() == FluidRegistry.getFluid("water");
+      return fluid.getFluid() == FluidRegistry.getFluid(GeneralConfig.FluidName);
 
     }
 
