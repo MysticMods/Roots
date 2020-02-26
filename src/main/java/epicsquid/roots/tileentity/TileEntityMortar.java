@@ -3,6 +3,7 @@ package epicsquid.roots.tileentity;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.particle.ParticleUtil;
@@ -36,6 +37,7 @@ public class TileEntityMortar extends TileBase {
       TileEntityMortar.this.markDirty();
       if (!world.isRemote) {
         updatePacketViaState();
+        TileEntityMortar.this.world.updateComparatorOutputLevel(pos, ModBlocks.mortar);
       }
     }
 

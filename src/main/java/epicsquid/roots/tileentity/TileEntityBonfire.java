@@ -8,6 +8,7 @@ import epicsquid.roots.block.BlockBonfire;
 import epicsquid.roots.config.RitualConfig;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualFrostLands;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
@@ -17,6 +18,7 @@ import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.ItemHandlerUtil;
 import epicsquid.roots.util.XPUtil;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -69,6 +71,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   private PyreCraftingRecipe lastRecipeUsed = null;
   private List<Ingredient> lastUsedIngredients = null;
   private EntityRitualBase ritualEntity = null;
+  private Block block = null;
 
   private boolean isBurning = false;
 
@@ -77,8 +80,9 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   public ItemStackHandler inventory = new ItemStackHandler(5) {
     @Override
     protected void onContentsChanged(int slot) {
+      TileEntityBonfire.this.markDirty();
       if (!world.isRemote) {
-        TileEntityBonfire.this.markDirty();
+        TileEntityBonfire.this.world.updateComparatorOutputLevel(pos, getBlock());
         TileEntityBonfire.this.updatePacketViaState();
       }
     }
@@ -90,6 +94,13 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     for (int i = 0; i < 5; i++) {
       inventory_storage.setStackInSlot(i, ItemStack.EMPTY);
     }
+  }
+
+  protected Block getBlock () {
+    if (block == null) {
+      block = world.getBlockState(pos).getBlock();
+    }
+    return block;
   }
 
   public TileEntityBonfire() {
