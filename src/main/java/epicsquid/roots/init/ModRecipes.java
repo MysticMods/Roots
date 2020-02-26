@@ -1022,7 +1022,7 @@ public class ModRecipes {
         new PyreCraftingRecipe(new ItemStack(ModItems.dewgonia, 3), 1).addIngredients(
             new OreIngredient("grass"),
             new ItemStack(Items.SUGAR),
-            new ItemStack(Items.DYE, 1, 4),
+            new OreIngredient("dyeBlue"),
             new ItemStack(ModItems.terra_moss),
             new ItemStack(Item.getItemFromBlock(Blocks.WATERLILY))));
 
@@ -1176,7 +1176,7 @@ public class ModRecipes {
             new ItemStack(ModItems.terra_moss),
             new OreIngredient("wildroot"),
             new ItemStack(Blocks.GRAVEL),
-            new ItemStack(Items.DYE, 1, 15)));
+            new OreIngredient("dyeWhite")));
 
     addCraftingRecipe("living_pickaxe",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_pickaxe), 1).addIngredients(
@@ -1252,7 +1252,7 @@ public class ModRecipes {
 
     addCraftingRecipe("runestone",
         new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(ModBlocks.runestone), 8), 1).addIngredients(
-            new ItemStack(Items.DYE, 1, 4),
+            new OreIngredient("dyeBlue"),
             new OreIngredient("stone"),
             new OreIngredient("stone"),
             new OreIngredient("stone"),
