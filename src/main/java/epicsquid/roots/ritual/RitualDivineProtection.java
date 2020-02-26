@@ -18,9 +18,9 @@ public class RitualDivineProtection extends RitualBase {
   public static Property<Float> PROP_CONSECRATION_DAMAGE = new Property<>("consecration_damage", 4.0f).setDescription("damage done to undead creatures if Consecration is installed");
   public static Property<Float> PROP_FIRE_DAMAGE = new Property<>("fire_damage", 4.0f).setDescription("amount of fire damage done to undead creatures");
   public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 2).setDescription("duration in SECONDS undead creatures will be set on fire for");
-  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15);
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 15);
-  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15);
+  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 15).setDescription("Radius on the Y Axis of the cube in which the ritual takes place");
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15).setDescription("Radius on the Z Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_DAY_LENGTH = new Property<>("day_length", 24000).setDescription("the length of the day for use in calculating addition/subtraction (modify if you have mods that adjust day/night length");
   public static Property<Integer> PROP_NIGHT_THRESHOLD = new Property<>("night_threshold", 12000).setDescription("the point at which day transitions into night (modify if you have mods that adjust day/night length");
 
