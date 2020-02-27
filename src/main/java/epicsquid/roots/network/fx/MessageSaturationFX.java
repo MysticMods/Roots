@@ -1,0 +1,63 @@
+package epicsquid.roots.network.fx;
+
+import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.spell.SpellChrysopoeia;
+import epicsquid.roots.spell.SpellSaturate;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+public class MessageSaturationFX implements IMessage {
+
+  private int entityId;
+
+  @SuppressWarnings("unused")
+  public MessageSaturationFX() {
+  }
+
+  public MessageSaturationFX(int id) {
+    this.entityId = id;
+  }
+
+  public MessageSaturationFX(EntityPlayer player) {
+    this.entityId = player.getEntityId();
+  }
+
+  @Override
+  public void fromBytes(ByteBuf buf) {
+    this.entityId = buf.readInt();
+  }
+
+  @Override
+  public void toBytes(ByteBuf buf) {
+    buf.writeInt(this.entityId);
+  }
+
+  @SuppressWarnings("Duplicates")
+  public static class Handler implements IMessageHandler<MessageSaturationFX, IMessage> {
+    @SideOnly(Side.CLIENT)
+    @Override
+    public IMessage onMessage(MessageSaturationFX message, MessageContext ctx) {
+      World world = Minecraft.getMinecraft().world;
+      Entity entity = world.getEntityByID(message.entityId);
+      if (entity instanceof EntityPlayer) {
+        EntityPlayer player = (EntityPlayer) entity;
+        for (int i = 0; i <= 360; i++) {
+          float tx = (float) entity.posX + 0.75f * (float) Math.sin(Math.toRadians(i));
+          float ty = (float) entity.posY + (player.height / 2) + 0.5f;
+          float tz = (float) entity.posZ + 0.75f * (float) Math.cos(Math.toRadians(i));
+          ParticleUtil.spawnParticleSpark(world, tx, ty, tz, (float) Math.sin(Math.toRadians(i)) * 0.05f, 0f, (float) Math.cos(Math.toRadians(i)) * 0.05f, SpellSaturate.instance.getRed1(), SpellSaturate.instance.getGreen1(), SpellSaturate.instance.getBlue1(), 1.0f, 3.0f, 50);
+        }
+      }
+
+      return null;
+    }
+  }
+}
