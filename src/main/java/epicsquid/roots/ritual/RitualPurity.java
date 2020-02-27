@@ -11,11 +11,11 @@ import net.minecraft.util.text.TextFormatting;
 
 public class RitualPurity extends RitualBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(1200);
-  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15);
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 15);
-  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15);
+  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 15).setDescription("Radius on the Y Axis of the cube in which the ritual takes place");
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15).setDescription("Radius on the Z Axis of the cube in which the ritual takes place");
   public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(20);
-  public static Property<Integer> PROP_ZOMBIE_COUNT = new Property<>("zombie_count", 1);
+  public static Property<Integer> PROP_ZOMBIE_COUNT = new Property<>("zombie_count", 1).setDescription("the rate at which the zombie villager is converted back to a villager");
 
   public double radius_x, radius_y, radius_z;
   public int interval, zombie_count;
