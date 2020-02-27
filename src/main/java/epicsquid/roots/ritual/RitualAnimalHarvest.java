@@ -12,11 +12,11 @@ import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualAnimalHarvest extends RitualBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(3200);
-  public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(110);
+  public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(110).setDescription("the number of ticks between each ritual harvest");
   public static Property<Integer> PROP_COUNT = new Property<>("count", 5).setDescription("the number of times harvesting will be performed per interval");
-  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15);
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 10);
-  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15);
+  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 10).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_GLOW_DURATION = new Property<>("glowing", 30).setDescription("duration (in ticks) mobs will glow after being harvested");
   public static Property<Integer> PROP_LOOTING_CHANCE = new Property<>("looting_chance", 6).setDescription("chance (1 in X) that the the looting chance will be set to looting_value");
   public static Property<Integer> PROP_LOOTING_VALUE = new Property<>("looting_value", 1).setDescription("the value passed to the loot function for 'looting' if looting_chance was successful");

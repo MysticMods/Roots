@@ -25,7 +25,7 @@ public class RitualSummonCreatures extends RitualBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(200);
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 3).setDescription("Radius on the X Axis of the square area in which the ritual takes place");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 3).setDescription("Radius on the Z Axis of the square area in which the ritual takes place");
-  public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(150);
+  public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(150).setDescription("interval in ticks between each summoned creature");
   public static Property<Integer> PROP_TRIES = new Property<>("tries", 10).setDescription("number of attempts at finding a random good (satisfying the conditions) position to spawn the creature");
 
   public int radius_x, radius_z, tries, interval;

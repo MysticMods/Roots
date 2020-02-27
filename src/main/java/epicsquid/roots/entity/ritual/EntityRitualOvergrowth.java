@@ -6,10 +6,8 @@ import epicsquid.roots.config.MossConfig;
 import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
 import epicsquid.roots.ritual.RitualOvergrowth;
 import epicsquid.roots.ritual.RitualRegistry;
-import net.minecraft.block.Block;
+import epicsquid.roots.util.RitualUtil;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -35,7 +33,7 @@ public class EntityRitualOvergrowth extends EntityRitualBase {
           if (world.isAirBlock(pos)) return false;
           IBlockState state = world.getBlockState(pos);
           IBlockState mossified = MossConfig.mossConversion(state);
-          return mossified != null && isAdjacentToWater(world, pos);
+          return mossified != null && RitualUtil.isAdjacentToWater(world, pos);
         });
         if (eligiblePositions.isEmpty()) return;
 
@@ -44,22 +42,6 @@ public class EntityRitualOvergrowth extends EntityRitualBase {
         PacketHandler.sendToAllTracking(new MessageOvergrowthEffectFX(pos.getX(), pos.getY(), pos.getZ()), this);
       }
     }
-  }
-
-  // TODO: MOVE THIS TO A UTILITY CLASS
-  /**
-   * Checks if the given block has water adjacent to it
-   *
-   * @return True if at least one side is touching a water source block
-   */
-  private boolean isAdjacentToWater(World world, BlockPos pos) {
-    for (EnumFacing facing : EnumFacing.HORIZONTALS) {
-      Block block = world.getBlockState(pos.offset(facing)).getBlock();
-      if (block == Blocks.WATER || block == Blocks.FLOWING_WATER) {
-        return true;
-      }
-    }
-    return false;
   }
 
 }

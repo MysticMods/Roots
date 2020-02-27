@@ -5,8 +5,10 @@ import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.tileentity.TileEntityOffertoryPlate;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -55,6 +57,21 @@ public class RitualUtil {
     }
 
     return null;
+  }
+
+  /**
+   * Checks if the given block has water adjacent to it
+   *
+   * @return True if at least one side is touching a water source block
+   */
+  public static boolean isAdjacentToWater(World world, BlockPos pos) {
+    for (EnumFacing facing : EnumFacing.HORIZONTALS) {
+      Block block = world.getBlockState(pos.offset(facing)).getBlock();
+      if (block == Blocks.WATER || block == Blocks.FLOWING_WATER) {
+        return true;
+      }
+    }
+    return false;
   }
 
   public static AxisAlignedBB OFFERING = new AxisAlignedBB(-6, -6, -6, 7, 7, 7);

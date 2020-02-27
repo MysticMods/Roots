@@ -11,7 +11,7 @@ import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualGroveSupplication extends RitualBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(120);
-  public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(100);
+  public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(100).setDescription("interval in ticks between each generated piece of generated flora");
 
   public int interval;
 
