@@ -15,7 +15,7 @@ public class RitualWardingProtection extends RitualBase {
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 15).setDescription("Radius on the Y Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15).setDescription("Radius on the Z Axis of the cube in which the ritual takes place");
-  public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(20);
+  public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(20).setDescription("interval in ticks between each time you get provided an invulnerability effect");
   public static Property<Integer> PROP_INVULN_DURATION = new Property<>("invuln_duration", 22).setDescription("duration in TICKS of the invulnerability effect");
 
   public double radius_x, radius_y, radius_z;

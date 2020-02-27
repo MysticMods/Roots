@@ -16,7 +16,7 @@ public class RitualTransmutation extends RitualBase {
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 8).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 8).setDescription("Radius on the Y Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 8).setDescription("Radius on the Z Axis of the cube in which the ritual takes place");
-  public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(100);
+  public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(100).setDescription("interval in ticks between each block transmutation");
 
   public int radius_x, radius_y, radius_z, interval;
 
