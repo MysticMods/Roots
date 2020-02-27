@@ -14,6 +14,8 @@ import epicsquid.roots.integration.jei.fey.FeyCategory;
 import epicsquid.roots.integration.jei.fey.FeyWrapper;
 import epicsquid.roots.integration.jei.mortar.MortarCategory;
 import epicsquid.roots.integration.jei.mortar.MortarWrapper;
+import epicsquid.roots.integration.jei.transubstantiation.ChrysopoeiaCategory;
+import epicsquid.roots.integration.jei.transubstantiation.ChrysopoeiaWrapper;
 import epicsquid.roots.integration.jei.ritual.RitualCategory;
 import epicsquid.roots.integration.jei.ritual.RitualCraftingCategory;
 import epicsquid.roots.integration.jei.ritual.RitualCraftingWrapper;
@@ -32,11 +34,11 @@ import epicsquid.roots.recipe.*;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.spell.SpellChrysopoeia;
 import epicsquid.roots.spell.SpellRegistry;
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
-import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -63,13 +65,14 @@ public class JEIRootsPlugin implements IModPlugin {
   public static final String SPELL_MODIFIERS = Roots.MODID + ".spell_modifiers";
   public static final String TERRA_MOSS = Roots.MODID + ".terra_moss";
   public static final String SUMMON_CREATURES = Roots.MODID + ".summon_creatures";
+  public static final String CHRYSOPOEIA = Roots.MODID + ".transubstantiation";
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registry) {
     IGuiHelper helper = registry.getJeiHelpers().getGuiHelper();
     registry.addRecipeCategories(new RunicShearsCategory(helper),
         new RitualCraftingCategory(helper),
-        new MortarCategory(helper),
+        new ChrysopoeiaCategory(helper),
         new RitualCategory(helper),
         new FeyCategory(helper),
         new SpellCostCategory(helper),
@@ -77,7 +80,8 @@ public class JEIRootsPlugin implements IModPlugin {
         new BarkRecipeCategory(helper),
         new MossRecipeCategory(helper),
         new RunicShearsEntityCategory(helper),
-        new SummonCreaturesCategory(helper)
+        new SummonCreaturesCategory(helper),
+        new MortarCategory(helper)
     );
   }
 
@@ -96,6 +100,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(MossRecipe.class, MossRecipeWrapper::new, TERRA_MOSS);
     registry.handleRecipes(SummonCreatureRecipe.class, SummonCreaturesWrapper::new, SUMMON_CREATURES);
     registry.handleRecipes(SummonCreatureIntermediate.class, SummonCreaturesWrapper::new, SUMMON_CREATURES);
+    registry.handleRecipes(ChrysopoeiaRecipe.class, ChrysopoeiaWrapper::new, CHRYSOPOEIA);
 
     Collection<SpellBase> spells = SpellRegistry.spellRegistry.values();
 
@@ -114,6 +119,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipes(ModRecipes.getBarkRecipes(), BARK_CARVING);
     registry.addRecipes(MossRecipe.getRecipeList(), TERRA_MOSS);
     registry.addRecipes(ModRecipes.getSummonCreatureEntries(), SUMMON_CREATURES);
+    registry.addRecipes(ModRecipes.getChrysopoeiaRecipes(), CHRYSOPOEIA);
 
     ModRecipes.generateLifeEssence();
     List<SummonCreatureIntermediate> summonGenerated = ModRecipes.getLifeEssenceList().stream().map(SummonCreatureIntermediate::create).collect(Collectors.toList());
@@ -138,6 +144,13 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.fey_crafter), FEY_CRAFTING);
     registry.addRecipeCatalyst(new ItemStack(ModItems.staff), SPELL_COSTS);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.imbuer), SPELL_MODIFIERS);
+    registry.addRecipeCatalyst(new ItemStack(ModItems.spell_chrysopoeia), CHRYSOPOEIA);
+
+    ItemStack spellDust = new ItemStack(ModItems.spell_dust);
+    SpellHandler handler = SpellHandler.fromStack(spellDust);
+    handler.setSpellToSlot(SpellChrysopoeia.instance);
+    handler.saveToStack();
+    registry.addRecipeCatalyst(spellDust, CHRYSOPOEIA);
 
     registry.addIngredientInfo(new ItemStack(ModItems.terra_moss), VanillaTypes.ITEM, I18n.format("jei.roots.terra_moss.desc"));
     registry.addIngredientInfo(new ItemStack(ModItems.terra_spores), VanillaTypes.ITEM, I18n.format("jei.roots.terra_spores.desc"));

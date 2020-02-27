@@ -113,7 +113,7 @@ public class SpellConfig {
     public boolean disableDesaturate = false;
     @Config.Name("Disable Transubstantiate Spell")
     @Config.Comment("Set to true to disable the Transubstantiate Spell")
-    public boolean disableTransubstantiate = false;
+    public boolean disableChrysopoeia = false;
   }
 
   public static class SpellFeaturesCategory {

@@ -68,8 +68,8 @@ public class SpellRegistry {
     spellRegistry.put(SpellSaturate.spellName, SpellSaturate.instance);
     SpellDesaturate.instance.setDisabled(SpellConfig.disableSpellsCategory.disableDesaturate);
     spellRegistry.put(SpellDesaturate.spellName, SpellDesaturate.instance);
-    SpellTransubstantiate.instance.setDisabled(SpellConfig.disableSpellsCategory.disableTransubstantiate);
-    spellRegistry.put(SpellTransubstantiate.spellName, SpellTransubstantiate.instance);
+    SpellChrysopoeia.instance.setDisabled(SpellConfig.disableSpellsCategory.disableChrysopoeia);
+    spellRegistry.put(SpellChrysopoeia.spellName, SpellChrysopoeia.instance);
 
     spellRegistry.put(SpellDisarm.spellName, SpellDisarm.instance);
     SpellDisarm.instance.setDisabled(SpellConfig.disableSpellsCategory.disableDisarm);

@@ -5,6 +5,7 @@ import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticallib.recipe.factories.OreFallbackIngredient;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.mysticalworld.MysticalWorld;
 import epicsquid.mysticalworld.config.ConfigManager;
 import epicsquid.mysticalworld.entity.*;
 import epicsquid.mysticalworld.materials.Material;
@@ -16,6 +17,7 @@ import epicsquid.roots.recipe.*;
 import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.util.IngredientWithStack;
 import epicsquid.roots.util.StateUtil;
 import epicsquid.roots.util.types.WorldPosStatePredicate;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
@@ -43,6 +45,8 @@ import java.util.stream.Collectors;
 @SuppressWarnings({"unused", "WeakerAccess", "UnusedReturnValue"})
 public class ModRecipes {
 
+  private static Map<ResourceLocation, ChrysopoeiaRecipe> chrysopoeiaRecipes = new HashMap<>();
+
   // TODO: Registries
   private static Map<ResourceLocation, AnimalHarvestRecipe> harvestRecipes = new HashMap<>();
   private static Map<ResourceLocation, AnimalHarvestFishRecipe> fishRecipes = new HashMap<>();
@@ -66,6 +70,54 @@ public class ModRecipes {
   private static Map<Class<? extends Entity>, PacifistEntry> pacifistClasses = new HashMap<>();
   private static Map<ResourceLocation, BarkRecipe> barkRecipes = new HashMap<>();
   private static Map<ResourceLocation, FlowerRecipe> flowerRecipes = new HashMap<>();
+
+  public static void initChrysopoeiaRecipes() {
+    addChrysopoeiaRecipe("gold_from_silver", new IngredientWithStack(new OreIngredient("ingotSilver"), 2), new ItemStack(Items.GOLD_INGOT));
+    addChrysopoeiaRecipe("iron_from_copper", new IngredientWithStack(new OreIngredient("ingotCopper"), 2), new ItemStack(Items.IRON_INGOT));
+    addChrysopoeiaRecipe("gold_nugget_from_silver", new IngredientWithStack(new OreIngredient("nuggetSilver"), 2), new ItemStack(Items.GOLD_NUGGET));
+    addChrysopoeiaRecipe("iron_nugget_from_copper", new IngredientWithStack(new OreIngredient("nuggetCopper"), 2), new ItemStack(Items.IRON_NUGGET));
+  }
+
+  public static Collection<ChrysopoeiaRecipe> getChrysopoeiaRecipes() {
+    return chrysopoeiaRecipes.values();
+  }
+
+  public static ChrysopoeiaRecipe addChrysopoeiaRecipe(String name, IngredientWithStack ingredient, ItemStack output) {
+    return addChrysopoeiaRecipe(new ResourceLocation(MysticalWorld.MODID, name), ingredient, output);
+  }
+
+  public static ChrysopoeiaRecipe addChrysopoeiaRecipe(ResourceLocation name, IngredientWithStack ingredient, ItemStack output) {
+    if (chrysopoeiaRecipes.containsKey(name)) {
+      Roots.logger.error("Invalid key: " + name.toString() + " for Chrysopoeia recipe. Key already exists.");
+      return null;
+    }
+    ChrysopoeiaRecipe recipe = new ChrysopoeiaRecipe(ingredient, output);
+    recipe.setRegistryName(name);
+    chrysopoeiaRecipes.put(name, recipe);
+    return recipe;
+  }
+
+  @Nullable
+  public static ChrysopoeiaRecipe getChrysopoeiaRecipe(ItemStack stack) {
+    for (ChrysopoeiaRecipe recipe : getChrysopoeiaRecipes()) {
+      if (recipe.matches(stack)) {
+        return recipe;
+      }
+    }
+
+    return null;
+  }
+
+  public static void removeChrysopoeiaRecipe(ResourceLocation name) {
+    chrysopoeiaRecipes.remove(name);
+  }
+
+  public static void removeChrysopoeiaRecipe(ItemStack stack) {
+    ChrysopoeiaRecipe recipe = getChrysopoeiaRecipe(stack);
+    if (recipe != null) {
+      removeChrysopoeiaRecipe(recipe.getRegistryName());
+    }
+  }
 
   public static void initSummonCreatureEntries() {
     addSummonCreatureEntry("owl", EntityOwl.class, new OreIngredient("treeSapling"), new OreIngredient("treeLeaves"));
@@ -998,6 +1050,7 @@ public class ModRecipes {
     initModdedBarkRecipes();
     initFlowerRecipes();
     initSummonCreatureEntries();
+    initChrysopoeiaRecipes();
 
     GameRegistry.addSmelting(ModItems.flour, new ItemStack(Items.BREAD), 0.125f);
     GameRegistry.addSmelting(epicsquid.mysticalworld.init.ModItems.seeds, new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_seeds), 0.05f);

@@ -8,13 +8,13 @@ import epicsquid.roots.block.BlockBonfire;
 import epicsquid.roots.config.RitualConfig;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualFrostLands;
-import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.IColdRitual;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
+import epicsquid.roots.util.IngredientWithStack;
 import epicsquid.roots.util.ItemHandlerUtil;
 import epicsquid.roots.util.XPUtil;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
@@ -390,7 +390,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         if (te != null) {
           IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
           if (cap != null) {
-            Int2ObjectOpenHashMap<ItemHandlerUtil.IngredientWithStack> slotsToIngredient = new Int2ObjectOpenHashMap<>();
+            Int2ObjectOpenHashMap<IngredientWithStack> slotsToIngredient = new Int2ObjectOpenHashMap<>();
             int amount = 0;
             for (Ingredient ingredient : lastUsedIngredients) {
               for (int i = 0; i < cap.getSlots(); i++) {
@@ -404,7 +404,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
                     }
                   } else {
                     amount++;
-                    slotsToIngredient.put(i, new ItemHandlerUtil.IngredientWithStack(ingredient, 1));
+                    slotsToIngredient.put(i, new IngredientWithStack(ingredient, 1));
                     break;
                   }
                 }

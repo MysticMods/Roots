@@ -1,7 +1,5 @@
 package epicsquid.roots.entity.spell;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellSpringStorm;

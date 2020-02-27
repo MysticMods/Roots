@@ -1,0 +1,17 @@
+{
+  "name": "Saturate",
+  "icon": "roots:spell_dust",
+  "category": "spells",
+  "advancement": "roots:wildewheet",
+  "flag": "roots:spell_saturate",
+  "pages": [
+    {
+      "type": "text",
+      "text": ""
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_saturate"
+    }
+  ]
+}
