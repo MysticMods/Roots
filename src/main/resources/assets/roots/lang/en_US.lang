@@ -142,10 +142,10 @@ roots.spell.spell_natures_blades.name=Nature's Blades
 roots.spell.spell_iced_touch.module_touch.description=Surrounds you with freezing clouds
 roots.spell.spell_reach.name=Reach
 roots.spell.spell_autumns_fall.name=Autumn's Fall
-roots.spell.spell_natures_scythe=Nature's Scythe
-roots.spell.spell_saturate=Saturate
-roots.spell.spell_desaturate=Desaturate
-roots.spell.spell_transubstantiate=Transubstantiate
+roots.spell.spell_natures_scythe.name=Nature's Scythe
+roots.spell.spell_saturate.name=Saturate
+roots.spell.spell_desaturate.name=Desaturate
+roots.spell.spell_chrysopoeia.name=Chyrsopoeia
 
 roots.ritual.ritual_healing_aura.name=Healing Aura
 roots.ritual.ritual_heavy_storms.name=Heavy Storms
@@ -203,8 +203,7 @@ item.ritual_overgrowth.name=Ritual: Overgrowth
 item.ritual_flower_growth.name=Ritual: Flower Growth
 item.ritual_transmutation.name=Ritual: Transmutation
 item.ritual_gathering.name=Ritual: Gathering
-item.grove_fairy_icon.name=Fairy Grove
-item.grove_fairy_text.name=Fairy Grove
+item.spell_chrysopoeia.name=Spell: Chrysopoiea
 item.fey_fire.name=Fey Fire
 
 #Knifes
@@ -344,6 +343,7 @@ container.roots.spell_costs.name=Spell Costs
 container.roots.spell_modifiers.name=Spell Modifiers
 container.roots.bark_carving.name=Bark Carving
 container.roots.terra_moss.name=Moss Scraping
+container.roots.chrysopoeia.name=Item Transmutation
 jei.roots.terra_moss.desc=Scraped from moss cobblestone with a knife. Cobblestone infused with terra spores will grow moss when adjacent to water.
 jei.roots.terra_spores.desc=Dropped from broken tall grass; used on cobblestone adjacent water grows spores, turning it into moss cobblestone.
 jei.roots.wildroot.desc=Dropped from broken tall grass and the extremely rare leaves of the wildwood tree.

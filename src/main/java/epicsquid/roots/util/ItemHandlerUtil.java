@@ -3,7 +3,6 @@ package epicsquid.roots.util;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.items.IItemHandler;
 
 import java.util.ArrayList;
@@ -62,28 +61,6 @@ public class ItemHandlerUtil {
     }
 
     return true;
-  }
-
-  public static class IngredientWithStack {
-    private final Ingredient ingredient;
-    private int count;
-
-    public IngredientWithStack(Ingredient ingredient, int count) {
-      this.ingredient = ingredient;
-      this.count = count;
-    }
-
-    public Ingredient getIngredient() {
-      return ingredient;
-    }
-
-    public int getCount() {
-      return count;
-    }
-
-    public void increment () {
-      count++;
-    }
   }
 
   public static List<ItemStack> getItemsInSlots(IItemHandler handler, Int2ObjectOpenHashMap<IngredientWithStack> slotToIngredients, boolean simulate) {
