@@ -1,10 +1,10 @@
 package epicsquid.roots.integration.top;
 
-import epicsquid.roots.block.BlockBonfire;
+import epicsquid.roots.block.BlockPyre;
 import epicsquid.roots.block.groves.BlockGroveStone;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.ritual.RitualBase;
-import epicsquid.roots.tileentity.TileEntityBonfire;
+import epicsquid.roots.tileentity.TileEntityPyre;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -29,8 +29,8 @@ public class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfoProvid
       if (blockState.getValue(BlockGroveStone.VALID)) {
         probeInfo.text(TextFormatting.GREEN + "" + TextFormatting.BOLD + "{*roots.hud.grove_stone.valid*}");
       }
-    } else if (block instanceof BlockBonfire) {
-      TileEntityBonfire te = (TileEntityBonfire) world.getTileEntity(data.getPos());
+    } else if (block instanceof BlockPyre) {
+      TileEntityPyre te = (TileEntityPyre) world.getTileEntity(data.getPos());
       if (te != null && te.getBurnTime() > 0) {
         int duration = 0;
         if (te.getLastRecipeUsed() != null) {

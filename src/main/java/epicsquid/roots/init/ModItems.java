@@ -186,12 +186,15 @@ public class ModItems {
       OreDictionary.registerOre("allTallFlowers", new ItemStack(Blocks.DOUBLE_PLANT, 1, type.getMeta()));
     }
 
-    for (Item bark : Arrays.asList(bark_oak, bark_wildwood, bark_birch, bark_spruce, bark_acacia, bark_dark_oak, bark_jungle)) {
+    for (Item bark : barks) {
       OreDictionary.registerOre("rootsBark", bark);
     }
 
-    for (Block rune : Arrays.asList(ModBlocks.runestone, ModBlocks.chiseled_runestone, ModBlocks.runestone_brick, ModBlocks.runestone_brick_alt)) {
+    for (Block rune : ModBlocks.runestoneBlocks) {
       OreDictionary.registerOre("runestone", rune);
+    }
+    for (Block runed : ModBlocks.runedObsidianBlocks) {
+      OreDictionary.registerOre("runedObsidian", runed);
     }
 
     OreDictionary.registerOre("wildroot", ModItems.wildroot);

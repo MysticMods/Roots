@@ -1,6 +1,6 @@
 {
     "name": "Ritual Automation",
-    "icon": "roots:bonfire",
+    "icon": "roots:pyre",
     "category": "rituals",
     "advancement": "roots:pyre",
     "priority": true,
@@ -16,7 +16,7 @@
           "multiblock": {
             "mapping": {
               "0": "minecraft:chest",
-              "R": "roots:bonfire"
+              "R": "roots:pyre"
             },
             "pattern": [
               [" ", "R", " "],
@@ -36,7 +36,7 @@
           "name": "Fire Locations",
           "multiblock": {
             "mapping": {
-              "0": "roots:bonfire",
+              "0": "roots:pyre",
               "G": "minecraft:grass",
               "I": "minecraft:iron_bars"
             },

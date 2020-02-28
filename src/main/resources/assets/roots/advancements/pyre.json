@@ -1,7 +1,7 @@
 {
     "display": {
         "icon": {
-            "item": "roots:bonfire"
+            "item": "roots:pyre"
         },
         "title": {
             "translate": "advancement.roots.pyre"
@@ -17,7 +17,7 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "roots:bonfire"
+                        "item": "roots:pyre"
                     }
                 ]
             }

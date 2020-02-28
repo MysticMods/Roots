@@ -135,12 +135,12 @@ public class JEIRootsPlugin implements IModPlugin {
       registry.addRecipeCatalyst(new ItemStack(knife), TERRA_MOSS);
     }
 
-    registry.addRecipeCatalyst(new ItemStack(ModBlocks.bonfire), RITUAL_CRAFTING);
-    registry.addRecipeCatalyst(new ItemStack(ModBlocks.reinforced_bonfire), RITUAL_CRAFTING);
+    registry.addRecipeCatalyst(new ItemStack(ModBlocks.pyre), RITUAL_CRAFTING);
+    registry.addRecipeCatalyst(new ItemStack(ModBlocks.reinforced_pyre), RITUAL_CRAFTING);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.mortar), MORTAR_AND_PESTLE);
     registry.addRecipeCatalyst(new ItemStack(ModItems.pestle), MORTAR_AND_PESTLE);
-    registry.addRecipeCatalyst(new ItemStack(ModBlocks.bonfire), RITUAL);
-    registry.addRecipeCatalyst(new ItemStack(ModBlocks.reinforced_bonfire), RITUAL);
+    registry.addRecipeCatalyst(new ItemStack(ModBlocks.pyre), RITUAL);
+    registry.addRecipeCatalyst(new ItemStack(ModBlocks.reinforced_pyre), RITUAL);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.fey_crafter), FEY_CRAFTING);
     registry.addRecipeCatalyst(new ItemStack(ModItems.staff), SPELL_COSTS);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.imbuer), SPELL_MODIFIERS);

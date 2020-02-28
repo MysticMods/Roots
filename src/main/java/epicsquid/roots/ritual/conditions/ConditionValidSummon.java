@@ -2,7 +2,7 @@ package epicsquid.roots.ritual.conditions;
 
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.tileentity.TileEntityBonfire;
+import epicsquid.roots.tileentity.TileEntityPyre;
 import epicsquid.roots.tileentity.TileEntityOffertoryPlate;
 import epicsquid.roots.util.RitualUtil;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ConditionValidSummon implements ICondition {
   @Override
-  public boolean checkCondition(TileEntityBonfire tile, @Nullable EntityPlayer player) {
+  public boolean checkCondition(TileEntityPyre tile, @Nullable EntityPlayer player) {
     List<TileEntityOffertoryPlate> plates = RitualUtil.getNearbyOfferingPlates(tile.getWorld(), tile.getPos());
     List<ItemStack> plateItems = RitualUtil.getItemsFromNearbyPlates(plates);
 

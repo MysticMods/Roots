@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RRR",
+    "RPR",
+    "RRR"  ],
+  "key": {
+    "P": [
+      {
+        "item": "roots:pyre",
+        "data": 0
+      }
+    ],
+    "R": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "runedObsidian"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:reinforced_pyre",
+    "data": 0
+  }
+}

@@ -19,7 +19,7 @@
       "enable_visualize": false,
       "multiblock": {
         "mapping": {
-          "0": "roots:bonfire",
+          "0": "roots:pyre",
           "R": "roots:runestone",
           "C": "roots:chiseled_runestone"
         },

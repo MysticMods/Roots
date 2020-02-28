@@ -1,0 +1,6 @@
+{
+    "variants":{
+        "burning=false":  { "model": "roots:reinforced_pyre" },
+        "burning=true": { "model": "roots:reinforced_pyre"}
+    }
+}

@@ -1,9 +1,9 @@
 package epicsquid.roots.integration.hwyla;
 
 import epicsquid.roots.block.groves.BlockGroveStone;
-import epicsquid.roots.integration.hwyla.providers.ProviderBonfire;
+import epicsquid.roots.integration.hwyla.providers.ProviderPyre;
 import epicsquid.roots.integration.hwyla.providers.ProviderGroveStone;
-import epicsquid.roots.tileentity.TileEntityBonfire;
+import epicsquid.roots.tileentity.TileEntityPyre;
 import mcp.mobius.waila.api.IWailaPlugin;
 import mcp.mobius.waila.api.IWailaRegistrar;
 import mcp.mobius.waila.api.WailaPlugin;
@@ -18,6 +18,6 @@ public class WAILAPlugin implements IWailaPlugin {
   @Override
   public void register(IWailaRegistrar registrar) {
     registrar.registerBodyProvider(new ProviderGroveStone(), BlockGroveStone.class);
-    registrar.registerBodyProvider(new ProviderBonfire(), TileEntityBonfire.class);
+    registrar.registerBodyProvider(new ProviderPyre(), TileEntityPyre.class);
   }
 }

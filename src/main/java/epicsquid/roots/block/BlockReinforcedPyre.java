@@ -11,8 +11,8 @@ import net.minecraft.world.IBlockAccess;
 import javax.annotation.Nonnull;
 
 @SuppressWarnings("deprecation")
-public class BlockReinforcedBonfire extends BlockBonfire {
-  public BlockReinforcedBonfire(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
+public class BlockReinforcedPyre extends BlockPyre {
+  public BlockReinforcedPyre(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
     super(mat, type, hardness, name, teClass);
     setResistance(5000f);
   }

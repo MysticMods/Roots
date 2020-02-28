@@ -1,6 +1,6 @@
 package epicsquid.roots.ritual.conditions;
 
-import epicsquid.roots.tileentity.TileEntityBonfire;
+import epicsquid.roots.tileentity.TileEntityPyre;
 import net.minecraft.block.BlockNewLog;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks;
@@ -32,7 +32,7 @@ public class ConditionTrees implements ICondition {
   }
 
   @Override
-  public boolean checkCondition(TileEntityBonfire tile, EntityPlayer player) {
+  public boolean checkCondition(TileEntityPyre tile, EntityPlayer player) {
     return getTreeAmount(tile.getWorld(), tile.getPos()) >= this.amount;
   }
 
