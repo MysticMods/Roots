@@ -28,6 +28,15 @@ public class MappingsEvent {
           case "fey_light":
             mapping.ignore();
             break;
+          case "bonfire":
+            mapping.remap(epicsquid.roots.init.ModBlocks.pyre);
+            break;
+          case "decorative_bonfire":
+            mapping.remap(epicsquid.roots.init.ModBlocks.decorative_pyre);
+            break;
+          case "reinforced_bonfire":
+            mapping.remap(epicsquid.roots.init.ModBlocks.reinforced_pyre);
+            break;
         }
       }
     }
@@ -53,6 +62,15 @@ public class MappingsEvent {
             break;
           case "cooked_seeds":
             mapping.remap(ModItems.cooked_seeds);
+            break;
+          case "bonfire":
+            mapping.remap(((BlockBase) epicsquid.roots.init.ModBlocks.pyre).getItemBlock());
+            break;
+          case "decorative_bonfire":
+            mapping.remap(((BlockBase) epicsquid.roots.init.ModBlocks.decorative_pyre).getItemBlock());
+            break;
+          case "reinforced_bonfire":
+            mapping.remap(((BlockBase) epicsquid.roots.init.ModBlocks.reinforced_pyre).getItemBlock());
             break;
         }
       }
