@@ -49,15 +49,25 @@ public class MessageChrysopoeiaFX implements IMessage {
       if (entity instanceof EntityPlayer) {
         EntityPlayer player = (EntityPlayer) entity;
         float height = player.height;
-        float increment = 0.05f;
+        float increment = 0.08f;
 
-        for (int i = 5; i <= 36 + 5; i++) {
+        for (int i = 0; i <= 36; i++) {
           float tx = (float) entity.posX + 0.75f * (float) Math.sin(Math.toRadians(i * 10));
-          float ty = (float) entity.posY + height + 0.6f - increment * i;
+          float ty = (float) entity.posY + (height / 2 - 0.6f) + ((i > 18) ? (increment * 36) - increment * i : increment * i);
           float tz = (float) entity.posZ + 0.75f * (float) Math.cos(Math.toRadians(i * 10));
           ParticleUtil.spawnParticlePetal(world, tx, ty, tz, 0, -0.01f, 0, SpellChrysopoeia.instance.getRed2(), SpellChrysopoeia.instance.getGreen2(), SpellChrysopoeia.instance.getBlue2(), 1.0f, 2.0f, 360);
+          ty = (float) entity.posY - height + 0.6f + ((i < 18) ? (increment * 36) - increment * i : increment * i);
+          ParticleUtil.spawnParticlePetal(world, tx, ty, tz, 0, -0.01f, 0, SpellChrysopoeia.instance.getRed2(), SpellChrysopoeia.instance.getGreen2(), SpellChrysopoeia.instance.getBlue2(), 1.0f, 2.0f, 360);
+          ty = (float) entity.posY + (height / 2);
+          ParticleUtil.spawnParticlePetal(world, tx, ty, tz, 0, -0.01f, 0, SpellChrysopoeia.instance.getRed2(), SpellChrysopoeia.instance.getGreen2(), SpellChrysopoeia.instance.getBlue2(), 1.0f, 2.0f, 360);
         }
-        for (int i = 5; i <= 36 + 5; i++) {
+/*        for (int i = 0; i <= 36; i++) {
+          float tx = (float) entity.posX + 0.75f * (float) Math.sin(Math.toRadians(i * 10));
+          float ty = (float) entity.posY + height - ((i < 18) ? -((increment * 36) + increment * i) : -(increment * i));
+          float tz = (float) entity.posZ + 0.75f * (float) Math.cos(Math.toRadians(i * 10));
+          ParticleUtil.spawnParticlePetal(world, tx, ty, tz, 0, -0.01f, 0, SpellChrysopoeia.instance.getRed2(), SpellChrysopoeia.instance.getGreen2(), SpellChrysopoeia.instance.getBlue2(), 1.0f, 2.0f, 360);
+        }*/
+/*        for (int i = 5; i <= 36 + 5; i++) {
           float tx = (float) entity.posX + 0.75f * (float) Math.cos(Math.toRadians(i * 10));
           float ty = (float) entity.posY + height + 0.6f - increment * i;
           float tz = (float) entity.posZ + 0.75f * (float) Math.sin(Math.toRadians(i * 10));
@@ -74,7 +84,7 @@ public class MessageChrysopoeiaFX implements IMessage {
           float ty = (float) entity.posY + 0.1f + (increment * 36) - increment * i;
           float tz = (float) entity.posZ + 0.75f * (float) Math.sin(Math.toRadians(i * 10));
           ParticleUtil.spawnParticlePetal(world, tx, ty, tz, 0, -0.01f, 0, SpellChrysopoeia.instance.getRed2(), SpellChrysopoeia.instance.getGreen2(), SpellChrysopoeia.instance.getBlue2(), 1.0f, 2.0f, 360);
-        }
+        }*/
       }
 
       return null;
