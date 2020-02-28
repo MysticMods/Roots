@@ -19,8 +19,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SpellAutumnsFall extends SpellBase {
 
@@ -28,7 +31,7 @@ public class SpellAutumnsFall extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(1, new SpellCost("wildewheet", 0.250));
   public static Property<Integer> PROP_RADIUS = new Property<>("radius", 10).setDescription("the horizontal radius of the effect this spell");
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 3).setDescription("the radius on the Y axis of the effect of this spell");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("the radius on the Y axis of the effect of this spell");
   public static Property<Integer> PROP_MAX_AFFECTED = new Property<>("max_affected", 1).setDescription("maximum number of blocks affected each tick");
 
   public static String spellName = "spell_autumns_fall";
@@ -68,7 +71,6 @@ public class SpellAutumnsFall extends SpellBase {
       // TODO: Check itemblock for block leaves, build and save a map per session
       if (!caster.world.isRemote) {
         caster.world.destroyBlock(pos, true);
-        //caster.world.notifyBlockUpdate(pos, blockstate, Blocks.AIR.getDefaultState(), 8); // TODO: Is this needed?
         PacketHandler.sendToAllTracking(new MessageFallBladesFX(pos.getX(), pos.getY(), pos.getZ(), true), caster.world, pos);
       }
       affected++;
@@ -76,11 +78,35 @@ public class SpellAutumnsFall extends SpellBase {
     return affected > 0;
   }
 
+  private static Set<Block> contained = new HashSet<>();
+  private static Set<Block> ignored = new HashSet<>();
+
   private boolean isAffectedByFallSpell(World world, BlockPos pos) {
     IBlockState state = world.getBlockState(pos);
     Block block = state.getBlock();
+    if (ignored.contains(block)) {
+      return false;
+    }
+    if (contained.contains(block)) {
+      return true;
+    }
 
-    return block instanceof BlockLeaves || block instanceof BlockTallGrass;
+    if (block instanceof BlockLeaves) {
+      contained.add(block);
+      return true;
+    }
+
+    ItemStack dropped = new ItemStack(block.getItemDropped(state, Util.rand, 0), 1, block.damageDropped(state));
+    int[] ores = OreDictionary.getOreIDs(dropped);
+    for (int ore : ores) {
+      if (OreDictionary.getOreName(ore).equals("treeLeaves")) {
+        contained.add(block);
+        return true;
+      }
+    }
+
+    ignored.add(block);
+    return false;
   }
 
   @Override
