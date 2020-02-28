@@ -39,17 +39,18 @@ public class SpellSaturate extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("wildewheet", 0.7));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("terra_moss", 0.5));
-  public static Property<Double> PROP_MULTIPLIER = new Property<>("multiplier", 0.5);
+  public static Property<Double> PROP_SATURATION_MULTIPLIER = new Property<>("saturation_multiplier", 0.5);
+  public static Property<Double> PROP_FOOD_MULTIPLIER = new Property<>("food_multiplier", 0.5);
 
   public static String spellName = "spell_saturate";
   public static SpellSaturate instance = new SpellSaturate(spellName);
 
-  private double multiplier;
+  private double saturation_multiplier, food_multiplier;
   private boolean suppressSound = false;
 
   public SpellSaturate(String name) {
     super(name, TextFormatting.GOLD, 225F / 255F, 52F / 255F, 246F / 255F, 232F / 42F, 232F / 255F, 42F / 255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_MULTIPLIER);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_SATURATION_MULTIPLIER, PROP_FOOD_MULTIPLIER);
     MinecraftForge.EVENT_BUS.register(this);
   }
 
@@ -152,12 +153,6 @@ public class SpellSaturate extends SpellBase {
       stats.setFoodLevel(Math.min(20, newFood));
     }
 
-/*    caster.sendMessage(new TextComponentString("Previous food: " + currentFood + ", previous saturation: " + currentSat));
-    caster.sendMessage(new TextComponentString("New food:" + newFood + ", new saturation: " + newSat));
-    caster.sendMessage(new TextComponentString("Set food: " + stats.getFoodLevel() + ", set saturation: " + stats.getSaturationLevel()));
-    caster.sendMessage(new TextComponentString("Containers left over: " + containers.size()));
-    caster.sendMessage(new TextComponentString("Total foods consumed: " + total));*/
-
     if (!containers.isEmpty()) {
       for (ItemStack container : containers) {
         if (!caster.addItemStackToInventory(container)) {
@@ -182,7 +177,7 @@ public class SpellSaturate extends SpellBase {
     ItemFood item = (ItemFood) stack.getItem();
     int heal = item.getHealAmount(stack);
     float saturation = item.getSaturationModifier(stack);
-    return (heal * saturation * 2f) * multiplier;
+    return (heal * saturation * 2f) * saturation_multiplier;
   }
 
   private int health(ItemStack stack) {
@@ -190,7 +185,7 @@ public class SpellSaturate extends SpellBase {
       return 0;
     }
     ItemFood item = (ItemFood) stack.getItem();
-    return (int) Math.floor(item.getHealAmount(stack) * multiplier);
+    return (int) Math.floor(item.getHealAmount(stack) * food_multiplier);
   }
 
   @SubscribeEvent
@@ -204,6 +199,7 @@ public class SpellSaturate extends SpellBase {
   public void doFinalise() {
     this.castType = properties.get(PROP_CAST_TYPE);
     this.cooldown = properties.get(PROP_COOLDOWN);
-    this.multiplier = properties.get(PROP_MULTIPLIER);
+    this.saturation_multiplier = properties.get(PROP_SATURATION_MULTIPLIER);
+    this.food_multiplier = properties.get(PROP_FOOD_MULTIPLIER);
   }
 }
