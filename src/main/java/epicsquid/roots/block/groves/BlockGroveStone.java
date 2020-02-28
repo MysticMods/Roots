@@ -2,11 +2,14 @@ package epicsquid.roots.block.groves;
 
 import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.particle.particles.ParticleLeaf;
 import epicsquid.mysticallib.particle.particles.ParticleLeafArc;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.config.GeneralConfig;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
+import epicsquid.roots.tileentity.TileEntityFeyCrafter;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockTallGrass;
@@ -26,6 +29,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -272,7 +276,48 @@ public class BlockGroveStone extends BlockBase {
             if (!worldIn.isAirBlock(pos.add(i / 2, 0, j / 2))) {
               break;
             }
-            ClientProxy.particleRenderer.spawnParticle(worldIn, ParticleLeafArc.class, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.75D, (double) pos.getZ() + 0.5D, (i + rand.nextDouble() - 0.05) * 0.025, 0, (j + rand.nextFloat() - 0.05) * 0.025, 100, (232 / 255.0) + rand.nextDouble() * 0.05, 167 / 255.0, 111 / 255.0, 0.385, 0.117 + rand.nextDouble() * 0.05, 1, rand.nextDouble() + 0.5, rand.nextDouble() * 2);
+            ClientProxy.particleRenderer.spawnParticle(
+                worldIn,
+                ParticleLeafArc.class,
+                (double) pos.getX() + 0.5D,
+                (double) pos.getY() + 0.75D,
+                (double) pos.getZ() + 0.5D,
+                (i + rand.nextDouble() - 0.05) * 0.025,
+                0,
+                (j + rand.nextFloat() - 0.05) * 0.025,
+                100,
+                (232 / 255.0) + rand.nextDouble() * 0.05,
+                167 / 255.0,
+                111 / 255.0,
+                0.385,
+                1,
+                1
+            );
+          }
+        }
+      }
+      List<BlockPos> potentials = Util.getBlocksWithinRadius(worldIn, pos, TileEntityFeyCrafter.GROVE_STONE_RADIUS, TileEntityFeyCrafter.GROVE_STONE_RADIUS, TileEntityFeyCrafter.GROVE_STONE_RADIUS, ModBlocks.fey_crafter);
+      if (!potentials.isEmpty()) {
+        Vec3d me = new Vec3d(pos).add(0.5, 0.75, 0.5);
+        for (BlockPos fey : potentials) {
+          if (rand.nextInt(3) == 0) {
+            Vec3d origAngle = new Vec3d(fey).add(0.5, 0.78, 0.5).subtract(me);
+            Vec3d angle = origAngle.normalize().scale(0.07);
+            ClientProxy.particleRenderer.spawnParticle(worldIn, ParticleLeaf.class,
+                (double) pos.getX() + 0.5D,
+                (double) pos.getY() + 0.78D,
+                (double) pos.getZ() + 0.5D,
+                angle.x * 0.5f,
+                angle.y * 0.5f,
+                angle.z * 0.5f,
+                (origAngle.lengthSquared() * 10) - 5,
+                (232 / 255.0) + rand.nextDouble() * 0.05,
+                167 / 255.0,
+                111 / 255.0,
+                0.485,
+                1,
+                1
+            );
           }
         }
       }
