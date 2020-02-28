@@ -22,12 +22,12 @@ public class SpellRampantGrowth extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("spirit_herb", 0.65));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("pereskia", 0.45));
-  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15);
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 15);
-  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15);
-  public static Property<Integer> PROP_TICKS = new Property<>("ticks", 3);
-  public static Property<Integer> PROP_COUNT = new Property<>("count", 2);
-  public static Property<Integer> PROP_ADDITIONAL_COUNT = new Property<>("additional_count", 4);
+  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15).setDescription("radius on the X axis of the area in which the spell takes effect");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 15).setDescription("radius on the Y axis of the area in which the spell takes effect");
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15).setDescription("radius on the Z axis of the area in which the spell takes effect");
+  public static Property<Integer> PROP_TICKS = new Property<>("ticks", 3).setDescription("the number of times a random chance to grow the crop is applied every tick");
+  public static Property<Integer> PROP_COUNT = new Property<>("count", 2).setDescription("the number of crops selected to be grown each tick");
+  public static Property<Integer> PROP_ADDITIONAL_COUNT = new Property<>("additional_count", 4).setDescription("an additional number of crops from zero to the specified value minus 1 added to the default count");
 
   public static String spellName = "spell_rampant_growth";
   public static SpellRampantGrowth instance = new SpellRampantGrowth(spellName);

@@ -24,9 +24,9 @@ public class SpellNaturesScythe extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(160);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
   public static Property.PropertyCost PROP_COST = new Property.PropertyCost(0, new SpellCost("wildroot", 0.05));
-  public static Property<Integer> PROP_RADIUS = new Property<>("radius", 5);
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 3);
-  public static Property<Integer> PROP_INTERVAL = new Property<>("interval", 10);
+  public static Property<Integer> PROP_RADIUS = new Property<>("radius", 5).setDescription("horizontal radius of the area in which the spell takes effect");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 3).setDescription("radius on the Y axis of the area in which the spell takes effect");
+  public static Property<Integer> PROP_INTERVAL = new Property<>("interval", 10).setDescription("interval in ticks between each harvested block");
 
   public static String spellName = "spell_natures_scythe";
   public static SpellNaturesScythe instance = new SpellNaturesScythe(spellName);

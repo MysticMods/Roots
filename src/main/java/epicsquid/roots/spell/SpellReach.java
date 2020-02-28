@@ -18,7 +18,7 @@ public class SpellReach extends SpellBase {
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("dewgonia", 0.750));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("stalicripe", 0.750));
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(600);
-  public static Property<Double> PROP_REACH = new Property<>("reach", 5.0);
+  public static Property<Double> PROP_REACH = new Property<>("reach", 5.0).setDescription("the extended reach applied to the player during the effect of the spell");
 
   public static String spellName = "spell_reach";
   public static SpellReach instance = new SpellReach(spellName);

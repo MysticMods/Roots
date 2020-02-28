@@ -27,9 +27,9 @@ public class SpellAutumnsFall extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(120);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(1, new SpellCost("wildewheet", 0.250));
-  public static Property<Integer> PROP_RADIUS = new Property<>("radius", 10);
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 3);
-  public static Property<Integer> PROP_MAX_AFFECTED = new Property<>("max_affected", 1);
+  public static Property<Integer> PROP_RADIUS = new Property<>("radius", 10).setDescription("the horizontal radius of the effect this spell");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 3).setDescription("the radius on the Y axis of the effect of this spell");
+  public static Property<Integer> PROP_MAX_AFFECTED = new Property<>("max_affected", 1).setDescription("maximum number of blocks affected each tick");
 
   public static String spellName = "spell_autumns_fall";
   public static SpellAutumnsFall instance = new SpellAutumnsFall(spellName);

@@ -19,7 +19,7 @@ public class SpellDandelionWinds extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(20);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("cloud_berry", 0.125));
-  public static Property<Float> PROP_DISTANCE = new Property<>("distance", 0.75f);
+  public static Property<Float> PROP_DISTANCE = new Property<>("distance", 0.75f).setDescription("the vertical component of the vector that determines the direction of the entity");
 
   public static String spellName = "spell_dandelion_winds";
   public static SpellDandelionWinds instance = new SpellDandelionWinds(spellName);
