@@ -12,23 +12,28 @@
   },
   "parent": "roots:fey_crafter",
   "criteria": {
-    "book": {
-      "trigger": "minecraft:inventory_changed",
+    "helmet": {
+      "trigger": "roots:fey_crafting",
       "conditions": {
-        "items": [
-          {
-            "item": "roots:sylvan_helmet"
-          },
-          {
-            "item": "roots:sylvan_chestplate"
-          },
-          {
-            "item": "roots:sylvan_leggings"
-          },
-          {
-            "item": "roots:sylvan_boots"
-          }
-        ]
+        "recipe": "roots:sylvan_helmet"
+      }
+    },
+    "chestplate": {
+      "trigger": "roots:fey_crafting",
+      "conditions": {
+        "recipe": "roots:sylvan_chestplate"
+      }
+    },
+    "leggings": {
+      "trigger": "roots:fey_crafting",
+      "conditions": {
+        "recipe": "roots:sylvan_leggings"
+      }
+    },
+    "boots": {
+      "trigger": "roots:fey_crafting",
+      "conditions": {
+        "recipe": "roots:sylvan_boots"
       }
     }
   }

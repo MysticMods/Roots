@@ -12,23 +12,28 @@
   },
   "parent": "roots:wildwood",
   "criteria": {
-    "book": {
-      "trigger": "minecraft:inventory_changed",
+    "helmet": {
+      "trigger": "roots:fey_crafting",
       "conditions": {
-        "items": [
-          {
-            "item": "roots:wildwood_helmet"
-          },
-          {
-            "item": "roots:wildwood_chestplate"
-          },
-          {
-            "item": "roots:wildwood_leggings"
-          },
-          {
-            "item": "roots:wildwood_boots"
-          }
-        ]
+        "recipe": "roots:wildwood_helmet"
+      }
+    },
+    "chestplate": {
+      "trigger": "roots:fey_crafting",
+      "conditions": {
+        "recipe": "roots:wildwood_chestplate"
+      }
+    },
+    "leggings": {
+      "trigger": "roots:fey_crafting",
+      "conditions": {
+        "recipe": "roots:wildwood_leggings"
+      }
+    },
+    "boots": {
+      "trigger": "roots:fey_crafting",
+      "conditions": {
+        "recipe": "roots:wildwood_boots"
       }
     }
   }
