@@ -1,6 +1,7 @@
 package epicsquid.roots.recipe;
 
 import epicsquid.mysticallib.util.ListUtil;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
@@ -79,6 +80,6 @@ public class FeyCraftingRecipe {
    * @param output
    * @param inputs
    */
-  public void postCraft(ItemStack output, List<ItemStack> inputs) {
+  public void postCraft(ItemStack output, List<ItemStack> inputs, EntityPlayer player) {
   }
 }
