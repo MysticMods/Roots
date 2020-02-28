@@ -12,14 +12,10 @@
     },
     "parent": "roots:fey_crafter",
     "criteria": {
-        "book": {
-            "trigger": "minecraft:inventory_changed",
+        "runestone": {
+            "trigger": "roots:fey_crafting",
             "conditions": {
-                "items": [
-                    {
-                        "item": "roots:runestone"
-                    }
-                ]
+                "recipe": "roots:runestone"
             }
         }
     }

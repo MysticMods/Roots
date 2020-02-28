@@ -12,14 +12,10 @@
     },
     "parent": "roots:spirit_herb",
     "criteria": {
-        "book": {
-            "trigger": "minecraft:inventory_changed",
+        "pouch": {
+            "trigger": "roots:fey_crafting",
             "conditions": {
-                "items": [
-                    {
-                        "item": "roots:apothecary_pouch"
-                    }
-                ]
+                "recipe": "roots:apothercary_pouch"
             }
         }
     }

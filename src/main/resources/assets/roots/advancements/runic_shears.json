@@ -12,14 +12,10 @@
     },
     "parent": "roots:pereskia",
     "criteria": {
-        "book": {
-            "trigger": "minecraft:inventory_changed",
+        "shears": {
+            "trigger": "roots:fey_crafting",
             "conditions": {
-                "items": [
-                    {
-                        "item": "roots:runic_shears"
-                    }
-                ]
+                "recipe": "roots:runic_shears"
             }
         }
     }

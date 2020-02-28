@@ -1,0 +1,22 @@
+{
+    "display": {
+        "icon": {
+            "item": "roots:runed_obsidian"
+        },
+        "title": {
+            "translate": "advancement.roots.runed_obsidian"
+        },
+        "description": {
+            "translate": "advancement.roots.runed_obsidian.desc"
+        }
+    },
+    "parent": "roots:fey_crafter",
+    "criteria": {
+        "runed_stone": {
+            "trigger": "roots:fey_crafter",
+            "conditions": {
+                "recipe": "roots:runed_obsidian"
+            }
+        }
+    }
+}

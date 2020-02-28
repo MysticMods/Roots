@@ -12,26 +12,34 @@
     },
     "parent": "roots:fey_crafter",
     "criteria": {
-        "book": {
-            "trigger": "minecraft:inventory_changed",
+        "pickaxe": {
+            "trigger": "roots:fey_crafter",
             "conditions": {
-                "items": [
-                    {
-                        "item": "roots:living_pickaxe"
-                    },
-                    {
-                        "item": "roots:living_axe"
-                    },
-                    {
-                        "item": "roots:living_shovel"
-                    },
-                    {
-                        "item": "roots:living_hoe"
-                    },
-                    {
-                        "item": "roots:living_sword"
-                    }
-                ]
+                "recipe": "roots:living_pickaxe"
+            }
+        },
+        "axe": {
+            "trigger": "roots:fey_crafter",
+            "conditions": {
+                "recipe": "roots:living_axe"
+            }
+        },
+        "shovel": {
+            "trigger": "roots:fey_crafter",
+            "conditions": {
+                "recipe": "roots:living_shovel"
+            }
+        },
+        "hoe": {
+            "trigger": "roots:fey_crafter",
+            "conditions": {
+                "recipe": "roots:living_hoe"
+            }
+        },
+        "sword": {
+            "trigger": "roots:fey_crafter",
+            "conditions": {
+                "recipe": "roots:living_sword"
             }
         }
     }
