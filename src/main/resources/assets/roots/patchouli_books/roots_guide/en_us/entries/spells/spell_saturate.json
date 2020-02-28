@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": ""
+      "text": "Consumes food in your inventory (although not in your off-hand), rapidly filling your hunger and saturation, although the amount of hunger filled and saturation gained is significantly less than would be obtained by eating the items.$(br2)$(info) Foods with potion effects, such as golden apples, will have them applied, although generally these will not stack.$(br2)$(warning) Foods with the highest saturation value are considered first. Saturation can and will be wasted in order to completely fill hunger."
     },
     {
       "type": "spell_template",

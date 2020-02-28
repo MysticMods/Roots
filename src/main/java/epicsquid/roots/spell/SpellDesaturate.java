@@ -75,7 +75,7 @@ public class SpellDesaturate extends SpellBase {
     if (!world.isRemote) {
       caster.heal(healed);
       stats.setFoodLevel(food);
-      stats.foodSaturationLevel = 0;
+      stats.foodSaturationLevel = Math.min(stats.foodSaturationLevel, food);
 
       ((EntityPlayerMP)caster).connection.sendPacket(new SPacketUpdateHealth(caster.getHealth(), stats.getFoodLevel(), stats.getSaturationLevel()));
 
