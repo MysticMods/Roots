@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": ""
+      "text": "Chrysopoeia is a great work, allowing you to transform items (held in your off-hand) into other items. Generally speaking, most recipes are lossy, in that it takes mre of the original item to obtain a single result.$(br2)$(warning) As this guide book is unable to list all recipes, please see the uses of 'Spell: Chrysopoeia' in JEI for a complete listing."
     },
     {
       "type": "spell_template",
