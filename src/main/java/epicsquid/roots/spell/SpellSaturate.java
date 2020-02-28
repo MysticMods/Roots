@@ -1,23 +1,29 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.network.fx.MessageSaturationFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketUpdateHealth;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.FoodStats;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
@@ -26,6 +32,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("deprecation")
 public class SpellSaturate extends SpellBase {
 
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(500);
@@ -38,10 +45,12 @@ public class SpellSaturate extends SpellBase {
   public static SpellSaturate instance = new SpellSaturate(spellName);
 
   private double multiplier;
+  private boolean suppressSound = false;
 
   public SpellSaturate(String name) {
     super(name, TextFormatting.GOLD, 235F / 255F, 183F / 255F, 52F / 255F, 156F / 255F, 100F / 255F, 16F / 255F);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_MULTIPLIER);
+    MinecraftForge.EVENT_BUS.register(this);
   }
 
   @Override
@@ -57,6 +66,7 @@ public class SpellSaturate extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks) {
+    World world = caster.world;
     FoodStats stats = caster.getFoodStats();
     int currentFood = stats.getFoodLevel();
     double currentSat = stats.getSaturationLevel();
@@ -97,7 +107,7 @@ public class SpellSaturate extends SpellBase {
       if (used > 0) {
         usedFoods.put(stack, used);
       }
-      if (newSat >= 20) {
+      if (newSat >= 20 && newFood >= 20) {
         break;
       }
     }
@@ -106,13 +116,18 @@ public class SpellSaturate extends SpellBase {
       return false;
     }
 
-    if (caster.world.isRemote) {
+    if (usedFoods.isEmpty()) {
+      return false;
+    }
+
+    if (world.isRemote) {
       return true;
     }
 
-    double added = 0.0;
-    int addedFood = 0;
+    List<ItemStack> containers = new ArrayList<>();
 
+    int total = 0;
+    suppressSound = true;
     for (Object2IntMap.Entry<ItemStack> entry : usedFoods.object2IntEntrySet()) {
       int used = entry.getIntValue();
       ItemStack stack = entry.getKey();
@@ -120,17 +135,35 @@ public class SpellSaturate extends SpellBase {
       ItemStack result = handler.extractItem(index, used, false);
       if (!result.isEmpty()) {
         for (int i = 0; i < result.getCount(); i++) {
-          added += saturation(result);
-          addedFood += health(result);
+          total++;
+          ItemStack container = result.onItemUseFinish(caster.world, caster);
+          if (!container.isEmpty() && !ItemUtil.equalWithoutSize(container, result)) {
+            containers.add(container);
+          }
         }
       }
     }
+    suppressSound = false;
 
-    if (added >= 0) {
-      stats.foodSaturationLevel = (float) Math.min(20, stats.foodSaturationLevel + added);
+    if (stats.foodSaturationLevel < newSat) {
+      stats.foodSaturationLevel = (float) Math.min(20, newSat);
     }
-    if (addedFood >= 0) {
-      stats.setFoodLevel(Math.min(20, currentFood + addedFood));
+    if (stats.getFoodLevel() < newFood) {
+      stats.setFoodLevel(Math.min(20, newFood));
+    }
+
+/*    caster.sendMessage(new TextComponentString("Previous food: " + currentFood + ", previous saturation: " + currentSat));
+    caster.sendMessage(new TextComponentString("New food:" + newFood + ", new saturation: " + newSat));
+    caster.sendMessage(new TextComponentString("Set food: " + stats.getFoodLevel() + ", set saturation: " + stats.getSaturationLevel()));
+    caster.sendMessage(new TextComponentString("Containers left over: " + containers.size()));
+    caster.sendMessage(new TextComponentString("Total foods consumed: " + total));*/
+
+    if (!containers.isEmpty()) {
+      for (ItemStack container : containers) {
+        if (!caster.addItemStackToInventory(container)) {
+          ItemUtil.spawnItem(caster.world, caster.getPosition(), container);
+        }
+      }
     }
 
     EntityPlayerMP playerMP = (EntityPlayerMP) caster;
@@ -142,7 +175,7 @@ public class SpellSaturate extends SpellBase {
     return true;
   }
 
-  private double saturation (ItemStack stack) {
+  private double saturation(ItemStack stack) {
     if (!(stack.getItem() instanceof ItemFood)) {
       return 0;
     }
@@ -152,12 +185,19 @@ public class SpellSaturate extends SpellBase {
     return (heal * saturation * 2f) * multiplier;
   }
 
-  private int health (ItemStack stack) {
+  private int health(ItemStack stack) {
     if (!(stack.getItem() instanceof ItemFood)) {
       return 0;
     }
     ItemFood item = (ItemFood) stack.getItem();
     return (int) Math.floor(item.getHealAmount(stack) * multiplier);
+  }
+
+  @SubscribeEvent
+  public void onSoundPlayed(PlaySoundAtEntityEvent event) {
+    if (event.getCategory() == SoundCategory.PLAYERS && event.getSound() == SoundEvents.ENTITY_PLAYER_BURP && suppressSound) {
+      event.setCanceled(true);
+    }
   }
 
   @Override
@@ -166,5 +206,4 @@ public class SpellSaturate extends SpellBase {
     this.cooldown = properties.get(PROP_COOLDOWN);
     this.multiplier = properties.get(PROP_MULTIPLIER);
   }
-
 }

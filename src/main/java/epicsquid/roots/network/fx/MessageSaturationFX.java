@@ -49,11 +49,11 @@ public class MessageSaturationFX implements IMessage {
       Entity entity = world.getEntityByID(message.entityId);
       if (entity instanceof EntityPlayer) {
         EntityPlayer player = (EntityPlayer) entity;
-        for (int i = 0; i <= 360; i++) {
-          float tx = (float) entity.posX + 0.75f * (float) Math.sin(Math.toRadians(i));
+        for (int i = 0; i <= 360; i+= 16) {
+          float tx = (float) entity.posX + 0.1f * (float) Math.sin(Math.toRadians(i));
           float ty = (float) entity.posY + (player.height / 2) + 0.5f;
-          float tz = (float) entity.posZ + 0.75f * (float) Math.cos(Math.toRadians(i));
-          ParticleUtil.spawnParticleSpark(world, tx, ty, tz, (float) Math.sin(Math.toRadians(i)) * 0.05f, 0f, (float) Math.cos(Math.toRadians(i)) * 0.05f, SpellSaturate.instance.getRed1(), SpellSaturate.instance.getGreen1(), SpellSaturate.instance.getBlue1(), 1.0f, 3.0f, 50);
+          float tz = (float) entity.posZ + 0.1f * (float) Math.cos(Math.toRadians(i));
+          ParticleUtil.spawnParticlePetal(world, tx, ty, tz, (float) Math.sin(Math.toRadians(i)) * 0.1f, -0.01f, (float) Math.cos(Math.toRadians(i)) * 0.1f, SpellSaturate.instance.getRed1(), SpellSaturate.instance.getGreen1(), SpellSaturate.instance.getBlue1(), 1.0f, 3.0f, 90);
         }
       }
 
