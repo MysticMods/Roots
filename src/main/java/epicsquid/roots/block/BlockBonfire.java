@@ -132,9 +132,8 @@ public class BlockBonfire extends BlockTEBase {
                 60 / 255.0 + rand.nextDouble() * 0.05,
                 1f,
                 2.5f,
-                1,
-                rand.nextDouble() + 0.5,
-                rand.nextDouble() * 2);
+                0
+            );
           }
         }
       }
