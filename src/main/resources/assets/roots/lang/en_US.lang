@@ -32,6 +32,7 @@ item.apothecary_pouch.name=Apothecary Pouch
 item.wildwood_door.name=Wildwood Door
 item.life_essence.name=Essence of Unknown Life
 item.life_essence.entity_name=Life-Essence of %s
+item.salmon_of_knowledge.name=Salmon of Knowledge
 
 tile.mortar.name=Mortar
 tile.imbuer.name=Imbuer
@@ -72,6 +73,9 @@ tile.fey_crafter.name=Fey Crafter
 tile.fey_light.name=Fey Light
 
 roots.tooltip.petaldust.notag=This Spell Dust has no NBT data! It is potentially prone to errors and should not be used!
+roots.tooltip.salmon.invalid=This contains invalid NBT data.
+roots.tooltip.salmon.advancements=Grants the following advancements: %s
+roots.tooltip.salmon.crafter=Crafted by: %s
 roots.tooltip.staff.notag=This Staff has no NBT data! It is potentially prone to errors and should not be used!
 roots.tooltip.staff.selected=Selected Slot: 
 roots.tooltip.pouch_divider=: x

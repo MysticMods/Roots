@@ -125,7 +125,7 @@ public class TileEntityFeyCrafter extends TileBase {
     return false;
   }
 
-  public List<ItemStack> craft() {
+  public List<ItemStack> craft(EntityPlayer player) {
     FeyCraftingRecipe recipe = getRecipe();
     List<ItemStack> result = new ArrayList<>();
     ItemStack current = ItemStack.EMPTY;
@@ -145,7 +145,7 @@ public class TileEntityFeyCrafter extends TileBase {
       if (current.isEmpty()) {
         current = recipe.getResult().copy();
         if (current.getMaxStackSize() == 1) singleStack = true;
-        recipe.postCraft(current, inputItems);
+        recipe.postCraft(current, inputItems, player);
       } else {
         // TODO: If this ever becomes a problem in the future I will laugh
         // TODO: But technically if you run out of ingredients for one recipe and then shift down to another, the result could change
@@ -181,8 +181,7 @@ public class TileEntityFeyCrafter extends TileBase {
   }
 
   @Override
-  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand,
-                          @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
+  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
 
     boolean shouldGui = false;
 
@@ -202,7 +201,7 @@ public class TileEntityFeyCrafter extends TileBase {
     }
 
     if (!shouldGui) {
-      items = craft();
+      items = craft(player);
       if (items.isEmpty()) {
         shouldGui = true;
       }

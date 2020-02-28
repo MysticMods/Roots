@@ -46,7 +46,7 @@ public class ModItems {
 
   public static Item creative_pouch, fey_fire;
 
-  public static Item life_essence;
+  public static Item life_essence, salmon;
 
   public static List<Item> barks;
 
@@ -98,6 +98,7 @@ public class ModItems {
         return EnumRarity.RARE;
       }
     }.setCreativeTab(Roots.tab));
+    event.addItem(salmon = new ItemSalmon("salmon_of_knowledge").setCreativeTab(Roots.tab));
 
     event.addItem(pestle = new ItemPestle("pestle").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(component_pouch = new ItemPouch("component_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));

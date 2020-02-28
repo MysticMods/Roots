@@ -35,6 +35,7 @@ import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nonnull;
@@ -1353,6 +1354,14 @@ public class ModRecipes {
         new ItemStack(ModItems.bark_wildwood),
         new ItemStack(ModItems.spirit_herb),
         new ItemStack(ModItems.component_pouch)
+    ));
+
+    addCraftingRecipe("salmon_of_knowledge", new SalmonRecipe(new ItemStack(ModItems.salmon), 1).addIngredients(
+        new ItemStack(Items.FISH, 1, ItemFishFood.FishType.SALMON.getMetadata()),
+        new ItemStack(Items.EXPERIENCE_BOTTLE),
+        new OreIngredient("rootsBark"),
+        new ItemStack(Items.BOOK),
+        new ItemStack(ModItems.terra_moss)
     ));
 
     addCraftingRecipe("sylvan_helmet", new FeyCraftingRecipe(new ItemStack(ModItems.sylvan_helmet), 1).addIngredients(
