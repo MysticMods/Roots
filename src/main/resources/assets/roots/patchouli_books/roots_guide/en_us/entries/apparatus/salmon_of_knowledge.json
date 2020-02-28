@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "When one druid desires to share their knowledge with others, they can imbue a $(l:rituals/ritual_animal_harvest)(presumably ethically obtained)$() salmon with their insight and understanding.$(br2)This dish, upon being consumed, would permanently unlock those secrets within that person."
+      "text": "When one druid desires to share their knowledge with others, they can imbue a $(l:rituals/ritual_animal_harvest)(presumably ethically obtained)$() salmon with their insight and understanding.$(br2)This dish, upon being consumed, will permanently unlock those secrets within that person."
     },
     {
       "type": "fey_crafting_template",
