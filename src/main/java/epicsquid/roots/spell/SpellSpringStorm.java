@@ -22,11 +22,11 @@ public class SpellSpringStorm extends SpellBase {
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("dewgonia", 0.8));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("cloud_berry", 0.3));
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(400);
-  public static Property<Integer> PROP_RADIUS = new Property<>("radius", 3);
-  public static Property<Integer> PROP_LIGHTNING_CHANCE = new Property<>("lightning_chance", 4);
-  public static Property<Integer> PROP_LIGHTNING_STRIKES = new Property<>("lightning_strikes", 3);
-  public static Property<Integer> PROP_FIRE_RESISTANCE = new Property<>("fire_resistance", 3);
-  public static Property<Integer> PROP_RESISTANCE = new Property<>("resistance", 0);
+  public static Property<Integer> PROP_RADIUS = new Property<>("radius", 3).setDescription("the radius of the area covered by the spring storm");
+  public static Property<Integer> PROP_LIGHTNING_CHANCE = new Property<>("lightning_chance", 4).setDescription("chance for each lightning to spawn (the higher the number is the lower the chance becomes: 1/x) [default: 1/4]");
+  public static Property<Integer> PROP_LIGHTNING_STRIKES = new Property<>("lightning_strikes", 3).setDescription("number of lightning strikes attempts each time");
+  public static Property<Integer> PROP_FIRE_RESISTANCE = new Property<>("fire_resistance", 3).setDescription("the level of fire resistance given to the player for 60 seconds");
+  public static Property<Integer> PROP_RESISTANCE = new Property<>("resistance", 0).setDescription("the level of resistance given to the player for 60 seconds");
 
   public int radius, duration, fire_resistance, lightning_strikes, resistance, lightning_chance;
 

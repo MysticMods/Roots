@@ -6,6 +6,7 @@ import epicsquid.roots.network.fx.MessageFallBladesFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.BlockDoublePlant;
+import net.minecraft.block.BlockFlower;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -24,9 +25,9 @@ public class SpellNaturesScythe extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(160);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
   public static Property.PropertyCost PROP_COST = new Property.PropertyCost(0, new SpellCost("wildroot", 0.05));
-  public static Property<Integer> PROP_RADIUS = new Property<>("radius", 5);
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 3);
-  public static Property<Integer> PROP_INTERVAL = new Property<>("interval", 10);
+  public static Property<Integer> PROP_RADIUS = new Property<>("radius", 5).setDescription("horizontal radius of the area in which the spell takes effect");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 3).setDescription("radius on the Y axis of the area in which the spell takes effect");
+  public static Property<Integer> PROP_INTERVAL = new Property<>("interval", 10).setDescription("interval in ticks between each harvested block");
 
   public static String spellName = "spell_natures_scythe";
   public static SpellNaturesScythe instance = new SpellNaturesScythe(spellName);
@@ -56,7 +57,7 @@ public class SpellNaturesScythe extends SpellBase {
     }
 
     World world = caster.world;
-    List<BlockPos> blocks = Util.getBlocksWithinRadius(caster.world, caster.getPosition(), radius, radius_y, radius, pos -> world.getBlockState(pos).getBlock() == Blocks.TALLGRASS || world.getBlockState(pos).getBlock() == Blocks.DOUBLE_PLANT && (world.getBlockState(pos).getValue(BlockDoublePlant.VARIANT) == BlockDoublePlant.EnumPlantType.FERN || world.getBlockState(pos).getValue(BlockDoublePlant.VARIANT) == BlockDoublePlant.EnumPlantType.GRASS));
+    List<BlockPos> blocks = Util.getBlocksWithinRadius(caster.world, caster.getPosition(), radius, radius_y, radius, pos -> ifAffectedByNaturesScythe(world, pos));
 
     if (blocks.isEmpty()) {
       return false;
@@ -70,6 +71,15 @@ public class SpellNaturesScythe extends SpellBase {
       PacketHandler.sendToAllTracking(new MessageFallBladesFX(pos.getX(), pos.getY(), pos.getZ(), false), world, pos);
     }
     return true;
+  }
+
+  private boolean ifAffectedByNaturesScythe(World world, BlockPos pos) {
+     return world.getBlockState(pos).getBlock() instanceof BlockFlower
+             || world.getBlockState(pos).getBlock() == Blocks.TALLGRASS
+             || world.getBlockState(pos).getBlock() == Blocks.DOUBLE_PLANT
+             && (world.getBlockState(pos).getValue(BlockDoublePlant.VARIANT) == BlockDoublePlant.EnumPlantType.FERN
+                  || world.getBlockState(pos).getValue(BlockDoublePlant.VARIANT) == BlockDoublePlant.EnumPlantType.GRASS
+             );
   }
 
   @Override

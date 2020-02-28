@@ -8,7 +8,6 @@ import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
@@ -26,9 +25,9 @@ public class SpellRadiance extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("cloud_berry", 0.5));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("pereskia", 0.25));
-  public static Property<Float> PROP_DISTANCE = new Property<>("distance", 32f);
-  public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(5f);
-  public static Property<Float> PROP_UNDEAD_DAMAGE = new Property<>("undead_damage", 3f);
+  public static Property<Float> PROP_DISTANCE = new Property<>("distance", 32f).setDescription("maximum reach of radiance beam");
+  public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(5f).setDescription("damage dealt each time by radiance beam");
+  public static Property<Float> PROP_UNDEAD_DAMAGE = new Property<>("undead_damage", 3f).setDescription("damage dealt each time by radiance beam on undead mobs");
 
   public static String spellName = "spell_radiance";
   public static SpellRadiance instance = new SpellRadiance(spellName);

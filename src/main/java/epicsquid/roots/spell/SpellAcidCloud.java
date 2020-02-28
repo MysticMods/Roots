@@ -11,7 +11,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -27,10 +26,10 @@ public class SpellAcidCloud extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(10);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("baffle_cap", 0.250));
-  public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(5f);
-  public static Property<Integer> PROP_POISON_DURATION = new Property<>("poison_duration", 80);
-  public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 5);
-  public static Property<Integer> PROP_POISON_AMPLIFICATION = new Property<>("poison_amplification", 0);
+  public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(5f).setDescription("damage dealt each time to living entities");
+  public static Property<Integer> PROP_POISON_DURATION = new Property<>("poison_duration", 80).setDescription("duration in ticks of the poison effect applied on the enemies");
+  public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 5).setDescription("duration in seconds of the fire effect applied on the enemies");
+  public static Property<Integer> PROP_POISON_AMPLIFICATION = new Property<>("poison_amplification", 0).setDescription("the level of the poison effect applied on the enemies (0 is the first level)");
 
   public static String spellName = "spell_acid_cloud";
   public static SpellAcidCloud instance = new SpellAcidCloud(spellName);

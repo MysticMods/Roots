@@ -18,7 +18,6 @@ import net.minecraft.network.play.server.SPacketUpdateHealth;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.FoodStats;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -39,8 +38,8 @@ public class SpellSaturate extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("wildewheet", 0.7));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("terra_moss", 0.5));
-  public static Property<Double> PROP_SATURATION_MULTIPLIER = new Property<>("saturation_multiplier", 0.5);
-  public static Property<Double> PROP_FOOD_MULTIPLIER = new Property<>("food_multiplier", 0.5);
+  public static Property<Double> PROP_SATURATION_MULTIPLIER = new Property<>("saturation_multiplier", 0.5).setDescription("multiplier for the saturation value each food item gives");
+  public static Property<Double> PROP_FOOD_MULTIPLIER = new Property<>("food_multiplier", 0.5).setDescription("multiplier for the food value each food item gives");
 
   public static String spellName = "spell_saturate";
   public static SpellSaturate instance = new SpellSaturate(spellName);

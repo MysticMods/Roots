@@ -9,7 +9,6 @@ import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -23,7 +22,7 @@ public class SpellGrowthInfusion extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(0);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("terra_moss", 0.08));
-  public static Property<Integer> PROP_TICK_COUNT = new Property<>("tick_count", 1);
+  public static Property<Integer> PROP_TICK_COUNT = new Property<>("tick_count", 1).setDescription("the number of times a random chance to grow the crop is applied every tick");
 
   public static String spellName = "spell_growth_infusion";
   public static SpellGrowthInfusion instance = new SpellGrowthInfusion(spellName);

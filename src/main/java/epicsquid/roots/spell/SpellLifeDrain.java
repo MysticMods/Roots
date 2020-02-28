@@ -26,11 +26,11 @@ public class SpellLifeDrain extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("moonglow_leaf", 0.25));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("baffle_cap", 0.125));
-  public static Property<Float> PROP_WITHER_DAMAGE = new Property<>("wither_damage", 3f);
-  public static Property<Float> PROP_HEAL = new Property<>("heal", 1.5f);
-  public static Property<Integer> PROP_WITHER_DURATION = new Property<>("wither_duration", 70);
-  public static Property<Integer> PROP_WITHER_AMPLIFICATION = new Property<>("wither_amplification", 0);
-  public static Property<Integer> PROP_WITHER_CHANCE = new Property<>("wither_chance", 4);
+  public static Property<Float> PROP_WITHER_DAMAGE = new Property<>("wither_damage", 3f).setDescription("wither damage dealt to the enemies (different from the damage dealt by the wither itself)");
+  public static Property<Float> PROP_HEAL = new Property<>("heal", 1.5f).setDescription("health points restored to the player");
+  public static Property<Integer> PROP_WITHER_DURATION = new Property<>("wither_duration", 70).setDescription("duration in ticks of the wither effect");
+  public static Property<Integer> PROP_WITHER_AMPLIFICATION = new Property<>("wither_amplification", 0).setDescription("the level of the wither effect (0 is the first level)");
+  public static Property<Integer> PROP_WITHER_CHANCE = new Property<>("wither_chance", 4).setDescription("chance for the enemies to be affected by a wither effect (the higher the number is the lower the chance is: 1/x) [default: 1/4]");
 
   public static String spellName = "spell_life_drain";
   public static SpellLifeDrain instance = new SpellLifeDrain(spellName);

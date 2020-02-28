@@ -2,7 +2,6 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.client.SpectatorHandler;
-import epicsquid.roots.client.gui.GuiFakeSpectator;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.MessageLightDrifterSync;
 import epicsquid.roots.network.fx.MessageLightDrifterFX;
@@ -12,8 +11,6 @@ import epicsquid.roots.util.types.Property;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -27,7 +24,7 @@ public class SpellLightDrifter extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("pereskia", 0.5));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("wildewheet", 0.25));
-  public static Property<Integer> PROP_DURATION = new Property<>("duration", 200);
+  public static Property<Integer> PROP_DURATION = new Property<>("duration", 200).setDescription("the duration in ticks of the spell effect on the player");
 
   public static String spellName = "spell_light_drifter";
   public static SpellLightDrifter instance = new SpellLightDrifter(spellName);

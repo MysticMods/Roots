@@ -27,10 +27,10 @@ public class SpellDisarm extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(350);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("moonglow_leaf", 1.0));
-  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 2);
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 2);
-  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 2);
-  public static Property<Integer> PROP_DROP_CHANCE = new Property<>("drop_chance", 4);
+  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 2).setDescription("radius on the X axis within which entities are affected by the spell");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 2).setDescription("radius on the Y axis within which entities are affected by the spell");
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 2).setDescription("radius on the Z axis within which entities are affected by the spell");
+  public static Property<Integer> PROP_DROP_CHANCE = new Property<>("drop_chance", 4).setDescription("chance for mobs to drop their equipment and weapons (the higher the number is the lower the chance is: 1/x) [default: 1/4]");
 
   public static String spellName = "spell_disarm";
   public static SpellDisarm instance = new SpellDisarm(spellName);

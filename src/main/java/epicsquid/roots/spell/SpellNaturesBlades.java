@@ -27,15 +27,15 @@ public class SpellNaturesBlades extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(160);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
   public static Property.PropertyCost PROP_COST = new Property.PropertyCost(0, new SpellCost("wildroot", 0.05));
-  public static Property<Integer> PROP_RADIUS = new Property<>("radius", 5);
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 3);
-  public static Property<Integer> PROP_GRASS_CHANCE = new Property<>("grass_chance", 15);
-  public static Property<Integer> PROP_UPGRADE_CHANCE = new Property<>("upgrade_chance", 30);
+  public static Property<Integer> PROP_RADIUS = new Property<>("radius", 5).setDescription("horizontal radius of the area in which this spell takes effect");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 3).setDescription("radius on the Y axis of the area in which this spell takes effect");
+  public static Property<Integer> PROP_GRASS_CHANCE = new Property<>("grass_chance", 15).setDescription("chance for the spell to generate tall grass in the area (the higher the number is the lower the chance is: 1/x) [default: 1/15]");
+  public static Property<Integer> PROP_UPGRADE_CHANCE = new Property<>("upgrade_chance", 30).setDescription("chance for the spell to upgrade tall grass in the area to a double tall grass (the higher the number is the lower the chance is: 1/x) [default: 1/30]");
 
   public static String spellName = "spell_natures_blades";
   public static SpellNaturesBlades instance = new SpellNaturesBlades(spellName);
 
-  private int radius, radius_y, interval, grass_chance, upgrade_chance;
+  private int radius, radius_y, grass_chance, upgrade_chance;
 
   public SpellNaturesBlades(String name) {
     super(name, TextFormatting.GREEN, 64 / 255F, 240 / 255F, 24 / 255F, 26 / 255F, 110 / 255F, 13 / 255F);
