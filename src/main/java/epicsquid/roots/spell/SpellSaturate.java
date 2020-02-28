@@ -48,7 +48,7 @@ public class SpellSaturate extends SpellBase {
   private boolean suppressSound = false;
 
   public SpellSaturate(String name) {
-    super(name, TextFormatting.GOLD, 235F / 255F, 183F / 255F, 52F / 255F, 156F / 255F, 100F / 255F, 16F / 255F);
+    super(name, TextFormatting.GOLD, 225F / 255F, 52F / 255F, 246F / 255F, 232F / 42F, 232F / 255F, 42F / 255F);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_MULTIPLIER);
     MinecraftForge.EVENT_BUS.register(this);
   }
