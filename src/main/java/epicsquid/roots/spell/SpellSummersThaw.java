@@ -10,7 +10,6 @@ import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -25,10 +24,10 @@ public class SpellSummersThaw extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(20);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("infernal_bulb", 0.25));
-  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 5);
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5);
-  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 5);
-  public static Property<Integer> PROP_MAX_AFFECTED = new Property<>("max_affected", 5);
+  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 5).setDescription("radius on the X axis of the area in which the spell takes effect");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("radius on the Y axis of the area in which the spell takes effect");
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 5).setDescription("radius on the Z axis of the area in which the spell takes effect");
+  public static Property<Integer> PROP_MAX_AFFECTED = new Property<>("max_affected", 5).setDescription("maximum affected blocks each time the spell is cast");
 
   public static String spellName = "spell_summers_thaw";
   public static SpellSummersThaw instance = new SpellSummersThaw(spellName);

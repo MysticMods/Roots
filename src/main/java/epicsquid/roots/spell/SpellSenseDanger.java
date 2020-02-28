@@ -18,11 +18,11 @@ public class SpellSenseDanger extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(190);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("wildroot", 0.285));
-  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 40);
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 40);
-  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 40);
-  public static Property<Integer> PROP_GLOW_DURATION = new Property<>("glow_duration", 40 * 20);
-  public static Property<Integer> PROP_NV_DURATION = new Property<>("night_vision_duration", 40 * 20);
+  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 40).setDescription("radius on the X axis of the area in which the spell takes effect");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 40).setDescription("radius on the X axis of the area in which the spell takes effect");
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 40).setDescription("radius on the X axis of the area in which the spell takes effect");
+  public static Property<Integer> PROP_GLOW_DURATION = new Property<>("glow_duration", 40 * 20).setDescription("duration in ticks of the glow effect");
+  public static Property<Integer> PROP_NV_DURATION = new Property<>("night_vision_duration", 40 * 20).setDescription("duration in ticks of the night vision effect");
 
   public static String spellName = "spell_sense_danger";
   public static SpellSenseDanger instance = new SpellSenseDanger(spellName);

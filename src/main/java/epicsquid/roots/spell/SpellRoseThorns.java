@@ -7,8 +7,6 @@ import epicsquid.roots.util.types.Property;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
@@ -20,11 +18,11 @@ public class SpellRoseThorns extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("terra_moss", 0.25));
   public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(8f);
-  public static Property<Integer> PROP_SLOWNESS_DURATION = new Property<>("slowness_duration", 80);
-  public static Property<Integer> PROP_SLOWNESS_AMPLIFIER = new Property<>("slowness_amplifier", 0);
-  public static Property<Integer> PROP_POISON_DURATION = new Property<>("poison_duration", 80);
-  public static Property<Integer> PROP_POISON_AMPLIFIER = new Property<>("poison_amplifier", 0);
-  public static Property<Integer> PROP_DURATION = new Property<>("trap_duration", 600);
+  public static Property<Integer> PROP_SLOWNESS_DURATION = new Property<>("slowness_duration", 80).setDescription("duration in ticks of the slowness effect applied when the traps are triggered");
+  public static Property<Integer> PROP_SLOWNESS_AMPLIFIER = new Property<>("slowness_amplifier", 0).setDescription("the level of the slowness effect (0 is the first level)");
+  public static Property<Integer> PROP_POISON_DURATION = new Property<>("poison_duration", 80).setDescription("duration in ticks of the poison effect applied when the traps are triggered");
+  public static Property<Integer> PROP_POISON_AMPLIFIER = new Property<>("poison_amplifier", 0).setDescription("the level of the poison effect (0 is the first level)");
+  public static Property<Integer> PROP_DURATION = new Property<>("trap_duration", 600).setDescription("duration in ticks of the trap before it disappears");
 
   public static String spellName = "spell_rose_thorns";
   public static SpellRoseThorns instance = new SpellRoseThorns(spellName);
