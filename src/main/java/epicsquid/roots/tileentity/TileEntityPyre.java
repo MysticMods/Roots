@@ -4,7 +4,7 @@ import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.block.BlockBonfire;
+import epicsquid.roots.block.BlockPyre;
 import epicsquid.roots.config.RitualConfig;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualFrostLands;
@@ -58,7 +58,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class TileEntityBonfire extends TileBase implements ITickable {
+public class TileEntityPyre extends TileBase implements ITickable {
   public static AxisAlignedBB bounding = new AxisAlignedBB(-1, -1, -1, 1, 1, 1);
 
   private float ticker = 0;
@@ -80,10 +80,10 @@ public class TileEntityBonfire extends TileBase implements ITickable {
   public ItemStackHandler inventory = new ItemStackHandler(5) {
     @Override
     protected void onContentsChanged(int slot) {
-      TileEntityBonfire.this.markDirty();
+      TileEntityPyre.this.markDirty();
       if (!world.isRemote) {
-        TileEntityBonfire.this.world.updateComparatorOutputLevel(pos, getBlock());
-        TileEntityBonfire.this.updatePacketViaState();
+        TileEntityPyre.this.world.updateComparatorOutputLevel(pos, getBlock());
+        TileEntityPyre.this.updatePacketViaState();
       }
     }
   };
@@ -103,7 +103,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     return block;
   }
 
-  public TileEntityBonfire() {
+  public TileEntityPyre() {
     super();
   }
 
@@ -289,7 +289,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
         }
         lastRecipeUsed = null;
         lastRitualUsed = null;
-        BlockBonfire.setState(false, world, pos);
+        BlockPyre.setState(false, world, pos);
         world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1F, 1F);
         world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1F, 1F);
         return true;
@@ -364,7 +364,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
 
   @Override
   public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
-    if (oldState.getBlock() == newState.getBlock() && newState.getBlock() instanceof BlockBonfire) return false;
+    if (oldState.getBlock() == newState.getBlock() && newState.getBlock() instanceof BlockPyre) return false;
 
     return super.shouldRefresh(world, pos, oldState, newState);
   }
@@ -467,7 +467,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
     }
     if (doBigFlame) {
       if (burnTime != 0) {
-        BlockBonfire.setState(true, world, pos);
+        BlockPyre.setState(true, world, pos);
       }
       doBigFlame = false;
       markDirty();
@@ -490,7 +490,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
 
       if (!burning || burnTime == 0) {
         burnTime = 0;
-        BlockBonfire.setState(false, world, pos);
+        BlockPyre.setState(false, world, pos);
         List<ItemStack> stacks = new ArrayList<>();
         for (int i = 0; i < inventory.getSlots(); i++) {
           ItemStack stack = inventory.getStackInSlot(i).copy();
@@ -533,7 +533,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           }
 
           EntityItem item = new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 1, getPos().getZ() + 0.5, result);
-          item.setCustomNameTag("bonfire");
+          item.setCustomNameTag("pyre");
           ItemUtil.spawnItem(world, item);
           XPUtil.spawnXP(world, getPos(), this.craftingXP);
           this.craftingResult = ItemStack.EMPTY;
@@ -600,7 +600,7 @@ public class TileEntityBonfire extends TileBase implements ITickable {
           new AxisAlignedBB(getPos().getX(), getPos().getY(), getPos().getZ(), getPos().getX() + 1, getPos().getY() + 1, getPos().getZ() + 1));
       for (EntityItem item : items) {
         ItemStack stack = item.getItem();
-        if (item.getCustomNameTag().equalsIgnoreCase("bonfire")) {
+        if (item.getCustomNameTag().equalsIgnoreCase("pyre")) {
           continue;
         }
         for (int i = 0; i < this.inventory.getSlots(); i++) {

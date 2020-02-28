@@ -26,7 +26,7 @@ import java.util.List;
 public class ModBlocks {
 
   // All block
-  public static Block mortar, bonfire, imbuer, structure_marker, offertory_plate, unending_bowl, reinforced_bonfire;
+  public static Block mortar, pyre, imbuer, structure_marker, offertory_plate, unending_bowl, reinforced_pyre;
   public static Block incense_burner, wildwood_rune;
   public static Block grove_stone, fey_crafter;
   public static Block fairy_grove_stone;
@@ -56,7 +56,7 @@ public class ModBlocks {
   public static Block wildwood_door, wildwood_trapdoor;
   public static Block wildwood_button, wildwood_pressure_plate, wildwood_fence, wildwood_fence_gate, wildwood_ladder;
 
-  public static Block fey_light, decorative_bonfire;
+  public static Block fey_light, decorative_pyre;
 
   // Lists of blcoks
   public static List<Block> runestoneBlocks;
@@ -156,9 +156,9 @@ public class ModBlocks {
 
     event.addBlock(structure_marker = new BlockStructureMarker());
     event.addBlock(mortar = new BlockMortar(Material.ROCK, SoundType.STONE, 1.4f, "mortar", TileEntityMortar.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(bonfire = new BlockBonfire(Material.WOOD, SoundType.WOOD, 1.4f, "bonfire", TileEntityBonfire.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(reinforced_bonfire = new BlockReinforcedBonfire(Material.ROCK, SoundType.STONE, 8.4f, "reinforced_bonfire", TileEntityBonfire.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(decorative_bonfire = new BlockDecorativeBonfire(Material.WOOD, SoundType.WOOD, 1.4f, "decorative_bonfire", TileEntityDecorativeBonfire.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(pyre = new BlockPyre(Material.WOOD, SoundType.WOOD, 1.4f, "pyre", TileEntityPyre.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(reinforced_pyre = new BlockReinforcedPyre(Material.ROCK, SoundType.STONE, 8.4f, "reinforced_pyre", TileEntityPyre.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(decorative_pyre = new BlockDecorativePyre(Material.WOOD, SoundType.WOOD, 1.4f, "decorative_pyre", TileEntityDecorativePyre.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(imbuer = new BlockImbuer(Material.WOOD, SoundType.WOOD, 1.4f, "imbuer", TileEntityImbuer.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(offertory_plate = new BlockOffertoryPlate(Material.ROCK, SoundType.STONE, 1.4f, "offertory_plate", TileEntityOffertoryPlate.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(unending_bowl = new BlockUnendingBowl(Material.ROCK, SoundType.STONE, 1.4f, "unending_bowl", TileEntityUnendingBowl.class)).setCreativeTab(Roots.tab).setLightOpacity(0);

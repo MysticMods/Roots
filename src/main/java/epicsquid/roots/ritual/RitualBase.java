@@ -1,11 +1,11 @@
 package epicsquid.roots.ritual;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.block.BlockBonfire;
+import epicsquid.roots.block.BlockPyre;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.ritual.conditions.ICondition;
-import epicsquid.roots.tileentity.TileEntityBonfire;
+import epicsquid.roots.tileentity.TileEntityPyre;
 import epicsquid.roots.util.types.PropertyTable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -88,30 +88,30 @@ public abstract class RitualBase {
     this.conditions.add(condition);
   }
 
-  public boolean isRitualRecipe(TileEntityBonfire tileEntityBonfire, @Nullable EntityPlayer player) {
+  public boolean isRitualRecipe(TileEntityPyre tileEntityPyre, @Nullable EntityPlayer player) {
     if (isDisabled()) return false;
     for (ICondition condition : this.conditions) {
       if (condition instanceof ConditionItems) {
         ConditionItems conditionItems = (ConditionItems) condition;
-        return conditionItems.checkCondition(tileEntityBonfire, player);
+        return conditionItems.checkCondition(tileEntityPyre, player);
       }
     }
     return false;
   }
 
-  public boolean canFire(TileEntityBonfire tileEntityBonfire, @Nullable EntityPlayer player) {
-    IBlockState state = tileEntityBonfire.getWorld().getBlockState(tileEntityBonfire.getPos());
-    if (state.getValue(BlockBonfire.BURNING)) {
+  public boolean canFire(TileEntityPyre Pyre, @Nullable EntityPlayer player) {
+    IBlockState state = Pyre.getWorld().getBlockState(Pyre.getPos());
+    if (state.getValue(BlockPyre.BURNING)) {
       return false;
     }
 
-    return checkTileConditions(tileEntityBonfire, player);
+    return checkTileConditions(Pyre, player);
   }
 
-  public boolean checkTileConditions(TileEntityBonfire tileEntityBonfire, @Nullable EntityPlayer player) {
+  public boolean checkTileConditions(TileEntityPyre tileEntityPyre, @Nullable EntityPlayer player) {
     boolean success = true;
     for (ICondition condition : this.conditions) {
-      if (!condition.check(tileEntityBonfire, player)) {
+      if (!condition.check(tileEntityPyre, player)) {
         success = false;
       }
     }

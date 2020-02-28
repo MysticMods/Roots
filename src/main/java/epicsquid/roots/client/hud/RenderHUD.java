@@ -1,7 +1,7 @@
 package epicsquid.roots.client.hud;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.block.BlockBonfire;
+import epicsquid.roots.block.BlockPyre;
 import epicsquid.roots.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -36,8 +36,8 @@ public class RenderHUD {
 
     if (block == ModBlocks.mortar) {
       RenderMortar.render(mc, trace.getBlockPos(), state, event);
-    } else if (block instanceof BlockBonfire) {
-      RenderBonfire.render(mc, trace.getBlockPos(), state, event);
+    } else if (block instanceof BlockPyre) {
+      RenderPyre.render(mc, trace.getBlockPos(), state, event);
     }
   }
 }

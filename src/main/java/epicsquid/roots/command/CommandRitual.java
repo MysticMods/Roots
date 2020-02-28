@@ -7,7 +7,7 @@ import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.ritual.conditions.ConditionTrees;
 import epicsquid.roots.ritual.conditions.ICondition;
-import epicsquid.roots.tileentity.TileEntityBonfire;
+import epicsquid.roots.tileentity.TileEntityPyre;
 import net.minecraft.block.BlockNewLog;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks;
@@ -75,15 +75,15 @@ public class CommandRitual extends CommandBase {
       BlockPos pos = player.getPosition();
 
       world.setBlockState(pos.down(), Blocks.CHEST.getDefaultState());
-      world.setBlockState(pos, ModBlocks.bonfire.getDefaultState());
+      world.setBlockState(pos, ModBlocks.pyre.getDefaultState());
 
       TileEntityChest chest = (TileEntityChest) world.getTileEntity(pos.down());
-      TileEntityBonfire bonfire = (TileEntityBonfire) world.getTileEntity(pos);
-      bonfire.setLastRitualUsed(ritual);
+      TileEntityPyre pyre = (TileEntityPyre) world.getTileEntity(pos);
+      pyre.setLastRitualUsed(ritual);
 
       int i = 0;
       for (Ingredient ing : ritual.getIngredients()) {
-        bonfire.inventory.setStackInSlot(i, resolveStack(ing));
+        pyre.inventory.setStackInSlot(i, resolveStack(ing));
         for (int j = i * 5; j < i * 5 + 5; j++) {
           ItemStack stack = resolveStack(ing);
           stack.setCount(stack.getMaxStackSize());

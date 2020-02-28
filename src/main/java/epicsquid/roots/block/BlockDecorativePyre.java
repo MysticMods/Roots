@@ -20,11 +20,11 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public class BlockDecorativeBonfire extends BlockBonfire {
+public class BlockDecorativePyre extends BlockPyre {
 
   public static PropertyBool BURNING = PropertyBool.create("burning");
 
-  public BlockDecorativeBonfire(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
+  public BlockDecorativePyre(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
     super(mat, type, hardness, name, teClass);
   }
 

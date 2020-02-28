@@ -2,13 +2,11 @@ package epicsquid.roots.block;
 
 import epicsquid.mysticallib.block.BlockTEBase;
 import epicsquid.mysticallib.particle.particles.ParticleLeaf;
-import epicsquid.mysticallib.particle.particles.ParticleLeafArc;
 import epicsquid.mysticallib.proxy.ClientProxy;
-import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
-import epicsquid.roots.tileentity.TileEntityBonfire;
+import epicsquid.roots.tileentity.TileEntityPyre;
 import epicsquid.roots.util.RitualUtil;
 import epicsquid.roots.util.types.BlockPosDimension;
 import net.minecraft.block.SoundType;
@@ -38,11 +36,11 @@ import java.util.Map;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public class BlockBonfire extends BlockTEBase {
+public class BlockPyre extends BlockTEBase {
 
   public static PropertyBool BURNING = PropertyBool.create("burning");
 
-  public BlockBonfire(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
+  public BlockPyre(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
     super(mat, type, hardness, name, teClass);
     setDefaultState(blockState.getBaseState().withProperty(BURNING, false));
   }
@@ -158,8 +156,8 @@ public class BlockBonfire extends BlockTEBase {
    */
   public int getComparatorInputOverride(IBlockState blockState, World worldIn, BlockPos pos) {
     TileEntity te = worldIn.getTileEntity(pos);
-    if (te instanceof TileEntityBonfire) {
-      TileEntityBonfire bon = (TileEntityBonfire) te;
+    if (te instanceof TileEntityPyre) {
+      TileEntityPyre bon = (TileEntityPyre) te;
       boolean lit = bon.getBurnTime() != 0;
 
       BlockPosDimension pdos = new BlockPosDimension(pos, worldIn.provider.getDimension());

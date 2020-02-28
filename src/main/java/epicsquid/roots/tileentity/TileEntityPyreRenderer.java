@@ -15,10 +15,10 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class TileEntityBonfireRenderer extends TileEntitySpecialRenderer<TileEntityBonfire> {
+public class TileEntityPyreRenderer extends TileEntitySpecialRenderer<TileEntityPyre> {
 
   @Override
-  public void render(TileEntityBonfire tem, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+  public void render(TileEntityPyre tem, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     ArrayList<ItemStack> renderItems = new ArrayList<>();
 
     for (int i = 0; i < tem.inventory.getSlots(); i++) {
@@ -50,7 +50,7 @@ public class TileEntityBonfireRenderer extends TileEntitySpecialRenderer<TileEnt
       renderResult(tem, x, y, z, new ItemStack(ritual.getIcon()), 1f);
   }
 
-  private void renderResult(TileEntityBonfire tem, double x, double y, double z, ItemStack result, float alpha) {
+  private void renderResult(TileEntityPyre tem, double x, double y, double z, ItemStack result, float alpha) {
     GlStateManager.enableBlend();
     RenderHelper.enableStandardItemLighting();
     GlStateManager.pushMatrix();

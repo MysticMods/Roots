@@ -1,7 +1,7 @@
 package epicsquid.roots.recipe;
 
 import epicsquid.mysticallib.util.ListUtil;
-import epicsquid.roots.tileentity.TileEntityBonfire;
+import epicsquid.roots.tileentity.TileEntityPyre;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -86,6 +86,6 @@ public class PyreCraftingRecipe {
     return ingredients;
   }
 
-  public void postCraft(ItemStack output, IItemHandlerModifiable handler, TileEntityBonfire bonfire) {
+  public void postCraft(ItemStack output, IItemHandlerModifiable handler, TileEntityPyre pyre) {
   }
 }

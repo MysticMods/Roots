@@ -1,7 +1,7 @@
 package epicsquid.roots.integration.hwyla.providers;
 
 import epicsquid.roots.ritual.RitualBase;
-import epicsquid.roots.tileentity.TileEntityBonfire;
+import epicsquid.roots.tileentity.TileEntityPyre;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
@@ -12,12 +12,12 @@ import net.minecraft.util.text.TextFormatting;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class ProviderBonfire implements IWailaDataProvider {
+public class ProviderPyre implements IWailaDataProvider {
 
   @Nonnull
   @Override
   public List<String> getWailaBody(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
-    TileEntityBonfire te = (TileEntityBonfire) accessor.getTileEntity();
+    TileEntityPyre te = (TileEntityPyre) accessor.getTileEntity();
     if (te != null && te.getBurnTime() > 0) {
       int duration;
       if (te.getLastRecipeUsed() != null) {

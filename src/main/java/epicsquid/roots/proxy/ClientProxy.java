@@ -13,7 +13,7 @@ public class ClientProxy extends CommonProxy {
   public void preInit(FMLPreInitializationEvent event) {
     super.preInit(event);
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMortar.class, new TileEntityMortarRenderer());
-    ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBonfire.class, new TileEntityBonfireRenderer());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPyre.class, new TileEntityPyreRenderer());
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityImbuer.class, new TileEntityImbuerRenderer());
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOffertoryPlate.class, new TileEntityOffertoryPlateRenderer());
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityIncenseBurner.class, new TileEntityIncenseBurnerRenderer());

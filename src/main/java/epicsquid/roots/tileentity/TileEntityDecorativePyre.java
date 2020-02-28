@@ -5,11 +5,11 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
 import net.minecraft.util.ITickable;
 
-public class TileEntityDecorativeBonfire extends TileBase implements ITickable {
+public class TileEntityDecorativePyre extends TileBase implements ITickable {
 
   private boolean doBigFlame = true;
 
-  public TileEntityDecorativeBonfire() {
+  public TileEntityDecorativePyre() {
     super();
   }
 

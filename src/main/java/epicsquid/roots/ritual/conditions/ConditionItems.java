@@ -1,7 +1,7 @@
 package epicsquid.roots.ritual.conditions;
 
 import epicsquid.mysticallib.util.ListUtil;
-import epicsquid.roots.tileentity.TileEntityBonfire;
+import epicsquid.roots.tileentity.TileEntityPyre;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -28,7 +28,7 @@ public class ConditionItems implements ICondition {
   }
 
   @Override
-  public boolean checkCondition(TileEntityBonfire tile, @Nullable EntityPlayer player) {
+  public boolean checkCondition(TileEntityPyre tile, @Nullable EntityPlayer player) {
     List<ItemStack> stacks = new ArrayList<>();
     for (int i = 0; i < tile.inventory.getSlots(); i++) {
       stacks.add(tile.inventory.extractItem(i, 1, true));

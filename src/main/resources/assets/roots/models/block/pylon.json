@@ -4,7 +4,7 @@
 	"textures": {
 		"2": "roots:blocks/runed_obsidian",
 		"3": "roots:blocks/runed_obsidian_brick",
-		"particle": "roots:blocks/bonfire"
+		"particle": "roots:blocks/pyre"
 	},
 	"elements": [
 		{
@@ -108,7 +108,7 @@
 	],
 	"groups": [
 		{
-			"name": "bonfire",
+			"name": "pyre",
 			"origin": [8, 8, 8],
 			"children": [0, 1, 2, 3]
 		},

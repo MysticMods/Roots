@@ -2,7 +2,7 @@ package epicsquid.roots.client.hud;
 
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
-import epicsquid.roots.tileentity.TileEntityBonfire;
+import epicsquid.roots.tileentity.TileEntityPyre;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
@@ -13,12 +13,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
-public class RenderBonfire {
+public class RenderPyre {
   public static void render(Minecraft mc, BlockPos pos, IBlockState state, RenderGameOverlayEvent.Post event) {
     World world = mc.world;
-    if (!(world.getTileEntity(pos) instanceof TileEntityBonfire)) return;
+    if (!(world.getTileEntity(pos) instanceof TileEntityPyre)) return;
 
-    TileEntityBonfire te = (TileEntityBonfire) world.getTileEntity(pos);
+    TileEntityPyre te = (TileEntityPyre) world.getTileEntity(pos);
     if (te == null) return;
 
     ScaledResolution res = event.getResolution();

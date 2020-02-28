@@ -2,8 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     " L ",
-    "LWL",
-    "SCS"  ],
+    "L L",
+    "S S"  ],
   "key": {
     "S": [
       {
@@ -16,22 +16,10 @@
         "type": "forge:ore_dict",
         "ore": "logWood"
       }
-    ],
-    "W": [
-      {
-        "item": "roots:wildroot",
-        "data": 0
-      }
-    ],
-    "C": [
-      {
-        "item": "roots:terra_moss",
-        "data": 0
-      }
     ]
   },
   "result": {
-    "item": "roots:pyre",
+    "item": "roots:decorative_pyre",
     "data": 0
   }
 }
