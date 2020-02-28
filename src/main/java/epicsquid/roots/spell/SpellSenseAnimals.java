@@ -17,10 +17,10 @@ public class SpellSenseAnimals extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(100);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("wildewheet", 0.25));
-  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 50);
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 25);
-  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 50);
-  public static Property<Integer> PROP_DURATION = new Property<>("duration", 40 * 20);
+  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 50).setDescription("radius on the X axis of the area in which the spell takes effect");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 25).setDescription("radius on the Y axis of the area in which the spell takes effect");
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 50).setDescription("radius on the Z axis of the area in which the spell takes effect");
+  public static Property<Integer> PROP_DURATION = new Property<>("duration", 40 * 20).setDescription("duration in ticks of the glowing effect applied to animals");
 
   public static String spellName = "spell_sense_animals";
   public static SpellSenseAnimals instance = new SpellSenseAnimals(spellName);

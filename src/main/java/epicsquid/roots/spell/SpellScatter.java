@@ -26,9 +26,9 @@ public class SpellScatter extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(60);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("wildroot", 0.25));
-  public static Property<Integer> PROP_RADIUS = new Property<>("radius", 7);
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 3);
-  public static Property<Integer> PROP_MAX_SEEDS = new Property<>("max_seeds", 16);
+  public static Property<Integer> PROP_RADIUS = new Property<>("radius", 7).setDescription("horizontal radius of the area the spell in which the spell takes effect");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 3).setDescription("radius on the Y axis of the area the spell in which the spell takes effect");
+  public static Property<Integer> PROP_MAX_SEEDS = new Property<>("max_seeds", 16).setDescription("maximum number of seeds planted each time the spell is cast");
 
   public static String spellName = "spell_scatter";
   public static SpellScatter instance = new SpellScatter(spellName);
