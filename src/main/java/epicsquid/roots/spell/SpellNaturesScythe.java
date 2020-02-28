@@ -6,6 +6,7 @@ import epicsquid.roots.network.fx.MessageFallBladesFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.BlockDoublePlant;
+import net.minecraft.block.BlockFlower;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -56,7 +57,7 @@ public class SpellNaturesScythe extends SpellBase {
     }
 
     World world = caster.world;
-    List<BlockPos> blocks = Util.getBlocksWithinRadius(caster.world, caster.getPosition(), radius, radius_y, radius, pos -> world.getBlockState(pos).getBlock() == Blocks.TALLGRASS || world.getBlockState(pos).getBlock() == Blocks.DOUBLE_PLANT && (world.getBlockState(pos).getValue(BlockDoublePlant.VARIANT) == BlockDoublePlant.EnumPlantType.FERN || world.getBlockState(pos).getValue(BlockDoublePlant.VARIANT) == BlockDoublePlant.EnumPlantType.GRASS));
+    List<BlockPos> blocks = Util.getBlocksWithinRadius(caster.world, caster.getPosition(), radius, radius_y, radius, pos -> ifAffectedByNaturesScythe(world, pos));
 
     if (blocks.isEmpty()) {
       return false;
@@ -70,6 +71,15 @@ public class SpellNaturesScythe extends SpellBase {
       PacketHandler.sendToAllTracking(new MessageFallBladesFX(pos.getX(), pos.getY(), pos.getZ(), false), world, pos);
     }
     return true;
+  }
+
+  private boolean ifAffectedByNaturesScythe(World world, BlockPos pos) {
+     return world.getBlockState(pos).getBlock() instanceof BlockFlower
+             || world.getBlockState(pos).getBlock() == Blocks.TALLGRASS
+             || world.getBlockState(pos).getBlock() == Blocks.DOUBLE_PLANT
+             && (world.getBlockState(pos).getValue(BlockDoublePlant.VARIANT) == BlockDoublePlant.EnumPlantType.FERN
+                  || world.getBlockState(pos).getValue(BlockDoublePlant.VARIANT) == BlockDoublePlant.EnumPlantType.GRASS
+             );
   }
 
   @Override
