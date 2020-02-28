@@ -61,5 +61,6 @@ public class PacketHandler {
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageRunicShearsAOEFX.MessageHolder.class, MessageRunicShearsAOEFX.class, Side.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageChrysopoeiaFX.Handler.class, MessageChrysopoeiaFX.class, Side.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageSaturationFX.Handler.class, MessageSaturationFX.class, Side.CLIENT);
+    epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageDesaturationFX.Handler.class, MessageDesaturationFX.class, Side.CLIENT);
   }
 }
