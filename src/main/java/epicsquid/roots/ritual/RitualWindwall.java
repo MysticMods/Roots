@@ -4,7 +4,6 @@ import epicsquid.roots.entity.ritual.EntityRitualWindwall;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
@@ -14,7 +13,7 @@ public class RitualWindwall extends RitualBase {
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 31).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 31).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 31).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
-  public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(5);
+  public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(5).setDescription("interval in ticks between each ritual knockback boost");
   public static Property<Integer> PROP_DISTANCE = new Property<>("distance", 31).setDescription("the distance at which hostile mobs are kept from the center of the ritual area");
   public static Property<Float> PROP_KNOCKBACK = new Property<>("knockback", 1.0f).setDescription("the knockback rate at which hostile mobs are pushed away from the center of the ritual");
 

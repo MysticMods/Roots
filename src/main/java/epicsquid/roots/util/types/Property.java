@@ -75,14 +75,25 @@ public class Property<T> {
   }
 
   public static class PropertyDuration extends Property<Integer> {
+
     public PropertyDuration(Integer defaultValue) {
       super("duration", defaultValue);
+    }
+
+    @Override
+    public String getDescription() {
+      return "the duration of the ritual in TICKS";
     }
   }
 
   public static class PropertyInterval extends Property<Integer> {
     public PropertyInterval(Integer defaultValue) {
       super("interval", defaultValue);
+    }
+
+    @Override
+    public PropertyInterval setDescription(String description) {
+      return ((PropertyInterval) super.setDescription(description));
     }
   }
 }
