@@ -54,11 +54,21 @@ public class Property<T> {
     public PropertyCooldown(Integer defaultValue) {
       super("cooldown", defaultValue);
     }
+
+    @Override
+    public String getDescription() {
+      return "the cooldown time in ticks of the spell";
+    }
   }
 
   public static class PropertyCastType extends Property<SpellBase.EnumCastType> {
     public PropertyCastType(SpellBase.EnumCastType defaultValue) {
       super("cast_type", defaultValue);
+    }
+
+    @Override
+    public String getDescription() {
+      return "the spell cast type (can be continuous or instantaneous)";
     }
   }
 
@@ -66,11 +76,21 @@ public class Property<T> {
     public PropertyCost(int index, SpellBase.SpellCost defaultValue) {
       super("cost_" + index, defaultValue);
     }
+
+    @Override
+    public String getDescription() {
+      return "the herb cost of one cast of this spell";
+    }
   }
 
   public static class PropertyDamage extends Property<Float> {
     public PropertyDamage(Float defaultValue) {
       super("damage", defaultValue);
+    }
+
+    @Override
+    public PropertyDamage setDescription(String description) {
+      return ((PropertyDamage) super.setDescription(description));
     }
   }
 
@@ -82,7 +102,7 @@ public class Property<T> {
 
     @Override
     public String getDescription() {
-      return "the duration of the ritual in TICKS";
+      return "the duration in ticks of the ritual/spell";
     }
   }
 

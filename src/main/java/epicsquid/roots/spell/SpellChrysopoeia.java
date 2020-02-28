@@ -25,7 +25,7 @@ public class SpellChrysopoeia extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("dewgonia", 0.5));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("stalicripe", 0.5));
-  public static Property<Integer> PROP_INTERVAL = new Property<>("interval", 20);
+  public static Property<Integer> PROP_INTERVAL = new Property<>("interval", 20).setDescription("interval in ticks between each transmutation");
 
   public static String spellName = "spell_chrysopoeia";
   public static SpellChrysopoeia instance = new SpellChrysopoeia(spellName);

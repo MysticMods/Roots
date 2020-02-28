@@ -19,8 +19,7 @@ public class SpellPetalShell extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("spirit_herb", 0.75));
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(120 * 20);
-  public static Property<Integer> PROP_MAXIMUM = new Property<>("maximum_shells", 3);
-
+  public static Property<Integer> PROP_MAXIMUM = new Property<>("maximum_shells", 3).setDescription("maximum number of shells (attack blockers) a player can have");
   public static String spellName = "spell_petal_shell";
   public static SpellPetalShell instance = new SpellPetalShell(spellName);
 
