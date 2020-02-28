@@ -5,6 +5,7 @@ import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
+import epicsquid.roots.advancements.Advancements;
 import epicsquid.roots.block.groves.BlockGroveStone;
 import epicsquid.roots.GuiHandler;
 import epicsquid.roots.init.ModBlocks;
@@ -17,6 +18,7 @@ import epicsquid.roots.recipe.FeyCraftingRecipe;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -25,6 +27,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
@@ -54,6 +57,7 @@ public class TileEntityFeyCrafter extends TileBase {
   };
 
   private BlockPos groveStone = null;
+  private FeyCraftingRecipe lastRecipe;
 
   public TileEntityFeyCrafter() {
     super();
@@ -157,8 +161,9 @@ public class TileEntityFeyCrafter extends TileBase {
         }
       }
 
-      recipe = getRecipe();
+      lastRecipe = recipe;
       if (singleStack) break;
+      recipe = getRecipe();
     }
 
     if (!current.isEmpty()) {
@@ -237,6 +242,8 @@ public class TileEntityFeyCrafter extends TileBase {
     MessageGrowthCrafterVisualFX packet = new MessageGrowthCrafterVisualFX(getPos(), world.provider.getDimension());
     PacketHandler.sendToAllTracking(packet, this);
     world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), ModSounds.CHIMES, SoundCategory.NEUTRAL, 1f, 1f);
+    Advancements.CRAFTING_TRIGGER.trigger((EntityPlayerMP) player, lastRecipe);
+    lastRecipe = null;
 
     return true;
   }
