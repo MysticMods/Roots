@@ -4,6 +4,12 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.network.MessageClearToasts;
+import epicsquid.roots.ritual.RitualBase;
+import epicsquid.roots.ritual.RitualRegistry;
+import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.util.types.Property;
+import epicsquid.roots.util.types.PropertyTable;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementManager;
 import net.minecraft.advancements.AdvancementProgress;
@@ -27,6 +33,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -95,12 +102,68 @@ public class CommandRoots extends CommandBase {
         }
         Path path = Paths.get("roots.log");
         try {
-          Files.write(path, growablesList, StandardCharsets.UTF_8);
+          Files.write(path, growablesList, StandardCharsets.UTF_8, StandardOpenOption.APPEND, StandardOpenOption.CREATE);
         } catch (IOException e) {
           player.sendMessage(new TextComponentString("Unable to write roots.log"));
           return;
         }
         player.sendMessage(new TextComponentString("Growables written to roots.log"));
+      } else if (args[0].equalsIgnoreCase("rituals")) {
+        List<String> rituals = new ArrayList<>();
+
+        for (RitualBase ritual : RitualRegistry.getRituals()) {
+          PropertyTable table = ritual.getProperties();
+          rituals.add("Ritual: " + ritual.getName() + (ritual.isDisabled() ? " (disabled)" : ""));
+          for (Property<?> prop : table.getProperties()) {
+            rituals.add("    Property: " + prop.getName());
+            if (prop.hasDefaultValue()) {
+              rituals.add("        Default: " + prop.getDefaultValue());
+            }
+            rituals.add("        Description: " + prop.getDescription());
+            rituals.add("        Type: " + prop.getType().getSimpleName());
+            rituals.add("        Value: " + table.get(prop));
+            rituals.add("");
+          }
+        }
+
+        Path path = Paths.get("roots.log");
+        try {
+          Files.write(path, rituals, StandardCharsets.UTF_8, StandardOpenOption.APPEND, StandardOpenOption.CREATE);
+        } catch (IOException e) {
+          player.sendMessage(new TextComponentString("Unable to write roots.log"));
+          Roots.logger.error("Unable to write to roots.log: ", e);
+          return;
+        }
+        player.sendMessage(new TextComponentString("Rituals written to roots.log"));
+      } else if (args[0].equalsIgnoreCase("spells")) {
+        List<String> spells = new ArrayList<>();
+
+        for (SpellBase spell : SpellRegistry.getSpells()) {
+          PropertyTable table = spell.getProperties();
+          spells.add("Spell: " + spell.getName() + (spell.isDisabled() ? " (disabled)" : ""));
+          for (Property<?> prop : table.getProperties()) {
+            if (prop.getType().equals(SpellBase.EnumCastType.class)) {
+              continue;
+            }
+            spells.add("    Property: " + prop.getName());
+            if (prop.hasDefaultValue()) {
+              spells.add("        Default: " + prop.getDefaultValue());
+            }
+            spells.add("        Description: " + prop.getDescription());
+            spells.add("        Type: " + prop.getType().getSimpleName());
+            spells.add("        Value: " + table.get(prop));
+            spells.add("");
+          }
+        }
+
+        Path path = Paths.get("roots.log");
+        try {
+          Files.write(path, spells, StandardCharsets.UTF_8, StandardOpenOption.APPEND, StandardOpenOption.CREATE);
+        } catch (IOException e) {
+          player.sendMessage(new TextComponentString("Unable to write roots.log"));
+          return;
+        }
+        player.sendMessage(new TextComponentString("Spells written to roots.log"));
       }
     }
   }

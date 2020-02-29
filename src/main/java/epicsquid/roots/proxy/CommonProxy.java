@@ -20,6 +20,15 @@ import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.util.OfferingUtil;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.*;
+import org.apache.logging.log4j.LogManager;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.Collections;
 
 public class CommonProxy {
   public void preInit(FMLPreInitializationEvent event) {
@@ -67,6 +76,11 @@ public class CommonProxy {
     Advancements.init();
     ModRecipes.clearGeneratedEntityRecipes();
     ModRecipes.generateLifeEssence();
+
+    try {
+      Files.write(Paths.get("roots.log"), Collections.singletonList(""), StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+    } catch (IOException ignored) {
+    }
   }
 
   public void serverStarting(FMLServerStartingEvent event) {

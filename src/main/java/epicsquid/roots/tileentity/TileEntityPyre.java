@@ -96,7 +96,7 @@ public class TileEntityPyre extends TileBase implements ITickable {
     }
   }
 
-  protected Block getBlock () {
+  protected Block getBlock() {
     if (block == null) {
       block = world.getBlockState(pos).getBlock();
     }
@@ -180,8 +180,8 @@ public class TileEntityPyre extends TileBase implements ITickable {
   }
 
   private boolean startRitual(@Nullable EntityPlayer player) {
-    RitualBase ritual = RitualRegistry.getRitual(this, player);
     validateEntity();
+    RitualBase ritual = RitualRegistry.getRitual(this, player);
 
     if (ritual != null && !ritual.isDisabled()) {
       if ((ritualEntity == null || ritualEntity.isDead) && ritual.canFire(this, player)) {
@@ -380,9 +380,43 @@ public class TileEntityPyre extends TileBase implements ITickable {
     return burnTime;
   }
 
-  @Override
-  public void update() {
-    // Potentially update from stuff below
+  public void ongoingFlame() {
+    if (world.isRemote) {
+      for (int i = 0; i < 2; i++) {
+        if (ritualEntity instanceof EntityRitualFrostLands) {
+          ParticleUtil
+              .spawnParticleFiery(world, getPos().getX() + 0.3125f + 0.375f * Util.rand.nextFloat(), getPos().getY() + 0.625f + 0.375f * Util.rand.nextFloat(),
+                  getPos().getZ() + 0.3125f + 0.375f * Util.rand.nextFloat(), 0.03125f * (Util.rand.nextFloat() - 0.5f), 0.125f * Util.rand.nextFloat(),
+                  0.03125f * (Util.rand.nextFloat() - 0.5f), 90.0f, 134.0f, 204.0f, 0.75f, 7.0f + 7.0f * Util.rand.nextFloat(), 40);
+        } else {
+          ParticleUtil
+              .spawnParticleFiery(world, getPos().getX() + 0.3125f + 0.375f * Util.rand.nextFloat(), getPos().getY() + 0.625f + 0.375f * Util.rand.nextFloat(),
+                  getPos().getZ() + 0.3125f + 0.375f * Util.rand.nextFloat(), 0.03125f * (Util.rand.nextFloat() - 0.5f), 0.125f * Util.rand.nextFloat(),
+                  0.03125f * (Util.rand.nextFloat() - 0.5f), 255.0f, 96.0f, 32.0f, 0.75f, 7.0f + 7.0f * Util.rand.nextFloat(), 40);
+        }
+      }
+    }
+  }
+
+  public void bigFlame() {
+    if (world.isRemote && this.doBigFlame) {
+      if (ritualEntity instanceof IColdRitual) {
+        for (int i = 0; i < 40; i++) {
+          ParticleUtil.spawnParticleFiery(world, getPos().getX() + 0.125f + 0.75f * random.nextFloat(), getPos().getY() + 0.75f + 0.5f * random.nextFloat(),
+              getPos().getZ() + 0.125f + 0.75f * random.nextFloat(), 0.03125f * (random.nextFloat() - 0.5f), 0.125f * random.nextFloat(),
+              0.03125f * (random.nextFloat() - 0.5f), 63.0f, 119.0f, 209.0f, 0.75f, 9.0f + 9.0f * random.nextFloat(), 40);
+        }
+      } else {
+        for (int i = 0; i < 40; i++) {
+          ParticleUtil.spawnParticleFiery(world, getPos().getX() + 0.125f + 0.75f * random.nextFloat(), getPos().getY() + 0.75f + 0.5f * random.nextFloat(),
+              getPos().getZ() + 0.125f + 0.75f * random.nextFloat(), 0.03125f * (random.nextFloat() - 0.5f), 0.125f * random.nextFloat(),
+              0.03125f * (random.nextFloat() - 0.5f), 255.0f, 224.0f, 32.0f, 0.75f, 9.0f + 9.0f * random.nextFloat(), 40);
+        }
+      }
+    }
+  }
+
+  public void refillInventory() {
     if (!world.isRemote) {
       resolveLastIngredients();
       if (lastUsedIngredients != null && !lastUsedIngredients.isEmpty() && ItemHandlerUtil.isEmpty(inventory)) {
@@ -418,54 +452,53 @@ public class TileEntityPyre extends TileBase implements ITickable {
                   ItemStack stack = temp.get(i);
                   inventory.setStackInSlot(i, stack);
                 }
+                markDirty();
+                updatePacketViaState();
               }
             }
           }
         }
       }
+    }
+  }
 
+  public boolean tickFire() {
+    boolean found = false;
+    if (!world.isRemote) {
       if (ticker % 10 == 0) {
         AxisAlignedBB bounds = bounding.offset(getPos());
         BlockPos start = new BlockPos(bounds.minX, bounds.minY, bounds.minZ);
         BlockPos stop = new BlockPos(bounds.maxX, bounds.maxY, bounds.maxZ);
-        boolean fire = false;
         for (BlockPos.MutableBlockPos pos : BlockPos.getAllInBoxMutable(start, stop)) {
           if (world.getBlockState(pos).getBlock() == Blocks.FIRE) {
-            fire = true;
             if (!world.getBlockState(pos.down()).getBlock().isFireSource(world, pos.down(), EnumFacing.UP)) {
               for (int i = 0; i < 1 + Util.rand.nextInt(3); i++) {
                 world.getBlockState(pos).getBlock().randomTick(world, pos, world.getBlockState(pos), Util.rand);
               }
+              found = true;
             }
           }
         }
-        if (fire) {
-          startRitual(null);
-        }
       }
     }
+    return found;
+  }
+
+  @Override
+  public void update() {
+    // Potentially update from stuff below
+    refillInventory();
+    boolean restart = tickFire();
+    boolean burning = false;
 
     this.ticker += 1.0f;
     if (pickupDelay > 0) {
       pickupDelay--;
     }
     //Spawn the Ignite flame particle
-    if (world.isRemote && this.doBigFlame) {
-      if (ritualEntity instanceof IColdRitual) {
-        for (int i = 0; i < 40; i++) {
-          ParticleUtil.spawnParticleFiery(world, getPos().getX() + 0.125f + 0.75f * random.nextFloat(), getPos().getY() + 0.75f + 0.5f * random.nextFloat(),
-              getPos().getZ() + 0.125f + 0.75f * random.nextFloat(), 0.03125f * (random.nextFloat() - 0.5f), 0.125f * random.nextFloat(),
-              0.03125f * (random.nextFloat() - 0.5f), 63.0f, 119.0f, 209.0f, 0.75f, 9.0f + 9.0f * random.nextFloat(), 40);
-        }
-      } else {
-        for (int i = 0; i < 40; i++) {
-          ParticleUtil.spawnParticleFiery(world, getPos().getX() + 0.125f + 0.75f * random.nextFloat(), getPos().getY() + 0.75f + 0.5f * random.nextFloat(),
-              getPos().getZ() + 0.125f + 0.75f * random.nextFloat(), 0.03125f * (random.nextFloat() - 0.5f), 0.125f * random.nextFloat(),
-              0.03125f * (random.nextFloat() - 0.5f), 255.0f, 224.0f, 32.0f, 0.75f, 9.0f + 9.0f * random.nextFloat(), 40);
-        }
-      }
-    }
+
     if (doBigFlame) {
+      bigFlame();
       if (burnTime != 0) {
         BlockPyre.setState(true, world, pos);
       }
@@ -478,7 +511,7 @@ public class TileEntityPyre extends TileBase implements ITickable {
     if (burnTime > 0) {
       burnTime--;
 
-      boolean burning = burnTime > 0;
+      burning = burnTime > 0;
 
       if ((ritualEntity != null && ritualEntity.isDead) && craftingResult.isEmpty()) {
         burning = false;
@@ -488,86 +521,54 @@ public class TileEntityPyre extends TileBase implements ITickable {
         meltNearbySnow();
       }
 
+      if (burning) {
+        //Spawn Fire particles
+        ongoingFlame();
+      }
       if (!burning || burnTime == 0) {
         burnTime = 0;
         BlockPyre.setState(false, world, pos);
-        List<ItemStack> stacks = new ArrayList<>();
-        for (int i = 0; i < inventory.getSlots(); i++) {
-          ItemStack stack = inventory.getStackInSlot(i).copy();
-          stack.setCount(1);
-          stacks.add(stack);
-        }
-        //Check if it is a ritual, if so try and see if it has new ritual fuel.
-        if (this.craftingResult.isEmpty() && this.lastRitualUsed != null) {
-          if (ListUtil.matchesIngredients(stacks, this.lastRitualUsed.getIngredients()) && this.lastRitualUsed.checkTileConditions(this, null)) {
-            lastRitualUsed.doEffect(world, getPos(), null);
-            burning = true;
-            this.burnTime = this.lastRitualUsed.getDuration();
-            this.doBigFlame = true;
-            for (int i = 0; i < inventory.getSlots(); i++) {
-              inventory.extractItem(i, 1, false);
-            }
-            markDirty();
-            if (!world.isRemote)
-              updatePacketViaState();
-          }
-        } else if (this.lastRecipeUsed != null) {
-          if (this.lastRecipeUsed.matches(stacks)) {
-            burning = true;
-            this.burnTime = this.lastRecipeUsed.getBurnTime();
-            this.doBigFlame = true;
-            for (int i = 0; i < inventory.getSlots(); i++) {
-              inventory.extractItem(i, 1, false);
-            }
-            markDirty();
-            if (!world.isRemote)
-              updatePacketViaState();
-          }
-        }
-
-        //Spawn item if crafting recipe
-        if (!world.isRemote && !this.craftingResult.isEmpty()) {
-          ItemStack result = this.craftingResult.copy();
-          if (this.lastRecipeUsed != null) {
-            this.lastRecipeUsed.postCraft(result, inventory_storage, this);
-          }
-
-          EntityItem item = new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 1, getPos().getZ() + 0.5, result);
-          item.setCustomNameTag("pyre");
-          ItemUtil.spawnItem(world, item);
-          XPUtil.spawnXP(world, getPos(), this.craftingXP);
-          this.craftingResult = ItemStack.EMPTY;
-          clearStorage();
-        }
-      }
-      if (burning) {
-        //Spawn Fire particles
-        if (world.isRemote) {
-          for (int i = 0; i < 2; i++) {
-            if (ritualEntity instanceof EntityRitualFrostLands) {
-              ParticleUtil
-                  .spawnParticleFiery(world, getPos().getX() + 0.3125f + 0.375f * Util.rand.nextFloat(), getPos().getY() + 0.625f + 0.375f * Util.rand.nextFloat(),
-                      getPos().getZ() + 0.3125f + 0.375f * Util.rand.nextFloat(), 0.03125f * (Util.rand.nextFloat() - 0.5f), 0.125f * Util.rand.nextFloat(),
-                      0.03125f * (Util.rand.nextFloat() - 0.5f), 90.0f, 134.0f, 204.0f, 0.75f, 7.0f + 7.0f * Util.rand.nextFloat(), 40);
-            } else {
-              ParticleUtil
-                  .spawnParticleFiery(world, getPos().getX() + 0.3125f + 0.375f * Util.rand.nextFloat(), getPos().getY() + 0.625f + 0.375f * Util.rand.nextFloat(),
-                      getPos().getZ() + 0.3125f + 0.375f * Util.rand.nextFloat(), 0.03125f * (Util.rand.nextFloat() - 0.5f), 0.125f * Util.rand.nextFloat(),
-                      0.03125f * (Util.rand.nextFloat() - 0.5f), 255.0f, 96.0f, 32.0f, 0.75f, 7.0f + 7.0f * Util.rand.nextFloat(), 40);
-            }
-          }
-        }
-      }
-      if (!burning || burnTime == 0) {
-        burnTime = 0;
+        spawnCraftResult();
         markDirty();
         if (!world.isRemote) {
+          startRitual(null);
+          restart = false;
           updatePacketViaState();
         }
       }
     }
 
     pickupItem();
+    if (restart && !world.isRemote && !burning) {
+      startRitual(null);
+    }
+  }
+
+  public void spawnCraftResult() {
+    //Spawn item if crafting recipe
+    if (!world.isRemote && !this.craftingResult.isEmpty()) {
+      ItemStack result = this.craftingResult.copy();
+      if (this.lastRecipeUsed != null) {
+        this.lastRecipeUsed.postCraft(result, inventory_storage, this);
+      }
+
+      EntityItem item = new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 1, getPos().getZ() + 0.5, result);
+      item.setCustomNameTag("pyre");
+      ItemUtil.spawnItem(world, item);
+      XPUtil.spawnXP(world, getPos(), this.craftingXP);
+      this.craftingResult = ItemStack.EMPTY;
+      clearStorage();
+    }
+  }
+
+  public List<ItemStack> getInventory() {
+    List<ItemStack> stacks = new ArrayList<>();
+    for (int i = 0; i < inventory.getSlots(); i++) {
+      ItemStack stack = inventory.getStackInSlot(i).copy();
+      stack.setCount(1);
+      stacks.add(stack);
+    }
+    return stacks;
   }
 
   private void meltNearbySnow() {
