@@ -33,6 +33,14 @@ public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
     return (Property<T>) prop;
   }
 
+  public <T> Property<T> get(String propertyName, T value) throws ClassCastException {
+    Property<?> prop = reverseMap.get(propertyName);
+    if (!prop.getType().equals(value.getClass())) {
+      throw new ClassCastException("Invalid cast: cannot cast " + prop.getType().getSimpleName() + " into " + value.getClass().getSimpleName());
+    }
+    return get(propertyName);
+  }
+
   public <T> T get(Property<T> property) {
     fetchedKeys.add(property.getName());
     T result = property.cast(map.get(property));
