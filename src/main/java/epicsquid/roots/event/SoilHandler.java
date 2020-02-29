@@ -1,4 +1,4 @@
-package epicsquid.roots.event.handlers;
+package epicsquid.roots.event;
 
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;

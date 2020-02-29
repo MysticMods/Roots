@@ -9,7 +9,7 @@
       "type": "spotlight",
       "item": "roots:runed_obsidian",
       "link_recipe": true,
-      "text": "Reinforced with the strength of obsidian, this runestone is extraordinarily strong: it's capable of withstanding the blows of almost any creature, and can also be used in the construction of $(l:rituals/standing_stones)standing stones$()."
+      "text": "Reinforced with the strength of obsidian, this runestone is extraordinarily strong: it's capable of withstanding the blows of almost any creature, and can also be used in the construction of $(l:rituals/standing_stones)standing stones$().$(br2)$(info) These blocks are wither-proof and are immune to the Ender Dragon."
     },
     {
       "type": "fey_crafting_template",
@@ -28,7 +28,9 @@
     {
       "type": "relations",
       "entries": [
-        "resources/runestone"
+        "resources/runestone",
+        "apparatus/reinforced_offering_plate",
+        "apparatus/reinforced_pyre"
       ]
     }
   ]

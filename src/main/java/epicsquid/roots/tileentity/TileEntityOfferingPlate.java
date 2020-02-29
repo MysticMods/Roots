@@ -20,11 +20,11 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import java.util.UUID;
 
-public class TileEntityOffertoryPlate extends TileBase {
+public class TileEntityOfferingPlate extends TileBase {
   public ItemStackHandler inventory = new ItemStackHandler(1) {
     @Override
     protected void onContentsChanged(int slot) {
-      TileEntityOffertoryPlate.this.markDirty();
+      TileEntityOfferingPlate.this.markDirty();
       if (!world.isRemote) {
         updatePacketViaState();
       }
@@ -33,7 +33,7 @@ public class TileEntityOffertoryPlate extends TileBase {
   private UUID lastPlayer = null;
   private int progress = 0;
 
-  public TileEntityOffertoryPlate() {
+  public TileEntityOfferingPlate() {
     super();
   }
 
@@ -74,19 +74,33 @@ public class TileEntityOffertoryPlate extends TileBase {
   }
 
   @Override
-  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand,
-                          @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
+  public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
     this.lastPlayer = player.getUniqueID();
     markDirty();
+    int count = heldItem.getCount();
+    if (player.isSneaking()) {
+      count = 1;
+    }
 
     if (!heldItem.isEmpty()) {
-      if (inventory.getStackInSlot(0).isEmpty()) {
+      ItemStack inSlot = inventory.getStackInSlot(0);
+      boolean doInsert = false;
+      if (!inSlot.isEmpty() && ItemUtil.equalWithoutSize(inSlot, heldItem) && inSlot.getCount() < inSlot.getMaxStackSize()) {
+        if (!player.isSneaking()) {
+          count = Math.min(inSlot.getMaxStackSize() - inSlot.getCount(), heldItem.getCount());
+        }
+        doInsert = true;
+      } else if (inSlot.isEmpty()) {
+        doInsert = true;
+      }
+      if (doInsert) {
         ItemStack toInsert = heldItem.copy();
+        toInsert.setCount(count);
         ItemStack attemptedInsert = inventory.insertItem(0, toInsert, true);
         if (attemptedInsert.isEmpty()) {
           inventory.insertItem(0, toInsert, false);
-          player.getHeldItem(hand).shrink(toInsert.getCount());
+          player.getHeldItem(hand).shrink(count);
           if (player.getHeldItem(hand).getCount() == 0) {
             player.setHeldItem(hand, ItemStack.EMPTY);
           }
@@ -99,7 +113,7 @@ public class TileEntityOffertoryPlate extends TileBase {
     }
     if (heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND) {
       if (!inventory.getStackInSlot(0).isEmpty()) {
-        ItemStack extracted = inventory.extractItem(0, inventory.getStackInSlot(0).getCount(), false);
+        ItemStack extracted = inventory.extractItem(0, count, false);
         ItemUtil.spawnItem(world, getPos(), extracted);
         updatePacketViaState();
         return true;

@@ -1,4 +1,4 @@
-package epicsquid.roots.event.handlers;
+package epicsquid.roots.event;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;

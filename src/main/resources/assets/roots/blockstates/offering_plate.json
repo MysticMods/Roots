@@ -1,0 +1,10 @@
+{
+    "variants":{
+        "facing=down":  { "model": "roots:offering_plate", "x": 180 },
+        "facing=up":    { "model": "roots:offering_plate" },
+        "facing=north": { "model": "roots:offering_plate" },
+        "facing=south": { "model": "roots:offering_plate", "y": 180 },
+        "facing=west":  { "model": "roots:offering_plate", "y": 270 },
+        "facing=east":  { "model": "roots:offering_plate", "y": 90 }
+    }
+}

@@ -13,7 +13,7 @@
     "parent": "roots:fey_crafter",
     "criteria": {
         "runed_stone": {
-            "trigger": "roots:fey_crafter",
+            "trigger": "roots:fey_crafting",
             "conditions": {
                 "recipe": "roots:runed_obsidian"
             }

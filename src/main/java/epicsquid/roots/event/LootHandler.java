@@ -1,4 +1,4 @@
-package epicsquid.roots.event.handlers;
+package epicsquid.roots.event;
 
 import com.google.common.collect.Sets;
 import epicsquid.mysticalworld.MysticalWorld;

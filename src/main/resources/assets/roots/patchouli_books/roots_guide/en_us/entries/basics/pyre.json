@@ -21,12 +21,15 @@
     },
     {
       "type": "text",
-      "text": "$(warning) Standing stones must be place so the bottom-most block is at the same level as the pyre to be valid."
+      "text": "$(warning) Standing stones must be place so the bottom-most block is at the same level as the pyre to be valid.$(br2) $(info) Other variants of the pyre may be discovered in the future. See $(l:basics/pyre#related)related chapters$()."
     },
     {
       "type": "relations",
+      "anchor": "related",
       "entries": [
-        "basics/bucket_of_water"
+        "basics/bucket_of_water",
+        "apparatus/reinforced_pyre",
+        "apparatus/decorative_pyre"
       ]
     }
   ]

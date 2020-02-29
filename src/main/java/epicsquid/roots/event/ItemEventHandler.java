@@ -1,4 +1,4 @@
-package epicsquid.roots.event.handlers;
+package epicsquid.roots.event;
 
 import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.roots.Roots;

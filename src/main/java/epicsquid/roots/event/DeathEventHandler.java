@@ -1,4 +1,4 @@
-package epicsquid.roots.event.handlers;
+package epicsquid.roots.event;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.advancements.Advancements;

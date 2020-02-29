@@ -26,13 +26,11 @@ import java.util.List;
 public class ModBlocks {
 
   // All block
-  public static Block mortar, pyre, imbuer, structure_marker, offertory_plate, unending_bowl, reinforced_pyre;
+  public static Block mortar, pyre, imbuer, structure_marker, offering_plate, unending_bowl, reinforced_pyre, reinforced_offering_plate;
   public static Block incense_burner, wildwood_rune;
   public static Block grove_stone, fey_crafter;
-  public static Block fairy_grove_stone;
 
   public static Block fey_fire;
-  public static Block mark;
 
   public static BlockCropBase moonglow, pereskia, wildroot, spirit_herb, wildewheet, cloud_berry, infernal_bulb, dewgonia, stalicripe;
 
@@ -160,7 +158,8 @@ public class ModBlocks {
     event.addBlock(reinforced_pyre = new BlockReinforcedPyre(Material.ROCK, SoundType.STONE, 8.4f, "reinforced_pyre", TileEntityPyre.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(decorative_pyre = new BlockDecorativePyre(Material.WOOD, SoundType.WOOD, 1.4f, "decorative_pyre", TileEntityDecorativePyre.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(imbuer = new BlockImbuer(Material.WOOD, SoundType.WOOD, 1.4f, "imbuer", TileEntityImbuer.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(offertory_plate = new BlockOffertoryPlate(Material.ROCK, SoundType.STONE, 1.4f, "offertory_plate", TileEntityOffertoryPlate.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(offering_plate = new BlockOfferingPlate(Material.ROCK, SoundType.STONE, 1.4f, "offering_plate", TileEntityOfferingPlate.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(reinforced_offering_plate = new BlockReinforcedOfferingPlate(Material.ROCK, SoundType.STONE, 4.4f, "reinforced_offering_plate", TileEntityOfferingPlate.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(unending_bowl = new BlockUnendingBowl(Material.ROCK, SoundType.STONE, 1.4f, "unending_bowl", TileEntityUnendingBowl.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(incense_burner = new BlockIncenseBurner(Material.ROCK, SoundType.STONE, 1.4f, "incense_burner", TileEntityIncenseBurner.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
 

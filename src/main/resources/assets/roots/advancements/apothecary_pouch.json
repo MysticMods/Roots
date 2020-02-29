@@ -15,7 +15,7 @@
         "pouch": {
             "trigger": "roots:fey_crafting",
             "conditions": {
-                "recipe": "roots:apothercary_pouch"
+                "recipe": "roots:apothecary_pouch"
             }
         }
     }

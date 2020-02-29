@@ -7,7 +7,7 @@ import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.SummonCreatureRecipe;
 import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.ritual.conditions.ConditionValidSummon;
-import epicsquid.roots.tileentity.TileEntityOffertoryPlate;
+import epicsquid.roots.tileentity.TileEntityOfferingPlate;
 import epicsquid.roots.util.RitualUtil;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.EntityPlayer;
@@ -64,18 +64,18 @@ public class RitualSummonCreatures extends RitualBase {
   public EntityRitualBase doEffect(World world, BlockPos pos, @Nullable EntityPlayer player) {
     EntityRitualSummonCreatures entity = (EntityRitualSummonCreatures) this.spawnEntity(world, pos, EntityRitualSummonCreatures.class, player);
     if (!world.isRemote) {
-      List<TileEntityOffertoryPlate> plates = RitualUtil.getNearbyOfferingPlates(world, pos);
+      List<TileEntityOfferingPlate> plates = RitualUtil.getNearbyOfferingPlates(world, pos);
       List<ItemStack> plateItems = RitualUtil.getItemsFromNearbyPlates(plates);
 
       SummonCreatureRecipe recipe = ModRecipes.findSummonCreatureEntry(plateItems);
       if (recipe != null) {
-        for (TileEntityOffertoryPlate plate : plates) {
+        for (TileEntityOfferingPlate plate : plates) {
           plate.removeItem();
         }
       }
       ItemStack essence = ItemStack.EMPTY;
       if (recipe == null) {
-        for (TileEntityOffertoryPlate plate : plates) {
+        for (TileEntityOfferingPlate plate : plates) {
           ItemStack stack = plate.getHeldItem();
           if (stack.getItem() == ModItems.life_essence) {
             essence = stack;

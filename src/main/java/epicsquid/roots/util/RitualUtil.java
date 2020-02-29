@@ -2,7 +2,7 @@ package epicsquid.roots.util;
 
 import com.google.common.collect.Sets;
 import epicsquid.roots.init.ModBlocks;
-import epicsquid.roots.tileentity.TileEntityOffertoryPlate;
+import epicsquid.roots.tileentity.TileEntityOfferingPlate;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -76,12 +76,12 @@ public class RitualUtil {
 
   public static AxisAlignedBB OFFERING = new AxisAlignedBB(-6, -6, -6, 7, 7, 7);
 
-  public static List<TileEntityOffertoryPlate> getNearbyOfferingPlates(World world, BlockPos pos) {
+  public static List<TileEntityOfferingPlate> getNearbyOfferingPlates(World world, BlockPos pos) {
     AxisAlignedBB bounds = OFFERING.offset(pos);
     BlockPos max = max(bounds);
     BlockPos min = min(bounds);
 
-    List<TileEntityOffertoryPlate> result = new ArrayList<>();
+    List<TileEntityOfferingPlate> result = new ArrayList<>();
 
     for (BlockPos p : BlockPos.getAllInBoxMutable(max, min)) {
       if (world.isAirBlock(p)) {
@@ -89,10 +89,10 @@ public class RitualUtil {
       }
 
       IBlockState state = world.getBlockState(p);
-      if (state.getBlock() == ModBlocks.offertory_plate) {
+      if (state.getBlock() == ModBlocks.offering_plate || state.getBlock() == ModBlocks.reinforced_offering_plate) {
         TileEntity te = world.getTileEntity(p);
-        if (te instanceof TileEntityOffertoryPlate) {
-          result.add((TileEntityOffertoryPlate) te);
+        if (te instanceof TileEntityOfferingPlate) {
+          result.add((TileEntityOfferingPlate) te);
         }
       }
     }
@@ -100,9 +100,9 @@ public class RitualUtil {
     return result;
   }
 
-  public static List<ItemStack> getItemsFromNearbyPlates(List<TileEntityOffertoryPlate> plates) {
+  public static List<ItemStack> getItemsFromNearbyPlates(List<TileEntityOfferingPlate> plates) {
     List<ItemStack> stacks = new ArrayList<>();
-    for (TileEntityOffertoryPlate plate : plates) {
+    for (TileEntityOfferingPlate plate : plates) {
       ItemStack stack = plate.getHeldItem();
       if (!stack.isEmpty()) {
         stacks.add(stack);

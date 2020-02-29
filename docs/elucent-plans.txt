@@ -5,7 +5,7 @@
         Fairies were always a very incomplete concept in Roots 2. I had all sorts of plans for them, but none ever really came to fruition. Essentially,
         I wanted to make a school of magic that would have tricky or chaotic effects, instead of some kind of simple raw power.
     
-        Offertory Plate:
+        offering Plate:
             Runestone pedestal atop which items can be placed.
             Once per day, the items on the pedestal will be consumed and replaced with a small amount of fairy dust.
             Different items have different values:
