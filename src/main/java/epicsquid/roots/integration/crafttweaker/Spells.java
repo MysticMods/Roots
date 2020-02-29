@@ -1,5 +1,6 @@
 package epicsquid.roots.integration.crafttweaker;
 
+import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import epicsquid.roots.Roots;
 import epicsquid.roots.spell.SpellBase;
@@ -38,46 +39,57 @@ public class Spells {
       return original;
     }
 
+    public <T> Spell set (String propertyName, T value) {
+      PropertyTable table = original.getProperties();
+      try {
+        Property<T> prop = table.get(propertyName, value);
+        table.set(prop, value);
+      } catch (ClassCastException error) {
+        CraftTweakerAPI.logError("Invalid type for property '" + propertyName + "' for Spell " + original.getName(), error);
+      }
+      return this;
+    }
+
+    @ZenMethod
+    public Spell setDouble (String propertyName, double value) {
+      return set(propertyName, value);
+    }
+
     @ZenMethod
     public Spell setFloat (String propertyName, float value) {
-      PropertyTable props = original.getProperties();
-      Property<Float> prop = props.get(propertyName);
-      props.set(prop, value);
-      return this;
+      return set(propertyName, value);
     }
 
     @ZenMethod
     public Spell setInteger (String propertyName, int value) {
-      PropertyTable props = original.getProperties();
-      Property<Integer> prop = props.get(propertyName);
-      props.set(prop, value);
-      return this;
+      return set(propertyName, value);
     }
 
     @ZenMethod
     public Spell setCooldown (int value) {
-      return setInteger("cooldown", value);
+      return set("cooldown", value);
     }
 
     @ZenMethod
     public Spell setDamage (float value) {
-      return setFloat("damage", value);
+      return set("damage", value);
     }
 
     @ZenMethod
     public Spell setString (String propertyName, String value) {
-      PropertyTable props = original.getProperties();
-      Property<String> prop = props.get(propertyName);
-      props.set(prop, value);
-      return this;
+      return set(propertyName, value);
     }
 
     @ZenMethod
     public Spell setCost (int cost, Herbs.Herb herb, double amount) {
       PropertyTable props = original.getProperties();
-      Property<SpellBase.SpellCost> prop = props.get("cost_" + cost);
-      SpellBase.SpellCost newCost = new SpellBase.SpellCost(herb.getHerbName(), amount);
-      props.set(prop, newCost);
+      try {
+        Property<SpellBase.SpellCost> prop = props.get("cost_" + cost, SpellBase.SpellCost.EMPTY);
+        SpellBase.SpellCost newCost = new SpellBase.SpellCost(herb.getHerbName(), amount);
+        props.set(prop, newCost);
+      } catch (ClassCastException error) {
+        CraftTweakerAPI.logError("Invalid spell cost " + cost + " for Spell " + original.getName() + ". Additional costs cannot be added at this time.", error);
+      }
       return this;
     }
   }

@@ -28,6 +28,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import scala.xml.dtd.EMPTY;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.Constructor;
@@ -336,6 +337,8 @@ public abstract class SpellBase {
   }
 
   public static class SpellCost {
+    public static SpellCost EMPTY = new SpellCost(null, 0);
+
     private String herb;
     private double cost;
 
