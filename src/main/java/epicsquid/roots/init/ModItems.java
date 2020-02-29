@@ -11,6 +11,7 @@ import epicsquid.roots.item.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFlower;
+import net.minecraft.block.BlockTallGrass;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -210,6 +211,8 @@ public class ModItems {
     OreDictionary.registerOre("dustWheat", ModItems.flour);
     OreDictionary.registerOre("treeLeaves", ModBlocks.wildwood_leaves);
     OreDictionary.registerOre("leather", ModItems.fey_leather);
+    OreDictionary.registerOre("tallgrass", new ItemStack(Blocks.TALLGRASS, 1, BlockTallGrass.EnumType.GRASS.getMeta()));
+    OreDictionary.registerOre("tallgrass", new ItemStack(Blocks.TALLGRASS, 1, BlockTallGrass.EnumType.FERN.getMeta()));
   }
 
   private static void registerSeedDrops() {

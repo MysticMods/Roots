@@ -124,8 +124,8 @@ public class ModRecipes {
     addSummonCreatureEntry("owl", EntityOwl.class, new OreIngredient("treeSapling"), new OreIngredient("treeLeaves"));
     addSummonCreatureEntry("deer", EntityDeer.class, Ingredient.fromItem(ModItems.petals), Ingredient.fromItem(ModItems.bark_oak));
     addSummonCreatureEntry("sprout", EntitySprout.class, Ingredient.fromItem(ModItems.bark_birch), Ingredients.AUBERGINE);
-    addSummonCreatureEntry("beetle", EntityBeetle.class, new OreIngredient("grass"), Ingredient.fromItem(Item.getItemFromBlock(Blocks.RED_FLOWER)));
-    addSummonCreatureEntry("frog", EntityFrog.class, new OreIngredient("grass"), Ingredient.fromItem(Items.CLAY_BALL));
+    addSummonCreatureEntry("beetle", EntityBeetle.class, new OreIngredient("tallgrass"), Ingredient.fromItem(Item.getItemFromBlock(Blocks.RED_FLOWER)));
+    addSummonCreatureEntry("frog", EntityFrog.class, new OreIngredient("tallgrass"), Ingredient.fromItem(Items.CLAY_BALL));
     addSummonCreatureEntry("fox", EntityFox.class, Ingredient.fromItem(ModItems.bark_spruce), new OreIngredient("dustRedstone"));
     addSummonCreatureEntry("wolf", EntityWolf.class, new OreIngredient("bone"), Ingredient.fromItem(Items.FLINT));
     addSummonCreatureEntry("squid", EntitySquid.class, new OreIngredient("sugarcane"), new OreIngredient("paper"));
@@ -141,7 +141,7 @@ public class ModRecipes {
     addSummonCreatureEntry("chicken", EntityChicken.class, new OreIngredient("egg"), Ingredient.fromItem(Items.WHEAT_SEEDS));
     addSummonCreatureEntry("donkey", EntityDonkey.class, new OreIngredient("cropCarrot"), new OreIngredient("chestWood"));
     addSummonCreatureEntry("parrot", EntityParrot.class, Ingredient.fromItem(ModItems.bark_jungle), Ingredient.fromItem(Items.BEETROOT_SEEDS));
-    addSummonCreatureEntry("ocelot", EntityOcelot.class, new OreIngredient("grass"), Ingredient.fromItem(Items.SUGAR));
+    addSummonCreatureEntry("ocelot", EntityOcelot.class, new OreIngredient("tallgrass"), Ingredient.fromItem(Items.SUGAR));
     addSummonCreatureEntry("mule", EntityMule.class, new OreIngredient("cropWheat"), Ingredient.fromItem(Items.COAL));
   }
 
@@ -1074,7 +1074,7 @@ public class ModRecipes {
 
     addCraftingRecipe("dewgonia",
         new PyreCraftingRecipe(new ItemStack(ModItems.dewgonia, 3), 1).addIngredients(
-            new OreIngredient("grass"),
+            new OreIngredient("tallgrass"),
             new ItemStack(Items.SUGAR),
             new OreIngredient("dyeBlue"),
             new ItemStack(ModItems.terra_moss),
@@ -1083,7 +1083,7 @@ public class ModRecipes {
     addCraftingRecipe("cloud_berry",
         new PyreCraftingRecipe(new ItemStack(ModItems.cloud_berry, 3), 1).addIngredients(
             new OreIngredient("treeLeaves"),
-            new OreIngredient("grass"),
+            new OreIngredient("tallgrass"),
             new OreIngredient("wool"),
             new ItemStack(ModItems.terra_moss),
             new ItemStack(ModItems.terra_moss)));

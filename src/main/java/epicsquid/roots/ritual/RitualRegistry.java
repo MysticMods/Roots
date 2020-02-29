@@ -5,6 +5,7 @@ import epicsquid.roots.tileentity.TileEntityPyre;
 import net.minecraft.entity.player.EntityPlayer;
 
 import javax.annotation.Nullable;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,5 +73,9 @@ public class RitualRegistry {
 
   public static void finalise () {
     ritualRegistry.values().forEach(RitualBase::finalise);
+  }
+
+  public static Collection<RitualBase> getRituals () {
+    return ritualRegistry.values();
   }
 }

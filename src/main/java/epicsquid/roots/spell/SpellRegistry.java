@@ -2,11 +2,16 @@ package epicsquid.roots.spell;
 
 import epicsquid.roots.config.SpellConfig;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 public class SpellRegistry {
   public static Map<String, SpellBase> spellRegistry = new HashMap<>();
+
+  public static Collection<SpellBase> getSpells () {
+    return spellRegistry.values();
+  }
 
   public static SpellBase getSpell(String s) {
     SpellBase spell = spellRegistry.get(s);

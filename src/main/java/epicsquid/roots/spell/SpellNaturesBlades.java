@@ -49,7 +49,7 @@ public class SpellNaturesBlades extends SpellBase {
         new OreIngredient("wildroot"),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
         new ItemStack(Items.GOLDEN_HOE),
-        new OreIngredient("grass")
+        new OreIngredient("tallgrass")
     );
   }
 

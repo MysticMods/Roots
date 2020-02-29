@@ -29,7 +29,7 @@ public class RitualOvergrowth extends RitualBase {
         new ConditionItems(
             new OreIngredient("sugarcane"),
             new ItemStack(ModItems.terra_moss),
-            new OreIngredient("grass"),
+            new OreIngredient("tallgrass"),
             new OreIngredient("rootsBark"),
             new OreIngredient("rootsBark")));
     setIcon(ModItems.ritual_overgrowth);

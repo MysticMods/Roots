@@ -351,5 +351,13 @@ public abstract class SpellBase {
     public double getCost() {
       return cost;
     }
+
+    @Override
+    public String toString() {
+      return "SpellCost{" +
+          "herb='" + herb + '\'' +
+          ", cost=" + cost +
+          '}';
+    }
   }
 }
