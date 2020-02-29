@@ -198,6 +198,9 @@ public class TileEntityMortar extends TileBase {
 
   @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
+    if (hand != EnumHand.MAIN_HAND) {
+      return true;
+    }
     ItemStack heldItem = player.getHeldItem(hand);
     ItemStack offHand = player.getHeldItemOffhand();
     List<ItemStack> ingredients = getIngredients();
