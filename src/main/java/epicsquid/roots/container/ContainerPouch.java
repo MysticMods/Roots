@@ -24,8 +24,8 @@ import javax.annotation.Nonnull;
 
 public class ContainerPouch extends Container {
 
-  private PouchHandler.PouchItemHandler inventoryHandler;
-  private PouchHandler.PouchItemHandler herbsHandler;
+  private PouchHandler.NBTStackHandler inventoryHandler;
+  private PouchHandler.HerbNBTStackHandler herbsHandler;
   private PouchHandler handler;
   private EntityPlayer player;
   private ItemStack pouch;
@@ -173,28 +173,23 @@ public class ContainerPouch extends Container {
 
       if (index < 36) { // Player Inventory -> Inventory/herbs
         if (herb && !mergeItemStack(stack, herbStart, herbStop, false)) {
-          handler.saveToStack();
           return ItemStack.EMPTY;
         } else if (!herb && !mergeItemStack(stack, 36, herbStart, false)) {
-          handler.saveToStack();
           return ItemStack.EMPTY;
         }
       } else {
         if (!mergeItemStack(stack, 27, 36, false) && !mergeItemStack(stack, 0, 27, false)) {
-          handler.saveToStack();
           return ItemStack.EMPTY;
         }
       }
 
       if (stack.isEmpty()) {
         slot.putStack(ItemStack.EMPTY);
-        handler.saveToStack();
       }
 
       slot.onSlotChanged();
     }
 
-    handler.saveToStack();
     return slotStack;
   }
 

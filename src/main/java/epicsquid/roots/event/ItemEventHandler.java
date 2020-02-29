@@ -66,7 +66,7 @@ public class ItemEventHandler {
           List<ItemStack> pouches = PowderInventoryUtil.getPouches(player);
           for (ItemStack pouch : pouches) {
             PouchHandler handler = PouchHandler.getHandler(pouch);
-            PouchHandler.PouchHerbHandler herbs = handler.getHerbs();
+            PouchHandler.HerbNBTStackHandler herbs = handler.getHerbs();
             int refill = herbs.refill(stack);
             if (refill < original) {
               modified = true;

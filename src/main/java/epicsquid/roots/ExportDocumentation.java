@@ -1,5 +1,6 @@
 package epicsquid.roots;
 
+import epicsquid.roots.integration.crafttweaker.Rituals;
 import epicsquid.roots.integration.crafttweaker.tweaks.*;
 import epicsquid.roots.util.zen.ZenDocExporter;
 
@@ -21,9 +22,9 @@ public class ExportDocumentation {
         MortarTweaker.class,
         PacifistTweaker.class,
         PyreCraftingTweaker.class,
-        RitualTweaker.class,
         RunicShearsTweaker.class,
-        TransmutationTweaker.class
+        TransmutationTweaker.class,
+        Rituals.class
     };
 
     ZenDocExporter export = new ZenDocExporter();
