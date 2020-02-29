@@ -1,4 +1,4 @@
-package epicsquid.roots.event.handlers;
+package epicsquid.roots.event;
 
 import epicsquid.roots.Roots;
 import net.minecraftforge.fml.common.Mod;

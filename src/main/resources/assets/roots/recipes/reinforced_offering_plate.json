@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "RCR",
+    " C ",
+    "RCR"  ],
+  "key": {
+    "R": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "runedObsidian"
+      }
+    ],
+    "C": [
+      {
+        "item": "roots:chiseled_runed_obsidian",
+        "data": 0
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:reinforced_offering_plate",
+    "data": 0
+  }
+}

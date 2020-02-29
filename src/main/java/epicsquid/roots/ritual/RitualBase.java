@@ -22,7 +22,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public abstract class RitualBase {
-  protected static int OFFERTORY_RADIUS = 6;
+  protected static int offering_RADIUS = 6;
   protected static Random random = new Random();
 
   protected PropertyTable properties = new PropertyTable();

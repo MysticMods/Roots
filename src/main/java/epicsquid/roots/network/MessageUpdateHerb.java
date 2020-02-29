@@ -1,7 +1,7 @@
 package epicsquid.roots.network;
 
 import epicsquid.roots.api.Herb;
-import epicsquid.roots.event.handlers.ClientTickHandler;
+import epicsquid.roots.event.ClientTickHandler;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.util.PowderInventoryUtil;
 import io.netty.buffer.ByteBuf;

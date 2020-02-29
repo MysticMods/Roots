@@ -7,8 +7,8 @@
   "key": {
     "R": [
       {
-        "item": "roots:runestone",
-        "data": 0
+        "type": "forge:ore_dict",
+        "ore": "runestone"
       }
     ],
     "C": [
@@ -19,7 +19,7 @@
     ]
   },
   "result": {
-    "item": "roots:offertory_plate",
+    "item": "roots:offering_plate",
     "data": 0
   }
 }

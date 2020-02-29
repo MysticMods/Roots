@@ -1,4 +1,4 @@
-package epicsquid.roots.event.handlers;
+package epicsquid.roots.event;
 
 import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.mysticalworld.init.ModBlocks;
@@ -37,6 +37,9 @@ public class MappingsEvent {
           case "reinforced_bonfire":
             mapping.remap(epicsquid.roots.init.ModBlocks.reinforced_pyre);
             break;
+          case "offertory_plate":
+            mapping.remap(epicsquid.roots.init.ModBlocks.offering_plate);
+            break;
         }
       }
     }
@@ -71,6 +74,9 @@ public class MappingsEvent {
             break;
           case "reinforced_bonfire":
             mapping.remap(((BlockBase) epicsquid.roots.init.ModBlocks.reinforced_pyre).getItemBlock());
+            break;
+          case "offertory_plate":
+            mapping.remap(((BlockBase) epicsquid.roots.init.ModBlocks.offering_plate).getItemBlock());
             break;
         }
       }

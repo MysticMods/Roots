@@ -19,10 +19,10 @@
       "multiblock": {
         "mapping": {
           "0": "roots:pyre",
-          "W": "roots:offertory_plate[facing=west]",
-          "E": "roots:offertory_plate[facing=east]",
-          "N": "roots:offertory_plate[facing=north]",
-          "S": "roots:offertory_plate[facing=south]"
+          "W": "roots:offering_plate[facing=west]",
+          "E": "roots:offering_plate[facing=east]",
+          "N": "roots:offering_plate[facing=north]",
+          "S": "roots:offering_plate[facing=south]"
         },
         "pattern": [
           ["       ","       ","       ","       ","       ","       ","       "],

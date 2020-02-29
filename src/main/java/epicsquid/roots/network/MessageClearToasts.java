@@ -1,6 +1,6 @@
 package epicsquid.roots.network;
 
-import epicsquid.roots.event.handlers.ClientTickHandler;
+import epicsquid.roots.event.ClientTickHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;

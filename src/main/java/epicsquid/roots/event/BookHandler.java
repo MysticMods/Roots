@@ -1,4 +1,4 @@
-package epicsquid.roots.event.handlers;
+package epicsquid.roots.event;
 
 import epicsquid.mysticallib.world.books.BookRegistry;
 import epicsquid.roots.Roots;

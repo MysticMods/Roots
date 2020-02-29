@@ -1,7 +1,7 @@
 package epicsquid.roots.tileentity;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.block.BlockOffertoryPlate;
+import epicsquid.roots.block.BlockOfferingPlate;
 import epicsquid.roots.init.ModBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -15,19 +15,19 @@ import net.minecraft.util.EnumFacing;
 
 import java.util.Random;
 
-public class TileEntityOffertoryPlateRenderer extends TileEntitySpecialRenderer<TileEntityOffertoryPlate> {
+public class TileEntityOfferingPlateRenderer extends TileEntitySpecialRenderer<TileEntityOfferingPlate> {
 
   @Override
-  public void render(TileEntityOffertoryPlate tei, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+  public void render(TileEntityOfferingPlate tei, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     if (!tei.inventory.getStackInSlot(0).isEmpty()) {
       int count = getCount(tei.inventory.getStackInSlot(0));
       RenderItem r = Minecraft.getMinecraft().getRenderItem();
       IBlockState state = tei.getWorld().getBlockState(tei.getPos());
-      if (state.getBlock() != ModBlocks.offertory_plate) {
-        Roots.logger.error("Fatal error rendering offertory plate, block state was " + state.toString() + " when offertory plate was expected.");
+      if (state.getBlock() != ModBlocks.offering_plate && state.getBlock() != ModBlocks.reinforced_offering_plate) {
+        Roots.logger.error("Fatal error rendering offering plate, block state was " + state.toString() + " when offering plate was expected.");
         return;
       }
-      EnumFacing f = state.getValue(BlockOffertoryPlate.FACING);
+      EnumFacing f = state.getValue(BlockOfferingPlate.FACING);
       for (int i = 0; i < count; i++) {
         GlStateManager.pushMatrix();
         GlStateManager
