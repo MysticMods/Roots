@@ -1,137 +1,191 @@
 package epicsquid.roots.handler;
 
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemPouch;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 
-public class PouchHandler implements INBTSerializable<NBTTagCompound> {
+public class PouchHandler {
   public static final int COMPONENT_POUCH_HERB_SLOTS = 6;
   public static final int COMPONENT_POUCH_INVENTORY_SLOTS = 12;
   public static final int APOTHECARY_POUCH_HERB_SLOTS = 9;
   public static final int APOTHECARY_POUCH_INVENTORY_SLOTS = 18;
 
-  private PouchItemHandler inventorySlots;
-  private PouchHerbHandler herbSlots;
+  private NBTStackHandler inventorySlots;
+  private HerbNBTStackHandler herbSlots;
   private ItemStack pouch;
 
-  private boolean isApoth = false;
-
-  public PouchHandler(ItemStack pouch, int inventorySlots, int herbSlots) {
+  public PouchHandler(ItemStack pouch) {
     this.pouch = pouch;
-    if (inventorySlots == APOTHECARY_POUCH_INVENTORY_SLOTS) {
-      isApoth = true;
+
+    if (isApoth()) {
+      this.inventorySlots = new NBTStackHandler(pouch, "inventory", APOTHECARY_POUCH_INVENTORY_SLOTS);
+      this.herbSlots = new HerbNBTStackHandler(pouch, "herbs", APOTHECARY_POUCH_HERB_SLOTS);
+    } else {
+      this.inventorySlots = new NBTStackHandler(pouch, "inventory", COMPONENT_POUCH_INVENTORY_SLOTS);
+      this.herbSlots = new HerbNBTStackHandler(pouch, "herbs", COMPONENT_POUCH_HERB_SLOTS);
     }
-    this.inventorySlots = new PouchItemHandler(inventorySlots);
-    this.herbSlots = new PouchHerbHandler(herbSlots);
   }
 
-  public PouchItemHandler getInventory() {
+  private boolean isApoth () {
+    return ((ItemPouch) pouch.getItem()).isApothecary();
+  }
+
+  public NBTStackHandler getInventory() {
     return inventorySlots;
   }
 
-  public PouchHerbHandler getHerbs() {
+  public HerbNBTStackHandler getHerbs() {
     return herbSlots;
   }
 
-  @Override
-  public NBTTagCompound serializeNBT() {
-    NBTTagCompound tag = new NBTTagCompound();
-    tag.setTag("inventory_slots", inventorySlots.serializeNBT());
-    tag.setTag("herb_slots", herbSlots.serializeNBT());
-    return tag;
-  }
-
-  @Override
-  public void deserializeNBT(NBTTagCompound nbt) {
-    NBTTagCompound inv = nbt.getCompoundTag("inventory_slots");
-    NBTTagCompound herb = nbt.getCompoundTag("herb_slots");
-    if (isApoth) {
-      if (inv.getInteger("Size") != APOTHECARY_POUCH_INVENTORY_SLOTS) {
-        inv.setInteger("Size", APOTHECARY_POUCH_INVENTORY_SLOTS);
-      }
-      if (herb.getInteger("Size") != APOTHECARY_POUCH_HERB_SLOTS) {
-        herb.setInteger("Size", APOTHECARY_POUCH_HERB_SLOTS);
-      }
-    }
-    inventorySlots.deserializeNBT(inv);
-    herbSlots.deserializeNBT(herb);
-  }
-
   public static PouchHandler getHandler(ItemStack stack) {
-    PouchHandler handler;
-    boolean isApoth = ((ItemPouch) stack.getItem()).isApothecary();
-    if (isApoth) {
-      handler = new PouchHandler(stack, APOTHECARY_POUCH_INVENTORY_SLOTS, APOTHECARY_POUCH_HERB_SLOTS);
-    } else {
-      handler = new PouchHandler(stack, COMPONENT_POUCH_INVENTORY_SLOTS, COMPONENT_POUCH_HERB_SLOTS);
+    return new PouchHandler(stack);
+  }
+
+  public static class NBTStackHandler implements IItemHandler, IItemHandlerModifiable {
+    private ItemStack stack;
+    private int slots;
+    private String identifier;
+
+    public NBTStackHandler(ItemStack stack, String identifier, int slots) {
+      this.stack = stack;
+      this.identifier = identifier;
+      this.slots = slots;
+      ensureSlots(slots);
     }
-    if (stack.hasTagCompound()) {
-      NBTTagCompound tag = stack.getTagCompound();
-      if (tag.hasKey("handler")) {
-        handler.deserializeNBT(tag.getCompoundTag("handler"));
+
+    private void ensureSlots(int slots) {
+      NBTTagList tag = getTag();
+      if (tag.tagCount() < slots) {
+        for (int i = tag.tagCount(); i < slots; i++) {
+          tag.appendTag(ItemStack.EMPTY.serializeNBT());
+        }
       }
     }
 
-    return handler;
-  }
-
-  public void saveToStack() {
-    NBTTagCompound tag = pouch.getTagCompound();
-    if (tag == null) {
-      tag = new NBTTagCompound();
-      pouch.setTagCompound(tag);
-    }
-
-    tag.setTag("handler", serializeNBT());
-  }
-
-  public class PouchItemHandler extends ItemStackHandler {
-
-    public PouchItemHandler(int size) {
-      super(size);
-    }
-
-    @Override
-    protected void onContentsChanged(int slot) {
-      super.onContentsChanged(slot);
-
-      PouchHandler.this.saveToStack();
+    public NBTTagList getTag() {
+      NBTTagCompound tag = stack.getTagCompound();
+      if (tag == null) {
+        tag = new NBTTagCompound();
+        stack.setTagCompound(tag);
+      }
+      if (tag.hasKey(identifier, Constants.NBT.TAG_LIST)) {
+        return tag.getTagList(identifier, Constants.NBT.TAG_COMPOUND);
+      } else {
+        NBTTagList list = new NBTTagList();
+        tag.setTag(identifier, list);
+        return list;
+      }
     }
 
     @Override
     public void setStackInSlot(int slot, @Nonnull ItemStack stack) {
-      super.setStackInSlot(slot, stack);
+      if (slot >= slots) {
+        throw new IllegalStateException("Invalid slot " + slot + ", maximum number of slots is " + slots);
+      }
+      NBTTagList tag = getTag();
+      tag.set(slot, stack.serializeNBT());
+    }
 
-      PouchHandler.this.saveToStack();
+    @Override
+    public int getSlots() {
+      return slots;
+    }
+
+    @Nonnull
+    @Override
+    public ItemStack getStackInSlot(int slot) {
+      if (slot >= slots) {
+        throw new IllegalStateException("Invalid slot " + slot + ", maximum number of slots is " + slots);
+      }
+      NBTTagList tag = getTag();
+      return new ItemStack(tag.getCompoundTagAt(slot));
     }
 
     @Nonnull
     @Override
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-      ItemStack result = super.insertItem(slot, stack, simulate);
-      PouchHandler.this.saveToStack();
-      return result;
+      if (slot >= slots) {
+        throw new IllegalStateException("Invalid slot " + slot + ", maximum number of slots is " + slots);
+      }
+      NBTTagList tag = getTag();
+      ItemStack inSlot = new ItemStack(tag.getCompoundTagAt(slot));
+      if (!inSlot.isEmpty() && !ItemUtil.equalWithoutSize(inSlot, stack)) {
+        return stack;
+      }
+
+      if (inSlot.getCount() + stack.getCount() < inSlot.getMaxStackSize()) {
+        if (!simulate) {
+          inSlot.grow(stack.getCount());
+          tag.set(slot, inSlot.serializeNBT());
+        }
+        return ItemStack.EMPTY;
+      } else {
+        int remainder = stack.getCount() - (inSlot.getMaxStackSize() - inSlot.getCount());
+        if (simulate) {
+          inSlot.setCount(remainder);
+          return inSlot;
+        } else {
+          ItemStack result = inSlot.copy();
+          result.setCount(remainder);
+          inSlot.setCount(inSlot.getMaxStackSize());
+          tag.set(slot, inSlot.serializeNBT());
+          return result;
+        }
+      }
     }
 
     @Nonnull
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
-      ItemStack result = super.extractItem(slot, amount, simulate);
+      if (slot >= slots) {
+        throw new IllegalStateException("Invalid slot " + slot + ", maximum number of slots is " + slots);
+      }
+      NBTTagList tag = getTag();
+      ItemStack inSlot = new ItemStack(tag.getCompoundTagAt(slot));
+      if (inSlot.isEmpty()) {
+        return ItemStack.EMPTY;
+      }
 
-      PouchHandler.this.saveToStack();
-      return result;
+      if (inSlot.getCount() <= amount) {
+        if (!simulate) {
+          tag.set(slot, ItemStack.EMPTY.serializeNBT());
+        }
+        return inSlot;
+      } else {
+        ItemStack result = inSlot.copy();
+        result.setCount(amount);
+        if (simulate) {
+          return result;
+        }
+
+        inSlot.shrink(amount);
+        tag.set(slot, inSlot.serializeNBT());
+        return result;
+      }
+    }
+
+    @Override
+    public int getSlotLimit(int slot) {
+      return 64;
     }
   }
 
-  public class PouchHerbHandler extends PouchItemHandler {
-    public PouchHerbHandler(int size) {
-      super(size);
+  public static class HerbNBTStackHandler extends NBTStackHandler {
+    public HerbNBTStackHandler(ItemStack stack, String identifier, int slots) {
+      super(stack, identifier, slots);
     }
 
     @Override
@@ -139,7 +193,7 @@ public class PouchHandler implements INBTSerializable<NBTTagCompound> {
       return HerbRegistry.isHerb(stack.getItem());
     }
 
-    public int refill (ItemStack herbStack) {
+    public int refill(ItemStack herbStack) {
       if (!containsHerb(herbStack.getItem())) {
         return herbStack.getCount();
       }
@@ -147,14 +201,16 @@ public class PouchHandler implements INBTSerializable<NBTTagCompound> {
       Item herb = herbStack.getItem();
       int count = herbStack.getCount();
 
-      for (ItemStack stack : stacks) {
+      NBTTagList tag = getTag();
+      for (int i = 0; i < tag.tagCount(); i++) {
+        ItemStack stack = new ItemStack(tag.getCompoundTagAt(i));
         if (stack.getItem() == herb) {
           if (stack.getCount() < stack.getMaxStackSize()) {
             int consumed = Math.min(count, stack.getMaxStackSize() - stack.getCount());
             if (consumed > 0) {
               stack.grow(consumed);
               count = Math.max(0, count - consumed);
-              PouchHandler.this.saveToStack();
+              tag.set(i, stack.serializeNBT());
             }
           }
         }
@@ -167,7 +223,9 @@ public class PouchHandler implements INBTSerializable<NBTTagCompound> {
     }
 
     public boolean containsHerb(Item item) {
-      for (ItemStack stack : stacks) {
+      NBTTagList tag = getTag();
+      for (int i = 0; i < tag.tagCount(); i++) {
+        ItemStack stack = new ItemStack(tag.getCompoundTagAt(i));
         if (stack.getItem() == item) {
           return true;
         }

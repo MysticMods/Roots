@@ -29,18 +29,28 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemPouch extends ItemBase implements IItemPouch {
+  public enum PouchType {
+    COMPONENT, APOTHECARY, CREATIVE;
+  }
+
+  private PouchType type = PouchType.COMPONENT;
 
   public ItemPouch(@Nonnull String name) {
     super(name);
     this.setMaxStackSize(1);
   }
 
+  public ItemPouch(@Nonnull String name, PouchType type) {
+    this(name);
+    this.type = type;
+  }
+
   public boolean isApothecary() {
-    return false;
+    return this.type == PouchType.APOTHECARY;
   }
 
   public boolean isCreative () {
-    return false;
+    return this.type == PouchType.CREATIVE;
   }
 
   public static boolean hasHerb(@Nonnull ItemStack pouch, Herb herb) {
@@ -127,7 +137,9 @@ public class ItemPouch extends ItemBase implements IItemPouch {
 
   private static boolean addHerbToNbt(@Nonnull ItemStack pouch, Herb herb) {
     PouchHandler pouchHandler = PouchHandler.getHandler(pouch);
-    if (pouchHandler == null) return false;
+    if (pouchHandler == null) {
+      return false;
+    }
     IItemHandler handler = pouchHandler.getHerbs();
     for (int i = 0; i < handler.getSlots(); i++) {
       ItemStack stack = handler.getStackInSlot(i);
