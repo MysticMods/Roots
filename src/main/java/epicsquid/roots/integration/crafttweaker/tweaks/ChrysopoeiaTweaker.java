@@ -18,11 +18,11 @@ import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-@ZenDocClass("mods.roots.Transubstantiate")
-@ZenDocAppend({"docs/include/transubstantiate.example.md"})
+@ZenDocClass("mods.roots.Chrysopoeia")
+@ZenDocAppend({"docs/include/chrysopoeia.example.md"})
 @ZenRegister
-@ZenClass("mods." + Roots.MODID + ".Transubstantiate")
-public class TransubstantiateTweaker {
+@ZenClass("mods." + Roots.MODID + ".Chrysopoeia")
+public class ChrysopoeiaTweaker {
 
   @ZenDocMethod(
       order = 1,

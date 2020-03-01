@@ -1,4 +1,4 @@
-package epicsquid.roots.integration.jei.transubstantiation;
+package epicsquid.roots.integration.jei.chrysopoeia;
 
 import epicsquid.roots.recipe.ChrysopoeiaRecipe;
 import mezz.jei.api.ingredients.IIngredients;

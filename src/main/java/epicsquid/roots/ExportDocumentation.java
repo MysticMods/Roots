@@ -24,7 +24,8 @@ public class ExportDocumentation {
         PyreCraftingTweaker.class,
         RunicShearsTweaker.class,
         TransmutationTweaker.class,
-        Rituals.class
+        Rituals.class,
+        ChrysopoeiaTweaker.class
     };
 
     ZenDocExporter export = new ZenDocExporter();
