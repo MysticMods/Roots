@@ -94,4 +94,38 @@ CraftTweaker
 
 All other documentation can be found on Jared's official CraftTweaker documentation website, [starting here with Animal Harvest](https://docs.blamejared.com/1.12/en/#Mods/Roots_3/animalharvest/), which should also link to the rest of the sections.
 
+***Rituals and Spells are not currently documented.***
 
+Simply put,
+
+```
+Rituals.getRitual("animal_harvest").setInt("radius_x", 40);
+
+Spells.getSpell("dandelion_winds").setFloat("distance", 0.95f);
+```
+
+To get all properties you can use:
+
+`/roots rituals`
+
+and
+
+`/roots spells`
+
+Both will output to `roots.log`.
+
+Scratch Space
+=============
+
+Name changes
+------------
+
+- `roots:bonfire` is now `roots:pyre`
+- `roots:offertory_plate` is now `roots:offering_plate`
+- `roots:assorted_seeds` are now in Mystical World, `mysticalworld:assorted_seeds`
+- Poisoned potato crop have been removed from Mystical World
+
+CraftTweaker changes
+--------------------
+
+- `mods.roots.Ritual` is now `mods.roots.Rituals`
