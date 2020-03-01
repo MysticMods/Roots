@@ -238,7 +238,7 @@ public class TileEntityMortar extends TileBase {
         return handleCraft(player.getPosition());
       }
     }
-    if (heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND) {
+    if (heldItem.isEmpty() && !world.isRemote) {
       for (int i = inventory.getSlots() - 1; i >= 0; i--) {
         if (this.dropItemInInventory(inventory, i)) {
           return true;
@@ -255,6 +255,5 @@ public class TileEntityMortar extends TileBase {
       Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
     }
   }
-
 }
 
