@@ -11,6 +11,7 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.MessageUpdateHerb;
 import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.util.ClientHerbUtil;
 import epicsquid.roots.util.HerbHud;
 import epicsquid.roots.util.ServerHerbUtil;
 import epicsquid.roots.util.types.Property;
@@ -130,7 +131,7 @@ public abstract class SpellBase {
         if (!player.world.isRemote) {
           r = ServerHerbUtil.getPowderTotal(player, herb);
         } else {
-          r = HerbHud.herbAmount(herb);
+          r = ClientHerbUtil.herbAmount(herb);
         }
         matches = r >= d;
         if (!matches && !player.isCreative()) {
