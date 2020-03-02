@@ -2,6 +2,7 @@ package epicsquid.roots.spell;
 
 import epicsquid.roots.entity.spell.EntityBoost;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.recipe.ingredient.ArrowBuilder;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,7 +32,7 @@ public class SpellSkySoarer extends SpellBase {
     addIngredients(
         new ItemStack(Item.getItemFromBlock(Blocks.LADDER)),
         new ItemStack(ModItems.petals),
-        new ItemStack(Items.ARROW),
+        ArrowBuilder.get(),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),
         new ItemStack(ModItems.cloud_berry)
     );
