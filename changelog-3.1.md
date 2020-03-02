@@ -25,6 +25,21 @@ Most importantly, please include:
 - the most recent crash report
 - any steps that you can recall that led to this
 
+Changelog
+=========
+
+alpha2
+------
+
+- Added utility function to MysticalLib to save reusing the same snippet of code over and over.
+- Moved Component Pouch and Apothecary Pouch item handlers to server-side only and stored them in world save data.
+- This has an impact on casting spells and the HUD updates, but these should've been completely resolved in this release.
+
+Known issues
+------------
+
+- Soil exchange is currently broken, returning either the wrong soil or not consuming from your inventory
+
 Bug Fixes
 =========
 
