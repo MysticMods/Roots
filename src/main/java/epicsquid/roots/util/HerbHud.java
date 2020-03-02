@@ -20,7 +20,7 @@ import java.util.Map;
 
 @SideOnly(Side.CLIENT)
 @SuppressWarnings("Duplicates")
-@Mod.EventBusSubscriber(modid= Roots.MODID)
+@Mod.EventBusSubscriber(modid= Roots.MODID, value=Side.CLIENT)
 public class HerbHud {
   private static HerbAlert slot1 = null;
   private static HerbAlert slot2 = null;
