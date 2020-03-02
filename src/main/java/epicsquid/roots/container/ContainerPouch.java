@@ -7,26 +7,33 @@
 
 package epicsquid.roots.container;
 
+import epicsquid.roots.handler.ClientPouchHandler;
+import epicsquid.roots.handler.IPouchHandler;
 import epicsquid.roots.handler.PouchHandler;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemPouch;
-import epicsquid.roots.util.PowderInventoryUtil;
+import epicsquid.roots.util.ServerHerbUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
 public class ContainerPouch extends Container {
 
-  private PouchHandler.NBTStackHandler inventoryHandler;
-  private PouchHandler.HerbNBTStackHandler herbsHandler;
-  private PouchHandler handler;
+  private IItemHandlerModifiable inventoryHandler;
+  private IItemHandlerModifiable herbsHandler;
+  private IPouchHandler handler;
   private EntityPlayer player;
   private ItemStack pouch;
 
@@ -35,11 +42,16 @@ public class ContainerPouch extends Container {
   private int inventoryEnd;
   private int herbsEnd;
 
-  public ContainerPouch(EntityPlayer player) {
+  private boolean isServerSide;
+
+  private SlotSupplier supplier;
+
+  public ContainerPouch(EntityPlayer player, boolean isServerSide) {
     this.player = player;
+    this.isServerSide = isServerSide;
     ItemStack main = player.getHeldItemMainhand();
     ItemStack off = player.getHeldItemOffhand();
-    ItemStack first = PowderInventoryUtil.getFirstPouch(player);
+    ItemStack first = ServerHerbUtil.getFirstPouch(player);
 
     ItemStack use = ItemStack.EMPTY;
     if (main.getItem() instanceof ItemPouch) {
@@ -50,11 +62,16 @@ public class ContainerPouch extends Container {
       use = first;
     }
 
-    handler = PouchHandler.getHandler(use);
+    if (isServerSide) {
+      handler = PouchHandler.getHandler(use);
+    } else {
+      handler = new ClientPouchHandler(use);
+    }
     inventoryHandler = handler.getInventory();
     herbsHandler = handler.getHerbs();
+    supplier = PouchSlot::new;
 
-    this.pouch = use;
+    pouch = use;
 
     createPlayerInventory(player.inventory);
     createPouchSlots();
@@ -76,15 +93,15 @@ public class ContainerPouch extends Container {
     for (int i = 0; i < inventoryHandler.getSlots(); i++) {
       // Top Row
       if (i < 5) {
-        addSlotToContainer(new SlotItemHandler(inventoryHandler, q++, xOffset + 11 + (i * 21), yOffset + 23));
+        addSlotToContainer(supplier.create(inventoryHandler, q++, xOffset + 11 + (i * 21), yOffset + 23));
       }
       // Middle Row
       if (i >= 5 && i < 9) {
-        addSlotToContainer(new SlotItemHandler(inventoryHandler, q++, xOffset + 22 + ((i - 5) * 21), yOffset + 44));
+        addSlotToContainer(supplier.create(inventoryHandler, q++, xOffset + 22 + ((i - 5) * 21), yOffset + 44));
       }
       // Bottom Row
       if (i >= 9 && i < 12) {
-        addSlotToContainer(new SlotItemHandler(inventoryHandler, q++, xOffset + 33 + ((i - 9) * 21), yOffset + 65));
+        addSlotToContainer(supplier.create(inventoryHandler, q++, xOffset + 33 + ((i - 9) * 21), yOffset + 65));
       }
       // Herb Pouch
     }
@@ -93,7 +110,7 @@ public class ContainerPouch extends Container {
       if (q >= 12 && q < 18) {
         // Controls which row the slots appear on
         int yPosOffset = q >= 14 ? q >= 16 ? 21 * 2 : 21 : 0;
-        addSlotToContainer(new SlotItemHandler(herbsHandler, i, xOffset + 127 + (21 * (q % 2)), yOffset + 23 + yPosOffset));
+        addSlotToContainer(supplier.create(herbsHandler, i, xOffset + 127 + (21 * (q % 2)), yOffset + 23 + yPosOffset));
         q++;
       }
     }
@@ -107,15 +124,15 @@ public class ContainerPouch extends Container {
     for (int i = 0; i < inventoryHandler.getSlots(); i++) {
       // Top Row
       if (i < 6) {
-        addSlotToContainer(new SlotItemHandler(inventoryHandler, q, xOffset + 25 + (20 * (q % 6)), yOffset + 19));
+        addSlotToContainer(supplier.create(inventoryHandler, q, xOffset + 25 + (20 * (q % 6)), yOffset + 19));
       }
       // Middle Slot
       if (i >= 6 && i < 12) {
-        addSlotToContainer(new SlotItemHandler(inventoryHandler, q, xOffset + 25 + (20 * (q % 6)), yOffset + 43));
+        addSlotToContainer(supplier.create(inventoryHandler, q, xOffset + 25 + (20 * (q % 6)), yOffset + 43));
       }
       // Bottom Slot
       if (i >= 12 && i < 18) {
-        addSlotToContainer(new SlotItemHandler(inventoryHandler, q, xOffset + 25 + (20 * (q % 6)), yOffset + 66));
+        addSlotToContainer(supplier.create(inventoryHandler, q, xOffset + 25 + (20 * (q % 6)), yOffset + 66));
       }
       q++;
     }
@@ -124,13 +141,13 @@ public class ContainerPouch extends Container {
       // Add Herb Slots
       q = inventoryEnd + i;
       if (q >= 18 && q < 21) {
-        addSlotToContainer(new SlotItemHandler(herbsHandler, i, xOffset + 149 + (16 * (q % 3)), yOffset + 16 + (4 * (q % 2))));
+        addSlotToContainer(supplier.create(herbsHandler, i, xOffset + 149 + (16 * (q % 3)), yOffset + 16 + (4 * (q % 2))));
       }
       if (q >= 21 && q < 24) {
-        addSlotToContainer(new SlotItemHandler(herbsHandler, i, xOffset + 149 + (16 * (q % 3)), yOffset + 39 + (4 * ((q + 1) % 2))));
+        addSlotToContainer(supplier.create(herbsHandler, i, xOffset + 149 + (16 * (q % 3)), yOffset + 39 + (4 * ((q + 1) % 2))));
       }
       if (q >= 24 && q < 27) {
-        addSlotToContainer(new SlotItemHandler(herbsHandler, i, xOffset + 149 + (16 * (q % 3)), yOffset + 64 + (4 * (q % 2))));
+        addSlotToContainer(supplier.create(herbsHandler, i, xOffset + 149 + (16 * (q % 3)), yOffset + 64 + (4 * (q % 2))));
       }
     }
     herbsEnd = q + 1;
@@ -153,7 +170,10 @@ public class ContainerPouch extends Container {
 
   @Override
   public boolean canInteractWith(@Nonnull EntityPlayer player) {
-    return true;
+    ItemStack main = player.getHeldItemMainhand();
+    ItemStack off = player.getHeldItemOffhand();
+    ItemStack first = ServerHerbUtil.getFirstPouch(player);
+    return (main.equals(pouch) || off.equals(pouch) || first.equals(pouch));
   }
 
   @Override
@@ -204,5 +224,53 @@ public class ContainerPouch extends Container {
     }
 
     return super.slotClick(slotId, dragType, clickTypeIn, player);
+  }
+
+  @Override
+  public void detectAndSendChanges() {
+    super.detectAndSendChanges();
+
+    handler.markDirty();
+  }
+
+  @Override
+  public void onContainerClosed(EntityPlayer playerIn) {
+    super.onContainerClosed(playerIn);
+
+    if (!player.world.isRemote) {
+      Objects.requireNonNull(player.world.getMapStorage()).saveAllData();
+    }
+  }
+
+  @FunctionalInterface
+  public interface SlotSupplier {
+    Slot create(IItemHandler itemHandler, int index, int xPosition, int yPosition);
+  }
+
+  public class PouchSlot extends SlotItemHandler {
+    public PouchSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+      super(itemHandler, index, xPosition, yPosition);
+    }
+
+    @Override
+    public boolean isItemValid(@Nonnull ItemStack stack) {
+      if (stack.getItem() instanceof ItemPouch) {
+        return false;
+      }
+
+      return super.isItemValid(stack);
+    }
+
+    @Override
+    public void onSlotChange(@Nonnull ItemStack stack1, @Nonnull ItemStack stack2) {
+      super.onSlotChange(stack1, stack2);
+      handler.markDirty();
+    }
+
+    @Override
+    public void onSlotChanged() {
+      super.onSlotChanged();
+      handler.markDirty();
+    }
   }
 }

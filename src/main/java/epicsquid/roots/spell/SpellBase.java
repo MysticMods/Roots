@@ -11,7 +11,8 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.MessageUpdateHerb;
 import epicsquid.roots.spell.modules.SpellModule;
-import epicsquid.roots.util.PowderInventoryUtil;
+import epicsquid.roots.util.HerbHud;
+import epicsquid.roots.util.ServerHerbUtil;
 import epicsquid.roots.util.types.Property;
 import epicsquid.roots.util.types.PropertyTable;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
@@ -28,7 +29,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import scala.xml.dtd.EMPTY;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.Constructor;
@@ -126,13 +126,22 @@ public abstract class SpellBase {
       Herb herb = entry.getKey();
       double d = entry.getValue();
       if (matches) {
-        double r = PowderInventoryUtil.getPowderTotal(player, herb);
+        double r;
+        if (!player.world.isRemote) {
+          r = ServerHerbUtil.getPowderTotal(player, herb);
+        } else {
+          r = HerbHud.herbAmount(herb);
+        }
         matches = r >= d;
         if (!matches && !player.isCreative()) {
           if (r == -1.0) {
-            player.sendStatusMessage(new TextComponentTranslation("roots.info.pouch.no_pouch").setStyle(new Style().setColor(TextFormatting.RED)), true);
+            if (!player.world.isRemote) {
+              player.sendStatusMessage(new TextComponentTranslation("roots.info.pouch.no_pouch").setStyle(new Style().setColor(TextFormatting.RED)), true);
+            }
           } else {
-            player.sendStatusMessage(new TextComponentTranslation("roots.info.pouch.no_herbs", new TextComponentTranslation(String.format("item.%s.name", herb.getName()))), true);
+            if (!player.world.isRemote) {
+              player.sendStatusMessage(new TextComponentTranslation("roots.info.pouch.no_herbs", new TextComponentTranslation(String.format("item.%s.name", herb.getName()))), true);
+            }
           }
         }
       }
@@ -144,7 +153,7 @@ public abstract class SpellBase {
     for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
       Herb herb = entry.getKey();
       double d = entry.getValue();
-      PowderInventoryUtil.removePowder(player, herb, d);
+      ServerHerbUtil.removePowder(player, herb, d);
     }
   }
 
@@ -152,11 +161,7 @@ public abstract class SpellBase {
     for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
       Herb herb = entry.getKey();
       double d = entry.getValue();
-      PowderInventoryUtil.removePowder(player, herb, d / 20.0);
-      if (player instanceof EntityPlayerMP) {
-        MessageUpdateHerb packet = new MessageUpdateHerb(herb);
-        PacketHandler.INSTANCE.sendTo(packet, (EntityPlayerMP) player);
-      }
+      ServerHerbUtil.removePowder(player, herb, d / 20.0);
     }
   }
 

@@ -33,7 +33,7 @@ public class GuiHandler implements IGuiHandler {
   public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
     switch (id) {
       case POUCH_ID:
-        return new ContainerPouch(player);
+        return new ContainerPouch(player, true);
       case QUIVER_ID:
         return new ContainerQuiver(player);
       case CRAFTER_ID:
@@ -51,7 +51,7 @@ public class GuiHandler implements IGuiHandler {
   public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
     switch (id) {
       case POUCH_ID:
-        return new GuiPouch(new ContainerPouch(player));
+        return new GuiPouch(new ContainerPouch(player, false));
       case QUIVER_ID:
         return new GuiQuiver(new ContainerQuiver(player));
       case CRAFTER_ID:
