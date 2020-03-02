@@ -17,7 +17,7 @@
       "type": "crafting",
       "recipe": "roots:pyre",
       "title": "Pyre",
-      "text": "Some rituals require runestones placed in specific configurations in addition to the pyre, or have other requirements.$(br2)$(info) In all cases, these will be displayed on the page after the ingredients of the ritual."
+      "text": "Some rituals require $(l:rituals/standing_stones)runestones placed in specific configurations$() in addition to the pyre, or have other requirements.$(br2)$(info) In all cases, these will be displayed on the page after the ingredients of the ritual."
     },
     {
       "type": "relations",
