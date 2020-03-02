@@ -53,11 +53,11 @@ public class ItemPouch extends ItemBase implements IItemPouch {
     return this.type == PouchType.CREATIVE;
   }
 
-  public static boolean hasHerb(@Nonnull ItemStack pouch, Herb herb) {
-    return getHerbQuantity(pouch, herb) > 0;
-  }
+  public static double getHerbQuantity(EntityPlayer player, ItemStack pouch, Herb herb) {
+    if (player.world.isRemote) {
+      return 0;
+    }
 
-  public static double getHerbQuantity(@Nonnull ItemStack pouch, Herb herb) {
     PouchHandler pouchHandler = PouchHandler.getHandler(pouch);
     if (pouchHandler == null) return 0.0;
     double count = getNbtQuantity(pouch, herb.getName());
@@ -75,7 +75,7 @@ public class ItemPouch extends ItemBase implements IItemPouch {
   @Nonnull
   public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
     ItemStack stack = player.getHeldItem(hand);
-    boolean isBaublesLoaded = Loader.isModLoaded("baubles");
+/*    boolean isBaublesLoaded = Loader.isModLoaded("baubles");
     boolean open_gui = false;
     if (GeneralConfig.AutoEquipPouches) {
       if (player.isSneaking()) {
@@ -90,8 +90,8 @@ public class ItemPouch extends ItemBase implements IItemPouch {
       }
     } else {
       open_gui = true;
-    }
-    if (!world.isRemote && open_gui) {
+    }*/
+    if (!world.isRemote) {
       player.openGui(Roots.getInstance(), GuiHandler.POUCH_ID, world, 0, 0, 0);
     }
     return new ActionResult<>(EnumActionResult.SUCCESS, stack);
@@ -114,28 +114,35 @@ public class ItemPouch extends ItemBase implements IItemPouch {
     return 0.0;
   }
 
-  public static double useQuantity(@Nonnull ItemStack stack, Herb herb, double quantity) {
+  public static double useQuantity(EntityPlayer player, ItemStack stack, Herb herb, double quantity) {
+    if (player.world.isRemote) {
+      return 0;
+    }
     double temp = quantity;
     if (stack.hasTagCompound() && stack.getTagCompound().hasKey(herb.getName())) {
       temp = temp - stack.getTagCompound().getDouble(herb.getName());
       if (temp >= 0) {
         stack.getTagCompound().removeTag(herb.getName());
-        if (temp > 0 && addHerbToNbt(stack, herb)) {
-          temp = useQuantity(stack, herb, temp);
+        if (temp > 0 && addHerbToNbt(player, stack, herb)) {
+          temp = useQuantity(player, stack, herb, temp);
         }
       } else {
         stack.getTagCompound().setDouble(herb.getName(), stack.getTagCompound().getDouble(herb.getName()) - quantity);
         temp = 0;
       }
     } else {
-      if (addHerbToNbt(stack, herb)) {
-        temp = useQuantity(stack, herb, quantity);
+      if (addHerbToNbt(player, stack, herb)) {
+        temp = useQuantity(player, stack, herb, quantity);
       }
     }
     return temp;
   }
 
-  private static boolean addHerbToNbt(@Nonnull ItemStack pouch, Herb herb) {
+  private static boolean addHerbToNbt(EntityPlayer player, ItemStack pouch, Herb herb) {
+    if (player.world.isRemote) {
+      return false;
+    }
+
     PouchHandler pouchHandler = PouchHandler.getHandler(pouch);
     if (pouchHandler == null) {
       return false;

@@ -9,7 +9,7 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemRunicShears;
-import epicsquid.roots.util.PowderInventoryUtil;
+import epicsquid.roots.util.ServerHerbUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -63,11 +63,10 @@ public class ItemEventHandler {
         int original = stack.getCount();
         if (HerbRegistry.isHerb(item)) {
           boolean modified = false;
-          List<ItemStack> pouches = PowderInventoryUtil.getPouches(player);
+          List<ItemStack> pouches = ServerHerbUtil.getPouches(player);
           for (ItemStack pouch : pouches) {
             PouchHandler handler = PouchHandler.getHandler(pouch);
-            PouchHandler.HerbNBTStackHandler herbs = handler.getHerbs();
-            int refill = herbs.refill(stack);
+            int refill = handler.refill(stack);
             if (refill < original) {
               modified = true;
               stack.setCount(refill);

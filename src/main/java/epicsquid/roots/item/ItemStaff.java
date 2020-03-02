@@ -73,7 +73,7 @@ public class ItemStaff extends ItemBase {
             if (spell.costsMet(player)) {
               boolean result = spell.cast(player, capability.getSelectedModules(), 0);
               if (result) {
-                if (!player.capabilities.isCreativeMode) {
+                if (!player.capabilities.isCreativeMode && !world.isRemote) {
                   spell.enactCosts(player);
                   capability.setCooldown(spell.getCooldown());
                   capability.setLastCooldown(spell.getCooldown());
@@ -101,7 +101,7 @@ public class ItemStaff extends ItemBase {
           if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
             if (spell.costsMet((EntityPlayer) player)) {
               boolean result = spell.cast((EntityPlayer) player, capability.getSelectedModules(), count);
-              if (result) {
+              if (result && !player.world.isRemote) {
                 spell.enactTickCosts((EntityPlayer) player);
               }
             }

@@ -2,10 +2,6 @@ package epicsquid.roots.util;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
-import epicsquid.roots.init.ModItems;
-import epicsquid.roots.integration.baubles.pouch.BaublePowderInventoryUtil;
-import epicsquid.roots.item.ItemPouch;
-import epicsquid.roots.item.ItemSylvanArmor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
@@ -13,124 +9,34 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-@Mod.EventBusSubscriber(modid = Roots.MODID)
-public class PowderInventoryUtil {
-  private static Map<Herb, HerbAlert> alerts = new HashMap<>();
+@SideOnly(Side.CLIENT)
+@SuppressWarnings("Duplicates")
+@Mod.EventBusSubscriber(modid= Roots.MODID)
+public class HerbHud {
   private static HerbAlert slot1 = null;
   private static HerbAlert slot2 = null;
+  private static Map<Herb, HerbAlert> alerts = new HashMap<>();
 
-  public static ItemStack getFirstPouch (EntityPlayer player) {
-    List<ItemStack> pouches = getPouches(player);
-    if (pouches.isEmpty()) {
-      return ItemStack.EMPTY;
-    }
-
-    return pouches.get(0);
+  public static double herbAmount (Herb herb) {
+    HerbAlert alert = getAlert(herb);
+    return alert.getAmount();
   }
 
-  public static List<ItemStack> getPouches(EntityPlayer player) {
-    List<ItemStack> result = new ArrayList<>();
-    if (Loader.isModLoaded("baubles")) {
-      ItemStack stack = BaublePowderInventoryUtil.getPouch(player);
-      if (!stack.isEmpty()) {
-        result.add(stack);
-      }
-    }
-
-    for (int i = 0; i < 36; i++) {
-      if (player.inventory.getStackInSlot(i).getItem() instanceof ItemPouch) {
-        result.add(player.inventory.getStackInSlot(i));
-      }
-    }
-
-    return result;
+  public static void updateHerb (Herb herb, double amount) {
+    HerbAlert alert = getAlert(herb);
+    alert.setAmount(amount);
   }
 
-  public static double getPowderTotal(EntityPlayer player, Herb herb) {
-    List<ItemStack> pouches = getPouches(player);
-    if (pouches.isEmpty()) return -1.0;
-
-    double quantity = 0;
-    for (ItemStack pouch : pouches) {
-      // Hard-coding for creative pouch
-      if (pouch.getItem() == ModItems.creative_pouch) {
-        quantity += 999;
-      } else {
-        quantity += ItemPouch.getHerbQuantity(pouch, herb);
-      }
-    }
-
-    return quantity;
-  }
-
-  public static void removePowder(EntityPlayer player, Herb herb, double amount) {
-    List<ItemStack> pouches = getPouches(player);
-    // TODO: Cost reduction is calculated here
-    amount -= amount * ItemSylvanArmor.sylvanBonus(player);
-    for (ItemStack pouch : pouches) {
-      if (pouch.getItem() == ModItems.creative_pouch) return;
-
-      amount = ItemPouch.useQuantity(pouch, herb, amount);
-      if (amount <= 0) {
-        break;
-      }
-    }
-
-    resolveSlots(player, herb);
-  }
-
-  public static void resolveSlots(EntityPlayer player, Herb herb) {
-    if (!player.world.isRemote) return;
-
-    Minecraft mc = Minecraft.getMinecraft();
-    if (player.getUniqueID() != mc.player.getUniqueID()) return;
-
-    if (slot1 != null && !slot1.active()) {
-      slot1.setSlot(-1);
-      slot1 = null;
-    }
-
-    if (slot2 != null && !slot2.active()) {
-      slot2.setSlot(-1);
-      slot2 = null;
-    }
-
-    if (slot1 == null && slot2 != null) {
-      slot1 = slot2;
-      slot2 = null;
-      slot1.setSlot(1);
-    }
-
-    if (slot1 == getAlert(herb)) {
-      slot1.refresh();
-    } else if (slot2 == getAlert(herb)) {
-      slot2.refresh();
-    } else {
-      if (slot1 == null) {
-        slot1 = getAlert(herb);
-        slot1.setSlot(1);
-        slot1.enable();
-      } else if (slot2 == null) {
-        slot2 = getAlert(herb);
-        slot2.setSlot(2);
-        slot2.enable();
-      }
-    }
-  }
-
-  public static HerbAlert getAlert(Herb herb) {
+  private static HerbAlert getAlert(Herb herb) {
     if (!alerts.containsKey(herb)) {
       HerbAlert alert = new HerbAlert(herb);
       alerts.put(herb, alert);
@@ -139,7 +45,6 @@ public class PowderInventoryUtil {
     return alerts.get(herb);
   }
 
-  // TODO: THIS SHOULD NOT BE HERE
   @SubscribeEvent
   @SideOnly(Side.CLIENT)
   public static void renderHUD(RenderGameOverlayEvent.Post event) {
@@ -176,6 +81,47 @@ public class PowderInventoryUtil {
     }
   }
 
+  public static void resolveSlots(EntityPlayer player, Herb herb, double amount) {
+    if (!player.world.isRemote) return;
+
+    Minecraft mc = Minecraft.getMinecraft();
+    if (player.getUniqueID() != mc.player.getUniqueID()) return;
+
+    updateHerb(herb, amount);
+
+    if (slot1 != null && !slot1.active()) {
+      slot1.setSlot(-1);
+      slot1 = null;
+    }
+
+    if (slot2 != null && !slot2.active()) {
+      slot2.setSlot(-1);
+      slot2 = null;
+    }
+
+    if (slot1 == null && slot2 != null) {
+      slot1 = slot2;
+      slot2 = null;
+      slot1.setSlot(1);
+    }
+
+    if (slot1 == getAlert(herb)) {
+      slot1.refresh();
+    } else if (slot2 == getAlert(herb)) {
+      slot2.refresh();
+    } else {
+      if (slot1 == null) {
+        slot1 = getAlert(herb);
+        slot1.setSlot(1);
+        slot1.enable();
+      } else if (slot2 == null) {
+        slot2 = getAlert(herb);
+        slot2.setSlot(2);
+        slot2.enable();
+      }
+    }
+  }
+
   public static class HerbAlert {
     private static final int TIME_VISIBLE = 8 * 20;
     private static final int MAX_TIME = TIME_VISIBLE;
@@ -185,9 +131,18 @@ public class PowderInventoryUtil {
     private int slot = 0;
     private Herb herb;
     private ItemStack stack = null;
+    private double amount;
 
     public HerbAlert(Herb herb) {
       this.herb = herb;
+    }
+
+    public double getAmount() {
+      return amount;
+    }
+
+    public void setAmount(double amount) {
+      this.amount = amount;
     }
 
     public void refresh() {
@@ -253,7 +208,7 @@ public class PowderInventoryUtil {
       GlStateManager.translate(x, y, 0);
       RenderHelper.enableGUIStandardItemLighting();
       mc.getRenderItem().renderItemAndEffectIntoGUI(stack, 0, 0);
-      String s = String.format("%.1f", getPowderTotal(mc.player, herb));
+      String s = String.format("%.1f", amount); //ServerHerbUtil.getPowderTotal(mc.player, herb));
       GlStateManager.disableLighting();
       GlStateManager.disableDepth();
       GlStateManager.disableBlend();
