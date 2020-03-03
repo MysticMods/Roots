@@ -2,7 +2,6 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualHeavyStorms;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -27,13 +26,13 @@ public class RitualHeavyStorms extends RitualBase {
 
   @Override
   public void init() {
-    addCondition(new ConditionItems(
+    recipe = new RitualRecipe(this,
         new ItemStack(Blocks.WATERLILY),
         new ItemStack(ModItems.dewgonia),
         new OreIngredient("vine"),
         new ItemStack(ModItems.cloud_berry),
         new ItemStack(Items.BEETROOT_SEEDS)
-    ));
+    );
     setIcon(ModItems.ritual_heavy_storms);
     setColor(TextFormatting.DARK_AQUA);
     setBold(true);

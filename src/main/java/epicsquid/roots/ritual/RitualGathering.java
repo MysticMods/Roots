@@ -2,7 +2,6 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualGathering;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.item.ItemStack;
@@ -26,13 +25,13 @@ public class RitualGathering extends RitualBase {
 
   @Override
   public void init () {
-    addCondition(new ConditionItems(
+    recipe = new RitualRecipe(this,
         new ItemStack(ModItems.wildewheet),
         new ItemStack(ModItems.wildewheet),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),
         new OreIngredient("ingotIron"),
         new OreIngredient("dustRedstone")
-    ));
+    );
     addCondition(new ConditionStandingStones(3, 1));
     setIcon(ModItems.ritual_gathering);
     setColor(TextFormatting.YELLOW);

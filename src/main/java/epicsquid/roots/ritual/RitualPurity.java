@@ -3,7 +3,6 @@ package epicsquid.roots.ritual;
 import epicsquid.roots.entity.ritual.EntityRitualPurity;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -29,13 +28,13 @@ public class RitualPurity extends RitualBase {
 
   @Override
   public void init () {
-    addCondition(new ConditionItems(
+    recipe = new RitualRecipe(this,
         new ItemStack(ModItems.terra_moss),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
         new ItemStack(ModBlocks.baffle_cap_mushroom),
         new ItemStack(Items.MILK_BUCKET),
         new ItemStack(Items.GLASS_BOTTLE)
-    ));
+    );
     setIcon(ModItems.ritual_purity);
     setColor(TextFormatting.LIGHT_PURPLE);
     setBold(true);

@@ -2,7 +2,6 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualFrostLands;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -28,13 +27,13 @@ public class RitualFrostLands extends RitualBase implements IColdRitual {
 
   @Override
   public void init () {
-    addCondition(new ConditionItems(
+    recipe = new RitualRecipe(this,
         new ItemStack(Items.SNOWBALL),
         new ItemStack(ModItems.dewgonia),
         new ItemStack(Blocks.SNOW),
         new ItemStack(ModItems.bark_spruce),
         new ItemStack(ModItems.bark_spruce)
-    ));
+    );
     setIcon(ModItems.ritual_frost_lands);
     setColor(TextFormatting.AQUA);
     setBold(true);

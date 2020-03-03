@@ -3,7 +3,6 @@ package epicsquid.roots.ritual;
 import epicsquid.roots.entity.ritual.EntityRitualTransmutation;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.init.Blocks;
@@ -27,14 +26,14 @@ public class RitualTransmutation extends RitualBase {
   }
 
   @Override
-  public void init () {
-    addCondition(
-        new ConditionItems(
-            new ItemStack(Blocks.FURNACE),
-            new ItemStack(Blocks.MOSSY_COBBLESTONE),
-            new ItemStack(ModItems.cloud_berry),
-            new OreIngredient("rootsBark"),
-            new ItemStack(ModBlocks.chiseled_runestone)));
+  public void init() {
+    recipe = new RitualRecipe(this,
+        new ItemStack(Blocks.FURNACE),
+        new ItemStack(Blocks.MOSSY_COBBLESTONE),
+        new ItemStack(ModItems.cloud_berry),
+        new OreIngredient("rootsBark"),
+        new ItemStack(ModBlocks.chiseled_runestone)
+    );
     addCondition(new ConditionStandingStones(3, 1));
     setIcon(ModItems.ritual_transmutation);
     setColor(TextFormatting.DARK_PURPLE);

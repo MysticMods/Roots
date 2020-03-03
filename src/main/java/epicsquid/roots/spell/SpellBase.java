@@ -1,6 +1,5 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
@@ -9,17 +8,16 @@ import epicsquid.roots.entity.spell.EntitySpellBase;
 import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.network.MessageUpdateHerb;
+import epicsquid.roots.recipe.IRootsRecipe;
 import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.tileentity.TileEntityMortar;
 import epicsquid.roots.util.ClientHerbUtil;
-import epicsquid.roots.util.HerbHud;
 import epicsquid.roots.util.ServerHerbUtil;
 import epicsquid.roots.util.types.Property;
 import epicsquid.roots.util.types.PropertyTable;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -56,6 +54,8 @@ public abstract class SpellBase {
   private List<SpellModule> acceptedModules = new ArrayList<>();
   private float[] firstColours;
   private float[] secondColours;
+
+  public SpellRecipe recipe = SpellRecipe.EMPTY;
 
   public enum EnumCastType {
     INSTANTANEOUS, CONTINUOUS
@@ -110,14 +110,12 @@ public abstract class SpellBase {
     return acceptedModules;
   }
 
+  public void setRecipe (SpellRecipe recipe) {
+    this.recipe = recipe;
+  }
+
   public SpellBase addIngredients(Object... stacks) {
-    for (Object stack : stacks) {
-      if (stack instanceof ItemStack) {
-        ingredients.add(Ingredient.fromStacks((ItemStack) stack));
-      } else if (stack instanceof Ingredient) {
-        ingredients.add((Ingredient) stack);
-      }
-    }
+    this.recipe = new SpellRecipe(this, stacks);
     return this;
   }
 
@@ -367,6 +365,29 @@ public abstract class SpellBase {
           "herb='" + herb + '\'' +
           ", cost=" + cost +
           '}';
+    }
+  }
+
+  public static class SpellRecipe implements IRootsRecipe<TileEntityMortar> {
+    public static SpellRecipe EMPTY = new SpellRecipe(null);
+
+    private List<Ingredient> ingredients = new ArrayList<>();
+    private SpellBase result;
+
+    public SpellRecipe(SpellBase result, Object ... stacks) {
+      this.result = result;
+      for (Object stack : stacks) {
+        if (stack instanceof Ingredient) {
+          ingredients.add((Ingredient) stack);
+        } else if (stack instanceof ItemStack) {
+          ingredients.add(Ingredient.fromStacks((ItemStack) stack));
+        }
+      }
+    }
+
+    @Override
+    public List<Ingredient> getIngredients() {
+      return ingredients;
     }
   }
 }

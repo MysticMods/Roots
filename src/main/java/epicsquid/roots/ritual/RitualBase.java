@@ -1,20 +1,24 @@
 package epicsquid.roots.ritual;
 
+import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.block.BlockPyre;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
-import epicsquid.roots.ritual.conditions.ConditionItems;
+import epicsquid.roots.recipe.IRootsRecipe;
 import epicsquid.roots.ritual.conditions.ICondition;
 import epicsquid.roots.tileentity.TileEntityPyre;
 import epicsquid.roots.util.types.PropertyTable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.Constructor;
@@ -33,6 +37,8 @@ public abstract class RitualBase {
   private TextFormatting color;
   private boolean bold;
 
+  public RitualRecipe recipe = RitualRecipe.EMPTY;
+
   protected int duration;
 
   protected boolean disabled;
@@ -42,6 +48,10 @@ public abstract class RitualBase {
     this.name = name;
     this.disabled = disabled;
     this.duration = 0;
+  }
+
+  public void setRecipe (RitualRecipe recipe) {
+    this.recipe = recipe;
   }
 
   public Class<? extends EntityRitualBase> getEntityClass() {
@@ -90,13 +100,7 @@ public abstract class RitualBase {
 
   public boolean isRitualRecipe(TileEntityPyre tileEntityPyre, @Nullable EntityPlayer player) {
     if (isDisabled()) return false;
-    for (ICondition condition : this.conditions) {
-      if (condition instanceof ConditionItems) {
-        ConditionItems conditionItems = (ConditionItems) condition;
-        return conditionItems.checkCondition(tileEntityPyre, player);
-      }
-    }
-    return false;
+    return recipe.matches(tileEntityPyre, player);
   }
 
   public boolean canFire(TileEntityPyre Pyre, @Nullable EntityPlayer player) {
@@ -170,12 +174,7 @@ public abstract class RitualBase {
 
   @SuppressWarnings("unchecked")
   public List<Ingredient> getIngredients() {
-    for (ICondition condition : this.conditions) {
-      if (condition instanceof ConditionItems) {
-        return ((ConditionItems) condition).getIngredients();
-      }
-    }
-    return Collections.EMPTY_LIST;
+    return recipe.getIngredients();
   }
 
   public void finalise() {
@@ -200,5 +199,46 @@ public abstract class RitualBase {
 
   public PropertyTable getProperties() {
     return properties;
+  }
+
+  public static class RitualRecipe implements IRootsRecipe<TileEntityPyre> {
+    public static RitualRecipe EMPTY = new RitualRecipe(null, Collections.emptyList());
+
+    public List<Ingredient> ingredients;
+    public RitualBase ritual;
+
+    public RitualRecipe(RitualBase ritual) {
+      this.ritual = ritual;
+    }
+
+    public RitualRecipe(RitualBase ritual, List<Ingredient> ingredients) {
+      this.ingredients = ingredients;
+      this.ritual = ritual;
+    }
+
+    public RitualRecipe(RitualBase ritual, Object... stacks) {
+      ingredients = new ArrayList<>();
+      for (Object stack : stacks) {
+        if (stack instanceof Ingredient) {
+          ingredients.add((Ingredient) stack);
+        } else if (stack instanceof ItemStack) {
+          ingredients.add(Ingredient.fromStacks((ItemStack) stack));
+        }
+      }
+      this.ritual = ritual;
+    }
+
+    @Override
+    public List<Ingredient> getIngredients() {
+      return ingredients;
+    }
+
+    public boolean matches(TileEntityPyre tile, @Nullable EntityPlayer player) {
+      List<ItemStack> stacks = new ArrayList<>();
+      for (int i = 0; i < tile.inventory.getSlots(); i++) {
+        stacks.add(tile.inventory.extractItem(i, 1, true));
+      }
+      return matches(stacks);
+    }
   }
 }

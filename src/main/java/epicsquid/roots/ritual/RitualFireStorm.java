@@ -2,7 +2,6 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualFireStorm;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.init.Items;
@@ -26,13 +25,13 @@ public class RitualFireStorm extends RitualBase {
 
   @Override
   public void init () {
-    addCondition(new ConditionItems(
+    recipe = new RitualRecipe(this,
         new ItemStack(ModItems.infernal_bulb),
         new ItemStack(ModItems.bark_acacia),
         new ItemStack(Items.COAL),
         new ItemStack(ModItems.bark_acacia),
         new ItemStack(Items.BLAZE_POWDER)
-    ));
+    );
     addCondition(new ConditionStandingStones(3, 3));
     setIcon(ModItems.ritual_fire_storm);
     setColor(TextFormatting.RED);

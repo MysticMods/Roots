@@ -5,7 +5,6 @@ import epicsquid.roots.entity.ritual.EntityRitualSummonCreatures;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.SummonCreatureRecipe;
-import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.ritual.conditions.ConditionValidSummon;
 import epicsquid.roots.tileentity.TileEntityOfferingPlate;
 import epicsquid.roots.util.RitualUtil;
@@ -38,13 +37,13 @@ public class RitualSummonCreatures extends RitualBase {
 
   @Override
   public void init() {
-    addCondition(new ConditionItems(
+    recipe = new RitualRecipe(this,
         new ItemStack(Items.WHEAT_SEEDS),
         new OreIngredient("cropWheat"),
         new OreIngredient("egg"),
         new ItemStack(Items.ROTTEN_FLESH),
         new ItemStack(Items.WHEAT_SEEDS)
-    ));
+    );
     addCondition(new ConditionValidSummon());
     setIcon(ModItems.ritual_summon_creatures);
     setColor(TextFormatting.DARK_PURPLE);

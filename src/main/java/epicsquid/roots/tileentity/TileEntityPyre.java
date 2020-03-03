@@ -2,7 +2,6 @@ package epicsquid.roots.tileentity;
 
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.block.BlockPyre;
 import epicsquid.roots.config.RitualConfig;
@@ -191,13 +190,13 @@ public class TileEntityPyre extends TileBase implements ITickable {
         this.lastRecipeUsed = null;
         this.lastUsedIngredients = ritual.getIngredients();
         this.doBigFlame = true;
-        for (int i = 0; i < inventory.getSlots(); i++) {
-          ItemStack item = inventory.extractItem(i, 1, false);
-          if (!world.isRemote) {
-            if (item.getItem().hasContainerItem(item)) {
-              ItemStack container = ForgeHooks.getContainerItem(item);
-              ItemUtil.spawnItem(world, getPos().add(1, 0, -1), container);
-            }
+        if (!world.isRemote) {
+          List<ItemStack> transformers = new ArrayList<>();
+          for (int i = 0; i < inventory.getSlots(); i++) {
+            transformers.add(inventory.extractItem(i, 1, false));
+          }
+          for (ItemStack stack : ritual.recipe.transformIngredients(transformers, this)) {
+            ItemUtil.spawnItem(world, getPos().add(1, 0, -1), stack);
           }
         }
         markDirty();
@@ -215,14 +214,15 @@ public class TileEntityPyre extends TileBase implements ITickable {
       this.craftingXP = recipe.getXP();
       this.burnTime = recipe.getBurnTime();
       this.doBigFlame = true;
+      List<ItemStack> transformers = new ArrayList<>();
       for (int i = 0; i < inventory.getSlots(); i++) {
         ItemStack item = inventory.extractItem(i, 1, false);
+        transformers.add(item);
         inventory_storage.insertItem(i, item, false);
-        if (!world.isRemote) {
-          if (item.getItem().hasContainerItem(item)) {
-            ItemStack container = ForgeHooks.getContainerItem(item);
-            ItemUtil.spawnItem(world, getPos().add(1, 0, -1), container);
-          }
+      }
+      if (!world.isRemote) {
+        for (ItemStack stack : recipe.transformIngredients(transformers, this)) {
+          ItemUtil.spawnItem(world, getPos().add(1, 0, -1), stack);
         }
       }
       markDirty();

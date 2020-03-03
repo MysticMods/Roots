@@ -2,7 +2,6 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualGermination;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.item.ItemStack;
@@ -31,13 +30,13 @@ public class RitualGermination extends RitualBase {
 
   @Override
   public void init () {
-    addCondition(new ConditionItems(
+    recipe = new RitualRecipe(this,
         new ItemStack(ModItems.spirit_herb),
         new ItemStack(ModItems.wildroot),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
         new OreIngredient("dyeWhite"),
         new OreIngredient("rootsBark")
-    ));
+    );
     addCondition(new ConditionStandingStones(3, 2));
     setIcon(ModItems.ritual_germination);
     setColor(TextFormatting.DARK_RED);
