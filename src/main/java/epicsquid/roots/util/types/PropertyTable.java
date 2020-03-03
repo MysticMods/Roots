@@ -23,6 +23,13 @@ public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
   }
 
   @SuppressWarnings("unchecked")
+  public <T> T getValue (String propertyName) {
+    fetchedKeys.add(propertyName);
+    Property<T> prop = (Property<T>) reverseMap.get(propertyName);
+    return get(prop);
+  }
+
+  @SuppressWarnings("unchecked")
   public <T> Property<T> get(String propertyName) {
     fetchedKeys.add(propertyName);
     Property<?> prop = reverseMap.get(propertyName);
@@ -86,6 +93,10 @@ public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
 
   public boolean hasProperty (Property<?> property) {
     return map.containsKey(property);
+  }
+
+  public boolean hasProperty (String prop) {
+    return reverseMap.containsKey(prop);
   }
 
   @Override
