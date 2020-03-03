@@ -9,6 +9,8 @@ import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.crafttweaker.Action;
+import epicsquid.roots.integration.crafttweaker.recipes.CTMortarRecipe;
+import epicsquid.roots.integration.crafttweaker.recipes.CTSpellRecipe;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
@@ -21,6 +23,8 @@ import net.minecraft.item.crafting.Ingredient;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -42,12 +46,13 @@ public class MortarTweaker {
   public static void addRecipe(IItemStack output, IIngredient[] inputs) {
     if (inputs.length != 5) {
       if (inputs.length == 1) {
-        CraftTweaker.LATE_ACTIONS.add(new AddMultiple(ModRecipes.getMortarRecipeList(CraftTweakerMC.getItemStack(output), CraftTweakerMC.getIngredient(inputs[0]))));
+        // TODO: Fix this
+        CraftTweaker.LATE_ACTIONS.add(new AddMultiple(CraftTweakerMC.getItemStack(output), inputs[0]));
       } else {
         CraftTweakerAPI.getLogger().logError("Mortar recipe must have 5 items total, or 1 single item.");
       }
     } else {
-      CraftTweaker.LATE_ACTIONS.add(new Add(CraftTweakerMC.getItemStack(output), Stream.of(inputs).map(CraftTweakerMC::getIngredient).toArray(Ingredient[]::new)));
+      CraftTweaker.LATE_ACTIONS.add(new Add(CraftTweakerMC.getItemStack(output), Arrays.asList(inputs)));
     }
   }
 
@@ -63,8 +68,7 @@ public class MortarTweaker {
     if (inputs.length != 5) {
       CraftTweakerAPI.getLogger().logError(String.format("Invalid ingredients length to change recipe for spell %s: need 5 ingredients, got %d.", spellName, inputs.length));
     } else {
-      List<Ingredient> ingredients = Stream.of(inputs).map(CraftTweakerMC::getIngredient).collect(Collectors.toList());
-      CraftTweaker.LATE_ACTIONS.add(new ChangeSpell(spellName, ingredients));
+      CraftTweaker.LATE_ACTIONS.add(new ChangeSpell(spellName, Arrays.asList(inputs)));
     }
   }
 
@@ -100,9 +104,9 @@ public class MortarTweaker {
 
   private static class Add extends Action {
     private ItemStack output;
-    private Ingredient[] inputs;
+    private List<IIngredient> inputs;
 
-    private Add(ItemStack output, Ingredient[] inputs) {
+    private Add(ItemStack output, List<IIngredient> inputs) {
       super("MortarRecipe");
       this.output = output;
       this.inputs = inputs;
@@ -110,7 +114,7 @@ public class MortarTweaker {
 
     @Override
     public void apply() {
-      MortarRecipe recipe = new MortarRecipe(output, inputs);
+      CTMortarRecipe recipe = new CTMortarRecipe(output, inputs);
       ModRecipes.addMortarRecipe(recipe);
     }
 
@@ -121,30 +125,40 @@ public class MortarTweaker {
   }
 
   private static class AddMultiple extends Action {
+    private ItemStack output;
+    private IIngredient input;
 
-    private List<MortarRecipe> multiRecipes;
-
-    private AddMultiple(List<MortarRecipe> recipes) {
+    private AddMultiple(ItemStack output, IIngredient input) {
       super("MultiMortarRecipe");
-      multiRecipes = recipes;
+      this.output = output;
+      this.input = input;
     }
 
     @Override
     public void apply() {
-      ModRecipes.getMortarRecipes().addAll(multiRecipes);
+      for (int i = 1; i <= 5; i++) {
+        List<IIngredient> inputs = new ArrayList<>();
+        ItemStack out = output.copy();
+        out.setCount(i);
+        for (int j = 0; j < i; i++) {
+          inputs.add(input);
+        }
+        CTMortarRecipe recipe = new CTMortarRecipe(out, inputs);
+        ModRecipes.getMortarRecipes().add(recipe);
+      }
     }
 
     @Override
     public String describe() {
-      return String.format("MultiMortarRecipe for variable input of %s into variable output of %s.", multiRecipes.get(0).getIngredients().get(0).getMatchingStacks()[0].getDisplayName(), multiRecipes.get(0).getResult().getDisplayName());
+      return String.format("MultiMortarRecipe for variable input of %s into variable output of %s.", input.toCommandString(), output.getDisplayName());
     }
   }
 
   private static class ChangeSpell extends Action {
     private String spell;
-    private List<Ingredient> ingredients;
+    private List<IIngredient> ingredients;
 
-    private ChangeSpell(String spell, List<Ingredient> ingredients) {
+    private ChangeSpell(String spell, List<IIngredient> ingredients) {
       super("ChangeSpellRecipe");
       this.spell = spell;
       this.ingredients = ingredients;
@@ -156,7 +170,8 @@ public class MortarTweaker {
       if (spell == null) {
         CraftTweakerAPI.logError("Invalid spell name: %s" + this.spell);
       } else {
-        spell.setIngredients(this.ingredients);
+        CTSpellRecipe recipe = new CTSpellRecipe(spell, ingredients);
+        spell.setRecipe(recipe);
       }
     }
 

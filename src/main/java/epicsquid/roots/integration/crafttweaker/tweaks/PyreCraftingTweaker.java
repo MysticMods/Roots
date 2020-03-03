@@ -9,6 +9,7 @@ import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.crafttweaker.Action;
+import epicsquid.roots.integration.crafttweaker.recipes.CTPyreCraftingRecipe;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.util.zen.ZenDocAppend;
 import epicsquid.roots.util.zen.ZenDocArg;
@@ -20,6 +21,8 @@ import net.minecraft.util.ResourceLocation;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 @ZenDocClass("mods.roots.Pyre")
@@ -56,7 +59,7 @@ public class PyreCraftingTweaker {
       CraftTweakerAPI.logError("Pyre Crafting Ritual must have 5 items: " + name);
       return;
     }
-    CraftTweaker.LATE_ACTIONS.add(new Add(name, CraftTweakerMC.getItemStack(output), Stream.of(inputs).map(CraftTweakerMC::getIngredient).toArray(Ingredient[]::new), xp));
+    CraftTweaker.LATE_ACTIONS.add(new Add(name, CraftTweakerMC.getItemStack(output), Arrays.asList(inputs), xp));
   }
 
   @ZenDocMethod(
@@ -73,10 +76,10 @@ public class PyreCraftingTweaker {
   private static class Add extends Action {
     private String name;
     private ItemStack output;
-    private Ingredient[] inputs;
-    private int xp = 0;
+    private List<IIngredient> inputs;
+    private int xp;
 
-    private Add(String name, ItemStack output, Ingredient[] inputs, int xp) {
+    private Add(String name, ItemStack output, List<IIngredient> inputs, int xp) {
       super("Pyre Crafting Ritual Add");
 
       this.name = name;
@@ -92,8 +95,7 @@ public class PyreCraftingTweaker {
 
     @Override
     public void apply() {
-      PyreCraftingRecipe recipe = new PyreCraftingRecipe(this.output, this.xp);
-      recipe.addIngredients((Object[]) inputs);
+      CTPyreCraftingRecipe recipe = new CTPyreCraftingRecipe(this.output, this.inputs, this.xp);
       recipe.setName(name);
       ModRecipes.addPyreCraftingRecipe(new ResourceLocation(Roots.MODID, name), recipe);
     }

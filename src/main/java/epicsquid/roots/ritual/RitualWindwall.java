@@ -2,7 +2,6 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualWindwall;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -29,13 +28,13 @@ public class RitualWindwall extends RitualBase {
 
   @Override
   public void init () {
-    addCondition(new ConditionItems(
+    recipe = new RitualRecipe(this,
         new ItemStack(ModItems.cloud_berry),
         new ItemStack(ModItems.moonglow_leaf),
         new ItemStack(ModItems.bark_spruce),
         new ItemStack(ModItems.bark_birch),
         new OreIngredient("feather")
-    ));
+    );
     setIcon(ModItems.ritual_windwall);
     setColor(TextFormatting.DARK_AQUA);
   }

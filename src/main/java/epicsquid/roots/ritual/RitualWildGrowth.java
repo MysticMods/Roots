@@ -2,7 +2,6 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualWildGrowth;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -25,12 +24,12 @@ public class RitualWildGrowth extends RitualBase {
 
   @Override
   public void init() {
-    addCondition(new ConditionItems(
+    recipe = new RitualRecipe(this,
         new OreIngredient("wildroot"),
         new ItemStack(ModItems.bark_dark_oak),
         new OreIngredient("rootsBark"),
         new OreIngredient("rootsBark"),
-        new ItemStack(ModItems.spirit_herb))
+        new ItemStack(ModItems.spirit_herb)
     );
     setIcon(ModItems.ritual_wild_growth);
     setColor(TextFormatting.DARK_GRAY);

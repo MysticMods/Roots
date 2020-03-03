@@ -2,7 +2,6 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualSpreadingForest;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -27,13 +26,13 @@ public class RitualSpreadingForest extends RitualBase {
 
   @Override
   public void init () {
-    addCondition(new ConditionItems(
+    recipe = new RitualRecipe(this,
         new ItemStack(ModItems.terra_moss),
         new ItemStack(ModItems.spirit_herb),
         new OreIngredient("rootsBark"),
         new OreIngredient("treeSapling"),
         new OreIngredient("treeSapling")
-    ));
+    );
     setIcon(ModItems.ritual_spreading_forest);
     setColor(TextFormatting.GREEN);
     setBold(true);

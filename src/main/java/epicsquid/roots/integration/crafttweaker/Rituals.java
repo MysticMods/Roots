@@ -3,26 +3,22 @@ package epicsquid.roots.integration.crafttweaker;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
-import crafttweaker.api.minecraft.CraftTweakerMC;
 import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
+import epicsquid.roots.integration.crafttweaker.recipes.CTRitualRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
-import epicsquid.roots.ritual.conditions.ConditionItems;
-import epicsquid.roots.ritual.conditions.ICondition;
 import epicsquid.roots.util.types.Property;
 import epicsquid.roots.util.types.PropertyTable;
 import epicsquid.roots.util.zen.ZenDocAppend;
 import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
-import net.minecraft.item.crafting.Ingredient;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.stream.Stream;
 
 @ZenDocClass("mods.roots.Ritual")
 @ZenDocAppend({"docs/include/ritual.example.md"})
@@ -43,14 +39,14 @@ public class Rituals {
       CraftTweakerAPI.logError("Rituals must have 5 items: " + name);
       return;
     }
-    CraftTweaker.LATE_ACTIONS.add(new Modify(name, Stream.of(inputs).map(CraftTweakerMC::getIngredient).toArray(Ingredient[]::new)));
+    CraftTweaker.LATE_ACTIONS.add(new Modify(name, Arrays.asList(inputs)));
   }
 
   private static class Modify extends Action {
     private String name;
-    private Ingredient[] inputs;
+    private List<IIngredient> inputs;
 
-    private Modify(String name, Ingredient[] inputs) {
+    private Modify(String name, List<IIngredient> inputs) {
       super("Ritual Modification");
 
       this.name = name;
@@ -69,19 +65,8 @@ public class Rituals {
         CraftTweakerAPI.logError("Invalid or disabled ritual or no ritual by the name of \"" + name + "\" exists.");
         return;
       }
-      ConditionItems newRecipe = new ConditionItems((Object[]) inputs);
-      List<ICondition> conditions = ritual.getConditions();
-      ListIterator<ICondition> iterator = conditions.listIterator();
-      while (iterator.hasNext()) {
-        ICondition cond = iterator.next();
-        if (cond instanceof ConditionItems) {
-          iterator.remove();
-          iterator.add(newRecipe);
-          return;
-        }
-      }
-      // If we haven't returned already then, for some reason, the above code failed to find it.
-      ritual.addCondition(newRecipe);
+      CTRitualRecipe recipe = new CTRitualRecipe(ritual, inputs);
+      ritual.setRecipe(recipe);
     }
   }
 

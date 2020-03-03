@@ -2,9 +2,7 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualDivineProtection;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
@@ -36,13 +34,13 @@ public class RitualDivineProtection extends RitualBase {
 
   @Override
   public void init() {
-    addCondition(new ConditionItems(
+    recipe = new RitualRecipe(this,
         new ItemStack(ModItems.pereskia),
         new ItemStack(ModItems.cloud_berry),
         new ItemStack(ModItems.bark_birch),
         new ItemStack(ModItems.bark_oak),
         new OreIngredient("dustGlowstone")
-    ));
+    );
     setIcon(ModItems.ritual_divine_protection);
     setColor(TextFormatting.YELLOW);
     setBold(true);

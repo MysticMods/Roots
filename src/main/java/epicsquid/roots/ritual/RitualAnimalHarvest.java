@@ -2,7 +2,6 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualAnimalHarvest;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.init.Items;
@@ -39,13 +38,13 @@ public class RitualAnimalHarvest extends RitualBase {
 
   @Override
   public void init() {
-    addCondition(new ConditionItems(
+    recipe = new RitualRecipe(this,
         new ItemStack(ModItems.wildewheet),
         new OreIngredient("wool"),
         new OreIngredient("cropCarrot"),
         new ItemStack(Items.MELON),
         new OreIngredient("wildroot")
-    ));
+    );
     addCondition(new ConditionStandingStones(3, 3));
     setIcon(ModItems.ritual_animal_harvest);
     setColor(TextFormatting.GOLD);

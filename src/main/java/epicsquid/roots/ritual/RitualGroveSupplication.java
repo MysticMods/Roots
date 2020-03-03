@@ -2,7 +2,6 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualGroveSupplication;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -23,13 +22,13 @@ public class RitualGroveSupplication extends RitualBase {
 
   @Override
   public void init() {
-    addCondition(new ConditionItems(
+    recipe = new RitualRecipe(this,
         new OreIngredient("doorWood"),
         new ItemStack(Blocks.MOSSY_COBBLESTONE),
         new OreIngredient("treeSapling"),
         new OreIngredient("wildroot"),
         new ItemStack(ModItems.petals)
-    ));
+    );
     setIcon(ModItems.ritual_grove_supplication);
     setColor(TextFormatting.YELLOW);
     setBold(true);

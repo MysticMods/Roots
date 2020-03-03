@@ -2,7 +2,6 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualOvergrowth;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.ritual.conditions.ConditionItems;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -24,14 +23,14 @@ public class RitualOvergrowth extends RitualBase {
   }
 
   @Override
-  public void init () {
-    addCondition(
-        new ConditionItems(
-            new OreIngredient("sugarcane"),
-            new ItemStack(ModItems.terra_moss),
-            new OreIngredient("tallgrass"),
-            new OreIngredient("rootsBark"),
-            new OreIngredient("rootsBark")));
+  public void init() {
+    recipe = new RitualRecipe(this,
+        new OreIngredient("sugarcane"),
+        new ItemStack(ModItems.terra_moss),
+        new OreIngredient("tallgrass"),
+        new OreIngredient("rootsBark"),
+        new OreIngredient("rootsBark")
+    );
     setIcon(ModItems.ritual_overgrowth);
     setColor(TextFormatting.DARK_GREEN);
     setBold(true);

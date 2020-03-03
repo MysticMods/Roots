@@ -1,6 +1,8 @@
 package epicsquid.roots.recipe;
 
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.ListUtil;
+import epicsquid.roots.tileentity.TileEntityFeyCrafter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FeyCraftingRecipe {
+public class FeyCraftingRecipe implements IRootsRecipe<TileEntityFeyCrafter> {
   private List<Ingredient> ingredients = new ArrayList<>();
   private ItemStack result;
   private String name;
@@ -54,6 +56,7 @@ public class FeyCraftingRecipe {
     return this;
   }
 
+  @Override
   public boolean matches(List<ItemStack> ingredients) {
     return ListUtil.matchesIngredients(ingredients, this.ingredients);
   }
@@ -66,10 +69,12 @@ public class FeyCraftingRecipe {
     return xp;
   }
 
+  @Override
   public List<ItemStack> getRecipe() {
     return ingredients.stream().map(ingredient -> ingredient.getMatchingStacks()[0]).collect(Collectors.toList());
   }
 
+  @Override
   public List<Ingredient> getIngredients() {
     return ingredients;
   }

@@ -9,6 +9,7 @@ import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.crafttweaker.Action;
+import epicsquid.roots.integration.crafttweaker.recipes.CTFeyCraftingRecipe;
 import epicsquid.roots.recipe.FeyCraftingRecipe;
 import epicsquid.roots.util.zen.ZenDocAppend;
 import epicsquid.roots.util.zen.ZenDocArg;
@@ -20,6 +21,8 @@ import net.minecraft.util.ResourceLocation;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -56,7 +59,7 @@ public class FeyCraftingTweaker {
     if (inputs.length != 5) {
       throw new IllegalArgumentException("Fey Crafting Ritual must have 5 items: " + name);
     }
-    CraftTweaker.LATE_ACTIONS.add(new Add(name, CraftTweakerMC.getItemStack(output), Stream.of(inputs).map(CraftTweakerMC::getIngredient).toArray(Ingredient[]::new), xp));
+    CraftTweaker.LATE_ACTIONS.add(new Add(name, CraftTweakerMC.getItemStack(output), Arrays.asList(inputs), xp));
   }
 
   @ZenDocMethod(
@@ -86,10 +89,10 @@ public class FeyCraftingTweaker {
   private static class Add extends Action {
     private String name;
     private ItemStack output;
-    private Ingredient[] inputs;
+    private List<IIngredient> inputs;
     private int xp = 0;
 
-    private Add(String name, ItemStack output, Ingredient[] inputs, int xp) {
+    private Add(String name, ItemStack output, List<IIngredient> inputs, int xp) {
       super("Fey Crafting Add");
 
       this.name = name;
@@ -105,8 +108,7 @@ public class FeyCraftingTweaker {
 
     @Override
     public void apply() {
-      FeyCraftingRecipe recipe = new FeyCraftingRecipe(this.output, this.xp);
-      recipe.addIngredients((Object[]) inputs);
+      CTFeyCraftingRecipe recipe = new CTFeyCraftingRecipe(this.output, inputs, this.xp);
       ModRecipes.addFeyCraftingRecipe(new ResourceLocation(Roots.MODID, name), recipe);
     }
   }

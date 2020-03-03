@@ -1,6 +1,7 @@
 package epicsquid.roots.recipe;
 
 import epicsquid.mysticallib.util.ListUtil;
+import epicsquid.roots.tileentity.TileEntityMortar;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MortarRecipe {
+public class MortarRecipe implements IRootsRecipe<TileEntityMortar> {
 
   private ItemStack result;
 
@@ -36,14 +37,11 @@ public class MortarRecipe {
     this.b2 = blue2;
   }
 
-  public boolean matches(List<ItemStack> ingredients) {
-    return ListUtil.matchesIngredients(ingredients, this.ingredients);
-  }
-
   public ItemStack getResult() {
     return result;
   }
 
+  @Override
   public List<Ingredient> getIngredients() {
     return ingredients;
   }
