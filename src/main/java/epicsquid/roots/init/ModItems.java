@@ -21,6 +21,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
@@ -213,10 +214,14 @@ public class ModItems {
     OreDictionary.registerOre("leather", ModItems.fey_leather);
     OreDictionary.registerOre("tallgrass", new ItemStack(Blocks.TALLGRASS, 1, BlockTallGrass.EnumType.GRASS.getMeta()));
     OreDictionary.registerOre("tallgrass", new ItemStack(Blocks.TALLGRASS, 1, BlockTallGrass.EnumType.FERN.getMeta()));
+    OreDictionary.registerOre("mushroom", new ItemStack(Item.getItemFromBlock(Blocks.RED_MUSHROOM)));
+    OreDictionary.registerOre("mushroom", new ItemStack(Item.getItemFromBlock(Blocks.BROWN_MUSHROOM)));
+    OreDictionary.registerOre("blockMushroom", new ItemStack(Item.getItemFromBlock(Blocks.RED_MUSHROOM_BLOCK)));
+    OreDictionary.registerOre("blockMushroom", new ItemStack(Item.getItemFromBlock(Blocks.BROWN_MUSHROOM_BLOCK)));
   }
 
   private static void registerSeedDrops() {
     MinecraftForge.addGrassSeed(new ItemStack(terra_spores, 1), 5);
-    MinecraftForge.addGrassSeed(new ItemStack(wildroot, 1), 5);
+    MinecraftForge.addGrassSeed(new ItemStack(wildroot, 1), 7);
   }
 }
