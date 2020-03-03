@@ -2,6 +2,12 @@ package epicsquid.roots.client;
 
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.integration.IntegrationUtil;
+import epicsquid.roots.ritual.RitualBase;
+import epicsquid.roots.ritual.RitualRegistry;
+import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.util.types.Property;
+import epicsquid.roots.util.types.PropertyTable;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -17,6 +23,7 @@ import vazkii.patchouli.client.book.text.BookTextParser;
 import vazkii.patchouli.common.book.Book;
 
 import java.util.Map;
+import java.util.function.Function;
 
 @SideOnly(Side.CLIENT)
 public class PatchouliHack {
@@ -44,7 +51,7 @@ public class PatchouliHack {
 
       return "";
     };
-    BookTextParser.CommandProcessor categoryCommand = (state) -> {
+    BookTextParser.CommandProcessor reset = (state) -> {
       state.color = state.prevColor;
       state.cluster = null;
       state.tooltip = "";
@@ -53,7 +60,7 @@ public class PatchouliHack {
       return "";
     };
     FUNCTIONS.put("cat", categoryFunction);
-    COMMANDS.put("/cat", categoryCommand);
+    COMMANDS.put("/cat", reset);
 
     BookTextParser.FunctionProcessor jeiUses = (parameter, state) -> {
       state.prevColor = state.color;
@@ -73,6 +80,50 @@ public class PatchouliHack {
     };
 
     FUNCTIONS.put("uses", jeiUses);
-    COMMANDS.put("/uses", categoryCommand);
+    COMMANDS.put("/uses", reset);
+
+    Function<String, BookTextParser.FunctionProcessor> prop = (type) ->
+      (parameter, state) -> {
+        if (parameter.contains("/")) {
+          String[] parts = parameter.split("/");
+          RitualBase ritual = RitualRegistry.getRitual(parts[0]);
+          SpellBase spell = SpellRegistry.getSpell(parts[0]);
+          PropertyTable props;
+          String propName = parts[1];
+          Object value = null;
+          if (type.equals("ritual") && ritual != null) {
+            props = ritual.getProperties();
+            if (props.hasProperty(propName)) {
+              value = props.getValue(propName);
+            } else {
+              return "INVALID PROPERTY: " + propName;
+            }
+          } else if (type.equals("ritual")) {
+            return "INVALID RITUAL";
+          } else if (type.equals("spell") && spell != null) {
+            props = spell.getProperties();
+            if (props.hasProperty(propName)) {
+              value = props.getValue(propName);
+            } else {
+              return "INVALID PROPERTY: " + propName;
+            }
+          } else if (type.equals("spell")) {
+            return "INVALID SPELL";
+          }
+          if (value != null) {
+            return value.toString();
+          } else {
+            return "INVALID COMMAND";
+          }
+        } else {
+          return "INVALID " + (type.equals("spell") ? "SPELL" : "RITUAL") + "COMMAND, REQUIRES PROPERTY TOO";
+        }
+    };
+
+    FUNCTIONS.put("spell", prop.apply("spell"));
+    COMMANDS.put("/spell", reset);
+
+    FUNCTIONS.put("ritual", prop.apply("ritual"));
+    COMMANDS.put("/ritual", reset);
   }
 }

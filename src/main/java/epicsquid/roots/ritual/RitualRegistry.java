@@ -31,6 +31,9 @@ public class RitualRegistry {
     if (ritualName == null) {
       return null;
     }
+    if (!ritualName.startsWith("ritual_")) {
+      ritualName = "ritual_" + ritualName;
+    }
     for (RitualBase ritual : ritualRegistry.values()) {
       if (ritual.getName().equalsIgnoreCase(ritualName)) {
         return ritual;
