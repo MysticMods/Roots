@@ -8,7 +8,6 @@ import epicsquid.roots.config.ElementalSoilConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.network.fx.ElementalSoilTransformFX;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,8 +20,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import javax.annotation.Nonnull;
 
 public class ItemBlockElementalSoil extends ItemBlock {
 
@@ -57,15 +54,19 @@ public class ItemBlockElementalSoil extends ItemBlock {
       ItemStack stack = player.getHeldItem(hand);
       world.setBlockToAir(opposite);
       boolean placed = false;
-      if (player.canPlayerEdit(opposite, facing, stack) && world.mayPlace(this.block, opposite, false, facing, player)) {
-        placed = world.setBlockState(opposite, this.block.getDefaultState(), 11);
+      if (player.canPlayerEdit(opposite, facing, stack) && world.mayPlace(this.block, opposite, true, facing, player)) {
+        if (!world.isRemote) {
+          placed = world.setBlockState(opposite, this.block.getDefaultState(), 11);
+        }
       }
       if (!placed) {
-        world.setBlockState(opposite, state);
-        world.setBlockState(opposite.up(), stateUp);
+        if (!world.isRemote) {
+          world.setBlockState(opposite, state);
+          world.setBlockState(opposite.up(), stateUp);
+        }
         return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
       } else {
-        Block block = stateDown.getBlock();
+        Block block = state.getBlock();
         if (block == Blocks.FARMLAND) {
           block = Blocks.DIRT;
         }
@@ -74,6 +75,13 @@ public class ItemBlockElementalSoil extends ItemBlock {
           ItemUtil.spawnItem(world, player.getPosition(), drop);
         }
         world.setBlockState(opposite.up(), stateUp);
+        if (!player.isCreative()) {
+          stack.shrink(1);
+          player.setHeldItem(hand, stack);
+        }
+        if (world.getBlockState(opposite).getBoundingBox(world, opposite).offset(opposite).intersects(player.getEntityBoundingBox())) {
+          player.setPositionAndUpdate(player.posX, player.posY + 0.1, player.posZ);
+        }
         return EnumActionResult.SUCCESS;
       }
     }
