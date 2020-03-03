@@ -49,6 +49,9 @@ public class ItemBlockElementalSoil extends ItemBlock {
         opposite = opposite.down();
         state = stateDown;
       }
+      if (state.getBlock() == this.block) {
+        return EnumActionResult.FAIL;
+      }
       IBlockState stateUp = world.getBlockState(opposite.up());
       world.setBlockToAir(opposite.up());
       ItemStack stack = player.getHeldItem(hand);
