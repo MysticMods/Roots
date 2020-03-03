@@ -8,7 +8,7 @@
     {
       "type": "spotlight",
       "item": "roots:fey_fire",
-      "text": "An extremely powerful but versatile flame that only harms hostile creatures, animals and items unaffected.$(br2)$(info) Those killed by it are considered to have been killed by a player with Looting II.$(br2)$(warning) The only known way to obtain this fire is through the $(l:rituals/ritual_fire_storm)Fire Storm$() ritual."
+      "text": "An extremely powerful but versatile flame that only harms hostile creatures: animals and items unaffected.$(br2)$(info) Those killed by it are considered to have been killed by a player with Looting II.$(br2)$(warning) The only known way to obtain this fire is through the $(l:rituals/ritual_fire_storm)Fire Storm$() ritual."
     },
     {
       "type": "relations",

@@ -7,12 +7,13 @@
   "pages": [
     {
       "type": "text",
-      "text": "Offering plates are a specifically designed way of presenting additional objects when performing $(l:rituals)rituals$(). Not all rituals require the presence of these plates, but those that do will generally consumed the items presented.$(br2)Right-clicking with an item (or stack of items) will place them upon the plate, while right-clicking with an empty hand will remove them.$(br2)$(info) Sneaking will allow you to place a single item from a stack. Likewise, sneaking will allow you to remove a single item from the plate."
+      "text": "Offering plates are a specifically designed way of presenting additional objects when performing $(cat:rituals)rituals$(). Not all rituals require the presence of these plates, but those that do will generally consumed the items presented.$(br2)Right-clicking with an item (or stack of items) will place them upon the plate, while right-clicking with an empty hand will remove them."
     },
     {
       "type": "crafting",
       "recipe": "roots:offering_plate",
-      "title": "Offering Plate"
+      "title": "Offering Plate",
+      "text": "$(br2)$(info) Sneaking will allow you to place a single item from a stack. Likewise, sneaking will allow you to remove a single item from the plate."
     },
     {
       "type": "relations",
