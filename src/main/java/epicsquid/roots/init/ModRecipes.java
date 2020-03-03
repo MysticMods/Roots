@@ -77,6 +77,7 @@ public class ModRecipes {
     addChrysopoeiaRecipe("iron_from_copper", new IngredientWithStack(new OreIngredient("ingotCopper"), 2), new ItemStack(Items.IRON_INGOT));
     addChrysopoeiaRecipe("gold_nugget_from_silver", new IngredientWithStack(new OreIngredient("nuggetSilver"), 2), new ItemStack(Items.GOLD_NUGGET));
     addChrysopoeiaRecipe("iron_nugget_from_copper", new IngredientWithStack(new OreIngredient("nuggetCopper"), 2), new ItemStack(Items.IRON_NUGGET));
+    addChrysopoeiaRecipe("leather_from_rotten_flesh", new IngredientWithStack(Ingredient.fromItem(Items.ROTTEN_FLESH), 10), new ItemStack(Items.LEATHER));
   }
 
   public static Collection<ChrysopoeiaRecipe> getChrysopoeiaRecipes() {
@@ -1402,6 +1403,14 @@ public class ModRecipes {
         new ItemStack(ModItems.stalicripe)
     ));
 
+    addCraftingRecipe("clay", new FeyCraftingRecipe(new ItemStack(Items.CLAY_BALL, 10), 1).addIngredients(
+        new OreIngredient("dirt"),
+        new ItemStack(ModItems.terra_moss),
+        new OreIngredient("sand"),
+        new ItemStack(ModItems.stalicripe),
+        new ItemStack(Items.WATER_BUCKET)
+    ));
+
     addCraftingRecipe("podzol", new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 5, BlockDirt.DirtType.PODZOL.getMetadata()), 1).addIngredients(
         new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 1, BlockDirt.DirtType.COARSE_DIRT.getMetadata()),
         new OreIngredient("rootsBark"),
@@ -1410,6 +1419,37 @@ public class ModRecipes {
         new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 1, BlockDirt.DirtType.COARSE_DIRT.getMetadata())
     ));
 
+    addCraftingRecipe("sand", new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(Blocks.SAND), 5, BlockSand.EnumType.SAND.getMetadata()), 1).addIngredients(
+        new OreIngredient("gravel"),
+        new OreIngredient("gravel"),
+        new OreIngredient("gravel"),
+        new OreIngredient("gravel"),
+        new ItemStack(ModItems.stalicripe)
+    ));
+
+    addCraftingRecipe("gravel", new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(Blocks.GRAVEL), 5), 1).addIngredients(
+        new OreIngredient("cobblestone"),
+        new OreIngredient("cobblestone"),
+        new OreIngredient("cobblestone"),
+        new OreIngredient("cobblestone"),
+        new ItemStack(ModItems.stalicripe)
+    ));
+
+    addCraftingRecipe("red_sand", new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(Blocks.SAND), 2, BlockSand.EnumType.RED_SAND.getMetadata()), 1).addIngredients(
+        new OreIngredient("dustRedstone"),
+        new OreIngredient("sand"),
+        new OreIngredient("dustRedstone"),
+        new OreIngredient("sand"),
+        new OreIngredient("dyeRed")
+    ));
+
+    addCraftingRecipe("gunpowder", new FeyCraftingRecipe(new ItemStack(Items.GUNPOWDER, 5), 1).addIngredients(
+        new OreIngredient("netherrack"),
+        new ItemStack(Items.COAL, 1, 1), // Charcoal
+        new OreIngredient("netherrack"),
+        new ItemStack(Items.MAGMA_CREAM, 1),
+        new ItemStack(ModItems.infernal_bulb)
+    ));
   }
 
   public static void afterHerbRegisterInit() {
