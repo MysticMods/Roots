@@ -62,8 +62,6 @@ public class ParticlePyreLeaf extends ParticleBase {
       this.setExpired();
     }
 
-    System.out.println("Distance: " + distance + " vs current: " + this.distance());
-
     this.motionY -= 0.04D * (double) this.particleGravity;
     this.move(this.motionX, this.motionY, this.motionZ);
 
