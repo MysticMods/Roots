@@ -3,6 +3,7 @@ package epicsquid.roots.block;
 import epicsquid.mysticallib.block.BlockTEBase;
 import epicsquid.mysticallib.particle.particles.ParticleLeaf;
 import epicsquid.mysticallib.proxy.ClientProxy;
+import epicsquid.roots.particle.ParticlePyreLeaf;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
@@ -117,7 +118,7 @@ public class BlockPyre extends BlockTEBase {
           if (rand.nextInt(6) == 0) {
             Vec3d origAngle = me.subtract(new Vec3d(runestone).add(0.5 + rand.nextDouble() - 0.5, 0.5 + rand.nextDouble() - 0.5, 0.5 + rand.nextDouble() - 0.5));
             Vec3d angle = origAngle.normalize().scale(0.05);
-            ClientProxy.particleRenderer.spawnParticle(world, ParticleLeaf.class,
+            ClientProxy.particleRenderer.spawnParticle(world, ParticlePyreLeaf.class,
                 (double) runestone.getX() + 0.5D,
                 (double) runestone.getY() + 0.5D,
                 (double) runestone.getZ() + 0.5D,
@@ -130,7 +131,11 @@ public class BlockPyre extends BlockTEBase {
                 60 / 255.0 + rand.nextDouble() * 0.05,
                 1f,
                 2.5f,
-                0
+                0,
+                me.x,
+                me.y,
+                me.z,
+                0.65
             );
           }
         }
