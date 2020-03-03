@@ -1391,6 +1391,25 @@ public class ModRecipes {
         new ItemStack(ModItems.bark_birch),
         new OreFallbackIngredient("gemAmethyst", "gemDiamond"),
         new ItemStack(Items.IRON_BOOTS)));
+
+    // END OF ARMOR/etc
+
+    addCraftingRecipe("mycelium", new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(Blocks.MYCELIUM), 5), 1).addIngredients(
+        new OreIngredient("mushroom"),
+        new OreIngredient("dirt"),
+        new ItemStack(ModItems.terra_spores),
+        new OreIngredient("dirt"),
+        new ItemStack(ModItems.stalicripe)
+    ));
+
+    addCraftingRecipe("podzol", new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 5, BlockDirt.DirtType.PODZOL.getMetadata()), 1).addIngredients(
+        new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 1, BlockDirt.DirtType.COARSE_DIRT.getMetadata()),
+        new OreIngredient("rootsBark"),
+        new OreIngredient("treeLeaves"),
+        new ItemStack(ModItems.stalicripe),
+        new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 1, BlockDirt.DirtType.COARSE_DIRT.getMetadata())
+    ));
+
   }
 
   public static void afterHerbRegisterInit() {
