@@ -59,10 +59,6 @@ public class Growth {
 
     if (CropConfig.getGrowthModBlacklist().contains(Objects.requireNonNull(state.getBlock().getRegistryName()).getNamespace())) return false;
 
-    if (state.getBlock() instanceof IGrowable) {
-      return ((IGrowable) state.getBlock()).canGrow(world, pos, state, true);
-    }
-
     // Hard-code this for some dumb reason as max age doesn't mean grown
     if (state.getBlock() == Blocks.REEDS || state.getBlock() == Blocks.CACTUS) {
       return world.isAirBlock(pos.up());
@@ -74,6 +70,10 @@ public class Growth {
 
     if (state.getBlock() instanceof BlockMushroom) {
       return true;
+    }
+
+    if (state.getBlock() instanceof IGrowable) {
+      return ((IGrowable) state.getBlock()).canGrow(world, pos, state, true);
     }
 
     if (state.getBlock() instanceof IPlantable) {
