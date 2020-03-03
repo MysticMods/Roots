@@ -1,6 +1,7 @@
 package epicsquid.roots.recipe.ingredient;
 
 import com.google.gson.JsonObject;
+import epicsquid.roots.init.ModItems;
 import net.minecraft.block.BlockNetherWart;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.*;
@@ -20,6 +21,9 @@ public class ArrowBuilder {
     if (ARROW == null) {
       NonNullList<ItemStack> matchingStacks = NonNullList.create();
       for (Item item : ForgeRegistries.ITEMS) {
+        if (item == ModItems.wildwood_quiver) {
+          continue;
+        }
         if (item instanceof ItemArrow) {
           item.getSubItems(CreativeTabs.SEARCH, matchingStacks);
         }
