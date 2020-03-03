@@ -20,12 +20,10 @@ import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.util.OfferingUtil;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.*;
-import org.apache.logging.log4j.LogManager;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Collections;

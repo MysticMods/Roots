@@ -2,9 +2,11 @@ package epicsquid.roots.proxy;
 
 import epicsquid.roots.RegistryManager;
 import epicsquid.roots.client.Keybinds;
+import epicsquid.roots.client.PatchouliHack;
 import epicsquid.roots.tileentity.*;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -31,5 +33,12 @@ public class ClientProxy extends CommonProxy {
   @Override
   public void postInit(FMLPostInitializationEvent event) {
     super.postInit(event);
+  }
+
+  @Override
+  public void loadComplete(FMLLoadCompleteEvent event) {
+    super.loadComplete(event);
+
+    PatchouliHack.init();
   }
 }

@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Summons a creature's spirit from beyond and returns it to a fleshly body in this world. The creature summoned is determined by what items are placed on various $(l:apparatus/offering_plate)offering plates$() placed nearby ($(l:rituals/ritual_summon_creatures#multiblock)see layout$()).$(br2)$(warning) Unfortunately, due to limitations of this guide, a complete list of creatures and items can only be found in JEI."
+      "text": "Summons a creature's spirit from beyond and returns it to a fleshly body in this world. The creature summoned is determined by what items are placed on various $(l:apparatus/offering_plate)offering plates$() placed nearby ($(l:rituals/ritual_summon_creatures#multiblock)see layout$()).$(br2)$(warning) Unfortunately, due to limitations of this guide, a $(uses:roots:ritual_summon_creatures)complete list of creatures and items can only be found in JEI$()."
     },
     {
       "type": "pyre_template",

@@ -65,7 +65,7 @@ public class JEIRootsPlugin implements IModPlugin {
   public static final String SPELL_MODIFIERS = Roots.MODID + ".spell_modifiers";
   public static final String TERRA_MOSS = Roots.MODID + ".terra_moss";
   public static final String SUMMON_CREATURES = Roots.MODID + ".summon_creatures";
-  public static final String CHRYSOPOEIA = Roots.MODID + ".transubstantiation";
+  public static final String CHRYSOPOEIA = Roots.MODID + ".chrysopoeia";
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registry) {
@@ -204,5 +204,12 @@ public class JEIRootsPlugin implements IModPlugin {
     subtypeRegistry.registerSubtypeInterpreter(ModItems.spell_dust, spellInterpreter);
 
     // TODO: Handler for Life Essence
+  }
+
+  public static IJeiRuntime runtime = null;
+
+  @Override
+  public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
+    runtime = jeiRuntime;
   }
 }
