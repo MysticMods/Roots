@@ -61,6 +61,7 @@ public class MessageLightDrifterSync implements IMessage {
   }
 
   public static class MessageHolder implements IMessageHandler<MessageLightDrifterSync, IMessage> {
+    @SuppressWarnings("ConstantConditions")
     @SideOnly(Side.CLIENT)
     @Override
     public IMessage onMessage(final MessageLightDrifterSync message, final MessageContext ctx) {
@@ -79,7 +80,11 @@ public class MessageLightDrifterSync implements IMessage {
         }
 
         player.capabilities.isFlying = message.enable;
-        player.setGameType(GameType.getByID(message.mode));
+        GameType type = GameType.getByID(message.mode);
+        if (type == null) {
+          type = GameType.SURVIVAL;
+        }
+        player.setGameType(type);
         player.capabilities.disableDamage = message.enable;
         player.capabilities.allowFlying = message.enable;
       }
