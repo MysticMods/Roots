@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Summons a protective storm cloud above the caster, extinguishing fires and providing players within it resistances to damage, especially fire.$(br2)In addition, it has a chance to strike hostile creatures with lightning.$(br2)$(warning) The world can only sustain one of these storm cloud per player, lest the entire weather system be thrown into chaos."
+      "text": "Summons a protective storm above the caster, extinguishing fires and providing players within it resistances to damage, especially fire.$(br2)$(info) It has a chance to strike hostile creatures with lightning.$(br2)$(warning) Only one storm cloud can be maintained per player."
     },
     {
       "type": "spell_template",

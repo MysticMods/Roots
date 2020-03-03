@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "When cast it plants all the seeds you have in your off-hand rapidly on farmland blocks around you under the default radius of 7 blocks"
+      "text": "Rapidly disseminates seeds from your off-hand to nearby farmland (or other suitable blocks that can sustain the plant), planting it as though planted by hand."
     },
     {
       "type": "spell_template",
