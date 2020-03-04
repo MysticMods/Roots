@@ -2,6 +2,7 @@ package epicsquid.roots.recipe;
 
 import com.google.common.collect.Lists;
 import epicsquid.mysticallib.util.ListUtil;
+import epicsquid.roots.tileentity.TileEntityPyre;
 import epicsquid.roots.util.types.RegistryItem;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -12,7 +13,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class SummonCreatureRecipe extends RegistryItem {
+public class SummonCreatureRecipe extends RegistryItem implements IRootsRecipe<TileEntityPyre> {
   private Class<? extends EntityLivingBase> clazz;
   private List<Ingredient> ingredients;
 
@@ -32,12 +33,9 @@ public class SummonCreatureRecipe extends RegistryItem {
     return clazz;
   }
 
+  @Override
   public List<Ingredient> getIngredients() {
     return ingredients;
-  }
-
-  public boolean matches (List<ItemStack> values) {
-    return ListUtil.matchesIngredients(values, getIngredients());
   }
 
   @Nullable

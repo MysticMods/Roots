@@ -29,6 +29,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("NullableProblems")
 public class TileEntityMortar extends TileBase {
 
   public ItemStackHandler inventory = new ItemStackHandler(5) {
@@ -89,6 +90,7 @@ public class TileEntityMortar extends TileBase {
     return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && facing == EnumFacing.UP;
   }
 
+  @SuppressWarnings("unchecked")
   @Nullable
   @Override
   public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
@@ -130,13 +132,13 @@ public class TileEntityMortar extends TileBase {
         markDirty();
         updatePacketViaState();
       }
+      List<ItemStack> items = new ArrayList<>();
       for (int i = 0; i < inventory.getSlots(); i++) {
-        ItemStack item = inventory.extractItem(i, 1, false);
-        if (!world.isRemote) {
-          if (item.getItem().hasContainerItem(item)) {
-            ItemStack container = ForgeHooks.getContainerItem(item);
-            ItemUtil.spawnItem(world, crafterPos.add(0, 1, 0), container);
-          }
+        items.add(inventory.extractItem(i, 1, false));
+      }
+      if (!world.isRemote) {
+        for (ItemStack stack : spell.recipe.transformIngredients(items, this)) {
+          ItemUtil.spawnItem(world, crafterPos.add(0, 1, 0), stack);
         }
       }
       return true;
@@ -170,17 +172,14 @@ public class TileEntityMortar extends TileBase {
         markDirty();
         updatePacketViaState();
       }
+      List<ItemStack> items = new ArrayList<>();
       for (int i = 0; i < inventory.getSlots(); i++) {
-        ItemStack item = inventory.extractItem(i, 1, false);
-        if (!world.isRemote) {
-          if (item.getItem().hasContainerItem(item)) {
-            ItemStack container = ForgeHooks.getContainerItem(item);
-            ItemUtil.spawnItem(world, crafterPos.add(0, 1, 0), container);
-          }
-        }
+        items.add(inventory.extractItem(i, 1, false));
       }
-      for (int i = 0; i < inventory.getSlots(); i++) {
-        inventory.extractItem(i, 1, false);
+      if (!world.isRemote) {
+        for (ItemStack stack : mortarRecipe.transformIngredients(items, this)) {
+          ItemUtil.spawnItem(world, crafterPos.add(0, 1, 0), stack);
+        }
       }
       return true;
     }
@@ -191,7 +190,9 @@ public class TileEntityMortar extends TileBase {
     List<ItemStack> ingredients = new ArrayList<>();
     for (int i = 0; i < inventory.getSlots(); i++) {
       ItemStack stack = inventory.getStackInSlot(i);
-      if (!stack.isEmpty()) ingredients.add(stack);
+      if (!stack.isEmpty()) {
+        ingredients.add(stack);
+      }
     }
     return ingredients;
   }
@@ -245,8 +246,7 @@ public class TileEntityMortar extends TileBase {
         }
       }
     }
-    if (!heldItem.isEmpty()) return true;
-    return false;
+    return !heldItem.isEmpty();
   }
 
   @Override

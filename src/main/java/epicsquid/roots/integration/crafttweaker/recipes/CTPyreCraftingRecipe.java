@@ -10,7 +10,7 @@ import net.minecraft.item.crafting.Ingredient;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CTPyreCraftingRecipe extends PyreCraftingRecipe implements CTTransformer<TileEntityPyre> {
+public class CTPyreCraftingRecipe extends PyreCraftingRecipe {
   private List<IIngredient> ingredients;
   private List<Ingredient> convertedIngredients;
 

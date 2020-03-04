@@ -4,6 +4,7 @@ import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.recipe.SummonCreatureRecipe;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -126,32 +127,23 @@ public class TileEntityOfferingPlate extends TileBase {
     return this.inventory.getStackInSlot(0).copy();
   }
 
-  public void removeItem() {
+  public ItemStack removeItem() {
     ItemStack stack = this.inventory.getStackInSlot(0);
     if (stack.getItem() == ModItems.life_essence) {
       if (stack.attemptDamageItem(1, Util.rand, null)) {
         inventory.setStackInSlot(0, ItemStack.EMPTY);
       }
+      return ItemStack.EMPTY;
     } else {
-      if (stack.getItem().hasContainerItem(stack)) {
-        ItemStack container = stack.getItem().getContainerItem(stack);
-        if (stack.getMaxStackSize() != 1 && stack.getCount() > 0) {
-          stack.shrink(1);
-          inventory.setStackInSlot(0, stack);
-        } else {
-          inventory.setStackInSlot(0, ItemStack.EMPTY);
-          if (!world.isRemote) {
-            ItemUtil.spawnItem(world, getPos().up(), container);
-          }
-        }
+      ItemStack ingredient = stack.copy();
+      ingredient.setCount(1);
+      stack.shrink(1);
+      if (stack.getCount() == 0 || stack.isEmpty()) {
+        inventory.setStackInSlot(0, ItemStack.EMPTY);
       } else {
-        stack.shrink(1);
-        if (stack.getCount() == 0 || stack.isEmpty()) {
-          inventory.setStackInSlot(0, ItemStack.EMPTY);
-        } else {
-          inventory.setStackInSlot(0, stack);
-        }
+        inventory.setStackInSlot(0, stack);
       }
+      return ingredient;
     }
   }
 

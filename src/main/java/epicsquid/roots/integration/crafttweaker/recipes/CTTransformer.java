@@ -4,7 +4,6 @@ import crafttweaker.CraftTweakerAPI;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
-import epicsquid.roots.recipe.IRootsRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeHooks;
@@ -12,9 +11,8 @@ import net.minecraftforge.common.ForgeHooks;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: Utility class?
-public interface CTTransformer<T extends TileEntity> extends IRootsRecipe<T> {
-  static <T extends TileEntity> List<ItemStack> transformIngredients(List<IIngredient> ingredients, List<ItemStack> items, T entity) {
+public class CTTransformer {
+  public static <T extends TileEntity> List<ItemStack> transformIngredients(List<IIngredient> ingredients, List<ItemStack> items, T entity) {
     List<IIngredient> postCopy = new ArrayList<>(ingredients);
     List<ItemStack> result = new ArrayList<>();
 
@@ -56,5 +54,18 @@ public interface CTTransformer<T extends TileEntity> extends IRootsRecipe<T> {
     }
 
     return result;
+  }
+
+  public static <T extends TileEntity> ItemStack transformIngredient(IIngredient ingredient, ItemStack item, T entity) {
+    IItemStack inSlot = CraftTweakerMC.getIItemStack(item);
+
+    if (ingredient.hasNewTransformers()) {
+      try {
+        return CraftTweakerMC.getItemStack(ingredient.applyNewTransform(inSlot));
+      } catch (Throwable e) {
+        CraftTweakerAPI.logError("Could not execute recipe transformer on " + ingredient.toCommandString(), e);
+      }
+    }
+    return ForgeHooks.getContainerItem(item);
   }
 }

@@ -2,21 +2,20 @@ package epicsquid.roots.integration.crafttweaker.recipes;
 
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.minecraft.CraftTweakerMC;
-import epicsquid.roots.recipe.FeyCraftingRecipe;
-import epicsquid.roots.tileentity.TileEntityFeyCrafter;
-import epicsquid.roots.tileentity.TileEntityMortar;
-import net.minecraft.item.ItemStack;
+import epicsquid.roots.recipe.SummonCreatureRecipe;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CTFeyCraftingRecipe extends FeyCraftingRecipe {
+public class CTSummonCreaturesRecipe extends SummonCreatureRecipe {
   private List<IIngredient> ingredients;
   private List<Ingredient> convertedIngredients;
 
-  public CTFeyCraftingRecipe(ItemStack result, List<IIngredient> ingredients, int xp) {
-    super(result, xp);
+  public CTSummonCreaturesRecipe(ResourceLocation resource, Class<? extends EntityLivingBase> clazz, List<IIngredient> ingredients) {
+    super(resource, clazz);
     this.ingredients = ingredients;
     this.convertedIngredients = ingredients.stream().map(CraftTweakerMC::getIngredient).collect(Collectors.toList());
   }
@@ -24,10 +23,5 @@ public class CTFeyCraftingRecipe extends FeyCraftingRecipe {
   @Override
   public List<Ingredient> getIngredients() {
     return convertedIngredients;
-  }
-
-  @Override
-  public List<ItemStack> transformIngredients(List<ItemStack> items, TileEntityFeyCrafter pyre) {
-    return CTTransformer.transformIngredients(ingredients, items, pyre);
   }
 }

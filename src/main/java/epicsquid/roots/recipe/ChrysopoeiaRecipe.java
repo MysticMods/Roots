@@ -45,7 +45,6 @@ public class ChrysopoeiaRecipe extends RegistryItem {
     return result;
   }
 
-
   public ItemStack getOutput() {
     return outputs;
   }
