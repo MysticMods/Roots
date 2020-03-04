@@ -10,7 +10,7 @@ import net.minecraft.item.crafting.Ingredient;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CTMortarRecipe extends MortarRecipe implements CTTransformer<TileEntityMortar> {
+public class CTMortarRecipe extends MortarRecipe {
   private List<IIngredient> ingredients;
   private List<Ingredient> convertedIngredients;
 

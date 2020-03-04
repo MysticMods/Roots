@@ -138,12 +138,11 @@ public class TileEntityFeyCrafter extends TileBase {
       inputItems.clear();
       boolean singleStack = false;
       for (int i = 0; i < 5; i++) {
-        ItemStack stack = inventory.extractItem(i, 1, false);
-        if (stack.getItem().hasContainerItem(stack)) {
-          ItemStack containerResult = ForgeHooks.getContainerItem(stack);
-          ItemUtil.spawnItem(world, getPos().add(0, 1, 0), containerResult);
-        }
-        inputItems.add(stack);
+        inputItems.add(inventory.extractItem(i, 1, false));
+      }
+
+      for (ItemStack stack : recipe.transformIngredients(inputItems, this)) {
+        ItemUtil.spawnItem(world, pos.add(random.nextBoolean() ? -1 : 1, 1, random.nextBoolean() ? -1 : 1), stack);
       }
 
       if (current.isEmpty()) {

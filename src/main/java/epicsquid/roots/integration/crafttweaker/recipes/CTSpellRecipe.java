@@ -10,7 +10,7 @@ import net.minecraft.item.crafting.Ingredient;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CTSpellRecipe extends SpellBase.SpellRecipe implements CTTransformer<TileEntityMortar> {
+public class CTSpellRecipe extends SpellBase.SpellRecipe {
   private List<IIngredient> ingredients;
   private List<Ingredient> convertedIngredients;
 

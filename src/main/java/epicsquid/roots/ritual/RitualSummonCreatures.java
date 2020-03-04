@@ -1,5 +1,6 @@
 package epicsquid.roots.ritual;
 
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualSummonCreatures;
 import epicsquid.roots.init.ModItems;
@@ -18,7 +19,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RitualSummonCreatures extends RitualBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(200);
@@ -67,9 +71,10 @@ public class RitualSummonCreatures extends RitualBase {
       List<ItemStack> plateItems = RitualUtil.getItemsFromNearbyPlates(plates);
 
       SummonCreatureRecipe recipe = ModRecipes.findSummonCreatureEntry(plateItems);
+      List<ItemStack> ingredients = new ArrayList<>();
       if (recipe != null) {
         for (TileEntityOfferingPlate plate : plates) {
-          plate.removeItem();
+          ingredients.add(plate.removeItem());
         }
       }
       ItemStack essence = ItemStack.EMPTY;
@@ -81,6 +86,11 @@ public class RitualSummonCreatures extends RitualBase {
             plate.removeItem();
             break;
           }
+        }
+      }
+      if (!ingredients.isEmpty()) {
+        for (ItemStack stack : recipe.transformIngredients(ingredients, null)) {
+          ItemUtil.spawnItem(world, pos.add(random.nextBoolean() ? -1 : 1, 1, random.nextBoolean() ? -1 : 1), stack);
         }
       }
 

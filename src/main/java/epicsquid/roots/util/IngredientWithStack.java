@@ -3,6 +3,8 @@ package epicsquid.roots.util;
 import net.minecraft.item.crafting.Ingredient;
 
 public class IngredientWithStack {
+  public static IngredientWithStack EMPTY = new IngredientWithStack(Ingredient.EMPTY, 0);
+
   private final Ingredient ingredient;
   private int count;
 

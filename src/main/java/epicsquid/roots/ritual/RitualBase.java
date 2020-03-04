@@ -1,7 +1,5 @@
 package epicsquid.roots.ritual;
 
-import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.block.BlockPyre;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
@@ -18,7 +16,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.Constructor;
@@ -50,7 +47,7 @@ public abstract class RitualBase {
     this.duration = 0;
   }
 
-  public void setRecipe (RitualRecipe recipe) {
+  public void setRecipe(RitualRecipe recipe) {
     this.recipe = recipe;
   }
 

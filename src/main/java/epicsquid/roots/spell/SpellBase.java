@@ -50,7 +50,6 @@ public abstract class SpellBase {
   private TextFormatting textColor;
   protected EnumCastType castType = EnumCastType.INSTANTANEOUS;
   private Object2DoubleOpenHashMap<Herb> costs = new Object2DoubleOpenHashMap<>();
-  private List<Ingredient> ingredients = new ArrayList<>();
   private List<SpellModule> acceptedModules = new ArrayList<>();
   private float[] firstColours;
   private float[] secondColours;
@@ -211,7 +210,7 @@ public abstract class SpellBase {
   }
 
   public boolean matchesIngredients(List<ItemStack> ingredients) {
-    return ListUtil.matchesIngredients(ingredients, this.ingredients);
+    return ListUtil.matchesIngredients(ingredients, this.getIngredients());
   }
 
   public abstract boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks);
@@ -261,11 +260,7 @@ public abstract class SpellBase {
   }
 
   public List<Ingredient> getIngredients() {
-    return ingredients;
-  }
-
-  public void setIngredients(List<Ingredient> ingredients) {
-    this.ingredients = ingredients;
+    return recipe.getIngredients();
   }
 
   public ItemStack getResult() {
