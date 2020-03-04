@@ -3,7 +3,7 @@ package epicsquid.roots.integration.jei.summon;
 import epicsquid.roots.integration.jei.shears.RunicShearsEntityWrapper;
 import epicsquid.roots.recipe.SummonCreatureIntermediate;
 import epicsquid.roots.recipe.SummonCreatureRecipe;
-import epicsquid.roots.util.EntityRenderHelper;
+import epicsquid.roots.util.RenderUtil;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -44,6 +44,6 @@ public class SummonCreaturesWrapper implements IRecipeWrapper {
       entity = recipe.getEntity(minecraft.world);
     }
     float scale = RunicShearsEntityWrapper.getScale(entity);
-    EntityRenderHelper.drawEntityOnScreen(137, 70, scale, 38 - mouseX, 70 - mouseY, entity);
+    RenderUtil.drawEntityOnScreen(137, 70, scale, 38 - mouseX, 70 - mouseY, entity);
   }
 }
