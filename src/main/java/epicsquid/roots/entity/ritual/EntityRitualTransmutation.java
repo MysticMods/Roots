@@ -5,7 +5,7 @@ import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
-import epicsquid.roots.recipe.TransmutationRecipe;
+import epicsquid.roots.recipe.OldTransmutationRecipe;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.ritual.RitualTransmutation;
 import net.minecraft.block.state.IBlockState;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 public class EntityRitualTransmutation extends EntityRitualBase {
-  private Set<TransmutationRecipe> recipes = new HashSet<>();
+  private Set<OldTransmutationRecipe> recipes = new HashSet<>();
   private RitualTransmutation ritual;
 
   public EntityRitualTransmutation(World worldIn) {
@@ -37,10 +37,10 @@ public class EntityRitualTransmutation extends EntityRitualBase {
       List<BlockPos> eligiblePositions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, (pos) -> {
         if (world.isAirBlock(pos)) return false;
         IBlockState state = world.getBlockState(pos);
-        List<TransmutationRecipe> stateRecipes = ModRecipes.getTransmutationRecipes(state);
+        List<OldTransmutationRecipe> stateRecipes = ModRecipes.getTransmutationRecipes(state);
         if (stateRecipes == null) return false;
         boolean foundMatch = false;
-        for (TransmutationRecipe r : stateRecipes) {
+        for (OldTransmutationRecipe r : stateRecipes) {
           if (r.matches(world, pos, state)) {
             foundMatch = true;
             break;
@@ -62,8 +62,8 @@ public class EntityRitualTransmutation extends EntityRitualBase {
   private void transmuteBlock(World world, BlockPos pos) {
     IBlockState state = world.getBlockState(pos);
 
-    TransmutationRecipe recipe = null;
-    for (TransmutationRecipe r : recipes) {
+    OldTransmutationRecipe recipe = null;
+    for (OldTransmutationRecipe r : recipes) {
       if (r.matches(world, pos, state)) {
         recipe = r;
         break;

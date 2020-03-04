@@ -156,7 +156,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addIngredientInfo(new ItemStack(ModItems.terra_spores), VanillaTypes.ITEM, I18n.format("jei.roots.terra_spores.desc"));
     registry.addIngredientInfo(new ItemStack(ModItems.wildroot), VanillaTypes.ITEM, I18n.format("jei.roots.wildroot.desc"));
 
-    for (TransmutationRecipe recipe : ModRecipes.getTransmutationRecipes()) {
+    for (OldTransmutationRecipe recipe : ModRecipes.getTransmutationRecipes()) {
       IBlockState endState = recipe.getEndState();
       ItemStack endStack = recipe.getEndStack();
       if (endStack != null && !endStack.isEmpty()) {
