@@ -75,22 +75,6 @@ public class ItemPouch extends ItemBase implements IItemPouch {
   @Nonnull
   public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
     ItemStack stack = player.getHeldItem(hand);
-/*    boolean isBaublesLoaded = Loader.isModLoaded("baubles");
-    boolean open_gui = false;
-    if (GeneralConfig.AutoEquipPouches) {
-      if (player.isSneaking()) {
-        open_gui = true;
-      }
-      if (isBaublesLoaded) {
-        if (!world.isRemote) {
-          if (!PouchEquipHandler.tryEquipPouch(player, stack)) {
-            open_gui = true;
-          }
-        }
-      }
-    } else {
-      open_gui = true;
-    }*/
     if (!world.isRemote) {
       player.openGui(Roots.getInstance(), GuiHandler.POUCH_ID, world, 0, 0, 0);
     }
