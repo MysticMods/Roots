@@ -1,5 +1,8 @@
 package epicsquid.roots.network;
 
+import epicsquid.roots.GuiHandler;
+import epicsquid.roots.Roots;
+import epicsquid.roots.item.ItemPouch;
 import epicsquid.roots.util.ServerHerbUtil;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -35,7 +38,7 @@ public class MessageServerOpenPouch implements IMessage {
       EntityPlayerMP player = ctx.getServerHandler().player;
       ItemStack pouch = ServerHerbUtil.getFirstPouch(player);
       if (!pouch.isEmpty()) {
-        pouch.getItem().onItemRightClick(player.world, player, EnumHand.MAIN_HAND);
+        player.openGui(Roots.getInstance(), GuiHandler.POUCH_ID, player.world, 0, 0, 0);
       }
     }
   }

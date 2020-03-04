@@ -37,8 +37,6 @@ public class ContainerPouch extends Container {
   private EntityPlayer player;
   private ItemStack pouch;
 
-  public boolean componentPouch = false;
-
   private int inventoryEnd;
   private int herbsEnd;
 
@@ -78,12 +76,15 @@ public class ContainerPouch extends Container {
   }
 
   private void createPouchSlots() {
-    if (pouch.getItem() == ModItems.component_pouch) {
+    if (!isApothecary()) {
       createComponentPouchSlots();
-      componentPouch = true;
     } else {
       createApothecaryPouchSlots();
     }
+  }
+
+  public boolean isApothecary () {
+    return handler.isApothecary();
   }
 
   private void createComponentPouchSlots() {

@@ -47,6 +47,6 @@ public class GuiPouch extends GuiContainer {
   }
 
   private boolean isComponentPouch() {
-    return containerPouch.componentPouch;
+    return !containerPouch.isApothecary();
   }
 }
