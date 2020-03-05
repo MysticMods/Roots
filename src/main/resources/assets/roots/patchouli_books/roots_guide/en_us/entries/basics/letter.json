@@ -29,6 +29,11 @@
       },
       {
         "type": "text",
+        "title": "Delicate Extraction",
+        "text": "Many recipes require ingredients that must be gathered with a delicate touch. More often than not, iron shears would suffice for this purpose, but it is possible to craft more primitive but $(l:apparatus/wooden_shears)suitably functional shears from wood$().$(br2)These can be used to obtain grass, ferns, vines, and so-on, in addition to shearing sheep of their wool."
+      },
+      {
+        "type": "text",
         "title": "Terra Moss",
         "text": "The $(l:herbs/terra_moss)strange spores$() which may be found in tall grass grow best when placed on rough stone near water. When scraped away carefully with a knife, it is clear that magic suffuses them.$(br2)However, fear not that you will spend your days breaking grass in search of spores, for there is a ritual, that of $(l:rituals/ritual_overgrowth)Overgrowth$(), which will magically grow this moss on suitable stone."
       },
