@@ -24,6 +24,15 @@ public class GeneralConfig {
     }
   }
 
+  @Config.Comment(("Set to false to disable repairing items in an Imbuer"))
+  public static boolean AllowImbuerRepair = true;
+
+  @Config.Comment(("Set to false to prevent runic dust from removing enchants with an Imbuer"))
+  public static boolean AllowImbuerDisenchant = true;
+
+  @Config.Comment(("Divisor of max damage of an item to calculte how much is repaired in an Imbuer (formula: max damage / X)"))
+  public static int MaxDamageDivisor = 4;
+
   @Config.Comment(("Client side only: disable elemental soil particles"))
   public static boolean DisableParticles = false;
 
