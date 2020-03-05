@@ -5,6 +5,7 @@ import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
+import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemStaff;
@@ -148,10 +149,10 @@ public class TileEntityImbuer extends TileBase implements ITickable {
           }
         } else {
           ItemStack toRepair = inventory.getStackInSlot(1);
-          if (!toRepair.isEmpty() && toRepair.isItemStackDamageable() && toRepair.getItem().getIsRepairable(toRepair, heldItem)) {
+          if (GeneralConfig.AllowImbuerRepair && !toRepair.isEmpty() && toRepair.isItemStackDamageable() && toRepair.getItem().getIsRepairable(toRepair, heldItem)) {
             ItemStack repairItem = heldItem.copy();
             repairItem.setCount(1);
-            int repairAmount = Math.min(toRepair.getItemDamage(), toRepair.getMaxDamage() / 4);
+            int repairAmount = Math.min(toRepair.getItemDamage(), toRepair.getMaxDamage() / GeneralConfig.MaxDamageDivisor);
             if (repairAmount > 0) {
               ItemStack result = inventory.insertItem(0, repairItem, true);
               if (result.isEmpty()) {
@@ -165,7 +166,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
                 return true;
               }
             }
-          } else if (!toRepair.isEmpty() && toRepair.isItemEnchanted() && heldItem.getItem() == ModItems.runic_dust) {
+          } else if (GeneralConfig.AllowImbuerDisenchant && !toRepair.isEmpty() && toRepair.isItemEnchanted() && heldItem.getItem() == ModItems.runic_dust) {
             ItemStack runicDust = heldItem.copy();
             runicDust.setCount(1);
             ItemStack result = inventory.insertItem(0, runicDust, true);
