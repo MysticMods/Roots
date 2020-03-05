@@ -5,11 +5,14 @@ import epicsquid.roots.Roots;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import javax.annotation.Nullable;
 import java.util.Set;
 
 @Mod.EventBusSubscriber(modid=Roots.MODID)
@@ -93,6 +96,11 @@ public class GeneralConfig {
 
   @Config.Comment(("Name of the liquid as per the Forge registry to provide from the Unending Bowl"))
   public static String FluidName = "water";
+
+  @Nullable
+  public static Fluid getFluid () {
+    return FluidRegistry.getFluid(FluidName);
+  }
 }
 
 
