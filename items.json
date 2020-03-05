@@ -4,10 +4,6 @@
   "models": [
     {
       "type": "tool",
-      "base": "apothecary_pouch"
-    },
-    {
-      "type": "tool",
       "base": "wooden_shears"
     },
     {
@@ -45,10 +41,6 @@
     {
       "type": "item",
       "base": "cloud_berry"
-    },
-    {
-      "type": "tool",
-      "base": "component_pouch"
     },
     {
       "type": "item",
