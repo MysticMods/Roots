@@ -1,5 +1,7 @@
 package epicsquid.roots.integration.jei;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.ElementalSoilConfig;
 import epicsquid.roots.handler.SpellHandler;
@@ -10,12 +12,12 @@ import epicsquid.roots.integration.jei.carving.BarkRecipeCategory;
 import epicsquid.roots.integration.jei.carving.BarkRecipeWrapper;
 import epicsquid.roots.integration.jei.carving.MossRecipeCategory;
 import epicsquid.roots.integration.jei.carving.MossRecipeWrapper;
+import epicsquid.roots.integration.jei.chrysopoeia.ChrysopoeiaCategory;
+import epicsquid.roots.integration.jei.chrysopoeia.ChrysopoeiaWrapper;
 import epicsquid.roots.integration.jei.fey.FeyCategory;
 import epicsquid.roots.integration.jei.fey.FeyWrapper;
 import epicsquid.roots.integration.jei.mortar.MortarCategory;
 import epicsquid.roots.integration.jei.mortar.MortarWrapper;
-import epicsquid.roots.integration.jei.chrysopoeia.ChrysopoeiaCategory;
-import epicsquid.roots.integration.jei.chrysopoeia.ChrysopoeiaWrapper;
 import epicsquid.roots.integration.jei.ritual.RitualCategory;
 import epicsquid.roots.integration.jei.ritual.RitualCraftingCategory;
 import epicsquid.roots.integration.jei.ritual.RitualCraftingWrapper;
@@ -39,15 +41,22 @@ import epicsquid.roots.spell.SpellRegistry;
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import mezz.jei.api.recipe.IRecipeWrapper;
+import mezz.jei.api.recipe.IVanillaRecipeFactory;
+import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.OreIngredient;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @JEIPlugin
@@ -85,8 +94,41 @@ public class JEIRootsPlugin implements IModPlugin {
     );
   }
 
+  private List<IRecipeWrapper> generateRepairRecipes (Ingredient repairItem, List<ItemStack> itemsToRepair, IVanillaRecipeFactory vanillaFactory) {
+    List<IRecipeWrapper> result = new ArrayList<>();
+    boolean first = true;
+    for (ItemStack repairMat : repairItem.getMatchingStacks()) {
+      for (ItemStack toRepair : itemsToRepair) {
+        ItemStack damaged1 = toRepair.copy();
+        damaged1.setItemDamage(damaged1.getMaxDamage());
+        ItemStack damaged2 = toRepair.copy();
+        damaged2.setItemDamage(damaged2.getMaxDamage() * 3 / 4);
+        ItemStack damaged3 = toRepair.copy();
+        damaged3.setItemDamage(damaged3.getMaxDamage() * 2 / 4);
+
+        if (first) {
+          IRecipeWrapper repairWithSame = vanillaFactory.createAnvilRecipe(damaged2, Collections.singletonList(damaged2), Collections.singletonList(damaged3));
+          result.add(repairWithSame);
+          first = false;
+        }
+
+        IRecipeWrapper repairWithMaterial = vanillaFactory.createAnvilRecipe(damaged1, Collections.singletonList(repairMat), Collections.singletonList(damaged2));
+        result.add(repairWithMaterial);
+      }
+    }
+    return result;
+  }
+
   @Override
   public void register(IModRegistry registry) {
+    IVanillaRecipeFactory vanillaFactory = registry.getJeiHelpers().getVanillaRecipeFactory();
+
+    registry.addRecipes(generateRepairRecipes(new OreIngredient("runestone"), Collections.singletonList(new ItemStack(ModItems.runic_shears)), vanillaFactory), VanillaRecipeCategoryUid.ANVIL);
+    registry.addRecipes(generateRepairRecipes(new OreIngredient("plankWood"), Collections.singletonList(new ItemStack(ModItems.wooden_shears)), vanillaFactory), VanillaRecipeCategoryUid.ANVIL);
+    registry.addRecipes(generateRepairRecipes(new OreIngredient("rootsBarkWildwood"), Arrays.asList(new ItemStack(ModItems.wildwood_quiver), new ItemStack(ModItems.wildwood_boots), new ItemStack(ModItems.wildwood_bow), new ItemStack(ModItems.wildwood_chestplate), new ItemStack(ModItems.wildwood_helmet), new ItemStack(ModItems.wildwood_leggings)), vanillaFactory), VanillaRecipeCategoryUid.ANVIL);
+    registry.addRecipes(generateRepairRecipes(new OreIngredient("rootsBark"), Arrays.asList(new ItemStack(ModItems.living_axe), new ItemStack(ModItems.living_hoe), new ItemStack(ModItems.living_pickaxe), new ItemStack(ModItems.living_pickaxe), new ItemStack(ModItems.living_shovel), new ItemStack(ModItems.living_sword)), vanillaFactory), VanillaRecipeCategoryUid.ANVIL);
+    registry.addRecipes(generateRepairRecipes(new OreIngredient("feyLeather"), Arrays.asList(new ItemStack(ModItems.sylvan_boots), new ItemStack(ModItems.sylvan_leggings), new ItemStack(ModItems.sylvan_chestplate), new ItemStack(ModItems.sylvan_helmet)), vanillaFactory), VanillaRecipeCategoryUid.ANVIL);
+
     registry.handleRecipes(RunicShearRecipe.class, RunicShearsWrapper::new, RUNIC_SHEARS);
     registry.handleRecipes(RunicShearEntityRecipe.class, RunicShearsEntityWrapper::new, RUNIC_SHEARS_ENTITY);
     registry.handleRecipes(PyreCraftingRecipe.class, RitualCraftingWrapper::new, RITUAL_CRAFTING);

@@ -8,7 +8,7 @@ import net.minecraftforge.oredict.OreDictionary;
 public class ItemWoodenShears extends ItemShearsBase {
   public ItemWoodenShears(String name) {
     super(name);
-    setMaxDamage(57); // 238 / 4.2
+    setMaxDamage(119);
   }
 
   private static int planksWood = -1;

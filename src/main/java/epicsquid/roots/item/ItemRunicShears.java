@@ -6,6 +6,7 @@ import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.mysticalworld.recipe.Ingredients;
 import epicsquid.roots.capability.life_essence.LifeEssenceCapability;
 import epicsquid.roots.capability.life_essence.LifeEssenceCapabilityProvider;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapability;
@@ -75,13 +76,7 @@ public class ItemRunicShears extends ItemShearsBase {
 
   @Override
   public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-    Item item = repair.getItem();
-    if (item instanceof ItemBlock) {
-      Block block = ((ItemBlock) item).getBlock();
-      return ModBlocks.runestoneBlocks.contains(block);
-    }
-
-    return false;
+    return toRepair.getItem() == this && Ingredients.RUNESTONE.test(repair);
   }
 
   @Override

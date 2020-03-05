@@ -190,6 +190,7 @@ public class ModItems {
     for (Item bark : barks) {
       OreDictionary.registerOre("rootsBark", bark);
     }
+    OreDictionary.registerOre("rootsBarkWildwood", ModItems.bark_wildwood);
 
     for (Block rune : ModBlocks.runestoneBlocks) {
       OreDictionary.registerOre("runestone", rune);
@@ -211,6 +212,7 @@ public class ModItems {
     OreDictionary.registerOre("dustWheat", ModItems.flour);
     OreDictionary.registerOre("treeLeaves", ModBlocks.wildwood_leaves);
     OreDictionary.registerOre("leather", ModItems.fey_leather);
+    OreDictionary.registerOre("feyLeather", ModItems.fey_leather);
     OreDictionary.registerOre("tallgrass", new ItemStack(Blocks.TALLGRASS, 1, BlockTallGrass.EnumType.GRASS.getMeta()));
     OreDictionary.registerOre("tallgrass", new ItemStack(Blocks.TALLGRASS, 1, BlockTallGrass.EnumType.FERN.getMeta()));
     OreDictionary.registerOre("mushroom", new ItemStack(Item.getItemFromBlock(Blocks.RED_MUSHROOM)));

@@ -1,6 +1,7 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemAxeBase;
+import epicsquid.mysticalworld.recipe.Ingredients;
 import epicsquid.roots.init.ModItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -19,6 +20,6 @@ public class ItemLivingAxe extends ItemAxeBase implements ILivingRepair {
 
   @Override
   public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-    return toRepair.getItem() == this && ModItems.barks.contains(repair.getItem());
+    return toRepair.getItem() == this && Ingredients.BARK.test(repair);
   }
 }
