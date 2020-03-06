@@ -1,69 +1,85 @@
 package epicsquid.roots.recipe;
 
 import com.google.common.collect.Sets;
-import epicsquid.mysticallib.util.NullableSupplier;
 import epicsquid.roots.util.types.RegistryItem;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 
-import javax.annotation.Nullable;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @SuppressWarnings("unchecked")
 public class TransmutationRecipe extends RegistryItem {
   private BlockStatePredicate start;
-  private NullableSupplier<ItemStack> stack;
-  private NullableSupplier<IBlockState> state;
-  private WorldBlockStatePredicate condition;
+  private ItemStack stack = ItemStack.EMPTY;
+  private IBlockState state = null;
+  private WorldBlockStatePredicate condition = WorldBlockStatePredicate.TRUE;
 
-  public TransmutationRecipe(BlockStatePredicate start, @Nullable NullableSupplier<ItemStack> stack, @Nullable NullableSupplier<IBlockState> state, @Nullable WorldBlockStatePredicate condition) {
+  public TransmutationRecipe(IBlockState start) {
+    this.start = new StatePredicate(start);
+  }
+
+  public TransmutationRecipe(BlockStatePredicate start) {
     this.start = start;
-    if (stack == null) {
-      this.stack = NullableSupplier.nullable(ItemStack.class);
-    } else {
-      this.stack = stack;
-    }
-    if (state == null) {
-      this.state = NullableSupplier.nullable(IBlockState.class);
-    } else {
-      this.state = state;
-    }
-    if (this.stack.isNull() && this.state.isNull()) {
-      throw new IllegalStateException("Can't have both state and stack output as null");
-    }
-    if (condition == null) {
-      this.condition = WorldBlockStatePredicate.TRUE;
-    } else {
-      this.condition = condition;
-    }
   }
 
-  @Nullable
-  public IBlockState getEndState() {
-    return state.get();
+  public BlockStatePredicate getStartPredicate () {
+    return start;
   }
 
-  @Nullable
-  public ItemStack getEndStack() {
-    return stack.get();
+  public WorldBlockStatePredicate getCondition () {
+    return condition;
+  }
+
+  public TransmutationRecipe item(ItemStack stack) {
+    if (this.state != null) {
+      throw new IllegalStateException("Can't have both a state and an itemstack result");
+    }
+    this.stack = stack;
+    return this;
+  }
+
+  public TransmutationRecipe state(IBlockState state) {
+    if (!this.stack.isEmpty()) {
+      throw new IllegalStateException("Can't have both a state and an itemstack result");
+    }
+    this.state = state;
+    return this;
+  }
+
+  public TransmutationRecipe condition(WorldBlockStatePredicate condition) {
+    this.condition = condition;
+    return this;
   }
 
   public boolean isItem() {
-    return !stack.isNull();
+    return !stack.isEmpty();
   }
 
   public boolean isState() {
-    return !state.isNull();
+    return state != null;
+  }
+
+  public ItemStack getStack () {
+    return stack;
+  }
+
+  public Optional<IBlockState> getState () {
+    if (state == null) {
+      return Optional.empty();
+    }
+
+    return Optional.of(state);
   }
 
   public boolean matches(IBlockState state, World world, BlockPos pos) {
-    return start.test(state) && condition.test(state, world, pos);
+    return start.test(state) && (condition != null && condition.test(state, world, pos));
   }
 
   public boolean matches(World world, BlockPos pos) {
@@ -77,13 +93,13 @@ public class TransmutationRecipe extends RegistryItem {
   }
 
   @FunctionalInterface
-  private interface BlockStatePredicate extends MatchingStates {
+  public interface BlockStatePredicate extends MatchingStates {
     BlockStatePredicate TRUE = (o) -> true;
 
     boolean test(IBlockState state);
   }
 
-  public class StatePredicate implements BlockStatePredicate {
+  public static class StatePredicate implements BlockStatePredicate {
     protected IBlockState state;
 
     public StatePredicate(IBlockState state) {
@@ -101,7 +117,7 @@ public class TransmutationRecipe extends RegistryItem {
     }
   }
 
-  public class PropertyPredicate extends StatePredicate {
+  public static class PropertyPredicate extends StatePredicate {
     protected List<IProperty<?>> props;
 
     public PropertyPredicate(IBlockState state, IProperty<?> prop) {
@@ -116,11 +132,13 @@ public class TransmutationRecipe extends RegistryItem {
 
     @Override
     public boolean test(IBlockState state) {
-      return super.test(state) && props.stream().allMatch(prop -> state.getValue(prop) == this.state.getValue(prop));
+      Collection<IProperty<?>> incoming = state.getPropertyKeys();
+      Collection<IProperty<?>> current = this.state.getPropertyKeys();
+      return super.test(state) && props.stream().allMatch(prop -> incoming.contains(prop) && current.contains(prop) && state.getValue(prop).equals(this.state.getValue(prop)));
     }
   }
 
-  public class BlocksPredicate implements BlockStatePredicate {
+  public static class BlocksPredicate implements BlockStatePredicate {
     private Set<Block> blocks;
 
     public BlocksPredicate(Block... blocks) {
@@ -133,6 +151,28 @@ public class TransmutationRecipe extends RegistryItem {
     }
   }
 
+  public static class LeavesPredicate implements BlockStatePredicate {
+    public static List<IBlockState> leaves = null;
+
+    @Override
+    public boolean test(IBlockState state) {
+      return state.getMaterial() == Material.LEAVES;
+    }
+
+    @Override
+    public List<IBlockState> matchingStates() {
+      if (leaves == null) {
+        leaves = new ArrayList<>();
+        for (ItemStack stack : OreDictionary.getOres("treeLeaves")) {
+          if (stack.getItem() instanceof ItemBlock) {
+            leaves.add(((ItemBlock) stack.getItem()).getBlock().getDefaultState());
+          }
+        }
+      }
+      return leaves;
+    }
+  }
+
   @FunctionalInterface
   public interface WorldBlockStatePredicate extends MatchingStates {
     WorldBlockStatePredicate TRUE = (a, b, c) -> true;
@@ -141,7 +181,7 @@ public class TransmutationRecipe extends RegistryItem {
   }
 
   @SuppressWarnings("deprecation")
-  public class BlockStateBelow implements WorldBlockStatePredicate {
+  public static class BlockStateBelow implements WorldBlockStatePredicate {
     protected BlockStatePredicate state;
 
     public BlockStateBelow(BlockStatePredicate state) {
@@ -159,7 +199,7 @@ public class TransmutationRecipe extends RegistryItem {
     }
   }
 
-  public class BlockStateAbove extends BlockStateBelow {
+  public static class BlockStateAbove extends BlockStateBelow {
     public BlockStateAbove(BlockStatePredicate state) {
       super(state);
     }

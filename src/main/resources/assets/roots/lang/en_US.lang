@@ -341,6 +341,7 @@ tile.caelic_soil.effect=Increases the rate at which plants grow.
 tile.terran_soil.effect=Increases the yield of plants grown on it.
 
 # JEI
+container.roots.transmutation.name=Transmutation Ritual
 container.roots.summon_creatures.name=Creature Summoning
 container.roots.runic_shears.name=Runic Shearing
 container.roots.runic_shears_entity.name=Runic Entity Shearing
