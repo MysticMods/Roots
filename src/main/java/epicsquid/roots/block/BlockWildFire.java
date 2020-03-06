@@ -57,7 +57,7 @@ public class BlockWildFire extends BlockFire implements IBlock, IModeledObject, 
 
   @Override
   public boolean noCull() {
-    return true;
+    return false;
   }
 
   @Nullable

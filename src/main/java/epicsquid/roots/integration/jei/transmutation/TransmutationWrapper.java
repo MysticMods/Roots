@@ -1,9 +1,9 @@
 package epicsquid.roots.integration.jei.transmutation;
 
 import epicsquid.mysticallib.util.CycleTimer;
-import epicsquid.roots.Roots;
 import epicsquid.roots.recipe.TransmutationRecipe;
-import epicsquid.roots.recipe.TransmutationRecipe.*;
+import epicsquid.roots.recipe.TransmutationRecipe.BlockStatePredicate;
+import epicsquid.roots.recipe.TransmutationRecipe.WorldBlockStatePredicate;
 import epicsquid.roots.util.RenderUtil;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -26,30 +26,40 @@ public class TransmutationWrapper implements IRecipeWrapper {
 
   @Override
   public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
+    if (recipe == null) {
+      return;
+    }
+
     ItemStack result = recipe.getStack();
     IBlockState outputState = recipe.getState().orElse(null);
     WorldBlockStatePredicate condition = recipe.getCondition();
     BlockStatePredicate input = recipe.getStartPredicate();
 
-    // Handle the input side
     IBlockState initial = timer.getCycledItem(input.matchingStates());
-    if (initial != null) {
-      RenderUtil.renderBlock(initial, 26, 47, 10, 20f, 0.4f);
-    }
+    IBlockState cond = timer.getCycledItem(condition.matchingStates());
 
-    if (condition != WorldBlockStatePredicate.TRUE) {
-      IBlockState cond = timer.getCycledItem(condition.matchingStates());
-      if (cond != null) {
-        try {
-          RenderUtil.renderBlock(cond, 26, 65, -10, 20f, 0.4f);
-        } catch (NullPointerException e) {
-          Roots.logger.error("WTF", e);
-        }
+    if (initial != null && cond != null) {
+      if (condition.getPosition() == TransmutationRecipe.StatePosition.BELOW) {
+        RenderUtil.renderBlock(initial, 26, 47, 10, 20f, 0.4f);
+        RenderUtil.renderBlock(cond, 26, 65, -10, 20f, 0.4f);
+      } else {
+        RenderUtil.renderBlock(cond, 26, 47, 10, 20f, 0.4f);
+        RenderUtil.renderBlock(initial, 26, 65, -10, 20f, 0.4f);
       }
+    } else if (initial != null) {
+      RenderUtil.renderBlock(initial, 26, 57, 10, 20f, 0.4f);
     }
 
-    if (outputState != null) {
-      RenderUtil.renderBlock(outputState, 130, 47, 10, 20f, 0.4f);
+    if (outputState != null && cond != null) {
+      if (condition.getPosition() == TransmutationRecipe.StatePosition.BELOW) {
+        RenderUtil.renderBlock(outputState, 130, 47, 10, 20f, 0.4f);
+        RenderUtil.renderBlock(cond, 130, 65, -10, 20f, 0.4f);
+      } else {
+        RenderUtil.renderBlock(cond, 130, 47, 10, 20f, 0.4f);
+        RenderUtil.renderBlock(outputState, 130, 65, -10, 20f, 0.4f);
+      }
+    } else if (outputState != null) {
+      RenderUtil.renderBlock(outputState, 130, 57, 10, 20f, 0.4f);
     } else {
       RenderHelper.enableGUIStandardItemLighting();
       int i3 = 126;

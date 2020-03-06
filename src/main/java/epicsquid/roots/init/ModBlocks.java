@@ -30,7 +30,7 @@ public class ModBlocks {
   public static Block incense_burner, wildwood_rune;
   public static Block grove_stone, fey_crafter;
 
-  public static Block fey_fire;
+  public static Block fey_fire, fake_water, fake_lava;
 
   public static BlockCropBase moonglow, pereskia, wildroot, spirit_herb, wildewheet, cloud_berry, infernal_bulb, dewgonia, stalicripe;
 
@@ -40,7 +40,6 @@ public class ModBlocks {
 
   //Elemental Soil
   public static Block elemental_soil_fire, elemental_soil_water, elemental_soil_air, elemental_soil_earth, elemental_soil;
-
 
   // Decoration
   public static Block runestone_slab, runestone_double_slab, runestone_stairs, runestone_wall, runestone_button, runestone_pressure_plate;
@@ -173,6 +172,8 @@ public class ModBlocks {
 
     event.addBlock(fey_light = new BlockFeyLight(Material.SNOW, SoundType.SNOW, 0.0f, "fey_light")).setCreativeTab(Roots.tab);
     event.addBlock(fey_fire = new BlockWildFire("fey_fire")).setCreativeTab(Roots.tab);
+    event.addBlock(fake_water = new BlockFakeLiquid(Material.WATER, SoundType.SNOW, 0, "fake_water")).setCreativeTab(Roots.tab);
+    event.addBlock(fake_lava = new BlockFakeLiquid(Material.LAVA, SoundType.SNOW, 0, "fake_lava")).setCreativeTab(Roots.tab);
   }
 
   private static Variants variants(RegisterContentEvent event, Block base, String name, SoundType sound, Material material) {
