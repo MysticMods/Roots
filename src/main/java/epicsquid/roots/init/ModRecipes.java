@@ -490,7 +490,7 @@ public class ModRecipes {
     LeavesPredicate leaves = new LeavesPredicate();
     StatePredicate cobblestone = new StatePredicate(Blocks.COBBLESTONE.getDefaultState());
     StatePredicate sand = new StatePredicate(Blocks.SAND.getDefaultState());
-    StatePredicate cobblestoneSlab = new StatePredicate(ModBlocks.runestone_slab.getDefaultState());
+    StatePredicate cobblestoneSlab = new StatePredicate(ModBlocks.runestone_slab.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.BOTTOM));
 
     TransmutationRecipe deadbush_cocoa = new TransmutationRecipe(Blocks.DEADBUSH.getDefaultState()).item(new ItemStack(Items.DYE, 3, EnumDyeColor.BROWN.getDyeDamage()));
     addTransmutationRecipe("deadbush_cocoa", deadbush_cocoa);
@@ -498,7 +498,7 @@ public class ModRecipes {
     TransmutationRecipe birch_jungle = new TransmutationRecipe(new PropertyPredicate(Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH), BlockOldLog.VARIANT)).state(Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE));
     addTransmutationRecipe("birch_jungle", birch_jungle);
 
-    TransmutationRecipe birch_jungle_leaves = new TransmutationRecipe(new PropertyPredicate(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.BIRCH), BlockOldLeaf.VARIANT)).state(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.BIRCH));
+    TransmutationRecipe birch_jungle_leaves = new TransmutationRecipe(new PropertyPredicate(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.BIRCH), BlockOldLeaf.VARIANT)).state(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE));
     addTransmutationRecipe("birch_jungle_leaves", birch_jungle_leaves);
 
     TransmutationRecipe pumpkin_to_melon = new TransmutationRecipe(Blocks.PUMPKIN.getDefaultState()).state(Blocks.MELON_BLOCK.getDefaultState()).condition(new BlockStateBelow(water));
