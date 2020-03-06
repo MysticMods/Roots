@@ -27,8 +27,6 @@ import java.lang.reflect.InvocationTargetException;
 public class EntityRitualSummonCreatures extends EntityRitualBase {
   private RitualSummonCreatures ritual;
 
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualSummonCreatures.class, DataSerializers.VARINT);
-
   private SummonCreatureRecipe summonRecipe = null;
   private ItemStack essence = ItemStack.EMPTY;
 

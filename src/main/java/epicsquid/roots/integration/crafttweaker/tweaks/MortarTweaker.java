@@ -11,7 +11,6 @@ import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.crafttweaker.Action;
 import epicsquid.roots.integration.crafttweaker.recipes.CTMortarRecipe;
 import epicsquid.roots.integration.crafttweaker.recipes.CTSpellRecipe;
-import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.util.zen.ZenDocAppend;
@@ -19,15 +18,12 @@ import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @ZenDocClass("mods.roots.Mortar")
 @ZenDocAppend({"docs/include/mortar.example.md"})
@@ -136,16 +132,23 @@ public class MortarTweaker {
 
     @Override
     public void apply() {
-      for (int i = 1; i <= 5; i++) {
-        List<IIngredient> inputs = new ArrayList<>();
-        ItemStack out = output.copy();
-        out.setCount(i);
-        for (int j = 0; j < i; i++) {
-          inputs.add(input);
-        }
-        CTMortarRecipe recipe = new CTMortarRecipe(out, inputs);
-        ModRecipes.getMortarRecipes().add(recipe);
-      }
+      ItemStack output2 = output.copy();
+      output2.setCount(output.getCount() * 2);
+      ItemStack output3 = output.copy();
+      output3.setCount(output.getCount() * 3);
+      ItemStack output4 = output.copy();
+      output4.setCount(output.getCount() * 4);
+      ItemStack output5 = output.copy();
+      output5.setCount(output.getCount() * 5);
+
+      List<CTMortarRecipe> recipes = Arrays.asList(
+          new CTMortarRecipe(output.copy(), Collections.singletonList(input)),
+          new CTMortarRecipe(output2, Arrays.asList(input, input)),
+          new CTMortarRecipe(output3, Arrays.asList(input, input, input)),
+          new CTMortarRecipe(output4, Arrays.asList(input, input, input, input)),
+          new CTMortarRecipe(output5, Arrays.asList(input, input, input, input, input))
+      );
+      ModRecipes.getMortarRecipes().addAll(recipes);
     }
 
     @Override
@@ -168,7 +171,7 @@ public class MortarTweaker {
     public void apply() {
       SpellBase spell = SpellRegistry.getSpell(this.spell);
       if (spell == null) {
-        CraftTweakerAPI.logError("Invalid spell name: %s" + this.spell);
+        CraftTweakerAPI.logError("Invalid spell name: " + this.spell);
       } else {
         CTSpellRecipe recipe = new CTSpellRecipe(spell, ingredients);
         spell.setRecipe(recipe);
