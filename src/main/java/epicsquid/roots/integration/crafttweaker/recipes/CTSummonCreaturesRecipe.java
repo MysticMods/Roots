@@ -3,7 +3,9 @@ package epicsquid.roots.integration.crafttweaker.recipes;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import epicsquid.roots.recipe.SummonCreatureRecipe;
+import epicsquid.roots.tileentity.TileEntityPyre;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 
@@ -23,5 +25,10 @@ public class CTSummonCreaturesRecipe extends SummonCreatureRecipe {
   @Override
   public List<Ingredient> getIngredients() {
     return convertedIngredients;
+  }
+
+  @Override
+  public List<ItemStack> transformIngredients(List<ItemStack> items, TileEntityPyre pyre) {
+    return CTTransformer.transformIngredients(ingredients, items, pyre);
   }
 }

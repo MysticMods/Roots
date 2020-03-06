@@ -56,6 +56,7 @@ public class AnimalHarvestTweaker {
           @ZenDocArg(arg = "weight", info = "the weight of the fish as an integer")
       }
   )
+  @ZenMethod
   public static void addFish(String name, IItemStack fish, int weight) {
     CraftTweaker.LATE_ACTIONS.add(new AddFish(name, CraftTweakerMC.getItemStack(fish), weight));
   }
@@ -66,6 +67,7 @@ public class AnimalHarvestTweaker {
           @ZenDocArg(arg = "fish", info = "the type of fish to remove as an item stack")
       }
   )
+  @ZenMethod
   public static void removeFish(IItemStack fish) {
     CraftTweaker.LATE_ACTIONS.add(new RemoveFish(CraftTweakerMC.getItemStack(fish)));
   }
