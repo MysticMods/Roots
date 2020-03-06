@@ -16,6 +16,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public class SpellChrysopoeia extends SpellBase {
     addIngredients(
         new OreIngredient("ingotIron"),
         new OreIngredient("ingotGold"),
-        new ItemStack(epicsquid.roots.init.ModItems.pestle),
+        new OreIngredient("cropNetherWart"),
         new ItemStack(Items.MAGMA_CREAM),
         new OreIngredient("gemDiamond")
     );
