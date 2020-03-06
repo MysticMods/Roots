@@ -23,7 +23,6 @@ public class ExportDocumentation {
         PacifistTweaker.class,
         PyreCraftingTweaker.class,
         RunicShearsTweaker.class,
-        TransmutationTweaker.class,
         Rituals.class,
         ChrysopoeiaTweaker.class
     };

@@ -32,6 +32,8 @@ import epicsquid.roots.integration.jei.spell.SpellModifierCategory;
 import epicsquid.roots.integration.jei.spell.SpellModifierWrapper;
 import epicsquid.roots.integration.jei.summon.SummonCreaturesCategory;
 import epicsquid.roots.integration.jei.summon.SummonCreaturesWrapper;
+import epicsquid.roots.integration.jei.transmutation.TransmutationCategory;
+import epicsquid.roots.integration.jei.transmutation.TransmutationWrapper;
 import epicsquid.roots.recipe.*;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
@@ -65,7 +67,6 @@ public class JEIRootsPlugin implements IModPlugin {
   public static final String RUNIC_SHEARS = Roots.MODID + ".runic_shears";
   public static final String RUNIC_SHEARS_ENTITY = Roots.MODID + ".runic_shears_entity";
   public static final String BARK_CARVING = Roots.MODID + ".bark_carving";
-  public static final String RUNIC_CARVING = Roots.MODID + ".runic_carving";
   public static final String RITUAL_CRAFTING = Roots.MODID + ".ritual_crafting";
   public static final String MORTAR_AND_PESTLE = Roots.MODID + ".mortar_and_pestle";
   public static final String RITUAL = Roots.MODID + ".ritual";
@@ -75,6 +76,7 @@ public class JEIRootsPlugin implements IModPlugin {
   public static final String TERRA_MOSS = Roots.MODID + ".terra_moss";
   public static final String SUMMON_CREATURES = Roots.MODID + ".summon_creatures";
   public static final String CHRYSOPOEIA = Roots.MODID + ".chrysopoeia";
+  public static final String TRANSMUTATION = Roots.MODID + ".transmutation";
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registry) {
@@ -90,7 +92,8 @@ public class JEIRootsPlugin implements IModPlugin {
         new MossRecipeCategory(helper),
         new RunicShearsEntityCategory(helper),
         new SummonCreaturesCategory(helper),
-        new MortarCategory(helper)
+        new MortarCategory(helper),
+        new TransmutationCategory(helper)
     );
   }
 
@@ -143,11 +146,9 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(SummonCreatureRecipe.class, SummonCreaturesWrapper::new, SUMMON_CREATURES);
     registry.handleRecipes(SummonCreatureIntermediate.class, SummonCreaturesWrapper::new, SUMMON_CREATURES);
     registry.handleRecipes(ChrysopoeiaRecipe.class, ChrysopoeiaWrapper::new, CHRYSOPOEIA);
+    registry.handleRecipes(TransmutationRecipe.class, TransmutationWrapper::new, TRANSMUTATION);
 
     Collection<SpellBase> spells = SpellRegistry.spellRegistry.values();
-
-    // TODO:
-    //List<RunicShearRecipe> runicShearEntityRecipes = runicShearRecipes.values().stream().filter(RunicShearRecipe::isEntityRecipe).collect(Collectors.toList());
 
     registry.addRecipes(ModRecipes.getRunicShearRecipes().values(), RUNIC_SHEARS);
     registry.addRecipes(ModRecipes.getRunicShearEntityRecipes().values(), RUNIC_SHEARS_ENTITY);
@@ -162,6 +163,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipes(MossRecipe.getRecipeList(), TERRA_MOSS);
     registry.addRecipes(ModRecipes.getSummonCreatureEntries(), SUMMON_CREATURES);
     registry.addRecipes(ModRecipes.getChrysopoeiaRecipes(), CHRYSOPOEIA);
+    registry.addRecipes(ModRecipes.getTransmutationRecipes(), TRANSMUTATION);
 
     ModRecipes.generateLifeEssence();
     List<SummonCreatureIntermediate> summonGenerated = ModRecipes.getLifeEssenceList().stream().map(SummonCreatureIntermediate::create).collect(Collectors.toList());
@@ -170,9 +172,9 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModItems.runic_shears), RUNIC_SHEARS);
     registry.addRecipeCatalyst(new ItemStack(ModItems.runic_shears), RUNIC_SHEARS_ENTITY);
     registry.addRecipeCatalyst(new ItemStack(ModItems.ritual_summon_creatures), SUMMON_CREATURES);
+    registry.addRecipeCatalyst(new ItemStack(ModItems.ritual_transmutation), TRANSMUTATION);
 
     for (Item knife : ModItems.knives) {
-      registry.addRecipeCatalyst(new ItemStack(knife), RUNIC_CARVING);
       registry.addRecipeCatalyst(new ItemStack(knife), BARK_CARVING);
       registry.addRecipeCatalyst(new ItemStack(knife), TERRA_MOSS);
     }
@@ -194,34 +196,24 @@ public class JEIRootsPlugin implements IModPlugin {
     handler.saveToStack();
     registry.addRecipeCatalyst(spellDust, CHRYSOPOEIA);
 
+    // TODO: Improve these
     registry.addIngredientInfo(new ItemStack(ModItems.terra_moss), VanillaTypes.ITEM, I18n.format("jei.roots.terra_moss.desc"));
     registry.addIngredientInfo(new ItemStack(ModItems.terra_spores), VanillaTypes.ITEM, I18n.format("jei.roots.terra_spores.desc"));
     registry.addIngredientInfo(new ItemStack(ModItems.wildroot), VanillaTypes.ITEM, I18n.format("jei.roots.wildroot.desc"));
 
-    for (OldTransmutationRecipe recipe : ModRecipes.getTransmutationRecipes()) {
-      IBlockState endState = recipe.getEndState();
-      ItemStack endStack = recipe.getEndStack();
-      if (endStack != null && !endStack.isEmpty()) {
-        registry.addIngredientInfo(endStack, VanillaTypes.ITEM, I18n.format(recipe.getKey()));
-      } else if (endState != null) {
-        Block endBlock = endState.getBlock();
-        ItemStack drop = new ItemStack(Item.getItemFromBlock(endBlock), 1, endBlock.damageDropped(endState));
-        if (!drop.isEmpty()) {
-          registry.addIngredientInfo(drop, VanillaTypes.ITEM, I18n.format(recipe.getKey()));
-        }
-      }
-    }
-
+    // TODO: Try to improve this somehow
     registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_log), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood.desc"));
     registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_sapling), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood_sapling.desc"));
     registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_leaves), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood_leaves.desc"));
 
     //Elemental Soil Crafting Information Panels
+    // TODO: JUST USE TOKENS IDIOT (me)
     String airSoilLocalized = new TextComponentTranslation("jei.roots.elemental_soil_air.desc").getFormattedText();
     airSoilLocalized = airSoilLocalized.replace("@LEVEL", ((Integer) ElementalSoilConfig.AirSoilMinY).toString());
     String earthSoilLocalized = new TextComponentTranslation("jei.roots.elemental_soil_earth.desc").getFormattedText();
     earthSoilLocalized = earthSoilLocalized.replace("@LEVEL", ((Integer) ElementalSoilConfig.EarthSoilMaxY).toString());
 
+    // TODO: Improve these with config
     registry.addIngredientInfo(new ItemStack(ModBlocks.elemental_soil_fire), VanillaTypes.ITEM, I18n.format("jei.roots.elemental_soil_fire.desc"));
     registry.addIngredientInfo(new ItemStack(ModBlocks.elemental_soil_water), VanillaTypes.ITEM, I18n.format("jei.roots.elemental_soil_water.desc"));
     registry.addIngredientInfo(new ItemStack(ModBlocks.elemental_soil_air), VanillaTypes.ITEM, airSoilLocalized);

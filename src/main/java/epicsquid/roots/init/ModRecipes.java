@@ -14,12 +14,11 @@ import epicsquid.mysticalworld.recipe.Ingredients;
 import epicsquid.roots.Roots;
 import epicsquid.roots.item.ItemDruidKnife;
 import epicsquid.roots.recipe.*;
+import epicsquid.roots.recipe.TransmutationRecipe.*;
 import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.util.IngredientWithStack;
-import epicsquid.roots.util.StateUtil;
-import epicsquid.roots.util.types.WorldPosStatePredicate;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.block.*;
 import net.minecraft.block.BlockFlower.EnumFlowerType;
@@ -34,6 +33,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreIngredient;
 
@@ -51,7 +52,7 @@ public class ModRecipes {
   private static Map<ResourceLocation, AnimalHarvestRecipe> harvestRecipes = new HashMap<>();
   private static Map<ResourceLocation, AnimalHarvestFishRecipe> fishRecipes = new HashMap<>();
   private static ObjectOpenHashSet<Class<? extends EntityLivingBase>> harvestClasses = null;
-  private static Map<ResourceLocation, OldTransmutationRecipe> transmutationRecipes = new HashMap<>();
+  private static Map<ResourceLocation, TransmutationRecipe> transmutationRecipes = new HashMap<>();
 
   // TODO: REGISTRIES FUCKING REGISTRIES PLEASE OH GOD REGISTRIES
   private static Map<ResourceLocation, SummonCreatureRecipe> summonCreatureRecipes = new HashMap<>();
@@ -450,116 +451,77 @@ public class ModRecipes {
     return false;
   }
 
-  public static void addTransmutationRecipe(String name, Block start, IBlockState endState, WorldPosStatePredicate condition) {
+  public static void addTransmutationRecipe(String name, TransmutationRecipe recipe) {
     ResourceLocation n = new ResourceLocation(Roots.MODID, name);
-    OldTransmutationRecipe recipe = new OldTransmutationRecipe(n, start, endState, condition);
     transmutationRecipes.put(n, recipe);
-  }
-
-  public static void addTransmutationRecipe(String name, IBlockState start, IBlockState endState) {
-    addTransmutationRecipe(name, start, endState, null);
-  }
-
-  public static void addTransmutationRecipe(String name, IBlockState start, IBlockState endState, WorldPosStatePredicate condition) {
-    ResourceLocation n = new ResourceLocation(Roots.MODID, name);
-    OldTransmutationRecipe recipe = new OldTransmutationRecipe(n, start, endState, condition);
-    transmutationRecipes.put(n, recipe);
-  }
-
-  public static void addTransmutationRecipe(String name, IBlockState start, ItemStack endState) {
-    addTransmutationRecipe(name, start, endState, null);
-  }
-
-  public static void addTransmutationRecipe(String name, IBlockState start, ItemStack endState, WorldPosStatePredicate condition) {
-    ResourceLocation n = new ResourceLocation(Roots.MODID, name);
-    OldTransmutationRecipe recipe = new OldTransmutationRecipe(n, start, endState, condition);
-    transmutationRecipes.put(n, recipe);
-  }
-
-  public static void addTransmutationRecipe(String name, Block start, ItemStack endState) {
-    addTransmutationRecipe(name, start, endState, null);
-  }
-
-  public static void addTransmutationRecipe(String name, Block start, ItemStack endState, WorldPosStatePredicate condition) {
-    ResourceLocation n = new ResourceLocation(Roots.MODID, name);
-    OldTransmutationRecipe recipe = new OldTransmutationRecipe(n, start, endState, condition);
-    transmutationRecipes.put(n, recipe);
-  }
-
-  public static void addTransmutationRecipe(String name, Block start, IBlockState endState) {
-    addTransmutationRecipe(name, start, endState, null);
-  }
-
-  public static void addTransmutationRecipe(String name, Block start, Block endState) {
-    addTransmutationRecipe(name, start, endState.getDefaultState(), null);
-  }
-
-  public static void removeTransmutationRecipe(String name) {
-    removeTransmutationRecipe(new ResourceLocation(Roots.MODID, name));
   }
 
   public static void removeTransmutationRecipe(ResourceLocation name) {
     transmutationRecipes.remove(name);
   }
 
-  public static OldTransmutationRecipe getTransmutationRecipe(String name) {
-    return getTransmutationRecipe(new ResourceLocation(Roots.MODID, name));
+  public static TransmutationRecipe getTransmutationRecipe(ResourceLocation name) {
+    return transmutationRecipes.get(name);
   }
 
-  public static OldTransmutationRecipe getTransmutationRecipe(ResourceLocation name) {
-    return transmutationRecipes.getOrDefault(name, null);
+  public static Collection<TransmutationRecipe> getTransmutationRecipes() {
+    return transmutationRecipes.values();
   }
 
-  public static List<OldTransmutationRecipe> getTransmutationRecipes() {
-    return new ArrayList<>(transmutationRecipes.values());
+  public static List<TransmutationRecipe> getTransmutationRecipesFor(World world, BlockPos pos) {
+    IBlockState state = world.getBlockState(pos);
+    return getTransmutationRecipesFor(state, world, pos);
   }
 
-  public static List<OldTransmutationRecipe> getTransmutationRecipes(IBlockState startState) {
-    List<OldTransmutationRecipe> result = new ArrayList<>();
-    for (OldTransmutationRecipe recipe : transmutationRecipes.values()) {
-      if (recipe.matches(startState)) result.add(recipe);
-    }
-    return result;
-  }
-
-  public static List<OldTransmutationRecipe> getTransmutationRecipes(Block startState) {
-    return getTransmutationRecipes(startState.getDefaultState());
+  public static List<TransmutationRecipe> getTransmutationRecipesFor(IBlockState state, World world, BlockPos pos) {
+   List<TransmutationRecipe> result = new ArrayList<>();
+   for (TransmutationRecipe recipe : getTransmutationRecipes()) {
+     if (recipe.matches(state, world, pos)) {
+       result.add(recipe);
+     }
+   }
+   return result;
   }
 
   public static void initTransmutationRecipes() {
-    WorldPosStatePredicate water_below = (t, u, v) -> {
-      Block b = t.getBlockState(u.down()).getBlock();
-      return b == Blocks.WATER || b == Blocks.FLOWING_WATER;
-    };
+    BlocksPredicate water = new BlocksPredicate(Blocks.WATER, Blocks.FLOWING_WATER);
+    StatePredicate wool = new StatePredicate(Blocks.WOOL.getDefaultState());
+    LeavesPredicate leaves = new LeavesPredicate();
+    StatePredicate cobblestone = new StatePredicate(Blocks.COBBLESTONE.getDefaultState());
+    StatePredicate sand = new StatePredicate(Blocks.SAND.getDefaultState());
 
-    WorldPosStatePredicate wool_below = (t, u, v) -> {
-      Block b = t.getBlockState(u.down()).getBlock();
-      return b == Blocks.WOOL;
-    };
+    TransmutationRecipe deadbush_cocoa = new TransmutationRecipe(Blocks.DEADBUSH.getDefaultState()).item(new ItemStack(Items.DYE, 3, EnumDyeColor.BROWN.getDyeDamage()));
+    addTransmutationRecipe("deadbush_cocoa", deadbush_cocoa);
 
-    WorldPosStatePredicate leaves_below = (t, u, v) -> {
-      Block b = t.getBlockState(u.down()).getBlock();
-      return b.isLeaves(v, t, u);
-    };
+    TransmutationRecipe birch_jungle = new TransmutationRecipe(new PropertyPredicate(Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH), BlockOldLog.VARIANT)).state(Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE));
+    addTransmutationRecipe("birch_jungle", birch_jungle);
 
-    WorldPosStatePredicate stone_below = (t, u, v) -> {
-      Block b = t.getBlockState(u.down()).getBlock();
-      return b == Blocks.COBBLESTONE;
-    };
+    TransmutationRecipe birch_jungle_leaves = new TransmutationRecipe(new PropertyPredicate(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.BIRCH), BlockOldLeaf.VARIANT)).state(Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.BIRCH));
+    addTransmutationRecipe("birch_jungle_leaves", birch_jungle_leaves);
 
-    addTransmutationRecipe("deadbush_cocoa", Blocks.DEADBUSH.getDefaultState(), new ItemStack(Items.DYE, 3, 3));
-    addTransmutationRecipe("birch_jungle", Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH), Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE));
-    addTransmutationRecipe("birch_jungle_leaves", Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.BIRCH), Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.JUNGLE));
-    addTransmutationRecipe("pumpkin_melon", Blocks.PUMPKIN.getDefaultState(), Blocks.MELON_BLOCK.getDefaultState(), water_below);
-    addTransmutationRecipe("pumpkin_cactus", Blocks.PUMPKIN.getDefaultState(), Blocks.CACTUS.getDefaultState(), (t, u, v) -> t.getBlockState(u.down()).getBlock() instanceof BlockSand);
-    addTransmutationRecipe("cocoa_to_carrot", Blocks.COCOA, new ItemStack(Items.CARROT));
-    addTransmutationRecipe("carrot_to_beetroot", Blocks.CARROTS.getDefaultState().withProperty(BlockCrops.AGE, 7), Blocks.BEETROOTS.getDefaultState());
-    addTransmutationRecipe("carpet_to_lilypad", Blocks.CARPET.getDefaultState(), Blocks.WATERLILY.getDefaultState(), water_below);
-    addTransmutationRecipe("trapdoor_to_cobweb", Blocks.TRAPDOOR, Blocks.WEB.getDefaultState(), wool_below);
-    addTransmutationRecipe("redstone_to_vines", Blocks.REDSTONE_WIRE, new ItemStack(Blocks.VINE), leaves_below);
-    addTransmutationRecipe("melon_to_pumpkin", Blocks.MELON_BLOCK.getDefaultState(), Blocks.PUMPKIN.getDefaultState(), stone_below);
-    StateUtil.ignoreState(Blocks.LEAVES, BlockLeaves.CHECK_DECAY);
-    StateUtil.ignoreState(Blocks.LEAVES, BlockLeaves.DECAYABLE);
+    TransmutationRecipe pumpkin_to_melon = new TransmutationRecipe(Blocks.PUMPKIN.getDefaultState()).state(Blocks.MELON_BLOCK.getDefaultState()).condition(new BlockStateBelow(water));
+    addTransmutationRecipe("pumpkin_to_melon", pumpkin_to_melon);
+
+    TransmutationRecipe pumpkin_to_cactus = new TransmutationRecipe(Blocks.PUMPKIN.getDefaultState()).state(Blocks.CACTUS.getDefaultState()).condition(new BlockStateBelow(sand));
+    addTransmutationRecipe("pumpkin_to_cactus", pumpkin_to_cactus);
+
+    TransmutationRecipe cocoa_to_carrot = new TransmutationRecipe(Blocks.COCOA.getDefaultState()).item(new ItemStack(Items.CARROT));
+    addTransmutationRecipe("cocoa_to_carrot", cocoa_to_carrot);
+
+    TransmutationRecipe carrot_to_beetroot = new TransmutationRecipe(new PropertyPredicate(Blocks.CARROTS.getDefaultState().withProperty(BlockCrops.AGE, 7), BlockCrops.AGE)).state(Blocks.BEETROOTS.getDefaultState());
+    addTransmutationRecipe("carrot_to_beetroot", carrot_to_beetroot);
+
+    TransmutationRecipe carpet_to_lilypad = new TransmutationRecipe(Blocks.CARPET.getDefaultState()).state(Blocks.WATERLILY.getDefaultState()).condition(new BlockStateBelow(water));
+    addTransmutationRecipe("carpet_to_lilypad", carpet_to_lilypad);
+
+    TransmutationRecipe trapdoor_to_cobweb = new TransmutationRecipe(Blocks.TRAPDOOR.getDefaultState()).state(Blocks.WEB.getDefaultState()).condition(new BlockStateBelow(wool));
+    addTransmutationRecipe("trapdoor_to_cobweb", trapdoor_to_cobweb);
+
+    TransmutationRecipe redstone_to_vines = new TransmutationRecipe(Blocks.REDSTONE_WIRE.getDefaultState()).item(new ItemStack(Blocks.VINE)).condition(new BlockStateBelow(leaves));
+    addTransmutationRecipe("redstone_to_vines", redstone_to_vines);
+
+    TransmutationRecipe melon_to_pumpkin = new TransmutationRecipe(Blocks.MELON_BLOCK.getDefaultState()).state(Blocks.PUMPKIN.getDefaultState()).condition(new BlockStateBelow(cobblestone));
+    addTransmutationRecipe("melon_to_pumpkin", melon_to_pumpkin);
   }
 
   public static void addAnimalHarvestRecipe(EntityLivingBase entity) {

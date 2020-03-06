@@ -1,4 +1,4 @@
-package epicsquid.roots.integration.crafttweaker.tweaks;
+/*package epicsquid.roots.integration.crafttweaker.tweaks;
 
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.block.IBlockState;
@@ -127,4 +127,4 @@ public class TransmutationTweaker {
       return String.format("Recipe to turn %s->%s to Transmutation", state, stack);
     }
   }
-}
+}*/
