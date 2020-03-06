@@ -20,7 +20,7 @@ import stanhebben.zenscript.annotations.ZenMethod;
 import java.util.Arrays;
 import java.util.List;
 
-@ZenDocClass("mods.roots.Ritual")
+@ZenDocClass("mods.roots.Rituals")
 @ZenDocAppend({"docs/include/ritual.example.md"})
 @ZenRegister
 @ZenClass("mods." + Roots.MODID + ".Rituals")
