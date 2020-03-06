@@ -2,9 +2,11 @@ package epicsquid.roots.util;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.EntityLivingBase;
@@ -71,6 +73,10 @@ public class RenderUtil {
     GlStateManager.translate(-0.5f, -0.5f, -0.5f);
     Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
     Minecraft.getMinecraft().getBlockRendererDispatcher().renderBlockBrightness(block, 1);
+/*    BlockRendererDispatcher renderer = Minecraft.getMinecraft().getBlockRendererDispatcher(); //.renderBlockBrightness(block, 1);
+
+    IBakedModel ibakedmodel = renderer.getModelForState(block);
+    renderer.getBlockModelRenderer().renderModelBrightness(ibakedmodel, block, 1, true);*/
     GlStateManager.popMatrix();
     RenderHelper.disableStandardItemLighting();
     GlStateManager.disableRescaleNormal();

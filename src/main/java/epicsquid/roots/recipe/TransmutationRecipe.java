@@ -1,11 +1,13 @@
 package epicsquid.roots.recipe;
 
 import com.google.common.collect.Sets;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.util.types.RegistryItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -13,6 +15,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @SuppressWarnings("unchecked")
 public class TransmutationRecipe extends RegistryItem {
@@ -140,14 +144,43 @@ public class TransmutationRecipe extends RegistryItem {
 
   public static class BlocksPredicate implements BlockStatePredicate {
     private Set<Block> blocks;
+    private List<IBlockState> states;
 
     public BlocksPredicate(Block... blocks) {
       this.blocks = Sets.newHashSet(blocks);
+      this.states = Stream.of(blocks).map(Block::getDefaultState).collect(Collectors.toList());
     }
 
     @Override
     public boolean test(IBlockState state) {
       return blocks.contains(state.getBlock());
+    }
+
+    @Override
+    public List<IBlockState> matchingStates() {
+      return states;
+    }
+  }
+
+  public static class WaterPredicate extends BlocksPredicate {
+    public WaterPredicate() {
+      super(Blocks.WATER, Blocks.FLOWING_WATER);
+    }
+
+    @Override
+    public List<IBlockState> matchingStates() {
+      return Collections.singletonList(ModBlocks.fake_water.getDefaultState());
+    }
+  }
+
+  public static class LavaPredicate extends BlocksPredicate {
+    public LavaPredicate() {
+      super(Blocks.LAVA, Blocks.FLOWING_LAVA);
+    }
+
+    @Override
+    public List<IBlockState> matchingStates() {
+      return Collections.singletonList(ModBlocks.fake_lava.getDefaultState());
     }
   }
 
@@ -173,9 +206,17 @@ public class TransmutationRecipe extends RegistryItem {
     }
   }
 
+  public enum StatePosition {
+    ABOVE, BELOW, NULL;
+  }
+
   @FunctionalInterface
   public interface WorldBlockStatePredicate extends MatchingStates {
     WorldBlockStatePredicate TRUE = (a, b, c) -> true;
+
+    default StatePosition getPosition() {
+      return StatePosition.NULL;
+    }
 
     boolean test(IBlockState state, World world, BlockPos pos);
   }
@@ -197,6 +238,11 @@ public class TransmutationRecipe extends RegistryItem {
     public List<IBlockState> matchingStates() {
       return this.state.matchingStates();
     }
+
+    @Override
+    public StatePosition getPosition() {
+      return StatePosition.BELOW;
+    }
   }
 
   public static class BlockStateAbove extends BlockStateBelow {
@@ -207,6 +253,11 @@ public class TransmutationRecipe extends RegistryItem {
     @Override
     public boolean test(IBlockState state, World world, BlockPos pos) {
       return this.state.test(world.getBlockState(pos.up()));
+    }
+
+    @Override
+    public StatePosition getPosition() {
+      return StatePosition.ABOVE;
     }
   }
 }

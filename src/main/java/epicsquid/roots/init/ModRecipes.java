@@ -453,6 +453,7 @@ public class ModRecipes {
 
   public static void addTransmutationRecipe(String name, TransmutationRecipe recipe) {
     ResourceLocation n = new ResourceLocation(Roots.MODID, name);
+    recipe.setRegistryName(n);
     transmutationRecipes.put(n, recipe);
   }
 
@@ -484,11 +485,12 @@ public class ModRecipes {
   }
 
   public static void initTransmutationRecipes() {
-    BlocksPredicate water = new BlocksPredicate(Blocks.WATER, Blocks.FLOWING_WATER);
+    BlocksPredicate water = new WaterPredicate();
     StatePredicate wool = new StatePredicate(Blocks.WOOL.getDefaultState());
     LeavesPredicate leaves = new LeavesPredicate();
     StatePredicate cobblestone = new StatePredicate(Blocks.COBBLESTONE.getDefaultState());
     StatePredicate sand = new StatePredicate(Blocks.SAND.getDefaultState());
+    StatePredicate cobblestoneSlab = new StatePredicate(ModBlocks.runestone_slab.getDefaultState());
 
     TransmutationRecipe deadbush_cocoa = new TransmutationRecipe(Blocks.DEADBUSH.getDefaultState()).item(new ItemStack(Items.DYE, 3, EnumDyeColor.BROWN.getDyeDamage()));
     addTransmutationRecipe("deadbush_cocoa", deadbush_cocoa);
@@ -508,7 +510,7 @@ public class ModRecipes {
     TransmutationRecipe cocoa_to_carrot = new TransmutationRecipe(Blocks.COCOA.getDefaultState()).item(new ItemStack(Items.CARROT));
     addTransmutationRecipe("cocoa_to_carrot", cocoa_to_carrot);
 
-    TransmutationRecipe carrot_to_beetroot = new TransmutationRecipe(new PropertyPredicate(Blocks.CARROTS.getDefaultState().withProperty(BlockCrops.AGE, 7), BlockCrops.AGE)).state(Blocks.BEETROOTS.getDefaultState());
+    TransmutationRecipe carrot_to_beetroot = new TransmutationRecipe(new PropertyPredicate(Blocks.CARROTS.getDefaultState().withProperty(BlockCrops.AGE, 7), BlockCrops.AGE)).state(Blocks.BEETROOTS.getDefaultState().withProperty(BlockBeetroot.BEETROOT_AGE, 3));
     addTransmutationRecipe("carrot_to_beetroot", carrot_to_beetroot);
 
     TransmutationRecipe carpet_to_lilypad = new TransmutationRecipe(Blocks.CARPET.getDefaultState()).state(Blocks.WATERLILY.getDefaultState()).condition(new BlockStateBelow(water));
@@ -517,7 +519,7 @@ public class ModRecipes {
     TransmutationRecipe trapdoor_to_cobweb = new TransmutationRecipe(Blocks.TRAPDOOR.getDefaultState()).state(Blocks.WEB.getDefaultState()).condition(new BlockStateBelow(wool));
     addTransmutationRecipe("trapdoor_to_cobweb", trapdoor_to_cobweb);
 
-    TransmutationRecipe redstone_to_vines = new TransmutationRecipe(Blocks.REDSTONE_WIRE.getDefaultState()).item(new ItemStack(Blocks.VINE)).condition(new BlockStateBelow(leaves));
+    TransmutationRecipe redstone_to_vines = new TransmutationRecipe(Blocks.REDSTONE_WIRE.getDefaultState()).item(new ItemStack(Blocks.VINE)).condition(new BlockStateAbove(cobblestoneSlab));
     addTransmutationRecipe("redstone_to_vines", redstone_to_vines);
 
     TransmutationRecipe melon_to_pumpkin = new TransmutationRecipe(Blocks.MELON_BLOCK.getDefaultState()).state(Blocks.PUMPKIN.getDefaultState()).condition(new BlockStateBelow(cobblestone));
