@@ -14,6 +14,8 @@ Fey.removeRecipe(<roots:living_axe>);
 
 // Adds a different recipe for the living axe, using the same name, to ensure that it shows up in Patchouli. By default all Fey crafting recipe names are the same as the item's registry name.
 Fey.addRecipe("living_axe", <roots:living_axe>, [<minecraft:sand>, <minecraft:dirt>, <minecraft:stone>, <minecraft:glass>, <minecraft:stone_axe>]);
+
+Fey.addRecipe("nether_stone", <minecraft:netherrack>, [<minecraft:flint_and_steel>.anyDamage().transformDamage(1), <minecraft:cobblestone>, <minecraft:cobblestone>, <minecraft:cobblestone>, <minecraft:cobblestone>]);
 ```
 
 ### Notes
