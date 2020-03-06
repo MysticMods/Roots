@@ -1,6 +1,7 @@
 package epicsquid.roots.integration.jei.transmutation;
 
 import epicsquid.mysticallib.util.CycleTimer;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.TransmutationRecipe;
 import epicsquid.roots.recipe.TransmutationRecipe.BlockStatePredicate;
 import epicsquid.roots.recipe.TransmutationRecipe.WorldBlockStatePredicate;
@@ -37,6 +38,7 @@ public class TransmutationWrapper implements IRecipeWrapper {
 
     IBlockState initial = timer.getCycledItem(input.matchingStates());
     IBlockState cond = timer.getCycledItem(condition.matchingStates());
+    Minecraft mc = Minecraft.getMinecraft();
 
     if (initial != null && cond != null) {
       if (condition.getPosition() == TransmutationRecipe.StatePosition.BELOW) {
@@ -64,10 +66,14 @@ public class TransmutationWrapper implements IRecipeWrapper {
       RenderHelper.enableGUIStandardItemLighting();
       int i3 = 126;
       int j3 = 32;
-      Minecraft mc = Minecraft.getMinecraft();
       mc.getRenderItem().renderItemIntoGUI(result, i3, j3);
       mc.getRenderItem().renderItemOverlayIntoGUI(mc.fontRenderer, result, i3, j3, null);
       RenderHelper.disableStandardItemLighting();
     }
+
+    RenderHelper.enableGUIStandardItemLighting();
+    mc.getRenderItem().renderItemIntoGUI(new ItemStack(ModItems.ritual_transmutation), 74, 33);
+    RenderHelper.disableStandardItemLighting();
+
   }
 }
