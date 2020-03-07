@@ -9,16 +9,19 @@ import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.crafttweaker.Action;
+import epicsquid.roots.integration.crafttweaker.recipes.CTSummonCreaturesRecipe;
 import epicsquid.roots.util.zen.ZenDocAppend;
 import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -38,7 +41,7 @@ public class SummonCreaturesTweaker {
   )
   @ZenMethod
   public static void addEntity(IEntityDefinition entity, IIngredient[] ingredients) {
-    CraftTweaker.LATE_ACTIONS.add(new Add((EntityEntry) entity.getInternal(), Stream.of(ingredients).map(CraftTweakerMC::getIngredient).collect(Collectors.toList())));
+    CraftTweaker.LATE_ACTIONS.add(new Add((EntityEntry) entity.getInternal(), Arrays.asList(ingredients)));
   }
 
   @ZenDocMethod(
@@ -93,6 +96,7 @@ public class SummonCreaturesTweaker {
       }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void apply() {
       Class<? extends EntityLivingBase> clz = (Class<? extends EntityLivingBase>) entry.getEntityClass();
@@ -146,9 +150,9 @@ public class SummonCreaturesTweaker {
 
   private static class Add extends Action {
     private final EntityEntry entry;
-    private List<Ingredient> ingredients;
+    private List<IIngredient> ingredients;
 
-    public Add(EntityEntry entry, List<Ingredient> ingredients) {
+    public Add(EntityEntry entry, List<IIngredient> ingredients) {
       super("add_summon_creature");
       this.entry = entry;
       this.ingredients = ingredients;
@@ -157,6 +161,7 @@ public class SummonCreaturesTweaker {
       }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void apply() {
       Class<? extends EntityLivingBase> elb = (Class<? extends EntityLivingBase>) entry.getEntityClass();
@@ -164,7 +169,9 @@ public class SummonCreaturesTweaker {
         CraftTweakerAPI.logError("Summon Creature Recipe already exists for entity: " + entry.getName());
         return;
       }
-      ModRecipes.addSummonCreatureEntry(entry.getName(), elb, ingredients);
+      ResourceLocation rl = new ResourceLocation(Roots.MODID, entry.getName());
+      CTSummonCreaturesRecipe recipe = new CTSummonCreaturesRecipe(rl, elb, ingredients);
+      ModRecipes.addSummonCreatureEntry(recipe);
     }
 
     @Override
