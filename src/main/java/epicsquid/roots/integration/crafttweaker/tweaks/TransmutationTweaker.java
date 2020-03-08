@@ -1,6 +1,5 @@
 package epicsquid.roots.integration.crafttweaker.tweaks;
 
-import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.block.IBlockState;
 import crafttweaker.api.item.IItemStack;
@@ -9,22 +8,17 @@ import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.crafttweaker.Action;
-import epicsquid.roots.integration.crafttweaker.tweaks.transmutation.Predicate;
-import epicsquid.roots.integration.crafttweaker.tweaks.transmutation.WorldPredicate;
+import epicsquid.roots.integration.crafttweaker.tweaks.predicates.Predicates;
 import epicsquid.roots.recipe.TransmutationRecipe;
 import epicsquid.roots.util.zen.ZenDocAppend;
 import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.util.ResourceLocation;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
 
 @ZenDocClass("mods.roots.Transmutation")
 @ZenDocAppend({"docs/include/transmutation.example.md"})
@@ -52,7 +46,7 @@ public class TransmutationTweaker {
       }
   )
   @ZenMethod
-  public static void addStateToStateRecipe(String name, Predicate<?> start, IBlockState result, @Nullable WorldPredicate<?> condition) {
+  public static void addStateToStateRecipe(String name, Predicates.IPredicate start, IBlockState result, @Nullable Predicates.IWorldPredicate condition) {
     CraftTweaker.LATE_ACTIONS.add(new AddStateToState(name, start, result, condition));
   }
 
@@ -66,17 +60,17 @@ public class TransmutationTweaker {
       }
   )
   @ZenMethod
-  public static void addStateToItemRecipe(String name, Predicate<?> start, IItemStack result, @Nullable WorldPredicate<?> condition) {
+  public static void addStateToItemRecipe(String name, Predicates.IPredicate start, IItemStack result, @Nullable Predicates.IWorldPredicate condition) {
     CraftTweaker.LATE_ACTIONS.add(new AddStateToItem(name, start, result, condition));
   }
 
   private static class AddStateToState extends Action {
     private final ResourceLocation name;
-    private Predicate<?> start;
+    private Predicates.IPredicate start;
     private IBlockState result;
-    private WorldPredicate<?> condition;
+    private Predicates.IWorldPredicate condition;
 
-    public AddStateToState(String name, Predicate<?> start, IBlockState result, WorldPredicate<?> condition) {
+    public AddStateToState(String name, Predicates.IPredicate start, IBlockState result, Predicates.IWorldPredicate condition) {
       super("AddStateToState");
       this.name = new ResourceLocation(Roots.MODID, name);
       this.start = start;
@@ -99,11 +93,11 @@ public class TransmutationTweaker {
 
   private static class AddStateToItem extends Action {
     private final ResourceLocation name;
-    private Predicate<?> start;
+    private Predicates.IPredicate start;
     private IItemStack result;
-    private WorldPredicate<?> condition;
+    private Predicates.IWorldPredicate condition;
 
-    public AddStateToItem(String name, Predicate<?> start, IItemStack result, WorldPredicate<?> condition) {
+    public AddStateToItem(String name, Predicates.IPredicate start, IItemStack result, Predicates.IWorldPredicate condition) {
       super("AddStateToItem");
       this.name = new ResourceLocation(Roots.MODID, name);
       this.start = start;
@@ -146,5 +140,4 @@ public class TransmutationTweaker {
       return String.format("Recipe to remove %s from Transmutation", name);
     }
   }
-
 }

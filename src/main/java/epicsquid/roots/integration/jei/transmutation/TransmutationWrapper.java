@@ -16,7 +16,7 @@ import net.minecraft.item.ItemStack;
 
 public class TransmutationWrapper implements IRecipeWrapper {
   public final TransmutationRecipe recipe;
-  private CycleTimer timer = new CycleTimer(-1);
+  private static final CycleTimer timer = new CycleTimer(10);
 
   public TransmutationWrapper(TransmutationRecipe recipe) {
     this.recipe = recipe;
@@ -39,6 +39,7 @@ public class TransmutationWrapper implements IRecipeWrapper {
 
     IBlockState initial = timer.getCycledItem(input.matchingStates());
     IBlockState cond = timer.getCycledItem(condition.matchingStates());
+    timer.onDraw();
     Minecraft mc = Minecraft.getMinecraft();
 
     if (initial != null && cond != null) {

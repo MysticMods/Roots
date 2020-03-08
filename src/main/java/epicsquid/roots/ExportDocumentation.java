@@ -2,8 +2,7 @@ package epicsquid.roots;
 
 import epicsquid.roots.integration.crafttweaker.Rituals;
 import epicsquid.roots.integration.crafttweaker.tweaks.*;
-import epicsquid.roots.integration.crafttweaker.tweaks.transmutation.*;
-import epicsquid.roots.recipe.TransmutationRecipe;
+import epicsquid.roots.integration.crafttweaker.tweaks.predicates.*;
 import epicsquid.roots.util.zen.ZenDocExporter;
 
 import java.io.IOException;
@@ -14,7 +13,6 @@ import java.nio.file.Paths;
 public class ExportDocumentation {
 
   public static void main(String[] args) {
-
     String targetPath = "docs/zs/";
     Class[] classes = {
         AnimalHarvestTweaker.class,
@@ -30,11 +28,9 @@ public class ExportDocumentation {
         TransmutationTweaker.class,
         BlockStateAbove.class,
         BlockStateBelow.class,
-        LavaPredicate.class,
-        LeavesPredicate.class,
+        Predicates.class,
         PropertyPredicate.class,
         StatePredicate.class,
-        WaterPredicate.class
     };
 
     ZenDocExporter export = new ZenDocExporter();

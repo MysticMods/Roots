@@ -2,7 +2,9 @@ package epicsquid.roots.integration.crafttweaker;
 
 import crafttweaker.annotations.ZenRegister;
 import epicsquid.roots.Roots;
+import epicsquid.roots.api.Herb;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.util.zen.ZenDocClass;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 import stanhebben.zenscript.annotations.ZenProperty;
@@ -10,6 +12,7 @@ import stanhebben.zenscript.annotations.ZenProperty;
 @ZenRegister
 @ZenClass("mods." + Roots.MODID + ".Herbs")
 @SuppressWarnings("unused")
+@ZenDocClass("mods." + Roots.MODID + ".Herbs")
 public class Herbs {
   @ZenProperty
   public static final Herb pereskia = new Herb("pereskia");
