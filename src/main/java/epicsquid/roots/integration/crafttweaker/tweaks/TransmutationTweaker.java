@@ -1,5 +1,6 @@
-/*package epicsquid.roots.integration.crafttweaker.tweaks;
+package epicsquid.roots.integration.crafttweaker.tweaks;
 
+import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.block.IBlockState;
 import crafttweaker.api.item.IItemStack;
@@ -8,14 +9,22 @@ import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.crafttweaker.Action;
+import epicsquid.roots.integration.crafttweaker.tweaks.transmutation.Predicate;
+import epicsquid.roots.integration.crafttweaker.tweaks.transmutation.WorldPredicate;
+import epicsquid.roots.recipe.TransmutationRecipe;
 import epicsquid.roots.util.zen.ZenDocAppend;
 import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
-import net.minecraft.item.ItemStack;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.util.ResourceLocation;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 @ZenDocClass("mods.roots.Transmutation")
 @ZenDocAppend({"docs/include/transmutation.example.md"})
@@ -36,27 +45,83 @@ public class TransmutationTweaker {
   @ZenDocMethod(
       order = 2,
       args = {
-          @ZenDocArg(arg = "name", info = "the name of the recipe being added (must be unique)"),
-          @ZenDocArg(arg = "state1", info = "the initial state of the block as defined as a blockstate"),
-          @ZenDocArg(arg = "state2", info = "the state that the initial state should be converted into")
+          @ZenDocArg(arg = "name", info = "the name of the recipe being created"),
+          @ZenDocArg(arg = "start", info = "the predicate describing the starting state being converted"),
+          @ZenDocArg(arg = "result", info = "the block state to convert to"),
+          @ZenDocArg(arg = "condition", info = "the condition of this transition (can be null)")
       }
   )
   @ZenMethod
-  public static void addBlockToBlockRecipe(String name, IBlockState state1, IBlockState state2) {
-    CraftTweaker.LATE_ACTIONS.add(new BlockToBlock(name, CraftTweakerMC.getBlockState(state1), CraftTweakerMC.getBlockState(state2)));
+  public static void addStateToStateRecipe(String name, Predicate<?> start, IBlockState result, @Nullable WorldPredicate<?> condition) {
+    CraftTweaker.LATE_ACTIONS.add(new AddStateToState(name, start, result, condition));
   }
 
   @ZenDocMethod(
       order = 3,
       args = {
-          @ZenDocArg(arg = "name", info = "the name of the recipe being added (must be unique)"),
-          @ZenDocArg(arg = "state", info = "the initial state that is looked for when converting (as a block state)"),
-          @ZenDocArg(arg = "stack", info = "the item stack that replaces the block state")
+          @ZenDocArg(arg = "name", info = "the name of the recipe being created"),
+          @ZenDocArg(arg = "start", info = "the predicate describing the starting state being converted"),
+          @ZenDocArg(arg = "result", info = "the item stack to convert to"),
+          @ZenDocArg(arg = "condition", info = "the condition of this transition (can be null)")
       }
   )
   @ZenMethod
-  public static void addBlockToItemRecipe(String name, IBlockState state, IItemStack stack) {
-    CraftTweaker.LATE_ACTIONS.add(new BlockToItem(name, CraftTweakerMC.getBlockState(state), CraftTweakerMC.getItemStack(stack)));
+  public static void addStateToItemRecipe(String name, Predicate<?> start, IItemStack result, @Nullable WorldPredicate<?> condition) {
+    CraftTweaker.LATE_ACTIONS.add(new AddStateToItem(name, start, result, condition));
+  }
+
+  private static class AddStateToState extends Action {
+    private final ResourceLocation name;
+    private Predicate<?> start;
+    private IBlockState result;
+    private WorldPredicate<?> condition;
+
+    public AddStateToState(String name, Predicate<?> start, IBlockState result, WorldPredicate<?> condition) {
+      super("AddStateToState");
+      this.name = new ResourceLocation(Roots.MODID, name);
+      this.start = start;
+      this.result = result;
+      this.condition = condition;
+    }
+
+    @Override
+    public void apply() {
+      TransmutationRecipe recipe = new TransmutationRecipe(start.get()).state(CraftTweakerMC.getBlockState(result)).condition(condition == null ? null : condition.get());
+      recipe.setRegistryName(name);
+      ModRecipes.addTransmutationRecipe(recipe);
+    }
+
+    @Override
+    public String describe() {
+      return "Add a State-to-State conversion recipe, resulting state: " + result.toString();
+    }
+  }
+
+  private static class AddStateToItem extends Action {
+    private final ResourceLocation name;
+    private Predicate<?> start;
+    private IItemStack result;
+    private WorldPredicate<?> condition;
+
+    public AddStateToItem(String name, Predicate<?> start, IItemStack result, WorldPredicate<?> condition) {
+      super("AddStateToItem");
+      this.name = new ResourceLocation(Roots.MODID, name);
+      this.start = start;
+      this.result = result;
+      this.condition = condition;
+    }
+
+    @Override
+    public void apply() {
+      TransmutationRecipe recipe = new TransmutationRecipe(start.get()).item(CraftTweakerMC.getItemStack(result)).condition(condition == null ? null : condition.get());
+      recipe.setRegistryName(name);
+      ModRecipes.addTransmutationRecipe(recipe);
+    }
+
+    @Override
+    public String describe() {
+      return "Add a State-to-Item conversion recipe, resulting state: " + result.toString();
+    }
   }
 
   private static class Remove extends Action {
@@ -82,49 +147,4 @@ public class TransmutationTweaker {
     }
   }
 
-  private static class BlockToBlock extends Action {
-    private final net.minecraft.block.state.IBlockState state1;
-    private final net.minecraft.block.state.IBlockState state2;
-    private final String name;
-
-    protected BlockToBlock(String name, net.minecraft.block.state.IBlockState state1, net.minecraft.block.state.IBlockState state2) {
-      super("add_block_to_block_transmutation");
-      this.name = name;
-      this.state1 = state1;
-      this.state2 = state2;
-    }
-
-    @Override
-    public void apply() {
-      ModRecipes.addTransmutationRecipe(name, state1, state2);
-    }
-
-    @Override
-    public String describe() {
-      return String.format("Recipe to add %s->%s to Transmutation", state1, state2);
-    }
-  }
-
-  private static class BlockToItem extends Action {
-    private final net.minecraft.block.state.IBlockState state;
-    private final ItemStack stack;
-    private final String name;
-
-    protected BlockToItem(String name, net.minecraft.block.state.IBlockState state1, ItemStack stack) {
-      super("add_block_to_item_transmutation");
-      this.state = state1;
-      this.stack = stack;
-      this.name = name;
-    }
-
-    @Override
-    public void apply() {
-      ModRecipes.addTransmutationRecipe(name, state, stack);
-    }
-
-    @Override
-    public String describe() {
-      return String.format("Recipe to turn %s->%s to Transmutation", state, stack);
-    }
-  }
-}*/
+}

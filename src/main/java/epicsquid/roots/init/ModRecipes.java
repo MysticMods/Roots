@@ -14,8 +14,8 @@ import epicsquid.mysticalworld.recipe.Ingredients;
 import epicsquid.roots.Roots;
 import epicsquid.roots.item.ItemDruidKnife;
 import epicsquid.roots.recipe.*;
-import epicsquid.roots.recipe.TransmutationRecipe.*;
 import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
+import epicsquid.roots.recipe.transmutation.*;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.util.IngredientWithStack;
@@ -454,6 +454,11 @@ public class ModRecipes {
   public static void addTransmutationRecipe(String name, TransmutationRecipe recipe) {
     ResourceLocation n = new ResourceLocation(Roots.MODID, name);
     recipe.setRegistryName(n);
+    transmutationRecipes.put(n, recipe);
+  }
+
+  public static void addTransmutationRecipe(TransmutationRecipe recipe) {
+    ResourceLocation n = recipe.getRegistryName();
     transmutationRecipes.put(n, recipe);
   }
 
