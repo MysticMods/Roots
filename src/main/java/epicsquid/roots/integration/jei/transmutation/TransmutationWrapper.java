@@ -3,8 +3,9 @@ package epicsquid.roots.integration.jei.transmutation;
 import epicsquid.mysticallib.util.CycleTimer;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.recipe.TransmutationRecipe;
-import epicsquid.roots.recipe.TransmutationRecipe.BlockStatePredicate;
-import epicsquid.roots.recipe.TransmutationRecipe.WorldBlockStatePredicate;
+import epicsquid.roots.recipe.transmutation.BlockStatePredicate;
+import epicsquid.roots.recipe.transmutation.StatePosition;
+import epicsquid.roots.recipe.transmutation.WorldBlockStatePredicate;
 import epicsquid.roots.util.RenderUtil;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -41,7 +42,7 @@ public class TransmutationWrapper implements IRecipeWrapper {
     Minecraft mc = Minecraft.getMinecraft();
 
     if (initial != null && cond != null) {
-      if (condition.getPosition() == TransmutationRecipe.StatePosition.BELOW) {
+      if (condition.getPosition() == StatePosition.BELOW) {
         RenderUtil.renderBlock(initial, 26, 47, 10, 20f, 0.4f);
         RenderUtil.renderBlock(cond, 26, 65, -10, 20f, 0.4f);
       } else {
@@ -53,7 +54,7 @@ public class TransmutationWrapper implements IRecipeWrapper {
     }
 
     if (outputState != null && cond != null) {
-      if (condition.getPosition() == TransmutationRecipe.StatePosition.BELOW) {
+      if (condition.getPosition() == StatePosition.BELOW) {
         RenderUtil.renderBlock(outputState, 130, 47, 10, 20f, 0.4f);
         RenderUtil.renderBlock(cond, 130, 65, -10, 20f, 0.4f);
       } else {
@@ -74,6 +75,5 @@ public class TransmutationWrapper implements IRecipeWrapper {
     RenderHelper.enableGUIStandardItemLighting();
     mc.getRenderItem().renderItemIntoGUI(new ItemStack(ModItems.ritual_transmutation), 74, 33);
     RenderHelper.disableStandardItemLighting();
-
   }
 }

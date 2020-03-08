@@ -2,6 +2,8 @@ package epicsquid.roots;
 
 import epicsquid.roots.integration.crafttweaker.Rituals;
 import epicsquid.roots.integration.crafttweaker.tweaks.*;
+import epicsquid.roots.integration.crafttweaker.tweaks.transmutation.*;
+import epicsquid.roots.recipe.TransmutationRecipe;
 import epicsquid.roots.util.zen.ZenDocExporter;
 
 import java.io.IOException;
@@ -24,7 +26,15 @@ public class ExportDocumentation {
         PyreCraftingTweaker.class,
         RunicShearsTweaker.class,
         Rituals.class,
-        ChrysopoeiaTweaker.class
+        ChrysopoeiaTweaker.class,
+        TransmutationTweaker.class,
+        BlockStateAbove.class,
+        BlockStateBelow.class,
+        LavaPredicate.class,
+        LeavesPredicate.class,
+        PropertyPredicate.class,
+        StatePredicate.class,
+        WaterPredicate.class
     };
 
     ZenDocExporter export = new ZenDocExporter();
