@@ -37,7 +37,8 @@ public class SummonCreaturesTweaker {
       args = {
           @ZenDocArg(arg = "entity", info = "the entity to be summoned"),
           @ZenDocArg(arg = "ingredients", info = "a list of ingredients used for the summoning")
-      }
+      },
+      description = "Adds a Summon Creatures recipe using the specified list of ingredients (up to 10)."
   )
   @ZenMethod
   public static void addEntity(IEntityDefinition entity, IIngredient[] ingredients) {
@@ -48,7 +49,8 @@ public class SummonCreaturesTweaker {
       order = 2,
       args = {
           @ZenDocArg(arg = "entity", info = "the entity to remove from summoning via recipe")
-      }
+      },
+      description = "Removes a Summon Cratures recipe based on the entity being summoned."
   )
   @ZenMethod
   public static void removeEntity(IEntityDefinition entity) {
@@ -59,7 +61,8 @@ public class SummonCreaturesTweaker {
       order = 3,
       args = {
           @ZenDocArg(arg = "entity", info = "the entity to remove life essence for")
-      }
+      },
+      description = "Specifically removes Life Essence (automatically added or manually added) for a specific entity."
   )
   @ZenMethod
   public static void removeLifeEssence(IEntityDefinition entity) {
@@ -70,7 +73,8 @@ public class SummonCreaturesTweaker {
       order = 4,
       args = {
           @ZenDocArg(arg = "entity", info = "the entity to add life essence for")
-      }
+      },
+      description = "Manually adds the potential Life Essence drop for a specific entity."
   )
   @ZenMethod
   public static void addLifeEssence(IEntityDefinition entity) {
@@ -78,7 +82,9 @@ public class SummonCreaturesTweaker {
   }
 
   @ZenDocMethod(
-      order = 5
+      order = 5,
+      description = "Clears the entire Life Essence table. This action takes place sequentially, meaning that it can be triggered at the start of a script to clear all life essences (including those automatically added from being in the Animal Harvest list), and additional life essences added afterwards are unaffected."
+      // TODO: Test this
   )
   @ZenMethod
   public static void clearLifeEssence() {

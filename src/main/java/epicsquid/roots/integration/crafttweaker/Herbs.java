@@ -4,7 +4,9 @@ import crafttweaker.annotations.ZenRegister;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
+import epicsquid.roots.util.zen.ZenDocMethod;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 import stanhebben.zenscript.annotations.ZenProperty;
@@ -49,6 +51,8 @@ public class Herbs {
     }
 
     @ZenMethod
+    @ZenDocMethod(order=1,
+    description="returns the string name of the herb")
     public String getHerbName() {
       return herbName;
     }
