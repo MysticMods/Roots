@@ -9,6 +9,7 @@ import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.crafttweaker.Action;
+import epicsquid.roots.integration.crafttweaker.tweaks.predicates.Predicates.IPredicate;
 import epicsquid.roots.recipe.RunicShearEntityRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
 import epicsquid.roots.util.zen.ZenDocAppend;
@@ -39,14 +40,15 @@ public class RunicShearsTweaker {
       args = {
           @ZenDocArg(arg = "name", info = "the name of the recipe being created"),
           @ZenDocArg(arg = "outputDrop", info = "the item output obtained by performing the shearing"),
-          @ZenDocArg(arg = "replacementState", info = "the block (as an itemstack) that replaces the block being interacted with upon shearing"),
-          @ZenDocArg(arg = "inputState", info = "the block that is to be sheared"),
+          @ZenDocArg(arg = "replacementState", info = "the replacement blockstate described as a block state"),
+          @ZenDocArg(arg = "inputState", info = "a predicate describing the input state (see Predicates)"),
           @ZenDocArg(arg = "displayItem", info = "the item that should be displayed in integration for this recipe")
       },
       description = "Creates a recipe with the defined name that creats the specified itemstack whenever runic shears are used on the specified input state, as well as the state that will replace the input state. Additionally, an optional item that can be displayed in integration."
   )
   @ZenMethod
-  public static void addRecipe(String name, IItemStack outputDrop, IBlockState replacementState, IBlockState inputState, IItemStack displayItem) {
+  public static void addRecipe(String name, IItemStack outputDrop, crafttweaker.api.block.IBlockState replacementState, IPredicate inputState, IItemStack displayItem) {
+    CraftTweaker.LATE_ACTIONS.add(new AddState(name, CraftTweakerMC.getItemStack(outputDrop), CraftTweakerMC.getBlockState(replacementState), inputState, CraftTweakerMC.getItemStack(displayItem)));
   }
 
   @ZenDocMethod(
@@ -61,12 +63,12 @@ public class RunicShearsTweaker {
       description = "Creates a recipe with the defined name that creats the specified itemstack whenever runic shears are used on the specified input state (derived from the itemstack), as well as the state that will replace the input state (derived from an itemstack). Additionally, an optional item that can be displayed in integration. ItemStacks for blockstates must be itemblocks."
   )
   @ZenMethod
-  public static void addRecipeViaItem(String name, IItemStack outputDrop, IItemStack replacementBlock, IItemStack inputBlock, IItemStack jeiDisplayItem) {
+  public static void addRecipeViaItem(String name, IItemStack outputDrop, IItemStack replacementBlock, IItemStack inputBlock, IItemStack displayItem) {
     if (!(CraftTweakerMC.getItemStack(inputBlock).getItem() instanceof ItemBlock) || (replacementBlock != null && !(CraftTweakerMC.getItemStack(replacementBlock).getItem() instanceof ItemBlock))) {
       CraftTweakerAPI.logError("Runic Shears require input and replacement to be blocks. Recipe: " + name);
       return;
     }
-    CraftTweaker.LATE_ACTIONS.add(new Add(name, CraftTweakerMC.getItemStack(outputDrop), CraftTweakerMC.getBlock(Objects.requireNonNull(replacementBlock).asBlock()), CraftTweakerMC.getBlock(inputBlock.asBlock()), CraftTweakerMC.getItemStack(jeiDisplayItem)));
+    CraftTweaker.LATE_ACTIONS.add(new Add(name, CraftTweakerMC.getItemStack(outputDrop), CraftTweakerMC.getBlock(Objects.requireNonNull(replacementBlock).asBlock()), CraftTweakerMC.getBlock(inputBlock.asBlock()), CraftTweakerMC.getItemStack(displayItem)));
   }
 
   @ZenDocMethod(
@@ -164,6 +166,40 @@ public class RunicShearsTweaker {
         return;
       }
       RunicShearRecipe recipe = new RunicShearRecipe(name, inputBlock, outputBlock, outputItem, displayItem);
+      ModRecipes.addRunicShearRecipe(recipe);
+    }
+  }
+
+  private static class AddState extends Action {
+    private String name;
+    private ItemStack displayItem;
+    private ItemStack outputItem;
+    private IPredicate input;
+    private IBlockState outputState;
+
+    private AddState(String name, ItemStack outputItem, IBlockState replacementState, IPredicate input, ItemStack displayItem) {
+      super("Runic Shears recipe add");
+
+      this.name = name;
+      this.outputItem = outputItem;
+      this.outputState = replacementState;
+      this.input = input;
+      this.displayItem = displayItem;
+    }
+
+    @Override
+    public String describe() {
+      return "Adding a recipe to create " + outputItem;
+    }
+
+    @Override
+    public void apply() {
+      ResourceLocation name = new ResourceLocation(Roots.MODID, this.name);
+      if (ModRecipes.getRunicShearRecipe(this.name) != null) {
+        CraftTweakerAPI.logError("Couldn't add Runic Shear recipe for " + name.toString() + ": already exists!");
+        return;
+      }
+      RunicShearRecipe recipe = new RunicShearRecipe(name, input.get(), outputState, outputItem, displayItem);
       ModRecipes.addRunicShearRecipe(recipe);
     }
   }

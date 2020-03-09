@@ -1,7 +1,10 @@
 package epicsquid.roots.recipe;
 
+import epicsquid.roots.recipe.transmutation.BlockStatePredicate;
+import epicsquid.roots.recipe.transmutation.StatePredicate;
 import epicsquid.roots.util.types.RegistryItem;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -10,25 +13,29 @@ import net.minecraft.util.ResourceLocation;
  */
 public class RunicShearRecipe extends RegistryItem {
 
-  private Block block;
-  private Block replacementBlock;
+  private BlockStatePredicate state;
+  private IBlockState replacementState;
   private ItemStack drop;
   private ItemStack optionalDisplayItem;
 
-  public RunicShearRecipe(ResourceLocation name, Block block, Block replacementBlock, ItemStack drop, ItemStack optionalDisplayItem) {
+  public RunicShearRecipe(ResourceLocation name, Block state, Block replacementState, ItemStack drop, ItemStack optionalDisplayItem) {
+    this(name, new StatePredicate(state.getDefaultState()), replacementState.getDefaultState(), drop, optionalDisplayItem);
+  }
+
+  public RunicShearRecipe(ResourceLocation name, BlockStatePredicate state, IBlockState replacementState, ItemStack drop, ItemStack optionalDisplayItem) {
     setRegistryName(name);
-    this.block = block;
-    this.replacementBlock = replacementBlock;
+    this.state = state;
+    this.replacementState = replacementState;
     this.drop = drop;
     this.optionalDisplayItem = optionalDisplayItem;
   }
 
-  public Block getBlock() {
-    return block;
+  public boolean matches (IBlockState state) {
+    return this.state.test(state);
   }
 
-  public Block getReplacementBlock() {
-    return replacementBlock;
+  public IBlockState getReplacementState () {
+    return replacementState;
   }
 
   public ItemStack getDrop() {

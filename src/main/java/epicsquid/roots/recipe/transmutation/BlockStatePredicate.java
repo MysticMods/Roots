@@ -4,7 +4,7 @@ import net.minecraft.block.state.IBlockState;
 
 @FunctionalInterface
 public interface BlockStatePredicate extends MatchingStates {
-    BlockStatePredicate TRUE = (o) -> true;
+  BlockStatePredicate TRUE = (o) -> true;
 
-    boolean test(IBlockState state);
+  boolean test(IBlockState state);
 }
