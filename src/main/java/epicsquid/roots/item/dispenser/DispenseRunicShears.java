@@ -93,7 +93,7 @@ public class DispenseRunicShears implements IBehaviorDispenseItem {
 
       // Runic Shears block recipe
       if (!successful) {
-        RunicShearRecipe recipe = ModRecipes.getRunicShearRecipe(block);
+        RunicShearRecipe recipe = ModRecipes.getRunicShearRecipe(targetState);
 
         if (recipe != null) {
           if (block instanceof BlockCrops) {
@@ -103,7 +103,7 @@ public class DispenseRunicShears implements IBehaviorDispenseItem {
               successful = true;
             }
           } else {
-            world.setBlockState(pos, recipe.getReplacementBlock().getDefaultState());
+            world.setBlockState(pos, recipe.getReplacementState());
             successful = true;
           }
 

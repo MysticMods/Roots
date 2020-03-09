@@ -716,20 +716,13 @@ public class ModRecipes {
 
       runicShearEntityRecipes.put(eRecipe.getRegistryName(), eRecipe);
     } else {
-      for (RunicShearRecipe blockRecipe : runicShearRecipes.values()) {
-        if (recipe.getBlock() == blockRecipe.getBlock()) {
-          Roots.logger.error("RunicShearRecipe duplicate found for block " + recipe.getBlock().getRegistryName());
-          return;
-        }
-      }
-
       runicShearRecipes.put(recipe.getRegistryName(), recipe);
     }
   }
 
-  public static RunicShearRecipe getRunicShearRecipe(Block block) {
+  public static RunicShearRecipe getRunicShearRecipe(IBlockState state) {
     for (RunicShearRecipe recipe : runicShearRecipes.values()) {
-      if (recipe.getBlock() == block) {
+      if (recipe.matches(state)) {
         return recipe;
       }
     }

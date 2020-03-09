@@ -120,20 +120,11 @@ public class ItemRunicShears extends ItemShearsBase {
       return EnumActionResult.SUCCESS;
     }
 
-    RunicShearRecipe recipe = ModRecipes.getRunicShearRecipe(block);
+    RunicShearRecipe recipe = ModRecipes.getRunicShearRecipe(state);
 
     if (recipe != null) {
       if (!world.isRemote) {
-
-        if (block instanceof BlockCrops) {
-          if (((BlockCrops) block).isMaxAge(world.getBlockState(pos))) {
-            world.setBlockState(pos, ((BlockCrops) block).withAge(0));
-          } else {
-            return EnumActionResult.SUCCESS;
-          }
-        } else {
-          world.setBlockState(pos, recipe.getReplacementBlock().getDefaultState());
-        }
+        world.setBlockState(pos, recipe.getReplacementState());
         ItemUtil.spawnItem(world, player.getPosition().add(0, 1, 0), recipe.getDrop().copy());
         if (!player.capabilities.isCreativeMode) {
           player.getHeldItem(hand).damageItem(1, player);
