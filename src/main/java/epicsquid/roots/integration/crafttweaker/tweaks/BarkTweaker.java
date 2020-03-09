@@ -29,7 +29,8 @@ public class BarkTweaker {
           @ZenDocArg(arg = "name", info = "the name of the recipe"),
           @ZenDocArg(arg = "woodLog", info = "the itemstack equivalent of the wood log being broken"),
           @ZenDocArg(arg = "bark", info = "the itemstack of the type of bark this log produces (including stack count)")
-      }
+      },
+      description = "Adds a recipe that converts a block (in the form of an item stack) into another item stack. Log input *must* be an itemblock."
   )
   @ZenMethod
   public static void addRecipe(String name, IItemStack woodLog, IItemStack bark) {
@@ -45,7 +46,8 @@ public class BarkTweaker {
       order=2,
       args = {
         @ZenDocArg(arg="bark", info="the itemstack of the type of bark to remove (excluding stack size)")
-    }
+    },
+      description = "Removes a bark recipe via output from the list."
   )
   @ZenMethod
   public static void removeRecipe(IItemStack bark) {

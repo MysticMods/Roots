@@ -30,7 +30,8 @@ public class AnimalHarvestTweaker {
       order = 1,
       args = {
           @ZenDocArg(arg = "entity", info = "the entity to generate drops for")
-      }
+      },
+      description = "Adds the specified entity to the Animal Harvest ritual list, making it eligible for drops. (Animal Harvest creatures form the default basis of Life Essence creation for Summon Creatures. See Summon Creatures for modifications of that derived list/emptying it.)"
   )
   @ZenMethod
   public static void addEntity(IEntityDefinition entity) {
@@ -41,7 +42,8 @@ public class AnimalHarvestTweaker {
       order = 2,
       args = {
           @ZenDocArg(arg = "entity", info = "the entity to stop generating drops for")
-      }
+      },
+      description = "Removes the specified entity from the Animal Harvest ritual list, preventing it from dropping anything."
   )
   @ZenMethod
   public static void removeEntity(IEntityDefinition entity) {
@@ -54,7 +56,8 @@ public class AnimalHarvestTweaker {
           @ZenDocArg(arg = "name", info = "the name of the type of fish"),
           @ZenDocArg(arg = "fish", info = "the type of fish as an item stack"),
           @ZenDocArg(arg = "weight", info = "the weight of the fish as an integer")
-      }
+      },
+      description = "Adds a specific item to the fish drop table, making it eligible to be dropped if there is a water source block in the radius of the ritual."
   )
   @ZenMethod
   public static void addFish(String name, IItemStack fish, int weight) {
@@ -65,7 +68,8 @@ public class AnimalHarvestTweaker {
       order = 4,
       args = {
           @ZenDocArg(arg = "fish", info = "the type of fish to remove as an item stack")
-      }
+      },
+      description = "Removes a specific item from the fish drop table, preventing it from being dropped in water source blocks."
   )
   @ZenMethod
   public static void removeFish(IItemStack fish) {

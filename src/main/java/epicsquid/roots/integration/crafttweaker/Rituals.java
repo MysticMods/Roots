@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @ZenDocClass("mods.roots.Rituals")
-@ZenDocAppend({"docs/include/ritual.example.md"})
+@ZenDocAppend({"docs/include/rituals.example.md"})
 @ZenRegister
 @ZenClass("mods." + Roots.MODID + ".Rituals")
 public class Rituals {
@@ -31,7 +31,8 @@ public class Rituals {
       args = {
           @ZenDocArg(arg = "name", info = "the name of the ritual whose ingredients you wish to modify"),
           @ZenDocArg(arg = "inputs", info = "a list of five ingredients (no more, no less)")
-      }
+      },
+      description = "Modifies the specified Ritual recipe to use the five ingredients specified."
   )
   @ZenMethod
   public static void modifyRitual(String name, IIngredient[] inputs) {
@@ -70,6 +71,12 @@ public class Rituals {
     }
   }
 
+  @ZenDocMethod(order = 2,
+      args = {
+          @ZenDocArg(arg = "ritualName", info = "the name of the ritual to be fetched; will prepend `ritual_` if it doesn't start with `ritual_`.")
+      },
+      description = "Returns a Ritual object which can have its properties modified."
+  )
   @ZenMethod
   public static Ritual getRitual(String ritualName) {
     if (!ritualName.startsWith("ritual_")) {
@@ -83,6 +90,8 @@ public class Rituals {
     return new Ritual(ritual);
   }
 
+  @ZenDocClass("mods.roots.Ritual")
+  @ZenDocAppend({"docs/include/ritual.example.md"})
   @ZenRegister
   @ZenClass("mods." + Roots.MODID + ".Ritual")
   public static class Ritual {
@@ -108,31 +117,65 @@ public class Rituals {
     }
 
     @ZenMethod
+    @ZenDocMethod(
+        order=1,
+        args = {
+            @ZenDocArg(arg="propertyName", info = "sets propertyName to the specified double value"),
+            @ZenDocArg(arg="value", info = "the value to set propertyName to; if this property is *not* a double, an error will be raised")
+        },
+        description = "Sets a propertyName to a specified value (throwing an exception if this is an invalid type for that property), then returns the ritual, allowing for chained functions."
+    )
     public Ritual setDouble(String propertyName, double value) {
       return set(propertyName, value);
     }
 
     @ZenMethod
+    @ZenDocMethod(
+        order = 2,
+        args = {
+            @ZenDocArg(arg="propertyName", info = "sets propertyName to the specified float value"),
+            @ZenDocArg(arg="value", info = "the value to set propertyName to; if this property is *not* a float, an error will be raised")
+        },
+        description = "Sets a propertyName to a specified value (throwing an exception if this is an invalid type for that property), then returns the ritual, allowing for chained functions."
+    )
     public Ritual setFloat(String propertyName, float value) {
       return set(propertyName, value);
     }
 
     @ZenMethod
+    @ZenDocMethod(
+        order = 3,
+        args = {
+            @ZenDocArg(arg="propertyName", info = "sets propertyName to the specified integer value"),
+            @ZenDocArg(arg="value", info = "the value to set propertyName to; if this property is *not* a integer, an error will be raised")
+        },
+        description = "Sets a propertyName to a specified value (throwing an exception if this is an invalid type for that property), then returns the ritual, allowing for chained functions."
+    )
     public Ritual setInteger(String propertyName, int value) {
       return set(propertyName, value);
     }
 
     @ZenMethod
-    public Ritual setCooldown(int value) {
-      return set("cooldown", value);
-    }
-
-    @ZenMethod
+    @ZenDocMethod(
+        order = 4,
+        args = {
+            @ZenDocArg(arg="value", info="the new duration for the ritual")
+        },
+        description = "Changes the duration of the ritual and returns the Ritual object for further modification. Is shorthand for `setInteger(\"duration\", value)`."
+    )
     public Ritual setDuration(int value) {
       return set("duration", value);
     }
 
     @ZenMethod
+    @ZenDocMethod(
+        order = 5,
+        args = {
+            @ZenDocArg(arg="propertyName", info = "sets propertyName to the specified string value"),
+            @ZenDocArg(arg="value", info = "the value to set propertyName to; if this property is *not* a string, an error will be raised")
+        },
+        description = "Sets a propertyName to a specified value (throwing an exception if this is an invalid type for that property), then returns the ritual, allowing for chained functions."
+    )
     public Ritual setString(String propertyName, String value) {
       return set(propertyName, value);
     }

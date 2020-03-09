@@ -8,7 +8,7 @@ import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.crafttweaker.Action;
-import epicsquid.roots.integration.crafttweaker.tweaks.predicates.Predicates;
+import epicsquid.roots.integration.crafttweaker.tweaks.predicates.Predicates.*;
 import epicsquid.roots.recipe.TransmutationRecipe;
 import epicsquid.roots.util.zen.ZenDocAppend;
 import epicsquid.roots.util.zen.ZenDocArg;
@@ -29,7 +29,8 @@ public class TransmutationTweaker {
       order = 1,
       args = {
           @ZenDocArg(arg = "name", info = "the name of the recipe being removed")
-      }
+      },
+      description = "Specifically removes a Transmutation Recipe based on the name of that recipe."
   )
   @ZenMethod
   public static void removeRecipe(String name) {
@@ -43,10 +44,11 @@ public class TransmutationTweaker {
           @ZenDocArg(arg = "start", info = "the predicate describing the starting state being converted"),
           @ZenDocArg(arg = "result", info = "the block state to convert to"),
           @ZenDocArg(arg = "condition", info = "the condition of this transition (can be null)")
-      }
+      },
+      description = "Add a Transmutation Recipe that converts from one IPredicate state-predicate into a block state, if the IWorldPredicate condition (which can be null, meaning that it will always match) is true."
   )
   @ZenMethod
-  public static void addStateToStateRecipe(String name, Predicates.IPredicate start, IBlockState result, @Nullable Predicates.IWorldPredicate condition) {
+  public static void addStateToStateRecipe(String name, IPredicate start, IBlockState result, @Nullable IWorldPredicate condition) {
     CraftTweaker.LATE_ACTIONS.add(new AddStateToState(name, start, result, condition));
   }
 
@@ -57,20 +59,21 @@ public class TransmutationTweaker {
           @ZenDocArg(arg = "start", info = "the predicate describing the starting state being converted"),
           @ZenDocArg(arg = "result", info = "the item stack to convert to"),
           @ZenDocArg(arg = "condition", info = "the condition of this transition (can be null)")
-      }
+      },
+      description = "Add a Transmutation Recipe that converts from one IPredicate state-predicate into an item, if the IWorldPredicate condition (which can be null, meaning that it will always match) is true."
   )
   @ZenMethod
-  public static void addStateToItemRecipe(String name, Predicates.IPredicate start, IItemStack result, @Nullable Predicates.IWorldPredicate condition) {
+  public static void addStateToItemRecipe(String name, IPredicate start, IItemStack result, @Nullable IWorldPredicate condition) {
     CraftTweaker.LATE_ACTIONS.add(new AddStateToItem(name, start, result, condition));
   }
 
   private static class AddStateToState extends Action {
     private final ResourceLocation name;
-    private Predicates.IPredicate start;
+    private IPredicate start;
     private IBlockState result;
-    private Predicates.IWorldPredicate condition;
+    private IWorldPredicate condition;
 
-    public AddStateToState(String name, Predicates.IPredicate start, IBlockState result, Predicates.IWorldPredicate condition) {
+    public AddStateToState(String name, IPredicate start, IBlockState result, IWorldPredicate condition) {
       super("AddStateToState");
       this.name = new ResourceLocation(Roots.MODID, name);
       this.start = start;
@@ -93,11 +96,11 @@ public class TransmutationTweaker {
 
   private static class AddStateToItem extends Action {
     private final ResourceLocation name;
-    private Predicates.IPredicate start;
+    private IPredicate start;
     private IItemStack result;
-    private Predicates.IWorldPredicate condition;
+    private IWorldPredicate condition;
 
-    public AddStateToItem(String name, Predicates.IPredicate start, IItemStack result, Predicates.IWorldPredicate condition) {
+    public AddStateToItem(String name, IPredicate start, IItemStack result, IWorldPredicate condition) {
       super("AddStateToItem");
       this.name = new ResourceLocation(Roots.MODID, name);
       this.start = start;

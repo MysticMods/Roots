@@ -1,8 +1,10 @@
 package epicsquid.roots.integration.crafttweaker.tweaks;
 
+import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.block.IBlock;
 import crafttweaker.api.block.IBlockState;
+import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
@@ -13,6 +15,8 @@ import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -26,7 +30,8 @@ public class FlowerTweaker {
       order = 1,
       args = {
           @ZenDocArg(arg = "name", info = "The name of the recipe you wish to remove")
-      }
+      },
+      description = "Removes a flower growth recipe by name."
   )
   @ZenMethod
   public static void removeRecipe(String name) {
@@ -38,7 +43,8 @@ public class FlowerTweaker {
       args = {
           @ZenDocArg(arg = "name", info = "The name of the recipe that you're adding"),
           @ZenDocArg(arg = "state", info = "The state of the block of the flower")
-      }
+      },
+      description = "Adds a recipe to create the specific block state during the flower growth ritual."
   )
   @ZenMethod
   public static void addRecipeBlockState(String name, IBlockState state) {
@@ -51,11 +57,31 @@ public class FlowerTweaker {
           @ZenDocArg(arg = "name", info = "The name of the recipe that you're adding"),
           @ZenDocArg(arg = "block", info = "The block of the flower to be placed"),
           @ZenDocArg(arg = "meta", info = "The meta of the state of the flower block")
-      }
+      },
+      description = "Adds a recipe by creating a blockstate from a block along with the meta value from an itemblock to be grown during the flower growth ritual."
   )
   @ZenMethod
   public static void addRecipeBlock(String name, IBlock block, int meta) {
     CraftTweaker.LATE_ACTIONS.add(new FlowerBlockMeta(name, CraftTweakerMC.getBlock(block), meta));
+  }
+
+  @ZenDocMethod(
+      order = 3,
+      args = {
+          @ZenDocArg(arg = "name", info = "The name of the recipe that you're adding"),
+          @ZenDocArg(arg = "stack", info = "The itemstack describing an itemblock to be placed")
+      },
+      description = "Adds a recipe by creating a blockstate from an itemstack containing an itemblock and metadata to be grown during the Flower Growth ritual."
+  )
+  @ZenMethod
+  public static void addRecipeItem(String name, IItemStack stack) {
+    ItemStack converted = CraftTweakerMC.getItemStack(stack);
+    if (!(converted.getItem() instanceof ItemBlock)) {
+      CraftTweakerAPI.logError("Cannot set " + stack.toString() + " as a Flower Growth ritual item as it is not an ItemBlock.");
+      return;
+    }
+    Block block = ((ItemBlock) converted.getItem()).getBlock();
+    CraftTweaker.LATE_ACTIONS.add(new FlowerBlockMeta(name, block, converted.getMetadata()));
   }
 
   private static class Remove extends Action {

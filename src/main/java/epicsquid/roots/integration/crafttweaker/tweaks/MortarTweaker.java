@@ -36,19 +36,17 @@ public class MortarTweaker {
       args = {
           @ZenDocArg(arg = "output", info = "the item output of this recipe"),
           @ZenDocArg(arg = "inputs", info = "an array of ingredients that is either 5 long or 1 long")
-      }
+      },
+      description = "Creates a recipe to create output from an array of ingredients (allows transformations). If the array is 5 long, a single recipe will be produced. If the array consists of only one ingredient, 5 separate recipes will be produced, with the output adjusted every time to compensate."
   )
   @ZenMethod
   public static void addRecipe(IItemStack output, IIngredient[] inputs) {
-    if (inputs.length != 5) {
-      if (inputs.length == 1) {
-        // TODO: Fix this
-        CraftTweaker.LATE_ACTIONS.add(new AddMultiple(CraftTweakerMC.getItemStack(output), inputs[0]));
-      } else {
-        CraftTweakerAPI.getLogger().logError("Mortar recipe must have 5 items total, or 1 single item.");
-      }
-    } else {
+    if (inputs.length == 1) {
+      CraftTweaker.LATE_ACTIONS.add(new AddMultiple(CraftTweakerMC.getItemStack(output), inputs[0]));
+    } else if (inputs.length == 5) {
       CraftTweaker.LATE_ACTIONS.add(new Add(CraftTweakerMC.getItemStack(output), Arrays.asList(inputs)));
+    } else {
+      CraftTweakerAPI.getLogger().logError("Mortar recipe must have 5 items total, or 1 single item.");
     }
   }
 
@@ -57,7 +55,8 @@ public class MortarTweaker {
       args = {
           @ZenDocArg(arg = "spellName", info = "the name of the spell as in the spell registry"),
           @ZenDocArg(arg = "inputs", info = "an array of 5 items that are the new ingredients for the recipe")
-      }
+      },
+      description = "Allows the modification of the recipe for a Spell using the specified array of 5 ingredients (allows for transformations)."
   )
   @ZenMethod
   public static void changeSpell(String spellName, IIngredient[] inputs) {
@@ -72,7 +71,8 @@ public class MortarTweaker {
       order = 3,
       args = {
           @ZenDocArg(arg = "output", info = "the item stack produced by the recipe")
-      }
+      },
+      description = "Removes a Mortar Recipe based on output. Compares output to existing recipes without regard for size, meaning that matching recipes with 1-5 inputs and 1-5x outputs will all be removed."
   )
   @ZenMethod
   public static void removeRecipe(IItemStack output) {

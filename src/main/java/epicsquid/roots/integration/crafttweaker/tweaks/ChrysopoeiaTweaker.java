@@ -30,7 +30,8 @@ public class ChrysopoeiaTweaker {
           @ZenDocArg(arg = "name", info = "the name of the recipe being added"),
           @ZenDocArg(arg = "ingredient", info = "a single ingredient (may have variable stack size)"),
           @ZenDocArg(arg = "output", info = "the output produce by Transubstantiation")
-      }
+      },
+      description = "Adds a transmutative recipe that converts an input (in the form of an ingredient, possibly with a variable stack size, transforms are supported), into an output (as an itemstack). Requires a name."
   )
   @ZenMethod
   public static void addRecipe(String name, IIngredient ingredient, IItemStack output) {
@@ -41,7 +42,8 @@ public class ChrysopoeiaTweaker {
       order = 2,
       args = {
           @ZenDocArg(arg = "output", info = "the output of the recipe you wish to remove")
-      }
+      },
+      description = "Removes a transmutative recipe based on the output of the recipe."
   )
   @ZenMethod
   public static void removeRecipe(IItemStack output) {
