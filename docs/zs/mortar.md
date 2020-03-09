@@ -14,6 +14,7 @@ void addRecipe(
 );
 ```
 
+Creates a recipe to create output from an array of ingredients (allows transformations). If the array is 5 long, a single recipe will be produced. If the array consists of only one ingredient, 5 separate recipes will be produced, with the output adjusted every time to compensate.
 
 ---
 
@@ -25,6 +26,7 @@ void changeSpell(
 );
 ```
 
+Allows the modification of the recipe for a Spell using the specified array of 5 ingredients (allows for transformations).
 
 ---
 
@@ -35,6 +37,7 @@ void removeRecipe(
 );
 ```
 
+Removes a Mortar Recipe based on output. Compares output to existing recipes without regard for size, meaning that matching recipes with 1-5 inputs and 1-5x outputs will all be removed.
 
 ---
 

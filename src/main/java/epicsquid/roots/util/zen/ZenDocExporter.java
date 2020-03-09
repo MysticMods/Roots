@@ -2,10 +2,12 @@ package epicsquid.roots.util.zen;
 
 import epicsquid.roots.util.StringHelper;
 import org.apache.commons.lang3.StringUtils;
+import scala.annotation.meta.field;
 import stanhebben.zenscript.annotations.Optional;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.nio.file.Files;
@@ -22,14 +24,15 @@ import java.util.stream.Collectors;
 
 @SuppressWarnings("unchecked")
 public class ZenDocExporter {
+  private static String className = "";
 
-  public void export(Path path, Class[] classes) {
-
+  public void export(Path path, Class<?>[] classes) {
     for (int i = 0; i < classes.length; i++) {
+      className = "";
       StringBuilder out = new StringBuilder();
 
-      ZenDocClass zenClass = (ZenDocClass) classes[i].getDeclaredAnnotation(ZenDocClass.class);
-      ZenDocAppend zenDocAppend = (ZenDocAppend) classes[i].getDeclaredAnnotation(ZenDocAppend.class);
+      ZenDocClass zenClass = classes[i].getDeclaredAnnotation(ZenDocClass.class);
+      ZenDocAppend zenDocAppend = classes[i].getDeclaredAnnotation(ZenDocAppend.class);
 
       if (zenClass == null) {
         continue;
@@ -43,6 +46,7 @@ public class ZenDocExporter {
 
       String[] h3 = zenClass.value().split("\\.");
       String zenClassName = h3[h3.length - 1];
+      className = zenClass.value();
       out.append("### Class\n");
       out.append("\n");
 
@@ -67,20 +71,26 @@ public class ZenDocExporter {
 
       // --- Methods
 
-      out.append("#### Methods\n");
-      out.append("\n");
 
       Method[] methods = classes[i].getDeclaredMethods();
       List<MethodAnnotationPair> methodList = this.getSortedMethodList(methods);
 
+      Field[] fields = classes[i].getDeclaredFields();
+      List<PropertyAnnotationPair> fieldList = this.getSortedFieldList(fields);
+
       // Add static methods to new list.
       List<MethodAnnotationPair> staticMethodList = methodList.stream()
-          .filter(pair -> Modifier.isStatic(pair.method.getModifiers()))
+          .filter(pair -> Modifier.isStatic(pair.type.getModifiers()))
           .collect(Collectors.toList());
+
+      if (!methodList.isEmpty()) {
+        out.append("#### Methods\n");
+        out.append("\n");
+      }
 
       // Remove static methods from main list.
       methodList = methodList.stream()
-          .filter(pair -> !Modifier.isStatic(pair.method.getModifiers()))
+          .filter(pair -> !Modifier.isStatic(pair.type.getModifiers()))
           .collect(Collectors.toList());
 
       // --- Static Methods
@@ -93,6 +103,15 @@ public class ZenDocExporter {
 
       if (!methodList.isEmpty()) {
         this.writeMethodList(out, methodList);
+      }
+
+      // --- Fields
+
+      if (!fieldList.isEmpty()) {
+        out.append("### Static Properties\n");
+        out.append("\n```zenscript\n");
+        this.writePropertyList(out, fieldList);
+        out.append("\n```");
       }
 
       // --- Append
@@ -138,7 +157,17 @@ public class ZenDocExporter {
         out.append("\n");
       }
 
-      this.writeMethod(out, staticMethodList.get(j).method, staticMethodList.get(j).annotation);
+      this.writeMethod(out, staticMethodList.get(j).type, staticMethodList.get(j).annotation);
+    }
+  }
+
+  private void writePropertyList(StringBuilder out, List<PropertyAnnotationPair> staticPropertyList) {
+    for (int j = 0; j < staticPropertyList.size(); j++) {
+      if (j > 0) {
+        out.append("\n");
+      }
+
+      this.writeProperty(out, staticPropertyList.get(j).type, staticPropertyList.get(j).annotation);
     }
   }
 
@@ -150,7 +179,7 @@ public class ZenDocExporter {
 
     out.append("```zenscript").append("\n");
 
-    /*if (Modifier.isStatic(method.getModifiers())) {
+    /*if (Modifier.isStatic(type.getModifiers())) {
       out.append("static ");
     }*/
 
@@ -162,7 +191,7 @@ public class ZenDocExporter {
     ZenDocArg[] args = annotation.args();
 
     if (types.length != args.length) {
-      throw new IllegalStateException("Wrong number of parameter names found for method: " + methodName);
+      throw new IllegalStateException("Wrong number of parameter names found for type: " + methodName);
     }
 
     if (args.length > 0) {
@@ -233,6 +262,21 @@ public class ZenDocExporter {
     out.append("\n---\n\n");
   }
 
+  private void writeProperty(StringBuilder out, Field field, ZenDocProperty annotation) {
+    String fieldName = field.getName();
+
+    String[] h3 = className.split("\\.");
+    String zenClassName = h3[h3.length - 1];
+    out.append(zenClassName).append(".").append(fieldName).append(" // ");
+
+    ZenDocProperty propertyAnnotation = field.getAnnotation(ZenDocProperty.class);
+    for (String line : propertyAnnotation.description()) {
+      out.append(line);
+    }
+
+    out.append("\n");
+  }
+
   private String parse(String line) {
 
     if (line.startsWith("@see")) {
@@ -266,6 +310,22 @@ public class ZenDocExporter {
     return methodList;
   }
 
+  private List<PropertyAnnotationPair> getSortedFieldList(Field[] fields) {
+
+    List<PropertyAnnotationPair> fieldList = new ArrayList<>();
+
+    for (Field field : fields) {
+      ZenDocProperty annotation = field.getDeclaredAnnotation(ZenDocProperty.class);
+
+      if (annotation != null) {
+        fieldList.add(new PropertyAnnotationPair(field, annotation));
+      }
+    }
+
+    fieldList.sort(Comparator.comparingInt(o -> o.annotation.order()));
+    return fieldList;
+  }
+
   private String getSimpleTypeString(Class type) {
 
     String result = type.getSimpleName();
@@ -279,15 +339,26 @@ public class ZenDocExporter {
     return result;
   }
 
-  private static class MethodAnnotationPair {
+  private static class AnnotationPairBase<T, V> {
+    public final T type;
+    public final V annotation;
 
-    public final Method method;
-    public final ZenDocMethod annotation;
-
-    private MethodAnnotationPair(Method method, ZenDocMethod annotation) {
-
-      this.method = method;
+    private AnnotationPairBase(T type, V annotation) {
+      this.type = type;
       this.annotation = annotation;
+    }
+  }
+
+  private static class MethodAnnotationPair extends AnnotationPairBase<Method, ZenDocMethod> {
+    private MethodAnnotationPair(Method method, ZenDocMethod annotation) {
+      super(method, annotation);
+    }
+  }
+
+  private static class PropertyAnnotationPair extends AnnotationPairBase<Field, ZenDocProperty> {
+
+    private PropertyAnnotationPair(Field method, ZenDocProperty annotation) {
+      super(method, annotation);
     }
   }
 

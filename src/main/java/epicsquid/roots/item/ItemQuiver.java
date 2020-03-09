@@ -172,7 +172,7 @@ public class ItemQuiver extends ItemArrowBase {
       try {
         arrowStack = lookup.unreflect(method);
       } catch (IllegalAccessException e) {
-        Roots.logger.error("Unable to reflect/method handler getArrowStack", e);
+        Roots.logger.error("Unable to reflect/type handler getArrowStack", e);
         return ItemStack.EMPTY;
       }
     }

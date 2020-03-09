@@ -1,5 +1,6 @@
 package epicsquid.roots;
 
+import epicsquid.roots.integration.crafttweaker.Herbs;
 import epicsquid.roots.integration.crafttweaker.Rituals;
 import epicsquid.roots.integration.crafttweaker.tweaks.*;
 import epicsquid.roots.integration.crafttweaker.tweaks.predicates.*;
@@ -14,7 +15,7 @@ public class ExportDocumentation {
 
   public static void main(String[] args) {
     String targetPath = "docs/zs/";
-    Class[] classes = {
+    Class<?>[] classes = {
         AnimalHarvestTweaker.class,
         BarkTweaker.class,
         FeyCraftingTweaker.class,
@@ -31,6 +32,7 @@ public class ExportDocumentation {
         Predicates.class,
         PropertyPredicate.class,
         StatePredicate.class,
+        Herbs.class,
     };
 
     ZenDocExporter export = new ZenDocExporter();

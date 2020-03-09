@@ -15,6 +15,7 @@ void addRecipe(
 );
 ```
 
+Adds a Pyre crafting recipe that produces output after the standard amount of time, with the specified input ingredients (with potential transformers).
 
 ---
 
@@ -28,6 +29,7 @@ void addRecipe(
 );
 ```
 
+Adds a Pyre crafting recipe that produces output after the standard amount of time, with the specified input ingredients (with potential transformers). Allows for the specification of an amount of experience to be generated once the craft is finished.
 
 ---
 
@@ -38,6 +40,7 @@ void removeRecipe(
 );
 ```
 
+Removes a Pyre crafting recipe based on its output.
 
 ---
 

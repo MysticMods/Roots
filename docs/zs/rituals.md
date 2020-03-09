@@ -14,6 +14,18 @@ void modifyRitual(
 );
 ```
 
+Modifies the specified Ritual recipe to use the five ingredients specified.
+
+---
+
+
+```zenscript
+Ritual getRitual(
+  string ritualName // the name of the ritual to be fetched; will prepend `ritual_` if it doesn't start with `ritual_`.
+);
+```
+
+Returns a Ritual object which can have its properties modified.
 
 ---
 
