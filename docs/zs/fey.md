@@ -15,6 +15,7 @@ void addRecipe(
 );
 ```
 
+Creates a recipe producing output from an array of ingredients (transforms are supported), requires a name.
 
 ---
 
@@ -28,6 +29,7 @@ void addRecipe(
 );
 ```
 
+Creates a recipe producing output from an array of ingredients (transforms are supported), requires a name. Additional drops the specified amount of experience whenever the recipe is crafted.
 
 ---
 
@@ -38,6 +40,7 @@ void removeRecipe(
 );
 ```
 
+Removes a Fey Crafting recipe via the output produced by the recipe.
 
 ---
 

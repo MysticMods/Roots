@@ -9,14 +9,30 @@ import mods.roots.RunicShears;
 
 ```zenscript
 void addRecipe(
+  string name,                  // the name of the recipe being created
+  IItemStack outputDrop,        // the item output obtained by performing the shearing
+  IBlockState replacementState, // the replacement blockstate described as a block state
+  IPredicate inputState,        // a predicate describing the input state (see Predicates)
+  IItemStack displayItem        // the item that should be displayed in integration for this recipe
+);
+```
+
+Creates a recipe with the defined name that creats the specified itemstack whenever runic shears are used on the specified input state, as well as the state that will replace the input state. Additionally, an optional item that can be displayed in integration.
+
+---
+
+
+```zenscript
+void addRecipeViaItem(
   string name,                 // the name of the recipe being created
   IItemStack outputDrop,       // the item output obtained by performing the shearing
   IItemStack replacementBlock, // the block (as an itemstack) that replaces the block being interacted with upon shearing
   IItemStack inputBlock,       // the block that is to be sheared
-  IItemStack jeiDisplayItem    // the item that should be displayed in JEI for this recipe
+  IItemStack displayItem       // the item that should be displayed in integration for this recipe
 );
 ```
 
+Creates a recipe with the defined name that creats the specified itemstack whenever runic shears are used on the specified input state (derived from the itemstack), as well as the state that will replace the input state (derived from an itemstack). Additionally, an optional item that can be displayed in integration. ItemStacks for blockstates must be itemblocks.
 
 ---
 
@@ -30,6 +46,7 @@ void addEntityRecipe(
 );
 ```
 
+Create a Runic Shears recipe that provides the outputDrop whenever the specified entity is interacted with using runic shears. The drop will only be created once every specified cooldown period. The entity specified must derive from EntityLivingBase.
 
 ---
 
@@ -40,6 +57,7 @@ void removeRecipe(
 );
 ```
 
+Removes any/all recipes that have the output item specified.
 
 ---
 

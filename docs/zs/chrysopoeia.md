@@ -15,6 +15,7 @@ void addRecipe(
 );
 ```
 
+Adds a transmutative recipe that converts an input (in the form of an ingredient, possibly with a variable stack size, transforms are supported), into an output (as an itemstack). Requires a name.
 
 ---
 
@@ -25,6 +26,7 @@ void removeRecipe(
 );
 ```
 
+Removes a transmutative recipe based on the output of the recipe.
 
 ---
 

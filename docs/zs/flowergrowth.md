@@ -13,6 +13,7 @@ void removeRecipe(
 );
 ```
 
+Removes a flower growth recipe by name.
 
 ---
 
@@ -24,6 +25,7 @@ void addRecipeBlockState(
 );
 ```
 
+Adds a recipe to create the specific block state during the flower growth ritual.
 
 ---
 
@@ -36,6 +38,19 @@ void addRecipeBlock(
 );
 ```
 
+Adds a recipe by creating a blockstate from a block along with the meta value from an itemblock to be grown during the flower growth ritual.
+
+---
+
+
+```zenscript
+void addRecipeItem(
+  string name,     // The name of the recipe that you're adding
+  IItemStack stack // The itemstack describing an itemblock to be placed
+);
+```
+
+Adds a recipe by creating a blockstate from an itemstack containing an itemblock and metadata to be grown during the Flower Growth ritual.
 
 ---
 
