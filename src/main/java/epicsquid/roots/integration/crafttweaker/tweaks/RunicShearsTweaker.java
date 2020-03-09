@@ -16,6 +16,7 @@ import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -38,13 +39,29 @@ public class RunicShearsTweaker {
       args = {
           @ZenDocArg(arg = "name", info = "the name of the recipe being created"),
           @ZenDocArg(arg = "outputDrop", info = "the item output obtained by performing the shearing"),
-          @ZenDocArg(arg = "replacementBlock", info = "the block (as an itemstack) that replaces the block being interacted with upon shearing"),
-          @ZenDocArg(arg = "inputBlock", info = "the block that is to be sheared"),
-          @ZenDocArg(arg = "jeiDisplayItem", info = "the item that should be displayed in JEI for this recipe")
-      }
+          @ZenDocArg(arg = "replacementState", info = "the block (as an itemstack) that replaces the block being interacted with upon shearing"),
+          @ZenDocArg(arg = "inputState", info = "the block that is to be sheared"),
+          @ZenDocArg(arg = "displayItem", info = "the item that should be displayed in integration for this recipe")
+      },
+      description = "Creates a recipe with the defined name that creats the specified itemstack whenever runic shears are used on the specified input state, as well as the state that will replace the input state. Additionally, an optional item that can be displayed in integration."
   )
   @ZenMethod
-  public static void addRecipe(String name, IItemStack outputDrop, IItemStack replacementBlock, IItemStack inputBlock, IItemStack jeiDisplayItem) {
+  public static void addRecipe(String name, IItemStack outputDrop, IBlockState replacementState, IBlockState inputState, IItemStack displayItem) {
+  }
+
+  @ZenDocMethod(
+      order = 2,
+      args = {
+          @ZenDocArg(arg = "name", info = "the name of the recipe being created"),
+          @ZenDocArg(arg = "outputDrop", info = "the item output obtained by performing the shearing"),
+          @ZenDocArg(arg = "replacementBlock", info = "the block (as an itemstack) that replaces the block being interacted with upon shearing"),
+          @ZenDocArg(arg = "inputBlock", info = "the block that is to be sheared"),
+          @ZenDocArg(arg = "displayItem", info = "the item that should be displayed in integration for this recipe")
+      },
+      description = "Creates a recipe with the defined name that creats the specified itemstack whenever runic shears are used on the specified input state (derived from the itemstack), as well as the state that will replace the input state (derived from an itemstack). Additionally, an optional item that can be displayed in integration. ItemStacks for blockstates must be itemblocks."
+  )
+  @ZenMethod
+  public static void addRecipeViaItem(String name, IItemStack outputDrop, IItemStack replacementBlock, IItemStack inputBlock, IItemStack jeiDisplayItem) {
     if (!(CraftTweakerMC.getItemStack(inputBlock).getItem() instanceof ItemBlock) || (replacementBlock != null && !(CraftTweakerMC.getItemStack(replacementBlock).getItem() instanceof ItemBlock))) {
       CraftTweakerAPI.logError("Runic Shears require input and replacement to be blocks. Recipe: " + name);
       return;
@@ -53,13 +70,14 @@ public class RunicShearsTweaker {
   }
 
   @ZenDocMethod(
-      order = 2,
+      order = 3,
       args = {
           @ZenDocArg(arg = "name", info = "the name of the recipe for the shearing"),
           @ZenDocArg(arg = "outputDrop", info = "the item that is dropped upon shearing the specified entity"),
           @ZenDocArg(arg = "entity", info = "the entity that is to be sheared to obtain the drop"),
           @ZenDocArg(arg = "cooldown", info = "the number of ticks (seconds multiplied by 20) it takes until the entity can be sheared again")
-      }
+      },
+      description = "Create a Runic Shears recipe that provides the outputDrop whenever the specified entity is interacted with using runic shears. The drop will only be created once every specified cooldown period. The entity specified must derive from EntityLivingBase."
   )
   @ZenMethod
   public static void addEntityRecipe(String name, IItemStack outputDrop, IEntityDefinition entity, int cooldown) {
@@ -72,10 +90,11 @@ public class RunicShearsTweaker {
   }
 
   @ZenDocMethod(
-      order = 3,
+      order = 4,
       args = {
           @ZenDocArg(arg = "output", info = "the itemstack output that you wish to remove")
-      }
+      },
+      description = "Removes any/all recipes that have the output item specified."
   )
   @ZenMethod
   public static void removeRecipe(IItemStack output) {
