@@ -1,6 +1,7 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.fx.MessageThawFX;
 import epicsquid.roots.spell.modules.SpellModule;
@@ -35,22 +36,22 @@ public class SpellSummersThaw extends SpellBase {
   private int radius_x, radius_y, radius_z, max;
 
   public SpellSummersThaw(String name) {
-    super(name, TextFormatting.RED, 25F/255F, 1F, 235F/255F, 252F/255F, 166F/255F, 37F/255F);
+    super(name, TextFormatting.RED, 25F / 255F, 1F, 235F / 255F, 252F / 255F, 166F / 255F, 37F / 255F);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_MAX_AFFECTED);
   }
 
   @Override
   public void init() {
     addIngredients(
-            new ItemStack(ModItems.bark_acacia),
-            new ItemStack(Blocks.TORCH),
-            new ItemStack(ModItems.infernal_bulb),
-            new OreIngredient("gunpowder"),
-            new ItemStack(Blocks.DOUBLE_PLANT, 1, BlockDoublePlant.EnumPlantType.SUNFLOWER.getMeta())
+        new ItemStack(ModItems.bark_acacia),
+        new ItemStack(Blocks.TORCH),
+        new ItemStack(ModItems.infernal_bulb),
+        new OreIngredient("gunpowder"),
+        new ItemStack(Blocks.DOUBLE_PLANT, 1, BlockDoublePlant.EnumPlantType.SUNFLOWER.getMeta())
     );
   }
 
-  private IBlockState mutate (IBlockState incoming) {
+  private IBlockState mutate(IBlockState incoming) {
     Block block = incoming.getBlock();
     if (block == Blocks.SNOW_LAYER) {
       return Blocks.AIR.getDefaultState();
@@ -75,34 +76,43 @@ public class SpellSummersThaw extends SpellBase {
 
     List<BlockPos> affectedBlocks = new ArrayList<>();
 
-    outer: for (int x = mX - radius_x; x < mX + radius_x; x++) {
+    for (int x = mX - radius_x; x < mX + radius_x; x++) {
       for (int y = mY - radius_y; y < mY + radius_y; y++) {
         for (int z = mZ - radius_z; z < mZ + radius_z; z++) {
           BlockPos thisPos = new BlockPos(x, y, z);
           IBlockState state = world.getBlockState(thisPos);
           IBlockState mutated = mutate(state);
-          if (state == mutated) {
-            continue;
-          }
-
-          affectedBlocks.add(thisPos);
-
-          if (!world.isRemote) {
-            world.setBlockState(thisPos, mutated, 3);
-          }
-
-          if (affectedBlocks.size() >= max) {
-            break outer;
+          if (state != mutated) {
+            affectedBlocks.add(thisPos);
           }
         }
       }
     }
 
-    if (!affectedBlocks.isEmpty()) {
-      PacketHandler.sendToAllTracking(new MessageThawFX(affectedBlocks), caster);
+    if (affectedBlocks.isEmpty()) {
+      return false;
     }
 
-    return affectedBlocks.isEmpty();
+    List<BlockPos> changed = new ArrayList<>();
+
+    for (int i = 0; i < max; i++) {
+      if (affectedBlocks.isEmpty()) {
+        break;
+      }
+      BlockPos p = affectedBlocks.remove(Util.rand.nextInt(affectedBlocks.size()));
+      IBlockState state = world.getBlockState(p);
+      IBlockState mutated = mutate(state);
+      changed.add(p);
+      if (!world.isRemote) {
+        world.setBlockState(p, mutated, 3);
+      }
+    }
+
+    if (!changed.isEmpty()) {
+      PacketHandler.sendToAllTracking(new MessageThawFX(changed), caster);
+    }
+
+    return true;
   }
 
   public int[] getRadius() {

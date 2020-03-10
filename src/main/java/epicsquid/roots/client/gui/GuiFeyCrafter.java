@@ -35,6 +35,21 @@ public class GuiFeyCrafter extends GuiContainer {
     this.renderHoveredToolTip(mouseX, mouseY);
   }
 
+  @Override
+  protected void renderHoveredToolTip(int x, int y) {
+    super.renderHoveredToolTip(x, y);
+
+    if (container.getRecipe() != null) {
+      final int minX = ((this.width - this.xSize) / 2) + ((this.xSize / 4) * 3) - 2;
+      final int minY = ((this.height - this.ySize) / 2) + (this.ySize / 5) - 2;
+      final int maxX = minX + 20;
+      final int maxY = minY + 20;
+
+      if (x >= minX && x <= maxX && y >= minY && y <= maxY) {
+        this.renderToolTip(container.getRecipe().getResult(), x, y);
+      }
+    }
+  }
 
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
