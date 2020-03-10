@@ -5,6 +5,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.network.fx.MessageScatterPlantFX;
 import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -61,7 +62,14 @@ public class SpellScatter extends SpellBase {
       return false;
     }
 
-    List<BlockPos> blocks = Util.getBlocksWithinRadius(world, pos.down(), radius, radius_y, radius, Blocks.FARMLAND);
+    List<BlockPos> blocks = Util.getBlocksWithinRadius(world, pos.down(), radius, radius_y, radius, (p) -> {
+      IBlockState at = world.getBlockState(p);
+      if (at.getBlock().canSustainPlant(at, world, p, EnumFacing.UP, (IPlantable) offhand.getItem())) {
+        return world.isAirBlock(p.up());
+      } else {
+        return false;
+      }
+    });
     if (blocks.isEmpty()) {
       return false;
     }

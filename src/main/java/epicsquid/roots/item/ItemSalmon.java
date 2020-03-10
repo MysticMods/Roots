@@ -155,7 +155,7 @@ public class ItemSalmon extends ItemBase {
       String crafter = tag.getString("crafter");
       NBTTagList advancements = tag.getTagList("advancements", Constants.NBT.TAG_STRING);
       tooltip.add(I18n.format("roots.tooltip.salmon.crafter", crafter));
-      StringJoiner joiner = new StringJoiner(",", "[", "]");
+      StringJoiner joiner = new StringJoiner(", ", "[", "]");
       for (int i = 0; i < advancements.tagCount(); i++) {
         joiner.add(advancements.getStringTagAt(i));
       }

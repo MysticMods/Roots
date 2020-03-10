@@ -13,11 +13,12 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MessageScatterPlantFX implements IMessage {
 
-  private List<BlockPos> affectedBlocks;
+  private List<BlockPos> affectedBlocks = new ArrayList<>();
 
   @SuppressWarnings("unused")
   public MessageScatterPlantFX() {

@@ -40,14 +40,14 @@ public class RunicShearsTweaker {
       args = {
           @ZenDocArg(arg = "name", info = "the name of the recipe being created"),
           @ZenDocArg(arg = "outputDrop", info = "the item output obtained by performing the shearing"),
-          @ZenDocArg(arg = "replacementState", info = "the replacement blockstate described as a block state"),
           @ZenDocArg(arg = "inputState", info = "a predicate describing the input state (see Predicates)"),
+          @ZenDocArg(arg = "replacementState", info = "the replacement blockstate described as a block state"),
           @ZenDocArg(arg = "displayItem", info = "the item that should be displayed in integration for this recipe")
       },
       description = "Creates a recipe with the defined name that creats the specified itemstack whenever runic shears are used on the specified input state, as well as the state that will replace the input state. Additionally, an optional item that can be displayed in integration."
   )
   @ZenMethod
-  public static void addRecipe(String name, IItemStack outputDrop, crafttweaker.api.block.IBlockState replacementState, IPredicate inputState, IItemStack displayItem) {
+  public static void addRecipe(String name, IItemStack outputDrop, IPredicate inputState, crafttweaker.api.block.IBlockState replacementState, IItemStack displayItem) {
     CraftTweaker.LATE_ACTIONS.add(new AddState(name, CraftTweakerMC.getItemStack(outputDrop), CraftTweakerMC.getBlockState(replacementState), inputState, CraftTweakerMC.getItemStack(displayItem)));
   }
 
@@ -56,14 +56,14 @@ public class RunicShearsTweaker {
       args = {
           @ZenDocArg(arg = "name", info = "the name of the recipe being created"),
           @ZenDocArg(arg = "outputDrop", info = "the item output obtained by performing the shearing"),
-          @ZenDocArg(arg = "replacementBlock", info = "the block (as an itemstack) that replaces the block being interacted with upon shearing"),
           @ZenDocArg(arg = "inputBlock", info = "the block that is to be sheared"),
+          @ZenDocArg(arg = "replacementBlock", info = "the block (as an itemstack) that replaces the block being interacted with upon shearing"),
           @ZenDocArg(arg = "displayItem", info = "the item that should be displayed in integration for this recipe")
       },
-      description = "Creates a recipe with the defined name that creats the specified itemstack whenever runic shears are used on the specified input state (derived from the itemstack), as well as the state that will replace the input state (derived from an itemstack). Additionally, an optional item that can be displayed in integration. ItemStacks for blockstates must be itemblocks."
+      description = "As above, but using ItemStacks that describe ItemBlocks to determine blockstates."
   )
   @ZenMethod
-  public static void addRecipeViaItem(String name, IItemStack outputDrop, IItemStack replacementBlock, IItemStack inputBlock, IItemStack displayItem) {
+  public static void addRecipeViaItem(String name, IItemStack outputDrop, IItemStack inputBlock, IItemStack replacementBlock, IItemStack displayItem) {
     if (!(CraftTweakerMC.getItemStack(inputBlock).getItem() instanceof ItemBlock) || (replacementBlock != null && !(CraftTweakerMC.getItemStack(replacementBlock).getItem() instanceof ItemBlock))) {
       CraftTweakerAPI.logError("Runic Shears require input and replacement to be blocks. Recipe: " + name);
       return;

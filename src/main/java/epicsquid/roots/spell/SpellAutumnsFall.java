@@ -97,11 +97,13 @@ public class SpellAutumnsFall extends SpellBase {
     }
 
     ItemStack dropped = new ItemStack(block.getItemDropped(state, Util.rand, 0), 1, block.damageDropped(state));
-    int[] ores = OreDictionary.getOreIDs(dropped);
-    for (int ore : ores) {
-      if (OreDictionary.getOreName(ore).equals("treeLeaves")) {
-        contained.add(block);
-        return true;
+    if (!dropped.isEmpty()) {
+      int[] ores = OreDictionary.getOreIDs(dropped);
+      for (int ore : ores) {
+        if (OreDictionary.getOreName(ore).equals("treeLeaves")) {
+          contained.add(block);
+          return true;
+        }
       }
     }
 
