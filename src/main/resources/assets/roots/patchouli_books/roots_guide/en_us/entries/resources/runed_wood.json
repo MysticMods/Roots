@@ -11,6 +11,42 @@
       "text": "Used to cap off wooden pillars that empower rituals, runed wood blocks can be crafted from any type of vanilla wood with a knife and $(l:herbs/wildroot)wildroot$().$(br2)This process damages your knife and consumes the wildroot. $(info) You can convert runed wood back to normal logs by crafting it shapelessly."
     },
     {
+      "type": "runic_carving_template",
+      "recipe": "acacia",
+      "link_recipe": "true"
+    },
+    {
+      "type": "runic_carving_template",
+      "recipe": "birch",
+      "link_recipe": "true"
+    },
+    {
+      "type": "runic_carving_template",
+      "recipe": "oak",
+      "link_recipe": "true"
+    },
+    {
+      "type": "runic_carving_template",
+      "recipe": "dark_oak",
+      "link_recipe": "true"
+    },
+    {
+      "type": "runic_carving_template",
+      "recipe": "jungle",
+      "link_recipe": "true"
+    },
+    {
+      "type": "runic_carving_template",
+      "recipe": "spruce",
+      "link_recipe": "true"
+    },
+    {
+      "advancement": "roots:wildwood",
+      "type": "runic_carving_template",
+      "recipe": "wildwood",
+      "link_recipe": "true"
+    },
+    {
       "type": "relations",
       "entries": [
         "rituals/standing_stones",

@@ -197,20 +197,26 @@ public class RitualUtil {
   }
 
   public enum RunedWoodType implements StandingPillar {
-    ACACIA(() -> ModBlocks.runed_acacia, (o) -> o.getBlock() == Blocks.LOG2 && o.getValue(BlockNewLog.VARIANT) == BlockPlanks.EnumType.ACACIA),
-    OAK(() -> ModBlocks.runed_oak, (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.OAK),
-    DARK_OAK(() -> ModBlocks.runed_dark_oak, (o) -> o.getBlock() == Blocks.LOG2 && o.getValue(BlockNewLog.VARIANT) == BlockPlanks.EnumType.DARK_OAK),
-    BIRCH(() -> ModBlocks.runed_birch, (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.BIRCH),
-    JUNGLE(() -> ModBlocks.runed_jungle, (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.JUNGLE),
-    SPRUCE(() -> ModBlocks.runed_spruce, (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.SPRUCE),
-    WILDWOOD(() -> ModBlocks.runed_wildwood, (o) -> o.getBlock() == ModBlocks.wildwood_log);
+    ACACIA(() -> ModBlocks.runed_acacia, (o) -> o.getBlock() == Blocks.LOG2 && o.getValue(BlockNewLog.VARIANT) == BlockPlanks.EnumType.ACACIA, new ItemStack(Blocks.LOG2, 1, 0)),
+    OAK(() -> ModBlocks.runed_oak, (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.OAK, new ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.OAK.getMetadata())),
+    DARK_OAK(() -> ModBlocks.runed_dark_oak, (o) -> o.getBlock() == Blocks.LOG2 && o.getValue(BlockNewLog.VARIANT) == BlockPlanks.EnumType.DARK_OAK, new ItemStack(Blocks.LOG2, 1, 1)),
+    BIRCH(() -> ModBlocks.runed_birch, (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.BIRCH, new ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.BIRCH.getMetadata())),
+    JUNGLE(() -> ModBlocks.runed_jungle, (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.JUNGLE, new ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.JUNGLE.getMetadata())),
+    SPRUCE(() -> ModBlocks.runed_spruce, (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.SPRUCE, new ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.SPRUCE.getMetadata())),
+    WILDWOOD(() -> ModBlocks.runed_wildwood, (o) -> o.getBlock() == ModBlocks.wildwood_log, new ItemStack(ModBlocks.wildwood_log));
 
     private Supplier<Block> supplier;
     private Predicate<IBlockState> matcher;
+    private ItemStack visual;
 
-    RunedWoodType(Supplier<Block> supplier, Predicate<IBlockState> matcher) {
+    RunedWoodType(Supplier<Block> supplier, Predicate<IBlockState> matcher, ItemStack visual) {
       this.supplier = supplier;
       this.matcher = matcher;
+      this.visual = visual;
+    }
+
+    public ItemStack getVisual() {
+      return visual;
     }
 
     public Block getTopper () {
