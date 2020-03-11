@@ -1,7 +1,6 @@
 package epicsquid.roots.block;
 
 import epicsquid.mysticallib.block.BlockTEBase;
-import epicsquid.mysticallib.particle.particles.ParticleLeaf;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.roots.particle.ParticlePyreLeaf;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
@@ -111,7 +110,10 @@ public class BlockPyre extends BlockTEBase {
     if (stateIn.getValue(BURNING)) {
       world.playSound((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, 0.5F, 1.0F, false);
 
-      List<BlockPos> standingStones = RitualUtil.getNearbyStandingStonePositions(world, pos, -1);
+      List<BlockPos> standingStones = RitualUtil.getNearbyPositions(RitualUtil.Runestone.get(), world, pos, -1);
+      for (RitualUtil.RunedWoodType type : RitualUtil.RunedWoodType.values()) {
+        standingStones.addAll(RitualUtil.getNearbyPositions(type, world, pos, -1));
+      }
       if (!standingStones.isEmpty()) {
         Vec3d me = new Vec3d(pos).add(0.5, 0.5, 0.5);
         for (BlockPos runestone : standingStones) {

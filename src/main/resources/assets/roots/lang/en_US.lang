@@ -74,6 +74,13 @@ tile.grove_stone.name=Grove Stone
 tile.fey_crafter.name=Fey Crafter
 tile.fey_light.name=Fey Light
 tile.decorative_pyre.name=Decorative Pyre
+tile.runed_wood_acacia=Runed Acacia Wood
+tile.runed_wood_dark_oak=Runed Dark Oak Wood
+tile.runed_wood_oak=Runed Oak Wood
+tile.runed_wood_birch=Runed Birch Wood
+tile.runed_wood_jungle=Runed Jungle Wood
+tile.runed_wood_spruce=Runed Spruce Wood
+tile.runed_wood_wildwood=Runed Wildwood
 
 roots.tooltip.petaldust.notag=This Spell Dust has no NBT data! It is potentially prone to errors and should not be used!
 roots.tooltip.salmon.invalid=This contains invalid NBT data.
