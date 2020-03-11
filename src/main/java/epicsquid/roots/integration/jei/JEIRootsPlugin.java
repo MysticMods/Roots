@@ -8,10 +8,7 @@ import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.integration.jei.carving.BarkRecipeCategory;
-import epicsquid.roots.integration.jei.carving.BarkRecipeWrapper;
-import epicsquid.roots.integration.jei.carving.MossRecipeCategory;
-import epicsquid.roots.integration.jei.carving.MossRecipeWrapper;
+import epicsquid.roots.integration.jei.carving.*;
 import epicsquid.roots.integration.jei.chrysopoeia.ChrysopoeiaCategory;
 import epicsquid.roots.integration.jei.chrysopoeia.ChrysopoeiaWrapper;
 import epicsquid.roots.integration.jei.fey.FeyCategory;
@@ -40,6 +37,7 @@ import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellChrysopoeia;
 import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.util.RitualUtil;
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
@@ -77,6 +75,7 @@ public class JEIRootsPlugin implements IModPlugin {
   public static final String SUMMON_CREATURES = Roots.MODID + ".summon_creatures";
   public static final String CHRYSOPOEIA = Roots.MODID + ".chrysopoeia";
   public static final String TRANSMUTATION = Roots.MODID + ".transmutation";
+  public static final String RUNED_WOOD = Roots.MODID + ".runed_wood";
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registry) {
@@ -93,7 +92,8 @@ public class JEIRootsPlugin implements IModPlugin {
         new RunicShearsEntityCategory(helper),
         new SummonCreaturesCategory(helper),
         new MortarCategory(helper),
-        new TransmutationCategory(helper)
+        new TransmutationCategory(helper),
+        new RunedWoodCategory(helper)
     );
   }
 
@@ -147,6 +147,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(SummonCreatureIntermediate.class, SummonCreaturesWrapper::new, SUMMON_CREATURES);
     registry.handleRecipes(ChrysopoeiaRecipe.class, ChrysopoeiaWrapper::new, CHRYSOPOEIA);
     registry.handleRecipes(TransmutationRecipe.class, TransmutationWrapper::new, TRANSMUTATION);
+    registry.handleRecipes(RitualUtil.RunedWoodType.class, RunedWoodWrapper::new, RUNED_WOOD);
 
     Collection<SpellBase> spells = SpellRegistry.spellRegistry.values();
 
@@ -164,6 +165,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipes(ModRecipes.getSummonCreatureEntries(), SUMMON_CREATURES);
     registry.addRecipes(ModRecipes.getChrysopoeiaRecipes(), CHRYSOPOEIA);
     registry.addRecipes(ModRecipes.getTransmutationRecipes(), TRANSMUTATION);
+    registry.addRecipes(Arrays.asList(RitualUtil.RunedWoodType.values()), RUNED_WOOD);
 
     ModRecipes.generateLifeEssence();
     List<SummonCreatureIntermediate> summonGenerated = ModRecipes.getLifeEssenceList().stream().map(SummonCreatureIntermediate::create).collect(Collectors.toList());
@@ -177,6 +179,7 @@ public class JEIRootsPlugin implements IModPlugin {
     for (Item knife : ModItems.knives) {
       registry.addRecipeCatalyst(new ItemStack(knife), BARK_CARVING);
       registry.addRecipeCatalyst(new ItemStack(knife), TERRA_MOSS);
+      registry.addRecipeCatalyst(new ItemStack(knife), RUNED_WOOD);
     }
 
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.pyre), RITUAL_CRAFTING);
