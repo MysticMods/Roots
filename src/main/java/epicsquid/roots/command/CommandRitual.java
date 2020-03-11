@@ -4,13 +4,11 @@ import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
+import epicsquid.roots.ritual.conditions.ConditionRunedPillars;
 import epicsquid.roots.ritual.conditions.ConditionStandingStones;
-import epicsquid.roots.ritual.conditions.ConditionTrees;
 import epicsquid.roots.ritual.conditions.ICondition;
 import epicsquid.roots.tileentity.TileEntityPyre;
-import net.minecraft.block.BlockNewLog;
-import net.minecraft.block.BlockOldLog;
-import net.minecraft.block.BlockPlanks;
+import epicsquid.roots.util.RitualUtil;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -98,6 +96,7 @@ public class CommandRitual extends CommandBase {
       }
 
       int runePos = 0;
+      int pillarPos = 0;
       for (ICondition condition : ritual.getConditions()) {
         if (condition instanceof ConditionStandingStones) {
           ConditionStandingStones stones = (ConditionStandingStones) condition;
@@ -108,17 +107,16 @@ public class CommandRitual extends CommandBase {
             }
           }
           runePos += stones.getAmount();
-        } else if (condition instanceof ConditionTrees) {
-          ConditionTrees trees = (ConditionTrees) condition;
-          BlockPlanks.EnumType type = trees.getTreeType();
-          for (i = 0; i < trees.getAmount(); i++) {
-            BlockPos base = pos.add(0, 1, i + 1);
-            if (type.getMetadata() >= 4) {
-              world.setBlockState(base, Blocks.LOG2.getDefaultState().withProperty(BlockNewLog.VARIANT, type));
-            } else {
-              world.setBlockState(base, Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, type));
+        } else if (condition instanceof ConditionRunedPillars) {
+          ConditionRunedPillars pillar = (ConditionRunedPillars) condition;
+          RitualUtil.RunedWoodType type = pillar.getType();
+          for (i = 0; i < pillar.getAmount(); i++) {
+            BlockPos base = pos.add(0, 1, pillarPos + i + 1);
+            for (int j = 0; j < pillar.getHeight(); j++) {
+              world.setBlockState(base.add(0, j, 0), j == pillar.getHeight() - 1 ? type.getTopper().getDefaultState() : type.getBase());
             }
           }
+          pillarPos += pillar.getAmount();
         }
       }
     }

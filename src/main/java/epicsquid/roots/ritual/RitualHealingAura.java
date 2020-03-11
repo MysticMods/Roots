@@ -2,10 +2,10 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualHealingAura;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.ritual.conditions.ConditionRunedPillars;
 import epicsquid.roots.ritual.conditions.ConditionStandingStones;
-import epicsquid.roots.ritual.conditions.ConditionTrees;
+import epicsquid.roots.util.RitualUtil;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.block.BlockPlanks;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -39,7 +39,7 @@ public class RitualHealingAura extends RitualBase {
         new ItemStack(Blocks.SAPLING, 1, 2)
     );
     addCondition(new ConditionStandingStones(3, 1));
-    addCondition(new ConditionTrees(BlockPlanks.EnumType.BIRCH, 1));
+    addCondition(new ConditionRunedPillars(RitualUtil.RunedWoodType.BIRCH, 3, 1));
     setIcon(ModItems.ritual_healing_aura);
     setColor(TextFormatting.GOLD);
   }

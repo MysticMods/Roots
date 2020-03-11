@@ -183,8 +183,8 @@ roots.ritual.ritual_grove_supplication.name=Grove Supplication
 roots.ritual.condition.items=Failed to start ritual: invalid items.
 roots.ritual.condition.standing_stones=Failed to start ritual: requires %s.
 roots.ritual.condition.standing_stones.types=%d of %d-high stones
-roots.ritual.condition.trees=Failed to start ritual: invalid trees, requires %s.
-roots.ritual.condition.trees.types=%d of %s.
+roots.ritual.condition.pillar=Failed to start ritual: requires %s.
+roots.ritual.condition.pillar.types=%d of %d-high %s pillars.
 roots.ritual.condition.invalid=Failed to start ritual: unknown reason
 roots.ritual.condition.invalid_summon=Failed to start ritual: no valid combination of summoning items found on nearby offering plates.
 

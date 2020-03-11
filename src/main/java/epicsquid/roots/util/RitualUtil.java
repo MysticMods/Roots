@@ -3,7 +3,10 @@ package epicsquid.roots.util;
 import com.google.common.collect.Sets;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.tileentity.TileEntityOfferingPlate;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockNewLog;
+import net.minecraft.block.BlockOldLog;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -112,11 +115,15 @@ public class RitualUtil {
 
   public static AxisAlignedBB RADIUS = new AxisAlignedBB(-9, -9, -9, 10, 10, 10);
 
-  public static int getNearbyStandingStones (World world, BlockPos pos, int height) {
+  public static int getNearbyStandingStones(World world, BlockPos pos, int height) {
     return getNearbyPositions(Runestone.get(), world, pos, height).size();
   }
 
-  public static List<BlockPos> getNearbyPositions(StandingPillar pillar,  World world, BlockPos pos, int height) {
+  public static int getNearbyPillar(StandingPillar pillar, World world, BlockPos pos, int height) {
+    return getNearbyPositions(pillar, world, pos, height).size();
+  }
+
+  public static List<BlockPos> getNearbyPositions(StandingPillar pillar, World world, BlockPos pos, int height) {
     List<BlockPos> positions = new ArrayList<>();
 
     AxisAlignedBB bounds = RADIUS.offset(pos);
@@ -158,8 +165,9 @@ public class RitualUtil {
   }
 
   public interface StandingPillar {
-    boolean matchesBase (IBlockState state);
-    boolean matchesTop (IBlockState state);
+    boolean matchesBase(IBlockState state);
+
+    boolean matchesTop(IBlockState state);
   }
 
   public static class Runestone implements StandingPillar {
@@ -178,7 +186,7 @@ public class RitualUtil {
       }
     }
 
-    public static Runestone get () {
+    public static Runestone get() {
       if (INSTANCE == null) {
         INSTANCE = new Runestone();
       }
@@ -197,29 +205,63 @@ public class RitualUtil {
   }
 
   public enum RunedWoodType implements StandingPillar {
-    ACACIA(() -> ModBlocks.runed_acacia, (o) -> o.getBlock() == Blocks.LOG2 && o.getValue(BlockNewLog.VARIANT) == BlockPlanks.EnumType.ACACIA, new ItemStack(Blocks.LOG2, 1, 0)),
-    OAK(() -> ModBlocks.runed_oak, (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.OAK, new ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.OAK.getMetadata())),
-    DARK_OAK(() -> ModBlocks.runed_dark_oak, (o) -> o.getBlock() == Blocks.LOG2 && o.getValue(BlockNewLog.VARIANT) == BlockPlanks.EnumType.DARK_OAK, new ItemStack(Blocks.LOG2, 1, 1)),
-    BIRCH(() -> ModBlocks.runed_birch, (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.BIRCH, new ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.BIRCH.getMetadata())),
-    JUNGLE(() -> ModBlocks.runed_jungle, (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.JUNGLE, new ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.JUNGLE.getMetadata())),
-    SPRUCE(() -> ModBlocks.runed_spruce, (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.SPRUCE, new ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.SPRUCE.getMetadata())),
-    WILDWOOD(() -> ModBlocks.runed_wildwood, (o) -> o.getBlock() == ModBlocks.wildwood_log, new ItemStack(ModBlocks.wildwood_log));
+    ACACIA(() -> ModBlocks.runed_acacia,
+        (o) -> o.getBlock() == Blocks.LOG2 && o.getValue(BlockNewLog.VARIANT) == BlockPlanks.EnumType.ACACIA,
+        () -> new ItemStack(Blocks.LOG2, 1, 0),
+        () -> Blocks.LOG2.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.ACACIA)
+    ),
+    OAK(() -> ModBlocks.runed_oak,
+        (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.OAK,
+        () -> new ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.OAK.getMetadata()),
+        () -> Blocks.LOG.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.OAK)
+    ),
+    DARK_OAK(() -> ModBlocks.runed_dark_oak,
+        (o) -> o.getBlock() == Blocks.LOG2 && o.getValue(BlockNewLog.VARIANT) == BlockPlanks.EnumType.DARK_OAK,
+        () -> new ItemStack(Blocks.LOG2, 1, 1),
+        () -> Blocks.LOG2.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.DARK_OAK)
+    ),
+    BIRCH(() -> ModBlocks.runed_birch,
+        (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.BIRCH,
+        () -> new ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.BIRCH.getMetadata()),
+        () -> Blocks.LOG.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.BIRCH)
+    ),
+    JUNGLE(() -> ModBlocks.runed_jungle,
+        (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.JUNGLE,
+        () -> new ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.JUNGLE.getMetadata()),
+        () -> Blocks.LOG.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.JUNGLE)
+    ),
+    SPRUCE(() -> ModBlocks.runed_spruce,
+        (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.SPRUCE,
+        () -> new ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.SPRUCE.getMetadata()),
+        () -> Blocks.LOG.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.SPRUCE)
+    ),
+    WILDWOOD(() -> ModBlocks.runed_wildwood,
+        (o) -> o.getBlock() == ModBlocks.wildwood_log,
+        () -> new ItemStack(ModBlocks.wildwood_log),
+        () -> ModBlocks.wildwood_log.getDefaultState()
+    );
 
     private Supplier<Block> supplier;
     private Predicate<IBlockState> matcher;
-    private ItemStack visual;
+    private Supplier<ItemStack> visual;
+    private Supplier<IBlockState> base;
 
-    RunedWoodType(Supplier<Block> supplier, Predicate<IBlockState> matcher, ItemStack visual) {
+    RunedWoodType(Supplier<Block> supplier, Predicate<IBlockState> matcher, Supplier<ItemStack> visual, Supplier<IBlockState> base) {
       this.supplier = supplier;
       this.matcher = matcher;
       this.visual = visual;
+      this.base = base;
     }
 
     public ItemStack getVisual() {
-      return visual;
+      return visual.get();
     }
 
-    public Block getTopper () {
+    public IBlockState getBase () {
+      return base.get();
+    }
+
+    public Block getTopper() {
       return supplier.get();
     }
 
@@ -234,7 +276,7 @@ public class RitualUtil {
     }
 
     @Nullable
-    public static IBlockState matchesAny (IBlockState state) {
+    public static IBlockState matchesAny(IBlockState state) {
       for (RunedWoodType type : RunedWoodType.values()) {
         if (type.matchesBase(state)) {
           return type.getTopper().getDefaultState();
