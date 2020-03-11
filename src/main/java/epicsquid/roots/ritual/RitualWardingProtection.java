@@ -35,8 +35,8 @@ public class RitualWardingProtection extends RitualBase {
         new OreIngredient("rootsBark"),
         new ItemStack(Items.IRON_CHESTPLATE)
     );
-    addCondition(new ConditionStandingStones(3, 3));
-    addCondition(new ConditionStandingStones(4, 3));
+    addCondition(new ConditionStandingStones(3, 2));
+    addCondition(new ConditionStandingStones(4, 2));
     setIcon(ModItems.ritual_warding_protection);
     setColor(TextFormatting.DARK_BLUE);
     setBold(true);

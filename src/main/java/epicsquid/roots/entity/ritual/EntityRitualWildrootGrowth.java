@@ -6,7 +6,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.network.fx.MessageTreeCompleteFX;
 import epicsquid.roots.ritual.RitualRegistry;
-import epicsquid.roots.ritual.RitualWildGrowth;
+import epicsquid.roots.ritual.RitualWildrootGrowth;
 import epicsquid.roots.world.tree.WorldGenBigWildwoodTree;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -16,13 +16,13 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.Random;
 
-public class EntityRitualWildGrowth extends EntityRitualBase {
-  private RitualWildGrowth ritual;
+public class EntityRitualWildrootGrowth extends EntityRitualBase {
+  private RitualWildrootGrowth ritual;
 
-  public EntityRitualWildGrowth(World worldIn) {
+  public EntityRitualWildrootGrowth(World worldIn) {
     super(worldIn);
-    this.getDataManager().register(lifetime, RitualRegistry.ritual_wild_growth.getDuration() + 20);
-    ritual = (RitualWildGrowth) RitualRegistry.ritual_wild_growth;
+    this.getDataManager().register(lifetime, RitualRegistry.ritual_wildroot_growth.getDuration() + 20);
+    ritual = (RitualWildrootGrowth) RitualRegistry.ritual_wildroot_growth;
   }
 
   @Override

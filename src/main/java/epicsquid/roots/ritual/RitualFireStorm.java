@@ -32,7 +32,8 @@ public class RitualFireStorm extends RitualBase {
         new ItemStack(ModItems.bark_acacia),
         new ItemStack(Items.BLAZE_POWDER)
     );
-    addCondition(new ConditionStandingStones(3, 3));
+    addCondition(new ConditionStandingStones(3, 1));
+    addCondition(new ConditionStandingStones(4, 3));
     setIcon(ModItems.ritual_fire_storm);
     setColor(TextFormatting.RED);
     setBold(true);

@@ -2,6 +2,8 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualSpreadingForest;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.ritual.conditions.ConditionRunedPillars;
+import epicsquid.roots.util.RitualUtil;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -33,6 +35,8 @@ public class RitualSpreadingForest extends RitualBase {
         new OreIngredient("treeSapling"),
         new OreIngredient("treeSapling")
     );
+    addCondition(new ConditionRunedPillars(RitualUtil.RunedWoodType.JUNGLE, 4, 1));
+    addCondition(new ConditionRunedPillars(RitualUtil.RunedWoodType.SPRUCE, 4, 1));
     setIcon(ModItems.ritual_spreading_forest);
     setColor(TextFormatting.GREEN);
     setBold(true);

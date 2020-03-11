@@ -3,6 +3,9 @@ package epicsquid.roots.ritual;
 import epicsquid.roots.entity.ritual.EntityRitualPurity;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.ritual.conditions.ConditionRunedPillars;
+import epicsquid.roots.ritual.conditions.ConditionStandingStones;
+import epicsquid.roots.util.RitualUtil;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -35,6 +38,8 @@ public class RitualPurity extends RitualBase {
         new ItemStack(Items.MILK_BUCKET),
         new ItemStack(Items.GLASS_BOTTLE)
     );
+    addCondition(new ConditionRunedPillars(RitualUtil.RunedWoodType.OAK, 3, 2));
+    addCondition(new ConditionStandingStones(3, 1));
     setIcon(ModItems.ritual_purity);
     setColor(TextFormatting.LIGHT_PURPLE);
     setBold(true);
