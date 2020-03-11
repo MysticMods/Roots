@@ -3,7 +3,7 @@ package epicsquid.roots.util;
 import com.google.common.collect.Sets;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.tileentity.TileEntityOfferingPlate;
-import net.minecraft.block.Block;
+import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -14,10 +14,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class RitualUtil {
 
@@ -111,32 +110,29 @@ public class RitualUtil {
     return stacks;
   }
 
-  public static AxisAlignedBB STONES = new AxisAlignedBB(-9, -9, -9, 10, 10, 10);
+  public static AxisAlignedBB RADIUS = new AxisAlignedBB(-9, -9, -9, 10, 10, 10);
 
   public static int getNearbyStandingStones (World world, BlockPos pos, int height) {
-    return getNearbyStandingStonePositions(world, pos, height).size();
+    return getNearbyPositions(Runestone.get(), world, pos, height).size();
   }
 
-  public static List<BlockPos> getNearbyStandingStonePositions (World world, BlockPos pos, int height) {
+  public static List<BlockPos> getNearbyPositions(StandingPillar pillar,  World world, BlockPos pos, int height) {
     List<BlockPos> positions = new ArrayList<>();
-    Set<Block> toppers = Sets.newHashSet(ModBlocks.chiseled_runestone, ModBlocks.chiseled_runed_obsidian);
-    Set<Block> basis = Sets.newHashSet(ModBlocks.runestone, ModBlocks.runed_obsidian);
 
-    AxisAlignedBB bounds = STONES.offset(pos);
+    AxisAlignedBB bounds = RADIUS.offset(pos);
     BlockPos max = max(bounds);
     BlockPos min = min(bounds);
 
-    int count = 0;
     for (BlockPos p : BlockPos.getAllInBoxMutable(max, min)) {
       IBlockState state = world.getBlockState(p);
-      if (toppers.contains(state.getBlock())) {
+      if (pillar.matchesTop(state)) {
         BlockPos start = p.toImmutable().down();
         IBlockState startState;
         int column = 1;
 
         while (start.getY() > (p.getY() - 10)) {
           startState = world.getBlockState(start);
-          if (!basis.contains(startState.getBlock())) {
+          if (!pillar.matchesBase(startState)) {
             break;
           }
 
@@ -161,4 +157,74 @@ public class RitualUtil {
     return new BlockPos(box.maxX, box.maxY, box.maxZ);
   }
 
+  public interface StandingPillar {
+    boolean matchesBase (IBlockState state);
+    boolean matchesTop (IBlockState state);
+  }
+
+  public static class Runestone implements StandingPillar {
+    private static Runestone INSTANCE = null;
+    private static Set<Block> toppers = new HashSet<>();
+    private static Set<Block> bases = new HashSet<>();
+
+    public Runestone() {
+      if (toppers.isEmpty()) {
+        toppers.add(ModBlocks.chiseled_runestone);
+        toppers.add(ModBlocks.chiseled_runed_obsidian);
+      }
+      if (bases.isEmpty()) {
+        bases.add(ModBlocks.runestone);
+        bases.add(ModBlocks.runed_obsidian);
+      }
+    }
+
+    public static Runestone get () {
+      if (INSTANCE == null) {
+        INSTANCE = new Runestone();
+      }
+      return INSTANCE;
+    }
+
+    @Override
+    public boolean matchesBase(IBlockState state) {
+      return bases.contains(state.getBlock());
+    }
+
+    @Override
+    public boolean matchesTop(IBlockState state) {
+      return toppers.contains(state.getBlock());
+    }
+  }
+
+  public enum RunedWoodType implements StandingPillar {
+    ACACIA(() -> ModBlocks.runed_acacia, (o) -> o.getBlock() == Blocks.LOG2 && o.getValue(BlockNewLog.VARIANT) == BlockPlanks.EnumType.ACACIA),
+    OAK(() -> ModBlocks.runed_oak, (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.OAK),
+    DARK_OAK(() -> ModBlocks.runed_dark_oak, (o) -> o.getBlock() == Blocks.LOG2 && o.getValue(BlockNewLog.VARIANT) == BlockPlanks.EnumType.DARK_OAK),
+    BIRCH(() -> ModBlocks.runed_birch, (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.BIRCH),
+    JUNGLE(() -> ModBlocks.runed_jungle, (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.JUNGLE),
+    SPRUCE(() -> ModBlocks.runed_spruce, (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.SPRUCE),
+    WILDWOOD(() -> ModBlocks.runed_wildwood, (o) -> o.getBlock() == ModBlocks.wildwood_log);
+
+    private Supplier<Block> supplier;
+    private Predicate<IBlockState> matcher;
+
+    RunedWoodType(Supplier<Block> supplier, Predicate<IBlockState> matcher) {
+      this.supplier = supplier;
+      this.matcher = matcher;
+    }
+
+    public Block getTopper () {
+      return supplier.get();
+    }
+
+    @Override
+    public boolean matchesBase(IBlockState state) {
+      return matcher.test(state);
+    }
+
+    @Override
+    public boolean matchesTop(IBlockState state) {
+      return state.getBlock() == getTopper();
+    }
+  }
 }
