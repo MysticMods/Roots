@@ -74,13 +74,13 @@ tile.grove_stone.name=Grove Stone
 tile.fey_crafter.name=Fey Crafter
 tile.fey_light.name=Fey Light
 tile.decorative_pyre.name=Decorative Pyre
-tile.runed_wood_acacia=Runed Acacia Wood
-tile.runed_wood_dark_oak=Runed Dark Oak Wood
-tile.runed_wood_oak=Runed Oak Wood
-tile.runed_wood_birch=Runed Birch Wood
-tile.runed_wood_jungle=Runed Jungle Wood
-tile.runed_wood_spruce=Runed Spruce Wood
-tile.runed_wood_wildwood=Runed Wildwood
+tile.runed_acacia.name=Runed Acacia
+tile.runed_dark_oak.name=Runed Dark Oak
+tile.runed_oak.name=Runed Oak
+tile.runed_birch.name=Runed Birch
+tile.runed_jungle.name=Runed Jungle
+tile.runed_spruce.name=Runed Spruce
+tile.runed_wildwood.name=Runed Wildwood
 
 roots.tooltip.petaldust.notag=This Spell Dust has no NBT data! It is potentially prone to errors and should not be used!
 roots.tooltip.salmon.invalid=This contains invalid NBT data.
@@ -429,4 +429,7 @@ roots.commands.dump.desc=§2/ct roots_properties [mode]\n§3Dumps the specified 
 roots.commands.dump.usage=Usage: ct roots_properties [mode]\nModes: all | ritual | spell
 
 roots.commands.dump_recipes.desc=§2/ct roots_recipes [category]\n§3Dumps a list of ResourceLocations of registered recipes.
-roots.commands.dump_recipes.usage=Usage: ct roots_recipes [mode]\nModes: all | animal_harvest | bark | fey_crafting | flower_growth | mortar | pacifist | pyre_crafting | runic_shears | transmutaiton
+roots.commands.dump_recipes.usage=Usage: ct roots_recipes [mode]\nModes: all | animal_harvest | chrysopoeia | fey_crafting | flower_growth | mortar | pacifist | pyre_crafting | runic_shears | transmutation
+
+# Stuff
+roots.message.salmon_eaten=You suddenly feel more knowledgeable about the world!

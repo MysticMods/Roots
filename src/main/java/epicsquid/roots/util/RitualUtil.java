@@ -226,5 +226,15 @@ public class RitualUtil {
     public boolean matchesTop(IBlockState state) {
       return state.getBlock() == getTopper();
     }
+
+    @Nullable
+    public static IBlockState matchesAny (IBlockState state) {
+      for (RunedWoodType type : RunedWoodType.values()) {
+        if (type.matchesBase(state)) {
+          return type.getTopper().getDefaultState();
+        }
+      }
+      return null;
+    }
   }
 }

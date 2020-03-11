@@ -14,6 +14,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -21,6 +22,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.*;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -97,6 +100,8 @@ public class ItemSalmon extends ItemBase {
       MessageClearToasts message = new MessageClearToasts();
       PacketHandler.INSTANCE.sendTo(message, player);
       AdvancementSyncHandler.syncPlayer(player, false);
+      worldIn.playSound(null, player.getPosition(), SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 1f, 0.8f);
+      player.sendMessage(new TextComponentTranslation("roots.message.salmon_eaten").setStyle(new Style().setColor(TextFormatting.LIGHT_PURPLE).setBold(true)));
     }
 
     return ItemStack.EMPTY;
