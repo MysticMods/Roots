@@ -13,38 +13,45 @@
     {
       "type": "runic_carving_template",
       "recipe": "acacia",
-      "link_recipe": "true"
+      "link_recipe": "true",
+      "text": "Carved from acacia logs."
     },
     {
       "type": "runic_carving_template",
       "recipe": "birch",
-      "link_recipe": "true"
+      "link_recipe": "true",
+      "text": "Carved from birch logs."
     },
     {
       "type": "runic_carving_template",
       "recipe": "oak",
-      "link_recipe": "true"
+      "link_recipe": "true",
+      "text": "Carved from oak logs."
     },
     {
       "type": "runic_carving_template",
       "recipe": "dark_oak",
-      "link_recipe": "true"
+      "link_recipe": "true",
+      "text": "Carved from dark oak logs."
     },
     {
       "type": "runic_carving_template",
       "recipe": "jungle",
-      "link_recipe": "true"
+      "link_recipe": "true",
+      "text": "Carved from jungle logs."
     },
     {
       "type": "runic_carving_template",
       "recipe": "spruce",
-      "link_recipe": "true"
+      "link_recipe": "true",
+      "text": "Carved from spruce logs."
     },
     {
       "advancement": "roots:wildwood",
       "type": "runic_carving_template",
       "recipe": "wildwood",
-      "link_recipe": "true"
+      "link_recipe": "true",
+      "text": "Carved from wildwood logs."
     },
     {
       "type": "relations",
