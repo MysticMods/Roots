@@ -1,0 +1,29 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_column",
+    "textures": {
+      "end": "minecraft:blocks/log_jungle_top",
+      "side": "roots:blocks/runed_jungle"
+    }
+  },
+  "variants": {
+    "axis": {
+      "y": {},
+      "z": {
+        "x": 90
+      },
+      "x": {
+        "x": 90,
+        "y": 90
+      },
+      "none": {}
+    },
+    "inventory": [
+      {}
+    ],
+    "handlers": [
+      {}
+    ]
+  }
+}

@@ -170,6 +170,41 @@
     {
       "type": "block",
       "base": "chiseled_runed_obsidian"
+    },
+    {
+      "type": "log",
+      "base": "runed_acacia",
+      "log": "minecraft:blocks/log_acacia_top"
+    },
+    {
+      "type": "log",
+      "base": "runed_oak",
+      "log": "minecraft:blocks/log_oak_top"
+    },
+    {
+      "type": "log",
+      "base": "runed_dark_oak",
+      "log": "minecraft:blocks/log_big_oak_top"
+    },
+    {
+      "type": "log",
+      "base": "runed_birch",
+      "log": "minecraft:blocks/log_birch_top"
+    },
+    {
+      "type": "log",
+      "base": "runed_jungle",
+      "log": "minecraft:blocks/log_jungle_top"
+    },
+    {
+      "type": "log",
+      "base": "runed_spruce",
+      "log": "minecraft:blocks/log_spruce_top"
+    },
+    {
+      "type": "log",
+      "base": "runed_wildwood",
+      "log": "roots:blocks/wildwood_log_top"
     }
   ]
 }
