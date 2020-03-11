@@ -5,6 +5,7 @@ import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.config.MossConfig;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.dispenser.DispenseKnife;
+import epicsquid.roots.util.RitualUtil;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -40,9 +41,9 @@ public class ItemDruidKnife extends ItemKnifeBase {
   @SuppressWarnings("deprecation")
   public EnumActionResult onItemUse(@Nonnull EntityPlayer player, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (hand == EnumHand.MAIN_HAND) {
+      IBlockState state = world.getBlockState(pos);
       if (!MossConfig.getBlacklistDimensions().contains(world.provider.getDimension())) {
         // Used to get terramoss from a block of cobble. This can also be done using runic shears.
-        IBlockState state = world.getBlockState(pos);
         IBlockState result = MossConfig.scrapeResult(state);
         if (result != null) {
           if (!world.isRemote) {
@@ -55,8 +56,23 @@ public class ItemDruidKnife extends ItemKnifeBase {
           }
           world.playSound(player, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
         }
+        return EnumActionResult.SUCCESS;
       }
-      return EnumActionResult.SUCCESS;
+      IBlockState result = RitualUtil.RunedWoodType.matchesAny(state);
+      ItemStack offHand = player.getHeldItemOffhand();
+      if (result != null && offHand.getItem() == ModItems.wildroot) {
+        if (!world.isRemote) {
+          world.setBlockState(pos, result);
+          world.scheduleBlockUpdate(pos, result.getBlock(), 1, result.getBlock().tickRate(world));
+          if (!player.capabilities.isCreativeMode) {
+            player.getHeldItem(hand).damageItem(1, player);
+            offHand.shrink(1);
+            player.setHeldItem(EnumHand.OFF_HAND, offHand.isEmpty() ? ItemStack.EMPTY : offHand);
+          }
+          world.playSound(null, pos, SoundEvents.BLOCK_WOOD_BREAK, SoundCategory.BLOCKS, 1f, 1f);
+        }
+        return EnumActionResult.SUCCESS;
+      }
     }
     return EnumActionResult.PASS;
   }
