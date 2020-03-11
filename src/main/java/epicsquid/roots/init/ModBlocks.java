@@ -38,6 +38,9 @@ public class ModBlocks {
   public static Block runestone, runestone_brick, runestone_brick_alt, chiseled_runestone, wildwood_log, wildwood_planks, wildwood_leaves, wildwood_sapling, baffle_cap_huge_stem, baffle_cap_huge_top,
       baffle_cap_mushroom, trample_rune;
 
+  // Runed wood
+  public static Block runed_acacia, runed_birch, runed_dark_oak, runed_jungle, runed_oak, runed_spruce, runed_wildwood;
+
   //Elemental Soil
   public static Block elemental_soil_fire, elemental_soil_water, elemental_soil_air, elemental_soil_earth, elemental_soil;
 
@@ -58,6 +61,7 @@ public class ModBlocks {
   // Lists of blcoks
   public static List<Block> runestoneBlocks;
   public static List<Block> runedObsidianBlocks;
+  public static List<Block> runedWoodBlocks;
 
   /**
    * Register all block
@@ -104,8 +108,17 @@ public class ModBlocks {
     event.addBlock(chiseled_runed_obsidian = new BlockRunedObsidian(Material.ROCK, SoundType.METAL, 8.5f, "chiseled_runed_obsidian")).setCreativeTab(Roots.tab);
     event.addBlock(trample_rune = new BlockTrample(Material.ROCK, SoundType.METAL, 1.4f, "runestone_trample", TileEntityTrample.class)).setCreativeTab(Roots.tab);
 
+    event.addBlock(runed_acacia = new BlockLogBase("runed_acacia")).setCreativeTab(Roots.tab);
+    event.addBlock(runed_dark_oak = new BlockLogBase("runed_dark_oak")).setCreativeTab(Roots.tab);
+    event.addBlock(runed_oak = new BlockLogBase("runed_oak")).setCreativeTab(Roots.tab);
+    event.addBlock(runed_birch = new BlockLogBase("runed_birch")).setCreativeTab(Roots.tab);
+    event.addBlock(runed_jungle = new BlockLogBase("runed_jungle")).setCreativeTab(Roots.tab);
+    event.addBlock(runed_spruce = new BlockLogBase("runed_spruce")).setCreativeTab(Roots.tab);
+    event.addBlock(runed_wildwood = new BlockLogBase("runed_wildwood")).setCreativeTab(Roots.tab);
+
     runestoneBlocks = Arrays.asList(runestone, runestone_brick, runestone_brick_alt, chiseled_runestone);
     runedObsidianBlocks = Arrays.asList(runed_obsidian, runed_obsidian_brick, runed_obsidian_brick_alt, chiseled_runed_obsidian);
+    runedWoodBlocks = Arrays.asList(runed_acacia, runed_dark_oak, runed_oak, runed_birch, runed_jungle, runed_spruce, runed_wildwood);
 
     event.addBlock(wildwood_leaves = new BlockLeavesBase(0.8f, "wildwood_leaves", () -> new ItemStack(ModItems.wildroot), 50).setFlammable(true).setCreativeTab(Roots.tab));
     event.addBlock(wildwood_log = new BlockLogBase("wildwood_log").setCreativeTab(Roots.tab));

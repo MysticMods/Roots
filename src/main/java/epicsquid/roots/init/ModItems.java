@@ -198,6 +198,9 @@ public class ModItems {
     for (Block runed : ModBlocks.runedObsidianBlocks) {
       OreDictionary.registerOre("runedObsidian", runed);
     }
+    for (Block runed : ModBlocks.runedWoodBlocks) {
+      OreDictionary.registerOre("runedWood", runed);
+    }
 
     OreDictionary.registerOre("wildroot", ModItems.wildroot);
 

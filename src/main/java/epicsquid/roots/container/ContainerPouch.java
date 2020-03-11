@@ -13,6 +13,7 @@ import epicsquid.roots.handler.PouchHandler;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemPouch;
+import epicsquid.roots.util.ClientHerbUtil;
 import epicsquid.roots.util.ServerHerbUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -49,7 +50,12 @@ public class ContainerPouch extends Container {
     this.isServerSide = isServerSide;
     ItemStack main = player.getHeldItemMainhand();
     ItemStack off = player.getHeldItemOffhand();
-    ItemStack first = ServerHerbUtil.getFirstPouch(player);
+    ItemStack first;
+    if (isServerSide) {
+      first = ServerHerbUtil.getFirstPouch(player);
+    } else {
+      first = ClientHerbUtil.getFirstPouch(player);
+    }
 
     ItemStack use = ItemStack.EMPTY;
     if (main.getItem() instanceof ItemPouch) {
