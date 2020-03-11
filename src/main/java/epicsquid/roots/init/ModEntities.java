@@ -50,7 +50,7 @@ public class ModEntities {
         EntityRitualSpreadingForest.class,
         EntityRitualTransmutation.class,
         EntityRitualWardingProtection.class,
-        EntityRitualWildGrowth.class,
+        EntityRitualWildrootGrowth.class,
         EntityRitualWindwall.class,
         EntityRitualSummonCreatures.class,
         EntitySpellSpringStorm.class

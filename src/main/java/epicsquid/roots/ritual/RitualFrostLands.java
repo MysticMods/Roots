@@ -2,6 +2,7 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualFrostLands;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -34,6 +35,7 @@ public class RitualFrostLands extends RitualBase implements IColdRitual {
         new ItemStack(ModItems.bark_spruce),
         new ItemStack(ModItems.bark_spruce)
     );
+    addCondition(new ConditionStandingStones(3, 1));
     setIcon(ModItems.ritual_frost_lands);
     setColor(TextFormatting.AQUA);
     setBold(true);

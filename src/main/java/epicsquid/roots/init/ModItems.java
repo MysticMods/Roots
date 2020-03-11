@@ -160,7 +160,7 @@ public class ModItems {
     event.addItem(ritual_frost_lands = new ItemBase("ritual_frost_lands").setCreativeTab(null));
     event.addItem(ritual_animal_harvest = new ItemBase("ritual_animal_harvest").setCreativeTab(null));
     event.addItem(ritual_summon_creatures = new ItemBase("ritual_summon_creatures").setCreativeTab(null));
-    event.addItem(ritual_wild_growth = new ItemBase("ritual_wild_growth").setCreativeTab(null));
+    event.addItem(ritual_wild_growth = new ItemBase("ritual_wildroot_growth").setCreativeTab(null));
     event.addItem(ritual_overgrowth = new ItemBase("ritual_overgrowth").setCreativeTab(null));
     event.addItem(ritual_flower_growth = new ItemBase("ritual_flower_growth").setCreativeTab(null));
     event.addItem(ritual_transmutation = new ItemBase("ritual_transmutation").setCreativeTab(null));

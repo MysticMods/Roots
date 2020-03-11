@@ -2,6 +2,7 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualDivineProtection;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -41,6 +42,7 @@ public class RitualDivineProtection extends RitualBase {
         new ItemStack(ModItems.bark_oak),
         new OreIngredient("dustGlowstone")
     );
+    addCondition(new ConditionStandingStones(3, 3));
     setIcon(ModItems.ritual_divine_protection);
     setColor(TextFormatting.YELLOW);
     setBold(true);

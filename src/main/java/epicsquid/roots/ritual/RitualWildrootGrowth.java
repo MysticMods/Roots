@@ -1,13 +1,13 @@
 package epicsquid.roots.ritual;
 
-import epicsquid.roots.entity.ritual.EntityRitualWildGrowth;
+import epicsquid.roots.entity.ritual.EntityRitualWildrootGrowth;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
 
-public class RitualWildGrowth extends RitualBase {
+public class RitualWildrootGrowth extends RitualBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(300);
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 10).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 20).setDescription("Radius on the Y Axis of the cube in which the ritual takes place");
@@ -16,10 +16,10 @@ public class RitualWildGrowth extends RitualBase {
 
   public int radius_x, radius_y, radius_z, interval;
 
-  public RitualWildGrowth(String name, boolean disabled) {
+  public RitualWildrootGrowth(String name, boolean disabled) {
     super(name, disabled);
     properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL);
-    setEntityClass(EntityRitualWildGrowth.class);
+    setEntityClass(EntityRitualWildrootGrowth.class);
   }
 
   @Override

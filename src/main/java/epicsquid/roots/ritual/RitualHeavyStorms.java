@@ -2,6 +2,9 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualHeavyStorms;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.ritual.conditions.ConditionRunedPillars;
+import epicsquid.roots.ritual.conditions.ConditionStandingStones;
+import epicsquid.roots.util.RitualUtil;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -33,6 +36,8 @@ public class RitualHeavyStorms extends RitualBase {
         new ItemStack(ModItems.cloud_berry),
         new ItemStack(Items.BEETROOT_SEEDS)
     );
+    addCondition(new ConditionStandingStones(3, 1));
+    addCondition(new ConditionRunedPillars(RitualUtil.RunedWoodType.DARK_OAK, 4, 1));
     setIcon(ModItems.ritual_heavy_storms);
     setColor(TextFormatting.DARK_AQUA);
     setBold(true);
