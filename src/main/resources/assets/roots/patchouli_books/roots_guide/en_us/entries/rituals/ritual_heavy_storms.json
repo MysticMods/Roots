@@ -30,6 +30,13 @@
           ["   R   ","       ","       ","   0   ","       ","       ","   R   "]
         ]
       }
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "rituals/standing_stones"
+      ]
     }
   ]
 }

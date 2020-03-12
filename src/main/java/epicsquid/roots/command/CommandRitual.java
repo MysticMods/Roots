@@ -111,7 +111,7 @@ public class CommandRitual extends CommandBase {
           ConditionRunedPillars pillar = (ConditionRunedPillars) condition;
           RitualUtil.RunedWoodType type = pillar.getType();
           for (i = 0; i < pillar.getAmount(); i++) {
-            BlockPos base = pos.add(0, 1, pillarPos + i + 1);
+            BlockPos base = pos.add(0, 0, pillarPos + i + 1);
             for (int j = 0; j < pillar.getHeight(); j++) {
               world.setBlockState(base.add(0, j, 0), j == pillar.getHeight() - 1 ? type.getTopper().getDefaultState() : type.getBase());
             }

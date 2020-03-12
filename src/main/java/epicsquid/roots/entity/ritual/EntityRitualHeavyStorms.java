@@ -23,19 +23,21 @@ public class EntityRitualHeavyStorms extends EntityRitualBase {
     ritual = (RitualHeavyStorms) RitualRegistry.ritual_heavy_storms;
   }
 
+  private int strike_count = 0;
+
   @Nullable
   public BlockPos validPosition() {
     if (world.isRemote) {
       return BlockPos.ORIGIN;
     }
     BlockPos pos = getPosition();
-    int maxY = (int) (pos.getX() + ritual.radius_x);
+    int maxY = (int) (pos.getY() + ritual.radius_x);
     for (int i = 0; i < 500; i++) {
       BlockPos random = RitualUtil.getRandomGroundPosition(pos, (int) ritual.radius_x, (int) ritual.radius_z);
       Chunk chunk = world.getChunk(random);
       int height = chunk.getHeight(random);
       if (height <= maxY) {
-        return new BlockPos(random.getX(), height, random.getZ());
+        return new BlockPos(random.getX(), height + 1, random.getZ());
       }
     }
     return null;
@@ -78,12 +80,6 @@ public class EntityRitualHeavyStorms extends EntityRitualBase {
         if (!world.getWorldInfo().isRaining()) {
           world.getWorldInfo().setRaining(true);
         }
-        if (rand.nextInt(ritual.lightning_chance) == 0) {
-          BlockPos pos = validPosition();
-          if (pos != null) {
-            world.weatherEffects.add(new EntityLightningBolt(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, false));
-          }
-        }
       }
       List<EntityLivingBase> entities = world
           .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
@@ -94,6 +90,19 @@ public class EntityRitualHeavyStorms extends EntityRitualBase {
             for (float i = 0; i < 24; i++) {
               ParticleUtil.spawnParticleGlow(world, (float) e.posX + 0.5f * (rand.nextFloat() - 0.5f), (float) e.posY + e.height / 2.5f + (rand.nextFloat() - 0.5f), (float) e.posZ + 0.5f * (rand.nextFloat() - 0.5f), 0.0625f * (rand.nextFloat() - 0.5f), 0.009375f * (rand.nextFloat()), 0.0625f * (rand.nextFloat() - 0.5f), 50, 50, 255, 0.25f * alpha, 2.0f + 4.0f * rand.nextFloat(), 80);
             }
+          }
+        }
+      }
+      if (!world.isRemote) {
+        if (rand.nextInt(ritual.lightning_chance) == 0 && strike_count <= ritual.max_strikes) {
+          BlockPos pos = validPosition();
+          if (!entities.isEmpty() && rand.nextInt(5) == 0) {
+            pos = entities.get(rand.nextInt(entities.size())).getPosition();
+          }
+
+          if (pos != null) {
+            world.weatherEffects.add(new EntityLightningBolt(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, false));
+            strike_count++;
           }
         }
       }

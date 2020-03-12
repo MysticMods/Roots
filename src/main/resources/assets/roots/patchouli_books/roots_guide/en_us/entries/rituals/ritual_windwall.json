@@ -7,11 +7,30 @@
   "pages": [
     {
       "type": "text",
-      "text": "All potentially hostile creatures are pushed rapidly away from the ritual location."
+      "text": "All potentially hostile creatures are pushed rapidly away from the ritual location.$(br2)$(standing_stones) $(l:rituals/ritual_windwall#multiblock)This ritual requires standing stones.$()"
     },
     {
       "type": "pyre_template",
       "ritual": "ritual_windwall"
+    },
+    {
+      "type": "multiblock",
+      "anchor": "multiblock",
+      "multiblock": {
+        "mapping": {
+          "0": "roots:pyre",
+          "R": "roots:runestone",
+          "C": "roots:chiseled_runestone",
+          "W": "roots:runed_spruce",
+          "L": "minecraft:log[variant=spruce]"
+        },
+        "pattern": [
+          ["       ","   W   ","       ","C     C","       ","       ","       "],
+          ["       ","   L   ","       ","R     R","       ","       ","       "],
+          ["       ","   L   ","       ","R     R","       ","       ","       "],
+          ["       ","   L   ","       ","R  0  R","       ","       ","       "]
+        ]
+      }
     }
   ]
 }
