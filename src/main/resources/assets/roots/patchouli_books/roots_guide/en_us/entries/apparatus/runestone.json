@@ -16,7 +16,8 @@
     {
       "type": "relations",
       "entries": [
-        "resources/runestone"
+        "resources/runestone",
+        "resources/runed_obsidian"
       ]
     }
   ]

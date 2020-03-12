@@ -15,7 +15,8 @@
     {
       "type": "relations",
       "entries": [
-        "rituals/ritual_animal_harvest"
+        "rituals/ritual_animal_harvest",
+        "basics/crafting"
       ]
     }
   ]

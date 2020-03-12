@@ -1,6 +1,6 @@
 {
   "name": "Rituals",
   "sortnum" : 3,
-  "description": "Rituals are performed using a $(l:basics/pyre)Pyre$() and generally take time to complete.$(br2)Most are portable, but some $(info) $(l:rituals/standing_stones)require standing stones or trees$().$(br2)It is also possible to $(info) $(l:rituals/automation)automate almost every ritual$().",
+  "description": "Rituals are performed using a $(l:basics/pyre)Pyre$() and generally take time to complete.$(br2)Most are portable, but some $(info) $(l:rituals/standing_stones)require standing stones or trees$(). It is also possible to $(info) $(l:rituals/automation)automate almost every ritual$().",
   "icon": "roots:pyre"
 }

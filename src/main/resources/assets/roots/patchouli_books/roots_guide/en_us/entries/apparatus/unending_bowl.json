@@ -16,7 +16,9 @@
     {
       "type": "relations",
       "entries": [
-        "herbs/dewgonia"
+        "herbs/dewgonia",
+        "resources/runestone",
+        "apparatus/runestone"
       ]
     }
   ]
