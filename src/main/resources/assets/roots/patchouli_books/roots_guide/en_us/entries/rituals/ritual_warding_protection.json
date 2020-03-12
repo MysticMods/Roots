@@ -23,15 +23,12 @@
           "C": "roots:chiseled_runestone"
         },
         "pattern": [
-          ["       "," C   C ","       ","       ","       ","   C   ","       "],
-          ["   C   "," R   R ","       ","C     C","       ","   R   ","       "],
-          ["   R   "," R   R ","       ","R     R","       ","   R   ","       "],
-          ["   R   "," R   R ","       ","R  0  R","       ","   R   ","       "]
+          ["       ","   C   ","       ","       ","       ","   C   ","       "],
+          ["       ","   R   ","       ","C     C","       ","   R   ","       "],
+          ["       ","   R   ","       ","R     R","       ","   R   ","       "],
+          ["       ","   R   ","       ","R  0  R","       ","   R   ","       "]
         ]
       }
-    },
-    { "type": "text",
-      "text": "It is not necessary for the standing stones to be in this exact configuration, merely that they be present."
     }
   ]
 }

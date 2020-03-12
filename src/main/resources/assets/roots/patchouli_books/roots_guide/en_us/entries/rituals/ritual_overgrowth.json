@@ -12,6 +12,15 @@
     {
       "type": "pyre_template",
       "ritual": "ritual_overgrowth"
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "herbs/terra_moss",
+        "apparatus/knives",
+        "apparatus/runic_shears"
+      ]
     }
   ]
 }

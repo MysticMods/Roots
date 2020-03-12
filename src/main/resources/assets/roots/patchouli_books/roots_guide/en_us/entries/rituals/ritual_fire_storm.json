@@ -34,7 +34,8 @@
       "type": "relations",
       "anchor": "related",
       "entries": [
-        "basics/fey_fire"
+        "basics/fey_fire",
+        "rituals/standing_stones"
       ]
     }
   ]
