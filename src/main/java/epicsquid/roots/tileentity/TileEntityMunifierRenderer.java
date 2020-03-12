@@ -12,10 +12,9 @@ public class TileEntityMunifierRenderer extends TileEntitySpecialRenderer<TileEn
       GlStateManager.pushMatrix();
       EntityItem item = new EntityItem(Minecraft.getMinecraft().world, x, y, z, tei.inventory.getStackInSlot(0));
       item.hoverStart = 0;
-      GlStateManager.translate(x, y - 0.5, z);
-      //+ 0.75, y, z + 0.5);
-/*      GlStateManager.rotate(45, 0, 0, 1.0f);
-      GlStateManager.translate(1.125 + (0.125 / 2), 0, 0.5);*/
+      float rotation = tei.ticks + partialTicks;
+      GlStateManager.translate(x + 0.5, (y + 0.15) + Math.sin(rotation / 20.d) / 19.5, z + 0.5);
+      GlStateManager.rotate(-rotation * 0.8f, 0, 1.0f, 0);
       Minecraft.getMinecraft().getRenderManager().renderEntity(item, 0, 0, 0, 0, 0, true);
       GlStateManager.popMatrix();
     }
