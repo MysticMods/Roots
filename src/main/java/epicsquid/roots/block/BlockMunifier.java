@@ -32,7 +32,7 @@ public class BlockMunifier extends BlockTEBase {
   @Nonnull
   @Override
   public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
-    return new AxisAlignedBB(0.3125, 0, 0.3125, 0.6875, 0.125, 0.6875);
+    return new AxisAlignedBB(0.25, 0, 0.25, 0.75, 0.125, 0.75);
   }
 
   @Override
