@@ -21,7 +21,8 @@
         "herbs/wildewheet",
         "herbs/spirit_herb",
         "resources/runestone",
-        "resources/fey_leather"
+        "resources/fey_leather",
+        "rituals/ritual_summon_creatures"
       ]
     }
   ]

@@ -1,5 +1,5 @@
 {
-  "name": "Storm of Fire",
+  "name": "Fire Storm",
   "icon": "roots:ritual_fire_storm",
   "category": "rituals",
   "advancement": "roots:infernal_bulb",
@@ -28,6 +28,13 @@
           ["   R   ","       ","       ","R  0  R","       ","       ","       "]
         ]
       }
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "basics/fey_fire"
+      ]
     }
   ]
 }

@@ -18,7 +18,8 @@
     {
       "type": "relations",
       "entries": [
-        "rituals/ritual_summon_creatures"
+        "rituals/ritual_summon_creatures",
+        "rituals/reinforced_offering_plate"
     ]
     }
   ]

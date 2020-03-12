@@ -29,7 +29,8 @@
     {
       "type": "relations",
       "entries": [
-        "basics/pyre"
+        "basics/pyre",
+        "apparatus/unending_bowl"
       ]
     }
   ]

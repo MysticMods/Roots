@@ -31,7 +31,8 @@
         "type": "relations",
         "entries": [
           "resources/bark",
-          "herbs/terra_moss"
+          "herbs/terra_moss",
+          "basics/other_imbuer"
         ]
       }
     ]

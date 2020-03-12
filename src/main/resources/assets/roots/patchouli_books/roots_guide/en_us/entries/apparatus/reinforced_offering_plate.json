@@ -18,7 +18,8 @@
       "type": "relations",
       "entries": [
         "rituals/ritual_summon_creatures",
-        "resources/runed_obsidian"
+        "resources/runed_obsidian",
+        "apparatus/offering_plate"
     ]
     }
   ]
