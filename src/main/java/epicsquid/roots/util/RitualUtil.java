@@ -1,6 +1,7 @@
 package epicsquid.roots.util;
 
 import com.google.common.collect.Sets;
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.tileentity.TileEntityOfferingPlate;
 import net.minecraft.block.Block;
@@ -23,12 +24,18 @@ import java.util.function.Supplier;
 
 public class RitualUtil {
 
-  private static Random rand = new Random();
+  private static Random rand = Util.rand;
 
   public static BlockPos getRandomPosRadialXZ(BlockPos centerPos, int xRadius, int zRadius) {
     BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(centerPos.getX() - xRadius, centerPos.getY(), centerPos.getZ() - zRadius);
 
-    return pos.add(rand.nextInt(xRadius * 2), 0, rand.nextInt(zRadius * 2));
+    return pos.add(rand.nextInt(xRadius * 2), 0, rand.nextInt(zRadius * 2)); // TODO: Not immutable?
+  }
+
+  public static BlockPos getRandomGroundPosition (BlockPos center, int xRadius, int zRadius) {
+    int randX = rand.nextInt(xRadius * 2) - xRadius;
+    int randZ = rand.nextInt(zRadius * 2) - zRadius;
+    return center.add(randX, 0, randZ);
   }
 
   public static BlockPos getRandomPosRadialXYZ(BlockPos centerPos, int xRadius, int yRadius, int zRadius) {

@@ -31,7 +31,7 @@ public class RitualWildrootGrowth extends RitualBase {
         new OreIngredient("rootsBark"),
         new ItemStack(ModItems.spirit_herb)
     );
-    setIcon(ModItems.ritual_wild_growth);
+    setIcon(ModItems.ritual_wildroot_growth);
     setColor(TextFormatting.DARK_GRAY);
     setBold(true);
   }

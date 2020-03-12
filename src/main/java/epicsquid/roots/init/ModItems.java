@@ -5,7 +5,6 @@ import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.item.ItemFoodBase;
 import epicsquid.mysticallib.item.ItemSeedBase;
-import epicsquid.mysticallib.item.ItemShearsBase;
 import epicsquid.mysticallib.material.MaterialTypes;
 import epicsquid.roots.Roots;
 import epicsquid.roots.item.*;
@@ -19,7 +18,6 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.item.Item.ToolMaterial;
-import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
@@ -42,7 +40,7 @@ public class ModItems {
   public static Item moonglow_seed, pereskia_bulb, spirit_herb_seed, wildewheet_seed, cloud_berry, infernal_bulb,
       stalicripe, dewgonia, wildroot;
 
-  public static Item ritual_healing_aura, ritual_heavy_storms, ritual_divine_protection, ritual_fire_storm, ritual_spreading_forest, ritual_windwall, ritual_warding_protection, ritual_germination, ritual_purity, ritual_frost_lands, ritual_animal_harvest, ritual_summon_creatures, ritual_wild_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation, ritual_gathering, ritual_grove_supplication, spell_chrysopoeia;
+  public static Item ritual_healing_aura, ritual_heavy_storms, ritual_divine_protection, ritual_fire_storm, ritual_spreading_forest, ritual_windwall, ritual_warding_protection, ritual_germination, ritual_purity, ritual_frost_lands, ritual_animal_harvest, ritual_summon_creatures, ritual_wildroot_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation, ritual_gathering, ritual_grove_supplication, spell_chrysopoeia;
 
   public static Item creative_pouch, fey_fire;
 
@@ -160,7 +158,7 @@ public class ModItems {
     event.addItem(ritual_frost_lands = new ItemBase("ritual_frost_lands").setCreativeTab(null));
     event.addItem(ritual_animal_harvest = new ItemBase("ritual_animal_harvest").setCreativeTab(null));
     event.addItem(ritual_summon_creatures = new ItemBase("ritual_summon_creatures").setCreativeTab(null));
-    event.addItem(ritual_wild_growth = new ItemBase("ritual_wildroot_growth").setCreativeTab(null));
+    event.addItem(ritual_wildroot_growth = new ItemBase("ritual_wildroot_growth").setCreativeTab(null));
     event.addItem(ritual_overgrowth = new ItemBase("ritual_overgrowth").setCreativeTab(null));
     event.addItem(ritual_flower_growth = new ItemBase("ritual_flower_growth").setCreativeTab(null));
     event.addItem(ritual_transmutation = new ItemBase("ritual_transmutation").setCreativeTab(null));

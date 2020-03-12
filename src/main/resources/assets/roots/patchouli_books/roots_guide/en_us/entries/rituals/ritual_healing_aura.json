@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Nearby creatures are healed back to full health while in the proximity of this short ritual.$(br2)$(warning) Hostile creatures will also be healed. Be wary!$(br2)$(standing_stones) $(l:rituals/ritual_healing_aura#multiblock)This ritual requires standing stones.$()"
+      "text": "Nearby players are slowly healed, while creatures are healed much more rapidly while in proximity of the ritual.$(br2)$(warning) Hostile creatures will also be healed. Be wary!$(br2)$(standing_stones) $(l:rituals/ritual_healing_aura#multiblock)This ritual requires standing stones.$()"
     },
     {
       "type": "pyre_template",
@@ -21,14 +21,14 @@
           "0": "roots:pyre",
           "R": "roots:runestone",
           "C": "roots:chiseled_runestone",
-          "L": "minecraft:leaves[variant=birch]",
-          "W": "minecraft:log[variant=birch]"
+          "W": "roots:runed_birch",
+          "L": "minecraft:log[variant=birch]"
         },
         "pattern": [
-          ["       ","       ","       ","       ","       ","   L   ","       "],
-          ["       ","   C   ","       ","       ","  LLL  ","  LLL  ","  LLL  "],
-          ["       ","   R   ","       ","       ","       ","   W   ","       "],
-          ["       ","   R   ","       ","   0   ","       ","   W   ","       "]
+          ["       ","       ","       ","       ","       ","       ","       "],
+          ["       ","   C   ","       ","       ","       ","   W   ","       "],
+          ["       ","   R   ","       ","       ","       ","   L   ","       "],
+          ["       ","   R   ","       ","   0   ","       ","   L   ","       "]
         ]
       }
     }

@@ -16,16 +16,18 @@ public class RitualHealingAura extends RitualBase {
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 15).setDescription("Radius on the Y Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15).setDescription("Radius on the Z Axis of the cube in which the ritual takes place");
-  public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(60).setDescription("interval in ticks between each ritual healing pulse");
-  public static Property<Float> PROP_AMOUNT = new Property<>("amount", 1.0f).setDescription("the amount of life points an entity is healed of each ritual pulse");
+  public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(40).setDescription("interval in ticks between each ritual healing pulse");
+  public static Property.PropertyInterval PROP_PLAYER_INTERVAL = new Property.PropertyInterval(60).setDescription("interval in ticks between each ritual healing pulse specifically for players");
+  public static Property<Float> PROP_PLAYER_AMOUNT = new Property<>("player_amount", 1.0f).setDescription("the amount of life points is healed for players for of each ritual pulse");
+  public static Property<Float> PROP_AMOUNT = new Property<>("amount", 4.0f).setDescription("the amount of life points a non-player entity is healed for each ritual pulse");
 
   public double radius_x, radius_y, radius_z;
-  public float amount;
-  public int interval;
+  public float amount, player_amount;
+  public int interval, player_interval;
 
   public RitualHealingAura(String name, boolean disabled) {
     super(name, disabled);
-    properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL, PROP_AMOUNT);
+    properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL, PROP_PLAYER_AMOUNT, PROP_AMOUNT, PROP_PLAYER_INTERVAL);
     setEntityClass(EntityRitualHealingAura.class);
   }
 
@@ -52,6 +54,8 @@ public class RitualHealingAura extends RitualBase {
     radius_y = radius[1] + 0.5;
     radius_z = radius[2] + 0.5;
     amount = properties.get(PROP_AMOUNT);
+    player_amount = properties.get(PROP_PLAYER_AMOUNT);
     interval = properties.get(PROP_INTERVAL);
+    player_interval = properties.get(PROP_PLAYER_INTERVAL);
   }
 }
