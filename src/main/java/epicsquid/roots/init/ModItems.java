@@ -8,10 +8,7 @@ import epicsquid.mysticallib.item.ItemSeedBase;
 import epicsquid.mysticallib.material.MaterialTypes;
 import epicsquid.roots.Roots;
 import epicsquid.roots.item.*;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockDoublePlant;
-import net.minecraft.block.BlockFlower;
-import net.minecraft.block.BlockTallGrass;
+import net.minecraft.block.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -220,6 +217,11 @@ public class ModItems {
     OreDictionary.registerOre("mushroom", new ItemStack(Item.getItemFromBlock(Blocks.BROWN_MUSHROOM)));
     OreDictionary.registerOre("blockMushroom", new ItemStack(Item.getItemFromBlock(Blocks.RED_MUSHROOM_BLOCK)));
     OreDictionary.registerOre("blockMushroom", new ItemStack(Item.getItemFromBlock(Blocks.BROWN_MUSHROOM_BLOCK)));
+
+    OreDictionary.registerOre("stonebrick", new ItemStack(Blocks.STONEBRICK, 1, BlockStoneBrick.DEFAULT_META));
+    OreDictionary.registerOre("stonebrick", new ItemStack(Blocks.STONEBRICK, 1, BlockStoneBrick.MOSSY_META));
+    OreDictionary.registerOre("stonebrick", new ItemStack(Blocks.STONEBRICK, 1, BlockStoneBrick.CHISELED_META));
+    OreDictionary.registerOre("stonebrick", new ItemStack(Blocks.STONEBRICK, 1, BlockStoneBrick.CRACKED_META));
   }
 
   private static void registerSeedDrops() {

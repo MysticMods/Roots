@@ -4,10 +4,7 @@ import com.google.common.collect.Sets;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.tileentity.TileEntityOfferingPlate;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockNewLog;
-import net.minecraft.block.BlockOldLog;
-import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -220,7 +217,7 @@ public class RitualUtil {
     OAK(() -> ModBlocks.runed_oak,
         (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.OAK,
         () -> new ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.OAK.getMetadata()),
-        () -> Blocks.LOG.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.OAK)
+        () -> Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.OAK)
     ),
     DARK_OAK(() -> ModBlocks.runed_dark_oak,
         (o) -> o.getBlock() == Blocks.LOG2 && o.getValue(BlockNewLog.VARIANT) == BlockPlanks.EnumType.DARK_OAK,
@@ -230,17 +227,17 @@ public class RitualUtil {
     BIRCH(() -> ModBlocks.runed_birch,
         (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.BIRCH,
         () -> new ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.BIRCH.getMetadata()),
-        () -> Blocks.LOG.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.BIRCH)
+        () -> Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH)
     ),
     JUNGLE(() -> ModBlocks.runed_jungle,
         (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.JUNGLE,
         () -> new ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.JUNGLE.getMetadata()),
-        () -> Blocks.LOG.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.JUNGLE)
+        () -> Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE)
     ),
     SPRUCE(() -> ModBlocks.runed_spruce,
         (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.SPRUCE,
         () -> new ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.SPRUCE.getMetadata()),
-        () -> Blocks.LOG.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.SPRUCE)
+        () -> Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.SPRUCE)
     ),
     WILDWOOD(() -> ModBlocks.runed_wildwood,
         (o) -> o.getBlock() == ModBlocks.wildwood_log,

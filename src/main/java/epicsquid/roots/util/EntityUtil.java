@@ -4,6 +4,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.HashSet;
@@ -34,7 +35,7 @@ public class EntityUtil {
       return true;
     }
 
-    if (entity instanceof IProjectile) {
+    if (entity instanceof IProjectile || entity instanceof EntityWitherSkull) {
       return true;
     }
 
