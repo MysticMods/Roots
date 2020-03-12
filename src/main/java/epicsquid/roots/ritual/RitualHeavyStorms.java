@@ -17,13 +17,15 @@ public class RitualHeavyStorms extends RitualBase {
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 15).setDescription("Radius on the Y Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15).setDescription("Radius on the Z Axis of the cube in which the ritual takes place");
+  public static Property<Integer> PROP_LIGHTNING_CHANCE = new Property<>("lightning_chance", 10).setDescription("Chance (per interval of 1 second) of the ritual duration for lightning to strike in the ritual area (1 in X)");
+  public static Property<Integer> PROP_MAX_STRIKES = new Property<>("lightning_strikes", 10).setDescription("Maximum number of lightning strikes that can happen per ritual. (Set to -1 for infinite)");
 
   public double radius_x, radius_y, radius_z;
-  public int interval;
+  public int interval, lightning_chance, max_strikes;
 
   public RitualHeavyStorms(String name, boolean disabled) {
     super(name, disabled);
-    properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
+    properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_LIGHTNING_CHANCE, PROP_MAX_STRIKES);
     setEntityClass(EntityRitualHeavyStorms.class);
   }
 
@@ -50,5 +52,7 @@ public class RitualHeavyStorms extends RitualBase {
     radius_x = radius[0] + 0.5;
     radius_y = radius[1] + 0.5;
     radius_z = radius[2] + 0.5;
+    lightning_chance = properties.get(PROP_LIGHTNING_CHANCE);
+    max_strikes = properties.get(PROP_MAX_STRIKES);
   }
 }

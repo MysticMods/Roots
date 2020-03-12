@@ -7,11 +7,27 @@
   "pages": [
     {
       "type": "text",
-      "text": "Combining both the freezing might of ice & frozen water, with the nourishing melt of snow feeding streams & rivers, this ritual will rapidly turn the area around it into a snowy wonderland.$(br2)Snowmen may appear, and those that do are regularly healed by the ritual's power. Farmland will be steadily moisturised, water will freeze into ice, and lava into obsidian."
+      "text": "Calling upon the freezing might of ice & frozen water, this ritual will rapidly turn the area around it into a glacier.$(br2)Snowmen will occasionally spawn, and those that do are regularly healed by the ritual's power. Farmland will be moisturised, water freezes into ice, and lava into obsidian.$(br2)$(standing_stones) $(l:rituals/ritual_frost_lands#multiblock)This ritual requires standing stones.$()"
     },
     {
       "type": "pyre_template",
       "ritual": "ritual_frost_lands"
+    },
+    {
+      "type": "multiblock",
+      "anchor": "multiblock",
+      "multiblock": {
+        "mapping": {
+          "0": "roots:pyre",
+          "R": "roots:runestone",
+          "C": "roots:chiseled_runestone"
+        },
+        "pattern": [
+          ["       ","       ","       ","       ","       ","       ","   C   "],
+          ["       ","       ","       ","       ","       ","       ","   R   "],
+          ["       ","       ","       ","   0   ","       ","       ","   R   "]
+        ]
+      }
     }
   ]
 }
