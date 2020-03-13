@@ -1,8 +1,8 @@
-package epicsquid.roots.item;
+package epicsquid.roots.item.living;
 
 import epicsquid.mysticallib.item.ItemHoeBase;
-import epicsquid.mysticalworld.recipe.Ingredients;
-import epicsquid.roots.init.ModItems;
+import epicsquid.roots.item.ILivingRepair;
+import epicsquid.roots.recipe.ingredient.RootsIngredients;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -66,6 +66,6 @@ public class ItemLivingHoe extends ItemHoeBase implements ILivingRepair {
 
   @Override
   public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-    return toRepair.getItem() == this && Ingredients.BARK.test(repair);
+    return toRepair.getItem() == this && RootsIngredients.BARK.test(repair);
   }
 }

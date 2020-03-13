@@ -1,7 +1,8 @@
-package epicsquid.roots.item;
+package epicsquid.roots.item.wildwood;
 
 import epicsquid.mysticallib.item.ItemBowBase;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.item.ILivingRepair;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.EnumRarity;

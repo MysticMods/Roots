@@ -1,8 +1,9 @@
-package epicsquid.roots.item;
+package epicsquid.roots.item.runic;
 
 import epicsquid.mysticallib.item.ItemShovelBase;
-import epicsquid.mysticalworld.recipe.Ingredients;
-import epicsquid.roots.init.ModItems;
+import epicsquid.mysticallib.item.tool.ItemExcavatorBase;
+import epicsquid.roots.item.ILivingRepair;
+import epicsquid.roots.recipe.ingredient.RootsIngredients;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,9 +17,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 @SuppressWarnings("deprecation")
-public class ItemLivingShovel extends ItemShovelBase implements ILivingRepair {
-  public ItemLivingShovel(ToolMaterial material, String name) {
-    super(material, name, 3, 192, 22);
+public class ItemRunicShovel extends ItemExcavatorBase implements ILivingRepair {
+  public ItemRunicShovel(ToolMaterial material, String name) {
+    super(name, 1992, 25, material);
   }
 
   @Override
@@ -31,6 +32,8 @@ public class ItemLivingShovel extends ItemShovelBase implements ILivingRepair {
   public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
     ItemStack stack = player.getHeldItem(hand);
     Block block = worldIn.getBlockState(pos).getBlock();
+
+    // TODO: Make this AoE
 
     if (facing != EnumFacing.DOWN && worldIn.isAirBlock(pos.up()) && (block == Blocks.GRASS || block == Blocks.DIRT)) {
       if (!worldIn.isRemote) {
@@ -48,6 +51,6 @@ public class ItemLivingShovel extends ItemShovelBase implements ILivingRepair {
 
   @Override
   public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-    return toRepair.getItem() == this && Ingredients.BARK.test(repair);
+    return toRepair.getItem() == this && RootsIngredients.RUNED_OBSIDIAN.test(repair);
   }
 }
