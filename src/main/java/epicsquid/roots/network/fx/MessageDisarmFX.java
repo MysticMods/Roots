@@ -47,12 +47,8 @@ public class MessageDisarmFX implements IMessage {
     public IMessage onMessage(MessageDisarmFX message, MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
 
-      ParticleUtil.spawnParticleSmoke(
-              world, (float) message.x + 0.5F, (float) message.y + 3,(float) message.z + 0.5F,
-              0, 0, 0,
-              SpellDisarm.instance.getRed1(), 0, 0, 1.0f,
-              6.0f + 6.0f * Util.rand.nextFloat(), 60, false);
-
+      ParticleUtil.spawnParticleSmoke(world, (float) message.x + 0.5F, (float) message.y + 3,(float) message.z + 0.5F,
+0, 0, 0, SpellDisarm.instance.getRed1(), 0, 0, 1.0f, 6.0f + 6.0f * Util.rand.nextFloat(), 60, false);
 
       return null;
     }
