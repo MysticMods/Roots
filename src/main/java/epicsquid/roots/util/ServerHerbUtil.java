@@ -22,12 +22,7 @@ public class ServerHerbUtil {
       return ItemStack.EMPTY;
     }
 
-    List<ItemStack> pouches = getPouches(player);
-    if (pouches.isEmpty()) {
-      return ItemStack.EMPTY;
-    }
-
-    return pouches.get(0);
+    return CommonHerbUtil.getFirstPouch(player);
   }
 
   public static List<ItemStack> getPouches(EntityPlayer player) {
@@ -35,21 +30,7 @@ public class ServerHerbUtil {
       return Collections.emptyList();
     }
 
-    List<ItemStack> result = new ArrayList<>();
-    if (Loader.isModLoaded("baubles")) {
-      ItemStack stack = BaublePowderInventoryUtil.getPouch(player);
-      if (!stack.isEmpty()) {
-        result.add(stack);
-      }
-    }
-
-    for (int i = 0; i < 36; i++) {
-      if (player.inventory.getStackInSlot(i).getItem() instanceof ItemPouch) {
-        result.add(player.inventory.getStackInSlot(i));
-      }
-    }
-
-    return result;
+    return CommonHerbUtil.getPouches(player);
   }
 
   public static double getPowderTotal(EntityPlayer player, Herb herb) {
