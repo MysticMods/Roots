@@ -15,7 +15,7 @@ public interface IRootsRecipe<T extends TileEntity> {
   }
 
   default List<ItemStack> getRecipe() {
-    return getIngredients().stream().map(ingredient -> ingredient.getMatchingStacks()[0]).collect(Collectors.toList());
+    return getIngredients().stream().map(ingredient -> ingredient.getMatchingStacks()[0].copy()).collect(Collectors.toList());
   }
 
   List<Ingredient> getIngredients();
