@@ -9,7 +9,7 @@
       "type": "spotlight",
       "item": "roots:elemental_soil",
       "link_recipe": true,
-      "text": "Elementally attuned herbs can be picky about where - as fickle as the elements themselves. Elemental soil itself increases the rate at which any plant grows, but it can also be imbued with an element to allow the corresponding plant to grow."
+      "text": "Elementally attuned herbs can be picky about where - as fickle as the elements themselves. Basic elemental soil increases growth, but it can be imbued with an element for different behaviours.$(br2)Elemental herbs, $(l:herbs/cloud_berry)cloud berry$(), $(l:herbs/dewgonia)dewgonia$(), $(l:herbs/infernal_bulb)infernal bulb$() and $(l:herbs/stalicripe)stalicripe$() will only grow on types of elemental soil."
     },
     {
       "type": "fey_crafting_template",
@@ -19,25 +19,25 @@
       "type": "spotlight",
       "item": "roots:elemental_soil_fire",
       "link_recipe": true,
-      "text": "$(l:herbs/infernal_bulb)Infernal Bulbs$() grow on magmatic soil. Obtained by throwing elemental soil (as a dropped item) into the $(warning) top of a pool of lava.$(br2)Other plants grown on magmatic soil will have drops cooked when harvested, if cookable. In addition, each plant harvested may drop experience."
+      "text": "Obtained by throwing elemental soil (as a dropped item) into the $(warning) top of a pool of lava.$(br2)Plants grown on magmatic soil will have some of their drops cooked, if cookable, while having a chance to produce experience."
     },
     {
       "type": "spotlight",
       "item": "roots:elemental_soil_water",
       "link_recipe": true,
-      "text": "$(l:herbs/dewgonia)Dewgonia$() grows on aquatic soil. Obtained by soaking elemental soil (as a dropped item) briefly in water.$(br2)Normal plants grown on the soil will be harvested automagically, the drops placed in containers below the soil or on the surface if none exists. $(info) Gravel beneath prevents this behaviour."
+      "text": "Obtained by soaking elemental soil (as a dropped item) briefly in water.$(br2)Plants grown on the soil will be harvested when grown, the drops placed in containers below the soil or on the surface if none exists. $(info) Gravel beneath prevents this behaviour."
     },
     {
       "type": "spotlight",
       "item": "roots:elemental_soil_air",
       "link_recipe": true,
-      "text": "$(l:herbs/cloud_berry)Cloud Berries$() grow on caelic, air-bound soil. Obtained by exposing elemental soil (as a dropped item) to the airy heights and the open skies ($(info) 90 blocks or higher).$(br2)Normal plants can also be grown on caelic soil, and the soil will grow them much faster than normal."
+      "text": "Obtained by exposing elemental soil (as a dropped item) to the airy heights and the open skies ($(info) 90 blocks or higher).$(br2)Plants grown on caelic soil will do so at an accelerated speed."
     },
     {
       "type": "spotlight",
       "item": "roots:elemental_soil_earth",
       "link_recipe": true,
-      "text": "$(l:herbs/stalicripe)Stalicripe$() grow on terran soil. Obtained by exposing elemental soil (as a dropped item) to the dark, $(info) covered depths of underground caves and chasms ($(info) 30 blocks or lower).$(br2)Normal plants can also be grown on terran soil, and the fertile earth will yield much more for the crop."
+      "text": "Obtained by exposing elemental soil (as a dropped item) to the dark, $(info) covered depths of underground caves and chasms ($(info) 30 blocks or lower).$(br2)Plants grown on terran soil will find the fertile each yields more crop."
     },
     {
       "type": "relations",
