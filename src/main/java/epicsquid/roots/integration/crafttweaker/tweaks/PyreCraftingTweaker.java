@@ -119,7 +119,9 @@ public class PyreCraftingTweaker {
 
     @Override
     public void apply() {
-      ModRecipes.removePyreCraftingRecipe(output);
+      if (!ModRecipes.removePyreCraftingRecipe(output)) {
+        CraftTweakerAPI.logError("Couldn't properly remove Pyre Crafting Recipe: " + output.toString());
+      }
     }
   }
 }

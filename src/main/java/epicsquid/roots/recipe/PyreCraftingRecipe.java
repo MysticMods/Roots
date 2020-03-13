@@ -2,9 +2,12 @@ package epicsquid.roots.recipe;
 
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.ListUtil;
+import epicsquid.roots.Roots;
 import epicsquid.roots.tileentity.TileEntityPyre;
+import epicsquid.roots.util.types.RegistryItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import java.util.ArrayList;
@@ -12,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PyreCraftingRecipe implements IRootsRecipe<TileEntityPyre> {
+public class PyreCraftingRecipe extends RegistryItem implements IRootsRecipe<TileEntityPyre> {
   private List<Ingredient> ingredients = new ArrayList<>();
   private ItemStack result;
   private String name;
@@ -30,6 +33,7 @@ public class PyreCraftingRecipe implements IRootsRecipe<TileEntityPyre> {
   }
 
   public PyreCraftingRecipe setName(String name) {
+    setRegistryName(new ResourceLocation(Roots.MODID, name));
     this.name = name;
     return this;
   }
