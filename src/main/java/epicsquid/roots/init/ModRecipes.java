@@ -166,7 +166,7 @@ public class ModRecipes {
       throw new IllegalArgumentException("Class " + recipe.getClazz().toString() + " already contained within the Summon Creatures registry.");
     }
     try {
-      if (findSummonCreatureEntry(recipe.getIngredients().stream().map(Ingredient::getMatchingStacks).map(o -> o[0]).collect(Collectors.toList())) != null) {
+      if (findSummonCreatureEntry(recipe.getIngredients().stream().map(o -> o.getMatchingStacks()[0].copy()).collect(Collectors.toList())) != null) {
         throw new IllegalArgumentException("Combination of ingredients for recipe (" + rl.toString() + "/" + recipe.getClazz().toString() + ") is already in use!");
       }
     } catch (ArrayIndexOutOfBoundsException e) {
