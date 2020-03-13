@@ -11,9 +11,8 @@ import epicsquid.roots.handler.ClientPouchHandler;
 import epicsquid.roots.handler.IPouchHandler;
 import epicsquid.roots.handler.PouchHandler;
 import epicsquid.roots.init.HerbRegistry;
-import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemPouch;
-import epicsquid.roots.util.ClientHerbUtil;
+import epicsquid.roots.util.CommonHerbUtil;
 import epicsquid.roots.util.ServerHerbUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -21,8 +20,6 @@ import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.SlotItemHandler;
@@ -54,7 +51,7 @@ public class ContainerPouch extends Container {
     if (isServerSide) {
       first = ServerHerbUtil.getFirstPouch(player);
     } else {
-      first = ClientHerbUtil.getFirstPouch(player);
+      first = CommonHerbUtil.getFirstPouch(player);
     }
 
     ItemStack use = ItemStack.EMPTY;
