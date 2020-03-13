@@ -201,10 +201,10 @@ public class BlockElementalSoil extends BlockBase {
       case Plains:
         return true;
     }
-    return plant == CustomPlantType.ELEMENT_FIRE && soilType == EnumElementalSoilType.FIRE
-        || plant == CustomPlantType.ELEMENT_AIR && soilType == EnumElementalSoilType.AIR
-        || plant == CustomPlantType.ELEMENT_EARTH && soilType == EnumElementalSoilType.EARTH
-        || plant == CustomPlantType.ELEMENT_WATER && soilType == EnumElementalSoilType.WATER;
+    return plant == CustomPlantType.ELEMENT_FIRE
+        || plant == CustomPlantType.ELEMENT_AIR
+        || plant == CustomPlantType.ELEMENT_EARTH
+        || plant == CustomPlantType.ELEMENT_WATER;
   }
 
   @Override
