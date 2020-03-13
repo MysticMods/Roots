@@ -8,7 +8,7 @@
       "type": "spotlight",
       "item": "roots:stalicripe",
       "link_recipe": true,
-      "text": "A rough, rugged plant that feels rough - almost the texture of recently hewn stone.$(br2)$(info) Can only be grown on $(l:resources/elemental_soil)Terran Soil.$()"
+      "text": "A rough, rugged plant that feels rough - almost the texture of recently hewn stone.$(br2)$(info) Can only be grown on a type of $(l:resources/elemental_soil)elemental soil.$()"
     },
     {
       "type": "ritual_crafting_template",
