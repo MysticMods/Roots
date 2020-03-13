@@ -1,15 +1,15 @@
-package epicsquid.roots.item;
+package epicsquid.roots.item.runic;
 
-import epicsquid.mysticallib.item.ItemPickaxeBase;
-import epicsquid.mysticalworld.recipe.Ingredients;
-import epicsquid.roots.init.ModItems;
+import epicsquid.mysticallib.item.ItemSwordBase;
+import epicsquid.roots.item.ILivingRepair;
+import epicsquid.roots.recipe.ingredient.RootsIngredients;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemLivingPickaxe extends ItemPickaxeBase implements ILivingRepair {
-  public ItemLivingPickaxe(ToolMaterial material, String name) {
-    super(material, name, 2, 192, 22);
+public class ItemRunicSword extends ItemSwordBase implements ILivingRepair {
+  public ItemRunicSword(ToolMaterial material, String name) {
+    super(material, name, 0, 1992, 35);
   }
 
   @Override
@@ -20,6 +20,6 @@ public class ItemLivingPickaxe extends ItemPickaxeBase implements ILivingRepair 
 
   @Override
   public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-    return toRepair.getItem() == this && Ingredients.BARK.test(repair);
+    return toRepair.getItem() == this && RootsIngredients.RUNED_OBSIDIAN.test(repair);
   }
 }

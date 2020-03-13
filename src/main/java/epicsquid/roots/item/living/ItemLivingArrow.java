@@ -1,4 +1,4 @@
-package epicsquid.roots.item;
+package epicsquid.roots.item.living;
 
 import epicsquid.mysticallib.item.ItemArrowBase;
 import epicsquid.roots.entity.projectile.EntityLivingArrow;

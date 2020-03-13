@@ -6,7 +6,6 @@ import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.mysticalworld.recipe.Ingredients;
 import epicsquid.roots.capability.life_essence.LifeEssenceCapability;
 import epicsquid.roots.capability.life_essence.LifeEssenceCapabilityProvider;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapability;
@@ -21,8 +20,8 @@ import epicsquid.roots.network.fx.MessageRunicShearsAOEFX;
 import epicsquid.roots.network.fx.MessageRunicShearsFX;
 import epicsquid.roots.recipe.RunicShearEntityRecipe;
 import epicsquid.roots.recipe.RunicShearRecipe;
+import epicsquid.roots.recipe.ingredient.RootsIngredients;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockCrops;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -35,8 +34,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumActionResult;
@@ -76,7 +73,7 @@ public class ItemRunicShears extends ItemShearsBase {
 
   @Override
   public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-    return toRepair.getItem() == this && Ingredients.RUNESTONE.test(repair);
+    return toRepair.getItem() == this && RootsIngredients.RUNESTONE.test(repair);
   }
 
   @Override

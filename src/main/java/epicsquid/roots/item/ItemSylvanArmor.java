@@ -2,10 +2,9 @@ package epicsquid.roots.item;
 
 import com.google.common.collect.Lists;
 import epicsquid.mysticallib.model.IModeledObject;
-import epicsquid.mysticalworld.recipe.Ingredients;
 import epicsquid.roots.Roots;
-import epicsquid.roots.init.ModItems;
 import epicsquid.roots.model.armor.ModelSylvanArmor;
+import epicsquid.roots.recipe.ingredient.RootsIngredients;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
@@ -69,6 +68,6 @@ public class ItemSylvanArmor extends ItemArmor implements IModeledObject {
 
   @Override
   public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-    return toRepair.getItem() == this && Ingredients.FEY_LEATHER.test(repair);
+    return toRepair.getItem() == this && RootsIngredients.FEY_LEATHER.test(repair);
   }
 }

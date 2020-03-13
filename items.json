@@ -4,6 +4,54 @@
   "models": [
     {
       "type": "tool",
+      "base": "runic_axe"
+    },
+    {
+      "type": "tool",
+      "base": "runic_hoe"
+    },
+    {
+      "type": "tool",
+      "base": "runic_pickaxe"
+    },
+    {
+      "type": "tool",
+      "base": "runic_shovel"
+    },
+    {
+      "type": "tool",
+      "base": "runic_sword"
+    },
+    {
+      "type": "tool",
+      "base": "runic_dagger"
+    },
+    {
+      "type": "tool",
+      "base": "terrastone_axe"
+    },
+    {
+      "type": "tool",
+      "base": "terrastone_hoe"
+    },
+    {
+      "type": "tool",
+      "base": "terrastone_pickaxe"
+    },
+    {
+      "type": "tool",
+      "base": "terrastone_shovel"
+    },
+    {
+      "type": "tool",
+      "base": "terrastone_sword"
+    },
+    {
+      "type": "tool",
+      "base": "terrastone_knife"
+    },
+    {
+      "type": "tool",
       "base": "wooden_shears"
     },
     {

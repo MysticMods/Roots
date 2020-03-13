@@ -1,8 +1,9 @@
-package epicsquid.roots.item;
+package epicsquid.roots.item.wildwood;
 
 import epicsquid.mysticallib.model.IModeledObject;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.item.ILivingRepair;
 import epicsquid.roots.model.armor.ModelWildwoodArmor;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
