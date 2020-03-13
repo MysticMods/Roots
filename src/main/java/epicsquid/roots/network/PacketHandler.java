@@ -62,5 +62,6 @@ public class PacketHandler {
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageSaturationFX.Handler.class, MessageSaturationFX.class, Side.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageDesaturationFX.Handler.class, MessageDesaturationFX.class, Side.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessagePatchouliJEI.MessageHolder.class, MessagePatchouliJEI.class, Side.CLIENT);
+    epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageThawFX.MessageHolder.class, MessageThawFX.class, Side.CLIENT);
   }
 }

@@ -8,6 +8,7 @@ import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -66,6 +67,7 @@ public class SpellSummersThaw extends SpellBase {
     }
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   public boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks) {
     BlockPos pos = caster.getPosition();
@@ -105,6 +107,9 @@ public class SpellSummersThaw extends SpellBase {
       changed.add(p);
       if (!world.isRemote) {
         world.setBlockState(p, mutated, 3);
+        if (mutated.getMaterial() == Material.WATER || mutated.getMaterial() == Material.LAVA) {
+          mutated.getBlock().neighborChanged(mutated, world, p, mutated.getBlock(), p);
+        }
       }
     }
 
