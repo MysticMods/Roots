@@ -886,7 +886,9 @@ public class ModRecipes {
   @Nullable
   public static FeyCraftingRecipe getFeyCraftingRecipe(List<ItemStack> items) {
     for (FeyCraftingRecipe recipe : feyCraftingRecipes.values()) {
-      if (recipe.matches(items)) return recipe;
+      if (recipe.matches(items)) {
+        return recipe;
+      }
     }
 
     return null;
@@ -902,9 +904,8 @@ public class ModRecipes {
   }
 
   public static PyreCraftingRecipe getCraftingRecipe(String recipeName) {
-    return getCraftingRecipe(new ResourceLocation(recipeName));
+    return getCraftingRecipe(new ResourceLocation(Roots.MODID, recipeName));
   }
-
 
   public static PyreCraftingRecipe getCraftingRecipe(ResourceLocation recipeName) {
     return pyreCraftingRecipes.get(recipeName);

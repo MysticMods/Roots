@@ -2,7 +2,10 @@ package epicsquid.roots.command;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
+import epicsquid.roots.block.groves.BlockGroveStone;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.network.MessageClearToasts;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
@@ -16,6 +19,7 @@ import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.advancements.PlayerAdvancements;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -24,6 +28,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.WorldServer;
 import vazkii.patchouli.common.handler.AdvancementSyncHandler;
@@ -67,7 +72,21 @@ public class CommandRoots extends CommandBase {
     if (sender instanceof EntityPlayerMP && args.length != 0) {
       EntityPlayerMP player = (EntityPlayerMP) sender;
       WorldServer world = player.getServerWorld();
-      if (args[0].equalsIgnoreCase("book")) {
+      if (args[0].equalsIgnoreCase("activate")) {
+        List<BlockPos> positions = Util.getBlocksWithinRadius(world, sender.getPosition(), 50, 50, 50, ModBlocks.grove_stone);
+        for (BlockPos pos : positions) {
+          IBlockState state = world.getBlockState(pos);
+          if (state.getBlock() != ModBlocks.grove_stone) {
+            continue;
+          }
+
+          if (state.getValue(BlockGroveStone.VALID)) {
+            continue;
+          }
+
+          world.setBlockState(pos, state.withProperty(BlockGroveStone.VALID, true));
+        }
+      } else if (args[0].equalsIgnoreCase("book")) {
         AdvancementManager manager = world.getAdvancementManager();
         PlayerAdvancements advancements = player.getAdvancements();
         for (Advancement adv : manager.getAdvancements()) {
