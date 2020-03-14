@@ -38,14 +38,11 @@ tile.mortar.name=Ступка
 tile.imbuer.name=Наполнитель
 tile.thatch.name=Соломенный блок
 tile.bonfire.name=Костёр
-<<<<<<< HEAD
-=======
 tile.reinforced_bonfire.name=Усиленный костёр
 tile.runed_obsidian.name=Рунный обсидиан
 tile.runed_obsidian_brick.name=Рунные обсидиановые кирпичи
 tile.runed_obsidian_brick_alt.name=Рунные обсидиановые кирпичи
 tile.chiseled_runed_obsidian.name=Рунный красивый обсидивн
->>>>>>> 09e5ede... Смиритесь с альт. названиями рунных кирпичей.
 tile.runestone.name=Рунный камень
 tile.runestone_brick.name=Рунные кирпичи
 tile.runestone_brick_alt.name=Рунные кирпичи
@@ -74,15 +71,6 @@ tile.runestone_brick_alt_pressure_plate.name=Нажимная плита из р
 tile.wildwood_sapling.name=Саженец дикого дерева
 tile.wildwood_ladder.name=Лестница из дикого дерева
 tile.grove_stone.name=Монумент
-<<<<<<< HEAD
-=======
-tile.fairy_grove_stone.name=Монумент фей
-tile.fungi_grove_stone.name=Монумент грибов
-tile.natural_grove_stone.name=Монумент природы
-tile.wild_grove_stone.name=Монумент дикой природы
-tile.twilight_grove_stone.name=Монумент сумерек
-tile.elemental_grove_stone.name=Монумент элементов
->>>>>>> 09e5ede... Deal with runed obsidian blockstates.
 tile.fey_crafter.name=Верстак фей
 tile.fey_light.name=Свет фей
 
