@@ -1,0 +1,394 @@
+itemGroup.roots=Roots
+
+entity.Villager.druid=Друид
+
+item.assorted_seeds.name=Смесь из семян
+item.cooked_seeds.name=Поджаренные семена
+item.pestle.name=Пест
+item.spell_dust.name=Смесь для заклинания
+item.staff.name=Посох
+item.straw.name=Соломка
+item.flour.name=Мука
+item.firestarter.name=Огниво
+item.living_pickaxe.name=Живая кирка
+item.living_axe.name=Живой топор
+item.living_shovel.name=Живая лопата
+item.living_hoe.name=Живая мотыга
+item.living_sword.name=Живой меч
+item.living_arrow.name=Живая стрела
+item.wildwood_quiver.name=Колчан из дикого дерева
+item.wildwood_bow.name=Лук из дикого дерева
+item.aer_ash.name=Пепел Воздуха
+item.terra_ash.name=Пепел Земли
+item.runic_shears.name=Рунические ножницы
+item.sylvan_helmet.name=Шлем Леса
+item.sylvan_chestplate.name=Нагрудник Леса
+item.sylvan_leggings.name=Штаны Леса
+item.sylvan_boots.name=Боты Леса
+item.wildwood_helmet.name=Шлем из дикого дерева
+item.wildwood_chestplate.name=Нагрудник из дикого дерева
+item.wildwood_leggings.name=Поножи из дикого дерева
+item.wildwood_boots.name=Ботинки из дикого дерева
+item.component_pouch.name=Сумка для трав
+item.creative_pouch.name=Творческая сумка для трав
+item.apothecary_pouch.name=Аптекарская сумка
+item.wildwood_door.name=Дверь из дикого дерева
+
+tile.mortar.name=Ступка
+tile.imbuer.name=Наполнитель
+tile.thatch.name=Соломенный блок
+tile.bonfire.name=Костёр
+<<<<<<< HEAD
+=======
+tile.reinforced_bonfire.name=Усиленный костёр
+tile.runed_obsidian.name=Рунный обсидиан
+tile.runed_obsidian_brick.name=Рунные обсидиановые кирпичи
+tile.runed_obsidian_brick_alt.name=Рунные обсидиановые кирпичи
+tile.chiseled_runed_obsidian.name=Рунный красивый обсидивн
+>>>>>>> 09e5ede... Смиритесь с альт. названиями рунных кирпичей.
+tile.runestone.name=Рунный камень
+tile.runestone_brick.name=Рунные кирпичи
+tile.runestone_brick_alt.name=Рунные кирпичи
+tile.runestone_trample.name=Устойчивые кирпичи
+tile.chiseled_runestone.name=Красивый рунный камень
+tile.fairy_dust.name=Пыльца фей
+tile.offertory_plate.name=Миска для подношений
+tile.unending_bowl.name=Бездонная Чаша
+tile.structure_marker.name=Метки для структур
+tile.incense_burner.name=Кадило
+tile.wildwood_rune.name=Руна из дикого дерева
+tile.wildwood_stairs.name=Ступени из дикого дерева
+tile.wildwood_trapdoor.name=Люк из дикого дерева
+tile.wildwood_button.name=Кнопка из дикого дерева
+tile.wildwood_pressure_plate.name=Нажимная плита из дикого дерева
+tile.wildwood_fence.name=Забор из дикого дерева
+tile.wildwood_fence_gate.name=Калитка из дикого дерева
+tile.wildwood_slab.name=Плита из дикого дерева
+tile.wildwood_wall.name=Wildwood Wall
+tile.runestone_button.name=Кнопка из рунного камня
+tile.runestone_brick_button.name=Рунный кирпич
+tile.runestone_brick_alt_button.name=Кнопка из рунного кирпича
+tile.runestone_pressure_plate.name=Нажимная плита из рунного камня
+tile.runestone_brick_pressure_plate.name=Нажимная плита из рунного кирпича
+tile.runestone_brick_alt_pressure_plate.name=Нажимная плита из рунного кирпича
+tile.wildwood_sapling.name=Саженец дикого дерева
+tile.wildwood_ladder.name=Лестница из дикого дерева
+tile.grove_stone.name=Монумент
+<<<<<<< HEAD
+=======
+tile.fairy_grove_stone.name=Монумент фей
+tile.fungi_grove_stone.name=Монумент грибов
+tile.natural_grove_stone.name=Монумент природы
+tile.wild_grove_stone.name=Монумент дикой природы
+tile.twilight_grove_stone.name=Монумент сумерек
+tile.elemental_grove_stone.name=Монумент элементов
+>>>>>>> 09e5ede... Deal with runed obsidian blockstates.
+tile.fey_crafter.name=Верстак фей
+tile.fey_light.name=Свет фей
+
+roots.tooltip.petaldust.notag=У ЭТОЙ СМЕСИ НЕТ NBT-ТЕГА! Она склонна к ошибкам и её не следует использовать!
+roots.tooltip.staff.notag=У ЭТОГО ПОСОХА НЕТ NBT-ТЕГА! Он склонен к ошибкм и его не следует использовать!
+roots.tooltip.staff.selected=Выбранный слот: 
+roots.tooltip.pouch_divider=: x
+roots.tooltip.trap_paper_health=Здоровье: 
+roots.tooltip.trap_paper_health_divider= /
+roots.tooltip.pouch=ПКМ сидя или %s, чтобы открыть сумку.
+roots.tooltip.pouch2=ПКМ или %s, чтобы открыть сумку.
+roots.tooltip.refill=Автоматически собирает травы с земли, пока не восполнит слот. [Можно отключить в конфигурации]
+roots.tooltip.creative_pouch1=Только Творческий режим.
+roots.tooltip.creative_pouch2=Содержит бесконечное количество любых трав.
+
+roots.info.staff.slot_and_spell=Выбранный слот(%d) имеет заклинание: %s
+roots.info.staff.no_slots=В вашем посохе нет места для новых заклинаний!
+roots.info.staff.empty_slot=Этот слот в посохе уже пуст.
+roots.info.pouch.no_herbs=В вашей сумке не хватает %s! roots.info.pouch.no_pouch=Для создания заклинвний вам нужна сумка для компонентов с нужными травами!
+roots.info.pyre.repeat1=Нажмите ПКМ, сидя,
+roots.info.pyre.repeat2=пустой рукой
+roots.info.pyre.repeat3=чтобы повторить ритуал.
+roots.info.pyre.repeat4=чтобы повторить крафт.
+
+roots.spell.module.module_fire.name=Огонь
+roots.spell.module.module_touch.name=Касание
+roots.spell.module.description=Модуль заклинаний:
+roots.spell.spell_wild_fire.name=Дикий огонь
+roots.spell.spell_dandelion_winds.name=Одуванчиковый Ветер
+roots.spell.spell_sanctuary.name=Святилище
+roots.spell.spell_life_drain.name=Вытяжка жизни
+roots.spell.spell_radiance.name=Сияние
+roots.spell.spell_shatter.name=Раскол
+roots.spell.spell_gravity_boost.name=Усиление гравитации
+roots.spell.spell_light_drifter.name=Сдвиг света
+roots.spell.spell_time_stop.name=Остановка времени
+roots.spell.spell_petal_shell.name=Панцирь лепестков
+roots.spell.spell_rose_thorns.name=Шипы роз
+roots.spell.spell_acid_cloud.name=Облако кислоты
+roots.spell.spell_acid_cloud.module_fire.description=Поджигает цели.
+roots.spell.spell_geas.name=Табу 
+roots.spell.spell_growth_infusion.name=Наполнение роста
+roots.spell.spell_sense_animals.name=Чувство животных
+roots.spell.spell_terra_transmutation.name=Трансмутация Земли
+roots.spell.spell_sky_soarer.name=Небесный путешественник
+roots.spell.spell_second_wind.name=Второй ветер
+roots.spell.spell_magnetism.name=Магнетизм
+roots.spell.spell_sense_danger.name=Чувство опасности
+roots.spell.spell_harvest.name=Жатва
+roots.spell.spell_rampant_growth.name= Безудержный рост
+roots.spell.spell_supplication.name=Оживление Монумента
+roots.spell.spell_fey_light.name=Свет фей
+roots.spell.spell_iced_touch.name=Ледяное касание
+roots.spell.spell_iced_touch.module_touch.description=Окружает вас замораживающими облаками
+
+roots.ritual.ritual_healing_aura.name=Аура лечения
+roots.ritual.ritual_heavy_storms.name=Тяжёлый шторм
+roots.ritual.ritual_divine_protection.name=Божественная защита
+roots.ritual.ritual_fire_storm.name=Шторм огня
+roots.ritual.ritual_spreading_forest.name=Растущий лес
+roots.ritual.ritual_windwall.name=Стена Ветра
+roots.ritual.ritual_warding_protection.name=Охранная защита
+roots.ritual.ritual_germination.name=Прорастание
+roots.ritual.ritual_purity.name=Очищение
+roots.ritual.ritual_frost_lands.name=Холодные земли
+roots.ritual.ritual_animal_harvest.name=Жатва животных
+roots.ritual.ritual_summon_creatures.name=Призвать созданий
+roots.ritual.ritual_wild_growth.name=Рост Дикого Корня
+roots.ritual.ritual_overgrowth.name=Усиленный Рост
+roots.ritual.ritual_flower_growth.name=Рост цветов
+roots.ritual.ritual_transmutation.name=Трансмутация
+roots.ritual.ritual_gathering.name=Сбор
+
+roots.ritual.condition.items=Не получилось начать ритуал: неверные предметы.
+roots.ritual.condition.standing_stones=Не получилось начать ритуал: нужно %s.
+roots.ritual.condition.standing_stones.types=%d богатых %d камней
+roots.ritual.condition.trees=Не получилось начать ритуал: Неверные деревья, нужны %s.
+roots.ritual.condition.trees.types=%d %s.
+roots.ritual.condition.invalid=Не получилось начать ритуал, непонятно почему.
+
+roots.keybinds.group=Roots
+roots.keybinds.pouch=Открыть сумку
+roots.keybinds.quiver=Открыть колчан
+roots.keybinds.pickup_arrow=Собрать стрелы
+roots.keybinds.spell_slot_1=Выбрать слот 1
+roots.keybinds.spell_slot_2=Выбрать слот 2
+roots.keybinds.spell_slot_3=Выбрать слот 3
+roots.keybinds.spell_slot_4=Выбрать слот 4
+roots.keybinds.spell_slot_5=Выбрать слот 5
+roots.keybinds.spell_slot_next=Выбрать следующий слот
+roots.keybinds.spell_slot_previous=Выбрать предыдущий слот
+
+item.ritual_healing_aura.name=Ритуал: Аура лечения
+item.ritual_heavy_storms.name=Ритуал: Тяжёлый ветер
+item.ritual_divine_protection.name=Ритуал: Божественная защита
+item.ritual_fire_storm.name=Ритуал: Огненный шторм
+item.ritual_spreading_forest.name=Ритуал: Растущий лкс
+item.ritual_windwall.name=Ритуал: Стена ветра
+item.ritual_warding_protection.name=Ритуал: Охранная защита
+item.ritual_germination.name=Ритуал: Прорастание
+item.ritual_purity.name=Ритуал: Очищение
+item.ritual_frost_lands.name=Ритуал: Холодные земли
+item.ritual_animal_harvest.name=Ритуал: Жатва животных
+item.ritual_summon_creatures.name=Ритуал: Призвать существ
+item.ritual_wild_growth.name=Ритуал: Рост Дикого Корня
+item.ritual_overgrowth.name=Ритуал: Усиленный рост
+item.ritual_flower_growth.name=Ритуал: Рост цветов
+item.ritual_transmutation.name=Ритуал: Трансмутация
+item.ritual_gathering.name=Ритуал: Сбор
+
+#Knifes
+item.wood_knife.name=Деревянный Нож
+item.stone_knife.name=Каменный Нож
+item.iron_knife.name=Железный Нож
+item.gold_knife.name=Золотой Нож
+item.diamond_knife.name=Алмазный Нож
+
+# Advancements
+advancement.roots.root=Roots 3
+advancement.roots.root.desc=Почувствуй силу природы!
+advancement.roots.wildroot=Корень природы
+advancement.roots.wildroot.desc=Найдите дикий корень в травк.
+advancement.roots.guide=Спутник Друида
+advancement.roots.guide.desc=Соедините дикий корень и книгу для важнейшей информации.
+advancement.roots.terra_moss=Переросшая природа
+advancement.roots.terra_moss.desc=Соскребите мох с мшистого булыжника.
+advancement.roots.staff=Посохи
+advancement.roots.staff.desc=Подготовьтесь к Магии!
+advancement.roots.pyre=Пламя!
+advancement.roots.pyre.desc=Создайте костёр для ритуалов и крафта!
+advancement.roots.fey_crafter=Монументы для чайников
+advancement.roots.fey_crafter.desc=Создайте Верстак фей для активации монумента.
+advancement.roots.grove_stone=Я ещё тут!
+advancement.roots.grove_stone.desc=Позовите фей для активации Монумента фей.
+advancement.roots.pereskia=Лепестки фей
+advancement.roots.pereskia.desc=Создайте Перескию на костре.
+advancement.roots.runic_shears=Межпространственные ножницы
+advancement.roots.runic_shears.desc=Создайте рунические ножницы для сбора эквивалентов из мира фей!
+advancement.roots.moonglow_leaf=Щепотка лунного света!
+advancement.roots.moonglow_leaf.desc=Создайте Луноцвет на костре.
+advancement.roots.spirit_herb=Травы Духов
+advancement.roots.spirit_herb.desc=Найдите Травы духов фей
+advancement.roots.wildewheet=Где же вся дикость?
+advancement.roots.wildewheet.desc=Найдите Дикую пшеницу
+advancement.roots.cloud_berry=Это облачко похоже на лошадку...
+advancement.roots.cloud_berry.desc=Создайте Облачник на костре.
+advancement.roots.infernal_bulb=Растения? Слишком жарко!
+advancement.roots.infernal_bulb.desc=Создайте Инфернополох на костре.
+advancement.roots.stalicripe=Сыны камня
+advancement.roots.stalicripe.desc=Создайте Затхлый корень на костре.
+advancement.roots.dewgonia=Деликатес для морской коровы
+advancement.roots.dewgonia.desc=Создайте морскую морковь.
+advancement.roots.baffle_cap=Грибы...
+advancement.roots.baffle_cap.desc=Создайте Шляпника на костре.
+advancement.roots.runestone=Язык Деревьев
+advancement.roots.runestone.desc=Создайте Рунный камень на Верстаке фей.
+advancement.roots.living=Холмы живы
+advancement.roots.living.desc=Создайте полный набор живых инструментов.
+advancement.roots.pacifist=Нейтральный путь
+advancement.roots.pacifist.desc=Вы убили мирное существо. Поздравляем!
+advancement.roots.sylvan_armor=Робы ботаника
+advancement.roots.sylvan_armor.desc=Создайте весь набор Лесных роб.
+advancement.roots.wildwood_armor=Cопротивление природы
+advancement.roots.wildwood_armor.desc=Соберите полный сет брони из дикого дерева.
+advancement.roots.apothecary_pouch=Дом Природы
+advancement.roots.apothecary_pouch.desc=Создайте аптекарскую сумку.
+advancement.roots.wildwood=Уга-чага-древо-кит!
+advancement.roots.wildwood.desc=Получите дикое дерево в любом виде.
+
+# Herbs
+item.moonglow_seed.name=Семена луноцвета
+item.moonglow_leaf.name=Лист луноцвета
+item.pereskia_bulb.name=Бутон перескии
+item.pereskia.name=Переския
+item.terra_spores.name=Терра-споры
+item.terra_moss.name=Терра-мох
+item.spirit_herb_seed.name=Семя Травы духов
+item.spirit_herb.name=Трава духов
+item.wildroot.name=Дикий Корень
+item.wildewheet.name=Дикая солома
+item.wildewheet_seed.name=Семена дикой пшеницы
+item.infernal_bulb.name=Инфернополох
+item.dewgonia.name=Морская морковь
+item.stalicripe.name=Затхлый корень
+item.cloud_berry.name=Облачник
+item.baffle_cap.name=Шляпник
+tile.baffle_cap.name=Шляпник
+tile.baffle_cap_mushroom.name=Шляпник
+tile.baffle_cap_huge_stem.name=Ствол большого Шляпника
+tile.baffle_cap_huge_top.name=Большой Шляпник
+
+# Bark
+item.bark_oak.name=Кора дуба
+item.bark_spruce.name=Кора ели
+item.bark_birch.name=Кора берёзы
+item.bark_jungle.name=Кора дерева джунглей
+item.bark_acacia.name=Кора акации
+item.bark_dark_oak.name=Кора тёмного дуба
+item.bark_wildwood.name=Кора дикого дерева
+
+# Runic Soil
+tile.elemental_soil.name=Элементальная почва
+tile.elemental_soil_fire.name=Огненная почва
+tile.elemental_soil_water.name=Водная почва
+tile.elemental_soil_earth.name=Земная почва
+tile.elemental_soil_air.name=Небесная почва
+
+# Rune Stone
+tile.runestone_stairs.name=Ступени из рунного камня
+tile.runestone_slab.name=Плита из рунного камня
+tile.runestone_wall.name=Стена из рунного камня
+tile.runestone_brick_stairs.name=Ступени из рунного кирпича
+tile.runestone_brick_slab.name=Плита из рунного кирпича
+tile.runestone_brick_wall.name=Стена из рунного кирпича
+
+tile.runestone_brick_alt_stairs.name=Ступени из рунного кирпича
+tile.runestone_brick_alt_slab.name=Плита из рунного кирпича
+tile.runestone_brick_alt_wall.name=Стена из рунного кирпича
+
+tile.wildwood_log.name=Бревно дикого дерева
+tile.wildwood_planks.name=Доски из дикого дерева
+tile.wildwood_leaves.name=Листья дикого дерева
+
+item.petals.name=Лепестки
+item.runic_dust.name=Руническая пыль
+item.cooked_pereskia.name=Запечённая переския
+item.wildewheet_bread.name=Хлеб из дикой пшеницы
+item.fey_leather.name=Кожа фей
+
+tile.magmatic_soil.effect=Готовит плоды при сборе.
+tile.aqueous_soil.effect=Автоматически собирает плоды, когда они вырасают.
+tile.caelic_soil.effect=Ускоряет рост растений.
+tile.terran_soil.effect=Увеличивает урожай растений.
+
+# JEI
+container.roots.runic_shears.name=Руническая стрижка
+container.roots.runic_shears_entity.name=Руническая стрижка сущностей
+container.roots.runic_carving.name=Руническое вырезание
+container.roots.ritual_crafting.name=Крафт на Костре
+container.roots.mortar_and_pestle.name=Ступа и пест
+container.roots.ritual.name=Ритуал на Костре
+container.roots.fey_crafting.name=Крафт фей
+container.roots.spell_costs.name=Цена заклинания
+container.roots.spell_modifiers.name=Модификаторы заклинания
+container.roots.bark_carving.name=Снятие коры
+container.roots.terra_moss.name=Соскабливание мха
+jei.roots.terra_moss.desc=Может быть соскоблено с мшистого булыжника. Булыжник со спорами около воды может превратитьcя в мшистый булыжник.
+jei.roots.terra_spores.desc=Падает с высокой травы; Использование на булыжнике рядом с водой превратит его в мшистый булыжник.
+jei.roots.wildroot.desc=Падают с высокой травы или c листвы дикого дерева.
+jei.roots.bark.desc=Получается при ломании нужного бревна ножом.
+jei.roots.wildwood.desc=Когда-то бывшее священным для друидов дерево, сейчас существует только в виде корней в траве. Однако, с их помощью, нужными словами и действиями, можно вызвать ритуал Роста Диких Корней.
+jei.roots.wildwood_sapling.desc=Редкое молодое деревце, которое, увы, бесплодно. Почти все растеньица были спрятаны до лучших времён друидами прошлых веуу
+jei.roots.wildwood_leaves.desc=Слабенькие ветви священного дерева не могут держать саженцев, но зато в них можно найти универсальный ответ на загадку их распространения - Дикий корень.
+jei.roots.elemental_soil_fire.desc=Можно создать, бросив Элементальную почву в лаву.
+jei.roots.elemental_soil_water.desc=Можно создать, бросив Элементальную почву в воду и немного подождав.
+jei.roots.elemental_soil_air.desc=Можно создать, бросив Элементальную почву на большой высоте и подождав.
+jei.roots.elemental_soil_earth.desc=Можно создать, бросив Элементальную почву глубоко под землёй и без вида на небо.
+jei.roots.runic_shears.cooldown=Предмет можно получить каждые %d секунд.
+jei.roots.open_book_button_text=Открыть книгу
+# Quiver
+roots.quiver.picked_up_arrow=Собрана стрела.
+roots.quiver.quiver_full=Ваш колчан полон.
+roots.quiver.fragile=Эта выращенная стрела не может быть собрана.
+roots.quiver.broke=Все стрелы сломаны.
+
+# Config
+# Categories
+config.roots.category.general=Основное
+config.roots.category.general.tooltip=Основные функции Roots 3.
+config.roots.category.rituals=Ритуалы
+config.roots.category.rituals.tooltip=Включение\отключение ритуалов и относящиеся к ритуалам функции.
+config.roots.category.spells=Заклинания
+config.roots.category.spells.tooltip=Включение/отключение заклинаний и относящиеся к ритуалам функции .
+config.roots.category.moss=Терра-мох
+config.roots.category.moss.tooltip=Конфигурация сбора и роста мха.
+config.roots.category.elemental_soil=Элементальная земля
+config.roots.category.elemental_soil.tooltip=Конфигурация крафта и использования элементальной почвы.
+config.roots.category.crops=Сбор и рост
+config.roots.category.crops.tooltip=Настройка заклинаний сбора\роста
+
+# WAILA/TOP/etc
+roots.hud.grove_stone.valid=Верный монолит
+roots.hud.pyre.recipe=Крафт: %s
+roots.hud.pyre.ritual=Ритуал: %s
+roots.hud.pyre.progress=Прогресс: осталось %s минут
+
+roots.hud.top.pyre.recipe=Крафт:
+roots.hud.top.pyre.ritual=Ритуал:
+roots.hud.top.pyre.progress=Прогресс:
+roots.hud.top.pyre.progress_info=минут осталось
+
+# Runic Shears
+roots.runic_shears.cooldown=Эквивалента фей на этот предмет нет.
+
+# Ritual of Transmutation
+roots.ritual.transmutation.deadbush_cocoa=Можно получить через Ритуал Трансмутации. Во время ритуала близлежащие мёртвые кусты превратятся в какао-бобы.
+roots.ritual.transmutation.birch_jungle=Можно получить через Ритуал Трансмутации. Во время ритуала близлежащие брёвна берёзы превращаются в таковые у джунглевого дерева.
+roots.ritual.transmutation.birch_jungle_leaves=Можно получить через Ритуал Трансмутации. Во время ритуала близлежащие листья берёзы превращаются в таковые у джунглевого дерева.
+roots.ritual.transmutation.pumpkin_melon=Можно получить через Ритуал Трансмутации. Во время ритуала близлежащие тыквы с водой под ними превратятся в арбузы
+roots.ritual.transmutation.pumpkin_cactus=Можно получить через Ритуал Трансмутации. Во время ритуала близлежащие тыквы, стоящие на песке превратятся в кактусы.
+
+# CraftTweaker commands
+roots.commands.dump.desc=В§2/ct roots_properties [mode]\nВ§3Dumps the specified property table(s) to the log.
+roots.commands.dump.usage=Использование: ct roots_properties [mode]\nModes: all | ritual | spell
+
+roots.commands.dump_recipes.desc=В§2/ct roots_recipes [category]\nВ§Выводит список ResourceLocations зарегистрированных рецептов.
+roots.commands.dump_recipes.usage=Использование: ct roots_recipes [mode]\nModes: all | animal_harvest | bark | fey_crafting | flower_growth | mortar | pacifist | pyre_crafting | runic_shears | transmutaiton
+
+# Переведено SoBinary для GamePoint.SU
