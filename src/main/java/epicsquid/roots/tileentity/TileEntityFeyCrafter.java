@@ -173,13 +173,20 @@ public class TileEntityFeyCrafter extends TileBase {
   }
 
   public FeyCraftingRecipe getRecipe() {
-    return ModRecipes.getFeyCraftingRecipe(getContents());
+    List<ItemStack> contents = getContents();
+    if (contents.isEmpty()) {
+      return null;
+    }
+    return ModRecipes.getFeyCraftingRecipe(contents);
   }
 
   public List<ItemStack> getContents() {
     List<ItemStack> result = new ArrayList<>();
     for (int i = 0; i < inventory.getSlots(); i++) {
-      result.add(inventory.getStackInSlot(i));
+      ItemStack inSlot = inventory.getStackInSlot(i);
+      if (!inSlot.isEmpty()) {
+        result.add(inSlot);
+      }
     }
     return result;
   }

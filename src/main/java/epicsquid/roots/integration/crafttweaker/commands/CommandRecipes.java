@@ -98,7 +98,7 @@ public class CommandRecipes extends CraftTweakerCommand {
           }
         case pyre_crafting:
           CraftTweakerAPI.getLogger().logInfo("Pyre Crafting recipes:");
-          for (Map.Entry<String, PyreCraftingRecipe> entry : ModRecipes.getPyreCraftingRecipes().entrySet()) {
+          for (Map.Entry<ResourceLocation, PyreCraftingRecipe> entry : ModRecipes.getPyreCraftingRecipes().entrySet()) {
             CraftTweakerAPI.getLogger().logInfo("  Key: roots:" + entry.getKey() + " with output: " + entry.getValue().getResult().toString());
           }
           if (command.get() == SubCommand.pyre_crafting) {

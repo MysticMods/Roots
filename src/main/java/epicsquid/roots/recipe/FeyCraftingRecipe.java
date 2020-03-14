@@ -56,11 +56,6 @@ public class FeyCraftingRecipe implements IRootsRecipe<TileEntityFeyCrafter> {
     return this;
   }
 
-  @Override
-  public boolean matches(List<ItemStack> ingredients) {
-    return ListUtil.matchesIngredients(ingredients, this.ingredients);
-  }
-
   public ItemStack getResult() {
     return result;
   }
