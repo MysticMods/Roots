@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 public class ItemRunicSword extends ItemSwordBase implements ILivingRepair {
   public ItemRunicSword(ToolMaterial material, String name) {
-    super(material, name, 0, 1992, 35);
+    super(material, name, 1992);
   }
 
   @Override

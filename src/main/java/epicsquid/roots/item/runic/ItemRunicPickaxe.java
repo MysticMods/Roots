@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 public class ItemRunicPickaxe extends ItemHammerBase implements ILivingRepair {
   public ItemRunicPickaxe(ToolMaterial material, String name) {
-    super(name, 1992, 25, material); // TODO: VALUES
+    super(name, 1992, material); // TODO: VALUES
   }
 
   @Override

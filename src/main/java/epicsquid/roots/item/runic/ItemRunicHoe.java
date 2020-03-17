@@ -22,7 +22,7 @@ import java.util.List;
 public class ItemRunicHoe extends ItemPloughBase implements ILivingRepair {
 
   public ItemRunicHoe(ToolMaterial material, String name) {
-    super(material, name, 3, 1992, 25);
+    super(material, name, 3, 1992);
   }
 
   @Override

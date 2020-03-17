@@ -6,6 +6,7 @@ import epicsquid.roots.capability.runic_shears.RunicShearsCapability;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityStorage;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.item.materials.Materials;
 import epicsquid.roots.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -37,6 +38,10 @@ public class Roots {
   public static ModContainer CONTAINER = null;
 
   public static Logger logger;
+
+  static {
+    Materials.load();
+  }
 
   @SidedProxy(clientSide = "epicsquid.roots.proxy.ClientProxy", serverSide = "epicsquid.roots.proxy.CommonProxy")
   public static CommonProxy proxy;
