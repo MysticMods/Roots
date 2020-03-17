@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 public class ItemTerrastoneSword extends ItemSwordBase implements ILivingRepair {
   public ItemTerrastoneSword(ToolMaterial material, String name) {
-    super(material, name, 0, 192, 22);
+    super(material, name, 192);
   }
 
   @Override

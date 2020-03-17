@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 @SuppressWarnings("deprecation")
 public class ItemRunicShovel extends ItemExcavatorBase implements ILivingRepair {
   public ItemRunicShovel(ToolMaterial material, String name) {
-    super(name, 1992, 25, material);
+    super(name, 1992, material);
   }
 
   @Override

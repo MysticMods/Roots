@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 @SuppressWarnings("deprecation")
 public class ItemTerrastoneShovel extends ItemShovelBase implements ILivingRepair {
   public ItemTerrastoneShovel(ToolMaterial material, String name) {
-    super(material, name, 3, 192, 22);
+    super(material, name, 3, 192);
   }
 
   @Override
