@@ -267,39 +267,20 @@ public class ItemStaff extends ItemBase {
     public int colorMultiplier(@Nonnull ItemStack stack, int tintIndex) {
       SpellHandler capability = SpellHandler.fromStack(stack);
       if (capability.hasSpellInSlot() && stack.getItem() instanceof ItemStaff) {
-        if (stack.getDisplayName().compareToIgnoreCase("Shiny Rod") == 0 || stack.getDisplayName().compareToIgnoreCase("Cutie Moon Rod") == 0) {
-          SpellBase spell = capability.getSelectedSpell();
-          if (spell != null) {
-            if (tintIndex == 0) {
-              int r = (int) (255 * spell.getRed1());
-              int g = (int) (255 * spell.getGreen1());
-              int b = (int) (255 * spell.getBlue1());
-              return (r << 16) + (g << 8) + b;
-            }
-            if (tintIndex == 1) {
-              int r = (int) (255 * spell.getRed2());
-              int g = (int) (255 * spell.getGreen2());
-              int b = (int) (255 * spell.getBlue2());
-              return (r << 16) + (g << 8) + b;
-            }
-          }
-          return Util.intColor(255, 255, 255);
-        } else {
-          SpellBase spell = capability.getSelectedSpell();
-          if (tintIndex == 1) {
-            int r = (int) (255 * spell.getRed1());
-            int g = (int) (255 * spell.getGreen1());
-            int b = (int) (255 * spell.getBlue1());
-            return (r << 16) + (g << 8) + b;
-          }
-          if (tintIndex == 2) {
-            int r = (int) (255 * spell.getRed2());
-            int g = (int) (255 * spell.getGreen2());
-            int b = (int) (255 * spell.getBlue2());
-            return (r << 16) + (g << 8) + b;
-          }
-          return Util.intColor(255, 255, 255);
+        SpellBase spell = capability.getSelectedSpell();
+        if (tintIndex == 1) {
+          int r = (int) (255 * spell.getRed1());
+          int g = (int) (255 * spell.getGreen1());
+          int b = (int) (255 * spell.getBlue1());
+          return (r << 16) + (g << 8) + b;
         }
+        if (tintIndex == 2) {
+          int r = (int) (255 * spell.getRed2());
+          int g = (int) (255 * spell.getGreen2());
+          int b = (int) (255 * spell.getBlue2());
+          return (r << 16) + (g << 8) + b;
+        }
+        return Util.intColor(255, 255, 255);
       }
       return Util.intColor(255, 255, 255);
     }
