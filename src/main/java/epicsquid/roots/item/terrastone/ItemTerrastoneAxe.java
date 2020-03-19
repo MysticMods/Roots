@@ -3,6 +3,8 @@ package epicsquid.roots.item.terrastone;
 import epicsquid.mysticallib.item.ItemAxeBase;
 import epicsquid.roots.item.ILivingRepair;
 import epicsquid.roots.recipe.ingredient.RootsIngredients;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -20,6 +22,13 @@ public class ItemTerrastoneAxe extends ItemAxeBase implements ILivingRepair {
 
   @Override
   public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-    return toRepair.getItem() == this && RootsIngredients.BARK.test(repair);
+    return toRepair.getItem() == this && RootsIngredients.MOSSY_COBBLESTONE.test(repair);
+  }
+
+  // TODO: Update
+  @Override
+  public float getDestroySpeed(ItemStack stack, IBlockState state) {
+    Material material = state.getMaterial();
+    return material != Material.WOOD && material != Material.PLANTS && material != Material.VINE ? super.getDestroySpeed(stack, state) : this.efficiency;
   }
 }

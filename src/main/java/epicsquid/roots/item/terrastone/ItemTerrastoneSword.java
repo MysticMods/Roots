@@ -20,6 +20,6 @@ public class ItemTerrastoneSword extends ItemSwordBase implements ILivingRepair 
 
   @Override
   public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-    return toRepair.getItem() == this && RootsIngredients.BARK.test(repair);
+    return toRepair.getItem() == this && RootsIngredients.MOSSY_COBBLESTONE.test(repair);
   }
 }

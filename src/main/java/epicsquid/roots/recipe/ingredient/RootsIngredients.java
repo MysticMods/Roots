@@ -8,4 +8,5 @@ public class RootsIngredients {
   public static Ingredient RUNESTONE = new OreIngredient("runestone");
   public static Ingredient FEY_LEATHER = new OreIngredient("feyLeather");
   public static Ingredient RUNED_OBSIDIAN = new OreIngredient("runedObsidian");
+  public static Ingredient MOSSY_COBBLESTONE = new OreIngredient("mossyCobblestone");
 }
