@@ -1,0 +1,68 @@
+{
+  "name": "Runic Tools",
+  "icon": "roots:runic_pickaxe",
+  "category": "apparatus",
+  "advancement": "roots:runed_obsidian",
+  "pages": [
+    {
+      "type": "text",
+      "text": "The combination of obsidian with $(l:resources/runestone)runestone$() has created a potent substance: $(l:resources/runed_obsidian)runed obsidian$(). The brilliance of lapis has been darkened by the obsidian, and out of it can be crafted wondrous tools and weapons.$(br2)Like $(l:apparatus/living_tools)living$() and $(l:apparatus/terrastone_tooles)terrastone tools$(), these are malleable enough to repair any damage they sustain.$(br2)$(info) It has the effectiveness of a diamond tool, and can be manually repaired with runed obsidian."
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "runic_pickaxe"
+    },
+    {
+      "type": "text",
+      "text": "This hammer will mine in a 3x3 area."
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "runic_axe"
+    },
+    {
+      "type": "text",
+      "text": "(TBI)"
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "runic_shovel"
+    },
+    {
+      "type": "text",
+      "text": "This shovel will dig in a 3x3 area."
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "runic_hoe"
+    },
+    {
+      "type": "text",
+      "text": "This hoe will till in a 3x3 area, and all ground tilled by it will be moisturized instantly."
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "runic_sword"
+    },
+    {
+      "type": "text",
+      "text": "(TBI)"
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "runic_dagger"
+    },
+    {
+      "type": "text",
+      "text": "While fast and low on damage, this dagger has a chance to cause enemies struck by it to bleed. Subsequent strikes have a chance to worsen the bleed."
+    },
+    {
+      "type": "relations",
+      "entries": [
+        "basics/other_imbuer",
+        "apparatus/living_tools",
+        "apparatus/terrastone_tools"
+      ]
+    }
+  ]
+}
