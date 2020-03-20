@@ -94,6 +94,7 @@ tile.runed_spruce.name=Runed Spruce
 tile.runed_wildwood.name=Runed Wildwood
 
 roots.tooltip.petaldust.notag=This Spell Dust has no NBT data! It is potentially prone to errors and should not be used!
+roots.tooltip.runic_dagger=Causes enemies struck to bleed, stacking up to three times.
 roots.tooltip.salmon.invalid=This contains invalid NBT data.
 roots.tooltip.salmon.advancements=Grants the following advancements: %s
 roots.tooltip.salmon.crafter=Crafted by: %s
