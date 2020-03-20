@@ -36,14 +36,7 @@ public class SpellRecipeProcessor implements IComponentProcessor {
   public String process(String s) {
     if (s.startsWith("item")) {
       int index = Integer.parseInt(s.substring(4)) - 1;
-      Ingredient ingredient;
-
-      try {
-        ingredient = ingredients.get(index);
-      } catch (Exception e) {
-        e.printStackTrace();
-        return "";
-      }
+      Ingredient ingredient = ingredients.get(index);
 
       return ItemStackUtil.serializeIngredient(ingredient);
     }
