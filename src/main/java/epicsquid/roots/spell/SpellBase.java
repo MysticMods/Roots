@@ -364,13 +364,11 @@ public abstract class SpellBase {
   }
 
   public static class SpellRecipe implements IRootsRecipe<TileEntityMortar> {
-    public static SpellRecipe EMPTY = new SpellRecipe(null);
+    public static SpellRecipe EMPTY = new SpellRecipe();
 
     private List<Ingredient> ingredients = new ArrayList<>();
-    private SpellBase result;
 
-    public SpellRecipe(SpellBase result, Object ... stacks) {
-      this.result = result;
+    public SpellRecipe(Object... stacks) {
       for (Object stack : stacks) {
         if (stack instanceof Ingredient) {
           ingredients.add((Ingredient) stack);

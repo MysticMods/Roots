@@ -15,7 +15,7 @@ public class CTSpellRecipe extends SpellBase.SpellRecipe {
   private List<Ingredient> convertedIngredients;
 
   public CTSpellRecipe(SpellBase result, List<IIngredient> ingredients) {
-    super(result);
+    super();
     this.ingredients = ingredients;
     this.convertedIngredients = ingredients.stream().map(CraftTweakerMC::getIngredient).collect(Collectors.toList());
   }
