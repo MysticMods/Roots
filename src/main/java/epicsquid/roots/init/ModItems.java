@@ -6,6 +6,7 @@ import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.item.ItemFoodBase;
 import epicsquid.mysticallib.item.ItemSeedBase;
 import epicsquid.mysticallib.material.MaterialTypes;
+import epicsquid.mysticalworld.materials.Material;
 import epicsquid.roots.Roots;
 import epicsquid.roots.item.*;
 import epicsquid.roots.item.living.*;
@@ -118,14 +119,16 @@ public class ModItems {
     event.addItem(runic_shovel = new ItemRunicShovel(Materials.RUNIC, "runic_shovel").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(runic_hoe = new ItemRunicHoe(Materials.RUNIC, "runic_hoe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(runic_sword = new ItemRunicSword(Materials.RUNIC, "runic_sword").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(runic_dagger = new ItemDruidKnife("runic_dagger", Materials.RUNIC).setCreativeTab(Roots.tab).setMaxStackSize(1));
+
+    MaterialTypes.addMaterial("runic", Materials.RUNIC, Materials.RUNIC.getAttackDamage() - 4, -1.3f);
+    event.addItem(runic_dagger = new ItemRunicKnife("runic_dagger", Materials.RUNIC).setCreativeTab(Roots.tab).setMaxStackSize(1));
 
     event.addItem(terrastone_pickaxe = new ItemTerrastonePickaxe(Materials.TERRASTONE, "terrastone_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(terrastone_axe = new ItemTerrastoneAxe(Materials.TERRASTONE, "terrastone_axe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(terrastone_shovel = new ItemTerrastoneShovel(Materials.TERRASTONE, "terrastone_shovel").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(terrastone_hoe = new ItemTerrastoneHoe(Materials.TERRASTONE, "terrastone_hoe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(terrastone_sword = new ItemTerrastoneSword(Materials.TERRASTONE, "terrastone_sword").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(terrastone_knife = new ItemDruidKnife("terrastone_knife", Materials.TERRASTONE).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    //event.addItem(terrastone_knife = new ItemDruidKnife("terrastone_knife", Materials.TERRASTONE).setCreativeTab(Roots.tab).setMaxStackSize(1));
 
     event.addItem(living_pickaxe = new ItemLivingPickaxe(Materials.LIVING, "living_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_axe = new ItemLivingAxe(Materials.LIVING, "living_axe").setCreativeTab(Roots.tab).setMaxStackSize(1));
@@ -165,7 +168,6 @@ public class ModItems {
 
     event.addItem(wildewheet_bread = new ItemFoodBase("wildewheet_bread", 7, false).setCreativeTab(Roots.tab));
 
-    // Fairy dust
     event.addItem(life_essence = new ItemLifeEssence("life_essence").setCreativeTab(Roots.tab));
 
     // Rituals

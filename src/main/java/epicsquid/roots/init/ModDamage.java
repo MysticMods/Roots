@@ -27,6 +27,8 @@ public class ModDamage {
 
   public static DamageSource WATER_DAMAGE = (new DamageSource("water_damage")).setDamageBypassesArmor().setMagicDamage();
 
+  public static DamageSource BLEED_DAMAGE = (new DamageSource("bleed_damage")).setDamageBypassesArmor();
+
   public static DamageSource radiantDamageFrom(@Nullable EntityPlayer player) {
     DamageSource source;
     if (player == null) {

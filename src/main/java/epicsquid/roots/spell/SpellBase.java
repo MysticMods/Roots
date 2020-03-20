@@ -114,7 +114,7 @@ public abstract class SpellBase {
   }
 
   public SpellBase addIngredients(Object... stacks) {
-    this.recipe = new SpellRecipe(this, stacks);
+    this.recipe = new SpellRecipe(stacks);
     return this;
   }
 

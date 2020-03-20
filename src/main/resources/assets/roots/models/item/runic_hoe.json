@@ -1,5 +1,5 @@
 {
-  "parent": "item/handheld",
+  "parent": "mysticallib:item/handheld_large",
   "textures": {
     "layer0": "roots:items/runic_hoe"
   }
