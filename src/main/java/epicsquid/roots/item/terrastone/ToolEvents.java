@@ -137,9 +137,9 @@ public class ToolEvents {
     final Material mat = state.getMaterial();
 
     if (hardness < 2.0f || hardness == 2.0f && mat == Material.ROCK) {
-      event.setNewSpeed(speed * ToolConfig.PickaxeSoftModifier);
+      event.setNewSpeed((float) (speed * ToolConfig.PickaxeSoftModifier));
     } else if (hardness >= 50f) {
-      event.setNewSpeed(speed * ToolConfig.PickaxeHardModifier);
+      event.setNewSpeed((float) (speed * ToolConfig.PickaxeHardModifier));
     }
   }
 }
