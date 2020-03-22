@@ -1,4 +1,4 @@
-package epicsquid.roots.item.runic;
+package epicsquid.roots.item.runed;
 
 import epicsquid.mysticallib.item.ItemAxeBase;
 import epicsquid.roots.item.ILivingRepair;
@@ -7,8 +7,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemRunicAxe extends ItemAxeBase implements ILivingRepair {
-  public ItemRunicAxe(ToolMaterial material, String name) {
+public class ItemRunedAxe extends ItemAxeBase implements ILivingRepair {
+  public ItemRunedAxe(ToolMaterial material, String name) {
     super(material, name, 3, 1992);
   }
 

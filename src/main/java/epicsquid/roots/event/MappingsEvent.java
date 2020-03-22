@@ -10,6 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 public class MappingsEvent {
@@ -45,6 +46,7 @@ public class MappingsEvent {
     }
   }
 
+  @SuppressWarnings("ConstantConditions")
   @SubscribeEvent
   public static void onMissingItemMappings(RegistryEvent.MissingMappings<Item> event) {
     for (RegistryEvent.MissingMappings.Mapping<Item> mapping : event.getMappings()) {
@@ -78,6 +80,14 @@ public class MappingsEvent {
           case "offertory_plate":
             mapping.remap(((BlockBase) epicsquid.roots.init.ModBlocks.offering_plate).getItemBlock());
             break;
+        }
+        if (missing.getPath().startsWith("runic_")) {
+          ResourceLocation replacement = new ResourceLocation(Roots.MODID, missing.getPath().replace("runic_", "runed_"));
+          Item item = ForgeRegistries.ITEMS.getValue(replacement);
+          if (replacement == null) {
+            throw new NullPointerException(replacement.toString() + " replacement for " + missing.toString() + " is null!");
+          }
+          mapping.remap(item);
         }
       }
     }

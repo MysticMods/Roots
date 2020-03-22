@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "roots:items/runic_dagger"
+    "layer0": "roots:items/runed_dagger"
   }
 }

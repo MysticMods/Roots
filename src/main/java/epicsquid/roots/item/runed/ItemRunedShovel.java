@@ -1,6 +1,5 @@
-package epicsquid.roots.item.runic;
+package epicsquid.roots.item.runed;
 
-import epicsquid.mysticallib.item.ItemShovelBase;
 import epicsquid.mysticallib.item.tool.ItemExcavatorBase;
 import epicsquid.roots.item.ILivingRepair;
 import epicsquid.roots.recipe.ingredient.RootsIngredients;
@@ -17,8 +16,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 @SuppressWarnings("deprecation")
-public class ItemRunicShovel extends ItemExcavatorBase implements ILivingRepair {
-  public ItemRunicShovel(ToolMaterial material, String name) {
+public class ItemRunedShovel extends ItemExcavatorBase implements ILivingRepair {
+  public ItemRunedShovel(ToolMaterial material, String name) {
     super(name, 1992, material);
   }
 

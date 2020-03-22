@@ -1,16 +1,16 @@
 {
-  "name": "Runic Tools",
-  "icon": "roots:runic_pickaxe",
+  "name": "Runed Tools",
+  "icon": "roots:runed_pickaxe",
   "category": "apparatus",
   "advancement": "roots:runed_obsidian",
   "pages": [
     {
       "type": "text",
-      "text": "The combination of obsidian with $(l:resources/runestone)runestone$() has created a potent substance: $(l:resources/runed_obsidian)runed obsidian$(). The brilliance of lapis has been darkened by the obsidian, and out of it can be crafted wondrous tools and weapons.$(br2)Like $(l:apparatus/living_tools)living$() and $(l:apparatus/terrastone_tooles)terrastone tools$(), these are malleable enough to repair any damage they sustain.$(br2)$(info) It has the effectiveness of a diamond tool, and can be manually repaired with runed obsidian."
+      "text": "The combination of obsidian with $(l:resources/runestone)runestone$() has created a potent substance: $(l:resources/runed_obsidian)runed obsidian$(). The brilliance of lapis has been darkened by the obsidian, and out of it can be crafted wondrous tools and weapons.$(br2)Like $(l:apparatus/living_tools)living$() and $(l:apparatus/terrastone_tooles)terrastone tools$(), these runed tools are malleable enough to repair any damage they sustain.$(br2)$(info) They have the effectiveness of diamond tools, and can be manually repaired with runed obsidian."
     },
     {
       "type": "fey_crafting_template",
-      "recipe": "runic_pickaxe"
+      "recipe": "runed_pickaxe"
     },
     {
       "type": "text",
@@ -18,7 +18,7 @@
     },
     {
       "type": "fey_crafting_template",
-      "recipe": "runic_axe"
+      "recipe": "runed_axe"
     },
     {
       "type": "text",
@@ -26,7 +26,7 @@
     },
     {
       "type": "fey_crafting_template",
-      "recipe": "runic_shovel"
+      "recipe": "runed_shovel"
     },
     {
       "type": "text",
@@ -34,7 +34,7 @@
     },
     {
       "type": "fey_crafting_template",
-      "recipe": "runic_hoe"
+      "recipe": "runed_hoe"
     },
     {
       "type": "text",
@@ -42,7 +42,7 @@
     },
     {
       "type": "fey_crafting_template",
-      "recipe": "runic_sword"
+      "recipe": "runed_sword"
     },
     {
       "type": "text",
@@ -50,7 +50,7 @@
     },
     {
       "type": "fey_crafting_template",
-      "recipe": "runic_dagger"
+      "recipe": "runed_dagger"
     },
     {
       "type": "text",
@@ -60,6 +60,7 @@
       "type": "relations",
       "entries": [
         "basics/other_imbuer",
+        "resources/runed_obsidian",
         "apparatus/living_tools",
         "apparatus/terrastone_tools"
       ]

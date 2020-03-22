@@ -1,6 +1,6 @@
 {
   "parent": "mysticallib:item/handheld_large",
   "textures": {
-    "layer0": "roots:items/runic_sword"
+    "layer0": "roots:items/runed_axe"
   }
 }

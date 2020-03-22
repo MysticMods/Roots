@@ -1,4 +1,4 @@
-package epicsquid.roots.item.runic;
+package epicsquid.roots.item.runed;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModPotions;
@@ -14,8 +14,8 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemRunicKnife extends ItemDruidKnife {
-  public ItemRunicKnife(String name, ToolMaterial material) {
+public class ItemRunedKnife extends ItemDruidKnife {
+  public ItemRunedKnife(String name, ToolMaterial material) {
     super(name, material);
   }
 

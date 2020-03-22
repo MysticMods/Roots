@@ -1,15 +1,15 @@
-package epicsquid.roots.item.runic;
+package epicsquid.roots.item.runed;
 
-import epicsquid.mysticallib.item.ItemSwordBase;
+import epicsquid.mysticallib.item.tool.ItemHammerBase;
 import epicsquid.roots.item.ILivingRepair;
 import epicsquid.roots.recipe.ingredient.RootsIngredients;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemRunicSword extends ItemSwordBase implements ILivingRepair {
-  public ItemRunicSword(ToolMaterial material, String name) {
-    super(material, name, 1992);
+public class ItemRunedPickaxe extends ItemHammerBase implements ILivingRepair {
+  public ItemRunedPickaxe(ToolMaterial material, String name) {
+    super(name, 1992, material); // TODO: VALUES
   }
 
   @Override
