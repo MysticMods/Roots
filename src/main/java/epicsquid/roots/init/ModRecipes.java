@@ -1381,7 +1381,7 @@ public class ModRecipes {
             new ItemStack(Items.STONE_PICKAXE),
             new ItemStack(ModItems.terra_moss),
             new OreIngredient("gemDiamond"),
-            new OreIngredient("gemDiamond")));
+            new OreIngredient("mossyCobblestone")));
 
     addFeyCraftingRecipe("terrastone_axe",
         new FeyCraftingRecipe(new ItemStack(ModItems.terrastone_axe), 1).addIngredients(
@@ -1389,7 +1389,7 @@ public class ModRecipes {
             new ItemStack(Items.STONE_AXE),
             new ItemStack(ModItems.terra_moss),
             new OreIngredient("gemDiamond"),
-            new OreIngredient("gemDiamond")));
+            new OreIngredient("mossyCobblestone")));
 
     addFeyCraftingRecipe("terrastone_shovel",
         new FeyCraftingRecipe(new ItemStack(ModItems.terrastone_shovel), 1).addIngredients(
@@ -1397,7 +1397,7 @@ public class ModRecipes {
             new ItemStack(Items.STONE_SHOVEL),
             new ItemStack(ModItems.terra_moss),
             new OreIngredient("gemDiamond"),
-            new OreIngredient("gemDiamond")));
+            new OreIngredient("mossyCobblestone")));
 
     addFeyCraftingRecipe("terrastone_hoe",
         new FeyCraftingRecipe(new ItemStack(ModItems.terrastone_hoe), 1).addIngredients(
@@ -1405,7 +1405,7 @@ public class ModRecipes {
             new ItemStack(Items.STONE_HOE),
             new ItemStack(ModItems.terra_moss),
             new OreIngredient("gemDiamond"),
-            new OreIngredient("gemDiamond")));
+            new OreIngredient("mossyCobblestone")));
 
     addFeyCraftingRecipe("terrastone_sword",
         new FeyCraftingRecipe(new ItemStack(ModItems.terrastone_sword), 1).addIngredients(
@@ -1413,7 +1413,7 @@ public class ModRecipes {
             new ItemStack(Items.STONE_SWORD),
             new ItemStack(ModItems.terra_moss),
             new OreIngredient("gemDiamond"),
-            new OreIngredient("gemDiamond")));
+            new OreIngredient("mossyCobblestone")));
 
      addFeyCraftingRecipe("runed_pickaxe",
         new FeyCraftingRecipe(new ItemStack(ModItems.runed_pickaxe), 1).addIngredients(
