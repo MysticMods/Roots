@@ -111,7 +111,7 @@ public class ToolEvents {
 
     final EntityPlayer player = event.getEntityPlayer();
     final Item heldItem = player.getHeldItemMainhand().getItem();
-    if (heldItem != ModItems.terrastone_pickaxe && heldItem != ModItems.terrastone_sword && heldItem != ModItems.terrastone_axe) {
+    if (heldItem != ModItems.terrastone_pickaxe && heldItem != ModItems.terrastone_sword && heldItem != ModItems.terrastone_axe && heldItem != ModItems.terrastone_hoe) {
       return;
     }
 
@@ -125,10 +125,8 @@ public class ToolEvents {
       return;
     }
 
-    if (heldItem == ModItems.terrastone_axe) {
-      if (ToolConfig.AxeLeaves && LeafHandler.isLeafBlock(state.getBlock())) {
-        event.setNewSpeed(100f);
-      }
+    if (((heldItem == ModItems.terrastone_axe && ToolConfig.AxeLeaves) || (heldItem == ModItems.terrastone_hoe && ToolConfig.HoeSilkTouch)) && LeafHandler.isLeafBlock(state.getBlock())) {
+      event.setNewSpeed(100f);
       return;
     }
 
