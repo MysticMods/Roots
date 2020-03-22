@@ -30,7 +30,7 @@ import java.util.Set;
 @SuppressWarnings("deprecation")
 public class ItemTerrastoneShovel extends ItemShovelBase implements ILivingRepair {
   public ItemTerrastoneShovel(ToolMaterial material, String name) {
-    super(material, name, 3, 192);
+    super(material, name, 3, 565);
     if (ToolConfig.ShovelSilkTouch) {
       // TODO: Handle registration if it's enabled or disabled
       MinecraftForge.EVENT_BUS.register(this);
@@ -39,7 +39,7 @@ public class ItemTerrastoneShovel extends ItemShovelBase implements ILivingRepai
 
   @Override
   public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-    update(stack, worldIn, entityIn, itemSlot, isSelected);
+    update(stack, worldIn, entityIn, itemSlot, isSelected, 20);
     super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
   }
 

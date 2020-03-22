@@ -14,7 +14,7 @@ public class ItemLivingSword extends ItemSwordBase implements ILivingRepair {
 
   @Override
   public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-    update(stack, worldIn, entityIn, itemSlot, isSelected);
+    update(stack, worldIn, entityIn, itemSlot, isSelected, 40);
     super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
   }
 
