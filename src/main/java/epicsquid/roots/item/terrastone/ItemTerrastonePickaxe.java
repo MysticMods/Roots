@@ -19,14 +19,14 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ItemTerrastonePickaxe extends ItemPickaxeBase implements ILivingRepair {
   public ItemTerrastonePickaxe(ToolMaterial material, String name) {
-    super(material, name, 2, 192);
+    super(material, name, 3, 565);
     // TODO: ???
     MinecraftForge.EVENT_BUS.register(this);
   }
 
   @Override
   public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-    update(stack, worldIn, entityIn, itemSlot, isSelected);
+    update(stack, worldIn, entityIn, itemSlot, isSelected, 20);
     super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
   }
 

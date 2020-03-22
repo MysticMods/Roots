@@ -9,12 +9,12 @@ import net.minecraft.world.World;
 
 public class ItemTerrastoneSword extends ItemSwordBase implements ILivingRepair {
   public ItemTerrastoneSword(ToolMaterial material, String name) {
-    super(material, name, 192);
+    super(material, name, 565);
   }
 
   @Override
   public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-    update(stack, worldIn, entityIn, itemSlot, isSelected);
+    update(stack, worldIn, entityIn, itemSlot, isSelected, 20);
     super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
   }
 
