@@ -1,9 +1,9 @@
 {
   "name": "Wildroot Growth",
-  "icon": "roots:ritual_wild_growth",
+  "icon": "roots:ritual_wildroot_growth",
   "category": "rituals",
   "advancement": "roots:spirit_herb",
-  "flag": "roots:ritual_wild_growth",
+  "flag": "roots:ritual_wildroot_growth",
   "pages": [
     {
       "type": "text",
