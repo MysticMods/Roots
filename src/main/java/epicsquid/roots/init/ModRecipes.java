@@ -1419,7 +1419,7 @@ public class ModRecipes {
         new FeyCraftingRecipe(new ItemStack(ModItems.runic_pickaxe), 1).addIngredients(
             new OreIngredient("runedObsidian"),
             new OreIngredient("runedObsidian"),
-            new ItemStack(Items.DIAMOND_SWORD),
+            new ItemStack(Items.DIAMOND_PICKAXE),
             new OreIngredient("feyLeather"),
             new ItemStack(ModItems.stalicripe)));
 
