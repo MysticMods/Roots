@@ -6,12 +6,11 @@ import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.item.ItemFoodBase;
 import epicsquid.mysticallib.item.ItemSeedBase;
 import epicsquid.mysticallib.material.MaterialTypes;
-import epicsquid.mysticalworld.materials.Material;
 import epicsquid.roots.Roots;
 import epicsquid.roots.item.*;
 import epicsquid.roots.item.living.*;
 import epicsquid.roots.item.materials.Materials;
-import epicsquid.roots.item.runic.*;
+import epicsquid.roots.item.runed.*;
 import epicsquid.roots.item.terrastone.*;
 import epicsquid.roots.item.wildwood.ItemWildwoodArmor;
 import epicsquid.roots.item.wildwood.ItemWildwoodBow;
@@ -38,7 +37,7 @@ public class ModItems {
       sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, apothecary_pouch, wooden_shears,
       petals, flour, living_arrow, runic_dust, cooked_pereskia, fey_leather, wildewheet_bread;
 
-  public static Item runic_axe, runic_hoe, runic_pickaxe, runic_shovel, runic_sword, runic_dagger;
+  public static Item runed_axe, runed_hoe, runed_pickaxe, runed_shovel, runed_sword, runed_dagger;
 
   public static Item terrastone_axe, terrastone_hoe, terrastone_pickaxe, terrastone_shovel, terrastone_sword, terrastone_knife;
 
@@ -114,14 +113,14 @@ public class ModItems {
     event.addItem(flour = new ItemBase("flour").setCreativeTab(Roots.tab));
     event.addItem(staff = new ItemStaff("staff").setCreativeTab(Roots.tab).setMaxStackSize(1));
 
-    event.addItem(runic_pickaxe = new ItemRunicPickaxe(Materials.RUNIC, "runic_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(runic_axe = new ItemRunicAxe(Materials.RUNIC, "runic_axe").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(runic_shovel = new ItemRunicShovel(Materials.RUNIC, "runic_shovel").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(runic_hoe = new ItemRunicHoe(Materials.RUNIC, "runic_hoe").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(runic_sword = new ItemRunicSword(Materials.RUNIC, "runic_sword").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(runed_pickaxe = new ItemRunedPickaxe(Materials.RUNIC, "runed_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(runed_axe = new ItemRunedAxe(Materials.RUNIC, "runed_axe").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(runed_shovel = new ItemRunedShovel(Materials.RUNIC, "runed_shovel").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(runed_hoe = new ItemRunedHoe(Materials.RUNIC, "runed_hoe").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(runed_sword = new ItemRunedSword(Materials.RUNIC, "runed_sword").setCreativeTab(Roots.tab).setMaxStackSize(1));
 
-    MaterialTypes.addMaterial("runic", Materials.RUNIC, Materials.RUNIC.getAttackDamage() - 4, -1.3f);
-    event.addItem(runic_dagger = new ItemRunicKnife("runic_dagger", Materials.RUNIC).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    MaterialTypes.addMaterial("runed", Materials.RUNIC, Materials.RUNIC.getAttackDamage() - 4, -1.3f);
+    event.addItem(runed_dagger = new ItemRunedKnife("runed_dagger", Materials.RUNIC).setCreativeTab(Roots.tab).setMaxStackSize(1));
 
     event.addItem(terrastone_pickaxe = new ItemTerrastonePickaxe(Materials.TERRASTONE, "terrastone_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(terrastone_axe = new ItemTerrastoneAxe(Materials.TERRASTONE, "terrastone_axe").setCreativeTab(Roots.tab).setMaxStackSize(1));

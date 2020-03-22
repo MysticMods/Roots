@@ -1,7 +1,7 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "roots:items/runic_pickaxe"
+    "layer0": "roots:items/runed_pickaxe"
   },
   "display": {
     "thirdperson_righthand": {

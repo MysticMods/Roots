@@ -1,4 +1,4 @@
-package epicsquid.roots.item.runic;
+package epicsquid.roots.item.runed;
 
 import epicsquid.mysticallib.item.tool.ItemPloughBase;
 import epicsquid.roots.item.ILivingRepair;
@@ -19,9 +19,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemRunicHoe extends ItemPloughBase implements ILivingRepair {
+public class ItemRunedHoe extends ItemPloughBase implements ILivingRepair {
 
-  public ItemRunicHoe(ToolMaterial material, String name) {
+  public ItemRunedHoe(ToolMaterial material, String name) {
     super(material, name, 3, 1992);
   }
 

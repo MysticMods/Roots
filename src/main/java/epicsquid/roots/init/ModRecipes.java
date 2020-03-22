@@ -1415,48 +1415,48 @@ public class ModRecipes {
             new OreIngredient("gemDiamond"),
             new OreIngredient("gemDiamond")));
 
-     addFeyCraftingRecipe("runic_pickaxe",
-        new FeyCraftingRecipe(new ItemStack(ModItems.runic_pickaxe), 1).addIngredients(
+     addFeyCraftingRecipe("runed_pickaxe",
+        new FeyCraftingRecipe(new ItemStack(ModItems.runed_pickaxe), 1).addIngredients(
             new OreIngredient("runedObsidian"),
             new OreIngredient("runedObsidian"),
             new ItemStack(Items.DIAMOND_PICKAXE),
             new OreIngredient("feyLeather"),
             new ItemStack(ModItems.stalicripe)));
 
-    addFeyCraftingRecipe("runic_axe",
-        new FeyCraftingRecipe(new ItemStack(ModItems.runic_axe), 1).addIngredients(
+    addFeyCraftingRecipe("runed_axe",
+        new FeyCraftingRecipe(new ItemStack(ModItems.runed_axe), 1).addIngredients(
             new OreIngredient("runedObsidian"),
             new OreIngredient("runedObsidian"),
             new ItemStack(Items.DIAMOND_AXE),
             new OreIngredient("feyLeather"),
             new ItemStack(ModItems.cloud_berry)));
 
-    addFeyCraftingRecipe("runic_shovel",
-        new FeyCraftingRecipe(new ItemStack(ModItems.runic_shovel), 1).addIngredients(
+    addFeyCraftingRecipe("runed_shovel",
+        new FeyCraftingRecipe(new ItemStack(ModItems.runed_shovel), 1).addIngredients(
             new OreIngredient("runedObsidian"),
             new OreIngredient("runedObsidian"),
             new ItemStack(Items.DIAMOND_SHOVEL),
             new OreIngredient("feyLeather"),
             new ItemStack(ModItems.dewgonia)));
 
-    addFeyCraftingRecipe("runic_hoe",
-        new FeyCraftingRecipe(new ItemStack(ModItems.runic_hoe), 1).addIngredients(
+    addFeyCraftingRecipe("runed_hoe",
+        new FeyCraftingRecipe(new ItemStack(ModItems.runed_hoe), 1).addIngredients(
             new OreIngredient("runedObsidian"),
             new OreIngredient("runedObsidian"),
             new ItemStack(Items.DIAMOND_HOE),
             new OreIngredient("feyLeather"),
             new ItemStack(ModItems.wildewheet)));
 
-    addFeyCraftingRecipe("runic_sword",
-        new FeyCraftingRecipe(new ItemStack(ModItems.runic_sword), 1).addIngredients(
+    addFeyCraftingRecipe("runed_sword",
+        new FeyCraftingRecipe(new ItemStack(ModItems.runed_sword), 1).addIngredients(
             new OreIngredient("runedObsidian"),
             new OreIngredient("runedObsidian"),
             new ItemStack(Items.DIAMOND_SWORD),
             new OreIngredient("feyLeather"),
             new ItemStack(ModItems.infernal_bulb)));
 
-     addFeyCraftingRecipe("runic_dagger",
-        new FeyCraftingRecipe(new ItemStack(ModItems.runic_dagger), 1).addIngredients(
+     addFeyCraftingRecipe("runed_dagger",
+        new FeyCraftingRecipe(new ItemStack(ModItems.runed_dagger), 1).addIngredients(
             new OreIngredient("runedObsidian"),
             new OreIngredient("runedObsidian"),
             new ItemStack(ModItems.diamond_knife),
