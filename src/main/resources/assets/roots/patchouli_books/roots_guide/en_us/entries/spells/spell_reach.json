@@ -3,7 +3,7 @@
   "icon": "roots:spell_dust",
   "category": "spells",
   "advancement": "roots:dewgonia",
-  "flag": "roots:spell_roots",
+  "flag": "roots:spell_reach",
   "pages": [
     {
       "type": "text",
