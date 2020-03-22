@@ -7,6 +7,7 @@ import epicsquid.roots.config.ToolConfig;
 import epicsquid.roots.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -23,7 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-@Mod.EventBusSubscriber(modid= Roots.MODID)
+@Mod.EventBusSubscriber(modid = Roots.MODID)
 public class ToolEvents {
   private static final Set<Block> SILK_TOUCH_BLOCKS = Sets.newHashSet(Blocks.MYCELIUM, Blocks.GRASS, Blocks.DIRT, Blocks.WEB);
   private static final Item DIRT_ITEM = Item.getItemFromBlock(Blocks.DIRT);
@@ -133,7 +134,9 @@ public class ToolEvents {
     final float speed = event.getNewSpeed();
 
     final float hardness = state.getBlockHardness(player.world, pos);
-    if (hardness <= 2.0f) {
+    final Material mat = state.getMaterial();
+
+    if (hardness < 2.0f || hardness == 2.0f && mat == Material.ROCK) {
       event.setNewSpeed(speed * ToolConfig.PickaxeSoftModifier);
     } else if (hardness >= 50f) {
       event.setNewSpeed(speed * ToolConfig.PickaxeHardModifier);
