@@ -7,10 +7,10 @@ import net.minecraftforge.common.config.Config;
 @Config(modid = Roots.MODID, name = "roots/tools", category = "tools")
 public class ToolConfig {
   @Config.Comment(("Terrastone Pickaxe speed modifier for soft materials"))
-  public static float PickaxeSoftModifier = 1.40f;
+  public static float PickaxeSoftModifier = 2.10f;
 
   @Config.Comment(("Terrastone Pickaxe speed modifier for hard materials"))
-  public static float PickaxeHardModifier = 1.90f;
+  public static float PickaxeHardModifier = 2.80f;
 
   @Config.Comment(("Terrastone Axe instantly breaks leaves"))
   public static boolean AxeLeaves = true;
