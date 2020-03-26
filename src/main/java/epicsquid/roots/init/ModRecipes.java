@@ -480,13 +480,13 @@ public class ModRecipes {
   }
 
   public static List<TransmutationRecipe> getTransmutationRecipesFor(IBlockState state, World world, BlockPos pos) {
-   List<TransmutationRecipe> result = new ArrayList<>();
-   for (TransmutationRecipe recipe : getTransmutationRecipes()) {
-     if (recipe.matches(state, world, pos)) {
-       result.add(recipe);
-     }
-   }
-   return result;
+    List<TransmutationRecipe> result = new ArrayList<>();
+    for (TransmutationRecipe recipe : getTransmutationRecipes()) {
+      if (recipe.matches(state, world, pos)) {
+        result.add(recipe);
+      }
+    }
+    return result;
   }
 
   public static void initTransmutationRecipes() {
@@ -912,7 +912,7 @@ public class ModRecipes {
   }
 
   @Nullable
-  public static PyreCraftingRecipe getCraftingRecipe (ItemStack output) {
+  public static PyreCraftingRecipe getCraftingRecipe(ItemStack output) {
     for (PyreCraftingRecipe recipe : pyreCraftingRecipes.values()) {
       if (ItemStack.areItemStacksEqual(recipe.getResult(), output)) {
         return recipe;
@@ -1036,7 +1036,7 @@ public class ModRecipes {
     initChrysopoeiaRecipes();
 
     GameRegistry.addSmelting(ModItems.flour, new ItemStack(Items.BREAD), 0.125f);
-    GameRegistry.addSmelting(epicsquid.mysticalworld.init.ModItems.seeds, new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_seeds), 0.05f);
+    /*    GameRegistry.addSmelting(epicsquid.mysticalworld.init.ModItems.seeds, new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_seeds), 0.05f);*/ // TODO: Move to Mystical World
     GameRegistry.addSmelting(ModItems.pereskia_bulb, new ItemStack(ModItems.cooked_pereskia), 0.125f);
 
     initCraftingRecipes();
@@ -1103,12 +1103,12 @@ public class ModRecipes {
             new ItemStack(Blocks.BROWN_MUSHROOM)));
 
     // Cooking!!!
-    addPyreCraftingRecipe("cooked_seeds", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_seeds, 5), 1).addIngredients(
+/*    addPyreCraftingRecipe("cooked_seeds", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_seeds, 5), 1).addIngredients(
         new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds)).setBurnTime(20));
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds)).setBurnTime(20));*/ // TODO: Restore
 
     addPyreCraftingRecipe("cooked_potato", new PyreCraftingRecipe(new ItemStack(Items.BAKED_POTATO, 5), 1).addIngredients(
         new OreIngredient("cropPotato"),
@@ -1415,7 +1415,7 @@ public class ModRecipes {
             new OreIngredient("gemDiamond"),
             new OreIngredient("mossyCobblestone")));
 
-     addFeyCraftingRecipe("runed_pickaxe",
+    addFeyCraftingRecipe("runed_pickaxe",
         new FeyCraftingRecipe(new ItemStack(ModItems.runed_pickaxe), 1).addIngredients(
             new OreIngredient("runedObsidian"),
             new OreIngredient("runedObsidian"),
@@ -1455,7 +1455,7 @@ public class ModRecipes {
             new OreIngredient("feyLeather"),
             new ItemStack(ModItems.infernal_bulb)));
 
-     addFeyCraftingRecipe("runed_dagger",
+    addFeyCraftingRecipe("runed_dagger",
         new FeyCraftingRecipe(new ItemStack(ModItems.runed_dagger), 1).addIngredients(
             new OreIngredient("runedObsidian"),
             new OreIngredient("runedObsidian"),

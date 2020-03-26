@@ -63,10 +63,10 @@ public class MappingsEvent {
             mapping.ignore();
             break;
           case "assorted_seeds":
-            mapping.remap(ModItems.seeds);
+/*            mapping.remap(ModItems.seeds);*/
             break;
           case "cooked_seeds":
-            mapping.remap(ModItems.cooked_seeds);
+/*            mapping.remap(ModItems.cooked_seeds);*/
             break;
           case "bonfire":
             mapping.remap(((BlockBase) epicsquid.roots.init.ModBlocks.pyre).getItemBlock());

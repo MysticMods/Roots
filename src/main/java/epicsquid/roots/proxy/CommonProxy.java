@@ -18,6 +18,7 @@ import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.util.OfferingUtil;
+import net.minecraft.client.model.ModelHorse;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.*;
 
