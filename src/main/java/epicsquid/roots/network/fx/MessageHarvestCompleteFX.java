@@ -51,7 +51,7 @@ public class MessageHarvestCompleteFX implements IMessage {
       World world = Minecraft.getMinecraft().world;
       for (BlockPos pos : message.affectedBlocks) {
         for (int k = 0; k < 5 + Util.rand.nextInt(2); k++) {
-          ClientProxy.particleRenderer.spawnParticle(world, Util.getLowercaseClassName(ParticleGlitter.class), (float) pos.getX(), (float) pos.getY(), (float) pos.getZ(),
+          ClientProxy.particleRenderer.spawnParticle(world, ParticleGlitter.class, (float) pos.getX(), (float) pos.getY(), (float) pos.getZ(),
               Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1),
               Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), 120, 0.607, 0.698 + Util.rand.nextDouble() * 0.05, 0.306, 1,
               Util.rand.nextDouble() + 0.5, Util.rand.nextDouble() * 2);

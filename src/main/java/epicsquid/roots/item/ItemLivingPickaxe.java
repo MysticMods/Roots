@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public class ItemLivingPickaxe extends ItemPickaxeBase implements ILivingRepair {
   public ItemLivingPickaxe(ToolMaterial material, String name) {
-    super(material, name, 2, 192, 22);
+    super(material, name, 2, 192);
   }
 
   @Override

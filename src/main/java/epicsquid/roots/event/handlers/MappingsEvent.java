@@ -3,6 +3,7 @@ package epicsquid.roots.event.handlers;
 import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticalworld.init.ModBlocks;
+import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -48,6 +49,12 @@ public class MappingsEvent {
             break;
           case "fey_light":
             mapping.ignore();
+            break;
+          case "assorted_seeds":
+            mapping.remap(ModItems.seeds);
+            break;
+          case "cooked_seeds":
+            mapping.remap(ModItems.cooked_seeds);
             break;
         }
       }

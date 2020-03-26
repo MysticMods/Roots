@@ -999,7 +999,6 @@ public class ModRecipes {
     initSummonCreatureEntries();
 
     GameRegistry.addSmelting(ModItems.flour, new ItemStack(Items.BREAD), 0.125f);
-    GameRegistry.addSmelting(ModItems.seeds, new ItemStack(ModItems.cooked_seeds), 0.05f);
     GameRegistry.addSmelting(ModItems.pereskia_bulb, new ItemStack(ModItems.cooked_pereskia), 0.125f);
 
     initCraftingRecipes();
@@ -1065,12 +1064,12 @@ public class ModRecipes {
             new ItemStack(Blocks.BROWN_MUSHROOM)));
 
     // Cooking!!!
-    addCraftingRecipe("cooked_seeds", new PyreCraftingRecipe(new ItemStack(ModItems.cooked_seeds, 5), 1).addIngredients(
-        new ItemStack(ModItems.seeds),
-        new ItemStack(ModItems.seeds),
-        new ItemStack(ModItems.seeds),
-        new ItemStack(ModItems.seeds),
-        new ItemStack(ModItems.seeds)).setBurnTime(20));
+    addCraftingRecipe("cooked_seeds", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_seeds, 5), 1).addIngredients(
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds)).setBurnTime(20));
 
     addCraftingRecipe("cooked_potato", new PyreCraftingRecipe(new ItemStack(Items.BAKED_POTATO, 5), 1).addIngredients(
         new ItemStack(Items.POTATO),
@@ -1157,13 +1156,6 @@ public class ModRecipes {
         new ItemStack(epicsquid.mysticalworld.init.ModItems.venison),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.venison),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.venison)).setBurnTime(300));
-
-    addCraftingRecipe("cooked_apple", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_apple, 5), 1).addIngredients(
-        new ItemStack(Items.APPLE),
-        new ItemStack(Items.APPLE),
-        new ItemStack(Items.APPLE),
-        new ItemStack(Items.APPLE),
-        new ItemStack(Items.APPLE)).setBurnTime(300));
 
     // END OF COOKING
 

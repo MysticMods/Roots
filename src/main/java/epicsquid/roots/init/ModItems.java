@@ -9,6 +9,7 @@ import epicsquid.mysticallib.item.ItemSeedBase;
 import epicsquid.mysticallib.material.MaterialTypes;
 import epicsquid.roots.Roots;
 import epicsquid.roots.item.*;
+import epicsquid.roots.item.materials.Materials;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFlower;
@@ -35,7 +36,7 @@ public class ModItems {
   // All mod items
   public static Item pestle, component_pouch, spell_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, wildwood_quiver, wildwood_bow,
       sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, apothecary_pouch,
-      petals, flour, living_arrow, runic_dust, seeds, cooked_seeds, cooked_pereskia, fey_leather, wildewheet_bread;
+      petals, flour, living_arrow, runic_dust, cooked_pereskia, fey_leather, wildewheet_bread;
 
   public static Item moonglow_leaf, pereskia, terra_spores, terra_moss, spirit_herb, wildewheet,
       baffle_cap, bark_oak, bark_birch, bark_spruce, bark_jungle, bark_dark_oak, bark_acacia, bark_wildwood;
@@ -107,11 +108,11 @@ public class ModItems {
     event.addItem(spell_dust = new ItemSpellDust("spell_dust").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(flour = new ItemBase("flour").setCreativeTab(Roots.tab));
     event.addItem(staff = new ItemStaff("staff").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(living_pickaxe = new ItemLivingPickaxe(ToolMaterial.IRON, "living_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(living_axe = new ItemLivingAxe(ToolMaterial.IRON, "living_axe").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(living_shovel = new ItemLivingShovel(ToolMaterial.IRON, "living_shovel").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(living_hoe = new ItemLivingHoe(ToolMaterial.IRON, "living_hoe").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(living_sword = new ItemLivingSword(ToolMaterial.IRON, "living_sword").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(living_pickaxe = new ItemLivingPickaxe(Materials.LIVING, "living_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(living_axe = new ItemLivingAxe(Materials.LIVING, "living_axe").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(living_shovel = new ItemLivingShovel(Materials.LIVING, "living_shovel").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(living_hoe = new ItemLivingHoe(Materials.LIVING, "living_hoe").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(living_sword = new ItemLivingSword(Materials.LIVING, "living_sword").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_arrow = new ItemLivingArrow("living_arrow").setCreativeTab(Roots.tab));
     event.addItem(wildwood_quiver = new ItemQuiver("wildwood_quiver").setCreativeTab(Roots.tab));
     event.addItem(wildwood_bow = new ItemWildwoodBow("wildwood_bow").setCreativeTab(Roots.tab));
@@ -139,13 +140,6 @@ public class ModItems {
     event.addItem(diamond_knife = new ItemDruidKnife("diamond_knife", ToolMaterial.DIAMOND).setCreativeTab(Roots.tab));
     event.addItem(gold_knife = new ItemDruidKnife("gold_knife", ToolMaterial.GOLD).setCreativeTab(Roots.tab));
 
-    event.addItem(seeds = new ItemBase("assorted_seeds").setCreativeTab(Roots.tab));
-    event.addItem(cooked_seeds = new ItemFoodBase("cooked_seeds", 1, 0.4f, false) {
-      @Override
-      public int getMaxItemUseDuration(ItemStack stack) {
-        return 8;
-      }
-    }.setCreativeTab(Roots.tab));
     event.addItem(cooked_pereskia = new ItemFoodBase("cooked_pereskia", 5, false).setCreativeTab(Roots.tab));
 
     event.addItem(wildewheet_bread = new ItemFoodBase("wildewheet_bread", 7, false).setCreativeTab(Roots.tab));

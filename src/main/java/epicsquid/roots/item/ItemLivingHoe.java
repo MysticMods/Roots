@@ -22,7 +22,7 @@ import java.util.List;
 public class ItemLivingHoe extends ItemHoeBase implements ILivingRepair {
 
   public ItemLivingHoe(ToolMaterial material, String name) {
-    super(material, name, 3, 192, 22);
+    super(material, name, 3, 192);
   }
 
   @Override
