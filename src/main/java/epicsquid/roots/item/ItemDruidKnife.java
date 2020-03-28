@@ -55,8 +55,8 @@ public class ItemDruidKnife extends ItemKnifeBase {
             }
           }
           world.playSound(player, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
+          return EnumActionResult.SUCCESS;
         }
-        return EnumActionResult.SUCCESS;
       }
       IBlockState result = RitualUtil.RunedWoodType.matchesAny(state);
       ItemStack offHand = player.getHeldItemOffhand();
