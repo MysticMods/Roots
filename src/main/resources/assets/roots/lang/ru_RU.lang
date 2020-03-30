@@ -336,7 +336,7 @@ jei.roots.open_book_button_text=Открыть книгу
 #=================== КОЛЧАН =======================
 roots.quiver.picked_up_arrow=Стрела подобрана.
 roots.quiver.quiver_full=Ваш колчан полон.
-roots.quiver.fragile=Эта стрела слишком хрупкая.
+roots.quiver.fragile=Выращенная стрела не может быть подобрана.
 roots.quiver.broke=Все стрелы сломаны.
 
 #=================== КОНФИГ =======================
