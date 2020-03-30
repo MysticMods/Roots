@@ -166,7 +166,7 @@ roots.ritual.ritual_purity.name=Очищение
 roots.ritual.ritual_frost_lands.name=Холодные Земли
 roots.ritual.ritual_animal_harvest.name=Жатва Животных
 roots.ritual.ritual_summon_creatures.name=Призыв Существ
-roots.ritual.ritual_wild_growth.name=Рост Дикого Корня
+roots.ritual.ritual_wild_growth.name=Перерождение
 roots.ritual.ritual_overgrowth.name=Разрастание
 roots.ritual.ritual_flower_growth.name=Рост Цветов
 roots.ritual.ritual_transmutation.name=Трансмутация
@@ -184,7 +184,7 @@ item.ritual_purity.name=Очищение
 item.ritual_frost_lands.name=Холодные Земли
 item.ritual_animal_harvest.name=Жатва Животных
 item.ritual_summon_creatures.name=Призыв Существ
-item.ritual_wild_growth.name=Рост Дикого Корня
+item.ritual_wild_growth.name=Перерождение
 item.ritual_overgrowth.name=Разрастание
 item.ritual_flower_growth.name=Рост Цветов
 item.ritual_transmutation.name=Трансмутация
@@ -323,7 +323,7 @@ jei.roots.terra_moss.desc=Может быть соскоблено с замше
 jei.roots.terra_spores.desc=Падает с высокой травы; Использование на булыжнике рядом с водой превратит его в замшелый булыжник.
 jei.roots.wildroot.desc=Падают с высокой травы или c листвы дикого дерева.
 jei.roots.bark.desc=Получается при использовании ножа на нужном бревне.
-jei.roots.wildwood.desc=Когда-то свещенное для друидов дерево, сейчас существует только в виде корней. Однако, с их помощью, можно вызвать ритуал Роста Диких Корней.
+jei.roots.wildwood.desc=Когда-то свещенное для друидов дерево, сейчас существует только в виде корней. Однако, с их помощью, можно вызвать ритуал Перерождения.
 jei.roots.wildwood_sapling.desc=Редкое молодое деревце, которое, увы, бесплодно. Почти все растения были спрятаны до лучших времён друидами прошлых веков.
 jei.roots.wildwood_leaves.desc=Слабенькие ветви священного дерева не могут держать саженцы, но в них можно найти ответ на загадку их распространения - Дикий корень.
 jei.roots.elemental_soil_fire.desc=Можно создать, бросив Элементальную почву в лаву.
@@ -368,11 +368,11 @@ roots.hud.top.pyre.progress_info=минут осталось
 roots.runic_shears.cooldown=Эквивалента фей на этот предмет нет.
 
 #===================== ТРАНСМУТАЦИЯ ======================
-roots.ritual.transmutation.deadbush_cocoa=Можно получить через Ритуал Трансмутации. Во время ритуала близлежащие мёртвые кусты превратятся в какао-бобы.
-roots.ritual.transmutation.birch_jungle=Можно получить через Ритуал Трансмутации. Во время ритуала близлежащие брёвна берёзы превращаются в бревна дерева джунглей.
-roots.ritual.transmutation.birch_jungle_leaves=Можно получить через Ритуал Трансмутации. Во время ритуала близлежащие листья берёзы превращаются в листву дерева джунглей.
-roots.ritual.transmutation.pumpkin_melon=Можно получить через Ритуал Трансмутации. Во время ритуала близлежащие тыквы с водой под ними превратятся в арбузы.
-roots.ritual.transmutation.pumpkin_cactus=Можно получить через Ритуал Трансмутации. Во время ритуала близлежащие тыквы, стоящие на песке, превратятся в кактусы.
+roots.ritual.transmutation.deadbush_cocoa=Можно получить через Ритуал Трансмутации. Во время ритуала мёртвые кусты превращаются в какао-бобы.
+roots.ritual.transmutation.birch_jungle=Можно получить через Ритуал Трансмутации. Во время ритуала брёвна берёзы превращаются в бревна дерева джунглей.
+roots.ritual.transmutation.birch_jungle_leaves=Можно получить через Ритуал Трансмутации. Во время ритуала листья берёзы превращаются в листья дерева джунглей.
+roots.ritual.transmutation.pumpkin_melon=Можно получить через Ритуал Трансмутации. Во время ритуала тыквы с водой под ними превращаются в арбузы.
+roots.ritual.transmutation.pumpkin_cactus=Можно получить через Ритуал Трансмутации. Во время ритуала тыквы поверх песка превращаются в кактусы.
 
 #======================= CT =======================
 roots.commands.dump.desc=В§2/ct roots_properties [mode]\nВ§3Dumps the specified property table(s) to the log.
