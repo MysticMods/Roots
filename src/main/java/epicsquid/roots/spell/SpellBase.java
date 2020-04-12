@@ -5,11 +5,12 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.entity.spell.EntitySpellBase;
-import epicsquid.roots.library.StaffInstance;
+import epicsquid.roots.library.StaffSpellStorage;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.modifier.Modifier;
 import epicsquid.roots.modifiers.instance.ModifierInstanceList;
+import epicsquid.roots.modifiers.modifier.ModifierList;
 import epicsquid.roots.recipe.IRootsRecipe;
 import epicsquid.roots.tileentity.TileEntityMortar;
 import epicsquid.roots.util.ClientHerbUtil;
@@ -54,6 +55,7 @@ public abstract class SpellBase extends RegistryItem {
   protected EnumCastType castType = EnumCastType.INSTANTANEOUS;
   private Object2DoubleOpenHashMap<Herb> costs = new Object2DoubleOpenHashMap<>();
   private List<Modifier> acceptedModifiers = new ArrayList<>();
+  private ModifierList modifierList = null;
   private float[] firstColours;
   private float[] secondColours;
 
@@ -108,7 +110,14 @@ public abstract class SpellBase extends RegistryItem {
     return this;
   }
 
-  public List<Modifier> getModifiers() {
+  public ModifierList getModifierList() {
+    if (modifierList == null) {
+      modifierList = new ModifierList(this);
+    }
+    return modifierList;
+  }
+
+  public List<Modifier> getModifiers () {
     return acceptedModifiers;
   }
 
@@ -179,8 +188,11 @@ public abstract class SpellBase extends RegistryItem {
     }
   }
 
+  // TODO
   private List<ItemStack> moduleItems = null;
 
+  // TODO: This should be returning Modifiers
+  @Deprecated
   @SideOnly(Side.CLIENT)
   public List<ItemStack> getModuleStacks() {
     if (moduleItems == null) {
@@ -268,7 +280,7 @@ public abstract class SpellBase extends RegistryItem {
 
   public ItemStack getResult() {
     ItemStack stack = new ItemStack(ModItems.spell_dust);
-    StaffInstance.fromStack(stack).setSpellToSlot(this);
+    StaffSpellStorage.fromStack(stack).setSpellToSlot(this);
     return stack;
   }
 

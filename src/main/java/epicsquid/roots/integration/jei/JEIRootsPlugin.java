@@ -2,7 +2,7 @@ package epicsquid.roots.integration.jei;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.ElementalSoilConfig;
-import epicsquid.roots.library.StaffInstance;
+import epicsquid.roots.library.StaffSpellStorage;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
@@ -187,7 +187,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModItems.spell_chrysopoeia), CHRYSOPOEIA);
 
     ItemStack spellDust = new ItemStack(ModItems.spell_dust);
-    StaffInstance handler = StaffInstance.fromStack(spellDust);
+    StaffSpellStorage handler = StaffSpellStorage.fromStack(spellDust);
     handler.setSpellToSlot(SpellChrysopoeia.instance);
     handler.saveToStack();
     registry.addRecipeCatalyst(spellDust, CHRYSOPOEIA);
@@ -223,7 +223,7 @@ public class JEIRootsPlugin implements IModPlugin {
     ISubtypeRegistry.ISubtypeInterpreter spellInterpreter = itemStack -> {
       Item stackItem = itemStack.getItem();
       if (stackItem != ModItems.spell_dust) return ISubtypeRegistry.ISubtypeInterpreter.NONE;
-      SpellBase spell = StaffInstance.fromStack(itemStack).getSelectedSpell();
+      SpellBase spell = StaffSpellStorage.fromStack(itemStack).getSelectedSpell();
       if (spell != null) {
         return spell.getName();
       }

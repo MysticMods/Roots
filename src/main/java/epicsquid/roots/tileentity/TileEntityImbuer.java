@@ -6,7 +6,7 @@ import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.GeneralConfig;
-import epicsquid.roots.library.StaffInstance;
+import epicsquid.roots.library.StaffSpellStorage;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.network.fx.MessageImbueCompleteFX;
@@ -100,7 +100,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
         }
       } else if (heldItem.getItem() == ModItems.staff || ModuleRegistry.isModule(heldItem)) {
         if (heldItem.getItem() == ModItems.staff) {
-          StaffInstance cap = StaffInstance.fromStack(heldItem);
+          StaffSpellStorage cap = StaffSpellStorage.fromStack(heldItem);
           if (!cap.hasFreeSlot() && inventory.getStackInSlot(0).getItem() != ModItems.runic_dust) {
             if (world.isRemote) {
               player.sendMessage(new TextComponentTranslation("roots.info.staff.no_slots").setStyle(new Style().setColor(TextFormatting.GOLD)));
@@ -209,7 +209,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
       angle += 2.0f;
       ItemStack spellDust = inventory.getStackInSlot(0);
       boolean clearSlot = spellDust.getItem() != ModItems.spell_dust;
-      StaffInstance capability = StaffInstance.fromStack(spellDust);
+      StaffSpellStorage capability = StaffSpellStorage.fromStack(spellDust);
       if ((capability.getSelectedSpell() != null) || clearSlot) {
         SpellBase spell;
         if (clearSlot) {

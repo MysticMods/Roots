@@ -1,9 +1,11 @@
 package epicsquid.roots.modifiers;
 
+import epicsquid.roots.spell.SpellBase;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.INBTSerializable;
 
-public interface IModifierList<T extends IModifier> extends Iterable<T>, INBTSerializable<NBTTagList> {
+public interface IModifierList<T extends IModifier, V extends NBTBase> extends Iterable<T>, INBTSerializable<V> {
   void clear();
 
   int size();
@@ -15,10 +17,4 @@ public interface IModifierList<T extends IModifier> extends Iterable<T>, INBTSer
   boolean add(T modifierInstance);
 
   boolean remove(Object o);
-
-  @Override
-  NBTTagList serializeNBT();
-
-  @Override
-  void deserializeNBT(NBTTagList nbt);
 }
