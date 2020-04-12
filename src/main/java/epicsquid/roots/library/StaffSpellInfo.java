@@ -4,13 +4,19 @@ import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.Constants;
 
-public class StaffSpellInstance extends SpellInstance {
-  public static StaffSpellInstance EMPTY = new StaffSpellInstance();
+import javax.annotation.Nullable;
 
+public class StaffSpellInfo extends AbstractSpellInfo<ModifierInstanceList> {
   private ModifierInstanceList modifiers = new ModifierInstanceList();
   private long cooldownStart = -1;
 
-  private StaffSpellInstance() {
+  private StaffSpellInfo() {
+  }
+
+  @Nullable
+  @Override
+  public ModifierInstanceList getModifiers() {
+    return modifiers;
   }
 
   public boolean onCooldown() {
@@ -48,8 +54,8 @@ public class StaffSpellInstance extends SpellInstance {
     this.cooldownStart = nbt.getLong("l");
   }
 
-  public static StaffSpellInstance fromNBT(NBTTagCompound tag) {
-    StaffSpellInstance instance = new StaffSpellInstance();
+  public static StaffSpellInfo fromNBT(NBTTagCompound tag) {
+    StaffSpellInfo instance = new StaffSpellInfo();
     instance.deserializeNBT(tag);
     return instance;
   }

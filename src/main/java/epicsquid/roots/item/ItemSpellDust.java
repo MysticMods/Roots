@@ -1,7 +1,7 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemBase;
-import epicsquid.roots.library.StaffInstance;
+import epicsquid.roots.library.StaffSpellStorage;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.client.util.ITooltipFlag;
@@ -33,7 +33,7 @@ public class ItemSpellDust extends ItemBase {
   @SideOnly(Side.CLIENT)
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
-    StaffInstance capability = StaffInstance.fromStack(stack);
+    StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
 
     SpellBase spell = capability.getSelectedSpell();
     if (spell == null) return;

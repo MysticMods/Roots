@@ -9,7 +9,7 @@ import net.minecraft.nbt.NBTTagList;
 import java.util.*;
 import java.util.function.Consumer;
 
-public class ModifierInstanceList implements IModifierList<ModifierInstance> {
+public class ModifierInstanceList implements IModifierList<ModifierInstance, NBTTagList> {
   private final Map<ModifierType, List<ModifierInstance>> internal;
 
   public ModifierInstanceList() {
@@ -101,7 +101,7 @@ public class ModifierInstanceList implements IModifierList<ModifierInstance> {
     }
   }
 
-  public static ModifierInstanceList fromNBT (NBTTagList tag) {
+  public static ModifierInstanceList fromNBT(NBTTagList tag) {
     ModifierInstanceList result = new ModifierInstanceList();
     result.deserializeNBT(tag);
     return result;

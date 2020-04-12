@@ -3,6 +3,7 @@ package epicsquid.roots.library;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -17,16 +18,16 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Objects;
 
-public class StaffInstance implements INBTSerializable<NBTTagCompound> {
+// TODO: Not actually a capability
+public class StaffSpellStorage implements INBTSerializable<NBTTagCompound> {
+  private static int MAX_SPELL_SLOT = 4;
+  private static int MIN_SPELL_SLOT = 0;
 
-  private Map<Integer, SpellBase> spells = new Int2ObjectOpenHashMap<>();
-  /*  private Map<Integer, List<SpellModule>> spellModules = new Int2ObjectOpenHashMap<>();*/
+  private Int2ObjectOpenHashMap<StaffSpellInfo> spells = new Int2ObjectOpenHashMap<>();
   private int selectedSlot = 0;
-  private int cooldown = 0;
-  private int lastCooldown = 0;
   private ItemStack stack;
 
-  public StaffInstance(ItemStack stack) {
+  public StaffSpellStorage(ItemStack stack) {
     this.stack = stack;
   }
 
@@ -34,13 +35,12 @@ public class StaffInstance implements INBTSerializable<NBTTagCompound> {
     return false;
   }
 
+  // TODO: What is this even used for?
   public boolean hasSpell() {
     if (!spells.isEmpty()) {
-      for (Map.Entry<Integer, SpellBase> entry : this.spells.entrySet()) {
-        if (entry != null) {
-          if (entry.getValue() != null) {
-            return true;
-          }
+      for (Int2ObjectMap.Entry<StaffSpellInfo> entry : this.spells.int2ObjectEntrySet()) {
+        if (entry.getValue() != null) {
+          return true;
         }
       }
     }
@@ -49,46 +49,72 @@ public class StaffInstance implements INBTSerializable<NBTTagCompound> {
   }
 
   public boolean hasSpellInSlot() {
-    return spells.getOrDefault(this.selectedSlot, null) != null;
+    return spells.get(this.selectedSlot) != null;
   }
 
   public boolean isEmpty() {
-    return spells.values().stream().filter(Objects::isNull).count() == 5;
+    for (Int2ObjectMap.Entry<StaffSpellInfo> entry : this.spells.int2ObjectEntrySet()) {
+      if (entry.getValue() != null) {
+        return false;
+      }
+    }
+    return true;
   }
 
-  public SpellBase getSpellInSlot(int slot) {
-    if (slot < 0 || slot >= 5) return null;
-    return spells.getOrDefault(slot, null);
+  @Nullable
+  public StaffSpellInfo getSpellInSlot(int slot) {
+    if (slot < MIN_SPELL_SLOT || slot > MAX_SPELL_SLOT) {
+      throw new IllegalStateException("Tried to get spell for invalid slot " + slot);
+    }
+    return spells.get(slot);
   }
+
+
 
   public int getCooldown() {
-    return cooldown;
+    StaffSpellInfo info = getSelectedSpell();
+    if (info == null) {
+      return -1;
+    }
+    return info.cooldown();
   }
 
-  public void setCooldown(int cooldown) {
-    this.cooldown = cooldown;
+  // TODO: Is this used? Is it used usefully?
+  @Deprecated
+  public void setCooldown() {
+    StaffSpellInfo info = getSelectedSpell();
+    if (info != null) {
+      info.use();
+    }
     saveToStack();
   }
 
+  @Deprecated
   public int getLastCooldown() {
-    return lastCooldown;
+    return -1;
   }
 
+  @Deprecated
   public void setLastCooldown(int lastCooldown) {
-    this.lastCooldown = lastCooldown;
     saveToStack();
   }
 
   @Nullable
-  public SpellBase getSelectedSpell() {
+  public StaffSpellInfo getSelectedSpell() {
     return spells.get(this.selectedSlot);
   }
 
   @SideOnly(Side.CLIENT)
   public String formatSelectedSpell() {
-    SpellBase spell = spells.get(this.selectedSlot);
-    if (spell == null) return "";
+    StaffSpellInfo info = spells.get(this.selectedSlot);
+    if (info == null) {
+      return "";
+    }
 
+    SpellBase spell = info.getSpell();
+    if (spell == null) {
+      return "";
+    }
     return "(" + spell.getTextColor() + TextFormatting.BOLD + I18n.format("roots.spell." + spell.getName() + ".name") + TextFormatting.RESET + ")";
   }
 
@@ -238,8 +264,8 @@ public class StaffInstance implements INBTSerializable<NBTTagCompound> {
   }
 
   @Nonnull
-  public static StaffInstance fromStack(ItemStack stack) {
-    StaffInstance result = new StaffInstance(stack);
+  public static StaffSpellStorage fromStack(ItemStack stack) {
+    StaffSpellStorage result = new StaffSpellStorage(stack);
     NBTTagCompound tag = stack.getTagCompound();
     if (tag != null && tag.hasKey("spell_holder")) {
       result.deserializeNBT(tag.getCompoundTag("spell_holder"));
