@@ -1,11 +1,9 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemBase;
-import epicsquid.roots.handler.SpellHandler;
+import epicsquid.roots.library.StaffInstance;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
-import epicsquid.roots.spell.modules.SpellModule;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -35,19 +33,19 @@ public class ItemSpellDust extends ItemBase {
   @SideOnly(Side.CLIENT)
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
-    SpellHandler capability = SpellHandler.fromStack(stack);
+    StaffInstance capability = StaffInstance.fromStack(stack);
 
     SpellBase spell = capability.getSelectedSpell();
     if (spell == null) return;
 
     spell.addToolTip(tooltip);
-    List<SpellModule> spellModules = capability.getSelectedModules();
+/*    List<SpellModule> spellModules = capability.getSelectedModules();
     if (!spellModules.isEmpty()) {
       tooltip.add(I18n.format("roots.spell.module.description"));
       String prefix = "roots.spell." + spell.getName();
       for (SpellModule module : spellModules) {
         tooltip.add(module.getFormat() + I18n.format("roots.spell.module." + module.getName() + ".name") + ": " + I18n.format(prefix + "." + module.getName() + ".description"));
       }
-    }
+    }*/
   }
 }

@@ -6,12 +6,12 @@ import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.GeneralConfig;
-import epicsquid.roots.handler.SpellHandler;
+import epicsquid.roots.library.StaffInstance;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.network.fx.MessageImbueCompleteFX;
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.FakeSpellRunicDust;
+import epicsquid.roots.spell.FakeSpell;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
@@ -100,7 +100,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
         }
       } else if (heldItem.getItem() == ModItems.staff || ModuleRegistry.isModule(heldItem)) {
         if (heldItem.getItem() == ModItems.staff) {
-          SpellHandler cap = SpellHandler.fromStack(heldItem);
+          StaffInstance cap = StaffInstance.fromStack(heldItem);
           if (!cap.hasFreeSlot() && inventory.getStackInSlot(0).getItem() != ModItems.runic_dust) {
             if (world.isRemote) {
               player.sendMessage(new TextComponentTranslation("roots.info.staff.no_slots").setStyle(new Style().setColor(TextFormatting.GOLD)));
@@ -209,11 +209,11 @@ public class TileEntityImbuer extends TileBase implements ITickable {
       angle += 2.0f;
       ItemStack spellDust = inventory.getStackInSlot(0);
       boolean clearSlot = spellDust.getItem() != ModItems.spell_dust;
-      SpellHandler capability = SpellHandler.fromStack(spellDust);
+      StaffInstance capability = StaffInstance.fromStack(spellDust);
       if ((capability.getSelectedSpell() != null) || clearSlot) {
         SpellBase spell;
         if (clearSlot) {
-          spell = new FakeSpellRunicDust();
+          spell = new FakeSpell();
         } else {
           spell = capability.getSelectedSpell();
         }
@@ -240,7 +240,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
               spell = capability.getSelectedSpell();
             } else {
               ItemStaff.clearData(staff);
-              spell = new FakeSpellRunicDust();
+              spell = new FakeSpell();
             }
             world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, staff));
             inventory.extractItem(0, 1, false);

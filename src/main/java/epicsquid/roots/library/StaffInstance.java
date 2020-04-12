@@ -1,10 +1,8 @@
-package epicsquid.roots.handler;
+package epicsquid.roots.library;
 
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
-import epicsquid.roots.spell.modules.ModuleRegistry;
-import epicsquid.roots.spell.modules.SpellModule;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -16,21 +14,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class SpellHandler implements INBTSerializable<NBTTagCompound> {
+public class StaffInstance implements INBTSerializable<NBTTagCompound> {
 
   private Map<Integer, SpellBase> spells = new Int2ObjectOpenHashMap<>();
-  private Map<Integer, List<SpellModule>> spellModules = new Int2ObjectOpenHashMap<>();
+  /*  private Map<Integer, List<SpellModule>> spellModules = new Int2ObjectOpenHashMap<>();*/
   private int selectedSlot = 0;
   private int cooldown = 0;
   private int lastCooldown = 0;
   private ItemStack stack;
 
-  public SpellHandler(ItemStack stack) {
+  public StaffInstance(ItemStack stack) {
     this.stack = stack;
   }
 
@@ -163,11 +159,11 @@ public class SpellHandler implements INBTSerializable<NBTTagCompound> {
     assert hasFreeSlot();
     setSelectedSlot(getNextFreeSlot());
     this.spells.put(this.selectedSlot, spell);
-    this.spellModules.remove(this.selectedSlot);
+    /*    this.spellModules.remove(this.selectedSlot);*/
     saveToStack();
   }
 
-  public void addModule(SpellModule module) {
+/*  public void addModule(SpellModule module) {
     if (this.spellModules.getOrDefault(this.selectedSlot, null) == null) {
       List<SpellModule> modules = new ArrayList<>();
       modules.add(module);
@@ -181,7 +177,7 @@ public class SpellHandler implements INBTSerializable<NBTTagCompound> {
 
   public List<SpellModule> getSelectedModules() {
     return this.spellModules.getOrDefault(this.selectedSlot, new ArrayList<>());
-  }
+  }*/
 
   public int getNextFreeSlot() {
     for (int i = 0; i < 5; i++) {
@@ -203,12 +199,12 @@ public class SpellHandler implements INBTSerializable<NBTTagCompound> {
       compound.setString("spell_" + entry.getKey(), (entry.getValue() == null) ? "" : entry.getValue().getName());
     }
 
-    for (Map.Entry<Integer, List<SpellModule>> entry : this.spellModules.entrySet()) {
+/*    for (Map.Entry<Integer, List<SpellModule>> entry : this.spellModules.entrySet()) {
       List<SpellModule> modules = entry.getValue();
       for (int i = 0; i < modules.size(); i++) {
         compound.setString(entry.getKey() + "_spell_" + i, modules.get(i).getName());
       }
-    }
+    }*/
 
     compound.setInteger("selectedSlot", this.selectedSlot);
     compound.setInteger("cooldown", this.cooldown);
@@ -224,7 +220,7 @@ public class SpellHandler implements INBTSerializable<NBTTagCompound> {
       }
     }
 
-    for (int i = 0; i < 5; i++) {
+/*    for (int i = 0; i < 5; i++) {
       List<SpellModule> modules = new ArrayList<>();
       for (int j = 0; j < 5; j++) {
         if (!tag.getString(i + "_spell_" + j).isEmpty()) {
@@ -234,7 +230,7 @@ public class SpellHandler implements INBTSerializable<NBTTagCompound> {
       if (modules.size() > 0) {
         this.spellModules.put(i, modules);
       }
-    }
+    }*/
 
     this.selectedSlot = tag.getInteger("selectedSlot");
     this.cooldown = tag.getInteger("cooldown");
@@ -242,10 +238,8 @@ public class SpellHandler implements INBTSerializable<NBTTagCompound> {
   }
 
   @Nonnull
-  public static SpellHandler fromStack(ItemStack stack) {
-    boolean correct = stack.getItem() == ModItems.spell_dust || stack.getItem() == ModItems.staff;
-
-    SpellHandler result = new SpellHandler(stack);
+  public static StaffInstance fromStack(ItemStack stack) {
+    StaffInstance result = new StaffInstance(stack);
     NBTTagCompound tag = stack.getTagCompound();
     if (tag != null && tag.hasKey("spell_holder")) {
       result.deserializeNBT(tag.getCompoundTag("spell_holder"));

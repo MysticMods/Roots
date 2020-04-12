@@ -2,10 +2,10 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.Roots;
+import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.network.fx.MessageScatterPlantFX;
-import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -13,6 +13,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -31,12 +32,12 @@ public class SpellScatter extends SpellBase {
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 3).setDescription("radius on the Y axis of the area the spell in which the spell takes effect");
   public static Property<Integer> PROP_MAX_SEEDS = new Property<>("max_seeds", 16).setDescription("maximum number of seeds planted each time the spell is cast");
 
-  public static String spellName = "spell_scatter";
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_scatter");
   public static SpellScatter instance = new SpellScatter(spellName);
 
   private int radius, radius_y, max_seeds;
 
-  public SpellScatter(String name) {
+  public SpellScatter(ResourceLocation name) {
     super(name, TextFormatting.DARK_GREEN, 188F / 255F, 244F / 255F, 151F / 255F, 71F / 255F, 132F / 255F, 30F / 255F);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS, PROP_RADIUS_Y, PROP_MAX_SEEDS);
   }
@@ -53,7 +54,7 @@ public class SpellScatter extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks) {
+  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks) {
     World world = caster.world;
     BlockPos pos = caster.getPosition();
 

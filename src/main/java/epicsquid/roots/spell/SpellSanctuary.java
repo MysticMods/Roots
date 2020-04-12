@@ -2,11 +2,12 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.Roots;
 import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.network.fx.MessageSanctuaryBurstFX;
 import epicsquid.roots.network.fx.MessageSanctuaryRingFX;
-import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.EntityUtil;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.Entity;
@@ -15,6 +16,7 @@ import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
 
@@ -33,7 +35,7 @@ public class SpellSanctuary extends SpellBase {
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("the radius on the Y axis of the area the spell in which the spell takes effect");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 4).setDescription("the radius on the Z axis of the area the spell in which the spell takes effect");
 
-  public static String spellName = "spell_sanctuary";
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_sanctuary");
   public static SpellSanctuary instance = new SpellSanctuary(spellName);
 
   private float velocity;
@@ -41,7 +43,7 @@ public class SpellSanctuary extends SpellBase {
 
   private static Set<String> entitiesBlackList = new HashSet<>();
 
-  public SpellSanctuary(String name) {
+  public SpellSanctuary(ResourceLocation name) {
     super(name, TextFormatting.DARK_PURPLE, 208f / 255f, 16f / 255f, 80f / 255f, 224f / 255f, 32f / 255f, 144f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_VELOCITY, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
   }
@@ -62,7 +64,7 @@ public class SpellSanctuary extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules, int ticks) {
+  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks) {
 
     List<Entity> entities = Util.getEntitiesWithinRadius(player.world, Entity.class, player.getPosition(), radius_x, radius_y, radius_z);
 

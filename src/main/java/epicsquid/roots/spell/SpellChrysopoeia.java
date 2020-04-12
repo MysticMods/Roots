@@ -2,10 +2,11 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.network.fx.MessageChrysopoeiaFX;
 import epicsquid.roots.recipe.ChrysopoeiaRecipe;
-import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,13 +14,11 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
-
-import java.util.List;
 
 public class SpellChrysopoeia extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(0);
@@ -28,12 +27,12 @@ public class SpellChrysopoeia extends SpellBase {
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("stalicripe", 0.5));
   public static Property<Integer> PROP_INTERVAL = new Property<>("interval", 20).setDescription("interval in ticks between each transmutation");
 
-  public static String spellName = "spell_chrysopoeia";
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_chrysopoeia");
   public static SpellChrysopoeia instance = new SpellChrysopoeia(spellName);
 
   private int interval;
 
-  public SpellChrysopoeia(String name) {
+  public SpellChrysopoeia(ResourceLocation name) {
     super(name, TextFormatting.GOLD, 176F / 255F, 169F / 255F, 158F / 255F, 224F / 255F, 174F / 255F, 99F / 255F);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_INTERVAL);
   }
@@ -69,7 +68,7 @@ public class SpellChrysopoeia extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks) {
+  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks) {
     World world = caster.world;
     ItemStack offHand = caster.getHeldItemOffhand();
     if (offHand.isEmpty()) {

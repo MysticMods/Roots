@@ -1,9 +1,10 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.network.fx.MessageShatterBurstFX;
-import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,28 +15,27 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
-
-import java.util.List;
 
 public class SpellShatter extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(20);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("stalicripe", 0.0625));
 
-  public static String spellName = "spell_shatter";
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_shatter");
   public static SpellShatter instance = new SpellShatter(spellName);
 
-  public SpellShatter(String name) {
+  public SpellShatter(ResourceLocation name) {
     super(name, TextFormatting.GRAY, 96f / 255f, 96f / 255f, 96f / 255f, 192f / 255f, 192f / 255f, 192f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1);
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
         new ItemStack(Items.FLINT),
         new ItemStack(Items.STONE_PICKAXE),
@@ -46,7 +46,7 @@ public class SpellShatter extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules, int ticks) {
+  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks) {
     if (!player.world.isRemote) {
       RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0),
           player.getLookVec().scale(8.0f).add(player.getPositionVector().add(0, player.getEyeHeight(), 0)));

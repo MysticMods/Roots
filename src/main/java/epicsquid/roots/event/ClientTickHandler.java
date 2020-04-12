@@ -31,7 +31,6 @@ public class ClientTickHandler {
         if (entry.counter-- <= 0) {
           entry.runnable.run();
           iterator.remove();
-          Roots.logger.debug("Removed a function");
         }
       }
       ticking = false;

@@ -1,24 +1,12 @@
 package epicsquid.roots.tileentity;
 
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
-import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.Roots;
-import epicsquid.roots.config.GeneralConfig;
-import epicsquid.roots.handler.SpellHandler;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.item.ItemStaff;
-import epicsquid.roots.network.fx.MessageImbueCompleteFX;
-import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.FakeSpellRunicDust;
-import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.modules.ModuleRegistry;
 import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -27,9 +15,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
