@@ -23,9 +23,9 @@ public class PouchHandlerData extends WorldSavedData {
     return identifier + uuid.toString();
   }
 
-  public PouchHandlerData(String identifier) {
-    super(identifier);
-    this.uuid = UUID.fromString(identifier.replace(PouchHandlerData.identifier, ""));
+  public PouchHandlerData(String name) {
+    super(name);
+    this.uuid = UUID.fromString(identifier.replace(identifier, ""));
     createHandler();
   }
 

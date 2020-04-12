@@ -1,7 +1,8 @@
-package epicsquid.roots.modifiers;
+package epicsquid.roots.modifiers.modifier;
 
 import epicsquid.roots.api.Herb;
-import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.modifiers.IModifier;
+import epicsquid.roots.modifiers.ModifierType;
 import epicsquid.roots.util.types.RegistryItem;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
@@ -10,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
 
-public class Modifier extends RegistryItem {
+public class Modifier extends RegistryItem implements IModifier {
   private final ModifierType modifier;
   private final double value;
   private final Herb herb;
@@ -30,12 +31,32 @@ public class Modifier extends RegistryItem {
     }
   }
 
+  @Override
+  public String getTranslationKey() {
+    return getRegistryName().getPath();
+  }
+
+  @Override
   public ItemStack getItem() {
     return item;
   }
 
-  public Object2DoubleOpenHashMap<Herb> apply (SpellBase spell) {
-    final Object2DoubleOpenHashMap<Herb> costs = spell.getCosts();
+  @Override
+  public ItemStack getActualItem() {
+    if (herb != null) {
+      return new ItemStack(herb.getItem());
+    } else {
+      return item;
+    }
+  }
+
+  @Override
+  public ModifierType getType() {
+    return modifier;
+  }
+
+  @Override
+  public Object2DoubleOpenHashMap<Herb> apply(final Object2DoubleOpenHashMap<Herb> costs) {
     if (modifier == ModifierType.NO_COST) {
       return costs;
     }

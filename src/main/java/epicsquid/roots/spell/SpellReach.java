@@ -1,16 +1,16 @@
 package epicsquid.roots.spell;
 
+import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModPotions;
-import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
-
-import java.util.List;
 
 public class SpellReach extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(800);
@@ -20,13 +20,13 @@ public class SpellReach extends SpellBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(600);
   public static Property<Double> PROP_REACH = new Property<>("reach", 5.0).setDescription("the extended reach applied to the player during the effect of the spell");
 
-  public static String spellName = "spell_reach";
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_reach");
   public static SpellReach instance = new SpellReach(spellName);
 
   public int duration;
   public double reach;
 
-  public SpellReach(String name) {
+  public SpellReach(ResourceLocation name) {
     super(name, TextFormatting.DARK_GREEN, 255f / 255f, 0f / 255f, 0f / 255f, 60f / 255f, 0f / 255f, 60f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DURATION, PROP_REACH);
   }
@@ -43,7 +43,7 @@ public class SpellReach extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks) {
+  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks) {
     caster.addPotionEffect(new PotionEffect(ModPotions.reach, duration, 0, false, false));
     return true;
   }

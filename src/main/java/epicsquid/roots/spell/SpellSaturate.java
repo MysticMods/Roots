@@ -3,8 +3,9 @@ package epicsquid.roots.spell;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.Roots;
+import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.network.fx.MessageSaturationFX;
-import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
@@ -17,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketUpdateHealth;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.FoodStats;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -41,13 +43,13 @@ public class SpellSaturate extends SpellBase {
   public static Property<Double> PROP_SATURATION_MULTIPLIER = new Property<>("saturation_multiplier", 0.5).setDescription("multiplier for the saturation value each food item gives");
   public static Property<Double> PROP_FOOD_MULTIPLIER = new Property<>("food_multiplier", 0.5).setDescription("multiplier for the food value each food item gives");
 
-  public static String spellName = "spell_saturate";
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_saturate");
   public static SpellSaturate instance = new SpellSaturate(spellName);
 
   private double saturation_multiplier, food_multiplier;
   private boolean suppressSound = false;
 
-  public SpellSaturate(String name) {
+  public SpellSaturate(ResourceLocation name) {
     super(name, TextFormatting.GOLD, 225F / 255F, 52F / 255F, 246F / 255F, 232F / 42F, 232F / 255F, 42F / 255F);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_SATURATION_MULTIPLIER, PROP_FOOD_MULTIPLIER);
     MinecraftForge.EVENT_BUS.register(this);
@@ -65,7 +67,7 @@ public class SpellSaturate extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks) {
+  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks) {
     World world = caster.world;
     FoodStats stats = caster.getFoodStats();
     int currentFood = stats.getFoodLevel();

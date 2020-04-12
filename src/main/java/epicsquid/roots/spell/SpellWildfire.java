@@ -1,28 +1,28 @@
 package epicsquid.roots.spell;
 
+import epicsquid.roots.Roots;
 import epicsquid.roots.entity.spell.EntityFireJet;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
-
-import java.util.List;
 
 public class SpellWildfire extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(24);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("infernal_bulb", 0.125));
 
-  public static String spellName = "spell_wild_fire";
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_wild_fire");
   public static SpellWildfire instance = new SpellWildfire(spellName);
 
-  public SpellWildfire(String name) {
+  public SpellWildfire(ResourceLocation name) {
     super(name, TextFormatting.GOLD, 255f / 255f, 128f / 255f, 32f / 255f, 255f / 255f, 64f / 255f, 32f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1);
   }
@@ -39,7 +39,7 @@ public class SpellWildfire extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules, int ticks) {
+  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks) {
     if (!player.world.isRemote) {
       EntityFireJet fireJet = new EntityFireJet(player.world);
       fireJet.setPlayer(player.getUniqueID());

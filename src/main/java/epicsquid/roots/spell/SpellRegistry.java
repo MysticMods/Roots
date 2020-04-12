@@ -1,25 +1,41 @@
 package epicsquid.roots.spell;
 
+import epicsquid.roots.Roots;
 import epicsquid.roots.config.SpellConfig;
+import net.minecraft.nbt.NBTTagString;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 public class SpellRegistry {
-  public static Map<String, SpellBase> spellRegistry = new HashMap<>();
+  public static Map<ResourceLocation, SpellBase> spellRegistry = new HashMap<>();
 
   public static Collection<SpellBase> getSpells () {
     return spellRegistry.values();
   }
 
   public static SpellBase getSpell(String s) {
-    SpellBase spell = spellRegistry.get(s);
+    return getSpell(new ResourceLocation(Roots.MODID, s));
+  }
+
+  public static SpellBase getSpell (ResourceLocation rl) {
+    if (rl.equals(FakeSpell.INSTANCE.getRegistryName())) {
+      return FakeSpell.INSTANCE;
+    }
+
+    SpellBase spell = spellRegistry.get(rl);
     if (spell == null) {
       return null;
     }
 
     return spell;
+  }
+
+  public static SpellBase getSpell (NBTTagString tag) {
+    ResourceLocation rl = new ResourceLocation(tag.getString());
+    return getSpell(rl);
   }
 
   public static void preInit() {

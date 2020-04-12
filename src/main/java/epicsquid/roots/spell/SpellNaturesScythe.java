@@ -2,8 +2,9 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.Roots;
+import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.network.fx.MessageFallBladesFX;
-import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFlower;
@@ -12,6 +13,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -29,12 +31,12 @@ public class SpellNaturesScythe extends SpellBase {
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 3).setDescription("radius on the Y axis of the area in which the spell takes effect");
   public static Property<Integer> PROP_INTERVAL = new Property<>("interval", 8).setDescription("interval in ticks between each harvested block");
 
-  public static String spellName = "spell_natures_scythe";
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_natures_scythe");
   public static SpellNaturesScythe instance = new SpellNaturesScythe(spellName);
 
   private int radius, radius_y, interval;
 
-  public SpellNaturesScythe(String name) {
+  public SpellNaturesScythe(ResourceLocation name) {
     super(name, TextFormatting.DARK_GREEN, 64 / 255F, 240 / 255F, 24 / 255F, 26 / 255F, 110 / 255F, 13 / 255F);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST, PROP_RADIUS, PROP_RADIUS_Y, PROP_INTERVAL);
   }
@@ -51,7 +53,7 @@ public class SpellNaturesScythe extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks) {
+  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks) {
     if (ticks % interval != 0) {
       return false;
     }

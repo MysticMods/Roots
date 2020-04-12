@@ -1,18 +1,18 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModPotions;
-import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
-
-import java.util.List;
 
 public class SpellSenseDanger extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(190);
@@ -24,12 +24,12 @@ public class SpellSenseDanger extends SpellBase {
   public static Property<Integer> PROP_GLOW_DURATION = new Property<>("glow_duration", 40 * 20).setDescription("duration in ticks of the glow effect");
   public static Property<Integer> PROP_NV_DURATION = new Property<>("night_vision_duration", 40 * 20).setDescription("duration in ticks of the night vision effect");
 
-  public static String spellName = "spell_sense_danger";
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_sense_danger");
   public static SpellSenseDanger instance = new SpellSenseDanger(spellName);
 
   private int radius_x, radius_y, radius_z, glowDuration, nvDuration;
 
-  public SpellSenseDanger(String name) {
+  public SpellSenseDanger(ResourceLocation name) {
     super(name, TextFormatting.DARK_RED, 255f / 255f, 0f / 255f, 0f / 255f, 60f / 255f, 0f / 255f, 60f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_NV_DURATION, PROP_GLOW_DURATION);
   }
@@ -46,7 +46,7 @@ public class SpellSenseDanger extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks) {
+  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks) {
     caster.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, nvDuration, 0, false, false));
     caster.addPotionEffect(new PotionEffect(ModPotions.danger_sense, glowDuration, 0, false, false));
     return true;

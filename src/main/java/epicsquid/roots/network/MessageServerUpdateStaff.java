@@ -1,6 +1,6 @@
 package epicsquid.roots.network;
 
-import epicsquid.roots.handler.SpellHandler;
+import epicsquid.roots.library.StaffInstance;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.SpellBase;
 import io.netty.buffer.ByteBuf;
@@ -58,7 +58,7 @@ public class MessageServerUpdateStaff implements IMessage {
       }
       if (staff == null) return;
 
-      SpellHandler handler = SpellHandler.fromStack(staff);
+      StaffInstance handler = StaffInstance.fromStack(staff);
       if (opcode < 50) {
         int slot = opcode - 1;
         if (handler.getSpellInSlot(slot) != null) {

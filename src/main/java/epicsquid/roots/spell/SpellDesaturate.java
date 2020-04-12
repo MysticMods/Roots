@@ -1,9 +1,10 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.network.fx.MessageDesaturationFX;
-import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -11,11 +12,10 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketUpdateHealth;
 import net.minecraft.util.FoodStats;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreIngredient;
-
-import java.util.List;
 
 public class SpellDesaturate extends SpellBase {
 
@@ -25,12 +25,12 @@ public class SpellDesaturate extends SpellBase {
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("terra_moss", 0.5));
   public static Property<Double> PROP_MULTIPLIER = new Property<>("multiplier", 0.5).setDescription("amount of health points restored by each food point");
 
-  public static String spellName = "spell_desaturate";
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_desaturate");
   public static SpellDesaturate instance = new SpellDesaturate(spellName);
 
   private double multiplier;
 
-  public SpellDesaturate(String name) {
+  public SpellDesaturate(ResourceLocation name) {
     super(name, TextFormatting.DARK_PURPLE, 184F / 255F, 232F / 255F, 42F / 255F, 109F / 255F, 32F / 255F, 168F / 255F);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_MULTIPLIER);
   }
@@ -47,7 +47,7 @@ public class SpellDesaturate extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks) {
+  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks) {
     if (!caster.shouldHeal()) {
       return false;
     }

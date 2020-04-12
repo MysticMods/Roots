@@ -1,10 +1,8 @@
 package epicsquid.roots.integration.jei;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.ElementalSoilConfig;
-import epicsquid.roots.handler.SpellHandler;
+import epicsquid.roots.library.StaffInstance;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
@@ -44,16 +42,11 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.IVanillaRecipeFactory;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.*;
@@ -194,7 +187,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModItems.spell_chrysopoeia), CHRYSOPOEIA);
 
     ItemStack spellDust = new ItemStack(ModItems.spell_dust);
-    SpellHandler handler = SpellHandler.fromStack(spellDust);
+    StaffInstance handler = StaffInstance.fromStack(spellDust);
     handler.setSpellToSlot(SpellChrysopoeia.instance);
     handler.saveToStack();
     registry.addRecipeCatalyst(spellDust, CHRYSOPOEIA);
@@ -230,7 +223,7 @@ public class JEIRootsPlugin implements IModPlugin {
     ISubtypeRegistry.ISubtypeInterpreter spellInterpreter = itemStack -> {
       Item stackItem = itemStack.getItem();
       if (stackItem != ModItems.spell_dust) return ISubtypeRegistry.ISubtypeInterpreter.NONE;
-      SpellBase spell = SpellHandler.fromStack(itemStack).getSelectedSpell();
+      SpellBase spell = StaffInstance.fromStack(itemStack).getSelectedSpell();
       if (spell != null) {
         return spell.getName();
       }

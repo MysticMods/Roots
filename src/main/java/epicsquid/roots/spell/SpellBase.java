@@ -5,21 +5,24 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.entity.spell.EntitySpellBase;
-import epicsquid.roots.handler.SpellHandler;
+import epicsquid.roots.library.StaffInstance;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.modifiers.modifier.Modifier;
+import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.recipe.IRootsRecipe;
-import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.tileentity.TileEntityMortar;
 import epicsquid.roots.util.ClientHerbUtil;
 import epicsquid.roots.util.ServerHerbUtil;
 import epicsquid.roots.util.types.Property;
 import epicsquid.roots.util.types.PropertyTable;
+import epicsquid.roots.util.types.RegistryItem;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.Style;
@@ -36,7 +39,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("Duplicates")
-public abstract class SpellBase {
+public abstract class SpellBase extends RegistryItem {
   protected PropertyTable properties = new PropertyTable();
 
   private boolean finalised = false;
@@ -50,7 +53,7 @@ public abstract class SpellBase {
   private TextFormatting textColor;
   protected EnumCastType castType = EnumCastType.INSTANTANEOUS;
   private Object2DoubleOpenHashMap<Herb> costs = new Object2DoubleOpenHashMap<>();
-  private List<SpellModule> acceptedModules = new ArrayList<>();
+  private List<Modifier> acceptedModifiers = new ArrayList<>();
   private float[] firstColours;
   private float[] secondColours;
 
@@ -60,8 +63,9 @@ public abstract class SpellBase {
     INSTANTANEOUS, CONTINUOUS
   }
 
-  public SpellBase(String name, TextFormatting textColor, float r1, float g1, float b1, float r2, float g2, float b2) {
-    this.name = name;
+  public SpellBase(ResourceLocation name, TextFormatting textColor, float r1, float g1, float b1, float r2, float g2, float b2) {
+    setRegistryName(name);
+    this.name = name.getPath();
     this.red1 = r1;
     this.green1 = g1;
     this.blue1 = b1;
@@ -81,7 +85,7 @@ public abstract class SpellBase {
     return secondColours;
   }
 
-  public abstract void init ();
+  public abstract void init();
 
   public boolean isDisabled() {
     return disabled;
@@ -92,24 +96,23 @@ public abstract class SpellBase {
   }
 
   public boolean hasModules() {
-    return !acceptedModules.isEmpty();
+    return !acceptedModifiers.isEmpty();
   }
 
-  public PropertyTable getProperties () {
+  public PropertyTable getProperties() {
     return properties;
   }
 
-  public SpellBase acceptModules(SpellModule ... modules) {
-    assert modules.length < 5;
-    acceptedModules.addAll(Arrays.asList(modules));
+  public SpellBase acceptsModifiers(Modifier... modules) {
+    acceptedModifiers.addAll(Arrays.asList(modules));
     return this;
   }
 
-  public List<SpellModule> getModules() {
-    return acceptedModules;
+  public List<Modifier> getModifiers() {
+    return acceptedModifiers;
   }
 
-  public void setRecipe (SpellRecipe recipe) {
+  public void setRecipe(SpellRecipe recipe) {
     this.recipe = recipe;
   }
 
@@ -185,9 +188,9 @@ public abstract class SpellBase {
       String prefix = "roots.spell." + name + ".";
       String mod = I18n.format("roots.spell.module.description");
 
-      for (SpellModule module : getModules()) {
-        ItemStack stack = module.getIngredient().copy();
-        String description = I18n.format(prefix + module.getName() + ".description");
+      for (Modifier module : getModifiers()) {
+        ItemStack stack = module.getActualItem();
+        String description = I18n.format(prefix + module.getTranslationKey() + ".description");
         Util.appendLoreTag(stack, mod, description);
         moduleItems.add(stack);
       }
@@ -196,7 +199,7 @@ public abstract class SpellBase {
     return moduleItems;
   }
 
-  public SpellBase addCost (SpellCost cost) {
+  public SpellBase addCost(SpellCost cost) {
     return addCost(cost.getHerb(), cost.getCost());
   }
 
@@ -213,7 +216,7 @@ public abstract class SpellBase {
     return ListUtil.matchesIngredients(ingredients, this.getIngredients());
   }
 
-  public abstract boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks);
+  public abstract boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks);
 
   public float getRed1() {
     return red1;
@@ -265,7 +268,7 @@ public abstract class SpellBase {
 
   public ItemStack getResult() {
     ItemStack stack = new ItemStack(ModItems.spell_dust);
-    SpellHandler.fromStack(stack).setSpellToSlot(this);
+    StaffInstance.fromStack(stack).setSpellToSlot(this);
     return stack;
   }
 
@@ -276,7 +279,7 @@ public abstract class SpellBase {
   public abstract void doFinalise();
 
   @SuppressWarnings("unchecked")
-  public void finaliseCosts () {
+  public void finaliseCosts() {
     for (Map.Entry<String, Property<?>> entry : getProperties()) {
       if (!entry.getKey().startsWith("cost_")) {
         continue;
@@ -292,13 +295,13 @@ public abstract class SpellBase {
     this.finalised = true;
   }
 
-  public void finalise () {
+  public void finalise() {
     doFinalise();
     finaliseCosts();
     validateProperties();
   }
 
-  public void validateProperties () {
+  public void validateProperties() {
     List<String> values = properties.finalise();
     if (!values.isEmpty()) {
       StringJoiner join = new StringJoiner(",");
@@ -307,7 +310,7 @@ public abstract class SpellBase {
     }
   }
 
-  public boolean finalised () {
+  public boolean finalised() {
     return finalised;
   }
 
@@ -346,7 +349,7 @@ public abstract class SpellBase {
       this.cost = cost;
     }
 
-    public Herb getHerb () {
+    public Herb getHerb() {
       return HerbRegistry.getHerbByName(herb);
     }
 

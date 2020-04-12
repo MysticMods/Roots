@@ -2,8 +2,9 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.Roots;
+import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.network.fx.MessageFallBladesFX;
-import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockDoublePlant;
@@ -14,6 +15,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -32,12 +34,12 @@ public class SpellNaturesBlades extends SpellBase {
   public static Property<Integer> PROP_GRASS_CHANCE = new Property<>("grass_chance", 12).setDescription("chance for the spell to generate tall grass in the area (the higher the number is the lower the chance is: 1/x) [default: 1/15]");
   public static Property<Integer> PROP_UPGRADE_CHANCE = new Property<>("upgrade_chance", 40).setDescription("chance for the spell to upgrade tall grass in the area to a double tall grass (the higher the number is the lower the chance is: 1/x) [default: 1/30]");
 
-  public static String spellName = "spell_natures_blades";
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_natures_blades");
   public static SpellNaturesBlades instance = new SpellNaturesBlades(spellName);
 
   private int radius, radius_y, grass_chance, upgrade_chance;
 
-  public SpellNaturesBlades(String name) {
+  public SpellNaturesBlades(ResourceLocation name) {
     super(name, TextFormatting.GREEN, 64 / 255F, 240 / 255F, 24 / 255F, 26 / 255F, 110 / 255F, 13 / 255F);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST, PROP_RADIUS, PROP_RADIUS_Y, PROP_GRASS_CHANCE, PROP_UPGRADE_CHANCE);
   }
@@ -54,7 +56,7 @@ public class SpellNaturesBlades extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks) {
+  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks) {
     World world = caster.world;
     List<BlockPos> blocks = Util.getBlocksWithinRadius(caster.world, caster.getPosition(), radius, radius_y, radius, pos -> (world.getBlockState(pos).getBlock() == Blocks.TALLGRASS && world.getBlockState(pos).getValue(BlockTallGrass.TYPE) != BlockTallGrass.EnumType.DEAD_BUSH && world.isAirBlock(pos.up())) || (world.getBlockState(pos) == Blocks.DIRT && world.getBlockState(pos).getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT && world.isAirBlock(pos.up())) || (world.getBlockState(pos).getBlock() == Blocks.GRASS && world.isAirBlock(pos.up())));
 

@@ -2,9 +2,10 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.network.fx.MessageThawFX;
-import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
@@ -13,6 +14,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -31,12 +33,12 @@ public class SpellSummersThaw extends SpellBase {
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 5).setDescription("radius on the Z axis of the area in which the spell takes effect");
   public static Property<Integer> PROP_MAX_AFFECTED = new Property<>("max_affected", 5).setDescription("maximum affected blocks each time the spell is cast");
 
-  public static String spellName = "spell_summers_thaw";
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_summers_thaw");
   public static SpellSummersThaw instance = new SpellSummersThaw(spellName);
 
   private int radius_x, radius_y, radius_z, max;
 
-  public SpellSummersThaw(String name) {
+  public SpellSummersThaw(ResourceLocation name) {
     super(name, TextFormatting.RED, 25F / 255F, 1F, 235F / 255F, 252F / 255F, 166F / 255F, 37F / 255F);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_MAX_AFFECTED);
   }
@@ -69,7 +71,7 @@ public class SpellSummersThaw extends SpellBase {
 
   @SuppressWarnings("deprecation")
   @Override
-  public boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks) {
+  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks) {
     BlockPos pos = caster.getPosition();
     World world = caster.world;
     int mX = pos.getX();
