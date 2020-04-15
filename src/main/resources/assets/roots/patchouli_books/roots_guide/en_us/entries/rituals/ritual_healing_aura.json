@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Nearby players are slowly healed, while creatures are healed much more rapidly while in proximity of the ritual.$(br2)$(warning) Hostile creatures will also be healed. Be wary!$(br2)$(standing_stones) $(l:rituals/ritual_healing_aura#multiblock)This ritual requires standing stones.$()"
+      "text": "Nearby players are slowly healed, while creatures are healed much more rapidly while in proximity of the ritual.$(br2)$(info) Hostile creatures are not affected.$(br2)$(standing_stones) $(l:rituals/ritual_healing_aura#multiblock)This ritual requires standing stones.$()"
     },
     {
       "type": "pyre_template",

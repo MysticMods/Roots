@@ -3,6 +3,7 @@ package epicsquid.roots.entity.ritual;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualHealingAura;
 import epicsquid.roots.ritual.RitualRegistry;
+import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -55,6 +56,9 @@ public class EntityRitualHealingAura extends EntityRitualBase {
       List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
       for (EntityLivingBase e : entities) {
         if (e instanceof EntityPlayer) {
+          continue;
+        }
+        if (EntityUtil.isHostile(e)) {
           continue;
         }
         if (!world.isRemote) {
