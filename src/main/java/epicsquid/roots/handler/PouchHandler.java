@@ -3,6 +3,7 @@ package epicsquid.roots.handler;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.item.ItemPouch;
+import epicsquid.roots.item.PouchType;
 import epicsquid.roots.world.data.PouchHandlerData;
 import epicsquid.roots.world.data.PouchHandlerRegistry;
 import net.minecraft.item.ItemStack;
@@ -83,8 +84,8 @@ public class PouchHandler implements IPouchHandler {
   }
 
   @Override
-  public boolean isApothecary() {
-    return ((ItemPouch) pouch.getItem()).isApothecary();
+  public PouchType getPouchType() {
+    return ItemPouch.getPouchType(pouch);
   }
 
   @Override

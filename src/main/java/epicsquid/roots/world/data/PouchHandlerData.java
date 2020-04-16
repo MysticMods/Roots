@@ -1,7 +1,7 @@
 package epicsquid.roots.world.data;
 
-import epicsquid.roots.handler.PouchHandler;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.item.PouchType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,6 +9,7 @@ import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 import java.util.UUID;
 
 @SuppressWarnings({"WeakerAccess", "NullableProblems"})
@@ -18,26 +19,47 @@ public class PouchHandlerData extends WorldSavedData {
   private UUID uuid;
   private MarkDirtyHandler inventoryHandler;
   private HerbHandler herbHandler;
+  private PouchType type = null;
+  private boolean defer = false;
 
   public static String name(UUID uuid) {
     return identifier + uuid.toString();
   }
 
+  public PouchType getType() {
+    return type;
+  }
+
   public PouchHandlerData(String identifier) {
     super(identifier);
     this.uuid = UUID.fromString(identifier.replace(PouchHandlerData.identifier, ""));
+    defer = true;
+  }
+
+  public PouchHandlerData(UUID uuid, PouchType type) {
+    super(name(uuid));
+    this.uuid = uuid;
+    this.type = type;
     createHandler();
   }
 
-  public PouchHandlerData(UUID uuid) {
-    super(name(uuid));
-    this.uuid = uuid;
-    createHandler();
+  public void upgrade (PouchType newType) {
+    if (type.ordinal() >= newType.ordinal()) {
+      return;
+    }
+
+    this.type = newType;
+    this.inventoryHandler.setSize(type.inventorySlots());
+    this.herbHandler.setSize(type.herbSlots());
+    markDirty();
   }
 
   private void createHandler() {
-    this.inventoryHandler = new MarkDirtyHandler(PouchHandler.APOTHECARY_POUCH_INVENTORY_SLOTS);
-    this.herbHandler = new HerbHandler(PouchHandler.APOTHECARY_POUCH_HERB_SLOTS);
+    if (type == null) {
+      throw new IllegalStateException("Attempted to instantiate PouchHandlerData before type was set.");
+    }
+    this.inventoryHandler = new MarkDirtyHandler(type.inventorySlots());
+    this.herbHandler = new HerbHandler(type.herbSlots());
   }
 
   public int refill(ItemStack herbStack) {
@@ -58,12 +80,17 @@ public class PouchHandlerData extends WorldSavedData {
 
   @Override
   public void readFromNBT(NBTTagCompound nbt) {
+    this.type = PouchType.fromOrdinal(nbt.getInteger("pouch"));
+    if (defer) {
+      createHandler();
+    }
     inventoryHandler.deserializeNBT(nbt.getCompoundTag("inventory"));
     herbHandler.deserializeNBT(nbt.getCompoundTag("herbs"));
   }
 
   @Override
   public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+    compound.setInteger("pouch", type.ordinal());
     compound.setTag("inventory", inventoryHandler.serializeNBT());
     compound.setTag("herbs", herbHandler.serializeNBT());
     return compound;
@@ -78,6 +105,15 @@ public class PouchHandlerData extends WorldSavedData {
     protected void onContentsChanged(int slot) {
       super.onContentsChanged(slot);
       markDirty();
+    }
+
+    @Override
+    public void setSize(int size) {
+      List<ItemStack> original = stacks;
+      super.setSize(size);
+      for (int i = 0; i < Math.min(original.size(), size); i++) {
+        stacks.set(i, original.get(i));
+      }
     }
   }
 
