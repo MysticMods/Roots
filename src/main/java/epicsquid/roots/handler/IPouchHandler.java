@@ -9,7 +9,6 @@ import javax.annotation.Nullable;
 public interface IPouchHandler {
 
   PouchType getPouchType ();
-  void setPouchType ();
 
   int refill(ItemStack herbStack);
 

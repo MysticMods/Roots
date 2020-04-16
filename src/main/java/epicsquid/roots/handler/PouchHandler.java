@@ -30,10 +30,11 @@ public class PouchHandler implements IPouchHandler {
 
     NBTTagCompound tag = ItemUtil.getOrCreateTag(pouch);
     PouchHandlerData data;
+    PouchType type = ItemPouch.getPouchType(pouch);
     if (tag.hasUniqueId("bag_id")) {
-      data = PouchHandlerRegistry.getData(tag.getUniqueId("bag_id"));
+      data = PouchHandlerRegistry.getData(tag.getUniqueId("bag_id"), type);
     } else {
-      data = PouchHandlerRegistry.getNewData();
+      data = PouchHandlerRegistry.getNewData(type);
       tag.setUniqueId("bag_id", data.getUuid());
     }
     this.inventorySlots = data.getInventoryHandler();

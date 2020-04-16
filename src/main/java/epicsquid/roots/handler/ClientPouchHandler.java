@@ -22,10 +22,6 @@ public class ClientPouchHandler implements IPouchHandler {
   }
 
   @Override
-  public void setPouchType() {
-  }
-
-  @Override
   public int refill(ItemStack herbStack) {
     return 0;
   }
