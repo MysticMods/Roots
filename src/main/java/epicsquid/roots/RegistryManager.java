@@ -47,14 +47,6 @@ public class RegistryManager {
     ModRecipes.initRecipes(event);
   }
 
-  @SubscribeEvent
-  public static void worldGenInit(RegisterWorldGenEvent event) {
-    LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
-
-    /*GameRegistry.registerWorldGenerator(new WorldGenWildlandGrove(), 102);
-    GameRegistry.registerWorldGenerator(new WorldGenNaturalGrove(), 103);*/
-  }
-
   @SideOnly(Side.CLIENT)
   @SubscribeEvent
   public static void onRegisterCustomModels(@Nonnull RegisterParticleEvent event) {
@@ -93,7 +85,7 @@ public class RegistryManager {
       } else {
         return 0xFFFFFF;
       }
-    }, ModItems.component_pouch, ModItems.apothecary_pouch);
+    }, ModItems.component_pouch, ModItems.apothecary_pouch, ModItems.herb_pouch);
   }
 
   @SubscribeEvent
