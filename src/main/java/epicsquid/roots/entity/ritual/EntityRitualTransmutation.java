@@ -50,8 +50,8 @@ public class EntityRitualTransmutation extends EntityRitualBase {
         return;
       }
       BlockPos pos = positions.remove(Util.rand.nextInt(positions.size()));
-      while (!positions.isEmpty()) {
-        if (transmuteBlock(world, pos)) {
+      while (true) {
+        if (transmuteBlock(world, pos) || positions.isEmpty()) {
           break;
         } else {
           pos = positions.remove(Util.rand.nextInt(positions.size()));
