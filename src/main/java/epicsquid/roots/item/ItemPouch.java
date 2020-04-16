@@ -8,7 +8,6 @@ import epicsquid.roots.GuiHandler;
 import epicsquid.roots.client.Keybinds;
 import epicsquid.roots.handler.PouchHandler;
 import epicsquid.roots.init.HerbRegistry;
-import epicsquid.roots.integration.baubles.pouch.PouchEquipHandler;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,9 +28,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemPouch extends ItemBase implements IItemPouch {
-  public enum PouchType {
-    COMPONENT, APOTHECARY, CREATIVE;
-  }
 
   private PouchType type = PouchType.COMPONENT;
 
@@ -45,12 +41,15 @@ public class ItemPouch extends ItemBase implements IItemPouch {
     this.type = type;
   }
 
-  public boolean isApothecary() {
-    return this.type == PouchType.APOTHECARY;
+  public PouchType getType() {
+    return type;
   }
 
-  public boolean isCreative () {
-    return this.type == PouchType.CREATIVE;
+  public static PouchType getPouchType (ItemStack pouch) {
+    if (!(pouch.getItem() instanceof ItemPouch)) {
+      return null;
+    }
+    return ((ItemPouch)pouch.getItem()).getType();
   }
 
   public static double getHerbQuantity(EntityPlayer player, ItemStack pouch, Herb herb) {

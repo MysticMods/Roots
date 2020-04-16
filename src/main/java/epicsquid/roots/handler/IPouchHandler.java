@@ -1,17 +1,29 @@
 package epicsquid.roots.handler;
 
+import epicsquid.roots.item.PouchType;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
+import javax.annotation.Nullable;
+
 public interface IPouchHandler {
-  int COMPONENT_POUCH_HERB_SLOTS = 6;
-  int COMPONENT_POUCH_INVENTORY_SLOTS = 12;
-  int APOTHECARY_POUCH_HERB_SLOTS = 9;
-  int APOTHECARY_POUCH_INVENTORY_SLOTS = 18;
+
+  PouchType getPouchType ();
+  void setPouchType ();
 
   int refill(ItemStack herbStack);
 
-  boolean isApothecary();
+  default boolean isApothecary() {
+    return getPouchType() == PouchType.APOTHECARY;
+  }
+
+  default boolean isHerb() {
+    return getPouchType() == PouchType.HERB;
+  }
+
+  default boolean isCreative () {
+    return getPouchType() == PouchType.CREATIVE;
+  }
 
   IItemHandlerModifiable getInventory();
 

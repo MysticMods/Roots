@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " W ",
+    "W W",
+    "WWW"  ],
+  "key": {
+    "W": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "wool"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:herb_pouch",
+    "data": 0
+  }
+}
