@@ -33,7 +33,7 @@ import java.util.List;
 public class ModItems {
 
   // All mod items
-  public static Item pestle, component_pouch, spell_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, wildwood_quiver, wildwood_bow,
+  public static Item pestle, herb_pouch, component_pouch, spell_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, wildwood_quiver, wildwood_bow,
       sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, apothecary_pouch, wooden_shears,
       petals, flour, living_arrow, runic_dust, cooked_pereskia, fey_leather, wildewheet_bread;
 
@@ -106,6 +106,7 @@ public class ModItems {
     event.addItem(salmon = new ItemSalmon("salmon_of_knowledge").setCreativeTab(Roots.tab));
 
     event.addItem(pestle = new ItemPestle("pestle").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(herb_pouch = new ItemHerbPouch("herb_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(component_pouch = new ItemPouch("component_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(creative_pouch = new ItemCreativePouch("creative_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(apothecary_pouch = new ItemApothecaryPouch("apothecary_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
