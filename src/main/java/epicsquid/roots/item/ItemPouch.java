@@ -28,8 +28,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemPouch extends ItemBase implements IItemPouch {
-
-  private PouchType type = PouchType.COMPONENT;
+  protected PouchType type = PouchType.COMPONENT;
 
   public ItemPouch(@Nonnull String name) {
     super(name);
