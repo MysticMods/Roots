@@ -40,6 +40,7 @@ item.wildwood_leggings.name=Wildwood Leggings
 item.wildwood_boots.name=Wildwood Boots
 item.component_pouch.name=Component Pouch
 item.creative_pouch.name=Creative Component Pouch
+item.herb_pouch.name=Herb Pouch
 item.apothecary_pouch.name=Apothecary Pouch
 item.wildwood_door.name=Wildwood Door
 item.life_essence.name=Essence of Unknown Life
@@ -94,6 +95,7 @@ tile.runed_spruce.name=Runed Spruce
 tile.runed_wildwood.name=Runed Wildwood
 
 roots.tooltip.petaldust.notag=This Spell Dust has no NBT data! It is potentially prone to errors and should not be used!
+roots.tooltip.color=Dyed %s.
 roots.tooltip.runed_dagger=Causes enemies struck to bleed, stacking up to three times.
 roots.tooltip.salmon.invalid=This contains invalid NBT data.
 roots.tooltip.salmon.advancements=Grants the following advancements: %s

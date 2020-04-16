@@ -22,10 +22,10 @@ public class GuiPouch extends GuiContainer {
   public GuiPouch(@Nonnull ContainerPouch containerPouch) {
     super(containerPouch);
     this.containerPouch = containerPouch;
-    if (isComponentPouch()) {
-      xSize = 150;
-    } else {
+    if (!isComponentPouch() && !isHerbPouch()) {
       xSize = 170;
+    } else {
+      xSize = 150;
     }
     ySize = 100;
   }
@@ -40,13 +40,31 @@ public class GuiPouch extends GuiContainer {
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
     GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-    this.mc.getTextureManager().bindTexture(new ResourceLocation(Roots.MODID, isComponentPouch() ? "textures/gui/component_pouch_gui.png" : "textures/gui/apothecary_pouch_gui.png"));
+    ResourceLocation rl;
+    if (containerPouch.isApothecary()) {
+      rl = new ResourceLocation(Roots.MODID, "textures/gui/apothecary_pouch_gui.png");
+    } else if (containerPouch.isHerb()) {
+      rl = new ResourceLocation(Roots.MODID, "textures/gui/herb_pouch_gui.png");
+    } else {
+      rl = new ResourceLocation(Roots.MODID, "textures/gui/component_pouch_gui.png");
+    }
+    this.mc.getTextureManager().bindTexture(rl);
     int i = (this.width - this.xSize) / 2;
     int j = (this.height - this.ySize) / 2;
-    this.drawTexturedModalRect(i - (isComponentPouch() ? 13 : 35), j - (isComponentPouch() ? 55 : 63), 0, 0, isComponentPouch() ? 176 : 213, isComponentPouch() ? 207 : 215);
+    if (containerPouch.isApothecary()) {
+      this.drawTexturedModalRect(i - 35, j - 63, 0, 0, 213, 215);
+    } else { //if (containerPouch.isHerb()) {
+      this.drawTexturedModalRect(i - 13, j - 55, 0, 0, 176, 207);
+/*    } else {
+      this.drawTexturedModalRect(i - 13, j - 55, 0, 0, 176, 207);*/
+    }
   }
 
   private boolean isComponentPouch() {
-    return !containerPouch.isApothecary();
+    return !containerPouch.isApothecary() && !containerPouch.isHerb();
+  }
+
+  private boolean isHerbPouch() {
+    return containerPouch.isHerb();
   }
 }

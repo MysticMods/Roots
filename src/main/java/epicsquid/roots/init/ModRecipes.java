@@ -1330,6 +1330,13 @@ public class ModRecipes {
         new OreIngredient("plankWood"),
         new OreIngredient("gemDiamond")));
 
+    addFeyCraftingRecipe("component_pouch", new FeyCraftingRecipe(new ItemStack(ModItems.component_pouch), 1).addIngredients(
+        new OreIngredient("chestWood"),
+        new OreIngredient("wool"),
+        new OreIngredient("wool"),
+        new OreIngredient("wildroot"),
+        new OreIngredient("rootsBark")));
+
     addFeyCraftingRecipe("apothecary_pouch", new ApothecaryPouchRecipe(new ItemStack(ModItems.apothecary_pouch), 1).addIngredients(
         new OreIngredient("chestEnder"),
         new ItemStack(ModItems.bark_wildwood),
