@@ -19,12 +19,7 @@ import java.util.List;
 
 public class ItemCreativePouch extends ItemPouch {
   public ItemCreativePouch(@Nonnull String name) {
-    super(name);
-  }
-
-  @Override
-  public boolean isCreative() {
-    return true;
+    super(name, PouchType.CREATIVE);
   }
 
   @Override

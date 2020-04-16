@@ -2,6 +2,7 @@ package epicsquid.roots.handler;
 
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.item.ItemPouch;
+import epicsquid.roots.item.PouchType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -65,8 +66,8 @@ public class OldPouchHandler implements INBTSerializable<NBTTagCompound> {
 
   public static OldPouchHandler getHandler(ItemStack stack) {
     OldPouchHandler handler;
-    boolean isApoth = ((ItemPouch) stack.getItem()).isApothecary();
-    if (isApoth) {
+    PouchType type = ItemPouch.getPouchType(stack);
+    if (type == PouchType.APOTHECARY) {
       handler = new OldPouchHandler(stack, APOTHECARY_POUCH_INVENTORY_SLOTS, APOTHECARY_POUCH_HERB_SLOTS);
     } else {
       handler = new OldPouchHandler(stack, COMPONENT_POUCH_INVENTORY_SLOTS, COMPONENT_POUCH_HERB_SLOTS);

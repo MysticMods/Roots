@@ -1,6 +1,7 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemBase;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.config.GeneralConfig;
@@ -11,6 +12,7 @@ import epicsquid.roots.init.HerbRegistry;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
@@ -18,6 +20,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -154,6 +157,14 @@ public class ItemPouch extends ItemBase implements IItemPouch {
       tooltip.add("");
       tooltip.add(TextFormatting.LIGHT_PURPLE + I18n.format("roots.tooltip.refill"));
     }
+
+    NBTTagCompound tag = ItemUtil.getOrCreateTag(stack);
+    EnumDyeColor color = EnumDyeColor.BROWN;
+    if (tag.hasKey("color", Constants.NBT.TAG_INT)) {
+      color = EnumDyeColor.byMetadata(tag.getInteger("color"));
+    }
+    tooltip.add("");
+    tooltip.add(I18n.format("roots.tooltip.color", I18n.format(color.getTranslationKey())));
 
     super.addInformation(stack, worldIn, tooltip, flagIn);
   }
