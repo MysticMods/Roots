@@ -149,7 +149,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
           }
         } else {
           ItemStack toRepair = inventory.getStackInSlot(1);
-          if (GeneralConfig.AllowImbuerRepair && !toRepair.isEmpty() && toRepair.isItemStackDamageable() && toRepair.getItem().getIsRepairable(toRepair, heldItem)) {
+          if (GeneralConfig.AllowImbuerRepair && !toRepair.isEmpty() && toRepair.isItemStackDamageable() && toRepair.getItem().getIsRepairable(toRepair, heldItem) && inventory.getStackInSlot(0).isEmpty()) {
             ItemStack repairItem = heldItem.copy();
             repairItem.setCount(1);
             int repairAmount = Math.min(toRepair.getItemDamage(), toRepair.getMaxDamage() / GeneralConfig.MaxDamageDivisor);
