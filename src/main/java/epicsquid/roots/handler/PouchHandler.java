@@ -42,9 +42,8 @@ public class PouchHandler implements IPouchHandler {
     markDirty = data::markDirty;
     filler = data::refill;
 
-    if (tag.hasKey("inventory_slots", Constants.NBT.TAG_COMPOUND) && tag.hasKey("herb_slots")) {
-      boolean apoth = this.isApothecary();
-      OldPouchHandler oldPouch = new OldPouchHandler(this.pouch, apoth ? OldPouchHandler.APOTHECARY_POUCH_INVENTORY_SLOTS : OldPouchHandler.COMPONENT_POUCH_INVENTORY_SLOTS, apoth ? OldPouchHandler.APOTHECARY_POUCH_HERB_SLOTS : OldPouchHandler.COMPONENT_POUCH_HERB_SLOTS);
+    if (tag.hasKey("handler", Constants.NBT.TAG_COMPOUND)) {
+      OldPouchHandler oldPouch = OldPouchHandler.getHandler(pouch);
       List<ItemStack> oldInventory = new ArrayList<>();
       List<ItemStack> oldHerbs = new ArrayList<>();
       OldPouchHandler.PouchItemHandler current = oldPouch.getInventory();
@@ -73,8 +72,7 @@ public class PouchHandler implements IPouchHandler {
           Roots.logger.error("Unable to fully merge itemstack " + stack.toString() + " into new component/apothecary herbs.");
         }
       }
-      tag.removeTag("inventory_slots");
-      tag.removeTag("herb_slots");
+      tag.removeTag("handler");
       markDirty();
     }
   }
