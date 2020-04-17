@@ -23,11 +23,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public abstract class RitualBase {
-  protected static int offering_RADIUS = 6;
   protected static Random random = new Random();
 
   protected PropertyTable properties = new PropertyTable();
-  public Class<? extends EntityRitualBase> entityClass;
+  private Class<? extends EntityRitualBase> entityClass;
   private List<ICondition> conditions = new ArrayList<>();
   private Item icon;
   private String name;
@@ -39,7 +38,7 @@ public abstract class RitualBase {
   protected int duration;
 
   protected boolean disabled;
-  protected boolean finalised;
+  private boolean finalised;
 
   public RitualBase(String name, boolean disabled) {
     this.name = name;
@@ -109,7 +108,7 @@ public abstract class RitualBase {
     return checkTileConditions(Pyre, player);
   }
 
-  public boolean checkTileConditions(TileEntityPyre tileEntityPyre, @Nullable EntityPlayer player) {
+  private boolean checkTileConditions(TileEntityPyre tileEntityPyre, @Nullable EntityPlayer player) {
     boolean success = true;
     for (ICondition condition : this.conditions) {
       if (!condition.check(tileEntityPyre, player)) {
@@ -177,6 +176,7 @@ public abstract class RitualBase {
   public void finalise() {
     doFinalise();
     validateProperties();
+    finalised = true;
   }
 
   public abstract void doFinalise();
@@ -196,6 +196,14 @@ public abstract class RitualBase {
 
   public PropertyTable getProperties() {
     return properties;
+  }
+
+  public AxisAlignedBB getBoundingBox () {
+    int[] r = properties.getRadius("radius");
+    if (r == null) {
+      throw new UnsupportedOperationException("getBoundingBox needs to be overridden for " + this.getClass().getCanonicalName());
+    }
+    return new AxisAlignedBB(-(r[0] + 1), -(r[1] + 1), -(r[2] + 1), r[0], r[1], r[2]);
   }
 
   public static class RitualRecipe implements IRootsRecipe<TileEntityPyre> {

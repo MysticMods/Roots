@@ -1,5 +1,7 @@
 package epicsquid.roots.tileentity;
 
+import com.google.common.collect.Sets;
+import epicsquid.mysticallib.particle.RenderUtil;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
@@ -10,9 +12,7 @@ import epicsquid.roots.entity.ritual.EntityRitualFrostLands;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
-import epicsquid.roots.ritual.IColdRitual;
-import epicsquid.roots.ritual.RitualBase;
-import epicsquid.roots.ritual.RitualRegistry;
+import epicsquid.roots.ritual.*;
 import epicsquid.roots.util.IngredientWithStack;
 import epicsquid.roots.util.ItemHandlerUtil;
 import epicsquid.roots.util.XPUtil;
@@ -42,7 +42,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
@@ -56,8 +55,9 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
-public class TileEntityPyre extends TileBase implements ITickable {
+public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IRanged {
   public static AxisAlignedBB bounding = new AxisAlignedBB(-1, -1, -1, 1, 1, 1);
 
   private float ticker = 0;
@@ -663,5 +663,47 @@ public class TileEntityPyre extends TileBase implements ITickable {
 
   public float getTicker() {
     return ticker;
+  }
+
+  private boolean showingRange = false;
+
+  @Override
+  public boolean isShowingRange() {
+    return showingRange;
+  }
+
+  @Override
+  public void toggleShowRange() {
+    this.showingRange = !showingRange;
+  }
+
+  @Override
+  public void setShowingRange(boolean showingRange) {
+    this.showingRange = showingRange;
+  }
+
+  private static AxisAlignedBB nullBox = new AxisAlignedBB(0, 0, 0, 0, 0, 0);
+
+  private static Set<Class<?>> excluded = Sets.newHashSet(RitualGroveSupplication.class, RitualFireStorm.class);
+  // Summon Creatures
+
+  @Nonnull
+  @Override
+  public AxisAlignedBB getBounds() {
+    RitualBase ritual = RitualRegistry.getRitual(this, null);
+    if (ritual == null) { // Shouldn't happen*/
+      return nullBox;
+    }
+
+    if (excluded.contains(ritual.getClass())) {
+      return nullBox;
+    }
+
+    AxisAlignedBB bb = ritual.getBoundingBox();
+    if (bb == null) {
+      return nullBox;
+    }
+
+    return bb;
   }
 }
