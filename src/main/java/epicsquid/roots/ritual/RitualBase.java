@@ -207,12 +207,15 @@ public abstract class RitualBase {
     return properties;
   }
 
-  public AxisAlignedBB getBoundingBox () {
-    int[] r = properties.getRadius("radius");
-    if (r == null) {
-      throw new UnsupportedOperationException("getBoundingBox needs to be overridden for " + this.getClass().getCanonicalName());
+  public AxisAlignedBB getBoundingBox() {
+    if (properties.hasProperty("radius_x") && properties.hasProperty("radius_y") && properties.hasProperty("radius_z")) {
+      int x = properties.getValue("radius_x");
+      int y = properties.getValue("radius_y");
+      int z = properties.getValue("radius_z");
+      return new AxisAlignedBB(-x, -y, -z, x, y, z);
+    } else {
+      return null;
     }
-    return new AxisAlignedBB(-(r[0] + 1), -(r[1] + 1), -(r[2] + 1), r[0], r[1], r[2]);
   }
 
   public static class RitualRecipe implements IRootsRecipe<TileEntityPyre> {

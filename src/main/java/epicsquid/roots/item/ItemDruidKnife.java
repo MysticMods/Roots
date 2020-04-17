@@ -2,10 +2,13 @@ package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemKnifeBase;
 import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.roots.block.BlockPyre;
 import epicsquid.roots.config.MossConfig;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.dispenser.DispenseKnife;
 import epicsquid.roots.util.RitualUtil;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -42,6 +45,12 @@ public class ItemDruidKnife extends ItemKnifeBase {
   public EnumActionResult onItemUse(@Nonnull EntityPlayer player, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
     if (hand == EnumHand.MAIN_HAND) {
       IBlockState state = world.getBlockState(pos);
+      Block block = state.getBlock();
+      if (player.isSneaking() && block == ModBlocks.reinforced_pyre || block == ModBlocks.pyre) {
+        if (block.onBlockActivated(world, pos, state, player, hand, facing, hitX, hitY, hitZ)) {
+          return EnumActionResult.SUCCESS;
+        }
+      }
       if (!MossConfig.getBlacklistDimensions().contains(world.provider.getDimension())) {
         // Used to get terramoss from a block of cobble. This can also be done using runic shears.
         IBlockState result = MossConfig.scrapeResult(state);
