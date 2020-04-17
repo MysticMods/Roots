@@ -5,11 +5,13 @@ import epicsquid.mysticalworld.init.ModBlocks;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
@@ -48,6 +50,21 @@ public class MappingsEvent {
 
   @SuppressWarnings("ConstantConditions")
   @SubscribeEvent
+  public static void onMissingEntityMappings(RegistryEvent.MissingMappings<EntityEntry> event) {
+    for (RegistryEvent.MissingMappings.Mapping<EntityEntry> mapping : event.getMappings()) {
+      ResourceLocation missing = mapping.key;
+      if (missing.getNamespace().equals(Roots.MODID)) {
+        switch (missing.getPath()) {
+          case "entity_ritual_wild_growth":
+            mapping.remap(ForgeRegistries.ENTITIES.getValue(new ResourceLocation(Roots.MODID, "entity_ritual_wildroot_growth")));
+            break;
+        }
+      }
+    }
+  }
+
+  @SuppressWarnings("ConstantConditions")
+  @SubscribeEvent
   public static void onMissingItemMappings(RegistryEvent.MissingMappings<Item> event) {
     for (RegistryEvent.MissingMappings.Mapping<Item> mapping : event.getMappings()) {
       ResourceLocation missing = mapping.key;
@@ -63,10 +80,10 @@ public class MappingsEvent {
             mapping.ignore();
             break;
           case "assorted_seeds":
-/*            mapping.remap(ModItems.seeds);*/
+            mapping.remap(ModItems.seeds);
             break;
           case "cooked_seeds":
-/*            mapping.remap(ModItems.cooked_seeds);*/
+            mapping.remap(ModItems.cooked_seeds);
             break;
           case "bonfire":
             mapping.remap(((BlockBase) epicsquid.roots.init.ModBlocks.pyre).getItemBlock());
@@ -79,6 +96,9 @@ public class MappingsEvent {
             break;
           case "offertory_plate":
             mapping.remap(((BlockBase) epicsquid.roots.init.ModBlocks.offering_plate).getItemBlock());
+            break;
+          case "ritual_wild_growth":
+            mapping.remap(epicsquid.roots.init.ModItems.ritual_wildroot_growth);
             break;
         }
         if (missing.getPath().startsWith("runic_")) {
