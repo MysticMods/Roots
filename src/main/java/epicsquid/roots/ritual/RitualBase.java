@@ -29,6 +29,7 @@ public abstract class RitualBase {
   private Class<? extends EntityRitualBase> entityClass;
   private List<ICondition> conditions = new ArrayList<>();
   private Item icon;
+  private ItemStack stack = ItemStack.EMPTY;
   private String name;
   private TextFormatting color;
   private boolean bold;
@@ -76,6 +77,14 @@ public abstract class RitualBase {
 
   public Item getIcon() {
     return icon;
+  }
+
+  public ItemStack getItemStack () {
+    if (stack.isEmpty()) {
+      stack = new ItemStack(icon);
+    }
+
+    return stack;
   }
 
   public void setIcon(Item icon) {
