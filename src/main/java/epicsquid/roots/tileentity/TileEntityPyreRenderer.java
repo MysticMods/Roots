@@ -7,7 +7,12 @@ import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
@@ -44,30 +49,41 @@ public class TileEntityPyreRenderer extends TileEntitySpecialRenderer<TileEntity
 
     PyreCraftingRecipe recipe = ModRecipes.getCraftingRecipe(renderItems);
     if (recipe != null)
-      renderResult(tem, x, y, z, recipe.getResult(), 0.8f);
+      renderResult(x, y, z, recipe.getResult(), 0.8f);
     RitualBase ritual = RitualRegistry.getRitual(tem, Minecraft.getMinecraft().player);
     if (ritual != null && !ritual.isDisabled())
-      renderResult(tem, x, y, z, new ItemStack(ritual.getIcon()), 1f);
+      renderResult(x, y, z, ritual.getItemStack(), 1f);
   }
 
-  private void renderResult(TileEntityPyre tem, double x, double y, double z, ItemStack result, float alpha) {
+  private void renderResult(double x, double y, double z, ItemStack result, float alpha) {
     GlStateManager.enableBlend();
     RenderHelper.enableStandardItemLighting();
+    GlStateManager.enableRescaleNormal();
     GlStateManager.pushMatrix();
     GlStateManager.translate(x + 0.5, y + 1.5, z + 0.5);
     GlStateManager.scale(0.5, 0.5, 0.5);
 
-    IBakedModel model = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(result, tem.getWorld(), null);
+    Minecraft mc = Minecraft.getMinecraft();
+    RenderItem ri = mc.getRenderItem();
+    TextureManager tm = mc.getTextureManager();
+
+    IBakedModel bakedmodel = ri.getItemModelWithOverrides(result, null, null);
     if (alpha != 1f) {
       GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
       GlStateManager.color(1F, 1F, 1F, alpha);
     }
-    Minecraft.getMinecraft().getRenderItem().renderItem(result, model);
+    tm.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+    tm.getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).setBlurMipmap(false, false);
+    GlStateManager.pushMatrix();
+    ri.renderItem(result, bakedmodel);
+    GlStateManager.cullFace(GlStateManager.CullFace.BACK);
     GlStateManager.popMatrix();
     GlStateManager.disableRescaleNormal();
-    if (alpha != 1f) {
-      GlStateManager.disableBlend();
-    }
+    GlStateManager.disableBlend();
+    tm.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+    tm.getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).restoreLastBlurMipmap();
+
+    GlStateManager.popMatrix();
     GlStateManager.color(1F, 1F, 1F, 1F);
   }
 }
