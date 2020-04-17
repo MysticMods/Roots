@@ -23,7 +23,7 @@
       "type": "crafting",
       "recipe": "roots:staff",
       "title": "Staff",
-      "text": "The staff can be made from any wood, as the wildroot allows the imbued spells to activate freely. In addition, herbs must also be provided from $(l:apparatus/component_pouch)a suitable container$().$(br2)$(info) You may craft larger containers in the future."
+      "text": "The staff can be made from any wood, as the wildroot allows the imbued spells to activate freely. In addition, herbs must also be provided from $(l:apparatus/herb_pouch)a suitable container$().$(br2)$(info) You may craft larger containers in the future."
     },
     {
       "type": "text",
