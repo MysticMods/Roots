@@ -1,6 +1,7 @@
 package epicsquid.roots.tileentity;
 
 import com.google.common.collect.Sets;
+import epicsquid.mysticallib.particle.RangeParticle;
 import epicsquid.mysticallib.particle.RenderUtil;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ItemUtil;
@@ -9,6 +10,7 @@ import epicsquid.roots.block.BlockPyre;
 import epicsquid.roots.config.RitualConfig;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualFrostLands;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
@@ -20,6 +22,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -46,6 +49,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -245,8 +250,16 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
 
   @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
-    if (world.isRemote) return true;
     ItemStack heldItem = player.getHeldItem(hand);
+    if (ModItems.knives.contains(heldItem.getItem()) && player.isSneaking()) {
+      if (world.isRemote) {
+        toggleShowRange();
+      }
+      return true;
+    }
+
+    if (world.isRemote) return true;
+
     if (!heldItem.isEmpty()) {
       boolean extinguish = false;
       IFluidHandlerItem cap = heldItem.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
@@ -668,18 +681,24 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
   private boolean showingRange = false;
 
   @Override
+  @SideOnly(Side.CLIENT)
   public boolean isShowingRange() {
     return showingRange;
   }
 
   @Override
+  @SideOnly(Side.CLIENT)
   public void toggleShowRange() {
-    this.showingRange = !showingRange;
+    setShowingRange(!isShowingRange());
   }
 
   @Override
+  @SideOnly(Side.CLIENT)
   public void setShowingRange(boolean showingRange) {
     this.showingRange = showingRange;
+    if (showingRange) {
+      Minecraft.getMinecraft().effectRenderer.addEffect(new RangeParticle<>(this));
+    }
   }
 
   private static AxisAlignedBB nullBox = new AxisAlignedBB(0, 0, 0, 0, 0, 0);
@@ -692,18 +711,21 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
   public AxisAlignedBB getBounds() {
     RitualBase ritual = RitualRegistry.getRitual(this, null);
     if (ritual == null) { // Shouldn't happen*/
+      setShowingRange(false);
       return nullBox;
     }
 
     if (excluded.contains(ritual.getClass())) {
+      setShowingRange(false);
       return nullBox;
     }
 
     AxisAlignedBB bb = ritual.getBoundingBox();
     if (bb == null) {
+      setShowingRange(false);
       return nullBox;
     }
 
-    return bb;
+    return bb.offset(getPos());
   }
 }
