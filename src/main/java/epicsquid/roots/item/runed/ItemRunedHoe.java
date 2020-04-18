@@ -23,6 +23,7 @@ public class ItemRunedHoe extends ItemPloughBase implements ILivingRepair {
 
   public ItemRunedHoe(ToolMaterial material, String name) {
     super(material, name, 3, 1992);
+    this.speed = 1.5f;
   }
 
   @Override

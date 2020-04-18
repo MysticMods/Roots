@@ -49,6 +49,6 @@ public class ItemRunedKnife extends ItemDruidKnife implements ILivingRepair {
     super.addInformation(stack, worldIn, tooltip, flagIn);
 
     tooltip.add("");
-    tooltip.add(TextFormatting.BOLD + "" + TextFormatting.DARK_RED + I18n.format("roots.tooltip.runic_dagger"));
+    tooltip.add(TextFormatting.BOLD + "" + TextFormatting.DARK_RED + I18n.format("roots.tooltip.runed_dagger"));
   }
 }
