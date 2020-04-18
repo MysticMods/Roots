@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 public class ItemRunedAxe extends ItemAxeBase implements ILivingRepair {
   public ItemRunedAxe(ToolMaterial material, String name) {
     super(material, name, 3, 1992);
+    this.attackDamage = 9.5f;
   }
 
   @Override
