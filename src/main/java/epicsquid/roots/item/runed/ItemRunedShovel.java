@@ -19,6 +19,7 @@ import net.minecraft.world.World;
 public class ItemRunedShovel extends ItemExcavatorBase implements ILivingRepair {
   public ItemRunedShovel(ToolMaterial material, String name) {
     super(name, 1992, material);
+    this.attackDamage = 5.5f;
   }
 
   @Override
