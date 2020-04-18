@@ -19,6 +19,7 @@ import java.util.List;
 public class ItemRunedKnife extends ItemDruidKnife implements ILivingRepair {
   public ItemRunedKnife(String name, ToolMaterial material) {
     super(name, material);
+    this.attackDamage = 4.5f;
   }
 
   @Override
