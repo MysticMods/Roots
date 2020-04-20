@@ -39,7 +39,7 @@
     {
       "type": "text",
       "title": "Casting",
-      "text": "One selected, the staff mey be held in either hand.$(br2)If the spell is instantaneous, simply right-click to activate. Otherwise, it requires your concentration: hold right-click for as long as you wish to activate it.$(br2)If the correct components are available, they will be consumed, the spell cast, and a visual alert will show you your remaining stock of herbs."
+      "text": "One selected, the staff may be held in either hand.$(br2)If the spell is instantaneous, simply right-click to activate. Otherwise, it requires your concentration: hold right-click for as long as you wish to activate it.$(br2)If the correct components are available, they will be consumed, the spell cast, and a visual alert will show you your remaining stock of herbs."
     },
     {
       "type": "text",
