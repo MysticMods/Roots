@@ -75,16 +75,6 @@ public class BlockWildFire extends BlockFire implements IBlock, IModeledObject, 
   public void initCustomModel() {
   }
 
-  @Nonnull
-  protected Class<? extends BakedModelBlock> getModelClass() {
-    return getModelClass(0);
-  }
-
-  @Nonnull
-  protected Class<? extends BakedModelBlock> getModelClass(int type) {
-    return BakedModelBlock.class;
-  }
-
   @Override
   public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
     // TODO: Maybe make it not affect immunity to fire; but it's FEY fire.
@@ -92,7 +82,7 @@ public class BlockWildFire extends BlockFire implements IBlock, IModeledObject, 
       return;
     }*/
 
-    if (!EntityUtil.isHostile(entityIn)) {
+    if (!EntityUtil.isHostile(entityIn) || EntityUtil.isFriendly(entityIn)) {
       return;
     }
 
@@ -123,7 +113,7 @@ public class BlockWildFire extends BlockFire implements IBlock, IModeledObject, 
     int i = state.getValue(AGE);
 
     if (i < 15) {
-      state = state.withProperty(AGE, i + rand.nextInt(3) / 2);
+      state = state.withProperty(AGE, i + rand.nextInt(6) / 2);
       worldIn.setBlockState(pos, state, 4);
     } else {
       worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
