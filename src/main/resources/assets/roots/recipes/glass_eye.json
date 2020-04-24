@@ -8,7 +8,7 @@
     "G": [
       {
         "type": "forge:ore_dict",
-        "ore": "glass"
+        "ore": "blockGlass"
       }
     ],
     "L": [
