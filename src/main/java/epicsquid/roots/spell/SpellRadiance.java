@@ -6,6 +6,7 @@ import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.network.fx.MessageRadianceBeamFX;
+import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,7 +47,7 @@ public class SpellRadiance extends SpellBase {
   @Override
   public void init () {
     addIngredients(
-        new OreIngredient("dustGlowstone"),
+        new GoldOrSilverIngotIngredient(),
         new OreIngredient("torch"),
         new OreIngredient("dyeYellow"),
         new ItemStack(ModItems.cloud_berry),
