@@ -14,6 +14,7 @@ import epicsquid.roots.network.fx.MessageGeasFX;
 import epicsquid.roots.network.fx.MessageGeasRingFX;
 import epicsquid.roots.network.fx.MessageLightDrifterFX;
 import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
+import epicsquid.roots.spell.SpellAquaBubble;
 import epicsquid.roots.util.Constants;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -22,6 +23,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -72,7 +74,16 @@ public class EventManager {
   public static void onDamage(LivingHurtEvent event) {
     EntityLivingBase entity = event.getEntityLiving();
     Entity trueSource = event.getSource().getTrueSource();
+    DamageSource damage = event.getSource();
 
+    if (entity.getActivePotionEffect(ModPotions.aqua_bubble) != null) {
+      if (damage.isFireDamage()) {
+        event.setAmount(event.getAmount() * SpellAquaBubble.instance.fire_reduction);
+      }
+      if (damage == DamageSource.LAVA) {
+        event.setAmount(event.getAmount() * SpellAquaBubble.instance.lava_reduction);
+      }
+    }
     if (entity.getActivePotionEffect(ModPotions.time_stop) != null) {
       event.setAmount(event.getAmount() * 0.1f);
     }

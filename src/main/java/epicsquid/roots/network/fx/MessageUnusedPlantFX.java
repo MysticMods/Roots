@@ -16,15 +16,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MessageScatterPlantFX implements IMessage {
+public class MessageUnusedPlantFX implements IMessage {
 
   private List<BlockPos> affectedBlocks = new ArrayList<>();
 
   @SuppressWarnings("unused")
-  public MessageScatterPlantFX() {
+  public MessageUnusedPlantFX() {
   }
 
-  public MessageScatterPlantFX(List<BlockPos> affectedBlocks) {
+  public MessageUnusedPlantFX(List<BlockPos> affectedBlocks) {
     this.affectedBlocks = affectedBlocks;
   }
 
@@ -45,10 +45,10 @@ public class MessageScatterPlantFX implements IMessage {
     }
   }
 
-  public static class Handler implements IMessageHandler<MessageScatterPlantFX, IMessage> {
+  public static class Handler implements IMessageHandler<MessageUnusedPlantFX, IMessage> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(MessageScatterPlantFX message, MessageContext ctx) {
+    public IMessage onMessage(MessageUnusedPlantFX message, MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       for (BlockPos pos : message.affectedBlocks) {
         for (int k = 0; k < 2 + Util.rand.nextInt(3); k++) {

@@ -3,7 +3,9 @@ package epicsquid.roots.proxy;
 import epicsquid.roots.RegistryManager;
 import epicsquid.roots.client.Keybinds;
 import epicsquid.roots.client.PatchouliHack;
+import epicsquid.roots.entity.player.layer.AquaBubbleRenderer;
 import epicsquid.roots.tileentity.*;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
@@ -29,6 +31,7 @@ public class ClientProxy extends CommonProxy {
   public void init(FMLInitializationEvent event) {
     super.init(event);
     RegistryManager.registerColorHandlers();
+    Minecraft.getMinecraft().getRenderManager().getSkinMap().values().forEach(o -> o.addLayer(new AquaBubbleRenderer(o)));
   }
 
   @Override
