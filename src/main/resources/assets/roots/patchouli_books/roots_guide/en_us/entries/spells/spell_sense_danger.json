@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Reveals the evil aura and intent of monstrous creatures, causing all nearby to glow brightly.$(br2)$(info) Glowing creatures can be seen through all solid objects."
+      "text": "Reveals the evil aura and intent of monstrous creatures, causing all nearby to glow brightly. Also grants sight in dark places, where vision would normally be clouded.$(br2)$(info) Glowing creatures can be seen through all solid objects."
     },
     {
       "type": "spell_template",

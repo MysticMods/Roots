@@ -3,19 +3,20 @@ package epicsquid.roots.spell;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.init.ModBlocks;
+import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.network.fx.MessageFallBladesFX;
-import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -34,12 +35,12 @@ public class SpellAutumnsFall extends SpellBase {
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("the radius on the Y axis of the effect of this spell");
   public static Property<Integer> PROP_MAX_AFFECTED = new Property<>("max_affected", 1).setDescription("maximum number of blocks affected each tick");
 
-  public static String spellName = "spell_autumns_fall";
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_autumns_fall");
   public static SpellAutumnsFall instance = new SpellAutumnsFall(spellName);
 
   private int radius, max_affected, radius_y;
 
-  public SpellAutumnsFall(String name) {
+  public SpellAutumnsFall(ResourceLocation name) {
     super(name, TextFormatting.GOLD, 227 / 255F, 179 / 255F, 66 / 255F, 209 / 255F, 113 / 255F, 10 / 255F);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS, PROP_RADIUS_Y, PROP_MAX_AFFECTED);
   }
@@ -56,7 +57,7 @@ public class SpellAutumnsFall extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks) {
+  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks) {
     List<BlockPos> blocks = Util.getBlocksWithinRadius(caster.world, caster.getPosition(), radius, radius_y, radius, blockPos -> isAffectedByFallSpell(caster.world, blockPos));
 
     if (blocks.isEmpty()) {

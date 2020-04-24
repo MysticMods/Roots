@@ -1,19 +1,19 @@
 package epicsquid.roots.spell;
 
+import epicsquid.roots.Roots;
 import epicsquid.roots.entity.spell.EntitySpellSpringStorm;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 public class SpellSpringStorm extends SpellBase {
 
@@ -30,10 +30,10 @@ public class SpellSpringStorm extends SpellBase {
 
   public int radius, duration, fire_resistance, lightning_strikes, resistance, lightning_chance;
 
-  public static String spellName = "spell_spring_storm";
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_spring_storm");
   public static SpellSpringStorm instance = new SpellSpringStorm(spellName);
 
-  public SpellSpringStorm(String name) {
+  public SpellSpringStorm(ResourceLocation name) {
     super(name, TextFormatting.BLUE, 34 / 255F, 133 / 255F, 245 / 255F, 23 / 255F, 44 / 255F, 89 / 255F);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DURATION, PROP_RADIUS, PROP_LIGHTNING_CHANCE, PROP_FIRE_RESISTANCE, PROP_LIGHTNING_STRIKES, PROP_RESISTANCE);
   }
@@ -50,7 +50,7 @@ public class SpellSpringStorm extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks) {
+  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks) {
     World world = caster.world;
     BlockPos pos = caster.getPosition();
 

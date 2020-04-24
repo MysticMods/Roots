@@ -1,17 +1,17 @@
 package epicsquid.roots.spell;
 
+import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
-import epicsquid.roots.spell.modules.SpellModule;
+import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
-
-import java.util.List;
 
 public class SpellSenseAnimals extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(100);
@@ -22,12 +22,12 @@ public class SpellSenseAnimals extends SpellBase {
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 50).setDescription("radius on the Z axis of the area in which the spell takes effect");
   public static Property<Integer> PROP_DURATION = new Property<>("duration", 40 * 20).setDescription("duration in ticks of the glowing effect applied to animals");
 
-  public static String spellName = "spell_sense_animals";
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_sense_animals");
   public static SpellSenseAnimals instance = new SpellSenseAnimals(spellName);
 
   private int radius_x, radius_y, radius_z, duration;
 
-  public SpellSenseAnimals(String name) {
+  public SpellSenseAnimals(ResourceLocation name) {
     super(name, TextFormatting.WHITE, 255f / 255f, 255f / 255f, 255f / 255f, 10f / 255f, 196f / 255f, 10f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_DURATION);
   }
@@ -44,7 +44,7 @@ public class SpellSenseAnimals extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, List<SpellModule> modules, int ticks) {
+  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks) {
     caster.addPotionEffect(new PotionEffect(ModPotions.animal_sense, duration, 0, false, false));
     return true;
   }

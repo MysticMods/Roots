@@ -1,20 +1,20 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.roots.Roots;
 import epicsquid.roots.entity.spell.EntityTimeStop;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.network.fx.MessageTimeStopStartFX;
-import epicsquid.roots.spell.modules.SpellModule;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionUtils;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
-
-import java.util.List;
 
 public class SpellTimeStop extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(320);
@@ -23,18 +23,18 @@ public class SpellTimeStop extends SpellBase {
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("moonglow_leaf", 0.5));
   public static Property<Integer> PROP_DURATION = new Property<>("duration", 200).setDescription("the duration of the time stop effect on entities");
 
-  public static String spellName = "spell_time_stop";
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_time_stop");
   public static SpellTimeStop instance = new SpellTimeStop(spellName);
 
   public static int duration;
 
-  public SpellTimeStop(String name) {
+  public SpellTimeStop(ResourceLocation name) {
     super(name, TextFormatting.DARK_BLUE, 64f / 255f, 64f / 255f, 64f / 255f, 192f / 255f, 32f / 255f, 255f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DURATION);
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
         new OreIngredient("enderpearl"),
         new ItemStack(ModItems.moonglow_leaf),
@@ -46,7 +46,7 @@ public class SpellTimeStop extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, List<SpellModule> modules, int ticks) {
+  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks) {
     if (!player.world.isRemote) {
       EntityTimeStop timeStop = new EntityTimeStop(player.world, duration);
       timeStop.setPlayer(player.getUniqueID());
