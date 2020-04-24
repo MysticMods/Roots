@@ -19,7 +19,7 @@ public class ClientProxy extends CommonProxy {
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMortar.class, new TileEntityMortarRenderer());
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPyre.class, new TileEntityPyreRenderer());
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityImbuer.class, new TileEntityImbuerRenderer());
-    ClientRegistry.bindTileEntitySpecialRenderer(TileEntityOfferingPlate.class, new TileEntityOfferingPlateRenderer());
+    ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCatalystPlate.class, new TileEntityCatalystPlateRenderer());
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityIncenseBurner.class, new TileEntityIncenseBurnerRenderer());
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFeyCrafter.class, new TileEntityFeyCrafterRenderer());
     ClientRegistry.bindTileEntitySpecialRenderer(TileEntityImposer.class, new TileEntityImposerRenderer());

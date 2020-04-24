@@ -3,6 +3,7 @@ itemGroup.roots=Roots
 entity.Villager.druid=Druid
 entity.entity_fairy.name=Fairy
 
+item.glass_eye.name=Glass Eye
 item.assorted_seeds.name=Mixed Seeds
 item.cooked_seeds.name=Toasted Seeds
 item.pestle.name=Pestle
@@ -61,8 +62,8 @@ tile.runestone_brick.name=Runestone Brick
 tile.runestone_brick_alt.name=Runestone Brick
 tile.runestone_trample.name=Sure-Footed Stone
 tile.chiseled_runestone.name=Chiseled Runestone
-tile.offering_plate.name=Offering Plate
-tile.reinforced_offering_plate.name=Reinforced Offering Plate
+tile.catalyst_plate.name=Catalyst Plate
+tile.reinforced_catalyst_plate.name=Reinforced Catalyst Plate
 tile.unending_bowl.name=Unending Bowl
 tile.incense_burner.name=Incense Burner
 tile.wildwood_rune.name=Wildroot Rune
@@ -200,7 +201,7 @@ roots.ritual.condition.standing_stones.types=%d of %d-high stones
 roots.ritual.condition.pillar=Failed to start ritual: requires %s.
 roots.ritual.condition.pillar.types=%d of %d-high %s pillars.
 roots.ritual.condition.invalid=Failed to start ritual: unknown reason
-roots.ritual.condition.invalid_summon=Failed to start ritual: no valid combination of summoning items found on nearby offering plates.
+roots.ritual.condition.invalid_summon=Failed to start ritual: no valid combination of summoning items found on nearby catalyst plates.
 
 roots.keybinds.group=Roots
 roots.keybinds.pouch=Open Pouch

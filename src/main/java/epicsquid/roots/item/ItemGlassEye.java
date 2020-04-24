@@ -51,7 +51,11 @@ public class ItemGlassEye extends ItemBase {
   @Override
   public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
     playerIn.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 15 * 20, 0, false, false));
-    return ActionResult.newResult(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+    ItemStack stack = playerIn.getHeldItem(handIn);
+    if (!playerIn.isCreative()) {
+      stack.shrink(1);
+    }
+    return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
   }
 
   @Override

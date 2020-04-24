@@ -8,7 +8,7 @@ import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.SummonCreatureRecipe;
 import epicsquid.roots.ritual.conditions.ConditionRunedPillars;
 import epicsquid.roots.ritual.conditions.ConditionValidSummon;
-import epicsquid.roots.tileentity.TileEntityOfferingPlate;
+import epicsquid.roots.tileentity.TileEntityCatalystPlate;
 import epicsquid.roots.util.RitualUtil;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,9 +21,7 @@ import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class RitualSummonCreatures extends RitualBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(200);
@@ -71,19 +69,19 @@ public class RitualSummonCreatures extends RitualBase {
   public EntityRitualBase doEffect(World world, BlockPos pos, @Nullable EntityPlayer player) {
     EntityRitualSummonCreatures entity = (EntityRitualSummonCreatures) this.spawnEntity(world, pos, EntityRitualSummonCreatures.class, player);
     if (!world.isRemote) {
-      List<TileEntityOfferingPlate> plates = RitualUtil.getNearbyOfferingPlates(world, pos);
+      List<TileEntityCatalystPlate> plates = RitualUtil.getNearbyCatalystPlates(world, pos);
       List<ItemStack> plateItems = RitualUtil.getItemsFromNearbyPlates(plates);
 
       SummonCreatureRecipe recipe = ModRecipes.findSummonCreatureEntry(plateItems);
       List<ItemStack> ingredients = new ArrayList<>();
       if (recipe != null) {
-        for (TileEntityOfferingPlate plate : plates) {
+        for (TileEntityCatalystPlate plate : plates) {
           ingredients.add(plate.removeItem());
         }
       }
       ItemStack essence = ItemStack.EMPTY;
       if (recipe == null) {
-        for (TileEntityOfferingPlate plate : plates) {
+        for (TileEntityCatalystPlate plate : plates) {
           ItemStack stack = plate.getHeldItem();
           if (stack.getItem() == ModItems.life_essence) {
             essence = stack;

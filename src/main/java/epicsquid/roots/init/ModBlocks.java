@@ -26,7 +26,7 @@ import java.util.List;
 public class ModBlocks {
 
   // All block
-  public static Block mortar, pyre, imbuer, munifier, structure_marker, offering_plate, unending_bowl, reinforced_pyre, reinforced_offering_plate;
+  public static Block mortar, pyre, imbuer, imposer, structure_marker, catalyst_plate, unending_bowl, reinforced_pyre, reinforced_catalyst_plate;
   public static Block incense_burner, wildwood_rune;
   public static Block grove_stone, fey_crafter;
 
@@ -170,9 +170,9 @@ public class ModBlocks {
     event.addBlock(reinforced_pyre = new BlockReinforcedPyre(Material.ROCK, SoundType.STONE, 8.4f, "reinforced_pyre", TileEntityPyre.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(decorative_pyre = new BlockDecorativePyre(Material.WOOD, SoundType.WOOD, 1.4f, "decorative_pyre", TileEntityDecorativePyre.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(imbuer = new BlockImbuer(Material.WOOD, SoundType.WOOD, 1.4f, "imbuer", TileEntityImbuer.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(munifier = new BlockImposer(Material.WOOD, SoundType.WOOD, 1.4f, "munifier", TileEntityImposer.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(offering_plate = new BlockOfferingPlate(Material.ROCK, SoundType.STONE, 1.4f, "offering_plate", TileEntityOfferingPlate.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(reinforced_offering_plate = new BlockReinforcedOfferingPlate(Material.ROCK, SoundType.STONE, 4.4f, "reinforced_offering_plate", TileEntityOfferingPlate.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(imposer = new BlockImposer(Material.WOOD, SoundType.WOOD, 1.4f, "imposer", TileEntityImposer.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(catalyst_plate = new BlockCatalystPlate(Material.ROCK, SoundType.STONE, 1.4f, "catalyst_plate", TileEntityCatalystPlate.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(reinforced_catalyst_plate = new BlockReinforcedCatalystPlate(Material.ROCK, SoundType.STONE, 4.4f, "reinforced_catalyst_plate", TileEntityCatalystPlate.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(unending_bowl = new BlockUnendingBowl(Material.ROCK, SoundType.STONE, 1.4f, "unending_bowl", TileEntityUnendingBowl.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(incense_burner = new BlockIncenseBurner(Material.ROCK, SoundType.STONE, 1.4f, "incense_burner", TileEntityIncenseBurner.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
 

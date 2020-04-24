@@ -16,7 +16,6 @@ import epicsquid.roots.integration.jer.JERIntegration;
 import epicsquid.roots.integration.patchouli.ConfigKeys;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellRegistry;
-import epicsquid.roots.util.OfferingUtil;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.*;
 
@@ -33,7 +32,6 @@ public class CommonProxy {
     SpellRegistry.preInit();
     HerbRegistry.init();
     RitualRegistry.preInit();
-    OfferingUtil.init();
     ModEntities.registerLootTables();
   }
 
@@ -41,7 +39,6 @@ public class CommonProxy {
     SpellRegistry.init();
     RitualRegistry.init();
     ConfigKeys.init();
-    OfferingUtil.init();
     if (Loader.isModLoaded("jeresources")) {
       JERIntegration.init();
     }

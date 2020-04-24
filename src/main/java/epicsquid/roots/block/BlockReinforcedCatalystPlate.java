@@ -11,8 +11,8 @@ import net.minecraft.world.IBlockAccess;
 import javax.annotation.Nonnull;
 
 @SuppressWarnings("deprecation")
-public class BlockReinforcedOfferingPlate extends BlockOfferingPlate {
-  public BlockReinforcedOfferingPlate(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
+public class BlockReinforcedCatalystPlate extends BlockCatalystPlate {
+  public BlockReinforcedCatalystPlate(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
     super(mat, type, hardness, name, teClass);
     setResistance(5000f);
   }

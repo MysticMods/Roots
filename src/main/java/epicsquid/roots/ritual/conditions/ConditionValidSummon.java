@@ -3,7 +3,7 @@ package epicsquid.roots.ritual.conditions;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.tileentity.TileEntityPyre;
-import epicsquid.roots.tileentity.TileEntityOfferingPlate;
+import epicsquid.roots.tileentity.TileEntityCatalystPlate;
 import epicsquid.roots.util.RitualUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -16,7 +16,7 @@ import java.util.List;
 public class ConditionValidSummon implements ICondition {
   @Override
   public boolean checkCondition(TileEntityPyre tile, @Nullable EntityPlayer player) {
-    List<TileEntityOfferingPlate> plates = RitualUtil.getNearbyOfferingPlates(tile.getWorld(), tile.getPos());
+    List<TileEntityCatalystPlate> plates = RitualUtil.getNearbyCatalystPlates(tile.getWorld(), tile.getPos());
     List<ItemStack> plateItems = RitualUtil.getItemsFromNearbyPlates(plates);
 
     if (ModRecipes.findSummonCreatureEntry(plateItems) != null) {
