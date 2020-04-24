@@ -5,7 +5,6 @@ import epicsquid.mysticalworld.init.ModBlocks;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -41,7 +40,7 @@ public class MappingsEvent {
             mapping.remap(epicsquid.roots.init.ModBlocks.reinforced_pyre);
             break;
           case "offertory_plate":
-            mapping.remap(epicsquid.roots.init.ModBlocks.offering_plate);
+            mapping.remap(epicsquid.roots.init.ModBlocks.catalyst_plate);
             break;
         }
       }
@@ -95,7 +94,7 @@ public class MappingsEvent {
             mapping.remap(((BlockBase) epicsquid.roots.init.ModBlocks.reinforced_pyre).getItemBlock());
             break;
           case "offertory_plate":
-            mapping.remap(((BlockBase) epicsquid.roots.init.ModBlocks.offering_plate).getItemBlock());
+            mapping.remap(((BlockBase) epicsquid.roots.init.ModBlocks.catalyst_plate).getItemBlock());
             break;
           case "ritual_wild_growth":
             mapping.remap(epicsquid.roots.init.ModItems.ritual_wildroot_growth);

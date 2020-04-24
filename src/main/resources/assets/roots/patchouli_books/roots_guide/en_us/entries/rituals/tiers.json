@@ -20,7 +20,7 @@
             "title": "Tier I",
             "type": "spotlight",
             "item": "roots:runestone",
-            "text": "These rituals require a single addition, such as a $(l:rituals/standing_stones)standing stone or pillar$() or an $(l:apparatus/offering_plate)offering plate$(), but still remain relatively portable.$(li)$(l:rituals/ritual_transmutation)Transmutation$()$(li)$(l:rituals/ritual_frost_lands)Frost Lands$()$(li)$(l:rituals/ritual_gathering)Gathering$()$(li)$(l:rituals/ritual_summon_creatures)Summon Creatures$()$(li)$(l:rituals/ritual_wildroot_growth)Wildroot Growth$()"
+            "text": "These rituals require a single addition, such as a $(l:rituals/standing_stones)standing stone or pillar$() or an $(l:apparatus/catalyst_plate)catalyst plate$(), but still remain relatively portable.$(li)$(l:rituals/ritual_transmutation)Transmutation$()$(li)$(l:rituals/ritual_frost_lands)Frost Lands$()$(li)$(l:rituals/ritual_gathering)Gathering$()$(li)$(l:rituals/ritual_summon_creatures)Summon Creatures$()$(li)$(l:rituals/ritual_wildroot_growth)Wildroot Growth$()"
         },
         {
             "title": "Tier II",

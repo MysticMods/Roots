@@ -4,7 +4,6 @@ import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.recipe.SummonCreatureRecipe;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -21,11 +20,11 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import java.util.UUID;
 
-public class TileEntityOfferingPlate extends TileBase {
+public class TileEntityCatalystPlate extends TileBase {
   public ItemStackHandler inventory = new ItemStackHandler(1) {
     @Override
     protected void onContentsChanged(int slot) {
-      TileEntityOfferingPlate.this.markDirty();
+      TileEntityCatalystPlate.this.markDirty();
       if (!world.isRemote) {
         updatePacketViaState();
       }
@@ -34,7 +33,7 @@ public class TileEntityOfferingPlate extends TileBase {
   private UUID lastPlayer = null;
   private int progress = 0;
 
-  public TileEntityOfferingPlate() {
+  public TileEntityCatalystPlate() {
     super();
   }
 

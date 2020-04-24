@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Summons a creature's spirit from beyond and returns it to a fleshly body in this world. The creature summoned is determined by what items are placed on various $(l:apparatus/offering_plate)offering plates$() placed nearby ($(l:rituals/ritual_summon_creatures#multiblock)see layout$()).$(br2)$(warning) Unfortunately, due to limitations of this guide, a $(uses:roots:ritual_summon_creatures)complete list of creatures and items can only be found in JEI$().$(br2)$(standing_stones) $(l:rituals/ritual_summon_creatures#multiblock)This ritual requires standing stones.$()"
+      "text": "Summons a creature's spirit from beyond and returns it to a fleshly body in this world. The creature summoned is determined by what items are placed on various $(l:apparatus/catalyst_plate)catalyst plates$() placed nearby ($(l:rituals/ritual_summon_creatures#multiblock)see layout$()).$(br2)$(warning) Unfortunately, due to limitations of this guide, a $(uses:roots:ritual_summon_creatures)complete list of creatures and items can only be found in JEI$().$(br2)$(standing_stones) $(l:rituals/ritual_summon_creatures#multiblock)This ritual requires standing stones.$()"
     },
     {
       "type": "pyre_template",
@@ -19,10 +19,10 @@
       "multiblock": {
         "mapping": {
           "0": "roots:pyre",
-          "W": "roots:offering_plate[facing=west]",
-          "E": "roots:offering_plate[facing=east]",
-          "N": "roots:offering_plate[facing=north]",
-          "S": "roots:offering_plate[facing=south]",
+          "W": "roots:catalyst_plate[facing=west]",
+          "E": "roots:catalyst_plate[facing=east]",
+          "N": "roots:catalyst_plate[facing=north]",
+          "S": "roots:catalyst_plate[facing=south]",
           "R": "roots:runed_birch",
           "C": "minecraft:log[variant=birch]"
         },
@@ -32,13 +32,13 @@
           ["   W   ","   C   ","       ","N  0  S","       ","       ","   E   "]
         ]
       },
-      "text": "Up to ten Offering Plates may be placed nearby (up to six blocks away)."
+      "text": "Up to ten Catalyst Plates may be placed nearby (up to six blocks away)."
     },
     {
       "type": "relations",
       "entries": [
-        "apparatus/offering_plate",
-        "apparatus/reinforced_offering_plate",
+        "apparatus/catalyst_plate",
+        "apparatus/reinforced_catalyst_plate",
         "apparatus/runic_shears"
       ]
     }

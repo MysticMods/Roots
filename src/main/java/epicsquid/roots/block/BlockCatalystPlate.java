@@ -18,10 +18,10 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 
 @SuppressWarnings("deprecation")
-public class BlockOfferingPlate extends BlockTEBase {
+public class BlockCatalystPlate extends BlockTEBase {
   public static final PropertyDirection FACING = PropertyDirection.create("facing");
 
-  public BlockOfferingPlate(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name,
+  public BlockCatalystPlate(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name,
                             @Nonnull Class<? extends TileEntity> teClass) {
     super(mat, type, hardness, name, teClass);
   }
