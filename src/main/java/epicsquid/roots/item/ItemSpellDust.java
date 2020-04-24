@@ -33,19 +33,12 @@ public class ItemSpellDust extends ItemBase {
   @SideOnly(Side.CLIENT)
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
+    // TODO: Contextualise base on library
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
 
-    SpellBase spell = capability.getSelectedSpell();
+    SpellBase spell = capability.getSelectedInfo().getSpell();
     if (spell == null) return;
 
     spell.addToolTip(tooltip);
-/*    List<SpellModule> spellModules = capability.getSelectedModules();
-    if (!spellModules.isEmpty()) {
-      tooltip.add(I18n.format("roots.spell.module.description"));
-      String prefix = "roots.spell." + spell.getName();
-      for (SpellModule module : spellModules) {
-        tooltip.add(module.getFormat() + I18n.format("roots.spell.module." + module.getName() + ".name") + ": " + I18n.format(prefix + "." + module.getName() + ".description"));
-      }
-    }*/
   }
 }

@@ -2,19 +2,15 @@ package epicsquid.roots.tileentity;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.tile.TileBase;
-import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.Roots;
 import epicsquid.roots.config.GeneralConfig;
-import epicsquid.roots.library.StaffSpellStorage;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemStaff;
+import epicsquid.roots.library.StaffSpellStorage;
 import epicsquid.roots.network.fx.MessageImbueCompleteFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.FakeSpell;
 import epicsquid.roots.spell.SpellBase;
-import epicsquid.roots.spell.modules.ModuleRegistry;
-import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -98,7 +94,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
             return true;
           }
         }
-      } else if (heldItem.getItem() == ModItems.staff || ModuleRegistry.isModule(heldItem)) {
+      } else if (heldItem.getItem() == ModItems.staff/* || ModuleRegistry.isModule(heldItem)*/) {
         if (heldItem.getItem() == ModItems.staff) {
           StaffSpellStorage cap = StaffSpellStorage.fromStack(heldItem);
           if (!cap.hasFreeSlot() && inventory.getStackInSlot(0).getItem() != ModItems.runic_dust) {
@@ -107,7 +103,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
             }
             return true;
           } else if (inventory.getStackInSlot(0).getItem() == ModItems.runic_dust) {
-            if (cap.getSelectedSpell() == null) {
+            if (cap.getSelectedInfo() == null) {
               if (world.isRemote) {
                 player.sendMessage(new TextComponentTranslation("roots.info.staff.empty_slot").setStyle(new Style().setColor(TextFormatting.GOLD)));
               }
@@ -210,12 +206,12 @@ public class TileEntityImbuer extends TileBase implements ITickable {
       ItemStack spellDust = inventory.getStackInSlot(0);
       boolean clearSlot = spellDust.getItem() != ModItems.spell_dust;
       StaffSpellStorage capability = StaffSpellStorage.fromStack(spellDust);
-      if ((capability.getSelectedSpell() != null) || clearSlot) {
+      if ((capability.getSelectedInfo() != null) || clearSlot) {
         SpellBase spell;
         if (clearSlot) {
           spell = new FakeSpell();
         } else {
-          spell = capability.getSelectedSpell();
+          spell = capability.getSelectedInfo().getSpell();
         }
         if (world.isRemote) {
           if (Util.rand.nextInt(2) == 0) {
@@ -235,9 +231,9 @@ public class TileEntityImbuer extends TileBase implements ITickable {
           if (inventory.getStackInSlot(1).getItem() == ModItems.staff) {
             ItemStack staff = inventory.getStackInSlot(1);
             SpellBase spell;
-            if (!clearSlot && capability.getSelectedSpell() != null) {
+            if (!clearSlot && capability.getSelectedInfo() != null) {
               ItemStaff.createData(staff, capability);
-              spell = capability.getSelectedSpell();
+              spell = capability.getSelectedInfo().getSpell();
             } else {
               ItemStaff.clearData(staff);
               spell = new FakeSpell();
@@ -248,7 +244,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
             markDirty();
             updatePacketViaState();
             PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(spell.getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
-          } else if (inventory.getStackInSlot(0).getItem() == ModItems.spell_dust) {
+/*          } else if (inventory.getStackInSlot(0).getItem() == ModItems.spell_dust) {
             ItemStack stack = inventory.getStackInSlot(1);
             SpellModule module = ModuleRegistry.getModule(stack);
             // TODO: Why is there no check to see if this is actually a module or not?
@@ -261,7 +257,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
               Roots.logger.error("Unable to imbue " + modifier + " into spell dust!?");
               ItemUtil.spawnItem(world, pos, modifier);
             }
-            PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(capability.getSelectedSpell().getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
+            PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(capability.getSelectedInfo().getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);*/
           } else {
             // Handle the repair
             ItemStack repairItem = inventory.extractItem(0, 1, false);

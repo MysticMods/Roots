@@ -7,12 +7,15 @@ import net.minecraft.nbt.NBTTagCompound;
 import javax.annotation.Nullable;
 
 public class LibrarySpellInfo extends AbstractSpellInfo<ModifierList> {
+  private boolean obtained;
+
   private LibrarySpellInfo() {
   }
 
-  private LibrarySpellInfo(SpellBase spell) {
+  public LibrarySpellInfo(SpellBase spell) {
     super(spell);
     this.modifiers = new ModifierList(spell);
+    this.obtained = false;
   }
 
   @Nullable
@@ -21,10 +24,23 @@ public class LibrarySpellInfo extends AbstractSpellInfo<ModifierList> {
     return modifiers;
   }
 
+  public boolean isObtained() {
+    return obtained;
+  }
+
+  public void setObtained () {
+    setObtained(true);
+  }
+
+  public void setObtained (boolean value) {
+    this.obtained = value;
+  }
+
   @Override
   public NBTTagCompound serializeNBT() {
     NBTTagCompound result = super.serializeNBT();
     result.setTag("m", modifiers.serializeNBT());
+    result.setBoolean("o", obtained);
     return result;
   }
 
@@ -33,6 +49,7 @@ public class LibrarySpellInfo extends AbstractSpellInfo<ModifierList> {
     super.deserializeNBT(nbt);
     this.modifiers = new ModifierList(getSpell());
     this.modifiers.deserializeNBT(nbt.getCompoundTag("m"));
+    this.obtained = nbt.getBoolean("o");
   }
 
   public static LibrarySpellInfo fromNBT(NBTTagCompound tag) {

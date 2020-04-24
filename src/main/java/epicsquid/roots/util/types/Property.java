@@ -52,12 +52,12 @@ public class Property<T> {
 
   public static class PropertyCooldown extends Property<Integer> {
     public PropertyCooldown(Integer defaultValue) {
-      super("cooldown", defaultValue);
+      super("cooldownLeft", defaultValue);
     }
 
     @Override
     public String getDescription() {
-      return "the cooldown time in ticks of the spell";
+      return "the cooldownLeft time in ticks of the spell";
     }
   }
 

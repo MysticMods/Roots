@@ -5,9 +5,9 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 
-public class TileEntityMunifierRenderer extends TileEntitySpecialRenderer<TileEntityMunifier> {
+public class TileEntityImposerRenderer extends TileEntitySpecialRenderer<TileEntityImposer> {
   @Override
-  public void render(TileEntityMunifier tei, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+  public void render(TileEntityImposer tei, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     if (!tei.inventory.getStackInSlot(0).isEmpty()) {
       GlStateManager.pushMatrix();
       EntityItem item = new EntityItem(Minecraft.getMinecraft().world, x, y, z, tei.inventory.getStackInSlot(0));

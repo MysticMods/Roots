@@ -170,7 +170,7 @@ public class ModBlocks {
     event.addBlock(reinforced_pyre = new BlockReinforcedPyre(Material.ROCK, SoundType.STONE, 8.4f, "reinforced_pyre", TileEntityPyre.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(decorative_pyre = new BlockDecorativePyre(Material.WOOD, SoundType.WOOD, 1.4f, "decorative_pyre", TileEntityDecorativePyre.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(imbuer = new BlockImbuer(Material.WOOD, SoundType.WOOD, 1.4f, "imbuer", TileEntityImbuer.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(munifier = new BlockMunifier(Material.WOOD, SoundType.WOOD, 1.4f, "munifier", TileEntityMunifier.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    event.addBlock(munifier = new BlockImposer(Material.WOOD, SoundType.WOOD, 1.4f, "munifier", TileEntityImposer.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(offering_plate = new BlockOfferingPlate(Material.ROCK, SoundType.STONE, 1.4f, "offering_plate", TileEntityOfferingPlate.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(reinforced_offering_plate = new BlockReinforcedOfferingPlate(Material.ROCK, SoundType.STONE, 4.4f, "reinforced_offering_plate", TileEntityOfferingPlate.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(unending_bowl = new BlockUnendingBowl(Material.ROCK, SoundType.STONE, 1.4f, "unending_bowl", TileEntityUnendingBowl.class)).setCreativeTab(Roots.tab).setLightOpacity(0);

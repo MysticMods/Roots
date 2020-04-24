@@ -215,7 +215,7 @@ public class HerbHud {
       mc.fontRenderer.drawStringWithShadow(s, 18.0f, 3.5f, 16777215);
       GlStateManager.enableLighting();
       GlStateManager.enableDepth();
-      // Fixes opaque cooldown overlay a bit lower
+      // Fixes opaque cooldownLeft overlay a bit lower
       // TODO: check if enabled blending still screws things up down the line.
       GlStateManager.enableBlend();
       RenderHelper.disableStandardItemLighting();

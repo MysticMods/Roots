@@ -58,6 +58,7 @@ public class CommandStaff extends CommandBase {
         return;
       }
 
+      // TODO
       StaffSpellStorage cap = StaffSpellStorage.fromStack(spell.getResult());
       ItemStack staff = new ItemStack(ModItems.staff);
       ItemStaff.createData(staff, cap);
