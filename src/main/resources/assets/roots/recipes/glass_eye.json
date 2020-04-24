@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GTG",
+    "GGG"  ],
+  "key": {
+    "G": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "glass"
+      }
+    ],
+    "L": [
+      {
+        "item": "minecraft:torch"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:glass_eye",
+    "data": 0
+  }
+}
