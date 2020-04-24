@@ -36,6 +36,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nonnull;
@@ -1103,12 +1104,20 @@ public class ModRecipes {
             new ItemStack(Blocks.BROWN_MUSHROOM)));
 
     // Cooking!!!
-/*    addPyreCraftingRecipe("cooked_seeds", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_seeds, 5), 1).addIngredients(
+    addPyreCraftingRecipe("cooked_seeds", new PyreCraftingRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_seeds, 5), 1).addIngredients(
         new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds)).setBurnTime(20));*/ // TODO: Restore
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds)).setBurnTime(20));
+
+    addPyreCraftingRecipe("dead_bush", new PyreCraftingRecipe(new ItemStack(Blocks.TALLGRASS, 3, BlockTallGrass.EnumType.DEAD_BUSH.getMeta()))
+        .addIngredients(
+            new OreIngredient("treeSapling"),
+            new OreIngredient("treeSapling"),
+            new OreIngredient("treeSapling"),
+            new OreIngredient("treeSapling"),
+            new OreIngredient("treeSapling")));
 
     addPyreCraftingRecipe("cooked_potato", new PyreCraftingRecipe(new ItemStack(Items.BAKED_POTATO, 5), 1).addIngredients(
         new OreIngredient("cropPotato"),
