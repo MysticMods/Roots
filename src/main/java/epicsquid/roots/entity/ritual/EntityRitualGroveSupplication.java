@@ -46,7 +46,7 @@ public class EntityRitualGroveSupplication extends EntityRitualBase {
       }
     }
     if (this.ticksExisted % ritual.interval == 0) {
-      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), 15, 10, 15, ModBlocks.grove_stone);
+      List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, ModBlocks.grove_stone);
       if (positions.isEmpty()) return;
 
       boolean didStuff = false;
