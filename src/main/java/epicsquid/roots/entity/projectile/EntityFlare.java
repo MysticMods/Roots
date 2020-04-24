@@ -6,6 +6,7 @@ import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualFireStorm;
 import epicsquid.roots.ritual.RitualRegistry;
+import epicsquid.roots.util.EntityUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -123,7 +124,12 @@ public class EntityFlare extends Entity {
 
   private void attackWithFire(List<EntityLivingBase> entities) {
     for (EntityLivingBase target : entities) {
-      if (target instanceof EntityPlayer) continue;
+      if (target instanceof EntityPlayer) {
+        continue;
+      }
+      if (EntityUtil.isFriendly(target) || !EntityUtil.isHostile(target)) {
+        continue;
+      }
       DamageSource source = ModDamage.wildfireDamage(target.world);
       if (source == null) {
         continue;
