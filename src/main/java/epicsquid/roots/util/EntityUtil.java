@@ -66,7 +66,7 @@ public class EntityUtil {
     return !isHostile(entity);
   }
 
-  public static boolean isHostile (Entity entity, EntityPlayer player) {
+  public static boolean isHostileTo (Entity entity, EntityPlayer player) {
     if (isHostile(entity)) return true;
 
     if (entity instanceof EntityLiving) {
