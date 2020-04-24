@@ -21,6 +21,12 @@ public class MappingsEvent {
       ResourceLocation missing = mapping.key;
       if (missing.getNamespace().equals(Roots.MODID)) {
         switch (missing.getPath()) {
+          case "offering_plate":
+            mapping.remap(epicsquid.roots.init.ModBlocks.catalyst_plate);
+            break;
+          case "reinforced_offering_plate":
+            mapping.remap(epicsquid.roots.init.ModBlocks.reinforced_catalyst_plate);
+            break;
           case "thatch":
             mapping.remap(ModBlocks.thatch);
             break;
@@ -69,6 +75,12 @@ public class MappingsEvent {
       ResourceLocation missing = mapping.key;
       if (missing.getNamespace().equals(Roots.MODID)) {
         switch (missing.getPath()) {
+          case "offering_plate":
+            mapping.remap(((BlockBase) epicsquid.roots.init.ModBlocks.catalyst_plate).getItemBlock());
+            break;
+          case "reinforced_offering_plate":
+            mapping.remap(((BlockBase) epicsquid.roots.init.ModBlocks.reinforced_catalyst_plate).getItemBlock());
+            break;
           case "thatch":
             mapping.remap(((BlockBase) ModBlocks.thatch).getItemBlock());
             break;
