@@ -69,7 +69,7 @@ public class Spells {
 
     @ZenMethod
     public Spell setCooldown (int value) {
-      return set("cooldown", value);
+      return set("cooldownLeft", value);
     }
 
     @ZenMethod

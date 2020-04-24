@@ -12,6 +12,7 @@ import epicsquid.roots.util.types.Property;
 import epicsquid.roots.util.types.PropertyTable;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 
 import java.util.Map;
@@ -53,8 +54,8 @@ public class CommandProperties extends CraftTweakerCommand {
         break;
       case "cast_type":
         return;
-      case "cooldown":
-        desc = "cooldown (in ticks) before spell can be used again";
+      case "cooldownLeft":
+        desc = "cooldownLeft (in ticks) before spell can be used again";
         break;
       case "cost_0":
         desc = "first spell herb cost";
@@ -94,8 +95,8 @@ public class CommandProperties extends CraftTweakerCommand {
             break;
           }
         case spell:
-          for (Map.Entry<String, SpellBase> entry : SpellRegistry.spellRegistry.entrySet()) {
-            String name = entry.getKey();
+          for (Map.Entry<ResourceLocation, SpellBase> entry : SpellRegistry.spellRegistry.entrySet()) {
+            String name = entry.getKey().getPath();
             SpellBase spell = entry.getValue();
             PropertyTable props = spell.getProperties();
             CraftTweakerAPI.getLogger().logInfo("Spell: " + name);

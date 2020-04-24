@@ -1,27 +1,27 @@
 package epicsquid.roots.library;
 
+import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.SpellBase;
-import epicsquid.roots.spell.SpellRegistry;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Map;
-import java.util.Objects;
 
 // TODO: Not actually a capability
 public class StaffSpellStorage implements INBTSerializable<NBTTagCompound> {
-  private static int MAX_SPELL_SLOT = 4;
-  private static int MIN_SPELL_SLOT = 0;
+  private static int MAX_SPELL_SLOT = 5;
+  private static int MIN_SPELL_SLOT = 1;
 
   private Int2ObjectOpenHashMap<StaffSpellInfo> spells = new Int2ObjectOpenHashMap<>();
   private int selectedSlot = 0;
@@ -31,30 +31,13 @@ public class StaffSpellStorage implements INBTSerializable<NBTTagCompound> {
     this.stack = stack;
   }
 
-  public boolean isDirty() {
-    return false;
-  }
-
-  // TODO: What is this even used for?
-  public boolean hasSpell() {
-    if (!spells.isEmpty()) {
-      for (Int2ObjectMap.Entry<StaffSpellInfo> entry : this.spells.int2ObjectEntrySet()) {
-        if (entry.getValue() != null) {
-          return true;
-        }
-      }
-    }
-
-    return false;
-  }
-
   public boolean hasSpellInSlot() {
     return spells.get(this.selectedSlot) != null;
   }
 
   public boolean isEmpty() {
-    for (Int2ObjectMap.Entry<StaffSpellInfo> entry : this.spells.int2ObjectEntrySet()) {
-      if (entry.getValue() != null) {
+    for (StaffSpellInfo v : this.spells.values()) {
+      if (v != null) {
         return false;
       }
     }
@@ -66,13 +49,19 @@ public class StaffSpellStorage implements INBTSerializable<NBTTagCompound> {
     if (slot < MIN_SPELL_SLOT || slot > MAX_SPELL_SLOT) {
       throw new IllegalStateException("Tried to get spell for invalid slot " + slot);
     }
-    return spells.get(slot);
+    return spells.get(slot-1);
   }
 
+  public int getCooldownLeft() {
+    StaffSpellInfo info = getSelectedInfo();
+    if (info == null) {
+      return -1;
+    }
+    return info.cooldownLeft();
+  }
 
-
-  public int getCooldown() {
-    StaffSpellInfo info = getSelectedSpell();
+  public int getCooldown () {
+    StaffSpellInfo info = getSelectedInfo();
     if (info == null) {
       return -1;
     }
@@ -80,27 +69,16 @@ public class StaffSpellStorage implements INBTSerializable<NBTTagCompound> {
   }
 
   // TODO: Is this used? Is it used usefully?
-  @Deprecated
   public void setCooldown() {
-    StaffSpellInfo info = getSelectedSpell();
+    StaffSpellInfo info = getSelectedInfo();
     if (info != null) {
       info.use();
     }
     saveToStack();
   }
 
-  @Deprecated
-  public int getLastCooldown() {
-    return -1;
-  }
-
-  @Deprecated
-  public void setLastCooldown(int lastCooldown) {
-    saveToStack();
-  }
-
   @Nullable
-  public StaffSpellInfo getSelectedSpell() {
+  public StaffSpellInfo getSelectedInfo() {
     return spells.get(this.selectedSlot);
   }
 
@@ -181,29 +159,13 @@ public class StaffSpellStorage implements INBTSerializable<NBTTagCompound> {
     setSelectedSlot(originalSlot);
   }
 
-  public void setSpellToSlot(SpellBase spell) {
-    assert hasFreeSlot();
-    setSelectedSlot(getNextFreeSlot());
-    this.spells.put(this.selectedSlot, spell);
-    /*    this.spellModules.remove(this.selectedSlot);*/
-    saveToStack();
-  }
-
-/*  public void addModule(SpellModule module) {
-    if (this.spellModules.getOrDefault(this.selectedSlot, null) == null) {
-      List<SpellModule> modules = new ArrayList<>();
-      modules.add(module);
-      this.spellModules.put(this.selectedSlot, modules);
-    } else {
-      List<SpellModule> modules = this.spellModules.get(this.selectedSlot);
-      modules.add(module);
+  public void setSpellToSlot(StaffSpellInfo spell) {
+    if (hasFreeSlot()) {
+      setSelectedSlot(getNextFreeSlot());
+      this.spells.put(this.selectedSlot, spell);
+      saveToStack();
     }
-    saveToStack();
   }
-
-  public List<SpellModule> getSelectedModules() {
-    return this.spellModules.getOrDefault(this.selectedSlot, new ArrayList<>());
-  }*/
 
   public int getNextFreeSlot() {
     for (int i = 0; i < 5; i++) {
@@ -221,46 +183,36 @@ public class StaffSpellStorage implements INBTSerializable<NBTTagCompound> {
   @Override
   public NBTTagCompound serializeNBT() {
     NBTTagCompound compound = new NBTTagCompound();
-    for (Map.Entry<Integer, SpellBase> entry : this.spells.entrySet()) {
-      compound.setString("spell_" + entry.getKey(), (entry.getValue() == null) ? "" : entry.getValue().getName());
+    NBTTagList spells = new NBTTagList();
+    for (Int2ObjectMap.Entry<StaffSpellInfo> entry : this.spells.int2ObjectEntrySet()) {
+      spells.appendTag((entry.getValue() == null) ? new NBTTagCompound() : entry.getValue().serializeNBT());
     }
-
-/*    for (Map.Entry<Integer, List<SpellModule>> entry : this.spellModules.entrySet()) {
-      List<SpellModule> modules = entry.getValue();
-      for (int i = 0; i < modules.size(); i++) {
-        compound.setString(entry.getKey() + "_spell_" + i, modules.get(i).getName());
-      }
-    }*/
+    compound.setTag("spells", spells);
 
     compound.setInteger("selectedSlot", this.selectedSlot);
-    compound.setInteger("cooldown", this.cooldown);
-    compound.setInteger("lastCooldown", this.lastCooldown);
     return compound;
   }
 
   @Override
   public void deserializeNBT(NBTTagCompound tag) {
-    for (int i = 0; i < 5; i++) {
-      if (!tag.getString("spell_" + i).isEmpty()) {
-        spells.put(i, SpellRegistry.getSpell(tag.getString("spell_" + i)));
+    if (tag.hasKey("spells", Constants.NBT.TAG_LIST)) {
+      NBTTagList spells = tag.getTagList("spells", Constants.NBT.TAG_COMPOUND);
+      if (spells.tagCount() > MAX_SPELL_SLOT) {
+        Roots.logger.error("Invalid spell when deserializing storage: spells list is " + spells.tagCount() + " which is greater than MAX_SPELL_SLOT " + MAX_SPELL_SLOT + ": " + tag.toString());
+      }
+      for (int i = 0; i < spells.tagCount(); i++) {
+        int slot = i + 1;
+        this.spells.put(slot, StaffSpellInfo.fromNBT(spells.getCompoundTagAt(i)));
+      }
+    } else {
+      for (int i = 0; i < 5; i++) {
+        if (tag.hasKey("spell_" + i)) {
+          spells.put(i, StaffSpellInfo.fromRegistry(tag.getString("spell_" + i)));
+        }
       }
     }
 
-/*    for (int i = 0; i < 5; i++) {
-      List<SpellModule> modules = new ArrayList<>();
-      for (int j = 0; j < 5; j++) {
-        if (!tag.getString(i + "_spell_" + j).isEmpty()) {
-          modules.add(ModuleRegistry.getModule(tag.getString(i + "_spell_" + j)));
-        }
-      }
-      if (modules.size() > 0) {
-        this.spellModules.put(i, modules);
-      }
-    }*/
-
     this.selectedSlot = tag.getInteger("selectedSlot");
-    this.cooldown = tag.getInteger("cooldown");
-    this.lastCooldown = tag.getInteger("lastCooldown");
   }
 
   @Nonnull

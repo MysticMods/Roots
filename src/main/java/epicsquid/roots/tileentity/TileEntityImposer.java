@@ -3,8 +3,6 @@ package epicsquid.roots.tileentity;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.spell.modules.ModuleRegistry;
-import epicsquid.roots.spell.modules.SpellModule;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,20 +18,20 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 
-public class TileEntityMunifier extends TileBase implements ITickable {
+public class TileEntityImposer extends TileBase implements ITickable {
   public ItemStackHandler inventory = new ItemStackHandler(1) {
     @Override
     protected void onContentsChanged(int slot) {
-      TileEntityMunifier.this.markDirty();
+      TileEntityImposer.this.markDirty();
       if (!world.isRemote) {
-        TileEntityMunifier.this.updatePacketViaState();
+        TileEntityImposer.this.updatePacketViaState();
       }
     }
   };
   int ticks = 0;
   public float angle = 0;
 
-  public TileEntityMunifier() {
+  public TileEntityImposer() {
     super();
   }
 

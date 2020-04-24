@@ -186,11 +186,12 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.imbuer), SPELL_MODIFIERS);
     registry.addRecipeCatalyst(new ItemStack(ModItems.spell_chrysopoeia), CHRYSOPOEIA);
 
-    ItemStack spellDust = new ItemStack(ModItems.spell_dust);
+    // TODO:
+/*    ItemStack spellDust = new ItemStack(ModItems.spell_dust);
     StaffSpellStorage handler = StaffSpellStorage.fromStack(spellDust);
     handler.setSpellToSlot(SpellChrysopoeia.instance);
     handler.saveToStack();
-    registry.addRecipeCatalyst(spellDust, CHRYSOPOEIA);
+    registry.addRecipeCatalyst(spellDust, CHRYSOPOEIA);*/
 
     // TODO: Improve these
     registry.addIngredientInfo(new ItemStack(ModItems.terra_moss), VanillaTypes.ITEM, I18n.format("jei.roots.terra_moss.desc"));
@@ -223,7 +224,8 @@ public class JEIRootsPlugin implements IModPlugin {
     ISubtypeRegistry.ISubtypeInterpreter spellInterpreter = itemStack -> {
       Item stackItem = itemStack.getItem();
       if (stackItem != ModItems.spell_dust) return ISubtypeRegistry.ISubtypeInterpreter.NONE;
-      SpellBase spell = StaffSpellStorage.fromStack(itemStack).getSelectedSpell();
+      // TODO
+      SpellBase spell = StaffSpellStorage.fromStack(itemStack).getSelectedInfo().getSpell();
       if (spell != null) {
         return spell.getName();
       }

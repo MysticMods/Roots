@@ -5,6 +5,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.entity.spell.EntitySpellBase;
+import epicsquid.roots.library.StaffSpellInfo;
 import epicsquid.roots.library.StaffSpellStorage;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
@@ -228,6 +229,10 @@ public abstract class SpellBase extends RegistryItem {
     return ListUtil.matchesIngredients(ingredients, this.getIngredients());
   }
 
+  public boolean cast (EntityPlayer caster, StaffSpellInfo info, int ticks) {
+    return cast(caster, info.getModifiers(), ticks);
+  }
+
   public abstract boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks);
 
   public float getRed1() {
@@ -280,7 +285,8 @@ public abstract class SpellBase extends RegistryItem {
 
   public ItemStack getResult() {
     ItemStack stack = new ItemStack(ModItems.spell_dust);
-    StaffSpellStorage.fromStack(stack).setSpellToSlot(this);
+    // TODO:
+    //StaffSpellStorage.fromStack(stack).setSpellToSlot(this);
     return stack;
   }
 

@@ -47,7 +47,7 @@ public class MessageServerUpdateStaff implements IMessage {
     }
 
     private void handleMessage(MessageServerUpdateStaff message, MessageContext ctx) {
-      int opcode = message.getOpcode();
+/*      int opcode = message.getOpcode();
       EntityPlayerMP player = ctx.getServerHandler().player;
       ItemStack staff = null;
       for (ItemStack s : player.getHeldEquipment()) {
@@ -72,8 +72,8 @@ public class MessageServerUpdateStaff implements IMessage {
         return;
       }
 
-      SpellBase spell = handler.getSelectedSpell();
-      player.sendMessage(new TextComponentTranslation("roots.info.staff.slot_and_spell", handler.getSelectedSlot() + 1, spell == null ? "none" : new TextComponentTranslation("roots.spell." + spell.getName() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))).setStyle(new Style().setColor(TextFormatting.GOLD)));
+      SpellBase spell = handler.getSelectedInfo();
+      player.sendMessage(new TextComponentTranslation("roots.info.staff.slot_and_spell", handler.getSelectedSlot() + 1, spell == null ? "none" : new TextComponentTranslation("roots.spell." + spell.getName() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))).setStyle(new Style().setColor(TextFormatting.GOLD)));*/
     }
   }
 }
