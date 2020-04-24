@@ -3,28 +3,8 @@
   "texture_base": "roots:items/",
   "models": [
     {
-      "type": "tool",
-      "base": "runic_axe"
-    },
-    {
-      "type": "tool",
-      "base": "runic_hoe"
-    },
-    {
-      "type": "tool",
-      "base": "runic_pickaxe"
-    },
-    {
-      "type": "tool",
-      "base": "runic_shovel"
-    },
-    {
-      "type": "tool",
-      "base": "runic_sword"
-    },
-    {
-      "type": "tool",
-      "base": "runic_dagger"
+      "type": "item",
+      "base": "glass_eye"
     },
     {
       "type": "tool",
