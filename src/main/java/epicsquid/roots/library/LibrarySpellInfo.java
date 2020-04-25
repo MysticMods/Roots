@@ -6,7 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import javax.annotation.Nullable;
 
-public class LibrarySpellInfo extends AbstractSpellInfo<ModifierList> {
+public class LibrarySpellInfo extends AbstractSpellModifiers<ModifierList> {
   private boolean obtained;
 
   private LibrarySpellInfo() {
