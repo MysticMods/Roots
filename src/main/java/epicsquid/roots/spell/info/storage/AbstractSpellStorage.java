@@ -12,6 +12,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implements INBTSerializable<NBTTagCompound> {
   protected ItemStack stack;
@@ -92,8 +94,17 @@ public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implemen
   @Override
   public abstract void deserializeNBT(NBTTagCompound tag);
 
+  protected static <V extends AbstractSpellInfo, T extends AbstractSpellStorage<V>> T fromStack (ItemStack stack, Function<ItemStack, T> factory) {
+    T result = factory.apply(stack);
+    NBTTagCompound tag = ItemUtil.getOrCreateTag(stack);
+    if (tag.hasKey("spell_storage")) {
+      result.deserializeNBT(tag.getCompoundTag("spell_storage"));
+    }
+    return result;
+  }
+
   public void saveToStack() {
     NBTTagCompound tag = ItemUtil.getOrCreateTag(stack);
-    tag.setTag("spell_holder", this.serializeNBT());
+    tag.setTag("spell_storage", this.serializeNBT());
   }
 }

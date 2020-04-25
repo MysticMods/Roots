@@ -1,6 +1,8 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemBase;
+import epicsquid.roots.spell.info.SpellDustInfo;
+import epicsquid.roots.spell.info.storage.DustSpellStorage;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
@@ -33,12 +35,11 @@ public class ItemSpellDust extends ItemBase {
   @SideOnly(Side.CLIENT)
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
-    // TODO: Contextualise base on library
-    StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
-
-    SpellBase spell = capability.getSelectedInfo().getSpell();
+    SpellDustInfo info = DustSpellStorage.fromStack(stack).getSelectedInfo();
+    SpellBase spell = info == null ? null : info.getSpell();
     if (spell == null) return;
 
+    // TODO: Migrate this to the info
     spell.addToolTip(tooltip);
   }
 }

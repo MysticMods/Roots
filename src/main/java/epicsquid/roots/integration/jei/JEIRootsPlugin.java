@@ -2,6 +2,9 @@ package epicsquid.roots.integration.jei;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.ElementalSoilConfig;
+import epicsquid.roots.spell.SpellChrysopoeia;
+import epicsquid.roots.spell.info.SpellDustInfo;
+import epicsquid.roots.spell.info.storage.DustSpellStorage;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
@@ -186,14 +189,11 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModItems.spell_chrysopoeia), CHRYSOPOEIA);
 
     // TODO:
-/*    ItemStack spellDust = new ItemStack(ModItems.spell_dust);
-    StaffSpellStorage handler = StaffSpellStorage.fromStack(spellDust);
-    handler.setSpellToSlot(SpellChrysopoeia.instance);
-    handler.saveToStack();
-    registry.addRecipeCatalyst(spellDust, CHRYSOPOEIA);*/
+    ItemStack spellDust = new ItemStack(ModItems.spell_dust);
+    DustSpellStorage.fromStack(spellDust).setSpellToSlot(SpellChrysopoeia.instance);
+    registry.addRecipeCatalyst(spellDust, CHRYSOPOEIA);
 
-    // TODO: Improve these
-    registry.addIngredientInfo(new ItemStack(ModItems.terra_moss), VanillaTypes.ITEM, I18n.format("jei.roots.terra_moss.desc"));
+    // Improve this
     registry.addIngredientInfo(new ItemStack(ModItems.terra_spores), VanillaTypes.ITEM, I18n.format("jei.roots.terra_spores.desc"));
     registry.addIngredientInfo(new ItemStack(ModItems.wildroot), VanillaTypes.ITEM, I18n.format("jei.roots.wildroot.desc"));
 
@@ -224,7 +224,8 @@ public class JEIRootsPlugin implements IModPlugin {
       Item stackItem = itemStack.getItem();
       if (stackItem != ModItems.spell_dust) return ISubtypeRegistry.ISubtypeInterpreter.NONE;
       // TODO
-      SpellBase spell = StaffSpellStorage.fromStack(itemStack).getSelectedInfo().getSpell();
+      SpellDustInfo info = DustSpellStorage.fromStack(itemStack).getSelectedInfo();
+      SpellBase spell = info == null ? null : info.getSpell();
       if (spell != null) {
         return spell.getName();
       }

@@ -12,6 +12,7 @@ import epicsquid.roots.modifiers.modifier.Modifier;
 import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.modifiers.modifier.ModifierList;
 import epicsquid.roots.recipe.IRootsRecipe;
+import epicsquid.roots.spell.info.storage.DustSpellStorage;
 import epicsquid.roots.tileentity.TileEntityMortar;
 import epicsquid.roots.util.ClientHerbUtil;
 import epicsquid.roots.util.ServerHerbUtil;
@@ -284,8 +285,7 @@ public abstract class SpellBase extends RegistryItem {
 
   public ItemStack getResult() {
     ItemStack stack = new ItemStack(ModItems.spell_dust);
-    // TODO:
-    //StaffSpellStorage.fromStack(stack).setSpellToSlot(this);
+    DustSpellStorage.fromStack(stack).setSpellToSlot(this);
     return stack;
   }
 
