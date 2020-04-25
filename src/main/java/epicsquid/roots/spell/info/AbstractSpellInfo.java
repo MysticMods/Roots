@@ -3,6 +3,7 @@ package epicsquid.roots.spell.info;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.INBTSerializable;
 
 import javax.annotation.Nullable;
@@ -31,6 +32,11 @@ public abstract class AbstractSpellInfo implements INBTSerializable<NBTTagCompou
 
   @Override
   public void deserializeNBT(NBTTagCompound nbt) {
-    this.spell = SpellRegistry.getSpell(nbt.getString("s"));
+    String name = nbt.getString("s");
+    if (name.contains(":")) {
+      this.spell = SpellRegistry.getSpell(new ResourceLocation(name));
+    } else {
+      this.spell = SpellRegistry.getSpell(name);
+    }
   }
 }
