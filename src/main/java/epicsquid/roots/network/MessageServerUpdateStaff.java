@@ -1,14 +1,6 @@
 package epicsquid.roots.network;
 
-import epicsquid.roots.library.StaffSpellStorage;
-import epicsquid.roots.init.ModItems;
-import epicsquid.roots.spell.SpellBase;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;

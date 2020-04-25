@@ -1,19 +1,14 @@
-package epicsquid.roots.library;
+package epicsquid.roots.info.storage;
 
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
-import epicsquid.roots.init.ModItems;
-import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.info.StaffSpellInfo;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.common.util.INBTSerializable;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -205,7 +200,7 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellStorage, S
   @Nonnull
   public static StaffSpellStorage fromStack(ItemStack stack) {
     StaffSpellStorage result = new StaffSpellStorage(stack);
-    NBTTagCompound tag = stack.getTagCompound();
+    NBTTagCompound tag = ItemUtil.getOrCreateTag(stack);
     if (tag != null && tag.hasKey("spell_holder")) {
       result.deserializeNBT(tag.getCompoundTag("spell_holder"));
     }

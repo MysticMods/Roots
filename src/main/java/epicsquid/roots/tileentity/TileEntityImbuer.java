@@ -6,7 +6,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemStaff;
-import epicsquid.roots.library.StaffSpellStorage;
+import epicsquid.roots.info.storage.StaffSpellStorage;
 import epicsquid.roots.network.fx.MessageImbueCompleteFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.FakeSpell;
