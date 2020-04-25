@@ -1,7 +1,7 @@
 package epicsquid.roots.command;
 
 import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.roots.library.StaffSpellStorage;
+import epicsquid.roots.info.storage.StaffSpellStorage;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.spell.SpellBase;

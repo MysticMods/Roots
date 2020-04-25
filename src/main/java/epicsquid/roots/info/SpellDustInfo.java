@@ -1,4 +1,4 @@
-package epicsquid.roots.library;
+package epicsquid.roots.info;
 
 import epicsquid.roots.spell.SpellBase;
 import net.minecraft.nbt.NBTTagCompound;

@@ -1,7 +1,6 @@
 package epicsquid.roots.world.data;
 
-import epicsquid.roots.library.LibrarySpellInfo;
-import epicsquid.roots.library.StaffSpellInfo;
+import epicsquid.roots.info.LibrarySpellInfo;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.entity.player.EntityPlayer;

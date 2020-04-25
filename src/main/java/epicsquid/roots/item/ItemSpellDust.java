@@ -1,7 +1,7 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemBase;
-import epicsquid.roots.library.StaffSpellStorage;
+import epicsquid.roots.info.storage.StaffSpellStorage;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.client.util.ITooltipFlag;
