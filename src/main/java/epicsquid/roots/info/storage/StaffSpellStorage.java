@@ -170,7 +170,6 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
       spells.appendTag((entry.getValue() == null) ? new NBTTagCompound() : entry.getValue().serializeNBT());
     }
     compound.setTag("spells", spells);
-
     compound.setInteger("selectedSlot", this.selectedSlot);
     return compound;
   }
