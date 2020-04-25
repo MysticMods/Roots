@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"3": "roots:blocks/munifier"
+		"3": "roots:blocks/imposer"
 	},
 	"elements": [
 		{
