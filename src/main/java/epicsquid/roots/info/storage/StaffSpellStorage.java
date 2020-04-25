@@ -14,7 +14,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 // TODO: Not actually a capability
-public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellStorage, StaffSpellInfo> {
+public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
   private static int MAX_SPELL_SLOT = 5;
   private static int MIN_SPELL_SLOT = 1;
 
