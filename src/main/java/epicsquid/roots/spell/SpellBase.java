@@ -5,7 +5,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.entity.spell.EntitySpellBase;
-import epicsquid.roots.info.StaffSpellInfo;
+import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.modifier.Modifier;

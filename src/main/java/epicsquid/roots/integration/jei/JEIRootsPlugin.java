@@ -2,7 +2,7 @@ package epicsquid.roots.integration.jei;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.ElementalSoilConfig;
-import epicsquid.roots.info.storage.StaffSpellStorage;
+import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;

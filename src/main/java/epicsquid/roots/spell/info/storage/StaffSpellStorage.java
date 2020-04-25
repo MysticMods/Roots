@@ -1,8 +1,8 @@
-package epicsquid.roots.info.storage;
+package epicsquid.roots.spell.info.storage;
 
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
-import epicsquid.roots.info.StaffSpellInfo;
+import epicsquid.roots.spell.info.StaffSpellInfo;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.item.ItemStack;
