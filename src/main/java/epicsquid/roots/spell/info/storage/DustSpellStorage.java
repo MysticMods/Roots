@@ -1,6 +1,6 @@
-package epicsquid.roots.info.storage;
+package epicsquid.roots.spell.info.storage;
 
-import epicsquid.roots.info.SpellDustInfo;
+import epicsquid.roots.spell.info.SpellDustInfo;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 

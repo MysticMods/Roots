@@ -1,4 +1,4 @@
-package epicsquid.roots.info;
+package epicsquid.roots.spell.info;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.modifiers.instance.ModifierInstanceList;

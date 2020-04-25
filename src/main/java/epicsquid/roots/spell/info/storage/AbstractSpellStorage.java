@@ -1,7 +1,7 @@
-package epicsquid.roots.info.storage;
+package epicsquid.roots.spell.info.storage;
 
 import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.roots.info.AbstractSpellInfo;
+import epicsquid.roots.spell.info.AbstractSpellInfo;
 import epicsquid.roots.spell.SpellBase;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
