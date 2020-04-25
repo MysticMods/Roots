@@ -198,11 +198,6 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
 
   @Nonnull
   public static StaffSpellStorage fromStack(ItemStack stack) {
-    StaffSpellStorage result = new StaffSpellStorage(stack);
-    NBTTagCompound tag = ItemUtil.getOrCreateTag(stack);
-    if (tag != null && tag.hasKey("spell_holder")) {
-      result.deserializeNBT(tag.getCompoundTag("spell_holder"));
-    }
-    return result;
+    return fromStack(stack, StaffSpellStorage::new);
   }
 }
