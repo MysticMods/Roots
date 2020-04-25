@@ -6,7 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import javax.annotation.Nullable;
 
-public class DustSpellStorage extends AbstractSpellStorage<DustSpellStorage, SpellDustInfo> {
+public class DustSpellStorage extends AbstractSpellStorage<SpellDustInfo> {
   private SpellDustInfo info = null;
 
   public DustSpellStorage() {

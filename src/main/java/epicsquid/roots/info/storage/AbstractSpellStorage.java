@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public abstract class AbstractSpellStorage<T extends AbstractSpellStorage<T, V>, V extends AbstractSpellInfo> implements INBTSerializable<NBTTagCompound> {
+public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implements INBTSerializable<NBTTagCompound> {
   protected ItemStack stack;
   protected int selectedSlot;
 
