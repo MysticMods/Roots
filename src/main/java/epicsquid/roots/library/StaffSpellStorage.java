@@ -19,22 +19,22 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 // TODO: Not actually a capability
-public class StaffSpellStorage implements INBTSerializable<NBTTagCompound> {
+public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellStorage, StaffSpellInfo> {
   private static int MAX_SPELL_SLOT = 5;
   private static int MIN_SPELL_SLOT = 1;
 
   private Int2ObjectOpenHashMap<StaffSpellInfo> spells = new Int2ObjectOpenHashMap<>();
-  private int selectedSlot = 0;
-  private ItemStack stack;
 
   public StaffSpellStorage(ItemStack stack) {
     this.stack = stack;
   }
 
+  @Override
   public boolean hasSpellInSlot() {
     return spells.get(this.selectedSlot) != null;
   }
 
+  @Override
   public boolean isEmpty() {
     for (StaffSpellInfo v : this.spells.values()) {
       if (v != null) {
@@ -44,6 +44,7 @@ public class StaffSpellStorage implements INBTSerializable<NBTTagCompound> {
     return true;
   }
 
+  @Override
   @Nullable
   public StaffSpellInfo getSpellInSlot(int slot) {
     if (slot < MIN_SPELL_SLOT || slot > MAX_SPELL_SLOT) {
@@ -52,6 +53,7 @@ public class StaffSpellStorage implements INBTSerializable<NBTTagCompound> {
     return spells.get(slot-1);
   }
 
+  @Override
   public int getCooldownLeft() {
     StaffSpellInfo info = getSelectedInfo();
     if (info == null) {
@@ -60,6 +62,7 @@ public class StaffSpellStorage implements INBTSerializable<NBTTagCompound> {
     return info.cooldownLeft();
   }
 
+  @Override
   public int getCooldown () {
     StaffSpellInfo info = getSelectedInfo();
     if (info == null) {
@@ -69,6 +72,7 @@ public class StaffSpellStorage implements INBTSerializable<NBTTagCompound> {
   }
 
   // TODO: Is this used? Is it used usefully?
+  @Override
   public void setCooldown() {
     StaffSpellInfo info = getSelectedInfo();
     if (info != null) {
@@ -77,39 +81,19 @@ public class StaffSpellStorage implements INBTSerializable<NBTTagCompound> {
     saveToStack();
   }
 
+  @Override
   @Nullable
   public StaffSpellInfo getSelectedInfo() {
     return spells.get(this.selectedSlot);
   }
 
-  @SideOnly(Side.CLIENT)
-  public String formatSelectedSpell() {
-    StaffSpellInfo info = spells.get(this.selectedSlot);
-    if (info == null) {
-      return "";
-    }
-
-    SpellBase spell = info.getSpell();
-    if (spell == null) {
-      return "";
-    }
-    return "(" + spell.getTextColor() + TextFormatting.BOLD + I18n.format("roots.spell." + spell.getName() + ".name") + TextFormatting.RESET + ")";
-  }
-
+  @Override
   public void clearSelectedSlot() {
     spells.put(this.selectedSlot, null);
     saveToStack();
   }
 
-  public int getSelectedSlot() {
-    return this.selectedSlot;
-  }
-
-  public void setSelectedSlot(int slot) {
-    this.selectedSlot = slot;
-    saveToStack();
-  }
-
+  @Override
   public void previousSlot() {
     if (this.isEmpty()) {
       setSelectedSlot(0);
@@ -134,7 +118,7 @@ public class StaffSpellStorage implements INBTSerializable<NBTTagCompound> {
     setSelectedSlot(originalSlot);
   }
 
-
+  @Override
   public void nextSlot() {
     if (this.isEmpty()) {
       setSelectedSlot(0);
@@ -159,6 +143,7 @@ public class StaffSpellStorage implements INBTSerializable<NBTTagCompound> {
     setSelectedSlot(originalSlot);
   }
 
+  @Override
   public void setSpellToSlot(StaffSpellInfo spell) {
     if (hasFreeSlot()) {
       setSelectedSlot(getNextFreeSlot());
@@ -167,6 +152,7 @@ public class StaffSpellStorage implements INBTSerializable<NBTTagCompound> {
     }
   }
 
+  @Override
   public int getNextFreeSlot() {
     for (int i = 0; i < 5; i++) {
       if (spells.getOrDefault(i, null) == null) {
@@ -176,6 +162,7 @@ public class StaffSpellStorage implements INBTSerializable<NBTTagCompound> {
     return -1;
   }
 
+  @Override
   public boolean hasFreeSlot() {
     return getNextFreeSlot() != -1;
   }
@@ -223,17 +210,5 @@ public class StaffSpellStorage implements INBTSerializable<NBTTagCompound> {
       result.deserializeNBT(tag.getCompoundTag("spell_holder"));
     }
     return result;
-  }
-
-  public void saveToStack() {
-    boolean correct = stack.getItem() == ModItems.spell_dust || stack.getItem() == ModItems.staff;
-    assert correct;
-
-    NBTTagCompound tag = stack.getTagCompound();
-    if (tag == null) {
-      tag = new NBTTagCompound();
-      stack.setTagCompound(tag);
-    }
-    tag.setTag("spell_holder", this.serializeNBT());
   }
 }

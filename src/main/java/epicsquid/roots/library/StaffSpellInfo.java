@@ -10,7 +10,7 @@ import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
 
-public class StaffSpellInfo extends AbstractSpellInfo<ModifierInstanceList> {
+public class StaffSpellInfo extends AbstractSpellModifiers<ModifierInstanceList> {
   private ModifierInstanceList modifiers = new ModifierInstanceList();
   private long cooldownStart = -1;
 

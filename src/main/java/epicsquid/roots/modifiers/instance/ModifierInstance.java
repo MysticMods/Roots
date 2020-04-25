@@ -51,6 +51,7 @@ public class ModifierInstance implements INBTSerializable<NBTTagCompound>, IModi
     return modifier.getActualItem();
   }
 
+  @Override
   public ModifierType getType () {
     return modifier.getType();
   }
