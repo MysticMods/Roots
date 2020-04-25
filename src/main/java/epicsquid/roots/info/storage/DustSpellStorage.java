@@ -35,6 +35,7 @@ public class DustSpellStorage extends AbstractSpellStorage<SpellDustInfo> {
   @Override
   public void clearSelectedSlot() {
     this.info = null;
+    saveToStack();
   }
 
   @Override
@@ -48,6 +49,7 @@ public class DustSpellStorage extends AbstractSpellStorage<SpellDustInfo> {
   @Override
   public void setSpellToSlot(SpellDustInfo spell) {
     this.info = spell;
+    saveToStack();
   }
 
   @Override
