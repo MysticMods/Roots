@@ -491,6 +491,7 @@ public class ModRecipes {
 
   public static void initTransmutationRecipes() {
     BlocksPredicate water = new WaterPredicate();
+    BlocksPredicate lava = new LavaPredicate();
     StatePredicate wool = new StatePredicate(Blocks.WOOL.getDefaultState());
     LeavesPredicate leaves = new LeavesPredicate();
     StatePredicate cobblestone = new StatePredicate(Blocks.COBBLESTONE.getDefaultState());
@@ -524,11 +525,14 @@ public class ModRecipes {
     TransmutationRecipe trapdoor_to_cobweb = new TransmutationRecipe(Blocks.TRAPDOOR.getDefaultState()).state(Blocks.WEB.getDefaultState()).condition(new BlockStateBelow(wool));
     addTransmutationRecipe("trapdoor_to_cobweb", trapdoor_to_cobweb);
 
-    TransmutationRecipe redstone_to_vines = new TransmutationRecipe(Blocks.REDSTONE_WIRE.getDefaultState()).item(new ItemStack(Blocks.VINE)).condition(new BlockStateAbove(cobblestoneSlab));
+    TransmutationRecipe redstone_to_vines = new TransmutationRecipe(Blocks.REDSTONE_WIRE.getDefaultState()).item(new ItemStack(Blocks.VINE)).condition(new BlockStateAbove(cobblestone));
     addTransmutationRecipe("redstone_to_vines", redstone_to_vines);
 
     TransmutationRecipe melon_to_pumpkin = new TransmutationRecipe(Blocks.MELON_BLOCK.getDefaultState()).state(Blocks.PUMPKIN.getDefaultState()).condition(new BlockStateBelow(cobblestone));
     addTransmutationRecipe("melon_to_pumpkin", melon_to_pumpkin);
+
+    TransmutationRecipe redstone_block_to_glowstone = new TransmutationRecipe(Blocks.GLOWSTONE.getDefaultState()).state(Blocks.REDSTONE_BLOCK.getDefaultState()).condition(new BlockStateBelow(lava));
+    addTransmutationRecipe("redstone_block_to_glowstone", redstone_block_to_glowstone);
   }
 
   public static void addAnimalHarvestRecipe(EntityLivingBase entity) {
@@ -753,7 +757,6 @@ public class ModRecipes {
     return runicShearRecipes.get(rl);
   }
 
-  @Nullable
   public static Set<RunicShearRecipe> getRunicShearRecipe(ItemStack stack) {
     Set<RunicShearRecipe> result = new HashSet<>();
     for (RunicShearRecipe recipe : runicShearRecipes.values()) {
