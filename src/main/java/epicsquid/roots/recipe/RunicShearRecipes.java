@@ -12,6 +12,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -32,6 +34,9 @@ public class RunicShearRecipes {
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "mule_fey_leather"), new ItemStack(ModItems.fey_leather, 1), EntityMule.class, 20 * 30));
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "mooshroom_fey_leather"), new ItemStack(ModItems.fey_leather, 1), EntityMooshroom.class, 20 * 30));
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "rabbit_fey_leather"), new ItemStack(ModItems.fey_leather, 1), EntityRabbit.class, 20 * 30));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "bat_fey_leather"), new ItemStack(ModItems.fey_leather, 1), EntityBat.class, 20 * 30));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "sheep_fey_leather"), new ItemStack(ModItems.fey_leather, 1), EntitySheep.class, 20 * 30));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "pig_fey_leather"), new ItemStack(ModItems.fey_leather, 1), EntityPig.class, 20 * 30));
 
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "chicken_fey_feather"), new ItemStack(ModItems.fey_feather, 1), EntityChicken.class, 20 * 45));
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "parrot_fey_feather"), new ItemStack(ModItems.fey_feather, 1), EntityParrot.class, 20 * 45));
@@ -60,8 +65,7 @@ public class RunicShearRecipes {
       }
     }, Sets.newHashSet(new ItemStack(Items.MELON_SEEDS), new ItemStack(ModItems.terra_spores), new ItemStack(Items.BEETROOT_SEEDS), new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed)), EntitySprout.class, 20 * 180));
 
-//    addPacifistEntry("pig", EntityPig.class);
-//    addPacifistEntry("sheep", EntitySheep.class);
-//    addPacifistEntry("wolf", EntityWolf.class);
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "wolf_bone"), new ItemStack(Items.BONE, 1), EntityBeetle.class, 20 * 180));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "ocelot_bone_meal"), new ItemStack(Items.STRING), EntityOcelot.class, 20 * 180));
   }
 }
