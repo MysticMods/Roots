@@ -16,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import net.minecraft.util.math.BlockPos;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -242,7 +243,12 @@ public class ContainerFeyCrafter extends Container {
 
   @Override
   public boolean canInteractWith(@Nonnull EntityPlayer player) {
-    return true;
+    BlockPos pos = this.crafter.getPos();
+    if (this.crafter.getWorld().getTileEntity(pos) != this.crafter) {
+        return false;
+    } else {
+        return player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+    }
   }
 
   public static class SlotGrid extends SlotItemHandler {
