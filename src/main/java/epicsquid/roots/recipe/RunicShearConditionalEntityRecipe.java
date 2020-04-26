@@ -15,29 +15,17 @@ import java.util.function.Function;
 /**
  * Transmutation recipe for Runic Shears
  */
-public class RunicShearConditionalEntityRecipe<T extends EntityLivingBase> extends RunicShearEntityRecipe {
-  protected final Function<T, ItemStack> functionMap;
+public class RunicShearConditionalEntityRecipe extends RunicShearEntityRecipe {
+  protected final Function<EntityLivingBase, ItemStack> functionMap;
 
-  public RunicShearConditionalEntityRecipe(ResourceLocation name, Function<T, ItemStack> functionMap, Set<ItemStack> drops, Class<T> entity, int cooldown) {
+  public RunicShearConditionalEntityRecipe(ResourceLocation name, Function<EntityLivingBase, ItemStack> functionMap, Set<ItemStack> drops, Class<? extends EntityLivingBase> entity, int cooldown) {
     super(name, ItemStack.EMPTY, entity, cooldown);
     this.functionMap = functionMap;
     this.dropMatch = Ingredient.fromStacks(drops.toArray(new ItemStack[0]));
   }
 
-  public Class<? extends EntityLivingBase> getClazz() {
-    return clazz;
-  }
-
-  public int getCooldown() {
-    return cooldown;
-  }
-
-  @Nullable
-  public EntityLivingBase getEntity(World world) {
-    try {
-      return clazz.getConstructor(World.class).newInstance(world);
-    } catch (Exception e) {
-      return null;
-    }
+  @Override
+  public ItemStack getDrop(EntityLivingBase entity) {
+    return functionMap.apply(entity);
   }
 }
