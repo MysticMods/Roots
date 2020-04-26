@@ -35,7 +35,7 @@ public class ModItems {
   // All mod items
   public static Item pestle, herb_pouch, component_pouch, spell_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, wildwood_quiver, wildwood_bow,
       sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, apothecary_pouch, wooden_shears,
-      petals, flour, living_arrow, runic_dust, cooked_pereskia, fey_leather, wildewheet_bread, glass_eye;
+      petals, flour, living_arrow, runic_dust, cooked_pereskia, fey_leather, wildewheet_bread, glass_eye, fey_feather, strange_slime;
 
   public static Item runed_axe, runed_hoe, runed_pickaxe, runed_shovel, runed_sword, runed_dagger;
 
@@ -101,6 +101,20 @@ public class ModItems {
       @SuppressWarnings("deprecation")
       public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.RARE;
+      }
+    }.setCreativeTab(Roots.tab));
+    event.addItem(fey_feather = new ItemBase("fey_feather") {
+      @Override
+      @SuppressWarnings("deprecation")
+      public EnumRarity getRarity(ItemStack stack) {
+        return EnumRarity.RARE;
+      }
+    }.setCreativeTab(Roots.tab));
+    event.addItem(strange_slime = new ItemBase("strange_slime") {
+      @Override
+      @SuppressWarnings("deprecation")
+      public EnumRarity getRarity(ItemStack stack) {
+        return EnumRarity.UNCOMMON;
       }
     }.setCreativeTab(Roots.tab));
     event.addItem(salmon = new ItemSalmon("salmon_of_knowledge").setCreativeTab(Roots.tab));
@@ -241,6 +255,9 @@ public class ModItems {
     OreDictionary.registerOre("treeLeaves", ModBlocks.wildwood_leaves);
     OreDictionary.registerOre("leather", ModItems.fey_leather);
     OreDictionary.registerOre("feyLeather", ModItems.fey_leather);
+    OreDictionary.registerOre("feather", ModItems.fey_feather);
+    OreDictionary.registerOre("slimeball", ModItems.strange_slime);
+    OreDictionary.registerOre("feyFeather", ModItems.fey_feather);
     OreDictionary.registerOre("tallgrass", new ItemStack(Blocks.TALLGRASS, 1, BlockTallGrass.EnumType.GRASS.getMeta()));
     OreDictionary.registerOre("tallgrass", new ItemStack(Blocks.TALLGRASS, 1, BlockTallGrass.EnumType.FERN.getMeta()));
     OreDictionary.registerOre("mushroom", new ItemStack(Item.getItemFromBlock(Blocks.RED_MUSHROOM)));

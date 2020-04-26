@@ -4,6 +4,14 @@
   "models": [
     {
       "type": "item",
+      "base": "strange_slime"
+    },
+    {
+      "type": "item",
+      "base": "fey_feather"
+    },
+    {
+      "type": "item",
       "base": "glass_eye"
     },
     {

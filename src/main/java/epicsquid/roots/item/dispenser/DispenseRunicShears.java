@@ -143,7 +143,7 @@ public class DispenseRunicShears implements IBehaviorDispenseItem {
 
           if (entity != null && recipe != null && cap != null) {
             cap.setCooldown(recipe.getCooldown());
-            EntityItem ent = entity.entityDropItem(recipe.getDrop().copy(), 1.0F);
+            EntityItem ent = entity.entityDropItem(recipe.getDrop((EntityLivingBase) entity).copy(), 1.0F);
             ent.motionY += Util.rand.nextFloat() * 0.05F;
             ent.motionX += (Util.rand.nextFloat() - Util.rand.nextFloat()) * 0.1F;
             ent.motionZ += (Util.rand.nextFloat() - Util.rand.nextFloat()) * 0.1F;

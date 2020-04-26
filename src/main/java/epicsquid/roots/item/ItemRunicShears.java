@@ -154,7 +154,7 @@ public class ItemRunicShears extends ItemShearsBase {
           if (cap != null) {
             if (cap.canHarvest()) {
               cap.setCooldown(recipe.getCooldown());
-              EntityItem ent = entity.entityDropItem(recipe.getDrop().copy(), 1.0F);
+              EntityItem ent = entity.entityDropItem(recipe.getDrop(entity).copy(), 1.0F);
               ent.motionY += rand.nextFloat() * 0.05F;
               ent.motionX += (rand.nextFloat() - rand.nextFloat()) * 0.1F;
               ent.motionZ += (rand.nextFloat() - rand.nextFloat()) * 0.1F;

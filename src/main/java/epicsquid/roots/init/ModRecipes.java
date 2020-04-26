@@ -36,7 +36,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nonnull;
@@ -755,24 +754,26 @@ public class ModRecipes {
   }
 
   @Nullable
-  public static RunicShearRecipe getRunicShearRecipe(ItemStack stack) {
+  public static Set<RunicShearRecipe> getRunicShearRecipe(ItemStack stack) {
+    Set<RunicShearRecipe> result = new HashSet<>();
     for (RunicShearRecipe recipe : runicShearRecipes.values()) {
-      if (ItemStack.areItemStacksEqual(recipe.getDrop(), stack)) {
-        return recipe;
+      if (recipe.getDropMatch().test(stack)) {
+        result.add(recipe);
       }
     }
 
-    return null;
+    return result;
   }
 
-  public static RunicShearEntityRecipe getRunicShearEntityRecipe(ItemStack stack) {
+  public static Set<RunicShearEntityRecipe> getRunicShearEntityRecipe(ItemStack stack) {
+    Set<RunicShearEntityRecipe> result = new HashSet<>();
     for (RunicShearEntityRecipe recipe : runicShearEntityRecipes.values()) {
-      if (ItemStack.areItemStacksEqual(recipe.getDrop(), stack)) {
-        return recipe;
+      if (recipe.getDropMatch().test(stack)) {
+        result.add(recipe);
       }
     }
 
-    return null;
+    return result;
   }
 
   public static Set<Class<? extends Entity>> getRunicShearEntities() {

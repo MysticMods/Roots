@@ -1,5 +1,6 @@
 package epicsquid.roots.integration.jei.shears;
 
+import com.google.common.collect.Lists;
 import epicsquid.roots.recipe.RunicShearEntityRecipe;
 import epicsquid.roots.util.RenderUtil;
 import mezz.jei.api.ingredients.IIngredients;
@@ -18,7 +19,7 @@ public class RunicShearsEntityWrapper implements IRecipeWrapper {
 
   @Override
   public void getIngredients(IIngredients ingredients) {
-    ingredients.setOutput(VanillaTypes.ITEM, this.recipe.getDrop());
+    ingredients.setOutputs(VanillaTypes.ITEM, Lists.newArrayList(this.recipe.getDropMatch().getMatchingStacks()));
   }
 
   public int getCooldown() {

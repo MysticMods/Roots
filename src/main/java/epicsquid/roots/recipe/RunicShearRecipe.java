@@ -6,17 +6,22 @@ import epicsquid.roots.util.types.RegistryItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.Collections;
+import java.util.Set;
 
 /**
  * Transmutation recipe for Runic Shears
  */
 public class RunicShearRecipe extends RegistryItem {
 
-  private BlockStatePredicate state;
-  private IBlockState replacementState;
-  private ItemStack drop;
-  private ItemStack optionalDisplayItem;
+  protected BlockStatePredicate state;
+  protected IBlockState replacementState;
+  protected ItemStack drop;
+  protected ItemStack optionalDisplayItem;
+  protected Ingredient dropMatch;
 
   public RunicShearRecipe(ResourceLocation name, Block state, Block replacementState, ItemStack drop, ItemStack optionalDisplayItem) {
     this(name, new StatePredicate(state.getDefaultState()), replacementState.getDefaultState(), drop, optionalDisplayItem);
@@ -27,6 +32,7 @@ public class RunicShearRecipe extends RegistryItem {
     this.state = state;
     this.replacementState = replacementState;
     this.drop = drop;
+    this.dropMatch = Ingredient.fromStacks(drop);
     this.optionalDisplayItem = optionalDisplayItem;
   }
 
@@ -40,6 +46,10 @@ public class RunicShearRecipe extends RegistryItem {
 
   public ItemStack getDrop() {
     return drop;
+  }
+
+  public Ingredient getDropMatch () {
+    return dropMatch;
   }
 
   public ItemStack getOptionalDisplayItem() {

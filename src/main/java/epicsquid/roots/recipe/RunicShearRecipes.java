@@ -1,6 +1,6 @@
 package epicsquid.roots.recipe;
 
-import epicsquid.mysticalworld.entity.EntityDeer;
+import epicsquid.mysticalworld.entity.*;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
@@ -26,5 +26,22 @@ public class RunicShearRecipes {
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "horse_fey_leather"), new ItemStack(ModItems.fey_leather, 1), EntityHorse.class, 20 * 30));
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "donkey_fey_leather"), new ItemStack(ModItems.fey_leather, 1), EntityDonkey.class, 20 * 30));
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "mule_fey_leather"), new ItemStack(ModItems.fey_leather, 1), EntityMule.class, 20 * 30));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "mooshroom_fey_leather"), new ItemStack(ModItems.fey_leather, 1), EntityMooshroom.class, 20 * 30));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "rabbit_fey_leather"), new ItemStack(ModItems.fey_leather, 1), EntityRabbit.class, 20 * 30));
+
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "chicken_fey_feather"), new ItemStack(ModItems.fey_feather, 1), EntityChicken.class, 20 * 45));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "parrot_fey_feather"), new ItemStack(ModItems.fey_feather, 1), EntityParrot.class, 20 * 45));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "owl_fey_feather"), new ItemStack(ModItems.fey_feather, 1), EntityOwl.class, 20 * 45));
+
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "beetle_strange_slime"), new ItemStack(ModItems.strange_slime, 1), EntityBeetle.class, 20 * 120));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "frog_strange_slime"), new ItemStack(ModItems.strange_slime, 1), EntityFrog.class, 20 * 120));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "squid_strange_slime"), new ItemStack(ModItems.strange_slime, 1), EntitySquid.class, 20 * 120));
+
+
+
+/*    addPacifistEntry("pig", EntityPig.class);
+    addPacifistEntry("sheep", EntitySheep.class);
+    addPacifistEntry("wolf", EntityWolf.class);
+    addPacifistEntry("sprout", EntitySprout.class);*/
   }
 }
