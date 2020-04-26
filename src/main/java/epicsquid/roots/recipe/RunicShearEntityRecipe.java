@@ -27,7 +27,7 @@ public class RunicShearEntityRecipe extends RunicShearRecipe {
     return clazz;
   }
 
-  public <T extends EntityLivingBase> ItemStack getDrop (T entity) {
+  public ItemStack getDrop (EntityLivingBase entity) {
     return getDrop();
   }
 
