@@ -4,31 +4,28 @@ import epicsquid.roots.recipe.transmutation.BlockStatePredicate;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.Set;
+import java.util.function.Function;
 
 /**
  * Transmutation recipe for Runic Shears
  */
-public class RunicShearEntityRecipe extends RunicShearRecipe {
+public class RunicShearConditionalEntityRecipe<T extends EntityLivingBase> extends RunicShearEntityRecipe {
+  protected final Function<T, ItemStack> functionMap;
 
-  protected Class<? extends EntityLivingBase> clazz;
-  protected int cooldown;
-
-  public RunicShearEntityRecipe(ResourceLocation name, ItemStack drop, Class<? extends EntityLivingBase> entity, int cooldown) {
-    super(name, BlockStatePredicate.TRUE, Blocks.AIR.getDefaultState(), drop, drop);
-    this.clazz = entity;
-    this.cooldown = cooldown;
+  public RunicShearConditionalEntityRecipe(ResourceLocation name, Function<T, ItemStack> functionMap, Set<ItemStack> drops, Class<T> entity, int cooldown) {
+    super(name, ItemStack.EMPTY, entity, cooldown);
+    this.functionMap = functionMap;
+    this.dropMatch = Ingredient.fromStacks(drops.toArray(new ItemStack[0]));
   }
 
   public Class<? extends EntityLivingBase> getClazz() {
     return clazz;
-  }
-
-  public <T extends EntityLivingBase> ItemStack getDrop (T entity) {
-    return getDrop();
   }
 
   public int getCooldown() {

@@ -356,6 +356,7 @@ item.runic_dust.name=Runic Dust
 item.cooked_pereskia.name=Roasted Pereskia
 item.wildewheet_bread.name=Wildewheet Bread
 item.fey_leather.name=Fey Leather
+item.fey_feather.name=Fey Feather
 
 tile.magmatic_soil.effect=Cooks some of the drops from plants when harvesting.
 tile.aqueous_soil.effect=Automatically harvests plants when they reach maturity.

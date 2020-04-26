@@ -27,6 +27,7 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 import java.util.Objects;
+import java.util.Set;
 
 @SuppressWarnings("ALL")
 @ZenDocClass("mods.roots.RunicShears")
@@ -118,14 +119,14 @@ public class RunicShearsTweaker {
 
     @Override
     public void apply() {
-      RunicShearRecipe recipe = ModRecipes.getRunicShearRecipe(output);
+      Set<RunicShearRecipe> recipes = ModRecipes.getRunicShearRecipe(output);
       boolean removed = false;
-      if (recipe != null) {
+      for (RunicShearRecipe recipe : recipes) {
         ModRecipes.getRunicShearRecipes().remove(recipe.getRegistryName());
         removed = true;
       }
-      RunicShearEntityRecipe eRecipe = ModRecipes.getRunicShearEntityRecipe(output);
-      if (eRecipe != null) {
+      Set<RunicShearEntityRecipe> entityRecipes = ModRecipes.getRunicShearEntityRecipe(output);
+      for (RunicShearEntityRecipe eRecipe : entityRecipes) {
         ModRecipes.getRunicShearEntityRecipes().remove(eRecipe.getRegistryName());
         ModRecipes.getGeneratedEntityRecipes().remove(eRecipe.getClazz());
         removed = true;
