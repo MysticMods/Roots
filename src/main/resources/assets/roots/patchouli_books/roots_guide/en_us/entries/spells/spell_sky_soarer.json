@@ -2,6 +2,7 @@
     "name": "Sky Soarer",
     "icon": "roots:spell_dust",
     "category": "spells",
+    "advancement": "roots:root",
     "flag": "roots:spell_sky_soarer",
     "pages": [
       {

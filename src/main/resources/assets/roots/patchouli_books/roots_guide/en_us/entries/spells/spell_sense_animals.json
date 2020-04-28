@@ -2,6 +2,7 @@
   "name": "Sense Animals",
   "icon": "roots:spell_dust",
   "category": "spells",
+  "advancement": "roots:root",
   "flag": "roots:spell_sense_animals",
   "pages": [
     {

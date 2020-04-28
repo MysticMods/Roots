@@ -2,6 +2,7 @@
   "name": "Petal Shell",
   "icon": "roots:spell_dust",
   "category": "spells",
+  "advancement": "roots:root",
   "flag": "roots:spell_petal_shell",
   "pages": [
     {
