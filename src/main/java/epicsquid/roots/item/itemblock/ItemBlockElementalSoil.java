@@ -27,14 +27,25 @@ public class ItemBlockElementalSoil extends ItemBlock {
     super(block);
   }
 
+/*  @Override
+  public boolean placeBlockAt(@Nonnull ItemStack stack, @Nonnull EntityPlayer player, World world, @Nonnull BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, @Nonnull IBlockState newState) {
+
+    Block oldblock = world.getBlockState(pos.offset(side.getOpposite())).getBlock();
+
+    if (oldblock instanceof BlockFarmland && player.inventory.addItemStackToInventory(new ItemStack(Blocks.DIRT))) {
+      pos = pos.offset(side.getOpposite());
+    }
+    return super.placeBlockAt(stack, player, world, pos, side, hitX, hitY, hitZ, newState);
+  }*/
+
   @Override
   public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, EnumHand hand) {
     BlockPos opposite = pos; // .offset(facing);
     IBlockState state = world.getBlockState(opposite);
     IBlockState stateDown = world.getBlockState(opposite.down());
     Roots.logger.info("BlockPos is " + pos.toString() + " while facing is " + facing.toString() + ". Pos state is " + state.toString() + ". State down is " + stateDown.toString());
-    if (state.getBlock() == Blocks.FARMLAND || (state.getBlock() instanceof BlockElementalSoil && state.getBlock() != block) || stateDown.getBlock() == Blocks.FARMLAND || (stateDown.getBlock() instanceof BlockElementalSoil && state.getBlock() != block)) {
-      if (stateDown.getBlock() == Blocks.FARMLAND || (stateDown.getBlock() instanceof BlockElementalSoil && state.getBlock() != block)) {
+    if (state.getBlock() == Blocks.FARMLAND || state.getBlock() instanceof BlockElementalSoil || stateDown.getBlock() == Blocks.FARMLAND || stateDown.getBlock() instanceof BlockElementalSoil) {
+      if (stateDown.getBlock() == Blocks.FARMLAND || stateDown.getBlock() instanceof BlockElementalSoil) {
         opposite = opposite.down();
         state = stateDown;
       }
