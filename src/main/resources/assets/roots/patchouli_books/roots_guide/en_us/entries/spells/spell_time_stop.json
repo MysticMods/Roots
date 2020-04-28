@@ -2,6 +2,7 @@
   "name": "Time Stop",
   "icon": "roots:spell_dust",
   "category": "spells",
+  "advancement": "roots:root",
   "flag": "roots:spell_time_stop",
   "pages": [
     {

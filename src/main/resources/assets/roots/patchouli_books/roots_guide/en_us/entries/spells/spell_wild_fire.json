@@ -2,6 +2,7 @@
   "name": "Wildfire",
   "icon": "roots:spell_dust",
   "category": "spells",
+  "advancement": "roots:root",
   "flag": "roots:spell_wild_fire",
   "pages": [
     {

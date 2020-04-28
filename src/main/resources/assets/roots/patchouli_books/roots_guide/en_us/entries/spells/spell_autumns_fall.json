@@ -2,6 +2,7 @@
     "name": "Autumn's Fall",
     "icon": "roots:spell_dust",
     "category": "spells",
+    "advancement": "roots:root",
     "flag": "roots:spell_autumns_fall",
     "pages": [
       {
