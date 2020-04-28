@@ -2,6 +2,7 @@
   "name": "Stalicripe",
   "icon": "roots:stalicripe",
   "category": "herbs",
+  "advancement": "roots:pyre",
   "pages": [
     {
       "type": "spotlight",

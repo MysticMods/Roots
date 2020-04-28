@@ -2,6 +2,7 @@
   "name": "Fey Light",
   "icon": "roots:spell_dust",
   "category": "spells",
+  "advancement": "roots:cloud_berry",
   "flag":  "roots:spell_fey_light",
   "pages": [
     {

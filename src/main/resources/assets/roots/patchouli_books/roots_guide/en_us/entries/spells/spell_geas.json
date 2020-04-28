@@ -2,6 +2,7 @@
   "name": "Geas",
   "icon": "roots:spell_dust",
   "category": "spells",
+  "advancement": "roots:wildewheet",
   "flag": "roots:spell_geas",
   "pages": [
     {

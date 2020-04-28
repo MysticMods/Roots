@@ -2,6 +2,7 @@
   "name": "Sanctuary",
   "icon": "roots:spell_dust",
   "category": "spells",
+  "advancement": "roots:pereskia",
   "flag": "roots:spell_sanctuary",
   "pages": [
     {

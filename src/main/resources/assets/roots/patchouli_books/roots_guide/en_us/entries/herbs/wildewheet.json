@@ -2,6 +2,8 @@
   "name": "Wildewheet",
   "icon": "roots:wildewheet",
   "category": "herbs",
+  "advancement": "roots:runic_shears",
+  
   "pages": [
     {
       "type": "spotlight",

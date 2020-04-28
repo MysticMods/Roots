@@ -3,6 +3,7 @@
     "icon": "roots:mortar",
     "category": "apparatus",
     "priority": true,
+    "advancement": "roots:root",
     "secret": true,
     "pages": [
       {

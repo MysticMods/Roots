@@ -2,6 +2,8 @@
   "name": "Moonglow Leaf",
   "icon": "roots:moonglow_leaf",
   "category": "herbs",
+  "advancement": "roots:pyre",
+  
   "pages": [
     {
       "type": "spotlight",

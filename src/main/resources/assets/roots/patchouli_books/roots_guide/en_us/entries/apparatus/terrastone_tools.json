@@ -2,6 +2,7 @@
   "name": "Terrastone Tools",
   "icon": "roots:terrastone_hoe",
   "category": "apparatus",
+  "advancement": "roots:runestone",
   "pages": [
     {
       "type": "text",

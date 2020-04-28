@@ -2,6 +2,7 @@
   "name": "Other Imbuements",
   "icon": "roots:imbuer",
   "category": "basics",
+  "advancement": "roots:root",
   "sortnum": 6,
     "pages": [
     {

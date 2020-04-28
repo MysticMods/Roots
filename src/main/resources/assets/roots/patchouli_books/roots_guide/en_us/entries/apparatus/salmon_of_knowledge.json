@@ -2,6 +2,7 @@
   "name": "Salmon of Knowledge",
   "icon": "roots:salmon_of_knowledge",
   "category": "apparatus",
+  "advancement": "roots:terra_moss",
   "pages": [
     {
       "type": "text",

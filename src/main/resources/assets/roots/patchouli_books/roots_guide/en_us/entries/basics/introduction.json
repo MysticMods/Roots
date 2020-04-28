@@ -2,6 +2,7 @@
     "name": "Introduction",
     "icon": "roots:pestle",
     "category": "basics",
+    "advancement": "roots:root",
     "priority": true,
     "sortnum": 0,
     "pages": [

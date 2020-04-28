@@ -2,6 +2,7 @@
     "name": "Ritual Automation",
     "icon": "roots:pyre",
     "category": "rituals",
+    "advancement": "roots:pyre",
     "priority": true,
     "sortnum": 0,
     "pages": [
