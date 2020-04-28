@@ -534,7 +534,7 @@ public class ModRecipes {
     TransmutationRecipe redstone_block_to_glowstone = new TransmutationRecipe(Blocks.REDSTONE_BLOCK.getDefaultState()).state(Blocks.GLOWSTONE.getDefaultState()).condition(new BlockStateBelow(lava));
     addTransmutationRecipe("redstone_block_to_glowstone", redstone_block_to_glowstone);
 
-    TransmutationRecipe carpet_diorite = new TransmutationRecipe(Blocks.SNOW.getDefaultState()).state(Blocks.CARPET.getDefaultState()).condition(new BlockStateBelow(new StatePredicate(Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE), Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE_SMOOTH))));
+    TransmutationRecipe carpet_diorite = new TransmutationRecipe(Blocks.SNOW.getDefaultState()).state(Blocks.CARPET.getDefaultState()).condition(new BlockStateBelow(new MultiStatePropertyPredicate(BlockStone.VARIANT, Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE), Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE_SMOOTH))));
   }
 
   public static void addAnimalHarvestRecipe(EntityLivingBase entity) {
