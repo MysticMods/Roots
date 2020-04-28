@@ -2,7 +2,6 @@
   "name": "Runic Dust",
   "icon": "roots:runic_dust",
   "category": "resources",
-  "advancement": "roots:runestone",
   "secret": true,
   "pages": [
     {

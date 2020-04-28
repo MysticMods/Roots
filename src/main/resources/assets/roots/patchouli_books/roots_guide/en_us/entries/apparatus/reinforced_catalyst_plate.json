@@ -2,7 +2,6 @@
   "name": "Reinforced Catalyst Plate",
   "icon": "roots:catalyst_plate",
   "category": "apparatus",
-  "advancement": "roots:runed_obsidian",
   "secret": true,
   "pages": [
     {

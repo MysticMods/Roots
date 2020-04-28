@@ -2,8 +2,6 @@
   "name": "Pereskia",
   "icon": "roots:pereskia",
   "category": "herbs",
-  "advancement": "roots:pyre",
-  
   "pages": [
     {
       "type": "spotlight",

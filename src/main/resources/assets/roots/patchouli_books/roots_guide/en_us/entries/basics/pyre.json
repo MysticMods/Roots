@@ -2,7 +2,6 @@
   "name": "Pyre",
   "icon": "roots:pyre",
   "category": "basics",
-  "advancement": "roots:root",
   "sortnum": 4,
   "pages": [
     {

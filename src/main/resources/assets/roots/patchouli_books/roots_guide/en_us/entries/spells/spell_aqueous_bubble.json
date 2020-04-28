@@ -1,0 +1,16 @@
+{
+  "name": "Aqueous Bubble",
+  "icon": "roots:spell_dust",
+  "category": "spells",
+  "flag": "roots:spell_aqueous_bubble",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Conjures a shield of ice and water around you. While the spell is active, you will absorb a considerable amount of damage, fire damage you take is halved, and lava damage that you take is reduced to almost nothing.$(br2)The spell will continue to protect you even after the absorption is depleted."
+    },
+    {
+      "type": "spell_template",
+      "spell": "spell_acid_cloud"
+    }
+  ]
+}

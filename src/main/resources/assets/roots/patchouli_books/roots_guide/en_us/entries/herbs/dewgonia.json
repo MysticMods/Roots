@@ -2,8 +2,6 @@
   "name": "Dewgonia",
   "icon": "roots:dewgonia",
   "category": "herbs",
-  "advancement": "roots:pyre",
-  
   "pages": [
     {
       "type": "spotlight",

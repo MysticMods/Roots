@@ -2,7 +2,6 @@
     "name": "Apothecary Pouch",
     "icon": "roots:apothecary_pouch",
     "category": "apparatus",
-    "advancement": "roots:spirit_herb",
     "pages": [
       {
         "type": "spotlight",

@@ -2,7 +2,6 @@
     "name": "Ritual Tiers",
     "icon": "roots:runed_acacia",
     "category": "rituals",
-    "advancement": "roots:pyre",
     "priority": true,
     "sortnum": 3,
     "pages": [

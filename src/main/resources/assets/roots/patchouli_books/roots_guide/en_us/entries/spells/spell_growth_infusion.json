@@ -2,7 +2,6 @@
   "name": "Growth Infusion",
   "icon": "roots:spell_dust",
   "category": "spells",
-  "advancement": "roots:terra_moss",
   "flag": "roots:spell_growth_infusion",
   "pages": [
     {

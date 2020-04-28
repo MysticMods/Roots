@@ -2,7 +2,6 @@
   "name": "Transmutation",
   "icon": "roots:ritual_transmutation",
   "category": "rituals",
-  "advancement": "roots:runestone",
   "flag": "roots:ritual_transmutation",
   "pages": [
     {

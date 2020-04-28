@@ -2,7 +2,6 @@
     "name": "Grove Supplication",
     "icon": "roots:ritual_grove_supplication",
     "category": "rituals",
-    "advancement": "roots:pyre",
     "priority": true,
     "pages": [
       {

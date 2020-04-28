@@ -2,7 +2,6 @@
   "name": "Rose Thorns",
   "icon": "roots:spell_dust",
   "category": "spells",
-  "advancement": "roots:staff",
   "flag": "roots:spell_rose_thorns",
   "pages": [
     {
