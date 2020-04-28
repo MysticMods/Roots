@@ -2,6 +2,7 @@
   "name": "Runestone",
   "icon": "roots:runestone",
   "category": "resources",
+  "advancement": "roots:fey_crafter",
   "secret": true,
   "pages": [
     {

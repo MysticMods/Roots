@@ -2,6 +2,7 @@
   "name": "Runed Obsidian",
   "icon": "roots:runed_obsidian",
   "category": "resources",
+  "advancement": "roots:runestone",
   "secret": true,
   "pages": [
     {

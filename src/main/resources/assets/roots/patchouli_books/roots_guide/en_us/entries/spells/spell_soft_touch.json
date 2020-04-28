@@ -2,6 +2,7 @@
     "name": "Soft Touch",
     "icon": "roots:spell_dust",
     "category": "spells",
+    "advancement": "roots:terra_moss",
     "flag": "roots:spell_soft_touch",
     "pages": [
       {

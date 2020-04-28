@@ -134,7 +134,7 @@ public class ModItems {
     event.addItem(runed_hoe = new ItemRunedHoe(Materials.RUNIC, "runed_hoe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(runed_sword = new ItemRunedSword(Materials.RUNIC, "runed_sword").setCreativeTab(Roots.tab).setMaxStackSize(1));
 
-    MaterialTypes.addMaterial("runed", Materials.RUNIC, null, Materials.RUNIC.getAttackDamage() - 4, -1.3f);
+    MaterialTypes.addMaterial("runed", Materials.RUNIC, Materials.RUNIC.getAttackDamage() - 4, -1.3f);
     event.addItem(runed_dagger = new ItemRunedKnife("runed_dagger", Materials.RUNIC).setCreativeTab(Roots.tab).setMaxStackSize(1));
 
     event.addItem(terrastone_pickaxe = new ItemTerrastonePickaxe(Materials.TERRASTONE, "terrastone_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
@@ -166,11 +166,11 @@ public class ModItems {
 
     event.addItem(runic_shears = new ItemRunicShears("runic_shears").setCreativeTab(Roots.tab));
 
-    MaterialTypes.addMaterial("vanilla:wood", ToolMaterial.WOOD, null, ToolMaterial.WOOD.getAttackDamage(), -1.7f);
-    MaterialTypes.addMaterial("vanilla:stone", ToolMaterial.STONE, null, ToolMaterial.STONE.getAttackDamage(), -1.7f);
-    MaterialTypes.addMaterial("vanilla:iron", ToolMaterial.IRON, ItemArmor.ArmorMaterial.IRON, ToolMaterial.IRON.getAttackDamage(), -1.5f);
-    MaterialTypes.addMaterial("vanilla:diamond", ToolMaterial.DIAMOND, ItemArmor.ArmorMaterial.DIAMOND, ToolMaterial.DIAMOND.getAttackDamage(), -1.0f);
-    MaterialTypes.addMaterial("vanilla:gold", ToolMaterial.GOLD, ItemArmor.ArmorMaterial.GOLD, ToolMaterial.GOLD.getAttackDamage(), -1.0f);
+    MaterialTypes.addMaterial("vanilla:wood", ToolMaterial.WOOD, ToolMaterial.WOOD.getAttackDamage(), -1.7f);
+    MaterialTypes.addMaterial("vanilla:stone", ToolMaterial.STONE, ToolMaterial.STONE.getAttackDamage(), -1.7f);
+    MaterialTypes.addMaterial("vanilla:iron", ToolMaterial.IRON, ToolMaterial.IRON.getAttackDamage(), -1.5f);
+    MaterialTypes.addMaterial("vanilla:diamond", ToolMaterial.DIAMOND, ToolMaterial.DIAMOND.getAttackDamage(), -1.0f);
+    MaterialTypes.addMaterial("vanilla:gold", ToolMaterial.GOLD, ToolMaterial.GOLD.getAttackDamage(), -1.0f);
 
     event.addItem(wood_knife = new ItemDruidKnife("wood_knife", ToolMaterial.WOOD).setCreativeTab(Roots.tab));
     event.addItem(stone_knife = new ItemDruidKnife("stone_knife", ToolMaterial.STONE).setCreativeTab(Roots.tab));

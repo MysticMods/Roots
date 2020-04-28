@@ -2,6 +2,7 @@
   "name": "Flower Growth",
   "icon": "roots:ritual_flower_growth",
   "category": "rituals",
+  "advancement": "roots:pyre",
   "flag": "roots:ritual_flower_growth",
   "pages": [
     {

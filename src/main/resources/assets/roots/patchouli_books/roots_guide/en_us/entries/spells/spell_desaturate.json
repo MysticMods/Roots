@@ -2,6 +2,7 @@
   "name": "Desaturate",
   "icon": "roots:spell_dust",
   "category": "spells",
+  "advancement": "roots:spirit_herb",
   "flag": "roots:spell_desaturate",
   "pages": [
     {

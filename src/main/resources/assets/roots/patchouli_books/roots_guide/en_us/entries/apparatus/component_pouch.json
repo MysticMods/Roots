@@ -2,6 +2,7 @@
     "name": "Component Pouch",
     "icon": "roots:component_pouch",
     "category": "apparatus",
+    "advancement": "roots:fey_crafter",
     "pages": [
       {
         "type": "spotlight",

@@ -2,6 +2,7 @@
   "name": "A Bucket of Water",
   "icon": "minecraft:water_bucket",
   "category": "basics",
+  "advancement": "roots:pyre",
   "sortnum": 7,
   "pages": [
     {

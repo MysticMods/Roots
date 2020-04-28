@@ -2,6 +2,7 @@
     "name": "Letter from a Druid",
     "icon": "minecraft:paper",
     "category": "basics",
+    "advancement": "roots:root",
     "priority": true,
     "sortnum": 2,
     "pages": [

@@ -2,6 +2,7 @@
     "name": "Essential Resources",
     "icon": "roots:wildroot",
     "category": "basics",
+    "advancement": "roots:root",
     "sortnum": 3,
     "pages": [
       {

@@ -2,6 +2,7 @@
   "name": "Crafting in Groves",
   "icon": "roots:fey_crafter",
   "category": "basics",
+  "advancement": "roots:root",
   "priority": true,
   "sortnum": 1,
   "pages": [

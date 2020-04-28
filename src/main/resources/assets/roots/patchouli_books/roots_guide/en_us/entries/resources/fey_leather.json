@@ -2,6 +2,7 @@
   "name": "Fey Leather",
   "icon": "roots:fey_leather",
   "category": "resources",
+  "advancement": "roots:runic_shears",
   "pages": [
     {
       "type": "spotlight",

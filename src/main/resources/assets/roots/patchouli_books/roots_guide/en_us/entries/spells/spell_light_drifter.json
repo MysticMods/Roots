@@ -2,6 +2,7 @@
   "name": "Light Drifter",
   "icon": "roots:spell_dust",
   "category": "spells",
+  "advancement": "roots:moonglow_leaf",
   "flag": "roots:spell_light_drifter",
   "pages": [
     {

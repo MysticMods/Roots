@@ -2,6 +2,7 @@
   "name": "Catalyst Plate",
   "icon": "roots:catalyst_plate",
   "category": "apparatus",
+  "advancement": "roots:runestone",
   "secret": true,
   "pages": [
     {

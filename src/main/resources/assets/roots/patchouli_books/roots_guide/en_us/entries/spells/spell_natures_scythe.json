@@ -2,6 +2,7 @@
     "name": "Nature's Scythe",
     "icon": "roots:spell_dust",
     "category": "spells",
+    "advancement": "roots:stalicripe",
     "flag": "roots:spell_natures_scythe",
     "pages": [
       {

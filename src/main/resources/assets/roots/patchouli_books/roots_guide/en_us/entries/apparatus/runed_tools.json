@@ -2,6 +2,7 @@
   "name": "Runed Tools",
   "icon": "roots:runed_pickaxe",
   "category": "apparatus",
+  "advancement": "roots:runed_obsidian",
   "pages": [
     {
       "type": "text",
