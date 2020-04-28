@@ -3,7 +3,6 @@
   "icon": "roots:elemental_soil",
   "category": "resources",
   "priority": true,
-  "advancement": "roots:fey_crafter",
   "pages": [
     {
       "type": "spotlight",

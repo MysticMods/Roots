@@ -2,7 +2,6 @@
   "name": "Heavy Storms",
   "icon": "roots:ritual_heavy_storms",
   "category": "rituals",
-  "advancement": "roots:cloud_berry",
   "flag": "roots:ritual_heavy_storms",
   "pages": [
     {

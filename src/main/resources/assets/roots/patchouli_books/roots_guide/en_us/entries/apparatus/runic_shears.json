@@ -3,7 +3,6 @@
   "icon": "roots:runic_shears",
   "category": "apparatus",
   "priority": true,
-  "advancement": "roots:pereskia",
   "pages": [
     {
       "type": "spotlight",

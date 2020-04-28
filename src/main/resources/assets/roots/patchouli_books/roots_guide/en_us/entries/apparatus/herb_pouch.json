@@ -3,7 +3,6 @@
     "icon": "roots:herb_pouch",
     "category": "apparatus",
     "priority": true,
-    "advancement": "roots:root",
     "pages": [
       {
         "type": "spotlight",

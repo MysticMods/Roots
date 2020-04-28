@@ -1,7 +1,6 @@
 {
     "name": "Wildwood",
     "icon": "roots:wildwood_sapling",
-    "advancement": "roots:spirit_herb",
     "category": "resources",
     "pages": [
       {

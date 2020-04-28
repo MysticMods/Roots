@@ -2,7 +2,6 @@
     "name": "Life Drain",
     "icon": "roots:spell_dust",
     "category": "spells",
-    "advancement": "roots:baffle_cap",
     "flag": "roots:spell_life_drain",
     "pages": [
       {

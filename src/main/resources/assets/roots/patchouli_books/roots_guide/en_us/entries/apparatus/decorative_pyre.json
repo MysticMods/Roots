@@ -2,7 +2,6 @@
   "name": "Decorative Pyre",
   "icon": "roots:pyre",
   "category": "apparatus",
-  "advancement": "roots:root",
   "pages": [
     {
       "type": "text",

@@ -2,7 +2,6 @@
   "name": "Fire Storm",
   "icon": "roots:ritual_fire_storm",
   "category": "rituals",
-  "advancement": "roots:infernal_bulb",
   "flags": "roots:ritual_fire_storm",
   "pages": [
     {
