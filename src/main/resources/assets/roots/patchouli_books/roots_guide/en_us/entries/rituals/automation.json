@@ -37,7 +37,7 @@
             "mapping": {
               "0": "roots:pyre",
               "G": "minecraft:grass",
-              "I": "minecraft:iron_bars"
+              "I": "minecraft:stained_glass[color=orange]"
             },
             "pattern": [
               ["     ", "     ", "     "],

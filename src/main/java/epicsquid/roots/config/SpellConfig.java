@@ -18,9 +18,6 @@ public class SpellConfig {
     @Config.Name("Disable Acid Cloud Spell")
     @Config.Comment("Set to true to disable Acid Cloud Spell")
     public boolean disableAcidCloud = false;
-    @Config.Name("Disable Nature's Blades Spell")
-    @Config.Comment("Set to true to disable Nature's Blades Spell")
-    public boolean disableNaturesBlades = false;
     @Config.Name("Disable Nature's Scythe")
     @Config.Comment("Set to true to disable Nature's Scythe Spell")
     public boolean disableNaturesScythe = false;
@@ -66,9 +63,6 @@ public class SpellConfig {
     @Config.Name("Disable Sanctuary Spell")
     @Config.Comment("Set to true to disable Sanctuary Spell")
     public boolean disableSanctuary = false;
-    @Config.Name("Disable Scatter Spell")
-    @Config.Comment("Set to true to disable Scatter Spell")
-    public boolean disableScatter = false;
     @Config.Name("Disable Second Wind Spell")
     @Config.Comment("Set to true to disable Second Wind Spell")
     public boolean disableSecondWind = false;
@@ -111,9 +105,12 @@ public class SpellConfig {
     @Config.Name("Disable Desaturate Spell")
     @Config.Comment("Set to true to disable the Desaturate Spell")
     public boolean disableDesaturate = false;
-    @Config.Name("Disable Transubstantiate Spell")
-    @Config.Comment("Set to true to disable the Transubstantiate Spell")
+    @Config.Name("Disable Chrysopoeia Spell")
+    @Config.Comment("Set to true to disable the Chrysopoeia Spell")
     public boolean disableChrysopoeia = false;
+    @Config.Name("Disable Aqueous Bubble Spell")
+    @Config.Comment("Set to true to disable the Aqueous Bubble Spell")
+    public boolean disableAquaBubble = false;
   }
 
   public static class SpellFeaturesCategory {
