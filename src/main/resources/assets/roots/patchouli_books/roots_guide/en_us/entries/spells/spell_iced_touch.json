@@ -2,7 +2,6 @@
   "name": "Iced Touch",
   "icon": "roots:spell_dust",
   "category": "spells",
-  "advancement": "roots:root",
   "flag": "roots:spell_iced_touch",
   "pages": [
     {
@@ -12,8 +11,8 @@
     {
       "type": "spell_template",
       "spell": "spell_iced_touch"
-    },
-    {
+		},
+		{
       "type": "spell_modifiers_template",
       "spell": "spell_iced_touch"
     }
