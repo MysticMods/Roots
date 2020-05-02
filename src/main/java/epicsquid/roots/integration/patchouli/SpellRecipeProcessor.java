@@ -1,10 +1,12 @@
 package epicsquid.roots.integration.patchouli;
 
+import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.ResourceLocation;
 import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariableProvider;
 import vazkii.patchouli.common.util.ItemStackUtil;
@@ -24,7 +26,7 @@ public class SpellRecipeProcessor implements IComponentProcessor {
   @Override
   public void setup(IVariableProvider<String> iVariableProvider) {
     spellName = iVariableProvider.get("spell");
-    SpellBase spell = SpellRegistry.spellRegistry.get(spellName);
+    SpellBase spell = SpellRegistry.spellRegistry.get(new ResourceLocation(Roots.MODID, spellName));
     ingredients = spell.getIngredients();
     for (Map.Entry<Herb, Double> cost : spell.getCosts().entrySet()) {
       herbs.add(new ItemStack(cost.getKey().getItem()));
