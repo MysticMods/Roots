@@ -2,8 +2,6 @@
   "name": "Runed Wood",
   "icon": "roots:runed_acacia",
   "category": "resources",
-  "advancement": "roots:root",
-  "secret": true,
   "pages": [
     {
       "type": "spotlight",
