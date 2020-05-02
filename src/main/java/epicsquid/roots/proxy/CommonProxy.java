@@ -51,8 +51,6 @@ public class CommonProxy {
     if (Loader.isModLoaded("consecration")) {
       Consecration.init();
     }
-    //MapGenStructureIO.registerStructureComponent(ComponentDruidHut.class, Roots.MODID + ":" + "druidhut");
-    //VillagerRegistry.instance().registerVillageCreationHandler(new ComponentDruidHut.CreationHandler());
     if (Loader.isModLoaded("crafttweaker")) {
       Inject.inject();
     }

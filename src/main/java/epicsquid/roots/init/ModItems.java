@@ -142,7 +142,7 @@ public class ModItems {
     event.addItem(terrastone_shovel = new ItemTerrastoneShovel(Materials.TERRASTONE, "terrastone_shovel").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(terrastone_hoe = new ItemTerrastoneHoe(Materials.TERRASTONE, "terrastone_hoe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(terrastone_sword = new ItemTerrastoneSword(Materials.TERRASTONE, "terrastone_sword").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    //event.addItem(terrastone_knife = new ItemDruidKnife("terrastone_knife", Materials.TERRASTONE).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    //event.addItem(terrastone_knife = new ItemMageKnife("terrastone_knife", Materials.TERRASTONE).setCreativeTab(Roots.tab).setMaxStackSize(1));
 
     event.addItem(living_pickaxe = new ItemLivingPickaxe(Materials.LIVING, "living_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(living_axe = new ItemLivingAxe(Materials.LIVING, "living_axe").setCreativeTab(Roots.tab).setMaxStackSize(1));
@@ -172,11 +172,11 @@ public class ModItems {
     MaterialTypes.addMaterial("vanilla:diamond", ToolMaterial.DIAMOND, ItemArmor.ArmorMaterial.DIAMOND, ToolMaterial.DIAMOND.getAttackDamage(), -1.0f);
     MaterialTypes.addMaterial("vanilla:gold", ToolMaterial.GOLD, ItemArmor.ArmorMaterial.GOLD, ToolMaterial.GOLD.getAttackDamage(), -1.0f);
 
-    event.addItem(wood_knife = new ItemDruidKnife("wood_knife", ToolMaterial.WOOD).setCreativeTab(Roots.tab));
-    event.addItem(stone_knife = new ItemDruidKnife("stone_knife", ToolMaterial.STONE).setCreativeTab(Roots.tab));
-    event.addItem(iron_knife = new ItemDruidKnife("iron_knife", ToolMaterial.IRON).setCreativeTab(Roots.tab));
-    event.addItem(diamond_knife = new ItemDruidKnife("diamond_knife", ToolMaterial.DIAMOND).setCreativeTab(Roots.tab));
-    event.addItem(gold_knife = new ItemDruidKnife("gold_knife", ToolMaterial.GOLD).setCreativeTab(Roots.tab));
+    event.addItem(wood_knife = new ItemMageKnife("wood_knife", ToolMaterial.WOOD).setCreativeTab(Roots.tab));
+    event.addItem(stone_knife = new ItemMageKnife("stone_knife", ToolMaterial.STONE).setCreativeTab(Roots.tab));
+    event.addItem(iron_knife = new ItemMageKnife("iron_knife", ToolMaterial.IRON).setCreativeTab(Roots.tab));
+    event.addItem(diamond_knife = new ItemMageKnife("diamond_knife", ToolMaterial.DIAMOND).setCreativeTab(Roots.tab));
+    event.addItem(gold_knife = new ItemMageKnife("gold_knife", ToolMaterial.GOLD).setCreativeTab(Roots.tab));
 
     event.addItem(cooked_pereskia = new ItemFoodBase("cooked_pereskia", 5, false).setCreativeTab(Roots.tab));
 

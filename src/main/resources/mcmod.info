@@ -2,7 +2,7 @@
 {
   "modid": "roots",
   "name": "Roots",
-  "description": "Druidic magic mod.",
+  "description": "Magic mod focusing on nature & the wilds.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",

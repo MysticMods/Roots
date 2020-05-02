@@ -3,7 +3,7 @@ package epicsquid.roots.item.runed;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.item.ILivingRepair;
-import epicsquid.roots.item.ItemDruidKnife;
+import epicsquid.roots.item.ItemMageKnife;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemRunedKnife extends ItemDruidKnife implements ILivingRepair {
+public class ItemRunedKnife extends ItemMageKnife implements ILivingRepair {
   public ItemRunedKnife(String name, ToolMaterial material) {
     super(name, material);
     this.attackDamage = 4.5f;
