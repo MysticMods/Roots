@@ -2,6 +2,7 @@
   "name": "Animal Harvest",
   "icon": "roots:ritual_animal_harvest",
   "category": "rituals",
+  "read_by_default": true,
   "flag": "roots:ritual_animal_harvest",
   "pages": [
     {

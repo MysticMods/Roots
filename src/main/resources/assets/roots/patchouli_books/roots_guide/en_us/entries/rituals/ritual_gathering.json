@@ -2,6 +2,7 @@
   "name": "Gathering",
   "icon": "roots:ritual_gathering",
   "category": "rituals",
+  "read_by_default": true,
   "flag": "roots:ritual_gathering",
   "pages": [
     {

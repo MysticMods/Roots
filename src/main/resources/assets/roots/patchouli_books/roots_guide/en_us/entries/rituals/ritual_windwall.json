@@ -2,6 +2,7 @@
   "name": "Windwall",
   "icon": "roots:ritual_windwall",
   "category": "rituals",
+  "read_by_default": true,
   "flag": "roots:ritual_windwall",
   "pages": [
     {

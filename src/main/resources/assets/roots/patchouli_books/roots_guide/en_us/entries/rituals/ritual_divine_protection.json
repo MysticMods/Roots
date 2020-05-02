@@ -2,6 +2,7 @@
   "name": "Divine Protection",
   "icon": "roots:ritual_divine_protection",
   "category": "rituals",
+  "read_by_default": true,
   "flag": "roots:ritual_divine_protection",
   "pages": [
     {

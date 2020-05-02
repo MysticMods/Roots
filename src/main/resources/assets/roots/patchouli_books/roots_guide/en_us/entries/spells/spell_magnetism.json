@@ -2,6 +2,7 @@
   "name": "Magnetism",
   "icon": "roots:spell_dust",
   "category": "spells",
+  "read_by_default": true,
   "flag": "roots:spell_magnetism",
   "pages": [
     {

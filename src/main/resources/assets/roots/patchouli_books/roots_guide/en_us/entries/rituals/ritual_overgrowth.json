@@ -2,6 +2,7 @@
   "name": "Overgrowth",
   "icon": "roots:ritual_overgrowth",
   "category": "rituals",
+  "read_by_default": true,
   "flag": "roots:ritual_overgrowth",
   "pages": [
     {

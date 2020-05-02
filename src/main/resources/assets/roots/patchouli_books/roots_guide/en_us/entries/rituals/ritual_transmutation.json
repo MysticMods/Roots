@@ -2,6 +2,7 @@
   "name": "Transmutation",
   "icon": "roots:ritual_transmutation",
   "category": "rituals",
+  "read_by_default": true,
   "flag": "roots:ritual_transmutation",
   "pages": [
     {
