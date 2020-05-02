@@ -2,7 +2,6 @@
   "name": "Dandelion Winds",
   "icon": "roots:spell_dust",
   "category": "spells",
-  "advancement": "roots:cloud_berry",
   "flag": "roots:spell_dandelion_winds",
   "pages": [
     {
