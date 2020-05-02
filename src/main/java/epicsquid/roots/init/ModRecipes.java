@@ -545,7 +545,14 @@ public class ModRecipes {
     TransmutationRecipe redstone_block_to_glowstone = new TransmutationRecipe(Blocks.REDSTONE_BLOCK.getDefaultState()).state(Blocks.GLOWSTONE.getDefaultState()).condition(new BlockStateBelow(lava));
     addTransmutationRecipe("redstone_block_to_glowstone", redstone_block_to_glowstone);
 
-    TransmutationRecipe carpet_diorite = new TransmutationRecipe(Blocks.SNOW.getDefaultState()).state(Blocks.CARPET.getDefaultState()).condition(new BlockStateBelow(new MultiStatePropertyPredicate(BlockStone.VARIANT, Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE), Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE_SMOOTH))));
+    TransmutationRecipe carpet_diorite = new TransmutationRecipe(Blocks.CARPET.getDefaultState()).state(Blocks.SNOW_LAYER.getDefaultState()).condition(new BlockStateBelow(new MultiStatePropertyPredicate(BlockStone.VARIANT, Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE), Blocks.STONE.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE_SMOOTH))));
+    addTransmutationRecipe("carpet_to_snow", carpet_diorite);
+
+    TransmutationRecipe lever_brown_mushroom = new TransmutationRecipe(Blocks.LEVER.getDefaultState()).state(Blocks.BROWN_MUSHROOM.getDefaultState()).condition(new BlockStateBelow(new PropertyPredicate(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.PODZOL), BlockDirt.VARIANT)));
+    addTransmutationRecipe("lever_to_brown_mushroom", lever_brown_mushroom);
+
+    TransmutationRecipe redstone_torch_red_mushroom = new TransmutationRecipe(Blocks.REDSTONE_TORCH.getDefaultState()).state(Blocks.RED_MUSHROOM.getDefaultState()).condition(new BlockStateBelow(new PropertyPredicate(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.PODZOL), BlockDirt.VARIANT)));
+    addTransmutationRecipe("redstone_torch_to_red_mushroom", redstone_torch_red_mushroom);
   }
 
   public static void addAnimalHarvestRecipe(EntityLivingBase entity) {
