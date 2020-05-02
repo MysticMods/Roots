@@ -2,7 +2,6 @@
     "name": "The Nature of Groves",
     "icon": "roots:grove_stone",
     "category": "basics",
-    "advancement": "roots:root",
     "sortnum": 7,
     "pages": [
       {

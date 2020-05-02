@@ -2,7 +2,6 @@
   "name": "Fey Fire",
   "icon": "roots:fey_fire",
   "category": "basics",
-  "advancement": "roots:infernal_bulb",
   "sortnum": 8,
   "pages": [
     {
