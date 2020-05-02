@@ -1,6 +1,7 @@
 {
   "name": "Aubergine",
   "icon": "mysticalworld:aubergine",
+  "read_by_default": true,
   "category": "resources",
   "pages": [
     {

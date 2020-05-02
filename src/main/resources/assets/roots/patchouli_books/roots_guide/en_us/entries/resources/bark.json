@@ -2,6 +2,8 @@
     "name": "Tree Bark",
     "icon": "roots:bark_oak",
     "category": "resources",
+    "priority": true,
+    "read_by_default": true,
     "pages": [
       {
         "type": "text",
