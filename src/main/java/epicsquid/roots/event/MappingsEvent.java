@@ -4,6 +4,7 @@ import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.mysticalworld.init.ModBlocks;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
+import epicsquid.roots.init.ModVillagers;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -12,9 +13,23 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 public class MappingsEvent {
+  @SubscribeEvent
+  public static void onMissingProfessionMappings (RegistryEvent.MissingMappings<VillagerRegistry.VillagerProfession> event) {
+    for (RegistryEvent.MissingMappings.Mapping<VillagerRegistry.VillagerProfession> mapping : event.getMappings()) {
+      ResourceLocation missing = mapping.key;
+      if (missing.getNamespace().equals(Roots.MODID)) {
+        switch (missing.getPath()) {
+          case "druid":
+            mapping.remap(ModVillagers.mageProfession);
+        }
+      }
+    }
+  }
+
   @SubscribeEvent
   public static void onMissingBlockMappings(RegistryEvent.MissingMappings<Block> event) {
     for (RegistryEvent.MissingMappings.Mapping<Block> mapping : event.getMappings()) {
