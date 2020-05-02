@@ -2,6 +2,7 @@
   "name": "Spreading Forest",
   "icon": "roots:ritual_spreading_forest",
   "category": "rituals",
+  "read_by_default": true,
   "flag": "roots:ritual_spreading_forest",
   "pages": [
     {

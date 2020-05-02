@@ -2,6 +2,7 @@
   "name": "Healing Aura",
   "icon": "roots:ritual_healing_aura",
   "category": "rituals",
+  "read_by_default": true,
   "flag": "roots:ritual_healing_aura",
   "pages": [
     {

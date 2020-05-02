@@ -2,6 +2,7 @@
   "name": "Heavy Storms",
   "icon": "roots:ritual_heavy_storms",
   "category": "rituals",
+  "read_by_default": true,
   "flag": "roots:ritual_heavy_storms",
   "pages": [
     {

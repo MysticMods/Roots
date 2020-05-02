@@ -2,6 +2,7 @@
   "name": "Germination",
   "icon": "roots:ritual_germination",
   "category": "rituals",
+  "read_by_default": true,
   "flag": "roots:ritual_germination",
   "pages": [
     {

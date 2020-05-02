@@ -2,6 +2,7 @@
   "name": "Summon Creatures",
   "icon": "roots:ritual_summon_creatures",
   "category": "rituals",
+  "read_by_default": true,
   "flag": "roots:ritual_summon_creatures",
   "pages": [
     {
