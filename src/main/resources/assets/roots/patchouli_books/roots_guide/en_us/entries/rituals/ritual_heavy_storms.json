@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Invokes the intensity of the monsoon, causing continuous rain that $(warning) cannot be disabled for the duration of the ritual, or unless it is ended early with a $(l:basics/bucket_of_water)bucket of water$().$(br2) In addition, lightning will strike within the area of the ritual, although all  nearby entities extinguished of fire.$(br2)$(standing_stones) $(l:rituals/ritual_heavy_storms#multiblock)This ritual requires standing stones.$()"
+      "text": "Invokes the intensity of the monsoon, causing continuous rain that $(warning) cannot be disabled for the duration of the ritual, unless it is ended early with a $(l:apparatus/bucket_of_water)bucket of water$().$(br2) In addition, lightning will strike within the area of the ritual, and all nearby entities will be extinguished of fire.$(br2)$(standing_stones) $(l:rituals/ritual_heavy_storms#multiblock)This ritual requires standing stones.$()"
     },
     {
       "type": "pyre_template",
