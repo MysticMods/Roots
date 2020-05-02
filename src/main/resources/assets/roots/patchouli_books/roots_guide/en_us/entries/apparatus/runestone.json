@@ -3,7 +3,6 @@
   "icon": "roots:runestone_trample",
   "category": "apparatus",
   "advancement": "roots:runestone",
-  "secret": true,
   "pages": [
     {
       "type": "text",

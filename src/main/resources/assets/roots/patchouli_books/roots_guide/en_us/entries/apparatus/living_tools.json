@@ -2,8 +2,6 @@
   "name": "Living Tools",
   "icon": "roots:living_pickaxe",
   "category": "apparatus",
-  "advancement": "roots:fey_crafter",
-  "secret": true,
   "pages": [
     {
       "type": "text",
