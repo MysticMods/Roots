@@ -2,7 +2,6 @@
   "name": "Spreading Forest",
   "icon": "roots:ritual_spreading_forest",
   "category": "rituals",
-  "advancement": "roots:spirit_herb",
   "flag": "roots:ritual_spreading_forest",
   "pages": [
     {

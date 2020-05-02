@@ -2,7 +2,6 @@
   "name": "Healing Aura",
   "icon": "roots:ritual_healing_aura",
   "category": "rituals",
-  "advancement": "roots:pyre",
   "flag": "roots:ritual_healing_aura",
   "pages": [
     {

@@ -2,7 +2,6 @@
     "name": "Standing Stones & Pillars",
     "icon": "roots:chiseled_runestone",
     "category": "rituals",
-    "advancement": "roots:pyre",
     "priority": true,
     "sortnum": 1,
     "pages": [
