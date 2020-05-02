@@ -1117,7 +1117,7 @@ public class ModRecipes {
         new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.seeds)).setBurnTime(20));
 
-    addPyreCraftingRecipe("dead_bush", new PyreCraftingRecipe(new ItemStack(Blocks.TALLGRASS, 3, BlockTallGrass.EnumType.DEAD_BUSH.getMeta()))
+    addPyreCraftingRecipe("dead_bush", new PyreCraftingRecipe(new ItemStack(Blocks.DEADBUSH, 3))
         .addIngredients(
             new OreIngredient("treeSapling"),
             new OreIngredient("treeSapling"),
