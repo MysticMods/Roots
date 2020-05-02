@@ -1,6 +1,6 @@
 {
-  "name": "Spell Recipes",
+  "name": "Spells",
   "sortnum" : 2,
-  "description": "Spells are a way of channeling magic through a staff, using quantity of $(cat:herbs)herbs$() as a reagent, to achieve change to yourself, to those around you, or to the world.$(br2)$(warning) You will need to store the required components (listed in every entry) in a special $(apparatus/component_pouch)pouch$() in order to cast spells.",
+  "description": "Spells are created by a selection of ingredients, combined in a $(l:apparatus/mortar)mortar with a pestle$(). Once infused into a $(l:apparatus/staff)staff$(), they can be cast using $(cat:herbs)herbs$() as reagents.$(br2)$(warning) Herbs must be stored in a $(l:basics/pouch)pouch$() in order to cast the spell.",
   "icon": "roots:staff"
 }

@@ -1,6 +1,6 @@
 {
-    "name": "Natural Resources",
+    "name": "Resources",
     "sortnum" : 4,
-    "description": "Asides from herbs specifically, there are a number of additional resources which can be gathered, crafted, or obtained through magical means.$(br2)These are utilised in the construction of armor & weapons, as well as, importantly, in the creation of $(cat:rituals)rituals$().",
+    "description": "Asides from $(cat:herbs)herbs$(), there are a variety of other resources, both magical and mundane, worldy and otherworldly, that can be gathered, created or obtained through magical means.$(br2)These are often used in the construction of items, the creation of $(cat:spells)spells$() and the execution of $(cat:rituals)rituals$().",
     "icon": "roots:bark_oak"
   }
