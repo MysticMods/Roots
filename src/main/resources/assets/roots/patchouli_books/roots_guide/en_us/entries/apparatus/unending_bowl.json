@@ -2,7 +2,6 @@
   "name": "Unending Bowl",
   "icon": "roots:unending_bowl",
   "category": "apparatus",
-  "advancement": "roots:dewgonia",
   "pages": [
     {
       "type": "spotlight",

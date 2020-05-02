@@ -2,8 +2,6 @@
     "name": "Wildwood Quiver",
     "icon": "roots:wildwood_quiver",
     "category": "apparatus",
-    "advancement": "roots:wildwood",
-    "secret": true,
     "pages": [
       {
         "type": "text",
