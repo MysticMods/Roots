@@ -2,6 +2,7 @@
   "name": "Stalicripe",
   "icon": "roots:stalicripe",
   "category": "herbs",
+  "read_by_default": true,
   "turnin": "roots:stalicripe",
   "pages": [
     {

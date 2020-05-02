@@ -2,6 +2,7 @@
   "name": "Moonglow Leaf",
   "icon": "roots:moonglow_leaf",
   "category": "herbs",
+  "read_by_default": true,
   "turnin": "roots:moonglow_leaf",
   "pages": [
     {
