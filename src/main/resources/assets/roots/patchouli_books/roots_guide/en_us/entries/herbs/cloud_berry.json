@@ -2,8 +2,7 @@
   "name": "Cloud Berry",
   "icon": "roots:cloud_berry",
   "category": "herbs",
-  "advancement": "roots:pyre",
-  
+  "turnin": "roots:cloud_berry",
   "pages": [
     {
       "type": "spotlight",

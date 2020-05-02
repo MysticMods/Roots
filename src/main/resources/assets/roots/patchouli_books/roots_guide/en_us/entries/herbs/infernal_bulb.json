@@ -2,8 +2,7 @@
   "name": "Infernal Bulb",
   "icon": "roots:infernal_bulb",
   "category": "herbs",
-  "advancement": "roots:pyre",
-  
+  "turning": "roots:infernal_bulb",
   "pages": [
     {
       "type": "spotlight",
