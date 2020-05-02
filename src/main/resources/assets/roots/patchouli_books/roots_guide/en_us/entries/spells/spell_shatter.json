@@ -2,7 +2,6 @@
   "name": "Shatter",
   "icon": "roots:spell_dust",
   "category": "spells",
-  "advancement": "roots:stalicripe",
   "flag": "roots:spell_shatter",
   "pages": [
     {

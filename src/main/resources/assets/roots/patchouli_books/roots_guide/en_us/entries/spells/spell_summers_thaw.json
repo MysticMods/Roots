@@ -2,7 +2,6 @@
   "name": "Summers' Thaw",
   "icon": "roots:spell_dust",
   "category": "spells",
-  "advancement": "roots:infernal_bulb",
   "flag": "roots:spell_summers_thaw",
   "pages": [
     {
