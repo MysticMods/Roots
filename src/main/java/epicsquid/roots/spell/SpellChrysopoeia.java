@@ -42,7 +42,7 @@ public class SpellChrysopoeia extends SpellBase {
     addIngredients(
         new OreIngredient("ingotIron"),
         new OreIngredient("ingotGold"),
-        new OreIngredient("cropNetherWart"),
+        new OreIngredient("dustRedstone"),
         new ItemStack(Items.MAGMA_CREAM),
         new OreIngredient("gemDiamond")
     );
