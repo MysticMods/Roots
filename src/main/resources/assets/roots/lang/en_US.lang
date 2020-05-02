@@ -1,6 +1,6 @@
 itemGroup.roots=Roots
 
-entity.Villager.druid=Druid
+entity.Villager.wild_mage=Wild Mage
 entity.entity_fairy.name=Fairy
 
 item.glass_eye.name=Glass Eye
@@ -248,7 +248,7 @@ advancement.roots.root=Roots 3
 advancement.roots.root.desc=Embrace the power of nature!
 advancement.roots.wildroot=The Root of Magic
 advancement.roots.wildroot.desc=Find wildroot amongst broken grass.
-advancement.roots.guide=Epi-Tome of Druidry
+advancement.roots.guide=Epi-Tome of Mage-ry
 advancement.roots.guide.desc=Combine a book with wildroot for an essential guide.
 advancement.roots.terra_moss=Overgrown Nature
 advancement.roots.terra_moss.desc=Scrape the magical growth off mossy cobblestone.
@@ -387,7 +387,7 @@ jei.roots.terra_moss.desc=Scraped from moss cobblestone with a knife. Cobbleston
 jei.roots.terra_spores.desc=Dropped from broken tall grass; used on cobblestone adjacent water grows spores, turning it into moss cobblestone.
 jei.roots.wildroot.desc=Dropped from broken tall grass and the extremely rare leaves of the wildwood tree.
 jei.roots.bark.desc=Obtained by breaking the relevant log with a knife.
-jei.roots.wildwood.desc=Once a sacred tree of druidry, the only remnant of these that remain in the world are their wildroots. From these a skilled druid, with the correct words and ingredients, can invoke the ritual of Wildroot Growth.
+jei.roots.wildwood.desc=Once a sacred tree, the only remnant of these that remain in the world are their wildroots. From these a skilled wild mage, with the correct words and ingredients, can invoke the ritual of Wildroot Growth.
 jei.roots.wildwood_sapling.desc=A rare, treasured young of a tree that does not itself bear children. No longer born, almost all of them have been secreted away by the druids of old.
 jei.roots.wildwood_leaves.desc=Unlike the leaves of other trees, the sacred wildwood has no longer the strength to bear saplings. Instead, the kernel of life common to all parts of the wildwood - the wildroot - may be found tucked amongst its leaves and its branches.
 jei.roots.elemental_soil_fire.desc=Created by tossing a piece of Elemental Soil into a pool of lava.

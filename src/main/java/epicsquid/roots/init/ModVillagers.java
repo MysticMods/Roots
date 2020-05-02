@@ -21,14 +21,14 @@ import net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfessio
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 @SuppressWarnings("unused")
 public class ModVillagers {
-  public static final VillagerProfession druidProfession = new VillagerProfession(Roots.MODID + ":druid", Roots.MODID + ":textures/entity/druid_hood.png", "minecraft:textures/entity/zombie_villager/zombie_villager.png"); // TODO: Zombie druid villager!
-  public static VillagerCareer druidCareer;
+  public static final VillagerProfession mageProfession = new VillagerProfession(Roots.MODID + ":wild_mage", Roots.MODID + ":textures/entity/mage.png", "minecraft:textures/entity/zombie_villager/zombie_villager.png"); // TODO: Zombie wild mage villager!
+  public static VillagerCareer mageCareer;
 
   @SubscribeEvent
   public static void onProfessionRegister(RegistryEvent.Register<VillagerProfession> event) {
-    event.getRegistry().register(druidProfession);
+    event.getRegistry().register(mageProfession);
 
-    druidCareer = new VillagerCareer(druidProfession, "druid").
+    mageCareer = new VillagerCareer(mageProfession, "wild_mage").
         addTrade(1,
             new EmeraldForRandomItem(new PriceInfo(5, 12), ModItems.wildroot, ModItems.terra_moss, epicsquid.mysticalworld.init.ModItems.aubergine),
             new EmeraldForRandomItem(new PriceInfo(5, 15), ModItems.bark_oak, ModItems.bark_birch, ModItems.bark_spruce, ModItems.bark_acacia, ModItems.bark_dark_oak, ModItems.bark_jungle),
