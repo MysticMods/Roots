@@ -2,6 +2,7 @@
     "name": "Wildwood Quiver",
     "icon": "roots:wildwood_quiver",
     "category": "apparatus",
+    "read_by_default": true,
     "pages": [
       {
         "type": "text",
