@@ -2,7 +2,6 @@
   "name": "Purify",
   "icon": "roots:ritual_purity",
   "category": "rituals",
-  "advancement": "roots:baffle_cap",
   "flag": "roots:ritual_purity",
   "pages": [
     {

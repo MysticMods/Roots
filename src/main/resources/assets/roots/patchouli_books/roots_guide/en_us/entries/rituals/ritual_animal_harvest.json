@@ -2,7 +2,6 @@
   "name": "Animal Harvest",
   "icon": "roots:ritual_animal_harvest",
   "category": "rituals",
-  "advancement": "roots:wildewheet",
   "flag": "roots:ritual_animal_harvest",
   "pages": [
     {
