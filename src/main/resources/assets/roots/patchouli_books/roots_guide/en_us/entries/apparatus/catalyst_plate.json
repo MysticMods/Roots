@@ -2,7 +2,7 @@
   "name": "Catalyst Plate",
   "icon": "roots:catalyst_plate",
   "category": "apparatus",
-  "secret": true,
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

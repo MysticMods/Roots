@@ -1,6 +1,7 @@
 {
     "name": "Apothecary Pouch",
     "icon": "roots:apothecary_pouch",
+    "read_by_default": true,
     "category": "apparatus",
     "pages": [
       {
