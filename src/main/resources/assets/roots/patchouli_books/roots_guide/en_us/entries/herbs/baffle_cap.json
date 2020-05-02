@@ -2,8 +2,7 @@
   "name": "Baffle Cap",
   "icon": "roots:baffle_cap_mushroom",
   "category": "herbs",
-  "advancement": "roots:pyre",
-  
+  "turnin": "roots:baffle_cap",
   "pages": [
     {
       "type": "spotlight",
