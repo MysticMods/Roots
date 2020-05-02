@@ -2,6 +2,7 @@
   "name": "Dewgonia",
   "icon": "roots:dewgonia",
   "category": "herbs",
+  "read_by_default": true,
   "turnin": "roots:dewgonia",
   "pages": [
     {

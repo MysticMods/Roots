@@ -2,6 +2,7 @@
   "name": "Terra Moss",
   "icon": "roots:terra_moss",
   "category": "herbs",
+  "read_by_default": true,
   "turnin": "roots:terra_moss",
   "priority": true,
   "pages": [

@@ -2,6 +2,7 @@
   "name": "Wildroot",
   "icon": "roots:wildroot",
   "category": "herbs",
+  "read_by_default": true,
   "turnin": "roots:wildroot",
   "priority": true,
   "pages": [

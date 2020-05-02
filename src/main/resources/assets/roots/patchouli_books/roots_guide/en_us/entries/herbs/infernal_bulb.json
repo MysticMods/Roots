@@ -2,6 +2,7 @@
   "name": "Infernal Bulb",
   "icon": "roots:infernal_bulb",
   "category": "herbs",
+  "read_by_default": true,
   "turnin": "roots:infernal_bulb",
   "pages": [
     {
