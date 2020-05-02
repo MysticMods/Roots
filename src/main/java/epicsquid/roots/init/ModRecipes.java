@@ -26,7 +26,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityPolarBear;
+import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -36,6 +36,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nonnull;
@@ -144,6 +145,16 @@ public class ModRecipes {
     addSummonCreatureEntry("parrot", EntityParrot.class, Ingredient.fromItem(ModItems.bark_jungle), Ingredient.fromItem(Items.BEETROOT_SEEDS));
     addSummonCreatureEntry("ocelot", EntityOcelot.class, new OreIngredient("tallgrass"), Ingredient.fromItem(Items.SUGAR));
     addSummonCreatureEntry("mule", EntityMule.class, new OreIngredient("cropWheat"), Ingredient.fromItem(Items.COAL));
+
+    // Hostiles
+    addSummonCreatureEntry("zombie_pigman", EntityPigZombie.class, new OreIngredient("nuggetGold"), Ingredient.fromItem(Items.PORKCHOP), Ingredient.fromItem(Items.FISHING_ROD));
+    addSummonCreatureEntry("zombie", EntityZombie.class, Ingredient.fromStacks(new ItemStack(Items.DYE, 1, EnumDyeColor.WHITE.getDyeDamage())), Ingredient.fromItem(Items.ROTTEN_FLESH), new OreIngredient("cropPotato"));
+    addSummonCreatureEntry("skeleton", EntitySkeleton.class, Ingredient.fromStacks(new ItemStack(Items.DYE, 1, EnumDyeColor.WHITE.getDyeDamage())), Ingredient.fromItem(Items.FLINT), Ingredient.fromStacks(new ItemStack(Items.BOW, 1, OreDictionary.WILDCARD_VALUE)));
+    addSummonCreatureEntry("husk", EntityHusk.class, Ingredient.fromItem(Item.getItemFromBlock(Blocks.CACTUS)), Ingredient.fromItem(Item.getItemFromBlock(Blocks.DEADBUSH)), Ingredient.fromStacks(new ItemStack(Item.getItemFromBlock(Blocks.SANDSTONE), 1, BlockSandStone.EnumType.CHISELED.getMetadata())));
+    addSummonCreatureEntry("spider", EntitySpider.class, Ingredient.fromItem(ModItems.glass_eye), new OreIngredient("string"), Ingredient.fromItem(Item.getItemFromBlock(Blocks.LADDER)));
+    addSummonCreatureEntry("creeper", EntityCreeper.class, Ingredient.fromItem(Item.getItemFromBlock(Blocks.DIRT)), new OreIngredient("tallgrass"), Ingredient.fromItem(Items.GUNPOWDER));
+    addSummonCreatureEntry("witch", EntityWitch.class, new OreIngredient("stickWood"), new OreIngredient("dustRedstone"), new OreIngredient("string"));
+    addSummonCreatureEntry("stray", EntityStray.class, Ingredient.fromItem(Items.SNOWBALL), Ingredient.fromItem(Items.FLINT), Ingredient.fromStacks(new ItemStack(Items.BOW, 1, OreDictionary.WILDCARD_VALUE)));
   }
 
   public static SummonCreatureRecipe addSummonCreatureEntry(String name, Class<? extends EntityLivingBase> clazz, Ingredient... ingredients) {
