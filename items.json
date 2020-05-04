@@ -4,6 +4,10 @@
   "models": [
     {
       "type": "item",
+      "base": "wooden_heart"
+    },
+    {
+      "type": "item",
       "base": "strange_slime"
     },
     {
