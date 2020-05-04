@@ -27,7 +27,7 @@ public class BarkHandler {
   public static void barkHarvested(BlockEvent.HarvestDropsEvent event) {
     if (event.getHarvester() != null) {
       ItemStack tool = event.getHarvester().getHeldItem(EnumHand.MAIN_HAND);
-      if (tool.getItem().getToolClasses(tool).contains("mageKnife")) {
+      if (tool.getItem().getToolClasses(tool).contains("druidKnife")) {
         IBlockState blockstate = event.getState();
         Block block = blockstate.getBlock();
         BlockPlanks.EnumType type = (block == Blocks.LOG) ?
