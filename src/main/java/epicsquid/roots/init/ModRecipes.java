@@ -12,7 +12,7 @@ import epicsquid.mysticalworld.materials.Material;
 import epicsquid.mysticalworld.materials.Materials;
 import epicsquid.mysticalworld.recipe.Ingredients;
 import epicsquid.roots.Roots;
-import epicsquid.roots.item.ItemMageKnife;
+import epicsquid.roots.item.ItemDruidKnife;
 import epicsquid.roots.recipe.*;
 import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
 import epicsquid.roots.recipe.transmutation.*;
@@ -410,7 +410,7 @@ public class ModRecipes {
   public static void addModdedBarkRecipe(String name, ItemStack item, ItemStack blockStack) {
     if (blockStack.getItem() instanceof ItemBlock) {
       for (Item knife : ModItems.knives) {
-        ((ItemMageKnife) knife).addEffectiveBlock(((ItemBlock) blockStack.getItem()).getBlock());
+        ((ItemDruidKnife) knife).addEffectiveBlock(((ItemBlock) blockStack.getItem()).getBlock());
       }
     }
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);

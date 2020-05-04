@@ -30,9 +30,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemMageKnife extends ItemKnifeBase {
+public class ItemDruidKnife extends ItemKnifeBase {
 
-  public ItemMageKnife(String name, ToolMaterial material) {
+  public ItemDruidKnife(String name, ToolMaterial material) {
     super(name, material);
     ModItems.knives.add(this);
 
