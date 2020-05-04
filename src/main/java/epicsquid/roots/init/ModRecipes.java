@@ -346,6 +346,7 @@ public class ModRecipes {
     addPacifistEntry("silkworm", EntitySilkworm.class);
     // TODO: Conditional non-hostile
     addPacifistEntry("lava_cat", EntityLavaCat.class);
+    addPacifistEntry("hellsprout", EntityHellSprout.class);
   }
 
   public static void addFlowerRecipe(String name, IBlockState state) {
@@ -720,6 +721,7 @@ public class ModRecipes {
     addAnimalHarvestRecipe("owl", EntityOwl.class);
     addAnimalHarvestRecipe("sprout", EntitySprout.class);
     addAnimalHarvestRecipe("lava_cat", EntityLavaCat.class);
+    addAnimalHarvestRecipe("hellsprout", EntityHellSprout.class);
     addAnimalHarvestRecipe("silkworm", EntitySilkworm.class);
     // Fish recipes
     addAnimalHarvestFishRecipe("cod", new ItemStack(Items.FISH, 1, ItemFishFood.FishType.COD.getMetadata()), 60);

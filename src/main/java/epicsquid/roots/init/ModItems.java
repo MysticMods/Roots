@@ -51,7 +51,7 @@ public class ModItems {
 
   public static Item creative_pouch, fey_fire;
 
-  public static Item life_essence, salmon;
+  public static Item life_essence, salmon, wooden_heart;
 
   public static List<Item> barks;
 
@@ -163,6 +163,8 @@ public class ModItems {
     event.addItem(wildwood_chestplate = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.CHEST, "wildwood_chestplate").setMaxStackSize(1));
     event.addItem(wildwood_leggings = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.LEGS, "wildwood_leggings").setMaxStackSize(1));
     event.addItem(wildwood_boots = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.FEET, "wildwood_boots").setMaxStackSize(1));
+
+    event.addItem(wooden_heart = new ItemBase("wooden_heart").setCreativeTab(Roots.tab));
 
     event.addItem(runic_shears = new ItemRunicShears("runic_shears").setCreativeTab(Roots.tab));
 
