@@ -28,7 +28,7 @@ public class Magnetize {
     if (entities.isEmpty()) return 0;
     for (Entity entity : entities) {
       if (!world.isRemote) {
-        if (entity instanceof EntityItem) {
+        if (entity instanceof EntityItem && !entity.isDead) {
           ((EntityItem) entity).setPickupDelay(0);
         }
         entity.moveToBlockPosAndAngles(startPosition, 0f, 0f);
@@ -55,6 +55,10 @@ public class Magnetize {
   }
 
   public static boolean skipPull(Entity entity) {
+    if (entity.isDead) {
+      return true;
+    }
+
     // Supporting Demagnetize
     // https://www.curseforge.com/minecraft/mc-mods/demagnetize
     if (entity instanceof EntityItem && entity.getEntityData().hasKey("PreventRemoteMovement")) {
