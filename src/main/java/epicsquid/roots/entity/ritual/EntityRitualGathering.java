@@ -58,7 +58,7 @@ public class EntityRitualGathering extends EntityRitualBase {
             break;
           }
         }
-        if (found && te != null) {
+        if (found) {
           IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
           if (cap != null) {
             List<BlockPos> transferredItems = Magnetize.store(world, getPosition(), cap, 15, 15, 15);
