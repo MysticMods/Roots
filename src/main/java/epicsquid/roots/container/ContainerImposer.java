@@ -7,6 +7,7 @@
 
 package epicsquid.roots.container;
 
+import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.tileentity.TileEntityImposer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -21,18 +22,29 @@ public class ContainerImposer extends Container {
 
   private final TileEntityImposer tile;
   private final EntityPlayer player;
+  private boolean selectSpell = true;
 
   public ContainerImposer(EntityPlayer player, TileEntityImposer tile) {
     this.tile = tile;
     this.player = player;
 
     createPlayerInventory(player.inventory);
-    createImposerSlots();
+    createModifierSlots();
+    createSpellSlots();
   }
 
-  private void createImposerSlots() {
+  public boolean isSelectSpell() {
+    return selectSpell;
+  }
+
+  public void setSelectSpell(boolean selectSpell) {
+    this.selectSpell = selectSpell;
+  }
+
+  private void createSpellSlots() {
     int xOffset = 47;
     int yOffset = -15;
+
 /*    for (int i = 0; i < quiverHandler.getSlots(); i++) {
       addSlotToContainer(new SlotItemHandler(quiverHandler, i, xOffset + 11 + (((i >= 3) ? i - 3 : i) * 21), yOffset + 23 + ((i >= 3) ? 21 : 0)) {
         @Override
@@ -41,6 +53,10 @@ public class ContainerImposer extends Container {
         }
       });
     }*/
+  }
+
+  private void createModifierSlots () {
+
   }
 
   private void createPlayerInventory(InventoryPlayer inventoryPlayer) {

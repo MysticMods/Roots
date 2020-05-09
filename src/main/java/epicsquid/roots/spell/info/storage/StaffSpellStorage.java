@@ -1,6 +1,5 @@
 package epicsquid.roots.spell.info.storage;
 
-import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
@@ -12,6 +11,8 @@ import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Collection;
+import java.util.List;
 
 // TODO: Not actually a capability
 public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
@@ -45,7 +46,11 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
     if (slot < MIN_SPELL_SLOT || slot > MAX_SPELL_SLOT) {
       throw new IllegalStateException("Tried to get spell for invalid slot " + slot);
     }
-    return spells.get(slot-1);
+    return spells.get(slot - 1);
+  }
+
+  public Collection<StaffSpellInfo> getSpells () {
+    return spells.values();
   }
 
   @Override
@@ -58,7 +63,7 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
   }
 
   @Override
-  public int getCooldown () {
+  public int getCooldown() {
     StaffSpellInfo info = getSelectedInfo();
     if (info == null) {
       return -1;

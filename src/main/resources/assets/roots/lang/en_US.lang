@@ -48,6 +48,7 @@ item.life_essence.name=Essence of Unknown Life
 item.life_essence.entity_name=Life-Essence of %s
 item.salmon_of_knowledge.name=Salmon of Knowledge
 item.wooden_shears.name=Wooden Shears
+tile.imposer.name=Imposer
 tile.mortar.name=Mortar
 tile.imbuer.name=Imbuer
 tile.thatch.name=Thatch

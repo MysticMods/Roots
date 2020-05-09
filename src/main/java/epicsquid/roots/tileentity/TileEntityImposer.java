@@ -2,7 +2,11 @@ package epicsquid.roots.tileentity;
 
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.GuiHandler;
+import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.item.ItemDruidKnife;
+import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -17,6 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class TileEntityImposer extends TileBase implements ITickable {
   public ItemStackHandler inventory = new ItemStackHandler(1) {
@@ -82,6 +87,11 @@ public class TileEntityImposer extends TileBase implements ITickable {
           return true;
         }
       }
+    } else if (!heldItem.isEmpty() && heldItem.getItem() instanceof ItemDruidKnife) {
+      if (!world.isRemote) {
+        player.openGui(Roots.instance, GuiHandler.IMPOSER_ID, world, pos.getX(), pos.getY(), pos.getZ());
+      }
+      return true;
     } else if (heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND) {
       for (int i = inventory.getSlots() - 1; i >= 0; i--) {
         if (this.dropItemInInventory(inventory, i)) {
@@ -97,6 +107,16 @@ public class TileEntityImposer extends TileBase implements ITickable {
     if (!world.isRemote) {
       Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
     }
+  }
+
+  @Nullable
+  public StaffSpellStorage getSpellStorage () {
+    ItemStack staff = inventory.getStackInSlot(0);
+    if (staff.isEmpty()) {
+      return null;
+    }
+
+    return new StaffSpellStorage(staff);
   }
 
   @Override
