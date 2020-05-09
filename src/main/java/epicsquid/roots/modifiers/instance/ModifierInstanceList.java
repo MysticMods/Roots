@@ -134,4 +134,25 @@ public class ModifierInstanceList implements IModifierList<ModifierInstance, NBT
       this.internalIterator.forEachRemaining(action);
     }
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ModifierInstanceList that = (ModifierInstanceList) o;
+    if (internal.size() != that.internal.size()) {
+      return false;
+    }
+    for (ModifierType mod : internal.keySet()) {
+      if (!internal.get(mod).equals(that.internal.get(mod))) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(internal);
+  }
 }

@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 public class StaffSpellInfo extends AbstractSpellModifiers<ModifierInstanceList> {
   private ModifierInstanceList modifiers = new ModifierInstanceList();
@@ -83,5 +84,19 @@ public class StaffSpellInfo extends AbstractSpellModifiers<ModifierInstanceList>
       return null;
     }
     return new StaffSpellInfo(spell);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    StaffSpellInfo that = (StaffSpellInfo) o;
+    return cooldownStart == that.cooldownStart &&
+        getModifiers() != null && getModifiers().equals(that.getModifiers());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getModifiers(), cooldownStart);
   }
 }
