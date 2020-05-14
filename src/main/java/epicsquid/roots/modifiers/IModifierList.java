@@ -1,5 +1,6 @@
 package epicsquid.roots.modifiers;
 
+import epicsquid.roots.modifiers.modifier.IModifierCore;
 import epicsquid.roots.spell.SpellBase;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagList;
@@ -13,6 +14,8 @@ public interface IModifierList<T extends IModifier, V extends NBTBase> extends I
   boolean isEmpty();
 
   boolean contains(Object o);
+
+  T getByCore (IModifierCore core);
 
   boolean add(T modifierInstance);
 

@@ -2,6 +2,7 @@ package epicsquid.roots.modifiers.instance;
 
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.modifiers.IModifier;
+import epicsquid.roots.modifiers.modifier.IModifierCore;
 import epicsquid.roots.modifiers.modifier.Modifier;
 import epicsquid.roots.modifiers.ModifierRegistry;
 import epicsquid.roots.modifiers.ModifierType;
@@ -42,18 +43,18 @@ public class ModifierInstance implements INBTSerializable<NBTTagCompound>, IModi
   }
 
   @Override
-  public ItemStack getItem() {
-    return modifier.getItem();
-  }
-
-  @Override
-  public ItemStack getActualItem() {
-    return modifier.getActualItem();
+  public ItemStack getStack() {
+    return modifier.getStack();
   }
 
   @Override
   public ModifierType getType () {
     return modifier.getType();
+  }
+
+  @Override
+  public IModifierCore getCore() {
+    return modifier.getCore();
   }
 
   @Override

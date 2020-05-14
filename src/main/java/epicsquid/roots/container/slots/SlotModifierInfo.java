@@ -36,7 +36,7 @@ public class SlotModifierInfo extends Slot {
     if (info == null) {
       return ItemStack.EMPTY;
     }
-    return info.getActualItem();
+    return info.getStack();
   }
 
   @Override
@@ -76,6 +76,14 @@ public class SlotModifierInfo extends Slot {
   }
 
   private boolean enabled = true;
+
+  public boolean isModifierDisabled () {
+    ModifierInstance info = this.info.get();
+    if (info == null) {
+      return false;
+    }
+    return !info.isEnabled();
+  }
 
   @Override
   public boolean isEnabled() {

@@ -45,7 +45,9 @@ public class RegisterHerbEvent extends GenericEvent<Herb> implements IContextSet
   /**
    * Register and item as a herb. Will be automatically wrapped for registering.
    */
-  public void register(@Nonnull Supplier<Item> item, String registryName) {
-    registry.register(new Herb(item, new ResourceLocation(Roots.MODID, registryName)));
+  public Herb register(@Nonnull Supplier<Item> item, String registryName) {
+    Herb value = new Herb(item, new ResourceLocation(Roots.MODID, registryName));
+    register(value);
+    return value;
   }
 }

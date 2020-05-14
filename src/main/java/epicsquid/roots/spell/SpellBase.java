@@ -202,7 +202,7 @@ public abstract class SpellBase extends RegistryItem {
       String mod = I18n.format("roots.spell.module.description");
 
       for (Modifier module : getModifiers()) {
-        ItemStack stack = module.getActualItem();
+        ItemStack stack = module.getStack();
         String description = I18n.format(prefix + module.getTranslationKey() + ".description");
         Util.appendLoreTag(stack, mod, description);
         moduleItems.add(stack);

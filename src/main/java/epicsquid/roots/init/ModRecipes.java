@@ -1565,6 +1565,7 @@ public class ModRecipes {
   }
 
   public static void afterHerbRegisterInit() {
+
   }
 
   private static void initDrops() {

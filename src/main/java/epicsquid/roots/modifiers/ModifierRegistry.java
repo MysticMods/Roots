@@ -15,7 +15,7 @@ public class ModifierRegistry {
     return map.get(name);
   }
 
-  public static void register (Modifier modifier) {
+  public static Modifier register (Modifier modifier) {
     ResourceLocation registryName = modifier.getRegistryName();
     if (registryName == null) {
       throw new IllegalStateException("Modifier being registered has a null registry name.");
@@ -24,6 +24,7 @@ public class ModifierRegistry {
       throw new IllegalStateException("Modifier with registry name " + registryName + " already exists!");
     }
     map.put(registryName, modifier);
+    return modifier;
   }
 
   public static Collection<Modifier> getModifiers () {
