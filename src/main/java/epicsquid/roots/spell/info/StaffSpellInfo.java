@@ -12,6 +12,7 @@ import javax.annotation.Nullable;
 import java.util.Objects;
 
 public class StaffSpellInfo extends AbstractSpellModifiers<ModifierInstanceList> {
+  public static StaffSpellInfo EMPTY = new StaffSpellInfo();
   private ModifierInstanceList modifiers = new ModifierInstanceList();
   private long cooldownStart = -1;
 
@@ -68,6 +69,11 @@ public class StaffSpellInfo extends AbstractSpellModifiers<ModifierInstanceList>
     super.deserializeNBT(nbt);
     this.modifiers = ModifierInstanceList.fromNBT(nbt.getTagList("m", Constants.NBT.TAG_COMPOUND));
     this.cooldownStart = nbt.getLong("l");
+  }
+
+  @Override
+  public boolean isEmpty() {
+    return this == EMPTY;
   }
 
   public static StaffSpellInfo fromNBT(NBTTagCompound tag) {

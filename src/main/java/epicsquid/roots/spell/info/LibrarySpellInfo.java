@@ -7,6 +7,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import javax.annotation.Nullable;
 
 public class LibrarySpellInfo extends AbstractSpellModifiers<ModifierList> {
+  public static LibrarySpellInfo EMPTY = new LibrarySpellInfo();
+
   private boolean obtained;
 
   private LibrarySpellInfo() {
@@ -50,6 +52,11 @@ public class LibrarySpellInfo extends AbstractSpellModifiers<ModifierList> {
     this.modifiers = new ModifierList(getSpell());
     this.modifiers.deserializeNBT(nbt.getCompoundTag("m"));
     this.obtained = nbt.getBoolean("o");
+  }
+
+  @Override
+  public boolean isEmpty() {
+    return this == EMPTY;
   }
 
   public static LibrarySpellInfo fromNBT(NBTTagCompound tag) {
