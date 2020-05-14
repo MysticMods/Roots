@@ -192,7 +192,7 @@ public abstract class SpellBase extends RegistryItem {
   // TODO
   private List<ItemStack> moduleItems = null;
 
-  // TODO: This should be returning Modifiers
+/*  // TODO: This should be returning Modifiers
   @Deprecated
   @SideOnly(Side.CLIENT)
   public List<ItemStack> getModuleStacks() {
@@ -210,7 +210,7 @@ public abstract class SpellBase extends RegistryItem {
     }
 
     return moduleItems;
-  }
+  }*/
 
   public SpellBase addCost(SpellCost cost) {
     return addCost(cost.getHerb(), cost.getCost());

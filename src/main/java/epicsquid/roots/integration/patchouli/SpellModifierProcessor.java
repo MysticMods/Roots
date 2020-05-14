@@ -7,6 +7,7 @@ import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariableProvider;
 import vazkii.patchouli.common.util.ItemStackUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SpellModifierProcessor implements IComponentProcessor {
@@ -17,7 +18,7 @@ public class SpellModifierProcessor implements IComponentProcessor {
   @Override
   public void setup(IVariableProvider<String> iVariableProvider) {
     recipe = SpellRegistry.getSpell(iVariableProvider.get("spell"));
-    stacks = recipe.getModuleStacks();
+    stacks = new ArrayList<>(); // recipe.getModuleStacks();
   }
 
   @Override

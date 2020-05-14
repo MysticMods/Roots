@@ -91,4 +91,8 @@ public class SlotSpellInfo extends Slot {
     }
     return false;
   }
+
+  public StaffSpellInfo getInfo () {
+    return info.get();
+  }
 }

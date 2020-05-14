@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SpellModifierWrapper implements IRecipeWrapper {
@@ -19,7 +20,7 @@ public class SpellModifierWrapper implements IRecipeWrapper {
 
   public SpellModifierWrapper(SpellBase recipe) {
     this.recipe = recipe;
-    this.module_items = recipe.getModuleStacks();
+    this.module_items = new ArrayList<>(); //recipe.getModuleStacks();
   }
 
   @Override

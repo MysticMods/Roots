@@ -28,7 +28,8 @@ public class Modifier extends RegistryItem implements IModifier {
 
   @Override
   public String getTranslationKey() {
-    return getRegistryName().getPath();
+    ResourceLocation rl = getRegistryName();
+    return rl.getNamespace() + "." + rl.getPath();
   }
 
   @Override

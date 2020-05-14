@@ -39,4 +39,6 @@ public abstract class AbstractSpellInfo implements INBTSerializable<NBTTagCompou
       this.spell = SpellRegistry.getSpell(name);
     }
   }
+
+  public abstract boolean isEmpty ();
 }

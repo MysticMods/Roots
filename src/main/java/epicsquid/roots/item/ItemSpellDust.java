@@ -1,7 +1,9 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemBase;
+import epicsquid.roots.modifiers.ModifierContext;
 import epicsquid.roots.spell.info.SpellDustInfo;
+import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.DustSpellStorage;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.spell.SpellBase;
@@ -41,5 +43,10 @@ public class ItemSpellDust extends ItemBase {
 
     // TODO: Migrate this to the info
     spell.addToolTip(tooltip);
+
+    StaffSpellInfo context = ModifierContext.getHoveredSpellInfo();
+    if (context != null) {
+
+    }
   }
 }
