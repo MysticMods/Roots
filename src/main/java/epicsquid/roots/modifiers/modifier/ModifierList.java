@@ -9,7 +9,9 @@ import it.unimi.dsi.fastutil.objects.Object2BooleanOpenHashMap;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nullable;
 import java.util.Iterator;
+import java.util.Map;
 
 public class ModifierList implements IModifierList<Modifier, NBTTagCompound> {
   private Object2BooleanOpenHashMap<Modifier> map = new Object2BooleanOpenHashMap<>();
@@ -41,7 +43,25 @@ public class ModifierList implements IModifierList<Modifier, NBTTagCompound> {
 
   @Override
   public boolean contains(Object o) {
+    if (o instanceof IModifierCore) {
+      return getByCore((IModifierCore) o) != null;
+    }
     return map.getBoolean(o);
+  }
+
+  @Override
+  @Nullable
+  public Modifier getByCore(IModifierCore core) {
+    for (Object2BooleanMap.Entry<Modifier> modifier : map.object2BooleanEntrySet()) {
+      if (modifier.getKey().getCore() == core) {
+        if (modifier.getBooleanValue()) {
+          return modifier.getKey();
+        }
+        break;
+      }
+    }
+
+    return null;
   }
 
   @Override
