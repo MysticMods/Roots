@@ -12,22 +12,17 @@ import net.minecraft.util.ResourceLocation;
 import javax.annotation.Nullable;
 
 public class Modifier extends RegistryItem implements IModifier {
+  private final IModifierCore core;
   private final ModifierType modifier;
   private final double value;
-  private final Herb herb;
-  private final ItemStack item;
 
-  public Modifier(ResourceLocation name, ModifierType modifierType, double value, ItemStack item, @Nullable Herb herb) {
+  public Modifier(ResourceLocation name, ModifierType modifierType, IModifierCore core, double value) {
     setRegistryName(name);
     this.modifier = modifierType;
     this.value = value;
-    this.herb = herb;
-    this.item = item;
-    if (modifier == ModifierType.ADDITIONAL_COST && this.herb == null) {
+    this.core = core;
+    if (modifier == ModifierType.ADDITIONAL_COST && !this.core.isHerb()) {
       throw new IllegalStateException("Modifier cannot be additional cost without a herb specified.");
-    }
-    if (item.isEmpty()) {
-      throw new IllegalStateException("Modifier ItemStack cannot be empty");
     }
   }
 
@@ -37,22 +32,18 @@ public class Modifier extends RegistryItem implements IModifier {
   }
 
   @Override
-  public ItemStack getItem() {
-    return item;
-  }
-
-  @Override
-  public ItemStack getActualItem() {
-    if (herb != null) {
-      return new ItemStack(herb.getItem());
-    } else {
-      return item;
-    }
+  public ItemStack getStack() {
+    return core.getStack();
   }
 
   @Override
   public ModifierType getType() {
     return modifier;
+  }
+
+  @Override
+  public IModifierCore getCore() {
+    return core;
   }
 
   @Override
@@ -62,10 +53,10 @@ public class Modifier extends RegistryItem implements IModifier {
     }
     if (modifier == ModifierType.ADDITIONAL_COST) {
       final Object2DoubleOpenHashMap<Herb> result = new Object2DoubleOpenHashMap<>(costs);
-      if (result.containsKey(this.herb)) {
-        result.put(this.herb, result.getDouble(this.herb) + this.value);
+      if (result.containsKey(core.getHerb())) {
+        result.put(core.getHerb(), result.getDouble(core.getHerb()) + this.value);
       } else {
-        result.put(this.herb, this.value);
+        result.put(core.getHerb(), this.value);
       }
       return result;
     }

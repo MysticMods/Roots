@@ -1,6 +1,7 @@
 package epicsquid.roots.modifiers;
 
 import epicsquid.roots.api.Herb;
+import epicsquid.roots.modifiers.modifier.IModifierCore;
 import epicsquid.roots.spell.SpellBase;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.item.ItemStack;
@@ -8,11 +9,11 @@ import net.minecraft.item.ItemStack;
 public interface IModifier {
   String getTranslationKey();
 
-  ItemStack getItem();
-
-  ItemStack getActualItem();
+  ItemStack getStack();
 
   ModifierType getType();
+
+  IModifierCore getCore ();
 
   Object2DoubleOpenHashMap<Herb> apply(final Object2DoubleOpenHashMap<Herb> costs);
 

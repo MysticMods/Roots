@@ -10,9 +10,11 @@ package epicsquid.roots.client.gui;
 import epicsquid.roots.Roots;
 import epicsquid.roots.container.ContainerFeyCrafter;
 import epicsquid.roots.container.ContainerImposer;
+import epicsquid.roots.container.slots.SlotModifierInfo;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -39,17 +41,6 @@ public class GuiImposer extends GuiContainer {
   @Override
   protected void renderHoveredToolTip(int x, int y) {
     super.renderHoveredToolTip(x, y);
-
-/*    if (container.getRecipe() != null) {
-      final int minX = ((this.width - this.xSize) / 2) + ((this.xSize / 4) * 3) - 2;
-      final int minY = ((this.height - this.ySize) / 2) + (this.ySize / 5) - 2;
-      final int maxX = minX + 20;
-      final int maxY = minY + 20;
-
-      if (x >= minX && x <= maxX && y >= minY && y <= maxY) {
-        this.renderToolTip(container.getRecipe().getResult(), x, y);
-      }
-    }*/
   }
 
   private static ResourceLocation SPELL_SELECT = new ResourceLocation(Roots.MODID, "textures/gui/imposer_spell_select.png");
@@ -66,5 +57,19 @@ public class GuiImposer extends GuiContainer {
     int i = (this.width - this.xSize) / 2;
     int j = (this.height - this.ySize) / 2;
     this.drawTexturedModalRect(i, j, 0, 0, 176, 243);
+  }
+
+  @Override
+  public void drawSlot(Slot slot) {
+    super.drawSlot(slot);
+    if (slot instanceof SlotModifierInfo) {
+      SlotModifierInfo info = (SlotModifierInfo) slot;
+      if (info.isModifierDisabled()) {
+        this.mc.getTextureManager().bindTexture(getTexture());
+        int i2 = slot.xPos + 1;
+        int j2 = slot.yPos + 1;
+        this.drawTexturedModalRect(i2, j2, 176, 0, 16, 16);
+      }
+    }
   }
 }

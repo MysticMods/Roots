@@ -3,6 +3,7 @@ package epicsquid.roots.modifiers.instance;
 import com.google.common.collect.Iterators;
 import epicsquid.roots.modifiers.IModifierList;
 import epicsquid.roots.modifiers.ModifierType;
+import epicsquid.roots.modifiers.modifier.IModifierCore;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
@@ -11,9 +12,11 @@ import java.util.function.Consumer;
 
 public class ModifierInstanceList implements IModifierList<ModifierInstance, NBTTagList> {
   private final Map<ModifierType, List<ModifierInstance>> internal;
+  private final Map<IModifierCore, ModifierInstance> coreToInstance;
 
   public ModifierInstanceList() {
     internal = new HashMap<>();
+    coreToInstance = new HashMap<>();
     for (ModifierType type : ModifierType.values()) {
       internal.put(type, new ArrayList<>());
     }
@@ -24,6 +27,7 @@ public class ModifierInstanceList implements IModifierList<ModifierInstance, NBT
     for (ModifierType type : ModifierType.values()) {
       internal.get(type).clear();
     }
+    coreToInstance.clear();
   }
 
   @Override
@@ -47,10 +51,18 @@ public class ModifierInstanceList implements IModifierList<ModifierInstance, NBT
 
   @Override
   public boolean contains(Object o) {
-    if (!(o instanceof ModifierInstance)) {
-      return false;
+    if (o instanceof ModifierInstance) {
+      return internal.get(((ModifierInstance) o).getType()).contains(o);
+    } else if (o instanceof IModifierCore) {
+      return coreToInstance.containsKey(o);
     }
-    return internal.get(((ModifierInstance) o).getType()).contains(o);
+
+    return false;
+  }
+
+  @Override
+  public ModifierInstance getByCore(IModifierCore core) {
+    return coreToInstance.get(core);
   }
 
   @Override
@@ -70,6 +82,11 @@ public class ModifierInstanceList implements IModifierList<ModifierInstance, NBT
 
   @Override
   public boolean add(ModifierInstance modifierInstance) {
+    IModifierCore core = modifierInstance.getCore();
+    if (coreToInstance.containsKey(core)) {
+      return false;
+    }
+    coreToInstance.put(core, modifierInstance);
     return internal.get(modifierInstance.getType()).add(modifierInstance);
   }
 
