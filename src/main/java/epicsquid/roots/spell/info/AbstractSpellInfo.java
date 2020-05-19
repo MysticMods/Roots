@@ -18,7 +18,6 @@ public abstract class AbstractSpellInfo implements INBTSerializable<NBTTagCompou
     this.spell = spell;
   }
 
-  @Nullable
   public SpellBase getSpell() {
     return spell;
   }
