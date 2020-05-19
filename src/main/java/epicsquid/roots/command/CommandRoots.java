@@ -1,5 +1,6 @@
 package epicsquid.roots.command;
 
+import com.sun.jna.Library;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
@@ -11,8 +12,11 @@ import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.spell.info.LibrarySpellInfo;
 import epicsquid.roots.util.types.Property;
 import epicsquid.roots.util.types.PropertyTable;
+import epicsquid.roots.world.data.SpellLibraryData;
+import epicsquid.roots.world.data.SpellLibraryRegistry;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementManager;
 import net.minecraft.advancements.AdvancementProgress;
@@ -54,7 +58,7 @@ public class CommandRoots extends CommandBase {
 
   @Override
   public String getUsage(ICommandSender sender) {
-    return "/roots book | /roots growables";
+    return "/roots book | /roots activate | /roots rituals | /roots growables | /roots spells | /roots library";
   }
 
   @Override
@@ -72,7 +76,19 @@ public class CommandRoots extends CommandBase {
     if (sender instanceof EntityPlayerMP && args.length != 0) {
       EntityPlayerMP player = (EntityPlayerMP) sender;
       WorldServer world = player.getServerWorld();
-      if (args[0].equalsIgnoreCase("activate")) {
+      if (args[0].equalsIgnoreCase("library")) {
+        SpellLibraryData data = SpellLibraryRegistry.getData(player);
+        for (LibrarySpellInfo info : data) {
+          if (info.isObtained()) {
+            player.sendMessage(new TextComponentString("Obtained: " + info.getSpell().getRegistryName()));
+          }
+        }
+        for (LibrarySpellInfo info : data) {
+          if (!info.isObtained()) {
+            player.sendMessage(new TextComponentString("Unobtained: " + info.getSpell().getRegistryName()));
+          }
+        }
+      } else if (args[0].equalsIgnoreCase("activate")) {
         List<BlockPos> positions = Util.getBlocksWithinRadius(world, sender.getPosition(), 50, 50, 50, ModBlocks.grove_stone);
         for (BlockPos pos : positions) {
           IBlockState state = world.getBlockState(pos);

@@ -1,8 +1,10 @@
 package epicsquid.roots.world.data;
 
-import epicsquid.roots.spell.info.LibrarySpellInfo;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.spell.info.LibrarySpellInfo;
+import epicsquid.roots.spell.info.SpellDustInfo;
+import epicsquid.roots.spell.info.storage.DustSpellStorage;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -10,10 +12,13 @@ import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.UUID;
 
 @SuppressWarnings("NullableProblems")
-public class SpellLibraryData extends WorldSavedData {
+public class SpellLibraryData extends WorldSavedData implements Iterable<LibrarySpellInfo> {
   private static final String identifier = "SpellData-";
   private Map<SpellBase, LibrarySpellInfo> spells = new HashMap<>();
 
@@ -30,26 +35,37 @@ public class SpellLibraryData extends WorldSavedData {
   }
 
   public SpellLibraryData(UUID uuid) {
-    super (name(uuid));
+    super(name(uuid));
     this.uuid = uuid;
     generateMap();
   }
 
-  public SpellLibraryData (EntityPlayer player) {
+  public SpellLibraryData(EntityPlayer player) {
     super(identifier + player.getCachedUniqueIdString());
     this.uuid = player.getUniqueID();
     generateMap();
   }
 
-  private void generateMap () {
+  private void generateMap() {
     spells.clear();
     for (SpellBase spell : SpellRegistry.spellRegistry.values()) {
       spells.put(spell, new LibrarySpellInfo(spell));
     }
   }
 
-  @Nullable
-  public LibrarySpellInfo getData (SpellBase spell) {
+  public void addSpell(SpellDustInfo info) {
+    LibrarySpellInfo libinfo = spells.get(info.getSpell());
+    libinfo.setObtained();
+    markDirty();
+  }
+
+  public void addSpell(SpellBase spell) {
+    LibrarySpellInfo info = spells.get(spell);
+    info.setObtained();
+    markDirty();
+  }
+
+  public LibrarySpellInfo getData(SpellBase spell) {
     return spells.get(spell);
   }
 
@@ -77,5 +93,10 @@ public class SpellLibraryData extends WorldSavedData {
     compound.setTag("spells", list);
     compound.setUniqueId("uuid", uuid);
     return compound;
+  }
+
+  @Override
+  public Iterator<LibrarySpellInfo> iterator() {
+    return spells.values().iterator();
   }
 }
