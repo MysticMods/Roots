@@ -127,7 +127,13 @@ public class ModItems {
     event.addItem(spell_dust = new ItemSpellDust("spell_dust").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(flour = new ItemBase("flour").setCreativeTab(Roots.tab));
     event.addItem(staff = new ItemStaff("staff").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(gramary = new ItemBase("gramary").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(gramary = new ItemBase("gramary") {
+      @SuppressWarnings("deprecation")
+      @Override
+      public EnumRarity getRarity(ItemStack stack) {
+        return EnumRarity.UNCOMMON;
+      }
+    }.setCreativeTab(Roots.tab).setMaxStackSize(1));
 
     event.addItem(runed_pickaxe = new ItemRunedPickaxe(Materials.RUNIC, "runed_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(runed_axe = new ItemRunedAxe(Materials.RUNIC, "runed_axe").setCreativeTab(Roots.tab).setMaxStackSize(1));

@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TST",
+    "SLS",
+    "TST"
+  ],
+  "key": {
+    "S": [
+      {
+        "type": "forge:ore_dict",
+        "ore":  "string"
+      }
+    ],
+    "L": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "logWood"
+      }
+    ],
+    "T": [
+      {
+        "item": "roots:terra_moss",
+        "data": 0
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:gramary",
+    "data": 0
+  }
+}
