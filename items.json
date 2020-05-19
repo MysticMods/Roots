@@ -4,6 +4,10 @@
   "models": [
     {
       "type": "item",
+      "base": "gramary"
+    },
+    {
+      "type": "item",
       "base": "wooden_heart"
     },
     {
