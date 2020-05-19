@@ -2,8 +2,10 @@ package epicsquid.roots.spell.info;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.modifiers.instance.ModifierInstanceList;
+import epicsquid.roots.modifiers.modifier.ModifierList;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.spell.info.storage.DustSpellStorage;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.Constants;
@@ -13,20 +15,29 @@ import java.util.Objects;
 
 public class StaffSpellInfo extends AbstractSpellModifiers<ModifierInstanceList> {
   public static StaffSpellInfo EMPTY = new StaffSpellInfo();
-  private ModifierInstanceList modifiers = new ModifierInstanceList();
   private long cooldownStart = -1;
 
-  private StaffSpellInfo() {
+  public StaffSpellInfo() {
+    modifiers = new ModifierInstanceList();
   }
 
-  private StaffSpellInfo(SpellBase spell) {
+  public StaffSpellInfo(SpellBase spell) {
     super(spell);
+    modifiers = new ModifierInstanceList(spell);
   }
 
   @Nullable
   @Override
   public ModifierInstanceList getModifiers() {
     return modifiers;
+  }
+
+  public void setModifiers(ModifierInstanceList modifiers) {
+    this.modifiers = modifiers;
+  }
+
+  public void setModifiers (ModifierList modifiers) {
+    this.modifiers = new ModifierInstanceList(modifiers);
   }
 
   public boolean onCooldown() {

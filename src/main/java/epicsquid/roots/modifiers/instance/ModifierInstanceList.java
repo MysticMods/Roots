@@ -4,6 +4,9 @@ import com.google.common.collect.Iterators;
 import epicsquid.roots.modifiers.IModifierList;
 import epicsquid.roots.modifiers.ModifierType;
 import epicsquid.roots.modifiers.modifier.IModifierCore;
+import epicsquid.roots.modifiers.modifier.Modifier;
+import epicsquid.roots.modifiers.modifier.ModifierList;
+import epicsquid.roots.spell.SpellBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
@@ -13,6 +16,17 @@ import java.util.function.Consumer;
 public class ModifierInstanceList implements IModifierList<ModifierInstance, NBTTagList> {
   private final Map<ModifierType, List<ModifierInstance>> internal;
   private final Map<IModifierCore, ModifierInstance> coreToInstance;
+
+  public ModifierInstanceList(ModifierList list) {
+    this();
+    for (Modifier m : list) {
+      add(new ModifierInstance(m, false, false));
+    }
+  }
+
+  public ModifierInstanceList (SpellBase spell) {
+    this(spell.getModifierList());
+  }
 
   public ModifierInstanceList() {
     internal = new HashMap<>();

@@ -59,6 +59,10 @@ public class LibrarySpellInfo extends AbstractSpellModifiers<ModifierList> {
     return this == EMPTY;
   }
 
+  public StaffSpellInfo toStaff () {
+    return new StaffSpellInfo(getSpell());
+  }
+
   public static LibrarySpellInfo fromNBT(NBTTagCompound tag) {
     LibrarySpellInfo instance = new LibrarySpellInfo();
     instance.deserializeNBT(tag);

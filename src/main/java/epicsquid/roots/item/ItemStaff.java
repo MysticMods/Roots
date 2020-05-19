@@ -4,6 +4,7 @@ import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.EventManager;
 import epicsquid.roots.spell.info.StaffSpellInfo;
+import epicsquid.roots.spell.info.storage.DustSpellStorage;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.spell.SpellBase;
 import net.minecraft.client.Minecraft;
@@ -139,10 +140,9 @@ public class ItemStaff extends ItemBase {
   }
 
   // TODO: This needs to happen to the library
-  @Deprecated
-  public static void createData(ItemStack stack, StaffSpellStorage dustCapability) {
+  public static void createData(ItemStack stack, DustSpellStorage dustCapability) {
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
-    capability.setSpellToSlot(dustCapability.getSelectedInfo());
+    capability.setSpellToSlot(Objects.requireNonNull(dustCapability.getSelectedInfo()).toStaff());
   }
 
   public static void clearData(ItemStack stack) {
@@ -176,12 +176,15 @@ public class ItemStaff extends ItemBase {
     }
     if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
       tooltip.add("");
-      for (int i = 0; i < 5; i++) {
-        SpellBase other = Objects.requireNonNull(capability.getSpellInSlot(i)).getSpell();
-        if (other == null) {
-          tooltip.add("" + (i + 1) + ": No spell.");
-        } else {
-          tooltip.add("" + (i + 1) + ": " + other.getTextColor() + TextFormatting.BOLD + I18n.format("roots.spell." + other.getName() + ".name"));
+      for (int i = StaffSpellStorage.MIN_SPELL_SLOT; i <= StaffSpellStorage.MAX_SPELL_SLOT; i++) {
+        info = capability.getSpellInSlot(i);
+        if (info != null) {
+          SpellBase other = info.getSpell();
+          if (other == null) {
+            tooltip.add("" + (i + 1) + ": No spell.");
+          } else {
+            tooltip.add("" + (i + 1) + ": " + other.getTextColor() + TextFormatting.BOLD + I18n.format("roots.spell." + other.getName() + ".name"));
+          }
         }
       }
     }
@@ -191,10 +194,7 @@ public class ItemStaff extends ItemBase {
   public boolean showDurabilityBar(ItemStack stack) {
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
     StaffSpellInfo spell = capability.getSelectedInfo();
-    if (spell != null && spell.onCooldown()) {
-      return true;
-    }
-    return false;
+    return spell != null && spell.onCooldown();
   }
 
   @SideOnly(Side.CLIENT)
