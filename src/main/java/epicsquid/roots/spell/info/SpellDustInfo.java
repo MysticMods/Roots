@@ -1,6 +1,7 @@
 package epicsquid.roots.spell.info;
 
 import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class SpellDustInfo extends AbstractSpellInfo {
@@ -16,6 +17,10 @@ public class SpellDustInfo extends AbstractSpellInfo {
   @Override
   public boolean isEmpty() {
     return this == EMPTY;
+  }
+
+  public StaffSpellInfo toStaff () {
+    return new StaffSpellInfo(getSpell());
   }
 
   public static SpellDustInfo fromNBT(NBTTagCompound tag) {

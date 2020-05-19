@@ -16,8 +16,8 @@ import java.util.List;
 
 // TODO: Not actually a capability
 public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
-  private static int MAX_SPELL_SLOT = 5;
-  private static int MIN_SPELL_SLOT = 1;
+  public static int MAX_SPELL_SLOT = 5;
+  public static int MIN_SPELL_SLOT = 1;
 
   private Int2ObjectOpenHashMap<StaffSpellInfo> spells = new Int2ObjectOpenHashMap<>();
 
