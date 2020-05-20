@@ -9,10 +9,10 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.network.fx.MessageImbueCompleteFX;
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.FakeSpell;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.storage.DustSpellStorage;
-import epicsquid.roots.spell.info.storage.StaffSpellStorage;
+import epicsquid.roots.world.data.SpellLibraryData;
+import epicsquid.roots.world.data.SpellLibraryRegistry;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -103,6 +103,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
           toInsert.setCount(1);
           ItemStack attemptedInsert = inventory.insertItem(slot, toInsert, false);
           if (attemptedInsert.isEmpty()) {
+            inserter = player.getUniqueID();
             player.getHeldItem(hand).shrink(1);
             markDirty();
             updatePacketViaState();
@@ -206,21 +207,21 @@ public class TileEntityImbuer extends TileBase implements ITickable {
         progress = 0;
         if (!world.isRemote) {
           if (inventory.getStackInSlot(1).getItem() == ModItems.staff) {
-            ItemStack staff = inventory.getStackInSlot(1);
-            SpellBase spell;
-            if (capability.getSelectedInfo() != null) {
-              ItemStaff.createData(staff, capability);
-              spell = capability.getSelectedInfo().getSpell();
+            if (inserter == null) {
+              Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
             } else {
-              ItemStaff.clearData(staff);
-              spell = new FakeSpell();
+              ItemStack staff = inventory.getStackInSlot(1);
+              ItemStaff.createData(staff, capability);
+              SpellBase spell = capability.getSelectedInfo().getSpell();
+              SpellLibraryData library = SpellLibraryRegistry.getData(inserter);
+              library.addSpell(spell);
+              world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, staff));
+              PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(spell.getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
             }
-            world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, staff));
             inventory.extractItem(0, 1, false);
             inventory.extractItem(1, 1, false);
             markDirty();
             updatePacketViaState();
-            PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(spell.getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
           } else {
             // Handle the repair
             ItemStack repairItem = inventory.extractItem(0, 1, false);

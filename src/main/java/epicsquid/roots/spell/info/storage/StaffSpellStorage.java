@@ -12,7 +12,7 @@ import net.minecraftforge.common.util.Constants;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 
 // TODO: Not actually a capability
 public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
@@ -46,11 +46,19 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
     if (slot < MIN_SPELL_SLOT || slot > MAX_SPELL_SLOT) {
       throw new IllegalStateException("Tried to get spell for invalid slot " + slot);
     }
-    return spells.get(slot - 1);
+    return spells.get(slot);
   }
 
   public Collection<StaffSpellInfo> getSpells () {
     return spells.values();
+  }
+
+  public void tick (long cd) {
+    for (StaffSpellInfo spell : getSpells()) {
+      spell.tick();
+      spell.validate(cd);
+    }
+    saveToStack();
   }
 
   @Override
@@ -62,21 +70,28 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
     return info.cooldownLeft();
   }
 
+  public boolean onCooldown () {
+    StaffSpellInfo info = getSelectedInfo();
+    if (info == null) {
+      return false;
+    }
+    return info.onCooldown();
+  }
+
   @Override
   public int getCooldown() {
     StaffSpellInfo info = getSelectedInfo();
     if (info == null) {
       return -1;
     }
-    return info.cooldown();
+    return info.cooldownTotal();
   }
 
   // TODO: Is this used? Is it used usefully?
-  @Override
-  public void setCooldown() {
+  public void setCooldown(long cd) {
     StaffSpellInfo info = getSelectedInfo();
     if (info != null) {
-      info.use();
+      info.use(cd);
     }
     saveToStack();
   }
@@ -89,7 +104,7 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
 
   @Override
   public void clearSelectedSlot() {
-    spells.put(this.selectedSlot, null);
+    spells.remove(this.selectedSlot);
     saveToStack();
   }
 
@@ -154,7 +169,7 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
 
   @Override
   public int getNextFreeSlot() {
-    for (int i = 0; i < 5; i++) {
+    for (int i = MIN_SPELL_SLOT; i <= MAX_SPELL_SLOT; i++) {
       if (spells.getOrDefault(i, null) == null) {
         return i;
       }
@@ -170,9 +185,9 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
   @Override
   public NBTTagCompound serializeNBT() {
     NBTTagCompound compound = new NBTTagCompound();
-    NBTTagList spells = new NBTTagList();
+    NBTTagCompound spells = new NBTTagCompound();
     for (Int2ObjectMap.Entry<StaffSpellInfo> entry : this.spells.int2ObjectEntrySet()) {
-      spells.appendTag((entry.getValue() == null) ? new NBTTagCompound() : entry.getValue().serializeNBT());
+      spells.setTag(String.valueOf(entry.getIntKey()), entry.getValue() == null ? new NBTTagCompound() : entry.getValue().serializeNBT());
     }
     compound.setTag("spells", spells);
     compound.setInteger("selectedSlot", this.selectedSlot);
@@ -181,14 +196,15 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
 
   @Override
   public void deserializeNBT(NBTTagCompound tag) {
-    if (tag.hasKey("spells", Constants.NBT.TAG_LIST)) {
-      NBTTagList spells = tag.getTagList("spells", Constants.NBT.TAG_COMPOUND);
-      if (spells.tagCount() > MAX_SPELL_SLOT) {
-        Roots.logger.error("Invalid spell when deserializing storage: spells list is " + spells.tagCount() + " which is greater than MAX_SPELL_SLOT " + MAX_SPELL_SLOT + ": " + tag.toString());
+    if (tag.hasKey("spells", Constants.NBT.TAG_COMPOUND)) {
+      NBTTagCompound spells = tag.getCompoundTag("spells");
+      Set<String> keys = spells.getKeySet();
+      if (keys.size() > MAX_SPELL_SLOT) {
+        Roots.logger.error("Invalid spell when deserializing storage: spells list is " + keys.size() + " which is greater than MAX_SPELL_SLOT " + MAX_SPELL_SLOT + ": " + tag.toString());
       }
-      for (int i = 0; i < spells.tagCount(); i++) {
-        int slot = i + 1;
-        this.spells.put(slot, StaffSpellInfo.fromNBT(spells.getCompoundTagAt(i)));
+      for (String key : keys) {
+        int value = Integer.parseInt(key);
+        this.spells.put(value, StaffSpellInfo.fromNBT(spells.getCompoundTag(key)));
       }
     } else {
       for (int i = 0; i < 5; i++) {

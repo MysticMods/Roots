@@ -40,6 +40,7 @@ public class PacketHandler {
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageServerTryPickupArrows.MessageHolder.class, MessageServerTryPickupArrows.class, Side.SERVER);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageServerOpenPouch.MessageHolder.class, MessageServerOpenPouch.class, Side.SERVER);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageServerOpenQuiver.MessageHolder.class, MessageServerOpenQuiver.class, Side.SERVER);
+    epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageSetImposerSlot.MessageHolder.class, MessageSetImposerSlot.class, Side.SERVER);
 
     //Server 2 Client
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageDisarmFX.Handler.class, MessageDisarmFX.class, Side.CLIENT);

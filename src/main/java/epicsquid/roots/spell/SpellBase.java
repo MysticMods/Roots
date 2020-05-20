@@ -1,7 +1,6 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.util.ListUtil;
-import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.entity.spell.EntitySpellBase;
@@ -139,9 +138,9 @@ public abstract class SpellBase extends RegistryItem {
       if (matches) {
         double r;
         if (!player.world.isRemote) {
-          r = ServerHerbUtil.getPowderTotal(player, herb);
+          r = ServerHerbUtil.getHerbAmount(player, herb);
         } else {
-          r = ClientHerbUtil.herbAmount(herb);
+          r = ClientHerbUtil.getHerbAmount(herb);
         }
         matches = r >= d;
         if (!matches && !player.isCreative()) {

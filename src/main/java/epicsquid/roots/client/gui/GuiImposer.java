@@ -7,22 +7,35 @@
 
 package epicsquid.roots.client.gui;
 
+import epicsquid.mysticallib.client.gui.InvisibleButton;
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.container.ContainerFeyCrafter;
 import epicsquid.roots.container.ContainerImposer;
 import epicsquid.roots.container.slots.SlotModifierInfo;
+import epicsquid.roots.container.slots.SlotSpellInfo;
+import epicsquid.roots.network.MessageSetImposerSlot;
+import epicsquid.roots.spell.info.StaffSpellInfo;
+import epicsquid.roots.spell.info.storage.StaffSpellStorage;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
 
 import javax.annotation.Nonnull;
+import java.io.IOException;
 
 public class GuiImposer extends GuiContainer {
 
   private ContainerImposer container;
+  private InvisibleButton backButton;
 
   public GuiImposer(@Nonnull ContainerImposer container) {
     super(container);
@@ -32,9 +45,29 @@ public class GuiImposer extends GuiContainer {
   }
 
   @Override
+  public void initGui() {
+    super.initGui();
+
+    this.buttonList.clear();
+    this.backButton = new InvisibleButton(0, guiLeft + 143, guiTop + 126, 32, 22, "");
+    this.buttonList.add(this.backButton);
+  }
+
+  @Override
   public void drawScreen(int mouseX, int mouseY, float partialTicks) {
     drawDefaultBackground();
     super.drawScreen(mouseX, mouseY, partialTicks);
+    if (container.tile.getSlot() != 0) {
+      FontRenderer renderer = Minecraft.getMinecraft().fontRenderer;
+      StaffSpellStorage storage = container.tile.getSpellStorage();
+      if (storage != null) {
+        StaffSpellInfo info = storage.getSpellInSlot(container.tile.getSlot());
+        if (info != null) {
+          String name = info.getSpell().getTextColor() + "" + TextFormatting.BOLD + I18n.format("roots.spell." + info.getSpell().getName() + ".name");
+          this.drawCenteredString(renderer, name, this.width / 2, guiTop + 5, 0xFFFFFFFF);
+        }
+      }
+    }
     this.renderHoveredToolTip(mouseX, mouseY);
   }
 
@@ -53,23 +86,46 @@ public class GuiImposer extends GuiContainer {
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
     GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-    this.mc.getTextureManager().bindTexture(getTexture());
+    ResourceLocation tex = getTexture();
+    backButton.visible = tex != SPELL_SELECT;
+    this.mc.getTextureManager().bindTexture(tex);
     int i = (this.width - this.xSize) / 2;
     int j = (this.height - this.ySize) / 2;
     this.drawTexturedModalRect(i, j, 0, 0, 176, 243);
   }
 
   @Override
+  protected void actionPerformed(GuiButton button) throws IOException {
+    if (button.id == backButton.id) {
+        MessageSetImposerSlot packet = new MessageSetImposerSlot(Minecraft.getMinecraft().player.world.provider.getDimension(), container.tile.getPos(), 0);
+        PacketHandler.INSTANCE.sendToServer(packet);
+    }
+
+    super.actionPerformed(button);
+  }
+
+  @Override
   public void drawSlot(Slot slot) {
     super.drawSlot(slot);
+    int i2 = slot.xPos;
+    int j2 = slot.yPos;
+    float oldZ = this.zLevel;
     if (slot instanceof SlotModifierInfo) {
       SlotModifierInfo info = (SlotModifierInfo) slot;
       if (info.isModifierDisabled()) {
         this.mc.getTextureManager().bindTexture(getTexture());
-        int i2 = slot.xPos + 1;
-        int j2 = slot.yPos + 1;
+        this.zLevel = 1000f;
         this.drawTexturedModalRect(i2, j2, 176, 0, 16, 16);
       }
+    } else if (slot instanceof SlotSpellInfo) {
+      SlotSpellInfo infoSlot = (SlotSpellInfo) slot;
+      StaffSpellInfo info = infoSlot.getInfo();
+      if (info == null || info == StaffSpellInfo.EMPTY) {
+        this.mc.getTextureManager().bindTexture(getTexture());
+        this.zLevel = 1000f;
+        this.drawTexturedModalRect(i2, j2, 176, 16, 16, 16);
+      }
     }
+    this.zLevel = oldZ;
   }
 }

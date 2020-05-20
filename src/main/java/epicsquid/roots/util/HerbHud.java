@@ -208,7 +208,7 @@ public class HerbHud {
       GlStateManager.translate(x, y, 0);
       RenderHelper.enableGUIStandardItemLighting();
       mc.getRenderItem().renderItemAndEffectIntoGUI(stack, 0, 0);
-      String s = String.format("%.1f", amount); //ServerHerbUtil.getPowderTotal(mc.player, herb));
+      String s = String.format("%.1f", amount); //ServerHerbUtil.getHerbAmount(mc.player, herb));
       GlStateManager.disableLighting();
       GlStateManager.disableDepth();
       GlStateManager.disableBlend();

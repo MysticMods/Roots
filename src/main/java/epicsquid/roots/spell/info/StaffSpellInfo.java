@@ -1,11 +1,14 @@
 package epicsquid.roots.spell.info;
 
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.modifiers.modifier.ModifierList;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
-import epicsquid.roots.spell.info.storage.DustSpellStorage;
+import epicsquid.roots.spell.info.storage.StaffSpellStorage;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.Constants;
@@ -15,7 +18,8 @@ import java.util.Objects;
 
 public class StaffSpellInfo extends AbstractSpellModifiers<ModifierInstanceList> {
   public static StaffSpellInfo EMPTY = new StaffSpellInfo();
-  private long cooldownStart = -1;
+  private int cooldown = -1;
+  private long cooldownStop = -1;
 
   public StaffSpellInfo() {
     modifiers = new ModifierInstanceList();
@@ -40,38 +44,45 @@ public class StaffSpellInfo extends AbstractSpellModifiers<ModifierInstanceList>
     this.modifiers = new ModifierInstanceList(modifiers);
   }
 
+  public void tick () {
+    if (this.cooldown == -1) {
+      return;
+    }
+    this.cooldown--;
+    if (this.cooldown <= 0) {
+      this.cooldown = -1;
+    }
+  }
+
   public boolean onCooldown() {
-    return cooldown() > 0;
+    return this.cooldown != -1;
   }
 
   public int cooldownLeft() {
-    if (cooldownStart == -1) {
-      return -1;
-    }
-
-    int internal = (int) ((System.currentTimeMillis() - this.cooldownStart) / 1000);
-
-    if (internal > spell.getCooldown() || internal < 0) {
-      this.cooldownStart = -1;
-      return -1;
-    } else {
-      return internal;
-    }
+    return cooldown;
   }
 
-  public int cooldown () {
+  public int cooldownTotal() {
     return spell.getCooldown();
   }
 
-  public void use() {
-    this.cooldownStart = System.currentTimeMillis();
+  public void use(long cd) {
+    this.cooldown = cooldownTotal();
+    this.cooldownStop = cd + cooldown;
+  }
+
+  public void validate (long cd) {
+    if (this.cooldown != -1 && cd > this.cooldownStop) {
+      this.cooldown = -1;
+    }
   }
 
   @Override
   public NBTTagCompound serializeNBT() {
     NBTTagCompound result = super.serializeNBT();
     result.setTag("m", modifiers.serializeNBT());
-    result.setLong("l", cooldownStart);
+    result.setInteger("c", cooldown);
+    result.setLong("l", cooldownStop);
     return result;
   }
 
@@ -79,7 +90,8 @@ public class StaffSpellInfo extends AbstractSpellModifiers<ModifierInstanceList>
   public void deserializeNBT(NBTTagCompound nbt) {
     super.deserializeNBT(nbt);
     this.modifiers = ModifierInstanceList.fromNBT(nbt.getTagList("m", Constants.NBT.TAG_COMPOUND));
-    this.cooldownStart = nbt.getLong("l");
+    this.cooldown = nbt.getInteger("c");
+    this.cooldownStop = nbt.getLong("l");
   }
 
   @Override
@@ -103,17 +115,25 @@ public class StaffSpellInfo extends AbstractSpellModifiers<ModifierInstanceList>
     return new StaffSpellInfo(spell);
   }
 
+  public ItemStack asStack () {
+    ItemStack stack = new ItemStack(ModItems.spell_dust);
+    NBTTagCompound comp = ItemUtil.getOrCreateTag(stack);
+    comp.setBoolean("staff", true);
+    StaffSpellStorage storage = StaffSpellStorage.fromStack(stack);
+    storage.setSpellToSlot(this);
+    return stack;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     StaffSpellInfo that = (StaffSpellInfo) o;
-    return cooldownStart == that.cooldownStart &&
-        getModifiers() != null && getModifiers().equals(that.getModifiers());
+    return cooldown == that.cooldown;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getModifiers(), cooldownStart);
+    return Objects.hash(cooldown);
   }
 }
