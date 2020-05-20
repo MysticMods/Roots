@@ -1,6 +1,5 @@
 package epicsquid.roots.container.slots;
 
-import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -9,20 +8,29 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nullable;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class SlotSpellInfo extends Slot {
   private static IInventory emptyInventory = new InventoryBasic("[Null]", true, 0);
-  private Supplier<StaffSpellInfo> info;
+  private final Function<Integer, StaffSpellInfo> info;
+  private final Supplier<Boolean> isHidden;
+  private int slot;
 
-  public SlotSpellInfo(Supplier<StaffSpellInfo> info, int xPosition, int yPosition) {
+  public SlotSpellInfo(Supplier<Boolean> isHidden, Function<Integer, StaffSpellInfo> info, int slot, int xPosition, int yPosition) {
     super(emptyInventory, 0, xPosition, yPosition);
     this.info = info;
+    this.slot = slot;
+    this.isHidden = isHidden;
   }
 
   @Override
   public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack) {
     return ItemStack.EMPTY;
+  }
+
+  public int getSlot() {
+    return slot;
   }
 
   @Override
@@ -33,13 +41,17 @@ public class SlotSpellInfo extends Slot {
   // TODO
   @Override
   public ItemStack getStack() {
-    return new ItemStack(ModItems.spell_dust);
-    //return super.getStack();
+    StaffSpellInfo info = this.info.apply(this.slot);
+    if (info == null) {
+      return ItemStack.EMPTY;
+    } else {
+      return info.asStack();
+    }
   }
 
   @Override
   public boolean getHasStack() {
-    return info.get() != null;
+    return info.apply(this.slot) != null;
   }
 
   @Override
@@ -73,26 +85,20 @@ public class SlotSpellInfo extends Slot {
     return false;
   }
 
-  private boolean enabled = true;
-
   @Override
   public boolean isEnabled() {
-    return enabled;
-  }
-
-  public void setEnabled(boolean enabled) {
-    this.enabled = enabled;
+    return isHidden.get();
   }
 
   @Override
   public boolean isSameInventory(Slot other) {
     if (other instanceof SlotSpellInfo) {
-      return ((SlotSpellInfo) other).info.get().equals(info.get());
+      return ((SlotSpellInfo) other).info.apply(slot).equals(info.apply(slot));
     }
     return false;
   }
 
   public StaffSpellInfo getInfo () {
-    return info.get();
+    return info.apply(slot);
   }
 }

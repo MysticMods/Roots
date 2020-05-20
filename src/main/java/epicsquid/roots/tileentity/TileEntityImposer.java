@@ -27,23 +27,36 @@ public class TileEntityImposer extends TileBase implements ITickable {
   public ItemStackHandler inventory = new ItemStackHandler(1) {
     @Override
     protected void onContentsChanged(int slot) {
+      TileEntityImposer.this.slot = 0;
       TileEntityImposer.this.markDirty();
       if (!world.isRemote) {
         TileEntityImposer.this.updatePacketViaState();
       }
     }
   };
-  int ticks = 0;
+  public int ticks = 0;
   public float angle = 0;
+  private int slot = 0;
 
   public TileEntityImposer() {
     super();
+  }
+
+  public int getSlot() {
+    return slot;
+  }
+
+  public void setSlot(int slot) {
+    this.slot = slot;
+    markDirty();
+    updatePacketViaState();
   }
 
   @Override
   public NBTTagCompound writeToNBT(NBTTagCompound tag) {
     super.writeToNBT(tag);
     tag.setTag("handler", inventory.serializeNBT());
+    tag.setInteger("slot", slot);
     return tag;
   }
 
@@ -51,6 +64,7 @@ public class TileEntityImposer extends TileBase implements ITickable {
   public void readFromNBT(NBTTagCompound tag) {
     super.readFromNBT(tag);
     inventory.deserializeNBT(tag.getCompoundTag("handler"));
+    slot = tag.getInteger("slot");
   }
 
   @Override
@@ -116,7 +130,7 @@ public class TileEntityImposer extends TileBase implements ITickable {
       return null;
     }
 
-    return new StaffSpellStorage(staff);
+    return StaffSpellStorage.fromStack(staff);
   }
 
   @Override

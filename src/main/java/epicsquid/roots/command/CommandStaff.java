@@ -1,6 +1,7 @@
 package epicsquid.roots.command;
 
 import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.roots.spell.info.storage.DustSpellStorage;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemStaff;
@@ -59,7 +60,7 @@ public class CommandStaff extends CommandBase {
       }
 
       // TODO
-      StaffSpellStorage cap = StaffSpellStorage.fromStack(spell.getResult());
+      DustSpellStorage cap = DustSpellStorage.fromStack(spell.getResult());
       ItemStack staff = new ItemStack(ModItems.staff);
       ItemStaff.createData(staff, cap);
 

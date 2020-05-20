@@ -7,10 +7,15 @@
 
 package epicsquid.roots.container;
 
+import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.roots.container.slots.SlotSpellInfo;
+import epicsquid.roots.network.MessageSetImposerSlot;
+import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.tileentity.TileEntityImposer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemArrow;
@@ -20,9 +25,8 @@ import javax.annotation.Nonnull;
 
 public class ContainerImposer extends Container {
 
-  private final TileEntityImposer tile;
+  public final TileEntityImposer tile;
   private final EntityPlayer player;
-  private boolean selectSpell = true;
 
   public ContainerImposer(EntityPlayer player, TileEntityImposer tile) {
     this.tile = tile;
@@ -34,34 +38,47 @@ public class ContainerImposer extends Container {
   }
 
   public boolean isSelectSpell() {
-    return selectSpell;
+    return tile.getSlot() == 0;
   }
 
-  public void setSelectSpell(boolean selectSpell) {
-    this.selectSpell = selectSpell;
+  private StaffSpellInfo getInfoFor(int slot) {
+    StaffSpellStorage storage = tile.getSpellStorage();
+    if (storage == null) {
+      return StaffSpellInfo.EMPTY;
+    } else {
+      return storage.getSpellInSlot(slot);
+    }
   }
 
   private void createSpellSlots() {
-    int xOffset = 47;
-    int yOffset = -15;
-
-/*    for (int i = 0; i < quiverHandler.getSlots(); i++) {
-      addSlotToContainer(new SlotItemHandler(quiverHandler, i, xOffset + 11 + (((i >= 3) ? i - 3 : i) * 21), yOffset + 23 + ((i >= 3) ? 21 : 0)) {
-        @Override
-        public boolean isItemValid(@Nonnull ItemStack stack) {
-          return stack.getItem() instanceof ItemArrow;
-        }
-      });
-    }*/
+    addSlotToContainer(new SlotSpellInfo(this::isSelectSpell, this::getInfoFor, 1, 51, 37)); // Spot 1
+    addSlotToContainer(new SlotSpellInfo(this::isSelectSpell, this::getInfoFor, 2, 56, 13)); // Spot 2
+    addSlotToContainer(new SlotSpellInfo(this::isSelectSpell, this::getInfoFor, 3, 80, 8)); // Spot 3
+    addSlotToContainer(new SlotSpellInfo(this::isSelectSpell, this::getInfoFor, 4, 104, 13)); // Spot 4
+    addSlotToContainer(new SlotSpellInfo(this::isSelectSpell, this::getInfoFor, 5, 109, 37)); // Spot 5
   }
 
-  private void createModifierSlots () {
+  private void createModifierSlots() {
+  }
 
+  @Override
+  public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
+    if (isSelectSpell() && slotId != -999) {
+      Slot slot = getSlot(slotId);
+      if (slot instanceof SlotSpellInfo) {
+        StaffSpellInfo info = ((SlotSpellInfo) slot).getInfo();
+        if (info != null && info != StaffSpellInfo.EMPTY) {
+          MessageSetImposerSlot packet = new MessageSetImposerSlot(player.world.provider.getDimension(), tile.getPos(), ((SlotSpellInfo) slot).getSlot());
+          PacketHandler.INSTANCE.sendToServer(packet);
+        }
+      }
+    }
+    return super.slotClick(slotId, dragType, clickTypeIn, player);
   }
 
   private void createPlayerInventory(InventoryPlayer inventoryPlayer) {
     int xOffset = 8;
-    int yOffset = 67;
+    int yOffset = 160;
 
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 9; j++) {

@@ -41,9 +41,6 @@ public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implemen
     return -1;
   }
 
-  public void setCooldown() {
-  }
-
   @Nullable
   public V getSelectedInfo() {
     return getSpellInSlot(selectedSlot);

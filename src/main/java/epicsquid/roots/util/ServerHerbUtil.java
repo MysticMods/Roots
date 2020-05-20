@@ -33,7 +33,7 @@ public class ServerHerbUtil {
     return CommonHerbUtil.getPouches(player);
   }
 
-  public static double getPowderTotal(EntityPlayer player, Herb herb) {
+  public static double getHerbAmount(EntityPlayer player, Herb herb) {
     if (player.world.isRemote) {
       return 0;
     }
