@@ -10,6 +10,7 @@ import epicsquid.roots.spell.SpellBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
+import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -75,6 +76,7 @@ public class ModifierInstanceList implements IModifierList<ModifierInstance, NBT
   }
 
   @Override
+  @Nullable
   public ModifierInstance getByCore(IModifierCore core) {
     return coreToInstance.get(core);
   }
