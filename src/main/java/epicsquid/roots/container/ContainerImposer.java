@@ -8,7 +8,12 @@
 package epicsquid.roots.container;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.roots.container.slots.SlotModifierInfo;
 import epicsquid.roots.container.slots.SlotSpellInfo;
+import epicsquid.roots.modifiers.instance.ModifierInstance;
+import epicsquid.roots.modifiers.instance.ModifierInstanceList;
+import epicsquid.roots.modifiers.modifier.IModifierCore;
+import epicsquid.roots.modifiers.modifier.ModifierCores;
 import epicsquid.roots.network.MessageSetImposerSlot;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
@@ -22,6 +27,7 @@ import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class ContainerImposer extends Container {
 
@@ -50,6 +56,27 @@ public class ContainerImposer extends Container {
     }
   }
 
+  @Nullable
+  private ModifierInstance getInstanceFor (IModifierCore core) {
+    StaffSpellStorage storage = tile.getSpellStorage();
+    if (storage == null) {
+      return null;
+    }
+    int slot = tile.getSlot();
+    if (slot == 0) {
+      return null;
+    }
+    StaffSpellInfo info = storage.getSpellInSlot(slot);
+    if (info == null) {
+      return null;
+    }
+    ModifierInstanceList mods = info.getModifiers();
+    if (mods == null) {
+      return null;
+    }
+    return mods.getByCore(core);
+  }
+
   private void createSpellSlots() {
     addSlotToContainer(new SlotSpellInfo(this::isSelectSpell, this::getInfoFor, 1, 51, 37)); // Spot 1
     addSlotToContainer(new SlotSpellInfo(this::isSelectSpell, this::getInfoFor, 2, 56, 13)); // Spot 2
@@ -59,6 +86,23 @@ public class ContainerImposer extends Container {
   }
 
   private void createModifierSlots() {
+    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.PERESKIA, 80, 18));
+    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.WILDROOT, 80, 43));
+    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.TERRA_MOSS, 80, 68));
+    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.INFERNAL_BULB, 80, 93));
+    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.DEWGONIA, 80, 118));
+    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.WILDEWHEET, 55, 38));
+    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.SPIRIT_HERB, 55, 73));
+    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.CLOUD_BERRY, 55, 108));
+    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.REDSTONE, 30, 38));
+    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.GUNPOWDER, 30, 73));
+    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.GLOWSTONE, 30, 108));
+    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.MOONGLOW_LEAF, 105, 38));
+    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.BAFFLE_CAP, 105, 73));
+    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.STALICRIPE, 105, 108));
+    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.LAPIS, 130, 38));
+    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.RUNIC_DUST, 130, 73));
+    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.BLAZE_POWDER, 130, 108));
   }
 
   @Override

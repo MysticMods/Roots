@@ -1,5 +1,6 @@
 package epicsquid.roots.container.slots;
 
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.modifiers.instance.ModifierInstance;
 import epicsquid.roots.modifiers.modifier.IModifierCore;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +17,6 @@ public class SlotModifierInfo extends Slot {
   private final IModifierProvider info;
   private final IModifierCore core;
   private final IBooleanProvider isHidden;
-
 
   public SlotModifierInfo(IBooleanProvider isHidden, IModifierProvider info, IModifierCore core, int xPosition, int yPosition) {
     super(emptyInventory, 0, xPosition, yPosition);
@@ -37,7 +37,16 @@ public class SlotModifierInfo extends Slot {
 
   @Override
   public boolean isItemValid(ItemStack stack) {
-    return false;
+    ModifierInstance info = get();
+    if (info == null) {
+      return false;
+    }
+
+    if (info.isApplied()) {
+      return false;
+    }
+
+    return ItemUtil.equalWithoutSize(stack, info.getStack());
   }
 
   // TODO
@@ -89,7 +98,7 @@ public class SlotModifierInfo extends Slot {
 
   @Override
   public boolean isEnabled() {
-    return !isHidden.get() && get() != null;
+    return !isHidden.get(); // && get() != null;
   }
 
   @Override
