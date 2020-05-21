@@ -8,16 +8,14 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nullable;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class SlotSpellInfo extends Slot {
   private static IInventory emptyInventory = new InventoryBasic("[Null]", true, 0);
-  private final Function<Integer, StaffSpellInfo> info;
-  private final Supplier<Boolean> isHidden;
+  private final ISlotProvider info;
+  private final IBooleanProvider isHidden;
   private int slot;
 
-  public SlotSpellInfo(Supplier<Boolean> isHidden, Function<Integer, StaffSpellInfo> info, int slot, int xPosition, int yPosition) {
+  public SlotSpellInfo(IBooleanProvider isHidden, ISlotProvider info, int slot, int xPosition, int yPosition) {
     super(emptyInventory, 0, xPosition, yPosition);
     this.info = info;
     this.slot = slot;
@@ -100,5 +98,10 @@ public class SlotSpellInfo extends Slot {
 
   public StaffSpellInfo getInfo () {
     return info.apply(slot);
+  }
+
+  @FunctionalInterface
+  public interface ISlotProvider {
+    StaffSpellInfo apply (int slot);
   }
 }

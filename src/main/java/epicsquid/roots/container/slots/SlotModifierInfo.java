@@ -1,6 +1,7 @@
 package epicsquid.roots.container.slots;
 
 import epicsquid.roots.modifiers.instance.ModifierInstance;
+import epicsquid.roots.modifiers.modifier.IModifierCore;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
@@ -12,11 +13,21 @@ import java.util.function.Supplier;
 
 public class SlotModifierInfo extends Slot {
   private static IInventory emptyInventory = new InventoryBasic("[Null]", true, 0);
-  private Supplier<ModifierInstance> info;
+  private final IModifierProvider info;
+  private final IModifierCore core;
+  private final IBooleanProvider isHidden;
 
-  public SlotModifierInfo(Supplier<ModifierInstance> info, int xPosition, int yPosition) {
+
+  public SlotModifierInfo(IBooleanProvider isHidden, IModifierProvider info, IModifierCore core, int xPosition, int yPosition) {
     super(emptyInventory, 0, xPosition, yPosition);
     this.info = info;
+    this.isHidden = isHidden;
+    this.core = core;
+  }
+
+  @Nullable
+  private ModifierInstance get () {
+    return info.get(core);
   }
 
   @Override
@@ -32,7 +43,7 @@ public class SlotModifierInfo extends Slot {
   // TODO
   @Override
   public ItemStack getStack() {
-    ModifierInstance info = this.info.get();
+    ModifierInstance info = get();
     if (info == null) {
       return ItemStack.EMPTY;
     }
@@ -41,7 +52,7 @@ public class SlotModifierInfo extends Slot {
 
   @Override
   public boolean getHasStack() {
-    return info.get() != null;
+    return get() != null;
   }
 
   @Override
@@ -58,13 +69,6 @@ public class SlotModifierInfo extends Slot {
     return 1;
   }
 
-  // TODO?
-  @Nullable
-  @Override
-  public String getSlotTexture() {
-    return super.getSlotTexture();
-  }
-
   @Override
   public ItemStack decrStackSize(int amount) {
     return ItemStack.EMPTY;
@@ -75,10 +79,8 @@ public class SlotModifierInfo extends Slot {
     return false;
   }
 
-  private boolean enabled = true;
-
   public boolean isModifierDisabled () {
-    ModifierInstance info = this.info.get();
+    ModifierInstance info = get();
     if (info == null) {
       return false;
     }
@@ -87,18 +89,20 @@ public class SlotModifierInfo extends Slot {
 
   @Override
   public boolean isEnabled() {
-    return enabled;
-  }
-
-  public void setEnabled(boolean enabled) {
-    this.enabled = enabled;
+    return !isHidden.get() && get() != null;
   }
 
   @Override
   public boolean isSameInventory(Slot other) {
     if (other instanceof SlotModifierInfo) {
-      return ((SlotModifierInfo) other).info.get().equals(info.get());
+      return ((SlotModifierInfo) other).core.equals(core);
     }
     return false;
+  }
+
+  @FunctionalInterface
+  public interface IModifierProvider {
+    @Nullable
+    ModifierInstance get (IModifierCore core);
   }
 }
