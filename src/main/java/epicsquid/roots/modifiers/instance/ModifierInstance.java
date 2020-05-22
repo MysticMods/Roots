@@ -37,6 +37,14 @@ public class ModifierInstance implements INBTSerializable<NBTTagCompound>, IModi
     return enabled;
   }
 
+  public void setApplied() {
+    this.applied = true;
+  }
+
+  public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
+  }
+
   @Override
   public String getTranslationKey() {
     return modifier.getTranslationKey();

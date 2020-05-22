@@ -3,6 +3,7 @@ package epicsquid.roots.container.slots;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.modifiers.instance.ModifierInstance;
 import epicsquid.roots.modifiers.modifier.IModifierCore;
+import epicsquid.roots.tileentity.TileEntityImposer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
@@ -17,17 +18,23 @@ public class SlotModifierInfo extends Slot {
   private final IModifierProvider info;
   private final IModifierCore core;
   private final IBooleanProvider isHidden;
+  private final TileEntityImposer tile;
 
-  public SlotModifierInfo(IBooleanProvider isHidden, IModifierProvider info, IModifierCore core, int xPosition, int yPosition) {
+  public SlotModifierInfo(IBooleanProvider isHidden, IModifierProvider info, IModifierCore core, TileEntityImposer tile, int xPosition, int yPosition) {
     super(emptyInventory, 0, xPosition, yPosition);
     this.info = info;
     this.isHidden = isHidden;
     this.core = core;
+    this.tile = tile;
   }
 
   @Nullable
   private ModifierInstance get () {
     return info.get(core);
+  }
+
+  public IModifierCore getCore() {
+    return core;
   }
 
   @Override
@@ -56,16 +63,45 @@ public class SlotModifierInfo extends Slot {
     if (info == null) {
       return ItemStack.EMPTY;
     }
-    return info.getStack();
+    if (info.isApplied()) {
+      return info.getStack();
+    } else {
+      return ItemStack.EMPTY;
+    }
+  }
+
+  public boolean isDisabled () {
+    ModifierInstance info = get();
+    if (info == null) {
+      return false;
+    }
+    return !info.isEnabled();
+  }
+
+  public boolean isApplied () {
+    ModifierInstance info = get();
+    if (info == null) {
+      return false;
+    }
+    return info.isApplied();
+  }
+
+  public boolean isApplicable () {
+    ModifierInstance info = get();
+    return info != null;
   }
 
   @Override
   public boolean getHasStack() {
-    return get() != null;
+    return !getStack().isEmpty();
   }
 
   @Override
   public void putStack(ItemStack stack) {
+    if (!stack.isEmpty()) {
+      // Consume the item on the server and the client side!
+      tile.addModifier(core, stack);
+    }
   }
 
   @Override
@@ -86,14 +122,6 @@ public class SlotModifierInfo extends Slot {
   @Override
   public boolean canTakeStack(EntityPlayer playerIn) {
     return false;
-  }
-
-  public boolean isModifierDisabled () {
-    ModifierInstance info = get();
-    if (info == null) {
-      return false;
-    }
-    return !info.isEnabled();
   }
 
   @Override

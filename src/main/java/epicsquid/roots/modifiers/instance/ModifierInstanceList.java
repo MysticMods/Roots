@@ -1,40 +1,36 @@
 package epicsquid.roots.modifiers.instance;
 
 import com.google.common.collect.Iterators;
+import epicsquid.roots.Roots;
 import epicsquid.roots.modifiers.IModifierList;
 import epicsquid.roots.modifiers.ModifierType;
 import epicsquid.roots.modifiers.modifier.IModifierCore;
 import epicsquid.roots.modifiers.modifier.Modifier;
-import epicsquid.roots.modifiers.modifier.ModifierList;
 import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.spell.info.AbstractSpellInfo;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Consumer;
 
-public class ModifierInstanceList implements IModifierList<ModifierInstance, NBTTagList> {
+public class ModifierInstanceList implements IModifierList<ModifierInstance, NBTTagCompound> {
   private final Map<ModifierType, List<ModifierInstance>> internal;
   private final Map<IModifierCore, ModifierInstance> coreToInstance;
+  private final SpellBase spell;
 
-  public ModifierInstanceList(ModifierList list) {
-    this();
-    for (Modifier m : list) {
-      add(new ModifierInstance(m, false, false));
-    }
-  }
-
-  public ModifierInstanceList (SpellBase spell) {
-    this(spell.getModifierList());
-  }
-
-  public ModifierInstanceList() {
+  public ModifierInstanceList(SpellBase spell) {
     internal = new HashMap<>();
     coreToInstance = new HashMap<>();
     for (ModifierType type : ModifierType.values()) {
       internal.put(type, new ArrayList<>());
     }
+    for (Modifier m : spell.getModifierList()) {
+      add(new ModifierInstance(m, false, false));
+    }
+    this.spell = spell;
   }
 
   @Override
@@ -99,10 +95,8 @@ public class ModifierInstanceList implements IModifierList<ModifierInstance, NBT
   @Override
   public boolean add(ModifierInstance modifierInstance) {
     IModifierCore core = modifierInstance.getCore();
-    if (coreToInstance.containsKey(core)) {
-      return false;
-    }
     coreToInstance.put(core, modifierInstance);
+    internal.get(modifierInstance.getType()).removeIf(o -> o.getCore().equals(core));
     return internal.get(modifierInstance.getType()).add(modifierInstance);
   }
 
@@ -116,26 +110,34 @@ public class ModifierInstanceList implements IModifierList<ModifierInstance, NBT
   }
 
   @Override
-  public NBTTagList serializeNBT() {
-    NBTTagList result = new NBTTagList();
+  public NBTTagCompound serializeNBT() {
+    NBTTagCompound result = new NBTTagCompound();
+    NBTTagList list = new NBTTagList();
     for (ModifierInstance m : this) {
-      result.appendTag(m.serializeNBT());
+      list.appendTag(m.serializeNBT());
     }
+    result.setString("s", spell.getRegistryName().toString());
+    result.setTag("l", list);
     return result;
   }
 
   @Override
-  public void deserializeNBT(NBTTagList nbt) {
-    this.clear();
+  public void deserializeNBT(NBTTagCompound tag) {
+    NBTTagList nbt = tag.getTagList("l", Constants.NBT.TAG_COMPOUND);
 
     for (int i = 0; i < nbt.tagCount(); i++) {
-      NBTTagCompound tag = nbt.getCompoundTagAt(i);
-      this.add(ModifierInstance.fromNBT(tag));
+      NBTTagCompound thisTag = nbt.getCompoundTagAt(i);
+      this.add(ModifierInstance.fromNBT(thisTag));
+    }
+
+    SpellBase other = AbstractSpellInfo.getSpellFromTag(tag);
+    if (!other.getRegistryName().equals(spell.getRegistryName())) {
+      Roots.logger.error("Tried to deserialize mismatched ModifierInstanceLists for spell " + spell.getRegistryName() + ", trying to load for " + other.getRegistryName());
     }
   }
 
-  public static ModifierInstanceList fromNBT(NBTTagList tag) {
-    ModifierInstanceList result = new ModifierInstanceList();
+  public static ModifierInstanceList fromNBT(NBTTagCompound tag) { // NBTTagList tag) {
+    ModifierInstanceList result = new ModifierInstanceList(AbstractSpellInfo.getSpellFromTag(tag));
     result.deserializeNBT(tag);
     return result;
   }

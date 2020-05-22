@@ -135,6 +135,8 @@ roots.info.pyre.repeat2=with empty hand
 roots.info.pyre.repeat3=to repeat ritual.
 roots.info.pyre.repeat4=to repeat craft.
 
+roots.imposer.back=Back
+
 roots.spell.module.module_fire.name=Fire
 roots.spell.module.module_touch.name=Touch
 roots.spell.module.description=Spell module:

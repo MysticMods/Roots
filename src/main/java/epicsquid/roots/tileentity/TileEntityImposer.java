@@ -1,11 +1,17 @@
 package epicsquid.roots.tileentity;
 
 import epicsquid.mysticallib.tile.TileBase;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.GuiHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemDruidKnife;
+import epicsquid.roots.modifiers.IModifier;
+import epicsquid.roots.modifiers.instance.ModifierInstance;
+import epicsquid.roots.modifiers.instance.ModifierInstanceList;
+import epicsquid.roots.modifiers.modifier.IModifierCore;
+import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -123,8 +129,60 @@ public class TileEntityImposer extends TileBase implements ITickable {
     }
   }
 
+  public void toggleModifier(IModifierCore core) {
+    if (world != null && !world.isRemote) {
+      StaffSpellStorage storage = getSpellStorage();
+      ModifierInstance modifier = getModifier(storage, core);
+      if (modifier == null) {
+        return;
+      }
+
+      modifier.setEnabled(!modifier.isEnabled());
+      storage.saveToStack();
+      markDirty();
+      updatePacketViaState();
+    }
+  }
+
   @Nullable
-  public StaffSpellStorage getSpellStorage () {
+  private ModifierInstance getModifier(StaffSpellStorage storage, IModifierCore core) {
+    if (storage == null) {
+      return null;
+    }
+    StaffSpellInfo info = storage.getSpellInSlot(slot);
+    if (info == null) {
+      return null;
+    }
+    ModifierInstanceList modifiers = info.getModifiers();
+    if (modifiers == null) {
+      return null;
+    }
+
+    return modifiers.getByCore(core);
+  }
+
+  public void addModifier(IModifierCore core, ItemStack stack) {
+    if (world != null && !world.isRemote) {
+      StaffSpellStorage storage = getSpellStorage();
+      ModifierInstance modifier = getModifier(storage, core);
+      if (modifier == null) {
+        return;
+      }
+
+      if (!ItemUtil.equalWithoutSize(modifier.getStack(), stack)) {
+        Roots.logger.error("Attempted to apply modifier core " + core + " to spell in slot " + slot + ", but it wants " + modifier.getStack() + " and we were passed " + stack + "!");
+        return;
+      }
+
+      modifier.setApplied();
+      storage.saveToStack();
+      markDirty();
+      updatePacketViaState();
+    }
+  }
+
+  @Nullable
+  public StaffSpellStorage getSpellStorage() {
     ItemStack staff = inventory.getStackInSlot(0);
     if (staff.isEmpty()) {
       return null;
