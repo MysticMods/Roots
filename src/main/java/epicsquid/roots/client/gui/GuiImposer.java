@@ -10,7 +10,6 @@ package epicsquid.roots.client.gui;
 import epicsquid.mysticallib.client.gui.InvisibleButton;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
-import epicsquid.roots.container.ContainerFeyCrafter;
 import epicsquid.roots.container.ContainerImposer;
 import epicsquid.roots.container.slots.SlotModifierInfo;
 import epicsquid.roots.container.slots.SlotSpellInfo;
@@ -23,9 +22,9 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 
@@ -49,7 +48,7 @@ public class GuiImposer extends GuiContainer {
     super.initGui();
 
     this.buttonList.clear();
-    this.backButton = new InvisibleButton(0, guiLeft + 143, guiTop + 126, 32, 22, "");
+    this.backButton = new InvisibleButton(0, guiLeft + 143, guiTop + 126, 32, 22, I18n.format("roots.imposer.back"));
     this.buttonList.add(this.backButton);
   }
 
@@ -64,6 +63,7 @@ public class GuiImposer extends GuiContainer {
         StaffSpellInfo info = storage.getSpellInSlot(container.tile.getSlot());
         if (info != null) {
           String name = info.getSpell().getTextColor() + "" + TextFormatting.BOLD + I18n.format("roots.spell." + info.getSpell().getName() + ".name");
+          RenderHelper.enableGUIStandardItemLighting();
           this.drawCenteredString(renderer, name, this.width / 2, guiTop + 5, 0xFFFFFFFF);
         }
       }
@@ -79,7 +79,7 @@ public class GuiImposer extends GuiContainer {
   private static ResourceLocation SPELL_SELECT = new ResourceLocation(Roots.MODID, "textures/gui/imposer_spell_select.png");
   private static ResourceLocation MODIFIER_EDIT = new ResourceLocation(Roots.MODID, "textures/gui/imposer_modifier_edit.png");
 
-  protected ResourceLocation getTexture () {
+  protected ResourceLocation getTexture() {
     return container.isSelectSpell() ? SPELL_SELECT : MODIFIER_EDIT;
   }
 
@@ -97,8 +97,8 @@ public class GuiImposer extends GuiContainer {
   @Override
   protected void actionPerformed(GuiButton button) throws IOException {
     if (button.id == backButton.id) {
-        MessageSetImposerSlot packet = new MessageSetImposerSlot(Minecraft.getMinecraft().player.world.provider.getDimension(), container.tile.getPos(), 0);
-        PacketHandler.INSTANCE.sendToServer(packet);
+      MessageSetImposerSlot packet = new MessageSetImposerSlot(Minecraft.getMinecraft().player.world.provider.getDimension(), container.tile.getPos(), 0);
+      PacketHandler.INSTANCE.sendToServer(packet);
     }
 
     super.actionPerformed(button);
@@ -106,26 +106,29 @@ public class GuiImposer extends GuiContainer {
 
   @Override
   public void drawSlot(Slot slot) {
-    super.drawSlot(slot);
-    int i2 = slot.xPos;
-    int j2 = slot.yPos;
-    float oldZ = this.zLevel;
+    int i2 = slot.xPos - 2;
+    int j2 = slot.yPos - 2;
     if (slot instanceof SlotModifierInfo) {
-      SlotModifierInfo info = (SlotModifierInfo) slot;
-      if (info.isModifierDisabled()) {
+      SlotModifierInfo modInfo = (SlotModifierInfo) slot;
+      if (!modInfo.isApplicable()) { // There is no modifier existant for this slot
         this.mc.getTextureManager().bindTexture(getTexture());
-        this.zLevel = 1000f;
-        this.drawTexturedModalRect(i2, j2, 176, 0, 16, 16);
+        this.drawTexturedModalRect(i2, j2, 176, 40, 20, 20);
+      } else if (!modInfo.isApplied()) { // There is a modifier but it isn't applied
+        this.mc.getTextureManager().bindTexture(getTexture());
+        this.drawTexturedModalRect(i2, j2, 176, 20, 20, 20);
+      } else if (modInfo.isDisabled()) { // There is a modifier and it is applied, but it's disabled
+        this.mc.getTextureManager().bindTexture(getTexture());
+        this.drawTexturedModalRect(i2, j2, 176, 0, 20, 20);
       }
-    } else if (slot instanceof SlotSpellInfo) {
+    }
+    super.drawSlot(slot);
+    if (slot instanceof SlotSpellInfo) {
       SlotSpellInfo infoSlot = (SlotSpellInfo) slot;
       StaffSpellInfo info = infoSlot.getInfo();
       if (info == null || info == StaffSpellInfo.EMPTY) {
         this.mc.getTextureManager().bindTexture(getTexture());
-        this.zLevel = 1000f;
-        this.drawTexturedModalRect(i2, j2, 176, 16, 16, 16);
+        this.drawTexturedModalRect(i2 + 2, j2 + 2, 176, 16, 16, 16);
       }
     }
-    this.zLevel = oldZ;
   }
 }

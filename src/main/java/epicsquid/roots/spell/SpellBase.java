@@ -4,6 +4,7 @@ import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.entity.spell.EntitySpellBase;
+import epicsquid.roots.modifiers.BaseModifiers;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
@@ -67,6 +68,7 @@ public abstract class SpellBase extends RegistryItem {
 
   public SpellBase(ResourceLocation name, TextFormatting textColor, float r1, float g1, float b1, float r2, float g2, float b2) {
     setRegistryName(name);
+    defaultModifiers();
     this.name = name.getPath();
     this.red1 = r1;
     this.green1 = g1;
@@ -188,29 +190,6 @@ public abstract class SpellBase extends RegistryItem {
     }
   }
 
-  // TODO
-  private List<ItemStack> moduleItems = null;
-
-/*  // TODO: This should be returning Modifiers
-  @Deprecated
-  @SideOnly(Side.CLIENT)
-  public List<ItemStack> getModuleStacks() {
-    if (moduleItems == null) {
-      moduleItems = new ArrayList<>();
-      String prefix = "roots.spell." + name + ".";
-      String mod = I18n.format("roots.spell.module.description");
-
-      for (Modifier module : getModifiers()) {
-        ItemStack stack = module.getStack();
-        String description = I18n.format(prefix + module.getTranslationKey() + ".description");
-        Util.appendLoreTag(stack, mod, description);
-        moduleItems.add(stack);
-      }
-    }
-
-    return moduleItems;
-  }*/
-
   public SpellBase addCost(SpellCost cost) {
     return addCost(cost.getHerb(), cost.getCost());
   }
@@ -309,6 +288,10 @@ public abstract class SpellBase extends RegistryItem {
       }
     }
     this.finalised = true;
+  }
+
+  public void defaultModifiers () {
+    acceptsModifiers(BaseModifiers.EMPOWER, BaseModifiers.GREATER_EMPOWER, BaseModifiers.SPEEDY, BaseModifiers.GREATER_SPEEDY, BaseModifiers.REDUCTION, BaseModifiers.GREATER_REDUCTION);
   }
 
   public void finalise() {

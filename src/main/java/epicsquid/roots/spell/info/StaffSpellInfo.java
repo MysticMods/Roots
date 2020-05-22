@@ -3,8 +3,11 @@ package epicsquid.roots.spell.info;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.modifiers.instance.ModifierInstance;
 import epicsquid.roots.modifiers.instance.ModifierInstanceList;
+import epicsquid.roots.modifiers.modifier.Modifier;
 import epicsquid.roots.modifiers.modifier.ModifierList;
+import epicsquid.roots.spell.FakeSpell;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
@@ -17,13 +20,9 @@ import javax.annotation.Nullable;
 import java.util.Objects;
 
 public class StaffSpellInfo extends AbstractSpellModifiers<ModifierInstanceList> {
-  public static StaffSpellInfo EMPTY = new StaffSpellInfo();
+  public static StaffSpellInfo EMPTY = new StaffSpellInfo(FakeSpell.INSTANCE);
   private int cooldown = -1;
   private long cooldownStop = -1;
-
-  public StaffSpellInfo() {
-    modifiers = new ModifierInstanceList();
-  }
 
   public StaffSpellInfo(SpellBase spell) {
     super(spell);
@@ -40,9 +39,13 @@ public class StaffSpellInfo extends AbstractSpellModifiers<ModifierInstanceList>
     this.modifiers = modifiers;
   }
 
-  public void setModifiers (ModifierList modifiers) {
-    this.modifiers = new ModifierInstanceList(modifiers);
-  }
+/*  public void setModifiers (ModifierList modifiers) {
+    this.modifiers = new ModifierInstanceList(spell);
+    this.modifiers.clear();
+    for (Modifier m : modifiers) {
+      this.modifiers.add(new ModifierInstance(m, false, false));
+    }
+  }*/
 
   public void tick () {
     if (this.cooldown == -1) {
@@ -89,7 +92,7 @@ public class StaffSpellInfo extends AbstractSpellModifiers<ModifierInstanceList>
   @Override
   public void deserializeNBT(NBTTagCompound nbt) {
     super.deserializeNBT(nbt);
-    this.modifiers = ModifierInstanceList.fromNBT(nbt.getTagList("m", Constants.NBT.TAG_COMPOUND));
+    this.modifiers = ModifierInstanceList.fromNBT(nbt.getCompoundTag("m"));
     this.cooldown = nbt.getInteger("c");
     this.cooldownStop = nbt.getLong("l");
   }
@@ -100,7 +103,8 @@ public class StaffSpellInfo extends AbstractSpellModifiers<ModifierInstanceList>
   }
 
   public static StaffSpellInfo fromNBT(NBTTagCompound tag) {
-    StaffSpellInfo instance = new StaffSpellInfo();
+    SpellBase spell = getSpellFromTag(tag);
+    StaffSpellInfo instance = new StaffSpellInfo(spell);
     instance.deserializeNBT(tag);
     return instance;
   }
