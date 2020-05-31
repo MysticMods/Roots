@@ -1,5 +1,6 @@
 package epicsquid.roots.modifiers.modifier;
 
+import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.modifiers.IModifier;
 import epicsquid.roots.modifiers.ModifierType;
@@ -29,7 +30,11 @@ public class Modifier extends RegistryItem implements IModifier {
   @Override
   public String getTranslationKey() {
     ResourceLocation rl = getRegistryName();
-    return rl.getNamespace() + "." + rl.getPath();
+    if (rl.getNamespace().equals(Roots.MODID)) {
+      return "roots.modifiers.modifiers." + rl.getPath();
+    } else {
+      return "roots.modifiers.modifiers." + rl.getNamespace() + "." + rl.getPath();
+    }
   }
 
   @Override

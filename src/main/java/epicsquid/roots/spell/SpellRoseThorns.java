@@ -47,7 +47,7 @@ public class SpellRoseThorns extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks) {
+  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, int amplifier) {
     if (!player.world.isRemote) {
       EntityThornTrap trap = new EntityThornTrap(player.world, damage, duration, slownessDuration, slownessAmplifier, poisonDuration, poisonAmplifier);
       trap.setPlayer(player.getUniqueID());

@@ -56,7 +56,7 @@ public class SpellRadiance extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks) {
+  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, int amplifier) {
     if (!player.world.isRemote && player.ticksExisted % 2 == 0) {
       RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0),
           player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)));

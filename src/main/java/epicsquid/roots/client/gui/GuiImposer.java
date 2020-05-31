@@ -22,14 +22,17 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fml.client.config.GuiUtils;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GuiImposer extends GuiContainer {
 
@@ -73,7 +76,27 @@ public class GuiImposer extends GuiContainer {
 
   @Override
   protected void renderHoveredToolTip(int x, int y) {
-    super.renderHoveredToolTip(x, y);
+    if (this.mc.player.inventory.getItemStack().isEmpty() && this.hoveredSlot != null) {
+      List<String> tooltip = new ArrayList<>();
+      FontRenderer font = null;
+      boolean hasStack = this.hoveredSlot.getHasStack();
+      if (hasStack) {
+        ItemStack stack = this.hoveredSlot.getStack();
+        GuiUtils.preItemToolTip(stack);
+        tooltip.addAll(getItemToolTip(stack));
+        font = stack.getItem().getFontRenderer(stack);
+      }
+      if (hoveredSlot instanceof SlotModifierInfo) {
+        // Add/manipulate modifier info here
+        tooltip.add("");
+      }
+      if (!tooltip.isEmpty()) {
+        this.drawHoveringText(tooltip, x, y, (font == null ? fontRenderer : font));
+        if (hasStack) {
+          GuiUtils.postItemToolTip();
+        }
+      }
+    }
   }
 
   private static ResourceLocation SPELL_SELECT = new ResourceLocation(Roots.MODID, "textures/gui/imposer_spell_select.png");

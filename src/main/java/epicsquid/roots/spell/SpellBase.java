@@ -5,6 +5,7 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.entity.spell.EntitySpellBase;
 import epicsquid.roots.modifiers.BaseModifiers;
+import epicsquid.roots.modifiers.modifier.ModifierCores;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
@@ -208,10 +209,19 @@ public abstract class SpellBase extends RegistryItem {
   }
 
   public boolean cast (EntityPlayer caster, StaffSpellInfo info, int ticks) {
-    return cast(caster, info.getModifiers(), ticks);
+    ModifierInstanceList modifiers = info.getModifiers();
+    int amplifier = 0;
+    if (modifiers.get(BaseModifiers.EMPOWER) != null) {
+      amplifier++;
+    }
+    if (modifiers.get(BaseModifiers.GREATER_EMPOWER) != null) {
+      amplifier += 2;
+    }
+
+    return cast(caster, info.getModifiers(), ticks, amplifier);
   }
 
-  public abstract boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks);
+  protected abstract boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, int amplifier);
 
   public float getRed1() {
     return red1;

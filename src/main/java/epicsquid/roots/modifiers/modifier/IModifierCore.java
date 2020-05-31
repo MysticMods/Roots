@@ -12,4 +12,6 @@ public interface IModifierCore {
   Herb getHerb();
 
   ItemStack getStack();
+
+  String getTranslationKey ();
 }

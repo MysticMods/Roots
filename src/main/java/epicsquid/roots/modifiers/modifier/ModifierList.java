@@ -65,6 +65,16 @@ public class ModifierList implements IModifierList<Modifier, NBTTagCompound> {
   }
 
   @Override
+  @Nullable
+  public Modifier get(Modifier modifier) {
+    if (map.getBoolean(modifier)) {
+      return modifier;
+    }
+
+    return null;
+  }
+
+  @Override
   public boolean add(Modifier modifier) {
     return map.put(modifier, true);
   }
