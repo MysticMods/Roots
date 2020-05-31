@@ -13,6 +13,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 public class TransmutationWrapper implements IRecipeWrapper {
   public final TransmutationRecipe recipe;
@@ -54,6 +55,7 @@ public class TransmutationWrapper implements IRecipeWrapper {
       RenderUtil.renderBlock(initial, 26, 57, 10, 20f, 0.4f);
     }
 
+    PlayerEvent.ItemPickupEvent
     if (outputState != null && cond != null) {
       if (condition.getPosition() == StatePosition.BELOW) {
         RenderUtil.renderBlock(outputState, 130, 47, 10, 20f, 0.4f);

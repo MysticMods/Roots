@@ -73,10 +73,6 @@ public class RenderUtil {
     GlStateManager.translate(-0.5f, -0.5f, -0.5f);
     Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
     Minecraft.getMinecraft().getBlockRendererDispatcher().renderBlockBrightness(block, 1);
-/*    BlockRendererDispatcher renderer = Minecraft.getMinecraft().getBlockRendererDispatcher(); //.renderBlockBrightness(block, 1);
-
-    IBakedModel ibakedmodel = renderer.getModelForState(block);
-    renderer.getBlockModelRenderer().renderModelBrightness(ibakedmodel, block, 1, true);*/
     GlStateManager.popMatrix();
     RenderHelper.disableStandardItemLighting();
     GlStateManager.disableRescaleNormal();

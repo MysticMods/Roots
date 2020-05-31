@@ -29,7 +29,6 @@ public class StaffSpellInfo extends AbstractSpellModifiers<ModifierInstanceList>
     modifiers = new ModifierInstanceList(spell);
   }
 
-  @Nullable
   @Override
   public ModifierInstanceList getModifiers() {
     return modifiers;

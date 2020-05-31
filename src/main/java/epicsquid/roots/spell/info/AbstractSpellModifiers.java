@@ -15,6 +15,5 @@ public abstract class AbstractSpellModifiers<T extends IModifierList<?, ?>> exte
     super(spell);
   }
 
-  @Nullable
   public abstract T getModifiers ();
 }

@@ -48,7 +48,7 @@ public class SpellLightDrifter extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks) {
+  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, int amplifier) {
     if (!player.world.isRemote) {
       player.capabilities.disableDamage = true;
       player.capabilities.allowFlying = true;

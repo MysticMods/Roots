@@ -78,6 +78,19 @@ public class ModifierInstanceList implements IModifierList<ModifierInstance, NBT
   }
 
   @Override
+  @Nullable
+  public ModifierInstance get(Modifier modifier) {
+    for (Map.Entry<ModifierType, List<ModifierInstance>> instances : internal.entrySet()) {
+      for (ModifierInstance mi : instances.getValue()) {
+        if (mi.getModifier().equals(modifier)) {
+          return mi;
+        }
+      }
+    }
+    return null;
+  }
+
+  @Override
   public Iterator<ModifierInstance> iterator() {
     List<ModifierIterator> iterators = new ArrayList<>();
     if (!internal.get(ModifierType.NO_COST).isEmpty()) {

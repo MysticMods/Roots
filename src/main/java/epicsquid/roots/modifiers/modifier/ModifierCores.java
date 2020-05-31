@@ -77,4 +77,9 @@ public enum ModifierCores implements IModifierCore {
     }
     return sup;
   }
+
+  @Override
+  public String getTranslationKey() {
+    return "roots.modifiers.cores." + name().toLowerCase();
+  }
 }
