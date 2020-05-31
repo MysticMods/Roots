@@ -1,0 +1,232 @@
+---- Minecraft Crash Report ----
+
+WARNING: coremods are present:
+  wings (wings-1.1.6-1.12.2.jar)
+  CreativePatchingLoader (CreativeCore_v1.9.90_mc1.12.2.jar)
+  LittlePatchingLoader (LittleTiles_v1.5.0-pre198_mc1.12.2.jar)
+  Quark Plugin (Quark-r1.6-177.jar)
+  CTMCorePlugin (CTM-MC1.12.2-1.0.1.30.jar)
+  OpenModsCorePlugin (OpenModsLib-1.12.2-0.12.2.jar)
+  AstralCore (astralsorcery-1.12.2-1.10.23.jar)
+  JEIDLoadingPlugin (JustEnoughIDs-1.0.2-26.jar)
+  LoadingPlugin (Bloodmoon-MC1.12.2-1.5.3.jar)
+  CorePlugin (ForgeEndertech-1.12.2.jar)
+  BewitchmentFMLLoadingPlugin (bewitchment-1.12.2-0.0.21.12.jar)
+  FutureMC (future-mc-0.1.13.jar)
+  FMLPlugin (elulib-0.1.12.jar)
+  llibrary (llibrary-1.7.7-1.12.2.jar)
+  SecretRoomsMod-Core (secretroomsmod-1.12.2-5.6.4.jar)
+  monstersandpets (ldshadowlady-monstersandpets-1.0.1-1.12.jar)
+  LoadingPlugin (Xaeros_Minimap_20.3.0_Forge_1.12.jar)
+Contact their authors BEFORE contacting forge
+
+// I bet Cylons wouldn't have this problem.
+
+Time: 5/31/20 7:13 PM
+Description: Initializing game
+
+java.lang.IllegalAccessError: tried to access class org.spongepowered.asm.mixin.transformer.MixinTransformer from class net.minecraftforge.fml.common.Loader
+	at net.minecraftforge.fml.common.Loader.handler$zza000$beforeConstructingMods(Loader.java:1131)
+	at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:594)
+	at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+	at net.minecraft.client.Minecraft.func_71384_a(Minecraft.java:467)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:378)
+	at net.minecraft.client.main.Main.main(SourceFile:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Client thread
+Stacktrace:
+	at net.minecraftforge.fml.common.Loader.handler$zza000$beforeConstructingMods(Loader.java:1131)
+	at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:594)
+	at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+	at net.minecraft.client.Minecraft.func_71384_a(Minecraft.java:467)
+
+-- Initialization --
+Details:
+Stacktrace:
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:378)
+	at net.minecraft.client.main.Main.main(SourceFile:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.12.2
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 1.8.0_51, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 1470619488 bytes (1402 MB) / 2147483648 bytes (2048 MB) up to 4294967296 bytes (4096 MB)
+	JVM Flags: 8 total; -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump -Xmx4G -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=32M
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP 9.42 Powered by Forge 14.23.5.2854 Optifine OptiFine_1.12.2_HD_U_E3 97 mods loaded, 95 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+
+	| State | ID                      | Version           | Source                                                | Signature                                |
+	|:----- |:----------------------- |:----------------- |:----------------------------------------------------- |:---------------------------------------- |
+	| L     | minecraft               | 1.12.2            | minecraft.jar                                         | None                                     |
+	| L     | mcp                     | 9.42              | minecraft.jar                                         | None                                     |
+	| L     | FML                     | 8.0.99.99         | forge-1.12.2-14.23.5.2854.jar                         | e3c3d50c7c986df74c645c0ac54639741c90a557 |
+	| L     | forge                   | 14.23.5.2854      | forge-1.12.2-14.23.5.2854.jar                         | e3c3d50c7c986df74c645c0ac54639741c90a557 |
+	| L     | creativecoredummy       | 1.0.0             | minecraft.jar                                         | None                                     |
+	| L     | littletilescore         | 1.0.0             | minecraft.jar                                         | None                                     |
+	| L     | xaerominimap_core       | 1.12.2-1.0        | minecraft.jar                                         | None                                     |
+	| L     | openmodscore            | 0.12.2            | minecraft.jar                                         | None                                     |
+	| L     | srm-hooks               | 1.12.2-1.0.0      | minecraft.jar                                         | None                                     |
+	| L     | futuremccore            | 0.1.12            | minecraft.jar                                         | None                                     |
+	| L     | elucore                 | 1.0               | minecraft.jar                                         | None                                     |
+	| L     | advancedcombat          | 1.1.2             | advancedcombat-1.1.2-[1.12].jar                       | None                                     |
+	| L     | aquaculture             | 1.6.8             | Aquaculture-1.12.2-1.6.8.jar                          | None                                     |
+	| L     | baubles                 | 1.5.2             | Baubles-1.12-1.5.2.jar                                | None                                     |
+	| L     | astralsorcery           | 1.10.22           | astralsorcery-1.12.2-1.10.23.jar                      | None                                     |
+	| L     | atum                    | 2.0.17            | Atum-1.12.2-2.0.17.jar                                | None                                     |
+	| L     | jei                     | 4.15.0.291        | jei_1.12.2-4.15.0.291.jar                             | None                                     |
+	| L     | quark                   | r1.6-177          | Quark-r1.6-177.jar                                    | None                                     |
+	| L     | autoreglib              | 1.3-32            | AutoRegLib-1.3-32 (1).jar                             | None                                     |
+	| L     | babymobs                | 1.5.5             | BabyMobs-1.12-1.5.5.jar                               | None                                     |
+	| L     | bno                     | 1.12.2-1.0.4.0    | BasicNetherOres-1.12.2-1.0.4.0.jar                    | None                                     |
+	| L     | patchouli               | 1.0-20            | Patchouli-1.0-20.jar                                  | None                                     |
+	| L     | bewitchment             | 0.21.12           | bewitchment-1.12.2-0.0.21.12.jar                      | None                                     |
+	| L     | bibliocraft             | 2.4.5             | BiblioCraft[v2.4.5][MC1.12.2].jar                     | None                                     |
+	| L     | biomesoplenty           | 7.0.1.2441        | BiomesOPlenty-1.12.2-7.0.1.2441-universal.jar         | None                                     |
+	| L     | bloodmoon               | 1.5.3             | Bloodmoon-MC1.12.2-1.5.3.jar                          | None                                     |
+	| L     | bonsaitrees             | 1.1.4             | bonsaitrees-1.1.4-b170.jar                            | None                                     |
+	| L     | bookshelf               | 2.3.585           | Bookshelf-1.12.2-2.3.585.jar                          | None                                     |
+	| L     | bookworm                | 1.12.2-2.5.1      | bookworm-1.12.2-2.5.1.jar                             | None                                     |
+	| L     | carpentersblocks        | 3.4.0-poc.6       | Carpenter's Blocks v3.4.0-poc.6 - MC 1.12.2.jar       | None                                     |
+	| L     | carryon                 | 1.12.1            | CarryOn MC1.12.2 v1.12.1.jar                          | None                                     |
+	| L     | chameleon               | 1.12-4.1.3        | Chameleon-1.12-4.1.3.jar                              | None                                     |
+	| L     | chickens                | 6.0.4             | chickens-6.0.4 (2).jar                                | None                                     |
+	| L     | ctm                     | MC1.12.2-1.0.1.30 | CTM-MC1.12.2-1.0.1.30.jar                             | None                                     |
+	| L     | roots                   | 1.12.2-3.0.28     | Roots-1.12.2-3.0.28 (1).jar                           | None                                     |
+	| L     | mysticalworld           | 1.12.2-1.8.4      | mysticalworld-1.12.2-1.8.4.jar                        | None                                     |
+	| L     | chisel                  | MC1.12.2-1.0.1.44 | Chisel-MC1.12.2-1.0.1.44 (1).jar                      | None                                     |
+	| L     | chiselsandbits          | 14.33             | chiselsandbits-14.33 (1).jar                          | None                                     |
+	| L     | cookingforblockheads    | 6.5.0             | CookingForBlockheads_1.12.2-6.5.0.jar                 | None                                     |
+	| L     | craftstudioapi          | 1.0.0             | CraftStudioAPI-universal-1.0.1.95-mc1.12-alpha.jar    | None                                     |
+	| L     | creativecore            | 1.9.9             | CreativeCore_v1.9.90_mc1.12.2.jar                     | None                                     |
+	| L     | customspawner           | 3.11.4            | CustomMobSpawner-3.11.4.jar                           | None                                     |
+	| L     | ptrmodellib             | 1.0.4             | PTRLib-1.0.4.jar                                      | None                                     |
+	| L     | props                   | 2.6.3             | Decocraft-2.6.3_1.12.2 (1).jar                        | None                                     |
+	| L     | doggytalents            | 1.15.1.5          | DoggyTalents-1.12.2-1.15.1.5.jar                      | None                                     |
+	| L     | mocreatures             | 12.0.5            | DrZharks MoCreatures Mod-12.0.5.jar                   | None                                     |
+	| L     | enderzoo                | 1.12.1-1.4.0.49   | EnderZoo-1.12.1-1.4.0.49.jar                          | None                                     |
+	| L     | golems                  | 7.1.8             | Extra-Golems-Mod-1.12.2.jar                           | None                                     |
+	| L     | extrautils2             | 1.0               | extrautils2-1.12-1.9.9.jar                            | None                                     |
+	| L     | fairylights             | 2.1.6             | fairylights-2.1.6-1.12.2.jar                          | None                                     |
+	| L     | forgeendertech          | 1.12.2-4.5.0.0    | ForgeEndertech-1.12.2.jar                             | None                                     |
+	| L     | cfm                     | 6.3.1             | furniture-6.3.1-1.12.2.jar                            | None                                     |
+	| L     | minecraftfuture         | 0.1.13            | future-mc-0.1.13.jar                                  | None                                     |
+	| L     | gardenstuff             | 1.12-2.1.1        | GardenStuff-1.12-2.1.1.jar                            | None                                     |
+	| L     | gravestone              | 1.10.2            | gravestone-1.10.2.jar                                 | None                                     |
+	| L     | waila                   | 1.8.26            | Hwyla-1.8.26-B41_1.12.2.jar                           | None                                     |
+	| L     | japaricraftmod          | 5.5.0             | japaricraftmod-1.12.2-5.5.0.jar                       | None                                     |
+	| L     | jeid                    | 1.0.2-26          | JustEnoughIDs-1.0.2-26.jar                            | None                                     |
+	| L     | chickendungeons         | 1.0.1             | ldshadowlady-chickendungeons-1.0.1.jar                | None                                     |
+	| L     | customcraftingtables    | 1.0.0             | ldshadowlady-customcraftingtables-1.0.jar             | None                                     |
+	| L     | llibrary                | 1.7.7             | llibrary-1.7.7-1.12.2.jar                             | None                                     |
+	| L     | monstersandpets         | 1.0.1             | ldshadowlady-monstersandpets-1.0.1-1.12.jar           | None                                     |
+	| L     | disney                  | 1.0.0             | ldshadowlady-disney-1.0.jar                           | None                                     |
+	| L     | youtuberzombies         | 1.0.0             | ldshadowlady-youtuberzombies-1.0.jar                  | None                                     |
+	| L     | littletiles             | 1.5.0             | LittleTiles_v1.5.0-pre198_mc1.12.2.jar                | None                                     |
+	| L     | lucky                   | 7.6.0             | luckyblock-1.12.2-7.6.0.zip                           | None                                     |
+	| L     | magicclover             | 1.12-0.7.8        | magicclover-1.12-0.7.8.jar                            | None                                     |
+	| L     | maidensmaterials        | 3.3               | Maiden's+Marvelous+Materials-3.3.jar                  | None                                     |
+	| L     | mopickaxes              | 10.0: Final BETA  | Mo-Pickaxes-Mod-1.12.2.jar                            | None                                     |
+	| L     | morechickens            | 3.1.0             | morechickens-1.12.2-3.1.0 (1).jar                     | None                                     |
+	| L     | naturescompass          | 1.8.3             | Natures-Compass-Mod-1.12.2.jar                        | None                                     |
+	| L     | neverenoughcandy        | 1.2.3             | NeverEnoughCandy-1.12.2-1.2.3.jar                     | None                                     |
+	| L     | openmods                | 0.12.2            | OpenModsLib-1.12.2-0.12.2.jar                         | None                                     |
+	| L     | openblocks              | 1.8.1             | OpenBlocks-1.12.2-1.8.1.jar                           | None                                     |
+	| L     | outfox                  | 0.1.4             | outfox-0.1.4-mc1.12.2.jar                             | None                                     |
+	| L     | harvestcraft            | 1.12.2zb          | Pam's+HarvestCraft+1.12.2zg.jar                       | None                                     |
+	| L     | placeableitems          | 3.3               | placeableitems-3.3.jar                                | None                                     |
+	| L     | roost                   | 2.0.10            | roost-1.12.2-2.0.10.jar                               | None                                     |
+	| L     | scollectibles           | demo              | scollectibles-1.1.jar                                 | None                                     |
+	| L     | secretroomsmod          | 5.6.4             | secretroomsmod-1.12.2-5.6.4.jar                       | None                                     |
+	| L     | sophisticatedwolves     | 3.13.8            | SophisticatedWolves-1.12.2-3.13.8.jar                 | None                                     |
+	| L     | storagedrawers          | 1.12.2-5.4.0      | StorageDrawers-1.12.2-5.4.0.jar                       | None                                     |
+	| L     | unlimitedchiselworks    | 0.3.1             | UnlimitedChiselWorks-0.3.1.jar                        | None                                     |
+	| L     | storagedrawersunlimited | 1.12.2-1.3.0      | StorageDrawersUnlimited-1.12.2-1.3.0.jar              | None                                     |
+	| L     | travellersbackpack      | 1.0.22.22         | TravellersBackpack-1.12.2-1.0.22.22.jar               | None                                     |
+	| L     | treechopper             | 1.2.4             | TreeChopper-1.12.2-1.2.4.jar                          | None                                     |
+	| L     | twilightforest          | 3.10.1013         | twilightforest-1.12.2-3.10.1013-universal (2).jar     | None                                     |
+	| L     | ultimate_unicorn_mod    | 1.5.16            | ultimate_unicorn_mod-1.12.2-1.5.16.jar                | None                                     |
+	| L     | wearablebackpacks       | 3.1.4             | WearableBackpacks-1.12.2-3.1.4.jar                    | None                                     |
+	| L     | wings                   | 1.1.6             | wings-1.1.6-1.12.2.jar                                | None                                     |
+	| L     | bauble_wings            | 1.0.0             | wings-1.1.6-1.12.2.jar                                | None                                     |
+	| L     | worldedit               | 6.1.10-SNAPSHOT   | worldedit-forge-mc1.12.2-6.1.10-SNAPSHOT-dist (1).jar | None                                     |
+	| L     | xaerominimap            | 20.3.0            | Xaeros_Minimap_20.3.0_Forge_1.12.jar                  | None                                     |
+	| L     | elulib                  | 0.1.12            | elulib-0.1.12.jar                                     | None                                     |
+	| L     | mysticallib             | 1.12.2-1.7.0      | mysticallib-1.12.2-1.7.0.jar                          | None                                     |
+	| UD    | mowzies_wings           | 1.0.0             | wings-1.1.6-1.12.2.jar                                | None                                     |
+	| UD    | mobends_wings           | 1.0.0             | wings-1.1.6-1.12.2.jar                                | None                                     |
+
+	Loaded coremods (and transformers): 
+wings (wings-1.1.6-1.12.2.jar)
+  me.paulf.wings.server.asm.WingsRuntimePatcher
+  me.paulf.wings.server.asm.mobends.WingsMoBendsRuntimePatcher
+CreativePatchingLoader (CreativeCore_v1.9.90_mc1.12.2.jar)
+  
+LittlePatchingLoader (LittleTiles_v1.5.0-pre198_mc1.12.2.jar)
+  com.creativemd.littletiles.LittleTilesTransformer
+Quark Plugin (Quark-r1.6-177.jar)
+  vazkii.quark.base.asm.ClassTransformer
+CTMCorePlugin (CTM-MC1.12.2-1.0.1.30.jar)
+  team.chisel.ctm.client.asm.CTMTransformer
+OpenModsCorePlugin (OpenModsLib-1.12.2-0.12.2.jar)
+  openmods.core.OpenModsClassTransformer
+AstralCore (astralsorcery-1.12.2-1.10.23.jar)
+  
+JEIDLoadingPlugin (JustEnoughIDs-1.0.2-26.jar)
+  org.dimdev.jeid.JEIDTransformer
+LoadingPlugin (Bloodmoon-MC1.12.2-1.5.3.jar)
+  lumien.bloodmoon.asm.ClassTransformer
+CorePlugin (ForgeEndertech-1.12.2.jar)
+  
+BewitchmentFMLLoadingPlugin (bewitchment-1.12.2-0.0.21.12.jar)
+  
+FutureMC (future-mc-0.1.13.jar)
+  thedarkcolour.futuremc.asm.CoreTransformer
+FMLPlugin (elulib-0.1.12.jar)
+  elucent.elulib.asm.ASMTransformer
+llibrary (llibrary-1.7.7-1.12.2.jar)
+  net.ilexiconn.llibrary.server.core.plugin.LLibraryTransformer
+  net.ilexiconn.llibrary.server.core.patcher.LLibraryRuntimePatcher
+SecretRoomsMod-Core (secretroomsmod-1.12.2-5.6.4.jar)
+  com.wynprice.secretroomsmod.core.SecretRoomsTransformer
+monstersandpets (ldshadowlady-monstersandpets-1.0.1-1.12.jar)
+  com.ldshadowlady.monstersandpets.asm.PlayerPassengerPatchRuntimePatcher
+LoadingPlugin (Xaeros_Minimap_20.3.0_Forge_1.12.jar)
+  xaero.common.core.transformer.ChunkTransformer
+  xaero.common.core.transformer.NetHandlerPlayClientTransformer
+	GL info: ' Vendor: 'Intel' Version: '4.4.0 - Build 20.19.15.4531' Renderer: 'Intel(R) HD Graphics 5500'
+	Launched Version: 1.12.2-forge-14.23.5.2854
+	LWJGL: 2.9.4
+	OpenGL: Intel(R) HD Graphics 5500 GL version 4.4.0 - Build 20.19.15.4531, Intel
+	GL Caps: Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: Yes
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	Type: Client (map_client.txt)
+	Resource Packs: 
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	CPU: 4x Intel(R) Core(TM) i5-5300U CPU @ 2.30GHz
