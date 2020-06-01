@@ -225,9 +225,9 @@ public abstract class SpellBase extends RegistryItem {
         case SUCCESS:
           return 0;
         case SUCCESS_SPEEDY:
-          return Math.round(cooldown * 0.1);
+          return Math.round(cooldown * 0.2);
         case SUCCESS_GREATER_SPEEDY:
-          return Math.round(cooldown * 0.3);
+          return Math.round(cooldown * 0.4);
       }
     }
   }
@@ -237,26 +237,26 @@ public abstract class SpellBase extends RegistryItem {
     double amplifier = 0;
     ModifierInstance mod = modifiers.get(BaseModifiers.EMPOWER);
     if (mod != null && mod.isApplied()) {
-      amplifier = 0.1;
+      amplifier = 0.2;
     }
     mod = modifiers.get(BaseModifiers.GREATER_EMPOWER);
     if (mod != null && mod.isApplied()) {
-      amplifier = 0.3;
+      amplifier = 0.4;
     }
     double speedy = 0;
     mod = modifiers.get(BaseModifiers.SPEEDY);
     if (mod != null && mod.isApplied()) {
-      speedy = 0.1;
+      speedy = 0.2;
     }
     mod = modifiers.get(BaseModifiers.GREATER_SPEEDY);
     if (mod != null && mod.isApplied()) {
-      speedy = 0.3;
+      speedy = 0.4;
     }
 
     if (cast(caster, info.getModifiers(), ticks, amplifier, speedy)) {
       if (speedy == 0d) {
         return CastResult.SUCCESS;
-      } else if (speedy == 0.1d) {
+      } else if (speedy == 0.2d) {
         return CastResult.SUCCESS_SPEEDY;
       } else {
         return CastResult.SUCCESS_GREATER_SPEEDY;

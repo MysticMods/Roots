@@ -15,16 +15,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessageAcidCloudFX implements IMessage {
   private double posX = 0, posY = 0, posZ = 0;
+  private boolean fire = false;
 
   public MessageAcidCloudFX() {
     super();
   }
 
-  public MessageAcidCloudFX(double x, double y, double z) {
+  public MessageAcidCloudFX(double x, double y, double z, boolean fire) {
     super();
     this.posX = x;
     this.posY = y;
     this.posZ = z;
+    this.fire = fire;
   }
 
   @Override
@@ -32,6 +34,7 @@ public class MessageAcidCloudFX implements IMessage {
     posX = buf.readDouble();
     posY = buf.readDouble();
     posZ = buf.readDouble();
+    fire = buf.readBoolean();
   }
 
   @Override
@@ -39,6 +42,7 @@ public class MessageAcidCloudFX implements IMessage {
     buf.writeDouble(posX);
     buf.writeDouble(posY);
     buf.writeDouble(posZ);
+    buf.writeBoolean(fire);
   }
 
   public static float getColorCycle(float ticks) {
@@ -60,12 +64,18 @@ public class MessageAcidCloudFX implements IMessage {
           vx *= -1;
           vz *= -1;
         }
-        if (Util.rand.nextBoolean()) {
-          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellAcidCloud.instance.getRed1(),
-              SpellAcidCloud.instance.getGreen1(), SpellAcidCloud.instance.getBlue1(), 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
+        if (message.fire) {
+          if (Util.rand.nextBoolean()) {
+            ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, 209.0f / 255, 54.0f / 255, 15.0f / 255, 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
+          } else {
+            ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, 245.0f / 255, 158.0f / 255, 66.0f / 255, 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
+          }
         } else {
-          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellAcidCloud.instance.getRed2(),
-              SpellAcidCloud.instance.getGreen2(), SpellAcidCloud.instance.getBlue2(), 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
+          if (Util.rand.nextBoolean()) {
+            ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellAcidCloud.instance.getRed1(), SpellAcidCloud.instance.getGreen1(), SpellAcidCloud.instance.getBlue1(), 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
+          } else {
+            ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellAcidCloud.instance.getRed2(), SpellAcidCloud.instance.getGreen2(), SpellAcidCloud.instance.getBlue2(), 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
+          }
         }
       }
       return null;

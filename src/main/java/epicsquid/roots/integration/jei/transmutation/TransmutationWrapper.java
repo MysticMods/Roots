@@ -55,7 +55,6 @@ public class TransmutationWrapper implements IRecipeWrapper {
       RenderUtil.renderBlock(initial, 26, 57, 10, 20f, 0.4f);
     }
 
-    PlayerEvent.ItemPickupEvent
     if (outputState != null && cond != null) {
       if (condition.getPosition() == StatePosition.BELOW) {
         RenderUtil.renderBlock(outputState, 130, 47, 10, 20f, 0.4f);
