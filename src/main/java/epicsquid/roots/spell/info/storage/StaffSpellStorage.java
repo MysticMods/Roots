@@ -87,6 +87,7 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
     return info.cooldownTotal();
   }
 
+  // TODO: Is this used? Is it used usefully?
   public void setCooldown(long cd) {
     StaffSpellInfo info = getSelectedInfo();
     if (info != null) {

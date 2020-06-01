@@ -2,7 +2,6 @@ package epicsquid.roots.spell;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.SpellConfig;
-import epicsquid.roots.spell.unused.SpellSummersThaw;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.ResourceLocation;
 

@@ -86,10 +86,10 @@ public class EntitySpellSpringStorm extends EntitySpellBase<SpellSpringStorm> {
         for (EntityLivingBase entity : entities) {
           if (entity instanceof EntityPlayer) {
             if (instance.fire_resistance >= 0) {
-              entity.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, (int) (60 + 60 * amplifier), instance.fire_resistance, false, false));
+              entity.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 60, instance.fire_resistance, false, false));
             }
             if (instance.resistance >= 0) {
-              entity.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, (int) (60 + 60 * amplifier), instance.resistance, false, false));
+              entity.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 60, instance.resistance, false, false));
             }
           }
           if (EntityUtil.isHostile(entity)) {
@@ -100,7 +100,7 @@ public class EntitySpellSpringStorm extends EntitySpellBase<SpellSpringStorm> {
         }
         if (!hostiles.isEmpty()) {
           if (strikes < instance.lightning_strikes) {
-            if (rand.nextInt((int) (instance.lightning_chance - instance.lightning_chance * amplifier)) == 0) {
+            if (rand.nextInt(instance.lightning_chance) == 0) {
               EntityLivingBase hostile = hostiles.remove(rand.nextInt(hostiles.size()));
 
               world.weatherEffects.add(new EntityLightningBolt(world, hostile.posX, hostile.posY, hostile.posZ, false));
@@ -125,7 +125,7 @@ public class EntitySpellSpringStorm extends EntitySpellBase<SpellSpringStorm> {
         rebuildGroundLevel();
       }
 
-      for (BlockPos pos : groundLevel) { // TODO: UM
+      for (BlockPos pos : groundLevel) {
         IBlockState state = world.getBlockState(pos);
         IBlockState stateUp = world.getBlockState(pos.up());
         IBlockState stateDown = world.getBlockState(pos.down());

@@ -47,7 +47,7 @@ public class SpellDesaturate extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, int amplifier) {
     if (!caster.shouldHeal()) {
       return false;
     }
@@ -56,13 +56,13 @@ public class SpellDesaturate extends SpellBase {
     if (food <= 1) {
       return false;
     }
-    float required = (float) ((caster.getMaxHealth() - caster.getHealth()) / (float) multiplier - multiplier * amplifier);
+    float required = (caster.getMaxHealth() - caster.getHealth()) / (float) multiplier;
     float healed = 0;
 
     for (int i = 0; i <= required; i++) {
       if (food > 1) {
         food--;
-        healed += 1 * multiplier - multiplier * amplifier;
+        healed += 1 * multiplier;
       } else {
         break;
       }
