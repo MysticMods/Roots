@@ -87,7 +87,7 @@ public class GuiImposer extends GuiContainer {
         font = stack.getItem().getFontRenderer(stack);
       }
       if (hoveredSlot instanceof SlotModifierInfo) {
-        // Add/manipulate modifier info here
+        // Add/manipulate modifyCooldown info here
         tooltip.add("");
       }
       if (!tooltip.isEmpty()) {
@@ -133,13 +133,13 @@ public class GuiImposer extends GuiContainer {
     int j2 = slot.yPos - 2;
     if (slot instanceof SlotModifierInfo) {
       SlotModifierInfo modInfo = (SlotModifierInfo) slot;
-      if (!modInfo.isApplicable()) { // There is no modifier existant for this slot
+      if (!modInfo.isApplicable()) { // There is no modifyCooldown existant for this slot
         this.mc.getTextureManager().bindTexture(getTexture());
         this.drawTexturedModalRect(i2, j2, 176, 40, 20, 20);
-      } else if (!modInfo.isApplied()) { // There is a modifier but it isn't applied
+      } else if (!modInfo.isApplied()) { // There is a modifyCooldown but it isn't applied
         this.mc.getTextureManager().bindTexture(getTexture());
         this.drawTexturedModalRect(i2, j2, 176, 20, 20, 20);
-      } else if (modInfo.isDisabled()) { // There is a modifier and it is applied, but it's disabled
+      } else if (modInfo.isDisabled()) { // There is a modifyCooldown and it is applied, but it's disabled
         this.mc.getTextureManager().bindTexture(getTexture());
         this.drawTexturedModalRect(i2, j2, 176, 0, 20, 20);
       }

@@ -14,7 +14,7 @@ public class FakeSpell extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, int amplifier) {
+  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     return false;
   }
 

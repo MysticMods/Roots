@@ -45,8 +45,8 @@ public class SpellAquaBubble extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, int amplifier) {
-    caster.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, duration, 0, false, false));
+  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+    caster.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, (int) (duration + duration * amplifier), 0, false, false));
     return true;
   }
 

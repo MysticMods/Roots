@@ -67,7 +67,7 @@ public class SpellSaturate extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, int amplifier) {
+  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     World world = caster.world;
     FoodStats stats = caster.getFoodStats();
     int currentFood = stats.getFoodLevel();
@@ -128,7 +128,6 @@ public class SpellSaturate extends SpellBase {
 
     List<ItemStack> containers = new ArrayList<>();
 
-    int total = 0;
     suppressSound = true;
     for (Object2IntMap.Entry<ItemStack> entry : usedFoods.object2IntEntrySet()) {
       int used = entry.getIntValue();
@@ -137,7 +136,6 @@ public class SpellSaturate extends SpellBase {
       ItemStack result = handler.extractItem(index, used, false);
       if (!result.isEmpty()) {
         for (int i = 0; i < result.getCount(); i++) {
-          total++;
           ItemStack container = result.onItemUseFinish(caster.world, caster);
           if (!container.isEmpty() && !ItemUtil.equalWithoutSize(container, result)) {
             containers.add(container);

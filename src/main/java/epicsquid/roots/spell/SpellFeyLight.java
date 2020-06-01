@@ -46,7 +46,7 @@ public class SpellFeyLight extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, int amplifier) {
+  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     World world = player.world;
     RayTraceResult result = this.rayTrace(player, player.isSneaking() ? 1 : 10);
     if (result != null && (!player.isSneaking() && result.typeOfHit == RayTraceResult.Type.BLOCK)) {

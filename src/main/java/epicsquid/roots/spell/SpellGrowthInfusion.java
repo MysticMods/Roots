@@ -47,7 +47,7 @@ public class SpellGrowthInfusion extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, int amplifier) {
+  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0), player.getLookVec().scale(8.0f).add(player.getPositionVector().add(0, player.getEyeHeight(), 0)));
     if (result != null) {
       if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
@@ -55,7 +55,7 @@ public class SpellGrowthInfusion extends SpellBase {
         IBlockState state = player.world.getBlockState(pos);
         if (Growth.canGrow(player.world, pos, state)) {
           if (!player.world.isRemote) {
-            for (int i = 0; i < tickCount; i++) {
+            for (int i = 0; i < tickCount + tickCount * amplifier; i++) {
               state.getBlock().randomTick(player.world, pos, state, new Random());
             }
             PacketHandler.sendToAllTracking(new MessageLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);

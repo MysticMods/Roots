@@ -53,7 +53,7 @@ public class SpellHarvest extends SpellBase {
   private static List<Block> skipBlocks = Arrays.asList(Blocks.BEDROCK, Blocks.GRASS, Blocks.DIRT, Blocks.STONE, Blocks.TALLGRASS, Blocks.WATER, Blocks.LAVA, Blocks.DOUBLE_PLANT, Blocks.MELON_STEM, Blocks.PUMPKIN_STEM);
 
   @Override
-  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, int amplifier) {
+  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     Harvest.prepare();
     List<BlockPos> affectedPositions = new ArrayList<>();
     List<BlockPos> pumpkinsAndMelons = new ArrayList<>();
