@@ -5,7 +5,7 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.entity.spell.EntitySpellBase;
 import epicsquid.roots.modifiers.BaseModifiers;
-import epicsquid.roots.modifiers.modifier.ModifierCores;
+import epicsquid.roots.modifiers.instance.ModifierInstance;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
@@ -28,6 +28,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -208,20 +209,64 @@ public abstract class SpellBase extends RegistryItem {
     return ListUtil.matchesIngredients(ingredients, this.getIngredients());
   }
 
-  public boolean cast (EntityPlayer caster, StaffSpellInfo info, int ticks) {
-    ModifierInstanceList modifiers = info.getModifiers();
-    int amplifier = 0;
-    if (modifiers.get(BaseModifiers.EMPOWER) != null) {
-      amplifier++;
-    }
-    if (modifiers.get(BaseModifiers.GREATER_EMPOWER) != null) {
-      amplifier += 2;
+  public enum CastResult {
+    FAIL,
+    SUCCESS,
+    SUCCESS_SPEEDY,
+    SUCCESS_GREATER_SPEEDY;
+
+    public boolean isSuccess () {
+      return this != FAIL;
     }
 
-    return cast(caster, info.getModifiers(), ticks, amplifier);
+    public long modifyCooldown(long cooldown) {
+      switch (this) {
+        default:
+        case SUCCESS:
+          return 0;
+        case SUCCESS_SPEEDY:
+          return Math.round(cooldown * 0.1);
+        case SUCCESS_GREATER_SPEEDY:
+          return Math.round(cooldown * 0.3);
+      }
+    }
   }
 
-  protected abstract boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, int amplifier);
+  public CastResult cast (EntityPlayer caster, StaffSpellInfo info, int ticks) {
+    ModifierInstanceList modifiers = info.getModifiers();
+    double amplifier = 0;
+    ModifierInstance mod = modifiers.get(BaseModifiers.EMPOWER);
+    if (mod != null && mod.isApplied()) {
+      amplifier = 0.1;
+    }
+    mod = modifiers.get(BaseModifiers.GREATER_EMPOWER);
+    if (mod != null && mod.isApplied()) {
+      amplifier = 0.3;
+    }
+    double speedy = 0;
+    mod = modifiers.get(BaseModifiers.SPEEDY);
+    if (mod != null && mod.isApplied()) {
+      speedy = 0.1;
+    }
+    mod = modifiers.get(BaseModifiers.GREATER_SPEEDY);
+    if (mod != null && mod.isApplied()) {
+      speedy = 0.3;
+    }
+
+    if (cast(caster, info.getModifiers(), ticks, amplifier, speedy)) {
+      if (speedy == 0d) {
+        return CastResult.SUCCESS;
+      } else if (speedy == 0.1d) {
+        return CastResult.SUCCESS_SPEEDY;
+      } else {
+        return CastResult.SUCCESS_GREATER_SPEEDY;
+      }
+    } else {
+      return CastResult.FAIL;
+    }
+  }
+
+  protected abstract boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy);
 
   public float getRed1() {
     return red1;
@@ -324,8 +369,13 @@ public abstract class SpellBase extends RegistryItem {
   }
 
   @Nullable
-  protected EntitySpellBase spawnEntity(World world, BlockPos pos, Class<? extends EntitySpellBase> entity, @Nullable EntityPlayer player) {
-    List<EntitySpellBase> pastRituals = world.getEntitiesWithinAABB(entity, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 100, pos.getZ() + 1), o -> o != null && o.getClass().equals(entity));
+  protected EntitySpellBase spawnEntity(World world, BlockPos pos, Class<? extends EntitySpellBase> entity, @Nullable EntityPlayer player, double amplifier, double speedy) {
+    return spawnEntity(world, new Vec3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5), entity, player, amplifier, speedy);
+  }
+
+  @Nullable
+  protected EntitySpellBase spawnEntity(World world, Vec3d pos, Class<? extends EntitySpellBase> entity, @Nullable EntityPlayer player, double amplifier, double speedy) {
+    List<EntitySpellBase> pastRituals = world.getEntitiesWithinAABB(entity, new AxisAlignedBB(pos.x, pos.y, pos.z - 100, pos.x + 1, pos.y + 100, pos.z + 1), o -> o != null && o.getClass().equals(entity));
     if (pastRituals.isEmpty() && !world.isRemote) {
       EntitySpellBase spell = null;
       try {
@@ -337,10 +387,12 @@ public abstract class SpellBase extends RegistryItem {
       if (spell == null) {
         return null;
       }
-      spell.setPosition(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+      spell.setPosition(pos.x, pos.y, pos.z);
       if (player != null) {
         spell.setPlayer(player.getUniqueID());
       }
+      spell.setAmplifier(amplifier);
+      spell.setSpeedy(speedy);
       world.spawnEntity(spell);
       return spell;
     }
