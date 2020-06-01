@@ -72,11 +72,11 @@ public class ItemStaff extends ItemBase {
           if (spell != null && spell.getCastType() != SpellBase.EnumCastType.CONTINUOUS) {
             if (spell.getCastType() == SpellBase.EnumCastType.INSTANTANEOUS) {
               if (spell.costsMet(player)) {
-                SpellBase.CastResult result = spell.cast(player, info, 0);
-                if (result.isSuccess()) {
+                boolean result = spell.cast(player, info, 0);
+                if (result) {
                   if (!player.capabilities.isCreativeMode && !world.isRemote) {
                     spell.enactCosts(player);
-                    capability.setCooldown(result.modifyCooldown(info.cooldownTotal()) + player.world.getTotalWorldTime());
+                    capability.setCooldown(player.world.getTotalWorldTime());
                   }
                 }
               }
@@ -101,8 +101,8 @@ public class ItemStaff extends ItemBase {
       if (spell != null) {
         if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
           if (spell.costsMet((EntityPlayer) player)) {
-            SpellBase.CastResult result = spell.cast((EntityPlayer) player, info, count);
-            if (result.isSuccess() && !player.world.isRemote) {
+            boolean result = spell.cast((EntityPlayer) player, info, count);
+            if (result && !player.world.isRemote) {
               spell.enactTickCosts((EntityPlayer) player);
             }
           }

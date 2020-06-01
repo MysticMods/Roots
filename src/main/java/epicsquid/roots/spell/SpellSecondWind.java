@@ -37,7 +37,7 @@ public class SpellSecondWind extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, int amplifier) {
     player.setAir(300);
     if (player.world.isRemote) {
       player.playSound(SoundEvents.ENTITY_BOAT_PADDLE_WATER, 1, 1);

@@ -46,9 +46,9 @@ public class SpellSenseDanger extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
-    caster.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, (int) (nvDuration + nvDuration * amplifier), 0, false, false));
-    caster.addPotionEffect(new PotionEffect(ModPotions.danger_sense, (int) (glowDuration + glowDuration * amplifier), 0, false, false));
+  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, int amplifier) {
+    caster.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, nvDuration, 0, false, false));
+    caster.addPotionEffect(new PotionEffect(ModPotions.danger_sense, glowDuration, 0, false, false));
     return true;
   }
 

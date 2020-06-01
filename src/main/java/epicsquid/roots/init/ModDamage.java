@@ -42,16 +42,6 @@ public class ModDamage {
     return source;
   }
 
-  public static DamageSource fireDamageFrom (@Nullable EntityPlayer player) {
-    DamageSource source;
-    if (player == null) {
-      source = DamageSource.IN_FIRE;
-    } else {
-      source = new EntityDamageSource("fire_damage", player).setDamageBypassesArmor().setMagicDamage().setFireDamage();
-    }
-    return source;
-  }
-
   public static DamageSource waterDamageSource(@Nullable EntityPlayer player) {
     if (player == null) {
       return WATER_DAMAGE;

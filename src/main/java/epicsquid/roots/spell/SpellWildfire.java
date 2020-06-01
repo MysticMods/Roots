@@ -18,17 +18,13 @@ public class SpellWildfire extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(24);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("infernal_bulb", 0.125));
-  public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(4.5f);
-  public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 4);
+
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_wild_fire");
   public static SpellWildfire instance = new SpellWildfire(spellName);
 
-  public float damage;
-  public int fire_duration;
-
   public SpellWildfire(ResourceLocation name) {
     super(name, TextFormatting.GOLD, 255f / 255f, 128f / 255f, 32f / 255f, 255f / 255f, 64f / 255f, 32f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_FIRE_DURATION);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1);
   }
 
   @Override
@@ -43,15 +39,12 @@ public class SpellWildfire extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, int amplifier) {
     if (!player.world.isRemote) {
-/*      EntityFireJet fireJet = new EntityFireJet(player.world);
+      EntityFireJet fireJet = new EntityFireJet(player.world);
       fireJet.setPlayer(player.getUniqueID());
       fireJet.setPosition(player.posX, player.posY, player.posZ);
-      fireJet.setAmplifier(amplifier);
-      fireJet.setSpeedy(speedy);*/
-      spawnEntity(player.world, player.getPosition(), EntityFireJet.class, player, amplifier, speedy);
-/*      player.world.spawnEntity(fireJet);*/
+      player.world.spawnEntity(fireJet);
     }
     return true;
   }
@@ -60,7 +53,5 @@ public class SpellWildfire extends SpellBase {
   public void doFinalise() {
     this.castType = properties.get(PROP_CAST_TYPE);
     this.cooldown = properties.get(PROP_COOLDOWN);
-    this.damage = properties.get(PROP_DAMAGE);
-    this.fire_duration = properties.get(PROP_FIRE_DURATION);
   }
 }

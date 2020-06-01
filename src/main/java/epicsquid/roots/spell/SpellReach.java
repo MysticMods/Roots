@@ -43,8 +43,8 @@ public class SpellReach extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
-    caster.addPotionEffect(new PotionEffect(ModPotions.reach, (int) (duration + duration * amplifier), 0, false, false));
+  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, int amplifier) {
+    caster.addPotionEffect(new PotionEffect(ModPotions.reach, duration, 0, false, false));
     return true;
   }
 

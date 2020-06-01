@@ -57,7 +57,7 @@ public class SpellAutumnsFall extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, int amplifier) {
     List<BlockPos> blocks = Util.getBlocksWithinRadius(caster.world, caster.getPosition(), radius, radius_y, radius, blockPos -> isAffectedByFallSpell(caster.world, blockPos));
 
     if (blocks.isEmpty()) {
@@ -66,7 +66,7 @@ public class SpellAutumnsFall extends SpellBase {
 
     int affected = 0;
 
-    while (affected < (max_affected + max_affected * amplifier) && !blocks.isEmpty()) {
+    while (affected < max_affected && !blocks.isEmpty()) {
 
       BlockPos pos = blocks.remove(Util.rand.nextInt(blocks.size()));
       // TODO: Check itemblock for block leaves, build and save a map per session

@@ -46,9 +46,9 @@ public class SpellTimeStop extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, int amplifier) {
     if (!player.world.isRemote) {
-      EntityTimeStop timeStop = new EntityTimeStop(player.world, (int) (duration + duration * amplifier));
+      EntityTimeStop timeStop = new EntityTimeStop(player.world, duration);
       timeStop.setPlayer(player.getUniqueID());
       timeStop.setPosition(player.posX, player.posY, player.posZ);
       player.world.spawnEntity(timeStop);
