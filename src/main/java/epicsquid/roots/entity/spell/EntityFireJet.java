@@ -21,12 +21,31 @@ import java.util.UUID;
 public class EntityFireJet extends Entity {
   private static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityFireJet.class, DataSerializers.VARINT);
   private UUID playerId = null;
+  private double amplifier, speedy;
+  private SpellWildfire instance;
 
   public EntityFireJet(World worldIn) {
     super(worldIn);
     this.setInvisible(true);
     this.setSize(1, 1);
     getDataManager().register(lifetime, 12);
+    this.instance = SpellWildfire.instance;
+  }
+
+  public double getAmplifier() {
+    return amplifier;
+  }
+
+  public void setAmplifier(double amplifier) {
+    this.amplifier = amplifier;
+  }
+
+  public double getSpeedy() {
+    return speedy;
+  }
+
+  public void setSpeedy(double speedy) {
+    this.speedy = speedy;
   }
 
   public void setPlayer(UUID id) {
@@ -54,10 +73,7 @@ public class EntityFireJet extends Entity {
       for (int i = 0; i < 8; i++) {
         float offX = 0.5f * (float) Math.sin(Math.toRadians(rotationYaw));
         float offZ = 0.5f * (float) Math.cos(Math.toRadians(rotationYaw));
-        ParticleUtil.spawnParticleFiery(world, (float) posX + (float) motionX * 2.5f + offX, (float) posY + 1.62F + (float) motionY * 2.5f,
-            (float) posZ + (float) motionZ * 2.5f + offZ, (float) motionX + 0.125f * (rand.nextFloat() - 0.5f),
-            (float) motionY + 0.125f * (rand.nextFloat() - 0.5f), (float) motionZ + 0.125f * (rand.nextFloat() - 0.5f), 255.0f, 96.0f, 32.0f, 0.5f, 7.5f, 24);
-
+        ParticleUtil.spawnParticleFiery(world, (float) posX + (float) motionX * 2.5f + offX, (float) posY + 1.62F + (float) motionY * 2.5f, (float) posZ + (float) motionZ * 2.5f + offZ, (float) motionX + 0.125f * (rand.nextFloat() - 0.5f), (float) motionY + 0.125f * (rand.nextFloat() - 0.5f), (float) motionZ + 0.125f * (rand.nextFloat() - 0.5f), 255.0f, 96.0f, 32.0f, 0.5f, 7.5f, 24);
       }
     }
     if (this.playerId != null) {
@@ -77,10 +93,9 @@ public class EntityFireJet extends Entity {
           List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class,
               new AxisAlignedBB(posX + vx * i - 1.5, posY + vy * i - 1.5, posZ + vz * i - 1.5, posX + vx * i + 1.5, posY + vy * i + 1.5, posZ + vz * i + 1.5));
           for (EntityLivingBase entity : entities) {
-            if (!(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
-                && entity.getUniqueID().compareTo(player.getUniqueID()) != 0) {
-              entity.setFire(4);
-              entity.attackEntityFrom((DamageSource.IN_FIRE).causeMobDamage(player), 4.5f);
+            if (!(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled()) && entity != player) {
+              entity.setFire((int) (instance.fire_duration + instance.fire_duration * amplifier));
+              entity.attackEntityFrom(ModDamage.fireDamageFrom(player), (float) (instance.damage + instance.damage * amplifier));
               entity.setLastAttackedEntity(player);
               entity.setRevengeTarget(player);
             }

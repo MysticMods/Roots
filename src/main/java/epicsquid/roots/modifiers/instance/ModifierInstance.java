@@ -50,6 +50,14 @@ public class ModifierInstance implements INBTSerializable<NBTTagCompound>, IModi
     return modifier.getTranslationKey();
   }
 
+  public String getModifierEnabledKey () {
+    if (isEnabled()) {
+      return "roots.modifier.is_enabled";
+    } else {
+      return "roots.modifier.is_disabled";
+    }
+  }
+
   @Override
   public ItemStack getStack() {
     return modifier.getStack();
