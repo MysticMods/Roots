@@ -53,7 +53,7 @@ public class EntityFireJet extends EntitySpellBase<SpellWildfire> {
         ParticleUtil.spawnParticleFiery(world, (float) posX + (float) motionX * 2.5f + offX, (float) posY + 1.62F + (float) motionY * 2.5f, (float) posZ + (float) motionZ * 2.5f + offZ, (float) motionX + 0.125f * (rand.nextFloat() - 0.5f), (float) motionY + 0.125f * (rand.nextFloat() - 0.5f), (float) motionZ + 0.125f * (rand.nextFloat() - 0.5f), 255.0f, 96.0f, 32.0f, 0.5f, 7.5f, 24);
       }
     }
-    if (this.player != null && !world.isRemote) {
+    if (this.player != null && !world.isRemote) { // TODO: Still not sure how this works
       EntityPlayer player = world.getPlayerEntityByUUID(this.player);
       if (player != null) {
         this.posX = player.posX;
