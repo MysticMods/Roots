@@ -1,6 +1,8 @@
 package epicsquid.roots.entity.spell;
 
+import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.spell.SpellWildfire;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

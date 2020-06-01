@@ -4,7 +4,13 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.init.ModDamage;
+import epicsquid.roots.modifiers.ModifierRegistry;
+import epicsquid.roots.modifiers.ModifierType;
+import epicsquid.roots.modifiers.instance.ModifierInstance;
 import epicsquid.roots.modifiers.instance.ModifierInstanceList;
+import epicsquid.roots.modifiers.modifier.Modifier;
+import epicsquid.roots.modifiers.modifier.ModifierCores;
 import epicsquid.roots.network.fx.MessageAcidCloudFX;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.EntityLivingBase;
@@ -32,6 +38,8 @@ public class SpellAcidCloud extends SpellBase {
   public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 5).setDescription("duration in seconds of the fire effect applied on the enemies");
   public static Property<Integer> PROP_POISON_AMPLIFICATION = new Property<>("poison_amplification", 0).setDescription("the level of the poison effect applied on the enemies (0 is the first level)");
 
+  public static Modifier FIRE_CLOUD = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "fire_cloud"), ModifierType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 0.05));
+
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_acid_cloud");
   public static SpellAcidCloud instance = new SpellAcidCloud(spellName);
 
@@ -43,6 +51,7 @@ public class SpellAcidCloud extends SpellBase {
   public SpellAcidCloud(ResourceLocation name) {
     super(name, TextFormatting.DARK_GREEN, 80f / 255f, 160f / 255f, 40f / 255f, 64f / 255f, 96f / 255f, 32f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_POISON_DURATION, PROP_FIRE_DURATION, PROP_POISON_AMPLIFICATION);
+    acceptsModifiers(FIRE_CLOUD);
   }
 
   @Override
@@ -54,27 +63,35 @@ public class SpellAcidCloud extends SpellBase {
         new OreIngredient("blockCactus"),
         new ItemStack(Items.ROTTEN_FLESH)
     );
-    //acceptsModifiers(ModuleRegistry.module_fire);
   }
 
   @Override
   public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     if (!player.world.isRemote) {
+      ModifierInstance fire = modifiers.get(FIRE_CLOUD);
       List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class,
           new AxisAlignedBB(player.posX - 4.0, player.posY - 1.0, player.posZ - 4.0, player.posX + 4.0, player.posY + 3.0, player.posZ + 4.0));
       for (EntityLivingBase e : entities) {
         if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
             && !e.getUniqueID().equals(player.getUniqueID())) {
           if (e.hurtTime <= 0 && !e.isDead) {
-            e.attackEntityFrom(DamageSource.causeMobDamage(player), (float) (damage + Math.floor(damage * amplifier)));
-            if (SpellConfig.spellFeaturesCategory.acidCloudPoisoningEffect)
+            if (fire != null && fire.isApplied()) {
+              e.attackEntityFrom(ModDamage.fireDamageFrom(player), (float) (damage + Math.floor(damage * amplifier)));
+            } else {
+              e.attackEntityFrom(DamageSource.causeMobDamage(player), (float) (damage + Math.floor(damage * amplifier)));
+            }
+            if (SpellConfig.spellFeaturesCategory.acidCloudPoisoningEffect) {
               e.addPotionEffect(new PotionEffect(MobEffects.POISON, (int) (poisonDuration + Math.floor(poisonDuration * amplifier)), poisonAmplification));
+            }
+            if (fire != null && fire.isApplied()) {
+              e.setFire(fireDuration);
+            }
             e.setRevengeTarget(player);
             e.setLastAttackedEntity(player);
           }
         }
       }
-      PacketHandler.sendToAllTracking(new MessageAcidCloudFX(player.posX, player.posY + player.getEyeHeight(), player.posZ), player);
+      PacketHandler.sendToAllTracking(new MessageAcidCloudFX(player.posX, player.posY + player.getEyeHeight(), player.posZ, fire != null && fire.isApplied()), player);
     }
     return true;
   }
