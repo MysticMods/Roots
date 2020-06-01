@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -19,6 +20,7 @@ public class EntityBoost extends Entity {
   private double origX;
   private double origY;
   private double origZ;
+  private float amplifier;
 
   public EntityBoost(World worldIn) {
     super(worldIn);
@@ -35,6 +37,10 @@ public class EntityBoost extends Entity {
       origY = result[1].motionY;
       origZ = result[1].motionZ;
     }
+  }
+
+  public void setAmplifier (float value) {
+    this.amplifier = value;
   }
 
   @Nullable
@@ -102,12 +108,14 @@ public class EntityBoost extends Entity {
           this.posX = player.posX;
           this.posY = player.posY + 1.0;
           this.posZ = player.posZ;
-          target.motionX = player.getLookVec().x * 0.8;
-          target.motionY = player.getLookVec().y * 0.8;
-          target.motionZ = player.getLookVec().z * 0.8;
-          this.motionX = player.getLookVec().x;
-          this.motionY = player.getLookVec().y;
-          this.motionZ = player.getLookVec().z;
+          double amp = 0.8 + (0.8 * amplifier);
+          Vec3d vec = player.getLookVec();
+          target.motionX = vec.x * amp;
+          target.motionY = vec.y * amp;
+          target.motionZ = vec.z * amp;
+          this.motionX = vec.x + vec.x * amplifier;
+          this.motionY = vec.y + vec.y * amplifier;
+          this.motionZ = vec.z + vec.z * amplifier;
           target.fallDistance = 0;
           target.velocityChanged = true;
         }

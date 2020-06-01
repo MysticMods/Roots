@@ -56,7 +56,7 @@ public class SpellDisarm extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, int amplifier) {
+  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     BlockPos playerPos = caster.getPosition();
     World world = caster.world;
 
@@ -77,7 +77,7 @@ public class SpellDisarm extends SpellBase {
         disarmed = true;
         if (!world.isRemote) {
           entity.setItemStackToSlot(slot, ItemStack.EMPTY);
-          if (drop_chance == 1 || drop_chance > 1 && Util.rand.nextInt(drop_chance) == 0) {
+          if (drop_chance == 1 || drop_chance > 1 && Util.rand.nextInt((int) (drop_chance - drop_chance * amplifier)) == 0) {
             ItemUtil.spawnItem(world, entity.getPosition(), stack);
           }
         }

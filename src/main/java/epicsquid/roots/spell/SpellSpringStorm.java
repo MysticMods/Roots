@@ -50,7 +50,7 @@ public class SpellSpringStorm extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, int amplifier) {
+  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     World world = caster.world;
     BlockPos pos = caster.getPosition();
 
@@ -59,7 +59,7 @@ public class SpellSpringStorm extends SpellBase {
       return false;
     }
 
-    return spawnEntity(world, pos, EntitySpellSpringStorm.class, caster) != null;
+    return spawnEntity(world, pos, EntitySpellSpringStorm.class, caster, amplifier, speedy) != null;
   }
 
   @Override
