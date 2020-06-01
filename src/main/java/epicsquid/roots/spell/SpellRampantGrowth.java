@@ -1,6 +1,7 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.mechanics.Growth;
@@ -53,15 +54,15 @@ public class SpellRampantGrowth extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, int amplifier) {
+  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     List<BlockPos> positions = Growth.collect(player.world, player.getPosition(), radius_x, radius_y, radius_z);
     if (positions.isEmpty()) return false;
     if (!player.world.isRemote) {
-      for (int i = 0; i < count + player.world.rand.nextInt(additionalCount); i++) {
+      for (int i = 0; i < (count + count * amplifier) + player.world.rand.nextInt((int) (additionalCount - additionalCount * amplifier)); i++) {
         BlockPos pos = positions.get(player.world.rand.nextInt(positions.size()));
         IBlockState state = player.world.getBlockState(pos);
-        for (int j = 0; j < this.ticks; j++) {
-          state.getBlock().randomTick(player.world, pos, state, new Random());
+        for (int j = 0; j < ticks; j++) {
+          state.getBlock().randomTick(player.world, pos, state, Util.rand);
         }
         if (player.world.rand.nextInt(3) == 0) {
           PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);

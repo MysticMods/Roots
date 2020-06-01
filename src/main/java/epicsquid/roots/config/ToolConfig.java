@@ -6,11 +6,11 @@ import net.minecraftforge.common.config.Config;
 @Config.LangKey("config.roots.category.tools")
 @Config(modid = Roots.MODID, name = "roots/tools", category = "tools")
 public class ToolConfig {
-  @Config.Comment(("Terrastone Pickaxe speed modifier for soft materials (set to 1 to disable)"))
+  @Config.Comment(("Terrastone Pickaxe speed modifyCooldown for soft materials (set to 1 to disable)"))
   @Config.RangeDouble(min=1)
   public static double PickaxeSoftModifier = 2.10;
 
-  @Config.Comment(("Terrastone Pickaxe speed modifier for hard materials (set to 1 to disable)"))
+  @Config.Comment(("Terrastone Pickaxe speed modifyCooldown for hard materials (set to 1 to disable)"))
   @Config.RangeDouble(min=1)
   public static double PickaxeHardModifier = 2.80;
 

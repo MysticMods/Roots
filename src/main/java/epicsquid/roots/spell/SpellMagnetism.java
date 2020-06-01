@@ -43,11 +43,11 @@ public class SpellMagnetism extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, int amplifier) {
+  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     // TODO: Check to see what the potential standard is for "unmagnetising" things
     int count = 0;
-    count += Magnetize.pull(EntityItem.class, player.world, player.getPosition(), radius_x, radius_y, radius_z);
-    count += Magnetize.pull(EntityXPOrb.class, player.world, player.getPosition(), radius_x, radius_y, radius_z);
+    count += Magnetize.pull(EntityItem.class, player.world, player.getPosition(), (int) (radius_x + radius_x * amplifier), (int) (radius_y + radius_y * amplifier), (int) (radius_z + radius_z * amplifier));
+    count += Magnetize.pull(EntityXPOrb.class, player.world, player.getPosition(), (int) (radius_x + radius_x * amplifier), (int) (radius_y + radius_y * amplifier), (int) (radius_z + radius_z * amplifier));
 
     return count != 0;
   }

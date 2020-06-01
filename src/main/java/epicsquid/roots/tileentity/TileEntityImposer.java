@@ -170,7 +170,7 @@ public class TileEntityImposer extends TileBase implements ITickable {
       }
 
       if (!ItemUtil.equalWithoutSize(modifier.getStack(), stack)) {
-        Roots.logger.error("Attempted to apply modifier core " + core + " to spell in slot " + slot + ", but it wants " + modifier.getStack() + " and we were passed " + stack + "!");
+        Roots.logger.error("Attempted to apply modifyCooldown core " + core + " to spell in slot " + slot + ", but it wants " + modifier.getStack() + " and we were passed " + stack + "!");
         return;
       }
 

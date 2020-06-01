@@ -45,7 +45,7 @@ public class SpellDandelionWinds extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, int amplifier) {
+  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     PacketHandler.sendToAllTracking(new MessageDandelionCastFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ), player);
     List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class,
         new AxisAlignedBB(player.posX + player.getLookVec().x * 6.0 - 6.0, player.posY + player.getLookVec().y * 6.0 - 6.0,
@@ -55,7 +55,7 @@ public class SpellDandelionWinds extends SpellBase {
       for (EntityLivingBase e : entities) {
         if (e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
           e.motionX += (player.getLookVec().x);
-          e.motionY += (distance);
+          e.motionY += (distance + distance * distance);
           e.motionZ += (player.getLookVec().z);
           e.velocityChanged = true;
         }
