@@ -3,6 +3,8 @@ package epicsquid.roots.item;
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.EventManager;
+import epicsquid.roots.modifiers.instance.ModifierInstance;
+import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.DustSpellStorage;
@@ -147,21 +149,21 @@ public class ItemStaff extends ItemBase {
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
-    tooltip.add(I18n.format("roots.tooltip.staff.selected") + (capability.getSelectedSlot() + 1));
+    tooltip.add(I18n.format("roots.tooltip.staff.selected") + (capability.getSelectedSlot()));
     StaffSpellInfo info = capability.getSelectedInfo();
     if (info != null) {
-      SpellBase spell = capability.getSelectedInfo().getSpell();
+      SpellBase spell = info.getSpell();
       if (spell != null) {
         tooltip.add("");
         spell.addToolTip(tooltip);
-/*      List<SpellModule> spellModules = capability.getSelectedModules();
-      if (!spellModules.isEmpty()) {
-        tooltip.add(I18n.format("roots.spell.module.description"));
-        String prefix = "roots.spell." + spell.getName();
-        for (SpellModule module : spellModules) {
-          tooltip.add(module.getFormat() + I18n.format("roots.spell.module." + module.getName() + ".name") + ": " + I18n.format(prefix + "." + module.getName() + ".description"));
+        ModifierInstanceList list = info.getModifiers();
+        for (ModifierInstance m : list) {
+          if (!m.isApplied()) {
+            continue;
+          }
+
+          tooltip.add(I18n.format(m.getTranslationKey()) + ": " + ((m.isEnabled()) ? TextFormatting.BOLD + "" : "") + I18n.format(m.getModifierEnabledKey()));
         }
-      }*/
       }
     } else {
       tooltip.add("");
@@ -174,9 +176,9 @@ public class ItemStaff extends ItemBase {
         if (info != null) {
           SpellBase other = info.getSpell();
           if (other == null) {
-            tooltip.add("" + (i + 1) + ": No spell.");
+            tooltip.add("" + i + ": No spell.");
           } else {
-            tooltip.add("" + (i + 1) + ": " + other.getTextColor() + TextFormatting.BOLD + I18n.format("roots.spell." + other.getName() + ".name"));
+            tooltip.add("" + i + ": " + other.getTextColor() + TextFormatting.BOLD + I18n.format("roots.spell." + other.getName() + ".name"));
           }
         }
       }
