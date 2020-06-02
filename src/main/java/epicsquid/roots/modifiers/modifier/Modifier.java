@@ -38,6 +38,11 @@ public class Modifier extends RegistryItem implements IModifier {
   }
 
   @Override
+  public String getFormatting () {
+    return core.getFormatting();
+  }
+
+  @Override
   public ItemStack getStack() {
     return core.getStack();
   }

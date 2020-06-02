@@ -73,11 +73,11 @@ public class ItemStaff extends ItemBase {
           SpellBase spell = info.getSpell();
           if (spell != null && spell.getCastType() != SpellBase.EnumCastType.CONTINUOUS) {
             if (spell.getCastType() == SpellBase.EnumCastType.INSTANTANEOUS) {
-              if (spell.costsMet(player)) {
+              if (spell.costsMet(player, info.getModifiers())) {
                 SpellBase.CastResult result = spell.cast(player, info, 0);
                 if (result.isSuccess()) {
                   if (!player.capabilities.isCreativeMode && !world.isRemote) {
-                    spell.enactCosts(player);
+                    spell.enactCosts(player, info.getModifiers());
                     capability.setCooldown(result.modifyCooldown(info.cooldownTotal()) + player.world.getTotalWorldTime());
                   }
                 }
@@ -102,10 +102,10 @@ public class ItemStaff extends ItemBase {
       SpellBase spell = info == null ? null : info.getSpell();
       if (spell != null) {
         if (spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
-          if (spell.costsMet((EntityPlayer) player)) {
+          if (spell.costsMet((EntityPlayer) player, info.getModifiers())) {
             SpellBase.CastResult result = spell.cast((EntityPlayer) player, info, count);
             if (result.isSuccess() && !player.world.isRemote) {
-              spell.enactTickCosts((EntityPlayer) player);
+              spell.enactTickCosts((EntityPlayer) player, info.getModifiers());
             }
           }
         }
@@ -162,7 +162,7 @@ public class ItemStaff extends ItemBase {
             continue;
           }
 
-          tooltip.add(I18n.format(m.getTranslationKey()) + ": " + ((m.isEnabled()) ? TextFormatting.BOLD + "" : "") + I18n.format(m.getModifierEnabledKey()));
+          tooltip.add(m.describe());
         }
       }
     } else {

@@ -134,9 +134,9 @@ public abstract class SpellBase extends RegistryItem {
     return this;
   }
 
-  public boolean costsMet(EntityPlayer player) {
+  public boolean costsMet(EntityPlayer player, ModifierInstanceList modifiers) {
     boolean matches = true;
-    for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
+    for (Map.Entry<Herb, Double> entry : modifiers.apply(this.costs).entrySet()) {
       Herb herb = entry.getKey();
       double d = entry.getValue();
       if (matches) {
@@ -163,16 +163,16 @@ public abstract class SpellBase extends RegistryItem {
     return matches && costs.size() > 0 || player.capabilities.isCreativeMode;
   }
 
-  public void enactCosts(EntityPlayer player) {
-    for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
+  public void enactCosts(EntityPlayer player, ModifierInstanceList modifiers) {
+    for (Map.Entry<Herb, Double> entry : modifiers.apply(this.costs).entrySet()) {
       Herb herb = entry.getKey();
       double d = entry.getValue();
       ServerHerbUtil.removePowder(player, herb, d);
     }
   }
 
-  public void enactTickCosts(EntityPlayer player) {
-    for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
+  public void enactTickCosts(EntityPlayer player, ModifierInstanceList modifiers) {
+    for (Map.Entry<Herb, Double> entry : modifiers.apply(this.costs).entrySet()) {
       Herb herb = entry.getKey();
       double d = entry.getValue();
       ServerHerbUtil.removePowder(player, herb, d / 20.0);

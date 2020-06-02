@@ -2,12 +2,14 @@ package epicsquid.roots.modifiers.instance;
 
 import com.google.common.collect.Iterators;
 import epicsquid.roots.Roots;
+import epicsquid.roots.api.Herb;
 import epicsquid.roots.modifiers.IModifierList;
 import epicsquid.roots.modifiers.ModifierType;
 import epicsquid.roots.modifiers.modifier.IModifierCore;
 import epicsquid.roots.modifiers.modifier.Modifier;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.AbstractSpellInfo;
+import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants;
@@ -120,6 +122,13 @@ public class ModifierInstanceList implements IModifierList<ModifierInstance, NBT
     }
 
     return internal.get(((ModifierInstance) o).getType()).remove(o);
+  }
+
+  public Object2DoubleOpenHashMap<Herb> apply (Object2DoubleOpenHashMap<Herb> costs) {
+    for (ModifierInstance m : this) {
+      costs = m.apply(costs);
+    }
+    return costs;
   }
 
   @Override

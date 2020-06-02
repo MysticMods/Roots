@@ -9,50 +9,55 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
 
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public enum ModifierCores implements IModifierCore {
-  GUNPOWDER(Items.GUNPOWDER),
-  GLOWSTONE(Items.GLOWSTONE_DUST),
-  REDSTONE(Items.REDSTONE),
-  LAPIS(new ItemStack(Items.DYE, 1, EnumDyeColor.BLUE.getDyeDamage())),
-  RUNIC_DUST(() -> ModItems.runic_dust),
-  BLAZE_POWDER(Items.BLAZE_POWDER),
+  GUNPOWDER(Items.GUNPOWDER, TextFormatting.GRAY + ""),
+  GLOWSTONE(Items.GLOWSTONE_DUST, TextFormatting.YELLOW + ""),
+  REDSTONE(Items.REDSTONE, TextFormatting.RED + ""),
+  LAPIS(new ItemStack(Items.DYE, 1, EnumDyeColor.BLUE.getDyeDamage()), TextFormatting.DARK_BLUE + ""),
+  RUNIC_DUST(() -> ModItems.runic_dust, TextFormatting.GRAY + "" + TextFormatting.BOLD),
+  BLAZE_POWDER(Items.BLAZE_POWDER, TextFormatting.DARK_RED + "" + TextFormatting.BOLD),
 
-  PERESKIA(new ResourceLocation(Roots.MODID, "pereskia")),
-  WILDEWHEET(new ResourceLocation(Roots.MODID, "wildewheet")),
-  WILDROOT(new ResourceLocation(Roots.MODID, "wildroot")),
-  MOONGLOW_LEAF(new ResourceLocation(Roots.MODID, "moonglow_leaf")),
-  SPIRIT_HERB(new ResourceLocation(Roots.MODID, "spirit_herb")),
-  TERRA_MOSS(new ResourceLocation(Roots.MODID, "terra_moss")),
-  BAFFLE_CAP(new ResourceLocation(Roots.MODID, "baffle_cap")),
-  CLOUD_BERRY(new ResourceLocation(Roots.MODID, "cloud_berry")),
-  INFERNAL_BULB(new ResourceLocation(Roots.MODID, "infernal_bulb")),
-  STALICRIPE(new ResourceLocation(Roots.MODID, "stalicripe")),
-  DEWGONIA(new ResourceLocation(Roots.MODID, "dewgonia"));
+  PERESKIA(new ResourceLocation(Roots.MODID, "pereskia"), TextFormatting.BOLD + "" + TextFormatting.LIGHT_PURPLE),
+  WILDEWHEET(new ResourceLocation(Roots.MODID, "wildewheet"), TextFormatting.GOLD + "" + TextFormatting.BOLD),
+  WILDROOT(new ResourceLocation(Roots.MODID, "wildroot"), TextFormatting.YELLOW + ""),
+  MOONGLOW_LEAF(new ResourceLocation(Roots.MODID, "moonglow_leaf"), TextFormatting.DARK_PURPLE + ""),
+  SPIRIT_HERB(new ResourceLocation(Roots.MODID, "spirit_herb"), TextFormatting.GREEN + "" + TextFormatting.BOLD),
+  TERRA_MOSS(new ResourceLocation(Roots.MODID, "terra_moss"), TextFormatting.DARK_GREEN + "" + TextFormatting.BOLD),
+  BAFFLE_CAP(new ResourceLocation(Roots.MODID, "baffle_cap"), TextFormatting.DARK_PURPLE + "" + TextFormatting.BOLD),
+  CLOUD_BERRY(new ResourceLocation(Roots.MODID, "cloud_berry"), TextFormatting.AQUA + "" + TextFormatting.BOLD),
+  INFERNAL_BULB(new ResourceLocation(Roots.MODID, "infernal_bulb"), TextFormatting.RED + "" + TextFormatting.BOLD),
+  STALICRIPE(new ResourceLocation(Roots.MODID, "stalicripe"), TextFormatting.DARK_RED + "" + TextFormatting.BOLD),
+  DEWGONIA(new ResourceLocation(Roots.MODID, "dewgonia"), TextFormatting.DARK_AQUA + "" + TextFormatting.BOLD);
 
   private final Supplier<ItemStack> stack;
   private final Supplier<Herb> herb;
+  private final String formatting;
 
-  ModifierCores(ResourceLocation herb) {
+  ModifierCores(ResourceLocation herb, String formatting) {
     this.herb = () -> HerbRegistry.getHerb(herb);
     this.stack = () -> ItemStack.EMPTY;
+    this.formatting = formatting;
   }
 
-  ModifierCores(ItemStack item) {
+  ModifierCores(ItemStack item, String formatting) {
     this.stack = () -> item;
     this.herb = null;
+    this.formatting = formatting;
   }
 
-  ModifierCores(Item item) {
-    this(new ItemStack(item));
+  ModifierCores(Item item, String formatting) {
+    this(new ItemStack(item), formatting);
   }
 
-  ModifierCores(Supplier<Item> item) {
+  ModifierCores(Supplier<Item> item, String formatting) {
     this.stack = () -> new ItemStack(item.get());
     this.herb = null;
+    this.formatting = formatting;
   }
 
   @Override
@@ -81,5 +86,10 @@ public enum ModifierCores implements IModifierCore {
   @Override
   public String getTranslationKey() {
     return "roots.modifiers.cores." + name().toLowerCase();
+  }
+
+  @Override
+  public String getFormatting() {
+    return formatting;
   }
 }
