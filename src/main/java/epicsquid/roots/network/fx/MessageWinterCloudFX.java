@@ -2,7 +2,7 @@ package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.SpellIcedTouch;
+import epicsquid.roots.spell.SpellWinterCloud;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
@@ -12,17 +12,17 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class MessageIcedTouchFX implements IMessage {
+public class MessageWinterCloudFX implements IMessage {
 
   private float x;
   private float y;
   private float z;
   private boolean isThaw;
 
-  public MessageIcedTouchFX() {
+  public MessageWinterCloudFX() {
   }
 
-  public MessageIcedTouchFX(float x, float y, float z) {
+  public MessageWinterCloudFX(float x, float y, float z) {
     this.x = x;
     this.y = y;
     this.z = z;
@@ -42,15 +42,15 @@ public class MessageIcedTouchFX implements IMessage {
     byteBuf.writeFloat(z);
   }
 
-  public static class Handler implements IMessageHandler<MessageIcedTouchFX, IMessage> {
+  public static class Handler implements IMessageHandler<MessageWinterCloudFX, IMessage> {
     @Override
     @SideOnly(Side.CLIENT)
-    public IMessage onMessage(MessageIcedTouchFX message, MessageContext context) {
+    public IMessage onMessage(MessageWinterCloudFX message, MessageContext context) {
       World world = Minecraft.getMinecraft().world;
       if (Util.rand.nextBoolean()) {
-        ParticleUtil.spawnParticleSmoke(world, message.x + 0.5F, message.y + 0.9F, message.z + 0.5F, 0, 0.01F, 0, SpellIcedTouch.instance.getRed1(), SpellIcedTouch.instance.getBlue1(), SpellIcedTouch.instance.getGreen1(), 0.30F, 15F, 40, true);
+        ParticleUtil.spawnParticleSmoke(world, message.x + 0.5F, message.y + 0.9F, message.z + 0.5F, 0, 0.01F, 0, SpellWinterCloud.instance.getRed1(), SpellWinterCloud.instance.getBlue1(), SpellWinterCloud.instance.getGreen1(), 0.30F, 15F, 40, true);
       } else {
-        ParticleUtil.spawnParticleSmoke(world, message.x + 0.5F, message.y + 0.9F, message.z + 0.5F, 0, 0.01F, 0, SpellIcedTouch.instance.getRed2(), SpellIcedTouch.instance.getBlue2(), SpellIcedTouch.instance.getGreen2(), 0.30F, 15F, 40, true);
+        ParticleUtil.spawnParticleSmoke(world, message.x + 0.5F, message.y + 0.9F, message.z + 0.5F, 0, 0.01F, 0, SpellWinterCloud.instance.getRed2(), SpellWinterCloud.instance.getBlue2(), SpellWinterCloud.instance.getGreen2(), 0.30F, 15F, 40, true);
       }
       return null;
     }

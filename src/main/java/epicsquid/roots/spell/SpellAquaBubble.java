@@ -29,7 +29,7 @@ public class SpellAquaBubble extends SpellBase {
   public float fire_reduction, lava_reduction;
 
   public SpellAquaBubble(ResourceLocation name) {
-    super(name, TextFormatting.DARK_GREEN, 255f / 255f, 0f / 255f, 0f / 255f, 60f / 255f, 0f / 255f, 60f / 255f);
+    super(name, TextFormatting.AQUA, 255f / 255f, 0f / 255f, 0f / 255f, 60f / 255f, 0f / 255f, 60f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DURATION, PROP_ABSORPTION, PROP_FIRE_REDUCTION, PROP_LAVA_REDUCTION);
   }
 

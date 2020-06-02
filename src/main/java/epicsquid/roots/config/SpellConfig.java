@@ -87,9 +87,9 @@ public class SpellConfig {
     @Config.Name("Disable Fey Light Spell")
     @Config.Comment("Set to true to disable Fey Light Spell")
     public boolean disableFeyLight = false;
-    @Config.Name("Disable Iced Touch Spell")
-    @Config.Comment("Set to true to disable the Iced Touch Spell")
-    public boolean disableIcedTouch = false;
+    @Config.Name("Disable Winter Cloud Spell")
+    @Config.Comment("Set to true to disable the Winter Cloud Spell")
+    public boolean disableWinterCloud = false;
     @Config.Name("Disable Spring Storm Spell")
     @Config.Comment("Set to true to disable the Spring Storm Spell")
     public boolean disableSpringStorm = false;
