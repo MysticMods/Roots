@@ -27,6 +27,8 @@ public class ContainerLibrary extends Container {
 
   private SpellLibraryData data;
   private ItemStack staff;
+  private int staffSlot = -1;
+  private int librarySlot = -1;
 
   public ContainerLibrary(EntityPlayer player, ItemStack staff, SpellLibraryData data) {
     this.data = data;
@@ -43,6 +45,14 @@ public class ContainerLibrary extends Container {
 
     createStaffSlots();
     createLibrarySlots();
+  }
+
+  public int getStaffSlot() {
+    return staffSlot;
+  }
+
+  public int getLibrarySlot() {
+    return librarySlot;
   }
 
   private StaffSpellInfo getInfoFor(int slot) {
@@ -106,10 +116,23 @@ public class ContainerLibrary extends Container {
   @Override
   @Nonnull
   public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
-    if (slotId >= 0) {
-      ItemStack stack = getSlot(slotId).getStack();
-      if (stack.getItem() instanceof ItemQuiver) {
-        return ItemStack.EMPTY;
+    if (slotId != 999) {
+      Slot slot = getSlot(slotId);
+      if (slot instanceof SlotLibraryInfo) {
+        SlotLibraryInfo info = (SlotLibraryInfo) slot;
+        if (staffSlot == -1) {
+          librarySlot = info.getSlot();
+        } else {
+          // Do the swappy-swappy
+        }
+      } else if (slot instanceof SlotSpellInfo) {
+        SlotSpellInfo info = (SlotSpellInfo) slot;
+
+        if (librarySlot == -1) {
+          staffSlot = info.getSlot();
+        } else {
+          // Do the swappy-swappy
+        }
       }
     }
 

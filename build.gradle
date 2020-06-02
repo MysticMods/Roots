@@ -18,6 +18,10 @@ compileJava {
     sourceCompatibility = targetCompatibility = '1.8'
 }
 
+runClient {
+    args "--username=Dev"
+}
+
 minecraft {
     version = "1.12.2-14.23.5.2847"
     runDir = "run"

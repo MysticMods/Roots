@@ -39,7 +39,6 @@ import java.util.List;
 public class GuiLibrary extends GuiContainer {
 
   private ContainerLibrary container;
-  private InvisibleButton backButton;
 
   public GuiLibrary(@Nonnull ContainerLibrary container) {
     super(container);
