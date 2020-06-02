@@ -236,20 +236,20 @@ public abstract class SpellBase extends RegistryItem {
     ModifierInstanceList modifiers = info.getModifiers();
     double amplifier = 0;
     ModifierInstance mod = modifiers.get(BaseModifiers.EMPOWER);
-    if (mod != null && mod.isApplied()) {
+    if (mod != null && mod.isEnabled()) {
       amplifier = 0.1;
     }
     mod = modifiers.get(BaseModifiers.GREATER_EMPOWER);
-    if (mod != null && mod.isApplied()) {
+    if (mod != null && mod.isEnabled()) {
       amplifier = 0.3;
     }
     double speedy = 0;
     mod = modifiers.get(BaseModifiers.SPEEDY);
-    if (mod != null && mod.isApplied()) {
+    if (mod != null && mod.isEnabled()) {
       speedy = 0.1;
     }
     mod = modifiers.get(BaseModifiers.GREATER_SPEEDY);
-    if (mod != null && mod.isApplied()) {
+    if (mod != null && mod.isEnabled()) {
       speedy = 0.3;
     }
 

@@ -75,7 +75,7 @@ public class SpellAcidCloud extends SpellBase {
         if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
             && !e.getUniqueID().equals(player.getUniqueID())) {
           if (e.hurtTime <= 0 && !e.isDead) {
-            if (fire != null && fire.isApplied()) {
+            if (fire != null && fire.isEnabled()) {
               e.attackEntityFrom(ModDamage.fireDamageFrom(player), (float) (damage + Math.floor(damage * amplifier)));
             } else {
               e.attackEntityFrom(DamageSource.causeMobDamage(player), (float) (damage + Math.floor(damage * amplifier)));
@@ -83,7 +83,7 @@ public class SpellAcidCloud extends SpellBase {
             if (SpellConfig.spellFeaturesCategory.acidCloudPoisoningEffect) {
               e.addPotionEffect(new PotionEffect(MobEffects.POISON, (int) (poisonDuration + Math.floor(poisonDuration * amplifier)), poisonAmplification));
             }
-            if (fire != null && fire.isApplied()) {
+            if (fire != null && fire.isEnabled()) {
               e.setFire(fireDuration);
             }
             e.setRevengeTarget(player);
@@ -91,7 +91,7 @@ public class SpellAcidCloud extends SpellBase {
           }
         }
       }
-      PacketHandler.sendToAllTracking(new MessageAcidCloudFX(player.posX, player.posY + player.getEyeHeight(), player.posZ, fire != null && fire.isApplied()), player);
+      PacketHandler.sendToAllTracking(new MessageAcidCloudFX(player.posX, player.posY + player.getEyeHeight(), player.posZ, fire != null && fire.isEnabled()), player);
     }
     return true;
   }
