@@ -81,9 +81,6 @@ public class SpellConfig {
     @Config.Name("Disable Time Stop Spell")
     @Config.Comment("Set to true to disable Time Stop Spell")
     public boolean disableTimeStop = false;
-    @Config.Name("Disable Summer's Thaw Spell")
-    @Config.Comment("Set to true to disable Summer's Thaw Spell")
-    public boolean disableSummersThaw = false;
     @Config.Name("Disable Wild Fire Spell")
     @Config.Comment("Set to true to disable Wild Fire Spell")
     public boolean disableWildFire = false;

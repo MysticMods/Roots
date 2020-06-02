@@ -97,8 +97,6 @@ public class SpellRegistry {
     SpellDisarm.instance.setDisabled(SpellConfig.disableSpellsCategory.disableDisarm);
     spellRegistry.put(SpellAutumnsFall.spellName, SpellAutumnsFall.instance);
     SpellAutumnsFall.instance.setDisabled(SpellConfig.disableSpellsCategory.disableAutumnsFall);
-    spellRegistry.put(SpellSummersThaw.spellName, SpellSummersThaw.instance);
-    SpellSummersThaw.instance.setDisabled(SpellConfig.disableSpellsCategory.disableSummersThaw);
     spellRegistry.put(SpellNaturesScythe.spellName, SpellNaturesScythe.instance);
     SpellNaturesScythe.instance.setDisabled(SpellConfig.disableSpellsCategory.disableNaturesScythe);
     spellRegistry.put(SpellSpringStorm.spellName, SpellSpringStorm.instance);
