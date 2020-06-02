@@ -1,6 +1,7 @@
 package epicsquid.roots.spell;
 
 import epicsquid.roots.Roots;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.util.types.Property;
@@ -10,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 public class SpellAquaBubble extends SpellBase {
@@ -36,11 +38,11 @@ public class SpellAquaBubble extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new OreIngredient("dustRedstone"),
-        new ItemStack(Items.LEAD),
-        new ItemStack(Items.CARROT_ON_A_STICK),
-        new OreIngredient("vine"),
-        new OreIngredient("stairWood")
+        new OreIngredient("dyeBlue"),
+        new ItemStack(ModItems.dewgonia),
+        new OreIngredient("snowball"),
+        new OreIngredient("blockGlass"),
+        new OreIngredient("gemQuartz")
     );
   }
 
