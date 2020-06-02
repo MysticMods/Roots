@@ -1,6 +1,7 @@
 package epicsquid.roots.container.slots;
 
-import epicsquid.roots.spell.info.StaffSpellInfo;
+import epicsquid.roots.spell.info.LibrarySpellInfo;
+import epicsquid.roots.world.data.SpellLibraryData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
@@ -8,16 +9,14 @@ import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.Nullable;
-
-public class SlotSpellInfo extends Slot {
+public class SlotLibraryInfo extends Slot {
   private static IInventory emptyInventory = new InventoryBasic("[Null]", true, 0);
-  private final ISlotProvider info;
+  private final SpellLibraryData data;
   private int slot;
 
-  public SlotSpellInfo(ISlotProvider info, int slot, int xPosition, int yPosition) {
+  public SlotLibraryInfo(SpellLibraryData data, int slot, int xPosition, int yPosition) {
     super(emptyInventory, 0, xPosition, yPosition);
-    this.info = info;
+    this.data = data;
     this.slot = slot;
   }
 
@@ -40,17 +39,30 @@ public class SlotSpellInfo extends Slot {
   // TODO
   @Override
   public ItemStack getStack() {
-    StaffSpellInfo info = this.info.apply(this.slot);
+    if (data == null) {
+      return ItemStack.EMPTY;
+    }
+
+    LibrarySpellInfo info = data.get(slot);
     if (info == null) {
       return ItemStack.EMPTY;
-    } else {
-      return info.asStack();
     }
+
+    return info.toStaff().asStack();
   }
 
   @Override
   public boolean getHasStack() {
-    return info.apply(this.slot) != null;
+    if (data == null) {
+      return false;
+    }
+
+    LibrarySpellInfo info = data.get(slot);
+    if (info == null) {
+      return false;
+    }
+
+    return info.isObtained();
   }
 
   @Override
@@ -67,13 +79,6 @@ public class SlotSpellInfo extends Slot {
     return 1;
   }
 
-  // TODO?
-  @Nullable
-  @Override
-  public String getSlotTexture() {
-    return super.getSlotTexture();
-  }
-
   @Override
   public ItemStack decrStackSize(int amount) {
     return ItemStack.EMPTY;
@@ -86,18 +91,9 @@ public class SlotSpellInfo extends Slot {
 
   @Override
   public boolean isSameInventory(Slot other) {
-    if (other instanceof SlotSpellInfo) {
-      return ((SlotSpellInfo) other).info.apply(slot).equals(info.apply(slot));
+    if (other instanceof SlotLibraryInfo) {
+      return ((SlotLibraryInfo) other).data.equals(data);
     }
     return false;
-  }
-
-  public StaffSpellInfo getInfo () {
-    return info.apply(slot);
-  }
-
-  @FunctionalInterface
-  public interface ISlotProvider {
-    StaffSpellInfo apply(int slot);
   }
 }

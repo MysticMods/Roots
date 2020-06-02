@@ -7,21 +7,21 @@
 
 package epicsquid.roots;
 
-import epicsquid.roots.client.gui.GuiFeyCrafter;
-import epicsquid.roots.client.gui.GuiImposer;
-import epicsquid.roots.client.gui.GuiPouch;
-import epicsquid.roots.client.gui.GuiQuiver;
-import epicsquid.roots.container.ContainerFeyCrafter;
-import epicsquid.roots.container.ContainerImposer;
-import epicsquid.roots.container.ContainerPouch;
-import epicsquid.roots.container.ContainerQuiver;
+import epicsquid.roots.client.gui.*;
+import epicsquid.roots.container.*;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.tileentity.TileEntityFeyCrafter;
 import epicsquid.roots.tileentity.TileEntityImposer;
+import epicsquid.roots.world.data.SpellLibraryRegistry;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
 
@@ -31,6 +31,31 @@ public class GuiHandler implements IGuiHandler {
   public static final int QUIVER_ID = 17;
   public static final int CRAFTER_ID = 18;
   public static final int IMPOSER_ID = 19;
+  public static final int LIBRARY_ID = 20;
+
+  public static ItemStack getStaff(EntityPlayer player) {
+    ItemStack staff = player.getHeldItemMainhand();
+    if (!staff.isEmpty() && staff.getItem().equals(ModItems.staff)) {
+      return staff;
+    }
+
+    staff = player.getHeldItemOffhand();
+    if (!staff.isEmpty() && staff.getItem().equals(ModItems.staff)) {
+      return staff;
+    }
+
+    IItemHandler handler = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+    if (handler != null) {
+      for (int i = 0; i < handler.getSlots(); i++) {
+        staff = handler.getStackInSlot(i);
+        if (!staff.isEmpty() && staff.getItem().equals(ModItems.staff)) {
+          return staff;
+        }
+      }
+    }
+
+    return ItemStack.EMPTY;
+  }
 
   @Nullable
   @Override
@@ -50,6 +75,12 @@ public class GuiHandler implements IGuiHandler {
         te = world.getTileEntity(new BlockPos(x, y, z));
         if (te instanceof TileEntityImposer) {
           return new ContainerImposer(player, (TileEntityImposer) te);
+        }
+        break;
+      case LIBRARY_ID:
+        ItemStack staff = getStaff(player);
+        if (!staff.isEmpty()) {
+          return new ContainerLibrary(player, staff, SpellLibraryRegistry.getData(player));
         }
         break;
     }
@@ -74,6 +105,12 @@ public class GuiHandler implements IGuiHandler {
         te = world.getTileEntity(new BlockPos(x, y, z));
         if (te instanceof TileEntityImposer) {
           return new GuiImposer(new ContainerImposer(player, (TileEntityImposer) te));
+        }
+        break;
+      case LIBRARY_ID:
+        ItemStack staff = getStaff(player);
+        if (!staff.isEmpty()) {
+          return new GuiLibrary(new ContainerLibrary(player, staff, null));
         }
         break;
     }

@@ -2,7 +2,7 @@ package epicsquid.roots.modifiers;
 
 import epicsquid.roots.client.gui.GuiImposer;
 import epicsquid.roots.container.ContainerImposer;
-import epicsquid.roots.container.slots.SlotSpellInfo;
+import epicsquid.roots.container.slots.SlotImposerSpellInfo;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,11 +37,11 @@ public class ModifierContext {
 
     Slot slot = screen.getSlotUnderMouse();
 
-    if (!(slot instanceof SlotSpellInfo)) {
+    if (!(slot instanceof SlotImposerSpellInfo)) {
       return StaffSpellInfo.EMPTY;
     }
 
-    SlotSpellInfo slot2 = (SlotSpellInfo) slot;
+    SlotImposerSpellInfo slot2 = (SlotImposerSpellInfo) slot;
     StaffSpellInfo info = slot2.getInfo();
     if (info == null) {
       return StaffSpellInfo.EMPTY;

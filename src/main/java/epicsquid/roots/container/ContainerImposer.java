@@ -7,16 +7,12 @@
 
 package epicsquid.roots.container;
 
-import crafttweaker.api.event.BlockHarvestDropsEvent;
-import crafttweaker.mc1120.events.handling.MCBlockHarvestDropsEvent;
-import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.container.slots.SlotModifierInfo;
-import epicsquid.roots.container.slots.SlotSpellInfo;
+import epicsquid.roots.container.slots.SlotImposerModifierInfo;
+import epicsquid.roots.container.slots.SlotImposerSpellInfo;
 import epicsquid.roots.modifiers.instance.ModifierInstance;
 import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.modifiers.modifier.IModifierCore;
 import epicsquid.roots.modifiers.modifier.ModifierCores;
-import epicsquid.roots.network.MessageSetImposerSlot;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.tileentity.TileEntityImposer;
@@ -27,7 +23,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.event.world.BlockEvent;
+import net.minecraft.util.math.BlockPos;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -81,44 +77,44 @@ public class ContainerImposer extends Container {
   }
 
   private void createSpellSlots() {
-    addSlotToContainer(new SlotSpellInfo(this::isSelectSpell, this::getInfoFor, 1, 51, 37)); // Spot 1
-    addSlotToContainer(new SlotSpellInfo(this::isSelectSpell, this::getInfoFor, 2, 56, 13)); // Spot 2
-    addSlotToContainer(new SlotSpellInfo(this::isSelectSpell, this::getInfoFor, 3, 80, 8)); // Spot 3
-    addSlotToContainer(new SlotSpellInfo(this::isSelectSpell, this::getInfoFor, 4, 104, 13)); // Spot 4
-    addSlotToContainer(new SlotSpellInfo(this::isSelectSpell, this::getInfoFor, 5, 109, 37)); // Spot 5
+    addSlotToContainer(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 1, 51, 37)); // Spot 1
+    addSlotToContainer(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 2, 56, 13)); // Spot 2
+    addSlotToContainer(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 3, 80, 8)); // Spot 3
+    addSlotToContainer(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 4, 104, 13)); // Spot 4
+    addSlotToContainer(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 5, 109, 37)); // Spot 5
   }
 
   private void createModifierSlots() {
-    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.PERESKIA, tile, 80, 18));
-    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.WILDROOT, tile, 80, 43));
-    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.TERRA_MOSS, tile, 80, 68));
-    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.INFERNAL_BULB, tile, 80, 93));
-    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.DEWGONIA, tile, 80, 118));
-    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.WILDEWHEET, tile, 55, 38));
-    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.SPIRIT_HERB, tile, 55, 73));
-    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.CLOUD_BERRY, tile, 55, 108));
-    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.REDSTONE, tile, 30, 38));
-    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.GUNPOWDER, tile, 30, 73));
-    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.GLOWSTONE, tile, 30, 108));
-    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.MOONGLOW_LEAF, tile, 105, 38));
-    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.BAFFLE_CAP, tile, 105, 73));
-    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.STALICRIPE, tile, 105, 108));
-    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.LAPIS, tile, 130, 38));
-    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.BLAZE_POWDER, tile, 130, 73));
-    addSlotToContainer(new SlotModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.RUNIC_DUST, tile, 130, 108));
+    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.PERESKIA, tile, 80, 18));
+    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.WILDROOT, tile, 80, 43));
+    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.TERRA_MOSS, tile, 80, 68));
+    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.INFERNAL_BULB, tile, 80, 93));
+    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.DEWGONIA, tile, 80, 118));
+    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.WILDEWHEET, tile, 55, 38));
+    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.SPIRIT_HERB, tile, 55, 73));
+    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.CLOUD_BERRY, tile, 55, 108));
+    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.REDSTONE, tile, 30, 38));
+    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.GUNPOWDER, tile, 30, 73));
+    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.GLOWSTONE, tile, 30, 108));
+    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.MOONGLOW_LEAF, tile, 105, 38));
+    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.BAFFLE_CAP, tile, 105, 73));
+    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.STALICRIPE, tile, 105, 108));
+    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.LAPIS, tile, 130, 38));
+    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.BLAZE_POWDER, tile, 130, 73));
+    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.RUNIC_DUST, tile, 130, 108));
   }
 
   @Override
   public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
     if (slotId != -999 && !player.world.isRemote) {
       Slot slot = getSlot(slotId);
-      if (slot instanceof SlotSpellInfo) {
-        StaffSpellInfo info = ((SlotSpellInfo) slot).getInfo();
+      if (slot instanceof SlotImposerSpellInfo) {
+        StaffSpellInfo info = ((SlotImposerSpellInfo) slot).getInfo();
         if (info != null && info != StaffSpellInfo.EMPTY) {
-          tile.setSlot(((SlotSpellInfo) slot).getSlot());
+          tile.setSlot(((SlotImposerSpellInfo) slot).getSlot());
         }
-      } else if (slot instanceof SlotModifierInfo) {
-        SlotModifierInfo info = (SlotModifierInfo) slot;
+      } else if (slot instanceof SlotImposerModifierInfo) {
+        SlotImposerModifierInfo info = (SlotImposerModifierInfo) slot;
         if (info.isApplicable() && info.isApplied()) {
           tile.toggleModifier(info.getCore());
         }
@@ -143,7 +139,12 @@ public class ContainerImposer extends Container {
 
   @Override
   public boolean canInteractWith(@Nonnull EntityPlayer player) {
-    return true;
+    BlockPos pos = this.tile.getPos();
+    if (this.tile.getWorld().getTileEntity(pos) != this.tile) {
+      return false;
+    } else {
+      return player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+    }
   }
 
   @Override

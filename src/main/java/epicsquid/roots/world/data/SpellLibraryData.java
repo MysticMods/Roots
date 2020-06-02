@@ -12,15 +12,15 @@ import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @SuppressWarnings("NullableProblems")
 public class SpellLibraryData extends WorldSavedData implements Iterable<LibrarySpellInfo> {
   private static final String identifier = "SpellData-";
   private Map<SpellBase, LibrarySpellInfo> spells = new HashMap<>();
+  private List<LibrarySpellInfo> list = null;
 
   private UUID uuid;
 
@@ -56,12 +56,14 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
   public void addSpell(SpellDustInfo info) {
     LibrarySpellInfo libinfo = spells.get(info.getSpell());
     libinfo.setObtained();
+    list = null;
     markDirty();
   }
 
   public void addSpell(SpellBase spell) {
     LibrarySpellInfo info = spells.get(spell);
     info.setObtained();
+    list = null;
     markDirty();
   }
 
@@ -79,6 +81,7 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
       spells.put(instance.getSpell(), instance);
     }
     uuid = nbt.getUniqueId("uuid");
+    list = null;
   }
 
   @Override
@@ -95,8 +98,29 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
     return compound;
   }
 
+  public List<LibrarySpellInfo> asList () {
+    if (list == null) {
+      list = spells.values().stream().filter(LibrarySpellInfo::isObtained).collect(Collectors.toList());
+    }
+    list.sort(Comparator.comparing(a -> a.getSpell().getRegistryName().getPath()));
+    return list;
+  }
+
   @Override
   public Iterator<LibrarySpellInfo> iterator() {
-    return spells.values().iterator();
+    return asList().iterator();
+  }
+
+  @Nullable
+  public LibrarySpellInfo get (int slot) {
+    List<LibrarySpellInfo> info = asList();
+    if (slot < info.size()) {
+      return info.get(slot);
+    }
+    return null;
+  }
+
+  public int size () {
+    return asList().size();
   }
 }

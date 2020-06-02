@@ -13,10 +13,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import net.minecraft.util.math.BlockPos;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -245,9 +245,9 @@ public class ContainerFeyCrafter extends Container {
   public boolean canInteractWith(@Nonnull EntityPlayer player) {
     BlockPos pos = this.crafter.getPos();
     if (this.crafter.getWorld().getTileEntity(pos) != this.crafter) {
-        return false;
+      return false;
     } else {
-        return player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
+      return player.getDistanceSq(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= 64.0D;
     }
   }
 
