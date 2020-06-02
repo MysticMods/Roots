@@ -104,6 +104,11 @@ public class Property<T> {
     public String getDescription() {
       return "the duration in ticks of the ritual/spell";
     }
+
+    @Override
+    public PropertyDuration setDescription(String description) {
+      return (PropertyDuration) super.setDescription(description);
+    }
   }
 
   public static class PropertyInterval extends Property<Integer> {

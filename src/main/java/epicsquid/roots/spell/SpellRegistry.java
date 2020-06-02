@@ -2,7 +2,6 @@ package epicsquid.roots.spell;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.SpellConfig;
-import epicsquid.roots.spell.unused.SpellSummersThaw;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.ResourceLocation;
 
@@ -82,8 +81,8 @@ public class SpellRegistry {
     SpellRampantGrowth.instance.setDisabled(SpellConfig.disableSpellsCategory.disableRampantGrowth);
     spellRegistry.put(SpellFeyLight.spellName, SpellFeyLight.instance);
     SpellFeyLight.instance.setDisabled(SpellConfig.disableSpellsCategory.disableFeyLight);
-    spellRegistry.put(SpellIcedTouch.spellName, SpellIcedTouch.instance);
-    SpellIcedTouch.instance.setDisabled(SpellConfig.disableSpellsCategory.disableIcedTouch);
+    spellRegistry.put(SpellWinterCloud.spellName, SpellWinterCloud.instance);
+    SpellWinterCloud.instance.setDisabled(SpellConfig.disableSpellsCategory.disableWinterCloud);
     SpellReach.instance.setDisabled(SpellConfig.disableSpellsCategory.disableReach);
     spellRegistry.put(SpellReach.spellName, SpellReach.instance);
     SpellSaturate.instance.setDisabled(SpellConfig.disableSpellsCategory.disableSaturate);
