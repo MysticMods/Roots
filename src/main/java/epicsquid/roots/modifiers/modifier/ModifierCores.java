@@ -15,12 +15,12 @@ import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public enum ModifierCores implements IModifierCore {
-  GUNPOWDER(Items.GUNPOWDER, TextFormatting.GRAY + ""),
-  GLOWSTONE(Items.GLOWSTONE_DUST, TextFormatting.YELLOW + ""),
-  REDSTONE(Items.REDSTONE, TextFormatting.RED + ""),
-  LAPIS(new ItemStack(Items.DYE, 1, EnumDyeColor.BLUE.getDyeDamage()), TextFormatting.DARK_BLUE + ""),
-  RUNIC_DUST(() -> ModItems.runic_dust, TextFormatting.GRAY + "" + TextFormatting.BOLD),
-  BLAZE_POWDER(Items.BLAZE_POWDER, TextFormatting.DARK_RED + "" + TextFormatting.BOLD),
+  GUNPOWDER(Items.GUNPOWDER, ""),
+  GLOWSTONE(Items.GLOWSTONE_DUST, ""),
+  REDSTONE(Items.REDSTONE, ""),
+  LAPIS(new ItemStack(Items.DYE, 1, EnumDyeColor.BLUE.getDyeDamage()), ""),
+  RUNIC_DUST(() -> ModItems.runic_dust, ""),
+  BLAZE_POWDER(Items.BLAZE_POWDER, ""),
 
   PERESKIA(new ResourceLocation(Roots.MODID, "pereskia"), TextFormatting.BOLD + "" + TextFormatting.LIGHT_PURPLE),
   WILDEWHEET(new ResourceLocation(Roots.MODID, "wildewheet"), TextFormatting.GOLD + "" + TextFormatting.BOLD),
@@ -91,5 +91,10 @@ public enum ModifierCores implements IModifierCore {
   @Override
   public String getFormatting() {
     return formatting;
+  }
+
+  @Override
+  public boolean isBasic() {
+    return this == GUNPOWDER || this == LAPIS || this == REDSTONE || this == BLAZE_POWDER || this == GLOWSTONE || this == RUNIC_DUST;
   }
 }

@@ -16,4 +16,6 @@ public interface IModifierCore {
   String getTranslationKey ();
 
   String getFormatting ();
+
+  boolean isBasic ();
 }

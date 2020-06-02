@@ -7,6 +7,7 @@ import epicsquid.roots.modifiers.modifier.Modifier;
 import epicsquid.roots.modifiers.ModifierRegistry;
 import epicsquid.roots.modifiers.ModifierType;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -69,7 +70,14 @@ public class ModifierInstance implements INBTSerializable<NBTTagCompound>, IModi
 
   @SideOnly(Side.CLIENT)
   public String describe () {
-    return getFormatting() + I18n.format(getTranslationKey()) + TextFormatting.RESET +  ": " + ((isEnabled()) ? TextFormatting.BOLD + "" : "") + I18n.format(getModifierEnabledKey());
+    if (isBasic()) {
+      return I18n.format(getTranslationKey());
+    }
+    if (GuiScreen.isShiftKeyDown()) {
+      return getFormatting() + I18n.format(getTranslationKey()) + TextFormatting.GRAY + ": " + I18n.format(getTranslationKey() + ".desc");
+    } else {
+      return getFormatting() + I18n.format(getTranslationKey()) + TextFormatting.RESET;
+    }
   }
 
   @Override
@@ -83,8 +91,18 @@ public class ModifierInstance implements INBTSerializable<NBTTagCompound>, IModi
   }
 
   @Override
+  public double getValue() {
+    return modifier.getValue();
+  }
+
+  @Override
   public IModifierCore getCore() {
     return modifier.getCore();
+  }
+
+  @Override
+  public boolean isBasic() {
+    return modifier.isBasic();
   }
 
   @Override

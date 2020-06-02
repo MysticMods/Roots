@@ -15,7 +15,11 @@ public interface IModifier {
 
   ModifierType getType();
 
+  double getValue();
+
   IModifierCore getCore ();
+
+  boolean isBasic ();
 
   Object2DoubleOpenHashMap<Herb> apply(final Object2DoubleOpenHashMap<Herb> costs);
 
