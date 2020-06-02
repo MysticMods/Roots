@@ -2,7 +2,6 @@ package epicsquid.roots.container.slots;
 
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
@@ -10,15 +9,17 @@ import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nullable;
 
-public class SlotSpellInfo extends Slot {
+public class SlotImposerSpellInfo extends Slot {
   private static IInventory emptyInventory = new InventoryBasic("[Null]", true, 0);
   private final ISlotProvider info;
+  private final IBooleanProvider isHidden;
   private int slot;
 
-  public SlotSpellInfo(ISlotProvider info, int slot, int xPosition, int yPosition) {
+  public SlotImposerSpellInfo(IBooleanProvider isHidden, ISlotProvider info, int slot, int xPosition, int yPosition) {
     super(emptyInventory, 0, xPosition, yPosition);
     this.info = info;
     this.slot = slot;
+    this.isHidden = isHidden;
   }
 
   @Override
@@ -34,8 +35,6 @@ public class SlotSpellInfo extends Slot {
   public boolean isItemValid(ItemStack stack) {
     return false;
   }
-
-  public static ItemStack stack = new ItemStack(Items.FLINT);
 
   // TODO
   @Override
@@ -85,9 +84,14 @@ public class SlotSpellInfo extends Slot {
   }
 
   @Override
+  public boolean isEnabled() {
+    return isHidden.get();
+  }
+
+  @Override
   public boolean isSameInventory(Slot other) {
-    if (other instanceof SlotSpellInfo) {
-      return ((SlotSpellInfo) other).info.apply(slot).equals(info.apply(slot));
+    if (other instanceof SlotImposerSpellInfo) {
+      return ((SlotImposerSpellInfo) other).info.apply(slot).equals(info.apply(slot));
     }
     return false;
   }
@@ -98,6 +102,6 @@ public class SlotSpellInfo extends Slot {
 
   @FunctionalInterface
   public interface ISlotProvider {
-    StaffSpellInfo apply(int slot);
+    StaffSpellInfo apply (int slot);
   }
 }

@@ -11,16 +11,15 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nullable;
-import java.util.function.Supplier;
 
-public class SlotModifierInfo extends Slot {
+public class SlotImposerModifierInfo extends Slot {
   private static IInventory emptyInventory = new InventoryBasic("[Null]", true, 0);
   private final IModifierProvider info;
   private final IModifierCore core;
   private final IBooleanProvider isHidden;
   private final TileEntityImposer tile;
 
-  public SlotModifierInfo(IBooleanProvider isHidden, IModifierProvider info, IModifierCore core, TileEntityImposer tile, int xPosition, int yPosition) {
+  public SlotImposerModifierInfo(IBooleanProvider isHidden, IModifierProvider info, IModifierCore core, TileEntityImposer tile, int xPosition, int yPosition) {
     super(emptyInventory, 0, xPosition, yPosition);
     this.info = info;
     this.isHidden = isHidden;
@@ -131,8 +130,8 @@ public class SlotModifierInfo extends Slot {
 
   @Override
   public boolean isSameInventory(Slot other) {
-    if (other instanceof SlotModifierInfo) {
-      return ((SlotModifierInfo) other).core.equals(core);
+    if (other instanceof SlotImposerModifierInfo) {
+      return ((SlotImposerModifierInfo) other).core.equals(core);
     }
     return false;
   }

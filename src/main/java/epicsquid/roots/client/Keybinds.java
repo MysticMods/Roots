@@ -3,6 +3,7 @@ package epicsquid.roots.client;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.network.MessageServerOpenLibrary;
 import epicsquid.roots.network.MessageServerOpenPouch;
 import epicsquid.roots.network.MessageServerOpenQuiver;
 import epicsquid.roots.network.MessageServerUpdateStaff;
@@ -26,34 +27,19 @@ public class Keybinds {
   public static KeyBinding POUCH_KEYBIND = null;
   public static KeyBinding QUIVER_KEYBIND = null;
 
-  private static KeyBinding SPELL_SLOT_1 = null;
-  private static KeyBinding SPELL_SLOT_2 = null;
-  private static KeyBinding SPELL_SLOT_3 = null;
-  private static KeyBinding SPELL_SLOT_4 = null;
-  private static KeyBinding SPELL_SLOT_5 = null;
-  private static KeyBinding SPELL_SLOT_NEXT = null;
-  private static KeyBinding SPELL_SLOT_PREVIOUS = null;
-
-  private static Object2IntOpenHashMap<KeyBinding> SLOT_MAP = new Object2IntOpenHashMap<>();
+  public static KeyBinding OPEN_SPELL_LIBRARY = null;
+  public static KeyBinding CYCLE_PROFILE = null;
 
   public static void init() {
     POUCH_KEYBIND = new KeyBinding(ROOTS_BASE + "pouch", 0, ROOTS_GROUP);
     QUIVER_KEYBIND = new KeyBinding(ROOTS_BASE + "quiver", 0, ROOTS_GROUP);
-
-    SLOT_MAP.put(SPELL_SLOT_1 = new KeyBinding(ROOTS_BASE + "spell_slot_1", 0, ROOTS_GROUP), 1);
-    SLOT_MAP.put(SPELL_SLOT_2 = new KeyBinding(ROOTS_BASE + "spell_slot_2", 0, ROOTS_GROUP), 2);
-    SLOT_MAP.put(SPELL_SLOT_3 = new KeyBinding(ROOTS_BASE + "spell_slot_3", 0, ROOTS_GROUP), 3);
-    SLOT_MAP.put(SPELL_SLOT_4 = new KeyBinding(ROOTS_BASE + "spell_slot_4", 0, ROOTS_GROUP), 4);
-    SLOT_MAP.put(SPELL_SLOT_5 = new KeyBinding(ROOTS_BASE + "spell_slot_5", 0, ROOTS_GROUP), 5);
-    SLOT_MAP.put(SPELL_SLOT_NEXT = new KeyBinding(ROOTS_BASE + "spell_slot_next", 0, ROOTS_GROUP), 50);
-    SLOT_MAP.put(SPELL_SLOT_PREVIOUS = new KeyBinding(ROOTS_BASE + "spell_slot_previous", 0, ROOTS_GROUP), 60);
+    OPEN_SPELL_LIBRARY = new KeyBinding(ROOTS_BASE + "spell_library", 0, ROOTS_GROUP);
+    CYCLE_PROFILE = new KeyBinding(ROOTS_BASE + "cycle", 0, ROOTS_GROUP);
 
     ClientRegistry.registerKeyBinding(POUCH_KEYBIND);
     ClientRegistry.registerKeyBinding(QUIVER_KEYBIND);
-    for (KeyBinding spellKb : SLOT_MAP.keySet()) {
-      ClientRegistry.registerKeyBinding(spellKb);
-    }
-
+    ClientRegistry.registerKeyBinding(OPEN_SPELL_LIBRARY);
+    ClientRegistry.registerKeyBinding(CYCLE_PROFILE);
   }
 
   @SubscribeEvent
@@ -66,18 +52,11 @@ public class Keybinds {
     } else if (QUIVER_KEYBIND.isKeyDown() && mc.inGameHasFocus) {
       MessageServerOpenQuiver packet = new MessageServerOpenQuiver();
       PacketHandler.INSTANCE.sendToServer(packet);
-    } else if (mc.inGameHasFocus) {
-      if (mc.player.getHeldItemOffhand().getItem() != ModItems.staff && mc.player.getHeldItemMainhand().getItem() != ModItems.staff) {
-        return;
-      }
+    } else if (OPEN_SPELL_LIBRARY.isKeyDown() && mc.inGameHasFocus) {
+      MessageServerOpenLibrary packet = new MessageServerOpenLibrary();
+      PacketHandler.INSTANCE.sendToServer(packet);
+    } else if (CYCLE_PROFILE.isKeyDown() && mc.inGameHasFocus) {
 
-      for (Map.Entry<KeyBinding, Integer> spell : SLOT_MAP.entrySet()) {
-        if (spell.getKey().isKeyDown()) {
-          MessageServerUpdateStaff packet = new MessageServerUpdateStaff(spell.getValue());
-          PacketHandler.INSTANCE.sendToServer(packet);
-          break;
-        }
-      }
     }
   }
 

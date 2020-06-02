@@ -11,8 +11,8 @@ import epicsquid.mysticallib.client.gui.InvisibleButton;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.container.ContainerImposer;
-import epicsquid.roots.container.slots.SlotModifierInfo;
-import epicsquid.roots.container.slots.SlotSpellInfo;
+import epicsquid.roots.container.slots.SlotImposerModifierInfo;
+import epicsquid.roots.container.slots.SlotImposerSpellInfo;
 import epicsquid.roots.network.MessageSetImposerSlot;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
@@ -86,7 +86,7 @@ public class GuiImposer extends GuiContainer {
         tooltip.addAll(getItemToolTip(stack));
         font = stack.getItem().getFontRenderer(stack);
       }
-      if (hoveredSlot instanceof SlotModifierInfo) {
+      if (hoveredSlot instanceof SlotImposerModifierInfo) {
         // Add/manipulate modifier info here
         tooltip.add("");
       }
@@ -131,8 +131,8 @@ public class GuiImposer extends GuiContainer {
   public void drawSlot(Slot slot) {
     int i2 = slot.xPos - 2;
     int j2 = slot.yPos - 2;
-    if (slot instanceof SlotModifierInfo) {
-      SlotModifierInfo modInfo = (SlotModifierInfo) slot;
+    if (slot instanceof SlotImposerModifierInfo) {
+      SlotImposerModifierInfo modInfo = (SlotImposerModifierInfo) slot;
       if (!modInfo.isApplicable()) { // There is no modifier existant for this slot
         this.mc.getTextureManager().bindTexture(getTexture());
         this.drawTexturedModalRect(i2, j2, 176, 40, 20, 20);
@@ -145,8 +145,8 @@ public class GuiImposer extends GuiContainer {
       }
     }
     super.drawSlot(slot);
-    if (slot instanceof SlotSpellInfo) {
-      SlotSpellInfo infoSlot = (SlotSpellInfo) slot;
+    if (slot instanceof SlotImposerSpellInfo) {
+      SlotImposerSpellInfo infoSlot = (SlotImposerSpellInfo) slot;
       StaffSpellInfo info = infoSlot.getInfo();
       if (info == null || info == StaffSpellInfo.EMPTY) {
         this.mc.getTextureManager().bindTexture(getTexture());

@@ -23,7 +23,7 @@ public class SpellAquaBubble extends SpellBase {
   public static Property<Double> PROP_ABSORPTION = new Property<>("absorption", 20.0).setDescription("the amount of health absorption granted");
   public static Property<Float> PROP_FIRE_REDUCTION = new Property<>("fire_reduction", 0.5f).setDescription("how much fire damage is multiplied by");
   public static Property<Float> PROP_LAVA_REDUCTION = new Property<>("fire_reduction", 0.0f).setDescription("how much lava damage is multiplied by");
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "aqua_bubble");
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_aqua_bubble");
   public static SpellAquaBubble instance = new SpellAquaBubble(spellName);
 
   public int duration;

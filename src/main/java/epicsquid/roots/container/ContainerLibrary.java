@@ -7,56 +7,68 @@
 
 package epicsquid.roots.container;
 
+import epicsquid.roots.container.slots.SlotLibraryInfo;
+import epicsquid.roots.container.slots.SlotSpellInfo;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemQuiver;
+import epicsquid.roots.spell.info.StaffSpellInfo;
+import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.world.data.SpellLibraryData;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 
 public class ContainerLibrary extends Container {
 
   private SpellLibraryData data;
-  private EntityPlayer player;
-  private ItemStack quiver;
+  private ItemStack staff;
 
-  public ContainerLibrary(EntityPlayer player, boolean isServer) {
-    this.player = player;
+  public ContainerLibrary(EntityPlayer player, ItemStack staff, SpellLibraryData data) {
+    this.data = data;
 
-    createPlayerInventory(player.inventory);
+    if (staff.isEmpty()) {
+      if (player.getHeldItemMainhand().getItem().equals(ModItems.staff)) {
+        this.staff = player.getHeldItemMainhand();
+      } else if (player.getHeldItemOffhand().getItem().equals(ModItems.staff)) {
+        this.staff = player.getHeldItemOffhand();
+      }
+    } else {
+      this.staff = staff;
+    }
+
+    createStaffSlots();
     createLibrarySlots();
   }
 
-  private void createLibrarySlots() {
-    int xOffset = 47;
-    int yOffset = -15;
-/*    for (int i = 0; i < quiverHandler.getSlots(); i++) {
-      addSlotToContainer(new SlotItemHandler(quiverHandler, i, xOffset + 11 + (((i >= 3) ? i - 3 : i) * 21), yOffset + 23 + ((i >= 3) ? 21 : 0)) {
-        @Override
-        public boolean isItemValid(@Nonnull ItemStack stack) {
-          return stack.getItem() instanceof ItemArrow;
-        }
-      });
-    }*/
+  private StaffSpellInfo getInfoFor(int slot) {
+    StaffSpellStorage storage = StaffSpellStorage.fromStack(staff);
+    return storage.getSpellInSlot(slot);
   }
 
-  private void createPlayerInventory(InventoryPlayer inventoryPlayer) {
-    int xOffset = 8;
-    int yOffset = 67;
+  private void createStaffSlots() {
+    addSlotToContainer(new SlotSpellInfo(this::getInfoFor, 1, 2, 33)); // Spot 1
+    addSlotToContainer(new SlotSpellInfo(this::getInfoFor, 2, 7, 9)); // Spot 2
+    addSlotToContainer(new SlotSpellInfo(this::getInfoFor, 3, 31, 4)); // Spot 3
+    addSlotToContainer(new SlotSpellInfo(this::getInfoFor, 4, 55, 9)); // Spot 4
+    addSlotToContainer(new SlotSpellInfo(this::getInfoFor, 5, 60, 33)); // Spot 5
+  }
 
-    for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 9; j++) {
-        addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, xOffset + j * 18, yOffset + i * 18));
+  private void createLibrarySlots() {
+    int offsetX = 98;
+    int offsetY = 15;
+
+    int i = 0;
+
+    for (int y = 0; y < 5; y++) {
+      for (int x = 0; x < 8; x++) {
+        addSlotToContainer(new SlotLibraryInfo(data, i, offsetX + x * 18, offsetY + y * 18));
+        i++;
       }
-    }
-    for (int i = 0; i < 9; i++) {
-      addSlotToContainer(new Slot(inventoryPlayer, i, xOffset + i * 18, yOffset + 58));
     }
   }
 
