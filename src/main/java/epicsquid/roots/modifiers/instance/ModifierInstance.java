@@ -7,10 +7,14 @@ import epicsquid.roots.modifiers.modifier.Modifier;
 import epicsquid.roots.modifiers.ModifierRegistry;
 import epicsquid.roots.modifiers.ModifierType;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Objects;
 
@@ -50,12 +54,22 @@ public class ModifierInstance implements INBTSerializable<NBTTagCompound>, IModi
     return modifier.getTranslationKey();
   }
 
+  @Override
+  public String getFormatting() {
+    return modifier.getFormatting();
+  }
+
   public String getModifierEnabledKey () {
     if (isEnabled()) {
       return "roots.modifier.is_enabled";
     } else {
       return "roots.modifier.is_disabled";
     }
+  }
+
+  @SideOnly(Side.CLIENT)
+  public String describe () {
+    return getFormatting() + I18n.format(getTranslationKey()) + TextFormatting.RESET +  ": " + ((isEnabled()) ? TextFormatting.BOLD + "" : "") + I18n.format(getModifierEnabledKey());
   }
 
   @Override

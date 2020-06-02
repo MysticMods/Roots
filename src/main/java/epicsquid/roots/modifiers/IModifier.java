@@ -9,6 +9,8 @@ import net.minecraft.item.ItemStack;
 public interface IModifier {
   String getTranslationKey();
 
+  String getFormatting();
+
   ItemStack getStack();
 
   ModifierType getType();
