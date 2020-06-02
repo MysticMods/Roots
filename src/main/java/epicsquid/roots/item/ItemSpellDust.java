@@ -47,7 +47,7 @@ public class ItemSpellDust extends ItemBase {
         return;
       }
 
-      spell.addToolTip(tooltip);
+      spell.addToolTip(tooltip, info.getModifiers());
     } else {
       SpellDustInfo info = DustSpellStorage.fromStack(stack).getSelectedInfo();
       SpellBase spell = info == null ? null : info.getSpell();
@@ -56,7 +56,7 @@ public class ItemSpellDust extends ItemBase {
       }
 
       // TODO: Migrate this to the info
-      spell.addToolTip(tooltip);
+      spell.addToolTip(tooltip, null);
     }
   }
 }

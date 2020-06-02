@@ -4,15 +4,16 @@ import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.entity.spell.EntitySpellBase;
-import epicsquid.roots.modifiers.BaseModifiers;
-import epicsquid.roots.modifiers.instance.ModifierInstance;
-import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.modifiers.modifier.Modifier;
+import epicsquid.roots.modifiers.BaseModifiers;
+import epicsquid.roots.modifiers.ModifierType;
+import epicsquid.roots.modifiers.instance.ModifierInstance;
 import epicsquid.roots.modifiers.instance.ModifierInstanceList;
+import epicsquid.roots.modifiers.modifier.Modifier;
 import epicsquid.roots.modifiers.modifier.ModifierList;
 import epicsquid.roots.recipe.IRootsRecipe;
+import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.DustSpellStorage;
 import epicsquid.roots.tileentity.TileEntityMortar;
 import epicsquid.roots.util.ClientHerbUtil;
@@ -21,6 +22,7 @@ import epicsquid.roots.util.types.Property;
 import epicsquid.roots.util.types.PropertyTable;
 import epicsquid.roots.util.types.RegistryItem;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -121,7 +123,7 @@ public abstract class SpellBase extends RegistryItem {
     return modifierList;
   }
 
-  public List<Modifier> getModifiers () {
+  public List<Modifier> getModifiers() {
     return acceptedModifiers;
   }
 
@@ -180,14 +182,83 @@ public abstract class SpellBase extends RegistryItem {
   }
 
   @SideOnly(Side.CLIENT)
-  public void addToolTip(List<String> tooltip) {
+  public void addToolTip(List<String> tooltip, @Nullable ModifierInstanceList list) {
+    Object2DoubleOpenHashMap<Herb> costs = this.costs;
+    if (list != null) {
+      costs = list.apply(costs);
+    }
     String prefix = "roots.spell." + name;
     tooltip.add("" + textColor + TextFormatting.BOLD + I18n.format(prefix + ".name") + TextFormatting.RESET);
     if (finalised()) {
-      for (Map.Entry<Herb, Double> entry : this.costs.entrySet()) {
+      for (Map.Entry<Herb, Double> entry : costs.entrySet()) {
         Herb herb = entry.getKey();
         String d = String.format("%.4f", entry.getValue());
         tooltip.add(I18n.format(herb.getItem().getTranslationKey() + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
+      }
+    }
+    StringJoiner basics = new StringJoiner(", ");
+    if (list != null) {
+      double addition = 0;
+      double subtraction = 0;
+      if (!GuiScreen.isShiftKeyDown()) {
+        StringJoiner joiner = new StringJoiner(", ");
+        for (ModifierInstance m : list) {
+          if (!m.isApplied() || !m.isEnabled()) {
+            continue;
+          }
+
+          if (m.getType() == ModifierType.ALL_COST_MULTIPLIER) {
+            if (m.getValue() < 0) {
+              subtraction += Math.abs(m.getValue());
+            } else {
+              addition += Math.abs(m.getValue());
+            }
+          }
+          if (m.isBasic()) {
+            basics.add(m.describe());
+          } else {
+            joiner.add(m.describe());
+          }
+        }
+
+        String result = joiner.toString();
+        if (!result.isEmpty()) {
+          tooltip.add(result);
+        }
+        if (GuiScreen.isShiftKeyDown()) {
+          result = basics.toString();
+          if (!result.isEmpty()) {
+            tooltip.add(result);
+          }
+        }
+      } else {
+        for (ModifierInstance m : list) {
+          if (!m.isApplied() || !m.isEnabled()) {
+            continue;
+          }
+
+          if (m.getType() == ModifierType.ALL_COST_MULTIPLIER) {
+            if (m.getValue() < 0) {
+              subtraction += Math.abs(m.getValue());
+            } else {
+              addition += Math.abs(m.getValue());
+            }
+          }
+          if (m.isBasic()) {
+            basics.add(m.describe());
+          } else {
+            tooltip.add(m.describe());
+          }
+        }
+        tooltip.add(basics.toString());
+      }
+      double actualSub = subtraction - addition;
+      double actualAdd = addition - subtraction;
+      if (actualSub > 0) {
+        tooltip.add(I18n.format("roots.tooltip.reduced_by", Math.floor(actualSub * 100) + "%"));
+      }
+      if (actualAdd > 0) {
+        tooltip.add(I18n.format("roots.tooltip.increased_by", Math.floor(actualAdd * 100) + "%"));
       }
     }
   }
@@ -215,7 +286,7 @@ public abstract class SpellBase extends RegistryItem {
     SUCCESS_SPEEDY,
     SUCCESS_GREATER_SPEEDY;
 
-    public boolean isSuccess () {
+    public boolean isSuccess() {
       return this != FAIL;
     }
 
@@ -232,7 +303,7 @@ public abstract class SpellBase extends RegistryItem {
     }
   }
 
-  public CastResult cast (EntityPlayer caster, StaffSpellInfo info, int ticks) {
+  public CastResult cast(EntityPlayer caster, StaffSpellInfo info, int ticks) {
     ModifierInstanceList modifiers = info.getModifiers();
     double amplifier = 0;
     ModifierInstance mod = modifiers.get(BaseModifiers.EMPOWER);
@@ -345,7 +416,7 @@ public abstract class SpellBase extends RegistryItem {
     this.finalised = true;
   }
 
-  public void defaultModifiers () {
+  public void defaultModifiers() {
     acceptsModifiers(BaseModifiers.EMPOWER, BaseModifiers.GREATER_EMPOWER, BaseModifiers.SPEEDY, BaseModifiers.GREATER_SPEEDY, BaseModifiers.REDUCTION, BaseModifiers.GREATER_REDUCTION);
   }
 

@@ -3,6 +3,7 @@ package epicsquid.roots.item;
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.EventManager;
+import epicsquid.roots.modifiers.ModifierType;
 import epicsquid.roots.modifiers.instance.ModifierInstance;
 import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.spell.SpellBase;
@@ -10,6 +11,7 @@ import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.DustSpellStorage;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
@@ -31,11 +33,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.input.Keyboard;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class ItemStaff extends ItemBase {
   public ItemStaff(String name) {
@@ -155,21 +158,13 @@ public class ItemStaff extends ItemBase {
       SpellBase spell = info.getSpell();
       if (spell != null) {
         tooltip.add("");
-        spell.addToolTip(tooltip);
-        ModifierInstanceList list = info.getModifiers();
-        for (ModifierInstance m : list) {
-          if (!m.isApplied()) {
-            continue;
-          }
-
-          tooltip.add(m.describe());
-        }
+        spell.addToolTip(tooltip, info.getModifiers());
       }
     } else {
       tooltip.add("");
       tooltip.add("No spell.");
     }
-    if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+    if (GuiScreen.isShiftKeyDown()) {
       tooltip.add("");
       for (int i = StaffSpellStorage.MIN_SPELL_SLOT; i <= StaffSpellStorage.MAX_SPELL_SLOT; i++) {
         info = capability.getSpellInSlot(i);

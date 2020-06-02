@@ -58,6 +58,16 @@ public class Modifier extends RegistryItem implements IModifier {
   }
 
   @Override
+  public boolean isBasic() {
+    return core.isBasic();
+  }
+
+  @Override
+  public double getValue() {
+    return value;
+  }
+
+  @Override
   public Object2DoubleOpenHashMap<Herb> apply(final Object2DoubleOpenHashMap<Herb> costs) {
     if (modifier == ModifierType.NO_COST) {
       return costs;

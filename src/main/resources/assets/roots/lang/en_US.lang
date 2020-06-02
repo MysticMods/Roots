@@ -106,6 +106,8 @@ roots.tooltip.salmon.crafter=Crafted by: %s
 roots.tooltip.staff.notag=This Staff has no NBT data! It is potentially prone to errors and should not be used!
 roots.tooltip.staff.selected=Selected Slot: 
 roots.tooltip.pouch_divider=: x
+roots.tooltip.increased_by=Costs increased by: %s
+roots.tooltip.reduced_by=Costs reduced by: %s
 roots.tooltip.trap_paper_health=Health: 
 roots.tooltip.trap_paper_health_divider= /
 roots.tooltip.pouch=Sneak-Right-Click or %s to open pouch.
@@ -177,6 +179,16 @@ roots.spell.spell_saturate.name=Saturate
 roots.spell.spell_desaturate.name=Desaturate
 roots.spell.spell_chrysopoeia.name=Chrysopoeia
 roots.spell.spell_aqua_bubble.name=Aqua Bubble
+
+roots.modifiers.modifiers.reduction=Cost Reduction
+roots.modifiers.modifiers.greater_speedy=Greater Speed
+roots.modifiers.modifiers.greater_reduction=Greatly Reduced Cost
+roots.modifiers.modifiers.speedy=Speed
+roots.modifiers.modifiers.empower=Empowerment
+roots.modifiers.modifiers.greater_empower=Greatly Empowered
+
+roots.modifiers.modifiers.fire_cloud=Fire Cloud
+roots.modifiers.modifiers.fire_cloud.desc=Flames mingle with the acid & poison.
 
 roots.ritual.ritual_healing_aura.name=Healing Aura
 roots.ritual.ritual_heavy_storms.name=Heavy Storms
