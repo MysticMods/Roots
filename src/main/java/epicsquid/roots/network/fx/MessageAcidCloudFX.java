@@ -64,22 +64,21 @@ public class MessageAcidCloudFX implements IMessage {
           vx *= -1;
           vz *= -1;
         }
-        if (message.fire) {
-          if (Util.rand.nextBoolean()) {
-            ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, 209.0f / 255, 54.0f / 255, 15.0f / 255, 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
-          } else {
-            ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, 245.0f / 255, 158.0f / 255, 66.0f / 255, 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
-          }
-        } else {
+        if (!message.fire || Util.rand.nextBoolean()) {
           if (Util.rand.nextBoolean()) {
             ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellAcidCloud.instance.getRed1(), SpellAcidCloud.instance.getGreen1(), SpellAcidCloud.instance.getBlue1(), 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
           } else {
             ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellAcidCloud.instance.getRed2(), SpellAcidCloud.instance.getGreen2(), SpellAcidCloud.instance.getBlue2(), 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
+          }
+        } else {
+          if (Util.rand.nextBoolean()) {
+            ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, 209.0f / 255, 54.0f / 255, 15.0f / 255, 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
+          } else {
+            ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, 245.0f / 255, 158.0f / 255, 66.0f / 255, 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
           }
         }
       }
       return null;
     }
   }
-
 }
