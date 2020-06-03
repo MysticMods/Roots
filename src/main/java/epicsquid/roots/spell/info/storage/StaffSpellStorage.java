@@ -11,7 +11,9 @@ import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 // TODO: Not actually a capability
@@ -50,15 +52,29 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
   }
 
   public Collection<StaffSpellInfo> getSpells () {
-    return spells.values();
+    List<StaffSpellInfo> result = new ArrayList<>();
+    for (int i = MIN_SPELL_SLOT; i <= MAX_SPELL_SLOT; i++) {
+      StaffSpellInfo info = spells.get(i);
+      if (info != null) {
+        result.add(info);
+      }
+    }
+    return result;
   }
 
   public void tick (long cd) {
+    boolean ticked = false;
     for (StaffSpellInfo spell : getSpells()) {
-      spell.tick();
-      spell.validate(cd);
+      if (spell.tick()) {
+        ticked = true;
+      }
+      if (spell.validate(cd)) {
+        ticked = true;
+      }
     }
-    saveToStack();
+    if (ticked) {
+      saveToStack();
+    }
   }
 
   @Override
@@ -111,6 +127,7 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
   public void previousSlot() {
     if (this.isEmpty()) {
       setSelectedSlot(0);
+      saveToStack();
       return;
     }
 
@@ -119,23 +136,27 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
     for (int i = selectedSlot - 1; i >= 0; i--) {
       if (spells.get(i) != null) {
         setSelectedSlot(i);
+        saveToStack();
         return;
       }
     }
     for (int i = 5; i >= originalSlot; i--) {
       if (spells.get(i) != null) {
         setSelectedSlot(i);
+        saveToStack();
         return;
       }
     }
 
     setSelectedSlot(originalSlot);
+    saveToStack();
   }
 
   @Override
   public void nextSlot() {
     if (this.isEmpty()) {
       setSelectedSlot(0);
+      saveToStack();
       return;
     }
 
@@ -144,17 +165,20 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
     for (int i = selectedSlot + 1; i < 5; i++) {
       if (spells.get(i) != null) {
         setSelectedSlot(i);
+        saveToStack();
         return;
       }
     }
     for (int i = 0; i < originalSlot; i++) {
       if (spells.get(i) != null) {
         setSelectedSlot(i);
+        saveToStack();
         return;
       }
     }
 
     setSelectedSlot(originalSlot);
+    saveToStack();
   }
 
   @Override
@@ -203,7 +227,12 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
       }
       for (String key : keys) {
         int value = Integer.parseInt(key);
-        this.spells.put(value, StaffSpellInfo.fromNBT(spells.getCompoundTag(key)));
+        StaffSpellInfo info = StaffSpellInfo.fromNBT(spells.getCompoundTag(key));
+        if (info == null) {
+          Roots.logger.error("Tried to deserialize spell " + spells.getCompoundTag(key) + " but got null!");
+        } else {
+          this.spells.put(value, info);
+        }
       }
     } else {
       for (int i = 0; i < 5; i++) {

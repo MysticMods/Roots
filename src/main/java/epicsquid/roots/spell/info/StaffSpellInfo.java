@@ -46,14 +46,15 @@ public class StaffSpellInfo extends AbstractSpellModifiers<ModifierInstanceList>
     }
   }*/
 
-  public void tick () {
+  public boolean tick () {
     if (this.cooldown == -1) {
-      return;
+      return false;
     }
     this.cooldown--;
     if (this.cooldown <= 0) {
       this.cooldown = -1;
     }
+    return true;
   }
 
   public boolean onCooldown() {
@@ -73,10 +74,12 @@ public class StaffSpellInfo extends AbstractSpellModifiers<ModifierInstanceList>
     this.cooldownStop = cd + cooldown;
   }
 
-  public void validate (long cd) {
+  public boolean validate (long cd) {
     if (this.cooldown != -1 && cd > this.cooldownStop) {
       this.cooldown = -1;
+      return true;
     }
+    return false;
   }
 
   @Override
@@ -101,8 +104,12 @@ public class StaffSpellInfo extends AbstractSpellModifiers<ModifierInstanceList>
     return this == EMPTY;
   }
 
+  @Nullable
   public static StaffSpellInfo fromNBT(NBTTagCompound tag) {
     SpellBase spell = getSpellFromTag(tag);
+    if (spell == null) {
+      return null;
+    }
     StaffSpellInfo instance = new StaffSpellInfo(spell);
     instance.deserializeNBT(tag);
     return instance;

@@ -28,7 +28,7 @@ public class SlotImposerModifierInfo extends Slot {
   }
 
   @Nullable
-  private ModifierInstance get () {
+  public ModifierInstance get () {
     return info.get(core);
   }
 
