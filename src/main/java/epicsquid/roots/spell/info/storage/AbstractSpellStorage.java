@@ -68,7 +68,6 @@ public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implemen
 
   public void setSelectedSlot(int slot) {
     this.selectedSlot = slot;
-    saveToStack();
   }
 
   public abstract void previousSlot();

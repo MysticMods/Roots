@@ -13,6 +13,7 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.container.ContainerImposer;
 import epicsquid.roots.container.slots.SlotImposerModifierInfo;
 import epicsquid.roots.container.slots.SlotImposerSpellInfo;
+import epicsquid.roots.modifiers.instance.ModifierInstance;
 import epicsquid.roots.network.MessageSetImposerSlot;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
@@ -80,15 +81,36 @@ public class GuiImposer extends GuiContainer {
       List<String> tooltip = new ArrayList<>();
       FontRenderer font = null;
       boolean hasStack = this.hoveredSlot.getHasStack();
+      ItemStack stack = this.hoveredSlot.getStack();
+      SlotImposerModifierInfo info = null;
+      if (hoveredSlot instanceof SlotImposerModifierInfo) {
+        info = (SlotImposerModifierInfo) hoveredSlot;
+        if (stack.isEmpty()) {
+          stack = info.getCore().getStack();
+          hasStack = true;
+        }
+        if (info.isDisabled() && info.isApplicable() && info.isApplied()) {
+          tooltip.add(TextFormatting.BOLD + I18n.format("roots.tooltip.modifier.not_enabled"));
+        } else if (!info.isApplied() && info.isApplicable()) {
+          tooltip.add(TextFormatting.BOLD + I18n.format("roots.tooltip.modifier.not_applied"));
+        } else if (!info.isApplicable()) {
+          tooltip.add(TextFormatting.BOLD + I18n.format("roots.tooltip.modifier.not_applicable"));
+          stack = ItemStack.EMPTY;
+          hasStack = false;
+        }
+      }
       if (hasStack) {
-        ItemStack stack = this.hoveredSlot.getStack();
         GuiUtils.preItemToolTip(stack);
         tooltip.addAll(getItemToolTip(stack));
         font = stack.getItem().getFontRenderer(stack);
       }
-      if (hoveredSlot instanceof SlotImposerModifierInfo) {
-        // Add/manipulate modifier info here
-        tooltip.add("");
+      if (info != null) {
+        ModifierInstance instance = info.get();
+        if (instance != null) {
+          tooltip.add("");
+          tooltip.add(instance.description());
+          tooltip.add(instance.describeCost());
+        }
       }
       if (!tooltip.isEmpty()) {
         this.drawHoveringText(tooltip, x, y, (font == null ? fontRenderer : font));

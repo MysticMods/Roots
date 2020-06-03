@@ -2,10 +2,10 @@ package epicsquid.roots.modifiers.instance;
 
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.modifiers.IModifier;
-import epicsquid.roots.modifiers.modifier.IModifierCore;
-import epicsquid.roots.modifiers.modifier.Modifier;
 import epicsquid.roots.modifiers.ModifierRegistry;
 import epicsquid.roots.modifiers.ModifierType;
+import epicsquid.roots.modifiers.modifier.IModifierCore;
+import epicsquid.roots.modifiers.modifier.Modifier;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
@@ -60,7 +60,7 @@ public class ModifierInstance implements INBTSerializable<NBTTagCompound>, IModi
     return modifier.getFormatting();
   }
 
-  public String getModifierEnabledKey () {
+  public String getModifierEnabledKey() {
     if (isEnabled()) {
       return "roots.modifier.is_enabled";
     } else {
@@ -69,7 +69,7 @@ public class ModifierInstance implements INBTSerializable<NBTTagCompound>, IModi
   }
 
   @SideOnly(Side.CLIENT)
-  public String describe () {
+  public String describe() {
     if (isBasic()) {
       return I18n.format(getTranslationKey());
     }
@@ -80,13 +80,36 @@ public class ModifierInstance implements INBTSerializable<NBTTagCompound>, IModi
     }
   }
 
+  @SideOnly(Side.CLIENT)
+  public String description() {
+    return getFormatting() + I18n.format(getTranslationKey()) + TextFormatting.GRAY + ": " + I18n.format(getTranslationKey() + ".desc");
+  }
+
+  @SideOnly(Side.CLIENT)
+  public String describeCost () {
+    switch (modifier.getType()) {
+      case NO_COST:
+        return I18n.format("roots.tooltip.modifier.no_cost");
+      case ADDITIONAL_COST:
+        return I18n.format("roots.tooltip.modifier.additional_cost", I18n.format(getStack().getTranslationKey() + ".name"), String.format("%.4f", modifier.getValue()));
+      case ALL_COST_MULTIPLIER:
+        if (modifier.getValue() < 0) {
+          return I18n.format("roots.tooltip.modifier.decreased_cost", Math.floor(modifier.getValue() * 100) + "%");
+        } else {
+          return I18n.format("roots.tooltip.modifier.increased_cost", Math.floor(modifier.getValue() * 100) + "%");
+        }
+      default:
+        return "";
+    }
+  }
+
   @Override
   public ItemStack getStack() {
     return modifier.getStack();
   }
 
   @Override
-  public ModifierType getType () {
+  public ModifierType getType() {
     return modifier.getType();
   }
 
@@ -121,7 +144,7 @@ public class ModifierInstance implements INBTSerializable<NBTTagCompound>, IModi
     this.enabled = tag.getBoolean("e");
   }
 
-  public static ModifierInstance fromNBT (NBTTagCompound tag) {
+  public static ModifierInstance fromNBT(NBTTagCompound tag) {
     ModifierInstance result = new ModifierInstance(null, false, false);
     result.deserializeNBT(tag);
     return result;
