@@ -9,8 +9,8 @@ package epicsquid.roots.container;
 
 import epicsquid.roots.container.slots.SlotImposerModifierInfo;
 import epicsquid.roots.container.slots.SlotImposerSpellInfo;
-import epicsquid.roots.modifiers.instance.ModifierInstance;
-import epicsquid.roots.modifiers.instance.ModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
+import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
 import epicsquid.roots.modifiers.modifier.IModifierCore;
 import epicsquid.roots.modifiers.modifier.ModifierCores;
 import epicsquid.roots.spell.info.StaffSpellInfo;
@@ -56,7 +56,7 @@ public class ContainerImposer extends Container {
   }
 
   @Nullable
-  private ModifierInstance getInstanceFor(IModifierCore core) {
+  private StaffModifierInstance getInstanceFor(IModifierCore core) {
     StaffSpellStorage storage = tile.getSpellStorage();
     if (storage == null) {
       return null;
@@ -69,7 +69,7 @@ public class ContainerImposer extends Container {
     if (info == null) {
       return null;
     }
-    ModifierInstanceList mods = info.getModifiers();
+    BaseModifierInstanceList mods = info.getModifiers();
     if (mods == null) {
       return null;
     }

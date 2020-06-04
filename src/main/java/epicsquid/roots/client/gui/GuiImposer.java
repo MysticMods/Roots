@@ -13,7 +13,7 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.container.ContainerImposer;
 import epicsquid.roots.container.slots.SlotImposerModifierInfo;
 import epicsquid.roots.container.slots.SlotImposerSpellInfo;
-import epicsquid.roots.modifiers.instance.ModifierInstance;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.network.MessageSetImposerSlot;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
@@ -105,7 +105,7 @@ public class GuiImposer extends GuiContainer {
         font = stack.getItem().getFontRenderer(stack);
       }
       if (info != null) {
-        ModifierInstance instance = info.get();
+        StaffModifierInstance instance = info.get();
         if (instance != null) {
           tooltip.add("");
           tooltip.add(instance.description());

@@ -1,36 +1,36 @@
-package epicsquid.roots.modifiers.instance;
+package epicsquid.roots.modifiers.instance.base;
 
 import com.google.common.collect.Iterators;
-import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.modifiers.IModifierList;
 import epicsquid.roots.modifiers.ModifierType;
 import epicsquid.roots.modifiers.modifier.IModifierCore;
 import epicsquid.roots.modifiers.modifier.Modifier;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.spell.SpellBase;
-import epicsquid.roots.spell.info.AbstractSpellInfo;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
-public class ModifierInstanceList implements IModifierList<ModifierInstance, NBTTagCompound> {
-  private final Map<ModifierType, List<ModifierInstance>> internal;
-  private final Map<IModifierCore, ModifierInstance> coreToInstance;
+public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> implements IModifierList<T, NBTTagCompound> {
+  private final Map<ModifierType, List<T>> internal;
+  private final Map<IModifierCore, T> coreToInstance;
   private final SpellBase spell;
 
-  public ModifierInstanceList(SpellBase spell) {
+  // TODO
+  public BaseModifierInstanceList(SpellBase spell, Function<Modifier, T> empty) {
     internal = new HashMap<>();
     coreToInstance = new HashMap<>();
     for (ModifierType type : ModifierType.values()) {
       internal.put(type, new ArrayList<>());
     }
     for (Modifier m : spell.getModifierList()) {
-      add(new ModifierInstance(m, false, false));
+      add(empty.apply(m));
     }
     this.spell = spell;
   }
@@ -64,8 +64,8 @@ public class ModifierInstanceList implements IModifierList<ModifierInstance, NBT
 
   @Override
   public boolean contains(Object o) {
-    if (o instanceof ModifierInstance) {
-      return internal.get(((ModifierInstance) o).getType()).contains(o);
+    if (o instanceof StaffModifierInstance) {
+      return internal.get(((StaffModifierInstance) o).getType()).contains(o);
     } else if (o instanceof IModifierCore) {
       return coreToInstance.containsKey(o);
     }
@@ -75,15 +75,15 @@ public class ModifierInstanceList implements IModifierList<ModifierInstance, NBT
 
   @Override
   @Nullable
-  public ModifierInstance getByCore(IModifierCore core) {
+  public T getByCore(IModifierCore core) {
     return coreToInstance.get(core);
   }
 
   @Override
   @Nullable
-  public ModifierInstance get(Modifier modifier) {
-    for (Map.Entry<ModifierType, List<ModifierInstance>> instances : internal.entrySet()) {
-      for (ModifierInstance mi : instances.getValue()) {
+  public T get(Modifier modifier) {
+    for (Map.Entry<ModifierType, List<T>> instances : internal.entrySet()) {
+      for (T mi : instances.getValue()) {
         if (mi.getModifier().equals(modifier)) {
           return mi;
         }
@@ -92,40 +92,44 @@ public class ModifierInstanceList implements IModifierList<ModifierInstance, NBT
     return null;
   }
 
+  @SuppressWarnings("unchecked")
   @Override
-  public Iterator<ModifierInstance> iterator() {
-    List<ModifierIterator> iterators = new ArrayList<>();
+  public Iterator<T> iterator() {
+    List<BaseModifierIterator> iterators = new ArrayList<>();
     if (!internal.get(ModifierType.NO_COST).isEmpty()) {
-      iterators.add(new ModifierIterator(internal.get(ModifierType.NO_COST).iterator()));
+      iterators.add(new BaseModifierIterator<>(internal.get(ModifierType.NO_COST).iterator()));
     }
     if (!internal.get(ModifierType.ADDITIONAL_COST).isEmpty()) {
-      iterators.add(new ModifierIterator(internal.get(ModifierType.ADDITIONAL_COST).iterator()));
+      iterators.add(new BaseModifierIterator<>(internal.get(ModifierType.ADDITIONAL_COST).iterator()));
     }
     if (!internal.get(ModifierType.ALL_COST_MULTIPLIER).isEmpty()) {
-      iterators.add(new ModifierIterator(internal.get(ModifierType.ALL_COST_MULTIPLIER).iterator()));
+      iterators.add(new BaseModifierIterator<>(internal.get(ModifierType.ALL_COST_MULTIPLIER).iterator()));
     }
-    return Iterators.concat(iterators.toArray(new ModifierIterator[0]));
+    // TODO?
+    return Iterators.concat(iterators.toArray(new BaseModifierIterator[0]));
   }
 
   @Override
-  public boolean add(ModifierInstance modifierInstance) {
+  public boolean add(T modifierInstance) {
     IModifierCore core = modifierInstance.getCore();
     coreToInstance.put(core, modifierInstance);
     internal.get(modifierInstance.getType()).removeIf(o -> o.getCore().equals(core));
     return internal.get(modifierInstance.getType()).add(modifierInstance);
   }
 
+  // TODO?
+  @SuppressWarnings("unchecked")
   @Override
   public boolean remove(Object o) {
-    if (!(o instanceof ModifierInstance)) {
+    if (!(o instanceof StaffModifierInstance)) {
       return false;
     }
 
-    return internal.get(((ModifierInstance) o).getType()).remove(o);
+    return internal.get(((T) o).getType()).remove(o);
   }
 
   public Object2DoubleOpenHashMap<Herb> apply (Object2DoubleOpenHashMap<Herb> costs) {
-    for (ModifierInstance m : this) {
+    for (T m : this) {
       costs = m.apply(costs);
     }
     return costs;
@@ -135,7 +139,7 @@ public class ModifierInstanceList implements IModifierList<ModifierInstance, NBT
   public NBTTagCompound serializeNBT() {
     NBTTagCompound result = new NBTTagCompound();
     NBTTagList list = new NBTTagList();
-    for (ModifierInstance m : this) {
+    for (T m : this) {
       list.appendTag(m.serializeNBT());
     }
     result.setString("s", spell.getRegistryName().toString());
@@ -144,30 +148,30 @@ public class ModifierInstanceList implements IModifierList<ModifierInstance, NBT
   }
 
   @Override
-  public void deserializeNBT(NBTTagCompound tag) {
+  public abstract void deserializeNBT(NBTTagCompound tag); /*
     NBTTagList nbt = tag.getTagList("l", Constants.NBT.TAG_COMPOUND);
 
     for (int i = 0; i < nbt.tagCount(); i++) {
       NBTTagCompound thisTag = nbt.getCompoundTagAt(i);
-      this.add(ModifierInstance.fromNBT(thisTag));
+      this.add(StaffModifierInstance.fromNBT(thisTag));
     }
 
     SpellBase other = AbstractSpellInfo.getSpellFromTag(tag);
     if (!other.getRegistryName().equals(spell.getRegistryName())) {
       Roots.logger.error("Tried to deserialize mismatched ModifierInstanceLists for spell " + spell.getRegistryName() + ", trying to load for " + other.getRegistryName());
     }
-  }
+  }*/
 
-  public static ModifierInstanceList fromNBT(NBTTagCompound tag) { // NBTTagList tag) {
-    ModifierInstanceList result = new ModifierInstanceList(AbstractSpellInfo.getSpellFromTag(tag));
+  /*public static BaseModifierInstanceList fromNBT(NBTTagCompound tag) { // NBTTagList tag) {
+    BaseModifierInstanceList result = new BaseModifierInstanceList(AbstractSpellInfo.getSpellFromTag(tag));
     result.deserializeNBT(tag);
     return result;
-  }
+  }*/
 
-  private static class ModifierIterator implements Iterator<ModifierInstance> {
-    private final Iterator<ModifierInstance> internalIterator;
+  private static class BaseModifierIterator<T extends BaseModifierInstance> implements Iterator<T> {
+    private final Iterator<T> internalIterator;
 
-    private ModifierIterator(Iterator<ModifierInstance> internalIterator) {
+    private BaseModifierIterator(Iterator<T> internalIterator) {
       this.internalIterator = internalIterator;
     }
 
@@ -177,7 +181,7 @@ public class ModifierInstanceList implements IModifierList<ModifierInstance, NBT
     }
 
     @Override
-    public ModifierInstance next() {
+    public T next() {
       return this.internalIterator.next();
     }
 
@@ -187,7 +191,7 @@ public class ModifierInstanceList implements IModifierList<ModifierInstance, NBT
     }
 
     @Override
-    public void forEachRemaining(Consumer<? super ModifierInstance> action) {
+    public void forEachRemaining(Consumer<? super T> action) {
       this.internalIterator.forEachRemaining(action);
     }
   }
@@ -196,7 +200,7 @@ public class ModifierInstanceList implements IModifierList<ModifierInstance, NBT
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    ModifierInstanceList that = (ModifierInstanceList) o;
+    BaseModifierInstanceList that = (BaseModifierInstanceList) o;
     if (internal.size() != that.internal.size()) {
       return false;
     }

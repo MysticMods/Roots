@@ -116,7 +116,7 @@ public class ContainerLibrary extends Container {
   @Override
   @Nonnull
   public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
-    if (slotId != 999) {
+    if (slotId != -999) {
       Slot slot = getSlot(slotId);
       if (slot instanceof SlotLibraryInfo) {
         SlotLibraryInfo info = (SlotLibraryInfo) slot;
@@ -137,5 +137,10 @@ public class ContainerLibrary extends Container {
     }
 
     return super.slotClick(slotId, dragType, clickTypeIn, player);
+  }
+
+  @Override
+  public void detectAndSendChanges() {
+    super.detectAndSendChanges();
   }
 }

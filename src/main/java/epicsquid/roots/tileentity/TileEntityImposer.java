@@ -7,9 +7,8 @@ import epicsquid.roots.GuiHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemDruidKnife;
-import epicsquid.roots.modifiers.IModifier;
-import epicsquid.roots.modifiers.instance.ModifierInstance;
-import epicsquid.roots.modifiers.instance.ModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
+import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
 import epicsquid.roots.modifiers.modifier.IModifierCore;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
@@ -132,7 +131,7 @@ public class TileEntityImposer extends TileBase implements ITickable {
   public void toggleModifier(IModifierCore core) {
     if (world != null && !world.isRemote) {
       StaffSpellStorage storage = getSpellStorage();
-      ModifierInstance modifier = getModifier(storage, core);
+      StaffModifierInstance modifier = getModifier(storage, core);
       if (modifier == null) {
         return;
       }
@@ -145,7 +144,7 @@ public class TileEntityImposer extends TileBase implements ITickable {
   }
 
   @Nullable
-  private ModifierInstance getModifier(StaffSpellStorage storage, IModifierCore core) {
+  private StaffModifierInstance getModifier(StaffSpellStorage storage, IModifierCore core) {
     if (storage == null) {
       return null;
     }
@@ -153,7 +152,7 @@ public class TileEntityImposer extends TileBase implements ITickable {
     if (info == null) {
       return null;
     }
-    ModifierInstanceList modifiers = info.getModifiers();
+    BaseModifierInstanceList modifiers = info.getModifiers();
     if (modifiers == null) {
       return null;
     }
@@ -164,7 +163,7 @@ public class TileEntityImposer extends TileBase implements ITickable {
   public void addModifier(IModifierCore core, ItemStack stack) {
     if (world != null && !world.isRemote) {
       StaffSpellStorage storage = getSpellStorage();
-      ModifierInstance modifier = getModifier(storage, core);
+      StaffModifierInstance modifier = getModifier(storage, core);
       if (modifier == null) {
         return;
       }

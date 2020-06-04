@@ -2,7 +2,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"3": "roots:blocks/imposer"
+		"3": "roots:blocks/imposer",
+		"particle": "roots:blocks/imposer"
 	},
 	"elements": [
 		{
