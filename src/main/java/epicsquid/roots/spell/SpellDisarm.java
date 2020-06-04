@@ -5,7 +5,7 @@ import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.modifiers.instance.ModifierInstanceList;
+import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
 import epicsquid.roots.network.fx.MessageDisarmFX;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.EntityLivingBase;
@@ -56,7 +56,7 @@ public class SpellDisarm extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer caster, BaseModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     BlockPos playerPos = caster.getPosition();
     World world = caster.world;
 

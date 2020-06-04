@@ -5,7 +5,7 @@ import epicsquid.mysticalworld.recipe.Ingredients;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.mechanics.Growth;
-import epicsquid.roots.modifiers.instance.ModifierInstanceList;
+import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
 import epicsquid.roots.network.fx.MessageLifeInfusionFX;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.state.IBlockState;
@@ -47,7 +47,7 @@ public class SpellGrowthInfusion extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, BaseModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0), player.getLookVec().scale(8.0f).add(player.getPositionVector().add(0, player.getEyeHeight(), 0)));
     if (result != null) {
       if (result.typeOfHit == RayTraceResult.Type.BLOCK) {

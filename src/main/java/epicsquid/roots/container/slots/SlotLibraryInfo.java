@@ -9,7 +9,9 @@ import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class SlotLibraryInfo extends Slot {
+import javax.annotation.Nullable;
+
+public class SlotLibraryInfo extends Slot implements ILibrarySlot {
   private static IInventory emptyInventory = new InventoryBasic("[Null]", true, 0);
   private final SpellLibraryData data;
   private int slot;
@@ -34,7 +36,15 @@ public class SlotLibraryInfo extends Slot {
     return false;
   }
 
-  public static ItemStack stack = new ItemStack(Items.FLINT);
+  @Override
+  @Nullable
+  public LibrarySpellInfo getInfo() {
+    if (data == null) {
+      return null;
+    }
+
+    return data.get(slot);
+  }
 
   // TODO
   @Override

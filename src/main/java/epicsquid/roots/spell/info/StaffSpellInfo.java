@@ -3,10 +3,7 @@ package epicsquid.roots.spell.info;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.modifiers.instance.ModifierInstance;
-import epicsquid.roots.modifiers.instance.ModifierInstanceList;
-import epicsquid.roots.modifiers.modifier.Modifier;
-import epicsquid.roots.modifiers.modifier.ModifierList;
+import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
 import epicsquid.roots.spell.FakeSpell;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
@@ -14,27 +11,26 @@ import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
 
-public class StaffSpellInfo extends AbstractSpellModifiers<ModifierInstanceList> {
+public class StaffSpellInfo extends AbstractSpellModifiers<BaseModifierInstanceList> {
   public static StaffSpellInfo EMPTY = new StaffSpellInfo(FakeSpell.INSTANCE);
   private int cooldown = -1;
   private long cooldownStop = -1;
 
   public StaffSpellInfo(SpellBase spell) {
     super(spell);
-    modifiers = new ModifierInstanceList(spell);
+    modifiers = new BaseModifierInstanceList(spell);
   }
 
   @Override
-  public ModifierInstanceList getModifiers() {
+  public BaseModifierInstanceList getModifiers() {
     return modifiers;
   }
 
-  public void setModifiers(ModifierInstanceList modifiers) {
+  public void setModifiers(BaseModifierInstanceList modifiers) {
     this.modifiers = modifiers;
   }
 
@@ -94,7 +90,7 @@ public class StaffSpellInfo extends AbstractSpellModifiers<ModifierInstanceList>
   @Override
   public void deserializeNBT(NBTTagCompound nbt) {
     super.deserializeNBT(nbt);
-    this.modifiers = ModifierInstanceList.fromNBT(nbt.getCompoundTag("m"));
+    this.modifiers = BaseModifierInstanceList.fromNBT(nbt.getCompoundTag("m"));
     this.cooldown = nbt.getInteger("c");
     this.cooldownStop = nbt.getLong("l");
   }

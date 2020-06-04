@@ -3,7 +3,7 @@ package epicsquid.roots.spell;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.modifiers.instance.ModifierInstanceList;
+import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
 import epicsquid.roots.network.fx.MessageShatterBurstFX;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.state.IBlockState;
@@ -51,7 +51,7 @@ public class SpellShatter extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, BaseModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     if (!player.world.isRemote) {
       RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0),
           player.getLookVec().scale(8.0f).add(player.getPositionVector().add(0, player.getEyeHeight(), 0)));

@@ -1,7 +1,7 @@
 package epicsquid.roots.container.slots;
 
 import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.roots.modifiers.instance.ModifierInstance;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.modifier.IModifierCore;
 import epicsquid.roots.tileentity.TileEntityImposer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,7 +28,7 @@ public class SlotImposerModifierInfo extends Slot {
   }
 
   @Nullable
-  public ModifierInstance get () {
+  public StaffModifierInstance get () {
     return info.get(core);
   }
 
@@ -43,7 +43,7 @@ public class SlotImposerModifierInfo extends Slot {
 
   @Override
   public boolean isItemValid(ItemStack stack) {
-    ModifierInstance info = get();
+    StaffModifierInstance info = get();
     if (info == null) {
       return false;
     }
@@ -58,7 +58,7 @@ public class SlotImposerModifierInfo extends Slot {
   // TODO
   @Override
   public ItemStack getStack() {
-    ModifierInstance info = get();
+    StaffModifierInstance info = get();
     if (info == null) {
       return ItemStack.EMPTY;
     }
@@ -70,7 +70,7 @@ public class SlotImposerModifierInfo extends Slot {
   }
 
   public boolean isDisabled () {
-    ModifierInstance info = get();
+    StaffModifierInstance info = get();
     if (info == null) {
       return false;
     }
@@ -78,7 +78,7 @@ public class SlotImposerModifierInfo extends Slot {
   }
 
   public boolean isApplied () {
-    ModifierInstance info = get();
+    StaffModifierInstance info = get();
     if (info == null) {
       return false;
     }
@@ -86,7 +86,7 @@ public class SlotImposerModifierInfo extends Slot {
   }
 
   public boolean isApplicable () {
-    ModifierInstance info = get();
+    StaffModifierInstance info = get();
     return info != null;
   }
 
@@ -139,6 +139,6 @@ public class SlotImposerModifierInfo extends Slot {
   @FunctionalInterface
   public interface IModifierProvider {
     @Nullable
-    ModifierInstance get (IModifierCore core);
+    StaffModifierInstance get (IModifierCore core);
   }
 }

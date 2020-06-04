@@ -3,15 +3,13 @@ package epicsquid.roots.spell;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
-import epicsquid.roots.modifiers.instance.ModifierInstanceList;
+import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 public class SpellAquaBubble extends SpellBase {
@@ -47,7 +45,7 @@ public class SpellAquaBubble extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer caster, BaseModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     caster.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, (int) (duration + duration * amplifier), 0, false, false));
     return true;
   }

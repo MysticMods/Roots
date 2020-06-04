@@ -1,0 +1,31 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "T T",
+    " B ",
+    "SSS"  ],
+  "key": {
+    "S": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "cobblestone"
+      }
+    ],
+    "B": [
+      {
+        "item": "roots:imbuer",
+        "data": 0
+      }
+    ],
+    "T": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "stickWood"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:imposer",
+    "data": 0
+  }
+}

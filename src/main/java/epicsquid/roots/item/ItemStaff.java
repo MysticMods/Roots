@@ -3,9 +3,6 @@ package epicsquid.roots.item;
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.EventManager;
-import epicsquid.roots.modifiers.ModifierType;
-import epicsquid.roots.modifiers.instance.ModifierInstance;
-import epicsquid.roots.modifiers.instance.ModifierInstanceList;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.DustSpellStorage;
@@ -35,10 +32,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.StringJoiner;
 
 public class ItemStaff extends ItemBase {
   public ItemStaff(String name) {

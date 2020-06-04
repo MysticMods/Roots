@@ -1,4 +1,4 @@
-package epicsquid.roots.modifiers.instance;
+package epicsquid.roots.modifiers.instance.base;
 
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.modifiers.IModifier;
@@ -19,15 +19,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Objects;
 
-public class ModifierInstance implements INBTSerializable<NBTTagCompound>, IModifier {
-  private Modifier modifier;
-  private boolean applied;
-  private boolean enabled;
+public class BaseModifierInstance implements INBTSerializable<NBTTagCompound>, IModifier {
+  protected Modifier modifier;
+  protected boolean applied;
 
-  public ModifierInstance(Modifier modifier, boolean applied, boolean enabled) {
+  public BaseModifierInstance(Modifier modifier, boolean applied) {
     this.modifier = modifier;
     this.applied = applied;
-    this.enabled = enabled;
+  }
+
+  public BaseModifierInstance() {
+    this.modifier = null;
+    this.applied = false;
   }
 
   public Modifier getModifier() {
@@ -38,16 +41,8 @@ public class ModifierInstance implements INBTSerializable<NBTTagCompound>, IModi
     return applied;
   }
 
-  public boolean isEnabled() {
-    return enabled;
-  }
-
   public void setApplied() {
     this.applied = true;
-  }
-
-  public void setEnabled(boolean enabled) {
-    this.enabled = enabled;
   }
 
   @Override
@@ -58,14 +53,6 @@ public class ModifierInstance implements INBTSerializable<NBTTagCompound>, IModi
   @Override
   public String getFormatting() {
     return modifier.getFormatting();
-  }
-
-  public String getModifierEnabledKey() {
-    if (isEnabled()) {
-      return "roots.modifier.is_enabled";
-    } else {
-      return "roots.modifier.is_disabled";
-    }
   }
 
   @SideOnly(Side.CLIENT)
@@ -86,7 +73,7 @@ public class ModifierInstance implements INBTSerializable<NBTTagCompound>, IModi
   }
 
   @SideOnly(Side.CLIENT)
-  public String describeCost () {
+  public String describeCost() {
     switch (modifier.getType()) {
       case NO_COST:
         return I18n.format("roots.tooltip.modifier.no_cost");
@@ -133,7 +120,6 @@ public class ModifierInstance implements INBTSerializable<NBTTagCompound>, IModi
     NBTTagCompound tag = new NBTTagCompound();
     tag.setString("m", modifier.getRegistryName().toString());
     tag.setBoolean("a", applied);
-    tag.setBoolean("e", enabled);
     return tag;
   }
 
@@ -141,36 +127,31 @@ public class ModifierInstance implements INBTSerializable<NBTTagCompound>, IModi
   public void deserializeNBT(NBTTagCompound tag) {
     this.modifier = ModifierRegistry.get(new ResourceLocation(tag.getString("m")));
     this.applied = tag.getBoolean("a");
-    this.enabled = tag.getBoolean("e");
   }
 
-  public static ModifierInstance fromNBT(NBTTagCompound tag) {
-    ModifierInstance result = new ModifierInstance(null, false, false);
+  // TODO
+  public static BaseModifierInstance fromNBT(NBTTagCompound tag) {
+    BaseModifierInstance result = new BaseModifierInstance();
     result.deserializeNBT(tag);
     return result;
   }
 
   @Override
   public Object2DoubleOpenHashMap<Herb> apply(Object2DoubleOpenHashMap<Herb> costs) {
-    if (!this.enabled || !this.applied) {
-      return costs;
-    }
-
-    return modifier.apply(costs);
+    return costs;
   }
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    ModifierInstance that = (ModifierInstance) o;
+    BaseModifierInstance that = (BaseModifierInstance) o;
     return applied == that.applied &&
-        enabled == that.enabled &&
         modifier.equals(that.modifier);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(modifier, applied, enabled);
+    return Objects.hash(modifier, applied);
   }
 }

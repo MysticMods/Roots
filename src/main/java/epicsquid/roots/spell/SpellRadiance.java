@@ -4,7 +4,7 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.modifiers.instance.ModifierInstanceList;
+import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
 import epicsquid.roots.network.fx.MessageRadianceBeamFX;
 import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
 import epicsquid.roots.util.types.Property;
@@ -56,7 +56,7 @@ public class SpellRadiance extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, ModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, BaseModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     if (!player.world.isRemote && player.ticksExisted % 2 == 0) {
       RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0),
           player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)));
