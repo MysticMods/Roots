@@ -1,12 +1,12 @@
 package epicsquid.roots.spell.info;
 
-import epicsquid.roots.modifiers.modifier.ModifierList;
+import epicsquid.roots.modifiers.instance.library.LibraryModifierInstanceList;
 import epicsquid.roots.spell.SpellBase;
 import net.minecraft.nbt.NBTTagCompound;
 
 import javax.annotation.Nullable;
 
-public class LibrarySpellInfo extends AbstractSpellModifiers<ModifierList> {
+public class LibrarySpellInfo extends AbstractSpellModifiers<LibraryModifierInstanceList> {
   public static LibrarySpellInfo EMPTY = new LibrarySpellInfo();
 
   private boolean obtained;
@@ -16,13 +16,13 @@ public class LibrarySpellInfo extends AbstractSpellModifiers<ModifierList> {
 
   public LibrarySpellInfo(SpellBase spell) {
     super(spell);
-    this.modifiers = new ModifierList(spell);
+    this.modifiers = new LibraryModifierInstanceList(spell);
     this.obtained = false;
   }
 
   @Nullable
   @Override
-  public ModifierList getModifiers() {
+  public LibraryModifierInstanceList getModifiers() {
     return modifiers;
   }
 
@@ -30,11 +30,11 @@ public class LibrarySpellInfo extends AbstractSpellModifiers<ModifierList> {
     return obtained;
   }
 
-  public void setObtained () {
+  public void setObtained() {
     setObtained(true);
   }
 
-  public void setObtained (boolean value) {
+  public void setObtained(boolean value) {
     this.obtained = value;
   }
 
@@ -49,7 +49,7 @@ public class LibrarySpellInfo extends AbstractSpellModifiers<ModifierList> {
   @Override
   public void deserializeNBT(NBTTagCompound nbt) {
     super.deserializeNBT(nbt);
-    this.modifiers = new ModifierList(getSpell());
+    this.modifiers = new LibraryModifierInstanceList(getSpell());
     this.modifiers.deserializeNBT(nbt.getCompoundTag("m"));
     this.obtained = nbt.getBoolean("o");
   }
@@ -59,7 +59,7 @@ public class LibrarySpellInfo extends AbstractSpellModifiers<ModifierList> {
     return this == EMPTY;
   }
 
-  public StaffSpellInfo toStaff () {
+  public StaffSpellInfo toStaff() {
     return new StaffSpellInfo(getSpell());
   }
 

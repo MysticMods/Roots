@@ -21,6 +21,10 @@ public class StaffModifierInstance extends BaseModifierInstance {
     this.enabled = false;
   }
 
+  public StaffModifierInstance(Modifier modifier) {
+    this(modifier, false, false);
+  }
+
   public boolean isEnabled() {
     return enabled;
   }

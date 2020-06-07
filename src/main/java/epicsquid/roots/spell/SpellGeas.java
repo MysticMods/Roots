@@ -4,7 +4,7 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
-import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -48,7 +48,7 @@ public class SpellGeas extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, BaseModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     boolean foundTarget = false;
     for (int i = 0; i < 4 && !foundTarget; i++) {
       double x = player.posX + player.getLookVec().x * 3.0 * (float) i;

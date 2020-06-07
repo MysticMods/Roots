@@ -5,7 +5,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.mechanics.Harvest;
-import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageHarvestCompleteFX;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.Block;
@@ -53,7 +53,7 @@ public class SpellHarvest extends SpellBase {
   private static List<Block> skipBlocks = Arrays.asList(Blocks.BEDROCK, Blocks.GRASS, Blocks.DIRT, Blocks.STONE, Blocks.TALLGRASS, Blocks.WATER, Blocks.LAVA, Blocks.DOUBLE_PLANT, Blocks.MELON_STEM, Blocks.PUMPKIN_STEM);
 
   @Override
-  public boolean cast(EntityPlayer player, BaseModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     Harvest.prepare();
     List<BlockPos> affectedPositions = new ArrayList<>();
     List<BlockPos> pumpkinsAndMelons = new ArrayList<>();

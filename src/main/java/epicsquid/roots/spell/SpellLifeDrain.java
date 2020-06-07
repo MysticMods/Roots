@@ -4,7 +4,7 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageLifeDrainAbsorbFX;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.EntityLivingBase;
@@ -60,7 +60,7 @@ public class SpellLifeDrain extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, BaseModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     if (!player.world.isRemote) {
       boolean foundTarget = false;
       PacketHandler.sendToAllTracking(new MessageLifeDrainAbsorbFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ), player);

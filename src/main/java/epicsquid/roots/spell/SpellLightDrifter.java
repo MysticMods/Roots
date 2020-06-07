@@ -4,7 +4,7 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.client.SpectatorHandler;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.MessageLightDrifterSync;
 import epicsquid.roots.network.fx.MessageLightDrifterFX;
 import epicsquid.roots.util.Constants;
@@ -48,7 +48,7 @@ public class SpellLightDrifter extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, BaseModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     if (!player.world.isRemote) {
       player.capabilities.disableDamage = true;
       player.capabilities.allowFlying = true;

@@ -2,7 +2,7 @@ package epicsquid.roots.spell;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.mechanics.Magnetize;
-import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
@@ -32,7 +32,7 @@ public class SpellMagnetism extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
         new OreIngredient("ingotIron"),
         new OreIngredient("dustRedstone"),
@@ -43,7 +43,7 @@ public class SpellMagnetism extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, BaseModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     // TODO: Check to see what the potential standard is for "unmagnetising" things
     int count = 0;
     count += Magnetize.pull(EntityItem.class, player.world, player.getPosition(), (int) (radius_x + radius_x * amplifier), (int) (radius_y + radius_y * amplifier), (int) (radius_z + radius_z * amplifier));

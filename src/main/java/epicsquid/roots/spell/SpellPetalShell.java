@@ -4,7 +4,7 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
-import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,7 +44,7 @@ public class SpellPetalShell extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, BaseModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     if (!player.world.isRemote) {
       player.addPotionEffect(new PotionEffect(ModPotions.petal_shell, (int) (duration + duration * amplifier), (int) (maxShells + maxShells * amplifier), false, false));
       PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ), player);

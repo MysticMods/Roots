@@ -3,7 +3,7 @@ package epicsquid.roots.spell;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
-import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,7 +46,7 @@ public class SpellWinterCloud extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, BaseModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     World world = player.world;
     player.addPotionEffect(new PotionEffect(ModPotions.freeze, duration, 0, false, false));
     world.playSound(null, player.getPosition(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 2f);

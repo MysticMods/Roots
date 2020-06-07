@@ -1,7 +1,6 @@
 package epicsquid.roots.spell.info;
 
 import epicsquid.roots.spell.SpellBase;
-import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class SpellDustInfo extends AbstractSpellInfo {
