@@ -1,14 +1,10 @@
 package epicsquid.roots.spell.info;
 
-import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.INBTSerializable;
-
-import javax.annotation.Nullable;
 
 public abstract class AbstractSpellInfo implements INBTSerializable<NBTTagCompound> {
   protected SpellBase spell;

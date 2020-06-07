@@ -3,7 +3,7 @@ package epicsquid.roots.spell;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageDesaturationFX;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.player.EntityPlayer;
@@ -47,7 +47,7 @@ public class SpellDesaturate extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, BaseModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer caster, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     if (!caster.shouldHeal()) {
       return false;
     }

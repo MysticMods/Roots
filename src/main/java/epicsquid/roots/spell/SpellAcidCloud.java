@@ -8,7 +8,7 @@ import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.modifiers.ModifierRegistry;
 import epicsquid.roots.modifiers.ModifierType;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
-import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.modifiers.modifier.Modifier;
 import epicsquid.roots.modifiers.modifier.ModifierCores;
 import epicsquid.roots.network.fx.MessageAcidCloudFX;
@@ -66,7 +66,7 @@ public class SpellAcidCloud extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, BaseModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     if (!player.world.isRemote) {
       StaffModifierInstance fire = modifiers.get(FIRE_CLOUD);
       List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class,

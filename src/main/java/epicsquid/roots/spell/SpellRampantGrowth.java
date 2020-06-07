@@ -5,7 +5,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.mechanics.Growth;
-import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.state.IBlockState;
@@ -53,7 +53,7 @@ public class SpellRampantGrowth extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, BaseModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     List<BlockPos> positions = Growth.collect(player.world, player.getPosition(), radius_x, radius_y, radius_z);
     if (positions.isEmpty()) return false;
     if (!player.world.isRemote) {

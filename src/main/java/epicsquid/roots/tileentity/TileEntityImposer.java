@@ -9,6 +9,7 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemDruidKnife;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.modifiers.modifier.IModifierCore;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
@@ -152,7 +153,7 @@ public class TileEntityImposer extends TileBase implements ITickable {
     if (info == null) {
       return null;
     }
-    BaseModifierInstanceList modifiers = info.getModifiers();
+    StaffModifierInstanceList modifiers = info.getModifiers();
     if (modifiers == null) {
       return null;
     }

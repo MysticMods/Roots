@@ -3,7 +3,7 @@ package epicsquid.roots.spell;
 import epicsquid.roots.Roots;
 import epicsquid.roots.entity.spell.EntityThornTrap;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.entity.player.EntityPlayer;
@@ -47,7 +47,7 @@ public class SpellRoseThorns extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, BaseModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     if (!player.world.isRemote) {
       EntityThornTrap trap = new EntityThornTrap(player.world, (float) (damage + damage * amplifier), (int) (duration + duration * amplifier), (int) (slownessDuration + slownessAmplifier * amplifier), slownessAmplifier, poisonDuration, poisonAmplifier);
       trap.setPlayer(player.getUniqueID());

@@ -19,16 +19,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Objects;
 
-public class BaseModifierInstance implements INBTSerializable<NBTTagCompound>, IModifier {
+public abstract class BaseModifierInstance implements INBTSerializable<NBTTagCompound>, IModifier {
   protected Modifier modifier;
   protected boolean applied;
 
-  public BaseModifierInstance(Modifier modifier, boolean applied) {
+  protected BaseModifierInstance(Modifier modifier, boolean applied) {
     this.modifier = modifier;
     this.applied = applied;
   }
 
-  public BaseModifierInstance() {
+  protected BaseModifierInstance() {
     this.modifier = null;
     this.applied = false;
   }
@@ -129,17 +129,8 @@ public class BaseModifierInstance implements INBTSerializable<NBTTagCompound>, I
     this.applied = tag.getBoolean("a");
   }
 
-  // TODO
-  public static BaseModifierInstance fromNBT(NBTTagCompound tag) {
-    BaseModifierInstance result = new BaseModifierInstance();
-    result.deserializeNBT(tag);
-    return result;
-  }
-
   @Override
-  public Object2DoubleOpenHashMap<Herb> apply(Object2DoubleOpenHashMap<Herb> costs) {
-    return costs;
-  }
+  public abstract Object2DoubleOpenHashMap<Herb> apply(Object2DoubleOpenHashMap<Herb> costs);
 
   @Override
   public boolean equals(Object o) {

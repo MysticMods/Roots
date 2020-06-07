@@ -4,6 +4,7 @@ import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.info.LibrarySpellInfo;
 import epicsquid.roots.spell.info.SpellDustInfo;
+import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.DustSpellStorage;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -71,6 +72,18 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
     return spells.get(spell);
   }
 
+  public void updateSpell(LibrarySpellInfo info) {
+    SpellBase spell = info.getSpell();
+    spells.put(spell, info);
+    list = null;
+    markDirty();
+  }
+
+  public void updateSpell(StaffSpellInfo info) {
+    SpellBase spell = info.getSpell();
+
+  }
+
   @SuppressWarnings("NullableProblems")
   @Override
   public void readFromNBT(NBTTagCompound nbt) {
@@ -81,7 +94,7 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
       spells.put(instance.getSpell(), instance);
     }
     uuid = nbt.getUniqueId("uuid");
-    list = null;
+    this.list = null;
   }
 
   @Override

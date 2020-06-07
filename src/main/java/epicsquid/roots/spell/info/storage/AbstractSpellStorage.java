@@ -1,8 +1,8 @@
 package epicsquid.roots.spell.info.storage;
 
 import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.roots.spell.info.AbstractSpellInfo;
 import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.spell.info.AbstractSpellInfo;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,7 +13,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implements INBTSerializable<NBTTagCompound> {
   protected ItemStack stack;

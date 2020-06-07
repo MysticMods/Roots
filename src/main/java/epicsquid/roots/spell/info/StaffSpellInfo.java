@@ -3,7 +3,7 @@ package epicsquid.roots.spell.info;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.spell.FakeSpell;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
@@ -15,22 +15,22 @@ import net.minecraft.util.ResourceLocation;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
-public class StaffSpellInfo extends AbstractSpellModifiers<BaseModifierInstanceList> {
+public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstanceList> {
   public static StaffSpellInfo EMPTY = new StaffSpellInfo(FakeSpell.INSTANCE);
   private int cooldown = -1;
   private long cooldownStop = -1;
 
   public StaffSpellInfo(SpellBase spell) {
     super(spell);
-    modifiers = new BaseModifierInstanceList(spell);
+    modifiers = new StaffModifierInstanceList(spell);
   }
 
   @Override
-  public BaseModifierInstanceList getModifiers() {
+  public StaffModifierInstanceList getModifiers() {
     return modifiers;
   }
 
-  public void setModifiers(BaseModifierInstanceList modifiers) {
+  public void setModifiers(StaffModifierInstanceList modifiers) {
     this.modifiers = modifiers;
   }
 
@@ -90,7 +90,7 @@ public class StaffSpellInfo extends AbstractSpellModifiers<BaseModifierInstanceL
   @Override
   public void deserializeNBT(NBTTagCompound nbt) {
     super.deserializeNBT(nbt);
-    this.modifiers = BaseModifierInstanceList.fromNBT(nbt.getCompoundTag("m"));
+    this.modifiers = StaffModifierInstanceList.fromNBT(nbt.getCompoundTag("m"));
     this.cooldown = nbt.getInteger("c");
     this.cooldownStop = nbt.getLong("l");
   }

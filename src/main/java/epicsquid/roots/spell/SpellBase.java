@@ -9,7 +9,7 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.BaseModifiers;
 import epicsquid.roots.modifiers.ModifierType;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
-import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.modifiers.modifier.Modifier;
 import epicsquid.roots.modifiers.modifier.ModifierList;
 import epicsquid.roots.recipe.IRootsRecipe;
@@ -136,7 +136,7 @@ public abstract class SpellBase extends RegistryItem {
     return this;
   }
 
-  public boolean costsMet(EntityPlayer player, BaseModifierInstanceList modifiers) {
+  public boolean costsMet(EntityPlayer player, StaffModifierInstanceList modifiers) {
     boolean matches = true;
     for (Map.Entry<Herb, Double> entry : modifiers.apply(this.costs).entrySet()) {
       Herb herb = entry.getKey();
@@ -165,7 +165,7 @@ public abstract class SpellBase extends RegistryItem {
     return matches && costs.size() > 0 || player.capabilities.isCreativeMode;
   }
 
-  public void enactCosts(EntityPlayer player, BaseModifierInstanceList modifiers) {
+  public void enactCosts(EntityPlayer player, StaffModifierInstanceList modifiers) {
     for (Map.Entry<Herb, Double> entry : modifiers.apply(this.costs).entrySet()) {
       Herb herb = entry.getKey();
       double d = entry.getValue();
@@ -173,7 +173,7 @@ public abstract class SpellBase extends RegistryItem {
     }
   }
 
-  public void enactTickCosts(EntityPlayer player, BaseModifierInstanceList modifiers) {
+  public void enactTickCosts(EntityPlayer player, StaffModifierInstanceList modifiers) {
     for (Map.Entry<Herb, Double> entry : modifiers.apply(this.costs).entrySet()) {
       Herb herb = entry.getKey();
       double d = entry.getValue();
@@ -182,7 +182,7 @@ public abstract class SpellBase extends RegistryItem {
   }
 
   @SideOnly(Side.CLIENT)
-  public void addToolTip(List<String> tooltip, @Nullable BaseModifierInstanceList list) {
+  public void addToolTip(List<String> tooltip, @Nullable StaffModifierInstanceList list) {
     Object2DoubleOpenHashMap<Herb> costs = this.costs;
     if (list != null) {
       costs = list.apply(costs);
@@ -304,7 +304,7 @@ public abstract class SpellBase extends RegistryItem {
   }
 
   public CastResult cast(EntityPlayer caster, StaffSpellInfo info, int ticks) {
-    BaseModifierInstanceList modifiers = info.getModifiers();
+    StaffModifierInstanceList modifiers = info.getModifiers();
     double amplifier = 0;
     StaffModifierInstance mod = modifiers.get(BaseModifiers.EMPOWER);
     if (mod != null && mod.isEnabled()) {
@@ -337,7 +337,7 @@ public abstract class SpellBase extends RegistryItem {
     }
   }
 
-  protected abstract boolean cast(EntityPlayer caster, BaseModifierInstanceList modifiers, int ticks, double amplifier, double speedy);
+  protected abstract boolean cast(EntityPlayer caster, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy);
 
   public float getRed1() {
     return red1;

@@ -11,6 +11,7 @@ import epicsquid.roots.container.slots.SlotImposerModifierInfo;
 import epicsquid.roots.container.slots.SlotImposerSpellInfo;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.modifiers.modifier.IModifierCore;
 import epicsquid.roots.modifiers.modifier.ModifierCores;
 import epicsquid.roots.spell.info.StaffSpellInfo;
@@ -69,7 +70,7 @@ public class ContainerImposer extends Container {
     if (info == null) {
       return null;
     }
-    BaseModifierInstanceList mods = info.getModifiers();
+    StaffModifierInstanceList mods = info.getModifiers();
     if (mods == null) {
       return null;
     }

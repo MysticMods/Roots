@@ -5,7 +5,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.init.ModBlocks;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageFallBladesFX;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.Block;
@@ -57,7 +57,7 @@ public class SpellAutumnsFall extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, BaseModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer caster, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     List<BlockPos> blocks = Util.getBlocksWithinRadius(caster.world, caster.getPosition(), radius, radius_y, radius, blockPos -> isAffectedByFallSpell(caster.world, blockPos));
 
     if (blocks.isEmpty()) {

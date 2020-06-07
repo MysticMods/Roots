@@ -4,7 +4,7 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
-import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageSaturationFX;
 import epicsquid.roots.util.types.Property;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -67,7 +67,7 @@ public class SpellSaturate extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, BaseModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer caster, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     World world = caster.world;
     FoodStats stats = caster.getFoodStats();
     int currentFood = stats.getFoodLevel();

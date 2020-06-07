@@ -3,7 +3,7 @@ package epicsquid.roots.spell;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,7 +46,7 @@ public class SpellFeyLight extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, BaseModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
     World world = player.world;
     RayTraceResult result = this.rayTrace(player, player.isSneaking() ? 1 : 10);
     if (result != null && (!player.isSneaking() && result.typeOfHit == RayTraceResult.Type.BLOCK)) {

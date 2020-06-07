@@ -1,6 +1,7 @@
 package epicsquid.roots.modifiers.instance.base;
 
 import com.google.common.collect.Iterators;
+import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.modifiers.IModifierList;
 import epicsquid.roots.modifiers.ModifierType;
@@ -8,9 +9,11 @@ import epicsquid.roots.modifiers.modifier.IModifierCore;
 import epicsquid.roots.modifiers.modifier.Modifier;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.spell.info.AbstractSpellInfo;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -147,26 +150,19 @@ public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> i
     return result;
   }
 
-  @Override
-  public abstract void deserializeNBT(NBTTagCompound tag); /*
+  public void deserializeNBT(NBTTagCompound tag, Function<NBTTagCompound, T> creator) {
     NBTTagList nbt = tag.getTagList("l", Constants.NBT.TAG_COMPOUND);
 
     for (int i = 0; i < nbt.tagCount(); i++) {
       NBTTagCompound thisTag = nbt.getCompoundTagAt(i);
-      this.add(StaffModifierInstance.fromNBT(thisTag));
+      this.add(creator.apply(thisTag));
     }
 
     SpellBase other = AbstractSpellInfo.getSpellFromTag(tag);
     if (!other.getRegistryName().equals(spell.getRegistryName())) {
       Roots.logger.error("Tried to deserialize mismatched ModifierInstanceLists for spell " + spell.getRegistryName() + ", trying to load for " + other.getRegistryName());
     }
-  }*/
-
-  /*public static BaseModifierInstanceList fromNBT(NBTTagCompound tag) { // NBTTagList tag) {
-    BaseModifierInstanceList result = new BaseModifierInstanceList(AbstractSpellInfo.getSpellFromTag(tag));
-    result.deserializeNBT(tag);
-    return result;
-  }*/
+  }
 
   private static class BaseModifierIterator<T extends BaseModifierInstance> implements Iterator<T> {
     private final Iterator<T> internalIterator;
