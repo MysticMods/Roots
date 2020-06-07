@@ -1,5 +1,6 @@
 package epicsquid.roots.model.armor;
 
+import epicsquid.mysticallib.client.model.ModelArmorBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 
