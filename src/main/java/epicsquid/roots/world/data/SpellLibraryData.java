@@ -31,7 +31,7 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
 
   public SpellLibraryData(String name) {
     super(name);
-    this.uuid = UUID.fromString(identifier.replace(identifier, ""));
+    this.uuid = UUID.fromString(name.replace(identifier, ""));
     generateMap();
   }
 

@@ -2,6 +2,7 @@ package epicsquid.roots.spell.info;
 
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -47,4 +48,6 @@ public abstract class AbstractSpellInfo implements INBTSerializable<NBTTagCompou
   }
 
   public abstract boolean isEmpty ();
+
+  public abstract ItemStack asStack();
 }

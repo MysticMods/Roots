@@ -1,5 +1,6 @@
 package epicsquid.roots.container.slots;
 
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.info.LibrarySpellInfo;
 import epicsquid.roots.world.data.SpellLibraryData;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,12 +13,19 @@ import net.minecraft.item.ItemStack;
 import javax.annotation.Nullable;
 
 public class SlotLibraryInfo extends Slot implements ILibrarySlot {
-  private static IInventory emptyInventory = new InventoryBasic("[Null]", true, 0);
+  private IInventory libraryInventory;
   private final SpellLibraryData data;
   private int slot;
 
-  public SlotLibraryInfo(SpellLibraryData data, int slot, int xPosition, int yPosition) {
-    super(emptyInventory, 0, xPosition, yPosition);
+  public static SlotLibraryInfo create (SpellLibraryData data, int slot, int x, int y) {
+    IInventory inventory = new InventoryBasic("[Slot: " + slot + "]", true, 1);
+    inventory.setInventorySlotContents(0, ItemStack.EMPTY);
+    return new SlotLibraryInfo(data, inventory, slot, x, y);
+  }
+
+  private SlotLibraryInfo(SpellLibraryData data, IInventory libraryInventory, int slot, int xPosition, int yPosition) {
+    super(libraryInventory, 0, xPosition, yPosition);
+    this.libraryInventory = libraryInventory;
     this.data = data;
     this.slot = slot;
   }
@@ -39,6 +47,8 @@ public class SlotLibraryInfo extends Slot implements ILibrarySlot {
   @Override
   @Nullable
   public LibrarySpellInfo getInfo() {
+    // TODO
+
     if (data == null) {
       return null;
     }
@@ -50,7 +60,7 @@ public class SlotLibraryInfo extends Slot implements ILibrarySlot {
   @Override
   public ItemStack getStack() {
     if (data == null) {
-      return ItemStack.EMPTY;
+      return libraryInventory.getStackInSlot(0);
     }
 
     LibrarySpellInfo info = data.get(slot);
@@ -58,13 +68,13 @@ public class SlotLibraryInfo extends Slot implements ILibrarySlot {
       return ItemStack.EMPTY;
     }
 
-    return info.toStaff().asStack();
+    return info.asStack();
   }
 
   @Override
   public boolean getHasStack() {
     if (data == null) {
-      return false;
+      return !libraryInventory.getStackInSlot(0).isEmpty();
     }
 
     LibrarySpellInfo info = data.get(slot);
@@ -77,6 +87,9 @@ public class SlotLibraryInfo extends Slot implements ILibrarySlot {
 
   @Override
   public void putStack(ItemStack stack) {
+    if (data == null && (stack.getItem() == ModItems.spell_dust || stack.isEmpty())) {
+      libraryInventory.setInventorySlotContents(0, stack);
+    }
   }
 
   @Override
@@ -102,6 +115,10 @@ public class SlotLibraryInfo extends Slot implements ILibrarySlot {
   @Override
   public boolean isSameInventory(Slot other) {
     if (other instanceof SlotLibraryInfo) {
+      if (((SlotLibraryInfo)other).data == null) {
+        return ItemStack.areItemStacksEqual(((SlotLibraryInfo) other).getStack(), getStack());
+      }
+
       return ((SlotLibraryInfo) other).data.equals(data);
     }
     return false;

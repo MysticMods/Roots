@@ -108,7 +108,9 @@ public class GuiImposer extends GuiContainer {
         StaffModifierInstance instance = info.get();
         if (instance != null) {
           tooltip.add("");
-          tooltip.add(instance.description());
+          tooltip.add(instance.describeName());
+          tooltip.add(instance.describeFunction());
+          tooltip.add("");
           tooltip.add(instance.describeCost());
         }
       }

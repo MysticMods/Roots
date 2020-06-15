@@ -214,6 +214,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
               ItemStaff.createData(staff, capability);
               SpellBase spell = capability.getSelectedInfo().getSpell();
               SpellLibraryData library = SpellLibraryRegistry.getData(inserter);
+              // TODO: This isn't working because I am Dumb.
               library.addSpell(spell);
               world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, staff));
               PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(spell.getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);

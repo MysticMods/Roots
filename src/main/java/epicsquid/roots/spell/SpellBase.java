@@ -8,6 +8,8 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.BaseModifiers;
 import epicsquid.roots.modifiers.ModifierType;
+import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;
+import epicsquid.roots.modifiers.instance.library.LibraryModifierInstanceList;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.modifiers.modifier.Modifier;
@@ -178,6 +180,31 @@ public abstract class SpellBase extends RegistryItem {
       Herb herb = entry.getKey();
       double d = entry.getValue();
       ServerHerbUtil.removePowder(player, herb, d / 20.0);
+    }
+  }
+
+  @SideOnly(Side.CLIENT)
+  public void addToolTip(List<String> tooltip, @Nullable LibraryModifierInstanceList list) {
+    Object2DoubleOpenHashMap<Herb> costs = this.costs;
+    if (list != null) {
+      costs = list.apply(costs);
+    }
+    String prefix = "roots.spell." + name;
+    tooltip.add("" + textColor + TextFormatting.BOLD + I18n.format(prefix + ".name") + TextFormatting.RESET);
+    if (finalised()) {
+      for (Map.Entry<Herb, Double> entry : costs.entrySet()) {
+        Herb herb = entry.getKey();
+        String d = String.format("%.4f", entry.getValue());
+        tooltip.add(I18n.format(herb.getItem().getTranslationKey() + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
+      }
+    }
+    if (!list.isEmpty()) {
+      tooltip.add("");
+    }
+    for (LibraryModifierInstance modifier : list) {
+      if (modifier.isApplied()) {
+        tooltip.add(modifier.describeName());
+      }
     }
   }
 

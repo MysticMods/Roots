@@ -30,6 +30,7 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
     return modifiers;
   }
 
+  @Override
   public void setModifiers(StaffModifierInstanceList modifiers) {
     this.modifiers = modifiers;
   }
@@ -134,6 +135,7 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
     return info;
   }
 
+  @Override
   public ItemStack asStack () {
     ItemStack stack = new ItemStack(ModItems.spell_dust);
     NBTTagCompound comp = ItemUtil.getOrCreateTag(stack);

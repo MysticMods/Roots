@@ -68,8 +68,13 @@ public abstract class BaseModifierInstance implements INBTSerializable<NBTTagCom
   }
 
   @SideOnly(Side.CLIENT)
-  public String description() {
-    return getFormatting() + I18n.format(getTranslationKey()) + TextFormatting.GRAY + ": " + I18n.format(getTranslationKey() + ".desc");
+  public String describeName() {
+    return getFormatting() + I18n.format(getTranslationKey()) + TextFormatting.GRAY + ":";
+  }
+
+  @SideOnly(Side.CLIENT)
+  public String describeFunction () {
+    return "- " + I18n.format(getTranslationKey() + ".desc");
   }
 
   @SideOnly(Side.CLIENT)
