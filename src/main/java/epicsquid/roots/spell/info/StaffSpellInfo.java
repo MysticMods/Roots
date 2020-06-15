@@ -121,6 +121,19 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
     return new StaffSpellInfo(spell);
   }
 
+  public static StaffSpellInfo fromLibrary (LibrarySpellInfo incoming) {
+    StaffSpellInfo info = new StaffSpellInfo(incoming.spell);
+    info.setModifiers(incoming.getModifiers().toStaff());
+    return info;
+  }
+
+  public LibrarySpellInfo toLibrary () {
+    LibrarySpellInfo info = new LibrarySpellInfo(spell);
+    info.setObtained();
+    info.setModifiers(getModifiers().toLibrary());
+    return info;
+  }
+
   public ItemStack asStack () {
     ItemStack stack = new ItemStack(ModItems.spell_dust);
     NBTTagCompound comp = ItemUtil.getOrCreateTag(stack);

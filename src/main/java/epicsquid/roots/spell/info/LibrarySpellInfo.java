@@ -4,8 +4,6 @@ import epicsquid.roots.modifiers.instance.library.LibraryModifierInstanceList;
 import epicsquid.roots.spell.SpellBase;
 import net.minecraft.nbt.NBTTagCompound;
 
-import javax.annotation.Nullable;
-
 public class LibrarySpellInfo extends AbstractSpellModifiers<LibraryModifierInstanceList> {
   public static LibrarySpellInfo EMPTY = new LibrarySpellInfo();
 
@@ -20,10 +18,14 @@ public class LibrarySpellInfo extends AbstractSpellModifiers<LibraryModifierInst
     this.obtained = false;
   }
 
-  @Nullable
   @Override
   public LibraryModifierInstanceList getModifiers() {
     return modifiers;
+  }
+
+  @Override
+  public void setModifiers(LibraryModifierInstanceList libraryModifierInstances) {
+    this.modifiers = libraryModifierInstances;
   }
 
   public boolean isObtained() {
@@ -60,12 +62,21 @@ public class LibrarySpellInfo extends AbstractSpellModifiers<LibraryModifierInst
   }
 
   public StaffSpellInfo toStaff() {
-    return new StaffSpellInfo(getSpell());
+    StaffSpellInfo info = new StaffSpellInfo(spell);
+    info.setModifiers(modifiers.toStaff());
+    return info;
   }
 
   public static LibrarySpellInfo fromNBT(NBTTagCompound tag) {
     LibrarySpellInfo instance = new LibrarySpellInfo();
     instance.deserializeNBT(tag);
+    return instance;
+  }
+
+  public static LibrarySpellInfo fromStaff(StaffSpellInfo incoming) {
+    LibrarySpellInfo instance = new LibrarySpellInfo(incoming.spell);
+    instance.setObtained(true);
+    instance.setModifiers(incoming.getModifiers().toLibrary());
     return instance;
   }
 }
