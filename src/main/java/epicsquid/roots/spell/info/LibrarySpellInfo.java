@@ -1,7 +1,12 @@
 package epicsquid.roots.spell.info;
 
+import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstanceList;
 import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.spell.info.storage.LibrarySpellStorage;
+import epicsquid.roots.spell.info.storage.StaffSpellStorage;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class LibrarySpellInfo extends AbstractSpellModifiers<LibraryModifierInstanceList> {
@@ -59,6 +64,16 @@ public class LibrarySpellInfo extends AbstractSpellModifiers<LibraryModifierInst
   @Override
   public boolean isEmpty() {
     return this == EMPTY;
+  }
+
+  @Override
+  public ItemStack asStack () {
+    ItemStack stack = new ItemStack(ModItems.spell_dust);
+    NBTTagCompound comp = ItemUtil.getOrCreateTag(stack);
+    comp.setBoolean("library", true);
+    LibrarySpellStorage storage = LibrarySpellStorage.fromStack(stack);
+    storage.setSpellToSlot(this);
+    return stack;
   }
 
   public StaffSpellInfo toStaff() {

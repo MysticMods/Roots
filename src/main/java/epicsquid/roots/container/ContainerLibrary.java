@@ -29,6 +29,7 @@ public class ContainerLibrary extends Container {
   private ItemStack staff;
   private int staffSlot = -1;
   private int librarySlot = -1;
+  private boolean isServer;
 
   public ContainerLibrary(EntityPlayer player, ItemStack staff, SpellLibraryData data) {
     this.data = data;
@@ -42,6 +43,8 @@ public class ContainerLibrary extends Container {
     } else {
       this.staff = staff;
     }
+
+    this.isServer = data == null;
 
     createStaffSlots();
     createLibrarySlots();
@@ -76,7 +79,7 @@ public class ContainerLibrary extends Container {
 
     for (int y = 0; y < 5; y++) {
       for (int x = 0; x < 8; x++) {
-        addSlotToContainer(new SlotLibraryInfo(data, i, offsetX + x * 18, offsetY + y * 18));
+        addSlotToContainer(SlotLibraryInfo.create(data, i, offsetX + x * 18, offsetY + y * 18));
         i++;
       }
     }
