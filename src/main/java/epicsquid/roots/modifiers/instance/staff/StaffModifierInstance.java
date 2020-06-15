@@ -2,13 +2,14 @@ package epicsquid.roots.modifiers.instance.staff;
 
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.modifiers.instance.base.BaseModifierInstance;
+import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;
 import epicsquid.roots.modifiers.modifier.Modifier;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.Objects;
 
-public class StaffModifierInstance extends BaseModifierInstance {
+public class StaffModifierInstance extends LibraryModifierInstance {
   private boolean enabled;
 
   public StaffModifierInstance(Modifier modifier, boolean applied, boolean enabled) {
@@ -50,6 +51,14 @@ public class StaffModifierInstance extends BaseModifierInstance {
     StaffModifierInstance result = new StaffModifierInstance();
     result.deserializeNBT(tag);
     return result;
+  }
+
+  public static StaffModifierInstance fromLibrary (LibraryModifierInstance instance) {
+    return new StaffModifierInstance(instance.getModifier(), instance.isApplied(), false);
+  }
+
+  public LibraryModifierInstance toLibrary () {
+    return this;
   }
 
   @Override

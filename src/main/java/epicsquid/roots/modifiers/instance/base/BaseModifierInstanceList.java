@@ -21,9 +21,9 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> implements IModifierList<T, NBTTagCompound> {
-  private final Map<ModifierType, List<T>> internal;
-  private final Map<IModifierCore, T> coreToInstance;
-  private final SpellBase spell;
+  protected final Map<ModifierType, List<T>> internal;
+  protected final Map<IModifierCore, T> coreToInstance;
+  protected final SpellBase spell;
 
   // TODO
   public BaseModifierInstanceList(SpellBase spell, Function<Modifier, T> empty) {
@@ -93,6 +93,10 @@ public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> i
       }
     }
     return null;
+  }
+
+  public SpellBase getSpell() {
+    return spell;
   }
 
   @SuppressWarnings("unchecked")

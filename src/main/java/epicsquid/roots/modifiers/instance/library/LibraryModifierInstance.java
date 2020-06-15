@@ -25,6 +25,14 @@ public class LibraryModifierInstance extends BaseModifierInstance {
     return result;
   }
 
+  public static LibraryModifierInstance fromStaff (StaffModifierInstance instance) {
+    return new LibraryModifierInstance(instance.getModifier(), instance.isApplied());
+  }
+
+  public StaffModifierInstance toStaff () {
+    return new StaffModifierInstance(modifier, applied, false);
+  }
+
   @Override
   public Object2DoubleOpenHashMap<Herb> apply(Object2DoubleOpenHashMap<Herb> costs) {
     return costs;
