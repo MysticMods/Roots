@@ -178,11 +178,12 @@ public class ContainerLibrary extends Container {
       if (isSelectSpell()) {
         if (slot instanceof SlotLibraryInfo) {
           SlotLibraryInfo info = (SlotLibraryInfo) slot;
-        /*if (staffSlot == -1) {
-          librarySlot = info.getSlot();
-        } else {
-          // Do the swappy-swappy
-        }*/
+          if (info.getHasStack()) {
+            librarySlot = info.getSlot();
+            if (staffSlot != -1) {
+              // Handle the swap
+            }
+          }
         } else if (slot instanceof SlotSpellInfo) {
           SlotSpellInfo info = (SlotSpellInfo) slot;
           if (GuiScreen.isShiftKeyDown() || GuiScreen.isAltKeyDown() || GuiScreen.isShiftKeyDown()) {
@@ -191,12 +192,11 @@ public class ContainerLibrary extends Container {
             }
             return ItemStack.EMPTY;
           }
-
-        /*if (librarySlot == -1) {
-          staffSlot = info.getSlot();
-        } else {
-          // Do the swappy-swappy
-        }*/
+          if (staffSlot == -1 && info.getHasStack()) {
+            staffSlot = info.getSlot();
+          } else if (info.getHasStack()) {
+            // handle the swap
+          }
         }
       } else {
         // Editing modifiers

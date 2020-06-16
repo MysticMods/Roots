@@ -15,6 +15,7 @@ import epicsquid.roots.container.slots.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.network.MessageResetLibraryScreen;
 import epicsquid.roots.network.MessageSetImposerSlot;
+import epicsquid.roots.spell.info.LibrarySpellInfo;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import net.minecraft.client.Minecraft;
@@ -168,6 +169,19 @@ public class GuiLibrary extends GuiContainer {
       }
     }
     super.drawSlot(slot);
+    if (slot instanceof SlotSpellInfo) {
+      // Staff
+      if (((SlotSpellInfo) slot).getSlot() == container.getStaffSlot()) {
+        this.mc.getTextureManager().bindTexture(getTexture());
+        this.drawTexturedModalRect(i2, j2, 0, 154 + 16, 20, 20);
+      }
+    } else if (slot instanceof SlotLibraryInfo) {
+      // Library
+      if (((SlotLibraryInfo) slot).getSlot() == container.getLibrarySlot()) {
+        this.mc.getTextureManager().bindTexture(getTexture());
+        this.drawTexturedModalRect(i2 + 1, j2 + 1, 0, 152, 18, 18);
+      }
+    }
   }
 
   @Override
