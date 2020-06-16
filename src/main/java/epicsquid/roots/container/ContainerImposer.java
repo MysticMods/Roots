@@ -10,7 +10,6 @@ package epicsquid.roots.container;
 import epicsquid.roots.container.slots.SlotImposerModifierInfo;
 import epicsquid.roots.container.slots.SlotImposerSpellInfo;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
-import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.modifiers.modifier.IModifierCore;
 import epicsquid.roots.modifiers.modifier.ModifierCores;
@@ -100,7 +99,7 @@ public class ContainerImposer extends Container {
     addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.MOONGLOW_LEAF, tile, 105, 38));
     addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.BAFFLE_CAP, tile, 105, 73));
     addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.STALICRIPE, tile, 105, 108));
-    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.LAPIS, tile, 130, 38));
+    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.NETHER_WART, tile, 130, 38));
     addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.BLAZE_POWDER, tile, 130, 73));
     addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.RUNIC_DUST, tile, 130, 108));
   }

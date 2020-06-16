@@ -2,6 +2,7 @@ package epicsquid.roots.spell.info.storage;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.spell.info.StaffSpellInfo;
+import epicsquid.roots.util.SpellUtil;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.item.ItemStack;
@@ -39,6 +40,11 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
       }
     }
     return true;
+  }
+
+  @Override
+  public boolean isValid() {
+    return SpellUtil.isValidStaff(stack);
   }
 
   @Override
@@ -244,7 +250,7 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
     this.selectedSlot = tag.getInteger("selectedSlot");
   }
 
-  @Nonnull
+  @Nullable
   public static StaffSpellStorage fromStack(ItemStack stack) {
     return fromStack(stack, StaffSpellStorage::new);
   }

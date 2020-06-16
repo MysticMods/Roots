@@ -29,6 +29,8 @@ public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implemen
 
   public abstract boolean isEmpty();
 
+  public abstract boolean isValid();
+
   @Nullable
   public abstract V getSpellInSlot(int slot);
 
@@ -89,8 +91,12 @@ public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implemen
   @Override
   public abstract void deserializeNBT(NBTTagCompound tag);
 
+  @Nullable
   protected static <V extends AbstractSpellInfo, T extends AbstractSpellStorage<V>> T fromStack (ItemStack stack, Function<ItemStack, T> factory) {
     T result = factory.apply(stack);
+    if (!result.isValid()) {
+      return null;
+    }
     NBTTagCompound tag = ItemUtil.getOrCreateTag(stack);
     if (tag.hasKey("spell_storage")) {
       result.deserializeNBT(tag.getCompoundTag("spell_storage"));

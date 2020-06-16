@@ -46,7 +46,7 @@ public class ItemStaff extends ItemBase {
     StaffSpellStorage oldCapability = StaffSpellStorage.fromStack(oldStack);
     StaffSpellStorage newCapability = StaffSpellStorage.fromStack(newStack);
 
-    return slotChanged || oldCapability.getSelectedSlot() != newCapability.getSelectedSlot();
+    return slotChanged || (oldCapability != null && newCapability != null && oldCapability.getSelectedSlot() != newCapability.getSelectedSlot());
   }
 
   @Nonnull
@@ -54,7 +54,7 @@ public class ItemStaff extends ItemBase {
   public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
     ItemStack stack = player.getHeldItem(hand);
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
-    if (player.isSneaking()) {
+    if (player.isSneaking() && capability != null) {
       capability.nextSlot();
       if (world.isRemote) {
         StaffSpellInfo info = capability.getSelectedInfo();
@@ -65,7 +65,7 @@ public class ItemStaff extends ItemBase {
       }
       return new ActionResult<>(EnumActionResult.PASS, player.getHeldItem(hand));
     } else {
-      if (!capability.onCooldown()) {
+      if (capability != null && !capability.onCooldown()) {
         StaffSpellInfo info = capability.getSelectedInfo();
         if (info != null) {
           SpellBase spell = info.getSpell();
@@ -95,7 +95,7 @@ public class ItemStaff extends ItemBase {
   @Override
   public void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
-    if (player instanceof EntityPlayer) {
+    if (player instanceof EntityPlayer && capability != null) {
       StaffSpellInfo info = capability.getSelectedInfo();
       SpellBase spell = info == null ? null : info.getSpell();
       if (spell != null) {
@@ -114,6 +114,9 @@ public class ItemStaff extends ItemBase {
   @Override
   public void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase entity, int timeLeft) {
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
+    if (capability == null) {
+      return;
+    }
     StaffSpellInfo info = capability.getSelectedInfo();
     SpellBase spell = info == null ? null : info.getSpell();
     EntityPlayer player = (EntityPlayer) entity;
@@ -129,24 +132,33 @@ public class ItemStaff extends ItemBase {
   @Override
   public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
-    capability.tick(entity.world.getTotalWorldTime());
+    if (capability != null) {
+      capability.tick(entity.world.getTotalWorldTime());
+    }
   }
 
   // TODO: This needs to happen to the library
   public static void createData(ItemStack stack, DustSpellStorage dustCapability) {
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
-    capability.setSpellToSlot(Objects.requireNonNull(dustCapability.getSelectedInfo()).toStaff());
+    if (capability != null) {
+      capability.setSpellToSlot(Objects.requireNonNull(dustCapability.getSelectedInfo()).toStaff());
+    }
   }
 
   public static void clearData(ItemStack stack) {
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
-    capability.clearSelectedSlot();
+    if (capability != null) {
+      capability.clearSelectedSlot();
+    }
   }
 
   @SideOnly(Side.CLIENT)
   @Override
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
+    if (capability == null) {
+      return;
+    }
     tooltip.add(I18n.format("roots.tooltip.staff.selected") + (capability.getSelectedSlot()));
     StaffSpellInfo info = capability.getSelectedInfo();
     if (info != null) {
@@ -177,13 +189,17 @@ public class ItemStaff extends ItemBase {
 
   @Override
   public boolean showDurabilityBar(ItemStack stack) {
-    return StaffSpellStorage.fromStack(stack).onCooldown();
+    StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
+    return capability != null && capability.onCooldown();
   }
 
   @SideOnly(Side.CLIENT)
   @Override
   public int getRGBDurabilityForDisplay(@Nonnull ItemStack stack) {
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
+    if (capability == null) {
+      return Util.intColor(255, 255, 255);
+    }
     StaffSpellInfo info = capability.getSelectedInfo();
     if (info == null) {
       return Util.intColor(255, 255, 255);
@@ -199,6 +215,9 @@ public class ItemStaff extends ItemBase {
   @Override
   public double getDurabilityForDisplay(ItemStack stack) {
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
+    if (capability == null) {
+      return 0;
+    }
     return (double) capability.getCooldownLeft() / capability.getCooldown();
   }
 
@@ -211,6 +230,9 @@ public class ItemStaff extends ItemBase {
   @Override
   public EnumAction getItemUseAction(ItemStack stack) {
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
+    if (capability == null) {
+      return EnumAction.NONE;
+    }
     StaffSpellInfo info = capability.getSelectedInfo();
     if (info != null) {
       SpellBase spell = info.getSpell();
@@ -233,7 +255,7 @@ public class ItemStaff extends ItemBase {
       ResourceLocation baseName = getRegistryName();
 
       StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
-      if (capability.hasSpellInSlot()) {
+      if (capability != null && capability.hasSpellInSlot()) {
         return new ModelResourceLocation(baseName.toString() + "_1");
       } else {
         return new ModelResourceLocation(baseName.toString());
@@ -246,7 +268,7 @@ public class ItemStaff extends ItemBase {
     @Override
     public int colorMultiplier(@Nonnull ItemStack stack, int tintIndex) {
       StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
-      if (capability.hasSpellInSlot() && stack.getItem() instanceof ItemStaff) {
+      if (capability != null && capability.hasSpellInSlot() && stack.getItem() instanceof ItemStaff) {
         StaffSpellInfo info = capability.getSelectedInfo();
         if (info == null) {
           return Util.intColor(255, 255, 255);
@@ -273,6 +295,9 @@ public class ItemStaff extends ItemBase {
   @Override
   public String getHighlightTip(ItemStack stack, String displayName) {
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
+    if (capability == null) {
+      return displayName;
+    }
     String additional = capability.formatSelectedSpell();
     if (additional != null) {
       return displayName + " " + additional;
