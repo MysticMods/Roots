@@ -11,23 +11,26 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nullable;
+import java.util.function.Supplier;
 
 public class SlotLibraryInfo extends Slot implements ILibrarySlot {
   private IInventory libraryInventory;
   private final SpellLibraryData data;
   private int slot;
+  private Supplier<Boolean> visibility;
 
-  public static SlotLibraryInfo create (SpellLibraryData data, int slot, int x, int y) {
+  public static SlotLibraryInfo create (SpellLibraryData data, Supplier<Boolean> visibility, int slot, int x, int y) {
     IInventory inventory = new InventoryBasic("[Slot: " + slot + "]", true, 1);
     inventory.setInventorySlotContents(0, ItemStack.EMPTY);
-    return new SlotLibraryInfo(data, inventory, slot, x, y);
+    return new SlotLibraryInfo(data, visibility, inventory, slot, x, y);
   }
 
-  private SlotLibraryInfo(SpellLibraryData data, IInventory libraryInventory, int slot, int xPosition, int yPosition) {
+  private SlotLibraryInfo(SpellLibraryData data, Supplier<Boolean> visibility, IInventory libraryInventory, int slot, int xPosition, int yPosition) {
     super(libraryInventory, 0, xPosition, yPosition);
     this.libraryInventory = libraryInventory;
     this.data = data;
     this.slot = slot;
+    this.visibility = visibility;
   }
 
   @Override
@@ -122,5 +125,10 @@ public class SlotLibraryInfo extends Slot implements ILibrarySlot {
       return ((SlotLibraryInfo) other).data.equals(data);
     }
     return false;
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return visibility.get();
   }
 }

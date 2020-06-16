@@ -8,6 +8,7 @@ import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.BaseModifiers;
 import epicsquid.roots.modifiers.ModifierType;
+import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstanceList;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
@@ -184,7 +185,7 @@ public abstract class SpellBase extends RegistryItem {
   }
 
   @SideOnly(Side.CLIENT)
-  public void addToolTip(List<String> tooltip, @Nullable LibraryModifierInstanceList list) {
+  public void addToolTipBase(List<String> tooltip, @Nullable BaseModifierInstanceList<?> list) {
     Object2DoubleOpenHashMap<Herb> costs = this.costs;
     if (list != null) {
       costs = list.apply(costs);
@@ -198,31 +199,26 @@ public abstract class SpellBase extends RegistryItem {
         tooltip.add(I18n.format(herb.getItem().getTranslationKey() + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
       }
     }
-    if (!list.isEmpty()) {
-      tooltip.add("");
-    }
-    for (LibraryModifierInstance modifier : list) {
-      if (modifier.isApplied()) {
-        tooltip.add(modifier.describeName());
+  }
+
+  @SideOnly(Side.CLIENT)
+  public void addToolTip(List<String> tooltip, @Nullable LibraryModifierInstanceList list) {
+    addToolTipBase(tooltip, list);
+    if (list != null) {
+      if (!list.isEmpty()) {
+        tooltip.add("");
+      }
+      for (LibraryModifierInstance modifier : list) {
+        if (modifier.isApplied()) {
+          tooltip.add(modifier.describeName());
+        }
       }
     }
   }
 
   @SideOnly(Side.CLIENT)
   public void addToolTip(List<String> tooltip, @Nullable StaffModifierInstanceList list) {
-    Object2DoubleOpenHashMap<Herb> costs = this.costs;
-    if (list != null) {
-      costs = list.apply(costs);
-    }
-    String prefix = "roots.spell." + name;
-    tooltip.add("" + textColor + TextFormatting.BOLD + I18n.format(prefix + ".name") + TextFormatting.RESET);
-    if (finalised()) {
-      for (Map.Entry<Herb, Double> entry : costs.entrySet()) {
-        Herb herb = entry.getKey();
-        String d = String.format("%.4f", entry.getValue());
-        tooltip.add(I18n.format(herb.getItem().getTranslationKey() + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
-      }
-    }
+    addToolTipBase(tooltip, list);
     StringJoiner basics = new StringJoiner(", ");
     if (list != null) {
       double addition = 0;
@@ -290,11 +286,11 @@ public abstract class SpellBase extends RegistryItem {
     }
   }
 
-  public SpellBase addCost(SpellCost cost) {
+  private SpellBase addCost(SpellCost cost) {
     return addCost(cost.getHerb(), cost.getCost());
   }
 
-  public SpellBase addCost(Herb herb, double amount) {
+  private SpellBase addCost(Herb herb, double amount) {
     if (herb == null) {
       System.out.println("Spell - " + this.getClass().getName() + " - added a null herb ingredient. This is a bug.");
       return this;

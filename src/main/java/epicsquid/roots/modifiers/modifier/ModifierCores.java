@@ -18,7 +18,7 @@ public enum ModifierCores implements IModifierCore {
   GUNPOWDER(Items.GUNPOWDER, ""),
   GLOWSTONE(Items.GLOWSTONE_DUST, ""),
   REDSTONE(Items.REDSTONE, ""),
-  LAPIS(new ItemStack(Items.DYE, 1, EnumDyeColor.BLUE.getDyeDamage()), ""),
+  NETHER_WART(Items.NETHER_WART, ""),
   RUNIC_DUST(() -> ModItems.runic_dust, ""),
   BLAZE_POWDER(Items.BLAZE_POWDER, ""),
 
@@ -95,6 +95,6 @@ public enum ModifierCores implements IModifierCore {
 
   @Override
   public boolean isBasic() {
-    return this == GUNPOWDER || this == LAPIS || this == REDSTONE || this == BLAZE_POWDER || this == GLOWSTONE || this == RUNIC_DUST;
+    return this == GUNPOWDER || this == NETHER_WART || this == REDSTONE || this == BLAZE_POWDER || this == GLOWSTONE || this == RUNIC_DUST;
   }
 }

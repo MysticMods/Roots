@@ -2,6 +2,7 @@ package epicsquid.roots.spell.info.storage;
 
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.SpellDustInfo;
+import epicsquid.roots.util.SpellUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -26,6 +27,11 @@ public class DustSpellStorage extends AbstractSpellStorage<SpellDustInfo> {
   @Override
   public boolean isEmpty() {
     return info != null;
+  }
+
+  @Override
+  public boolean isValid() {
+    return SpellUtil.isValidDust(stack);
   }
 
   @Nullable
@@ -73,7 +79,7 @@ public class DustSpellStorage extends AbstractSpellStorage<SpellDustInfo> {
     this.info = SpellDustInfo.fromNBT(tag);
   }
 
-  @Nonnull
+  @Nullable
   public static DustSpellStorage fromStack(ItemStack stack) {
     return fromStack(stack, DustSpellStorage::new);
   }

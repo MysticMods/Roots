@@ -15,6 +15,7 @@ import epicsquid.roots.container.slots.SlotImposerModifierInfo;
 import epicsquid.roots.container.slots.SlotImposerSpellInfo;
 import epicsquid.roots.container.slots.SlotLibraryInfo;
 import epicsquid.roots.container.slots.SlotSpellInfo;
+import epicsquid.roots.network.MessageResetLibraryScreen;
 import epicsquid.roots.network.MessageSetImposerSlot;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
@@ -39,30 +40,63 @@ import java.util.List;
 public class GuiLibrary extends GuiContainer {
 
   private ContainerLibrary container;
+  private InvisibleButton backButton;
 
   public GuiLibrary(@Nonnull ContainerLibrary container) {
     super(container);
     this.container = container;
     xSize = 256;
-    ySize = 140;
+    ySize = 152;
+  }
+
+  private boolean isSelectSpell () {
+    return container.isSelectSpell();
   }
 
   @Override
   public void drawScreen(int mouseX, int mouseY, float partialTicks) {
     drawDefaultBackground();
     super.drawScreen(mouseX, mouseY, partialTicks);
+    if (!isSelectSpell()) {
+      FontRenderer renderer = Minecraft.getMinecraft().fontRenderer;
+      StaffSpellStorage storage = container.getSpellStorage();
+      if (storage != null) {
+        StaffSpellInfo info = storage.getSpellInSlot(container.getSpellSlot());
+        if (info != null) {
+          String name = info.getSpell().getTextColor() + "" + TextFormatting.BOLD + I18n.format("roots.spell." + info.getSpell().getName() + ".name");
+          RenderHelper.enableGUIStandardItemLighting();
+          this.drawCenteredString(renderer, name, this.width / 2, guiTop, 0xFFFFFFFF);
+        }
+      }
+    }
     this.renderHoveredToolTip(mouseX, mouseY);
   }
 
+  @Override
+  public void initGui() {
+    super.initGui();
+
+    this.buttonList.clear();
+    this.backButton = new InvisibleButton(0, guiLeft + 183, guiTop + 136, 32, 22, I18n.format("roots.imposer.back"));
+    this.buttonList.add(this.backButton);
+  }
+
   private static ResourceLocation SPELL_SELECT = new ResourceLocation(Roots.MODID, "textures/gui/staff_gui.png");
+  private static ResourceLocation SPELL_MODIFY = new ResourceLocation(Roots.MODID, "textures/gui/staff_gui_modifiers.png");
+
+  protected ResourceLocation getTexture() {
+    return container.isSelectSpell() ? SPELL_SELECT : SPELL_MODIFY;
+  }
 
   @Override
   protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
     GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-    this.mc.getTextureManager().bindTexture(SPELL_SELECT);
+    ResourceLocation tex = getTexture();
+    backButton.visible = tex != SPELL_SELECT;
+    this.mc.getTextureManager().bindTexture(tex);
     int i = (this.width - this.xSize) / 2;
     int j = (this.height - this.ySize) / 2;
-    this.drawTexturedModalRect(i, j, 0, 0, 256, 140);
+    this.drawTexturedModalRect(i, j, 0, 0, 256, 152);
   }
 
   @Override
@@ -75,5 +109,16 @@ public class GuiLibrary extends GuiContainer {
       SlotSpellInfo info = (SlotSpellInfo) slot;
     }
     super.drawSlot(slot);
+  }
+
+  @Override
+  protected void actionPerformed(GuiButton button) throws IOException {
+    if (button.id == backButton.id) {
+      MessageResetLibraryScreen packet = new MessageResetLibraryScreen();
+      PacketHandler.INSTANCE.sendToServer(packet);
+      container.setSelectSpell();
+    }
+
+    super.actionPerformed(button);
   }
 }
