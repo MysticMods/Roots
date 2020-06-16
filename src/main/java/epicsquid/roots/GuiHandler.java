@@ -12,6 +12,7 @@ import epicsquid.roots.container.*;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.tileentity.TileEntityFeyCrafter;
 import epicsquid.roots.tileentity.TileEntityImposer;
+import epicsquid.roots.util.SpellUtil;
 import epicsquid.roots.world.data.SpellLibraryRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -74,11 +75,13 @@ public class GuiHandler implements IGuiHandler {
       case IMPOSER_ID:
         te = world.getTileEntity(new BlockPos(x, y, z));
         if (te instanceof TileEntityImposer) {
+          ((TileEntityImposer) te).updateInSlot(player);
           return new ContainerImposer(player, (TileEntityImposer) te);
         }
         break;
       case LIBRARY_ID:
         ItemStack staff = getStaff(player);
+        SpellUtil.updateModifiers(staff, player);
         if (!staff.isEmpty()) {
           return new ContainerLibrary(player, staff, SpellLibraryRegistry.getData(player));
         }

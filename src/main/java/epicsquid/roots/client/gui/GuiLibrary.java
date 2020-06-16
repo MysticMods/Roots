@@ -11,10 +11,8 @@ import epicsquid.mysticallib.client.gui.InvisibleButton;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.container.ContainerLibrary;
-import epicsquid.roots.container.slots.SlotImposerModifierInfo;
-import epicsquid.roots.container.slots.SlotImposerSpellInfo;
-import epicsquid.roots.container.slots.SlotLibraryInfo;
-import epicsquid.roots.container.slots.SlotSpellInfo;
+import epicsquid.roots.container.slots.*;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.network.MessageResetLibraryScreen;
 import epicsquid.roots.network.MessageSetImposerSlot;
 import epicsquid.roots.spell.info.StaffSpellInfo;
@@ -81,6 +79,59 @@ public class GuiLibrary extends GuiContainer {
     this.buttonList.add(this.backButton);
   }
 
+  @Override
+  protected void renderHoveredToolTip(int x, int y) {
+    if (this.mc.player.inventory.getItemStack().isEmpty() && this.hoveredSlot != null) {
+      List<String> tooltip = new ArrayList<>();
+      FontRenderer font = null;
+      boolean hasStack = this.hoveredSlot.getHasStack();
+      ItemStack stack = this.hoveredSlot.getStack();
+      SlotLibraryModifierInfo info = null;
+      if (hoveredSlot instanceof SlotLibraryModifierInfo) {
+        info = (SlotLibraryModifierInfo) hoveredSlot;
+        if (stack.isEmpty()) {
+          stack = info.getCore().getStack();
+          hasStack = true;
+        }
+        if (info.isDisabled() && info.isApplicable() && info.isApplied()) {
+          tooltip.add(TextFormatting.BOLD + I18n.format("roots.tooltip.modifier.not_enabled"));
+        } else if (!info.isApplied() && info.isApplicable()) {
+          tooltip.add(TextFormatting.BOLD + I18n.format("roots.tooltip.modifier.not_applied"));
+        } else if (!info.isApplicable()) {
+          tooltip.add(TextFormatting.BOLD + I18n.format("roots.tooltip.modifier.not_applicable"));
+          stack = ItemStack.EMPTY;
+          hasStack = false;
+        }
+      } else if (hoveredSlot instanceof SlotSpellInfo) {
+        SlotSpellInfo spellInfo = (SlotSpellInfo) hoveredSlot;
+        if (spellInfo.getHasStack()) {
+          tooltip.add(TextFormatting.BOLD + I18n.format("roots.tooltip.modifier.activate"));
+        }
+      }
+      if (hasStack) {
+        GuiUtils.preItemToolTip(stack);
+        tooltip.addAll(getItemToolTip(stack));
+        font = stack.getItem().getFontRenderer(stack);
+      }
+      if (info != null) {
+        StaffModifierInstance instance = info.get();
+        if (instance != null) {
+          tooltip.add("");
+          tooltip.add(instance.describeName());
+          tooltip.add(instance.describeFunction());
+          tooltip.add("");
+          tooltip.add(instance.describeCost());
+        }
+      }
+      if (!tooltip.isEmpty()) {
+        this.drawHoveringText(tooltip, x, y, (font == null ? fontRenderer : font));
+        if (hasStack) {
+          GuiUtils.postItemToolTip();
+        }
+      }
+    }
+  }
+
   private static ResourceLocation SPELL_SELECT = new ResourceLocation(Roots.MODID, "textures/gui/staff_gui.png");
   private static ResourceLocation SPELL_MODIFY = new ResourceLocation(Roots.MODID, "textures/gui/staff_gui_modifiers.png");
 
@@ -103,10 +154,18 @@ public class GuiLibrary extends GuiContainer {
   public void drawSlot(Slot slot) {
     int i2 = slot.xPos - 2;
     int j2 = slot.yPos - 2;
-    if (slot instanceof SlotLibraryInfo) {
-      SlotLibraryInfo info = (SlotLibraryInfo) slot;
-    } else if (slot instanceof SlotSpellInfo) {
-      SlotSpellInfo info = (SlotSpellInfo) slot;
+    if (slot instanceof SlotLibraryModifierInfo) {
+      SlotLibraryModifierInfo modInfo = (SlotLibraryModifierInfo) slot;
+      if (!modInfo.isApplicable()) { // There is no modifier existant for this slot
+        this.mc.getTextureManager().bindTexture(getTexture());
+        this.drawTexturedModalRect(i2, j2, 0, 152+40, 20, 20);
+      } else if (!modInfo.isApplied()) { // There is a modifier but it isn't applied
+        this.mc.getTextureManager().bindTexture(getTexture());
+        this.drawTexturedModalRect(i2, j2, 0, 152+20, 20, 20);
+      } else if (modInfo.isDisabled()) { // There is a modifier and it is applied, but it's disabled
+        this.mc.getTextureManager().bindTexture(getTexture());
+        this.drawTexturedModalRect(i2, j2, 0, 152, 20, 20);
+      }
     }
     super.drawSlot(slot);
   }

@@ -1,11 +1,10 @@
 package epicsquid.roots.world.data;
 
+import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.info.LibrarySpellInfo;
 import epicsquid.roots.spell.info.SpellDustInfo;
-import epicsquid.roots.spell.info.StaffSpellInfo;
-import epicsquid.roots.spell.info.storage.DustSpellStorage;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -15,7 +14,6 @@ import net.minecraftforge.common.util.Constants;
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @SuppressWarnings("NullableProblems")
 public class SpellLibraryData extends WorldSavedData implements Iterable<LibrarySpellInfo> {
@@ -72,16 +70,25 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
     return spells.get(spell);
   }
 
-  public void updateSpell(LibrarySpellInfo info) {
-    SpellBase spell = info.getSpell();
-    spells.put(spell, info);
+  public void updateSpell(LibrarySpellInfo incoming) {
+    SpellBase spell = incoming.getSpell();
+    LibrarySpellInfo current = getData(spell);
+    if (!current.isObtained() && incoming.isObtained()) {
+      current.setObtained();
+    }
+    for (LibraryModifierInstance instance : incoming.getModifiers()) {
+      if (instance.isApplied()) {
+        LibraryModifierInstance currentInstance = current.getModifiers().get(instance.getModifier());
+        if (currentInstance == null) {
+          throw new NullPointerException("Trying to update " + spell.getRegistryName() + " for player " + uuid + " but incoming modifier list contained " + instance.getModifier().getRegistryName() + " but our copy does not!");
+        }
+        if (!currentInstance.isApplied()) {
+          currentInstance.setApplied();
+        }
+      }
+    }
     list = null;
     markDirty();
-  }
-
-  public void updateSpell(StaffSpellInfo info) {
-    SpellBase spell = info.getSpell();
-
   }
 
   @SuppressWarnings("NullableProblems")

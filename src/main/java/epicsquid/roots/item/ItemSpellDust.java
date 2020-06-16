@@ -45,7 +45,11 @@ public class ItemSpellDust extends ItemBase {
   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
     NBTTagCompound tag = ItemUtil.getOrCreateTag(stack);
     if (tag.hasKey("staff") && tag.getBoolean("staff")) {
-      StaffSpellInfo info = StaffSpellStorage.fromStack(stack).getSelectedInfo();
+      StaffSpellStorage storage = StaffSpellStorage.fromStack(stack);
+      if (storage == null) {
+        return;
+      }
+      StaffSpellInfo info = storage.getSelectedInfo();
       SpellBase spell = info == null ? null : info.getSpell();
       if (spell == null) {
         return;
@@ -53,7 +57,11 @@ public class ItemSpellDust extends ItemBase {
 
       spell.addToolTip(tooltip, info.getModifiers());
     } else if (tag.hasKey("library") && tag.getBoolean("library")) {
-      LibrarySpellInfo info = LibrarySpellStorage.fromStack(stack).getSelectedInfo();
+      LibrarySpellStorage storage = LibrarySpellStorage.fromStack(stack);
+      if (storage == null) {
+        return;
+      }
+      LibrarySpellInfo info = storage.getSelectedInfo();
       SpellBase spell = info == null ? null : info.getSpell();
       if (spell == null) {
         return;
@@ -61,7 +69,11 @@ public class ItemSpellDust extends ItemBase {
 
       spell.addToolTip(tooltip, info.getModifiers());
     } else {
-      SpellDustInfo info = DustSpellStorage.fromStack(stack).getSelectedInfo();
+      DustSpellStorage storage = DustSpellStorage.fromStack(stack);
+      if (storage == null) {
+        return;
+      }
+      SpellDustInfo info = storage.getSelectedInfo();
       SpellBase spell = info == null ? null : info.getSpell();
       if (spell == null) {
         return;

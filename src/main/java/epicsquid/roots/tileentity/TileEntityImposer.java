@@ -13,6 +13,7 @@ import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.modifiers.modifier.IModifierCore;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
+import epicsquid.roots.util.SpellUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -50,6 +51,16 @@ public class TileEntityImposer extends TileBase implements ITickable {
 
   public int getSlot() {
     return slot;
+  }
+
+  public void updateInSlot (EntityPlayer player) {
+    if (SpellUtil.isStaff(inventory.getStackInSlot(0))) {
+      ItemStack staff = inventory.getStackInSlot(0);
+      SpellUtil.updateModifiers(staff, player);
+      inventory.setStackInSlot(0, staff);
+      markDirty();
+      updatePacketViaState();
+    }
   }
 
   public void setSlot(int slot) {
@@ -93,6 +104,7 @@ public class TileEntityImposer extends TileBase implements ITickable {
     ItemStack heldItem = player.getHeldItem(hand);
     if (!heldItem.isEmpty() && heldItem.getItem() == ModItems.staff) {
       if (inventory.getStackInSlot(0).isEmpty()) {
+        SpellUtil.updateModifiers(heldItem, player);
         ItemStack toInsert = heldItem.copy();
         toInsert.setCount(1);
         ItemStack attemptedInsert = inventory.insertItem(0, toInsert, true);
@@ -154,10 +166,6 @@ public class TileEntityImposer extends TileBase implements ITickable {
       return null;
     }
     StaffModifierInstanceList modifiers = info.getModifiers();
-    if (modifiers == null) {
-      return null;
-    }
-
     return modifiers.getByCore(core);
   }
 
