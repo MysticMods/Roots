@@ -23,7 +23,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
@@ -60,11 +59,11 @@ public class ContainerLibrary extends Container {
   }
 
   @Nullable
-  public StaffSpellStorage getSpellStorage () {
+  public StaffSpellStorage getSpellStorage() {
     return StaffSpellStorage.fromStack(staff);
   }
 
-  public int getSpellSlot () {
+  public int getSpellSlot() {
     return slot;
   }
 
@@ -72,7 +71,7 @@ public class ContainerLibrary extends Container {
     return slot == 0;
   }
 
-  public void setSelectSpell () {
+  public void setSelectSpell() {
     slot = 0;
   }
 
@@ -198,6 +197,27 @@ public class ContainerLibrary extends Container {
         } else {
           // Do the swappy-swappy
         }*/
+        }
+      } else {
+        // Editing modifiers
+        SlotLibraryModifierInfo info = (SlotLibraryModifierInfo) slot;
+        if (info.isApplicable() && info.isApplied()) {
+          StaffSpellStorage storage = getSpellStorage();
+          if (storage == null) {
+            return ItemStack.EMPTY;
+          }
+          StaffSpellInfo staffInfo = storage.getSpellInSlot(this.slot);
+          if (staffInfo == null) {
+            return ItemStack.EMPTY;
+          }
+
+          StaffModifierInstance modifier = staffInfo.getModifiers().getByCore(info.getCore());
+          if (modifier == null) {
+            return ItemStack.EMPTY;
+          }
+
+          modifier.setEnabled(!modifier.isEnabled());
+          storage.saveToStack();
         }
       }
     }

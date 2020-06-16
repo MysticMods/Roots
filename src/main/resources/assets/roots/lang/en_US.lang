@@ -126,6 +126,7 @@ roots.tooltip.knife1=Break %s to obtain varying amounts of %s.
 roots.tooltip.knife2=Right-Click %s to obtain %s.
 roots.tooltip.knife_dispenser=Can be automated using a dispenser to scrape moss from suitable blocks.
 roots.tooltip.runic_shears=Can be automated using a dispenser to perform all functions of Runic Shears, excluding obtaining Life Essence.
+roots.tooltip.modifier.activate=[Alt-Click slot to edit spell modifiers.]
 roots.tooltip.modifier.not_applied=[Modifier not applied.]
 roots.tooltip.modifier.not_enabled=[Modifier not enabled.]
 roots.tooltip.modifier.not_applicable=[No applicable modifier for this slot.]
