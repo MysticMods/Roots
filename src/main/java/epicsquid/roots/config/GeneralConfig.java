@@ -74,7 +74,8 @@ public class GeneralConfig {
   }
 
   @Config.Comment(("List of mod:item:meta (meta optional) of saplings that should be blacklisted from the Spreading Forest ritual"))
-  public static String[] SaplingBlacklist = new String[]{"roots:wildwood_sapling"};
+  public static String[] SaplingBlacklist = new String[]{"roots:wildwood_sapling", "corvus:frankinsence_sapling",
+"thebetweenlands:sapling_spirit_tree"};
 
   @Config.Ignore
   private static Set<ItemStack> saplingBlacklist = null;
