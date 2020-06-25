@@ -43,15 +43,17 @@ public class EntityRitualFrostLands extends EntityRitualBase implements IColdRit
 
       List<BlockPos> positions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, (BlockPos pos) -> world.isAirBlock(pos.up()) && !world.isAirBlock(pos) && Blocks.SNOW_LAYER.canPlaceBlockAt(world, pos));
       int breakout = 0;
-      while (!positions.isEmpty() && breakout < 20) {
+      while (!positions.isEmpty() && breakout < 50) {
         BlockPos choice = positions.get(rand.nextInt(positions.size()));
         if (world.getBlockState(choice).getBlock() == Blocks.SNOW_LAYER) {
-          breakout++;
-        } else if (Blocks.SNOW_LAYER.canPlaceBlockAt(world, choice.up())) {
-          world.setBlockState(choice.up(), Blocks.SNOW_LAYER.getDefaultState());
-          affectedPositions.add(choice.up());
-          break;
+          if (Blocks.SNOW_LAYER.canPlaceBlockAt(world, choice.up())) {
+            world.setBlockState(choice.up(), Blocks.SNOW_LAYER.getDefaultState());
+            affectedPositions.add(choice.up());
+            break;
+          }
         }
+
+        breakout++;
       }
 
       if (Util.rand.nextInt(ritual.interval_spawn) == 0) {
