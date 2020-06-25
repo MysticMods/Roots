@@ -1,10 +1,8 @@
 package epicsquid.roots.spell.info;
 
-import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.storage.DustSpellStorage;
-import epicsquid.roots.spell.info.storage.LibrarySpellStorage;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -27,7 +25,7 @@ public class SpellDustInfo extends AbstractSpellInfo {
   public ItemStack asStack() {
     ItemStack stack = new ItemStack(ModItems.spell_dust);
     DustSpellStorage storage = DustSpellStorage.fromStack(stack);
-    storage.setSpellToSlot(this);
+    storage.addSpell(this);
     return stack;
   }
 

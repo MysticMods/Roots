@@ -27,11 +27,14 @@ import net.minecraft.util.math.BlockPos;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ContainerImposer extends Container {
 
   public final TileEntityImposer tile;
   private final EntityPlayer player;
+  private final Map<IModifierCore, Slot> coreSlotMap = new HashMap<>();
 
   public ContainerImposer(EntityPlayer player, TileEntityImposer tile) {
     this.tile = tile;
@@ -84,24 +87,30 @@ public class ContainerImposer extends Container {
     addSlotToContainer(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 5, 109, 37)); // Spot 5
   }
 
+  private void addModifierSlot (IModifierCore core, TileEntityImposer imposer, int x, int y) {
+    SlotImposerModifierInfo slot = new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, core, imposer, x, y);
+    coreSlotMap.put(core, slot);
+    addSlotToContainer(slot);
+  }
+
   private void createModifierSlots() {
-    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.PERESKIA, tile, 80, 18));
-    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.WILDROOT, tile, 80, 43));
-    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.TERRA_MOSS, tile, 80, 68));
-    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.INFERNAL_BULB, tile, 80, 93));
-    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.DEWGONIA, tile, 80, 118));
-    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.WILDEWHEET, tile, 55, 38));
-    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.SPIRIT_HERB, tile, 55, 73));
-    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.CLOUD_BERRY, tile, 55, 108));
-    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.REDSTONE, tile, 30, 38));
-    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.GUNPOWDER, tile, 30, 73));
-    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.GLOWSTONE, tile, 30, 108));
-    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.MOONGLOW_LEAF, tile, 105, 38));
-    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.BAFFLE_CAP, tile, 105, 73));
-    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.STALICRIPE, tile, 105, 108));
-    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.NETHER_WART, tile, 130, 38));
-    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.BLAZE_POWDER, tile, 130, 73));
-    addSlotToContainer(new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.RUNIC_DUST, tile, 130, 108));
+    addModifierSlot(ModifierCores.PERESKIA, tile, 80, 18);
+    addModifierSlot(ModifierCores.WILDROOT, tile, 80, 43);
+    addModifierSlot(ModifierCores.TERRA_MOSS, tile, 80, 68);
+    addModifierSlot(ModifierCores.INFERNAL_BULB, tile, 80, 93);
+    addModifierSlot(ModifierCores.DEWGONIA, tile, 80, 118);
+    addModifierSlot(ModifierCores.WILDEWHEET, tile, 55, 38);
+    addModifierSlot(ModifierCores.SPIRIT_HERB, tile, 55, 73);
+    addModifierSlot(ModifierCores.CLOUD_BERRY, tile, 55, 108);
+    addModifierSlot(ModifierCores.REDSTONE, tile, 30, 38);
+    addModifierSlot(ModifierCores.GUNPOWDER, tile, 30, 73);
+    addModifierSlot(ModifierCores.GLOWSTONE, tile, 30, 108);
+    addModifierSlot(ModifierCores.MOONGLOW_LEAF, tile, 105, 38);
+    addModifierSlot(ModifierCores.BAFFLE_CAP, tile, 105, 73);
+    addModifierSlot(ModifierCores.STALICRIPE, tile, 105, 108);
+    addModifierSlot(ModifierCores.NETHER_WART, tile, 130, 38);
+    addModifierSlot(ModifierCores.BLAZE_POWDER, tile, 130, 73);
+    addModifierSlot(ModifierCores.RUNIC_DUST, tile, 130, 108);
   }
 
   @Override

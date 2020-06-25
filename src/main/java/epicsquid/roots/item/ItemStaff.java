@@ -141,7 +141,7 @@ public class ItemStaff extends ItemBase {
   public static void createData(ItemStack stack, DustSpellStorage dustCapability) {
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
     if (capability != null) {
-      capability.setSpellToSlot(Objects.requireNonNull(dustCapability.getSelectedInfo()).toStaff());
+      capability.addSpell(Objects.requireNonNull(dustCapability.getSelectedInfo()).toStaff());
     }
   }
 

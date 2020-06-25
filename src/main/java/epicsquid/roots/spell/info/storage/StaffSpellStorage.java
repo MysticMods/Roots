@@ -124,8 +124,18 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
 
   @Override
   public void clearSelectedSlot() {
-    spells.remove(this.selectedSlot);
+    spells.put(this.selectedSlot, null);
     saveToStack();
+  }
+
+  @Override
+  public void clearSlot(int slot) {
+    if (slot <= MAX_SPELL_SLOT && slot >= MIN_SPELL_SLOT) {
+      spells.put(slot, null);
+      saveToStack();
+    } else {
+      throw new IllegalArgumentException("Invalid argument for StaffSpellStorage::clearSlot, `slot`: " + slot + " cannot be contained within the constraints of " + MIN_SPELL_SLOT + "-" + MAX_SPELL_SLOT);
+    }
   }
 
   @Override
@@ -187,11 +197,21 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
   }
 
   @Override
-  public void setSpellToSlot(StaffSpellInfo spell) {
+  public void addSpell(StaffSpellInfo spell) {
     if (hasFreeSlot()) {
       setSelectedSlot(getNextFreeSlot());
       this.spells.put(this.selectedSlot, spell);
       saveToStack();
+    }
+  }
+
+  @Override
+  public void setSpellToSlot(int slot, StaffSpellInfo spell) {
+    if (slot <= MAX_SPELL_SLOT && slot >= MIN_SPELL_SLOT) {
+      this.spells.put(slot, spell);
+      saveToStack();
+    } else {
+      throw new IllegalArgumentException("Invalid argument for StaffSpellStorage::setSpellToSlot, `slot`: " + slot + " cannot be contained within the constraints of " + MIN_SPELL_SLOT + "-" + MAX_SPELL_SLOT);
     }
   }
 

@@ -31,6 +31,7 @@ public class MessageResetLibraryScreen implements IMessage {
       Container container = ctx.getServerHandler().player.openContainer;
       if (container instanceof ContainerLibrary) {
         ((ContainerLibrary) container).setSelectSpell();
+        ((ContainerLibrary) container).reset();
       }
     }
   }

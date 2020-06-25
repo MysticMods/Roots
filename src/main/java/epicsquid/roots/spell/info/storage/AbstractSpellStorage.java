@@ -63,6 +63,8 @@ public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implemen
 
   public abstract void clearSelectedSlot();
 
+  public abstract void clearSlot (int slot);
+
   public int getSelectedSlot() {
     return this.selectedSlot;
   }
@@ -75,7 +77,9 @@ public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implemen
 
   public abstract void nextSlot();
 
-  public abstract void setSpellToSlot(V spell);
+  public abstract void addSpell(V spell);
+
+  public abstract void setSpellToSlot (int slot, V spell);
 
   public int getNextFreeSlot() {
     return -1;

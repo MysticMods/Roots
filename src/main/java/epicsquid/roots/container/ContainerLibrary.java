@@ -10,13 +10,14 @@ package epicsquid.roots.container;
 import epicsquid.roots.container.slots.SlotLibraryInfo;
 import epicsquid.roots.container.slots.SlotLibraryModifierInfo;
 import epicsquid.roots.container.slots.SlotSpellInfo;
-import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.modifiers.modifier.IModifierCore;
 import epicsquid.roots.modifiers.modifier.ModifierCores;
+import epicsquid.roots.spell.info.LibrarySpellInfo;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
+import epicsquid.roots.util.PlayerSyncUtil;
 import epicsquid.roots.world.data.SpellLibraryData;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,29 +28,26 @@ import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.function.Supplier;
 
 public class ContainerLibrary extends Container {
 
   private SpellLibraryData data;
-  private ItemStack staff;
+  private final Supplier<ItemStack> staff;
   private int staffSlot = -1;
   private int librarySlot = -1;
   private boolean isServer;
 
   private int slot;
 
-  public ContainerLibrary(EntityPlayer player, ItemStack staff, SpellLibraryData data) {
+  public ContainerLibrary(EntityPlayer player, Supplier<ItemStack> staff, SpellLibraryData data) {
     this.data = data;
 
-    if (staff.isEmpty()) {
-      if (player.getHeldItemMainhand().getItem().equals(ModItems.staff)) {
-        this.staff = player.getHeldItemMainhand();
-      } else if (player.getHeldItemOffhand().getItem().equals(ModItems.staff)) {
-        this.staff = player.getHeldItemOffhand();
-      }
-    } else {
-      this.staff = staff;
+    if (staff == null) {
+      throw new IllegalArgumentException("ContainerLibrary initialization: staff cannot be null.");
     }
+
+    this.staff = staff;
 
     this.isServer = data == null;
 
@@ -60,7 +58,7 @@ public class ContainerLibrary extends Container {
 
   @Nullable
   public StaffSpellStorage getSpellStorage() {
-    return StaffSpellStorage.fromStack(staff);
+    return StaffSpellStorage.fromStack(staff.get());
   }
 
   public int getSpellSlot() {
@@ -69,6 +67,11 @@ public class ContainerLibrary extends Container {
 
   public boolean isSelectSpell() {
     return slot == 0;
+  }
+
+  public void reset () {
+    staffSlot = -1;
+    librarySlot = -1;
   }
 
   public void setSelectSpell() {
@@ -84,7 +87,7 @@ public class ContainerLibrary extends Container {
   }
 
   private StaffSpellInfo getInfoFor(int slot) {
-    StaffSpellStorage storage = StaffSpellStorage.fromStack(staff);
+    StaffSpellStorage storage = getSpellStorage();
     if (storage == null) {
       return null;
     }
@@ -96,7 +99,7 @@ public class ContainerLibrary extends Container {
     if (slot == 0) {
       return null;
     }
-    StaffSpellStorage storage = StaffSpellStorage.fromStack(staff);
+    StaffSpellStorage storage = getSpellStorage();
     if (storage == null) {
       return null;
     }
@@ -179,9 +182,18 @@ public class ContainerLibrary extends Container {
         if (slot instanceof SlotLibraryInfo) {
           SlotLibraryInfo info = (SlotLibraryInfo) slot;
           if (info.getHasStack()) {
-            librarySlot = info.getSlot();
+            librarySlot = info.getSlot() + 5;
             if (staffSlot != -1) {
-              // Handle the swap
+              StaffSpellStorage storage = getSpellStorage();
+              LibrarySpellInfo libInfo = info.getInfo();
+              if (storage == null || libInfo == null) {
+                reset();
+                return ItemStack.EMPTY;
+              }
+              storage.setSpellToSlot(staffSlot, libInfo.toStaff());
+              storage.saveToStack();
+              reset();
+              PlayerSyncUtil.syncPlayer(player);
             }
           }
         } else if (slot instanceof SlotSpellInfo) {
@@ -192,10 +204,76 @@ public class ContainerLibrary extends Container {
             }
             return ItemStack.EMPTY;
           }
-          if (staffSlot == -1 && info.getHasStack()) {
-            staffSlot = info.getSlot();
-          } else if (info.getHasStack()) {
-            // handle the swap
+          if (info.getHasStack()) {
+            StaffSpellInfo newSpell = null;
+            int swap = -1;
+            if (staffSlot == -1) {
+              staffSlot = info.getSlot();
+            }
+            if (librarySlot != -1) {
+              LibrarySpellInfo libInfo = ((SlotLibraryInfo) getSlot(librarySlot)).getInfo();
+              if (libInfo == null) {
+                librarySlot = -1;
+              } else {
+                newSpell = libInfo.toStaff();
+              }
+            } else {
+              newSpell = info.getInfo();
+              swap = info.getSlot();
+            }
+            if (newSpell != null) {
+              StaffSpellStorage storage = getSpellStorage();
+              if (storage == null) {
+                reset();
+                return ItemStack.EMPTY;
+              }
+              if (swap == -1) {
+                storage.setSpellToSlot(staffSlot, newSpell);
+                storage.saveToStack();
+                reset();
+                PlayerSyncUtil.syncPlayer(player);
+              } else if (staffSlot != -1 && swap != staffSlot) {
+                StaffSpellInfo oldSpell = storage.getSpellInSlot(staffSlot);
+                storage.setSpellToSlot(staffSlot, newSpell);
+                storage.setSpellToSlot(swap, oldSpell);
+                storage.saveToStack();
+                reset();
+                PlayerSyncUtil.syncPlayer(player);
+              }
+            }
+          } else {
+            StaffSpellStorage storage = null;
+            if (staffSlot != -1 || librarySlot != -1) {
+              storage = getSpellStorage();
+              if (storage == null) {
+                reset();
+                return ItemStack.EMPTY;
+              }
+            }
+            if (staffSlot != -1) {
+              StaffSpellInfo newSpell = ((SlotSpellInfo) getSlot(librarySlot)).getInfo();
+              if (newSpell == null) {
+                reset();
+                return ItemStack.EMPTY;
+              }
+              storage.setSpellToSlot(info.getSlot(), newSpell);
+              storage.clearSlot(staffSlot);
+              storage.saveToStack();
+              reset();
+              PlayerSyncUtil.syncPlayer(player);
+            } else if (librarySlot != -1) {
+              LibrarySpellInfo newSpell = ((SlotLibraryInfo) getSlot(librarySlot)).getInfo();
+              if (newSpell == null) {
+                reset();
+                return ItemStack.EMPTY;
+              }
+              storage.setSpellToSlot(info.getSlot(), newSpell.toStaff());
+              storage.saveToStack();
+              reset();
+              PlayerSyncUtil.syncPlayer(player);
+            } else {
+              staffSlot = info.getSlot();
+            }
           }
         }
       } else {
@@ -218,6 +296,7 @@ public class ContainerLibrary extends Container {
 
           modifier.setEnabled(!modifier.isEnabled());
           storage.saveToStack();
+          PlayerSyncUtil.syncPlayer(player);
         }
       }
     }

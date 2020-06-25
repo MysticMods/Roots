@@ -40,6 +40,7 @@ public class GuiLibrary extends GuiContainer {
 
   private ContainerLibrary container;
   private InvisibleButton backButton;
+  private InvisibleButton resetButton;
 
   public GuiLibrary(@Nonnull ContainerLibrary container) {
     super(container);
@@ -77,7 +78,9 @@ public class GuiLibrary extends GuiContainer {
 
     this.buttonList.clear();
     this.backButton = new InvisibleButton(0, guiLeft + 183, guiTop + 136, 32, 22, I18n.format("roots.imposer.back"));
+    this.resetButton = new InvisibleButton(0, guiLeft + 183, guiTop + 136, 32, 22, I18n.format("roots.library.reset"));
     this.buttonList.add(this.backButton);
+    this.buttonList.add(this.resetButton);
   }
 
   @Override
@@ -145,6 +148,7 @@ public class GuiLibrary extends GuiContainer {
     GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
     ResourceLocation tex = getTexture();
     backButton.visible = tex != SPELL_SELECT;
+    resetButton.visible = tex == SPELL_SELECT;
     this.mc.getTextureManager().bindTexture(tex);
     int i = (this.width - this.xSize) / 2;
     int j = (this.height - this.ySize) / 2;
@@ -177,7 +181,7 @@ public class GuiLibrary extends GuiContainer {
       }
     } else if (slot instanceof SlotLibraryInfo) {
       // Library
-      if (((SlotLibraryInfo) slot).getSlot() == container.getLibrarySlot()) {
+      if (((SlotLibraryInfo) slot).getSlot() == container.getLibrarySlot() - 5) {
         this.mc.getTextureManager().bindTexture(getTexture());
         this.drawTexturedModalRect(i2 + 1, j2 + 1, 0, 152, 18, 18);
       }
@@ -186,10 +190,11 @@ public class GuiLibrary extends GuiContainer {
 
   @Override
   protected void actionPerformed(GuiButton button) throws IOException {
-    if (button.id == backButton.id) {
+    if (button.id == backButton.id || button.id == resetButton.id) {
       MessageResetLibraryScreen packet = new MessageResetLibraryScreen();
       PacketHandler.INSTANCE.sendToServer(packet);
       container.setSelectSpell();
+      container.reset();
     }
 
     super.actionPerformed(button);

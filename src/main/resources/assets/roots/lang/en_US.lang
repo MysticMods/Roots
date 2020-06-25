@@ -146,6 +146,7 @@ roots.info.pyre.repeat3=to repeat ritual.
 roots.info.pyre.repeat4=to repeat craft.
 
 roots.imposer.back=Back
+roots.library.reset=De-select
 roots.modifier.is_enabled=Enabled
 roots.modifier.is_disabled=Disabled
 
