@@ -12,9 +12,11 @@ import epicsquid.roots.container.*;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.tileentity.TileEntityFeyCrafter;
 import epicsquid.roots.tileentity.TileEntityImposer;
+import epicsquid.roots.util.PlayerSyncUtil;
 import epicsquid.roots.util.SpellUtil;
 import epicsquid.roots.world.data.SpellLibraryRegistry;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -25,6 +27,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
+import java.util.function.Supplier;
 
 public class GuiHandler implements IGuiHandler {
 
@@ -34,15 +37,16 @@ public class GuiHandler implements IGuiHandler {
   public static final int IMPOSER_ID = 19;
   public static final int LIBRARY_ID = 20;
 
-  public static ItemStack getStaff(EntityPlayer player) {
+  @Nullable
+  private static Supplier<ItemStack> getStaff(EntityPlayer player) {
     ItemStack staff = player.getHeldItemMainhand();
     if (!staff.isEmpty() && staff.getItem().equals(ModItems.staff)) {
-      return staff;
+      return player::getHeldItemMainhand;
     }
 
     staff = player.getHeldItemOffhand();
     if (!staff.isEmpty() && staff.getItem().equals(ModItems.staff)) {
-      return staff;
+      return player::getHeldItemOffhand;
     }
 
     IItemHandler handler = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
@@ -50,12 +54,13 @@ public class GuiHandler implements IGuiHandler {
       for (int i = 0; i < handler.getSlots(); i++) {
         staff = handler.getStackInSlot(i);
         if (!staff.isEmpty() && staff.getItem().equals(ModItems.staff)) {
-          return staff;
+          final int x = i;
+          return () -> handler.getStackInSlot(x);
         }
       }
     }
 
-    return ItemStack.EMPTY;
+    return null;
   }
 
   @Nullable
@@ -80,9 +85,10 @@ public class GuiHandler implements IGuiHandler {
         }
         break;
       case LIBRARY_ID:
-        ItemStack staff = getStaff(player);
-        SpellUtil.updateModifiers(staff, player);
-        if (!staff.isEmpty()) {
+        Supplier<ItemStack> staff = getStaff(player);
+        if (staff != null) {
+          SpellUtil.updateModifiers(staff.get(), player);
+          PlayerSyncUtil.syncPlayer(player);
           return new ContainerLibrary(player, staff, SpellLibraryRegistry.getData(player));
         }
         break;
@@ -111,8 +117,8 @@ public class GuiHandler implements IGuiHandler {
         }
         break;
       case LIBRARY_ID:
-        ItemStack staff = getStaff(player);
-        if (!staff.isEmpty()) {
+        Supplier<ItemStack> staff = getStaff(player);
+        if (staff != null) {
           return new GuiLibrary(new ContainerLibrary(player, staff, null));
         }
         break;

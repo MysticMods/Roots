@@ -6,7 +6,6 @@ import epicsquid.roots.util.SpellUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class DustSpellStorage extends AbstractSpellStorage<SpellDustInfo> {
@@ -47,6 +46,11 @@ public class DustSpellStorage extends AbstractSpellStorage<SpellDustInfo> {
   }
 
   @Override
+  public void clearSlot(int slot) {
+    clearSelectedSlot();
+  }
+
+  @Override
   public void previousSlot() {
   }
 
@@ -56,13 +60,18 @@ public class DustSpellStorage extends AbstractSpellStorage<SpellDustInfo> {
 
   public void setSpellToSlot(SpellBase spell) {
     SpellDustInfo info = new SpellDustInfo(spell);
-    setSpellToSlot(info);
+    addSpell(info);
   }
 
   @Override
-  public void setSpellToSlot(SpellDustInfo spell) {
+  public void addSpell(SpellDustInfo spell) {
     this.info = spell;
     saveToStack();
+  }
+
+  @Override
+  public void setSpellToSlot(int slot, SpellDustInfo spell) {
+    addSpell(spell);
   }
 
   @Override

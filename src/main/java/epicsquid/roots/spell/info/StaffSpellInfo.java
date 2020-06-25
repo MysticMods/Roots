@@ -141,7 +141,7 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
     NBTTagCompound comp = ItemUtil.getOrCreateTag(stack);
     comp.setBoolean("staff", true);
     StaffSpellStorage storage = StaffSpellStorage.fromStack(stack);
-    storage.setSpellToSlot(this);
+    storage.addSpell(this);
     return stack;
   }
 

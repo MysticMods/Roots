@@ -2,12 +2,10 @@ package epicsquid.roots.spell.info.storage;
 
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.LibrarySpellInfo;
-import epicsquid.roots.spell.info.SpellDustInfo;
 import epicsquid.roots.util.SpellUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class LibrarySpellStorage extends AbstractSpellStorage<LibrarySpellInfo> {
@@ -48,6 +46,11 @@ public class LibrarySpellStorage extends AbstractSpellStorage<LibrarySpellInfo> 
   }
 
   @Override
+  public void clearSlot(int slot) {
+    clearSelectedSlot();
+  }
+
+  @Override
   public void previousSlot() {
   }
 
@@ -57,13 +60,18 @@ public class LibrarySpellStorage extends AbstractSpellStorage<LibrarySpellInfo> 
 
   public void setSpellToSlot(SpellBase spell) {
     LibrarySpellInfo info = new LibrarySpellInfo(spell);
-    setSpellToSlot(info);
+    addSpell(info);
   }
 
   @Override
-  public void setSpellToSlot(LibrarySpellInfo spell) {
+  public void addSpell(LibrarySpellInfo spell) {
     this.info = spell;
     saveToStack();
+  }
+
+  @Override
+  public void setSpellToSlot(int slot, LibrarySpellInfo spell) {
+    addSpell(spell);
   }
 
   @Override

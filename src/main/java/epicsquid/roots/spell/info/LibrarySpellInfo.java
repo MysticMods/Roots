@@ -5,7 +5,6 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstanceList;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.storage.LibrarySpellStorage;
-import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -72,7 +71,7 @@ public class LibrarySpellInfo extends AbstractSpellModifiers<LibraryModifierInst
     NBTTagCompound comp = ItemUtil.getOrCreateTag(stack);
     comp.setBoolean("library", true);
     LibrarySpellStorage storage = LibrarySpellStorage.fromStack(stack);
-    storage.setSpellToSlot(this);
+    storage.addSpell(this);
     return stack;
   }
 
