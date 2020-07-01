@@ -35,7 +35,7 @@ public class SpellGroveSupplication extends SpellBase {
     addIngredients(
         new OreIngredient("doorWood"),
         new ItemStack(Blocks.MOSSY_COBBLESTONE),
-        new ItemStack(Blocks.SAPLING),
+        new OreIngredient("treeSapling"),
         new ItemStack(ModItems.wildroot),
         new ItemStack(ModItems.petals)
     );
