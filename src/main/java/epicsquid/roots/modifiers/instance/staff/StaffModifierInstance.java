@@ -1,9 +1,9 @@
 package epicsquid.roots.modifiers.instance.staff;
 
 import epicsquid.roots.api.Herb;
-import epicsquid.roots.modifiers.instance.base.BaseModifierInstance;
+import epicsquid.roots.modifiers.CostType;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;
-import epicsquid.roots.modifiers.modifier.Modifier;
+import epicsquid.roots.modifiers.Modifier;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -67,7 +67,11 @@ public class StaffModifierInstance extends LibraryModifierInstance {
       return costs;
     }
 
-    return modifier.apply(costs);
+    for (CostType type : CostType.values()) {
+      costs = modifier.apply(costs, type);
+    }
+
+    return costs;
   }
 
   @Override

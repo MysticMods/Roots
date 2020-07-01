@@ -1,7 +1,5 @@
-package epicsquid.roots.modifiers.modifier;
+package epicsquid.roots.modifiers;
 
-import epicsquid.roots.modifiers.IModifierList;
-import epicsquid.roots.modifiers.ModifierRegistry;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import it.unimi.dsi.fastutil.objects.Object2BooleanMap;
@@ -11,7 +9,6 @@ import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
 import java.util.Iterator;
-import java.util.Map;
 
 public class ModifierList implements IModifierList<Modifier, NBTTagCompound> {
   private Object2BooleanOpenHashMap<Modifier> map = new Object2BooleanOpenHashMap<>();

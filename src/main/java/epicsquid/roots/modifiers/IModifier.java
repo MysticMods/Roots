@@ -1,29 +1,42 @@
 package epicsquid.roots.modifiers;
 
 import epicsquid.roots.api.Herb;
-import epicsquid.roots.modifiers.modifier.IModifierCore;
 import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.util.types.IRegistryItem;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.item.ItemStack;
 
-public interface IModifier {
+import java.util.List;
+import java.util.function.Supplier;
+
+public interface IModifier extends IRegistryItem {
   String getTranslationKey();
 
   String getFormatting();
 
   ItemStack getStack();
 
-  ModifierType getType();
-
-  double getValue();
-
   IModifierCore getCore ();
 
   boolean isBasic ();
 
-  Object2DoubleOpenHashMap<Herb> apply(final Object2DoubleOpenHashMap<Herb> costs);
+  List<IModifierCost> getCosts();
 
-  default Object2DoubleOpenHashMap<Herb> apply(SpellBase spell) {
-    return apply(spell.getCosts());
+  List<Supplier<IModifier>> getConflicts();
+
+  default boolean conflicts (IModifier modifier) {
+    for (Supplier<IModifier> mod : getConflicts()) {
+      if (mod.get().equals(modifier)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  Object2DoubleOpenHashMap<Herb> apply(final Object2DoubleOpenHashMap<Herb> costs, CostType phase);
+
+  default Object2DoubleOpenHashMap<Herb> apply(SpellBase spell, CostType phase) {
+    return apply(spell.getCosts(), phase);
   }
 }

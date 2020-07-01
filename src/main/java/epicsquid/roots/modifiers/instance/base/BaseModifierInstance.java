@@ -1,15 +1,10 @@
 package epicsquid.roots.modifiers.instance.base;
 
 import epicsquid.roots.api.Herb;
-import epicsquid.roots.modifiers.IModifier;
-import epicsquid.roots.modifiers.ModifierRegistry;
-import epicsquid.roots.modifiers.ModifierType;
-import epicsquid.roots.modifiers.modifier.IModifierCore;
-import epicsquid.roots.modifiers.modifier.Modifier;
+import epicsquid.roots.modifiers.*;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
@@ -17,6 +12,8 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public abstract class BaseModifierInstance implements INBTSerializable<NBTTagCompound>, IModifier {
@@ -73,41 +70,36 @@ public abstract class BaseModifierInstance implements INBTSerializable<NBTTagCom
   }
 
   @SideOnly(Side.CLIENT)
-  public String describeFunction () {
+  public String describeFunction() {
     return "- " + I18n.format(getTranslationKey() + ".desc");
   }
 
   @SideOnly(Side.CLIENT)
-  public String describeCost() {
-    switch (modifier.getType()) {
-      case NO_COST:
-        return I18n.format("roots.tooltip.modifier.no_cost");
-      case ADDITIONAL_COST:
-        return I18n.format("roots.tooltip.modifier.additional_cost", I18n.format(getStack().getTranslationKey() + ".name"), String.format("%.4f", modifier.getValue()));
-      case ALL_COST_MULTIPLIER:
-        if (modifier.getValue() < 0) {
-          return I18n.format("roots.tooltip.modifier.decreased_cost", Math.floor(modifier.getValue() * 100) + "%");
-        } else {
-          return I18n.format("roots.tooltip.modifier.increased_cost", Math.floor(modifier.getValue() * 100) + "%");
-        }
-      default:
-        return "";
+  public List<String> describeCost() {
+    // TODO: Sort by type
+    List<String> result = new ArrayList<>();
+    for (IModifierCost cost : modifier.getCosts()) {
+      switch (cost.getCost()) {
+        case NO_COST:
+          result.add(I18n.format("roots.tooltip.modifier.no_cost"));
+          break;
+        case ADDITIONAL_COST:
+          if (cost.getHerb() == null) {
+            throw new NullPointerException("Additional herb modifier cost type but no herb specified.");
+          }
+          result.add(I18n.format("roots.tooltip.modifier.additional_cost", I18n.format(cost.getHerb().getStack().getTranslationKey() + ".name"), String.format("%.4f", cost.getValue())));
+          break;
+        case ALL_COST_MULTIPLIER:
+          if (cost.getValue() < 0) {
+            result.add(I18n.format("roots.tooltip.modifier.decreased_cost", Math.floor(cost.getValue() * 100) + "%"));
+          } else {
+            result.add(I18n.format("roots.tooltip.modifier.increased_cost", Math.floor(cost.getValue() * 100) + "%"));
+          }
+          break;
+        default:
+      }
     }
-  }
-
-  @Override
-  public ItemStack getStack() {
-    return modifier.getStack();
-  }
-
-  @Override
-  public ModifierType getType() {
-    return modifier.getType();
-  }
-
-  @Override
-  public double getValue() {
-    return modifier.getValue();
+    return result;
   }
 
   @Override
@@ -135,7 +127,7 @@ public abstract class BaseModifierInstance implements INBTSerializable<NBTTagCom
   }
 
   @Override
-  public abstract Object2DoubleOpenHashMap<Herb> apply(Object2DoubleOpenHashMap<Herb> costs);
+  public abstract Object2DoubleOpenHashMap<Herb> apply(Object2DoubleOpenHashMap<Herb> costs, CostType phase);
 
   @Override
   public boolean equals(Object o) {

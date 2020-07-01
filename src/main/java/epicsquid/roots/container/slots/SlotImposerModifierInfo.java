@@ -2,7 +2,7 @@ package epicsquid.roots.container.slots;
 
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
-import epicsquid.roots.modifiers.modifier.IModifierCore;
+import epicsquid.roots.modifiers.IModifierCore;
 import epicsquid.roots.tileentity.TileEntityImposer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
