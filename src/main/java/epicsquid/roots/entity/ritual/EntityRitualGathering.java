@@ -49,21 +49,15 @@ public class EntityRitualGathering extends EntityRitualBase {
         AxisAlignedBB bounds = bounding.offset(getPosition());
         BlockPos start = new BlockPos(bounds.minX, bounds.minY, bounds.minZ);
         BlockPos stop = new BlockPos(bounds.maxX, bounds.maxY, bounds.maxZ);
-        TileEntity te = null;
-        boolean found = false;
         for (BlockPos.MutableBlockPos pos : BlockPos.getAllInBoxMutable(start, stop)) {
-          te = world.getTileEntity(pos);
+          TileEntity te = world.getTileEntity(pos);
           if (te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
-            found = true;
-            break;
-          }
-        }
-        if (found) {
-          IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-          if (cap != null) {
-            List<BlockPos> transferredItems = Magnetize.store(world, getPosition(), cap, 15, 15, 15);
-            if (!transferredItems.isEmpty()) {
-              PacketHandler.sendToAllTracking(new MessageItemGatheredFX(transferredItems), this);
+            IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+            if (cap != null) {
+              List<BlockPos> transferredItems = Magnetize.store(world, getPosition(), cap, 15, 15, 15);
+              if (!transferredItems.isEmpty()) {
+                PacketHandler.sendToAllTracking(new MessageItemGatheredFX(transferredItems), this);
+              }
             }
           }
         }
