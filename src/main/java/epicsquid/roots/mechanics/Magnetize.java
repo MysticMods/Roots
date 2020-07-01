@@ -46,9 +46,11 @@ public class Magnetize {
       EntityItem entity = iterator.next();
       ItemStack item = entity.getItem();
       ItemStack result = ItemHandlerHelper.insertItemStacked(handler, item, false);
+      positions.add(entity.getPosition());
       if (result.isEmpty()) {
-        positions.add(entity.getPosition());
         entity.setDead();
+      } else {
+        entity.setItem(result);
       }
     }
     return positions;
