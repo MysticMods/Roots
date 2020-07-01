@@ -1,10 +1,6 @@
 package epicsquid.roots.modifiers;
 
-import epicsquid.roots.modifiers.modifier.IModifierCore;
-import epicsquid.roots.modifiers.modifier.Modifier;
-import epicsquid.roots.spell.SpellBase;
 import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.INBTSerializable;
 
 import javax.annotation.Nullable;

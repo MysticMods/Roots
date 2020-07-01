@@ -1,4 +1,4 @@
-package epicsquid.roots.modifiers.modifier;
+package epicsquid.roots.modifiers;
 
 import epicsquid.roots.api.Herb;
 import net.minecraft.item.ItemStack;

@@ -1,6 +1,6 @@
 package epicsquid.roots.modifiers;
 
-public enum ModifierType {
+public enum CostType {
   NO_COST, ADDITIONAL_COST, ALL_COST_MULTIPLIER;
 
   public String getTranslationKey () {

@@ -1,6 +1,5 @@
 package epicsquid.roots.modifiers;
 
-import epicsquid.roots.modifiers.modifier.Modifier;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;

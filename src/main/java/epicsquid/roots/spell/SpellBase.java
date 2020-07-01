@@ -7,14 +7,14 @@ import epicsquid.roots.entity.spell.EntitySpellBase;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.BaseModifiers;
-import epicsquid.roots.modifiers.ModifierType;
+import epicsquid.roots.modifiers.CostType;
 import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstanceList;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
-import epicsquid.roots.modifiers.modifier.Modifier;
-import epicsquid.roots.modifiers.modifier.ModifierList;
+import epicsquid.roots.modifiers.Modifier;
+import epicsquid.roots.modifiers.ModifierList;
 import epicsquid.roots.recipe.IRootsRecipe;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.DustSpellStorage;
@@ -230,7 +230,7 @@ public abstract class SpellBase extends RegistryItem {
             continue;
           }
 
-          if (m.getType() == ModifierType.ALL_COST_MULTIPLIER) {
+          if (m.getType() == CostType.ALL_COST_MULTIPLIER) {
             if (m.getValue() < 0) {
               subtraction += Math.abs(m.getValue());
             } else {
@@ -260,7 +260,7 @@ public abstract class SpellBase extends RegistryItem {
             continue;
           }
 
-          if (m.getType() == ModifierType.ALL_COST_MULTIPLIER) {
+          if (m.getType() == CostType.ALL_COST_MULTIPLIER) {
             if (m.getValue() < 0) {
               subtraction += Math.abs(m.getValue());
             } else {

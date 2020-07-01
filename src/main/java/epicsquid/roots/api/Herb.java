@@ -1,6 +1,7 @@
 package epicsquid.roots.api;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
@@ -18,6 +19,7 @@ public class Herb extends IForgeRegistryEntry.Impl<Herb> {
    * Herb Items
    */
   private Supplier<Item> item;
+  private Supplier<ItemStack> stack = null;
 
   public Herb(@Nonnull Supplier<Item> item, ResourceLocation resourceLocation) {
     super();
@@ -37,6 +39,14 @@ public class Herb extends IForgeRegistryEntry.Impl<Herb> {
 
   public void setItem(@Nonnull Item item) {
     this.item = () -> item;
+  }
+
+  public ItemStack getStack () {
+    if (stack == null) {
+      final ItemStack ourStack = new ItemStack(this.item.get());
+      stack = () -> ourStack;
+    }
+    return stack.get();
   }
 
   @Override

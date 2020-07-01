@@ -5,12 +5,9 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModDamage;
-import epicsquid.roots.modifiers.ModifierRegistry;
-import epicsquid.roots.modifiers.ModifierType;
+import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
-import epicsquid.roots.modifiers.modifier.Modifier;
-import epicsquid.roots.modifiers.modifier.ModifierCores;
 import epicsquid.roots.network.fx.MessageAcidCloudFX;
 import epicsquid.roots.util.types.Property;
 import net.minecraft.entity.EntityLivingBase;
@@ -27,6 +24,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.oredict.OreIngredient;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class SpellAcidCloud extends SpellBase {
@@ -38,7 +36,7 @@ public class SpellAcidCloud extends SpellBase {
   public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 5).setDescription("duration in seconds of the fire effect applied on the enemies");
   public static Property<Integer> PROP_POISON_AMPLIFICATION = new Property<>("poison_amplification", 0).setDescription("the level of the poison effect applied on the enemies (0 is the first level)");
 
-  public static Modifier FIRE_CLOUD = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "fire_cloud"), ModifierType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 0.05));
+  public static Modifier FIRE_CLOUD = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "fire_cloud"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 0.05)));
 
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_acid_cloud");
   public static SpellAcidCloud instance = new SpellAcidCloud(spellName);

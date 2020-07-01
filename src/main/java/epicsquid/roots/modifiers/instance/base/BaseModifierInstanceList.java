@@ -3,10 +3,10 @@ package epicsquid.roots.modifiers.instance.base;
 import com.google.common.collect.Iterators;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
+import epicsquid.roots.modifiers.CostType;
+import epicsquid.roots.modifiers.IModifierCore;
 import epicsquid.roots.modifiers.IModifierList;
-import epicsquid.roots.modifiers.ModifierType;
-import epicsquid.roots.modifiers.modifier.IModifierCore;
-import epicsquid.roots.modifiers.modifier.Modifier;
+import epicsquid.roots.modifiers.Modifier;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.AbstractSpellInfo;
@@ -21,17 +21,14 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> implements IModifierList<T, NBTTagCompound> {
-  protected final Map<ModifierType, List<T>> internal;
+  protected final List<T> internal;
   protected final Map<IModifierCore, T> coreToInstance;
   protected final SpellBase spell;
 
   // TODO
   public BaseModifierInstanceList(SpellBase spell, Function<Modifier, T> empty) {
-    internal = new HashMap<>();
+    internal = new ArrayList<>();
     coreToInstance = new HashMap<>();
-    for (ModifierType type : ModifierType.values()) {
-      internal.put(type, new ArrayList<>());
-    }
     for (Modifier m : spell.getModifierList()) {
       add(empty.apply(m));
     }
@@ -40,35 +37,24 @@ public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> i
 
   @Override
   public void clear() {
-    for (ModifierType type : ModifierType.values()) {
-      internal.get(type).clear();
-    }
+    internal.clear();
     coreToInstance.clear();
   }
 
   @Override
   public int size() {
-    int size = 0;
-    for (ModifierType type : ModifierType.values()) {
-      size += internal.get(type).size();
-    }
-    return size;
+    return internal.size();
   }
 
   @Override
   public boolean isEmpty() {
-    for (ModifierType type : ModifierType.values()) {
-      if (!internal.get(type).isEmpty()) {
-        return false;
-      }
-    }
-    return true;
+    return internal.isEmpty();
   }
 
   @Override
   public boolean contains(Object o) {
-    if (o instanceof StaffModifierInstance) {
-      return internal.get(((StaffModifierInstance) o).getType()).contains(o);
+    if (o instanceof BaseModifierInstance) {
+      return internal.contains(o);
     } else if (o instanceof IModifierCore) {
       return coreToInstance.containsKey(o);
     }
@@ -85,11 +71,9 @@ public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> i
   @Override
   @Nullable
   public T get(Modifier modifier) {
-    for (Map.Entry<ModifierType, List<T>> instances : internal.entrySet()) {
-      for (T mi : instances.getValue()) {
-        if (mi.getModifier().equals(modifier)) {
-          return mi;
-        }
+    for (T mi : internal) {
+      if (mi.getModifier().equals(modifier)) {
+        return mi;
       }
     }
     return null;
@@ -102,42 +86,29 @@ public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> i
   @SuppressWarnings("unchecked")
   @Override
   public Iterator<T> iterator() {
-    List<BaseModifierIterator> iterators = new ArrayList<>();
-    if (!internal.get(ModifierType.NO_COST).isEmpty()) {
-      iterators.add(new BaseModifierIterator<>(internal.get(ModifierType.NO_COST).iterator()));
-    }
-    if (!internal.get(ModifierType.ADDITIONAL_COST).isEmpty()) {
-      iterators.add(new BaseModifierIterator<>(internal.get(ModifierType.ADDITIONAL_COST).iterator()));
-    }
-    if (!internal.get(ModifierType.ALL_COST_MULTIPLIER).isEmpty()) {
-      iterators.add(new BaseModifierIterator<>(internal.get(ModifierType.ALL_COST_MULTIPLIER).iterator()));
-    }
-    // TODO?
-    return Iterators.concat(iterators.toArray(new BaseModifierIterator[0]));
+    return internal.iterator();
   }
 
   @Override
   public boolean add(T modifierInstance) {
     IModifierCore core = modifierInstance.getCore();
     coreToInstance.put(core, modifierInstance);
-    internal.get(modifierInstance.getType()).removeIf(o -> o.getCore().equals(core));
-    return internal.get(modifierInstance.getType()).add(modifierInstance);
+    internal.removeIf(o -> o.getCore().equals(core));
+    return internal.add(modifierInstance);
   }
 
   // TODO?
   @SuppressWarnings("unchecked")
   @Override
   public boolean remove(Object o) {
-    if (!(o instanceof StaffModifierInstance)) {
-      return false;
-    }
-
-    return internal.get(((T) o).getType()).remove(o);
+    return internal.remove(o);
   }
 
-  public Object2DoubleOpenHashMap<Herb> apply (Object2DoubleOpenHashMap<Herb> costs) {
-    for (T m : this) {
-      costs = m.apply(costs);
+  public Object2DoubleOpenHashMap<Herb> apply(Object2DoubleOpenHashMap<Herb> costs) {
+    for (CostType type : CostType.values()) {
+      for (T m : this) {
+        costs = m.apply(costs, type);
+      }
     }
     return costs;
   }
@@ -166,54 +137,5 @@ public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> i
     if (!other.getRegistryName().equals(spell.getRegistryName())) {
       Roots.logger.error("Tried to deserialize mismatched ModifierInstanceLists for spell " + spell.getRegistryName() + ", trying to load for " + other.getRegistryName());
     }
-  }
-
-  private static class BaseModifierIterator<T extends BaseModifierInstance> implements Iterator<T> {
-    private final Iterator<T> internalIterator;
-
-    private BaseModifierIterator(Iterator<T> internalIterator) {
-      this.internalIterator = internalIterator;
-    }
-
-    @Override
-    public boolean hasNext() {
-      return this.internalIterator.hasNext();
-    }
-
-    @Override
-    public T next() {
-      return this.internalIterator.next();
-    }
-
-    @Override
-    public void remove() {
-      this.internalIterator.remove();
-    }
-
-    @Override
-    public void forEachRemaining(Consumer<? super T> action) {
-      this.internalIterator.forEachRemaining(action);
-    }
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    BaseModifierInstanceList that = (BaseModifierInstanceList) o;
-    if (internal.size() != that.internal.size()) {
-      return false;
-    }
-    for (ModifierType mod : internal.keySet()) {
-      if (!internal.get(mod).equals(that.internal.get(mod))) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(internal);
   }
 }
