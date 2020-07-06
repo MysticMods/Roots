@@ -2,6 +2,7 @@ package epicsquid.roots.modifiers.instance.base;
 
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.modifiers.*;
+import epicsquid.roots.util.types.RegistryItem;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class BaseModifierInstance implements INBTSerializable<NBTTagCompound>, IModifier {
+public abstract class BaseModifierInstance extends RegistryItem implements INBTSerializable<NBTTagCompound>, IModifier {
   protected Modifier modifier;
   protected boolean applied;
 
