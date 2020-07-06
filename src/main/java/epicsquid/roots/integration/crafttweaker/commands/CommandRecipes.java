@@ -7,6 +7,7 @@ import crafttweaker.mc1120.commands.CraftTweakerCommand;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.*;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -19,7 +20,7 @@ public class CommandRecipes extends CraftTweakerCommand {
   }
 
   private enum SubCommand {
-    all, animal_harvest, bark, fey_crafting, flower_growth, mortar, pacifist, pyre_crafting, runic_shears;
+    all, animal_harvest, bark, fey_crafting, flower_growth, mortar, pacifist, pyre_crafting, runic_shears, life_essence
   }
 
   @Override
@@ -114,6 +115,14 @@ public class CommandRecipes extends CraftTweakerCommand {
             CraftTweakerAPI.getLogger().logInfo("  Key: " + entry.getKey().toString() + " with the result of " + entry.getValue().getDrop().toString() + " for entity with class: " + entry.getValue().getClazz().getSimpleName());
           }
           if (command.get() == SubCommand.runic_shears) {
+            break;
+          }
+        case life_essence:
+          CraftTweakerAPI.getLogger().logInfo("Life Essence reipes:");
+          for (Class<? extends EntityLivingBase> clazz : ModRecipes.getLifeEssenceList()) {
+            CraftTweakerAPI.getLogger().logInfo("  Entity: " + clazz.getSimpleName());
+          }
+          if (command.get() == SubCommand.life_essence) {
             break;
           }
       }
