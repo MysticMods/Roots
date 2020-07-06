@@ -481,7 +481,7 @@ roots.commands.dump.desc=§2/ct roots_properties [mode] §3Dumps the specified p
 roots.commands.dump.usage=Usage: ct roots_properties [mode] Modes: all | ritual | spell
 
 roots.commands.dump_recipes.desc=§2/ct roots_recipes [category] §3Dumps a list of ResourceLocations of registered recipes.
-roots.commands.dump_recipes.usage=Usage: ct roots_recipes [mode] Modes: all | animal_harvest | chrysopoeia | fey_crafting | flower_growth | mortar | pacifist | pyre_crafting | runic_shears | transmutation
+roots.commands.dump_recipes.usage=Usage: ct roots_recipes [mode] Modes: all | animal_harvest | chrysopoeia | fey_crafting | flower_growth | mortar | pacifist | pyre_crafting | runic_shears | transmutation | life_essence
 
 # Stuff
 roots.message.salmon_eaten=You suddenly feel more knowledgeable about the world!
