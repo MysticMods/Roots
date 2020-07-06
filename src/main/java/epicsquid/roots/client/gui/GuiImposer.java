@@ -111,7 +111,7 @@ public class GuiImposer extends GuiContainer {
           tooltip.add(instance.describeName());
           tooltip.add(instance.describeFunction());
           tooltip.add("");
-          tooltip.add(instance.describeCost());
+          tooltip.addAll(instance.describeCost());
         }
       }
       if (!tooltip.isEmpty()) {

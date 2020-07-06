@@ -68,10 +68,15 @@ public class StaffModifierInstance extends LibraryModifierInstance {
     }
 
     for (CostType type : CostType.values()) {
-      costs = modifier.apply(costs, type);
+      costs = apply(costs, type);
     }
 
     return costs;
+  }
+
+  @Override
+  public Object2DoubleOpenHashMap<Herb> apply(Object2DoubleOpenHashMap<Herb> costs, CostType phase) {
+    return modifier.apply(costs, phase);
   }
 
   @Override

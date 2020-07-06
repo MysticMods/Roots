@@ -36,7 +36,19 @@ public interface IModifier extends IRegistryItem {
 
   Object2DoubleOpenHashMap<Herb> apply(final Object2DoubleOpenHashMap<Herb> costs, CostType phase);
 
-  default Object2DoubleOpenHashMap<Herb> apply(SpellBase spell, CostType phase) {
+  default Object2DoubleOpenHashMap<Herb> apply(final SpellBase spell, CostType phase) {
     return apply(spell.getCosts(), phase);
+  }
+
+  default Object2DoubleOpenHashMap<Herb> apply (Object2DoubleOpenHashMap<Herb> costs) {
+    for (CostType type : CostType.values()) {
+      costs = apply(costs, type);
+    }
+
+    return costs;
+  }
+
+  default Object2DoubleOpenHashMap<Herb> apply (final SpellBase spell) {
+    return apply(spell.getCosts());
   }
 }

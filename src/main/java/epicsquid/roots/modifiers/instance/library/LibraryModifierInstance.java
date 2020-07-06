@@ -2,6 +2,7 @@ package epicsquid.roots.modifiers.instance.library;
 
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.modifiers.CostType;
+import epicsquid.roots.modifiers.IModifier;
 import epicsquid.roots.modifiers.IModifierCost;
 import epicsquid.roots.modifiers.instance.base.BaseModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
@@ -12,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class LibraryModifierInstance extends BaseModifierInstance {
   public LibraryModifierInstance(Modifier modifier, boolean applied) {
@@ -47,6 +49,11 @@ public class LibraryModifierInstance extends BaseModifierInstance {
   @Override
   public List<IModifierCost> getCosts() {
     return Collections.emptyList();
+  }
+
+  @Override
+  public List<Supplier<IModifier>> getConflicts() {
+    return modifier.getConflicts();
   }
 
   @Override

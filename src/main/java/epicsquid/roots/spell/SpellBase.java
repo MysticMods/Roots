@@ -6,15 +6,12 @@ import epicsquid.roots.api.Herb;
 import epicsquid.roots.entity.spell.EntitySpellBase;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.modifiers.BaseModifiers;
-import epicsquid.roots.modifiers.CostType;
+import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstanceList;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
-import epicsquid.roots.modifiers.Modifier;
-import epicsquid.roots.modifiers.ModifierList;
 import epicsquid.roots.recipe.IRootsRecipe;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.DustSpellStorage;
@@ -230,11 +227,13 @@ public abstract class SpellBase extends RegistryItem {
             continue;
           }
 
-          if (m.getType() == CostType.ALL_COST_MULTIPLIER) {
-            if (m.getValue() < 0) {
-              subtraction += Math.abs(m.getValue());
-            } else {
-              addition += Math.abs(m.getValue());
+          for (IModifierCost c : m.getCosts()) {
+            if (c.getCost() == CostType.ALL_COST_MULTIPLIER) {
+              if (c.getValue() < 0) {
+                subtraction += Math.abs(c.getValue());
+              } else {
+                addition += Math.abs(c.getValue());
+              }
             }
           }
           if (m.isBasic()) {
@@ -260,11 +259,13 @@ public abstract class SpellBase extends RegistryItem {
             continue;
           }
 
-          if (m.getType() == CostType.ALL_COST_MULTIPLIER) {
-            if (m.getValue() < 0) {
-              subtraction += Math.abs(m.getValue());
-            } else {
-              addition += Math.abs(m.getValue());
+          for (IModifierCost c : m.getCosts()) {
+            if (c.getCost() == CostType.ALL_COST_MULTIPLIER) {
+              if (c.getValue() < 0) {
+                subtraction += Math.abs(c.getValue());
+              } else {
+                addition += Math.abs(c.getValue());
+              }
             }
           }
           if (m.isBasic()) {
