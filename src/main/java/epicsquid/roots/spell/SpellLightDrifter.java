@@ -1,4 +1,4 @@
-package epicsquid.roots.spell;
+/*package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
@@ -77,4 +77,4 @@ public class SpellLightDrifter extends SpellBase {
     this.cooldown = properties.get(PROP_COOLDOWN);
     this.duration = properties.get(PROP_DURATION);
   }
-}
+}*/

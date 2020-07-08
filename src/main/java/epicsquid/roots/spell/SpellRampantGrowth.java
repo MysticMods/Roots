@@ -1,4 +1,4 @@
-package epicsquid.roots.spell;
+/*package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
@@ -82,4 +82,4 @@ public class SpellRampantGrowth extends SpellBase {
     this.count = properties.get(PROP_COUNT);
     this.additionalCount = properties.get(PROP_ADDITIONAL_COUNT);
   }
-}
+}*/

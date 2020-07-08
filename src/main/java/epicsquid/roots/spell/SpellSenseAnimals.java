@@ -1,4 +1,4 @@
-package epicsquid.roots.spell;
+/*package epicsquid.roots.spell;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
@@ -62,4 +62,4 @@ public class SpellSenseAnimals extends SpellBase {
     this.radius_y = properties.get(PROP_RADIUS_Y);
     this.radius_z = properties.get(PROP_RADIUS_Z);
   }
-}
+}*/

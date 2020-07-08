@@ -1,4 +1,4 @@
-package epicsquid.roots.spell;
+/*package epicsquid.roots.spell;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.entity.spell.EntitySpellSpringStorm;
@@ -73,4 +73,4 @@ public class SpellSpringStorm extends SpellBase {
     this.lightning_chance = properties.get(PROP_LIGHTNING_CHANCE);
     this.lightning_strikes = properties.get(PROP_LIGHTNING_STRIKES);
   }
-}
+}*/

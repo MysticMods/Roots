@@ -1,4 +1,4 @@
-package epicsquid.roots.spell;
+/*package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
@@ -120,4 +120,4 @@ public class SpellAutumnsFall extends SpellBase {
     this.radius_y = properties.get(PROP_RADIUS_Y);
     this.max_affected = properties.get(PROP_MAX_AFFECTED);
   }
-}
+}*/

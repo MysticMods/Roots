@@ -1,4 +1,4 @@
-package epicsquid.roots.spell;
+/*package epicsquid.roots.spell;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
@@ -50,4 +50,4 @@ public class SpellSecondWind extends SpellBase {
     this.castType = properties.get(PROP_CAST_TYPE);
     this.cooldown = properties.get(PROP_COOLDOWN);
   }
-}
+}*/
