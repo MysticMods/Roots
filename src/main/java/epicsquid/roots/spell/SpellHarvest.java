@@ -7,7 +7,7 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.mechanics.Harvest;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageHarvestCompleteFX;
-import epicsquid.roots.util.types.Property;
+import epicsquid.roots.properties.Property;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;

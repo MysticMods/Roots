@@ -10,7 +10,7 @@ import epicsquid.roots.ritual.conditions.ConditionRunedPillars;
 import epicsquid.roots.ritual.conditions.ConditionValidSummon;
 import epicsquid.roots.tileentity.TileEntityCatalystPlate;
 import epicsquid.roots.util.RitualUtil;
-import epicsquid.roots.util.types.Property;
+import epicsquid.roots.properties.Property;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

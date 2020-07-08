@@ -6,7 +6,7 @@ import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
-import epicsquid.roots.util.types.PropertyTable;
+import epicsquid.roots.properties.PropertyTable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -17,14 +17,11 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.patchouli.client.book.BookCategory;
-import vazkii.patchouli.client.book.BookEntry;
 import vazkii.patchouli.client.book.gui.GuiBook;
 import vazkii.patchouli.client.book.gui.GuiBookCategory;
-import vazkii.patchouli.client.book.gui.GuiBookEntry;
 import vazkii.patchouli.client.book.text.BookTextParser;
 import vazkii.patchouli.common.book.Book;
 
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.function.Function;
 

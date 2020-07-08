@@ -7,7 +7,7 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageRadianceBeamFX;
 import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
-import epicsquid.roots.util.types.Property;
+import epicsquid.roots.properties.Property;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

@@ -1,4 +1,4 @@
-package epicsquid.roots.util.types;
+package epicsquid.roots.properties;
 
 public class NoDefaultProperty<T> extends Property<T> {
   public NoDefaultProperty(String name, Class<?> clazz) {

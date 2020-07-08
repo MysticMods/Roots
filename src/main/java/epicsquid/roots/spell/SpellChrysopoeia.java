@@ -7,7 +7,7 @@ import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageChrysopoeiaFX;
 import epicsquid.roots.recipe.ChrysopoeiaRecipe;
-import epicsquid.roots.util.types.Property;
+import epicsquid.roots.properties.Property;
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;

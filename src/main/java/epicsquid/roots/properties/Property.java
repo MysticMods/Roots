@@ -1,13 +1,8 @@
-package epicsquid.roots.util.types;
+package epicsquid.roots.properties;
 
 import epicsquid.roots.spell.SpellBase;
 
-public class Property<T> {
-  protected Class<?> type;
-  protected String name;
-  protected T defaultValue;
-  protected String description = "unknown";
-
+public class Property<T> extends AbstractProperty<T, Property<T>> {
   public Property (String name, Class<?> clazz) {
     this.type = clazz;
     this.name = name;
@@ -20,34 +15,15 @@ public class Property<T> {
     this.defaultValue = defaultValue;
   }
 
-  public String getDescription() {
-    return description;
-  }
-
+  @Override
   public Property<T> setDescription(String description) {
     this.description = description;
     return this;
   }
 
-  public Class<?> getType() {
-    return type;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public T getDefaultValue() {
-    return defaultValue;
-  }
-
-  public boolean hasDefaultValue () {
+  @Override
+  public boolean validate(T value) {
     return true;
-  }
-
-  @SuppressWarnings("unchecked")
-  public T cast (Object val) {
-    return (T) val;
   }
 
   public static class PropertyCooldown extends Property<Integer> {
@@ -57,7 +33,12 @@ public class Property<T> {
 
     @Override
     public String getDescription() {
-      return "the cooldownLeft time in ticks of the spell";
+      return "the cooldown remaining (in ticks) of the spell";
+    }
+
+    @Override
+    public boolean validate(Integer value) {
+      return value >= 0;
     }
   }
 
@@ -79,7 +60,12 @@ public class Property<T> {
 
     @Override
     public String getDescription() {
-      return "the herb cost of one cast of this spell";
+      return "the herb cost of one cast of this spell or its cost every tick";
+    }
+
+    @Override
+    public boolean validate(SpellBase.SpellCost value) {
+      return value.getCost() > 0;
     }
   }
 
@@ -91,6 +77,11 @@ public class Property<T> {
     @Override
     public PropertyDamage setDescription(String description) {
       return ((PropertyDamage) super.setDescription(description));
+    }
+
+    @Override
+    public boolean validate(Float value) {
+      return value > 0;
     }
   }
 
@@ -109,6 +100,11 @@ public class Property<T> {
     public PropertyDuration setDescription(String description) {
       return (PropertyDuration) super.setDescription(description);
     }
+
+    @Override
+    public boolean validate(Integer value) {
+      return value > 0;
+    }
   }
 
   public static class PropertyInterval extends Property<Integer> {
@@ -119,6 +115,11 @@ public class Property<T> {
     @Override
     public PropertyInterval setDescription(String description) {
       return ((PropertyInterval) super.setDescription(description));
+    }
+
+    @Override
+    public boolean validate(Integer value) {
+      return value > 0;
     }
   }
 }

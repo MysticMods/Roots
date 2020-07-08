@@ -7,7 +7,7 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageLifeInfusionFX;
-import epicsquid.roots.util.types.Property;
+import epicsquid.roots.properties.Property;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

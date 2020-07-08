@@ -1,6 +1,5 @@
 package epicsquid.roots.command;
 
-import com.sun.jna.Library;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
@@ -13,8 +12,8 @@ import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.info.LibrarySpellInfo;
-import epicsquid.roots.util.types.Property;
-import epicsquid.roots.util.types.PropertyTable;
+import epicsquid.roots.properties.Property;
+import epicsquid.roots.properties.PropertyTable;
 import epicsquid.roots.world.data.SpellLibraryData;
 import epicsquid.roots.world.data.SpellLibraryRegistry;
 import net.minecraft.advancements.Advancement;

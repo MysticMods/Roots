@@ -4,7 +4,7 @@ import epicsquid.roots.entity.ritual.EntityRitualSpreadingForest;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.ritual.conditions.ConditionRunedPillars;
 import epicsquid.roots.util.RitualUtil;
-import epicsquid.roots.util.types.Property;
+import epicsquid.roots.properties.Property;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
