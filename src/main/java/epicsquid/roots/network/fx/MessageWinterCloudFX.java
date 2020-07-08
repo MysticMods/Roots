@@ -2,7 +2,7 @@ package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.SpellWinterCloud;
+import epicsquid.roots.spell.SpellStormCloud;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
@@ -48,9 +48,9 @@ public class MessageWinterCloudFX implements IMessage {
     public IMessage onMessage(MessageWinterCloudFX message, MessageContext context) {
       World world = Minecraft.getMinecraft().world;
       if (Util.rand.nextBoolean()) {
-        ParticleUtil.spawnParticleSmoke(world, message.x + 0.5F, message.y + 0.9F, message.z + 0.5F, 0, 0.01F, 0, SpellWinterCloud.instance.getRed1(), SpellWinterCloud.instance.getBlue1(), SpellWinterCloud.instance.getGreen1(), 0.30F, 15F, 40, true);
+        ParticleUtil.spawnParticleSmoke(world, message.x + 0.5F, message.y + 0.9F, message.z + 0.5F, 0, 0.01F, 0, SpellStormCloud.instance.getRed1(), SpellStormCloud.instance.getBlue1(), SpellStormCloud.instance.getGreen1(), 0.30F, 15F, 40, true);
       } else {
-        ParticleUtil.spawnParticleSmoke(world, message.x + 0.5F, message.y + 0.9F, message.z + 0.5F, 0, 0.01F, 0, SpellWinterCloud.instance.getRed2(), SpellWinterCloud.instance.getBlue2(), SpellWinterCloud.instance.getGreen2(), 0.30F, 15F, 40, true);
+        ParticleUtil.spawnParticleSmoke(world, message.x + 0.5F, message.y + 0.9F, message.z + 0.5F, 0, 0.01F, 0, SpellStormCloud.instance.getRed2(), SpellStormCloud.instance.getBlue2(), SpellStormCloud.instance.getGreen2(), 0.30F, 15F, 40, true);
       }
       return null;
     }

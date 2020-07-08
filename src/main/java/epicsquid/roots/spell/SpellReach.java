@@ -1,4 +1,4 @@
-package epicsquid.roots.spell;
+/*package epicsquid.roots.spell;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModPotions;
@@ -56,4 +56,4 @@ public class SpellReach extends SpellBase {
     this.reach = properties.get(PROP_REACH);
     ModPotions.reach.loadComplete(this.reach);
   }
-}
+}*/

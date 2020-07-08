@@ -1,4 +1,4 @@
-package epicsquid.roots.spell;
+/*package epicsquid.roots.spell;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.mechanics.Magnetize;
@@ -60,4 +60,4 @@ public class SpellMagnetism extends SpellBase {
     this.radius_y = properties.get(PROP_RADIUS_Y);
     this.radius_z = properties.get(PROP_RADIUS_Z);
   }
-}
+}*/
