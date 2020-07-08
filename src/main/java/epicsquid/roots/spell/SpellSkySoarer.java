@@ -5,7 +5,7 @@ import epicsquid.roots.entity.spell.EntityBoost;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.recipe.ingredient.ArrowBuilder;
-import epicsquid.roots.util.types.Property;
+import epicsquid.roots.properties.Property;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;

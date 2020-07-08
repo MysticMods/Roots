@@ -1,4 +1,4 @@
-package epicsquid.roots.util.types;
+package epicsquid.roots.properties;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -58,7 +58,27 @@ public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
     }
   }
 
+  public static class InvalidPropetyValue extends IllegalArgumentException {
+    public InvalidPropetyValue() {
+    }
+
+    public InvalidPropetyValue(String s) {
+      super(s);
+    }
+
+    public InvalidPropetyValue(String message, Throwable cause) {
+      super(message, cause);
+    }
+
+    public InvalidPropetyValue(Throwable cause) {
+      super(cause);
+    }
+  }
+
   public <T> void set(Property<T> property, T value) {
+    if (!property.validate(value)) {
+      throw new InvalidPropetyValue("Value " + value + " is not valid for property " + property.getName());
+    }
     map.put(property, value);
   }
 

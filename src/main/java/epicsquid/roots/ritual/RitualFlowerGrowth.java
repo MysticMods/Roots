@@ -2,7 +2,7 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualFlowerGrowth;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.util.types.Property;
+import epicsquid.roots.properties.Property;
 import net.minecraft.block.BlockRedFlower;
 import net.minecraft.block.BlockYellowFlower;
 import net.minecraft.init.Blocks;
