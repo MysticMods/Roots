@@ -5,6 +5,7 @@ import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.util.types.IRegistryItem;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -26,12 +27,26 @@ public interface IModifier extends IRegistryItem {
 
   default boolean conflicts (IModifier modifier) {
     for (Supplier<IModifier> mod : getConflicts()) {
-      if (mod.get().equals(modifier)) {
+      if (mod.get().getModifier().equals(modifier.getModifier())) {
         return true;
       }
     }
 
     return false;
+  }
+
+  default <T extends IModifier, V extends NBTBase> boolean isConflicting (IModifierList<T, V> modifiers) {
+    for (T modifier : modifiers.getModifiers()) {
+      if (conflicts(modifier)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  default IModifier getModifier () {
+    return this;
   }
 
   Object2DoubleOpenHashMap<Herb> apply(final Object2DoubleOpenHashMap<Herb> costs, CostType phase);

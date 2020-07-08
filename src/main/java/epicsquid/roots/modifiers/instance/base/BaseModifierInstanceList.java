@@ -79,6 +79,11 @@ public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> i
     return null;
   }
 
+  @Override
+  public Collection<T> getModifiers() {
+    return internal;
+  }
+
   public SpellBase getSpell() {
     return spell;
   }

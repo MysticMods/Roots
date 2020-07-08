@@ -31,6 +31,7 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
     this.applied = false;
   }
 
+  @Override
   public Modifier getModifier() {
     return modifier;
   }
