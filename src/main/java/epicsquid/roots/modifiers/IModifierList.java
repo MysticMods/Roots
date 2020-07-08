@@ -4,6 +4,7 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraftforge.common.util.INBTSerializable;
 
 import javax.annotation.Nullable;
+import java.util.Collection;
 
 public interface IModifierList<T extends IModifier, V extends NBTBase> extends Iterable<T>, INBTSerializable<V> {
   void clear();
@@ -19,6 +20,8 @@ public interface IModifierList<T extends IModifier, V extends NBTBase> extends I
 
   @Nullable
   T get (Modifier modifier);
+
+  Collection<T> getModifiers ();
 
   boolean add(T modifierInstance);
 

@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
+import java.util.Collection;
 import java.util.Iterator;
 
 public class ModifierList implements IModifierList<Modifier, NBTTagCompound> {
@@ -69,6 +70,11 @@ public class ModifierList implements IModifierList<Modifier, NBTTagCompound> {
     }
 
     return null;
+  }
+
+  @Override
+  public Collection<Modifier> getModifiers() {
+    return map.keySet();
   }
 
   @Override
