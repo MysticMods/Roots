@@ -49,6 +49,12 @@ public class SpellDisarm extends SpellBase {
   public static Modifier STALICRIPE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "paralysis"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier DEWGONIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "liquid_lurch"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
+  static {
+    // Conflicts
+    // Poison Hands < -> Flower Child
+    BAFFLE_CAP.addConflict(CLOUD_BERRY);
+  }
+
   private int radius_x, radius_y, radius_z, drop_chance;
 
   private SpellDisarm(ResourceLocation name) {

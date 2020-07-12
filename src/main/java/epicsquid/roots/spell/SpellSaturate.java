@@ -57,6 +57,15 @@ public class SpellSaturate extends SpellBase {
   public static Modifier STALICRIPE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "iron_gut"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier DEWGONIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "bottled_goods"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
+  static {
+    // For sanity, don't cross-polinate
+    WILDROOT.addConflicts(MOONGLOW_LEAF, BAFFLE_CAP, INFERNAL_BULB, STALICRIPE, DEWGONIA);
+    MOONGLOW_LEAF.addConflicts(BAFFLE_CAP, INFERNAL_BULB, STALICRIPE, DEWGONIA);
+    BAFFLE_CAP.addConflicts(INFERNAL_BULB, STALICRIPE, DEWGONIA);
+    INFERNAL_BULB.addConflicts(STALICRIPE, DEWGONIA);
+    STALICRIPE.addConflict(DEWGONIA);
+  }
+
   private double saturation_multiplier, food_multiplier;
   private boolean suppressSound = false;
 

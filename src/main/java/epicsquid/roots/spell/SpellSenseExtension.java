@@ -49,6 +49,10 @@ public class SpellSenseExtension extends SpellBase {
   public static Modifier STALICRIPE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "sense_ores"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier DEWGONIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "sense_liquids"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
+  static {
+    MOONGLOW_LEAF.addConflict(BAFFLE_CAP); //
+  }
+
   private int radius_x, radius_y, radius_z, drop_chance;
 
   private SpellSenseExtension(ResourceLocation name) {

@@ -48,6 +48,11 @@ public class SpellAcidCloud extends SpellBase {
   public static Modifier STALICRIPE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "cloud_of_rocks"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier DEWGONIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "underwater_increase"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
+  static {
+    // Conflicts
+    TERRA_MOSS.addConflicts(WILDROOT, SPIRIT_HERB, INFERNAL_BULB, STALICRIPE);
+  }
+
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_acid_cloud");
   public static SpellAcidCloud instance = new SpellAcidCloud(spellName);
 

@@ -7,7 +7,9 @@ import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 
+import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
 
 public interface IModifier extends IRegistryItem {
@@ -23,11 +25,23 @@ public interface IModifier extends IRegistryItem {
 
   List<IModifierCost> getCosts();
 
-  List<Supplier<IModifier>> getConflicts();
+  Set<IModifier> getConflicts();
+
+  default Supplier<IModifier> supply () {
+    return () -> this;
+  }
+
+  default void addConflict(IModifier supplier) {
+    addConflict(supplier, true);
+  }
+
+  default void addConflict (IModifier supplier, boolean reverse) {
+    throw new IllegalStateException(this.getClass().toString() + " does not support addConflict.");
+  }
 
   default boolean conflicts (IModifier modifier) {
-    for (Supplier<IModifier> mod : getConflicts()) {
-      if (mod.get().getModifier().equals(modifier.getModifier())) {
+    for (IModifier mod : getConflicts()) {
+      if (mod.getModifier().equals(modifier.getModifier())) {
         return true;
       }
     }

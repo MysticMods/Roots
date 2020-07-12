@@ -40,6 +40,13 @@ public class SpellGrowthInfusion extends SpellBase {
   public static Modifier STALICRIPE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "ore_infusion"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier DEWGONIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "hydration"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
+  static {
+    // Conflicts
+    WILDROOT.addConflicts(PERESKIA, SPIRIT_HERB, CLOUD_BERRY); // Targets specific flowers
+    STALICRIPE.addConflicts(PERESKIA, SPIRIT_HERB, CLOUD_BERRY); // Can't AOE
+    BAFFLE_CAP.addConflicts(PERESKIA, SPIRIT_HERB, CLOUD_BERRY); // Again can't aoe
+  }
+
   private int tickCount;
 
   public SpellGrowthInfusion(ResourceLocation name) {

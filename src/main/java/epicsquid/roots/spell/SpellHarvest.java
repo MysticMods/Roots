@@ -44,6 +44,11 @@ public class SpellHarvest extends SpellBase {
   public static Modifier STALICRIPE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "yield"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier DEWGONIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "block_harvest"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
+  static {
+    // Conflcits
+    PERESKIA.addConflict(TERRA_MOSS); // Can't increase/decrease at the same time
+  }
+
   private int radius_x, radius_y, radius_z;
 
   public SpellHarvest(ResourceLocation name) {
