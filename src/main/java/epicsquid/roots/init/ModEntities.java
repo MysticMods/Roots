@@ -52,8 +52,8 @@ public class ModEntities {
         EntityRitualWardingProtection.class,
         EntityRitualWildrootGrowth.class,
         EntityRitualWindwall.class,
-        EntityRitualSummonCreatures.class,
-        EntitySpellSpringStorm.class
+        EntityRitualSummonCreatures.class
+        //EntitySpellSpringStorm.class
     );
 
     ritualClasses.forEach(LibRegistry::registerEntity);
