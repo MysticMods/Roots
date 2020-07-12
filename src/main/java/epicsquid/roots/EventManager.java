@@ -12,7 +12,6 @@ import epicsquid.roots.item.IItemPouch;
 import epicsquid.roots.network.MessageLightDrifterSync;
 import epicsquid.roots.network.fx.MessageGeasFX;
 import epicsquid.roots.network.fx.MessageGeasRingFX;
-import epicsquid.roots.network.fx.MessageLightDrifterFX;
 import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
 import epicsquid.roots.spell.SpellAquaBubble;
 import epicsquid.roots.util.Constants;
@@ -150,7 +149,7 @@ public class EventManager {
         player.setPositionAndUpdate(player.posX, player.posY, player.posZ);
         player.setGameType(GameType.getByID(event.getEntity().getEntityData().getInteger(Constants.LIGHT_DRIFTER_MODE)));
         player.extinguish();
-        PacketHandler.sendToAllTracking(new MessageLightDrifterFX(event.getEntity().posX, event.getEntity().posY + 1.0f, event.getEntity().posZ), event.getEntity());
+        //PacketHandler.sendToAllTracking(new MessageLightDrifterFX(event.getEntity().posX, event.getEntity().posY + 1.0f, event.getEntity().posZ), event.getEntity());
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_TAG);
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_X);
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_Y);

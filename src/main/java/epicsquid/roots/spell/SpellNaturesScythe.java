@@ -1,11 +1,9 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
-import epicsquid.roots.network.fx.MessageFallBladesFX;
 import epicsquid.roots.properties.Property;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFlower;
@@ -39,7 +37,7 @@ public class SpellNaturesScythe extends SpellBase {
   public static Modifier WILDEWHEET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "leaf_harvester"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier WILDROOT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "magnetic_harvester"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
   public static Modifier MOONGLOW_LEAF = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "silken_touch"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 1)));
-  public static Modifier SPIRIT_HERB = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "regrowth"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1)));
+  public static Modifier SPIRIT_HERB = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "scythe_regrowth"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1)));
   public static Modifier TERRA_MOSS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "grass_harvester"), ModifierCores.TERRA_MOSS, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.TERRA_MOSS, 1)));
   public static Modifier BAFFLE_CAP = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "mushroom_harvester"), ModifierCores.BAFFLE_CAP, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 1)));
   public static Modifier CLOUD_BERRY = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "flower_harvester"), ModifierCores.CLOUD_BERRY, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 1)));
@@ -83,18 +81,18 @@ public class SpellNaturesScythe extends SpellBase {
     if (!world.isRemote) {
       world.destroyBlock(pos, true);
       world.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 0.5f, 1f);
-      PacketHandler.sendToAllTracking(new MessageFallBladesFX(pos.getX(), pos.getY(), pos.getZ(), false), world, pos);
+      //PacketHandler.sendToAllTracking(new MessageFallBladesFX(pos.getX(), pos.getY(), pos.getZ(), false), world, pos);
     }
     return true;
   }
 
   private boolean ifAffectedByNaturesScythe(World world, BlockPos pos) {
-     return world.getBlockState(pos).getBlock() instanceof BlockFlower
-             || world.getBlockState(pos).getBlock() == Blocks.TALLGRASS
-             || world.getBlockState(pos).getBlock() == Blocks.DOUBLE_PLANT
-             && (world.getBlockState(pos).getValue(BlockDoublePlant.VARIANT) == BlockDoublePlant.EnumPlantType.FERN
-                  || world.getBlockState(pos).getValue(BlockDoublePlant.VARIANT) == BlockDoublePlant.EnumPlantType.GRASS
-             );
+    return world.getBlockState(pos).getBlock() instanceof BlockFlower
+        || world.getBlockState(pos).getBlock() == Blocks.TALLGRASS
+        || world.getBlockState(pos).getBlock() == Blocks.DOUBLE_PLANT
+        && (world.getBlockState(pos).getValue(BlockDoublePlant.VARIANT) == BlockDoublePlant.EnumPlantType.FERN
+        || world.getBlockState(pos).getValue(BlockDoublePlant.VARIANT) == BlockDoublePlant.EnumPlantType.GRASS
+    );
   }
 
   @Override

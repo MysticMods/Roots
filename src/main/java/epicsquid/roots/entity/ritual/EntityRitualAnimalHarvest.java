@@ -5,7 +5,6 @@ import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.config.RitualConfig;
 import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.recipe.AnimalHarvestFishRecipe;
 import epicsquid.roots.ritual.RitualAnimalHarvest;
 import epicsquid.roots.ritual.RitualRegistry;
@@ -77,7 +76,7 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
           stack.setCount(ritual.fish_count + Math.max(0, (rand.nextInt(ritual.fish_additional) - 2)));
           ItemUtil.spawnItem(world, pos.add(0, 1, 0), stack);
         }
-        PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY() + 1, pos.getZ()), this);
+        //PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY() + 1, pos.getZ()), this);
         return true;
       }
     }
