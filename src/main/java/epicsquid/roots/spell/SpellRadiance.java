@@ -46,6 +46,10 @@ public class SpellRadiance extends SpellBase {
   public static Modifier STALICRIPE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "wider_ray"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier DEWGONIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "slowing_ray"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
+  static {
+    TERRA_MOSS.addConflicts(MOONGLOW_LEAF, WILDEWHEET, BAFFLE_CAP, INFERNAL_BULB, DEWGONIA); // Can't heal and do those
+  }
+
   private float distance;
   private float damage;
   private float undeadDamage;

@@ -39,6 +39,11 @@ public class SpellTimeStop extends SpellBase {
 
   public static int duration;
 
+  static {
+    // Conflicts
+    STALICRIPE.addConflicts(SPIRIT_HERB);
+  }
+
   public SpellTimeStop(ResourceLocation name) {
     super(name, TextFormatting.DARK_BLUE, 64f / 255f, 64f / 255f, 64f / 255f, 192f / 255f, 32f / 255f, 255f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DURATION);

@@ -46,6 +46,10 @@ public class SpellShatter extends SpellBase {
 
   private float damage;
 
+  static {
+    SPIRIT_HERB.addConflicts(PERESKIA, MOONGLOW_LEAF);
+  }
+
   public SpellShatter(ResourceLocation name) {
     super(name, TextFormatting.GRAY, 96f / 255f, 96f / 255f, 96f / 255f, 192f / 255f, 192f / 255f, 192f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE);

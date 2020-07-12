@@ -19,6 +19,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import vazkii.botania.common.item.equipment.bauble.CloudPendantShim;
 
 import javax.annotation.Nullable;
 
@@ -40,6 +41,12 @@ public class SpellFeyLight extends SpellBase {
   public static Modifier INFERNAL_BULB = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "red_light"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 1)));
   public static Modifier STALICRIPE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "brown_light"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier DEWGONIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "blue_light"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
+
+  static {
+    // Conflicts
+    // Deluminator <-> Everything
+    SPIRIT_HERB.addConflicts(PERESKIA, WILDEWHEET, WILDROOT, MOONGLOW_LEAF, TERRA_MOSS, BAFFLE_CAP, INFERNAL_BULB, STALICRIPE, DEWGONIA);
+  }
 
   public SpellFeyLight(ResourceLocation name) {
     super(name, TextFormatting.LIGHT_PURPLE, 247f / 255f, 246 / 255f, 210f / 255f, 227f / 255f, 81f / 255f, 244f / 255f);

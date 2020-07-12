@@ -38,6 +38,14 @@ public class SpellDandelionWinds extends SpellBase {
   public static Modifier STALICRIPE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "suction"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier DEWGONIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "billowing_sails"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
+  // Conflicts
+  static {
+    // Grounded Wind <-> Slow Falling
+    WILDROOT.addConflict(MOONGLOW_LEAF);
+    // Circle of Winds <-> Billowing Sails
+    SPIRIT_HERB.addConflict(DEWGONIA);
+  }
+
   private float distance;
 
   public SpellDandelionWinds(ResourceLocation name) {

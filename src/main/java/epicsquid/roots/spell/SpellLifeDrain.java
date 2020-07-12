@@ -48,6 +48,10 @@ public class SpellLifeDrain extends SpellBase {
   public static Modifier STALICRIPE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "weakening_drain"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier DEWGONIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "underwater_breath"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
+  static {
+    SPIRIT_HERB.addConflict(TERRA_MOSS); // You can't see the creature to target
+  }
+
   private float witherDamage;
   private float heal;
   private int witherDuration;

@@ -51,6 +51,10 @@ public class SpellSelfAugmentation extends SpellBase {
 
   private int radius_x, radius_y, radius_z, drop_chance;
 
+  static {
+    SPIRIT_HERB.addConflicts(MOONGLOW_LEAF, TERRA_MOSS);
+  }
+
   private SpellSelfAugmentation(ResourceLocation name) {
     super(name, TextFormatting.DARK_RED, 122F / 255F, 0F, 0F, 58F / 255F, 58F / 255F, 58F / 255F);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);

@@ -41,6 +41,12 @@ public class SpellGeas extends SpellBase {
   public static Modifier STALICRIPE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "avalanche"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier DEWGONIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "waterfall"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
+  static {
+    // Conflicts
+    TERRA_MOSS.addConflicts(SPIRIT_HERB, CLOUD_BERRY);
+    WILDEWHEET.addConflicts(INFERNAL_BULB, STALICRIPE, DEWGONIA);
+  }
+
   private int duration;
 
   public SpellGeas(ResourceLocation name) {

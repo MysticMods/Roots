@@ -13,7 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Supplier;
+import java.util.Set;
 
 public class LibraryModifierInstance extends BaseModifierInstance {
   public LibraryModifierInstance(Modifier modifier, boolean applied) {
@@ -52,7 +52,7 @@ public class LibraryModifierInstance extends BaseModifierInstance {
   }
 
   @Override
-  public List<Supplier<IModifier>> getConflicts() {
+  public Set<IModifier> getConflicts() {
     return modifier.getConflicts();
   }
 

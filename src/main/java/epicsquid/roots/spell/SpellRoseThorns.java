@@ -42,6 +42,12 @@ public class SpellRoseThorns extends SpellBase {
   public static Modifier STALICRIPE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "empowering_trap"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier DEWGONIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "paralysis_trap"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
+  static {
+    // Conflicts
+    WILDROOT.addConflicts(MOONGLOW_LEAF, CLOUD_BERRY, DEWGONIA); // Can't slow enemies to a stop & fling/levitate/slow them
+    CLOUD_BERRY.addConflicts(MOONGLOW_LEAF); // Can't fling them up in the air and backwards at the same time
+  }
+
   public SpellRoseThorns(ResourceLocation name) {
     super(name, TextFormatting.RED, 255f / 255f, 32f / 255f, 64f / 255f, 32f / 255f, 255f / 255f, 96f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_SLOWNESS_AMPLIFIER, PROP_SLOWNESS_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_DURATION);
