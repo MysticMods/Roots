@@ -66,15 +66,19 @@ public class CommandStaff extends CommandBase {
       library.addSpell(spell);
 
       ItemStack staff = player.getHeldItemMainhand();
+      boolean newStaff = false;
       if (staff.getItem() != ModItems.staff) {
         staff = new ItemStack(ModItems.staff);
+        newStaff = true;
       }
       StaffSpellStorage storage = StaffSpellStorage.fromStack(staff);
       StaffSpellInfo info = StaffSpellInfo.fromSpell(spell, true);
       if (storage != null && storage.hasFreeSlot()) {
         storage.setSpellToSlot(storage.getNextFreeSlot(), info);
         storage.saveToStack();
-        return;
+        if (!newStaff) {
+          return;
+        }
       }
 
       IItemHandler inv = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
