@@ -130,6 +130,7 @@ roots.tooltip.modifier.activate=[Alt-Click slot to edit spell modifiers.]
 roots.tooltip.modifier.not_applied=[Modifier not applied.]
 roots.tooltip.modifier.not_enabled=[Modifier not enabled.]
 roots.tooltip.modifier.not_applicable=[No applicable modifier for this slot.]
+roots.tooltip.modifier.conflicting=[Modifier conflicts with %s.]
 roots.tooltip.modifier.additional_cost=Additional cost of %s: x%s
 roots.tooltip.modifier.no_cost=No cost.
 roots.tooltip.modifier.increased_cost=All herb costs increased by %s

@@ -13,6 +13,7 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -106,7 +107,11 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
 
   @Override
   public IModifierCore getCore() {
-    return modifier.getCore();
+    if (modifier == null) {
+      return BaseModifiers.AIR;
+    } else {
+      return modifier.getCore();
+    }
   }
 
   @Override

@@ -1,12 +1,15 @@
 package epicsquid.roots.command;
 
 import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.roots.spell.info.storage.DustSpellStorage;
-import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.spell.info.StaffSpellInfo;
+import epicsquid.roots.spell.info.storage.DustSpellStorage;
+import epicsquid.roots.spell.info.storage.StaffSpellStorage;
+import epicsquid.roots.world.data.SpellLibraryData;
+import epicsquid.roots.world.data.SpellLibraryRegistry;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
@@ -57,6 +60,20 @@ public class CommandStaff extends CommandBase {
       if (spell == null) {
         player.sendMessage(new TextComponentString("Invalid spell: " + args[0]));
         return;
+      }
+
+      SpellLibraryData library = SpellLibraryRegistry.getData(player);
+      library.addSpell(spell);
+
+      ItemStack inHand = player.getHeldItemMainhand();
+      if (inHand.getItem() == ModItems.staff) {
+        StaffSpellStorage storage = StaffSpellStorage.fromStack(inHand);
+        StaffSpellInfo info = StaffSpellInfo.fromSpell(spell, true);
+        if (storage != null && storage.hasFreeSlot()) {
+          storage.setSpellToSlot(storage.getNextFreeSlot(), info);
+          storage.saveToStack();
+          return;
+        }
       }
 
       // TODO

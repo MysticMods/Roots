@@ -79,6 +79,28 @@ public class ContainerImposer extends Container {
     return mods.getByCore(core);
   }
 
+  @Nullable
+  public StaffModifierInstanceList getModifiers () {
+    StaffSpellStorage storage = tile.getSpellStorage();
+    if (storage == null) {
+      return null;
+    }
+    int slot = tile.getSlot();
+    if (slot == 0) {
+      return null;
+    }
+    StaffSpellInfo info = storage.getSpellInSlot(slot);
+    if (info == null) {
+      return null;
+    }
+    StaffModifierInstanceList mods = info.getModifiers();
+    if (mods == null) {
+      return null;
+    }
+
+    return mods;
+  }
+
   private void createSpellSlots() {
     addSlotToContainer(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 1, 51, 37)); // Spot 1
     addSlotToContainer(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 2, 56, 13)); // Spot 2
