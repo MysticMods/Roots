@@ -60,7 +60,6 @@ public abstract class SpellBase extends RegistryItem {
   protected EnumCastType castType = EnumCastType.INSTANTANEOUS;
   private Object2DoubleOpenHashMap<Herb> costs = new Object2DoubleOpenHashMap<>();
   private List<Modifier> acceptedModifiers = new ArrayList<>();
-  private ModifierList modifierList = null;
   private float[] firstColours;
   private float[] secondColours;
 
@@ -114,13 +113,6 @@ public abstract class SpellBase extends RegistryItem {
   public SpellBase acceptsModifiers(Modifier... modules) {
     acceptedModifiers.addAll(Arrays.asList(modules));
     return this;
-  }
-
-  public ModifierList getModifierList() {
-    if (modifierList == null) {
-      modifierList = new ModifierList(this);
-    }
-    return modifierList;
   }
 
   public List<Modifier> getModifiers() {

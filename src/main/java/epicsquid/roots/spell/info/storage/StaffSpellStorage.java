@@ -199,8 +199,7 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
   @Override
   public void addSpell(StaffSpellInfo spell) {
     if (hasFreeSlot()) {
-      setSelectedSlot(getNextFreeSlot());
-      this.spells.put(this.selectedSlot, spell);
+      setSpellToSlot(getNextFreeSlot(), spell);
       saveToStack();
     }
   }

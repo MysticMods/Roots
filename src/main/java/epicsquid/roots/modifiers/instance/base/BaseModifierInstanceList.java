@@ -29,7 +29,7 @@ public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> i
   public BaseModifierInstanceList(SpellBase spell, Function<Modifier, T> empty) {
     internal = new ArrayList<>();
     coreToInstance = new HashMap<>();
-    for (Modifier m : spell.getModifierList()) {
+    for (Modifier m : spell.getModifiers()) {
       add(empty.apply(m));
     }
     this.spell = spell;

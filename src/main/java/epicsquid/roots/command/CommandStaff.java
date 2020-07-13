@@ -65,21 +65,17 @@ public class CommandStaff extends CommandBase {
       SpellLibraryData library = SpellLibraryRegistry.getData(player);
       library.addSpell(spell);
 
-      ItemStack inHand = player.getHeldItemMainhand();
-      if (inHand.getItem() == ModItems.staff) {
-        StaffSpellStorage storage = StaffSpellStorage.fromStack(inHand);
-        StaffSpellInfo info = StaffSpellInfo.fromSpell(spell, true);
-        if (storage != null && storage.hasFreeSlot()) {
-          storage.setSpellToSlot(storage.getNextFreeSlot(), info);
-          storage.saveToStack();
-          return;
-        }
+      ItemStack staff = player.getHeldItemMainhand();
+      if (staff.getItem() != ModItems.staff) {
+        staff = new ItemStack(ModItems.staff);
       }
-
-      // TODO
-      DustSpellStorage cap = DustSpellStorage.fromStack(spell.getResult());
-      ItemStack staff = new ItemStack(ModItems.staff);
-      ItemStaff.createData(staff, cap);
+      StaffSpellStorage storage = StaffSpellStorage.fromStack(staff);
+      StaffSpellInfo info = StaffSpellInfo.fromSpell(spell, true);
+      if (storage != null && storage.hasFreeSlot()) {
+        storage.setSpellToSlot(storage.getNextFreeSlot(), info);
+        storage.saveToStack();
+        return;
+      }
 
       IItemHandler inv = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
 

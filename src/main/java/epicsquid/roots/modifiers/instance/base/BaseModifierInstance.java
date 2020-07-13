@@ -13,6 +13,7 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
@@ -148,5 +149,11 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
   @Override
   public int hashCode() {
     return Objects.hash(modifier, applied);
+  }
+
+  @Nonnull
+  @Override
+  public ResourceLocation getRegistryName() {
+    return modifier.getRegistryName();
   }
 }
