@@ -61,6 +61,27 @@ public class ContainerLibrary extends Container {
     return StaffSpellStorage.fromStack(staff.get());
   }
 
+  @Nullable
+  public StaffModifierInstanceList getModifiers () {
+    StaffSpellStorage storage = getSpellStorage();
+    if (storage == null) {
+      return null;
+    }
+    if (slot == 0) {
+      return null;
+    }
+    StaffSpellInfo info = storage.getSpellInSlot(slot);
+    if (info == null) {
+      return null;
+    }
+    StaffModifierInstanceList mods = info.getModifiers();
+    if (mods == null) {
+      return null;
+    }
+
+    return mods;
+  }
+
   public int getSpellSlot() {
     return slot;
   }

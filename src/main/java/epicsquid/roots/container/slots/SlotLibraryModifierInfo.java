@@ -3,6 +3,7 @@ package epicsquid.roots.container.slots;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.IModifierCore;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
@@ -10,6 +11,8 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
+import java.util.List;
 
 public class SlotLibraryModifierInfo extends Slot {
   private static IInventory emptyInventory = new InventoryBasic("[Null]", true, 0);
@@ -85,6 +88,31 @@ public class SlotLibraryModifierInfo extends Slot {
   public boolean isApplicable () {
     StaffModifierInstance info = get();
     return info != null;
+  }
+
+  public boolean isConflicting (StaffModifierInstanceList modifiers) {
+    if (modifiers == null) {
+      return false;
+    }
+
+    StaffModifierInstance info = get();
+    if (info == null) {
+      return false;
+    }
+    return info.isConflicting(modifiers);
+  }
+
+  public List<StaffModifierInstance> getConflicts (StaffModifierInstanceList modifiers) {
+    if (modifiers == null) {
+      return Collections.emptyList();
+    }
+
+    StaffModifierInstance info = get();
+    if (info == null) {
+      return Collections.emptyList();
+    }
+
+    return info.getConflicts(modifiers);
   }
 
   @Override
