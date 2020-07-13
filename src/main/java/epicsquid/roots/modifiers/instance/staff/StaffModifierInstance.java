@@ -2,12 +2,13 @@ package epicsquid.roots.modifiers.instance.staff;
 
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.modifiers.CostType;
+import epicsquid.roots.modifiers.IModifier;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;
 import epicsquid.roots.modifiers.Modifier;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.nbt.NBTTagCompound;
 
-import java.util.Objects;
+import java.util.*;
 
 public class StaffModifierInstance extends LibraryModifierInstance {
   private boolean enabled;
@@ -72,6 +73,22 @@ public class StaffModifierInstance extends LibraryModifierInstance {
     }
 
     return costs;
+  }
+
+  public List<StaffModifierInstance> getConflicts (StaffModifierInstanceList modifiers) {
+    Set<IModifier> conflicts = getConflicts();
+    if (conflicts.isEmpty()) {
+      return Collections.emptyList();
+    }
+
+    List<StaffModifierInstance> conflicting = new ArrayList<>();
+    for (StaffModifierInstance modifierInstance : modifiers) {
+      if (modifierInstance.isEnabled() && modifierInstance.isApplied() && conflicts(modifierInstance)) {
+        conflicting.add(modifierInstance);
+      }
+    }
+
+    return conflicting;
   }
 
   @Override

@@ -2,7 +2,9 @@ package epicsquid.roots.spell.info;
 
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.storage.LibrarySpellStorage;
 import net.minecraft.item.ItemStack;

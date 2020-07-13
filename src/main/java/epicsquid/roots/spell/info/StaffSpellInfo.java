@@ -3,6 +3,7 @@ package epicsquid.roots.spell.info;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.spell.FakeSpell;
 import epicsquid.roots.spell.SpellBase;
@@ -34,14 +35,6 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
   public void setModifiers(StaffModifierInstanceList modifiers) {
     this.modifiers = modifiers;
   }
-
-/*  public void setModifiers (ModifierList modifiers) {
-    this.modifiers = new ModifierInstanceList(spell);
-    this.modifiers.clear();
-    for (Modifier m : modifiers) {
-      this.modifiers.add(new ModifierInstance(m, false, false));
-    }
-  }*/
 
   public boolean tick () {
     if (this.cooldown == -1) {
@@ -125,6 +118,16 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
   public static StaffSpellInfo fromLibrary (LibrarySpellInfo incoming) {
     StaffSpellInfo info = new StaffSpellInfo(incoming.spell);
     info.setModifiers(incoming.getModifiers().toStaff());
+    return info;
+  }
+
+  public static StaffSpellInfo fromSpell (SpellBase spell, boolean modifiers) {
+    StaffSpellInfo info = new StaffSpellInfo(spell);
+    if (modifiers) {
+      for (StaffModifierInstance modifier : info.getModifiers()) {
+        modifier.setApplied();
+      }
+    }
     return info;
   }
 
