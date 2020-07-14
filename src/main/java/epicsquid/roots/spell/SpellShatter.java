@@ -30,9 +30,6 @@ public class SpellShatter extends SpellBase {
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("stalicripe", 0.0625));
   public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(5.0f);
 
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_shatter");
-  public static SpellShatter instance = new SpellShatter(spellName);
-
   public static Modifier PERESKIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "wider"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier WILDEWHEET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "farmers_ray"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier WILDROOT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "magnetic_ray"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
@@ -49,6 +46,9 @@ public class SpellShatter extends SpellBase {
   static {
     SPIRIT_HERB.addConflicts(PERESKIA, MOONGLOW_LEAF);
   }
+
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_shatter");
+  public static SpellShatter instance = new SpellShatter(spellName);
 
   public SpellShatter(ResourceLocation name) {
     super(name, TextFormatting.GRAY, 96f / 255f, 96f / 255f, 96f / 255f, 192f / 255f, 192f / 255f, 192f / 255f);

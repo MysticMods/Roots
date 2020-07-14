@@ -35,9 +35,6 @@ public class SpellDisarm extends SpellBase {
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 2).setDescription("radius on the Z axis within which entities are affected by the spell");
   public static Property<Integer> PROP_DROP_CHANCE = new Property<>("drop_chance", 4).setDescription("chance for mobs to drop their equipment and weapons (the higher the number is the lower the chance is: 1/x) [default: 1/4]");
 
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_disarm");
-  public static SpellDisarm instance = new SpellDisarm(spellName);
-
   public static Modifier PERESKIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "boost_drops"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier WILDEWHEET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "cows_with_guns"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier WILDROOT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "armor_i"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
@@ -54,6 +51,9 @@ public class SpellDisarm extends SpellBase {
     // Poison Hands < -> Flower Child
     BAFFLE_CAP.addConflict(CLOUD_BERRY);
   }
+
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_disarm");
+  public static SpellDisarm instance = new SpellDisarm(spellName);
 
   private int radius_x, radius_y, radius_z, drop_chance;
 

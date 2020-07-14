@@ -27,11 +27,8 @@ public class SpellHarvest extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("wildewheet", 0.55));
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 6).setDescription("radius on the X axis of the area the spell has effect on");
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("radius on the Y axis of the area the spell has effect on");;
-  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 6).setDescription("radius on the Z axis of the area the spell has effect on");;
-
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_harvest");
-  public static SpellHarvest instance = new SpellHarvest(spellName);
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("radius on the Y axis of the area the spell has effect on");
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 6).setDescription("radius on the Z axis of the area the spell has effect on");
 
   public static Modifier PERESKIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "extended_harvest"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier WILDROOT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "magnetic_harvest"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
@@ -48,6 +45,9 @@ public class SpellHarvest extends SpellBase {
     // Conflcits
     PERESKIA.addConflict(TERRA_MOSS); // Can't increase/decrease at the same time
   }
+
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_harvest");
+  public static SpellHarvest instance = new SpellHarvest(spellName);
 
   private int radius_x, radius_y, radius_z;
 

@@ -21,8 +21,6 @@ public class SpellWildfire extends SpellBase {
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("infernal_bulb", 0.125));
   public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(4.5f);
   public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 4);
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_wild_fire");
-  public static SpellWildfire instance = new SpellWildfire(spellName);
 
   public static Modifier PERESKIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "purple_flame"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier WILDEWHEET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_flame"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -34,6 +32,9 @@ public class SpellWildfire extends SpellBase {
   public static Modifier CLOUD_BERRY = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "floating_cinders"), ModifierCores.CLOUD_BERRY, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 1)));
   public static Modifier STALICRIPE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "pyroclastic_cloud"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier DEWGONIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "fire_and_ice"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
+
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_wild_fire");
+  public static SpellWildfire instance = new SpellWildfire(spellName);
 
   public float damage;
   public int fire_duration;

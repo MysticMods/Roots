@@ -25,9 +25,6 @@ public class SpellRoseThorns extends SpellBase {
   public static Property<Integer> PROP_POISON_AMPLIFIER = new Property<>("poison_amplifier", 0).setDescription("the level of the poison effect (0 is the first level)");
   public static Property<Integer> PROP_DURATION = new Property<>("trap_duration", 600).setDescription("duration in ticks of the trap before it disappears");
 
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_rose_thorns");
-  public static SpellRoseThorns instance = new SpellRoseThorns(spellName);
-
   public static float damage;
   public static int slownessDuration, slownessAmplifier, poisonDuration, poisonAmplifier, duration;
 
@@ -47,6 +44,9 @@ public class SpellRoseThorns extends SpellBase {
     WILDROOT.addConflicts(MOONGLOW_LEAF, CLOUD_BERRY, DEWGONIA); // Can't slow enemies to a stop & fling/levitate/slow them
     CLOUD_BERRY.addConflicts(MOONGLOW_LEAF); // Can't fling them up in the air and backwards at the same time
   }
+
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_rose_thorns");
+  public static SpellRoseThorns instance = new SpellRoseThorns(spellName);
 
   public SpellRoseThorns(ResourceLocation name) {
     super(name, TextFormatting.RED, 255f / 255f, 32f / 255f, 64f / 255f, 32f / 255f, 255f / 255f, 96f / 255f);

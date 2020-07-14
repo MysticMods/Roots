@@ -22,8 +22,6 @@ public class SpellAquaBubble extends SpellBase {
   public static Property<Double> PROP_ABSORPTION = new Property<>("absorption", 20.0).setDescription("the amount of health absorption granted");
   public static Property<Float> PROP_FIRE_REDUCTION = new Property<>("fire_reduction", 0.5f).setDescription("how much fire damage is multiplied by");
   public static Property<Float> PROP_LAVA_REDUCTION = new Property<>("fire_reduction", 0.0f).setDescription("how much lava damage is multiplied by");
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_aqua_bubble");
-  public static SpellAquaBubble instance = new SpellAquaBubble(spellName);
 
   // TODO: Costs
 
@@ -36,6 +34,9 @@ public class SpellAquaBubble extends SpellBase {
   public static Modifier CLOUD_BERRY = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "bubble_knockback"), ModifierCores.CLOUD_BERRY, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 1)));
   public static Modifier INFERNAL_BULB = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "reflective_bubble"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 1)));
   public static Modifier STALICRIPE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "stoneskin"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
+
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_aqua_bubble");
+  public static SpellAquaBubble instance = new SpellAquaBubble(spellName);
 
   public int duration;
   public double absorption;

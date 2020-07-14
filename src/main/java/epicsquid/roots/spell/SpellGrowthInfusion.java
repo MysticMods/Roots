@@ -26,9 +26,6 @@ public class SpellGrowthInfusion extends SpellBase {
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("terra_moss", 0.08));
   public static Property<Integer> PROP_TICK_COUNT = new Property<>("tick_count", 1).setDescription("the number of times a random chance to grow the crop is applied every tick");
 
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_growth_infusion");
-  public static SpellGrowthInfusion instance = new SpellGrowthInfusion(spellName);
-
   public static Modifier PERESKIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "rampant_growth_i"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier WILDEWHEET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "rampant_breeding"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier WILDROOT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "flower_spreading"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
@@ -46,6 +43,9 @@ public class SpellGrowthInfusion extends SpellBase {
     STALICRIPE.addConflicts(PERESKIA, SPIRIT_HERB, CLOUD_BERRY); // Can't AOE
     BAFFLE_CAP.addConflicts(PERESKIA, SPIRIT_HERB, CLOUD_BERRY); // Again can't aoe
   }
+
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_growth_infusion");
+  public static SpellGrowthInfusion instance = new SpellGrowthInfusion(spellName);
 
   private int tickCount;
 

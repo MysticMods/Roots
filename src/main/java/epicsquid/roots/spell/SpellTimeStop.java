@@ -24,9 +24,6 @@ public class SpellTimeStop extends SpellBase {
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("moonglow_leaf", 0.5));
   public static Property<Integer> PROP_DURATION = new Property<>("duration", 200).setDescription("the duration of the time stop effect on entities");
 
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_time_stop");
-  public static SpellTimeStop instance = new SpellTimeStop(spellName);
-
   public static Modifier WILDEWHEET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_passage"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier WILDROOT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "freed_familiars"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
   public static Modifier SPIRIT_HERB = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "overtime"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1)));
@@ -37,12 +34,15 @@ public class SpellTimeStop extends SpellBase {
   public static Modifier STALICRIPE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "minor_halt"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier DEWGONIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "ice_age"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
-  public static int duration;
-
   static {
     // Conflicts
     STALICRIPE.addConflicts(SPIRIT_HERB);
   }
+
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_time_stop");
+  public static SpellTimeStop instance = new SpellTimeStop(spellName);
+
+  public static int duration;
 
   public SpellTimeStop(ResourceLocation name) {
     super(name, TextFormatting.DARK_BLUE, 64f / 255f, 64f / 255f, 64f / 255f, 192f / 255f, 32f / 255f, 255f / 255f);

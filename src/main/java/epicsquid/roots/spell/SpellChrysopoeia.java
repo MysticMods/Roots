@@ -28,9 +28,6 @@ public class SpellChrysopoeia extends SpellBase {
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("dewgonia", 0.5));
   public static Property<Integer> PROP_INTERVAL = new Property<>("interval", 20).setDescription("interval in ticks between each transmutation");
 
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_chrysopoeia");
-  public static SpellChrysopoeia instance = new SpellChrysopoeia(spellName);
-
   public static Modifier PERESKIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "overproduction_i"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier WILDEWHEET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "byproduct_i"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier WILDROOT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "byproduct_iv"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
@@ -40,6 +37,9 @@ public class SpellChrysopoeia extends SpellBase {
   public static Modifier BAFFLE_CAP = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "overproduction_iv"), ModifierCores.BAFFLE_CAP, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 1)));
   public static Modifier CLOUD_BERRY = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "byproduct_iii"), ModifierCores.CLOUD_BERRY, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 1)));
   public static Modifier STALICRIPE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "byproduct_ii"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
+
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_chrysopoeia");
+  public static SpellChrysopoeia instance = new SpellChrysopoeia(spellName);
 
   private int interval;
 
