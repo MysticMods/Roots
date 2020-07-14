@@ -35,9 +35,6 @@ public class SpellSenseExtension extends SpellBase {
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 2).setDescription("radius on the Z axis within which entities are affected by the spell");
   public static Property<Integer> PROP_DROP_CHANCE = new Property<>("drop_chance", 4).setDescription("chance for mobs to drop their equipment and weapons (the higher the number is the lower the chance is: 1/x) [default: 1/4]");
 
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "remote_interaction");
-  public static SpellSenseExtension instance = new SpellSenseExtension(spellName);
-
   public static Modifier PERESKIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "summon_animals"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier WILDEWHEET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "sense_animals"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier MOONGLOW_LEAF = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "nondetection"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 1)));
@@ -52,6 +49,9 @@ public class SpellSenseExtension extends SpellBase {
   static {
     MOONGLOW_LEAF.addConflict(BAFFLE_CAP); //
   }
+
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "remote_interaction");
+  public static SpellSenseExtension instance = new SpellSenseExtension(spellName);
 
   private int radius_x, radius_y, radius_z, drop_chance;
 

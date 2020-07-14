@@ -28,9 +28,6 @@ public class SpellFeyLight extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("cloud_berry", 0.125));
 
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_fey_light");
-  public static SpellFeyLight instance = new SpellFeyLight(spellName);
-
   public static Modifier PERESKIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "pink_light"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier WILDEWHEET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "yellow_light"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier WILDROOT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "fixed_light"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
@@ -47,6 +44,9 @@ public class SpellFeyLight extends SpellBase {
     // Deluminator <-> Everything
     SPIRIT_HERB.addConflicts(PERESKIA, WILDEWHEET, WILDROOT, MOONGLOW_LEAF, TERRA_MOSS, BAFFLE_CAP, INFERNAL_BULB, STALICRIPE, DEWGONIA);
   }
+
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_fey_light");
+  public static SpellFeyLight instance = new SpellFeyLight(spellName);
 
   public SpellFeyLight(ResourceLocation name) {
     super(name, TextFormatting.LIGHT_PURPLE, 247f / 255f, 246 / 255f, 210f / 255f, 227f / 255f, 81f / 255f, 244f / 255f);

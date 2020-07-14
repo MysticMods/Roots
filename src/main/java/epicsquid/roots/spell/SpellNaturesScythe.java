@@ -30,9 +30,6 @@ public class SpellNaturesScythe extends SpellBase {
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("radius on the Y axis of the area in which the spell takes effect");
   public static Property<Integer> PROP_INTERVAL = new Property<>("interval", 2).setDescription("interval in ticks between each harvested block");
 
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_natures_scythe");
-  public static SpellNaturesScythe instance = new SpellNaturesScythe(spellName);
-
   public static Modifier PERESKIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "dewebbing"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier WILDEWHEET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "leaf_harvester"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier WILDROOT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "magnetic_harvester"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
@@ -43,6 +40,9 @@ public class SpellNaturesScythe extends SpellBase {
   public static Modifier CLOUD_BERRY = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "flower_harvester"), ModifierCores.CLOUD_BERRY, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 1)));
   public static Modifier INFERNAL_BULB = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "blazing_speed"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 1)));
   public static Modifier DEWGONIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "watery_harvest"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
+
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_natures_scythe");
+  public static SpellNaturesScythe instance = new SpellNaturesScythe(spellName);
 
   private int radius, radius_y, interval;
 

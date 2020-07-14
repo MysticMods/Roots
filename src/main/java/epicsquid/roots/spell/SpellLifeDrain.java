@@ -35,9 +35,6 @@ public class SpellLifeDrain extends SpellBase {
   public static Property<Integer> PROP_WITHER_AMPLIFICATION = new Property<>("wither_amplification", 0).setDescription("the level of the wither effect (0 is the first level)");
   public static Property<Integer> PROP_WITHER_CHANCE = new Property<>("wither_chance", 4).setDescription("chance for the enemies to be affected by a wither effect (the higher the number is the lower the chance is: 1/x) [default: 1/4]");
 
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_life_drain");
-  public static SpellLifeDrain instance = new SpellLifeDrain(spellName);
-
   public static Modifier PERESKIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "amplified_healing"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier WILDEWHEET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_drain"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier WILDROOT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "distributed_healing"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
@@ -51,6 +48,9 @@ public class SpellLifeDrain extends SpellBase {
   static {
     SPIRIT_HERB.addConflict(TERRA_MOSS); // You can't see the creature to target
   }
+
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_life_drain");
+  public static SpellLifeDrain instance = new SpellLifeDrain(spellName);
 
   private float witherDamage;
   private float heal;

@@ -1,13 +1,11 @@
 package epicsquid.roots.modifiers.instance.base;
 
-import com.google.common.collect.Iterators;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.modifiers.CostType;
 import epicsquid.roots.modifiers.IModifierCore;
 import epicsquid.roots.modifiers.IModifierList;
 import epicsquid.roots.modifiers.Modifier;
-import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.AbstractSpellInfo;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
@@ -17,7 +15,6 @@ import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> implements IModifierList<T, NBTTagCompound> {

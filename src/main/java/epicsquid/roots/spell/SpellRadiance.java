@@ -33,9 +33,6 @@ public class SpellRadiance extends SpellBase {
   public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(5f).setDescription("damage dealt each time by radiance beam");
   public static Property<Float> PROP_UNDEAD_DAMAGE = new Property<>("undead_damage", 3f).setDescription("damage dealt each time by radiance beam on undead mobs");
 
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_radiance");
-  public static SpellRadiance instance = new SpellRadiance(spellName);
-
   public static Modifier WILDEWHEET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_radiance"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier WILDROOT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "magnetic_radiance"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
   public static Modifier MOONGLOW_LEAF = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "withering_ray"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 1)));
@@ -49,6 +46,9 @@ public class SpellRadiance extends SpellBase {
   static {
     TERRA_MOSS.addConflicts(MOONGLOW_LEAF, WILDEWHEET, BAFFLE_CAP, INFERNAL_BULB, DEWGONIA); // Can't heal and do those
   }
+
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_radiance");
+  public static SpellRadiance instance = new SpellRadiance(spellName);
 
   private float distance;
   private float damage;

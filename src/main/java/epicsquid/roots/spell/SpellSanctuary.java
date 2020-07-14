@@ -36,9 +36,6 @@ public class SpellSanctuary extends SpellBase {
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("the radius on the Y axis of the area the spell in which the spell takes effect");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 4).setDescription("the radius on the Z axis of the area the spell in which the spell takes effect");
 
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_sanctuary");
-  public static SpellSanctuary instance = new SpellSanctuary(spellName);
-
   public static Modifier WILDEWHEET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "reject_nature"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier MOONGLOW_LEAF = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "withering"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 1)));
   public static Modifier SPIRIT_HERB = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "undead_rejection"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1)));
@@ -48,6 +45,9 @@ public class SpellSanctuary extends SpellBase {
   public static Modifier INFERNAL_BULB = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "inflammatory_bubble"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 1)));
   public static Modifier STALICRIPE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "earthen_radius"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier DEWGONIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "liquid_repulsion"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
+
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_sanctuary");
+  public static SpellSanctuary instance = new SpellSanctuary(spellName);
 
   private float velocity;
   private int radius_x, radius_y, radius_z;

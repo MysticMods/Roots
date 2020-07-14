@@ -44,9 +44,6 @@ public class SpellSaturate extends SpellBase {
   public static Property<Double> PROP_SATURATION_MULTIPLIER = new Property<>("saturation_multiplier", 0.5).setDescription("multiplier for the saturation value each food item gives");
   public static Property<Double> PROP_FOOD_MULTIPLIER = new Property<>("food_multiplier", 0.5).setDescription("multiplier for the food value each food item gives");
 
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_saturate");
-  public static SpellSaturate instance = new SpellSaturate(spellName);
-
   public static Modifier PERESKIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "big_bellied"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier WILDROOT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "root_lover"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
   public static Modifier MOONGLOW_LEAF = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "inversion"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 1)));
@@ -65,6 +62,9 @@ public class SpellSaturate extends SpellBase {
     INFERNAL_BULB.addConflicts(STALICRIPE, DEWGONIA);
     STALICRIPE.addConflict(DEWGONIA);
   }
+
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_saturate");
+  public static SpellSaturate instance = new SpellSaturate(spellName);
 
   private double saturation_multiplier, food_multiplier;
   private boolean suppressSound = false;

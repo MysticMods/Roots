@@ -22,9 +22,6 @@ public class SpellPetalShell extends SpellBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(120 * 20);
   public static Property<Integer> PROP_MAXIMUM = new Property<>("maximum_shells", 3).setDescription("maximum number of shells (attack blockers) a player can have");
 
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_petal_shell");
-  public static SpellPetalShell instance = new SpellPetalShell(spellName);
-
   public static Modifier PERESKIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "react_radiance"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier WILDEWHEET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_dance"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier WILDROOT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "react_daggers"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
@@ -35,6 +32,9 @@ public class SpellPetalShell extends SpellBase {
   public static Modifier INFERNAL_BULB = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "react_fire"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 1)));
   public static Modifier STALICRIPE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "react_paralysis"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier DEWGONIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "react_slow"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
+
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_petal_shell");
+  public static SpellPetalShell instance = new SpellPetalShell(spellName);
 
   private int maxShells;
   private int duration;

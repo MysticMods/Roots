@@ -35,9 +35,6 @@ public class SpellSelfAugmentation extends SpellBase {
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 2).setDescription("radius on the Z axis within which entities are affected by the spell");
   public static Property<Integer> PROP_DROP_CHANCE = new Property<>("drop_chance", 4).setDescription("chance for mobs to drop their equipment and weapons (the higher the number is the lower the chance is: 1/x) [default: 1/4]");
 
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "self_augmentation");
-  public static SpellSelfAugmentation instance = new SpellSelfAugmentation(spellName);
-
   public static Modifier PERESKIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "reach"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier WILDEWHEET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "speed"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier MOONGLOW_LEAF = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "slow_fall"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 1)));
@@ -49,11 +46,14 @@ public class SpellSelfAugmentation extends SpellBase {
   public static Modifier STALICRIPE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "haste"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier DEWGONIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "second_wind"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
-  private int radius_x, radius_y, radius_z, drop_chance;
-
   static {
     SPIRIT_HERB.addConflicts(MOONGLOW_LEAF, TERRA_MOSS);
   }
+
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "self_augmentation");
+  public static SpellSelfAugmentation instance = new SpellSelfAugmentation(spellName);
+
+  private int radius_x, radius_y, radius_z, drop_chance;
 
   private SpellSelfAugmentation(ResourceLocation name) {
     super(name, TextFormatting.DARK_RED, 122F / 255F, 0F, 0F, 58F / 255F, 58F / 255F, 58F / 255F);

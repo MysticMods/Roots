@@ -24,9 +24,6 @@ public class SpellDandelionWinds extends SpellBase {
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("cloud_berry", 0.125));
   public static Property<Float> PROP_DISTANCE = new Property<>("distance", 0.75f).setDescription("the vertical component of the vector that determines the direction of the entity");
 
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_dandelion_winds");
-  public static SpellDandelionWinds instance = new SpellDandelionWinds(spellName);
-
   public static Modifier PERESKIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "strong_gusts"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier WILDEWHEET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_winds"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier WILDROOT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "grounded_wind"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
@@ -45,6 +42,9 @@ public class SpellDandelionWinds extends SpellBase {
     // Circle of Winds <-> Billowing Sails
     SPIRIT_HERB.addConflict(DEWGONIA);
   }
+
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_dandelion_winds");
+  public static SpellDandelionWinds instance = new SpellDandelionWinds(spellName);
 
   private float distance;
 

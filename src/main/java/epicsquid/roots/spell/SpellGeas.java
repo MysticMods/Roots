@@ -27,9 +27,6 @@ public class SpellGeas extends SpellBase {
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("baffle_cap", 0.5));
   public static Property<Integer> PROP_DURATION = new Property<>("geas_duration", 400).setDescription("duration in ticks of this spell effect on entities");
 
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_geas");
-  public static SpellGeas instance = new SpellGeas(spellName);
-
   public static Modifier PERESKIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "extended_geas"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier WILDEWHEET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "animal_servants"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier WILDROOT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "rooted_response"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
@@ -46,6 +43,9 @@ public class SpellGeas extends SpellBase {
     TERRA_MOSS.addConflicts(SPIRIT_HERB, CLOUD_BERRY);
     WILDEWHEET.addConflicts(INFERNAL_BULB, STALICRIPE, DEWGONIA);
   }
+
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_geas");
+  public static SpellGeas instance = new SpellGeas(spellName);
 
   private int duration;
 
