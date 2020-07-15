@@ -29,7 +29,7 @@ public class SpellDustInfo extends AbstractSpellInfo {
     return stack;
   }
 
-  public StaffSpellInfo toStaff () {
+  public StaffSpellInfo toStaff() {
     return new StaffSpellInfo(getSpell());
   }
 

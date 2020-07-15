@@ -3,7 +3,6 @@ package epicsquid.roots.item;
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.proxy.ClientProxy;
-import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.config.MossConfig;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

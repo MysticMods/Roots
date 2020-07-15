@@ -6,10 +6,10 @@ import crafttweaker.api.item.IIngredient;
 import crafttweaker.mc1120.CraftTweaker;
 import epicsquid.roots.Roots;
 import epicsquid.roots.integration.crafttweaker.recipes.CTRitualRecipe;
-import epicsquid.roots.ritual.RitualBase;
-import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.properties.PropertyTable;
+import epicsquid.roots.ritual.RitualBase;
+import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.zen.ZenDocAppend;
 import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
@@ -118,10 +118,10 @@ public class Rituals {
 
     @ZenMethod
     @ZenDocMethod(
-        order=1,
+        order = 1,
         args = {
-            @ZenDocArg(arg="propertyName", info = "sets propertyName to the specified double value"),
-            @ZenDocArg(arg="value", info = "the value to set propertyName to; if this property is *not* a double, an error will be raised")
+            @ZenDocArg(arg = "propertyName", info = "sets propertyName to the specified double value"),
+            @ZenDocArg(arg = "value", info = "the value to set propertyName to; if this property is *not* a double, an error will be raised")
         },
         description = "Sets a propertyName to a specified value (throwing an exception if this is an invalid type for that property), then returns the ritual, allowing for chained functions."
     )
@@ -133,8 +133,8 @@ public class Rituals {
     @ZenDocMethod(
         order = 2,
         args = {
-            @ZenDocArg(arg="propertyName", info = "sets propertyName to the specified float value"),
-            @ZenDocArg(arg="value", info = "the value to set propertyName to; if this property is *not* a float, an error will be raised")
+            @ZenDocArg(arg = "propertyName", info = "sets propertyName to the specified float value"),
+            @ZenDocArg(arg = "value", info = "the value to set propertyName to; if this property is *not* a float, an error will be raised")
         },
         description = "Sets a propertyName to a specified value (throwing an exception if this is an invalid type for that property), then returns the ritual, allowing for chained functions."
     )
@@ -146,8 +146,8 @@ public class Rituals {
     @ZenDocMethod(
         order = 3,
         args = {
-            @ZenDocArg(arg="propertyName", info = "sets propertyName to the specified integer value"),
-            @ZenDocArg(arg="value", info = "the value to set propertyName to; if this property is *not* a integer, an error will be raised")
+            @ZenDocArg(arg = "propertyName", info = "sets propertyName to the specified integer value"),
+            @ZenDocArg(arg = "value", info = "the value to set propertyName to; if this property is *not* a integer, an error will be raised")
         },
         description = "Sets a propertyName to a specified value (throwing an exception if this is an invalid type for that property), then returns the ritual, allowing for chained functions."
     )
@@ -159,7 +159,7 @@ public class Rituals {
     @ZenDocMethod(
         order = 4,
         args = {
-            @ZenDocArg(arg="value", info="the new duration for the ritual")
+            @ZenDocArg(arg = "value", info = "the new duration for the ritual")
         },
         description = "Changes the duration of the ritual and returns the Ritual object for further modification. Is shorthand for `setInteger(\"duration\", value)`."
     )
@@ -171,8 +171,8 @@ public class Rituals {
     @ZenDocMethod(
         order = 5,
         args = {
-            @ZenDocArg(arg="propertyName", info = "sets propertyName to the specified string value"),
-            @ZenDocArg(arg="value", info = "the value to set propertyName to; if this property is *not* a string, an error will be raised")
+            @ZenDocArg(arg = "propertyName", info = "sets propertyName to the specified string value"),
+            @ZenDocArg(arg = "value", info = "the value to set propertyName to; if this property is *not* a string, an error will be raised")
         },
         description = "Sets a propertyName to a specified value (throwing an exception if this is an invalid type for that property), then returns the ritual, allowing for chained functions."
     )

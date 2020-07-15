@@ -2,10 +2,8 @@ package epicsquid.roots.network;
 
 import epicsquid.roots.GuiHandler;
 import epicsquid.roots.Roots;
-import epicsquid.roots.util.ServerHerbUtil;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;

@@ -4,11 +4,9 @@ import epicsquid.roots.item.PouchType;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
-import javax.annotation.Nullable;
-
 public interface IPouchHandler {
 
-  PouchType getPouchType ();
+  PouchType getPouchType();
 
   int refill(ItemStack herbStack);
 
@@ -20,7 +18,7 @@ public interface IPouchHandler {
     return getPouchType() == PouchType.HERB;
   }
 
-  default boolean isCreative () {
+  default boolean isCreative() {
     return getPouchType() == PouchType.CREATIVE;
   }
 

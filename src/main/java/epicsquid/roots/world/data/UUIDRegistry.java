@@ -5,7 +5,6 @@ import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
-import java.rmi.server.UID;
 import java.util.UUID;
 import java.util.function.Function;
 
@@ -22,7 +21,7 @@ public abstract class UUIDRegistry<T extends WorldSavedData> {
   }
 
   @SuppressWarnings("unchecked")
-  public T getDataInternal (UUID id) {
+  public T getDataInternal(UUID id) {
     WorldServer server = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(0);
     MapStorage storage = server.getMapStorage();
     if (storage == null) {

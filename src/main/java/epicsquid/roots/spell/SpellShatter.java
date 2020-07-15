@@ -43,10 +43,6 @@ public class SpellShatter extends SpellBase {
 
   private float damage;
 
-  static {
-    SPIRIT_HERB.addConflicts(PERESKIA, MOONGLOW_LEAF);
-  }
-
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_shatter");
   public static SpellShatter instance = new SpellShatter(spellName);
 

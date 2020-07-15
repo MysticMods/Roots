@@ -13,7 +13,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class EntityRitualTransmutation extends EntityRitualBase {
   private Map<BlockPos, TransmutationRecipe> recipes = new HashMap<>();

@@ -9,10 +9,10 @@ package epicsquid.roots.container;
 
 import epicsquid.roots.container.slots.SlotImposerModifierInfo;
 import epicsquid.roots.container.slots.SlotImposerSpellInfo;
-import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
-import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.modifiers.IModifierCore;
 import epicsquid.roots.modifiers.ModifierCores;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.tileentity.TileEntityImposer;
@@ -80,7 +80,7 @@ public class ContainerImposer extends Container {
   }
 
   @Nullable
-  public StaffModifierInstanceList getModifiers () {
+  public StaffModifierInstanceList getModifiers() {
     StaffSpellStorage storage = tile.getSpellStorage();
     if (storage == null) {
       return null;
@@ -109,7 +109,7 @@ public class ContainerImposer extends Container {
     addSlotToContainer(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 5, 109, 37)); // Spot 5
   }
 
-  private void addModifierSlot (IModifierCore core, TileEntityImposer imposer, int x, int y) {
+  private void addModifierSlot(IModifierCore core, TileEntityImposer imposer, int x, int y) {
     SlotImposerModifierInfo slot = new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, core, imposer, x, y);
     coreSlotMap.put(core, slot);
     addSlotToContainer(slot);

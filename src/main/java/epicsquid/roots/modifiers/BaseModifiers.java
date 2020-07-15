@@ -1,6 +1,5 @@
 package epicsquid.roots.modifiers;
 
-import com.google.common.collect.Lists;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import net.minecraft.item.ItemStack;

@@ -39,7 +39,7 @@ public class EntityBoost extends Entity {
     }
   }
 
-  public void setAmplifier (float value) {
+  public void setAmplifier(float value) {
     this.amplifier = value;
   }
 

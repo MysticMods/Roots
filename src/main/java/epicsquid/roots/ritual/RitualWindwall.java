@@ -2,10 +2,10 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualWindwall;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.properties.Property;
 import epicsquid.roots.ritual.conditions.ConditionRunedPillars;
 import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.util.RitualUtil;
-import epicsquid.roots.properties.Property;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
@@ -30,7 +30,7 @@ public class RitualWindwall extends RitualBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     recipe = new RitualRecipe(this,
         new ItemStack(ModItems.moonglow_leaf),
         new OreIngredient("stonebrick"),

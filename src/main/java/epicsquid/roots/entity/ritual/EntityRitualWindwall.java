@@ -6,7 +6,6 @@ import epicsquid.roots.ritual.RitualWindwall;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;

@@ -2,11 +2,11 @@ package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.roots.GuiHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
-import epicsquid.roots.config.GeneralConfig;
-import epicsquid.roots.GuiHandler;
 import epicsquid.roots.client.Keybinds;
+import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.handler.PouchHandler;
 import epicsquid.roots.init.HerbRegistry;
 import net.minecraft.client.resources.I18n;
@@ -47,11 +47,11 @@ public class ItemPouch extends ItemBase implements IItemPouch {
     return type;
   }
 
-  public static PouchType getPouchType (ItemStack pouch) {
+  public static PouchType getPouchType(ItemStack pouch) {
     if (!(pouch.getItem() instanceof ItemPouch)) {
       return null;
     }
-    return ((ItemPouch)pouch.getItem()).getType();
+    return ((ItemPouch) pouch.getItem()).getType();
   }
 
   public static double getHerbQuantity(EntityPlayer player, ItemStack pouch, Herb herb) {

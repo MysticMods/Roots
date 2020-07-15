@@ -65,7 +65,7 @@ public class SpellLifeDrain extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
         new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom)),
         new ItemStack(ModItems.moonglow_leaf),

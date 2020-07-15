@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Config.LangKey("config.roots.category.rituals")
-@Config(modid = Roots.MODID, name = "roots/rituals", category="rituals")
+@Config(modid = Roots.MODID, name = "roots/rituals", category = "rituals")
 public class RitualConfig {
 
   @Config.Name("Fluids to extinguish rituals")
@@ -17,7 +17,7 @@ public class RitualConfig {
   @Config.Ignore
   private static List<String> extinguishFluids = null;
 
-  public static List<String> getExtinguishFluids () {
+  public static List<String> getExtinguishFluids() {
     if (extinguishFluids == null) {
       extinguishFluids = Arrays.asList(ritualExtinguishFluids);
     }

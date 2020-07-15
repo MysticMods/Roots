@@ -13,9 +13,9 @@ public interface IModifierCore {
 
   ItemStack getStack();
 
-  String getTranslationKey ();
+  String getTranslationKey();
 
-  String getFormatting ();
+  String getFormatting();
 
-  boolean isBasic ();
+  boolean isBasic();
 }

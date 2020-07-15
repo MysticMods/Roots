@@ -12,7 +12,6 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.container.ContainerImposer;
 import epicsquid.roots.container.slots.SlotImposerModifierInfo;
-import epicsquid.roots.container.slots.SlotImposerSpellInfo;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.MessageSetImposerSlot;
@@ -104,7 +103,7 @@ public class GuiImposer extends GuiContainer {
           List<StaffModifierInstance> conflicts = info.getConflicts(modifiers);
           StringJoiner joiner = new StringJoiner(",");
           conflicts.forEach(o -> joiner.add(I18n.format(o.getTranslationKey())));
-          tooltip.add(TextFormatting.BOLD + I18n.format("roots.tooltip.modifier.conflicting", conflicts.toString()));
+          tooltip.add(TextFormatting.BOLD + I18n.format("roots.tooltip.modifier.conflicting", joiner.toString()));
         }
       }
       if (hasStack) {
@@ -166,8 +165,10 @@ public class GuiImposer extends GuiContainer {
     if (slot instanceof SlotImposerModifierInfo) {
       SlotImposerModifierInfo modInfo = (SlotImposerModifierInfo) slot;
       if (!modInfo.isApplicable()) { // There is no modifier existant for this slot
+        GlStateManager.enableBlend();
         this.mc.getTextureManager().bindTexture(getTexture());
         this.drawTexturedModalRect(i2, j2, 176, 40, 20, 20);
+        GlStateManager.disableBlend();
       } else if (!modInfo.isApplied()) { // There is a modifier but it isn't applied
         this.mc.getTextureManager().bindTexture(getTexture());
         this.drawTexturedModalRect(i2, j2, 176, 20, 20, 20);
@@ -180,13 +181,5 @@ public class GuiImposer extends GuiContainer {
       }
     }
     super.drawSlot(slot);
-/*    if (slot instanceof SlotImposerSpellInfo) {
-      SlotImposerSpellInfo infoSlot = (SlotImposerSpellInfo) slot;
-      StaffSpellInfo info = infoSlot.getInfo();
-      if (info == null || info == StaffSpellInfo.EMPTY) {
-        this.mc.getTextureManager().bindTexture(getTexture());
-        this.drawTexturedModalRect(i2 + 2, j2 + 2, 176, 16, 16, 16);
-      }
-    }*/
   }
 }

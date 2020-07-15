@@ -10,12 +10,12 @@ import java.util.List;
 public class MultiStatePropertyPredicate extends MultiStatePredicate {
   protected List<IProperty<?>> props;
 
-  public MultiStatePropertyPredicate(IProperty<?> prop, IBlockState ... states) {
+  public MultiStatePropertyPredicate(IProperty<?> prop, IBlockState... states) {
     super(states);
     this.props = Collections.singletonList(prop);
   }
 
-  public MultiStatePropertyPredicate(List<IProperty<?>> props, IBlockState ... states) {
+  public MultiStatePropertyPredicate(List<IProperty<?>> props, IBlockState... states) {
     super(states);
     this.props = props;
   }

@@ -2,8 +2,8 @@ package epicsquid.roots.ritual.conditions;
 
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.tileentity.TileEntityPyre;
 import epicsquid.roots.tileentity.TileEntityCatalystPlate;
+import epicsquid.roots.tileentity.TileEntityPyre;
 import epicsquid.roots.util.RitualUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

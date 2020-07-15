@@ -56,7 +56,7 @@ public class SpellGrowthInfusion extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
         new OreIngredient("treeSapling"),
         new OreIngredient("treeSapling"),

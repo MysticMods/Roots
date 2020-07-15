@@ -2,7 +2,6 @@ package epicsquid.roots.particle;
 
 import epicsquid.mysticallib.particle.ParticleBase;
 import epicsquid.mysticallib.util.Util;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 public class ParticlePyreLeaf extends ParticleBase {
@@ -47,7 +46,7 @@ public class ParticlePyreLeaf extends ParticleBase {
     this.particleGravity = 0.0f;
   }
 
-  private void standardUpdate () {
+  private void standardUpdate() {
     this.prevPosX = this.posX;
     this.prevPosY = this.posY;
     this.prevPosZ = this.posZ;
@@ -71,7 +70,7 @@ public class ParticlePyreLeaf extends ParticleBase {
     }
   }
 
-  public double distance () {
+  public double distance() {
     double a = this.posX - this.destX;
     double b = this.posY - this.destY;
     double c = this.posZ - this.destZ;

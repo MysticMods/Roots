@@ -88,11 +88,11 @@ public class ContainerPouch extends Container {
     }
   }
 
-  public boolean isApothecary () {
+  public boolean isApothecary() {
     return handler.isApothecary();
   }
 
-  public boolean isHerb () {
+  public boolean isHerb() {
     return handler.isHerb();
   }
 
@@ -100,15 +100,15 @@ public class ContainerPouch extends Container {
     int xOffset = -80;
     int yOffset = -50;
     for (int i = 0; i < herbsHandler.getSlots(); i++) {
-        // Controls which row the slots appear on
-        int yPosOffset = 0;
-        if (i >= 3) {
-          yPosOffset += 21;
-        }
-        if (i >= 6) {
-          yPosOffset += 22;
-        }
-        addSlotToContainer(supplier.create(herbsHandler, i, xOffset + 127 + (21 * (i % 3)), yOffset + 23 + yPosOffset));
+      // Controls which row the slots appear on
+      int yPosOffset = 0;
+      if (i >= 3) {
+        yPosOffset += 21;
+      }
+      if (i >= 6) {
+        yPosOffset += 22;
+      }
+      addSlotToContainer(supplier.create(herbsHandler, i, xOffset + 127 + (21 * (i % 3)), yOffset + 23 + yPosOffset));
     }
     herbsEnd = 9;
     inventoryEnd = 0;

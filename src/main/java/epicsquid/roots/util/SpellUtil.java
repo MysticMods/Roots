@@ -14,19 +14,19 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 public class SpellUtil {
-  public static boolean isValidStaff (ItemStack stack) {
+  public static boolean isValidStaff(ItemStack stack) {
     return stack.getItem() == ModItems.staff || stack.getItem() == ModItems.spell_dust;
   }
 
-  public static boolean isStaff (ItemStack stack) {
+  public static boolean isStaff(ItemStack stack) {
     return stack.getItem() == ModItems.staff;
   }
 
-  public static boolean isValidDust (ItemStack stack) {
+  public static boolean isValidDust(ItemStack stack) {
     return stack.getItem() == ModItems.spell_dust;
   }
 
-  public static boolean updateModifiers (ItemStack stack, EntityPlayer player) {
+  public static boolean updateModifiers(ItemStack stack, EntityPlayer player) {
     if (player.world.isRemote) {
       return false;
     }

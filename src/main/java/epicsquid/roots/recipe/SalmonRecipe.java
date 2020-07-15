@@ -1,7 +1,6 @@
 package epicsquid.roots.recipe;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.init.ModItems;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementManager;
 import net.minecraft.advancements.AdvancementProgress;
@@ -12,11 +11,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.WorldServer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SalmonRecipe extends FeyCraftingRecipe {

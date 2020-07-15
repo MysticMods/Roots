@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 
 public class PlayerSyncUtil {
-  public static void syncPlayer (EntityPlayer player) {
+  public static void syncPlayer(EntityPlayer player) {
     if (player.world.isRemote) {
       return;
     }
@@ -12,7 +12,7 @@ public class PlayerSyncUtil {
     syncPlayer((EntityPlayerMP) player);
   }
 
-  public static void syncPlayer (EntityPlayerMP player) {
+  public static void syncPlayer(EntityPlayerMP player) {
     player.sendContainerToPlayer(player.inventoryContainer);
     player.sendContainerToPlayer(player.openContainer);
   }

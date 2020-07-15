@@ -4,8 +4,6 @@ import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticallib.event.RegisterParticleEvent;
-import epicsquid.mysticallib.event.RegisterWorldGenEvent;
-import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.init.*;
 import epicsquid.roots.item.ItemLifeEssence;
 import epicsquid.roots.item.ItemStaff;

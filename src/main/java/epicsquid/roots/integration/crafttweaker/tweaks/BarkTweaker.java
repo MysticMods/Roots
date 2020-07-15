@@ -43,10 +43,10 @@ public class BarkTweaker {
   }
 
   @ZenDocMethod(
-      order=2,
+      order = 2,
       args = {
-        @ZenDocArg(arg="bark", info="the itemstack of the type of bark to remove (excluding stack size)")
-    },
+          @ZenDocArg(arg = "bark", info = "the itemstack of the type of bark to remove (excluding stack size)")
+      },
       description = "Removes a bark recipe via output from the list."
   )
   @ZenMethod

@@ -23,7 +23,7 @@ public class LibraryModifierInstanceList extends BaseModifierInstanceList<Librar
     return result;
   }
 
-  public static LibraryModifierInstanceList fromStaff (StaffModifierInstanceList incoming) {
+  public static LibraryModifierInstanceList fromStaff(StaffModifierInstanceList incoming) {
     LibraryModifierInstanceList result = new LibraryModifierInstanceList(incoming.getSpell());
     for (StaffModifierInstance modifier : incoming) {
       result.add(modifier);
@@ -31,9 +31,9 @@ public class LibraryModifierInstanceList extends BaseModifierInstanceList<Librar
     return result;
   }
 
-  public StaffModifierInstanceList toStaff () {
+  public StaffModifierInstanceList toStaff() {
     StaffModifierInstanceList result = new StaffModifierInstanceList(spell);
-     for (LibraryModifierInstance modifier : this) {
+    for (LibraryModifierInstance modifier : this) {
       result.add(modifier.toStaff());
     }
     return result;

@@ -42,7 +42,7 @@ public class ModDamage {
     return source;
   }
 
-  public static DamageSource fireDamageFrom (@Nullable EntityPlayer player) {
+  public static DamageSource fireDamageFrom(@Nullable EntityPlayer player) {
     DamageSource source;
     if (player == null) {
       source = DamageSource.IN_FIRE;
@@ -61,7 +61,7 @@ public class ModDamage {
   }
 
   @Nullable
-  public static DamageSource wildfireDamage (World world) {
+  public static DamageSource wildfireDamage(World world) {
     if (world.isRemote) return null;
 
     WorldServer server = (WorldServer) world;

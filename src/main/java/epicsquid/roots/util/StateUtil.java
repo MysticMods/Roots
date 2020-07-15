@@ -55,7 +55,7 @@ public class StateUtil {
    * @param stateWithValues
    * @return
    */
-  public static boolean stateContainsValues (IBlockState stateBeingChecked, IBlockState stateWithValues) {
+  public static boolean stateContainsValues(IBlockState stateBeingChecked, IBlockState stateWithValues) {
     // If they aren't the same block then they aren't the same state
     if (stateBeingChecked.getBlock() != stateWithValues.getBlock()) return false;
 

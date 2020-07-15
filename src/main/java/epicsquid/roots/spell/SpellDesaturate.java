@@ -87,7 +87,7 @@ public class SpellDesaturate extends SpellBase {
       stats.setFoodLevel(food);
       stats.foodSaturationLevel = Math.min(stats.foodSaturationLevel, food);
 
-      ((EntityPlayerMP)caster).connection.sendPacket(new SPacketUpdateHealth(caster.getHealth(), stats.getFoodLevel(), stats.getSaturationLevel()));
+      ((EntityPlayerMP) caster).connection.sendPacket(new SPacketUpdateHealth(caster.getHealth(), stats.getFoodLevel(), stats.getSaturationLevel()));
 
       MessageDesaturationFX message = new MessageDesaturationFX(caster);
       PacketHandler.sendToAllTracking(message, caster);

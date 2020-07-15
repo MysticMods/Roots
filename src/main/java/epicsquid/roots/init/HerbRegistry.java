@@ -15,9 +15,7 @@ import net.minecraftforge.registries.RegistryBuilder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @EventBusSubscriber(modid = Roots.MODID)
@@ -66,7 +64,7 @@ public class HerbRegistry {
   }
 
   @Nullable
-  public static Herb getHerb (@Nonnull ResourceLocation key) {
+  public static Herb getHerb(@Nonnull ResourceLocation key) {
     return REGISTRY.getValue(key);
   }
 

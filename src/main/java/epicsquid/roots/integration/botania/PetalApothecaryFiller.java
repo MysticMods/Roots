@@ -15,7 +15,7 @@ import vazkii.botania.common.block.tile.TileAltar;
 
 import java.util.Random;
 
-@Mod.EventBusSubscriber(modid= Roots.MODID)
+@Mod.EventBusSubscriber(modid = Roots.MODID)
 public class PetalApothecaryFiller {
 
   private static boolean hasBotania = false;

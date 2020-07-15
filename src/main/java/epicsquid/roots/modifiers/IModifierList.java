@@ -16,12 +16,12 @@ public interface IModifierList<T extends IModifier, V extends NBTBase> extends I
   boolean contains(Object o);
 
   @Nullable
-  T getByCore (IModifierCore core);
+  T getByCore(IModifierCore core);
 
   @Nullable
-  T get (Modifier modifier);
+  T get(Modifier modifier);
 
-  Collection<T> getModifiers ();
+  Collection<T> getModifiers();
 
   boolean add(T modifierInstance);
 

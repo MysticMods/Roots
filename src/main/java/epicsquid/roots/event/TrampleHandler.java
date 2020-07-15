@@ -27,8 +27,8 @@ public class TrampleHandler {
     }
   }
 
-  @SubscribeEvent(priority= EventPriority.HIGHEST)
-  public static void onBucketUse (FillBucketEvent event) {
+  @SubscribeEvent(priority = EventPriority.HIGHEST)
+  public static void onBucketUse(FillBucketEvent event) {
     RayTraceResult result = event.getTarget();
     if (result != null) {
       BlockPos pos = result.getBlockPos();
@@ -40,8 +40,8 @@ public class TrampleHandler {
     }
   }
 
-  @SubscribeEvent(priority=EventPriority.HIGHEST)
-  public static void onFluidPlaceBlock (BlockEvent.FluidPlaceBlockEvent event) {
+  @SubscribeEvent(priority = EventPriority.HIGHEST)
+  public static void onFluidPlaceBlock(BlockEvent.FluidPlaceBlockEvent event) {
     if (event.getOriginalState().getBlock() == ModBlocks.trample_rune) {
       event.setNewState(event.getOriginalState());
     }

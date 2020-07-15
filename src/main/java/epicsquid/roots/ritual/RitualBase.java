@@ -3,10 +3,10 @@ package epicsquid.roots.ritual;
 import epicsquid.roots.Roots;
 import epicsquid.roots.block.BlockPyre;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
+import epicsquid.roots.properties.PropertyTable;
 import epicsquid.roots.recipe.IRootsRecipe;
 import epicsquid.roots.ritual.conditions.ICondition;
 import epicsquid.roots.tileentity.TileEntityPyre;
-import epicsquid.roots.properties.PropertyTable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -79,7 +79,7 @@ public abstract class RitualBase {
     return icon;
   }
 
-  public ItemStack getItemStack () {
+  public ItemStack getItemStack() {
     if (stack.isEmpty()) {
       stack = new ItemStack(icon);
     }

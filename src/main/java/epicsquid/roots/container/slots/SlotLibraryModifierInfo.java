@@ -1,8 +1,8 @@
 package epicsquid.roots.container.slots;
 
 import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.IModifierCore;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -28,7 +28,7 @@ public class SlotLibraryModifierInfo extends Slot {
   }
 
   @Nullable
-  public StaffModifierInstance get () {
+  public StaffModifierInstance get() {
     return info.get(core);
   }
 
@@ -69,7 +69,7 @@ public class SlotLibraryModifierInfo extends Slot {
     }
   }
 
-  public boolean isDisabled () {
+  public boolean isDisabled() {
     StaffModifierInstance info = get();
     if (info == null) {
       return false;
@@ -77,7 +77,7 @@ public class SlotLibraryModifierInfo extends Slot {
     return !info.isEnabled();
   }
 
-  public boolean isApplied () {
+  public boolean isApplied() {
     StaffModifierInstance info = get();
     if (info == null) {
       return false;
@@ -85,12 +85,12 @@ public class SlotLibraryModifierInfo extends Slot {
     return info.isApplied();
   }
 
-  public boolean isApplicable () {
+  public boolean isApplicable() {
     StaffModifierInstance info = get();
     return info != null;
   }
 
-  public boolean isConflicting (StaffModifierInstanceList modifiers) {
+  public boolean isConflicting(StaffModifierInstanceList modifiers) {
     if (modifiers == null) {
       return false;
     }
@@ -102,7 +102,7 @@ public class SlotLibraryModifierInfo extends Slot {
     return info.isConflicting(modifiers);
   }
 
-  public List<StaffModifierInstance> getConflicts (StaffModifierInstanceList modifiers) {
+  public List<StaffModifierInstance> getConflicts(StaffModifierInstanceList modifiers) {
     if (modifiers == null) {
       return Collections.emptyList();
     }

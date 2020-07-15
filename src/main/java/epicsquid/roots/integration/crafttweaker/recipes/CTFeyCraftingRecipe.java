@@ -4,7 +4,6 @@ import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import epicsquid.roots.recipe.FeyCraftingRecipe;
 import epicsquid.roots.tileentity.TileEntityFeyCrafter;
-import epicsquid.roots.tileentity.TileEntityMortar;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 

@@ -55,7 +55,7 @@ public class SpellRoseThorns extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
         new OreIngredient("blockCactus"),
         new ItemStack(Blocks.DOUBLE_PLANT, 1, BlockDoublePlant.EnumPlantType.ROSE.getMeta()),

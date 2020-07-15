@@ -43,7 +43,7 @@ public class RenderMortar {
     SpellBase spellRecipe = ModRecipes.getSpellRecipe(toRender);
 
     ScaledResolution res = event.getResolution();
-    int x = (int) ((res.getScaledWidth() / 2));
+    int x = ((res.getScaledWidth() / 2));
     int y = res.getScaledHeight() / 2;
     float angle = -90;
     int radius = 24;

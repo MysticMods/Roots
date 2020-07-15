@@ -4,7 +4,6 @@ import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.MysticalLib;
 import epicsquid.mysticallib.particle.ParticleBase;
 import epicsquid.mysticallib.particle.ParticleRegistry;
-import epicsquid.mysticallib.particle.particles.ParticleLeafArc;
 import epicsquid.roots.particle.*;
 import net.minecraft.util.ResourceLocation;
 

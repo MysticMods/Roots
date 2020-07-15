@@ -26,7 +26,7 @@ public class RitualWrapper implements IRecipeWrapper {
   public RitualWrapper(RitualBase recipe) {
     this.recipe = recipe;
 
-    button = new GuiButton(2020, 75, 55, 60, 20,  I18n.format("jei.roots.open_book_button_text"));
+    button = new GuiButton(2020, 75, 55, 60, 20, I18n.format("jei.roots.open_book_button_text"));
   }
 
   @Override

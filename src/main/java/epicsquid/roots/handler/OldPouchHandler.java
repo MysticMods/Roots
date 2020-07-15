@@ -140,7 +140,7 @@ public class OldPouchHandler implements INBTSerializable<NBTTagCompound> {
       return HerbRegistry.isHerb(stack.getItem());
     }
 
-    public int refill (ItemStack herbStack) {
+    public int refill(ItemStack herbStack) {
       if (!containsHerb(herbStack.getItem())) {
         return herbStack.getCount();
       }

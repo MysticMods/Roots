@@ -3,9 +3,11 @@ package epicsquid.roots.modifiers.instance.staff;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.modifiers.CostType;
 import epicsquid.roots.modifiers.IModifier;
-import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;
+import epicsquid.roots.modifiers.IModifierList;
 import epicsquid.roots.modifiers.Modifier;
+import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.*;
@@ -54,11 +56,11 @@ public class StaffModifierInstance extends LibraryModifierInstance {
     return result;
   }
 
-  public static StaffModifierInstance fromLibrary (LibraryModifierInstance instance) {
+  public static StaffModifierInstance fromLibrary(LibraryModifierInstance instance) {
     return new StaffModifierInstance(instance.getModifier(), instance.isApplied(), false);
   }
 
-  public LibraryModifierInstance toLibrary () {
+  public LibraryModifierInstance toLibrary() {
     return this;
   }
 
@@ -75,7 +77,11 @@ public class StaffModifierInstance extends LibraryModifierInstance {
     return costs;
   }
 
-  public List<StaffModifierInstance> getConflicts (StaffModifierInstanceList modifiers) {
+  public boolean isConflicting(StaffModifierInstanceList modifiers) {
+    return !getConflicts(modifiers).isEmpty();
+  }
+
+  public List<StaffModifierInstance> getConflicts(StaffModifierInstanceList modifiers) {
     Set<IModifier> conflicts = getConflicts();
     if (conflicts.isEmpty()) {
       return Collections.emptyList();

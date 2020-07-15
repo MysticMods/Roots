@@ -31,7 +31,7 @@ public class CropConfig {
   @Config.Ignore
   private static Set<String> growthModBlacklist = null;
 
-  public static Set<String> getGrowthModBlacklist () {
+  public static Set<String> getGrowthModBlacklist() {
     if (growthModBlacklist == null) {
       growthModBlacklist = Sets.newHashSet(GrowthModBlacklist);
     }
@@ -45,7 +45,7 @@ public class CropConfig {
   @Config.Ignore
   public static Set<String> harvestModBlacklist = null;
 
-  public static Set<String> getHarvestModBlacklist () {
+  public static Set<String> getHarvestModBlacklist() {
     if (harvestModBlacklist == null) {
       harvestModBlacklist = Sets.newHashSet(HarvestModBlacklist);
     }
@@ -59,7 +59,7 @@ public class CropConfig {
   @Config.Ignore
   public static Set<ResourceLocation> harvestBlacklist = null;
 
-  public static Set<ResourceLocation> getHarvestBlacklist () {
+  public static Set<ResourceLocation> getHarvestBlacklist() {
     if (harvestBlacklist == null) {
       harvestBlacklist = ConfigUtil.parseLocationsSet(HarvestBlacklist);
     }

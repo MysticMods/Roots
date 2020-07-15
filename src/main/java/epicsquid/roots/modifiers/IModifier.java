@@ -7,7 +7,6 @@ import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
@@ -19,15 +18,15 @@ public interface IModifier extends IRegistryItem {
 
   ItemStack getStack();
 
-  IModifierCore getCore ();
+  IModifierCore getCore();
 
-  boolean isBasic ();
+  boolean isBasic();
 
   List<IModifierCost> getCosts();
 
   Set<IModifier> getConflicts();
 
-  default Supplier<IModifier> supply () {
+  default Supplier<IModifier> supply() {
     return () -> this;
   }
 
@@ -35,11 +34,11 @@ public interface IModifier extends IRegistryItem {
     addConflict(supplier, true);
   }
 
-  default void addConflict (IModifier supplier, boolean reverse) {
+  default void addConflict(IModifier supplier, boolean reverse) {
     throw new IllegalStateException(this.getClass().toString() + " does not support addConflict.");
   }
 
-  default boolean conflicts (IModifier modifier) {
+  default boolean conflicts(IModifier modifier) {
     for (IModifier mod : getConflicts()) {
       if (mod.getModifier().equals(modifier.getModifier())) {
         return true;
@@ -49,7 +48,7 @@ public interface IModifier extends IRegistryItem {
     return false;
   }
 
-  default <T extends IModifier, V extends NBTBase> boolean isConflicting (IModifierList<T, V> modifiers) {
+  default <T extends IModifier, V extends NBTBase> boolean isConflicting(IModifierList<T, V> modifiers) {
     for (T modifier : modifiers.getModifiers()) {
       if (conflicts(modifier)) {
         return true;
@@ -59,7 +58,7 @@ public interface IModifier extends IRegistryItem {
     return false;
   }
 
-  default IModifier getModifier () {
+  default IModifier getModifier() {
     return this;
   }
 
@@ -69,7 +68,7 @@ public interface IModifier extends IRegistryItem {
     return apply(spell.getCosts(), phase);
   }
 
-  default Object2DoubleOpenHashMap<Herb> apply (Object2DoubleOpenHashMap<Herb> costs) {
+  default Object2DoubleOpenHashMap<Herb> apply(Object2DoubleOpenHashMap<Herb> costs) {
     for (CostType type : CostType.values()) {
       costs = apply(costs, type);
     }
@@ -77,7 +76,7 @@ public interface IModifier extends IRegistryItem {
     return costs;
   }
 
-  default Object2DoubleOpenHashMap<Herb> apply (final SpellBase spell) {
+  default Object2DoubleOpenHashMap<Herb> apply(final SpellBase spell) {
     return apply(spell.getCosts());
   }
 }

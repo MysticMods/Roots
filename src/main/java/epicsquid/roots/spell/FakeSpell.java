@@ -23,6 +23,6 @@ public class FakeSpell extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
   }
 }

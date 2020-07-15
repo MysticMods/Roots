@@ -2,7 +2,6 @@ package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemKnifeBase;
 import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.roots.block.BlockPyre;
 import epicsquid.roots.config.MossConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;

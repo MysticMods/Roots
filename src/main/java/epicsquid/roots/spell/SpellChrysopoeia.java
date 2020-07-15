@@ -7,8 +7,8 @@ import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageChrysopoeiaFX;
-import epicsquid.roots.recipe.ChrysopoeiaRecipe;
 import epicsquid.roots.properties.Property;
+import epicsquid.roots.recipe.ChrysopoeiaRecipe;
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -62,11 +62,12 @@ public class SpellChrysopoeia extends SpellBase {
 
   private static final Object2LongOpenHashMap<EntityPlayer> soundTimer = new Object2LongOpenHashMap<>();
   private static final long DELAY = 6 * 20;
+
   static {
     soundTimer.defaultReturnValue(-1);
   }
 
-  public static boolean shouldPlaySound (EntityPlayer player) {
+  public static boolean shouldPlaySound(EntityPlayer player) {
     long val = soundTimer.getLong(player);
     if (val == -1) {
       soundTimer.put(player, player.ticksExisted);

@@ -26,7 +26,7 @@ public class RitualFlowerGrowth extends RitualBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     recipe = new RitualRecipe(this,
         new ItemStack(Blocks.YELLOW_FLOWER, 1, BlockYellowFlower.EnumFlowerType.DANDELION.getMeta()),
         new OreIngredient("wildroot"),

@@ -22,7 +22,7 @@ import java.util.UUID;
 
 @SuppressWarnings("AccessStaticViaInstance")
 public class EntityThornTrap extends Entity {
-  private static final DataParameter<Integer> lifetime = EntityDataManager.<Integer>createKey(EntityThornTrap.class, DataSerializers.VARINT);
+  private static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityThornTrap.class, DataSerializers.VARINT);
   private UUID playerId = null;
 
   private float damage;
