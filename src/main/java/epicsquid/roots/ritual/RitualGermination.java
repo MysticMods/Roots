@@ -2,8 +2,8 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualGermination;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.properties.Property;
+import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
@@ -29,7 +29,7 @@ public class RitualGermination extends RitualBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     recipe = new RitualRecipe(this,
         new ItemStack(ModItems.spirit_herb),
         new ItemStack(ModItems.wildroot),

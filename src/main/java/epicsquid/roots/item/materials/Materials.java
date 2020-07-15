@@ -8,7 +8,7 @@ public class Materials {
   public static ToolMaterial TERRASTONE = EnumHelper.addToolMaterial("terrastone", 3, 780, 8.0f, 3.0f, 21);
   public static ToolMaterial RUNIC = EnumHelper.addToolMaterial("runic", 3, 1991, 9.5f, 4.5f, 27);
 
-  public static void load () {
+  public static void load() {
 
   }
 }

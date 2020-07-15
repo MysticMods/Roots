@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.registry.VillagerRegistry;
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 public class MappingsEvent {
   @SubscribeEvent
-  public static void onMissingProfessionMappings (RegistryEvent.MissingMappings<VillagerRegistry.VillagerProfession> event) {
+  public static void onMissingProfessionMappings(RegistryEvent.MissingMappings<VillagerRegistry.VillagerProfession> event) {
     for (RegistryEvent.MissingMappings.Mapping<VillagerRegistry.VillagerProfession> mapping : event.getMappings()) {
       ResourceLocation missing = mapping.key;
       if (missing.getNamespace().equals(Roots.MODID)) {

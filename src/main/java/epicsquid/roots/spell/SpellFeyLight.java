@@ -19,7 +19,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import vazkii.botania.common.item.equipment.bauble.CloudPendantShim;
 
 import javax.annotation.Nullable;
 

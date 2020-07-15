@@ -2,9 +2,9 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualSpreadingForest;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.properties.Property;
 import epicsquid.roots.ritual.conditions.ConditionRunedPillars;
 import epicsquid.roots.util.RitualUtil;
-import epicsquid.roots.properties.Property;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
@@ -27,7 +27,7 @@ public class RitualSpreadingForest extends RitualBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     recipe = new RitualRecipe(this,
         new ItemStack(ModItems.terra_moss),
         new ItemStack(ModItems.spirit_herb),

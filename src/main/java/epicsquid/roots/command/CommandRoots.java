@@ -6,14 +6,15 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.block.groves.BlockGroveStone;
 import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.modifiers.IModifier;
 import epicsquid.roots.network.MessageClearToasts;
+import epicsquid.roots.properties.Property;
+import epicsquid.roots.properties.PropertyTable;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.info.LibrarySpellInfo;
-import epicsquid.roots.properties.Property;
-import epicsquid.roots.properties.PropertyTable;
 import epicsquid.roots.world.data.SpellLibraryData;
 import epicsquid.roots.world.data.SpellLibraryRegistry;
 import net.minecraft.advancements.Advancement;
@@ -57,7 +58,7 @@ public class CommandRoots extends CommandBase {
 
   @Override
   public String getUsage(ICommandSender sender) {
-    return "/roots book | /roots activate | /roots rituals | /roots growables | /roots spells | /roots library";
+    return "/roots book | /roots activate | /roots rituals | /roots growables | /roots spells | /roots library | /roots modifiers";
   }
 
   @Override
@@ -75,7 +76,25 @@ public class CommandRoots extends CommandBase {
     if (sender instanceof EntityPlayerMP && args.length != 0) {
       EntityPlayerMP player = (EntityPlayerMP) sender;
       WorldServer world = player.getServerWorld();
-      if (args[0].equalsIgnoreCase("library")) {
+      if (args[0].equalsIgnoreCase("modifiers")) {
+        List<String> modifierList = new ArrayList<>();
+        for (SpellBase spell : SpellRegistry.spellRegistry.values()) {
+          for (IModifier modifier : spell.getModifiers()) {
+            if (!modifier.isBasic()) {
+              modifierList.add(modifier.getTranslationKey());
+              modifierList.add(modifier.getTranslationKey() + ".desc");
+            }
+          }
+        }
+        Path path = Paths.get("roots.log");
+        try {
+          Files.write(path, modifierList, StandardCharsets.UTF_8, StandardOpenOption.APPEND, StandardOpenOption.CREATE);
+        } catch (IOException e) {
+          player.sendMessage(new TextComponentString("Unable to write roots.log"));
+          return;
+        }
+        player.sendMessage(new TextComponentString("Modifiers written to roots.log"));
+      } else if (args[0].equalsIgnoreCase("library")) {
         SpellLibraryData data = SpellLibraryRegistry.getData(player);
         for (LibrarySpellInfo info : data) {
           if (info.isObtained()) {

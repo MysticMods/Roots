@@ -36,7 +36,7 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
     this.modifiers = modifiers;
   }
 
-  public boolean tick () {
+  public boolean tick() {
     if (this.cooldown == -1) {
       return false;
     }
@@ -64,7 +64,7 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
     this.cooldownStop = cd + cooldown;
   }
 
-  public boolean validate (long cd) {
+  public boolean validate(long cd) {
     if (this.cooldown != -1 && cd > this.cooldownStop) {
       this.cooldown = -1;
       return true;
@@ -106,7 +106,7 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
   }
 
   @Nullable
-  public static StaffSpellInfo fromRegistry (String name) {
+  public static StaffSpellInfo fromRegistry(String name) {
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
     SpellBase spell = SpellRegistry.getSpell(rl);
     if (spell == null) {
@@ -115,13 +115,13 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
     return new StaffSpellInfo(spell);
   }
 
-  public static StaffSpellInfo fromLibrary (LibrarySpellInfo incoming) {
+  public static StaffSpellInfo fromLibrary(LibrarySpellInfo incoming) {
     StaffSpellInfo info = new StaffSpellInfo(incoming.spell);
     info.setModifiers(incoming.getModifiers().toStaff());
     return info;
   }
 
-  public static StaffSpellInfo fromSpell (SpellBase spell, boolean modifiers) {
+  public static StaffSpellInfo fromSpell(SpellBase spell, boolean modifiers) {
     StaffSpellInfo info = new StaffSpellInfo(spell);
     if (modifiers) {
       for (StaffModifierInstance modifier : info.getModifiers()) {
@@ -131,7 +131,7 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
     return info;
   }
 
-  public LibrarySpellInfo toLibrary () {
+  public LibrarySpellInfo toLibrary() {
     LibrarySpellInfo info = new LibrarySpellInfo(spell);
     info.setObtained();
     info.setModifiers(getModifiers().toLibrary());
@@ -139,7 +139,7 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
   }
 
   @Override
-  public ItemStack asStack () {
+  public ItemStack asStack() {
     ItemStack stack = new ItemStack(ModItems.spell_dust);
     NBTTagCompound comp = ItemUtil.getOrCreateTag(stack);
     comp.setBoolean("staff", true);

@@ -5,7 +5,6 @@ import epicsquid.mysticallib.block.IBlock;
 import epicsquid.mysticallib.block.INoCullBlock;
 import epicsquid.mysticallib.model.ICustomModeledObject;
 import epicsquid.mysticallib.model.IModeledObject;
-import epicsquid.mysticallib.model.block.BakedModelBlock;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.block.BlockFire;

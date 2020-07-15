@@ -1,15 +1,12 @@
 package epicsquid.roots.client.gui;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.gui.GuiSpectator;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.spectator.SpectatorMenu;
 import net.minecraft.client.gui.spectator.categories.SpectatorDetails;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.lang.invoke.MethodHandle;
 
 @SideOnly(Side.CLIENT)
 public class GuiFakeSpectator extends GuiSpectator {
@@ -25,12 +22,12 @@ public class GuiFakeSpectator extends GuiSpectator {
     }
   }
 
-  public static void setFake () {
+  public static void setFake() {
     init();
     Minecraft.getMinecraft().ingameGUI.spectatorGui = instance;
   }
 
-  public static void setReal () {
+  public static void setReal() {
     init();
     Minecraft.getMinecraft().ingameGUI.spectatorGui = actualInstance;
   }

@@ -4,9 +4,9 @@ import epicsquid.roots.api.Herb;
 import epicsquid.roots.modifiers.CostType;
 import epicsquid.roots.modifiers.IModifier;
 import epicsquid.roots.modifiers.IModifierCost;
+import epicsquid.roots.modifiers.Modifier;
 import epicsquid.roots.modifiers.instance.base.BaseModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
-import epicsquid.roots.modifiers.Modifier;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,7 +20,7 @@ public class LibraryModifierInstance extends BaseModifierInstance {
     super(modifier, applied);
   }
 
-  public LibraryModifierInstance (Modifier modifier) {
+  public LibraryModifierInstance(Modifier modifier) {
     super(modifier, false);
   }
 
@@ -33,11 +33,11 @@ public class LibraryModifierInstance extends BaseModifierInstance {
     return result;
   }
 
-  public static LibraryModifierInstance fromStaff (StaffModifierInstance instance) {
+  public static LibraryModifierInstance fromStaff(StaffModifierInstance instance) {
     return new LibraryModifierInstance(instance.getModifier(), instance.isApplied());
   }
 
-  public StaffModifierInstance toStaff () {
+  public StaffModifierInstance toStaff() {
     return new StaffModifierInstance(modifier, applied, false);
   }
 

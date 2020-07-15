@@ -43,7 +43,7 @@ public class PouchHandlerData extends WorldSavedData {
     createHandler();
   }
 
-  public void upgrade (PouchType newType) {
+  public void upgrade(PouchType newType) {
     if (type.ordinal() >= newType.ordinal()) {
       return;
     }

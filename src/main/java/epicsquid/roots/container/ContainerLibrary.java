@@ -10,10 +10,10 @@ package epicsquid.roots.container;
 import epicsquid.roots.container.slots.SlotLibraryInfo;
 import epicsquid.roots.container.slots.SlotLibraryModifierInfo;
 import epicsquid.roots.container.slots.SlotSpellInfo;
-import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
-import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.modifiers.IModifierCore;
 import epicsquid.roots.modifiers.ModifierCores;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.spell.info.LibrarySpellInfo;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
@@ -62,7 +62,7 @@ public class ContainerLibrary extends Container {
   }
 
   @Nullable
-  public StaffModifierInstanceList getModifiers () {
+  public StaffModifierInstanceList getModifiers() {
     StaffSpellStorage storage = getSpellStorage();
     if (storage == null) {
       return null;
@@ -90,7 +90,7 @@ public class ContainerLibrary extends Container {
     return slot == 0;
   }
 
-  public void reset () {
+  public void reset() {
     staffSlot = -1;
     librarySlot = -1;
   }

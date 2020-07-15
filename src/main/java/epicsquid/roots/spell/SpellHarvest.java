@@ -58,7 +58,7 @@ public class SpellHarvest extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
         new ItemStack(Items.GOLDEN_HOE),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),

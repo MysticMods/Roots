@@ -64,7 +64,7 @@ public class IntegrationUtil {
   }
 
   @SideOnly(Side.CLIENT)
-  public static void openCategory (ResourceLocation book, ResourceLocation category) {
+  public static void openCategory(ResourceLocation book, ResourceLocation category) {
     Minecraft mc = Minecraft.getMinecraft();
     openCategory(mc.world, mc.player, book, category);
   }
@@ -99,7 +99,7 @@ public class IntegrationUtil {
   }
 
   @SideOnly(Side.CLIENT)
-  public static void showUses (ItemStack stack) {
+  public static void showUses(ItemStack stack) {
     if (JEIRootsPlugin.runtime == null) {
       return;
     }

@@ -47,8 +47,8 @@ public class EntityRitualPurity extends EntityRitualBase {
           .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
       for (EntityLivingBase e : entities) {
         if (EntityUtil.isHostile(e)) {
-          if (e instanceof EntityZombieVillager && ((EntityZombieVillager)e).isConverting()) {
-            ((EntityZombieVillager)e).conversionTime -= ritual.zombie_count;
+          if (e instanceof EntityZombieVillager && ((EntityZombieVillager) e).isConverting()) {
+            ((EntityZombieVillager) e).conversionTime -= ritual.zombie_count;
             e.extinguish();
           }
           continue;

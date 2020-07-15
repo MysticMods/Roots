@@ -24,7 +24,7 @@ public class ChrysopoeiaRecipe extends RegistryItem {
     return inputs.getIngredient().test(stack) && stack.getCount() >= inputs.getCount();
   }
 
-  public ItemStack process (EntityPlayer player, ItemStack stack) {
+  public ItemStack process(EntityPlayer player, ItemStack stack) {
     if (!matches(stack)) {
       return stack;
     }

@@ -1,7 +1,6 @@
 package epicsquid.roots.recipe;
 
 import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.tileentity.TileEntityPyre;
 import epicsquid.roots.util.types.RegistryItem;
@@ -11,7 +10,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.IItemHandlerModifiable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 

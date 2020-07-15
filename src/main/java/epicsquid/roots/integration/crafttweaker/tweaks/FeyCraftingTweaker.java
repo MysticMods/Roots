@@ -24,7 +24,6 @@ import stanhebben.zenscript.annotations.ZenMethod;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 @ZenDocClass("mods.roots.Fey")
 @ZenDocAppend({"docs/include/fey_crafting.example.md"})

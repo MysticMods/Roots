@@ -2,9 +2,7 @@ package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.roots.item.dispenser.DispensePestle;
-import epicsquid.roots.item.dispenser.DispenseRunicShears;
 import net.minecraft.block.BlockDispenser;
-import net.minecraft.item.Item;
 
 import javax.annotation.Nonnull;
 

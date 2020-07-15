@@ -14,7 +14,7 @@ public class EntityUtil {
   private static Set<ResourceLocation> forcedFriendly = new HashSet<>();
   private static Set<ResourceLocation> forcedHostile = new HashSet<>();
 
-  public static boolean isHostile (Entity entity) {
+  public static boolean isHostile(Entity entity) {
     if (entity instanceof EntityPlayer) return false;
 
     ResourceLocation rl = EntityList.getKey(entity);
@@ -35,14 +35,11 @@ public class EntityUtil {
       return true;
     }
 
-    if (entity instanceof IProjectile || entity instanceof EntityWitherSkull) {
-      return true;
-    }
+    return entity instanceof IProjectile || entity instanceof EntityWitherSkull;
 
-    return false;
   }
 
-  public static boolean isFriendly (Entity entity) {
+  public static boolean isFriendly(Entity entity) {
     if (entity instanceof EntityPlayer) return false;
 
     ResourceLocation rl = EntityList.getKey(entity);
@@ -66,14 +63,12 @@ public class EntityUtil {
     return !isHostile(entity);
   }
 
-  public static boolean isHostileTo (Entity entity, EntityPlayer player) {
+  public static boolean isHostileTo(Entity entity, EntityPlayer player) {
     if (isHostile(entity)) return true;
 
     if (entity instanceof EntityLiving) {
       EntityLiving living = (EntityLiving) entity;
-      if (living.getAttackTarget() == player) {
-        return true;
-      }
+      return living.getAttackTarget() == player;
     }
 
     return false;

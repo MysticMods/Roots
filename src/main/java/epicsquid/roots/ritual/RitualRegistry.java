@@ -66,7 +66,7 @@ public class RitualRegistry {
     addRitual(ritual_grove_supplication = new RitualGroveSupplication("ritual_grove_supplication", false));
   }
 
-  public static void init () {
+  public static void init() {
     ritualRegistry.values().forEach(RitualBase::init);
   }
 
@@ -74,11 +74,11 @@ public class RitualRegistry {
     ritualRegistry.put(ritual.getName(), ritual);
   }
 
-  public static void finalise () {
+  public static void finalise() {
     ritualRegistry.values().forEach(RitualBase::finalise);
   }
 
-  public static Collection<RitualBase> getRituals () {
+  public static Collection<RitualBase> getRituals() {
     return ritualRegistry.values();
   }
 }

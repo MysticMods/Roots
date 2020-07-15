@@ -2,7 +2,6 @@ package epicsquid.roots.util.zen;
 
 import epicsquid.roots.util.StringHelper;
 import org.apache.commons.lang3.StringUtils;
-import scala.annotation.meta.field;
 import stanhebben.zenscript.annotations.Optional;
 
 import java.io.IOException;

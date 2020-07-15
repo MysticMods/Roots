@@ -118,7 +118,7 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
     return compound;
   }
 
-  public List<LibrarySpellInfo> asList () {
+  public List<LibrarySpellInfo> asList() {
     if (list == null) {
       list = spells.values().stream().filter(LibrarySpellInfo::isObtained).collect(Collectors.toList());
     }
@@ -132,7 +132,7 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
   }
 
   @Nullable
-  public LibrarySpellInfo get (int slot) {
+  public LibrarySpellInfo get(int slot) {
     List<LibrarySpellInfo> info = asList();
     if (slot < info.size()) {
       return info.get(slot);
@@ -140,7 +140,7 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
     return null;
   }
 
-  public int size () {
+  public int size() {
     return asList().size();
   }
 }

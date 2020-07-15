@@ -2,12 +2,9 @@ package epicsquid.roots.client;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
-import epicsquid.roots.init.ModItems;
 import epicsquid.roots.network.MessageServerOpenLibrary;
 import epicsquid.roots.network.MessageServerOpenPouch;
 import epicsquid.roots.network.MessageServerOpenQuiver;
-import epicsquid.roots.network.MessageServerUpdateStaff;
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -16,8 +13,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 public class Keybinds {

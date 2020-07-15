@@ -41,7 +41,7 @@ public class Herb extends IForgeRegistryEntry.Impl<Herb> {
     this.item = () -> item;
   }
 
-  public ItemStack getStack () {
+  public ItemStack getStack() {
     if (stack == null) {
       final ItemStack ourStack = new ItemStack(this.item.get());
       stack = () -> ourStack;

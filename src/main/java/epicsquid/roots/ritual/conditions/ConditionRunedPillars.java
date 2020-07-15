@@ -28,7 +28,7 @@ public class ConditionRunedPillars implements ICondition {
     return amount;
   }
 
-  public RitualUtil.RunedWoodType getType () {
+  public RitualUtil.RunedWoodType getType() {
     return type;
   }
 

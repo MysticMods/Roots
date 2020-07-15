@@ -4,7 +4,10 @@ import com.google.common.collect.Sets;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.tileentity.TileEntityCatalystPlate;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockNewLog;
+import net.minecraft.block.BlockOldLog;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -29,7 +32,7 @@ public class RitualUtil {
     return pos.add(rand.nextInt(xRadius * 2), 0, rand.nextInt(zRadius * 2)); // TODO: Not immutable?
   }
 
-  public static BlockPos getRandomGroundPosition (BlockPos center, int xRadius, int zRadius) {
+  public static BlockPos getRandomGroundPosition(BlockPos center, int xRadius, int zRadius) {
     int randX = rand.nextInt(xRadius * 2) - xRadius;
     int randZ = rand.nextInt(zRadius * 2) - zRadius;
     return center.add(randX, 0, randZ);
@@ -261,7 +264,7 @@ public class RitualUtil {
       return visual.get();
     }
 
-    public IBlockState getBase () {
+    public IBlockState getBase() {
       return base.get();
     }
 

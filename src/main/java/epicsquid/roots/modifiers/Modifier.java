@@ -11,7 +11,6 @@ import net.minecraft.util.ResourceLocation;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Supplier;
 
 public class Modifier extends RegistryItem implements IModifier {
   private final IModifierCore core;

@@ -96,12 +96,12 @@ public class SlotImposerSpellInfo extends Slot {
     return false;
   }
 
-  public StaffSpellInfo getInfo () {
+  public StaffSpellInfo getInfo() {
     return info.apply(slot);
   }
 
   @FunctionalInterface
   public interface ISlotProvider {
-    StaffSpellInfo apply (int slot);
+    StaffSpellInfo apply(int slot);
   }
 }

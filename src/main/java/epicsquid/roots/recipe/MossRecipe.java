@@ -20,7 +20,7 @@ public class MossRecipe {
     this.output = output;
   }
 
-  public MossRecipe (Map.Entry<ItemStack, ItemStack> entry) {
+  public MossRecipe(Map.Entry<ItemStack, ItemStack> entry) {
     this.input = entry.getKey();
     this.output = entry.getValue();
   }
@@ -33,14 +33,14 @@ public class MossRecipe {
     return output;
   }
 
-  public static List<MossRecipe> getRecipeList (Map<ItemStack, ItemStack> recipes) {
+  public static List<MossRecipe> getRecipeList(Map<ItemStack, ItemStack> recipes) {
     if (RECIPE_LIST == null) {
       RECIPE_LIST = recipes.entrySet().stream().map(MossRecipe::new).collect(Collectors.toList());
     }
     return RECIPE_LIST;
   }
 
-  public static List<MossRecipe> getRecipeList () {
+  public static List<MossRecipe> getRecipeList() {
     if (RECIPE_LIST == null) {
       return getRecipeList(MossConfig.getMossyCobblestones());
     }
@@ -48,7 +48,7 @@ public class MossRecipe {
     return RECIPE_LIST;
   }
 
-  public static ItemStack getTerraMoss () {
+  public static ItemStack getTerraMoss() {
     if (TERRA_MOSS.isEmpty()) {
       TERRA_MOSS = new ItemStack(ModItems.terra_moss);
     }

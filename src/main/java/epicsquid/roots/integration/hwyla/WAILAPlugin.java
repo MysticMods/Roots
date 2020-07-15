@@ -1,8 +1,8 @@
 package epicsquid.roots.integration.hwyla;
 
 import epicsquid.roots.block.groves.BlockGroveStone;
-import epicsquid.roots.integration.hwyla.providers.ProviderPyre;
 import epicsquid.roots.integration.hwyla.providers.ProviderGroveStone;
+import epicsquid.roots.integration.hwyla.providers.ProviderPyre;
 import epicsquid.roots.tileentity.TileEntityPyre;
 import mcp.mobius.waila.api.IWailaPlugin;
 import mcp.mobius.waila.api.IWailaRegistrar;

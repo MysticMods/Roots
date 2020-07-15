@@ -11,11 +11,11 @@ public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
   public PropertyTable() {
   }
 
-  public Collection<Property<?>> getProperties () {
+  public Collection<Property<?>> getProperties() {
     return reverseMap.values();
   }
 
-  public void addProperties (Property<?>... properties) {
+  public void addProperties(Property<?>... properties) {
     for (Property prop : properties) {
       map.put(prop, null);
       reverseMap.put(prop.getName(), prop);
@@ -23,7 +23,7 @@ public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
   }
 
   @SuppressWarnings("unchecked")
-  public <T> T getValue (String propertyName) {
+  public <T> T getValue(String propertyName) {
     fetchedKeys.add(propertyName);
     Property<T> prop = (Property<T>) reverseMap.get(propertyName);
     return get(prop);
@@ -82,7 +82,7 @@ public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
     map.put(property, value);
   }
 
-  public int[] getRadius () {
+  public int[] getRadius() {
     int[] radius = getRadius("radius");
     if (radius == null) {
       throw new IllegalArgumentException("This property table does not contain radius_x, radius_y and/or radius_z");
@@ -92,7 +92,7 @@ public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
 
   @SuppressWarnings("unchecked")
   @Nullable
-  public int[] getRadius (String radiusPrefix) {
+  public int[] getRadius(String radiusPrefix) {
     Property<?> pX = get(radiusPrefix + "_x");
     Property<?> pY = get(radiusPrefix + "_y");
     Property<?> pZ = get(radiusPrefix + "_z");
@@ -111,11 +111,11 @@ public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
     return new int[]{x, y, z};
   }
 
-  public boolean hasProperty (Property<?> property) {
+  public boolean hasProperty(Property<?> property) {
     return map.containsKey(property);
   }
 
-  public boolean hasProperty (String prop) {
+  public boolean hasProperty(String prop) {
     return reverseMap.containsKey(prop);
   }
 
@@ -124,7 +124,7 @@ public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
     return reverseMap.entrySet().iterator();
   }
 
-  public List<String> finalise () {
+  public List<String> finalise() {
     ArrayList<String> result = new ArrayList<>();
     for (String key : reverseMap.keySet()) {
       if (!fetchedKeys.contains(key)) {

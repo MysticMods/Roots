@@ -1,7 +1,5 @@
 package epicsquid.roots.recipe;
 
-import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.roots.tileentity.TileEntityFeyCrafter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

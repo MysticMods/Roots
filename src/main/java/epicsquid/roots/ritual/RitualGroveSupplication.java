@@ -41,7 +41,7 @@ public class RitualGroveSupplication extends RitualBase {
   public void doFinalise() {
     duration = properties.get(PROP_DURATION);
     interval = properties.get(PROP_INTERVAL);
-    int r[] = properties.getRadius();
+    int[] r = properties.getRadius();
     radius_x = r[0];
     radius_y = r[1];
     radius_z = r[2];

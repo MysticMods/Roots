@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.Constants;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -56,7 +55,7 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
     return spells.get(slot);
   }
 
-  public Collection<StaffSpellInfo> getSpells () {
+  public Collection<StaffSpellInfo> getSpells() {
     List<StaffSpellInfo> result = new ArrayList<>();
     for (int i = MIN_SPELL_SLOT; i <= MAX_SPELL_SLOT; i++) {
       StaffSpellInfo info = spells.get(i);
@@ -67,7 +66,7 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
     return result;
   }
 
-  public void tick (long cd) {
+  public void tick(long cd) {
     boolean ticked = false;
     for (StaffSpellInfo spell : getSpells()) {
       if (spell.tick()) {
@@ -91,7 +90,7 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
     return info.cooldownLeft();
   }
 
-  public boolean onCooldown () {
+  public boolean onCooldown() {
     StaffSpellInfo info = getSelectedInfo();
     if (info == null) {
       return false;

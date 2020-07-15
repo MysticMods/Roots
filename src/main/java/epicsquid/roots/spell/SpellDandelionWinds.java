@@ -55,7 +55,7 @@ public class SpellDandelionWinds extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
         new ItemStack(Blocks.YELLOW_FLOWER),
         new OreIngredient("treeLeaves"),

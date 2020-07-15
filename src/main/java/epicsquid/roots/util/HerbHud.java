@@ -20,18 +20,18 @@ import java.util.Map;
 
 @SideOnly(Side.CLIENT)
 @SuppressWarnings("Duplicates")
-@Mod.EventBusSubscriber(modid= Roots.MODID, value=Side.CLIENT)
+@Mod.EventBusSubscriber(modid = Roots.MODID, value = Side.CLIENT)
 public class HerbHud {
   private static HerbAlert slot1 = null;
   private static HerbAlert slot2 = null;
   private static Map<Herb, HerbAlert> alerts = new HashMap<>();
 
-  public static double herbAmount (Herb herb) {
+  public static double herbAmount(Herb herb) {
     HerbAlert alert = getAlert(herb);
     return alert.getAmount();
   }
 
-  public static void updateHerb (Herb herb, double amount) {
+  public static void updateHerb(Herb herb, double amount) {
     HerbAlert alert = getAlert(herb);
     alert.setAmount(amount);
   }

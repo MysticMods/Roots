@@ -22,13 +22,13 @@ public class BlockStateAbove implements Predicates.IWorldPredicate {
 
   @ZenMethod
   @ZenDocMethod(
-      order=1,
+      order = 1,
       args = {
           @ZenDocArg(arg = "predicate", info = "a defined predicate that describes (potentially) multiple blockstates")
       },
       description = "Creates an IWorldCondition which tests the state above a block using the provided IPredicate."
   )
-  public static BlockStateAbove create (Predicates.IPredicate predicate) {
+  public static BlockStateAbove create(Predicates.IPredicate predicate) {
     return new BlockStateAbove(predicate);
   }
 

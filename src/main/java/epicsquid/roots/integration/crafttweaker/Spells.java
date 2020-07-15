@@ -3,10 +3,10 @@ package epicsquid.roots.integration.crafttweaker;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import epicsquid.roots.Roots;
-import epicsquid.roots.spell.SpellBase;
-import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.properties.PropertyTable;
+import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.util.zen.ZenDocClass;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -16,7 +16,7 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenDocClass("mods." + Roots.MODID + ".Spells")
 public class Spells {
   @ZenMethod
-  public static Spell getSpell (String spellName) {
+  public static Spell getSpell(String spellName) {
     if (!spellName.startsWith("spell_")) {
       spellName = "spell_" + spellName;
     }
@@ -41,7 +41,7 @@ public class Spells {
       return original;
     }
 
-    public <T> Spell set (String propertyName, T value) {
+    public <T> Spell set(String propertyName, T value) {
       PropertyTable table = original.getProperties();
       try {
         Property<T> prop = table.get(propertyName, value);
@@ -53,37 +53,37 @@ public class Spells {
     }
 
     @ZenMethod
-    public Spell setDouble (String propertyName, double value) {
+    public Spell setDouble(String propertyName, double value) {
       return set(propertyName, value);
     }
 
     @ZenMethod
-    public Spell setFloat (String propertyName, float value) {
+    public Spell setFloat(String propertyName, float value) {
       return set(propertyName, value);
     }
 
     @ZenMethod
-    public Spell setInteger (String propertyName, int value) {
+    public Spell setInteger(String propertyName, int value) {
       return set(propertyName, value);
     }
 
     @ZenMethod
-    public Spell setCooldown (int value) {
+    public Spell setCooldown(int value) {
       return set("cooldownLeft", value);
     }
 
     @ZenMethod
-    public Spell setDamage (float value) {
+    public Spell setDamage(float value) {
       return set("damage", value);
     }
 
     @ZenMethod
-    public Spell setString (String propertyName, String value) {
+    public Spell setString(String propertyName, String value) {
       return set(propertyName, value);
     }
 
     @ZenMethod
-    public Spell setCost (int cost, Herbs.Herb herb, double amount) {
+    public Spell setCost(int cost, Herbs.Herb herb, double amount) {
       PropertyTable props = original.getProperties();
       try {
         Property<SpellBase.SpellCost> prop = props.get("cost_" + cost, SpellBase.SpellCost.EMPTY);

@@ -1,7 +1,6 @@
 package epicsquid.roots.network.fx;
 
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.SpellChrysopoeia;
 import epicsquid.roots.spell.SpellSaturate;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -49,7 +48,7 @@ public class MessageSaturationFX implements IMessage {
       Entity entity = world.getEntityByID(message.entityId);
       if (entity instanceof EntityPlayer) {
         EntityPlayer player = (EntityPlayer) entity;
-        for (int i = 0; i <= 360; i+= 16) {
+        for (int i = 0; i <= 360; i += 16) {
           float tx = (float) entity.posX + 0.1f * (float) Math.sin(Math.toRadians(i));
           float ty = (float) entity.posY + (player.height / 2) + 0.5f;
           float tz = (float) entity.posZ + 0.1f * (float) Math.cos(Math.toRadians(i));

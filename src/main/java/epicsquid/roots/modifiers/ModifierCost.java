@@ -50,19 +50,19 @@ public class ModifierCost implements IModifierCost {
     return null;
   }
 
-  public static List<IModifierCost> of (CostType cost, IModifierCore herb, double value) {
+  public static List<IModifierCost> of(CostType cost, IModifierCore herb, double value) {
     return Collections.singletonList(new ModifierCost(cost, value, herb));
   }
 
-  public static List<IModifierCost> of (CostType cost, double value) {
+  public static List<IModifierCost> of(CostType cost, double value) {
     return of(cost, null, value);
   }
 
-  public static List<IModifierCost> of (CostType cost) {
+  public static List<IModifierCost> of(CostType cost) {
     return of(cost, null, 0);
   }
 
-  public static List<IModifierCost> noCost () {
+  public static List<IModifierCost> noCost() {
     return of(CostType.NO_COST);
   }
 }

@@ -46,7 +46,7 @@ public class SpellWildfire extends SpellBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     addIngredients(
         new OreIngredient("dyeOrange"),
         new ItemStack(Items.COAL, 1, 1),
