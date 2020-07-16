@@ -7,6 +7,15 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+// TODO:
+// - Don't worry about clearing entity data
+// - Finalise and prevent modifiers from functioning if configured so in CraftTweaker
+// - CraftTweaker ability to adjust modifier costs and amplifications
+// - CraftTweaker remove the ability to change the costs of spells
+// - setFireModifier, setPeacefulModifier, etc
+// - Standard helper functions fire(), slow(), paralyse()
+// - Standard function to storeEntityData modifier per-modifier/per-spell
+
 public class ModifierRegistry {
   private static Map<ResourceLocation, Modifier> map = new HashMap<>();
   private static boolean initialized = false;
