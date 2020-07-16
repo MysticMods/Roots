@@ -81,7 +81,7 @@ public class SpellAcidCloud extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks) {
     if (!player.world.isRemote) {
       StaffModifierInstance fire = modifiers.get(INFERNAL_BULB);
       List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class,
@@ -91,12 +91,12 @@ public class SpellAcidCloud extends SpellBase {
             && !e.getUniqueID().equals(player.getUniqueID())) {
           if (e.hurtTime <= 0 && !e.isDead) {
             if (fire != null && fire.isEnabled()) {
-              e.attackEntityFrom(ModDamage.fireDamageFrom(player), (float) (damage + Math.floor(damage * amplifier)));
+              e.attackEntityFrom(ModDamage.fireDamageFrom(player), ampFloat(damage));
             } else {
-              e.attackEntityFrom(DamageSource.causeMobDamage(player), (float) (damage + Math.floor(damage * amplifier)));
+              e.attackEntityFrom(DamageSource.causeMobDamage(player), ampFloat(damage));
             }
             if (SpellConfig.spellFeaturesCategory.acidCloudPoisoningEffect) {
-              e.addPotionEffect(new PotionEffect(MobEffects.POISON, (int) (poisonDuration + Math.floor(poisonDuration * amplifier)), poisonAmplification));
+              e.addPotionEffect(new PotionEffect(MobEffects.POISON, ampInt(poisonDuration), poisonAmplification));
             }
             if (fire != null && fire.isEnabled()) {
               e.setFire(fireDuration);
@@ -106,7 +106,7 @@ public class SpellAcidCloud extends SpellBase {
           }
         }
       }
-      PacketHandler.sendToAllTracking(new MessageAcidCloudFX(player.posX, player.posY + player.getEyeHeight(), player.posZ, fire != null && fire.isEnabled()), player);
+      PacketHandler.sendToAllTracking(new MessageAcidCloudFX(player.posX, player.posY + player.getEyeHeight(), player.posZ, modifiers), player);
     }
     return true;
   }

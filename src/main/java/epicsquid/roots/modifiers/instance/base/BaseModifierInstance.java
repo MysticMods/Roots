@@ -46,6 +46,11 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
   }
 
   @Override
+  public String getIdentifier() {
+    return modifier.getIdentifier();
+  }
+
+  @Override
   public String getTranslationKey() {
     return modifier.getTranslationKey();
   }

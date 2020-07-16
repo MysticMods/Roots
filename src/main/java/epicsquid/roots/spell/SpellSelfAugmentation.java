@@ -73,7 +73,7 @@ public class SpellSelfAugmentation extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer caster, StaffModifierInstanceList modifiers, int ticks) {
     BlockPos playerPos = caster.getPosition();
     World world = caster.world;
 
@@ -94,7 +94,7 @@ public class SpellSelfAugmentation extends SpellBase {
         disarmed = true;
         if (!world.isRemote) {
           entity.setItemStackToSlot(slot, ItemStack.EMPTY);
-          if (drop_chance == 1 || drop_chance > 1 && Util.rand.nextInt((int) (drop_chance - drop_chance * amplifier)) == 0) {
+          if (drop_chance == 1 || drop_chance > 1 && Util.rand.nextInt(ampSubInt(drop_chance)) == 0) {
             ItemUtil.spawnItem(world, entity.getPosition(), stack);
           }
         }

@@ -76,7 +76,7 @@ public class SpellLifeDrain extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks) {
     if (!player.world.isRemote) {
       boolean foundTarget = false;
       PacketHandler.sendToAllTracking(new MessageLifeDrainAbsorbFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ), player);
@@ -91,13 +91,13 @@ public class SpellLifeDrain extends SpellBase {
               && e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
             foundTarget = true;
             if (e.hurtTime <= 0 && !e.isDead) {
-              e.attackEntityFrom(DamageSource.causeMobDamage(player), (float) (witherDamage + witherDamage * amplifier));
-              if (e.rand.nextInt((int) (witherChance - witherChance * amplifier)) == 0) {
-                e.addPotionEffect(new PotionEffect(MobEffects.WITHER, (int) (witherDuration + witherDuration * amplifier), witherAmplification));
+              e.attackEntityFrom(DamageSource.causeMobDamage(player), ampFloat(witherDamage));
+              if (e.rand.nextInt(ampSubInt(witherChance)) == 0) {
+                e.addPotionEffect(new PotionEffect(MobEffects.WITHER, ampInt(witherDuration)));
               }
               e.setRevengeTarget(player);
               e.setLastAttackedEntity(player);
-              player.heal((float) (heal + heal * amplifier));
+              player.heal(ampFloat(heal));
             }
           }
         }

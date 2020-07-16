@@ -72,7 +72,7 @@ public class SpellSummersThaw extends SpellBase {
 
   @SuppressWarnings("deprecation")
   @Override
-  public boolean cast(EntityPlayer caster, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer caster, StaffModifierInstanceList modifiers, int ticks) {
     BlockPos pos = caster.getPosition();
     World world = caster.world;
     int mX = pos.getX();

@@ -57,13 +57,13 @@ public class SpellWildfire extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks) {
     if (!player.world.isRemote) {
       EntityFireJet fireJet = new EntityFireJet(player.world);
       fireJet.setPlayer(player.getUniqueID());
       fireJet.setPosition(player.posX, player.posY, player.posZ);
-      fireJet.setAmplifier(amplifier);
-      fireJet.setSpeedy(speedy);
+      fireJet.setAmplifier(getAmplifyValue());
+      fireJet.setSpeedy(getSpeedValue());
       player.world.spawnEntity(fireJet);
     }
     return true;

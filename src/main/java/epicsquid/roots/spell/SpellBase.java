@@ -48,7 +48,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("Duplicates")
-public abstract class SpellBase extends RegistryItem {
+public abstract class SpellBase extends RegistryItem implements SpellMulitipliers {
   protected PropertyTable properties = new PropertyTable();
 
   private boolean finalised = false;
@@ -65,6 +65,9 @@ public abstract class SpellBase extends RegistryItem {
   private List<Modifier> acceptedModifiers = new ArrayList<>();
   private float[] firstColours;
   private float[] secondColours;
+
+  protected Buff speedy;
+  protected Buff amplifier;
 
   public SpellRecipe recipe = SpellRecipe.EMPTY;
 
@@ -322,41 +325,76 @@ public abstract class SpellBase extends RegistryItem {
     }
   }
 
-  public CastResult cast(EntityPlayer caster, StaffSpellInfo info, int ticks) {
-    StaffModifierInstanceList modifiers = info.getModifiers();
-    double amplifier = 0;
-    StaffModifierInstance mod = modifiers.get(BaseModifiers.EMPOWER);
-    if (mod != null && mod.isEnabled()) {
-      amplifier = 0.1;
-    }
-    mod = modifiers.get(BaseModifiers.GREATER_EMPOWER);
-    if (mod != null && mod.isEnabled()) {
-      amplifier = 0.3;
-    }
-    double speedy = 0;
-    mod = modifiers.get(BaseModifiers.SPEEDY);
-    if (mod != null && mod.isEnabled()) {
-      speedy = 0.1;
-    }
-    mod = modifiers.get(BaseModifiers.GREATER_SPEEDY);
-    if (mod != null && mod.isEnabled()) {
-      speedy = 0.3;
-    }
+  public enum Buff {
+    NONE, BONUS, GREATER_BONUS;
+  }
 
-    if (cast(caster, info.getModifiers(), ticks, amplifier, speedy)) {
-      if (speedy == 0d) {
-        return CastResult.SUCCESS;
-      } else if (speedy == 0.1d) {
-        return CastResult.SUCCESS_SPEEDY;
-      } else {
-        return CastResult.SUCCESS_GREATER_SPEEDY;
-      }
-    } else {
-      return CastResult.FAIL;
+  @Override
+  public double getAmplifyValue() {
+    switch (amplifier) {
+      default:
+      case NONE:
+        return 0;
+      case BONUS:
+        return 0.1;
+      case GREATER_BONUS:
+        return 0.3;
     }
   }
 
-  protected abstract boolean cast(EntityPlayer caster, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy);
+  @Override
+  public double getSpeedValue() {
+    switch (speedy) {
+      default:
+      case NONE:
+        return 0;
+      case BONUS:
+        return 0.1;
+      case GREATER_BONUS:
+        return 0.3;
+    }
+  }
+
+  public CastResult cast(EntityPlayer caster, StaffSpellInfo info, int ticks) {
+    StaffModifierInstanceList modifiers = info.getModifiers();
+    amplifier = Buff.NONE;
+    StaffModifierInstance mod = modifiers.get(BaseModifiers.EMPOWER);
+    if (mod != null && mod.isEnabled()) {
+      amplifier = Buff.BONUS;
+    }
+    mod = modifiers.get(BaseModifiers.GREATER_EMPOWER);
+    if (mod != null && mod.isEnabled()) {
+      amplifier = Buff.GREATER_BONUS;
+    }
+    speedy = Buff.NONE;
+    mod = modifiers.get(BaseModifiers.SPEEDY);
+    if (mod != null && mod.isEnabled()) {
+      speedy = Buff.BONUS;
+    }
+    mod = modifiers.get(BaseModifiers.GREATER_SPEEDY);
+    if (mod != null && mod.isEnabled()) {
+      speedy = Buff.GREATER_BONUS;
+    }
+
+    CastResult result = CastResult.FAIL;
+
+    if (cast(caster, info.getModifiers(), ticks)) {
+      if (speedy.equals(Buff.NONE)) {
+        result = CastResult.SUCCESS;
+      } else if (speedy.equals(Buff.BONUS)) {
+        result = CastResult.SUCCESS_SPEEDY;
+      } else {
+        result = CastResult.SUCCESS_GREATER_SPEEDY;
+      }
+    }
+
+    speedy = Buff.NONE;
+    amplifier = Buff.NONE;
+
+    return result;
+  }
+
+  protected abstract boolean cast(EntityPlayer caster, StaffModifierInstanceList modifiers, int ticks);
 
   public float getRed1() {
     return red1;

@@ -59,7 +59,7 @@ public class SpellStormCloud extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks) {
     World world = player.world;
     player.addPotionEffect(new PotionEffect(ModPotions.freeze, duration, 0, false, false));
     world.playSound(null, player.getPosition(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 2f);

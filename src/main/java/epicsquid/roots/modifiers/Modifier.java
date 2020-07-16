@@ -63,6 +63,16 @@ public class Modifier extends RegistryItem implements IModifier {
     return conflicts;
   }
 
+  private String identifier = null;
+
+  @Override
+  public String getIdentifier() {
+    if (identifier == null) {
+      identifier = getRegistryName().toString();
+    }
+    return identifier;
+  }
+
   @Override
   public void addConflict(IModifier supplier, boolean reverse) {
     conflicts.add(supplier);

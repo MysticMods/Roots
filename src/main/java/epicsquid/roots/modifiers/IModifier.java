@@ -26,6 +26,8 @@ public interface IModifier extends IRegistryItem {
 
   Set<IModifier> getConflicts();
 
+  String getIdentifier();
+
   default Supplier<IModifier> supply() {
     return () -> this;
   }
