@@ -72,7 +72,7 @@ public class SpellRadiance extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks) {
     if (!player.world.isRemote && player.ticksExisted % 2 == 0) {
       float distance = 32;
       RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0), player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)), false, true, true);
@@ -153,9 +153,9 @@ public class SpellRadiance extends SpellBase {
               if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
                   && e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
                 if (e.hurtTime <= 0 && !e.isDead) {
-                  e.attackEntityFrom(ModDamage.radiantDamageFrom(player), (float) (damage + damage * amplifier));
+                  e.attackEntityFrom(ModDamage.radiantDamageFrom(player), ampFloat(damage));
                   if (e.isEntityUndead()) {
-                    e.attackEntityFrom(ModDamage.radiantDamageFrom(player), (float) (undeadDamage + undeadDamage * amplifier));
+                    e.attackEntityFrom(ModDamage.radiantDamageFrom(player), ampFloat(undeadDamage));
                   }
                   e.setRevengeTarget(player);
                   e.setLastAttackedEntity(player);

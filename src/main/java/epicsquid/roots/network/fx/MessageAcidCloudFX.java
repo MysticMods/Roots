@@ -1,6 +1,7 @@
 package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellAcidCloud;
 import io.netty.buffer.ByteBuf;
@@ -21,12 +22,12 @@ public class MessageAcidCloudFX implements IMessage {
     super();
   }
 
-  public MessageAcidCloudFX(double x, double y, double z, boolean fire) {
+  public MessageAcidCloudFX(double x, double y, double z, StaffModifierInstanceList modifiers) {
     super();
     this.posX = x;
     this.posY = y;
     this.posZ = z;
-    this.fire = fire;
+    this.fire = false;
   }
 
   @Override

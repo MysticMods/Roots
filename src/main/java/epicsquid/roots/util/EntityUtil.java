@@ -1,12 +1,16 @@
 package epicsquid.roots.util;
 
+import epicsquid.roots.modifiers.IModifier;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityWitherSkull;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.Constants;
 
+import javax.annotation.Nullable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -72,5 +76,16 @@ public class EntityUtil {
     }
 
     return false;
+  }
+
+  @Nullable
+  public static NBTTagCompound getModifierData (Entity entity, IModifier modifier) {
+    NBTTagCompound data = entity.getEntityData();
+
+    if (data.hasKey(modifier.getIdentifier(), Constants.NBT.TAG_COMPOUND)) {
+      return data.getCompoundTag(modifier.getIdentifier());
+    }
+
+    return null;
   }
 }
