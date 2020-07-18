@@ -60,7 +60,7 @@ public class ItemLivingHoe extends ItemHoeBase implements ILivingRepair {
   @Override
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
     tooltip.add("");
-    tooltip.add(TextFormatting.GREEN + "Breaks plants in a large radius.");
+    tooltip.add(TextFormatting.GREEN + I18n.format("roots.tooltip.livinghoe");
     super.addInformation(stack, worldIn, tooltip, flagIn);
   }
 
