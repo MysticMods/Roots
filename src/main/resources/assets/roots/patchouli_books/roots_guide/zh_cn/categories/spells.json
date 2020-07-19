@@ -1,6 +1,6 @@
 {
-  "name": "咒术配方",
+  "name": "咒术",
   "sortnum" : 2,
-  "description": "咒术是一种通过法杖引导魔法的方式，辅以少许的药草作为咒术材料，你便可以释放出能够在世界中产生一定影响的咒术。$(br2)$(warning)你需要将你的咒术材料放入特制的$(apparatus/component_pouch)口袋$()中才能施放法术。",
+  "description": "将特定的原料放入$(l:apparatus/mortar)研钵和研杵$()里仔细研磨，咒术就这样被创造了出来。如果将这些研磨物注入到$(l:apparatus/staff)法杖$()中，你就可以将$(cat:herbs)植物$()视为施咒试剂，尽情地施放咒术了、$(br2)$(warning)如果你想要施放咒术，你需要将你的植物放入$(l:basics/pouch)袋子$()中。",
   "icon": "roots:staff"
 }

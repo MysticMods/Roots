@@ -1,13 +1,13 @@
 {
-  "name": "自然萌芽",
+  "name": "Germination",
   "icon": "roots:ritual_germination",
   "category": "rituals",
-  "advancement": "roots:spirit_herb",
+  "read_by_default": true,
   "flag": "roots:ritual_germination",
   "pages": [
     {
       "type": "text",
-      "text": "自然之力无比广博，即便是在那微小的种子中亦可发现其痕迹，尽管这股力量处于沉眠状态。萌芽仪式便可在效用期间激发植种与树苗内蕴藏的自然力量，缓慢地催发它们的生长。这一效果会在仪式进行时持续生效。$(br2)$(standing_stones) $(l:rituals/ritual_germination#multiblock)仪式需要用到石柱。$()"
+      "text": "The energy of nature is a huge thing, even when found in the tiniest seeds, though it may lay dormant there. This ritual finds that dormant energy and sparks germination, causing crops & trees to slowly grow as long as the ritual persists.$(br2)$(standing_stones) $(l:rituals/ritual_germination#multiblock)This ritual requires standing stones.$()"
     },
     {
       "type": "pyre_template",
@@ -19,17 +19,24 @@
       "enable_visualize": false,
       "multiblock": {
         "mapping": {
-          "0": "roots:bonfire",
+          "0": "roots:pyre",
           "R": "roots:runestone",
           "C": "roots:chiseled_runestone"
         },
         "pattern": [
-          ["       ","       ","       ","       ","       ","       ","       "],
-          ["   C   ","       ","       ","       ","       ","       ","   C   "],
+          ["   C   ","       ","       ","       ","       ","       ","       "],
+          ["   R   ","       ","       ","       ","       ","       ","   C   "],
           ["   R   ","       ","       ","       ","       ","       ","   R   "],
           ["   R   ","       ","       ","   0   ","       ","       ","   R   "]
         ]
       }
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "rituals/standing_stones"
+      ]
     }
   ]
 }

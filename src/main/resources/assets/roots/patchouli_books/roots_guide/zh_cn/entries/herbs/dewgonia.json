@@ -1,15 +1,15 @@
 {
-  "name": "露海棠",
+  "name": "Dewgonia",
   "icon": "roots:dewgonia",
   "category": "herbs",
-  "advancement": "roots:pyre",
-  
+  "read_by_default": true,
+  "turnin": "roots:dewgonia",
   "pages": [
     {
       "type": "spotlight",
       "item": "roots:dewgonia",
       "link_recipe": true,
-      "text": "露海棠错落于根茎上，通透水灵，但远没有其外表一般脆弱。$(br2)$(info)露海棠只会在$(l:resources/elemental_soil)水素土$()上生长。"
+      "text": "Dewgonia grows in stalks ending in flowers, which look similar to barely-contained water and yet are less delicate than they appear.$(br2)$(info) Can only be grown on a type of $(l:resources/elemental_soil)elemental soil.$()"
     },
     {
       "type": "ritual_crafting_template",

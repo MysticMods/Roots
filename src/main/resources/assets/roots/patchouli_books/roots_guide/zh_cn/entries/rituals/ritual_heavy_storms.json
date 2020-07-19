@@ -1,17 +1,42 @@
 {
-  "name": "暴风雨",
+  "name": "Heavy Storms",
   "icon": "roots:ritual_heavy_storms",
   "category": "rituals",
-  "advancement": "roots:cloud_berry",
+  "read_by_default": true,
   "flag": "roots:ritual_heavy_storms",
   "pages": [
     {
       "type": "text",
-      "text": "唤起强烈的季风，从而引起$(warning)在仪式持续过程中无法被平息的疾风暴雨，停息暴雨的唯一手段就是用 $(l:basics/bucket_of_water)水桶$()将仪式柴堆浇熄。$(br2)同样地，暴雨亦可扑灭所有着火生物身上的火焰。。"
+      "text": "Invokes the intensity of the monsoon, causing continuous rain that $(warning) cannot be disabled for the duration of the ritual, unless it is ended early with a $(l:apparatus/bucket_of_water)bucket of water$().$(br2) In addition, lightning will strike within the area of the ritual, and all nearby entities will be extinguished of fire.$(br2)$(standing_stones) $(l:rituals/ritual_heavy_storms#multiblock)This ritual requires standing stones.$()"
     },
     {
       "type": "pyre_template",
       "ritual": "ritual_heavy_storms"
+    },
+    {
+      "type": "multiblock",
+      "anchor": "multiblock",
+      "enable_visualize": false,
+      "multiblock": {
+        "mapping": {
+          "0": "roots:pyre",
+          "R": "roots:runestone",
+          "C": "roots:chiseled_runestone"
+        },
+        "pattern": [
+          ["   C   ","       ","       ","       ","       ","       ","       "],
+          ["   R   ","       ","       ","       ","       ","       ","   C   "],
+          ["   R   ","       ","       ","       ","       ","       ","   R   "],
+          ["   R   ","       ","       ","   0   ","       ","       ","   R   "]
+        ]
+      }
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "rituals/standing_stones"
+      ]
     }
   ]
 }

@@ -1,17 +1,37 @@
 {
-  "name": "绵延森流",
+  "name": "Spreading Forest",
   "icon": "roots:ritual_spreading_forest",
   "category": "rituals",
-  "advancement": "roots:spirit_herb",
+  "read_by_default": true,
   "flag": "roots:ritual_spreading_forest",
   "pages": [
     {
       "type": "text",
-      "text": "森林，一向是庄严神圣之所，这一仪式将使森林得以蓬勃蔓延。现存的树将自发抛散幼苗，任其扎根大地，茁壮成长。$(br2)$(warning) 需要已种植的树苗或成树来进行该仪式。$(br2)$(warning) 该仪式对诸如野木一类的树木无效。"
+      "text": "The forest is one of the most sacred places to be, and this ritual allows forests to spread. Existing trees will shed saplings, and those saplings will be planted and grown.$(br2)$(warning) A sapling or fully grown tree nearby is required to start the process.$(br2)$(warning) Some trees, such as Wildwood trees, are unaffected by this ritual.$(br2)$(standing_stones) $(l:rituals/ritual_spreading_forest#multiblock)This ritual requires standing stones.$()"
     },
     {
       "type": "pyre_template",
       "ritual": "ritual_spreading_forest"
+    },
+    {
+      "type": "multiblock",
+      "anchor": "multiblock",
+      "enable_visualize": false,
+      "multiblock": {
+        "mapping": {
+          "0": "roots:pyre",
+          "C": "roots:runed_jungle",
+          "R": "minecraft:log[variant=jungle]",
+          "L": "minecraft:log[variant=spruce]",
+          "W": "roots:runed_spruce"
+        },
+        "pattern": [
+          ["       ","       ","   W   ","       ","   C   ","       ","       "],
+          ["       ","       ","   L   ","       ","   R   ","       ","       "],
+          ["       ","       ","   L   ","       ","   R   ","       ","       "],
+          ["       ","       ","   L   ","   0   ","   R   ","       ","       "]
+        ]
+      }
     }
   ]
 }

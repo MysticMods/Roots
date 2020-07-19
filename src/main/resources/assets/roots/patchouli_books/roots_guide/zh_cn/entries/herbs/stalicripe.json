@@ -1,14 +1,15 @@
 {
-  "name": "石笋",
+  "name": "Stalicripe",
   "icon": "roots:stalicripe",
   "category": "herbs",
-  "advancement": "roots:pyre",
+  "read_by_default": true,
+  "turnin": "roots:stalicripe",
   "pages": [
     {
       "type": "spotlight",
       "item": "roots:stalicripe",
       "link_recipe": true,
-      "text": "看上去就相当坚硬粗糙的植物- 看上去就像是刚被砍掉一小块的的石头的粗糙截面。$(br2)$(info)只有种在 $(l:resources/elemental_soil)地素土$()上才能生长。"
+      "text": "A rough, rugged plant that feels rough - almost the texture of recently hewn stone.$(br2)$(info) Can only be grown on a type of $(l:resources/elemental_soil)elemental soil.$()"
     },
     {
       "type": "ritual_crafting_template",

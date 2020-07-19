@@ -1,13 +1,13 @@
 {
-  "name": "动物采收",
+  "name": "Animal Harvest",
   "icon": "roots:ritual_animal_harvest",
   "category": "rituals",
-  "advancement": "roots:wildewheet",
+  "read_by_default": true,
   "flag": "roots:ritual_animal_harvest",
   "pages": [
     {
       "type": "text",
-      "text": "站在仪式附近的动物会愿意放弃掉自身的部分肉体精华，且这一过程不会对动物造成伤害。$(info)受到仪式影响的动物会短暂地发光。$(br2)$(standing_stones) $(l:rituals/ritual_animal_harvest#multiblock)这一仪式需要使用石柱。$()"
+      "text": "Animals in the vicinity of the ritual will willingly give up part of their physical essence, although suffering no harm to themselves in the process. $(info) Affected animals will glow briefly.$(br2)$(standing_stones) $(l:rituals/ritual_animal_harvest#multiblock)This ritual requires standing stones.$()"
     },
     {
       "type": "pyre_template",
@@ -18,7 +18,7 @@
       "anchor": "multiblock",
       "multiblock": {
         "mapping": {
-          "0": "roots:bonfire",
+          "0": "roots:pyre",
           "R": "roots:runestone",
           "C": "roots:chiseled_runestone"
         },
@@ -28,6 +28,13 @@
           ["   R   ","       ","       ","R  0  R","       ","       ","       "]
         ]
       }
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "rituals/standing_stones"
+      ]
     }
   ]
 }

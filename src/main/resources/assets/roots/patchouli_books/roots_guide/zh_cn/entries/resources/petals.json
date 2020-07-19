@@ -1,12 +1,13 @@
 {
-  "name": "花瓣",
+  "name": "Petals",
   "icon": "roots:petals",
   "category": "resources",
+  "read_by_default": true,
   "pages": [
     {
       "type": "spotlight",
       "item": "roots:petals",
-      "text": "虽然研杵与研钵是一种用于捣碎东西的钝器，但是只要你足够小心，你也可以用它们来将花朵上的花瓣分离下来，摘下来的花瓣将会被轻轻捣碎，以释放出它们蕴含的自然精华。"
+      "text": "While the mortar & pestle is a blunt instrument often used for crushing, it is possible to delicately separate the petals from the stems of various flowers, and then gently bruise them to release natural essence."
     },
     {
       "type": "mortar_template",

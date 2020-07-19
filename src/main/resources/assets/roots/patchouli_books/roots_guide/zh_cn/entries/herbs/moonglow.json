@@ -1,15 +1,15 @@
 {
-  "name": "萤月之叶",
+  "name": "Moonglow Leaf",
   "icon": "roots:moonglow_leaf",
   "category": "herbs",
-  "advancement": "roots:pyre",
-  
+  "read_by_default": true,
+  "turnin": "roots:moonglow_leaf",
   "pages": [
     {
       "type": "spotlight",
       "item": "roots:moonglow_leaf",
       "link_recipe": true,
-      "text": "初见一瞥，萤月于夜色浓郁之处静静生长。一些观察细致的德鲁伊指出，萤月草在月亮朦胧黯淡之时完全不会发光。$(br2)$(info)萤月如同普通作物那样，你可以在耕地上种植并收获它。"
+      "text": "Moonglow, at a first glance, seems to glow in the dark at night; observant mages have noted that it actually emits no light at all if the moon is obscured.$(br2)$(info) Moonglow seeds can be obtained and planted on normal farmland."
     },
     {
       "type": "ritual_crafting_template",

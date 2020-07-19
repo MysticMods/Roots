@@ -1,13 +1,13 @@
 {
-  "name": "野火",
+  "name": "Wildfire",
   "icon": "roots:spell_dust",
   "category": "spells",
-  "advancement": "roots:infernal_bulb",
+  "read_by_default": true,
   "flag": "roots:spell_wild_fire",
   "pages": [
     {
       "type": "text",
-      "text": "引导时，召唤出一道强力的火焰射流。$(warning) 火焰射流会伤害所有它所经过的生物，并且会使得它们着火。"
+      "text": "Summons forth a powerful jet of flame while channeled, $(warning) dealing fire damage to and setting on fire any creature which it encounters."
     },
     {
       "type": "spell_template",

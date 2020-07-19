@@ -1,13 +1,13 @@
 {
-    "name": "生命汲取",
+    "name": "Life Drain",
     "icon": "roots:spell_dust",
     "category": "spells",
-    "advancement": "roots:baffle_cap",
+    "read_by_default": true,
     "flag": "roots:spell_life_drain",
     "pages": [
       {
         "type": "text",
-        "text": "从别的生物体内汲取生命精华，在此过程中你会回复生命值。需要注意的是，这一咒法的治愈量会远低于伤害量。$(br2)此外，每次咒术的施放都有可能会为目标的灵魂带来凋零效果，$(warning) 这会进一步对目标造成伤害。(凋零所造成的伤害不会治愈你)"
+        "text": "Drains the life essence from other creatures, healing you in the process. The amount healed is considerably less than the damage done.$(br2)In addition, each use of the spell has a chance to wither the soul of the target, $(warning) causing further damage (which does not heal you)."
       },
       {
         "type": "spell_template",

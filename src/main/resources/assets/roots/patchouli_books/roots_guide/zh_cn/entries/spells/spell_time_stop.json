@@ -1,13 +1,13 @@
 {
-  "name": "时间停止",
+  "name": "Time Stop",
   "icon": "roots:spell_dust",
   "category": "spells",
-  "advancement": "roots:moonglow_leaf",
+  "read_by_default": true,
   "flag": "roots:spell_time_stop",
   "pages": [
     {
       "type": "text",
-      "text": "暂停施术者周围的时间，施术者本人不受影响。"
+      "text": "Temporarily halts the progress of time for all creatures in the vicinity of the caster, excluding the caster."
     },
     {
       "type": "spell_template",

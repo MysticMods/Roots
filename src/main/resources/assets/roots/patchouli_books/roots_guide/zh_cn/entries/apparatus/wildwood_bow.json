@@ -1,13 +1,12 @@
 {
-    "name": "野木弓",
+    "name": "Wildwood Bow",
     "icon": "roots:wildwood_bow",
     "category": "apparatus",
-    "advancement": "roots:wildwood",
-    "secret": true,
+    "read_by_default": true,
     "pages": [
       {
         "type": "text",
-        "text": "以野木进行强化，这把长弓是所有冒险家的趁手之物。"
+        "text": "Reinforced with wildwood, this bow is a hardy tool for any adventurer."
       },
       {
         "type": "fey_crafting_template",

@@ -1,14 +1,13 @@
 {
-    "name": "药师口袋",
+    "name": "Apothecary Pouch",
     "icon": "roots:apothecary_pouch",
+    "read_by_default": true,
     "category": "apparatus",
-    "advancement": "roots:spirit_herb",
-    "secret": true,
     "pages": [
       {
         "type": "spotlight",
         "item": "roots:apothecary_pouch",
-        "text": "药师口袋是药草口袋的升级版本，它在容纳量以及实用性上有了巨大的提升: 口袋本身可以装下比原先更多的东西。$(br2)药草被分门别类地放在不同的玻璃管内，以防相互混杂在一起，同时这也提升了它的药草储存数量。"
+        "text": "A vast improvement over the component pouch in capacity and usefulness: the pouch itself holds many more items.$(br2)$(info) If your inventory contains multiple pouches of any type, all are considered."
       },
       {
         "type": "fey_crafting_template",
@@ -18,6 +17,7 @@
         "type": "relations",
         "entries": [
           "apparatus/component_pouch",
+          "apparatus/herb_pouch",
           "basics/spells",
           "herbs/spirit_herb",
           "resources/wildwood"

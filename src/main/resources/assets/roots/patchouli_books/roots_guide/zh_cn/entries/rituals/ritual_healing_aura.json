@@ -1,13 +1,13 @@
 {
-  "name": "治疗光环",
+  "name": "Healing Aura",
   "icon": "roots:ritual_healing_aura",
   "category": "rituals",
-  "advancement": "roots:pyre",
+  "read_by_default": true,
   "flag": "roots:ritual_healing_aura",
   "pages": [
     {
       "type": "text",
-      "text": "这一仪式的持续时间很短，但是受到影响仪式影响的生物的生命值将会完全恢复。$(br2)$(warning)敌对生物也会受到治疗，注意！$(br2)$(standing_stones) $(l:rituals/ritual_healing_aura#multiblock)本仪式需要使用到石柱。$()"
+      "text": "Nearby players are slowly healed, while creatures are healed much more rapidly while in proximity of the ritual.$(br2)$(info) Hostile creatures are not affected.$(br2)$(standing_stones) $(l:rituals/ritual_healing_aura#multiblock)This ritual requires standing stones.$()"
     },
     {
       "type": "pyre_template",
@@ -18,19 +18,26 @@
       "anchor": "multiblock",
       "multiblock": {
         "mapping": {
-          "0": "roots:bonfire",
+          "0": "roots:pyre",
           "R": "roots:runestone",
           "C": "roots:chiseled_runestone",
-          "L": "minecraft:leaves[variant=birch]",
-          "W": "minecraft:log[variant=birch]"
+          "W": "roots:runed_birch",
+          "L": "minecraft:log[variant=birch]"
         },
         "pattern": [
-          ["       ","       ","       ","       ","       ","   L   ","       "],
-          ["       ","   C   ","       ","       ","  LLL  ","  LLL  ","  LLL  "],
-          ["       ","   R   ","       ","       ","       ","   W   ","       "],
-          ["       ","   R   ","       ","   0   ","       ","   W   ","       "]
+          ["       ","       ","       ","       ","       ","       ","       "],
+          ["       ","   C   ","       ","       ","       ","   W   ","       "],
+          ["       ","   R   ","       ","       ","       ","   L   ","       "],
+          ["       ","   R   ","       ","   0   ","       ","   L   ","       "]
         ]
       }
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "rituals/standing_stones"
+      ]
     }
   ]
 }

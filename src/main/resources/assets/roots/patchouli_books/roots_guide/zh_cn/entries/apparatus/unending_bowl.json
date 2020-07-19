@@ -1,13 +1,13 @@
 {
-  "name": "无尽碗",
+  "name": "Unending Bowl",
   "icon": "roots:unending_bowl",
   "category": "apparatus",
-  "advancement": "roots:dewgonia",
+  "read_by_default": true,
   "pages": [
     {
       "type": "spotlight",
       "item": "roots:unending_bowl",
-      "text": "一旦放置在世界中，无尽碗就会如同它的名字所形容的，将会提供无穷无尽的水，无论你使用多少，都无法耗竭。$(br2)此外，那些装有了水的容器也可以将它们所储存的水排入碗内。 $(info)碗内的水也可以通过常规方法输入或者输出。"
+      "text": "Once placed, the unending bowl, as its name suggests, will never run out of water, no matter how much is taken from it.$(br2)In addition, containers filled with water can also be emptied into it, and $(info) water can be piped in or out through standard methods."
     },
     {
       "type": "fey_crafting_template",
@@ -16,7 +16,9 @@
     {
       "type": "relations",
       "entries": [
-        "herbs/dewgonia"
+        "herbs/dewgonia",
+        "resources/runestone",
+        "apparatus/runestone"
       ]
     }
   ]

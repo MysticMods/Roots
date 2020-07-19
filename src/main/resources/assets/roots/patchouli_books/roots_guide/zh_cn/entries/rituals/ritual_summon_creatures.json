@@ -1,13 +1,13 @@
 {
-  "name": "召唤生物",
+  "name": "Summon Creatures",
   "icon": "roots:ritual_summon_creatures",
   "category": "rituals",
-  "advancement": "roots:wildewheet",
+  "read_by_default": true,
   "flag": "roots:ritual_summon_creatures",
   "pages": [
     {
       "type": "text",
-      "text": "从彼岸中召回死去的灵魂，并将其将其遣返至世界中的一具肉体内。被召来的生物的种类，取决于附近的$(l:apparatus/offering_plate)供奉盘$()中摆放的物品，($(l:rituals/ritual_summon_creatures#multiblock)参看下面的布局$())。$(br2)$(warning) 遗憾的是，由于本书的限制，完整的生物以及物品列表需要在JEI中查看。"
+      "text": "Summons a creature's spirit from beyond and returns it to a fleshly body in this world. The creature summoned is determined by what items are placed on various $(l:apparatus/catalyst_plate)catalyst plates$() placed nearby ($(l:rituals/ritual_summon_creatures#multiblock)see layout$()).$(br2)$(warning) Unfortunately, due to limitations of this guide, a $(uses:roots:ritual_summon_creatures)complete list of creatures and items can only be found in JEI$().$(br2)$(standing_stones) $(l:rituals/ritual_summon_creatures#multiblock)This ritual requires standing stones.$()"
     },
     {
       "type": "pyre_template",
@@ -18,24 +18,28 @@
       "anchor": "multiblock",
       "multiblock": {
         "mapping": {
-          "0": "roots:bonfire",
-          "W": "roots:offertory_plate[facing=west]",
-          "E": "roots:offertory_plate[facing=east]",
-          "N": "roots:offertory_plate[facing=north]",
-          "S": "roots:offertory_plate[facing=south]"
+          "0": "roots:pyre",
+          "W": "roots:catalyst_plate[facing=west]",
+          "E": "roots:catalyst_plate[facing=east]",
+          "N": "roots:catalyst_plate[facing=north]",
+          "S": "roots:catalyst_plate[facing=south]",
+          "R": "roots:runed_birch",
+          "C": "minecraft:log[variant=birch]"
         },
         "pattern": [
-          ["       ","       ","       ","       ","       ","       ","       "],
-          ["       ","       ","       ","       ","       ","       ","       "],
-          ["   W   ","       ","       ","N  0  S","       ","       ","   E   "]
+          ["       ","   R   ","       ","       ","       ","       ","       "],
+          ["       ","   C   ","       ","       ","       ","       ","       "],
+          ["   W   ","   C   ","       ","N  0  S","       ","       ","   E   "]
         ]
       },
-      "text": "最多只能在周围摆放10个供奉盘(最远距离为6格)。"
+      "text": "Up to ten Catalyst Plates may be placed nearby (up to six blocks away)."
     },
     {
       "type": "relations",
       "entries": [
-        "apparatus/offering_plate"
+        "apparatus/catalyst_plate",
+        "apparatus/reinforced_catalyst_plate",
+        "apparatus/runic_shears"
       ]
     }
   ]
