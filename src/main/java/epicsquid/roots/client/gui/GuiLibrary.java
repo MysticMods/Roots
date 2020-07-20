@@ -127,7 +127,7 @@ public class GuiLibrary extends GuiContainer {
       }
       if (info != null) {
         StaffModifierInstance instance = info.get();
-        if (instance != null) {
+        if (instance != null && !instance.isDisabled()) {
           tooltip.add("");
           tooltip.add(instance.describeName());
           tooltip.add(instance.describeFunction());
