@@ -6,10 +6,7 @@ import epicsquid.roots.api.Herb;
 import epicsquid.roots.entity.spell.EntitySpellBase;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.modifiers.BaseModifiers;
-import epicsquid.roots.modifiers.CostType;
-import epicsquid.roots.modifiers.IModifierCost;
-import epicsquid.roots.modifiers.Modifier;
+import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstanceList;
@@ -66,6 +63,8 @@ public abstract class SpellBase extends RegistryItem implements SpellMulitiplier
   private float[] firstColours;
   private float[] secondColours;
 
+  protected IModifier poison, fire, slow, paralysis, peaceful;
+
   protected Buff speedy;
   protected Buff amplifier;
 
@@ -90,6 +89,61 @@ public abstract class SpellBase extends RegistryItem implements SpellMulitiplier
     this.secondColours = new float[]{r2, g2, b2};
   }
 
+  public void setPoison(IModifier poison) {
+    this.poison = poison;
+  }
+
+  public void setFire(IModifier fire) {
+    this.fire = fire;
+  }
+
+  public void setSlow(IModifier slow) {
+    this.slow = slow;
+  }
+
+  public void setParalysis(IModifier paralysis) {
+    this.paralysis = paralysis;
+  }
+
+  public void setPeaceful(IModifier peaceful) {
+    this.peaceful = peaceful;
+  }
+
+  protected boolean hasModifierEnabled (IModifier modifier, StaffModifierInstanceList modifiers) {
+    if (modifier == null) {
+      return false;
+    }
+    StaffModifierInstance instance = modifiers.get(modifier);
+    if (instance == null) {
+      return false;
+    }
+    if (instance.isApplied() && instance.isEnabled()) {
+      return true;
+    }
+
+    return false;
+  }
+
+  public boolean poison (StaffModifierInstanceList modifiers) {
+    return hasModifierEnabled(poison, modifiers);
+  }
+
+  public boolean fire(StaffModifierInstanceList modifiers) {
+    return hasModifierEnabled(fire, modifiers);
+  }
+
+  public boolean slow(StaffModifierInstanceList modifiers) {
+    return hasModifierEnabled(slow, modifiers);
+  }
+
+  public boolean paralysis(StaffModifierInstanceList modifiers) {
+    return hasModifierEnabled(paralysis, modifiers);
+  }
+
+  public boolean peaceful(StaffModifierInstanceList modifiers) {
+    return hasModifierEnabled(peaceful, modifiers);
+  }
+
   public float[] getFirstColours() {
     return firstColours;
   }
@@ -106,10 +160,6 @@ public abstract class SpellBase extends RegistryItem implements SpellMulitiplier
 
   public void setDisabled(boolean disabled) {
     this.disabled = disabled;
-  }
-
-  public boolean hasModules() {
-    return !acceptedModifiers.isEmpty();
   }
 
   public PropertyTable getProperties() {

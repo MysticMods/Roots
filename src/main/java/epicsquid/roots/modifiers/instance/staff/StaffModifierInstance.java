@@ -30,7 +30,7 @@ public class StaffModifierInstance extends LibraryModifierInstance {
   }
 
   public boolean isEnabled() {
-    return enabled;
+    return enabled && !isDisabled();
   }
 
   public void setEnabled(boolean enabled) {

@@ -12,6 +12,8 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 public interface IModifier extends IRegistryItem {
+  boolean isDisabled();
+
   String getTranslationKey();
 
   String getFormatting();

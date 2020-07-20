@@ -153,7 +153,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipes(spells, SPELL_COSTS);
     registry.addRecipes(RitualRegistry.ritualRegistry.values(), RITUAL);
     registry.addRecipes(ModRecipes.getFeyCraftingRecipes().values(), FEY_CRAFTING);
-    registry.addRecipes(spells.stream().filter(SpellBase::hasModules).collect(Collectors.toList()), SPELL_MODIFIERS);
+    registry.addRecipes(spells, SPELL_MODIFIERS);
     registry.addRecipes(ModRecipes.getBarkRecipes(), BARK_CARVING);
     registry.addRecipes(MossRecipe.getRecipeList(), TERRA_MOSS);
     registry.addRecipes(ModRecipes.getSummonCreatureEntries(), SUMMON_CREATURES);

@@ -19,7 +19,7 @@ public interface IModifierList<T extends IModifier, V extends NBTBase> extends I
   T getByCore(IModifierCore core);
 
   @Nullable
-  T get(Modifier modifier);
+  T get(IModifier modifier);
 
   Collection<T> getModifiers();
 
