@@ -24,6 +24,11 @@ public class Modifier extends RegistryItem implements IModifier {
   }
 
   @Override
+  public boolean isDisabled() {
+    return ModifierRegistry.isDisabled(this);
+  }
+
+  @Override
   public String getTranslationKey() {
     ResourceLocation rl = getRegistryName();
     if (rl.getNamespace().equals(Roots.MODID)) {

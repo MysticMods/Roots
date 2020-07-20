@@ -33,12 +33,17 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
   }
 
   @Override
+  public boolean isDisabled() {
+    return modifier.isDisabled();
+  }
+
+  @Override
   public Modifier getModifier() {
     return modifier;
   }
 
   public boolean isApplied() {
-    return applied;
+    return applied && !isDisabled();
   }
 
   public void setApplied() {

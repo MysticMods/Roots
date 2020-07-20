@@ -2,10 +2,7 @@ package epicsquid.roots.modifiers.instance.base;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
-import epicsquid.roots.modifiers.CostType;
-import epicsquid.roots.modifiers.IModifierCore;
-import epicsquid.roots.modifiers.IModifierList;
-import epicsquid.roots.modifiers.Modifier;
+import epicsquid.roots.modifiers.*;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.AbstractSpellInfo;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
@@ -67,7 +64,7 @@ public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> i
 
   @Override
   @Nullable
-  public T get(Modifier modifier) {
+  public T get(IModifier modifier) {
     for (T mi : internal) {
       if (mi.getModifier().equals(modifier)) {
         return mi;

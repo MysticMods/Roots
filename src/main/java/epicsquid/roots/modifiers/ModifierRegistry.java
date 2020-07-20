@@ -3,9 +3,7 @@ package epicsquid.roots.modifiers;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 // TODO:
 // - Don't worry about clearing entity data
@@ -19,10 +17,27 @@ import java.util.Map;
 public class ModifierRegistry {
   private static Map<ResourceLocation, Modifier> map = new HashMap<>();
   private static boolean initialized = false;
+  public static Set<ResourceLocation> disabledModifiers = new HashSet<>();
 
   @Nullable
   public static Modifier get(ResourceLocation name) {
     return map.get(name);
+  }
+
+  public static void disable (IModifier modifier) {
+    if (modifier == null) {
+      return;
+    }
+
+    disabledModifiers.add(modifier.getRegistryName());
+  }
+
+  public static boolean isDisabled (IModifier modifier) {
+    if (modifier == null) {
+      return false;
+    }
+
+    return disabledModifiers.contains(modifier.getRegistryName());
   }
 
   public static Modifier register(Modifier modifier) {
