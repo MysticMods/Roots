@@ -89,6 +89,9 @@ public class StaffModifierInstance extends LibraryModifierInstance {
 
     List<StaffModifierInstance> conflicting = new ArrayList<>();
     for (StaffModifierInstance modifierInstance : modifiers) {
+      if (modifierInstance.isDisabled()) {
+        continue;
+      }
       if (modifierInstance.isEnabled() && modifierInstance.isApplied() && conflicts(modifierInstance)) {
         conflicting.add(modifierInstance);
       }

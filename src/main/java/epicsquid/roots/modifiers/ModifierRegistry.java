@@ -16,8 +16,7 @@ import java.util.*;
 
 public class ModifierRegistry {
   private static Map<ResourceLocation, Modifier> map = new HashMap<>();
-  private static boolean initialized = false;
-  public static Set<ResourceLocation> disabledModifiers = new HashSet<>();
+  private static Set<ResourceLocation> disabledModifiers = new HashSet<>();
 
   @Nullable
   public static Modifier get(ResourceLocation name) {
@@ -54,13 +53,5 @@ public class ModifierRegistry {
 
   public static Collection<Modifier> getModifiers() {
     return map.values();
-  }
-
-  public static void initialize() {
-    initialized = true;
-  }
-
-  public static boolean initialized() {
-    return initialized;
   }
 }

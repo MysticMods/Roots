@@ -74,7 +74,7 @@ public class SlotLibraryModifierInfo extends Slot {
     if (info == null) {
       return false;
     }
-    return !info.isEnabled();
+    return !info.isEnabled() || info.isDisabled();
   }
 
   public boolean isApplied() {
@@ -82,12 +82,12 @@ public class SlotLibraryModifierInfo extends Slot {
     if (info == null) {
       return false;
     }
-    return info.isApplied();
+    return info.isApplied() && !info.isDisabled();
   }
 
   public boolean isApplicable() {
     StaffModifierInstance info = get();
-    return info != null;
+    return info != null && !info.isDisabled();
   }
 
   public boolean isConflicting(StaffModifierInstanceList modifiers) {
