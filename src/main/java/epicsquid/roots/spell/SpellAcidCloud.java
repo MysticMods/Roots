@@ -11,6 +11,7 @@ import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageAcidCloudFX;
 import epicsquid.roots.properties.Property;
+import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -67,6 +68,8 @@ public class SpellAcidCloud extends SpellBase {
     super(name, TextFormatting.DARK_GREEN, 80f / 255f, 160f / 255f, 40f / 255f, 64f / 255f, 96f / 255f, 32f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_POISON_DURATION, PROP_FIRE_DURATION, PROP_POISON_AMPLIFICATION);
     acceptsModifiers(PERESKIA, WILDEWHEET, WILDROOT, MOONGLOW_LEAF, SPIRIT_HERB, TERRA_MOSS, CLOUD_BERRY, INFERNAL_BULB, STALICRIPE, DEWGONIA);
+    setFire(INFERNAL_BULB);
+
   }
 
   @Override
@@ -87,19 +90,20 @@ public class SpellAcidCloud extends SpellBase {
       List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class,
           new AxisAlignedBB(player.posX - 4.0, player.posY - 1.0, player.posZ - 4.0, player.posX + 4.0, player.posY + 3.0, player.posZ + 4.0));
       for (EntityLivingBase e : entities) {
-        if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
-            && !e.getUniqueID().equals(player.getUniqueID())) {
+        if (e != player && !(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
           if (e.hurtTime <= 0 && !e.isDead) {
-            if (fire != null && fire.isEnabled()) {
-              e.attackEntityFrom(ModDamage.fireDamageFrom(player), ampFloat(damage));
+            if (peaceful(modifiers) && !EntityUtil.isHostile(e)) {
+              continue;
+            }
+            if (fire(modifiers)) {
+              e.attackEntityFrom(ModDamage.fireDamageFrom(player), ampFloat(damage)/2);
+              e.attackEntityFrom(DamageSource.causeMobDamage(player), ampFloat(damage)/2);
+              e.setFire(fireDuration);
             } else {
               e.attackEntityFrom(DamageSource.causeMobDamage(player), ampFloat(damage));
             }
             if (SpellConfig.spellFeaturesCategory.acidCloudPoisoningEffect) {
               e.addPotionEffect(new PotionEffect(MobEffects.POISON, ampInt(poisonDuration), poisonAmplification));
-            }
-            if (fire != null && fire.isEnabled()) {
-              e.setFire(fireDuration);
             }
             e.setRevengeTarget(player);
             e.setLastAttackedEntity(player);
