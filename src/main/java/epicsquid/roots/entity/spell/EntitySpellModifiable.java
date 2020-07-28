@@ -22,12 +22,12 @@ public abstract class EntitySpellModifiable<T extends SpellBase> extends Entity 
   protected T instance;
   protected StaffModifierInstanceList modifiers;
 
-  public EntitySpellModifiable(World worldIn, T instance) {
+  public EntitySpellModifiable(World worldIn, T instance, int duration) {
     super(worldIn);
     this.instance = instance;
     this.setInvisible(true);
     this.setSize(1, 1);
-    getDataManager().register(lifetime, 12);
+    getDataManager().register(lifetime, duration);
   }
 
   public void setModifiers(StaffModifierInstanceList modifiers) {
