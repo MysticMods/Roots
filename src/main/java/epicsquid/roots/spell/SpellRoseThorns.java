@@ -52,6 +52,7 @@ public class SpellRoseThorns extends SpellBase {
     super(name, TextFormatting.RED, 255f / 255f, 32f / 255f, 64f / 255f, 32f / 255f, 255f / 255f, 96f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_SLOWNESS_AMPLIFIER, PROP_SLOWNESS_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_DURATION);
     acceptsModifiers(PERESKIA, WILDEWHEET, WILDROOT, MOONGLOW_LEAF, SPIRIT_HERB, BAFFLE_CAP, CLOUD_BERRY, INFERNAL_BULB, STALICRIPE, DEWGONIA);
+    setPeaceful(WILDEWHEET);
   }
 
   @Override
@@ -70,6 +71,7 @@ public class SpellRoseThorns extends SpellBase {
     if (!player.world.isRemote) {
       EntityThornTrap trap = new EntityThornTrap(player.world, ampFloat(damage), ampInt(duration), ampInt(slownessDuration), slownessAmplifier, poisonDuration, poisonAmplifier);
       trap.setPlayer(player.getUniqueID());
+      trap.setModifiers(modifiers);
       trap.setPosition(player.posX + player.getLookVec().x, player.posY + player.getEyeHeight() + player.getLookVec().y, player.posZ + player.getLookVec().z);
       trap.motionX = player.getLookVec().x * 0.75f;
       trap.motionY = player.getLookVec().y * 0.75f;

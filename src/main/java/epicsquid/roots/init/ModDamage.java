@@ -29,6 +29,18 @@ public class ModDamage {
 
   public static DamageSource BLEED_DAMAGE = (new DamageSource("bleed_damage")).setDamageBypassesArmor();
 
+  public static DamageSource ROSE_DAMAGE = (new DamageSource("rose_thorns")).setDamageBypassesArmor();
+
+  public static DamageSource roseDamageFrom (@Nullable EntityPlayer player) {
+    DamageSource source;
+    if (player == null) {
+      return ROSE_DAMAGE;
+    } else {
+      source = new EntityDamageSource("rose_thorns", player).setDamageBypassesArmor();
+    }
+    return source;
+  }
+
   public static DamageSource radiantDamageFrom(@Nullable EntityPlayer player) {
     DamageSource source;
     if (player == null) {
