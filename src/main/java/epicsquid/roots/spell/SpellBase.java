@@ -109,7 +109,7 @@ public abstract class SpellBase extends RegistryItem implements SpellMulitiplier
     this.peaceful = peaceful;
   }
 
-  protected boolean hasModifierEnabled (IModifier modifier, StaffModifierInstanceList modifiers) {
+  protected boolean has(IModifier modifier, StaffModifierInstanceList modifiers) {
     if (modifier == null) {
       return false;
     }
@@ -125,23 +125,23 @@ public abstract class SpellBase extends RegistryItem implements SpellMulitiplier
   }
 
   public boolean poison (StaffModifierInstanceList modifiers) {
-    return hasModifierEnabled(poison, modifiers);
+    return has(poison, modifiers);
   }
 
   public boolean fire(StaffModifierInstanceList modifiers) {
-    return hasModifierEnabled(fire, modifiers);
+    return has(fire, modifiers);
   }
 
   public boolean slow(StaffModifierInstanceList modifiers) {
-    return hasModifierEnabled(slow, modifiers);
+    return has(slow, modifiers);
   }
 
   public boolean paralysis(StaffModifierInstanceList modifiers) {
-    return hasModifierEnabled(paralysis, modifiers);
+    return has(paralysis, modifiers);
   }
 
   public boolean peaceful(StaffModifierInstanceList modifiers) {
-    return hasModifierEnabled(peaceful, modifiers);
+    return has(peaceful, modifiers);
   }
 
   public float[] getFirstColours() {
