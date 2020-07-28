@@ -1,6 +1,7 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.recipe.Ingredients;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
@@ -18,13 +19,20 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
 
+import java.util.List;
 import java.util.Random;
 
 public class SpellGrowthInfusion extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(0);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("terra_moss", 0.08));
-  public static Property<Integer> PROP_TICK_COUNT = new Property<>("tick_count", 1).setDescription("the number of times a random chance to grow the crop is applied every tick");
+  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 7).setDescription("radius on the X axis of the area in which the spell takes effect");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 7).setDescription("radius on the Y axis of the area in which the spell takes effect");
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 7).setDescription("radius on the Z axis of the area in which the spell takes effect");
+  public static Property<Integer> PROP_RADIUS_BOOST = new Property<>("radius_boost", 8).setDescription("how much the radius of the spell is boosted by with each rampant growth modifier");
+  public static Property<Integer> PROP_TICKS = new Property<>("ticks", 3).setDescription("the number of times a random chance to grow the crop is applied every tick");
+  public static Property<Integer> PROP_COUNT = new Property<>("count", 2).setDescription("the number of crops selected to be grown each tick");
+  public static Property<Integer> PROP_ADDITIONAL_COUNT = new Property<>("additional_count", 4).setDescription("an additional number of crops from zero to the specified value minus 1 added to the default count");
 
   public static Modifier PERESKIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "rampant_growth_i"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier WILDEWHEET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "rampant_breeding"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -47,11 +55,11 @@ public class SpellGrowthInfusion extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_growth_infusion");
   public static SpellGrowthInfusion instance = new SpellGrowthInfusion(spellName);
 
-  private int tickCount;
+  private int radius_x, radius_y, radius_z, ticks, additionalCount, count, radius_boost;
 
   public SpellGrowthInfusion(ResourceLocation name) {
     super(name, TextFormatting.YELLOW, 48f / 255f, 255f / 255f, 48f / 255f, 192f / 255f, 255f / 255f, 192f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_TICK_COUNT);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_TICKS, PROP_COUNT, PROP_ADDITIONAL_COUNT, PROP_RADIUS_BOOST);
     acceptsModifiers(PERESKIA, WILDEWHEET, WILDROOT, MOONGLOW_LEAF, SPIRIT_HERB, BAFFLE_CAP, CLOUD_BERRY, INFERNAL_BULB, STALICRIPE, DEWGONIA);
   }
 
@@ -68,18 +76,44 @@ public class SpellGrowthInfusion extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks) {
-    RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0), player.getLookVec().scale(8.0f).add(player.getPositionVector().add(0, player.getEyeHeight(), 0)));
-    if (result != null) {
-      if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
-        BlockPos pos = result.getBlockPos();
-        IBlockState state = player.world.getBlockState(pos);
-        if (Growth.canGrow(player.world, pos, state)) {
-          if (!player.world.isRemote) {
-            for (int i = 0; i < ampInt(tickCount); i++) {
-              state.getBlock().randomTick(player.world, pos, state, new Random());
+    boolean aoe = false;
+    if (has(PERESKIA, modifiers) || has(SPIRIT_HERB, modifiers)) {
+      aoe = true;
+    }
+    int boost = 0;
+    if (aoe && (has(PERESKIA, modifiers) || has(SPIRIT_HERB, modifiers))) {
+      boost = radius_boost;
+    }
+    if (aoe) {
+      List<BlockPos> positions = Growth.collect(player.world, player.getPosition(), radius_x + boost, radius_y + boost, radius_z + boost);
+      if (positions.isEmpty()) return false;
+      if (!player.world.isRemote) {
+        for (int i = 0; i < ampInt(count) + player.world.rand.nextInt((ampSubInt(additionalCount))); i++) {
+          BlockPos pos = positions.get(player.world.rand.nextInt(positions.size()));
+          IBlockState state = player.world.getBlockState(pos);
+          for (int j = 0; j < ticks; j++) {
+            state.getBlock().randomTick(player.world, pos, state, Util.rand);
+          }
+          if (player.world.rand.nextInt(3) == 0) {
+            //PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);
+          }
+        }
+      }
+      return true;
+    } else {
+      RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0), player.getLookVec().scale(8.0f).add(player.getPositionVector().add(0, player.getEyeHeight(), 0)));
+      if (result != null) {
+        if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
+          BlockPos pos = result.getBlockPos();
+          IBlockState state = player.world.getBlockState(pos);
+          if (Growth.canGrow(player.world, pos, state)) {
+            if (!player.world.isRemote) {
+              for (int i = 0; i < ampInt(ticks); i++) {
+                state.getBlock().randomTick(player.world, pos, state, new Random());
+              }
+              PacketHandler.sendToAllTracking(new MessageLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);
+              return true;
             }
-            PacketHandler.sendToAllTracking(new MessageLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);
-            return true;
           }
         }
       }
@@ -91,6 +125,12 @@ public class SpellGrowthInfusion extends SpellBase {
   public void doFinalise() {
     this.castType = properties.get(PROP_CAST_TYPE);
     this.cooldown = properties.get(PROP_COOLDOWN);
-    this.tickCount = properties.get(PROP_TICK_COUNT);
+    this.radius_x = properties.get(PROP_RADIUS_X);
+    this.radius_y = properties.get(PROP_RADIUS_Y);
+    this.radius_z = properties.get(PROP_RADIUS_Z);
+    this.ticks = properties.get(PROP_TICKS);
+    this.count = properties.get(PROP_COUNT);
+    this.additionalCount = properties.get(PROP_ADDITIONAL_COUNT);
+    this.radius_boost = properties.get(PROP_RADIUS_BOOST);
   }
 }

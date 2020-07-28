@@ -3,7 +3,9 @@ package epicsquid.roots.util;
 import epicsquid.roots.modifiers.IModifier;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,6 +19,24 @@ import java.util.Set;
 public class EntityUtil {
   private static Set<ResourceLocation> forcedFriendly = new HashSet<>();
   private static Set<ResourceLocation> forcedHostile = new HashSet<>();
+
+  public static boolean isFamiliar (EntityPlayer player, Entity entity) {
+    if (entity instanceof EntityPlayer) return false;
+
+    if (!isFriendly(entity)) {
+      return false;
+    }
+
+    if (entity instanceof AbstractHorse) {
+      AbstractHorse owned = (AbstractHorse) entity;
+      return owned.getOwnerUniqueId() != null && owned.getOwnerUniqueId().equals(player.getUniqueID());
+    } else if (entity instanceof IEntityOwnable) {
+      IEntityOwnable owned = (IEntityOwnable) entity;
+      return owned.getOwnerId() != null && owned.getOwnerId().equals(player.getUniqueID());
+    }
+
+    return false;
+  }
 
   public static boolean isHostile(Entity entity) {
     if (entity instanceof EntityPlayer) return false;
@@ -76,6 +96,18 @@ public class EntityUtil {
     }
 
     return false;
+  }
+
+  public static boolean isFriendlyTo (Entity entity, EntityPlayer player) {
+    if (!isFriendly(entity)) {
+      return false;
+    }
+
+    if (entity instanceof EntityLiving) {
+      return ((EntityLiving) entity).getAttackTarget() == player;
+    }
+
+    return true;
   }
 
   @Nullable

@@ -42,7 +42,7 @@ public class SpellTimeStop extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_time_stop");
   public static SpellTimeStop instance = new SpellTimeStop(spellName);
 
-  public static int duration;
+  public int duration;
 
   public SpellTimeStop(ResourceLocation name) {
     super(name, TextFormatting.DARK_BLUE, 64f / 255f, 64f / 255f, 64f / 255f, 192f / 255f, 32f / 255f, 255f / 255f);
@@ -68,6 +68,7 @@ public class SpellTimeStop extends SpellBase {
       EntityTimeStop timeStop = new EntityTimeStop(player.world, ampInt(duration));
       timeStop.setPlayer(player.getUniqueID());
       timeStop.setPosition(player.posX, player.posY, player.posZ);
+      timeStop.setModifiers(modifiers);
       player.world.spawnEntity(timeStop);
       PacketHandler.sendToAllTracking(new MessageTimeStopStartFX(player.posX, player.posY + 1.0f, player.posZ), player);
     }
@@ -78,6 +79,6 @@ public class SpellTimeStop extends SpellBase {
   public void doFinalise() {
     this.castType = properties.get(PROP_CAST_TYPE);
     this.cooldown = properties.get(PROP_COOLDOWN);
-    duration = properties.get(PROP_DURATION);
+    this.duration = properties.get(PROP_DURATION);
   }
 }
