@@ -98,6 +98,18 @@ public class EntityUtil {
     return false;
   }
 
+  public static boolean isFriendlyTo (Entity entity, EntityPlayer player) {
+    if (!isFriendly(entity)) {
+      return false;
+    }
+
+    if (entity instanceof EntityLiving) {
+      return ((EntityLiving) entity).getAttackTarget() == player;
+    }
+
+    return true;
+  }
+
   @Nullable
   public static NBTTagCompound getModifierData (Entity entity, IModifier modifier) {
     NBTTagCompound data = entity.getEntityData();
