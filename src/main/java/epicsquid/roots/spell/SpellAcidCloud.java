@@ -69,6 +69,8 @@ public class SpellAcidCloud extends SpellBase {
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_POISON_DURATION, PROP_FIRE_DURATION, PROP_POISON_AMPLIFICATION);
     acceptsModifiers(PERESKIA, WILDEWHEET, WILDROOT, MOONGLOW_LEAF, SPIRIT_HERB, TERRA_MOSS, CLOUD_BERRY, INFERNAL_BULB, STALICRIPE, DEWGONIA);
     setFire(INFERNAL_BULB);
+    setPeaceful(WILDEWHEET);
+    setParalysis(WILDROOT);
 
   }
 
@@ -86,13 +88,12 @@ public class SpellAcidCloud extends SpellBase {
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks) {
     if (!player.world.isRemote) {
-      StaffModifierInstance fire = modifiers.get(INFERNAL_BULB);
       List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class,
           new AxisAlignedBB(player.posX - 4.0, player.posY - 1.0, player.posZ - 4.0, player.posX + 4.0, player.posY + 3.0, player.posZ + 4.0));
       for (EntityLivingBase e : entities) {
         if (e != player && !(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
           if (e.hurtTime <= 0 && !e.isDead) {
-            if (peaceful(modifiers) && !EntityUtil.isHostile(e)) {
+            if (peaceful(modifiers) && EntityUtil.isFriendly(e)) {
               continue;
             }
             if (fire(modifiers)) {

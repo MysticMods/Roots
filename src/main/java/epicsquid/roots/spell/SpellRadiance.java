@@ -9,6 +9,7 @@ import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageRadianceBeamFX;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
+import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -58,6 +59,8 @@ public class SpellRadiance extends SpellBase {
     super(name, TextFormatting.WHITE, 255f / 255f, 255f / 255f, 64f / 255f, 255f / 255f, 255f / 255f, 192f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DISTANCE, PROP_DAMAGE, PROP_UNDEAD_DAMAGE);
     acceptsModifiers(WILDEWHEET, WILDROOT, MOONGLOW_LEAF, SPIRIT_HERB, TERRA_MOSS, BAFFLE_CAP, INFERNAL_BULB, STALICRIPE, DEWGONIA);
+    setPeaceful(WILDEWHEET);
+    setFire(INFERNAL_BULB);
   }
 
   @Override
@@ -150,8 +153,10 @@ public class SpellRadiance extends SpellBase {
             List<EntityLivingBase> entities = player.world
                 .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - bx, y - by, z - bz, x + bx, y + by, z + bz));
             for (EntityLivingBase e : entities) {
-              if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
-                  && e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
+              if (e != player && !(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
+                if (peaceful(modifiers) && EntityUtil.isFriendly(e)) {
+                  continue;
+                }
                 if (e.hurtTime <= 0 && !e.isDead) {
                   e.attackEntityFrom(ModDamage.radiantDamageFrom(player), ampFloat(damage));
                   if (e.isEntityUndead()) {
