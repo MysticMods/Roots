@@ -9,13 +9,16 @@ import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageDisarmFX;
 import epicsquid.roots.properties.Property;
+import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -34,6 +37,7 @@ public class SpellDisarm extends SpellBase {
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 2).setDescription("radius on the Y axis within which entities are affected by the spell");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 2).setDescription("radius on the Z axis within which entities are affected by the spell");
   public static Property<Integer> PROP_DROP_CHANCE = new Property<>("drop_chance", 4).setDescription("chance for mobs to drop their equipment and weapons (the higher the number is the lower the chance is: 1/x) [default: 1/4]");
+  public static Property<Integer> PROP_REARM_DURATION = new Property<>("rearm_duration", 25).setDescription("the duration of strength applied to peaceful creatures when cows with guns is enabled");
 
   public static Modifier PERESKIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "boost_drops"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier WILDEWHEET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "cows_with_guns"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -55,12 +59,14 @@ public class SpellDisarm extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_disarm");
   public static SpellDisarm instance = new SpellDisarm(spellName);
 
-  private int radius_x, radius_y, radius_z, drop_chance;
+  private int radius_x, radius_y, radius_z, drop_chance, rearm_duration;
 
   private SpellDisarm(ResourceLocation name) {
     super(name, TextFormatting.DARK_RED, 122F / 255F, 0F, 0F, 58F / 255F, 58F / 255F, 58F / 255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_REARM_DURATION);
     acceptsModifiers(PERESKIA, WILDEWHEET, WILDROOT, SPIRIT_HERB, TERRA_MOSS, BAFFLE_CAP, CLOUD_BERRY, INFERNAL_BULB, STALICRIPE, DEWGONIA);
+    setPeaceful(WILDEWHEET);
+    setFire(INFERNAL_BULB);
   }
 
   @Override
@@ -87,26 +93,30 @@ public class SpellDisarm extends SpellBase {
     }
 
     for (EntityLivingBase entity : entities) {
-      boolean disarmed = false;
-      for (EntityEquipmentSlot slot : EntityEquipmentSlot.values()) {
-        ItemStack stack = entity.getItemStackFromSlot(slot);
-        if (stack.isEmpty()) {
-          continue;
-        }
-        disarmed = true;
-        if (!world.isRemote) {
-          entity.setItemStackToSlot(slot, ItemStack.EMPTY);
-          if (drop_chance == 1 || drop_chance > 1 && Util.rand.nextInt(ampSubInt(drop_chance)) == 0) {
-            ItemUtil.spawnItem(world, entity.getPosition(), stack);
+      if (EntityUtil.isHostile(entity)) {
+        boolean disarmed = false;
+        for (EntityEquipmentSlot slot : EntityEquipmentSlot.values()) {
+          ItemStack stack = entity.getItemStackFromSlot(slot);
+          if (stack.isEmpty()) {
+            continue;
+          }
+          disarmed = true;
+          if (!world.isRemote) {
+            entity.setItemStackToSlot(slot, ItemStack.EMPTY);
+            if (drop_chance == 1 || drop_chance > 1 && Util.rand.nextInt(ampSubInt(drop_chance)) == 0) {
+              ItemUtil.spawnItem(world, entity.getPosition(), stack);
+            }
           }
         }
-      }
 
-      if (disarmed) {
-        if (!world.isRemote) {
-          PacketHandler.sendToAllTracking(new MessageDisarmFX(entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ()), caster);
+        if (disarmed) {
+          if (!world.isRemote) {
+            PacketHandler.sendToAllTracking(new MessageDisarmFX(entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ()), caster);
+          }
+          return true;
         }
-        return true;
+      } else if (modifiers != null && peaceful(modifiers) && EntityUtil.isFriendlyTo(entity, caster)) {
+        entity.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, this.rearm_duration, 2));
       }
     }
     return false;
@@ -120,5 +130,6 @@ public class SpellDisarm extends SpellBase {
     this.radius_y = properties.get(PROP_RADIUS_Y);
     this.radius_z = properties.get(PROP_RADIUS_Z);
     this.drop_chance = properties.get(PROP_DROP_CHANCE);
+    this.rearm_duration = properties.get(PROP_REARM_DURATION);
   }
 }
