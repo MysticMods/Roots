@@ -63,10 +63,10 @@ public abstract class SpellBase extends RegistryItem implements SpellMulitiplier
   private float[] firstColours;
   private float[] secondColours;
 
-  protected IModifier poison, fire, slow, paralysis, peaceful;
-
   protected Buff speedy;
   protected Buff amplifier;
+
+  protected StaffModifierInstanceList tempModifiers = null;
 
   public SpellRecipe recipe = SpellRecipe.EMPTY;
 
@@ -89,59 +89,20 @@ public abstract class SpellBase extends RegistryItem implements SpellMulitiplier
     this.secondColours = new float[]{r2, g2, b2};
   }
 
-  public void setPoison(IModifier poison) {
-    this.poison = poison;
-  }
-
-  public void setFire(IModifier fire) {
-    this.fire = fire;
-  }
-
-  public void setSlow(IModifier slow) {
-    this.slow = slow;
-  }
-
-  public void setParalysis(IModifier paralysis) {
-    this.paralysis = paralysis;
-  }
-
-  public void setPeaceful(IModifier peaceful) {
-    this.peaceful = peaceful;
-  }
-
-  protected boolean has(IModifier modifier, StaffModifierInstanceList modifiers) {
+  public boolean has(IModifier modifier, StaffModifierInstanceList modifiers) {
     if (modifier == null) {
-      return false;
+      throw new NullPointerException("Modifiers supplied to SpellBase::has cannot be null.");
+/*      return false;*/
     }
     StaffModifierInstance instance = modifiers.get(modifier);
     if (instance == null) {
       return false;
     }
-    if (instance.isApplied() && instance.isEnabled()) {
-      return true;
-    }
-
-    return false;
+    return instance.isApplied() && instance.isEnabled();
   }
 
-  public boolean poison (StaffModifierInstanceList modifiers) {
-    return has(poison, modifiers);
-  }
-
-  public boolean fire(StaffModifierInstanceList modifiers) {
-    return has(fire, modifiers);
-  }
-
-  public boolean slow(StaffModifierInstanceList modifiers) {
-    return has(slow, modifiers);
-  }
-
-  public boolean paralysis(StaffModifierInstanceList modifiers) {
-    return has(paralysis, modifiers);
-  }
-
-  public boolean peaceful(StaffModifierInstanceList modifiers) {
-    return has(peaceful, modifiers);
+  protected boolean has (IModifier modifier) {
+    return has(modifier, tempModifiers);
   }
 
   public float[] getFirstColours() {
@@ -406,22 +367,22 @@ public abstract class SpellBase extends RegistryItem implements SpellMulitiplier
   }
 
   public CastResult cast(EntityPlayer caster, StaffSpellInfo info, int ticks) {
-    StaffModifierInstanceList modifiers = info.getModifiers();
+    tempModifiers = info.getModifiers();
     amplifier = Buff.NONE;
-    StaffModifierInstance mod = modifiers.get(BaseModifiers.EMPOWER);
+    StaffModifierInstance mod = tempModifiers.get(BaseModifiers.EMPOWER);
     if (mod != null && mod.isEnabled()) {
       amplifier = Buff.BONUS;
     }
-    mod = modifiers.get(BaseModifiers.GREATER_EMPOWER);
+    mod = tempModifiers.get(BaseModifiers.GREATER_EMPOWER);
     if (mod != null && mod.isEnabled()) {
       amplifier = Buff.GREATER_BONUS;
     }
     speedy = Buff.NONE;
-    mod = modifiers.get(BaseModifiers.SPEEDY);
+    mod = tempModifiers.get(BaseModifiers.SPEEDY);
     if (mod != null && mod.isEnabled()) {
       speedy = Buff.BONUS;
     }
-    mod = modifiers.get(BaseModifiers.GREATER_SPEEDY);
+    mod = tempModifiers.get(BaseModifiers.GREATER_SPEEDY);
     if (mod != null && mod.isEnabled()) {
       speedy = Buff.GREATER_BONUS;
     }
@@ -440,6 +401,7 @@ public abstract class SpellBase extends RegistryItem implements SpellMulitiplier
 
     speedy = Buff.NONE;
     amplifier = Buff.NONE;
+    tempModifiers = null;
 
     return result;
   }

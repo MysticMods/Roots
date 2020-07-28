@@ -89,7 +89,7 @@ public class EntityThornTrap extends EntitySpellModifiable<SpellRoseThorns> {
           setDead();
           for (EntityLivingBase entity : entities) {
             if (!(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
-              if (modifiers != null && instance.peaceful(modifiers) && EntityUtil.isFriendly(entity)) {
+              if (modifiers != null && instance.has(instance.PEACEFUL, modifiers) && EntityUtil.isFriendly(entity)) {
                 continue;
               }
               entity.attackEntityFrom(ModDamage.roseDamageFrom(player), damage);

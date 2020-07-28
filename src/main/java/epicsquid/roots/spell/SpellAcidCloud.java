@@ -7,7 +7,6 @@ import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.modifiers.*;
-import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageAcidCloudFX;
 import epicsquid.roots.properties.Property;
@@ -39,20 +38,20 @@ public class SpellAcidCloud extends SpellBase {
 
   // TODO: Costs
 
-  public static Modifier PERESKIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "radius_boost"), ModifierCores.PERESKIA, Lists.newArrayList(new ModifierCost(CostType.ADDITIONAL_COST, 0.2, ModifierCores.PERESKIA), new ModifierCost(CostType.ALL_COST_MULTIPLIER, 0.05))));
-  public static Modifier WILDEWHEET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_cloud"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 0.1)));
-  public static Modifier WILDROOT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "rooting_cloud"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.3)));
-  public static Modifier MOONGLOW_LEAF = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "moonfall"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 0.4)));
-  public static Modifier SPIRIT_HERB = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "unholy_vanquisher"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 0.3)));
-  public static Modifier TERRA_MOSS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "healing_cloud"), ModifierCores.TERRA_MOSS, Lists.newArrayList(new ModifierCost(CostType.ADDITIONAL_COST, 0.3, ModifierCores.TERRA_MOSS), new ModifierCost(CostType.ALL_COST_MULTIPLIER, 0.05))));
-  public static Modifier CLOUD_BERRY = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "increased_speed"), ModifierCores.CLOUD_BERRY, Lists.newArrayList(new ModifierCost(CostType.ADDITIONAL_COST, 0.15, ModifierCores.CLOUD_BERRY), new ModifierCost(CostType.ALL_COST_MULTIPLIER, 0.15))));
-  public static Modifier INFERNAL_BULB = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "fire_cloud"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 0.25)));
-  public static Modifier STALICRIPE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "cloud_of_rocks"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 0.25)));
-  public static Modifier DEWGONIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "underwater_increase"), ModifierCores.DEWGONIA, Lists.newArrayList(new ModifierCost(CostType.ADDITIONAL_COST, 0.2, ModifierCores.DEWGONIA), new ModifierCost(CostType.ALL_COST_MULTIPLIER, 0.1))));
+  public static Modifier RADIUS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "radius_boost"), ModifierCores.PERESKIA, Lists.newArrayList(new ModifierCost(CostType.ADDITIONAL_COST, 0.2, ModifierCores.PERESKIA), new ModifierCost(CostType.ALL_COST_MULTIPLIER, 0.05))));
+  public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_cloud"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 0.1)));
+  public static Modifier PARALYSIS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "rooting_cloud"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.3)));
+  public static Modifier NIGHT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "moonfall"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 0.4)));
+  public static Modifier UNDEAD = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "unholy_vanquisher"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 0.3)));
+  public static Modifier HEALING = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "healing_cloud"), ModifierCores.TERRA_MOSS, Lists.newArrayList(new ModifierCost(CostType.ADDITIONAL_COST, 0.3, ModifierCores.TERRA_MOSS), new ModifierCost(CostType.ALL_COST_MULTIPLIER, 0.05))));
+  public static Modifier SPEED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "increased_speed"), ModifierCores.CLOUD_BERRY, Lists.newArrayList(new ModifierCost(CostType.ADDITIONAL_COST, 0.15, ModifierCores.CLOUD_BERRY), new ModifierCost(CostType.ALL_COST_MULTIPLIER, 0.15))));
+  public static Modifier FIRE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "fire_cloud"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 0.25)));
+  public static Modifier PHYSICAL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "cloud_of_rocks"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 0.25)));
+  public static Modifier UNDERWATER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "underwater_increase"), ModifierCores.DEWGONIA, Lists.newArrayList(new ModifierCost(CostType.ADDITIONAL_COST, 0.2, ModifierCores.DEWGONIA), new ModifierCost(CostType.ALL_COST_MULTIPLIER, 0.1))));
 
   static {
     // Conflicts
-    TERRA_MOSS.addConflicts(WILDROOT, SPIRIT_HERB, INFERNAL_BULB, STALICRIPE);
+    HEALING.addConflicts(PARALYSIS, UNDEAD, FIRE, PHYSICAL);
   }
 
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_acid_cloud");
@@ -67,11 +66,7 @@ public class SpellAcidCloud extends SpellBase {
   public SpellAcidCloud(ResourceLocation name) {
     super(name, TextFormatting.DARK_GREEN, 80f / 255f, 160f / 255f, 40f / 255f, 64f / 255f, 96f / 255f, 32f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_POISON_DURATION, PROP_FIRE_DURATION, PROP_POISON_AMPLIFICATION);
-    acceptsModifiers(PERESKIA, WILDEWHEET, WILDROOT, MOONGLOW_LEAF, SPIRIT_HERB, TERRA_MOSS, CLOUD_BERRY, INFERNAL_BULB, STALICRIPE, DEWGONIA);
-    setFire(INFERNAL_BULB);
-    setPeaceful(WILDEWHEET);
-    setParalysis(WILDROOT);
-
+    acceptsModifiers(RADIUS, PEACEFUL, PARALYSIS, NIGHT, UNDEAD, HEALING, SPEED, FIRE, PHYSICAL, UNDERWATER);
   }
 
   @Override
@@ -93,10 +88,10 @@ public class SpellAcidCloud extends SpellBase {
       for (EntityLivingBase e : entities) {
         if (e != player && !(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
           if (e.hurtTime <= 0 && !e.isDead) {
-            if (peaceful(modifiers) && EntityUtil.isFriendly(e)) {
+            if (has(PEACEFUL) && EntityUtil.isFriendly(e)) {
               continue;
             }
-            if (fire(modifiers)) {
+            if (has(FIRE)) {
               e.attackEntityFrom(ModDamage.fireDamageFrom(player), ampFloat(damage)/2);
               e.attackEntityFrom(DamageSource.causeMobDamage(player), ampFloat(damage)/2);
               e.setFire(fireDuration);
