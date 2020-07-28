@@ -7,6 +7,7 @@ import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageDandelionCastFX;
 import epicsquid.roots.properties.Property;
+import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -52,6 +53,9 @@ public class SpellDandelionWinds extends SpellBase {
     super(name, TextFormatting.YELLOW, 255f / 255f, 255f / 255f, 32f / 255f, 255f / 255f, 176f / 255f, 32f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DISTANCE);
     acceptsModifiers(PERESKIA, WILDEWHEET, WILDROOT, MOONGLOW_LEAF, SPIRIT_HERB, TERRA_MOSS, BAFFLE_CAP, INFERNAL_BULB, STALICRIPE, DEWGONIA);
+    setFire(INFERNAL_BULB);
+    setPeaceful(WILDEWHEET);
+    setPoison(BAFFLE_CAP);
   }
 
   @Override
@@ -74,7 +78,10 @@ public class SpellDandelionWinds extends SpellBase {
             player.posZ + player.getLookVec().z * 6.0 + 6.0));
     if (entities.size() > 0) {
       for (EntityLivingBase e : entities) {
-        if (e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
+        if (e != player) {
+          if (peaceful(modifiers) && EntityUtil.isFriendly(e)) {
+            continue;
+          }
           e.motionX += (player.getLookVec().x);
           e.motionY += (distance + distance * distance);
           e.motionZ += (player.getLookVec().z);

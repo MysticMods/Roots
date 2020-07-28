@@ -8,6 +8,7 @@ import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageLifeDrainAbsorbFX;
 import epicsquid.roots.properties.Property;
+import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -62,6 +63,8 @@ public class SpellLifeDrain extends SpellBase {
     super(name, TextFormatting.DARK_GRAY, 144f / 255f, 32f / 255f, 64f / 255f, 255f / 255f, 196f / 255f, 240f / 255f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_WITHER_DAMAGE, PROP_HEAL, PROP_WITHER_DURATION, PROP_WITHER_AMPLIFICATION, PROP_WITHER_CHANCE);
     acceptsModifiers(PERESKIA, WILDEWHEET, WILDROOT, SPIRIT_HERB, TERRA_MOSS, CLOUD_BERRY, INFERNAL_BULB, STALICRIPE, DEWGONIA);
+    setFire(INFERNAL_BULB);
+    setPeaceful(WILDEWHEET);
   }
 
   @Override
@@ -87,8 +90,10 @@ public class SpellLifeDrain extends SpellBase {
         List<EntityLivingBase> entities = player.world
             .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 2.0, y - 2.0, z - 2.0, x + 2.0, y + 2.0, z + 2.0));
         for (EntityLivingBase e : entities) {
-          if (!(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())
-              && e.getUniqueID().compareTo(player.getUniqueID()) != 0) {
+          if (e != player && !(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
+            if (peaceful(modifiers) && EntityUtil.isFriendly(e)) {
+              continue;
+            }
             foundTarget = true;
             if (e.hurtTime <= 0 && !e.isDead) {
               e.attackEntityFrom(DamageSource.causeMobDamage(player), ampFloat(witherDamage));
