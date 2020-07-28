@@ -1,14 +1,10 @@
 package epicsquid.roots.recipe;
 
-import epicsquid.roots.recipe.transmutation.BlockStatePredicate;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
 import java.util.Set;
 import java.util.function.Function;
 

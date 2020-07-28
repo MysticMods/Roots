@@ -2,10 +2,6 @@ package epicsquid.roots.integration.jei;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.ElementalSoilConfig;
-import epicsquid.roots.spell.SpellChrysopoeia;
-import epicsquid.roots.spell.info.SpellDustInfo;
-import epicsquid.roots.spell.info.storage.DustSpellStorage;
-import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
@@ -36,7 +32,10 @@ import epicsquid.roots.recipe.*;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.spell.SpellChrysopoeia;
 import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.spell.info.SpellDustInfo;
+import epicsquid.roots.spell.info.storage.DustSpellStorage;
 import epicsquid.roots.util.RitualUtil;
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.VanillaTypes;
@@ -92,7 +91,7 @@ public class JEIRootsPlugin implements IModPlugin {
     );
   }
 
-  private List<IRecipeWrapper> generateRepairRecipes (Ingredient repairItem, List<ItemStack> itemsToRepair, IVanillaRecipeFactory vanillaFactory) {
+  private List<IRecipeWrapper> generateRepairRecipes(Ingredient repairItem, List<ItemStack> itemsToRepair, IVanillaRecipeFactory vanillaFactory) {
     List<IRecipeWrapper> result = new ArrayList<>();
     boolean first = true;
     for (ItemStack repairMat : repairItem.getMatchingStacks()) {
@@ -154,7 +153,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipes(spells, SPELL_COSTS);
     registry.addRecipes(RitualRegistry.ritualRegistry.values(), RITUAL);
     registry.addRecipes(ModRecipes.getFeyCraftingRecipes().values(), FEY_CRAFTING);
-    registry.addRecipes(spells.stream().filter(SpellBase::hasModules).collect(Collectors.toList()), SPELL_MODIFIERS);
+    registry.addRecipes(spells, SPELL_MODIFIERS);
     registry.addRecipes(ModRecipes.getBarkRecipes(), BARK_CARVING);
     registry.addRecipes(MossRecipe.getRecipeList(), TERRA_MOSS);
     registry.addRecipes(ModRecipes.getSummonCreatureEntries(), SUMMON_CREATURES);

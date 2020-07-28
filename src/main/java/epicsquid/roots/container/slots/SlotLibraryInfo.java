@@ -4,7 +4,6 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.spell.info.LibrarySpellInfo;
 import epicsquid.roots.world.data.SpellLibraryData;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
@@ -19,7 +18,7 @@ public class SlotLibraryInfo extends Slot implements ILibrarySlot {
   private int slot;
   private Supplier<Boolean> visibility;
 
-  public static SlotLibraryInfo create (SpellLibraryData data, Supplier<Boolean> visibility, int slot, int x, int y) {
+  public static SlotLibraryInfo create(SpellLibraryData data, Supplier<Boolean> visibility, int slot, int x, int y) {
     IInventory inventory = new InventoryBasic("[Slot: " + slot + "]", true, 1);
     inventory.setInventorySlotContents(0, ItemStack.EMPTY);
     return new SlotLibraryInfo(data, visibility, inventory, slot, x, y);
@@ -118,7 +117,7 @@ public class SlotLibraryInfo extends Slot implements ILibrarySlot {
   @Override
   public boolean isSameInventory(Slot other) {
     if (other instanceof SlotLibraryInfo) {
-      if (((SlotLibraryInfo)other).data == null) {
+      if (((SlotLibraryInfo) other).data == null) {
         return ItemStack.areItemStacksEqual(((SlotLibraryInfo) other).getStack(), getStack());
       }
 

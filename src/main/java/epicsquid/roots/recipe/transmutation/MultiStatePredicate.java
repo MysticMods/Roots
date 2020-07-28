@@ -3,13 +3,12 @@ package epicsquid.roots.recipe.transmutation;
 import com.google.common.collect.Lists;
 import net.minecraft.block.state.IBlockState;
 
-import java.util.Collections;
 import java.util.List;
 
 public class MultiStatePredicate implements BlockStatePredicate {
   protected List<IBlockState> states;
 
-  public MultiStatePredicate(IBlockState ... states) {
+  public MultiStatePredicate(IBlockState... states) {
     this.states = Lists.newArrayList(states);
   }
 

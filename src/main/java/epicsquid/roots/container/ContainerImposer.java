@@ -9,10 +9,10 @@ package epicsquid.roots.container;
 
 import epicsquid.roots.container.slots.SlotImposerModifierInfo;
 import epicsquid.roots.container.slots.SlotImposerSpellInfo;
-import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
-import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.modifiers.IModifierCore;
 import epicsquid.roots.modifiers.ModifierCores;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.tileentity.TileEntityImposer;
@@ -79,6 +79,28 @@ public class ContainerImposer extends Container {
     return mods.getByCore(core);
   }
 
+  @Nullable
+  public StaffModifierInstanceList getModifiers() {
+    StaffSpellStorage storage = tile.getSpellStorage();
+    if (storage == null) {
+      return null;
+    }
+    int slot = tile.getSlot();
+    if (slot == 0) {
+      return null;
+    }
+    StaffSpellInfo info = storage.getSpellInSlot(slot);
+    if (info == null) {
+      return null;
+    }
+    StaffModifierInstanceList mods = info.getModifiers();
+    if (mods == null) {
+      return null;
+    }
+
+    return mods;
+  }
+
   private void createSpellSlots() {
     addSlotToContainer(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 1, 51, 37)); // Spot 1
     addSlotToContainer(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 2, 56, 13)); // Spot 2
@@ -87,7 +109,7 @@ public class ContainerImposer extends Container {
     addSlotToContainer(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 5, 109, 37)); // Spot 5
   }
 
-  private void addModifierSlot (IModifierCore core, TileEntityImposer imposer, int x, int y) {
+  private void addModifierSlot(IModifierCore core, TileEntityImposer imposer, int x, int y) {
     SlotImposerModifierInfo slot = new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, core, imposer, x, y);
     coreSlotMap.put(core, slot);
     addSlotToContainer(slot);

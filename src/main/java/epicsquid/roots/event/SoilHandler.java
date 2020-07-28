@@ -24,12 +24,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-@Mod.EventBusSubscriber(modid= Roots.MODID)
+@Mod.EventBusSubscriber(modid = Roots.MODID)
 @SuppressWarnings("unused")
 public class SoilHandler {
 
   @SubscribeEvent(priority = EventPriority.HIGHEST)
-  public static void onCropHarvest (BlockEvent.HarvestDropsEvent event) {
+  public static void onCropHarvest(BlockEvent.HarvestDropsEvent event) {
     if (event.getHarvester() != null) {
       if (event.getState().getBlock() instanceof IPlantable) {
         IBlockState soil = event.getWorld().getBlockState(event.getPos().offset(EnumFacing.DOWN));

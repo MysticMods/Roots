@@ -13,6 +13,7 @@ import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -31,16 +32,27 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
     this.applied = false;
   }
 
+  @Override
+  public boolean isDisabled() {
+    return modifier.isDisabled();
+  }
+
+  @Override
   public Modifier getModifier() {
     return modifier;
   }
 
   public boolean isApplied() {
-    return applied;
+    return applied && !isDisabled();
   }
 
   public void setApplied() {
     this.applied = true;
+  }
+
+  @Override
+  public String getIdentifier() {
+    return modifier.getIdentifier();
   }
 
   @Override
@@ -105,7 +117,11 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
 
   @Override
   public IModifierCore getCore() {
-    return modifier.getCore();
+    if (modifier == null) {
+      return BaseModifiers.AIR;
+    } else {
+      return modifier.getCore();
+    }
   }
 
   @Override
@@ -142,5 +158,11 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
   @Override
   public int hashCode() {
     return Objects.hash(modifier, applied);
+  }
+
+  @Nonnull
+  @Override
+  public ResourceLocation getRegistryName() {
+    return modifier.getRegistryName();
   }
 }

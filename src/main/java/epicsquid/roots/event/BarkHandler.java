@@ -20,10 +20,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Mod.EventBusSubscriber(modid= Roots.MODID)
+@Mod.EventBusSubscriber(modid = Roots.MODID)
 @SuppressWarnings("unused")
 public class BarkHandler {
-  @SubscribeEvent(priority= EventPriority.HIGHEST)
+  @SubscribeEvent(priority = EventPriority.HIGHEST)
   public static void barkHarvested(BlockEvent.HarvestDropsEvent event) {
     if (event.getHarvester() != null) {
       ItemStack tool = event.getHarvester().getHeldItem(EnumHand.MAIN_HAND);

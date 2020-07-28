@@ -15,13 +15,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import javax.annotation.Nullable;
 import java.util.Set;
 
-@Mod.EventBusSubscriber(modid=Roots.MODID)
+@Mod.EventBusSubscriber(modid = Roots.MODID)
 @Config.LangKey("config.roots.category.general")
-@Config(modid = Roots.MODID, name = "roots/general", category="main")
+@Config(modid = Roots.MODID, name = "roots/general", category = "main")
 @SuppressWarnings("unused")
 public class GeneralConfig {
   @SubscribeEvent(priority = EventPriority.HIGH)
-  public static void onConfigChanged (ConfigChangedEvent.OnConfigChangedEvent event) {
+  public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
     if (event.getModID().equals(Roots.MODID)) {
       ConfigManager.sync(Roots.MODID, Config.Type.INSTANCE);
     }
@@ -72,7 +72,7 @@ public class GeneralConfig {
   @Config.Ignore
   private static Set<ItemStack> twoByTwoSaplings = null;
 
-  public static Set<ItemStack> getTwoByTwoSaplings () {
+  public static Set<ItemStack> getTwoByTwoSaplings() {
     if (twoByTwoSaplings == null) {
       twoByTwoSaplings = ConfigUtil.parseItemStacksSet(TwoByTwoSaplings);
     }
@@ -82,12 +82,12 @@ public class GeneralConfig {
 
   @Config.Comment(("List of mod:item:meta (meta optional) of saplings that should be blacklisted from the Spreading Forest ritual"))
   public static String[] SaplingBlacklist = new String[]{"roots:wildwood_sapling", "corvus:frankinsence_sapling",
-"thebetweenlands:sapling_spirit_tree"};
+      "thebetweenlands:sapling_spirit_tree"};
 
   @Config.Ignore
   private static Set<ItemStack> saplingBlacklist = null;
 
-  public static Set<ItemStack> getSaplingBlacklist () {
+  public static Set<ItemStack> getSaplingBlacklist() {
     if (saplingBlacklist == null) {
       saplingBlacklist = ConfigUtil.parseItemStacksSet(SaplingBlacklist);
     }
@@ -99,7 +99,7 @@ public class GeneralConfig {
   public static String FluidName = "water";
 
   @Nullable
-  public static Fluid getFluid () {
+  public static Fluid getFluid() {
     return FluidRegistry.getFluid(FluidName);
   }
 }

@@ -8,16 +8,11 @@ import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.transmutation.PropertyPredicate;
 import net.minecraft.block.BlockBeetroot;
 import net.minecraft.block.BlockCrops;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-
-import java.util.function.Function;
 
 public class RunicShearRecipes {
 

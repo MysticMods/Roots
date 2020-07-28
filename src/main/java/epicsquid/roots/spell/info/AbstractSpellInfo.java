@@ -21,7 +21,7 @@ public abstract class AbstractSpellInfo implements INBTSerializable<NBTTagCompou
     return spell;
   }
 
-  public static SpellBase getSpellFromTag (NBTTagCompound nbt) {
+  public static SpellBase getSpellFromTag(NBTTagCompound nbt) {
     String name = nbt.getString("s");
     if (name.contains(":")) {
       return SpellRegistry.getSpell(new ResourceLocation(name));
@@ -47,7 +47,7 @@ public abstract class AbstractSpellInfo implements INBTSerializable<NBTTagCompou
     }
   }
 
-  public abstract boolean isEmpty ();
+  public abstract boolean isEmpty();
 
   public abstract ItemStack asStack();
 }

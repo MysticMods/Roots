@@ -38,7 +38,7 @@ public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implemen
     return -1;
   }
 
-  public int getCooldown () {
+  public int getCooldown() {
     return -1;
   }
 
@@ -63,7 +63,7 @@ public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implemen
 
   public abstract void clearSelectedSlot();
 
-  public abstract void clearSlot (int slot);
+  public abstract void clearSlot(int slot);
 
   public int getSelectedSlot() {
     return this.selectedSlot;
@@ -79,7 +79,7 @@ public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implemen
 
   public abstract void addSpell(V spell);
 
-  public abstract void setSpellToSlot (int slot, V spell);
+  public abstract void setSpellToSlot(int slot, V spell);
 
   public int getNextFreeSlot() {
     return -1;
@@ -96,7 +96,7 @@ public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implemen
   public abstract void deserializeNBT(NBTTagCompound tag);
 
   @Nullable
-  protected static <V extends AbstractSpellInfo, T extends AbstractSpellStorage<V>> T fromStack (ItemStack stack, Function<ItemStack, T> factory) {
+  protected static <V extends AbstractSpellInfo, T extends AbstractSpellStorage<V>> T fromStack(ItemStack stack, Function<ItemStack, T> factory) {
     T result = factory.apply(stack);
     if (!result.isValid()) {
       return null;

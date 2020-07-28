@@ -2,8 +2,8 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualDivineProtection;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.properties.Property;
+import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;

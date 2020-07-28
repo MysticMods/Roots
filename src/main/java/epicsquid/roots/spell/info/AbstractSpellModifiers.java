@@ -13,7 +13,7 @@ public abstract class AbstractSpellModifiers<T extends IModifierList<?, ?>> exte
     super(spell);
   }
 
-  public abstract T getModifiers ();
+  public abstract T getModifiers();
 
-  public abstract void setModifiers (T modifiers);
+  public abstract void setModifiers(T modifiers);
 }

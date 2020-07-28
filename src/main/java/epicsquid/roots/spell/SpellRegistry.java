@@ -65,7 +65,7 @@ public class SpellRegistry {
     SpellGeas.instance.setDisabled(SpellConfig.disableSpellsCategory.disableGeas);
     spellRegistry.put(SpellRadiance.spellName, SpellRadiance.instance);
     SpellRadiance.instance.setDisabled(SpellConfig.disableSpellsCategory.disableRadiance);
-    spellRegistry.put(SpellLightDrifter.spellName, SpellLightDrifter.instance);
+/*    spellRegistry.put(SpellLightDrifter.spellName, SpellLightDrifter.instance);
     SpellLightDrifter.instance.setDisabled(SpellConfig.disableSpellsCategory.disableLightDrifter);
     spellRegistry.put(SpellSenseAnimals.spellName, SpellSenseAnimals.instance);
     SpellSenseAnimals.instance.setDisabled(SpellConfig.disableSpellsCategory.disableSenseAnimals);
@@ -74,17 +74,17 @@ public class SpellRegistry {
     spellRegistry.put(SpellMagnetism.spellName, SpellMagnetism.instance);
     SpellMagnetism.instance.setDisabled(SpellConfig.disableSpellsCategory.disableMagnetism);
     spellRegistry.put(SpellSenseDanger.spellName, SpellSenseDanger.instance);
-    SpellSenseDanger.instance.setDisabled(SpellConfig.disableSpellsCategory.disableSenseDanger);
+    SpellSenseDanger.instance.setDisabled(SpellConfig.disableSpellsCategory.disableSenseDanger);*/
     spellRegistry.put(SpellHarvest.spellName, SpellHarvest.instance);
     SpellHarvest.instance.setDisabled(SpellConfig.disableSpellsCategory.disableHarvest);
-    spellRegistry.put(SpellRampantGrowth.spellName, SpellRampantGrowth.instance);
-    SpellRampantGrowth.instance.setDisabled(SpellConfig.disableSpellsCategory.disableRampantGrowth);
+/*    spellRegistry.put(SpellRampantGrowth.spellName, SpellRampantGrowth.instance);
+    SpellRampantGrowth.instance.setDisabled(SpellConfig.disableSpellsCategory.disableRampantGrowth);*/
     spellRegistry.put(SpellFeyLight.spellName, SpellFeyLight.instance);
     SpellFeyLight.instance.setDisabled(SpellConfig.disableSpellsCategory.disableFeyLight);
-    spellRegistry.put(SpellWinterCloud.spellName, SpellWinterCloud.instance);
-    SpellWinterCloud.instance.setDisabled(SpellConfig.disableSpellsCategory.disableWinterCloud);
-    SpellReach.instance.setDisabled(SpellConfig.disableSpellsCategory.disableReach);
-    spellRegistry.put(SpellReach.spellName, SpellReach.instance);
+    spellRegistry.put(SpellStormCloud.spellName, SpellStormCloud.instance);
+    SpellStormCloud.instance.setDisabled(SpellConfig.disableSpellsCategory.disableWinterCloud);
+/*    SpellReach.instance.setDisabled(SpellConfig.disableSpellsCategory.disableReach);
+    spellRegistry.put(SpellReach.spellName, SpellReach.instance);*/
     SpellSaturate.instance.setDisabled(SpellConfig.disableSpellsCategory.disableSaturate);
     spellRegistry.put(SpellSaturate.spellName, SpellSaturate.instance);
     SpellDesaturate.instance.setDisabled(SpellConfig.disableSpellsCategory.disableDesaturate);
@@ -94,12 +94,12 @@ public class SpellRegistry {
 
     spellRegistry.put(SpellDisarm.spellName, SpellDisarm.instance);
     SpellDisarm.instance.setDisabled(SpellConfig.disableSpellsCategory.disableDisarm);
-    spellRegistry.put(SpellAutumnsFall.spellName, SpellAutumnsFall.instance);
-    SpellAutumnsFall.instance.setDisabled(SpellConfig.disableSpellsCategory.disableAutumnsFall);
+/*    spellRegistry.put(SpellAutumnsFall.spellName, SpellAutumnsFall.instance);
+    SpellAutumnsFall.instance.setDisabled(SpellConfig.disableSpellsCategory.disableAutumnsFall);*/
     spellRegistry.put(SpellNaturesScythe.spellName, SpellNaturesScythe.instance);
     SpellNaturesScythe.instance.setDisabled(SpellConfig.disableSpellsCategory.disableNaturesScythe);
-    spellRegistry.put(SpellSpringStorm.spellName, SpellSpringStorm.instance);
-    SpellSpringStorm.instance.setDisabled(SpellConfig.disableSpellsCategory.disableSpringStorm);
+/*    spellRegistry.put(SpellSpringStorm.spellName, SpellSpringStorm.instance);
+    SpellSpringStorm.instance.setDisabled(SpellConfig.disableSpellsCategory.disableSpringStorm);*/
     spellRegistry.put(SpellAquaBubble.spellName, SpellAquaBubble.instance);
     SpellAquaBubble.instance.setDisabled(SpellConfig.disableSpellsCategory.disableAquaBubble);
   }

@@ -10,20 +10,17 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.crafttweaker.Action;
 import epicsquid.roots.integration.crafttweaker.recipes.CTPyreCraftingRecipe;
-import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.util.zen.ZenDocAppend;
 import epicsquid.roots.util.zen.ZenDocArg;
 import epicsquid.roots.util.zen.ZenDocClass;
 import epicsquid.roots.util.zen.ZenDocMethod;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 @ZenDocClass("mods.roots.Pyre")
 @ZenDocAppend({"docs/include/pyre.example.md"})

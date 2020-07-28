@@ -9,9 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.Collections;
-import java.util.Set;
-
 /**
  * Transmutation recipe for Runic Shears
  */
@@ -36,11 +33,11 @@ public class RunicShearRecipe extends RegistryItem {
     this.optionalDisplayItem = optionalDisplayItem;
   }
 
-  public boolean matches (IBlockState state) {
+  public boolean matches(IBlockState state) {
     return this.state.test(state);
   }
 
-  public IBlockState getReplacementState () {
+  public IBlockState getReplacementState() {
     return replacementState;
   }
 
@@ -48,7 +45,7 @@ public class RunicShearRecipe extends RegistryItem {
     return drop;
   }
 
-  public Ingredient getDropMatch () {
+  public Ingredient getDropMatch() {
     return dropMatch;
   }
 

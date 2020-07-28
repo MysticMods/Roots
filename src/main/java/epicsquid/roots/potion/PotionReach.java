@@ -19,7 +19,7 @@ public class PotionReach extends Potion {
     setIconIndex(7, 0);
   }
 
-  public void loadComplete (double amount) {
+  public void loadComplete(double amount) {
     registerPotionAttributeModifier(EntityPlayer.REACH_DISTANCE, "c7e53f18-fd9a-427f-afca-36ee974a7adf", amount, 0);
     // Hopefully that's additive to the base
   }

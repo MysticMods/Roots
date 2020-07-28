@@ -57,7 +57,8 @@ public class Growth {
 
     if (CropConfig.getGrowthBlacklist().contains(state.getBlock())) return false;
 
-    if (CropConfig.getGrowthModBlacklist().contains(Objects.requireNonNull(state.getBlock().getRegistryName()).getNamespace())) return false;
+    if (CropConfig.getGrowthModBlacklist().contains(Objects.requireNonNull(state.getBlock().getRegistryName()).getNamespace()))
+      return false;
 
     // Hard-code this for some dumb reason as max age doesn't mean grown
     if (state.getBlock() == Blocks.REEDS || state.getBlock() == Blocks.CACTUS) {

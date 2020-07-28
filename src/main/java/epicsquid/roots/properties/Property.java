@@ -3,7 +3,7 @@ package epicsquid.roots.properties;
 import epicsquid.roots.spell.SpellBase;
 
 public class Property<T> extends AbstractProperty<T, Property<T>> {
-  public Property (String name, Class<?> clazz) {
+  public Property(String name, Class<?> clazz) {
     this.type = clazz;
     this.name = name;
     this.defaultValue = null;

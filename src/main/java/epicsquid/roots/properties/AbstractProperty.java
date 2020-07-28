@@ -24,14 +24,14 @@ public abstract class AbstractProperty<T, V extends AbstractProperty<T, ?>> {
     return defaultValue;
   }
 
-  public abstract boolean validate (T value);
+  public abstract boolean validate(T value);
 
-  public boolean hasDefaultValue () {
+  public boolean hasDefaultValue() {
     return true;
   }
 
   @SuppressWarnings("unchecked")
-  public T cast (Object val) {
+  public T cast(Object val) {
     return (T) val;
   }
 }

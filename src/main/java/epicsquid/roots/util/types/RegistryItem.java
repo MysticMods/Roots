@@ -13,7 +13,6 @@ public abstract class RegistryItem implements IRegistryItem {
   }
 
   @Override
-  @Nonnull
   public ResourceLocation getRegistryName() {
     return this.resourceLocation;
   }

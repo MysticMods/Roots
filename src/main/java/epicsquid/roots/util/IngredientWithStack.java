@@ -21,7 +21,7 @@ public class IngredientWithStack {
     return count;
   }
 
-  public void increment () {
+  public void increment() {
     count++;
   }
 }

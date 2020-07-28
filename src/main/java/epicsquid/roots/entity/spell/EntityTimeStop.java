@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class EntityTimeStop extends Entity {
-  private static final DataParameter<Integer> lifetime = EntityDataManager.<Integer>createKey(EntityTimeStop.class, DataSerializers.VARINT);
+  private static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityTimeStop.class, DataSerializers.VARINT);
   private UUID playerId = null;
 
   private int duration;

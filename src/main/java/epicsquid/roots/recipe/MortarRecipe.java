@@ -1,6 +1,5 @@
 package epicsquid.roots.recipe;
 
-import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.roots.tileentity.TileEntityMortar;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;

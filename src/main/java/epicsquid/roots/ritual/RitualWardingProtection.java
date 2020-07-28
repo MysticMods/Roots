@@ -2,8 +2,8 @@ package epicsquid.roots.ritual;
 
 import epicsquid.roots.entity.ritual.EntityRitualWardingProtection;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import epicsquid.roots.properties.Property;
+import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -27,7 +27,7 @@ public class RitualWardingProtection extends RitualBase {
   }
 
   @Override
-  public void init () {
+  public void init() {
     recipe = new RitualRecipe(this,
         new ItemStack(Items.SPECKLED_MELON),
         new ItemStack(ModItems.stalicripe),

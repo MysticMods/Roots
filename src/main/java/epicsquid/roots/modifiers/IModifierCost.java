@@ -5,10 +5,10 @@ import epicsquid.roots.api.Herb;
 import javax.annotation.Nullable;
 
 public interface IModifierCost {
-  CostType getCost ();
+  CostType getCost();
 
-  double getValue ();
+  double getValue();
 
   @Nullable
-  Herb getHerb ();
+  Herb getHerb();
 }

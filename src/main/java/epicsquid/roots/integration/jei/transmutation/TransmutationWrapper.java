@@ -13,7 +13,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
 public class TransmutationWrapper implements IRecipeWrapper {
   public final TransmutationRecipe recipe;

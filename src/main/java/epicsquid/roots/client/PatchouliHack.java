@@ -2,11 +2,11 @@ package epicsquid.roots.client;
 
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.integration.IntegrationUtil;
+import epicsquid.roots.properties.PropertyTable;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
-import epicsquid.roots.properties.PropertyTable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;

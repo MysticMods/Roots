@@ -11,7 +11,7 @@ public enum PouchType {
   public static final int APOTHECARY_POUCH_INVENTORY_SLOTS = 18;
   public static final int HERB_POUCH_SLOTS = 9;
 
-  public int herbSlots () {
+  public int herbSlots() {
     switch (this) {
       case COMPONENT:
         return COMPONENT_POUCH_HERB_SLOTS;
@@ -24,7 +24,7 @@ public enum PouchType {
     }
   }
 
-  public int inventorySlots () {
+  public int inventorySlots() {
     switch (this) {
       case COMPONENT:
         return COMPONENT_POUCH_INVENTORY_SLOTS;
@@ -36,7 +36,7 @@ public enum PouchType {
   }
 
   @Nullable
-  public static PouchType fromOrdinal (int ordinal) {
+  public static PouchType fromOrdinal(int ordinal) {
     int i = 0;
     for (PouchType type : values()) {
       if (i == ordinal) {

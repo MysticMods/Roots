@@ -1,13 +1,8 @@
 package epicsquid.roots.modifiers.instance.base;
 
-import com.google.common.collect.Iterators;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
-import epicsquid.roots.modifiers.CostType;
-import epicsquid.roots.modifiers.IModifierCore;
-import epicsquid.roots.modifiers.IModifierList;
-import epicsquid.roots.modifiers.Modifier;
-import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
+import epicsquid.roots.modifiers.*;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.AbstractSpellInfo;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
@@ -17,7 +12,6 @@ import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> implements IModifierList<T, NBTTagCompound> {
@@ -29,7 +23,7 @@ public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> i
   public BaseModifierInstanceList(SpellBase spell, Function<Modifier, T> empty) {
     internal = new ArrayList<>();
     coreToInstance = new HashMap<>();
-    for (Modifier m : spell.getModifierList()) {
+    for (Modifier m : spell.getModifiers()) {
       add(empty.apply(m));
     }
     this.spell = spell;
@@ -70,13 +64,18 @@ public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> i
 
   @Override
   @Nullable
-  public T get(Modifier modifier) {
+  public T get(IModifier modifier) {
     for (T mi : internal) {
       if (mi.getModifier().equals(modifier)) {
         return mi;
       }
     }
     return null;
+  }
+
+  @Override
+  public Collection<T> getModifiers() {
+    return internal;
   }
 
   public SpellBase getSpell() {

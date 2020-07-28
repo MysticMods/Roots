@@ -7,9 +7,9 @@ import epicsquid.roots.GuiHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemDruidKnife;
+import epicsquid.roots.modifiers.IModifierCore;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
-import epicsquid.roots.modifiers.IModifierCore;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.util.SpellUtil;
@@ -52,7 +52,7 @@ public class TileEntityImposer extends TileBase implements ITickable {
     return slot;
   }
 
-  public void updateInSlot (EntityPlayer player) {
+  public void updateInSlot(EntityPlayer player) {
     if (SpellUtil.isStaff(inventory.getStackInSlot(0))) {
       ItemStack staff = inventory.getStackInSlot(0);
       SpellUtil.updateModifiers(staff, player);

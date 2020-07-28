@@ -6,8 +6,8 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageThawFX;
-import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.properties.Property;
+import epicsquid.roots.spell.SpellBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.material.Material;
@@ -72,7 +72,7 @@ public class SpellSummersThaw extends SpellBase {
 
   @SuppressWarnings("deprecation")
   @Override
-  public boolean cast(EntityPlayer caster, StaffModifierInstanceList modifiers, int ticks, double amplifier, double speedy) {
+  public boolean cast(EntityPlayer caster, StaffModifierInstanceList modifiers, int ticks) {
     BlockPos pos = caster.getPosition();
     World world = caster.world;
     int mX = pos.getX();

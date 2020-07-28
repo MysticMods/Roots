@@ -1,4 +1,4 @@
-package epicsquid.roots.spell;
+/*package epicsquid.roots.spell;
 
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
@@ -66,4 +66,4 @@ public class SpellSenseDanger extends SpellBase {
     this.radius_y = properties.get(PROP_RADIUS_Y);
     this.radius_z = properties.get(PROP_RADIUS_Z);
   }
-}
+}*/

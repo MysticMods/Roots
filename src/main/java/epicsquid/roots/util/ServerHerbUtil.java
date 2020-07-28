@@ -3,16 +3,13 @@ package epicsquid.roots.util;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.integration.baubles.pouch.BaublePowderInventoryUtil;
 import epicsquid.roots.item.ItemPouch;
 import epicsquid.roots.item.ItemSylvanArmor;
 import epicsquid.roots.network.MessageUpdateHerb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.Loader;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 

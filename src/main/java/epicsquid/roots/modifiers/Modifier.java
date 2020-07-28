@@ -2,27 +2,30 @@ package epicsquid.roots.modifiers;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
-import epicsquid.roots.properties.PropertyTable;
 import epicsquid.roots.util.types.RegistryItem;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.function.Supplier;
+import java.util.Set;
 
 public class Modifier extends RegistryItem implements IModifier {
   private final IModifierCore core;
   private final List<IModifierCost> costs;
-  private final List<Supplier<IModifier>> conflicts;
+  private final Set<IModifier> conflicts = new HashSet<>();
 
   public Modifier(ResourceLocation name, IModifierCore core, List<IModifierCost> costs) {
     setRegistryName(name);
     this.costs = costs;
     this.core = core;
-    this.conflicts = new ArrayList<>();
+  }
+
+  @Override
+  public boolean isDisabled() {
+    return ModifierRegistry.isDisabled(this);
   }
 
   @Override
@@ -61,8 +64,32 @@ public class Modifier extends RegistryItem implements IModifier {
   }
 
   @Override
-  public List<Supplier<IModifier>> getConflicts() {
+  public Set<IModifier> getConflicts() {
     return conflicts;
+  }
+
+  private String identifier = null;
+
+  @Override
+  public String getIdentifier() {
+    if (identifier == null) {
+      identifier = getRegistryName().toString();
+    }
+    return identifier;
+  }
+
+  @Override
+  public void addConflict(IModifier supplier, boolean reverse) {
+    conflicts.add(supplier);
+    if (reverse) {
+      supplier.addConflict(this, false);
+    }
+  }
+
+  public void addConflicts(IModifier... suppliers) {
+    for (IModifier sup : suppliers) {
+      addConflict(sup);
+    }
   }
 
   @Override

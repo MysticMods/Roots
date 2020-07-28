@@ -48,9 +48,7 @@ public class PacifistEntry {
 
     if (entity instanceof EntityLiving) {
       EntityLiving en = (EntityLiving) entity;
-      if (en.getAttackTarget() != null && en.getAttackTarget().equals(player)) {
-        return false;
-      }
+      return en.getAttackTarget() == null || !en.getAttackTarget().equals(player);
     }
 
     return true;

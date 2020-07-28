@@ -1,4 +1,4 @@
-package epicsquid.roots.entity.spell;
+/*package epicsquid.roots.entity.spell;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
@@ -168,4 +168,4 @@ public class EntitySpellSpringStorm extends EntitySpellBase<SpellSpringStorm> {
       }
     }
   }
-}
+}*/

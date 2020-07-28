@@ -29,6 +29,18 @@ public class ModDamage {
 
   public static DamageSource BLEED_DAMAGE = (new DamageSource("bleed_damage")).setDamageBypassesArmor();
 
+  public static DamageSource ROSE_DAMAGE = (new DamageSource("rose_thorns")).setDamageBypassesArmor();
+
+  public static DamageSource roseDamageFrom (@Nullable EntityPlayer player) {
+    DamageSource source;
+    if (player == null) {
+      return ROSE_DAMAGE;
+    } else {
+      source = new EntityDamageSource("rose_thorns", player).setDamageBypassesArmor();
+    }
+    return source;
+  }
+
   public static DamageSource radiantDamageFrom(@Nullable EntityPlayer player) {
     DamageSource source;
     if (player == null) {
@@ -42,7 +54,7 @@ public class ModDamage {
     return source;
   }
 
-  public static DamageSource fireDamageFrom (@Nullable EntityPlayer player) {
+  public static DamageSource fireDamageFrom(@Nullable EntityPlayer player) {
     DamageSource source;
     if (player == null) {
       source = DamageSource.IN_FIRE;
@@ -61,7 +73,7 @@ public class ModDamage {
   }
 
   @Nullable
-  public static DamageSource wildfireDamage (World world) {
+  public static DamageSource wildfireDamage(World world) {
     if (world.isRemote) return null;
 
     WorldServer server = (WorldServer) world;

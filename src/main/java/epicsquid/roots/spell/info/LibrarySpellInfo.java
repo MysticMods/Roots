@@ -66,7 +66,7 @@ public class LibrarySpellInfo extends AbstractSpellModifiers<LibraryModifierInst
   }
 
   @Override
-  public ItemStack asStack () {
+  public ItemStack asStack() {
     ItemStack stack = new ItemStack(ModItems.spell_dust);
     NBTTagCompound comp = ItemUtil.getOrCreateTag(stack);
     comp.setBoolean("library", true);
