@@ -4,24 +4,18 @@ import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellWildfire;
 import epicsquid.roots.util.EntityUtil;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import java.util.List;
-import java.util.UUID;
 
 public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
 
   public EntityFireJet(World worldIn) {
-    super(worldIn, SpellWildfire.instance);
+    super(worldIn, SpellWildfire.instance, 12);
   }
 
   @Override
@@ -51,7 +45,7 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
           List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class,
               new AxisAlignedBB(posX + vx * i - 1.5, posY + vy * i - 1.5, posZ + vz * i - 1.5, posX + vx * i + 1.5, posY + vy * i + 1.5, posZ + vz * i + 1.5));
           for (EntityLivingBase entity : entities) {
-            if (entity != player&& !(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
+            if (entity != player && !(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
               if (modifiers != null && instance.peaceful(modifiers) && EntityUtil.isFriendly(entity)) {
                 continue;
               }

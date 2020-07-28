@@ -32,7 +32,7 @@ public class EntityThornTrap extends EntitySpellModifiable<SpellRoseThorns> {
   }
 
   public EntityThornTrap(World world, float damage, int duration, int slownessDuration, int slownessAmplifier, int poisonDuration, int poisonAmplifier) {
-    super(world, SpellRoseThorns.instance);
+    super(world, SpellRoseThorns.instance, duration);
     this.setNoGravity(false);
     this.noClip = false;
     this.damage = damage;
