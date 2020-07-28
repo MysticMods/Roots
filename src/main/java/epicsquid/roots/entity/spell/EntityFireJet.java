@@ -3,6 +3,7 @@ package epicsquid.roots.entity.spell;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellWildfire;
+import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,57 +18,15 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import java.util.List;
 import java.util.UUID;
 
-public class EntityFireJet extends Entity {
-  private static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityFireJet.class, DataSerializers.VARINT);
-  private UUID playerId = null;
-  private double amplifier, speedy;
-  private SpellWildfire instance;
+public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
 
   public EntityFireJet(World worldIn) {
-    super(worldIn);
-    this.setInvisible(true);
-    this.setSize(1, 1);
-    getDataManager().register(lifetime, 12);
-    this.instance = SpellWildfire.instance;
-  }
-
-  public double getAmplifier() {
-    return amplifier;
-  }
-
-  public void setAmplifier(double amplifier) {
-    this.amplifier = amplifier;
-  }
-
-  public double getSpeedy() {
-    return speedy;
-  }
-
-  public void setSpeedy(double speedy) {
-    this.speedy = speedy;
-  }
-
-  public void setPlayer(UUID id) {
-    this.playerId = id;
-  }
-
-  @Override
-  public boolean isEntityInsideOpaqueBlock() {
-    return false;
-  }
-
-  @Override
-  protected void entityInit() {
-
+    super(worldIn, SpellWildfire.instance);
   }
 
   @Override
   public void onUpdate() {
-    getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
-    getDataManager().setDirty(lifetime);
-    if (getDataManager().get(lifetime) <= 0) {
-      setDead();
-    }
+    super.onUpdate();
     if (world.isRemote) {
       for (int i = 0; i < 8; i++) {
         float offX = 0.5f * (float) Math.sin(Math.toRadians(rotationYaw));
@@ -92,7 +51,10 @@ public class EntityFireJet extends Entity {
           List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class,
               new AxisAlignedBB(posX + vx * i - 1.5, posY + vy * i - 1.5, posZ + vz * i - 1.5, posX + vx * i + 1.5, posY + vy * i + 1.5, posZ + vz * i + 1.5));
           for (EntityLivingBase entity : entities) {
-            if (!(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled()) && entity != player) {
+            if (entity != player&& !(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
+              if (modifiers != null && instance.peaceful(modifiers) && EntityUtil.isFriendly(entity)) {
+                continue;
+              }
               entity.setFire((int) (instance.fire_duration + instance.fire_duration * amplifier));
               entity.attackEntityFrom(ModDamage.fireDamageFrom(player), (float) (instance.damage + instance.damage * amplifier));
               entity.setLastAttackedEntity(player);
@@ -103,15 +65,4 @@ public class EntityFireJet extends Entity {
       }
     }
   }
-
-  @Override
-  protected void readEntityFromNBT(NBTTagCompound compound) {
-    this.playerId = net.minecraft.nbt.NBTUtil.getUUIDFromTag(compound.getCompoundTag("id"));
-  }
-
-  @Override
-  protected void writeEntityToNBT(NBTTagCompound compound) {
-    compound.setTag("id", net.minecraft.nbt.NBTUtil.createUUIDTag(playerId));
-  }
-
 }

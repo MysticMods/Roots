@@ -1,7 +1,9 @@
 package epicsquid.roots.entity.spell;
 
+import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRoseThorns;
+import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
@@ -21,10 +23,7 @@ import java.util.List;
 import java.util.UUID;
 
 @SuppressWarnings("AccessStaticViaInstance")
-public class EntityThornTrap extends Entity {
-  private static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityThornTrap.class, DataSerializers.VARINT);
-  private UUID playerId = null;
-
+public class EntityThornTrap extends EntitySpellModifiable<SpellRoseThorns> {
   private float damage;
   private int slownessDuration, slownessAmplifier, poisonDuration, poisonAmplifier, duration;
 
@@ -33,10 +32,7 @@ public class EntityThornTrap extends Entity {
   }
 
   public EntityThornTrap(World world, float damage, int duration, int slownessDuration, int slownessAmplifier, int poisonDuration, int poisonAmplifier) {
-    super(world);
-    this.setInvisible(false);
-    this.setSize(1, 1);
-    getDataManager().register(lifetime, duration);
+    super(world, SpellRoseThorns.instance);
     this.setNoGravity(false);
     this.noClip = false;
     this.damage = damage;
@@ -111,7 +107,11 @@ public class EntityThornTrap extends Entity {
           setDead();
           for (EntityLivingBase entity : entities) {
             if (!(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
-              entity.attackEntityFrom(DamageSource.CACTUS.causeMobDamage(player), damage);
+              if (modifiers != null && instance.peaceful(modifiers) && EntityUtil.isFriendly(entity)) {
+                continue;
+              }
+              entity.attackEntityFrom(ModDamage.roseDamageFrom(player), damage);
+              // TODO: Handle other damage types/etc here
               entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, slownessDuration, slownessAmplifier));
               entity.addPotionEffect(new PotionEffect(MobEffects.POISON, poisonDuration, poisonAmplifier));
               entity.setLastAttackedEntity(player);
@@ -121,15 +121,9 @@ public class EntityThornTrap extends Entity {
           if (world.isRemote) {
             for (int i = 0; i < 30; i++) {
               if (rand.nextBoolean()) {
-                ParticleUtil.spawnParticleThorn(world, (float) posX + 0.25f * (rand.nextFloat() - 0.5f), (float) posY + 0.25f * (rand.nextFloat() - 0.5f),
-                    (float) posZ + 0.25f * (rand.nextFloat() - 0.5f), 0.375f * rand.nextFloat() - 0.1875f, 0.1f + 0.125f * rand.nextFloat(),
-                    0.375f * rand.nextFloat() - 0.1875f, SpellRoseThorns.instance.getRed1(), SpellRoseThorns.instance.getGreen1(),
-                    SpellRoseThorns.instance.getBlue1(), 0.5f, 4.0f, 24, rand.nextBoolean());
+                ParticleUtil.spawnParticleThorn(world, (float) posX + 0.25f * (rand.nextFloat() - 0.5f), (float) posY + 0.25f * (rand.nextFloat() - 0.5f), (float) posZ + 0.25f * (rand.nextFloat() - 0.5f), 0.375f * rand.nextFloat() - 0.1875f, 0.1f + 0.125f * rand.nextFloat(), 0.375f * rand.nextFloat() - 0.1875f, SpellRoseThorns.instance.getRed1(), SpellRoseThorns.instance.getGreen1(), SpellRoseThorns.instance.getBlue1(), 0.5f, 4.0f, 24, rand.nextBoolean());
               } else {
-                ParticleUtil.spawnParticleThorn(world, (float) posX + 0.25f * (rand.nextFloat() - 0.5f), (float) posY + 0.25f * (rand.nextFloat() - 0.5f),
-                    (float) posZ + 0.25f * (rand.nextFloat() - 0.5f), 0.375f * rand.nextFloat() - 0.1875f, 0.1f + 0.125f * rand.nextFloat(),
-                    0.375f * rand.nextFloat() - 0.1875f, SpellRoseThorns.instance.getRed2(), SpellRoseThorns.instance.getGreen2(),
-                    SpellRoseThorns.instance.getBlue2(), 0.5f, 4.0f, 24, rand.nextBoolean());
+                ParticleUtil.spawnParticleThorn(world, (float) posX + 0.25f * (rand.nextFloat() - 0.5f), (float) posY + 0.25f * (rand.nextFloat() - 0.5f), (float) posZ + 0.25f * (rand.nextFloat() - 0.5f), 0.375f * rand.nextFloat() - 0.1875f, 0.1f + 0.125f * rand.nextFloat(), 0.375f * rand.nextFloat() - 0.1875f, SpellRoseThorns.instance.getRed2(), SpellRoseThorns.instance.getGreen2(), SpellRoseThorns.instance.getBlue2(), 0.5f, 4.0f, 24, rand.nextBoolean());
               }
             }
           }
@@ -140,12 +134,12 @@ public class EntityThornTrap extends Entity {
 
   @Override
   protected void readEntityFromNBT(NBTTagCompound compound) {
-    this.playerId = net.minecraft.nbt.NBTUtil.getUUIDFromTag(compound.getCompoundTag("id"));
+    super.readEntityFromNBT(compound);
   }
 
   @Override
   protected void writeEntityToNBT(NBTTagCompound compound) {
-    compound.setTag("id", net.minecraft.nbt.NBTUtil.createUUIDTag(playerId));
+    super.writeEntityToNBT(compound);
   }
 
 }
