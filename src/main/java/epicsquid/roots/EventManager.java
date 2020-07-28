@@ -92,18 +92,17 @@ public class EventManager {
 
     World world = entity.getEntityWorld();
 
+    PotionEffect effect = entity.getActivePotionEffect(ModPotions.petal_shell);
     if (entity instanceof EntityPlayer && !world.isRemote) {
-      EntityPlayer player = ((EntityPlayer) entity);
-      PotionEffect effect = player.getActivePotionEffect(ModPotions.petal_shell);
       if (effect != null) {
         int newCount = effect.getAmplifier() - 1;
-        player.removePotionEffect(ModPotions.petal_shell);
+        entity.removePotionEffect(ModPotions.petal_shell);
         if (newCount > 0) {
-          player.addPotionEffect(new PotionEffect(ModPotions.petal_shell, 60 * 20, newCount, false, false));
+          entity.addPotionEffect(new PotionEffect(ModPotions.petal_shell, 60 * 20, newCount, false, false));
         }
         event.setAmount(0);
         event.setCanceled(true);
-        PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ), player);
+        PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(entity.posX, entity.posY + 1.0f, entity.posZ), entity);
       }
     }
     if (trueSource instanceof EntityLivingBase) {
