@@ -65,43 +65,25 @@ public class EntityThornTrap extends EntitySpellModifiable<SpellRoseThorns> {
       this.motionX = 0;
       this.motionZ = 0;
     }
-    getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
-    getDataManager().setDirty(lifetime);
-    if (getDataManager().get(lifetime) <= 0) {
-      setDead();
-    }
     if (world.isRemote) {
       if (onGround) {
         if (rand.nextBoolean()) {
-          ParticleUtil
-              .spawnParticleThorn(world, (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f),
-                  0.125f * (rand.nextFloat() - 0.5f), SpellRoseThorns.instance.getRed1(), SpellRoseThorns.instance.getGreen1(),
-                  SpellRoseThorns.instance.getBlue1(), 0.5f, 2.5f, 12, rand.nextBoolean());
+          ParticleUtil.spawnParticleThorn(world, (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), SpellRoseThorns.instance.getRed1(), SpellRoseThorns.instance.getGreen1(), SpellRoseThorns.instance.getBlue1(), 0.5f, 2.5f, 12, rand.nextBoolean());
         } else {
-          ParticleUtil
-              .spawnParticleThorn(world, (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f),
-                  0.125f * (rand.nextFloat() - 0.5f), SpellRoseThorns.instance.getRed2(), SpellRoseThorns.instance.getGreen2(),
-                  SpellRoseThorns.instance.getBlue2(), 0.5f, 2.5f, 12, rand.nextBoolean());
+          ParticleUtil.spawnParticleThorn(world, (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), SpellRoseThorns.instance.getRed2(), SpellRoseThorns.instance.getGreen2(), SpellRoseThorns.instance.getBlue2(), 0.5f, 2.5f, 12, rand.nextBoolean());
         }
       } else {
         if (rand.nextBoolean()) {
-          ParticleUtil
-              .spawnParticleGlow(world, (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f),
-                  0.125f * (rand.nextFloat() - 0.5f), SpellRoseThorns.instance.getRed1(), SpellRoseThorns.instance.getGreen1(),
-                  SpellRoseThorns.instance.getBlue1(), 0.5f, 5f, 12);
+          ParticleUtil.spawnParticleGlow(world, (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), SpellRoseThorns.instance.getRed1(), SpellRoseThorns.instance.getGreen1(), SpellRoseThorns.instance.getBlue1(), 0.5f, 5f, 12);
         } else {
-          ParticleUtil
-              .spawnParticleGlow(world, (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f),
-                  0.125f * (rand.nextFloat() - 0.5f), SpellRoseThorns.instance.getRed2(), SpellRoseThorns.instance.getGreen2(),
-                  SpellRoseThorns.instance.getBlue2(), 0.5f, 5f, 12);
+          ParticleUtil.spawnParticleGlow(world, (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), SpellRoseThorns.instance.getRed2(), SpellRoseThorns.instance.getGreen2(), SpellRoseThorns.instance.getBlue2(), 0.5f, 5f, 12);
         }
       }
     }
     if (playerId != null) {
       EntityPlayer player = world.getPlayerEntityByUUID(playerId);
       if (player != null) {
-        List<EntityLivingBase> entities = world
-            .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 1.5, posY - 1.5, posZ - 1.5, posX + 1.5, posY + 1.5, posZ + 1.5));
+        List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 1.5, posY - 1.5, posZ - 1.5, posX + 1.5, posY + 1.5, posZ + 1.5));
         entities.remove(player);
         if (entities.size() > 0) {
           setDead();
