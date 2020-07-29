@@ -64,7 +64,7 @@ public class ModDamage {
     return source;
   }
 
-  public static DamageSource waterDamageSource(@Nullable EntityPlayer player) {
+  public static DamageSource waterDamageFrom(@Nullable EntityPlayer player) {
     if (player == null) {
       return WATER_DAMAGE;
     }
