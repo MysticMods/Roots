@@ -46,7 +46,7 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
               new AxisAlignedBB(posX + vx * i - 1.5, posY + vy * i - 1.5, posZ + vz * i - 1.5, posX + vx * i + 1.5, posY + vy * i + 1.5, posZ + vz * i + 1.5));
           for (EntityLivingBase entity : entities) {
             if (entity != player && !(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
-              if (modifiers != null && instance.peaceful(modifiers) && EntityUtil.isFriendly(entity)) {
+              if (modifiers != null && instance.has(SpellWildfire.PEACEFUL, modifiers) && EntityUtil.isFriendly(entity)) {
                 continue;
               }
               entity.setFire((int) (instance.fire_duration + instance.fire_duration * amplifier));
