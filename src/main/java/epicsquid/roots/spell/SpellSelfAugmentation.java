@@ -1,32 +1,21 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
-import epicsquid.roots.network.fx.MessageDisarmFX;
 import epicsquid.roots.properties.Property;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreIngredient;
-
-import java.util.List;
 
 public class SpellSelfAugmentation extends SpellBase {
 
@@ -46,9 +35,9 @@ public class SpellSelfAugmentation extends SpellBase {
 
   public static Property<Integer> PROP_SLOW_FALL_DURATION = new Property<>("slow_fall_duration", 18*20).setDescription("duration for the slow fall potion effect");
 
-  public static Modifier PERESKIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "reach"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
-  public static Modifier WILDEWHEET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "speed"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
-  public static Modifier MOONGLOW_LEAF = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "slow_fall"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 1)));
+  public static Modifier REACH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "reach"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
+  public static Modifier SPEED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "speed"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
+  public static Modifier SLOW_FALL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "slow_fall"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 1)));
   public static Modifier SPIRIT_HERB = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "light_drifter"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1)));
   public static Modifier TERRA_MOSS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "magnetism"), ModifierCores.TERRA_MOSS, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.TERRA_MOSS, 1)));
   public static Modifier BAFFLE_CAP = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "bitter_luck"), ModifierCores.BAFFLE_CAP, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 1)));
@@ -58,7 +47,7 @@ public class SpellSelfAugmentation extends SpellBase {
   public static Modifier DEWGONIA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "second_wind"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
   static {
-    SPIRIT_HERB.addConflicts(MOONGLOW_LEAF, TERRA_MOSS);
+    SPIRIT_HERB.addConflicts(SLOW_FALL, TERRA_MOSS);
   }
 
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "self_augmentation");
@@ -70,7 +59,7 @@ public class SpellSelfAugmentation extends SpellBase {
   private SpellSelfAugmentation(ResourceLocation name) {
     super(name, TextFormatting.DARK_RED, 122F / 255F, 0F, 0F, 58F / 255F, 58F / 255F, 58F / 255F);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_REACH, PROP_REACH_DURATION, PROP_SPEED_AMPLIFIER, PROP_SPEED_DURATION, PROP_SLOW_FALL_DURATION);
-    acceptsModifiers(PERESKIA, WILDEWHEET, MOONGLOW_LEAF, SPIRIT_HERB, TERRA_MOSS, BAFFLE_CAP, CLOUD_BERRY, INFERNAL_BULB, STALICRIPE, DEWGONIA);
+    acceptsModifiers(REACH, SPEED, SLOW_FALL, SPIRIT_HERB, TERRA_MOSS, BAFFLE_CAP, CLOUD_BERRY, INFERNAL_BULB, STALICRIPE, DEWGONIA);
   }
 
   @Override
@@ -86,13 +75,13 @@ public class SpellSelfAugmentation extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer caster, StaffModifierInstanceList modifiers, int ticks) {
-    if (has(PERESKIA, modifiers)) {
+    if (has(REACH, modifiers)) {
       caster.addPotionEffect(new PotionEffect(ModPotions.reach, ampInt(reach_duration), 0, false, false));
     }
-    if (has(WILDEWHEET, modifiers)) {
+    if (has(SPEED, modifiers)) {
       caster.addPotionEffect(new PotionEffect(MobEffects.SPEED, ampInt(speed_duration), speed_amplifier, false, false));
     }
-    if (has(MOONGLOW_LEAF, modifiers)) {
+    if (has(SLOW_FALL, modifiers)) {
       // TODO: Slow Fall???
       //caster.addPotionEffect(new PotionEffect(MobEffects.
     }
