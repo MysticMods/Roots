@@ -12,7 +12,7 @@ public class RandomIterable<T> implements Iterable<T> {
 
   public RandomIterable(List<T> wrap) {
     this.wrap = wrap;
-    this.list = IntStream.rangeClosed(0, wrap.size()).boxed().collect(Collectors.toList());
+    this.list = IntStream.rangeClosed(0, wrap.size()-1).boxed().collect(Collectors.toList());
     Collections.shuffle(this.list);
   }
 
