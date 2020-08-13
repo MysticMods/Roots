@@ -69,6 +69,7 @@ public class SpellAcidCloud extends SpellBase {
 
   private float damage, night_damage, undead_damage, healing;
   private int poisonDuration, poisonAmplification, fireDuration, regen_duration, regen_amp, damage_count, heal_count;
+  public int radius, radius_boost;
 
 
   public SpellAcidCloud(ResourceLocation name) {
@@ -96,8 +97,13 @@ public class SpellAcidCloud extends SpellBase {
       List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, info.has(RADIUS) ? boxBoost.offset(player.getPosition()) : boxGeneral.offset(player.getPosition()));
       int healed = 0;
       int damaged = 0;
+      if (info.has(SPEED)) {
+        player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 1, 18, false, false));
+        player.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 1, 0, false, false));
+      }
       for (EntityLivingBase e : new RandomIterable<>(entities)) {
-        // TODO: Make instanceof check helper function
+        // TODO: Visual effect of cloud (white or gold)
+        // TODO: Enforce healing check
         if (info.has(HEALING)) {
           if (EntityUtil.isHostile(e) || EntityUtil.isHostileTo(e, player)) {
             continue;
@@ -105,6 +111,7 @@ public class SpellAcidCloud extends SpellBase {
           if (regen_duration != -1) {
             e.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, regen_duration, regen_amp));
           }
+          // TODO: Particle effect to denote entities being healed
           if (healing > 0) {
             e.heal(healing);
           }
@@ -113,6 +120,7 @@ public class SpellAcidCloud extends SpellBase {
             break;
           }
         } else {
+          // TODO: Make instanceof check helper function
           if (e != player && !(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
             if (e.hurtTime <= 0 && !e.isDead) {
               if (info.has(PEACEFUL) && EntityUtil.isFriendly(e)) {
@@ -125,6 +133,7 @@ public class SpellAcidCloud extends SpellBase {
               } else {
                 e.attackEntityFrom(DamageSource.causeMobDamage(player), ampFloat(damage));
               }
+              // TODO: Additional visual effect
               if (info.has(NIGHT)) {
                 long time = player.world.getWorldTime() - 12000;
                 if (time >= 0) {
@@ -134,6 +143,7 @@ public class SpellAcidCloud extends SpellBase {
                   }
                 }
               }
+              // TODO: Additional visual effect
               if (info.has(UNDEAD) && e.isEntityUndead()) {
                 e.attackEntityFrom(ModDamage.radiantDamageFrom(player), ampFloat(undead_damage));
               }
@@ -163,8 +173,8 @@ public class SpellAcidCloud extends SpellBase {
     this.poisonAmplification = properties.get(PROP_POISON_AMPLIFICATION);
     this.poisonDuration = properties.get(PROP_POISON_DURATION);
     this.fireDuration = properties.get(PROP_FIRE_DURATION);
-    int radius = properties.get(PROP_RADIUS_GENERAL);
-    int radius_boost = properties.get(PROP_RADIUS_BOOST);
+    this.radius = properties.get(PROP_RADIUS_GENERAL);
+    this.radius_boost = properties.get(PROP_RADIUS_BOOST);
     boxGeneral = new AxisAlignedBB(-radius, -radius, -radius, radius +1, radius +1, radius +1);
     boxBoost = boxGeneral.grow(radius_boost);
     this.night_damage = properties.get(PROP_NIGHT_DAMAGE);
