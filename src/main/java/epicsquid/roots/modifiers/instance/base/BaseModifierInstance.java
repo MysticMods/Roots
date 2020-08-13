@@ -132,7 +132,11 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
   @Override
   public NBTTagCompound serializeNBT() {
     NBTTagCompound tag = new NBTTagCompound();
-    tag.setString("m", modifier.getRegistryName().toString());
+    try {
+      tag.setString("m", modifier.getRegistryName().toString());
+    } catch (NullPointerException e) {
+      System.out.println("null");
+    }
     tag.setBoolean("a", applied);
     return tag;
   }

@@ -37,7 +37,7 @@ public class SpellStormCloud extends SpellBase {
   public static Modifier EARTHQUAKE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "earthquake"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier ICE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "freezing_rain"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_winter_cloud");
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_storm_cloud");
   public static SpellStormCloud instance = new SpellStormCloud(spellName);
 
   private int duration;

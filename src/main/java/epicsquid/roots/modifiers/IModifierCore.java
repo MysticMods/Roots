@@ -18,4 +18,6 @@ public interface IModifierCore {
   String getFormatting();
 
   boolean isBasic();
+
+  int getKey();
 }

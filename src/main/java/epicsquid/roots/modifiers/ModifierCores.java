@@ -96,4 +96,22 @@ public enum ModifierCores implements IModifierCore {
   public boolean isBasic() {
     return this == GUNPOWDER || this == NETHER_WART || this == REDSTONE || this == BLAZE_POWDER || this == GLOWSTONE || this == RUNIC_DUST;
   }
+
+  @Override
+  public int getKey() {
+    return ordinal();
+  }
+
+  @Nullable
+  public static IModifierCore getByOrdinal (int ordinal) {
+    if (ordinal == -1) {
+      return BaseModifiers.AIR;
+    }
+    for (ModifierCores core : values()) {
+      if (core.ordinal() == ordinal) {
+        return core;
+      }
+    }
+    return null;
+  }
 }

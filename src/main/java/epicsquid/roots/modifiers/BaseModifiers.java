@@ -39,6 +39,11 @@ public class BaseModifiers {
     public boolean isBasic() {
       return true;
     }
+
+    @Override
+    public int getKey() {
+      return -1;
+    }
   };
 
   public static Modifier NULL = new Modifier(new ResourceLocation(Roots.MODID, "null"), AIR, ModifierCost.noCost());
