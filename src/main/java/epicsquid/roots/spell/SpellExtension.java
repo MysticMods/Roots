@@ -73,7 +73,7 @@ public class SpellExtension extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, StaffModifierInstanceList modifiers, int ticks) {
+  public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
     BlockPos playerPos = caster.getPosition();
     World world = caster.world;
 

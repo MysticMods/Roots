@@ -67,7 +67,7 @@ public class SpellGeas extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     boolean foundTarget = false;
     for (int i = 0; i < 4 && !foundTarget; i++) {
       double x = player.posX + player.getLookVec().x * 3.0 * (float) i;

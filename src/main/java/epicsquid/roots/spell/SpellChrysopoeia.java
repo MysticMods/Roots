@@ -81,7 +81,7 @@ public class SpellChrysopoeia extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, StaffModifierInstanceList modifiers, int ticks) {
+  public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
     World world = caster.world;
     ItemStack offHand = caster.getHeldItemOffhand();
     if (offHand.isEmpty()) {

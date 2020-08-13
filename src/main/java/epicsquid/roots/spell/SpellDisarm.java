@@ -79,7 +79,7 @@ public class SpellDisarm extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, StaffModifierInstanceList modifiers, int ticks) {
+  public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
     BlockPos playerPos = caster.getPosition();
     World world = caster.world;
 
@@ -113,7 +113,7 @@ public class SpellDisarm extends SpellBase {
           }
           return true;
         }
-      } else if (has(PEACEFUL) && EntityUtil.isFriendlyTo(entity, caster)) {
+      } else if (info.has(PEACEFUL) && EntityUtil.isFriendlyTo(entity, caster)) {
         entity.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, this.rearm_duration, 2));
       }
     }

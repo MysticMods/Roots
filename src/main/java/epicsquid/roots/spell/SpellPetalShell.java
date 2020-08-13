@@ -70,9 +70,9 @@ public class SpellPetalShell extends SpellBase {
   private AxisAlignedBB bb;
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     if (!player.world.isRemote) {
-      if (has(PEACEFUL)) {
+      if (info.has(PEACEFUL)) {
         World world = player.world;
         List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, bb.offset(player.getPosition()));
         entities.removeIf(o -> !EntityUtil.isFamiliar(player, o));

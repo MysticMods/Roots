@@ -76,7 +76,7 @@ public class SpellSanctuary extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
 
     List<Entity> entities = Util.getEntitiesWithinRadius(player.world, Entity.class, player.getPosition(), radius_x, radius_y, radius_z);
 

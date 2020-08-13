@@ -59,7 +59,7 @@ public class SpellDesaturate extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, StaffModifierInstanceList modifiers, int ticks) {
+  public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
     if (!caster.shouldHeal()) {
       return false;
     }

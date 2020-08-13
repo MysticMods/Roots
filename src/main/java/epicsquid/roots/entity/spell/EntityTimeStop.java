@@ -46,7 +46,7 @@ public class EntityTimeStop extends EntitySpellModifiable<SpellTimeStop> {
     List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 9.0, posY - 1.0, posZ - 9.0, posX + 10.0, posY + 20.0, posZ + 10.0));
     for (EntityLivingBase e : entities) {
       if (!(e instanceof EntityPlayer)) {
-        if (modifiers != null && instance.has(SpellTimeStop.PEACEFUL, modifiers) && EntityUtil.isFriendly(e)) {
+        if (modifiers != null && modifiers.has(SpellTimeStop.PEACEFUL) && EntityUtil.isFriendly(e)) {
           continue;
         }
         e.addPotionEffect(new PotionEffect(ModPotions.time_stop, 40, 0, false, false));

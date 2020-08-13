@@ -79,4 +79,13 @@ public class StaffModifierInstanceList extends BaseModifierInstanceList<StaffMod
     }
     return modifiers;
   }
+
+  public boolean has (IModifier modifier) {
+    StaffModifierInstance instance = get(modifier);
+    if (instance == null) {
+      return false;
+    }
+
+    return instance.isApplied() && instance.isEnabled();
+  }
 }
