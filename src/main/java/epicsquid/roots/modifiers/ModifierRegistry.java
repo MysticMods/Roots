@@ -1,5 +1,6 @@
 package epicsquid.roots.modifiers;
 
+import epicsquid.roots.Roots;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
@@ -53,5 +54,18 @@ public class ModifierRegistry {
 
   public static Collection<Modifier> getModifiers() {
     return map.values();
+  }
+
+  @Nullable
+  public static Modifier fromHashCode (int code) {
+    for (Map.Entry<ResourceLocation, Modifier> entry : map.entrySet()) {
+      if (entry.getKey().hashCode() == code) {
+        return entry.getValue();
+      } else {
+        Roots.logger.info("Modifier " + entry.getKey() + " hash code is: " + entry.getKey().hashCode());
+      }
+    }
+
+    return null;
   }
 }

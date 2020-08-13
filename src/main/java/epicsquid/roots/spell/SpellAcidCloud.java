@@ -35,6 +35,8 @@ public class SpellAcidCloud extends SpellBase {
   public static Property<Integer> PROP_POISON_DURATION = new Property<>("poison_duration", 80).setDescription("duration in ticks of the poison effect applied on the enemies");
   public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 5).setDescription("duration in seconds of the fire effect applied on the enemies");
   public static Property<Integer> PROP_POISON_AMPLIFICATION = new Property<>("poison_amplification", 0).setDescription("the level of the poison effect applied on the enemies (0 is the first level)");
+  public static Property<Integer> PROP_RADIUS_GENERAL = new Property<>("radius_general", 4).setDescription("default radius for the acid cloud");
+  public static Property<Integer> PROP_RADIUS_BOOST = new Property<>("radius_boost", 2).setDescription("how much radius should be boosted by when Radius Boost modifier applied");
 
   // TODO: Costs
 
@@ -58,14 +60,12 @@ public class SpellAcidCloud extends SpellBase {
   public static SpellAcidCloud instance = new SpellAcidCloud(spellName);
 
   private float damage;
-  private int poisonDuration;
-  private int poisonAmplification;
-  private int fireDuration;
+  public int poisonDuration, poisonAmplification, fireDuration, radius, radius_boost;
 
 
   public SpellAcidCloud(ResourceLocation name) {
     super(name, TextFormatting.DARK_GREEN, 80f / 255f, 160f / 255f, 40f / 255f, 64f / 255f, 96f / 255f, 32f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_POISON_DURATION, PROP_FIRE_DURATION, PROP_POISON_AMPLIFICATION);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_POISON_DURATION, PROP_FIRE_DURATION, PROP_POISON_AMPLIFICATION, PROP_RADIUS_BOOST, PROP_RADIUS_GENERAL);
     acceptsModifiers(RADIUS, PEACEFUL, PARALYSIS, NIGHT, UNDEAD, HEALING, SPEED, FIRE, PHYSICAL, UNDERWATER);
   }
 
@@ -80,11 +80,12 @@ public class SpellAcidCloud extends SpellBase {
     );
   }
 
+  public static AxisAlignedBB boxGeneral, boxBoost;
+
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks) {
     if (!player.world.isRemote) {
-      List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class,
-          new AxisAlignedBB(player.posX - 4.0, player.posY - 1.0, player.posZ - 4.0, player.posX + 4.0, player.posY + 3.0, player.posZ + 4.0));
+      List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, has(RADIUS) ? boxBoost.offset(player.getPosition()) : boxGeneral.offset(player.getPosition()));
       for (EntityLivingBase e : entities) {
         if (e != player && !(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
           if (e.hurtTime <= 0 && !e.isDead) {
@@ -119,5 +120,9 @@ public class SpellAcidCloud extends SpellBase {
     this.poisonAmplification = properties.get(PROP_POISON_AMPLIFICATION);
     this.poisonDuration = properties.get(PROP_POISON_DURATION);
     this.fireDuration = properties.get(PROP_FIRE_DURATION);
+    this.radius = properties.get(PROP_RADIUS_GENERAL);
+    this.radius_boost = properties.get(PROP_RADIUS_BOOST);
+    boxGeneral = new AxisAlignedBB(-radius, -radius, -radius, radius+1, radius+1, radius+1);
+    boxBoost = boxGeneral.grow(radius_boost);
   }
 }
