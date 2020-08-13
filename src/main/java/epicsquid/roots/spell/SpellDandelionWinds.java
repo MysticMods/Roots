@@ -67,7 +67,7 @@ public class SpellDandelionWinds extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     PacketHandler.sendToAllTracking(new MessageDandelionCastFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ), player);
     List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class,
         new AxisAlignedBB(player.posX + player.getLookVec().x * 6.0 - 6.0, player.posY + player.getLookVec().y * 6.0 - 6.0,
@@ -76,7 +76,7 @@ public class SpellDandelionWinds extends SpellBase {
     if (entities.size() > 0) {
       for (EntityLivingBase e : entities) {
         if (e != player) {
-          if (has(PEACEFUL) && EntityUtil.isFriendly(e)) {
+          if (info.has(PEACEFUL) && EntityUtil.isFriendly(e)) {
             continue;
           }
           e.motionX += (player.getLookVec().x);

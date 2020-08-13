@@ -83,16 +83,16 @@ public class SpellAcidCloud extends SpellBase {
   public static AxisAlignedBB boxGeneral, boxBoost;
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     if (!player.world.isRemote) {
-      List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, has(RADIUS) ? boxBoost.offset(player.getPosition()) : boxGeneral.offset(player.getPosition()));
+      List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, info.has(RADIUS) ? boxBoost.offset(player.getPosition()) : boxGeneral.offset(player.getPosition()));
       for (EntityLivingBase e : entities) {
         if (e != player && !(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
           if (e.hurtTime <= 0 && !e.isDead) {
-            if (has(PEACEFUL) && EntityUtil.isFriendly(e)) {
+            if (info.has(PEACEFUL) && EntityUtil.isFriendly(e)) {
               continue;
             }
-            if (has(FIRE)) {
+            if (info.has(FIRE)) {
               e.attackEntityFrom(ModDamage.fireDamageFrom(player), ampFloat(damage)/2);
               e.attackEntityFrom(DamageSource.causeMobDamage(player), ampFloat(damage)/2);
               e.setFire(fireDuration);
@@ -107,7 +107,7 @@ public class SpellAcidCloud extends SpellBase {
           }
         }
       }
-      PacketHandler.sendToAllTracking(new MessageAcidCloudFX(player.posX, player.posY + player.getEyeHeight(), player.posZ, modifiers), player);
+      PacketHandler.sendToAllTracking(new MessageAcidCloudFX(player.posX, player.posY + player.getEyeHeight(), player.posZ, info), player);
     }
     return true;
   }

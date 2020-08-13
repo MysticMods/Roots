@@ -64,7 +64,7 @@ public class SpellNaturesScythe extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, StaffModifierInstanceList modifiers, int ticks) {
+  public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
     if (ticks % speedSubInt(interval) != 0) {
       return false;
     }

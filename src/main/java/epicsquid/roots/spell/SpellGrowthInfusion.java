@@ -75,13 +75,13 @@ public class SpellGrowthInfusion extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     boolean aoe = false;
-    if (has(RADIUS1, modifiers) || has(RADIUS2, modifiers)) {
+    if (info.has(RADIUS1) || info.has(RADIUS2)) {
       aoe = true;
     }
     int boost = 0;
-    if (aoe && (has(RADIUS1, modifiers) || has(RADIUS2, modifiers))) {
+    if (aoe && (info.has(RADIUS1) || info.has(RADIUS2))) {
       boost = radius_boost;
     }
     if (aoe) {
@@ -94,6 +94,8 @@ public class SpellGrowthInfusion extends SpellBase {
           for (int j = 0; j < ticks; j++) {
             state.getBlock().randomTick(player.world, pos, state, Util.rand);
           }
+          // TODO: FINISH WRITING THIS
+          // TODO: CENTRALISE EFFECT COLOURS
           if (player.world.rand.nextInt(3) == 0) {
             //PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);
           }

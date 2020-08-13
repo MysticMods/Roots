@@ -66,8 +66,6 @@ public abstract class SpellBase extends RegistryItem implements SpellMulitiplier
   protected Buff speedy;
   protected Buff amplifier;
 
-  protected StaffModifierInstanceList tempModifiers = null;
-
   public SpellRecipe recipe = SpellRecipe.EMPTY;
 
   public enum EnumCastType {
@@ -89,21 +87,17 @@ public abstract class SpellBase extends RegistryItem implements SpellMulitiplier
     this.secondColours = new float[]{r2, g2, b2};
   }
 
-  public boolean has(IModifier modifier, StaffModifierInstanceList modifiers) {
-    if (modifier == null) {
+/*  public boolean has(IModifier modifier, StaffModifierInstanceList modifiers) {
+    if (modifiers == null) {
       throw new NullPointerException("Modifiers supplied to SpellBase::has cannot be null.");
-/*      return false;*/
+*//*      return false;*//*
     }
     StaffModifierInstance instance = modifiers.get(modifier);
     if (instance == null) {
       return false;
     }
     return instance.isApplied() && instance.isEnabled();
-  }
-
-  protected boolean has (IModifier modifier) {
-    return has(modifier, tempModifiers);
-  }
+  }*/
 
   public float[] getFirstColours() {
     return firstColours;
@@ -367,7 +361,7 @@ public abstract class SpellBase extends RegistryItem implements SpellMulitiplier
   }
 
   public CastResult cast(EntityPlayer caster, StaffSpellInfo info, int ticks) {
-    tempModifiers = info.getModifiers();
+    StaffModifierInstanceList tempModifiers = info.getModifiers();
     amplifier = Buff.NONE;
     StaffModifierInstance mod = tempModifiers.get(BaseModifiers.EMPOWER);
     if (mod != null && mod.isEnabled()) {
@@ -406,7 +400,7 @@ public abstract class SpellBase extends RegistryItem implements SpellMulitiplier
     return result;
   }
 
-  protected abstract boolean cast(EntityPlayer caster, StaffModifierInstanceList modifiers, int ticks);
+  protected abstract boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks);
 
   public float getRed1() {
     return red1;

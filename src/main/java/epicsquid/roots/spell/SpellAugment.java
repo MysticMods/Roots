@@ -74,14 +74,14 @@ public class SpellAugment extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, StaffModifierInstanceList modifiers, int ticks) {
-    if (has(REACH, modifiers)) {
+  public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
+    if (info.has(REACH)) {
       caster.addPotionEffect(new PotionEffect(ModPotions.reach, ampInt(reach_duration), 0, false, false));
     }
-    if (has(SPEED, modifiers)) {
+    if (info.has(SPEED)) {
       caster.addPotionEffect(new PotionEffect(MobEffects.SPEED, ampInt(speed_duration), speed_amplifier, false, false));
     }
-    if (has(SLOW_FALL, modifiers)) {
+    if (info.has(SLOW_FALL)) {
       // TODO: Slow Fall???
       //caster.addPotionEffect(new PotionEffect(MobEffects.
     }

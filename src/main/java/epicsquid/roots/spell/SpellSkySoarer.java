@@ -51,7 +51,7 @@ public class SpellSkySoarer extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList modifiers, int ticks) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     if (!player.world.isRemote) {
       EntityBoost boost = new EntityBoost(player.world);
       boost.setPlayer(player.getUniqueID());
