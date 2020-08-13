@@ -31,6 +31,16 @@ public class ModDamage {
 
   public static DamageSource ROSE_DAMAGE = (new DamageSource("rose_thorns")).setDamageBypassesArmor();
 
+  public static DamageSource magicDamageFrom (@Nullable EntityPlayer player) {
+    DamageSource source;
+    if (player == null) {
+      source = DamageSource.MAGIC;
+    } else {
+      source = new EntityDamageSource("magic", player).setDamageBypassesArmor().setMagicDamage();
+    }
+    return source;
+  }
+
   public static DamageSource roseDamageFrom (@Nullable EntityPlayer player) {
     DamageSource source;
     if (player == null) {
