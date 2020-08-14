@@ -102,6 +102,9 @@ public class StaffModifierInstance extends LibraryModifierInstance {
 
   @Override
   public Object2DoubleOpenHashMap<Herb> apply(Object2DoubleOpenHashMap<Herb> costs, CostType phase) {
+    if (!isEnabled() || !isApplied()) {
+      return costs;
+    }
     return modifier.apply(costs, phase);
   }
 

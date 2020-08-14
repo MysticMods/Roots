@@ -185,14 +185,20 @@ public class GuiImposer extends GuiContainer {
         this.drawTexturedModalRect(i2, j2, 176, 40, 20, 20);
         GlStateManager.disableBlend();
       } else if (!modInfo.isApplied()) { // There is a modifier but it isn't applied
+        GlStateManager.enableBlend();
         this.mc.getTextureManager().bindTexture(getTexture());
         this.drawTexturedModalRect(i2, j2, 176, 20, 20, 20);
+        GlStateManager.disableBlend();
       } else if (modInfo.isConflicting(container.getModifiers())) { // There is a modifier but it conflicts with other enabled modifiers
+        GlStateManager.enableBlend();
         this.mc.getTextureManager().bindTexture(getTexture());
         this.drawTexturedModalRect(i2, j2, 176, 60, 20, 20);
+        GlStateManager.disableBlend();
       } else if (modInfo.isDisabled()) { // There is a modifier and it is applied, but it's disabled
+        GlStateManager.enableBlend();
         this.mc.getTextureManager().bindTexture(getTexture());
         this.drawTexturedModalRect(i2, j2, 176, 0, 20, 20);
+        GlStateManager.disableBlend();
       }
     }
     super.drawSlot(slot);
