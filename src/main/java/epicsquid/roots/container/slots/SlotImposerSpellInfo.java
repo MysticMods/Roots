@@ -36,16 +36,29 @@ public class SlotImposerSpellInfo extends Slot {
     return false;
   }
 
+  private ItemStack stack = null;
+
   // TODO
   @Override
   public ItemStack getStack() {
+    if (stack != null) {
+      return stack;
+    }
+
     StaffSpellInfo info = this.info.apply(this.slot);
     if (info == null) {
       return ItemStack.EMPTY;
     } else {
-      // TODO: CACHE
-      return info.asStack();
+      if (stack == null) {
+        stack = info.asStack();
+      }
+
+      return stack;
     }
+  }
+
+  public void invalidate () {
+    this.stack = null;
   }
 
   @Override
