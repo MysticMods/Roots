@@ -37,6 +37,7 @@ public class ContainerImposer extends Container {
   public final TileEntityImposer tile;
   private final EntityPlayer player;
   private final Map<IModifierCore, Slot> coreSlotMap = new HashMap<>();
+  private List<SlotImposerSpellInfo> spellSlots = null;
 
   public ContainerImposer(EntityPlayer player, TileEntityImposer tile) {
     this.tile = tile;
@@ -104,11 +105,20 @@ public class ContainerImposer extends Container {
   }
 
   private void createSpellSlots() {
-    addSlotToContainer(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 1, 51, 37)); // Spot 1
-    addSlotToContainer(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 2, 56, 13)); // Spot 2
-    addSlotToContainer(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 3, 80, 8)); // Spot 3
-    addSlotToContainer(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 4, 104, 13)); // Spot 4
-    addSlotToContainer(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 5, 109, 37)); // Spot 5
+    addSpellSlot(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 1, 51, 37)); // Spot 1
+    addSpellSlot(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 2, 56, 13)); // Spot 2
+    addSpellSlot(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 3, 80, 8)); // Spot 3
+    addSpellSlot(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 4, 104, 13)); // Spot 4
+    addSpellSlot(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 5, 109, 37)); // Spot 5
+  }
+
+  private void addSpellSlot (SlotImposerSpellInfo slot) {
+    spellSlots.add(slot);
+    addSlotToContainer(slot);
+  }
+
+  public void invalidate () {
+    spellSlots.forEach(SlotImposerSpellInfo::invalidate);
   }
 
   private void addModifierSlot(IModifierCore core, TileEntityImposer imposer, int x, int y) {
@@ -146,6 +156,7 @@ public class ContainerImposer extends Container {
         StaffSpellInfo info = ((SlotImposerSpellInfo) slot).getInfo();
         if (info != null && info != StaffSpellInfo.EMPTY) {
           tile.setSlot(((SlotImposerSpellInfo) slot).getSlot());
+          invalidate();
         }
       } else if (slot instanceof SlotImposerModifierInfo) {
         SlotImposerModifierInfo info = (SlotImposerModifierInfo) slot;
@@ -168,6 +179,7 @@ public class ContainerImposer extends Container {
                 storage.saveToStack();
                 tile.markDirty();
                 tile.updatePacketViaState();
+                invalidate();
               }
             }
           }
