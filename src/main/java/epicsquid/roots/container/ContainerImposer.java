@@ -7,17 +7,20 @@
 
 package epicsquid.roots.container;
 
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.container.slots.SlotImposerModifierInfo;
 import epicsquid.roots.container.slots.SlotImposerSpellInfo;
 import epicsquid.roots.modifiers.IModifierCore;
 import epicsquid.roots.modifiers.ModifierCores;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
+import epicsquid.roots.network.MessageInvalidateContainer;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.tileentity.TileEntityImposer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
@@ -28,16 +31,17 @@ import net.minecraft.util.math.BlockPos;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ContainerImposer extends Container {
+public class ContainerImposer extends Container implements IInvalidatingContainer {
 
   public final TileEntityImposer tile;
   private final EntityPlayer player;
   private final Map<IModifierCore, Slot> coreSlotMap = new HashMap<>();
-  private List<SlotImposerSpellInfo> spellSlots = null;
+  private List<SlotImposerSpellInfo> spellSlots = new ArrayList<>();
 
   public ContainerImposer(EntityPlayer player, TileEntityImposer tile) {
     this.tile = tile;
@@ -112,12 +116,13 @@ public class ContainerImposer extends Container {
     addSpellSlot(new SlotImposerSpellInfo(this::isSelectSpell, this::getInfoFor, 5, 109, 37)); // Spot 5
   }
 
-  private void addSpellSlot (SlotImposerSpellInfo slot) {
+  private void addSpellSlot(SlotImposerSpellInfo slot) {
     spellSlots.add(slot);
     addSlotToContainer(slot);
   }
 
-  public void invalidate () {
+  @Override
+  public void invalidate() {
     spellSlots.forEach(SlotImposerSpellInfo::invalidate);
   }
 
@@ -157,6 +162,8 @@ public class ContainerImposer extends Container {
         if (info != null && info != StaffSpellInfo.EMPTY) {
           tile.setSlot(((SlotImposerSpellInfo) slot).getSlot());
           invalidate();
+          MessageInvalidateContainer message = new MessageInvalidateContainer();
+          PacketHandler.INSTANCE.sendTo(message, (EntityPlayerMP) player);
         }
       } else if (slot instanceof SlotImposerModifierInfo) {
         SlotImposerModifierInfo info = (SlotImposerModifierInfo) slot;
@@ -180,6 +187,8 @@ public class ContainerImposer extends Container {
                 tile.markDirty();
                 tile.updatePacketViaState();
                 invalidate();
+                MessageInvalidateContainer message = new MessageInvalidateContainer();
+                PacketHandler.INSTANCE.sendTo(message, (EntityPlayerMP) player);
               }
             }
           }

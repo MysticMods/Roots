@@ -50,6 +50,7 @@ public class PacketHandler {
 
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageClearToasts.MessageHolder.class, MessageClearToasts.class, Side.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageUpdateHerb.MessageHolder.class, MessageUpdateHerb.class, Side.CLIENT);
+    epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageInvalidateContainer.MessageHolder.class, MessageInvalidateContainer.class, Side.CLIENT);
 
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageHarvestCompleteFX.MessageHolder.class, MessageHarvestCompleteFX.class, Side.CLIENT);
     epicsquid.mysticallib.network.PacketHandler.registerMessage(MessageGroveCompleteFX.MessageHolder.class, MessageGroveCompleteFX.class, Side.CLIENT);

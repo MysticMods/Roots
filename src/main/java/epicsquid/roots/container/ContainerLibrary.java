@@ -30,7 +30,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
-public class ContainerLibrary extends Container {
+public class ContainerLibrary extends Container implements IInvalidatingContainer {
 
   private SpellLibraryData data;
   private final Supplier<ItemStack> staff;
@@ -328,5 +328,10 @@ public class ContainerLibrary extends Container {
   @Override
   public void detectAndSendChanges() {
     super.detectAndSendChanges();
+  }
+
+  @Override
+  public void invalidate() {
+    // TODO
   }
 }
