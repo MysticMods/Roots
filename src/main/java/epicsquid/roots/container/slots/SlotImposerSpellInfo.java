@@ -43,6 +43,7 @@ public class SlotImposerSpellInfo extends Slot {
     if (info == null) {
       return ItemStack.EMPTY;
     } else {
+      // TODO: CACHE
       return info.asStack();
     }
   }

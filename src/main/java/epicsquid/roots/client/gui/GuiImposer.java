@@ -91,19 +91,28 @@ public class GuiImposer extends GuiContainer {
           hasStack = true;
         }
         StaffModifierInstanceList modifiers = container.getModifiers();
-        if (info.isDisabled() && info.isApplicable() && info.isApplied() && !info.isConflicting(modifiers)) {
+        if (info.isDisabled() && info.isApplicable() && info.isApplied()) { // && !info.isConflicting(modifiers)) {
           tooltip.add(TextFormatting.BOLD + I18n.format("roots.tooltip.modifier.not_enabled"));
-        } else if (!info.isApplied() && info.isApplicable() && !info.isConflicting(modifiers)) {
+          tooltip.add("");
+        }
+        if (!info.isApplied() && info.isApplicable()) { // && !info.isConflicting(modifiers)) {
           tooltip.add(TextFormatting.BOLD + I18n.format("roots.tooltip.modifier.not_applied"));
-        } else if (!info.isApplicable() && !info.isConflicting(modifiers)) {
+          tooltip.add("");
+        }
+        if (!info.isApplicable()) { // && !info.isConflicting(modifiers)) {
           tooltip.add(TextFormatting.BOLD + I18n.format("roots.tooltip.modifier.not_applicable"));
+          tooltip.add("");
           stack = ItemStack.EMPTY;
           hasStack = false;
-        } else if (info.isConflicting(modifiers)) {
+        }
+        if (info.isConflicting(modifiers)) {
           List<StaffModifierInstance> conflicts = info.getConflicts(modifiers);
-          StringJoiner joiner = new StringJoiner(",");
+          StringJoiner joiner = new StringJoiner(", ");
           conflicts.forEach(o -> joiner.add(I18n.format(o.getTranslationKey())));
-          tooltip.add(TextFormatting.BOLD + I18n.format("roots.tooltip.modifier.conflicting", joiner.toString()));
+          tooltip.add(TextFormatting.BOLD + I18n.format("roots.tooltip.modifier.conflicting1", joiner.toString()));
+          tooltip.add("");
+          tooltip.add(TextFormatting.BOLD + I18n.format("roots.tooltip.modifier.conflicting2"));
+          tooltip.add("");
         }
       }
       if (hasStack) {
@@ -119,6 +128,12 @@ public class GuiImposer extends GuiContainer {
           tooltip.add(instance.describeFunction());
           tooltip.add("");
           tooltip.addAll(instance.describeCost());
+          tooltip.add("");
+          if (instance.isEnabled()) {
+            tooltip.add(TextFormatting.BOLD + "" + TextFormatting.GREEN + I18n.format("roots.tooltip.modifier.enabled"));
+          } else {
+            tooltip.add(TextFormatting.BOLD + "" + TextFormatting.RED + I18n.format("roots.tooltip.modifier.disabled"));
+          }
         }
       }
       if (!tooltip.isEmpty()) {
@@ -172,12 +187,12 @@ public class GuiImposer extends GuiContainer {
       } else if (!modInfo.isApplied()) { // There is a modifier but it isn't applied
         this.mc.getTextureManager().bindTexture(getTexture());
         this.drawTexturedModalRect(i2, j2, 176, 20, 20, 20);
-      } else if (modInfo.isDisabled()) { // There is a modifier and it is applied, but it's disabled
-        this.mc.getTextureManager().bindTexture(getTexture());
-        this.drawTexturedModalRect(i2, j2, 176, 0, 20, 20);
       } else if (modInfo.isConflicting(container.getModifiers())) { // There is a modifier but it conflicts with other enabled modifiers
         this.mc.getTextureManager().bindTexture(getTexture());
         this.drawTexturedModalRect(i2, j2, 176, 60, 20, 20);
+      } else if (modInfo.isDisabled()) { // There is a modifier and it is applied, but it's disabled
+        this.mc.getTextureManager().bindTexture(getTexture());
+        this.drawTexturedModalRect(i2, j2, 176, 0, 20, 20);
       }
     }
     super.drawSlot(slot);

@@ -7,6 +7,7 @@ import epicsquid.roots.GuiHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemDruidKnife;
+import epicsquid.roots.modifiers.IModifier;
 import epicsquid.roots.modifiers.IModifierCore;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
@@ -140,7 +141,7 @@ public class TileEntityImposer extends TileBase implements ITickable {
     }
   }
 
-  public void toggleModifier(IModifierCore core) {
+/*  public void toggleModifier(IModifierCore core) {
     if (world != null && !world.isRemote) {
       StaffSpellStorage storage = getSpellStorage();
       StaffModifierInstance modifier = getModifier(storage, core);
@@ -153,10 +154,18 @@ public class TileEntityImposer extends TileBase implements ITickable {
       markDirty();
       updatePacketViaState();
     }
+  }*/
+
+  public StaffSpellInfo getCurrentInfo (StaffSpellStorage storage) {
+    if (storage == null) {
+      return StaffSpellInfo.EMPTY;
+    }
+
+    return storage.getSpellInSlot(slot);
   }
 
   @Nullable
-  private StaffModifierInstance getModifier(StaffSpellStorage storage, IModifierCore core) {
+  public StaffModifierInstance getModifier(StaffSpellStorage storage, IModifierCore core) {
     if (storage == null) {
       return null;
     }
