@@ -7,6 +7,7 @@ import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;

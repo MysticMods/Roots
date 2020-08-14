@@ -16,6 +16,7 @@ import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.tileentity.TileEntityImposer;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
@@ -28,6 +29,7 @@ import net.minecraft.util.math.BlockPos;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ContainerImposer extends Container {
@@ -135,6 +137,7 @@ public class ContainerImposer extends Container {
     addModifierSlot(ModifierCores.RUNIC_DUST, tile, 130, 108);
   }
 
+  @SuppressWarnings("ConstantConditions")
   @Override
   public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
     if (slotId != -999 && !player.world.isRemote) {
@@ -147,7 +150,27 @@ public class ContainerImposer extends Container {
       } else if (slot instanceof SlotImposerModifierInfo) {
         SlotImposerModifierInfo info = (SlotImposerModifierInfo) slot;
         if (info.isApplicable() && info.isApplied()) {
-          tile.toggleModifier(info.getCore());
+          if (tile.getWorld() != null && !tile.getWorld().isRemote) {
+            StaffSpellStorage storage = tile.getSpellStorage();
+            StaffSpellInfo staffInfo = tile.getCurrentInfo(storage);
+            if (staffInfo != null) {
+              StaffModifierInstanceList modifiers = staffInfo.getModifiers();
+              StaffModifierInstance modifier = modifiers.getByCore(info.getCore());
+              if (modifier != null) {
+                if (modifier.isEnabled() || (!modifier.isConflicting(modifiers) && !GuiScreen.isAltKeyDown() && !GuiScreen.isAltKeyDown())) {
+                  modifier.setEnabled(!modifier.isEnabled());
+                } else if (!modifier.isEnabled() && modifier.isConflicting(modifiers) && (GuiScreen.isAltKeyDown() || GuiScreen.isAltKeyDown())) {
+                  for (StaffModifierInstance conflictingMod : modifier.getConflicts(modifiers)) {
+                    conflictingMod.setEnabled(false);
+                  }
+                  modifier.setEnabled(true);
+                }
+                storage.saveToStack();
+                tile.markDirty();
+                tile.updatePacketViaState();
+              }
+            }
+          }
         }
       }
     }

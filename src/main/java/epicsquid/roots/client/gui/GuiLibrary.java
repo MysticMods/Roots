@@ -110,9 +110,10 @@ public class GuiLibrary extends GuiContainer {
           hasStack = false;
         } else if (info.isConflicting(modifiers)) {
           List<StaffModifierInstance> conflicts = info.getConflicts(modifiers);
-          StringJoiner joiner = new StringJoiner(",");
+          StringJoiner joiner = new StringJoiner(", ");
           conflicts.forEach(o -> joiner.add(I18n.format(o.getTranslationKey())));
-          tooltip.add(TextFormatting.BOLD + I18n.format("roots.tooltip.modifier.conflicting", joiner.toString()));
+          tooltip.add(TextFormatting.BOLD + I18n.format("roots.tooltip.modifier.conflicting1", joiner.toString()));
+          tooltip.add(TextFormatting.BOLD + I18n.format("roots.tooltip.modifier.conflicting2"));
         }
       } else if (hoveredSlot instanceof SlotSpellInfo) {
         SlotSpellInfo spellInfo = (SlotSpellInfo) hoveredSlot;
@@ -177,12 +178,12 @@ public class GuiLibrary extends GuiContainer {
       } else if (!modInfo.isApplied()) { // There is a modifier but it isn't applied
         this.mc.getTextureManager().bindTexture(getTexture());
         this.drawTexturedModalRect(i2, j2, 0, 152 + 20, 20, 20);
-      } else if (modInfo.isDisabled()) { // There is a modifier and it is applied, but it's disabled
-        this.mc.getTextureManager().bindTexture(getTexture());
-        this.drawTexturedModalRect(i2, j2, 0, 152, 20, 20);
       } else if (modInfo.isConflicting(container.getModifiers())) { // There is a modifier but it conflicts with other enabled modifiers
         this.mc.getTextureManager().bindTexture(getTexture());
         this.drawTexturedModalRect(i2, j2, 0, 152 + 60, 20, 20);
+      } else if (modInfo.isDisabled()) { // There is a modifier and it is applied, but it's disabled
+        this.mc.getTextureManager().bindTexture(getTexture());
+        this.drawTexturedModalRect(i2, j2, 0, 152, 20, 20);
       }
     }
     super.drawSlot(slot);

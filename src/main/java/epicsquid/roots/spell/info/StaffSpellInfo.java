@@ -145,6 +145,8 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
     comp.setBoolean("staff", true);
     StaffSpellStorage storage = StaffSpellStorage.fromStack(stack);
     storage.addSpell(this);
+    storage.setSelectedSlot(1);
+    storage.saveToStack();
     return stack;
   }
 

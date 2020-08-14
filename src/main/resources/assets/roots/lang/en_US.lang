@@ -133,11 +133,14 @@ roots.tooltip.modifier.activate=[Alt-Click slot to edit spell modifiers.]
 roots.tooltip.modifier.not_applied=[Modifier not applied.]
 roots.tooltip.modifier.not_enabled=[Modifier not enabled.]
 roots.tooltip.modifier.not_applicable=[No applicable modifier for this slot.]
-roots.tooltip.modifier.conflicting=[Modifier conflicts with %s.]
+roots.tooltip.modifier.conflicting1=[Modifier conflicts with %s.]
+roots.tooltip.modifier.conflicting2=[Alt-Click to disable conflicts then enable this modifier.]
 roots.tooltip.modifier.additional_cost=Additional cost of %s: x%s
 roots.tooltip.modifier.no_cost=No cost.
 roots.tooltip.modifier.increased_cost=All herb costs increased by %s
 roots.tooltip.modifier.decreased_cost=All herb costs decreased by %s
+roots.tooltip.modifier.enabled=Enabled.
+roots.tooltip.modifier.disabled=Disabled.
 
 roots.info.staff.slot_and_spell=Selected Slot (%d) has spell: %s
 roots.info.staff.no_slots=Your staff has no room for new spells!
