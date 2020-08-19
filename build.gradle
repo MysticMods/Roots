@@ -44,7 +44,7 @@ dependencies {
         compile project(':MysticalLib')
         compile project(':MysticalWorld')
         compileOnly "vazkii.patchouli:Patchouli:${patchouli_version}"
-        deobfCompile "info.tehnut.harvest:Harvest:1.12-1.2.7-20"
+        compile "curse.maven:simpleharvest:2897811"
         deobfCompile "com.azanor:Baubles:${version_baubles}"
     }
 
@@ -67,14 +67,12 @@ dependencies {
 }
 
 repositories {
-    maven { 
-        name = 'Patchouli'
-        url = "https://maven.blamejared.com" 
-    }
-    maven {
-        name = "TehNut"
-        url = "http://tehnut.info/maven"
-    }
+    //Currently down
+    //maven {
+        //Harvest
+        //name = "TehNut"
+        //url = "http://tehnut.info/maven"
+    //}
     maven {
         // location of the maven that hosts JEI files
         name = "Progwml6 maven"
@@ -86,18 +84,26 @@ repositories {
         url = "modmaven.k-4u.nl"
     }
     maven {
-        name = "JER"
+        name = "JER Maven (way2muchnoise)"
         url = "https://dl.bintray.com/way2muchnoise/dev"
     }
     maven {
+        name = "MMD Maven"
         url 'https://maven.mcmoddev.com'
     }
     maven {
-        name = "Jared"
+        //Also contains Patchouli
+        name = "Jared Maven"
         url = "https://maven.blamejared.com"
     }
     maven {
+        name = 'Tterrag Maven'
         url "http://maven.tterrag.com"
+    }
+
+    maven {
+        name = 'Curse Maven by WynPrice'
+        url = "https://www.cursemaven.com"
     }
 }
 
