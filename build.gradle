@@ -40,7 +40,6 @@ dependencies {
         compile project(':MysticalLib')
         compile project(':MysticalWorld')
         compileOnly "vazkii.patchouli:Patchouli:${patchouli_version}"
-        deobfCompile "info.tehnut.harvest:Harvest:1.12-1.2.7-20"
         deobfCompile "com.azanor:Baubles:${version_baubles}"
     }
 
@@ -68,9 +67,9 @@ repositories {
         url = "https://maven.blamejared.com" 
     }
     maven {
-        name = "TehNut"
-        url = "http://tehnut.info/maven"
+        url = "https://github.com/TehNut/temporary-maven-thing/raw/master/maven"
     }
+
     maven {
         // location of the maven that hosts JEI files
         name = "Progwml6 maven"
