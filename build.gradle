@@ -57,12 +57,17 @@ dependencies {
         exclude group: 'mezz.jei'
     }
 
-    deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}"
+    //deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}"
     compile "curse.maven:simpleharvest:2897811"
+    compile "curse.maven:hwyla:2568751"
     deobfCompile "mcjty.theoneprobe:TheOneProbe-${top_version}"
 }
 
 repositories {
+    maven {
+        name = 'Curse Maven by WynPrice'
+        url = "https://www.cursemaven.com"
+    }
     maven { 
         name = 'Patchouli'
         url = "https://maven.blamejared.com" 
