@@ -23,6 +23,8 @@ public class ModDamage {
   @SuppressWarnings("unused")
   public static DamageSource RADIANT_DAMAGE = (new DamageSource("holy_damage")).setDamageBypassesArmor().setMagicDamage();
 
+  public static DamageSource PHYSICAL_DAMAGE = (new DamageSource("physical_damage")).setDamageBypassesArmor();
+
   public static DamageSource PSYCHIC_DAMAGE = (new DamageSource("psychic_damage")).setDamageBypassesArmor().setMagicDamage();
 
   public static DamageSource WATER_DAMAGE = (new DamageSource("water_damage")).setDamageBypassesArmor().setMagicDamage();
@@ -30,6 +32,16 @@ public class ModDamage {
   public static DamageSource BLEED_DAMAGE = (new DamageSource("bleed_damage")).setDamageBypassesArmor();
 
   public static DamageSource ROSE_DAMAGE = (new DamageSource("rose_thorns")).setDamageBypassesArmor();
+
+  public static DamageSource physicalDamageFrom (@Nullable EntityPlayer player) {
+    DamageSource source;
+    if (player == null) {
+      source = PHYSICAL_DAMAGE;
+    } else {
+      source = new EntityDamageSource("physical", player).setDamageBypassesArmor();
+    }
+    return source;
+  }
 
   public static DamageSource magicDamageFrom (@Nullable EntityPlayer player) {
     DamageSource source;

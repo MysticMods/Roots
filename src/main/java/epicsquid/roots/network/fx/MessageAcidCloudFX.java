@@ -7,6 +7,7 @@ import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellAcidCloud;
 import io.netty.buffer.ByteBuf;
+import it.unimi.dsi.fastutil.floats.FloatArrayList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -53,6 +54,44 @@ public class MessageAcidCloudFX extends ModifierPacket implements IMessage {
     return (MathHelper.sin((float) Math.toRadians(ticks)) + 1.0f) / 2.0f;
   }
 
+  private float[] getColor () {
+    float[] list;
+    // Default Acid
+    if (Util.rand.nextBoolean()) {
+      list = SpellAcidCloud.instance.getFirstColours(0.125f);
+    } else {
+      list = SpellAcidCloud.instance.getSecondColours(0.125f);
+    }
+
+    // Fire
+    if (hasRand(SpellAcidCloud.FIRE, 3)) {
+      if (Util.rand.nextBoolean()) {
+        list = new float[]{209.0f / 255, 54.0f / 255, 15.0f / 255, 0.125f};
+      } else {
+        list = new float[]{245.0f / 255, 158.0f / 255, 66.0f / 255, 0.125f};
+      }
+    }
+
+    // Physical Damage
+    if (hasRand(SpellAcidCloud.PHYSICAL, 5)) {
+      if (Util.rand.nextBoolean()) {
+        list = new float[]{181.0f / 255, 175.0f / 255, 158.0f / 255, 0.125f};
+      } else {
+        list = new float[]{224.0f / 255, 213.0f / 255, 182.0f / 255, 0.125f};
+      }
+    }
+
+    if (has(SpellAcidCloud.HEALING)) {
+      if (Util.rand.nextBoolean()) {
+        list = new float[]{235.0f / 255, 215.0f / 255, 63.0f / 255, 0.125f};
+      } else {
+        list = new float[]{237.0f / 255, 217.0f / 255, 168.0f / 255, 0.125f};
+      }
+    }
+
+    return list;
+  }
+
   public static class MessageHolder implements IMessageHandler<MessageAcidCloudFX, IMessage> {
     @SideOnly(Side.CLIENT)
     @Override
@@ -71,19 +110,7 @@ public class MessageAcidCloudFX extends ModifierPacket implements IMessage {
             vx *= -1;
             vz *= -1;
           }
-          if (!message.has(SpellAcidCloud.FIRE) || Util.rand.nextBoolean()) {
-            if (Util.rand.nextBoolean()) {
-              ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellAcidCloud.instance.getRed1(), SpellAcidCloud.instance.getGreen1(), SpellAcidCloud.instance.getBlue1(), 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
-            } else {
-              ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellAcidCloud.instance.getRed2(), SpellAcidCloud.instance.getGreen2(), SpellAcidCloud.instance.getBlue2(), 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
-            }
-          } else {
-            if (Util.rand.nextBoolean()) {
-              ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, 209.0f / 255, 54.0f / 255, 15.0f / 255, 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
-            } else {
-              ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, 245.0f / 255, 158.0f / 255, 66.0f / 255, 0.125f, 10f + Util.rand.nextFloat() * 6f, 120, false);
-            }
-          }
+          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, message.getColor(), 10f + Util.rand.nextFloat() * 6f, 120, false);
         }
       }
       return null;

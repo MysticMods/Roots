@@ -5,11 +5,14 @@ import net.minecraftforge.common.util.INBTSerializable;
 
 import javax.annotation.Nullable;
 import java.util.Collection;
+import java.util.stream.Stream;
 
 public interface IModifierList<T extends IModifier, V extends NBTBase> extends Iterable<T>, INBTSerializable<V> {
   void clear();
 
   int size();
+
+  Stream<T> stream();
 
   boolean isEmpty();
 

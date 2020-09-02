@@ -66,11 +66,9 @@ public class AquaBubbleRenderer implements LayerRenderer<EntityPlayer> {
           }
           // TODO: Adjust smoke
           if (Util.rand.nextBoolean()) {
-            ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellStormCloud.instance.getRed1(),
-                SpellStormCloud.instance.getGreen1(), SpellStormCloud.instance.getBlue1(), 0.125f, 4f + Util.rand.nextFloat() * 6f, 120, false);
+            ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellStormCloud.instance.getFirstColours(0.125f), 4f + Util.rand.nextFloat() * 6f, 120, false);
           } else {
-            ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellStormCloud.instance.getRed2(),
-                SpellStormCloud.instance.getGreen2(), SpellStormCloud.instance.getBlue2(), 0.125f, 4f + Util.rand.nextFloat() * 6f, 120, false);
+            ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellStormCloud.instance.getSecondColours(0.125f), 4f + Util.rand.nextFloat() * 6f, 120, false);
           }
         }
       }

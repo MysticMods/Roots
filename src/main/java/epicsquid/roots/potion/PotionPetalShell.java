@@ -38,16 +38,12 @@ public class PotionPetalShell extends Potion {
     if (entityLivingBaseIn instanceof EntityPlayer && entityLivingBaseIn.world.isRemote) {
       int count = amplifier;
       EntityPlayer player = (EntityPlayer) entityLivingBaseIn;
-      float r, g, b;
-      r = SpellPetalShell.instance.getFirstColours()[0];
-      g = SpellPetalShell.instance.getFirstColours()[1];
-      b = SpellPetalShell.instance.getFirstColours()[2];
       for (float i = 0; i < 360; i += 120) {
         float ang = (float) (player.ticksExisted % 360);
         float tx = (float) player.posX + 0.8f * (float) Math.sin(Math.toRadians(2.0f * (i + ang)));
         float ty = (float) player.posY + 1.0f;
         float tz = (float) player.posZ + 0.8f * (float) Math.cos(Math.toRadians(2.0f * (i + ang)));
-        ParticleUtil.spawnParticlePetal(player.world, tx, ty, tz, 0, 0, 0, r, g, b, 1f, 3.5f, 10);
+        ParticleUtil.spawnParticlePetal(player.world, tx, ty, tz, 0, 0, 0, SpellPetalShell.instance.getFirstColours(), 3.5f, 10);
         count--;
         if (count < 0) {
           break;
