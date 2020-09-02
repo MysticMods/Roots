@@ -44,7 +44,6 @@ dependencies {
         compile project(':MysticalLib')
         compile project(':MysticalWorld')
         compileOnly "vazkii.patchouli:Patchouli:${patchouli_version}"
-        deobfCompile "info.tehnut.harvest:Harvest:1.12-1.2.7-20"
         deobfCompile "com.azanor:Baubles:${version_baubles}"
     }
 
@@ -62,7 +61,8 @@ dependencies {
         exclude group: 'mezz.jei'
     }
 
-    deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}"
+    compile "curse.maven:simpleharvest:2897811"
+    compile "curse.maven:hwyla:2568751"
     deobfCompile "mcjty.theoneprobe:TheOneProbe-${top_version}"
 }
 
@@ -70,9 +70,6 @@ repositories {
     maven { 
         name = 'Patchouli'
         url = "https://maven.blamejared.com" 
-    }
-    maven {
-        url = "https://maven.tehnut.info"
     }
     maven {
         // location of the maven that hosts JEI files
@@ -97,6 +94,10 @@ repositories {
     }
     maven {
         url "http://maven.tterrag.com"
+    }
+    maven {
+        name = 'Curse Maven by WynPrice'
+        url = "https://www.cursemaven.com"
     }
 }
 

@@ -1,5 +1,6 @@
 package epicsquid.roots.network.fx;
 
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.modifiers.IModifier;
 import epicsquid.roots.modifiers.IModifierCore;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
@@ -33,8 +34,11 @@ public class ModifierPacket implements IMessage {
     }
   }
 
-  @SideOnly(Side.CLIENT)
   public boolean has(IModifier modifier) {
     return modifiers != null && modifiers.contains(modifier.getCore());
+  }
+
+  public boolean hasRand (IModifier modifier, int rand) {
+    return has(modifier) && Util.rand.nextInt(rand) == 0;
   }
 }

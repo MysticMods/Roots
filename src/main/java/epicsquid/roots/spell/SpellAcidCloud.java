@@ -39,12 +39,15 @@ public class SpellAcidCloud extends SpellBase {
   public static Property<Integer> PROP_POISON_AMPLIFICATION = new Property<>("poison_amplification", 0).setDescription("the level of the poison effect applied on the enemies (0 is the first level)");
   public static Property<Integer> PROP_RADIUS_GENERAL = new Property<>("radius_general", 4).setDescription("default radius for the acid cloud");
   public static Property<Integer> PROP_RADIUS_BOOST = new Property<>("radius_boost", 2).setDescription("how much radius should be boosted by when Radius Boost modifier applied");
-  public static Property<Float> PROP_NIGHT_DAMAGE = new Property<>("night_damage", 0.5f).setDescription("the incremental damage (multiplied by closeness to midnight) caused by the moonglow modifier");
+  public static Property<Float> PROP_NIGHT_LOWER = new Property<>("night_modifier_low", 0.1f).setDescription("the value to multiply damage by at dusk and dawn, rising to night_modifier_high at midnight and then down again");
+  public static Property<Float> PROP_NIGHT_HIGHER = new Property<>("night_modifier_high", 0.5f).setDescription("the value to multiply damage by at midnight, increasing to this from dusk and decreasing from this at dawn");
   public static Property<Float> PROP_UNDEAD_DAMAGE = new Property<>("undead_damage", 2.0f).setDescription("additional damage done to undead entities with the spirit herb modifier");
   public static Property<Float> PROP_HEALING = new Property<>("healing", 1.0f).setDescription("how much healing is done by the cloud");
   public static Property<Integer> PROP_REGENERATION = new Property<>("regeneration", 40).setDescription("how long the duration of regen to apply (0 to not apply)");
   public static Property<Integer> PROP_REGEN_AMPLIFIER = new Property<>("regeneration_amplifier", 0).setDescription("what amplifier to use when applying the regen effect");
   public static Property<Integer> PROP_HEALING_COUNT = new Property<>("healing_count", 3).setDescription("maximum number of creatures that can be healed per tick, -1 for infinite");
+  public static Property<Float> PROP_UNDERWATER_BOOST = new Property<>("underwater_boost", 1.3f).setDescription("the multiplier given to damage and healing when underwater");
+  public static Property<Float> PROP_PHYSICAL_DAMAGE = new Property<>("physical_damage", 2.0f).setDescription("additional physical damage that is done");
 
   // TODO: Costs
 
@@ -67,14 +70,13 @@ public class SpellAcidCloud extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_acid_cloud");
   public static SpellAcidCloud instance = new SpellAcidCloud(spellName);
 
-  private float damage, night_damage, undead_damage, healing;
+  private float damage, night_low, night_high, undead_damage, healing, underwater_boost, physical_damage;
   private int poisonDuration, poisonAmplification, fireDuration, regen_duration, regen_amp, damage_count, heal_count;
   public int radius, radius_boost;
 
-
   public SpellAcidCloud(ResourceLocation name) {
     super(name, TextFormatting.DARK_GREEN, 80f / 255f, 160f / 255f, 40f / 255f, 64f / 255f, 96f / 255f, 32f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_POISON_DURATION, PROP_FIRE_DURATION, PROP_POISON_AMPLIFICATION, PROP_RADIUS_BOOST, PROP_RADIUS_GENERAL, PROP_NIGHT_DAMAGE, PROP_UNDEAD_DAMAGE, PROP_HEALING, PROP_REGEN_AMPLIFIER, PROP_REGENERATION);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_POISON_DURATION, PROP_FIRE_DURATION, PROP_POISON_AMPLIFICATION, PROP_RADIUS_BOOST, PROP_RADIUS_GENERAL, PROP_NIGHT_LOWER, PROP_NIGHT_HIGHER, PROP_UNDEAD_DAMAGE, PROP_HEALING, PROP_REGEN_AMPLIFIER, PROP_REGENERATION, PROP_UNDERWATER_BOOST, PROP_PHYSICAL_DAMAGE);
     acceptsModifiers(RADIUS, PEACEFUL, PARALYSIS, NIGHT, UNDEAD, HEALING, SPEED, FIRE, PHYSICAL, UNDERWATER);
   }
 
@@ -91,6 +93,11 @@ public class SpellAcidCloud extends SpellBase {
 
   public static AxisAlignedBB boxGeneral, boxBoost;
 
+  private double getMultiplier(double time, float min, float max) {
+    int peak = 18000; // Allow this to be configured
+    return (max - min) * Math.exp(-(1.0/(24000 * 100)) * (time - peak)) + min;
+  }
+
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     if (!player.world.isRemote) {
@@ -101,9 +108,20 @@ public class SpellAcidCloud extends SpellBase {
         player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 1, 18, false, false));
         player.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 1, 0, false, false));
       }
+      float modifier = 1;
+      if (info.has(NIGHT)) {
+        modifier += getMultiplier(player.world.getWorldTime(), night_low, night_high);
+      }
+      if (info.has(UNDERWATER)) {
+        modifier += underwater_boost;
+      }
       for (EntityLivingBase e : new RandomIterable<>(entities)) {
         // TODO: Visual effect of cloud (white or gold)
         // TODO: Enforce healing check
+        // TODO: Additional visual effect
+
+
+        // e.attackEntityFrom(ModDamage.magicDamageFrom(player), ampFloat(night_damage * mod));
         if (info.has(HEALING)) {
           if (EntityUtil.isHostile(e) || EntityUtil.isHostileTo(e, player)) {
             continue;
@@ -113,7 +131,7 @@ public class SpellAcidCloud extends SpellBase {
           }
           // TODO: Particle effect to denote entities being healed
           if (healing > 0) {
-            e.heal(healing);
+            e.heal(ampFloat(healing * modifier));
           }
           healed++;
           if (heal_count != -1 && healed >= heal_count) {
@@ -127,25 +145,18 @@ public class SpellAcidCloud extends SpellBase {
                 continue;
               }
               if (info.has(FIRE)) {
-                e.attackEntityFrom(ModDamage.fireDamageFrom(player), ampFloat(damage) / 2);
-                e.attackEntityFrom(DamageSource.causeMobDamage(player), ampFloat(damage) / 2);
+                e.attackEntityFrom(ModDamage.fireDamageFrom(player), ampFloat(damage * modifier) / 2);
+                e.attackEntityFrom(DamageSource.causeMobDamage(player), ampFloat(damage * modifier) / 2);
                 e.setFire(fireDuration);
               } else {
-                e.attackEntityFrom(DamageSource.causeMobDamage(player), ampFloat(damage));
-              }
-              // TODO: Additional visual effect
-              if (info.has(NIGHT)) {
-                long time = player.world.getWorldTime() - 12000;
-                if (time >= 0) {
-                  int mod = (int) ((time > 6000 ? 12000 - time : time) / 1000) / 2;
-                  if (mod != 0) {
-                    e.attackEntityFrom(ModDamage.magicDamageFrom(player), ampFloat(night_damage * mod));
-                  }
-                }
+                e.attackEntityFrom(DamageSource.causeMobDamage(player), ampFloat(damage * modifier));
               }
               // TODO: Additional visual effect
               if (info.has(UNDEAD) && e.isEntityUndead()) {
-                e.attackEntityFrom(ModDamage.radiantDamageFrom(player), ampFloat(undead_damage));
+                e.attackEntityFrom(ModDamage.radiantDamageFrom(player), ampFloat(undead_damage * modifier));
+              }
+              if (info.has(PHYSICAL)) {
+                e.attackEntityFrom(ModDamage.physicalDamageFrom(player), ampFloat(physical_damage * modifier));
               }
               if (SpellConfig.spellFeaturesCategory.acidCloudPoisoningEffect) {
                 e.addPotionEffect(new PotionEffect(MobEffects.POISON, ampInt(poisonDuration), poisonAmplification));
@@ -175,14 +186,17 @@ public class SpellAcidCloud extends SpellBase {
     this.fireDuration = properties.get(PROP_FIRE_DURATION);
     this.radius = properties.get(PROP_RADIUS_GENERAL);
     this.radius_boost = properties.get(PROP_RADIUS_BOOST);
-    boxGeneral = new AxisAlignedBB(-radius, -radius, -radius, radius +1, radius +1, radius +1);
+    boxGeneral = new AxisAlignedBB(-radius, -radius, -radius, radius + 1, radius + 1, radius + 1);
     boxBoost = boxGeneral.grow(radius_boost);
-    this.night_damage = properties.get(PROP_NIGHT_DAMAGE);
+    this.night_low = properties.get(PROP_NIGHT_LOWER);
+    this.night_high = properties.get(PROP_NIGHT_HIGHER);
     this.undead_damage = properties.get(PROP_UNDEAD_DAMAGE);
     this.healing = properties.get(PROP_HEALING);
     this.regen_amp = properties.get(PROP_REGEN_AMPLIFIER);
     this.regen_duration = properties.get(PROP_REGENERATION);
     this.damage_count = properties.get(PROP_DAMAGE_COUNT);
     this.heal_count = properties.get(PROP_HEALING_COUNT);
+    this.underwater_boost = properties.get(PROP_UNDERWATER_BOOST);
+    this.physical_damage = properties.get(PROP_PHYSICAL_DAMAGE);
   }
 }

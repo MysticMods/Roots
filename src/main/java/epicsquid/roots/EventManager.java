@@ -9,6 +9,9 @@ import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.baubles.pouch.BaubleBeltCapabilityHandler;
 import epicsquid.roots.item.IItemPouch;
+import epicsquid.roots.modifiers.IModifierCore;
+import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.MessageLightDrifterSync;
 import epicsquid.roots.network.fx.MessageGeasFX;
 import epicsquid.roots.network.fx.MessageGeasRingFX;
@@ -21,6 +24,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.GameType;
@@ -36,6 +40,8 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
+
+import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 public class EventManager {
@@ -76,6 +82,31 @@ public class EventManager {
     DamageSource damage = event.getSource();
 
     if (entity.getActivePotionEffect(ModPotions.aqua_bubble) != null) {
+      ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(entity.getEntityData(), SpellAquaBubble.instance);
+
+      float totalFire = damage.isFireDamage() ? event.getAmount() : 0;
+
+      if (trueSource != null && totalFire > 0 && mods.has(SpellAquaBubble.REFLECT_FIRE) && entity instanceof EntityPlayer) {
+        trueSource.attackEntityFrom(ModDamage.physicalDamageFrom((EntityPlayer) entity), totalFire);
+      }
+
+      if (trueSource instanceof EntityLivingBase && event.getAmount() > 0) {
+        EntityLivingBase attacker = (EntityLivingBase) trueSource;
+        if (mods.has(SpellAquaBubble.KNOCKBACK)) {
+          attacker.knockBack(entity, SpellAquaBubble.instance.knockback, entity.posX - attacker.posX, entity.posZ - attacker.posZ);
+        }
+        if (mods.has(SpellAquaBubble.SLOW)) {
+          attacker.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, SpellAquaBubble.instance.slow_duration, SpellAquaBubble.instance.slow_amplifier));
+        }
+        if (mods.has(SpellAquaBubble.UNDEAD) && attacker.isEntityUndead()) {
+          event.setAmount(event.getAmount() * SpellAquaBubble.instance.undead_reduction);
+        }
+      }
+
+      if (damage.isMagicDamage() && mods.has(SpellAquaBubble.MAGIC_RESIST)) {
+        event.setAmount(event.getAmount() * SpellAquaBubble.instance.magic_reduction);
+      }
+
       if (damage.isFireDamage()) {
         event.setAmount(event.getAmount() * SpellAquaBubble.instance.fire_reduction);
       }

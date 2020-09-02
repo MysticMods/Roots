@@ -67,6 +67,10 @@ public class ParticleUtil {
     }
   }
 
+  public static void spawnParticleSmoke(World world, float x, float y, float z, float vx, float vy, float vz, float[] rgba, float scale, int lifetime, boolean additive) {
+    spawnParticleSmoke(world, x, y, z, vx, vy, vz, rgba[0], rgba[1], rgba[2], rgba[3], scale, lifetime, additive);
+  }
+
   public static void spawnParticleSmoke(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale, int lifetime, boolean additive) {
     if (MysticalLib.proxy instanceof ClientProxy) {
       counter += random.nextInt(3);
@@ -110,6 +114,10 @@ public class ParticleUtil {
         ClientProxy.particleRenderer.spawnParticle(world, ModParticles.PARTICLE_THORN, x, y, z, vx, vy, vz, lifetime, r, g, b, a, scale);
       }
     }
+  }
+
+  public static void spawnParticlePetal(World world, float x, float y, float z, float vx, float vy, float vz, float[] rgba, float scale, int lifetime) {
+    spawnParticlePetal(world, x, y, z, vz, vy, vz, rgba[0], rgba[1], rgba[2], rgba[3], scale, lifetime);
   }
 
   public static void spawnParticlePetal(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale, int lifetime) {

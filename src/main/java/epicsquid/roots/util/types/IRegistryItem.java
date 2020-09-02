@@ -9,4 +9,7 @@ public interface IRegistryItem {
 
   @Nonnull
   ResourceLocation getRegistryName();
+
+  @Nonnull
+  String getCachedName ();
 }

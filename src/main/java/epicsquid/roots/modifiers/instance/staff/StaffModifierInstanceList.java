@@ -1,20 +1,17 @@
 package epicsquid.roots.modifiers.instance.staff;
 
-import epicsquid.roots.Roots;
 import epicsquid.roots.modifiers.IModifier;
 import epicsquid.roots.modifiers.IModifierCore;
 import epicsquid.roots.modifiers.ModifierCores;
-import epicsquid.roots.modifiers.ModifierRegistry;
 import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstanceList;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.AbstractSpellInfo;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraft.nbt.NBTTagIntArray;
+import net.minecraftforge.common.util.Constants;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -66,6 +63,30 @@ public class StaffModifierInstanceList extends BaseModifierInstanceList<StaffMod
     }
   }
 
+  public int[] snapshot () {
+    return this.stream().filter(modifier -> modifier.isEnabled() && modifier.isApplied() && !modifier.isConflicting(this)).map(o -> o.getCore().getKey()).mapToInt(i->i).toArray();
+  }
+
+  public static ModifierSnapshot fromSnapshot (NBTTagCompound tag, SpellBase spell) {
+    if (tag.hasKey(spell.getCachedName(), Constants.NBT.TAG_INT_ARRAY)) {
+      return new ModifierSnapshot(tag.getIntArray(spell.getCachedName()));
+    } else {
+      return new ModifierSnapshot();
+    }
+  }
+
+  public static Set<IModifierCore> fromSnapshot (NBTTagIntArray snapshot) {
+    Set<IModifierCore> modifiers = new HashSet<>();
+    for (int i : snapshot.getIntArray()) {
+      IModifierCore core = ModifierCores.getByOrdinal(i);
+      if (core == null) {
+        throw new NullPointerException("Invalid modifier when reconstructing ModifierList from Snapshot, ordinal of: " + i + " is not a valid core.");
+      }
+      modifiers.add(core);
+    }
+    return modifiers;
+  }
+
   public static Set<IModifierCore> fromBytes (ByteBuf buf) {
     Set<IModifierCore> modifiers = new HashSet<>();
     int size = buf.readInt();
@@ -80,6 +101,7 @@ public class StaffModifierInstanceList extends BaseModifierInstanceList<StaffMod
     return modifiers;
   }
 
+
   public boolean has (IModifier modifier) {
     StaffModifierInstance instance = get(modifier);
     if (instance == null) {
@@ -88,4 +110,5 @@ public class StaffModifierInstanceList extends BaseModifierInstanceList<StaffMod
 
     return instance.isApplied() && instance.isEnabled();
   }
+
 }

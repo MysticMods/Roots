@@ -13,6 +13,7 @@ import net.minecraftforge.common.util.Constants;
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> implements IModifierList<T, NBTTagCompound> {
   protected final List<T> internal;
@@ -43,6 +44,11 @@ public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> i
   @Override
   public boolean isEmpty() {
     return internal.isEmpty();
+  }
+
+  @Override
+  public Stream<T> stream() {
+    return internal.stream();
   }
 
   @Override

@@ -60,8 +60,6 @@ public abstract class SpellBase extends RegistryItem implements SpellMulitiplier
   protected EnumCastType castType = EnumCastType.INSTANTANEOUS;
   private Object2DoubleOpenHashMap<Herb> costs = new Object2DoubleOpenHashMap<>();
   private List<Modifier> acceptedModifiers = new ArrayList<>();
-  private float[] firstColours;
-  private float[] secondColours;
 
   protected Buff speedy;
   protected Buff amplifier;
@@ -83,28 +81,22 @@ public abstract class SpellBase extends RegistryItem implements SpellMulitiplier
     this.green2 = g2;
     this.blue2 = b2;
     this.textColor = textColor;
-    this.firstColours = new float[]{r1, g1, b1};
-    this.secondColours = new float[]{r2, g2, b2};
   }
-
-/*  public boolean has(IModifier modifier, StaffModifierInstanceList modifiers) {
-    if (modifiers == null) {
-      throw new NullPointerException("Modifiers supplied to SpellBase::has cannot be null.");
-*//*      return false;*//*
-    }
-    StaffModifierInstance instance = modifiers.get(modifier);
-    if (instance == null) {
-      return false;
-    }
-    return instance.isApplied() && instance.isEnabled();
-  }*/
 
   public float[] getFirstColours() {
-    return firstColours;
+    return getFirstColours(1.0f);
   }
 
-  public float[] getSecondColours() {
-    return secondColours;
+  public float[] getFirstColours (float alpha) {
+    return new float[]{red1, green1, blue1, alpha};
+  }
+
+  public float[] getSecondColours () {
+    return getSecondColours(1.0f);
+  }
+
+  public float[] getSecondColours(float alpha) {
+    return new float[]{red2, green2, blue2, alpha};
   }
 
   public abstract void init();
