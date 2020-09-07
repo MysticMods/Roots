@@ -84,6 +84,8 @@ public class SpellRegistry {
     SpellNaturesScythe.instance.setDisabled(SpellConfig.disableSpellsCategory.disableNaturesScythe);
     spellRegistry.put(SpellAquaBubble.spellName, SpellAquaBubble.instance);
     SpellAquaBubble.instance.setDisabled(SpellConfig.disableSpellsCategory.disableAquaBubble);
+    spellRegistry.put(SpellAugment.spellName, SpellAugment.instance);
+    SpellAugment.instance.setDisabled(SpellConfig.disableSpellsCategory.disableAugment);
   }
 
   public static void init() {

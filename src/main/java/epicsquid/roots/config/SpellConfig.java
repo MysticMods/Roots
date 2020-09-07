@@ -108,6 +108,9 @@ public class SpellConfig {
     @Config.Name("Disable Aqueous Bubble Spell")
     @Config.Comment("Set to true to disable the Aqueous Bubble Spell")
     public boolean disableAquaBubble = false;
+    @Config.Name("Disable Augment Spell")
+    @Config.Comment("Set to true to disable the Augment Spell")
+    public boolean disableAugment = false;
   }
 
   public static class SpellFeaturesCategory {
