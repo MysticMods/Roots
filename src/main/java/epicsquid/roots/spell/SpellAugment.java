@@ -5,12 +5,15 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.client.SpectatorHandler;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
+import epicsquid.roots.mechanics.Magnetize;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.MessageLightDrifterSync;
 import epicsquid.roots.network.fx.MessageLightDrifterFX;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.Constants;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -28,10 +31,9 @@ public class SpellAugment extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(350);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("wildroot", 1.0));
-  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 2).setDescription("radius on the X axis within which entities are affected by the spell");
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 2).setDescription("radius on the Y axis within which entities are affected by the spell");
-  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 2).setDescription("radius on the Z axis within which entities are affected by the spell");
-  public static Property<Integer> PROP_DROP_CHANCE = new Property<>("drop_chance", 4).setDescription("chance for mobs to drop their equipment and weapons (the higher the number is the lower the chance is: 1/x) [default: 1/4]");
+  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15).setDescription("radius on the X axis of the area in which dropped items are magnetized to the player");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 15).setDescription("radius on the Y axis of the area in which dropped items are magnetized to the player");
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15).setDescription("radius on the Z axis of the area in which dropped items are magnetized to the player");
 
   public static Property<Integer> PROP_REACH_DURATION = new Property<>("reach_duration", 600).setDescription("duration for the reach potion effect");
   public static Property<Double> PROP_REACH = new Property<>("reach", 5.0).setDescription("the extended reach applied to the player during the effect of the spell");
@@ -42,6 +44,9 @@ public class SpellAugment extends SpellBase {
   public static Property<Integer> PROP_SLOW_FALL_DURATION = new Property<>("slow_fall_duration", 18 * 20).setDescription("duration for the slow fall potion effect");
 
   public static Property<Integer> PROP_DRIFTER_DURATION = new Property<>("drifter_duration", 200).setDescription("the duration in ticks of the spell effect on the player");
+
+  public static Property<Integer> PROP_LUCK_DURATION = new Property<>("luck_duration", 15 * 20).setDescription("duration for the luck potion effect");
+  public static Property<Integer> PROP_LUCK_AMPLIFIER = new Property<>("luck_amplifier", 0).setDescription("amplifier for the luck potion effect");
 
   public static Modifier REACH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "reach"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier SPEED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "speed"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -61,12 +66,12 @@ public class SpellAugment extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "augment");
   public static SpellAugment instance = new SpellAugment(spellName);
 
-  private int radius_x, radius_y, radius_z, drop_chance, reach_duration, speed_amplifier, speed_duration, slow_fall, drifter_duration;
+  private int radius_x, radius_y, radius_z, reach_duration, speed_amplifier, speed_duration, slow_fall, drifter_duration, luck_amplifier, luck_duration;
   private double reach;
 
   private SpellAugment(ResourceLocation name) {
     super(name, TextFormatting.DARK_RED, 122F / 255F, 0F, 0F, 58F / 255F, 58F / 255F, 58F / 255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_REACH, PROP_REACH_DURATION, PROP_SPEED_AMPLIFIER, PROP_SPEED_DURATION, PROP_SLOW_FALL_DURATION, PROP_DRIFTER_DURATION);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_REACH, PROP_REACH_DURATION, PROP_SPEED_AMPLIFIER, PROP_SPEED_DURATION, PROP_SLOW_FALL_DURATION, PROP_DRIFTER_DURATION, PROP_LUCK_AMPLIFIER, PROP_LUCK_DURATION);
     acceptsModifiers(REACH, SPEED, SLOW_FALL, LIGHT_DRIFTER, MAGNETISM, LUCK, JAUNT, STRENGTH, HASTE, SECOND_WIND);
   }
 
@@ -83,16 +88,21 @@ public class SpellAugment extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+    boolean acted = false;
     if (info.has(REACH)) {
+      acted = true;
       player.addPotionEffect(new PotionEffect(ModPotions.reach, ampInt(reach_duration), 0, false, false));
     }
     if (info.has(SPEED)) {
+      acted = true;
       player.addPotionEffect(new PotionEffect(MobEffects.SPEED, ampInt(speed_duration), speed_amplifier, false, false));
     }
     if (info.has(SLOW_FALL)) {
+      acted = true;
       player.addPotionEffect(new PotionEffect(ModPotions.slow_fall, ampInt(slow_fall), 0, false, false));
     }
     if (info.has(LIGHT_DRIFTER)) {
+      acted = true;
       if (!player.world.isRemote) {
         player.capabilities.disableDamage = true;
         player.capabilities.allowFlying = true;
@@ -113,7 +123,20 @@ public class SpellAugment extends SpellBase {
         SpectatorHandler.setFake();
       }
     }
-    return false;
+    if (info.has(MAGNETISM)) {
+      int count = 0;
+      count += Magnetize.pull(EntityItem.class, player.world, player.getPosition(), ampInt(radius_x), ampInt(radius_y), ampInt(radius_z));
+      count += Magnetize.pull(EntityXPOrb.class, player.world, player.getPosition(), ampInt(radius_x), ampInt(radius_y), ampInt(radius_z));
+
+      if (!acted) {
+        acted = count != 0;
+      }
+    }
+    if (info.has(LUCK)) {
+      acted = true;
+      player.addPotionEffect(new PotionEffect(MobEffects.LUCK, ampInt(luck_duration), luck_amplifier, false, false));
+    }
+    return acted;
   }
 
   @Override
@@ -123,13 +146,14 @@ public class SpellAugment extends SpellBase {
     this.radius_x = properties.get(PROP_RADIUS_X);
     this.radius_y = properties.get(PROP_RADIUS_Y);
     this.radius_z = properties.get(PROP_RADIUS_Z);
-    this.drop_chance = properties.get(PROP_DROP_CHANCE);
     this.reach = properties.get(PROP_REACH);
     this.reach_duration = properties.get(PROP_REACH_DURATION);
     this.speed_duration = properties.get(PROP_SPEED_DURATION);
     this.speed_amplifier = properties.get(PROP_SPEED_AMPLIFIER);
     this.slow_fall = properties.get(PROP_SLOW_FALL_DURATION);
     this.drifter_duration = properties.get(PROP_DRIFTER_DURATION);
+    this.luck_amplifier = properties.get(PROP_LUCK_AMPLIFIER);
+    this.luck_duration = properties.get(PROP_LUCK_DURATION);
     ModPotions.reach.loadComplete(this.reach);
   }
 }
