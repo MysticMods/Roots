@@ -23,8 +23,9 @@ import java.util.UUID;
 
 public class EntityFlare extends Entity {
   private static final DataParameter<Float> value = EntityDataManager.createKey(EntityFlare.class, DataSerializers.FLOAT);
+  private static final double VARIANCE = 5.5;
   private int lifetime = 320;
-  private UUID id = null;
+  private double threshhold;
 
   public EntityFlare(World worldIn) {
     super(worldIn);
@@ -32,7 +33,7 @@ public class EntityFlare extends Entity {
     this.getDataManager().register(value, 0f);
   }
 
-  public void initCustom(double x, double y, double z, double vx, double vy, double vz, double value) {
+  public void initCustom(double x, double y, double z, double vx, double vy, double vz, double value, double threshold) {
     this.posX = x;
     this.posY = y;
     this.posZ = z;
@@ -43,6 +44,7 @@ public class EntityFlare extends Entity {
     this.getDataManager().set(EntityFlare.value, (float) value);
     this.getDataManager().setDirty(EntityFlare.value);
     this.setSize((float) value / 10.0f, (float) value / 10.0f);
+    this.threshhold = threshold;
   }
 
   @Override
@@ -53,18 +55,13 @@ public class EntityFlare extends Entity {
   protected void readEntityFromNBT(NBTTagCompound compound) {
     getDataManager().set(EntityFlare.value, compound.getFloat("value"));
     getDataManager().setDirty(EntityFlare.value);
-    if (compound.hasKey("UUIDmost")) {
-      id = new UUID(compound.getLong("UUIDmost"), compound.getLong("UUIDleast"));
-    }
+    this.threshhold = compound.getDouble("threshold");
   }
 
   @Override
   protected void writeEntityToNBT(NBTTagCompound compound) {
     compound.setFloat("value", getDataManager().get(value));
-    if (id != null) {
-      compound.setLong("UUIDmost", id.getMostSignificantBits());
-      compound.setLong("UUIDleast", id.getLeastSignificantBits());
-    }
+    compound.setDouble("threhsold", this.threshhold);
   }
 
   @Override
@@ -72,9 +69,10 @@ public class EntityFlare extends Entity {
     super.onUpdate();
     float alpha = Math.min(40, (320.0f - (float) lifetime)) / 40.0f;
     this.lifetime--;
-    this.getDataManager().set(value, this.getDataManager().get(value) - 0.025f);
+    float val = this.getDataManager().get(value);
+    this.getDataManager().set(value, val - 0.025f);
 
-    if (this.lifetime <= 0 || this.getDataManager().get(value) <= 0) {
+    if (this.lifetime <= 0 || val <= 0) {
       this.getEntityWorld().removeEntity(this);
       this.setDead();
     }
@@ -83,16 +81,13 @@ public class EntityFlare extends Entity {
     this.posY += this.motionY;
     this.posZ += this.motionZ;
     IBlockState state = getEntityWorld().getBlockState(getPosition());
-    if (state.isFullCube() && state.isOpaqueCube()) {
+    if (state.isFullCube() && state.isOpaqueCube() && this.posY <= threshhold + VARIANCE) {
       if (getEntityWorld().isRemote) {
         for (int i = 0; i < 40; i++) {
-          ParticleUtil.spawnParticleFiery(getEntityWorld(), (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f),
-              0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), 255, 96, 32, 0.5f * alpha,
-              getDataManager().get(value) + rand.nextFloat() * getDataManager().get(value), 40);
+          ParticleUtil.spawnParticleFiery(getEntityWorld(), (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), 255, 96, 32, 0.5f * alpha, val + rand.nextFloat() * val, 40);
         }
       }
-      List<EntityLivingBase> entities = Util
-          .getEntitiesWithinRadius(getEntityWorld(), EntityLivingBase.class, this.getPosition(), (float) (getDataManager().get(value) * 0.125), (float) (getDataManager().get(value) * 0.125), (float) (getDataManager().get(value) * 0.125));
+      List<EntityLivingBase> entities = Util.getEntitiesWithinRadius(getEntityWorld(), EntityLivingBase.class, this.getPosition(), val * 0.125f, val * 0.125f, val * 0.125f);
       this.attackWithFire(entities);
       if (world.isAirBlock(getPosition().up())) {
         world.setBlockState(getPosition().up(), ModBlocks.fey_fire.getDefaultState());
@@ -102,20 +97,15 @@ public class EntityFlare extends Entity {
     if (getEntityWorld().isRemote) {
       for (double i = 0; i < 3; i++) {
         double coeff = i / 3.0;
-        ParticleUtil.spawnParticleFiery(getEntityWorld(), (float) (prevPosX + (posX - prevPosX) * coeff), (float) (prevPosY + (posY - prevPosY) * coeff),
-            (float) (prevPosZ + (posZ - prevPosZ) * coeff), 0.0125f * (rand.nextFloat() - 0.5f), 0.0125f * (rand.nextFloat() - 0.5f),
-            0.0125f * (rand.nextFloat() - 0.5f), 255, 96, 32, 0.5f * alpha, getDataManager().get(value) + rand.nextFloat() * getDataManager().get(value), 40);
+        ParticleUtil.spawnParticleFiery(getEntityWorld(), (float) (prevPosX + (posX - prevPosX) * coeff), (float) (prevPosY + (posY - prevPosY) * coeff), (float) (prevPosZ + (posZ - prevPosZ) * coeff), 0.0125f * (rand.nextFloat() - 0.5f), 0.0125f * (rand.nextFloat() - 0.5f), 0.0125f * (rand.nextFloat() - 0.5f), 255, 96, 32, 0.5f * alpha, val + rand.nextFloat() * val, 40);
       }
     }
-    List<EntityLivingBase> entities = Util
-        .getEntitiesWithinRadius(getEntityWorld(), EntityLivingBase.class, this.getPosition(), (float) (getDataManager().get(value) * 0.125), (float) (getDataManager().get(value) * 0.125), (float) (getDataManager().get(value) * 0.125));
+    List<EntityLivingBase> entities = Util.getEntitiesWithinRadius(getEntityWorld(), EntityLivingBase.class, this.getPosition(), val * 0.125f, val * 0.125f, val * 0.125f);
     if (entities.size() > 0) {
       this.attackWithFire(entities);
       if (getEntityWorld().isRemote) {
         for (int i = 0; i < 40; i++) {
-          ParticleUtil.spawnParticleFiery(getEntityWorld(), (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f),
-              0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), 255, 96, 32, 0.5f * alpha,
-              getDataManager().get(value) + rand.nextFloat() * getDataManager().get(value), 40);
+          ParticleUtil.spawnParticleFiery(getEntityWorld(), (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), 255, 96, 32, 0.5f * alpha, val + rand.nextFloat() * val, 40);
         }
       }
       this.setDead();

@@ -38,7 +38,7 @@ public class BlockWildFire extends BlockFire implements IBlock, IModeledObject, 
     setTranslationKey(name);
     setRegistryName(LibRegistry.getActiveModid(), name);
     setLightOpacity(15);
-    setLightLevel(1.0f);
+    setLightLevel(1.0f / 4);
     this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, 0).withProperty(NORTH, false).withProperty(EAST, false).withProperty(SOUTH, false).withProperty(WEST, false).withProperty(UPPER, false));
     //itemBlock = new ItemBlock(this).setRegistryName(LibRegistry.getActiveModid(), name);
   }
@@ -105,14 +105,14 @@ public class BlockWildFire extends BlockFire implements IBlock, IModeledObject, 
   @Override
   public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
     if (!worldIn.isAreaLoaded(pos, 2)) return; // Forge: prevent loading unloaded chunks when spreading fire
-    if (!this.canPlaceBlockAt(worldIn, pos)) {
+    if (!this.canPlaceBlockAt(worldIn, pos) || worldIn.isAirBlock(pos.down())) {
       worldIn.setBlockToAir(pos);
     }
 
     int i = state.getValue(AGE);
 
     if (i < 15) {
-      state = state.withProperty(AGE, i + rand.nextInt(6) / 2);
+      state = state.withProperty(AGE, Math.max(15, i + rand.nextInt(6) / 2));
       worldIn.setBlockState(pos, state, 4);
     } else {
       worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());

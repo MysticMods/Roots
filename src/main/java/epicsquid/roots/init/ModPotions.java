@@ -16,6 +16,7 @@ public class ModPotions {
   public static PotionReach reach;
   public static PotionBleeding bleeding;
   public static PotionAquaBubble aqua_bubble;
+  public static PotionSlowFall slow_fall;
 
   public static void registerPotions(RegistryEvent.Register<Potion> event) {
     event.getRegistry().register(freeze = new PotionFreeze().setRegistryName(Roots.MODID, "freeze"));
@@ -28,5 +29,6 @@ public class ModPotions {
     event.getRegistry().register(reach = (PotionReach) new PotionReach().setRegistryName(Roots.MODID, "reach"));
     event.getRegistry().register(bleeding = (PotionBleeding) new PotionBleeding().setRegistryName(Roots.MODID, "bleeding"));
     event.getRegistry().register(aqua_bubble = (PotionAquaBubble) new PotionAquaBubble().setRegistryName(Roots.MODID, "aqua_bubble"));
+    event.getRegistry().register(slow_fall = (PotionSlowFall) new PotionSlowFall().setRegistryName(Roots.MODID, "slow_fall"));
   }
 }
