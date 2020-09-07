@@ -1,11 +1,8 @@
 package epicsquid.roots.potion;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.SpellPetalShell;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
@@ -20,7 +17,16 @@ public class PotionSlowFall extends Potion {
     super(false, 0xe8e7d3);
     setPotionName("Slow Fall");
     setBeneficial();
-    setIconIndex(3, 0);
+    setIconIndex(0, 1);
+  }
+
+  @Override
+  public void performEffect(EntityLivingBase entityLivingBaseIn, int amplifier) {
+    super.performEffect(entityLivingBaseIn, amplifier);
+    if (!entityLivingBaseIn.onGround && entityLivingBaseIn.motionY < 0.0D && !entityLivingBaseIn.isInWater() && !entityLivingBaseIn.isOnLadder() && !entityLivingBaseIn.isElytraFlying() && !entityLivingBaseIn.isSneaking()) {
+      entityLivingBaseIn.fallDistance *= 0.6f;
+      entityLivingBaseIn.motionY *= 0.6d;
+    }
   }
 
   @Override

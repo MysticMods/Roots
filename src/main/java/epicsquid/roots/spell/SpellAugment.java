@@ -35,6 +35,8 @@ public class SpellAugment extends SpellBase {
 
   public static Property<Integer> PROP_SLOW_FALL_DURATION = new Property<>("slow_fall_duration", 18*20).setDescription("duration for the slow fall potion effect");
 
+  public static Property<Integer> PROP_DRIFTER_DURATION = new Property<>("drifter_duration", 200).setDescription("the duration in ticks of the spell effect on the player");
+
   public static Modifier REACH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "reach"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier SPEED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "speed"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier SLOW_FALL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "slow_fall"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 1)));
@@ -82,8 +84,7 @@ public class SpellAugment extends SpellBase {
       caster.addPotionEffect(new PotionEffect(MobEffects.SPEED, ampInt(speed_duration), speed_amplifier, false, false));
     }
     if (info.has(SLOW_FALL)) {
-      // TODO: Slow Fall???
-      //caster.addPotionEffect(new PotionEffect(MobEffects.
+      caster.addPotionEffect(new PotionEffect(ModPotions.slow_fall, ampInt(slow_fall), 0, false, false));
     }
     return false;
   }
