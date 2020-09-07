@@ -89,11 +89,11 @@ public class SpellAugment extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new ItemStack(Items.SHIELD),
-        new OreIngredient("gemDiamond"),
-        new OreIngredient("bone"),
-        new ItemStack(Item.getItemFromBlock(Blocks.TRIPWIRE_HOOK)),
-        new ItemStack(ModItems.moonglow_leaf)
+        new ItemStack(ModItems.spirit_herb_seed),
+        new ItemStack(Items.EXPERIENCE_BOTTLE),
+        new ItemStack(Items.CARROT_ON_A_STICK),
+        new ItemStack(Items.GOLDEN_APPLE),
+        new ItemStack(Items.IRON_HELMET)
     );
   }
 
