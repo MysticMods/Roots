@@ -38,14 +38,12 @@ minecraft {
 }
 
 dependencies {
-    if (!project.hasProperty("dev_env")) {
-        compile files('libs/')
-    } else {
-        compile project(':MysticalLib')
-        compile project(':MysticalWorld')
-        compileOnly "vazkii.patchouli:Patchouli:${patchouli_version}"
-        deobfCompile "com.azanor:Baubles:${version_baubles}"
-    }
+    compile project(':MysticalLib')
+    compile project(':MysticalWorld')
+
+    compileOnly "vazkii.patchouli:Patchouli:${patchouli_version}"
+    compile "curse.maven:simpleharvest:2897811"
+    deobfCompile "com.azanor:Baubles:${version_baubles}"
 
     // compile against the JEI API but do not include it at runtime
     deobfProvided "mezz.jei:jei_${minecraft_version}:${jei_version}:api"
@@ -61,7 +59,6 @@ dependencies {
         exclude group: 'mezz.jei'
     }
 
-    compile "curse.maven:simpleharvest:2897811"
     compile "curse.maven:hwyla:2568751"
     deobfCompile "mcjty.theoneprobe:TheOneProbe-${top_version}"
 }
@@ -82,17 +79,20 @@ repositories {
         url = "modmaven.k-4u.nl"
     }
     maven {
-        name = "JER"
+        name = "JER Maven (way2muchnoise)"
         url = "https://dl.bintray.com/way2muchnoise/dev"
     }
     maven {
+        name = "MMD Maven"
         url 'https://maven.mcmoddev.com'
     }
     maven {
-        name = "Jared"
+        //Also contains Patchouli
+        name = "Jared Maven"
         url = "https://maven.blamejared.com"
     }
     maven {
+        name = 'Tterrag Maven'
         url "http://maven.tterrag.com"
     }
     maven {
