@@ -18,6 +18,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -48,6 +49,16 @@ public class SpellAugment extends SpellBase {
   public static Property<Integer> PROP_LUCK_DURATION = new Property<>("luck_duration", 15 * 20).setDescription("duration for the luck potion effect");
   public static Property<Integer> PROP_LUCK_AMPLIFIER = new Property<>("luck_amplifier", 0).setDescription("amplifier for the luck potion effect");
 
+  public static Property<Integer> PROP_STRENGTH_DURATION = new Property<>("strength_duration", 15 * 20).setDescription("duration for the strength potion effect");
+  public static Property<Integer> PROP_STRENGTH_AMPLIFIER = new Property<>("strength_amplifier", 0).setDescription("amplifier for the strength potion effect");
+
+  public static Property<Integer> PROP_HASTE_DURATION = new Property<>("haste_duration", 15 * 20).setDescription("duration for the haste potion effect");
+  public static Property<Integer> PROP_HASTE_AMPLIFIER = new Property<>("haste_amplifier", 0).setDescription("amplifier for the haste potion effect");
+
+  public static Property<Integer> PROP_AIR_AMOUNT = new Property<>("air_amount", 300).setDescription("the value to add to a user's air with the second wind effect");
+
+  public static Property<Integer> PROP_JAUNT_DISTANCE = new Property<>("jaunt_distance", 15).setDescription("the number of blocks forward to jaunt");
+
   public static Modifier REACH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "reach"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier SPEED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "speed"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier SLOW_FALL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "slow_fall"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 1)));
@@ -66,12 +77,12 @@ public class SpellAugment extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "augment");
   public static SpellAugment instance = new SpellAugment(spellName);
 
-  private int radius_x, radius_y, radius_z, reach_duration, speed_amplifier, speed_duration, slow_fall, drifter_duration, luck_amplifier, luck_duration;
+  private int radius_x, radius_y, radius_z, reach_duration, speed_amplifier, speed_duration, slow_fall, drifter_duration, luck_amplifier, luck_duration, jaunt_distance, strength_amplifier, strength_duration, haste_amplifier, haste_duration, air_amount;
   private double reach;
 
   private SpellAugment(ResourceLocation name) {
     super(name, TextFormatting.DARK_RED, 122F / 255F, 0F, 0F, 58F / 255F, 58F / 255F, 58F / 255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_REACH, PROP_REACH_DURATION, PROP_SPEED_AMPLIFIER, PROP_SPEED_DURATION, PROP_SLOW_FALL_DURATION, PROP_DRIFTER_DURATION, PROP_LUCK_AMPLIFIER, PROP_LUCK_DURATION);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_REACH, PROP_REACH_DURATION, PROP_SPEED_AMPLIFIER, PROP_SPEED_DURATION, PROP_SLOW_FALL_DURATION, PROP_DRIFTER_DURATION, PROP_LUCK_AMPLIFIER, PROP_LUCK_DURATION, PROP_JAUNT_DISTANCE, PROP_AIR_AMOUNT, PROP_STRENGTH_AMPLIFIER, PROP_STRENGTH_DURATION, PROP_HASTE_AMPLIFIER, PROP_HASTE_DURATION);
     acceptsModifiers(REACH, SPEED, SLOW_FALL, LIGHT_DRIFTER, MAGNETISM, LUCK, JAUNT, STRENGTH, HASTE, SECOND_WIND);
   }
 
@@ -88,6 +99,7 @@ public class SpellAugment extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+    // TODO: Particle
     boolean acted = false;
     if (info.has(REACH)) {
       acted = true;
@@ -136,6 +148,31 @@ public class SpellAugment extends SpellBase {
       acted = true;
       player.addPotionEffect(new PotionEffect(MobEffects.LUCK, ampInt(luck_duration), luck_amplifier, false, false));
     }
+    if (info.has(JAUNT)) {
+      // Attempt a jaunt!
+/*      Vec3d pos = new Vec3d(player.posX, player.posY, player.posZ);
+      pos.rotateYaw(
+      player.rotationYaw;*/
+
+    }
+    if (info.has(STRENGTH)) {
+      acted = true;
+      player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, ampInt(strength_duration), strength_amplifier, false, false));
+    }
+    if (info.has(SECOND_WIND)) {
+      int air = player.getAir();
+      if (air < 300) {
+        acted = true;
+        player.setAir(Math.min(300, air + air_amount));
+        if (player.world.isRemote) {
+          player.playSound(SoundEvents.ENTITY_BOAT_PADDLE_WATER, 1, 1);
+        }
+      }
+    }
+    if (info.has(HASTE)) {
+      acted = true;
+      player.addPotionEffect(new PotionEffect(MobEffects.HASTE, ampInt(haste_duration), haste_amplifier, false, false));
+    }
     return acted;
   }
 
@@ -154,6 +191,12 @@ public class SpellAugment extends SpellBase {
     this.drifter_duration = properties.get(PROP_DRIFTER_DURATION);
     this.luck_amplifier = properties.get(PROP_LUCK_AMPLIFIER);
     this.luck_duration = properties.get(PROP_LUCK_DURATION);
+    this.strength_amplifier = properties.get(PROP_STRENGTH_AMPLIFIER);
+    this.strength_duration = properties.get(PROP_STRENGTH_DURATION);
+    this.haste_amplifier = properties.get(PROP_HASTE_AMPLIFIER);
+    this.haste_duration = properties.get(PROP_HASTE_DURATION);
+    this.jaunt_distance = properties.get(PROP_JAUNT_DISTANCE);
+    this.air_amount = properties.get(PROP_AIR_AMOUNT);
     ModPotions.reach.loadComplete(this.reach);
   }
 }
