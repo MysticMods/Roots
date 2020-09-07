@@ -1,9 +1,7 @@
-/*
 package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.SpellLightDrifter;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.MathHelper;
@@ -15,6 +13,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessageLightDrifterFX implements IMessage {
+  private static float[] set1 = new float[]{196f / 255f, 240f / 255f, 255f / 255f, 0.125f};
+  private static float[] set2 = new float[]{32f / 255f, 64f / 255f, 96f / 255f, 0.125f};
   private double posX = 0, posY = 0, posZ = 0;
 
   public MessageLightDrifterFX() {
@@ -62,15 +62,13 @@ public class MessageLightDrifterFX implements IMessage {
           vz *= -1;
         }
         if (Util.rand.nextBoolean()) {
-          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellLightDrifter.instance.getRed1(),
-              SpellLightDrifter.instance.getGreen1(), SpellLightDrifter.instance.getBlue1(), 0.125f, 8f + Util.rand.nextFloat() * 6f, 80, true);
+          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, set1, 8f + Util.rand.nextFloat() * 6f, 80, true);
         } else {
-          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellLightDrifter.instance.getRed2(),
-              SpellLightDrifter.instance.getGreen2(), SpellLightDrifter.instance.getBlue2(), 0.125f, 8f + Util.rand.nextFloat() * 6f, 80, true);
+          ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, set2, 8f + Util.rand.nextFloat() * 6f, 80, true);
         }
       }
       return null;
     }
   }
 
-}*/
+}

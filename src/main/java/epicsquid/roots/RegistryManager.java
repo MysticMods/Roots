@@ -7,7 +7,7 @@ import epicsquid.mysticallib.event.RegisterParticleEvent;
 import epicsquid.roots.init.*;
 import epicsquid.roots.item.ItemLifeEssence;
 import epicsquid.roots.item.ItemStaff;
-import epicsquid.roots.network.PacketHandler;
+import epicsquid.roots.network.RootsPacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityList;
 import net.minecraft.item.EnumDyeColor;
@@ -34,7 +34,7 @@ public class RegistryManager {
     ModItems.registerItems(event);
 
     ModEntities.registerMobs();
-    PacketHandler.registerMessages();
+    RootsPacketHandler.registerMessages();
   }
 
   @SubscribeEvent

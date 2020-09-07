@@ -1,11 +1,16 @@
 package epicsquid.roots.spell;
 
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
+import epicsquid.roots.client.SpectatorHandler;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
+import epicsquid.roots.network.MessageLightDrifterSync;
+import epicsquid.roots.network.fx.MessageLightDrifterFX;
 import epicsquid.roots.properties.Property;
+import epicsquid.roots.util.Constants;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -15,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.GameType;
 import net.minecraftforge.oredict.OreIngredient;
 
 public class SpellAugment extends SpellBase {
@@ -30,10 +36,10 @@ public class SpellAugment extends SpellBase {
   public static Property<Integer> PROP_REACH_DURATION = new Property<>("reach_duration", 600).setDescription("duration for the reach potion effect");
   public static Property<Double> PROP_REACH = new Property<>("reach", 5.0).setDescription("the extended reach applied to the player during the effect of the spell");
 
-  public static Property<Integer> PROP_SPEED_DURATION = new Property<>("speed_duration", 15*20).setDescription("duration for the speed potion effect");
+  public static Property<Integer> PROP_SPEED_DURATION = new Property<>("speed_duration", 15 * 20).setDescription("duration for the speed potion effect");
   public static Property<Integer> PROP_SPEED_AMPLIFIER = new Property<>("speed_amplifier", 0).setDescription("amplifier for the speed potion effect");
 
-  public static Property<Integer> PROP_SLOW_FALL_DURATION = new Property<>("slow_fall_duration", 18*20).setDescription("duration for the slow fall potion effect");
+  public static Property<Integer> PROP_SLOW_FALL_DURATION = new Property<>("slow_fall_duration", 18 * 20).setDescription("duration for the slow fall potion effect");
 
   public static Property<Integer> PROP_DRIFTER_DURATION = new Property<>("drifter_duration", 200).setDescription("the duration in ticks of the spell effect on the player");
 
@@ -55,12 +61,12 @@ public class SpellAugment extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "augment");
   public static SpellAugment instance = new SpellAugment(spellName);
 
-  private int radius_x, radius_y, radius_z, drop_chance, reach_duration, speed_amplifier, speed_duration, slow_fall;
+  private int radius_x, radius_y, radius_z, drop_chance, reach_duration, speed_amplifier, speed_duration, slow_fall, drifter_duration;
   private double reach;
 
   private SpellAugment(ResourceLocation name) {
     super(name, TextFormatting.DARK_RED, 122F / 255F, 0F, 0F, 58F / 255F, 58F / 255F, 58F / 255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_REACH, PROP_REACH_DURATION, PROP_SPEED_AMPLIFIER, PROP_SPEED_DURATION, PROP_SLOW_FALL_DURATION);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_REACH, PROP_REACH_DURATION, PROP_SPEED_AMPLIFIER, PROP_SPEED_DURATION, PROP_SLOW_FALL_DURATION, PROP_DRIFTER_DURATION);
     acceptsModifiers(REACH, SPEED, SLOW_FALL, LIGHT_DRIFTER, MAGNETISM, LUCK, JAUNT, STRENGTH, HASTE, SECOND_WIND);
   }
 
@@ -76,15 +82,36 @@ public class SpellAugment extends SpellBase {
   }
 
   @Override
-  public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     if (info.has(REACH)) {
-      caster.addPotionEffect(new PotionEffect(ModPotions.reach, ampInt(reach_duration), 0, false, false));
+      player.addPotionEffect(new PotionEffect(ModPotions.reach, ampInt(reach_duration), 0, false, false));
     }
     if (info.has(SPEED)) {
-      caster.addPotionEffect(new PotionEffect(MobEffects.SPEED, ampInt(speed_duration), speed_amplifier, false, false));
+      player.addPotionEffect(new PotionEffect(MobEffects.SPEED, ampInt(speed_duration), speed_amplifier, false, false));
     }
     if (info.has(SLOW_FALL)) {
-      caster.addPotionEffect(new PotionEffect(ModPotions.slow_fall, ampInt(slow_fall), 0, false, false));
+      player.addPotionEffect(new PotionEffect(ModPotions.slow_fall, ampInt(slow_fall), 0, false, false));
+    }
+    if (info.has(LIGHT_DRIFTER)) {
+      if (!player.world.isRemote) {
+        player.capabilities.disableDamage = true;
+        player.capabilities.allowFlying = true;
+        player.noClip = true;
+        player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, drifter_duration);
+        player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_X, player.posX);
+        player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_Y, player.posY);
+        player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_Z, player.posZ);
+        if (player.capabilities.isCreativeMode) {
+          player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_MODE, GameType.CREATIVE.getID());
+        } else {
+          player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_MODE, GameType.SURVIVAL.getID());
+        }
+        player.setGameType(GameType.SPECTATOR);
+        PacketHandler.sendToAllTracking(new MessageLightDrifterSync(player.getUniqueID(), player.posX, player.posY, player.posZ, true, GameType.SPECTATOR.getID()), player);
+        PacketHandler.sendToAllTracking(new MessageLightDrifterFX(player.posX, player.posY + 1.0f, player.posZ), player);
+      } else {
+        SpectatorHandler.setFake();
+      }
     }
     return false;
   }
@@ -102,6 +129,7 @@ public class SpellAugment extends SpellBase {
     this.speed_duration = properties.get(PROP_SPEED_DURATION);
     this.speed_amplifier = properties.get(PROP_SPEED_AMPLIFIER);
     this.slow_fall = properties.get(PROP_SLOW_FALL_DURATION);
+    this.drifter_duration = properties.get(PROP_DRIFTER_DURATION);
     ModPotions.reach.loadComplete(this.reach);
   }
 }

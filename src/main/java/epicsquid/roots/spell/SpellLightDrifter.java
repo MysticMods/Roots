@@ -1,38 +1,9 @@
-/*package epicsquid.roots.spell;
-
-import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.roots.Roots;
-import epicsquid.roots.client.SpectatorHandler;
-import epicsquid.roots.init.ModItems;
-import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
-import epicsquid.roots.network.MessageLightDrifterSync;
-import epicsquid.roots.network.fx.MessageLightDrifterFX;
-import epicsquid.roots.util.Constants;
-import epicsquid.roots.properties.Property;
-import net.minecraft.block.BlockDoublePlant;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.GameType;
-import net.minecraftforge.oredict.OreIngredient;
-
+/*
 public class SpellLightDrifter extends SpellBase {
-  public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(250);
-  public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("pereskia", 0.5));
-  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("wildewheet", 0.25));
-  public static Property<Integer> PROP_DURATION = new Property<>("duration", 200).setDescription("the duration in ticks of the spell effect on the player");
 
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_light_drifter");
-  public static SpellLightDrifter instance = new SpellLightDrifter(spellName);
-
-  private int duration;
 
   public SpellLightDrifter(ResourceLocation name) {
-    super(name, TextFormatting.AQUA, 196f / 255f, 240f / 255f, 255f / 255f, 32f / 255f, 64f / 255f, 96f / 255f);
+    super(name, TextFormatting.AQUA, );
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DURATION);
   }
 
