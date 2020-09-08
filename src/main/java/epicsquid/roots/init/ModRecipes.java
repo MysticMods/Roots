@@ -90,20 +90,24 @@ public class ModRecipes {
   }
 
   public static ChrysopoeiaRecipe addChrysopoeiaRecipe(ResourceLocation name, IngredientWithStack ingredient, ItemStack output) {
+    return addChrysopoeiaRecipe(name, ingredient, output, ItemStack.EMPTY, 0, 0);
+  }
+
+  public static ChrysopoeiaRecipe addChrysopoeiaRecipe(ResourceLocation name, IngredientWithStack inputs, ItemStack outputs, ItemStack byproduct, float overload, float byproductChance) {
     if (chrysopoeiaRecipes.containsKey(name)) {
       Roots.logger.error("Invalid key: " + name.toString() + " for Chrysopoeia recipe. Key already exists.");
       return null;
     }
-    ChrysopoeiaRecipe recipe = new ChrysopoeiaRecipe(ingredient, output);
+    ChrysopoeiaRecipe recipe = new ChrysopoeiaRecipe(inputs, outputs, byproduct, overload, byproductChance);
     recipe.setRegistryName(name);
     chrysopoeiaRecipes.put(name, recipe);
     return recipe;
   }
 
   @Nullable
-  public static ChrysopoeiaRecipe getChrysopoeiaRecipe(ItemStack stack, boolean inverted) {
+  public static ChrysopoeiaRecipe getChrysopoeiaRecipe(ItemStack stack) {
     for (ChrysopoeiaRecipe recipe : getChrysopoeiaRecipes()) {
-      if (recipe.matches(stack, inverted)) {
+      if (recipe.matches(stack)) {
         return recipe;
       }
     }

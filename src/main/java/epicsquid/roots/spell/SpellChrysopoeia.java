@@ -32,7 +32,7 @@ public class SpellChrysopoeia extends SpellBase {
   public static Modifier BY1 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "byproduct_i"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier BY4 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "byproduct_iv"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
   public static Modifier OVER2 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "overproduction_ii"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 1)));
-  public static Modifier INVERSION = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "recipe_inversion"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1)));
+  public static Modifier REPETITION = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "repetition"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1)));
   public static Modifier OVER3 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "overproduction_iii"), ModifierCores.TERRA_MOSS, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.TERRA_MOSS, 1)));
   public static Modifier OVER4 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "overproduction_iv"), ModifierCores.BAFFLE_CAP, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 1)));
   public static Modifier BY3 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "byproduct_iii"), ModifierCores.CLOUD_BERRY, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 1)));
@@ -46,7 +46,7 @@ public class SpellChrysopoeia extends SpellBase {
   public SpellChrysopoeia(ResourceLocation name) {
     super(name, TextFormatting.GOLD, 176F / 255F, 169F / 255F, 158F / 255F, 224F / 255F, 174F / 255F, 99F / 255F);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_INTERVAL);
-    acceptsModifiers(OVER1, BY1, BY4, OVER2, INVERSION, OVER3, OVER4, BY3, BY2);
+    acceptsModifiers(OVER1, BY1, BY4, OVER2, REPETITION, OVER3, OVER4, BY3, BY2);
   }
 
   @Override
@@ -90,7 +90,6 @@ public class SpellChrysopoeia extends SpellBase {
 
     int over = 0;
     int by = 0;
-    boolean inverted = info.has(INVERSION);
     if (info.has(OVER1)) {
       over++;
     }
@@ -120,7 +119,7 @@ public class SpellChrysopoeia extends SpellBase {
       return false;
     }
 
-    ChrysopoeiaRecipe recipe = ModRecipes.getChrysopoeiaRecipe(offHand, inverted);
+    ChrysopoeiaRecipe recipe = ModRecipes.getChrysopoeiaRecipe(offHand);
     if (recipe == null) {
       if (!world.isRemote && shouldPlaySound(caster)) {
         world.playSound(null, caster.getPosition(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 0.4f);
@@ -132,8 +131,8 @@ public class SpellChrysopoeia extends SpellBase {
       if (shouldPlaySound(caster)) {
         world.playSound(null, caster.getPosition(), SoundEvents.BLOCK_METAL_PLACE, SoundCategory.PLAYERS, 0.3f, 0.4f);
       }
-      ItemStack result = recipe.getCraftingResult(over, inverted);
-      ItemStack byproduct = recipe.getByproduct(by, inverted);
+      ItemStack result = recipe.getCraftingResult(over);
+      ItemStack byproduct = recipe.getByproduct(by);
       if (!caster.addItemStackToInventory(result)) {
         ItemUtil.spawnItem(world, caster.getPosition(), result);
       }
@@ -142,7 +141,7 @@ public class SpellChrysopoeia extends SpellBase {
           ItemUtil.spawnItem(world, caster.getPosition(), byproduct);
         }
       }
-      ItemStack handResult = recipe.process(caster, offHand, over, by, inverted);
+      ItemStack handResult = recipe.process(caster, offHand, over, by);
       caster.setHeldItem(EnumHand.OFF_HAND, handResult);
 
       MessageChrysopoeiaFX message = new MessageChrysopoeiaFX(caster);

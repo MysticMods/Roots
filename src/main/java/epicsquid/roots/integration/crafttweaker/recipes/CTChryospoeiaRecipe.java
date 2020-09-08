@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 public class CTChryospoeiaRecipe extends ChrysopoeiaRecipe {
   private IIngredient input;
 
+  // TODO: Update with support for thingy
   public CTChryospoeiaRecipe(IIngredient input, ItemStack outputs) {
     super(IngredientWithStack.EMPTY, outputs);
     this.input = input;
@@ -31,7 +32,7 @@ public class CTChryospoeiaRecipe extends ChrysopoeiaRecipe {
   }
 
   @Override
-  public ItemStack process(EntityPlayer player, ItemStack stack) {
+  public ItemStack process(EntityPlayer player, ItemStack stack, int overload, int by) {
     if (!matches(stack)) {
       return stack;
     }

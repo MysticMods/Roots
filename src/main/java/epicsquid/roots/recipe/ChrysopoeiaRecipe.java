@@ -10,45 +10,37 @@ import net.minecraftforge.common.ForgeHooks;
 
 public class ChrysopoeiaRecipe extends RegistryItem {
   private final IngredientWithStack inputs;
-  private final IngredientWithStack reversedInputs;
   private final ItemStack outputs;
-  private final ItemStack inverted;
-  private final boolean canReverse;
   private final float overload;
   private final float byproductChance;
   private final ItemStack byproduct;
-  private final ItemStack byproductInverted;
 
-  public ChrysopoeiaRecipe(IngredientWithStack inputs, ItemStack inverted, ItemStack outputs, float overload, ItemStack byproduct, ItemStack byproductInverted, float byproductChance, boolean canReverse) {
+  public ChrysopoeiaRecipe (IngredientWithStack inputs, ItemStack outputs) {
+    this(inputs, outputs, ItemStack.EMPTY, 0, 0);
+  }
+
+  public ChrysopoeiaRecipe(IngredientWithStack inputs, ItemStack outputs, ItemStack byproduct, float overload, float byproductChance) {
     this.inputs = inputs;
-    this.reversedInputs = new IngredientWithStack(outputs);
     this.outputs = outputs;
-    this.canReverse = canReverse;
     this.overload = overload;
     this.byproduct = byproduct;
-    this.byproductInverted = byproductInverted;
     this.byproductChance = byproductChance;
-    this.inverted = inverted;
   }
 
   public IngredientWithStack getIngredient() {
     return inputs;
   }
 
-  public boolean matches(ItemStack stack, boolean inverted) {
-    if (!inverted) {
-      return inputs.getIngredient().test(stack) && stack.getCount() >= inputs.getCount();
-    } else {
-      return reversedInputs.getIngredient().test(stack) && stack.getCount() >= reversedInputs.getCount();
-    }
+  public boolean matches(ItemStack stack) {
+    return inputs.getIngredient().test(stack) && stack.getCount() >= inputs.getCount();
   }
 
-  public ItemStack process(EntityPlayer player, ItemStack stack, int overload, int by, boolean inverted) {
-    if (!matches(stack, inverted)) {
+  public ItemStack process(EntityPlayer player, ItemStack stack, int overload, int by) {
+    if (!matches(stack)) {
       return stack;
     }
 
-    int count = inverted ? reversedInputs.getCount() : inputs.getCount();
+    int count = inputs.getCount();
 
     if ((stack.getCount() - count) <= 0) {
       return ForgeHooks.getContainerItem(stack);
@@ -70,23 +62,8 @@ public class ChrysopoeiaRecipe extends RegistryItem {
     return outputs;
   }
 
-  public ItemStack getCraftingResult (int overloadAmount, boolean inverted) {
-    ItemStack result;
-    if (inverted && canReverse) {
-      if (this.inverted.isEmpty()) {
-        return ItemStack.EMPTY;
-      } else {
-        result = this.inverted.copy();
-      }
-    } else if (inverted) {
-      return ItemStack.EMPTY;
-    } else {
-      result = outputs.copy();
-    }
-
-    if (result.isEmpty()) {
-      return ItemStack.EMPTY;
-    }
+  public ItemStack getCraftingResult(int overloadAmount) {
+    ItemStack result = outputs.copy();
 
     if (overloadAmount > 0) {
       int multiplier = Util.floatChance(byproductChance * overloadAmount);
@@ -95,23 +72,8 @@ public class ChrysopoeiaRecipe extends RegistryItem {
     return result;
   }
 
-  public ItemStack getByproduct (int byproductAmount, boolean inverted) {
-    ItemStack result;
-    if (inverted && canReverse) {
-      if (byproductInverted.isEmpty()) {
-        return ItemStack.EMPTY;
-      } else {
-        result = byproductInverted.copy();
-      }
-    } else if (inverted) {
-      return ItemStack.EMPTY;
-    } else {
-      result = byproduct.copy();
-    }
-
-    if (result.isEmpty()) {
-      return ItemStack.EMPTY;
-    }
+  public ItemStack getByproduct(int byproductAmount) {
+    ItemStack result = byproduct.copy();
 
     if (byproductAmount > 0) {
       int multiplier = Util.floatChance(byproductChance * byproductAmount);
