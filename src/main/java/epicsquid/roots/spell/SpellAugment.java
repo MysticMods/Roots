@@ -12,6 +12,7 @@ import epicsquid.roots.network.MessageLightDrifterSync;
 import epicsquid.roots.network.fx.MessageLightDrifterFX;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.Constants;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,6 +24,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameType;
 import net.minecraftforge.oredict.OreIngredient;
@@ -57,7 +60,7 @@ public class SpellAugment extends SpellBase {
 
   public static Property<Integer> PROP_AIR_AMOUNT = new Property<>("air_amount", 300).setDescription("the value to add to a user's air with the second wind effect");
 
-  public static Property<Integer> PROP_JAUNT_DISTANCE = new Property<>("jaunt_distance", 15).setDescription("the number of blocks forward to jaunt");
+  public static Property<Integer> PROP_JAUNT_DISTANCE = new Property<>("jaunt_distance", 5).setDescription("the number of blocks forward to jaunt");
 
   public static Modifier REACH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "reach"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier SPEED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "speed"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -149,11 +152,16 @@ public class SpellAugment extends SpellBase {
       player.addPotionEffect(new PotionEffect(MobEffects.LUCK, ampInt(luck_duration), luck_amplifier, false, false));
     }
     if (info.has(JAUNT)) {
-      // Attempt a jaunt!
-/*      Vec3d pos = new Vec3d(player.posX, player.posY, player.posZ);
-      pos.rotateYaw(
-      player.rotationYaw;*/
-
+      Vec3d realPos = new Vec3d(player.posX, player.posY, player.posZ).add(Vec3d.fromPitchYaw(0, player.rotationYaw).scale(jaunt_distance));
+      BlockPos pos = player.world.getHeight(new BlockPos(realPos.x, realPos.y, realPos.z));
+      IBlockState state = player.world.getBlockState(pos);
+      if (state.getBlock().isPassable(player.world, pos)) {
+        acted = true;
+        if (!player.world.isRemote) {
+          player.setPositionAndUpdate(realPos.x, pos.getY() + 0.01, realPos.z);
+          player.fallDistance = 0f;
+        }
+      }
     }
     if (info.has(STRENGTH)) {
       acted = true;
