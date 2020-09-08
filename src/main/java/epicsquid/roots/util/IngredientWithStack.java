@@ -1,5 +1,6 @@
 package epicsquid.roots.util;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 
 public class IngredientWithStack {
@@ -13,6 +14,11 @@ public class IngredientWithStack {
     this.count = count;
   }
 
+  public IngredientWithStack(ItemStack stack) {
+    this.ingredient = Ingredient.fromStacks(stack);
+    this.count = stack.getCount();
+  }
+
   public Ingredient getIngredient() {
     return ingredient;
   }
@@ -23,5 +29,9 @@ public class IngredientWithStack {
 
   public void increment() {
     count++;
+  }
+
+  public IngredientWithStack copy () {
+    return new IngredientWithStack(this.ingredient, this.count);
   }
 }

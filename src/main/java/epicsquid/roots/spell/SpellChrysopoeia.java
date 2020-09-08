@@ -88,11 +88,39 @@ public class SpellChrysopoeia extends SpellBase {
       return false;
     }
 
+    int over = 0;
+    int by = 0;
+    boolean inverted = info.has(INVERSION);
+    if (info.has(OVER1)) {
+      over++;
+    }
+    if (info.has(OVER2)) {
+      over++;
+    }
+    if (info.has(OVER3)) {
+      over++;
+    }
+    if (info.has(OVER4)) {
+      over++;
+    }
+    if (info.has(BY1)) {
+      by++;
+    }
+    if (info.has(BY2)) {
+      by++;
+    }
+    if (info.has(BY3)) {
+      by++;
+    }
+    if (info.has(BY4)) {
+      by++;
+    }
+
     if (interval != 0 && ticks % interval != 0) {
       return false;
     }
 
-    ChrysopoeiaRecipe recipe = ModRecipes.getChrysopoeiaRecipe(offHand);
+    ChrysopoeiaRecipe recipe = ModRecipes.getChrysopoeiaRecipe(offHand, inverted);
     if (recipe == null) {
       if (!world.isRemote && shouldPlaySound(caster)) {
         world.playSound(null, caster.getPosition(), SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 0.4f);
@@ -104,11 +132,17 @@ public class SpellChrysopoeia extends SpellBase {
       if (shouldPlaySound(caster)) {
         world.playSound(null, caster.getPosition(), SoundEvents.BLOCK_METAL_PLACE, SoundCategory.PLAYERS, 0.3f, 0.4f);
       }
-      ItemStack result = recipe.getOutput().copy();
+      ItemStack result = recipe.getCraftingResult(over, inverted);
+      ItemStack byproduct = recipe.getByproduct(by, inverted);
       if (!caster.addItemStackToInventory(result)) {
         ItemUtil.spawnItem(world, caster.getPosition(), result);
       }
-      ItemStack handResult = recipe.process(caster, offHand);
+      if (!byproduct.isEmpty()) {
+        if (!caster.addItemStackToInventory(byproduct)) {
+          ItemUtil.spawnItem(world, caster.getPosition(), byproduct);
+        }
+      }
+      ItemStack handResult = recipe.process(caster, offHand, over, by, inverted);
       caster.setHeldItem(EnumHand.OFF_HAND, handResult);
 
       MessageChrysopoeiaFX message = new MessageChrysopoeiaFX(caster);

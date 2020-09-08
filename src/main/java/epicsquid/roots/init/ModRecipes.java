@@ -101,9 +101,9 @@ public class ModRecipes {
   }
 
   @Nullable
-  public static ChrysopoeiaRecipe getChrysopoeiaRecipe(ItemStack stack) {
+  public static ChrysopoeiaRecipe getChrysopoeiaRecipe(ItemStack stack, boolean inverted) {
     for (ChrysopoeiaRecipe recipe : getChrysopoeiaRecipes()) {
-      if (recipe.matches(stack)) {
+      if (recipe.matches(stack, inverted)) {
         return recipe;
       }
     }
