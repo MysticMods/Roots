@@ -74,7 +74,7 @@ public class SpellAugment extends SpellBase {
     LIGHT_DRIFTER.addConflicts(SLOW_FALL, MAGNETISM);
   }
 
-  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "augment");
+  public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_augment");
   public static SpellAugment instance = new SpellAugment(spellName);
 
   private int radius_x, radius_y, radius_z, reach_duration, speed_amplifier, speed_duration, slow_fall, drifter_duration, luck_amplifier, luck_duration, jaunt_distance, strength_amplifier, strength_duration, haste_amplifier, haste_duration, air_amount;
