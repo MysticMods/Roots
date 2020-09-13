@@ -93,6 +93,7 @@ public class SpellDandelionWinds extends SpellBase {
       Entity entity = player.getLowestRidingEntity();
       if (entity instanceof EntityBoat) {
         if (!player.world.isRemote) {
+          // TODO
           EntityBoat boat = (EntityBoat) entity;
           boat.momentum *= ampDouble(boat_speed);
 /*          entity.motionX *= ampDouble(boat_speed);
@@ -211,6 +212,7 @@ public class SpellDandelionWinds extends SpellBase {
 
   private void flingEntity(Entity e, Vec3d lookVec, double motion, StaffModifierInstanceList info) {
     e.motionX += lookVec.x;
+    // TODO: Improve suction
     e.motionY += (motion * 0.7);
     e.motionZ += lookVec.z;
     if (info.has(GROUNDED)) {
