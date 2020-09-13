@@ -5,6 +5,7 @@ import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageDisarmFX;
@@ -26,6 +27,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreIngredient;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class SpellDisarm extends SpellBase {
@@ -63,6 +65,9 @@ public class SpellDisarm extends SpellBase {
     POISON.addConflict(FLOWERS);
   }
 
+  public static List<EntityEquipmentSlot> HANDS;
+  public static List<EntityEquipmentSlot> ARMOR;
+
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_disarm");
   public static SpellDisarm instance = new SpellDisarm(spellName);
 
@@ -86,8 +91,15 @@ public class SpellDisarm extends SpellBase {
     );
   }
 
+  @SuppressWarnings("ConstantConditions")
   @Override
   public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
+    if (ARMOR == null) {
+      ARMOR = Arrays.asList(EntityEquipmentSlot.HEAD, EntityEquipmentSlot.CHEST, EntityEquipmentSlot.LEGS, EntityEquipmentSlot.FEET);
+    }
+    if (HANDS == null) {
+      HANDS = Arrays.asList(EntityEquipmentSlot.MAINHAND, EntityEquipmentSlot.OFFHAND);
+    }
     BlockPos playerPos = caster.getPosition();
     World world = caster.world;
 
@@ -98,10 +110,34 @@ public class SpellDisarm extends SpellBase {
       return false;
     }
 
+    int count = 0;
+
     for (EntityLivingBase entity : entities) {
       if (EntityUtil.isHostile(entity)) {
         boolean disarmed = false;
-        for (EntityEquipmentSlot slot : EntityEquipmentSlot.values()) {
+        for (EntityEquipmentSlot handSlot : HANDS) {
+          ItemStack stack = entity.getItemStackFromSlot(handSlot);
+          if (stack.isEmpty()) {
+            continue;
+          }
+          disarmed = true;
+          if (!world.isRemote) {
+            if (info.has(FLOWERS)) {
+              entity.setItemStackToSlot(handSlot, new ItemStack(Item.getItemFromBlock(Blocks.RED_FLOWER)));
+            } else {
+              entity.setItemStackToSlot(handSlot, ItemStack.EMPTY);
+            }
+            if (Util.rand.nextFloat() < ampFloat(drop_chance + chance_increase)) {
+              ItemUtil.spawnItem(world, entity.getPosition(), stack);
+            }
+          }
+        }
+
+        float armorChance = info.has(ARMOR1) ? armor_chance : 0;
+        if (info.has(ARMOR2)) {
+          armorChance += armor_chance;
+        }
+        for (EntityEquipmentSlot slot : ARMOR) {
           ItemStack stack = entity.getItemStackFromSlot(slot);
           if (stack.isEmpty()) {
             continue;
@@ -109,7 +145,7 @@ public class SpellDisarm extends SpellBase {
           disarmed = true;
           if (!world.isRemote) {
             entity.setItemStackToSlot(slot, ItemStack.EMPTY);
-            if (drop_chance == 1 || drop_chance > 1 && Util.rand.nextInt(ampSubInt(drop_chance)) == 0) {
+            if (Util.rand.nextFloat() < ampFloat(armorChance)) {
               ItemUtil.spawnItem(world, entity.getPosition(), stack);
             }
           }
@@ -117,12 +153,34 @@ public class SpellDisarm extends SpellBase {
 
         if (disarmed) {
           if (!world.isRemote) {
+            if (info.has(POISON)) {
+              entity.addPotionEffect(new PotionEffect(MobEffects.POISON, poison_duration, poison_amplifier));
+            }
+            if (info.has(FIRE)) {
+              entity.setFire(fire_duration);
+            }
+            if (info.has(PARALYSIS)) {
+              entity.addPotionEffect(new PotionEffect(ModPotions.time_stop, paralysis_duration));
+            }
+            if (info.has(KNOCKBACK)) {
+              entity.knockBack(caster, knockback, caster.posX - entity.posX, caster.posZ - entity.posZ);
+            }
+
             PacketHandler.sendToAllTracking(new MessageDisarmFX(entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ()), caster);
           }
-          return true;
+          if (info.has(DUO) && count < 2) {
+            count++;
+          } else {
+            return true;
+          }
         }
       } else if (info.has(PEACEFUL) && EntityUtil.isFriendlyTo(entity, caster)) {
+        // potion effect
         entity.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, this.rearm_duration, 2));
+        EntityLivingBase lastAttacked = caster.getLastAttackedEntity();
+        if (lastAttacked != null && lastAttacked.isEntityAlive()) {
+          entity.setRevengeTarget(lastAttacked);
+        }
       }
     }
     return false;
