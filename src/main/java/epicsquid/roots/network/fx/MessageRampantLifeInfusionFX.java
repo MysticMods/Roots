@@ -1,9 +1,7 @@
-/*
 package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.SpellRampantGrowth;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -18,6 +16,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessageRampantLifeInfusionFX implements IMessage {
   private double posX = 0, posY = 0, posZ = 0;
+  private static float[] colors1 = new float[]{224f / 255f, 135f / 255f, 40f / 255f, 0.5f};
+  private static float[] colors2 = new float[]{46f / 255f, 94f / 255f, 93f / 255f, 0.5f};
 
   public MessageRampantLifeInfusionFX() {
     super();
@@ -58,19 +58,12 @@ public class MessageRampantLifeInfusionFX implements IMessage {
       state.getBlock().randomDisplayTick(state, world, pos, Util.rand);
       for (int k = 0; k < 10; k++) {
         if (Util.rand.nextBoolean()) {
-          ParticleUtil.spawnParticlePetal(world, (float) message.posX + Util.rand.nextFloat(), (float) message.posY + Util.rand.nextFloat(),
-              (float) message.posZ + Util.rand.nextFloat(), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f),
-              0.125f * (Util.rand.nextFloat() - 0.5f), SpellRampantGrowth.instance.getRed1() * 255.0f, SpellRampantGrowth.instance.getGreen1() * 255.0f,
-              SpellRampantGrowth.instance.getBlue1() * 255.0f, 0.5f, 5f, 14);
+          ParticleUtil.spawnParticlePetal(world, (float) message.posX + Util.rand.nextFloat(), (float) message.posY + Util.rand.nextFloat(), (float) message.posZ + Util.rand.nextFloat(), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), colors1, 5f, 14);
         } else {
-          ParticleUtil.spawnParticlePetal(world, (float) message.posX + Util.rand.nextFloat(), (float) message.posY + Util.rand.nextFloat(),
-              (float) message.posZ + Util.rand.nextFloat(), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f),
-              0.125f * (Util.rand.nextFloat() - 0.5f), SpellRampantGrowth.instance.getRed2() * 255.0f, SpellRampantGrowth.instance.getGreen2() * 255.0f,
-              SpellRampantGrowth.instance.getBlue2() * 255.0f, 0.5f, 5f, 14);
+          ParticleUtil.spawnParticlePetal(world, (float) message.posX + Util.rand.nextFloat(), (float) message.posY + Util.rand.nextFloat(), (float) message.posZ + Util.rand.nextFloat(), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), colors2, 5f, 14);
         }
       }
       return null;
     }
   }
-
-}*/
+}

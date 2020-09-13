@@ -9,6 +9,7 @@ import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageLifeInfusionFX;
+import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.properties.Property;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -94,10 +95,9 @@ public class SpellGrowthInfusion extends SpellBase {
           for (int j = 0; j < ticks; j++) {
             state.getBlock().randomTick(player.world, pos, state, Util.rand);
           }
-          // TODO: FINISH WRITING THIS
           // TODO: CENTRALISE EFFECT COLOURS
           if (player.world.rand.nextInt(3) == 0) {
-            //PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);
+            PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);
           }
         }
       }
