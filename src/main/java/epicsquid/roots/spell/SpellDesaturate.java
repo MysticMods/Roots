@@ -24,7 +24,8 @@ public class SpellDesaturate extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("spirit_herb", 0.7));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("terra_moss", 0.5));
-  public static Property<Double> PROP_MULTIPLIER = new Property<>("multiplier", 0.5).setDescription("amount of health points restored by each food point");
+  public static Property<Double> PROP_MULTIPLIER = new Property<>("multiplier", 0.70).setDescription("amount of health points restored by each food point");
+  public static Property<Double> PROP_AMPLIFIED_MULTIPLIER = new Property<>("multiplier", 0.95).setDescription("amount of health points restored by each food point when using the amplified bonus");
 
   public static Modifier RATIO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "amplified_saturation"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_heal"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -39,11 +40,11 @@ public class SpellDesaturate extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_desaturate");
   public static SpellDesaturate instance = new SpellDesaturate(spellName);
 
-  private double multiplier;
+  private double multiplier, amplified_multiplier;
 
   public SpellDesaturate(ResourceLocation name) {
     super(name, TextFormatting.DARK_PURPLE, 184F / 255F, 232F / 255F, 42F / 255F, 109F / 255F, 32F / 255F, 168F / 255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_MULTIPLIER);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_MULTIPLIER, PROP_AMPLIFIED_MULTIPLIER);
     acceptsModifiers(RATIO, PEACEFUL, GROWTH, SHIELD, DAMAGE, LEVITATE, FIRE_RESIST, RESISTANCE, SECOND_WIND);
   }
 
@@ -68,17 +69,24 @@ public class SpellDesaturate extends SpellBase {
     if (food <= 1) {
       return false;
     }
-    float required = ((caster.getMaxHealth() - caster.getHealth()) / ampSubFloat(multiplier));
+    double multiplier = this.multiplier;
+    if (info.has(RATIO)) {
+      multiplier = this.amplified_multiplier;
+    }
+    multiplier = ampSubFloat(multiplier);
+    float missing = caster.getMaxHealth() - caster.getHealth();
     float healed = 0;
 
-    for (int i = 0; i <= required; i++) {
+    for (int i = 0; i <= caster.getMaxHealth(); i++) {
       if (food > 1) {
         food--;
-        healed += 1 * ampSubFloat(multiplier);
+        healed += 1f * multiplier;
       } else {
         break;
       }
     }
+
+    float overheal = healed - missing;
 
     World world = caster.world;
 
@@ -86,6 +94,9 @@ public class SpellDesaturate extends SpellBase {
       caster.heal(healed);
       stats.setFoodLevel(food);
       stats.foodSaturationLevel = Math.min(stats.foodSaturationLevel, food);
+
+      if (overheal > 0) {
+      }
 
       ((EntityPlayerMP) caster).connection.sendPacket(new SPacketUpdateHealth(caster.getHealth(), stats.getFoodLevel(), stats.getSaturationLevel()));
 
@@ -101,5 +112,6 @@ public class SpellDesaturate extends SpellBase {
     this.castType = properties.get(PROP_CAST_TYPE);
     this.cooldown = properties.get(PROP_COOLDOWN);
     this.multiplier = properties.get(PROP_MULTIPLIER);
+    this.amplified_multiplier = properties.get(PROP_AMPLIFIED_MULTIPLIER);
   }
 }

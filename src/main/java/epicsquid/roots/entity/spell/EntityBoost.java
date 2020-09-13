@@ -3,11 +3,13 @@ package epicsquid.roots.entity.spell;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellSkySoarer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -49,7 +51,7 @@ public class EntityBoost extends Entity {
       EntityPlayer player = world.getPlayerEntityByUUID(playerId);
       if (player != null) {
         Entity riding = player.getLowestRidingEntity();
-        if (riding != null) {
+        if (riding != player) {
           return new Entity[]{player, riding};
         } else {
           return new Entity[]{player, player};
@@ -79,9 +81,15 @@ public class EntityBoost extends Entity {
       if (!world.isRemote) {
         Entity[] target = getTargets();
         if (target != null) {
-          target[1].motionX = origX;
-          target[1].motionY = origY;
-          target[1].motionZ = origZ;
+          if (target[1] instanceof EntityBoat) {
+            target[1].motionX += MathHelper.sin(-target[1].rotationYaw * 0.017453292F) * 0.25;
+            target[1].motionY = 0;
+            target[1].motionZ += MathHelper.cos(target[1].rotationYaw * 0.017453292F) * 0.25;
+          } else {
+            target[1].motionX = origX;
+            target[1].motionY = origY;
+            target[1].motionZ = origZ;
+          }
         }
       }
     }
@@ -105,13 +113,14 @@ public class EntityBoost extends Entity {
         if (result != null) {
           EntityPlayer player = (EntityPlayer) result[0];
           Entity target = result[1];
+          boolean boat = target instanceof EntityBoat;
           this.posX = player.posX;
-          this.posY = player.posY + 1.0;
+          this.posY = boat ? this.posY : player.posY + 1.0;
           this.posZ = player.posZ;
           double amp = 0.8 + (0.8 * amplifier);
           Vec3d vec = player.getLookVec();
           target.motionX = vec.x * amp;
-          target.motionY = vec.y * amp;
+          target.motionY = boat ? target.motionY : vec.y * amp;
           target.motionZ = vec.z * amp;
           this.motionX = vec.x + vec.x * amplifier;
           this.motionY = vec.y + vec.y * amplifier;
