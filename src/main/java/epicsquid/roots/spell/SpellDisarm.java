@@ -36,8 +36,15 @@ public class SpellDisarm extends SpellBase {
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 2).setDescription("radius on the X axis within which entities are affected by the spell");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 2).setDescription("radius on the Y axis within which entities are affected by the spell");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 2).setDescription("radius on the Z axis within which entities are affected by the spell");
-  public static Property<Integer> PROP_DROP_CHANCE = new Property<>("drop_chance", 4).setDescription("chance for mobs to drop their equipment and weapons (the higher the number is the lower the chance is: 1/x) [default: 1/4]");
+  public static Property<Float> PROP_DROP_CHANCE = new Property<>("drop_chance", 0.35f).setDescription("percentage chance for disarmed mobs to actually drop their weapons (default 0.35 = 35%)");
   public static Property<Integer> PROP_REARM_DURATION = new Property<>("rearm_duration", 25).setDescription("the duration of strength applied to peaceful creatures when cows with guns is enabled");
+  public static Property<Float> PROP_CHANCE_INCREASE = new Property<>("chance_increase", 0.35f).setDescription("percentage chance to be applied when increased drop chance is active (default 0.35 = 35%)");
+  public static Property<Float> PROP_ARMOR = new Property<>("armor_chance", 0.30f).setDescription("percent chance when armor is enabled to drop armor (percent doubled when both applied)");
+  public static Property<Integer> PROP_POISON_DURATION = new Property<>("posion_duration", 120).setDescription("duration of the poison effect when applied");
+  public static Property<Integer> PROP_POISON_AMPLIFIER = new Property<>("poison_amplifier", 0).setDescription("the amplifier to be applied to the poison effect");
+  public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 4).setDescription("duration that disarmed creatures should be set on fire for in seconds");
+  public static Property<Float> PROP_KNOCKBACK = new Property<>("knockback_strength", 0.5f).setDescription("the strength of the knockback effect");
+  public static Property<Integer> PROP_PARALYSIS_DURATION = new Property<>("paralysis_duration", 120).setDescription("how long a creature should be paralysed for");
 
   public static Modifier DROP_CHANCE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "boost_drops"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "cows_with_guns"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -59,11 +66,12 @@ public class SpellDisarm extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_disarm");
   public static SpellDisarm instance = new SpellDisarm(spellName);
 
-  private int radius_x, radius_y, radius_z, drop_chance, rearm_duration;
+  private int radius_x, radius_y, radius_z, rearm_duration, poison_duration, poison_amplifier, fire_duration, paralysis_duration;
+  private float drop_chance, armor_chance, chance_increase, knockback;
 
   private SpellDisarm(ResourceLocation name) {
     super(name, TextFormatting.DARK_RED, 122F / 255F, 0F, 0F, 58F / 255F, 58F / 255F, 58F / 255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_REARM_DURATION);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_REARM_DURATION, PROP_CHANCE_INCREASE, PROP_ARMOR, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_FIRE_DURATION, PROP_KNOCKBACK, PROP_PARALYSIS_DURATION);
     acceptsModifiers(DROP_CHANCE, PEACEFUL, ARMOR1, DUO, ARMOR2, POISON, FLOWERS, FIRE, PARALYSIS, KNOCKBACK);
   }
 
@@ -128,6 +136,13 @@ public class SpellDisarm extends SpellBase {
     this.radius_y = properties.get(PROP_RADIUS_Y);
     this.radius_z = properties.get(PROP_RADIUS_Z);
     this.drop_chance = properties.get(PROP_DROP_CHANCE);
+    this.chance_increase = properties.get(PROP_CHANCE_INCREASE);
+    this.armor_chance = properties.get(PROP_ARMOR);
+    this.knockback = properties.get(PROP_KNOCKBACK);
+    this.poison_amplifier = properties.get(PROP_POISON_AMPLIFIER);
+    this.poison_duration = properties.get(PROP_POISON_DURATION);
+    this.paralysis_duration = properties.get(PROP_PARALYSIS_DURATION);
+    this.fire_duration = properties.get(PROP_FIRE_DURATION);
     this.rearm_duration = properties.get(PROP_REARM_DURATION);
   }
 }
