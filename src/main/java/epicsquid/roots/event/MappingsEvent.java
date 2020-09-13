@@ -4,9 +4,11 @@ import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.mysticalworld.init.ModBlocks;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
+import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.init.ModVillagers;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -17,6 +19,19 @@ import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 public class MappingsEvent {
+  @SubscribeEvent
+  public static void onMissingPotionMappings (RegistryEvent.MissingMappings<Potion> event) {
+    for (RegistryEvent.MissingMappings.Mapping<Potion> mapping : event.getMappings()) {
+      ResourceLocation missing = mapping.key;
+      if (missing.getNamespace().equals(Roots.MODID)) {
+        switch (missing.getPath()) {
+          case "invulnerability":
+            mapping.remap(ModPotions.nondetection);
+        }
+      }
+    }
+  }
+
   @SubscribeEvent
   public static void onMissingProfessionMappings(RegistryEvent.MissingMappings<VillagerRegistry.VillagerProfession> event) {
     for (RegistryEvent.MissingMappings.Mapping<VillagerRegistry.VillagerProfession> mapping : event.getMappings()) {

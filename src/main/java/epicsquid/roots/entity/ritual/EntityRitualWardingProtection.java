@@ -5,6 +5,7 @@ import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.ritual.RitualWardingProtection;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -45,7 +46,7 @@ public class EntityRitualWardingProtection extends EntityRitualBase {
       List<EntityLivingBase> entities = world
           .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
       for (EntityLivingBase e : entities) {
-        e.addPotionEffect(new PotionEffect(ModPotions.invulnerability, ritual.invuln_duration, 0, false, false));
+        e.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, ritual.invuln_duration, 10, false, false));
       }
     }
   }
