@@ -3,12 +3,14 @@ package epicsquid.roots.event;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.handler.QuiverHandler;
+import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.item.ItemQuiver;
 import epicsquid.roots.network.MessageServerTryPickupArrows;
 import epicsquid.roots.util.QuiverInventoryUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -21,6 +23,13 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class SneakHandler {
   private static boolean lastSneak = false;
+
+  @SubscribeEvent
+  public static void onPlayerVisibility (PlayerEvent.Visibility event) {
+    if (event.getEntityPlayer().getActivePotionEffect(ModPotions.nondetection) != null) {
+      event.modifyVisibility(0);
+    }
+  }
 
   @SubscribeEvent
   @SideOnly(Side.CLIENT)
