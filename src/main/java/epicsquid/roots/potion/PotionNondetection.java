@@ -8,14 +8,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class PotionInvulnerability extends Potion {
+public class PotionNondetection extends Potion {
   private ResourceLocation texture = new ResourceLocation(Roots.MODID, "textures/gui/potions.png");
 
-  public PotionInvulnerability() {
+  public PotionNondetection() {
     super(false, 0x5c5d6b);
-    setPotionName("Invulnerability");
+    setPotionName("Non-Detection");
     setBeneficial();
-    setIconIndex(2, 0);
+    setIconIndex(1, 2);
   }
 
   @Override

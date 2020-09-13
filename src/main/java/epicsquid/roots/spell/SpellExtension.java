@@ -1,39 +1,32 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticallib.util.ItemUtil;
-import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
-import epicsquid.roots.network.fx.MessageDisarmFX;
 import epicsquid.roots.properties.Property;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreIngredient;
 
-import java.util.List;
-
 public class SpellExtension extends SpellBase {
-
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(350);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("wildroot", 1.0));
-  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 2).setDescription("radius on the X axis within which entities are affected by the spell");
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 2).setDescription("radius on the Y axis within which entities are affected by the spell");
-  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 2).setDescription("radius on the Z axis within which entities are affected by the spell");
-  public static Property<Integer> PROP_DROP_CHANCE = new Property<>("drop_chance", 4).setDescription("chance for mobs to drop their equipment and weapons (the higher the number is the lower the chance is: 1/x) [default: 1/4]");
+  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 50).setDescription("radius on the X axis within which entities are affected by the spell");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 25).setDescription("radius on the Y axis within which entities are affected by the spell");
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 50).setDescription("radius on the Z axis within which entities are affected by the spell");
+  public static Property<Integer> PROP_ANIMAL_DURATION = new Property<>("animal_glow_duration", 40 * 20).setDescription("the duration of the glow effect when applied to passive entities");
+  public static Property<Integer> PROP_ENEMY_DURATION = new Property<>("enemy_glow_duration", 40 * 20).setDescription("the duration of the glow effect when applied to hostile entities");
+  public static Property<Integer> PROP_NIGHT_VISION = new Property<>("night_vision", 40 * 20).setDescription("how long the danger sense effect is applied to the player");
+  public static Property<Float> PROP_SUMMON_ANIMAL_CHANCE = new Property<>("animal_summon_chance", 0.15f).setDescription("the percentage chance per entity affected that they will be summoned to the player instead");
+  public static Property<Float> PROP_SUMMON_ENEMY_CHANCE = new Property<>("summon_enemy_chance", 0.05f).setDescription("the percentage chance per entity affected that they will be summoned to the player instead");
 
   public static Modifier SUMMON_ANIMALS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "summon_animals"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier SENSE_ANIMALS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "sense_animals"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -53,10 +46,11 @@ public class SpellExtension extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "extension");
   public static SpellExtension instance = new SpellExtension(spellName);
 
-  private int radius_x, radius_y, radius_z, drop_chance;
+  private int radius_x, radius_y, radius_z, animal_duration, enemy_duration, night_vision;
+  private float summon_animal, summon_enemy;
 
   private SpellExtension(ResourceLocation name) {
-    super(name, TextFormatting.DARK_RED, 122F / 255F, 0F, 0F, 58F / 255F, 58F / 255F, 58F / 255F);
+    super(name, TextFormatting.WHITE, 122F / 255F, 0F, 0F, 58F / 255F, 58F / 255F, 58F / 255F);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
     acceptsModifiers(SUMMON_ANIMALS, SENSE_ANIMALS, NONDETECTION, SUMMON_DANGER, SENSE_DANGER, ATTRACTION, SENSE_CONTAINERS, SENSE_FIRE, SENSE_ORES, SENSE_LIQUIDS);
   }
@@ -64,50 +58,25 @@ public class SpellExtension extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new ItemStack(Items.SHIELD),
-        new OreIngredient("gemDiamond"),
-        new OreIngredient("bone"),
-        new ItemStack(Item.getItemFromBlock(Blocks.TRIPWIRE_HOOK)),
-        new ItemStack(ModItems.moonglow_leaf)
+        new OreIngredient("cropCarrot"),
+        new ItemStack(Items.LEAD),
+        new ItemStack(ModItems.glass_eye),
+        new ItemStack(Items.COMPASS),
+        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine)
     );
   }
 
   @Override
   public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
-    BlockPos playerPos = caster.getPosition();
-    World world = caster.world;
-
-    List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(playerPos.getX() - radius_x, playerPos.getY() - radius_y, playerPos.getZ() - radius_z, playerPos.getX() + radius_x, playerPos.getY() + radius_y, playerPos.getZ() + radius_z));
-    entities.remove(caster);
-
-    if (entities.isEmpty()) {
-      return false;
+    caster.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, ampInt(night_vision), 0, false, false));
+    if (info.has(SENSE_ANIMALS)) {
+      caster.addPotionEffect(new PotionEffect(ModPotions.animal_sense, ampInt(animal_duration), 0, false, false));
     }
-
-    for (EntityLivingBase entity : entities) {
-      boolean disarmed = false;
-      for (EntityEquipmentSlot slot : EntityEquipmentSlot.values()) {
-        ItemStack stack = entity.getItemStackFromSlot(slot);
-        if (stack.isEmpty()) {
-          continue;
-        }
-        disarmed = true;
-        if (!world.isRemote) {
-          entity.setItemStackToSlot(slot, ItemStack.EMPTY);
-          if (drop_chance == 1 || drop_chance > 1 && Util.rand.nextInt(ampSubInt(drop_chance)) == 0) {
-            ItemUtil.spawnItem(world, entity.getPosition(), stack);
-          }
-        }
-      }
-
-      if (disarmed) {
-        if (!world.isRemote) {
-          PacketHandler.sendToAllTracking(new MessageDisarmFX(entity.getPosition().getX(), entity.getPosition().getY(), entity.getPosition().getZ()), caster);
-        }
-        return true;
-      }
+    if (info.has(SENSE_DANGER)) {
+      caster.addPotionEffect(new PotionEffect(ModPotions.danger_sense, ampInt(enemy_duration), 0, false, false));
     }
-    return false;
+    
+    return true;
   }
 
   @Override
@@ -117,6 +86,10 @@ public class SpellExtension extends SpellBase {
     this.radius_x = properties.get(PROP_RADIUS_X);
     this.radius_y = properties.get(PROP_RADIUS_Y);
     this.radius_z = properties.get(PROP_RADIUS_Z);
-    this.drop_chance = properties.get(PROP_DROP_CHANCE);
+    this.animal_duration = properties.get(PROP_ANIMAL_DURATION);
+    this.enemy_duration = properties.get(PROP_ENEMY_DURATION);
+    this.night_vision = properties.get(PROP_NIGHT_VISION);
+    this.summon_animal = properties.get(PROP_SUMMON_ANIMAL_CHANCE);
+    this.summon_enemy = properties.get(PROP_SUMMON_ENEMY_CHANCE);
   }
 }
