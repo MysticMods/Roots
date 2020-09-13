@@ -93,8 +93,10 @@ public class SpellDandelionWinds extends SpellBase {
       Entity entity = player.getLowestRidingEntity();
       if (entity instanceof EntityBoat) {
         if (!player.world.isRemote) {
-          entity.motionX *= ampDouble(boat_speed);
-          entity.motionZ *= ampDouble(boat_speed);
+          EntityBoat boat = (EntityBoat) entity;
+          boat.momentum *= ampDouble(boat_speed);
+/*          entity.motionX *= ampDouble(boat_speed);
+          entity.motionZ *= ampDouble(boat_speed);*/
           PacketHandler.sendToAllTracking(new MessageDandelionCastFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ), player);
         }
         return true;
