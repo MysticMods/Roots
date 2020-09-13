@@ -1,12 +1,21 @@
 package epicsquid.roots.potion;
 
+import epicsquid.mysticallib.util.AABBUtil;
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
+import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
+import epicsquid.roots.spell.SpellAquaBubble;
+import epicsquid.roots.spell.SpellExtension;
+import epicsquid.roots.util.EntityUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -37,11 +46,15 @@ public class PotionDangerSense extends Potion {
     if (entity.world.isRemote) return;
 
     if (entity instanceof EntityPlayer) {
-/*      int[] radius = SpellSenseDanger.instance.getRadius();
+      ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(entity.getEntityData(), SpellExtension.instance);
+      int[] radius = SpellExtension.instance.getRadius();
       AxisAlignedBB aabb = AABBUtil.buildFromEntity(entity).grow(radius[0], radius[1], radius[2]);
       for (EntityLivingBase mob : entity.world.getEntitiesWithinAABB(EntityLivingBase.class, aabb, EntityUtil::isHostile)) {
         mob.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 10, 0, false, false));
-      }*/
+        if (mods.has(SpellExtension.SUMMON_DANGER) && Util.rand.nextFloat() < SpellExtension.instance.summon_enemy) {
+          mob.setPositionAndUpdate(entity.posX, entity.posY, entity.posZ);
+        }
+      }
     }
   }
 
