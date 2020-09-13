@@ -1,11 +1,15 @@
 package epicsquid.roots.event;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.handler.QuiverHandler;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.item.ItemQuiver;
+import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.MessageServerTryPickupArrows;
+import epicsquid.roots.spell.SpellExtension;
 import epicsquid.roots.util.QuiverInventoryUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -27,7 +31,12 @@ public class SneakHandler {
   @SubscribeEvent
   public static void onPlayerVisibility (PlayerEvent.Visibility event) {
     if (event.getEntityPlayer().getActivePotionEffect(ModPotions.nondetection) != null) {
-      event.modifyVisibility(0);
+      ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(event.getEntityPlayer().getEntityData(), SpellExtension.instance);
+      if (mods.has(SpellExtension.ATTRACTION)) {
+        event.modifyVisibility(999);
+      } else {
+        event.modifyVisibility(0);
+      }
     }
   }
 

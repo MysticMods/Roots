@@ -30,6 +30,7 @@ public class RootsPacketHandler {
     PacketHandler.registerMessage(MessageHarvestCompleteFX.MessageHolder.class, MessageHarvestCompleteFX.class, Side.CLIENT);
     PacketHandler.registerMessage(MessageFrostTouchFX.MessageHolder.class, MessageFrostTouchFX.class, Side.CLIENT);
     PacketHandler.registerMessage(MessageWinterCloudFX.Handler.class, MessageWinterCloudFX.class, Side.CLIENT);
+    PacketHandler.registerMessage(MessageSenseFX.Handler.class, MessageSenseFX.class, Side.CLIENT);
 
     //Other Effects
     PacketHandler.registerMessage(MessageImbueCompleteFX.MessageHolder.class, MessageImbueCompleteFX.class, Side.CLIENT);
