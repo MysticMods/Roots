@@ -4,11 +4,14 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageDesaturationFX;
+import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.EntityUtil;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -21,6 +24,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.FoodStats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -157,6 +161,18 @@ public class SpellDesaturate extends SpellBase {
             count++;
           }
         } else if (info.has(GROWTH)) {
+          List<BlockPos> positions = Growth.collect(caster.world, caster.getPosition(), radius_x, radius_y, radius_z);
+          int count = 0;
+          while (positions.size() > 0 && count < growth_count) {
+            int targ = Util.rand.nextInt(positions.size());
+            BlockPos pos = positions.remove(targ);
+            for (int i = 0; i < (growth_ticks * overheal); i++) {
+              IBlockState state = caster.world.getBlockState(pos);
+              state.getBlock().randomTick(caster.world, pos, state, Util.rand);
+            }
+            PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), caster);
+            count++;
+          }
           // Do nearby growth
         } else if (info.has(SHIELD)) {
           // TODO: Visual
