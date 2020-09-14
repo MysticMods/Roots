@@ -1,6 +1,7 @@
 package epicsquid.roots.util;
 
 import epicsquid.roots.api.Herb;
+import epicsquid.roots.client.hud.RenderHerbHUD;
 import epicsquid.roots.init.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
@@ -28,6 +29,6 @@ public class ClientHerbUtil {
       return 999;
     }
 
-    return HerbHud.herbAmount(herb);
+    return RenderHerbHUD.INSTANCE.herbAmount(herb);
   }
 }
