@@ -117,7 +117,7 @@ public class SpellDisarm extends SpellBase {
         boolean disarmed = false;
         for (EntityEquipmentSlot handSlot : HANDS) {
           ItemStack stack = entity.getItemStackFromSlot(handSlot);
-          if (stack.isEmpty()) {
+          if (stack.isEmpty() || stack.getItem() == Item.getItemFromBlock(Blocks.RED_FLOWER)) {
             continue;
           }
           disarmed = true;
