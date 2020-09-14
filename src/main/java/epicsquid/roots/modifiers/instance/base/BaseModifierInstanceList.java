@@ -123,7 +123,9 @@ public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> i
     NBTTagCompound result = new NBTTagCompound();
     NBTTagList list = new NBTTagList();
     for (T m : this) {
-      list.appendTag(m.serializeNBT());
+      if (m.getModifier() != null) {
+        list.appendTag(m.serializeNBT());
+      }
     }
     result.setString("s", spell.getRegistryName().toString());
     result.setTag("l", list);
