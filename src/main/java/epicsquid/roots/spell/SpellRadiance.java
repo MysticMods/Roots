@@ -12,7 +12,9 @@ import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
@@ -33,6 +35,13 @@ public class SpellRadiance extends SpellBase {
   public static Property<Float> PROP_DISTANCE = new Property<>("distance", 32f).setDescription("maximum reach of radiance beam");
   public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(5f).setDescription("damage dealt each time by radiance beam");
   public static Property<Float> PROP_UNDEAD_DAMAGE = new Property<>("undead_damage", 3f).setDescription("damage dealt each time by radiance beam on undead mobs");
+  public static Property<Integer> PROP_WITHER_DURATION = new Property<>("wither_duration", 5 * 20).setDescription("the duration of the wither effect to apply to affected entities");
+  public static Property<Integer> PROP_GLOW_DURATION = new Property<>("glow_duration", 10 * 20).setDescription("the duration of the glow effect to apply to affected entities");
+  public static Property<Integer> PROP_POISON_DURATION = new Property<>("poison_duration", 5 * 20).setDescription("the duration of the poison effect to apply to affected entities");
+  public static Property<Integer> PROP_POISON_AMPLIFIER = new Property<>("poison_amplifier", 0).setDescription("the amplifier to use for the poison effect");
+  public static Property<Integer> PROP_SLOW_DURATION = new Property<>("slow_duration", 5 * 20).setDescription("the duration of the slow effect to apply to affected entities");
+  public static Property<Integer> PROP_SLOW_AMPLIFIER = new Property<>("slow_amplifier", 0).setDescription("the amplifier to use for the slow effect");
+  public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 5 * 20).setDescription("the duration of the fire effect to apply to affected entities");
 
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_radiance"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier MAGNETISM = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "magnetic_radiance"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
@@ -51,13 +60,12 @@ public class SpellRadiance extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_radiance");
   public static SpellRadiance instance = new SpellRadiance(spellName);
 
-  private float distance;
-  private float damage;
-  private float undeadDamage;
+  private int wither_duration, glow_duration, poison_duration, poison_amplifier, fire_duration, slowness_duration, slowness_amplifier;
+  private float distance, damage, undeadDamage;
 
   public SpellRadiance(ResourceLocation name) {
     super(name, TextFormatting.WHITE, 255f / 255f, 255f / 255f, 64f / 255f, 255f / 255f, 255f / 255f, 192f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DISTANCE, PROP_DAMAGE, PROP_UNDEAD_DAMAGE);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DISTANCE, PROP_DAMAGE, PROP_UNDEAD_DAMAGE, PROP_WITHER_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_FIRE_DURATION, PROP_GLOW_DURATION);
     acceptsModifiers(PEACEFUL, MAGNETISM, WITHER, GLOWING, HEALING, POISON, FIRE, BIGGER, SLOW);
   }
 
@@ -148,8 +156,7 @@ public class SpellRadiance extends SpellBase {
             double x = positions.get(i).x * (1.0f - j) + positions.get(i + 1).x * j;
             double y = positions.get(i).y * (1.0f - j) + positions.get(i + 1).y * j;
             double z = positions.get(i).z * (1.0f - j) + positions.get(i + 1).z * j;
-            List<EntityLivingBase> entities = player.world
-                .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - bx, y - by, z - bz, x + bx, y + by, z + bz));
+            List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - bx, y - by, z - bz, x + bx, y + by, z + bz));
             for (EntityLivingBase e : entities) {
               if (e != player && !(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
                 if (info.has(PEACEFUL) && EntityUtil.isFriendly(e)) {
@@ -161,7 +168,23 @@ public class SpellRadiance extends SpellBase {
                     e.attackEntityFrom(ModDamage.radiantDamageFrom(player), ampFloat(undeadDamage));
                   }
                   e.setRevengeTarget(player);
-                  e.setLastAttackedEntity(player);
+                  player.setLastAttackedEntity(e);
+                  if (info.has(WITHER)) {
+                    e.addPotionEffect(new PotionEffect(MobEffects.WITHER, wither_duration));
+                  }
+                  if (info.has(GLOWING)) {
+                    e.addPotionEffect(new PotionEffect(MobEffects.GLOWING, glow_duration));
+                  }
+                  if (info.has(POISON)) {
+                    e.addPotionEffect(new PotionEffect(MobEffects.POISON, poison_duration, poison_amplifier));
+                  }
+                  if (info.has(FIRE)) {
+                    e.setFire(fire_duration);
+                  }
+                  if (info.has(SLOW)) {
+                    e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, slowness_duration, slowness_amplifier));
+                  }
+
                   count++;
                 }
               }
@@ -181,5 +204,12 @@ public class SpellRadiance extends SpellBase {
     this.distance = properties.get(PROP_DISTANCE);
     this.damage = properties.get(PROP_DAMAGE);
     this.undeadDamage = properties.get(PROP_UNDEAD_DAMAGE);
+    this.wither_duration = properties.get(PROP_WITHER_DURATION);
+    this.glow_duration = properties.get(PROP_GLOW_DURATION);
+    this.poison_duration = properties.get(PROP_POISON_DURATION);
+    this.poison_amplifier = properties.get(PROP_POISON_AMPLIFIER);
+    this.fire_duration = properties.get(PROP_FIRE_DURATION);
+    this.slowness_duration = properties.get(PROP_SLOW_DURATION);
+    this.slowness_amplifier = properties.get(PROP_SLOW_AMPLIFIER);
   }
 }
