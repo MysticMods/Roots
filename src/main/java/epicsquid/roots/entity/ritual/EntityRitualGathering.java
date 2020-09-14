@@ -15,7 +15,7 @@ import net.minecraftforge.items.IItemHandler;
 import java.util.List;
 
 public class EntityRitualGathering extends EntityRitualBase {
-  public static AxisAlignedBB bounding = new AxisAlignedBB(-1, -1, -1, 1, 1, 1);
+  public static AxisAlignedBB bounding = new AxisAlignedBB(-1, -1, -1, 2, 2, 2);
 
   private RitualGathering ritual;
 
