@@ -1,6 +1,22 @@
 {
   "variants":{
     "normal":  { "model": "roots:grove_padding" },
-    "inventory": {"model":  "roots:fey_light"}
+    "inventory": {"model":  "roots:fey_light" },
+     "color=0":  { "model": "roots:fey_light" },
+     "color=1":  { "model": "roots:fey_light" },
+     "color=2":  { "model": "roots:fey_light" },
+     "color=3":  { "model": "roots:fey_light" },
+     "color=4":  { "model": "roots:fey_light" },
+     "color=5":  { "model": "roots:fey_light" },
+     "color=6":  { "model": "roots:fey_light" },
+     "color=7":  { "model": "roots:fey_light" },
+     "color=8":  { "model": "roots:fey_light" },
+     "color=9":  { "model": "roots:fey_light" },
+     "color=10":  { "model": "roots:fey_light" },
+     "color=11":  { "model": "roots:fey_light" },
+     "color=12":  { "model": "roots:fey_light" },
+     "color=13":  { "model": "roots:fey_light" },
+     "color=14":  { "model": "roots:fey_light" },
+     "color=15":  { "model": "roots:fey_light" }
   }
 }
