@@ -2,19 +2,27 @@ package epicsquid.roots.util;
 
 import epicsquid.roots.modifiers.IModifier;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityWitherSkull;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 
 public class EntityUtil {
   private static Set<ResourceLocation> forcedFriendly = new HashSet<>();
@@ -111,13 +119,23 @@ public class EntityUtil {
   }
 
   @Nullable
-  public static NBTTagCompound getModifierData (Entity entity, IModifier modifier) {
-    NBTTagCompound data = entity.getEntityData();
-
-    if (data.hasKey(modifier.getIdentifier(), Constants.NBT.TAG_COMPOUND)) {
-      return data.getCompoundTag(modifier.getIdentifier());
+  public static <T extends EntityLivingBase> T makeSlave (Function<World, T> builder, EntityLivingBase parent) {
+    if (parent.world.isRemote) {
+      return null;
     }
 
-    return null;
+    T slave = builder.apply(parent.world);
+
+    for (PotionEffect pot : parent.getActivePotionEffects()) {
+      slave.addPotionEffect(pot);
+    }
+
+    for (EntityEquipmentSlot slot : EntityEquipmentSlot.values()) {
+      slave.setItemStackToSlot(slot, parent.getItemStackFromSlot(slot));
+    }
+
+    slave.setHealth(parent.getHealth());
+
+    return slave;
   }
 }
