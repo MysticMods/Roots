@@ -3,6 +3,8 @@ package epicsquid.roots.init;
 import epicsquid.mysticallib.LibRegistry;
 import epicsquid.mysticallib.entity.RenderNull;
 import epicsquid.roots.Roots;
+import epicsquid.roots.entity.mob.EntityHuskSlave;
+import epicsquid.roots.entity.mob.EntityZombieSlave;
 import epicsquid.roots.entity.projectile.EntityFlare;
 import epicsquid.roots.entity.ritual.*;
 import epicsquid.roots.entity.spell.EntityBoost;
@@ -10,6 +12,8 @@ import epicsquid.roots.entity.spell.EntityFireJet;
 import epicsquid.roots.entity.spell.EntityThornTrap;
 import epicsquid.roots.entity.spell.EntityTimeStop;
 import epicsquid.roots.proxy.ClientProxy;
+import net.minecraft.client.renderer.entity.RenderHusk;
+import net.minecraft.client.renderer.entity.RenderZombie;
 import net.minecraft.entity.Entity;
 
 import java.util.Arrays;
@@ -37,6 +41,10 @@ public class ModEntities {
     LibRegistry.registerEntity(EntityBoost.class);
     LibRegistry.registerEntity(EntityFlare.class);
 
+    // Slaves
+    LibRegistry.registerEntity(EntityHuskSlave.class);
+    LibRegistry.registerEntity(EntityZombieSlave.class);
+
     // Ritual entities
     List<Class<? extends Entity>> ritualClasses = Arrays.asList(
         EntityRitualAnimalHarvest.class,
@@ -56,8 +64,9 @@ public class ModEntities {
         EntityRitualWildrootGrowth.class,
         EntityRitualWindwall.class,
         EntityRitualSummonCreatures.class
-        //EntitySpellSpringStorm.class
     );
+
+
 
     ritualClasses.forEach(LibRegistry::registerEntity);
 
@@ -69,6 +78,9 @@ public class ModEntities {
       LibRegistry.registerEntityRenderer(EntityFlare.class, new RenderNull.Factory());
 
       ritualClasses.forEach(c -> LibRegistry.registerEntityRenderer(c, new RenderNull.Factory()));
+
+      LibRegistry.registerEntityRenderer(EntityHuskSlave.class, RenderHusk::new);
+      LibRegistry.registerEntityRenderer(EntityZombieSlave.class, RenderZombie::new);
     }
   }
 

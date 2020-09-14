@@ -10,6 +10,8 @@ import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityHusk;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -105,11 +107,15 @@ public class SpellGeas extends SpellBase {
             } else if (EntityUtil.isHostileTo(e, player)) {
               affected++;
               if (!player.world.isRemote) {
-                e.addPotionEffect(new PotionEffect(ModPotions.geas, ampInt(dur), 0, false, false));
-                if (e instanceof EntityLiving) {
-                  ((EntityLiving) e).setAttackTarget(null);
-                }
-                break;
+/*                if (info.has(GUARDIANS) && e.isEntityUndead() && (e.getClass() == EntityZombie.class || e.getClass() == EntityHusk.class)) {
+
+                } else {*/
+                  e.addPotionEffect(new PotionEffect(ModPotions.geas, ampInt(dur), 0, false, false));
+                  if (e instanceof EntityLiving) {
+                    ((EntityLiving) e).setAttackTarget(null);
+                  }
+                  break;
+                //}
               }
             }
           }
