@@ -56,7 +56,7 @@ public class ModBlocks {
   public static Block wildwood_door, wildwood_trapdoor;
   public static Block wildwood_button, wildwood_pressure_plate, wildwood_fence, wildwood_fence_gate, wildwood_ladder;
 
-  public static Block fey_light, fey_light_colored, decorative_pyre;
+  public static Block fey_light, fey_colored_light, fey_decaying_light, decorative_pyre;
 
   // Lists of blcoks
   public static List<Block> runestoneBlocks;
@@ -184,7 +184,9 @@ public class ModBlocks {
 
     event.addBlock(fey_crafter = new BlockFeyCrafter(Material.WOOD, SoundType.WOOD, 2.5f, "fey_crafter", TileEntityFeyCrafter.class)).setCreativeTab(Roots.tab);
 
-    event.addBlock(fey_light = new BlockNormalFeyLight(Material.SNOW, SoundType.SNOW, 0.0f, "fey_light")).setCreativeTab(Roots.tab);
+    event.addBlock(fey_light = new BlockNormalFeyLight(Material.SNOW, SoundType.SNOW, 0.0f, "fey_light"));
+    event.addBlock(fey_colored_light = new BlockColoredFeyLight(Material.SNOW, SoundType.SNOW, 0.0f, "fey_colored_light"));
+    event.addBlock(fey_decaying_light = new BlockDecayingFeyLight(Material.SNOW, SoundType.SNOW, 0.0f, "fey_decaying_light"));
     event.addBlock(fey_fire = new BlockWildFire("fey_fire")).setCreativeTab(Roots.tab);
     event.addBlock(fake_water = new BlockFakeLiquid(Material.WATER, SoundType.SNOW, 0, "fake_water")).setCreativeTab(Roots.tab);
     event.addBlock(fake_lava = new BlockFakeLiquid(Material.LAVA, SoundType.SNOW, 0, "fake_lava")).setCreativeTab(Roots.tab);

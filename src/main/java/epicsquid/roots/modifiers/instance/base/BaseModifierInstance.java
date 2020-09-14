@@ -1,5 +1,6 @@
 package epicsquid.roots.modifiers.instance.base;
 
+import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.util.types.RegistryItem;
@@ -34,7 +35,7 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
 
   @Override
   public boolean isDisabled() {
-    return modifier.isDisabled();
+    return modifier != null && modifier.isDisabled();
   }
 
   @Override

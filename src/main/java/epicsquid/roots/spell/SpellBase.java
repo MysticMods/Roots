@@ -218,7 +218,7 @@ public abstract class SpellBase extends RegistryItem implements SpellMulitiplier
       if (!GuiScreen.isShiftKeyDown()) {
         StringJoiner joiner = new StringJoiner(", ");
         for (StaffModifierInstance m : list) {
-          if (!m.isApplied() || !m.isEnabled()) {
+          if (m.getModifier() == null || !m.isApplied() || !m.isEnabled()) {
             continue;
           }
 
@@ -250,7 +250,7 @@ public abstract class SpellBase extends RegistryItem implements SpellMulitiplier
         }
       } else {
         for (StaffModifierInstance m : list) {
-          if (!m.isApplied() || !m.isEnabled()) {
+          if (m.getModifier() == null || !m.isApplied() || !m.isEnabled()) {
             continue;
           }
 

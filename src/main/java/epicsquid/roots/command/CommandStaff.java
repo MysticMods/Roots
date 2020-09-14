@@ -73,6 +73,7 @@ public class CommandStaff extends CommandBase {
       StaffSpellInfo info = StaffSpellInfo.fromSpell(spell, true);
       if (storage != null && storage.hasFreeSlot()) {
         storage.setSpellToSlot(storage.getNextFreeSlot(), info);
+        storage.setSelectedSlot(1);
         storage.saveToStack();
         if (!newStaff) {
           return;
