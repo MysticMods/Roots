@@ -7,6 +7,7 @@ import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.properties.Property;
+import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -69,26 +70,43 @@ public class SpellGeas extends SpellBase {
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     boolean foundTarget = false;
-    for (int i = 0; i < 4 && !foundTarget; i++) {
+    int count = 1;
+    if (info.has(DUO)) {
+      count = 2;
+    }
+    if (info.has(TRIO)) {
+      count = 3;
+    }
+    for (int i = 0; i < 20; i++) {
+      if (count == 0) {
+        break;
+      }
       double x = player.posX + player.getLookVec().x * 3.0 * (float) i;
       double y = player.posY + player.getEyeHeight() + player.getLookVec().y * 3.0 * (float) i;
       double z = player.posZ + player.getLookVec().z * 3.0 * (float) i;
-      List<EntityLivingBase> entities = player.world
-          .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 4.0, y - 4.0, z - 4.0, x + 4.0, y + 4.0, z + 4.0));
+      List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 4.0, y - 4.0, z - 4.0, x + 5.0, y + 5.0, z + 5.0));
       for (EntityLivingBase e : entities) {
-        if (e != player && e.getActivePotionEffect(ModPotions.geas) == null) {
-          foundTarget = true;
-          if (!player.world.isRemote) {
-            e.addPotionEffect(new PotionEffect(ModPotions.geas, duration + duration * duration, 0, false, false));
-            if (e instanceof EntityLiving) {
-              ((EntityLiving) e).setAttackTarget(null);
+        if (e == player) {
+          continue;
+        }
+        if (e.getActivePotionEffect(ModPotions.geas) == null) {
+          if (EntityUtil.isFriendlyTo(e, player) && info.has(PEACEFUL)) {
+            count--;
+            e.getEntityData().setIntArray(getCachedName(), info.snapshot());
+          } else if (EntityUtil.isHostileTo(e, player)) {
+            count--;
+            if (!player.world.isRemote) {
+              e.addPotionEffect(new PotionEffect(ModPotions.geas, duration + duration * duration, 0, false, false));
+              if (e instanceof EntityLiving) {
+                ((EntityLiving) e).setAttackTarget(null);
+              }
+              break;
             }
-            break;
           }
         }
       }
     }
-    return foundTarget;
+    return count == 0;
   }
 
   @Override

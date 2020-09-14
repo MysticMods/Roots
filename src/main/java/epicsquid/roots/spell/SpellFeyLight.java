@@ -1,5 +1,6 @@
 package epicsquid.roots.spell;
 
+import com.google.common.collect.Sets;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.block.BlockColoredFeyLight;
@@ -8,6 +9,7 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.properties.Property;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,6 +28,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Set;
 
 public class SpellFeyLight extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(20);
@@ -86,11 +89,16 @@ public class SpellFeyLight extends SpellBase {
     return 75 + Util.rand.nextInt(75);
   }
 
+  private static Set<Block> lightSet = null;
+
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     World world = player.world;
     if (info.has(CONSUME)) {
-      List<BlockPos> positions = Util.getBlocksWithinRadius(world, player.getPosition(), radius_x, radius_y, radius_z, ModBlocks.fey_colored_light, ModBlocks.fey_decaying_light, ModBlocks.fey_light);
+      if (lightSet == null) {
+        lightSet = Sets.newHashSet(ModBlocks.fey_colored_light, ModBlocks.fey_decaying_light, ModBlocks.fey_light);
+      }
+      List<BlockPos> positions = Util.getBlocksWithinRadius(world, player.getPosition(), radius_x, radius_y, radius_z, lightSet);
       if (positions.isEmpty()) {
         return false;
       }
