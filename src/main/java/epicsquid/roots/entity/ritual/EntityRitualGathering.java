@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 public class EntityRitualGathering extends EntityRitualBase {
   protected static Random random = new Random();
   protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityRitualGathering.class, DataSerializers.VARINT);
-  public static AxisAlignedBB bounding = new AxisAlignedBB(-1, -1, -1, 1, 1, 1);
+  public static AxisAlignedBB bounding = new AxisAlignedBB(-1, -1, -1, 2, 2, 2);
 
 
   public EntityRitualGathering(World worldIn) {
