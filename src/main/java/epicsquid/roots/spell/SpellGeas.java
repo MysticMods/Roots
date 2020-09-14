@@ -27,6 +27,8 @@ public class SpellGeas extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("baffle_cap", 0.5));
   public static Property<Integer> PROP_DURATION = new Property<>("geas_duration", 400).setDescription("duration in ticks of this spell effect on entities");
+  public static Property<Integer> PROP_EXTENSION = new Property<>("extension", 600).setDescription("additional duration in ticks to be added to the base duration");
+  public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(3.5f).setDescription("how much damage the spell should do before applying the potion effect");
 
   public static Modifier DURATION = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "extended_geas"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "animal_servants"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -48,11 +50,12 @@ public class SpellGeas extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_geas");
   public static SpellGeas instance = new SpellGeas(spellName);
 
-  private int duration;
+  private float damage;
+  private int duration, extension;
 
   public SpellGeas(ResourceLocation name) {
     super(name, TextFormatting.DARK_RED, 128f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DURATION);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DURATION, PROP_EXTENSION, PROP_DAMAGE);
     acceptsModifiers(DURATION, PEACEFUL, PARALYSIS, GUARDIANS, TRIO, TARGET, DUO, FIRE, PHYSICAL, WATER);
   }
 
@@ -69,44 +72,51 @@ public class SpellGeas extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
-    boolean foundTarget = false;
     int count = 1;
-    if (info.has(DUO)) {
-      count = 2;
+    int affected = 0;
+    int dur = duration;
+    if (info.has(DURATION)) {
+      dur += extension;
     }
-    if (info.has(TRIO)) {
-      count = 3;
-    }
-    for (int i = 0; i < 20; i++) {
-      if (count == 0) {
-        break;
+    if (!info.has(TARGET)) {
+      if (info.has(DUO)) {
+        count = 2;
       }
-      double x = player.posX + player.getLookVec().x * 3.0 * (float) i;
-      double y = player.posY + player.getEyeHeight() + player.getLookVec().y * 3.0 * (float) i;
-      double z = player.posZ + player.getLookVec().z * 3.0 * (float) i;
-      List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 4.0, y - 4.0, z - 4.0, x + 5.0, y + 5.0, z + 5.0));
-      for (EntityLivingBase e : entities) {
-        if (e == player) {
-          continue;
+      if (info.has(TRIO)) {
+        count = 3;
+      }
+      for (int i = 0; i < 20; i++) {
+        if (affected == count) {
+          break;
         }
-        if (e.getActivePotionEffect(ModPotions.geas) == null) {
-          if (EntityUtil.isFriendlyTo(e, player) && info.has(PEACEFUL)) {
-            count--;
-            e.getEntityData().setIntArray(getCachedName(), info.snapshot());
-          } else if (EntityUtil.isHostileTo(e, player)) {
-            count--;
-            if (!player.world.isRemote) {
-              e.addPotionEffect(new PotionEffect(ModPotions.geas, duration + duration * duration, 0, false, false));
-              if (e instanceof EntityLiving) {
-                ((EntityLiving) e).setAttackTarget(null);
+        double x = player.posX + player.getLookVec().x * 3.0 * (float) i;
+        double y = player.posY + player.getEyeHeight() + player.getLookVec().y * 3.0 * (float) i;
+        double z = player.posZ + player.getLookVec().z * 3.0 * (float) i;
+        List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 4.0, y - 4.0, z - 4.0, x + 5.0, y + 5.0, z + 5.0));
+        for (EntityLivingBase e : entities) {
+          if (e == player) {
+            continue;
+          }
+          if (e.getActivePotionEffect(ModPotions.geas) == null) {
+            if (EntityUtil.isFriendlyTo(e, player) && info.has(PEACEFUL)) {
+              affected++;
+              e.getEntityData().setIntArray(getCachedName(), info.snapshot());
+              e.addPotionEffect(new PotionEffect(ModPotions.geas, ampInt(dur), 0, false, false));
+            } else if (EntityUtil.isHostileTo(e, player)) {
+              affected++;
+              if (!player.world.isRemote) {
+                e.addPotionEffect(new PotionEffect(ModPotions.geas, ampInt(dur), 0, false, false));
+                if (e instanceof EntityLiving) {
+                  ((EntityLiving) e).setAttackTarget(null);
+                }
+                break;
               }
-              break;
             }
           }
         }
       }
     }
-    return count == 0;
+    return affected > 0;
   }
 
   @Override
@@ -114,5 +124,7 @@ public class SpellGeas extends SpellBase {
     this.castType = properties.get(PROP_CAST_TYPE);
     this.cooldown = properties.get(PROP_COOLDOWN);
     this.duration = properties.get(PROP_DURATION);
+    this.extension = properties.get(PROP_EXTENSION);
+    this.damage = properties.get(PROP_DAMAGE);
   }
 }
