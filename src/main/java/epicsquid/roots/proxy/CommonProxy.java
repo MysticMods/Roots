@@ -7,6 +7,7 @@ import epicsquid.roots.command.CommandStaff;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModEntities;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.integration.cfb.RootsCFB;
 import epicsquid.roots.integration.chisel.RootsChisel;
 import epicsquid.roots.integration.consecration.Consecration;
 import epicsquid.roots.integration.crafttweaker.commands.Inject;
@@ -53,6 +54,9 @@ public class CommonProxy {
     }
     if (Loader.isModLoaded("crafttweaker")) {
       Inject.inject();
+    }
+    if (Loader.isModLoaded("cookingforblockheads")) {
+      RootsCFB.init();
     }
   }
 
