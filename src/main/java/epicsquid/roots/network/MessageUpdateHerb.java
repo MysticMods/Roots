@@ -3,7 +3,7 @@ package epicsquid.roots.network;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.event.ClientTickHandler;
 import epicsquid.roots.init.HerbRegistry;
-import epicsquid.roots.util.HerbHud;
+import epicsquid.roots.client.hud.RenderHerbHUD;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
@@ -42,7 +42,7 @@ public class MessageUpdateHerb implements IMessage {
     @SideOnly(Side.CLIENT)
     @Override
     public IMessage onMessage(final MessageUpdateHerb message, final MessageContext ctx) {
-      ClientTickHandler.addRunnable(() -> HerbHud.resolveSlots(Minecraft.getMinecraft().player, message.herb, message.amount));
+      ClientTickHandler.addRunnable(() -> RenderHerbHUD.INSTANCE.resolveSlots(Minecraft.getMinecraft().player, message.herb, message.amount));
       return null;
     }
   }

@@ -1,4 +1,4 @@
-package epicsquid.roots.util;
+package epicsquid.roots.client.hud;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
@@ -15,34 +15,41 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
 
 @SideOnly(Side.CLIENT)
 @SuppressWarnings("Duplicates")
 @Mod.EventBusSubscriber(modid = Roots.MODID, value = Side.CLIENT)
-public class HerbHud {
-  private static HerbAlert slot1 = null;
-  private static HerbAlert slot2 = null;
-  private static Map<Herb, HerbAlert> alerts = new HashMap<>();
+public class RenderHerbHUD {
+  public static RenderHerbHUD INSTANCE = new RenderHerbHUD();
 
-  public static double herbAmount(Herb herb) {
+  private Deque<HerbAlert> slots = new ArrayDeque<>();
+  private Map<Herb, HerbAlert> alerts = new HashMap<>();
+
+  public double herbAmount(Herb herb) {
     HerbAlert alert = getAlert(herb);
     return alert.getAmount();
   }
 
-  public static void updateHerb(Herb herb, double amount) {
+  public void updateHerb(Herb herb, double amount) {
     HerbAlert alert = getAlert(herb);
     alert.setAmount(amount);
+    if (alert.invalid()) {
+      slots.addFirst(alert);
+    }
+    alert.show();
   }
 
-  private static HerbAlert getAlert(Herb herb) {
-    if (!alerts.containsKey(herb)) {
-      HerbAlert alert = new HerbAlert(herb);
+  private HerbAlert getAlert(Herb herb) {
+    HerbAlert alert = alerts.get(herb);
+    if (alert == null) {
+      alert = new HerbAlert(herb);
       alerts.put(herb, alert);
     }
-
-    return alerts.get(herb);
+    return alert;
   }
 
   @SubscribeEvent
@@ -51,90 +58,50 @@ public class HerbHud {
     if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
       ScaledResolution res = event.getResolution();
       float partial = event.getPartialTicks();
-      if (slot1 != null) {
-        if (slot1.active()) {
-          slot1.render(res, partial);
-        } else {
-          slot1.setSlot(-1);
-          slot1 = null;
-        }
+      int i = 0;
+      for (HerbAlert alert : INSTANCE.slots) {
+        alert.render(res, partial, i);
+        i++;
       }
-      if (slot2 != null) {
-        if (slot2.active()) {
-          slot2.render(res, partial);
-        } else {
-          slot2.setSlot(-1);
-          slot2 = null;
-        }
-      }
+      INSTANCE.slots.removeIf(HerbAlert::invalid);
     }
   }
 
   @SubscribeEvent
   @SideOnly(Side.CLIENT)
   public static void clientTick(TickEvent.ClientTickEvent event) {
-    if (slot1 != null) {
-      slot1.tick(event);
-    }
-    if (slot2 != null) {
-      slot2.tick(event);
-    }
+    INSTANCE.slots.forEach(HerbAlert::tick);
   }
 
-  public static void resolveSlots(EntityPlayer player, Herb herb, double amount) {
-    if (!player.world.isRemote) return;
+  public void resolveSlots(EntityPlayer player, Herb herb, double amount) {
+    if (!player.world.isRemote) {
+      return;
+    }
 
     Minecraft mc = Minecraft.getMinecraft();
-    if (player.getUniqueID() != mc.player.getUniqueID()) return;
+    if (player.getUniqueID() != mc.player.getUniqueID()) {
+      return;
+    }
 
     updateHerb(herb, amount);
-
-    if (slot1 != null && !slot1.active()) {
-      slot1.setSlot(-1);
-      slot1 = null;
-    }
-
-    if (slot2 != null && !slot2.active()) {
-      slot2.setSlot(-1);
-      slot2 = null;
-    }
-
-    if (slot1 == null && slot2 != null) {
-      slot1 = slot2;
-      slot2 = null;
-      slot1.setSlot(1);
-    }
-
-    if (slot1 == getAlert(herb)) {
-      slot1.refresh();
-    } else if (slot2 == getAlert(herb)) {
-      slot2.refresh();
-    } else {
-      if (slot1 == null) {
-        slot1 = getAlert(herb);
-        slot1.setSlot(1);
-        slot1.enable();
-      } else if (slot2 == null) {
-        slot2 = getAlert(herb);
-        slot2.setSlot(2);
-        slot2.enable();
-      }
-    }
   }
 
-  public static class HerbAlert {
+  public class HerbAlert {
     private static final int TIME_VISIBLE = 8 * 20;
     private static final int MAX_TIME = TIME_VISIBLE;
     private static final int ANIM_TIME = 5;
 
     private int ticks = 0;
-    private int slot = 0;
     private Herb herb;
     private ItemStack stack = null;
     private double amount;
 
     public HerbAlert(Herb herb) {
       this.herb = herb;
+    }
+
+    public void show () {
+      this.ticks = TIME_VISIBLE;
     }
 
     public double getAmount() {
@@ -145,18 +112,6 @@ public class HerbHud {
       this.amount = amount;
     }
 
-    public void refresh() {
-      this.ticks = TIME_VISIBLE - ANIM_TIME;
-    }
-
-    public void setSlot(int slot) {
-      this.slot = slot;
-    }
-
-    public void enable() {
-      this.ticks = TIME_VISIBLE;
-    }
-
     public ItemStack getStack() {
       if (stack == null) {
         stack = new ItemStack(herb.getItem());
@@ -165,42 +120,51 @@ public class HerbHud {
       return stack;
     }
 
-    public boolean active() {
-      return slot != -1 && ticks > 0;
+    public boolean invalid () {
+      return ticks <= 0;
     }
 
-    @SideOnly(Side.CLIENT)
-    public void tick(TickEvent.ClientTickEvent event) {
-      if (ticks == -1) return;
-
-      ticks--;
+    public void tick() {
+      if (ticks > 0) {
+        ticks--;
+      }
     }
 
-    @SideOnly(Side.CLIENT)
-    public void render(ScaledResolution res, float partialTicks) {
-      if (ticks == 0) return;
+    public void render(ScaledResolution res, float partialTicks, int slot) {
+      Roots.logger.info(slot);
+      if (ticks == 0) {
+        return;
+      }
 
       Minecraft mc = Minecraft.getMinecraft();
 
       float progress;
 
-      if (ticks < ANIM_TIME) {
-        progress = Math.max(0, ticks - partialTicks) / ANIM_TIME;
+      int row = slot / 3;
+      int col = slot % 3;
+
+      int anim_time = ANIM_TIME * (row+1);
+
+      if (ticks < anim_time) {
+        progress = Math.max(0, ticks - partialTicks) / anim_time;
       } else {
-        progress = Math.min(ANIM_TIME, (MAX_TIME - ticks) + partialTicks) / ANIM_TIME;
+        progress = Math.min(anim_time, (MAX_TIME - ticks) + partialTicks) / anim_time;
       }
 
       float anim = -progress * (progress - 2) * 20f;
 
       float x = res.getScaledWidth() / 2.0f;
-      float y = res.getScaledHeight() - anim; //res.getScaledHeight() - progress;
+      float y = res.getScaledHeight() - anim;
+
+      if (row != 0) {
+        y -= row * 20;
+      }
 
       int barWidth = 190 + 58;
       if (!mc.player.getHeldItemOffhand().isEmpty()) {
         barWidth += 58;
       }
-      x += ((barWidth / 2.0) * -1 + slot * 40) - 95;
-
+      x += ((barWidth / 2.0) * -1 + (col * 35)) - 75;
 
       ItemStack stack = getStack();
 
@@ -208,15 +172,13 @@ public class HerbHud {
       GlStateManager.translate(x, y, 0);
       RenderHelper.enableGUIStandardItemLighting();
       mc.getRenderItem().renderItemAndEffectIntoGUI(stack, 0, 0);
-      String s = String.format("%.1f", amount); //ServerHerbUtil.getHerbAmount(mc.player, herb));
+      String s = String.format("%.1f", amount);
       GlStateManager.disableLighting();
       GlStateManager.disableDepth();
       GlStateManager.disableBlend();
       mc.fontRenderer.drawStringWithShadow(s, 18.0f, 3.5f, 16777215);
       GlStateManager.enableLighting();
       GlStateManager.enableDepth();
-      // Fixes opaque cooldownLeft overlay a bit lower
-      // TODO: check if enabled blending still screws things up down the line.
       GlStateManager.enableBlend();
       RenderHelper.disableStandardItemLighting();
       GlStateManager.popMatrix();
