@@ -17,6 +17,7 @@ import epicsquid.roots.network.fx.MessageGeasRingFX;
 import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
 import epicsquid.roots.spell.SpellAquaBubble;
 import epicsquid.roots.util.Constants;
+import epicsquid.roots.util.SlaveUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -136,7 +137,7 @@ public class EventManager {
     }
     if (trueSource instanceof EntityLivingBase) {
       EntityLivingBase trueLiving = (EntityLivingBase) trueSource;
-      if (trueLiving.getActivePotionEffect(ModPotions.geas) != null) {
+      if (trueLiving.getActivePotionEffect(ModPotions.geas) != null && !SlaveUtil.isSlave(trueLiving)) {
         trueLiving.attackEntityFrom(ModDamage.PSYCHIC_DAMAGE, 3);
         event.setAmount(0);
         PacketHandler.sendToAllTracking(new MessageGeasRingFX(trueLiving.posX, trueLiving.posY + 1.0, trueLiving.posZ), trueLiving);
@@ -147,7 +148,7 @@ public class EventManager {
   @SubscribeEvent
   public static void onEntityTarget(LivingSetAttackTargetEvent event) {
     EntityLivingBase entity = event.getEntityLiving();
-    if (entity.getActivePotionEffect(ModPotions.geas) != null && entity instanceof EntityLiving) {
+    if (entity.getActivePotionEffect(ModPotions.geas) != null && entity instanceof EntityLiving && !SlaveUtil.isSlave(entity)) {
       if (((EntityLiving) entity).getAttackTarget() != null) {
         ((EntityLiving) entity).setAttackTarget(null);
       }

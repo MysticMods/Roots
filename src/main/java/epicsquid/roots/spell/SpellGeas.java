@@ -8,10 +8,9 @@ import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.EntityUtil;
+import epicsquid.roots.util.SlaveUtil;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityHusk;
-import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -107,15 +106,20 @@ public class SpellGeas extends SpellBase {
             } else if (EntityUtil.isHostileTo(e, player)) {
               affected++;
               if (!player.world.isRemote) {
-/*                if (info.has(GUARDIANS) && e.isEntityUndead() && (e.getClass() == EntityZombie.class || e.getClass() == EntityHusk.class)) {
-
-                } else {*/
+                if (info.has(GUARDIANS) && SlaveUtil.canBecomeSlave(e)) {
+                  EntityLivingBase slave = SlaveUtil.enslave(e);
+                  e.world.spawnEntity(slave);
+                  e.setDropItemsWhenDead(false);
+                  e.setDead();
+                  slave.setPositionAndUpdate(slave.posX, slave.posY, slave.posZ);
+                  slave.addPotionEffect(new PotionEffect(ModPotions.geas, ampInt(dur), 0, false, false));
+                } else {
                   e.addPotionEffect(new PotionEffect(ModPotions.geas, ampInt(dur), 0, false, false));
                   if (e instanceof EntityLiving) {
                     ((EntityLiving) e).setAttackTarget(null);
                   }
                   break;
-                //}
+                }
               }
             }
           }

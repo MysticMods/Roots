@@ -34,16 +34,14 @@ public class ModEntities {
    * LibRegistry.registerEntityRenderer(Entity.class, new RenderEntity.Factory());
    */
   public static void registerMobs() {
+    LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
+
     // Helper entities
     LibRegistry.registerEntity(EntityFireJet.class);
     LibRegistry.registerEntity(EntityThornTrap.class);
     LibRegistry.registerEntity(EntityTimeStop.class);
     LibRegistry.registerEntity(EntityBoost.class);
     LibRegistry.registerEntity(EntityFlare.class);
-
-    // Slaves
-    LibRegistry.registerEntity(EntityHuskSlave.class);
-    LibRegistry.registerEntity(EntityZombieSlave.class);
 
     // Ritual entities
     List<Class<? extends Entity>> ritualClasses = Arrays.asList(
@@ -66,9 +64,11 @@ public class ModEntities {
         EntityRitualSummonCreatures.class
     );
 
-
-
     ritualClasses.forEach(LibRegistry::registerEntity);
+
+    // Slaves
+    LibRegistry.registerEntity(EntityHuskSlave.class);
+    LibRegistry.registerEntity(EntityZombieSlave.class);
 
     if (Roots.proxy instanceof ClientProxy) {
       LibRegistry.registerEntityRenderer(EntityFireJet.class, new RenderNull.Factory());

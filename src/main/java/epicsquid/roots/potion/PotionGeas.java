@@ -4,8 +4,8 @@ import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.spell.SpellGeas;
 import epicsquid.roots.util.EntityUtil;
+import epicsquid.roots.util.SlaveUtil;
 import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -14,13 +14,9 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.monster.AbstractSkeleton;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-
-import java.util.function.Predicate;
 
 public class PotionGeas extends Potion {
   public PotionGeas() {
@@ -79,7 +75,13 @@ public class PotionGeas extends Potion {
   @Override
   public void removeAttributesModifiersFromEntity(EntityLivingBase target, AbstractAttributeMap attributeMapIn, int amplifier) {
     super.removeAttributesModifiersFromEntity(target, attributeMapIn, amplifier);
-    if (target instanceof EntityCreature && EntityUtil.isFriendly(target)) {
+    if (SlaveUtil.isSlave(target)) {
+      EntityLivingBase slave = SlaveUtil.revert(target);
+      target.world.spawnEntity(slave);
+      target.setDropItemsWhenDead(false);
+      target.setDead();
+      slave.setPositionAndUpdate(slave.posX, slave.posY, slave.posZ);
+    } else if (target instanceof EntityCreature && EntityUtil.isFriendly(target)) {
       EntityCreature entity = (EntityCreature) target;
       ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(target.getEntityData(), SpellGeas.instance);
       if (mods.has(SpellGeas.PEACEFUL)) {
