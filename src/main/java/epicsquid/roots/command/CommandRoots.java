@@ -2,6 +2,7 @@ package epicsquid.roots.command;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.mysticallib.util.RayCastUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.block.groves.BlockGroveStone;
@@ -15,6 +16,7 @@ import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.info.LibrarySpellInfo;
+import epicsquid.roots.util.SlaveUtil;
 import epicsquid.roots.world.data.SpellLibraryData;
 import epicsquid.roots.world.data.SpellLibraryRegistry;
 import net.minecraft.advancements.Advancement;
@@ -26,6 +28,8 @@ import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -76,7 +80,17 @@ public class CommandRoots extends CommandBase {
     if (sender instanceof EntityPlayerMP && args.length != 0) {
       EntityPlayerMP player = (EntityPlayerMP) sender;
       WorldServer world = player.getServerWorld();
-      if (args[0].equalsIgnoreCase("modifiers")) {
+      if (args[0].equalsIgnoreCase("slave")) {
+        Entity target = RayCastUtil.mouseOverEntity(player);
+        if (SlaveUtil.canBecomeSlave(target) || SlaveUtil.isSlave(target)) {
+          EntityLivingBase parent = (EntityLivingBase) target;
+          EntityLivingBase slave = SlaveUtil.canBecomeSlave(target) ? SlaveUtil.enslave(parent) : SlaveUtil.revert(parent);
+          world.spawnEntity(slave);
+          parent.setDropItemsWhenDead(false);
+          parent.setDead();
+          slave.setPositionAndUpdate(slave.posX, slave.posY, slave.posZ);
+        }
+      } else if (args[0].equalsIgnoreCase("modifiers")) {
         List<String> modifierList = new ArrayList<>();
         for (SpellBase spell : SpellRegistry.spellRegistry.values()) {
           for (IModifier modifier : spell.getModifiers()) {
