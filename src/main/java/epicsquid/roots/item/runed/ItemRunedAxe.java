@@ -5,11 +5,12 @@ import epicsquid.roots.item.ILivingRepair;
 import epicsquid.roots.recipe.ingredient.RootsIngredients;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.world.World;
 
 public class ItemRunedAxe extends ItemAxeBase implements ILivingRepair {
   public ItemRunedAxe(ToolMaterial material, String name) {
-    super(material, name, 3, 1992);
+    super(material, name, 3, 1992, () -> Ingredient.EMPTY);
     this.attackDamage = 9.5f;
   }
 

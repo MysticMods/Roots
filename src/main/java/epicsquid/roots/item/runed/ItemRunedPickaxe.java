@@ -5,11 +5,12 @@ import epicsquid.roots.item.ILivingRepair;
 import epicsquid.roots.recipe.ingredient.RootsIngredients;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.world.World;
 
 public class ItemRunedPickaxe extends ItemHammerBase implements ILivingRepair {
   public ItemRunedPickaxe(ToolMaterial material, String name) {
-    super(name, 1992, material); // TODO: VALUES
+    super(name, 1992, material, () -> Ingredient.EMPTY); // TODO: VALUES
   }
 
   @Override

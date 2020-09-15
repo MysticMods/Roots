@@ -15,6 +15,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -28,7 +29,7 @@ import java.util.List;
 
 public class ItemTerrastoneHoe extends ItemHoeBase implements ILivingRepair {
   public ItemTerrastoneHoe(ToolMaterial material, String name) {
-    super(material, name, 3, 565);
+    super(material, name, 3, 565, () -> Ingredient.EMPTY);
   }
 
   @Override

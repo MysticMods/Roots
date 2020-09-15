@@ -3,11 +3,12 @@ package epicsquid.roots.item;
 import epicsquid.mysticallib.item.ItemShearsBase;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemWoodenShears extends ItemShearsBase {
   public ItemWoodenShears(String name) {
-    super(name);
+    super(name, () -> Ingredient.EMPTY);
     setMaxDamage(119);
   }
 

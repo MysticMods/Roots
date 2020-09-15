@@ -5,11 +5,12 @@ import epicsquid.roots.item.ILivingRepair;
 import epicsquid.roots.recipe.ingredient.RootsIngredients;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.world.World;
 
 public class ItemTerrastoneSword extends ItemSwordBase implements ILivingRepair {
   public ItemTerrastoneSword(ToolMaterial material, String name) {
-    super(material, name, 565);
+    super(material, name, 565, () -> Ingredient.EMPTY);
   }
 
   @Override

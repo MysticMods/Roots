@@ -10,6 +10,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
@@ -22,7 +23,7 @@ import java.util.List;
 public class ItemRunedHoe extends ItemPloughBase implements ILivingRepair {
 
   public ItemRunedHoe(ToolMaterial material, String name) {
-    super(material, name, 3, 1992);
+    super(material, name, 3, 1992, () -> Ingredient.EMPTY);
     this.speed = 1.5f;
   }
 

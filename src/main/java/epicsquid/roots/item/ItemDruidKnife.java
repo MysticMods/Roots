@@ -15,6 +15,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -32,7 +33,7 @@ import java.util.List;
 public class ItemDruidKnife extends ItemKnifeBase {
 
   public ItemDruidKnife(String name, ToolMaterial material) {
-    super(name, material);
+    super(name, material, () -> Ingredient.EMPTY);
     ModItems.knives.add(this);
 
     BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, DispenseKnife.getInstance());
