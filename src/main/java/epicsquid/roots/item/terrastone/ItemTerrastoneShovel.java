@@ -9,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -20,7 +21,7 @@ import net.minecraftforge.common.MinecraftForge;
 @SuppressWarnings("deprecation")
 public class ItemTerrastoneShovel extends ItemShovelBase implements ILivingRepair {
   public ItemTerrastoneShovel(ToolMaterial material, String name) {
-    super(material, name, 3, 565);
+    super(material, name, 3, 565, () -> Ingredient.EMPTY);
     if (ToolConfig.ShovelSilkTouch) {
       // TODO: Handle registration if it's enabled or disabled
       MinecraftForge.EVENT_BUS.register(this);

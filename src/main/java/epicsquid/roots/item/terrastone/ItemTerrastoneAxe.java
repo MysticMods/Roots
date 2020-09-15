@@ -7,11 +7,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.world.World;
 
 public class ItemTerrastoneAxe extends ItemAxeBase implements ILivingRepair {
   public ItemTerrastoneAxe(ToolMaterial material, String name) {
-    super(material, name, 3, 565);
+    super(material, name, 3, 565, () -> Ingredient.EMPTY);
   }
 
   @Override
