@@ -31,6 +31,7 @@ public class SpellPetalShell extends SpellBase {
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 5).setDescription("radius on the X axis of the area the spell has effect on");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("radius on the Y axis of the area the spell has effect on");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 5).setDescription("radius on the Z axis of the area the spell has effect on");
+  public static Property<Integer> PROP_EXTRA = new Property<>("extra_shells", 2).setDescription("the number of additional extra shells that should be granted");
 
   public static Modifier RADIANT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "react_radiance"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_dance"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -54,13 +55,11 @@ public class SpellPetalShell extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_petal_shell");
   public static SpellPetalShell instance = new SpellPetalShell(spellName);
 
-  private int maxShells;
-  private int duration;
-  private int radius_x, radius_y, radius_z;
+  private int maxShells, extraShells, duration, radius_x, radius_y, radius_z;
 
   public SpellPetalShell(ResourceLocation name) {
     super(name, TextFormatting.LIGHT_PURPLE, 255f / 255f, 192f / 255f, 240f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_MAXIMUM, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_MAXIMUM, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_EXTRA);
     acceptsModifiers(RADIANT, PEACEFUL, SLASHING, CHARGES, COLOUR, POISON, LEVITATE, FIRE, PARALYSIS, SLOW);
   }
 
@@ -80,18 +79,33 @@ public class SpellPetalShell extends SpellBase {
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     if (!player.world.isRemote) {
+      int shells = maxShells;
+      if (info.has(CHARGES)) {
+        shells += extraShells;
+      }
+      shells = ampInt(shells);
       if (info.has(PEACEFUL)) {
         World world = player.world;
         List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, bb.offset(player.getPosition()));
         entities.removeIf(o -> !EntityUtil.isFamiliar(player, o));
         if (!entities.isEmpty()) {
           EntityLivingBase entity = entities.get(Util.rand.nextInt(entities.size()));
-          entity.addPotionEffect(new PotionEffect(ModPotions.petal_shell, ampInt(duration), ampInt(maxShells), false, false));
+          PotionEffect effect = entity.getActivePotionEffect(ModPotions.petal_shell);
+          if (effect != null) {
+            entity.addPotionEffect(new PotionEffect(ModPotions.petal_shell, ampInt(duration), shells, false, false));
+          } else {
+            entity.addPotionEffect(new PotionEffect(ModPotions.petal_shell, ampInt(duration), ampInt(maxShells), false, false));
+          }
           PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(entity.posX, entity.posY + 1.0f, entity.posZ), entity);
         }
-        player.addPotionEffect(new PotionEffect(ModPotions.petal_shell, ampInt(duration), ampInt(maxShells), false, false));
-        PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ), player);
       }
+      PotionEffect effect = player.getActivePotionEffect(ModPotions.petal_shell);
+      if (effect != null) {
+        player.addPotionEffect(new PotionEffect(ModPotions.petal_shell, ampInt(duration), shells, false, false));
+      } else {
+        player.addPotionEffect(new PotionEffect(ModPotions.petal_shell, ampInt(duration), ampInt(maxShells), false, false));
+      }
+      PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ), player);
     }
     return true;
   }
@@ -106,5 +120,6 @@ public class SpellPetalShell extends SpellBase {
     this.radius_y = properties.get(PROP_RADIUS_Y);
     this.radius_z = properties.get(PROP_RADIUS_Z);
     this.bb = new AxisAlignedBB(-radius_x, -radius_y, -radius_z, 1 + radius_x, 1 + radius_y, 1 + radius_z);
+    this.extraShells = properties.get(PROP_EXTRA);
   }
 }
