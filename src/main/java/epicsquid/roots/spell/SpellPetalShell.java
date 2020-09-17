@@ -43,6 +43,14 @@ public class SpellPetalShell extends SpellBase {
   public static Modifier PARALYSIS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "react_paralysis"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier SLOW = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "react_slow"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
+  static {
+    RADIANT.addConflicts(SLASHING, POISON, LEVITATE, PARALYSIS, SLOW);
+    SLASHING.addConflicts(POISON, LEVITATE, PARALYSIS, SLOW);
+    POISON.addConflicts(LEVITATE, PARALYSIS, SLOW);
+    LEVITATE.addConflicts(PARALYSIS, SLOW);
+    PARALYSIS.addConflict(SLOW);
+  }
+
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_petal_shell");
   public static SpellPetalShell instance = new SpellPetalShell(spellName);
 
