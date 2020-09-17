@@ -32,7 +32,7 @@ public class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfoProvid
     } else if (block instanceof BlockPyre) {
       TileEntityPyre te = (TileEntityPyre) world.getTileEntity(data.getPos());
       if (te != null && te.getBurnTime() > 0) {
-        int duration = 0;
+        int duration;
         if (te.getLastRecipeUsed() != null) {
           ItemStack result = te.getLastRecipeUsed().getResult();
           duration = te.getLastRecipeUsed().getBurnTime();

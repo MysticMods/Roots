@@ -92,7 +92,7 @@ public class FeyCraftingTweaker {
     private String name;
     private ItemStack output;
     private List<IIngredient> inputs;
-    private int xp = 0;
+    private int xp;
 
     private Add(String name, ItemStack output, List<IIngredient> inputs, int xp) {
       super("Fey Crafting Add");

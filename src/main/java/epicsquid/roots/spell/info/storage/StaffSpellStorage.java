@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-// TODO: Not actually a capability
+// TODO:
 public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
   public static int MAX_SPELL_SLOT = 5;
   public static int MIN_SPELL_SLOT = 1;
