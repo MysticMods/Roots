@@ -250,5 +250,6 @@ public class SpellDandelionWinds extends SpellBase {
     this.fire_duration = properties.get(PROP_FIRE_DURATION);
     this.r1 = properties.get(PROP_RANGE_1);
     this.r2 = properties.get(PROP_RANGE_2);
+    this.boat_speed = properties.get(PROP_BOAT_SPEED);
   }
 }
