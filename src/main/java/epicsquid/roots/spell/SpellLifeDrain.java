@@ -1,6 +1,7 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
@@ -24,6 +25,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SpellLifeDrain extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(0);
@@ -35,6 +37,8 @@ public class SpellLifeDrain extends SpellBase {
   public static Property<Integer> PROP_WITHER_DURATION = new Property<>("wither_duration", 70).setDescription("duration in ticks of the wither effect");
   public static Property<Integer> PROP_WITHER_AMPLIFICATION = new Property<>("wither_amplification", 0).setDescription("the level of the wither effect (0 is the first level)");
   public static Property<Integer> PROP_WITHER_CHANCE = new Property<>("wither_chance", 4).setDescription("chance for the enemies to be affected by a wither effect (the higher the number is the lower the chance is: 1/x) [default: 1/4]");
+  public static Property<Float> PROP_ADDITIONAL_HEAL = new Property<>("additional_heal", 1.5f).setDescription("how much additional healing should be done");
+  public static Property<Float> PROP_SPECTRAL_CHANCE = new Property<>("spectral_chance", 0.35f).setDescription("chance per cast of a spectral entity existing");
 
   public static Modifier RATIO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "amplified_healing"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_drain"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -53,15 +57,12 @@ public class SpellLifeDrain extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_life_drain");
   public static SpellLifeDrain instance = new SpellLifeDrain(spellName);
 
-  private float witherDamage;
-  private float heal;
-  private int witherDuration;
-  private int witherAmplification;
-  private int witherChance;
+  private float witherDamage, heal, additionalHeal, spectralChance;
+  private int witherDuration, witherChance, witherAmplification;
 
   public SpellLifeDrain(ResourceLocation name) {
     super(name, TextFormatting.DARK_GRAY, 144f / 255f, 32f / 255f, 64f / 255f, 255f / 255f, 196f / 255f, 240f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_WITHER_DAMAGE, PROP_HEAL, PROP_WITHER_DURATION, PROP_WITHER_AMPLIFICATION, PROP_WITHER_CHANCE);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_WITHER_DAMAGE, PROP_HEAL, PROP_WITHER_DURATION, PROP_WITHER_AMPLIFICATION, PROP_WITHER_CHANCE, PROP_ADDITIONAL_HEAL, PROP_SPECTRAL_CHANCE);
     acceptsModifiers(RATIO, PEACEFUL, DISTRIBUTE, SPIRITS, TARGET, DAMAGE, FIRE, WEAKNESS, SECOND_WIND);
   }
 
@@ -81,12 +82,22 @@ public class SpellLifeDrain extends SpellBase {
     if (!player.world.isRemote) {
       boolean foundTarget = false;
       PacketHandler.sendToAllTracking(new MessageLifeDrainAbsorbFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ), player);
+      float heal = this.heal;
+      if (info.has(RATIO)) {
+        heal += additionalHeal;
+      }
+      float dam = witherDamage;
+      if (info.has(DAMAGE)) {
+        heal = heal / 2;
+        dam = dam * 2;
+      }
+      final float h = heal;
       for (int i = 0; i < 4 && !foundTarget; i++) {
         double x = player.posX + player.getLookVec().x * 3.0 * (float) i;
         double y = player.posY + player.getEyeHeight() + player.getLookVec().y * 3.0 * (float) i;
         double z = player.posZ + player.getLookVec().z * 3.0 * (float) i;
-        List<EntityLivingBase> entities = player.world
-            .getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 2.0, y - 2.0, z - 2.0, x + 2.0, y + 2.0, z + 2.0));
+        List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 2.0, y - 2.0, z - 2.0, x + 2.0, y + 2.0, z + 2.0));
+        List<EntityLivingBase> peacefuls = entities.stream().filter(EntityUtil::isFriendly).collect(Collectors.toList());
         for (EntityLivingBase e : entities) {
           if (e != player && !(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
             if (info.has(PEACEFUL) && EntityUtil.isFriendly(e)) {
@@ -94,14 +105,25 @@ public class SpellLifeDrain extends SpellBase {
             }
             foundTarget = true;
             if (e.hurtTime <= 0 && !e.isDead) {
-              e.attackEntityFrom(DamageSource.causeMobDamage(player), ampFloat(witherDamage));
+              e.attackEntityFrom(DamageSource.causeMobDamage(player), ampFloat(dam));
               if (e.rand.nextInt(ampSubInt(witherChance)) == 0) {
-                e.addPotionEffect(new PotionEffect(MobEffects.WITHER, ampInt(witherDuration)));
+                e.addPotionEffect(new PotionEffect(MobEffects.WITHER, ampInt(witherDuration), witherAmplification));
               }
               e.setRevengeTarget(player);
               e.setLastAttackedEntity(player);
-              player.heal(ampFloat(heal));
+              if (info.has(DISTRIBUTE)) {
+                peacefuls.forEach(o -> o.heal(ampFloat(h)));
+              } else {
+                player.heal(ampFloat(h));
+              }
             }
+          }
+        }
+        if (Util.rand.nextFloat() < spectralChance) {
+          if (info.has(DISTRIBUTE)) {
+            peacefuls.forEach(o -> o.heal(ampFloat(h)));
+          } else {
+            player.heal(ampFloat(h));
           }
         }
       }
@@ -118,5 +140,7 @@ public class SpellLifeDrain extends SpellBase {
     this.witherDuration = properties.get(PROP_WITHER_DURATION);
     this.witherAmplification = properties.get(PROP_WITHER_AMPLIFICATION);
     this.witherChance = properties.get(PROP_WITHER_CHANCE);
+    this.additionalHeal = properties.get(PROP_ADDITIONAL_HEAL);
+    this.spectralChance = properties.get(PROP_SPECTRAL_CHANCE);
   }
 }
