@@ -1,6 +1,8 @@
 package epicsquid.roots.network.fx;
 
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.client.particle.ParticlePosition;
+import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellExtension;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -89,12 +91,10 @@ public class MessageSenseFX implements IMessage {
     @SideOnly(Side.CLIENT)
     public IMessage onMessage(MessageSenseFX message, MessageContext ctx) {
       Minecraft minecraft = Minecraft.getMinecraft();
-      EntityPlayer player = minecraft.player;
       World world = minecraft.world;
-      ParticleManager manager = minecraft.effectRenderer;
       for (SensePosition sense : message.senses) {
         for (int i = 0; i < 2; ++i) {
-          manager.addEffect(new ParticlePosition(player.world, sense.pos.getX() + 0.75 - world.rand.nextDouble() / 2d, sense.pos.getY() + 0.75 - world.rand.nextDouble() / 2d, sense.pos.getZ() + 0.75 - world.rand.nextDouble() / 2d, sense.type));
+          ParticleUtil.spawnParticlePetal(world, sense.pos.getX() + 0.75f - world.rand.nextFloat() / 2f, sense.pos.getY() + 0.75f - world.rand.nextFloat() / 2f, sense.pos.getZ() + 0.75f - world.rand.nextFloat() / 2f, 0, 0, 0, sense.type.getColor(), 10f, 20 * 30, true);
         }
       }
       return null;

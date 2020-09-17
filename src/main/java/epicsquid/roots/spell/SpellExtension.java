@@ -11,8 +11,6 @@ import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageSenseFX;
 import epicsquid.roots.network.fx.MessageSenseFX.SensePosition;
 import epicsquid.roots.properties.Property;
-import it.unimi.dsi.fastutil.ints.Int2CharOpenHashMap;
-import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntArraySet;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -35,7 +33,10 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SpellExtension extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(350);
@@ -117,7 +118,20 @@ public class SpellExtension extends SpellBase {
   private IntArraySet ores = new IntArraySet();
 
   public enum SenseType {
-    CONTAINER, SPAWNER, LIQUID, ORE;
+    CONTAINER(new float[]{224 / 255.0f, 211 / 255.0f, 29 / 255.0f, 0.5f}),
+    SPAWNER(new float[]{46 / 255.0f, 133 / 255.0f, 209 / 255.0f, 0.5f}),
+    LIQUID(new float[]{207 / 255.0f, 66 / 255.0f, 19 / 255.0f, 0.5f}),
+    ORE(new float[]{138 / 255.0f, 114 / 255.0f, 90 / 255.0f, 0.5f});
+
+    private float[] color;
+
+    SenseType(float[] color) {
+      this.color = color;
+    }
+
+    public float[] getColor() {
+      return color;
+    }
 
     @Nullable
     public static SenseType fromOrdinal(int ordinal) {
@@ -197,7 +211,7 @@ public class SpellExtension extends SpellBase {
     boolean l = info.has(SENSE_LIQUIDS);
     boolean o = info.has(SENSE_ORES);
     IntArraySet held = getHeldIds(caster.getHeldItemOffhand());
-    boolean specific = held != null && !held.isEmpty();
+    boolean specific = o && held != null && !held.isEmpty();
     if (c || s || l || o) {
       if (!caster.world.isRemote) {
         List<SensePosition> positions = new ArrayList<>();
@@ -223,7 +237,7 @@ public class SpellExtension extends SpellBase {
           IBlockState state = caster.world.getBlockState(pos);
           Block block = state.getBlock();
           if (c && containers.contains(vec)) {
-            if (block instanceof BlockContainer) {
+            if (block instanceof BlockContainer && block.getClass() != BlockMobSpawner.class) {
               positions.add(new SensePosition(SenseType.CONTAINER, pos.toImmutable(), caster.world.provider.getDimension()));
             }
           }
@@ -315,7 +329,7 @@ public class SpellExtension extends SpellBase {
   }
 
   @Nullable
-  public AxisAlignedBB getBiggestBoundingBox (boolean ore, boolean ore_specific, boolean liquid, boolean container, boolean spawner) {
+  public AxisAlignedBB getBiggestBoundingBox(boolean ore, boolean ore_specific, boolean liquid, boolean container, boolean spawner) {
     List<BoxSize> boxes = new ArrayList<>();
     if (ore) {
       boxes.add(new BoxSize(SearchType.ORE, radius_ore_x * radius_ore_y * radius_ore_z));
