@@ -1,6 +1,22 @@
 {
   "variants":{
     "normal":  { "model": "roots:grove_padding" },
-    "inventory": {"model":  "roots:fey_light"}
+    "inventory": {"model":  "roots:fey_light"},
+    "decay=0":  { "model": "roots:grove_padding" },
+    "decay=1":  { "model": "roots:grove_padding" },
+    "decay=2":  { "model": "roots:grove_padding" },
+    "decay=3":  { "model": "roots:grove_padding" },
+    "decay=4":  { "model": "roots:grove_padding" },
+    "decay=5":  { "model": "roots:grove_padding" },
+    "decay=6":  { "model": "roots:grove_padding" },
+    "decay=7":  { "model": "roots:grove_padding" },
+    "decay=8":  { "model": "roots:grove_padding" },
+    "decay=9":  { "model": "roots:grove_padding" },
+    "decay=10":  { "model": "roots:grove_padding" },
+    "decay=11":  { "model": "roots:grove_padding" },
+    "decay=12":  { "model": "roots:grove_padding" },
+    "decay=13":  { "model": "roots:grove_padding" },
+    "decay=14":  { "model": "roots:grove_padding" },
+    "decay=15":  { "model": "roots:grove_padding" }
   }
 }
