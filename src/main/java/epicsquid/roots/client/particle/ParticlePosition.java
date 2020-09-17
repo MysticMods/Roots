@@ -37,7 +37,7 @@ public class ParticlePosition extends ParticleCloud {
       case LIQUID:
         GlStateManager.color(46 / 255.0f, 133 / 255.0f, 209 / 255.0f, 0.5f);
         break;
-      case FIRE:
+      case SPAWNER:
         GlStateManager.color(207 / 255.0f, 66 / 255.0f, 19 / 255.0f, 0.5f);
         break;
       case ORE:
