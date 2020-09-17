@@ -18,6 +18,7 @@ public class SpellSkySoarer extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(39);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("cloud_berry", 0.15));
+  public static Property<Integer> PROP_SLOW_FALL_DURATION = new Property<>("slow_fall_duration", 20 * 4).setDescription("the duration of the slow fall effect that should be applied after the boost effect ends");
 
   public static Modifier SLOW_FALL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "slow_fall"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier NO_COLLIDE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "arboreal_bypass"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -33,9 +34,11 @@ public class SpellSkySoarer extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_sky_soarer");
   public static SpellSkySoarer instance = new SpellSkySoarer(spellName);
 
+  public int slow_duration;
+
   public SpellSkySoarer(ResourceLocation name) {
     super(name, TextFormatting.BLUE, 32f / 255f, 200f / 255f, 255f / 255f, 32f / 255f, 64f / 255f, 255f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_SLOW_FALL_DURATION);
     acceptsModifiers(SLOW_FALL, NO_COLLIDE, FASTER, VERTICAL, KNOCKBACK, REGENERATION, CHEM_TRAILS, ROCKET_MAN, NO_FALL_DAMAGE, UNDERWATER);
   }
 
@@ -57,6 +60,7 @@ public class SpellSkySoarer extends SpellBase {
       boost.setPlayer(player.getUniqueID());
       boost.setPosition(player.posX, player.posY, player.posZ);
       player.world.spawnEntity(boost);
+      player.getEntityData().setIntArray(getCachedName(), info.snapshot());
     }
     return true;
   }
@@ -65,5 +69,6 @@ public class SpellSkySoarer extends SpellBase {
   public void doFinalise() {
     this.castType = properties.get(PROP_CAST_TYPE);
     this.cooldown = properties.get(PROP_COOLDOWN);
+    this.slow_duration = properties.get(PROP_SLOW_FALL_DURATION);
   }
 }

@@ -1,6 +1,10 @@
 package epicsquid.roots.entity.spell;
 
+import epicsquid.roots.init.ModPotions;
+import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.spell.SpellAquaBubble;
 import epicsquid.roots.spell.SpellSkySoarer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
@@ -9,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -89,6 +94,11 @@ public class EntityBoost extends Entity {
             target[1].motionX = origX;
             target[1].motionY = origY;
             target[1].motionZ = origZ;
+          }
+          EntityPlayer player = (EntityPlayer) target[0];
+          ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(player.getEntityData(), SpellSkySoarer.instance);
+          if (mods.has(SpellSkySoarer.SLOW_FALL)) {
+            player.addPotionEffect(new PotionEffect(ModPotions.slow_fall, SpellSkySoarer.instance.slow_duration));
           }
         }
       }
