@@ -111,6 +111,9 @@ public class SpellConfig {
     @Config.Name("Disable Augment Spell")
     @Config.Comment("Set to true to disable the Augment Spell")
     public boolean disableAugment = false;
+    @Config.Name("Disable Extension Spell")
+    @Config.Comment("Set to true to disable the Extension Spell")
+    public boolean disableExtension = false;
   }
 
   public static class SpellFeaturesCategory {

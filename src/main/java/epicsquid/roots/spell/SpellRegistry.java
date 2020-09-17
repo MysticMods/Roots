@@ -86,6 +86,8 @@ public class SpellRegistry {
     SpellAquaBubble.instance.setDisabled(SpellConfig.disableSpellsCategory.disableAquaBubble);
     spellRegistry.put(SpellAugment.spellName, SpellAugment.instance);
     SpellAugment.instance.setDisabled(SpellConfig.disableSpellsCategory.disableAugment);
+    spellRegistry.put(SpellExtension.spellName, SpellExtension.instance);
+    SpellExtension.instance.setDisabled(SpellConfig.disableSpellsCategory.disableExtension);
   }
 
   public static void init() {
