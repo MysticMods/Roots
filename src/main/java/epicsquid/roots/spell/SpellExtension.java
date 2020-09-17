@@ -41,10 +41,14 @@ public class SpellExtension extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(350);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("wildroot", 1.0));
-  // TODO: Split this for animals and hostiles
-  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 50).setDescription("radius on the X axis within which entities are affected by the spell");
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 25).setDescription("radius on the Y axis within which entities are affected by the spell");
-  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 50).setDescription("radius on the Z axis within which entities are affected by the spell");
+  public static Property<Integer> PROP_RADIUS_ANIMALS_X = new Property<>("radius_animals_x", 50).setDescription("radius on the X axis within which entities are affected by the spell");
+  public static Property<Integer> PROP_RADIUS_ANIMALS_Y = new Property<>("radius_animals_y", 25).setDescription("radius on the Y axis within which entities are affected by the spell");
+  public static Property<Integer> PROP_RADIUS_ANIMALS_Z = new Property<>("radius_animals_z", 50).setDescription("radius on the Z axis within which entities are affected by the spell");
+
+  public static Property<Integer> PROP_RADIUS_HOSTILES_X = new Property<>("radius_hostiles_x", 50).setDescription("radius on the X axis within which entities are affected by the spell");
+  public static Property<Integer> PROP_RADIUS_HOSTILES_Y = new Property<>("radius_hostiles_y", 25).setDescription("radius on the Y axis within which entities are affected by the spell");
+  public static Property<Integer> PROP_RADIUS_HOSTILES_Z = new Property<>("radius_hostiles_z", 50).setDescription("radius on the Z axis within which entities are affected by the spell");
+
   public static Property<Integer> PROP_ANIMAL_DURATION = new Property<>("animal_glow_duration", 40 * 20).setDescription("the duration of the glow effect when applied to passive entities");
   public static Property<Integer> PROP_ENEMY_DURATION = new Property<>("enemy_glow_duration", 40 * 20).setDescription("the duration of the glow effect when applied to hostile entities");
   public static Property<Integer> PROP_NIGHT_VISION = new Property<>("night_vision", 40 * 20).setDescription("how long the danger sense effect is applied to the player");
@@ -90,12 +94,12 @@ public class SpellExtension extends SpellBase {
   public static SpellExtension instance = new SpellExtension(spellName);
 
   private AxisAlignedBB ore, ore_specific, liquid, container, spawner;
-  private int radius_x, radius_y, radius_z, animal_duration, enemy_duration, night_vision, radius_ore_x, radius_ore_y, radius_ore_z, radius_ore_specific_x, radius_ore_specific_y, radius_ore_specific_z, radius_liquid_x, radius_liquid_y, radius_liquid_z, radius_container_x, radius_container_y, radius_container_z, radius_spawner_x, radius_spawner_y, radius_spawner_z;
+  private int radius_animals_x, radius_animals_y, radius_animals_z, animal_duration, enemy_duration, night_vision, radius_ore_x, radius_ore_y, radius_ore_z, radius_ore_specific_x, radius_ore_specific_y, radius_ore_specific_z, radius_liquid_x, radius_liquid_y, radius_liquid_z, radius_container_x, radius_container_y, radius_container_z, radius_spawner_x, radius_spawner_y, radius_spawner_z, radius_hostiles_x, radius_hostiles_y, radius_hostiles_z;
   public float summon_animal, summon_enemy;
 
   private SpellExtension(ResourceLocation name) {
     super(name, TextFormatting.WHITE, 122F / 255F, 0F, 0F, 58F / 255F, 58F / 255F, 58F / 255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_ANIMAL_DURATION, PROP_ENEMY_DURATION, PROP_NIGHT_VISION, PROP_SUMMON_ANIMAL_CHANCE, PROP_SUMMON_ENEMY_CHANCE, PROP_RADIUS_ORE_X, PROP_RADIUS_ORE_Y, PROP_RADIUS_ORE_Z, PROP_RADIUS_ORE_SPECIFIC_X, PROP_RADIUS_ORE_SPECIFIC_Y, PROP_RADIUS_ORE_SPECIFIC_Z, PROP_RADIUS_LIQUID_X, PROP_RADIUS_LIQUID_Y, PROP_RADIUS_LIQUID_Z, PROP_RADIUS_CONTAINER_X, PROP_RADIUS_CONTAINER_Y, PROP_RADIUS_CONTAINER_Z, PROP_RADIUS_SPAWNER_X, PROP_RADIUS_SPAWNER_Y, PROP_RADIUS_SPAWNER_Z);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_ANIMAL_DURATION, PROP_ENEMY_DURATION, PROP_NIGHT_VISION, PROP_SUMMON_ANIMAL_CHANCE, PROP_SUMMON_ENEMY_CHANCE, PROP_RADIUS_ORE_X, PROP_RADIUS_ORE_Y, PROP_RADIUS_ORE_Z, PROP_RADIUS_ORE_SPECIFIC_X, PROP_RADIUS_ORE_SPECIFIC_Y, PROP_RADIUS_ORE_SPECIFIC_Z, PROP_RADIUS_LIQUID_X, PROP_RADIUS_LIQUID_Y, PROP_RADIUS_LIQUID_Z, PROP_RADIUS_CONTAINER_X, PROP_RADIUS_CONTAINER_Y, PROP_RADIUS_CONTAINER_Z, PROP_RADIUS_SPAWNER_X, PROP_RADIUS_SPAWNER_Y, PROP_RADIUS_SPAWNER_Z, PROP_RADIUS_ANIMALS_X, PROP_RADIUS_ANIMALS_Y, PROP_RADIUS_ANIMALS_Z, PROP_RADIUS_HOSTILES_X, PROP_RADIUS_HOSTILES_Y, PROP_RADIUS_HOSTILES_Z);
     acceptsModifiers(SUMMON_ANIMALS, SENSE_ANIMALS, NONDETECTION, SUMMON_DANGER, SENSE_DANGER, ATTRACTION, SENSE_CONTAINERS, SENSE_SPAWNERS, SENSE_ORES, SENSE_LIQUIDS);
   }
 
@@ -256,8 +260,12 @@ public class SpellExtension extends SpellBase {
     return true;
   }
 
-  public int[] getRadius() {
-    return new int[]{radius_x, radius_y, radius_z};
+  public int[] getRadiusHostiles() {
+    return new int[]{radius_hostiles_x, radius_hostiles_y, radius_hostiles_z};
+  }
+
+  public int[] getRadiusAnimals() {
+    return new int[]{radius_animals_x, radius_animals_y, radius_animals_z};
   }
 
   private Map<SearchType, AxisAlignedBB> typeToBox = new HashMap<>();
@@ -266,9 +274,12 @@ public class SpellExtension extends SpellBase {
   public void doFinalise() {
     this.castType = properties.get(PROP_CAST_TYPE);
     this.cooldown = properties.get(PROP_COOLDOWN);
-    this.radius_x = properties.get(PROP_RADIUS_X);
-    this.radius_y = properties.get(PROP_RADIUS_Y);
-    this.radius_z = properties.get(PROP_RADIUS_Z);
+    this.radius_hostiles_x = properties.get(PROP_RADIUS_HOSTILES_X);
+    this.radius_hostiles_y = properties.get(PROP_RADIUS_HOSTILES_Y);
+    this.radius_hostiles_z = properties.get(PROP_RADIUS_HOSTILES_Z);
+    this.radius_animals_x = properties.get(PROP_RADIUS_ANIMALS_X);
+    this.radius_animals_y = properties.get(PROP_RADIUS_ANIMALS_Y);
+    this.radius_animals_z = properties.get(PROP_RADIUS_ANIMALS_Z);
     this.animal_duration = properties.get(PROP_ANIMAL_DURATION);
     this.enemy_duration = properties.get(PROP_ENEMY_DURATION);
     this.night_vision = properties.get(PROP_NIGHT_VISION);
