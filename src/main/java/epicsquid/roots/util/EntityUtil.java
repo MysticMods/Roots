@@ -1,28 +1,16 @@
 package epicsquid.roots.util;
 
-import epicsquid.roots.entity.mob.EntityHuskSlave;
-import epicsquid.roots.entity.mob.EntityZombieSlave;
+import epicsquid.roots.config.GeneralConfig;
 import net.minecraft.entity.*;
-import net.minecraft.entity.monster.EntityHusk;
-import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityWitherSkull;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
 
 public class EntityUtil {
   private static Set<ResourceLocation> forcedFriendly = new HashSet<>();
@@ -116,5 +104,52 @@ public class EntityUtil {
     }
 
     return true;
+  }
+
+  public static boolean canSummonPassive(EntityLivingBase entity) {
+    if (!isFriendly(entity)) {
+      return false;
+    }
+
+    if (entity.hasCustomName()) {
+      return false;
+    }
+
+    if (entity instanceof EntityLiving) {
+      EntityLiving living = (EntityLiving) entity;
+      if (living.getLeashed()) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  public static boolean canSummonHostile(EntityLivingBase entity) {
+    if (!isHostile(entity)) {
+      return false;
+    }
+
+    if (entity.hasCustomName()) {
+      return false;
+    }
+
+    if (isBoss(entity)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  public static boolean isBoss(EntityLivingBase entity) {
+    if (!entity.isNonBoss()) {
+      return true;
+    }
+
+    if (entity.getMaxHealth() > GeneralConfig.BossEntityHealth) {
+      return true;
+    }
+
+    return false;
   }
 }
