@@ -53,8 +53,8 @@ public class SpellExtension extends SpellBase {
   public static Property<Integer> PROP_ANIMAL_DURATION = new Property<>("animal_glow_duration", 40 * 20).setDescription("the duration of the glow effect when applied to passive entities");
   public static Property<Integer> PROP_ENEMY_DURATION = new Property<>("enemy_glow_duration", 40 * 20).setDescription("the duration of the glow effect when applied to hostile entities");
   public static Property<Integer> PROP_NIGHT_VISION = new Property<>("night_vision", 40 * 20).setDescription("how long the danger sense effect is applied to the player");
-  public static Property<Float> PROP_SUMMON_ANIMAL_CHANCE = new Property<>("animal_summon_chance", 0.15f).setDescription("the percentage chance per entity affected that they will be summoned to the player instead");
-  public static Property<Float> PROP_SUMMON_ENEMY_CHANCE = new Property<>("summon_enemy_chance", 0.05f).setDescription("the percentage chance per entity affected that they will be summoned to the player instead");
+  public static Property<Integer> PROP_SUMMON_ANIMAL_CHANCE = new Property<>("animal_summon_chance", 5000000).setDescription("the percentage chance per entity affected that they will be summoned to the player instead (1 in X)");
+  public static Property<Integer> PROP_SUMMON_ENEMY_CHANCE = new Property<>("summon_enemy_chance", 5000000).setDescription("the percentage chance per entity affected that they will be summoned to the player instead (1 in X)");
 
   public static Property<Integer> PROP_RADIUS_ORE_X = new Property<>("radius_ore_x", 15).setDescription("radius on the X axis within which ores are searched for");
   public static Property<Integer> PROP_RADIUS_ORE_Y = new Property<>("radius_ore_y", 15).setDescription("radius on the Y axis within which ores are searched for");
@@ -96,7 +96,7 @@ public class SpellExtension extends SpellBase {
 
   private AxisAlignedBB ore, ore_specific, liquid, container, spawner;
   private int radius_animals_x, radius_animals_y, radius_animals_z, animal_duration, enemy_duration, night_vision, radius_ore_x, radius_ore_y, radius_ore_z, radius_ore_specific_x, radius_ore_specific_y, radius_ore_specific_z, radius_liquid_x, radius_liquid_y, radius_liquid_z, radius_container_x, radius_container_y, radius_container_z, radius_spawner_x, radius_spawner_y, radius_spawner_z, radius_hostiles_x, radius_hostiles_y, radius_hostiles_z;
-  public float summon_animal, summon_enemy;
+  public int summon_animal, summon_enemy;
 
   private SpellExtension(ResourceLocation name) {
     super(name, TextFormatting.WHITE, 122F / 255F, 0F, 0F, 58F / 255F, 58F / 255F, 58F / 255F);

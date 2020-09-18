@@ -66,6 +66,9 @@ public class GeneralConfig {
   @Config.Comment(("The aoe-radius for using runic shears to aoe-shear things"))
   public static int RunicShearsRadius = 15;
 
+  @Config.Comment(("The health threshold at which entities are considered boss-type creatures (in half hearts)"))
+  public static float BossEntityHealth = 40;
+
   @Config.Comment(("List of mod:item:meta (meta optional) of saplings that should be planted in 2x2 by the Spreading Forest ritual"))
   public static String[] TwoByTwoSaplings = new String[]{"thaumcraft:sapling_greatwood"};
 
@@ -81,8 +84,11 @@ public class GeneralConfig {
   }
 
   @Config.Comment(("List of mod:item:meta (meta optional) of saplings that should be blacklisted from the Spreading Forest ritual"))
-  public static String[] SaplingBlacklist = new String[]{"roots:wildwood_sapling", "corvus:frankinsence_sapling",
-      "thebetweenlands:sapling_spirit_tree"};
+  public static String[] SaplingBlacklist = new String[]{
+      "roots:wildwood_sapling",
+      "corvus:frankinsence_sapling",
+      "thebetweenlands:sapling_spirit_tree"
+  };
 
   @Config.Ignore
   private static Set<ItemStack> saplingBlacklist = null;
