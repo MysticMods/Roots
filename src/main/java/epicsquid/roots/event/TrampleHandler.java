@@ -26,24 +26,4 @@ public class TrampleHandler {
       event.setCanceled(true);
     }
   }
-
-  @SubscribeEvent(priority = EventPriority.HIGHEST)
-  public static void onBucketUse(FillBucketEvent event) {
-    RayTraceResult result = event.getTarget();
-    if (result != null) {
-      BlockPos pos = result.getBlockPos();
-      World world = event.getWorld();
-      IBlockState state = world.getBlockState(pos);
-      if (state.getBlock() == ModBlocks.trample_rune) {
-        event.setCanceled(true);
-      }
-    }
-  }
-
-  @SubscribeEvent(priority = EventPriority.HIGHEST)
-  public static void onFluidPlaceBlock(BlockEvent.FluidPlaceBlockEvent event) {
-    if (event.getOriginalState().getBlock() == ModBlocks.trample_rune) {
-      event.setNewState(event.getOriginalState());
-    }
-  }
 }
