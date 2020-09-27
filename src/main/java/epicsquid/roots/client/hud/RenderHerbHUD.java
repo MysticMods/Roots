@@ -131,7 +131,6 @@ public class RenderHerbHUD {
     }
 
     public void render(ScaledResolution res, float partialTicks, int slot) {
-      Roots.logger.info(slot);
       if (ticks == 0) {
         return;
       }
