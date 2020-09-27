@@ -11,6 +11,7 @@ import epicsquid.roots.properties.Property;
 import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
@@ -42,6 +43,8 @@ public class SpellRadiance extends SpellBase {
   public static Property<Integer> PROP_SLOW_DURATION = new Property<>("slow_duration", 5 * 20).setDescription("the duration of the slow effect to apply to affected entities");
   public static Property<Integer> PROP_SLOW_AMPLIFIER = new Property<>("slow_amplifier", 0).setDescription("the amplifier to use for the slow effect");
   public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 5 * 20).setDescription("the duration of the fire effect to apply to affected entities");
+  public static Property<Float> PROP_WIDTH = new Property<>("width", 0.1f).setDescription("default width of the radiance beam");
+  public static Property<Float> PROP_ADDED_WIDTH = new Property<>("added_width", 0.3f).setDescription("width added to the default radiance beam");
 
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_radiance"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier MAGNETISM = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "magnetic_radiance"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
@@ -61,11 +64,11 @@ public class SpellRadiance extends SpellBase {
   public static SpellRadiance instance = new SpellRadiance(spellName);
 
   private int wither_duration, glow_duration, poison_duration, poison_amplifier, fire_duration, slowness_duration, slowness_amplifier;
-  private float distance, damage, undeadDamage;
+  private float distance, damage, undeadDamage, width, added_width;
 
   public SpellRadiance(ResourceLocation name) {
     super(name, TextFormatting.WHITE, 255f / 255f, 255f / 255f, 64f / 255f, 255f / 255f, 255f / 255f, 192f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DISTANCE, PROP_DAMAGE, PROP_UNDEAD_DAMAGE, PROP_WITHER_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_FIRE_DURATION, PROP_GLOW_DURATION);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DISTANCE, PROP_DAMAGE, PROP_UNDEAD_DAMAGE, PROP_WITHER_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_FIRE_DURATION, PROP_GLOW_DURATION, PROP_WIDTH, PROP_ADDED_WIDTH);
     acceptsModifiers(PEACEFUL, MAGNETISM, WITHER, GLOWING, HEALING, POISON, FIRE, BIGGER, SLOW);
   }
 
@@ -83,7 +86,11 @@ public class SpellRadiance extends SpellBase {
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     if (!player.world.isRemote && player.ticksExisted % 2 == 0) {
-      float distance = 32;
+      float w = width;
+      if (info.has(BIGGER)) {
+        w += added_width;
+      }
+      float distance = this.distance;
       RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0), player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)), false, true, true);
       Vec3d direction = player.getLookVec();
       ArrayList<Vec3d> positions = new ArrayList<Vec3d>();
@@ -149,9 +156,9 @@ public class SpellRadiance extends SpellBase {
       int count = 0;
       if (positions.size() > 1) {
         for (int i = 0; i < positions.size() - 1; i++) {
-          double bx = Math.abs(positions.get(i + 1).x - positions.get(i).x) * 0.1f;
-          double by = Math.abs(positions.get(i + 1).y - positions.get(i).y) * 0.1f;
-          double bz = Math.abs(positions.get(i + 1).z - positions.get(i).z) * 0.1f;
+          double bx = Math.abs(positions.get(i + 1).x - positions.get(i).x) * w;
+          double by = Math.abs(positions.get(i + 1).y - positions.get(i).y) * w;
+          double bz = Math.abs(positions.get(i + 1).z - positions.get(i).z) * w;
           for (float j = 0; j < 1; j += 0.1f) {
             double x = positions.get(i).x * (1.0f - j) + positions.get(i + 1).x * j;
             double y = positions.get(i).y * (1.0f - j) + positions.get(i + 1).y * j;
@@ -163,6 +170,11 @@ public class SpellRadiance extends SpellBase {
                   continue;
                 }
                 if (e.hurtTime <= 0 && !e.isDead) {
+                  // TODO: NOT THE RIGHT WAY TO DO THIS
+                  if (info.has(MAGNETISM)) {
+                    e.getEntityData().setUniqueId("magnetic", player.getUniqueID());
+                    e.getEntityData().setInteger("magnetic_ticks", e.ticksExisted);
+                  }
                   e.attackEntityFrom(ModDamage.radiantDamageFrom(player), ampFloat(damage));
                   if (e.isEntityUndead()) {
                     e.attackEntityFrom(ModDamage.radiantDamageFrom(player), ampFloat(undeadDamage));
@@ -211,5 +223,7 @@ public class SpellRadiance extends SpellBase {
     this.fire_duration = properties.get(PROP_FIRE_DURATION);
     this.slowness_duration = properties.get(PROP_SLOW_DURATION);
     this.slowness_amplifier = properties.get(PROP_SLOW_AMPLIFIER);
+    this.width = properties.get(PROP_WIDTH);
+    this.added_width = properties.get(PROP_ADDED_WIDTH);
   }
 }
