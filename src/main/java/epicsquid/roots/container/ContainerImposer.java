@@ -175,9 +175,9 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
               StaffModifierInstanceList modifiers = staffInfo.getModifiers();
               StaffModifierInstance modifier = modifiers.getByCore(info.getCore());
               if (modifier != null) {
-                if (modifier.isEnabled() || (!modifier.isConflicting(modifiers) && !GuiScreen.isAltKeyDown() && !GuiScreen.isAltKeyDown())) {
+                if (modifier.isEnabled() || (!modifier.isConflicting(modifiers) && !GuiScreen.isAltKeyDown() && !GuiScreen.isCtrlKeyDown())) {
                   modifier.setEnabled(!modifier.isEnabled());
-                } else if (!modifier.isEnabled() && modifier.isConflicting(modifiers) && (GuiScreen.isAltKeyDown() || GuiScreen.isAltKeyDown())) {
+                } else if (!modifier.isEnabled() && modifier.isConflicting(modifiers) && (GuiScreen.isAltKeyDown() || GuiScreen.isCtrlKeyDown())) {
                   for (StaffModifierInstance conflictingMod : modifier.getConflicts(modifiers)) {
                     conflictingMod.setEnabled(false);
                   }

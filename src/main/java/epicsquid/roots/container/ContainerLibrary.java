@@ -315,7 +315,17 @@ public class ContainerLibrary extends Container implements IInvalidatingContaine
             return ItemStack.EMPTY;
           }
 
-          modifier.setEnabled(!modifier.isEnabled());
+          StaffModifierInstanceList modifiers = staffInfo.getModifiers();
+
+          if (modifier.isEnabled() || (!modifier.isConflicting(modifiers) && !GuiScreen.isAltKeyDown() && !GuiScreen.isCtrlKeyDown())) {
+            modifier.setEnabled(!modifier.isEnabled());
+          } else if (!modifier.isEnabled() && modifier.isConflicting(modifiers) && (GuiScreen.isAltKeyDown() || GuiScreen.isCtrlKeyDown())) {
+            for (StaffModifierInstance conflictingMod : modifier.getConflicts(modifiers)) {
+              conflictingMod.setEnabled(false);
+            }
+            modifier.setEnabled(true);
+          }
+
           storage.saveToStack();
           PlayerSyncUtil.syncPlayer(player);
         }
