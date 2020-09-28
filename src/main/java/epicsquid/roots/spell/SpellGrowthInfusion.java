@@ -12,9 +12,11 @@ import epicsquid.roots.network.fx.MessageLifeInfusionFX;
 import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.properties.Property;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
@@ -30,6 +32,9 @@ public class SpellGrowthInfusion extends SpellBase {
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 7).setDescription("radius on the X axis of the area in which the spell takes effect");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 7).setDescription("radius on the Y axis of the area in which the spell takes effect");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 7).setDescription("radius on the Z axis of the area in which the spell takes effect");
+  public static Property<Integer> PROP_RADIUS_BREED_X = new Property<>("radius_breed_x", 6).setDescription("radius on the X axis of the area in which the spell takes effect for the purposes of causing animals to go into breeding mode");
+  public static Property<Integer> PROP_RADIUS_BREED_Y = new Property<>("radius_breed_y", 6).setDescription("radius on the Y axis of the area in which the spell takes effect for the purposes of causing animals to go into breeding mode");
+  public static Property<Integer> PROP_RADIUS_BREED_Z = new Property<>("radius_breed_z", 6).setDescription("radius on the Z axis of the area in which the spell takes effect for the purposes of causing animals to go into breeding mode");
   public static Property<Integer> PROP_RADIUS_BOOST = new Property<>("radius_boost", 8).setDescription("how much the radius of the spell is boosted by with each rampant growth modifier");
   public static Property<Integer> PROP_TICKS = new Property<>("ticks", 3).setDescription("the number of times a random chance to grow the crop is applied every tick");
   public static Property<Integer> PROP_COUNT = new Property<>("count", 2).setDescription("the number of crops selected to be grown each tick");
@@ -56,11 +61,12 @@ public class SpellGrowthInfusion extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_growth_infusion");
   public static SpellGrowthInfusion instance = new SpellGrowthInfusion(spellName);
 
-  private int radius_x, radius_y, radius_z, ticks, additionalCount, count, radius_boost;
+  private AxisAlignedBB breedingBox;
+  private int radius_x, radius_y, radius_z, ticks, additionalCount, count, radius_boost, radius_breed_x, radius_breed_y, radius_breed_z;
 
   public SpellGrowthInfusion(ResourceLocation name) {
     super(name, TextFormatting.YELLOW, 48f / 255f, 255f / 255f, 48f / 255f, 192f / 255f, 255f / 255f, 192f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_TICKS, PROP_COUNT, PROP_ADDITIONAL_COUNT, PROP_RADIUS_BOOST);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_TICKS, PROP_COUNT, PROP_ADDITIONAL_COUNT, PROP_RADIUS_BOOST, PROP_RADIUS_BREED_X, PROP_RADIUS_BREED_Y, PROP_RADIUS_BREED_Z);
     acceptsModifiers(RADIUS1, BREED, FLOWERS, VILLAGERS, RADIUS2, MUSHROOM, RADIUS3, ANIMAL_GROWTH, ORE, HYDRATE);
   }
 
@@ -77,6 +83,25 @@ public class SpellGrowthInfusion extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+    boolean didSomething = false;
+    if (info.has(BREED)) {
+      List<EntityAnimal> animals = player.world.getEntitiesWithinAABB(EntityAnimal.class, breedingBox.offset(player.getPosition()));
+      int count = 0;
+      for (EntityAnimal animal : animals) {
+        if (animal.isInLove() || animal.getGrowingAge() != 0) {
+          continue;
+        }
+        count++;
+        if (!player.world.isRemote) {
+          animal.setInLove(player);
+          // TODO: PARTICLE
+        }
+      }
+      if (count != 0) {
+        didSomething = true;
+      }
+    }
+
     boolean aoe = false;
     if (info.has(RADIUS1) || info.has(RADIUS2)) {
       aoe = true;
@@ -101,7 +126,7 @@ public class SpellGrowthInfusion extends SpellBase {
           }
         }
       }
-      return true;
+      didSomething = true;
     } else {
       RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0), player.getLookVec().scale(8.0f).add(player.getPositionVector().add(0, player.getEyeHeight(), 0)));
       if (result != null) {
@@ -114,13 +139,13 @@ public class SpellGrowthInfusion extends SpellBase {
                 state.getBlock().randomTick(player.world, pos, state, new Random());
               }
               PacketHandler.sendToAllTracking(new MessageLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);
-              return true;
+              didSomething = true;
             }
           }
         }
       }
     }
-    return false;
+    return didSomething;
   }
 
   @Override
@@ -130,9 +155,13 @@ public class SpellGrowthInfusion extends SpellBase {
     this.radius_x = properties.get(PROP_RADIUS_X);
     this.radius_y = properties.get(PROP_RADIUS_Y);
     this.radius_z = properties.get(PROP_RADIUS_Z);
+    this.radius_breed_x = properties.get(PROP_RADIUS_BREED_X);
+    this.radius_breed_y = properties.get(PROP_RADIUS_BREED_Y);
+    this.radius_breed_z = properties.get(PROP_RADIUS_BREED_Z);
     this.ticks = properties.get(PROP_TICKS);
     this.count = properties.get(PROP_COUNT);
     this.additionalCount = properties.get(PROP_ADDITIONAL_COUNT);
     this.radius_boost = properties.get(PROP_RADIUS_BOOST);
+    this.breedingBox = new AxisAlignedBB(-this.radius_breed_x, -this.radius_breed_y, -this.radius_breed_z, this.radius_breed_x + 1, this.radius_breed_y + 1, this.radius_breed_z + 1);
   }
 }
