@@ -33,10 +33,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SpellExtension extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(350);
@@ -114,6 +111,8 @@ public class SpellExtension extends SpellBase {
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine)
     );
   }
+
+  private Set<Block> nonOres = new HashSet<>();
 
   private IntArraySet ores = new IntArraySet();
 
@@ -252,14 +251,18 @@ public class SpellExtension extends SpellBase {
             }
           }
           if ((o && ores.contains(vec)) || (specific && ores_specific.contains(vec))) {
-            ItemStack stack = ItemUtil.stackFromState(state);
-            if (isOre(stack)) {
-              if (specific) {
-                if (oresMatch(stack, held)) {
+            if (!nonOres.contains(block)) {
+              ItemStack stack = ItemUtil.stackFromState(state);
+              if (isOre(stack)) {
+                if (specific) {
+                  if (oresMatch(stack, held)) {
+                    positions.add(new SensePosition(SenseType.ORE, pos.toImmutable(), caster.world.provider.getDimension()));
+                  }
+                } else {
                   positions.add(new SensePosition(SenseType.ORE, pos.toImmutable(), caster.world.provider.getDimension()));
                 }
               } else {
-                positions.add(new SensePosition(SenseType.ORE, pos.toImmutable(), caster.world.provider.getDimension()));
+                nonOres.add(state.getBlock());
               }
             }
           }
