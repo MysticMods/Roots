@@ -27,6 +27,16 @@ public class FlowerRecipe {
     this.block = block;
   }
 
+  public boolean matches (IBlockState state) {
+    Block block = state.getBlock();
+    int meta = block.getMetaFromState(state);
+    return matches(block, meta);
+  }
+
+  public boolean matches (Block block, int meta) {
+    return this.block == block && this.meta == meta;
+  }
+
   @Nullable
   public IBlockState getFlower() {
     return flower;
