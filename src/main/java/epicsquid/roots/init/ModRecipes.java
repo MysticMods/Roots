@@ -380,6 +380,18 @@ public class ModRecipes {
     return flowerRecipes;
   }
 
+  @Nullable
+  public static FlowerRecipe getFlowerRecipe (IBlockState state) {
+    Block block = state.getBlock();
+    int meta = block.getMetaFromState(state);
+    for (FlowerRecipe recipe : flowerRecipes.values()) {
+      if (recipe.matches(block, meta)) {
+        return recipe;
+      }
+    }
+    return null;
+  }
+
   public static void initFlowerRecipes() {
     addFlowerRecipe("dandelion", Blocks.YELLOW_FLOWER.getStateFromMeta(EnumFlowerType.DANDELION.getMeta()));
     addFlowerRecipe("poppy", Blocks.RED_FLOWER.getStateFromMeta(EnumFlowerType.POPPY.getMeta()));
