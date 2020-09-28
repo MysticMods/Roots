@@ -2,6 +2,7 @@ package epicsquid.roots.recipe;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
@@ -11,12 +12,14 @@ public class FlowerRecipe {
   private final ResourceLocation registryName;
   private final int meta;
   private final Block block;
+  private final ItemStack stack;
 
   public FlowerRecipe(ResourceLocation name, IBlockState flower) {
     this.flower = flower;
     this.registryName = name;
     this.block = flower.getBlock();
     this.meta = this.block.getMetaFromState(flower);
+    this.stack = new ItemStack(this.block, 1, this.meta);
   }
 
   @SuppressWarnings("deprecation")
@@ -25,6 +28,11 @@ public class FlowerRecipe {
     this.meta = meta;
     this.flower = block.getStateFromMeta(this.meta);
     this.block = block;
+    this.stack = new ItemStack(this.block, 1, this.meta);
+  }
+
+  public ItemStack getStack () {
+    return this.stack.copy();
   }
 
   public boolean matches (IBlockState state) {

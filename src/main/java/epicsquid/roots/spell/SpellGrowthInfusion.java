@@ -1,18 +1,27 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.mysticallib.util.RayCastUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.recipe.Ingredients;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageLifeInfusionFX;
 import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.properties.Property;
+import epicsquid.roots.recipe.FlowerRecipe;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockMushroom;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -39,6 +48,9 @@ public class SpellGrowthInfusion extends SpellBase {
   public static Property<Integer> PROP_TICKS = new Property<>("ticks", 3).setDescription("the number of times a random chance to grow the crop is applied every tick");
   public static Property<Integer> PROP_COUNT = new Property<>("count", 2).setDescription("the number of crops selected to be grown each tick");
   public static Property<Integer> PROP_ADDITIONAL_COUNT = new Property<>("additional_count", 4).setDescription("an additional number of crops from zero to the specified value minus 1 added to the default count");
+  public static Property<Float> PROP_EMBIGGEN_CHANCE = new Property<>("embiggen_chance", 0.05f).setDescription("chance per tick to turn a mushroom into a big mushroom");
+  public static Property<Integer> PROP_ANIMAL_GROWTH = new Property<>("animal_growth_base", 20).setDescription("default number of ticks to age an entity by (1 second per channel)");
+  public static Property<Integer> PROP_ANIMAL_GROWTH_VARY = new Property<>("animal_growth_vary", 4 * 20).setDescription("additional ticks to age an entity by (varying from 0 to this value)");
 
   public static Modifier RADIUS1 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "rampant_growth_i"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier BREED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "rampant_breeding"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -62,11 +74,12 @@ public class SpellGrowthInfusion extends SpellBase {
   public static SpellGrowthInfusion instance = new SpellGrowthInfusion(spellName);
 
   private AxisAlignedBB breedingBox;
-  private int radius_x, radius_y, radius_z, ticks, additionalCount, count, radius_boost, radius_breed_x, radius_breed_y, radius_breed_z;
+  private int radius_x, radius_y, radius_z, ticks, additional_count, count, radius_boost, radius_breed_x, radius_breed_y, radius_breed_z, animal_growth, animal_growth_vary;
+  private float embiggen_chance;
 
   public SpellGrowthInfusion(ResourceLocation name) {
     super(name, TextFormatting.YELLOW, 48f / 255f, 255f / 255f, 48f / 255f, 192f / 255f, 255f / 255f, 192f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_TICKS, PROP_COUNT, PROP_ADDITIONAL_COUNT, PROP_RADIUS_BOOST, PROP_RADIUS_BREED_X, PROP_RADIUS_BREED_Y, PROP_RADIUS_BREED_Z);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_TICKS, PROP_COUNT, PROP_ADDITIONAL_COUNT, PROP_RADIUS_BOOST, PROP_RADIUS_BREED_X, PROP_RADIUS_BREED_Y, PROP_RADIUS_BREED_Z, PROP_EMBIGGEN_CHANCE, PROP_ANIMAL_GROWTH, PROP_ANIMAL_GROWTH_VARY);
     acceptsModifiers(RADIUS1, BREED, FLOWERS, VILLAGERS, RADIUS2, MUSHROOM, RADIUS3, ANIMAL_GROWTH, ORE, HYDRATE);
   }
 
@@ -83,6 +96,7 @@ public class SpellGrowthInfusion extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+    // TODO: HYDRATION
     boolean didSomething = false;
     if (info.has(BREED)) {
       List<EntityAnimal> animals = player.world.getEntitiesWithinAABB(EntityAnimal.class, breedingBox.offset(player.getPosition()));
@@ -114,7 +128,7 @@ public class SpellGrowthInfusion extends SpellBase {
       List<BlockPos> positions = Growth.collect(player.world, player.getPosition(), radius_x + boost, radius_y + boost, radius_z + boost);
       if (positions.isEmpty()) return false;
       if (!player.world.isRemote) {
-        for (int i = 0; i < ampInt(count) + player.world.rand.nextInt((ampSubInt(additionalCount))); i++) {
+        for (int i = 0; i < ampInt(count) + player.world.rand.nextInt((ampSubInt(additional_count))); i++) {
           BlockPos pos = positions.get(player.world.rand.nextInt(positions.size()));
           IBlockState state = player.world.getBlockState(pos);
           for (int j = 0; j < ticks; j++) {
@@ -128,12 +142,63 @@ public class SpellGrowthInfusion extends SpellBase {
       }
       didSomething = true;
     } else {
-      RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0), player.getLookVec().scale(8.0f).add(player.getPositionVector().add(0, player.getEyeHeight(), 0)));
+      RayCastUtil.RayTraceAndEntityResult entityResult = RayCastUtil.rayTraceMouseOver(player, 8.0d);
+      Entity resultEntity = entityResult.getPointedEntity();
+      if (resultEntity != null) {
+        if (info.has(ANIMAL_GROWTH) && resultEntity instanceof EntityAgeable) {
+          EntityAgeable ageable = (EntityAgeable) resultEntity;
+          // TODO: CONSIDER ADDING HOSTILE CHECK
+          if (ageable.isChild()) {
+            didSomething = true;
+            if (!player.world.isRemote) {
+              int amount = animal_growth + Util.rand.nextInt(animal_growth_vary);
+              ageable.addGrowth(amount);
+              // TODO: PARTICLES
+            }
+          }
+        }
+        if (info.has(VILLAGERS) && resultEntity instanceof EntityVillager) {
+          // TODO public net.minecraft.entity.passive.EntityVillager field_70961_j # timeUntilReset
+        }
+      }
+
+      RayTraceResult result = RayCastUtil.rayTraceBlocksSight(player.world, player, 8.0f);
       if (result != null) {
         if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
           BlockPos pos = result.getBlockPos();
           IBlockState state = player.world.getBlockState(pos);
-          if (Growth.canGrow(player.world, pos, state)) {
+          Block block = state.getBlock();
+
+          // Test for flower
+          if (info.has(FLOWERS)) {
+            FlowerRecipe recipe = ModRecipes.getFlowerRecipe(state);
+            if (recipe != null) {
+              didSomething = true;
+              if (!player.world.isRemote) {
+                // TODO: PARTICLE
+                ItemUtil.spawnItem(player.world, pos, recipe.getStack());
+              }
+            }
+          }
+
+          // Test for mushroom
+          if (info.has(MUSHROOM)) {
+            if (block instanceof BlockMushroom) {
+              didSomething = true;
+              if (!player.world.isRemote && Util.rand.nextFloat() < embiggen_chance) {
+                BlockMushroom shroom = (BlockMushroom) block;
+
+                if (shroom.generateBigMushroom(player.world, pos, state, Util.rand)) {
+                  // TODO: Particles/sound?
+                }
+              }
+            }
+          }
+
+          // TODO: Stone -> ore conversion
+
+          // Test for growth last
+          if (!didSomething && Growth.canGrow(player.world, pos, state)) {
             if (!player.world.isRemote) {
               for (int i = 0; i < ampInt(ticks); i++) {
                 state.getBlock().randomTick(player.world, pos, state, new Random());
@@ -160,8 +225,11 @@ public class SpellGrowthInfusion extends SpellBase {
     this.radius_breed_z = properties.get(PROP_RADIUS_BREED_Z);
     this.ticks = properties.get(PROP_TICKS);
     this.count = properties.get(PROP_COUNT);
-    this.additionalCount = properties.get(PROP_ADDITIONAL_COUNT);
+    this.additional_count = properties.get(PROP_ADDITIONAL_COUNT);
     this.radius_boost = properties.get(PROP_RADIUS_BOOST);
     this.breedingBox = new AxisAlignedBB(-this.radius_breed_x, -this.radius_breed_y, -this.radius_breed_z, this.radius_breed_x + 1, this.radius_breed_y + 1, this.radius_breed_z + 1);
+    this.embiggen_chance = properties.get(PROP_EMBIGGEN_CHANCE);
+    this.animal_growth = properties.get(PROP_ANIMAL_GROWTH);
+    this.animal_growth_vary = properties.get(PROP_ANIMAL_GROWTH_VARY);
   }
 }
