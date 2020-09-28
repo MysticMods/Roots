@@ -3,6 +3,7 @@ package epicsquid.roots.spell;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.client.SpectatorHandler;
+import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.mechanics.Magnetize;
@@ -141,7 +142,9 @@ public class SpellAugment extends SpellBase {
     if (info.has(MAGNETISM)) {
       int count = 0;
       count += Magnetize.pull(EntityItem.class, player.world, player.getPosition(), ampInt(radius_x), ampInt(radius_y), ampInt(radius_z));
-      count += Magnetize.pull(EntityXPOrb.class, player.world, player.getPosition(), ampInt(radius_x), ampInt(radius_y), ampInt(radius_z));
+      if (SpellConfig.spellFeaturesCategory.shouldMagnetismAttractXP) {
+        count += Magnetize.pull(EntityXPOrb.class, player.world, player.getPosition(), ampInt(radius_x), ampInt(radius_y), ampInt(radius_z));
+      }
 
       if (!acted) {
         acted = count != 0;
