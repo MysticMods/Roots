@@ -15,23 +15,20 @@ public class FlowerRecipe {
   public FlowerRecipe(ResourceLocation name, IBlockState flower) {
     this.flower = flower;
     this.registryName = name;
-    this.meta = -1;
-    this.block = null;
+    this.block = flower.getBlock();
+    this.meta = this.block.getMetaFromState(flower);
   }
 
+  @SuppressWarnings("deprecation")
   public FlowerRecipe(ResourceLocation name, int meta, Block block) {
     this.registryName = name;
-    this.flower = null;
     this.meta = meta;
+    this.flower = block.getStateFromMeta(this.meta);
     this.block = block;
   }
 
   @Nullable
-  @SuppressWarnings("deprecation")
   public IBlockState getFlower() {
-    if (flower == null && block != null && meta != -1) {
-      return block.getStateFromMeta(meta);
-    }
     return flower;
   }
 
