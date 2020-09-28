@@ -41,9 +41,4 @@ public class LootHandler {
       }
     }
   }
-
-  @SubscribeEvent
-  public static void onExperienceDrop (LivingExperienceDropEvent event) {
-    if (
-  }
 }

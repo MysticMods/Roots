@@ -9,6 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -38,6 +39,13 @@ public class DropsHandler {
           }
         }
       }
+    }
+  }
+
+  @SubscribeEvent
+  public static void onExperienceDrop (LivingExperienceDropEvent event) {
+    if () {
+
     }
   }
 }
