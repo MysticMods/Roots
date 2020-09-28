@@ -84,13 +84,15 @@ public class SpellHarvest extends SpellBase {
 
           if (skipBlocks.contains(block)) return false;
 
-          if (state.getBlock() == Blocks.PUMPKIN || state.getBlock() == Blocks.MELON_BLOCK) {
-            pumpkinsAndMelons.add(pos);
-            return false;
-          }
-          if (state.getBlock() == Blocks.REEDS || state.getBlock() == Blocks.CACTUS) {
-            reedsAndCactus.add(pos);
-            return false;
+          if (info.has(BLOCKS)) {
+            if (state.getBlock() == Blocks.PUMPKIN || state.getBlock() == Blocks.MELON_BLOCK) {
+              pumpkinsAndMelons.add(pos);
+              return false;
+            }
+            if (state.getBlock() == Blocks.REEDS || state.getBlock() == Blocks.CACTUS) {
+              reedsAndCactus.add(pos);
+              return false;
+            }
           }
           IProperty<?> prop = Harvest.resolveStates(state);
           if (prop != null) {
