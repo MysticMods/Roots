@@ -12,10 +12,7 @@ import epicsquid.roots.network.fx.MessageSenseFX;
 import epicsquid.roots.network.fx.MessageSenseFX.SensePosition;
 import epicsquid.roots.properties.Property;
 import it.unimi.dsi.fastutil.ints.IntArraySet;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.BlockMobSpawner;
+import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -26,6 +23,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -47,11 +45,13 @@ public class SpellExtension extends SpellBase {
   public static Property<Integer> PROP_RADIUS_HOSTILES_Y = new Property<>("radius_hostiles_y", 25).setDescription("radius on the Y axis within which entities are affected by the spell");
   public static Property<Integer> PROP_RADIUS_HOSTILES_Z = new Property<>("radius_hostiles_z", 50).setDescription("radius on the Z axis within which entities are affected by the spell");
 
+  public static Property<Integer> PROP_RADIUS_PLANTS_X = new Property<>("radius_plants_x", 50).setDescription("radius on the X axis within which entities are affected by the spell");
+  public static Property<Integer> PROP_RADIUS_PLANTS_Y = new Property<>("radius_plants_y", 25).setDescription("radius on the Y axis within which entities are affected by the spell");
+  public static Property<Integer> PROP_RADIUS_PLANTS_Z = new Property<>("radius_plants_z", 50).setDescription("radius on the Z axis within which entities are affected by the spell");
+
   public static Property<Integer> PROP_ANIMAL_DURATION = new Property<>("animal_glow_duration", 40 * 20).setDescription("the duration of the glow effect when applied to passive entities");
   public static Property<Integer> PROP_ENEMY_DURATION = new Property<>("enemy_glow_duration", 40 * 20).setDescription("the duration of the glow effect when applied to hostile entities");
   public static Property<Integer> PROP_NIGHT_VISION = new Property<>("night_vision", 40 * 20).setDescription("how long the danger sense effect is applied to the player");
-  public static Property<Integer> PROP_SUMMON_ANIMAL_CHANCE = new Property<>("animal_summon_chance", 5000000).setDescription("the percentage chance per entity affected that they will be summoned to the player instead (1 in X)");
-  public static Property<Integer> PROP_SUMMON_ENEMY_CHANCE = new Property<>("summon_enemy_chance", 5000000).setDescription("the percentage chance per entity affected that they will be summoned to the player instead (1 in X)");
 
   public static Property<Integer> PROP_RADIUS_ORE_X = new Property<>("radius_ore_x", 15).setDescription("radius on the X axis within which ores are searched for");
   public static Property<Integer> PROP_RADIUS_ORE_Y = new Property<>("radius_ore_y", 15).setDescription("radius on the Y axis within which ores are searched for");
@@ -73,32 +73,31 @@ public class SpellExtension extends SpellBase {
   public static Property<Integer> PROP_RADIUS_SPAWNER_Y = new Property<>("radius_spawner_y", 30).setDescription("radius on the Y axis within which spawners are searched for");
   public static Property<Integer> PROP_RADIUS_SPAWNER_Z = new Property<>("radius_spawner_z", 30).setDescription("radius on the Z axis within which spawners are searched for");
 
-  public static Modifier SUMMON_ANIMALS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "summon_animals"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
+  public static Modifier SENSE_HOME = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "sense_home"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier SENSE_ANIMALS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "sense_animals"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier NONDETECTION = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "nondetection"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 1)));
-  public static Modifier SUMMON_DANGER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "summon_hostiles"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1)));
+  public static Modifier SENSE_TIME = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "sense_time"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1)));
   public static Modifier SENSE_DANGER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "sense_hostiles"), ModifierCores.TERRA_MOSS, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.TERRA_MOSS, 1)));
-  public static Modifier ATTRACTION = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "unhealthy_attraction"), ModifierCores.BAFFLE_CAP, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 1)));
+  public static Modifier SENSE_PLANTS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "sense_plants"), ModifierCores.BAFFLE_CAP, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 1)));
   public static Modifier SENSE_CONTAINERS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "sense_containers"), ModifierCores.CLOUD_BERRY, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 1)));
   public static Modifier SENSE_SPAWNERS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "sense_spanwers"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 1)));
   public static Modifier SENSE_ORES = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "sense_ores"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier SENSE_LIQUIDS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "sense_liquids"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
   static {
-    NONDETECTION.addConflict(ATTRACTION); //
+    NONDETECTION.addConflict(SENSE_PLANTS); //
   }
 
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_extension");
   public static SpellExtension instance = new SpellExtension(spellName);
 
-  private AxisAlignedBB ore, ore_specific, liquid, container, spawner;
-  private int radius_animals_x, radius_animals_y, radius_animals_z, animal_duration, enemy_duration, night_vision, radius_ore_x, radius_ore_y, radius_ore_z, radius_ore_specific_x, radius_ore_specific_y, radius_ore_specific_z, radius_liquid_x, radius_liquid_y, radius_liquid_z, radius_container_x, radius_container_y, radius_container_z, radius_spawner_x, radius_spawner_y, radius_spawner_z, radius_hostiles_x, radius_hostiles_y, radius_hostiles_z;
-  public int summon_animal, summon_enemy;
+  private AxisAlignedBB ore, ore_specific, liquid, container, spawner, plants;
+  private int radius_animals_x, radius_animals_y, radius_animals_z, animal_duration, enemy_duration, night_vision, radius_ore_x, radius_ore_y, radius_ore_z, radius_ore_specific_x, radius_ore_specific_y, radius_ore_specific_z, radius_liquid_x, radius_liquid_y, radius_liquid_z, radius_container_x, radius_container_y, radius_container_z, radius_spawner_x, radius_spawner_y, radius_spawner_z, radius_hostiles_x, radius_hostiles_y, radius_hostiles_z, radius_plants_x, radius_plants_y, radius_plants_z;
 
   private SpellExtension(ResourceLocation name) {
     super(name, TextFormatting.WHITE, 122F / 255F, 0F, 0F, 58F / 255F, 58F / 255F, 58F / 255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_ANIMAL_DURATION, PROP_ENEMY_DURATION, PROP_NIGHT_VISION, PROP_SUMMON_ANIMAL_CHANCE, PROP_SUMMON_ENEMY_CHANCE, PROP_RADIUS_ORE_X, PROP_RADIUS_ORE_Y, PROP_RADIUS_ORE_Z, PROP_RADIUS_ORE_SPECIFIC_X, PROP_RADIUS_ORE_SPECIFIC_Y, PROP_RADIUS_ORE_SPECIFIC_Z, PROP_RADIUS_LIQUID_X, PROP_RADIUS_LIQUID_Y, PROP_RADIUS_LIQUID_Z, PROP_RADIUS_CONTAINER_X, PROP_RADIUS_CONTAINER_Y, PROP_RADIUS_CONTAINER_Z, PROP_RADIUS_SPAWNER_X, PROP_RADIUS_SPAWNER_Y, PROP_RADIUS_SPAWNER_Z, PROP_RADIUS_ANIMALS_X, PROP_RADIUS_ANIMALS_Y, PROP_RADIUS_ANIMALS_Z, PROP_RADIUS_HOSTILES_X, PROP_RADIUS_HOSTILES_Y, PROP_RADIUS_HOSTILES_Z);
-    acceptsModifiers(SUMMON_ANIMALS, SENSE_ANIMALS, NONDETECTION, SUMMON_DANGER, SENSE_DANGER, ATTRACTION, SENSE_CONTAINERS, SENSE_SPAWNERS, SENSE_ORES, SENSE_LIQUIDS);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_ANIMAL_DURATION, PROP_ENEMY_DURATION, PROP_NIGHT_VISION, PROP_RADIUS_ORE_X, PROP_RADIUS_ORE_Y, PROP_RADIUS_ORE_Z, PROP_RADIUS_ORE_SPECIFIC_X, PROP_RADIUS_ORE_SPECIFIC_Y, PROP_RADIUS_ORE_SPECIFIC_Z, PROP_RADIUS_LIQUID_X, PROP_RADIUS_LIQUID_Y, PROP_RADIUS_LIQUID_Z, PROP_RADIUS_CONTAINER_X, PROP_RADIUS_CONTAINER_Y, PROP_RADIUS_CONTAINER_Z, PROP_RADIUS_SPAWNER_X, PROP_RADIUS_SPAWNER_Y, PROP_RADIUS_SPAWNER_Z, PROP_RADIUS_ANIMALS_X, PROP_RADIUS_ANIMALS_Y, PROP_RADIUS_ANIMALS_Z, PROP_RADIUS_HOSTILES_X, PROP_RADIUS_HOSTILES_Y, PROP_RADIUS_HOSTILES_Z, PROP_RADIUS_PLANTS_X, PROP_RADIUS_PLANTS_Z, PROP_RADIUS_PLANTS_Y);
+    acceptsModifiers(SENSE_HOME, SENSE_ANIMALS, NONDETECTION, SENSE_TIME, SENSE_DANGER, SENSE_PLANTS, SENSE_CONTAINERS, SENSE_SPAWNERS, SENSE_ORES, SENSE_LIQUIDS);
   }
 
   @Override
@@ -120,7 +119,8 @@ public class SpellExtension extends SpellBase {
     CONTAINER(new float[]{224 / 255.0f, 211 / 255.0f, 29 / 255.0f, 0.5f}),
     SPAWNER(new float[]{46 / 255.0f, 133 / 255.0f, 209 / 255.0f, 0.5f}),
     LIQUID(new float[]{207 / 255.0f, 66 / 255.0f, 19 / 255.0f, 0.5f}),
-    ORE(new float[]{138 / 255.0f, 114 / 255.0f, 90 / 255.0f, 0.5f});
+    ORE(new float[]{138 / 255.0f, 114 / 255.0f, 90 / 255.0f, 0.5f}),
+    PLANTS(new float[]{3 / 255.0f, 252/255.0f, 11/255.0f, 0.5f});
 
     private float[] color;
 
@@ -208,23 +208,26 @@ public class SpellExtension extends SpellBase {
     boolean c = info.has(SENSE_CONTAINERS);
     boolean s = info.has(SENSE_SPAWNERS);
     boolean l = info.has(SENSE_LIQUIDS);
+    boolean p = info.has(SENSE_PLANTS);
     boolean o = info.has(SENSE_ORES);
     IntArraySet held = getHeldIds(caster.getHeldItemOffhand());
     boolean specific = o && held != null && !held.isEmpty();
-    if (c || s || l || o) {
+    if (c || s || l || o || p) {
       if (!caster.world.isRemote) {
-        List<SensePosition> positions = new ArrayList<>();
+        HashMap<SenseType, List<BlockPos>> positions = new HashMap<>();
         BlockPos playerPos = caster.getPosition();
         AxisAlignedBB ores = ore.offset(playerPos);
         AxisAlignedBB ores_specific = ore_specific.offset(playerPos);
         AxisAlignedBB liquids = liquid.offset(playerPos);
         AxisAlignedBB containers = container.offset(playerPos);
         AxisAlignedBB spawners = spawner.offset(playerPos);
-        AxisAlignedBB offset = getBiggestBoundingBox(o, specific, l, c, s);
+        AxisAlignedBB plant = plants.offset(playerPos);
+        AxisAlignedBB offset = getBiggestBoundingBox(o, specific, l, c, s, p);
         if (offset == null) {
           return true;
         }
         AxisAlignedBB box = offset.offset(playerPos);
+        int count = 3;
         for (BlockPos pos : AABBUtil.unique(box)) {
           if (!caster.world.isAreaLoaded(pos, 1, false)) {
             continue;
@@ -237,17 +240,38 @@ public class SpellExtension extends SpellBase {
           Block block = state.getBlock();
           if (c && containers.contains(vec)) {
             if (block instanceof BlockContainer && block.getClass() != BlockMobSpawner.class) {
-              positions.add(new SensePosition(SenseType.CONTAINER, pos.toImmutable(), caster.world.provider.getDimension()));
+              positions.computeIfAbsent(SenseType.CONTAINER, (q) -> new ArrayList<>()).add(pos);
             }
           }
           if (s && spawners.contains(vec)) {
             if (block instanceof BlockMobSpawner) {
-              positions.add(new SensePosition(SenseType.SPAWNER, pos.toImmutable(), caster.world.provider.getDimension()));
+              positions.computeIfAbsent(SenseType.SPAWNER, (q) -> new ArrayList<>()).add(pos);
             }
           }
           if (l && liquids.contains(vec)) {
             if (block instanceof BlockLiquid || block instanceof IFluidHandler) {
-              positions.add(new SensePosition(SenseType.LIQUID, pos.toImmutable(), caster.world.provider.getDimension()));
+              // TODO: SPESHUL
+              List<BlockPos> liquidPositions = positions.computeIfAbsent(SenseType.LIQUID, (q) -> new ArrayList<>());
+              boolean skip = false;
+              int t = MathHelper.clamp(count*count, 1, 10);
+              for (BlockPos q : liquidPositions) {
+                double dist = q.distanceSq(pos);
+                if (dist < t) {
+                  skip = true;
+                  break;
+                }
+              }
+              if (!skip) {
+                count = 3;
+                liquidPositions.add(pos);
+              } else {
+                count++;
+              }
+            }
+          }
+          if (p && plant.contains(vec)) {
+            if (block instanceof IGrowable) {
+              positions.computeIfAbsent(SenseType.PLANTS, (q) -> new ArrayList<>()).add(pos);
             }
           }
           if ((o && ores.contains(vec)) || (specific && ores_specific.contains(vec))) {
@@ -256,10 +280,10 @@ public class SpellExtension extends SpellBase {
               if (isOre(stack)) {
                 if (specific) {
                   if (oresMatch(stack, held)) {
-                    positions.add(new SensePosition(SenseType.ORE, pos.toImmutable(), caster.world.provider.getDimension()));
+                    positions.computeIfAbsent(SenseType.ORE, (q) -> new ArrayList<>()).add(pos);
                   }
                 } else {
-                  positions.add(new SensePosition(SenseType.ORE, pos.toImmutable(), caster.world.provider.getDimension()));
+                  positions.computeIfAbsent(SenseType.ORE, (q) -> new ArrayList<>()).add(pos);
                 }
               } else {
                 nonOres.add(state.getBlock());
@@ -267,7 +291,7 @@ public class SpellExtension extends SpellBase {
             }
           }
         }
-        if (!positions.isEmpty()) {
+        if (positions.values().stream().anyMatch(t -> !t.isEmpty())) {
           MessageSenseFX message = new MessageSenseFX(positions);
           PacketHandler.INSTANCE.sendTo(message, (EntityPlayerMP) caster);
         }
@@ -285,6 +309,10 @@ public class SpellExtension extends SpellBase {
     return new int[]{radius_animals_x, radius_animals_y, radius_animals_z};
   }
 
+  public int[] getRadiusPlants() {
+    return new int[]{radius_plants_x, radius_plants_y, radius_plants_z};
+  }
+
   private Map<SearchType, AxisAlignedBB> typeToBox = new HashMap<>();
 
   @Override
@@ -300,8 +328,6 @@ public class SpellExtension extends SpellBase {
     this.animal_duration = properties.get(PROP_ANIMAL_DURATION);
     this.enemy_duration = properties.get(PROP_ENEMY_DURATION);
     this.night_vision = properties.get(PROP_NIGHT_VISION);
-    this.summon_animal = properties.get(PROP_SUMMON_ANIMAL_CHANCE);
-    this.summon_enemy = properties.get(PROP_SUMMON_ENEMY_CHANCE);
     this.radius_ore_x = properties.get(PROP_RADIUS_ORE_X);
     this.radius_ore_y = properties.get(PROP_RADIUS_ORE_Y);
     this.radius_ore_z = properties.get(PROP_RADIUS_ORE_Z);
@@ -317,22 +343,27 @@ public class SpellExtension extends SpellBase {
     this.radius_spawner_x = properties.get(PROP_RADIUS_SPAWNER_X);
     this.radius_spawner_y = properties.get(PROP_RADIUS_SPAWNER_Y);
     this.radius_spawner_z = properties.get(PROP_RADIUS_SPAWNER_Z);
+    this.radius_plants_x = properties.get(PROP_RADIUS_PLANTS_X);
+    this.radius_plants_y = properties.get(PROP_RADIUS_PLANTS_Y);
+    this.radius_plants_z = properties.get(PROP_RADIUS_PLANTS_Z);
     // TODO: check all AxisAlignedBB for +1
     this.ore = new AxisAlignedBB(-radius_ore_x, -radius_ore_y, -radius_ore_z, (radius_ore_x + 1), (radius_ore_y + 1), (radius_ore_z + 1));
     this.ore_specific = new AxisAlignedBB(-radius_ore_specific_x, -radius_ore_specific_y, -radius_ore_specific_z, (radius_ore_specific_x + 1), (radius_ore_specific_y + 1), (radius_ore_specific_z + 1));
     this.liquid = new AxisAlignedBB(-radius_liquid_x, -radius_liquid_y, -radius_liquid_z, (radius_liquid_x + 1), (radius_liquid_y + 1), (radius_liquid_z + 1));
     this.container = new AxisAlignedBB(-radius_ore_x, -radius_ore_y, -radius_ore_z, (radius_ore_x + 1), (radius_ore_y + 1), (radius_ore_z + 1));
     this.spawner = new AxisAlignedBB(-radius_spawner_x, -radius_spawner_y, -radius_spawner_z, (radius_spawner_x + 1), (radius_spawner_y + 1), (radius_spawner_z + 1));
+    this.plants = new AxisAlignedBB(-radius_plants_x, -radius_plants_y, -radius_plants_z, radius_plants_x+1, radius_plants_y+1, radius_plants_z+1);
 
     typeToBox.put(SearchType.ORE, ore);
     typeToBox.put(SearchType.ORE_SPECIFIC, ore_specific);
     typeToBox.put(SearchType.CONTAINER, container);
     typeToBox.put(SearchType.LIQUID, liquid);
     typeToBox.put(SearchType.SPAWNER, spawner);
+    typeToBox.put(SearchType.PLANTS, plants);
   }
 
   @Nullable
-  public AxisAlignedBB getBiggestBoundingBox(boolean ore, boolean ore_specific, boolean liquid, boolean container, boolean spawner) {
+  public AxisAlignedBB getBiggestBoundingBox(boolean ore, boolean ore_specific, boolean liquid, boolean container, boolean spawner, boolean plants) {
     List<BoxSize> boxes = new ArrayList<>();
     if (ore) {
       boxes.add(new BoxSize(SearchType.ORE, radius_ore_x * radius_ore_y * radius_ore_z));
@@ -349,6 +380,9 @@ public class SpellExtension extends SpellBase {
     if (spawner) {
       boxes.add(new BoxSize(SearchType.SPAWNER, radius_spawner_x * radius_spawner_y * radius_spawner_z));
     }
+    if (plants) {
+      boxes.add(new BoxSize(SearchType.PLANTS, radius_plants_x * radius_plants_y * radius_plants_z));
+    }
     if (boxes.isEmpty()) {
       return null;
     }
@@ -357,7 +391,7 @@ public class SpellExtension extends SpellBase {
   }
 
   private enum SearchType {
-    ORE, ORE_SPECIFIC, LIQUID, CONTAINER, SPAWNER
+    ORE, ORE_SPECIFIC, LIQUID, CONTAINER, SPAWNER, PLANTS
   }
 
   private class BoxSize {

@@ -17,24 +17,22 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MessageSenseFX implements IMessage {
   public static class SensePosition {
     private SpellExtension.SenseType type;
     private BlockPos pos;
-    private int dimension;
 
-    public SensePosition(SpellExtension.SenseType type, BlockPos pos, int dimension) {
+    public SensePosition(SpellExtension.SenseType type, BlockPos pos) {
       this.type = type;
       this.pos = pos;
-      this.dimension = dimension;
     }
 
-    public SensePosition(SpellExtension.SenseType type, int x, int y, int z, int dimension) {
+    public SensePosition(SpellExtension.SenseType type, int x, int y, int z) {
       this.type = type;
       this.pos = new BlockPos(x, y, z);
-      this.dimension = dimension;
     }
 
     public SpellExtension.SenseType getType() {
@@ -44,44 +42,43 @@ public class MessageSenseFX implements IMessage {
     public BlockPos getPos() {
       return pos;
     }
-
-    public int getDimension() {
-      return dimension;
-    }
   }
 
-  private List<SensePosition> senses;
+  private HashMap<SpellExtension.SenseType, List<BlockPos>> senses;
 
   public MessageSenseFX() {
   }
 
-  public MessageSenseFX(List<SensePosition> senses) {
+  public MessageSenseFX(HashMap<SpellExtension.SenseType, List<BlockPos>> senses) {
     this.senses = senses;
   }
 
   @Override
   public void fromBytes(ByteBuf buf) {
-    this.senses = new ArrayList<>();
-    int count = buf.readInt();
-    for (int i = 0; i < count; i++) {
-      SpellExtension.SenseType sense = SpellExtension.SenseType.fromOrdinal(buf.readInt());
-      int x = buf.readInt();
-      int y = buf.readInt();
-      int z = buf.readInt();
-      int dimension = buf.readInt();
-      this.senses.add(new SensePosition(sense, x, y, z, dimension));
+    this.senses = new HashMap<>();
+    for (SpellExtension.SenseType type : SpellExtension.SenseType.values()) {
+      List<BlockPos> positions = senses.computeIfAbsent(type, (t) -> new ArrayList<>());
+      int count = buf.readInt();
+      for (int i = 0; i < count; i++) {
+        positions.add(new BlockPos(buf.readInt(), buf.readInt(), buf.readInt()));
+      }
     }
   }
 
   @Override
   public void toBytes(ByteBuf buf) {
-    buf.writeInt(this.senses.size());
-    for (SensePosition pos : this.senses) {
-      buf.writeInt(pos.type.ordinal());
-      buf.writeInt(pos.pos.getX());
-      buf.writeInt(pos.pos.getY());
-      buf.writeInt(pos.pos.getZ());
-      buf.writeInt(pos.dimension);
+    for (SpellExtension.SenseType type : SpellExtension.SenseType.values()) {
+      List<BlockPos> positions = senses.get(type);
+      if (positions == null) {
+        buf.writeInt(0);
+      } else {
+        buf.writeInt(positions.size());
+        for (BlockPos pos : positions) {
+          buf.writeInt(pos.getX());
+          buf.writeInt(pos.getY());
+          buf.writeInt(pos.getZ());
+        }
+      }
     }
   }
 
@@ -92,9 +89,18 @@ public class MessageSenseFX implements IMessage {
     public IMessage onMessage(MessageSenseFX message, MessageContext ctx) {
       Minecraft minecraft = Minecraft.getMinecraft();
       World world = minecraft.world;
-      for (SensePosition sense : message.senses) {
-        for (int i = 0; i < 2; ++i) {
-          ParticleUtil.spawnParticlePetal(world, sense.pos.getX() + 0.75f - world.rand.nextFloat() / 2f, sense.pos.getY() + 0.75f - world.rand.nextFloat() / 2f, sense.pos.getZ() + 0.75f - world.rand.nextFloat() / 2f, 0, 0, 0, sense.type.getColor(), 10f, 20 * 30, true);
+      for (SpellExtension.SenseType type : SpellExtension.SenseType.values()) {
+        List<BlockPos> positions = message.senses.get(type);
+        if (positions != null) {
+          for (BlockPos pos : positions) {
+            for (int i = 0; i < 2; ++i) {
+              ParticleUtil.spawnParticlePetal(world,
+                  pos.getX() + (0.5f - world.rand.nextFloat()) + (world.rand.nextInt(3) == 0 ? (world.rand.nextBoolean() ? -1 : 1) : 0),
+                  pos.getY() + (0.5f - world.rand.nextFloat()) + (world.rand.nextInt(3) == 0 ? (world.rand.nextBoolean() ? -1 : 1) : 0),
+                  pos.getZ() + (0.5f - world.rand.nextFloat()) + (world.rand.nextInt(3) == 0 ? (world.rand.nextBoolean() ? -1 : 1) : 0),
+                  0, 0, 0, type.getColor(), 10f, 20 * 30, true);
+            }
+          }
         }
       }
       return null;
