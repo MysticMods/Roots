@@ -1,7 +1,6 @@
 package epicsquid.roots.event;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.handler.QuiverHandler;
 import epicsquid.roots.init.ModPotions;
@@ -32,7 +31,7 @@ public class SneakHandler {
   public static void onPlayerVisibility (PlayerEvent.Visibility event) {
     if (event.getEntityPlayer().getActivePotionEffect(ModPotions.nondetection) != null) {
       ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(event.getEntityPlayer().getEntityData(), SpellExtension.instance);
-      if (mods.has(SpellExtension.ATTRACTION)) {
+      if (mods.has(SpellExtension.SENSE_PLANTS)) {
         event.modifyVisibility(999);
       } else {
         event.modifyVisibility(0);
