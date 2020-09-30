@@ -165,38 +165,26 @@ roots.spell.spell_sanctuary.name=Sanctuary
 roots.spell.spell_life_drain.name=Life Drain
 roots.spell.spell_radiance.name=Radiance
 roots.spell.spell_shatter.name=Shatter
-roots.spell.spell_gravity_boost.name=Gravity Boost
 roots.spell.spell_light_drifter.name=Light Drifter
-roots.spell.spell_spring_storm.name=Spring Storm
 roots.spell.spell_time_stop.name=Time Stop
 roots.spell.spell_petal_shell.name=Petal Shell
 roots.spell.spell_rose_thorns.name=Rose's Thorns
 roots.spell.spell_acid_cloud.name=Acid Cloud
 roots.spell.spell_geas.name=Geas
 roots.spell.spell_growth_infusion.name=Growth Infusion
-roots.spell.spell_sense_animals.name=Sense Animals
-roots.spell.spell_terra_transmutation.name=Terra Transmutation
 roots.spell.spell_sky_soarer.name=Sky Soarer
-roots.spell.spell_second_wind.name=Second Wind
-roots.spell.spell_magnetism.name=Magnetism
-roots.spell.spell_sense_danger.name=Sense Danger
-roots.spell.spell_scatter.name=Scatter
 roots.spell.spell_harvest.name=Harvest
-roots.spell.spell_rampant_growth.name=Rampant Growth
 roots.spell.spell_fey_light.name=Fey Light
-roots.spell.spell_winter_cloud.name=Winter Cloud
-roots.spell.spell_summers_thaw.name=Summer's Thaw
 roots.spell.spell_disarm.name=Disarm
-roots.spell.spell_soft_touch.name=Soft Touch
-roots.spell.spell_mark.name=Mark
-roots.spell.spell_natures_blades.name=Nature's Blades
 roots.spell.spell_reach.name=Reach
-roots.spell.spell_autumns_fall.name=Autumn's Fall
 roots.spell.spell_natures_scythe.name=Nature's Scythe
 roots.spell.spell_saturate.name=Saturate
 roots.spell.spell_desaturate.name=Desaturate
 roots.spell.spell_chrysopoeia.name=Chrysopoeia
 roots.spell.spell_aqua_bubble.name=Aqua Bubble
+roots.spell.spell_augment.name=Augment
+roots.spell.spell_extension.name=Extension
+roots.spell.spell_storm_cloud.name=Storm Cloud
 
 roots.modifiers.modifiers.reduction=Cost Reduction
 roots.modifiers.modifiers.reduction.desc=Reduces herb costs.
@@ -491,6 +479,21 @@ roots.commands.dump_recipes.usage=Usage: ct roots_recipes [mode] Modes: all | an
 
 # Stuff
 roots.message.salmon_eaten=You suddenly feel more knowledgeable about the world!
+
+# Time
+roots.message.sense_time=It is currently %s on day %s; the moon %s.
+roots.message.sense_time.format=%s:%s
+roots.message.sense_time.moon.will=will be %s
+roots.message.sense_time.moon.is=is %s
+roots.message.sense_time.moon.0=full
+roots.message.sense_time.moon.1=gibbous, waning
+roots.message.sense_time.moon.3=third quarter, waning
+roots.message.sense_time.moon.4=crescent, waning
+roots.message.sense_time.moon.5=new
+roots.message.sense_time.moon.6=crescent, waxing
+roots.message.sense_time.moon.7=first quarter, waxing
+roots.message.sense_time.moon.8=gibbous, waxing
+
 
 # Modifiers
 roots.modifiers.modifiers.extended_geas=Extended Geas
@@ -917,3 +920,46 @@ roots.modifiers.modifiers.byproduct_iii=Byproduct
 roots.modifiers.modifiers.byproduct_iii.desc=Increases the chance that eligible recipes will produce a byproduct.
 roots.modifiers.modifiers.byproduct_ii=Byproduct
 roots.modifiers.modifiers.byproduct_ii.desc=Increases the chance that eligible recipes will produce a byproduct.
+
+# Some of the above may have been deleted
+roots.modifiers.modifiers.reach=Reach
+roots.modifiers.modifiers.reach.desc=Increases the distance you can reach with tools.
+roots.modifiers.modifiers.speed=Speed
+roots.modifiers.modifiers.speed.desc=Increases your movement speed.
+roots.modifiers.modifiers.augment_slow_fall=Slow Fall
+roots.modifiers.modifiers.augment_slow_fall.desc=Reduces the speed at which you fall.
+roots.modifiers.modifiers.light_drifter=Light Drifter
+roots.modifiers.modifiers.light_drifter.desc=Enter an incorporeal state, drifting and seeing through objects.
+roots.modifiers.modifiers.magnetism=Magnetism
+roots.modifiers.modifiers.magnetism.desc=Teleports items (and experience) to you.
+roots.modifiers.modifiers.bitter_luck=Bitter Luck
+roots.modifiers.modifiers.bitter_luck.desc=Grants you Luck... but only luck for some things.
+roots.modifiers.modifiers.absorption=Absorption
+roots.modifiers.modifiers.absorption.desc=Grants you an absorption shield.
+roots.modifiers.modifiers.strength_of_flame=Strength of Flame
+roots.modifiers.modifiers.strength_of_flame.desc=Grants you strength.
+roots.modifiers.modifiers.haste=Haste
+roots.modifiers.modifiers.haste.desc=Grants you haste.
+roots.modifiers.modifiers.second_wind=Second Wind
+roots.modifiers.modifiers.second_wind.desc=Grants you breath when underwater.
+
+roots.modifiers.modifiers.sense_home=Sense Home
+roots.modifiers.modifiers.sense_home.desc=Be given a sign that points towards your spawn location.
+roots.modifiers.modifiers.sense_animals=Sense Animals
+roots.modifiers.modifiers.sense_animals.desc=Highlights nearby animals for a duration.
+roots.modifiers.modifiers.nondetection=Nondetection
+roots.modifiers.modifiers.nondetection.desc=Reduce the radius at which enemies can detect you.
+roots.modifiers.modifiers.sense_time=Sense Time
+roots.modifiers.modifiers.sense_time.desc=Sense details about time.
+roots.modifiers.modifiers.sense_hostiles=Sense Hostiles
+roots.modifiers.modifiers.sense_hostiles.desc=Highlights nearby hostile creatures for a duration.
+roots.modifiers.modifiers.sense_plants=Sense Plants
+roots.modifiers.modifiers.sense_plants.desc=Highlights nearby growing plants and plant life.
+roots.modifiers.modifiers.sense_containers=Sense Containers
+roots.modifiers.modifiers.sense_containers.desc=Highlights nearby containers.
+roots.modifiers.modifiers.sense_liquids=Sense Liquid
+roots.modifiers.modifiers.sense_liquids.desc=Highlights nearby liquids.
+roots.modifiers.modifiers.sense_spawners=Sense Spawners
+roots.modifiers.modifiers.sense_spawners.desc=Highlights nearby spawners.
+roots.modifiers.modifiers.sense_ores=Sense Ores
+roots.modifiers.modifiers.sense_ores.desc=Highlights either all nearby ores or the ore held in your off-hand.
