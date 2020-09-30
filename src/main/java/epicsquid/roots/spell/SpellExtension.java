@@ -25,6 +25,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.oredict.OreDictionary;
@@ -80,12 +83,12 @@ public class SpellExtension extends SpellBase {
   public static Modifier SENSE_DANGER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "sense_hostiles"), ModifierCores.TERRA_MOSS, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.TERRA_MOSS, 1)));
   public static Modifier SENSE_PLANTS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "sense_plants"), ModifierCores.BAFFLE_CAP, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 1)));
   public static Modifier SENSE_CONTAINERS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "sense_containers"), ModifierCores.CLOUD_BERRY, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 1)));
-  public static Modifier SENSE_SPAWNERS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "sense_spanwers"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 1)));
+  public static Modifier SENSE_SPAWNERS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "sense_spawners"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 1)));
   public static Modifier SENSE_ORES = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "sense_ores"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier SENSE_LIQUIDS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "sense_liquids"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
   static {
-    NONDETECTION.addConflict(SENSE_PLANTS); //
+    //NONDETECTION.addConflict(SENSE_PLANTS); //
   }
 
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_extension");
@@ -204,6 +207,20 @@ public class SpellExtension extends SpellBase {
     if (info.has(SENSE_DANGER)) {
       caster.addPotionEffect(new PotionEffect(ModPotions.danger_sense, ampInt(enemy_duration), 0, false, false));
       caster.getEntityData().setIntArray(getCachedName(), info.snapshot());
+    }
+    if (info.has(SENSE_HOME)) {
+
+    }
+    if (info.has(SENSE_TIME)) {
+      if (!caster.world.isRemote) {
+        long total = 6000L + caster.world.getWorldTime();
+        int day = (int) (total / 24000L) + 1;
+        int hours = (int) ((total % 24000) / 1000);
+        int minutes = (int) (total % 24000 % 1000 / 1000.0 * 60.0);
+        int moon = (int)(caster.world.getWorldTime() / 24000L % 8L + 8L) % 8;
+        ITextComponent moonComp = new TextComponentTranslation("roots.message.sense_time.moon." + moon).setStyle(new Style().setColor(TextFormatting.GOLD));
+        caster.sendMessage(new TextComponentTranslation("roots.message.sense_time", new TextComponentTranslation("roots.message.sense_time.format", String.format("%02d", hours), String.format("%02d", minutes)).setStyle(new Style().setColor(TextFormatting.GOLD)), day, hours < 18 && hours > 6 ? new TextComponentTranslation("roots.message.sense_time.moon.will", moonComp) : new TextComponentTranslation("roots.message.sense_time.moon.is", moonComp)).setStyle(new Style().setBold(true)));
+      }
     }
     boolean c = info.has(SENSE_CONTAINERS);
     boolean s = info.has(SENSE_SPAWNERS);
