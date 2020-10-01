@@ -219,7 +219,7 @@ public class SpellExtension extends SpellBase {
         int minutes = (int) (total % 24000 % 1000 / 1000.0 * 60.0);
         int moon = (int)(caster.world.getWorldTime() / 24000L % 8L + 8L) % 8;
         ITextComponent moonComp = new TextComponentTranslation("roots.message.sense_time.moon." + moon).setStyle(new Style().setColor(TextFormatting.GOLD));
-        caster.sendMessage(new TextComponentTranslation("roots.message.sense_time", new TextComponentTranslation("roots.message.sense_time.format", String.format("%02d", hours), String.format("%02d", minutes)).setStyle(new Style().setColor(TextFormatting.GOLD)), day, hours < 18 && hours > 6 ? new TextComponentTranslation("roots.message.sense_time.moon.will", moonComp) : new TextComponentTranslation("roots.message.sense_time.moon.is", moonComp)).setStyle(new Style().setBold(true)));
+        caster.sendMessage(new TextComponentTranslation("roots.message.sense_time", new TextComponentTranslation("roots.message.sense_time.format", String.format("%02d", hours), String.format("%02d", minutes)).setStyle(new Style().setColor(TextFormatting.GOLD)), day, hours < 18 && hours > 6 ? new TextComponentTranslation("roots.message.sense_time.moon.will", moonComp) : new TextComponentTranslation("roots.message.sense_time.moon.is", moonComp)).setStyle(new Style().setColor(TextFormatting.YELLOW)));
       }
     }
     boolean c = info.has(SENSE_CONTAINERS);

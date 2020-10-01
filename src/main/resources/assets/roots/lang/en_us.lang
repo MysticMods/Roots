@@ -487,12 +487,12 @@ roots.message.sense_time.moon.will=will be %s
 roots.message.sense_time.moon.is=is %s
 roots.message.sense_time.moon.0=full
 roots.message.sense_time.moon.1=gibbous, waning
-roots.message.sense_time.moon.3=third quarter, waning
-roots.message.sense_time.moon.4=crescent, waning
-roots.message.sense_time.moon.5=new
-roots.message.sense_time.moon.6=crescent, waxing
-roots.message.sense_time.moon.7=first quarter, waxing
-roots.message.sense_time.moon.8=gibbous, waxing
+roots.message.sense_time.moon.2=third quarter, waning
+roots.message.sense_time.moon.3=crescent, waning
+roots.message.sense_time.moon.4=new
+roots.message.sense_time.moon.5=crescent, waxing
+roots.message.sense_time.moon.6=first quarter, waxing
+roots.message.sense_time.moon.7=gibbous, waxing
 
 
 # Modifiers
