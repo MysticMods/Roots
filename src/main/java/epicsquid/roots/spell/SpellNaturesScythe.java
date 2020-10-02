@@ -1,12 +1,17 @@
 package epicsquid.roots.spell;
 
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
+import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.modifiers.*;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
+import epicsquid.roots.network.fx.MessageFallBladesFX;
 import epicsquid.roots.properties.Property;
-import net.minecraft.block.BlockDoublePlant;
-import net.minecraft.block.BlockFlower;
+import epicsquid.roots.util.OreDictCache;
+import net.minecraft.block.*;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -17,11 +22,30 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.oredict.OreIngredient;
 
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SpellNaturesScythe extends SpellBase {
+  private static final MethodHandle GET_SILK_DROP;
+
+  static {
+    try {
+      Method getSilkDrop = ObfuscationReflectionHelper.findMethod(Block.class, "func_180643_i", ItemStack.class, IBlockState.class);
+      getSilkDrop.setAccessible(true);
+      GET_SILK_DROP = MethodHandles.lookup().unreflect(getSilkDrop).asType(MethodType.methodType(ItemStack.class));
+    } catch (IllegalAccessException e) {
+      throw new RuntimeException("Unable to properly handle silk touch drops", e);
+    }
+  }
 
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(160);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
@@ -41,7 +65,7 @@ public class SpellNaturesScythe extends SpellBase {
   public static Modifier LEAVES = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "leaf_harvester"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier MAGNETISM = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "magnetic_harvester"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
   public static Modifier SILK_TOUCH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "silken_touch"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 1)));
-  public static Modifier REGROWTH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "scythe_regrowth"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1)));
+  public static Modifier VOID = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "void"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1)));
   public static Modifier GRASS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "grass_harvester"), ModifierCores.TERRA_MOSS, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.TERRA_MOSS, 1)));
   public static Modifier MUSHROOM = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "mushroom_harvester"), ModifierCores.BAFFLE_CAP, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 1)));
   public static Modifier FLOWER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "flower_harvester"), ModifierCores.CLOUD_BERRY, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 1)));
@@ -53,10 +77,12 @@ public class SpellNaturesScythe extends SpellBase {
 
   private int radius, radius_y, interval;
 
+  private String tree, web, grass, mushroom, flower, water;
+
   public SpellNaturesScythe(ResourceLocation name) {
     super(name, TextFormatting.DARK_GREEN, 64 / 255F, 240 / 255F, 24 / 255F, 26 / 255F, 110 / 255F, 13 / 255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST, PROP_RADIUS, PROP_RADIUS_Y, PROP_INTERVAL, PROP_MAX_AFFECTED);
-    acceptsModifiers(WEBS, LEAVES, MAGNETISM, SILK_TOUCH, REGROWTH, GRASS, MUSHROOM, FLOWER, SPEED, VINES);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST, PROP_RADIUS, PROP_RADIUS_Y, PROP_INTERVAL, PROP_MAX_AFFECTED, PROP_TREE_DICT, PROP_WEB_DICT, PROP_GRASS_DICT, PROP_MUSHROOM_DICT, PROP_FLOWER_DICT, PROP_WATER_DICT);
+    acceptsModifiers(WEBS, LEAVES, MAGNETISM, SILK_TOUCH, VOID, GRASS, MUSHROOM, FLOWER, SPEED, VINES);
   }
 
   @Override
@@ -72,12 +98,16 @@ public class SpellNaturesScythe extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
-    if (ticks % speedSubInt(interval) != 0) {
+    int i = interval;
+    if (info.has(SPEED)) {
+      i /= 2;
+    }
+    if (ticks % speedSubInt(i) != 0) {
       return false;
     }
 
     World world = caster.world;
-    List<BlockPos> blocks = Util.getBlocksWithinRadius(caster.world, caster.getPosition(), radius, radius_y, radius, pos -> ifAffectedByNaturesScythe(world, pos));
+    List<BlockPos> blocks = Util.getBlocksWithinRadius(caster.world, caster.getPosition(), radius, radius_y, radius, pos -> ifAffectedByNaturesScythe(world, pos, info));
 
     if (blocks.isEmpty()) {
       return false;
@@ -86,20 +116,80 @@ public class SpellNaturesScythe extends SpellBase {
     BlockPos pos = blocks.get(Util.rand.nextInt(blocks.size()));
 
     if (!world.isRemote) {
-      world.destroyBlock(pos, true);
+      if (info.has(VOID)) {
+        world.destroyBlock(pos, false);
+      } else {
+        breakBlock(world, pos, info, caster);
+      }
       world.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 0.5f, 1f);
-      //PacketHandler.sendToAllTracking(new MessageFallBladesFX(pos.getX(), pos.getY(), pos.getZ(), false), world, pos);
+      PacketHandler.sendToAllTracking(new MessageFallBladesFX(pos.getX(), pos.getY(), pos.getZ(), false), world, pos);
     }
     return true;
   }
 
-  private boolean ifAffectedByNaturesScythe(World world, BlockPos pos) {
-    return world.getBlockState(pos).getBlock() instanceof BlockFlower
-        || world.getBlockState(pos).getBlock() == Blocks.TALLGRASS
-        || world.getBlockState(pos).getBlock() == Blocks.DOUBLE_PLANT
-        && (world.getBlockState(pos).getValue(BlockDoublePlant.VARIANT) == BlockDoublePlant.EnumPlantType.FERN
-        || world.getBlockState(pos).getValue(BlockDoublePlant.VARIANT) == BlockDoublePlant.EnumPlantType.GRASS
-    );
+  private void breakBlock (World world, BlockPos pos, StaffModifierInstanceList info, EntityPlayer player) {
+    // TODO: HANDLE MAGNETISM
+    IBlockState state = world.getBlockState(pos);
+    Block block = state.getBlock();
+    if (info.has(SILK_TOUCH) && block.canSilkHarvest(world, pos, state, player)) {
+      List<ItemStack> items = new ArrayList<>();
+      ItemStack silked;
+      try {
+        silked = (ItemStack) GET_SILK_DROP.invokeExact(block, state);
+      } catch (Throwable throwable) {
+        throw new RuntimeException("Unable to get silk touch drop!?", throwable);
+      }
+      if (silked.isEmpty()) {
+        items.add(silked);
+      }
+      ForgeEventFactory.fireBlockHarvesting(items, world, pos, state, 0, 1.0f, true, player);
+      for (ItemStack item : items) {
+        Block.spawnAsEntity(world, pos, item);
+      }
+    } else {
+      block.dropBlockAsItem(world, pos, state, 0);
+    }
+  }
+
+  private boolean ifAffectedByNaturesScythe(World world, BlockPos pos, StaffModifierInstanceList info) {
+    if (world.isAirBlock(pos)) {
+      return false;
+    }
+
+    IBlockState state = world.getBlockState(pos);
+    Block block = state.getBlock();
+    if (info.has(WEBS)) {
+      if (block instanceof BlockWeb || OreDictCache.matches(this.web, state)) {
+        return true;
+      }
+    }
+    if (info.has(LEAVES)) {
+      if (block instanceof BlockLeaves || OreDictCache.matches(this.tree, state)) {
+        return true;
+      }
+    }
+    if (info.has(GRASS)) {
+      if (block == Blocks.TALLGRASS || ((block == Blocks.DOUBLE_PLANT) && state.getValue(BlockDoublePlant.VARIANT) == BlockDoublePlant.EnumPlantType.FERN || state.getValue(BlockDoublePlant.VARIANT) == BlockDoublePlant.EnumPlantType.GRASS) || OreDictCache.matches(this.grass, state)) {
+        return true;
+      }
+    }
+    if (info.has(FLOWER)) {
+      if (block instanceof BlockFlower || (block instanceof BlockDoublePlant && state.getValue(BlockDoublePlant.VARIANT) != BlockDoublePlant.EnumPlantType.GRASS && state.getValue(BlockDoublePlant.VARIANT) != BlockDoublePlant.EnumPlantType.FERN) || OreDictCache.matches(this.flower, state)) {
+        return true;
+      }
+    }
+    if (info.has(MUSHROOM)) {
+      if (block instanceof BlockMushroom || OreDictCache.matches(this.mushroom, state)) {
+        return true;
+      }
+    }
+    if (info.has(VINES)) {
+      if (block instanceof BlockVine || block instanceof BlockLilyPad || OreDictCache.matches(this.water, state)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   @Override
@@ -109,5 +199,11 @@ public class SpellNaturesScythe extends SpellBase {
     this.radius = properties.get(PROP_RADIUS);
     this.radius_y = properties.get(PROP_RADIUS_Y);
     this.interval = properties.get(PROP_INTERVAL);
+    this.flower = properties.get(PROP_FLOWER_DICT);
+    this.grass = properties.get(PROP_GRASS_DICT);
+    this.mushroom = properties.get(PROP_MUSHROOM_DICT);
+    this.tree = properties.get(PROP_TREE_DICT);
+    this.water = properties.get(PROP_WATER_DICT);
+    this.web = properties.get(PROP_WEB_DICT);
   }
 }
