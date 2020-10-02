@@ -1,5 +1,6 @@
 package epicsquid.roots.network.fx;
 
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellGeas;
 import io.netty.buffer.ByteBuf;
@@ -15,7 +16,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.Random;
 
 public class MessageGeasRingFX implements IMessage {
-  private static Random random = new Random();
   private double posX = 0, posY = 0, posZ = 0;
 
   public MessageGeasRingFX() {
@@ -53,18 +53,18 @@ public class MessageGeasRingFX implements IMessage {
     public IMessage onMessage(final MessageGeasRingFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       for (int k = 0; k < 20; k++) {
-        if (random.nextBoolean()) {
-          ParticleUtil.spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (random.nextFloat() - 0.5f), 0.125f * (random.nextFloat() - 0.5f), 0.125f * (random.nextFloat() - 0.5f), SpellGeas.instance.getRed1() * 255.0f, SpellGeas.instance.getGreen1() * 255.0f, SpellGeas.instance.getBlue1() * 255.0f, 0.75f, 7.5f, 24);
+        if (Util.rand.nextBoolean()) {
+          ParticleUtil.spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellGeas.instance.getRed1() * 255.0f, SpellGeas.instance.getGreen1() * 255.0f, SpellGeas.instance.getBlue1() * 255.0f, 0.75f, 7.5f, 24);
         } else {
-          ParticleUtil.spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (random.nextFloat() - 0.5f), 0.125f * (random.nextFloat() - 0.5f), 0.125f * (random.nextFloat() - 0.5f), SpellGeas.instance.getRed2() * 255.0f, SpellGeas.instance.getGreen2() * 255.0f, SpellGeas.instance.getBlue2() * 255.0f, 0.75f, 7.5f, 24);
+          ParticleUtil.spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellGeas.instance.getRed2() * 255.0f, SpellGeas.instance.getGreen2() * 255.0f, SpellGeas.instance.getBlue2() * 255.0f, 0.75f, 7.5f, 24);
         }
       }
-      for (float k = 0; k < 360; k += random.nextInt(9)) {
-        if (random.nextBoolean()) {
-          if (random.nextBoolean()) {
-            ParticleUtil.spawnParticleGlow(world, (float) message.posX + 1.15f * (float) Math.sin(Math.toRadians(k)), (float) message.posY, (float) message.posZ + 1.15f * (float) Math.cos(Math.toRadians(k)), 0, 0, 0, SpellGeas.instance.getRed1(), SpellGeas.instance.getGreen1(), SpellGeas.instance.getBlue1(), 0.75f, 1.25f + 5.0f * random.nextFloat(), 40);
+      for (float k = 0; k < 360; k += Util.rand.nextInt(9)) {
+        if (Util.rand.nextBoolean()) {
+          if (Util.rand.nextBoolean()) {
+            ParticleUtil.spawnParticleGlow(world, (float) message.posX + 1.15f * (float) Math.sin(Math.toRadians(k)), (float) message.posY, (float) message.posZ + 1.15f * (float) Math.cos(Math.toRadians(k)), 0, 0, 0, SpellGeas.instance.getRed1(), SpellGeas.instance.getGreen1(), SpellGeas.instance.getBlue1(), 0.75f, 1.25f + 5.0f * Util.rand.nextFloat(), 40);
           } else {
-            ParticleUtil.spawnParticleGlow(world, (float) message.posX + 1.15f * (float) Math.sin(Math.toRadians(k)), (float) message.posY, (float) message.posZ + 1.15f * (float) Math.cos(Math.toRadians(k)), 0, 0, 0, SpellGeas.instance.getRed2(), SpellGeas.instance.getGreen2(), SpellGeas.instance.getBlue2(), 0.75f, 1.25f + 5.0f * random.nextFloat(), 40);
+            ParticleUtil.spawnParticleGlow(world, (float) message.posX + 1.15f * (float) Math.sin(Math.toRadians(k)), (float) message.posY, (float) message.posZ + 1.15f * (float) Math.cos(Math.toRadians(k)), 0, 0, 0, SpellGeas.instance.getRed2(), SpellGeas.instance.getGreen2(), SpellGeas.instance.getBlue2(), 0.75f, 1.25f + 5.0f * Util.rand.nextFloat(), 40);
           }
         }
       }

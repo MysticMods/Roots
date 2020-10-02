@@ -494,6 +494,7 @@ roots.message.sense_time.moon.5=crescent, waxing
 roots.message.sense_time.moon.6=first quarter, waxing
 roots.message.sense_time.moon.7=gibbous, waxing
 
+roots.message.respawn.cant_respawn_dimension=Sorry, but your bed is in another dimension!
 
 # Modifiers
 roots.modifiers.modifiers.extended_geas=Extended Geas

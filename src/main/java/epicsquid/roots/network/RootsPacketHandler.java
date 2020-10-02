@@ -70,5 +70,6 @@ public class RootsPacketHandler {
     PacketHandler.registerMessage(MessagePatchouliJEI.MessageHolder.class, MessagePatchouliJEI.class, Side.CLIENT);
     PacketHandler.registerMessage(MessageThawFX.MessageHolder.class, MessageThawFX.class, Side.CLIENT);
     PacketHandler.registerMessage(MessageDisarmFX.Handler.class, MessageDisarmFX.class, Side.CLIENT);
+    PacketHandler.registerMessage(MessageSenseHomeFX.MessageHolder.class, MessageSenseHomeFX.class, Side.CLIENT);
   }
 }

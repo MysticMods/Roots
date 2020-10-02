@@ -1,4 +1,4 @@
-/*package epicsquid.roots.spell;
+package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
@@ -6,7 +6,6 @@ import epicsquid.mysticalworld.init.ModBlocks;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
-import epicsquid.roots.network.fx.MessageFallBladesFX;
 import epicsquid.roots.properties.Property;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -120,4 +119,4 @@ public class SpellAutumnsFall extends SpellBase {
     this.radius_y = properties.get(PROP_RADIUS_Y);
     this.max_affected = properties.get(PROP_MAX_AFFECTED);
   }
-}*/
+}

@@ -29,6 +29,13 @@ public class SpellNaturesScythe extends SpellBase {
   public static Property<Integer> PROP_RADIUS = new Property<>("radius", 12).setDescription("horizontal radius of the area in which the spell takes effect");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("radius on the Y axis of the area in which the spell takes effect");
   public static Property<Integer> PROP_INTERVAL = new Property<>("interval", 2).setDescription("interval in ticks between each harvested block");
+  public static Property<Integer> PROP_MAX_AFFECTED = new Property<>("max_affected", 1).setDescription("maximum number of blocks affected each tick per enabled type");
+  public static Property<String> PROP_TREE_DICT = new Property<>("tree_dictionary", "treeLeaves").setDescription("the ore dictionary entry that should be used to identify leaves");
+  public static Property<String> PROP_WEB_DICT = new Property<>("web_dictionary", "webs").setDescription("the ore dictionary entry that should be used to identify cobwebs in addition to the standard vanilla block");
+  public static Property<String> PROP_GRASS_DICT = new Property<>("grass_dictionary", "grass").setDescription("the ore dictionary entry that should be used to identify grass in addition to the standard vanilla blocks");
+  public static Property<String> PROP_MUSHROOM_DICT = new Property<>("mushroom_dictionary", "mushrooms").setDescription("the ore dictionary entry that should be used to identify mushroom blocks (not huge mushrooms) in addition to those that derive from the default mushroom");
+  public static Property<String> PROP_FLOWER_DICT = new Property<>("flower_dictionary", "flowers").setDescription("the ore dictionary entry that should be used to identify flower blocks in addition to those that derive from the default flowers");
+  public static Property<String> PROP_WATER_DICT = new Property<>("water_dictionary", "watery").setDescription("the ore dictionary entry that should be used to identify water plants and vines in addition to those that by default derive from vanilla vines and lilypads");
 
   public static Modifier WEBS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "dewebbing"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier LEAVES = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "leaf_harvester"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -48,7 +55,7 @@ public class SpellNaturesScythe extends SpellBase {
 
   public SpellNaturesScythe(ResourceLocation name) {
     super(name, TextFormatting.DARK_GREEN, 64 / 255F, 240 / 255F, 24 / 255F, 26 / 255F, 110 / 255F, 13 / 255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST, PROP_RADIUS, PROP_RADIUS_Y, PROP_INTERVAL);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST, PROP_RADIUS, PROP_RADIUS_Y, PROP_INTERVAL, PROP_MAX_AFFECTED);
     acceptsModifiers(WEBS, LEAVES, MAGNETISM, SILK_TOUCH, REGROWTH, GRASS, MUSHROOM, FLOWER, SPEED, VINES);
   }
 
