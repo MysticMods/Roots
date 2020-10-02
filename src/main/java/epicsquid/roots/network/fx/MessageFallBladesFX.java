@@ -1,4 +1,4 @@
-/*package epicsquid.roots.network.fx;
+package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
@@ -14,6 +14,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessageFallBladesFX implements IMessage {
+    private static final float[] colors1 = new float[]{227 / 255F, 179 / 255F, 66 / 255F, 1f};
+    private static final float[] colors2 = new float[]{209 / 255F, 113 / 255F, 10 / 255F, 1f};
 
     private double x;
     private double y;
@@ -59,7 +61,7 @@ public class MessageFallBladesFX implements IMessage {
                         ParticleUtil.spawnParticlePetal(
                                 world, (float) message.x + Util.rand.nextFloat(), (float) message.y + Util.rand.nextFloat(), (float) message.z + Util.rand.nextFloat(),
                                 0, -0.05F, 0,
-                                SpellAutumnsFall.instance.getRed1(), SpellAutumnsFall.instance.getGreen1(), SpellAutumnsFall.instance.getBlue1(), 1.0f,
+                                colors1,
                                 1F, 160);
                     }
 
@@ -67,7 +69,7 @@ public class MessageFallBladesFX implements IMessage {
                         ParticleUtil.spawnParticlePetal(
                                 world, (float) message.x + Util.rand.nextFloat(), (float) message.y + Util.rand.nextFloat(), (float) message.z + Util.rand.nextFloat(),
                                 0, -0.05F, 0,
-                                SpellAutumnsFall.instance.getRed2(), SpellAutumnsFall.instance.getGreen2(), SpellAutumnsFall.instance.getBlue2(), 1.0f,
+                                colors2,
                                 0.5F, 160);
                     }
                 } else {
@@ -92,4 +94,4 @@ public class MessageFallBladesFX implements IMessage {
             return null;
         }
     }
-}*/
+}
