@@ -9,8 +9,9 @@ import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageSenseFX;
-import epicsquid.roots.network.fx.MessageSenseFX.SensePosition;
+import epicsquid.roots.network.fx.MessageSenseHomeFX;
 import epicsquid.roots.properties.Property;
+import epicsquid.roots.util.OreDictCache;
 import it.unimi.dsi.fastutil.ints.IntArraySet;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
@@ -34,7 +35,10 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SpellExtension extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(350);
@@ -114,8 +118,6 @@ public class SpellExtension extends SpellBase {
     );
   }
 
-  private Set<Block> nonOres = new HashSet<>();
-
   private IntArraySet ores = new IntArraySet();
 
   public enum SenseType {
@@ -123,7 +125,7 @@ public class SpellExtension extends SpellBase {
     SPAWNER(new float[]{46 / 255.0f, 133 / 255.0f, 209 / 255.0f, 0.5f}),
     LIQUID(new float[]{207 / 255.0f, 66 / 255.0f, 19 / 255.0f, 0.5f}),
     ORE(new float[]{138 / 255.0f, 114 / 255.0f, 90 / 255.0f, 0.5f}),
-    PLANTS(new float[]{3 / 255.0f, 252/255.0f, 11/255.0f, 0.5f});
+    PLANTS(new float[]{3 / 255.0f, 252 / 255.0f, 11 / 255.0f, 0.5f});
 
     private float[] color;
 
@@ -145,24 +147,6 @@ public class SpellExtension extends SpellBase {
 
       return null;
     }
-  }
-
-  private boolean isOre(ItemStack stack) {
-    if (stack.isEmpty()) {
-      return false;
-    }
-    int[] ids = OreDictionary.getOreIDs(stack);
-    for (int id : ids) {
-      if (ores.contains(id)) {
-        return true;
-      }
-      if (OreDictionary.getOreName(id).startsWith("ore")) {
-        ores.add(id);
-        return true;
-      }
-    }
-
-    return false;
   }
 
   @Nullable
@@ -209,7 +193,19 @@ public class SpellExtension extends SpellBase {
       caster.getEntityData().setIntArray(getCachedName(), info.snapshot());
     }
     if (info.has(SENSE_HOME)) {
-
+      if (!caster.world.isRemote) {
+        if (caster.world.provider.canRespawnHere()) {
+          BlockPos home = caster.getBedLocation();
+          //noinspection ConstantConditions
+          if (home == null) {
+            home = caster.world.provider.getSpawnPoint();
+          }
+          MessageSenseHomeFX packet = new MessageSenseHomeFX(home);
+          PacketHandler.INSTANCE.sendTo(packet, (EntityPlayerMP) caster);
+        } else {
+          caster.sendMessage(new TextComponentTranslation("roots.message.respawn.cant_respawn_dimension").setStyle(new Style().setColor(TextFormatting.RED)));
+        }
+      }
     }
     if (info.has(SENSE_TIME)) {
       if (!caster.world.isRemote) {
@@ -217,7 +213,7 @@ public class SpellExtension extends SpellBase {
         int day = (int) (total / 24000L) + 1;
         int hours = (int) ((total % 24000) / 1000);
         int minutes = (int) (total % 24000 % 1000 / 1000.0 * 60.0);
-        int moon = (int)(caster.world.getWorldTime() / 24000L % 8L + 8L) % 8;
+        int moon = (int) (caster.world.getWorldTime() / 24000L % 8L + 8L) % 8;
         ITextComponent moonComp = new TextComponentTranslation("roots.message.sense_time.moon." + moon).setStyle(new Style().setColor(TextFormatting.GOLD));
         caster.sendMessage(new TextComponentTranslation("roots.message.sense_time", new TextComponentTranslation("roots.message.sense_time.format", String.format("%02d", hours), String.format("%02d", minutes)).setStyle(new Style().setColor(TextFormatting.GOLD)), day, hours < 18 && hours > 6 ? new TextComponentTranslation("roots.message.sense_time.moon.will", moonComp) : new TextComponentTranslation("roots.message.sense_time.moon.is", moonComp)).setStyle(new Style().setColor(TextFormatting.YELLOW)));
       }
@@ -270,7 +266,7 @@ public class SpellExtension extends SpellBase {
               // TODO: SPESHUL
               List<BlockPos> liquidPositions = positions.computeIfAbsent(SenseType.LIQUID, (q) -> new ArrayList<>());
               boolean skip = false;
-              int t = MathHelper.clamp(count*count, 1, 10);
+              int t = MathHelper.clamp(count * count, 1, 10);
               for (BlockPos q : liquidPositions) {
                 double dist = q.distanceSq(pos);
                 if (dist < t) {
@@ -292,18 +288,14 @@ public class SpellExtension extends SpellBase {
             }
           }
           if ((o && ores.contains(vec)) || (specific && ores_specific.contains(vec))) {
-            if (!nonOres.contains(block)) {
-              ItemStack stack = ItemUtil.stackFromState(state);
-              if (isOre(stack)) {
-                if (specific) {
-                  if (oresMatch(stack, held)) {
-                    positions.computeIfAbsent(SenseType.ORE, (q) -> new ArrayList<>()).add(pos);
-                  }
-                } else {
+            ItemStack stack = ItemUtil.stackFromState(state);
+            if (OreDictCache.matchesPrefix("ore", stack)) {
+              if (specific) {
+                if (oresMatch(stack, held)) {
                   positions.computeIfAbsent(SenseType.ORE, (q) -> new ArrayList<>()).add(pos);
                 }
               } else {
-                nonOres.add(state.getBlock());
+                positions.computeIfAbsent(SenseType.ORE, (q) -> new ArrayList<>()).add(pos);
               }
             }
           }
@@ -369,7 +361,7 @@ public class SpellExtension extends SpellBase {
     this.liquid = new AxisAlignedBB(-radius_liquid_x, -radius_liquid_y, -radius_liquid_z, (radius_liquid_x + 1), (radius_liquid_y + 1), (radius_liquid_z + 1));
     this.container = new AxisAlignedBB(-radius_ore_x, -radius_ore_y, -radius_ore_z, (radius_ore_x + 1), (radius_ore_y + 1), (radius_ore_z + 1));
     this.spawner = new AxisAlignedBB(-radius_spawner_x, -radius_spawner_y, -radius_spawner_z, (radius_spawner_x + 1), (radius_spawner_y + 1), (radius_spawner_z + 1));
-    this.plants = new AxisAlignedBB(-radius_plants_x, -radius_plants_y, -radius_plants_z, radius_plants_x+1, radius_plants_y+1, radius_plants_z+1);
+    this.plants = new AxisAlignedBB(-radius_plants_x, -radius_plants_y, -radius_plants_z, radius_plants_x + 1, radius_plants_y + 1, radius_plants_z + 1);
 
     typeToBox.put(SearchType.ORE, ore);
     typeToBox.put(SearchType.ORE_SPECIFIC, ore_specific);
