@@ -98,10 +98,18 @@ public class ModDamage {
   public static DamageSource wildfireDamage(World world) {
     if (world.isRemote) return null;
 
-    WorldServer server = (WorldServer) world;
-    FakePlayer player = FakePlayerFactory.get(server, FAKE_PLAYER);
+    FakePlayer player = getFakePlayer(world);
 
     return new EntityDamageSource(FEY_FIRE, player).setDamageBypassesArmor().setMagicDamage().setFireDamage();
+  }
+
+  public static FakePlayer getFakePlayer (World world) {
+    if (world.isRemote) {
+      throw new IllegalStateException("can't get a fake player on a client side");
+    }
+
+    WorldServer server = (WorldServer) world;
+    return FakePlayerFactory.get(server, FAKE_PLAYER);
   }
 
   public static void init() {
