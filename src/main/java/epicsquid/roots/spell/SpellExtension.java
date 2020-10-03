@@ -102,7 +102,7 @@ public class SpellExtension extends SpellBase {
   private int radius_animals_x, radius_animals_y, radius_animals_z, animal_duration, enemy_duration, night_vision, radius_ore_x, radius_ore_y, radius_ore_z, radius_ore_specific_x, radius_ore_specific_y, radius_ore_specific_z, radius_liquid_x, radius_liquid_y, radius_liquid_z, radius_container_x, radius_container_y, radius_container_z, radius_spawner_x, radius_spawner_y, radius_spawner_z, radius_hostiles_x, radius_hostiles_y, radius_hostiles_z, radius_plants_x, radius_plants_y, radius_plants_z;
 
   private SpellExtension(ResourceLocation name) {
-    super(name, TextFormatting.WHITE, 122F / 255F, 0F, 0F, 58F / 255F, 58F / 255F, 58F / 255F);
+    super(name, TextFormatting.WHITE, 205/255.0f, 230/255.0f, 69/255.0f, 184/255.0f, 114/255.0f, 177/255.0f);
     properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_ANIMAL_DURATION, PROP_ENEMY_DURATION, PROP_NIGHT_VISION, PROP_RADIUS_ORE_X, PROP_RADIUS_ORE_Y, PROP_RADIUS_ORE_Z, PROP_RADIUS_ORE_SPECIFIC_X, PROP_RADIUS_ORE_SPECIFIC_Y, PROP_RADIUS_ORE_SPECIFIC_Z, PROP_RADIUS_LIQUID_X, PROP_RADIUS_LIQUID_Y, PROP_RADIUS_LIQUID_Z, PROP_RADIUS_CONTAINER_X, PROP_RADIUS_CONTAINER_Y, PROP_RADIUS_CONTAINER_Z, PROP_RADIUS_SPAWNER_X, PROP_RADIUS_SPAWNER_Y, PROP_RADIUS_SPAWNER_Z, PROP_RADIUS_ANIMALS_X, PROP_RADIUS_ANIMALS_Y, PROP_RADIUS_ANIMALS_Z, PROP_RADIUS_HOSTILES_X, PROP_RADIUS_HOSTILES_Y, PROP_RADIUS_HOSTILES_Z, PROP_RADIUS_PLANTS_X, PROP_RADIUS_PLANTS_Z, PROP_RADIUS_PLANTS_Y);
     acceptsModifiers(SENSE_HOME, SENSE_ANIMALS, NONDETECTION, SENSE_TIME, SENSE_DANGER, SENSE_PLANTS, SENSE_CONTAINERS, SENSE_SPAWNERS, SENSE_ORES, SENSE_LIQUIDS);
   }
