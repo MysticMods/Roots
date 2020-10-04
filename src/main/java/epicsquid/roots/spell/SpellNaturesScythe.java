@@ -1,6 +1,7 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.modifiers.*;
@@ -15,6 +16,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
@@ -135,12 +137,12 @@ public class SpellNaturesScythe extends SpellBase {
     IBlockState state = world.getBlockState(pos);
     Block block = state.getBlock();
     int fortune = info.has(FORTUNE) ? 2 : 0;
+    boolean skip = false;
+    List<ItemStack> drops = new ArrayList<>();
     if (info.has(SILK_TOUCH)) {
-      boolean skip = false;
-      List<ItemStack> drops = new ArrayList<>();
       if (block instanceof IShearable && ((IShearable) block).isShearable(SHEARS, world, pos)) {
         IShearable shearable = (IShearable) block;
-        drops = shearable.onSheared(SHEARS, player.world, pos, fortune);
+        drops.addAll(shearable.onSheared(SHEARS, player.world, pos, fortune));
         world.destroyBlock(pos, false);
       } else if (block.canSilkHarvest(world, pos, state, player)) {
         ItemStack silked;
@@ -155,17 +157,24 @@ public class SpellNaturesScythe extends SpellBase {
         ForgeEventFactory.fireBlockHarvesting(drops, world, pos, state, fortune, 1.0f, true, player);
       } else {
         skip = true;
-        block.dropBlockAsItem(world, pos, state, fortune);
-        world.destroyBlock(pos, false);
-      }
-      if (!skip) {
-        for (ItemStack item : drops) {
-          Block.spawnAsEntity(world, pos, item);
-        }
       }
     } else {
-      block.dropBlockAsItem(world, pos, state, fortune);
+      skip = true;
+    }
+    if (skip) {
+      NonNullList<ItemStack> dropped = NonNullList.create();
+      block.getDrops(dropped, world, pos, state, fortune);
+      drops.addAll(dropped);
+      ForgeEventFactory.fireBlockHarvesting(dropped, world, pos, state, fortune, 1.0f, true, player);
       world.destroyBlock(pos, false);
+    }
+    boolean magnet = info.has(MAGNETISM);
+    for (ItemStack item : drops) {
+      if (magnet) {
+        ItemUtil.spawnItem(world, player.getPosition(), item);
+      } else {
+        Block.spawnAsEntity(world, pos, item);
+      }
     }
   }
 
