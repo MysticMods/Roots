@@ -48,7 +48,7 @@ public class RootsPacketHandler {
 
     //Server 2 Client
     PacketHandler.registerMessage(MessageDisarmFX.Handler.class, MessageDisarmFX.class, Side.CLIENT);
-    /*    PacketHandler.registerMessage(MessageFallBladesFX.Handler.class, MessageFallBladesFX.class, Side.CLIENT);*/
+    PacketHandler.registerMessage(MessageFallBladesFX.Handler.class, MessageFallBladesFX.class, Side.CLIENT);
 
     PacketHandler.registerMessage(MessageClearToasts.MessageHolder.class, MessageClearToasts.class, Side.CLIENT);
     PacketHandler.registerMessage(MessageUpdateHerb.MessageHolder.class, MessageUpdateHerb.class, Side.CLIENT);
