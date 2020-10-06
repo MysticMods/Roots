@@ -64,7 +64,8 @@ public class SpellRadiance extends SpellBase {
   public static SpellRadiance instance = new SpellRadiance(spellName);
 
   private int wither_duration, glow_duration, poison_duration, poison_amplifier, fire_duration, slowness_duration, slowness_amplifier;
-  private float distance, damage, undeadDamage, width, added_width;
+  public float distance;
+  private float damage, undeadDamage, width, added_width;
 
   public SpellRadiance(ResourceLocation name) {
     super(name, TextFormatting.WHITE, 255f / 255f, 255f / 255f, 64f / 255f, 255f / 255f, 255f / 255f, 192f / 255f);

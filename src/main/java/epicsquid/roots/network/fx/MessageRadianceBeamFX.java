@@ -64,7 +64,7 @@ public class MessageRadianceBeamFX implements IMessage {
       World world = Minecraft.getMinecraft().world;
       EntityPlayer player = world.getPlayerEntityByUUID(message.id);
       if (player != null) {
-        float distance = 32;
+        float distance = SpellRadiance.instance.distance;
         RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0), player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)), false, true, true);
         Vec3d direction = player.getLookVec();
         ArrayList<Vec3d> positions = new ArrayList<Vec3d>();
