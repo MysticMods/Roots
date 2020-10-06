@@ -71,5 +71,6 @@ public class RootsPacketHandler {
     PacketHandler.registerMessage(MessageThawFX.MessageHolder.class, MessageThawFX.class, Side.CLIENT);
     PacketHandler.registerMessage(MessageDisarmFX.Handler.class, MessageDisarmFX.class, Side.CLIENT);
     PacketHandler.registerMessage(MessageSenseHomeFX.MessageHolder.class, MessageSenseHomeFX.class, Side.CLIENT);
+    PacketHandler.registerMessage(MessageTargetedGeasFX.MessageHolder.class, MessageTargetedGeasFX.class, Side.CLIENT);
   }
 }
