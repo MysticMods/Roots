@@ -26,6 +26,7 @@ public class SpellChrysopoeia extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("infernal_bulb", 0.5));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("dewgonia", 0.5));
+  public static Property.PropertyCost PROP_COST_3 = new Property.PropertyCost(2, new SpellCost("spirit_herb", 0.1));
   public static Property<Integer> PROP_INTERVAL = new Property<>("interval", 20).setDescription("interval in ticks between each transmutation");
 
   public static Modifier OVER1 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "overproduction_i"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
@@ -45,7 +46,7 @@ public class SpellChrysopoeia extends SpellBase {
 
   public SpellChrysopoeia(ResourceLocation name) {
     super(name, TextFormatting.GOLD, 176F / 255F, 169F / 255F, 158F / 255F, 224F / 255F, 174F / 255F, 99F / 255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_INTERVAL);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_COST_3, PROP_INTERVAL);
     acceptsModifiers(OVER1, BY1, BY4, OVER2, REPETITION, OVER3, OVER4, BY3, BY2);
   }
 
