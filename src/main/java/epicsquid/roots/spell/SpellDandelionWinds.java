@@ -1,6 +1,7 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.AABBUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
@@ -9,9 +10,9 @@ import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageDandelionCastFX;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.EntityUtil;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -41,7 +42,6 @@ public class SpellDandelionWinds extends SpellBase {
   public static Property<Integer> PROP_POISON_DURATION = new Property<>("posion_duration", 5 * 20).setDescription("the duration of the poison effect to apply");
   public static Property<Integer> PROP_POISON_AMPLIFIER = new Property<>("poison_amplifier", 0).setDescription("the amplifier to apply to the poison effect");
   public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 4).setDescription("the duration (in seconds) that entities should be set on fire for");
-  public static Property<Double> PROP_BOAT_SPEED = new Property<>("boat_speed", 1.5).setDescription("the multiplier that should be applied to boat speed");
 
   public static Modifier STRONGER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "strong_gusts"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_winds"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -52,27 +52,28 @@ public class SpellDandelionWinds extends SpellBase {
   public static Modifier POISON = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "poisonous_breeze"), ModifierCores.BAFFLE_CAP, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 1)));
   public static Modifier FIRE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "flaming_wind"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 1)));
   public static Modifier SUCTION = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "suction"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
-  public static Modifier BOAT_SPEED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "billowing_sails"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
+  public static Modifier EXTINGUISH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "extinguisher"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
   // Conflicts
   static {
     // Grounded Wind <-> Slow Falling
     GROUNDED.addConflict(SLOW_FALL);
     // Circle of Winds <-> Billowing Sails
-    CIRCLE.addConflict(BOAT_SPEED);
+    CIRCLE.addConflict(EXTINGUISH);
+    EXTINGUISH.addConflict(FIRE);
   }
 
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_dandelion_winds");
   public static SpellDandelionWinds instance = new SpellDandelionWinds(spellName);
 
   private int slow_duration, poison_amplifier, poison_duration, fire_duration;
-  private double r1, r2, boat_speed;
+  private double r1, r2;
   private float distance, additional_distance, additional_fall;
 
   public SpellDandelionWinds(ResourceLocation name) {
     super(name, TextFormatting.YELLOW, 255f / 255f, 255f / 255f, 32f / 255f, 255f / 255f, 176f / 255f, 32f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DISTANCE, PROP_RANGE_1, PROP_RANGE_2, PROP_ADDITIONAL_DISTANCE, PROP_ADDITIONAL_DISTANCE, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_BOAT_SPEED);
-    acceptsModifiers(STRONGER, PEACEFUL, GROUNDED, SLOW_FALL, CIRCLE, ITEMS, POISON, FIRE, SUCTION, BOAT_SPEED);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DISTANCE, PROP_RANGE_1, PROP_RANGE_2, PROP_ADDITIONAL_DISTANCE, PROP_ADDITIONAL_DISTANCE, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION);
+    acceptsModifiers(STRONGER, PEACEFUL, GROUNDED, SLOW_FALL, CIRCLE, ITEMS, POISON, FIRE, SUCTION, EXTINGUISH);
   }
 
   @Override
@@ -89,19 +90,8 @@ public class SpellDandelionWinds extends SpellBase {
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     // TODO: Circle, Suction
-    if (info.has(BOAT_SPEED)) {
-      Entity entity = player.getLowestRidingEntity();
-      if (entity instanceof EntityBoat) {
-        if (!player.world.isRemote) {
-          // TODO
-          EntityBoat boat = (EntityBoat) entity;
-          boat.momentum *= ampDouble(boat_speed);
-/*          entity.motionX *= ampDouble(boat_speed);
-          entity.motionZ *= ampDouble(boat_speed);*/
-          PacketHandler.sendToAllTracking(new MessageDandelionCastFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ), player);
-        }
-        return true;
-      }
+    if (info.has(EXTINGUISH)) {
+
     }
 
     Vec3d lookVec = player.getLookVec();
@@ -110,6 +100,7 @@ public class SpellDandelionWinds extends SpellBase {
     Vec3d playVec = player.getPositionVector();
 
     int count = 0;
+    int extinguish = 0;
 
     if (!info.has(CIRCLE)) {
       AxisAlignedBB bounding = new AxisAlignedBB(player.posX + lookVec.x * r1 - r1, player.posY + lookVec.y * r1 - r1, player.posZ + lookVec.z * r1 - r2, player.posX + lookVec.x * r1 + r1, player.posY + lookVec.y * r1 + r1, player.posZ + lookVec.z * r1 + r1);
@@ -146,6 +137,17 @@ public class SpellDandelionWinds extends SpellBase {
               trySetFire(player.world, pos);
             }
           });
+        }
+      }
+      if (info.has(EXTINGUISH)) {
+        for (BlockPos pos : AABBUtil.unique(bounding)) {
+          IBlockState state = player.world.getBlockState(pos);
+          if (state.getBlock() == Blocks.FIRE) {
+            extinguish++;
+            if (!player.world.isRemote) {
+              player.world.setBlockToAir(pos);
+            }
+          }
         }
       }
     } else {
@@ -188,9 +190,20 @@ public class SpellDandelionWinds extends SpellBase {
           }
         }
       }
+      if (info.has(EXTINGUISH)) {
+        for (BlockPos pos : AABBUtil.unique(bounding)) {
+          IBlockState state = player.world.getBlockState(pos);
+          if (state.getBlock() == Blocks.FIRE) {
+            extinguish++;
+            if (!player.world.isRemote) {
+              player.world.setBlockToAir(pos);
+            }
+          }
+        }
+      }
     }
 
-    if (count > 0) {
+    if (count > 0 || extinguish > 0) {
       if (!player.world.isRemote) {
         PacketHandler.sendToAllTracking(new MessageDandelionCastFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ), player);
       }
@@ -250,6 +263,5 @@ public class SpellDandelionWinds extends SpellBase {
     this.fire_duration = properties.get(PROP_FIRE_DURATION);
     this.r1 = properties.get(PROP_RANGE_1);
     this.r2 = properties.get(PROP_RANGE_2);
-    this.boat_speed = properties.get(PROP_BOAT_SPEED);
   }
 }
