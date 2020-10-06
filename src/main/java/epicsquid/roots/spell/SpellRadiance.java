@@ -11,6 +11,7 @@ import epicsquid.roots.properties.Property;
 import epicsquid.roots.recipe.ingredient.GoldOrSilverIngotIngredient;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
@@ -63,8 +64,7 @@ public class SpellRadiance extends SpellBase {
   public static SpellRadiance instance = new SpellRadiance(spellName);
 
   private int wither_duration, glow_duration, poison_duration, poison_amplifier, fire_duration, slowness_duration, slowness_amplifier;
-  private float damage, undeadDamage, width, added_width;
-  public float distance;
+  private float distance, damage, undeadDamage, width, added_width;
 
   public SpellRadiance(ResourceLocation name) {
     super(name, TextFormatting.WHITE, 255f / 255f, 255f / 255f, 64f / 255f, 255f / 255f, 255f / 255f, 192f / 255f);
@@ -83,10 +83,6 @@ public class SpellRadiance extends SpellBase {
     );
   }
 
-  private double coeff(int a) {
-    return a == 0 ? -1 : 1;
-  }
-
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     if (!player.world.isRemote && player.ticksExisted % 2 == 0) {
@@ -95,49 +91,68 @@ public class SpellRadiance extends SpellBase {
         w += added_width;
       }
       float distance = this.distance;
-      float eye = player.getEyeHeight();
-      Vec3d pos = player.getPositionVector();
-      Vec3d start = pos.add(0, eye, 0);
-      Vec3d lookVec = player.getLookVec();
-      RayTraceResult result = player.world.rayTraceBlocks(start, start.add(lookVec).scale(distance), false, true, true);
-      Vec3d direction = lookVec;
-      List<Vec3d> positions = new ArrayList<>();
-      double yaw = Math.toRadians(-90 - player.rotationYaw);
-      positions.add(new Vec3d(player.posX + 0.5 * Math.sin(yaw), player.posY + eye, player.posZ + 0.5 * Math.cos(yaw)));
-      PacketHandler.sendToAllTracking(new MessageRadianceBeamFX(player.getUniqueID(), player.posX, player.posY + eye, player.posZ), player);
+      RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0), player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)), false, true, true);
+      Vec3d direction = player.getLookVec();
+      ArrayList<Vec3d> positions = new ArrayList<Vec3d>();
+      float offX = 0.5f * (float) Math.sin(Math.toRadians(-90.0f - player.rotationYaw));
+      float offZ = 0.5f * (float) Math.cos(Math.toRadians(-90.0f - player.rotationYaw));
+      positions.add(new Vec3d(player.posX + offX, player.posY + player.getEyeHeight(), player.posZ + offZ));
+      PacketHandler.sendToAllTracking(new MessageRadianceBeamFX(player.getUniqueID(), player.posX, player.posY + 1.0f, player.posZ), player);
       if (result != null) {
         positions.add(result.hitVec);
         if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
-          Vec3d hitVec = result.hitVec;
           Vec3i hitSide = result.sideHit.getDirectionVec();
-          direction = new Vec3d(direction.x * coeff(hitSide.getX()), direction.y * coeff(hitSide.getY()), direction.z * coeff(hitSide.getZ()));
-          distance -= result.hitVec.subtract(pos).length();
+          float xCoeff = 1f;
+          if (hitSide.getX() != 0) {
+            xCoeff = -1f;
+          }
+          float yCoeff = 1f;
+          if (hitSide.getY() != 0) {
+            yCoeff = -1f;
+          }
+          float zCoeff = 1f;
+          if (hitSide.getZ() != 0) {
+            zCoeff = -1f;
+          }
+          direction = new Vec3d(direction.x * xCoeff, direction.y * yCoeff, direction.z * zCoeff);
+          distance -= result.hitVec.subtract(player.getPositionVector()).length();
           if (distance > 0) {
-            result = player.world.rayTraceBlocks(hitVec, hitVec.add(direction.scale(distance)));
-            if (result != null) {
-              positions.add(hitVec = result.hitVec);
-              if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
-                hitSide = result.sideHit.getDirectionVec();
-                direction = new Vec3d(direction.x * coeff(hitSide.getX()), direction.y * coeff(hitSide.getY()), direction.z * coeff(hitSide.getZ()));
-                distance -= hitVec.subtract(pos).length();
+            RayTraceResult result2 = player.world.rayTraceBlocks(result.hitVec, result.hitVec.add(direction.scale(distance)));
+            if (result2 != null) {
+              positions.add(result2.hitVec);
+              if (result2.typeOfHit == RayTraceResult.Type.BLOCK) {
+                hitSide = result2.sideHit.getDirectionVec();
+                xCoeff = 1f;
+                if (hitSide.getX() != 0) {
+                  xCoeff = -1f;
+                }
+                yCoeff = 1f;
+                if (hitSide.getY() != 0) {
+                  yCoeff = -1f;
+                }
+                zCoeff = 1f;
+                if (hitSide.getZ() != 0) {
+                  zCoeff = -1f;
+                }
+                direction = new Vec3d(direction.x * xCoeff, direction.y * yCoeff, direction.z * zCoeff);
+                distance -= result2.hitVec.subtract(player.getPositionVector()).length();
                 if (distance > 0) {
-                  result = player.world.rayTraceBlocks(hitVec, hitVec.add(direction.scale(distance)));
-                  if (result != null) {
-                    positions.add(result.hitVec);
+                  RayTraceResult result3 = player.world.rayTraceBlocks(result2.hitVec, result2.hitVec.add(direction.scale(distance)));
+                  if (result3 != null) {
+                    positions.add(result3.hitVec);
                   } else {
-                    positions.add(hitVec.add(direction.scale(distance)));
+                    positions.add(result2.hitVec.add(direction.scale(distance)));
                   }
                 }
               }
             } else {
-              positions.add(hitVec.add(direction.scale(distance)));
+              positions.add(result.hitVec.add(direction.scale(distance)));
             }
           }
         }
       } else {
-        positions.add(start.add(lookVec.scale(distance)));
+        positions.add(player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)));
       }
-
       int count = 0;
       if (positions.size() > 1) {
         for (int i = 0; i < positions.size() - 1; i++) {
