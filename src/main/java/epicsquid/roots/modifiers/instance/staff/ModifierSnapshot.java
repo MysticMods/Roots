@@ -2,6 +2,7 @@ package epicsquid.roots.modifiers.instance.staff;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.modifiers.IModifier;
+import io.netty.buffer.ByteBuf;
 import it.unimi.dsi.fastutil.ints.IntArraySet;
 
 public class ModifierSnapshot {
@@ -27,5 +28,12 @@ public class ModifierSnapshot {
 
   public boolean hasRand (IModifier modifier, int rand) {
     return has(modifier) && Util.rand.nextInt(rand) == 0;
+  }
+
+  public void toBytes (ByteBuf buf) {
+    buf.writeShort(modifiers.size());
+    for (int i : modifiers) {
+      buf.writeInt(i);
+    }
   }
 }

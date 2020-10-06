@@ -16,6 +16,7 @@ import epicsquid.roots.network.fx.MessageGeasFX;
 import epicsquid.roots.network.fx.MessageGeasRingFX;
 import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
 import epicsquid.roots.spell.SpellAquaBubble;
+import epicsquid.roots.spell.SpellPetalShell;
 import epicsquid.roots.util.Constants;
 import epicsquid.roots.util.SlaveUtil;
 import net.minecraft.entity.Entity;
@@ -123,16 +124,48 @@ public class EventManager {
     World world = entity.getEntityWorld();
 
     PotionEffect effect = entity.getActivePotionEffect(ModPotions.petal_shell);
-    if (entity instanceof EntityPlayer && !world.isRemote) {
+    if (!world.isRemote) {
       if (effect != null) {
         int newCount = effect.getAmplifier() - 1;
         entity.removePotionEffect(ModPotions.petal_shell);
         if (newCount > 0) {
-          entity.addPotionEffect(new PotionEffect(ModPotions.petal_shell, 60 * 20, newCount, false, false));
+          entity.addPotionEffect(new PotionEffect(ModPotions.petal_shell, SpellPetalShell.instance.duration, newCount, false, false));
+        }
+        ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(entity.getEntityData(), SpellPetalShell.instance);
+        if (trueSource != null) {
+          if (mods.has(SpellPetalShell.RADIANT)) {
+            trueSource.attackEntityFrom(ModDamage.radiantDamageFrom(entity), SpellPetalShell.instance.radiant_damage);
+            // TODO: Particle?
+          } else if (mods.has(SpellPetalShell.SLASHING)) {
+            trueSource.attackEntityFrom(ModDamage.physicalDamageFrom(entity), SpellPetalShell.instance.dagger_damage);
+            if (trueSource instanceof EntityLivingBase) {
+              ((EntityLivingBase) trueSource).addPotionEffect(new PotionEffect(ModPotions.bleeding, SpellPetalShell.instance.bleed_duration, SpellPetalShell.instance.bleed_amplifier));
+            }
+          } else if (mods.has(SpellPetalShell.POISON)) {
+            if (trueSource instanceof EntityLivingBase) {
+              ((EntityLivingBase) trueSource).addPotionEffect(new PotionEffect(MobEffects.POISON, SpellPetalShell.instance.poison_duration, SpellPetalShell.instance.poison_amplifier));
+            }
+          } else if (mods.has(SpellPetalShell.LEVITATE)) {
+            if (trueSource instanceof EntityLivingBase) {
+              ((EntityLivingBase) trueSource).addPotionEffect(new PotionEffect(MobEffects.LEVITATION, SpellPetalShell.instance.levitate_duration, 0));
+            }
+          } else if (mods.has(SpellPetalShell.FIRE)) {
+            trueSource.setFire(SpellPetalShell.instance.fire_duration);
+            trueSource.attackEntityFrom(ModDamage.fireDamageFrom(entity), SpellPetalShell.instance.fire_damage);
+          } else if (mods.has(SpellPetalShell.PARALYSIS)) {
+            if (trueSource instanceof EntityLivingBase) {
+              ((EntityLivingBase) trueSource).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, SpellPetalShell.instance.paralysis_duration, 10));
+            }
+          } else if (mods.has(SpellPetalShell.SLOW)) {
+            if (trueSource instanceof EntityLivingBase) {
+              ((EntityLivingBase) trueSource).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, SpellPetalShell.instance.slow_duration, SpellPetalShell.instance.slow_amplifier));
+            }
+          }
         }
         event.setAmount(0);
         event.setCanceled(true);
-        PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(entity.posX, entity.posY + 1.0f, entity.posZ), entity);
+
+        PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(entity.posX, entity.posY + 1.0f, entity.posZ, mods), entity);
       }
     }
     if (trueSource instanceof EntityLivingBase) {
