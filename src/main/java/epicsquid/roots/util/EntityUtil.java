@@ -100,7 +100,7 @@ public class EntityUtil {
     }
 
     if (entity instanceof EntityLiving) {
-      return ((EntityLiving) entity).getAttackTarget() == player;
+      return ((EntityLiving) entity).getAttackTarget() != player;
     }
 
     return true;

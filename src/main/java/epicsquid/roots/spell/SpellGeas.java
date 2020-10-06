@@ -1,5 +1,6 @@
 package epicsquid.roots.spell;
 
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.RayCastUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModBlocks;
@@ -25,7 +26,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
-import vazkii.botania.common.network.PacketHandler;
 
 import java.util.List;
 
@@ -133,14 +133,13 @@ public class SpellGeas extends SpellBase {
       if (trace != null) {
         if (!player.world.isRemote) {
           MessageTargetedGeasFX packet = new MessageTargetedGeasFX();
-          PacketHandler.sendTo((EntityPlayerMP) player, packet);
+          PacketHandler.INSTANCE.sendTo(packet, (EntityPlayerMP) player);
         }
       }
       if (target instanceof EntityLivingBase) {
         EntityLivingBase entity = (EntityLivingBase) target;
-        return affect(entity, peaceful, player, info, dur) != 0;
+        affected = affect(entity, peaceful, player, info, dur);
       }
-      return false;
     } else {
       if (info.has(DUO)) {
         count = 2;
