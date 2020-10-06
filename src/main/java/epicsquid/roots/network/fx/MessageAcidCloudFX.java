@@ -24,7 +24,7 @@ public class MessageAcidCloudFX extends ModifierPacket implements IMessage {
   private double posX = 0, posY = 0, posZ = 0;
 
   public MessageAcidCloudFX() {
-    super(null);
+    super();
   }
 
   public MessageAcidCloudFX(double x, double y, double z, StaffModifierInstanceList modifiers) {

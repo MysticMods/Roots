@@ -1,11 +1,12 @@
 package epicsquid.roots.potion;
 
 import epicsquid.roots.Roots;
+import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellPetalShell;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
@@ -34,16 +35,16 @@ public class PotionPetalShell extends Potion {
   }
 
   @Override
-  public void performEffect(EntityLivingBase entityLivingBaseIn, int amplifier) {
-    if (entityLivingBaseIn instanceof EntityPlayer && entityLivingBaseIn.world.isRemote) {
+  public void performEffect(EntityLivingBase entity, int amplifier) {
+    if (entity.world.isRemote) {
+      ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(entity.getEntityData(), SpellPetalShell.instance);
       int count = amplifier;
-      EntityPlayer player = (EntityPlayer) entityLivingBaseIn;
       for (float i = 0; i < 360; i += 120) {
-        float ang = (float) (player.ticksExisted % 360);
-        float tx = (float) player.posX + 0.8f * (float) Math.sin(Math.toRadians(2.0f * (i + ang)));
-        float ty = (float) player.posY + 1.0f;
-        float tz = (float) player.posZ + 0.8f * (float) Math.cos(Math.toRadians(2.0f * (i + ang)));
-        ParticleUtil.spawnParticlePetal(player.world, tx, ty, tz, 0, 0, 0, SpellPetalShell.instance.getFirstColours(), 3.5f, 10);
+        float ang = (float) (entity.ticksExisted % 360);
+        float tx = (float) entity.posX + 0.8f * (float) Math.sin(Math.toRadians(2.0f * (i + ang)));
+        float ty = (float) entity.posY + 1.0f;
+        float tz = (float) entity.posZ + 0.8f * (float) Math.cos(Math.toRadians(2.0f * (i + ang)));
+        ParticleUtil.spawnParticlePetal(entity.world, tx, ty, tz, 0, 0, 0, mods.has(SpellPetalShell.COLOUR) ? SpellPetalShell.mossFirst : SpellPetalShell.instance.getFirstColours(), 3.5f, 10);
         count--;
         if (count < 0) {
           break;

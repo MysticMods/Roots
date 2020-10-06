@@ -9,6 +9,8 @@ import epicsquid.roots.modifiers.instance.library.LibraryModifierInstanceList;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.AbstractSpellInfo;
 import io.netty.buffer.ByteBuf;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntArraySet;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagIntArray;
 import net.minecraftforge.common.util.Constants;
@@ -87,18 +89,13 @@ public class StaffModifierInstanceList extends BaseModifierInstanceList<StaffMod
     return modifiers;
   }
 
-  public static Set<IModifierCore> fromBytes (ByteBuf buf) {
-    Set<IModifierCore> modifiers = new HashSet<>();
+  public static ModifierSnapshot fromBytes (ByteBuf buf) {
+    IntArraySet modifiers = new IntArraySet();
     int size = buf.readInt();
     for (int i = 0; i < size; i++) {
-      int key = buf.readShort();
-      IModifierCore core = ModifierCores.getByOrdinal(key);
-      if (core == null) {
-        throw new NullPointerException("Invalid modifier when StaffModifierInstanceList, ModifierCore ordinal of " + key);
-      }
-      modifiers.add(core);
+      modifiers.add(buf.readShort());
     }
-    return modifiers;
+    return new ModifierSnapshot(modifiers);
   }
 
 

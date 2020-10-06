@@ -1,6 +1,7 @@
 package epicsquid.roots.init;
 
 import com.mojang.authlib.GameProfile;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
@@ -33,7 +34,7 @@ public class ModDamage {
 
   public static DamageSource ROSE_DAMAGE = (new DamageSource("rose_thorns")).setDamageBypassesArmor();
 
-  public static DamageSource physicalDamageFrom (@Nullable EntityPlayer player) {
+  public static DamageSource physicalDamageFrom (@Nullable Entity player) {
     DamageSource source;
     if (player == null) {
       source = PHYSICAL_DAMAGE;
@@ -43,7 +44,7 @@ public class ModDamage {
     return source;
   }
 
-  public static DamageSource magicDamageFrom (@Nullable EntityPlayer player) {
+  public static DamageSource magicDamageFrom (@Nullable Entity player) {
     DamageSource source;
     if (player == null) {
       source = DamageSource.MAGIC;
@@ -53,7 +54,7 @@ public class ModDamage {
     return source;
   }
 
-  public static DamageSource roseDamageFrom (@Nullable EntityPlayer player) {
+  public static DamageSource roseDamageFrom (@Nullable Entity player) {
     DamageSource source;
     if (player == null) {
       return ROSE_DAMAGE;
@@ -63,7 +64,7 @@ public class ModDamage {
     return source;
   }
 
-  public static DamageSource radiantDamageFrom(@Nullable EntityPlayer player) {
+  public static DamageSource radiantDamageFrom(@Nullable Entity player) {
     DamageSource source;
     if (player == null) {
       source = RADIANT_DAMAGE;
@@ -76,7 +77,7 @@ public class ModDamage {
     return source;
   }
 
-  public static DamageSource fireDamageFrom(@Nullable EntityPlayer player) {
+  public static DamageSource fireDamageFrom(@Nullable Entity player) {
     DamageSource source;
     if (player == null) {
       source = DamageSource.IN_FIRE;
@@ -86,7 +87,7 @@ public class ModDamage {
     return source;
   }
 
-  public static DamageSource waterDamageFrom(@Nullable EntityPlayer player) {
+  public static DamageSource waterDamageFrom(@Nullable Entity player) {
     if (player == null) {
       return WATER_DAMAGE;
     }

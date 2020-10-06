@@ -32,6 +32,19 @@ public class SpellPetalShell extends SpellBase {
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("radius on the Y axis of the area the spell has effect on");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 5).setDescription("radius on the Z axis of the area the spell has effect on");
   public static Property<Integer> PROP_EXTRA = new Property<>("extra_shells", 2).setDescription("the number of additional extra shells that should be granted");
+  public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 5).setDescription("the duration of time at which a person should be set on fire");
+  public static Property<Float> PROP_FIRE_DAMAGE = new Property<>("fire_damage", 2.5f).setDescription("the amount of fire damage that should be done to a creature");
+  public static Property<Integer> PROP_POISON_DURATION = new Property<>("poison_duration", 20 * 4).setDescription("the duration of the poison effect made by the reactant");
+  public static Property<Integer> PROP_POISON_AMPLIFIER = new Property<>("poison_amplifier", 0).setDescription("the amplifier of the poison effect made by the reactant");
+  public static Property<Integer> PROP_LEVITATE_DURATION = new Property<>("levitate_duration", 20 * 6).setDescription("the duration of the levitation effect applied to creatures");
+  public static Property<Integer> PROP_PARALYSIS_DURATION = new Property<>("paralysis_duraiton", 20 * 3).setDescription("how long creatures should be paralysed for");
+  public static Property<Integer> PROP_SLOW_DURATION = new Property<>("slow_duration", 8 * 20).setDescription("the duration of time that the slow effect should be applied for to creatures");
+  public static Property<Integer> PROP_SLOW_AMPLIFIER = new Property<>("slow_amplifier", 0).setDescription("the amplifier applied to the slow effect");
+  public static Property<Float> PROP_DAGGER_DAMAGE = new Property<>("dagger_damage", 2.5f).setDescription("the amount of slashing damage that should be done to creatures");
+  public static Property<Integer> PROP_BLEED_DURATION = new Property<>("bleed_duration", 4 * 20).setDescription("the duration of the bleed effect created by the slashing damage");
+  public static Property<Integer> PROP_BLEED_AMPLIFIER = new Property<>("bleed_amplifier", 0).setDescription("the amplifier applied to the bleed effect created by the slashing damage");
+  public static Property<Float> PROP_RADIANT_DAMAGE = new Property<>("radiant_damage", 2.5f).setDescription("the amount of radiant damage applied to the attacking creature");
+
 
   public static Modifier RADIANT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "react_radiance"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_dance"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -44,6 +57,9 @@ public class SpellPetalShell extends SpellBase {
   public static Modifier PARALYSIS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "react_paralysis"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier SLOW = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "react_slow"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
+  public static final float[] mossFirst = new float[]{138 / 255.0f, 154/255.0f, 91/255.0f, 0.5f};
+  public static final float[] mossSecond = new float[]{79/255.0f, 93/255.0f, 35/255.0f, 0.5f};
+
   static {
     RADIANT.addConflicts(SLASHING, POISON, LEVITATE, PARALYSIS, SLOW);
     SLASHING.addConflicts(POISON, LEVITATE, PARALYSIS, SLOW);
@@ -55,11 +71,13 @@ public class SpellPetalShell extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_petal_shell");
   public static SpellPetalShell instance = new SpellPetalShell(spellName);
 
-  private int maxShells, extraShells, duration, radius_x, radius_y, radius_z;
+  public int duration, fire_duration, poison_duration, poison_amplifier, levitate_duration, paralysis_duration, slow_duration, slow_amplifier, bleed_duration, bleed_amplifier;
+  public float fire_damage, dagger_damage, radiant_damage;
+  private int maxShells, extraShells, radius_x, radius_y, radius_z;
 
   public SpellPetalShell(ResourceLocation name) {
     super(name, TextFormatting.LIGHT_PURPLE, 255f / 255f, 192f / 255f, 240f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_MAXIMUM, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_EXTRA);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_MAXIMUM, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_EXTRA, PROP_FIRE_DURATION, PROP_FIRE_DAMAGE, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_LEVITATE_DURATION, PROP_PARALYSIS_DURATION, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_DAGGER_DAMAGE, PROP_BLEED_AMPLIFIER, PROP_BLEED_DURATION, PROP_RADIANT_DAMAGE);
     acceptsModifiers(RADIANT, PEACEFUL, SLASHING, CHARGES, COLOUR, POISON, LEVITATE, FIRE, PARALYSIS, SLOW);
   }
 
@@ -96,7 +114,8 @@ public class SpellPetalShell extends SpellBase {
           } else {
             entity.addPotionEffect(new PotionEffect(ModPotions.petal_shell, ampInt(duration), ampInt(maxShells), false, false));
           }
-          PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(entity.posX, entity.posY + 1.0f, entity.posZ), entity);
+          entity.getEntityData().setIntArray(getCachedName(), info.snapshot());
+          PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(entity.posX, entity.posY + 1.0f, entity.posZ, info), entity);
         }
       }
       PotionEffect effect = player.getActivePotionEffect(ModPotions.petal_shell);
@@ -105,7 +124,8 @@ public class SpellPetalShell extends SpellBase {
       } else {
         player.addPotionEffect(new PotionEffect(ModPotions.petal_shell, ampInt(duration), ampInt(maxShells), false, false));
       }
-      PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ), player);
+      player.getEntityData().setIntArray(getCachedName(), info.snapshot());
+      PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ, info), player);
     }
     return true;
   }
@@ -121,5 +141,17 @@ public class SpellPetalShell extends SpellBase {
     this.radius_z = properties.get(PROP_RADIUS_Z);
     this.bb = new AxisAlignedBB(-radius_x, -radius_y, -radius_z, 1 + radius_x, 1 + radius_y, 1 + radius_z);
     this.extraShells = properties.get(PROP_EXTRA);
+    this.fire_duration = properties.get(PROP_FIRE_DURATION);
+    this.poison_duration = properties.get(PROP_POISON_DURATION);
+    this.poison_amplifier = properties.get(PROP_POISON_AMPLIFIER);
+    this.levitate_duration = properties.get(PROP_LEVITATE_DURATION);
+    this.paralysis_duration = properties.get(PROP_PARALYSIS_DURATION);
+    this.slow_duration = properties.get(PROP_SLOW_DURATION);
+    this.slow_amplifier = properties.get(PROP_SLOW_AMPLIFIER);
+    this.bleed_duration = properties.get(PROP_BLEED_DURATION);
+    this.bleed_amplifier = properties.get(PROP_BLEED_AMPLIFIER);
+    this.fire_damage = properties.get(PROP_FIRE_DAMAGE);
+    this.dagger_damage = properties.get(PROP_DAGGER_DAMAGE);
+    this.radiant_damage = properties.get(PROP_RADIANT_DAMAGE);
   }
 }
