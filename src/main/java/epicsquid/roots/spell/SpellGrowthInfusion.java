@@ -15,8 +15,12 @@ import epicsquid.roots.network.fx.MessageLifeInfusionFX;
 import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.recipe.FlowerRecipe;
+import epicsquid.roots.recipe.OreChances;
+import epicsquid.roots.util.OreDictCache;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.BlockMushroom;
+import net.minecraft.block.BlockSapling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -51,13 +55,17 @@ public class SpellGrowthInfusion extends SpellBase {
   public static Property<Float> PROP_EMBIGGEN_CHANCE = new Property<>("embiggen_chance", 0.05f).setDescription("chance per tick to turn a mushroom into a big mushroom");
   public static Property<Integer> PROP_ANIMAL_GROWTH = new Property<>("animal_growth_base", 20).setDescription("default number of ticks to age an entity by (1 second per channel)");
   public static Property<Integer> PROP_ANIMAL_GROWTH_VARY = new Property<>("animal_growth_vary", 4 * 20).setDescription("additional ticks to age an entity by (varying from 0 to this value)");
+  public static Property<Integer> PROP_VILLAGER_GROWTH = new Property<>("villager_growth_base", 20).setDescription("default number of ticks to age an entity by (1 second per channel)");
+  public static Property<Integer> PROP_VILLAGER_GROWTH_VARY = new Property<>("villager_growth_vary", 4 * 20).setDescription("additional ticks to age an entity by (varying from 0 to this value)");
+  public static Property<String> PROP_STONE_DICT = new Property<>("stone_dictionary", "stone").setDescription("the ore dictionary entry that should be used to determine if a block can be targetted for ore conversion");
+  public static Property<Float> PROP_STONE_CHANCE = new Property<>("stone_chance", 0.01f).setDescription("the chance per tick of eligible stone being converted to ore");
 
   public static Modifier RADIUS1 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "rampant_growth_i"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier BREED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "rampant_breeding"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier FLOWERS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "flower_spreading"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
   public static Modifier VILLAGERS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "false_night"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 1)));
   public static Modifier RADIUS2 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "rampant_growth_ii"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1)));
-  public static Modifier MUSHROOM = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "embiggening"), ModifierCores.BAFFLE_CAP, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 1)));
+  public static Modifier EMBIGGEN = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "embiggening"), ModifierCores.BAFFLE_CAP, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 1)));
   public static Modifier RADIUS3 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "arms_of_air"), ModifierCores.CLOUD_BERRY, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 1)));
   public static Modifier ANIMAL_GROWTH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "incubation"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 1)));
   public static Modifier ORE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "ore_infusion"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
@@ -67,20 +75,21 @@ public class SpellGrowthInfusion extends SpellBase {
     // Conflicts
     FLOWERS.addConflicts(RADIUS1, RADIUS2, RADIUS3); // Targets specific flowers
     ORE.addConflicts(RADIUS1, RADIUS2, RADIUS3); // Can't AOE
-    MUSHROOM.addConflicts(RADIUS1, RADIUS2, RADIUS3); // Again can't aoe
+    EMBIGGEN.addConflicts(RADIUS1, RADIUS2, RADIUS3); // Again can't aoe
   }
 
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_growth_infusion");
   public static SpellGrowthInfusion instance = new SpellGrowthInfusion(spellName);
 
   private AxisAlignedBB breedingBox;
-  private int radius_x, radius_y, radius_z, ticks, additional_count, count, radius_boost, radius_breed_x, radius_breed_y, radius_breed_z, animal_growth, animal_growth_vary;
-  private float embiggen_chance;
+  private int radius_x, radius_y, radius_z, ticks, additional_count, count, radius_boost, radius_breed_x, radius_breed_y, radius_breed_z, animal_growth, animal_growth_vary, villager_growth, villager_growth_vary;
+  private float embiggen_chance, stone_chance;
+  private String stone_dict;
 
   public SpellGrowthInfusion(ResourceLocation name) {
     super(name, TextFormatting.YELLOW, 48f / 255f, 255f / 255f, 48f / 255f, 192f / 255f, 255f / 255f, 192f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_TICKS, PROP_COUNT, PROP_ADDITIONAL_COUNT, PROP_RADIUS_BOOST, PROP_RADIUS_BREED_X, PROP_RADIUS_BREED_Y, PROP_RADIUS_BREED_Z, PROP_EMBIGGEN_CHANCE, PROP_ANIMAL_GROWTH, PROP_ANIMAL_GROWTH_VARY);
-    acceptsModifiers(RADIUS1, BREED, FLOWERS, VILLAGERS, RADIUS2, MUSHROOM, RADIUS3, ANIMAL_GROWTH, ORE, HYDRATE);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_TICKS, PROP_COUNT, PROP_ADDITIONAL_COUNT, PROP_RADIUS_BOOST, PROP_RADIUS_BREED_X, PROP_RADIUS_BREED_Y, PROP_RADIUS_BREED_Z, PROP_EMBIGGEN_CHANCE, PROP_ANIMAL_GROWTH, PROP_ANIMAL_GROWTH_VARY, PROP_STONE_CHANCE, PROP_STONE_DICT, PROP_VILLAGER_GROWTH, PROP_VILLAGER_GROWTH_VARY);
+    acceptsModifiers(RADIUS1, BREED, FLOWERS, VILLAGERS, RADIUS2, EMBIGGEN, RADIUS3, ANIMAL_GROWTH, ORE, HYDRATE);
   }
 
   @Override
@@ -134,6 +143,10 @@ public class SpellGrowthInfusion extends SpellBase {
           for (int j = 0; j < ticks; j++) {
             state.getBlock().randomTick(player.world, pos, state, Util.rand);
           }
+          IBlockState below = player.world.getBlockState(pos.down());
+          if (below.getPropertyKeys().contains(BlockFarmland.MOISTURE)) {
+            player.world.setBlockState(pos.down(), below.withProperty(BlockFarmland.MOISTURE, 7), 2 | 16);
+          }
           // TODO: CENTRALISE EFFECT COLOURS
           if (player.world.rand.nextInt(3) == 0) {
             PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);
@@ -159,6 +172,14 @@ public class SpellGrowthInfusion extends SpellBase {
         }
         if (info.has(VILLAGERS) && resultEntity instanceof EntityVillager) {
           // TODO public net.minecraft.entity.passive.EntityVillager field_70961_j # timeUntilReset
+          EntityVillager villager = (EntityVillager) resultEntity;
+          if (!villager.isChild()) {
+            didSomething = true;
+            if (!player.world.isRemote) {
+              villager.timeUntilReset = Math.min(0, villager.timeUntilReset - villager_growth + Util.rand.nextInt(villager_growth_vary));
+              // TODO: Particles
+            }
+          }
         }
       }
 
@@ -181,8 +202,8 @@ public class SpellGrowthInfusion extends SpellBase {
             }
           }
 
-          // Test for mushroom
-          if (info.has(MUSHROOM)) {
+          // Test for mushroom or tree
+          if (info.has(EMBIGGEN)) {
             if (block instanceof BlockMushroom) {
               didSomething = true;
               if (!player.world.isRemote && Util.rand.nextFloat() < embiggen_chance) {
@@ -192,16 +213,34 @@ public class SpellGrowthInfusion extends SpellBase {
                   // TODO: Particles/sound?
                 }
               }
+            } else if (block instanceof BlockSapling) {
+              didSomething = true;
+              if (!player.world.isRemote && Util.rand.nextFloat() < embiggen_chance) {
+                BlockSapling sapling = (BlockSapling) block;
+                sapling.generateTree(player.world, pos, state, Util.rand);
+              }
             }
           }
 
           // TODO: Stone -> ore conversion
+          if (info.has(ORE)) {
+            if (OreDictCache.matches(this.stone_dict, state) && Util.rand.nextFloat() < this.stone_chance) {
+              didSomething = true;
+              if (!player.world.isRemote) {
+                player.world.setBlockState(pos, OreChances.getRandomState());
+              }
+            }
+          }
 
           // Test for growth last
           if (!didSomething && Growth.canGrow(player.world, pos, state)) {
             if (!player.world.isRemote) {
               for (int i = 0; i < ampInt(ticks); i++) {
                 state.getBlock().randomTick(player.world, pos, state, new Random());
+              }
+              IBlockState below = player.world.getBlockState(pos.down());
+              if (below.getPropertyKeys().contains(BlockFarmland.MOISTURE)) {
+                player.world.setBlockState(pos.down(), below.withProperty(BlockFarmland.MOISTURE, 7), 2 | 16);
               }
               PacketHandler.sendToAllTracking(new MessageLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);
               didSomething = true;
@@ -231,5 +270,9 @@ public class SpellGrowthInfusion extends SpellBase {
     this.embiggen_chance = properties.get(PROP_EMBIGGEN_CHANCE);
     this.animal_growth = properties.get(PROP_ANIMAL_GROWTH);
     this.animal_growth_vary = properties.get(PROP_ANIMAL_GROWTH_VARY);
+    this.villager_growth = properties.get(PROP_VILLAGER_GROWTH);
+    this.villager_growth_vary = properties.get(PROP_VILLAGER_GROWTH_VARY);
+    this.stone_chance = properties.get(PROP_STONE_CHANCE);
+    this.stone_dict = properties.get(PROP_STONE_DICT);
   }
 }
