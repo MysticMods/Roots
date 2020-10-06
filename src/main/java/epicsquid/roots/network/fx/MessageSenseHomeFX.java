@@ -52,7 +52,7 @@ public class MessageSenseHomeFX implements IMessage {
       Vec3d playerPos = player.getPositionVector().add(0, 1, 0);
       Vec3d line = new Vec3d(message.home.getX(), player.posY, message.home.getZ()).add(0.5, 0.5, 0.5);
       for (Vec3d vec : VecUtil.pointsBetween(playerPos, line, 15)) {
-        ParticleUtil.spawnParticlePetal(world, (float) vec.x, (float) vec.y, (float) vec.z, 0, 0, 0, color, 15, 5 * 20);
+        ParticleUtil.spawnParticlePetal(world, (float) vec.x, (float) vec.y, (float) vec.z, 0, 0, 0, color, 15, 19 * 20);
       }
       return null;
     }

@@ -80,7 +80,11 @@ public class ItemStaff extends ItemBase {
                   }
                 }
               }
-              return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
+              if (player.world.isRemote) {
+                return new ActionResult<>(EnumActionResult.PASS, player.getHeldItem(hand));
+              } else {
+                return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
+              }
             }
           } else if (spell != null && spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
             player.setActiveHand(hand);
