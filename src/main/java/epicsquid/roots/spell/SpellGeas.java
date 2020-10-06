@@ -126,20 +126,12 @@ public class SpellGeas extends SpellBase {
     }
     dur = ampInt(dur);
     boolean peaceful = info.has(PEACEFUL);
-    if (info.has(TARGET)) {
-      RayCastUtil.RayTraceAndEntityResult result = RayCastUtil.rayTraceMouseOver(player, distance);
-      Entity target = result.getPointedEntity();
-      RayTraceResult trace = result.getResult();
-      if (trace != null) {
-        if (!player.world.isRemote) {
-          MessageTargetedGeasFX packet = new MessageTargetedGeasFX();
-          PacketHandler.INSTANCE.sendTo(packet, (EntityPlayerMP) player);
-        }
-      }
+    if (info.has(TARGET)) {/*
+
       if (target instanceof EntityLivingBase) {
         EntityLivingBase entity = (EntityLivingBase) target;
         affected = affect(entity, peaceful, player, info, dur);
-      }
+      }*/
     } else {
       if (info.has(DUO)) {
         count = 2;
