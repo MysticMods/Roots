@@ -19,13 +19,13 @@ import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketUpdateHealth;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.FoodStats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreIngredient;
@@ -62,8 +62,6 @@ public class SpellDesaturate extends SpellBase {
   public static Property<Integer> PROP_LEVITATION_DURATION = new Property<>("levitation_duration", 20).setDescription("the duration of the levitation effect multiplied by the overflow");
   public static Property<Integer> PROP_LEVITATE_TARGETS = new Property<>("levitation_targets", 3).setDescription("the number of hostile nearby creatures that should be levitated");
 
-  public static Property<Integer> PROP_BREATH = new Property<>("breath", 10).setDescription("the amount of air that should be restored, multiplied by overflow");
-
   public static Modifier RATIO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "amplified_saturation"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_heal"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier GROWTH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_growth"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
@@ -72,14 +70,14 @@ public class SpellDesaturate extends SpellBase {
   public static Modifier LEVITATE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_levitation"), ModifierCores.CLOUD_BERRY, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 1)));
   public static Modifier THOUGHTFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "thoughtful"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 1)));
   public static Modifier RESISTANCE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_stone_skin"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
-  public static Modifier SECOND_WIND = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_breath"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
+  public static Modifier PURIFY = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_purification"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
   static {
-    PEACEFUL.addConflicts(GROWTH, SHIELD, DAMAGE, LEVITATE, RESISTANCE, SECOND_WIND);
-    GROWTH.addConflicts(SHIELD, DAMAGE, LEVITATE, RESISTANCE, SECOND_WIND);
-    SHIELD.addConflicts(LEVITATE, RESISTANCE, SECOND_WIND);
-    LEVITATE.addConflicts(RESISTANCE, SECOND_WIND);
-    RESISTANCE.addConflict(SECOND_WIND);
+    PEACEFUL.addConflicts(GROWTH, SHIELD, DAMAGE, LEVITATE, RESISTANCE, PURIFY);
+    GROWTH.addConflicts(SHIELD, DAMAGE, LEVITATE, RESISTANCE, PURIFY);
+    SHIELD.addConflicts(LEVITATE, RESISTANCE, PURIFY);
+    LEVITATE.addConflicts(RESISTANCE, PURIFY);
+    RESISTANCE.addConflict(PURIFY);
   }
 
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_desaturate");
@@ -87,12 +85,12 @@ public class SpellDesaturate extends SpellBase {
 
   private AxisAlignedBB box;
   private double multiplier, amplified_multiplier;
-  private int shield_base, shield_amplifier, resistance_base, resistance_amplifier, growth_ticks, growth_count, heal_amount, damage_amount, levitation_duration, levitation_targets, breath, radius_x, radius_y, radius_z;
+  private int shield_base, shield_amplifier, resistance_base, resistance_amplifier, growth_ticks, growth_count, heal_amount, damage_amount, levitation_duration, levitation_targets, radius_x, radius_y, radius_z;
 
   public SpellDesaturate(ResourceLocation name) {
     super(name, TextFormatting.DARK_PURPLE, 184F / 255F, 232F / 255F, 42F / 255F, 109F / 255F, 32F / 255F, 168F / 255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_MULTIPLIER, PROP_AMPLIFIED_MULTIPLIER, PROP_SHIELD_BASE, PROP_SHIELD_AMPLIFIER, PROP_LEVITATE_TARGETS, PROP_LEVITATION_DURATION, PROP_RESISTANCE_AMPLIFIER, PROP_RESISTANCE_BASE, PROP_GROWTH_COUNT, PROP_GROWTH_TICKS, PROP_HEAL_AMOUNT, PROP_DAMAGE_AMOUNT, PROP_BREATH, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
-    acceptsModifiers(RATIO, PEACEFUL, GROWTH, SHIELD, DAMAGE, LEVITATE, THOUGHTFUL, RESISTANCE, SECOND_WIND);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_MULTIPLIER, PROP_AMPLIFIED_MULTIPLIER, PROP_SHIELD_BASE, PROP_SHIELD_AMPLIFIER, PROP_LEVITATE_TARGETS, PROP_LEVITATION_DURATION, PROP_RESISTANCE_AMPLIFIER, PROP_RESISTANCE_BASE, PROP_GROWTH_COUNT, PROP_GROWTH_TICKS, PROP_HEAL_AMOUNT, PROP_DAMAGE_AMOUNT, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
+    acceptsModifiers(RATIO, PEACEFUL, GROWTH, SHIELD, DAMAGE, LEVITATE, THOUGHTFUL, RESISTANCE, PURIFY);
   }
 
   @Override
@@ -173,7 +171,6 @@ public class SpellDesaturate extends SpellBase {
             PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), caster);
             count++;
           }
-          // Do nearby growth
         } else if (info.has(SHIELD)) {
           // TODO: Visual
           caster.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, (int) (shield_base * overheal), shield_amplifier, false, false));
@@ -202,6 +199,17 @@ public class SpellDesaturate extends SpellBase {
           // TODO: Visual
           caster.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, (int) (resistance_base * overheal), resistance_amplifier, false, false));
           // Grant resistance
+        } else if (info.has(PURIFY)) {
+          Potion pot = null;
+          for (PotionEffect ef : caster.getActivePotionEffects()) {
+            if (ef.getPotion().isBadEffect()) {
+              pot = ef.getPotion();
+              break;
+            }
+          }
+          if (pot != null) {
+            caster.removePotionEffect(pot);
+          }
         }
       }
 
@@ -230,7 +238,6 @@ public class SpellDesaturate extends SpellBase {
     this.damage_amount = properties.get(PROP_DAMAGE_AMOUNT);
     this.levitation_duration = properties.get(PROP_LEVITATION_DURATION);
     this.levitation_targets = properties.get(PROP_LEVITATE_TARGETS);
-    this.breath = properties.get(PROP_BREATH);
     int[] radius = properties.getRadius();
     this.radius_x = radius[0];
     this.radius_y = radius[1];
