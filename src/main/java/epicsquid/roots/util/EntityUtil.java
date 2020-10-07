@@ -5,6 +5,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.AbstractHorse;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.util.ResourceLocation;
@@ -89,6 +90,18 @@ public class EntityUtil {
     if (entity instanceof EntityLiving) {
       EntityLiving living = (EntityLiving) entity;
       return living.getAttackTarget() == player;
+    }
+
+    return false;
+  }
+
+  public static boolean isAquatic (Entity entity) {
+    if (entity instanceof EntityWaterMob) {
+      return true;
+    }
+
+    if (EntitySpawnPlacementRegistry.getPlacementForEntity(entity.getClass()) == EntityLiving.SpawnPlacementType.IN_WATER) {
+      return true;
     }
 
     return false;

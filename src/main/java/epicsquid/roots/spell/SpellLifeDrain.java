@@ -5,11 +5,11 @@ import epicsquid.mysticallib.util.RayCastUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageLifeDrainAbsorbFX;
-import epicsquid.roots.network.fx.MessageTargetedGeasFX;
 import epicsquid.roots.network.fx.MessageTargetedLifeDrainFX;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.EntityUtil;
@@ -45,6 +45,10 @@ public class SpellLifeDrain extends SpellBase {
   public static Property<Float> PROP_ADDITIONAL_HEAL = new Property<>("additional_heal", 1.5f).setDescription("how much additional healing should be done");
   public static Property<Float> PROP_SPECTRAL_CHANCE = new Property<>("spectral_chance", 0.35f).setDescription("chance per cast of a spectral entity existing");
   public static Property<Double> PROP_DISTANCE = new Property<>("distance", 15d).setDescription("the distance that the targeted beam of life drain should extend for in blocks");
+  public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 4).setDescription("the duration that relevant entities should be set aflame for in seconds");
+  public static Property<Float> PROP_FIRE_DAMAGE = new Property<>("fire_damage", 2.5f).setDescription("the additional fire damage (that does not heal)");
+  public static Property<Integer> PROP_SLOW_DURATION = new Property<>("slow_duration", 5 * 20).setDescription("the duration of the slow effect");
+  public static Property<Integer> PROP_SLOW_AMPLIFIER = new Property<>("slow_amplifier", 0).setDescription("the amplifier to be applied to the slow effect");
 
   public static Modifier RATIO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "amplified_healing"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_drain"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -53,8 +57,8 @@ public class SpellLifeDrain extends SpellBase {
   public static Modifier TARGET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "targeted_drain"), ModifierCores.TERRA_MOSS, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.TERRA_MOSS, 1)));
   public static Modifier DAMAGE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "lightened_load"), ModifierCores.CLOUD_BERRY, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 1)));
   public static Modifier FIRE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "brimstone"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 1)));
-  public static Modifier WEAKNESS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "weakening_drain"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
-  public static Modifier SECOND_WIND = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "underwater_breath"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
+  public static Modifier SLOWING = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "slowing_drain"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
+  public static Modifier CHTHONIC = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "chthonic"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
   static {
     TARGET.addConflicts(SPIRITS, DISTRIBUTE);
@@ -64,14 +68,14 @@ public class SpellLifeDrain extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_life_drain");
   public static SpellLifeDrain instance = new SpellLifeDrain(spellName);
 
-  private float witherDamage, heal, additionalHeal, spectralChance;
-  private int witherDuration, witherChance, witherAmplification;
+  private float witherDamage, heal, additionalHeal, spectralChance, fire_damage;
+  private int witherDuration, witherChance, witherAmplification, fire_duration, slow_duration, slow_amplifier;
   public double distance;
 
   public SpellLifeDrain(ResourceLocation name) {
     super(name, TextFormatting.DARK_GRAY, 144f / 255f, 32f / 255f, 64f / 255f, 255f / 255f, 196f / 255f, 240f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_WITHER_DAMAGE, PROP_HEAL, PROP_WITHER_DURATION, PROP_WITHER_AMPLIFICATION, PROP_WITHER_CHANCE, PROP_ADDITIONAL_HEAL, PROP_SPECTRAL_CHANCE);
-    acceptsModifiers(RATIO, PEACEFUL, DISTRIBUTE, SPIRITS, TARGET, DAMAGE, FIRE, WEAKNESS, SECOND_WIND);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_WITHER_DAMAGE, PROP_HEAL, PROP_WITHER_DURATION, PROP_WITHER_AMPLIFICATION, PROP_WITHER_CHANCE, PROP_ADDITIONAL_HEAL, PROP_SPECTRAL_CHANCE, PROP_DISTANCE);
+    acceptsModifiers(RATIO, PEACEFUL, DISTRIBUTE, SPIRITS, TARGET, DAMAGE, FIRE, SLOWING, CHTHONIC);
   }
 
   @Override
@@ -92,9 +96,19 @@ public class SpellLifeDrain extends SpellBase {
       }
       if (e.hurtTime <= 0 && !e.isDead) {
         if (!player.world.isRemote) {
+          if (info.has(CHTHONIC) && EntityUtil.isAquatic(e) && e.isInWater()) {
+            dam *= 2;
+          }
           e.attackEntityFrom(DamageSource.causeMobDamage(player), dam);
           if (e.rand.nextInt(ampSubInt(witherChance)) == 0) {
             e.addPotionEffect(new PotionEffect(MobEffects.WITHER, ampInt(witherDuration), witherAmplification));
+          }
+          if (info.has(SLOWING)) {
+            e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, ampInt(slow_duration), slow_amplifier));
+          }
+          if (info.has(FIRE)) {
+            e.setFire(fire_duration);
+            e.attackEntityFrom(ModDamage.fireDamageFrom(player), ampFloat(fire_damage));
           }
           e.setRevengeTarget(player);
           e.setLastAttackedEntity(player);
@@ -173,5 +187,9 @@ public class SpellLifeDrain extends SpellBase {
     this.witherChance = properties.get(PROP_WITHER_CHANCE);
     this.additionalHeal = properties.get(PROP_ADDITIONAL_HEAL);
     this.spectralChance = properties.get(PROP_SPECTRAL_CHANCE);
+    this.fire_damage = properties.get(PROP_FIRE_DAMAGE);
+    this.fire_duration = properties.get(PROP_FIRE_DURATION);
+    this.slow_amplifier = properties.get(PROP_SLOW_AMPLIFIER);
+    this.slow_duration = properties.get(PROP_SLOW_DURATION);
   }
 }
