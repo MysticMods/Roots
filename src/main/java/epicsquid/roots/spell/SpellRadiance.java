@@ -45,6 +45,7 @@ public class SpellRadiance extends SpellBase {
   public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 5 * 20).setDescription("the duration of the fire effect to apply to affected entities");
   public static Property<Float> PROP_WIDTH = new Property<>("width", 0.1f).setDescription("default width of the radiance beam");
   public static Property<Float> PROP_ADDED_WIDTH = new Property<>("added_width", 0.3f).setDescription("width added to the default radiance beam");
+  public static Property<Float> PROP_HEALING = new Property<>("healing", 2f).setDescription("the amount of healing each strike of the beam should do");
 
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_radiance"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier MAGNETISM = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "magnetic_radiance"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
@@ -65,11 +66,11 @@ public class SpellRadiance extends SpellBase {
 
   private int wither_duration, glow_duration, poison_duration, poison_amplifier, fire_duration, slowness_duration, slowness_amplifier;
   public float distance;
-  private float damage, undeadDamage, width, added_width;
+  private float damage, undeadDamage, width, added_width, healing;
 
   public SpellRadiance(ResourceLocation name) {
     super(name, TextFormatting.WHITE, 255f / 255f, 255f / 255f, 64f / 255f, 255f / 255f, 255f / 255f, 192f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DISTANCE, PROP_DAMAGE, PROP_UNDEAD_DAMAGE, PROP_WITHER_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_FIRE_DURATION, PROP_GLOW_DURATION, PROP_WIDTH, PROP_ADDED_WIDTH);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DISTANCE, PROP_DAMAGE, PROP_UNDEAD_DAMAGE, PROP_WITHER_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_FIRE_DURATION, PROP_GLOW_DURATION, PROP_WIDTH, PROP_ADDED_WIDTH, PROP_HEALING);
     acceptsModifiers(PEACEFUL, MAGNETISM, WITHER, GLOWING, HEALING, POISON, FIRE, BIGGER, SLOW);
   }
 
@@ -167,38 +168,47 @@ public class SpellRadiance extends SpellBase {
             List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - bx, y - by, z - bz, x + bx, y + by, z + bz));
             for (EntityLivingBase e : entities) {
               if (e != player && !(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
-                if (info.has(PEACEFUL) && EntityUtil.isFriendly(e)) {
-                  continue;
-                }
-                if (e.hurtTime <= 0 && !e.isDead) {
-                  // TODO: NOT THE RIGHT WAY TO DO THIS
-                  if (info.has(MAGNETISM)) {
-                    e.getEntityData().setUniqueId("magnetic", player.getUniqueID());
-                    e.getEntityData().setInteger("magnetic_ticks", e.ticksExisted);
-                  }
-                  e.attackEntityFrom(ModDamage.radiantDamageFrom(player), ampFloat(damage));
-                  if (e.isEntityUndead()) {
-                    e.attackEntityFrom(ModDamage.radiantDamageFrom(player), ampFloat(undeadDamage));
-                  }
-                  e.setRevengeTarget(player);
-                  player.setLastAttackedEntity(e);
-                  if (info.has(WITHER)) {
-                    e.addPotionEffect(new PotionEffect(MobEffects.WITHER, wither_duration));
-                  }
-                  if (info.has(GLOWING)) {
-                    e.addPotionEffect(new PotionEffect(MobEffects.GLOWING, glow_duration));
-                  }
-                  if (info.has(POISON)) {
-                    e.addPotionEffect(new PotionEffect(MobEffects.POISON, poison_duration, poison_amplifier));
-                  }
-                  if (info.has(FIRE)) {
-                    e.setFire(fire_duration);
-                  }
-                  if (info.has(SLOW)) {
-                    e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, slowness_duration, slowness_amplifier));
+                if (info.has(HEALING)) {
+                  if (!EntityUtil.isFriendly(e)) {
+                    continue;
                   }
 
+                  e.heal(ampFloat(healing));
                   count++;
+                } else {
+                  if (info.has(PEACEFUL) && EntityUtil.isFriendly(e)) {
+                    continue;
+                  }
+                  if (e.hurtTime <= 0 && !e.isDead) {
+                    // TODO: NOT THE RIGHT WAY TO DO THIS
+                    if (info.has(MAGNETISM)) {
+                      e.getEntityData().setUniqueId("magnetic", player.getUniqueID());
+                      e.getEntityData().setInteger("magnetic_ticks", e.ticksExisted);
+                    }
+                    e.attackEntityFrom(ModDamage.radiantDamageFrom(player), ampFloat(damage));
+                    if (e.isEntityUndead()) {
+                      e.attackEntityFrom(ModDamage.radiantDamageFrom(player), ampFloat(undeadDamage));
+                    }
+                    e.setRevengeTarget(player);
+                    player.setLastAttackedEntity(e);
+                    if (info.has(WITHER)) {
+                      e.addPotionEffect(new PotionEffect(MobEffects.WITHER, wither_duration));
+                    }
+                    if (info.has(GLOWING)) {
+                      e.addPotionEffect(new PotionEffect(MobEffects.GLOWING, glow_duration));
+                    }
+                    if (info.has(POISON)) {
+                      e.addPotionEffect(new PotionEffect(MobEffects.POISON, poison_duration, poison_amplifier));
+                    }
+                    if (info.has(FIRE)) {
+                      e.setFire(fire_duration);
+                    }
+                    if (info.has(SLOW)) {
+                      e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, slowness_duration, slowness_amplifier));
+                    }
+
+                    count++;
+                  }
                 }
               }
             }
@@ -226,5 +236,6 @@ public class SpellRadiance extends SpellBase {
     this.slowness_amplifier = properties.get(PROP_SLOW_AMPLIFIER);
     this.width = properties.get(PROP_WIDTH);
     this.added_width = properties.get(PROP_ADDED_WIDTH);
+    this.healing = properties.get(PROP_HEALING);
   }
 }
