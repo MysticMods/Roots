@@ -12,7 +12,6 @@ import epicsquid.roots.network.fx.MessageTargetedGeasFX;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.EntityUtil;
 import epicsquid.roots.util.SlaveUtil;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,7 +23,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.List;
@@ -127,18 +125,15 @@ public class SpellGeas extends SpellBase {
     dur = ampInt(dur);
     boolean peaceful = info.has(PEACEFUL);
     if (info.has(TARGET)) {
-      RayCastUtil.RayTraceAndEntityResult result = RayCastUtil.rayTraceMouseOver(player, distance);
-      Entity target = result.getPointedEntity();
-      RayTraceResult trace = result.getResult();
-      if (trace != null) {
+      List<EntityLivingBase> entities = RayCastUtil.rayTraceEntities(EntityLivingBase.class, player, distance);
+      entities.removeIf(o -> o.getActivePotionEffect(ModPotions.geas) != null);
+      if (!entities.isEmpty()) {
+        EntityLivingBase target = entities.get(0);
+        affected = affect(target, peaceful, player, info, dur);
         if (!player.world.isRemote) {
-          MessageTargetedGeasFX packet = new MessageTargetedGeasFX();
+          MessageTargetedGeasFX packet = new MessageTargetedGeasFX(player, target);
           PacketHandler.INSTANCE.sendTo(packet, (EntityPlayerMP) player);
         }
-      }
-      if (target instanceof EntityLivingBase) {
-        EntityLivingBase entity = (EntityLivingBase) target;
-        affected = affect(entity, peaceful, player, info, dur);
       }
     } else {
       if (info.has(DUO)) {
