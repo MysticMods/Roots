@@ -843,7 +843,7 @@ public class ModRecipes {
 
   public static MortarRecipe getMortarRecipe(ItemStack output) {
     for (MortarRecipe mortarRecipe : mortarRecipes) {
-      if (mortarRecipe.getResult().isItemEqual(output)) {
+      if (ItemUtil.equalWithoutSize(mortarRecipe.getResult(), output)) {
         return mortarRecipe;
       }
     }

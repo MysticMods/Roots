@@ -132,14 +132,14 @@ public class SpellNaturesScythe extends SpellBase {
     return true;
   }
 
-  private void breakBlock(World world, BlockPos pos, StaffModifierInstanceList info, EntityPlayer player) {
+  public void breakBlock(World world, BlockPos pos, StaffModifierInstanceList info, EntityPlayer player) {
     // TODO: HANDLE MAGNETISM
     IBlockState state = world.getBlockState(pos);
     Block block = state.getBlock();
-    int fortune = info.has(FORTUNE) ? 2 : 0;
+    int fortune = (info.has(SpellHarvest.FORTUNE) || info.has(FORTUNE)) ? 2 : 0;
     boolean skip = false;
     List<ItemStack> drops = new ArrayList<>();
-    if (info.has(SILK_TOUCH)) {
+    if (info.has(SILK_TOUCH) || info.has(SpellHarvest.SILK_TOUCH)) {
       if (block instanceof IShearable && ((IShearable) block).isShearable(SHEARS, world, pos)) {
         IShearable shearable = (IShearable) block;
         drops.addAll(shearable.onSheared(SHEARS, player.world, pos, fortune));
@@ -173,7 +173,7 @@ public class SpellNaturesScythe extends SpellBase {
       if (magnet) {
         ItemUtil.spawnItem(world, player.getPosition(), item);
       } else {
-        Block.spawnAsEntity(world, pos, item);
+        ItemUtil.spawnItem(world, pos, item);
       }
     }
   }
