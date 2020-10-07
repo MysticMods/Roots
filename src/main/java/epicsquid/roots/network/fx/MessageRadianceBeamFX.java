@@ -67,7 +67,7 @@ public class MessageRadianceBeamFX implements IMessage {
         float distance = SpellRadiance.instance.distance;
         RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(0, player.getEyeHeight(), 0), player.getPositionVector().add(0, player.getEyeHeight(), 0).add(player.getLookVec().scale(distance)), false, true, true);
         Vec3d direction = player.getLookVec();
-        ArrayList<Vec3d> positions = new ArrayList<Vec3d>();
+        ArrayList<Vec3d> positions = new ArrayList<>();
         float offX = 0.5f * (float) Math.sin(Math.toRadians(-90.0f - player.rotationYaw));
         float offZ = 0.5f * (float) Math.cos(Math.toRadians(-90.0f - player.rotationYaw));
         positions.add(new Vec3d(player.posX + offX, player.posY + player.getEyeHeight(), player.posZ + offZ));
