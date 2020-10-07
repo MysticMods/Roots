@@ -1,7 +1,13 @@
 package epicsquid.roots.config;
 
 import epicsquid.roots.Roots;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Config;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Config.LangKey("config.roots.category.spells")
 @Config(modid = Roots.MODID, name = "roots/spells", category = "spells")
@@ -128,8 +134,18 @@ public class SpellConfig {
 
     @Config.RequiresMcRestart
     @Config.Name("Sanctuary Spell Entities Blacklist")
-    @Config.Comment("Entities in this list will be excluded by Sanctuary Spell when repelling entities")
+    @Config.Comment("Entities in this list will be excluded by Sanctuary Spell when repelling entities (formatted as mod:mobname)")
     public String[] sanctuaryEntitiesBlacklist = {};
+
+    @Config.Ignore
+    public Set<ResourceLocation> resources = null;
+
+    public Set<ResourceLocation> getSanctuaryBlacklist () {
+      if (resources == null) {
+        resources = Stream.of(sanctuaryEntitiesBlacklist).map(ResourceLocation::new).collect(Collectors.toSet());
+      }
+      return resources;
+    }
   }
 
 }
