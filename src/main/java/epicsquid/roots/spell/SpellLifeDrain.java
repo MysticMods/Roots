@@ -1,6 +1,7 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.RayCastUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModBlocks;
@@ -8,10 +9,13 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageLifeDrainAbsorbFX;
+import epicsquid.roots.network.fx.MessageTargetedGeasFX;
+import epicsquid.roots.network.fx.MessageTargetedLifeDrainFX;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
@@ -24,6 +28,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.oredict.OreIngredient;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,6 +44,7 @@ public class SpellLifeDrain extends SpellBase {
   public static Property<Integer> PROP_WITHER_CHANCE = new Property<>("wither_chance", 4).setDescription("chance for the enemies to be affected by a wither effect (the higher the number is the lower the chance is: 1/x) [default: 1/4]");
   public static Property<Float> PROP_ADDITIONAL_HEAL = new Property<>("additional_heal", 1.5f).setDescription("how much additional healing should be done");
   public static Property<Float> PROP_SPECTRAL_CHANCE = new Property<>("spectral_chance", 0.35f).setDescription("chance per cast of a spectral entity existing");
+  public static Property<Double> PROP_DISTANCE = new Property<>("distance", 15d).setDescription("the distance that the targeted beam of life drain should extend for in blocks");
 
   public static Modifier RATIO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "amplified_healing"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_drain"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -51,7 +57,8 @@ public class SpellLifeDrain extends SpellBase {
   public static Modifier SECOND_WIND = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "underwater_breath"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
   static {
-    SPIRITS.addConflict(TARGET); // You can't see the creature to target
+    TARGET.addConflicts(SPIRITS, DISTRIBUTE);
+    SPIRITS.addConflicts(DISTRIBUTE);
   }
 
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_life_drain");
@@ -59,6 +66,7 @@ public class SpellLifeDrain extends SpellBase {
 
   private float witherDamage, heal, additionalHeal, spectralChance;
   private int witherDuration, witherChance, witherAmplification;
+  public double distance;
 
   public SpellLifeDrain(ResourceLocation name) {
     super(name, TextFormatting.DARK_GRAY, 144f / 255f, 32f / 255f, 64f / 255f, 255f / 255f, 196f / 255f, 240f / 255f);
@@ -77,11 +85,36 @@ public class SpellLifeDrain extends SpellBase {
     );
   }
 
+  private boolean handleEntity(EntityPlayer player, EntityLivingBase e, StaffModifierInstanceList info, List<EntityLivingBase> peacefuls, float dam, float h) {
+    if (e != player && !(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
+      if (info.has(PEACEFUL) && EntityUtil.isFriendly(e)) {
+        return false;
+      }
+      if (e.hurtTime <= 0 && !e.isDead) {
+        if (!player.world.isRemote) {
+          e.attackEntityFrom(DamageSource.causeMobDamage(player), dam);
+          if (e.rand.nextInt(ampSubInt(witherChance)) == 0) {
+            e.addPotionEffect(new PotionEffect(MobEffects.WITHER, ampInt(witherDuration), witherAmplification));
+          }
+          e.setRevengeTarget(player);
+          e.setLastAttackedEntity(player);
+          if (info.has(DISTRIBUTE)) {
+            peacefuls.forEach(o -> o.heal(h));
+          } else {
+            player.heal(h);
+          }
+        }
+        return true;
+      }
+    }
+    return false;
+  }
+
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+    // TODO: Make this more elegant
     if (!player.world.isRemote) {
       boolean foundTarget = false;
-      PacketHandler.sendToAllTracking(new MessageLifeDrainAbsorbFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ), player);
       float heal = this.heal;
       if (info.has(RATIO)) {
         heal += additionalHeal;
@@ -92,39 +125,37 @@ public class SpellLifeDrain extends SpellBase {
         dam = dam * 2;
       }
       final float h = heal;
-      for (int i = 0; i < 4 && !foundTarget; i++) {
-        double x = player.posX + player.getLookVec().x * 3.0 * (float) i;
-        double y = player.posY + player.getEyeHeight() + player.getLookVec().y * 3.0 * (float) i;
-        double z = player.posZ + player.getLookVec().z * 3.0 * (float) i;
-        List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 2.0, y - 2.0, z - 2.0, x + 2.0, y + 2.0, z + 2.0));
-        List<EntityLivingBase> peacefuls = entities.stream().filter(EntityUtil::isFriendly).collect(Collectors.toList());
-        for (EntityLivingBase e : entities) {
-          if (e != player && !(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
-            if (info.has(PEACEFUL) && EntityUtil.isFriendly(e)) {
-              continue;
-            }
-            foundTarget = true;
-            if (e.hurtTime <= 0 && !e.isDead) {
-              e.attackEntityFrom(DamageSource.causeMobDamage(player), ampFloat(dam));
-              if (e.rand.nextInt(ampSubInt(witherChance)) == 0) {
-                e.addPotionEffect(new PotionEffect(MobEffects.WITHER, ampInt(witherDuration), witherAmplification));
-              }
-              e.setRevengeTarget(player);
-              e.setLastAttackedEntity(player);
-              if (info.has(DISTRIBUTE)) {
-                peacefuls.forEach(o -> o.heal(ampFloat(h)));
-              } else {
-                player.heal(ampFloat(h));
-              }
+      if (info.has(TARGET)) {
+        List<EntityLivingBase> entitiesBeam = RayCastUtil.rayTraceEntities(EntityLivingBase.class, player, distance);
+        EntityLivingBase targeted = null;
+        for (EntityLivingBase target : entitiesBeam) {
+          if (handleEntity(player, target, info, Collections.emptyList(), ampFloat(dam), ampFloat(h))) {
+            targeted = target;
+          }
+        }
+        if (targeted != null) {
+          foundTarget = true;
+          MessageTargetedLifeDrainFX packet = new MessageTargetedLifeDrainFX(player, targeted);
+          PacketHandler.INSTANCE.sendTo(packet, (EntityPlayerMP) player);
+        }
+      } else {
+        PacketHandler.sendToAllTracking(new MessageLifeDrainAbsorbFX(player.getUniqueID(), player.posX, player.posY + player.getEyeHeight(), player.posZ), player);
+        for (int i = 0; i < 4 && !foundTarget; i++) {
+          double x = player.posX + player.getLookVec().x * 3.0 * (float) i;
+          double y = player.posY + player.getEyeHeight() + player.getLookVec().y * 3.0 * (float) i;
+          double z = player.posZ + player.getLookVec().z * 3.0 * (float) i;
+          List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 2.0, y - 2.0, z - 2.0, x + 2.0, y + 2.0, z + 2.0));
+          List<EntityLivingBase> peacefuls = entities.stream().filter(EntityUtil::isFriendly).collect(Collectors.toList());
+          for (EntityLivingBase e : entities) {
+            if (handleEntity(player, e, info, peacefuls, ampFloat(dam), ampFloat(h))) {
+              foundTarget = true;
             }
           }
         }
+      }
+      if (!foundTarget && info.has(SPIRITS)) {
         if (Util.rand.nextFloat() < spectralChance) {
-          if (info.has(DISTRIBUTE)) {
-            peacefuls.forEach(o -> o.heal(ampFloat(h)));
-          } else {
-            player.heal(ampFloat(h));
-          }
+          player.heal(h);
         }
       }
     }
