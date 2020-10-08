@@ -15,10 +15,8 @@ import net.minecraftforge.common.util.Constants;
 import java.util.UUID;
 
 public abstract class EntitySpellModifiable<T extends SpellBase> extends Entity {
-  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityFireJet.class, DataSerializers.VARINT);
+  protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntitySpellModifiable.class, DataSerializers.VARINT);
   protected UUID playerId = null;
-  protected double amplifier;
-  protected double speedy;
   protected T instance;
   protected StaffModifierInstanceList modifiers;
 
@@ -43,10 +41,6 @@ public abstract class EntitySpellModifiable<T extends SpellBase> extends Entity 
   protected void entityInit() {
   }
 
-  public double getAmplifier() {
-    return amplifier;
-  }
-
   @Override
   public void onUpdate() {
     //super.onUpdate();
@@ -55,18 +49,6 @@ public abstract class EntitySpellModifiable<T extends SpellBase> extends Entity 
     if (getDataManager().get(lifetime) <= 0) {
       setDead();
     }
-  }
-
-  public void setAmplifier(double amplifier) {
-    this.amplifier = amplifier;
-  }
-
-  public double getSpeedy() {
-    return speedy;
-  }
-
-  public void setSpeedy(double speedy) {
-    this.speedy = speedy;
   }
 
   public void setPlayer(UUID id) {
