@@ -104,7 +104,7 @@ public class SpellNaturesScythe extends SpellBase {
       x *= 2;
     }
 
-    int interval = speedSubInt(this.interval);
+    int interval = info.speedSubInt(this.interval);
     if (interval != 0 && ticks % interval == 0) {
       return false;
     }

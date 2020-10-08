@@ -96,7 +96,7 @@ public class SpellDandelionWinds extends SpellBase {
 
     Vec3d lookVec = player.getLookVec();
     float d = info.has(STRONGER) ? distance + additional_distance : distance;
-    float motion = ampFloat(d * d + d);
+    float motion = info.ampFloat(d * d + d);
     Vec3d playVec = player.getPositionVector();
 
     int count = 0;

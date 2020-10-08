@@ -40,7 +40,7 @@ public class SpellLifeDrain extends SpellBase {
   public static Property<Float> PROP_WITHER_DAMAGE = new Property<>("wither_damage", 3f).setDescription("wither damage dealt to the enemies (different from the damage dealt by the wither itself)");
   public static Property<Float> PROP_HEAL = new Property<>("heal", 1.5f).setDescription("health points restored to the player");
   public static Property<Integer> PROP_WITHER_DURATION = new Property<>("wither_duration", 70).setDescription("duration in ticks of the wither effect");
-  public static Property<Integer> PROP_WITHER_AMPLIFICATION = new Property<>("wither_amplification", 0).setDescription("the level of the wither effect (0 is the first level)");
+  public static Property<Integer> PROP_WITHER_AMPLIFICATION = new Property<>("wither_info.amplification", 0).setDescription("the level of the wither effect (0 is the first level)");
   public static Property<Integer> PROP_WITHER_CHANCE = new Property<>("wither_chance", 4).setDescription("chance for the enemies to be affected by a wither effect (the higher the number is the lower the chance is: 1/x) [default: 1/4]");
   public static Property<Float> PROP_ADDITIONAL_HEAL = new Property<>("additional_heal", 1.5f).setDescription("how much additional healing should be done");
   public static Property<Float> PROP_SPECTRAL_CHANCE = new Property<>("spectral_chance", 0.35f).setDescription("chance per cast of a spectral entity existing");
@@ -48,9 +48,9 @@ public class SpellLifeDrain extends SpellBase {
   public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 4).setDescription("the duration that relevant entities should be set aflame for in seconds");
   public static Property<Float> PROP_FIRE_DAMAGE = new Property<>("fire_damage", 2.5f).setDescription("the additional fire damage (that does not heal)");
   public static Property<Integer> PROP_SLOW_DURATION = new Property<>("slow_duration", 5 * 20).setDescription("the duration of the slow effect");
-  public static Property<Integer> PROP_SLOW_AMPLIFIER = new Property<>("slow_amplifier", 0).setDescription("the amplifier to be applied to the slow effect");
+  public static Property<Integer> PROP_SLOW_AMPLIFIER = new Property<>("slow_amplifier", 0).setDescription("the info.amplifier to be applied to the slow effect");
 
-  public static Modifier RATIO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "amplified_healing"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
+  public static Modifier RATIO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "info.amplified_healing"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_drain"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier DISTRIBUTE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "distributed_healing"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
   public static Modifier SPIRITS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "spectral_drain"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1)));
@@ -100,15 +100,15 @@ public class SpellLifeDrain extends SpellBase {
             dam *= 2;
           }
           e.attackEntityFrom(DamageSource.causeMobDamage(player), dam);
-          if (e.rand.nextInt(ampSubInt(witherChance)) == 0) {
-            e.addPotionEffect(new PotionEffect(MobEffects.WITHER, ampInt(witherDuration), witherAmplification));
+          if (e.rand.nextInt(info.ampSubInt(witherChance)) == 0) {
+            e.addPotionEffect(new PotionEffect(MobEffects.WITHER, info.ampInt(witherDuration), witherAmplification));
           }
           if (info.has(SLOWING)) {
-            e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, ampInt(slow_duration), slow_amplifier));
+            e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, info.ampInt(slow_duration), slow_amplifier));
           }
           if (info.has(FIRE)) {
             e.setFire(fire_duration);
-            e.attackEntityFrom(ModDamage.fireDamageFrom(player), ampFloat(fire_damage));
+            e.attackEntityFrom(ModDamage.fireDamageFrom(player), info.ampFloat(fire_damage));
           }
           e.setRevengeTarget(player);
           e.setLastAttackedEntity(player);
@@ -143,7 +143,7 @@ public class SpellLifeDrain extends SpellBase {
         List<EntityLivingBase> entitiesBeam = RayCastUtil.rayTraceEntities(EntityLivingBase.class, player, distance);
         EntityLivingBase targeted = null;
         for (EntityLivingBase target : entitiesBeam) {
-          if (handleEntity(player, target, info, Collections.emptyList(), ampFloat(dam), ampFloat(h))) {
+          if (handleEntity(player, target, info, Collections.emptyList(), info.ampFloat(dam), info.ampFloat(h))) {
             targeted = target;
           }
         }
@@ -161,7 +161,7 @@ public class SpellLifeDrain extends SpellBase {
           List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 2.0, y - 2.0, z - 2.0, x + 2.0, y + 2.0, z + 2.0));
           List<EntityLivingBase> peacefuls = entities.stream().filter(EntityUtil::isFriendly).collect(Collectors.toList());
           for (EntityLivingBase e : entities) {
-            if (handleEntity(player, e, info, peacefuls, ampFloat(dam), ampFloat(h))) {
+            if (handleEntity(player, e, info, peacefuls, info.ampFloat(dam), info.ampFloat(h))) {
               foundTarget = true;
             }
           }

@@ -79,19 +79,19 @@ public class SpellAquaBubble extends SpellBase {
   @Override
   public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
     if (!caster.world.isRemote) {
-      caster.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, ampInt(duration), 0, false, false));
+      caster.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, info.ampInt(duration), 0, false, false));
       caster.getEntityData().setIntArray(getCachedName(), info.snapshot());
       if (info.has(RESISTANCE)) {
-        caster.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, ampInt(resistance_duration), resistance_amplifier));
+        caster.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, info.ampInt(resistance_duration), resistance_amplifier));
       }
       if (info.has(DUO)) {
         List<EntityPlayer> players = caster.world.getEntitiesWithinAABB(EntityPlayer.class, radius.offset(caster.getPosition()));
         if (!players.isEmpty()) {
           EntityPlayer other = players.get(Util.rand.nextInt(players.size()));
-          other.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, ampInt(duration), 0, false, false));
+          other.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, info.ampInt(duration), 0, false, false));
           other.getEntityData().setIntArray(getCachedName(), info.snapshot());
           if (info.has(RESISTANCE)) {
-            other.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, ampInt(resistance_duration), resistance_amplifier));
+            other.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, info.ampInt(resistance_duration), resistance_amplifier));
           }
         }
       }

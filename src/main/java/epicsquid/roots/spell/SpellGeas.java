@@ -122,7 +122,7 @@ public class SpellGeas extends SpellBase {
     if (info.has(DURATION)) {
       dur += extension;
     }
-    dur = ampInt(dur);
+    dur = info.ampInt(dur);
     boolean peaceful = info.has(PEACEFUL);
     if (info.has(TARGET)) {
       List<EntityLivingBase> entities = RayCastUtil.rayTraceEntities(EntityLivingBase.class, player, distance);
