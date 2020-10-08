@@ -45,7 +45,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("Duplicates")
-public abstract class SpellBase extends RegistryItem implements SpellMulitipliers {
+public abstract class SpellBase extends RegistryItem {
   protected PropertyTable properties = new PropertyTable();
 
   private boolean finalised = false;
@@ -60,9 +60,6 @@ public abstract class SpellBase extends RegistryItem implements SpellMulitiplier
   protected EnumCastType castType = EnumCastType.INSTANTANEOUS;
   private Object2DoubleOpenHashMap<Herb> costs = new Object2DoubleOpenHashMap<>();
   private List<Modifier> acceptedModifiers = new ArrayList<>();
-
-  protected Buff speedy;
-  protected Buff amplifier;
 
   public SpellRecipe recipe = SpellRecipe.EMPTY;
 
@@ -322,73 +319,27 @@ public abstract class SpellBase extends RegistryItem implements SpellMulitiplier
     }
   }
 
-  public enum Buff {
-    NONE, BONUS, GREATER_BONUS;
-  }
-
-  @Override
-  public double getAmplifyValue() {
-    switch (amplifier) {
-      default:
-      case NONE:
-        return 0;
-      case BONUS:
-        return 0.1;
-      case GREATER_BONUS:
-        return 0.3;
-    }
-  }
-
-  @Override
-  public double getSpeedValue() {
-    switch (speedy) {
-      default:
-      case NONE:
-        return 0;
-      case BONUS:
-        return 0.1;
-      case GREATER_BONUS:
-        return 0.3;
-    }
-  }
-
   public CastResult cast(EntityPlayer caster, StaffSpellInfo info, int ticks) {
-    StaffModifierInstanceList tempModifiers = info.getModifiers();
-    amplifier = Buff.NONE;
-    StaffModifierInstance mod = tempModifiers.get(BaseModifiers.EMPOWER);
-    if (mod != null && mod.isEnabled()) {
-      amplifier = Buff.BONUS;
+    StaffModifierInstanceList mods = info.getModifiers();
+    SpellMulitipliers.Buff speedy = SpellMulitipliers.Buff.NONE;
+    if (mods.has(BaseModifiers.SPEEDY)) {
+      speedy = SpellMulitipliers.Buff.BONUS;
     }
-    mod = tempModifiers.get(BaseModifiers.GREATER_EMPOWER);
-    if (mod != null && mod.isEnabled()) {
-      amplifier = Buff.GREATER_BONUS;
-    }
-    speedy = Buff.NONE;
-    mod = tempModifiers.get(BaseModifiers.SPEEDY);
-    if (mod != null && mod.isEnabled()) {
-      speedy = Buff.BONUS;
-    }
-    mod = tempModifiers.get(BaseModifiers.GREATER_SPEEDY);
-    if (mod != null && mod.isEnabled()) {
-      speedy = Buff.GREATER_BONUS;
+    if (mods.has(BaseModifiers.GREATER_SPEEDY)) {
+      speedy = SpellMulitipliers.Buff.GREATER_BONUS;
     }
 
     CastResult result = CastResult.FAIL;
 
     if (cast(caster, info.getModifiers(), ticks)) {
-      if (speedy.equals(Buff.NONE)) {
+      if (speedy.equals(SpellMulitipliers.Buff.NONE)) {
         result = CastResult.SUCCESS;
-      } else if (speedy.equals(Buff.BONUS)) {
+      } else if (speedy.equals(SpellMulitipliers.Buff.BONUS)) {
         result = CastResult.SUCCESS_SPEEDY;
       } else {
         result = CastResult.SUCCESS_GREATER_SPEEDY;
       }
     }
-
-    speedy = Buff.NONE;
-    amplifier = Buff.NONE;
-    tempModifiers = null;
-
     return result;
   }
 

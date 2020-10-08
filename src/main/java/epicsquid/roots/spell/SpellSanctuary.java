@@ -112,10 +112,10 @@ public class SpellSanctuary extends SpellBase {
                 e.attackEntityFrom(DamageSource.causeMobDamage(player), spider_damage);
               }
               if (info.has(WITHER)) {
-                ((EntityLivingBase) e).addPotionEffect(new PotionEffect(MobEffects.WITHER, ampInt(wither_duration), wither_amplifier));
+                ((EntityLivingBase) e).addPotionEffect(new PotionEffect(MobEffects.WITHER, info.ampInt(wither_duration), wither_amplifier));
               }
               if (info.has(LEVITATE)) {
-                ((EntityLivingBase) e).addPotionEffect(new PotionEffect(MobEffects.LEVITATION, ampInt(levitation_duration), 0));
+                ((EntityLivingBase) e).addPotionEffect(new PotionEffect(MobEffects.LEVITATION, info.ampInt(levitation_duration), 0));
               }
               if (info.has(UNDEAD) && ((EntityLivingBase) e).isEntityUndead()) {
                 e.attackEntityFrom(DamageSource.causeMobDamage(player), undead_damage);

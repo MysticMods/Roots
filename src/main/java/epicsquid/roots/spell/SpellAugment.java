@@ -107,15 +107,15 @@ public class SpellAugment extends SpellBase {
     boolean acted = false;
     if (info.has(REACH)) {
       acted = true;
-      player.addPotionEffect(new PotionEffect(ModPotions.reach, ampInt(reach_duration), 0, false, false));
+      player.addPotionEffect(new PotionEffect(ModPotions.reach, info.ampInt(reach_duration), 0, false, false));
     }
     if (info.has(SPEED)) {
       acted = true;
-      player.addPotionEffect(new PotionEffect(MobEffects.SPEED, ampInt(speed_duration), speed_amplifier, false, false));
+      player.addPotionEffect(new PotionEffect(MobEffects.SPEED, info.ampInt(speed_duration), speed_amplifier, false, false));
     }
     if (info.has(SLOW_FALL)) {
       acted = true;
-      player.addPotionEffect(new PotionEffect(ModPotions.slow_fall, ampInt(slow_fall), 0, false, false));
+      player.addPotionEffect(new PotionEffect(ModPotions.slow_fall, info.ampInt(slow_fall), 0, false, false));
     }
     if (info.has(LIGHT_DRIFTER)) {
       acted = true;
@@ -141,9 +141,9 @@ public class SpellAugment extends SpellBase {
     }
     if (info.has(MAGNETISM)) {
       int count = 0;
-      count += Magnetize.pull(EntityItem.class, player.world, player.getPosition(), ampInt(radius_x), ampInt(radius_y), ampInt(radius_z));
+      count += Magnetize.pull(EntityItem.class, player.world, player.getPosition(), info.ampInt(radius_x), info.ampInt(radius_y), info.ampInt(radius_z));
       if (SpellConfig.spellFeaturesCategory.shouldMagnetismAttractXP) {
-        count += Magnetize.pull(EntityXPOrb.class, player.world, player.getPosition(), ampInt(radius_x), ampInt(radius_y), ampInt(radius_z));
+        count += Magnetize.pull(EntityXPOrb.class, player.world, player.getPosition(), info.ampInt(radius_x), info.ampInt(radius_y), info.ampInt(radius_z));
       }
 
       if (!acted) {
@@ -152,15 +152,15 @@ public class SpellAugment extends SpellBase {
     }
     if (info.has(LUCK)) {
       acted = true;
-      player.addPotionEffect(new PotionEffect(MobEffects.LUCK, ampInt(luck_duration), luck_amplifier, false, false));
+      player.addPotionEffect(new PotionEffect(MobEffects.LUCK, info.ampInt(luck_duration), luck_amplifier, false, false));
     }
     if (info.has(STRENGTH)) {
       acted = true;
-      player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, ampInt(strength_duration), strength_amplifier, false, false));
+      player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, info.ampInt(strength_duration), strength_amplifier, false, false));
     }
     if (info.has(ABSORPTION)) {
       acted = true;
-      player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, ampInt(absorption_duration), absorption_amplifier, false, false));
+      player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, info.ampInt(absorption_duration), absorption_amplifier, false, false));
     }
     if (info.has(SECOND_WIND)) {
       int air = player.getAir();
@@ -174,7 +174,7 @@ public class SpellAugment extends SpellBase {
     }
     if (info.has(HASTE)) {
       acted = true;
-      player.addPotionEffect(new PotionEffect(MobEffects.HASTE, ampInt(haste_duration), haste_amplifier, false, false));
+      player.addPotionEffect(new PotionEffect(MobEffects.HASTE, info.ampInt(haste_duration), haste_amplifier, false, false));
     }
     return acted;
   }

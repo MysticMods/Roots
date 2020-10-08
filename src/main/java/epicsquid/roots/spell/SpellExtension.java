@@ -183,13 +183,13 @@ public class SpellExtension extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
-    caster.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, ampInt(night_vision), 0, false, false));
+    caster.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, info.ampInt(night_vision), 0, false, false));
     if (info.has(SENSE_ANIMALS)) {
-      caster.addPotionEffect(new PotionEffect(ModPotions.animal_sense, ampInt(animal_duration), 0, false, false));
+      caster.addPotionEffect(new PotionEffect(ModPotions.animal_sense, info.ampInt(animal_duration), 0, false, false));
       caster.getEntityData().setIntArray(getCachedName(), info.snapshot());
     }
     if (info.has(SENSE_DANGER)) {
-      caster.addPotionEffect(new PotionEffect(ModPotions.danger_sense, ampInt(enemy_duration), 0, false, false));
+      caster.addPotionEffect(new PotionEffect(ModPotions.danger_sense, info.ampInt(enemy_duration), 0, false, false));
       caster.getEntityData().setIntArray(getCachedName(), info.snapshot());
     }
     if (info.has(SENSE_HOME)) {

@@ -101,7 +101,7 @@ public class SpellPetalShell extends SpellBase {
       if (info.has(CHARGES)) {
         shells += extraShells;
       }
-      shells = ampInt(shells);
+      shells = info.ampInt(shells);
       if (info.has(PEACEFUL)) {
         World world = player.world;
         List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, bb.offset(player.getPosition()));
@@ -110,9 +110,9 @@ public class SpellPetalShell extends SpellBase {
           EntityLivingBase entity = entities.get(Util.rand.nextInt(entities.size()));
           PotionEffect effect = entity.getActivePotionEffect(ModPotions.petal_shell);
           if (effect != null) {
-            entity.addPotionEffect(new PotionEffect(ModPotions.petal_shell, ampInt(duration), shells, false, false));
+            entity.addPotionEffect(new PotionEffect(ModPotions.petal_shell, info.ampInt(duration), shells, false, false));
           } else {
-            entity.addPotionEffect(new PotionEffect(ModPotions.petal_shell, ampInt(duration), ampInt(maxShells), false, false));
+            entity.addPotionEffect(new PotionEffect(ModPotions.petal_shell, info.ampInt(duration), info.ampInt(maxShells), false, false));
           }
           entity.getEntityData().setIntArray(getCachedName(), info.snapshot());
           PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(entity.posX, entity.posY + 1.0f, entity.posZ, info), entity);
@@ -120,9 +120,9 @@ public class SpellPetalShell extends SpellBase {
       }
       PotionEffect effect = player.getActivePotionEffect(ModPotions.petal_shell);
       if (effect != null) {
-        player.addPotionEffect(new PotionEffect(ModPotions.petal_shell, ampInt(duration), shells, false, false));
+        player.addPotionEffect(new PotionEffect(ModPotions.petal_shell, info.ampInt(duration), shells, false, false));
       } else {
-        player.addPotionEffect(new PotionEffect(ModPotions.petal_shell, ampInt(duration), ampInt(maxShells), false, false));
+        player.addPotionEffect(new PotionEffect(ModPotions.petal_shell, info.ampInt(duration), info.ampInt(maxShells), false, false));
       }
       player.getEntityData().setIntArray(getCachedName(), info.snapshot());
       PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ, info), player);

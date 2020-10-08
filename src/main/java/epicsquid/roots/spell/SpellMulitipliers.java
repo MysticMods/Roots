@@ -1,9 +1,32 @@
 package epicsquid.roots.spell;
 
 public interface SpellMulitipliers {
-  double getAmplifyValue();
+  Buff getAmplify ();
+  Buff getSpeedy ();
 
-  double getSpeedValue();
+  default double getAmplifyValue() {
+    switch (getAmplify()) {
+      default:
+      case NONE:
+        return 0;
+      case BONUS:
+        return 0.1;
+      case GREATER_BONUS:
+        return 0.3;
+    }
+  }
+
+  default double getSpeedValue() {
+    switch (getSpeedy()) {
+      default:
+      case NONE:
+        return 0;
+      case BONUS:
+        return 0.1;
+      case GREATER_BONUS:
+        return 0.3;
+    }
+  }
 
   default int ampSubInt(int value) {
     return (int) (value - Math.floor((double) value * getAmplifyValue()));
@@ -111,5 +134,9 @@ public interface SpellMulitipliers {
 
   default int speedSubInt(double value) {
     return (int) Math.floor(value * getSpeedValue());
+  }
+
+  enum Buff {
+    NONE, BONUS, GREATER_BONUS;
   }
 }

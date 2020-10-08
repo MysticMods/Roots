@@ -64,8 +64,6 @@ public class SpellWildfire extends SpellBase {
       EntityFireJet fireJet = new EntityFireJet(player.world);
       fireJet.setPlayer(player.getUniqueID());
       fireJet.setPosition(player.posX, player.posY, player.posZ);
-      fireJet.setAmplifier(getAmplifyValue());
-      fireJet.setSpeedy(getSpeedValue());
       fireJet.setModifiers(info);
       player.world.spawnEntity(fireJet);
     }

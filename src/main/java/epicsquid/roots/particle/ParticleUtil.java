@@ -130,6 +130,10 @@ public class ParticleUtil {
     }
   }
 
+  public static void spawnParticleThorn(World world, float x, float y, float z, float vx, float vy, float vz, float[] rgba, float scale, int lifetime, boolean additive) {
+    spawnParticleThorn(world, x, y, z, vx, vy, vz, rgba[0], rgba[1], rgba[2], rgba[3], scale, lifetime, additive);
+  }
+
   public static void spawnParticleThorn(World world, float x, float y, float z, float vx, float vy, float vz, float r, float g, float b, float a, float scale, int lifetime, boolean additive) {
     if (MysticalLib.proxy instanceof ClientProxy) {
       counter += random.nextInt(3);

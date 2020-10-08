@@ -173,7 +173,7 @@ public class SpellRadiance extends SpellBase {
                     continue;
                   }
 
-                  e.heal(ampFloat(healing));
+                  e.heal(info.ampFloat(healing));
                   count++;
                 } else {
                   if (info.has(PEACEFUL) && EntityUtil.isFriendly(e)) {
@@ -185,9 +185,9 @@ public class SpellRadiance extends SpellBase {
                       e.getEntityData().setUniqueId("magnetic", player.getUniqueID());
                       e.getEntityData().setInteger("magnetic_ticks", e.ticksExisted);
                     }
-                    e.attackEntityFrom(ModDamage.radiantDamageFrom(player), ampFloat(damage));
+                    e.attackEntityFrom(ModDamage.radiantDamageFrom(player), info.ampFloat(damage));
                     if (e.isEntityUndead()) {
-                      e.attackEntityFrom(ModDamage.radiantDamageFrom(player), ampFloat(undeadDamage));
+                      e.attackEntityFrom(ModDamage.radiantDamageFrom(player), info.ampFloat(undeadDamage));
                     }
                     e.setRevengeTarget(player);
                     player.setLastAttackedEntity(e);

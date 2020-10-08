@@ -121,7 +121,7 @@ public class SpellAcidCloud extends SpellBase {
         // TODO: Additional visual effect
 
 
-        // e.attackEntityFrom(ModDamage.magicDamageFrom(player), ampFloat(night_damage * mod));
+        // e.attackEntityFrom(ModDamage.magicDamageFrom(player), info.ampFloat(night_damage * mod));
         if (info.has(HEALING)) {
           if (EntityUtil.isHostile(e) || EntityUtil.isHostileTo(e, player)) {
             continue;
@@ -131,7 +131,7 @@ public class SpellAcidCloud extends SpellBase {
           }
           // TODO: Particle effect to denote entities being healed
           if (healing > 0) {
-            e.heal(ampFloat(healing * modifier));
+            e.heal(info.ampFloat(healing * modifier));
           }
           healed++;
           if (heal_count != -1 && healed >= heal_count) {
@@ -145,21 +145,21 @@ public class SpellAcidCloud extends SpellBase {
                 continue;
               }
               if (info.has(FIRE)) {
-                e.attackEntityFrom(ModDamage.fireDamageFrom(player), ampFloat(damage * modifier) / 2);
-                e.attackEntityFrom(DamageSource.causeMobDamage(player), ampFloat(damage * modifier) / 2);
+                e.attackEntityFrom(ModDamage.fireDamageFrom(player), info.ampFloat(damage * modifier) / 2);
+                e.attackEntityFrom(DamageSource.causeMobDamage(player), info.ampFloat(damage * modifier) / 2);
                 e.setFire(fireDuration);
               } else {
-                e.attackEntityFrom(DamageSource.causeMobDamage(player), ampFloat(damage * modifier));
+                e.attackEntityFrom(DamageSource.causeMobDamage(player), info.ampFloat(damage * modifier));
               }
               // TODO: Additional visual effect
               if (info.has(UNDEAD) && e.isEntityUndead()) {
-                e.attackEntityFrom(ModDamage.radiantDamageFrom(player), ampFloat(undead_damage * modifier));
+                e.attackEntityFrom(ModDamage.radiantDamageFrom(player), info.ampFloat(undead_damage * modifier));
               }
               if (info.has(PHYSICAL)) {
-                e.attackEntityFrom(ModDamage.physicalDamageFrom(player), ampFloat(physical_damage * modifier));
+                e.attackEntityFrom(ModDamage.physicalDamageFrom(player), info.ampFloat(physical_damage * modifier));
               }
               if (SpellConfig.spellFeaturesCategory.acidCloudPoisoningEffect) {
-                e.addPotionEffect(new PotionEffect(MobEffects.POISON, ampInt(poisonDuration), poisonAmplification));
+                e.addPotionEffect(new PotionEffect(MobEffects.POISON, info.ampInt(poisonDuration), poisonAmplification));
               }
               e.setRevengeTarget(player);
               e.setLastAttackedEntity(player);

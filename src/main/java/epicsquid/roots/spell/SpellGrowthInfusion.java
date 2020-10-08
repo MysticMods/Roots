@@ -137,7 +137,7 @@ public class SpellGrowthInfusion extends SpellBase {
       List<BlockPos> positions = Growth.collect(player.world, player.getPosition(), radius_x + boost, radius_y + boost, radius_z + boost);
       if (positions.isEmpty()) return false;
       if (!player.world.isRemote) {
-        for (int i = 0; i < ampInt(count) + player.world.rand.nextInt((ampSubInt(additional_count))); i++) {
+        for (int i = 0; i < info.ampInt(count) + player.world.rand.nextInt((info.ampSubInt(additional_count))); i++) {
           BlockPos pos = positions.get(player.world.rand.nextInt(positions.size()));
           IBlockState state = player.world.getBlockState(pos);
           for (int j = 0; j < ticks; j++) {
@@ -235,7 +235,7 @@ public class SpellGrowthInfusion extends SpellBase {
           // Test for growth last
           if (!didSomething && Growth.canGrow(player.world, pos, state)) {
             if (!player.world.isRemote) {
-              for (int i = 0; i < ampInt(ticks); i++) {
+              for (int i = 0; i < info.ampInt(ticks); i++) {
                 state.getBlock().randomTick(player.world, pos, state, new Random());
               }
               IBlockState below = player.world.getBlockState(pos.down());

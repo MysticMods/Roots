@@ -118,7 +118,7 @@ public class SpellDesaturate extends SpellBase {
     if (info.has(RATIO)) {
       multiplier = this.amplified_multiplier;
     }
-    multiplier = ampSubFloat(multiplier);
+    multiplier = info.ampSubFloat(multiplier);
     float missing = caster.getMaxHealth() - caster.getHealth();
     float healed = 0;
 

@@ -24,9 +24,16 @@ public class SpellRoseThorns extends SpellBase {
   public static Property<Integer> PROP_POISON_DURATION = new Property<>("poison_duration", 80).setDescription("duration in ticks of the poison effect applied when the traps are triggered");
   public static Property<Integer> PROP_POISON_AMPLIFIER = new Property<>("poison_amplifier", 0).setDescription("the level of the poison effect (0 is the first level)");
   public static Property<Integer> PROP_DURATION = new Property<>("trap_duration", 600).setDescription("duration in ticks of the trap before it disappears");
+  public static Property<Integer> PROP_ROOT_DURATION = new Property<>("root_duration", 4 * 20).setDescription("how long enemies should be rooted in place for");
+  public static Property<Float> PROP_KNOCKBACK = new Property<>("knockback", 5f).setDescription("how much entities should be knocked back by");
+  public static Property<Float> PROP_UNDEAD_DAMAGE = new Property<>("undead_damage", 2f).setDescription("how much additional damage against undead");
+  public static Property<Float> PROP_KNOCKUP = new Property<>("knock_up", 5f).setDescription("how much a creature should be knocked up by");
+  public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 4).setDescription("how long entities should be set aflame for");
+  public static Property<Integer> PROP_STRENGTH_DURATION = new Property<>("strength_duration", 5 * 20).setDescription("how long the player should be empowered for when the trap triggers");
+  public static Property<Integer> PROP_STRENGTH_AMPLIFIER = new Property<>("strength_amplifier", 0).setDescription("the amplifier to be applied to the strength potion effect");
 
-  public static float damage;
-  public static int slownessDuration, slownessAmplifier, poisonDuration, poisonAmplifier, duration;
+  public float damage, undead_damage, knockback, knockup;
+  public int slowness_duration, slowness_amplifier, poison_duration, poison_amplifier, duration, strength_duration, strength_amplifier, fire_duration, root_duration;
 
   public static Modifier BIGGER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "larger_trap"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_trap"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -50,7 +57,7 @@ public class SpellRoseThorns extends SpellBase {
 
   public SpellRoseThorns(ResourceLocation name) {
     super(name, TextFormatting.RED, 255f / 255f, 32f / 255f, 64f / 255f, 32f / 255f, 255f / 255f, 96f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_SLOWNESS_AMPLIFIER, PROP_SLOWNESS_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_DURATION);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_SLOWNESS_AMPLIFIER, PROP_SLOWNESS_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_DURATION, PROP_ROOT_DURATION, PROP_KNOCKBACK, PROP_KNOCKUP, PROP_UNDEAD_DAMAGE, PROP_STRENGTH_AMPLIFIER, PROP_STRENGTH_DURATION);
     acceptsModifiers(BIGGER, PEACEFUL, PARALYSIS, KNOCKBACK, UNDEAD, POISON, BOOST, FIRE, STRENGTH, SLOW);
   }
 
@@ -68,7 +75,7 @@ public class SpellRoseThorns extends SpellBase {
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     if (!player.world.isRemote) {
-      EntityThornTrap trap = new EntityThornTrap(player.world, ampFloat(damage), ampInt(duration), ampInt(slownessDuration), slownessAmplifier, poisonDuration, poisonAmplifier);
+      EntityThornTrap trap = new EntityThornTrap(player.world);
       trap.setPlayer(player.getUniqueID());
       trap.setModifiers(info);
       trap.setPosition(player.posX + player.getLookVec().x, player.posY + player.getEyeHeight() + player.getLookVec().y, player.posZ + player.getLookVec().z);
@@ -84,11 +91,17 @@ public class SpellRoseThorns extends SpellBase {
   public void doFinalise() {
     this.castType = properties.get(PROP_CAST_TYPE);
     this.cooldown = properties.get(PROP_COOLDOWN);
-    damage = properties.get(PROP_DAMAGE);
-    poisonAmplifier = properties.get(PROP_POISON_AMPLIFIER);
-    poisonDuration = properties.get(PROP_POISON_DURATION);
-    slownessAmplifier = properties.get(PROP_SLOWNESS_AMPLIFIER);
-    slownessDuration = properties.get(PROP_SLOWNESS_DURATION);
-    duration = properties.get(PROP_DURATION);
+    this.damage = properties.get(PROP_DAMAGE);
+    this.poison_amplifier = properties.get(PROP_POISON_AMPLIFIER);
+    this.poison_duration = properties.get(PROP_POISON_DURATION);
+    this.slowness_amplifier = properties.get(PROP_SLOWNESS_AMPLIFIER);
+    this.slowness_duration = properties.get(PROP_SLOWNESS_DURATION);
+    this.duration = properties.get(PROP_DURATION);
+    this.undead_damage = properties.get(PROP_UNDEAD_DAMAGE);
+    this.knockback = properties.get(PROP_KNOCKBACK);
+    this.knockup = properties.get(PROP_KNOCKUP);
+    this.strength_amplifier = properties.get(PROP_STRENGTH_AMPLIFIER);
+    this.strength_duration = properties.get(PROP_STRENGTH_DURATION);
+    this.root_duration = properties.get(PROP_ROOT_DURATION);
   }
 }

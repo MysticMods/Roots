@@ -127,7 +127,7 @@ public class SpellDisarm extends SpellBase {
             } else {
               entity.setItemStackToSlot(handSlot, ItemStack.EMPTY);
             }
-            if (Util.rand.nextFloat() < ampFloat(drop_chance + chance_increase)) {
+            if (Util.rand.nextFloat() < info.ampFloat(drop_chance + chance_increase)) {
               ItemUtil.spawnItem(world, entity.getPosition(), stack);
             }
           }
@@ -145,7 +145,7 @@ public class SpellDisarm extends SpellBase {
           disarmed = true;
           if (!world.isRemote) {
             entity.setItemStackToSlot(slot, ItemStack.EMPTY);
-            if (Util.rand.nextFloat() < ampFloat(armorChance)) {
+            if (Util.rand.nextFloat() < info.ampFloat(armorChance)) {
               ItemUtil.spawnItem(world, entity.getPosition(), stack);
             }
           }
