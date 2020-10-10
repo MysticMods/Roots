@@ -208,11 +208,11 @@ public class SpellHarvest extends SpellBase {
       }
     }
 
-    if (info.has(UNDEAD)) {
+    if (info.has(UNDEAD) && !player.world.isRemote) {
       if (Util.rand.nextFloat() < undead_chance) {
         int c = info.ampInt(undead_count + Util.rand.nextInt(undead_additional));
         for (int i = 0; i < c; i++) {
-          Item it = ModItems.spirit_pouch;
+          Item it = ModItems.spirit_bag;
           if (Util.rand.nextFloat() < undead_rarity) {
             it = ModItems.reliquary;
           }
@@ -223,6 +223,7 @@ public class SpellHarvest extends SpellBase {
             ItemUtil.spawnItem(player.world, Util.getRandomWithinRadius(player.getPosition(), x, y, z), stack);
           }
         }
+        count++;
       }
     }
 

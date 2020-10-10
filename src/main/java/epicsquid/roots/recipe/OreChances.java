@@ -29,6 +29,9 @@ public class OreChances {
   }
 
   public static IBlockState getRandomState () {
+    if (items.isEmpty()) {
+      return Blocks.AIR.getDefaultState();
+    }
     OreItem item = WeightedRandom.getRandomItem(Util.rand, items);
     IBlockState state = item.getState();
     if (state == null) {
