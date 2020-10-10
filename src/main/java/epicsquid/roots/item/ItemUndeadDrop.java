@@ -1,13 +1,13 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemBase;
+import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.roots.recipe.SpiritDrops;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
@@ -21,17 +21,33 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
-public class ItemGlassEye extends ItemBase {
-  public ItemGlassEye(@Nonnull String name) {
+public class ItemUndeadDrop extends ItemBase {
+  private DropType type;
+
+  public ItemUndeadDrop(@Nonnull String name, DropType type) {
     super(name);
-    setMaxStackSize(64);
+    this.type = type;
+  }
+
+  @Override
+  public EnumRarity getRarity(ItemStack stack) {
+    switch (type) {
+      default:
+      case POUCH:
+        return EnumRarity.UNCOMMON;
+      case RELIQUARY:
+        return EnumRarity.RARE;
+    }
   }
 
   @Override
   public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
     ItemStack stack = playerIn.getHeldItem(handIn);
     if (!worldIn.isRemote) {
-      playerIn.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 15 * 20, 0, false, false));
+      ItemStack result = type == DropType.POUCH ? SpiritDrops.getRandomPouch() : SpiritDrops.getRandomReliquary();
+      if (!playerIn.addItemStackToInventory(result)) {
+        ItemUtil.spawnItem(worldIn, playerIn.getPosition(), result);
+      }
 
       if (!playerIn.isCreative()) {
         stack.shrink(1);
@@ -41,16 +57,24 @@ public class ItemGlassEye extends ItemBase {
   }
 
   @Override
-  public EnumRarity getRarity(ItemStack stack) {
-    return EnumRarity.UNCOMMON;
-  }
-
-  @Override
   @SideOnly(Side.CLIENT)
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
     super.addInformation(stack, worldIn, tooltip, flagIn);
 
     tooltip.add("");
-    tooltip.add(TextFormatting.YELLOW + I18n.format("roots.glass_eye.tooltip"));
+    switch (type) {
+      default:
+      case POUCH:
+        tooltip.add(TextFormatting.YELLOW + I18n.format("roots.spirit_pouch.tooltip"));
+        break;
+      case RELIQUARY:
+        tooltip.add(TextFormatting.YELLOW + I18n.format("roots.reliquary.tooltip"));
+        break;
+    }
+
+  }
+
+  public enum DropType {
+    RELIQUARY, POUCH;
   }
 }

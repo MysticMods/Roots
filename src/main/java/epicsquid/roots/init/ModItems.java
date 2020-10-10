@@ -38,7 +38,7 @@ public class ModItems {
   // All mod items
   public static Item pestle, herb_pouch, component_pouch, spell_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, wildwood_quiver, wildwood_bow,
       sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, apothecary_pouch, wooden_shears,
-      petals, flour, living_arrow, runic_dust, cooked_pereskia, fey_leather, wildewheet_bread, glass_eye, fey_feather, strange_slime, gramary;
+      petals, flour, living_arrow, runic_dust, cooked_pereskia, fey_leather, wildewheet_bread, glass_eye, fey_feather, strange_slime, gramary, spirit_bag, reliquary;
 
   public static Item runed_axe, runed_hoe, runed_pickaxe, runed_shovel, runed_sword, runed_dagger;
 
@@ -137,6 +137,8 @@ public class ModItems {
         return EnumRarity.UNCOMMON;
       }
     }.setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(spirit_bag = new ItemUndeadDrop("spirit_bag", ItemUndeadDrop.DropType.POUCH)).setCreativeTab(Roots.tab);
+    event.addItem(reliquary = new ItemUndeadDrop("reliquary", ItemUndeadDrop.DropType.RELIQUARY)).setCreativeTab(Roots.tab);
 
     event.addItem(runed_pickaxe = new ItemRunedPickaxe(Materials.RUNIC, "runed_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(runed_axe = new ItemRunedAxe(Materials.RUNIC, "runed_axe").setCreativeTab(Roots.tab).setMaxStackSize(1));

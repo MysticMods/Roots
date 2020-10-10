@@ -39,11 +39,17 @@ public class SpiritDrops {
   }
 
   public static ItemStack getRandomReliquary () {
+    if (reliquary.isEmpty()) {
+      return ItemStack.EMPTY;
+    }
     SpiritItem item = WeightedRandom.getRandomItem(Util.rand, reliquary);
     return item.getItem();
   }
 
   public static ItemStack getRandomPouch () {
+    if (pouch.isEmpty()) {
+      return ItemStack.EMPTY;
+    }
     SpiritItem item = WeightedRandom.getRandomItem(Util.rand, pouch);
     return item.getItem();
   }

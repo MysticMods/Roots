@@ -52,6 +52,8 @@ item.life_essence.name=Essence of Unknown Life
 item.life_essence.entity_name=Life-Essence of %s
 item.salmon_of_knowledge.name=Salmon of Knowledge
 item.wooden_shears.name=Wooden Shears
+item.reliquary.name=Reliquary
+item.spirit_bag.name=Spirit Bag
 tile.imposer.name=Imposer
 tile.mortar.name=Mortar
 tile.imbuer.name=Imbuer
@@ -101,6 +103,7 @@ tile.runed_birch.name=Runed Birch
 tile.runed_jungle.name=Runed Jungle
 tile.runed_spruce.name=Runed Spruce
 tile.runed_wildwood.name=Runed Wildwood
+
 
 roots.tooltip.petaldust.notag=This Spell Dust has no NBT data! It is potentially prone to errors and should not be used!
 roots.tooltip.color=Dyed %s.
@@ -964,3 +967,6 @@ roots.modifiers.modifiers.sense_spawners=Sense Spawners
 roots.modifiers.modifiers.sense_spawners.desc=Highlights nearby spawners.
 roots.modifiers.modifiers.sense_ores=Sense Ores
 roots.modifiers.modifiers.sense_ores.desc=Highlights either all nearby ores or the ore held in your off-hand.
+
+roots.spirit_pouch.tooltip=Right-click to open and reveal what's inside!
+roots.reliquary.tooltip=Right-click to open and reveal what's inside!
