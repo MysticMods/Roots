@@ -32,8 +32,6 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
     super.onUpdate();
 
     if (!world.isRemote) {
-      MessageWildfireFX packet = new MessageWildfireFX(posX, posY, posZ, motionX, motionY, motionZ, rotationYaw, modifiers);
-      PacketHandler.INSTANCE.sendToAllTracking(packet, this);
       if (this.playerId != null) {
         EntityPlayer player = world.getPlayerEntityByUUID(this.playerId);
         if (player != null) {
@@ -74,17 +72,15 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
                   }
                   if (modifiers.has(SpellWildfire.ICICLES)) {
                     int count = instance.icicle_count;
-                    int g = 0;
-                    int seg = (360 / count) / 10;
-                    int deg = seg * 3;
-                    int rand = seg * 7;
-                    for (float k = 0; k < 360; k += deg + Util.rand.nextInt(rand)) {
-                      if (g == count) {
-                        break;
-                      }
-                      EntityIcicle icicle = new EntityIcicle(world, player, entity);
+                    Vec3d pos = entity.getPositionVector();
+                    Vec3d playerPos = player.getPositionVector().add(0, player.getEyeHeight(), 0);
+                    Vec3d accel = pos.subtract(playerPos);
+                    for (int k = 0; k < count; k++) {
+                      EntityIcicle icicle = new EntityIcicle(world, player, accel.x, accel.y, accel.z);
+                      icicle.posX = playerPos.x;
+                      icicle.posY = playerPos.y + Util.rand.nextDouble() - 0.5;
+                      icicle.posZ = playerPos.z;
                       world.spawnEntity(icicle);
-                      g++;
                     }
                   }
                   if (modifiers.has(SpellWildfire.WILDFIRE)) {
@@ -112,6 +108,10 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
       }
       if (this.onGround && modifiers != null && modifiers.has(SpellWildfire.WILDFIRE) && !world.isRemote) {
         wildFire(getPosition());
+      }
+      if (this.ticksExisted % 2 == 0) {
+        MessageWildfireFX packet = new MessageWildfireFX(posX, posY, posZ, motionX, motionY, motionZ, rotationYaw, modifiers);
+        PacketHandler.INSTANCE.sendToAllTracking(packet, this);
       }
     }
   }
