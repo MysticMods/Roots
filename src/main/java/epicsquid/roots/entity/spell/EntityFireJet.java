@@ -80,6 +80,7 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
                       icicle.posX = playerPos.x;
                       icicle.posY = playerPos.y + Util.rand.nextDouble() - 0.5;
                       icicle.posZ = playerPos.z;
+                      icicle.setModifiers(modifiers);
                       world.spawnEntity(icicle);
                     }
                   }

@@ -2,7 +2,7 @@ package epicsquid.roots.entity.spell;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModDamage;
-import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
+import epicsquid.roots.modifiers.instance.staff.ISnapshot;
 import epicsquid.roots.spell.SpellWildfire;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityFireball;
@@ -11,9 +11,9 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class EntityIcicle extends EntityFireball {
-  private StaffModifierInstanceList modifiers = null;
+  private ISnapshot modifiers = null;
 
-  public EntityIcicle (World worldIn) {
+  public EntityIcicle(World worldIn) {
     super(worldIn);
   }
 
@@ -29,7 +29,7 @@ public class EntityIcicle extends EntityFireball {
   protected void entityInit() {
   }
 
-  public void setModifiers(StaffModifierInstanceList modifiers) {
+  public void setModifiers(ISnapshot modifiers) {
     this.modifiers = modifiers;
   }
 
