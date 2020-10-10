@@ -176,8 +176,6 @@ public class ModItems {
     event.addItem(wildwood_leggings = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.LEGS, "wildwood_leggings").setMaxStackSize(1));
     event.addItem(wildwood_boots = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.FEET, "wildwood_boots").setMaxStackSize(1));
 
-    event.addItem(wooden_heart = new ItemBase("wooden_heart").setCreativeTab(Roots.tab));
-
     event.addItem(runic_shears = new ItemRunicShears("runic_shears").setCreativeTab(Roots.tab));
 
     MaterialTypes.addMaterial("vanilla:wood", ToolMaterial.WOOD, null, ToolMaterial.WOOD.getAttackDamage(), -1.7f);
