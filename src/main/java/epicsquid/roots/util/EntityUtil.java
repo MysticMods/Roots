@@ -17,6 +17,24 @@ public class EntityUtil {
   private static Set<ResourceLocation> forcedFriendly = new HashSet<>();
   private static Set<ResourceLocation> forcedHostile = new HashSet<>();
 
+  public static boolean isFamiliar(Entity entity) {
+    if (entity instanceof EntityPlayer) return false;
+
+    if (!isFriendly(entity)) {
+      return false;
+    }
+
+    if (entity instanceof AbstractHorse) {
+      AbstractHorse owned = (AbstractHorse) entity;
+      return owned.getOwnerUniqueId() != null;
+    } else if (entity instanceof IEntityOwnable) {
+      IEntityOwnable owned = (IEntityOwnable) entity;
+      return owned.getOwnerId() != null;
+    }
+
+    return false;
+  }
+
   public static boolean isFamiliar(EntityPlayer player, Entity entity) {
     if (entity instanceof EntityPlayer) return false;
 
@@ -95,7 +113,7 @@ public class EntityUtil {
     return false;
   }
 
-  public static boolean isAquatic (Entity entity) {
+  public static boolean isAquatic(Entity entity) {
     if (entity instanceof EntityWaterMob) {
       return true;
     }

@@ -7,6 +7,7 @@ import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.datasync.DataParameter;
@@ -49,7 +50,17 @@ public class EntityTimeStop extends EntitySpellModifiable<SpellTimeStop> {
         if (modifiers != null && modifiers.has(SpellTimeStop.PEACEFUL) && EntityUtil.isFriendly(e)) {
           continue;
         }
+        if (modifiers != null && modifiers.has(SpellTimeStop.FAMILIARS) && EntityUtil.isFamiliar(e)) {
+          continue;
+        }
         e.addPotionEffect(new PotionEffect(ModPotions.time_stop, 40, 0, false, false));
+        e.getEntityData().setIntArray(SpellTimeStop.instance.getCachedName(), modifiers.toArray());
+        if (modifiers.has(SpellTimeStop.SLOW)) {
+          e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, modifiers.ampInt(instance.slow_duration) + 40, instance.slow_amplifier));
+        }
+        if (modifiers.has(SpellTimeStop.WEAKNESS)) {
+          e.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, modifiers.ampInt(instance.weakness_duration) + 40, instance.weakness_amplifier));
+        }
       }
     }
   }

@@ -10,8 +10,10 @@ import epicsquid.roots.network.fx.MessageTimeStopStartFX;
 import epicsquid.roots.properties.Property;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
@@ -22,7 +24,17 @@ public class SpellTimeStop extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("pereskia", 0.5));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("moonglow_leaf", 0.5));
+  public static Property.PropertyCost PROP_COST_3 = new Property.PropertyCost(2, new SpellCost("dewgonia", 0.125));
   public static Property<Integer> PROP_DURATION = new Property<>("duration", 200).setDescription("the duration of the time stop effect on entities");
+  public static Property<Integer> PROP_OVERTIME = new Property<>("overtime", 200).setDescription("the extended duration that should apply when overtime is active");
+  public static Property<Integer> PROP_UNDERTIME = new Property<>("undertime", 100).setDescription("the shortened duration that is applied instead of the normal duration");
+  public static Property<Integer> PROP_SLOWNESS_DURATION = new Property<>("slowness_duration", 80).setDescription("duration in ticks of the slowness effect applied when the traps are triggered");
+  public static Property<Integer> PROP_SLOWNESS_AMPLIFIER = new Property<>("slowness_amplifier", 0).setDescription("the level of the slowness effect (0 is the first level)");
+  public static Property<Integer> PROP_WEAKNESS_DURATION = new Property<>("weakness_duration", 80).setDescription("duration in ticks of the weakness effect applied when the traps are triggered");
+  public static Property<Integer> PROP_WEAKNESS_AMPLIFIER = new Property<>("weakness_amplifier", 0).setDescription("the level of the weakness effect (0 is the first level)");
+  public static Property<Integer> PROP_SPEED_DURATION = new Property<>("speed_duration", 80).setDescription("duration in ticks of the speed effect applied when the traps are triggered");
+  public static Property<Integer> PROP_SPEED_AMPLIFIER = new Property<>("speed_amplifier", 0).setDescription("the level of the speed effect (0 is the first level)");
+  public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 5).setDescription("the duration that entities should be set on fire for");
 
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_passage"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier FAMILIARS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "freed_familiars"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
@@ -42,11 +54,11 @@ public class SpellTimeStop extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_time_stop");
   public static SpellTimeStop instance = new SpellTimeStop(spellName);
 
-  public int duration;
+  public int duration, slow_duration, slow_amplifier, overtime, weakness_duration, weakness_amplifier, speed_duration, speed_amplifier, fire_duration, undertime;
 
   public SpellTimeStop(ResourceLocation name) {
     super(name, TextFormatting.DARK_BLUE, 64f / 255f, 64f / 255f, 64f / 255f, 192f / 255f, 32f / 255f, 255f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DURATION);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_COST_3, PROP_DURATION, PROP_SLOWNESS_AMPLIFIER, PROP_SLOWNESS_DURATION, PROP_OVERTIME, PROP_WEAKNESS_AMPLIFIER, PROP_WEAKNESS_DURATION, PROP_SPEED_AMPLIFIER, PROP_SPEED_DURATION, PROP_FIRE_DURATION, PROP_UNDERTIME);
     acceptsModifiers(PEACEFUL, FAMILIARS, LONGER, SLOW, WEAKNESS, SPEED, FIRE, SHORTER, FREEZE);
   }
 
@@ -65,12 +77,23 @@ public class SpellTimeStop extends SpellBase {
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     if (!player.world.isRemote) {
-      EntityTimeStop timeStop = new EntityTimeStop(player.world, info.ampInt(duration));
+      int dur = duration;
+      if (info.has(LONGER)) {
+        dur += overtime;
+      }
+      dur = info.ampInt(dur);
+      if (info.has(SHORTER)) {
+        dur = info.ampSubInt(undertime);
+      }
+      EntityTimeStop timeStop = new EntityTimeStop(player.world, dur);
       timeStop.setPlayer(player.getUniqueID());
       timeStop.setPosition(player.posX, player.posY, player.posZ);
       timeStop.setModifiers(info);
       player.world.spawnEntity(timeStop);
       PacketHandler.sendToAllTracking(new MessageTimeStopStartFX(player.posX, player.posY + 1.0f, player.posZ), player);
+      if (info.has(SPEED)) {
+        player.addPotionEffect(new PotionEffect(MobEffects.SPEED, info.ampInt(speed_duration), speed_amplifier));
+      }
     }
     return true;
   }
@@ -80,5 +103,13 @@ public class SpellTimeStop extends SpellBase {
     this.castType = properties.get(PROP_CAST_TYPE);
     this.cooldown = properties.get(PROP_COOLDOWN);
     this.duration = properties.get(PROP_DURATION);
+    this.slow_duration = properties.get(PROP_SLOWNESS_DURATION);
+    this.slow_amplifier = properties.get(PROP_SLOWNESS_AMPLIFIER);
+    this.overtime = properties.get(PROP_OVERTIME);
+    this.weakness_amplifier = properties.get(PROP_WEAKNESS_AMPLIFIER);
+    this.weakness_duration = properties.get(PROP_WEAKNESS_DURATION);
+    this.slow_amplifier = properties.get(PROP_SLOWNESS_AMPLIFIER);
+    this.slow_duration = properties.get(PROP_SLOWNESS_DURATION);
+    this.fire_duration = properties.get(PROP_FIRE_DURATION);
   }
 }
