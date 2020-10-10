@@ -321,20 +321,20 @@ public abstract class SpellBase extends RegistryItem {
 
   public CastResult cast(EntityPlayer caster, StaffSpellInfo info, int ticks) {
     StaffModifierInstanceList mods = info.getModifiers();
-    SpellMulitipliers.Buff speedy = SpellMulitipliers.Buff.NONE;
+    ISpellMulitipliers.Buff speedy = ISpellMulitipliers.Buff.NONE;
     if (mods.has(BaseModifiers.SPEEDY)) {
-      speedy = SpellMulitipliers.Buff.BONUS;
+      speedy = ISpellMulitipliers.Buff.BONUS;
     }
     if (mods.has(BaseModifiers.GREATER_SPEEDY)) {
-      speedy = SpellMulitipliers.Buff.GREATER_BONUS;
+      speedy = ISpellMulitipliers.Buff.GREATER_BONUS;
     }
 
     CastResult result = CastResult.FAIL;
 
     if (cast(caster, info.getModifiers(), ticks)) {
-      if (speedy.equals(SpellMulitipliers.Buff.NONE)) {
+      if (speedy.equals(ISpellMulitipliers.Buff.NONE)) {
         result = CastResult.SUCCESS;
-      } else if (speedy.equals(SpellMulitipliers.Buff.BONUS)) {
+      } else if (speedy.equals(ISpellMulitipliers.Buff.BONUS)) {
         result = CastResult.SUCCESS_SPEEDY;
       } else {
         result = CastResult.SUCCESS_GREATER_SPEEDY;

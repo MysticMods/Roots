@@ -1,5 +1,7 @@
 package epicsquid.roots.entity.spell;
 
+import epicsquid.roots.modifiers.instance.staff.ISnapshot;
+import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellWildfire;
@@ -18,7 +20,7 @@ public abstract class EntitySpellModifiable<T extends SpellBase> extends Entity 
   protected static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntitySpellModifiable.class, DataSerializers.VARINT);
   protected UUID playerId = null;
   protected T instance;
-  protected StaffModifierInstanceList modifiers;
+  protected ISnapshot modifiers;
 
   public EntitySpellModifiable(World worldIn, T instance, int duration) {
     super(worldIn);
@@ -58,18 +60,12 @@ public abstract class EntitySpellModifiable<T extends SpellBase> extends Entity 
   @Override
   protected void readEntityFromNBT(NBTTagCompound compound) {
     this.playerId = compound.getUniqueId("playerId");
-    if (compound.hasKey("modifiers", Constants.NBT.TAG_COMPOUND)) {
-      this.modifiers = StaffModifierInstanceList.fromNBT(compound.getCompoundTag("modifiers"));
-    } else {
-      this.modifiers = null;
-    }
+    this.modifiers = new ModifierSnapshot(compound.getIntArray("modifiers"));
   }
 
   @Override
   protected void writeEntityToNBT(NBTTagCompound compound) {
     compound.setUniqueId("playerId", playerId);
-    if (this.modifiers != null) {
-      compound.setTag("modifiers", this.modifiers.serializeNBT());
-    }
+    compound.setIntArray("modifiers", this.modifiers.toArray());
   }
 }

@@ -1,9 +1,11 @@
 package epicsquid.roots.entity.spell;
 
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.mechanics.Growth;
+import epicsquid.roots.network.fx.MessageWildfireFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellWildfire;
 import epicsquid.roots.util.EntityUtil;
@@ -23,32 +25,14 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
-
   public EntityFireJet(World worldIn) {
     super(worldIn, SpellWildfire.instance, 12);
   }
 
-  private static final float[] redColor = new float[]{255.0f / 255.0f, 96.0f / 255.0f, 32.0f / 255.0f, 0.5f};
-  private static final float[] purpleColor = new float[]{212 / 255.0f, 11 / 255.0f, 74 / 255.0f, 0.5f};
-  private static final float[] greenColor = new float[]{148 / 255.0f, 212 / 255.0f, 11 / 255.0f, 0.5f};
-
   @Override
   public void onUpdate() {
     super.onUpdate();
-    float[] color = redColor;
-    if (modifiers.has(SpellWildfire.GREEN)) {
-      color = greenColor;
-    } else if (modifiers.has(SpellWildfire.PURPLE)) {
-      color = purpleColor;
-    }
 
-    if (world.isRemote) {
-      for (int i = 0; i < 8; i++) {
-        float offX = 0.5f * (float) Math.sin(Math.toRadians(rotationYaw));
-        float offZ = 0.5f * (float) Math.cos(Math.toRadians(rotationYaw));
-        ParticleUtil.spawnParticleFiery(world, (float) posX + (float) motionX * 2.5f + offX, (float) posY + 1.62F + (float) motionY * 2.5f, (float) posZ + (float) motionZ * 2.5f + offZ, (float) motionX + 0.125f * (rand.nextFloat() - 0.5f), (float) motionY + 0.125f * (rand.nextFloat() - 0.5f), (float) motionZ + 0.125f * (rand.nextFloat() - 0.5f), color, 7.5f, 24);
-      }
-    }
     if (!world.isRemote) {
       if (this.playerId != null) {
         EntityPlayer player = world.getPlayerEntityByUUID(this.playerId);
@@ -87,7 +71,27 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
                     entity.addPotionEffect(new PotionEffect(MobEffects.POISON, modifiers.ampInt(instance.poison_duration), instance.poison_amplifier));
                   }
                   if (modifiers.has(SpellWildfire.ICICLES)) {
-                    // TODO
+                    int count = instance.icicle_count;
+                    int seg = (360 / count) / 10;
+                    int deg = seg * 3;
+                    int rand = seg * 7;
+
+                    Vec3d pos = entity.getPositionVector();
+
+                    for (float k = 0; k < 360; k += deg + Util.rand.nextInt(rand)) {
+                      if (count >= 0) {
+                        double rad = Math.toRadians(k);
+                        double dx = (pos.x + 4 * Math.sin(rad));
+                        double dy = (pos.y + (Util.rand.nextBoolean() ? Util.rand.nextDouble() - 1 : Util.rand.nextDouble()));
+                        double dz = (pos.z + 4 * Math.cos(rad));
+                        EntityIcicle icicle = new EntityIcicle(world, player, pos.x - dx, pos.y - dy, pos.z - dz);
+                        icicle.posY = dx;
+                        icicle.posY = dy;
+                        icicle.posZ = dz;
+                        world.spawnEntity(icicle);
+                        count--;
+                      }
+                    }
                   }
                   if (modifiers.has(SpellWildfire.WILDFIRE)) {
                     wildFire(getPosition());
@@ -111,6 +115,10 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
       }
       if (this.onGround && modifiers != null && modifiers.has(SpellWildfire.WILDFIRE) && !world.isRemote) {
         wildFire(getPosition());
+      }
+      if (this.ticksExisted % 2 == 0) {
+        MessageWildfireFX packet = new MessageWildfireFX(posX, posY, posZ, motionX, motionY, motionZ, rotationYaw, modifiers);
+        PacketHandler.INSTANCE.sendToAllTracking(packet, this);
       }
     }
   }

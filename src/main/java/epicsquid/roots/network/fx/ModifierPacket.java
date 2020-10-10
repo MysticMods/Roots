@@ -3,6 +3,7 @@ package epicsquid.roots.network.fx;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.modifiers.IModifier;
 import epicsquid.roots.modifiers.IModifierCore;
+import epicsquid.roots.modifiers.instance.staff.ISnapshot;
 import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import io.netty.buffer.ByteBuf;
@@ -15,14 +16,14 @@ import java.util.Set;
 public class ModifierPacket implements IMessage {
   private StaffModifierInstanceList modifierInstances;
   @SideOnly(Side.CLIENT)
-  protected ModifierSnapshot modifiers = null;
+  protected ISnapshot modifiers = null;
 
   public ModifierPacket () {
     this.modifiers = null;
     this.modifierInstances = null;
   }
 
-  public ModifierPacket(ModifierSnapshot snapshot) {
+  public ModifierPacket(ISnapshot snapshot) {
     this.modifiers = snapshot;
   }
 
