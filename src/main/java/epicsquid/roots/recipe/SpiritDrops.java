@@ -2,8 +2,13 @@ package epicsquid.roots.recipe;
 
 import epicsquid.mysticallib.types.OneTimeSupplier;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.mysticalworld.init.ModItems;
+import epicsquid.mysticalworld.materials.Materials;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.ItemFishFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.WeightedRandom;
@@ -11,6 +16,7 @@ import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class SpiritDrops {
@@ -35,7 +41,7 @@ public class SpiritDrops {
   }
 
   public static void addPouch (SpiritItem item) {
-    reliquary.add(item);
+    pouch.add(item);
   }
 
   public static ItemStack getRandomReliquary () {
@@ -55,9 +61,9 @@ public class SpiritDrops {
   }
 
   public static class StackItem extends SpiritItem {
-    private final ItemStack stack;
+    private final Supplier<ItemStack> stack;
 
-    public StackItem(ItemStack stack, int itemWeightIn) {
+    public StackItem(Supplier<ItemStack> stack, int itemWeightIn) {
       super(itemWeightIn);
       this.stack = stack;
     }
@@ -65,7 +71,7 @@ public class SpiritDrops {
 
     @Override
     public ItemStack getItem() {
-      return stack.copy();
+      return stack.get().copy();
     }
   }
 
@@ -91,5 +97,45 @@ public class SpiritDrops {
     }
 
     public abstract ItemStack getItem ();
+  }
+
+  static {
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.APPLE, 3)), 31));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Blocks.WEB, 2)), 22));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.FEATHER, 6)), 29));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.COAL, 7, 1)), 45));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.BOOK)), 26));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.WRITABLE_BOOK)), 23));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.GOLD_NUGGET, 4)), 17));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.IRON_NUGGET, 4)), 21));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Objects.requireNonNull(Materials.copper.getNugget()), 4)), 21));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Objects.requireNonNull(Materials.silver.getNugget()), 4)), 16));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.FISH, 4, ItemFishFood.FishType.PUFFERFISH.getMetadata())), 14));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.FISH, 4, ItemFishFood.FishType.CLOWNFISH.getMetadata())), 13));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.GUNPOWDER, 3)), 7));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.SLIME_BALL, 2)), 5));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.DYE, 3, EnumDyeColor.BLUE.getMetadata())), 9));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.GOLD_INGOT)), 11));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.IRON_INGOT)), 13));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.REDSTONE, 6)), 10));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Objects.requireNonNull(Materials.copper.getItem()))), 11));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Objects.requireNonNull(Materials.silver.getItem()))), 13));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.NAME_TAG, 2)), 8));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.COMPASS)), 6));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.CLOCK)), 5));
+    addPouch(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(ModItems.unripe_pearl, 4)), 4));
+    addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.EXPERIENCE_BOTTLE)), 35));
+    addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.NETHER_WART, 3)), 29));
+    addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.SPIDER_EYE, 2)), 32));
+    addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.GLOWSTONE_DUST, 5)), 14));
+    addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.DIAMOND)), 12));
+    addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.ENDER_PEARL, 2)), 14));
+    addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.BLAZE_ROD, 2)), 12));
+    addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.EMERALD, 2)), 13));
+    addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Items.GHAST_TEAR, 3)), 13));
+    addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(Objects.requireNonNull(Materials.amethyst.getItem()))), 15));
+    addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(ModItems.pearl, 6)), 15));
+    addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(ModItems.beetle_mask)), 5));
+    addReliquary(new StackItem(new OneTimeSupplier<>(() -> new ItemStack(ModItems.antler_hat)), 6));
   }
 }
