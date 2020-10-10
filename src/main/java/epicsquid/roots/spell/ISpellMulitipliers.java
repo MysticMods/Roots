@@ -1,6 +1,6 @@
 package epicsquid.roots.spell;
 
-public interface SpellMulitipliers {
+public interface ISpellMulitipliers {
   Buff getAmplify ();
   Buff getSpeedy ();
 

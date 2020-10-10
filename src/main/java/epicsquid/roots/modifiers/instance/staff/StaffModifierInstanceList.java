@@ -8,7 +8,7 @@ import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstanceList;
 import epicsquid.roots.spell.SpellBase;
-import epicsquid.roots.spell.SpellMulitipliers;
+import epicsquid.roots.spell.ISpellMulitipliers;
 import epicsquid.roots.spell.info.AbstractSpellInfo;
 import io.netty.buffer.ByteBuf;
 import it.unimi.dsi.fastutil.ints.IntArraySet;
@@ -21,7 +21,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class StaffModifierInstanceList extends BaseModifierInstanceList<StaffModifierInstance> implements SpellMulitipliers {
+public class StaffModifierInstanceList extends BaseModifierInstanceList<StaffModifierInstance> implements ISpellMulitipliers, ISnapshot {
   public StaffModifierInstanceList(SpellBase spell) {
     super(spell, StaffModifierInstance::new);
   }
@@ -99,7 +99,12 @@ public class StaffModifierInstanceList extends BaseModifierInstanceList<StaffMod
     return new ModifierSnapshot(modifiers);
   }
 
+  @Override
+  public int[] toArray() {
+    return snapshot();
+  }
 
+  @Override
   public boolean has (IModifier modifier) {
     StaffModifierInstance instance = get(modifier);
     if (instance == null) {
@@ -107,27 +112,5 @@ public class StaffModifierInstanceList extends BaseModifierInstanceList<StaffMod
     }
 
     return instance.isApplied() && instance.isEnabled();
-  }
-
-  @Override
-  public Buff getAmplify() {
-    if (has(BaseModifiers.GREATER_EMPOWER)) {
-      return SpellMulitipliers.Buff.GREATER_BONUS;
-    }
-    if (has(BaseModifiers.EMPOWER)) {
-      return SpellMulitipliers.Buff.BONUS;
-    }
-    return SpellMulitipliers.Buff.NONE;
-  }
-
-  @Override
-  public Buff getSpeedy() {
-    if (has(BaseModifiers.GREATER_SPEEDY)) {
-      return SpellMulitipliers.Buff.GREATER_BONUS;
-    }
-    if (has(BaseModifiers.EMPOWER)) {
-      return SpellMulitipliers.Buff.BONUS;
-    }
-    return SpellMulitipliers.Buff.NONE;
   }
 }

@@ -6,11 +6,9 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.entity.mob.EntityHuskSlave;
 import epicsquid.roots.entity.mob.EntityZombieSlave;
 import epicsquid.roots.entity.projectile.EntityFlare;
+import epicsquid.roots.entity.render.RenderIcicle;
 import epicsquid.roots.entity.ritual.*;
-import epicsquid.roots.entity.spell.EntityBoost;
-import epicsquid.roots.entity.spell.EntityFireJet;
-import epicsquid.roots.entity.spell.EntityThornTrap;
-import epicsquid.roots.entity.spell.EntityTimeStop;
+import epicsquid.roots.entity.spell.*;
 import epicsquid.roots.proxy.ClientProxy;
 import net.minecraft.client.renderer.entity.RenderHusk;
 import net.minecraft.client.renderer.entity.RenderZombie;
@@ -21,18 +19,6 @@ import java.util.List;
 
 public class ModEntities {
 
-  /**
-   * Registers mobs in the game
-   * <p>
-   * Egg colours are defined as Background colour then Foreground (spots) colour
-   * <p>
-   * <p>
-   * Format for registering a mob:
-   * <p>
-   * LibRegistry.registerEntity(Entity.class, BackgroundColour, ForegroundColour);
-   * if (Mod.proxy instanceof ClientProxy)
-   * LibRegistry.registerEntityRenderer(Entity.class, new RenderEntity.Factory());
-   */
   public static void registerMobs() {
     LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
 
@@ -81,6 +67,7 @@ public class ModEntities {
 
       LibRegistry.registerEntityRenderer(EntityHuskSlave.class, RenderHusk::new);
       LibRegistry.registerEntityRenderer(EntityZombieSlave.class, RenderZombie::new);
+      LibRegistry.registerEntityRenderer(EntityIcicle.class, RenderIcicle::new);
     }
   }
 
