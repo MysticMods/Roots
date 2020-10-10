@@ -53,6 +53,10 @@ public abstract class EntitySpellModifiable<T extends SpellBase> extends Entity 
     }
   }
 
+  public int getLifetime () {
+    return getDataManager().get(lifetime);
+  }
+
   public void setPlayer(UUID id) {
     this.playerId = id;
   }
