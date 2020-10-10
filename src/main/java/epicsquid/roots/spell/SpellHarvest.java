@@ -19,6 +19,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.ResourceLocation;
@@ -38,6 +39,10 @@ public class SpellHarvest extends SpellBase {
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 6).setDescription("radius on the Z axis of the area the spell has effect on");
   public static Property<Integer> PROP_RADIUS_BOOST = new Property<>("radius_boost", 4).setDescription("how much the radius should be increased by");
   public static Property<Integer> PROP_RADIUS_UNBOOST = new Property<>("radius_unboost", 3).setDescription("how much the radius should be decreased by");
+  public static Property<Float> PROP_UNDEAD_CHANCE = new Property<>("undead_chance", 0.3f).setDescription("the chance per cast of getting an undead cache");
+  public static Property<Integer> PROP_UNDEAD_COUNT = new Property<>("undead_count", 1).setDescription("the number of guaranteed undead caches when granted");
+  public static Property<Integer> PROP_UNDEAD_ADDITIONAL = new Property<>("undead_additional", 3).setDescription("the number of (0-(x-1)) additional caches");
+  public static Property<Float> PROP_UNDEAD_RARITY = new Property<>("undead_rare", 0.3f).setDescription("the frequency at which caches will be upgraded from common to rare");
 
   public static Modifier RADIUS1 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "extended_harvest"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier MAGNETISM = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "magnetic_harvest"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
@@ -58,11 +63,12 @@ public class SpellHarvest extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_harvest");
   public static SpellHarvest instance = new SpellHarvest(spellName);
 
-  private int radius_x, radius_y, radius_z, radius_boost, radius_unboost;
+  private int radius_x, radius_y, radius_z, radius_boost, radius_unboost, undead_count, undead_additional;
+  private float undead_chance, undead_rarity;
 
   public SpellHarvest(ResourceLocation name) {
     super(name, TextFormatting.GREEN, 57f / 255f, 253f / 255f, 28f / 255f, 197f / 255f, 233f / 255f, 28f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_RADIUS_BOOST, PROP_RADIUS_UNBOOST);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_RADIUS_BOOST, PROP_RADIUS_UNBOOST, PROP_UNDEAD_ADDITIONAL, PROP_UNDEAD_CHANCE, PROP_UNDEAD_COUNT, PROP_UNDEAD_RARITY);
     acceptsModifiers(RADIUS1, MAGNETISM, FORTUNE, UNDEAD, SMALL_RADIUS, POISON, GROWTH, COOKING, CRUSHING, SILK_TOUCH);
   }
 
@@ -202,6 +208,24 @@ public class SpellHarvest extends SpellBase {
       }
     }
 
+    if (info.has(UNDEAD)) {
+      if (Util.rand.nextFloat() < undead_chance) {
+        int c = info.ampInt(undead_count + Util.rand.nextInt(undead_additional));
+        for (int i = 0; i < c; i++) {
+          Item it = ModItems.spirit_pouch;
+          if (Util.rand.nextFloat() < undead_rarity) {
+            it = ModItems.reliquary;
+          }
+          ItemStack stack = new ItemStack(it);
+          if (info.has(MAGNETISM)) {
+            ItemUtil.spawnItem(player.world, player.getPosition(), stack);
+          } else {
+            ItemUtil.spawnItem(player.world, Util.getRandomWithinRadius(player.getPosition(), x, y, z), stack);
+          }
+        }
+      }
+    }
+
     if (!affectedPositions.isEmpty() && !player.world.isRemote) {
       MessageHarvestCompleteFX message = new MessageHarvestCompleteFX(affectedPositions);
       PacketHandler.sendToAllTracking(message, player);
@@ -223,6 +247,10 @@ public class SpellHarvest extends SpellBase {
     this.radius_z = properties.get(PROP_RADIUS_Z);
     this.radius_boost = properties.get(PROP_RADIUS_BOOST);
     this.radius_unboost = properties.get(PROP_RADIUS_UNBOOST);
+    this.undead_additional = properties.get(PROP_UNDEAD_ADDITIONAL);
+    this.undead_chance = properties.get(PROP_UNDEAD_CHANCE);
+    this.undead_count = properties.get(PROP_UNDEAD_COUNT);
+    this.undead_rarity = properties.get(PROP_UNDEAD_RARITY);
   }
 
   private interface ItemStackConverter extends Function<ItemStack, ItemStack> {
