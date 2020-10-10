@@ -28,6 +28,7 @@ public class ModEntities {
     LibRegistry.registerEntity(EntityTimeStop.class);
     LibRegistry.registerEntity(EntityBoost.class);
     LibRegistry.registerEntity(EntityFlare.class);
+    LibRegistry.registerEntity(EntityIcicle.class);
 
     // Ritual entities
     List<Class<? extends Entity>> ritualClasses = Arrays.asList(
