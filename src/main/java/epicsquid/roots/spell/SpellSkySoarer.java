@@ -10,8 +10,10 @@ import epicsquid.roots.recipe.ingredient.ArrowBuilder;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -23,6 +25,8 @@ public class SpellSkySoarer extends SpellBase {
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("cloud_berry", 0.15));
   public static Property<Integer> PROP_SLOW_FALL_DURATION = new Property<>("slow_fall_duration", 20 * 4).setDescription("the duration of the slow fall effect that should be applied after the boost effect ends");
   public static Property<Integer> PROP_JAUNT_DISTANCE = new Property<>("jaunt_distance", 5).setDescription("the number of blocks forward to jaunt");
+  public static Property<Integer> PROP_REGEN_DURATION = new Property<>("regen_duration", 20 * 20).setDescription("how long regeneration should be applied for");
+  public static Property<Integer> PROP_REGEN_AMPLIFIER = new Property<>("regen_amplifier", 0).setDescription("the amplifier to use for the regeneration effect");
 
   public static Modifier SLOW_FALL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "slow_fall"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier NO_COLLIDE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "arboreal_bypass"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -42,11 +46,11 @@ public class SpellSkySoarer extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_sky_soarer");
   public static SpellSkySoarer instance = new SpellSkySoarer(spellName);
 
-  public int slow_duration, jaunt_distance;
+  public int slow_duration, jaunt_distance, regen_duration, regen_amplifier;
 
   public SpellSkySoarer(ResourceLocation name) {
     super(name, TextFormatting.BLUE, 32f / 255f, 200f / 255f, 255f / 255f, 32f / 255f, 64f / 255f, 255f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_SLOW_FALL_DURATION, PROP_JAUNT_DISTANCE);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_SLOW_FALL_DURATION, PROP_JAUNT_DISTANCE, PROP_REGEN_AMPLIFIER, PROP_REGEN_DURATION);
     acceptsModifiers(SLOW_FALL, NO_COLLIDE, FASTER, VERTICAL, KNOCKBACK, REGENERATION, CHEM_TRAILS, JAUNT, NO_FALL_DAMAGE, UNDERWATER);
   }
 
@@ -83,6 +87,9 @@ public class SpellSkySoarer extends SpellBase {
         player.world.spawnEntity(boost);
         player.getEntityData().setIntArray(getCachedName(), info.snapshot());
       }
+      if (info.has(REGENERATION)) {
+        player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, info.ampInt(regen_duration), regen_amplifier, false, false));
+      }
     }
     return true;
   }
@@ -93,5 +100,7 @@ public class SpellSkySoarer extends SpellBase {
     this.cooldown = properties.get(PROP_COOLDOWN);
     this.slow_duration = properties.get(PROP_SLOW_FALL_DURATION);
     this.jaunt_distance = properties.get(PROP_JAUNT_DISTANCE);
+    this.regen_amplifier = properties.get(PROP_REGEN_AMPLIFIER);
+    this.regen_duration = properties.get(PROP_REGEN_DURATION);
   }
 }
