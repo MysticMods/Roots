@@ -43,6 +43,8 @@ public class SpellSaturate extends SpellBase {
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("terra_moss", 0.5));
   public static Property<Double> PROP_SATURATION_MULTIPLIER = new Property<>("saturation_multiplier", 0.5).setDescription("multiplier for the saturation value each food item gives");
   public static Property<Double> PROP_FOOD_MULTIPLIER = new Property<>("food_multiplier", 0.5).setDescription("multiplier for the food value each food item gives");
+  public static Property<Double> PROP_ADDITIONAL_SATURATION_MULTIPLIER = new Property<>("increased_saturation_multiplier", 0.3).setDescription("the additional value added to the multiplier");
+  public static Property<Double> PROP_ADDITIONAL_FOOD_MULTIPLIER = new Property<>("increased_food_multiplier", 0.3);
 
   public static Modifier RATIO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "big_bellied"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier UNCOOKED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "root_lover"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
@@ -66,12 +68,12 @@ public class SpellSaturate extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_saturate");
   public static SpellSaturate instance = new SpellSaturate(spellName);
 
-  private double saturation_multiplier, food_multiplier;
+  private double saturation_multiplier, food_multiplier, additional_saturation_multiplier, additional_food_multiplier;
   private boolean suppressSound = false;
 
   public SpellSaturate(ResourceLocation name) {
     super(name, TextFormatting.GOLD, 225F / 255F, 52F / 255F, 246F / 255F, 232F / 42F, 232F / 255F, 42F / 255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_SATURATION_MULTIPLIER, PROP_FOOD_MULTIPLIER);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_SATURATION_MULTIPLIER, PROP_FOOD_MULTIPLIER, PROP_ADDITIONAL_FOOD_MULTIPLIER, PROP_ADDITIONAL_SATURATION_MULTIPLIER);
     acceptsModifiers(RATIO, UNCOOKED, INVERSION, RESISTANCE, POISONED, ITEMS, COOKED, NAUSEA, LIQUIDS);
     MinecraftForge.EVENT_BUS.register(this);
   }
@@ -111,13 +113,13 @@ public class SpellSaturate extends SpellBase {
     if (foods.isEmpty()) {
       return false;
     }
-    List<ItemStack> sortedFoods = foods.keySet().stream().sorted((o1, o2) -> Double.compare(saturation(o2), saturation(o1))).collect(Collectors.toList());
+    List<ItemStack> sortedFoods = foods.keySet().stream().sorted((o1, o2) -> Double.compare(saturation(o2, info), saturation(o1, info))).collect(Collectors.toList());
 
     Object2IntOpenHashMap<ItemStack> usedFoods = new Object2IntOpenHashMap<>();
 
     for (ItemStack stack : sortedFoods) {
-      double thisSaturation = saturation(stack);
-      int thisFood = health(stack);
+      double thisSaturation = saturation(stack, info);
+      int thisFood = health(stack, info);
       int used = 0;
       for (int i = 0; i < stack.getCount(); i++) {
         newSat += thisSaturation;
@@ -190,22 +192,30 @@ public class SpellSaturate extends SpellBase {
     return true;
   }
 
-  private double saturation(ItemStack stack) {
+  private double saturation(ItemStack stack, StaffModifierInstanceList info) {
     if (!(stack.getItem() instanceof ItemFood)) {
       return 0;
     }
     ItemFood item = (ItemFood) stack.getItem();
     int heal = item.getHealAmount(stack);
     float saturation = item.getSaturationModifier(stack);
-    return (heal * saturation * 2f) * saturation_multiplier;
+    double sat = saturation_multiplier;
+    if (info.has(RATIO)) {
+      sat += additional_saturation_multiplier;
+    }
+    return (heal * saturation * 2f) * sat;
   }
 
-  private int health(ItemStack stack) {
+  private int health(ItemStack stack, StaffModifierInstanceList info) {
     if (!(stack.getItem() instanceof ItemFood)) {
       return 0;
     }
     ItemFood item = (ItemFood) stack.getItem();
-    return (int) Math.floor(item.getHealAmount(stack) * food_multiplier);
+    double food = food_multiplier;
+    if (info.has(RATIO)) {
+      food += additional_food_multiplier;
+    }
+    return (int) Math.floor(item.getHealAmount(stack) * food);
   }
 
   @SubscribeEvent
@@ -221,5 +231,7 @@ public class SpellSaturate extends SpellBase {
     this.cooldown = properties.get(PROP_COOLDOWN);
     this.saturation_multiplier = properties.get(PROP_SATURATION_MULTIPLIER);
     this.food_multiplier = properties.get(PROP_FOOD_MULTIPLIER);
+    this.additional_food_multiplier = properties.get(PROP_ADDITIONAL_FOOD_MULTIPLIER);
+    this.additional_saturation_multiplier = properties.get(PROP_ADDITIONAL_SATURATION_MULTIPLIER);
   }
 }
