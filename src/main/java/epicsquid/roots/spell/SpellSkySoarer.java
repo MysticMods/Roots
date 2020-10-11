@@ -69,7 +69,7 @@ public class SpellSkySoarer extends SpellBase {
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     if (!player.world.isRemote) {
       if (info.has(JAUNT)) {
-        Vec3d realPos = new Vec3d(player.posX, player.posY, player.posZ).add(Vec3d.fromPitchYaw(0, player.rotationYaw).scale(jaunt_distance));
+        Vec3d realPos = new Vec3d(player.posX, player.posY, player.posZ).add(Vec3d.fromPitchYaw(0, player.rotationYaw).scale(info.ampInt(jaunt_distance)));
         BlockPos pos = player.world.getHeight(new BlockPos(realPos.x, realPos.y, realPos.z));
         IBlockState state = player.world.getBlockState(pos);
         if (state.getBlock().isPassable(player.world, pos)) {
@@ -85,7 +85,6 @@ public class SpellSkySoarer extends SpellBase {
         boost.setPlayer(player.getUniqueID());
         boost.setPosition(player.posX, player.posY, player.posZ);
         player.world.spawnEntity(boost);
-        player.getEntityData().setIntArray(getCachedName(), info.snapshot());
       }
       if (info.has(REGENERATION)) {
         player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, info.ampInt(regen_duration), regen_amplifier, false, false));
