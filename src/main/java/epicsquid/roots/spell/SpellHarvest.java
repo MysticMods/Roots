@@ -6,10 +6,12 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.mechanics.Harvest;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageHarvestCompleteFX;
+import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.recipe.FoodPoisoning;
 import epicsquid.roots.recipe.MortarRecipe;
@@ -43,6 +45,8 @@ public class SpellHarvest extends SpellBase {
   public static Property<Integer> PROP_UNDEAD_COUNT = new Property<>("undead_count", 1).setDescription("the number of guaranteed undead caches when granted");
   public static Property<Integer> PROP_UNDEAD_ADDITIONAL = new Property<>("undead_additional", 3).setDescription("the number of (0-(x-1)) additional caches");
   public static Property<Float> PROP_UNDEAD_RARITY = new Property<>("undead_rare", 0.3f).setDescription("the frequency at which caches will be upgraded from common to rare");
+  public static Property<Integer> PROP_GROWTH_COUNT = new Property<>("growth_count", 6).setDescription("how many additional ticks of growth will be applied");
+  public static Property<Integer> PROP_GROWTH_ADDITIONAL = new Property<>("growth_additional", 12).setDescription("how many additional randomised ticks of growth will be applied");
 
   public static Modifier RADIUS1 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "extended_harvest"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier MAGNETISM = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "magnetic_harvest"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
@@ -63,12 +67,12 @@ public class SpellHarvest extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_harvest");
   public static SpellHarvest instance = new SpellHarvest(spellName);
 
-  private int radius_x, radius_y, radius_z, radius_boost, radius_unboost, undead_count, undead_additional;
+  private int radius_x, radius_y, radius_z, radius_boost, radius_unboost, undead_count, undead_additional, growth_count, growth_additional;
   private float undead_chance, undead_rarity;
 
   public SpellHarvest(ResourceLocation name) {
     super(name, TextFormatting.GREEN, 57f / 255f, 253f / 255f, 28f / 255f, 197f / 255f, 233f / 255f, 28f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_RADIUS_BOOST, PROP_RADIUS_UNBOOST, PROP_UNDEAD_ADDITIONAL, PROP_UNDEAD_CHANCE, PROP_UNDEAD_COUNT, PROP_UNDEAD_RARITY);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_RADIUS_BOOST, PROP_RADIUS_UNBOOST, PROP_UNDEAD_ADDITIONAL, PROP_UNDEAD_CHANCE, PROP_UNDEAD_COUNT, PROP_UNDEAD_RARITY, PROP_GROWTH_COUNT, PROP_GROWTH_ADDITIONAL);
     acceptsModifiers(RADIUS1, MAGNETISM, FORTUNE, UNDEAD, SMALL_RADIUS, POISON, GROWTH, COOKING, CRUSHING, SILK_TOUCH);
   }
 
@@ -232,8 +236,23 @@ public class SpellHarvest extends SpellBase {
       PacketHandler.sendToAllTracking(message, player);
     }
 
-    for (ItemStack item : drops) {
-      ItemUtil.spawnItem(player.world, player.getPosition(), item);
+    if (!player.world.isRemote) {
+      for (ItemStack item : drops) {
+        ItemUtil.spawnItem(player.world, player.getPosition(), item);
+      }
+
+      if (info.has(GROWTH)) {
+        for (BlockPos pos : affectedPositions) {
+          IBlockState state = player.world.getBlockState(pos);
+          if (Growth.canGrow(player.world, pos, state)) {
+            int c = growth_count + Util.rand.nextInt(growth_additional);
+            for (int i = 0; i < c; i++) {
+              state.getBlock().randomTick(player.world, pos, state, Util.rand);
+            }
+            PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);
+          }
+        }
+      }
     }
 
     return count != 0;
@@ -252,6 +271,8 @@ public class SpellHarvest extends SpellBase {
     this.undead_chance = properties.get(PROP_UNDEAD_CHANCE);
     this.undead_count = properties.get(PROP_UNDEAD_COUNT);
     this.undead_rarity = properties.get(PROP_UNDEAD_RARITY);
+    this.growth_count = properties.get(PROP_GROWTH_COUNT);
+    this.growth_additional = properties.get(PROP_GROWTH_ADDITIONAL);
   }
 
   private interface ItemStackConverter extends Function<ItemStack, ItemStack> {
