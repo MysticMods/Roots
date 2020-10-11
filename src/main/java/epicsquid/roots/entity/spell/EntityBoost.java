@@ -61,6 +61,7 @@ public class EntityBoost extends Entity {
     }
   }
 
+  // TODO: What happened to this?
   public void setAmplifier(float value) {
     this.amplifier = value;
   }
