@@ -5,9 +5,7 @@ import epicsquid.roots.modifiers.instance.staff.ISnapshot;
 import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.SpellAquaBubble;
 import epicsquid.roots.spell.SpellSkySoarer;
-import it.unimi.dsi.fastutil.ints.IntSets;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,7 +33,7 @@ public class EntityBoost extends Entity {
   private float amplifier;
   private ISnapshot modifiers;
 
-  public static boolean beingBoosted (Entity player) {
+  public static boolean beingBoosted(Entity player) {
     return boostedPlayers.contains(player.getUniqueID());
   }
 
@@ -124,15 +122,9 @@ public class EntityBoost extends Entity {
     if (world.isRemote) {
       for (int i = 0; i < 4; i++) {
         if (rand.nextBoolean()) {
-          ParticleUtil.spawnParticleStar(world, (float) posX + (rand.nextFloat()) - 0.5f, (float) posY + (rand.nextFloat()) + 0.5f,
-              (float) posZ + (rand.nextFloat()) - 0.5f, -0.125f * (float) motionX, -0.125f * (float) motionY, -0.125f * (float) motionZ,
-              SpellSkySoarer.instance.getRed1(), SpellSkySoarer.instance.getGreen1(), SpellSkySoarer.instance.getBlue1(), 0.5f,
-              5.0f * rand.nextFloat() + 5.0f, 40);
+          ParticleUtil.spawnParticleStar(world, (float) posX + (rand.nextFloat()) - 0.5f, (float) posY + (rand.nextFloat()) + 0.5f, (float) posZ + (rand.nextFloat()) - 0.5f, -0.125f * (float) motionX, -0.125f * (float) motionY, -0.125f * (float) motionZ, SpellSkySoarer.instance.getFirstColours(0.5f), 5.0f * rand.nextFloat() + 5.0f, 40);
         } else {
-          ParticleUtil.spawnParticleStar(world, (float) posX + (rand.nextFloat()) - 0.5f, (float) posY + (rand.nextFloat()) + 0.5f,
-              (float) posZ + (rand.nextFloat()) - 0.5f, -0.125f * (float) motionX, -0.125f * (float) motionY, -0.125f * (float) motionZ,
-              SpellSkySoarer.instance.getRed2(), SpellSkySoarer.instance.getGreen2(), SpellSkySoarer.instance.getBlue2(), 0.5f,
-              5.0f * rand.nextFloat() + 5.0f, 40);
+          ParticleUtil.spawnParticleStar(world, (float) posX + (rand.nextFloat()) - 0.5f, (float) posY + (rand.nextFloat()) + 0.5f, (float) posZ + (rand.nextFloat()) - 0.5f, -0.125f * (float) motionX, -0.125f * (float) motionY, -0.125f * (float) motionZ, SpellSkySoarer.instance.getSecondColours(0.5f), 5.0f * rand.nextFloat() + 5.0f, 40);
         }
       }
     } else {
