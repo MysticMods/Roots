@@ -77,6 +77,7 @@ public class SpellSkySoarer extends SpellBase {
         }
       } else {
         EntityBoost boost = new EntityBoost(player.world);
+        boost.setModifiers(info);
         boost.setPlayer(player.getUniqueID());
         boost.setPosition(player.posX, player.posY, player.posZ);
         player.world.spawnEntity(boost);
