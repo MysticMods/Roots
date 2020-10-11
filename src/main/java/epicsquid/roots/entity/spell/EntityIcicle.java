@@ -5,6 +5,7 @@ import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.modifiers.instance.staff.ISnapshot;
 import epicsquid.roots.spell.SpellWildfire;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
@@ -15,14 +16,17 @@ public class EntityIcicle extends EntityFireball {
 
   public EntityIcicle(World worldIn) {
     super(worldIn);
+    this.setSize(0.25F, 0.25F);
   }
 
   public EntityIcicle(World worldIn, double x, double y, double z, double accelX, double accelY, double accelZ) {
     super(worldIn, x, y, z, accelX, accelY, accelZ);
+    this.setSize(0.25F, 0.25F);
   }
 
   public EntityIcicle(World worldIn, EntityLivingBase shooter, double accelX, double accelY, double accelZ) {
     super(worldIn, shooter, accelX, accelY, accelZ);
+    this.setSize(0.25F, 0.25F);
   }
 
   @Override
