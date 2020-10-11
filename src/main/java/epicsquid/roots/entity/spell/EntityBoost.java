@@ -1,11 +1,13 @@
 package epicsquid.roots.entity.spell;
 
 import epicsquid.roots.init.ModPotions;
+import epicsquid.roots.modifiers.instance.staff.ISnapshot;
 import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellAquaBubble;
 import epicsquid.roots.spell.SpellSkySoarer;
+import it.unimi.dsi.fastutil.ints.IntSets;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,21 +21,33 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 public class EntityBoost extends Entity {
+  private static final Set<UUID> boostedPlayers = new HashSet<>();
   private static final DataParameter<Integer> lifetime = EntityDataManager.createKey(EntityBoost.class, DataSerializers.VARINT);
   private UUID playerId = null;
   private double origX;
   private double origY;
   private double origZ;
   private float amplifier;
+  private ISnapshot modifiers;
+
+  public static boolean beingBoosted (Entity player) {
+    return boostedPlayers.contains(player.getUniqueID());
+  }
 
   public EntityBoost(World worldIn) {
     super(worldIn);
     this.setInvisible(true);
     this.setSize(1, 1);
     getDataManager().register(lifetime, 20);
+  }
+
+  public void setModifiers(ISnapshot modifiers) {
+    this.modifiers = modifiers;
   }
 
   public void setPlayer(UUID id) {
@@ -43,6 +57,9 @@ public class EntityBoost extends Entity {
       origX = result[1].motionX;
       origY = result[1].motionY;
       origZ = result[1].motionZ;
+    }
+    if (modifiers.has(SpellSkySoarer.NO_COLLIDE)) {
+      boostedPlayers.add(id);
     }
   }
 
@@ -83,6 +100,7 @@ public class EntityBoost extends Entity {
     getDataManager().setDirty(lifetime);
     if (getDataManager().get(lifetime) <= 0) {
       setDead();
+      boostedPlayers.remove(this.playerId);
       if (!world.isRemote) {
         Entity[] target = getTargets();
         if (target != null) {

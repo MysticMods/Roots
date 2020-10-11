@@ -4,6 +4,7 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.roots.capability.life_essence.LifeEssenceCapabilityProvider;
 import epicsquid.roots.capability.runic_shears.RunicShearsCapabilityProvider;
+import epicsquid.roots.entity.spell.EntityBoost;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.init.ModRecipes;
@@ -19,6 +20,7 @@ import epicsquid.roots.spell.SpellAquaBubble;
 import epicsquid.roots.spell.SpellPetalShell;
 import epicsquid.roots.util.Constants;
 import epicsquid.roots.util.SlaveUtil;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -27,6 +29,8 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -34,12 +38,15 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
+import net.minecraftforge.event.world.GetCollisionBoxesEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
+
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 public class EventManager {
@@ -228,6 +235,25 @@ public class EventManager {
   public static void onLooting(LootingLevelEvent event) {
     if (event.getDamageSource().damageType.equals(ModDamage.FEY_FIRE)) {
       event.setLootingLevel(event.getLootingLevel() + 2);
+    }
+  }
+
+  @SubscribeEvent
+  public static void onLeafEvent(GetCollisionBoxesEvent event) {
+    if (!(event.getEntity() instanceof EntityPlayer)) {
+      return;
+    }
+
+    if (EntityBoost.beingBoosted(event.getEntity())) {
+      List<AxisAlignedBB> collisions = event.getCollisionBoxesList();
+      for (int i = collisions.size() - 1; i >= 0; i--) {
+        AxisAlignedBB aabb = collisions.get(i);
+        BlockPos pos = new BlockPos(aabb.minX + (aabb.maxX - aabb.minX) * 0.5f, aabb.minY + (aabb.maxY - aabb.minY) * 0.5f, aabb.minZ + (aabb.maxZ - aabb.minZ) * 0.5f);
+        IBlockState state = event.getWorld().getBlockState(pos);
+        if (state.getBlock().isLeaves(state, event.getWorld(), pos) && event.getEntity().posY < aabb.maxY) {
+          event.getCollisionBoxesList().remove(i);
+        }
+      }
     }
   }
 }
