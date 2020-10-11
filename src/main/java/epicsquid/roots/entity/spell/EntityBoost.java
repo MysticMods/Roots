@@ -1,9 +1,11 @@
 package epicsquid.roots.entity.spell;
 
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.modifiers.instance.staff.ISnapshot;
 import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
+import epicsquid.roots.network.fx.MessageChemTrailsFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellSkySoarer;
 import net.minecraft.entity.Entity;
@@ -129,6 +131,9 @@ public class EntityBoost extends Entity {
         }
       }
     } else {
+      if (modifiers.has(SpellSkySoarer.CHEM_TRAILS)) {
+        PacketHandler.sendToAllTracking(new MessageChemTrailsFX(this.posX, this.posY, this.posZ, this.motionX, this.motionY, this.motionZ), this);
+      }
       if (playerId != null) {
         Entity[] result = getTargets();
         if (result != null) {
