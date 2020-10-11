@@ -13,10 +13,12 @@ import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketUpdateHealth;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.FoodStats;
 import net.minecraft.util.ResourceLocation;
@@ -45,6 +47,11 @@ public class SpellSaturate extends SpellBase {
   public static Property<Double> PROP_FOOD_MULTIPLIER = new Property<>("food_multiplier", 0.5).setDescription("multiplier for the food value each food item gives");
   public static Property<Double> PROP_ADDITIONAL_SATURATION_MULTIPLIER = new Property<>("increased_saturation_multiplier", 0.3).setDescription("the additional value added to the multiplier");
   public static Property<Double> PROP_ADDITIONAL_FOOD_MULTIPLIER = new Property<>("increased_food_multiplier", 0.3);
+  public static Property<String> PROP_UNCOOKED_DICT = new Property<>("uncooked_dictionary", "rootsUncookedFood").setDescription("the ore dictionary name for items that should be considered uncooked");
+  public static Property<Integer> PROP_RESISTANCE_DURATION = new Property<>("resistance_duration", 10 * 20).setDescription("the duration of the resistance effect, multiplied by how much additional saturation there is");
+  public static Property<Integer> PROP_RESISTANCE_AMPLIFIER = new Property<>("resistance_amplifier", 0).setDescription("the amplifier for the resistance effect");
+  public static Property<Double> PROP_POISON_ADDITION_FOOD = new Property<>("poison_food", 0.7).setDescription("how much additional percentage of food should be applied when eating poisoned food");
+  public static Property<Double> PROP_POISON_ADDITION_SATURATION = new Property<>("poison_saturation", 0.7).setDescription("how much additional percentage of saturation should be applied when eating poisoned food");
 
   public static Modifier RATIO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "big_bellied"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier UNCOOKED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "root_lover"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
@@ -68,12 +75,14 @@ public class SpellSaturate extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_saturate");
   public static SpellSaturate instance = new SpellSaturate(spellName);
 
-  private double saturation_multiplier, food_multiplier, additional_saturation_multiplier, additional_food_multiplier;
+  private String uncooked_dictionary;
+  private int resistance_amplifier, resistance_duration;
+  private double saturation_multiplier, food_multiplier, additional_saturation_multiplier, additional_food_multiplier, poison_saturation, poison_food;
   private boolean suppressSound = false;
 
   public SpellSaturate(ResourceLocation name) {
     super(name, TextFormatting.GOLD, 225F / 255F, 52F / 255F, 246F / 255F, 232F / 42F, 232F / 255F, 42F / 255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_SATURATION_MULTIPLIER, PROP_FOOD_MULTIPLIER, PROP_ADDITIONAL_FOOD_MULTIPLIER, PROP_ADDITIONAL_SATURATION_MULTIPLIER);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_SATURATION_MULTIPLIER, PROP_FOOD_MULTIPLIER, PROP_ADDITIONAL_FOOD_MULTIPLIER, PROP_ADDITIONAL_SATURATION_MULTIPLIER, PROP_UNCOOKED_DICT, PROP_RESISTANCE_AMPLIFIER, PROP_RESISTANCE_DURATION, PROP_POISON_ADDITION_FOOD, PROP_POISON_ADDITION_SATURATION);
     acceptsModifiers(RATIO, UNCOOKED, INVERSION, RESISTANCE, POISONED, ITEMS, COOKED, NAUSEA, LIQUIDS);
     MinecraftForge.EVENT_BUS.register(this);
   }
@@ -152,19 +161,33 @@ public class SpellSaturate extends SpellBase {
     List<ItemStack> containers = new ArrayList<>();
 
     suppressSound = true;
+    PotionEffect poison = null;
+    if (info.has(POISONED)) {
+      poison = caster.getActivePotionEffect(MobEffects.POISON);
+      caster.removeActivePotionEffect(MobEffects.POISON);
+    }
     for (Object2IntMap.Entry<ItemStack> entry : usedFoods.object2IntEntrySet()) {
       int used = entry.getIntValue();
       ItemStack stack = entry.getKey();
       int index = foods.getInt(stack);
       ItemStack result = handler.extractItem(index, used, false);
+
       if (!result.isEmpty()) {
         for (int i = 0; i < result.getCount(); i++) {
           ItemStack container = result.onItemUseFinish(caster.world, caster);
           if (!container.isEmpty() && !ItemUtil.equalWithoutSize(container, result)) {
             containers.add(container);
           }
+          if (poison == null && info.has(POISONED)) {
+            caster.removeActivePotionEffect(MobEffects.POISON);
+          }
         }
       }
+    }
+
+    if (info.has(POISONED) && poison != null) {
+      caster.removeActivePotionEffect(MobEffects.POISON);
+      caster.addPotionEffect(poison);
     }
     suppressSound = false;
 
@@ -192,6 +215,19 @@ public class SpellSaturate extends SpellBase {
     return true;
   }
 
+  private boolean poisoned (ItemStack stack) {
+    if (!(stack.getItem() instanceof ItemFood)) {
+      return false;
+    }
+
+    ItemFood food = (ItemFood) stack.getItem();
+    if (food.potionId != null && food.potionId.getPotion() == MobEffects.POISON) {
+      return true;
+    }
+
+    return false;
+  }
+
   private double saturation(ItemStack stack, StaffModifierInstanceList info) {
     if (!(stack.getItem() instanceof ItemFood)) {
       return 0;
@@ -202,6 +238,9 @@ public class SpellSaturate extends SpellBase {
     double sat = saturation_multiplier;
     if (info.has(RATIO)) {
       sat += additional_saturation_multiplier;
+    }
+    if (info.has(POISONED) && poisoned(stack)) {
+      sat += poison_saturation;
     }
     return (heal * saturation * 2f) * sat;
   }
@@ -214,6 +253,9 @@ public class SpellSaturate extends SpellBase {
     double food = food_multiplier;
     if (info.has(RATIO)) {
       food += additional_food_multiplier;
+    }
+    if (info.has(POISONED) && poisoned(stack)) {
+      food += poison_food;
     }
     return (int) Math.floor(item.getHealAmount(stack) * food);
   }
@@ -233,5 +275,10 @@ public class SpellSaturate extends SpellBase {
     this.food_multiplier = properties.get(PROP_FOOD_MULTIPLIER);
     this.additional_food_multiplier = properties.get(PROP_ADDITIONAL_FOOD_MULTIPLIER);
     this.additional_saturation_multiplier = properties.get(PROP_ADDITIONAL_SATURATION_MULTIPLIER);
+    this.uncooked_dictionary = properties.get(PROP_UNCOOKED_DICT);
+    this.resistance_amplifier = properties.get(PROP_RESISTANCE_AMPLIFIER);
+    this.resistance_duration = properties.get(PROP_RESISTANCE_DURATION);
+    this.poison_food = properties.get(PROP_POISON_ADDITION_FOOD);
+    this.poison_saturation = properties.get(PROP_POISON_ADDITION_SATURATION);
   }
 }
