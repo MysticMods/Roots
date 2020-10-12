@@ -27,7 +27,7 @@ public class SpellSkySoarer extends SpellBase {
   public static Property<Integer> PROP_JAUNT_DISTANCE = new Property<>("jaunt_distance", 5).setDescription("the number of blocks forward to jaunt");
   public static Property<Integer> PROP_REGEN_DURATION = new Property<>("regen_duration", 20 * 20).setDescription("how long regeneration should be applied for");
   public static Property<Integer> PROP_REGEN_AMPLIFIER = new Property<>("regen_amplifier", 0).setDescription("the amplifier to use for the regeneration effect");
-  public static Property<Float> PROP_AMPLIFIER = new Property<>("amplifier", 1f).setDescription("the amplifier to the default motion");
+  public static Property<Float> PROP_AMPLIFIER = new Property<>("amplifier", 0.8f).setDescription("the amplifier to the default motion");
   public static Property<Integer> PROP_FALL_DURATION = new Property<>("fall_duration", 20 * 15).setDescription("the duration for which fall damage should be suppressed after a boost ends");
 
   public static Modifier SLOW_FALL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "slow_fall"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));

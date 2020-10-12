@@ -193,10 +193,6 @@ public class EntityBoost extends Entity {
     public PlayerTracker (UUID id) {
     }
 
-    public PlayerTracker(int start) {
-      this.start = start;
-    }
-
     public void setStart(int start) {
       this.start = start;
     }
