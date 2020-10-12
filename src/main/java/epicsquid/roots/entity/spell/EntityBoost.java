@@ -32,7 +32,6 @@ public class EntityBoost extends Entity {
   private double origX;
   private double origY;
   private double origZ;
-  private float amplifier;
   private ISnapshot modifiers;
 
   public static boolean beingBoosted(Entity player) {
@@ -61,11 +60,6 @@ public class EntityBoost extends Entity {
     if (modifiers.has(SpellSkySoarer.NO_COLLIDE)) {
       boostedPlayers.add(id);
     }
-  }
-
-  // TODO: What happened to this?
-  public void setAmplifier(float value) {
-    this.amplifier = value;
   }
 
   @Nullable
@@ -135,6 +129,7 @@ public class EntityBoost extends Entity {
         PacketHandler.sendToAllTracking(new MessageChemTrailsFX(this.posX, this.posY, this.posZ, this.motionX, this.motionY, this.motionZ), this);
       }
       if (playerId != null) {
+        float amplifier = modifiers.ampFloat(SpellSkySoarer.instance.amplifier);
         Entity[] result = getTargets();
         if (result != null) {
           EntityPlayer player = (EntityPlayer) result[0];
@@ -143,7 +138,7 @@ public class EntityBoost extends Entity {
           this.posX = player.posX;
           this.posY = boat ? this.posY : player.posY + 1.0;
           this.posZ = player.posZ;
-          double amp = 0.8 + (0.8 * amplifier);
+          double amp = 0.8 * amplifier;
           Vec3d vec = player.getLookVec();
           target.motionX = vec.x * amp;
           target.motionY = boat ? target.motionY : vec.y * amp;

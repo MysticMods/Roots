@@ -27,6 +27,7 @@ public class SpellSkySoarer extends SpellBase {
   public static Property<Integer> PROP_JAUNT_DISTANCE = new Property<>("jaunt_distance", 5).setDescription("the number of blocks forward to jaunt");
   public static Property<Integer> PROP_REGEN_DURATION = new Property<>("regen_duration", 20 * 20).setDescription("how long regeneration should be applied for");
   public static Property<Integer> PROP_REGEN_AMPLIFIER = new Property<>("regen_amplifier", 0).setDescription("the amplifier to use for the regeneration effect");
+  public static Property<Float> PROP_AMPLIFIER = new Property<>("amplifier", 1f).setDescription("the amplifier to the default motion");
 
   public static Modifier SLOW_FALL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "slow_fall"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier NO_COLLIDE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "arboreal_bypass"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -46,11 +47,12 @@ public class SpellSkySoarer extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_sky_soarer");
   public static SpellSkySoarer instance = new SpellSkySoarer(spellName);
 
+  public float amplifier;
   public int slow_duration, jaunt_distance, regen_duration, regen_amplifier;
 
   public SpellSkySoarer(ResourceLocation name) {
     super(name, TextFormatting.BLUE, 32f / 255f, 200f / 255f, 255f / 255f, 32f / 255f, 64f / 255f, 255f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_SLOW_FALL_DURATION, PROP_JAUNT_DISTANCE, PROP_REGEN_AMPLIFIER, PROP_REGEN_DURATION);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_SLOW_FALL_DURATION, PROP_JAUNT_DISTANCE, PROP_REGEN_AMPLIFIER, PROP_REGEN_DURATION, PROP_AMPLIFIER);
     acceptsModifiers(SLOW_FALL, NO_COLLIDE, FASTER, VERTICAL, KNOCKBACK, REGENERATION, CHEM_TRAILS, JAUNT, NO_FALL_DAMAGE, UNDERWATER);
   }
 
@@ -101,5 +103,6 @@ public class SpellSkySoarer extends SpellBase {
     this.jaunt_distance = properties.get(PROP_JAUNT_DISTANCE);
     this.regen_amplifier = properties.get(PROP_REGEN_AMPLIFIER);
     this.regen_duration = properties.get(PROP_REGEN_DURATION);
+    this.amplifier = properties.get(PROP_AMPLIFIER);
   }
 }
