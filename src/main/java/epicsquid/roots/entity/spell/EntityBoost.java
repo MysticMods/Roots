@@ -36,11 +36,15 @@ public class EntityBoost extends Entity {
     return boostedPlayers.contains(player.getUniqueID());
   }
 
-  public EntityBoost(World worldIn) {
+  public EntityBoost (World worldIn) {
+    this(worldIn, SpellSkySoarer.instance.lifetime);
+  }
+
+  public EntityBoost(World worldIn, int life) {
     super(worldIn);
     this.setInvisible(true);
     this.setSize(1, 1);
-    getDataManager().register(lifetime, 20);
+    getDataManager().register(lifetime, life);
   }
 
   public void setModifiers(ISnapshot modifiers) {
@@ -128,7 +132,11 @@ public class EntityBoost extends Entity {
         PacketHandler.sendToAllTracking(new MessageChemTrailsFX(this.posX, this.posY, this.posZ, this.motionX, this.motionY, this.motionZ), this);
       }
       if (playerId != null) {
-        float amplifier = modifiers.ampFloat(SpellSkySoarer.instance.amplifier);
+        float amplifier = SpellSkySoarer.instance.amplifier;
+        if (modifiers.has(SpellSkySoarer.FASTER)) {
+          amplifier += SpellSkySoarer.instance.extended_amplifier;
+        }
+        amplifier = modifiers.ampFloat(amplifier);
         Entity[] result = getTargets();
         if (result != null) {
           EntityPlayer player = (EntityPlayer) result[0];
@@ -143,9 +151,13 @@ public class EntityBoost extends Entity {
           target.motionX = vec.x * amp;
           target.motionY = boat ? target.motionY : vec.y * amp;
           target.motionZ = vec.z * amp;
-          this.motionX = vec.x + vec.x * amplifier;
-          this.motionY = vec.y + vec.y * amplifier;
-          this.motionZ = vec.z + vec.z * amplifier;
+          if (!modifiers.has(SpellSkySoarer.VERTICAL)) {
+            this.motionX = vec.x + vec.x * amplifier;
+            this.motionZ = vec.z + vec.z * amplifier;
+          }
+          if (!modifiers.has(SpellSkySoarer.HORIZONTAL)) {
+            this.motionY = vec.y + vec.y * amplifier;
+          }
           target.fallDistance = 0;
           target.velocityChanged = true;
         }
