@@ -69,6 +69,8 @@ public class SpellSaturate extends SpellBase {
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 6).setDescription("radius on the X axis of the area the spell has effect on");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("radius on the Y axis of the area the spell has effect on");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 6).setDescription("radius on the Z axis of the area the spell has effect on");
+  public static Property<Integer> PROP_INVERSION_SATURATION_BOOST = new Property<>("inversion_saturation_boost", 5).setDescription("the value that the percentage ratio between max foot/saturation and the food/saturation value is added from; set lower to cause inversion to give less food");
+  public static Property<Integer> PROP_INVERSION_FOOD_BOOST = new Property<>("inversion_food_boost", 4).setDescription("the value that the percentage ratio between max foot/saturation and the food/saturation value is added from; set lower to cause inversion to give less food (rounded down)");
 
   public static Modifier RATIO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "big_bellied"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier UNCOOKED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "root_lover"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
@@ -93,13 +95,13 @@ public class SpellSaturate extends SpellBase {
   public static SpellSaturate instance = new SpellSaturate(spellName);
 
   private String uncooked_dictionary, cooked_dictionary, bottled_dictionary;
-  private int resistance_amplifier, resistance_duration, radius_x, radius_y, radius_z;
+  private int resistance_amplifier, resistance_duration, radius_x, radius_y, radius_z, inversion_food_boost, inversion_saturation_boost;
   private double saturation_multiplier, food_multiplier, additional_saturation_multiplier, additional_food_multiplier, poison_saturation, poison_food, uncooked_saturation, uncooked_food, cooked_saturation, cooked_food, bottled_saturation, bottled_food, nausea_saturation, nausea_food;
   private boolean suppressSound = false;
 
   public SpellSaturate(ResourceLocation name) {
     super(name, TextFormatting.GOLD, 225F / 255F, 52F / 255F, 246F / 255F, 232F / 42F, 232F / 255F, 42F / 255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_SATURATION_MULTIPLIER, PROP_FOOD_MULTIPLIER, PROP_ADDITIONAL_FOOD_MULTIPLIER, PROP_ADDITIONAL_SATURATION_MULTIPLIER, PROP_UNCOOKED_DICT, PROP_RESISTANCE_AMPLIFIER, PROP_RESISTANCE_DURATION, PROP_POISON_ADDITION_FOOD, PROP_POISON_ADDITION_SATURATION, PROP_COOKED_ADDITIONAL_FOOD, PROP_COOKED_ADDITIONAL_SATURATION, PROP_COOKED_DICT, PROP_UNCOOKED_ADDITIONAL_FOOD, PROP_UNCOOKED_ADDITIONAL_SATURATION, PROP_NAUSEA_ADDITIONAL_FOOD, PROP_NAUSEA_ADDITIONAL_SATURATION, PROP_BOTTLED_ADDITIONAL_FOOD, PROP_BOTTLED_ADDITIONAL_SATURATION, PROP_BOTTLED_DICT);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_SATURATION_MULTIPLIER, PROP_FOOD_MULTIPLIER, PROP_ADDITIONAL_FOOD_MULTIPLIER, PROP_ADDITIONAL_SATURATION_MULTIPLIER, PROP_UNCOOKED_DICT, PROP_RESISTANCE_AMPLIFIER, PROP_RESISTANCE_DURATION, PROP_POISON_ADDITION_FOOD, PROP_POISON_ADDITION_SATURATION, PROP_COOKED_ADDITIONAL_FOOD, PROP_COOKED_ADDITIONAL_SATURATION, PROP_COOKED_DICT, PROP_UNCOOKED_ADDITIONAL_FOOD, PROP_UNCOOKED_ADDITIONAL_SATURATION, PROP_NAUSEA_ADDITIONAL_FOOD, PROP_NAUSEA_ADDITIONAL_SATURATION, PROP_BOTTLED_ADDITIONAL_FOOD, PROP_BOTTLED_ADDITIONAL_SATURATION, PROP_BOTTLED_DICT, PROP_INVERSION_SATURATION_BOOST, PROP_INVERSION_FOOD_BOOST);
     acceptsModifiers(RATIO, UNCOOKED, INVERSION, RESISTANCE, POISONED, ITEMS, COOKED, NAUSEA, BOTTLED);
     MinecraftForge.EVENT_BUS.register(this);
   }
@@ -376,6 +378,10 @@ public class SpellSaturate extends SpellBase {
     return OreDictCache.matches(bottled_dictionary, stack);
   }
 
+  private double inversion (double value, int boost) {
+    return value + (boost * ((20d - value) / 20));
+  }
+
   private double saturation(ItemStack stack, StaffModifierInstanceList info) {
     if (!(stack.getItem() instanceof ItemFood)) {
       return 0;
@@ -402,7 +408,11 @@ public class SpellSaturate extends SpellBase {
     if (info.has(BOTTLED)  && bottled(stack)) {
       sat += bottled_saturation;
     }
-    return (heal * saturation * 2f) * sat;
+    double result = (heal * saturation * 2) * sat;
+    if (info.has(INVERSION)) {
+      result = inversion(result, info.ampInt(inversion_saturation_boost));
+    }
+    return result;
   }
 
   private int health(ItemStack stack, StaffModifierInstanceList info) {
@@ -429,7 +439,11 @@ public class SpellSaturate extends SpellBase {
     if (info.has(BOTTLED)  && bottled(stack)) {
       food += bottled_food;
     }
-    return (int) Math.floor(item.getHealAmount(stack) * food);
+    double result = item.getHealAmount(stack) * food;
+    if (info.has(INVERSION)) {
+      result = inversion(result, info.ampInt(inversion_food_boost));
+    }
+    return MathHelper.floor(result);
   }
 
   @SubscribeEvent
@@ -465,5 +479,7 @@ public class SpellSaturate extends SpellBase {
     this.bottled_dictionary = properties.get(PROP_BOTTLED_DICT);
     this.nausea_saturation = properties.get(PROP_NAUSEA_ADDITIONAL_SATURATION);
     this.nausea_food = properties.get(PROP_NAUSEA_ADDITIONAL_FOOD);
+    this.inversion_food_boost = properties.get(PROP_INVERSION_FOOD_BOOST);
+    this.inversion_saturation_boost = properties.get(PROP_INVERSION_SATURATION_BOOST);
   }
 }
