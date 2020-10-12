@@ -21,9 +21,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class EntityBoost extends Entity {
   private static final Set<UUID> boostedPlayers = new HashSet<>();
@@ -113,6 +111,7 @@ public class EntityBoost extends Entity {
           if (mods.has(SpellSkySoarer.SLOW_FALL)) {
             player.addPotionEffect(new PotionEffect(ModPotions.slow_fall, SpellSkySoarer.instance.slow_duration));
           }
+          markSafe(player);
         }
       }
     }
@@ -133,6 +132,7 @@ public class EntityBoost extends Entity {
         Entity[] result = getTargets();
         if (result != null) {
           EntityPlayer player = (EntityPlayer) result[0];
+          markSafe(player);
           Entity target = result[1];
           boolean boat = target instanceof EntityBoat;
           this.posX = player.posX;
@@ -163,4 +163,50 @@ public class EntityBoost extends Entity {
     compound.setTag("id", net.minecraft.nbt.NBTUtil.createUUIDTag(playerId));
   }
 
+  private static Map<UUID, PlayerTracker> playerMap = new HashMap<>();
+
+  public static Map<UUID, PlayerTracker> getPlayers () {
+    return playerMap;
+  }
+
+  public static boolean safe (EntityPlayer player) {
+    PlayerTracker result = playerMap.get(player.getUniqueID());
+    if (result == null) {
+      return false;
+    }
+
+    boolean res = result.safe(player);
+    if (!res) {
+      playerMap.remove(player.getUniqueID());
+    }
+    return res;
+  }
+
+  public static void markSafe (EntityPlayer player) {
+    PlayerTracker track = playerMap.computeIfAbsent(player.getUniqueID(), PlayerTracker::new);
+    track.setStart(player.ticksExisted);
+  }
+
+  public static class PlayerTracker {
+    private int start;
+
+    public PlayerTracker (UUID id) {
+    }
+
+    public PlayerTracker(int start) {
+      this.start = start;
+    }
+
+    public void setStart(int start) {
+      this.start = start;
+    }
+
+    public boolean safe (EntityPlayer player) {
+      if (player.ticksExisted - start < SpellSkySoarer.instance.fall_duration) {
+        return true;
+      }
+
+      return false;
+    }
+  }
 }
