@@ -35,6 +35,7 @@ import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
@@ -253,6 +254,15 @@ public class EventManager {
         if (state.getBlock().isLeaves(state, event.getWorld(), pos) && event.getEntity().posY < aabb.maxY) {
           event.getCollisionBoxesList().remove(i);
         }
+      }
+    }
+  }
+
+  @SubscribeEvent
+  public static void onFall(LivingFallEvent event) {
+    if (event.getEntityLiving() instanceof EntityPlayer) {
+      if (EntityBoost.safe((EntityPlayer) event.getEntityLiving())) {
+        event.setDamageMultiplier(0);
       }
     }
   }
