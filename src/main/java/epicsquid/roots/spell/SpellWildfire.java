@@ -37,6 +37,7 @@ public class SpellWildfire extends SpellBase {
   public static Property<Integer> PROP_GROWTH_TICKS = new Property<>("growth_ticks", 12).setDescription("how many ticks of growth should be applied when an entity is killed directly");
   public static Property<Float> PROP_ICE_DAMAGE = new Property<>("icicle_damage", 1f).setDescription("how much damage icicles should deal when they strike a creature");
   public static Property<Integer> PROP_ICICLE_COUNT = new Property<>("icicle_count", 3).setDescription("how many icicles should spawn");
+  public static Property<Integer> PROP_LIFETIME = new Property<>("lifetime", 12).setDescription("how long the fire projectile should exist for (which determines how far it will travel");
 
   public static Modifier PURPLE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "purple_flame"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.05)));
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_flame"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 0.1)));
@@ -56,11 +57,11 @@ public class SpellWildfire extends SpellBase {
   public int radius_x, radius_y, radius_z, growth_ticks;
   public AxisAlignedBB bounding;
   public float damage, ice_damage;
-  public int fire_duration, fire_radius, slow_duration, slow_amplifier, paralysis_duration, poison_duration, poison_amplifier, levitate_duration, icicle_count;
+  public int fire_duration, fire_radius, slow_duration, slow_amplifier, paralysis_duration, poison_duration, poison_amplifier, levitate_duration, icicle_count, lifetime;
 
   public SpellWildfire(ResourceLocation name) {
     super(name, TextFormatting.GOLD, 255f / 255f, 128f / 255f, 32f / 255f, 255f / 255f, 64f / 255f, 32f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_FIRE_DURATION, PROP_PARALYSIS_DURATION, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_LEVITATE_DURATION, PROP_FIRE_RADIUS, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_GROWTH_TICKS, PROP_ICE_DAMAGE, PROP_ICICLE_COUNT);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_FIRE_DURATION, PROP_PARALYSIS_DURATION, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_LEVITATE_DURATION, PROP_FIRE_RADIUS, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_GROWTH_TICKS, PROP_ICE_DAMAGE, PROP_ICICLE_COUNT, PROP_LIFETIME);
     acceptsModifiers(PURPLE, PEACEFUL, PARALYSIS, SLOW, GREEN, GROWTH, POISON, LEVITATE, WILDFIRE, ICICLES);
   }
 
@@ -107,5 +108,6 @@ public class SpellWildfire extends SpellBase {
     this.growth_ticks = properties.get(PROP_GROWTH_TICKS);
     this.ice_damage = properties.get(PROP_ICE_DAMAGE);
     this.icicle_count = properties.get(PROP_ICICLE_COUNT);
+    this.lifetime = properties.get(PROP_LIFETIME);
   }
 }

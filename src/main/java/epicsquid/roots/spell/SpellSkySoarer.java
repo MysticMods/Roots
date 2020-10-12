@@ -28,33 +28,37 @@ public class SpellSkySoarer extends SpellBase {
   public static Property<Integer> PROP_REGEN_DURATION = new Property<>("regen_duration", 20 * 20).setDescription("how long regeneration should be applied for");
   public static Property<Integer> PROP_REGEN_AMPLIFIER = new Property<>("regen_amplifier", 0).setDescription("the amplifier to use for the regeneration effect");
   public static Property<Float> PROP_AMPLIFIER = new Property<>("amplifier", 0.8f).setDescription("the amplifier to the default motion");
+  public static Property<Float> PROP_EXTENDED_AMPLIFIER = new Property<>("extended_amplifier", 0.6f).setDescription("how much should be added to the default amplifier when the faster modifier is enabled");
   public static Property<Integer> PROP_FALL_DURATION = new Property<>("fall_duration", 20 * 15).setDescription("the duration for which fall damage should be suppressed after a boost ends");
+  public static Property<Integer> PROP_LIFETIME = new Property<>("lifetime", 20).setDescription("how long the boost entity should exist for (in ticks)");
+  public static Property<Integer> PROP_EXTENDED_LIFETIME = new Property<>("extended_lifetime", 20).setDescription("a value that should be added to the lifetime when the eternal flame modifier is used (in ticks)");
 
   public static Modifier SLOW_FALL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "slow_fall"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier NO_COLLIDE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "arboreal_bypass"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier FASTER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "momentum"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
   public static Modifier VERTICAL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "verticality"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 1)));
-  public static Modifier KNOCKBACK = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "knockback"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1)));
+  public static Modifier JAUNT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "jaunt"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1)));
   public static Modifier REGENERATION = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "regenerative_sky"), ModifierCores.TERRA_MOSS, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.TERRA_MOSS, 1)));
   public static Modifier CHEM_TRAILS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "chem_trails"), ModifierCores.BAFFLE_CAP, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 1)));
-  public static Modifier JAUNT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "jaunt"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 1)));
+  public static Modifier ETERNAL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "eternal_flame"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 1)));
   public static Modifier NO_FALL_DAMAGE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "friendly_earth"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
-  public static Modifier UNDERWATER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "surface_seeker"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
+  public static Modifier HORIZONTAL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "aquaplane"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
   static {
-    JAUNT.addConflicts(NO_FALL_DAMAGE, CHEM_TRAILS, KNOCKBACK, VERTICAL, FASTER, NO_COLLIDE, SLOW_FALL);
+    JAUNT.addConflicts(NO_FALL_DAMAGE, CHEM_TRAILS, ETERNAL, VERTICAL, FASTER, NO_COLLIDE, SLOW_FALL);
+    VERTICAL.addConflict(HORIZONTAL);
   }
 
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_sky_soarer");
   public static SpellSkySoarer instance = new SpellSkySoarer(spellName);
 
-  public float amplifier;
-  public int slow_duration, jaunt_distance, regen_duration, regen_amplifier, fall_duration;
+  public float amplifier, extended_amplifier;
+  public int slow_duration, jaunt_distance, regen_duration, regen_amplifier, fall_duration, lifetime, extended_liftime;
 
   public SpellSkySoarer(ResourceLocation name) {
     super(name, TextFormatting.BLUE, 32f / 255f, 200f / 255f, 255f / 255f, 32f / 255f, 64f / 255f, 255f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_SLOW_FALL_DURATION, PROP_JAUNT_DISTANCE, PROP_REGEN_AMPLIFIER, PROP_REGEN_DURATION, PROP_AMPLIFIER, PROP_FALL_DURATION);
-    acceptsModifiers(SLOW_FALL, NO_COLLIDE, FASTER, VERTICAL, KNOCKBACK, REGENERATION, CHEM_TRAILS, JAUNT, NO_FALL_DAMAGE, UNDERWATER);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_SLOW_FALL_DURATION, PROP_JAUNT_DISTANCE, PROP_REGEN_AMPLIFIER, PROP_REGEN_DURATION, PROP_AMPLIFIER, PROP_FALL_DURATION, PROP_LIFETIME, PROP_EXTENDED_LIFETIME, PROP_EXTENDED_AMPLIFIER);
+    acceptsModifiers(SLOW_FALL, NO_COLLIDE, FASTER, VERTICAL, JAUNT, REGENERATION, CHEM_TRAILS, ETERNAL, NO_FALL_DAMAGE, HORIZONTAL);
   }
 
   @Override
@@ -83,7 +87,11 @@ public class SpellSkySoarer extends SpellBase {
           }
         }
       } else {
-        EntityBoost boost = new EntityBoost(player.world);
+        int life = lifetime;
+        if (info.has(ETERNAL)) {
+          life += extended_liftime;
+        }
+        EntityBoost boost = new EntityBoost(player.world, life);
         boost.setModifiers(info);
         boost.setPlayer(player.getUniqueID());
         boost.setPosition(player.posX, player.posY, player.posZ);
@@ -106,5 +114,8 @@ public class SpellSkySoarer extends SpellBase {
     this.regen_duration = properties.get(PROP_REGEN_DURATION);
     this.amplifier = properties.get(PROP_AMPLIFIER);
     this.fall_duration = properties.get(PROP_FALL_DURATION);
+    this.lifetime = properties.get(PROP_LIFETIME);
+    this.extended_liftime = properties.get(PROP_EXTENDED_LIFETIME);
+    this.extended_amplifier = properties.get(PROP_EXTENDED_AMPLIFIER);
   }
 }

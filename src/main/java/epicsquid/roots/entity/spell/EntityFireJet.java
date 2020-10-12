@@ -24,7 +24,7 @@ import java.util.List;
 
 public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
   public EntityFireJet(World worldIn) {
-    super(worldIn, SpellWildfire.instance, 12);
+    super(worldIn, SpellWildfire.instance, SpellWildfire.instance.lifetime);
   }
 
   @Override
