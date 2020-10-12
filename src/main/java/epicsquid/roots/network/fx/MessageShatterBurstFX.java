@@ -60,27 +60,22 @@ public class MessageShatterBurstFX implements IMessage {
     @Override
     public IMessage onMessage(final MessageShatterBurstFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
-      for (float i = 0; i < 40; i++) {
-        double x = (1.0f - i / 40.0f) * message.srcX + (i / 40.0f) * message.posX;
-        double y = (1.0f - i / 40.0f) * message.srcY + (i / 40.0f) * message.posY;
-        double z = (1.0f - i / 40.0f) * message.srcZ + (i / 40.0f) * message.posZ;
+      float scale = 40f;
+      for (float i = 0; i < scale; i++) {
+        double x = (1.0f - i / scale) * message.srcX + (i / scale) * message.posX;
+        double y = (1.0f - i / scale) * message.srcY + (i / scale) * message.posY;
+        double z = (1.0f - i / scale) * message.srcZ + (i / scale) * message.posZ;
         if (Util.rand.nextBoolean()) {
-          ParticleUtil.spawnParticleGlow(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellShatter.instance.getRed1() * 255.0f,
-              SpellShatter.instance.getGreen1() * 255.0f, SpellShatter.instance.getBlue1() * 255.0f, 0.25f * (i / 40.0f), 2.5f, 24);
+          ParticleUtil.spawnParticleGlow(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellShatter.instance.getFirstColours(0.25f * (i/scale)), 2.5f, 24);
         } else {
-          ParticleUtil.spawnParticleGlow(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellShatter.instance.getRed2() * 255.0f,
-              SpellShatter.instance.getGreen2() * 255.0f, SpellShatter.instance.getBlue2() * 255.0f, 0.25f * (i / 40.0f), 2.5f, 24);
+          ParticleUtil.spawnParticleGlow(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellShatter.instance.getSecondColours(0.25f * (i / scale)), 2.5f, 24);
         }
       }
       for (int k = 0; k < 20; k++) {
         if (Util.rand.nextBoolean()) {
-          ParticleUtil.spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.25f * (Util.rand.nextFloat() - 0.5f),
-              0.25f * (Util.rand.nextFloat() - 0.5f), 0.25f * (Util.rand.nextFloat() - 0.5f), SpellShatter.instance.getRed1() * 255.0f,
-              SpellShatter.instance.getGreen1() * 255.0f, SpellShatter.instance.getBlue1() * 255.0f, 0.25f, 5f, 12);
+          ParticleUtil.spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.25f * (Util.rand.nextFloat() - 0.5f), 0.25f * (Util.rand.nextFloat() - 0.5f), 0.25f * (Util.rand.nextFloat() - 0.5f), SpellShatter.instance.getFirstColours(0.25f), 5f, 12);
         } else {
-          ParticleUtil.spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.25f * (Util.rand.nextFloat() - 0.5f),
-              0.25f * (Util.rand.nextFloat() - 0.5f), 0.25f * (Util.rand.nextFloat() - 0.5f), SpellShatter.instance.getRed2() * 255.0f,
-              SpellShatter.instance.getGreen2() * 255.0f, SpellShatter.instance.getBlue2() * 255.0f, 0.25f, 5f, 12);
+          ParticleUtil.spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.25f * (Util.rand.nextFloat() - 0.5f), 0.25f * (Util.rand.nextFloat() - 0.5f), 0.25f * (Util.rand.nextFloat() - 0.5f), SpellShatter.instance.getSecondColours(0.25f), 5f, 12);
         }
       }
       return null;
