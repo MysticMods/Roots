@@ -2,10 +2,13 @@ package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.AABBUtil;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
+import epicsquid.roots.config.MossConfig;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
+import epicsquid.roots.network.fx.MessageRunicShearsAOEFX;
 import epicsquid.roots.network.fx.MessageShatterBurstFX;
 import epicsquid.roots.properties.Property;
 import net.minecraft.block.state.IBlockState;
@@ -24,6 +27,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SpellShatter extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(20);
@@ -120,10 +125,29 @@ public class SpellShatter extends SpellBase {
       return false;
     }
     boolean broke = false;
+    List<BlockPos> mossPositions = new ArrayList<>();
     for (BlockPos p : AABBUtil.unique(box)) {
       IBlockState state = player.world.getBlockState(p);
       // TODO: Update this as per silk touch
-      if (state.getBlockHardness(player.world, p) > 0) {
+      boolean didMoss = false;
+      if (info.has(KNIFE)) {
+        IBlockState mossState = MossConfig.scrapeResult(state);
+        if (mossState != null) {
+          broke = true;
+          didMoss = true;
+          if (!player.world.isRemote) {
+            player.world.setBlockState(p, mossState);
+            player.world.scheduleBlockUpdate(p, mossState.getBlock(), 1, mossState.getBlock().tickRate(player.world));
+            mossPositions.add(p);
+            if (info.has(MAGNETISM)) {
+              ItemUtil.spawnItem(player.world, player.getPosition(), new ItemStack(ModItems.terra_moss));
+            } else {
+              ItemUtil.spawnItem(player.world, p, new ItemStack(ModItems.terra_moss));
+            }
+          }
+        }
+      }
+      if (!didMoss && state.getBlockHardness(player.world, p) > 0) {
         if (!player.world.isRemote) {
           if (info.has(VOID)) {
             player.world.destroyBlock(p, false);
@@ -141,6 +165,10 @@ public class SpellShatter extends SpellBase {
         double offX = 0.5 * Math.sin(yaw);
         double offZ = 0.5 * Math.cos(yaw);
         PacketHandler.sendToAllTracking(new MessageShatterBurstFX(player.posX + offX, player.posY + player.getEyeHeight(), player.posZ + offZ, result.hitVec.x, result.hitVec.y, result.hitVec.z), player);
+        if (!mossPositions.isEmpty()) {
+          MessageRunicShearsAOEFX message = new MessageRunicShearsAOEFX(mossPositions);
+          PacketHandler.sendToAllTracking(message, player.world.provider.getDimension(), mossPositions.get(0));
+        }
       }
       return true;
     } else {
