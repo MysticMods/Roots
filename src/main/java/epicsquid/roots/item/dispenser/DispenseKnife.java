@@ -29,7 +29,7 @@ public class DispenseKnife implements IBehaviorDispenseItem {
   @Override
   public ItemStack dispense(IBlockSource source, ItemStack stack) {
     World world = source.getWorld();
-    if (MossConfig.getBlacklistDimensions().contains(world.provider.getDimension()) {
+    if (MossConfig.getBlacklistDimensions().contains(world.provider.getDimension())) {
       return stack;
     }
     EnumFacing facing = source.getBlockState().getValue(BlockDispenser.FACING);
