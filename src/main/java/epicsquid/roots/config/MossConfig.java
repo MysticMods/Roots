@@ -11,10 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Config;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Config.LangKey("config.roots.category.moss")
 @Config(modid = Roots.MODID, name = "roots/moss", category = "moss")
@@ -24,11 +21,11 @@ public class MossConfig {
   public static String[] BlacklistDimensions = new String[]{};
 
   @Config.Ignore
-  public static List<Integer> blacklistDimensions = null;
+  public static Set<Integer> blacklistDimensions = null;
 
-  public static List<Integer> getBlacklistDimensions() {
+  public static Set<Integer> getBlacklistDimensions() {
     if (blacklistDimensions == null) {
-      blacklistDimensions = new ArrayList<>();
+      blacklistDimensions = new HashSet<>();
       for (String dim : BlacklistDimensions) {
         blacklistDimensions.add(Integer.parseInt(dim));
       }

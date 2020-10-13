@@ -126,11 +126,12 @@ public class SpellShatter extends SpellBase {
     }
     boolean broke = false;
     List<BlockPos> mossPositions = new ArrayList<>();
+    boolean noMoss = MossConfig.getBlacklistDimensions().contains(player.world.provider.getDimension());
     for (BlockPos p : AABBUtil.unique(box)) {
       IBlockState state = player.world.getBlockState(p);
       // TODO: Update this as per silk touch
       boolean didMoss = false;
-      if (info.has(KNIFE)) {
+      if (info.has(KNIFE) && !noMoss) {
         IBlockState mossState = MossConfig.scrapeResult(state);
         if (mossState != null) {
           broke = true;
