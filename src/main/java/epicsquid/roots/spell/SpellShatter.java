@@ -1,6 +1,7 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.AABBUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.*;
@@ -15,20 +16,29 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreIngredient;
 
+import javax.annotation.Nullable;
+
 public class SpellShatter extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(20);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("stalicripe", 0.0625));
   public static Property<Float> PROP_DISTANCE = new Property<>("distance", 8f).setDescription("the maximum range of the beam");
+  public static Property<Integer> PROP_DEFAULT_WIDTH = new Property<>("default_width", 0).setDescription("the default width (when not amplified; 0 = 1)");
+  public static Property<Integer> PROP_DEFAULT_HEIGHT = new Property<>("default_height", 0).setDescription("the default height (when not amplified: this is 2 blocks tall, with the block below the block targeted also being broken; if this value is greater than 0, than the height will be 1 block above and 1 block below, relatively, th block hit)");
+  public static Property<Integer> PROP_DEFAULT_DEPTH = new Property<>("default_depth", 0).setDescription("the default depth (when not amplified; 0 = just one block broken)");
+  public static Property<Integer> PROP_WIDTH = new Property<>("width", 1).setDescription("the width when the width modifier is applied; this is appiled to the left and right of the targeted block, meaning a width of 1 is a total width of 3 blocks");
+  public static Property<Integer> PROP_HEIGHT = new Property<>("height", 1).setDescription("the height when the height modifier is applied; as per width");
+  public static Property<Integer> PROP_DEPTH = new Property<>("depth", 2).setDescription("this value is applied by offsetting the position relative to the angle the beam struck it; if struck from above, it digs down, etc. By default, with a value of 2, this should result in 3 blocks being broken.");
 
   public static Modifier WIDER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "wider"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
-  public static Modifier HOE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "farmers_ray"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
+  public static Modifier TALLER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "taller"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier MAGNETISM = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "magnetic_ray"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
   public static Modifier DEEPER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "deeper"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 1)));
   public static Modifier SINGLE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "singularity"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1)));
@@ -42,11 +52,12 @@ public class SpellShatter extends SpellBase {
   public static SpellShatter instance = new SpellShatter(spellName);
 
   public float distance;
+  private int default_depth, added_depth, default_height, added_height, default_width, added_width;
 
   public SpellShatter(ResourceLocation name) {
     super(name, TextFormatting.GRAY, 96f / 255f, 96f / 255f, 96f / 255f, 192f / 255f, 192f / 255f, 192f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DISTANCE);
-    acceptsModifiers(WIDER, HOE, MAGNETISM, DEEPER, SINGLE, KNIFE, MUSHROOM, TREE, SMELTING, SILK_TOUCH);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DISTANCE, PROP_DEPTH, PROP_WIDTH, PROP_HEIGHT, PROP_DEFAULT_DEPTH, PROP_DEFAULT_HEIGHT, PROP_DEFAULT_WIDTH);
+    acceptsModifiers(WIDER, TALLER, MAGNETISM, DEEPER, SINGLE, KNIFE, MUSHROOM, TREE, SMELTING, SILK_TOUCH);
   }
 
   @Override
@@ -60,39 +71,77 @@ public class SpellShatter extends SpellBase {
     );
   }
 
-  @Override
-  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
-    if (!player.world.isRemote) {
-      Vec3d eyes = new Vec3d(0, (double) player.getEyeHeight(), 0);
-      RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(eyes), player.getLookVec().scale(distance).add(player.getPositionVector().add(eyes)));
-      if (result != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
-        BlockPos pos = result.getBlockPos();
-        IBlockState state = player.world.getBlockState(pos);
-        boolean doParticles = false;
-        if (state.getBlockHardness(player.world, pos) > 0) {
-          player.world.destroyBlock(pos, true);
-          player.world.notifyBlockUpdate(pos, state, Blocks.AIR.getDefaultState(), 8); // Should already be air
-          doParticles = true;
+  @Nullable
+  public static AxisAlignedBB getBox(EntityPlayer player, StaffModifierInstanceList info, RayTraceResult result) {
+    if (result != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
+      BlockPos pos = result.getBlockPos();
+      EnumFacing side = result.sideHit;
+      EnumFacing playerFacing = player.getHorizontalFacing();
+      EnumFacing width = EnumFacing.fromAngle(playerFacing.getHorizontalAngle() + 90);
+      EnumFacing height = side.getAxis() != EnumFacing.Axis.Y ? EnumFacing.DOWN : playerFacing.getOpposite();
+      EnumFacing depth = side.getOpposite();
+
+      BlockPos start = pos;
+      BlockPos stop = pos;
+
+      if (!info.has(SINGLE)) {
+        int h = info.has(TALLER) ? SpellShatter.instance.added_height : SpellShatter.instance.default_height;
+        if (info.has(TALLER)) {
+          stop = stop.offset(height, h);
+          start = start.offset(height.getOpposite(), h);
+        } else if (!info.has(WIDER)) {
+          stop = stop.offset(height);
         }
-        if (result.sideHit.getAxis() != EnumFacing.Axis.Y)
-          pos = result.getBlockPos().down();
-        else {
-          pos = pos.offset(player.getHorizontalFacing().getOpposite());
-        }
-        state = player.world.getBlockState(pos);
-        if (state.getBlockHardness(player.world, pos) > 0) {
-          player.world.destroyBlock(pos, true);
-          player.world.notifyBlockUpdate(pos, state, Blocks.AIR.getDefaultState(), 8);
-        }
-        if (doParticles) {
-          double yaw = Math.toRadians(-90.0 - player.rotationYaw);
-          double offX = 0.5 * Math.sin(yaw);
-          double offZ = 0.5 * Math.cos(yaw);
-          PacketHandler.sendToAllTracking(new MessageShatterBurstFX(player.posX + offX, player.posY + player.getEyeHeight(), player.posZ + offZ, result.hitVec.x, result.hitVec.y, result.hitVec.z), player);
+
+        int w = info.has(WIDER) ? SpellShatter.instance.added_width : SpellShatter.instance.default_width;
+        if (w != 0) {
+          stop = stop.offset(width, w);
+          start = start.offset(width.getOpposite(), w);
         }
       }
+
+      int d = info.has(DEEPER) ? SpellShatter.instance.added_depth : SpellShatter.instance.default_depth;
+      if (d != 0) {
+        stop = stop.offset(depth, d);
+      }
+
+      return new AxisAlignedBB(start, stop);
     }
-    return true;
+    return null;
+  }
+
+  @Override
+  public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+    Vec3d eyes = new Vec3d(0, (double) player.getEyeHeight(), 0);
+    RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(eyes), player.getLookVec().scale(distance).add(player.getPositionVector().add(eyes)));
+
+    AxisAlignedBB box = getBox(player, info, result);
+    if (box == null) {
+      return false;
+    }
+    boolean broke = false;
+    for (BlockPos p : AABBUtil.unique(box)) {
+      IBlockState state = player.world.getBlockState(p);
+      // TODO: Update this as per silk touch
+      if (state.getBlockHardness(player.world, p) > 0) {
+        if (!player.world.isRemote) {
+          player.world.destroyBlock(p, true);
+        }
+        broke = true;
+      }
+    }
+
+    if (broke) {
+      if (!player.world.isRemote) {
+        double yaw = Math.toRadians(-90.0 - player.rotationYaw);
+        double offX = 0.5 * Math.sin(yaw);
+        double offZ = 0.5 * Math.cos(yaw);
+        PacketHandler.sendToAllTracking(new MessageShatterBurstFX(player.posX + offX, player.posY + player.getEyeHeight(), player.posZ + offZ, result.hitVec.x, result.hitVec.y, result.hitVec.z), player);
+      }
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @Override
@@ -100,5 +149,11 @@ public class SpellShatter extends SpellBase {
     this.castType = properties.get(PROP_CAST_TYPE);
     this.cooldown = properties.get(PROP_COOLDOWN);
     this.distance = properties.get(PROP_DISTANCE);
+    this.default_depth = properties.get(PROP_DEFAULT_DEPTH);
+    this.added_depth = properties.get(PROP_DEPTH);
+    this.default_height = properties.get(PROP_DEFAULT_HEIGHT);
+    this.added_height = properties.get(PROP_HEIGHT);
+    this.default_width = properties.get(PROP_DEFAULT_WIDTH);
+    this.added_width = properties.get(PROP_WIDTH);
   }
 }
