@@ -77,7 +77,7 @@ public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
 
   public <T> void set(Property<T> property, T value) {
     if (!property.validate(value)) {
-      throw new InvalidPropetyValue("Value " + value + " is not valid for property " + property.getName());
+      throw new InvalidPropetyValue("Value " + value + " is not valid for property " + property.getName() + ", bounds: " + property.getValidationBounds());
     }
     map.put(property, value);
   }
