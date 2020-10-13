@@ -36,6 +36,10 @@ public class SpellShatter extends SpellBase {
   public static Property<Integer> PROP_WIDTH = new Property<>("width", 1).setDescription("the width when the width modifier is applied; this is appiled to the left and right of the targeted block, meaning a width of 1 is a total width of 3 blocks");
   public static Property<Integer> PROP_HEIGHT = new Property<>("height", 1).setDescription("the height when the height modifier is applied; as per width");
   public static Property<Integer> PROP_DEPTH = new Property<>("depth", 2).setDescription("this value is applied by offsetting the position relative to the angle the beam struck it; if struck from above, it digs down, etc. By default, with a value of 2, this should result in 3 blocks being broken.");
+  public static Property<Integer> PROP_MAX_LEAVES = new Property<>("max_leaves", 30).setDescription("the maximum amount of leaves that are broken");
+  public static Property<Integer> PROP_MAX_MUSHROOM = new Property<>("max_mushroom", 30).setDescription("the maximum number of mushroom blocks that are broken");
+  public static Property<String> PROP_LEAF_DICT = new Property<>("leaf_dictionary", "treeLeaves").setDescription("the ore dictionary entry used to identify leaves in addition to vanilla");
+  public static Property<String> PROP_MUSHROOM_DICT = new Property<>("mushroom_dictionary", "blockMushroom").setDescription("the ore dictionary entry used to identify mushrooms in addition to vanilla");
 
   public static Modifier WIDER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "wider"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier TALLER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "taller"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -52,11 +56,12 @@ public class SpellShatter extends SpellBase {
   public static SpellShatter instance = new SpellShatter(spellName);
 
   public float distance;
-  private int default_depth, added_depth, default_height, added_height, default_width, added_width;
+  private int default_depth, added_depth, default_height, added_height, default_width, added_width, max_leaves, max_mushroom;
+  private String mushroom_dictionary, leaf_dictionary;
 
   public SpellShatter(ResourceLocation name) {
     super(name, TextFormatting.GRAY, 96f / 255f, 96f / 255f, 96f / 255f, 192f / 255f, 192f / 255f, 192f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DISTANCE, PROP_DEPTH, PROP_WIDTH, PROP_HEIGHT, PROP_DEFAULT_DEPTH, PROP_DEFAULT_HEIGHT, PROP_DEFAULT_WIDTH);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DISTANCE, PROP_DEPTH, PROP_WIDTH, PROP_HEIGHT, PROP_DEFAULT_DEPTH, PROP_DEFAULT_HEIGHT, PROP_DEFAULT_WIDTH, PROP_MAX_LEAVES, PROP_MAX_MUSHROOM, PROP_MUSHROOM_DICT, PROP_LEAF_DICT);
     acceptsModifiers(WIDER, TALLER, MAGNETISM, DEEPER, SINGLE, KNIFE, MUSHROOM, TREE, SMELTING, SILK_TOUCH);
   }
 
@@ -155,5 +160,9 @@ public class SpellShatter extends SpellBase {
     this.added_height = properties.get(PROP_HEIGHT);
     this.default_width = properties.get(PROP_DEFAULT_WIDTH);
     this.added_width = properties.get(PROP_WIDTH);
+    this.max_leaves = properties.get(PROP_MAX_LEAVES);
+    this.max_mushroom = properties.get(PROP_MAX_MUSHROOM);
+    this.mushroom_dictionary = properties.get(PROP_MUSHROOM_DICT);
+    this.leaf_dictionary = properties.get(PROP_LEAF_DICT);
   }
 }
