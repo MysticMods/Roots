@@ -16,6 +16,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -133,13 +134,12 @@ public class SpellNaturesScythe extends SpellBase {
   }
 
   public void breakBlock(World world, BlockPos pos, StaffModifierInstanceList info, EntityPlayer player) {
-    // TODO: HANDLE MAGNETISM
     IBlockState state = world.getBlockState(pos);
     Block block = state.getBlock();
-    int fortune = (info.has(SpellHarvest.FORTUNE) || info.has(FORTUNE)) ? 2 : 0;
+    int fortune = (info.has(SpellHarvest.FORTUNE) || info.has(FORTUNE) || info.has(SpellShatter.FORTUNE)) ? 2 : 0;
     boolean skip = false;
     List<ItemStack> drops = new ArrayList<>();
-    if (info.has(SILK_TOUCH) || info.has(SpellHarvest.SILK_TOUCH)) {
+    if (info.has(SILK_TOUCH) || info.has(SpellHarvest.SILK_TOUCH) || info.has(SpellShatter.SILK_TOUCH)) {
       if (block instanceof IShearable && ((IShearable) block).isShearable(SHEARS, world, pos)) {
         IShearable shearable = (IShearable) block;
         drops.addAll(shearable.onSheared(SHEARS, player.world, pos, fortune));
@@ -168,8 +168,16 @@ public class SpellNaturesScythe extends SpellBase {
       ForgeEventFactory.fireBlockHarvesting(dropped, world, pos, state, fortune, 1.0f, true, player);
       world.destroyBlock(pos, false);
     }
-    boolean magnet = info.has(MAGNETISM);
+    boolean magnet = info.has(MAGNETISM) || info.has(SpellHarvest.MAGNETISM) || info.has(SpellShatter.MAGNETISM);
     for (ItemStack item : drops) {
+      if (info.has(SpellShatter.SMELTING)) {
+        int count = item.getCount();
+        ItemStack smelted = FurnaceRecipes.instance().getSmeltingResult(item);
+        if (!smelted.isEmpty()) {
+          item = smelted.copy();
+          item.setCount(count);
+        }
+      }
       if (magnet) {
         ItemUtil.spawnItem(world, player.getPosition(), item);
       } else {
