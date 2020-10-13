@@ -86,36 +86,38 @@ public class ItemRunicShears extends ItemShearsBase {
       return EnumActionResult.PASS;
     }
 
-    IBlockState moss = MossConfig.scrapeResult(state);
-    IBlockState moss2 = MossConfig.mossConversion(state);
+    if (!MossConfig.getBlacklistDimensions().contains(player.world.provider.getDimension()) {
+      IBlockState moss = MossConfig.scrapeResult(state);
+      IBlockState moss2 = MossConfig.mossConversion(state);
 
-    if (moss != null || moss2 != null) {
-      if (!world.isRemote) {
-        AxisAlignedBB bounds = bounding.offset(pos);
-        BlockPos start = new BlockPos(bounds.minX, bounds.minY, bounds.minZ);
-        BlockPos stop = new BlockPos(bounds.maxX, bounds.maxY, bounds.maxZ);
-        List<BlockPos> affectedBlocks = new ArrayList<>();
-        for (BlockPos.MutableBlockPos p : BlockPos.getAllInBoxMutable(start, stop)) {
-          IBlockState pState = world.getBlockState(p);
-          IBlockState m = MossConfig.scrapeResult(pState);
-          if (m != null) {
-            affectedBlocks.add(p.toImmutable());
-            world.setBlockState(p, m);
-            world.scheduleBlockUpdate(p, m.getBlock(), 1, m.getBlock().tickRate(world));
-            ItemUtil.spawnItem(world, player.getPosition().add(0, 1, 0), new ItemStack(ModItems.terra_moss));
+      if (moss != null || moss2 != null) {
+        if (!world.isRemote) {
+          AxisAlignedBB bounds = bounding.offset(pos);
+          BlockPos start = new BlockPos(bounds.minX, bounds.minY, bounds.minZ);
+          BlockPos stop = new BlockPos(bounds.maxX, bounds.maxY, bounds.maxZ);
+          List<BlockPos> affectedBlocks = new ArrayList<>();
+          for (BlockPos.MutableBlockPos p : BlockPos.getAllInBoxMutable(start, stop)) {
+            IBlockState pState = world.getBlockState(p);
+            IBlockState m = MossConfig.scrapeResult(pState);
+            if (m != null) {
+              affectedBlocks.add(p.toImmutable());
+              world.setBlockState(p, m);
+              world.scheduleBlockUpdate(p, m.getBlock(), 1, m.getBlock().tickRate(world));
+              ItemUtil.spawnItem(world, player.getPosition().add(0, 1, 0), new ItemStack(ModItems.terra_moss));
+            }
+          }
+          if (!affectedBlocks.isEmpty()) {
+            if (!player.capabilities.isCreativeMode) {
+              player.getHeldItem(hand).damageItem(1 + Math.min(6, random.nextInt(affectedBlocks.size())), player);
+            }
+            MessageRunicShearsAOEFX message = new MessageRunicShearsAOEFX(affectedBlocks);
+            PacketHandler.sendToAllTracking(message, world.provider.getDimension(), pos);
           }
         }
-        if (!affectedBlocks.isEmpty()) {
-          if (!player.capabilities.isCreativeMode) {
-            player.getHeldItem(hand).damageItem(1 + Math.min(6, random.nextInt(affectedBlocks.size())), player);
-          }
-          MessageRunicShearsAOEFX message = new MessageRunicShearsAOEFX(affectedBlocks);
-          PacketHandler.sendToAllTracking(message, world.provider.getDimension(), pos);
-        }
+        player.swingArm(hand);
+        world.playSound(null, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
+        return EnumActionResult.SUCCESS;
       }
-      player.swingArm(hand);
-      world.playSound(null, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1f, 1f);
-      return EnumActionResult.SUCCESS;
     }
 
     RunicShearRecipe recipe = ModRecipes.getRunicShearRecipe(state);
