@@ -86,7 +86,7 @@ public class ItemRunicShears extends ItemShearsBase {
       return EnumActionResult.PASS;
     }
 
-    if (!MossConfig.getBlacklistDimensions().contains(player.world.provider.getDimension()) {
+    if (!MossConfig.getBlacklistDimensions().contains(player.world.provider.getDimension())) {
       IBlockState moss = MossConfig.scrapeResult(state);
       IBlockState moss2 = MossConfig.mossConversion(state);
 
