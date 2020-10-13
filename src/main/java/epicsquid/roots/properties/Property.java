@@ -2,6 +2,8 @@ package epicsquid.roots.properties;
 
 import epicsquid.roots.spell.SpellBase;
 
+import java.util.function.Predicate;
+
 public class Property<T> extends AbstractProperty<T, Property<T>> {
   public Property(String name, Class<?> clazz) {
     this.type = clazz;
@@ -18,6 +20,13 @@ public class Property<T> extends AbstractProperty<T, Property<T>> {
   @Override
   public Property<T> setDescription(String description) {
     this.description = description;
+    return this;
+  }
+
+  @Override
+  public Property<T> setValidation(Predicate<T> validator, String bounds) {
+    this.validator = validator;
+    this.bounds = bounds;
     return this;
   }
 
