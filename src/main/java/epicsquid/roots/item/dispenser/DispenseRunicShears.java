@@ -56,6 +56,10 @@ public class DispenseRunicShears implements IBehaviorDispenseItem {
   @Override
   public ItemStack dispense(IBlockSource source, ItemStack stack) {
     World world = source.getWorld();
+    if (MossConfig.getBlacklistDimensions().contains(world.provider.getDimension())) {
+      return stack;
+    }
+
     boolean successful = false;
     if (!world.isRemote) {
       EnumFacing facing = source.getBlockState().getValue(BlockDispenser.FACING);
