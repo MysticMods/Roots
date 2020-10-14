@@ -191,5 +191,6 @@ public class SpellLifeDrain extends SpellBase {
     this.fire_duration = properties.get(PROP_FIRE_DURATION);
     this.slow_amplifier = properties.get(PROP_SLOW_AMPLIFIER);
     this.slow_duration = properties.get(PROP_SLOW_DURATION);
+    this.distance = properties.get(PROP_DISTANCE);
   }
 }
