@@ -28,7 +28,7 @@ public class RootsPacketHandler {
     PacketHandler.registerMessage(MessageOvergrowthEffectFX.MessageHolder.class, MessageOvergrowthEffectFX.class, Side.CLIENT);
     PacketHandler.registerMessage(MessageTreeCompleteFX.MessageHolder.class, MessageTreeCompleteFX.class, Side.CLIENT);
     PacketHandler.registerMessage(MessageHarvestCompleteFX.MessageHolder.class, MessageHarvestCompleteFX.class, Side.CLIENT);
-    PacketHandler.registerMessage(MessageFrostTouchFX.MessageHolder.class, MessageFrostTouchFX.class, Side.CLIENT);
+    PacketHandler.registerMessage(MessageStormCloudGasFX.MessageHolder.class, MessageStormCloudGasFX.class, Side.CLIENT);
     PacketHandler.registerMessage(MessageWinterCloudFX.Handler.class, MessageWinterCloudFX.class, Side.CLIENT);
     PacketHandler.registerMessage(MessageSenseFX.Handler.class, MessageSenseFX.class, Side.CLIENT);
 
@@ -75,5 +75,6 @@ public class RootsPacketHandler {
     PacketHandler.registerMessage(MessageTargetedLifeDrainFX.MessageHolder.class, MessageTargetedLifeDrainFX.class, Side.CLIENT);
     PacketHandler.registerMessage(MessageWildfireFX.MessageHolder.class, MessageWildfireFX.class, Side.CLIENT);
     PacketHandler.registerMessage(MessageChemTrailsFX.Handler.class, MessageChemTrailsFX.class, Side.CLIENT);
+    PacketHandler.registerMessage(MessageStormCloudStormFX.MessageHolder.class, MessageStormCloudStormFX.class, Side.CLIENT);
   }
 }
