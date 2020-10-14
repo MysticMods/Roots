@@ -27,6 +27,10 @@ public class MappingsEvent {
         switch (missing.getPath()) {
           case "invulnerability":
             mapping.remap(ModPotions.nondetection);
+            break;
+          case "freeze":
+            mapping.remap(ModPotions.storm_cloud);
+            break;
         }
       }
     }

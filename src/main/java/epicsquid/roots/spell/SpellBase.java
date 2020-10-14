@@ -88,8 +88,20 @@ public abstract class SpellBase extends RegistryItem {
     return new float[]{red1, green1, blue1, alpha};
   }
 
-  public float[] getSecondColours () {
-    return getSecondColours(1.0f);
+  public float[] modifyFirstColours (float value) {
+    return modifyFirstColours(value, 1.0f);
+  }
+
+  public float[] modifyFirstColours (float value, float alpha) {
+    return new float[]{red1*value, green1*value, blue1*value, alpha};
+  }
+
+  public float[] modifySecondColours (float value) {
+    return modifySecondColours(value, 1.0f);
+  }
+
+  public float[] modifySecondColours (float value, float alpha) {
+    return new float[]{red2*value, green2*value, blue2*value, alpha};
   }
 
   public float[] getSecondColours(float alpha) {

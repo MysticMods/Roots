@@ -6,7 +6,7 @@ import net.minecraft.potion.Potion;
 import net.minecraftforge.event.RegistryEvent;
 
 public class ModPotions {
-  public static Potion freeze;
+  public static Potion storm_cloud;
   public static Potion geas;
   public static Potion time_stop;
   public static Potion nondetection;
@@ -19,7 +19,7 @@ public class ModPotions {
   public static PotionSlowFall slow_fall;
 
   public static void registerPotions(RegistryEvent.Register<Potion> event) {
-    event.getRegistry().register(freeze = new PotionFreeze().setRegistryName(Roots.MODID, "freeze"));
+    event.getRegistry().register(storm_cloud = new PotionStormCloud().setRegistryName(Roots.MODID, "storm_cloud"));
     event.getRegistry().register(geas = new PotionGeas().setRegistryName(Roots.MODID, "geas"));
     event.getRegistry().register(time_stop = new PotionTimeStop().setRegistryName(Roots.MODID, "time_stop"));
     event.getRegistry().register(nondetection = new PotionNondetection().setRegistryName(Roots.MODID, "nondetection"));

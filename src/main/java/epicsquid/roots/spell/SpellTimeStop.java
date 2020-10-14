@@ -111,5 +111,8 @@ public class SpellTimeStop extends SpellBase {
     this.slow_amplifier = properties.get(PROP_SLOWNESS_AMPLIFIER);
     this.slow_duration = properties.get(PROP_SLOWNESS_DURATION);
     this.fire_duration = properties.get(PROP_FIRE_DURATION);
+    this.undertime = properties.get(PROP_UNDERTIME);
+    this.speed_duration = properties.get(PROP_SPEED_DURATION);
+    this.speed_amplifier = properties.get(PROP_SPEED_AMPLIFIER);
   }
 }
