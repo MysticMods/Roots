@@ -18,6 +18,7 @@ import epicsquid.roots.network.fx.MessageGeasRingFX;
 import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
 import epicsquid.roots.spell.SpellAquaBubble;
 import epicsquid.roots.spell.SpellPetalShell;
+import epicsquid.roots.spell.SpellStormCloud;
 import epicsquid.roots.util.Constants;
 import epicsquid.roots.util.SlaveUtil;
 import net.minecraft.block.state.IBlockState;
@@ -93,7 +94,7 @@ public class EventManager {
       float totalFire = damage.isFireDamage() ? event.getAmount() : 0;
 
       if (trueSource != null && totalFire > 0 && mods.has(SpellAquaBubble.REFLECT_FIRE) && entity instanceof EntityPlayer) {
-        trueSource.attackEntityFrom(ModDamage.physicalDamageFrom((EntityPlayer) entity), totalFire);
+        trueSource.attackEntityFrom(ModDamage.physicalDamageFrom(entity), totalFire);
       }
 
       if (trueSource instanceof EntityLivingBase && event.getAmount() > 0) {
@@ -120,6 +121,19 @@ public class EventManager {
         event.setAmount(event.getAmount() * SpellAquaBubble.instance.lava_reduction);
       }
     }
+
+    if (entity.getActivePotionEffect(ModPotions.storm_cloud) != null) {
+      ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(entity.getEntityData(), SpellStormCloud.instance);
+      if (trueSource != null) {
+        if (mods.has(SpellStormCloud.JOLT)) {
+          trueSource.attackEntityFrom(DamageSource.causeMobDamage(entity), mods.ampFloat(SpellStormCloud.instance.lightning_damage));
+        }
+        if (mods.has(SpellStormCloud.MAGNETISM)) {
+          trueSource.setPositionAndUpdate(entity.posX, entity.posY, entity.posZ);
+        }
+      }
+    }
+
     if (entity.getActivePotionEffect(ModPotions.time_stop) != null) {
       event.setAmount(event.getAmount() * 0.1f);
     }
