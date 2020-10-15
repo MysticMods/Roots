@@ -3,25 +3,30 @@ package epicsquid.roots.potion;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
+import epicsquid.roots.entity.spell.EntityIcicle;
 import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageStormCloudGasFX;
 import epicsquid.roots.network.fx.MessageStormCloudStormFX;
-import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellStormCloud;
+import epicsquid.roots.util.EntityUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 public class PotionStormCloud extends Potion {
 
@@ -61,6 +66,53 @@ public class PotionStormCloud extends Potion {
         }
       }
 
+      int radius = SpellStormCloud.instance.radius;
+      if (mods.has(SpellStormCloud.RADIUS)) {
+        radius += SpellStormCloud.instance.radius_extended;
+      }
+
+      List<EntityLivingBase> entities = Util.getEntitiesWithinRadius(world, EntityLivingBase.class, entity.getPosition(), radius, radius, radius);
+      for (EntityLivingBase e : entities) {
+        if (EntityUtil.isFriendly(e) || e == entity) {
+          if (entity.ticksExisted % SpellStormCloud.instance.heal_interval == 0) {
+            if (mods.has(SpellStormCloud.HEALING)) {
+              e.heal(SpellStormCloud.instance.heal_amount);
+            }
+          }
+          e.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, mods.ampInt(SpellStormCloud.instance.duration), SpellStormCloud.instance.fire_resistance, false, false));
+          e.extinguish();
+          if (mods.has(SpellStormCloud.PEACEFUL) || e == entity) {
+            continue;
+          }
+        }
+
+        if (mods.has(SpellStormCloud.LIGHTNING) && e.ticksExisted % mods.ampSubInt(SpellStormCloud.instance.lightning_interval) == 0) {
+          if (Util.rand.nextFloat() < mods.ampFloat(SpellStormCloud.instance.lightning_chance)) {
+            world.addWeatherEffect(new EntityLightningBolt(world, e.posX, e.posY, e.posZ, false));
+          }
+        }
+
+        if (mods.has(SpellStormCloud.POISON)) {
+          e.addPotionEffect(new PotionEffect(MobEffects.POISON, mods.ampInt(SpellStormCloud.instance.poison_duration), SpellStormCloud.instance.poison_amplifier));
+        }
+
+        if (mods.has(SpellStormCloud.ICICLES)) {
+          if (e.ticksExisted % mods.ampSubInt(SpellStormCloud.instance.icicle_interval) == 0) {
+            if (Util.rand.nextFloat() < mods.ampFloat(SpellStormCloud.instance.icicle_chance)) {
+              Vec3d pos = e.getPositionVector();
+              Vec3d playerPos = entity.getPositionVector().add(0, entity.getEyeHeight(), 0);
+              Vec3d accel = pos.subtract(playerPos);
+              EntityIcicle icicle = new EntityIcicle(world, entity, accel.x, accel.y, accel.z, EntityIcicle.SpellType.STORM_CLOUD);
+              icicle.posX = playerPos.x;
+              icicle.posY = playerPos.y + Util.rand.nextDouble() - 0.5;
+              icicle.posZ = playerPos.z;
+              icicle.setModifiers(mods);
+              world.spawnEntity(icicle);
+            }
+          }
+        }
+      }
+
       if (mods.has(SpellStormCloud.OBSIDIAN) || mods.has(SpellStormCloud.ICE)) {
         if (entity.ticksExisted % 4 == 0) {
           PacketHandler.sendToAllTracking(new MessageStormCloudGasFX(entity), entity);
@@ -69,7 +121,7 @@ public class PotionStormCloud extends Potion {
     }
 
     if (entity.ticksExisted % 2 == 0) {
-          PacketHandler.sendToAllTracking(new MessageStormCloudStormFX(entity), entity);
+      PacketHandler.sendToAllTracking(new MessageStormCloudStormFX(entity, mods), entity);
     }
   }
 
