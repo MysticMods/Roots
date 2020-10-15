@@ -76,7 +76,7 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
                     Vec3d playerPos = player.getPositionVector().add(0, player.getEyeHeight(), 0);
                     Vec3d accel = pos.subtract(playerPos);
                     for (int k = 0; k < count; k++) {
-                      EntityIcicle icicle = new EntityIcicle(world, player, accel.x, accel.y, accel.z);
+                      EntityIcicle icicle = new EntityIcicle(world, player, accel.x, accel.y, accel.z, EntityIcicle.SpellType.WILDFIRE);
                       icicle.posX = playerPos.x;
                       icicle.posY = playerPos.y + Util.rand.nextDouble() - 0.5;
                       icicle.posZ = playerPos.z;

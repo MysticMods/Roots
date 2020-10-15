@@ -1,7 +1,9 @@
 package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
 import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.spell.SpellStormCloud;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -13,22 +15,25 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class MessageStormCloudStormFX implements IMessage {
+public class MessageStormCloudStormFX extends ModifierPacket implements IMessage {
   private double posX = 0, posY = 0, posZ = 0;
 
   private static final float[] color1 = new float[]{78 / 255.0f, 189 / 255.0f, 191 / 255.0f, 0.75f};
   private static final float[] color2 = new float[]{18 / 255.0f, 90 / 255.0f, 138 / 255.0f, 0.75f};
 
+  private static final float[] color3 = new float[]{107/255.0f, 252/255.0f, 3/255.0f, 0.75f};
+  private static final float[] color4 = new float[]{42/255.0f, 189/255.0f, 93/255.0f, 0.75f};
+
   public MessageStormCloudStormFX() {
     super();
   }
 
-  public MessageStormCloudStormFX(Entity entity) {
-    this(entity.posX, entity.posY, entity.posZ);
+  public MessageStormCloudStormFX(Entity entity, ModifierSnapshot modifiers) {
+    this(entity.posX, entity.posY, entity.posZ, modifiers);
   }
 
-  public MessageStormCloudStormFX(double x, double y, double z) {
-    super();
+  public MessageStormCloudStormFX(double x, double y, double z, ModifierSnapshot modifiers) {
+    super(modifiers);
     this.posX = x;
     this.posY = y;
     this.posZ = z;
@@ -68,7 +73,14 @@ public class MessageStormCloudStormFX implements IMessage {
           vx *= -1;
           vz *= -1;
         }
-        ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0, vz, Util.rand.nextBoolean() ? color1 : color2, 3f + Util.rand.nextFloat() * 4f, 80, false);
+        float[] color = color1;
+        if (Util.rand.nextBoolean()) {
+          color = color2;
+        }
+        if (message.hasRand(SpellStormCloud.POISON, 4)) {
+          color = Util.rand.nextBoolean() ? color3 : color4;
+        }
+        ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0, vz, color, 3f + Util.rand.nextFloat() * 4f, 80, false);
       }
       return null;
     }

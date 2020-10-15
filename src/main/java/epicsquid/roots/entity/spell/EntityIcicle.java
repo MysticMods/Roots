@@ -1,32 +1,33 @@
 package epicsquid.roots.entity.spell;
 
-import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.modifiers.instance.staff.ISnapshot;
+import epicsquid.roots.spell.SpellStormCloud;
 import epicsquid.roots.spell.SpellWildfire;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityFireball;
+import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class EntityIcicle extends EntityFireball {
   private ISnapshot modifiers = null;
+  private SpellType type = null;
 
   public EntityIcicle(World worldIn) {
     super(worldIn);
     this.setSize(0.25F, 0.25F);
   }
 
-  public EntityIcicle(World worldIn, double x, double y, double z, double accelX, double accelY, double accelZ) {
-    super(worldIn, x, y, z, accelX, accelY, accelZ);
-    this.setSize(0.25F, 0.25F);
-  }
-
-  public EntityIcicle(World worldIn, EntityLivingBase shooter, double accelX, double accelY, double accelZ) {
+  public EntityIcicle(World worldIn, EntityLivingBase shooter, double accelX, double accelY, double accelZ, SpellType type) {
     super(worldIn, shooter, accelX, accelY, accelZ);
     this.setSize(0.25F, 0.25F);
+    this.type = type;
+    this.motionY = this.accelerationY;
+    this.motionX = this.accelerationX;
+    this.motionZ = this.accelerationZ;
+    ProjectileHelper.rotateTowardsMovement(this, 5f);
   }
 
   @Override
@@ -62,11 +63,24 @@ public class EntityIcicle extends EntityFireball {
         } else {
           source = ModDamage.PHYSICAL_DAMAGE;
         }
-        float dam = modifiers == null ? SpellWildfire.instance.ice_damage : modifiers.ampFloat(SpellWildfire.instance.ice_damage);
+        float dam;
+        switch (type) {
+          default:
+          case WILDFIRE:
+            dam = SpellWildfire.instance.ice_damage;
+            break;
+          case STORM_CLOUD:
+            dam = SpellStormCloud.instance.icicle_damage;
+            break;
+        }
+        dam = modifiers == null ? dam : modifiers.ampFloat(dam);
         result.entityHit.attackEntityFrom(source, dam);
-        Roots.logger.info("Icicle hit: " + result.entityHit);
       }
       setDead();
     }
+  }
+
+  public enum SpellType {
+    WILDFIRE, STORM_CLOUD;
   }
 }
