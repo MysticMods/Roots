@@ -34,17 +34,19 @@ public class SpellGeas extends SpellBase {
   public static Property<Integer> PROP_DURATION = new Property<>("geas_duration", 400).setDescription("duration in ticks of this spell effect on entities");
   public static Property<Double> PROP_DISTANCE = new Property<>("distance", 15d).setDescription("the farthest extent that entities will be looked for when using targeted mode");
   public static Property<Integer> PROP_EXTENSION = new Property<>("extension", 600).setDescription("additional duration in ticks to be added to the base duration");
-  public static Property<Integer> PROP_ROOT_DURATION = new Property<>("root_duration", 20 * 4).setDescription("how long the creature should be rooted for after geas ends");
+  public static Property<Integer> PROP_WEAKNESS_DURATION = new Property<>("weakness_duration", 20 * 4).setDescription("how long the creature should be weakened for after geas ends");
   public static Property<Float> PROP_FIRE_DAMAGE = new Property<>("fire_damage", 2.5f).setDescription("the amount of fire damage that creatures should take after the geas ends");
   public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 3).setDescription("how long creatures should be set on fire for after geas ends");
   public static Property<Float> PROP_PHYSICAL_DAMAGE = new Property<>("physical_damage", 2.5f).setDescription("the amount of physical damage creatures should take after the geas ends");
   public static Property<Float> PROP_WATER_DAMAGE = new Property<>("water_damage", 2.5f).setDescription("how much water damage creatures should take after the geas ends");
+  public static Property<Integer> PROP_WEAKNESS_AMPLIFIER = new Property<>("weakness_amplifier", 0).setDescription("the amplifier to be applied to the weakness effect");
+
 
   public static Modifier DURATION = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "extended_geas"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "animal_servants"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
-  public static Modifier PARALYSIS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "rooted_response"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
+  public static Modifier WEAKNESS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "weakened_response"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1)));
   public static Modifier GUARDIANS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "unholy_command"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 1)));
-  public static Modifier TRIO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "triumvirate"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1)));
+  public static Modifier TRIO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "triumvirate"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
   public static Modifier TARGET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "targeted_geas"), ModifierCores.TERRA_MOSS, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.TERRA_MOSS, 1)));
   public static Modifier DUO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "duumvirate"), ModifierCores.CLOUD_BERRY, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 1)));
   public static Modifier FIRE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "inferno"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 1)));
@@ -62,15 +64,15 @@ public class SpellGeas extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_geas");
   public static SpellGeas instance = new SpellGeas(spellName);
 
-  public int root_duration, fire_duration;
+  public int weakness_duration, fire_duration, weakness_amplifier;
   public float fire_damage, physical_damage, water_damage;
   private int duration, extension;
   public double distance;
 
   public SpellGeas(ResourceLocation name) {
     super(name, TextFormatting.DARK_RED, 128f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DURATION, PROP_EXTENSION, PROP_ROOT_DURATION, PROP_FIRE_DAMAGE, PROP_FIRE_DURATION, PROP_PHYSICAL_DAMAGE, PROP_WATER_DAMAGE, PROP_DISTANCE);
-    acceptsModifiers(DURATION, PEACEFUL, PARALYSIS, GUARDIANS, TRIO, TARGET, DUO, FIRE, PHYSICAL, WATER);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DURATION, PROP_EXTENSION, PROP_WEAKNESS_DURATION, PROP_FIRE_DAMAGE, PROP_FIRE_DURATION, PROP_PHYSICAL_DAMAGE, PROP_WATER_DAMAGE, PROP_DISTANCE, PROP_WEAKNESS_AMPLIFIER);
+    acceptsModifiers(DURATION, PEACEFUL, WEAKNESS, GUARDIANS, TRIO, TARGET, DUO, FIRE, PHYSICAL, WATER);
   }
 
   @Override
@@ -167,7 +169,8 @@ public class SpellGeas extends SpellBase {
     this.cooldown = properties.get(PROP_COOLDOWN);
     this.duration = properties.get(PROP_DURATION);
     this.extension = properties.get(PROP_EXTENSION);
-    this.root_duration = properties.get(PROP_ROOT_DURATION);
+    this.weakness_duration = properties.get(PROP_WEAKNESS_DURATION);
+    this.weakness_amplifier = properties.get(PROP_WEAKNESS_AMPLIFIER);
     this.fire_duration = properties.get(PROP_FIRE_DURATION);
     this.fire_damage = properties.get(PROP_FIRE_DAMAGE);
     this.physical_damage = properties.get(PROP_PHYSICAL_DAMAGE);

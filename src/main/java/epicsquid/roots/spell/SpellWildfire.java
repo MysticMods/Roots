@@ -24,7 +24,6 @@ public class SpellWildfire extends SpellBase {
   public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(4.5f);
 
   public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 4).setDescription("how much fire damage should be done");
-  public static Property<Integer> PROP_PARALYSIS_DURATION = new Property<>("paralysis_duration", 5 * 20).setDescription("how long creatures should be paralyzed for");
   public static Property<Integer> PROP_SLOW_DURATION = new Property<>("slow_duration", 6 * 20).setDescription("how long an entity should be slowed for");
   public static Property<Integer> PROP_SLOW_AMPLIFIER = new Property<>("slow_amplifier", 0).setDescription("the amplifier that should be applied to the slow effect");
   public static Property<Integer> PROP_POISON_DURATION = new Property<>("poison_duration", 6 * 20).setDescription("how long an entity should be poisoned for");
@@ -38,10 +37,13 @@ public class SpellWildfire extends SpellBase {
   public static Property<Float> PROP_ICE_DAMAGE = new Property<>("icicle_damage", 1f).setDescription("how much damage icicles should deal when they strike a creature");
   public static Property<Integer> PROP_ICICLE_COUNT = new Property<>("icicle_count", 3).setDescription("how many icicles should spawn");
   public static Property<Integer> PROP_LIFETIME = new Property<>("lifetime", 12).setDescription("how long the fire projectile should exist for (which determines how far it will travel");
+  public static Property<Integer> PROP_WEAKNESS_DURATION = new Property<>("weakness_duration", 4 * 20).setDescription("how long enemies should be weakened in place for");
+  public static Property<Integer> PROP_WEAKNESS_AMPLIFIER = new Property<>("weakness_amplifier", 0).setDescription("the amplifier to be applied to the weakness effect");
+
 
   public static Modifier PURPLE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "purple_flame"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.05)));
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_flame"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 0.1)));
-  public static Modifier PARALYSIS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "thorns"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.35)));
+  public static Modifier WEAKNESS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "weakening_thorns"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.35)));
   public static Modifier SLOW = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "slow_fire"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 0.125)));
   public static Modifier GREEN = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "green_flame"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 0.05)));
   public static Modifier GROWTH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "post_mortem_growth"), ModifierCores.TERRA_MOSS, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.TERRA_MOSS, 0.125)));
@@ -57,12 +59,12 @@ public class SpellWildfire extends SpellBase {
   public int radius_x, radius_y, radius_z, growth_ticks;
   public AxisAlignedBB bounding;
   public float damage, ice_damage;
-  public int fire_duration, fire_radius, slow_duration, slow_amplifier, paralysis_duration, poison_duration, poison_amplifier, levitate_duration, icicle_count, lifetime;
+  public int fire_duration, fire_radius, slow_duration, slow_amplifier, poison_duration, poison_amplifier, levitate_duration, icicle_count, lifetime,  weakness_amplifier, weakness_duration;
 
   public SpellWildfire(ResourceLocation name) {
     super(name, TextFormatting.GOLD, 255f / 255f, 128f / 255f, 32f / 255f, 255f / 255f, 64f / 255f, 32f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_FIRE_DURATION, PROP_PARALYSIS_DURATION, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_LEVITATE_DURATION, PROP_FIRE_RADIUS, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_GROWTH_TICKS, PROP_ICE_DAMAGE, PROP_ICICLE_COUNT, PROP_LIFETIME);
-    acceptsModifiers(PURPLE, PEACEFUL, PARALYSIS, SLOW, GREEN, GROWTH, POISON, LEVITATE, WILDFIRE, ICICLES);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_FIRE_DURATION, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_LEVITATE_DURATION, PROP_FIRE_RADIUS, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_GROWTH_TICKS, PROP_ICE_DAMAGE, PROP_ICICLE_COUNT, PROP_LIFETIME, PROP_WEAKNESS_AMPLIFIER, PROP_WEAKNESS_DURATION);
+    acceptsModifiers(PURPLE, PEACEFUL, WEAKNESS, SLOW, GREEN, GROWTH, POISON, LEVITATE, WILDFIRE, ICICLES);
   }
 
   @Override
@@ -96,7 +98,6 @@ public class SpellWildfire extends SpellBase {
     this.fire_duration = properties.get(PROP_FIRE_DURATION);
     this.slow_duration = properties.get(PROP_SLOW_DURATION);
     this.slow_amplifier = properties.get(PROP_SLOW_AMPLIFIER);
-    this.paralysis_duration = properties.get(PROP_PARALYSIS_DURATION);
     this.poison_amplifier = properties.get(PROP_POISON_AMPLIFIER);
     this.poison_duration = properties.get(PROP_POISON_DURATION);
     this.levitate_duration = properties.get(PROP_LEVITATE_DURATION);
@@ -109,5 +110,7 @@ public class SpellWildfire extends SpellBase {
     this.ice_damage = properties.get(PROP_ICE_DAMAGE);
     this.icicle_count = properties.get(PROP_ICICLE_COUNT);
     this.lifetime = properties.get(PROP_LIFETIME);
+    this.weakness_duration = properties.get(PROP_WEAKNESS_DURATION);
+    this.weakness_amplifier = properties.get(PROP_WEAKNESS_AMPLIFIER);
   }
 }

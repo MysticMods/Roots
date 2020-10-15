@@ -46,7 +46,8 @@ public class SpellDisarm extends SpellBase {
   public static Property<Integer> PROP_POISON_AMPLIFIER = new Property<>("poison_amplifier", 0).setDescription("the amplifier to be applied to the poison effect");
   public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 4).setDescription("duration that disarmed creatures should be set on fire for in seconds");
   public static Property<Float> PROP_KNOCKBACK = new Property<>("knockback_strength", 0.5f).setDescription("the strength of the knockback effect");
-  public static Property<Integer> PROP_PARALYSIS_DURATION = new Property<>("paralysis_duration", 120).setDescription("how long a creature should be paralysed for");
+  public static Property<Integer> PROP_WEAKNESS_DURATION = new Property<>("weakness_duration", 4 * 20).setDescription("how long enemies should be weakened in place for");
+  public static Property<Integer> PROP_WEAKNESS_AMPLIFIER = new Property<>("weakness_amplifier", 0).setDescription("the amplifier to be applied to the weakness effect");
 
   public static Modifier DROP_CHANCE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "boost_drops"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "cows_with_guns"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -56,7 +57,7 @@ public class SpellDisarm extends SpellBase {
   public static Modifier POISON = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "poison_hands"), ModifierCores.BAFFLE_CAP, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 1)));
   public static Modifier FLOWERS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "flower_child"), ModifierCores.CLOUD_BERRY, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 1)));
   public static Modifier FIRE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "blaze"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 1)));
-  public static Modifier PARALYSIS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "paralysis"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
+  public static Modifier WEAKNESS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "weakness"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier KNOCKBACK = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "liquid_lurch"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
   static {
@@ -71,13 +72,13 @@ public class SpellDisarm extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_disarm");
   public static SpellDisarm instance = new SpellDisarm(spellName);
 
-  private int radius_x, radius_y, radius_z, rearm_duration, poison_duration, poison_amplifier, fire_duration, paralysis_duration;
+  private int radius_x, radius_y, radius_z, rearm_duration, poison_duration, poison_amplifier, fire_duration, weakness_duration, weakness_amplifier;
   private float drop_chance, armor_chance, chance_increase, knockback;
 
   private SpellDisarm(ResourceLocation name) {
     super(name, TextFormatting.DARK_RED, 122F / 255F, 0F, 0F, 58F / 255F, 58F / 255F, 58F / 255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_REARM_DURATION, PROP_CHANCE_INCREASE, PROP_ARMOR, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_FIRE_DURATION, PROP_KNOCKBACK, PROP_PARALYSIS_DURATION);
-    acceptsModifiers(DROP_CHANCE, PEACEFUL, ARMOR1, DUO, ARMOR2, POISON, FLOWERS, FIRE, PARALYSIS, KNOCKBACK);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_REARM_DURATION, PROP_CHANCE_INCREASE, PROP_ARMOR, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_FIRE_DURATION, PROP_KNOCKBACK, PROP_WEAKNESS_AMPLIFIER, PROP_WEAKNESS_DURATION);
+    acceptsModifiers(DROP_CHANCE, PEACEFUL, ARMOR1, DUO, ARMOR2, POISON, FLOWERS, FIRE, WEAKNESS, KNOCKBACK);
   }
 
   @Override
@@ -159,8 +160,8 @@ public class SpellDisarm extends SpellBase {
             if (info.has(FIRE)) {
               entity.setFire(fire_duration);
             }
-            if (info.has(PARALYSIS)) {
-              entity.addPotionEffect(new PotionEffect(ModPotions.time_stop, paralysis_duration));
+            if (info.has(WEAKNESS)) {
+              entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, info.ampInt(weakness_duration), weakness_amplifier));
             }
             if (info.has(KNOCKBACK)) {
               entity.knockBack(caster, knockback, caster.posX - entity.posX, caster.posZ - entity.posZ);
@@ -199,7 +200,8 @@ public class SpellDisarm extends SpellBase {
     this.knockback = properties.get(PROP_KNOCKBACK);
     this.poison_amplifier = properties.get(PROP_POISON_AMPLIFIER);
     this.poison_duration = properties.get(PROP_POISON_DURATION);
-    this.paralysis_duration = properties.get(PROP_PARALYSIS_DURATION);
+    this.weakness_duration = properties.get(PROP_WEAKNESS_DURATION);
+    this.weakness_amplifier = properties.get(PROP_WEAKNESS_AMPLIFIER);
     this.fire_duration = properties.get(PROP_FIRE_DURATION);
     this.rearm_duration = properties.get(PROP_REARM_DURATION);
   }

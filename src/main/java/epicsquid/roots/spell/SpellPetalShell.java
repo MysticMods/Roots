@@ -37,13 +37,14 @@ public class SpellPetalShell extends SpellBase {
   public static Property<Integer> PROP_POISON_DURATION = new Property<>("poison_duration", 20 * 4).setDescription("the duration of the poison effect made by the reactant");
   public static Property<Integer> PROP_POISON_AMPLIFIER = new Property<>("poison_amplifier", 0).setDescription("the amplifier of the poison effect made by the reactant");
   public static Property<Integer> PROP_LEVITATE_DURATION = new Property<>("levitate_duration", 20 * 6).setDescription("the duration of the levitation effect applied to creatures");
-  public static Property<Integer> PROP_PARALYSIS_DURATION = new Property<>("paralysis_duraiton", 20 * 3).setDescription("how long creatures should be paralysed for");
+  public static Property<Integer> PROP_WEAKNESS_DURATION = new Property<>("weakness_duration", 20 * 3).setDescription("how long creatures should be weakened for");
   public static Property<Integer> PROP_SLOW_DURATION = new Property<>("slow_duration", 8 * 20).setDescription("the duration of time that the slow effect should be applied for to creatures");
   public static Property<Integer> PROP_SLOW_AMPLIFIER = new Property<>("slow_amplifier", 0).setDescription("the amplifier applied to the slow effect");
   public static Property<Float> PROP_DAGGER_DAMAGE = new Property<>("dagger_damage", 2.5f).setDescription("the amount of slashing damage that should be done to creatures");
   public static Property<Integer> PROP_BLEED_DURATION = new Property<>("bleed_duration", 4 * 20).setDescription("the duration of the bleed effect created by the slashing damage");
   public static Property<Integer> PROP_BLEED_AMPLIFIER = new Property<>("bleed_amplifier", 0).setDescription("the amplifier applied to the bleed effect created by the slashing damage");
   public static Property<Float> PROP_RADIANT_DAMAGE = new Property<>("radiant_damage", 2.5f).setDescription("the amount of radiant damage applied to the attacking creature");
+  public static Property<Integer> PROP_WEAKNESS_AMPLIFIER = new Property<>("weakness_amplifier", 0).setDescription("the amplifier to be applied to the weakness effect");
 
 
   public static Modifier RADIANT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "react_radiance"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
@@ -54,31 +55,31 @@ public class SpellPetalShell extends SpellBase {
   public static Modifier POISON = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "react_poison"), ModifierCores.BAFFLE_CAP, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 1)));
   public static Modifier LEVITATE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "react_drift"), ModifierCores.CLOUD_BERRY, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 1)));
   public static Modifier FIRE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "react_fire"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 1)));
-  public static Modifier PARALYSIS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "react_paralysis"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
+  public static Modifier WEAKNESS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "react_paralysis"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
   public static Modifier SLOW = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "react_slow"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
 
   public static final float[] mossFirst = new float[]{138 / 255.0f, 154/255.0f, 91/255.0f, 0.5f};
   public static final float[] mossSecond = new float[]{79/255.0f, 93/255.0f, 35/255.0f, 0.5f};
 
   static {
-    RADIANT.addConflicts(SLASHING, POISON, LEVITATE, PARALYSIS, SLOW);
-    SLASHING.addConflicts(POISON, LEVITATE, PARALYSIS, SLOW);
-    POISON.addConflicts(LEVITATE, PARALYSIS, SLOW);
-    LEVITATE.addConflicts(PARALYSIS, SLOW);
-    PARALYSIS.addConflict(SLOW);
+    RADIANT.addConflicts(SLASHING, POISON, LEVITATE, WEAKNESS, SLOW);
+    SLASHING.addConflicts(POISON, LEVITATE, WEAKNESS, SLOW);
+    POISON.addConflicts(LEVITATE, WEAKNESS, SLOW);
+    LEVITATE.addConflicts(WEAKNESS, SLOW);
+    WEAKNESS.addConflict(SLOW);
   }
 
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_petal_shell");
   public static SpellPetalShell instance = new SpellPetalShell(spellName);
 
-  public int duration, fire_duration, poison_duration, poison_amplifier, levitate_duration, paralysis_duration, slow_duration, slow_amplifier, bleed_duration, bleed_amplifier;
+  public int duration, fire_duration, poison_duration, poison_amplifier, levitate_duration, weakness_duration, slow_duration, slow_amplifier, bleed_duration, bleed_amplifier, weakness_amplifier;
   public float fire_damage, dagger_damage, radiant_damage;
   private int maxShells, extraShells, radius_x, radius_y, radius_z;
 
   public SpellPetalShell(ResourceLocation name) {
     super(name, TextFormatting.LIGHT_PURPLE, 255f / 255f, 192f / 255f, 240f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_MAXIMUM, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_EXTRA, PROP_FIRE_DURATION, PROP_FIRE_DAMAGE, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_LEVITATE_DURATION, PROP_PARALYSIS_DURATION, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_DAGGER_DAMAGE, PROP_BLEED_AMPLIFIER, PROP_BLEED_DURATION, PROP_RADIANT_DAMAGE);
-    acceptsModifiers(RADIANT, PEACEFUL, SLASHING, CHARGES, COLOUR, POISON, LEVITATE, FIRE, PARALYSIS, SLOW);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_MAXIMUM, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_EXTRA, PROP_FIRE_DURATION, PROP_FIRE_DAMAGE, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_LEVITATE_DURATION, PROP_WEAKNESS_DURATION, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_DAGGER_DAMAGE, PROP_BLEED_AMPLIFIER, PROP_BLEED_DURATION, PROP_RADIANT_DAMAGE, PROP_WEAKNESS_AMPLIFIER);
+    acceptsModifiers(RADIANT, PEACEFUL, SLASHING, CHARGES, COLOUR, POISON, LEVITATE, FIRE, WEAKNESS, SLOW);
   }
 
   @Override
@@ -145,7 +146,7 @@ public class SpellPetalShell extends SpellBase {
     this.poison_duration = properties.get(PROP_POISON_DURATION);
     this.poison_amplifier = properties.get(PROP_POISON_AMPLIFIER);
     this.levitate_duration = properties.get(PROP_LEVITATE_DURATION);
-    this.paralysis_duration = properties.get(PROP_PARALYSIS_DURATION);
+    this.weakness_duration = properties.get(PROP_WEAKNESS_DURATION);
     this.slow_duration = properties.get(PROP_SLOW_DURATION);
     this.slow_amplifier = properties.get(PROP_SLOW_AMPLIFIER);
     this.bleed_duration = properties.get(PROP_BLEED_DURATION);
@@ -153,5 +154,6 @@ public class SpellPetalShell extends SpellBase {
     this.fire_damage = properties.get(PROP_FIRE_DAMAGE);
     this.dagger_damage = properties.get(PROP_DAGGER_DAMAGE);
     this.radiant_damage = properties.get(PROP_RADIANT_DAMAGE);
+    this.weakness_amplifier = properties.get(PROP_WEAKNESS_AMPLIFIER);
   }
 }
