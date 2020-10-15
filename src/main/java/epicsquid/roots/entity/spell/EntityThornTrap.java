@@ -11,7 +11,6 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
@@ -86,8 +85,8 @@ public class EntityThornTrap extends EntitySpellModifiable<SpellRoseThorns> {
             if (modifiers.has(SpellRoseThorns.FIRE)) {
               entity.setFire(modifiers.ampInt(SpellRoseThorns.instance.fire_duration));
             }
-            if (modifiers.has(SpellRoseThorns.PARALYSIS)) {
-              entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, modifiers.ampInt(SpellRoseThorns.instance.root_duration), 10));
+            if (modifiers.has(SpellRoseThorns.WEAKNESS)) {
+              entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, modifiers.ampInt(SpellRoseThorns.instance.weakness_duration), SpellRoseThorns.instance.weakness_amplifier));
             }
             if (modifiers.has(SpellRoseThorns.SLOW)) {
               entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, modifiers.ampInt(SpellRoseThorns.instance.slowness_duration), SpellRoseThorns.instance.slowness_amplifier));

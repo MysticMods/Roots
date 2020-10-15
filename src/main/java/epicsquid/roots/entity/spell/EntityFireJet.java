@@ -58,8 +58,8 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
                   hit = true;
                   entity.setFire(modifiers.ampInt(instance.fire_duration));
                   entity.attackEntityFrom(ModDamage.fireDamageFrom(player), modifiers.ampFloat(instance.damage));
-                  if (modifiers.has(SpellWildfire.PARALYSIS)) {
-                    entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, modifiers.ampInt(instance.paralysis_duration), 10));
+                  if (modifiers.has(SpellWildfire.WEAKNESS)) {
+                    entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, modifiers.ampInt(instance.weakness_duration), instance.weakness_amplifier));
                   }
                   if (modifiers.has(SpellWildfire.SLOW)) {
                     entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, modifiers.ampInt(instance.slow_duration), instance.slow_amplifier));
