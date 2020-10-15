@@ -28,7 +28,7 @@ public class Keybinds {
   public static void init() {
     POUCH_KEYBIND = new KeyBinding(ROOTS_BASE + "pouch", 0, ROOTS_GROUP);
     QUIVER_KEYBIND = new KeyBinding(ROOTS_BASE + "quiver", 0, ROOTS_GROUP);
-    OPEN_SPELL_LIBRARY = new KeyBinding(ROOTS_BASE + "spell_library", 0, ROOTS_GROUP);
+    OPEN_SPELL_LIBRARY = new KeyBinding(ROOTS_BASE + "spell_library", 37, ROOTS_GROUP);
     CYCLE_PROFILE = new KeyBinding(ROOTS_BASE + "cycle", 0, ROOTS_GROUP);
 
     ClientRegistry.registerKeyBinding(POUCH_KEYBIND);
