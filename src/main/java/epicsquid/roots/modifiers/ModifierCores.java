@@ -1,5 +1,6 @@
 package epicsquid.roots.modifiers;
 
+import epicsquid.mysticallib.types.OneTimeSupplier;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.init.HerbRegistry;
@@ -11,7 +12,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 
 import javax.annotation.Nullable;
+import java.util.Set;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum ModifierCores implements IModifierCore {
   GUNPOWDER(Items.GUNPOWDER, ""),
@@ -32,6 +36,8 @@ public enum ModifierCores implements IModifierCore {
   INFERNAL_BULB(new ResourceLocation(Roots.MODID, "infernal_bulb"), TextFormatting.RED + "" + TextFormatting.BOLD),
   STALICRIPE(new ResourceLocation(Roots.MODID, "stalicripe"), TextFormatting.DARK_RED + "" + TextFormatting.BOLD),
   DEWGONIA(new ResourceLocation(Roots.MODID, "dewgonia"), TextFormatting.DARK_AQUA + "" + TextFormatting.BOLD);
+
+  private static Set<Item> modifierCores = null;
 
   private final Supplier<ItemStack> stack;
   private final Supplier<Herb> herb;
@@ -54,7 +60,7 @@ public enum ModifierCores implements IModifierCore {
   }
 
   ModifierCores(Supplier<Item> item, String formatting) {
-    this.stack = () -> new ItemStack(item.get());
+    this.stack = new OneTimeSupplier<>(() -> new ItemStack(item.get()));
     this.herb = null;
     this.formatting = formatting;
   }
@@ -113,5 +119,16 @@ public enum ModifierCores implements IModifierCore {
       }
     }
     return null;
+  }
+
+  public static boolean isModifierCore (Item item) {
+    if (modifierCores == null) {
+      modifierCores = Stream.of(values()).map(ModifierCores::getStack).map(ItemStack::getItem).collect(Collectors.toSet());
+    }
+    return modifierCores.contains(item);
+  }
+
+  public static boolean isModifierCore (ItemStack stack) {
+    return isModifierCore(stack.getItem());
   }
 }
