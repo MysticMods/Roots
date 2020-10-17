@@ -141,7 +141,7 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
   public void previousSlot() {
     if (this.isEmpty()) {
       // Problematic TODO
-      setSelectedSlot(0);
+      setSelectedSlot(1);
       saveToStack();
       return;
     }
@@ -171,7 +171,7 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
   public void nextSlot() {
     if (this.isEmpty()) {
       // Problematic TODO
-      setSelectedSlot(0);
+      setSelectedSlot(1);
       saveToStack();
       return;
     }
