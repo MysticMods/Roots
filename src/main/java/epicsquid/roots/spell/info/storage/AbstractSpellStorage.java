@@ -16,7 +16,7 @@ import java.util.function.Function;
 
 public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implements INBTSerializable<NBTTagCompound> {
   protected ItemStack stack;
-  protected int selectedSlot;
+  protected int selectedSlot = 1;
 
   public AbstractSpellStorage() {
   }

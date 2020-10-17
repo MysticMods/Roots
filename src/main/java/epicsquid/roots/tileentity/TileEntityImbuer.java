@@ -206,17 +206,18 @@ public class TileEntityImbuer extends TileBase implements ITickable {
       if (progress > 200) {
         progress = 0;
         if (!world.isRemote) {
-          if (inventory.getStackInSlot(1).getItem() == ModItems.staff) {
+          ItemStack inSlot = inventory.getStackInSlot(1);
+          if (inSlot.getItem() == ModItems.staff || inSlot.getItem() == ModItems.gramary) {
             if (inserter == null) {
               Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
             } else {
-              ItemStack staff = inventory.getStackInSlot(1);
-              ItemStaff.createData(staff, capability);
+              if (inSlot.getItem() == ModItems.staff) {
+                ItemStaff.createData(inSlot, capability);
+              }
               SpellBase spell = capability.getSelectedInfo().getSpell();
               SpellLibraryData library = SpellLibraryRegistry.getData(inserter);
-              // TODO: This isn't working because I am Dumb.
               library.addSpell(spell);
-              world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, staff));
+              world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inSlot));
               PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(spell.getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
             }
             inventory.extractItem(0, 1, false);

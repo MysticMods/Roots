@@ -142,10 +142,14 @@ public class ItemStaff extends ItemBase {
   }
 
   // TODO: This needs to happen to the library
+  // TODO: BUT WHY DOES IT NEED TO HAPPEN IN THE LIBRARY???
   public static void createData(ItemStack stack, DustSpellStorage dustCapability) {
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
     if (capability != null) {
       capability.addSpell(Objects.requireNonNull(dustCapability.getSelectedInfo()).toStaff());
+      if (capability.getSelectedSlot() == 0) {
+        capability.setSelectedSlot(1);
+      }
     }
   }
 
