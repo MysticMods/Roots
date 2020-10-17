@@ -94,7 +94,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
       int slot = -1;
       if (heldItem.getItem() == ModItems.spell_dust) {
         slot = 0;
-      } else if (heldItem.getItem() == ModItems.staff) {
+      } else if (heldItem.getItem() == ModItems.staff || heldItem.getItem() == ModItems.gramary) {
         slot = 1;
       }
       if (slot != -1) {
