@@ -1,6 +1,9 @@
 package epicsquid.roots.entity.spell;
 
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.ModDamage;
+import epicsquid.roots.network.fx.MessageRoseThornsBurstFX;
+import epicsquid.roots.network.fx.MessageRoseThornsTickFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRoseThorns;
 import epicsquid.roots.util.EntityUtil;
@@ -48,69 +51,53 @@ public class EntityThornTrap extends EntitySpellModifiable<SpellRoseThorns> {
       this.motionZ = 0;
     }
     // TODO: Make this server-side
-    float scale1 = modifiers.has(SpellRoseThorns.BIGGER) ? 4.5f : 2.5f;
-    float scale2 = modifiers.has(SpellRoseThorns.BIGGER) ? 9f : 5f;
-    if (world.isRemote) {
-      if (onGround) {
-        if (rand.nextBoolean()) {
-          ParticleUtil.spawnParticleThorn(world, (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), SpellRoseThorns.instance.getFirstColours(0.5f), scale1, 12, rand.nextBoolean());
-        } else {
-          ParticleUtil.spawnParticleThorn(world, (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), SpellRoseThorns.instance.getSecondColours(0.5f), scale1, 12, rand.nextBoolean());
-        }
-      } else {
-        if (rand.nextBoolean()) {
-          ParticleUtil.spawnParticleGlow(world, (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), SpellRoseThorns.instance.getFirstColours(0.5f), scale2, 12);
-        } else {
-          ParticleUtil.spawnParticleGlow(world, (float) posX, (float) posY, (float) posZ, 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), 0.125f * (rand.nextFloat() - 0.5f), SpellRoseThorns.instance.getSecondColours(0.5f), scale2, 12);
-        }
+
+    if (!world.isRemote) {
+      if (modifiers == null) {
+        setDead();
+        return;
       }
-    }
-    if (playerId != null) {
-      double offset = modifiers.has(SpellRoseThorns.BIGGER) ? 3 : 1.5;
-      EntityPlayer player = world.getPlayerEntityByUUID(playerId);
-      if (player != null) {
-        List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - offset, posY - offset, posZ - offset, posX + offset, posY + offset, posZ + offset), o -> o != player);
-        for (EntityLivingBase entity : entities) {
-          if (!(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
-            if (modifiers != null && modifiers.has(instance.PEACEFUL) && EntityUtil.isFriendly(entity)) {
-              continue;
-            }
-            setDead();
-            entity.attackEntityFrom(ModDamage.roseDamageFrom(player), modifiers.ampFloat(SpellRoseThorns.instance.damage));
-            if (modifiers.has(SpellRoseThorns.UNDEAD) & entity.isEntityUndead()) {
-              entity.attackEntityFrom(ModDamage.roseDamageFrom(player), modifiers.ampFloat(SpellRoseThorns.instance.undead_damage));
-            }
-            if (modifiers.has(SpellRoseThorns.STRENGTH)) {
-              player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, modifiers.ampInt(SpellRoseThorns.instance.strength_duration), SpellRoseThorns.instance.slowness_amplifier, false, false));
-            }
-            if (modifiers.has(SpellRoseThorns.FIRE)) {
-              entity.setFire(modifiers.ampInt(SpellRoseThorns.instance.fire_duration));
-            }
-            if (modifiers.has(SpellRoseThorns.WEAKNESS)) {
-              entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, modifiers.ampInt(SpellRoseThorns.instance.weakness_duration), SpellRoseThorns.instance.weakness_amplifier));
-            }
-            if (modifiers.has(SpellRoseThorns.SLOW)) {
-              entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, modifiers.ampInt(SpellRoseThorns.instance.slowness_duration), SpellRoseThorns.instance.slowness_amplifier));
-            }
-            if (modifiers.has(SpellRoseThorns.POISON)) {
-              entity.addPotionEffect(new PotionEffect(MobEffects.POISON, modifiers.ampInt(SpellRoseThorns.instance.poison_duration), SpellRoseThorns.instance.poison_amplifier));
-            }
-            if (modifiers.has(SpellRoseThorns.BOOST)) {
-              entity.motionY = SpellRoseThorns.instance.knockup;
-              entity.velocityChanged = true;
-            }
-            if (modifiers.has(SpellRoseThorns.KNOCKBACK)) {
-              entity.knockBack(this, SpellRoseThorns.instance.knockback, this.posX - entity.posX, this.posZ - entity.posZ);
-            }
-          }
-          if (world.isRemote) {
-            for (int i = 0; i < 30; i++) {
-              if (rand.nextBoolean()) {
-                ParticleUtil.spawnParticleThorn(world, (float) posX + 0.25f * (rand.nextFloat() - 0.5f), (float) posY + 0.25f * (rand.nextFloat() - 0.5f), (float) posZ + 0.25f * (rand.nextFloat() - 0.5f), 0.375f * rand.nextFloat() - 0.1875f, 0.1f + 0.125f * rand.nextFloat(), 0.375f * rand.nextFloat() - 0.1875f, SpellRoseThorns.instance.getFirstColours(0.5f), 4.0f, 24, rand.nextBoolean());
-              } else {
-                ParticleUtil.spawnParticleThorn(world, (float) posX + 0.25f * (rand.nextFloat() - 0.5f), (float) posY + 0.25f * (rand.nextFloat() - 0.5f), (float) posZ + 0.25f * (rand.nextFloat() - 0.5f), 0.375f * rand.nextFloat() - 0.1875f, 0.1f + 0.125f * rand.nextFloat(), 0.375f * rand.nextFloat() - 0.1875f, SpellRoseThorns.instance.getSecondColours(0.5f), 4.0f, 24, rand.nextBoolean());
+
+      PacketHandler.sendToAllTracking(new MessageRoseThornsTickFX(this.posX, this.posY, this.posZ, this.onGround, modifiers), this);
+      if (playerId != null) {
+        double offset = modifiers.has(SpellRoseThorns.BIGGER) ? 3 : 1.5;
+        EntityPlayer player = world.getPlayerEntityByUUID(playerId);
+        if (player != null) {
+          List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - offset, posY - offset, posZ - offset, posX + offset, posY + offset, posZ + offset), o -> o != player);
+          for (EntityLivingBase entity : entities) {
+            if (!(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
+              if (modifiers.has(instance.PEACEFUL) && EntityUtil.isFriendly(entity)) {
+                continue;
+              }
+              setDead();
+              entity.attackEntityFrom(ModDamage.roseDamageFrom(player), modifiers.ampFloat(SpellRoseThorns.instance.damage));
+              if (modifiers.has(SpellRoseThorns.UNDEAD) & entity.isEntityUndead()) {
+                entity.attackEntityFrom(ModDamage.roseDamageFrom(player), modifiers.ampFloat(SpellRoseThorns.instance.undead_damage));
+              }
+              if (modifiers.has(SpellRoseThorns.STRENGTH)) {
+                player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, modifiers.ampInt(SpellRoseThorns.instance.strength_duration), SpellRoseThorns.instance.slowness_amplifier, false, false));
+              }
+              if (modifiers.has(SpellRoseThorns.FIRE)) {
+                entity.setFire(modifiers.ampInt(SpellRoseThorns.instance.fire_duration));
+              }
+              if (modifiers.has(SpellRoseThorns.WEAKNESS)) {
+                entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, modifiers.ampInt(SpellRoseThorns.instance.weakness_duration), SpellRoseThorns.instance.weakness_amplifier));
+              }
+              if (modifiers.has(SpellRoseThorns.SLOW)) {
+                entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, modifiers.ampInt(SpellRoseThorns.instance.slowness_duration), SpellRoseThorns.instance.slowness_amplifier));
+              }
+              if (modifiers.has(SpellRoseThorns.POISON)) {
+                entity.addPotionEffect(new PotionEffect(MobEffects.POISON, modifiers.ampInt(SpellRoseThorns.instance.poison_duration), SpellRoseThorns.instance.poison_amplifier));
+              }
+              if (modifiers.has(SpellRoseThorns.BOOST)) {
+                entity.motionY = SpellRoseThorns.instance.knockup;
+                entity.velocityChanged = true;
+              }
+              if (modifiers.has(SpellRoseThorns.KNOCKBACK)) {
+                entity.knockBack(this, SpellRoseThorns.instance.knockback, this.posX - entity.posX, this.posZ - entity.posZ);
               }
             }
+            PacketHandler.sendToAllTracking(new MessageRoseThornsBurstFX(this.posX, this.posY, this.posZ, modifiers), this);
           }
         }
       }
