@@ -178,13 +178,16 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
 
     int originalSlot = selectedSlot;
 
-    for (int i = selectedSlot; i <= MAX_SPELL_SLOT; i++) {
-      if (spells.get(i) != null) {
-        setSelectedSlot(i);
-        saveToStack();
-        return;
+    if (selectedSlot + 1 <= MAX_SPELL_SLOT) {
+      for (int i = selectedSlot + 1; i <= MAX_SPELL_SLOT; i++) {
+        if (spells.get(i) != null) {
+          setSelectedSlot(i);
+          saveToStack();
+          return;
+        }
       }
     }
+
     for (int i = MIN_SPELL_SLOT; i < originalSlot; i++) {
       if (spells.get(i) != null) {
         setSelectedSlot(i);
