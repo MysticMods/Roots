@@ -1389,7 +1389,7 @@ public class ModRecipes {
         new OreIngredient("rootsBark")));
 
     addFeyCraftingRecipe("apothecary_pouch", new ApothecaryPouchRecipe(new ItemStack(ModItems.apothecary_pouch), 1).addIngredients(
-        new ItemStack(ModItems.baffle_cap),
+        new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom)),
         new ItemStack(ModItems.bark_wildwood),
         new ItemStack(ModItems.bark_wildwood),
         new ItemStack(ModItems.spirit_herb),
