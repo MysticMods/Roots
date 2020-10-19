@@ -47,6 +47,7 @@ public class EntityThornTrap extends EntitySpellModifiable<SpellRoseThorns> {
       this.motionX = 0;
       this.motionZ = 0;
     }
+    // TODO: Make this server-side
     float scale1 = modifiers.has(SpellRoseThorns.BIGGER) ? 4.5f : 2.5f;
     float scale2 = modifiers.has(SpellRoseThorns.BIGGER) ? 9f : 5f;
     if (world.isRemote) {
