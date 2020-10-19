@@ -40,8 +40,6 @@ public class ContainerPouch extends Container {
 
   private boolean isServerSide;
 
-  private SlotSupplier supplier;
-
   public ContainerPouch(EntityPlayer player, boolean isServerSide) {
     this.player = player;
     this.isServerSide = isServerSide;
@@ -70,7 +68,6 @@ public class ContainerPouch extends Container {
     }
     inventoryHandler = handler.getInventory();
     herbsHandler = handler.getHerbs();
-    supplier = PouchSlot::new;
 
     pouch = use;
 
@@ -108,7 +105,7 @@ public class ContainerPouch extends Container {
       if (i >= 6) {
         yPosOffset += 22;
       }
-      addSlotToContainer(supplier.create(herbsHandler, i, xOffset + 127 + (21 * (i % 3)), yOffset + 23 + yPosOffset));
+      addSlotToContainer(new PouchSlot(herbsHandler, true, i, xOffset + 127 + (21 * (i % 3)), yOffset + 23 + yPosOffset));
     }
     herbsEnd = 9;
     inventoryEnd = 0;
@@ -121,15 +118,15 @@ public class ContainerPouch extends Container {
     for (int i = 0; i < inventoryHandler.getSlots(); i++) {
       // Top Row
       if (i < 5) {
-        addSlotToContainer(supplier.create(inventoryHandler, q++, xOffset + 11 + (i * 21), yOffset + 23));
+        addSlotToContainer(new PouchSlot(inventoryHandler, q++, xOffset + 11 + (i * 21), yOffset + 23));
       }
       // Middle Row
       if (i >= 5 && i < 9) {
-        addSlotToContainer(supplier.create(inventoryHandler, q++, xOffset + 22 + ((i - 5) * 21), yOffset + 44));
+        addSlotToContainer(new PouchSlot(inventoryHandler, q++, xOffset + 22 + ((i - 5) * 21), yOffset + 44));
       }
       // Bottom Row
       if (i >= 9 && i < 12) {
-        addSlotToContainer(supplier.create(inventoryHandler, q++, xOffset + 33 + ((i - 9) * 21), yOffset + 65));
+        addSlotToContainer(new PouchSlot(inventoryHandler, q++, xOffset + 33 + ((i - 9) * 21), yOffset + 65));
       }
       // Herb Pouch
     }
@@ -138,7 +135,7 @@ public class ContainerPouch extends Container {
       if (q >= 12 && q < 18) {
         // Controls which row the slots appear on
         int yPosOffset = q >= 14 ? q >= 16 ? 21 * 2 : 21 : 0;
-        addSlotToContainer(supplier.create(herbsHandler, i, xOffset + 127 + (21 * (q % 2)), yOffset + 23 + yPosOffset));
+        addSlotToContainer(new PouchSlot(herbsHandler, true, i, xOffset + 127 + (21 * (q % 2)), yOffset + 23 + yPosOffset));
         q++;
       }
     }
@@ -152,15 +149,15 @@ public class ContainerPouch extends Container {
     for (int i = 0; i < inventoryHandler.getSlots(); i++) {
       // Top Row
       if (i < 6) {
-        addSlotToContainer(supplier.create(inventoryHandler, q, xOffset + 25 + (20 * (q % 6)), yOffset + 19));
+        addSlotToContainer(new PouchSlot(inventoryHandler, q, xOffset + 25 + (20 * (q % 6)), yOffset + 19));
       }
       // Middle Slot
       if (i >= 6 && i < 12) {
-        addSlotToContainer(supplier.create(inventoryHandler, q, xOffset + 25 + (20 * (q % 6)), yOffset + 43));
+        addSlotToContainer(new PouchSlot(inventoryHandler, q, xOffset + 25 + (20 * (q % 6)), yOffset + 43));
       }
       // Bottom Slot
       if (i >= 12 && i < 18) {
-        addSlotToContainer(supplier.create(inventoryHandler, q, xOffset + 25 + (20 * (q % 6)), yOffset + 66));
+        addSlotToContainer(new PouchSlot(inventoryHandler, q, xOffset + 25 + (20 * (q % 6)), yOffset + 66));
       }
       q++;
     }
@@ -169,13 +166,13 @@ public class ContainerPouch extends Container {
       // Add Herb Slots
       q = inventoryEnd + i;
       if (q >= 18 && q < 21) {
-        addSlotToContainer(supplier.create(herbsHandler, i, xOffset + 149 + (16 * (q % 3)), yOffset + 16 + (4 * (q % 2))));
+        addSlotToContainer(new PouchSlot(herbsHandler, true, i, xOffset + 149 + (16 * (q % 3)), yOffset + 16 + (4 * (q % 2))));
       }
       if (q >= 21 && q < 24) {
-        addSlotToContainer(supplier.create(herbsHandler, i, xOffset + 149 + (16 * (q % 3)), yOffset + 39 + (4 * ((q + 1) % 2))));
+        addSlotToContainer(new PouchSlot(herbsHandler, true, i, xOffset + 149 + (16 * (q % 3)), yOffset + 39 + (4 * ((q + 1) % 2))));
       }
       if (q >= 24 && q < 27) {
-        addSlotToContainer(supplier.create(herbsHandler, i, xOffset + 149 + (16 * (q % 3)), yOffset + 64 + (4 * (q % 2))));
+        addSlotToContainer(new PouchSlot(herbsHandler, true, i, xOffset + 149 + (16 * (q % 3)), yOffset + 64 + (4 * (q % 2))));
       }
     }
     herbsEnd = q + 1;
@@ -270,19 +267,26 @@ public class ContainerPouch extends Container {
     }
   }
 
-  @FunctionalInterface
-  public interface SlotSupplier {
-    Slot create(IItemHandler itemHandler, int index, int xPosition, int yPosition);
-  }
-
   public class PouchSlot extends SlotItemHandler {
+    private final boolean herb;
+
+    public PouchSlot(IItemHandler itemHandler, boolean herb, int index, int xPosition, int yPosition) {
+      super(itemHandler, index, xPosition, yPosition);
+      this.herb = herb;
+    }
+
     public PouchSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
       super(itemHandler, index, xPosition, yPosition);
+      this.herb = false;
     }
 
     @Override
     public boolean isItemValid(@Nonnull ItemStack stack) {
       if (stack.getItem() instanceof ItemPouch) {
+        return false;
+      }
+
+      if (herb && !HerbRegistry.isHerb(stack.getItem())) {
         return false;
       }
 
