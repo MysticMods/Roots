@@ -271,7 +271,7 @@ public class ContainerLibrary extends Container implements IInvalidatingContaine
                 return ItemStack.EMPTY;
               }
             }
-            if (staffSlot != -1) {
+            if (staffSlot != -1 && librarySlot != -1) {
               StaffSpellInfo newSpell = ((SlotSpellInfo) getSlot(librarySlot)).getInfo();
               if (newSpell == null) {
                 reset();
