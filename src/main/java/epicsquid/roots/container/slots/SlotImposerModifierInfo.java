@@ -125,6 +125,10 @@ public class SlotImposerModifierInfo extends Slot {
 
   @Override
   public void putStack(ItemStack stack) {
+    if (!stack.isEmpty()) {
+      // Consume the item on the server and the client side!
+      tile.addModifier(core, stack);
+    }
   }
 
   @Override
