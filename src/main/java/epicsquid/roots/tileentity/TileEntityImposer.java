@@ -181,7 +181,7 @@ public class TileEntityImposer extends TileBase implements ITickable {
     if (world != null && !world.isRemote) {
       StaffSpellStorage storage = getSpellStorage();
       StaffModifierInstance modifier = getModifier(storage, core);
-      if (modifier == null) {
+      if (modifier == null || storage == null) {
         return;
       }
 

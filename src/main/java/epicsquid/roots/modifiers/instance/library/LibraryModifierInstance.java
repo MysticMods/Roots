@@ -43,7 +43,7 @@ public class LibraryModifierInstance extends BaseModifierInstance {
 
   @Override
   public ItemStack getStack() {
-    return ItemStack.EMPTY;
+    return getCore().getStack();
   }
 
   @Override
