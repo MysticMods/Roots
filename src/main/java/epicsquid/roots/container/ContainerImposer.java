@@ -155,7 +155,6 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
   @SuppressWarnings("ConstantConditions")
   @Override
   public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
-    Slot heldItem = getSlot(-999);
     if (slotId != -999 && !player.world.isRemote) {
       Slot slot = getSlot(slotId);
       if (slot instanceof SlotImposerSpellInfo) {
@@ -193,8 +192,6 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
               }
             }
           }
-        } else if (info.isApplicable() && !info.isApplied()) {
-
         }
       }
     }
@@ -235,12 +232,15 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
     if (slot != null && slot.getHasStack()) {
       ItemStack stack = slot.getStack();
 
-      boolean isModifier = ModifierCores.isModifierCore(stack);
+      boolean isArrow = stack.getItem() instanceof ItemArrow;
 
-      if (isModifier && index < 10) {
-
-      } {
-
+      if (isArrow && index < 36 && !mergeItemStack(stack, 36, 42, false)) {
+        slot.onSlotChanged();
+        //handler.saveToStack();
+        return ItemStack.EMPTY;
+      } else {
+        //handler.saveToStack();
+        return ItemStack.EMPTY;
       }
     }
 
