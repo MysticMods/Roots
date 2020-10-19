@@ -143,9 +143,11 @@ public class SpellGrowthInfusion extends SpellBase {
           for (int j = 0; j < ticks; j++) {
             state.getBlock().randomTick(player.world, pos, state, Util.rand);
           }
-          IBlockState below = player.world.getBlockState(pos.down());
-          if (below.getPropertyKeys().contains(BlockFarmland.MOISTURE)) {
-            player.world.setBlockState(pos.down(), below.withProperty(BlockFarmland.MOISTURE, 7), 2 | 16);
+          if (info.has(HYDRATE)) {
+            IBlockState below = player.world.getBlockState(pos.down());
+            if (below.getPropertyKeys().contains(BlockFarmland.MOISTURE)) {
+              player.world.setBlockState(pos.down(), below.withProperty(BlockFarmland.MOISTURE, 7), 2 | 16);
+            }
           }
           // TODO: CENTRALISE EFFECT COLOURS
           if (player.world.rand.nextInt(3) == 0) {
@@ -238,9 +240,11 @@ public class SpellGrowthInfusion extends SpellBase {
               for (int i = 0; i < info.ampInt(ticks); i++) {
                 state.getBlock().randomTick(player.world, pos, state, new Random());
               }
-              IBlockState below = player.world.getBlockState(pos.down());
-              if (below.getPropertyKeys().contains(BlockFarmland.MOISTURE)) {
-                player.world.setBlockState(pos.down(), below.withProperty(BlockFarmland.MOISTURE, 7), 2 | 16);
+              if (info.has(HYDRATE)) {
+                IBlockState below = player.world.getBlockState(pos.down());
+                if (below.getPropertyKeys().contains(BlockFarmland.MOISTURE)) {
+                  player.world.setBlockState(pos.down(), below.withProperty(BlockFarmland.MOISTURE, 7), 2 | 16);
+                }
               }
               PacketHandler.sendToAllTracking(new MessageLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), player);
               didSomething = true;
