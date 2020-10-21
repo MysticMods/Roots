@@ -34,7 +34,7 @@ public class ModifierSnapshot implements ISnapshot, ISpellMulitipliers {
 
   @Override
   public void toBytes(ByteBuf buf) {
-    buf.writeShort(modifiers.size());
+    buf.writeInt(modifiers.size());
     for (int i : modifiers) {
       buf.writeInt(i);
     }
