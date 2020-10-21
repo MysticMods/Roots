@@ -24,7 +24,7 @@ public class RootsPacketHandler {
     PacketHandler.registerMessage(MessageGeasRingFX.MessageHolder.class, MessageGeasRingFX.class, Side.CLIENT);
     PacketHandler.registerMessage(MessageGeasFX.MessageHolder.class, MessageGeasFX.class, Side.CLIENT);
     PacketHandler.registerMessage(MessageUnusedPlantFX.Handler.class, MessageUnusedPlantFX.class, Side.CLIENT);
-    /*    PacketHandler.registerMessage(MessageRampantLifeInfusionFX.MessageHolder.class, MessageRampantLifeInfusionFX.class, Side.CLIENT);*/
+    PacketHandler.registerMessage(MessageRampantLifeInfusionFX.MessageHolder.class, MessageRampantLifeInfusionFX.class, Side.CLIENT);
     PacketHandler.registerMessage(MessageOvergrowthEffectFX.MessageHolder.class, MessageOvergrowthEffectFX.class, Side.CLIENT);
     PacketHandler.registerMessage(MessageTreeCompleteFX.MessageHolder.class, MessageTreeCompleteFX.class, Side.CLIENT);
     PacketHandler.registerMessage(MessageHarvestCompleteFX.MessageHolder.class, MessageHarvestCompleteFX.class, Side.CLIENT);
