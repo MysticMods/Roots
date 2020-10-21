@@ -37,7 +37,7 @@ import java.util.List;
 
 public class SpellNaturesScythe extends SpellBase {
   private static final MethodHandle GET_SILK_DROP;
-  private static final ItemStack SHEARS = new ItemStack(Items.SHEARS);
+  public static final ItemStack SHEARS = new ItemStack(Items.SHEARS);
 
   static {
     try {
@@ -133,6 +133,11 @@ public class SpellNaturesScythe extends SpellBase {
     return true;
   }
 
+  public boolean canSilkTouch(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+    Block block = state.getBlock();
+    return (block instanceof IShearable && ((IShearable) block).isShearable(SHEARS, world, pos)) || block.canSilkHarvest(world, pos, state, player);
+  }
+
   public void breakBlock(World world, BlockPos pos, StaffModifierInstanceList info, EntityPlayer player) {
     IBlockState state = world.getBlockState(pos);
     Block block = state.getBlock();
@@ -151,10 +156,11 @@ public class SpellNaturesScythe extends SpellBase {
         } catch (Throwable throwable) {
           throw new RuntimeException("Unable to get silk touch drop!?", throwable);
         }
-        if (silked.isEmpty()) {
+        if (!silked.isEmpty()) {
           drops.add(silked);
         }
         ForgeEventFactory.fireBlockHarvesting(drops, world, pos, state, fortune, 1.0f, true, player);
+        world.destroyBlock(pos, false);
       } else {
         skip = true;
       }
