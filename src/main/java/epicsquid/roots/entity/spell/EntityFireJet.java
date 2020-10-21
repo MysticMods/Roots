@@ -13,6 +13,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -32,6 +33,8 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
     super.onUpdate();
 
     if (!world.isRemote) {
+      MessageWildfireFX packet = new MessageWildfireFX(posX, posY, posZ, motionX, motionY, motionZ, rotationYaw, modifiers);
+      PacketHandler.INSTANCE.sendToAllTracking(packet, this);
       if (this.playerId != null) {
         EntityPlayer player = world.getPlayerEntityByUUID(this.playerId);
         if (player != null) {
@@ -110,10 +113,6 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
       if (this.onGround && modifiers != null && modifiers.has(SpellWildfire.WILDFIRE) && !world.isRemote) {
         wildFire(getPosition());
       }
-      if (this.ticksExisted % 2 == 0) {
-        MessageWildfireFX packet = new MessageWildfireFX(posX, posY, posZ, motionX, motionY, motionZ, rotationYaw, modifiers);
-        PacketHandler.INSTANCE.sendToAllTracking(packet, this);
-      }
     }
   }
 
@@ -142,7 +141,10 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
     for (BlockPos pos : Util.getPositionsWithinCircle(center, instance.fire_radius)) {
       BlockPos air = airPos(pos, 10);
       if (air != null) {
-        world.setBlockState(air, ModBlocks.fey_fire.getDefaultState(), 2);
+        IBlockState down = world.getBlockState(air.down());
+        if (down.isSideSolid(world, air.down(), EnumFacing.UP)) {
+          world.setBlockState(air, ModBlocks.fey_fire.getDefaultState(), 2);
+        }
       }
     }
   }
