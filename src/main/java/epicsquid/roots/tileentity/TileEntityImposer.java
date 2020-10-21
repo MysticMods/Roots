@@ -120,12 +120,15 @@ public class TileEntityImposer extends TileBase implements ITickable {
         }
       }
     } else if (!heldItem.isEmpty() && heldItem.getItem() instanceof ItemDruidKnife) {
-      if (!world.isRemote) {
-        player.openGui(Roots.instance, GuiHandler.IMPOSER_ID, world, pos.getX(), pos.getY(), pos.getZ());
+      ItemStack inSlot = inventory.getStackInSlot(0);
+      if (inSlot.getItem() == ModItems.staff) {
+        if (!world.isRemote) {
+          player.openGui(Roots.instance, GuiHandler.IMPOSER_ID, world, pos.getX(), pos.getY(), pos.getZ());
+        }
       }
       return true;
     } else if (heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND) {
-      for (int i = inventory.getSlots() - 1; i >= 0; i--) {
+      for (int i = 0; i < inventory.getSlots(); i++) {
         if (this.dropItemInInventory(inventory, i)) {
           return true;
         }
@@ -140,21 +143,6 @@ public class TileEntityImposer extends TileBase implements ITickable {
       Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
     }
   }
-
-/*  public void toggleModifier(IModifierCore core) {
-    if (world != null && !world.isRemote) {
-      StaffSpellStorage storage = getSpellStorage();
-      StaffModifierInstance modifier = getModifier(storage, core);
-      if (modifier == null) {
-        return;
-      }
-
-      modifier.setEnabled(!modifier.isEnabled());
-      storage.saveToStack();
-      markDirty();
-      updatePacketViaState();
-    }
-  }*/
 
   public StaffSpellInfo getCurrentInfo (StaffSpellStorage storage) {
     if (storage == null) {
