@@ -1,10 +1,14 @@
 package epicsquid.roots.potion;
 
 import epicsquid.roots.Roots;
+import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.spell.SpellAquaBubble;
+import epicsquid.roots.spell.SpellPetalShell;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
@@ -25,6 +29,16 @@ public class PotionAquaBubble extends Potion {
 
   public void finalise(SpellAquaBubble spell) {
     absorb_amount = (float) spell.absorption;
+  }
+
+  @Override
+  public void performEffect(EntityLivingBase entity, int amplifier) {
+    if (!entity.world.isRemote) {
+      ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(entity.getEntityData(), SpellAquaBubble.instance);
+      if (mods.has(SpellAquaBubble.POISON_RESIST)) {
+        entity.removePotionEffect(MobEffects.POISON);
+      }
+    }
   }
 
   @Override
