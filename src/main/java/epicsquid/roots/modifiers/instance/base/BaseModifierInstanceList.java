@@ -13,6 +13,7 @@ import net.minecraftforge.common.util.Constants;
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> implements IModifierList<T, NBTTagCompound> {
@@ -107,6 +108,10 @@ public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> i
   @Override
   public boolean remove(Object o) {
     return internal.remove(o);
+  }
+
+  public boolean removeIf (Predicate<? super T> predicate) {
+    return internal.removeIf(predicate);
   }
 
   public Object2DoubleOpenHashMap<Herb> apply(Object2DoubleOpenHashMap<Herb> costs) {

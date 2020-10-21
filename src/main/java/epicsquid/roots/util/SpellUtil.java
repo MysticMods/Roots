@@ -1,7 +1,9 @@
 package epicsquid.roots.util;
 
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.modifiers.ModifierRegistry;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;
+import epicsquid.roots.modifiers.instance.library.LibraryModifierInstanceList;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.spell.SpellBase;
@@ -12,6 +14,8 @@ import epicsquid.roots.world.data.SpellLibraryData;
 import epicsquid.roots.world.data.SpellLibraryRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+
+import java.util.List;
 
 public class SpellUtil {
   public static boolean isValidStaff(ItemStack stack) {
@@ -43,6 +47,9 @@ public class SpellUtil {
     SpellLibraryData data = SpellLibraryRegistry.getData(player);
 
     for (StaffSpellInfo info : storage.getSpells()) {
+      LibraryModifierInstanceList libraryModifiers = data.getModifiers(info.toLibrary());
+      info.getModifiers().removeIf(o -> libraryModifiers.get(o.getModifier()) == null || ModifierRegistry.get(o.getModifier()) == null);
+
       data.updateSpell(info.toLibrary());
     }
 

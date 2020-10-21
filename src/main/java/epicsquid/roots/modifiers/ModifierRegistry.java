@@ -20,6 +20,11 @@ public class ModifierRegistry {
   private static Set<ResourceLocation> disabledModifiers = new HashSet<>();
 
   @Nullable
+  public static Modifier get(Modifier modifier) {
+    return map.get(modifier.getRegistryName());
+  }
+
+  @Nullable
   public static Modifier get(ResourceLocation name) {
     return map.get(name);
   }

@@ -1,6 +1,7 @@
 package epicsquid.roots.world.data;
 
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;
+import epicsquid.roots.modifiers.instance.library.LibraryModifierInstanceList;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.info.LibrarySpellInfo;
@@ -68,6 +69,12 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
 
   public LibrarySpellInfo getData(SpellBase spell) {
     return spells.get(spell);
+  }
+
+  public LibraryModifierInstanceList getModifiers (LibrarySpellInfo incoming) {
+    SpellBase spell = incoming.getSpell();
+    LibrarySpellInfo current = getData(spell);
+    return current.getModifiers();
   }
 
   public void updateSpell(LibrarySpellInfo incoming) {
