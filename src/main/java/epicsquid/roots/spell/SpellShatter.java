@@ -3,6 +3,7 @@ package epicsquid.roots.spell;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.AABBUtil;
 import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.mysticallib.util.RayCastUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.MossConfig;
 import epicsquid.roots.init.ModItems;
@@ -11,6 +12,7 @@ import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageRunicShearsAOEFX;
 import epicsquid.roots.network.fx.MessageShatterBurstFX;
 import epicsquid.roots.properties.Property;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -24,6 +26,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
+import net.minecraftforge.common.IShearable;
 import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nullable;
@@ -118,7 +122,7 @@ public class SpellShatter extends SpellBase {
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     Vec3d eyes = new Vec3d(0, (double) player.getEyeHeight(), 0);
-    RayTraceResult result = player.world.rayTraceBlocks(player.getPositionVector().add(eyes), player.getLookVec().scale(distance).add(player.getPositionVector().add(eyes)));
+    RayTraceResult result = RayCastUtil.rayTraceBlocks(player.world, player.getPositionVector().add(eyes), player.getLookVec().scale(distance).add(player.getPositionVector().add(eyes)), false, false, false, false);
 
     AxisAlignedBB box = getBox(player, info, result);
     if (box == null) {
@@ -148,7 +152,7 @@ public class SpellShatter extends SpellBase {
           }
         }
       }
-      if (!didMoss && state.getBlockHardness(player.world, p) > 0) {
+      if (!didMoss && ((info.has(SILK_TOUCH) && SpellNaturesScythe.instance.canSilkTouch(player.world, p, state, player) || state.getBlockHardness(player.world, p) > 0))) {
         if (!player.world.isRemote) {
           if (info.has(VOID)) {
             player.world.destroyBlock(p, false);
