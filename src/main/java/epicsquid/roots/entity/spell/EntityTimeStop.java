@@ -44,22 +44,24 @@ public class EntityTimeStop extends EntitySpellModifiable<SpellTimeStop> {
         }
       }
     }
-    List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 9.0, posY - 1.0, posZ - 9.0, posX + 10.0, posY + 20.0, posZ + 10.0));
-    for (EntityLivingBase e : entities) {
-      if (!(e instanceof EntityPlayer)) {
-        if (modifiers != null && modifiers.has(SpellTimeStop.PEACEFUL) && EntityUtil.isFriendly(e)) {
-          continue;
-        }
-        if (modifiers != null && modifiers.has(SpellTimeStop.FAMILIARS) && EntityUtil.isFamiliar(e)) {
-          continue;
-        }
-        e.addPotionEffect(new PotionEffect(ModPotions.time_stop, 40, 0, false, false));
-        e.getEntityData().setIntArray(SpellTimeStop.instance.getCachedName(), modifiers.toArray());
-        if (modifiers.has(SpellTimeStop.SLOW)) {
-          e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, modifiers.ampInt(instance.slow_duration) + 40, instance.slow_amplifier));
-        }
-        if (modifiers.has(SpellTimeStop.WEAKNESS)) {
-          e.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, modifiers.ampInt(instance.weakness_duration) + 40, instance.weakness_amplifier));
+    if (!world.isRemote) {
+      List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 9.0, posY - 1.0, posZ - 9.0, posX + 10.0, posY + 20.0, posZ + 10.0));
+      for (EntityLivingBase e : entities) {
+        if (!(e instanceof EntityPlayer)) {
+          if (modifiers != null && modifiers.has(SpellTimeStop.PEACEFUL) && EntityUtil.isFriendly(e)) {
+            continue;
+          }
+          if (modifiers != null && modifiers.has(SpellTimeStop.FAMILIARS) && EntityUtil.isFamiliar(e)) {
+            continue;
+          }
+          e.addPotionEffect(new PotionEffect(ModPotions.time_stop, 40, 0, false, false));
+          e.getEntityData().setIntArray(SpellTimeStop.instance.getCachedName(), modifiers.toArray());
+          if (modifiers.has(SpellTimeStop.SLOW)) {
+            e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, modifiers.ampInt(instance.slow_duration) + 40, instance.slow_amplifier));
+          }
+          if (modifiers.has(SpellTimeStop.WEAKNESS)) {
+            e.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, modifiers.ampInt(instance.weakness_duration) + 40, instance.weakness_amplifier));
+          }
         }
       }
     }
