@@ -11,6 +11,7 @@ import epicsquid.roots.util.EntityUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
@@ -143,7 +144,7 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
       if (air != null) {
         IBlockState down = world.getBlockState(air.down());
         if (down.isSideSolid(world, air.down(), EnumFacing.UP)) {
-          world.setBlockState(air, ModBlocks.fey_fire.getDefaultState(), 2);
+          world.setBlockState(air, Blocks.FIRE.getDefaultState(), 2);
         }
       }
     }
