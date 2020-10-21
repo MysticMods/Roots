@@ -11,6 +11,7 @@ import epicsquid.mysticallib.client.gui.InvisibleButton;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.container.ContainerLibrary;
+import epicsquid.roots.container.slots.SlotImposerModifierInfo;
 import epicsquid.roots.container.slots.SlotLibraryInfo;
 import epicsquid.roots.container.slots.SlotLibraryModifierInfo;
 import epicsquid.roots.container.slots.SlotSpellInfo;
@@ -170,20 +171,24 @@ public class GuiLibrary extends GuiContainer {
     int j2 = slot.yPos - 2;
     if (slot instanceof SlotLibraryModifierInfo) {
       SlotLibraryModifierInfo modInfo = (SlotLibraryModifierInfo) slot;
-      if (!modInfo.isApplicable()) { // There is no modifier existant for this slot
-        GlStateManager.enableBlend();
-        this.mc.getTextureManager().bindTexture(getTexture());
-        this.drawTexturedModalRect(i2, j2, 0, 152 + 40, 20, 20);
-        GlStateManager.disableBlend();
-      } else if (!modInfo.isApplied()) { // There is a modifier but it isn't applied
-        this.mc.getTextureManager().bindTexture(getTexture());
-        this.drawTexturedModalRect(i2, j2, 0, 152 + 20, 20, 20);
-      } else if (modInfo.isConflicting(container.getModifiers())) { // There is a modifier but it conflicts with other enabled modifiers
-        this.mc.getTextureManager().bindTexture(getTexture());
-        this.drawTexturedModalRect(i2, j2, 0, 152 + 60, 20, 20);
-      } else if (modInfo.isDisabled()) { // There is a modifier and it is applied, but it's disabled
-        this.mc.getTextureManager().bindTexture(getTexture());
-        this.drawTexturedModalRect(i2, j2, 0, 152, 20, 20);
+      if (!modInfo.isApplicable() || !modInfo.isApplied() || modInfo.isDisabled() || modInfo.isConflicting(container.getModifiers())) {
+        int v = -1;
+        if (!modInfo.isApplicable()) { // There is no modifier existant for this slot
+          v = 40;
+        } else if (!modInfo.isApplied()) { // There is a modifier but it isn't applied
+          v = 20;
+        } else if (modInfo.isDisabled()) { // There is a modifier and it is applied, but it's disabled
+          v = 0;
+        } else if (modInfo.isConflicting(container.getModifiers())) { // There is a modifier but it conflicts with other enabled modifiers
+          v = 60;
+        }
+
+        if (v != -1) {
+          this.mc.getTextureManager().bindTexture(getTexture());
+          GlStateManager.enableAlpha();
+          this.drawTexturedModalRect(i2, j2, 176, v, 20, 20);
+          GlStateManager.disableAlpha();
+        }
       }
     }
     super.drawSlot(slot);
