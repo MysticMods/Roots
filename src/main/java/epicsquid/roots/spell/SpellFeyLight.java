@@ -52,8 +52,8 @@ public class SpellFeyLight extends SpellBase {
   static {
     // Conflicts
     // Deluminator <-> Everything
-    CONSUME.addConflicts(DECAY, PINK, YELLOW, FIXED, PURPLE, GREEN, DECAY, RED, BROWN, BLUE);
-    DECAY.addConflicts(PINK, YELLOW, PURPLE, GREEN, DECAY, RED, BROWN, BLUE);
+    CONSUME.addConflicts(DECAY, PINK, YELLOW, FIXED, PURPLE, GREEN, RED, BROWN, BLUE);
+    DECAY.addConflicts(PINK, YELLOW, PURPLE, GREEN, RED, BROWN, BLUE);
     PINK.addConflicts(YELLOW, PURPLE, GREEN, RED, BROWN, BLUE);
     YELLOW.addConflicts(PURPLE, GREEN, RED, BROWN, BLUE);
     PURPLE.addConflicts(GREEN, RED, BROWN, BLUE);
