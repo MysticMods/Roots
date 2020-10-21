@@ -300,8 +300,6 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
         if (ritualEntity != null) {
           ritualEntity.setDead();
         }
-        lastRecipeUsed = null;
-        lastRitualUsed = null;
         BlockPyre.setState(false, world, pos);
         world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1F, 1F);
         world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1F, 1F);
@@ -710,6 +708,11 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
   @Override
   public AxisAlignedBB getBounds() {
     RitualBase ritual = RitualRegistry.getRitual(this, null);
+    if (ritual == null) {
+      if (getLastRitualUsed() != null) {
+        ritual = getLastRitualUsed();
+      }
+    }
     if (ritual == null) { // Shouldn't happen*/
       setShowingRange(false);
       return nullBox;
