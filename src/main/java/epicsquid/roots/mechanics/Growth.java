@@ -53,12 +53,17 @@ public class Growth {
   }
 
   public static boolean canGrow(World world, BlockPos pos, IBlockState state) {
-    if (BLACKLIST.contains(state.getBlock())) return false;
-
-    if (CropConfig.getGrowthBlacklist().contains(state.getBlock())) return false;
-
-    if (CropConfig.getGrowthModBlacklist().contains(Objects.requireNonNull(state.getBlock().getRegistryName()).getNamespace()))
+    if (BLACKLIST.contains(state.getBlock())) {
       return false;
+    }
+
+    if (CropConfig.getGrowthBlacklist().contains(state.getBlock())) {
+      return false;
+    }
+
+    if (CropConfig.getGrowthModBlacklist().contains(Objects.requireNonNull(state.getBlock().getRegistryName()).getNamespace())) {
+      return false;
+    }
 
     // Hard-code this for some dumb reason as max age doesn't mean grown
     if (state.getBlock() == Blocks.REEDS || state.getBlock() == Blocks.CACTUS) {
@@ -73,9 +78,14 @@ public class Growth {
       return true;
     }
 
+    if (state.getBlock() instanceof BlockVine) {
+      return true;
+    }
+
     if (state.getBlock() instanceof IGrowable) {
       return ((IGrowable) state.getBlock()).canGrow(world, pos, state, true);
     }
+
 
     if (state.getBlock() instanceof IPlantable) {
       Collection<IProperty<?>> keys = state.getPropertyKeys();
