@@ -15,6 +15,7 @@ import java.util.Set;
 
 public class LeavesPredicate implements BlockStatePredicate {
   public static List<IBlockState> leaves = null;
+  public static List<ItemStack> leafItems = null;
 
   @Override
   public boolean test(IBlockState state) {
@@ -25,6 +26,7 @@ public class LeavesPredicate implements BlockStatePredicate {
   public List<IBlockState> matchingStates() {
     if (leaves == null) {
       Set<IBlockState> leafBlocks = new HashSet<>();
+      leafItems = new ArrayList<>();
       for (ItemStack stack : OreDictionary.getOres("treeLeaves")) {
         if (stack.getItem() instanceof ItemBlock) {
           Block block = ((ItemBlock) stack.getItem()).getBlock();
@@ -36,11 +38,20 @@ public class LeavesPredicate implements BlockStatePredicate {
               continue;
             }
             leafBlocks.add(state);
+            leafItems.add(stack);
           }
         }
       }
       leaves = new ArrayList<>(leafBlocks);
     }
     return leaves;
+  }
+
+  @Override
+  public List<ItemStack> matchingItems() {
+    if (leafItems == null) {
+      matchingStates();
+    }
+    return leafItems;
   }
 }

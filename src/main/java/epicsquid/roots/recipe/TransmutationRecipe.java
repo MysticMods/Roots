@@ -60,14 +60,6 @@ public class TransmutationRecipe extends RegistryItem {
     return this;
   }
 
-  public boolean isItem() {
-    return !stack.isEmpty();
-  }
-
-  public boolean isState() {
-    return state != null;
-  }
-
   public ItemStack getStack() {
     return stack;
   }
