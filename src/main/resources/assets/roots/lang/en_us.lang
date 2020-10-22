@@ -499,6 +499,8 @@ roots.message.sense_time.moon.7=gibbous, waxing
 
 roots.message.respawn.cant_respawn_dimension=Sorry, but your bed is in another dimension!
 
+roots.message.spell_imbued=The spell %s has been added to your library!
+
 # Modifiers
 
 roots.modifiers.modifiers.absorption.desc=Grants you an absorption shield.
