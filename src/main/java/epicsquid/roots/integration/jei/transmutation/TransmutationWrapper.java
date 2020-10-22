@@ -8,11 +8,17 @@ import epicsquid.roots.recipe.transmutation.StatePosition;
 import epicsquid.roots.recipe.transmutation.WorldBlockStatePredicate;
 import epicsquid.roots.util.RenderUtil;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class TransmutationWrapper implements IRecipeWrapper {
   public final TransmutationRecipe recipe;
@@ -24,6 +30,19 @@ public class TransmutationWrapper implements IRecipeWrapper {
 
   @Override
   public void getIngredients(IIngredients ingredients) {
+    List<ItemStack> inputs = recipe.getStartPredicate().matchingItems();
+    ItemStack output = ItemStack.EMPTY;
+    if (recipe.getStack().isEmpty() && recipe.getState().isPresent()) {
+      IBlockState state = recipe.getState().get();
+      output = new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state));
+    } else if (!recipe.getStack().isEmpty()) {
+      output = recipe.getStack();
+    }
+
+    if (!output.isEmpty()) {
+      ingredients.setOutput(VanillaTypes.ITEM, output);
+    }
+    ingredients.setInputLists(VanillaTypes.ITEM, Collections.singletonList(inputs));
   }
 
   @Override
