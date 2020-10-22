@@ -191,7 +191,7 @@ public abstract class SpellBase extends RegistryItem {
     if (list != null) {
       costs = list.apply(costs);
     }
-    String prefix = "roots.spell." + name;
+    String prefix = getTranslationKey();
     tooltip.add("" + textColor + TextFormatting.BOLD + I18n.format(prefix + ".name") + TextFormatting.RESET);
     if (finalised()) {
       for (Map.Entry<Herb, Double> entry : costs.entrySet()) {
@@ -200,6 +200,10 @@ public abstract class SpellBase extends RegistryItem {
         tooltip.add(I18n.format(herb.getItem().getTranslationKey() + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
       }
     }
+  }
+
+  public String getTranslationKey () {
+    return "roots.spell." + name;
   }
 
   @SideOnly(Side.CLIENT)
