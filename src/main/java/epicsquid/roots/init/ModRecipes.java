@@ -1140,7 +1140,7 @@ public class ModRecipes {
     addPyreCraftingRecipe("baffle_cap",
         new PyreCraftingRecipe(new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom), 3), 1).addIngredients(
             new ItemStack(ModItems.terra_moss),
-            new ItemStack(Items.FERMENTED_SPIDER_EYE),
+            new ItemStack(Items.ROTTEN_FLESH),
             new ItemStack(Items.WHEAT_SEEDS),
             new ItemStack(Blocks.RED_MUSHROOM),
             new ItemStack(Blocks.BROWN_MUSHROOM)));
