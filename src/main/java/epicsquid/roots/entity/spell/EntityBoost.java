@@ -36,7 +36,7 @@ public class EntityBoost extends Entity {
     return boostedPlayers.contains(player.getUniqueID());
   }
 
-  public EntityBoost (World worldIn) {
+  public EntityBoost(World worldIn) {
     this(worldIn, SpellSkySoarer.instance.lifetime);
   }
 
@@ -146,17 +146,16 @@ public class EntityBoost extends Entity {
           this.posX = player.posX;
           this.posY = boat ? this.posY : player.posY + 1.0;
           this.posZ = player.posZ;
-          double amp = 0.8 * amplifier;
           Vec3d vec = player.getLookVec();
-          target.motionX = vec.x * amp;
-          target.motionY = boat ? target.motionY : vec.y * amp;
-          target.motionZ = vec.z * amp;
           if (!modifiers.has(SpellSkySoarer.VERTICAL)) {
-            this.motionX = vec.x + vec.x * amplifier;
-            this.motionZ = vec.z + vec.z * amplifier;
+            target.motionX = vec.x * amplifier;
+            target.motionZ = vec.z * amplifier;
+            this.motionX = vec.x;
+            this.motionZ = vec.z;
           }
           if (!modifiers.has(SpellSkySoarer.HORIZONTAL)) {
-            this.motionY = vec.y + vec.y * amplifier;
+            target.motionY = boat ? target.motionY : vec.y * amplifier;
+            this.motionY = vec.y;
           }
           target.fallDistance = 0;
           target.velocityChanged = true;
@@ -177,11 +176,11 @@ public class EntityBoost extends Entity {
 
   private static Map<UUID, PlayerTracker> playerMap = new HashMap<>();
 
-  public static Map<UUID, PlayerTracker> getPlayers () {
+  public static Map<UUID, PlayerTracker> getPlayers() {
     return playerMap;
   }
 
-  public static boolean safe (EntityPlayer player) {
+  public static boolean safe(EntityPlayer player) {
     PlayerTracker result = playerMap.get(player.getUniqueID());
     if (result == null) {
       return false;
@@ -194,7 +193,7 @@ public class EntityBoost extends Entity {
     return res;
   }
 
-  public static void markSafe (EntityPlayer player) {
+  public static void markSafe(EntityPlayer player) {
     PlayerTracker track = playerMap.computeIfAbsent(player.getUniqueID(), PlayerTracker::new);
     track.setStart(player.ticksExisted);
   }
@@ -202,14 +201,14 @@ public class EntityBoost extends Entity {
   public static class PlayerTracker {
     private int start;
 
-    public PlayerTracker (UUID id) {
+    public PlayerTracker(UUID id) {
     }
 
     public void setStart(int start) {
       this.start = start;
     }
 
-    public boolean safe (EntityPlayer player) {
+    public boolean safe(EntityPlayer player) {
       if (player.ticksExisted - start < SpellSkySoarer.instance.fall_duration) {
         return true;
       }

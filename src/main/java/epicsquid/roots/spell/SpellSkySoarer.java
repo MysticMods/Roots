@@ -30,8 +30,8 @@ public class SpellSkySoarer extends SpellBase {
   public static Property<Float> PROP_AMPLIFIER = new Property<>("amplifier", 0.8f).setDescription("the amplifier to the default motion");
   public static Property<Float> PROP_EXTENDED_AMPLIFIER = new Property<>("extended_amplifier", 0.6f).setDescription("how much should be added to the default amplifier when the faster modifier is enabled");
   public static Property<Integer> PROP_FALL_DURATION = new Property<>("fall_duration", 20 * 15).setDescription("the duration for which fall damage should be suppressed after a boost ends");
-  public static Property<Integer> PROP_LIFETIME = new Property<>("lifetime", 20).setDescription("how long the boost entity should exist for (in ticks)");
-  public static Property<Integer> PROP_EXTENDED_LIFETIME = new Property<>("extended_lifetime", 20).setDescription("a value that should be added to the lifetime when the eternal flame modifier is used (in ticks)");
+  public static Property<Integer> PROP_LIFETIME = new Property<>("lifetime", 28).setDescription("how long the boost entity should exist for (in ticks)");
+  public static Property<Integer> PROP_EXTENDED_LIFETIME = new Property<>("extended_lifetime", 28).setDescription("a value that should be added to the lifetime when the eternal flame modifier is used (in ticks)");
 
   public static Modifier SLOW_FALL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "slow_fall"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
   public static Modifier NO_COLLIDE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "arboreal_bypass"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
@@ -91,6 +91,7 @@ public class SpellSkySoarer extends SpellBase {
         if (info.has(ETERNAL)) {
           life += extended_liftime;
         }
+        life = info.ampInt(life);
         EntityBoost boost = new EntityBoost(player.world, life);
         boost.setModifiers(info);
         boost.setPlayer(player.getUniqueID());
