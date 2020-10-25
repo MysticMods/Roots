@@ -72,15 +72,15 @@ public class SpellSaturate extends SpellBase {
   public static Property<Integer> PROP_INVERSION_SATURATION_BOOST = new Property<>("inversion_saturation_boost", 5).setDescription("the value that the percentage ratio between max foot/saturation and the food/saturation value is added from; set lower to cause inversion to give less food");
   public static Property<Integer> PROP_INVERSION_FOOD_BOOST = new Property<>("inversion_food_boost", 4).setDescription("the value that the percentage ratio between max foot/saturation and the food/saturation value is added from; set lower to cause inversion to give less food (rounded down)");
 
-  public static Modifier RATIO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "big_bellied"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
-  public static Modifier UNCOOKED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "root_lover"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
-  public static Modifier INVERSION = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "inversion"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 1)));
-  public static Modifier RESISTANCE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "iron_excess"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1)));
-  public static Modifier POISONED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "antivenom"), ModifierCores.BAFFLE_CAP, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 1)));
-  public static Modifier ITEMS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "scattered_goods"), ModifierCores.CLOUD_BERRY, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 1)));
-  public static Modifier COOKED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "cooked_goods"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 1)));
-  public static Modifier NAUSEA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "iron_gut"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
-  public static Modifier BOTTLED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "bottled_goods"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
+  public static Modifier RATIO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "big_bellied"), ModifierCores.PERESKIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.6)));
+  public static Modifier UNCOOKED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "root_lover"), ModifierCores.WILDROOT, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.345)));
+  public static Modifier INVERSION = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "inversion"), ModifierCores.MOONGLOW_LEAF, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 0.345)));
+  public static Modifier RESISTANCE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "iron_excess"), ModifierCores.SPIRIT_HERB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 0.275)));
+  public static Modifier POISONED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "antivenom"), ModifierCores.BAFFLE_CAP, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 0.275)));
+  public static Modifier ITEMS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "scattered_goods"), ModifierCores.CLOUD_BERRY, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 0.125)));
+  public static Modifier COOKED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "cooked_goods"), ModifierCores.INFERNAL_BULB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 0.275)));
+  public static Modifier NAUSEA = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "iron_gut"), ModifierCores.STALICRIPE, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 0.275)));
+  public static Modifier BOTTLED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "bottled_goods"), ModifierCores.DEWGONIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 0.275)));
 
   static {
     // For sanity, don't cross-polinate
