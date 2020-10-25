@@ -11,10 +11,14 @@ import epicsquid.roots.network.MessageServerTryPickupArrows;
 import epicsquid.roots.spell.SpellExtension;
 import epicsquid.roots.util.QuiverInventoryUtil;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -36,6 +40,20 @@ public class SneakHandler {
       } else {
         event.modifyVisibility(0);
       }
+    }
+  }
+
+  @SubscribeEvent (priority= EventPriority.LOWEST)
+  public static void onCheckAttack(LivingSetAttackTargetEvent event) {
+    if (!(event.getTarget() instanceof EntityPlayer) || !(event.getEntityLiving() instanceof EntityMob)) {
+      return;
+    }
+
+    EntityPlayer player = (EntityPlayer) event.getTarget();
+    EntityMob attacker = (EntityMob) event.getEntityLiving();
+    if (player.getActivePotionEffect(ModPotions.nondetection) != null) {
+      attacker.setRevengeTarget(null);
+      attacker.attackTarget = null;
     }
   }
 
