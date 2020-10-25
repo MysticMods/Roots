@@ -63,7 +63,7 @@ public class ItemStaff extends ItemBase {
           player.sendStatusMessage(new TextComponentTranslation("roots.info.staff.slot_and_spell", capability.getSelectedSlot(), spell == null ? "none" : new TextComponentTranslation("roots.spell." + spell.getName() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))).setStyle(new Style().setColor(TextFormatting.GOLD)), true);
         }
       }
-      return new ActionResult<>(EnumActionResult.PASS, player.getHeldItem(hand));
+      return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
     } else {
       if (capability != null && !capability.onCooldown()) {
         StaffSpellInfo info = capability.getSelectedInfo();
@@ -80,11 +80,11 @@ public class ItemStaff extends ItemBase {
                   }
                 }
               }
-              if (player.world.isRemote) {
+/*              if (player.world.isRemote) {
                 return new ActionResult<>(EnumActionResult.PASS, player.getHeldItem(hand));
-              } else {
+              } else {*/
                 return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
-              }
+/*              }*/
             }
           } else if (spell != null && spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
             player.setActiveHand(hand);
