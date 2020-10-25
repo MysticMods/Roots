@@ -66,7 +66,7 @@ public class MessageShatterBurstFX implements IMessage {
         double y = (1.0f - i / scale) * message.srcY + (i / scale) * message.posY;
         double z = (1.0f - i / scale) * message.srcZ + (i / scale) * message.posZ;
         if (Util.rand.nextBoolean()) {
-          ParticleUtil.spawnParticleGlow(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellShatter.instance.getFirstColours(0.25f * (i/scale)), 2.5f, 24);
+          ParticleUtil.spawnParticleGlow(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellShatter.instance.getFirstColours(0.25f * (i / scale)), 2.5f, 24);
         } else {
           ParticleUtil.spawnParticleGlow(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellShatter.instance.getSecondColours(0.25f * (i / scale)), 2.5f, 24);
         }

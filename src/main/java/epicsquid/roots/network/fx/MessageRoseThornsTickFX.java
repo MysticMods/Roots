@@ -4,7 +4,6 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.modifiers.instance.staff.ISnapshot;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRoseThorns;
-import epicsquid.roots.spell.SpellWildfire;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;

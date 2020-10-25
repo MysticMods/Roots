@@ -15,7 +15,7 @@ public class ChrysopoeiaRecipe extends RegistryItem {
   private final float byproductChance;
   private final ItemStack byproduct;
 
-  public ChrysopoeiaRecipe (IngredientWithStack inputs, ItemStack outputs) {
+  public ChrysopoeiaRecipe(IngredientWithStack inputs, ItemStack outputs) {
     this(inputs, outputs, ItemStack.EMPTY, 0, 0);
   }
 

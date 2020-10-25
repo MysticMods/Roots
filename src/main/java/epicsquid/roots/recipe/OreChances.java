@@ -20,15 +20,15 @@ import java.util.function.Supplier;
 public class OreChances {
   private static final List<OreItem> items = new ArrayList<>();
 
-  public static void clear () {
+  public static void clear() {
     items.clear();
   }
 
-  public static void addOreChance (OreItem item) {
+  public static void addOreChance(OreItem item) {
     items.add(item);
   }
 
-  public static IBlockState getRandomState () {
+  public static IBlockState getRandomState() {
     if (items.isEmpty()) {
       return Blocks.AIR.getDefaultState();
     }
@@ -97,7 +97,7 @@ public class OreChances {
     }
 
     @Nullable
-    public abstract IBlockState getState ();
+    public abstract IBlockState getState();
   }
 
   static {

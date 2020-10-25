@@ -75,7 +75,7 @@ public class Cost implements IModifierCost {
     return cost(cost, null, 0);
   }
 
-  public static List<IModifierCost> of (IModifierCost ... costs) {
+  public static List<IModifierCost> of(IModifierCost... costs) {
     return Arrays.asList(costs);
   }
 

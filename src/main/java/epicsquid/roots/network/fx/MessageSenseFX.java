@@ -1,13 +1,9 @@
 package epicsquid.roots.network.fx;
 
-import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.client.particle.ParticlePosition;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellExtension;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;

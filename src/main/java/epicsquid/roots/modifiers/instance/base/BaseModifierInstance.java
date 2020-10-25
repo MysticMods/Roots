@@ -1,6 +1,5 @@
 package epicsquid.roots.modifiers.instance.base;
 
-import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.util.types.RegistryItem;

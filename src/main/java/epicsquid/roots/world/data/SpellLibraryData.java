@@ -71,7 +71,7 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
     return spells.get(spell);
   }
 
-  public LibraryModifierInstanceList getModifiers (LibrarySpellInfo incoming) {
+  public LibraryModifierInstanceList getModifiers(LibrarySpellInfo incoming) {
     SpellBase spell = incoming.getSpell();
     LibrarySpellInfo current = getData(spell);
     return current.getModifiers();

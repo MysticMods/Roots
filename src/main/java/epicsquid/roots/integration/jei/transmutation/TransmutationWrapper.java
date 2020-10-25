@@ -14,9 +14,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 

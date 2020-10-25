@@ -31,17 +31,17 @@ public class FlowerRecipe {
     this.stack = new ItemStack(this.block, 1, this.meta);
   }
 
-  public ItemStack getStack () {
+  public ItemStack getStack() {
     return this.stack.copy();
   }
 
-  public boolean matches (IBlockState state) {
+  public boolean matches(IBlockState state) {
     Block block = state.getBlock();
     int meta = block.getMetaFromState(state);
     return matches(block, meta);
   }
 
-  public boolean matches (Block block, int meta) {
+  public boolean matches(Block block, int meta) {
     return this.block == block && this.meta == meta;
   }
 

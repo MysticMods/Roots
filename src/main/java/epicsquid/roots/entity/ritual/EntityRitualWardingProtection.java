@@ -1,6 +1,5 @@
 package epicsquid.roots.entity.ritual;
 
-import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.ritual.RitualWardingProtection;

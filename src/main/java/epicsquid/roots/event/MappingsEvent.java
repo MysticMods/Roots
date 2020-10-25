@@ -20,7 +20,7 @@ import net.minecraftforge.fml.common.registry.VillagerRegistry;
 @Mod.EventBusSubscriber(modid = Roots.MODID)
 public class MappingsEvent {
   @SubscribeEvent
-  public static void onMissingPotionMappings (RegistryEvent.MissingMappings<Potion> event) {
+  public static void onMissingPotionMappings(RegistryEvent.MissingMappings<Potion> event) {
     for (RegistryEvent.MissingMappings.Mapping<Potion> mapping : event.getMappings()) {
       ResourceLocation missing = mapping.key;
       if (missing.getNamespace().equals(Roots.MODID)) {

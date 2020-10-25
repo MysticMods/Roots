@@ -2,7 +2,6 @@ package epicsquid.roots.init;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.world.World;
@@ -34,7 +33,7 @@ public class ModDamage {
 
   public static DamageSource ROSE_DAMAGE = (new DamageSource("rose_thorns")).setDamageBypassesArmor();
 
-  public static DamageSource physicalDamageFrom (@Nullable Entity player) {
+  public static DamageSource physicalDamageFrom(@Nullable Entity player) {
     DamageSource source;
     if (player == null) {
       source = PHYSICAL_DAMAGE;
@@ -44,7 +43,7 @@ public class ModDamage {
     return source;
   }
 
-  public static DamageSource magicDamageFrom (@Nullable Entity player) {
+  public static DamageSource magicDamageFrom(@Nullable Entity player) {
     DamageSource source;
     if (player == null) {
       source = DamageSource.MAGIC;
@@ -54,7 +53,7 @@ public class ModDamage {
     return source;
   }
 
-  public static DamageSource roseDamageFrom (@Nullable Entity player) {
+  public static DamageSource roseDamageFrom(@Nullable Entity player) {
     DamageSource source;
     if (player == null) {
       return ROSE_DAMAGE;
@@ -104,7 +103,7 @@ public class ModDamage {
     return new EntityDamageSource(FEY_FIRE, player).setDamageBypassesArmor().setMagicDamage().setFireDamage();
   }
 
-  public static FakePlayer getFakePlayer (World world) {
+  public static FakePlayer getFakePlayer(World world) {
     if (world.isRemote) {
       throw new IllegalStateException("can't get a fake player on a client side");
     }

@@ -11,5 +11,5 @@ public interface IRegistryItem {
   ResourceLocation getRegistryName();
 
   @Nonnull
-  String getCachedName ();
+  String getCachedName();
 }

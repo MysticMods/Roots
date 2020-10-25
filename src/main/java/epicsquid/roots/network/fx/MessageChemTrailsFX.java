@@ -2,8 +2,6 @@ package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.SpellNaturesScythe;
-import epicsquid.roots.spell.SpellSkySoarer;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
@@ -42,7 +40,7 @@ public class MessageChemTrailsFX implements IMessage {
     }
   }
 
-  private static final float[] smoke = new float[]{87/255.0f, 79/255.0f, 75/255.0f, 1.0f};
+  private static final float[] smoke = new float[]{87 / 255.0f, 79 / 255.0f, 75 / 255.0f, 1.0f};
 
   public static class Handler implements IMessageHandler<MessageChemTrailsFX, IMessage> {
     @SideOnly(Side.CLIENT)

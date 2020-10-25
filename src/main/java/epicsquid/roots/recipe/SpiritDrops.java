@@ -4,7 +4,6 @@ import epicsquid.mysticallib.types.OneTimeSupplier;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.mysticalworld.materials.Materials;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
@@ -23,28 +22,28 @@ public class SpiritDrops {
   private static final List<SpiritItem> reliquary = new ArrayList<>();
   private static final List<SpiritItem> pouch = new ArrayList<>();
 
-  public static void clearReliquary () {
+  public static void clearReliquary() {
     reliquary.clear();
   }
 
-  public static void clearPouch () {
+  public static void clearPouch() {
     pouch.clear();
   }
 
-  public static void clear () {
+  public static void clear() {
     clearReliquary();
     clearPouch();
   }
 
-  public static void addReliquary (SpiritItem item) {
+  public static void addReliquary(SpiritItem item) {
     reliquary.add(item);
   }
 
-  public static void addPouch (SpiritItem item) {
+  public static void addPouch(SpiritItem item) {
     pouch.add(item);
   }
 
-  public static ItemStack getRandomReliquary () {
+  public static ItemStack getRandomReliquary() {
     if (reliquary.isEmpty()) {
       return ItemStack.EMPTY;
     }
@@ -52,7 +51,7 @@ public class SpiritDrops {
     return item.getItem();
   }
 
-  public static ItemStack getRandomPouch () {
+  public static ItemStack getRandomPouch() {
     if (pouch.isEmpty()) {
       return ItemStack.EMPTY;
     }
@@ -96,7 +95,7 @@ public class SpiritDrops {
       super(itemWeightIn);
     }
 
-    public abstract ItemStack getItem ();
+    public abstract ItemStack getItem();
   }
 
   static {

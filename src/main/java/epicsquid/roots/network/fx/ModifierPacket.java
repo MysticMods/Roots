@@ -6,8 +6,6 @@ import epicsquid.roots.modifiers.instance.staff.ISnapshot;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModifierPacket implements IMessage {
   private StaffModifierInstanceList modifierInstances;

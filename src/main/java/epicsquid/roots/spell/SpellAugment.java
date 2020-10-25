@@ -13,7 +13,6 @@ import epicsquid.roots.network.MessageLightDrifterSync;
 import epicsquid.roots.network.fx.MessageLightDrifterFX;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.Constants;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,8 +22,6 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameType;
 
@@ -60,7 +57,6 @@ public class SpellAugment extends SpellBase {
   public static Property<Integer> PROP_ABSORPTION_AMPLIFIER = new Property<>("absorption_amplifier", 0).setDescription("amplifier for the haste potion effect");
 
   public static Property<Integer> PROP_AIR_AMOUNT = new Property<>("air_amount", 300).setDescription("the value to add to a user's air with the second wind effect");
-
 
 
   public static Modifier REACH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "reach"), ModifierCores.PERESKIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.5)));

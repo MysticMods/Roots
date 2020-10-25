@@ -16,7 +16,7 @@ public abstract class AbstractProperty<T, V extends AbstractProperty<T, ?>> {
 
   public abstract V setDescription(String description);
 
-  public abstract V setValidation (Predicate<T> validator, String bounds);
+  public abstract V setValidation(Predicate<T> validator, String bounds);
 
   public Class<?> getType() {
     return type;

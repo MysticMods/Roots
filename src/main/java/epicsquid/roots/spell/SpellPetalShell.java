@@ -58,8 +58,8 @@ public class SpellPetalShell extends SpellBase {
   public static Modifier WEAKNESS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "react_weakness"), ModifierCores.STALICRIPE, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 0.375)));
   public static Modifier SLOW = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "react_slow"), ModifierCores.DEWGONIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 0.375)));
 
-  public static final float[] mossFirst = new float[]{138 / 255.0f, 154/255.0f, 91/255.0f, 0.5f};
-  public static final float[] mossSecond = new float[]{79/255.0f, 93/255.0f, 35/255.0f, 0.5f};
+  public static final float[] mossFirst = new float[]{138 / 255.0f, 154 / 255.0f, 91 / 255.0f, 0.5f};
+  public static final float[] mossSecond = new float[]{79 / 255.0f, 93 / 255.0f, 35 / 255.0f, 0.5f};
 
   static {
     RADIANT.addConflicts(SLASHING, POISON, LEVITATE, WEAKNESS, SLOW);

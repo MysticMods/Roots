@@ -1,13 +1,10 @@
 package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.modifiers.IModifier;
-import epicsquid.roots.modifiers.ModifierCores;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellAcidCloud;
 import io.netty.buffer.ByteBuf;
-import it.unimi.dsi.fastutil.floats.FloatArrayList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -16,9 +13,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MessageAcidCloudFX extends ModifierPacket implements IMessage {
   private double posX = 0, posY = 0, posZ = 0;
@@ -54,7 +48,7 @@ public class MessageAcidCloudFX extends ModifierPacket implements IMessage {
     return (MathHelper.sin((float) Math.toRadians(ticks)) + 1.0f) / 2.0f;
   }
 
-  private float[] getColor () {
+  private float[] getColor() {
     float[] list;
     // Default Acid
     if (Util.rand.nextBoolean()) {

@@ -1,11 +1,9 @@
 package epicsquid.roots.potion;
 
 import epicsquid.mysticallib.util.AABBUtil;
-import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
-import epicsquid.roots.spell.SpellAquaBubble;
 import epicsquid.roots.spell.SpellExtension;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.client.Minecraft;

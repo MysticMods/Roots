@@ -4,21 +4,14 @@ import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellTimeStop;
 import epicsquid.roots.util.EntityUtil;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTUtil;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 import java.util.List;
-import java.util.UUID;
 
 public class EntityTimeStop extends EntitySpellModifiable<SpellTimeStop> {
 

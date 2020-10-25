@@ -242,6 +242,6 @@ public class SpellDesaturate extends SpellBase {
     this.radius_x = radius[0];
     this.radius_y = radius[1];
     this.radius_z = radius[2];
-    this.box = new AxisAlignedBB(-radius_x, -radius_y, -radius_z, radius_x+1, radius_y+1, radius_z+1);
+    this.box = new AxisAlignedBB(-radius_x, -radius_y, -radius_z, radius_x + 1, radius_y + 1, radius_z + 1);
   }
 }
