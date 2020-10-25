@@ -176,10 +176,10 @@ public class GuiLibrary extends GuiContainer {
           v = 40;
         } else if (!modInfo.isApplied()) { // There is a modifier but it isn't applied
           v = 20;
-        } else if (modInfo.isDisabled()) { // There is a modifier and it is applied, but it's disabled
-          v = 0;
         } else if (modInfo.isConflicting(container.getModifiers())) { // There is a modifier but it conflicts with other enabled modifiers
           v = 60;
+        } else if (modInfo.isDisabled()) { // There is a modifier and it is applied, but it's disabled
+          v = 0;
         }
 
         if (v != -1) {
