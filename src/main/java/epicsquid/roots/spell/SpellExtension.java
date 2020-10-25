@@ -184,6 +184,9 @@ public class SpellExtension extends SpellBase {
   @Override
   public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
     caster.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, info.ampInt(night_vision), 0, false, false));
+    if (info.has(NONDETECTION)) {
+      caster.addPotionEffect(new PotionEffect(ModPotions.nondetection, info.ampInt(night_vision), 0, false, false));
+    }
     if (info.has(SENSE_ANIMALS)) {
       caster.addPotionEffect(new PotionEffect(ModPotions.animal_sense, info.ampInt(animal_duration), 0, false, false));
       caster.getEntityData().setIntArray(getCachedName(), info.snapshot());
