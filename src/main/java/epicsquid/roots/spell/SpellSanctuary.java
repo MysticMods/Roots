@@ -98,7 +98,17 @@ public class SpellSanctuary extends SpellBase {
 
     for (Entity e : entities) {
       if (e != player) {
-        if ((e instanceof IProjectile || (EntityUtil.isHostile(e) && !info.has(UNPEACEFUL))) && (!SpellConfig.spellFeaturesCategory.getSanctuaryBlacklist().contains(EntityList.getKey(e)))) {
+        boolean reject = false;
+        if (e instanceof IProjectile) {
+          reject = true;
+        } else if (EntityUtil.isHostile(e)) {
+          reject = true;
+        } else if (info.has(UNPEACEFUL) && (EntityUtil.isFriendly(e) || !EntityUtil.isHostile(e))) {
+          reject = true;
+        } else if (SpellConfig.spellFeaturesCategory.getSanctuaryBlacklist().contains(EntityList.getKey(e))) {
+          reject = true;
+        }
+        if (!reject) {
           if (e.getDistanceSq(player) < r) {
             e.motionX = v * (e.posX - player.posX);
             e.motionY = v * (e.posY - player.posY);
