@@ -76,7 +76,7 @@ public class ItemEventHandler {
           if (modified) {
             event.setCanceled(true);
             entity.setDead();
-            entity.world.playSound(null, player.getPosition(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 1, 0.5f);
+            entity.world.playSound(null, player.getPosition(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.6f, 0.5f);
             if (!stack.isEmpty()) {
               EntityItem newEntity = new EntityItem(entity.world, entity.posX, entity.posY, entity.posZ, stack);
               newEntity.motionX = entity.motionX;
