@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GTG",
+    "GGG"  ],
+  "key": {
+    "G": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "nuggetGold"
+      }
+    ],
+    "T": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "spiderEye"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:golden_eye",
+    "data": 0
+  }
+}
