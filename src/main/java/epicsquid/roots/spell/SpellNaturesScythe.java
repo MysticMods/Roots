@@ -11,7 +11,9 @@ import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.OreDictCache;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -22,7 +24,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.GameType;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -142,6 +146,11 @@ public class SpellNaturesScythe extends SpellBase {
     IBlockState state = world.getBlockState(pos);
     Block block = state.getBlock();
     int fortune = (info.has(SpellHarvest.FORTUNE) || info.has(FORTUNE) || info.has(SpellShatter.FORTUNE)) ? 2 : 0;
+    int xp = ForgeHooks.onBlockBreakEvent(world, GameType.SURVIVAL, (EntityPlayerMP) player, pos);
+    if (xp == -1) {
+      return;
+    }
+    xp = block.getExpDrop(state, world, pos, fortune);
     boolean skip = false;
     List<ItemStack> drops = new ArrayList<>();
     if (info.has(SILK_TOUCH) || info.has(SpellHarvest.SILK_TOUCH) || info.has(SpellShatter.SILK_TOUCH)) {
@@ -188,6 +197,17 @@ public class SpellNaturesScythe extends SpellBase {
         ItemUtil.spawnItem(world, player.getPosition(), item);
       } else {
         ItemUtil.spawnItem(world, pos, item);
+      }
+    }
+    if (xp > 0) {
+      BlockPos pos2 = pos;
+      if (magnet) {
+        pos2 = player.getPosition();
+      }
+      while (xp > 0) {
+        int i = EntityXPOrb.getXPSplit(xp);
+        xp -= i;
+        world.spawnEntity(new EntityXPOrb(world, (double) pos2.getX() + 0.5D, (double) pos2.getY() + 0.5D, (double) pos2.getZ() + 0.5D, i));
       }
     }
   }
