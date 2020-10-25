@@ -60,16 +60,16 @@ public class SpellGrowthInfusion extends SpellBase {
   public static Property<String> PROP_STONE_DICT = new Property<>("stone_dictionary", "stone").setDescription("the ore dictionary entry that should be used to determine if a block can be targetted for ore conversion");
   public static Property<Float> PROP_STONE_CHANCE = new Property<>("stone_chance", 0.01f).setDescription("the chance per tick of eligible stone being converted to ore");
 
-  public static Modifier RADIUS1 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "rampant_growth_i"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.1)));
-  public static Modifier BREED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "rampant_breeding"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 0.345)));
-  public static Modifier FLOWERS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "flower_spreading"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.25)));
-  public static Modifier VILLAGERS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "false_night"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 0.675)));
-  public static Modifier RADIUS2 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "rampant_growth_ii"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 0.1)));
-  public static Modifier EMBIGGEN = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "embiggening"), ModifierCores.BAFFLE_CAP, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 0.45)));
-  public static Modifier RADIUS3 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "arms_of_air"), ModifierCores.CLOUD_BERRY, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 0.1)));
-  public static Modifier ANIMAL_GROWTH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "incubation"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 0.475)));
-  public static Modifier ORE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "ore_infusion"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 0.8)));
-  public static Modifier HYDRATE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "hydration"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 0.05)));
+  public static Modifier RADIUS1 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "rampant_growth_i"), ModifierCores.PERESKIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.275)));
+  public static Modifier BREED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "rampant_breeding"), ModifierCores.WILDEWHEET, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 0.345)));
+  public static Modifier FLOWERS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "flower_spreading"), ModifierCores.WILDROOT, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.25)));
+  public static Modifier VILLAGERS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "false_night"), ModifierCores.MOONGLOW_LEAF, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 0.675)));
+  public static Modifier RADIUS2 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "rampant_growth_ii"), ModifierCores.SPIRIT_HERB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 0.275)));
+  public static Modifier EMBIGGEN = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "embiggening"), ModifierCores.BAFFLE_CAP, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 0.45)));
+  public static Modifier RADIUS3 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "arms_of_air"), ModifierCores.CLOUD_BERRY, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 0.275)));
+  public static Modifier ANIMAL_GROWTH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "incubation"), ModifierCores.INFERNAL_BULB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 0.475)));
+  public static Modifier ORE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "ore_infusion"), ModifierCores.STALICRIPE, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 0.8)));
+  public static Modifier HYDRATE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "hydration"), ModifierCores.DEWGONIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 0.125)));
 
   static {
     // Conflicts

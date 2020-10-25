@@ -50,15 +50,15 @@ public class SpellLifeDrain extends SpellBase {
   public static Property<Integer> PROP_SLOW_DURATION = new Property<>("slow_duration", 5 * 20).setDescription("the duration of the slow effect");
   public static Property<Integer> PROP_SLOW_AMPLIFIER = new Property<>("slow_amplifier", 0).setDescription("the info.amplifier to be applied to the slow effect");
 
-  public static Modifier RATIO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "amplified_healing"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
-  public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_drain"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
-  public static Modifier DISTRIBUTE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "distributed_healing"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
-  public static Modifier SPIRITS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "spectral_drain"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1)));
-  public static Modifier TARGET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "targeted_drain"), ModifierCores.TERRA_MOSS, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.TERRA_MOSS, 1)));
-  public static Modifier DAMAGE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "lightened_load"), ModifierCores.CLOUD_BERRY, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 1)));
-  public static Modifier FIRE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "brimstone"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 1)));
-  public static Modifier SLOWING = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "slowing_drain"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
-  public static Modifier CHTHONIC = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "chthonic"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
+  public static Modifier RATIO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "amplified_healing"), ModifierCores.PERESKIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.75)));
+  public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_drain"), ModifierCores.WILDEWHEET, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 0.125)));
+  public static Modifier DISTRIBUTE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "distributed_healing"), ModifierCores.WILDROOT, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.375)));
+  public static Modifier SPIRITS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "spectral_drain"), ModifierCores.SPIRIT_HERB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1.5)));
+  public static Modifier TARGET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "targeted_drain"), ModifierCores.TERRA_MOSS, Cost.of(Cost.cost(CostType.ADDITIONAL_COST, ModifierCores.TERRA_MOSS, 0.125), Cost.cost(CostType.ALL_COST_MULTIPLIER, -0.275))));
+  public static Modifier DAMAGE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "lightened_load"), ModifierCores.CLOUD_BERRY, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 0.25)));
+  public static Modifier FIRE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "brimstone"), ModifierCores.INFERNAL_BULB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 0.375)));
+  public static Modifier SLOWING = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "slowing_drain"), ModifierCores.STALICRIPE, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 0.345)));
+  public static Modifier CHTHONIC = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "chthonic"), ModifierCores.DEWGONIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 0.345)));
 
   static {
     TARGET.addConflicts(SPIRITS, DISTRIBUTE);

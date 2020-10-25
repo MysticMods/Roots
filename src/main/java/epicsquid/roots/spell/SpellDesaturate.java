@@ -62,15 +62,15 @@ public class SpellDesaturate extends SpellBase {
   public static Property<Integer> PROP_LEVITATION_DURATION = new Property<>("levitation_duration", 20).setDescription("the duration of the levitation effect multiplied by the overflow");
   public static Property<Integer> PROP_LEVITATE_TARGETS = new Property<>("levitation_targets", 3).setDescription("the number of hostile nearby creatures that should be levitated");
 
-  public static Modifier RATIO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "amplified_saturation"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
-  public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_heal"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
-  public static Modifier GROWTH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_growth"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
-  public static Modifier SHIELD = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_absorb"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 1)));
-  public static Modifier DAMAGE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_damage"), ModifierCores.BAFFLE_CAP, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 1)));
-  public static Modifier LEVITATE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_levitation"), ModifierCores.CLOUD_BERRY, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 1)));
-  public static Modifier THOUGHTFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "thoughtful"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 1)));
-  public static Modifier RESISTANCE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_stone_skin"), ModifierCores.STALICRIPE, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 1)));
-  public static Modifier PURIFY = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_purification"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
+  public static Modifier RATIO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "amplified_saturation"), ModifierCores.PERESKIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.6)));
+  public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_heal"), ModifierCores.WILDEWHEET, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 0.125)));
+  public static Modifier GROWTH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_growth"), ModifierCores.WILDROOT, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.125)));
+  public static Modifier SHIELD = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_absorb"), ModifierCores.MOONGLOW_LEAF, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 0.45)));
+  public static Modifier DAMAGE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_damage"), ModifierCores.BAFFLE_CAP, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 0.65)));
+  public static Modifier LEVITATE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_levitation"), ModifierCores.CLOUD_BERRY, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 0.275)));
+  public static Modifier THOUGHTFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "thoughtful"), ModifierCores.INFERNAL_BULB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 0.3)));
+  public static Modifier RESISTANCE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_stone_skin"), ModifierCores.STALICRIPE, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 0.4)));
+  public static Modifier PURIFY = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_purification"), ModifierCores.DEWGONIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 0.7)));
 
   static {
     PEACEFUL.addConflicts(GROWTH, SHIELD, DAMAGE, LEVITATE, RESISTANCE, PURIFY);

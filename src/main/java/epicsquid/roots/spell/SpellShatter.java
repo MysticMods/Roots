@@ -44,18 +44,18 @@ public class SpellShatter extends SpellBase {
   public static Property<Integer> PROP_DEFAULT_DEPTH = new Property<>("default_depth", 0).setDescription("the default depth (when not amplified; 0 = just one block broken)");
   public static Property<Integer> PROP_WIDTH = new Property<>("width", 1).setDescription("the width when the width modifier is applied; this is appiled to the left and right of the targeted block, meaning a width of 1 is a total width of 3 blocks");
   public static Property<Integer> PROP_HEIGHT = new Property<>("height", 1).setDescription("the height when the height modifier is applied; as per width");
-  public static Property<Integer> PROP_DEPTH = new Property<>("depth", 2).setDescription("this value is applied by offsetting the position relative to the angle the beam struck it; if struck from above, it digs down, etc. By default, with a value of 2, this should result in 3 blocks being broken.");
+  public static Property<Integer> PROP_DEPTH = new Property<>("depth", 2).setDescription("this value is applied by offsetting the position relative to the angle the beam struck it; if struck from above, it digs down, etc. By default, with a value single 2, this should result in 3 blocks being broken.");
 
-  public static Modifier WIDER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "wider"), ModifierCores.PERESKIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 1)));
-  public static Modifier TALLER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "taller"), ModifierCores.WILDEWHEET, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
-  public static Modifier MAGNETISM = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "magnetic_ray"), ModifierCores.WILDROOT, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 1)));
-  public static Modifier DEEPER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "deeper"), ModifierCores.MOONGLOW_LEAF, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 1)));
-  public static Modifier SINGLE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "singularity"), ModifierCores.SPIRIT_HERB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 1)));
-  public static Modifier KNIFE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "moss_harvest"), ModifierCores.TERRA_MOSS, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.TERRA_MOSS, 1)));
-  public static Modifier VOID = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "shatter_void"), ModifierCores.BAFFLE_CAP, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 1)));
-  public static Modifier FORTUNE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "shatter_fortune"), ModifierCores.CLOUD_BERRY, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 1)));
-  public static Modifier SMELTING = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "smelting_ray"), ModifierCores.INFERNAL_BULB, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 1)));
-  public static Modifier SILK_TOUCH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "shatter_silk_touch"), ModifierCores.DEWGONIA, ModifierCost.of(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 1)));
+  public static Modifier WIDER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "wider"), ModifierCores.PERESKIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.45)));
+  public static Modifier TALLER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "taller"), ModifierCores.WILDEWHEET, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 0.45)));
+  public static Modifier MAGNETISM = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "magnetic_ray"), ModifierCores.WILDROOT, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.125)));
+  public static Modifier DEEPER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "deeper"), ModifierCores.MOONGLOW_LEAF, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 0.45)));
+  public static Modifier SINGLE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "singularity"), ModifierCores.SPIRIT_HERB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 0.125)));
+  public static Modifier KNIFE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "moss_harvest"), ModifierCores.TERRA_MOSS, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.TERRA_MOSS, 0.275)));
+  public static Modifier VOID = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "shatter_void"), ModifierCores.BAFFLE_CAP, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 0.125)));
+  public static Modifier FORTUNE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "shatter_fortune"), ModifierCores.CLOUD_BERRY, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 0.375)));
+  public static Modifier SMELTING = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "smelting_ray"), ModifierCores.INFERNAL_BULB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 0.25)));
+  public static Modifier SILK_TOUCH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "shatter_silk_touch"), ModifierCores.DEWGONIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 0.65)));
 
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_shatter");
   public static SpellShatter instance = new SpellShatter(spellName);
