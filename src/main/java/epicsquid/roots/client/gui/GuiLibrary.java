@@ -11,7 +11,6 @@ import epicsquid.mysticallib.client.gui.InvisibleButton;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.container.ContainerLibrary;
-import epicsquid.roots.container.slots.SlotImposerModifierInfo;
 import epicsquid.roots.container.slots.SlotLibraryInfo;
 import epicsquid.roots.container.slots.SlotLibraryModifierInfo;
 import epicsquid.roots.container.slots.SlotSpellInfo;

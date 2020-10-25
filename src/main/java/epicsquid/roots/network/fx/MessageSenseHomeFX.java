@@ -2,12 +2,10 @@ package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.VecUtil;
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.SpellGeas;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -15,8 +13,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.Random;
 
 public class MessageSenseHomeFX implements IMessage {
   private BlockPos home;
@@ -41,7 +37,7 @@ public class MessageSenseHomeFX implements IMessage {
     buf.writeInt(home.getZ());
   }
 
-  private static final float[] color = new float[]{182/255.0f, 109/255.0f, 191/255.0f, 0.5f};
+  private static final float[] color = new float[]{182 / 255.0f, 109 / 255.0f, 191 / 255.0f, 0.5f};
 
   public static class MessageHolder implements IMessageHandler<MessageSenseHomeFX, IMessage> {
     @SideOnly(Side.CLIENT)

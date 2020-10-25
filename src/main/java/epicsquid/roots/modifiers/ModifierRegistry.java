@@ -29,7 +29,7 @@ public class ModifierRegistry {
     return map.get(name);
   }
 
-  public static void disable (IModifier modifier) {
+  public static void disable(IModifier modifier) {
     if (modifier == null) {
       return;
     }
@@ -37,7 +37,7 @@ public class ModifierRegistry {
     disabledModifiers.add(modifier.getRegistryName());
   }
 
-  public static boolean isDisabled (IModifier modifier) {
+  public static boolean isDisabled(IModifier modifier) {
     if (modifier == null) {
       return false;
     }
@@ -62,7 +62,7 @@ public class ModifierRegistry {
   }
 
   @Nullable
-  public static Modifier fromHashCode (int code) {
+  public static Modifier fromHashCode(int code) {
     for (Map.Entry<ResourceLocation, Modifier> entry : map.entrySet()) {
       if (entry.getKey().hashCode() == code) {
         return entry.getValue();

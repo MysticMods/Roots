@@ -335,14 +335,11 @@ public class SpellSaturate extends SpellBase {
     }
 
     ItemFood food = (ItemFood) stack.getItem();
-    if (food.potionId != null && food.potionId.getPotion() == MobEffects.POISON) {
-      return true;
-    }
+    return food.potionId != null && food.potionId.getPotion() == MobEffects.POISON;
 
-    return false;
   }
 
-  private boolean nauseating (ItemStack stack) {
+  private boolean nauseating(ItemStack stack) {
     if (!(stack.getItem() instanceof ItemFood)) {
       return false;
     }
@@ -358,27 +355,25 @@ public class SpellSaturate extends SpellBase {
       if (food.potionId.getPotion() == MobEffects.BLINDNESS) {
         return true;
       }
-      if (food.potionId.getPotion() == MobEffects.WITHER) {
-        return true;
-      }
+      return food.potionId.getPotion() == MobEffects.WITHER;
     }
 
     return false;
   }
 
-  private boolean cooked (ItemStack stack) {
+  private boolean cooked(ItemStack stack) {
     return OreDictCache.matches(cooked_dictionary, stack);
   }
 
-  private boolean uncooked (ItemStack stack) {
+  private boolean uncooked(ItemStack stack) {
     return OreDictCache.matches(uncooked_dictionary, stack);
   }
 
-  private boolean bottled (ItemStack stack) {
+  private boolean bottled(ItemStack stack) {
     return OreDictCache.matches(bottled_dictionary, stack);
   }
 
-  private double inversion (double value, int boost) {
+  private double inversion(double value, int boost) {
     return value + (boost * ((20d - value) / 20));
   }
 
@@ -405,7 +400,7 @@ public class SpellSaturate extends SpellBase {
     if (info.has(UNCOOKED) && uncooked(stack)) {
       sat += uncooked_saturation;
     }
-    if (info.has(BOTTLED)  && bottled(stack)) {
+    if (info.has(BOTTLED) && bottled(stack)) {
       sat += bottled_saturation;
     }
     double result = (heal * saturation * 2) * sat;
@@ -436,7 +431,7 @@ public class SpellSaturate extends SpellBase {
     if (info.has(UNCOOKED) && uncooked(stack)) {
       food += uncooked_food;
     }
-    if (info.has(BOTTLED)  && bottled(stack)) {
+    if (info.has(BOTTLED) && bottled(stack)) {
       food += bottled_food;
     }
     double result = item.getHealAmount(stack) * food;

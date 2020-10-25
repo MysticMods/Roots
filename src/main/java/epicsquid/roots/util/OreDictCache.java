@@ -20,7 +20,7 @@ public class OreDictCache {
   private static Map<String, Set<Supplier<Ingredient>>> prefixMatches = new HashMap<>();
   private static Set<String> noIngredients = new HashSet<>();
 
-  public static boolean matches (String oreName, IBlockState state) {
+  public static boolean matches(String oreName, IBlockState state) {
     return matches(oreName, ItemUtil.stackFromState(state));
   }
 
@@ -35,7 +35,7 @@ public class OreDictCache {
     return entries.computeIfAbsent(oreName, (name) -> new OneTimeSupplier<>(() -> new OreIngredient(name))).get().apply(stack);
   }
 
-  public static boolean matchesPrefix (String prefix, ItemStack stack) {
+  public static boolean matchesPrefix(String prefix, ItemStack stack) {
     if (stack.isEmpty()) {
       return false;
     }

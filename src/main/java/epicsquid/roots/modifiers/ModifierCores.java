@@ -109,7 +109,7 @@ public enum ModifierCores implements IModifierCore {
   }
 
   @Nullable
-  public static IModifierCore getByOrdinal (int ordinal) {
+  public static IModifierCore getByOrdinal(int ordinal) {
     if (ordinal == -1) {
       return BaseModifiers.AIR;
     }
@@ -121,14 +121,14 @@ public enum ModifierCores implements IModifierCore {
     return null;
   }
 
-  public static boolean isModifierCore (Item item) {
+  public static boolean isModifierCore(Item item) {
     if (modifierCores == null) {
       modifierCores = Stream.of(values()).map(ModifierCores::getStack).map(ItemStack::getItem).collect(Collectors.toSet());
     }
     return modifierCores.contains(item);
   }
 
-  public static boolean isModifierCore (ItemStack stack) {
+  public static boolean isModifierCore(ItemStack stack) {
     return isModifierCore(stack.getItem());
   }
 }

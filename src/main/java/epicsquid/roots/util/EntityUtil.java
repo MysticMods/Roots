@@ -118,11 +118,8 @@ public class EntityUtil {
       return true;
     }
 
-    if (EntitySpawnPlacementRegistry.getPlacementForEntity(entity.getClass()) == EntityLiving.SpawnPlacementType.IN_WATER) {
-      return true;
-    }
+    return EntitySpawnPlacementRegistry.getPlacementForEntity(entity.getClass()) == EntityLiving.SpawnPlacementType.IN_WATER;
 
-    return false;
   }
 
   public static boolean isFriendlyTo(Entity entity, EntityPlayer player) {
@@ -148,9 +145,7 @@ public class EntityUtil {
 
     if (entity instanceof EntityLiving) {
       EntityLiving living = (EntityLiving) entity;
-      if (living.getLeashed()) {
-        return false;
-      }
+      return !living.getLeashed();
     }
 
     return true;
@@ -165,11 +160,7 @@ public class EntityUtil {
       return false;
     }
 
-    if (isBoss(entity)) {
-      return false;
-    }
-
-    return true;
+    return !isBoss(entity);
   }
 
   public static boolean isBoss(EntityLivingBase entity) {
@@ -177,10 +168,7 @@ public class EntityUtil {
       return true;
     }
 
-    if (entity.getMaxHealth() > GeneralConfig.BossEntityHealth) {
-      return true;
-    }
+    return entity.getMaxHealth() > GeneralConfig.BossEntityHealth;
 
-    return false;
   }
 }

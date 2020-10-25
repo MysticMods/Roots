@@ -57,7 +57,7 @@ public class SlotImposerSpellInfo extends Slot {
     }
   }
 
-  public void invalidate () {
+  public void invalidate() {
     this.stack = null;
   }
 

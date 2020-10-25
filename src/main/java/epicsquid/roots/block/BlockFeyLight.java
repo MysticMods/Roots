@@ -1,9 +1,6 @@
 package epicsquid.roots.block;
 
 import epicsquid.mysticallib.block.BlockBase;
-import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.particle.ParticleUtil;
-import it.unimi.dsi.fastutil.floats.FloatArrayList;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -20,9 +17,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 @SuppressWarnings("deprecation")

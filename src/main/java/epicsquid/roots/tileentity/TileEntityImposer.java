@@ -7,7 +7,6 @@ import epicsquid.roots.GuiHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemDruidKnife;
-import epicsquid.roots.modifiers.IModifier;
 import epicsquid.roots.modifiers.IModifierCore;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
@@ -144,7 +143,7 @@ public class TileEntityImposer extends TileBase implements ITickable {
     }
   }
 
-  public StaffSpellInfo getCurrentInfo (StaffSpellStorage storage) {
+  public StaffSpellInfo getCurrentInfo(StaffSpellStorage storage) {
     if (storage == null) {
       return StaffSpellInfo.EMPTY;
     }

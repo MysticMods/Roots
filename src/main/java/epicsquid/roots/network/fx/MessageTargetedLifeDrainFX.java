@@ -1,7 +1,6 @@
 package epicsquid.roots.network.fx;
 
 import epicsquid.roots.particle.ParticleUtil;
-import epicsquid.roots.spell.SpellGeas;
 import epicsquid.roots.spell.SpellLifeDrain;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;

@@ -21,8 +21,8 @@ public class MessageStormCloudStormFX extends ModifierPacket implements IMessage
   private static final float[] color1 = new float[]{78 / 255.0f, 189 / 255.0f, 191 / 255.0f, 0.75f};
   private static final float[] color2 = new float[]{18 / 255.0f, 90 / 255.0f, 138 / 255.0f, 0.75f};
 
-  private static final float[] color3 = new float[]{107/255.0f, 252/255.0f, 3/255.0f, 0.75f};
-  private static final float[] color4 = new float[]{42/255.0f, 189/255.0f, 93/255.0f, 0.75f};
+  private static final float[] color3 = new float[]{107 / 255.0f, 252 / 255.0f, 3 / 255.0f, 0.75f};
+  private static final float[] color4 = new float[]{42 / 255.0f, 189 / 255.0f, 93 / 255.0f, 0.75f};
 
   public MessageStormCloudStormFX() {
     super();

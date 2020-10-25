@@ -31,7 +31,7 @@ public class IngredientWithStack {
     count++;
   }
 
-  public IngredientWithStack copy () {
+  public IngredientWithStack copy() {
     return new IngredientWithStack(this.ingredient, this.count);
   }
 }

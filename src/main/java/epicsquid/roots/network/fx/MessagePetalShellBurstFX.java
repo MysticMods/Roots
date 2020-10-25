@@ -2,7 +2,6 @@ package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
-import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellPetalShell;
@@ -58,7 +57,7 @@ public class MessagePetalShellBurstFX extends ModifierPacket implements IMessage
   }
 
   @SideOnly(Side.CLIENT)
-  public static float[] getColours (boolean first, final MessagePetalShellBurstFX message) {
+  public static float[] getColours(boolean first, final MessagePetalShellBurstFX message) {
     if (first) {
       if (message.has(SpellPetalShell.COLOUR)) {
         return SpellPetalShell.mossFirst;

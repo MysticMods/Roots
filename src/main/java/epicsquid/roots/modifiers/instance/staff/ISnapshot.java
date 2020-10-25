@@ -35,6 +35,6 @@ public interface ISnapshot extends ISpellMulitipliers {
     return ISpellMulitipliers.Buff.NONE;
   }
 
-  default void toBytes (ByteBuf buf) {
+  default void toBytes(ByteBuf buf) {
   }
 }

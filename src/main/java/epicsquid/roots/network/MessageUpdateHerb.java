@@ -1,9 +1,9 @@
 package epicsquid.roots.network;
 
 import epicsquid.roots.api.Herb;
+import epicsquid.roots.client.hud.RenderHerbHUD;
 import epicsquid.roots.event.ClientTickHandler;
 import epicsquid.roots.init.HerbRegistry;
-import epicsquid.roots.client.hud.RenderHerbHUD;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;

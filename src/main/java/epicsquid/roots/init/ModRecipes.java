@@ -381,7 +381,7 @@ public class ModRecipes {
   }
 
   @Nullable
-  public static FlowerRecipe getFlowerRecipe (IBlockState state) {
+  public static FlowerRecipe getFlowerRecipe(IBlockState state) {
     Block block = state.getBlock();
     int meta = block.getMetaFromState(state);
     for (FlowerRecipe recipe : flowerRecipes.values()) {

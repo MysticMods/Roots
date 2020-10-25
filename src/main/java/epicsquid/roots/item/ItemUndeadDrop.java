@@ -75,6 +75,6 @@ public class ItemUndeadDrop extends ItemBase {
   }
 
   public enum DropType {
-    RELIQUARY, POUCH;
+    RELIQUARY, POUCH
   }
 }

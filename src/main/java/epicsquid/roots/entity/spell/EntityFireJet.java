@@ -2,7 +2,6 @@ package epicsquid.roots.entity.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
-import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.network.fx.MessageWildfireFX;

@@ -3,8 +3,9 @@ package epicsquid.roots.spell;
 import net.minecraft.util.math.MathHelper;
 
 public interface ISpellMulitipliers {
-  Buff getAmplify ();
-  Buff getSpeedy ();
+  Buff getAmplify();
+
+  Buff getSpeedy();
 
   default double getAmplifyValue() {
     switch (getAmplify()) {
@@ -139,6 +140,6 @@ public interface ISpellMulitipliers {
   }
 
   enum Buff {
-    NONE, BONUS, GREATER_BONUS;
+    NONE, BONUS, GREATER_BONUS
   }
 }

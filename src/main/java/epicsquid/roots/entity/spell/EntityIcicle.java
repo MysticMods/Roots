@@ -81,6 +81,6 @@ public class EntityIcicle extends EntityFireball {
   }
 
   public enum SpellType {
-    WILDFIRE, STORM_CLOUD;
+    WILDFIRE, STORM_CLOUD
   }
 }

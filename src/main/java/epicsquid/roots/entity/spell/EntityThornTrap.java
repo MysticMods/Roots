@@ -4,7 +4,6 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.network.fx.MessageRoseThornsBurstFX;
 import epicsquid.roots.network.fx.MessageRoseThornsTickFX;
-import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRoseThorns;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.EntityLivingBase;

@@ -58,7 +58,7 @@ public class SpellWildfire extends SpellBase {
   public int radius_x, radius_y, radius_z, growth_ticks;
   public AxisAlignedBB bounding;
   public float damage, ice_damage;
-  public int fire_duration, fire_radius, slow_duration, slow_amplifier, poison_duration, poison_amplifier, levitate_duration, icicle_count, lifetime,  weakness_amplifier, weakness_duration;
+  public int fire_duration, fire_radius, slow_duration, slow_amplifier, poison_duration, poison_amplifier, levitate_duration, icicle_count, lifetime, weakness_amplifier, weakness_duration;
 
   public SpellWildfire(ResourceLocation name) {
     super(name, TextFormatting.GOLD, 255f / 255f, 128f / 255f, 32f / 255f, 255f / 255f, 64f / 255f, 32f / 255f);

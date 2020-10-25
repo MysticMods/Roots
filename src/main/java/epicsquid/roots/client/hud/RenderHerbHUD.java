@@ -100,7 +100,7 @@ public class RenderHerbHUD {
       this.herb = herb;
     }
 
-    public void show () {
+    public void show() {
       this.ticks = TIME_VISIBLE;
     }
 
@@ -120,7 +120,7 @@ public class RenderHerbHUD {
       return stack;
     }
 
-    public boolean invalid () {
+    public boolean invalid() {
       return ticks <= 0;
     }
 
@@ -142,7 +142,7 @@ public class RenderHerbHUD {
       int row = slot / 3;
       int col = slot % 3;
 
-      int anim_time = ANIM_TIME * (row+1);
+      int anim_time = ANIM_TIME * (row + 1);
 
       if (ticks < anim_time) {
         progress = Math.max(0, ticks - partialTicks) / anim_time;

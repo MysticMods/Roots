@@ -6,7 +6,10 @@ import epicsquid.roots.api.Herb;
 import epicsquid.roots.entity.spell.EntitySpellBase;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.modifiers.*;
+import epicsquid.roots.modifiers.BaseModifiers;
+import epicsquid.roots.modifiers.CostType;
+import epicsquid.roots.modifiers.IModifierCost;
+import epicsquid.roots.modifiers.Modifier;
 import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstanceList;
@@ -84,24 +87,24 @@ public abstract class SpellBase extends RegistryItem {
     return getFirstColours(1.0f);
   }
 
-  public float[] getFirstColours (float alpha) {
+  public float[] getFirstColours(float alpha) {
     return new float[]{red1, green1, blue1, alpha};
   }
 
-  public float[] modifyFirstColours (float value) {
+  public float[] modifyFirstColours(float value) {
     return modifyFirstColours(value, 1.0f);
   }
 
-  public float[] modifyFirstColours (float value, float alpha) {
-    return new float[]{red1*value, green1*value, blue1*value, alpha};
+  public float[] modifyFirstColours(float value, float alpha) {
+    return new float[]{red1 * value, green1 * value, blue1 * value, alpha};
   }
 
-  public float[] modifySecondColours (float value) {
+  public float[] modifySecondColours(float value) {
     return modifySecondColours(value, 1.0f);
   }
 
-  public float[] modifySecondColours (float value, float alpha) {
-    return new float[]{red2*value, green2*value, blue2*value, alpha};
+  public float[] modifySecondColours(float value, float alpha) {
+    return new float[]{red2 * value, green2 * value, blue2 * value, alpha};
   }
 
   public float[] getSecondColours(float alpha) {
@@ -202,7 +205,7 @@ public abstract class SpellBase extends RegistryItem {
     }
   }
 
-  public String getTranslationKey () {
+  public String getTranslationKey() {
     return "roots.spell." + name;
   }
 

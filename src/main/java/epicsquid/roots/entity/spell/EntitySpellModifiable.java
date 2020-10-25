@@ -4,15 +4,12 @@ import epicsquid.roots.modifiers.instance.staff.ISnapshot;
 import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.spell.SpellBase;
-import epicsquid.roots.spell.SpellWildfire;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.Constants;
 
 import java.util.UUID;
 
@@ -53,7 +50,7 @@ public abstract class EntitySpellModifiable<T extends SpellBase> extends Entity 
     }
   }
 
-  public int getLifetime () {
+  public int getLifetime() {
     return getDataManager().get(lifetime);
   }
 

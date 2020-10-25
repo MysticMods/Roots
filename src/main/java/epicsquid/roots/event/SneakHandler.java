@@ -28,7 +28,7 @@ public class SneakHandler {
   private static boolean lastSneak = false;
 
   @SubscribeEvent
-  public static void onPlayerVisibility (PlayerEvent.Visibility event) {
+  public static void onPlayerVisibility(PlayerEvent.Visibility event) {
     if (event.getEntityPlayer().getActivePotionEffect(ModPotions.nondetection) != null) {
       ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(event.getEntityPlayer().getEntityData(), SpellExtension.instance);
       if (mods.has(SpellExtension.SENSE_PLANTS)) {

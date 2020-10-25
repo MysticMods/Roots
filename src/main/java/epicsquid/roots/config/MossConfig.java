@@ -11,7 +11,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Config;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 @Config.LangKey("config.roots.category.moss")
 @Config(modid = Roots.MODID, name = "roots/moss", category = "moss")

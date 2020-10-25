@@ -31,7 +31,7 @@ public interface IModifierList<T extends IModifier, V extends NBTBase> extends I
 
   boolean remove(Object o);
 
-  default boolean removeIf (Predicate<? super T> predicate) {
+  default boolean removeIf(Predicate<? super T> predicate) {
     throw new UnsupportedOperationException("this method isn't implemented for this class");
   }
 }

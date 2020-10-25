@@ -15,8 +15,6 @@ import epicsquid.roots.world.data.SpellLibraryRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
-import java.util.List;
-
 public class SpellUtil {
   public static boolean isValidStaff(ItemStack stack) {
     return stack.getItem() == ModItems.staff || stack.getItem() == ModItems.spell_dust;

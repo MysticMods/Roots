@@ -220,9 +220,7 @@ public class SpellNaturesScythe extends SpellBase {
       }
     }
     if (info.has(MUSHROOM)) {
-      if (block instanceof BlockMushroom || OreDictCache.matches(this.mushroom, state)) {
-        return true;
-      }
+      return block instanceof BlockMushroom || OreDictCache.matches(this.mushroom, state);
     }
 
     return false;

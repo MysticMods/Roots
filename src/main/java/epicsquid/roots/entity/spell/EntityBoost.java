@@ -209,11 +209,8 @@ public class EntityBoost extends Entity {
     }
 
     public boolean safe(EntityPlayer player) {
-      if (player.ticksExisted - start < SpellSkySoarer.instance.fall_duration) {
-        return true;
-      }
+      return player.ticksExisted - start < SpellSkySoarer.instance.fall_duration;
 
-      return false;
     }
   }
 }

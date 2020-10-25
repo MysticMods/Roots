@@ -13,8 +13,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Random;
-
 public class MessageGeasRingFX implements IMessage {
   private double posX = 0, posY = 0, posZ = 0;
 

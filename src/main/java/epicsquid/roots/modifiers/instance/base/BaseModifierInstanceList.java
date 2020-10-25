@@ -110,7 +110,7 @@ public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> i
     return internal.remove(o);
   }
 
-  public boolean removeIf (Predicate<? super T> predicate) {
+  public boolean removeIf(Predicate<? super T> predicate) {
     return internal.removeIf(predicate);
   }
 

@@ -97,7 +97,7 @@ public class SpellAcidCloud extends SpellBase {
 
   private double getMultiplier(double time, float min, float max) {
     int peak = 18000; // Allow this to be configured
-    return (max - min) * Math.exp(-(1.0/(24000 * 100)) * (time - peak)) + min;
+    return (max - min) * Math.exp(-(1.0 / (24000 * 100)) * (time - peak)) + min;
   }
 
   @Override

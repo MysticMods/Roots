@@ -4,7 +4,6 @@ import epicsquid.roots.Roots;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Config;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -140,7 +139,7 @@ public class SpellConfig {
     @Config.Ignore
     public Set<ResourceLocation> resources = null;
 
-    public Set<ResourceLocation> getSanctuaryBlacklist () {
+    public Set<ResourceLocation> getSanctuaryBlacklist() {
       if (resources == null) {
         resources = Stream.of(sanctuaryEntitiesBlacklist).map(ResourceLocation::new).collect(Collectors.toSet());
       }
