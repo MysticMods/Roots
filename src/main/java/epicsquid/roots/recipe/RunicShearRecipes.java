@@ -8,6 +8,8 @@ import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.transmutation.PropertyPredicate;
 import net.minecraft.block.BlockBeetroot;
 import net.minecraft.block.BlockCrops;
+import net.minecraft.entity.monster.EntityCaveSpider;
+import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.passive.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -60,6 +62,8 @@ public class RunicShearRecipes {
     }, Sets.newHashSet(new ItemStack(Items.MELON_SEEDS), new ItemStack(ModItems.terra_spores), new ItemStack(Items.BEETROOT_SEEDS), new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed)), EntitySprout.class, 20 * 180));
 
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "wolf_bone"), new ItemStack(Items.BONE, 1), EntityWolf.class, 20 * 180));
-    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "ocelot_bone_meal"), new ItemStack(Items.STRING), EntityOcelot.class, 20 * 180));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "ocelot_string"), new ItemStack(Items.STRING), EntityOcelot.class, 20 * 180));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "spider_golden_eye"), new ItemStack(ModItems.golden_eye, 1), EntitySpider.class, 20 * 60 * 10));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "cave_spider_golden_eye"), new ItemStack(ModItems.golden_eye, 1), EntityCaveSpider.class, 20 * 60 * 10));
   }
 }

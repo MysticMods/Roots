@@ -38,7 +38,7 @@ public class ModItems {
   // All mod items
   public static Item pestle, herb_pouch, component_pouch, spell_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, wildwood_quiver, wildwood_bow,
       sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, apothecary_pouch, wooden_shears,
-      petals, flour, living_arrow, runic_dust, cooked_pereskia, fey_leather, wildewheet_bread, glass_eye, fey_feather, strange_slime, gramary, spirit_bag, reliquary;
+      petals, flour, living_arrow, runic_dust, cooked_pereskia, fey_leather, wildewheet_bread, glass_eye, fey_feather, strange_slime, gramary, spirit_bag, reliquary, golden_eye;
 
   public static Item runed_axe, runed_hoe, runed_pickaxe, runed_shovel, runed_sword, runed_dagger;
 
@@ -197,6 +197,7 @@ public class ModItems {
     event.addItem(life_essence = new ItemLifeEssence("life_essence").setCreativeTab(Roots.tab));
 
     event.addItem(glass_eye = new ItemGlassEye("glass_eye").setCreativeTab(Roots.tab));
+    event.addItem(golden_eye = new ItemFoodBase("golden_eye", 6, 1.35f, false).setCreativeTab(Roots.tab));
 
     // Rituals
     event.addItem(ritual_healing_aura = new ItemBase("ritual_healing_aura").setCreativeTab(null));
@@ -270,6 +271,12 @@ public class ModItems {
     OreDictionary.registerOre("feather", ModItems.fey_feather);
     OreDictionary.registerOre("slimeball", ModItems.strange_slime);
     OreDictionary.registerOre("feyFeather", ModItems.fey_feather);
+    OreDictionary.registerOre("spiderEye", Items.SPIDER_EYE);
+    OreDictionary.registerOre("goldenEye", ModItems.golden_eye);
+    OreDictionary.registerOre("eye", ModItems.golden_eye);
+    OreDictionary.registerOre("eye", ModItems.glass_eye);
+    OreDictionary.registerOre("eye", Items.SPIDER_EYE);
+    OreDictionary.registerOre("eye", Items.FERMENTED_SPIDER_EYE);
     OreDictionary.registerOre("tallgrass", new ItemStack(Blocks.TALLGRASS, 1, BlockTallGrass.EnumType.GRASS.getMeta()));
     OreDictionary.registerOre("tallgrass", new ItemStack(Blocks.TALLGRASS, 1, BlockTallGrass.EnumType.FERN.getMeta()));
     OreDictionary.registerOre("mushroom", new ItemStack(Item.getItemFromBlock(Blocks.RED_MUSHROOM)));
