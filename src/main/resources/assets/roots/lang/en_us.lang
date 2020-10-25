@@ -241,6 +241,8 @@ roots.keybinds.spell_slot_4=Select Slot 4
 roots.keybinds.spell_slot_5=Select Slot 5
 roots.keybinds.spell_slot_next=Select Next Slot
 roots.keybinds.spell_slot_previous=Select Previous Slot
+roots.keybinds.cycle=Select Next Spell
+roots.keybinds.spell_library=Open Spell Library
 
 item.ritual_healing_aura.name=Ritual: Healing Aura
 item.ritual_heavy_storms.name=Ritual: Heavy Storms
