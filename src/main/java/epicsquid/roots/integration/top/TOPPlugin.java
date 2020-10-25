@@ -44,8 +44,10 @@ public class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfoProvid
         } else {
           return;
         }
-        int remaining = duration - (duration - te.getBurnTime());
-        probeInfo.text("{*roots.hud.pyre.progress*}" + String.format("%.2f", remaining / 20.0 / 60.0) + " {*roots.hud.pyre.progress_info*}");
+        int remaining = (duration - (duration - te.getBurnTime()) / 20);
+        int seconds = remaining % 60;
+        int minutes = remaining / 60;
+        probeInfo.text("{*roots.hud.top.pyre.progress*}" + minutes + " {*roots.hud.top.pyre.progress_info*} " + seconds + " {*roots.hud.top.pyre.progress_info2*}");
       }
     }
   }

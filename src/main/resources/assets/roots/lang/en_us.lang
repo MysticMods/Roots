@@ -450,12 +450,14 @@ config.roots.category.crops.tooltip=Settings relating to growth & harvesting spe
 roots.hud.grove_stone.valid=Valid stone
 roots.hud.pyre.recipe=Crafting: %s
 roots.hud.pyre.ritual=Ritual: %s
-roots.hud.pyre.progress=Progress: %s minutes remaining
+roots.hud.pyre.progress=Progress: %s remaining
+roots.hud.pyre.minutes_seconds=%s minutes, %s seconds
 
 roots.hud.top.pyre.recipe=Crafting:
 roots.hud.top.pyre.ritual=Ritual:
 roots.hud.top.pyre.progress=Progress:
-roots.hud.top.pyre.progress_info=minutes remaining
+roots.hud.top.pyre.progress_info=minutes
+roots.hud.top.pyre.progress_info2=seconds remaining
 
 # Runic Shears
 roots.runic_shears.cooldown=The fey's equivalent has nothing to gift you at this time.
