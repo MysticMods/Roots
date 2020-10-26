@@ -32,8 +32,8 @@ public class ProviderPyre implements IWailaDataProvider {
       } else {
         return tooltip;
       }
-      double totalSeconds = (duration - (duration - te.getBurnTime()) / 20.0);
-      tooltip.add(I18n.format("roots.hud.pyre.progress", totalSeconds));
+      double totalSeconds = (duration - (duration - te.getBurnTime())) / 20.0;
+      tooltip.add(I18n.format("roots.hud.pyre.progress", (int) totalSeconds));
     }
     return tooltip;
   }
