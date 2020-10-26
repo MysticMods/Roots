@@ -1,5 +1,6 @@
 package epicsquid.roots.network.fx;
 
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellGeas;
 import io.netty.buffer.ByteBuf;
@@ -48,13 +49,12 @@ public class MessageTargetedGeasFX implements IMessage {
     buf.writeDouble(this.stop.z);
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageTargetedGeasFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageTargetedGeasFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageTargetedGeasFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageTargetedGeasFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       ParticleUtil.renderBeam(world, message.start, message.stop, ParticleUtil::spawnParticleStarNoGravity, SpellGeas.instance);
-      return null;
     }
   }
 }

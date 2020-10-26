@@ -2,6 +2,7 @@ package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellSanctuary;
 import io.netty.buffer.ByteBuf;
@@ -48,10 +49,10 @@ public class MessageSanctuaryRingFX extends ModifierPacket implements IMessage {
     return (MathHelper.sin((float) Math.toRadians(ticks)) + 1.0f) / 2.0f;
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageSanctuaryRingFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageSanctuaryRingFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageSanctuaryRingFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageSanctuaryRingFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       float c;
       if (message.modifiers.has(SpellSanctuary.RADIUS)) {
@@ -62,13 +63,12 @@ public class MessageSanctuaryRingFX extends ModifierPacket implements IMessage {
       for (float k = 0; k < 360; k += Util.rand.nextInt(72)) {
         if (Util.rand.nextBoolean()) {
           if (Util.rand.nextBoolean()) {
-            ParticleUtil.spawnParticlePetal(world, (float) message.posX + c * (float) Math.sin(Math.toRadians(k)), (float) message.posY, (float) message.posZ + 3.0f * (float) Math.cos(Math.toRadians(k)), 0, 0, 0, SpellSanctuary.instance.getFirstColours(0.5f), 1.25f + 5.0f * Util.rand.nextFloat(), 40);
+            ParticleUtil.spawnParticlePetal(world, (float) message.posX + c * (float) Math.sin(Math.toRadians(k)), (float) message.posY, (float) message.posZ + c * (float) Math.cos(Math.toRadians(k)), 0, 0, 0, SpellSanctuary.instance.getFirstColours(0.5f), 1.25f + 5.0f * Util.rand.nextFloat(), 40);
           } else {
-            ParticleUtil.spawnParticlePetal(world, (float) message.posX + c * (float) Math.sin(Math.toRadians(k)), (float) message.posY, (float) message.posZ + 3.0f * (float) Math.cos(Math.toRadians(k)), 0, 0, 0, SpellSanctuary.instance.getSecondColours(0.5f), 1.25f + 5.0f * Util.rand.nextFloat(), 40);
+            ParticleUtil.spawnParticlePetal(world, (float) message.posX + c * (float) Math.sin(Math.toRadians(k)), (float) message.posY, (float) message.posZ + c * (float) Math.cos(Math.toRadians(k)), 0, 0, 0, SpellSanctuary.instance.getSecondColours(0.5f), 1.25f + 5.0f * Util.rand.nextFloat(), 40);
           }
         }
       }
-      return null;
     }
   }
 

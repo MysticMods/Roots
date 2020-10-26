@@ -1,6 +1,7 @@
 package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.unused.SpellSummersThaw;
 import io.netty.buffer.ByteBuf;
@@ -43,10 +44,10 @@ public class MessageThawFX implements IMessage {
     }
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageThawFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageThawFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageThawFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageThawFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       for (BlockPos pos : message.affectedBlocks) {
         for (int k = 0; k < 2 + Util.rand.nextInt(2); k++) {
@@ -55,7 +56,6 @@ public class MessageThawFX implements IMessage {
           }
         }
       }
-      return null;
     }
   }
 }

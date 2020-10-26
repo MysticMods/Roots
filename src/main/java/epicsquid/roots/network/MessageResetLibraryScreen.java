@@ -20,14 +20,8 @@ public class MessageResetLibraryScreen implements IMessage {
   public void toBytes(ByteBuf buf) {
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageResetLibraryScreen, IMessage> {
-    @Override
-    public IMessage onMessage(MessageResetLibraryScreen message, MessageContext ctx) {
-      FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> handleMessage(message, ctx));
-      return null;
-    }
-
-    private void handleMessage(MessageResetLibraryScreen message, MessageContext ctx) {
+  public static class MessageHolder extends ServerMessageHandler<MessageResetLibraryScreen> {
+    protected void handleMessage(MessageResetLibraryScreen message, MessageContext ctx) {
       Container container = ctx.getServerHandler().player.openContainer;
       if (container instanceof ContainerLibrary) {
         ((ContainerLibrary) container).setSelectSpell();

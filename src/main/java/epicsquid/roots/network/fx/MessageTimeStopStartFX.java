@@ -1,6 +1,8 @@
 package epicsquid.roots.network.fx;
 
+import ca.weblite.objc.Client;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellTimeStop;
 import io.netty.buffer.ByteBuf;
@@ -45,10 +47,10 @@ public class MessageTimeStopStartFX implements IMessage {
     return (MathHelper.sin((float) Math.toRadians(ticks)) + 1.0f) / 2.0f;
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageTimeStopStartFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageTimeStopStartFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageTimeStopStartFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageTimeStopStartFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       for (float k = 0; k < 360; k += Util.rand.nextInt(4)) {
         if (Util.rand.nextBoolean()) {
@@ -65,7 +67,6 @@ public class MessageTimeStopStartFX implements IMessage {
           }
         }
       }
-      return null;
     }
   }
 

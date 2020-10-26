@@ -5,9 +5,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class MessageServerOpenQuiver implements IMessage {
@@ -22,16 +20,8 @@ public class MessageServerOpenQuiver implements IMessage {
   public void toBytes(ByteBuf buf) {
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageServerOpenQuiver, IMessage> {
-
-    @Override
-    public IMessage onMessage(MessageServerOpenQuiver message, MessageContext ctx) {
-      FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> handleMessage(message, ctx));
-
-      return null;
-    }
-
-    private void handleMessage(MessageServerOpenQuiver message, MessageContext ctx) {
+  public static class MessageHolder extends ServerMessageHandler<MessageServerOpenQuiver> {
+    protected void handleMessage(MessageServerOpenQuiver message, MessageContext ctx) {
       EntityPlayerMP player = ctx.getServerHandler().player;
       ItemStack quiver = QuiverInventoryUtil.getQuiver(player);
       if (!quiver.isEmpty()) {

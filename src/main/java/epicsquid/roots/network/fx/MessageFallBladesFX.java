@@ -1,6 +1,7 @@
 package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellNaturesScythe;
 import io.netty.buffer.ByteBuf;
@@ -48,10 +49,10 @@ public class MessageFallBladesFX implements IMessage {
     buf.writeBoolean(isFall);
   }
 
-  public static class Handler implements IMessageHandler<MessageFallBladesFX, IMessage> {
+  public static class Handler extends ClientMessageHandler<MessageFallBladesFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(MessageFallBladesFX message, MessageContext ctx) {
+    protected void handleMessage(MessageFallBladesFX message, MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
 
       for (int i = 0; i < 10; i++) {
@@ -89,8 +90,6 @@ public class MessageFallBladesFX implements IMessage {
           }
         }
       }
-
-      return null;
     }
   }
 }

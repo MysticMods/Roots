@@ -2,6 +2,7 @@ package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellAcidCloud;
 import io.netty.buffer.ByteBuf;
@@ -9,7 +10,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -86,10 +86,10 @@ public class MessageAcidCloudFX extends ModifierPacket implements IMessage {
     return list;
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageAcidCloudFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageAcidCloudFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageAcidCloudFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageAcidCloudFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       boolean radius = message.has(SpellAcidCloud.RADIUS);
       for (int q = 0; q < (radius ? 2 : 1); q++) {
@@ -107,7 +107,6 @@ public class MessageAcidCloudFX extends ModifierPacket implements IMessage {
           ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, message.getColor(), 10f + Util.rand.nextFloat() * 6f, 120, false);
         }
       }
-      return null;
     }
   }
 }

@@ -1,6 +1,7 @@
 package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -42,17 +43,16 @@ public class MessageTreeCompleteFX implements IMessage {
     }
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageTreeCompleteFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageTreeCompleteFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageTreeCompleteFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageTreeCompleteFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       for (BlockPos pos : message.affectedBlocks) {
         for (int k = 0; k < 2 + Util.rand.nextInt(2); k++) {
           ParticleUtil.spawnParticleGlow(world, (float) pos.getX(), (float) pos.getY(), (float) pos.getZ(), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 204f, 196f, 35f, 0.5f, 2.5f, 48);
         }
       }
-      return null;
     }
   }
 }

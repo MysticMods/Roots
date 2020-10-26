@@ -1,6 +1,7 @@
 package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellSanctuary;
 import io.netty.buffer.ByteBuf;
@@ -8,7 +9,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -45,23 +45,18 @@ public class MessageSanctuaryBurstFX implements IMessage {
     return (MathHelper.sin((float) Math.toRadians(ticks)) + 1.0f) / 2.0f;
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageSanctuaryBurstFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageSanctuaryBurstFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageSanctuaryBurstFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageSanctuaryBurstFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       for (int k = 0; k < 10; k++) {
         if (Util.rand.nextBoolean()) {
-          ParticleUtil.spawnParticlePetal(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f),
-              0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellSanctuary.instance.getRed1() * 255.0f,
-              SpellSanctuary.instance.getGreen1() * 255.0f, SpellSanctuary.instance.getBlue1() * 255.0f, 0.5f, 5f, 14);
+          ParticleUtil.spawnParticlePetal(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellSanctuary.instance.getFirstColours(0.5f), 5f, 14);
         } else {
-          ParticleUtil.spawnParticlePetal(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f),
-              0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellSanctuary.instance.getRed2() * 255.0f,
-              SpellSanctuary.instance.getGreen2() * 255.0f, SpellSanctuary.instance.getBlue2() * 255.0f, 0.5f, 5f, 14);
+          ParticleUtil.spawnParticlePetal(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellSanctuary.instance.getSecondColours(0.5f), 5f, 14);
         }
       }
-      return null;
     }
   }
 

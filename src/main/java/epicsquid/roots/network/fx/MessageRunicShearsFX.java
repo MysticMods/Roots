@@ -3,6 +3,7 @@ package epicsquid.roots.network.fx;
 import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.network.ClientMessageHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -43,10 +44,10 @@ public class MessageRunicShearsFX implements IMessage {
     return world.getEntityByID(this.entityId);
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageRunicShearsFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageRunicShearsFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageRunicShearsFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageRunicShearsFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       Entity entity = message.getEntity(world);
       for (int i = 0; i < 50; i++) {
@@ -61,7 +62,6 @@ public class MessageRunicShearsFX implements IMessage {
                 Util.rand.nextDouble() + 0.5,
                 Util.rand.nextDouble() * 2);
       }
-      return null;
     }
   }
 

@@ -1,6 +1,7 @@
 package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRadiance;
 import io.netty.buffer.ByteBuf;
@@ -57,10 +58,10 @@ public class MessageRadianceBeamFX implements IMessage {
     return (MathHelper.sin((float) Math.toRadians(ticks)) + 1.0f) / 2.0f;
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageRadianceBeamFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageRadianceBeamFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageRadianceBeamFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageRadianceBeamFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       EntityPlayer player = world.getPlayerEntityByUUID(message.id);
       if (player != null) {
@@ -150,8 +151,6 @@ public class MessageRadianceBeamFX implements IMessage {
           }
         }
       }
-      return null;
     }
   }
-
 }

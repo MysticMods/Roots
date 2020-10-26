@@ -1,5 +1,6 @@
 package epicsquid.roots.network.fx;
 
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellExtension;
 import io.netty.buffer.ByteBuf;
@@ -78,11 +79,10 @@ public class MessageSenseFX implements IMessage {
     }
   }
 
-  public static class Handler implements IMessageHandler<MessageSenseFX, IMessage> {
-
+  public static class Handler extends ClientMessageHandler<MessageSenseFX> {
     @Override
     @SideOnly(Side.CLIENT)
-    public IMessage onMessage(MessageSenseFX message, MessageContext ctx) {
+    protected void handleMessage(MessageSenseFX message, MessageContext ctx) {
       Minecraft minecraft = Minecraft.getMinecraft();
       World world = minecraft.world;
       for (SpellExtension.SenseType type : SpellExtension.SenseType.values()) {
@@ -99,7 +99,6 @@ public class MessageSenseFX implements IMessage {
           }
         }
       }
-      return null;
     }
   }
 }

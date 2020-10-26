@@ -1,5 +1,6 @@
 package epicsquid.roots.network.fx;
 
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellDesaturate;
 import io.netty.buffer.ByteBuf;
@@ -40,10 +41,10 @@ public class MessageDesaturationFX implements IMessage {
   }
 
   @SuppressWarnings("Duplicates")
-  public static class Handler implements IMessageHandler<MessageDesaturationFX, IMessage> {
+  public static class Handler extends ClientMessageHandler<MessageDesaturationFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(MessageDesaturationFX message, MessageContext ctx) {
+    protected void handleMessage(MessageDesaturationFX message, MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       Entity entity = world.getEntityByID(message.entityId);
       if (entity instanceof EntityPlayer) {
@@ -52,11 +53,9 @@ public class MessageDesaturationFX implements IMessage {
           float tx = (float) entity.posX + 0.5f * (float) Math.sin(Math.toRadians(i));
           float ty = (float) entity.posY + (player.height / 2) + 0.5f;
           float tz = (float) entity.posZ + 0.5f * (float) Math.cos(Math.toRadians(i));
-          ParticleUtil.spawnParticlePetal(world, tx, ty, tz, (float) -(Math.sin(Math.toRadians(i)) * 0.1f), -0.01f, (float) -(Math.cos(Math.toRadians(i)) * 0.1f), SpellDesaturate.instance.getRed1(), SpellDesaturate.instance.getGreen1(), SpellDesaturate.instance.getBlue1(), 1.0f, 3.0f, 90);
+          ParticleUtil.spawnParticlePetal(world, tx, ty, tz, (float) -(Math.sin(Math.toRadians(i)) * 0.1f), -0.01f, (float) -(Math.cos(Math.toRadians(i)) * 0.1f), SpellDesaturate.instance.getFirstColours(1.0f), 3.0f, 90);
         }
       }
-
-      return null;
     }
   }
 }

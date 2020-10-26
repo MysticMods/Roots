@@ -41,14 +41,8 @@ public class MessageSetImposerSlot implements IMessage {
     buf.writeInt(slot);
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageSetImposerSlot, IMessage> {
-    @Override
-    public IMessage onMessage(MessageSetImposerSlot message, MessageContext ctx) {
-      FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> handleMessage(message, ctx));
-      return null;
-    }
-
-    private void handleMessage(MessageSetImposerSlot message, MessageContext ctx) {
+  public static class MessageHolder extends ServerMessageHandler<MessageSetImposerSlot> {
+    protected void handleMessage(MessageSetImposerSlot message, MessageContext ctx) {
       WorldServer server = DimensionManager.getWorld(message.dimension);
       TileEntity te = server.getTileEntity(message.pos);
       if (te instanceof TileEntityImposer) {

@@ -2,6 +2,7 @@ package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.modifiers.instance.staff.ISnapshot;
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellWildfire;
 import io.netty.buffer.ByteBuf;
@@ -65,10 +66,10 @@ public class MessageWildfireFX extends ModifierPacket implements IMessage {
   private static final float[] purpleColor = new float[]{212 / 255.0f, 11 / 255.0f, 74 / 255.0f, 0.5f};
   private static final float[] greenColor = new float[]{148 / 255.0f, 212 / 255.0f, 11 / 255.0f, 0.5f};
 
-  public static class MessageHolder implements IMessageHandler<MessageWildfireFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageWildfireFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageWildfireFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageWildfireFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       float[] color = redColor;
       if (message.has(SpellWildfire.GREEN)) {
@@ -81,7 +82,6 @@ public class MessageWildfireFX extends ModifierPacket implements IMessage {
         float offZ = 0.5f * (float) Math.cos(Math.toRadians(message.rotationYaw));
         ParticleUtil.spawnParticleFiery(world, (float) message.posX + (float) message.motionX * 2.5f + offX, (float) message.posY + 1.62F + (float) message.motionY * 2.5f, (float) message.posZ + (float) message.motionZ * 2.5f + offZ, (float) message.motionX + 0.125f * (Util.rand.nextFloat() - 0.5f), (float) message.motionY + 0.125f * (Util.rand.nextFloat() - 0.5f), (float) message.motionZ + 0.125f * (Util.rand.nextFloat() - 0.5f), color, 7.5f, 24);
       }
-      return null;
     }
   }
 }

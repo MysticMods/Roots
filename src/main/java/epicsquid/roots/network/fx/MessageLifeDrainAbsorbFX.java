@@ -1,12 +1,14 @@
 package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellLifeDrain;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -53,30 +55,25 @@ public class MessageLifeDrainAbsorbFX implements IMessage {
     return (MathHelper.sin((float) Math.toRadians(ticks)) + 1.0f) / 2.0f;
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageLifeDrainAbsorbFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageLifeDrainAbsorbFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageLifeDrainAbsorbFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageLifeDrainAbsorbFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       EntityPlayer player = world.getPlayerEntityByUUID(message.id);
       if (player != null) {
+        Vec3d lookVec = player.getLookVec();
         for (int i = 0; i < 4; i++) {
-          float x = (float) player.posX + (float) player.getLookVec().x * (6.0f + Util.rand.nextFloat() * 9.0f) + 2.0f * (Util.rand.nextFloat() - 0.5f);
-          float y = (float) player.posY + 1.0f + (float) player.getLookVec().y * (6.0f + Util.rand.nextFloat() * 9.0f) + 2.0f * (Util.rand.nextFloat() - 0.5f);
-          float z = (float) player.posZ + (float) player.getLookVec().z * (6.0f + Util.rand.nextFloat() * 9.0f) + 2.0f * (Util.rand.nextFloat() - 0.5f);
+          float x = (float) player.posX + (float) lookVec.x * (6.0f + Util.rand.nextFloat() * 9.0f) + 2.0f * (Util.rand.nextFloat() - 0.5f);
+          float y = (float) player.posY + 1.0f + (float) lookVec.y * (6.0f + Util.rand.nextFloat() * 9.0f) + 2.0f * (Util.rand.nextFloat() - 0.5f);
+          float z = (float) player.posZ + (float) lookVec.z * (6.0f + Util.rand.nextFloat() * 9.0f) + 2.0f * (Util.rand.nextFloat() - 0.5f);
           if (Util.rand.nextBoolean()) {
-            ParticleUtil.spawnParticleLineGlow(world, x, y, z, (float) player.posX, (float) player.posY + 1.0f, (float) player.posZ,
-                SpellLifeDrain.instance.getRed1(), SpellLifeDrain.instance.getGreen1(), SpellLifeDrain.instance.getBlue1(), 1.0f,
-                6.0f + 6.0f * Util.rand.nextFloat(), 40);
+            ParticleUtil.spawnParticleLineGlow(world, x, y, z, (float) player.posX, (float) player.posY + 1.0f, (float) player.posZ, SpellLifeDrain.instance.getFirstColours(1.0f), 6.0f + 6.0f * Util.rand.nextFloat(), 40);
           } else {
-            ParticleUtil.spawnParticleLineGlow(world, x, y, z, (float) player.posX, (float) player.posY + 1.0f, (float) player.posZ,
-                SpellLifeDrain.instance.getRed2(), SpellLifeDrain.instance.getGreen2(), SpellLifeDrain.instance.getBlue2(), 1.0f,
-                6.0f + 6.0f * Util.rand.nextFloat(), 40);
+            ParticleUtil.spawnParticleLineGlow(world, x, y, z, (float) player.posX, (float) player.posY + 1.0f, (float) player.posZ, SpellLifeDrain.instance.getSecondColours(1.0f), 6.0f + 6.0f * Util.rand.nextFloat(), 40);
           }
         }
       }
-      return null;
     }
   }
-
 }

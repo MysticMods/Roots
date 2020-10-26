@@ -60,11 +60,10 @@ public class MessageLightDrifterSync implements IMessage {
     return (MathHelper.sin((float) Math.toRadians(ticks)) + 1.0f) / 2.0f;
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageLightDrifterSync, IMessage> {
-    @SuppressWarnings("ConstantConditions")
+  public static class MessageHolder extends ClientMessageHandler<MessageLightDrifterSync> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageLightDrifterSync message, final MessageContext ctx) {
+    protected void handleMessage(final MessageLightDrifterSync message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       EntityPlayer player = world.getPlayerEntityByUUID(message.id);
       if (player != null) {
@@ -88,8 +87,6 @@ public class MessageLightDrifterSync implements IMessage {
         player.capabilities.disableDamage = message.enable;
         player.capabilities.allowFlying = message.enable;
       }
-      return null;
     }
   }
-
 }

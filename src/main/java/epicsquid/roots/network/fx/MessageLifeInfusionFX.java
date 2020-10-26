@@ -1,6 +1,7 @@
 package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellGrowthInfusion;
 import io.netty.buffer.ByteBuf;
@@ -10,7 +11,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -47,28 +47,21 @@ public class MessageLifeInfusionFX implements IMessage {
     return (MathHelper.sin((float) Math.toRadians(ticks)) + 1.0f) / 2.0f;
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageLifeInfusionFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageLifeInfusionFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageLifeInfusionFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageLifeInfusionFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       BlockPos pos = new BlockPos(message.posX, message.posY, message.posZ);
       IBlockState state = world.getBlockState(pos);
       state.getBlock().randomDisplayTick(state, world, pos, Util.rand);
       for (int k = 0; k < 10; k++) {
         if (Util.rand.nextBoolean()) {
-          ParticleUtil.spawnParticleStar(world, (float) message.posX + Util.rand.nextFloat(), (float) message.posY + Util.rand.nextFloat(),
-              (float) message.posZ + Util.rand.nextFloat(), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f),
-              0.125f * (Util.rand.nextFloat() - 0.5f), SpellGrowthInfusion.instance.getRed1() * 255.0f, SpellGrowthInfusion.instance.getGreen1() * 255.0f,
-              SpellGrowthInfusion.instance.getBlue1() * 255.0f, 0.5f, 5f, 14);
+          ParticleUtil.spawnParticleStar(world, (float) message.posX + Util.rand.nextFloat(), (float) message.posY + Util.rand.nextFloat(), (float) message.posZ + Util.rand.nextFloat(), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellGrowthInfusion.instance.getFirstColours(0.5f), 5f, 14);
         } else {
-          ParticleUtil.spawnParticleStar(world, (float) message.posX + Util.rand.nextFloat(), (float) message.posY + Util.rand.nextFloat(),
-              (float) message.posZ + Util.rand.nextFloat(), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f),
-              0.125f * (Util.rand.nextFloat() - 0.5f), SpellGrowthInfusion.instance.getRed2() * 255.0f, SpellGrowthInfusion.instance.getGreen2() * 255.0f,
-              SpellGrowthInfusion.instance.getBlue2() * 255.0f, 0.5f, 5f, 14);
+          ParticleUtil.spawnParticleStar(world, (float) message.posX + Util.rand.nextFloat(), (float) message.posY + Util.rand.nextFloat(), (float) message.posZ + Util.rand.nextFloat(), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellGrowthInfusion.instance.getSecondColours(0.5f), 5f, 14);
         }
       }
-      return null;
     }
   }
 

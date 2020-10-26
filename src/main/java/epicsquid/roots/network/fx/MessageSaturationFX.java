@@ -1,5 +1,6 @@
 package epicsquid.roots.network.fx;
 
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellSaturate;
 import io.netty.buffer.ByteBuf;
@@ -40,11 +41,12 @@ public class MessageSaturationFX implements IMessage {
   }
 
   @SuppressWarnings("Duplicates")
-  public static class Handler implements IMessageHandler<MessageSaturationFX, IMessage> {
+  public static class Handler extends ClientMessageHandler<MessageSaturationFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(MessageSaturationFX message, MessageContext ctx) {
+    protected void handleMessage(MessageSaturationFX message, MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
+      // TODO: CHECK THIS?
       Entity entity = world.getEntityByID(message.entityId);
       if (entity instanceof EntityPlayer) {
         EntityPlayer player = (EntityPlayer) entity;
@@ -55,8 +57,6 @@ public class MessageSaturationFX implements IMessage {
           ParticleUtil.spawnParticlePetal(world, tx, ty, tz, (float) Math.sin(Math.toRadians(i)) * 0.1f, -0.01f, (float) Math.cos(Math.toRadians(i)) * 0.1f, SpellSaturate.instance.getRed1(), SpellSaturate.instance.getGreen1(), SpellSaturate.instance.getBlue1(), 1.0f, 3.0f, 90);
         }
       }
-
-      return null;
     }
   }
 }

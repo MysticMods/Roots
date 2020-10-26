@@ -2,6 +2,7 @@ package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.modifiers.instance.staff.ISnapshot;
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRoseThorns;
 import io.netty.buffer.ByteBuf;
@@ -50,10 +51,10 @@ public class MessageRoseThornsTickFX extends ModifierPacket implements IMessage 
     buf.writeBoolean(this.onGround);
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageRoseThornsTickFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageRoseThornsTickFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageRoseThornsTickFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageRoseThornsTickFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       float scale1 = message.has(SpellRoseThorns.BIGGER) ? 4.5f : 2.5f;
       float scale2 = message.has(SpellRoseThorns.BIGGER) ? 9f : 5f;
@@ -70,7 +71,6 @@ public class MessageRoseThornsTickFX extends ModifierPacket implements IMessage 
           ParticleUtil.spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellRoseThorns.instance.getSecondColours(0.5f), scale2, 12);
         }
       }
-      return null;
     }
   }
 }

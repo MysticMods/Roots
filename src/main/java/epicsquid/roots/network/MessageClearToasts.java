@@ -21,12 +21,11 @@ public class MessageClearToasts implements IMessage {
   public void toBytes(ByteBuf buf) {
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageClearToasts, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageClearToasts> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageClearToasts message, final MessageContext ctx) {
+    public void handleMessage(final MessageClearToasts message, final MessageContext ctx) {
       ClientTickHandler.addRunnable(() -> Minecraft.getMinecraft().getToastGui().clear(), 20);
-      return null;
     }
   }
 }

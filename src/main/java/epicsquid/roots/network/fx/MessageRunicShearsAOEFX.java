@@ -3,6 +3,7 @@ package epicsquid.roots.network.fx;
 import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.network.ClientMessageHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
@@ -43,17 +44,16 @@ public class MessageRunicShearsAOEFX implements IMessage {
     }
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageRunicShearsAOEFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageRunicShearsAOEFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageRunicShearsAOEFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageRunicShearsAOEFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       for (BlockPos pos : message.affectedBlocks) {
         for (int k = 0; k < 2 + Util.rand.nextInt(2); k++) {
           ClientProxy.particleRenderer.spawnParticle(world, ParticleGlitter.class, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), 120, 0.855 + Util.rand.nextDouble() * 0.05, 0.710, 0.943 - Util.rand.nextDouble() * 0.05, 1, Util.rand.nextDouble() + 0.5, Util.rand.nextDouble() * 2);
         }
       }
-      return null;
     }
   }
 }
