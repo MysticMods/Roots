@@ -3,6 +3,7 @@ package epicsquid.roots.network.fx;
 import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.network.ClientMessageHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
@@ -45,10 +46,10 @@ public class MessageItemGatheredFX implements IMessage {
     }
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageItemGatheredFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageItemGatheredFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageItemGatheredFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageItemGatheredFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       for (BlockPos pos : message.positions) {
         for (int i = 0; i < 15; i++) {
@@ -64,8 +65,6 @@ public class MessageItemGatheredFX implements IMessage {
                   Util.rand.nextDouble() * 2);
         }
       }
-      return null;
     }
   }
-
 }

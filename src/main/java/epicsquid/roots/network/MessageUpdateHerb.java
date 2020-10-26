@@ -2,14 +2,12 @@ package epicsquid.roots.network;
 
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.client.hud.RenderHerbHUD;
-import epicsquid.roots.event.ClientTickHandler;
 import epicsquid.roots.init.HerbRegistry;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -38,12 +36,11 @@ public class MessageUpdateHerb implements IMessage {
     buf.writeDouble(amount);
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageUpdateHerb, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageUpdateHerb> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageUpdateHerb message, final MessageContext ctx) {
-      ClientTickHandler.addRunnable(() -> RenderHerbHUD.INSTANCE.resolveSlots(Minecraft.getMinecraft().player, message.herb, message.amount));
-      return null;
+    protected void handleMessage(final MessageUpdateHerb message, final MessageContext ctx) {
+      RenderHerbHUD.INSTANCE.resolveSlots(Minecraft.getMinecraft().player, message.herb, message.amount);
     }
   }
 }

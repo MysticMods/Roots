@@ -3,6 +3,7 @@ package epicsquid.roots.network.fx;
 import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.network.ClientMessageHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
@@ -40,20 +41,14 @@ public class MessageOvergrowthEffectFX implements IMessage {
     buf.writeDouble(posZ);
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageOvergrowthEffectFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageOvergrowthEffectFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageOvergrowthEffectFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageOvergrowthEffectFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       for (int i = 0; i < 50; i++) {
-        ClientProxy.particleRenderer
-            .spawnParticle(world, ParticleGlitter.class, message.posX + 0.5, message.posY + 0.5, message.posZ + 0.5,
-                Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1),
-                Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), 120, 0.607, 0.698 + Util.rand.nextDouble() * 0.05, 0.306, 1,
-                Util.rand.nextDouble() + 0.5, Util.rand.nextDouble() * 2);
+        ClientProxy.particleRenderer.spawnParticle(world, ParticleGlitter.class, message.posX + 0.5, message.posY + 0.5, message.posZ + 0.5, Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), Util.rand.nextDouble() * 0.1 * (Util.rand.nextDouble() > 0.5 ? -1 : 1), 120, 0.607, 0.698 + Util.rand.nextDouble() * 0.05, 0.306, 1, Util.rand.nextDouble() + 0.5, Util.rand.nextDouble() * 2);
       }
-      return null;
     }
   }
-
 }

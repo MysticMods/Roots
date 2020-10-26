@@ -1,6 +1,7 @@
 package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellDisarm;
 import io.netty.buffer.ByteBuf;
@@ -41,17 +42,13 @@ public class MessageDisarmFX implements IMessage {
     buf.writeDouble(z);
   }
 
-  public static class Handler implements IMessageHandler<MessageDisarmFX, IMessage> {
+  public static class Handler extends ClientMessageHandler<MessageDisarmFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(MessageDisarmFX message, MessageContext ctx) {
+    protected void handleMessage(MessageDisarmFX message, MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
 
-      ParticleUtil.spawnParticleSmoke(world, (float) message.x + 0.5F, (float) message.y + 3, (float) message.z + 0.5F,
-          0, 0, 0, SpellDisarm.instance.getRed1(), 0, 0, 1.0f, 6.0f + 6.0f * Util.rand.nextFloat(), 60, false);
-
-      return null;
+      ParticleUtil.spawnParticleSmoke(world, (float) message.x + 0.5F, (float) message.y + 3, (float) message.z + 0.5F, 0, 0, 0, SpellDisarm.instance.getRed1(), 0, 0, 1.0f, 6.0f + 6.0f * Util.rand.nextFloat(), 60, false);
     }
-
   }
 }

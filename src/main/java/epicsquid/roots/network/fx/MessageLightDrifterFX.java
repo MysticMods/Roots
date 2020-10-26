@@ -1,6 +1,7 @@
 package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -46,17 +47,18 @@ public class MessageLightDrifterFX implements IMessage {
     return (MathHelper.sin((float) Math.toRadians(ticks)) + 1.0f) / 2.0f;
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageLightDrifterFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageLightDrifterFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageLightDrifterFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageLightDrifterFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       for (float i = 0; i < 360; i += Util.rand.nextInt(12)) {
-        float x = (float) message.posX + (0.5f * Util.rand.nextFloat()) * (float) Math.sin(Math.toRadians(i));
+        double yaw = Math.toRadians(i);
+        float x = (float) message.posX + (0.5f * Util.rand.nextFloat()) * (float) Math.sin(yaw);
         float y = (float) message.posY + (Util.rand.nextFloat() - 0.5f);
-        float z = (float) message.posZ + (0.5f * Util.rand.nextFloat()) * (float) Math.cos(Math.toRadians(i));
-        float vx = 0.0625f * (float) Math.cos(Math.toRadians(i));
-        float vz = 0.025f * (float) Math.sin(Math.toRadians(i));
+        float z = (float) message.posZ + (0.5f * Util.rand.nextFloat()) * (float) Math.cos(yaw);
+        float vx = 0.0625f * (float) Math.cos(yaw);
+        float vz = 0.025f * (float) Math.sin(yaw);
         if (Util.rand.nextBoolean()) {
           vx *= -1;
           vz *= -1;
@@ -67,8 +69,6 @@ public class MessageLightDrifterFX implements IMessage {
           ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, set2, 8f + Util.rand.nextFloat() * 6f, 80, true);
         }
       }
-      return null;
     }
   }
-
 }

@@ -1,5 +1,6 @@
 package epicsquid.roots.network.fx;
 
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellGeas;
 import io.netty.buffer.ByteBuf;
@@ -47,23 +48,22 @@ public class MessageGeasFX implements IMessage {
     return (MathHelper.sin((float) Math.toRadians(ticks)) + 1.0f) / 2.0f;
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageGeasFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageGeasFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageGeasFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageGeasFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       for (float i = 0; i < 360; i += random.nextInt(40)) {
-        float x = (float) message.posX + (0.25f * random.nextFloat()) * (float) Math.sin(Math.toRadians(i));
+        double yaw = Math.toRadians(i);
+        float x = (float) message.posX + (0.25f * random.nextFloat()) * (float) Math.sin(yaw);
         float y = (float) message.posY;
-        float z = (float) message.posZ + (0.25f * random.nextFloat()) * (float) Math.cos(Math.toRadians(i));
+        float z = (float) message.posZ + (0.25f * random.nextFloat()) * (float) Math.cos(yaw);
         if (random.nextBoolean()) {
-          ParticleUtil.spawnParticleGlow(world, x, y, z, 0, 0.125f * (random.nextFloat() - 0.5f), 0, SpellGeas.instance.getRed1(), SpellGeas.instance.getGreen1(), SpellGeas.instance.getBlue1(), 0.75f, 2f + random.nextFloat() * 2f, 20);
+          ParticleUtil.spawnParticleGlow(world, x, y, z, 0, 0.125f * (random.nextFloat() - 0.5f), 0, SpellGeas.instance.getFirstColours(0.75f), 2f + random.nextFloat() * 2f, 20);
         } else {
-          ParticleUtil.spawnParticleGlow(world, x, y, z, 0, 0.125f * (random.nextFloat() - 0.5f), 0, SpellGeas.instance.getRed2(), SpellGeas.instance.getGreen2(), SpellGeas.instance.getBlue2(), 0.75f, 2f + random.nextFloat() * 2f, 20);
+          ParticleUtil.spawnParticleGlow(world, x, y, z, 0, 0.125f * (random.nextFloat() - 0.5f), 0, SpellGeas.instance.getSecondColours(0.75f), 2f + random.nextFloat() * 2f, 20);
         }
       }
-      return null;
     }
   }
-
 }

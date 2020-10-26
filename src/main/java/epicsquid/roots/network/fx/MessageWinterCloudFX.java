@@ -1,6 +1,7 @@
 package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellStormCloud;
 import io.netty.buffer.ByteBuf;
@@ -42,17 +43,16 @@ public class MessageWinterCloudFX implements IMessage {
     byteBuf.writeFloat(z);
   }
 
-  public static class Handler implements IMessageHandler<MessageWinterCloudFX, IMessage> {
+  public static class Handler extends ClientMessageHandler<MessageWinterCloudFX> {
     @Override
     @SideOnly(Side.CLIENT)
-    public IMessage onMessage(MessageWinterCloudFX message, MessageContext context) {
+    protected void handleMessage(MessageWinterCloudFX message, MessageContext context) {
       World world = Minecraft.getMinecraft().world;
       if (Util.rand.nextBoolean()) {
         ParticleUtil.spawnParticleSmoke(world, message.x + 0.5F, message.y + 0.9F, message.z + 0.5F, 0, 0.01F, 0, SpellStormCloud.instance.getRed1(), SpellStormCloud.instance.getBlue1(), SpellStormCloud.instance.getGreen1(), 0.30F, 15F, 40, true);
       } else {
         ParticleUtil.spawnParticleSmoke(world, message.x + 0.5F, message.y + 0.9F, message.z + 0.5F, 0, 0.01F, 0, SpellStormCloud.instance.getRed2(), SpellStormCloud.instance.getBlue2(), SpellStormCloud.instance.getGreen2(), 0.30F, 15F, 40, true);
       }
-      return null;
     }
   }
 }

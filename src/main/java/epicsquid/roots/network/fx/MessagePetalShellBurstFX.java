@@ -3,6 +3,7 @@ package epicsquid.roots.network.fx;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellPetalShell;
 import io.netty.buffer.ByteBuf;
@@ -73,10 +74,10 @@ public class MessagePetalShellBurstFX extends ModifierPacket implements IMessage
     }
   }
 
-  public static class MessageHolder implements IMessageHandler<MessagePetalShellBurstFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessagePetalShellBurstFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessagePetalShellBurstFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessagePetalShellBurstFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       for (int k = 0; k < 10; k++) {
         if (Util.rand.nextBoolean()) {
@@ -94,7 +95,6 @@ public class MessagePetalShellBurstFX extends ModifierPacket implements IMessage
           }
         }
       }
-      return null;
     }
   }
 }

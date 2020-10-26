@@ -23,16 +23,8 @@ public class MessageServerOpenPouch implements IMessage {
   public void toBytes(ByteBuf buf) {
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageServerOpenPouch, IMessage> {
-
-    @Override
-    public IMessage onMessage(MessageServerOpenPouch message, MessageContext ctx) {
-      FMLCommonHandler.instance().getMinecraftServerInstance().addScheduledTask(() -> handleMessage(message, ctx));
-
-      return null;
-    }
-
-    private void handleMessage(MessageServerOpenPouch message, MessageContext ctx) {
+  public static class MessageHolder extends ServerMessageHandler<MessageServerOpenPouch> {
+    protected void handleMessage(MessageServerOpenPouch message, MessageContext ctx) {
       EntityPlayerMP player = ctx.getServerHandler().player;
       ItemStack pouch = ServerHerbUtil.getFirstPouch(player);
       if (!pouch.isEmpty()) {

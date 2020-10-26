@@ -1,6 +1,7 @@
 package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.state.IBlockState;
@@ -48,10 +49,10 @@ public class MessageRampantLifeInfusionFX implements IMessage {
     return (MathHelper.sin((float) Math.toRadians(ticks)) + 1.0f) / 2.0f;
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageRampantLifeInfusionFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageRampantLifeInfusionFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageRampantLifeInfusionFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageRampantLifeInfusionFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       BlockPos pos = new BlockPos(message.posX, message.posY, message.posZ);
       IBlockState state = world.getBlockState(pos);
@@ -63,7 +64,6 @@ public class MessageRampantLifeInfusionFX implements IMessage {
           ParticleUtil.spawnParticlePetal(world, (float) message.posX + Util.rand.nextFloat(), (float) message.posY + Util.rand.nextFloat(), (float) message.posZ + Util.rand.nextFloat(), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), colors2, 5f, 14);
         }
       }
-      return null;
     }
   }
 }

@@ -1,6 +1,7 @@
 package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellShatter;
 import io.netty.buffer.ByteBuf;
@@ -55,10 +56,10 @@ public class MessageShatterBurstFX implements IMessage {
     return (MathHelper.sin((float) Math.toRadians(ticks)) + 1.0f) / 2.0f;
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageShatterBurstFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageShatterBurstFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageShatterBurstFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageShatterBurstFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       float scale = 40f;
       for (float i = 0; i < scale; i++) {
@@ -78,7 +79,6 @@ public class MessageShatterBurstFX implements IMessage {
           ParticleUtil.spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.25f * (Util.rand.nextFloat() - 0.5f), 0.25f * (Util.rand.nextFloat() - 0.5f), 0.25f * (Util.rand.nextFloat() - 0.5f), SpellShatter.instance.getSecondColours(0.25f), 5f, 12);
         }
       }
-      return null;
     }
   }
 

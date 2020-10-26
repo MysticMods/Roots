@@ -1,6 +1,7 @@
 package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.VecUtil;
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -39,10 +40,10 @@ public class MessageSenseHomeFX implements IMessage {
 
   private static final float[] color = new float[]{182 / 255.0f, 109 / 255.0f, 191 / 255.0f, 0.5f};
 
-  public static class MessageHolder implements IMessageHandler<MessageSenseHomeFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageSenseHomeFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageSenseHomeFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageSenseHomeFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       EntityPlayer player = Minecraft.getMinecraft().player;
       Vec3d playerPos = player.getPositionVector().add(0, 1, 0);
@@ -50,7 +51,6 @@ public class MessageSenseHomeFX implements IMessage {
       for (Vec3d vec : VecUtil.pointsBetween(playerPos, line, 15)) {
         ParticleUtil.spawnParticlePetal(world, (float) vec.x, (float) vec.y, (float) vec.z, 0, 0, 0, color, 15, 19 * 20);
       }
-      return null;
     }
   }
 

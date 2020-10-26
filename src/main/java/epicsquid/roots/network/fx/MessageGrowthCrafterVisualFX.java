@@ -1,5 +1,6 @@
 package epicsquid.roots.network.fx;
 
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.tileentity.TileEntityFeyCrafter;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -38,20 +39,20 @@ public class MessageGrowthCrafterVisualFX implements IMessage {
     buf.writeInt(this.dimension);
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageGrowthCrafterVisualFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageGrowthCrafterVisualFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageGrowthCrafterVisualFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageGrowthCrafterVisualFX message, final MessageContext ctx) {
       Minecraft mc = Minecraft.getMinecraft();
       World world = mc.world;
-      if (world.provider.getDimension() != message.dimension) return null;
-
-      TileEntity te = world.getTileEntity(message.pos);
-      if (te instanceof TileEntityFeyCrafter) {
-        ((TileEntityFeyCrafter) te).doVisual();
+      if (world.provider.getDimension() == message.dimension) {
+        // TODO: This should be based on block pos tracking so we should be in range regardless
+        // But it might be worhtwhile to check the distance of the player to this tile
+        TileEntity te = world.getTileEntity(message.pos);
+        if (te instanceof TileEntityFeyCrafter) {
+          ((TileEntityFeyCrafter) te).doVisual();
+        }
       }
-
-      return null;
     }
   }
 }

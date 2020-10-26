@@ -2,6 +2,7 @@ package epicsquid.roots.network.fx;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellStormCloud;
 import io.netty.buffer.ByteBuf;
@@ -57,10 +58,10 @@ public class MessageStormCloudStormFX extends ModifierPacket implements IMessage
     return (MathHelper.sin((float) Math.toRadians(ticks)) + 1.0f) / 2.0f;
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageStormCloudStormFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageStormCloudStormFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageStormCloudStormFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageStormCloudStormFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       for (float i = 0; i < 360; i += Util.rand.nextInt(50)) {
         double r = Math.toRadians(i);
@@ -82,7 +83,6 @@ public class MessageStormCloudStormFX extends ModifierPacket implements IMessage
         }
         ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0, vz, color, 3f + Util.rand.nextFloat() * 4f, 80, false);
       }
-      return null;
     }
   }
 

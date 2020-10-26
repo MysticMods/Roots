@@ -1,5 +1,6 @@
 package epicsquid.roots.network.fx;
 
+import epicsquid.roots.network.ClientMessageHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellLifeDrain;
 import io.netty.buffer.ByteBuf;
@@ -48,13 +49,12 @@ public class MessageTargetedLifeDrainFX implements IMessage {
     buf.writeDouble(this.stop.z);
   }
 
-  public static class MessageHolder implements IMessageHandler<MessageTargetedLifeDrainFX, IMessage> {
+  public static class MessageHolder extends ClientMessageHandler<MessageTargetedLifeDrainFX> {
     @SideOnly(Side.CLIENT)
     @Override
-    public IMessage onMessage(final MessageTargetedLifeDrainFX message, final MessageContext ctx) {
+    protected void handleMessage(final MessageTargetedLifeDrainFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       ParticleUtil.renderBeam(world, message.start, message.stop, ParticleUtil::spawnParticleStarNoGravity, SpellLifeDrain.instance);
-      return null;
     }
   }
 }
