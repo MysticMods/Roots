@@ -7,6 +7,7 @@ import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 
 import javax.annotation.Nonnull;
@@ -31,10 +32,8 @@ public class ProviderPyre implements IWailaDataProvider {
       } else {
         return tooltip;
       }
-      int remaining = (duration - (duration - te.getBurnTime()) / 20);
-      int seconds = remaining % 60;
-      int minutes = remaining / 60;
-      tooltip.add(I18n.format("roots.hud.pyre.progress", I18n.format("roots.hud.pyre.minutes_seconds", minutes, seconds)));
+      double totalSeconds = (duration - (duration - te.getBurnTime()) / 20.0);
+      tooltip.add(I18n.format("roots.hud.pyre.progress", totalSeconds));
     }
     return tooltip;
   }

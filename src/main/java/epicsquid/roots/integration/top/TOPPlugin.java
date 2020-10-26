@@ -8,8 +8,10 @@ import epicsquid.roots.tileentity.TileEntityPyre;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
@@ -44,10 +46,8 @@ public class TOPPlugin implements Function<ITheOneProbe, Void>, IProbeInfoProvid
         } else {
           return;
         }
-        int remaining = (duration - (duration - te.getBurnTime()) / 20);
-        int seconds = remaining % 60;
-        int minutes = remaining / 60;
-        probeInfo.text("{*roots.hud.top.pyre.progress*}" + minutes + " {*roots.hud.top.pyre.progress_info*} " + seconds + " {*roots.hud.top.pyre.progress_info2*}");
+        double totalSeconds = (duration - (duration - te.getBurnTime()) / 20.0);
+        probeInfo.text("{*roots.hud.top.pyre.progress*}" + totalSeconds + " {*roots.hud.top.pyre.progress_info*} ");
       }
     }
   }
