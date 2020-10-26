@@ -9,6 +9,7 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.network.fx.MessageImbueCompleteFX;
 import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.spell.FakeSpell;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.info.storage.DustSpellStorage;
 import epicsquid.roots.world.data.SpellLibraryData;
@@ -193,21 +194,28 @@ public class TileEntityImbuer extends TileBase implements ITickable {
       angle += 2.0f;
       ItemStack spellDust = inventory.getStackInSlot(0);
       DustSpellStorage capability = DustSpellStorage.fromStack(spellDust);
-      if ((capability.getSelectedInfo() != null)) {
-        SpellBase spell = capability.getSelectedInfo().getSpell();
-        if (world.isRemote) {
-          if (Util.rand.nextInt(2) == 0) {
-            ParticleUtil.spawnParticleLineGlow(world, getPos().getX() + 0.5f, getPos().getY() + 0.125f, getPos().getZ() + 0.5f, getPos().getX() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), getPos().getY() + 1.0f, getPos().getZ() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), spell.getRed1(), spell.getGreen1(), spell.getBlue1(), 0.25f, 4.0f, 40);
-          } else {
-            ParticleUtil.spawnParticleLineGlow(world, getPos().getX() + 0.5f, getPos().getY() + 0.125f, getPos().getZ() + 0.5f, getPos().getX() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), getPos().getY() + 1.0f, getPos().getZ() + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), spell.getRed2(), spell.getGreen2(), spell.getBlue2(), 0.25f, 4.0f, 40);
-          }
+      SpellBase spell;
+      if (capability != null && capability.getSelectedInfo() != null) {
+        spell = capability.getSelectedInfo().getSpell();
+      } else {
+        spell = FakeSpell.INSTANCE;
+      }
+      if (world.isRemote) {
+        BlockPos pos = getPos();
+        float x = pos.getX();
+        float y = pos.getY();
+        float z = pos.getZ();
+        if (Util.rand.nextInt(2) == 0) {
+          ParticleUtil.spawnParticleLineGlow(world, x + 0.5f, y + 0.125f, z + 0.5f, x + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), y + 1.0f, z + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), spell.getFirstColours(0.25f), 4.0f, 40);
+        } else {
+          ParticleUtil.spawnParticleLineGlow(world, x + 0.5f, y + 0.125f, z + 0.5f, x + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), y + 1.0f, z + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), spell.getSecondColours(0.25f), 4.0f, 40);
         }
       }
       if (progress > 200) {
         progress = 0;
         if (!world.isRemote) {
           ItemStack inSlot = inventory.getStackInSlot(1);
-          if (inSlot.getItem() == ModItems.staff || inSlot.getItem() == ModItems.gramary) {
+          if ((inSlot.getItem() == ModItems.staff || inSlot.getItem() == ModItems.gramary) && spell != FakeSpell.INSTANCE) {
             boolean ejectItem = true;
             if (inserter == null) {
               Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
@@ -217,7 +225,6 @@ public class TileEntityImbuer extends TileBase implements ITickable {
               } else if (inSlot.getItem() == ModItems.gramary) {
                 ejectItem = false;
               }
-              SpellBase spell = capability.getSelectedInfo().getSpell();
               SpellLibraryData library = SpellLibraryRegistry.getData(inserter);
               library.addSpell(spell);
               world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inSlot));
