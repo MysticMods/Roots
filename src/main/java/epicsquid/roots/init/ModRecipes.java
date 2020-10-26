@@ -1263,7 +1263,7 @@ public class ModRecipes {
             new ItemStack(ModItems.terra_moss),
             new OreIngredient("wildroot"),
             new ItemStack(Blocks.GRAVEL),
-            new OreIngredient("dyeWhite")));
+            new OreIngredient("dye")));
 
     addFeyCraftingRecipe("living_pickaxe",
         new FeyCraftingRecipe(new ItemStack(ModItems.living_pickaxe), 1).addIngredients(
