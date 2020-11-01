@@ -8,6 +8,7 @@ import epicsquid.roots.ritual.RitualFrostLands;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.block.BlockFarmland;
 import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.BlockSnow;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.monster.EntitySnowman;
 import net.minecraft.init.Blocks;
@@ -45,12 +46,17 @@ public class EntityRitualFrostLands extends EntityRitualBase implements IColdRit
       int breakout = 0;
       while (!positions.isEmpty() && breakout < 50) {
         BlockPos choice = positions.get(rand.nextInt(positions.size()));
-        if (world.getBlockState(choice).getBlock() == Blocks.SNOW_LAYER) {
+        IBlockState choiceState = world.getBlockState(choice);
+        if (choiceState.getBlock() != Blocks.SNOW_LAYER) {
           if (Blocks.SNOW_LAYER.canPlaceBlockAt(world, choice.up())) {
             world.setBlockState(choice.up(), Blocks.SNOW_LAYER.getDefaultState());
             affectedPositions.add(choice.up());
             break;
           }
+        } else if (choiceState.getValue(BlockSnow.LAYERS) < 8 && Util.rand.nextInt(5) == 0) {
+          world.setBlockState(choice, choiceState.withProperty(BlockSnow.LAYERS, Math.min(choiceState.getValue(BlockSnow.LAYERS) + 1, 8)));
+          affectedPositions.add(choice);
+          break;
         }
 
         breakout++;
