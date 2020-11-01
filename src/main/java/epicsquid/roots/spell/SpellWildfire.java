@@ -52,6 +52,10 @@ public class SpellWildfire extends SpellBase {
   public static Modifier WILDFIRE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "pyroclastic_cloud"), ModifierCores.STALICRIPE, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 0.45)));
   public static Modifier ICICLES = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "fire_and_ice"), ModifierCores.DEWGONIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 0.375)));
 
+  static {
+    GREEN.addConflicts(PURPLE);
+  }
+
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_wild_fire");
   public static SpellWildfire instance = new SpellWildfire(spellName);
 
