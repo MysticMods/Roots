@@ -73,6 +73,7 @@ public class SpellDesaturate extends SpellBase {
   public static Modifier PURIFY = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "excess_purification"), ModifierCores.DEWGONIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 0.7)));
 
   static {
+    THOUGHTFUL.addConflicts(PEACEFUL, GROWTH, SHIELD, DAMAGE, LEVITATE, RESISTANCE, PURIFY);
     PEACEFUL.addConflicts(GROWTH, SHIELD, DAMAGE, LEVITATE, RESISTANCE, PURIFY);
     GROWTH.addConflicts(SHIELD, DAMAGE, LEVITATE, RESISTANCE, PURIFY);
     SHIELD.addConflicts(LEVITATE, RESISTANCE, PURIFY);
