@@ -1,10 +1,10 @@
 package epicsquid.roots.entity.spell;
 
-import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.mechanics.Growth;
-import epicsquid.roots.network.fx.MessageWildfireFX;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
+import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellWildfire;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.block.state.IBlockState;
@@ -12,6 +12,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -24,17 +27,52 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
+  protected static final DataParameter<Integer> color = EntityDataManager.createKey(EntityFireJet.class, DataSerializers.VARINT);
+
   public EntityFireJet(World worldIn) {
     super(worldIn, SpellWildfire.instance, SpellWildfire.instance.lifetime);
+    getDataManager().register(color, 0);
   }
+
+  @Override
+  public void setModifiers(StaffModifierInstanceList modifiers) {
+    super.setModifiers(modifiers);
+    int color = 0; // RED
+    if (modifiers.has(SpellWildfire.PURPLE)) {
+      color = 1; // PURPLE
+    } else if (modifiers.has(SpellWildfire.GREEN)) {
+      color = 2; // GREEN
+    }
+    getDataManager().set(EntityFireJet.color, color);
+    getDataManager().setDirty(EntityFireJet.color);
+  }
+
+  private static final float[] redColor = new float[]{255.0f / 255.0f, 96.0f / 255.0f, 32.0f / 255.0f, 0.5f};
+  private static final float[] purpleColor = new float[]{212 / 255.0f, 11 / 255.0f, 74 / 255.0f, 0.5f};
+  private static final float[] greenColor = new float[]{148 / 255.0f, 212 / 255.0f, 11 / 255.0f, 0.5f};
 
   @Override
   public void onUpdate() {
     super.onUpdate();
 
-    if (!world.isRemote) {
-      MessageWildfireFX packet = new MessageWildfireFX(posX, posY, posZ, motionX, motionY, motionZ, rotationYaw, modifiers);
-      PacketHandler.INSTANCE.sendToAllTracking(packet, this);
+    if (world.isRemote) {
+      float[] color;
+      switch (getDataManager().get(EntityFireJet.color)) {
+        default:
+        case 0:
+          color = redColor;
+          break;
+        case 1:
+          color = purpleColor;
+          break;
+        case 2:
+          color = greenColor;
+          break;
+      }
+      float offX = 0.5f * (float) Math.sin(Math.toRadians(rotationYaw));
+      float offZ = 0.5f * (float) Math.cos(Math.toRadians(rotationYaw));
+      ParticleUtil.spawnParticleFiery(world, (float) posX + (float) motionX * 2.5f + offX, (float) posY + 1.62F + (float) motionY * 2.5f, (float) posZ + (float) motionZ * 2.5f + offZ, (float) motionX + 0.125f * (rand.nextFloat() - 0.5f), (float) motionY + 0.125f * (rand.nextFloat() - 0.5f), (float) motionZ + 0.125f * (rand.nextFloat() - 0.5f), color, 7.5f, 24);
+    } else {
       if (this.playerId != null) {
         EntityPlayer player = world.getPlayerEntityByUUID(this.playerId);
         if (player != null) {
@@ -103,9 +141,6 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
                   }
                 }
               }
-            }
-            if (hit) {
-              setDead();
             }
           }
         }
