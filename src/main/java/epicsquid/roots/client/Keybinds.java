@@ -2,6 +2,7 @@ package epicsquid.roots.client;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
+import epicsquid.roots.network.MessageServerCycleSlot;
 import epicsquid.roots.network.MessageServerOpenLibrary;
 import epicsquid.roots.network.MessageServerOpenPouch;
 import epicsquid.roots.network.MessageServerOpenQuiver;
@@ -23,18 +24,18 @@ public class Keybinds {
   public static KeyBinding QUIVER_KEYBIND = null;
 
   public static KeyBinding OPEN_SPELL_LIBRARY = null;
-  public static KeyBinding CYCLE_PROFILE = null;
+  public static KeyBinding CYCLE_SLOT = null;
 
   public static void init() {
     POUCH_KEYBIND = new KeyBinding(ROOTS_BASE + "pouch", 0, ROOTS_GROUP);
     QUIVER_KEYBIND = new KeyBinding(ROOTS_BASE + "quiver", 0, ROOTS_GROUP);
     OPEN_SPELL_LIBRARY = new KeyBinding(ROOTS_BASE + "spell_library", 37, ROOTS_GROUP);
-    CYCLE_PROFILE = new KeyBinding(ROOTS_BASE + "cycle", 0, ROOTS_GROUP);
+    CYCLE_SLOT = new KeyBinding(ROOTS_BASE + "cycle", 0, ROOTS_GROUP);
 
     ClientRegistry.registerKeyBinding(POUCH_KEYBIND);
     ClientRegistry.registerKeyBinding(QUIVER_KEYBIND);
     ClientRegistry.registerKeyBinding(OPEN_SPELL_LIBRARY);
-    ClientRegistry.registerKeyBinding(CYCLE_PROFILE);
+    ClientRegistry.registerKeyBinding(CYCLE_SLOT);
   }
 
   @SubscribeEvent
@@ -50,8 +51,9 @@ public class Keybinds {
     } else if (OPEN_SPELL_LIBRARY.isKeyDown() && mc.inGameHasFocus) {
       MessageServerOpenLibrary packet = new MessageServerOpenLibrary();
       PacketHandler.INSTANCE.sendToServer(packet);
-    } else if (CYCLE_PROFILE.isKeyDown() && mc.inGameHasFocus) {
-
+    } else if (CYCLE_SLOT.isKeyDown() && mc.inGameHasFocus) {
+      MessageServerCycleSlot packet = new MessageServerCycleSlot();
+      PacketHandler.INSTANCE.sendToServer(packet);
     }
   }
 
