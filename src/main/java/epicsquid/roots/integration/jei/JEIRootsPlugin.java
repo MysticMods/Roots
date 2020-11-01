@@ -10,6 +10,8 @@ import epicsquid.roots.integration.jei.chrysopoeia.ChrysopoeiaCategory;
 import epicsquid.roots.integration.jei.chrysopoeia.ChrysopoeiaWrapper;
 import epicsquid.roots.integration.jei.fey.FeyCategory;
 import epicsquid.roots.integration.jei.fey.FeyWrapper;
+import epicsquid.roots.integration.jei.loot.LootCategory;
+import epicsquid.roots.integration.jei.loot.LootWrapper;
 import epicsquid.roots.integration.jei.mortar.MortarCategory;
 import epicsquid.roots.integration.jei.mortar.MortarWrapper;
 import epicsquid.roots.integration.jei.ritual.RitualCategory;
@@ -70,6 +72,7 @@ public class JEIRootsPlugin implements IModPlugin {
   public static final String CHRYSOPOEIA = Roots.MODID + ".chrysopoeia";
   public static final String TRANSMUTATION = Roots.MODID + ".transmutation";
   public static final String RUNED_WOOD = Roots.MODID + ".runed_wood";
+  public static final String LOOT = Roots.MODID + ".loot";
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registry) {
@@ -87,7 +90,8 @@ public class JEIRootsPlugin implements IModPlugin {
         new SummonCreaturesCategory(helper),
         new MortarCategory(helper),
         new TransmutationCategory(helper),
-        new RunedWoodCategory(helper)
+        new RunedWoodCategory(helper),
+        new LootCategory(helper)
     );
   }
 
@@ -142,9 +146,11 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(ChrysopoeiaRecipe.class, ChrysopoeiaWrapper::new, CHRYSOPOEIA);
     registry.handleRecipes(TransmutationRecipe.class, TransmutationWrapper::new, TRANSMUTATION);
     registry.handleRecipes(RitualUtil.RunedWoodType.class, RunedWoodWrapper::new, RUNED_WOOD);
+    registry.handleRecipes(LootWrapper.LootRecipe.class, LootWrapper::new, LOOT);
 
     Collection<SpellBase> spells = SpellRegistry.spellRegistry.values();
 
+    registry.addRecipes(Arrays.asList(new LootWrapper.LootRecipe(ModItems.spirit_bag, SpiritDrops.getPouch()), new LootWrapper.LootRecipe(ModItems.reliquary, SpiritDrops.getReliquary())), LOOT);
     registry.addRecipes(ModRecipes.getRunicShearRecipes().values(), RUNIC_SHEARS);
     registry.addRecipes(ModRecipes.getRunicShearEntityRecipes().values(), RUNIC_SHEARS_ENTITY);
     registry.addRecipes(ModRecipes.getPyreCraftingRecipes().values(), RITUAL_CRAFTING);
@@ -186,6 +192,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModItems.staff), SPELL_COSTS);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.imbuer), SPELL_MODIFIERS);
     registry.addRecipeCatalyst(new ItemStack(ModItems.spell_chrysopoeia), CHRYSOPOEIA);
+    registry.addRecipeCatalyst(new ItemStack(ModItems.reliquary), LOOT);
 
     // TODO:
     ItemStack spellDust = new ItemStack(ModItems.spell_dust);

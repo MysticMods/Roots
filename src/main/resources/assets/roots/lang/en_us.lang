@@ -406,6 +406,7 @@ container.roots.runic_carving.name=Runic Carving
 container.roots.ritual_crafting.name=Pyre Crafting Ritual
 container.roots.mortar_and_pestle.name=Mortar and Pestle
 container.roots.ritual.name=Pyre Ritual
+container.roots.loot.name=Spirit Drops
 container.roots.fey_crafting.name=Fey Crafting
 container.roots.spell_costs.name=Spell Costs
 container.roots.spell_modifiers.name=Spell Modifiers
