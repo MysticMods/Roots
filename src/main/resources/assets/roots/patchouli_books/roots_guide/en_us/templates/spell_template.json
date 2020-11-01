@@ -59,6 +59,13 @@
       "y": 118
     },
     {
+      "type": "item",
+      "item": "#cost3",
+      "framed": false,
+      "x": 51,
+      "y": 142
+    },
+    {
       "type": "text",
       "text": "#cost1_text",
       "x": 72,
@@ -69,6 +76,12 @@
       "text": "#cost2_text",
       "x": 72,
       "y": 121
+    },
+    {
+      "type": "text",
+      "text": "#cost3_text",
+      "x": 72,
+      "y": 145
     },
     {
       "type": "image",
