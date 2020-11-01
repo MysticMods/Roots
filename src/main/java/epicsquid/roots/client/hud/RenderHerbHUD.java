@@ -175,7 +175,7 @@ public class RenderHerbHUD {
       GlStateManager.disableLighting();
       GlStateManager.disableDepth();
       GlStateManager.disableBlend();
-      mc.fontRenderer.drawStringWithShadow(s, 18.0f, 3.5f, 16777215);
+      mc.fontRenderer.drawStringWithShadow(s, 19.0f, 3.5f, 16777215);
       GlStateManager.enableLighting();
       GlStateManager.enableDepth();
       GlStateManager.enableBlend();
