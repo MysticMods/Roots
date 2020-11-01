@@ -485,6 +485,7 @@ roots.commands.dump_recipes.usage=Usage: ct roots_recipes [mode] Modes: all | an
 
 # Stuff
 roots.message.salmon_eaten=You suddenly feel more knowledgeable about the world!
+roots.message.no_staff=You aren't wielding a staff!
 
 # Time
 roots.message.sense_time=It is currently %s on day %s; the moon %s.

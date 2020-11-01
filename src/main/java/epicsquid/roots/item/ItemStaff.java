@@ -49,21 +49,25 @@ public class ItemStaff extends ItemBase {
     return slotChanged || (oldCapability != null && newCapability != null && oldCapability.getSelectedSlot() != newCapability.getSelectedSlot());
   }
 
+  public ItemStack nextSlot(World world, EntityPlayer player, ItemStack stack, StaffSpellStorage capability) {
+    capability.nextSlot();
+    if (world.isRemote) {
+      StaffSpellInfo info = capability.getSelectedInfo();
+      if (info != null) {
+        SpellBase spell = info.getSpell();
+        player.sendStatusMessage(new TextComponentTranslation("roots.info.staff.slot_and_spell", capability.getSelectedSlot(), spell == null ? "none" : new TextComponentTranslation("roots.spell." + spell.getName() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))).setStyle(new Style().setColor(TextFormatting.GOLD)), true);
+      }
+    }
+    return stack;
+  }
+
   @Nonnull
   @Override
   public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
     ItemStack stack = player.getHeldItem(hand);
     StaffSpellStorage capability = StaffSpellStorage.fromStack(stack);
     if (player.isSneaking() && capability != null) {
-      capability.nextSlot();
-      if (world.isRemote) {
-        StaffSpellInfo info = capability.getSelectedInfo();
-        if (info != null) {
-          SpellBase spell = info.getSpell();
-          player.sendStatusMessage(new TextComponentTranslation("roots.info.staff.slot_and_spell", capability.getSelectedSlot(), spell == null ? "none" : new TextComponentTranslation("roots.spell." + spell.getName() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))).setStyle(new Style().setColor(TextFormatting.GOLD)), true);
-        }
-      }
-      return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
+      return new ActionResult<>(EnumActionResult.SUCCESS, nextSlot(world, player, stack, capability));
     } else {
       if (capability != null && !capability.onCooldown()) {
         StaffSpellInfo info = capability.getSelectedInfo();
@@ -80,11 +84,7 @@ public class ItemStaff extends ItemBase {
                   }
                 }
               }
-/*              if (player.world.isRemote) {
-                return new ActionResult<>(EnumActionResult.PASS, player.getHeldItem(hand));
-              } else {*/
-                return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
-/*              }*/
+              return new ActionResult<>(EnumActionResult.SUCCESS, stack);
             }
           } else if (spell != null && spell.getCastType() == SpellBase.EnumCastType.CONTINUOUS) {
             player.setActiveHand(hand);
