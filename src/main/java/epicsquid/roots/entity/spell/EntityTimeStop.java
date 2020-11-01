@@ -55,6 +55,9 @@ public class EntityTimeStop extends EntitySpellModifiable<SpellTimeStop> {
           if (modifiers.has(SpellTimeStop.WEAKNESS)) {
             e.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, modifiers.ampInt(instance.weakness_duration) + 40, instance.weakness_amplifier));
           }
+          if (modifiers.has(SpellTimeStop.FIRE)) {
+            e.setFire(SpellTimeStop.instance.fire_duration);
+          }
         }
       }
     }
