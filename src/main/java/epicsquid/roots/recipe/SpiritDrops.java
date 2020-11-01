@@ -43,6 +43,14 @@ public class SpiritDrops {
     pouch.add(item);
   }
 
+  public static List<SpiritItem> getReliquary () {
+    return reliquary;
+  }
+
+  public static List<SpiritItem> getPouch () {
+    return pouch;
+  }
+
   public static ItemStack getRandomReliquary() {
     if (reliquary.isEmpty()) {
       return ItemStack.EMPTY;
