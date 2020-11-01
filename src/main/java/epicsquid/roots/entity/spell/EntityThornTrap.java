@@ -77,7 +77,8 @@ public class EntityThornTrap extends EntitySpellModifiable<SpellRoseThorns> {
                 player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, modifiers.ampInt(SpellRoseThorns.instance.strength_duration), SpellRoseThorns.instance.slowness_amplifier, false, false));
               }
               if (modifiers.has(SpellRoseThorns.FIRE)) {
-                entity.setFire(modifiers.ampInt(SpellRoseThorns.instance.fire_duration));
+                int fire_dur = modifiers.ampInt(SpellRoseThorns.instance.fire_duration);
+                entity.setFire(fire_dur);
               }
               if (modifiers.has(SpellRoseThorns.WEAKNESS)) {
                 entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, modifiers.ampInt(SpellRoseThorns.instance.weakness_duration), SpellRoseThorns.instance.weakness_amplifier));
