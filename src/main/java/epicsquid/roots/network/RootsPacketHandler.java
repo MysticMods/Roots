@@ -77,5 +77,6 @@ public class RootsPacketHandler {
     PacketHandler.registerMessage(MessageStormCloudStormFX.MessageHolder.class, MessageStormCloudStormFX.class, Side.CLIENT);
     PacketHandler.registerMessage(MessageRoseThornsTickFX.MessageHolder.class, MessageRoseThornsTickFX.class, Side.CLIENT);
     PacketHandler.registerMessage(MessageRoseThornsBurstFX.MessageHolder.class, MessageRoseThornsBurstFX.class, Side.CLIENT);
+    PacketHandler.registerMessage(MessagePetalShellRingFX.MessageHolder.class, MessagePetalShellRingFX.class, Side.CLIENT);
   }
 }
