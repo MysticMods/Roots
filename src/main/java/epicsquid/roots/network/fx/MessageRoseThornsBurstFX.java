@@ -14,18 +14,16 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class MessageRoseThornsBurstFX extends ModifierPacket implements IMessage {
+public class MessageRoseThornsBurstFX implements IMessage {
   private double posX;
   private double posY;
   private double posZ;
 
 
   public MessageRoseThornsBurstFX() {
-    super();
   }
 
-  public MessageRoseThornsBurstFX(double posX, double posY, double posZ, ISnapshot snapshot) {
-    super(snapshot);
+  public MessageRoseThornsBurstFX(double posX, double posY, double posZ) {
     this.posX = posX;
     this.posY = posY;
     this.posZ = posZ;
@@ -33,7 +31,6 @@ public class MessageRoseThornsBurstFX extends ModifierPacket implements IMessage
 
   @Override
   public void fromBytes(ByteBuf buf) {
-    super.fromBytes(buf);
     this.posX = buf.readDouble();
     this.posY = buf.readDouble();
     this.posZ = buf.readDouble();
@@ -41,7 +38,6 @@ public class MessageRoseThornsBurstFX extends ModifierPacket implements IMessage
 
   @Override
   public void toBytes(ByteBuf buf) {
-    super.toBytes(buf);
     buf.writeDouble(this.posX);
     buf.writeDouble(this.posY);
     buf.writeDouble(this.posZ);

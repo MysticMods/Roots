@@ -1,9 +1,12 @@
 package epicsquid.roots.entity.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModDamage;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageRoseThornsBurstFX;
 import epicsquid.roots.network.fx.MessageRoseThornsTickFX;
+import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRoseThorns;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,6 +14,9 @@ import net.minecraft.entity.MoverType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -21,10 +27,26 @@ import java.util.UUID;
 
 @SuppressWarnings("AccessStaticViaInstance")
 public class EntityThornTrap extends EntitySpellModifiable<SpellRoseThorns> {
+  protected static final DataParameter<Float> scale1 = EntityDataManager.createKey(EntityThornTrap.class, DataSerializers.FLOAT);
+  protected static final DataParameter<Float> scale2 = EntityDataManager.createKey(EntityThornTrap.class, DataSerializers.FLOAT);
+
   public EntityThornTrap(World world) {
     super(world, SpellRoseThorns.instance, SpellRoseThorns.instance.duration);
     this.setNoGravity(false);
     this.noClip = false;
+    getDataManager().register(scale1, 2.5f);
+    getDataManager().register(scale2, 5f);
+  }
+
+  @Override
+  public void setModifiers(StaffModifierInstanceList modifiers) {
+    super.setModifiers(modifiers);
+    if (modifiers.has(SpellRoseThorns.BIGGER)) {
+      getDataManager().set(scale1, 4.5f);
+      getDataManager().set(scale2, 9f);
+      getDataManager().setDirty(scale1);
+      getDataManager().setDirty(scale2);
+    }
   }
 
   public void setPlayer(UUID id) {
@@ -49,15 +71,29 @@ public class EntityThornTrap extends EntitySpellModifiable<SpellRoseThorns> {
       this.motionX = 0;
       this.motionZ = 0;
     }
-    // TODO: Make this server-side
 
-    if (!world.isRemote) {
+    if (world.isRemote) {
+      float scale1 = getDataManager().get(EntityThornTrap.scale1);
+      float scale2 = getDataManager().get(EntityThornTrap.scale2);
+      if (this.onGround) {
+        if (Util.rand.nextBoolean()) {
+          ParticleUtil.spawnParticleThorn(world, (float) this.posX, (float) this.posY, (float) this.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellRoseThorns.instance.getFirstColours(0.5f), scale1, 12, Util.rand.nextBoolean());
+        } else {
+          ParticleUtil.spawnParticleThorn(world, (float) this.posX, (float) this.posY, (float) this.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellRoseThorns.instance.getSecondColours(0.5f), scale1, 12, Util.rand.nextBoolean());
+        }
+      } else {
+        if (Util.rand.nextBoolean()) {
+          ParticleUtil.spawnParticleGlow(world, (float) this.posX, (float) this.posY, (float) this.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellRoseThorns.instance.getFirstColours(0.5f), scale2, 12);
+        } else {
+          ParticleUtil.spawnParticleGlow(world, (float) this.posX, (float) this.posY, (float) this.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellRoseThorns.instance.getSecondColours(0.5f), scale2, 12);
+        }
+      }
+    } else {
       if (modifiers == null) {
         setDead();
         return;
       }
 
-      PacketHandler.sendToAllTracking(new MessageRoseThornsTickFX(this.posX, this.posY, this.posZ, this.onGround, modifiers), this);
       if (playerId != null) {
         double offset = modifiers.has(SpellRoseThorns.BIGGER) ? 3 : 1.5;
         EntityPlayer player = world.getPlayerEntityByUUID(playerId);
@@ -97,7 +133,7 @@ public class EntityThornTrap extends EntitySpellModifiable<SpellRoseThorns> {
                 entity.knockBack(this, SpellRoseThorns.instance.knockback, this.posX - entity.posX, this.posZ - entity.posZ);
               }
             }
-            PacketHandler.sendToAllTracking(new MessageRoseThornsBurstFX(this.posX, this.posY, this.posZ, modifiers), this);
+            PacketHandler.sendToAllTracking(new MessageRoseThornsBurstFX(this.posX, this.posY, this.posZ), this);
           }
         }
       }
