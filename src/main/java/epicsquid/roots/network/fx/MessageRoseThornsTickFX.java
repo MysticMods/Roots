@@ -58,19 +58,7 @@ public class MessageRoseThornsTickFX extends ModifierPacket implements IMessage 
       World world = Minecraft.getMinecraft().world;
       float scale1 = message.has(SpellRoseThorns.BIGGER) ? 4.5f : 2.5f;
       float scale2 = message.has(SpellRoseThorns.BIGGER) ? 9f : 5f;
-      if (message.onGround) {
-        if (Util.rand.nextBoolean()) {
-          ParticleUtil.spawnParticleThorn(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellRoseThorns.instance.getFirstColours(0.5f), scale1, 12, Util.rand.nextBoolean());
-        } else {
-          ParticleUtil.spawnParticleThorn(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellRoseThorns.instance.getSecondColours(0.5f), scale1, 12, Util.rand.nextBoolean());
-        }
-      } else {
-        if (Util.rand.nextBoolean()) {
-          ParticleUtil.spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellRoseThorns.instance.getFirstColours(0.5f), scale2, 12);
-        } else {
-          ParticleUtil.spawnParticleGlow(world, (float) message.posX, (float) message.posY, (float) message.posZ, 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), 0.125f * (Util.rand.nextFloat() - 0.5f), SpellRoseThorns.instance.getSecondColours(0.5f), scale2, 12);
-        }
-      }
+
     }
   }
 }
