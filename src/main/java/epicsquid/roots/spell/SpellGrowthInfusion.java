@@ -76,6 +76,7 @@ public class SpellGrowthInfusion extends SpellBase {
     FLOWERS.addConflicts(RADIUS1, RADIUS2, RADIUS3); // Targets specific flowers
     ORE.addConflicts(RADIUS1, RADIUS2, RADIUS3); // Can't AOE
     EMBIGGEN.addConflicts(RADIUS1, RADIUS2, RADIUS3); // Again can't aoe
+    ANIMAL_GROWTH.addConflicts(RADIUS1, RADIUS2, RADIUS3);
   }
 
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_growth_infusion");
