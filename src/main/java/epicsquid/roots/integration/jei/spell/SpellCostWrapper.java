@@ -37,7 +37,7 @@ public class SpellCostWrapper implements IRecipeWrapper {
 
     for (double cost : recipe.getCosts().values()) {
       String c = String.format("x %.4f", cost);
-      minecraft.fontRenderer.drawString(c, 82, row == 0 ? 20 : 40, Color.BLACK.getRGB());
+      minecraft.fontRenderer.drawString(c, 82, (row + 1) * 20, Color.BLACK.getRGB());
       row++;
     }
   }
