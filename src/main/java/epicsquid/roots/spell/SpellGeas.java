@@ -145,14 +145,14 @@ public class SpellGeas extends SpellBase {
         count = 3;
       }
       for (int i = 0; i < 20; i++) {
-        if (affected == count) {
-          break;
-        }
         double x = player.posX + player.getLookVec().x * 3.0 * (float) i;
         double y = player.posY + player.getEyeHeight() + player.getLookVec().y * 3.0 * (float) i;
         double z = player.posZ + player.getLookVec().z * 3.0 * (float) i;
         List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 4.0, y - 4.0, z - 4.0, x + 5.0, y + 5.0, z + 5.0));
         for (EntityLivingBase e : entities) {
+          if (affected == count) {
+            break;
+          }
           if (e == player) {
             continue;
           }
