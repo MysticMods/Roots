@@ -111,8 +111,7 @@ public class EntityBoost extends Entity {
             target[1].motionZ = origZ;
           }
           EntityPlayer player = (EntityPlayer) target[0];
-          ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(player.getEntityData(), SpellSkySoarer.instance);
-          if (mods.has(SpellSkySoarer.SLOW_FALL)) {
+          if (this.modifiers.has(SpellSkySoarer.SLOW_FALL)) {
             player.addPotionEffect(new PotionEffect(ModPotions.slow_fall, SpellSkySoarer.instance.slow_duration));
           }
           markSafe(player);
@@ -167,11 +166,17 @@ public class EntityBoost extends Entity {
   @Override
   protected void readEntityFromNBT(NBTTagCompound compound) {
     this.playerId = net.minecraft.nbt.NBTUtil.getUUIDFromTag(compound.getCompoundTag("id"));
+    if (compound.hasKey("modifiers")) {
+      this.modifiers = new ModifierSnapshot(compound.getIntArray("modifiers"));
+    }
   }
 
   @Override
   protected void writeEntityToNBT(NBTTagCompound compound) {
     compound.setTag("id", net.minecraft.nbt.NBTUtil.createUUIDTag(playerId));
+    if (this.modifiers != null) {
+      this.modifiers.toCompound(compound);
+    }
   }
 
   private static Map<UUID, PlayerTracker> playerMap = new HashMap<>();

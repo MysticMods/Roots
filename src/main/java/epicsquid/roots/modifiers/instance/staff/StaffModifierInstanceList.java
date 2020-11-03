@@ -52,17 +52,28 @@ public class StaffModifierInstanceList extends BaseModifierInstanceList<StaffMod
     return result;
   }
 
-  public void toBytes(ByteBuf buf) {
+  private List<IModifierCore> getCores () {
     List<IModifierCore> cores = new ArrayList<>();
     for (StaffModifierInstance modifier : this) {
       if (modifier.isEnabled() && modifier.isApplied() && !modifier.isConflicting(this)) {
         cores.add(modifier.getCore());
       }
     }
+    return cores;
+  }
+
+  @Override
+  public void toBytes(ByteBuf buf) {
+    List<IModifierCore> cores = getCores();
     buf.writeInt(cores.size());
     for (IModifierCore core : cores) {
       buf.writeShort(core.getKey());
     }
+  }
+
+  @Override
+  public void toCompound (NBTTagCompound tag) {
+    tag.setIntArray("modifiers", getCores().stream().mapToInt(IModifierCore::getKey).toArray());
   }
 
   public int[] snapshot() {

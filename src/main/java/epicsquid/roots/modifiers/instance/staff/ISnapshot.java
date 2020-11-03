@@ -5,6 +5,7 @@ import epicsquid.roots.modifiers.BaseModifiers;
 import epicsquid.roots.modifiers.IModifier;
 import epicsquid.roots.spell.ISpellMulitipliers;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.nbt.NBTTagCompound;
 
 public interface ISnapshot extends ISpellMulitipliers {
   int[] toArray();
@@ -36,5 +37,8 @@ public interface ISnapshot extends ISpellMulitipliers {
   }
 
   default void toBytes(ByteBuf buf) {
+  }
+
+  default void toCompound (NBTTagCompound tag) {
   }
 }
