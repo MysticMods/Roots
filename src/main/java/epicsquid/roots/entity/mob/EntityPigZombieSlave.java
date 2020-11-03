@@ -1,6 +1,7 @@
 package epicsquid.roots.entity.mob;
 
 import epicsquid.roots.util.EntityUtil;
+import epicsquid.roots.util.SlaveUtil;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntityPigZombie;
@@ -23,6 +24,6 @@ public class EntityPigZombieSlave extends EntityPigZombie {
 
   @Override
   protected void applyEntityAI() {
-    this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityMob.class, 10, false, false, EntityUtil::isHostile));
+    this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityMob.class, 10, false, false, o -> EntityUtil.isHostile(o) && !SlaveUtil.isSlave(o)));
   }
 }
