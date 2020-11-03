@@ -128,8 +128,10 @@ public class PotionGeas extends Potion {
           target.setFire(mods.ampInt(SpellGeas.instance.fire_duration));
           target.attackEntityFrom(DamageSource.IN_FIRE, mods.ampFloat(SpellGeas.instance.fire_damage));
         } else if (mods.has(SpellGeas.PHYSICAL)) {
+          // TODO: VISUAL EFFECT
           target.attackEntityFrom(ModDamage.PHYSICAL_DAMAGE, mods.ampFloat(SpellGeas.instance.physical_damage));
         } else if (mods.has(SpellGeas.WATER)) {
+          // TODO: ROCK FALL e VERYONE DIE
           target.attackEntityFrom(ModDamage.waterDamageFrom(null), mods.ampFloat(SpellGeas.instance.water_damage));
         }
       }
