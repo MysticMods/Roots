@@ -56,9 +56,9 @@ public class SpellCostCategory implements IRecipeCategory<SpellCostWrapper> {
     }
     if (costs.size() == 3) {
       group.init(2, true, 61, 55);
-      group.set(1, costs.get(2));
+      group.set(2, costs.get(2));
     }
-    group.init(2, false, 0, 35);
-    group.set(2, recipe.getResult());
+    group.init(3, false, 0, 35);
+    group.set(3, recipe.getResult());
   }
 }
