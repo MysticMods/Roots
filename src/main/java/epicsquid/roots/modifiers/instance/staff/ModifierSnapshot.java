@@ -4,6 +4,7 @@ import epicsquid.roots.modifiers.IModifier;
 import epicsquid.roots.spell.ISpellMulitipliers;
 import io.netty.buffer.ByteBuf;
 import it.unimi.dsi.fastutil.ints.IntArraySet;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class ModifierSnapshot implements ISnapshot, ISpellMulitipliers {
   private static IntArraySet EMPTY = new IntArraySet();
@@ -38,5 +39,10 @@ public class ModifierSnapshot implements ISnapshot, ISpellMulitipliers {
     for (int i : modifiers) {
       buf.writeInt(i);
     }
+  }
+
+  @Override
+  public void toCompound (NBTTagCompound tag) {
+    tag.setIntArray("modifiers", modifiers.toIntArray());
   }
 }

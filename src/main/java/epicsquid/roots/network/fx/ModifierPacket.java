@@ -39,11 +39,7 @@ public class ModifierPacket implements IMessage {
       if (this.modifiers != null) {
         this.modifiers.toBytes(buf);
       } else {
-        if (this.modifierInstances == null) {
-          buf.writeInt(0);
-        } else {
-          this.modifierInstances.toBytes(buf);
-        }
+        this.modifierInstances.toBytes(buf);
       }
     }
   }
