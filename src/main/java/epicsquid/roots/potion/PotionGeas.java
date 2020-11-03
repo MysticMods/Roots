@@ -34,7 +34,7 @@ public class PotionGeas extends Potion {
     return true;
   }
 
-  @Override
+/*  @Override
   public void applyAttributesModifiersToEntity(EntityLivingBase target, AbstractAttributeMap attributeMapIn, int amplifier) {
     super.applyAttributesModifiersToEntity(target, attributeMapIn, amplifier);
     if (target instanceof EntityCreature && EntityUtil.isFriendly(target)) {
@@ -73,7 +73,7 @@ public class PotionGeas extends Potion {
         target.getEntityData().setBoolean("hadDamage", hadDamage);
       }
     }
-  }
+  }*/
 
   @Override
   public void removeAttributesModifiersFromEntity(EntityLivingBase target, AbstractAttributeMap attributeMapIn, int amplifier) {
@@ -84,7 +84,7 @@ public class PotionGeas extends Potion {
       target.setDropItemsWhenDead(false);
       target.setDead();
       slave.setPositionAndUpdate(slave.posX, slave.posY, slave.posZ);
-    } else if (target instanceof EntityCreature && EntityUtil.isFriendly(target)) {
+    } else {/*if (target instanceof EntityCreature && EntityUtil.isFriendly(target)) {
       EntityCreature entity = (EntityCreature) target;
       ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(target.getEntityData(), SpellGeas.instance);
       if (mods.has(SpellGeas.PEACEFUL)) {
@@ -119,10 +119,9 @@ public class PotionGeas extends Potion {
         target.getEntityData().removeTag("hadAttack");
         target.getEntityData().removeTag("hadTarget");
         target.getEntityData().removeTag("hadDamage");
-      }
-    } else {
+      }*/
       ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(target.getEntityData(), SpellGeas.instance);
-      if (!mods.has(SpellGeas.PEACEFUL) || !EntityUtil.isFriendly(target)) {
+      if (!EntityUtil.isFriendly(target) || !mods.has(SpellGeas.PEACEFUL)) {
         if (mods.has(SpellGeas.WEAKNESS)) {
           target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, mods.ampInt(SpellGeas.instance.weakness_duration), SpellGeas.instance.weakness_amplifier));
         } else if (mods.has(SpellGeas.FIRE)) {
