@@ -68,7 +68,7 @@ public class BlockColoredFeyLight extends BlockFeyLight {
 
   // PINK, YELLOW, PURPLE, GREEN, RED, BROWN, BLUE
 
-  public static final PropertyInteger COLOR = PropertyInteger.create("color", 0, 5);
+  public static final PropertyInteger COLOR = PropertyInteger.create("color", 0, 6);
 
   public BlockColoredFeyLight(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
     super(mat, type, hardness, name);
