@@ -1,0 +1,11 @@
+{
+  "name": "Wildroot Rune",
+  "icon": "roots:wildwood_rune",
+  "category": "crafting_decoration",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

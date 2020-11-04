@@ -1,0 +1,11 @@
+{
+  "name": "Catalyst Plates",
+  "icon": "roots:catalyst_plate",
+  "category": "rituals",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

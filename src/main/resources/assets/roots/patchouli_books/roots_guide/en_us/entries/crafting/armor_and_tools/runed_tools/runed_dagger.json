@@ -1,0 +1,11 @@
+{
+  "name": "Runed Dagger",
+  "icon": "roots:runed_dagger",
+  "category": "crafting_armor_tools_runed",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

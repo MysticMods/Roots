@@ -1,0 +1,11 @@
+{
+  "name": "Wildwood Quiver",
+  "icon": "roots:wildwood_quiver",
+  "category": "crafting_armor_tools_wildwood",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

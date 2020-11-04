@@ -1,0 +1,11 @@
+{
+  "name": "Component Pouch",
+  "icon": "roots:component_pouch",
+  "category": "crafting",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

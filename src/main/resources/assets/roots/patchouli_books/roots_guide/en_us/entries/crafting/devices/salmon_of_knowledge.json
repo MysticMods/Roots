@@ -1,0 +1,11 @@
+{
+  "name": "Salmon of Knowledge",
+  "icon": "roots:salmon_of_knowledge",
+  "category": "crafting_devices",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

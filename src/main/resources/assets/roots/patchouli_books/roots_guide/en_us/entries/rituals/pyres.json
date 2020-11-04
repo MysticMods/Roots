@@ -1,0 +1,11 @@
+{
+  "name": "Pyres",
+  "icon": "roots:pyre",
+  "category": "rituals",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Gramary",
+  "icon": "roots:gramary",
+  "category": "crafting",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

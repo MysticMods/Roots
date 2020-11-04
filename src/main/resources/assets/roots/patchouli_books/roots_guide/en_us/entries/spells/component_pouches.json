@@ -1,0 +1,11 @@
+{
+  "name": "Component Pouches",
+  "icon": "roots:herb_pouch",
+  "category": "spells",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

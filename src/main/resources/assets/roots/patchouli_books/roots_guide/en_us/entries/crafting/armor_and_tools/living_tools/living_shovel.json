@@ -1,0 +1,11 @@
+{
+  "name": "Living Shovel",
+  "icon": "roots:living_shovel",
+  "category": "crafting_armor_tools_living",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

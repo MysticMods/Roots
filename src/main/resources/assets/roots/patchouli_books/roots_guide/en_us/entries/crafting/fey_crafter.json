@@ -1,0 +1,11 @@
+{
+  "name": "Fey Crafter",
+  "icon": "roots:fey_crafter",
+  "category": "crafting",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Renewable Resources",
+  "icon": "minecraft:farmland",
+  "category": "herbs",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

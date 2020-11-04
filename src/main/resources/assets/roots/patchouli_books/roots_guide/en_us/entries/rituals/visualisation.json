@@ -1,0 +1,11 @@
+{
+  "name": "Visualisation",
+  "icon": "roots:glass_eye",
+  "category": "rituals",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Runed Great-Axe",
+  "icon": "roots:runed_axe",
+  "category": "crafting_armor_tools_runed",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

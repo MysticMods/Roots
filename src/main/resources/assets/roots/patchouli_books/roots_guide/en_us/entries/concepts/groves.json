@@ -1,0 +1,11 @@
+{
+  "name": "Groves",
+  "icon": "roots:grove_stone",
+  "category": "concepts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

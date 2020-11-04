@@ -1,0 +1,11 @@
+{
+  "name": "The Fey",
+  "icon": "roots:pereskia",
+  "category": "concepts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

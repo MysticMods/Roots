@@ -1,0 +1,11 @@
+{
+  "name": "Living Hoe",
+  "icon": "roots:terrastone_hoe",
+  "category": "crafting_armor_tools_terrastone",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

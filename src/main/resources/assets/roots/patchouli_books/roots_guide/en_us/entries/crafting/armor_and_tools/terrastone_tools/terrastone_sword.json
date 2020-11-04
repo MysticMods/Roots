@@ -1,0 +1,11 @@
+{
+  "name": "Living Sword",
+  "icon": "roots:terrastone_sword",
+  "category": "crafting_armor_tools_terrastone",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

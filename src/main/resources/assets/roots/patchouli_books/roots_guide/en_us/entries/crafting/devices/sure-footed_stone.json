@@ -1,0 +1,11 @@
+{
+  "name": "Sure-Footed Stone",
+  "icon": "roots:runestone_trample",
+  "category": "crafting_devices",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

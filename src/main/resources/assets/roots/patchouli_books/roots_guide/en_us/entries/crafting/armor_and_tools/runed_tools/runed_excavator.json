@@ -1,0 +1,11 @@
+{
+  "name": "Runed Excavator",
+  "icon": "roots:runed_shovel",
+  "category": "crafting_armor_tools_runed",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

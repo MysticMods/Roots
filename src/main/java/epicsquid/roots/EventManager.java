@@ -17,9 +17,11 @@ import epicsquid.roots.network.fx.MessageGeasFX;
 import epicsquid.roots.network.fx.MessageGeasRingFX;
 import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
 import epicsquid.roots.spell.SpellAquaBubble;
+import epicsquid.roots.spell.SpellGeas;
 import epicsquid.roots.spell.SpellPetalShell;
 import epicsquid.roots.spell.SpellStormCloud;
 import epicsquid.roots.util.Constants;
+import epicsquid.roots.util.EntityUtil;
 import epicsquid.roots.util.SlaveUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -203,9 +205,21 @@ public class EventManager {
   @SubscribeEvent
   public static void onEntityTarget(LivingSetAttackTargetEvent event) {
     EntityLivingBase entity = event.getEntityLiving();
-    if (entity.getActivePotionEffect(ModPotions.geas) != null && entity instanceof EntityLiving && !SlaveUtil.isSlave(entity)) {
-      if (((EntityLiving) entity).getAttackTarget() != null) {
-        ((EntityLiving) entity).setAttackTarget(null);
+    if (entity.getActivePotionEffect(ModPotions.geas) != null) {
+      if (SlaveUtil.isSlave(entity)) {
+        return;
+      }
+      if (entity instanceof EntityLiving && !SlaveUtil.isSlave(entity)) {
+        EntityLiving living = (EntityLiving) entity;
+        if (living.getAttackTarget() != null) {
+          if (EntityUtil.isFriendly(entity)) {
+            ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(living.getEntityData(), SpellGeas.instance);
+            if (mods.has(SpellGeas.PEACEFUL)) {
+              return;
+            }
+          }
+          living.attackTarget = null;
+        }
       }
     }
   }

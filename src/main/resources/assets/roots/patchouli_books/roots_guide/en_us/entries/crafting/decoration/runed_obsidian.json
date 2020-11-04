@@ -1,0 +1,11 @@
+{
+  "name": "Runed Obsidian",
+  "icon": "roots:chiseled_runed_obsidian",
+  "category": "crafting_decoration",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

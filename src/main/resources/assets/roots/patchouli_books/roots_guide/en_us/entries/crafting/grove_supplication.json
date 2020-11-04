@@ -1,0 +1,11 @@
+{
+  "name": "Grove Supplication",
+  "icon": "roots:ritual_grove_supplication",
+  "category": "crafting",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

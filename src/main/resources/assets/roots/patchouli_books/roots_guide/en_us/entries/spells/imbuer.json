@@ -1,0 +1,11 @@
+{
+  "name": "Imbuer",
+  "icon": "roots:imbuer",
+  "category": "spells",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

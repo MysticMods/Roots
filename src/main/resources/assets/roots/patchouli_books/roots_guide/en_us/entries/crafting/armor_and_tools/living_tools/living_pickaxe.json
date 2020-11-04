@@ -1,0 +1,11 @@
+{
+  "name": "Living Pickaxe",
+  "icon": "roots:living_pickaxe",
+  "category": "crafting_armor_tools_living",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

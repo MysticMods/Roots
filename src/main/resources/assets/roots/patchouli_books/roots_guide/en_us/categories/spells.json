@@ -1,6 +1,6 @@
 {
   "name": "Spells",
-  "sortnum" : 2,
-  "description": "Spells are created by a selection of ingredients, combined in a $(l:apparatus/mortar)mortar with a pestle$(). Once infused into a $(l:apparatus/staff)staff$(), they can be cast using $(cat:herbs)herbs$() as reagents.$(br2)$(warning) Herbs must be stored in a $(l:basics/pouch)pouch$() in order to cast the spell.",
-  "icon": "roots:staff"
+  "sortnum" : 3,
+  "description": "This section covers spells, from the creation of the spell dust, the imbuing of the gramary, and the selection of spell in the staff using the Spell Library, as well as the component pouches and reagents required to cast them.",
+  "icon": "roots:gramary"
 }

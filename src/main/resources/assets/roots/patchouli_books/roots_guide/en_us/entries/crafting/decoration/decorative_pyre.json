@@ -1,0 +1,11 @@
+{
+  "name": "Decorative Pyre",
+  "icon": "roots:decorative_pyre",
+  "category": "crafting_decoration",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

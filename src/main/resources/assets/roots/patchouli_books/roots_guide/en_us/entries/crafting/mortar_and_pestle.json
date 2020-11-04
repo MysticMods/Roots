@@ -1,0 +1,11 @@
+{
+  "name": "Mortar & Pestle",
+  "icon": "roots:pestle",
+  "category": "crafting",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

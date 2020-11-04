@@ -1,0 +1,11 @@
+{
+  "name": "Wild Magic",
+  "icon": "roots:fey_fire",
+  "category": "concepts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

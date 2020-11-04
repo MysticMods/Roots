@@ -1,0 +1,11 @@
+{
+  "name": "Unending Bowl",
+  "icon": "roots:unending_bowl",
+  "category": "crafting_devices",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}
