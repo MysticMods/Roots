@@ -1,0 +1,11 @@
+{
+  "name": "Apothecary Pouch",
+  "icon": "roots:apothecary_pouch",
+  "category": "crafting",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

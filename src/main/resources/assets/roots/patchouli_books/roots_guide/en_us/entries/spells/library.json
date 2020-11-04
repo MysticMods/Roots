@@ -1,0 +1,11 @@
+{
+  "name": "Spell Library",
+  "icon": "roots:gramary",
+  "category": "spells",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

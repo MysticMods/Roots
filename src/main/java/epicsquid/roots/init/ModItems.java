@@ -36,13 +36,13 @@ import java.util.List;
 public class ModItems {
 
   // All mod items
-  public static Item pestle, herb_pouch, component_pouch, spell_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, wildwood_quiver, wildwood_bow,
+  public static Item guide, pestle, herb_pouch, component_pouch, spell_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, wildwood_quiver, wildwood_bow,
       sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, apothecary_pouch, wooden_shears,
       petals, flour, living_arrow, runic_dust, cooked_pereskia, fey_leather, wildewheet_bread, glass_eye, fey_feather, strange_slime, gramary, spirit_bag, reliquary, golden_eye;
 
   public static Item runed_axe, runed_hoe, runed_pickaxe, runed_shovel, runed_sword, runed_dagger;
 
-  public static Item terrastone_axe, terrastone_hoe, terrastone_pickaxe, terrastone_shovel, terrastone_sword, terrastone_knife;
+  public static Item terrastone_axe, terrastone_hoe, terrastone_pickaxe, terrastone_shovel, terrastone_sword;
 
   public static Item moonglow_leaf, pereskia, terra_spores, terra_moss, spirit_herb, wildewheet,
       baffle_cap, bark_oak, bark_birch, bark_spruce, bark_jungle, bark_dark_oak, bark_acacia, bark_wildwood;
@@ -54,7 +54,7 @@ public class ModItems {
 
   public static Item creative_pouch, fey_fire;
 
-  public static Item life_essence, salmon, wooden_heart;
+  public static Item life_essence, salmon;
 
   public static List<Item> barks;
 
@@ -70,6 +70,7 @@ public class ModItems {
    * Register all items
    */
   public static void registerItems(@Nonnull RegisterContentEvent event) {
+    event.addItem(guide = new ItemGuide("roots_guide")).setCreativeTab(Roots.tab);
     event.addItem(moonglow_seed = new ItemSeedBase("moonglow_seed", ModBlocks.moonglow, Blocks.DIRT).setCreativeTab(Roots.tab));
     event.addItem(moonglow_leaf = new ItemBase("moonglow_leaf").setCreativeTab(Roots.tab));
     event.addItem(pereskia_bulb = new ItemSeedBase("pereskia_bulb", ModBlocks.pereskia, Blocks.DIRT).setCreativeTab(Roots.tab));

@@ -1,0 +1,7 @@
+{
+  "name": "Runed Tools",
+  "parent": "crafting_armor_tools",
+  "sortnum" : 3,
+  "description": "This section covers tools made out of runed obsidian.",
+  "icon": "roots:runed_pickaxe"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Living Pickaxe",
+  "icon": "roots:terrastone_pickaxe",
+  "category": "crafting_armor_tools_terrastone",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

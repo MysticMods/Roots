@@ -34,32 +34,20 @@ public class PotionGeas extends Potion {
     return true;
   }
 
-/*  @Override
+  @Override
   public void applyAttributesModifiersToEntity(EntityLivingBase target, AbstractAttributeMap attributeMapIn, int amplifier) {
     super.applyAttributesModifiersToEntity(target, attributeMapIn, amplifier);
     if (target instanceof EntityCreature && EntityUtil.isFriendly(target)) {
       EntityCreature entity = (EntityCreature) target;
       ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(target.getEntityData(), SpellGeas.instance);
       if (mods.has(SpellGeas.PEACEFUL)) {
-        boolean hadAttack = false;
-        for (EntityAITasks.EntityAITaskEntry task : entity.tasks.taskEntries) {
-          if (task.action instanceof EntityAIAttackMelee) {
-            hadAttack = true;
-            break;
-          }
-        }
+        boolean hadAttack = entity.tasks.taskEntries.stream().anyMatch(o -> o.action instanceof EntityAIAttackMelee);
         if (!hadAttack) {
           entity.tasks.addTask(5, new EntityAIAttackMelee(entity, 1.0d, false));
         }
-        boolean hadTarget = false;
-        for (EntityAITasks.EntityAITaskEntry task : entity.targetTasks.taskEntries) {
-          if (task.action instanceof EntityAINearestAttackableTarget) {
-            hadTarget = true;
-            break;
-          }
-        }
+        boolean hadTarget = entity.targetTasks.taskEntries.stream().anyMatch(o -> o.action instanceof EntityAINearestAttackableTarget);
         if (!hadTarget) {
-          entity.targetTasks.addTask(5, new EntityAINearestAttackableTarget<>(entity, EntityMob.class, 10, true, true, EntityUtil::isHostile));
+          entity.targetTasks.addTask(5, new EntityAINearestAttackableTarget<>(entity, EntityMob.class, 10, false, false, o -> EntityUtil.isHostile(o) && !SlaveUtil.isSlave(o)));
         }
         boolean hadDamage = false;
         //noinspection ConstantConditions
@@ -73,7 +61,7 @@ public class PotionGeas extends Potion {
         target.getEntityData().setBoolean("hadDamage", hadDamage);
       }
     }
-  }*/
+  }
 
   @Override
   public void removeAttributesModifiersFromEntity(EntityLivingBase target, AbstractAttributeMap attributeMapIn, int amplifier) {
@@ -84,29 +72,16 @@ public class PotionGeas extends Potion {
       target.setDropItemsWhenDead(false);
       target.setDead();
       slave.setPositionAndUpdate(slave.posX, slave.posY, slave.posZ);
-    } else {/*if (target instanceof EntityCreature && EntityUtil.isFriendly(target)) {
+    } else if (target instanceof EntityCreature && EntityUtil.isFriendly(target)) {
       EntityCreature entity = (EntityCreature) target;
       ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(target.getEntityData(), SpellGeas.instance);
       if (mods.has(SpellGeas.PEACEFUL)) {
-        EntityAIBase attack = null;
-        for (EntityAITasks.EntityAITaskEntry task : entity.tasks.taskEntries) {
-          if (task.action instanceof EntityAIAttackMelee) {
-            attack = task.action;
-            break;
-          }
+        if (!entity.getEntityData().getBoolean("hadAttack")) {
+          entity.tasks.taskEntries.removeIf(o -> o.action instanceof EntityAIAttackMelee);
         }
-        if (attack != null && !entity.getEntityData().getBoolean("hadAttack")) {
-          entity.tasks.removeTask(attack);
-        }
-        EntityAIBase targAi = null;
-        for (EntityAITasks.EntityAITaskEntry task : entity.targetTasks.taskEntries) {
-          if (task.action instanceof EntityAINearestAttackableTarget) {
-            targAi = task.action;
-            break;
-          }
-        }
-        if (targAi != null && !entity.getEntityData().getBoolean("hadTarget")) {
-          entity.targetTasks.removeTask(targAi);
+
+        if (!entity.getEntityData().getBoolean("hadTarget")) {
+          entity.targetTasks.taskEntries.removeIf(o -> o.action instanceof EntityAINearestAttackableTarget);
         }
 
         if (!entity.getEntityData().getBoolean("hadDamage")) {
@@ -119,9 +94,7 @@ public class PotionGeas extends Potion {
         target.getEntityData().removeTag("hadAttack");
         target.getEntityData().removeTag("hadTarget");
         target.getEntityData().removeTag("hadDamage");
-      }*/
-      ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(target.getEntityData(), SpellGeas.instance);
-      if (!EntityUtil.isFriendly(target) || !mods.has(SpellGeas.PEACEFUL)) {
+      } else if (!EntityUtil.isFriendly(target) || !mods.has(SpellGeas.PEACEFUL)) {
         if (mods.has(SpellGeas.WEAKNESS)) {
           target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, mods.ampInt(SpellGeas.instance.weakness_duration), SpellGeas.instance.weakness_amplifier));
         } else if (mods.has(SpellGeas.FIRE)) {

@@ -1,0 +1,11 @@
+{
+  "name": "Herb Pouch",
+  "icon": "roots:herb_pouch",
+  "category": "crafting",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

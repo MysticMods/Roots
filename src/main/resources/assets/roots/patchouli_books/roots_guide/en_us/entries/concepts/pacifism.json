@@ -1,0 +1,11 @@
+{
+  "name": "Pacifism",
+  "icon": "minecraft:cooked_beef",
+  "category": "concepts",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Catalyst Plates",
+  "icon": "roots:reinforced_catalyst_plate",
+  "category": "crafting_devices",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

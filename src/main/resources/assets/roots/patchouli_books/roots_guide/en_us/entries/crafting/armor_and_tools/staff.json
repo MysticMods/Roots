@@ -1,0 +1,11 @@
+{
+  "name": "Staff",
+  "icon": "roots:staff",
+  "category": "crafting",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

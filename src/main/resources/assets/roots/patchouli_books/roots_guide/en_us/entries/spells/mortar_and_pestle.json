@@ -1,0 +1,11 @@
+{
+  "name": "Mortar & Pestle",
+  "icon": "roots:mortar",
+  "category": "spells",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Living Sword",
+  "icon": "roots:living_sword",
+  "category": "crafting_armor_tools_living",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

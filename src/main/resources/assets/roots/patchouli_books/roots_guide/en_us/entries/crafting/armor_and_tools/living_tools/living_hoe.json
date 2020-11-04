@@ -1,0 +1,11 @@
+{
+  "name": "Living Hoe",
+  "icon": "roots:living_hoe",
+  "category": "crafting_armor_tools_living",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

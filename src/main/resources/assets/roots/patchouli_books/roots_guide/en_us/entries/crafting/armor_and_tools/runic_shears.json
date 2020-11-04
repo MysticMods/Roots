@@ -1,0 +1,11 @@
+{
+  "name": "Runic Shears",
+  "icon": "roots:runic_shears",
+  "category": "crafting",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

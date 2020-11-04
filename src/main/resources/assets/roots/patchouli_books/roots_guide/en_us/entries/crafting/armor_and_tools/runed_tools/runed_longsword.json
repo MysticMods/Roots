@@ -1,0 +1,11 @@
+{
+  "name": "Runed Longsword",
+  "icon": "roots:runed_sword",
+  "category": "crafting_armor_tools_runed",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

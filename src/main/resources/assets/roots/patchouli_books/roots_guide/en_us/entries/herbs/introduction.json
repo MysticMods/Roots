@@ -1,0 +1,11 @@
+{
+  "name": "Introduction",
+  "icon": "minecraft:writable_book",
+  "category": "herbs",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

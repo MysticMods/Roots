@@ -1,0 +1,11 @@
+{
+  "name": "Introduction",
+  "icon": "minecraft:writable_book",
+  "category": "rituals",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

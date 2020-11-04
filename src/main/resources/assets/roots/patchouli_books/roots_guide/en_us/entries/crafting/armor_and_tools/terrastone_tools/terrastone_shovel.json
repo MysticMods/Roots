@@ -1,0 +1,11 @@
+{
+  "name": "Living Shovel",
+  "icon": "roots:terrastone_shovel",
+  "category": "crafting_armor_tools_terrastone",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

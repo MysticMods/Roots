@@ -1,0 +1,11 @@
+{
+  "name": "Pyres",
+  "icon": "roots:reinforced_pyre",
+  "category": "crafting_devices",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

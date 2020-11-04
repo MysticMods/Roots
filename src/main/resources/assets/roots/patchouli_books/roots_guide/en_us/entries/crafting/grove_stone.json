@@ -1,0 +1,11 @@
+{
+  "name": "Grove Stone",
+  "icon": "roots:grove_stone",
+  "category": "crafting",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Living Arrow",
+  "icon": "roots:living_arrow",
+  "category": "crafting_armor_tools_living",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

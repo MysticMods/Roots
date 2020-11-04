@@ -1,0 +1,7 @@
+{
+  "name": "Terrastone Tools",
+  "parent": "crafting_armor_tools",
+  "sortnum" : 2,
+  "description": "This section covers tools made from a combination of sturdy stone and terra moss.",
+  "icon": "roots:terrastone_shovel"
+}

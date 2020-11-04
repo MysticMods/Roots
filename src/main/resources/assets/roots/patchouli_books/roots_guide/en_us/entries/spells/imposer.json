@@ -1,0 +1,11 @@
+{
+  "name": "Imposer",
+  "icon": "roots:imposer",
+  "category": "spells",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

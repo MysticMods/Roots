@@ -1,0 +1,11 @@
+{
+  "name": "Modifiers",
+  "icon": "minecraft:blaze_powder",
+  "category": "spells",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

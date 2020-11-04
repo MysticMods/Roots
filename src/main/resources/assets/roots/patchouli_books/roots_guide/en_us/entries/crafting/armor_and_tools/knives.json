@@ -1,0 +1,11 @@
+{
+  "name": "Knives",
+  "icon": "roots:wood_knife",
+  "category": "crafting",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "Living Tools",
+  "parent": "crafting_armor_tools",
+  "sortnum" : 1,
+  "description": "This category describes living tools that can be crafted in a fey crafter.",
+  "icon": "roots:living_pickaxe"
+}

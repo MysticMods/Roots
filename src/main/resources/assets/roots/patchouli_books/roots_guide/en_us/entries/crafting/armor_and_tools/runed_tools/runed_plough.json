@@ -1,0 +1,11 @@
+{
+  "name": "Runed Plough",
+  "icon": "roots:runed_hoe",
+  "category": "crafting_armor_tools_runed",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

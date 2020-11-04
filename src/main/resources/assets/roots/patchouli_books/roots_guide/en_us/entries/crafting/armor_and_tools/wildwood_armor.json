@@ -1,0 +1,11 @@
+{
+  "name": "Wildwood Armor",
+  "icon": "roots:wildwood_chestplate",
+  "category": "crafting",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

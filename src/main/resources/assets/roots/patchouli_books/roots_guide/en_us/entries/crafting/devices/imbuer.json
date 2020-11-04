@@ -1,0 +1,11 @@
+{
+  "name": "Imbuer",
+  "icon": "roots:imbuer",
+  "category": "crafting_devices",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}
