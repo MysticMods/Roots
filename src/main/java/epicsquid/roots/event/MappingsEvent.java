@@ -151,6 +151,12 @@ public class MappingsEvent {
           case "ritual_wild_growth":
             mapping.remap(epicsquid.roots.init.ModItems.ritual_wildroot_growth);
             break;
+          case "structure_market":
+            mapping.ignore();
+            break;
+          case "wildwood_rune":
+            mapping.remap(((BlockBase) epicsquid.roots.init.ModBlocks.wildroot_rune).getItemBlock());
+            break;
         }
         if (missing.getPath().startsWith("runic_")) {
           ResourceLocation replacement = new ResourceLocation(Roots.MODID, missing.getPath().replace("runic_", "runed_"));
