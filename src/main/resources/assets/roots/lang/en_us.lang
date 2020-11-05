@@ -75,7 +75,7 @@ tile.catalyst_plate.name=Catalyst Plate
 tile.reinforced_catalyst_plate.name=Reinforced Catalyst Plate
 tile.unending_bowl.name=Unending Bowl
 tile.incense_burner.name=Incense Burner
-tile.wildrood_rune.name=Wildroot Rune
+tile.wildroot_rune.name=Wildroot Rune
 tile.wildwood_stairs.name=Wildwood Stairs
 tile.wildwood_trapdoor.name=Wildwood Trapdoor
 tile.wildwood_button.name=Wildwood Button
@@ -105,7 +105,12 @@ tile.runed_birch.name=Runed Birch
 tile.runed_jungle.name=Runed Jungle
 tile.runed_spruce.name=Runed Spruce
 tile.runed_wildwood.name=Runed Wildwood
-
+tile.runed_obsidian_button.name=Runed Obsidian Button
+tile.runed_obsidian_brick_button.name=Runed Obsidian Brick Button
+tile.runed_obsidian_brick_alt_button.name=Runed Obsidian Brick Button
+tile.runed_obsidian_pressure_plate.name=Runed Obsidian Pressure Plate
+tile.runed_obsidian_brick_pressure_plate.name=Runed Obsidian Brick Pressure Plate
+tile.runed_obsidian_brick_alt_pressure_plate.name=Runed Obsidian Brick Pressure Plate
 
 roots.tooltip.petaldust.notag=This Spell Dust has no NBT data! It is potentially prone to errors and should not be used!
 roots.tooltip.color=Dyed %s.
@@ -376,10 +381,20 @@ tile.runestone_wall.name=Runestone Wall
 tile.runestone_brick_stairs.name=Runestone Brick Stairs
 tile.runestone_brick_slab.name=Runestone Brick Slab
 tile.runestone_brick_wall.name=Runestone Brick Wall
-
 tile.runestone_brick_alt_stairs.name=Runestone Brick Stairs
 tile.runestone_brick_alt_slab.name=Runestone Brick Slab
 tile.runestone_brick_alt_wall.name=Runestone Brick Wall
+
+# Runed Obsidian
+tile.runed_obsidian_stairs.name=Runed Obsidian Stairs
+tile.runed_obsidian_slab.name=Runed Obsidian Slab
+tile.runed_obsidian_wall.name=Runed Obsidian Wall
+tile.runed_obsidian_brick_stairs.name=Runed Obsidian Brick Stairs
+tile.runed_obsidian_brick_slab.name=Runed Obsidian Brick Slab
+tile.runed_obsidian_brick_wall.name=Runed Obsidian Brick Wall
+tile.runed_obsidian_brick_alt_stairs.name=Runed Obsidian Brick Stairs
+tile.runed_obsidian_brick_alt_slab.name=Runed Obsidian Brick Slab
+tile.runed_obsidian_brick_alt_wall.name=Runed Obsidian Brick Wall
 
 tile.wildwood_log.name=Wildwood Log
 tile.wildwood_planks.name=Wildwood Planks
