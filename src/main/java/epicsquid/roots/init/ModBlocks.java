@@ -108,8 +108,8 @@ public class ModBlocks {
     event.addBlock(runestone_brick_alt = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "runestone_brick_alt")).setCreativeTab(Roots.tab);
     event.addBlock(chiseled_runestone = new BlockBase(Material.ROCK, SoundType.METAL, 1.4f, "chiseled_runestone")).setCreativeTab(Roots.tab);
     event.addBlock(runed_obsidian = new BlockRunedObsidian(Material.ROCK, SoundType.METAL, 8.5f, "runed_obsidian")).setCreativeTab(Roots.tab);
-    event.addBlock(runed_obsidian_brick = new BlockRunedObsidian(Material.ROCK, SoundType.METAL, 1.4f, "runed_obsidian_brick")).setCreativeTab(Roots.tab);
-    event.addBlock(runed_obsidian_brick_alt = new BlockRunedObsidian(Material.ROCK, SoundType.METAL, 1.4f, "runed_obsidian_brick_alt")).setCreativeTab(Roots.tab);
+    event.addBlock(runed_obsidian_brick = new BlockRunedObsidian(Material.ROCK, SoundType.METAL, 8.5f, "runed_obsidian_brick")).setCreativeTab(Roots.tab);
+    event.addBlock(runed_obsidian_brick_alt = new BlockRunedObsidian(Material.ROCK, SoundType.METAL, 8.5f, "runed_obsidian_brick_alt")).setCreativeTab(Roots.tab);
     event.addBlock(chiseled_runed_obsidian = new BlockRunedObsidian(Material.ROCK, SoundType.METAL, 8.5f, "chiseled_runed_obsidian")).setCreativeTab(Roots.tab);
     event.addBlock(trample_rune = new BlockTrample(Material.ROCK, SoundType.METAL, 1.4f, "runestone_trample", TileEntityTrample.class)).setCreativeTab(Roots.tab);
 
@@ -169,7 +169,7 @@ public class ModBlocks {
     runestone_brick_alt_button = runes.button;
     runestone_brick_alt_pressure_plate = runes.pressure_plate;
 
-    runes = variants(event, runed_obsidian, "runed_obsidian", SoundType.STONE, Material.ROCK);
+    runes = variantsObsidian(event, runed_obsidian, "runed_obsidian", SoundType.STONE, Material.ROCK);
     runed_obsidian_slab = runes.slab;
     runed_obsidian_double_slab = runes.double_slab;
     runed_obsidian_stairs = runes.stairs;
@@ -177,7 +177,7 @@ public class ModBlocks {
     runed_obsidian_button = runes.button;
     runed_obsidian_pressure_plate = runes.pressure_plate;
 
-    runes = variants(event, runed_obsidian_brick, "runed_obsidian_brick", SoundType.STONE, Material.ROCK);
+    runes = variantsObsidian(event, runed_obsidian_brick, "runed_obsidian_brick", SoundType.STONE, Material.ROCK);
     runed_obsidian_brick_slab = runes.slab;
     runed_obsidian_brick_double_slab = runes.double_slab;
     runed_obsidian_brick_stairs = runes.stairs;
@@ -185,7 +185,7 @@ public class ModBlocks {
     runed_obsidian_brick_button = runes.button;
     runed_obsidian_brick_pressure_plate = runes.pressure_plate;
 
-    runes = variants(event, runed_obsidian_brick_alt, "runed_obsidian_brick", SoundType.STONE, Material.ROCK);
+    runes = variants(event, runed_obsidian_brick_alt, "runed_obsidian_brick_alt", SoundType.STONE, Material.ROCK);
     runed_obsidian_brick_alt_slab = runes.slab;
     runed_obsidian_brick_alt_double_slab = runes.double_slab;
     runed_obsidian_brick_alt_stairs = runes.stairs;
