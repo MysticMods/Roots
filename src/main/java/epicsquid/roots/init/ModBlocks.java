@@ -221,6 +221,20 @@ public class ModBlocks {
     event.addBlock(fake_lava = new BlockFakeLiquid(Material.LAVA, SoundType.SNOW, 0, "fake_lava")).setCreativeTab(Roots.tab);
   }
 
+  private static Variants variantsObsidian(RegisterContentEvent event, Block base, String name, SoundType sound, Material material) {
+    Block[] slabs = new Block[2];
+    Block stairs;
+    Block wall;
+    Block button;
+    Block pressure_plate;
+    LibRegistry.addSlabPair(material, sound, 8.5f, name, base.getDefaultState(), slabs, Roots.tab, BlockRunedSlab::new);
+    event.addBlock(stairs = new BlockRunedStairs(base.getDefaultState(), sound, 8.5f, name + "_stairs").setCreativeTab(Roots.tab));
+    event.addBlock(wall = new BlockRunedWall(base, sound, 8.5f, name + "_wall").setCreativeTab(Roots.tab));
+    event.addBlock(button = new BlockRunedButton(base, sound, 8.5f, name + "_button").setCreativeTab(Roots.tab));
+    event.addBlock(pressure_plate = new BlockRunedPressurePlate(base, BlockPressurePlateBase.PressurePlateType.MOBS, sound, 8.5f, name + "_pressure_plate").setCreativeTab(Roots.tab));
+    return new Variants(slabs, stairs, wall, button, pressure_plate);
+  }
+
   private static Variants variants(RegisterContentEvent event, Block base, String name, SoundType sound, Material material) {
     Block[] slabs = new Block[2];
     Block stairs;
