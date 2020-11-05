@@ -2,16 +2,13 @@
   "type": "forge:ore_shapeless",
   "ingredients": [
     {
-      "item": "minecraft:book"
+      "item": "roots:wildwood_log"
     },
     {
       "item": "roots:wildroot"
     }
   ],
   "result": {
-    "item": "patchouli:guide_book",
-    "nbt": {
-      "patchouli:book": "roots:roots_guide"
-    }
+    "item": "roots:wildroot_rune"
   }
 }

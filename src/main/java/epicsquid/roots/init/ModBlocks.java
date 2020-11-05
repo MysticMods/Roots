@@ -27,7 +27,7 @@ public class ModBlocks {
 
   // All block
   public static Block mortar, pyre, imbuer, imposer, structure_marker, catalyst_plate, unending_bowl, reinforced_pyre, reinforced_catalyst_plate;
-  public static Block incense_burner, wildwood_rune;
+  public static Block incense_burner, wildroot_rune;
   public static Block grove_stone, fey_crafter;
 
   public static Block fey_fire, fake_water, fake_lava;
@@ -50,6 +50,11 @@ public class ModBlocks {
   public static Block runestone_brick_alt_slab, runestone_brick_alt_double_slab, runestone_brick_alt_stairs, runestone_brick_alt_wall, runestone_brick_alt_button, runestone_brick_alt_pressure_plate;
 
   public static Block runed_obsidian, chiseled_runed_obsidian, runed_obsidian_brick, runed_obsidian_brick_alt;
+
+  public static Block runed_obsidian_slab, runed_obsidian_double_slab, runed_obsidian_stairs, runed_obsidian_wall, runed_obsidian_button, runed_obsidian_pressure_plate;
+  public static Block runed_obsidian_brick_slab, runed_obsidian_brick_double_slab, runed_obsidian_brick_stairs, runed_obsidian_brick_wall, runed_obsidian_brick_button, runed_obsidian_brick_pressure_plate;
+  public static Block runed_obsidian_brick_alt_slab, runed_obsidian_brick_alt_double_slab, runed_obsidian_brick_alt_stairs, runed_obsidian_brick_alt_wall, runed_obsidian_brick_alt_button, runed_obsidian_brick_alt_pressure_plate;
+
 
   // Wildwood
   public static Block wildwood_slab, wildwood_double_slab, wildwood_stairs, wildwood_wall;
@@ -164,7 +169,31 @@ public class ModBlocks {
     runestone_brick_alt_button = runes.button;
     runestone_brick_alt_pressure_plate = runes.pressure_plate;
 
-    event.addBlock(structure_marker = new BlockStructureMarker());
+    runes = variants(event, runed_obsidian, "runed_obsidian", SoundType.STONE, Material.ROCK);
+    runed_obsidian_slab = runes.slab;
+    runed_obsidian_double_slab = runes.double_slab;
+    runed_obsidian_stairs = runes.stairs;
+    runed_obsidian_wall = runes.wall;
+    runed_obsidian_button = runes.button;
+    runed_obsidian_pressure_plate = runes.pressure_plate;
+
+    runes = variants(event, runed_obsidian_brick, "runed_obsidian_brick", SoundType.STONE, Material.ROCK);
+    runed_obsidian_brick_slab = runes.slab;
+    runed_obsidian_brick_double_slab = runes.double_slab;
+    runed_obsidian_brick_stairs = runes.stairs;
+    runed_obsidian_brick_wall = runes.wall;
+    runed_obsidian_brick_button = runes.button;
+    runed_obsidian_brick_pressure_plate = runes.pressure_plate;
+
+    runes = variants(event, runed_obsidian_brick_alt, "runed_obsidian_brick", SoundType.STONE, Material.ROCK);
+    runed_obsidian_brick_alt_slab = runes.slab;
+    runed_obsidian_brick_alt_double_slab = runes.double_slab;
+    runed_obsidian_brick_alt_stairs = runes.stairs;
+    runed_obsidian_brick_alt_wall = runes.wall;
+    runed_obsidian_brick_alt_button = runes.button;
+    runed_obsidian_brick_alt_pressure_plate = runes.pressure_plate;
+
+    //event.addBlock(structure_marker = new BlockStructureMarker());
     event.addBlock(mortar = new BlockMortar(Material.ROCK, SoundType.STONE, 1.4f, "mortar", TileEntityMortar.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(pyre = new BlockPyre(Material.WOOD, SoundType.WOOD, 1.4f, "pyre", TileEntityPyre.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(reinforced_pyre = new BlockReinforcedPyre(Material.ROCK, SoundType.STONE, 8.4f, "reinforced_pyre", TileEntityPyre.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
@@ -177,7 +206,7 @@ public class ModBlocks {
     event.addBlock(incense_burner = new BlockIncenseBurner(Material.ROCK, SoundType.STONE, 1.4f, "incense_burner", TileEntityIncenseBurner.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
 
     //Runes
-    event.addBlock(wildwood_rune = new BlockWildwoodRune(Material.WOOD, SoundType.WOOD, 1.4f, "wildwood_rune")).setCreativeTab(Roots.tab);
+    event.addBlock(wildroot_rune = new BlockWildwoodRune(Material.WOOD, SoundType.WOOD, 1.4f, "wildroot_rune")).setCreativeTab(Roots.tab);
 
     // Grove Stones
     event.addBlock(grove_stone = new BlockGroveStone("grove_stone")).setCreativeTab(Roots.tab);

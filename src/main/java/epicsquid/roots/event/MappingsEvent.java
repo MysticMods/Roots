@@ -82,6 +82,12 @@ public class MappingsEvent {
           case "offertory_plate":
             mapping.remap(epicsquid.roots.init.ModBlocks.catalyst_plate);
             break;
+          case "wildwood_rune":
+            mapping.remap(epicsquid.roots.init.ModBlocks.wildroot_rune);
+            break;
+          case "structure_marker":
+            mapping.ignore();
+            break;
         }
       }
     }
