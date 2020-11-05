@@ -1,0 +1,20 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "R  ",
+    "RR ",
+    "RRR"
+    ],
+  "key": {
+    "R": [
+      {
+        "item": "roots:runed_obsidian_brick_alt"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:runed_obsidian_brick_alt_stairs",
+    "data": 0,
+    "count": 8
+  }
+}
