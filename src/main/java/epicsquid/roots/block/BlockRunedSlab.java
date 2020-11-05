@@ -1,6 +1,7 @@
 package epicsquid.roots.block;
 
-import epicsquid.mysticallib.block.BlockBase;
+import epicsquid.mysticallib.block.BlockSlabBase;
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -9,19 +10,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-public class BlockRunedObsidian extends BlockBase {
-  public BlockRunedObsidian(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name) {
-    super(mat, type, hardness, name);
+public class BlockRunedSlab extends BlockSlabBase {
+  public BlockRunedSlab(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull IBlockState parent, boolean isDouble, @Nullable Block slab) {
+    super(mat, type, hardness, name, parent, isDouble, slab);
     setResistance(5000f);
-  }
-
-  public static boolean checkEntityBlocked(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
-    if (entity instanceof net.minecraft.entity.boss.EntityDragon || (entity instanceof net.minecraft.entity.boss.EntityWither) || (entity instanceof net.minecraft.entity.projectile.EntityWitherSkull)) {
-      return true;
-    }
-
-    return false;
   }
 
   @Override
