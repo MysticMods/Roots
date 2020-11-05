@@ -12,10 +12,6 @@
     {
       "type": "spell_template",
       "spell": "spell_winter_cloud"
-    },
-    {
-      "type": "spell_modifiers_template",
-      "spell": "spell_winter_cloud"
     }
   ]
 }
