@@ -1,0 +1,19 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "RRR",
+    "RRR"
+    ],
+  "key": {
+    "R": [
+      {
+        "item": "roots:runed_obsidian_brick"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:runed_obsidian_brick_wall",
+    "data": 0,
+    "count": 6
+  }
+}
