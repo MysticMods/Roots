@@ -80,7 +80,7 @@ public class SpellAquaBubble extends SpellBase {
   public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
     if (!caster.world.isRemote) {
       caster.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, info.ampInt(duration), 0, false, false));
-      caster.getEntityData().setIntArray(getCachedName(), info.snapshot());
+      caster.getEntityData().setIntArray(getCachedName(), info.toArray());
       if (info.has(RESISTANCE)) {
         caster.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, info.ampInt(resistance_duration), resistance_amplifier));
       }
@@ -89,7 +89,7 @@ public class SpellAquaBubble extends SpellBase {
         if (!players.isEmpty()) {
           EntityPlayer other = players.get(Util.rand.nextInt(players.size()));
           other.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, info.ampInt(duration), 0, false, false));
-          other.getEntityData().setIntArray(getCachedName(), info.snapshot());
+          other.getEntityData().setIntArray(getCachedName(), info.toArray());
           if (info.has(RESISTANCE)) {
             other.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, info.ampInt(resistance_duration), resistance_amplifier));
           }

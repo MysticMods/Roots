@@ -67,7 +67,7 @@ public class StaffModifierInstanceList extends BaseModifierInstanceList<StaffMod
     List<IModifierCore> cores = getCores();
     buf.writeInt(cores.size());
     for (IModifierCore core : cores) {
-      buf.writeShort(core.getKey());
+      buf.writeInt(core.getKey());
     }
   }
 
@@ -76,8 +76,9 @@ public class StaffModifierInstanceList extends BaseModifierInstanceList<StaffMod
     tag.setIntArray("modifiers", getCores().stream().mapToInt(IModifierCore::getKey).toArray());
   }
 
-  public int[] snapshot() {
-    return this.stream().filter(modifier -> modifier.isEnabled() && modifier.isApplied() && !modifier.isConflicting(this)).map(o -> o.getCore().getKey()).mapToInt(i -> i).toArray();
+  @Override
+  public int[] toArray() {
+    return getCores().stream().mapToInt(IModifierCore::getKey).toArray();
   }
 
   public static ModifierSnapshot fromSnapshot(NBTTagCompound tag, SpellBase spell) {
@@ -88,30 +89,13 @@ public class StaffModifierInstanceList extends BaseModifierInstanceList<StaffMod
     }
   }
 
-  public static Set<IModifierCore> fromSnapshot(NBTTagIntArray snapshot) {
-    Set<IModifierCore> modifiers = new HashSet<>();
-    for (int i : snapshot.getIntArray()) {
-      IModifierCore core = ModifierCores.getByOrdinal(i);
-      if (core == null) {
-        throw new NullPointerException("Invalid modifier when reconstructing ModifierList from Snapshot, ordinal of: " + i + " is not a valid core.");
-      }
-      modifiers.add(core);
-    }
-    return modifiers;
-  }
-
   public static ModifierSnapshot fromBytes(ByteBuf buf) {
     IntArraySet modifiers = new IntArraySet();
     int size = buf.readInt();
     for (int i = 0; i < size; i++) {
-      modifiers.add(buf.readShort());
+      modifiers.add(buf.readInt());
     }
     return new ModifierSnapshot(modifiers);
-  }
-
-  @Override
-  public int[] toArray() {
-    return snapshot();
   }
 
   @Override

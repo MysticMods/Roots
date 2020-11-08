@@ -90,7 +90,7 @@ public class SpellGeas extends SpellBase {
     if (e.getActivePotionEffect(ModPotions.geas) == null) {
       if (peaceful && EntityUtil.isFriendlyTo(e, player)) {
         if (!player.world.isRemote) {
-          e.getEntityData().setIntArray(getCachedName(), info.snapshot());
+          e.getEntityData().setIntArray(getCachedName(), info.toArray());
           e.addPotionEffect(new PotionEffect(ModPotions.geas, dur, 0, false, false));
         }
         return 1;
@@ -103,10 +103,10 @@ public class SpellGeas extends SpellBase {
             e.setDead();
             slave.setPositionAndUpdate(slave.posX, slave.posY, slave.posZ);
             slave.addPotionEffect(new PotionEffect(ModPotions.geas, dur, 0, false, false));
-            slave.getEntityData().setIntArray(getCachedName(), info.snapshot());
+            slave.getEntityData().setIntArray(getCachedName(), info.toArray());
           } else {
             e.addPotionEffect(new PotionEffect(ModPotions.geas, dur, 0, false, false));
-            e.getEntityData().setIntArray(getCachedName(), info.snapshot());
+            e.getEntityData().setIntArray(getCachedName(), info.toArray());
             if (e instanceof EntityLiving) {
               ((EntityLiving) e).setAttackTarget(null);
             }
