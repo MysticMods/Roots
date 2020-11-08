@@ -115,7 +115,7 @@ public class SpellPetalShell extends SpellBase {
           } else {
             entity.addPotionEffect(new PotionEffect(ModPotions.petal_shell, info.ampInt(duration), info.ampInt(maxShells), false, false));
           }
-          entity.getEntityData().setIntArray(getCachedName(), info.snapshot());
+          entity.getEntityData().setIntArray(getCachedName(), info.toArray());
           PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(entity.posX, entity.posY + 1.0f, entity.posZ, info), entity);
         }
       }
@@ -125,7 +125,7 @@ public class SpellPetalShell extends SpellBase {
       } else {
         player.addPotionEffect(new PotionEffect(ModPotions.petal_shell, info.ampInt(duration), info.ampInt(maxShells), false, false));
       }
-      player.getEntityData().setIntArray(getCachedName(), info.snapshot());
+      player.getEntityData().setIntArray(getCachedName(), info.toArray());
       PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ, info), player);
     }
     return true;

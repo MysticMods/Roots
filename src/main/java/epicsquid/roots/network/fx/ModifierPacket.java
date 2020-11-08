@@ -8,39 +8,27 @@ import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class ModifierPacket implements IMessage {
-  private StaffModifierInstanceList modifierInstances;
-  protected ISnapshot modifiers = null;
+  protected ISnapshot modifiers;
 
   public ModifierPacket() {
     this.modifiers = null;
-    this.modifierInstances = null;
   }
 
   public ModifierPacket(ISnapshot snapshot) {
     this.modifiers = snapshot;
   }
 
-  public ModifierPacket(StaffModifierInstanceList modifierInstances) {
-    this.modifierInstances = modifierInstances;
-  }
-
   @Override
   public void fromBytes(ByteBuf buf) {
-    if (buf.readBoolean()) {
-      this.modifiers = StaffModifierInstanceList.fromBytes(buf);
-    }
+    this.modifiers = StaffModifierInstanceList.fromBytes(buf);
   }
 
   @Override
   public void toBytes(ByteBuf buf) {
-    if (this.modifiers == null && this.modifierInstances == null) {
-      buf.writeBoolean(false);
+    if (this.modifiers == null) {
+      buf.writeInt(0);
     } else {
-      if (this.modifiers != null) {
-        this.modifiers.toBytes(buf);
-      } else {
-        this.modifierInstances.toBytes(buf);
-      }
+      this.modifiers.toBytes(buf);
     }
   }
 

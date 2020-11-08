@@ -189,11 +189,11 @@ public class SpellExtension extends SpellBase {
     }
     if (info.has(SENSE_ANIMALS)) {
       caster.addPotionEffect(new PotionEffect(ModPotions.animal_sense, info.ampInt(animal_duration), 0, false, false));
-      caster.getEntityData().setIntArray(getCachedName(), info.snapshot());
+      caster.getEntityData().setIntArray(getCachedName(), info.toArray());
     }
     if (info.has(SENSE_DANGER)) {
       caster.addPotionEffect(new PotionEffect(ModPotions.danger_sense, info.ampInt(enemy_duration), 0, false, false));
-      caster.getEntityData().setIntArray(getCachedName(), info.snapshot());
+      caster.getEntityData().setIntArray(getCachedName(), info.toArray());
     }
     if (info.has(SENSE_HOME)) {
       if (!caster.world.isRemote) {

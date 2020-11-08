@@ -60,7 +60,7 @@ public class MessageSanctuaryRingFX extends ModifierPacket implements IMessage {
       } else {
         c = MathHelper.sqrt(1 + SpellSanctuary.instance.radius_x + SpellSanctuary.instance.radius_z);
       }
-      for (float k = 0; k < 360; k += Util.rand.nextInt(72)) {
+      for (float k = 0; k < 360; k += Util.rand.nextInt(42)) {
         if (Util.rand.nextBoolean()) {
           if (Util.rand.nextBoolean()) {
             ParticleUtil.spawnParticlePetal(world, (float) message.posX + c * (float) Math.sin(Math.toRadians(k)), (float) message.posY, (float) message.posZ + c * (float) Math.cos(Math.toRadians(k)), 0, 0, 0, SpellSanctuary.instance.getFirstColours(0.5f), 1.25f + 5.0f * Util.rand.nextFloat(), 40);
