@@ -1,0 +1,6 @@
+{
+  "parent": "block/wall_post",
+  "textures": {
+    "wall": "roots:blocks/runed_obsidian_brick"
+  }
+}

@@ -1,0 +1,6 @@
+{
+    "parent": "block/wall_inventory",
+    "textures": {
+        "wall": "roots:blocks/runed_obsidian_brick_alt"
+    }
+}
