@@ -3,7 +3,8 @@
   "defaults": {
     "textures": {
       "wall": "roots:blocks/runestone",
-      "texture": "roots:blocks/runestone"
+      "texture": "roots:blocks/runestone",
+      "particle": "roots:blocks/runestone"
     }
   },
   "variants": {
