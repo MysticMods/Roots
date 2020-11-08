@@ -998,6 +998,8 @@ roots.modifiers.modifiers.yellow_light.desc=Creates a light that is yellow.
 roots.modifiers.modifiers.yellow_light=Yellow Light
 roots.modifiers.modifiers.yield.desc=Causes harvested items to be processed by any relevant mortar & pestle recipe.
 roots.modifiers.modifiers.yield=Yield
+roots.modifiers.modifiers.react_weakness=React: Weakness
+roots.modifiers.modifiers.react_weakness.desc=Causes attackers to be weakened.
 
 roots.spirit_pouch.tooltip=Right-click to open and reveal what's inside!
 roots.reliquary.tooltip=Right-click to open and reveal what's inside!
