@@ -3,7 +3,8 @@
   "defaults": {
     "textures": {
       "wall": "roots:blocks/runed_obsidian_brick_alt",
-      "texture": "roots:blocks/runed_obsidian_brick_alt"
+      "texture": "roots:blocks/runed_obsidian_brick_alt",
+      "particle": "roots:blocks/runed_obsidian_brick_alt"
     }
   },
   "variants": {

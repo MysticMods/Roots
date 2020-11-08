@@ -3,7 +3,8 @@
   "defaults": {
     "textures": {
       "wall": "roots:blocks/wildwood_planks",
-      "texture": "roots:blocks/wildwood_planks"
+      "texture": "roots:blocks/wildwood_planks",
+      "particle": "roots:blocks/wildwood_planks"
     }
   },
   "variants": {
