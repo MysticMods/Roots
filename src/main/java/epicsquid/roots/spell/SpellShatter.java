@@ -34,7 +34,7 @@ import java.util.List;
 public class SpellShatter extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(0);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("stalicripe", 0.0625));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("stalicripe", 0.0825));
   public static Property<Float> PROP_DISTANCE = new Property<>("distance", 8f).setDescription("the maximum range of the beam");
   public static Property<Integer> PROP_DEFAULT_WIDTH = new Property<>("default_width", 0).setDescription("the default width (when not amplified; 0 = 1)");
   public static Property<Integer> PROP_DEFAULT_HEIGHT = new Property<>("default_height", 0).setDescription("the default height (when not amplified: this is 2 blocks tall, with the block below the block targeted also being broken; if this value is greater than 0, than the height will be 1 block above and 1 block below, relatively, th block hit)");
