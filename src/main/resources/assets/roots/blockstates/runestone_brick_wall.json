@@ -1,86 +1,19 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "textures": {
-      "wall": "roots:blocks/runestone_brick",
-      "texture": "roots:blocks/runestone_brick",
-      "particle": "roots:blocks/runestone_brick"
+  "multipart": [
+    {   "when": { "up": true },
+      "apply": { "model": "roots:runestone_brick_wall_post" }
+    },
+    {   "when": { "north": true },
+      "apply": { "model": "roots:runestone_brick_wall_side", "uvlock": true }
+    },
+    {   "when": { "east": true },
+      "apply": { "model": "roots:runestone_brick_wall_side", "y": 90, "uvlock": true }
+    },
+    {   "when": { "south": true },
+      "apply": { "model": "roots:runestone_brick_wall_side", "y": 180, "uvlock": true }
+    },
+    {   "when": { "west": true },
+      "apply": { "model": "roots:runestone_brick_wall_side", "y": 270, "uvlock": true }
     }
-  },
-  "variants": {
-    "normal": [
-      {
-      }
-    ],
-    "inventory": [
-      {
-        "model": "wall_inventory"
-      }
-    ],
-    "handlers": [
-      {
-        "model": "wall_inventory"
-      }
-    ],
-    "up": {
-      "true": {
-        "model": "wall_post"
-      },
-      "false": {
-      }
-    },
-    "north": {
-      "true": {
-        "submodel": {
-          "north": {
-            "model": "wall_side",
-            "uvlock": true
-          }
-        }
-      },
-      "false": {
-      }
-    },
-    "south": {
-      "true": {
-        "submodel": {
-          "south": {
-            "model": "wall_side",
-            "uvlock": true,
-            "y": 180
-          }
-        }
-      },
-      "false": {
-      }
-    },
-    "east": {
-      "true": {
-        "submodel": {
-          "east": {
-            "model": "wall_side",
-            "uvlock": true,
-            "y": 90
-          }
-        }
-      },
-      "false": {
-      }
-    },
-    "west": {
-      "true": {
-        "submodel": {
-          "west": {
-            "model": "wall_side",
-            "uvlock": true,
-            "y": 270
-          }
-        }
-      },
-      "false": {
-      }
-    }
-  },
-  "multipart": []
+  ]
 }
-

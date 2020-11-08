@@ -1,5 +1,7 @@
 {
   "directory": "src\\main\\resources\\assets\\roots\\blockstates",
+  "blocks": "src\\main\\resources\\assets\\roots\\models\\block",
+  "items": "src\\main\\resources\\assets\\roots\\models\\item",
   "texture_base": "roots:blocks/",
   "models": [
     {
@@ -205,6 +207,90 @@
       "type": "log",
       "base": "runed_wildwood",
       "log": "roots:blocks/wildwood_log_top"
+    },
+    {
+      "type": "block",
+      "base": "runed_obsidian"
+    },
+    {
+      "type": "button",
+      "base": "runed_obsidian"
+    },
+    {
+      "type": "double_slab",
+      "base": "runed_obsidian"
+    },
+    {
+      "type": "pressure_plate",
+      "base": "runed_obsidian"
+    },
+    {
+      "type": "slab",
+      "base": "runed_obsidian"
+    },
+    {
+      "type": "stairs",
+      "base": "runed_obsidian"
+    },
+    {
+      "type": "wall",
+      "base": "runed_obsidian"
+    },
+    {
+      "type": "block",
+      "base": "runed_obsidian_brick"
+    },
+    {
+      "type": "button",
+      "base": "runed_obsidian_brick"
+    },
+    {
+      "type": "double_slab",
+      "base": "runed_obsidian_brick"
+    },
+    {
+      "type": "pressure_plate",
+      "base": "runed_obsidian_brick"
+    },
+    {
+      "type": "slab",
+      "base": "runed_obsidian_brick"
+    },
+    {
+      "type": "stairs",
+      "base": "runed_obsidian_brick"
+    },
+    {
+      "type": "wall",
+      "base": "runed_obsidian_brick"
+    },
+    {
+      "type": "block",
+      "base": "runed_obsidian_brick_alt"
+    },
+    {
+      "type": "button",
+      "base": "runed_obsidian_brick_alt"
+    },
+    {
+      "type": "double_slab",
+      "base": "runed_obsidian_brick_alt"
+    },
+    {
+      "type": "pressure_plate",
+      "base": "runed_obsidian_brick_alt"
+    },
+    {
+      "type": "slab",
+      "base": "runed_obsidian_brick_alt"
+    },
+    {
+      "type": "stairs",
+      "base": "runed_obsidian_brick_alt"
+    },
+    {
+      "type": "wall",
+      "base": "runed_obsidian_brick_alt"
     }
   ]
 }
