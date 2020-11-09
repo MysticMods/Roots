@@ -203,7 +203,7 @@ public class ModBlocks {
     event.addBlock(catalyst_plate = new BlockCatalystPlate(Material.ROCK, SoundType.STONE, 1.4f, "catalyst_plate", TileEntityCatalystPlate.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(reinforced_catalyst_plate = new BlockReinforcedCatalystPlate(Material.ROCK, SoundType.STONE, 4.4f, "reinforced_catalyst_plate", TileEntityCatalystPlate.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
     event.addBlock(unending_bowl = new BlockUnendingBowl(Material.ROCK, SoundType.STONE, 1.4f, "unending_bowl", TileEntityUnendingBowl.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
-    event.addBlock(incense_burner = new BlockIncenseBurner(Material.ROCK, SoundType.STONE, 1.4f, "incense_burner", TileEntityIncenseBurner.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
+    //event.addBlock(incense_burner = new BlockIncenseBurner(Material.ROCK, SoundType.STONE, 1.4f, "incense_burner", TileEntityIncenseBurner.class)).setCreativeTab(Roots.tab).setLightOpacity(0);
 
     //Runes
     event.addBlock(wildroot_rune = new BlockWildwoodRune(Material.WOOD, SoundType.WOOD, 1.4f, "wildroot_rune")).setCreativeTab(Roots.tab);
