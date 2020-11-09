@@ -50,6 +50,9 @@ public class MessageRunicShearsFX implements IMessage {
     protected void handleMessage(final MessageRunicShearsFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       Entity entity = message.getEntity(world);
+      if (entity == null) {
+        return;
+      }
       for (int i = 0; i < 50; i++) {
         ClientProxy.particleRenderer
             .spawnParticle(world, ParticleGlitter.class, entity.posX, entity.posY + 0.9f, entity.posZ,
