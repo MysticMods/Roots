@@ -88,6 +88,9 @@ public class MappingsEvent {
           case "structure_marker":
             mapping.ignore();
             break;
+          case "incense_burner":
+            mapping.ignore();
+            break;
         }
       }
     }
