@@ -34,7 +34,8 @@ public class ItemLifeEssence extends ItemBase {
     if (id == null) {
       return super.getItemStackDisplayName(stack);
     } else {
-      return I18n.format(this.getTranslationKey() + ".entity_name", I18n.format("entity." + EntityList.getTranslationName(id) + ".name"));
+      return net.minecraft.util.text.translation.I18n.translateToLocalFormatted(this.getTranslationKey() + ".entity_name", net.minecraft.util.text.translation.I18n.translateToLocalFormatted("entity." + EntityList.getTranslationName(id) + ".name"));
+      //return I18n.format(this.getTranslationKey() + ".entity_name", I18n.format("entity." + EntityList.getTranslationName(id) + ".name"));
     }
   }
 
