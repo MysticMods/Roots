@@ -58,17 +58,41 @@ public class MessagePetalShellRingFX extends ModifierPacket implements IMessage 
     protected void handleMessage(final MessagePetalShellRingFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       int count = message.amplifier;
-      for (float i = 0; i < 360; i += 120) {
-        float ang = (float) (message.ticksExisted % 360);
-        float tx = (float) message.posX + 0.8f * (float) Math.sin(Math.toRadians(2.0f * (i + ang)));
-        float ty = (float) message.posY + 1.0f;
-        float tz = (float) message.posZ + 0.8f * (float) Math.cos(Math.toRadians(2.0f * (i + ang)));
-        ParticleUtil.spawnParticlePetal(world, tx, ty, tz, 0, 0, 0, message.has(SpellPetalShell.COLOUR) ? SpellPetalShell.mossFirst : SpellPetalShell.instance.getFirstColours(), 3.5f, 10);
+      int shells = SpellPetalShell.instance.maxShells; // 3 - 1
+      if (message.has(SpellPetalShell.CHARGES)) {
+        shells += SpellPetalShell.instance.extraShells; // 2
+      }
+      float radius = 0.8f;
+      float height = 1.0f;
+      float anglePerShell = (float)(Math.PI * 2.0 / (shells+1));
+      float angleOffset   = (float)Math.toRadians(message.ticksExisted % 360);
+      for (int i = 0; i <= shells; i++) {
+        float tx = (float) message.posX + radius * (float) Math.sin(angleOffset + i * anglePerShell);
+        float tz = (float) message.posZ + radius * (float) Math.cos(angleOffset + i * anglePerShell);
+        float ty = (float) message.posY + height;
+        ParticleUtil.spawnParticlePetal(world, tx, ty, tz, 0, 0, 0, message.has(SpellPetalShell.COLOUR) ? SpellPetalShell.mossFirst : SpellPetalShell.instance.getFirstColours(), 3.5f, 15);
         count--;
         if (count < 0) {
           break;
         }
       }
+/*      World world = Minecraft.getMinecraft().world;
+      int count = message.amplifier;
+      int shells = SpellPetalShell.instance.maxShells; // 3 - 1
+      if (message.has(SpellPetalShell.CHARGES)) {
+        shells += SpellPetalShell.instance.extraShells; // 2
+      }
+      for (float i = 0; i < 360; i += (360.0 / shells + 1)) {
+        float ang = (float) (message.ticksExisted % 360);
+        float tx = (float) message.posX + 0.8f * (float) Math.sin(Math.toRadians(2.0f * (i + ang)));
+        float ty = (float) message.posY + 1.0f;
+        float tz = (float) message.posZ + 0.8f * (float) Math.cos(Math.toRadians(2.0f * (i + ang)));
+        ParticleUtil.spawnParticlePetal(world, tx, ty, tz, 0, 0, 0, message.has(SpellPetalShell.COLOUR) ? SpellPetalShell.mossFirst : SpellPetalShell.instance.getFirstColours(), 3.5f, 15);
+        count--;
+        if (count < 0) {
+          break;
+        }
+      }*/
     }
   }
 }

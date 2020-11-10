@@ -74,7 +74,8 @@ public class SpellPetalShell extends SpellBase {
 
   public int duration, fire_duration, poison_duration, poison_amplifier, levitate_duration, weakness_duration, slow_duration, slow_amplifier, bleed_duration, bleed_amplifier, weakness_amplifier;
   public float fire_damage, dagger_damage, radiant_damage;
-  private int maxShells, extraShells, radius_x, radius_y, radius_z;
+  public int maxShells, extraShells;
+  private int radius_x, radius_y, radius_z;
 
   public SpellPetalShell(ResourceLocation name) {
     super(name, TextFormatting.LIGHT_PURPLE, 255f / 255f, 192f / 255f, 240f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
@@ -102,7 +103,6 @@ public class SpellPetalShell extends SpellBase {
       if (info.has(CHARGES)) {
         shells += extraShells;
       }
-      shells = info.ampInt(shells);
       if (info.has(PEACEFUL)) {
         World world = player.world;
         List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, bb.offset(player.getPosition()));
@@ -135,7 +135,7 @@ public class SpellPetalShell extends SpellBase {
   public void doFinalise() {
     this.castType = properties.get(PROP_CAST_TYPE);
     this.cooldown = properties.get(PROP_COOLDOWN);
-    this.maxShells = properties.get(PROP_MAXIMUM);
+    this.maxShells = properties.get(PROP_MAXIMUM) - 1;
     this.duration = properties.get(PROP_DURATION);
     this.radius_x = properties.get(PROP_RADIUS_X);
     this.radius_y = properties.get(PROP_RADIUS_Y);
