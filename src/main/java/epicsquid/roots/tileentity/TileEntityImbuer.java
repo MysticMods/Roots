@@ -216,20 +216,20 @@ public class TileEntityImbuer extends TileBase implements ITickable {
         if (!world.isRemote) {
           ItemStack inSlot = inventory.getStackInSlot(1);
           if ((inSlot.getItem() == ModItems.staff || inSlot.getItem() == ModItems.gramary) && spell != FakeSpell.INSTANCE) {
-            boolean ejectItem = true;
+            boolean ejectItem = inSlot.getItem() != ModItems.gramary;
             if (inserter == null) {
               Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
             } else {
               if (inSlot.getItem() == ModItems.staff) {
                 ItemStaff.createData(inSlot, capability);
-              } else if (inSlot.getItem() == ModItems.gramary) {
-                ejectItem = false;
               }
               SpellLibraryData library = SpellLibraryRegistry.getData(inserter);
               library.addSpell(spell);
-              world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inSlot));
+              if (!ejectItem) {
+                world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inSlot));
+              }
               PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(spell.getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
-              if (!ejectItem && inserter != null) {
+              if (inserter != null) {
                 EntityPlayerMP player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(inserter);
                 player.sendStatusMessage(new TextComponentTranslation("roots.message.spell_imbued", new TextComponentTranslation(spell.getTranslationKey() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))), true);
               }
