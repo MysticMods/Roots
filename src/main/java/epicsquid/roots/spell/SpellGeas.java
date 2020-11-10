@@ -1,21 +1,17 @@
 package epicsquid.roots.spell;
 
-import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticallib.util.RayCastUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
-import epicsquid.roots.network.fx.MessageTargetedGeasFX;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.EntityUtil;
 import epicsquid.roots.util.SlaveUtil;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -31,6 +27,7 @@ public class SpellGeas extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(80);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("baffle_cap", 0.5));
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("terra_moss", 0.125));
   public static Property<Integer> PROP_DURATION = new Property<>("geas_duration", 400).setDescription("duration in ticks of this spell effect on entities");
   public static Property<Double> PROP_DISTANCE = new Property<>("distance", 15d).setDescription("the farthest extent that entities will be looked for when using targeted mode");
   public static Property<Integer> PROP_EXTENSION = new Property<>("extension", 600).setDescription("additional duration in ticks to be added to the base duration");
@@ -46,16 +43,14 @@ public class SpellGeas extends SpellBase {
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "animal_servants"), ModifierCores.WILDEWHEET, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier WEAKNESS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "weakened_response"), ModifierCores.SPIRIT_HERB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 0.275)));
   public static Modifier GUARDIANS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "unholy_command"), ModifierCores.MOONGLOW_LEAF, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 0.675)));
-  public static Modifier TRIO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "triumvirate"), ModifierCores.WILDROOT, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.675)));
-  public static Modifier TARGET = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "targeted_geas"), ModifierCores.TERRA_MOSS, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.TERRA_MOSS, 0.125)));
-  public static Modifier DUO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "duumvirate"), ModifierCores.CLOUD_BERRY, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 0.675)));
+  public static Modifier ADDED1 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "additional_target1"), ModifierCores.WILDROOT, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.675)));
+  public static Modifier ADDED2 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "additional_target2"), ModifierCores.CLOUD_BERRY, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 0.675)));
   public static Modifier FIRE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "inferno"), ModifierCores.INFERNAL_BULB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 0.275)));
   public static Modifier PHYSICAL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "avalanche"), ModifierCores.STALICRIPE, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 0.275)));
   public static Modifier WATER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "waterfall"), ModifierCores.DEWGONIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 0.275)));
 
   static {
     // Conflicts
-    TARGET.addConflicts(TRIO, DUO);
     PEACEFUL.addConflicts(FIRE, PHYSICAL, WATER);
     FIRE.addConflicts(PHYSICAL, WATER);
     PHYSICAL.addConflicts(WATER);
@@ -71,8 +66,8 @@ public class SpellGeas extends SpellBase {
 
   public SpellGeas(ResourceLocation name) {
     super(name, TextFormatting.DARK_RED, 128f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DURATION, PROP_EXTENSION, PROP_WEAKNESS_DURATION, PROP_FIRE_DAMAGE, PROP_FIRE_DURATION, PROP_PHYSICAL_DAMAGE, PROP_WATER_DAMAGE, PROP_DISTANCE, PROP_WEAKNESS_AMPLIFIER);
-    acceptsModifiers(DURATION, PEACEFUL, WEAKNESS, GUARDIANS, TRIO, TARGET, DUO, FIRE, PHYSICAL, WATER);
+    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DURATION, PROP_EXTENSION, PROP_WEAKNESS_DURATION, PROP_FIRE_DAMAGE, PROP_FIRE_DURATION, PROP_PHYSICAL_DAMAGE, PROP_WATER_DAMAGE, PROP_DISTANCE, PROP_WEAKNESS_AMPLIFIER);
+    acceptsModifiers(DURATION, PEACEFUL, WEAKNESS, GUARDIANS, ADDED1, ADDED2, FIRE, PHYSICAL, WATER);
   }
 
   @Override
@@ -128,38 +123,26 @@ public class SpellGeas extends SpellBase {
     }
     dur = info.ampInt(dur);
     boolean peaceful = info.has(PEACEFUL);
-    if (info.has(TARGET)) {
-      List<EntityLivingBase> entities = RayCastUtil.rayTraceEntities(EntityLivingBase.class, player, distance);
-      entities.removeIf(o -> o.getActivePotionEffect(ModPotions.geas) != null);
-      if (!entities.isEmpty()) {
-        EntityLivingBase target = entities.get(0);
-        affected = affect(target, peaceful, player, info, dur);
-        if (!player.world.isRemote) {
-          MessageTargetedGeasFX packet = new MessageTargetedGeasFX(player, target);
-          PacketHandler.INSTANCE.sendTo(packet, (EntityPlayerMP) player);
+
+    if (info.has(ADDED2)) {
+      count++;
+    }
+    if (info.has(ADDED1)) {
+      count++;
+    }
+    for (int i = 0; i < 20; i++) {
+      double x = player.posX + player.getLookVec().x * 3.0 * (float) i;
+      double y = player.posY + player.getEyeHeight() + player.getLookVec().y * 3.0 * (float) i;
+      double z = player.posZ + player.getLookVec().z * 3.0 * (float) i;
+      List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 4.0, y - 4.0, z - 4.0, x + 5.0, y + 5.0, z + 5.0));
+      for (EntityLivingBase e : entities) {
+        if (affected == count) {
+          break;
         }
-      }
-    } else {
-      if (info.has(DUO)) {
-        count = 2;
-      }
-      if (info.has(TRIO)) {
-        count = 3;
-      }
-      for (int i = 0; i < 20; i++) {
-        double x = player.posX + player.getLookVec().x * 3.0 * (float) i;
-        double y = player.posY + player.getEyeHeight() + player.getLookVec().y * 3.0 * (float) i;
-        double z = player.posZ + player.getLookVec().z * 3.0 * (float) i;
-        List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 4.0, y - 4.0, z - 4.0, x + 5.0, y + 5.0, z + 5.0));
-        for (EntityLivingBase e : entities) {
-          if (affected == count) {
-            break;
-          }
-          if (e == player) {
-            continue;
-          }
-          affected += affect(e, peaceful, player, info, dur);
+        if (e == player) {
+          continue;
         }
+        affected += affect(e, peaceful, player, info, dur);
       }
     }
     return affected > 0;
