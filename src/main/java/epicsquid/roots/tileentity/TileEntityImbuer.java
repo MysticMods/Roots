@@ -225,7 +225,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
               }
               SpellLibraryData library = SpellLibraryRegistry.getData(inserter);
               library.addSpell(spell);
-              if (!ejectItem) {
+              if (ejectItem) {
                 world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inSlot));
               }
               PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(spell.getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
