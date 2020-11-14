@@ -1,5 +1,7 @@
 {
   "directory": "src\\main\\resources\\assets\\roots\\models\\item",
+  "blocks": "src\\main\\resources\\assets\\roots\\models\\block",
+  "items": "src\\main\\resources\\assets\\roots\\models\\item",
   "texture_base": "roots:items/",
   "models": [
     {
@@ -277,6 +279,102 @@
     {
       "type": "item",
       "base": "spell_dust"
+    },
+    {
+      "type": "item",
+      "base": "acid_cloud"
+    },
+    {
+      "type": "item",
+      "base": "aqua_bubble"
+    },
+    {
+      "type": "item",
+      "base": "augment"
+    },
+    {
+      "type": "item",
+      "base": "chrysopoeia"
+    },
+    {
+      "type": "item",
+      "base": "dandelion_winds"
+    },
+    {
+      "type": "item",
+      "base": "desaturate"
+    },
+    {
+      "type": "item",
+      "base": "disarm"
+    },
+    {
+      "type": "item",
+      "base": "extension"
+    },
+    {
+      "type": "item",
+      "base": "fey_light"
+    },
+    {
+      "type": "item",
+      "base": "geas"
+    },
+    {
+      "type": "item",
+      "base": "growth_infusion"
+    },
+    {
+      "type": "item",
+      "base": "harvest"
+    },
+    {
+      "type": "item",
+      "base": "life_drain"
+    },
+    {
+      "type": "item",
+      "base": "natures_scythe"
+    },
+    {
+      "type": "item",
+      "base": "petal_shell"
+    },
+    {
+      "type": "item",
+      "base": "radiance"
+    },
+    {
+      "type": "item",
+      "base": "rose_thorns"
+    },
+    {
+      "type": "item",
+      "base": "sanctuary"
+    },
+    {
+      "type": "item",
+      "base": "saturate"
+    },
+    {
+      "type": "item",
+      "base": "shatter"
+    },
+    {
+      "type": "item",
+      "base": "sky_soarer"
+    },
+    {
+      "type": "item",
+      "base": "storm_cloud"
+    },
+    {
+      "type": "item",
+      "base": "time_stop"
+    },
+    {
+      "type": "item",
+      "base": "wild_fire"
     }
   ]
 }
