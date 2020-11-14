@@ -141,7 +141,7 @@ public class SpellGrowthInfusion extends SpellBase {
         for (int i = 0; i < info.ampInt(count) + player.world.rand.nextInt((info.ampSubInt(additional_count))); i++) {
           BlockPos pos = positions.get(player.world.rand.nextInt(positions.size()));
           IBlockState state = player.world.getBlockState(pos);
-          for (int j = 0; j < ticks; j++) {
+          for (int j = 0; j < this.ticks; j++) {
             state.getBlock().randomTick(player.world, pos, state, Util.rand);
           }
           if (info.has(HYDRATE)) {
