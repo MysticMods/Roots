@@ -4,7 +4,6 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.modifiers.instance.staff.ISnapshot;
 import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
-import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageChemTrailsFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellSkySoarer;
@@ -114,7 +113,9 @@ public class EntityBoost extends Entity {
           if (this.modifiers.has(SpellSkySoarer.SLOW_FALL)) {
             player.addPotionEffect(new PotionEffect(ModPotions.slow_fall, SpellSkySoarer.instance.slow_duration));
           }
-          markSafe(player);
+          if (this.modifiers.has(SpellSkySoarer.NO_FALL_DAMAGE)) {
+            markSafe(player);
+          }
         }
       }
     }
