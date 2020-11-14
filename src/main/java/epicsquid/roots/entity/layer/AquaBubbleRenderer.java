@@ -1,4 +1,4 @@
-package epicsquid.roots.entity.player.layer;
+package epicsquid.roots.entity.layer;
 
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
@@ -6,28 +6,39 @@ import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellStormCloud;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelPlayer;
+import net.minecraft.client.model.ModelWolf;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
-public class AquaBubbleRenderer implements LayerRenderer<EntityPlayer> {
+public class AquaBubbleRenderer<T extends EntityLivingBase> implements LayerRenderer<T> {
   private static final ResourceLocation AQUA_TEXTURE = new ResourceLocation(Roots.MODID, "textures/entity/aqua_bubble.png");
-  private final RenderPlayer renderer;
-  private final ModelPlayer model;
+  private final RenderLivingBase<T> renderer;
+  private final ModelBase model;
+  private final boolean player;
 
-  public AquaBubbleRenderer(RenderPlayer renderer) {
+  public AquaBubbleRenderer(RenderLivingBase<T> renderer) {
     this.renderer = renderer;
-    boolean smallArms = ObfuscationReflectionHelper.getPrivateValue(ModelPlayer.class, renderer.getMainModel(), "field_178735_y");
-    this.model = new ModelPlayer(1.3f, smallArms);
+    if (renderer instanceof RenderPlayer) {
+      boolean smallArms = ObfuscationReflectionHelper.getPrivateValue(ModelPlayer.class, ((RenderPlayer)renderer).getMainModel(), "field_178735_y");
+      this.model = new ModelPlayer(1.3f, smallArms);
+      this.player = true;
+    } else {
+      this.player = false;
+      this.model = renderer.getMainModel();
+    }
   }
 
   @Override
-  public void doRenderLayer(EntityPlayer player, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+  public void doRenderLayer(T player, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
     if (player.getActivePotionEffect(ModPotions.aqua_bubble) != null) {
       boolean flag = player.isInvisible();
       GlStateManager.depthMask(!flag);
@@ -43,7 +54,11 @@ public class AquaBubbleRenderer implements LayerRenderer<EntityPlayer> {
       GlStateManager.blendFunc(GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE);
       this.model.setModelAttributes(this.renderer.getMainModel());
       Minecraft.getMinecraft().entityRenderer.setupFogColor(true);
-      this.model.render(player, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+      if (this.player) {
+        this.model.render(player, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+      } else {
+        this.model.render(player, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale * 0.5f);
+      }
       Minecraft.getMinecraft().entityRenderer.setupFogColor(false);
       GlStateManager.matrixMode(5890);
       GlStateManager.loadIdentity();

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "roots:items/spell_dust"
+    "layer0": "roots:items/natures_scythe"
   }
 }
