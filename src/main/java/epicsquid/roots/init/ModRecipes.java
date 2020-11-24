@@ -1,6 +1,8 @@
 package epicsquid.roots.init;
 
 import com.google.common.collect.Lists;
+import crafttweaker.api.item.IIngredient;
+import crafttweaker.api.oredict.IOreDictEntry;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticallib.recipe.factories.OreFallbackIngredient;
 import epicsquid.mysticallib.util.ItemUtil;
@@ -360,8 +362,12 @@ public class ModRecipes {
   }
 
   public static void addFlowerRecipe(String name, Block block, int meta) {
+    addFlowerRecipe(name, block, meta, Collections.emptyList());
+  }
+
+  public static void addFlowerRecipe(String name, Block block, int meta, List<IIngredient> allowedSoils) {
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
-    FlowerRecipe recipe = new FlowerRecipe(rl, meta, block);
+    FlowerRecipe recipe = new FlowerRecipe(rl, meta, block, allowedSoils);
     flowerRecipes.put(rl, recipe);
   }
 
