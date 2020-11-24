@@ -3,6 +3,7 @@ package epicsquid.roots.entity.ritual;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.mc1120.item.MCItemStack;
+import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.FlowerRecipe;
 import epicsquid.roots.ritual.RitualFlowerGrowth;
@@ -33,11 +34,13 @@ public class EntityRitualFlowerGrowth extends EntityRitualBase {
 
     if (this.ticksExisted % ritual.interval == 0) {
       BlockPos topBlockPos = RitualUtil.getRandomPosRadialXZ(new BlockPos(getPosition().getX(), getPosition().getY() - ritual.radius_y, getPosition().getZ()), ritual.radius_x, ritual.radius_z);
-      while (!generateFlower(topBlockPos)) {
-        topBlockPos = topBlockPos.up();
-        // TODO: Make bounds configurable
-        if (topBlockPos.getY() > 256 || Math.abs(topBlockPos.getY() - posY) < 20)
+      for (int i = 0; i <= ritual.radius_y; i++) {
+        if (generateFlower(topBlockPos.up(i))) {
           break;
+        }
+        if (generateFlower(topBlockPos.down(i))) {
+          break;
+        }
       }
     }
   }
@@ -67,7 +70,7 @@ public class EntityRitualFlowerGrowth extends EntityRitualBase {
     if (allowedSoils.size() > 0) {
       // Only use whitelisting logic if there's a provided whitelist.
       if (world.isAirBlock(pos.down())) {
-        // Can't create an item stack of air.
+        // It is invalid to create an ItemStack of air, so don't even try.
         return false;
       }
       IBlockState blockState = world.getBlockState(pos.down());
