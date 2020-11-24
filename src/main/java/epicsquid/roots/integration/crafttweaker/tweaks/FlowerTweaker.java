@@ -105,8 +105,12 @@ public class FlowerTweaker {
       CraftTweakerAPI.logError("Cannot set " + stack.toString() + " as a Flower Growth ritual item as it is not an ItemBlock.");
       return;
     }
+    for (IIngredient soil : allowedSoils) {
+      if (soil.getAmount() != 1) {
+        CraftTweakerAPI.logError("allowedSoils: soils should be single-item stacks");
+      }
+    }
     Block block = ((ItemBlock) converted.getItem()).getBlock();
-    CraftTweakerAPI.logDefault("addRecipeItemOnSoils with " + allowedSoils.size() + " soil types");
     CraftTweaker.LATE_ACTIONS.add(new FlowerBlockMeta(name, block, converted.getMetadata(), allowedSoils));
   }
 

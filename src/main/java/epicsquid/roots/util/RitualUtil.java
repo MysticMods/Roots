@@ -69,6 +69,13 @@ public class RitualUtil {
   }
 
   /**
+   * Get a random integer between min and max inclusive.
+   */
+  public static int getRandomInteger(int min, int max) {
+    return rand.nextInt(max - min + 1) + min;
+  }
+
+  /**
    * Checks if the given block has water adjacent to it
    *
    * @return True if at least one side is touching a water source block

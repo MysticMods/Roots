@@ -20,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class EntityRitualFlowerGrowth extends EntityRitualBase {
-  private RitualFlowerGrowth ritual;
+  private final RitualFlowerGrowth ritual;
 
   public EntityRitualFlowerGrowth(World worldIn) {
     super(worldIn);
@@ -33,12 +33,15 @@ public class EntityRitualFlowerGrowth extends EntityRitualBase {
     super.onUpdate();
 
     if (this.ticksExisted % ritual.interval == 0) {
-      BlockPos topBlockPos = RitualUtil.getRandomPosRadialXZ(new BlockPos(getPosition().getX(), getPosition().getY() - ritual.radius_y, getPosition().getZ()), ritual.radius_x, ritual.radius_z);
-      for (int i = 0; i <= ritual.radius_y; i++) {
-        if (generateFlower(topBlockPos.up(i))) {
-          break;
-        }
-        if (generateFlower(topBlockPos.down(i))) {
+      BlockPos baseOfRandomColumn = RitualUtil.getRandomPosRadialXZ(
+              getPosition().down(ritual.radius_y), ritual.radius_x, ritual.radius_z);
+      // If there are multiple "platforms", we want an upper platform block to be a candidate for planting
+      // even if the lower platform block below it isn't, so start at a random offset.
+      int blocksToScan = ritual.radius_y * 2 + 1;
+      int offset = RitualUtil.getRandomInteger(0, blocksToScan);
+      for (int i = 0; i < blocksToScan; i++) {
+        int height = (offset + i) % blocksToScan;
+        if (generateFlower(baseOfRandomColumn.up(height))) {
           break;
         }
       }
@@ -51,12 +54,7 @@ public class EntityRitualFlowerGrowth extends EntityRitualBase {
     }
 
     List<IIngredient> allowedSoils = Collections.emptyList();
-    // If the user removed all recipes, we'll fall back to making dandelions.
     IBlockState flower = Blocks.YELLOW_FLOWER.getStateFromMeta(BlockFlower.EnumFlowerType.DANDELION.getMeta());
-
-    // Ideally, we'd iterate through all recipes in a random order and try to use each.
-    // That would allow us to place one flower per iteration more reliably instead of trying a random recipe
-    // at every point in a giant column.
     FlowerRecipe recipe = ModRecipes.getRandomFlowerRecipe();
     if (recipe != null) {
       flower = recipe.getFlower();
@@ -75,8 +73,7 @@ public class EntityRitualFlowerGrowth extends EntityRitualBase {
       }
       IBlockState blockState = world.getBlockState(pos.down());
       Block block = blockState.getBlock();
-
-      IItemStack soil = new MCItemStack(new ItemStack(block, block.getMetaFromState(blockState)));
+      IItemStack soil = new MCItemStack(new ItemStack(block, 1, block.getMetaFromState(blockState)));
       boolean found = false;
       for (IIngredient allowedSoil : allowedSoils) {
         if (allowedSoil.contains(soil)) {
