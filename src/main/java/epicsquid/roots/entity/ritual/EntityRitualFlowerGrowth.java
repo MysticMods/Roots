@@ -43,17 +43,16 @@ public class EntityRitualFlowerGrowth extends EntityRitualBase {
     if (!world.isAirBlock(pos)) {
       return false;
     }
-
+    if (world.isAirBlock(pos.down())) {
+      return false;
+    }
     IBlockState flower = ModRecipes.getRandomFlowerRecipe(world.getBlockState(pos.down()));
-
     if (!flower.getBlock().canPlaceBlockAt(world, pos)) {
       return false;
     }
-
     if (!world.isRemote) {
       world.setBlockState(pos, flower);
     }
-
     return true;
   }
 }
