@@ -1,10 +1,9 @@
 package epicsquid.roots.recipe;
 
-import crafttweaker.api.item.IIngredient;
-import crafttweaker.api.oredict.IOreDictEntry;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import java.util.Collections;
 import java.util.List;
@@ -17,9 +16,9 @@ public class FlowerRecipe {
   private final int meta;
   private final Block block;
   private final ItemStack stack;
-  private final List<IIngredient> allowedSoils;
+  private final List<Ingredient> allowedSoils;
 
-  public FlowerRecipe(ResourceLocation name, IBlockState flower, List<IIngredient> allowedSoils) {
+  public FlowerRecipe(ResourceLocation name, IBlockState flower, List<Ingredient> allowedSoils) {
     this.flower = flower;
     this.registryName = name;
     this.block = flower.getBlock();
@@ -47,7 +46,7 @@ public class FlowerRecipe {
     this.allowedSoils = Collections.emptyList();
   }
 
-  public FlowerRecipe(ResourceLocation name, int meta, Block block, List<IIngredient> allowedSoils) {
+  public FlowerRecipe(ResourceLocation name, int meta, Block block, List<Ingredient> allowedSoils) {
     this.registryName = name;
     this.meta = meta;
     this.flower = block.getStateFromMeta(this.meta);
@@ -75,7 +74,7 @@ public class FlowerRecipe {
     return flower;
   }
 
-  public List<IIngredient> getAllowedSoils() {
+  public List<Ingredient> getAllowedSoils() {
     return allowedSoils;
   }
 

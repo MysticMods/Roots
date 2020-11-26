@@ -1,9 +1,6 @@
 package epicsquid.roots.entity.ritual;
 
-import crafttweaker.api.item.IIngredient;
-import crafttweaker.api.item.IItemStack;
-import crafttweaker.mc1120.item.MCItemStack;
-import epicsquid.roots.Roots;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.FlowerRecipe;
 import epicsquid.roots.ritual.RitualFlowerGrowth;
@@ -14,6 +11,7 @@ import net.minecraft.block.BlockFlower;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import java.util.Collections;
@@ -53,7 +51,7 @@ public class EntityRitualFlowerGrowth extends EntityRitualBase {
       return false;
     }
 
-    List<IIngredient> allowedSoils = Collections.emptyList();
+    List<Ingredient> allowedSoils = Collections.emptyList();
     IBlockState flower = Blocks.YELLOW_FLOWER.getStateFromMeta(BlockFlower.EnumFlowerType.DANDELION.getMeta());
     FlowerRecipe recipe = ModRecipes.getRandomFlowerRecipe();
     if (recipe != null) {
@@ -71,12 +69,10 @@ public class EntityRitualFlowerGrowth extends EntityRitualBase {
         // It is invalid to create an ItemStack of air, so don't even try.
         return false;
       }
-      IBlockState blockState = world.getBlockState(pos.down());
-      Block block = blockState.getBlock();
-      IItemStack soil = new MCItemStack(new ItemStack(block, 1, block.getMetaFromState(blockState)));
+      ItemStack soil = ItemUtil.stackFromState(world.getBlockState(pos.down()));
       boolean found = false;
-      for (IIngredient allowedSoil : allowedSoils) {
-        if (allowedSoil.contains(soil)) {
+      for (Ingredient allowedSoil : allowedSoils) {
+        if (allowedSoil.apply(soil)) {
           found = true;
           break;
         }

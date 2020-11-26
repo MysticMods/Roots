@@ -20,9 +20,12 @@ import epicsquid.roots.util.zen.ZenDocMethod;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -105,13 +108,12 @@ public class FlowerTweaker {
       CraftTweakerAPI.logError("Cannot set " + stack.toString() + " as a Flower Growth ritual item as it is not an ItemBlock.");
       return;
     }
+    List<Ingredient> allowedSoilsMC = new ArrayList<>(allowedSoils.size());
     for (IIngredient soil : allowedSoils) {
-      if (soil.getAmount() != 1) {
-        CraftTweakerAPI.logError("allowedSoils: soils should be single-item stacks");
-      }
+      allowedSoilsMC.add(CraftTweakerMC.getIngredient(soil));
     }
     Block block = ((ItemBlock) converted.getItem()).getBlock();
-    CraftTweaker.LATE_ACTIONS.add(new FlowerBlockMeta(name, block, converted.getMetadata(), allowedSoils));
+    CraftTweaker.LATE_ACTIONS.add(new FlowerBlockMeta(name, block, converted.getMetadata(), allowedSoilsMC));
   }
 
   private static class Remove extends Action {
@@ -162,9 +164,9 @@ public class FlowerTweaker {
     private final Block block;
     private final int meta;
     private final String name;
-    private final List<IIngredient> allowedSoils;
+    private final List<Ingredient> allowedSoils;
 
-    protected FlowerBlockMeta(String name, Block block, int meta, List<IIngredient> allowedSoils) {
+    protected FlowerBlockMeta(String name, Block block, int meta, List<Ingredient> allowedSoils) {
       super("add_block_meta_flower");
       this.name = name;
       this.block = block;
