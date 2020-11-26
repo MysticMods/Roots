@@ -373,9 +373,10 @@ public class ModRecipes {
     flowerRecipes.remove(name);
   }
 
-  @Nullable
   public static IBlockState getRandomFlowerRecipe(IBlockState soil) {
-    if (flowerRecipes.isEmpty()) return null;
+    if (flowerRecipes.isEmpty()) {
+      return Blocks.YELLOW_FLOWER.getStateFromMeta(BlockFlower.EnumFlowerType.DANDELION.getMeta());
+    }
 
     ItemStack soilStack = ItemUtil.stackFromState(soil);
     List<FlowerRecipe> matches = new ArrayList<>();

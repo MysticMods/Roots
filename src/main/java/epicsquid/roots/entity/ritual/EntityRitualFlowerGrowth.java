@@ -45,9 +45,6 @@ public class EntityRitualFlowerGrowth extends EntityRitualBase {
     }
 
     IBlockState flower = ModRecipes.getRandomFlowerRecipe(world.getBlockState(pos.down()));
-    if (flower == null) {
-      flower = Blocks.YELLOW_FLOWER.getStateFromMeta(BlockFlower.EnumFlowerType.DANDELION.getMeta());
-    }
 
     if (!flower.getBlock().canPlaceBlockAt(world, pos)) {
       return false;
