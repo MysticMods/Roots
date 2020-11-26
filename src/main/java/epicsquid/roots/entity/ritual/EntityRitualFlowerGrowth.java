@@ -1,21 +1,14 @@
 package epicsquid.roots.entity.ritual;
 
-import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.recipe.FlowerRecipe;
 import epicsquid.roots.ritual.RitualFlowerGrowth;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.RitualUtil;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import java.util.Collections;
-import java.util.List;
 
 public class EntityRitualFlowerGrowth extends EntityRitualBase {
   private final RitualFlowerGrowth ritual;
@@ -51,35 +44,13 @@ public class EntityRitualFlowerGrowth extends EntityRitualBase {
       return false;
     }
 
-    List<Ingredient> allowedSoils = Collections.emptyList();
-    IBlockState flower = Blocks.YELLOW_FLOWER.getStateFromMeta(BlockFlower.EnumFlowerType.DANDELION.getMeta());
-    FlowerRecipe recipe = ModRecipes.getRandomFlowerRecipe();
-    if (recipe != null) {
-      flower = recipe.getFlower();
-      allowedSoils = recipe.getAllowedSoils();
+    IBlockState flower = ModRecipes.getRandomFlowerRecipe(world.getBlockState(pos.down()));
+    if (flower == null) {
+      flower = Blocks.YELLOW_FLOWER.getStateFromMeta(BlockFlower.EnumFlowerType.DANDELION.getMeta());
     }
 
     if (!flower.getBlock().canPlaceBlockAt(world, pos)) {
       return false;
-    }
-
-    if (allowedSoils.size() > 0) {
-      // Only use whitelisting logic if there's a provided whitelist.
-      if (world.isAirBlock(pos.down())) {
-        // It is invalid to create an ItemStack of air, so don't even try.
-        return false;
-      }
-      ItemStack soil = ItemUtil.stackFromState(world.getBlockState(pos.down()));
-      boolean found = false;
-      for (Ingredient allowedSoil : allowedSoils) {
-        if (allowedSoil.apply(soil)) {
-          found = true;
-          break;
-        }
-      }
-      if (!found) {
-        return false;
-      }
     }
 
     if (!world.isRemote) {

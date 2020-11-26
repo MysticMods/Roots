@@ -374,10 +374,27 @@ public class ModRecipes {
   }
 
   @Nullable
-  public static FlowerRecipe getRandomFlowerRecipe() {
+  public static IBlockState getRandomFlowerRecipe(IBlockState soil) {
     if (flowerRecipes.isEmpty()) return null;
 
-    return Lists.newArrayList(flowerRecipes.values()).get(Util.rand.nextInt(Math.max(1, flowerRecipes.size())));
+    ItemStack soilStack = ItemUtil.stackFromState(soil);
+    List<FlowerRecipe> matches = new ArrayList<>();
+    for (FlowerRecipe recipe : flowerRecipes.values()) {
+      if (recipe.getAllowedSoils().isEmpty()) {
+        matches.add(recipe);
+      } else {
+        for (Ingredient allowedSoil : recipe.getAllowedSoils()) {
+          if (allowedSoil.apply(soilStack)) {
+            matches.add(recipe);
+            break;
+          }
+        }
+      }
+    }
+    if (matches.isEmpty()) {
+      return null;
+    }
+    return matches.get(Util.rand.nextInt(matches.size())).getFlower();
   }
 
   public static Map<ResourceLocation, FlowerRecipe> getFlowerRecipes() {
