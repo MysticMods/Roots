@@ -251,6 +251,10 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
   @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
+    if (heldItem.getItem() == ModItems.firestarter) {
+      return false;
+    }
+
     if (ModItems.knives.contains(heldItem.getItem()) && player.isSneaking()) {
       if (world.isRemote) {
         toggleShowRange();

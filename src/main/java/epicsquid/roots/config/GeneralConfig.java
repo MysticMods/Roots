@@ -108,6 +108,9 @@ public class GeneralConfig {
   public static Fluid getFluid() {
     return FluidRegistry.getFluid(FluidName);
   }
+
+  @Config.Comment(("How long it takes a Fire Starter to start a fire (in ticks)"))
+  public static int FireStarterTicks = 20 * 3;
 }
 
 
