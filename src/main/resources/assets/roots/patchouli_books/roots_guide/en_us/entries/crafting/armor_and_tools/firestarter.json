@@ -1,0 +1,11 @@
+{
+  "name": "Fire Starter",
+  "icon": "roots:firestarter",
+  "category": "crafting",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

@@ -7,6 +7,7 @@ item.roots_guide.name=The Magic of the Wilds
 item.roots.roots_guide.name=The Magic of the Wilds
 info.roots.roots_guide.landing=This book is a compilation of all known information, dating back to the age of Druids and down into the modern era, where mages of the wild seek to piece together all the different ways the natural world can be interacted with.
 
+item.fire_starter.name=Fire Starter
 item.glass_eye.name=Glass Eye
 item.golden_eye.name=Golden Eye
 item.assorted_seeds.name=Mixed Seeds
@@ -486,6 +487,7 @@ roots.runic_shears.tooltip1=%s a block or entity to attempt to collect a Fey Gif
 roots.runic_shears.tooltip2=%s an entity to attempt to extract its Life Essence.
 
 roots.glass_eye.tooltip=Right-Click to shatter and grant vision in dark places.
+roots.fire_starter.tooltip=Hold Right-Click to slowly start a fire.
 
 # Ritual of Transmutation
 roots.ritual.transmutation.deadbush_cocoa=Obtained through the Ritual of Transmutation. Nearby dead bushes will transform into cocoa beans.

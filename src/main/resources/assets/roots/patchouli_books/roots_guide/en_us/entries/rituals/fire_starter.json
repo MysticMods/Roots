@@ -1,0 +1,11 @@
+{
+    "name": "Starting Fires",
+    "icon": "roots:firestarter",
+    "category": "rituals",
+    "pages": [
+        {
+          "type": "text",
+          "text": "Once a ritual has been begun on a Pyre, the Pyre will begin looking for the same ingredients (or similar where the ore dictionary is used) in inventories below it. If found, these will be inserted into the Pyre.$(br2)At the end of a ritual, if the Pyre contains the items to repeat itself, the fire does not go out but starts anew, consuming the items."
+        }
+    ]
+}
