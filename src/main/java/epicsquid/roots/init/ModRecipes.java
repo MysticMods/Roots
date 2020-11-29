@@ -360,8 +360,12 @@ public class ModRecipes {
   }
 
   public static void addFlowerRecipe(String name, Block block, int meta) {
+    addFlowerRecipe(name, block, meta, Collections.emptyList());
+  }
+
+  public static void addFlowerRecipe(String name, Block block, int meta, List<Ingredient> allowedSoils) {
     ResourceLocation rl = new ResourceLocation(Roots.MODID, name);
-    FlowerRecipe recipe = new FlowerRecipe(rl, meta, block);
+    FlowerRecipe recipe = new FlowerRecipe(rl, meta, block, allowedSoils);
     flowerRecipes.put(rl, recipe);
   }
 
@@ -369,11 +373,29 @@ public class ModRecipes {
     flowerRecipes.remove(name);
   }
 
-  @Nullable
-  public static FlowerRecipe getRandomFlowerRecipe() {
-    if (flowerRecipes.isEmpty()) return null;
+  public static IBlockState getRandomFlowerRecipe(IBlockState soil) {
+    if (flowerRecipes.isEmpty()) {
+      return Blocks.YELLOW_FLOWER.getStateFromMeta(BlockFlower.EnumFlowerType.DANDELION.getMeta());
+    }
 
-    return Lists.newArrayList(flowerRecipes.values()).get(Util.rand.nextInt(Math.max(1, flowerRecipes.size())));
+    ItemStack soilStack = ItemUtil.stackFromState(soil);
+    List<FlowerRecipe> matches = new ArrayList<>();
+    for (FlowerRecipe recipe : flowerRecipes.values()) {
+      if (recipe.getAllowedSoils().isEmpty()) {
+        matches.add(recipe);
+      } else {
+        for (Ingredient allowedSoil : recipe.getAllowedSoils()) {
+          if (allowedSoil.apply(soilStack)) {
+            matches.add(recipe);
+            break;
+          }
+        }
+      }
+    }
+    if (matches.isEmpty()) {
+      return null;
+    }
+    return matches.get(Util.rand.nextInt(matches.size())).getFlower();
   }
 
   public static Map<ResourceLocation, FlowerRecipe> getFlowerRecipes() {

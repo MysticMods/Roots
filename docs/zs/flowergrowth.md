@@ -55,6 +55,21 @@ Adds a recipe by creating a blockstate from an itemstack containing an itemblock
 ---
 
 
+```zenscript
+void addRecipeItemOnSoils(
+  string name,            // The name of the recipe that you're adding
+  IItemStack stack,       // The itemstack describing an itemblock to be placed
+  List<IIngredient> soils // The types of "soils" (blocks) the itemblock can be placed on
+);
+```
+
+Adds a recipe by creating a blockstate from an itemstack containing an itemblock and metadata to be grown during the Flower Growth ritual, with a whitelist of "soils" (blocks) that this recipe can grow things on.
+
+The soils can be oredict entries.
+
+---
+
+
 ### Examples
 
 ```zenscript
@@ -68,6 +83,15 @@ FlowerGrowth.addRecipeBlockState("mystical_white_flower", <blockstate:botania:fl
 
 // Adds a Botania magenta flower using block + meta
 FlowerGrowth.addRecipeBlock("mystical_green_flower", <botania:flower>.asBlock(), 2);
+
+// Adds a torch as an item, but only on dirt and brown mulch.
+FlowerGrowth.addRecipeItemOnSoils(
+  "torch_on_dirt",
+  <minecraft:torch>,
+  [
+    <ore:dirt>,
+    <inspirations:mulch:1>
+  ]);
 ```
 
 ### Notes
