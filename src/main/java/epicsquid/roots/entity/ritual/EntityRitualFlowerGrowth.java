@@ -1,7 +1,6 @@
 package epicsquid.roots.entity.ritual;
 
 import epicsquid.roots.init.ModRecipes;
-import epicsquid.roots.recipe.FlowerRecipe;
 import epicsquid.roots.ritual.RitualFlowerGrowth;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.util.RitualUtil;
@@ -12,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityRitualFlowerGrowth extends EntityRitualBase {
-  private RitualFlowerGrowth ritual;
+  private final RitualFlowerGrowth ritual;
 
   public EntityRitualFlowerGrowth(World worldIn) {
     super(worldIn);
@@ -25,34 +24,35 @@ public class EntityRitualFlowerGrowth extends EntityRitualBase {
     super.onUpdate();
 
     if (this.ticksExisted % ritual.interval == 0) {
-      BlockPos topBlockPos = RitualUtil.getRandomPosRadialXZ(new BlockPos(getPosition().getX(), getPosition().getY() - ritual.radius_y, getPosition().getZ()), ritual.radius_x, ritual.radius_z);
-      while (!generateFlower(topBlockPos)) {
-        topBlockPos = topBlockPos.up();
-        // TODO: Make bounds configurable
-        if (topBlockPos.getY() > 256 || Math.abs(topBlockPos.getY() - posY) < 20)
+      BlockPos baseOfRandomColumn = RitualUtil.getRandomPosRadialXZ(
+              getPosition().down(ritual.radius_y), ritual.radius_x, ritual.radius_z);
+      // If there are multiple "platforms", we want an upper platform block to be a candidate for planting
+      // even if the lower platform block below it isn't, so start at a random offset.
+      int blocksToScan = ritual.radius_y * 2 + 1;
+      int offset = RitualUtil.getRandomInteger(0, blocksToScan);
+      for (int i = 0; i < blocksToScan; i++) {
+        int height = (offset + i) % blocksToScan;
+        if (generateFlower(baseOfRandomColumn.up(height))) {
           break;
+        }
       }
     }
   }
 
   private boolean generateFlower(BlockPos pos) {
-    IBlockState flower = getRandomFlower();
-    if (world.isAirBlock(pos) && flower.getBlock().canPlaceBlockAt(world, pos)) {
-      if (!world.isRemote) {
-        world.setBlockState(pos, flower);
-      }
-      return true;
+    if (!world.isAirBlock(pos)) {
+      return false;
     }
-    return false;
-  }
-
-  private IBlockState getRandomFlower() {
-    FlowerRecipe recipe = ModRecipes.getRandomFlowerRecipe();
-    if (recipe == null) return Blocks.YELLOW_FLOWER.getStateFromMeta(BlockFlower.EnumFlowerType.DANDELION.getMeta());
-
-    IBlockState state = recipe.getFlower();
-    if (state == null) return Blocks.AIR.getDefaultState();
-
-    return state;
+    if (world.isAirBlock(pos.down())) {
+      return false;
+    }
+    IBlockState flower = ModRecipes.getRandomFlowerRecipe(world.getBlockState(pos.down()));
+    if (!flower.getBlock().canPlaceBlockAt(world, pos)) {
+      return false;
+    }
+    if (!world.isRemote) {
+      world.setBlockState(pos, flower);
+    }
+    return true;
   }
 }

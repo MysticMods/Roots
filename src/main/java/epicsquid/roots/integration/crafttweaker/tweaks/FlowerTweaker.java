@@ -4,9 +4,12 @@ import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.block.IBlock;
 import crafttweaker.api.block.IBlockState;
+import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
+import crafttweaker.api.oredict.IOreDictEntry;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import crafttweaker.mc1120.CraftTweaker;
+import crafttweaker.mc1120.item.MCItemStack;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.crafttweaker.Action;
@@ -17,9 +20,14 @@ import epicsquid.roots.util.zen.ZenDocMethod;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @ZenDocClass("mods.roots.FlowerGrowth")
 @ZenDocAppend({"docs/include/flower_growth.example.md"})
@@ -62,7 +70,7 @@ public class FlowerTweaker {
   )
   @ZenMethod
   public static void addRecipeBlock(String name, IBlock block, int meta) {
-    CraftTweaker.LATE_ACTIONS.add(new FlowerBlockMeta(name, CraftTweakerMC.getBlock(block), meta));
+    CraftTweaker.LATE_ACTIONS.add(new FlowerBlockMeta(name, CraftTweakerMC.getBlock(block), meta, null));
   }
 
   @ZenDocMethod(
@@ -81,7 +89,31 @@ public class FlowerTweaker {
       return;
     }
     Block block = ((ItemBlock) converted.getItem()).getBlock();
-    CraftTweaker.LATE_ACTIONS.add(new FlowerBlockMeta(name, block, converted.getMetadata()));
+    CraftTweaker.LATE_ACTIONS.add(new FlowerBlockMeta(name, block, converted.getMetadata(), null));
+  }
+
+  @ZenDocMethod(
+      order = 4,
+      args = {
+          @ZenDocArg(arg = "name", info = "The name of the recipe that you're adding"),
+          @ZenDocArg(arg = "stack", info = "The itemstack describing an itemblock to be placed"),
+          @ZenDocArg(arg = "allowedSoils", info = "A list of blocks that this flower can be placed on")
+      },
+      description = "Adds a recipe by creating a blockstate from an itemstack containing an itemblock and metadata to be grown during the Flower Growth ritual. The flower will only be grown on a soil mentioned. Accepts oredict entries."
+  )
+  @ZenMethod
+  public static void addRecipeItemOnSoils(String name, IItemStack stack, List<IIngredient> allowedSoils) {
+    ItemStack converted = CraftTweakerMC.getItemStack(stack);
+    if (!(converted.getItem() instanceof ItemBlock)) {
+      CraftTweakerAPI.logError("Cannot set " + stack.toString() + " as a Flower Growth ritual item as it is not an ItemBlock.");
+      return;
+    }
+    List<Ingredient> allowedSoilsMC = new ArrayList<>(allowedSoils.size());
+    for (IIngredient soil : allowedSoils) {
+      allowedSoilsMC.add(CraftTweakerMC.getIngredient(soil));
+    }
+    Block block = ((ItemBlock) converted.getItem()).getBlock();
+    CraftTweaker.LATE_ACTIONS.add(new FlowerBlockMeta(name, block, converted.getMetadata(), allowedSoilsMC));
   }
 
   private static class Remove extends Action {
@@ -132,17 +164,19 @@ public class FlowerTweaker {
     private final Block block;
     private final int meta;
     private final String name;
+    private final List<Ingredient> allowedSoils;
 
-    protected FlowerBlockMeta(String name, Block block, int meta) {
+    protected FlowerBlockMeta(String name, Block block, int meta, List<Ingredient> allowedSoils) {
       super("add_block_meta_flower");
       this.name = name;
       this.block = block;
       this.meta = meta;
+      this.allowedSoils = allowedSoils == null ? Collections.emptyList() : allowedSoils;
     }
 
     @Override
     public void apply() {
-      ModRecipes.addFlowerRecipe(name, block, meta);
+      ModRecipes.addFlowerRecipe(name, block, meta, allowedSoils);
     }
 
     @Override
