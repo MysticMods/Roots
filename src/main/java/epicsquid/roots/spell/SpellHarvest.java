@@ -169,7 +169,8 @@ public class SpellHarvest extends SpellBase {
 
     int count = 0;
 
-    reedsAndCactus.sort(Comparator.comparingInt(Vec3i::getY));
+    reedsAndCactus.sort((o1, o2) -> Integer.compare(o2.getY(), o1.getY()));
+    pumpkinsAndMelons.addAll(reedsAndCactus);
 
     List<ItemStack> drops = new ArrayList<>();
     for (BlockPos pos : crops) {
@@ -194,17 +195,6 @@ public class SpellHarvest extends SpellBase {
       if (!player.world.isRemote) {
         SpellNaturesScythe.instance.breakBlock(player.world, pos, info, player);
         affectedPositions.add(pos);
-      }
-    }
-
-    for (BlockPos pos : reedsAndCactus) {
-      IBlockState state = player.world.getBlockState(pos);
-      if (reedsOrCactusTest.test(state)) {
-        count++;
-        if (!player.world.isRemote) {
-          SpellNaturesScythe.instance.breakBlock(player.world, pos.up(), info, player);
-          affectedPositions.add(pos);
-        }
       }
     }
 
