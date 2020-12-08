@@ -42,7 +42,6 @@ dependencies {
     compile project(':MysticalWorld')
 
     compileOnly "vazkii.patchouli:Patchouli:${patchouli_version}"
-    compile "curse.maven:simpleharvest:2897811"
     deobfCompile "com.azanor:Baubles:${version_baubles}"
 
     // compile against the JEI API but do not include it at runtime
@@ -59,7 +58,7 @@ dependencies {
         exclude group: 'mezz.jei'
     }
 
-    compile "curse.maven:hwyla:2568751"
+    deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}"
     deobfCompile "mcjty.theoneprobe:TheOneProbe-${top_version}"
 }
 
@@ -98,6 +97,10 @@ repositories {
     maven {
         name = 'Curse Maven by WynPrice'
         url = "https://www.cursemaven.com"
+    }
+    maven {
+        name = "tehnut"
+        url = "https://maven.tehnut.info"
     }
 }
 

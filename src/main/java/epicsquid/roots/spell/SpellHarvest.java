@@ -26,10 +26,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class SpellHarvest extends SpellBase {
@@ -133,6 +135,9 @@ public class SpellHarvest extends SpellBase {
       z -= radius_unboost;
     }
 
+    Predicate<IBlockState> pumpkinOrMelonTest = new Harvest.Matcher(Blocks.PUMPKIN).or(new Harvest.Matcher(Blocks.MELON_BLOCK));
+    Predicate<IBlockState> reedsOrCactusTest = new Harvest.Matcher(Blocks.REEDS).or(new Harvest.Matcher(Blocks.CACTUS));
+
     List<BlockPos> affectedPositions = new ArrayList<>();
     List<BlockPos> pumpkinsAndMelons = new ArrayList<>();
     List<BlockPos> reedsAndCactus = new ArrayList<>();
@@ -144,12 +149,15 @@ public class SpellHarvest extends SpellBase {
 
           if (skipBlocks.contains(block)) return false;
 
-          if (state.getBlock() == Blocks.PUMPKIN || state.getBlock() == Blocks.MELON_BLOCK) {
+          if (pumpkinOrMelonTest.test(state)) {
             pumpkinsAndMelons.add(pos);
             return false;
           }
-          if (state.getBlock() == Blocks.REEDS || state.getBlock() == Blocks.CACTUS) {
-            reedsAndCactus.add(pos);
+          if (reedsOrCactusTest.test(state)) {
+            IBlockState down = player.world.getBlockState(pos.down());
+            if (reedsOrCactusTest.test(down)) {
+              reedsAndCactus.add(pos);
+            }
             return false;
           }
           IProperty<?> prop = Harvest.resolveStates(state);
@@ -160,6 +168,8 @@ public class SpellHarvest extends SpellBase {
         });
 
     int count = 0;
+
+    reedsAndCactus.sort(Comparator.comparingInt(Vec3i::getY));
 
     List<ItemStack> drops = new ArrayList<>();
     for (BlockPos pos : crops) {
@@ -186,24 +196,10 @@ public class SpellHarvest extends SpellBase {
         affectedPositions.add(pos);
       }
     }
-    Set<BlockPos> done = new HashSet<>();
-    List<BlockPos> lowest = new ArrayList<>();
-    for (BlockPos pos : reedsAndCactus) {
-      if (done.contains(pos)) continue;
 
-      BlockPos down = pos.down();
-      IBlockState downState = player.world.getBlockState(down);
-      while (downState.getBlock() == Blocks.CACTUS || downState.getBlock() == Blocks.REEDS) {
-        done.add(down);
-        down = down.down();
-        downState = player.world.getBlockState(down);
-      }
-      lowest.add(down.up());
-      done.add(pos);
-    }
-    for (BlockPos pos : lowest) {
-      IBlockState state = player.world.getBlockState(pos.up());
-      if (state.getBlock() == Blocks.CACTUS || state.getBlock() == Blocks.REEDS) {
+    for (BlockPos pos : reedsAndCactus) {
+      IBlockState state = player.world.getBlockState(pos);
+      if (reedsOrCactusTest.test(state)) {
         count++;
         if (!player.world.isRemote) {
           SpellNaturesScythe.instance.breakBlock(player.world, pos.up(), info, player);

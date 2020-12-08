@@ -28,6 +28,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import javax.annotation.Nullable;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.function.Predicate;
 
 @SuppressWarnings("unchecked")
 @Mod.EventBusSubscriber(modid = Roots.MODID)
@@ -36,6 +37,19 @@ public class Harvest {
   private static Map<IProperty<?>, Integer> stateMax = new Object2IntOpenHashMap<>();
   private static Deque<HarvestEntry> queue = new ArrayDeque<>();
   private static HashMap<Block, ItemStack> seedCache = new HashMap<>();
+
+  public static class Matcher implements Predicate<IBlockState> {
+    private final Block block;
+
+    public Matcher(Block block) {
+      this.block = block;
+    }
+
+    @Override
+    public boolean test(IBlockState state) {
+      return state.getBlock() == block;
+    }
+  }
 
   public static int getMaxState(IProperty<?> prop) {
     return stateMax.getOrDefault(prop, -1);
