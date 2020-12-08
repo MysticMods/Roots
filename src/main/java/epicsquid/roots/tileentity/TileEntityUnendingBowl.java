@@ -123,7 +123,7 @@ public class TileEntityUnendingBowl extends TileBase {
 
     @Override
     public boolean canDrainFluidType(@Nullable FluidStack fluid) {
-      return fluid.getFluid() == FluidRegistry.getFluid(GeneralConfig.FluidName);
+      return fluid == null || fluid.getFluid() == FluidRegistry.getFluid(GeneralConfig.FluidName);
     }
 
     @Override
