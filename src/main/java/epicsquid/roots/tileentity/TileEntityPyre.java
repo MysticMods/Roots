@@ -297,8 +297,11 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
       }
       // TODO: Make this a configurable array of items or extensible classes
       if (heldItem.getItem() instanceof ItemFlintAndSteel) {
-        heldItem.damageItem(1, player);
-        return startRitual(player);
+        if (startRitual(player)) {
+          heldItem.damageItem(1, player);
+          return true;
+        }
+        return false;
       } else if (extinguish && burnTime > 0) {
         burnTime = 0;
         if (ritualEntity != null) {

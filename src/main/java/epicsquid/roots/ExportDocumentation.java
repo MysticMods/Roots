@@ -32,7 +32,7 @@ public class ExportDocumentation {
         Predicates.class,
         PropertyPredicate.class,
         StatePredicate.class,
-        Herbs.class,
+        Herbs.class
     };
 
     ZenDocExporter export = new ZenDocExporter();
