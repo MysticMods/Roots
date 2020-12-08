@@ -1,6 +1,8 @@
 package epicsquid.roots.entity.ritual;
 
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.mechanics.Growth;
+import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualGermination;
 import epicsquid.roots.ritual.RitualRegistry;
@@ -53,7 +55,7 @@ public class EntityRitualGermination extends EntityRitualBase {
           for (int j = 0; j < ritual.ticks + x; j++) {
             state.getBlock().randomTick(world, pos, state, world.rand);
           }
-          //PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), this);
+          PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY(), pos.getZ()), this);
         }
       }
     }
