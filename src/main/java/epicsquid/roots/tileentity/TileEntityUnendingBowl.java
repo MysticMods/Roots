@@ -1,10 +1,15 @@
 package epicsquid.roots.tileentity;
 
 import epicsquid.mysticallib.tile.TileBase;
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.config.GeneralConfig;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.init.PotionTypes;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -22,6 +27,18 @@ public class TileEntityUnendingBowl extends TileBase {
   @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
 
+    ItemStack stack = player.getHeldItem(hand);
+    if (stack.getItem() == Items.GLASS_BOTTLE) {
+      if (!world.isRemote) {
+        stack.shrink(1);
+        ItemStack potion = PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER);
+        if (!player.addItemStackToInventory(potion)) {
+          ItemUtil.spawnItem(world, player.getPosition(), potion);
+        }
+      }
+
+      return true;
+    }
     if (!world.isRemote) {
       return FluidUtil.interactWithFluidHandler(player, hand, HANDLER);
     }
