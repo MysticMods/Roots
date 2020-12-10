@@ -108,10 +108,12 @@ public abstract class RitualBase {
     return recipe.matches(tileEntityPyre, player);
   }
 
-  public boolean canFire(TileEntityPyre Pyre, @Nullable EntityPlayer player) {
-    IBlockState state = Pyre.getWorld().getBlockState(Pyre.getPos());
-    if (state.getValue(BlockPyre.BURNING)) {
-      return false;
+  public boolean canFire(TileEntityPyre Pyre, @Nullable EntityPlayer player, boolean refire) {
+    if (!refire) {
+      IBlockState state = Pyre.getWorld().getBlockState(Pyre.getPos());
+      if (state.getValue(BlockPyre.BURNING)) {
+        return false;
+      }
     }
 
     return checkTileConditions(Pyre, player);
