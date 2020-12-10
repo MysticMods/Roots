@@ -58,13 +58,13 @@ public class MessagePetalShellRingFX extends ModifierPacket implements IMessage 
     protected void handleMessage(final MessagePetalShellRingFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       int count = message.amplifier;
-      int shells = SpellPetalShell.instance.maxShells; // 3 - 1
+      int shells = SpellPetalShell.instance.maxShells - 1; // 3 - 1
       if (message.has(SpellPetalShell.CHARGES)) {
         shells += SpellPetalShell.instance.extraShells; // 2
       }
       float radius = 0.8f;
       float height = 1.0f;
-      float anglePerShell = (float)(Math.PI * 2.0 / (shells+1));
+      float anglePerShell = (float)(Math.PI * 2.0 / (count));
       float angleOffset   = (float)Math.toRadians(message.ticksExisted % 360);
       for (int i = 0; i <= shells; i++) {
         float tx = (float) message.posX + radius * (float) Math.sin(angleOffset + i * anglePerShell);
@@ -72,7 +72,7 @@ public class MessagePetalShellRingFX extends ModifierPacket implements IMessage 
         float ty = (float) message.posY + height;
         ParticleUtil.spawnParticlePetal(world, tx, ty, tz, 0, 0, 0, message.has(SpellPetalShell.COLOUR) ? SpellPetalShell.mossFirst : SpellPetalShell.instance.getFirstColours(), 3.5f, 15);
         count--;
-        if (count < 0) {
+        if (count <= 0) {
           break;
         }
       }

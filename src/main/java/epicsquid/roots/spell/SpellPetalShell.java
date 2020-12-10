@@ -135,7 +135,7 @@ public class SpellPetalShell extends SpellBase {
   public void doFinalise() {
     this.castType = properties.get(PROP_CAST_TYPE);
     this.cooldown = properties.get(PROP_COOLDOWN);
-    this.maxShells = properties.get(PROP_MAXIMUM) - 1;
+    this.maxShells = properties.get(PROP_MAXIMUM);
     this.duration = properties.get(PROP_DURATION);
     this.radius_x = properties.get(PROP_RADIUS_X);
     this.radius_y = properties.get(PROP_RADIUS_Y);
