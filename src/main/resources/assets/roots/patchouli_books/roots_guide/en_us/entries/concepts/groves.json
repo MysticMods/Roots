@@ -5,7 +5,69 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example."
+      "text": "After $(l:concepts/wild_magic)the fall of the Order of Druids$(), many sought to enhance the power of wild magic in order to make it equivalent to that which they had lost.$(br2)While their purpose was selfish, the final result of the Grove Stone was surprisingly useful as a magnifier of wild magic, as well as a catalyst for crafting.$(br2)While simulating the Fey was"
+    },
+    {
+      "type": "multiblock",
+      "name": "Grove Stone",
+      "multiblock": {
+        "mapping": {
+          "0": "roots:grove_stone",
+          "M": "roots:grove_stone[half=middle]",
+          "T": "roots:grove_stone[half=top]"
+        },
+        "pattern": [
+          [
+            " ",
+            "T",
+            " "
+          ],
+          [
+            " ",
+            "M",
+            " "
+          ],
+          [
+            " ",
+            "0",
+            " "
+          ],
+          [
+            " ",
+            " ",
+            " "
+          ],
+          [
+            " ",
+            " ",
+            " "
+          ]
+        ]
+      },
+      "enable_visualize": false,
+      "text": "$(o)A sketch of a recent variation of the monolith$()"
+    },
+    {
+      "type": "text",
+      "text": "not something that these latter Druids were able to accomplish, it remains unclear whether it even has the potential for success.$(br2)Regardless, when combined with an appropriately attuned device, it allows for a greater range of crafting and creation.$(br2)Some posit it harnesses power from the Fey via minute portals, small enough for energy but too small to be seen, but its exact method remains unclear."
+    },
+    {
+      "type": "multiblock",
+      "name": "'Fey' Crafter",
+      "multiblock": {
+        "mapping": {
+          "0": "roots:fey_crafter"
+        },
+        "pattern": [
+          [
+            " ",
+            "0",
+            " "
+          ]
+        ]
+      },
+      "enable_visualize": false,
+      "text": "$(o)Despite evidence, often called a 'Fey' crafter.()"
     }
   ]
 }
