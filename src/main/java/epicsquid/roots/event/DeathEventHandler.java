@@ -2,6 +2,7 @@ package epicsquid.roots.event;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.advancements.Advancements;
+import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.PacifistEntry;
 import net.minecraft.entity.Entity;
@@ -19,6 +20,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class DeathEventHandler {
   @SubscribeEvent
   public static void onDeath(LivingDeathEvent event) {
+    if (!GeneralConfig.UntruePacifist) {
+      return;
+    }
     EntityLivingBase entity = event.getEntityLiving();
     PacifistEntry entry = ModRecipes.getPacifistEntry(entity);
     if (entry == null || !entity.isServerWorld()) return;
