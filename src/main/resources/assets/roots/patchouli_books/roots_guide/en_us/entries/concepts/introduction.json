@@ -5,7 +5,15 @@
   "pages": [
     {
       "type": "text",
-      "text": "The magic of the wilds exists in every natural place and thing, and that magic can be harnessed for great works. Once, those who channeled this power were called druids and guarded their knowledge jealously. I will detail their decline and fading $(l:concepts/wild_magic)elsewhere$() in this tome.$(br2)This existence of this tome and the spells, rituals and crafts contained within is owed entirely to these druids, though presenting such things openly and to all would perhaps be considered the greatest sin in their eyes."
+      "text": "The magic of the wilds exists in every natural place and thing, and that magic can be harnessed for great works.$(br2)Once, those who channeled this power were called druids and guarded their knowledge jealously. I will detail their decline and fading $(l:concepts/wild_magic)elsewhere$() in this tome.$(br2)This existence of this tome and the spells, rituals and"
+    },
+    {
+      "type": "text",
+      "text": "crafts contained within is owed entirely to these druids, though exposing such mysteries openly would not be appreciated by them.$(br2)Nonetheless, this is precisely what I shall do.$(br2)Contained within are $(cat:concepts)historical and conceptual works$() of note, as well, $(cat:crafting)crafting recipes and rituals$(), techniques for $(cat:herbs)herbalism$() and, most importantly, $(cat:spells)spell craft$().$(br2)Each section contains its own"
+    },
+    {
+      "type": "text",
+      "text": "introduction, which should be enough to acquaint the beginner in the fundamentals.$(br2)Many secrets were lost to the grave, but I am certain that what is presented herein shall prove a boon to anyone willing to embrace the wilds.$(br2)- Iselius Thorn"
     }
   ]
 }
