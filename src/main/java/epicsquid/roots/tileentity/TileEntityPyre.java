@@ -1,6 +1,7 @@
 package epicsquid.roots.tileentity;
 
 import com.google.common.collect.Sets;
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.particle.RangeParticle;
 import epicsquid.mysticallib.particle.RenderUtil;
 import epicsquid.mysticallib.tile.TileBase;
@@ -12,6 +13,7 @@ import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualFrostLands;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.network.fx.MessagePyreBigFlameFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.*;
@@ -57,10 +59,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IRanged {
   public static AxisAlignedBB bounding = new AxisAlignedBB(-1, -1, -1, 1, 1, 1);
@@ -76,6 +75,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
   private List<Ingredient> lastUsedIngredients = null;
   private EntityRitualBase ritualEntity = null;
   private Block block = null;
+  private UUID lastPlayerId = null;
 
   private boolean isBurning = false;
 
@@ -117,7 +117,6 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
     super.writeToNBT(tag);
     tag.setTag("handler", inventory.serializeNBT());
     tag.setInteger("burnTime", burnTime);
-    tag.setBoolean("doBigFlame", doBigFlame);
     tag.setTag("craftingResult", this.craftingResult.serializeNBT());
     tag.setInteger("craftingXP", craftingXP);
     tag.setString("lastRitualUsed", (this.lastRitualUsed != null) ? this.lastRitualUsed.getName() : "");
@@ -131,7 +130,6 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
     super.readFromNBT(tag);
     inventory.deserializeNBT(tag.getCompoundTag("handler"));
     burnTime = tag.getInteger("burnTime");
-    doBigFlame = tag.getBoolean("doBigFlame");
     craftingResult = new ItemStack(tag.getCompoundTag("craftingResult"));
     craftingXP = tag.getInteger("craftingXP");
     lastRitualUsed = RitualRegistry.getRitual(tag.getString("lastRitualUsed"));
@@ -160,7 +158,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
   public PyreCraftingRecipe getCurrentRecipe() {
     List<ItemStack> stacks = new ArrayList<>();
     for (int i = 0; i < inventory.getSlots(); i++) {
-      ItemStack stack = inventory.extractItem(i, 1, true);
+      ItemStack stack = inventory.getStackInSlot(i);
       stacks.add(stack);
     }
 
@@ -183,18 +181,29 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
     }
   }
 
-  private boolean startRitual(@Nullable EntityPlayer player) {
-    validateEntity();
+  private boolean startRitual(@Nullable UUID playerId, boolean refire) {
+    if (playerId == null) {
+      return startRitual((EntityPlayer) null, refire);
+    } else {
+      return startRitual(Objects.requireNonNull(world.getMinecraftServer()).getPlayerList().getPlayerByUUID(lastPlayerId), refire);
+    }
+  }
+
+  private boolean startRitual(@Nullable EntityPlayer player, boolean refire) {
     RitualBase ritual = RitualRegistry.getRitual(this, player);
 
     if (ritual != null && !ritual.isDisabled()) {
-      if ((ritualEntity == null || ritualEntity.isDead) && ritual.canFire(this, player)) {
-        ritualEntity = ritual.doEffect(world, pos, player);
+      if (ritual.canFire(this, player, refire)) {
         this.burnTime = ritual.getDuration();
+/*        if (ritualEntity != null && !ritualEntity.isDead) {
+          ritualEntity.setDead();
+        }*/
+        ritualEntity = ritual.doEffect(world, pos, player);
         this.lastRitualUsed = ritual;
         this.lastRecipeUsed = null;
         this.lastUsedIngredients = ritual.getIngredients();
         this.doBigFlame = true;
+        this.isBurning = true;
         if (!world.isRemote) {
           List<ItemStack> transformers = new ArrayList<>();
           for (int i = 0; i < inventory.getSlots(); i++) {
@@ -219,6 +228,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
       this.craftingXP = recipe.getXP();
       this.burnTime = recipe.getBurnTime();
       this.doBigFlame = true;
+      this.isBurning = true;
       List<ItemStack> transformers = new ArrayList<>();
       for (int i = 0; i < inventory.getSlots(); i++) {
         ItemStack item = inventory.extractItem(i, 1, false);
@@ -262,7 +272,9 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
       return true;
     }
 
-    if (world.isRemote) return true;
+    if (world.isRemote) {
+      return true;
+    }
 
     if (!heldItem.isEmpty()) {
       boolean extinguish = false;
@@ -297,11 +309,12 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
       }
       // TODO: Make this a configurable array of items or extensible classes
       if (heldItem.getItem() instanceof ItemFlintAndSteel) {
-        if (startRitual(player)) {
+        boolean result = startRitual(player, false);
+        this.lastPlayerId = player.getUniqueID();
+        if (result) {
           heldItem.damageItem(1, player);
-          return true;
         }
-        return false;
+        return result;
       } else if (extinguish && burnTime > 0) {
         burnTime = 0;
         if (ritualEntity != null) {
@@ -370,9 +383,9 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
         if (!inventory.getStackInSlot(i).isEmpty()) {
           ItemStack extracted = inventory.extractItem(i, inventory.getStackInSlot(i).getCount(), false);
           ItemUtil.spawnItem(world, player.posX, player.posY + 1, player.posZ, false, extracted, 0, -1);
+          pickupDelay = 40;
           markDirty();
           updatePacketViaState();
-          pickupDelay = 40;
           return true;
         }
       }
@@ -382,7 +395,9 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
 
   @Override
   public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
-    if (oldState.getBlock() == newState.getBlock() && newState.getBlock() instanceof BlockPyre) return false;
+    if (oldState.getBlock() instanceof BlockPyre && newState.getBlock() instanceof BlockPyre) {
+      return false;
+    }
 
     return super.shouldRefresh(world, pos, oldState, newState);
   }
@@ -400,37 +415,25 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
 
   public void ongoingFlame() {
     if (world.isRemote) {
-      for (int i = 0; i < 2; i++) {
-        if (ritualEntity instanceof EntityRitualFrostLands) {
-          ParticleUtil
-              .spawnParticleFiery(world, getPos().getX() + 0.3125f + 0.375f * Util.rand.nextFloat(), getPos().getY() + 0.625f + 0.375f * Util.rand.nextFloat(),
-                  getPos().getZ() + 0.3125f + 0.375f * Util.rand.nextFloat(), 0.03125f * (Util.rand.nextFloat() - 0.5f), 0.125f * Util.rand.nextFloat(),
-                  0.03125f * (Util.rand.nextFloat() - 0.5f), 90.0f, 134.0f, 204.0f, 0.75f, 7.0f + 7.0f * Util.rand.nextFloat(), 40);
-        } else {
-          ParticleUtil
-              .spawnParticleFiery(world, getPos().getX() + 0.3125f + 0.375f * Util.rand.nextFloat(), getPos().getY() + 0.625f + 0.375f * Util.rand.nextFloat(),
-                  getPos().getZ() + 0.3125f + 0.375f * Util.rand.nextFloat(), 0.03125f * (Util.rand.nextFloat() - 0.5f), 0.125f * Util.rand.nextFloat(),
-                  0.03125f * (Util.rand.nextFloat() - 0.5f), 255.0f, 96.0f, 32.0f, 0.75f, 7.0f + 7.0f * Util.rand.nextFloat(), 40);
+      IBlockState state = world.getBlockState(getPos());
+      if (state.getBlock() instanceof BlockPyre) {
+        if (state.getValue(BlockPyre.BURNING)) {
+          for (int i = 0; i < 2; i++) {
+            if (ritualEntity instanceof EntityRitualFrostLands) {
+              ParticleUtil.spawnParticleFiery(world, getPos().getX() + 0.3125f + 0.375f * Util.rand.nextFloat(), getPos().getY() + 0.625f + 0.375f * Util.rand.nextFloat(), getPos().getZ() + 0.3125f + 0.375f * Util.rand.nextFloat(), 0.03125f * (Util.rand.nextFloat() - 0.5f), 0.125f * Util.rand.nextFloat(), 0.03125f * (Util.rand.nextFloat() - 0.5f), 90.0f, 134.0f, 204.0f, 0.75f, 7.0f + 7.0f * Util.rand.nextFloat(), 40);
+            } else {
+              ParticleUtil.spawnParticleFiery(world, getPos().getX() + 0.3125f + 0.375f * Util.rand.nextFloat(), getPos().getY() + 0.625f + 0.375f * Util.rand.nextFloat(), getPos().getZ() + 0.3125f + 0.375f * Util.rand.nextFloat(), 0.03125f * (Util.rand.nextFloat() - 0.5f), 0.125f * Util.rand.nextFloat(), 0.03125f * (Util.rand.nextFloat() - 0.5f), 255.0f, 96.0f, 32.0f, 0.75f, 7.0f + 7.0f * Util.rand.nextFloat(), 40);
+            }
+          }
         }
       }
     }
   }
 
   public void bigFlame() {
-    if (world.isRemote && this.doBigFlame) {
-      if (ritualEntity instanceof IColdRitual) {
-        for (int i = 0; i < 40; i++) {
-          ParticleUtil.spawnParticleFiery(world, getPos().getX() + 0.125f + 0.75f * random.nextFloat(), getPos().getY() + 0.75f + 0.5f * random.nextFloat(),
-              getPos().getZ() + 0.125f + 0.75f * random.nextFloat(), 0.03125f * (random.nextFloat() - 0.5f), 0.125f * random.nextFloat(),
-              0.03125f * (random.nextFloat() - 0.5f), 63.0f, 119.0f, 209.0f, 0.75f, 9.0f + 9.0f * random.nextFloat(), 40);
-        }
-      } else {
-        for (int i = 0; i < 40; i++) {
-          ParticleUtil.spawnParticleFiery(world, getPos().getX() + 0.125f + 0.75f * random.nextFloat(), getPos().getY() + 0.75f + 0.5f * random.nextFloat(),
-              getPos().getZ() + 0.125f + 0.75f * random.nextFloat(), 0.03125f * (random.nextFloat() - 0.5f), 0.125f * random.nextFloat(),
-              0.03125f * (random.nextFloat() - 0.5f), 255.0f, 224.0f, 32.0f, 0.75f, 9.0f + 9.0f * random.nextFloat(), 40);
-        }
-      }
+    if (this.doBigFlame) {
+      PacketHandler.sendToAllTracking(new MessagePyreBigFlameFX(getPos(), ritualEntity instanceof IColdRitual), this);
+      doBigFlame = false;
     }
   }
 
@@ -504,61 +507,70 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
 
   @Override
   public void update() {
-    // Potentially update from stuff below
-    refillInventory();
-    boolean restart = tickFire();
-    boolean burning = false;
-
     this.ticker += 1.0f;
-    if (pickupDelay > 0) {
-      pickupDelay--;
-    }
-    //Spawn the Ignite flame particle
 
-    if (doBigFlame) {
-      bigFlame();
-      if (burnTime != 0) {
-        BlockPyre.setState(true, world, pos);
+    // Potentially update from stuff below
+    if (!world.isRemote) {
+      refillInventory();
+      boolean restart = tickFire();
+      boolean burning = false;
+
+      if (pickupDelay > 0) {
+        pickupDelay--;
       }
-      doBigFlame = false;
-      markDirty();
-      if (!world.isRemote)
-        updatePacketViaState();
-    }
+      //Spawn the Ignite flame particle
 
-    if (burnTime > 0) {
-      burnTime--;
+      if (doBigFlame) {
+        bigFlame();
+        markDirty();
+        if (burnTime != 0) {
+          BlockPyre.setState(true, world, pos);
+        }
+        updatePacketViaState();
+      }
+
+      validateEntity();
 
       burning = burnTime > 0;
 
-      if ((ritualEntity != null && ritualEntity.isDead) && craftingResult.isEmpty()) {
-        burning = false;
-      }
+      boolean shouldUpdate = false;
 
-      if (burning && getTicker() % 20.0f == 0 && random.nextDouble() < 0.05 && !(ritualEntity instanceof IColdRitual)) {
-        meltNearbySnow();
-      }
-
-      if (burning) {
-        //Spawn Fire particles
-        ongoingFlame();
-      }
-      if (!burning || burnTime == 0) {
-        burnTime = 0;
-        BlockPyre.setState(false, world, pos);
-        spawnCraftResult();
+      if (burnTime > 0) {
+        burnTime--;
         markDirty();
-        if (!world.isRemote) {
-          startRitual(null);
+        shouldUpdate = true;
+
+        if ((ritualEntity != null && ritualEntity.isDead) && craftingResult.isEmpty()) {
+          burning = false;
+        }
+
+        if (burning && getTicker() % 20.0f == 0 && random.nextDouble() < 0.05 && !(ritualEntity instanceof IColdRitual)) {
+          meltNearbySnow();
+        }
+
+        if (!burning || burnTime == 0) {
+          burnTime = 0;
+          spawnCraftResult();
+          markDirty();
+          if (!startRitual(lastPlayerId, true)) {
+            BlockPyre.setState(false, world, pos);
+          }
           restart = false;
           updatePacketViaState();
+          shouldUpdate = false;
         }
       }
-    }
 
-    pickupItem();
-    if (restart && !world.isRemote && !burning) {
-      startRitual(null);
+      if (shouldUpdate) {
+        updatePacketViaState();
+      }
+
+      pickupItem();
+      if (restart && !burning) {
+        startRitual(lastPlayerId, true);
+      }
+    } else {
+      ongoingFlame();
     }
   }
 
@@ -590,26 +602,28 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
   }
 
   private void meltNearbySnow() {
-    List<BlockPos> nearbySnowOrIce = new ArrayList<>();
-    for (int x = -4; x < 5; x++) {
-      for (int z = -4; z < 5; z++) {
-        BlockPos topBlockPos = world.getTopSolidOrLiquidBlock(new BlockPos(pos.getX() + x, pos.getY(), pos.getZ() + z));
-        topBlockPos = topBlockPos.subtract(new Vec3i(0, 1, 0));
-        IBlockState topBlockState = world.getBlockState(topBlockPos);
-        if (topBlockState.getMaterial() == Material.SNOW || topBlockState.getMaterial() == Material.ICE) {
-          nearbySnowOrIce.add(topBlockPos);
+    if (!world.isRemote) {
+      List<BlockPos> nearbySnowOrIce = new ArrayList<>();
+      for (int x = -4; x < 5; x++) {
+        for (int z = -4; z < 5; z++) {
+          BlockPos topBlockPos = world.getTopSolidOrLiquidBlock(new BlockPos(pos.getX() + x, pos.getY(), pos.getZ() + z));
+          topBlockPos = topBlockPos.subtract(new Vec3i(0, 1, 0));
+          IBlockState topBlockState = world.getBlockState(topBlockPos);
+          if (topBlockState.getMaterial() == Material.SNOW || topBlockState.getMaterial() == Material.ICE) {
+            nearbySnowOrIce.add(topBlockPos);
+          }
         }
       }
-    }
 
-    if (nearbySnowOrIce.isEmpty()) {
-      return;
-    }
-    BlockPos posToMelt = nearbySnowOrIce.get(nearbySnowOrIce.size() > 1 ? random.nextInt(nearbySnowOrIce.size() - 1) : 0);
-    if (world.getBlockState(posToMelt).getMaterial() == Material.SNOW) {
-      world.setBlockState(posToMelt, Blocks.AIR.getDefaultState());
-    } else if (world.getBlockState(posToMelt).getMaterial() == Material.ICE) {
-      world.setBlockState(posToMelt, Blocks.WATER.getDefaultState());
+      if (nearbySnowOrIce.isEmpty()) {
+        return;
+      }
+      BlockPos posToMelt = nearbySnowOrIce.get(nearbySnowOrIce.size() > 1 ? random.nextInt(nearbySnowOrIce.size() - 1) : 0);
+      if (world.getBlockState(posToMelt).getMaterial() == Material.SNOW) {
+        world.setBlockState(posToMelt, Blocks.AIR.getDefaultState());
+      } else if (world.getBlockState(posToMelt).getMaterial() == Material.ICE) {
+        world.setBlockState(posToMelt, Blocks.WATER.getDefaultState());
+      }
     }
   }
 

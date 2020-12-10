@@ -88,8 +88,11 @@ public class BlockPyre extends BlockTEBase {
   }
 
   public static void setState(boolean burning, World world, BlockPos pos) {
-    if (burning) world.setBlockState(pos, world.getBlockState(pos).withProperty(BURNING, true), 3);
-    else world.setBlockState(pos, world.getBlockState(pos).withProperty(BURNING, false), 3);
+    if (burning) {
+      world.setBlockState(pos, world.getBlockState(pos).withProperty(BURNING, true), 3);
+    } else {
+      world.setBlockState(pos, world.getBlockState(pos).withProperty(BURNING, false), 3);
+    }
   }
 
 
