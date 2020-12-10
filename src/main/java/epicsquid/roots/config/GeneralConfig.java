@@ -111,6 +111,9 @@ public class GeneralConfig {
 
   @Config.Comment(("How long it takes a Fire Starter to start a fire (in ticks)"))
   public static int FireStarterTicks = 20 * 3;
+
+  @Config.Comment(("Whether or not the Untrue Pacifist advancement should be tracked"))
+  public static boolean UntruePacifist = true;
 }
 
 
