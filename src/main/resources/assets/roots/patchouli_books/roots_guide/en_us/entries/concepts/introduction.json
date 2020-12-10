@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example."
+      "text": "The magic of the wilds exists in every natural place and thing, and that magic can be harnessed for great works. Once, those who channeled this power were called druids and guarded their knowledge jealously. I will detail their decline and fading $(l:concepts/wild_magic)elsewhere$() in this tome.$(br2)This existence of this tome and the spells, rituals and crafts contained within is owed entirely to these druids, though presenting such things openly and to all would perhaps be considered the greatest sin in their eyes."
     }
   ]
 }
