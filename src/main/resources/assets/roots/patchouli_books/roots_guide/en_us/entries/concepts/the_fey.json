@@ -5,7 +5,23 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example."
+      "text": "While once connected with ours (see $(l:concepts/wild_magic)my history of Wild Magic$()), the Fey is another world entirely. Much power can be found in the Fey, and it is this that empowers many of the great creatures that hail from there.$(br2)Old documents speak of trade and passage, but it is unclear precisely how connected this world was to ours."
+    },
+    {
+      "type": "text",
+      "text": "There are many rumours and stories that suggest things native to our world actually came from the Fey, but there is much evidence against this.$(br2)$(l:herbs/pereskia)Pereskia$() is often called 'fairy flower', but while it may delight such creatures, it is simply a flower that blossomed with wild magic.$(br2)Those delightful plant-creatures, Sprouts, on the other hand, seem to be descendents of the Fey."
+    },
+    {
+      "type": "text",
+      "text": "It is thus important to keep an open mind.$(br2)When presented with something 'from the Fey', you should rightfully question it.$(br2)When told a spell derives 'from the Fey', remember wild magic was great before the Order of Druids even existed.$(br2)Even in this, keep an open mind: perhaps, like sprouts, there are other Fey-born things in our world."
+    },
+    {
+      "type": "entity",
+      "name": "The Sprout",
+      "entity": "mysticalworld:entity_sprout",
+      "scale": 1,
+      "offset": 0,
+      "text": "A common example of sentient plant."
     }
   ]
 }
