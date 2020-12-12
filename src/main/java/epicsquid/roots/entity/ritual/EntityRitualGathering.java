@@ -34,7 +34,11 @@ public class EntityRitualGathering extends EntityRitualBase {
         AxisAlignedBB bounds = bounding.offset(getPosition());
         BlockPos start = new BlockPos(bounds.minX, bounds.minY, bounds.minZ);
         BlockPos stop = new BlockPos(bounds.maxX, bounds.maxY, bounds.maxZ);
+        BlockPos down = getPosition().down();
         for (BlockPos.MutableBlockPos pos : BlockPos.getAllInBoxMutable(start, stop)) {
+          if (pos.equals(down)) {
+            continue;
+          }
           TileEntity te = world.getTileEntity(pos);
           if (te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)) {
             IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
