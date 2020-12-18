@@ -2,6 +2,7 @@ package epicsquid.roots.init;
 
 import com.google.common.collect.Lists;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
+import epicsquid.mysticallib.recipe.factories.AccessibleCompoundIngredient;
 import epicsquid.mysticallib.recipe.factories.OreFallbackIngredient;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
@@ -1499,7 +1500,7 @@ public class ModRecipes {
         new FeyCraftingRecipe(new ItemStack(ModItems.runed_pickaxe), 1).addIngredients(
             new OreIngredient("runedObsidian"),
             new OreIngredient("runedObsidian"),
-            new ItemStack(Items.DIAMOND_PICKAXE),
+            new AccessibleCompoundIngredient(Ingredient.fromItem(Items.DIAMOND_PICKAXE), Ingredient.fromItem(Materials.amethyst.getPickaxe())),
             new OreIngredient("feyLeather"),
             new ItemStack(ModItems.stalicripe)));
 
@@ -1507,7 +1508,7 @@ public class ModRecipes {
         new FeyCraftingRecipe(new ItemStack(ModItems.runed_axe), 1).addIngredients(
             new OreIngredient("runedObsidian"),
             new OreIngredient("runedObsidian"),
-            new ItemStack(Items.DIAMOND_AXE),
+            new AccessibleCompoundIngredient(Ingredient.fromItem(Items.DIAMOND_AXE), Ingredient.fromItem(Materials.amethyst.getAxe())),
             new OreIngredient("feyLeather"),
             new ItemStack(ModItems.cloud_berry)));
 
@@ -1515,7 +1516,7 @@ public class ModRecipes {
         new FeyCraftingRecipe(new ItemStack(ModItems.runed_shovel), 1).addIngredients(
             new OreIngredient("runedObsidian"),
             new OreIngredient("runedObsidian"),
-            new ItemStack(Items.DIAMOND_SHOVEL),
+            new AccessibleCompoundIngredient(Ingredient.fromItem(Items.DIAMOND_SHOVEL), Ingredient.fromItem(Materials.amethyst.getShovel())),
             new OreIngredient("feyLeather"),
             new ItemStack(ModItems.dewgonia)));
 
@@ -1523,7 +1524,7 @@ public class ModRecipes {
         new FeyCraftingRecipe(new ItemStack(ModItems.runed_hoe), 1).addIngredients(
             new OreIngredient("runedObsidian"),
             new OreIngredient("runedObsidian"),
-            new ItemStack(Items.DIAMOND_HOE),
+            new AccessibleCompoundIngredient(Ingredient.fromItem(Items.DIAMOND_HOE), Ingredient.fromItem(Materials.amethyst.getHoe())),
             new OreIngredient("feyLeather"),
             new ItemStack(ModItems.wildewheet)));
 
@@ -1531,7 +1532,7 @@ public class ModRecipes {
         new FeyCraftingRecipe(new ItemStack(ModItems.runed_sword), 1).addIngredients(
             new OreIngredient("runedObsidian"),
             new OreIngredient("runedObsidian"),
-            new ItemStack(Items.DIAMOND_SWORD),
+            new AccessibleCompoundIngredient(Ingredient.fromItem(Items.DIAMOND_SWORD), Ingredient.fromItem(Materials.amethyst.getSword())),
             new OreIngredient("feyLeather"),
             new ItemStack(ModItems.infernal_bulb)));
 
@@ -1539,7 +1540,7 @@ public class ModRecipes {
         new FeyCraftingRecipe(new ItemStack(ModItems.runed_dagger), 1).addIngredients(
             new OreIngredient("runedObsidian"),
             new OreIngredient("runedObsidian"),
-            new ItemStack(ModItems.diamond_knife),
+            new AccessibleCompoundIngredient(Ingredient.fromItem(ModItems.diamond_knife), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.amethyst_knife)),
             new OreIngredient("feyLeather"),
             new ItemStack(ModItems.moonglow_leaf)));
 
