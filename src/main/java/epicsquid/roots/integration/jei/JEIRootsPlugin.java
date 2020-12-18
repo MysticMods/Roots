@@ -21,8 +21,6 @@ import epicsquid.roots.integration.jei.ritual.RitualWrapper;
 import epicsquid.roots.integration.jei.shears.*;
 import epicsquid.roots.integration.jei.spell.SpellCostCategory;
 import epicsquid.roots.integration.jei.spell.SpellCostWrapper;
-import epicsquid.roots.integration.jei.spell.SpellModifierCategory;
-import epicsquid.roots.integration.jei.spell.SpellModifierWrapper;
 import epicsquid.roots.integration.jei.summon.SummonCreaturesCategory;
 import epicsquid.roots.integration.jei.summon.SummonCreaturesWrapper;
 import epicsquid.roots.integration.jei.transmutation.TransmutationCategory;
@@ -81,7 +79,6 @@ public class JEIRootsPlugin implements IModPlugin {
         new RitualCategory(helper),
         new FeyCategory(helper),
         new SpellCostCategory(helper),
-        new SpellModifierCategory(helper),
         new BarkRecipeCategory(helper),
         new MossRecipeCategory(helper),
         new RunicShearsEntityCategory(helper),
@@ -137,7 +134,6 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(RitualBase.class, RitualWrapper::new, RITUAL);
     registry.handleRecipes(FeyCraftingRecipe.class, FeyWrapper::new, FEY_CRAFTING);
     registry.handleRecipes(SpellBase.class, SpellCostWrapper::new, SPELL_COSTS);
-    registry.handleRecipes(SpellBase.class, SpellModifierWrapper::new, SPELL_MODIFIERS);
     registry.handleRecipes(BarkRecipe.class, BarkRecipeWrapper::new, BARK_CARVING);
     registry.handleRecipes(MossRecipe.class, MossRecipeWrapper::new, TERRA_MOSS);
     registry.handleRecipes(SummonCreatureRecipe.class, SummonCreaturesWrapper::new, SUMMON_CREATURES);
@@ -148,7 +144,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(RitualUtil.RunedWoodType.class, RunedWoodWrapper::new, RUNED_WOOD);
     registry.handleRecipes(LootWrapper.LootRecipe.class, LootWrapper::new, LOOT);
 
-    Collection<SpellBase> spells = SpellRegistry.spellRegistry.values();
+    Collection<SpellBase> spells = SpellRegistry.spellRegistry.values().stream().filter(o -> !o.isDisabled()).collect(Collectors.toList());
 
     registry.addRecipes(Arrays.asList(new LootWrapper.LootRecipe(ModItems.spirit_bag, SpiritDrops.getPouch()), new LootWrapper.LootRecipe(ModItems.reliquary, SpiritDrops.getReliquary())), LOOT);
     registry.addRecipes(ModRecipes.getRunicShearRecipes().values(), RUNIC_SHEARS);
