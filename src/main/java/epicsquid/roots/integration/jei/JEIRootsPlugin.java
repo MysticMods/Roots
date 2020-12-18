@@ -18,10 +18,7 @@ import epicsquid.roots.integration.jei.ritual.RitualCategory;
 import epicsquid.roots.integration.jei.ritual.RitualCraftingCategory;
 import epicsquid.roots.integration.jei.ritual.RitualCraftingWrapper;
 import epicsquid.roots.integration.jei.ritual.RitualWrapper;
-import epicsquid.roots.integration.jei.shears.RunicShearsCategory;
-import epicsquid.roots.integration.jei.shears.RunicShearsEntityCategory;
-import epicsquid.roots.integration.jei.shears.RunicShearsEntityWrapper;
-import epicsquid.roots.integration.jei.shears.RunicShearsWrapper;
+import epicsquid.roots.integration.jei.shears.*;
 import epicsquid.roots.integration.jei.spell.SpellCostCategory;
 import epicsquid.roots.integration.jei.spell.SpellCostWrapper;
 import epicsquid.roots.integration.jei.spell.SpellModifierCategory;
@@ -60,6 +57,7 @@ public class JEIRootsPlugin implements IModPlugin {
 
   public static final String RUNIC_SHEARS = Roots.MODID + ".runic_shears";
   public static final String RUNIC_SHEARS_ENTITY = Roots.MODID + ".runic_shears_entity";
+  public static final String RUNIC_SHEARS_SUMMON_ENTITY = Roots.MODID + ".runic_shears_summon_entity";
   public static final String BARK_CARVING = Roots.MODID + ".bark_carving";
   public static final String RITUAL_CRAFTING = Roots.MODID + ".ritual_crafting";
   public static final String MORTAR_AND_PESTLE = Roots.MODID + ".mortar_and_pestle";
@@ -91,7 +89,8 @@ public class JEIRootsPlugin implements IModPlugin {
         new MortarCategory(helper),
         new TransmutationCategory(helper),
         new RunedWoodCategory(helper),
-        new LootCategory(helper)
+        new LootCategory(helper),
+        new RunicShearsSummonEntityCategory(helper)
     );
   }
 
@@ -143,6 +142,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(MossRecipe.class, MossRecipeWrapper::new, TERRA_MOSS);
     registry.handleRecipes(SummonCreatureRecipe.class, SummonCreaturesWrapper::new, SUMMON_CREATURES);
     registry.handleRecipes(SummonCreatureIntermediate.class, SummonCreaturesWrapper::new, SUMMON_CREATURES);
+    registry.handleRecipes(SummonCreatureIntermediate.class, RunicShearsSummonEntityWrapper::new, RUNIC_SHEARS_SUMMON_ENTITY);
     registry.handleRecipes(ChrysopoeiaRecipe.class, ChrysopoeiaWrapper::new, CHRYSOPOEIA);
     registry.handleRecipes(TransmutationRecipe.class, TransmutationWrapper::new, TRANSMUTATION);
     registry.handleRecipes(RitualUtil.RunedWoodType.class, RunedWoodWrapper::new, RUNED_WOOD);
@@ -170,9 +170,11 @@ public class JEIRootsPlugin implements IModPlugin {
     ModRecipes.generateLifeEssence();
     List<SummonCreatureIntermediate> summonGenerated = ModRecipes.getLifeEssenceList().stream().map(SummonCreatureIntermediate::create).collect(Collectors.toList());
     registry.addRecipes(summonGenerated, SUMMON_CREATURES);
+    registry.addRecipes(summonGenerated, RUNIC_SHEARS_SUMMON_ENTITY);
 
     registry.addRecipeCatalyst(new ItemStack(ModItems.runic_shears), RUNIC_SHEARS);
     registry.addRecipeCatalyst(new ItemStack(ModItems.runic_shears), RUNIC_SHEARS_ENTITY);
+    registry.addRecipeCatalyst(new ItemStack(ModItems.runic_shears), RUNIC_SHEARS_SUMMON_ENTITY);
     registry.addRecipeCatalyst(new ItemStack(ModItems.ritual_summon_creatures), SUMMON_CREATURES);
     registry.addRecipeCatalyst(new ItemStack(ModItems.ritual_transmutation), TRANSMUTATION);
 

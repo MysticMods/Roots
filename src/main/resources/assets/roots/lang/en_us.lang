@@ -419,6 +419,7 @@ container.roots.transmutation.name=Transmutation Ritual
 container.roots.summon_creatures.name=Creature Summoning
 container.roots.runic_shears.name=Runic Shearing
 container.roots.runic_shears_entity.name=Runic Entity Shearing
+container.roots.runic_shears_summon_entity.name=Runic Entity Summoning
 container.roots.runic_carving.name=Runic Carving
 container.roots.ritual_crafting.name=Pyre Crafting Ritual
 container.roots.mortar_and_pestle.name=Mortar and Pestle
@@ -443,6 +444,7 @@ jei.roots.elemental_soil_water.desc=Created by tossing a piece of Elemental Soil
 jei.roots.elemental_soil_air.desc=Created by dropping a piece of Elemental Soil onto a surface closer to the sky, and unobscured from it.
 jei.roots.elemental_soil_earth.desc=Created by dropping a piece of Elemental Soil onto a surface covered from the sky and in the depth's of the ground.
 jei.roots.runic_shears.cooldown=Item can be obtained every %d seconds.
+jei.roots.runic_shears.summon=Item obtained by Sneaking while using Runic Shears.
 jei.roots.open_book_button_text=Open Book
 # Quiver
 roots.quiver.picked_up_arrow=Retrieved arrows.
