@@ -15,8 +15,15 @@ import javax.annotation.Nullable;
 public class SummonCreatureIntermediate extends SummonCreatureRecipe {
   private static ResourceLocation empty = new ResourceLocation(Roots.MODID, "generated");
 
-  protected SummonCreatureIntermediate(Class<? extends EntityLivingBase> clazz, Ingredient... ingredients) {
+  private final ItemStack essenceStack;
+
+  private SummonCreatureIntermediate(Class<? extends EntityLivingBase> clazz, ItemStack essenceStack, Ingredient... ingredients) {
     super(empty, clazz, ingredients);
+    this.essenceStack = essenceStack;
+  }
+
+  public ItemStack getEssenceStack() {
+    return essenceStack;
   }
 
   @Nullable
@@ -35,6 +42,6 @@ public class SummonCreatureIntermediate extends SummonCreatureRecipe {
 
     tag.setString("id", rl.toString());
 
-    return new SummonCreatureIntermediate(clazz, IngredientNBT.fromStacks(stack));
+    return new SummonCreatureIntermediate(clazz, stack, IngredientNBT.fromStacks(stack));
   }
 }
