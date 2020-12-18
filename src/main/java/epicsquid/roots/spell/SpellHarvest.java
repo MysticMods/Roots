@@ -26,7 +26,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.*;
@@ -37,7 +36,7 @@ import java.util.stream.Collectors;
 public class SpellHarvest extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(25);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("wildewheet", 0.55));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("wildewheet", 0.55));
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 6).setDescription("radius on the X axis of the area the spell has effect on");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("radius on the Y axis of the area the spell has effect on");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 6).setDescription("radius on the Z axis of the area the spell has effect on");
@@ -74,7 +73,7 @@ public class SpellHarvest extends SpellBase {
 
   public SpellHarvest(ResourceLocation name) {
     super(name, TextFormatting.GREEN, 57f / 255f, 253f / 255f, 28f / 255f, 197f / 255f, 233f / 255f, 28f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_RADIUS_BOOST, PROP_RADIUS_UNBOOST, PROP_UNDEAD_ADDITIONAL, PROP_UNDEAD_CHANCE, PROP_UNDEAD_COUNT, PROP_UNDEAD_RARITY, PROP_GROWTH_COUNT, PROP_GROWTH_ADDITIONAL);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_RADIUS_BOOST, PROP_RADIUS_UNBOOST, PROP_UNDEAD_ADDITIONAL, PROP_UNDEAD_CHANCE, PROP_UNDEAD_COUNT, PROP_UNDEAD_RARITY, PROP_GROWTH_COUNT, PROP_GROWTH_ADDITIONAL);
     acceptsModifiers(RADIUS1, MAGNETISM, FORTUNE, UNDEAD, SMALL_RADIUS, POISON, GROWTH, COOKING, CRUSHING, SILK_TOUCH);
   }
 

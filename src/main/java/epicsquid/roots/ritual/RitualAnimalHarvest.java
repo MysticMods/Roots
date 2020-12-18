@@ -32,7 +32,7 @@ public class RitualAnimalHarvest extends RitualBase {
 
   public RitualAnimalHarvest(String name, boolean disabled) {
     super(name, disabled);
-    properties.addProperties(PROP_DURATION, PROP_INTERVAL, PROP_COUNT, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_LOOTING_CHANCE, PROP_LOOTING_VALUE, PROP_GLOW_DURATION, PROP_FISH_CHANCE, PROP_FISH_COUNT, PROP_FISH_ADDITIONAL);
+    properties.add(PROP_DURATION, PROP_INTERVAL, PROP_COUNT, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_LOOTING_CHANCE, PROP_LOOTING_VALUE, PROP_GLOW_DURATION, PROP_FISH_CHANCE, PROP_FISH_COUNT, PROP_FISH_ADDITIONAL);
     setEntityClass(EntityRitualAnimalHarvest.class);
   }
 

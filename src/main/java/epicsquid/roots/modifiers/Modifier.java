@@ -2,22 +2,22 @@ package epicsquid.roots.modifiers;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
+import epicsquid.roots.properties.Property;
+import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.util.types.RegistryItem;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Modifier extends RegistryItem implements IModifier {
   private final IModifierCore core;
-  private final List<IModifierCost> costs;
   private final Set<IModifier> conflicts = new HashSet<>();
+  private final Map<CostType, IModifierCost> costs;
 
-  public Modifier(ResourceLocation name, IModifierCore core, List<IModifierCost> costs) {
+  public Modifier(ResourceLocation name, IModifierCore core, Map<CostType, IModifierCost> costs) {
     setRegistryName(name);
     this.costs = costs;
     this.core = core;
@@ -59,7 +59,7 @@ public class Modifier extends RegistryItem implements IModifier {
   }
 
   @Override
-  public List<IModifierCost> getCosts() {
+  public Map<CostType, IModifierCost> getCosts() {
     return costs;
   }
 
@@ -76,6 +76,20 @@ public class Modifier extends RegistryItem implements IModifier {
       identifier = getRegistryName().toString();
     }
     return identifier;
+  }
+
+  @Override
+  public List<Property<SpellBase.ModifierCost>> asProperties() {
+    List<Property<SpellBase.ModifierCost>> costs = new ArrayList<>();
+    for (IModifierCost entry : getCosts().values()) {
+      String name = entry.asPropertyName();
+      if (name == null) {
+        continue;
+      }
+      Property<SpellBase.ModifierCost> prop = new Property<>(name, new SpellBase.ModifierCost(entry));
+      costs.add(prop);
+    }
+    return costs;
   }
 
   @Override
@@ -99,7 +113,8 @@ public class Modifier extends RegistryItem implements IModifier {
     }
 
     final Object2DoubleOpenHashMap<Herb> result = new Object2DoubleOpenHashMap<>(costs);
-    for (IModifierCost cost : getCosts()) {
+    for (Map.Entry<CostType, IModifierCost> c : getCosts().entrySet()) {
+      IModifierCost cost = c.getValue();
       if (cost.getCost() != phase) {
         continue;
       }

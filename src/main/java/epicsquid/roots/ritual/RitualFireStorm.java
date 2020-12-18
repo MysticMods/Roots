@@ -19,7 +19,7 @@ public class RitualFireStorm extends RitualBase {
 
   public RitualFireStorm(String name, boolean disabled) {
     super(name, disabled);
-    properties.addProperties(PROP_DURATION, PROP_PROJECTILE_COUNT, PROP_PROJECTILE_DAMAGE, PROP_PROJECTILE_KNOCKBACK);
+    properties.add(PROP_DURATION, PROP_PROJECTILE_COUNT, PROP_PROJECTILE_DAMAGE, PROP_PROJECTILE_KNOCKBACK);
     setEntityClass(EntityRitualFireStorm.class);
   }
 

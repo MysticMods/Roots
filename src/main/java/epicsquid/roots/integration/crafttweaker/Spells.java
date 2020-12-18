@@ -83,14 +83,35 @@ public class Spells {
     }
 
     @ZenMethod
-    public Spell setCost(int cost, Herbs.Herb herb, double amount) {
+    public Spell setCost(Herbs.Herb herb, double amount) {
       PropertyTable props = original.getProperties();
       try {
-        Property<SpellBase.SpellCost> prop = props.get("cost_" + cost, SpellBase.SpellCost.EMPTY);
+        Property<SpellBase.SpellCost> prop = props.get("cost_" + herb.getHerbName());
+        if (prop == null) {
+          CraftTweakerAPI.logError("Invalid spell cost " + herb.getHerbName() + " for Spell " + original.getName() + ": this is not an existing cost.");
+          return this;
+        }
         SpellBase.SpellCost newCost = new SpellBase.SpellCost(herb.getHerbName(), amount);
         props.set(prop, newCost);
       } catch (ClassCastException error) {
-        CraftTweakerAPI.logError("Invalid spell cost " + cost + " for Spell " + original.getName() + ". Additional costs cannot be added at this time.", error);
+        CraftTweakerAPI.logError("Invalid spell cost " + herb.getHerbName() + " for Spell " + original.getName() + ". Additional costs cannot be added at this time.", error);
+      }
+      return this;
+    }
+
+    @ZenMethod
+    public Spell setModifierCost (Costs.Cost cost, Herbs.Herb herb, double value) {
+      PropertyTable props = original.getProperties();
+      try {
+        Property<SpellBase.ModifierCost> prop = props.get(herb.getHerbName() + "_" + cost.getCostName());
+        if (prop == null) {
+          CraftTweakerAPI.logError("Invalid modifier cost " + herb.getHerbName() + " with cost type " + cost.getCostName() + ": there is no existing cost for this combination of herb and cost.");
+          return this;
+        }
+        SpellBase.ModifierCost newCost = new SpellBase.ModifierCost(herb.getOriginal(), cost.getOriginal(), value);
+        props.set(prop, newCost);
+      } catch (ClassCastException error) {
+        CraftTweakerAPI.logError("Invalid modifier cost " + herb.getHerbName() + " with cost type " + cost.getCostName() + ": there is no existing cost for this combination of herb and cost. Resulted in error: ", error);
       }
       return this;
     }

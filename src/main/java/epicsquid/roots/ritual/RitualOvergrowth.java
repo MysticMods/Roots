@@ -18,7 +18,7 @@ public class RitualOvergrowth extends RitualBase {
 
   public RitualOvergrowth(String name, boolean disabled) {
     super(name, disabled);
-    properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL);
+    properties.add(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL);
     setEntityClass(EntityRitualOvergrowth.class);
   }
 

@@ -25,7 +25,7 @@ public class RitualWindwall extends RitualBase {
 
   public RitualWindwall(String name, boolean disabled) {
     super(name, disabled);
-    properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL, PROP_DISTANCE, PROP_KNOCKBACK);
+    properties.add(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL, PROP_DISTANCE, PROP_KNOCKBACK);
     setEntityClass(EntityRitualWindwall.class);
   }
 

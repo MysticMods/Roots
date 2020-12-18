@@ -6,10 +6,7 @@ import epicsquid.roots.api.Herb;
 import epicsquid.roots.entity.spell.EntitySpellBase;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.modifiers.BaseModifiers;
-import epicsquid.roots.modifiers.CostType;
-import epicsquid.roots.modifiers.IModifierCost;
-import epicsquid.roots.modifiers.Modifier;
+import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.base.BaseModifierInstanceList;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstanceList;
@@ -127,6 +124,11 @@ public abstract class SpellBase extends RegistryItem {
 
   public SpellBase acceptsModifiers(Modifier... modules) {
     acceptedModifiers.addAll(Arrays.asList(modules));
+    for (Modifier mod : modules) {
+      for (Property<ModifierCost> prop : mod.asProperties()) {
+        properties.add(prop);
+      }
+    }
     return this;
   }
 
@@ -238,7 +240,7 @@ public abstract class SpellBase extends RegistryItem {
             continue;
           }
 
-          for (IModifierCost c : m.getCosts()) {
+          for (IModifierCost c : m.getCosts().values()) {
             if (c.getCost() == CostType.ALL_COST_MULTIPLIER) {
               if (c.getValue() < 0) {
                 subtraction += Math.abs(c.getValue());
@@ -270,7 +272,7 @@ public abstract class SpellBase extends RegistryItem {
             continue;
           }
 
-          for (IModifierCost c : m.getCosts()) {
+          for (IModifierCost c : m.getCosts().values()) {
             if (c.getCost() == CostType.ALL_COST_MULTIPLIER) {
               if (c.getValue() < 0) {
                 subtraction += Math.abs(c.getValue());
@@ -495,6 +497,43 @@ public abstract class SpellBase extends RegistryItem {
     return null;
   }
 
+  public static class ModifierCost {
+    private Herb herb;
+    private CostType type;
+    private double cost;
+
+    public ModifierCost(IModifierCost cost) {
+      this(cost.getHerb(), cost.getCost(), cost.getValue());
+    }
+
+    public ModifierCost(Herb herb, CostType type, double cost) {
+      this.herb = herb;
+      this.type = type;
+      this.cost = cost;
+    }
+
+    public Herb getHerb() {
+      return herb;
+    }
+
+    public CostType getType() {
+      return type;
+    }
+
+    public double getCost() {
+      return cost;
+    }
+
+    @Override
+    public String toString() {
+      return "ModifierCost{" +
+          "herb=" + herb.getName() +
+          ", type=" + type +
+          ", cost=" + cost +
+          '}';
+    }
+  }
+
   public static class SpellCost {
     public static SpellCost EMPTY = new SpellCost(null, 0);
 
@@ -522,6 +561,8 @@ public abstract class SpellBase extends RegistryItem {
           '}';
     }
   }
+
+
 
   public static class SpellRecipe implements IRootsRecipe<TileEntityMortar> {
     public static SpellRecipe EMPTY = new SpellRecipe();

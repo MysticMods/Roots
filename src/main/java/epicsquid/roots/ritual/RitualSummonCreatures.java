@@ -35,7 +35,7 @@ public class RitualSummonCreatures extends RitualBase {
 
   public RitualSummonCreatures(String name, boolean disabled) {
     super(name, disabled);
-    properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL, PROP_TRIES);
+    properties.add(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL, PROP_TRIES);
     setEntityClass(EntityRitualSummonCreatures.class);
   }
 

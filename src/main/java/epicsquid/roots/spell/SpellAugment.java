@@ -29,7 +29,7 @@ public class SpellAugment extends SpellBase {
 
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(350);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("wildroot", 1.0));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("wildroot", 1.0));
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15).setDescription("radius on the X axis of the area in which dropped items are magnetized to the player");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 15).setDescription("radius on the Y axis of the area in which dropped items are magnetized to the player");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15).setDescription("radius on the Z axis of the area in which dropped items are magnetized to the player");
@@ -82,7 +82,7 @@ public class SpellAugment extends SpellBase {
 
   private SpellAugment(ResourceLocation name) {
     super(name, TextFormatting.AQUA, 69 / 255.0f, 209 / 255.0f, 127 / 255.0f, 28 / 255.0f, 28 / 255.0f, 148 / 255.0f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_REACH, PROP_REACH_DURATION, PROP_SPEED_AMPLIFIER, PROP_SPEED_DURATION, PROP_SLOW_FALL_DURATION, PROP_DRIFTER_DURATION, PROP_LUCK_AMPLIFIER, PROP_LUCK_DURATION, PROP_AIR_AMOUNT, PROP_STRENGTH_AMPLIFIER, PROP_STRENGTH_DURATION, PROP_HASTE_AMPLIFIER, PROP_HASTE_DURATION);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_REACH, PROP_REACH_DURATION, PROP_SPEED_AMPLIFIER, PROP_SPEED_DURATION, PROP_SLOW_FALL_DURATION, PROP_DRIFTER_DURATION, PROP_LUCK_AMPLIFIER, PROP_LUCK_DURATION, PROP_AIR_AMOUNT, PROP_STRENGTH_AMPLIFIER, PROP_STRENGTH_DURATION, PROP_HASTE_AMPLIFIER, PROP_HASTE_DURATION);
     acceptsModifiers(REACH, SPEED, SLOW_FALL, LIGHT_DRIFTER, MAGNETISM, LUCK, ABSORPTION, STRENGTH, HASTE, SECOND_WIND);
   }
 

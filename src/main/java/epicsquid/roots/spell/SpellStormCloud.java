@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 public class SpellStormCloud extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(100);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("cloud_berry", 0.015));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("cloud_berry", 0.015));
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(600).setDescription("the duration of the spell effect on the player");
   public static Property<Integer> PROP_RADIUS = new Property<>("radius", 2).setDescription("the radius of the area covered by the spring storm");
   public static Property<Integer> PROP_RADIUS_EXTENDED = new Property<>("extended_radius", 2).setDescription("the additional radius of the storm");
@@ -58,7 +58,7 @@ public class SpellStormCloud extends SpellBase {
 
   public SpellStormCloud(ResourceLocation name) {
     super(name, TextFormatting.DARK_AQUA, 22f / 255f, 142f / 255f, 255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DURATION, PROP_RADIUS, PROP_RADIUS_EXTENDED, PROP_LIGHTNING_CHANCE, PROP_LIGHTNING_DAMAGE, PROP_LIGHTNING_INTERVAL, PROP_FIRE_RESISTANCE, PROP_HEAL_AMOUNT, PROP_HEAL_INTERVAL, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_ICICLE_DAMAGE, PROP_ICICLE_CHANCE, PROP_ICICLE_INTERVAL);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DURATION, PROP_RADIUS, PROP_RADIUS_EXTENDED, PROP_LIGHTNING_CHANCE, PROP_LIGHTNING_DAMAGE, PROP_LIGHTNING_INTERVAL, PROP_FIRE_RESISTANCE, PROP_HEAL_AMOUNT, PROP_HEAL_INTERVAL, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_ICICLE_DAMAGE, PROP_ICICLE_CHANCE, PROP_ICICLE_INTERVAL);
     acceptsModifiers(RADIUS, PEACEFUL, MAGNETISM, LIGHTNING, JOLT, HEALING, POISON, OBSIDIAN, ICICLES, ICE);
   }
 

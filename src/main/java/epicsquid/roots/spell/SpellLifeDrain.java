@@ -35,8 +35,8 @@ import java.util.stream.Collectors;
 public class SpellLifeDrain extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(0);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("moonglow_leaf", 0.25));
-  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("baffle_cap", 0.125));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("moonglow_leaf", 0.25));
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(new SpellCost("baffle_cap", 0.125));
   public static Property<Float> PROP_WITHER_DAMAGE = new Property<>("wither_damage", 3f).setDescription("wither damage dealt to the enemies (different from the damage dealt by the wither itself)");
   public static Property<Float> PROP_HEAL = new Property<>("heal", 1.5f).setDescription("health points restored to the player");
   public static Property<Integer> PROP_WITHER_DURATION = new Property<>("wither_duration", 70).setDescription("duration in ticks of the wither effect");
@@ -74,7 +74,7 @@ public class SpellLifeDrain extends SpellBase {
 
   public SpellLifeDrain(ResourceLocation name) {
     super(name, TextFormatting.DARK_GRAY, 144f / 255f, 32f / 255f, 64f / 255f, 255f / 255f, 196f / 255f, 240f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_WITHER_DAMAGE, PROP_HEAL, PROP_WITHER_DURATION, PROP_WITHER_AMPLIFICATION, PROP_WITHER_CHANCE, PROP_ADDITIONAL_HEAL, PROP_SPECTRAL_CHANCE, PROP_DISTANCE);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_WITHER_DAMAGE, PROP_HEAL, PROP_WITHER_DURATION, PROP_WITHER_AMPLIFICATION, PROP_WITHER_CHANCE, PROP_ADDITIONAL_HEAL, PROP_SPECTRAL_CHANCE, PROP_DISTANCE);
     acceptsModifiers(RATIO, PEACEFUL, DISTRIBUTE, SPIRITS, TARGET, DAMAGE, FIRE, SLOWING, CHTHONIC);
   }
 

@@ -22,9 +22,9 @@ import net.minecraftforge.oredict.OreIngredient;
 public class SpellTimeStop extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(320);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("pereskia", 0.5));
-  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("moonglow_leaf", 0.5));
-  public static Property.PropertyCost PROP_COST_3 = new Property.PropertyCost(2, new SpellCost("dewgonia", 0.125));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("pereskia", 0.5));
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(new SpellCost("moonglow_leaf", 0.5));
+  public static Property.PropertyCost PROP_COST_3 = new Property.PropertyCost(new SpellCost("dewgonia", 0.125));
   public static Property<Integer> PROP_DURATION = new Property<>("duration", 200).setDescription("the duration of the time stop effect on entities");
   public static Property<Integer> PROP_OVERTIME = new Property<>("overtime", 200).setDescription("the extended duration that should apply when overtime is active");
   public static Property<Integer> PROP_UNDERTIME = new Property<>("undertime", 100).setDescription("the shortened duration that is applied instead of the normal duration");
@@ -58,7 +58,7 @@ public class SpellTimeStop extends SpellBase {
 
   public SpellTimeStop(ResourceLocation name) {
     super(name, TextFormatting.DARK_BLUE, 64f / 255f, 64f / 255f, 64f / 255f, 192f / 255f, 32f / 255f, 255f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_COST_3, PROP_DURATION, PROP_SLOWNESS_AMPLIFIER, PROP_SLOWNESS_DURATION, PROP_OVERTIME, PROP_WEAKNESS_AMPLIFIER, PROP_WEAKNESS_DURATION, PROP_SPEED_AMPLIFIER, PROP_SPEED_DURATION, PROP_FIRE_DURATION, PROP_UNDERTIME);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_COST_3, PROP_DURATION, PROP_SLOWNESS_AMPLIFIER, PROP_SLOWNESS_DURATION, PROP_OVERTIME, PROP_WEAKNESS_AMPLIFIER, PROP_WEAKNESS_DURATION, PROP_SPEED_AMPLIFIER, PROP_SPEED_DURATION, PROP_FIRE_DURATION, PROP_UNDERTIME);
     acceptsModifiers(PEACEFUL, FAMILIARS, LONGER, SLOW, WEAKNESS, SPEED, FIRE, SHORTER, FREEZE);
   }
 

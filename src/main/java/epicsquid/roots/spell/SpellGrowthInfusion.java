@@ -41,7 +41,7 @@ import java.util.Random;
 public class SpellGrowthInfusion extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(0);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("terra_moss", 0.2));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("terra_moss", 0.2));
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 7).setDescription("radius on the X axis of the area in which the spell takes effect");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 7).setDescription("radius on the Y axis of the area in which the spell takes effect");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 7).setDescription("radius on the Z axis of the area in which the spell takes effect");
@@ -89,7 +89,7 @@ public class SpellGrowthInfusion extends SpellBase {
 
   public SpellGrowthInfusion(ResourceLocation name) {
     super(name, TextFormatting.YELLOW, 48f / 255f, 255f / 255f, 48f / 255f, 192f / 255f, 255f / 255f, 192f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_TICKS, PROP_COUNT, PROP_ADDITIONAL_COUNT, PROP_RADIUS_BOOST, PROP_RADIUS_BREED_X, PROP_RADIUS_BREED_Y, PROP_RADIUS_BREED_Z, PROP_EMBIGGEN_CHANCE, PROP_ANIMAL_GROWTH, PROP_ANIMAL_GROWTH_VARY, PROP_STONE_CHANCE, PROP_STONE_DICT, PROP_VILLAGER_GROWTH, PROP_VILLAGER_GROWTH_VARY);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_TICKS, PROP_COUNT, PROP_ADDITIONAL_COUNT, PROP_RADIUS_BOOST, PROP_RADIUS_BREED_X, PROP_RADIUS_BREED_Y, PROP_RADIUS_BREED_Z, PROP_EMBIGGEN_CHANCE, PROP_ANIMAL_GROWTH, PROP_ANIMAL_GROWTH_VARY, PROP_STONE_CHANCE, PROP_STONE_DICT, PROP_VILLAGER_GROWTH, PROP_VILLAGER_GROWTH_VARY);
     acceptsModifiers(RADIUS1, BREED, FLOWERS, VILLAGERS, RADIUS2, EMBIGGEN, RADIUS3, ANIMAL_GROWTH, ORE, HYDRATE);
   }
 

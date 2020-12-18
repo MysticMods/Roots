@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class LibraryModifierInstance extends BaseModifierInstance {
@@ -47,7 +47,7 @@ public class LibraryModifierInstance extends BaseModifierInstance {
   }
 
   @Override
-  public List<IModifierCost> getCosts() {
+  public Map<CostType, IModifierCost> getCosts() {
     return Collections.emptyList();
   }
 

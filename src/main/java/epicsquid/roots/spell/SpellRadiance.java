@@ -30,8 +30,8 @@ import java.util.List;
 public class SpellRadiance extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(10);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("cloud_berry", 0.5));
-  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("pereskia", 0.25));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("cloud_berry", 0.5));
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(new SpellCost("pereskia", 0.25));
   public static Property<Float> PROP_DISTANCE = new Property<>("distance", 32f).setDescription("maximum reach of radiance beam");
   public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(5f).setDescription("damage dealt each time by radiance beam");
   public static Property<Float> PROP_UNDEAD_DAMAGE = new Property<>("undead_damage", 3f).setDescription("damage dealt each time by radiance beam on undead mobs");
@@ -69,7 +69,7 @@ public class SpellRadiance extends SpellBase {
 
   public SpellRadiance(ResourceLocation name) {
     super(name, TextFormatting.WHITE, 255f / 255f, 255f / 255f, 64f / 255f, 255f / 255f, 255f / 255f, 192f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DISTANCE, PROP_DAMAGE, PROP_UNDEAD_DAMAGE, PROP_WITHER_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_FIRE_DURATION, PROP_GLOW_DURATION, PROP_WIDTH, PROP_ADDED_WIDTH, PROP_HEALING);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DISTANCE, PROP_DAMAGE, PROP_UNDEAD_DAMAGE, PROP_WITHER_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_FIRE_DURATION, PROP_GLOW_DURATION, PROP_WIDTH, PROP_ADDED_WIDTH, PROP_HEALING);
     acceptsModifiers(PEACEFUL, MAGNETISM, WITHER, GLOWING, HEALING, POISON, FIRE, BIGGER, SLOW);
   }
 

@@ -3,9 +3,7 @@ package epicsquid.roots.modifiers;
 import epicsquid.roots.api.Herb;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Cost implements IModifierCost {
   private final CostType cost;
@@ -51,15 +49,15 @@ public class Cost implements IModifierCost {
     return null;
   }
 
-  public static List<IModifierCost> single(CostType cost, IModifierCore herb, double value) {
-    return Collections.singletonList(new Cost(cost, value, herb));
+  public static Map<CostType, IModifierCost> single(CostType cost, IModifierCore herb, double value) {
+    return Collections.singletonMap(cost, new Cost(cost, value, herb));
   }
 
-  public static List<IModifierCost> single(CostType cost, double value) {
+  public static Map<CostType, IModifierCost> single(CostType cost, double value) {
     return single(cost, null, value);
   }
 
-  public static List<IModifierCost> single(CostType cost) {
+  public static Map<CostType, IModifierCost> single(CostType cost) {
     return single(cost, null, 0);
   }
 
@@ -75,11 +73,15 @@ public class Cost implements IModifierCost {
     return cost(cost, null, 0);
   }
 
-  public static List<IModifierCost> of(IModifierCost... costs) {
-    return Arrays.asList(costs);
+  public static Map<CostType, IModifierCost> of(IModifierCost... costs) {
+    Map<CostType, IModifierCost> map = new HashMap<>();
+    for (IModifierCost cost : costs) {
+      map.put(cost.getCost(), cost);
+    }
+    return map;
   }
 
-  public static List<IModifierCost> noCost() {
+  public static Map<CostType, IModifierCost> noCost() {
     return single(CostType.NO_COST);
   }
 }
