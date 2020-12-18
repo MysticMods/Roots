@@ -25,7 +25,7 @@ public class RitualHeavyStorms extends RitualBase {
 
   public RitualHeavyStorms(String name, boolean disabled) {
     super(name, disabled);
-    properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_LIGHTNING_CHANCE, PROP_MAX_STRIKES);
+    properties.add(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_LIGHTNING_CHANCE, PROP_MAX_STRIKES);
     setEntityClass(EntityRitualHeavyStorms.class);
   }
 

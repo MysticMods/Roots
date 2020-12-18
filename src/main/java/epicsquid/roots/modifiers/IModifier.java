@@ -1,6 +1,7 @@
 package epicsquid.roots.modifiers;
 
 import epicsquid.roots.api.Herb;
+import epicsquid.roots.properties.Property;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.util.types.IRegistryItem;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
@@ -8,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
 
@@ -24,11 +26,13 @@ public interface IModifier extends IRegistryItem {
 
   boolean isBasic();
 
-  List<IModifierCost> getCosts();
+  Map<CostType, IModifierCost> getCosts();
 
   Set<IModifier> getConflicts();
 
   String getIdentifier();
+
+  List<Property<SpellBase.ModifierCost>> asProperties ();
 
   default Supplier<IModifier> supply() {
     return () -> this;

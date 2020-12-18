@@ -22,7 +22,7 @@ public class RitualSpreadingForest extends RitualBase {
 
   public RitualSpreadingForest(String name, boolean disabled) {
     super(name, disabled);
-    properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_PLACE_INTERVAL, PROP_GROWTH_INTERVAL, PROP_DOUBLE_CHANCE);
+    properties.add(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_PLACE_INTERVAL, PROP_GROWTH_INTERVAL, PROP_DOUBLE_CHANCE);
     setEntityClass(EntityRitualSpreadingForest.class);
   }
 

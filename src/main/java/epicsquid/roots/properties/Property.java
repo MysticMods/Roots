@@ -63,8 +63,8 @@ public class Property<T> extends AbstractProperty<T, Property<T>> {
   }
 
   public static class PropertyCost extends Property<SpellBase.SpellCost> {
-    public PropertyCost(int index, SpellBase.SpellCost defaultValue) {
-      super("cost_" + index, defaultValue);
+    public PropertyCost(SpellBase.SpellCost defaultValue) {
+      super("cost_" + defaultValue.getHerb().getName(), defaultValue);
     }
 
     @Override

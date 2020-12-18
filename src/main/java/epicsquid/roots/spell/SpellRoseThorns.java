@@ -17,7 +17,7 @@ import net.minecraftforge.oredict.OreIngredient;
 public class SpellRoseThorns extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(24);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("terra_moss", 0.25));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("terra_moss", 0.25));
   public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(8f);
   public static Property<Integer> PROP_SLOWNESS_DURATION = new Property<>("slowness_duration", 80).setDescription("duration in ticks of the slowness effect applied when the traps are triggered");
   public static Property<Integer> PROP_SLOWNESS_AMPLIFIER = new Property<>("slowness_amplifier", 0).setDescription("the level of the slowness effect (0 is the first level)");
@@ -58,7 +58,7 @@ public class SpellRoseThorns extends SpellBase {
 
   public SpellRoseThorns(ResourceLocation name) {
     super(name, TextFormatting.RED, 255f / 255f, 32f / 255f, 64f / 255f, 32f / 255f, 255f / 255f, 96f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_SLOWNESS_AMPLIFIER, PROP_SLOWNESS_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_DURATION, PROP_WEAKNESS_DURATION, PROP_KNOCKBACK, PROP_KNOCKUP, PROP_UNDEAD_DAMAGE, PROP_STRENGTH_AMPLIFIER, PROP_STRENGTH_DURATION);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_SLOWNESS_AMPLIFIER, PROP_SLOWNESS_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_DURATION, PROP_WEAKNESS_DURATION, PROP_KNOCKBACK, PROP_KNOCKUP, PROP_UNDEAD_DAMAGE, PROP_STRENGTH_AMPLIFIER, PROP_STRENGTH_DURATION);
     acceptsModifiers(BIGGER, PEACEFUL, WEAKNESS, KNOCKBACK, UNDEAD, POISON, BOOST, FIRE, STRENGTH, SLOW);
   }
 

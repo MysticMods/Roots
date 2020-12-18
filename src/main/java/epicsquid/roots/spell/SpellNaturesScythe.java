@@ -55,7 +55,7 @@ public class SpellNaturesScythe extends SpellBase {
 
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(160);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
-  public static Property.PropertyCost PROP_COST = new Property.PropertyCost(0, new SpellCost("stalicripe", 0.1));
+  public static Property.PropertyCost PROP_COST = new Property.PropertyCost(new SpellCost("stalicripe", 0.1));
   public static Property<Integer> PROP_RADIUS = new Property<>("radius", 12).setDescription("horizontal radius of the area in which the spell takes effect");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("radius on the Y axis of the area in which the spell takes effect");
   public static Property<Integer> PROP_INTERVAL = new Property<>("interval", 2).setDescription("interval in ticks between each harvested block segment");
@@ -87,7 +87,7 @@ public class SpellNaturesScythe extends SpellBase {
 
   public SpellNaturesScythe(ResourceLocation name) {
     super(name, TextFormatting.DARK_GREEN, 64 / 255F, 240 / 255F, 24 / 255F, 26 / 255F, 110 / 255F, 13 / 255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST, PROP_RADIUS, PROP_RADIUS_Y, PROP_INTERVAL, PROP_MAX_AFFECTED, PROP_TREE_DICT, PROP_WEB_DICT, PROP_GRASS_DICT, PROP_MUSHROOM_DICT, PROP_FLOWER_DICT, PROP_VINES_DICT);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST, PROP_RADIUS, PROP_RADIUS_Y, PROP_INTERVAL, PROP_MAX_AFFECTED, PROP_TREE_DICT, PROP_WEB_DICT, PROP_GRASS_DICT, PROP_MUSHROOM_DICT, PROP_FLOWER_DICT, PROP_VINES_DICT);
     acceptsModifiers(WEBS, LEAVES, MAGNETISM, FORTUNE, VOID, GRASS, MUSHROOM, FLOWER, SPEED, SILK_TOUCH);
   }
 

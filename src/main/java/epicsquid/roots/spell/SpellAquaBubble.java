@@ -21,8 +21,8 @@ import java.util.List;
 public class SpellAquaBubble extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(1200);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("dewgonia", 1.5));
-  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("terra_moss", 0.5));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("dewgonia", 1.5));
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(new SpellCost("terra_moss", 0.5));
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(1200);
   public static Property<Double> PROP_ABSORPTION = new Property<>("absorption", 20.0).setDescription("the amount of health absorption granted");
   public static Property<Float> PROP_FIRE_REDUCTION = new Property<>("fire_reduction", 0.5f).setDescription("how much fire damage is multiplied by");
@@ -61,7 +61,7 @@ public class SpellAquaBubble extends SpellBase {
 
   public SpellAquaBubble(ResourceLocation name) {
     super(name, TextFormatting.AQUA, 255f / 255f, 0f / 255f, 0f / 255f, 60f / 255f, 0f / 255f, 60f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DURATION, PROP_ABSORPTION, PROP_FIRE_REDUCTION, PROP_LAVA_REDUCTION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_KNOCKBACK, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_UNDEAD_REDUCTION, PROP_RESISTANCE_AMPLIFIER, PROP_RESISTANCE_DURATION, PROP_MAGIC_RESIST);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DURATION, PROP_ABSORPTION, PROP_FIRE_REDUCTION, PROP_LAVA_REDUCTION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_KNOCKBACK, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_UNDEAD_REDUCTION, PROP_RESISTANCE_AMPLIFIER, PROP_RESISTANCE_DURATION, PROP_MAGIC_RESIST);
     acceptsModifiers(DUO, FAMILIARS, SLOW, MAGIC_RESIST, UNDEAD, POISON_RESIST, KNOCKBACK, REFLECT_FIRE, RESISTANCE);
   }
 

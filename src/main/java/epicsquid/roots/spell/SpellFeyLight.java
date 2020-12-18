@@ -33,7 +33,7 @@ import java.util.Set;
 public class SpellFeyLight extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(20);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("cloud_berry", 0.125));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("cloud_berry", 0.125));
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15).setDescription("radius on the X axis within which lights are affected by the spell");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 10).setDescription("radius on the Y axis within which lights are affected by the spell");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15).setDescription("radius on the Z axis within which lights are affected by the spell");
@@ -70,7 +70,7 @@ public class SpellFeyLight extends SpellBase {
 
   public SpellFeyLight(ResourceLocation name) {
     super(name, TextFormatting.LIGHT_PURPLE, 247f / 255f, 246 / 255f, 210f / 255f, 227f / 255f, 81f / 255f, 244f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1);
     acceptsModifiers(PINK, YELLOW, FIXED, PURPLE, CONSUME, GREEN, DECAY, RED, BROWN, BLUE);
   }
 

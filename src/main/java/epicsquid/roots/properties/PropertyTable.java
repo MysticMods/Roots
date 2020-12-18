@@ -15,7 +15,7 @@ public class PropertyTable implements Iterable<Map.Entry<String, Property<?>>> {
     return reverseMap.values();
   }
 
-  public void addProperties(Property<?>... properties) {
+  public void add(Property<?>... properties) {
     for (Property prop : properties) {
       map.put(prop, null);
       reverseMap.put(prop.getName(), prop);

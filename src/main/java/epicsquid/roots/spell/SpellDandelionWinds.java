@@ -32,7 +32,7 @@ import java.util.List;
 public class SpellDandelionWinds extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(20);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("cloud_berry", 0.125));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("cloud_berry", 0.125));
   public static Property<Float> PROP_DISTANCE = new Property<>("distance", 0.75f).setDescription("the vertical component of the vector that determines the direction of the entity");
   public static Property<Double> PROP_RANGE_1 = new Property<>("range_1", 6.0).setDescription("the first range increment for calculating the bounding box");
   public static Property<Double> PROP_RANGE_2 = new Property<>("range_2", 4.0).setDescription("the first range increment for calculating the bounding box");
@@ -72,7 +72,7 @@ public class SpellDandelionWinds extends SpellBase {
 
   public SpellDandelionWinds(ResourceLocation name) {
     super(name, TextFormatting.YELLOW, 255f / 255f, 255f / 255f, 32f / 255f, 255f / 255f, 176f / 255f, 32f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DISTANCE, PROP_RANGE_1, PROP_RANGE_2, PROP_ADDITIONAL_DISTANCE, PROP_ADDITIONAL_DISTANCE, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DISTANCE, PROP_RANGE_1, PROP_RANGE_2, PROP_ADDITIONAL_DISTANCE, PROP_ADDITIONAL_DISTANCE, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION);
     acceptsModifiers(STRONGER, PEACEFUL, GROUNDED, SLOW_FALL, CIRCLE, ITEMS, POISON, FIRE, SUCTION, EXTINGUISH);
   }
 

@@ -25,7 +25,7 @@ import java.util.List;
 public class SpellPetalShell extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(120);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("spirit_herb", 0.75));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("spirit_herb", 0.75));
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(120 * 20);
   public static Property<Integer> PROP_MAXIMUM = new Property<>("maximum_shells", 3).setDescription("maximum number of shells (attack blockers) a player can have");
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 5).setDescription("radius on the X axis of the area the spell has effect on");
@@ -79,7 +79,7 @@ public class SpellPetalShell extends SpellBase {
 
   public SpellPetalShell(ResourceLocation name) {
     super(name, TextFormatting.LIGHT_PURPLE, 255f / 255f, 192f / 255f, 240f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_MAXIMUM, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_EXTRA, PROP_FIRE_DURATION, PROP_FIRE_DAMAGE, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_LEVITATE_DURATION, PROP_WEAKNESS_DURATION, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_DAGGER_DAMAGE, PROP_BLEED_AMPLIFIER, PROP_BLEED_DURATION, PROP_RADIANT_DAMAGE, PROP_WEAKNESS_AMPLIFIER);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_MAXIMUM, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_EXTRA, PROP_FIRE_DURATION, PROP_FIRE_DAMAGE, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_LEVITATE_DURATION, PROP_WEAKNESS_DURATION, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_DAGGER_DAMAGE, PROP_BLEED_AMPLIFIER, PROP_BLEED_DURATION, PROP_RADIANT_DAMAGE, PROP_WEAKNESS_AMPLIFIER);
     acceptsModifiers(RADIANT, PEACEFUL, SLASHING, CHARGES, COLOUR, POISON, LEVITATE, FIRE, WEAKNESS, SLOW);
   }
 

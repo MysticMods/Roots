@@ -21,7 +21,7 @@ public class RitualTransmutation extends RitualBase {
 
   public RitualTransmutation(String name, boolean disabled) {
     super(name, disabled);
-    properties.addProperties(PROP_DURATION, PROP_INTERVAL, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
+    properties.add(PROP_DURATION, PROP_INTERVAL, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
     setEntityClass(EntityRitualTransmutation.class);
   }
 

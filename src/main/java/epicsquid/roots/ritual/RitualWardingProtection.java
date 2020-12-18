@@ -22,7 +22,7 @@ public class RitualWardingProtection extends RitualBase {
 
   public RitualWardingProtection(String name, boolean disabled) {
     super(name, disabled);
-    properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL, PROP_INVULN_DURATION);
+    properties.add(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL, PROP_INVULN_DURATION);
     setEntityClass(EntityRitualWardingProtection.class);
   }
 

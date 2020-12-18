@@ -27,7 +27,7 @@ public class RitualHealingAura extends RitualBase {
 
   public RitualHealingAura(String name, boolean disabled) {
     super(name, disabled);
-    properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL, PROP_PLAYER_AMOUNT, PROP_AMOUNT, PROP_PLAYER_INTERVAL);
+    properties.add(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL, PROP_PLAYER_AMOUNT, PROP_AMOUNT, PROP_PLAYER_INTERVAL);
     setEntityClass(EntityRitualHealingAura.class);
   }
 

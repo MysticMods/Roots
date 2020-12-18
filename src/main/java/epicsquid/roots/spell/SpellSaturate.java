@@ -45,8 +45,8 @@ public class SpellSaturate extends SpellBase {
 
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(500);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("wildewheet", 0.7));
-  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("terra_moss", 0.5));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("wildewheet", 0.7));
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(new SpellCost("terra_moss", 0.5));
   public static Property<Double> PROP_SATURATION_MULTIPLIER = new Property<>("saturation_multiplier", 0.5).setDescription("multiplier for the saturation value each food item gives");
   public static Property<Double> PROP_FOOD_MULTIPLIER = new Property<>("food_multiplier", 0.5).setDescription("multiplier for the food value each food item gives");
   public static Property<Double> PROP_ADDITIONAL_SATURATION_MULTIPLIER = new Property<>("increased_saturation_multiplier", 0.3).setDescription("the additional value added to the multiplier");
@@ -101,7 +101,7 @@ public class SpellSaturate extends SpellBase {
 
   public SpellSaturate(ResourceLocation name) {
     super(name, TextFormatting.GOLD, 225F / 255F, 52F / 255F, 246F / 255F, 232F / 42F, 232F / 255F, 42F / 255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_SATURATION_MULTIPLIER, PROP_FOOD_MULTIPLIER, PROP_ADDITIONAL_FOOD_MULTIPLIER, PROP_ADDITIONAL_SATURATION_MULTIPLIER, PROP_UNCOOKED_DICT, PROP_RESISTANCE_AMPLIFIER, PROP_RESISTANCE_DURATION, PROP_POISON_ADDITION_FOOD, PROP_POISON_ADDITION_SATURATION, PROP_COOKED_ADDITIONAL_FOOD, PROP_COOKED_ADDITIONAL_SATURATION, PROP_COOKED_DICT, PROP_UNCOOKED_ADDITIONAL_FOOD, PROP_UNCOOKED_ADDITIONAL_SATURATION, PROP_NAUSEA_ADDITIONAL_FOOD, PROP_NAUSEA_ADDITIONAL_SATURATION, PROP_BOTTLED_ADDITIONAL_FOOD, PROP_BOTTLED_ADDITIONAL_SATURATION, PROP_BOTTLED_DICT, PROP_INVERSION_SATURATION_BOOST, PROP_INVERSION_FOOD_BOOST);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_SATURATION_MULTIPLIER, PROP_FOOD_MULTIPLIER, PROP_ADDITIONAL_FOOD_MULTIPLIER, PROP_ADDITIONAL_SATURATION_MULTIPLIER, PROP_UNCOOKED_DICT, PROP_RESISTANCE_AMPLIFIER, PROP_RESISTANCE_DURATION, PROP_POISON_ADDITION_FOOD, PROP_POISON_ADDITION_SATURATION, PROP_COOKED_ADDITIONAL_FOOD, PROP_COOKED_ADDITIONAL_SATURATION, PROP_COOKED_DICT, PROP_UNCOOKED_ADDITIONAL_FOOD, PROP_UNCOOKED_ADDITIONAL_SATURATION, PROP_NAUSEA_ADDITIONAL_FOOD, PROP_NAUSEA_ADDITIONAL_SATURATION, PROP_BOTTLED_ADDITIONAL_FOOD, PROP_BOTTLED_ADDITIONAL_SATURATION, PROP_BOTTLED_DICT, PROP_INVERSION_SATURATION_BOOST, PROP_INVERSION_FOOD_BOOST);
     acceptsModifiers(RATIO, UNCOOKED, INVERSION, RESISTANCE, POISONED, ITEMS, COOKED, NAUSEA, BOTTLED);
     MinecraftForge.EVENT_BUS.register(this);
   }

@@ -36,8 +36,8 @@ public class SpellDesaturate extends SpellBase {
 
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(500);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(0, new SpellCost("spirit_herb", 0.7));
-  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(1, new SpellCost("terra_moss", 0.5));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("spirit_herb", 0.7));
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(new SpellCost("terra_moss", 0.5));
 
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 8).setDescription("radius on the X axis within which entities are affected by the spell");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 2).setDescription("radius on the Y axis within which entities are affected by the spell");
@@ -90,7 +90,7 @@ public class SpellDesaturate extends SpellBase {
 
   public SpellDesaturate(ResourceLocation name) {
     super(name, TextFormatting.DARK_PURPLE, 184F / 255F, 232F / 255F, 42F / 255F, 109F / 255F, 32F / 255F, 168F / 255F);
-    properties.addProperties(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_MULTIPLIER, PROP_AMPLIFIED_MULTIPLIER, PROP_SHIELD_BASE, PROP_SHIELD_AMPLIFIER, PROP_LEVITATE_TARGETS, PROP_LEVITATION_DURATION, PROP_RESISTANCE_AMPLIFIER, PROP_RESISTANCE_BASE, PROP_GROWTH_COUNT, PROP_GROWTH_TICKS, PROP_HEAL_AMOUNT, PROP_DAMAGE_AMOUNT, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_MULTIPLIER, PROP_AMPLIFIED_MULTIPLIER, PROP_SHIELD_BASE, PROP_SHIELD_AMPLIFIER, PROP_LEVITATE_TARGETS, PROP_LEVITATION_DURATION, PROP_RESISTANCE_AMPLIFIER, PROP_RESISTANCE_BASE, PROP_GROWTH_COUNT, PROP_GROWTH_TICKS, PROP_HEAL_AMOUNT, PROP_DAMAGE_AMOUNT, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
     acceptsModifiers(RATIO, PEACEFUL, GROWTH, SHIELD, DAMAGE, LEVITATE, THOUGHTFUL, RESISTANCE, PURIFY);
   }
 

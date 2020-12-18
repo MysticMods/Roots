@@ -19,7 +19,7 @@ public class RitualGathering extends RitualBase {
 
   public RitualGathering(String name, boolean disabled) {
     super(name, disabled);
-    this.properties.addProperties(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL);
+    this.properties.add(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL);
     setEntityClass(EntityRitualGathering.class);
   }
 
