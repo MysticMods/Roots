@@ -119,6 +119,12 @@ public class SpellFeyLight extends SpellBase {
         RayTraceResult result = this.rayTrace(player, 10);
         if (result != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
           pos = result.getBlockPos().offset(result.sideHit);
+          if (!world.isAirBlock(pos)) {
+            result = this.rayTrace(player, 10, false);
+            if (result != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
+              pos = result.getBlockPos().offset(result.sideHit);
+            }
+          }
         }
       }
       if (world.isAirBlock(pos)) {
@@ -173,10 +179,15 @@ public class SpellFeyLight extends SpellBase {
 
   @Nullable
   public RayTraceResult rayTrace(EntityPlayer player, double blockReachDistance) {
+    return rayTrace(player, blockReachDistance, true);
+  }
+
+  @Nullable
+  public RayTraceResult rayTrace(EntityPlayer player, double blockReachDistance, boolean ignore) {
     Vec3d vec3d = player.getPositionEyes(1.0F);
     Vec3d vec3d1 = player.getLook(1.0F);
     Vec3d vec3d2 = vec3d.add(vec3d1.x * blockReachDistance, vec3d1.y * blockReachDistance, vec3d1.z * blockReachDistance);
-    return player.world.rayTraceBlocks(vec3d, vec3d2, false, true, true);
+    return player.world.rayTraceBlocks(vec3d, vec3d2, false, ignore, true);
   }
 }
 
