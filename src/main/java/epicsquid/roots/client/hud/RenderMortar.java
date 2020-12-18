@@ -57,7 +57,7 @@ public class RenderMortar {
         mc.getRenderItem().renderItemOverlayIntoGUI(mc.fontRenderer, output, x + radius + 16, y - 8, null);
       }
       RenderHelper.disableStandardItemLighting();
-    } else if (spellRecipe != null) {
+    } else if (spellRecipe != null && !spellRecipe.isDisabled()) {
       ItemStack output = new ItemStack(ModItems.spell_dust, 1);
       RenderHelper.enableGUIStandardItemLighting();
       mc.getRenderItem().renderItemIntoGUI(output, x + radius + 24, y - 14);
