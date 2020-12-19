@@ -440,6 +440,13 @@ public abstract class SpellBase extends RegistryItem {
         addCost(cost);
       }
     }
+    for (Modifier mod : getModifiers()) {
+      List<ModifierCost> costs = new ArrayList<>();
+      for (Property<ModifierCost> prop : mod.asProperties()) {
+        costs.add(properties.get(prop));
+      }
+      mod.replaceCosts(costs);
+    }
     this.finalised = true;
   }
 
@@ -524,6 +531,10 @@ public abstract class SpellBase extends RegistryItem {
       return cost;
     }
 
+    public IModifierCost asCost () {
+      return new Cost(getType(), getCost(), ModifierCores.fromHerb(getHerb()));
+    }
+
     @Override
     public String toString() {
       return "ModifierCost{" +
@@ -551,6 +562,10 @@ public abstract class SpellBase extends RegistryItem {
 
     public double getCost() {
       return cost;
+    }
+
+    public String getHerbName () {
+      return this.herb;
     }
 
     @Override

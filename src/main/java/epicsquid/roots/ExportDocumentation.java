@@ -2,6 +2,7 @@ package epicsquid.roots;
 
 import epicsquid.roots.integration.crafttweaker.Herbs;
 import epicsquid.roots.integration.crafttweaker.Rituals;
+import epicsquid.roots.integration.crafttweaker.Spells;
 import epicsquid.roots.integration.crafttweaker.tweaks.*;
 import epicsquid.roots.integration.crafttweaker.tweaks.predicates.*;
 import epicsquid.roots.util.zen.ZenDocExporter;
@@ -32,7 +33,8 @@ public class ExportDocumentation {
         Predicates.class,
         PropertyPredicate.class,
         StatePredicate.class,
-        Herbs.class
+        Herbs.class,
+        Spells.class
     };
 
     ZenDocExporter export = new ZenDocExporter();

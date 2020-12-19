@@ -48,7 +48,7 @@ public class LibraryModifierInstance extends BaseModifierInstance {
 
   @Override
   public Map<CostType, IModifierCost> getCosts() {
-    return Collections.emptyList();
+    return Collections.emptyMap();
   }
 
   @Override

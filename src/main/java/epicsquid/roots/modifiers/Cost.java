@@ -43,6 +43,9 @@ public class Cost implements IModifierCost {
   @Nullable
   @Override
   public Herb getHerb() {
+    if (herb == null) {
+      return null;
+    }
     if (herb.isHerb()) {
       return herb.getHerb();
     }
@@ -50,7 +53,9 @@ public class Cost implements IModifierCost {
   }
 
   public static Map<CostType, IModifierCost> single(CostType cost, IModifierCore herb, double value) {
-    return Collections.singletonMap(cost, new Cost(cost, value, herb));
+    Map<CostType, IModifierCost> map = new HashMap<>();
+    map.put(cost, new Cost(cost, value, herb));
+    return map;
   }
 
   public static Map<CostType, IModifierCost> single(CostType cost, double value) {

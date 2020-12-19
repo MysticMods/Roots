@@ -90,7 +90,7 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
         return false;
       }
     }
-    if (!isHerb(stack)) {
+    if (!HerbRegistry.isHerb(stack)) {
       return false;
     }
     if (!inventoryStack.isEmpty()) {
@@ -113,16 +113,6 @@ public class TileEntityIncenseBurner extends TileBase implements ITickable {
     if (!world.isRemote)
       updatePacketViaState();
 
-    return false;
-  }
-
-  private boolean isHerb(@Nonnull ItemStack stack) {
-    // TODO: Improve this
-    for (Herb herb : HerbRegistry.REGISTRY.getValuesCollection()) {
-      if (stack.getItem() == herb.getItem()) {
-        return true;
-      }
-    }
     return false;
   }
 
