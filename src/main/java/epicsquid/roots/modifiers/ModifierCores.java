@@ -12,6 +12,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -130,5 +131,17 @@ public enum ModifierCores implements IModifierCore {
 
   public static boolean isModifierCore(ItemStack stack) {
     return isModifierCore(stack.getItem());
+  }
+
+  @Nullable
+  public static ModifierCores fromHerb (Herb herb) {
+    for (ModifierCores core : values()) {
+      if (core.isHerb()) {
+        if (Objects.equals(core.getHerb(), herb)) {
+          return core;
+        }
+      }
+    }
+    return null;
   }
 }

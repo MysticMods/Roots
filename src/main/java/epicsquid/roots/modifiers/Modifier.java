@@ -16,6 +16,7 @@ public class Modifier extends RegistryItem implements IModifier {
   private final IModifierCore core;
   private final Set<IModifier> conflicts = new HashSet<>();
   private final Map<CostType, IModifierCost> costs;
+  private List<Property<SpellBase.ModifierCost>> propertyCache;
 
   public Modifier(ResourceLocation name, IModifierCore core, Map<CostType, IModifierCost> costs) {
     setRegistryName(name);
@@ -80,16 +81,18 @@ public class Modifier extends RegistryItem implements IModifier {
 
   @Override
   public List<Property<SpellBase.ModifierCost>> asProperties() {
-    List<Property<SpellBase.ModifierCost>> costs = new ArrayList<>();
-    for (IModifierCost entry : getCosts().values()) {
-      String name = entry.asPropertyName();
-      if (name == null) {
-        continue;
+    if (propertyCache == null) {
+      propertyCache = new ArrayList<>();
+      for (IModifierCost entry : getCosts().values()) {
+        String name = entry.asPropertyName();
+        if (name == null) {
+          continue;
+        }
+        Property<SpellBase.ModifierCost> prop = new Property<>(name, new SpellBase.ModifierCost(entry));
+        propertyCache.add(prop);
       }
-      Property<SpellBase.ModifierCost> prop = new Property<>(name, new SpellBase.ModifierCost(entry));
-      costs.add(prop);
     }
-    return costs;
+    return propertyCache;
   }
 
   @Override
@@ -103,6 +106,13 @@ public class Modifier extends RegistryItem implements IModifier {
   public void addConflicts(IModifier... suppliers) {
     for (IModifier sup : suppliers) {
       addConflict(sup);
+    }
+  }
+
+  public void replaceCosts (List<SpellBase.ModifierCost> costs) {
+    this.costs.clear();
+    for (SpellBase.ModifierCost cost : costs) {
+      this.costs.put(cost.getType(), cost.asCost());
     }
   }
 

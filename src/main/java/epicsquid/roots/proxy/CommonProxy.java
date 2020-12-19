@@ -30,7 +30,6 @@ import java.util.Collections;
 public class CommonProxy {
   public void preInit(FMLPreInitializationEvent event) {
     SpellRegistry.preInit();
-    HerbRegistry.init();
     RitualRegistry.preInit();
     ModEntities.registerLootTables();
   }

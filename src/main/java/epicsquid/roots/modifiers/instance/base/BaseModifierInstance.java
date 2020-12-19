@@ -2,6 +2,8 @@ package epicsquid.roots.modifiers.instance.base;
 
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.modifiers.*;
+import epicsquid.roots.properties.Property;
+import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.util.types.RegistryItem;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.client.gui.GuiScreen;
@@ -15,6 +17,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -91,7 +94,7 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
   public List<String> describeCost() {
     // TODO: Sort by type
     List<String> result = new ArrayList<>();
-    for (IModifierCost cost : modifier.getCosts()) {
+    for (IModifierCost cost : modifier.getCosts().values()) {
       switch (cost.getCost()) {
         case NO_COST:
           result.add(I18n.format("roots.tooltip.modifier.no_cost"));
@@ -168,5 +171,10 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
   @Override
   public ResourceLocation getRegistryName() {
     return modifier.getRegistryName();
+  }
+
+  @Override
+  public List<Property<SpellBase.ModifierCost>> asProperties() {
+    return Collections.emptyList();
   }
 }
