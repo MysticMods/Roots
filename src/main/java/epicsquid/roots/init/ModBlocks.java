@@ -219,6 +219,8 @@ public class ModBlocks {
     event.addBlock(fey_fire = new BlockWildFire("fey_fire")).setCreativeTab(Roots.tab);
     event.addBlock(fake_water = new BlockFakeLiquid(Material.WATER, SoundType.SNOW, 0, "fake_water")).setCreativeTab(Roots.tab);
     event.addBlock(fake_lava = new BlockFakeLiquid(Material.LAVA, SoundType.SNOW, 0, "fake_lava")).setCreativeTab(Roots.tab);
+
+    ModItems.baffle_cap = ((BlockMushroomBase) baffle_cap_mushroom).getItemBlock();
   }
 
   private static Variants variantsObsidian(RegisterContentEvent event, Block base, String name, SoundType sound, Material material) {
