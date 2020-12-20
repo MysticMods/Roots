@@ -202,9 +202,6 @@ public abstract class SpellBase extends RegistryItem {
       for (Map.Entry<Herb, Double> entry : costs.entrySet()) {
         Herb herb = entry.getKey();
         String d = String.format("%.4f", entry.getValue());
-        if (herb.getItem() == null) {
-          System.out.print("PANICK");
-        }
         tooltip.add(I18n.format(herb.getItem().getTranslationKey() + ".name") + I18n.format("roots.tooltip.pouch_divider") + d);
       }
     }
