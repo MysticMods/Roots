@@ -3,6 +3,7 @@ package epicsquid.roots.modifiers;
 import epicsquid.roots.api.Herb;
 
 import javax.annotation.Nullable;
+import java.util.Locale;
 
 public interface IModifierCost {
   CostType getCost();
@@ -19,6 +20,6 @@ public interface IModifierCost {
       return null;
     }
 
-    return herb.getName() + "_" + getCost().toString();
+    return herb.getName() + "_" + getCost().toString().toLowerCase(Locale.ROOT);
   }
 }
