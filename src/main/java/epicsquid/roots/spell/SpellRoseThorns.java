@@ -3,6 +3,7 @@ package epicsquid.roots.spell;
 import epicsquid.roots.Roots;
 import epicsquid.roots.entity.spell.EntityThornTrap;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.properties.Property;
@@ -71,6 +72,7 @@ public class SpellRoseThorns extends SpellBase {
         new OreIngredient("dyeRed"),
         new ItemStack(ModItems.terra_moss)
     );
+    setCastSound(ModSounds.Spells.ROSE_THORNS);
   }
 
   @Override

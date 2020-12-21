@@ -6,6 +6,7 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.block.BlockColoredFeyLight;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.properties.Property;
@@ -83,6 +84,7 @@ public class SpellFeyLight extends SpellBase {
         new ItemStack(ModItems.bark_acacia),
         new ItemStack(ModItems.cloud_berry)
     );
+    setCastSound(ModSounds.Spells.FEY_LIGHT);
   }
 
   public int nextTick() {

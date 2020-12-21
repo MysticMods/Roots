@@ -4,6 +4,7 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageChrysopoeiaFX;
@@ -59,6 +60,7 @@ public class SpellChrysopoeia extends SpellBase {
         new ItemStack(Items.MAGMA_CREAM),
         new OreIngredient("gemDiamond")
     );
+    setCastSound(ModSounds.Spells.CHRYSOPOEIA);
   }
 
   private static final Object2LongOpenHashMap<EntityPlayer> soundTimer = new Object2LongOpenHashMap<>();

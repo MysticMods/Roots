@@ -5,6 +5,7 @@ import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageDisarmFX;
@@ -89,6 +90,7 @@ public class SpellDisarm extends SpellBase {
         new ItemStack(Item.getItemFromBlock(Blocks.TRIPWIRE_HOOK)),
         new ItemStack(ModItems.moonglow_leaf)
     );
+    setCastSound(ModSounds.Spells.DISARM);
   }
 
   @SuppressWarnings("ConstantConditions")

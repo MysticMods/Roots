@@ -4,6 +4,7 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
@@ -103,6 +104,7 @@ public class SpellDesaturate extends SpellBase {
         new OreIngredient("bone"),
         new ItemStack(ModItems.spirit_herb)
     );
+    setCastSound(ModSounds.Spells.DESATURATE);
   }
 
   @Override

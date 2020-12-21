@@ -7,6 +7,7 @@ import epicsquid.mysticallib.util.RayCastUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.MossConfig;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageRunicShearsAOEFX;
@@ -75,6 +76,7 @@ public class SpellShatter extends SpellBase {
         new ItemStack(Item.getItemFromBlock(Blocks.TNT)),
         new OreIngredient("cobblestone")
     );
+    setCastSound(ModSounds.Spells.SHATTER);
   }
 
   @Nullable

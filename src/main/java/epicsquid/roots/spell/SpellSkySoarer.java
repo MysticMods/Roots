@@ -3,6 +3,7 @@ package epicsquid.roots.spell;
 import epicsquid.roots.Roots;
 import epicsquid.roots.entity.spell.EntityBoost;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.properties.Property;
@@ -70,6 +71,7 @@ public class SpellSkySoarer extends SpellBase {
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),
         new ItemStack(ModItems.cloud_berry)
     );
+    setCastSound(ModSounds.Spells.SKY_SOARER);
   }
 
   @Override

@@ -28,6 +28,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -62,6 +64,8 @@ public abstract class SpellBase extends RegistryItem {
   private List<Modifier> acceptedModifiers = new ArrayList<>();
 
   public SpellRecipe recipe = SpellRecipe.EMPTY;
+
+  protected SoundEvent cast_sound;
 
   public enum EnumCastType {
     INSTANTANEOUS, CONTINUOUS
@@ -134,6 +138,15 @@ public abstract class SpellBase extends RegistryItem {
 
   public List<Modifier> getModifiers() {
     return acceptedModifiers;
+  }
+
+  public void setCastSound (@Nullable SoundEvent event) {
+    this.cast_sound = event;
+  }
+
+  @Nullable
+  public SoundEvent getCastSound () {
+    return this.cast_sound;
   }
 
   public void setRecipe(SpellRecipe recipe) {
@@ -359,6 +372,13 @@ public abstract class SpellBase extends RegistryItem {
         result = CastResult.SUCCESS_SPEEDY;
       } else {
         result = CastResult.SUCCESS_GREATER_SPEEDY;
+      }
+    }
+
+    if (result != CastResult.FAIL && !caster.world.isRemote && (ticks == 0 || ticks == 72000)) {
+      SoundEvent event = this.getCastSound();
+      if (event != null) {
+        caster.world.playSound(null, caster.getPosition(), event, SoundCategory.PLAYERS, 1, 1);
       }
     }
     return result;

@@ -5,6 +5,7 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModDamage;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageAcidCloudFX;
@@ -90,6 +91,7 @@ public class SpellAcidCloud extends SpellBase {
         new OreIngredient("blockCactus"),
         new ItemStack(Items.ROTTEN_FLESH)
     );
+    setCastSound(ModSounds.Spells.ACID_CLOUD);
   }
 
   public static AxisAlignedBB boxGeneral, boxBoost;

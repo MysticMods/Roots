@@ -4,6 +4,7 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageRadianceBeamFX;
@@ -82,6 +83,7 @@ public class SpellRadiance extends SpellBase {
         new ItemStack(ModItems.cloud_berry),
         new ItemStack(ModItems.pereskia)
     );
+    setCastSound(ModSounds.Spells.RADIANCE);
   }
 
   @Override
