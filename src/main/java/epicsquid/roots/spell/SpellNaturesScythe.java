@@ -4,6 +4,7 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageFallBladesFX;
@@ -100,6 +101,7 @@ public class SpellNaturesScythe extends SpellBase {
         new ItemStack(Items.GOLDEN_SWORD),
         new OreIngredient("tallgrass")
     );
+    setCastSound(ModSounds.Spells.NATURES_SCYTHE);
   }
 
   @Override

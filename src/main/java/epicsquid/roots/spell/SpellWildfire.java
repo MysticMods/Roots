@@ -4,6 +4,7 @@ import epicsquid.mysticallib.util.AABBUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.entity.spell.EntityFireJet;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.properties.Property;
@@ -79,6 +80,7 @@ public class SpellWildfire extends SpellBase {
         new ItemStack(ModItems.infernal_bulb),
         new ItemStack(Item.getItemFromBlock(Blocks.TNT))
     );
+    setCastSound(ModSounds.Spells.WILDFIRE);
   }
 
   @Override

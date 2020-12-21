@@ -7,6 +7,7 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageLifeDrainAbsorbFX;
@@ -87,6 +88,7 @@ public class SpellLifeDrain extends SpellBase {
         new ItemStack(Items.IRON_SWORD),
         new OreIngredient("blockCactus")
     );
+    setCastSound(ModSounds.Spells.LIFE_DRAIN);
   }
 
   private boolean handleEntity(EntityPlayer player, EntityLivingBase e, StaffModifierInstanceList info, List<EntityLivingBase> peacefuls, float dam, float h) {

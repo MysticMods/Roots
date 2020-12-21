@@ -8,6 +8,7 @@ import epicsquid.mysticalworld.recipe.Ingredients;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
@@ -102,6 +103,7 @@ public class SpellGrowthInfusion extends SpellBase {
         Ingredients.AUBERGINE,
         new OreIngredient("cropWheat")
     );
+    setCastSound(ModSounds.Spells.GROWTH_INFUSION);
   }
 
   @Override

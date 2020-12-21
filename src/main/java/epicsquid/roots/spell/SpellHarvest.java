@@ -6,6 +6,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.mechanics.Growth;
 import epicsquid.roots.mechanics.Harvest;
 import epicsquid.roots.modifiers.*;
@@ -86,6 +87,7 @@ public class SpellHarvest extends SpellBase {
         new ItemStack(Items.BEETROOT_SEEDS),
         new ItemStack(Items.WHEAT_SEEDS)
     );
+    setCastSound(ModSounds.Spells.HARVEST);
   }
 
   private static List<Block> skipBlocks = Arrays.asList(Blocks.BEDROCK, Blocks.GRASS, Blocks.DIRT, Blocks.STONE, Blocks.TALLGRASS, Blocks.WATER, Blocks.LAVA, Blocks.DOUBLE_PLANT, Blocks.MELON_STEM, Blocks.PUMPKIN_STEM);

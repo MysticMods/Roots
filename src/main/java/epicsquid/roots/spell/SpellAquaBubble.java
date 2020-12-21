@@ -4,6 +4,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.properties.Property;
@@ -63,6 +64,7 @@ public class SpellAquaBubble extends SpellBase {
     super(name, TextFormatting.AQUA, 255f / 255f, 0f / 255f, 0f / 255f, 60f / 255f, 0f / 255f, 60f / 255f);
     properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DURATION, PROP_ABSORPTION, PROP_FIRE_REDUCTION, PROP_LAVA_REDUCTION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_KNOCKBACK, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_UNDEAD_REDUCTION, PROP_RESISTANCE_AMPLIFIER, PROP_RESISTANCE_DURATION, PROP_MAGIC_RESIST);
     acceptsModifiers(DUO, FAMILIARS, SLOW, MAGIC_RESIST, UNDEAD, POISON_RESIST, KNOCKBACK, REFLECT_FIRE, RESISTANCE);
+    setCastSound(ModSounds.Spells.AQUA_BUBBLE);
   }
 
   @Override
@@ -74,6 +76,7 @@ public class SpellAquaBubble extends SpellBase {
         new OreIngredient("blockGlass"),
         new OreIngredient("gemQuartz")
     );
+    setCastSound(ModSounds.Spells.AQUA_BUBBLE);
   }
 
   @Override

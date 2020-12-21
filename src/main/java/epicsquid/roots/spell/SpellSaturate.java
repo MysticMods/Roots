@@ -5,6 +5,7 @@ import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageSaturationFX;
@@ -115,6 +116,7 @@ public class SpellSaturate extends SpellBase {
         new ItemStack(Items.PUMPKIN_PIE),
         new ItemStack(epicsquid.roots.init.ModItems.wildewheet)
     );
+    setCastSound(ModSounds.Spells.SATURATE);
   }
 
   @Override

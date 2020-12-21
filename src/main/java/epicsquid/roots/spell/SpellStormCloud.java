@@ -3,6 +3,7 @@ package epicsquid.roots.spell;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.properties.Property;
@@ -71,6 +72,7 @@ public class SpellStormCloud extends SpellBase {
         new ItemStack(Items.SNOWBALL),
         new ItemStack(Item.getItemFromBlock(Blocks.RED_FLOWER), 1, BlockFlower.EnumFlowerType.BLUE_ORCHID.getMeta())
     );
+    setCastSound(ModSounds.Spells.STORM_CLOUD); // todo
   }
 
   @Override

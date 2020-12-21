@@ -5,6 +5,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageSanctuaryBurstFX;
@@ -73,6 +74,7 @@ public class SpellSanctuary extends SpellBase {
         new ItemStack(ModItems.bark_spruce),
         new OreIngredient("wildroot")
     );
+    //setCastSound(ModSounds.Spells.SANCTUARY);
   }
 
   @Override

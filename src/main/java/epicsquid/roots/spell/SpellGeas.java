@@ -4,6 +4,7 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.properties.Property;
@@ -79,6 +80,7 @@ public class SpellGeas extends SpellBase {
         new ItemStack(ModItems.terra_spores),
         new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom))
     );
+    setCastSound(ModSounds.Spells.GEAS); // todo
   }
 
   private int affect(EntityLivingBase e, boolean peaceful, EntityPlayer player, StaffModifierInstanceList info, int dur) {

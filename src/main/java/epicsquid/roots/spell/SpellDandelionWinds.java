@@ -5,6 +5,7 @@ import epicsquid.mysticallib.util.AABBUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageDandelionCastFX;
@@ -85,6 +86,7 @@ public class SpellDandelionWinds extends SpellBase {
         new ItemStack(ModItems.cloud_berry),
         new ItemStack(ModItems.terra_spores)
     );
+    setCastSound(ModSounds.Spells.DANDELION_WINDS);
   }
 
   @Override
