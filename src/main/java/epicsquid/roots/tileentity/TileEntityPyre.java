@@ -13,6 +13,7 @@ import epicsquid.roots.entity.ritual.EntityRitualBase;
 import epicsquid.roots.entity.ritual.EntityRitualFrostLands;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.network.fx.MessagePyreBigFlameFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
@@ -268,6 +269,8 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
     if (ModItems.knives.contains(heldItem.getItem()) && player.isSneaking()) {
       if (world.isRemote) {
         toggleShowRange();
+      } else {
+        world.playSound(null, getPos(), ModSounds.Events.PYRE_ADD_ITEM, SoundCategory.PLAYERS, 1f, 1f);
       }
       return true;
     }
@@ -347,6 +350,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
               }
               markDirty();
               updatePacketViaState();
+              world.playSound(null, getPos(), ModSounds.Events.PYRE_ADD_ITEM, SoundCategory.PLAYERS, 1f, 1f);
               return true;
             }
           }
@@ -386,6 +390,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
           pickupDelay = 40;
           markDirty();
           updatePacketViaState();
+          world.playSound(null, getPos(), ModSounds.Events.PYRE_REMOVE_ITEM, SoundCategory.PLAYERS, 1f, 1f);
           return true;
         }
       }
