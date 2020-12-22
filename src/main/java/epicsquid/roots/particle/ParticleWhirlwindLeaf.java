@@ -2,6 +2,7 @@ package epicsquid.roots.particle;
 
 import epicsquid.mysticallib.particle.ParticleBase;
 import epicsquid.mysticallib.util.Util;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class ParticleWhirlwindLeaf extends ParticleBase {
@@ -12,9 +13,10 @@ public class ParticleWhirlwindLeaf extends ParticleBase {
   public float initAlpha;
   public float angularVelocity;
   public boolean additive;
+  public float initAngle;
 
   public double centerX, centerY, centerZ;
-  public double distance;
+  public double radius;
 
   public ParticleWhirlwindLeaf(World world, double x, double y, double z, double vx, double vy, double vz, double[] data) {
     super(world, x, y, z, vx, vy, vz, data);
@@ -36,14 +38,15 @@ public class ParticleWhirlwindLeaf extends ParticleBase {
     this.particleScale = (float) data[5];
     this.initScale = (float) data[5];
     this.additive = data[6] == 1;
-    this.destX = data[7];
-    this.destY = data[8];
-    this.destZ = data[9];
-    this.distance = data[10];
+    this.centerX = data[7];
+    this.centerY = data[8];
+    this.centerZ = data[9];
+    this.radius = data[10];
     this.angularVelocity = 0.0f;
     this.prevParticleAngle = particleAngle;
     this.particleAngle = Util.rand.nextFloat() * 2.0f * (float) Math.PI;
     this.particleGravity = 0.0f;
+    this.initAngle = Util.rand.nextFloat() * 2.0f * (float) Math.PI;
   }
 
   private void standardUpdate() {
@@ -55,26 +58,18 @@ public class ParticleWhirlwindLeaf extends ParticleBase {
       this.setExpired();
     }
 
-    if (this.distance() <= distance) {
-      this.particleMaxAge = this.particleAge;
-      this.initAlpha = 0;
-      this.setExpired();
-    }
+    float thisAngle = (float) particleAge / particleMaxAge * (2 * (float) Math.PI * 12);
+    this.motionX = this.prevPosX - (centerX + radius + MathHelper.sin(thisAngle));
+    this.motionY = this.prevPosY - (centerY + MathHelper.sin((float) (Math.PI * thisAngle)));
+    this.motionZ = this.prevPosZ - (centerZ + radius + MathHelper.cos(thisAngle));
 
-    this.motionY -= 0.04D * (double) this.particleGravity;
+    //this.motionY -= 0.04D * (double) this.particleGravity;
     this.move(this.motionX, this.motionY, this.motionZ);
 
-    if (this.onGround) {
+/*    if (this.onGround) {
       this.motionX *= 0.699999988079071D;
       this.motionZ *= 0.699999988079071D;
-    }
-  }
-
-  public double distance() {
-    double a = this.posX - this.destX;
-    double b = this.posY - this.destY;
-    double c = this.posZ - this.destZ;
-    return (a * a + b * b + c * c);
+    }*/
   }
 
   @Override
