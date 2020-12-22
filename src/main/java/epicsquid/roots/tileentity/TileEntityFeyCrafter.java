@@ -245,7 +245,7 @@ public class TileEntityFeyCrafter extends TileBase {
 
     MessageGrowthCrafterVisualFX packet = new MessageGrowthCrafterVisualFX(getPos(), world.provider.getDimension());
     PacketHandler.sendToAllTracking(packet, this);
-    world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), ModSounds.CHIMES, SoundCategory.NEUTRAL, 1f, 1f);
+    world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), ModSounds.WHIRLWIND, SoundCategory.NEUTRAL, 1f, 1f);
     Advancements.CRAFTING_TRIGGER.trigger((EntityPlayerMP) player, lastRecipe);
     lastRecipe = null;
 
