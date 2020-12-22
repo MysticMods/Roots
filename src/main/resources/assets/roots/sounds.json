@@ -1,9 +1,9 @@
 {
-  "chimes": {
-    "category": "neutral",
-    "sounds": [
-      "roots:chimes"
-    ]
+  "whirlwind": {
+      "category": "neutral",
+      "sounds": [
+          "roots:whirlwind"
+      ]
   },
   "spell.acid_cloud": {
     "sounds": [

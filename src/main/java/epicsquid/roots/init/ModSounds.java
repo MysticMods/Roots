@@ -2,14 +2,13 @@ package epicsquid.roots.init;
 
 import epicsquid.mysticallib.event.RegisterContentEvent;
 import epicsquid.roots.Roots;
-import net.minecraft.client.audio.Sound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 
 import javax.annotation.Nonnull;
 
 public class ModSounds {
-  public static SoundEvent CHIMES;
+  public static SoundEvent WHIRLWIND;
 
   public static class Spells {
     public static SoundEvent ACID_CLOUD;
@@ -67,7 +66,7 @@ public class ModSounds {
   }
 
   public static void initSounds(@Nonnull RegisterContentEvent event) {
-    event.addSound(CHIMES = createSoundEvent(new ResourceLocation(Roots.MODID, "chimes")));
+    event.addSound(WHIRLWIND = createSoundEvent(new ResourceLocation(Roots.MODID, "whirlwind")));
 
     // Spells
     event.addSound(Spells.ACID_CLOUD = createSoundEvent("spell.acid_cloud"));

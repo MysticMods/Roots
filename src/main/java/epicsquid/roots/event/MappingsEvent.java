@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -107,6 +108,15 @@ public class MappingsEvent {
             mapping.remap(ForgeRegistries.ENTITIES.getValue(new ResourceLocation(Roots.MODID, "entity_ritual_wildroot_growth")));
             break;
         }
+      }
+    }
+  }
+
+  @SubscribeEvent
+  public static void onMissingSoundMappings(RegistryEvent.MissingMappings<SoundEvent> event) {
+    for (RegistryEvent.MissingMappings.Mapping<SoundEvent> mapping : event.getMappings()) {
+      if (mapping.key.getNamespace().equals(Roots.MODID)) {
+        mapping.ignore();
       }
     }
   }
