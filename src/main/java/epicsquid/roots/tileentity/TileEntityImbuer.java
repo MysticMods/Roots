@@ -6,6 +6,7 @@ import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.network.fx.MessageImbueCompleteFX;
 import epicsquid.roots.particle.ParticleUtil;
@@ -26,6 +27,7 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -112,6 +114,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
             player.getHeldItem(hand).shrink(1);
             markDirty();
             updatePacketViaState();
+            world.playSound(null, getPos(), ModSounds.Events.IMBUER_ADD_ITEM, SoundCategory.BLOCKS, 1f, 1f);
             return true;
           }
         }
@@ -129,6 +132,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
               }
               markDirty();
               updatePacketViaState();
+              world.playSound(null, getPos(), ModSounds.Events.IMBUER_ADD_ITEM, SoundCategory.BLOCKS, 1f, 1f);
               return true;
             }
           }
@@ -148,6 +152,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
                 }
                 markDirty();
                 updatePacketViaState();
+                world.playSound(null, getPos(), ModSounds.Events.IMBUER_ADD_ITEM, SoundCategory.BLOCKS, 1f, 1f);
                 return true;
               }
             }
@@ -163,6 +168,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
               }
               markDirty();
               updatePacketViaState();
+              world.playSound(null, getPos(), ModSounds.Events.IMBUER_ADD_ITEM, SoundCategory.BLOCKS, 1f, 1f);
               return true;
             }
           }
@@ -172,6 +178,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
     if (heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND) {
       for (int i = inventory.getSlots() - 1; i >= 0; i--) {
         if (this.dropItemInInventory(inventory, i)) {
+          world.playSound(null, getPos(), ModSounds.Events.IMBUER_REMOVE_ITEM, SoundCategory.BLOCKS, 1f, 1f);
           return true;
         }
       }
@@ -210,6 +217,10 @@ public class TileEntityImbuer extends TileBase implements ITickable {
         } else {
           ParticleUtil.spawnParticleLineGlow(world, x + 0.5f, y + 0.125f, z + 0.5f, x + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), y + 1.0f, z + 0.5f + 0.5f * (Util.rand.nextFloat() - 0.5f), spell.getSecondColours(0.25f), 4.0f, 40);
         }
+      } else {
+        if (progress % 20 == 0) {
+          world.playSound(null, getPos(), ModSounds.Events.IMBUER_USE, SoundCategory.BLOCKS, 1f, 1f);
+        }
       }
       if (progress > 200) {
         progress = 0;
@@ -237,6 +248,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
             inventory.extractItem(0, 1, false);
             if (ejectItem) {
               inventory.extractItem(1, 1, false);
+              world.playSound(null, getPos(), ModSounds.Events.IMBUER_FINISHED, SoundCategory.BLOCKS, 1f, 1f);
             }
             markDirty();
             updatePacketViaState();
@@ -257,6 +269,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
               }
             }
             world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, toRepair));
+            world.playSound(null, getPos(), ModSounds.Events.IMBUER_FINISHED, SoundCategory.BLOCKS, 1f, 1f);
             markDirty();
             updatePacketViaState();
             PacketHandler.sendToAllTracking(new MessageImbueCompleteFX("fake_spell", getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);

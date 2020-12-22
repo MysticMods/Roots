@@ -6,6 +6,7 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.MortarRecipe;
 import epicsquid.roots.spell.SpellBase;
@@ -17,6 +18,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
@@ -122,6 +124,7 @@ public class TileEntityMortar extends TileBase {
       ItemStack dust = spell.getResult();
       if (!world.isRemote) {
         ItemUtil.spawnItem(world, crafterPos.add(0, 1, 0), dust);
+        world.playSound(null, crafterPos, ModSounds.Events.MORTAR_USE, SoundCategory.PLAYERS, 1f, 1f);
         markDirty();
         updatePacketViaState();
       }
@@ -162,6 +165,7 @@ public class TileEntityMortar extends TileBase {
       }
       if (!world.isRemote) {
         ItemUtil.spawnItem(world, crafterPos.add(0, 1, 0), mortarRecipe.getResult().copy());
+        world.playSound(null, crafterPos, ModSounds.Events.MORTAR_USE, SoundCategory.PLAYERS, 1f, 1f);
         markDirty();
         updatePacketViaState();
       }
@@ -213,6 +217,7 @@ public class TileEntityMortar extends TileBase {
               if (player.getHeldItem(hand).getCount() == 0) {
                 player.setHeldItem(hand, ItemStack.EMPTY);
               }
+              world.playSound(null, getPos(), ModSounds.Events.MORTAR_ADD_ITEM, SoundCategory.PLAYERS, 1f, 1f);
               markDirty();
               updatePacketViaState();
               return true;
@@ -225,6 +230,7 @@ public class TileEntityMortar extends TileBase {
           if (mortar.isEmpty()) {
             player.setHeldItem(hand, ItemStack.EMPTY);
             markDirty();
+            world.playSound(null, getPos(), ModSounds.Events.MORTAR_ADD_ITEM, SoundCategory.PLAYERS, 1f, 1f);
             updatePacketViaState();
             return true;
           }
@@ -235,6 +241,7 @@ public class TileEntityMortar extends TileBase {
     if (heldItem.isEmpty() && !world.isRemote) {
       for (int i = inventory.getSlots() - 1; i >= 0; i--) {
         if (this.dropItemInInventory(inventory, i)) {
+          world.playSound(null, getPos(), ModSounds.Events.MORTAR_REMOVE_ITEM, SoundCategory.PLAYERS, 1f, 1f);
           return true;
         }
       }
