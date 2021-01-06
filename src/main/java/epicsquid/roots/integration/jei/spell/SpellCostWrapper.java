@@ -24,6 +24,7 @@ public class SpellCostWrapper implements IRecipeWrapper {
   public void getIngredients(IIngredients ingredients) {
     List<ItemStack> costs = this.recipe.getCostItems();
     costs.add(this.recipe.getResult());
+    costs.add(this.recipe.getIcon());
     ingredients.setInputs(VanillaTypes.ITEM, costs);
   }
 

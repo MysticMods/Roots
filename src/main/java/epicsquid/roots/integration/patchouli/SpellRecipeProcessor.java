@@ -43,7 +43,7 @@ public class SpellRecipeProcessor implements IComponentProcessor {
       return ItemStackUtil.serializeIngredient(ingredient);
     }
     if (s.equalsIgnoreCase("result")) {
-      ItemStack dust = SpellRegistry.getSpell(spellName).getResult();
+      ItemStack dust = SpellRegistry.getSpell(spellName).getIcon();
 
       return ItemStackUtil.serializeStack(dust);
     }

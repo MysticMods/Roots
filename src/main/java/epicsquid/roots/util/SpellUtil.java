@@ -17,7 +17,7 @@ import net.minecraft.item.ItemStack;
 
 public class SpellUtil {
   public static boolean isValidStaff(ItemStack stack) {
-    return stack.getItem() == ModItems.staff || stack.getItem() == ModItems.spell_dust;
+    return stack.getItem() == ModItems.staff || stack.getItem() == ModItems.spell_dust || stack.getItem() == ModItems.spell_icon;
   }
 
   public static boolean isStaff(ItemStack stack) {
@@ -25,7 +25,7 @@ public class SpellUtil {
   }
 
   public static boolean isValidDust(ItemStack stack) {
-    return stack.getItem() == ModItems.spell_dust;
+    return stack.getItem() == ModItems.spell_dust || stack.getItem() == ModItems.spell_icon;
   }
 
   public static boolean updateModifiers(ItemStack stack, EntityPlayer player) {
