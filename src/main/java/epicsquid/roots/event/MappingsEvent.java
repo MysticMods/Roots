@@ -128,6 +128,9 @@ public class MappingsEvent {
       ResourceLocation missing = mapping.key;
       if (missing.getNamespace().equals(Roots.MODID)) {
         switch (missing.getPath()) {
+          case "spell_chrysopoeia":
+            mapping.remap(epicsquid.roots.init.ModItems.spell_icon);
+            break;
           case "offering_plate":
             mapping.remap(((BlockBase) epicsquid.roots.init.ModBlocks.catalyst_plate).getItemBlock());
             break;

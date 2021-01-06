@@ -30,11 +30,38 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ItemSpellDust extends ItemBase {
-  public ItemSpellDust(String name) {
+public class ItemSpellIcon extends ItemBase {
+  public ItemSpellIcon(String name) {
     super(name);
     this.hasSubtypes = true;
     this.setHasSubtypes(true);
+  }
+
+  private static Map<SpellBase, ModelResourceLocation> spellMap = new HashMap<>();
+
+  @Override
+  public void initModel() {
+    SpellRegistry.getSpells().forEach(o -> {
+      String path = o.getRegistryName().getPath();
+      path = path.replace("spell_", "");
+      spellMap.put(o, new ModelResourceLocation(new ResourceLocation(Roots.MODID, path), "inventory"));
+    });
+    ModelBakery.registerItemVariants(ModItems.spell_dust, spellMap.values().toArray(new ModelResourceLocation[0]));
+
+    final ModelResourceLocation res = new ModelResourceLocation(new ResourceLocation(Roots.MODID, "spell_dust"), "inventory");
+
+    ModelLoader.setCustomMeshDefinition(ModItems.spell_dust, (stack) -> {
+      DustSpellStorage storage = DustSpellStorage.fromStack(stack);
+      if (storage == null) {
+        return res;
+      }
+      SpellDustInfo info = storage.getSelectedInfo();
+      if (info == null) {
+        return res;
+      }
+
+      return spellMap.get(info.getSpell());
+    });
   }
 
   @Override
@@ -45,6 +72,7 @@ public class ItemSpellDust extends ItemBase {
       }
     }
   }
+
 
   @SideOnly(Side.CLIENT)
   @Override
