@@ -189,13 +189,15 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.fey_crafter), FEY_CRAFTING);
     registry.addRecipeCatalyst(new ItemStack(ModItems.staff), SPELL_COSTS);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.imbuer), SPELL_MODIFIERS);
-    registry.addRecipeCatalyst(new ItemStack(ModItems.spell_chrysopoeia), CHRYSOPOEIA);
     registry.addRecipeCatalyst(new ItemStack(ModItems.reliquary), LOOT);
 
     // TODO:
     ItemStack spellDust = new ItemStack(ModItems.spell_dust);
     DustSpellStorage.fromStack(spellDust).setSpellToSlot(SpellChrysopoeia.instance);
     registry.addRecipeCatalyst(spellDust, CHRYSOPOEIA);
+    ItemStack spellIcon = new ItemStack(ModItems.spell_icon);
+    DustSpellStorage.fromStack(spellIcon).setSpellToSlot(SpellChrysopoeia.instance);
+    registry.addRecipeCatalyst(spellIcon, CHRYSOPOEIA);
 
     // Improve this
     registry.addIngredientInfo(new ItemStack(ModItems.terra_spores), VanillaTypes.ITEM, I18n.format("jei.roots.terra_spores.desc"));
@@ -226,8 +228,7 @@ public class JEIRootsPlugin implements IModPlugin {
   public void registerItemSubtypes(ISubtypeRegistry subtypeRegistry) {
     ISubtypeRegistry.ISubtypeInterpreter spellInterpreter = itemStack -> {
       Item stackItem = itemStack.getItem();
-      if (stackItem != ModItems.spell_dust) return ISubtypeRegistry.ISubtypeInterpreter.NONE;
-      // TODO
+      if (stackItem != ModItems.spell_dust && stackItem != ModItems.spell_icon) return ISubtypeRegistry.ISubtypeInterpreter.NONE;
       SpellDustInfo info = DustSpellStorage.fromStack(itemStack).getSelectedInfo();
       SpellBase spell = info == null ? null : info.getSpell();
       if (spell != null) {
@@ -238,8 +239,7 @@ public class JEIRootsPlugin implements IModPlugin {
     };
 
     subtypeRegistry.registerSubtypeInterpreter(ModItems.spell_dust, spellInterpreter);
-
-    // TODO: Handler for Life Essence
+    subtypeRegistry.registerSubtypeInterpreter(ModItems.spell_icon, spellInterpreter);
   }
 
   public static IJeiRuntime runtime = null;
