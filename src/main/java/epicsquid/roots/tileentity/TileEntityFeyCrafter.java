@@ -1,6 +1,7 @@
 package epicsquid.roots.tileentity;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
@@ -13,7 +14,7 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.network.fx.MessageGrowthCrafterVisualFX;
-import epicsquid.roots.particle.ParticleUtil;
+import epicsquid.roots.particle.ParticleWhirlwindLeaf;
 import epicsquid.roots.recipe.FeyCraftingRecipe;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -252,13 +253,47 @@ public class TileEntityFeyCrafter extends TileBase {
     return true;
   }
 
+  private static final double[] stages = new double[]{0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1};
+
+
   public void doVisual() {
     if (world.isRemote) {
-      for (int i = 0; i < 40; i++) {
-        // TODO: Use whirlwind of leaf particles!
-        ParticleUtil.spawnParticleFiery(world, getPos().getX() + 0.125f + 0.75f * random.nextFloat(), getPos().getY() + 1.25f + 0.5f * random.nextFloat(),
-            getPos().getZ() + 0.125f + 0.75f * random.nextFloat(), 0.03125f * (random.nextFloat() - 0.5f), 0.125f * random.nextFloat(),
-            0.03125f * (random.nextFloat() - 0.5f), 64.0f, 125.0f, 57.0f, 0.75f, 9.0f + 9.0f * random.nextFloat(), 40);
+      BlockPos pos = getPos();
+      for (int s = 0; s < 12; s++) {
+        double r = stages[s];
+        double y = 0.6 + (s * 0.13);
+        for (int i = 0; i < (r * 1.2 * 10); i++) {
+          ClientProxy.particleRenderer.spawnParticle(world, ParticleWhirlwindLeaf.class,
+              0, 0, 0, 0, 0, 0,
+              220,
+              60 / 255.0 + Util.rand.nextDouble() * 0.05,
+              120 / 255.0 + Util.rand.nextDouble() * 0.05,
+              60 / 255.0 + Util.rand.nextDouble() * 0.05,
+              0.7f,
+              0.9f,
+              Util.rand.nextBoolean() ? 1 : 0,
+              pos.getX() + 0.5,
+              pos.getY() + y,
+              pos.getZ() + 0.5,
+              r,
+              0
+          );
+          ClientProxy.particleRenderer.spawnParticle(world, ParticleWhirlwindLeaf.class,
+              0, 0, 0, 0, 0, 0,
+              220,
+              30 / 255.0 + Util.rand.nextDouble() * 0.05,
+              60 / 255.0 + Util.rand.nextDouble() * 0.05,
+              30 / 255.0 + Util.rand.nextDouble() * 0.05,
+              0.7f,
+              1.1f,
+              Util.rand.nextBoolean() ? 1 : 0,
+              pos.getX() + 0.5,
+              pos.getY() + y,
+              pos.getZ() + 0.5,
+              r * 0.85,
+              1
+          );
+        }
       }
     }
   }

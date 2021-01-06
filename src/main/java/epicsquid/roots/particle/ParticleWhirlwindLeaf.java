@@ -18,6 +18,8 @@ public class ParticleWhirlwindLeaf extends ParticleBase {
   public double centerX, centerY, centerZ;
   public double radius;
 
+  public boolean inverse = false;
+
   public ParticleWhirlwindLeaf(World world, double x, double y, double z, double vx, double vy, double vz, double[] data) {
     super(world, x, y, z, vx, vy, vz, data);
     this.colorR = (float) data[1];
@@ -46,7 +48,8 @@ public class ParticleWhirlwindLeaf extends ParticleBase {
     this.prevParticleAngle = particleAngle;
     this.particleAngle = Util.rand.nextFloat() * 2.0f * (float) Math.PI;
     this.particleGravity = 0.0f;
-    this.initAngle = Util.rand.nextFloat() * 2.0f * (float) Math.PI;
+    this.initAngle = Util.rand.nextFloat() * (2.0f * (float) Math.PI * 2);
+    this.inverse = data[11] == 1;
   }
 
   private void standardUpdate() {
@@ -58,18 +61,15 @@ public class ParticleWhirlwindLeaf extends ParticleBase {
       this.setExpired();
     }
 
-    float thisAngle = (float) particleAge / particleMaxAge * (2 * (float) Math.PI * 12);
-    this.motionX = this.prevPosX - (centerX + radius + MathHelper.sin(thisAngle));
-    this.motionY = this.prevPosY - (centerY + MathHelper.sin((float) (Math.PI * thisAngle)));
-    this.motionZ = this.prevPosZ - (centerZ + radius + MathHelper.cos(thisAngle));
-
-    //this.motionY -= 0.04D * (double) this.particleGravity;
-    this.move(this.motionX, this.motionY, this.motionZ);
-
-/*    if (this.onGround) {
-      this.motionX *= 0.699999988079071D;
-      this.motionZ *= 0.699999988079071D;
-    }*/
+    float thisAngle = (float) particleAge / particleMaxAge * (2 * (float) Math.PI * 2) + initAngle;
+    this.posY = centerY + MathHelper.sin(0.0073123123f * thisAngle);
+    if (!inverse) {
+      this.posX = centerX + radius * MathHelper.sin(thisAngle);
+      this.posZ = centerZ + radius * MathHelper.cos(thisAngle);
+    } else {
+      this.posX = centerX + radius * MathHelper.cos(thisAngle);
+      this.posZ = centerZ + radius * MathHelper.sin(thisAngle);
+    }
   }
 
   @Override
@@ -77,9 +77,9 @@ public class ParticleWhirlwindLeaf extends ParticleBase {
     standardUpdate();
     lifetime--;
     this.prevParticleAngle = particleAngle;
-    this.particleAngle += this.angularVelocity;
+    //this.particleAngle += this.angularVelocity;
     float lifeCoeff = (float) this.particleAge / (float) this.particleMaxAge;
-    this.particleAlpha = initAlpha * (Math.max(1.0f - lifeCoeff, 0.6f));
+    this.particleAlpha = initAlpha * (Math.max(1.0f - lifeCoeff, 0.1f));
   }
 
   @Override
