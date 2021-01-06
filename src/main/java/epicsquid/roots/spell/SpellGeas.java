@@ -84,6 +84,9 @@ public class SpellGeas extends SpellBase {
 
   private int affect(EntityLivingBase e, boolean peaceful, EntityPlayer player, StaffModifierInstanceList info, int dur) {
     if (e.getActivePotionEffect(ModPotions.geas) == null) {
+      if (EntityUtil.isBoss(e)) {
+        return 0;
+      }
       if (peaceful && EntityUtil.isFriendlyTo(e, player)) {
         if (!player.world.isRemote) {
           e.getEntityData().setIntArray(getCachedName(), info.toArray());
