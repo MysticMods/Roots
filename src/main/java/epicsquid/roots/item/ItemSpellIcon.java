@@ -21,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -80,6 +81,47 @@ public class ItemSpellIcon extends ItemBase {
     }
   }
 
+  @Override
+  public String getItemStackDisplayName(ItemStack stack) {
+    NBTTagCompound tag = ItemUtil.getOrCreateTag(stack);
+    if (tag.hasKey("staff") && tag.getBoolean("staff")) {
+      StaffSpellStorage storage = StaffSpellStorage.fromStack(stack);
+      if (storage == null) {
+        return "Unknown";
+      }
+      StaffSpellInfo info = storage.getSelectedInfo();
+      SpellBase spell = info == null ? null : info.getSpell();
+      if (spell == null) {
+        return "Unknown";
+      }
+
+      return I18n.translateToLocal(spell.getTranslationKey()+".name").trim();
+    } else if (tag.hasKey("library") && tag.getBoolean("library")) {
+      LibrarySpellStorage storage = LibrarySpellStorage.fromStack(stack);
+      if (storage == null) {
+        return "Unknown";
+      }
+      LibrarySpellInfo info = storage.getSelectedInfo();
+      SpellBase spell = info == null ? null : info.getSpell();
+      if (spell == null) {
+        return "Unknown";
+      }
+
+      return I18n.translateToLocal(spell.getTranslationKey()+".name").trim();
+    } else {
+      DustSpellStorage storage = DustSpellStorage.fromStack(stack);
+      if (storage == null) {
+        return "Unknown";
+      }
+      SpellDustInfo info = storage.getSelectedInfo();
+      SpellBase spell = info == null ? null : info.getSpell();
+      if (spell == null) {
+        return "Unknown";
+      }
+
+      return I18n.translateToLocal(spell.getTranslationKey()+".name").trim();
+    }
+  }
 
   @SideOnly(Side.CLIENT)
   @Override
