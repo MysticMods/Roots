@@ -43,7 +43,7 @@ import java.util.Map;
 public class SpellExtension extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(350);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("wildroot", 1.0));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("wildroot", 0.450));
   public static Property<Integer> PROP_RADIUS_ANIMALS_X = new Property<>("radius_animals_x", 50).setDescription("radius on the X axis within which entities are affected by the spell");
   public static Property<Integer> PROP_RADIUS_ANIMALS_Y = new Property<>("radius_animals_y", 25).setDescription("radius on the Y axis within which entities are affected by the spell");
   public static Property<Integer> PROP_RADIUS_ANIMALS_Z = new Property<>("radius_animals_z", 50).setDescription("radius on the Z axis within which entities are affected by the spell");

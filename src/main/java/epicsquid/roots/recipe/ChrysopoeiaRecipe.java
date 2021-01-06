@@ -63,16 +63,15 @@ public class ChrysopoeiaRecipe extends RegistryItem {
   }
 
   public ItemStack getCraftingResult(int overloadAmount) {
-    ItemStack result = outputs.copy();
 
-    if (overloadAmount > 0) {
+/*    if (overloadAmount > 0) {
       int multiplier = Util.floatChance(byproductChance * overloadAmount);
       result.setCount(byproduct.getCount() * multiplier);
-    }
-    return result;
+    }*/
+    return outputs.copy();
   }
 
-  public ItemStack getByproduct(int byproductAmount) {
+/*  public ItemStack getByproduct(int byproductAmount) {
     ItemStack result = byproduct.copy();
 
     if (byproductAmount > 0) {
@@ -80,5 +79,5 @@ public class ChrysopoeiaRecipe extends RegistryItem {
       result.setCount(byproduct.getCount() * multiplier);
     }
     return result;
-  }
+  }*/
 }

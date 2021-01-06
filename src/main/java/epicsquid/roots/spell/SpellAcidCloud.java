@@ -32,37 +32,37 @@ public class SpellAcidCloud extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(10);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("baffle_cap", 0.250));
-  public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(5f).setDescription("damage dealt each time to living entities");
-  public static Property<Integer> PROP_DAMAGE_COUNT = new Property<>("damage_count", 5).setDescription("maximum number of creatures that can be damaged per tick, -1 for infinite");
+  public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(4f).setDescription("damage dealt each time to living entities");
+  public static Property<Integer> PROP_DAMAGE_COUNT = new Property<>("damage_count", 4).setDescription("maximum number of creatures that can be damaged per tick, -1 for infinite");
   public static Property<Integer> PROP_POISON_DURATION = new Property<>("poison_duration", 80).setDescription("duration in ticks of the poison effect applied on the enemies");
   public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 5).setDescription("duration in seconds of the fire effect applied on the enemies");
   public static Property<Integer> PROP_POISON_AMPLIFICATION = new Property<>("poison_amplification", 0).setDescription("the level of the poison effect applied on the enemies (0 is the first level)");
   public static Property<Integer> PROP_RADIUS_GENERAL = new Property<>("radius_general", 4).setDescription("default radius for the acid cloud");
   public static Property<Integer> PROP_RADIUS_BOOST = new Property<>("radius_boost", 2).setDescription("how much radius should be boosted by when Radius Boost modifier applied");
-  public static Property<Float> PROP_NIGHT_LOWER = new Property<>("night_modifier_low", 0.1f).setDescription("the value to multiply damage by at dusk and dawn, rising to night_modifier_high at midnight and then down again");
-  public static Property<Float> PROP_NIGHT_HIGHER = new Property<>("night_modifier_high", 0.5f).setDescription("the value to multiply damage by at midnight, increasing to this from dusk and decreasing from this at dawn");
+  public static Property<Float> PROP_NIGHT_LOWER = new Property<>("night_modifier_low", 0.05f).setDescription("the value to multiply damage by at dusk and dawn, rising to night_modifier_high at midnight and then down again");
+  public static Property<Float> PROP_NIGHT_HIGHER = new Property<>("night_modifier_high", 0.6f).setDescription("the value to multiply damage by at midnight, increasing to this from dusk and decreasing from this at dawn");
   public static Property<Float> PROP_UNDEAD_DAMAGE = new Property<>("undead_damage", 2.0f).setDescription("additional damage done to undead entities with the spirit herb modifier");
   public static Property<Float> PROP_HEALING = new Property<>("healing", 1.0f).setDescription("how much healing is done by the cloud");
   public static Property<Integer> PROP_REGENERATION = new Property<>("regeneration", 40).setDescription("how long the duration of regen to apply (0 to not apply)");
   public static Property<Integer> PROP_REGEN_AMPLIFIER = new Property<>("regeneration_amplifier", 0).setDescription("what amplifier to use when applying the regen effect");
   public static Property<Integer> PROP_HEALING_COUNT = new Property<>("healing_count", 3).setDescription("maximum number of creatures that can be healed per tick, -1 for infinite");
-  public static Property<Float> PROP_UNDERWATER_BOOST = new Property<>("underwater_boost", 1.3f).setDescription("the multiplier given to damage and healing when underwater");
+  public static Property<Float> PROP_UNDERWATER_BOOST = new Property<>("underwater_boost", 1.4f).setDescription("the multiplier given to damage and healing when underwater");
   public static Property<Float> PROP_PHYSICAL_DAMAGE = new Property<>("physical_damage", 2.0f).setDescription("additional physical damage that is done");
   public static Property<Integer> PROP_WEAKNESS_DURATION = new Property<>("weakness_duration", 4 * 20).setDescription("how long enemies should be weakened in place for");
   public static Property<Integer> PROP_WEAKNESS_AMPLIFIER = new Property<>("weakness_amplifier", 0).setDescription("the amplifier to be applied to the weakness effect");
 
   // TODO: Costs
 
-  public static Modifier RADIUS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "radius_boost"), ModifierCores.PERESKIA, Cost.of(new Cost(CostType.ADDITIONAL_COST, 0.2, ModifierCores.PERESKIA), new Cost(CostType.ALL_COST_MULTIPLIER, 0.125))));
+  public static Modifier RADIUS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "radius_boost"), ModifierCores.PERESKIA, Cost.of(new Cost(CostType.ADDITIONAL_COST, 0.2, ModifierCores.PERESKIA))));
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_cloud"), ModifierCores.WILDEWHEET, Cost.of(Cost.cost(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 0.125), Cost.cost(CostType.ALL_COST_MULTIPLIER, -0.125))));
   public static Modifier WEAKNESS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "weakening_cloud"), ModifierCores.WILDROOT, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.275)));
-  public static Modifier NIGHT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "moonfall"), ModifierCores.MOONGLOW_LEAF, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 0.275)));
+  public static Modifier NIGHT = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "moonfall"), ModifierCores.MOONGLOW_LEAF, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 0.375)));
   public static Modifier UNDEAD = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "unholy_vanquisher"), ModifierCores.SPIRIT_HERB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 0.425)));
   public static Modifier HEALING = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "healing_cloud"), ModifierCores.TERRA_MOSS, Cost.of(new Cost(CostType.ADDITIONAL_COST, 0.275, ModifierCores.TERRA_MOSS), new Cost(CostType.ALL_COST_MULTIPLIER, -0.125))));
-  public static Modifier SPEED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "increased_speed"), ModifierCores.CLOUD_BERRY, Cost.of(new Cost(CostType.ADDITIONAL_COST, 0.125, ModifierCores.CLOUD_BERRY), new Cost(CostType.ALL_COST_MULTIPLIER, -0.125))));
+  public static Modifier SPEED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "increased_speed"), ModifierCores.CLOUD_BERRY, Cost.of(new Cost(CostType.ADDITIONAL_COST, 0.225, ModifierCores.CLOUD_BERRY))));
   public static Modifier FIRE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "fire_cloud"), ModifierCores.INFERNAL_BULB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 0.275)));
   public static Modifier PHYSICAL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "cloud_of_rocks"), ModifierCores.STALICRIPE, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 0.275)));
-  public static Modifier UNDERWATER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "underwater_increase"), ModifierCores.DEWGONIA, Cost.of(new Cost(CostType.ADDITIONAL_COST, 0.275, ModifierCores.DEWGONIA))));
+  public static Modifier UNDERWATER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "underwater_increase"), ModifierCores.DEWGONIA, Cost.of(new Cost(CostType.ADDITIONAL_COST, 0.175, ModifierCores.DEWGONIA))));
 
   static {
     // Conflicts

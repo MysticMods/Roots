@@ -34,8 +34,8 @@ public class SpellDisarm extends SpellBase {
 
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(350);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("moonglow_leaf", 1.0));
-  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(new SpellCost("wildewheet", 1.0));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("moonglow_leaf", 0.425));
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(new SpellCost("wildewheet", 0.125));
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 5).setDescription("radius on the X axis within which entities are affected by the spell");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("radius on the Y axis within which entities are affected by the spell");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 5).setDescription("radius on the Z axis within which entities are affected by the spell");
@@ -72,12 +72,19 @@ public class SpellDisarm extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_disarm");
   public static SpellDisarm instance = new SpellDisarm(spellName);
 
-  private int radius_x, radius_y, radius_z, rearm_duration, poison_duration, poison_amplifier, fire_duration, weakness_duration, weakness_amplifier;
+  private int radius_x;
+  private int radius_y;
+  private int radius_z;
+  private int poison_duration;
+  private int poison_amplifier;
+  private int fire_duration;
+  private int weakness_duration;
+  private int weakness_amplifier;
   private float drop_chance, armor_chance, chance_increase, knockback;
 
   private SpellDisarm(ResourceLocation name) {
     super(name, TextFormatting.DARK_RED, 122F / 255F, 0F, 0F, 58F / 255F, 58F / 255F, 58F / 255F);
-    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_REARM_DURATION, PROP_CHANCE_INCREASE, PROP_ARMOR, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_FIRE_DURATION, PROP_KNOCKBACK, PROP_WEAKNESS_AMPLIFIER, PROP_WEAKNESS_DURATION);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_REARM_DURATION, PROP_CHANCE_INCREASE, PROP_ARMOR, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_FIRE_DURATION, PROP_KNOCKBACK, PROP_WEAKNESS_AMPLIFIER, PROP_WEAKNESS_DURATION);
     acceptsModifiers(DROP_CHANCE, ARMOR1, DUO, ARMOR2, POISON, FLOWERS, FIRE, WEAKNESS, KNOCKBACK);
   }
 
@@ -197,6 +204,5 @@ public class SpellDisarm extends SpellBase {
     this.weakness_duration = properties.get(PROP_WEAKNESS_DURATION);
     this.weakness_amplifier = properties.get(PROP_WEAKNESS_AMPLIFIER);
     this.fire_duration = properties.get(PROP_FIRE_DURATION);
-    this.rearm_duration = properties.get(PROP_REARM_DURATION);
   }
 }

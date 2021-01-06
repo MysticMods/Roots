@@ -21,7 +21,7 @@ import net.minecraftforge.oredict.OreIngredient;
 public class SpellWildfire extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(24);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("infernal_bulb", 0.125));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("infernal_bulb", 0.225));
   public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(4.5f);
 
   public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 4).setDescription("how much fire damage should be done");

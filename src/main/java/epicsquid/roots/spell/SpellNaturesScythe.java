@@ -56,7 +56,7 @@ public class SpellNaturesScythe extends SpellBase {
 
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(160);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
-  public static Property.PropertyCost PROP_COST = new Property.PropertyCost(new SpellCost("stalicripe", 0.1));
+  public static Property.PropertyCost PROP_COST = new Property.PropertyCost(new SpellCost("stalicripe", 0.125));
   public static Property<Integer> PROP_RADIUS = new Property<>("radius", 12).setDescription("horizontal radius of the area in which the spell takes effect");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("radius on the Y axis of the area in which the spell takes effect");
   public static Property<Integer> PROP_INTERVAL = new Property<>("interval", 2).setDescription("interval in ticks between each harvested block segment");

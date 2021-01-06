@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 public class SpellStormCloud extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(100);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("cloud_berry", 0.015));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("cloud_berry", 0.250));
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(600).setDescription("the duration of the spell effect on the player");
   public static Property<Integer> PROP_RADIUS = new Property<>("radius", 2).setDescription("the radius of the area covered by the spring storm");
   public static Property<Integer> PROP_RADIUS_EXTENDED = new Property<>("extended_radius", 2).setDescription("the additional radius of the storm");
