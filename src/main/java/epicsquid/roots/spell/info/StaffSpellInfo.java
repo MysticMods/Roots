@@ -140,7 +140,7 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
 
   @Override
   public ItemStack asStack() {
-    ItemStack stack = new ItemStack(ModItems.spell_dust);
+    ItemStack stack = new ItemStack(ModItems.spell_icon);
     NBTTagCompound comp = ItemUtil.getOrCreateTag(stack);
     comp.setBoolean("staff", true);
     StaffSpellStorage storage = StaffSpellStorage.fromStack(stack);

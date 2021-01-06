@@ -109,15 +109,22 @@ public class CommandRoots extends CommandBase {
         }
         player.sendMessage(new TextComponentString("Modifiers written to roots.log"));
       } else if (args[0].equalsIgnoreCase("library")) {
-        SpellLibraryData data = SpellLibraryRegistry.getData(player);
-        for (LibrarySpellInfo info : data) {
-          if (info.isObtained()) {
-            player.sendMessage(new TextComponentString("Obtained: " + info.getSpell().getRegistryName()));
+        if (args.length == 2 && args[1].equals("fill")) {
+          SpellLibraryData library = SpellLibraryRegistry.getData(player);
+          for (SpellBase spell : SpellRegistry.getSpells()) {
+            library.addSpell(spell);
           }
-        }
-        for (LibrarySpellInfo info : data) {
-          if (!info.isObtained()) {
-            player.sendMessage(new TextComponentString("Unobtained: " + info.getSpell().getRegistryName()));
+        } else {
+          SpellLibraryData data = SpellLibraryRegistry.getData(player);
+          for (LibrarySpellInfo info : data) {
+            if (info.isObtained()) {
+              player.sendMessage(new TextComponentString("Obtained: " + info.getSpell().getRegistryName()));
+            }
+          }
+          for (LibrarySpellInfo info : data) {
+            if (!info.isObtained()) {
+              player.sendMessage(new TextComponentString("Unobtained: " + info.getSpell().getRegistryName()));
+            }
           }
         }
       } else if (args[0].equalsIgnoreCase("activate")) {

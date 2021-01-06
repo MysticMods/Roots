@@ -23,7 +23,7 @@ public class SpellDustInfo extends AbstractSpellInfo {
 
   @Override
   public ItemStack asStack() {
-    ItemStack stack = new ItemStack(ModItems.spell_dust);
+    ItemStack stack = new ItemStack(ModItems.spell_icon);
     DustSpellStorage storage = DustSpellStorage.fromStack(stack);
     storage.addSpell(this);
     return stack;
