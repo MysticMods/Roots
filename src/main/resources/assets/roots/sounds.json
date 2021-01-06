@@ -198,8 +198,7 @@
     "sounds": [
       "minecraft:block/chorus_flower/death1",
       "minecraft:block/chorus_flower/death2",
-      "minecraft:block/chorus_flower/death3",
-      "minecraft:block/chorus_flower/death4"
+      "minecraft:block/chorus_flower/death3"
     ],
     "subtitle": "subtitle.roots.spell.nature_scythe"
   },
