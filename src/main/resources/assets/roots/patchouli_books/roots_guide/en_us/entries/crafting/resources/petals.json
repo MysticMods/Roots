@@ -1,0 +1,11 @@
+{
+  "name": "Petals",
+  "icon": "roots:petals",
+  "category": "crafting_resources",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

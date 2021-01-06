@@ -1,0 +1,11 @@
+{
+  "name": "Wildwood",
+  "icon": "roots:wildwood_log",
+  "category": "crafting_resources",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

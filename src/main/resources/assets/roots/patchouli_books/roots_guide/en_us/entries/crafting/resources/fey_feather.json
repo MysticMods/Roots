@@ -1,0 +1,11 @@
+{
+  "name": "Fey Feather",
+  "icon": "roots:fey_feather",
+  "category": "crafting_resources",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

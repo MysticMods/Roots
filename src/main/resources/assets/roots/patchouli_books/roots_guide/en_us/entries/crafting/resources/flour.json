@@ -1,0 +1,11 @@
+{
+  "name": "Flour",
+  "icon": "roots:flour",
+  "category": "crafting_resources",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

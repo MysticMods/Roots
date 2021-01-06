@@ -1,0 +1,11 @@
+{
+  "name": "Glass Eye",
+  "icon": "roots:glass_eye",
+  "category": "crafting_resources",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Runestone",
+  "icon": "roots:runestone",
+  "category": "crafting_resources",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}
