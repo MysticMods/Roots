@@ -41,7 +41,7 @@ public class SpellGeas extends SpellBase {
 
 
   public static Modifier DURATION = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "extended_geas"), ModifierCores.PERESKIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.45)));
-  public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "animal_servants"), ModifierCores.WILDEWHEET, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
+  public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "animal_savior"), ModifierCores.WILDEWHEET, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 1)));
   public static Modifier WEAKNESS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "weakened_response"), ModifierCores.SPIRIT_HERB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 0.275)));
   public static Modifier GUARDIANS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "unholy_command"), ModifierCores.MOONGLOW_LEAF, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 0.675)));
   public static Modifier ADDED1 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "additional_target1"), ModifierCores.WILDROOT, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.675)));
@@ -52,7 +52,6 @@ public class SpellGeas extends SpellBase {
 
   static {
     // Conflicts
-    PEACEFUL.addConflicts(FIRE, PHYSICAL, WATER);
     FIRE.addConflicts(PHYSICAL, WATER);
     PHYSICAL.addConflicts(WATER);
   }
@@ -110,6 +109,15 @@ public class SpellGeas extends SpellBase {
           }
         }
         return 1;
+      } else if (peaceful && EntityUtil.isHostile(e)) {
+        if (EntityUtil.isFriendly(e.getAttackingEntity())) {
+          e.addPotionEffect(new PotionEffect(ModPotions.geas, dur, 0, false, false));
+          e.getEntityData().setIntArray(getCachedName(), info.toArray());
+          if (e instanceof EntityLiving) {
+            ((EntityLiving) e).setAttackTarget(null);
+          }
+          return 1;
+        }
       }
     }
     return 0;

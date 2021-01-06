@@ -212,12 +212,6 @@ public class EventManager {
       if (entity instanceof EntityLiving && !SlaveUtil.isSlave(entity)) {
         EntityLiving living = (EntityLiving) entity;
         if (living.getAttackTarget() != null) {
-          if (EntityUtil.isFriendly(entity)) {
-            ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(living.getEntityData(), SpellGeas.instance);
-            if (mods.has(SpellGeas.PEACEFUL)) {
-              return;
-            }
-          }
           living.attackTarget = null;
         }
       }
