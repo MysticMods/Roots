@@ -46,11 +46,11 @@ public class ItemSpellIcon extends ItemBase {
       path = path.replace("spell_", "");
       spellMap.put(o, new ModelResourceLocation(new ResourceLocation(Roots.MODID, path), "inventory"));
     });
-    ModelBakery.registerItemVariants(ModItems.spell_dust, spellMap.values().toArray(new ModelResourceLocation[0]));
+    ModelBakery.registerItemVariants(ModItems.spell_icon, spellMap.values().toArray(new ModelResourceLocation[0]));
 
-    final ModelResourceLocation res = new ModelResourceLocation(new ResourceLocation(Roots.MODID, "spell_dust"), "inventory");
+    final ModelResourceLocation res = new ModelResourceLocation(new ResourceLocation(Roots.MODID, "spell_icon"), "inventory");
 
-    ModelLoader.setCustomMeshDefinition(ModItems.spell_dust, (stack) -> {
+    ModelLoader.setCustomMeshDefinition(ModItems.spell_icon, (stack) -> {
       DustSpellStorage storage = DustSpellStorage.fromStack(stack);
       if (storage == null) {
         return res;
@@ -68,7 +68,7 @@ public class ItemSpellIcon extends ItemBase {
   public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
     if (tab == this.getCreativeTab()) {
       for (SpellBase entry : SpellRegistry.spellRegistry.values()) {
-        subItems.add(entry.getResult());
+        subItems.add(entry.getIcon());
       }
     }
   }

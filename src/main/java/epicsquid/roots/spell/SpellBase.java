@@ -434,14 +434,32 @@ public abstract class SpellBase extends RegistryItem {
     return recipe.getIngredients();
   }
 
+  private ItemStack result = null;
+  private ItemStack icon = null;
+
   public ItemStack getResult() {
-    ItemStack stack = new ItemStack(ModItems.spell_dust);
-    DustSpellStorage.fromStack(stack).setSpellToSlot(this);
-    return stack;
+    if (result == null) {
+      result = new ItemStack(ModItems.spell_dust);
+      DustSpellStorage.fromStack(result).setSpellToSlot(this);
+    }
+    return result;
   }
 
+  public ItemStack getIcon() {
+    if (icon == null) {
+      icon = new ItemStack(ModItems.spell_icon);
+      DustSpellStorage.fromStack(icon).setSpellToSlot(this);
+    }
+    return icon;
+  }
+
+  private List<ItemStack> costItemCache = null;
+
   public List<ItemStack> getCostItems() {
-    return costs.keySet().stream().map((herb) -> new ItemStack(herb.getItem())).collect(Collectors.toList());
+    if (costItemCache == null) {
+      costItemCache = costs.keySet().stream().map((herb) -> new ItemStack(herb.getItem())).collect(Collectors.toList());
+    }
+    return costItemCache;
   }
 
   public abstract void doFinalise();
@@ -500,7 +518,7 @@ public abstract class SpellBase extends RegistryItem {
 
   @Nullable
   protected EntitySpellBase spawnEntity(World world, Vec3d pos, Class<? extends EntitySpellBase> entity, @Nullable EntityPlayer player, double amplifier, double speedy) {
-    List<EntitySpellBase> pastRituals = world.getEntitiesWithinAABB(entity, new AxisAlignedBB(pos.x, pos.y, pos.z - 100, pos.x + 1, pos.y + 100, pos.z + 1), o -> o != null && o.getClass().equals(entity));
+    List<EntitySpellBase> pastRituals = world.getEntitiesWithinAABB(entity, new AxisAlignedBB(pos.x, pos.y, pos.z - 100, pos.x + 2, pos.y + 100, pos.z + 1), o -> o != null && o.getClass().equals(entity));
     if (pastRituals.isEmpty() && !world.isRemote) {
       EntitySpellBase spell = null;
       try {

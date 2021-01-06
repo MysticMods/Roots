@@ -65,7 +65,7 @@ public class MortarCategory implements IRecipeCategory<MortarWrapper> {
         group.set(i, Arrays.asList(spell.getIngredients().get(i).getMatchingStacks()));
       }
       group.init(5, false, 72, 27);
-      group.set(5, spell.getResult());
+      group.set(5, spell.getIcon());
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "roots:items/spell_chrysopoeia"
+    "layer0": "roots:items/spell_dust"
   }
 }

@@ -220,7 +220,7 @@ public class ModItems {
     event.addItem(ritual_transmutation = new ItemBase("ritual_transmutation").setCreativeTab(null));
     event.addItem(ritual_gathering = new ItemBase("ritual_gathering").setCreativeTab(null));
     event.addItem(ritual_grove_supplication = new ItemBase("ritual_grove_supplication").setCreativeTab(null));
-    event.addItem(spell_icon = new ItemBase("spell_icon").setCreativeTab(null));
+    event.addItem(spell_icon = new ItemSpellIcon("spell_icon").setCreativeTab(Roots.tab));
 
     event.addItem(fey_fire = new ItemBase("fey_fire").setCreativeTab(null));
 
