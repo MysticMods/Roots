@@ -58,7 +58,7 @@ public class RenderMortar {
       }
       RenderHelper.disableStandardItemLighting();
     } else if (spellRecipe != null && !spellRecipe.isDisabled()) {
-      ItemStack output = new ItemStack(ModItems.spell_dust, 1);
+      ItemStack output = spellRecipe.getIcon();
       RenderHelper.enableGUIStandardItemLighting();
       mc.getRenderItem().renderItemIntoGUI(output, x + radius + 24, y - 14);
       String s = spellRecipe.getTextColor() + I18n.format("roots.spell." + spellRecipe.getName() + ".name");

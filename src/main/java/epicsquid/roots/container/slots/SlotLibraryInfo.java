@@ -89,7 +89,7 @@ public class SlotLibraryInfo extends Slot implements ILibrarySlot {
 
   @Override
   public void putStack(ItemStack stack) {
-    if (data == null && (stack.getItem() == ModItems.spell_dust || stack.isEmpty())) {
+    if (data == null && (stack.getItem() == ModItems.spell_icon || stack.isEmpty())) {
       libraryInventory.setInventorySlotContents(0, stack);
     }
   }

@@ -51,16 +51,23 @@ public class ItemSpellIcon extends ItemBase {
     final ModelResourceLocation res = new ModelResourceLocation(new ResourceLocation(Roots.MODID, "spell_icon"), "inventory");
 
     ModelLoader.setCustomMeshDefinition(ModItems.spell_icon, (stack) -> {
-      DustSpellStorage storage = DustSpellStorage.fromStack(stack);
-      if (storage == null) {
-        return res;
+      StaffSpellStorage storage1 = StaffSpellStorage.fromStack(stack);
+      DustSpellStorage storage2 = DustSpellStorage.fromStack(stack);
+
+      if (storage1 != null) {
+        StaffSpellInfo info = storage1.getSelectedInfo();
+        if (info != null) {
+          return spellMap.get(info.getSpell());
+        }
       }
-      SpellDustInfo info = storage.getSelectedInfo();
-      if (info == null) {
-        return res;
+      if (storage2 != null) {
+        SpellDustInfo info = storage2.getSelectedInfo();
+        if (info != null) {
+          return spellMap.get(info.getSpell());
+        }
       }
 
-      return spellMap.get(info.getSpell());
+      return res;
     });
   }
 
