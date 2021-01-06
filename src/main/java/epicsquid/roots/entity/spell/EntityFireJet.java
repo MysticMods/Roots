@@ -54,7 +54,9 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
   @Override
   public void onUpdate() {
     super.onUpdate();
-
+    if (this.onGround && modifiers != null && modifiers.has(SpellWildfire.WILDFIRE) && !world.isRemote) {
+      wildFire(getPosition());
+    }
     if (world.isRemote) {
       float[] color;
       switch (getDataManager().get(EntityFireJet.color)) {
@@ -126,7 +128,7 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
                     }
                   }
                   if (modifiers.has(SpellWildfire.WILDFIRE)) {
-                    wildFire(getPosition());
+                    wildFire(entity.getPosition());
                   }
                   if (modifiers.has(SpellWildfire.GROWTH) && entity.isDead) {
                     List<BlockPos> positions = Growth.collect(world, getPosition(), instance.radius_x, instance.radius_y, instance.radius_z);
@@ -144,9 +146,6 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
             }
           }
         }
-      }
-      if (this.onGround && modifiers != null && modifiers.has(SpellWildfire.WILDFIRE) && !world.isRemote) {
-        wildFire(getPosition());
       }
     }
   }
@@ -173,14 +172,9 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
   }
 
   private void wildFire(BlockPos center) {
-    for (BlockPos pos : Util.getPositionsWithinCircle(center, instance.fire_radius)) {
-      BlockPos air = airPos(pos, 10);
-      if (air != null) {
-        IBlockState down = world.getBlockState(air.down());
-        if (down.isSideSolid(world, air.down(), EnumFacing.UP)) {
-          world.setBlockState(air, Blocks.FIRE.getDefaultState(), 2);
-        }
-      }
+    if (world.isAirBlock(center)) {
+      // TODO: Check down
+      world.setBlockState(center, Blocks.FIRE.getDefaultState());
     }
   }
 }
