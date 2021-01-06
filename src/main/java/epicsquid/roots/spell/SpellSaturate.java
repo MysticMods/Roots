@@ -46,8 +46,8 @@ public class SpellSaturate extends SpellBase {
 
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(500);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("wildewheet", 0.7));
-  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(new SpellCost("terra_moss", 0.5));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("wildewheet", 0.425));
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(new SpellCost("terra_moss", 0.650));
   public static Property<Double> PROP_SATURATION_MULTIPLIER = new Property<>("saturation_multiplier", 0.5).setDescription("multiplier for the saturation value each food item gives");
   public static Property<Double> PROP_FOOD_MULTIPLIER = new Property<>("food_multiplier", 0.5).setDescription("multiplier for the food value each food item gives");
   public static Property<Double> PROP_ADDITIONAL_SATURATION_MULTIPLIER = new Property<>("increased_saturation_multiplier", 0.3).setDescription("the additional value added to the multiplier");

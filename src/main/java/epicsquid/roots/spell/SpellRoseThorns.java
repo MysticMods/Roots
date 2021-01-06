@@ -18,8 +18,8 @@ import net.minecraftforge.oredict.OreIngredient;
 public class SpellRoseThorns extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(24);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("terra_moss", 0.25));
-  public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(8f);
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("terra_moss", 0.325));
+  public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(4f);
   public static Property<Integer> PROP_SLOWNESS_DURATION = new Property<>("slowness_duration", 80).setDescription("duration in ticks of the slowness effect applied when the traps are triggered");
   public static Property<Integer> PROP_SLOWNESS_AMPLIFIER = new Property<>("slowness_amplifier", 0).setDescription("the level of the slowness effect (0 is the first level)");
   public static Property<Integer> PROP_POISON_DURATION = new Property<>("poison_duration", 80).setDescription("duration in ticks of the poison effect applied when the traps are triggered");

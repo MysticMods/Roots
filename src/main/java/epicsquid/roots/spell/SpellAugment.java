@@ -29,7 +29,7 @@ public class SpellAugment extends SpellBase {
 
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(350);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("wildroot", 1.0));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("wildroot", 0.7));
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15).setDescription("radius on the X axis of the area in which dropped items are magnetized to the player");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 15).setDescription("radius on the Y axis of the area in which dropped items are magnetized to the player");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15).setDescription("radius on the Z axis of the area in which dropped items are magnetized to the player");

@@ -26,26 +26,26 @@ public class SpellAquaBubble extends SpellBase {
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(new SpellCost("terra_moss", 0.5));
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(1200);
   public static Property<Double> PROP_ABSORPTION = new Property<>("absorption", 20.0).setDescription("the amount of health absorption granted");
-  public static Property<Float> PROP_FIRE_REDUCTION = new Property<>("fire_reduction", 0.5f).setDescription("how much fire damage is multiplied by");
+  public static Property<Float> PROP_FIRE_REDUCTION = new Property<>("fire_reduction", 0.6f).setDescription("how much fire damage is multiplied by");
   public static Property<Float> PROP_LAVA_REDUCTION = new Property<>("fire_reduction", 0.0f).setDescription("how much lava damage is multiplied by");
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 5).setDescription("the radius to search for familiars and additional players within");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("the radius to search for familiars and additional players within");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 5).setDescription("the radius to search for familiars and additional players within");
-  public static Property<Float> PROP_KNOCKBACK = new Property<>("knockback", 0.5f).setDescription("the amount of knockback to be applied");
+  public static Property<Float> PROP_KNOCKBACK = new Property<>("knockback", 0.2f).setDescription("the amount of knockback to be applied");
   public static Property<Integer> PROP_SLOW_DURATION = new Property<>("slowness_duration", 60).setDescription("the duration of time that the slowness effect is applied for");
   public static Property<Integer> PROP_SLOW_AMPLIFIER = new Property<>("slowness_amplifier", 0).setDescription("the amplifier to be applied to the slowness effect");
-  public static Property<Float> PROP_UNDEAD_REDUCTION = new Property<>("undead_reduction", 0.5f).setDescription("the percentage of damage (as a float) that you take from undead");
+  public static Property<Float> PROP_UNDEAD_REDUCTION = new Property<>("undead_reduction", 0.4f).setDescription("the percentage of damage (as a float) that you take from undead");
   public static Property<Integer> PROP_RESISTANCE_DURATION = new Property<>("resistance_duration", 500).setDescription("how long the resistance buff should be added for");
   public static Property<Integer> PROP_RESISTANCE_AMPLIFIER = new Property<>("resistance_amplifier", 0).setDescription("how much to amplify the resistance buff by");
-  public static Property<Float> PROP_MAGIC_RESIST = new Property<>("magic_resistance", 0.25f).setDescription("how much magic damage is reduced by");
+  public static Property<Float> PROP_MAGIC_RESIST = new Property<>("magic_resistance", 0.4f).setDescription("how much magic damage is reduced by");
 
   // TODO: Costs
 
   public static Modifier DUO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "bubble_duumvirate"), ModifierCores.PERESKIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.75)));
-  public static Modifier FAMILIARS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "faithful_sharing"), ModifierCores.WILDEWHEET, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 0.475)));
+  public static Modifier FAMILIARS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "faithful_sharing"), ModifierCores.WILDEWHEET, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 0.275)));
   public static Modifier SLOW = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "barkskin"), ModifierCores.WILDROOT, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.35)));
   public static Modifier MAGIC_RESIST = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "moon_bubble"), ModifierCores.MOONGLOW_LEAF, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 0.725)));
-  public static Modifier UNDEAD = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "spirit_bubble"), ModifierCores.SPIRIT_HERB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 0.475)));
+  public static Modifier UNDEAD = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "spirit_bubble"), ModifierCores.SPIRIT_HERB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 0.375)));
   public static Modifier POISON_RESIST = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "poison_protection"), ModifierCores.BAFFLE_CAP, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 0.375)));
   public static Modifier KNOCKBACK = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "bubble_knockback"), ModifierCores.CLOUD_BERRY, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 0.275)));
   public static Modifier REFLECT_FIRE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "reflective_bubble"), ModifierCores.INFERNAL_BULB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 0.125)));

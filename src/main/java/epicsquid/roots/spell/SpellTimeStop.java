@@ -25,7 +25,7 @@ public class SpellTimeStop extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("pereskia", 0.5));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(new SpellCost("moonglow_leaf", 0.5));
-  public static Property.PropertyCost PROP_COST_3 = new Property.PropertyCost(new SpellCost("dewgonia", 0.125));
+  public static Property.PropertyCost PROP_COST_3 = new Property.PropertyCost(new SpellCost("dewgonia", 0.325));
   public static Property<Integer> PROP_DURATION = new Property<>("duration", 200).setDescription("the duration of the time stop effect on entities");
   public static Property<Integer> PROP_OVERTIME = new Property<>("overtime", 200).setDescription("the extended duration that should apply when overtime is active");
   public static Property<Integer> PROP_UNDERTIME = new Property<>("undertime", 100).setDescription("the shortened duration that is applied instead of the normal duration");

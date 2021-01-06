@@ -23,7 +23,7 @@ import net.minecraft.util.text.TextFormatting;
 public class SpellSkySoarer extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(39);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("cloud_berry", 0.15));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("cloud_berry", 0.250));
   public static Property<Integer> PROP_SLOW_FALL_DURATION = new Property<>("slow_fall_duration", 20 * 20).setDescription("the duration of the slow fall effect that should be applied after the boost effect ends");
   public static Property<Integer> PROP_JAUNT_DISTANCE = new Property<>("jaunt_distance", 5).setDescription("the number of blocks forward to jaunt");
   public static Property<Integer> PROP_REGEN_DURATION = new Property<>("regen_duration", 20 * 20).setDescription("how long regeneration should be applied for");

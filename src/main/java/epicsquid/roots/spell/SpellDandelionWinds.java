@@ -38,13 +38,13 @@ public class SpellDandelionWinds extends SpellBase {
   public static Property<Double> PROP_RANGE_1 = new Property<>("range_1", 6.0).setDescription("the first range increment for calculating the bounding box");
   public static Property<Double> PROP_RANGE_2 = new Property<>("range_2", 4.0).setDescription("the first range increment for calculating the bounding box");
   public static Property<Float> PROP_ADDITIONAL_DISTANCE = new Property<>("additional_distance", 0.25f).setDescription("the additional vertical component of the vector that determines the direction of the entity");
-  public static Property<Float> PROP_ADDITIONAL_FALL = new Property<>("additional_fall", 1.35f).setDescription("the fall distance modifier");
+  public static Property<Float> PROP_ADDITIONAL_FALL = new Property<>("additional_fall", 1.75f).setDescription("the fall distance modifier");
   public static Property<Integer> PROP_SLOW_DURATION = new Property<>("slow_duration", 60).setDescription("the duration of the slow fall effect");
   public static Property<Integer> PROP_POISON_DURATION = new Property<>("posion_duration", 5 * 20).setDescription("the duration of the poison effect to apply");
   public static Property<Integer> PROP_POISON_AMPLIFIER = new Property<>("poison_amplifier", 0).setDescription("the amplifier to apply to the poison effect");
   public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 4).setDescription("the duration (in seconds) that entities should be set on fire for");
 
-  public static Modifier STRONGER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "strong_gusts"), ModifierCores.PERESKIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.75)));
+  public static Modifier STRONGER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "strong_gusts"), ModifierCores.PERESKIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.45)));
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_winds"), ModifierCores.WILDEWHEET, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 0.125)));
   public static Modifier GROUNDED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "grounded_wind"), ModifierCores.WILDROOT, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.345)));
   public static Modifier SLOW_FALL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "slow_falling"), ModifierCores.MOONGLOW_LEAF, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 0.125)));
@@ -91,11 +91,6 @@ public class SpellDandelionWinds extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
-    // TODO: Circle, Suction
-    if (info.has(EXTINGUISH)) {
-
-    }
-
     Vec3d lookVec = player.getLookVec();
     float d = info.has(STRONGER) ? distance + additional_distance : distance;
     float motion = info.ampFloat(d * d + d);

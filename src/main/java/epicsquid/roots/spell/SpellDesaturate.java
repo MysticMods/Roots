@@ -37,7 +37,7 @@ public class SpellDesaturate extends SpellBase {
 
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(500);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
-  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("spirit_herb", 0.7));
+  public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("spirit_herb", 0.5));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(new SpellCost("terra_moss", 0.5));
 
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 8).setDescription("radius on the X axis within which entities are affected by the spell");
