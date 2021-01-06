@@ -262,16 +262,16 @@ public class TileEntityFeyCrafter extends TileBase {
       for (int s = 0; s < 12; s++) {
         double r = stages[s];
         double y = 0.6 + (s * 0.13);
-        for (int i = 0; i < (r * 1.2 * 10); i++) {
+        for (int i = 0; i < (r * 1.4 * 8); i++) {
           ClientProxy.particleRenderer.spawnParticle(world, ParticleWhirlwindLeaf.class,
               0, 0, 0, 0, 0, 0,
-              220,
+              200,
               60 / 255.0 + Util.rand.nextDouble() * 0.05,
               120 / 255.0 + Util.rand.nextDouble() * 0.05,
               60 / 255.0 + Util.rand.nextDouble() * 0.05,
-              0.7f,
+              1.1f,
               0.9f,
-              Util.rand.nextBoolean() ? 1 : 0,
+              0,
               pos.getX() + 0.5,
               pos.getY() + y,
               pos.getZ() + 0.5,
@@ -280,13 +280,13 @@ public class TileEntityFeyCrafter extends TileBase {
           );
           ClientProxy.particleRenderer.spawnParticle(world, ParticleWhirlwindLeaf.class,
               0, 0, 0, 0, 0, 0,
-              220,
+              200,
               30 / 255.0 + Util.rand.nextDouble() * 0.05,
               60 / 255.0 + Util.rand.nextDouble() * 0.05,
               30 / 255.0 + Util.rand.nextDouble() * 0.05,
-              0.7f,
               1.1f,
-              Util.rand.nextBoolean() ? 1 : 0,
+              1.1f,
+              0,
               pos.getX() + 0.5,
               pos.getY() + y,
               pos.getZ() + 0.5,
