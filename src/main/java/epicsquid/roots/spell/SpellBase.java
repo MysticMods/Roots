@@ -1,5 +1,6 @@
 package epicsquid.roots.spell;
 
+import com.google.common.collect.ImmutableList;
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
@@ -457,7 +458,11 @@ public abstract class SpellBase extends RegistryItem {
 
   public List<ItemStack> getCostItems() {
     if (costItemCache == null) {
-      costItemCache = costs.keySet().stream().map((herb) -> new ItemStack(herb.getItem())).collect(Collectors.toList());
+      List<ItemStack> costList = new ArrayList<>();
+      for (Herb cost : this.costs.keySet()) {
+        costList.add(new ItemStack(cost.getItem()));
+      }
+      costItemCache = ImmutableList.copyOf(costList);
     }
     return costItemCache;
   }
