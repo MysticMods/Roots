@@ -1,0 +1,11 @@
+{
+  "name": "Strange Slime",
+  "icon": "roots:strange_slime",
+  "category": "crafting_resources",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

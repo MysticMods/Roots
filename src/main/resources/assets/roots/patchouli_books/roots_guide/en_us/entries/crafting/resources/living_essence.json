@@ -1,0 +1,11 @@
+{
+  "name": "Living Essence",
+  "icon": "roots:living_essence",
+  "category": "crafting_resources",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

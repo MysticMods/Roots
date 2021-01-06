@@ -1,0 +1,11 @@
+{
+  "name": "Bark",
+  "icon": "roots:oak_bark",
+  "category": "crafting_resources",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

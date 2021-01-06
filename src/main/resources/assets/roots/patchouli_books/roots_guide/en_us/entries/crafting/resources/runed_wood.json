@@ -1,0 +1,11 @@
+{
+  "name": "Runed Wood",
+  "icon": "roots:runed_birch",
+  "category": "crafting_resources",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

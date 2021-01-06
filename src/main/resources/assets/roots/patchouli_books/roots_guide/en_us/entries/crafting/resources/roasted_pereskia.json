@@ -1,0 +1,11 @@
+{
+  "name": "Roast Pereskia",
+  "icon": "roots:roasted_pereskia",
+  "category": "crafting_resources",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

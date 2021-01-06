@@ -1,0 +1,11 @@
+{
+  "name": "Runic Dust",
+  "icon": "roots:runic_dust",
+  "category": "crafting_resources",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}
