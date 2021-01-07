@@ -862,7 +862,10 @@ public class ModRecipes {
   public static void removeMortarRecipes(ItemStack output) {
     MortarRecipe recipeToRemove = getMortarRecipe(output);
     if (recipeToRemove != null) {
-      mortarRecipes.remove(recipeToRemove.getRegistryName());
+      while (recipeToRemove != null) {
+        mortarRecipes.remove(recipeToRemove.getRegistryName());
+        recipeToRemove = getMortarRecipe(output);
+      }
     }
   }
 
@@ -905,7 +908,7 @@ public class ModRecipes {
       copy = output.copy();
       copy.setCount((i + 1) * count);
       MortarRecipe recipe = new MortarRecipe(copy, ingredients.toArray(new Ingredient[0]), red1, green1, blue1, red2, green2, blue2);
-      recipe.setRegistryName(new ResourceLocation(Roots.MODID, name + "_" + (i+1)));
+      recipe.setRegistryName(new ResourceLocation(Roots.MODID, name + "_" + (i + 1)));
       result.put(recipe.getRegistryName(), recipe);
     }
     return result;
