@@ -39,7 +39,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.WorldServer;
-import vazkii.patchouli.common.handler.AdvancementSyncHandler;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -166,7 +165,6 @@ public class CommandRoots extends CommandBase {
         if (!player.addItemStackToInventory(book)) {
           ItemUtil.spawnItem(world, player.getPosition(), book);
         }
-        AdvancementSyncHandler.syncPlayer(player, false);
       } else if (args[0].equalsIgnoreCase("growables")) {
         List<String> growablesList = new ArrayList<>();
         for (Block block : Block.REGISTRY) {
