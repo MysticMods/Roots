@@ -16,7 +16,6 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -130,7 +129,7 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
                   if (modifiers.has(SpellWildfire.WILDFIRE)) {
                     wildFire(entity.getPosition());
                   }
-                  if (modifiers.has(SpellWildfire.GROWTH) && entity.isDead) {
+                  if (modifiers.has(SpellWildfire.DUALITY) && entity.isDead) {
                     List<BlockPos> positions = Growth.collect(world, getPosition(), instance.radius_x, instance.radius_y, instance.radius_z);
                     if (!world.isRemote) {
                       for (BlockPos pos : positions) {
@@ -150,31 +149,19 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
     }
   }
 
-  @Nullable
-  private BlockPos airPos(BlockPos pos, int max) {
-    IBlockState state = world.getBlockState(pos);
-    if (!world.isAirBlock(pos) && !state.getBlock().isReplaceable(world, pos)) {
-      for (int i = 0; i <= max; i++) {
-        if (world.isAirBlock(pos) || state.getBlock().isReplaceable(world, pos)) {
-          return pos;
-        }
-        pos = pos.add(0, 1, 0);
-      }
-    } else {
-      for (int i = 0; i <= max; i++) {
-        pos = pos.add(0, -1, 0);
-        if (!world.isAirBlock(pos) && !state.getBlock().isReplaceable(world, pos)) {
-          return pos.up();
-        }
-      }
-    }
-    return null;
-  }
-
   private void wildFire(BlockPos center) {
-    if (world.isAirBlock(center)) {
+    IBlockState state = world.getBlockState(center);
+    if (world.isAirBlock(center) || state.getBlock().isReplaceable(world, center)) {
       // TODO: Check down
-      world.setBlockState(center, Blocks.FIRE.getDefaultState());
+      int x = 4;
+      while ((world.isAirBlock(center.down()) || state.getBlock().isReplaceable(world, center)) && x >= 0) {
+        center = center.down();
+        state = world.getBlockState(center);
+        x--;
+      }
+      if (world.isAirBlock(center) || state.getBlock().isReplaceable(world, center)) {
+        world.setBlockState(center.up(), Blocks.FIRE.getDefaultState());
+      }
     }
   }
 }
