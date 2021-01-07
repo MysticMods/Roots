@@ -8,6 +8,8 @@ import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.properties.Property;
+import epicsquid.roots.util.EntityUtil;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
@@ -92,6 +94,17 @@ public class SpellAquaBubble extends SpellBase {
         if (!players.isEmpty()) {
           EntityPlayer other = players.get(Util.rand.nextInt(players.size()));
           other.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, info.ampInt(duration), 0, false, false));
+          other.getEntityData().setIntArray(getCachedName(), info.toArray());
+          if (info.has(RESISTANCE)) {
+            other.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, info.ampInt(resistance_duration), resistance_amplifier));
+          }
+        }
+      }
+      if (info.has(FAMILIARS)) {
+        List<EntityLivingBase> entities = caster.world.getEntitiesWithinAABB(EntityLivingBase.class, radius.offset(caster.getPosition()), o -> EntityUtil.isFamiliar(caster, o));
+        if (!entities.isEmpty()) {
+          EntityLivingBase other = entities.get(Util.rand.nextInt(entities.size()));
+          other.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, info.ampInt(duration)/*, 0, false, false*/));
           other.getEntityData().setIntArray(getCachedName(), info.toArray());
           if (info.has(RESISTANCE)) {
             other.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, info.ampInt(resistance_duration), resistance_amplifier));

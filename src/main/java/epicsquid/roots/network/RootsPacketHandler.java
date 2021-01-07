@@ -79,5 +79,6 @@ public class RootsPacketHandler {
     PacketHandler.registerMessage(MessageRoseThornsBurstFX.MessageHolder.class, MessageRoseThornsBurstFX.class, Side.CLIENT);
     PacketHandler.registerMessage(MessagePetalShellRingFX.MessageHolder.class, MessagePetalShellRingFX.class, Side.CLIENT);
     PacketHandler.registerMessage(MessagePyreBigFlameFX.Handler.class, MessagePyreBigFlameFX.class, Side.CLIENT);
+    PacketHandler.registerMessage(MessageAquaBubbleFX.MessageHolder.class, MessageAquaBubbleFX.class, Side.CLIENT);
   }
 }

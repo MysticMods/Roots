@@ -66,27 +66,6 @@ public class AquaBubbleRenderer<T extends EntityLivingBase> implements LayerRend
       GlStateManager.enableLighting();
       GlStateManager.disableBlend();
       GlStateManager.depthMask(flag);
-
-      if (Util.rand.nextInt(10) == 0) {
-        World world = Minecraft.getMinecraft().world;
-        for (float i = 0; i < 360; i += Util.rand.nextInt(40)) {
-          float x = (float) player.posX + (1.2f * Util.rand.nextFloat()) * (float) Math.sin(Math.toRadians(i));
-          float y = (float) player.posY + (Util.rand.nextFloat() + 0.25f);
-          float z = (float) player.posZ + (1.2f * Util.rand.nextFloat()) * (float) Math.cos(Math.toRadians(i));
-          float vx = 0.0625f * (float) Math.cos(Math.toRadians(i));
-          float vz = 0.025f * (float) Math.sin(Math.toRadians(i));
-          if (Util.rand.nextBoolean()) {
-            vx *= -1;
-            vz *= -1;
-          }
-          // TODO: Adjust smoke
-          if (Util.rand.nextBoolean()) {
-            ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellStormCloud.instance.getFirstColours(0.125f), 4f + Util.rand.nextFloat() * 6f, 120, false);
-          } else {
-            ParticleUtil.spawnParticleSmoke(world, x, y, z, vx, 0.125f * (Util.rand.nextFloat() - 0.5f), vz, SpellStormCloud.instance.getSecondColours(0.125f), 4f + Util.rand.nextFloat() * 6f, 120, false);
-          }
-        }
-      }
     }
   }
 
