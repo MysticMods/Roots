@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SpellCostWrapper implements IRecipeWrapper {
@@ -22,7 +23,8 @@ public class SpellCostWrapper implements IRecipeWrapper {
 
   @Override
   public void getIngredients(IIngredients ingredients) {
-    List<ItemStack> costs = this.recipe.getCostItems();
+    // TODO: Cache this?
+    List<ItemStack> costs = new ArrayList<>(this.recipe.getCostItems());
     costs.add(this.recipe.getResult());
     costs.add(this.recipe.getIcon());
     ingredients.setInputs(VanillaTypes.ITEM, costs);
