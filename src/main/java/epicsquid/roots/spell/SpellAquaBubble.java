@@ -34,6 +34,7 @@ public class SpellAquaBubble extends SpellBase {
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("the radius to search for familiars and additional players within");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 5).setDescription("the radius to search for familiars and additional players within");
   public static Property<Float> PROP_KNOCKBACK = new Property<>("knockback", 0.2f).setDescription("the amount of knockback to be applied");
+  public static Property<Float> PROP_AMPLIFIER = new Property<>("amplifier", 0.6f).setDescription("how much the effects of this spell should be amplified by");
   public static Property<Integer> PROP_SLOW_DURATION = new Property<>("slowness_duration", 60).setDescription("the duration of time that the slowness effect is applied for");
   public static Property<Integer> PROP_SLOW_AMPLIFIER = new Property<>("slowness_amplifier", 0).setDescription("the amplifier to be applied to the slowness effect");
   public static Property<Float> PROP_UNDEAD_REDUCTION = new Property<>("undead_reduction", 0.4f).setDescription("the percentage of damage (as a float) that you take from undead");
@@ -43,7 +44,7 @@ public class SpellAquaBubble extends SpellBase {
 
   // TODO: Costs
 
-  public static Modifier DUO = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "bubble_duumvirate"), ModifierCores.PERESKIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.75)));
+  public static Modifier AMPLIFIED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "bubble_amplified"), ModifierCores.PERESKIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.975)));
   public static Modifier FAMILIARS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "faithful_sharing"), ModifierCores.WILDEWHEET, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 0.275)));
   public static Modifier SLOW = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "barkskin"), ModifierCores.WILDROOT, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.35)));
   public static Modifier MAGIC_RESIST = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "moon_bubble"), ModifierCores.MOONGLOW_LEAF, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 0.725)));
@@ -58,14 +59,14 @@ public class SpellAquaBubble extends SpellBase {
 
   public int duration, radius_x, radius_y, radius_z, slow_duration, slow_amplifier, resistance_duration, resistance_amplifier;
   public double absorption;
-  public float fire_reduction, lava_reduction, knockback, undead_reduction, magic_reduction;
+  public float fire_reduction, lava_reduction, knockback, undead_reduction, magic_reduction, amplifier;
 
   private AxisAlignedBB radius;
 
   public SpellAquaBubble(ResourceLocation name) {
     super(name, TextFormatting.AQUA, 255f / 255f, 0f / 255f, 0f / 255f, 60f / 255f, 0f / 255f, 60f / 255f);
     properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DURATION, PROP_ABSORPTION, PROP_FIRE_REDUCTION, PROP_LAVA_REDUCTION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_KNOCKBACK, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_UNDEAD_REDUCTION, PROP_RESISTANCE_AMPLIFIER, PROP_RESISTANCE_DURATION, PROP_MAGIC_RESIST);
-    acceptsModifiers(DUO, FAMILIARS, SLOW, MAGIC_RESIST, UNDEAD, POISON_RESIST, KNOCKBACK, REFLECT_FIRE, RESISTANCE);
+    acceptsModifiers(AMPLIFIED, FAMILIARS, SLOW, MAGIC_RESIST, UNDEAD, POISON_RESIST, KNOCKBACK, REFLECT_FIRE, RESISTANCE);
     setCastSound(ModSounds.Spells.AQUA_BUBBLE);
   }
 
@@ -83,31 +84,26 @@ public class SpellAquaBubble extends SpellBase {
 
   @Override
   public boolean cast(EntityPlayer caster, StaffModifierInstanceList info, int ticks) {
+    int dur = duration;
+    int dur2 = resistance_duration;
+    if (info.has(AMPLIFIED)) {
+      dur += duration * amplifier;
+      dur2 += resistance_duration * amplifier;
+    }
     if (!caster.world.isRemote) {
-      caster.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, info.ampInt(duration), 0, false, false));
+      caster.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, info.ampInt(dur), 0, false, false));
       caster.getEntityData().setIntArray(getCachedName(), info.toArray());
       if (info.has(RESISTANCE)) {
-        caster.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, info.ampInt(resistance_duration), resistance_amplifier));
-      }
-      if (info.has(DUO)) {
-        List<EntityPlayer> players = caster.world.getEntitiesWithinAABB(EntityPlayer.class, radius.offset(caster.getPosition()));
-        if (!players.isEmpty()) {
-          EntityPlayer other = players.get(Util.rand.nextInt(players.size()));
-          other.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, info.ampInt(duration), 0, false, false));
-          other.getEntityData().setIntArray(getCachedName(), info.toArray());
-          if (info.has(RESISTANCE)) {
-            other.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, info.ampInt(resistance_duration), resistance_amplifier));
-          }
-        }
+        caster.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, info.ampInt(dur2), resistance_amplifier));
       }
       if (info.has(FAMILIARS)) {
         List<EntityLivingBase> entities = caster.world.getEntitiesWithinAABB(EntityLivingBase.class, radius.offset(caster.getPosition()), o -> EntityUtil.isFamiliar(caster, o));
         if (!entities.isEmpty()) {
           EntityLivingBase other = entities.get(Util.rand.nextInt(entities.size()));
-          other.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, info.ampInt(duration)/*, 0, false, false*/));
+          other.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, info.ampInt(dur)/*, 0, false, false*/));
           other.getEntityData().setIntArray(getCachedName(), info.toArray());
           if (info.has(RESISTANCE)) {
-            other.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, info.ampInt(resistance_duration), resistance_amplifier));
+            other.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, info.ampInt(dur2), resistance_amplifier));
           }
         }
       }
@@ -136,5 +132,6 @@ public class SpellAquaBubble extends SpellBase {
     this.resistance_amplifier = properties.get(PROP_RESISTANCE_AMPLIFIER);
     this.resistance_duration = properties.get(PROP_RESISTANCE_DURATION);
     this.magic_reduction = properties.get(PROP_MAGIC_RESIST);
+    this.amplifier = properties.get(PROP_AMPLIFIER);
   }
 }

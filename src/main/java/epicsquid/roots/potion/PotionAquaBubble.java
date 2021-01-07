@@ -9,7 +9,6 @@ import epicsquid.roots.network.fx.MessageAquaBubbleFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellAquaBubble;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,6 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class PotionAquaBubble extends Potion {
   private ResourceLocation texture = new ResourceLocation(Roots.MODID, "textures/gui/potions.png");
   private float absorb_amount = 0;
+  private float amplifier = 0;
 
   public PotionAquaBubble() {
     super(false, 0x3ea1ed);
@@ -35,6 +35,7 @@ public class PotionAquaBubble extends Potion {
 
   public void finalise(SpellAquaBubble spell) {
     absorb_amount = (float) spell.absorption;
+    amplifier = spell.amplifier;
   }
 
   public static void doEffect(World world, double posX, double posY, double posZ) {
@@ -95,13 +96,23 @@ public class PotionAquaBubble extends Potion {
 
   @Override
   public void removeAttributesModifiersFromEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
-    entityLivingBaseIn.setAbsorptionAmount(entityLivingBaseIn.getAbsorptionAmount() - absorb_amount);
+    ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(entityLivingBaseIn.getEntityData(), SpellAquaBubble.instance);
+    float absorb = absorb_amount;
+    if (mods.has(SpellAquaBubble.AMPLIFIED)) {
+      absorb += absorb_amount * this.amplifier;
+    }
+    entityLivingBaseIn.setAbsorptionAmount(entityLivingBaseIn.getAbsorptionAmount() - absorb);
     super.removeAttributesModifiersFromEntity(entityLivingBaseIn, attributeMapIn, amplifier);
   }
 
   @Override
   public void applyAttributesModifiersToEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
-    entityLivingBaseIn.setAbsorptionAmount(entityLivingBaseIn.getAbsorptionAmount() + absorb_amount);
+    ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(entityLivingBaseIn.getEntityData(), SpellAquaBubble.instance);
+    float absorb = absorb_amount;
+    if (mods.has(SpellAquaBubble.AMPLIFIED)) {
+      absorb += absorb_amount * this.amplifier;
+    }
+    entityLivingBaseIn.setAbsorptionAmount(entityLivingBaseIn.getAbsorptionAmount() + absorb);
     super.applyAttributesModifiersToEntity(entityLivingBaseIn, attributeMapIn, amplifier);
   }
 }
