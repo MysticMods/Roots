@@ -20,7 +20,6 @@ import epicsquid.roots.recipe.transmutation.*;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.util.IngredientWithStack;
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.block.*;
 import net.minecraft.block.BlockFlower.EnumFlowerType;
 import net.minecraft.block.state.IBlockState;
@@ -53,7 +52,7 @@ public class ModRecipes {
   // TODO: Registries
   private static Map<ResourceLocation, AnimalHarvestRecipe> harvestRecipes = new HashMap<>();
   private static Map<ResourceLocation, AnimalHarvestFishRecipe> fishRecipes = new HashMap<>();
-  private static ObjectOpenHashSet<Class<? extends EntityLivingBase>> harvestClasses = null;
+  private static Set<Class<? extends EntityLivingBase>> harvestClasses = null;
   private static Map<ResourceLocation, TransmutationRecipe> transmutationRecipes = new HashMap<>();
 
   // TODO: REGISTRIES FUCKING REGISTRIES PLEASE OH GOD REGISTRIES
@@ -677,9 +676,9 @@ public class ModRecipes {
     return null;
   }
 
-  public static ObjectOpenHashSet<Class<? extends EntityLivingBase>> getAnimalHarvestClasses() {
+  public static Set<Class<? extends EntityLivingBase>> getAnimalHarvestClasses() {
     if (harvestClasses == null || harvestClasses.size() != harvestRecipes.size()) {
-      harvestClasses = new ObjectOpenHashSet<>();
+      harvestClasses = new HashSet<>();
       for (AnimalHarvestRecipe recipe : harvestRecipes.values()) {
         harvestClasses.add(recipe.getHarvestClass());
       }
