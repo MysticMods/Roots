@@ -34,7 +34,6 @@ public class SpellWildfire extends SpellBase {
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 5).setDescription("radius on the X axis within which entities are affected by the spell");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("radius on the Y axis within which entities are affected by the spell");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 5).setDescription("radius on the Z axis within which entities are affected by the spell");
-  public static Property<Integer> PROP_GROWTH_TICKS = new Property<>("growth_ticks", 12).setDescription("how many ticks of growth should be applied when an entity is killed directly");
   public static Property<Float> PROP_ICE_DAMAGE = new Property<>("icicle_damage", 1f).setDescription("how much damage icicles should deal when they strike a creature");
   public static Property<Integer> PROP_ICICLE_COUNT = new Property<>("icicle_count", 3).setDescription("how many icicles should spawn");
   public static Property<Integer> PROP_LIFETIME = new Property<>("lifetime", 12).setDescription("how long the fire projectile should exist for (which determines how far it will travel");
@@ -46,8 +45,8 @@ public class SpellWildfire extends SpellBase {
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_flame"), ModifierCores.WILDEWHEET, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 0.125)));
   public static Modifier WEAKNESS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "weakening_thorns"), ModifierCores.WILDROOT, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.35)));
   public static Modifier SLOW = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "slow_fire"), ModifierCores.MOONGLOW_LEAF, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 0.325)));
-  public static Modifier GREEN = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "green_flame"), ModifierCores.SPIRIT_HERB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 0.05)));
-  public static Modifier GROWTH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "post_mortem_growth"), ModifierCores.TERRA_MOSS, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.TERRA_MOSS, 0.325)));
+  public static Modifier GREEN = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "green_flame"), ModifierCores.TERRA_MOSS, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.TERRA_MOSS, 0.05)));
+  public static Modifier DUALITY = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "spiritual_duality"), ModifierCores.SPIRIT_HERB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 0.925)));
   public static Modifier POISON = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "poisoned_fire"), ModifierCores.BAFFLE_CAP, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 0.325)));
   public static Modifier LEVITATE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "floating_cinders"), ModifierCores.CLOUD_BERRY, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 0.6)));
   public static Modifier WILDFIRE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "pyroclastic_cloud"), ModifierCores.STALICRIPE, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 0.45)));
@@ -67,8 +66,8 @@ public class SpellWildfire extends SpellBase {
 
   public SpellWildfire(ResourceLocation name) {
     super(name, TextFormatting.GOLD, 255f / 255f, 128f / 255f, 32f / 255f, 255f / 255f, 64f / 255f, 32f / 255f);
-    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_FIRE_DURATION, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_LEVITATE_DURATION, PROP_FIRE_RADIUS, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_GROWTH_TICKS, PROP_ICE_DAMAGE, PROP_ICICLE_COUNT, PROP_LIFETIME, PROP_WEAKNESS_AMPLIFIER, PROP_WEAKNESS_DURATION);
-    acceptsModifiers(PURPLE, PEACEFUL, WEAKNESS, SLOW, GREEN, GROWTH, POISON, LEVITATE, WILDFIRE, ICICLES);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_FIRE_DURATION, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_LEVITATE_DURATION, PROP_FIRE_RADIUS, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_ICE_DAMAGE, PROP_ICICLE_COUNT, PROP_LIFETIME, PROP_WEAKNESS_AMPLIFIER, PROP_WEAKNESS_DURATION);
+    acceptsModifiers(PURPLE, PEACEFUL, WEAKNESS, SLOW, GREEN, DUALITY, POISON, LEVITATE, WILDFIRE, ICICLES);
   }
 
   @Override
@@ -83,14 +82,21 @@ public class SpellWildfire extends SpellBase {
     setCastSound(ModSounds.Spells.WILDFIRE);
   }
 
+  private void createJet(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
+    EntityFireJet fireJet = new EntityFireJet(player.world);
+    fireJet.setPlayer(player.getUniqueID());
+    fireJet.setPosition(player.posX, player.posY, player.posZ);
+    fireJet.setModifiers(info);
+    player.world.spawnEntity(fireJet);
+  }
+
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     if (!player.world.isRemote) {
-      EntityFireJet fireJet = new EntityFireJet(player.world);
-      fireJet.setPlayer(player.getUniqueID());
-      fireJet.setPosition(player.posX, player.posY, player.posZ);
-      fireJet.setModifiers(info);
-      player.world.spawnEntity(fireJet);
+      createJet(player, info, ticks);
+      if (info.has(DUALITY)) {
+        createJet(player, info, ticks);
+      }
     }
     return true;
   }
@@ -111,7 +117,6 @@ public class SpellWildfire extends SpellBase {
     this.radius_y = properties.get(PROP_RADIUS_Y);
     this.radius_z = properties.get(PROP_RADIUS_Z);
     this.bounding = AABBUtil.fromRadius(radius_x, radius_y, radius_z);
-    this.growth_ticks = properties.get(PROP_GROWTH_TICKS);
     this.ice_damage = properties.get(PROP_ICE_DAMAGE);
     this.icicle_count = properties.get(PROP_ICICLE_COUNT);
     this.lifetime = properties.get(PROP_LIFETIME);
