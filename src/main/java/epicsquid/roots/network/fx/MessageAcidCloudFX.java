@@ -67,7 +67,7 @@ public class MessageAcidCloudFX extends ModifierPacket implements IMessage {
     }
 
     // Physical Damage
-    if (hasRand(SpellAcidCloud.PHYSICAL, 5)) {
+    if (hasRand(SpellAcidCloud.SLOWING, 5)) {
       if (Util.rand.nextBoolean()) {
         list = new float[]{181.0f / 255, 175.0f / 255, 158.0f / 255, 0.125f};
       } else {

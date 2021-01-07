@@ -46,6 +46,8 @@ public class SpellAcidCloud extends SpellBase {
   public static Property<Integer> PROP_REGENERATION = new Property<>("regeneration", 40).setDescription("how long the duration of regen to apply (0 to not apply)");
   public static Property<Integer> PROP_REGEN_AMPLIFIER = new Property<>("regeneration_amplifier", 0).setDescription("what amplifier to use when applying the regen effect");
   public static Property<Integer> PROP_HEALING_COUNT = new Property<>("healing_count", 3).setDescription("maximum number of creatures that can be healed per tick, -1 for infinite");
+  public static Property<Integer> PROP_SLOW_DURATION = new Property<>("slow_duration", 40).setDescription("how long to apply slowness for");
+  public static Property<Integer> PROP_SLOW_AMPLIFIER = new Property<>("slow_amplifier", 1).setDescription("the amplifier to be applied to the slowing effect");
   public static Property<Float> PROP_UNDERWATER_BOOST = new Property<>("underwater_boost", 1.4f).setDescription("the multiplier given to damage and healing when underwater");
   public static Property<Float> PROP_PHYSICAL_DAMAGE = new Property<>("physical_damage", 2.0f).setDescription("additional physical damage that is done");
   public static Property<Integer> PROP_WEAKNESS_DURATION = new Property<>("weakness_duration", 4 * 20).setDescription("how long enemies should be weakened in place for");
@@ -61,25 +63,25 @@ public class SpellAcidCloud extends SpellBase {
   public static Modifier HEALING = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "healing_cloud"), ModifierCores.TERRA_MOSS, Cost.of(new Cost(CostType.ADDITIONAL_COST, 0.275, ModifierCores.TERRA_MOSS), new Cost(CostType.ALL_COST_MULTIPLIER, -0.125))));
   public static Modifier SPEED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "increased_speed"), ModifierCores.CLOUD_BERRY, Cost.of(new Cost(CostType.ADDITIONAL_COST, 0.225, ModifierCores.CLOUD_BERRY))));
   public static Modifier FIRE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "fire_cloud"), ModifierCores.INFERNAL_BULB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 0.275)));
-  public static Modifier PHYSICAL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "cloud_of_rocks"), ModifierCores.STALICRIPE, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 0.275)));
+  public static Modifier SLOWING = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "slowing"), ModifierCores.STALICRIPE, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 0.275)));
   public static Modifier UNDERWATER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "underwater_increase"), ModifierCores.DEWGONIA, Cost.of(new Cost(CostType.ADDITIONAL_COST, 0.175, ModifierCores.DEWGONIA))));
 
   static {
     // Conflicts
-    HEALING.addConflicts(WEAKNESS, UNDEAD, FIRE, PHYSICAL);
+    HEALING.addConflicts(WEAKNESS, UNDEAD, FIRE);
   }
 
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_acid_cloud");
   public static SpellAcidCloud instance = new SpellAcidCloud(spellName);
 
   private float damage, night_low, night_high, undead_damage, healing, underwater_boost, physical_damage;
-  private int poisonDuration, poisonAmplification, fireDuration, regen_duration, regen_amp, damage_count, heal_count, weakness_amplifier, weakness_duration;
+  private int poisonDuration, poisonAmplification, fireDuration, regen_duration, regen_amp, damage_count, heal_count, weakness_amplifier, weakness_duration, slow_duration, slow_amplifier;
   public int radius, radius_boost;
 
   public SpellAcidCloud(ResourceLocation name) {
     super(name, TextFormatting.DARK_GREEN, 80f / 255f, 160f / 255f, 40f / 255f, 64f / 255f, 96f / 255f, 32f / 255f);
     properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_POISON_DURATION, PROP_FIRE_DURATION, PROP_POISON_AMPLIFICATION, PROP_RADIUS_BOOST, PROP_RADIUS_GENERAL, PROP_NIGHT_LOWER, PROP_NIGHT_HIGHER, PROP_UNDEAD_DAMAGE, PROP_HEALING, PROP_REGEN_AMPLIFIER, PROP_REGENERATION, PROP_UNDERWATER_BOOST, PROP_PHYSICAL_DAMAGE);
-    acceptsModifiers(RADIUS, PEACEFUL, WEAKNESS, NIGHT, UNDEAD, HEALING, SPEED, FIRE, PHYSICAL, UNDERWATER);
+    acceptsModifiers(RADIUS, PEACEFUL, WEAKNESS, NIGHT, UNDEAD, HEALING, SPEED, FIRE, SLOWING, UNDERWATER);
   }
 
   @Override
@@ -161,8 +163,8 @@ public class SpellAcidCloud extends SpellBase {
               if (info.has(UNDEAD) && e.isEntityUndead()) {
                 e.attackEntityFrom(ModDamage.radiantDamageFrom(player), info.ampFloat(undead_damage * modifier));
               }
-              if (info.has(PHYSICAL)) {
-                e.attackEntityFrom(ModDamage.physicalDamageFrom(player), info.ampFloat(physical_damage * modifier));
+              if (info.has(SLOWING)) {
+                e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, info.ampInt(slow_duration), slow_amplifier));
               }
               if (SpellConfig.spellFeaturesCategory.acidCloudPoisoningEffect) {
                 e.addPotionEffect(new PotionEffect(MobEffects.POISON, info.ampInt(poisonDuration), poisonAmplification));
@@ -206,5 +208,7 @@ public class SpellAcidCloud extends SpellBase {
     this.physical_damage = properties.get(PROP_PHYSICAL_DAMAGE);
     this.weakness_duration = properties.get(PROP_WEAKNESS_DURATION);
     this.weakness_amplifier = properties.get(PROP_WEAKNESS_AMPLIFIER);
+    this.slow_duration = properties.get(PROP_SLOW_DURATION);
+    this.slow_amplifier = properties.get(PROP_SLOW_AMPLIFIER);
   }
 }
