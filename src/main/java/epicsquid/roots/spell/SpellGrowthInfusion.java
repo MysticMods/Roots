@@ -128,6 +128,20 @@ public class SpellGrowthInfusion extends SpellBase {
       }
     }
 
+    if (info.has(ANIMAL_GROWTH)) {
+      List<EntityAnimal> animals = player.world.getEntitiesWithinAABB(EntityAnimal.class, breedingBox.offset(player.getPosition()), EntityAgeable::isChild);
+      if (!animals.isEmpty()) {
+        didSomething = true;
+        if (!player.world.isRemote) {
+          EntityAnimal choice = animals.get(Util.rand.nextInt(animals.size()));
+          // TODO: CONSIDER ADDING HOSTILE CHECK
+          int amount = animal_growth + Util.rand.nextInt(animal_growth_vary);
+          choice.addGrowth(amount);
+          // TODO: PARTICLES
+        }
+      }
+    }
+
     boolean aoe = false;
     if (info.has(RADIUS1) || info.has(RADIUS2)) {
       aoe = true;
@@ -163,18 +177,6 @@ public class SpellGrowthInfusion extends SpellBase {
       RayCastUtil.RayTraceAndEntityResult entityResult = RayCastUtil.rayTraceMouseOver(player, 8.0d);
       Entity resultEntity = entityResult.getPointedEntity();
       if (resultEntity != null) {
-        if (info.has(ANIMAL_GROWTH) && resultEntity instanceof EntityAgeable) {
-          EntityAgeable ageable = (EntityAgeable) resultEntity;
-          // TODO: CONSIDER ADDING HOSTILE CHECK
-          if (ageable.isChild()) {
-            didSomething = true;
-            if (!player.world.isRemote) {
-              int amount = animal_growth + Util.rand.nextInt(animal_growth_vary);
-              ageable.addGrowth(amount);
-              // TODO: PARTICLES
-            }
-          }
-        }
         if (info.has(VILLAGERS) && resultEntity instanceof EntityVillager) {
           // TODO public net.minecraft.entity.passive.EntityVillager field_70961_j # timeUntilReset
           EntityVillager villager = (EntityVillager) resultEntity;
