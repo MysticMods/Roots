@@ -9,13 +9,10 @@ import epicsquid.roots.util.EntityUtil;
 import epicsquid.roots.util.SlaveUtil;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -43,7 +40,7 @@ public class PotionGeas extends Potion {
       if (mods.has(SpellGeas.PEACEFUL)) {
         boolean hadAttack = entity.tasks.taskEntries.stream().anyMatch(o -> o.action instanceof EntityAIAttackMelee);
         if (!hadAttack) {
-           entity.tasks.addTask(5, new EntityAIPassiveAttackMelee(entity, 1.0d, false));
+          entity.tasks.addTask(5, new EntityAIPassiveAttackMelee(entity, 1.0d, false));
         }
         boolean hadTarget = entity.targetTasks.taskEntries.stream().anyMatch(o -> o.action instanceof EntityAINearestAttackableTarget);
         if (!hadTarget) {
@@ -64,33 +61,19 @@ public class PotionGeas extends Potion {
       target.setDropItemsWhenDead(false);
       target.setDead();
       slave.setPositionAndUpdate(slave.posX, slave.posY, slave.posZ);
-    } else if (target instanceof EntityCreature && EntityUtil.isFriendly(target)) {
-      EntityCreature entity = (EntityCreature) target;
+    } else {
       ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(target.getEntityData(), SpellGeas.instance);
-      if (mods.has(SpellGeas.PEACEFUL)) {
-        if (!entity.getEntityData().getBoolean("hadAttack")) {
-          entity.tasks.taskEntries.removeIf(o -> o.action instanceof EntityAIAttackMelee);
-        }
-
-        if (!entity.getEntityData().getBoolean("hadTarget")) {
-          entity.targetTasks.taskEntries.removeIf(o -> o.action instanceof EntityAINearestAttackableTarget);
-        }
-
-        target.getEntityData().removeTag("hadAttack");
-        target.getEntityData().removeTag("hadTarget");
-      } else if (!EntityUtil.isFriendly(target) || !mods.has(SpellGeas.PEACEFUL)) {
-        if (mods.has(SpellGeas.WEAKNESS)) {
-          target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, mods.ampInt(SpellGeas.instance.weakness_duration), SpellGeas.instance.weakness_amplifier));
-        } else if (mods.has(SpellGeas.FIRE)) {
-          target.setFire(mods.ampInt(SpellGeas.instance.fire_duration));
-          target.attackEntityFrom(DamageSource.IN_FIRE, mods.ampFloat(SpellGeas.instance.fire_damage));
-        } else if (mods.has(SpellGeas.PHYSICAL)) {
-          // TODO: VISUAL EFFECT
-          target.attackEntityFrom(ModDamage.PHYSICAL_DAMAGE, mods.ampFloat(SpellGeas.instance.physical_damage));
-        } else if (mods.has(SpellGeas.WATER)) {
-          // TODO: ROCK FALL EVERYONE DIE
-          target.attackEntityFrom(ModDamage.waterDamageFrom(null), mods.ampFloat(SpellGeas.instance.water_damage));
-        }
+      if (mods.has(SpellGeas.WEAKNESS)) {
+        target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, mods.ampInt(SpellGeas.instance.weakness_duration), SpellGeas.instance.weakness_amplifier));
+      } else if (mods.has(SpellGeas.FIRE)) {
+        target.setFire(mods.ampInt(SpellGeas.instance.fire_duration));
+        target.attackEntityFrom(DamageSource.IN_FIRE, mods.ampFloat(SpellGeas.instance.fire_damage));
+      } else if (mods.has(SpellGeas.PHYSICAL)) {
+        // TODO: VISUAL EFFECT
+        target.attackEntityFrom(ModDamage.PHYSICAL_DAMAGE, mods.ampFloat(SpellGeas.instance.physical_damage));
+      } else if (mods.has(SpellGeas.WATER)) {
+        // TODO: ROCK FALL EVERYONE DIE
+        target.attackEntityFrom(ModDamage.waterDamageFrom(null), mods.ampFloat(SpellGeas.instance.water_damage));
       }
     }
   }
