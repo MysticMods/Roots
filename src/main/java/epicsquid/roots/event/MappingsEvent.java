@@ -4,6 +4,7 @@ import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.mysticalworld.init.ModBlocks;
 import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
+import epicsquid.roots.compat.OldHerbRegistry;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.init.ModVillagers;
 import net.minecraft.block.Block;
@@ -118,6 +119,13 @@ public class MappingsEvent {
       if (mapping.key.getNamespace().equals(Roots.MODID)) {
         mapping.ignore();
       }
+    }
+  }
+
+  @SubscribeEvent
+  public static void onMissingHerbs(RegistryEvent.MissingMappings<OldHerbRegistry.Herb> event) {
+    for (RegistryEvent.MissingMappings.Mapping<OldHerbRegistry.Herb> mapping : event.getMappings()) {
+      mapping.ignore();
     }
   }
 
