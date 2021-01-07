@@ -1,6 +1,7 @@
 package epicsquid.roots.integration.crafttweaker.tweaks;
 
 import crafttweaker.CraftTweakerAPI;
+import crafttweaker.annotations.ZenDoc;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
@@ -34,17 +35,18 @@ public class MortarTweaker {
   @ZenDocMethod(
       order = 1,
       args = {
+          @ZenDocArg(arg = "name", info = "the name of this recipe, should match a recipe being replaced"),
           @ZenDocArg(arg = "output", info = "the item output of this recipe"),
           @ZenDocArg(arg = "inputs", info = "an array of ingredients that is either 5 long or 1 long")
       },
       description = "Creates a recipe to create output from an array of ingredients (allows transformations). If the array is 5 long, a single recipe will be produced. If the array consists of only one ingredient, 5 separate recipes will be produced, with the output adjusted every time to compensate."
   )
   @ZenMethod
-  public static void addRecipe(IItemStack output, IIngredient[] inputs) {
+  public static void addRecipe(String name, IItemStack output, IIngredient[] inputs) {
     if (inputs.length == 1) {
-      CraftTweaker.LATE_ACTIONS.add(new AddMultiple(CraftTweakerMC.getItemStack(output), inputs[0]));
+      CraftTweaker.LATE_ACTIONS.add(new AddMultiple(name, CraftTweakerMC.getItemStack(output), inputs[0]));
     } else if (inputs.length == 5) {
-      CraftTweaker.LATE_ACTIONS.add(new Add(CraftTweakerMC.getItemStack(output), Arrays.asList(inputs)));
+      CraftTweaker.LATE_ACTIONS.add(new Add(name, CraftTweakerMC.getItemStack(output), Arrays.asList(inputs)));
     } else {
       CraftTweakerAPI.getLogger().logError("Mortar recipe must have 5 items total, or 1 single item.");
     }
@@ -101,16 +103,18 @@ public class MortarTweaker {
   private static class Add extends Action {
     private ItemStack output;
     private List<IIngredient> inputs;
+    private String name;
 
-    private Add(ItemStack output, List<IIngredient> inputs) {
+    private Add(String name, ItemStack output, List<IIngredient> inputs) {
       super("MortarRecipe");
       this.output = output;
       this.inputs = inputs;
+      this.name = name;
     }
 
     @Override
     public void apply() {
-      CTMortarRecipe recipe = new CTMortarRecipe(output, inputs);
+      CTMortarRecipe recipe = new CTMortarRecipe(name, output, inputs);
       ModRecipes.addMortarRecipe(recipe);
     }
 
@@ -123,11 +127,13 @@ public class MortarTweaker {
   private static class AddMultiple extends Action {
     private ItemStack output;
     private IIngredient input;
+    private String name;
 
-    private AddMultiple(ItemStack output, IIngredient input) {
+    private AddMultiple(String name, ItemStack output, IIngredient input) {
       super("MultiMortarRecipe");
       this.output = output;
       this.input = input;
+      this.name = name;
     }
 
     @Override
@@ -142,13 +148,13 @@ public class MortarTweaker {
       output5.setCount(output.getCount() * 5);
 
       List<CTMortarRecipe> recipes = Arrays.asList(
-          new CTMortarRecipe(output.copy(), Collections.singletonList(input)),
-          new CTMortarRecipe(output2, Arrays.asList(input, input)),
-          new CTMortarRecipe(output3, Arrays.asList(input, input, input)),
-          new CTMortarRecipe(output4, Arrays.asList(input, input, input, input)),
-          new CTMortarRecipe(output5, Arrays.asList(input, input, input, input, input))
+          new CTMortarRecipe(name + "_1", output.copy(), Collections.singletonList(input)),
+          new CTMortarRecipe(name + "_2", output2, Arrays.asList(input, input)),
+          new CTMortarRecipe(name + "_3", output3, Arrays.asList(input, input, input)),
+          new CTMortarRecipe(name + "_4", output4, Arrays.asList(input, input, input, input)),
+          new CTMortarRecipe(name + "_5", output5, Arrays.asList(input, input, input, input, input))
       );
-      ModRecipes.getMortarRecipes().addAll(recipes);
+      recipes.forEach(ModRecipes::addMortarRecipe);
     }
 
     @Override

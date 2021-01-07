@@ -61,7 +61,7 @@ public class ModRecipes {
   private static Map<Class<? extends EntityLivingBase>, SummonCreatureRecipe> summonCreatureClasses = new HashMap<>();
 
   // TODO: ResourceLocation-based
-  private static List<MortarRecipe> mortarRecipes = new ArrayList<>();
+  private static Map<ResourceLocation, MortarRecipe> mortarRecipes = new HashMap<>();
   private static Map<ResourceLocation, PyreCraftingRecipe> pyreCraftingRecipes = new HashMap<>();
 
   private static Map<ResourceLocation, FeyCraftingRecipe> feyCraftingRecipes = new HashMap<>();
@@ -848,11 +848,11 @@ public class ModRecipes {
   }
 
   public static void addMortarRecipe(MortarRecipe recipe) {
-    mortarRecipes.add(recipe);
+    mortarRecipes.put(recipe.getRegistryName(), recipe);
   }
 
   public static MortarRecipe getMortarRecipe(List<ItemStack> items) {
-    for (MortarRecipe mortarRecipe : mortarRecipes) {
+    for (MortarRecipe mortarRecipe : mortarRecipes.values()) {
       if (mortarRecipe.matches(items)) {
         return mortarRecipe;
       }
@@ -861,11 +861,14 @@ public class ModRecipes {
   }
 
   public static void removeMortarRecipes(ItemStack output) {
-    mortarRecipes.removeIf(recipe -> ItemUtil.equalWithoutSize(recipe.getResult(), output));
+    MortarRecipe recipeToRemove = getMortarRecipe(output);
+    if (recipeToRemove != null) {
+      mortarRecipes.remove(recipeToRemove.getRegistryName());
+    }
   }
 
   public static MortarRecipe getMortarRecipe(ItemStack output) {
-    for (MortarRecipe mortarRecipe : mortarRecipes) {
+    for (MortarRecipe mortarRecipe : mortarRecipes.values()) {
       if (ItemUtil.equalWithoutSize(mortarRecipe.getResult(), output)) {
         return mortarRecipe;
       }
@@ -875,7 +878,7 @@ public class ModRecipes {
 
   public static MortarRecipe getMortarRecipe(String name, int meta) {
     ResourceLocation item = new ResourceLocation(name);
-    for (MortarRecipe mortarRecipe : mortarRecipes) {
+    for (MortarRecipe mortarRecipe : mortarRecipes.values()) {
       ItemStack output = mortarRecipe.getResult();
       if (Objects.equals(output.getItem().getRegistryName(), item) && output.getMetadata() == meta) {
         return mortarRecipe;
@@ -885,16 +888,16 @@ public class ModRecipes {
     return null;
   }
 
-  private static void addMortarRecipe(ItemStack output, Ingredient input, float red1, float green1, float blue1, float red2, float green2, float blue2) {
-    mortarRecipes.addAll(getMortarRecipeList(output, input, red1, green1, blue1, red2, green2, blue2));
+  private static void addMortarRecipe(String name, ItemStack output, Ingredient input, float red1, float green1, float blue1, float red2, float green2, float blue2) {
+    mortarRecipes.putAll(getMortarRecipeList(name, output, input, red1, green1, blue1, red2, green2, blue2));
   }
 
-  public static List<MortarRecipe> getMortarRecipeList(ItemStack output, Ingredient input) {
-    return getMortarRecipeList(output, input, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+  public static Map<ResourceLocation, MortarRecipe> getMortarRecipeList(String name, ItemStack output, Ingredient input) {
+    return getMortarRecipeList(name, output, input, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
   }
 
-  public static List<MortarRecipe> getMortarRecipeList(ItemStack output, Ingredient input, float red1, float green1, float blue1, float red2, float green2, float blue2) {
-    List<MortarRecipe> result = new ArrayList<>();
+  public static Map<ResourceLocation, MortarRecipe> getMortarRecipeList(String name, ItemStack output, Ingredient input, float red1, float green1, float blue1, float red2, float green2, float blue2) {
+    Map<ResourceLocation, MortarRecipe> result = new HashMap<>();
     ItemStack copy;
     List<Ingredient> ingredients = new ArrayList<>();
     int count = output.getCount();
@@ -903,7 +906,8 @@ public class ModRecipes {
       copy = output.copy();
       copy.setCount((i + 1) * count);
       MortarRecipe recipe = new MortarRecipe(copy, ingredients.toArray(new Ingredient[0]), red1, green1, blue1, red2, green2, blue2);
-      result.add(recipe);
+      recipe.setRegistryName(new ResourceLocation(Roots.MODID, name + "_" + (i+1)));
+      result.put(recipe.getRegistryName(), recipe);
     }
     return result;
   }
@@ -1045,22 +1049,22 @@ public class ModRecipes {
     return harvestRecipes;
   }
 
-  public static List<MortarRecipe> getMortarRecipes() {
-    return mortarRecipes;
+  public static Collection<MortarRecipe> getMortarRecipes() {
+    return mortarRecipes.values();
   }
 
   public static void initMortarRecipes() {
-    addMortarRecipe(new ItemStack(Items.DYE, 1, EnumDyeColor.LIGHT_BLUE.getDyeDamage()), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.carapace), 1, 1, 1, 1, 1, 1);
-    addMortarRecipe(new ItemStack(Items.DYE, 1, EnumDyeColor.ORANGE.getDyeDamage()), new OreIngredient("cropCarrot"), 1, 1, 1, 1, 1, 1);
-    addMortarRecipe(new ItemStack(ModItems.flour), new OreIngredient("cropWheat"), 1f, 1f, 0f, 1f, 1f, 0f);
-    addMortarRecipe(new ItemStack(ModItems.flour), new OreIngredient("cropPotato"), 1f, 1f, 0, 1f, 1f, 0f);
-    addMortarRecipe(new ItemStack(Items.DYE, 4, 15), new OreIngredient("bone"), 0f, 0f, 0f, 0f, 0f, 0f);
-    addMortarRecipe(new ItemStack(Items.SUGAR, 2), new OreIngredient("sugarcane"), 0f, 0f, 0f, 1f, 1f, 1f);
-    addMortarRecipe(new ItemStack(Items.BLAZE_POWDER, 5), Ingredient.fromItem(Items.BLAZE_ROD), 1, 1, 1, 1, 1, 1);
-    addMortarRecipe(new ItemStack(Items.STRING, 4), new OreIngredient("wool"), 1, 1, 1, 1, 1, 1);
-    addMortarRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.silk_thread, 5), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.silk_cocoon), 0, 0, 0, 0, 0, 0);
-    addMortarRecipe(new ItemStack(Items.MAGMA_CREAM, 2), Ingredient.fromItem(Item.getItemFromBlock(Blocks.MAGMA)), 1, 0, 0, 1, 0, 0);
-    addMortarRecipe(new ItemStack(Items.FLINT), Ingredient.fromItem(Item.getItemFromBlock(Blocks.GRAVEL)), 1, 1, 1, 1, 1, 1);
+    addMortarRecipe("carapace_blue_dye", new ItemStack(Items.DYE, 1, EnumDyeColor.LIGHT_BLUE.getDyeDamage()), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.carapace), 1, 1, 1, 1, 1, 1);
+    addMortarRecipe("carrot_orange_dye", new ItemStack(Items.DYE, 1, EnumDyeColor.ORANGE.getDyeDamage()), new OreIngredient("cropCarrot"), 1, 1, 1, 1, 1, 1);
+    addMortarRecipe("wheat_flour", new ItemStack(ModItems.flour), new OreIngredient("cropWheat"), 1f, 1f, 0f, 1f, 1f, 0f);
+    addMortarRecipe("potato_flour", new ItemStack(ModItems.flour), new OreIngredient("cropPotato"), 1f, 1f, 0, 1f, 1f, 0f);
+    addMortarRecipe("bone_to_bone_meal", new ItemStack(Items.DYE, 4, 15), new OreIngredient("bone"), 0f, 0f, 0f, 0f, 0f, 0f);
+    addMortarRecipe("sugarcane_to_sugar", new ItemStack(Items.SUGAR, 2), new OreIngredient("sugarcane"), 0f, 0f, 0f, 1f, 1f, 1f);
+    addMortarRecipe("rod_to_blaze_powder", new ItemStack(Items.BLAZE_POWDER, 5), Ingredient.fromItem(Items.BLAZE_ROD), 1, 1, 1, 1, 1, 1);
+    addMortarRecipe("wool_to_string", new ItemStack(Items.STRING, 4), new OreIngredient("wool"), 1, 1, 1, 1, 1, 1);
+    addMortarRecipe("cocoon_to_silk_thread", new ItemStack(epicsquid.mysticalworld.init.ModItems.silk_thread, 5), Ingredient.fromItem(epicsquid.mysticalworld.init.ModItems.silk_cocoon), 0, 0, 0, 0, 0, 0);
+    addMortarRecipe("magma_cream_from_magma_blocks", new ItemStack(Items.MAGMA_CREAM, 2), Ingredient.fromItem(Item.getItemFromBlock(Blocks.MAGMA)), 1, 0, 0, 1, 0, 0);
+    addMortarRecipe("flint_from_gravel", new ItemStack(Items.FLINT), Ingredient.fromItem(Item.getItemFromBlock(Blocks.GRAVEL)), 1, 1, 1, 1, 1, 1);
 
     for (Material metal : Materials.getMaterials()) {
       if (!metal.isEnabled()) continue;
@@ -1070,19 +1074,19 @@ public class ModRecipes {
         continue;
       }
 
-      addMortarRecipe(new ItemStack(metalDust), new OreIngredient("ingot" + metal.getOredictNameSuffix()), 82f / 255f, 92f / 255f, 114f / 255f, 160f / 255f, 167f / 255f, 183f / 255f);
+      addMortarRecipe(metal.getOredictNameSuffix().toLowerCase() + "_to_dust", new ItemStack(metalDust), new OreIngredient("ingot" + metal.getOredictNameSuffix()), 82f / 255f, 92f / 255f, 114f / 255f, 160f / 255f, 167f / 255f, 183f / 255f);
     }
 
     if (ConfigManager.gold.enableDusts) {
-      addMortarRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.gold_dust), new OreIngredient("ingotGold"), 82f / 255f, 92f / 255f, 114f / 255f, 160f / 255f, 167f / 255f, 183f / 255f);
+      addMortarRecipe("gold_to_dust", new ItemStack(epicsquid.mysticalworld.init.ModItems.gold_dust), new OreIngredient("ingotGold"), 82f / 255f, 92f / 255f, 114f / 255f, 160f / 255f, 167f / 255f, 183f / 255f);
     }
     if (ConfigManager.iron.enableDusts) {
-      addMortarRecipe(new ItemStack(epicsquid.mysticalworld.init.ModItems.iron_dust), new OreIngredient("ingotIron"), 82f / 255f, 92f / 255f, 114f / 255f, 160f / 255f, 167f / 255f, 183f / 255f);
+      addMortarRecipe("iron_to_dust", new ItemStack(epicsquid.mysticalworld.init.ModItems.iron_dust), new OreIngredient("ingotIron"), 82f / 255f, 92f / 255f, 114f / 255f, 160f / 255f, 167f / 255f, 183f / 255f);
     }
 
-    addMortarRecipe(new ItemStack(ModItems.petals), new OreIngredient("allFlowers"), 1f, 0f, 0f, 0f, 1f, 0f);
-    addMortarRecipe(new ItemStack(ModItems.petals, 2), new OreIngredient("allTallFlowers"), 1f, 0f, 0f, 0f, 1f, 0f);
-    addMortarRecipe(new ItemStack(ModItems.runic_dust), new OreIngredient("runestone"), 0f, 0f, 1f, 60 / 255f, 0f, 1f);
+    addMortarRecipe("flowers_to_petals", new ItemStack(ModItems.petals), new OreIngredient("allFlowers"), 1f, 0f, 0f, 0f, 1f, 0f);
+    addMortarRecipe("double_flowers_to_petals", new ItemStack(ModItems.petals, 2), new OreIngredient("allTallFlowers"), 1f, 0f, 0f, 0f, 1f, 0f);
+    addMortarRecipe("runestone_to_runic_dust", new ItemStack(ModItems.runic_dust), new OreIngredient("runestone"), 0f, 0f, 1f, 60 / 255f, 0f, 1f);
   }
 
   /**
