@@ -34,11 +34,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class EntityRitualAnimalHarvest extends EntityRitualBase {
 
   private RitualAnimalHarvest ritual;
-  private ObjectOpenHashSet<Class<? extends EntityLivingBase>> harvestClasses;
+  private Set<Class<? extends EntityLivingBase>> harvestClasses;
 
   public EntityRitualAnimalHarvest(World worldIn) {
     super(worldIn);
