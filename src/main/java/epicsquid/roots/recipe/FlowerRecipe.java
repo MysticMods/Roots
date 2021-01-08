@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+@SuppressWarnings("deprecation")
 public class FlowerRecipe {
   private final IBlockState flower;
   private final ResourceLocation registryName;

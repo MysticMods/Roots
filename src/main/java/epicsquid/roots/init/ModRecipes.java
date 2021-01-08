@@ -869,6 +869,14 @@ public class ModRecipes {
     }
   }
 
+  public static void removeMortarRecipe (ResourceLocation location) {
+    mortarRecipes.remove(location);
+  }
+
+  public static void removeMortarRecipe (String name) {
+    removeMortarRecipe(new ResourceLocation(Roots.MODID, name));
+  }
+
   public static MortarRecipe getMortarRecipe(ItemStack output) {
     for (MortarRecipe mortarRecipe : mortarRecipes.values()) {
       if (ItemUtil.equalWithoutSize(mortarRecipe.getResult(), output)) {

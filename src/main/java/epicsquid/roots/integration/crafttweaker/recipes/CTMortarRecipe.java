@@ -15,18 +15,17 @@ import java.util.stream.Collectors;
 public class CTMortarRecipe extends MortarRecipe {
   private List<IIngredient> ingredients;
   private List<Ingredient> convertedIngredients;
-  private ResourceLocation name;
 
   public CTMortarRecipe(String name, ItemStack result, List<IIngredient> ingredients) {
     super(result, new Ingredient[]{});
-    this.name = new ResourceLocation(Roots.MODID, name);
+    this.setRegistryName(new ResourceLocation(Roots.MODID, name));
     this.ingredients = ingredients;
     this.convertedIngredients = ingredients.stream().map(CraftTweakerMC::getIngredient).collect(Collectors.toList());
   }
 
   public CTMortarRecipe(String name, ItemStack result, List<IIngredient> ingredients, float red1, float green1, float blue1, float red2, float green2, float blue2) {
     super(result, new Ingredient[]{}, red1, green1, blue1, red2, green2, blue2);
-    this.name = new ResourceLocation(Roots.MODID, name);
+    this.setRegistryName(new ResourceLocation(Roots.MODID, name));
     this.ingredients = ingredients;
     this.convertedIngredients = ingredients.stream().map(CraftTweakerMC::getIngredient).collect(Collectors.toList());
   }
