@@ -83,7 +83,7 @@ repositories {
     }
     maven {
         name = "MMD Maven"
-        url 'https://maven.mcmoddev.com'
+        url 'https://mmdmaven.blamejared.com'
     }
     maven {
         //Also contains Patchouli
@@ -93,10 +93,6 @@ repositories {
     maven {
         name = 'Tterrag Maven'
         url "http://maven.tterrag.com"
-    }
-    maven {
-        name = "tehnut"
-        url = "https://maven.tehnut.info"
     }
 }
 
