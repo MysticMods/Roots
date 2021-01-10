@@ -1,7 +1,7 @@
 {
   "name": "Wooden Shears",
   "icon": "roots:wooden_shears",
-  "category": "crafting",
+  "category": "crafting_armor_tools",
   "pages": [
     {
       "type": "text",

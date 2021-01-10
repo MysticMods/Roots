@@ -83,6 +83,26 @@ public class PatchouliHack {
     FUNCTIONS.put("uses", jeiUses);
     COMMANDS.put("/uses", reset);
 
+    BookTextParser.FunctionProcessor jeiSources = (parameter, state) -> {
+      state.prevColor = state.color;
+      if (Loader.isModLoaded("jei")) {
+        String[] parts = parameter.split(":");
+        ItemStack stack = ItemUtil.stackFromString(parts);
+        if (!stack.isEmpty()) {
+          state.color = state.book.linkColor;
+          state.tooltip = stack.getDisplayName();
+          state.onClick = () -> {
+            IntegrationUtil.showSources(stack);
+          };
+        }
+      }
+
+      return "";
+    };
+
+    FUNCTIONS.put("sources", jeiSources);
+    COMMANDS.put("/sources", reset);
+
     Function<String, BookTextParser.FunctionProcessor> prop = (type) ->
         (parameter, state) -> {
           if (parameter.contains("/")) {

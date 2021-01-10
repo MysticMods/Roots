@@ -1,7 +1,7 @@
 {
   "name": "Staff",
   "icon": "roots:staff",
-  "category": "crafting",
+  "category": "crafting_armor_tools",
   "pages": [
     {
       "type": "text",

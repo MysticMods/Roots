@@ -1,11 +1,12 @@
 {
   "name": "Roast Pereskia",
-  "icon": "roots:roasted_pereskia",
+  "icon": "roots:cooked_pereskia",
   "category": "crafting_resources",
   "pages": [
     {
-      "type": "text",
-      "text": "Example."
+      "type": "smelting",
+      "recipe": "roots:pereskia_bulb",
+      "text": "A delicious treat and a way to consume additional pereskia bulbs."
     }
   ]
 }

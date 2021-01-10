@@ -1,11 +1,53 @@
 {
   "name": "Bark",
-  "icon": "roots:oak_bark",
+  "icon": "roots:bark_acacia",
   "category": "crafting_resources",
   "pages": [
     {
       "type": "text",
-      "text": "Example."
+      "text": "Much wild magic is stored in the bark of a tree, in addition to its leaves and logs. Breaking a log with a $(l:crafting/armor_and_tools/knives)knife$() allows you to obtain bark.$(br2)$(info) The amount of bark produced can be increased with the fortune enchantment."
+    },
+    {
+      "type": "spotlight",
+      "item": "roots:bark_oak",
+      "title": "Oak Bark",
+      "text": "Dropped from oak logs."
+    },
+    {
+      "type": "spotlight",
+      "item": "roots:bark_birch",
+      "title": "Birch Bark",
+      "text": "Obtained from birch logs."
+    },
+    {
+      "type": "spotlight",
+      "item": "roots:bark_spruce",
+      "title": "Spruce Bark",
+      "text": "Obtained from spruce logs."
+    },
+    {
+      "type": "spotlight",
+      "item": "roots:bark_jungle",
+      "title": "Jungle Bark",
+      "text": "Obtained from jungle logs."
+    },
+    {
+      "type": "spotlight",
+      "item": "roots:bark_acacia",
+      "title": "Acacia Bark",
+      "text": "Obtained from acacia logs."
+    },
+    {
+      "type": "spotlight",
+      "item": "roots:bark_dark_oak",
+      "title": "Dark Oak Bark",
+      "text": "Obtained from dark oak logs."
+    },
+    {
+      "type": "spotlight",
+      "item": "roots:bark_wildwood",
+      "title": "Wildwood Bark",
+      "text": "Obtained from wildwood logs."
     }
   ]
 }
