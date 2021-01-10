@@ -4,8 +4,10 @@
   "category": "crafting_resources",
   "pages": [
     {
-      "type": "text",
-      "text": "Example."
+      "type": "spotlight",
+      "item": "roots:fey_leather",
+      "link_recipe": true,
+      "text": "$(l:crafting/armor_and_tools/runic_shears)Runic Shears$() allow you to reach briefly between the realms, plucking from an otherworldly equivalent of an animal or plant a fey item.$(br2)Fey leather can be obtained from many creatures that drop leather when killed. A complete list of suitable entities can be found with $(sources:roots:fey_leather)JEI$()."
     }
   ]
 }

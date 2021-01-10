@@ -107,4 +107,14 @@ public class IntegrationUtil {
     IRecipesGui gui = JEIRootsPlugin.runtime.getRecipesGui();
     gui.show(registry.createFocus(IFocus.Mode.INPUT, stack));
   }
+
+  @SideOnly(Side.CLIENT)
+  public static void showSources (ItemStack stack) {
+    if (JEIRootsPlugin.runtime == null) {
+      return;
+    }
+    IRecipeRegistry registry = JEIRootsPlugin.runtime.getRecipeRegistry();
+    IRecipesGui gui = JEIRootsPlugin.runtime.getRecipesGui();
+    gui.show(registry.createFocus(IFocus.Mode.OUTPUT, stack));
+  }
 }

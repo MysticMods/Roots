@@ -1,7 +1,7 @@
 {
   "name": "Fire Starter",
   "icon": "roots:firestarter",
-  "category": "crafting",
+  "category": "crafting_armor_tools",
   "pages": [
     {
       "type": "text",

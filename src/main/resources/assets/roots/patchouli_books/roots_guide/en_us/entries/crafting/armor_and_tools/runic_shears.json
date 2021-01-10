@@ -1,7 +1,7 @@
 {
   "name": "Runic Shears",
   "icon": "roots:runic_shears",
-  "category": "crafting",
+  "category": "crafting_armor_tools",
   "pages": [
     {
       "type": "text",

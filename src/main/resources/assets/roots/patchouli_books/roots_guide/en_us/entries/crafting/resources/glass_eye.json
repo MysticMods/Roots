@@ -4,8 +4,10 @@
   "category": "crafting_resources",
   "pages": [
     {
-      "type": "text",
-      "text": "Example."
+      "type": "crafting",
+      "recipe": "roots:glass_eye",
+      "link_recipe": true,
+      "text": "Simple to craft, this replacement eye can be used for a variety of purposes. Most significantly, it can be broken by right-clicking in order to gain night-vision effects. It's also used in recipes and rituals."
     }
   ]
 }

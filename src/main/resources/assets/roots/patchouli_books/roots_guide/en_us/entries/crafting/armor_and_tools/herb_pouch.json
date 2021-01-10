@@ -1,7 +1,7 @@
 {
   "name": "Herb Pouch",
   "icon": "roots:herb_pouch",
-  "category": "crafting",
+  "category": "crafting_armor_tools",
   "pages": [
     {
       "type": "text",

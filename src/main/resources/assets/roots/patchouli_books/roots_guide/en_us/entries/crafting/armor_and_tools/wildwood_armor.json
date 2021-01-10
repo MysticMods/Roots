@@ -1,7 +1,7 @@
 {
   "name": "Wildwood Armor",
   "icon": "roots:wildwood_chestplate",
-  "category": "crafting",
+  "category": "crafting_armor_tools",
   "pages": [
     {
       "type": "text",

@@ -1,7 +1,7 @@
 {
   "name": "Apothecary Pouch",
   "icon": "roots:apothecary_pouch",
-  "category": "crafting",
+  "category": "crafting_armor_tools",
   "pages": [
     {
       "type": "text",

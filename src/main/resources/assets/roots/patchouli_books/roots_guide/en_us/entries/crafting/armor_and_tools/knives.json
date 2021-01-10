@@ -1,7 +1,7 @@
 {
   "name": "Knives",
   "icon": "roots:wood_knife",
-  "category": "crafting",
+  "category": "crafting_armor_tools",
   "pages": [
     {
       "type": "text",
