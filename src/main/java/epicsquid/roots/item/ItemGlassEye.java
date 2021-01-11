@@ -31,6 +31,9 @@ public class ItemGlassEye extends ItemBase {
   public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
     ItemStack stack = playerIn.getHeldItem(handIn);
     if (!worldIn.isRemote) {
+      if (playerIn.getActivePotionEffect(MobEffects.NIGHT_VISION) != null) {
+        return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
+      }
       playerIn.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 15 * 20, 0, false, false));
 
       if (!playerIn.isCreative()) {
