@@ -3,6 +3,7 @@ package epicsquid.roots.item;
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.roots.block.BlockPyre;
 import epicsquid.roots.config.GeneralConfig;
+import epicsquid.roots.tileentity.TileEntityPyre;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -12,6 +13,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -28,8 +30,6 @@ import java.util.List;
 public class ItemFireStarter extends ItemBase {
   public ItemFireStarter(@Nonnull String name) {
     super(name);
-    setMaxStackSize(1);
-    setMaxDamage(12);
   }
 
   @Override
@@ -45,30 +45,40 @@ public class ItemFireStarter extends ItemBase {
 
   @Override
   public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entity) {
-    if (!world.isRemote && stack.getItemDamage() < stack.getMaxDamage() && entity instanceof EntityPlayer) {
+    if (!world.isRemote && entity instanceof EntityPlayer) {
       EntityPlayer player = (EntityPlayer) entity;
       RayTraceResult result = rayTrace(entity.world, player, false);
       //noinspection ConstantConditions
       if (result != null && result.typeOfHit == RayTraceResult.Type.BLOCK) {
         EnumFacing facing = result.sideHit;
         BlockPos hit = result.getBlockPos();
-        IBlockState state = world.getBlockState(hit);
-        if (state.getBlock() instanceof BlockPyre) {
-          state.getBlock();
-        }
 
         hit = hit.offset(facing);
         if (!player.canPlayerEdit(hit, facing, stack)) {
           return stack;
         }
 
+        boolean used = false;
+
         if (world.isAirBlock(hit)) {
           world.playSound(player, hit, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
           world.setBlockState(hit, Blocks.FIRE.getDefaultState(), 11);
+          used = true;
+        } else {
+          TileEntity te = world.getTileEntity(hit);
+          if (te instanceof TileEntityPyre) {
+            TileEntityPyre pyre = (TileEntityPyre) te;
+            pyre.startRitual(player.getUniqueID(), false);
+            pyre.setLastPlayerId(player.getUniqueID());
+            used = true;
+          }
         }
 
+
         // TODO: Pyres?
-        stack.damageItem(1, player);
+        if (used) {
+          stack.shrink(1);
+        }
         return stack;
       }
     }
