@@ -9,6 +9,8 @@ import epicsquid.roots.recipe.transmutation.PropertyPredicate;
 import net.minecraft.block.BlockBeetroot;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.entity.monster.EntityCaveSpider;
+import net.minecraft.entity.monster.EntityMagmaCube;
+import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.passive.*;
 import net.minecraft.init.Blocks;
@@ -41,6 +43,8 @@ public class RunicShearRecipes {
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "beetle_strange_ooze"), new ItemStack(ModItems.strange_ooze, 1), EntityBeetle.class, 20 * 120));
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "frog_strange_ooze"), new ItemStack(ModItems.strange_ooze, 1), EntityFrog.class, 20 * 120));
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "squid_strange_ooze"), new ItemStack(ModItems.strange_ooze, 1), EntitySquid.class, 20 * 120));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "slime_strange_ooze"), new ItemStack(ModItems.strange_ooze, 1), EntitySlime.class, 20 * 120));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "magma_cube_strange_ooze"), new ItemStack(ModItems.strange_ooze, 1), EntityMagmaCube.class, 20 * 120));
 
     ModRecipes.addRunicShearRecipe(new RunicShearConditionalEntityRecipe(new ResourceLocation(Roots.MODID, "sprout_stuff"), entityLivingBase -> {
       EntitySprout sprout = (EntitySprout) entityLivingBase;
