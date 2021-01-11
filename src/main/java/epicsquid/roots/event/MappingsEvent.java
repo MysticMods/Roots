@@ -187,6 +187,9 @@ public class MappingsEvent {
           case "fey_feather":
             mapping.remap(epicsquid.roots.init.ModItems.mystic_feather);
             break;
+          case "strange_slime":
+            mapping.remap(epicsquid.roots.init.ModItems.strange_ooze);
+            break;
         }
         if (missing.getPath().startsWith("runic_")) {
           ResourceLocation replacement = new ResourceLocation(Roots.MODID, missing.getPath().replace("runic_", "runed_"));
