@@ -137,7 +137,7 @@ public class MappingsEvent {
       if (missing.getNamespace().equals(Roots.MODID)) {
         switch (missing.getPath()) {
           case "spell_chrysopoeia":
-            mapping.remap(epicsquid.roots.init.ModItems.spell_icon);
+            mapping.ignore();
             break;
           case "offering_plate":
             mapping.remap(((BlockBase) epicsquid.roots.init.ModBlocks.catalyst_plate).getItemBlock());
@@ -183,6 +183,9 @@ public class MappingsEvent {
             break;
           case "incense_burner":
             mapping.ignore();
+            break;
+          case "fey_feather":
+            mapping.remap(epicsquid.roots.init.ModItems.mystic_feather);
             break;
         }
         if (missing.getPath().startsWith("runic_")) {
