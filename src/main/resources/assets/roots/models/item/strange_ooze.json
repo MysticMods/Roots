@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "roots:items/strange_slime"
+    "layer0": "roots:items/strange_ooze"
   }
 }

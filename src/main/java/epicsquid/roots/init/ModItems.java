@@ -38,7 +38,7 @@ public class ModItems {
   // All mod items
   public static Item guide, pestle, herb_pouch, component_pouch, spell_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, wildwood_quiver, wildwood_bow,
       sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, apothecary_pouch, wooden_shears, firestarter,
-      petals, flour, living_arrow, runic_dust, cooked_pereskia, fey_leather, wildewheet_bread, glass_eye, fey_feather, strange_slime, gramary, spirit_bag, reliquary, golden_eye;
+      petals, flour, living_arrow, runic_dust, cooked_pereskia, fey_leather, wildewheet_bread, glass_eye, mystic_feather, strange_ooze, gramary, spirit_bag, reliquary, golden_eye;
 
   public static Item runed_axe, runed_hoe, runed_pickaxe, runed_shovel, runed_sword, runed_dagger;
 
@@ -107,14 +107,14 @@ public class ModItems {
         return EnumRarity.RARE;
       }
     }.setCreativeTab(Roots.tab));
-    event.addItem(fey_feather = new ItemBase("fey_feather") {
+    event.addItem(mystic_feather = new ItemBase("mystic_feather") {
       @Override
       @SuppressWarnings("deprecation")
       public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.RARE;
       }
     }.setCreativeTab(Roots.tab));
-    event.addItem(strange_slime = new ItemBase("strange_slime") {
+    event.addItem(strange_ooze = new ItemBase("strange_ooze") {
       @Override
       @SuppressWarnings("deprecation")
       public EnumRarity getRarity(ItemStack stack) {
@@ -270,9 +270,9 @@ public class ModItems {
     OreDictionary.registerOre("treeLeaves", ModBlocks.wildwood_leaves);
     OreDictionary.registerOre("leather", ModItems.fey_leather);
     OreDictionary.registerOre("feyLeather", ModItems.fey_leather);
-    OreDictionary.registerOre("feather", ModItems.fey_feather);
-    OreDictionary.registerOre("slimeball", ModItems.strange_slime);
-    OreDictionary.registerOre("feyFeather", ModItems.fey_feather);
+    OreDictionary.registerOre("feather", ModItems.mystic_feather);
+    OreDictionary.registerOre("slimeball", ModItems.strange_ooze);
+    OreDictionary.registerOre("feyFeather", ModItems.mystic_feather);
     OreDictionary.registerOre("spiderEye", Items.SPIDER_EYE);
     OreDictionary.registerOre("goldenEye", ModItems.golden_eye);
     OreDictionary.registerOre("eye", ModItems.golden_eye);

@@ -34,13 +34,13 @@ public class RunicShearRecipes {
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "bat_fey_leather"), new ItemStack(ModItems.fey_leather, 1), EntityBat.class, 20 * 30));
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "pig_fey_leather"), new ItemStack(ModItems.fey_leather, 1), EntityPig.class, 20 * 30));
 
-    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "chicken_fey_feather"), new ItemStack(ModItems.fey_feather, 1), EntityChicken.class, 20 * 45));
-    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "parrot_fey_feather"), new ItemStack(ModItems.fey_feather, 1), EntityParrot.class, 20 * 45));
-    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "owl_fey_feather"), new ItemStack(ModItems.fey_feather, 1), EntityOwl.class, 20 * 45));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "chicken_mystic_feather"), new ItemStack(ModItems.mystic_feather, 1), EntityChicken.class, 20 * 45));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "parrot_mystic_feather"), new ItemStack(ModItems.mystic_feather, 1), EntityParrot.class, 20 * 45));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "owl_mystic_feather"), new ItemStack(ModItems.mystic_feather, 1), EntityOwl.class, 20 * 45));
 
-    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "beetle_strange_slime"), new ItemStack(ModItems.strange_slime, 1), EntityBeetle.class, 20 * 120));
-    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "frog_strange_slime"), new ItemStack(ModItems.strange_slime, 1), EntityFrog.class, 20 * 120));
-    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "squid_strange_slime"), new ItemStack(ModItems.strange_slime, 1), EntitySquid.class, 20 * 120));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "beetle_strange_ooze"), new ItemStack(ModItems.strange_ooze, 1), EntityBeetle.class, 20 * 120));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "frog_strange_ooze"), new ItemStack(ModItems.strange_ooze, 1), EntityFrog.class, 20 * 120));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "squid_strange_ooze"), new ItemStack(ModItems.strange_ooze, 1), EntitySquid.class, 20 * 120));
 
     ModRecipes.addRunicShearRecipe(new RunicShearConditionalEntityRecipe(new ResourceLocation(Roots.MODID, "sprout_stuff"), entityLivingBase -> {
       EntitySprout sprout = (EntitySprout) entityLivingBase;
