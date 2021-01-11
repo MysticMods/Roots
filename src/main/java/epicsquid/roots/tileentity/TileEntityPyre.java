@@ -182,7 +182,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
     }
   }
 
-  private boolean startRitual(@Nullable UUID playerId, boolean refire) {
+  public boolean startRitual(@Nullable UUID playerId, boolean refire) {
     if (playerId == null) {
       return startRitual((EntityPlayer) null, refire);
     } else {
@@ -190,7 +190,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
     }
   }
 
-  private boolean startRitual(@Nullable EntityPlayer player, boolean refire) {
+  public boolean startRitual(@Nullable EntityPlayer player, boolean refire) {
     RitualBase ritual = RitualRegistry.getRitual(this, player);
 
     if (ritual != null && !ritual.isDisabled()) {
@@ -756,5 +756,9 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
     }
 
     return bb.offset(getPos());
+  }
+
+  public void setLastPlayerId(UUID lastPlayerId) {
+    this.lastPlayerId = lastPlayerId;
   }
 }
