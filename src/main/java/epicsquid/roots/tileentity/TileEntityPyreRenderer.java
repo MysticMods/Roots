@@ -1,9 +1,7 @@
 package epicsquid.roots.tileentity;
 
-import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
-import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
@@ -45,12 +43,14 @@ public class TileEntityPyreRenderer extends TileEntitySpecialRenderer<TileEntity
       GlStateManager.popMatrix();
     }
 
-    PyreCraftingRecipe recipe = ModRecipes.getCraftingRecipe(renderItems);
-    if (recipe != null)
+    PyreCraftingRecipe recipe = tem.getCurrentRecipe();
+    if (recipe != null) {
       renderResult(x, y, z, recipe.getResult(), 0.8f);
-    RitualBase ritual = RitualRegistry.getRitual(tem, Minecraft.getMinecraft().player);
-    if (ritual != null && !ritual.isDisabled())
+    }
+    RitualBase ritual = tem.getCurrentRitual();
+    if (ritual != null && !ritual.isDisabled()) {
       renderResult(x, y, z, ritual.getItemStack(), 1f);
+    }
   }
 
   private void renderResult(double x, double y, double z, ItemStack result, float alpha) {

@@ -80,11 +80,14 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
 
   private boolean isBurning = false;
 
-  private Random random = new Random();
+  private PyreCraftingRecipe currentRecipe = null;
+  private RitualBase currentRitual = null;
 
   public ItemStackHandler inventory = new ItemStackHandler(5) {
     @Override
     protected void onContentsChanged(int slot) {
+      currentRecipe = null;
+      currentRitual = null;
       TileEntityPyre.this.markDirty();
       if (!world.isRemote) {
         TileEntityPyre.this.world.updateComparatorOutputLevel(pos, getBlock());
@@ -156,16 +159,6 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
     readFromNBT(pkt.getNbtCompound());
   }
 
-  public PyreCraftingRecipe getCurrentRecipe() {
-    List<ItemStack> stacks = new ArrayList<>();
-    for (int i = 0; i < inventory.getSlots(); i++) {
-      ItemStack stack = inventory.getStackInSlot(i);
-      stacks.add(stack);
-    }
-
-    return ModRecipes.getCraftingRecipe(stacks);
-  }
-
   private void validateEntity() {
     if (ritualEntity == null) return;
 
@@ -183,7 +176,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
   }
 
   public boolean startRitual(@Nullable UUID playerId, boolean refire) {
-    if (playerId == null) {
+    if (playerId == null || lastPlayerId == null) {
       return startRitual((EntityPlayer) null, refire);
     } else {
       return startRitual(Objects.requireNonNull(world.getMinecraftServer()).getPlayerList().getPlayerByUUID(lastPlayerId), refire);
@@ -549,7 +542,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
           burning = false;
         }
 
-        if (burning && getTicker() % 20.0f == 0 && random.nextDouble() < 0.05 && !(ritualEntity instanceof IColdRitual)) {
+        if (burning && getTicker() % 20.0f == 0 && Util.rand.nextDouble() < 0.05 && !(ritualEntity instanceof IColdRitual)) {
           meltNearbySnow();
         }
 
@@ -623,7 +616,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
       if (nearbySnowOrIce.isEmpty()) {
         return;
       }
-      BlockPos posToMelt = nearbySnowOrIce.get(nearbySnowOrIce.size() > 1 ? random.nextInt(nearbySnowOrIce.size() - 1) : 0);
+      BlockPos posToMelt = nearbySnowOrIce.get(nearbySnowOrIce.size() > 1 ? Util.rand.nextInt(nearbySnowOrIce.size() - 1) : 0);
       if (world.getBlockState(posToMelt).getMaterial() == Material.SNOW) {
         world.setBlockState(posToMelt, Blocks.AIR.getDefaultState());
       } else if (world.getBlockState(posToMelt).getMaterial() == Material.ICE) {
@@ -673,14 +666,37 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
     }
   }
 
+  @Nullable
   public RitualBase getLastRitualUsed() {
     return lastRitualUsed;
   }
 
+  @Nullable
   public PyreCraftingRecipe getLastRecipeUsed() {
     return lastRecipeUsed;
   }
 
+  @Nullable
+  public RitualBase getCurrentRitual() {
+    if (currentRitual == null) {
+      currentRitual = RitualRegistry.getRitual(this, null);
+    }
+    return currentRitual;
+  }
+
+  @Nullable
+  public PyreCraftingRecipe getCurrentRecipe() {
+    if (currentRecipe == null) {
+      List<ItemStack> stacks = new ArrayList<>();
+      for (int i = 0; i < inventory.getSlots(); i++) {
+        ItemStack stack = inventory.getStackInSlot(i);
+        stacks.add(stack);
+      }
+
+      currentRecipe = ModRecipes.getCraftingRecipe(stacks);
+    }
+    return currentRecipe;
+  }
 
   public void setLastRitualUsed(RitualBase lastRitualUsed) {
     this.lastRitualUsed = lastRitualUsed;
