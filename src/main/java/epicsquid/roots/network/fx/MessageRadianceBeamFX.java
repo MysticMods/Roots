@@ -23,18 +23,20 @@ import java.util.UUID;
 
 public class MessageRadianceBeamFX implements IMessage {
   private double posX = 0, posY = 0, posZ = 0;
+  private boolean dim = false;
   private UUID id = null;
 
   public MessageRadianceBeamFX() {
     super();
   }
 
-  public MessageRadianceBeamFX(UUID id, double x, double y, double z) {
+  public MessageRadianceBeamFX(UUID id, double x, double y, double z, boolean dim) {
     super();
     this.posX = x;
     this.posY = y;
     this.posZ = z;
     this.id = id;
+    this.dim = dim;
   }
 
   @Override
@@ -43,6 +45,7 @@ public class MessageRadianceBeamFX implements IMessage {
     posY = buf.readDouble();
     posZ = buf.readDouble();
     id = new UUID(buf.readLong(), buf.readLong());
+    dim = buf.readBoolean();
   }
 
   @Override
@@ -52,6 +55,7 @@ public class MessageRadianceBeamFX implements IMessage {
     buf.writeDouble(posZ);
     buf.writeLong(id.getMostSignificantBits());
     buf.writeLong(id.getLeastSignificantBits());
+    buf.writeBoolean(dim);
   }
 
   public static float getColorCycle(float ticks) {
@@ -134,6 +138,10 @@ public class MessageRadianceBeamFX implements IMessage {
             totalDist += positions.get(i).subtract(positions.get(i + 1)).length();
           }
           double alphaDist = 0;
+          float base = 0.05f;
+          if (message.dim) {
+            base = 0.75f;
+          }
           for (int i = 0; i < positions.size() - 1; i++) {
             double dist = positions.get(i).subtract(positions.get(i + 1)).length();
             for (double j = 0; j < dist; j += 0.15) {
@@ -141,11 +149,10 @@ public class MessageRadianceBeamFX implements IMessage {
               double y = positions.get(i).y * (1.0 - j / dist) + positions.get(i + 1).y * (j / dist);
               double z = positions.get(i).z * (1.0 - j / dist) + positions.get(i + 1).z * (j / dist);
               alphaDist += 0.15;
-
               if (Util.rand.nextBoolean()) {
-                ParticleUtil.spawnParticleStarNoGravity(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellRadiance.instance.getRed1() * 255.0f, SpellRadiance.instance.getGreen1() * 255.0f, SpellRadiance.instance.getBlue1() * 255.0f, 0.75f * (float) (1.0f - alphaDist / totalDist), 3f + 3f * Util.rand.nextFloat(), 14);
+                ParticleUtil.spawnParticleStarNoGravity(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellRadiance.instance.getRed1() * 255.0f, SpellRadiance.instance.getGreen1() * 255.0f, SpellRadiance.instance.getBlue1() * 255.0f, base * (float) (1.0f - alphaDist / totalDist), 3f + 3f * Util.rand.nextFloat(), 14);
               } else {
-                ParticleUtil.spawnParticleStarNoGravity(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellRadiance.instance.getRed2() * 255.0f, SpellRadiance.instance.getGreen2() * 255.0f, SpellRadiance.instance.getBlue2() * 255.0f, 0.75f * (float) (1.0f - alphaDist / totalDist), 3f + 3f * Util.rand.nextFloat(), 14);
+                ParticleUtil.spawnParticleStarNoGravity(world, (float) x, (float) y, (float) z, 0, 0, 0, SpellRadiance.instance.getRed2() * 255.0f, SpellRadiance.instance.getGreen2() * 255.0f, SpellRadiance.instance.getBlue2() * 255.0f, base * (float) (1.0f - alphaDist / totalDist), 3f + 3f * Util.rand.nextFloat(), 14);
               }
             }
           }

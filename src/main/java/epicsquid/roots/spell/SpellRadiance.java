@@ -100,7 +100,6 @@ public class SpellRadiance extends SpellBase {
       float offX = 0.5f * (float) Math.sin(Math.toRadians(-90.0f - player.rotationYaw));
       float offZ = 0.5f * (float) Math.cos(Math.toRadians(-90.0f - player.rotationYaw));
       positions.add(new Vec3d(player.posX + offX, player.posY + player.getEyeHeight(), player.posZ + offZ));
-      PacketHandler.sendToAllTracking(new MessageRadianceBeamFX(player.getUniqueID(), player.posX, player.posY + 1.0f, player.posZ), player);
       if (result != null) {
         positions.add(result.hitVec);
         if (result.typeOfHit == RayTraceResult.Type.BLOCK) {
@@ -216,6 +215,7 @@ public class SpellRadiance extends SpellBase {
           }
         }
       }
+      PacketHandler.sendToAllTracking(new MessageRadianceBeamFX(player.getUniqueID(), player.posX, player.posY + 1.0f, player.posZ, count > 0), player);
       return count > 0;
     }
     return false;
