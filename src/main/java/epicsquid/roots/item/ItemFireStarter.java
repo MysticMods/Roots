@@ -1,8 +1,8 @@
 package epicsquid.roots.item;
 
 import epicsquid.mysticallib.item.ItemBase;
-import epicsquid.roots.block.BlockPyre;
 import epicsquid.roots.config.GeneralConfig;
+import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.tileentity.TileEntityPyre;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -35,12 +35,8 @@ public class ItemFireStarter extends ItemBase {
   @Override
   public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand hand) {
     ItemStack stack = player.getHeldItem(hand);
-    if (stack.getItemDamage() < stack.getMaxDamage()) {
-      player.setActiveHand(hand);
-      return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
-    }
-
-    return ActionResult.newResult(EnumActionResult.PASS, stack);
+    player.setActiveHand(hand);
+    return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
   }
 
   @Override
@@ -53,6 +49,9 @@ public class ItemFireStarter extends ItemBase {
         EnumFacing facing = result.sideHit;
         BlockPos hit = result.getBlockPos();
 
+        IBlockState hitState = world.getBlockState(hit);
+        boolean pyre = hitState.getBlock() == ModBlocks.pyre || hitState.getBlock() == ModBlocks.reinforced_pyre;
+
         hit = hit.offset(facing);
         if (!player.canPlayerEdit(hit, facing, stack)) {
           return stack;
@@ -60,23 +59,23 @@ public class ItemFireStarter extends ItemBase {
 
         boolean used = false;
 
-        if (world.isAirBlock(hit)) {
+        if (!pyre && world.isAirBlock(hit)) {
           world.playSound(player, hit, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
           world.setBlockState(hit, Blocks.FIRE.getDefaultState(), 11);
           used = true;
         } else {
-          TileEntity te = world.getTileEntity(hit);
+          TileEntity te = world.getTileEntity(result.getBlockPos());
           if (te instanceof TileEntityPyre) {
-            TileEntityPyre pyre = (TileEntityPyre) te;
-            pyre.startRitual(player.getUniqueID(), false);
-            pyre.setLastPlayerId(player.getUniqueID());
+            TileEntityPyre pyreTe = (TileEntityPyre) te;
+            pyreTe.startRitual(player.getUniqueID(), false);
+            pyreTe.setLastPlayerId(player.getUniqueID());
             used = true;
           }
         }
 
 
         // TODO: Pyres?
-        if (used) {
+        if (used && !player.isCreative()) {
           stack.shrink(1);
         }
         return stack;
