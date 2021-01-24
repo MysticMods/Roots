@@ -8,6 +8,7 @@ import epicsquid.roots.entity.spell.EntityBoost;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.integration.baubles.pouch.BaubleBeltCapabilityHandler;
 import epicsquid.roots.item.IItemPouch;
 import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
@@ -16,10 +17,7 @@ import epicsquid.roots.network.MessageLightDrifterSync;
 import epicsquid.roots.network.fx.MessageGeasFX;
 import epicsquid.roots.network.fx.MessageGeasRingFX;
 import epicsquid.roots.network.fx.MessagePetalShellBurstFX;
-import epicsquid.roots.spell.SpellAquaBubble;
-import epicsquid.roots.spell.SpellGeas;
-import epicsquid.roots.spell.SpellPetalShell;
-import epicsquid.roots.spell.SpellStormCloud;
+import epicsquid.roots.spell.*;
 import epicsquid.roots.util.Constants;
 import epicsquid.roots.util.EntityUtil;
 import epicsquid.roots.util.SlaveUtil;
@@ -32,6 +30,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameType;
@@ -155,6 +154,13 @@ public class EventManager {
         ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(entity.getEntityData(), SpellPetalShell.instance);
         if (newCount > 0) {
           entity.addPotionEffect(new PotionEffect(ModPotions.petal_shell, mods.ampInt(SpellPetalShell.instance.duration), newCount, false, false));
+          if (SpellPetalShell.instance.shouldPlaySound()) {
+            entity.playSound(ModSounds.Spells.PETAL_SHELL_EFFECT_BREAK, SpellPetalShell.instance.getSoundVolume(), 1);
+          }
+        } else {
+          if (SpellPetalShell.instance.shouldPlaySound()) {
+            entity.playSound(ModSounds.Spells.PETAL_SHELL_EFFECT_END, SpellPetalShell.instance.getSoundVolume(), 1);
+          }
         }
         if (trueSource != null) {
           if (mods.has(SpellPetalShell.RADIANT)) {
@@ -253,6 +259,9 @@ public class EventManager {
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_Y);
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_Z);
         event.getEntity().getEntityData().removeTag(Constants.LIGHT_DRIFTER_MODE);
+        if (SpellAugment.instance.shouldPlaySound()) {
+          player.world.playSound(null, player.getPosition(), ModSounds.Spells.LIGHT_DRIFTER_EFFECT_END, SoundCategory.PLAYERS, SpellAugment.instance.getSoundVolume(), 1);
+        }
       }
     }
     if (entity.getActivePotionEffect(ModPotions.geas) != null) {

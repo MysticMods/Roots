@@ -2,12 +2,15 @@ package epicsquid.roots.potion;
 
 import epicsquid.mysticallib.util.AABBUtil;
 import epicsquid.roots.Roots;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
+import epicsquid.roots.spell.SpellAugment;
 import epicsquid.roots.spell.SpellExtension;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.Potion;
@@ -61,5 +64,13 @@ public class PotionDangerSense extends Potion {
   @Override
   public boolean shouldRenderInvText(PotionEffect effect) {
     return true;
+  }
+
+  @Override
+  public void removeAttributesModifiersFromEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
+    super.removeAttributesModifiersFromEntity(entityLivingBaseIn, attributeMapIn, amplifier);
+    if (SpellAugment.instance.shouldPlaySound()) {
+      entityLivingBaseIn.playSound(ModSounds.Spells.SENSE_DANGER_EFFECT_END, SpellAugment.instance.getSoundVolume(), 1);
+    }
   }
 }

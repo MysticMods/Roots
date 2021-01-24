@@ -1,7 +1,11 @@
 package epicsquid.roots.potion;
 
 import epicsquid.roots.Roots;
+import epicsquid.roots.init.ModSounds;
+import epicsquid.roots.spell.SpellAugment;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -39,5 +43,13 @@ public class PotionReach extends Potion {
   @Override
   public boolean shouldRenderInvText(PotionEffect effect) {
     return true;
+  }
+
+  @Override
+  public void removeAttributesModifiersFromEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
+    super.removeAttributesModifiersFromEntity(entityLivingBaseIn, attributeMapIn, amplifier);
+    if (SpellAugment.instance.shouldPlaySound()) {
+      entityLivingBaseIn.playSound(ModSounds.Spells.REACH_EFFECT_END, SpellAugment.instance.getSoundVolume(), 1);
+    }
   }
 }

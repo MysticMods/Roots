@@ -4,15 +4,18 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.entity.spell.EntityIcicle;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageStormCloudGasFX;
 import epicsquid.roots.network.fx.MessageStormCloudStormFX;
 import epicsquid.roots.spell.SpellStormCloud;
+import epicsquid.roots.spell.SpellTimeStop;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.MobEffects;
@@ -135,5 +138,14 @@ public class PotionStormCloud extends Potion {
   public int getStatusIconIndex() {
     Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
     return super.getStatusIconIndex();
+  }
+
+
+  @Override
+  public void removeAttributesModifiersFromEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
+    super.removeAttributesModifiersFromEntity(entityLivingBaseIn, attributeMapIn, amplifier);
+    if (SpellStormCloud.instance.shouldPlaySound()) {
+      entityLivingBaseIn.playSound(ModSounds.Spells.STORM_CLOUD_END, SpellStormCloud.instance.getSoundVolume(), 1);
+    }
   }
 }

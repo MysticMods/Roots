@@ -2,6 +2,7 @@ package epicsquid.roots.potion;
 
 import epicsquid.roots.entity.ai.EntityAIPassiveAttackMelee;
 import epicsquid.roots.init.ModDamage;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.spell.SpellGeas;
@@ -55,6 +56,9 @@ public class PotionGeas extends Potion {
   @Override
   public void removeAttributesModifiersFromEntity(EntityLivingBase target, AbstractAttributeMap attributeMapIn, int amplifier) {
     super.removeAttributesModifiersFromEntity(target, attributeMapIn, amplifier);
+    if (SpellGeas.instance.shouldPlaySound()) {
+      target.playSound(ModSounds.Spells.GEAS_EFFECT_END, SpellGeas.instance.getSoundVolume(), 1);
+    }
     if (SlaveUtil.isSlave(target)) {
       EntityLivingBase slave = SlaveUtil.revert(target);
       target.world.spawnEntity(slave);

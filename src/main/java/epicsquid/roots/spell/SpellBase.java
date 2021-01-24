@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import epicsquid.mysticallib.util.ListUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
+import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.entity.spell.EntitySpellBase;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModItems;
@@ -45,7 +46,6 @@ import javax.annotation.Nullable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @SuppressWarnings("Duplicates")
 public abstract class SpellBase extends RegistryItem {
@@ -58,6 +58,7 @@ public abstract class SpellBase extends RegistryItem {
   private String name;
   protected int cooldown = 20;
   protected boolean disabled = false;
+  protected SpellConfig.SpellSoundsCategory.SpellSound sound = null;
 
   private TextFormatting textColor;
   protected EnumCastType castType = EnumCastType.INSTANTANEOUS;
@@ -114,6 +115,30 @@ public abstract class SpellBase extends RegistryItem {
   }
 
   public abstract void init();
+
+  public SpellConfig.SpellSoundsCategory.SpellSound getSound() {
+    return sound;
+  }
+
+  public void setSound(SpellConfig.SpellSoundsCategory.SpellSound sound) {
+    this.sound = sound;
+  }
+
+  public boolean shouldPlaySound () {
+    if (sound == null) {
+      return true;
+    } else {
+      return sound.enabled;
+    }
+  }
+
+  public float getSoundVolume() {
+    if (sound == null) {
+      return 1;
+    } else {
+      return (float) sound.volume;
+    }
+  }
 
   public boolean isDisabled() {
     return disabled;
@@ -378,8 +403,8 @@ public abstract class SpellBase extends RegistryItem {
 
     if (result != CastResult.FAIL && !caster.world.isRemote && (ticks == 0 || ticks == 72000)) {
       SoundEvent event = this.getCastSound();
-      if (event != null) {
-        caster.world.playSound(null, caster.getPosition(), event, SoundCategory.PLAYERS, 1, 1);
+      if (event != null && shouldPlaySound()) {
+        caster.world.playSound(null, caster.getPosition(), event, SoundCategory.PLAYERS, getSoundVolume(), 1);
       }
     }
     return result;

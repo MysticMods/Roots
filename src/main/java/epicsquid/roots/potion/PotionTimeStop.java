@@ -1,7 +1,12 @@
 package epicsquid.roots.potion;
 
 import epicsquid.roots.Roots;
+import epicsquid.roots.init.ModSounds;
+import epicsquid.roots.spell.SpellAugment;
+import epicsquid.roots.spell.SpellTimeStop;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
@@ -33,5 +38,13 @@ public class PotionTimeStop extends Potion {
   public int getStatusIconIndex() {
     Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
     return super.getStatusIconIndex();
+  }
+
+  @Override
+  public void removeAttributesModifiersFromEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
+    super.removeAttributesModifiersFromEntity(entityLivingBaseIn, attributeMapIn, amplifier);
+    if (SpellTimeStop.instance.shouldPlaySound()) {
+      entityLivingBaseIn.playSound(ModSounds.Spells.TIME_STOP_END, SpellTimeStop.instance.getSoundVolume(), 1);
+    }
   }
 }
