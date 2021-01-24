@@ -31,6 +31,7 @@ import net.minecraftforge.oredict.OreIngredient;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public class SpellShatter extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(0);
@@ -123,6 +124,10 @@ public class SpellShatter extends SpellBase {
     Vec3d eyes = new Vec3d(0, (double) player.getEyeHeight(), 0);
     RayTraceResult result = RayCastUtil.rayTraceBlocks(player.world, player.getPositionVector().add(eyes), player.getLookVec().scale(distance).add(player.getPositionVector().add(eyes)), false, false, false, false);
 
+    List<Function<ItemStack, ItemStack>> converters = new ArrayList<>();
+    if (info.has(SMELTING)) {
+      converters.add(SpellHarvest.instance::tryCook);
+    }
     AxisAlignedBB box = getBox(player, info, result);
     if (box == null) {
       return false;
@@ -156,7 +161,7 @@ public class SpellShatter extends SpellBase {
           if (info.has(VOID)) {
             player.world.destroyBlock(p, false);
           } else {
-            SpellNaturesScythe.instance.breakBlock(player.world, p, info, player);
+            SpellNaturesScythe.instance.breakBlock(player.world, p, info, player, converters);
           }
         }
         broke = true;

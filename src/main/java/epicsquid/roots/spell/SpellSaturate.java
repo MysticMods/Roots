@@ -307,7 +307,7 @@ public class SpellSaturate extends SpellBase {
       int excessFood = newFood - 20;
       if (excessSat > 0 || excessFood > 0) {
         int amount = MathHelper.ceil(excessSat) * Math.min(1, excessFood);
-        caster.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, info.ampInt(amount * resistance_duration), resistance_amplifier, false, false));
+        caster.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, info.speedAmpInt(amount * resistance_duration), resistance_amplifier, false, false));
       }
     }
 

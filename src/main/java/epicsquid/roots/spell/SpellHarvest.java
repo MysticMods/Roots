@@ -112,15 +112,15 @@ public class SpellHarvest extends SpellBase {
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     Harvest.prepare();
 
-    Function<ItemStack, ItemStack> converter = (o) -> o;
+    List<Function<ItemStack, ItemStack>> converters = new ArrayList<>();
     if (info.has(CRUSHING)) {
-      converter = converter.compose(this::tryCrush);
+      converters.add(this::tryCrush);
     }
     if (info.has(POISON)) {
-      converter = converter.compose(FoodPoisoning::replacement);
+      converters.add(FoodPoisoning::replacement);
     }
     if (info.has(COOKING)) {
-      converter = converter.compose(this::tryCook);
+      converters.add(this::tryCook);
     }
 
     int x = radius_x;
@@ -178,7 +178,19 @@ public class SpellHarvest extends SpellBase {
       IBlockState state = player.world.getBlockState(pos);
 
       if (!player.world.isRemote) {
-        List<ItemStack> blockDrops = Harvest.harvestReturnDrops(state, pos, player.world, player).stream().map(converter).collect(Collectors.toList());
+        List<ItemStack> origBlockDrops = Harvest.harvestReturnDrops(state, pos, player.world, player);
+        List<ItemStack> blockDrops;
+        if (converters.isEmpty()) {
+          blockDrops = origBlockDrops;
+        } else {
+          blockDrops = new ArrayList<>();
+          for (ItemStack orig : origBlockDrops) {
+            for (Function<ItemStack, ItemStack> converter : converters) {
+              orig = converter.apply(orig);
+            }
+            blockDrops.add(orig);
+          }
+        }
 
         if (info.has(MAGNETISM)) {
           drops.addAll(blockDrops);
@@ -194,7 +206,7 @@ public class SpellHarvest extends SpellBase {
     for (BlockPos pos : pumpkinsAndMelons) {
       count++;
       if (!player.world.isRemote) {
-        SpellNaturesScythe.instance.breakBlock(player.world, pos, info, player);
+        SpellNaturesScythe.instance.breakBlock(player.world, pos, info, player, converters);
         affectedPositions.add(pos);
       }
     }

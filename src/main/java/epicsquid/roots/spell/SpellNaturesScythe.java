@@ -33,12 +33,14 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.oredict.OreIngredient;
 
+import javax.annotation.Nullable;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public class SpellNaturesScythe extends SpellBase {
   private static final MethodHandle GET_SILK_DROP;
@@ -111,8 +113,8 @@ public class SpellNaturesScythe extends SpellBase {
       x *= 2;
     }
 
-    int interval = info.speedSubInt(this.interval);
-    if (interval != 0 && ticks % interval == 0) {
+    int interval = Math.max(1, info.speedSubInt(this.interval));
+    if (ticks % interval == 0) {
       return false;
     }
 
@@ -123,6 +125,8 @@ public class SpellNaturesScythe extends SpellBase {
       return false;
     }
 
+    List<Function<ItemStack, ItemStack>> converters = new ArrayList<>();
+
     for (int i = 0; i <= x; i++) {
       BlockPos pos = blocks.get(Util.rand.nextInt(blocks.size()));
 
@@ -130,7 +134,7 @@ public class SpellNaturesScythe extends SpellBase {
         if (info.has(VOID)) {
           world.destroyBlock(pos, false);
         } else {
-          breakBlock(world, pos, info, caster);
+          breakBlock(world, pos, info, caster, converters);
         }
         world.playSound(null, pos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 0.5f, 1f);
         PacketHandler.sendToAllTracking(new MessageFallBladesFX(pos.getX(), pos.getY(), pos.getZ(), false), world, pos);
@@ -144,7 +148,7 @@ public class SpellNaturesScythe extends SpellBase {
     return (block instanceof IShearable && ((IShearable) block).isShearable(SHEARS, world, pos)) || block.canSilkHarvest(world, pos, state, player);
   }
 
-  public void breakBlock(World world, BlockPos pos, StaffModifierInstanceList info, EntityPlayer player) {
+  public void breakBlock(World world, BlockPos pos, StaffModifierInstanceList info, EntityPlayer player, List<Function<ItemStack, ItemStack>> converters) {
     IBlockState state = world.getBlockState(pos);
     Block block = state.getBlock();
     int fortune = (info.has(SpellHarvest.FORTUNE) || info.has(FORTUNE) || info.has(SpellShatter.FORTUNE)) ? 2 : 0;
@@ -187,12 +191,9 @@ public class SpellNaturesScythe extends SpellBase {
     }
     boolean magnet = info.has(MAGNETISM) || info.has(SpellHarvest.MAGNETISM) || info.has(SpellShatter.MAGNETISM);
     for (ItemStack item : drops) {
-      if (info.has(SpellShatter.SMELTING)) {
-        int count = item.getCount();
-        ItemStack smelted = FurnaceRecipes.instance().getSmeltingResult(item);
-        if (!smelted.isEmpty()) {
-          item = smelted.copy();
-          item.setCount(count);
+      if (!converters.isEmpty()) {
+        for (Function<ItemStack, ItemStack> converter : converters) {
+          item = converter.apply(item);
         }
       }
       if (magnet) {

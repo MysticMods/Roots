@@ -103,14 +103,14 @@ public class SpellLifeDrain extends SpellBase {
           }
           e.attackEntityFrom(DamageSource.causeMobDamage(player), dam);
           if (e.rand.nextInt(info.ampSubInt(witherChance)) == 0) {
-            e.addPotionEffect(new PotionEffect(MobEffects.WITHER, info.ampInt(witherDuration), witherAmplification));
+            e.addPotionEffect(new PotionEffect(MobEffects.WITHER, info.speedAmpInt(witherDuration), witherAmplification));
           }
           if (info.has(SLOWING)) {
-            e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, info.ampInt(slow_duration), slow_amplifier));
+            e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, info.speedAmpInt(slow_duration), slow_amplifier));
           }
           if (info.has(FIRE)) {
-            e.setFire(fire_duration);
-            e.attackEntityFrom(ModDamage.fireDamageFrom(player), info.ampFloat(fire_damage));
+            e.setFire(info.speedAmpInt(fire_duration));
+            e.attackEntityFrom(ModDamage.fireDamageFrom(player), fire_damage);
           }
           e.setRevengeTarget(player);
           e.setLastAttackedEntity(player);
