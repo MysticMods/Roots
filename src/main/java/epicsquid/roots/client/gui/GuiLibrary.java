@@ -184,9 +184,11 @@ public class GuiLibrary extends GuiContainer {
 
         if (v != -1) {
           this.mc.getTextureManager().bindTexture(getTexture());
+          GlStateManager.disableLighting();
           GlStateManager.enableAlpha();
           this.drawTexturedModalRect(i2, j2, 0, 152 + v, 20, 20);
           GlStateManager.disableAlpha();
+          GlStateManager.enableLighting();
         }
       }
     }

@@ -193,9 +193,11 @@ public class GuiImposer extends GuiContainer {
 
         if (v != -1) {
           this.mc.getTextureManager().bindTexture(getTexture());
+          GlStateManager.disableLighting();
           GlStateManager.enableAlpha();
           this.drawTexturedModalRect(i2, j2, 176, v, 20, 20);
           GlStateManager.disableAlpha();
+          GlStateManager.enableLighting();
         }
       }
     }
