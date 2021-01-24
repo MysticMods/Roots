@@ -125,14 +125,12 @@ public class SpellAcidCloud extends SpellBase {
         // TODO: Enforce healing check
         // TODO: Additional visual effect
 
-
-        // e.attackEntityFrom(ModDamage.magicDamageFrom(player), info.ampFloat(night_damage * mod));
         if (info.has(HEALING)) {
           if (EntityUtil.isHostile(e) || EntityUtil.isHostileTo(e, player)) {
             continue;
           }
           if (regen_duration != -1) {
-            e.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, regen_duration, regen_amp));
+            e.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, info.speedAmpInt(regen_duration), regen_amp));
           }
           // TODO: Particle effect to denote entities being healed
           if (healing > 0) {
@@ -150,7 +148,7 @@ public class SpellAcidCloud extends SpellBase {
                 continue;
               }
               if (info.has(WEAKNESS)) {
-                e.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, info.ampInt(weakness_duration), weakness_amplifier));
+                e.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, info.speedAmpInt(weakness_duration), weakness_amplifier));
               }
               if (info.has(FIRE)) {
                 e.attackEntityFrom(ModDamage.fireDamageFrom(player), info.ampFloat(damage * modifier) / 2);
@@ -164,10 +162,10 @@ public class SpellAcidCloud extends SpellBase {
                 e.attackEntityFrom(ModDamage.radiantDamageFrom(player), info.ampFloat(undead_damage * modifier));
               }
               if (info.has(SLOWING)) {
-                e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, info.ampInt(slow_duration), slow_amplifier));
+                e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, info.speedAmpInt(slow_duration), slow_amplifier));
               }
               if (SpellConfig.spellFeaturesCategory.acidCloudPoisoningEffect) {
-                e.addPotionEffect(new PotionEffect(MobEffects.POISON, info.ampInt(poisonDuration), poisonAmplification));
+                e.addPotionEffect(new PotionEffect(MobEffects.POISON, info.speedAmpInt(poisonDuration), poisonAmplification));
               }
               e.setRevengeTarget(player);
               e.setLastAttackedEntity(player);

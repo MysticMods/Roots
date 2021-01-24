@@ -162,13 +162,13 @@ public class SpellDisarm extends SpellBase {
         if (disarmed) {
           if (!world.isRemote) {
             if (info.has(POISON)) {
-              entity.addPotionEffect(new PotionEffect(MobEffects.POISON, poison_duration, poison_amplifier));
+              entity.addPotionEffect(new PotionEffect(MobEffects.POISON, info.speedAmpInt(poison_duration), poison_amplifier));
             }
             if (info.has(FIRE)) {
               entity.setFire(fire_duration);
             }
             if (info.has(WEAKNESS)) {
-              entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, info.ampInt(weakness_duration), weakness_amplifier));
+              entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, info.speedAmpInt(weakness_duration), weakness_amplifier));
             }
             if (info.has(KNOCKBACK)) {
               entity.knockBack(caster, knockback, caster.posX - entity.posX, caster.posZ - entity.posZ);

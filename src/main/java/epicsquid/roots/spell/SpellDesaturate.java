@@ -176,7 +176,7 @@ public class SpellDesaturate extends SpellBase {
           }
         } else if (info.has(SHIELD)) {
           // TODO: Visual
-          caster.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, (int) (shield_base * overheal), shield_amplifier, false, false));
+          caster.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, info.speedAmpInt((int) (shield_base * overheal)), shield_amplifier, false, false));
           // Add a shield
         } else if (info.has(DAMAGE)) {
           List<EntityLivingBase> entities = caster.world.getEntitiesWithinAABB(EntityLivingBase.class, box.offset(caster.getPosition()), EntityUtil::isHostile);
@@ -195,12 +195,12 @@ public class SpellDesaturate extends SpellBase {
             int targ = Util.rand.nextInt(entities.size());
             EntityLivingBase target = entities.remove(targ);
             // TODO: Visual
-            target.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, (int) (levitation_duration * overheal), 0));
+            target.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, info.speedAmpInt((int) (levitation_duration * overheal)), 0));
             count++;
           }
         } else if (info.has(RESISTANCE)) {
           // TODO: Visual
-          caster.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, (int) (resistance_base * overheal), resistance_amplifier, false, false));
+          caster.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, info.speedAmpInt((int) (resistance_base * overheal)), resistance_amplifier, false, false));
           // Grant resistance
         } else if (info.has(PURIFY)) {
           Potion pot = null;

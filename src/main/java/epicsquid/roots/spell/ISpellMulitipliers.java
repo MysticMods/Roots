@@ -139,6 +139,42 @@ public interface ISpellMulitipliers {
     return MathHelper.floor(value - value * getSpeedValue());
   }
 
+  default int speedAmpInt(int value) {
+    return MathHelper.floor(value + value * getSpeedValue());
+  }
+
+  default int speedAmpInt(float value) {
+    return MathHelper.floor(value + value * getSpeedValue());
+  }
+
+  default int speedAmpInt(double value) {
+    return MathHelper.floor(value + value * getSpeedValue());
+  }
+
+  default float speedAmpFloat(int value) {
+    return (float) (value + value * getSpeedValue());
+  }
+
+  default float speedAmpFloat(float value) {
+    return (float) (value + value * getSpeedValue());
+  }
+
+  default float speedAmpFloat(double value) {
+    return (float) (value + value * getSpeedValue());
+  }
+
+  default double speedAmpDouble(int value) {
+    return value + value * getSpeedValue();
+  }
+
+  default double speedAmpDouble(double value) {
+    return value + value * getSpeedValue();
+  }
+
+  default double speedAmpDouble(float value) {
+    return value + value * getSpeedValue();
+  }
+
   enum Buff {
     NONE, BONUS, GREATER_BONUS
   }

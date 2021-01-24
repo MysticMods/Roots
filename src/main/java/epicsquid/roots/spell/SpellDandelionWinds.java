@@ -237,13 +237,13 @@ public class SpellDandelionWinds extends SpellBase {
     }
     flingEntity(e, lookVec, motion, info);
     if (info.has(SLOW_FALL)) {
-      e.addPotionEffect(new PotionEffect(ModPotions.slow_fall, slow_duration, 0, false, false));
+      e.addPotionEffect(new PotionEffect(ModPotions.slow_fall, info.speedAmpInt(slow_duration), 0, false, false));
     }
     if (info.has(POISON)) {
-      e.addPotionEffect(new PotionEffect(MobEffects.POISON, poison_duration, poison_amplifier));
+      e.addPotionEffect(new PotionEffect(MobEffects.POISON, info.speedAmpInt(poison_duration), poison_amplifier));
     }
     if (info.has(FIRE)) {
-      e.setFire(fire_duration);
+      e.setFire(info.speedAmpInt(fire_duration));
     }
   }
 
