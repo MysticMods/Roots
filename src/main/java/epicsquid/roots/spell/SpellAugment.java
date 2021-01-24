@@ -103,15 +103,15 @@ public class SpellAugment extends SpellBase {
     boolean acted = false;
     if (info.has(REACH)) {
       acted = true;
-      player.addPotionEffect(new PotionEffect(ModPotions.reach, info.ampInt(reach_duration), 0, false, false));
+      player.addPotionEffect(new PotionEffect(ModPotions.reach, info.speedAmpInt(reach_duration), 0, false, false));
     }
     if (info.has(SPEED)) {
       acted = true;
-      player.addPotionEffect(new PotionEffect(MobEffects.SPEED, info.ampInt(speed_duration), speed_amplifier, false, false));
+      player.addPotionEffect(new PotionEffect(MobEffects.SPEED, info.speedAmpInt(speed_duration), speed_amplifier, false, false));
     }
     if (info.has(SLOW_FALL)) {
       acted = true;
-      player.addPotionEffect(new PotionEffect(ModPotions.slow_fall, info.ampInt(slow_fall), 0, false, false));
+      player.addPotionEffect(new PotionEffect(ModPotions.slow_fall, info.speedAmpInt(slow_fall), 0, false, false));
     }
     if (info.has(LIGHT_DRIFTER)) {
       acted = true;
@@ -119,7 +119,7 @@ public class SpellAugment extends SpellBase {
         player.capabilities.disableDamage = true;
         player.capabilities.allowFlying = true;
         player.noClip = true;
-        player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, drifter_duration);
+        player.getEntityData().setInteger(Constants.LIGHT_DRIFTER_TAG, info.speedAmpInt(drifter_duration));
         player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_X, player.posX);
         player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_Y, player.posY);
         player.getEntityData().setDouble(Constants.LIGHT_DRIFTER_Z, player.posZ);
@@ -148,15 +148,15 @@ public class SpellAugment extends SpellBase {
     }
     if (info.has(LUCK)) {
       acted = true;
-      player.addPotionEffect(new PotionEffect(MobEffects.LUCK, info.ampInt(luck_duration), luck_amplifier, false, false));
+      player.addPotionEffect(new PotionEffect(MobEffects.LUCK, info.speedAmpInt(luck_duration), luck_amplifier, false, false));
     }
     if (info.has(STRENGTH)) {
       acted = true;
-      player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, info.ampInt(strength_duration), strength_amplifier, false, false));
+      player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, info.speedAmpInt(strength_duration), strength_amplifier, false, false));
     }
     if (info.has(ABSORPTION)) {
       acted = true;
-      player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, info.ampInt(absorption_duration), absorption_amplifier, false, false));
+      player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, info.speedAmpInt(absorption_duration), absorption_amplifier, false, false));
     }
     if (info.has(SECOND_WIND)) {
       int air = player.getAir();
@@ -170,7 +170,7 @@ public class SpellAugment extends SpellBase {
     }
     if (info.has(HASTE)) {
       acted = true;
-      player.addPotionEffect(new PotionEffect(MobEffects.HASTE, info.ampInt(haste_duration), haste_amplifier, false, false));
+      player.addPotionEffect(new PotionEffect(MobEffects.HASTE, info.speedAmpInt(haste_duration), haste_amplifier, false, false));
     }
     return acted;
   }

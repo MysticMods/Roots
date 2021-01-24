@@ -91,19 +91,19 @@ public class SpellAquaBubble extends SpellBase {
       dur2 += resistance_duration * amplifier;
     }
     if (!caster.world.isRemote) {
-      caster.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, info.ampInt(dur), 0, false, false));
+      caster.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, info.speedAmpInt(dur), 0, false, false));
       caster.getEntityData().setIntArray(getCachedName(), info.toArray());
       if (info.has(RESISTANCE)) {
-        caster.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, info.ampInt(dur2), resistance_amplifier));
+        caster.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, info.speedAmpInt(dur2), resistance_amplifier));
       }
       if (info.has(FAMILIARS)) {
         List<EntityLivingBase> entities = caster.world.getEntitiesWithinAABB(EntityLivingBase.class, radius.offset(caster.getPosition()), o -> EntityUtil.isFamiliar(caster, o));
         if (!entities.isEmpty()) {
           EntityLivingBase other = entities.get(Util.rand.nextInt(entities.size()));
-          other.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, info.ampInt(dur)/*, 0, false, false*/));
+          other.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, info.speedAmpInt(dur)/*, 0, false, false*/));
           other.getEntityData().setIntArray(getCachedName(), info.toArray());
           if (info.has(RESISTANCE)) {
-            other.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, info.ampInt(dur2), resistance_amplifier));
+            other.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, info.speedAmpInt(dur2), resistance_amplifier));
           }
         }
       }

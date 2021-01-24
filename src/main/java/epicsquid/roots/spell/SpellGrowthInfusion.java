@@ -50,16 +50,19 @@ public class SpellGrowthInfusion extends SpellBase {
   public static Property<Integer> PROP_RADIUS_BREED_Y = new Property<>("radius_breed_y", 6).setDescription("radius on the Y axis of the area in which the spell takes effect for the purposes of causing animals to go into breeding mode");
   public static Property<Integer> PROP_RADIUS_BREED_Z = new Property<>("radius_breed_z", 6).setDescription("radius on the Z axis of the area in which the spell takes effect for the purposes of causing animals to go into breeding mode");
   public static Property<Integer> PROP_RADIUS_BOOST = new Property<>("radius_boost", 8).setDescription("how much the radius of the spell is boosted by with each rampant growth modifier");
-  public static Property<Integer> PROP_TICKS = new Property<>("ticks", 3).setDescription("the number of times a random chance to grow the crop is applied every tick");
+  public static Property<Integer> PROP_GROWTH_TICKS = new Property<>("growth_ticks", 3).setDescription("the number of times a random chance to grow the crop is applied every tick");
   public static Property<Integer> PROP_COUNT = new Property<>("count", 2).setDescription("the number of crops selected to be grown each tick");
   public static Property<Integer> PROP_ADDITIONAL_COUNT = new Property<>("additional_count", 4).setDescription("an additional number of crops from zero to the specified value minus 1 added to the default count");
   public static Property<Float> PROP_EMBIGGEN_CHANCE = new Property<>("embiggen_chance", 0.05f).setDescription("chance per tick to turn a mushroom into a big mushroom");
   public static Property<Integer> PROP_ANIMAL_GROWTH = new Property<>("animal_growth_base", 20).setDescription("default number of ticks to age an entity by (1 second per channel)");
   public static Property<Integer> PROP_ANIMAL_GROWTH_VARY = new Property<>("animal_growth_vary", 4 * 20).setDescription("additional ticks to age an entity by (varying from 0 to this value)");
+  public static Property<Integer> PROP_ANIMAL_GROWTH_INTERVAL = new Property<>("animal_growth_interval", 20).setDescription("how frequently additional ticks are added to an enttity");
   public static Property<Integer> PROP_VILLAGER_GROWTH = new Property<>("villager_growth_base", 20).setDescription("default number of ticks to age an entity by (1 second per channel)");
   public static Property<Integer> PROP_VILLAGER_GROWTH_VARY = new Property<>("villager_growth_vary", 4 * 20).setDescription("additional ticks to age an entity by (varying from 0 to this value)");
+  public static Property<Integer> PROP_VILLAGER_GROWTH_INTERVAL = new Property<>("villager_growth_interval", 20).setDescription("how frequently additional ticks are added to an enttity");
   public static Property<String> PROP_STONE_DICT = new Property<>("stone_dictionary", "stone").setDescription("the ore dictionary entry that should be used to determine if a block can be targetted for ore conversion");
   public static Property<Float> PROP_STONE_CHANCE = new Property<>("stone_chance", 0.01f).setDescription("the chance per tick of eligible stone being converted to ore");
+  public static Property<Integer> PROP_STONE_INTERVAL = new Property<>("stone_interval", 40).setDescription("how often as an interval ore should try to be converted from stone");
 
   public static Modifier RADIUS1 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "rampant_growth_i"), ModifierCores.PERESKIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.275)));
   public static Modifier BREED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "rampant_breeding"), ModifierCores.WILDEWHEET, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 0.345)));
@@ -84,13 +87,13 @@ public class SpellGrowthInfusion extends SpellBase {
   public static SpellGrowthInfusion instance = new SpellGrowthInfusion(spellName);
 
   private AxisAlignedBB breedingBox;
-  private int radius_x, radius_y, radius_z, ticks, additional_count, count, radius_boost, radius_breed_x, radius_breed_y, radius_breed_z, animal_growth, animal_growth_vary, villager_growth, villager_growth_vary;
+  private int radius_x, radius_y, radius_z, growth_ticks, additional_count, count, radius_boost, radius_breed_x, radius_breed_y, radius_breed_z, animal_growth, animal_growth_vary, villager_growth, villager_growth_vary, animal_growth_interval, villager_growth_interval, stone_interval;
   private float embiggen_chance, stone_chance;
   private String stone_dict;
 
   public SpellGrowthInfusion(ResourceLocation name) {
     super(name, TextFormatting.YELLOW, 48f / 255f, 255f / 255f, 48f / 255f, 192f / 255f, 255f / 255f, 192f / 255f);
-    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_TICKS, PROP_COUNT, PROP_ADDITIONAL_COUNT, PROP_RADIUS_BOOST, PROP_RADIUS_BREED_X, PROP_RADIUS_BREED_Y, PROP_RADIUS_BREED_Z, PROP_EMBIGGEN_CHANCE, PROP_ANIMAL_GROWTH, PROP_ANIMAL_GROWTH_VARY, PROP_STONE_CHANCE, PROP_STONE_DICT, PROP_VILLAGER_GROWTH, PROP_VILLAGER_GROWTH_VARY);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_GROWTH_TICKS, PROP_COUNT, PROP_ADDITIONAL_COUNT, PROP_RADIUS_BOOST, PROP_RADIUS_BREED_X, PROP_RADIUS_BREED_Y, PROP_RADIUS_BREED_Z, PROP_EMBIGGEN_CHANCE, PROP_ANIMAL_GROWTH, PROP_ANIMAL_GROWTH_VARY, PROP_STONE_CHANCE, PROP_STONE_DICT, PROP_VILLAGER_GROWTH, PROP_VILLAGER_GROWTH_VARY, PROP_ANIMAL_GROWTH_INTERVAL, PROP_VILLAGER_GROWTH_INTERVAL, PROP_STONE_INTERVAL);
     acceptsModifiers(RADIUS1, BREED, FLOWERS, VILLAGERS, RADIUS2, EMBIGGEN, RADIUS3, ANIMAL_GROWTH, ORE, HYDRATE);
   }
 
@@ -128,7 +131,7 @@ public class SpellGrowthInfusion extends SpellBase {
       }
     }
 
-    if (info.has(ANIMAL_GROWTH)) {
+    if (info.has(ANIMAL_GROWTH) && ticks % info.speedSubInt(animal_growth_interval) == 0) {
       List<EntityAnimal> animals = player.world.getEntitiesWithinAABB(EntityAnimal.class, breedingBox.offset(player.getPosition()), EntityAgeable::isChild);
       if (!animals.isEmpty()) {
         didSomething = true;
@@ -157,7 +160,7 @@ public class SpellGrowthInfusion extends SpellBase {
         for (int i = 0; i < info.ampInt(count) + player.world.rand.nextInt((info.ampSubInt(additional_count))); i++) {
           BlockPos pos = positions.get(player.world.rand.nextInt(positions.size()));
           IBlockState state = player.world.getBlockState(pos);
-          for (int j = 0; j < this.ticks; j++) {
+          for (int j = 0; j < this.growth_ticks; j++) {
             state.getBlock().randomTick(player.world, pos, state, Util.rand);
           }
           if (info.has(HYDRATE)) {
@@ -177,7 +180,7 @@ public class SpellGrowthInfusion extends SpellBase {
       RayCastUtil.RayTraceAndEntityResult entityResult = RayCastUtil.rayTraceMouseOver(player, 8.0d);
       Entity resultEntity = entityResult.getPointedEntity();
       if (resultEntity != null) {
-        if (info.has(VILLAGERS) && resultEntity instanceof EntityVillager) {
+        if (info.has(VILLAGERS) && resultEntity instanceof EntityVillager && ticks % info.speedSubInt(villager_growth_interval) == 0) {
           // TODO public net.minecraft.entity.passive.EntityVillager field_70961_j # timeUntilReset
           EntityVillager villager = (EntityVillager) resultEntity;
           if (!villager.isChild()) {
@@ -230,7 +233,7 @@ public class SpellGrowthInfusion extends SpellBase {
           }
 
           // TODO: Stone -> ore conversion
-          if (info.has(ORE)) {
+          if (info.has(ORE) && ticks % info.speedSubInt(stone_interval) == 0) {
             if (OreDictCache.matches(this.stone_dict, state) && Util.rand.nextFloat() < this.stone_chance) {
               didSomething = true;
               if (!player.world.isRemote) {
@@ -242,7 +245,7 @@ public class SpellGrowthInfusion extends SpellBase {
           // Test for growth last
           if (!didSomething && Growth.canGrow(player.world, pos, state)) {
             if (!player.world.isRemote) {
-              for (int i = 0; i < info.ampInt(ticks); i++) {
+              for (int i = 0; i < info.ampInt(growth_ticks); i++) {
                 state.getBlock().randomTick(player.world, pos, state, new Random());
               }
               if (info.has(HYDRATE)) {
@@ -271,7 +274,7 @@ public class SpellGrowthInfusion extends SpellBase {
     this.radius_breed_x = properties.get(PROP_RADIUS_BREED_X);
     this.radius_breed_y = properties.get(PROP_RADIUS_BREED_Y);
     this.radius_breed_z = properties.get(PROP_RADIUS_BREED_Z);
-    this.ticks = properties.get(PROP_TICKS);
+    this.growth_ticks = properties.get(PROP_GROWTH_TICKS);
     this.count = properties.get(PROP_COUNT);
     this.additional_count = properties.get(PROP_ADDITIONAL_COUNT);
     this.radius_boost = properties.get(PROP_RADIUS_BOOST);
@@ -279,9 +282,12 @@ public class SpellGrowthInfusion extends SpellBase {
     this.embiggen_chance = properties.get(PROP_EMBIGGEN_CHANCE);
     this.animal_growth = properties.get(PROP_ANIMAL_GROWTH);
     this.animal_growth_vary = properties.get(PROP_ANIMAL_GROWTH_VARY);
+    this.animal_growth_interval = properties.get(PROP_ANIMAL_GROWTH_INTERVAL);
     this.villager_growth = properties.get(PROP_VILLAGER_GROWTH);
     this.villager_growth_vary = properties.get(PROP_VILLAGER_GROWTH_VARY);
+    this.villager_growth_interval = properties.get(PROP_VILLAGER_GROWTH_INTERVAL);
     this.stone_chance = properties.get(PROP_STONE_CHANCE);
     this.stone_dict = properties.get(PROP_STONE_DICT);
+    this.stone_interval = properties.get(PROP_STONE_INTERVAL);
   }
 }

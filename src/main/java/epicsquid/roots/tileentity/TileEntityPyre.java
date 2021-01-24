@@ -678,21 +678,24 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
 
   @Nullable
   public RitualBase getCurrentRitual() {
-    if (currentRitual == null) {
-      currentRitual = RitualRegistry.getRitual(this, null);
-    }
-    return currentRitual;
+    return RitualRegistry.getRitual(this, null);
   }
 
   @Nullable
   public PyreCraftingRecipe getCurrentRecipe() {
-    if (currentRecipe == null) {
-      List<ItemStack> stacks = new ArrayList<>();
-      for (int i = 0; i < inventory.getSlots(); i++) {
-        ItemStack stack = inventory.getStackInSlot(i);
-        stacks.add(stack);
+    List<ItemStack> stacks = new ArrayList<>();
+    for (int i = 0; i < inventory.getSlots(); i++) {
+      ItemStack stack = inventory.getStackInSlot(i);
+      stacks.add(stack);
+    }
+    if (lastRecipeUsed != null && lastRecipeUsed.matches(stacks)) {
+      if (currentRecipe != lastRecipeUsed) {
+        currentRecipe = lastRecipeUsed;
       }
-
+    } else if (lastRecipeUsed != null && lastRecipeUsed == currentRecipe) {
+      currentRecipe = null;
+    }
+    if (currentRecipe == null) {
       currentRecipe = ModRecipes.getCraftingRecipe(stacks);
     }
     return currentRecipe;
