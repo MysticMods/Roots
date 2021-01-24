@@ -288,7 +288,7 @@ public class EventManager {
 
   @SubscribeEvent
   public static void onFall(LivingFallEvent event) {
-    if (event.getEntityLiving() instanceof EntityPlayer) {
+    if (event.getEntityLiving() instanceof EntityPlayer && !event.getEntityLiving().world.isRemote) {
       if (EntityBoost.safe((EntityPlayer) event.getEntityLiving())) {
         event.setDamageMultiplier(0);
       }
