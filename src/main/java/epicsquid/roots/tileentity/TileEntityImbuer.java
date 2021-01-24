@@ -7,7 +7,6 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModSounds;
-import epicsquid.roots.item.ItemStaff;
 import epicsquid.roots.network.fx.MessageImbueCompleteFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.FakeSpell;
@@ -101,7 +100,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
       int slot = -1;
       if (heldItem.getItem() == ModItems.spell_dust) {
         slot = 0;
-      } else if (heldItem.getItem() == ModItems.staff || heldItem.getItem() == ModItems.gramary) {
+      } else if (/*heldItem.getItem() == ModItems.staff || */heldItem.getItem() == ModItems.gramary) {
         slot = 1;
       }
       if (slot != -1) {
@@ -226,19 +225,19 @@ public class TileEntityImbuer extends TileBase implements ITickable {
         progress = 0;
         if (!world.isRemote) {
           ItemStack inSlot = inventory.getStackInSlot(1);
-          if ((inSlot.getItem() == ModItems.staff || inSlot.getItem() == ModItems.gramary) && spell != FakeSpell.INSTANCE) {
-            boolean ejectItem = inSlot.getItem() != ModItems.gramary;
+          if ((/*inSlot.getItem() == ModItems.staff || */inSlot.getItem() == ModItems.gramary) && spell != FakeSpell.INSTANCE) {
+            /*            boolean ejectItem = inSlot.getItem() != ModItems.gramary;*/
             if (inserter == null) {
               Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
             } else {
-              if (inSlot.getItem() == ModItems.staff) {
+/*              if (inSlot.getItem() == ModItems.staff) {
                 ItemStaff.createData(inSlot, capability);
-              }
+              }*/
               SpellLibraryData library = SpellLibraryRegistry.getData(inserter);
               library.addSpell(spell);
-              if (ejectItem) {
+/*              if (ejectItem) {
                 world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inSlot));
-              }
+              }*/
               PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(spell.getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
               if (inserter != null) {
                 EntityPlayerMP player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(inserter);
@@ -246,10 +245,10 @@ public class TileEntityImbuer extends TileBase implements ITickable {
               }
             }
             inventory.extractItem(0, 1, false);
-            if (ejectItem) {
-              inventory.extractItem(1, 1, false);
-              world.playSound(null, getPos(), ModSounds.Events.IMBUER_FINISHED, SoundCategory.BLOCKS, 1f, 1f);
-            }
+            world.playSound(null, getPos(), ModSounds.Events.IMBUER_FINISHED, SoundCategory.BLOCKS, 1f, 1f);
+            /*if (ejectItem) {
+              inventory.extractItem(1, 1, false);*/
+
             markDirty();
             updatePacketViaState();
           } else {
