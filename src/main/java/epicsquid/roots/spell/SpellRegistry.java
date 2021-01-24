@@ -70,7 +70,7 @@ public class SpellRegistry {
     spellRegistry.put(SpellFeyLight.spellName, SpellFeyLight.instance);
     SpellFeyLight.instance.setDisabled(SpellConfig.disableSpellsCategory.disableFeyLight);
     spellRegistry.put(SpellStormCloud.spellName, SpellStormCloud.instance);
-    SpellStormCloud.instance.setDisabled(SpellConfig.disableSpellsCategory.disableWinterCloud);
+    SpellStormCloud.instance.setDisabled(SpellConfig.disableSpellsCategory.disbleStormCloud);
     SpellSaturate.instance.setDisabled(SpellConfig.disableSpellsCategory.disableSaturate);
     spellRegistry.put(SpellSaturate.spellName, SpellSaturate.instance);
     SpellDesaturate.instance.setDisabled(SpellConfig.disableSpellsCategory.disableDesaturate);
