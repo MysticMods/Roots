@@ -141,6 +141,18 @@ public class Modifier extends RegistryItem implements IModifier {
           Herb herb = actualCost.getKey();
           result.put(herb, val + val * cost.getValue());
         }
+      } else if (cost.getCost() == CostType.SPECIFIC_COST_ADJUSTMENT) {
+        for (Object2DoubleMap.Entry<Herb> actualCost : costs.object2DoubleEntrySet()) {
+          double val = actualCost.getDoubleValue();
+          Herb herb = actualCost.getKey();
+          result.put(herb, val + cost.getValue());
+        }
+      } else if (cost.getCost() == CostType.SPECIFIC_COST_MULTIPLIER) {
+        for (Object2DoubleMap.Entry<Herb> actualCost : costs.object2DoubleEntrySet()) {
+          double val = actualCost.getDoubleValue();
+          Herb herb = actualCost.getKey();
+          result.put(herb, val + val * cost.getValue());
+        }
       }
     }
 
