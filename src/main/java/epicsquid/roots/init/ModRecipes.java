@@ -3,6 +3,7 @@ package epicsquid.roots.init;
 import com.google.common.collect.Lists;
 import epicsquid.mysticallib.event.RegisterModRecipesEvent;
 import epicsquid.mysticallib.recipe.factories.AccessibleCompoundIngredient;
+import epicsquid.mysticallib.recipe.factories.MultiOreIngredient;
 import epicsquid.mysticallib.recipe.factories.OreFallbackIngredient;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
@@ -1376,7 +1377,7 @@ public class ModRecipes {
 
     addFeyCraftingRecipe("runestone",
         new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(ModBlocks.runestone), 8), 1).addIngredients(
-            new OreIngredient("dyeBlue"),
+            new MultiOreIngredient("gemLapis", "dustRedstone", "dustGlowstone", "dustPrismarine", "gemPrismarine", "gemEmerald", "gemDiamond"),
             new OreIngredient("stone"),
             new OreIngredient("stone"),
             new OreIngredient("stone"),
