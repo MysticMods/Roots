@@ -192,19 +192,19 @@ public class SpellRadiance extends SpellBase {
                     e.setRevengeTarget(player);
                     player.setLastAttackedEntity(e);
                     if (info.has(WITHER)) {
-                      e.addPotionEffect(new PotionEffect(MobEffects.WITHER, info.ampInt(wither_duration)));
+                      e.addPotionEffect(new PotionEffect(MobEffects.WITHER, info.speedAmpInt(wither_duration)));
                     }
                     if (info.has(GLOWING)) {
-                      e.addPotionEffect(new PotionEffect(MobEffects.GLOWING, info.ampInt(glow_duration)));
+                      e.addPotionEffect(new PotionEffect(MobEffects.GLOWING, info.speedAmpInt(glow_duration)));
                     }
                     if (info.has(POISON)) {
-                      e.addPotionEffect(new PotionEffect(MobEffects.POISON, info.ampInt(poison_duration), poison_amplifier));
+                      e.addPotionEffect(new PotionEffect(MobEffects.POISON, info.speedAmpInt(poison_duration), poison_amplifier));
                     }
                     if (info.has(FIRE)) {
-                      e.setFire(info.ampInt(fire_duration));
+                      e.setFire(info.speedAmpInt(fire_duration));
                     }
                     if (info.has(SLOW)) {
-                      e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, info.ampInt(slowness_duration), slowness_amplifier));
+                      e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, info.speedAmpInt(slowness_duration), slowness_amplifier));
                     }
 
                     count++;

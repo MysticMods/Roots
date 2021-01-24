@@ -110,20 +110,20 @@ public class EntityThornTrap extends EntitySpellModifiable<SpellRoseThorns> {
                 entity.attackEntityFrom(ModDamage.roseDamageFrom(player), modifiers.ampFloat(SpellRoseThorns.instance.undead_damage));
               }
               if (modifiers.has(SpellRoseThorns.STRENGTH)) {
-                player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, modifiers.ampInt(SpellRoseThorns.instance.strength_duration), SpellRoseThorns.instance.slowness_amplifier, false, false));
+                player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, modifiers.speedAmpInt(SpellRoseThorns.instance.strength_duration), SpellRoseThorns.instance.slowness_amplifier, false, false));
               }
               if (modifiers.has(SpellRoseThorns.FIRE)) {
-                int fire_dur = modifiers.ampInt(SpellRoseThorns.instance.fire_duration);
+                int fire_dur = modifiers.speedAmpInt(SpellRoseThorns.instance.fire_duration);
                 entity.setFire(fire_dur);
               }
               if (modifiers.has(SpellRoseThorns.WEAKNESS)) {
-                entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, modifiers.ampInt(SpellRoseThorns.instance.weakness_duration), SpellRoseThorns.instance.weakness_amplifier));
+                entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, modifiers.speedAmpInt(SpellRoseThorns.instance.weakness_duration), SpellRoseThorns.instance.weakness_amplifier));
               }
               if (modifiers.has(SpellRoseThorns.SLOW)) {
-                entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, modifiers.ampInt(SpellRoseThorns.instance.slowness_duration), SpellRoseThorns.instance.slowness_amplifier));
+                entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, modifiers.speedAmpInt(SpellRoseThorns.instance.slowness_duration), SpellRoseThorns.instance.slowness_amplifier));
               }
               if (modifiers.has(SpellRoseThorns.POISON)) {
-                entity.addPotionEffect(new PotionEffect(MobEffects.POISON, modifiers.ampInt(SpellRoseThorns.instance.poison_duration), SpellRoseThorns.instance.poison_amplifier));
+                entity.addPotionEffect(new PotionEffect(MobEffects.POISON, modifiers.speedAmpInt(SpellRoseThorns.instance.poison_duration), SpellRoseThorns.instance.poison_amplifier));
               }
               if (modifiers.has(SpellRoseThorns.BOOST)) {
                 entity.motionY = SpellRoseThorns.instance.knockup;

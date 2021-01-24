@@ -79,7 +79,7 @@ public class SpellStormCloud extends SpellBase {
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     World world = player.world;
     if (!world.isRemote) {
-      player.addPotionEffect(new PotionEffect(ModPotions.storm_cloud, info.ampInt(duration), 0, false, false));
+      player.addPotionEffect(new PotionEffect(ModPotions.storm_cloud, info.speedAmpInt(duration), 0, false, false));
       player.getEntityData().setIntArray(getCachedName(), info.toArray());
       world.playSound(null, player.getPosition(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 2f);
     }
