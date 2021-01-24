@@ -112,6 +112,20 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
             result.add(I18n.format("roots.tooltip.modifier.increased_cost", Math.floor(cost.getValue() * 100) + "%"));
           }
           break;
+        case SPECIFIC_COST_ADJUSTMENT:
+          if (cost.getValue() < 0) {
+            result.add(I18n.format("roots.tooltip.modifier.specific_decreased_cost", cost.getHerb().getName(), Math.floor(cost.getValue() * 100) + "%"));
+          } else {
+            result.add(I18n.format("roots.tooltip.modifier.specific_increased_cost", cost.getHerb().getName(), Math.floor(cost.getValue() * 100) + "%"));
+          }
+          break;
+        case SPECIFIC_COST_MULTIPLIER:
+          if (cost.getValue() < 0) {
+            result.add(I18n.format("roots.tooltip.modifier.specific_decreased_cost", cost.getHerb().getName(), Math.floor(cost.getValue() * 100) + "%"));
+          } else {
+            result.add(I18n.format("roots.tooltip.modifier.specific_increased_cost", cost.getHerb().getName(), Math.floor(cost.getValue() * 100) + "%"));
+          }
+          break;
         default:
       }
     }

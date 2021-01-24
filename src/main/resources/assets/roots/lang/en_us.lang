@@ -152,6 +152,8 @@ roots.tooltip.modifier.additional_cost=Additional cost of %s: x%s
 roots.tooltip.modifier.no_cost=No cost.
 roots.tooltip.modifier.increased_cost=All herb costs increased by %s
 roots.tooltip.modifier.decreased_cost=All herb costs decreased by %s
+roots.tooltip.modifier.specific_increased_cost=Increases cost of %s by %s.
+roots.tooltip.modifier.specific_decreased_cost=Decreases cost of %s by %s.
 roots.tooltip.modifier.enabled=Enabled.
 roots.tooltip.modifier.disabled=Disabled.
 

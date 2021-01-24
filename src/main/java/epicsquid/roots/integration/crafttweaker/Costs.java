@@ -28,6 +28,12 @@ public class Costs {
   @ZenProperty
   @ZenDocProperty(order = 3, description = "Modifies all existing costs")
   public static final Cost all_cost_multiplier = new Cost("all_cost_multiplier", CostType.ALL_COST_MULTIPLIER);
+  @ZenProperty
+  @ZenDocProperty(order = 4, description = "Adjusts a specific cost")
+  public static final Cost specific_cost_adjustment = new Cost("specific_cost_adjustment", CostType.SPECIFIC_COST_ADJUSTMENT);
+  @ZenProperty
+  @ZenDocProperty(order = 5, description = "Multiplies a specific cost")
+  public static final Cost specific_cost_multiplier = new Cost("specific_cost_multiplier", CostType.SPECIFIC_COST_MULTIPLIER);
 
   @ZenRegister
   @ZenClass("mods." + Roots.MODID + ".Cost")
