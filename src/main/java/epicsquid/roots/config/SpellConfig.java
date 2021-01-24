@@ -195,7 +195,6 @@ public class SpellConfig {
     @Config.Comment("Sounds settings for Wild Fire Spell")
     public SpellSound soundWildFire = new SpellSound();
 
-
     public static class SpellSound {
       @Config.Name("Enable sound")
       @Config.Comment("Set to false to prevent the sounds for this spell from being played")
