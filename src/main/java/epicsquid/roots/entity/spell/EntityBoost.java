@@ -140,7 +140,9 @@ public class EntityBoost extends Entity {
         Entity[] result = getTargets();
         if (result != null) {
           EntityPlayer player = (EntityPlayer) result[0];
-          markSafe(player);
+          if (this.modifiers.has(SpellSkySoarer.NO_FALL_DAMAGE)) {
+            markSafe(player);
+          }
           Entity target = result[1];
           boolean boat = target instanceof EntityBoat;
           this.posX = player.posX;
