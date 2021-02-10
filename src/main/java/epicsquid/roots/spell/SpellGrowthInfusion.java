@@ -146,12 +146,18 @@ public class SpellGrowthInfusion extends SpellBase {
     }
 
     boolean aoe = false;
-    if (info.has(RADIUS1) || info.has(RADIUS2)) {
-      aoe = true;
-    }
     int boost = 0;
-    if (aoe && (info.has(RADIUS1) || info.has(RADIUS2))) {
-      boost = radius_boost;
+    if (info.has(RADIUS1) || info.has(RADIUS2) || info.has(RADIUS3)) {
+      aoe = true;
+      if (info.has(RADIUS1)) {
+        boost += radius_boost;
+      }
+      if (info.has(RADIUS2)) {
+        boost += radius_boost;
+      }
+      if (info.has(RADIUS3)) {
+        boost += radius_boost;
+      }
     }
     if (aoe) {
       List<BlockPos> positions = Growth.collect(player.world, player.getPosition(), radius_x + boost, radius_y + boost, radius_z + boost);
