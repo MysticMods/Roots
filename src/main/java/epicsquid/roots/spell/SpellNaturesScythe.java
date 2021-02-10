@@ -151,7 +151,7 @@ public class SpellNaturesScythe extends SpellBase {
   public void breakBlock(World world, BlockPos pos, StaffModifierInstanceList info, EntityPlayer player, List<Function<ItemStack, ItemStack>> converters) {
     IBlockState state = world.getBlockState(pos);
     Block block = state.getBlock();
-    int fortune = (info.has(SpellHarvest.FORTUNE) || info.has(FORTUNE) || info.has(SpellShatter.FORTUNE)) ? 2 : 0;
+    int fortune = (info.has(FORTUNE) || info.has(SpellShatter.FORTUNE)) ? 2 : 0;
     int xp = ForgeHooks.onBlockBreakEvent(world, GameType.SURVIVAL, (EntityPlayerMP) player, pos);
     if (xp == -1) {
       return;

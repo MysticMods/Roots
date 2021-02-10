@@ -38,6 +38,7 @@ public class SpellHarvest extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(25);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("wildewheet", 0.55));
+  public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(new SpellCost("terra_moss", 0.1));
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 6).setDescription("radius on the X axis of the area the spell has effect on");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("radius on the Y axis of the area the spell has effect on");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 6).setDescription("radius on the Z axis of the area the spell has effect on");
@@ -52,9 +53,8 @@ public class SpellHarvest extends SpellBase {
 
   public static Modifier RADIUS1 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "extended_harvest"), ModifierCores.PERESKIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.275)));
   public static Modifier MAGNETISM = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "magnetic_harvest"), ModifierCores.WILDROOT, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.125)));
-  public static Modifier FORTUNE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "harvest_fortune"), ModifierCores.MOONGLOW_LEAF, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 0.675)));
   public static Modifier UNDEAD = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "gifts_of_undeath"), ModifierCores.SPIRIT_HERB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 0.75)));
-  public static Modifier SMALL_RADIUS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "targeted_harvest"), ModifierCores.TERRA_MOSS, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.TERRA_MOSS, 0.275)));
+  public static Modifier SMALL_RADIUS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "targeted_harvest"), ModifierCores.MOONGLOW_LEAF, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 0.275)));
   public static Modifier POISON = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "poisoned_harvest"), ModifierCores.BAFFLE_CAP, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 0.125)));
   public static Modifier GROWTH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "regrowth"), ModifierCores.CLOUD_BERRY, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 0.345)));
   public static Modifier COOKING = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "fiery_harvest"), ModifierCores.INFERNAL_BULB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 0.125)));
@@ -75,7 +75,7 @@ public class SpellHarvest extends SpellBase {
   public SpellHarvest(ResourceLocation name) {
     super(name, TextFormatting.GREEN, 57f / 255f, 253f / 255f, 28f / 255f, 197f / 255f, 233f / 255f, 28f / 255f);
     properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_RADIUS_BOOST, PROP_RADIUS_UNBOOST, PROP_UNDEAD_ADDITIONAL, PROP_UNDEAD_CHANCE, PROP_UNDEAD_COUNT, PROP_UNDEAD_RARITY, PROP_GROWTH_COUNT, PROP_GROWTH_ADDITIONAL);
-    acceptsModifiers(RADIUS1, MAGNETISM, FORTUNE, UNDEAD, SMALL_RADIUS, POISON, GROWTH, COOKING, CRUSHING, SILK_TOUCH);
+    acceptsModifiers(RADIUS1, MAGNETISM, UNDEAD, SMALL_RADIUS, POISON, GROWTH, COOKING, CRUSHING, SILK_TOUCH);
   }
 
   @Override
