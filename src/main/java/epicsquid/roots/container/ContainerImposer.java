@@ -18,7 +18,6 @@ import epicsquid.roots.network.MessageInvalidateContainer;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.tileentity.TileEntityImposer;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -36,12 +35,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ContainerImposer extends Container implements IInvalidatingContainer {
+public class ContainerImposer extends Container implements IInvalidatingContainer, IModifierContainer {
 
   public final TileEntityImposer tile;
   private final EntityPlayer player;
   private final Map<IModifierCore, Slot> coreSlotMap = new HashMap<>();
   private List<SlotImposerSpellInfo> spellSlots = new ArrayList<>();
+  private boolean shiftDown = false;
+  private boolean altDown = false;
+  private boolean ctrlDown = false;
 
   public ContainerImposer(EntityPlayer player, TileEntityImposer tile) {
     this.tile = tile;
@@ -175,9 +177,9 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
               StaffModifierInstanceList modifiers = staffInfo.getModifiers();
               StaffModifierInstance modifier = modifiers.getByCore(info.getCore());
               if (modifier != null) {
-                if (modifier.isEnabled() || (!modifier.isConflicting(modifiers) && !GuiScreen.isAltKeyDown() && !GuiScreen.isCtrlKeyDown())) {
+                if (modifier.isEnabled() || (!modifier.isConflicting(modifiers) && !isAltDown() && !isControlDown())) {
                   modifier.setEnabled(!modifier.isEnabled());
-                } else if (!modifier.isEnabled() && modifier.isConflicting(modifiers) && (GuiScreen.isAltKeyDown() || GuiScreen.isCtrlKeyDown())) {
+                } else if (!modifier.isEnabled() && modifier.isConflicting(modifiers) && (isAltDown() || isControlDown())) {
                   for (StaffModifierInstance conflictingMod : modifier.getConflicts(modifiers)) {
                     conflictingMod.setEnabled(false);
                   }
@@ -246,5 +248,29 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
 
     //handler.saveToStack();
     return slotStack;
+  }
+
+  @Override
+  public void setModifierStatus(int modifier, boolean status) {
+    if (modifier == 0) { // shift
+      this.shiftDown = status;
+    } else if (modifier == 1) { // ctrl
+      this.ctrlDown = status;
+    } else if (modifier == 2) { // alt
+      this.altDown = status;
+    }
+  }
+
+  @Override
+  public boolean getModifierStatus(int modifier) {
+    if (modifier == 0) { // shift
+      return this.shiftDown;
+    } else if (modifier == 1) { // ctrl
+      return this.ctrlDown;
+    } else if (modifier == 2) { // alt
+      return this.altDown;
+    } else {
+      return false;
+    }
   }
 }
