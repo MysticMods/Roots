@@ -1,7 +1,7 @@
 {
   "name": "Modifiers",
   "icon": "minecraft:blaze_powder",
-  "category": "spells",
+  "category": "spell_mechanics",
   "pages": [
     {
       "type": "text",

@@ -1,7 +1,7 @@
 {
   "name": "Staff",
   "icon": "roots:staff",
-  "category": "spells",
+  "category": "spell_mechanics",
   "pages": [
     {
       "type": "text",

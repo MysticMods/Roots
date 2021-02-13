@@ -1,6 +1,6 @@
 {
   "name": "Spells",
   "sortnum" : 3,
-  "description": "This section covers spells, from the creation of the spell dust, the imbuing of the gramary, and the selection of spell in the staff using the Spell Library, as well as the component pouches and reagents required to cast them.",
+  "description": "This section covers spells and provides an introduction to the crafting and casting of spells.",
   "icon": "roots:gramary"
 }

@@ -1,7 +1,7 @@
 {
   "name": "Component Pouches",
   "icon": "roots:herb_pouch",
-  "category": "spells",
+  "category": "spell_mechanics",
   "pages": [
     {
       "type": "text",

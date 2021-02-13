@@ -3,6 +3,7 @@
     "icon": "roots:ritual_grove_supplication",
     "category": "rituals",
     "priority": true,
+    "sortnum": 2,
     "pages": [
       {
         "type": "text",

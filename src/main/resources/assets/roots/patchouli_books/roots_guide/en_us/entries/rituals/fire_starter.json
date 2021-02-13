@@ -1,7 +1,7 @@
 {
     "name": "Starting Fires",
-    "icon": "roots:firestarter",
-    "category": "rituals",
+    "icon": "roots:fire_starter",
+    "category": "rituals_ritual",
     "pages": [
         {
           "type": "text",

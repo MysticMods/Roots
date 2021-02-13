@@ -1,9 +1,7 @@
 {
     "name": "Ritual Tiers",
     "icon": "roots:runed_acacia",
-    "category": "rituals",
-    "priority": true,
-    "sortnum": 3,
+    "category": "rituals_ritual",
     "pages": [
         {
           "type": "text",

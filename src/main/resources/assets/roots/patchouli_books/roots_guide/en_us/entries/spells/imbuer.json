@@ -2,6 +2,8 @@
   "name": "Imbuer",
   "icon": "roots:imbuer",
   "category": "spells",
+  "priority": true,
+  "sortnum": 2,
   "pages": [
     {
       "type": "text",
