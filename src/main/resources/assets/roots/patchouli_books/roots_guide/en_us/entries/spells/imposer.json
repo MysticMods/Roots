@@ -1,7 +1,7 @@
 {
   "name": "Imposer",
   "icon": "roots:imposer",
-  "category": "spells",
+  "category": "spell_mechanics",
   "pages": [
     {
       "type": "text",

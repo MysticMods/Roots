@@ -2,10 +2,25 @@
   "name": "Introduction",
   "icon": "minecraft:writable_book",
   "category": "rituals",
+  "sortnum": 1,
+  "priority": true,
   "pages": [
     {
       "type": "text",
-      "text": "Example."
+      "text": "Rituals are a way of unlocking the wild energy of nature at harnessing it for a specific purpose.$(br2)The primary device used in rituals is a $(l:crafting/devices/pyres)Pyre$(), and it is upon this pyre that the five necessary ingredients to perform the ritual are placed by right-clicking.$(br2)Lighting the pyre is the final step to begin the ritual."
+    },
+    {
+      "type": "text",
+      "text": "Once the correct ingredients are placed on the pyre, the HUD will information about the ritual.$(br2)$(info) It can then be started with a $(l:rituals/fire_starter)flint-and-steel, fire starter$().$(br2)Some rituals require additional components to function that are placed near the pyre.$(br2)$(info) Some require $(l:rituals/standing_stones)standing stones or runed pillars$(). Additionally, a ritual might require $(l:rituals/catalyst_plates)a catalyst plate$() to direct the wild energy."
+    },
+    {
+      "type": "text",
+      "text": "There are a small number of rituals that require components in addition to those mentioned, but those will be specified in the entry for the ritual itself."
+    },
+    {
+      "type": "text",
+      "title": "Automation",
+      "text": "($(o)See $(l:rituals/automation)Ritual Automation$())$(br2)Ingredients for rituals can be stored in a chest beneath the pyre, and they will be consumed from there automatically whenever the pyre is empty.$(br2)An already-started ritual will automatically continue if new ingredients are provided, but nearby sources of flame will also be consumed to start a ritual."
     }
   ]
 }

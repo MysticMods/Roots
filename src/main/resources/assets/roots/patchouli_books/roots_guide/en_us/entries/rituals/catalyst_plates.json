@@ -1,7 +1,7 @@
 {
   "name": "Catalyst Plates",
   "icon": "roots:catalyst_plate",
-  "category": "rituals",
+  "category": "rituals_ritual",
   "pages": [
     {
       "type": "text",
