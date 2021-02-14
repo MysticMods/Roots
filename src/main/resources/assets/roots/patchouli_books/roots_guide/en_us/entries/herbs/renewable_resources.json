@@ -2,6 +2,9 @@
   "name": "Renewable Resources",
   "icon": "minecraft:farmland",
   "category": "herbs",
+  "priority": true,
+  "turnin": "roots:renewable_renaissance",
+  "sortnum": 2,
   "pages": [
     {
       "type": "text",

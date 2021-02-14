@@ -2,6 +2,9 @@
   "name": "Introduction to Herbs",
   "icon": "minecraft:writable_book",
   "category": "herbs",
+  "priority": true,
+  "turnin": "roots:all_the_herbs_3",
+  "sortnum": 1,
   "pages": [
     {
       "type": "text",

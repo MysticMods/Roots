@@ -4,6 +4,7 @@
   "category": "herbs",
   "turnin": "roots:wildroot",
   "priority": true,
+  "sortnum": 3,
   "pages": [
     {
       "type": "spotlight",

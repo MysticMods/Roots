@@ -40,5 +40,4 @@ public class RitualRecipeProcessor implements IComponentProcessor {
 
     return null;
   }
-
 }

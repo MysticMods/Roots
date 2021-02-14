@@ -11,7 +11,8 @@
       },
       {
         "type": "pyre_template",
-        "ritual": "ritual_grove_supplication"
+        "ritual": "ritual_grove_supplication",
+        "text": "As a $(bold)tier 1$() ritual, an unactivated grove stone is required for the ritual to be fully effective, although not to start it."
       }
     ]
   }

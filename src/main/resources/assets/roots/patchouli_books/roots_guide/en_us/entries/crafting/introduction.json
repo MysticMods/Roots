@@ -2,6 +2,8 @@
   "name": "Introduction",
   "icon": "minecraft:writable_book",
   "category": "crafting",
+  "priority": true,
+  "sortnum": 1,
   "pages": [
     {
       "type": "text",
