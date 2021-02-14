@@ -341,6 +341,10 @@ advancement.roots.apothecary_pouch=House of Herbs
 advancement.roots.apothecary_pouch.desc=Personally craft an Apothecary Pouch to improve your storage.
 advancement.roots.wildwood=Wild, Wild Wood!
 advancement.roots.wildwood.desc=Acquire Wildwood in any form through the Ritual of Wild Growth.
+advancement.roots.all_the_herbs_3=All The Herbs 3!
+advancement.roots.all_the_herbs_3.desc=Collect one of every magical herb.
+advancement.roots.renewable_renaissance=Renascent Renewables
+advancement.roots.renewable_renaissance.desc=Starting growing renewable magical herbs. Gotta plant 'em all!
 
 # Herbs
 item.moonglow_seed.name=Moonglow Seed

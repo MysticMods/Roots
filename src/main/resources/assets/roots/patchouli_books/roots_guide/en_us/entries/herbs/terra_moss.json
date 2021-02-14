@@ -5,6 +5,7 @@
   "read_by_default": true,
   "turnin": "roots:terra_moss",
   "priority": true,
+  "sortnum": 4,
   "pages": [
     {
       "type": "spotlight",

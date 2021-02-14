@@ -7,11 +7,12 @@
   "pages": [
     {
       "type": "text",
-      "text": "Animals in the vicinity of the ritual will willingly give up part of their physical essence, although suffering no harm to themselves in the process. $(info) Affected animals will glow briefly.$(br2)$(standing_stones) $(l:rituals/ritual_animal_harvest#multiblock)This ritual requires standing stones.$()"
+      "text": "Animals in the vicinity of the ritual will magically shed items as though they had been slain by a player, but without suffering any harm.$(br2)$(info) Any animal who is affected by the ritual will briefly glow.$(br2)$(info) A level of looting is applied to all kills, increasing the chances of obtaining rare drops."
     },
     {
       "type": "pyre_template",
-      "ritual": "ritual_animal_harvest"
+      "ritual": "ritual_animal_harvest",
+      "text": "$(standing_stones) As a $(bold)tier 3$() ritual, $(l:rituals/ritual_animal_harvest#multiblock)3 standing stones are required before the ritual can be begun$()."
     },
     {
       "type": "multiblock",
