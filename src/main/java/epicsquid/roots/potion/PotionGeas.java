@@ -1,19 +1,13 @@
 package epicsquid.roots.potion;
 
-import epicsquid.roots.entity.ai.EntityAIPassiveAttackMelee;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.spell.SpellGeas;
-import epicsquid.roots.util.EntityUtil;
 import epicsquid.roots.util.SlaveUtil;
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -35,22 +29,6 @@ public class PotionGeas extends Potion {
   @Override
   public void applyAttributesModifiersToEntity(EntityLivingBase target, AbstractAttributeMap attributeMapIn, int amplifier) {
     super.applyAttributesModifiersToEntity(target, attributeMapIn, amplifier);
-    if (target instanceof EntityCreature && EntityUtil.isFriendly(target)) {
-      EntityCreature entity = (EntityCreature) target;
-      ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(target.getEntityData(), SpellGeas.instance);
-      if (mods.has(SpellGeas.PEACEFUL)) {
-        boolean hadAttack = entity.tasks.taskEntries.stream().anyMatch(o -> o.action instanceof EntityAIAttackMelee);
-        if (!hadAttack) {
-          entity.tasks.addTask(5, new EntityAIPassiveAttackMelee(entity, 1.0d, false));
-        }
-        boolean hadTarget = entity.targetTasks.taskEntries.stream().anyMatch(o -> o.action instanceof EntityAINearestAttackableTarget);
-        if (!hadTarget) {
-          entity.targetTasks.addTask(5, new EntityAINearestAttackableTarget<>(entity, EntityMob.class, 10, false, false, o -> !SlaveUtil.isSlave(o)));
-        }
-        target.getEntityData().setBoolean("hadAttack", hadAttack);
-        target.getEntityData().setBoolean("hadTarget", hadTarget);
-      }
-    }
   }
 
   @Override
