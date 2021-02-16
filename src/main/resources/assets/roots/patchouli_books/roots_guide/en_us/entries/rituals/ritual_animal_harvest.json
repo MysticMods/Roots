@@ -7,12 +7,12 @@
   "pages": [
     {
       "type": "text",
-      "text": "Animals in the vicinity of the ritual will magically shed items as though they had been slain by a player, but without suffering any harm.$(br2)$(info) Any animal who is affected by the ritual will briefly glow.$(br2)$(info) A level of looting is applied to all kills, increasing the chances of obtaining rare drops."
+      "text": "Eligible creatures in the vicinity of the ritual will magically shed, dropping items as though they had been slain by a player, without suffering any actual harm.$(br2)This ritual is a way of stocking up in precious items as well as maintaining a $(l:concepts/pacifism)pacifist$() life-style.$(br2)$(info) Looting $(ritual:animal_harvest/looting_value) will be randomly applied to some drops."
     },
     {
       "type": "pyre_template",
       "ritual": "ritual_animal_harvest",
-      "text": "$(standing_stones) As a $(bold)tier 3$() ritual, $(l:rituals/ritual_animal_harvest#multiblock)3 standing stones are required before the ritual can be begun$()."
+      "text": "$(standing_stones) As a $(bold)tier 3$() ritual, $(l:rituals/ritual_animal_harvest#multiblock)3 standing stones are required to begin$(). Please see later pages of this entry."
     },
     {
       "type": "multiblock",
@@ -31,10 +31,20 @@
       }
     },
     {
+      "type": "text",
+      "title": "Ritual Specifics",
+      "text": "$(bold)Duration:$() The ritual lasts for $(ritual:animal_harvest/SECONDS/duration) seconds.$(br2)$(bold)Size:$() Ritual area extends $(ritual:animal_harvest/radius_x) and $(ritual:animal_harvest/radius_z) blocks from the center, and vertically by $(ritual:animal_harvest/radius_y).$(br2)$(bold)Creatures:$() $(ritual:animal_harvest/count) eligible creatures are selected at random every $(ritual:animal_harvest/SECONDS/interval) seconds.$(br2)$(bold)Looting:$() Looting $(ritual:animal_harvest/looting_value) has a 1 in $(ritual:animal_harvest/looting_chance) chance of being applied per eligible creature."
+    },
+    {
+      "type": "text",
+      "text": "$(bold)Glowing$(): Eligible creatures who drop items while the ritual is active will have the Glowing effect applied to them for $(ritual:animal_harvest/SECONDS/glowing) seconds.$(br2)$(bold)Fish:$() If water blocks are found, $(ritual:animal_harvest/fish_count) fish have a 1 in $(ritual:animal_harvest/fish_chance) chance of being spawned, with a potential for $(ritual:animal_harvest/fish_additional) additional fish."
+    },
+    {
       "type": "relations",
       "anchor": "related",
       "entries": [
-        "rituals/standing_stones"
+        "rituals/standing_stones",
+        "concepts/pacifism"
       ]
     }
   ]
