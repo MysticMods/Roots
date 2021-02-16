@@ -1016,6 +1016,14 @@ roots.modifiers.modifiers.yield.desc=Causes harvested items to be processed by a
 roots.modifiers.modifiers.yield=Yield
 roots.modifiers.modifiers.react_weakness=React: Weakness
 roots.modifiers.modifiers.react_weakness.desc=Causes attackers to be weakened.
+roots.modifiers.modifiers.additional_target1=Additional Target
+roots.modifiers.modifiers.additional_target1.desc=An additional target will be affected by Geas.
+roots.modifiers.modifiers.additional_target2=Additional Target
+roots.modifiers.modifiers.additional_target2.desc=An additional target will be affected by Geas.
+roots.modifiers.modifiers.spiritual_duality=Spiritual Duality
+roots.modifiers.modifiers.spiritual_duality.desc=Fires an additional jet of flame when cast.
+roots.modifiers.modifiers.animal_savior=Animal Savior
+roots.modifiers.modifiers.animal_savior.desc=Applies an absorption shield to all nearby peaceful entities.
 
 roots.spirit_pouch.tooltip=Right-click to open and reveal what's inside!
 roots.reliquary.tooltip=Right-click to open and reveal what's inside!
