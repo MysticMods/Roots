@@ -1,6 +1,7 @@
 package epicsquid.roots.client;
 
 import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.roots.Roots;
 import epicsquid.roots.integration.IntegrationUtil;
 import epicsquid.roots.properties.PropertyTable;
 import epicsquid.roots.ritual.RitualBase;
@@ -111,11 +112,38 @@ public class PatchouliHack {
             SpellBase spell = SpellRegistry.getSpell(parts[0]);
             PropertyTable props;
             String propName = parts[1];
+            boolean seconds = false;
+            boolean minutes = false;
+            if (propName.equals("SECONDS")) {
+              propName = parts[2];
+              seconds = true;
+            }
+            if (propName.equals("MINUTES")) {
+              propName = parts[2];
+              minutes = true;
+            }
             Object value = null;
             if (type.equals("ritual") && ritual != null) {
               props = ritual.getProperties();
               if (props.hasProperty(propName)) {
                 value = props.getValue(propName);
+                if (seconds) {
+                  try {
+                    double val = (double) (int) value;
+                    value = String.format("%.01f", val / 20);
+                  } catch (ClassCastException e) {
+                    Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
+                    return "INVALID PROPERTY FOR SECONDS: " + propName;
+                  }
+                } else if (minutes) {
+                  try {
+                    double val = (double) (int) value;
+                    value = val / 20 / 60;
+                  } catch (ClassCastException e) {
+                    Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
+                    return "INVALID PROPERTY FOR MINUTES: " + propName;
+                  }
+                }
               } else {
                 return "INVALID PROPERTY: " + propName;
               }

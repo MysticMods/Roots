@@ -1,18 +1,32 @@
 {
-    "name": "Grove Supplication",
-    "icon": "roots:ritual_grove_supplication",
-    "category": "rituals",
-    "priority": true,
-    "sortnum": 2,
-    "pages": [
-      {
-        "type": "text",
-        "text": "Supplicates and entreats the spirits of the fey to come forth to a nearby, anchoring Grove Stone. After its activation, the stone itself, acting as an anchor or a gateway, will visibly pull energy towards itself.$(br2)As time progresses, the activated Stone will begin transforming the world around it."
-      },
-      {
-        "type": "pyre_template",
-        "ritual": "ritual_grove_supplication",
-        "text": "As a $(bold)tier 1$() ritual, an unactivated grove stone is required for the ritual to be fully effective, although not to start it."
-      }
-    ]
-  }
+  "name": "Grove Supplication",
+  "icon": "roots:ritual_grove_supplication",
+  "category": "rituals",
+  "priority": true,
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Supplicates and entreats whatever energy of the Fey world that still lingers in this world to anchor a $(l:crafting/grove_stones)Grove Stone$().$(br2)Once anchored, the stone will light up and become animated, as well as producing leaf particles, some of which will travel to nearby $(l:crafting/fey_crafter)fey crafters$().$(br2)The stone will also begin producing grass and rare flowers."
+    },
+    {
+      "type": "pyre_template",
+      "ritual": "ritual_grove_supplication",
+      "text": "As a $(bold)tier 1$() ritual, a grove stone is required for the ritual to be effective."
+    },
+    {
+      "type": "text",
+      "title": "Ritual Specifics",
+      "text": "$(bold)Duration:$() The ritual lasts $(ritual:grove_supplication/SECONDS/duration) seconds. If an inactive grove stone is not found nearby by the end of the ritual, it will fail.$(br2)$(bold)Radius:$() The ritual will search for grove stones within an area of $(ritual:grove_supplication/radius_x) and $(ritual:grove_supplication/radius_z) blocks horizontally, and by $(ritual:grove_supplication/radius_y) vertically."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "concepts/the_fey",
+        "crafting/fey_crafter",
+        "crafting/grove_stone"
+      ]
+    }
+  ]
+}
