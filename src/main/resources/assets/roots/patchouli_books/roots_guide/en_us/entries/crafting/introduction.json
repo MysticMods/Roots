@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "You will encounter three different types of crafting in Roots:$(br2)$(li)Vanilla crafting with a carfting table$(li)$(l:crafting/devices/pyres)Pyre$() ritual crafting$(li)$(l:crafting/fey_crafter)Fey crafting$() with an an activated $(l:crafting/grove_stone)grove stone$().$(li)$(l:crafing/mortar_and_pestle)Mortar & Pestle$() crafting.$(br2)This entry will skip over Vanilla crafting tables, as recipes for those items will be displayed in their relevant entries."
+      "text": "You will encounter three different types of crafting in Roots:$(br2)$(li)Vanilla crafting with a carfting table$(li)$(l:crafting/devices/pyres)Pyre$() ritual crafting$(li)$(l:crafting/fey_crafter)Fey crafting$() with an an activated $(l:crafting/grove_stone)grove stone$().$(li)$(l:crafting/mortar_and_pestle)Mortar & Pestle$() crafting.$(br2)This entry will skip over Vanilla crafting tables, as recipes for those items will be displayed in their relevant entries."
     },
     {
       "type": "text",
