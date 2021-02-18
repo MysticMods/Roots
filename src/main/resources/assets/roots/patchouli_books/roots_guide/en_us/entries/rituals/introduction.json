@@ -1,5 +1,5 @@
 {
-  "name": "Introduction",
+  "name": "Introduction to Rituals",
   "icon": "minecraft:writable_book",
   "category": "rituals",
   "sortnum": 1,
@@ -15,7 +15,22 @@
     },
     {
       "type": "text",
-      "text": "There are a small number of rituals that require components in addition to those mentioned, but those will be specified in the entry for the ritual itself."
+      "text": "There are a small number of rituals that require components in addition to those mentioned, but those will be specified in the entry for the ritual itself.$(br2)$(info) In the event that you wish to end a ritual early, you can throw a bucket of water on it."
+    },
+    {
+      "type": "text",
+      "title": "Ritual Tiers",
+      "text": "($(o)See $(l:rituals/tiers)Ritual Tiers$())$(br2)Some rituals will require additional components. The ritual's entry will display this as a multiblock image and note what components are required.$(br2)Because of this, rituals can be classed as tiers, with the tier number being equivalent to the number of components required.$(br2)Thus, it is possible to list $(l:rituals/tiers)rituals by tier$()."
+    },
+    {
+      "type": "text",
+      "title": "Ritual Specifics",
+      "text": "All ritual entries will list specific details. The type of details will very depending on the type of ritual, but it will generally list the size of the ritual, the duration of the ritual, etc.$(br2)More complex rituals will also list details about how their individual functions operate and how frequently they operate."
+    },
+    {
+      "type": "text",
+      "title": "Visualisation",
+      "text": "($(o)See $(l:rituals/visualisation)Ritual Visualisation$())$(br2)If a ritual has a specific radius or cube size, it's possible to have the exact range of the ritual displayed in-world.$(br2)To do so, sneak-right-click a $(l:crafting/devices/pyres)pyre$() that has ritual ingredients in it (or displays a previously activated ritual) with a $(l:crafting/armor_and_tools/knives)knife$()."
     },
     {
       "type": "text",
