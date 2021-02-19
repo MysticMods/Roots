@@ -72,7 +72,7 @@ public class SpellTimeStop extends SpellBase {
         new ItemStack(ModItems.pereskia),
         new ItemStack(Items.CLOCK)
     );
-    setCastSound(ModSounds.Spells.TIME_STOP); // todo
+    //setCastSound(ModSounds.Spells.TIME_STOP); // todo
   }
 
   @Override
