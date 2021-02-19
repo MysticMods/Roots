@@ -105,7 +105,7 @@ public class SpellSanctuary extends SpellBase {
           reject = true;
         } else if (EntityUtil.isHostile(e)) {
           reject = true;
-        } else if (info.has(UNPEACEFUL) && (EntityUtil.isFriendly(e) || !EntityUtil.isHostile(e))) {
+        } else if (info.has(UNPEACEFUL) && EntityUtil.isFriendly(e)) {
           reject = true;
         } else if (SpellConfig.spellFeaturesCategory.getSanctuaryBlacklist().contains(EntityList.getKey(e))) {
           reject = true;
