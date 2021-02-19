@@ -72,7 +72,7 @@ public class SpellStormCloud extends SpellBase {
         new ItemStack(Items.SNOWBALL),
         new ItemStack(Item.getItemFromBlock(Blocks.RED_FLOWER), 1, BlockFlower.EnumFlowerType.BLUE_ORCHID.getMeta())
     );
-    setCastSound(ModSounds.Spells.STORM_CLOUD); // todo
+    //setCastSound(ModSounds.Spells.STORM_CLOUD); // todo
   }
 
   @Override
