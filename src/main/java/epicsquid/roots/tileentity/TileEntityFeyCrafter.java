@@ -22,14 +22,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -40,10 +43,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class TileEntityFeyCrafter extends TileBase {
+public class TileEntityFeyCrafter extends TileBase implements ITickable {
+  public static int COUNTDOWN = 40;
   public static int GROVE_STONE_RADIUS = 10;
 
   private Random random = new Random();
+
+  private int countdown = -1;
+  private List<ItemStack> storedItems = new ArrayList<>();
 
   public ItemStackHandler inventory = new ItemStackHandler(5) {
     @Override
@@ -68,6 +75,14 @@ public class TileEntityFeyCrafter extends TileBase {
     super.writeToNBT(tag);
     tag.setTag("handler", inventory.serializeNBT());
     tag.setLong("groveStone", groveStone == null ? -1 : groveStone.toLong());
+    if (!storedItems.isEmpty()) {
+      NBTTagList tagList = new NBTTagList();
+      for (ItemStack stack : storedItems) {
+        tagList.appendTag(stack.serializeNBT());
+      }
+      tag.setTag("storedItems", tagList);
+    }
+    tag.setInteger("countdown", countdown);
 
     return tag;
   }
@@ -77,8 +92,23 @@ public class TileEntityFeyCrafter extends TileBase {
     super.readFromNBT(tag);
     inventory.deserializeNBT(tag.getCompoundTag("handler"));
     long gpos = tag.getLong("groveStone");
-    if (gpos == -1) groveStone = null;
-    else groveStone = BlockPos.fromLong(gpos);
+    if (gpos == -1) {
+      groveStone = null;
+    } else {
+      groveStone = BlockPos.fromLong(gpos);
+    }
+    this.storedItems = new ArrayList<>();
+    if (tag.hasKey("storedItems")) {
+      NBTTagList stored = tag.getTagList("storedItems", Constants.NBT.TAG_COMPOUND);
+      for (int i = 0; i < stored.tagCount(); i++) {
+        this.storedItems.add(new ItemStack(stored.getCompoundTagAt(i)));
+      }
+    }
+    if (tag.hasKey("countdown")) {
+      this.countdown = tag.getInteger("countdown");
+    } else {
+      this.countdown = -1;
+    }
   }
 
   @Nonnull
@@ -204,15 +234,13 @@ public class TileEntityFeyCrafter extends TileBase {
       return true;
     }
 
-    List<ItemStack> items = new ArrayList<>();
-
     if (!ModItems.knives.contains(player.getHeldItem(hand).getItem())) {
       shouldGui = true;
     }
 
     if (!shouldGui) {
-      items = craft(player);
-      if (items.isEmpty()) {
+      this.storedItems = craft(player);
+      if (this.storedItems.isEmpty()) {
         shouldGui = true;
       }
     }
@@ -222,39 +250,17 @@ public class TileEntityFeyCrafter extends TileBase {
       return true;
     }
 
-    for (EnumFacing facing : EnumFacing.values()) {
-      TileEntity te = world.getTileEntity(getPos().offset(facing));
-      if (te != null) {
-        IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        if (cap != null) {
-          List<ItemStack> newItems = new ArrayList<>();
-          for (ItemStack toPut : items) {
-            ItemStack result = ItemHandlerHelper.insertItemStacked(cap, toPut, false);
-            if (!result.isEmpty()) {
-              newItems.add(result);
-            }
-          }
-          items = newItems;
-        }
-      }
-    }
-
-    for (ItemStack stack : items) {
-      EntityItem item = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.1, pos.getZ() + 0.5, stack);
-      world.spawnEntity(item);
-    }
+    this.countdown = COUNTDOWN;
 
     MessageGrowthCrafterVisualFX packet = new MessageGrowthCrafterVisualFX(getPos(), world.provider.getDimension());
     PacketHandler.sendToAllTracking(packet, this);
     world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), ModSounds.WHIRLWIND, SoundCategory.NEUTRAL, 1f, 1f);
     Advancements.CRAFTING_TRIGGER.trigger((EntityPlayerMP) player, lastRecipe);
     lastRecipe = null;
-
     return true;
   }
 
   private static final double[] stages = new double[]{0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1};
-
 
   public void doVisual() {
     if (world.isRemote) {
@@ -294,6 +300,38 @@ public class TileEntityFeyCrafter extends TileBase {
               1
           );
         }
+      }
+    }
+  }
+
+  @Override
+  public void update() {
+    if (!world.isRemote) {
+      if (countdown > 0) {
+        countdown--;
+      } else {
+        countdown = -1;
+        for (EnumFacing facing : EnumFacing.values()) {
+          TileEntity te = world.getTileEntity(getPos().offset(facing));
+          if (te != null) {
+            IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+            if (cap != null) {
+              List<ItemStack> newItems = new ArrayList<>();
+              for (ItemStack toPut : storedItems) {
+                ItemStack result = ItemHandlerHelper.insertItemStacked(cap, toPut, false);
+                if (!result.isEmpty()) {
+                  newItems.add(result);
+                }
+              }
+              storedItems = newItems;
+            }
+          }
+        }
+        for (ItemStack stack : storedItems) {
+          EntityItem item = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1.1, pos.getZ() + 0.5, stack);
+          world.spawnEntity(item);
+        }
+        this.storedItems.clear();
       }
     }
   }
