@@ -1,7 +1,7 @@
 {
   "name": "Strange Ooze",
   "icon": "roots:strange_ooze",
-  "category": "crafting_resources",
+  "category": "resources",
   "pages": [
     {
       "type": "text",

@@ -1,7 +1,7 @@
 {
   "name": "Fey Leather",
   "icon": "roots:fey_leather",
-  "category": "crafting_resources",
+  "category": "resources",
   "pages": [
     {
       "type": "spotlight",

@@ -1,7 +1,7 @@
 {
   "name": "Flour",
   "icon": "roots:flour",
-  "category": "crafting_resources",
+  "category": "resources",
   "pages": [
     {
       "type": "mortar_template",

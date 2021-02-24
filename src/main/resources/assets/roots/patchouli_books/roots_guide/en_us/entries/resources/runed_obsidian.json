@@ -1,7 +1,7 @@
 {
   "name": "Runed Obsidian",
   "icon": "roots:runed_obsidian",
-  "category": "crafting_resources",
+  "category": "resources",
   "pages": [
     {
       "type": "text",

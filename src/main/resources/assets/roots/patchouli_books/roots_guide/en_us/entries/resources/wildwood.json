@@ -1,7 +1,7 @@
 {
   "name": "Wildwood",
   "icon": "roots:wildwood_log",
-  "category": "crafting_resources",
+  "category": "resources",
   "pages": [
     {
       "type": "text",
