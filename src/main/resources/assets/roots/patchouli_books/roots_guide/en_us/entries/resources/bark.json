@@ -1,7 +1,7 @@
 {
   "name": "Bark",
   "icon": "roots:bark_acacia",
-  "category": "crafting_resources",
+  "category": "resources",
   "pages": [
     {
       "type": "text",

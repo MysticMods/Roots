@@ -1,7 +1,7 @@
 {
   "name": "Elemental Soil",
   "icon": "roots:elemental_soil",
-  "category": "crafting_resources",
+  "category": "resources",
   "pages": [
     {
       "type": "spotlight",

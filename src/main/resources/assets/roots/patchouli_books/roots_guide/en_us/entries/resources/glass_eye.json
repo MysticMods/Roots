@@ -1,7 +1,7 @@
 {
   "name": "Glass Eye",
   "icon": "roots:glass_eye",
-  "category": "crafting_resources",
+  "category": "resources",
   "pages": [
     {
       "type": "crafting",

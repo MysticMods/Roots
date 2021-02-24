@@ -1,7 +1,7 @@
 {
   "name": "Petals",
   "icon": "roots:petals",
-  "category": "crafting_resources",
+  "category": "resources",
   "pages": [
     {
       "type": "mortar_template",

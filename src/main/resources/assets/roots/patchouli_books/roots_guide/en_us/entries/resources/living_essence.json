@@ -1,7 +1,7 @@
 {
   "name": "Living Essence",
   "icon": "roots:living_essence",
-  "category": "crafting_resources",
+  "category": "resources",
   "pages": [
     {
       "type": "text",

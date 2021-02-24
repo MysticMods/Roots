@@ -1,7 +1,6 @@
 {
   "name": "Resources",
-  "parent": "crafting",
-  "sortnum" : 3,
+  "sortnum" : 5,
   "description": "This sections focuses on resources that are useful in crafting, as well as how to obtain or actually craft them.",
   "icon": "roots:bark_birch"
 }

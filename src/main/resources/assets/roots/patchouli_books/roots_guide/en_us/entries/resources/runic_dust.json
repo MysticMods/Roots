@@ -1,7 +1,7 @@
 {
   "name": "Runic Dust",
   "icon": "roots:runic_dust",
-  "category": "crafting_resources",
+  "category": "resources",
   "pages": [
     {
       "type": "spotlight",

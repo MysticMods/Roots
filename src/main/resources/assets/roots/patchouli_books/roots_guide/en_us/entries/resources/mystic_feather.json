@@ -1,7 +1,7 @@
 {
   "name": "Mystic Feather",
   "icon": "roots:mystic_feather",
-  "category": "crafting_resources",
+  "category": "resources",
   "pages": [
     {
       "type": "text",
