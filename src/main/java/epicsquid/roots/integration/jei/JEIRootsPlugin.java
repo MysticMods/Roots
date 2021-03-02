@@ -2,6 +2,7 @@ package epicsquid.roots.integration.jei;
 
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.ElementalSoilConfig;
+import epicsquid.roots.config.MossConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
@@ -10,6 +11,7 @@ import epicsquid.roots.integration.jei.chrysopoeia.ChrysopoeiaCategory;
 import epicsquid.roots.integration.jei.chrysopoeia.ChrysopoeiaWrapper;
 import epicsquid.roots.integration.jei.fey.FeyCategory;
 import epicsquid.roots.integration.jei.fey.FeyWrapper;
+import epicsquid.roots.integration.jei.interact.*;
 import epicsquid.roots.integration.jei.loot.LootCategory;
 import epicsquid.roots.integration.jei.loot.LootWrapper;
 import epicsquid.roots.integration.jei.mortar.MortarCategory;
@@ -41,10 +43,13 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.IVanillaRecipeFactory;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.*;
@@ -69,6 +74,8 @@ public class JEIRootsPlugin implements IModPlugin {
   public static final String TRANSMUTATION = Roots.MODID + ".transmutation";
   public static final String RUNED_WOOD = Roots.MODID + ".runed_wood";
   public static final String LOOT = Roots.MODID + ".loot";
+  public static final String BLOCK_BREAK = Roots.MODID + ".block_break";
+  public static final String RIGHT_CLICK_BLOCK = Roots.MODID + ".right_click_block";
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registry) {
@@ -87,7 +94,9 @@ public class JEIRootsPlugin implements IModPlugin {
         new TransmutationCategory(helper),
         new RunedWoodCategory(helper),
         new LootCategory(helper),
-        new RunicShearsSummonEntityCategory(helper)
+        new RunicShearsSummonEntityCategory(helper),
+        new BlockBreakCategory(helper),
+        new BlockRightClickCategory(helper)
     );
   }
 
@@ -143,8 +152,27 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(TransmutationRecipe.class, TransmutationWrapper::new, TRANSMUTATION);
     registry.handleRecipes(RitualUtil.RunedWoodType.class, RunedWoodWrapper::new, RUNED_WOOD);
     registry.handleRecipes(LootWrapper.LootRecipe.class, LootWrapper::new, LOOT);
+    registry.handleRecipes(BlockBreakRecipe.class, BlockBreakWrapper::new, BLOCK_BREAK);
+    registry.handleRecipes(BlockRightClickRecipe.class, BlockRightClickWrapper::new, RIGHT_CLICK_BLOCK);
 
     Collection<SpellBase> spells = SpellRegistry.spellRegistry.values().stream().filter(o -> !o.isDisabled()).collect(Collectors.toList());
+
+    List<BlockBreakRecipe> blockBreakRecipes = new ArrayList<>();
+    blockBreakRecipes.add(new BlockBreakRecipe(new OreIngredient("tallgrass"), new ItemStack(ModItems.terra_spores)));
+    blockBreakRecipes.add(new BlockBreakRecipe(new OreIngredient("tallgrass"), new ItemStack(ModItems.wildroot)));
+
+    registry.addRecipes(blockBreakRecipes, BLOCK_BREAK);
+
+    List<BlockRightClickRecipe> blockRightClickRecipes = new ArrayList<>();
+    List<ItemStack> source = new ArrayList<>();
+    List<ItemStack> result = new ArrayList<>();
+    for (Map.Entry<ItemStack, ItemStack> i : MossConfig.getMossyCobblestones().entrySet()) {
+      source.add(i.getKey());
+      result.add(i.getValue());
+    }
+    blockRightClickRecipes.add(new BlockRightClickRecipe(new ItemStack(ModItems.terra_spores), source, result));
+
+    registry.addRecipes(blockRightClickRecipes, RIGHT_CLICK_BLOCK);
 
     registry.addRecipes(Arrays.asList(new LootWrapper.LootRecipe(ModItems.spirit_bag, SpiritDrops.getPouch()), new LootWrapper.LootRecipe(ModItems.reliquary, SpiritDrops.getReliquary())), LOOT);
     registry.addRecipes(ModRecipes.getRunicShearRecipes().values(), RUNIC_SHEARS);
@@ -173,6 +201,8 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModItems.runic_shears), RUNIC_SHEARS_SUMMON_ENTITY);
     registry.addRecipeCatalyst(new ItemStack(ModItems.ritual_summon_creatures), SUMMON_CREATURES);
     registry.addRecipeCatalyst(new ItemStack(ModItems.ritual_transmutation), TRANSMUTATION);
+    registry.addRecipeCatalyst(new ItemStack(Blocks.TALLGRASS), BLOCK_BREAK);
+    registry.addRecipeCatalyst(new ItemStack(ModItems.terra_spores), RIGHT_CLICK_BLOCK);
 
     for (Item knife : ModItems.knives) {
       registry.addRecipeCatalyst(new ItemStack(knife), BARK_CARVING);
