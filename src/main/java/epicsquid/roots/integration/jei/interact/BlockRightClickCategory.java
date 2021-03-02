@@ -43,11 +43,11 @@ public class BlockRightClickCategory implements IRecipeCategory<BlockRightClickW
   @Override
   public void setRecipe(IRecipeLayout recipeLayout, BlockRightClickWrapper recipeWrapper, IIngredients ingredients) {
     IGuiItemStackGroup group = recipeLayout.getItemStacks();
-    group.init(0, true, 2, 3);
+    group.init(0, true, 1, 2);
     group.set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
-    group.init(1, true, 37, 3);
+    group.init(1, true, 36, 2);
     group.set(1, ingredients.getInputs(VanillaTypes.ITEM).get(1));
-    group.init(2, false, 72, 3);
+    group.init(2, false, 71, 2);
     group.set(2, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
   }
 }
