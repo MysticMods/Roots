@@ -43,9 +43,9 @@ public class BlockBreakCategory implements IRecipeCategory<BlockBreakWrapper> {
   @Override
   public void setRecipe(IRecipeLayout recipeLayout, BlockBreakWrapper recipeWrapper, IIngredients ingredients) {
     IGuiItemStackGroup group = recipeLayout.getItemStacks();
-    group.init(0, true, 20, 3);
+    group.init(0, true, 19, 2);
     group.set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
-    group.init(1, false, 55, 3);
+    group.init(1, false, 54, 2);
     group.set(1, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
   }
 }

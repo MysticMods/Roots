@@ -170,7 +170,7 @@ public class JEIRootsPlugin implements IModPlugin {
       source.add(i.getKey());
       result.add(i.getValue());
     }
-    blockRightClickRecipes.add(new BlockRightClickRecipe(new ItemStack(ModItems.terra_spores), source, result));
+    blockRightClickRecipes.add(new BlockRightClickRecipe(new ItemStack(ModItems.terra_spores), result, source));
 
     registry.addRecipes(blockRightClickRecipes, RIGHT_CLICK_BLOCK);
 
