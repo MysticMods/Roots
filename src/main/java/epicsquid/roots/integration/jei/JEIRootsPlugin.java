@@ -42,6 +42,7 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.IVanillaRecipeFactory;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
+import net.minecraft.block.BlockTallGrass;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -201,7 +202,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModItems.runic_shears), RUNIC_SHEARS_SUMMON_ENTITY);
     registry.addRecipeCatalyst(new ItemStack(ModItems.ritual_summon_creatures), SUMMON_CREATURES);
     registry.addRecipeCatalyst(new ItemStack(ModItems.ritual_transmutation), TRANSMUTATION);
-    registry.addRecipeCatalyst(new ItemStack(Blocks.TALLGRASS), BLOCK_BREAK);
+    registry.addRecipeCatalyst(new ItemStack(Blocks.TALLGRASS, 1, BlockTallGrass.EnumType.GRASS.getMeta()), BLOCK_BREAK);
     registry.addRecipeCatalyst(new ItemStack(ModItems.terra_spores), RIGHT_CLICK_BLOCK);
 
     for (Item knife : ModItems.knives) {
@@ -228,10 +229,6 @@ public class JEIRootsPlugin implements IModPlugin {
     ItemStack spellIcon = new ItemStack(ModItems.spell_icon);
     DustSpellStorage.fromStack(spellIcon).setSpellToSlot(SpellChrysopoeia.instance);
     registry.addRecipeCatalyst(spellIcon, CHRYSOPOEIA);
-
-    // Improve this
-    registry.addIngredientInfo(new ItemStack(ModItems.terra_spores), VanillaTypes.ITEM, I18n.format("jei.roots.terra_spores.desc"));
-    registry.addIngredientInfo(new ItemStack(ModItems.wildroot), VanillaTypes.ITEM, I18n.format("jei.roots.wildroot.desc"));
 
     // TODO: Try to improve this somehow
     registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_log), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood.desc"));
