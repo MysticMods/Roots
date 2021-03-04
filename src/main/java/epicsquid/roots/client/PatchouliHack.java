@@ -117,6 +117,11 @@ public class PatchouliHack {
             boolean bool = false;
             boolean night = false;
             boolean day = false;
+            boolean heart = false;
+            if (propName.equals("HEART")) {
+              propName = parts[2];
+              heart = true;
+            }
             if (propName.equals("NIGHT")) {
               propName = parts[2];
               night = true;
@@ -137,6 +142,7 @@ public class PatchouliHack {
               propName = parts[2];
               minutes = true;
             }
+
             Object value = null;
             if (type.equals("ritual") && ritual != null) {
               props = ritual.getProperties();
@@ -161,7 +167,8 @@ public class PatchouliHack {
                 } else if (bool) {
                   try {
                     boolean val = (boolean) value;
-                    value = val ? "true" : "false";
+                    // TODO: Translate this
+                    value = val ? I18n.format("roots.patchouli.true") : I18n.format("roots.patchouli.false");
                   } catch (ClassCastException e) {
                     Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
                     return "INVALID PROPERTY FOR BOOL: " + propName;
@@ -181,6 +188,14 @@ public class PatchouliHack {
                   } catch (ClassCastException e) {
                     Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
                     return "INVALID PROPERTY FOR DAY: " + propName;
+                  }
+                } else if (heart) {
+                  try {
+                    float val = (float) value * 0.5f;
+                    value = String.format("%.01f", val);
+                  } catch (ClassCastException e) {
+                    Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
+                    return "INVALID PROPERTY FOR HEARTS: " + propName;
                   }
                 }
               } else {

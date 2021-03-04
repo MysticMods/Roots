@@ -28,7 +28,8 @@
           ["   R   ","       ","       ","R     R","       ","       ","       "],
           ["   R   ","       ","       ","R  0  R","       ","       ","       "]
         ]
-      }
+      },
+      "text": "The ritual requires three $(l:rituals/standing_stones)standing stones$() of runestone or runed obsidian."
     },
     {
       "type": "text",

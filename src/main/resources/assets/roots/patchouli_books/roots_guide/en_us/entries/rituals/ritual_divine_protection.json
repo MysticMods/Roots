@@ -28,12 +28,17 @@
           ["   R   ","       ","       ","       ","       ","       ","       "],
           ["   R   ","       ","       ","   0   ","       ","       ","       "]
         ]
-      }
+      },
+      "text": "A single $(l:rituals/standing_stone)standing stone$() of runestone or runed obsidian is required."
     },
     {
       "type": "text",
       "title": "Ritual Specifics",
-      "text": "$(bold)Rain$(): Whether or not rain will be cleared: $(ritual:divine_protection/BOOL/rain).$(br2)$(bold)Time$(): Whether or not time will be adjusted: $(ritual:divine_protection/BOOL/time). Average decrease of night duration is $(ritual:divine_protection/NIGHT/night_reduction). Average increase of day duration is $(ritual:divine_protection/DAY/day_extension).$(br2)"
+      "text": "$(bold)Duration:$() The ritual lasts for $(ritual:divine_protection/SECONDS/duration) seconds.$(br2)$(bold)Size:$() Undead damage area extends $(ritual:divine_protection/radius_x) and $(ritual:divine_protection/radius_z) blocks from the center, and vertically by $(ritual:divine_protection/radius_y).$(br2)$(bold)Rain$(): Whether rain is cleared: $(ritual:divine_protection/BOOL/rain).$(br2)$(bold)Time$(): Whether time will be adjusted: $(ritual:divine_protection/BOOL/time). Night is decreased by $(ritual:divine_protection/NIGHT/night_reduction). Day is increased by $(ritual:divine_protection/DAY/day_extension).$(br2)"
+    },
+    {
+      "type": "text",
+      "text": "$(bold)Damage$(): The ritual deals $(ritual:divine_protection/HEART/fire_damage) hearts of fire damage to undead entities, or $(ritual:divine_protection/HEART/consecration_damage) hearts of fire damage if consecration is installed.$(br2)Additionally, undead creatures who are damaged are also set on fire for $(ritual:divine_protection/fire_duration) seconds."
     },
     {
       "type": "relations",
