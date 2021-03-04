@@ -1,11 +1,23 @@
 {
-    "name": "Starting Fires",
-    "icon": "roots:fire_starter",
-    "category": "rituals_ritual",
-    "pages": [
-        {
-          "type": "text",
-          "text": "Once a ritual has been begun on a Pyre, the Pyre will begin looking for the same ingredients (or similar where the ore dictionary is used) in inventories below it. If found, these will be inserted into the Pyre.$(br2)At the end of a ritual, if the Pyre contains the items to repeat itself, the fire does not go out but starts anew, consuming the items."
-        }
-    ]
+  "name": "Starting Fires",
+  "icon": "roots:fire_starter",
+  "category": "rituals_ritual",
+  "pages": [
+    {
+      "type": "oredict_spotlight",
+      "oredict": "pyreFireStarters",
+      "name": "Fire Starters",
+      "text": "Pyres can be lit through a variety of devices, including the ones shown above. If the item can be damaged, the act of starting the ritual will damage it.$(br2)Fire starters can be configured through the entry $(bold)pyreFireStarters$() in the ore dictionary."
+    },
+    {
+      "type": "crafting",
+      "recipe": "roots:firestarter",
+      "text": "Additionally, a rudimentary $(l:crafting/armor_and_tools/firestarter)fire-starter$() can be crafted from two sticks.$(br2)You must channel the device on the Pyre for several seconds to start it, after which point the device is consumed."
+    },
+    {
+      "type": "text",
+      "title": "Automation",
+      "text": "The pyre will automatically light itself if it finds fire in the area immediately around it. $(l:rituals/automation)Please see the section on Automation$() for more precise details."
+    }
+  ]
 }

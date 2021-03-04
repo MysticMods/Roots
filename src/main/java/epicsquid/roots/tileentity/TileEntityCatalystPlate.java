@@ -79,15 +79,12 @@ public class TileEntityCatalystPlate extends TileBase {
     this.lastPlayer = player.getUniqueID();
     markDirty();
     int count = heldItem.getCount();
-    if (player.isSneaking()) {
-      count = 1;
-    }
 
     if (!heldItem.isEmpty()) {
       ItemStack inSlot = inventory.getStackInSlot(0);
       boolean doInsert = false;
       if (!inSlot.isEmpty() && ItemUtil.equalWithoutSize(inSlot, heldItem) && inSlot.getCount() < inSlot.getMaxStackSize()) {
-        if (!player.isSneaking()) {
+        if (player.isSneaking()) {
           count = Math.min(inSlot.getMaxStackSize() - inSlot.getCount(), heldItem.getCount());
         }
         doInsert = true;
@@ -99,20 +96,26 @@ public class TileEntityCatalystPlate extends TileBase {
         toInsert.setCount(count);
         ItemStack attemptedInsert = inventory.insertItem(0, toInsert, true);
         if (attemptedInsert.isEmpty()) {
-          inventory.insertItem(0, toInsert, false);
-          player.getHeldItem(hand).shrink(count);
-          if (player.getHeldItem(hand).getCount() == 0) {
-            player.setHeldItem(hand, ItemStack.EMPTY);
-          }
+          if (!world.isRemote) {
+            inventory.insertItem(0, toInsert, false);
+            player.getHeldItem(hand).shrink(count);
+            if (player.getHeldItem(hand).getCount() == 0) {
+              player.setHeldItem(hand, ItemStack.EMPTY);
+            }
 
-          if (!world.isRemote)
             updatePacketViaState();
+          }
           return true;
         }
       }
     }
     if (heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND) {
-      if (!inventory.getStackInSlot(0).isEmpty()) {
+      ItemStack inSlot = inventory.getStackInSlot(0);
+      if (!inSlot.isEmpty()) {
+        count = inSlot.getCount();
+        if (player.isSneaking()) {
+          count = 1;
+        }
         ItemStack extracted = inventory.extractItem(0, count, false);
         ItemUtil.spawnItem(world, getPos(), extracted);
         updatePacketViaState();

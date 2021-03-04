@@ -57,6 +57,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -252,6 +253,8 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
     }
   }
 
+  private Ingredient fireStarters = null;
+
   @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
@@ -304,10 +307,13 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
         }
       }
       // TODO: Make this a configurable array of items or extensible classes
-      if (heldItem.getItem() instanceof ItemFlintAndSteel) {
+      if (fireStarters == null) {
+        fireStarters = new OreIngredient("pyreFireStarters");
+      }
+      if (fireStarters.test(heldItem)) {
         boolean result = startRitual(player, false);
         this.lastPlayerId = player.getUniqueID();
-        if (result) {
+        if (result && heldItem.isItemStackDamageable() /*&& !player.isCreative()*/) {
           heldItem.damageItem(1, player);
         }
         return result;
