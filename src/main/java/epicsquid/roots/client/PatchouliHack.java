@@ -114,6 +114,21 @@ public class PatchouliHack {
             String propName = parts[1];
             boolean seconds = false;
             boolean minutes = false;
+            boolean bool = false;
+            boolean night = false;
+            boolean day = false;
+            if (propName.equals("NIGHT")) {
+              propName = parts[2];
+              night = true;
+            }
+            if (propName.equals("DAY")) {
+              propName = parts[2];
+              day = true;
+            }
+            if (propName.equals("BOOL")) {
+              propName = parts[2];
+              bool = true;
+            }
             if (propName.equals("SECONDS")) {
               propName = parts[2];
               seconds = true;
@@ -142,6 +157,30 @@ public class PatchouliHack {
                   } catch (ClassCastException e) {
                     Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
                     return "INVALID PROPERTY FOR MINUTES: " + propName;
+                  }
+                } else if (bool) {
+                  try {
+                    boolean val = (boolean) value;
+                    value = val ? "true" : "false";
+                  } catch (ClassCastException e) {
+                    Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
+                    return "INVALID PROPERTY FOR BOOL: " + propName;
+                  }
+                } else if (night) {
+                  try {
+                    double val = 100.0 / (double) ((int)value + 1);
+                    value = (int) val + "%";
+                  } catch (ClassCastException e) {
+                    Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
+                    return "INVALID PROPERTY FOR NIGHT: " + propName;
+                  }
+                } else if (day) {
+                  try {
+                    double val = 100.0 / (double) (int) value;
+                    value = (int) val + "%";
+                  } catch (ClassCastException e) {
+                    Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
+                    return "INVALID PROPERTY FOR DAY: " + propName;
                   }
                 }
               } else {

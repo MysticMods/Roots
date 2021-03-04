@@ -12,7 +12,7 @@
     {
       "type": "pyre_template",
       "ritual": "ritual_animal_harvest",
-      "text": "$(standing_stones) As a $(bold)tier 3$() ritual, $(l:rituals/ritual_animal_harvest#multiblock)3 standing stones are required to begin$(). Please see later pages of this entry."
+      "text": "$(standing_stones) As a $(bold)tier III$() ritual, $(l:rituals/ritual_animal_harvest#multiblock)3 standing stones are required to begin$(). Please see later pages of this entry."
     },
     {
       "type": "multiblock",
