@@ -7,11 +7,12 @@
   "pages": [
     {
       "type": "text",
-      "text": "From the heavens spew forth meteors of $(l:basics/fey_fire)fey fire$(). While fey fire does not burn players, peaceful creatures or items, hostiles killed with it count as though a player had done so, with Looting II.$(br2)$(standing_stones) $(l:rituals/ritual_fire_storm#multiblock)This ritual requires standing stones.$()"
+      "text": "Large meteors of wild fire fall from the sky, travelling through any obstacle in their way to reach the ritual location. Wild fire does not burn players, items, or peaceful creatures.$(br2)$(info) Entities killed by meteors or wild fire are considered to have been killed by a player with Looting II.$(br2)Wild fire decays naturally."
     },
     {
       "type": "pyre_template",
-      "ritual": "ritual_fire_storm"
+      "ritual": "ritual_fire_storm",
+      "text": "$(standing_stones) As a $(bold)tier IV$() ritual, $(l:rituals/ritual_divine_protection#multiblock)4 standing stones are required to begin$(). Please see later pages of this entry."
     },
     {
       "type": "multiblock",
@@ -28,14 +29,18 @@
           ["   R   ","       ","       ","R     R","       ","       ","   R   "],
           ["   R   ","       ","       ","R  0  R","       ","       ","   R   "]
         ]
-      }
+      },
+      "text": "$(l:rituals/standing_stone)Standing stones$() of runestone or runed obsidian are required: a 3-high and three 4-high."
+    },
+    {
+      "type": "text",
+      "title": "Ritual Specifics",
+      "text": "$(bold)Duration:$() The ritual lasts for $(ritual:fire_storm/SECONDS/duration) seconds.$(br2)$(bold)Meteors$(): A maximum number of $(ritual:fire_storm/projectile_count) meteors can be active per a ritual at a time.$(br2)$(bold)Damage$(): Each meteor specifically deals $(ritual:fire_storm/HEART/projectile_damage) hearts of damage, with a knockback value of $(ritual:fire_storm/projectile_knockback).$(br2)$(bold)Location$(): The ritual will function underground as well as above ground."
     },
     {
       "type": "relations",
       "anchor": "related",
       "entries": [
-        "basics/fey_fire",
-        "rituals/standing_stones"
       ]
     }
   ]
