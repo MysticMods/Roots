@@ -7,11 +7,12 @@
   "pages": [
     {
       "type": "text",
-      "text": "Rainy weather and clouds are repelled by this ritual, which also slows the sun's movement. At night, it has the opposite effect. $(info) Nearby undead will be smitten by fire.$(br2)$(info) Day is increased by roughly 30%, and night reduced by 50%.$(br2)$(standing_stones) $(l:rituals/ritual_divine_protection#multiblock)This ritual requires standing stones.$()"
+      "text": "Calling upon the protection of an ancient sun deity, forgotten even in the time of the Druids, this ritual drastically alters the weather & time cycle.$(br2)Rain is dispelled by this ritual, while the length of a day is increased, and the duration of night is shortened.$(br2)In addition, nearby undead, anathema to the sun, will be smote with fire."
     },
     {
       "type": "pyre_template",
-      "ritual": "ritual_divine_protection"
+      "ritual": "ritual_divine_protection",
+      "text": "$(standing_stones) As a $(bold)tier I$() ritual, $(l:rituals/ritual_divine_protection#multiblock)a single standing stone is required to begin$(). Please see later pages of this entry."
     },
     {
       "type": "multiblock",
@@ -23,17 +24,21 @@
           "C": "roots:chiseled_runestone"
         },
         "pattern": [
-          ["   C   ","       ","       ","C     C","       ","       ","       "],
-          ["   R   ","       ","       ","R     R","       ","       ","       "],
-          ["   R   ","       ","       ","R  0  R","       ","       ","       "]
+          ["   C   ","       ","       ","       ","       ","       ","       "],
+          ["   R   ","       ","       ","       ","       ","       ","       "],
+          ["   R   ","       ","       ","   0   ","       ","       ","       "]
         ]
       }
+    },
+    {
+      "type": "text",
+      "title": "Ritual Specifics",
+      "text": "$(bold)Rain$(): Whether or not rain will be cleared: $(ritual:divine_protection/BOOL/rain).$(br2)$(bold)Time$(): Whether or not time will be adjusted: $(ritual:divine_protection/BOOL/time). Average decrease of night duration is $(ritual:divine_protection/NIGHT/night_reduction). Average increase of day duration is $(ritual:divine_protection/DAY/day_extension).$(br2)"
     },
     {
       "type": "relations",
       "anchor": "related",
       "entries": [
-        "rituals/standing_stones"
       ]
     }
   ]
