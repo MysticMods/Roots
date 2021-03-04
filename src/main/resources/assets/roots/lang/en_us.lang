@@ -498,7 +498,7 @@ roots.runic_shears.tooltip1=%s a block or entity to attempt to collect a Fey Gif
 roots.runic_shears.tooltip2=%s an entity to attempt to extract its Life Essence.
 
 roots.glass_eye.tooltip=Right-Click to shatter and grant vision in dark places.
-roots.fire_starter.tooltip=Hold Right-Click to slowly start a fire.
+roots.fire_starter.tooltip=Hold Right-Click to slowly start a fire. Single use.
 
 # Ritual of Transmutation
 roots.ritual.transmutation.deadbush_cocoa=Obtained through the Ritual of Transmutation. Nearby dead bushes will transform into cocoa beans.
