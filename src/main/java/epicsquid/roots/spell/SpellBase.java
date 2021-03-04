@@ -75,7 +75,6 @@ public abstract class SpellBase extends RegistryItem {
 
   public SpellBase(ResourceLocation name, TextFormatting textColor, float r1, float g1, float b1, float r2, float g2, float b2) {
     setRegistryName(name);
-    defaultModifiers();
     this.name = name.getPath();
     this.red1 = r1;
     this.green1 = g1;
@@ -124,7 +123,7 @@ public abstract class SpellBase extends RegistryItem {
     this.sound = sound;
   }
 
-  public boolean shouldPlaySound () {
+  public boolean shouldPlaySound() {
     if (sound == null) {
       return true;
     } else {
@@ -166,12 +165,12 @@ public abstract class SpellBase extends RegistryItem {
     return acceptedModifiers;
   }
 
-  public void setCastSound (@Nullable SoundEvent event) {
+  public void setCastSound(@Nullable SoundEvent event) {
     this.cast_sound = event;
   }
 
   @Nullable
-  public SoundEvent getCastSound () {
+  public SoundEvent getCastSound() {
     return this.cast_sound;
   }
 
@@ -268,7 +267,6 @@ public abstract class SpellBase extends RegistryItem {
   @SideOnly(Side.CLIENT)
   public void addToolTip(List<String> tooltip, @Nullable StaffModifierInstanceList list) {
     addToolTipBase(tooltip, list);
-    StringJoiner basics = new StringJoiner(", ");
     if (list != null) {
       double addition = 0;
       double subtraction = 0;
@@ -288,11 +286,7 @@ public abstract class SpellBase extends RegistryItem {
               }
             }
           }
-          if (m.isBasic()) {
-            basics.add(m.describe());
-          } else {
-            joiner.add(m.describe());
-          }
+          joiner.add(m.describe());
         }
 
         String result = joiner.toString();
@@ -300,7 +294,6 @@ public abstract class SpellBase extends RegistryItem {
           tooltip.add(result);
         }
         if (GuiScreen.isShiftKeyDown()) {
-          result = basics.toString();
           if (!result.isEmpty()) {
             tooltip.add(result);
           }
@@ -320,13 +313,8 @@ public abstract class SpellBase extends RegistryItem {
               }
             }
           }
-          if (m.isBasic()) {
-            basics.add(m.describe());
-          } else {
-            tooltip.add(m.describe());
-          }
+          tooltip.add(m.describe());
         }
-        tooltip.add(basics.toString());
       }
       double actualSub = subtraction - addition;
       double actualAdd = addition - subtraction;
@@ -381,24 +369,11 @@ public abstract class SpellBase extends RegistryItem {
 
   public CastResult cast(EntityPlayer caster, StaffSpellInfo info, int ticks) {
     StaffModifierInstanceList mods = info.getModifiers();
-    ISpellMulitipliers.Buff speedy = ISpellMulitipliers.Buff.NONE;
-    if (mods.has(BaseModifiers.SPEEDY)) {
-      speedy = ISpellMulitipliers.Buff.BONUS;
-    }
-    if (mods.has(BaseModifiers.GREATER_SPEEDY)) {
-      speedy = ISpellMulitipliers.Buff.GREATER_BONUS;
-    }
 
     CastResult result = CastResult.FAIL;
 
     if (cast(caster, info.getModifiers(), ticks)) {
-      if (speedy.equals(ISpellMulitipliers.Buff.NONE)) {
-        result = CastResult.SUCCESS;
-      } else if (speedy.equals(ISpellMulitipliers.Buff.BONUS)) {
-        result = CastResult.SUCCESS_SPEEDY;
-      } else {
-        result = CastResult.SUCCESS_GREATER_SPEEDY;
-      }
+      result = CastResult.SUCCESS;
     }
 
     if (result != CastResult.FAIL && !caster.world.isRemote && (ticks == 0 || ticks == 72000)) {
@@ -518,10 +493,6 @@ public abstract class SpellBase extends RegistryItem {
     this.finalised = true;
   }
 
-  public void defaultModifiers() {
-    acceptsModifiers(BaseModifiers.EMPOWER, BaseModifiers.GREATER_EMPOWER, BaseModifiers.SPEEDY, BaseModifiers.GREATER_SPEEDY, BaseModifiers.REDUCTION, BaseModifiers.GREATER_REDUCTION);
-  }
-
   public void finalise() {
     doFinalise();
     finaliseCosts();
@@ -564,8 +535,6 @@ public abstract class SpellBase extends RegistryItem {
       if (player != null) {
         spell.setPlayer(player.getUniqueID());
       }
-      spell.setAmplifier(amplifier);
-      spell.setSpeedy(speedy);
       world.spawnEntity(spell);
       return spell;
     }
@@ -599,7 +568,7 @@ public abstract class SpellBase extends RegistryItem {
       return cost;
     }
 
-    public IModifierCost asCost () {
+    public IModifierCost asCost() {
       return new Cost(getType(), getCost(), ModifierCores.fromHerb(getHerb()));
     }
 
@@ -632,7 +601,7 @@ public abstract class SpellBase extends RegistryItem {
       return cost;
     }
 
-    public String getHerbName () {
+    public String getHerbName() {
       return this.herb;
     }
 
@@ -644,7 +613,6 @@ public abstract class SpellBase extends RegistryItem {
           '}';
     }
   }
-
 
 
   public static class SpellRecipe implements IRootsRecipe<TileEntityMortar> {

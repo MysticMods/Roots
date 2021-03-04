@@ -22,7 +22,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
@@ -98,19 +97,19 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
                     continue;
                   }
                   hit = true;
-                  entity.setFire(modifiers.ampInt(instance.fire_duration));
-                  entity.attackEntityFrom(ModDamage.fireDamageFrom(player), modifiers.ampFloat(instance.damage));
+                  entity.setFire(instance.fire_duration);
+                  entity.attackEntityFrom(ModDamage.fireDamageFrom(player), instance.damage);
                   if (modifiers.has(SpellWildfire.WEAKNESS)) {
-                    entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, modifiers.ampInt(instance.weakness_duration), instance.weakness_amplifier));
+                    entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, instance.weakness_duration, instance.weakness_amplifier));
                   }
                   if (modifiers.has(SpellWildfire.SLOW)) {
-                    entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, modifiers.ampInt(instance.slow_duration), instance.slow_amplifier));
+                    entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, instance.slow_duration, instance.slow_amplifier));
                   }
                   if (modifiers.has(SpellWildfire.LEVITATE)) {
-                    entity.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, modifiers.ampInt(instance.levitate_duration), 0));
+                    entity.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, instance.levitate_duration, 0));
                   }
                   if (modifiers.has(SpellWildfire.POISON)) {
-                    entity.addPotionEffect(new PotionEffect(MobEffects.POISON, modifiers.ampInt(instance.poison_duration), instance.poison_amplifier));
+                    entity.addPotionEffect(new PotionEffect(MobEffects.POISON, instance.poison_duration, instance.poison_amplifier));
                   }
                   if (modifiers.has(SpellWildfire.ICICLES)) {
                     int count = instance.icicle_count;

@@ -3,7 +3,6 @@ package epicsquid.roots.spell;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
-import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.properties.Property;
@@ -79,7 +78,7 @@ public class SpellStormCloud extends SpellBase {
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     World world = player.world;
     if (!world.isRemote) {
-      player.addPotionEffect(new PotionEffect(ModPotions.storm_cloud, info.speedAmpInt(duration), 0, false, false));
+      player.addPotionEffect(new PotionEffect(ModPotions.storm_cloud, duration, 0, false, false));
       player.getEntityData().setIntArray(getCachedName(), info.toArray());
       world.playSound(null, player.getPosition(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS, 0.3f, 2f);
     }

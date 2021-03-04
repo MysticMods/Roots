@@ -122,7 +122,7 @@ public class SpellGeas extends SpellBase {
     if (info.has(DURATION)) {
       dur += extension;
     }
-    dur = info.speedAmpInt(dur);
+    dur = dur;
     boolean peaceful = info.has(PEACEFUL);
 
     if (info.has(ADDED2)) {

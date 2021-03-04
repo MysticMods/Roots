@@ -136,7 +136,7 @@ public class EntityBoost extends Entity {
         if (modifiers.has(SpellSkySoarer.FASTER)) {
           amplifier += SpellSkySoarer.instance.extended_amplifier;
         }
-        amplifier = modifiers.speedAmpFloat(amplifier);
+        amplifier = amplifier;
         Entity[] result = getTargets();
         if (result != null) {
           EntityPlayer player = (EntityPlayer) result[0];

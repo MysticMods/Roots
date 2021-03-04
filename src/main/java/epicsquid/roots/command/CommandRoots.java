@@ -93,10 +93,8 @@ public class CommandRoots extends CommandBase {
         List<String> modifierList = new ArrayList<>();
         for (SpellBase spell : SpellRegistry.spellRegistry.values()) {
           for (IModifier modifier : spell.getModifiers()) {
-            if (!modifier.isBasic()) {
-              modifierList.add(modifier.getTranslationKey());
-              modifierList.add(modifier.getTranslationKey() + ".desc");
-            }
+            modifierList.add(modifier.getTranslationKey());
+            modifierList.add(modifier.getTranslationKey() + ".desc");
           }
         }
         Path path = Paths.get("roots.log");

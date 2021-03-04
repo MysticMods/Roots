@@ -32,7 +32,6 @@ import net.minecraft.util.text.TextFormatting;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class SpellHarvest extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(25);
@@ -213,7 +212,7 @@ public class SpellHarvest extends SpellBase {
 
     if (info.has(UNDEAD) && !player.world.isRemote) {
       if (Util.rand.nextFloat() < undead_chance) {
-        int c = info.ampInt(undead_count + Util.rand.nextInt(undead_additional));
+        int c = undead_count + Util.rand.nextInt(undead_additional);
         for (int i = 0; i < c; i++) {
           Item it = ModItems.spirit_bag;
           if (Util.rand.nextFloat() < undead_rarity) {

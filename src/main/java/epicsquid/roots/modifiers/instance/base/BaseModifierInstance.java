@@ -70,9 +70,6 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
 
   @SideOnly(Side.CLIENT)
   public String describe() {
-    if (isBasic()) {
-      return I18n.format(getTranslationKey());
-    }
     if (GuiScreen.isShiftKeyDown()) {
       return getFormatting() + I18n.format(getTranslationKey()) + TextFormatting.GRAY + ": " + I18n.format(getTranslationKey() + ".desc");
     } else {
@@ -139,11 +136,6 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
     } else {
       return modifier.getCore();
     }
-  }
-
-  @Override
-  public boolean isBasic() {
-    return modifier.isBasic();
   }
 
   @Override

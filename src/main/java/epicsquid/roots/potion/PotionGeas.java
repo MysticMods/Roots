@@ -46,16 +46,16 @@ public class PotionGeas extends Potion {
     } else {
       ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(target.getEntityData(), SpellGeas.instance);
       if (mods.has(SpellGeas.WEAKNESS)) {
-        target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, mods.ampInt(SpellGeas.instance.weakness_duration), SpellGeas.instance.weakness_amplifier));
+        target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, SpellGeas.instance.weakness_duration, SpellGeas.instance.weakness_amplifier));
       } else if (mods.has(SpellGeas.FIRE)) {
-        target.setFire(mods.ampInt(SpellGeas.instance.fire_duration));
-        target.attackEntityFrom(DamageSource.IN_FIRE, mods.ampFloat(SpellGeas.instance.fire_damage));
+        target.setFire(SpellGeas.instance.fire_duration);
+        target.attackEntityFrom(DamageSource.IN_FIRE, SpellGeas.instance.fire_damage);
       } else if (mods.has(SpellGeas.PHYSICAL)) {
         // TODO: VISUAL EFFECT
-        target.attackEntityFrom(ModDamage.PHYSICAL_DAMAGE, mods.ampFloat(SpellGeas.instance.physical_damage));
+        target.attackEntityFrom(ModDamage.PHYSICAL_DAMAGE, SpellGeas.instance.physical_damage);
       } else if (mods.has(SpellGeas.WATER)) {
         // TODO: ROCK FALL EVERYONE DIE
-        target.attackEntityFrom(ModDamage.waterDamageFrom(null), mods.ampFloat(SpellGeas.instance.water_damage));
+        target.attackEntityFrom(ModDamage.waterDamageFrom(null), SpellGeas.instance.water_damage);
       }
     }
   }

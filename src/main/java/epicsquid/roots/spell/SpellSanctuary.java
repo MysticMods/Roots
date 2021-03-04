@@ -5,7 +5,6 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageSanctuaryBurstFX;
@@ -124,17 +123,17 @@ public class SpellSanctuary extends SpellBase {
                 e.attackEntityFrom(DamageSource.causeMobDamage(player), spider_damage);
               }
               if (info.has(WITHER)) {
-                ((EntityLivingBase) e).addPotionEffect(new PotionEffect(MobEffects.WITHER, info.speedAmpInt(wither_duration), wither_amplifier));
+                ((EntityLivingBase) e).addPotionEffect(new PotionEffect(MobEffects.WITHER, wither_duration, wither_amplifier));
               }
               if (info.has(LEVITATE)) {
-                ((EntityLivingBase) e).addPotionEffect(new PotionEffect(MobEffects.LEVITATION, info.speedAmpInt(levitation_duration), 0));
+                ((EntityLivingBase) e).addPotionEffect(new PotionEffect(MobEffects.LEVITATION, levitation_duration, 0));
               }
               if (info.has(UNDEAD) && ((EntityLivingBase) e).isEntityUndead()) {
                 e.attackEntityFrom(DamageSource.causeMobDamage(player), undead_damage);
               }
             }
             if (info.has(FIRE)) {
-              e.setFire(info.speedAmpInt(fire_duration));
+              e.setFire(fire_duration);
             }
           }
         }

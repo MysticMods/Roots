@@ -4,7 +4,6 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.entity.spell.EntityTimeStop;
 import epicsquid.roots.init.ModItems;
-import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageTimeStopStartFX;
@@ -82,9 +81,9 @@ public class SpellTimeStop extends SpellBase {
       if (info.has(LONGER)) {
         dur += overtime;
       }
-      dur = info.ampInt(dur);
+      dur = dur;
       if (info.has(SHORTER)) {
-        dur = info.ampSubInt(undertime);
+        dur = undertime;
       }
       EntityTimeStop timeStop = new EntityTimeStop(player.world, dur);
       timeStop.setPlayer(player.getUniqueID());
@@ -93,7 +92,7 @@ public class SpellTimeStop extends SpellBase {
       player.world.spawnEntity(timeStop);
       PacketHandler.sendToAllTracking(new MessageTimeStopStartFX(player.posX, player.posY + 1.0f, player.posZ), player);
       if (info.has(SPEED)) {
-        player.addPotionEffect(new PotionEffect(MobEffects.SPEED, info.speedAmpInt(speed_duration), speed_amplifier));
+        player.addPotionEffect(new PotionEffect(MobEffects.SPEED, speed_duration, speed_amplifier));
       }
     }
     return true;

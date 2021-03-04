@@ -73,7 +73,7 @@ public class EntityIcicle extends EntityFireball {
             dam = SpellStormCloud.instance.icicle_damage;
             break;
         }
-        dam = modifiers == null ? dam : modifiers.ampFloat(dam);
+        dam = modifiers == null ? dam : dam;
         result.entityHit.attackEntityFrom(source, dam);
       }
       setDead();

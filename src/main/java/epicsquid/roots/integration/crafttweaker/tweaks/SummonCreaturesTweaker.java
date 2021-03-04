@@ -124,7 +124,7 @@ public class SummonCreaturesTweaker {
 
     @Override
     public void apply() {
-      Class<? extends EntityLivingBase> clz = (Class<? extends EntityLivingBase>) entry.getEntityClass();
+      @SuppressWarnings("unchecked") Class<? extends EntityLivingBase> clz = (Class<? extends EntityLivingBase>) entry.getEntityClass();
       ModRecipes.removeLifeEssence(clz);
     }
 

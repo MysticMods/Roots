@@ -40,16 +40,9 @@ public class Cost implements IModifierCost {
     return value;
   }
 
-  @Nullable
   @Override
   public Herb getHerb() {
-    if (herb == null) {
-      return null;
-    }
-    if (herb.isHerb()) {
-      return herb.getHerb();
-    }
-    return null;
+    return herb.getHerb();
   }
 
   public static Map<CostType, IModifierCost> single(CostType cost, IModifierCore herb, double value) {

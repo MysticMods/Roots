@@ -130,11 +130,11 @@ public class SpellAcidCloud extends SpellBase {
             continue;
           }
           if (regen_duration != -1) {
-            e.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, info.speedAmpInt(regen_duration), regen_amp));
+            e.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, regen_duration, regen_amp));
           }
           // TODO: Particle effect to denote entities being healed
           if (healing > 0) {
-            e.heal(info.ampFloat(healing * modifier));
+            e.heal(healing * modifier);
           }
           healed++;
           if (heal_count != -1 && healed >= heal_count) {
@@ -148,24 +148,24 @@ public class SpellAcidCloud extends SpellBase {
                 continue;
               }
               if (info.has(WEAKNESS)) {
-                e.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, info.speedAmpInt(weakness_duration), weakness_amplifier));
+                e.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, weakness_duration, weakness_amplifier));
               }
               if (info.has(FIRE)) {
-                e.attackEntityFrom(ModDamage.fireDamageFrom(player), info.ampFloat(damage * modifier) / 2);
-                e.attackEntityFrom(DamageSource.causeMobDamage(player), info.ampFloat(damage * modifier) / 2);
+                e.attackEntityFrom(ModDamage.fireDamageFrom(player), damage * modifier / 2);
+                e.attackEntityFrom(DamageSource.causeMobDamage(player), damage * modifier / 2);
                 e.setFire(fireDuration);
               } else {
-                e.attackEntityFrom(DamageSource.causeMobDamage(player), info.ampFloat(damage * modifier));
+                e.attackEntityFrom(DamageSource.causeMobDamage(player), damage * modifier);
               }
               // TODO: Additional visual effect
               if (info.has(UNDEAD) && e.isEntityUndead()) {
-                e.attackEntityFrom(ModDamage.radiantDamageFrom(player), info.ampFloat(undead_damage * modifier));
+                e.attackEntityFrom(ModDamage.radiantDamageFrom(player), undead_damage * modifier);
               }
               if (info.has(SLOWING)) {
-                e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, info.speedAmpInt(slow_duration), slow_amplifier));
+                e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, slow_duration, slow_amplifier));
               }
               if (SpellConfig.spellFeaturesCategory.acidCloudPoisoningEffect) {
-                e.addPotionEffect(new PotionEffect(MobEffects.POISON, info.speedAmpInt(poisonDuration), poisonAmplification));
+                e.addPotionEffect(new PotionEffect(MobEffects.POISON, poisonDuration, poisonAmplification));
               }
               e.setRevengeTarget(player);
               e.setLastAttackedEntity(player);
