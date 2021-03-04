@@ -32,7 +32,6 @@ public class RitualGathering extends RitualBase {
         new OreIngredient("ingotIron"),
         new OreIngredient("dustRedstone")
     );
-    addCondition(new ConditionStandingStones(3, 1));
     setIcon(ModItems.ritual_gathering);
     setColor(TextFormatting.YELLOW);
     setBold(true);

@@ -35,7 +35,6 @@ public class RitualFrostLands extends RitualBase implements IColdRitual {
         new ItemStack(ModItems.bark_spruce),
         new ItemStack(ModItems.bark_spruce)
     );
-    addCondition(new ConditionStandingStones(3, 1));
     setIcon(ModItems.ritual_frost_lands);
     setColor(TextFormatting.AQUA);
     setBold(true);
