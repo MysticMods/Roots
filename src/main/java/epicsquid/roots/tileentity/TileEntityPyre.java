@@ -490,18 +490,17 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
   public boolean tickFire() {
     boolean found = false;
     if (!world.isRemote) {
-      if (ticker % 10 == 0) {
+      if (ticker % 10 == 0 && !isBurning) {
         AxisAlignedBB bounds = bounding.offset(getPos());
         BlockPos start = new BlockPos(bounds.minX, bounds.minY, bounds.minZ);
         BlockPos stop = new BlockPos(bounds.maxX, bounds.maxY, bounds.maxZ);
         for (BlockPos.MutableBlockPos pos : BlockPos.getAllInBoxMutable(start, stop)) {
           if (world.getBlockState(pos).getBlock() == Blocks.FIRE) {
+            found = true;
             if (!world.getBlockState(pos.down()).getBlock().isFireSource(world, pos.down(), EnumFacing.UP)) {
-              for (int i = 0; i < 1 + Util.rand.nextInt(3); i++) {
-                world.getBlockState(pos).getBlock().randomTick(world, pos, world.getBlockState(pos), Util.rand);
-              }
-              found = true;
+              world.setBlockState(pos, Blocks.AIR.getDefaultState());
             }
+            break;
           }
         }
       }
