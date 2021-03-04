@@ -39,7 +39,6 @@ public class RitualPurity extends RitualBase {
         new ItemStack(Items.GLASS_BOTTLE)
     );
     addCondition(new ConditionRunedPillars(RitualUtil.RunedWoodType.OAK, 3, 2));
-    addCondition(new ConditionStandingStones(3, 1));
     setIcon(ModItems.ritual_purity);
     setColor(TextFormatting.LIGHT_PURPLE);
     setBold(true);

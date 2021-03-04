@@ -41,7 +41,7 @@ public class RitualWindwall extends RitualBase {
     setIcon(ModItems.ritual_windwall);
     setColor(TextFormatting.DARK_AQUA);
     addCondition(new ConditionRunedPillars(RitualUtil.RunedWoodType.SPRUCE, 4, 1));
-    addCondition(new ConditionStandingStones(4, 2));
+    addCondition(new ConditionStandingStones(4, 1));
   }
 
   @Override

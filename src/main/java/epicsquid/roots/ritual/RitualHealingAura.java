@@ -40,7 +40,6 @@ public class RitualHealingAura extends RitualBase {
         new OreIngredient("wildroot"),
         new ItemStack(Blocks.SAPLING, 1, 2)
     );
-    addCondition(new ConditionStandingStones(3, 1));
     addCondition(new ConditionRunedPillars(RitualUtil.RunedWoodType.BIRCH, 3, 1));
     setIcon(ModItems.ritual_healing_aura);
     setColor(TextFormatting.GOLD);

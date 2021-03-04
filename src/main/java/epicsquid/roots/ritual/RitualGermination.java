@@ -38,7 +38,6 @@ public class RitualGermination extends RitualBase {
         new OreIngredient("rootsBark")
     );
     addCondition(new ConditionStandingStones(3, 1));
-    addCondition(new ConditionStandingStones(4, 1));
     setIcon(ModItems.ritual_germination);
     setColor(TextFormatting.DARK_RED);
     setBold(true);
