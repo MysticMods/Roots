@@ -307,7 +307,7 @@ public class SpellSaturate extends SpellBase {
       int excessFood = newFood - 20;
       if (excessSat > 0 || excessFood > 0) {
         int amount = MathHelper.ceil(excessSat) * Math.min(1, excessFood);
-        caster.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, info.speedAmpInt(amount * resistance_duration), resistance_amplifier, false, false));
+        caster.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, amount * resistance_duration, resistance_amplifier, false, false));
       }
     }
 
@@ -407,7 +407,7 @@ public class SpellSaturate extends SpellBase {
     }
     double result = (heal * saturation * 2) * sat;
     if (info.has(INVERSION)) {
-      result = inversion(result, info.ampInt(inversion_saturation_boost));
+      result = inversion(result, inversion_saturation_boost);
     }
     return result;
   }
@@ -438,7 +438,7 @@ public class SpellSaturate extends SpellBase {
     }
     double result = item.getHealAmount(stack) * food;
     if (info.has(INVERSION)) {
-      result = inversion(result, info.ampInt(inversion_food_boost));
+      result = inversion(result, inversion_food_boost);
     }
     return MathHelper.floor(result);
   }

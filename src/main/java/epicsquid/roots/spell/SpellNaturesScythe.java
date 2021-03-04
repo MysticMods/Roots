@@ -19,7 +19,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -33,7 +32,6 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.oredict.OreIngredient;
 
-import javax.annotation.Nullable;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
@@ -113,7 +111,7 @@ public class SpellNaturesScythe extends SpellBase {
       x *= 2;
     }
 
-    int interval = Math.max(1, info.speedSubInt(this.interval));
+    int interval = Math.max(1, this.interval);
     if (ticks % interval == 0) {
       return false;
     }

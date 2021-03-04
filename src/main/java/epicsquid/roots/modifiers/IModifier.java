@@ -24,8 +24,6 @@ public interface IModifier extends IRegistryItem {
 
   IModifierCore getCore();
 
-  boolean isBasic();
-
   Map<CostType, IModifierCost> getCosts();
 
   Set<IModifier> getConflicts();

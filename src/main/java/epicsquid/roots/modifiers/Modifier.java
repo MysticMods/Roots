@@ -55,11 +55,6 @@ public class Modifier extends RegistryItem implements IModifier {
   }
 
   @Override
-  public boolean isBasic() {
-    return core.isBasic();
-  }
-
-  @Override
   public Map<CostType, IModifierCost> getCosts() {
     return costs;
   }

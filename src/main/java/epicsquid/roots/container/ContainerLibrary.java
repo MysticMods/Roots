@@ -146,15 +146,9 @@ public class ContainerLibrary extends Container implements IInvalidatingContaine
     addSlotToContainer(new SlotLibraryModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.WILDEWHEET, 95, 38));
     addSlotToContainer(new SlotLibraryModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.SPIRIT_HERB, 95, 73));
     addSlotToContainer(new SlotLibraryModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.CLOUD_BERRY, 95, 108));
-    addSlotToContainer(new SlotLibraryModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.REDSTONE, 70, 38));
-    addSlotToContainer(new SlotLibraryModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.GUNPOWDER, 70, 73));
-    addSlotToContainer(new SlotLibraryModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.GLOWSTONE, 70, 108));
     addSlotToContainer(new SlotLibraryModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.MOONGLOW_LEAF, 145, 38));
     addSlotToContainer(new SlotLibraryModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.BAFFLE_CAP, 145, 73));
     addSlotToContainer(new SlotLibraryModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.STALICRIPE, 145, 108));
-    addSlotToContainer(new SlotLibraryModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.NETHER_WART, 170, 38));
-    addSlotToContainer(new SlotLibraryModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.BLAZE_POWDER, 170, 73));
-    addSlotToContainer(new SlotLibraryModifierInfo(this::isSelectSpell, this::getInstanceFor, ModifierCores.RUNIC_DUST, 170, 108));
   }
 
   private void createStaffSlots() {

@@ -173,7 +173,7 @@ public class SpellRadiance extends SpellBase {
                     continue;
                   }
 
-                  e.heal(info.ampFloat(healing));
+                  e.heal(healing);
                   count++;
                 } else {
                   if (info.has(PEACEFUL) && EntityUtil.isFriendly(e)) {
@@ -185,26 +185,26 @@ public class SpellRadiance extends SpellBase {
                       e.getEntityData().setUniqueId("magnetic", player.getUniqueID());
                       e.getEntityData().setInteger("magnetic_ticks", e.ticksExisted);
                     }
-                    e.attackEntityFrom(ModDamage.radiantDamageFrom(player), info.ampFloat(damage));
+                    e.attackEntityFrom(ModDamage.radiantDamageFrom(player), damage);
                     if (e.isEntityUndead()) {
-                      e.attackEntityFrom(ModDamage.radiantDamageFrom(player), info.ampFloat(undeadDamage));
+                      e.attackEntityFrom(ModDamage.radiantDamageFrom(player), undeadDamage);
                     }
                     e.setRevengeTarget(player);
                     player.setLastAttackedEntity(e);
                     if (info.has(WITHER)) {
-                      e.addPotionEffect(new PotionEffect(MobEffects.WITHER, info.speedAmpInt(wither_duration)));
+                      e.addPotionEffect(new PotionEffect(MobEffects.WITHER, wither_duration));
                     }
                     if (info.has(GLOWING)) {
-                      e.addPotionEffect(new PotionEffect(MobEffects.GLOWING, info.speedAmpInt(glow_duration)));
+                      e.addPotionEffect(new PotionEffect(MobEffects.GLOWING, glow_duration));
                     }
                     if (info.has(POISON)) {
-                      e.addPotionEffect(new PotionEffect(MobEffects.POISON, info.speedAmpInt(poison_duration), poison_amplifier));
+                      e.addPotionEffect(new PotionEffect(MobEffects.POISON, poison_duration, poison_amplifier));
                     }
                     if (info.has(FIRE)) {
-                      e.setFire(info.speedAmpInt(fire_duration));
+                      e.setFire(fire_duration);
                     }
                     if (info.has(SLOW)) {
-                      e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, info.speedAmpInt(slowness_duration), slowness_amplifier));
+                      e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, slowness_duration, slowness_amplifier));
                     }
 
                     count++;

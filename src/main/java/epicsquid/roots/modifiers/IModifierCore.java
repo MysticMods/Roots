@@ -6,9 +6,6 @@ import net.minecraft.item.ItemStack;
 import javax.annotation.Nullable;
 
 public interface IModifierCore {
-  boolean isHerb();
-
-  @Nullable
   Herb getHerb();
 
   ItemStack getStack();
@@ -16,8 +13,6 @@ public interface IModifierCore {
   String getTranslationKey();
 
   String getFormatting();
-
-  boolean isBasic();
 
   int getKey();
 }

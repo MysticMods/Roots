@@ -38,7 +38,6 @@ import java.util.Map;
 public class ContainerImposer extends Container implements IInvalidatingContainer, IModifierContainer {
 
   public final TileEntityImposer tile;
-  private final EntityPlayer player;
   private final Map<IModifierCore, Slot> coreSlotMap = new HashMap<>();
   private List<SlotImposerSpellInfo> spellSlots = new ArrayList<>();
   private boolean shiftDown = false;
@@ -47,7 +46,6 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
 
   public ContainerImposer(EntityPlayer player, TileEntityImposer tile) {
     this.tile = tile;
-    this.player = player;
 
     createPlayerInventory(player.inventory);
     createModifierSlots();
@@ -143,15 +141,9 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
     addModifierSlot(ModifierCores.WILDEWHEET, tile, 55, 38);
     addModifierSlot(ModifierCores.SPIRIT_HERB, tile, 55, 73);
     addModifierSlot(ModifierCores.CLOUD_BERRY, tile, 55, 108);
-    addModifierSlot(ModifierCores.REDSTONE, tile, 30, 38);
-    addModifierSlot(ModifierCores.GUNPOWDER, tile, 30, 73);
-    addModifierSlot(ModifierCores.GLOWSTONE, tile, 30, 108);
     addModifierSlot(ModifierCores.MOONGLOW_LEAF, tile, 105, 38);
     addModifierSlot(ModifierCores.BAFFLE_CAP, tile, 105, 73);
     addModifierSlot(ModifierCores.STALICRIPE, tile, 105, 108);
-    addModifierSlot(ModifierCores.NETHER_WART, tile, 130, 38);
-    addModifierSlot(ModifierCores.BLAZE_POWDER, tile, 130, 73);
-    addModifierSlot(ModifierCores.RUNIC_DUST, tile, 130, 108);
   }
 
   @SuppressWarnings("ConstantConditions")
@@ -233,6 +225,8 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
 
     if (slot != null && slot.getHasStack()) {
       ItemStack stack = slot.getStack();
+
+
 
       boolean isArrow = stack.getItem() instanceof ItemArrow;
 

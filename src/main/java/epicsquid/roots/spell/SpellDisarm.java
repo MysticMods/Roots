@@ -135,7 +135,7 @@ public class SpellDisarm extends SpellBase {
             } else {
               entity.setItemStackToSlot(handSlot, ItemStack.EMPTY);
             }
-            if (Util.rand.nextFloat() < info.ampFloat(drop_chance + chance_increase)) {
+            if (Util.rand.nextFloat() < drop_chance + chance_increase) {
               ItemUtil.spawnItem(world, entity.getPosition(), stack);
             }
           }
@@ -153,7 +153,7 @@ public class SpellDisarm extends SpellBase {
           disarmed = true;
           if (!world.isRemote) {
             entity.setItemStackToSlot(slot, ItemStack.EMPTY);
-            if (Util.rand.nextFloat() < info.ampFloat(armorChance)) {
+            if (Util.rand.nextFloat() < armorChance) {
               ItemUtil.spawnItem(world, entity.getPosition(), stack);
             }
           }
@@ -162,13 +162,13 @@ public class SpellDisarm extends SpellBase {
         if (disarmed) {
           if (!world.isRemote) {
             if (info.has(POISON)) {
-              entity.addPotionEffect(new PotionEffect(MobEffects.POISON, info.speedAmpInt(poison_duration), poison_amplifier));
+              entity.addPotionEffect(new PotionEffect(MobEffects.POISON, poison_duration, poison_amplifier));
             }
             if (info.has(FIRE)) {
               entity.setFire(fire_duration);
             }
             if (info.has(WEAKNESS)) {
-              entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, info.speedAmpInt(weakness_duration), weakness_amplifier));
+              entity.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, weakness_duration, weakness_amplifier));
             }
             if (info.has(KNOCKBACK)) {
               entity.knockBack(caster, knockback, caster.posX - entity.posX, caster.posZ - entity.posZ);

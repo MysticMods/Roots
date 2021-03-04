@@ -5,7 +5,6 @@ import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.init.ModSounds;
-import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageChrysopoeiaFX;
 import epicsquid.roots.properties.Property;
@@ -49,10 +48,6 @@ public class SpellChrysopoeia extends SpellBase {
     super(name, TextFormatting.GOLD, 176F / 255F, 169F / 255F, 158F / 255F, 224F / 255F, 174F / 255F, 99F / 255F);
     properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_COST_3, PROP_INTERVAL);
 /*    acceptsModifiers(OVER1, BY1, BY4, OVER2, REPETITION, OVER3, OVER4, BY3, BY2);*/
-  }
-
-  @Override
-  public void defaultModifiers() {
   }
 
   @Override

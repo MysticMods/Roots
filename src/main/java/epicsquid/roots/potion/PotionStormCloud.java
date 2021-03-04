@@ -10,7 +10,6 @@ import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageStormCloudGasFX;
 import epicsquid.roots.network.fx.MessageStormCloudStormFX;
 import epicsquid.roots.spell.SpellStormCloud;
-import epicsquid.roots.spell.SpellTimeStop;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -82,26 +81,26 @@ public class PotionStormCloud extends Potion {
               e.heal(SpellStormCloud.instance.heal_amount);
             }
           }
-          e.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, mods.ampInt(SpellStormCloud.instance.duration), SpellStormCloud.instance.fire_resistance, false, false));
+          e.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, SpellStormCloud.instance.duration, SpellStormCloud.instance.fire_resistance, false, false));
           e.extinguish();
           if (mods.has(SpellStormCloud.PEACEFUL) || e == entity) {
             continue;
           }
         }
 
-        if (mods.has(SpellStormCloud.LIGHTNING) && e.ticksExisted % mods.ampSubInt(SpellStormCloud.instance.lightning_interval) == 0) {
-          if (Util.rand.nextFloat() < mods.ampFloat(SpellStormCloud.instance.lightning_chance)) {
+        if (mods.has(SpellStormCloud.LIGHTNING) && e.ticksExisted % SpellStormCloud.instance.lightning_interval == 0) {
+          if (Util.rand.nextFloat() < SpellStormCloud.instance.lightning_chance) {
             world.addWeatherEffect(new EntityLightningBolt(world, e.posX, e.posY, e.posZ, false));
           }
         }
 
         if (mods.has(SpellStormCloud.POISON)) {
-          e.addPotionEffect(new PotionEffect(MobEffects.POISON, mods.ampInt(SpellStormCloud.instance.poison_duration), SpellStormCloud.instance.poison_amplifier));
+          e.addPotionEffect(new PotionEffect(MobEffects.POISON, SpellStormCloud.instance.poison_duration, SpellStormCloud.instance.poison_amplifier));
         }
 
         if (mods.has(SpellStormCloud.ICICLES)) {
-          if (e.ticksExisted % mods.ampSubInt(SpellStormCloud.instance.icicle_interval) == 0) {
-            if (Util.rand.nextFloat() < mods.ampFloat(SpellStormCloud.instance.icicle_chance)) {
+          if (e.ticksExisted % SpellStormCloud.instance.icicle_interval == 0) {
+            if (Util.rand.nextFloat() < SpellStormCloud.instance.icicle_chance) {
               Vec3d pos = e.getPositionVector();
               Vec3d playerPos = entity.getPositionVector().add(0, entity.getEyeHeight(), 0);
               Vec3d accel = pos.subtract(playerPos);

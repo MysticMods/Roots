@@ -102,14 +102,14 @@ public class SpellLifeDrain extends SpellBase {
             dam *= 2;
           }
           e.attackEntityFrom(DamageSource.causeMobDamage(player), dam);
-          if (e.rand.nextInt(info.ampSubInt(witherChance)) == 0) {
-            e.addPotionEffect(new PotionEffect(MobEffects.WITHER, info.speedAmpInt(witherDuration), witherAmplification));
+          if (e.rand.nextInt(witherChance) == 0) {
+            e.addPotionEffect(new PotionEffect(MobEffects.WITHER, witherDuration, witherAmplification));
           }
           if (info.has(SLOWING)) {
-            e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, info.speedAmpInt(slow_duration), slow_amplifier));
+            e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, slow_duration, slow_amplifier));
           }
           if (info.has(FIRE)) {
-            e.setFire(info.speedAmpInt(fire_duration));
+            e.setFire(fire_duration);
             e.attackEntityFrom(ModDamage.fireDamageFrom(player), fire_damage);
           }
           e.setRevengeTarget(player);
@@ -145,7 +145,7 @@ public class SpellLifeDrain extends SpellBase {
         List<EntityLivingBase> entitiesBeam = RayCastUtil.rayTraceEntities(EntityLivingBase.class, player, distance);
         EntityLivingBase targeted = null;
         for (EntityLivingBase target : entitiesBeam) {
-          if (handleEntity(player, target, info, Collections.emptyList(), info.ampFloat(dam), info.ampFloat(h))) {
+          if (handleEntity(player, target, info, Collections.emptyList(), dam, h)) {
             targeted = target;
           }
         }
@@ -163,7 +163,7 @@ public class SpellLifeDrain extends SpellBase {
           List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 2.0, y - 2.0, z - 2.0, x + 2.0, y + 2.0, z + 2.0));
           List<EntityLivingBase> peacefuls = entities.stream().filter(EntityUtil::isFriendly).collect(Collectors.toList());
           for (EntityLivingBase e : entities) {
-            if (handleEntity(player, e, info, peacefuls, info.ampFloat(dam), info.ampFloat(h))) {
+            if (handleEntity(player, e, info, peacefuls, dam, h)) {
               foundTarget = true;
             }
           }

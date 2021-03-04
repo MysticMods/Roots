@@ -131,7 +131,7 @@ public class SpellGrowthInfusion extends SpellBase {
       }
     }
 
-    if (info.has(ANIMAL_GROWTH) && ticks % info.speedSubInt(animal_growth_interval) == 0) {
+    if (info.has(ANIMAL_GROWTH) && ticks % animal_growth_interval == 0) {
       List<EntityAnimal> animals = player.world.getEntitiesWithinAABB(EntityAnimal.class, breedingBox.offset(player.getPosition()), EntityAgeable::isChild);
       if (!animals.isEmpty()) {
         didSomething = true;
@@ -163,7 +163,7 @@ public class SpellGrowthInfusion extends SpellBase {
       List<BlockPos> positions = Growth.collect(player.world, player.getPosition(), radius_x + boost, radius_y + boost, radius_z + boost);
       if (positions.isEmpty()) return false;
       if (!player.world.isRemote) {
-        for (int i = 0; i < info.ampInt(count) + player.world.rand.nextInt((info.ampSubInt(additional_count))); i++) {
+        for (int i = 0; i < count + player.world.rand.nextInt((additional_count)); i++) {
           BlockPos pos = positions.get(player.world.rand.nextInt(positions.size()));
           IBlockState state = player.world.getBlockState(pos);
           for (int j = 0; j < this.growth_ticks; j++) {
@@ -186,7 +186,7 @@ public class SpellGrowthInfusion extends SpellBase {
       RayCastUtil.RayTraceAndEntityResult entityResult = RayCastUtil.rayTraceMouseOver(player, 8.0d);
       Entity resultEntity = entityResult.getPointedEntity();
       if (resultEntity != null) {
-        if (info.has(VILLAGERS) && resultEntity instanceof EntityVillager && ticks % info.speedSubInt(villager_growth_interval) == 0) {
+        if (info.has(VILLAGERS) && resultEntity instanceof EntityVillager && ticks % villager_growth_interval == 0) {
           // TODO public net.minecraft.entity.passive.EntityVillager field_70961_j # timeUntilReset
           EntityVillager villager = (EntityVillager) resultEntity;
           if (!villager.isChild()) {
@@ -239,7 +239,7 @@ public class SpellGrowthInfusion extends SpellBase {
           }
 
           // TODO: Stone -> ore conversion
-          if (info.has(ORE) && ticks % info.speedSubInt(stone_interval) == 0) {
+          if (info.has(ORE) && ticks % stone_interval == 0) {
             if (OreDictCache.matches(this.stone_dict, state) && Util.rand.nextFloat() < this.stone_chance) {
               didSomething = true;
               if (!player.world.isRemote) {
@@ -251,7 +251,7 @@ public class SpellGrowthInfusion extends SpellBase {
           // Test for growth last
           if (!didSomething && Growth.canGrow(player.world, pos, state)) {
             if (!player.world.isRemote) {
-              for (int i = 0; i < info.ampInt(growth_ticks); i++) {
+              for (int i = 0; i < growth_ticks; i++) {
                 state.getBlock().randomTick(player.world, pos, state, new Random());
               }
               if (info.has(HYDRATE)) {
