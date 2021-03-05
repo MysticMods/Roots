@@ -114,6 +114,9 @@ public class GeneralConfig {
 
   @Config.Comment(("Whether or not the Untrue Pacifist advancement should be tracked"))
   public static boolean UntruePacifist = true;
+
+  @Config.Comment(("Whether or not the Wild Mage villager career should be populated (note: this may break pre-existing worlds if changed)"))
+  public static boolean WildMageVillager = true;
 }
 
 
