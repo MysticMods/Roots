@@ -1,18 +1,23 @@
 package epicsquid.roots.entity.ritual;
 
-import epicsquid.mysticallib.util.Util;
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.item.ItemLifeEssence;
+import epicsquid.roots.network.fx.MessageCreatureSummonedFX;
+import epicsquid.roots.network.fx.MessageTimeStopStartFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.recipe.SummonCreatureRecipe;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.ritual.RitualSummonCreatures;
 import epicsquid.roots.util.RitualUtil;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -55,7 +60,7 @@ public class EntityRitualSummonCreatures extends EntityRitualBase {
         ParticleUtil.spawnParticleSmoke(world, tx, ty, tz, vx, 0, vz, 67, 0, 87, 0.065f * alpha, 5.0f, 125, true);
       }
     }
-    if (this.ticksExisted % ritual.interval == 0) {
+    if (this.ticksExisted % ritual.interval == 0 && !world.isRemote) {
       Class<? extends Entity> entityClass = null;
 
       if (summonRecipe != null) {
@@ -106,16 +111,11 @@ public class EntityRitualSummonCreatures extends EntityRitualBase {
 
       entity.setPosition(suitable.getX() + 0.5, suitable.getY() + 0.5, suitable.getZ() + 0.5);
 
-      if (!world.isRemote) {
-        world.spawnEntity(entity);
-      } else {
-        for (int i = 0; i < 10; i++) {
-          ParticleUtil.spawnParticleStar(world, (float) entity.posX + 0.5f * (Util.rand.nextFloat() - 0.5f),
-              (float) (entity.posY + entity.height / 2.5f + (Util.rand.nextFloat())), (float) entity.posZ + 0.5f * (Util.rand.nextFloat() - 0.5f),
-              0.125f * (Util.rand.nextFloat() - 0.5f), 0.01875f * (Util.rand.nextFloat()), 0.125f * (Util.rand.nextFloat() - 0.5f), 100, 255, 100, 1.0f,
-              1.0f + 2.0f * Util.rand.nextFloat(), 40);
-        }
+      world.spawnEntity(entity);
+      if (entity instanceof EntityLivingBase) {
+        ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.GLOWING, ritual.glow_duration));
       }
+      PacketHandler.sendToAllTracking(new MessageCreatureSummonedFX(entity), entity);
     }
   }
 
