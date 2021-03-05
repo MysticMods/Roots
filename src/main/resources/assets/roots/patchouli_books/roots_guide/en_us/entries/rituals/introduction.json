@@ -11,7 +11,7 @@
     },
     {
       "type": "text",
-      "text": "Once the correct ingredients are placed on the pyre, the HUD will information about the ritual.$(br2)$(info) It can then be started with a $(l:rituals/fire_starter)flint-and-steel, fire starter$().$(br2)Some rituals require additional components to function that are placed near the pyre.$(br2)$(info) Some require $(l:rituals/standing_stones)standing stones or runed pillars$(). Additionally, a ritual might require $(l:rituals/catalyst_plates)a catalyst plate$() to direct the wild energy."
+      "text": "Once the correct ingredients are placed on the pyre, the HUD will information about the ritual.$(br2)$(info) It can then be started with a $(l:rituals/fire_starter)flint-and-steel or other fire starters$().$(br2)Some rituals require additional components to function that are placed near the pyre:$(br2)$(info) Some require $(l:rituals/standing_stones)standing stones, runed pillars$(), or additionally $(l:rituals/catalyst_plates)catalyst plates$() to direct energy."
     },
     {
       "type": "text",
