@@ -264,12 +264,9 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
       for (String key : keys) {
         int value = Integer.parseInt(key);
         StaffSpellInfo info = StaffSpellInfo.fromNBT(spells.getCompoundTag(key));
-        if (info == null) {
-          //Probably just spell swapping
-          //Roots.logger.error("Tried to deserialize spell " + spells.getCompoundTag(key) + " but got null!");
-        } else {
-          this.spells.put(value, info);
-        }
+        //Probably just spell swapping
+        //Roots.logger.error("Tried to deserialize spell " + spells.getCompoundTag(key) + " but got null!");
+        this.spells.put(value, info);
       }
     } else {
       for (int i = 0; i < 5; i++) {
