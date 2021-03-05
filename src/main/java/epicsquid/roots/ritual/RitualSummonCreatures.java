@@ -30,12 +30,13 @@ public class RitualSummonCreatures extends RitualBase {
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 3).setDescription("Radius on the Z Axis of the square area in which the ritual takes place");
   public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(150).setDescription("interval in ticks between each summoned creature");
   public static Property<Integer> PROP_TRIES = new Property<>("tries", 10).setDescription("number of attempts at finding a random good (satisfying the conditions) position to spawn the creature");
+  public static Property<Integer> PROP_GLOW_DURATION = new Property<>("glow_duration", 30).setDescription("the duration at which newly spawned and summoned entities will glow at (in ticks)");
 
-  public int radius_x, radius_y, radius_z, tries, interval;
+  public int radius_x, radius_y, radius_z, tries, interval, glow_duration;
 
   public RitualSummonCreatures(String name, boolean disabled) {
     super(name, disabled);
-    properties.add(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL, PROP_TRIES);
+    properties.add(PROP_DURATION, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_INTERVAL, PROP_TRIES, PROP_GLOW_DURATION);
     setEntityClass(EntityRitualSummonCreatures.class);
   }
 
@@ -63,6 +64,7 @@ public class RitualSummonCreatures extends RitualBase {
     radius_y = properties.get(PROP_RADIUS_Y);
     interval = properties.get(PROP_INTERVAL);
     tries = properties.get(PROP_TRIES);
+    glow_duration = properties.get(PROP_GLOW_DURATION);
   }
 
   @Override
