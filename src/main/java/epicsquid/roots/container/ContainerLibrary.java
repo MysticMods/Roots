@@ -253,6 +253,7 @@ public class ContainerLibrary extends Container implements IInvalidatingContaine
                 StaffSpellInfo oldSpell = storage.getSpellInSlot(staffSlot);
                 storage.setSpellToSlot(staffSlot, newSpell);
                 storage.setSpellToSlot(swap, oldSpell);
+                // TODO: WHAT IF OLD SPELL IS INVALID???
                 storage.saveToStack();
                 reset();
                 PlayerSyncUtil.syncPlayer(player);
