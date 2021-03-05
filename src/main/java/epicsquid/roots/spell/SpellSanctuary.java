@@ -20,6 +20,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
@@ -69,7 +70,7 @@ public class SpellSanctuary extends SpellBase {
     addIngredients(
         new ItemStack(Items.ARMOR_STAND),
         new ItemStack(ModItems.pereskia),
-        new ItemStack(Items.MILK_BUCKET),
+        new ItemStack(Items.BOWL),
         new ItemStack(ModItems.bark_spruce),
         new OreIngredient("wildroot")
     );

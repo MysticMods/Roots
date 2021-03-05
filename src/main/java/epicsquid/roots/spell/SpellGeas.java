@@ -76,9 +76,9 @@ public class SpellGeas extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new ItemStack(Item.getItemFromBlock(Blocks.WEB)),
+        new ItemStack(Items.ROTTEN_FLESH),
         new ItemStack(Items.LEAD),
-        new ItemStack(Items.CARROT_ON_A_STICK),
+        new ItemStack(Items.FISHING_ROD),
         new ItemStack(ModItems.terra_spores),
         new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom))
     );

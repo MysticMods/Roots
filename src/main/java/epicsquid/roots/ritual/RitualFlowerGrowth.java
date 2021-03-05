@@ -28,11 +28,11 @@ public class RitualFlowerGrowth extends RitualBase {
   @Override
   public void init() {
     recipe = new RitualRecipe(this,
-        new ItemStack(Blocks.YELLOW_FLOWER, 1, BlockYellowFlower.EnumFlowerType.DANDELION.getMeta()),
+        new OreIngredient("allFlowers"),
         new OreIngredient("wildroot"),
         new ItemStack(ModItems.terra_moss),
         new ItemStack(ModItems.petals),
-        new ItemStack(Blocks.RED_FLOWER, 1, BlockRedFlower.EnumFlowerType.POPPY.getMeta())
+        new OreIngredient("allFlowers")
     );
 
     setIcon(ModItems.ritual_flower_growth);

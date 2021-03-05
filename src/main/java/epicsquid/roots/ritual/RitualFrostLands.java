@@ -8,6 +8,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualFrostLands extends RitualBase implements IColdRitual {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(6400);
@@ -29,9 +30,9 @@ public class RitualFrostLands extends RitualBase implements IColdRitual {
   @Override
   public void init() {
     recipe = new RitualRecipe(this,
-        new ItemStack(Items.SNOWBALL),
+        new OreIngredient("sugarcane"),
         new ItemStack(ModItems.dewgonia),
-        new ItemStack(Blocks.SNOW),
+        new ItemStack(Blocks.WATERLILY),
         new ItemStack(ModItems.bark_spruce),
         new ItemStack(ModItems.bark_spruce)
     );

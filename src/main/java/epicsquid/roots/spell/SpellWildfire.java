@@ -77,7 +77,7 @@ public class SpellWildfire extends SpellBase {
         new ItemStack(Items.COAL, 1, 1),
         new OreIngredient("gunpowder"),
         new ItemStack(ModItems.infernal_bulb),
-        new ItemStack(Item.getItemFromBlock(Blocks.TNT))
+        new OreIngredient("dustRedstone")
     );
     setCastSound(ModSounds.Spells.WILDFIRE);
   }

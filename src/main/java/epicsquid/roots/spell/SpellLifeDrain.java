@@ -17,6 +17,7 @@ import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
@@ -85,8 +86,8 @@ public class SpellLifeDrain extends SpellBase {
         new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom)),
         new ItemStack(ModItems.moonglow_leaf),
         new ItemStack(ModItems.moonglow_seed),
-        new ItemStack(Items.IRON_SWORD),
-        new OreIngredient("blockCactus")
+        new ItemStack(Items.STONE_SWORD),
+        new ItemStack(Blocks.IRON_BARS)
     );
     setCastSound(ModSounds.Spells.LIFE_DRAIN);
   }

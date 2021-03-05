@@ -18,6 +18,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.OreIngredient;
 
 public class SpellStormCloud extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(100);
@@ -66,9 +68,9 @@ public class SpellStormCloud extends SpellBase {
   public void init() {
     addIngredients(
         new ItemStack(ModItems.dewgonia),
-        new ItemStack(Item.getItemFromBlock(Blocks.SNOW)),
-        new ItemStack(Item.getItemFromBlock(Blocks.SNOW)),
-        new ItemStack(Items.SNOWBALL),
+        new ItemStack(Items.WATER_BUCKET),
+        new OreIngredient("sugarcane"),
+        new ItemStack(Items.CLAY_BALL),
         new ItemStack(Item.getItemFromBlock(Blocks.RED_FLOWER), 1, BlockFlower.EnumFlowerType.BLUE_ORCHID.getMeta())
     );
     //setCastSound(ModSounds.Spells.STORM_CLOUD); // todo

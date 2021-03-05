@@ -33,7 +33,7 @@ public class RitualWardingProtection extends RitualBase {
         new ItemStack(ModItems.stalicripe),
         new OreIngredient("wildroot"),
         new OreIngredient("rootsBark"),
-        new ItemStack(Items.IRON_CHESTPLATE)
+        new ItemStack(Items.SHIELD)
     );
     addCondition(new ConditionStandingStones(3, 2));
     addCondition(new ConditionStandingStones(4, 2));

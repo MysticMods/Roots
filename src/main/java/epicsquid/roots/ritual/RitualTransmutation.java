@@ -29,7 +29,7 @@ public class RitualTransmutation extends RitualBase {
   public void init() {
     recipe = new RitualRecipe(this,
         new ItemStack(Blocks.FURNACE),
-        new ItemStack(Blocks.MOSSY_COBBLESTONE),
+        new ItemStack(Blocks.GRAVEL),
         new ItemStack(ModItems.cloud_berry),
         new OreIngredient("rootsBark"),
         new ItemStack(ModBlocks.chiseled_runestone)

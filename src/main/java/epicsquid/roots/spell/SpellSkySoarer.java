@@ -11,6 +11,7 @@ import epicsquid.roots.recipe.ingredient.ArrowBuilder;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -67,7 +68,7 @@ public class SpellSkySoarer extends SpellBase {
     addIngredients(
         new ItemStack(Item.getItemFromBlock(Blocks.LADDER)),
         new ItemStack(ModItems.petals),
-        ArrowBuilder.get(),
+        new ItemStack(Items.BOW),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),
         new ItemStack(ModItems.cloud_berry)
     );
