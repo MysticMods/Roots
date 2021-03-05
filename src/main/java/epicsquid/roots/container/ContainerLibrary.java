@@ -261,9 +261,17 @@ public class ContainerLibrary extends Container implements IInvalidatingContaine
             }
           } else {
             StaffSpellStorage storage = null;
+            boolean didSwap = false;
             if (staffSlot != -1 || librarySlot != -1) {
               storage = getSpellStorage();
-              if (storage == null) {
+              if (storage != null) {
+                StaffSpellInfo oldSpell = storage.getSpellInSlot(staffSlot);
+                storage.setSpellToSlot(info.getSlot(), oldSpell);
+                storage.clearSlot(staffSlot);
+                reset();
+                PlayerSyncUtil.syncPlayer(player);
+                didSwap = true;
+              } else {
                 reset();
                 return ItemStack.EMPTY;
               }
@@ -289,7 +297,7 @@ public class ContainerLibrary extends Container implements IInvalidatingContaine
               storage.saveToStack();
               reset();
               PlayerSyncUtil.syncPlayer(player);
-            } else {
+            } else if (!didSwap) {
               staffSlot = info.getSlot();
             }
           }
