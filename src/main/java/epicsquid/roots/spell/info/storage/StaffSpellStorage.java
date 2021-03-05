@@ -278,4 +278,17 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
   public static StaffSpellStorage fromStack(ItemStack stack) {
     return fromStack(stack, StaffSpellStorage::new);
   }
+
+  @Override
+  public void saveToStack() {
+    if (getSelectedInfo() == null) {
+      for (int i = MIN_SPELL_SLOT; i <= MAX_SPELL_SLOT; i++) {
+        if (spells.get(i) != null) {
+          setSelectedSlot(i);
+          break;
+        }
+      }
+    }
+    super.saveToStack();
+  }
 }
