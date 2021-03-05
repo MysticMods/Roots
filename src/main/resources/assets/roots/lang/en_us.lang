@@ -1027,6 +1027,7 @@ roots.modifiers.modifiers.animal_savior.desc=Applies an absorption shield to all
 
 roots.spirit_pouch.tooltip=Right-click to open and reveal what's inside!
 roots.reliquary.tooltip=Right-click to open and reveal what's inside!
+roots.living_hoe.tooltip=Breaks plants in a large radius.
 
 roots.patchouli.true=yes
 roots.patchouli.false=no
