@@ -235,6 +235,14 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
 
   @Override
   public NBTTagCompound serializeNBT() {
+    if (getSelectedInfo() == null) {
+      for (int i = MIN_SPELL_SLOT; i <= MAX_SPELL_SLOT; i++) {
+        if (spells.get(i) != null) {
+          setSelectedSlot(i);
+          break;
+        }
+      }
+    }
     NBTTagCompound compound = new NBTTagCompound();
     NBTTagCompound spells = new NBTTagCompound();
     for (Int2ObjectMap.Entry<StaffSpellInfo> entry : this.spells.int2ObjectEntrySet()) {
@@ -277,18 +285,5 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
   @Nullable
   public static StaffSpellStorage fromStack(ItemStack stack) {
     return fromStack(stack, StaffSpellStorage::new);
-  }
-
-  @Override
-  public void saveToStack() {
-    if (getSelectedInfo() == null) {
-      for (int i = MIN_SPELL_SLOT; i <= MAX_SPELL_SLOT; i++) {
-        if (spells.get(i) != null) {
-          setSelectedSlot(i);
-          break;
-        }
-      }
-    }
-    super.saveToStack();
   }
 }
