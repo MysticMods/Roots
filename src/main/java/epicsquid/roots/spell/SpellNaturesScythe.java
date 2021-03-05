@@ -98,7 +98,7 @@ public class SpellNaturesScythe extends SpellBase {
         new OreIngredient("wildroot"),
         new OreIngredient("wildroot"),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
-        new ItemStack(Items.GOLDEN_SWORD),
+        new ItemStack(Items.STONE_HOE),
         new OreIngredient("tallgrass")
     );
     setCastSound(ModSounds.Spells.NATURES_SCYTHE);

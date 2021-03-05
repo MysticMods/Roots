@@ -80,10 +80,10 @@ public class SpellHarvest extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new ItemStack(Items.GOLDEN_HOE),
+        new ItemStack(Items.STONE_HOE),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),
         new ItemStack(ModItems.wildewheet),
-        new ItemStack(Items.BEETROOT_SEEDS),
+        new ItemStack(ModItems.wildewheet_seed),
         new ItemStack(Items.WHEAT_SEEDS)
     );
     setCastSound(ModSounds.Spells.HARVEST);

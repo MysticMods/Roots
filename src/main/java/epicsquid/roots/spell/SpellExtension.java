@@ -110,9 +110,9 @@ public class SpellExtension extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new OreIngredient("cropCarrot"),
-        new ItemStack(Items.LEAD),
-        new ItemStack(ModItems.glass_eye),
+        new OreIngredient("chestWood"),
+        new ItemStack(Items.STONE_PICKAXE),
+        new OreIngredient("eye"),
         new ItemStack(Items.COMPASS),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine)
     );

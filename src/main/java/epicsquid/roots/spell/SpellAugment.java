@@ -1,10 +1,10 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
+import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
 import epicsquid.roots.client.SpectatorHandler;
 import epicsquid.roots.config.SpellConfig;
-import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModPotions;
 import epicsquid.roots.mechanics.Magnetize;
 import epicsquid.roots.modifiers.*;
@@ -24,6 +24,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameType;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.OreIngredient;
 
 public class SpellAugment extends SpellBase {
 
@@ -89,11 +91,11 @@ public class SpellAugment extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new ItemStack(ModItems.spirit_herb_seed),
-        new ItemStack(Items.EXPERIENCE_BOTTLE),
-        new ItemStack(Items.CARROT_ON_A_STICK),
-        new ItemStack(Items.GOLDEN_APPLE),
-        new ItemStack(Items.IRON_HELMET)
+        new ItemStack(ModItems.aubergine_seed),
+        new ItemStack(Items.FISHING_ROD),
+        new ItemStack(Items.SHIELD),
+        new ItemStack(epicsquid.roots.init.ModItems.petals),
+        new ItemStack(Items.BOOK)
     );
   }
 

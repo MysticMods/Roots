@@ -87,7 +87,7 @@ public class SpellAcidCloud extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new ItemStack(Items.SPIDER_EYE),
+        new OreIngredient("eye"),
         new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom)),
         new OreIngredient("dyeLime"),
         new OreIngredient("blockCactus"),

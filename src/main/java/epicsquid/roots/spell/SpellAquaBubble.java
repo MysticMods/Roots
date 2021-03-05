@@ -11,6 +11,7 @@ import epicsquid.roots.properties.Property;
 import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -73,7 +74,7 @@ public class SpellAquaBubble extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new OreIngredient("dyeBlue"),
+        new ItemStack(Items.WATER_BUCKET),
         new ItemStack(ModItems.dewgonia),
         new OreIngredient("snowball"),
         new OreIngredient("blockGlass"),

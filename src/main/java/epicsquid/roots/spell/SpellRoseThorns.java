@@ -68,7 +68,7 @@ public class SpellRoseThorns extends SpellBase {
     addIngredients(
         new OreIngredient("blockCactus"),
         new ItemStack(Blocks.DOUBLE_PLANT, 1, BlockDoublePlant.EnumPlantType.ROSE.getMeta()),
-        new OreIngredient("bone"),
+        new OreIngredient("stickWood"),
         new OreIngredient("dyeRed"),
         new ItemStack(ModItems.terra_moss)
     );
