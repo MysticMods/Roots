@@ -72,7 +72,7 @@ public enum ModifierCores implements IModifierCore {
   }
 
   @Nullable
-  public static IModifierCore getByOrdinal(int ordinal) {
+  public static IModifierCore fromOrdinal(int ordinal) {
     if (ordinal == -1) {
       return BaseModifiers.AIR;
     }
@@ -98,7 +98,20 @@ public enum ModifierCores implements IModifierCore {
   @Nullable
   public static ModifierCores fromHerb(Herb herb) {
     for (ModifierCores core : values()) {
-      if (Objects.equals(core.getHerb(), herb)) {
+      if (core.getHerb() == herb) {
+        return core;
+      }
+    }
+    return null;
+  }
+
+  @Nullable
+  public static ModifierCores fromItemStack (ItemStack stack) {
+    if (!isModifierCore(stack)) {
+      return null;
+    }
+    for (ModifierCores core : values()) {
+      if (core.getHerb().getItem() == stack.getItem()) {
         return core;
       }
     }

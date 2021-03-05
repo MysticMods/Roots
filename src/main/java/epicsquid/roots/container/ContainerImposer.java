@@ -24,7 +24,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 
@@ -149,7 +148,7 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
   @SuppressWarnings("ConstantConditions")
   @Override
   public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
-    if (slotId != -999 && !player.world.isRemote) {
+    if (slotId >= 0 && !player.world.isRemote) {
       Slot slot = getSlot(slotId);
       if (slot instanceof SlotImposerSpellInfo) {
         StaffSpellInfo info = ((SlotImposerSpellInfo) slot).getInfo();
@@ -219,29 +218,43 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
   @Override
   @Nonnull
   public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
-    ItemStack slotStack = ItemStack.EMPTY;
-
-    Slot slot = inventorySlots.get(index);
-
-    if (slot != null && slot.getHasStack()) {
-      ItemStack stack = slot.getStack();
-
-
-
-      boolean isArrow = stack.getItem() instanceof ItemArrow;
-
-      if (isArrow && index < 36 && !mergeItemStack(stack, 36, 42, false)) {
-        slot.onSlotChanged();
-        //handler.saveToStack();
-        return ItemStack.EMPTY;
-      } else {
-        //handler.saveToStack();
-        return ItemStack.EMPTY;
-      }
+    if (index <= 10) {
+      return ItemStack.EMPTY;
     }
 
-    //handler.saveToStack();
-    return slotStack;
+    Slot slot = this.inventorySlots.get(index);
+
+    if (slot == null || !slot.getHasStack()) {
+      return ItemStack.EMPTY;
+    }
+
+    ItemStack inSlot = slot.getStack();
+    IModifierCore core = ModifierCores.fromItemStack(inSlot);
+    if (core == null) {
+      return ItemStack.EMPTY;
+    }
+
+    Slot coreSlot = coreSlotMap.get(core);
+    if (coreSlot == null) {
+      throw new IllegalStateException("slot for modifier core " + core + " must exist and cannot be null");
+    }
+
+    // This slot already has a modifier in it, so do nothing
+    if (coreSlot.getHasStack()) {
+      return ItemStack.EMPTY;
+    }
+
+    if (inSlot.getCount() > 1) {
+      inSlot.shrink(1);
+      slot.putStack(inSlot);
+      inSlot = inSlot.copy();
+      inSlot.setCount(1);
+    } else {
+      slot.putStack(ItemStack.EMPTY);
+    }
+    coreSlot.putStack(inSlot);
+
+    return ItemStack.EMPTY;
   }
 
   @Override
