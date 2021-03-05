@@ -5,6 +5,7 @@ import epicsquid.roots.item.ILivingRepair;
 import epicsquid.roots.recipe.ingredient.RootsIngredients;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -61,7 +62,7 @@ public class ItemLivingHoe extends ItemHoeBase implements ILivingRepair {
   @Override
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
     tooltip.add("");
-    tooltip.add(TextFormatting.GREEN + "Breaks plants in a large radius.");
+    tooltip.add(TextFormatting.GREEN + I18n.format("roots.living_hoe.tooltip"));
     super.addInformation(stack, worldIn, tooltip, flagIn);
   }
 
