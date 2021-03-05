@@ -14,6 +14,10 @@ public interface IModifierCost {
 
   default String asPropertyName () {
     Herb herb = getHerb();
-    return herb.getName() + "_" + getCost().toString().toLowerCase(Locale.ROOT);
+    if (herb == null) {
+      return "no_herb_" + getCost().toString().toLowerCase(Locale.ROOT);
+    } else {
+      return herb.getName() + "_" + getCost().toString().toLowerCase(Locale.ROOT);
+    }
   }
 }

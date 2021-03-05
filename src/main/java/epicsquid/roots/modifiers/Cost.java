@@ -2,6 +2,7 @@ package epicsquid.roots.modifiers;
 
 import epicsquid.roots.api.Herb;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 
@@ -41,8 +42,13 @@ public class Cost implements IModifierCost {
   }
 
   @Override
+  @Nullable
   public Herb getHerb() {
-    return herb.getHerb();
+    if (herb != null) {
+      return herb.getHerb();
+    } else {
+      return null;
+    }
   }
 
   public static Map<CostType, IModifierCost> single(CostType cost, IModifierCore herb, double value) {
