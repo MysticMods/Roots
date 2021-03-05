@@ -67,7 +67,5 @@ public class RunicShearRecipes {
 
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "wolf_bone"), new ItemStack(Items.BONE, 1), EntityWolf.class, 20 * 180));
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "ocelot_string"), new ItemStack(Items.STRING), EntityOcelot.class, 20 * 180));
-    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "spider_golden_eye"), new ItemStack(ModItems.golden_eye, 1), EntitySpider.class, 20 * 60 * 10));
-    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "cave_spider_golden_eye"), new ItemStack(ModItems.golden_eye, 1), EntityCaveSpider.class, 20 * 60 * 10));
   }
 }

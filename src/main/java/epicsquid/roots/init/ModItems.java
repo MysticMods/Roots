@@ -38,7 +38,7 @@ public class ModItems {
   // All mod items
   public static Item guide, pestle, herb_pouch, component_pouch, spell_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, wildwood_quiver, wildwood_bow,
       sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, apothecary_pouch, wooden_shears, firestarter,
-      petals, flour, living_arrow, runic_dust, cooked_pereskia, fey_leather, wildewheet_bread, glass_eye, mystic_feather, strange_ooze, gramary, spirit_bag, reliquary, golden_eye;
+      petals, flour, living_arrow, runic_dust, cooked_pereskia, fey_leather, wildewheet_bread, glass_eye, mystic_feather, strange_ooze, gramary, spirit_bag, reliquary;
 
   public static Item runed_axe, runed_hoe, runed_pickaxe, runed_shovel, runed_sword, runed_dagger;
 
@@ -199,7 +199,6 @@ public class ModItems {
     event.addItem(life_essence = new ItemLifeEssence("life_essence").setCreativeTab(Roots.tab));
 
     event.addItem(glass_eye = new ItemGlassEye("glass_eye").setCreativeTab(Roots.tab));
-    event.addItem(golden_eye = new ItemFoodBase("golden_eye", 6, 1.35f, false).setCreativeTab(Roots.tab));
 
     // Rituals
     event.addItem(ritual_healing_aura = new ItemBase("ritual_healing_aura").setCreativeTab(null));
@@ -274,8 +273,6 @@ public class ModItems {
     OreDictionary.registerOre("slimeball", ModItems.strange_ooze);
     OreDictionary.registerOre("feyFeather", ModItems.mystic_feather);
     OreDictionary.registerOre("spiderEye", Items.SPIDER_EYE);
-    OreDictionary.registerOre("goldenEye", ModItems.golden_eye);
-    OreDictionary.registerOre("eye", ModItems.golden_eye);
     OreDictionary.registerOre("eye", ModItems.glass_eye);
     OreDictionary.registerOre("eye", Items.SPIDER_EYE);
     OreDictionary.registerOre("eye", Items.FERMENTED_SPIDER_EYE);
