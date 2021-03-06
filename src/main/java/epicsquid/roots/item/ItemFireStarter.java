@@ -40,6 +40,11 @@ public class ItemFireStarter extends ItemBase {
   }
 
   @Override
+  public int getItemBurnTime(ItemStack itemStack) {
+    return 200;
+  }
+
+  @Override
   public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entity) {
     if (!world.isRemote && entity instanceof EntityPlayer) {
       EntityPlayer player = (EntityPlayer) entity;
