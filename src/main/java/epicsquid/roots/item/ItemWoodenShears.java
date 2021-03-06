@@ -23,6 +23,11 @@ public class ItemWoodenShears extends ItemShearsBase {
   }
 
   @Override
+  public int getItemBurnTime(ItemStack itemStack) {
+    return 200;
+  }
+
+  @Override
   public boolean isRepairable() {
     return true;
   }
