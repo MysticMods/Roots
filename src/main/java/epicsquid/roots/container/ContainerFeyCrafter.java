@@ -41,11 +41,11 @@ public class ContainerFeyCrafter extends Container {
   }
 
   private void createCrafterSlots() {
-    addSlotToContainer(new SlotGrid(crafter.inventory, this, 0, 54, 10));
-    addSlotToContainer(new SlotGrid(crafter.inventory, this, 1, 28, 31));
-    addSlotToContainer(new SlotGrid(crafter.inventory, this, 2, 80, 31));
-    addSlotToContainer(new SlotGrid(crafter.inventory, this, 3, 35, 64));
-    addSlotToContainer(new SlotGrid(crafter.inventory, this, 4, 75, 64));
+    addSlotToContainer(new SlotGrid(crafter.inventory, this, 0, 54, 12));
+    addSlotToContainer(new SlotGrid(crafter.inventory, this, 1, 29, 30));
+    addSlotToContainer(new SlotGrid(crafter.inventory, this, 2, 79, 30));
+    addSlotToContainer(new SlotGrid(crafter.inventory, this, 3, 38, 59));
+    addSlotToContainer(new SlotGrid(crafter.inventory, this, 4, 70, 59));
   }
 
   private void createPlayerInventory(InventoryPlayer inventoryPlayer) {
