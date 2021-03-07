@@ -7,8 +7,10 @@
 
 package epicsquid.roots.client.gui;
 
+import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
 import epicsquid.roots.container.ContainerFeyCrafter;
+import epicsquid.roots.init.ModBlocks;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
@@ -20,6 +22,8 @@ import javax.annotation.Nonnull;
 public class GuiFeyCrafter extends GuiContainer {
 
   private ContainerFeyCrafter container;
+  private ItemStack knife = ItemStack.EMPTY;
+  private ItemStack fey_crafter = ItemStack.EMPTY;
 
   public GuiFeyCrafter(@Nonnull ContainerFeyCrafter container) {
     super(container);
@@ -61,25 +65,38 @@ public class GuiFeyCrafter extends GuiContainer {
     int j3 = -1;
     int i3 = -1;
     if (container.getRecipe() != null) {
+      if (knife.isEmpty()) {
+        knife = new ItemStack(ModItems.amethyst_knife);
+      }
+      if (fey_crafter.isEmpty()) {
+        fey_crafter = new ItemStack(ModBlocks.fey_crafter);
+      }
       RenderHelper.enableGUIStandardItemLighting();
       ItemStack result = container.getRecipe().getResult();
       i3 = i + ((this.xSize / 4) * 3);
       j3 = j + (this.ySize / 5);
+      if (container.getValidStone()) {
+        mc.getRenderItem().renderItemIntoGUI(knife, i3 - 16, j3 + 18);
+        mc.getRenderItem().renderItemIntoGUI(fey_crafter, i3 + 16, j3 + 18);
+      }
       mc.getRenderItem().renderItemIntoGUI(result, i3, j3);
       mc.getRenderItem().renderItemOverlayIntoGUI(mc.fontRenderer, result, i3, j3, null);
+
       RenderHelper.disableStandardItemLighting();
     }
     this.mc.getTextureManager().bindTexture(new ResourceLocation(Roots.MODID, "textures/gui/fey_crafting_gui.png"));
     if (!container.getValidStone()) {
-      int i2 = i + 54;
-      int j2 = j + 33;
-      this.drawTexturedModalRect(i2, j2, 176, 0, 16, 22);
+      int i2 = i + 11;
+      int j2 = j + 54;
+      this.drawTexturedModalRect(i2, j2, 176, 0, 16, 24);
       if (container.getRecipe() != null) {
         GlStateManager.pushMatrix();
         GlStateManager.translate(0, 0, 150f);
         this.drawTexturedModalRect(i3 + 1, j3 + 1, 176 + 16, 0, 15, 15);
         GlStateManager.popMatrix();
       }
+    } else if (container.getRecipe() != null) {
+      this.drawTexturedModalRect(i3 - 2, j3 + 22, 176, 24, 18, 10);
     }
   }
 }
