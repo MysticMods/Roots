@@ -36,7 +36,7 @@ public class RitualHeavyStorms extends RitualBase {
         new ItemStack(ModItems.dewgonia),
         new OreIngredient("vine"),
         new ItemStack(ModItems.cloud_berry),
-        new ItemStack(Items.WATER_BUCKET)
+        new ItemStack(Items.SNOWBALL)
     );
     addCondition(new ConditionStandingStones(3, 1));
     addCondition(new ConditionRunedPillars(RitualUtil.RunedWoodType.DARK_OAK, 4, 1));

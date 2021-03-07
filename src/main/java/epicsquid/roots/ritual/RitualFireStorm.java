@@ -6,6 +6,7 @@ import epicsquid.roots.properties.Property;
 import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.text.TextFormatting;
 
 public class RitualFireStorm extends RitualBase {
@@ -28,7 +29,7 @@ public class RitualFireStorm extends RitualBase {
     recipe = new RitualRecipe(this,
         new ItemStack(ModItems.infernal_bulb),
         new ItemStack(ModItems.bark_acacia),
-        new ItemStack(Items.COAL),
+        Ingredient.fromItem(Items.COAL),
         new ItemStack(ModItems.bark_acacia),
         new ItemStack(Items.BLAZE_POWDER)
     );

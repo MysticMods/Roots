@@ -38,7 +38,7 @@ public class RitualHealingAura extends RitualBase {
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine),
         new ItemStack(ModItems.bark_birch),
         new OreIngredient("wildroot"),
-        new ItemStack(Blocks.SAPLING, 1, 2)
+        new OreIngredient("treeSapling")
     );
     addCondition(new ConditionRunedPillars(RitualUtil.RunedWoodType.BIRCH, 3, 1));
     setIcon(ModItems.ritual_healing_aura);
