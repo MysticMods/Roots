@@ -2,19 +2,18 @@ package epicsquid.roots.recipe;
 
 import com.google.common.collect.Sets;
 import epicsquid.mysticalworld.entity.*;
+import epicsquid.mysticalworld.materials.Materials;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.transmutation.PropertyPredicate;
 import net.minecraft.block.BlockBeetroot;
 import net.minecraft.block.BlockCrops;
-import net.minecraft.entity.monster.EntityCaveSpider;
-import net.minecraft.entity.monster.EntityMagmaCube;
-import net.minecraft.entity.monster.EntitySlime;
-import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.monster.*;
 import net.minecraft.entity.passive.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemFishFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -43,8 +42,6 @@ public class RunicShearRecipes {
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "beetle_strange_ooze"), new ItemStack(ModItems.strange_ooze, 1), EntityBeetle.class, 20 * 120));
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "frog_strange_ooze"), new ItemStack(ModItems.strange_ooze, 1), EntityFrog.class, 20 * 120));
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "squid_strange_ooze"), new ItemStack(ModItems.strange_ooze, 1), EntitySquid.class, 20 * 120));
-    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "slime_strange_ooze"), new ItemStack(ModItems.strange_ooze, 1), EntitySlime.class, 20 * 120));
-    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "magma_cube_strange_ooze"), new ItemStack(ModItems.strange_ooze, 1), EntityMagmaCube.class, 20 * 120));
 
     ModRecipes.addRunicShearRecipe(new RunicShearConditionalEntityRecipe(new ResourceLocation(Roots.MODID, "sprout_stuff"), entityLivingBase -> {
       EntitySprout sprout = (EntitySprout) entityLivingBase;
@@ -65,7 +62,25 @@ public class RunicShearRecipes {
       }
     }, Sets.newHashSet(new ItemStack(Items.MELON_SEEDS), new ItemStack(ModItems.terra_spores), new ItemStack(Items.BEETROOT_SEEDS), new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed)), EntitySprout.class, 20 * 180));
 
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "hell_sprout"), new ItemStack(Items.MAGMA_CREAM), EntityHellSprout.class, 20 * 180));
+
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "wolf_bone"), new ItemStack(Items.BONE, 1), EntityWolf.class, 20 * 180));
-    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "ocelot_string"), new ItemStack(Items.STRING), EntityOcelot.class, 20 * 180));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "ocelot_string"), new ItemStack(Items.FISH, 1, ItemFishFood.FishType.CLOWNFISH.getMetadata()), EntityOcelot.class, 20 * 180));
+
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "silverfish_silver"), new ItemStack(Materials.silver.getNugget(), 2), EntitySilverfish.class, 20 * 120));
+
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "villager_spirit_bag"), new ItemStack(ModItems.spirit_bag), EntityVillager.class, 20 * 60 * 5));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "spider_eyes"), new ItemStack(Items.SPIDER_EYE), EntitySpider.class, 20 * 120));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "cave_spider_eyes"), new ItemStack(Items.FERMENTED_SPIDER_EYE), EntityCaveSpider.class, 20 * 120));
+
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "skeletal_horse_bone"), new ItemStack(Items.BONE, 2), EntitySkeletonHorse.class, 20 * 120));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "zombie_horse_flesh"), new ItemStack(Items.ROTTEN_FLESH, 2), EntityZombieHorse.class, 20 * 120));
+
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "polar_bear_ice"), new ItemStack(Blocks.ICE, 6), EntityPolarBear.class, 20 * 120));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "snowman_snowballs"), new ItemStack(Items.SNOWBALL, 8), EntitySnowman.class, 20 * 120));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "iron_golem_books"), new ItemStack(Items.BOOK, 3), EntityIronGolem.class, 20 * 120));
+
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "lava_cat"), new ItemStack(Blocks.OBSIDIAN), EntityLavaCat.class, 20 * 60 * 4));
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "zombie_pigman_gold"), new ItemStack(Items.GOLD_NUGGET), EntityPigZombie.class, 20 * 60 * 3));
   }
 }
