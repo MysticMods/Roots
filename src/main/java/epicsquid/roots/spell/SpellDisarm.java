@@ -90,7 +90,7 @@ public class SpellDisarm extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new ItemStack(Items.SHIELD),
+        new ItemStack(ModItems.moonglow_leaf),
         new OreIngredient("gemDiamond"),
         new OreIngredient("bone"),
         new ItemStack(Item.getItemFromBlock(Blocks.TRIPWIRE_HOOK)),

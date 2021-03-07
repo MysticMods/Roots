@@ -26,6 +26,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -81,7 +82,7 @@ public class SpellFeyLight extends SpellBase {
         new ItemStack(Item.getItemFromBlock(Blocks.LIT_PUMPKIN)),
         new ItemStack(Item.getItemFromBlock(Blocks.DOUBLE_PLANT), 1, BlockDoublePlant.EnumPlantType.SUNFLOWER.getMeta()),
         new ItemStack(ModItems.cloud_berry),
-        new ItemStack(ModItems.bark_acacia),
+        new OreIngredient("rootsBark"),
         new ItemStack(ModItems.cloud_berry)
     );
     setCastSound(ModSounds.Spells.FEY_LIGHT);

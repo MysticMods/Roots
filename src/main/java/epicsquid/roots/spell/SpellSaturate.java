@@ -113,7 +113,7 @@ public class SpellSaturate extends SpellBase {
         new ItemStack(Items.MUSHROOM_STEW),
         new ItemStack(Items.MILK_BUCKET),
         new ItemStack(ModItems.cooked_aubergine),
-        new ItemStack(Items.PUMPKIN_PIE),
+        new ItemStack(Items.EGG),
         new ItemStack(epicsquid.roots.init.ModItems.wildewheet)
     );
     setCastSound(ModSounds.Spells.SATURATE);
