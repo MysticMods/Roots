@@ -5,6 +5,7 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModDamage;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
@@ -90,7 +91,7 @@ public class SpellAcidCloud extends SpellBase {
         new OreIngredient("eye"),
         new ItemStack(Item.getItemFromBlock(ModBlocks.baffle_cap_mushroom)),
         new OreIngredient("dyeLime"),
-        new OreIngredient("blockCactus"),
+        new ItemStack(ModItems.runic_dust),
         new ItemStack(Items.ROTTEN_FLESH)
     );
     setCastSound(ModSounds.Spells.ACID_CLOUD);

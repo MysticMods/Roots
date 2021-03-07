@@ -99,7 +99,7 @@ public class SpellDesaturate extends SpellBase {
   public void init() {
     addIngredients(
         new ItemStack(Items.BOWL),
-        new ItemStack(ModItems.fey_leather),
+        new ItemStack(ModItems.petals),
         new ItemStack(Items.ROTTEN_FLESH),
         new OreIngredient("bone"),
         new ItemStack(ModItems.spirit_herb)

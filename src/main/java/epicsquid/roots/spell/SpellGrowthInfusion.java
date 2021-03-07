@@ -100,7 +100,7 @@ public class SpellGrowthInfusion extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new OreIngredient("treeSapling"),
+        new OreIngredient("allFlowers"),
         new OreIngredient("treeSapling"),
         new ItemStack(ModItems.terra_moss),
         Ingredients.AUBERGINE,

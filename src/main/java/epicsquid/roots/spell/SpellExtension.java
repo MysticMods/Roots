@@ -114,7 +114,7 @@ public class SpellExtension extends SpellBase {
         new ItemStack(Items.STONE_PICKAXE),
         new OreIngredient("eye"),
         new ItemStack(Items.COMPASS),
-        new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine)
+        new ItemStack(Items.GOLDEN_CARROT)
     );
   }
 

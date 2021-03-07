@@ -16,6 +16,7 @@ import epicsquid.roots.util.Constants;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
@@ -91,7 +92,7 @@ public class SpellAugment extends SpellBase {
   @Override
   public void init() {
     addIngredients(
-        new ItemStack(ModItems.aubergine_seed),
+        new ItemStack(Blocks.ANVIL),
         new ItemStack(Items.FISHING_ROD),
         new ItemStack(Items.SHIELD),
         new ItemStack(epicsquid.roots.init.ModItems.petals),
