@@ -199,18 +199,20 @@ public class ContainerLibrary extends Container implements IInvalidatingContaine
         if (slot instanceof SlotLibraryInfo) {
           SlotLibraryInfo info = (SlotLibraryInfo) slot;
           if (info.getHasStack()) {
-            librarySlot = info.getSlot() + 5;
+            librarySlot = slotId;
             if (staffSlot != -1) {
-              StaffSpellStorage storage = getSpellStorage();
-              LibrarySpellInfo libInfo = info.getInfo();
-              if (storage == null || libInfo == null) {
-                reset();
-                return ItemStack.EMPTY;
+              if (!player.world.isRemote) {
+                StaffSpellStorage storage = getSpellStorage();
+                LibrarySpellInfo libInfo = info.getInfo();
+                if (storage == null || libInfo == null) {
+                  reset();
+                  return ItemStack.EMPTY;
+                }
+                storage.setSpellToSlot(staffSlot, libInfo.toStaff());
+                storage.saveToStack();
+                PlayerSyncUtil.syncPlayer(player);
               }
-              storage.setSpellToSlot(staffSlot, libInfo.toStaff());
-              storage.saveToStack();
               reset();
-              PlayerSyncUtil.syncPlayer(player);
             }
           }
         } else if (slot instanceof SlotSpellInfo) {
@@ -240,23 +242,26 @@ public class ContainerLibrary extends Container implements IInvalidatingContaine
             }
             if (newSpell != null) {
               StaffSpellStorage storage = getSpellStorage();
-              if (storage == null) {
+              if (storage == null && !player.world.isRemote) {
                 reset();
                 return ItemStack.EMPTY;
               }
               if (swap == -1) {
-                storage.setSpellToSlot(staffSlot, newSpell);
-                storage.saveToStack();
+                if (!player.world.isRemote) {
+                  storage.setSpellToSlot(staffSlot, newSpell);
+                  storage.saveToStack();
+                  PlayerSyncUtil.syncPlayer(player);
+                }
                 reset();
-                PlayerSyncUtil.syncPlayer(player);
               } else if (staffSlot != -1 && swap != staffSlot) {
-                StaffSpellInfo oldSpell = storage.getSpellInSlot(staffSlot);
-                storage.setSpellToSlot(staffSlot, newSpell);
-                storage.setSpellToSlot(swap, oldSpell);
-                // TODO: WHAT IF OLD SPELL IS INVALID???
-                storage.saveToStack();
+                if (!player.world.isRemote) {
+                  StaffSpellInfo oldSpell = storage.getSpellInSlot(staffSlot);
+                  storage.setSpellToSlot(staffSlot, newSpell);
+                  storage.setSpellToSlot(swap, oldSpell);
+                  storage.saveToStack();
+                  PlayerSyncUtil.syncPlayer(player);
+                }
                 reset();
-                PlayerSyncUtil.syncPlayer(player);
               }
             }
           } else {
@@ -265,11 +270,21 @@ public class ContainerLibrary extends Container implements IInvalidatingContaine
             if (staffSlot != -1 || librarySlot != -1) {
               storage = getSpellStorage();
               if (storage != null) {
-                StaffSpellInfo oldSpell = storage.getSpellInSlot(staffSlot);
-                storage.setSpellToSlot(info.getSlot(), oldSpell);
-                storage.clearSlot(staffSlot);
+                if (!player.world.isRemote) {
+                  if (staffSlot != -1) {
+                    StaffSpellInfo oldSpell = storage.getSpellInSlot(staffSlot);
+                    storage.setSpellToSlot(info.getSlot(), oldSpell);
+                    storage.clearSlot(staffSlot);
+                  } else if (librarySlot != -1) {
+                    LibrarySpellInfo libInfo = ((SlotLibraryInfo) getSlot(librarySlot)).getInfo();
+                    storage.setSpellToSlot(info.getSlot(), libInfo.toStaff());
+                  }
+
+                  storage.saveToStack();
+                  PlayerSyncUtil.syncPlayer(player);
+                }
+
                 reset();
-                PlayerSyncUtil.syncPlayer(player);
                 didSwap = true;
               } else {
                 reset();
@@ -277,26 +292,30 @@ public class ContainerLibrary extends Container implements IInvalidatingContaine
               }
             }
             if (staffSlot != -1 && librarySlot != -1) {
-              StaffSpellInfo newSpell = ((SlotSpellInfo) getSlot(librarySlot)).getInfo();
-              if (newSpell == null) {
-                reset();
-                return ItemStack.EMPTY;
+              if (!player.world.isRemote) {
+                StaffSpellInfo newSpell = ((SlotSpellInfo) getSlot(librarySlot)).getInfo();
+                if (newSpell == null) {
+                  reset();
+                  return ItemStack.EMPTY;
+                }
+                storage.setSpellToSlot(info.getSlot(), newSpell);
+                storage.clearSlot(staffSlot);
+                storage.saveToStack();
+                PlayerSyncUtil.syncPlayer(player);
               }
-              storage.setSpellToSlot(info.getSlot(), newSpell);
-              storage.clearSlot(staffSlot);
-              storage.saveToStack();
               reset();
-              PlayerSyncUtil.syncPlayer(player);
             } else if (librarySlot != -1) {
-              LibrarySpellInfo newSpell = ((SlotLibraryInfo) getSlot(librarySlot)).getInfo();
-              if (newSpell == null) {
-                reset();
-                return ItemStack.EMPTY;
+              if (!player.world.isRemote) {
+                LibrarySpellInfo newSpell = ((SlotLibraryInfo) getSlot(librarySlot)).getInfo();
+                if (newSpell == null) {
+                  reset();
+                  return ItemStack.EMPTY;
+                }
+                storage.setSpellToSlot(info.getSlot(), newSpell.toStaff());
+                storage.saveToStack();
+                PlayerSyncUtil.syncPlayer(player);
               }
-              storage.setSpellToSlot(info.getSlot(), newSpell.toStaff());
-              storage.saveToStack();
               reset();
-              PlayerSyncUtil.syncPlayer(player);
             } else if (!didSwap) {
               staffSlot = info.getSlot();
             }
@@ -304,6 +323,7 @@ public class ContainerLibrary extends Container implements IInvalidatingContaine
         }
       } else {
         // Editing modifiers
+        // TODO: MAKE IT NOT BREAK STUFF WITH REMOTE.
         SlotLibraryModifierInfo info = (SlotLibraryModifierInfo) slot;
         if (info.isApplicable() && info.isApplied()) {
           StaffSpellStorage storage = getSpellStorage();
