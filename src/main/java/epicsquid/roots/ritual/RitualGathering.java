@@ -26,7 +26,7 @@ public class RitualGathering extends RitualBase {
   @Override
   public void init() {
     recipe = new RitualRecipe(this,
-        new ItemStack(ModItems.wildewheet),
+        new OreIngredient("slimeball"),
         new ItemStack(ModItems.wildewheet),
         new ItemStack(epicsquid.mysticalworld.init.ModItems.aubergine_seed),
         new OreIngredient("ingotIron"),

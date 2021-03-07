@@ -7,6 +7,7 @@ import epicsquid.roots.ritual.conditions.ConditionStandingStones;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualAnimalHarvest extends RitualBase {
@@ -42,7 +43,7 @@ public class RitualAnimalHarvest extends RitualBase {
         new ItemStack(ModItems.wildewheet),
         new OreIngredient("wool"),
         new OreIngredient("cropCarrot"),
-        new ItemStack(Items.MELON),
+        new OreIngredient("slimeball"),
         new OreIngredient("wildroot")
     );
     addCondition(new ConditionStandingStones(3, 3));

@@ -38,7 +38,7 @@ public class RitualDivineProtection extends RitualBase {
     recipe = new RitualRecipe(this,
         new ItemStack(ModItems.pereskia),
         new ItemStack(ModItems.cloud_berry),
-        new ItemStack(ModItems.bark_birch),
+        new OreIngredient("rootsBark"),
         new ItemStack(ModItems.bark_oak),
         new OreIngredient("dustGlowstone")
     );
