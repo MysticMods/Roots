@@ -83,7 +83,7 @@ repositories {
     }
     maven {
         name = "MMD Maven"
-        url 'https://mmdmaven.blamejared.com'
+        url 'https://maven.mcmoddev.com'
     }
     maven {
         //Also contains Patchouli
