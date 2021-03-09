@@ -137,4 +137,10 @@ public class BlockWildFire extends BlockFire implements IBlock, IModeledObject, 
       }
     }
   }
+
+  @SideOnly(Side.CLIENT)
+  @SuppressWarnings("deprecation")
+  public int getPackedLightmapCoords(IBlockState state, IBlockAccess source, BlockPos pos) {
+    return source.getCombinedLight(pos, 15);
+  }
 }
