@@ -3,6 +3,7 @@ package epicsquid.roots.entity.ritual;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.mechanics.Magnetize;
 import epicsquid.roots.network.fx.MessageItemGatheredFX;
+import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.ritual.RitualGathering;
 import epicsquid.roots.ritual.RitualRegistry;
 import net.minecraft.tileentity.TileEntity;
@@ -28,7 +29,17 @@ public class EntityRitualGathering extends EntityRitualBase {
   @Override
   public void onUpdate() {
     super.onUpdate();
-
+    float alpha = (float) Math.min(40, (RitualRegistry.ritual_summon_creatures.getDuration() + 20) - getDataManager().get(lifetime)) / 40.0f;
+    if (world.isRemote && getDataManager().get(lifetime) > 0) {
+      for (float i = 0; i < 360; i += rand.nextFloat() * 90.0f) {
+        float vx = -(0.09f * (float) Math.sin(Math.toRadians(i)));
+        float vz = -(0.09f * (float) Math.cos(Math.toRadians(i)));
+        float tx = (float) posX + 2.5f * (float) Math.sin(Math.toRadians(i));
+        float ty = (float) posY;
+        float tz = (float) posZ + 2.5f * (float) Math.cos(Math.toRadians(i));
+        ParticleUtil.spawnParticleSmoke(world, tx, ty, tz, vx, 0, vz, 120, 255, 232, 0.055f, 5.0f, 95, true);
+      }
+    }
     if (!world.isRemote) {
       if (this.ticksExisted % ritual.interval == 0) {
         AxisAlignedBB bounds = bounding.offset(getPosition());
