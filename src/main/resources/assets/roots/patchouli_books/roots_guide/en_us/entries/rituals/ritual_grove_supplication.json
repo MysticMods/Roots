@@ -12,7 +12,25 @@
     {
       "type": "pyre_template",
       "ritual": "ritual_grove_supplication",
-      "text": "As a $(bold)tier I$() ritual, a grove stone is required for the ritual to be effective."
+      "text": "As a $(l:rituals/tiers)$(bold)tier I$() ritual, $(l:rituals/ritual_grove_supplication#multiblock)a grove stone$() is required for the ritual to be effective."
+    },
+    {
+      "type": "multiblock",
+      "anchor": "multiblock",
+      "multiblock": {
+        "mapping": {
+          "0": "roots:pyre",
+          "1": "roots:grove_stone[facing=north,half=bottom,valid=false]",
+          "2": "roots:grove_stone[facing=north,half=middle,valid=false]",
+          "3": "roots:grove_stone[facing=north,half=top,valid=false]"
+        },
+        "pattern": [
+          ["       ","       ","       ","3      ","       ","       ","       "],
+          ["       ","       ","       ","2      ","       ","       ","       "],
+          ["       ","       ","       ","1  0   ","       ","       ","       "]
+        ]
+      },
+      "text": "The ritual requires an inactive $(l:rituals/grove_stone)grove stone$() to activate."
     },
     {
       "type": "text",

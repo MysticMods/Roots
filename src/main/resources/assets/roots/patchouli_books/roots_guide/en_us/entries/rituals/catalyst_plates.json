@@ -15,12 +15,12 @@
     {
       "type": "crafting",
       "recipe": "roots:offering_plate",
-      "text": "For instructions on making $(l:crafting/decoration/runestone)chiseled runestone$(), see the relevant section under decorative crafting.$(br2)Blocks on the sides of the recipe may be of any type of runestone, including chiseled."
+      "text": "For instructions on making $(l:crafting/runestone)chiseled runestone$(), see the relevant section under decorative crafting.$(br2)Blocks on the sides of the recipe may be of any type of runestone, including chiseled."
     },
     {
       "type": "crafting",
       "recipe": "roots:reinforced_offering_plate",
-      "text": "The recipe for $(l:crafting/decoration/runed_obsidian)chiseled runed obsidian$() is similar to that of normal chiseled runestone.$(br2)Again, blocks on the side of the recipe may be of any type of runed obsidian, including chiseled."
+      "text": "The recipe for $(l:crafting/runed_obsidian)chiseled runed obsidian$() is similar to that of normal chiseled runestone.$(br2)Again, blocks on the side of the recipe may be of any type of runed obsidian, including chiseled."
     },
     {
       "type": "multiblock",

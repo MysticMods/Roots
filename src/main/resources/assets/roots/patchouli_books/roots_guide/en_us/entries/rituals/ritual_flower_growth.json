@@ -7,11 +7,12 @@
   "pages": [
     {
       "type": "text",
-      "text": "An abundance of flowers of every type will grow in the area around the pyre, useful for creating such resources as $(l:resources/petals)petals$() or dyes.$(br2)$(warning) $(l:spells/natures_scythe)Nature's Scythe$() makes clearing out tall grass before the ritual easy.$(br2)"
+      "text": "An abundance of flowers of every type will grow in the area around the pyre, useful for creating such resources as $(l:resources/petals)petals$() or dyes, or even just for simple decoration.$(br2)$(info) $(l:spells/natures_scythe)Nature's Scythe$() makes clearing out tall grass before the ritual easy.$(br2)The exact flowers grown and the soils they grow upon can be configured with CraftTweaker."
     },
     {
       "type": "pyre_template",
-      "ritual": "ritual_flower_growth"
+      "ritual": "ritual_flower_growth",
+      "text": "As a $(l:rituals/tiers)$(bold)tier 0$() ritual, there are no additional requirements to complete this ritual."
     }
   ]
 }
