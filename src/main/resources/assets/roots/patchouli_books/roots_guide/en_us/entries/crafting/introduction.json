@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "You will encounter three different types of crafting in Roots:$(br2)$(li)Vanilla crafting with a carfting table$(li)$(l:crafting/devices/pyres)Pyre$() ritual crafting$(li)$(l:crafting/fey_crafter)Fey crafting$() with an an activated $(l:crafting/grove_stone)grove stone$().$(li)$(l:crafting/mortar_and_pestle)Mortar & Pestle$() crafting.$(br2)This entry will skip over Vanilla crafting tables, as recipes for those items will be displayed in their relevant entries. Most recipes generally require $(l:resources/introduction)resources$()."
+      "text": "You will encounter three different types of crafting in Roots:$(br2)$(li)Vanilla crafting with a carfting table$(li)$(l:crafting/pyres)Pyre$() ritual crafting$(li)$(l:crafting/fey_crafter)Fey crafting$() with an an activated $(l:crafting/grove_stone)grove stone$().$(li)$(l:crafting/mortar_and_pestle)Mortar & Pestle$() crafting.$(br2)This entry will skip over Vanilla crafting tables, as recipes for those items will be displayed in their relevant entries. Most recipes generally require $(l:resources/introduction)resources$()."
     },
     {
       "type": "text",
@@ -17,12 +17,12 @@
     {
       "type": "text",
       "title": "Pyre Ritual Crafting",
-      "text": "$(cat:herbs)Most herbs$() require a $(l:crafting/devices/pyres)Pyre crafting ritual$() of some kind to create, except those which use $(l:crafting/armor_and_tools/runic_shears)runic shears$() to access the Fey world.$(br2)In addition to herbs, some food items can be cooked \"in bulk\" on a pyre.$(br2)$(info) Unlike some $(cat:rituals)rituals$(), crafting rituals do not require additional components and are all considered $(l:rituals/tiers)'tier 0'$()."
+      "text": "$(cat:herbs)Most herbs$() require a $(l:crafting/pyres)Pyre crafting ritual$() of some kind to create, except those which use $(l:crafting/runic_shears)runic shears$() to access the Fey world.$(br2)In addition to herbs, some food items can be cooked \"in bulk\" on a pyre.$(br2)$(info) Unlike some $(cat:rituals)rituals$(), crafting rituals do not require additional components and are all considered $(l:rituals/tiers)'tier 0'$()."
     },
     {
       "type": "text",
       "title": "Fey Crafting",
-      "text": "An active $(l:crafting/grove_stone)Grove Stone$() within 10 blocks powers the $(l:crafting/fey_crafter)fey crafter$(). Activation is through the $(l:rituals/ritual_grove_supplication)Grove Supplication ritual$().$(br2)Recipes have five ingredients, although full stacks of each can be placed in the crafter.$(br2)$(info) Right-clicking with a $(l:crafting/armor_and_tools/knives)knife$() begins the process of crafting.$(br2)$(info) Multiple crafting operations will be performed instantly for all provided ingredients."
+      "text": "An active $(l:crafting/grove_stone)Grove Stone$() within 10 blocks powers the $(l:crafting/fey_crafter)fey crafter$(). Activation is through the $(l:rituals/ritual_grove_supplication)Grove Supplication ritual$().$(br2)Recipes have five ingredients, although full stacks of each can be placed in the crafter.$(br2)$(info) Right-clicking with a $(l:crafting/knives)knife$() begins the process of crafting.$(br2)$(info) Multiple crafting operations will be performed instantly for all provided ingredients."
     },
     {
       "type": "text",

@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Rituals are a way of unlocking the wild energy of nature at harnessing it for a specific purpose.$(br2)The primary device used in rituals is a $(l:crafting/devices/pyres)Pyre$(), and it is upon this pyre that the five necessary ingredients to perform the ritual are placed by right-clicking.$(br2)Lighting the pyre is the final step to begin the ritual."
+      "text": "Rituals are a way of unlocking the wild energy of nature at harnessing it for a specific purpose.$(br2)The primary device used in rituals is a $(l:crafting/pyres)Pyre$(), and it is upon this pyre that the five necessary ingredients to perform the ritual are placed by right-clicking.$(br2)Lighting the pyre is the final step to begin the ritual."
     },
     {
       "type": "text",
@@ -30,7 +30,7 @@
     {
       "type": "text",
       "title": "Visualisation",
-      "text": "($(o)See $(l:rituals/visualisation)Ritual Visualisation$())$(br2)If a ritual has a specific radius or cube size, it's possible to have the exact range of the ritual displayed in-world.$(br2)To do so, sneak-right-click a $(l:crafting/devices/pyres)pyre$() that has ritual ingredients in it (or displays a previously activated ritual) with a $(l:crafting/armor_and_tools/knives)knife$()."
+      "text": "($(o)See $(l:rituals/visualisation)Ritual Visualisation$())$(br2)If a ritual has a specific radius or cube size, it's possible to have the exact range of the ritual displayed in-world.$(br2)To do so, sneak-right-click a $(l:crafting/pyres)pyre$() that has ritual ingredients in it (or displays a previously activated ritual) with a $(l:crafting/knives)knife$()."
     },
     {
       "type": "text",

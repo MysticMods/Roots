@@ -9,7 +9,7 @@
     },
     {
       "type": "text",
-      "text": "In order to gather the specific resource you will need to meet the pre-requisites for doing so.$(br2)For example, obtaining $(l:resources/bark)bark$() requires that you have crafted a $(l:crafting/armor_and_tools/knives)knife$() first, likewise $(l:resources/petals)petals$() a $(l:crafting/mortar_and_pestle)mortar & pestle$().$(br2)More complex resources will require more complex crafting systems, such as $(l:resources/runestone)runestone$() requiring a $(l:crafting/fey_crafter)fey crafter$(), or $(l:resources/mystic_feather)mystic feathers$() and $(l:resources/fey_leather)fey leather$() requiring $(l:crafting/armor_and_tools/runic_shears)runic shears$()."
+      "text": "In order to gather the specific resource you will need to meet the pre-requisites for doing so.$(br2)For example, obtaining $(l:resources/bark)bark$() requires that you have crafted a $(l:crafting/knives)knife$() first, likewise $(l:resources/petals)petals$() a $(l:crafting/mortar_and_pestle)mortar & pestle$().$(br2)More complex resources will require more complex crafting systems, such as $(l:resources/runestone)runestone$() requiring a $(l:crafting/fey_crafter)fey crafter$(), or $(l:resources/mystic_feather)mystic feathers$() and $(l:resources/fey_leather)fey leather$() requiring $(l:crafting/runic_shears)runic shears$()."
     },
     {
       "type": "text",

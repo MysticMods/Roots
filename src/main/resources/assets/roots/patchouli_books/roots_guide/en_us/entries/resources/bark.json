@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Much wild magic is stored in the bark of a tree, in addition to its leaves and logs. Breaking a log with a $(l:crafting/armor_and_tools/knives)knife$() allows you to obtain bark.$(br2)$(info) The amount of bark produced can be increased with the fortune enchantment."
+      "text": "Much wild magic is stored in the bark of a tree, in addition to its leaves and logs. Breaking a log with a $(l:crafting/knives)knife$() allows you to obtain bark.$(br2)$(info) The amount of bark produced can be increased with the fortune enchantment."
     },
     {
       "type": "spotlight",

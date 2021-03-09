@@ -12,7 +12,7 @@
     {
       "type": "crafting",
       "recipe": "roots:firestarter",
-      "text": "Additionally, a rudimentary $(l:crafting/armor_and_tools/firestarter)fire-starter$() can be crafted from two sticks.$(br2)You must channel the device on the Pyre for several seconds to start it, after which point the device is consumed."
+      "text": "Additionally, a rudimentary $(l:crafting/firestarter)fire-starter$() can be crafted from two sticks.$(br2)You must channel the device on the Pyre for several seconds to start it, after which point the device is consumed."
     },
     {
       "type": "text",
