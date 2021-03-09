@@ -118,6 +118,7 @@ public class PatchouliHack {
             boolean night = false;
             boolean day = false;
             boolean heart = false;
+            boolean chance = false;
             if (propName.equals("HEART")) {
               propName = parts[2];
               heart = true;
@@ -141,6 +142,10 @@ public class PatchouliHack {
             if (propName.equals("MINUTES")) {
               propName = parts[2];
               minutes = true;
+            }
+            if (propName.equals("CHANCE")) {
+              propName = parts[2];
+              chance = true;
             }
 
             Object value = null;
@@ -175,7 +180,7 @@ public class PatchouliHack {
                   }
                 } else if (night) {
                   try {
-                    double val = 100.0 / (double) ((int)value + 1);
+                    double val = 100.0 / (double) ((int) value + 1);
                     value = (int) val + "%";
                   } catch (ClassCastException e) {
                     Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
@@ -196,6 +201,14 @@ public class PatchouliHack {
                   } catch (ClassCastException e) {
                     Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
                     return "INVALID PROPERTY FOR HEARTS: " + propName;
+                  }
+                } else if (chance) {
+                  try {
+                    double val = 1.0 / (double) (int) value;
+                    value = String.format("%.03f", val) + "%";
+                  } catch (ClassCastException e) {
+                    Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
+                    return "INVALID PROPERTY FOR CHANCE: " + propName;
                   }
                 }
               } else {
@@ -228,7 +241,6 @@ public class PatchouliHack {
 
     FUNCTIONS.put("ritual", prop.apply("ritual"));
     COMMANDS.put("/ritual", reset);
-
 /*    BookTextParser.FunctionProcessor li_link = (parameter, state) -> {
       state.lineBreaks = 1;
       state.spacingLeft = 4;
