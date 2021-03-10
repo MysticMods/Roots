@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "While this category contains an introduction to the various concepts of the game from a lore perspective, each individual category contains its own introduction describing its systems in detail.$(br2)Some categories contain additional information in mechanics in a subcategory, which will be marked in $(bold)bold$() as $(bold)Subcategories$() on the left."
+      "text": "While this category contains an introduction to the various concepts of the game from a lore perspective, each individual category contains its own introduction describing each system in detail.$(br2)Some categories contain additional information on mechanics in a subcategory, which will be marked in $(bold)bold$() as $(bold)Subcategories$() on the left."
     },
     {
       "type": "text",
