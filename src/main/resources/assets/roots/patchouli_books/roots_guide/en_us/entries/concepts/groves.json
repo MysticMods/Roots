@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "After $(l:concepts/wild_magic)the fall of the Order of Druids$(), many sought to enhance the power of wild magic in order to make it equivalent to that which they had lost.$(br2)While their purpose was selfish, the final result of the Grove Stone was surprisingly useful as a magnifier of wild magic, as well as a catalyst for crafting.$(br2)While simulating the Fey was"
+      "text": "After $(l:concepts/wild_magic)the fall of the Order of Druids$(), many sought to enhance the power of Wild Magic in order to make it equivalent to that which they had lost.$(br2)While their purpose was selfish, the resulting Grove Stone was surprisingly useful as a magnifier of wild magic, and as a catalyst for crafting.$(br2)Simulating the Fey was not"
     },
     {
       "type": "multiblock",
@@ -49,7 +49,7 @@
     },
     {
       "type": "text",
-      "text": "not something that these latter Druids were able to accomplish, it remains unclear whether it even has the potential for success.$(br2)Regardless, when combined with an appropriately attuned device, it allows for a greater range of crafting and creation.$(br2)Some posit it harnesses power from the Fey via minute portals, small enough for energy but too small to be seen, but its exact method remains unclear."
+      "text": "something that these latter Druids were capable of, and it remains unclear whether it is even possible to do so.$(br2)Regardless, when combined with an appropriately attuned device, Grove Stones allow for a greater range of crafting and creation.$(br2)Some posit they harness power from the Fey via minute portals, large enough for energy but too small to be seen, but the exact method remains unclear."
     },
     {
       "type": "multiblock",
