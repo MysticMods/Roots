@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Nearby players are slowly healed, while creatures are healed much more rapidly while in proximity of the ritual.$(br2)$(info) Hostile creatures are not affected.$(br2)$(standing_stones) $(l:rituals/ritual_healing_aura#multiblock)This ritual requires standing stones.$()"
+      "text": "The healing of passive creatures and players is increased while in they remain in the ritual range.$(br2)Indeed, those passive creatures healed by the ritual are healed for significantly more, and also more frequently, than players.$(br2)Hostile creatures are unaffected by the ritual."
     },
     {
       "type": "pyre_template",
@@ -19,16 +19,14 @@
       "multiblock": {
         "mapping": {
           "0": "roots:pyre",
-          "R": "roots:runestone",
-          "C": "roots:chiseled_runestone",
           "W": "roots:runed_birch",
           "L": "minecraft:log[variant=birch]"
         },
         "pattern": [
           ["       ","       ","       ","       ","       ","       ","       "],
-          ["       ","   C   ","       ","       ","       ","   W   ","       "],
-          ["       ","   R   ","       ","       ","       ","   L   ","       "],
-          ["       ","   R   ","       ","   0   ","       ","   L   ","       "]
+          ["       ","       ","       ","       ","       ","   W   ","       "],
+          ["       ","       ","       ","       ","       ","   L   ","       "],
+          ["       ","       ","       ","   0   ","       ","   L   ","       "]
         ]
       }
     },

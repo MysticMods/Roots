@@ -352,6 +352,7 @@ public class ModRecipes {
     // TODO: Conditional non-hostile
     addPacifistEntry("lava_cat", EntityLavaCat.class);
     addPacifistEntry("hellsprout", EntityHellSprout.class);
+    addPacifistEntry("clam", EntityClam.class);
   }
 
   public static void addFlowerRecipe(String name, IBlockState state) {
