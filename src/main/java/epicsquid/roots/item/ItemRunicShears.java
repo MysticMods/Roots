@@ -39,6 +39,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.EnumActionResult;
@@ -68,7 +69,7 @@ public class ItemRunicShears extends ItemShearsBase {
   private Random random;
 
   public ItemRunicShears(@Nonnull String name) {
-    super(name);
+    super(name, () -> Ingredient.EMPTY);
     setMaxDamage(357);
     setMaxStackSize(1);
     setHasSubtypes(false);

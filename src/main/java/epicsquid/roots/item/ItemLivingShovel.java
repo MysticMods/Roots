@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -17,7 +18,7 @@ import net.minecraft.world.World;
 @SuppressWarnings("deprecation")
 public class ItemLivingShovel extends ItemShovelBase implements ILivingRepair {
   public ItemLivingShovel(ToolMaterial material, String name) {
-    super(material, name, 3, 192);
+    super(material, name, 3, 192, () -> Ingredient.EMPTY);
   }
 
   @Override
