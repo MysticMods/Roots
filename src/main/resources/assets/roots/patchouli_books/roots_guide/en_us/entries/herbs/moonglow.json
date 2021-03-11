@@ -9,7 +9,7 @@
       "type": "spotlight",
       "item": "roots:moonglow_leaf",
       "link_recipe": true,
-      "text": "Moonglow, at a first glance, seems to glow in the dark at night; observant mages have noted that it actually emits no light at all if the moon is obscured.$(br2)$(info) Moonglow seeds can be obtained and planted on normal farmland."
+      "text": "Moonglow, at a first glance, seems to glow in the dark at night; observant mages have noted that it actually emits no light at all if the moon is obscured.$(br2)$(info) Once obtained, Moonglow seeds can be planted on normal farmland."
     },
     {
       "type": "ritual_crafting_template",
