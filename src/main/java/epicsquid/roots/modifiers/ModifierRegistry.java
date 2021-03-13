@@ -21,6 +21,9 @@ public class ModifierRegistry {
 
   @Nullable
   public static Modifier get(Modifier modifier) {
+    if (modifier == null) {
+      return null;
+    }
     return map.get(modifier.getRegistryName());
   }
 

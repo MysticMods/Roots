@@ -33,6 +33,8 @@ public class ModDamage {
 
   public static DamageSource ROSE_DAMAGE = (new DamageSource("rose_thorns")).setDamageBypassesArmor();
 
+  public static DamageSource HARVEST_RITUAL_DAMAGE = (new DamageSource("harvest_damage_ritual"));
+
   public static DamageSource physicalDamageFrom(@Nullable Entity player) {
     DamageSource source;
     if (player == null) {

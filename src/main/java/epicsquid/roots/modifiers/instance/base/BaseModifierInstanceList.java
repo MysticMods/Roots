@@ -72,6 +72,9 @@ public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> i
   @Override
   @Nullable
   public T get(IModifier modifier) {
+    if (modifier == null) {
+      return null;
+    }
     for (T mi : internal) {
       if (mi.getModifier().equals(modifier)) {
         return mi;

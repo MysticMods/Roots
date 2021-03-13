@@ -41,9 +41,6 @@
       "type": "relations",
       "anchor": "related",
       "entries": [
-        "concepts/the_fey",
-        "crafting/fey_crafter",
-        "crafting/grove_stone"
       ]
     }
   ]

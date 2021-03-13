@@ -69,6 +69,8 @@ public class RunicShearRecipes {
 
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "silverfish_silver"), new ItemStack(Materials.silver.getNugget(), 2), EntitySilverfish.class, 20 * 120));
 
+    ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "clam_pearl"), new ItemStack(epicsquid.mysticalworld.init.ModItems.pearl), EntityClam.class, 20 * 60 * 4));
+
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "villager_spirit_bag"), new ItemStack(ModItems.spirit_bag), EntityVillager.class, 20 * 60 * 5));
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "spider_eyes"), new ItemStack(Items.SPIDER_EYE), EntitySpider.class, 20 * 120));
     ModRecipes.addRunicShearRecipe(new RunicShearEntityRecipe(new ResourceLocation(Roots.MODID, "cave_spider_eyes"), new ItemStack(Items.FERMENTED_SPIDER_EYE), EntityCaveSpider.class, 20 * 120));

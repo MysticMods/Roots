@@ -3,6 +3,7 @@ package epicsquid.roots.entity.ritual;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.config.RitualConfig;
+import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.AnimalHarvestFishRecipe;
 import epicsquid.roots.ritual.RitualAnimalHarvest;
@@ -134,7 +135,7 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
       LootTable loottable = entity.world.getLootTableManager().getLootTableFromLocation(resourcelocation);
       entity.deathLootTable = null;
       FakePlayer fakePlayer = FakePlayerFactory.getMinecraft((WorldServer) entity.world);
-      LootContext context = new LootContext(looting, (WorldServer) entity.world, entity.world.getLootTableManager(), entity, fakePlayer, DamageSource.GENERIC);
+      LootContext context = new LootContext(looting, (WorldServer) entity.world, entity.world.getLootTableManager(), entity, fakePlayer, ModDamage.HARVEST_RITUAL_DAMAGE);
 
       for (ItemStack itemstack : loottable.generateLootForPools(entity.deathLootTableSeed == 0L ? entity.rand : new Random(entity.deathLootTableSeed), context)) {
         entity.entityDropItem(itemstack, 0.0F);
