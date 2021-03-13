@@ -16,7 +16,7 @@ public class RitualHealingAura extends RitualBase {
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 15).setDescription("Radius on the Y Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15).setDescription("Radius on the Z Axis of the cube in which the ritual takes place");
-  public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(40).setDescription("interval in ticks between each ritual healing pulse");
+  public static Property<Integer> PROP_INTERVAL = new Property<>("passive_interval", 40).setDescription("interval in ticks between each ritual healing pulse");
   public static Property.PropertyInterval PROP_PLAYER_INTERVAL = new Property.PropertyInterval(60).setDescription("interval in ticks between each ritual healing pulse specifically for players");
   public static Property<Float> PROP_PLAYER_AMOUNT = new Property<>("player_amount", 1.0f).setDescription("the amount of life points is healed for players for of each ritual pulse");
   public static Property<Float> PROP_AMOUNT = new Property<>("amount", 4.0f).setDescription("the amount of life points a non-player entity is healed for each ritual pulse");
