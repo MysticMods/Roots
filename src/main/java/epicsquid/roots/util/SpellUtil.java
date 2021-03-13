@@ -1,5 +1,6 @@
 package epicsquid.roots.util;
 
+import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.modifiers.ModifierRegistry;
 import epicsquid.roots.modifiers.instance.library.LibraryModifierInstance;

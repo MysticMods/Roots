@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "The healing of passive creatures and players is increased while in they remain in the ritual range.$(br2)Indeed, those passive creatures healed by the ritual are healed for significantly more, and also more frequently, than players.$(br2)Hostile creatures are unaffected by the ritual."
+      "text": "The healing of passive creatures and players is increased while in they remain in the ritual range.$(br2)Indeed, those passive creatures healed by the ritual are healed for significantly more, and also more frequently, than players.$(br2)$(info) Hostile creatures are unaffected by the ritual."
     },
     {
       "type": "pyre_template",
@@ -31,10 +31,14 @@
       }
     },
     {
+      "type": "text",
+      "title": "Ritual Specifics",
+      "text": "$(bold)Duration:$() The ritual lasts $(ritual:healing_aura/SECONDS/duration) seconds. If an inactive grove stone is not found nearby by the end of the ritual, it will fail.$(br2)$(bold)Size:$() The ritual will search for grove stones within an area of $(ritual:healing_aura/radius_x) and $(ritual:healing_aura/radius_z) blocks horizontally, and by $(ritual:healing_aura/radius_y) vertically."
+    },
+    {
       "type": "relations",
       "anchor": "related",
       "entries": [
-        "rituals/standing_stones"
       ]
     }
   ]
