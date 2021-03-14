@@ -50,7 +50,6 @@ public class RitualSummonCreatures extends RitualBase {
         new ItemStack(Items.WHEAT_SEEDS)
     );
     addCondition(new ConditionValidSummon());
-    addCondition(new ConditionRunedPillars(RitualUtil.RunedWoodType.BIRCH, 3, 1));
     setIcon(ModItems.ritual_summon_creatures);
     setColor(TextFormatting.DARK_PURPLE);
     setBold(true);
