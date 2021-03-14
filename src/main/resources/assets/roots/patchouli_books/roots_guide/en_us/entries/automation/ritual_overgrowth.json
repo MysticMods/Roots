@@ -1,0 +1,11 @@
+{
+  "name": "Ritual: Overgrowth",
+  "icon": "roots:ritual_overgrowth",
+  "category": "automation",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

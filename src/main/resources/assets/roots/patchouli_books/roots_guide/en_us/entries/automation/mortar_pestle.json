@@ -1,0 +1,11 @@
+{
+  "name": "Mortar & Pestle",
+  "icon": "roots:mortar",
+  "category": "automation",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}
