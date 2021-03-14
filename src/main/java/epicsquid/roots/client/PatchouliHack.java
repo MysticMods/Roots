@@ -119,6 +119,7 @@ public class PatchouliHack {
             boolean day = false;
             boolean heart = false;
             boolean chance = false;
+            boolean multiplier = false;
             if (propName.equals("HEART")) {
               propName = parts[2];
               heart = true;
@@ -146,6 +147,10 @@ public class PatchouliHack {
             if (propName.equals("CHANCE")) {
               propName = parts[2];
               chance = true;
+            }
+            if (propName.equals("MULT")) {
+              propName = parts[2];
+              multiplier = true;
             }
 
             Object value = null;
@@ -209,6 +214,13 @@ public class PatchouliHack {
                   } catch (ClassCastException e) {
                     Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
                     return "INVALID PROPERTY FOR CHANCE: " + propName;
+                  }
+                } else if (multiplier) {
+                  try {
+                    value = (int) value + 1;
+                  } catch (ClassCastException e) {
+                    Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
+                    return "INVALID PROPERTY FOR MULTIPLIER: " + propName;
                   }
                 }
               } else {

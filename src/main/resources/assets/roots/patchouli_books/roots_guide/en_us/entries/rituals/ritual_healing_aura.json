@@ -35,11 +35,7 @@
     {
       "type": "text",
       "title": "Ritual Specifics",
-      "text": "$(bold)Duration:$() The ritual lasts $(ritual:healing_aura/SECONDS/duration) seconds. If an inactive grove stone is not found nearby by the end of the ritual, it will fail.$(br2)$(bold)Size:$() The ritual will search for grove stones within an area of $(ritual:healing_aura/radius_x) and $(ritual:healing_aura/radius_z) blocks horizontally, and by $(ritual:healing_aura/radius_y) vertically.$(br2)$(bold)Player Healing$(): Players are healed every $(ritual:healing_aura/SECONDS/interval) seconds for $(ritual:healing_aura/HEART/player_amount) hearts."
-    },
-    {
-      "type": "text",
-      "text": "$(bold)Passive Healing$(): Passive creatures are healed every $(ritual:healing_aura/SECONDS/passive_interval) seconds for $(ritual:healing_aura/HEART/amount) hearts."
+      "text": "$(bold)Duration:$() The ritual lasts $(ritual:healing_aura/SECONDS/duration) seconds.$(br2)$(bold)Size:$() The ritual will search for within an area of $(ritual:healing_aura/radius_x) and $(ritual:healing_aura/radius_z) blocks horizontally, and by $(ritual:healing_aura/radius_y) vertically.$(br2)$(bold)Player Healing$(): Players are healed every $(ritual:healing_aura/SECONDS/interval) seconds for $(ritual:healing_aura/HEART/player_amount) hearts.$(br2)$(bold)Passive Healing$(): Passive creatures are healed every $(ritual:healing_aura/SECONDS/passive_interval) seconds for $(ritual:healing_aura/HEART/amount) hearts."
     },
     {
       "type": "relations",
