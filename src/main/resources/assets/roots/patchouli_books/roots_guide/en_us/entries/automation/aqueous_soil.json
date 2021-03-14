@@ -1,0 +1,11 @@
+{
+  "name": "Aqueous Soil",
+  "icon": "roots:aqueous_soil",
+  "category": "automation",
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}
