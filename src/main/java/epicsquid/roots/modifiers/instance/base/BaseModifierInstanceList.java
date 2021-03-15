@@ -21,7 +21,6 @@ public abstract class BaseModifierInstanceList<T extends BaseModifierInstance> i
   protected final Map<IModifierCore, T> coreToInstance;
   protected final SpellBase spell;
 
-  // TODO
   public BaseModifierInstanceList(SpellBase spell, Function<Modifier, T> empty) {
     internal = new ArrayList<>();
     coreToInstance = new HashMap<>();

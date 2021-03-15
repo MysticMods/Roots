@@ -1,6 +1,13 @@
 package epicsquid.roots.spell.info.storage;
 
+import com.google.common.collect.Sets;
 import epicsquid.roots.Roots;
+import epicsquid.roots.modifiers.Modifier;
+import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
+import epicsquid.roots.spell.SpellAugment;
+import epicsquid.roots.spell.SpellExtension;
+import epicsquid.roots.spell.SpellGrowthInfusion;
+import epicsquid.roots.spell.SpellStormCloud;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.util.SpellUtil;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
@@ -268,15 +275,90 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
         //Roots.logger.error("Tried to deserialize spell " + spells.getCompoundTag(key) + " but got null!");
         this.spells.put(value, info);
       }
-    } else {
+      this.selectedSlot = tag.getInteger("selectedSlot");
+    } else if (tag.hasKey("spell_0")) {
       for (int i = 0; i < 5; i++) {
         if (tag.hasKey("spell_" + i)) {
-          spells.put(i, StaffSpellInfo.fromRegistry(tag.getString("spell_" + i)));
+          StaffSpellInfo info = resolveSpell(tag.getString("spell_" + i));
+          spells.put(i+1, info);
         }
       }
+      this.selectedSlot = tag.getInteger("selectedSlot");
+      this.saveToStack();
     }
+  }
 
-    this.selectedSlot = tag.getInteger("selectedSlot");
+  private static Set<String> REMOVED_SPELLS = Sets.newHashSet("spell_iced_touch", "spell_light_drifter", "spell_magnetism", "spell_rampant_growth", "spell_second_wind", "spell_sense_animals", "spell_sense_danger");
+
+  @Nullable
+  private static StaffSpellInfo resolveSpell(String spell_name) {
+    if (!REMOVED_SPELLS.contains(spell_name)) {
+      return StaffSpellInfo.fromRegistry(spell_name);
+    } else {
+      StaffSpellInfo info = null;
+      switch (spell_name) {
+        case "spell_iced_touch":
+          info = StaffSpellInfo.fromSpell(SpellStormCloud.instance, false);
+          break;
+        case "spell_light_drifter":
+          info = StaffSpellInfo.fromSpell(SpellAugment.instance, false);
+          for (StaffModifierInstance mod : info.getModifiers()) {
+            if (mod.getModifier() == SpellAugment.LIGHT_DRIFTER) {
+              mod.setApplied();
+              mod.setEnabled(true);
+            }
+          }
+          break;
+        case "spell_magnetism":
+          info = StaffSpellInfo.fromSpell(SpellAugment.instance, false);
+          for (StaffModifierInstance mod : info.getModifiers()) {
+            if (mod.getModifier() == SpellAugment.MAGNETISM) {
+              mod.setApplied();
+              mod.setEnabled(true);
+            }
+          }
+          break;
+        case "rampant_growth":
+          info = StaffSpellInfo.fromSpell(SpellGrowthInfusion.instance, false);
+          for (StaffModifierInstance mod : info.getModifiers()) {
+            Modifier m = mod.getModifier();
+            if (m == SpellGrowthInfusion.RADIUS1 || m == SpellGrowthInfusion.RADIUS2 || m == SpellGrowthInfusion.RADIUS3) {
+              mod.setApplied();
+              mod.setEnabled(true);
+            }
+          }
+          break;
+        case "spell_second_wind":
+          info = StaffSpellInfo.fromSpell(SpellAugment.instance, false);
+          for (StaffModifierInstance mod : info.getModifiers()) {
+            if (mod.getModifier() == SpellAugment.SECOND_WIND) {
+              mod.setApplied();
+              mod.setEnabled(true);
+            }
+          }
+          break;
+        case "spell_sense_animals":
+          info = StaffSpellInfo.fromSpell(SpellExtension.instance, false);
+          for (StaffModifierInstance mod : info.getModifiers()) {
+            if (mod.getModifier() == SpellExtension.SENSE_ANIMALS) {
+              mod.setApplied();
+              mod.setEnabled(true);
+            }
+          }
+          break;
+        case "spell_sense_danger":
+          info = StaffSpellInfo.fromSpell(SpellExtension.instance, false);
+          for (StaffModifierInstance mod : info.getModifiers()) {
+            if (mod.getModifier() == SpellExtension.SENSE_DANGER) {
+              mod.setApplied();
+              mod.setEnabled(true);
+            }
+          }
+          break;
+      }
+
+      return info;
+    }
   }
 
   @Nullable
