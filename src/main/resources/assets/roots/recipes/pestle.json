@@ -8,8 +8,8 @@
   "key": {
     "X": [
       {
-        "item": "minecraft:stone",
-        "data": 0
+        "type": "forge:ore_dict",
+        "ore": "pestleStone"
       }
     ]
   },

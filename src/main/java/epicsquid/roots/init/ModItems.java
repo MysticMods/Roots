@@ -256,7 +256,7 @@ public class ModItems {
     }
 
     OreDictionary.registerOre("wildroot", ModItems.wildroot);
-
+    OreDictionary.registerOre("pestleStone", new ItemStack(Blocks.STONE, 1, OreDictionary.WILDCARD_VALUE));
     OreDictionary.registerOre("logWood", ModBlocks.wildwood_log);
     OreDictionary.registerOre("plankWood", ModBlocks.wildwood_planks);
     OreDictionary.registerOre("stairWood", ModBlocks.wildwood_stairs);
