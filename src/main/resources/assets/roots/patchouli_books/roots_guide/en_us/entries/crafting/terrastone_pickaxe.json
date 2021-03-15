@@ -1,7 +1,8 @@
 {
-  "name": "Living Pickaxe",
+  "name": "Terrastone Pickaxe",
   "icon": "roots:terrastone_pickaxe",
   "category": "crafting_armor_tools_terrastone",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

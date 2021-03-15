@@ -2,6 +2,7 @@
   "name": "Living Arrow",
   "icon": "roots:living_arrow",
   "category": "crafting_armor_tools_living",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

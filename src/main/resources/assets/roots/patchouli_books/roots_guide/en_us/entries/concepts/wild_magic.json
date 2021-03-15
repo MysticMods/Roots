@@ -2,6 +2,7 @@
   "name": "A History of Wild Magic",
   "icon": "roots:fey_fire",
   "category": "concepts",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

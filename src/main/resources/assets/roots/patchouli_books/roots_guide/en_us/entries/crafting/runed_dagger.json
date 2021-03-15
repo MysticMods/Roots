@@ -2,6 +2,7 @@
   "name": "Runed Dagger",
   "icon": "roots:runed_dagger",
   "category": "crafting_armor_tools_runed",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

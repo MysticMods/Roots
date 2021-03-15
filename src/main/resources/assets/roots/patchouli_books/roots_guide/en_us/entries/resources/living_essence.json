@@ -2,6 +2,7 @@
   "name": "Living Essence",
   "icon": "roots:living_essence",
   "category": "resources",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

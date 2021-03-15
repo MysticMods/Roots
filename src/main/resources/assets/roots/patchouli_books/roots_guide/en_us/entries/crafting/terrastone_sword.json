@@ -1,7 +1,8 @@
 {
-  "name": "Living Sword",
+  "name": "Terrastone Sword",
   "icon": "roots:terrastone_sword",
   "category": "crafting_armor_tools_terrastone",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

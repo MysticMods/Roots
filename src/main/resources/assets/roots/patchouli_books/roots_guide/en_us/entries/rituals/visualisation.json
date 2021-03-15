@@ -2,6 +2,7 @@
   "name": "Visualisation",
   "icon": "roots:glass_eye",
   "category": "rituals_ritual",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

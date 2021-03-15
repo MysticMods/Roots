@@ -2,6 +2,8 @@
   "name": "Component Pouches",
   "icon": "roots:herb_pouch",
   "category": "spells",
+  "priority": true,
+  "sortnum": 4,
   "pages": [
     {
       "type": "text",

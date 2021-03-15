@@ -2,6 +2,7 @@
   "name": "Ritual: Overgrowth",
   "icon": "roots:ritual_overgrowth",
   "category": "automation",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

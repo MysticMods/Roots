@@ -2,6 +2,8 @@
   "name": "Quick Start",
   "icon": "roots:staff",
   "category": "concepts",
+  "priority": true,
+  "sortnum": 1,
   "pages": [
     {
       "type": "text",

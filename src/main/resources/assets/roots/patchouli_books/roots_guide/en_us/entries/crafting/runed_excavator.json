@@ -2,6 +2,7 @@
   "name": "Runed Excavator",
   "icon": "roots:runed_shovel",
   "category": "crafting_armor_tools_runed",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

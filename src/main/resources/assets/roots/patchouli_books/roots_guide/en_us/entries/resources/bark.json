@@ -2,6 +2,7 @@
   "name": "Bark",
   "icon": "roots:bark_acacia",
   "category": "resources",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

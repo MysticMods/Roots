@@ -2,6 +2,7 @@
   "name": "Strange Ooze",
   "icon": "roots:strange_ooze",
   "category": "resources",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

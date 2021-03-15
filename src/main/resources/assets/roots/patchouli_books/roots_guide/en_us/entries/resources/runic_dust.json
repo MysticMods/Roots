@@ -2,6 +2,7 @@
   "name": "Runic Dust",
   "icon": "roots:runic_dust",
   "category": "resources",
+  "read_by_default": true,
   "pages": [
     {
       "type": "spotlight",

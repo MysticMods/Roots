@@ -2,6 +2,7 @@
   "name": "Elemental Soil",
   "icon": "roots:elemental_soil",
   "category": "resources",
+  "read_by_default": true,
   "pages": [
     {
       "type": "spotlight",
@@ -37,4 +38,5 @@
       "link_recipe": true,
       "text": "Obtained by throwing a block of elemental soil down beneath the ground, below the defined height ($(info) a default of 30 blocks or lower), and allowing it to soak in the energy.$(br2)The yield of any crop grown upon this soil will be increased."
     }
-  ]}
+  ]
+}

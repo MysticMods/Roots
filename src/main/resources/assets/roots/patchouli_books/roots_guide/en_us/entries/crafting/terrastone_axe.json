@@ -1,7 +1,8 @@
 {
-  "name": "Living Axe",
+  "name": "Terrastone Axe",
   "icon": "roots:terrastone_axe",
   "category": "crafting_armor_tools_terrastone",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",
