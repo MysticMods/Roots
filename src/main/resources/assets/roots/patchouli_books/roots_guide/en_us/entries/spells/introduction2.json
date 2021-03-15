@@ -1,0 +1,52 @@
+{
+  "name": "Introduction to Modifiers",
+  "icon": "minecraft:writable_book",
+  "category": "spells",
+  "priority": true,
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "text",
+      "text": "While spells have specific functions that are outlined in their individual entries, they can be customised in many ways with modifiers.$(br2)As a once-only task, the $(l:spells/introduction2#unlock)modifier itself be unlocked$().$(br2)After this, the modifier merely needs to be enabled in the staff, either through the imposer or the $(l:spells/library)spell library$() interface."
+    },
+    {
+      "type": "crafting",
+      "title": "Imposers",
+      "recipe": "roots:imposer",
+      "text": "Inserting a staff into the imposer ($(l:spells/library)with spells selected$()) allows you to both insert modifiers globally and enable them for this staff.$(br2)$(info) Right-click with staff and then again with a $(l:crafting/knives)knife$() to open the interface."
+    },
+    {
+      "type": "image",
+      "title": "Imposer: Spell Select",
+      "images": ["roots:textures/gui/patchouli/imposer_spell_select.png"],
+      "text": "The initial Imposer interface: click a spell to modify it."
+    },
+    {
+      "type": "image",
+      "title": "Imposer: Modifier Editing",
+      "images": ["roots:textures/gui/patchouli/imposer_modifier_edit.png"],
+      "text": "After clicking on a spell. [Player inventory present but not shown.]"
+    },
+    {
+      "type": "text",
+      "title": "Modifier Editing",
+      "text": "As seen in the screenshots, you can click on a spell to open the modifier editing screen. The button labeled 'Back' will return you to the spell selection screen.$(br2)Colour of the border around the modifier, as well as the tooltip, provide information.$(br2)$(info) A greyed-out square means that no modifier exists for this herb."
+    },
+    {
+      "type": "text",
+      "title": "Modifier Unlocking",
+      "anchor": "unlock",
+      "text": "The process of unlocking a modifier is a simple one. It requires that you have the relevant herb in your inventory.$(br2)$(info) Either shift-click the herb to automatically fill the slot, or click it into the slot.$(br2)$(info) Once unlocked, this modifier is permanently unlocked in your spell library and all staffs you open."
+    },
+    {
+      "type": "text",
+      "title": "Colour & Tooltip",
+      "text": "Yellow colouring and tooltip of 'Modifier not unlocked' mean the modifier is available.$(br2)$(info) Insert the relevant herb into the slot to unlock it.$(br2)Red colouring and tooltip of 'Modifier not enabled' means the modifier is unlocked but not enabled.$(br2)$(info) Simply click the slot to enable it."
+    },
+    {
+      "type": "text",
+      "title": "Colour & Tooltip",
+      "text": "Green colouring and no additional tooltip text mean the modifier is enabled.$(br2)$(info) Click the slot to disable it.$(br2)Purple colouring and 'Modifier conflicts' means this modifier conflicts with another modifier and cannot be enabled.$(br2)$(info) Disable the mentioned modifiers or hold Alt when clicking to disable them automatically."
+    }
+  ]
+}
