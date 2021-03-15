@@ -11,7 +11,7 @@
     {
       "type": "mortar_template",
       "item": "roots:runic_dust",
-      "text": "$(info) It can be crafted individually or in batches of up to 5."
+      "text": "$(info) Runic dust can be crafted individually or in batches of up to 5."
     }
   ]
 }

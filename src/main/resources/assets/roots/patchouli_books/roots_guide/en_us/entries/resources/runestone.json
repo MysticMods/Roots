@@ -7,7 +7,7 @@
       "type": "spotlight",
       "item": "roots:runestone",
       "link_recipe": true,
-      "text": "One of the primary and principle building ingredients for rituals and devices, this sturdy stone also serves a number of $(l:crafting/runestone)decorative$() purposes.$(br2)Infused with magic, runestone is generally created in a fey crafter."
+      "text": "One of the primary and principle building ingredients for rituals and devices, this sturdy stone also serves a number of $(l:crafting/runestone)decorative$() purposes.$(br2)Infused with magic, runestone is generally created in a fey crafter, and can then be crafted into its variants."
     },
     {
       "type": "fey_crafting_template",

@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "$(l:crafting/runic_shears)Runic Shears$() allow you to reach briefly between the realms, plucking from an otherworldly equivalent of an animal or plant a fey item.$(br2)Mystic feathers can be obtained from many creatures that are feathered. A complete list of suitable entities can be found with $(sources:roots:mystic_feather)JEI$()."
+      "text": "$(l:crafting/runic_shears)Runic Shears$() allow you to reach briefly between the realms, plucking from an otherworldly equivalent of an animal (or plant) a fey item.$(br2)Mystic feathers can be obtained from many creatures that are feathered. A complete list of suitable entities can be found with $(sources:roots:mystic_feather)JEI$()."
     }
   ]
 }
