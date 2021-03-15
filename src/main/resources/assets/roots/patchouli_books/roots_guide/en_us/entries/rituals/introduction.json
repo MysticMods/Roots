@@ -7,25 +7,25 @@
   "pages": [
     {
       "type": "text",
-      "text": "Rituals are a way of unlocking the wild energy of nature at harnessing it for a specific purpose.$(br2)The primary device used in rituals is a $(l:crafting/pyres)Pyre$(), and it is upon this pyre that the five necessary ingredients to perform the ritual are placed by right-clicking.$(br2)Lighting the pyre is the final step to begin the ritual."
+      "text": "Rituals are a way of unlocking the wild energy of nature and harnessing it for a specific purpose.$(br2)The primary device used in rituals is a $(l:crafting/pyres)Pyre$(), and it is upon this pyre that the five necessary ingredients to perform the ritual are placed by right-clicking or throwing. (right click again to remove items)."
     },
     {
       "type": "text",
-      "text": "Once the correct ingredients are placed on the pyre, the HUD will information about the ritual.$(br2)$(info) It can then be started with a $(l:rituals/fire_starter)flint-and-steel or other fire starters$().$(br2)Some rituals require additional components to function that are placed near the pyre:$(br2)$(info) Some require $(l:rituals/standing_stones)standing stones, runed pillars$(), or additionally $(l:rituals/catalyst_plates)catalyst plates$() to direct energy."
+      "text": "Lighting the pyre is the final step to begin the ritual.$(br2)Once the correct ingredients are placed on the pyre, the HUD will information about the ritual.$(br2)$(info) It can then be started with a $(l:rituals/fire_starter)flint-and-steel or other fire starters$().$(br2)Before some rituals can function, they require additional components to be placed near the pyre."
     },
     {
       "type": "text",
-      "text": "There are a small number of rituals that require components in addition to those mentioned, but those will be specified in the entry for the ritual itself.$(br2)$(info) In the event that you wish to end a ritual early, you can throw a bucket of water on it."
+      "text": "$(info) Some require $(l:rituals/standing_stones)standing stones, runed pillars$(), or $(l:rituals/catalyst_plates)catalyst plates$() to direct energy.$(br2)There are a small number of rituals that require components in addition to those mentioned, but those will be specified in the entry for the ritual itself.$(br2)$(info) In the event that you wish to end a ritual early, you can pour a bucket of water on it."
     },
     {
       "type": "text",
       "title": "Ritual Tiers",
-      "text": "($(o)See $(l:rituals/tiers)Ritual Tiers$())$(br2)Some rituals will require additional components. The ritual's entry will display this as a multiblock image and note what components are required.$(br2)Because of this, rituals can be classed as tiers, with the tier number being equivalent to the number of components required.$(br2)Thus, it is possible to list $(l:rituals/tiers)rituals by tier$()."
+      "text": "($(o)See $(l:rituals/tiers)Ritual Tiers$())$(br2)Some rituals require additional components, these will be displayed in each ritual entry as a multiblock image.$(br2)Because of these additional requirements, rituals can be classed in tiers, with the tier number being equivalent to the number of components required.$(br2)It is, therefore, possible to list $(l:rituals/tiers)rituals by tier$()."
     },
     {
       "type": "text",
       "title": "Ritual Specifics",
-      "text": "All ritual entries will list specific details. The type of details will very depending on the type of ritual, but it will generally list the size of the ritual, the duration of the ritual, etc.$(br2)More complex rituals will also list details about how their individual functions operate and how frequently they operate."
+      "text": "All ritual entries will list specific details. The type of details provided will vary depending on the type of ritual, but it will generally list the size and duration of the ritual, etc.$(br2)More complex rituals will also list details about how their individual functions operate and how frequently."
     },
     {
       "type": "text",
