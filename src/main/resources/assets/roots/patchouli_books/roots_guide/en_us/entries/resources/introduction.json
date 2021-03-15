@@ -2,6 +2,8 @@
   "name": "Introduction to Resources",
   "icon": "minecraft:writable_book",
   "category": "resources",
+  "priority": true,
+  "sortnum": 1,
   "pages": [
     {
       "type": "text",
