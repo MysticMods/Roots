@@ -1,6 +1,6 @@
 {
   "name": "Desaturate",
-  "icon": "roots:spell_dust",
+  "icon": "roots:spell_icon{spell_storage:{s:\"roots:spell_desaturate\"}}",
   "category": "spells",
   "read_by_default": true,
   "flag": "roots:spell_desaturate",

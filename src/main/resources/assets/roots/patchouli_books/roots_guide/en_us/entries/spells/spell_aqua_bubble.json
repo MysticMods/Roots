@@ -1,6 +1,6 @@
 {
     "name": "Aqua Bubble",
-    "icon": "roots:spell_dust",
+    "icon": "roots:spell_icon{spell_storage:{s:\"roots:spell_aqua_bubble\"}}",
     "category": "spells",
     "read_by_default": true,
     "flag": "roots:spell_aqua_bubble",

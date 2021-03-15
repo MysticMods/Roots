@@ -1,6 +1,6 @@
 {
   "name": "Fey Light",
-  "icon": "roots:spell_dust",
+  "icon": "roots:spell_icon{spell_storage:{s:\"roots:spell_fey_light\"}}",
   "category": "spells",
   "read_by_default": true,
   "flag":  "roots:spell_fey_light",

@@ -1,0 +1,13 @@
+{
+  "name": "Introduction to Automation",
+  "icon": "minecraft:writable_book",
+  "category": "automation",
+  "priority": true,
+  "sortnum":  1,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

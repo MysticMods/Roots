@@ -1,6 +1,6 @@
 {
   "name": "Aqueous Soil",
-  "icon": "roots:aqueous_soil",
+  "icon": "roots:elemental_soil_water",
   "category": "automation",
   "pages": [
     {

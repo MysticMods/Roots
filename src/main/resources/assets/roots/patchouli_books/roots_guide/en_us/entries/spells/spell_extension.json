@@ -1,9 +1,9 @@
 {
-  "name": "Magnetism",
-  "icon": "roots:spell_dust",
+  "name": "Extension",
+  "icon": "roots:spell_icon{spell_storage:{s:\"roots:spell_extension\"}}",
   "category": "spells",
   "read_by_default": true,
-  "flag": "roots:spell_magnetism",
+  "flag": "roots:spell_extension",
   "pages": [
     {
       "type": "text",
@@ -11,7 +11,7 @@
     },
     {
       "type": "spell_template",
-      "spell": "spell_magnetism"
+      "spell": "spell_extension"
     }
   ]
 }
