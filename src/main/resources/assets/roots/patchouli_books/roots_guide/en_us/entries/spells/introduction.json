@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example."
+      "text": "Spells are, like $(l:rituals/introduction)rituals$(), a way of unleashing the wild energy contained within herbs, harnessing it to effect change in the world around you.$(br2)Unlike rituals, spells merely require that you carry with you a $(l:crafting/staff)staff$() and $(l:spells/component_pouches)any component pouch$()."
     }
   ]
 }

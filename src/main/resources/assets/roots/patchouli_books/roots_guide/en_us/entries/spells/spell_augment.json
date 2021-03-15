@@ -1,9 +1,9 @@
 {
-  "name": "Light Drifter",
-  "icon": "roots:spell_dust",
+  "name": "Augment",
+  "icon": "roots:spell_icon{spell_storage:{s:\"roots:spell_augment\"}}",
   "category": "spells",
   "read_by_default": true,
-  "flag": "roots:spell_light_drifter",
+  "flag": "roots:spell_augment",
   "pages": [
     {
       "type": "text",
@@ -11,7 +11,7 @@
     },
     {
       "type": "spell_template",
-      "spell": "spell_light_drifter"
+      "spell": "spell_augment"
     }
   ]
 }
