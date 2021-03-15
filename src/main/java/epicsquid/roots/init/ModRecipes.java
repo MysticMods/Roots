@@ -458,6 +458,11 @@ public class ModRecipes {
   }
 
   @Nullable
+  public static BarkRecipe getBarkRecipeByName (ResourceLocation name) {
+    return barkRecipes.get(name);
+  }
+
+  @Nullable
   public static BarkRecipe getModdedBarkRecipe(IBlockState block) {
     ItemStack stack = new ItemStack(block.getBlock(), 1, block.getBlock().damageDropped(block));
     for (BarkRecipe recipe : barkRecipes.values()) {

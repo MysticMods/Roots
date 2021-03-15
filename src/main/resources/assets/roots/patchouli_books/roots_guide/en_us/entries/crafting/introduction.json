@@ -7,12 +7,12 @@
   "pages": [
     {
       "type": "text",
-      "text": "You will encounter three different types of crafting in Roots:$(br2)$(li)Vanilla crafting with a carfting table$(li)$(l:crafting/pyres)Pyre$() ritual crafting$(li)$(l:crafting/fey_crafter)Fey crafting$() with an an activated $(l:crafting/grove_stone)grove stone$().$(li)$(l:crafting/mortar_and_pestle)Mortar & Pestle$() crafting.$(br2)This entry will skip over Vanilla crafting tables, as recipes for those items will be displayed in their relevant entries. Most recipes generally require $(l:resources/introduction)resources$()."
+      "text": "You will encounter three different types of crafting:$(br2)$(li)Vanilla crafting table$(li)$(l:crafting/pyres)Pyre$() ritual crafting$(li)$(l:crafting/fey_crafter)Fey crafting$() with an an activated $(l:crafting/grove_stone)grove stone$().$(li)$(l:crafting/mortar_and_pestle)Mortar & Pestle$() crafting.$(br2)Most recipes require some form of $(l:resources/introduction)special resources$().$(br2)$(info) Vanilla crafting table recipes are performed as normal."
     },
     {
       "type": "text",
       "title": "Categories",
-      "text": "There are a number of different categories of crafted items that you can find under $(bold)Subcategories$() in the the main Crafting category.$(li)$(cat:crafting_armor_tools)Armor and Tools$()$(li)$(cat:crafting_devices)Devices$()$(li)$()$(li)$(cat:crafting_decoration)Decorative blocks$()$(br2)Each of these categories lists the relevant items (including recipes) and any subcategories."
+      "text": "There are a number of different categories of crafted items that you can find under $(bold)Subcategories$() in the the main Crafting category.$(li)$(cat:crafting_armor_tools)Armor and Tools$()$(li)$(cat:crafting_devices)Devices$()$(li)$(cat:crafting_decoration)Decorative blocks$()$(br2)Each of these categories lists the relevant items, recipes & uses and any subcategories they may also have."
     },
     {
       "type": "text",

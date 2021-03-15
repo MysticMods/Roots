@@ -5,13 +5,14 @@
   "pages": [
     {
       "type": "text",
-      "text": "Much wild magic is stored in the bark of a tree, in addition to its leaves and logs. Breaking a log with a $(l:crafting/knives)knife$() allows you to obtain bark.$(br2)$(info) The amount of bark produced can be increased with the fortune enchantment."
+      "text": "Created by breaking the relevant log with a $(l:crafting/knives)knife$(), the stripped-away bark contains much wild magic within it.$(br2)Different trees produce different barks, and each of them uch wild magic is stored in the bark of a tree, in addition to its leaves and logs. Breaking a log with a $(l:crafting/knives)knife$() allows you to obtain bark.$(br2)$(info) The amount of bark produced can be increased with the fortune enchantment."
     },
     {
-      "type": "spotlight",
-      "item": "roots:bark_oak",
-      "title": "Oak Bark",
-      "text": "Dropped from oak logs."
+      "type": "bark_template_double",
+      "recipe": "roots:oak",
+      "recipe2": "roots:birch",
+      "name": "Birch & Oak Bark",
+      "text": "Obtained from oak or birch logs."
     },
     {
       "type": "spotlight",
