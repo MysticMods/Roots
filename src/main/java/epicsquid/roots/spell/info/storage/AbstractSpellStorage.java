@@ -104,6 +104,10 @@ public abstract class AbstractSpellStorage<V extends AbstractSpellInfo> implemen
     NBTTagCompound tag = ItemUtil.getOrCreateTag(stack);
     if (tag.hasKey("spell_storage")) {
       result.deserializeNBT(tag.getCompoundTag("spell_storage"));
+    } else if (tag.hasKey("spell_holder")) {
+      result.deserializeNBT(tag.getCompoundTag("spell_holder"));
+      tag.removeTag("spell_holder");
+      result.saveToStack();
     }
     return result;
   }
