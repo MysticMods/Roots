@@ -2,6 +2,7 @@
   "name": "Groves",
   "icon": "roots:grove_stone",
   "category": "concepts",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

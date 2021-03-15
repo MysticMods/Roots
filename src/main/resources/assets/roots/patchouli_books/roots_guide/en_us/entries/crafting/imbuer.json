@@ -2,6 +2,7 @@
   "name": "Imbuer",
   "icon": "roots:imbuer",
   "category": "crafting_devices",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

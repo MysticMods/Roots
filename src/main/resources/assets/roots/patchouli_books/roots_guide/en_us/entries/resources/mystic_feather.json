@@ -2,6 +2,7 @@
   "name": "Mystic Feather",
   "icon": "roots:mystic_feather",
   "category": "resources",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

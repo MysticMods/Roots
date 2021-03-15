@@ -2,6 +2,7 @@
   "name": "Mortar & Pestle",
   "icon": "roots:pestle",
   "category": "crafting",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

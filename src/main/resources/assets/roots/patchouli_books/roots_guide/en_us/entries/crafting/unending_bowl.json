@@ -2,6 +2,7 @@
   "name": "Unending Bowl",
   "icon": "roots:unending_bowl",
   "category": "crafting_devices",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

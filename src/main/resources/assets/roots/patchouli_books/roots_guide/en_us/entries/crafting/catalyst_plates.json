@@ -2,6 +2,7 @@
   "name": "Catalyst Plates",
   "icon": "roots:reinforced_catalyst_plate",
   "category": "crafting_devices",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

@@ -2,6 +2,7 @@
   "name": "Living Axe",
   "icon": "roots:living_axe",
   "category": "crafting_armor_tools_living",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

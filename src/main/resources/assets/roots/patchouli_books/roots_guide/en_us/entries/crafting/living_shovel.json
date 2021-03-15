@@ -2,6 +2,7 @@
   "name": "Living Shovel",
   "icon": "roots:living_shovel",
   "category": "crafting_armor_tools_living",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

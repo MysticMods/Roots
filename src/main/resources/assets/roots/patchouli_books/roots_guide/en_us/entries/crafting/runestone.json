@@ -2,6 +2,7 @@
   "name": "Runestone",
   "icon": "roots:runestone_stairs",
   "category": "crafting_decoration",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

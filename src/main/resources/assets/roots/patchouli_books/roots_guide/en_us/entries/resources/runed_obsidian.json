@@ -2,6 +2,7 @@
   "name": "Runed Obsidian",
   "icon": "roots:runed_obsidian",
   "category": "resources",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

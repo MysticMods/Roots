@@ -2,6 +2,7 @@
   "name": "Mortar & Pestle",
   "icon": "roots:mortar",
   "category": "automation",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

@@ -2,6 +2,7 @@
   "name": "Flour",
   "icon": "roots:flour",
   "category": "resources",
+  "read_by_default": true,
   "pages": [
     {
       "type": "mortar_template",

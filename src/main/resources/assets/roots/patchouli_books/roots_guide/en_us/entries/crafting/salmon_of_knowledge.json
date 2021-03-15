@@ -2,6 +2,7 @@
   "name": "Salmon of Knowledge",
   "icon": "roots:salmon_of_knowledge",
   "category": "crafting_devices",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

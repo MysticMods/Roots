@@ -2,6 +2,7 @@
   "name": "Wildwood",
   "icon": "roots:wildwood_stairs",
   "category": "crafting_decoration",
+  "read_by_default": true,
   "pages": [
     {
       "type": "text",

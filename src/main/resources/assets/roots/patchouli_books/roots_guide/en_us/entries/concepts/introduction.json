@@ -3,7 +3,7 @@
   "icon": "minecraft:writable_book",
   "category": "concepts",
   "priority": true,
-  "sortnum": 1,
+  "sortnum": 2,
   "pages": [
     {
       "type": "text",

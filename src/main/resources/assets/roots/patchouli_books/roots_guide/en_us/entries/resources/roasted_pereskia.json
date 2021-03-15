@@ -2,6 +2,7 @@
   "name": "Roast Pereskia",
   "icon": "roots:cooked_pereskia",
   "category": "resources",
+  "read_by_default": true,
   "pages": [
     {
       "type": "smelting",
