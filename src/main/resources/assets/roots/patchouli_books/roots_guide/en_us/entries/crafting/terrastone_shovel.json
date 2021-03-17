@@ -1,6 +1,7 @@
 {
   "name": "Terrastone Shovel",
   "icon": "roots:terrastone_shovel",
+  "read_by_default": true,
   "category": "crafting_armor_tools_terrastone",
   "pages": [
     {
