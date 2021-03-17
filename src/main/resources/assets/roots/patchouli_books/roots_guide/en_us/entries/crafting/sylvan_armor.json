@@ -7,6 +7,22 @@
     {
       "type": "text",
       "text": "Example."
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "sylvan_helm"
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "sylvan_chestplate"
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "sylvan_leggings"
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "sylvan_boots"
     }
   ]
 }

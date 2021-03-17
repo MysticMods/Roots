@@ -6,50 +6,24 @@
   "pages": [
     {
       "type": "text",
-      "text": "Created by breaking the relevant log with a $(l:crafting/knives)knife$(), the stripped-away bark contains much wild magic within it.$(br2)Different trees produce different barks, and each of them uch wild magic is stored in the bark of a tree, in addition to its leaves and logs. Breaking a log with a $(l:crafting/knives)knife$() allows you to obtain bark.$(br2)$(info) The amount of bark produced can be increased with the fortune enchantment."
+      "text": "Created by breaking the relevant log with a $(l:crafting/knives)knife$(), the stripped-away bark contains much wild magic within it.$(br2)Different trees produce different barks, but each contain a considerable amount of wild magic.$(br2)$(info) The amount of bark obtained when breaking logs can be increased with the fortune enchantment."
+    },
+    {
+      "type": "bark_template_quint",
+      "recipe1": "roots:oak",
+      "recipe2": "roots:birch",
+      "recipe3": "roots:jungle",
+      "recipe4": "roots:acacia",
+      "recipe5": "roots:spruce",
+      "name": "Bark Types",
+      "text": "Obtained from breaking logs with knives."
     },
     {
       "type": "bark_template_double",
-      "recipe": "roots:oak",
-      "recipe2": "roots:birch",
-      "name": "Birch & Oak Bark",
-      "text": "Obtained from oak or birch logs."
-    },
-    {
-      "type": "spotlight",
-      "item": "roots:bark_birch",
-      "title": "Birch Bark",
-      "text": "Obtained from birch logs."
-    },
-    {
-      "type": "spotlight",
-      "item": "roots:bark_spruce",
-      "title": "Spruce Bark",
-      "text": "Obtained from spruce logs."
-    },
-    {
-      "type": "spotlight",
-      "item": "roots:bark_jungle",
-      "title": "Jungle Bark",
-      "text": "Obtained from jungle logs."
-    },
-    {
-      "type": "spotlight",
-      "item": "roots:bark_acacia",
-      "title": "Acacia Bark",
-      "text": "Obtained from acacia logs."
-    },
-    {
-      "type": "spotlight",
-      "item": "roots:bark_dark_oak",
-      "title": "Dark Oak Bark",
-      "text": "Obtained from dark oak logs."
-    },
-    {
-      "type": "spotlight",
-      "item": "roots:bark_wildwood",
-      "title": "Wildwood Bark",
-      "text": "Obtained from wildwood logs."
+      "recipe1": "roots:dark_oak",
+      "recipe2": "roots:wildwood",
+      "name": "Bark Types",
+      "text": "Obtained from breaking logs with knives."
     }
   ]
 }
