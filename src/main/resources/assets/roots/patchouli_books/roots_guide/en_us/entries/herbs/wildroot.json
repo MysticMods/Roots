@@ -4,6 +4,7 @@
   "category": "herbs",
   "turnin": "roots:wildroot",
   "priority": true,
+  "read_by_default": true,
   "sortnum": 3,
   "pages": [
     {
