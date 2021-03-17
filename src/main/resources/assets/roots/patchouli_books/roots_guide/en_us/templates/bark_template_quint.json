@@ -1,4 +1,3 @@
-
 {
   "processor": "epicsquid.roots.integration.patchouli.BarkRecipeProcessor",
   "components": [
@@ -31,14 +30,56 @@
       "y": 43
     },
     {
+      "type": "item",
+      "item": "#input3",
+      "framed": false,
+      "x": 45,
+      "y": 19
+    },
+    {
+      "type": "item",
+      "item": "#output3",
+      "framed": false,
+      "x": 81,
+      "y": 19
+    },
+    {
+      "type": "item",
+      "item": "#input4",
+      "framed": false,
+      "x": 45,
+      "y": 43
+    },
+    {
+      "type": "item",
+      "item": "#output4",
+      "framed": false,
+      "x": 81,
+      "y": 43
+    },
+    {
+      "type": "item",
+      "item": "#input5",
+      "framed": false,
+      "x": 45,
+      "y": 19
+    },
+    {
+      "type": "item",
+      "item": "#output5",
+      "framed": false,
+      "x": 81,
+      "y": 19
+    },
+    {
       "type": "image",
       "image": "roots:textures/gui/patchouli/elements3.png",
-      "x": 14,
+      "x": 17,
       "y": 16,
       "u": 99,
       "v": 0,
       "width": 88,
-      "height": 47
+      "height": 120
     },
     {
       "type": "header",

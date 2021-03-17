@@ -7,6 +7,22 @@
     {
       "type": "text",
       "text": "Example."
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "wildwood_helm"
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "wildwood_chestplate"
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "wildwood_leggings"
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "wildwood_boots"
     }
   ]
 }
