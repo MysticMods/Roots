@@ -67,7 +67,7 @@ public class TileEntityFeyCrafterRenderer extends TileEntitySpecialRenderer<Tile
 
       FeyCraftingRecipe recipe = te.getRecipe();
       if (recipe != null) {
-        renderResult((te.getWorld().getTotalWorldTime() + partialTicks) * 4, x, y, z, recipe.getResult(), 0.9f);
+        renderResult((te.getWorld().getTotalWorldTime() + partialTicks) * 2.6f, x, y, z, recipe.getResult(), 0.99f);
       }
     }
   }
@@ -77,19 +77,15 @@ public class TileEntityFeyCrafterRenderer extends TileEntitySpecialRenderer<Tile
     RenderHelper.enableStandardItemLighting();
     GlStateManager.enableRescaleNormal();
     GlStateManager.pushMatrix();
-    GlStateManager.translate(x + 0.5, y + 1.55, z + 0.5);
-    GlStateManager.scale(0.25, 0.25, 0.25);
-    GlStateManager.rotate(ticks, 1, 1, 1);
+    GlStateManager.translate(x + 0.5, y + 1.4, z + 0.5);
+    GlStateManager.scale(0.3, 0.3, 0.3);
+    GlStateManager.rotate(ticks, 0, 1, 0);
 
     Minecraft mc = Minecraft.getMinecraft();
     RenderItem ri = mc.getRenderItem();
     TextureManager tm = mc.getTextureManager();
 
     IBakedModel bakedmodel = ri.getItemModelWithOverrides(result, null, null);
-    if (alpha != 1f) {
-      GlStateManager.blendFunc(GlStateManager.SourceFactor.DST_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR);
-      GlStateManager.color(1F, 1F, 1F, alpha);
-    }
     tm.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
     tm.getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).setBlurMipmap(false, false);
     GlStateManager.pushMatrix();
