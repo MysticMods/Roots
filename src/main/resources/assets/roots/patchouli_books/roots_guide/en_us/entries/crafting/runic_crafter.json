@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "The fey crafter was created as a device to channel energy into the construction of powerful objects.$(br2)$(l:concepts/groves)History does not say$() if it was created before or after the $(l:crafting/grove_stone)grove stone$() but one is needed for it to function."
+      "text": "Example."
     },
     {
       "type": "fey_crafting_template",
