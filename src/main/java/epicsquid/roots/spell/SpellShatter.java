@@ -56,6 +56,10 @@ public class SpellShatter extends SpellBase {
   public static Modifier SMELTING = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "smelting_ray"), ModifierCores.INFERNAL_BULB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 0.25)));
   public static Modifier SILK_TOUCH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "shatter_silk_touch"), ModifierCores.DEWGONIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 0.65)));
 
+  static {
+    SILK_TOUCH.addConflict(FORTUNE);
+  }
+
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_shatter");
   public static SpellShatter instance = new SpellShatter(spellName);
 
