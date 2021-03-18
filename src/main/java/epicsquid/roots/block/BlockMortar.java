@@ -71,11 +71,11 @@ public class BlockMortar extends BlockTEBase {
       }
       SpellBase spell = ModRecipes.getSpellRecipe(ingredients);
       if (spell != null) {
-        return 6;
+        return 15;
       }
       MortarRecipe mortarRecipe = ModRecipes.getMortarRecipe(ingredients);
       if (mortarRecipe != null) {
-        return 6;
+        return 15;
       }
       return ingredients.size();
     }
