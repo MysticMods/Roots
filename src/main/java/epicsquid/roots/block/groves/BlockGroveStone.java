@@ -2,13 +2,13 @@ package epicsquid.roots.block.groves;
 
 import epicsquid.mysticallib.block.BlockBase;
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticallib.particle.particles.ParticleLeaf;
 import epicsquid.mysticallib.particle.particles.ParticleLeafArc;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.network.fx.MessageOvergrowthEffectFX;
+import epicsquid.roots.particle.ParticlePyreLeaf;
 import epicsquid.roots.tileentity.TileEntityFeyCrafter;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoublePlant;
@@ -301,12 +301,13 @@ public class BlockGroveStone extends BlockBase {
         Vec3d me = new Vec3d(pos).add(0.5, 0.75, 0.5);
         for (BlockPos fey : potentials) {
           if (rand.nextInt(3) == 0) {
-            Vec3d origAngle = new Vec3d(fey).add(0.5, 0.78, 0.5).subtract(me);
+            Vec3d fey2 = new Vec3d(fey).add(0.5, 0.78, 0.5);
+            Vec3d origAngle = fey2.subtract(me);
             Vec3d angle = origAngle.normalize().scale(0.07);
-            ClientProxy.particleRenderer.spawnParticle(worldIn, ParticleLeaf.class,
-                (double) pos.getX() + 0.5D,
-                (double) pos.getY() + 0.78D,
-                (double) pos.getZ() + 0.5D,
+            ClientProxy.particleRenderer.spawnParticle(worldIn, ParticlePyreLeaf.class,
+                me.x,
+                me.y,
+                me.z,
                 angle.x * 0.5f,
                 angle.y * 0.5f,
                 angle.z * 0.5f,
@@ -316,7 +317,11 @@ public class BlockGroveStone extends BlockBase {
                 111 / 255.0,
                 0.485,
                 1,
-                1
+                0,
+                fey2.x,
+                fey2.y,
+                fey2.z,
+                0.65
             );
           }
         }
