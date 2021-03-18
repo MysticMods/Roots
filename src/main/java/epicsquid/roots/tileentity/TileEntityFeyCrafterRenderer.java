@@ -1,9 +1,14 @@
 package epicsquid.roots.tileentity;
 
+import epicsquid.roots.recipe.FeyCraftingRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 
@@ -59,7 +64,44 @@ public class TileEntityFeyCrafterRenderer extends TileEntitySpecialRenderer<Tile
 
       RenderHelper.disableStandardItemLighting();
       GlStateManager.popMatrix();
-    }
 
+      FeyCraftingRecipe recipe = te.getRecipe();
+      if (recipe != null) {
+        renderResult((te.getWorld().getTotalWorldTime() + partialTicks) * 4, x, y, z, recipe.getResult(), 0.9f);
+      }
+    }
+  }
+
+  private void renderResult(float ticks, double x, double y, double z, ItemStack result, float alpha) {
+    GlStateManager.enableBlend();
+    RenderHelper.enableStandardItemLighting();
+    GlStateManager.enableRescaleNormal();
+    GlStateManager.pushMatrix();
+    GlStateManager.translate(x + 0.5, y + 1.55, z + 0.5);
+    GlStateManager.scale(0.25, 0.25, 0.25);
+    GlStateManager.rotate(ticks, 1, 1, 1);
+
+    Minecraft mc = Minecraft.getMinecraft();
+    RenderItem ri = mc.getRenderItem();
+    TextureManager tm = mc.getTextureManager();
+
+    IBakedModel bakedmodel = ri.getItemModelWithOverrides(result, null, null);
+    if (alpha != 1f) {
+      GlStateManager.blendFunc(GlStateManager.SourceFactor.DST_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR);
+      GlStateManager.color(1F, 1F, 1F, alpha);
+    }
+    tm.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+    tm.getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).setBlurMipmap(false, false);
+    GlStateManager.pushMatrix();
+    ri.renderItem(result, bakedmodel);
+    GlStateManager.cullFace(GlStateManager.CullFace.BACK);
+    GlStateManager.popMatrix();
+    GlStateManager.disableRescaleNormal();
+    GlStateManager.disableBlend();
+    tm.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+    tm.getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).restoreLastBlurMipmap();
+
+    GlStateManager.popMatrix();
+    GlStateManager.color(1F, 1F, 1F, 1F);
   }
 }

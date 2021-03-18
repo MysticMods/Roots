@@ -59,7 +59,7 @@ public class BlockMortar extends BlockTEBase {
   /*
     0 = No items or invalid recipe
     1-5 = How many items
-    6 = Valid recipe
+    15 = Valid recipe
    */
   public int getComparatorInputOverride(IBlockState blockState, World worldIn, BlockPos pos) {
     TileEntity te = worldIn.getTileEntity(pos);
