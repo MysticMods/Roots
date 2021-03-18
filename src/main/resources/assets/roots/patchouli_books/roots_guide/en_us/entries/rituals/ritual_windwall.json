@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Harnessing the power of the winds, all potentially hostile creatures are blown away from the ritual area.$(br2)$(warning) It is possible for hostiles to become trapped on terrain. Be sure to modify the area accordingly.$(br2)$(info) No effect is had on strictly passive creatures; those that become hostile under certain circumstances are unaffected."
+      "text": "Harnessing the power of the winds, all potentially hostile creatures are blown away from the ritual area.$(br2)$(warning) It is possible for hostiles to become trapped on terrain. Be sure to modify the area accordingly.$(br2)$(info) No effect is had on strictly passive creatures nor on creatures that become hostile under certain circumstances."
     },
     {
       "type": "pyre_template",
@@ -37,7 +37,7 @@
     {
       "type": "text",
       "title": "Ritual Specifics",
-      "text": "$(bold)Duration:$() The ritual lasts $(ritual:windwall/SECONDS/duration) seconds.$(br2)$(bold)Size:$() The ritual will search for within an area of $(ritual:windwall/radius_x) and $(ritual:windwall/radius_z) blocks horizontally, and by $(ritual:windwall/radius_y) vertically.$(br2)$(bold)Enforcement$(): Hostile creatures that stray within the $(ritual:windwall/distance) blocks of the ritual are blown back, with a knockback strength of $(ritual:windwall/knockback)."
+      "text": "$(bold)Duration:$() The ritual lasts $(ritual:windwall/SECONDS/duration) seconds.$(br2)$(bold)Size:$() The ritual will search for within an area of $(ritual:windwall/radius_x) and $(ritual:windwall/radius_z) blocks horizontally, and by $(ritual:windwall/radius_y) blocks vertically.$(br2)$(bold)Enforcement$(): Hostile creatures that stray within the $(ritual:windwall/distance) blocks of the ritual are blown back, with a knockback strength of $(ritual:windwall/knockback)."
     },
     {
       "type": "relations",

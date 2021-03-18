@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Used to info the $(l:rituals/ritual_summon_creatures)Ritual of Summon Creatures$(), catalyst plates come in two types, one of $(l:resources/runestone)runestone$() and the other of hardier, boss-resistant $(l:resources/runed_obsidian)runed obsidian$().$(br2)$(warning) Catalyst plates must be placed within 6 blocks of the pyre to be detected.$(br2)$(warning) Multiple plates may be required for some summons."
+      "text": "Used to inform the $(l:rituals/ritual_summon_creatures)Ritual of Summon Creatures$(), catalyst plates come in two types, one of $(l:resources/runestone)runestone$() and the other of hardier, boss-resistant $(l:resources/runed_obsidian)runed obsidian$().$(br2)$(warning) Catalyst plates must be placed within 6 blocks of the pyre to be detected.$(br2)$(warning) Multiple plates may be required for some summons."
     },
     {
       "type": "text",

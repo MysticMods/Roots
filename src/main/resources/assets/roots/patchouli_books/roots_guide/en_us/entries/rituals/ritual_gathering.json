@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Loose items on the ground will be gathered by magic and drawn into an adjacent inventory.$(br2)This operation is performed at regular intervals for the duration of the ritual, making it ideal for gathering up things regularly dropped.$(br2)$(warning) The target inventory can be located in anywhere around the pyre apart from beneath."
+      "text": "Loose items on the ground will be gathered by magic and drawn into an adjacent inventory.$(br2)This operation is performed at regular intervals for the duration of the ritual, making it ideal for gathering up things regularly dropped.$(br2)$(warning) The target inventory can be located in anywhere around the pyre except beneath."
     },
     {
       "type": "pyre_template",
@@ -32,7 +32,7 @@
      {
       "type": "text",
       "title": "Ritual Specifics",
-      "text": "$(bold)Duration:$() The ritual lasts for $(ritual:gathering/SECONDS/duration) seconds.$(br2)$(bold)Size:$() Ritual area extends $(ritual:gathering/radius_x) and $(ritual:gathering/radius_z) blocks from the center, and vertically by $(ritual:gathering/radius_y).$(br2)$(bold)Frequency:$() Items are checked for every $(ritual:gathering/SECONDS/interval) seconds."
+      "text": "$(bold)Duration:$() The ritual lasts for $(ritual:gathering/SECONDS/duration) seconds.$(br2)$(bold)Size:$() Ritual area extends $(ritual:gathering/radius_x) and $(ritual:gathering/radius_z) blocks from the center, and vertically by $(ritual:gathering/radius_y) blocks.$(br2)$(bold)Frequency:$() Items are checked for every $(ritual:gathering/SECONDS/interval) seconds."
     },
     {
       "type": "relations",

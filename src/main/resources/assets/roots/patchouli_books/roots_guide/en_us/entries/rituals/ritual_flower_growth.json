@@ -17,7 +17,7 @@
     {
       "type": "text",
       "title": "Ritual Specifics",
-      "text": "$(bold)Duration:$() The ritual lasts for $(ritual:flower_growth/SECONDS/duration) seconds.$(br2)$(bold)Size:$() Ritual area extends $(ritual:flower_growth/radius_x) and $(ritual:flower_growth/radius_z) blocks from the center, and vertically by $(ritual:flower_growth/radius_y).$(br2)$(bold)Frequency:$() Flowers are grown every $(l:ritual:flower_growth/SECONDS/interval) seconds when an eligible location can be found."
+      "text": "$(bold)Duration:$() The ritual lasts for $(ritual:flower_growth/SECONDS/duration) seconds.$(br2)$(bold)Size:$() Ritual area extends $(ritual:flower_growth/radius_x) and $(ritual:flower_growth/radius_z) blocks from the center, and vertically by $(ritual:flower_growth/radius_y) blocks.$(br2)$(bold)Frequency:$() Flowers are grown every $(ritual:flower_growth/SECONDS/interval) seconds when an eligible location can be found."
     },
     {
       "type": "relations",

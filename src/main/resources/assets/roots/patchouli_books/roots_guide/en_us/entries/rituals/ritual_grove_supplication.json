@@ -35,7 +35,7 @@
     {
       "type": "text",
       "title": "Ritual Specifics",
-      "text": "$(bold)Duration:$() The ritual lasts $(ritual:grove_supplication/SECONDS/duration) seconds. If an inactive grove stone is not found nearby by the end of the ritual, it will fail.$(br2)$(bold)Size:$() The ritual will search for grove stones within an area of $(ritual:grove_supplication/radius_x) and $(ritual:grove_supplication/radius_z) blocks horizontally, and by $(ritual:grove_supplication/radius_y) vertically."
+      "text": "$(bold)Duration:$() The ritual lasts $(ritual:grove_supplication/SECONDS/duration) seconds. If an inactive grove stone is not found nearby by the end of the ritual, it will fail.$(br2)$(bold)Size:$() The ritual will search for grove stones within an area of $(ritual:grove_supplication/radius_x) and $(ritual:grove_supplication/radius_z) blocks horizontally, and by $(ritual:grove_supplication/radius_y) blocks vertically."
     },
     {
       "type": "relations",
