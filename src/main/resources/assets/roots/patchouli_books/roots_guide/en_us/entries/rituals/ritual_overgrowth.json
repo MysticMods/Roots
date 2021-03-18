@@ -31,7 +31,7 @@
     {
       "type": "text",
       "title": "Ritual Specifics",
-      "text": "$(bold)Duration:$() The ritual lasts for $(ritual:overgrowth/SECONDS/duration) seconds.$(br2)$(bold)Size:$() Ritual area extends $(ritual:overgrowth/radius_x) and $(ritual:overgrowth/radius_z) blocks from the center, and vertically by $(ritual:overgrowth/radius_y).$(br2)$(bold)Frequency:$() The ritual will attempt to grow terra moss ever $(ritual:overgrowth/SECONDS/interval) seconds."
+      "text": "$(bold)Duration:$() The ritual lasts for $(ritual:overgrowth/SECONDS/duration) seconds.$(br2)$(bold)Size:$() Ritual area extends $(ritual:overgrowth/radius_x) and $(ritual:overgrowth/radius_z) blocks from the center, and vertically by $(ritual:overgrowth/radius_y) blocks.$(br2)$(bold)Frequency:$() The ritual will attempt to grow terra moss every $(ritual:overgrowth/SECONDS/interval) seconds."
     },
     {
       "type": "relations",

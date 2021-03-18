@@ -7,11 +7,11 @@
   "pages": [
     {
       "type": "text",
-      "text": "Rituals are a way of unlocking the wild energy of nature and harnessing it for a specific purpose.$(br2)The primary device used in rituals is a $(l:crafting/pyres)Pyre$(), and it is upon this pyre that the five necessary ingredients to perform the ritual are placed by right-clicking or throwing. (right click again to remove items)."
+      "text": "Rituals are a way of unlocking the wild energy of nature and harnessing it for a specific purpose.$(br2)The primary device used in rituals is a $(l:crafting/pyres)Pyre$(), and it is upon this pyre that the five  ingredients necessary to perform the ritual are placed by right-clicking or throwing. (right click again to remove items)."
     },
     {
       "type": "text",
-      "text": "Lighting the pyre is the final step to begin the ritual.$(br2)Once the correct ingredients are placed on the pyre, the HUD will information about the ritual.$(br2)$(info) It can then be started with a $(l:rituals/fire_starter)flint-and-steel or other fire starters$().$(br2)Before some rituals can function, they require additional components to be placed near the pyre."
+      "text": "Once the correct ingredients are placed on the pyre, the HUD will show information about the ritual. Lighting the pyre is the final step, and will begin the ritual.$(br2)$(info) The pyre can be started with a $(l:rituals/fire_starter)flint-and-steel or other fire starters$().$(br2)Before some rituals can function, they require additional components to be placed near the pyre."
     },
     {
       "type": "text",

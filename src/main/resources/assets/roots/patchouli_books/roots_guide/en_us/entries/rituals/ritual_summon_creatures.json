@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "The spirit of a creature is summoned from beyond, while a fleshly body is created for it, returning it to this world.$(br2)$(info) The creature's form is determine by what items are placed on nearby $(l:rituals/catalyst_plates)catalyst plates$().$(br2)$(warning) Limitations of this guide book prevent a full list of combinations, but one can be found $(uses:roots:ritual_summon_creatures)in JEI$()."
+      "text": "The spirit of a creature is summoned from beyond, while a fleshly body is created for it, returning it to this world.$(br2)$(info) The creature's form is determined by the items are placed on nearby $(l:rituals/catalyst_plates)catalyst plates$().$(br2)$(warning) Limitations of this guide book prevent a full list of combinations, but one can be found $(uses:roots:ritual_summon_creatures)in JEI$()."
     },
     {
       "type": "pyre_template",
@@ -60,7 +60,7 @@
     {
       "type": "text",
       "title": "Ritual Specifics",
-      "text": "$(bold)Duration:$() The ritual lasts $(ritual:summon_creatures/SECONDS/duration) seconds, with the entity being summoned after $(ritual:summon_creatures/SECONDS/interval).$(br2)$(bold)Size:$() The ritual will try to summon the creature within an area of $(ritual:summon_creatures/radius_x) and $(ritual:summon_creatures/radius_z) blocks horizontally, and by $(ritual:summon_creatures/radius_y) vertically.$(br2)$(bold)Summoning$(): The ritual will make $(ritual:summon_creatures/tries) attempts to find a suitable location to place the summon creature."
+      "text": "$(bold)Duration:$() The ritual lasts $(ritual:summon_creatures/SECONDS/duration) seconds, with the entity being summoned after $(ritual:summon_creatures/SECONDS/interval).$(br2)$(bold)Size:$() The ritual will try to summon the creature within an area of $(ritual:summon_creatures/radius_x) and $(ritual:summon_creatures/radius_z) blocks horizontally, and by $(ritual:summon_creatures/radius_y) blocks vertically.$(br2)$(bold)Summoning$(): The ritual will make $(ritual:summon_creatures/tries) attempts to find a suitable location to place the summoned creature."
     },
     {
       "type": "text",
