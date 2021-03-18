@@ -458,7 +458,7 @@ public class ModRecipes {
   }
 
   @Nullable
-  public static BarkRecipe getBarkRecipeByName (ResourceLocation name) {
+  public static BarkRecipe getBarkRecipeByName(ResourceLocation name) {
     return barkRecipes.get(name);
   }
 
@@ -877,11 +877,11 @@ public class ModRecipes {
     }
   }
 
-  public static void removeMortarRecipe (ResourceLocation location) {
+  public static void removeMortarRecipe(ResourceLocation location) {
     mortarRecipes.remove(location);
   }
 
-  public static void removeMortarRecipe (String name) {
+  public static void removeMortarRecipe(String name) {
     removeMortarRecipe(new ResourceLocation(Roots.MODID, name));
   }
 
@@ -969,6 +969,16 @@ public class ModRecipes {
 
   public static Map<ResourceLocation, FeyCraftingRecipe> getFeyCraftingRecipes() {
     return feyCraftingRecipes;
+  }
+
+  @Nullable
+  public static FeyCraftingRecipe getFeyCraftingRecipe (ItemStack stack) {
+    for (FeyCraftingRecipe recipe : feyCraftingRecipes.values()) {
+      if (ItemUtil.equalWithoutSize(recipe.getResult(), stack)) {
+        return recipe;
+      }
+    }
+    return null;
   }
 
   @Nullable
@@ -1397,6 +1407,15 @@ public class ModRecipes {
             new OreIngredient("runestone"),
             new OreIngredient("obsidian"),
             new OreIngredient("runestone")));
+
+    addFeyCraftingRecipe("runic_crafter",
+        new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(ModBlocks.runic_crafter), 1), 1)
+            .addIngredients(
+                new ItemStack(ModBlocks.fey_crafter),
+                new ItemStack(ModBlocks.chiseled_runestone),
+                new OreIngredient("runestone"),
+                new ItemStack(ModItems.runic_dust),
+                new ItemStack(ModItems.mystic_feather)));
 
     addFeyCraftingRecipe("wildwood_helmet", new FeyCraftingRecipe(new ItemStack(ModItems.wildwood_helmet), 1).addIngredients(
         new ItemStack(Items.IRON_HELMET),

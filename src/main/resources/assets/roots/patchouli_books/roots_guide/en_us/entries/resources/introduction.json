@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "There are a number of resources that can be collected, some of them require $(l:crafting/introduction)tools that can be crafted$(), specific $(l:rituals/introduction)rituals$() or $(l:spells/introduction)spells$().$(br2)Some resources themselves are crafted, either through traditional crafting means, or again using the special tools, or gathered from entities using special tools."
+      "text": "There are a number of resources that can be collected, some of them require $(l:crafting/introduction)tools that can be crafted$(), specific $(l:rituals/introduction)rituals$() or $(l:spells/introduction)spells$().$(br2)Some resources themselves are crafted, either through traditional means, or using specially purposed devices, or gathered from entities with special tools."
     },
     {
       "type": "text",
