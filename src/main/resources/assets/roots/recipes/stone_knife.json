@@ -15,6 +15,10 @@
       {
         "type": "forge:ore_dict",
         "ore": "cobblestone"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "pestleStone"
       }
     ]
   },
