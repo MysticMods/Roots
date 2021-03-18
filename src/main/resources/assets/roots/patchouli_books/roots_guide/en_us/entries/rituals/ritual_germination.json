@@ -35,7 +35,7 @@
     {
       "type": "text",
       "title": "Ritual Specifics",
-      "text": "$(bold)Duration:$() The ritual lasts for $(ritual:germination/SECONDS/duration) seconds.$(br2)$(bold)Size:$() Ritual area extends $(ritual:germination/radius_x) and $(ritual:germination/radius_z) blocks from the center, and vertically by $(ritual:germination/radius_y).$(br2)$(bold)Frequency:$() Growth is triggered every $(ritual:germination/SECONDS/interval) seconds, when a maximum of $(ritual:germination/count) growable blocks are granted $(ritual:germination/ticks) growth ticks.$(br2)Up to $(ritual:germination/bonus_ticks) bonus ticks can be applied to each growable."
+      "text": "$(bold)Duration:$() The ritual lasts for $(ritual:germination/SECONDS/duration) seconds.$(br2)$(bold)Size:$() Ritual area extends $(ritual:germination/radius_x) and $(ritual:germination/radius_z) blocks from the center, and vertically by $(ritual:germination/radius_y) blocks.$(br2)$(bold)Frequency:$() Growth is triggered every $(ritual:germination/SECONDS/interval) seconds, when a maximum of $(ritual:germination/count) growable blocks are granted $(ritual:germination/ticks) growth ticks.$(br2)Up to $(ritual:germination/bonus_ticks) bonus ticks can be applied to each growable."
     },
     {
       "type": "text",

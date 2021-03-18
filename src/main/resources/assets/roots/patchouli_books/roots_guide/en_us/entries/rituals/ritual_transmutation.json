@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Through the process of Transmutation, objects can be transformed into other objects given the right circumstances are met.$(br2)Blocks are transformed into blocks or items, although care must be taken to prevent potential loops.$(br2)$(warning) Recipes cannot be listed in this guide. A complete list can be found $(uses:roots:ritual_transmutation)using JEI$()."
+      "text": "Through the process of Transmutation, objects can be transformed into other objects provided the requirements are met.$(br2)Blocks are transformed into blocks or items, although care must be taken to prevent potential loops.$(br2)$(warning) Recipes cannot be listed in this guide. A complete list can be found $(uses:roots:ritual_transmutation)using JEI$()."
     },
     {
       "type": "pyre_template",
@@ -35,7 +35,7 @@
     {
       "type": "text",
       "title": "Ritual Specifics",
-      "text": "$(bold)Duration:$() The ritual lasts $(ritual:transmutation/SECONDS/duration) seconds, with transmutation taking place every $(ritual:transmutation/SECONDS/interval) seconds for the duration.$(br2)$(bold)Size:$() The ritual will try to transmute blocks within an area of $(ritual:transmutation/radius_x) and $(ritual:transmutation/radius_z) blocks horizontally, and by $(ritual:transmutation/radius_y) vertically.$(br2)"
+      "text": "$(bold)Duration:$() The ritual lasts $(ritual:transmutation/SECONDS/duration) seconds, with transmutation taking place every $(ritual:transmutation/SECONDS/interval) seconds for the duration.$(br2)$(bold)Size:$() The ritual will try to transmute blocks within an area of $(ritual:transmutation/radius_x) and $(ritual:transmutation/radius_z) blocks horizontally, and $(ritual:transmutation/radius_y) blocks vertically.$(br2)"
     },
     {
       "type": "relations",

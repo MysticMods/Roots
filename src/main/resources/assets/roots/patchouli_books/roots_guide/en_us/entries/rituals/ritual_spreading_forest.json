@@ -39,7 +39,7 @@
     {
       "type": "text",
       "title": "Ritual Specifics",
-      "text": "$(bold)Duration:$() The ritual lasts $(ritual:spreading_forest/SECONDS/duration) seconds.$(br2)$(bold)Size:$() The ritual will search for leaves or saplings within an area of $(ritual:spreading_forest/radius_x) and $(ritual:spreading_forest/radius_z) blocks horizontally, and by $(ritual:spreading_forest/radius_y) vertically.$(br2)$(bold)Placement$(): Saplings are placed every $(ritual:spreading_forest/SECONDS/place_interval) seconds.$(br2)$(bold)Growth$(): Saplings are grown every $(ritual:spreading_forest/SECONDS/growth_interval) seconds."
+      "text": "$(bold)Duration:$() The ritual lasts $(ritual:spreading_forest/SECONDS/duration) seconds.$(br2)$(bold)Size:$() The ritual will search for leaves or saplings within an area of $(ritual:spreading_forest/radius_x) and $(ritual:spreading_forest/radius_z) blocks horizontally, and by $(ritual:spreading_forest/radius_y) blocks vertically.$(br2)$(bold)Placement$(): Saplings are placed every $(ritual:spreading_forest/SECONDS/place_interval) seconds.$(br2)$(bold)Growth$(): Saplings are grown every $(ritual:spreading_forest/SECONDS/growth_interval) seconds."
     },
     {
       "type": "relations",

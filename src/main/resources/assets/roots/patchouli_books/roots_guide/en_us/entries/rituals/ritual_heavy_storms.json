@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Invoking the strength of a monsoon, rain falls continuously for the duration of the ritual.$(br2)$(warning) Rain cannot be disabled for the duration of the ritual.$(br2)In addition to the monsoon also comes the storm: lightning will strike within the ritual area, although all fires that are started and all creatures on fire will be extinguished."
+      "text": "Invoking the strength of a monsoon, rain falls continuously for the duration of the ritual.$(br2)$(warning) Rain cannot be disabled for the duration of the ritual.$(br2)Additionally, lightning will strike within the ritual area, although all fires that are started and all creatures on fire will be extinguished."
     },
     {
       "type": "pyre_template",
@@ -38,7 +38,7 @@
     {
       "type": "text",
       "title": "Ritual Specifics",
-      "text": "$(bold)Duration:$() The ritual lasts $(ritual:heavy_storms/SECONDS/duration) seconds.$(br2)$(bold)Size:$() The ritual will search for within an area of $(ritual:heavy_storms/radius_x) and $(ritual:heavy_storms/radius_z) blocks horizontally, and by $(ritual:heavy_storms/radius_y) vertically.$(br2)$(bold)Lightning$(): Lightning has a change of $(ritual:heavy_storms/CHANCE/lightning_chance) per tick of striking."
+      "text": "$(bold)Duration:$() The ritual lasts $(ritual:heavy_storms/SECONDS/duration) seconds.$(br2)$(bold)Size:$() The ritual will search for within an area of $(ritual:heavy_storms/radius_x) and $(ritual:heavy_storms/radius_z) blocks horizontally, and by $(ritual:heavy_storms/radius_y) blocks vertically.$(br2)$(bold)Lightning$(): Lightning has a change of $(ritual:heavy_storms/CHANCE/lightning_chance) per tick of striking."
     },
     {
       "type": "text",
