@@ -19,7 +19,10 @@ public class TileEntityRunicCrafterRenderer extends TileEntitySpecialRenderer<Ti
 
   @Override
   public void render(TileEntityRunicCrafter te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-
+    ItemStack pedestal = te.pedestal.getStackInSlot(0);
+    if (!pedestal.isEmpty()) {
+      renderResult((te.getWorld().getTotalWorldTime() + partialTicks) * 2.6f, x, y, z, pedestal, 0.99f);
+    }
     List<ItemStack> items = new ArrayList<>();
 
     for (int i = 0; i < te.inventory.getSlots(); i++)
@@ -37,19 +40,19 @@ public class TileEntityRunicCrafterRenderer extends TileEntitySpecialRenderer<Ti
 
       switch (items.indexOf(item)) {
         case 0:
-          GlStateManager.translate(x + 0.5, y + 1.1, z + 0.125);
+          GlStateManager.translate(x + 0.68, y + 0.62, z + 0.125);
           break;
         case 1:
-          GlStateManager.translate(x + 0.13, y + 1.1, z + 0.45);
+          GlStateManager.translate(x + 0.3, y + 0.75, z + 0.1);
           break;
         case 2:
-          GlStateManager.translate(x + 0.88, y + 1.1, z + 0.45);
+          GlStateManager.translate(x + 0.95, y + 0.72, z + 0.55);
           break;
         case 3:
-          GlStateManager.translate(x + 0.25, y + 1.1, z + 0.88);
+          GlStateManager.translate(x + 0.07, y + 0.72, z + 0.58);
           break;
         case 4:
-          GlStateManager.translate(x + 0.69, y + 1.1, z + 0.88);
+          GlStateManager.translate(x + 0.45, y + 0.78, z + 0.95);
           break;
       }
 
@@ -67,7 +70,7 @@ public class TileEntityRunicCrafterRenderer extends TileEntitySpecialRenderer<Ti
 
       FeyCraftingRecipe recipe = te.getRecipe();
       if (recipe != null) {
-        renderResult((te.getWorld().getTotalWorldTime() + partialTicks) * 2.6f, x, y, z, recipe.getResult(), 0.99f);
+
       }
     }
   }
@@ -77,7 +80,7 @@ public class TileEntityRunicCrafterRenderer extends TileEntitySpecialRenderer<Ti
     RenderHelper.enableStandardItemLighting();
     GlStateManager.enableRescaleNormal();
     GlStateManager.pushMatrix();
-    GlStateManager.translate(x + 0.5, y + 1.4, z + 0.5);
+    GlStateManager.translate(x + 0.5, y + 1.1, z + 0.5);
     GlStateManager.scale(0.3, 0.3, 0.3);
     GlStateManager.rotate(ticks, 0, 1, 0);
 
