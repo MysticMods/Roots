@@ -1384,7 +1384,7 @@ public class ModRecipes {
 
     addFeyCraftingRecipe("runestone",
         new FeyCraftingRecipe(new ItemStack(Item.getItemFromBlock(ModBlocks.runestone), 8), 1).addIngredients(
-            new MultiOreIngredient("gemLapis", "dustRedstone", "dustGlowstone", "dustPrismarine", "gemPrismarine", "gemEmerald", "gemDiamond"),
+            new MultiOreIngredient("gemLapis", "dustRedstone", "dustGlowstone", "dustPrismarine", "gemPrismarine", "gemEmerald", "gemDiamond", "gunpowder", "dustBlaze"),
             new OreIngredient("stone"),
             new OreIngredient("stone"),
             new OreIngredient("stone"),

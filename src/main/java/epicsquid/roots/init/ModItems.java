@@ -231,6 +231,7 @@ public class ModItems {
    * Register item oredicts here
    */
   public static void registerOredict() {
+    OreDictionary.registerOre("dustBlaze", Items.BLAZE_POWDER);
     for (BlockFlower.EnumFlowerType type : BlockFlower.EnumFlowerType.values()) {
       OreDictionary.registerOre("allFlowers", new ItemStack(type.getBlockType().getBlock(), 1, type.getMeta()));
     }
