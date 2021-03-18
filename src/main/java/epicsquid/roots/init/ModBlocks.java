@@ -26,9 +26,9 @@ import java.util.List;
 public class ModBlocks {
 
   // All block
-  public static Block mortar, pyre, imbuer, imposer, structure_marker, catalyst_plate, unending_bowl, reinforced_pyre, reinforced_catalyst_plate;
-  public static Block incense_burner, wildroot_rune;
-  public static Block grove_stone, fey_crafter;
+  public static Block mortar, pyre, imbuer, imposer, catalyst_plate, unending_bowl, reinforced_pyre, reinforced_catalyst_plate;
+  public static Block wildroot_rune;
+  public static Block grove_stone, fey_crafter, runic_crafter;
 
   public static Block fey_fire, fake_water, fake_lava;
 
@@ -212,6 +212,7 @@ public class ModBlocks {
     event.addBlock(grove_stone = new BlockGroveStone("grove_stone")).setCreativeTab(Roots.tab);
 
     event.addBlock(fey_crafter = new BlockFeyCrafter(Material.WOOD, SoundType.WOOD, 2.5f, "fey_crafter", TileEntityFeyCrafter.class)).setCreativeTab(Roots.tab);
+    event.addBlock(runic_crafter = new BlockFeyCrafter(Material.ROCK, SoundType.STONE, 4.5f, "runic_crafter", TileEntityRunicCrafter.class)).setCreativeTab(Roots.tab);
 
     event.addBlock(fey_light = new BlockNormalFeyLight(Material.SNOW, SoundType.SNOW, 0.0f, "fey_light"));
     event.addBlock(fey_colored_light = new BlockColoredFeyLight(Material.SNOW, SoundType.SNOW, 0.0f, "fey_colored_light"));

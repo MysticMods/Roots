@@ -48,10 +48,8 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
   public static int COUNTDOWN = 40;
   public static int GROVE_STONE_RADIUS = 10;
 
-  private Random random = new Random();
-
-  private int countdown = -1;
-  private List<ItemStack> storedItems = new ArrayList<>();
+  protected int countdown = -1;
+  protected List<ItemStack> storedItems = new ArrayList<>();
 
   public ItemStackHandler inventory = new ItemStackHandler(5) {
     @Override
@@ -63,8 +61,8 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
     }
   };
 
-  private BlockPos groveStone = null;
-  private FeyCraftingRecipe lastRecipe;
+  protected BlockPos groveStone = null;
+  protected FeyCraftingRecipe lastRecipe;
 
   public TileEntityFeyCrafter() {
     super();
@@ -172,7 +170,7 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
       }
 
       for (ItemStack stack : recipe.transformIngredients(inputItems, this)) {
-        ItemUtil.spawnItem(world, pos.add(random.nextBoolean() ? -1 : 1, 1, random.nextBoolean() ? -1 : 1), stack);
+        ItemUtil.spawnItem(world, pos.add(Util.rand.nextBoolean() ? -1 : 1, 1, Util.rand.nextBoolean() ? -1 : 1), stack);
       }
 
       if (current.isEmpty()) {
