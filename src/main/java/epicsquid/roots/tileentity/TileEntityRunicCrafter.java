@@ -1,5 +1,6 @@
 package epicsquid.roots.tileentity;
 
+import com.google.common.collect.Lists;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.particle.particles.ParticleLeaf;
 import epicsquid.mysticallib.proxy.ClientProxy;
@@ -11,10 +12,14 @@ import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.network.fx.MessageGrowthCrafterVisualFX;
 import epicsquid.roots.recipe.FeyCraftingRecipe;
+import epicsquid.roots.util.IngredientWithStack;
+import epicsquid.roots.util.ItemHandlerUtil;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -31,6 +36,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @SuppressWarnings("Duplicates")
@@ -60,6 +66,28 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
 
   public TileEntityRunicCrafter() {
     super();
+  }
+
+  @Override
+  public List<ItemStack> craft(EntityPlayer player) {
+    FeyCraftingRecipe recipe = getRecipe();
+    ItemStack result = ItemStack.EMPTY;
+    List<ItemStack> inputItems = new ArrayList<>();
+    if (recipe != null) {
+      for (int i = 0; i < 5; i++) {
+        inputItems.add(inventory.extractItem(i, 1, false));
+      }
+
+      for (ItemStack stack : recipe.transformIngredients(inputItems, this)) {
+        ItemUtil.spawnItem(world, pos.add(Util.rand.nextBoolean() ? -1 : 1, 1, Util.rand.nextBoolean() ? -1 : 1), stack);
+      }
+
+      result = recipe.getResult().copy();
+      recipe.postCraft(result, inputItems, player);
+      lastRecipe = recipe;
+    }
+
+    return Lists.newArrayList(result);
   }
 
   @Override
@@ -107,10 +135,14 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
   @Override
   @Nullable
   public FeyCraftingRecipe getRecipe() {
-    if (ItemUtil.equalWithoutSize(currentRecipe.getResult(), pedestal.getStackInSlot(0))) {
+    ItemStack pedestalStack = pedestal.getStackInSlot(0);
+    if (pedestalStack.isEmpty()) {
+      return null;
+    }
+    if (currentRecipe != null && ItemUtil.equalWithoutSize(currentRecipe.getResult(), pedestalStack)) {
       return currentRecipe;
     } else {
-      currentRecipe = ModRecipes.getFeyCraftingRecipe(pedestal.getStackInSlot(0));
+      currentRecipe = ModRecipes.getFeyCraftingRecipe(pedestalStack);
       return currentRecipe;
     }
   }
@@ -118,7 +150,7 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
   @Override
   public void update() {
     if (!world.isRemote) {
-      if (world.getTotalWorldTime() % 2 == 0 && getRecipe() != null) {
+      if (world.getTotalWorldTime() % 3 != 0 && getRecipe() != null) {
         ClientProxy.particleRenderer.spawnParticle(
             world,
             ParticleLeaf.class,
@@ -129,9 +161,9 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
             (Util.rand.nextDouble() * 0.02) * 0.5,
             (Util.rand.nextDouble() - 0.5) * 0.005,
             100,
-            63 / 255.0,
-            (143 / 255.0) + Util.rand.nextDouble() * 0.05,
-            74 / 255.0,
+            (140 / 255.0) + (Util.rand.nextDouble() - 0.5) * 0.1,
+            52 / 255.0,
+            245 / 255.0,
             1, //0.785,
             1,
             1
@@ -142,6 +174,9 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
       } else {
         countdown = -1;
         for (EnumFacing facing : EnumFacing.values()) {
+          if (facing == EnumFacing.DOWN) {
+            continue;
+          }
           TileEntity te = world.getTileEntity(getPos().offset(facing));
           if (te != null) {
             IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
@@ -162,6 +197,76 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
           world.spawnEntity(item);
         }
         this.storedItems.clear();
+      }
+      if (countdown == -1) {
+        List<ItemStack> items = getContents();
+        FeyCraftingRecipe recipe = getRecipe();
+        if (recipe == null || (recipe != null && !items.isEmpty() && (items.size() != 5 || !recipe.matches(items)))) {
+          // Eject these
+          TileEntity te = world.getTileEntity(getPos().down());
+          if (te != null) {
+            IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+            if (cap != null) {
+              for (int i = 0; i < inventory.getSlots(); i++) {
+                ItemStack toPut = inventory.getStackInSlot(i);
+                inventory.setStackInSlot(i, ItemHandlerHelper.insertItemStacked(cap, toPut, false));
+              }
+            }
+          }
+        }
+        if (recipe != null && !items.isEmpty() && (items.size() != 5 || recipe.matches(items))) {
+          return;
+        }
+        if (recipe != null) {
+          refillInventory();
+        }
+      }
+    }
+  }
+
+  public void refillInventory() {
+    FeyCraftingRecipe recipe = getRecipe();
+    if (!world.isRemote && recipe != null) {
+      List<Ingredient> requirements = recipe.getIngredients();
+      if (ItemHandlerUtil.isEmpty(inventory)) {
+        TileEntity te = world.getTileEntity(getPos().down());
+        if (te != null) {
+          IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+          if (cap != null) {
+            Int2ObjectOpenHashMap<IngredientWithStack> slotsToIngredient = new Int2ObjectOpenHashMap<>();
+            int amount = 0;
+            for (Ingredient ingredient : requirements) {
+              for (int i = 0; i < cap.getSlots(); i++) {
+                ItemStack inSlot = cap.getStackInSlot(i);
+                if (ingredient.apply(inSlot)) {
+                  if (slotsToIngredient.containsKey(i)) {
+                    if (inSlot.getCount() > slotsToIngredient.get(i).getCount()) {
+                      amount++;
+                      slotsToIngredient.get(i).increment();
+                      break;
+                    }
+                  } else {
+                    amount++;
+                    slotsToIngredient.put(i, new IngredientWithStack(ingredient, 1));
+                    break;
+                  }
+                }
+              }
+            }
+            if (amount == 5) {
+              List<ItemStack> temp = ItemHandlerUtil.getItemsInSlots(cap, slotsToIngredient, true);
+              if (temp.size() == 5) {
+                temp = ItemHandlerUtil.getItemsInSlots(cap, slotsToIngredient, false);
+                for (int i = 0; i < temp.size(); i++) {
+                  ItemStack stack = temp.get(i);
+                  inventory.setStackInSlot(i, stack);
+                }
+                markDirty();
+                updatePacketViaState();
+              }
+            }
+          }
+        }
       }
     }
   }
