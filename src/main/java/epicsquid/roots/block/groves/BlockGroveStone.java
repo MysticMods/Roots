@@ -296,7 +296,7 @@ public class BlockGroveStone extends BlockBase {
           }
         }
       }
-      List<BlockPos> potentials = Util.getBlocksWithinRadius(worldIn, pos, TileEntityFeyCrafter.GROVE_STONE_RADIUS, TileEntityFeyCrafter.GROVE_STONE_RADIUS, TileEntityFeyCrafter.GROVE_STONE_RADIUS, ModBlocks.fey_crafter);
+      List<BlockPos> potentials = Util.getBlocksWithinRadius(worldIn, pos, TileEntityFeyCrafter.GROVE_STONE_RADIUS, TileEntityFeyCrafter.GROVE_STONE_RADIUS, TileEntityFeyCrafter.GROVE_STONE_RADIUS, ModBlocks.fey_crafter, ModBlocks.runic_crafter);
       if (!potentials.isEmpty()) {
         Vec3d me = new Vec3d(pos).add(0.5, 0.75, 0.5);
         for (BlockPos fey : potentials) {
