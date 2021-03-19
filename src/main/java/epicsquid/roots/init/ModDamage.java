@@ -14,9 +14,13 @@ import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class ModDamage {
-  private static final String FAKE_PLAYER_NAME = "Fey Fire";
-  private static final UUID FAKE_PLAYER_UUID = UUID.fromString("fd3bc208-e351-48ac-afc4-1b612dc36aff");
-  private static final GameProfile FAKE_PLAYER = new GameProfile(FAKE_PLAYER_UUID, FAKE_PLAYER_NAME);
+  private static final String FEY_FIRE_FAKE_PLAYER_NAME = "Fey Fire";
+  private static final UUID FEY_FIRE_FAKE_PLAYER_UUID = UUID.fromString("fd3bc208-e351-48ac-afc4-1b612dc36aff");
+  public static final GameProfile FEY_FIRE_FAKE_PLAYER = new GameProfile(FEY_FIRE_FAKE_PLAYER_UUID, FEY_FIRE_FAKE_PLAYER_NAME);
+
+  private static final String FEY_CRAFTER_FAKE_PLAYER_NAME = "Fey Crafter";
+  private static final UUID FEY_CRAFTER_FAKE_PLAYER_UUID = UUID.fromString("f8f5968b-da9f-430d-851b-cf232728f141");
+  public static final GameProfile FEY_CRAFTER_FAKE_PLAYER = new GameProfile(FEY_CRAFTER_FAKE_PLAYER_UUID, FEY_CRAFTER_FAKE_PLAYER_NAME);
 
   public static final String FEY_FIRE = "fey_fire";
 
@@ -106,12 +110,16 @@ public class ModDamage {
   }
 
   public static FakePlayer getFakePlayer(World world) {
+    return getFakePlayer(world, FEY_FIRE_FAKE_PLAYER);
+  }
+
+  public static FakePlayer getFakePlayer(World world, GameProfile profile) {
     if (world.isRemote) {
       throw new IllegalStateException("can't get a fake player on a client side");
     }
 
     WorldServer server = (WorldServer) world;
-    return FakePlayerFactory.get(server, FAKE_PLAYER);
+    return FakePlayerFactory.get(server, profile);
   }
 
   public static void init() {
