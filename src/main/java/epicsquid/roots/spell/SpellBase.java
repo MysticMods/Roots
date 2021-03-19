@@ -575,7 +575,7 @@ public abstract class SpellBase extends RegistryItem {
     @Override
     public String toString() {
       return "ModifierCost{" +
-          "herb=" + herb.getName() +
+          "herb=" + (herb == null ? "none" : herb.getName()) +
           ", type=" + type +
           ", cost=" + cost +
           '}';
