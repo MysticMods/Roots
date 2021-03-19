@@ -10,6 +10,7 @@ import epicsquid.roots.GuiHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.advancements.Advancements;
 import epicsquid.roots.block.groves.BlockGroveStone;
+import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
@@ -330,6 +331,10 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
       } else {
         countdown = -1;
         for (EnumFacing facing : EnumFacing.values()) {
+          IBlockState state = world.getBlockState(getPos().offset(facing));
+          if (GeneralConfig.getCrafterOutputIgnore().contains(state.getBlock())) {
+            continue;
+          }
           TileEntity te = world.getTileEntity(getPos().offset(facing));
           if (te != null) {
             IItemHandler cap = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);

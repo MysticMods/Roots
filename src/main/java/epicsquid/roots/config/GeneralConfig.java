@@ -2,7 +2,9 @@ package epicsquid.roots.config;
 
 import epicsquid.mysticallib.util.ConfigUtil;
 import epicsquid.roots.Roots;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fluids.Fluid;
@@ -11,8 +13,10 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import javax.annotation.Nullable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = Roots.MODID)
@@ -117,6 +121,29 @@ public class GeneralConfig {
 
   @Config.Comment(("Whether or not the Wild Mage villager career should be populated (note: this may break pre-existing worlds if changed)"))
   public static boolean WildMageVillager = true;
+
+  @Config.Comment(("List of blocks that Fey Crafters and Runic Crafters should not output to"))
+  public static String[] crafterOutputBlackist = new String[]{
+      "minecraft:dispenser"
+  };
+
+  @Config.Ignore
+  private static Set<Block> crafterOutputIgnore = null;
+
+  public static Set<Block> getCrafterOutputIgnore () {
+    if (crafterOutputIgnore == null) {
+      crafterOutputIgnore = new HashSet<>();
+      for (String rl : crafterOutputBlackist) {
+        Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(rl));
+        if (block == null) {
+          Roots.logger.error("Invalid Configuration Value for: crafterOutputBlacklist.\n  - " + rl + " is not a valid block.");
+        } else {
+          crafterOutputIgnore.add(block);
+        }
+      }
+    }
+    return crafterOutputIgnore;
+  }
 }
 
 
