@@ -70,6 +70,13 @@ public class GuiLibrary extends GuiContainer {
           this.drawCenteredString(renderer, name, this.width / 2, guiTop, 0xFFFFFFFF);
         }
       }
+    } else {
+      FontRenderer renderer = Minecraft.getMinecraft().fontRenderer;
+      ItemStack staff = container.getStaff();
+      if (!staff.isEmpty() && staff.hasDisplayName()) {
+        RenderHelper.enableGUIStandardItemLighting();
+        this.drawCenteredString(renderer, staff.getDisplayName(), this.width / 2, guiTop - (guiTop/3), 0xffffffff);
+      }
     }
     this.renderHoveredToolTip(mouseX, mouseY);
   }

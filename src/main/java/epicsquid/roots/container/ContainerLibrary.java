@@ -63,6 +63,15 @@ public class ContainerLibrary extends Container implements IInvalidatingContaine
     return StaffSpellStorage.fromStack(staff.get());
   }
 
+  @Nonnull
+  public ItemStack getStaff () {
+    if (staff == null) {
+      return ItemStack.EMPTY;
+    } else {
+      return staff.get();
+    }
+  }
+
   @Nullable
   public StaffModifierInstanceList getModifiers() {
     StaffSpellStorage storage = getSpellStorage();
