@@ -6,6 +6,7 @@ import epicsquid.mysticallib.particle.particles.ParticleLeaf;
 import epicsquid.mysticallib.proxy.ClientProxy;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
@@ -36,7 +37,6 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @SuppressWarnings("Duplicates")
@@ -175,6 +175,10 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
         countdown = -1;
         for (EnumFacing facing : EnumFacing.values()) {
           if (facing == EnumFacing.DOWN) {
+            continue;
+          }
+          IBlockState state = world.getBlockState(getPos().offset(facing));
+          if (GeneralConfig.getCrafterOutputIgnore().contains(state.getBlock())) {
             continue;
           }
           TileEntity te = world.getTileEntity(getPos().offset(facing));
