@@ -20,6 +20,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -48,7 +51,7 @@ public class GuiHandler implements IGuiHandler {
       return player::getHeldItemOffhand;
     }
 
-    IItemHandler handler = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+/*    IItemHandler handler = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
     if (handler != null) {
       for (int i = 0; i < handler.getSlots(); i++) {
         staff = handler.getStackInSlot(i);
@@ -57,7 +60,7 @@ public class GuiHandler implements IGuiHandler {
           return () -> handler.getStackInSlot(x);
         }
       }
-    }
+    }*/
 
     return null;
   }
@@ -89,6 +92,8 @@ public class GuiHandler implements IGuiHandler {
           SpellUtil.updateModifiers(staff.get(), player);
           PlayerSyncUtil.syncPlayer(player);
           return new ContainerLibrary(player, staff, SpellLibraryRegistry.getData(player));
+        } else {
+          player.sendStatusMessage(new TextComponentTranslation("roots.message.hold_staff").setStyle(new Style().setColor(TextFormatting.LIGHT_PURPLE).setBold(true)), true);
         }
         break;
     }

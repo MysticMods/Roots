@@ -537,6 +537,8 @@ roots.message.respawn.cant_respawn_dimension=Sorry, but your bed is in another d
 
 roots.message.spell_imbued=The spell %s has been added to your library!
 
+roots.message.hold_staff=You must be holding a staff to open the spell library.
+
 # Modifiers
 
 roots.modifiers.modifiers.absorption.desc=Grants you an absorption shield.
