@@ -1,6 +1,6 @@
 {
   "name": "Mortar & Pestle",
-  "icon": "roots:pestle",
+  "icon": "roots:mortar",
   "category": "crafting",
   "read_by_default": true,
   "pages": [
