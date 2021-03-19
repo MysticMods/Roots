@@ -120,6 +120,7 @@ public class PatchouliHack {
             boolean heart = false;
             boolean chance = false;
             boolean multiplier = false;
+            boolean roman = false;
             if (propName.equals("HEART")) {
               propName = parts[2];
               heart = true;
@@ -151,6 +152,10 @@ public class PatchouliHack {
             if (propName.equals("MULT")) {
               propName = parts[2];
               multiplier = true;
+            }
+            if (propName.equals("ROMAN")) {
+              propName = parts[2];
+              roman = true;
             }
 
             Object value = null;
@@ -221,6 +226,13 @@ public class PatchouliHack {
                   } catch (ClassCastException e) {
                     Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
                     return "INVALID PROPERTY FOR MULTIPLIER: " + propName;
+                  }
+                } else if (roman) {
+                  try {
+                    value = I18n.format("enchantment.level." + (int) value);
+                  } catch (ClassCastException e) {
+                    Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
+                    return "INVALID PROPERTY FOR ROMAN NUMERAL: " + propName;
                   }
                 }
               } else {

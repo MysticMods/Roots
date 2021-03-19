@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Eligible creatures in the vicinity of the ritual will magically shed, dropping items as though they had been slain by a player, without suffering any actual harm.$(br2)This ritual is a way of stocking up in precious items as well as maintaining a $(l:concepts/pacifism)pacifist$() life-style.$(br2)$(info) Looting $(ritual:animal_harvest/looting_value) will be randomly applied to some drops."
+      "text": "Eligible creatures in the vicinity of the ritual will magically shed, dropping items as though they had been slain by a player, without suffering any actual harm.$(br2)This ritual is a way of stocking up in precious items as well as maintaining a $(l:concepts/pacifism)pacifist$() life-style.$(br2)$(info) Looting $(ritual:animal_harvest/ROMAN/looting_value) will be randomly applied to some drops."
     },
     {
       "type": "pyre_template",
@@ -34,7 +34,7 @@
     {
       "type": "text",
       "title": "Ritual Specifics",
-      "text": "$(bold)Duration:$() The ritual lasts for $(ritual:animal_harvest/SECONDS/duration) seconds.$(br2)$(bold)Size:$() Ritual area extends $(ritual:animal_harvest/radius_x) and $(ritual:animal_harvest/radius_z) blocks from the center, and vertically by $(ritual:animal_harvest/radius_y) blocks.$(br2)$(bold)Creatures:$() $(ritual:animal_harvest/count) eligible creatures are selected at random every $(ritual:animal_harvest/SECONDS/interval) seconds.$(br2)$(bold)Looting:$() Looting $(ritual:animal_harvest/looting_value) has a 1 in $(ritual:animal_harvest/looting_chance) chance of being applied per eligible creature."
+      "text": "$(bold)Duration:$() The ritual lasts for $(ritual:animal_harvest/SECONDS/duration) seconds.$(br2)$(bold)Size:$() Ritual area extends $(ritual:animal_harvest/radius_x) and $(ritual:animal_harvest/radius_z) blocks from the center, and vertically by $(ritual:animal_harvest/radius_y) blocks.$(br2)$(bold)Creatures:$() $(ritual:animal_harvest/count) eligible creatures are selected at random every $(ritual:animal_harvest/SECONDS/interval) seconds.$(br2)$(bold)Looting:$() Looting $(ritual:animal_harvest/ROMAN/looting_value) has a 1 in $(ritual:animal_harvest/looting_chance) chance of being applied per eligible creature."
     },
     {
       "type": "text",
