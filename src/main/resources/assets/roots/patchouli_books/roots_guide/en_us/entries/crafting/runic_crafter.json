@@ -5,11 +5,33 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example."
+      "text": "An upgraded form of the $(l:crafting/fey_crafter)fey crafter$(), that accepts identical recipes and allows for easy automation.$(br2)$(info) The desired output is right-clicked, and, if valid, will be shown above.$(br2)$(info) The crafter will try drawing items from an inventory below. Crafting itself is performed by right-clicking with a $(l:crafting/knives)knife$()."
     },
     {
       "type": "fey_crafting_template",
-      "recipe": "runic_crafter"
+      "recipe": "runic_crafter",
+      "text": "$(info) This crafter obeys the $(l:crafting/fey_crafter)fey crafter's$() grove stones limits."
+    },
+    {
+      "type": "multiblock",
+      "name": "Chest Location",
+      "multiblock": {
+        "mapping": {
+          "0": "roots:runic_crafter",
+          "R": "minecraft:chest",
+          "I": "minecraft:torch"
+        },
+        "pattern": [
+          ["III","III","III"],
+          ["III","I0I","III"],
+          ["   "," R ","   "]
+        ]
+      },
+      "text": "The feeder chest must be below the crafter. Torch locations indicate eligible output inventory spots."
+    },
+    {
+      "type": "text",
+      "text": "$(info) Unlike the $(l:crafting/fey_crafter)fey crafter$(), only a single craft of a recipe will be made upon activation.$(br2)The result will be ejected nearby or placed into an inventory in one of the eligible locations show in the multiblock.$(br2)$(info) As with the fey crafter, it is possible to automate this completely through the use of a dispenser with a $(l:crafting/knives)knife$() inserted into it."
     }
   ]
 }

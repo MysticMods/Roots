@@ -1413,7 +1413,7 @@ public class ModRecipes {
             .addIngredients(
                 new ItemStack(ModBlocks.fey_crafter),
                 new ItemStack(ModBlocks.chiseled_runestone),
-                new OreIngredient("runestone"),
+                new ItemStack(ModBlocks.chiseled_runestone),
                 new ItemStack(ModItems.runic_dust),
                 new ItemStack(ModItems.mystic_feather)));
 

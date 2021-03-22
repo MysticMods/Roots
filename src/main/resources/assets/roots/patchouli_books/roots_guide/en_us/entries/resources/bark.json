@@ -15,15 +15,14 @@
       "recipe3": "roots:jungle",
       "recipe4": "roots:acacia",
       "recipe5": "roots:spruce",
-      "name": "Bark Types",
-      "text": "Obtained from breaking logs with knives."
+      "name": "Bark Types"
     },
     {
       "type": "bark_template_double",
       "recipe1": "roots:dark_oak",
       "recipe2": "roots:wildwood",
       "name": "Bark Types",
-      "text": "Obtained from breaking logs with knives."
+      "text": "Obtained from breaking logs with knives.$(br2)$(info) Other, modded bark types may be available. For a full listing, $(uses:roots:stone_knife)see JEI$()."
     }
   ]
 }

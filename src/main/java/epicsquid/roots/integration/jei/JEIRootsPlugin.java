@@ -21,6 +21,9 @@ import epicsquid.roots.integration.jei.ritual.RitualCraftingCategory;
 import epicsquid.roots.integration.jei.ritual.RitualCraftingWrapper;
 import epicsquid.roots.integration.jei.ritual.RitualWrapper;
 import epicsquid.roots.integration.jei.shears.*;
+import epicsquid.roots.integration.jei.soil.SoilCategory;
+import epicsquid.roots.integration.jei.soil.SoilRecipe;
+import epicsquid.roots.integration.jei.soil.SoilWrapper;
 import epicsquid.roots.integration.jei.spell.SpellCostCategory;
 import epicsquid.roots.integration.jei.spell.SpellCostWrapper;
 import epicsquid.roots.integration.jei.summon.SummonCreaturesCategory;
@@ -67,6 +70,7 @@ public class JEIRootsPlugin implements IModPlugin {
   public static final String MORTAR_AND_PESTLE = Roots.MODID + ".mortar_and_pestle";
   public static final String RITUAL = Roots.MODID + ".ritual";
   public static final String FEY_CRAFTING = Roots.MODID + ".fey_crafting";
+  public static final String SOIL = Roots.MODID + ".soil";
   public static final String SPELL_COSTS = Roots.MODID + ".spell_costs";
   public static final String SPELL_MODIFIERS = Roots.MODID + ".spell_modifiers";
   public static final String TERRA_MOSS = Roots.MODID + ".terra_moss";
@@ -97,7 +101,8 @@ public class JEIRootsPlugin implements IModPlugin {
         new LootCategory(helper),
         new RunicShearsSummonEntityCategory(helper),
         new BlockBreakCategory(helper),
-        new BlockRightClickCategory(helper)
+        new BlockRightClickCategory(helper),
+        new SoilCategory(helper)
     );
   }
 
@@ -155,6 +160,9 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(LootWrapper.LootRecipe.class, LootWrapper::new, LOOT);
     registry.handleRecipes(BlockBreakRecipe.class, BlockBreakWrapper::new, BLOCK_BREAK);
     registry.handleRecipes(BlockRightClickRecipe.class, BlockRightClickWrapper::new, RIGHT_CLICK_BLOCK);
+    registry.handleRecipes(SoilRecipe.class, SoilWrapper::new, SOIL);
+
+    registry.addRecipes(SoilRecipe.recipes, SOIL);
 
     Collection<SpellBase> spells = SpellRegistry.spellRegistry.values().stream().filter(o -> !o.isDisabled()).collect(Collectors.toList());
 
@@ -204,6 +212,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModItems.ritual_transmutation), TRANSMUTATION);
     registry.addRecipeCatalyst(new ItemStack(Blocks.TALLGRASS, 1, BlockTallGrass.EnumType.GRASS.getMeta()), BLOCK_BREAK);
     registry.addRecipeCatalyst(new ItemStack(ModItems.terra_spores), RIGHT_CLICK_BLOCK);
+    registry.addRecipeCatalyst(new ItemStack(ModBlocks.elemental_soil), SOIL);
 
     for (Item knife : ModItems.knives) {
       registry.addRecipeCatalyst(new ItemStack(knife), BARK_CARVING);
@@ -218,6 +227,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.pyre), RITUAL);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.reinforced_pyre), RITUAL);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.fey_crafter), FEY_CRAFTING);
+    registry.addRecipeCatalyst(new ItemStack(ModBlocks.runic_crafter), FEY_CRAFTING);
     registry.addRecipeCatalyst(new ItemStack(ModItems.staff), SPELL_COSTS);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.imbuer), SPELL_MODIFIERS);
     registry.addRecipeCatalyst(new ItemStack(ModItems.reliquary), LOOT);
