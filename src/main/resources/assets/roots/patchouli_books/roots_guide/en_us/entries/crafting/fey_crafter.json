@@ -16,7 +16,12 @@
     {
       "type": "text",
       "title": "Recipes",
-      "text": "While most objects which are created in the fey crafter have entries in this book, it is possible to view a complete list through JEI (if it is installed).$(br2)You can $(uses:roots:fey_crafter)click here to view this list$() of items."
+      "text": "While most objects which are created in the fey crafter have entries in this book, it is possible to view a complete list through JEI (if it is installed).$(br2)You can $(uses:roots:fey_crafter)click here to view this list$() of items.$(br2)$(info) Output items are inserted into adjacent inventories that are not blacklisted, or into the world as an item."
+    },
+    {
+      "type": "text",
+      "title": "Automation",
+      "text": "It's possible to use a Vanilla dispenser with a $(l:crafting/knives)knife$() inserted into it to trigger the crafting process.$(br2)$(info) It's not possible to automate the insertion of ingredients into the fey crafter; instead, the $(l:crafting/runic_crafter)runic crafter$() is designed with this in mind."
     },
     {
       "type": "text",

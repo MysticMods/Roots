@@ -60,6 +60,12 @@
       "text": "Fey Crafting",
       "x": -1,
       "y": 0
+    },
+    {
+      "type": "text",
+      "text": "#text",
+      "x": 0,
+      "y": 124
     }
   ]
 }
