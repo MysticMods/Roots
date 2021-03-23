@@ -30,7 +30,7 @@ public class SoilCategory implements IRecipeCategory<SoilWrapper> {
     air = helper.createDrawable(new ResourceLocation(Roots.MODID, "textures/gui/jei/elemental_soil_air.png"), 0, 0, 24, 20);
     earth = helper.createDrawable(new ResourceLocation(Roots.MODID, "textures/gui/jei/elemental_soil_earth.png"), 0, 0, 24, 20);
     liquid = helper.createDrawable(new ResourceLocation(Roots.MODID, "textures/gui/jei/elemental_soil_liquid.png"), 0, 0, 24, 20);
-    background = helper.createDrawable(new ResourceLocation(Roots.MODID, "textures/gui/jei/elemental_soil.png"), 0, 0, 75, 44);
+    background = helper.createDrawable(new ResourceLocation(Roots.MODID, "textures/gui/jei/elemental_soil.png"), 0, 0, 115, 44);
   }
 
   @Override

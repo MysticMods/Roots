@@ -12,7 +12,7 @@ public class SoilRecipe {
   public static SoilRecipe WATER = new SoilRecipe(new ItemStack(ModBlocks.elemental_soil_water), RecipeType.WATER);
   public static SoilRecipe EARTH = new SoilRecipe(new ItemStack(ModBlocks.elemental_soil_earth), RecipeType.EARTH);
   public static SoilRecipe AIR = new SoilRecipe(new ItemStack(ModBlocks.elemental_soil_air), RecipeType.AIR);
-  public static List<SoilRecipe> recipes = Arrays.asList(FIRE, WATER, EARTH, AIR);
+  public static List<SoilRecipe> recipes = Arrays.asList(EARTH, AIR, WATER, FIRE);
 
   private static ItemStack SOIL = new ItemStack(ModBlocks.elemental_soil);
   private ItemStack output;
