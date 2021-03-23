@@ -540,6 +540,8 @@ roots.message.sense_time.moon.7=gibbous, waxing
 roots.message.respawn.cant_respawn_dimension=Sorry, but your bed is in another dimension!
 
 roots.message.spell_imbued=The spell %s has been added to your library!
+roots.message.spell_invalid=That spell isn't valid.
+roots.message.spell_already=The spell %s is already in your library.
 
 roots.message.hold_staff=You must be holding a staff to open the spell library.
 
