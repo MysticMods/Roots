@@ -101,14 +101,19 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
     }
 
     ItemStack heldItem = player.getHeldItem(hand);
-    if (heldItem.isEmpty() || !ModItems.knives.contains(heldItem.getItem())) {
+    ItemStack pedestalItem = pedestal.getStackInSlot(0);
+    if (!ModItems.knives.contains(heldItem.getItem())) {
       boolean update = false;
-      if (heldItem.isEmpty() && !pedestal.getStackInSlot(0).isEmpty()) {
-        player.setHeldItem(hand, pedestal.getStackInSlot(0).copy());
+      if (!pedestalItem.isEmpty() && heldItem.getCount() < heldItem.getMaxStackSize() && ItemUtil.equalWithoutSize(heldItem, pedestalItem) || heldItem.isEmpty()) {
+        if (heldItem.isEmpty()) {
+          player.setHeldItem(hand, pedestalItem);
+        } else {
+          heldItem.grow(1);
+        }
         pedestal.setStackInSlot(0, ItemStack.EMPTY);
         update = true;
         // pop it off
-      } else if (pedestal.getStackInSlot(0).isEmpty() && !heldItem.isEmpty()) {
+      } else if (pedestalItem.isEmpty()) {
         ItemStack pedestalStack = heldItem.copy();
         pedestalStack.setCount(1);
         pedestal.setStackInSlot(0, pedestalStack);
