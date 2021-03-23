@@ -11,6 +11,7 @@ import epicsquid.roots.network.fx.MessageImbueCompleteFX;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.FakeSpell;
 import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.spell.info.LibrarySpellInfo;
 import epicsquid.roots.spell.info.storage.DustSpellStorage;
 import epicsquid.roots.world.data.SpellLibraryData;
 import epicsquid.roots.world.data.SpellLibraryRegistry;
@@ -30,6 +31,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextComponentUtils;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -93,6 +95,40 @@ public class TileEntityImbuer extends TileBase implements ITickable {
     readFromNBT(pkt.getNbtCompound());
   }
 
+  enum ExistsResult {
+    NONE, EXISTS, INVALID;
+  }
+
+  private ExistsResult checkExists(int slot, ItemStack heldItem, EntityPlayer player, World world) {
+    if (!world.isRemote) {
+      ItemStack inSlot = inventory.getStackInSlot(slot == 0 ? 1 : 0);
+      ItemStack spellDust = ItemStack.EMPTY;
+      System.out.println("InSlot " + inSlot);
+      System.out.println("HeldItem " + heldItem);
+      if (heldItem.getItem() == ModItems.gramary && inSlot.getItem() == ModItems.spell_dust) {
+        spellDust = inSlot;
+      } else if (heldItem.getItem() == ModItems.spell_dust && inSlot.getItem() == ModItems.gramary) {
+        spellDust = heldItem;
+      }
+      if (spellDust.isEmpty()) {
+        return ExistsResult.NONE;
+      }
+      DustSpellStorage cap = DustSpellStorage.fromStack(spellDust);
+      SpellBase spell = cap != null && cap.getSelectedInfo() != null ? cap.getSelectedInfo().getSpell() : FakeSpell.INSTANCE;
+      SpellLibraryData library = SpellLibraryRegistry.getData(player);
+      if (spell == FakeSpell.INSTANCE) {
+        player.sendStatusMessage(new TextComponentTranslation("roots.message.spell_invalid").setStyle(new Style().setColor(spell.getTextColor()).setBold(true)), true);
+        return ExistsResult.INVALID;
+      }
+      LibrarySpellInfo lib = library.getData(spell);
+      if (lib.isObtained()) {
+        player.sendStatusMessage(new TextComponentTranslation("roots.message.spell_already", new TextComponentTranslation(spell.getTranslationKey() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))), true);
+        return ExistsResult.EXISTS;
+      }
+    }
+    return ExistsResult.NONE;
+  }
+
   @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
@@ -100,13 +136,19 @@ public class TileEntityImbuer extends TileBase implements ITickable {
       int slot = -1;
       if (heldItem.getItem() == ModItems.spell_dust) {
         slot = 0;
-      } else if (/*heldItem.getItem() == ModItems.staff || */heldItem.getItem() == ModItems.gramary) {
+      } else if (heldItem.getItem() == ModItems.gramary) {
         slot = 1;
       }
       if (slot != -1) {
         if (inventory.getStackInSlot(slot).isEmpty()) {
+          if (world.isRemote) {
+            return true;
+          }
           ItemStack toInsert = heldItem.copy();
           toInsert.setCount(1);
+          if (checkExists(slot, heldItem, player, world) != ExistsResult.NONE) {
+            return true;
+          }
           ItemStack attemptedInsert = inventory.insertItem(slot, toInsert, false);
           if (attemptedInsert.isEmpty()) {
             inserter = player.getUniqueID();
@@ -225,19 +267,12 @@ public class TileEntityImbuer extends TileBase implements ITickable {
         progress = 0;
         if (!world.isRemote) {
           ItemStack inSlot = inventory.getStackInSlot(1);
-          if ((/*inSlot.getItem() == ModItems.staff || */inSlot.getItem() == ModItems.gramary) && spell != FakeSpell.INSTANCE) {
-            /*            boolean ejectItem = inSlot.getItem() != ModItems.gramary;*/
+          if (inSlot.getItem() == ModItems.gramary && spell != FakeSpell.INSTANCE) {
             if (inserter == null) {
               Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inventory);
             } else {
-/*              if (inSlot.getItem() == ModItems.staff) {
-                ItemStaff.createData(inSlot, capability);
-              }*/
               SpellLibraryData library = SpellLibraryRegistry.getData(inserter);
               library.addSpell(spell);
-/*              if (ejectItem) {
-                world.spawnEntity(new EntityItem(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, inSlot));
-              }*/
               PacketHandler.sendToAllTracking(new MessageImbueCompleteFX(spell.getName(), getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5), this);
               if (inserter != null) {
                 EntityPlayerMP player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(inserter);
