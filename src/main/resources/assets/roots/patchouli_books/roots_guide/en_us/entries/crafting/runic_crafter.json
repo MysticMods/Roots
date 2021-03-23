@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "An upgraded form of the $(l:crafting/fey_crafter)fey crafter$(), that accepts identical recipes and allows for easy automation.$(br2)$(info) The desired output is right-clicked, and, if valid, will be shown above.$(br2)$(info) The crafter will try drawing items from an inventory below. Crafting itself is performed by right-clicking with a $(l:crafting/knives)knife$()."
+      "text": "An upgraded form of the $(l:crafting/fey_crafter)fey crafter$(), that accepts identical recipes and allows for easy automation.$(br2)$(info) The desired output is right-clicked onto the crafter.$(br2)$(info) The crafter will try drawing items from an inventory below. Crafting itself is performed by right-clicking with a $(l:crafting/knives)knife$()."
     },
     {
       "type": "fey_crafting_template",
