@@ -160,7 +160,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
       } else {
         // Check for a damaged item in the other slot and see if this matches
         if (inventory.getStackInSlot(0).isEmpty() && inventory.getStackInSlot(1).isEmpty()) {
-          if (heldItem.isItemStackDamageable() || (heldItem.isItemEnchanted() && heldItem.getItem() != Items.ENCHANTED_BOOK)) {
+          if (heldItem.isItemDamaged() || (heldItem.isItemEnchanted() && heldItem.getItem() != Items.ENCHANTED_BOOK)) {
             ItemStack toInsert = heldItem.copy();
             ItemStack attemptedInsert = inventory.insertItem(1, toInsert, true);
             if (attemptedInsert.isEmpty()) {
@@ -177,7 +177,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
           }
         } else {
           ItemStack toRepair = inventory.getStackInSlot(1);
-          if (GeneralConfig.AllowImbuerRepair && !toRepair.isEmpty() && toRepair.isItemStackDamageable() && toRepair.getItem().getIsRepairable(toRepair, heldItem) && inventory.getStackInSlot(0).isEmpty()) {
+          if (GeneralConfig.AllowImbuerRepair && !toRepair.isEmpty() && toRepair.isItemDamaged() && toRepair.getItem().getIsRepairable(toRepair, heldItem) && inventory.getStackInSlot(0).isEmpty()) {
             ItemStack repairItem = heldItem.copy();
             repairItem.setCount(1);
             int repairAmount = Math.min(toRepair.getItemDamage(), toRepair.getMaxDamage() / GeneralConfig.MaxDamageDivisor);

@@ -2,26 +2,30 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "TST",
-    "SLS",
+    "LWL",
     "TST"
   ],
   "key": {
     "S": [
       {
         "type": "forge:ore_dict",
-        "ore":  "string"
+        "ore": "string"
       }
     ],
     "L": [
       {
         "type": "forge:ore_dict",
-        "ore": "logWood"
+        "ore": "barkRoots"
       }
     ],
     "T": [
       {
-        "item": "roots:terra_moss",
-        "data": 0
+        "item": "roots:terra_moss"
+      }
+    ],
+    "W": [
+      {
+        "item": "roots:wildroot"
       }
     ]
   },

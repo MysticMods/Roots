@@ -5,8 +5,19 @@
   "read_by_default": true,
   "pages": [
     {
+      "type": "crafting",
+      "recipe": "roots:imbuer",
+      "text": "$(info) Please see the $(l:spells/introduction#imbuing)spells introduction section on imbuing$() for information on spells.$(br2)Specific use instructions along with all other uses of the imbuer will be outlined and discussed in the following pages.$(br2)"
+    },
+    {
       "type": "text",
-      "text": "Example."
+      "title": "Using the Imbuer",
+      "text": "The imbuer features two places where items can go. "
+    },
+    {
+      "type": "text",
+      "title": "Additional Features",
+      "text": "$(warning) Many of these features can be disabled via configuration. If something doesn't work, it may have been disabled in your modpack.$(br2)In addition to imbuing into the spell library, the imbuer allows you to perform the following actions:$(li)repair items for no XP cost using their repair ingredients$(li)"
     }
   ]
 }
