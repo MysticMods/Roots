@@ -50,7 +50,8 @@
     {
       "type": "text",
       "title": "Imbuing",
-      "text": "The process of energizing spell dust and channeling it into your $(l:spells/library)library$() involves both an $(l:crafting/imbuer)imbuer$() and a $(l:crafting/gramary)gramary$().$(br2)This process can be performed by placing the gramary and the spell dust on the imbuer.  A message will appear informing you of the spell that has been added to your library."
+      "anchor": "imbuing",
+      "text": "The process of energizing spell dust and channeling it into your $(l:spells/library)library$() involves both an $(l:crafting/imbuer)imbuer$() and a $(l:crafting/gramary)gramary$().$(br2)This process can be performed by placing the gramary and the spell dust on the imbuer.  A message will appear informing you of the spell that has been added to your library.$(br2)$(info) Additional uses of the imbuer beyond spells are explained in the $(l:crafting/imbuer)imbuer entry$()."
     },
     {
       "type": "text",

@@ -5,8 +5,14 @@
   "read_by_default": true,
   "pages": [
     {
+      "type": "crafting",
+      "recipe": "roots:offering_plate",
+      "recipe2": "roots:reinforced_offering_plate"
+    },
+    {
       "type": "text",
-      "text": "Example."
+      "title": "Usage",
+      "text": "Catalyst plates are primarily to support certain rituals by supplying additional ingredients.$(br2)$(info) See the $(l:rituals/catalyst_plates)entry on Catalyst Plates in the Rituals section$() for full information.$(br2)$(info) Reinforced catalyst plates are immune to damage from Vanilla bosses such as the Wither or the Ender Dragon, as well as highly resistant to explosions."
     }
   ]
 }
