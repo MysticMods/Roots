@@ -15,7 +15,7 @@
     "L": [
       {
         "type": "forge:ore_dict",
-        "ore": "barkRoots"
+        "ore": "rootsBark"
       }
     ],
     "T": [
