@@ -293,6 +293,12 @@ public class TileEntityImbuer extends TileBase implements ITickable {
               if (tag.hasKey("ench")) {
                 tag.removeTag("ench");
                 toRepair.setTagCompound(tag);
+                if (GeneralConfig.AllowImbuerDisenchantReduceCost) {
+                  int rep = toRepair.getRepairCost();
+                  if (rep > 0) {
+                    toRepair.setRepairCost(rep - (rep / 3));
+                  }
+                }
               }
             } else {
               int repairAmount = Math.min(toRepair.getItemDamage(), toRepair.getMaxDamage() / 4);
