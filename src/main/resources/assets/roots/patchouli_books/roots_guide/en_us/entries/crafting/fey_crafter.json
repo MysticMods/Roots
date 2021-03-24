@@ -21,7 +21,7 @@
     {
       "type": "text",
       "title": "Automation",
-      "text": "It's possible to use a Vanilla dispenser with a $(l:crafting/knives)knife$() inserted into it to trigger the crafting process.$(br2)$(info) It's not possible to automate the insertion of ingredients into the fey crafter; instead, the $(l:crafting/runic_crafter)runic crafter$() is designed with this in mind."
+      "text": "While it's possible to use a Vanilla dispenser with a $(l:crafting/knives)knife$() inserted into it to trigger the crafting process, there are limitations.$(br2)$(info) You cannot automatically insert ingredients into the fey crafter, but you can with the $(l:crafting/runic_crafter)runic crafter$().$(br2)$(info) The fey crafter will output a comparator signal of 15 if it is ready to crafter, otherwise 0."
     },
     {
       "type": "text",
