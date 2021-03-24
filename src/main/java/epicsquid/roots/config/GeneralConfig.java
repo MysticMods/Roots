@@ -37,6 +37,9 @@ public class GeneralConfig {
   @Config.Comment(("Set to false to prevent runic dust from removing enchants with an Imbuer"))
   public static boolean AllowImbuerDisenchant = true;
 
+  @Config.Comment(("Set to false to prevent Imbuer disenchantment operations from reducing the repair cost of an item"))
+  public static boolean AllowImbuerDisenchantReduceCost = true;
+
   @Config.Comment(("Divisor of max damage of an item to calculte how much is repaired in an Imbuer (formula: max damage / X)"))
   public static int MaxDamageDivisor = 4;
 
