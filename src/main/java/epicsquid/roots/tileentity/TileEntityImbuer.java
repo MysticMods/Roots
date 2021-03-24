@@ -95,38 +95,36 @@ public class TileEntityImbuer extends TileBase implements ITickable {
     readFromNBT(pkt.getNbtCompound());
   }
 
-  enum ExistsResult {
-    NONE, EXISTS, INVALID;
-  }
-
-  private ExistsResult checkExists(int slot, ItemStack heldItem, EntityPlayer player, World world) {
+  private boolean checkExists(int slot, ItemStack heldItem, EntityPlayer player, World world) {
     if (!world.isRemote) {
       ItemStack inSlot = inventory.getStackInSlot(slot == 0 ? 1 : 0);
+      if (inSlot.isEmpty()) {
+        return false;
+      }
       ItemStack spellDust = ItemStack.EMPTY;
-      System.out.println("InSlot " + inSlot);
-      System.out.println("HeldItem " + heldItem);
       if (heldItem.getItem() == ModItems.gramary && inSlot.getItem() == ModItems.spell_dust) {
         spellDust = inSlot;
       } else if (heldItem.getItem() == ModItems.spell_dust && inSlot.getItem() == ModItems.gramary) {
         spellDust = heldItem;
       }
       if (spellDust.isEmpty()) {
-        return ExistsResult.NONE;
+        player.sendStatusMessage(new TextComponentTranslation("roots.message.spell_invalid").setStyle(new Style().setColor(FakeSpell.INSTANCE.getTextColor()).setBold(true)), true);
+        return true;
       }
       DustSpellStorage cap = DustSpellStorage.fromStack(spellDust);
       SpellBase spell = cap != null && cap.getSelectedInfo() != null ? cap.getSelectedInfo().getSpell() : FakeSpell.INSTANCE;
       SpellLibraryData library = SpellLibraryRegistry.getData(player);
       if (spell == FakeSpell.INSTANCE) {
         player.sendStatusMessage(new TextComponentTranslation("roots.message.spell_invalid").setStyle(new Style().setColor(spell.getTextColor()).setBold(true)), true);
-        return ExistsResult.INVALID;
+        return true;
       }
       LibrarySpellInfo lib = library.getData(spell);
       if (lib.isObtained()) {
         player.sendStatusMessage(new TextComponentTranslation("roots.message.spell_already", new TextComponentTranslation(spell.getTranslationKey() + ".name").setStyle(new Style().setColor(spell.getTextColor()).setBold(true))), true);
-        return ExistsResult.EXISTS;
+        return true;
       }
     }
-    return ExistsResult.NONE;
+    return false;
   }
 
   @Override
@@ -146,7 +144,7 @@ public class TileEntityImbuer extends TileBase implements ITickable {
           }
           ItemStack toInsert = heldItem.copy();
           toInsert.setCount(1);
-          if (checkExists(slot, heldItem, player, world) != ExistsResult.NONE) {
+          if (checkExists(slot, heldItem, player, world)) {
             return true;
           }
           ItemStack attemptedInsert = inventory.insertItem(slot, toInsert, false);
