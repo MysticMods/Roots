@@ -10,9 +10,6 @@
     }
   ],
   "result": {
-    "item": "patchouli:guide_book",
-    "nbt": {
-      "patchouli:book": "roots:roots_guide"
-    }
+    "item": "roots:roots_guide"
   }
 }
