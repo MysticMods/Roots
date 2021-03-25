@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Briefly separates the caster's body and spirit from reality, allowing them to phase through solid blocks and move freely for a time until the spell has run its course.$(br2)$(info) When the spell ends, the caster is returned to the location they cast the spell."
+      "text": "Example"
     },
     {
       "type": "spell_template",

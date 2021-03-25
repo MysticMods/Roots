@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Disarms all the entities in the default radius of 20 blocks around the caster with one single use!"
+      "text": "Example"
     },
     {
       "type": "spell_template",

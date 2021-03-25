@@ -6,24 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Created by breaking the relevant log with a $(l:crafting/knives)knife$(), the stripped-away bark contains much wild magic within it.$(br2)Different trees produce different barks, but each contain a considerable amount of wild magic.$(br2)$(info) The amount of bark obtained when breaking logs can be increased with the fortune enchantment."
-    },
-    {
-      "type": "bark_template_quint",
-      "recipe1": "roots:oak",
-      "recipe2": "roots:birch",
-      "recipe3": "roots:jungle",
-      "recipe4": "roots:acacia",
-      "recipe5": "roots:spruce",
-      "name": "Bark Types",
-      "text": "Obtained from breaking logs with knives."
-    },
-    {
-      "type": "bark_template_double",
-      "recipe1": "roots:dark_oak",
-      "recipe2": "roots:wildwood",
-      "name": "Bark Types",
-      "text": "Obtained from breaking logs with knives."
+      "text": "Example"
     }
   ]
 }

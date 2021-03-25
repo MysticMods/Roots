@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Temporarily halts the progress of time for all creatures in the vicinity of the caster, excluding the caster."
+      "text": "Example"
     },
     {
       "type": "spell_template",

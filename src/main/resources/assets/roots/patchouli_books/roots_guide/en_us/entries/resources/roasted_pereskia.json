@@ -5,9 +5,8 @@
   "read_by_default": true,
   "pages": [
     {
-      "type": "smelting",
-      "recipe": "roots:pereskia_bulb",
-      "text": "A delicious treat and a way to consume additional pereskia bulbs."
+      "type": "text",
+      "text": "Example"
     }
   ]
 }

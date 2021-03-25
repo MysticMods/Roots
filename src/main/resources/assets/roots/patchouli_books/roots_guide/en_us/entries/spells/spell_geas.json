@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "The targeted creature is placed under a geas, preventing them from attacking the caster for a short period of time."
+      "text": "Example"
     },
     {
       "type": "spell_template",

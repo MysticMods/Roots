@@ -5,8 +5,9 @@
   "read_by_default": true,
   "pages": [
     {
-      "type": "text",
-      "text": "Example."
+      "type": "crafting",
+      "recipe": "roots:gramary",
+      "text": "Much more than just bark, moss and wildroot held together by string, this is a repository of magic.$(br2)While it cannot be interacted with directly, it is used in the imbuing process when adding spells to your library.$(br2)$(warning) You will need at least one of these to progress through Roots."
     }
   ]
 }
