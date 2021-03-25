@@ -5,8 +5,9 @@
   "read_by_default": true,
   "pages": [
     {
-      "type": "text",
-      "text": "Example."
+      "type": "crafting",
+      "recipe": "roots:imposer",
+      "text": "Specifically designed to impose the power of herbs onto spells, allowing them to be altered and modified, use of which is discussed fully $(l:spells/introduction2#imposer)in the modifiers introduction$().$(br2)$(warning) There are currently no additional uses."
     }
   ]
 }
