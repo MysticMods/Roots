@@ -12,6 +12,7 @@
     {
       "type": "crafting",
       "title": "Imposers",
+      "anchor": "imposer",
       "recipe": "roots:imposer",
       "text": "Inserting a staff into the imposer ($(l:spells/library)with spells selected$()) allows you to both insert modifiers globally and enable them for this staff.$(br2)$(info) Right-click with staff and then again with a $(l:crafting/knives)knife$() to open the interface."
     },

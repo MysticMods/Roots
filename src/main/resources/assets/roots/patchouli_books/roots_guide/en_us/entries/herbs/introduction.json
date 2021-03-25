@@ -21,6 +21,7 @@
     {
       "type": "text",
       "title": "Unlocking Herbs",
+      "anchor": "pyre",
       "text": "You will not immediately be able to access all herbs upon starting Roots. A number of them require the use of a specific tool for creation, while others require a crafting ritual on the Pyre.$(br2)The recipe for each herb is specified in its entry, and can be crafted as many times as you like.$(br)$(info) It is always worthwhile to grow herbs as crops after your initial crafting."
     }
   ]
