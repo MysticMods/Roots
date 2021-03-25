@@ -6,20 +6,12 @@
   "turnin": "roots:stalicripe",
   "pages": [
     {
-      "type": "spotlight",
-      "item": "roots:stalicripe",
-      "link_recipe": true,
-      "text": "A tough, rugged plant that feels rough - almost the texture of recently newly hewn stone.$(br2)$(info) Can only be grown on any type of $(l:resources/elemental_soil)elemental soil.$()"
+      "type": "text",
+      "text": "Example"
     },
     {
       "type": "ritual_crafting_template",
       "recipe": "stalicripe"
-    },
-    {
-      "type": "relations",
-      "entries": [
-        "resources/elemental_soil"
-      ]
     }
   ]
 }

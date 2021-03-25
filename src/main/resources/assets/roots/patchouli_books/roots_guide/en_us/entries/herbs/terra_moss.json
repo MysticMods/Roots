@@ -8,20 +8,18 @@
   "sortnum": 4,
   "pages": [
     {
-      "type": "spotlight",
-      "item": "roots:terra_moss",
-      "link_recipe": true,
-      "text": "Terra Moss is one of the most commonly available magical herbs, it is simply that few recognise its potential. You can grow it by obtaining Terra Moss Spores from broken tall grass, $(info) and then imbue it into cobblestone $(warning) horizontally adjacent to water."
+      "type": "text",
+      "text": "Example"
     },
     {
       "type": "multiblock",
       "multiblock": {
         "mapping": {
-          "0": "minecraft:water",
-          "M": "minecraft:cobblestone"
+          "0": "minecraft:cobblestone",
+          "M": "minecraft:water"
         },
         "pattern": [
-          ["   M   ","  M0M  ","   M   "]
+          [" M ","M0M"," M "]
         ]
       }
     },
@@ -35,14 +33,6 @@
       "type": "moss_template",
       "name": "Terra Moss",
       "text": "Scraping a number of other mossy blocks with a knife will also give you terra moss.$(br2)$(info) These other blocks can also be imbued as can cobblestone."
-    },
-    {
-      "type": "relations",
-      "entries": [
-        "apparatus/knives",
-        "rituals/ritual_overgrowth",
-        "basics/resources"
-      ]
     }
   ]
 }
