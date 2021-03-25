@@ -6,10 +6,8 @@
   "turnin": "roots:spirit_herb",
   "pages": [
     {
-      "type": "spotlight",
-      "item": "roots:spirit_herb",
-      "link_recipe": true,
-      "text": "Used in ceremonies since ancient times, Spirit Herb resonates with the spirits of the deceased.$(br2)$(info) Crafting Spirit Herb will give you seeds, which can be planted on normal farmland."
+      "type": "text",
+      "text": "Example"
     },
     {
       "type": "runic_shears_template",
@@ -20,12 +18,6 @@
     {
       "type": "crafting",
       "recipe": "roots:spirit_herb_seed"
-    },
-    {
-      "type": "relations",
-      "entries": [
-        "apparatus/runic_shears"
-      ]
     }
   ]
 }
