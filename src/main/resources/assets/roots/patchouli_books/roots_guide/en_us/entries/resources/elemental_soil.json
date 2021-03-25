@@ -5,38 +5,8 @@
   "read_by_default": true,
   "pages": [
     {
-      "type": "spotlight",
-      "item": "roots:elemental_soil",
-      "link_recipe": true,
-      "text": "Certain mixtures of dirt and gravel produce a soil suitable for more uncommon plants, unable to grow on farmland.$(br2)The soil can be attuned to one of the four elements to add additional effects.$(br2)$(info) Elemental plants will grow on any type of elemental soil, including the base type."
-    },
-    {
-      "type": "fey_crafting_template",
-      "recipe": "elemental_soil"
-    },
-    {
-      "type": "spotlight",
-      "item": "roots:elemental_soil_fire",
-      "link_recipe": true,
-      "text": "Obtained by throwing a block of elemental soil into lava, this fiery soil will cause some of its harvested drops to be cooked if appropriate.$(br2)In addition, each plant that is harvested from this soil may drop experience."
-    },
-    {
-      "type": "spotlight",
-      "item": "roots:elemental_soil_water",
-      "link_recipe": true,
-      "text": "Obtained by throwing a block of elemental soil into water and allowing it to soak, this soil will cause any crop that grows upon it to be automatically harvested.$(br2)$(info)If a container is below, the drops will be placed there or otherwise on the surface. If gravel is below, this behaviour is suppressed."
-    },
-    {
-      "type": "spotlight",
-      "item": "roots:elemental_soil_air",
-      "link_recipe": true,
-      "text": "Obtained by throwing a block of elemental soil on the ground above the defined height ($(info) a default of 90 blocks or higher) and allowing them to soak in the energy.$(br2)Plants grown on this soil will grow much faster than normal."
-    },
-    {
-      "type": "spotlight",
-      "item": "roots:elemental_soil_earth",
-      "link_recipe": true,
-      "text": "Obtained by throwing a block of elemental soil down beneath the ground (no sky access), below the defined height ($(info) a default of 30 blocks or lower), and allowing it to soak in the energy.$(br2)The yield of any crop grown upon this soil will be increased."
+      "type": "text",
+      "text": "Example"
     }
   ]
 }

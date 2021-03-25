@@ -5,14 +5,8 @@
   "read_by_default": true,
   "pages": [
     {
-      "type": "mortar_template",
-      "item": "roots:flour",
-      "text": "Flour can be produced from a variety of crops and used to create bread, such as wheat or potato, either individually or in batches up to five."
-    },
-    {
-      "type": "smelting",
-      "recipe": "roots:flour",
-      "text": "Each portion of flour can be cooked to create a single loaf of bread.$(br2)This process allows you to create more bread from a greater variety of ingredients, and with a far greater yield than the standard three wheat crafting recipe."
+      "type": "text",
+      "text": "Example"
     }
   ]
 }

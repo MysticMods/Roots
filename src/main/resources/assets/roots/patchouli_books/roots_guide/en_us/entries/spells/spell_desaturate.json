@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Instantly exchanges filled hunger for health, although the amount of health gained per filled point of health is greatly reduced compared to that which you would normally restore slowly, over time.$(br2)$(info) In addition, saturation equal to filled hunger is also consumed."
+      "text": "Example"
     },
     {
       "type": "spell_template",

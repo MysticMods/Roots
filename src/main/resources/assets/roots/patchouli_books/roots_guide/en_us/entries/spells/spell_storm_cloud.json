@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "This is a simple spell surrounds the caster in a cloud of ice & snow, allowing them to immediately extinguish fire and convert nearby lava to obsidian as they walk."
+      "text": "Example"
     },
     {
       "type": "spell_template",

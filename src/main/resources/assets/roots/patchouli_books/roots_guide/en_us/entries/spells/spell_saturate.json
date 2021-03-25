@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Consumes food in your inventory to rapidly fill your hunger and saturation, although at a cost: the amount gained is significantly less than would be obtained by eating.$(br2)$(info) Foods with potion effects, such as golden apples, will have these applied. $(warning) Saturation can and will be wasted in order to completely fill hunger."
+      "text": "Example"
     },
     {
       "type": "spell_template",

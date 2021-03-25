@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Summons a great gust of wind, certainly strong enough to knock all creatures in front of you back and high into the air.$(br2)$(info) The creatures will sustain fall damage if flung too far."
+      "text": "Example"
     },
     {
       "type": "spell_template",

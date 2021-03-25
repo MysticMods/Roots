@@ -5,9 +5,8 @@
   "read_by_default": true,
   "pages": [
     {
-      "type": "mortar_template",
-      "item": "roots:petals",
-      "text": "While generally a blunt instrument, the pestle can be used to mix and strip flowers from their stems.$(br2)Petals have a variety of uses, especially in spell recipes and rituals."
+      "type": "text",
+      "text": "Example"
     }
   ]
 }

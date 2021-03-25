@@ -5,14 +5,8 @@
   "read_by_default": true,
   "pages": [
     {
-      "type": "spotlight",
-      "item": "roots:runic_dust",
-      "text": "Although $(l:crafting/resources/runestone)runestone$() is a hardy material, it can be broken down into an equally hardy and powerful material.$(br2)It has a lot of uses in spells and rituals, as well as in the process of disenchanting with an imbuer."
-    },
-    {
-      "type": "mortar_template",
-      "item": "roots:runic_dust",
-      "text": "$(info) Runic dust can be crafted individually or in batches of up to 5."
+      "type": "text",
+      "text": "Example"
     }
   ]
 }
