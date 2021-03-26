@@ -7,6 +7,10 @@
     {
       "type": "text",
       "text": "Example"
+    },
+    {
+      "type": "fey_crafting_template",
+      "recipe": "runestone"
     }
   ]
 }
