@@ -1,6 +1,6 @@
 {
-  "name": "Living Essence",
-  "icon": "roots:living_essence",
+  "name": "Life Essence",
+  "icon": "roots:life_essence",
   "category": "resources",
   "read_by_default": true,
   "pages": [
