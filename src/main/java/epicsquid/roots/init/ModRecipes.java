@@ -867,6 +867,10 @@ public class ModRecipes {
     return null;
   }
 
+  public static MortarRecipe getMortarRecipe (ResourceLocation name) {
+    return mortarRecipes.get(name);
+  }
+
   public static void removeMortarRecipes(ItemStack output) {
     MortarRecipe recipeToRemove = getMortarRecipe(output);
     if (recipeToRemove != null) {
@@ -892,6 +896,16 @@ public class ModRecipes {
       }
     }
     return null;
+  }
+
+  public static List<MortarRecipe> getMortarRecipes (String name, int meta) {
+    List<MortarRecipe> recipes = new ArrayList<>();
+    for (MortarRecipe recipe : mortarRecipes.values()) {
+      if (recipe.getResult().getItem().getRegistryName().toString().equals(name) && (recipe.getResult().getMetadata() == meta || meta == -1)) {
+        recipes.add(recipe);
+      }
+    }
+    return recipes;
   }
 
   public static MortarRecipe getMortarRecipe(String name, int meta) {

@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example"
+      "text": "Elemental soil is all that is required in order to grown either of the four elemental plants: $(l:herbs/infernal_bulb)infernal bulb$(), $(l:herbs/dewgonia)dewgonia$(), $(l:herbs/stalicripe)stalicripe$() and $(l:herbs/cloud_berry)cloud berry$().$(br2)$(info) This soil can also grow almost any other crop, giving them all a growth boost.$(br2)There are also variants of elemental soil aligned with each of the four elements, with special crafting methods."
     }
   ]
 }
