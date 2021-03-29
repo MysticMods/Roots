@@ -5,8 +5,9 @@
   "read_by_default": true,
   "pages": [
     {
-      "type": "text",
-      "text": "Example"
+      "type": "mortar_template",
+      "recipe": "roots:flowers_to_petals_5",
+      "text": "Flowers are eligible for processing if they are in the $(bold)allFlowers$() or $(bold)allTallFlowers$() ore dictionary categories.$(br2)$(info) You can find a complete list of all sources $(sources:roots:petals)in JEI$()."
     }
   ]
 }

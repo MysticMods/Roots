@@ -1,30 +1,29 @@
 package epicsquid.roots.integration.patchouli;
 
+import epicsquid.roots.client.PatchouliHack;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.MortarRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.ResourceLocation;
 import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariableProvider;
 import vazkii.patchouli.common.util.ItemStackUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MortarRecipeProcessor implements IComponentProcessor {
 
   private List<Ingredient> ingredients = new ArrayList<>();
-  private ItemStack output = null;
+  private ItemStack output = ItemStack.EMPTY;
 
   @Override
   public void setup(IVariableProvider<String> iVariableProvider) {
-    String item = iVariableProvider.get("item");
-    int meta = iVariableProvider.has("meta") ? Integer.parseInt(iVariableProvider.get("meta")) : 0;
-    MortarRecipe mortarBase = ModRecipes.getMortarRecipe(item, meta);
-    if (mortarBase != null) {
-      ingredients = mortarBase.getIngredients();
-      output = mortarBase.getResult();
-    }
+    MortarRecipe recipe = ModRecipes.getMortarRecipe(new ResourceLocation(iVariableProvider.get("recipe")));
+    output = recipe.getResult();
+    ingredients = recipe.getIngredients();
   }
 
   @Override

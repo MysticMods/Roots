@@ -1,5 +1,6 @@
 package epicsquid.roots.client;
 
+import epicsquid.mysticallib.util.CycleTimer;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.integration.IntegrationUtil;
@@ -28,6 +29,8 @@ import java.util.function.Function;
 
 @SideOnly(Side.CLIENT)
 public class PatchouliHack {
+  public static final CycleTimer timer = new CycleTimer(10);
+
   public static void init() {
     Map<String, BookTextParser.CommandProcessor> COMMANDS = ObfuscationReflectionHelper.getPrivateValue(BookTextParser.class, null, "COMMANDS");
     Map<String, BookTextParser.FunctionProcessor> FUNCTIONS = ObfuscationReflectionHelper.getPrivateValue(BookTextParser.class, null, "FUNCTIONS");
