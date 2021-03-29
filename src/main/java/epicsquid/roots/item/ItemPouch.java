@@ -158,13 +158,15 @@ public class ItemPouch extends ItemBase implements IItemPouch {
       tooltip.add(TextFormatting.LIGHT_PURPLE + I18n.format("roots.tooltip.refill"));
     }
 
-    NBTTagCompound tag = ItemUtil.getOrCreateTag(stack);
-    EnumDyeColor color = EnumDyeColor.BROWN;
-    if (tag.hasKey("color", Constants.NBT.TAG_INT)) {
-      color = EnumDyeColor.byMetadata(tag.getInteger("color"));
+    if (getPouchType(stack) != PouchType.FEY) {
+      NBTTagCompound tag = ItemUtil.getOrCreateTag(stack);
+      EnumDyeColor color = EnumDyeColor.BROWN;
+      if (tag.hasKey("color", Constants.NBT.TAG_INT)) {
+        color = EnumDyeColor.byMetadata(tag.getInteger("color"));
+      }
+      tooltip.add("");
+      tooltip.add(I18n.format("roots.tooltip.color", I18n.format(color.getTranslationKey())));
     }
-    tooltip.add("");
-    tooltip.add(I18n.format("roots.tooltip.color", I18n.format(color.getTranslationKey())));
 
     super.addInformation(stack, worldIn, tooltip, flagIn);
   }

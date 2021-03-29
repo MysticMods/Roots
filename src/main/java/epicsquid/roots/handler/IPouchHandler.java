@@ -22,6 +22,10 @@ public interface IPouchHandler {
     return getPouchType() == PouchType.CREATIVE;
   }
 
+  default boolean isFey () {
+    return getPouchType() == PouchType.FEY;
+  }
+
   IItemHandlerModifiable getInventory();
 
   IItemHandlerModifiable getHerbs();

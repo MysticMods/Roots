@@ -81,5 +81,6 @@ public class RootsPacketHandler {
     PacketHandler.registerMessage(MessageAquaBubbleFX.MessageHolder.class, MessageAquaBubbleFX.class, Side.CLIENT);
     PacketHandler.registerMessage(MessageServerModifier.MessageHolder.class, MessageServerModifier.class, Side.SERVER);
     PacketHandler.registerMessage(MessageCreatureSummonedFX.MessageHolder.class, MessageCreatureSummonedFX.class, Side.CLIENT);
+    PacketHandler.registerMessage(MessageTradeResetFX.Handler.class, MessageTradeResetFX.class, Side.CLIENT);
   }
 }

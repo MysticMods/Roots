@@ -972,7 +972,7 @@ public class ModRecipes {
   }
 
   @Nullable
-  public static FeyCraftingRecipe getFeyCraftingRecipe (ItemStack stack) {
+  public static FeyCraftingRecipe getFeyCraftingRecipe(ItemStack stack) {
     for (FeyCraftingRecipe recipe : feyCraftingRecipes.values()) {
       if (ItemUtil.equalWithoutSize(recipe.getResult(), stack)) {
         return recipe;
@@ -1458,6 +1458,14 @@ public class ModRecipes {
         new ItemStack(ModItems.bark_wildwood),
         new ItemStack(ModItems.spirit_herb),
         new ItemStack(ModItems.component_pouch)
+    ));
+
+    addFeyCraftingRecipe("fey_pouch", new FeyPouchRecipe(new ItemStack(ModItems.fey_pouch), 1).addIngredients(
+        new ItemStack(ModItems.herb_pouch),
+        new ItemStack(ModItems.fey_leather),
+        new ItemStack(ModItems.fey_leather),
+        new ItemStack(ModItems.pereskia),
+        new ItemStack(ModItems.mystic_feather)
     ));
 
     addFeyCraftingRecipe("salmon_of_knowledge", new SalmonRecipe(new ItemStack(ModItems.salmon), 1).addIngredients(

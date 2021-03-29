@@ -36,8 +36,8 @@ import java.util.List;
 public class ModItems {
 
   // All mod items
-  public static Item guide, pestle, herb_pouch, component_pouch, spell_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, wildwood_quiver, wildwood_bow,
-      sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, apothecary_pouch, wooden_shears, firestarter,
+  public static Item guide, pestle, herb_pouch, component_pouch, apothecary_pouch, fey_pouch, spell_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, wildwood_quiver, wildwood_bow,
+      sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, wooden_shears, firestarter,
       petals, flour, living_arrow, runic_dust, cooked_pereskia, fey_leather, wildewheet_bread, glass_eye, mystic_feather, strange_ooze, gramary, spirit_bag, reliquary;
 
   public static Item runed_axe, runed_hoe, runed_pickaxe, runed_shovel, runed_sword, runed_dagger;
@@ -128,6 +128,7 @@ public class ModItems {
     event.addItem(component_pouch = new ItemPouch("component_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(creative_pouch = new ItemCreativePouch("creative_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(apothecary_pouch = new ItemApothecaryPouch("apothecary_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(fey_pouch = new ItemFeyPouch("fey_pouch").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(spell_dust = new ItemSpellDust("spell_dust").setCreativeTab(Roots.tab).setMaxStackSize(1));
     event.addItem(flour = new ItemBase("flour").setCreativeTab(Roots.tab));
     event.addItem(staff = new ItemStaff("staff").setCreativeTab(Roots.tab).setMaxStackSize(1));

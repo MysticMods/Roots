@@ -57,6 +57,7 @@ item.salmon_of_knowledge.name=Salmon of Knowledge
 item.wooden_shears.name=Wooden Shears
 item.reliquary.name=Reliquary
 item.spirit_bag.name=Spirit Bag
+item.fey_pouch.name=Fey Leather Pouch
 tile.imposer.name=Imposer
 tile.mortar.name=Mortar
 tile.imbuer.name=Imbuer
@@ -113,6 +114,7 @@ tile.runed_obsidian_brick_alt_button.name=Runed Obsidian Brick Button
 tile.runed_obsidian_pressure_plate.name=Runed Obsidian Pressure Plate
 tile.runed_obsidian_brick_pressure_plate.name=Runed Obsidian Brick Pressure Plate
 tile.runed_obsidian_brick_alt_pressure_plate.name=Runed Obsidian Brick Pressure Plate
+
 
 roots.tooltip.petaldust.notag=This Spell Dust has no NBT data! It is potentially prone to errors and should not be used!
 roots.tooltip.color=Dyed %s.
@@ -657,7 +659,7 @@ roots.modifiers.modifiers.extinguisher.desc=Extinguishes flames in the direction
 roots.modifiers.modifiers.extinguisher=Fire Extinguisher
 roots.modifiers.modifiers.faithful_sharing.desc=A single creature tamed by you nearby is also affected.
 roots.modifiers.modifiers.faithful_sharing=Faithful Sharing
-roots.modifiers.modifiers.false_night.desc=Reduces the time until villagers are ready to reset their traits.
+roots.modifiers.modifiers.false_night.desc=Has a chance to reset a nearby villagers' locked trades.
 roots.modifiers.modifiers.false_night=False Night
 roots.modifiers.modifiers.fiery_harvest.desc=Causes harvested items to be processed by any relevant furnace recipe.
 roots.modifiers.modifiers.fiery_harvest=Fiery Harvest
