@@ -110,7 +110,7 @@ public class SpellSanctuary extends SpellBase {
         } else if (SpellConfig.spellFeaturesCategory.getSanctuaryBlacklist().contains(EntityList.getKey(e))) {
           reject = true;
         }
-        if (!reject) {
+        if (reject) {
           if (e.getDistanceSq(player) < r) {
             e.motionX = v * (e.posX - player.posX);
             e.motionY = v * (e.posY - player.posY);
