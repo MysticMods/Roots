@@ -45,6 +45,8 @@ public class GuiPouch extends GuiContainer {
       rl = new ResourceLocation(Roots.MODID, "textures/gui/apothecary_pouch_gui.png");
     } else if (containerPouch.isHerb()) {
       rl = new ResourceLocation(Roots.MODID, "textures/gui/herb_pouch_gui.png");
+    } else if (containerPouch.isFey()) {
+      rl = new ResourceLocation(Roots.MODID, "textures/gui/fey_pouch_gui.png");
     } else {
       rl = new ResourceLocation(Roots.MODID, "textures/gui/component_pouch_gui.png");
     }
@@ -53,15 +55,13 @@ public class GuiPouch extends GuiContainer {
     int j = (this.height - this.ySize) / 2;
     if (containerPouch.isApothecary()) {
       this.drawTexturedModalRect(i - 35, j - 63, 0, 0, 213, 215);
-    } else { //if (containerPouch.isHerb()) {
+    } else {
       this.drawTexturedModalRect(i - 13, j - 55, 0, 0, 176, 207);
-/*    } else {
-      this.drawTexturedModalRect(i - 13, j - 55, 0, 0, 176, 207);*/
     }
   }
 
   private boolean isComponentPouch() {
-    return !containerPouch.isApothecary() && !containerPouch.isHerb();
+    return !containerPouch.isApothecary() && !containerPouch.isHerb() && !containerPouch.isFey();
   }
 
   private boolean isHerbPouch() {

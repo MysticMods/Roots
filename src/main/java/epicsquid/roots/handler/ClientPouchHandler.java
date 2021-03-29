@@ -8,7 +8,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class ClientPouchHandler implements IPouchHandler {
   private ItemStackHandler inventory = new ItemStackHandler(PouchType.APOTHECARY_POUCH_INVENTORY_SLOTS);
-  private ItemStackHandler herbs = new ItemStackHandler(PouchType.APOTHECARY_POUCH_HERB_SLOTS);
+  private ItemStackHandler herbs = new ItemStackHandler(PouchType.FEY_POUCH_HERB_SLOTS);
 
   private final ItemStack pouch;
 
