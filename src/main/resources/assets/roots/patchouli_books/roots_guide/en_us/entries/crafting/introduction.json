@@ -22,6 +22,7 @@
     {
       "type": "text",
       "title": "Fey Crafting",
+      "anchor": "grove",
       "text": "An active $(l:crafting/grove_stone)Grove Stone$() within 10 blocks powers the $(l:crafting/fey_crafter)fey crafter$(). Activation is through the $(l:rituals/ritual_grove_supplication)Grove Supplication ritual$().$(br2)Recipes have five ingredients, although full stacks of each can be placed in the crafter.$(br2)$(info) Right-clicking with a $(l:crafting/knives)knife$() or using a dispenser with a knife begins crafting. Multiple crafts craft will be performed at once for all provided ingredients."
     },
     {
