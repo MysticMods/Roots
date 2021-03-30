@@ -3,6 +3,7 @@ package epicsquid.roots.client;
 import epicsquid.mysticallib.util.CycleTimer;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
+import epicsquid.roots.config.ElementalSoilConfig;
 import epicsquid.roots.integration.IntegrationUtil;
 import epicsquid.roots.properties.PropertyTable;
 import epicsquid.roots.ritual.RitualBase;
@@ -24,6 +25,7 @@ import vazkii.patchouli.client.book.gui.GuiBookCategory;
 import vazkii.patchouli.client.book.text.BookTextParser;
 import vazkii.patchouli.common.book.Book;
 
+import java.util.Locale;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -268,6 +270,25 @@ public class PatchouliHack {
 
     FUNCTIONS.put("ritual", prop.apply("ritual"));
     COMMANDS.put("/ritual", reset);
+
+    Function<String, BookTextParser.FunctionProcessor> config = (type) ->
+        (parameter, state) -> {
+          switch (parameter.toLowerCase(Locale.ROOT)) {
+            case "earth_max_y":
+              return "" + ElementalSoilConfig.EarthSoilMaxY;
+            case "air_min_y":
+              return "" + ElementalSoilConfig.AirSoilMinY;
+            case "air_delay":
+              return "" + ElementalSoilConfig.AirSoilDelay;
+            case "earth_delay":
+              return "" + ElementalSoilConfig.EarthSoilDelay;
+            default:
+              return "" + 0;
+          }
+        };
+
+    FUNCTIONS.put("config", prop.apply("config"));
+    COMMANDS.put("/config", reset);
 /*    BookTextParser.FunctionProcessor li_link = (parameter, state) -> {
       state.lineBreaks = 1;
       state.spacingLeft = 4;
