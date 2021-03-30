@@ -997,6 +997,7 @@ roots.living_hoe.tooltip=Breaks plants in a large radius.
 
 roots.patchouli.true=yes
 roots.patchouli.false=no
+roots.patchouli.fey_crafting=Fey Crafting
 
 subtitle.roots.aqua_bubble_alt_end=Aqua Bubble finishes
 subtitle.roots.event.imbuer.add_item=Item added
