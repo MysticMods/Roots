@@ -16,7 +16,7 @@ public class ItemLivingArrow extends ItemArrowBase {
   public EntityArrow createArrow(World worldIn, ItemStack stack, EntityLivingBase shooter) {
     EntityLivingArrow arrow = new EntityLivingArrow(worldIn, shooter);
     arrow.setPotionEffect(stack);
-    arrow.setDamage(3.0D);
+    arrow.setDamage(4.0D);
     return arrow;
   }
 }
