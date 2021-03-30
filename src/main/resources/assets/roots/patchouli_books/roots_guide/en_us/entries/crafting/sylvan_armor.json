@@ -9,18 +9,22 @@
       "text": "Example."
     },
     {
+      "title": "Sylvan Helmet",
       "type": "fey_crafting_template",
       "recipe": "sylvan_helmet"
     },
     {
+      "title": "Sylvan Chestplate",
       "type": "fey_crafting_template",
       "recipe": "sylvan_chestplate"
     },
     {
+      "title": "Sylvan Leggings",
       "type": "fey_crafting_template",
       "recipe": "sylvan_leggings"
     },
     {
+      "title": "Sylvan Boots",
       "type": "fey_crafting_template",
       "recipe": "sylvan_boots"
     }
