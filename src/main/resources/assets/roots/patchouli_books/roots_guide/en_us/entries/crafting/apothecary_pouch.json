@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example."
+      "text": "Much more advanced than the $(l:crafting/component_pouch)component pouch$() (which is a required ingredient), this pouch contains additional slots for herbs and a large number of slots for non-herb items.$(br2)$(info) All pouches can be dyed to $(l:spells/component_pouches)differentiate them from others$().$(br2)$(warning) Mechanics of pouches are more directly explained the $(l:spells/component_pouches)component pouches section on spells$()."
     },
     {
       "type": "fey_crafting_template",

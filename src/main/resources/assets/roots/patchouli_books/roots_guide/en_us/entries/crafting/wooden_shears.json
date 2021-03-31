@@ -5,8 +5,9 @@
   "read_by_default": true,
   "pages": [
     {
-      "type": "text",
-      "text": "Example."
+      "type": "crafting",
+      "recipe": "roots:wooden_shears",
+      "text": "Wooden shears, while not being anywhere near as durable as iron shears, provide identical functionality.$(br2)$(info) They can be used to harvest leaves and grass as though with silk touch, as well as shearing sheep."
     }
   ]
 }

@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example."
+      "text": "A more complex pouch which contains less slots for herbs, but compensates by providing a number of slots in which you can store non-herb items.$(br2)$(info) All pouches can be dyed to $(l:spells/component_pouches)differentiate them from others$().$(br2)$(warning) Mechanics of pouches are more directly explained the $(l:spells/component_pouches)component pouches section on spells$()."
     },
     {
       "type": "fey_crafting_template",
