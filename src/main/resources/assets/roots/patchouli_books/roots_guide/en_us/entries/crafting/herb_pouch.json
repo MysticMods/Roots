@@ -5,8 +5,9 @@
   "read_by_default": true,
   "pages": [
     {
-      "type": "text",
-      "text": "Example."
+      "type": "crafting",
+      "recipe": "roots:herb_pouch",
+      "text": "The simplest pouch that can be crafted without using a $(l:crafting/fey_crafter)fey crafter$(), this provides nine slots with which to stores $(cat:herbs)herbs$() as reagents for spell-casting.$(br2)$(info) All pouches can be dyed to $(l:spells/component_pouches)differentiate them from others$()."
     }
   ]
 }
