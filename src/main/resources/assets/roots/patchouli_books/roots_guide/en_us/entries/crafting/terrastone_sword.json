@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example."
+      "text": "Terrastone tools, like $(cat:crafting_armor_tools_living)living tools$(), naturally repair themselves over time (indeed, more rapidly than living tools do).$(br2)$(info) They have the damage of diamond tools, but less durability.$(br2)$(info) The sword is capable of instantly breaking cobwebs with silk touch."
     },
     {
       "type": "fey_crafting_template",
