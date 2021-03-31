@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example."
+      "text": "Terrastone tools, like $(cat:crafting_armor_tools_living)living tools$(), naturally repair themselves over time (indeed, more rapidly than living tools do).$(br2)$(info) They have the harvest level of diamond tools, but less durability.$(br2)$(info) The terrastone axe, especially, allows you to instantly break leaves."
     },
     {
       "type": "fey_crafting_template",

@@ -7,11 +7,11 @@ import net.minecraftforge.common.config.Config;
 @Config(modid = Roots.MODID, name = "roots/tools", category = "tools")
 public class ToolConfig {
   @Config.Comment(("Terrastone Pickaxe speed modifier for soft materials (set to 1 to disable)"))
-  @Config.RangeDouble(min = 1)
-  public static double PickaxeSoftModifier = 2.10;
+  @Config.RangeDouble(min = 0)
+  public static double PickaxeSoftModifier = 0.8;
 
   @Config.Comment(("Terrastone Pickaxe speed modifier for hard materials (set to 1 to disable)"))
-  @Config.RangeDouble(min = 1)
+  @Config.RangeDouble(min = 0)
   public static double PickaxeHardModifier = 2.80;
 
   @Config.Comment(("Terrastone Axe instantly breaks leaves"))
