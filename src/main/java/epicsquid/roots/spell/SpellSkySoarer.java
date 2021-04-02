@@ -7,7 +7,6 @@ import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.properties.Property;
-import epicsquid.roots.recipe.ingredient.ArrowBuilder;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -16,10 +15,13 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
+
+import javax.annotation.Nullable;
 
 public class SpellSkySoarer extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(39);
@@ -75,19 +77,91 @@ public class SpellSkySoarer extends SpellBase {
     setCastSound(ModSounds.Spells.SKY_SOARER);
   }
 
+  private boolean playerSafe(EntityPlayer player, BlockPos.MutableBlockPos position, EnumFacing direction) {
+    int safe_count = 0;
+    int start_y = position.getY();
+
+    position.setY(start_y - (direction == EnumFacing.DOWN ? 2 : 1));
+    IBlockState state = player.world.getBlockState(position);
+    if (!state.isSideSolid(player.world, position, EnumFacing.UP)) {
+      return false;
+    }
+
+    position.setY(start_y);
+    state = player.world.getBlockState(position);
+    if (state.getBlock().isPassable(player.world, position)) {
+      safe_count++;
+    }
+
+    position.move(direction, 1);
+    state = player.world.getBlockState(position);
+    if (state.getBlock().isPassable(player.world, position)) {
+      safe_count++;
+    }
+
+    return safe_count == 2;
+  }
+
+  @Nullable
+  private Vec3d findSafePosition(EntityPlayer player) {
+    Vec3d realPos = new Vec3d(player.posX, player.posY, player.posZ).add(Vec3d.fromPitchYaw(0, player.rotationYaw).scale(jaunt_distance));
+    BlockPos real = new BlockPos(realPos);
+    BlockPos pos = player.world.getHeight(real);
+    int height = player.world.provider.isNether() ? 128 : 256;
+    if (height == 128) {
+      BlockPos.MutableBlockPos dest = new BlockPos.MutableBlockPos(real);
+      int safe_y = -1;
+      for (int i = height - 1; i > real.getY(); i--) {
+        dest.setY(i);
+        if (playerSafe(player, dest, EnumFacing.UP)) {
+          safe_y = i;
+          break;
+        }
+      }
+
+      if (safe_y == -1) {
+        for (int i = 0; i < real.getY(); i++) {
+          dest.setY(i);
+          if (playerSafe(player, dest, EnumFacing.DOWN)) {
+            safe_y = i;
+            break;
+          }
+        }
+      }
+
+      if (safe_y == -1 || safe_y >= height) {
+        return null;
+      }
+
+      return new Vec3d(realPos.x, safe_y + 0.01, realPos.z);
+    } else {
+      IBlockState state = player.world.getBlockState(pos);
+      IBlockState state2 = player.world.getBlockState(pos.up());
+      IBlockState state3 = player.world.getBlockState(pos.down());
+      if (state.getBlock().isPassable(player.world, pos) && state2.getBlock().isPassable(player.world, pos.up()) && state3.isSideSolid(player.world, pos.down(), EnumFacing.UP)) {
+        return new Vec3d(realPos.x, pos.getY() + 0.01, realPos.z);
+      }
+
+      return null;
+    }
+  }
+
   @Override
   public boolean cast(EntityPlayer player, StaffModifierInstanceList info, int ticks) {
     if (!player.world.isRemote) {
       if (info.has(JAUNT)) {
-        Vec3d realPos = new Vec3d(player.posX, player.posY, player.posZ).add(Vec3d.fromPitchYaw(0, player.rotationYaw).scale(jaunt_distance));
-        BlockPos pos = player.world.getHeight(new BlockPos(realPos.x, realPos.y, realPos.z));
-        IBlockState state = player.world.getBlockState(pos);
-        if (state.getBlock().isPassable(player.world, pos)) {
-          //acted = true;
-          if (!player.world.isRemote) {
-            player.setPositionAndUpdate(realPos.x, pos.getY() + 0.01, realPos.z);
-            player.fallDistance = 0f;
-          }
+        Vec3d dest = findSafePosition(player);
+        if (dest == null) {
+          return false;
+        }
+
+        if (dest.y >= 128) {
+          System.out.println("URGH");
+        }
+
+        if (!player.world.isRemote) {
+          player.setPositionAndUpdate(dest.x, dest.y, dest.z);
+          player.fallDistance = 0f;
         }
       } else {
         int life = lifetime;
