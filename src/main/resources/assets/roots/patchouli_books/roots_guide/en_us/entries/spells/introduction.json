@@ -21,7 +21,7 @@
     },
     {
       "type": "text",
-      "text": "$(info) Full information for manipulating staffs and spell slots $(l:crafting/staff)can be found on the page dedicated to the staff$().$(br2)Once a spell has been imbued into your library, you can hold a staff and press '$(k:roots.keybinds.spell_library)' to bring up your spell library.$(br2)$(info) Instructions on using the spell library can be found in the $(l:spells/library)spell library$() entry.$(br2)Although spells may be changed at any time, you may need to re-enable modifiers afterwards."
+      "text": "$(info) Full information for manipulating staffs and spell slots $(l:crafting/staff)can be found on the page dedicated to the staff$().$(br2)Once a spell has been imbued into your library, you can hold a staff and press '$(k:roots.keybinds.spell_library)' to bring up your $(l:spells/library)spell library$().$(br2)$(info) Instructions on using the spell library can be found in the $(l:spells/library)spell library$() entry.$(br2)Although spells may be changed at any time, you may need to re-enable modifiers afterwards."
     },
     {
       "type": "crafting",
