@@ -5,9 +5,11 @@ import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.GuiHandler;
 import epicsquid.roots.Roots;
+import epicsquid.roots.advancements.Advancements;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemDruidKnife;
 import epicsquid.roots.modifiers.IModifierCore;
+import epicsquid.roots.modifiers.ModifierCores;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.spell.info.StaffSpellInfo;
@@ -15,6 +17,8 @@ import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.util.SpellUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -164,7 +168,7 @@ public class TileEntityImposer extends TileBase implements ITickable {
     return modifiers.getByCore(core);
   }
 
-  public void addModifier(IModifierCore core, ItemStack stack) {
+  public void addModifier(IModifierCore core, ItemStack stack, Container container) {
     if (world != null && !world.isRemote) {
       StaffSpellStorage storage = getSpellStorage();
       StaffModifierInstance modifier = getModifier(storage, core);
@@ -181,6 +185,10 @@ public class TileEntityImposer extends TileBase implements ITickable {
       storage.saveToStack();
       markDirty();
       updatePacketViaState();
+      EntityPlayerMP player = Util.getPlayerByContainer(world, container);
+      if (player != null) {
+        Advancements.MODIFIER_TRIGGER.trigger(player, (ModifierCores) modifier.getModifier().getCore());
+      }
     }
   }
 

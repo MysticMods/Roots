@@ -1,11 +1,10 @@
 package epicsquid.roots.modifiers;
 
 import epicsquid.roots.api.Herb;
+import epicsquid.roots.util.types.IRegistryItem;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.Nullable;
-
-public interface IModifierCore {
+public interface IModifierCore extends IRegistryItem {
   Herb getHerb();
 
   ItemStack getStack();

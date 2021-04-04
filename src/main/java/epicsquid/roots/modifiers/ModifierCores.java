@@ -3,11 +3,14 @@ package epicsquid.roots.modifiers;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.util.types.IRegistryItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
+import org.apache.commons.lang3.NotImplementedException;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.Set;
@@ -33,11 +36,14 @@ public enum ModifierCores implements IModifierCore {
   private final Supplier<ItemStack> stack;
   private final Supplier<Herb> herb;
   private final String formatting;
+  private final ResourceLocation registryName;
+  private String cachedName = null;
 
   ModifierCores(ResourceLocation herb, String formatting) {
     this.herb = () -> HerbRegistry.getHerb(herb);
     this.stack = () -> ItemStack.EMPTY;
     this.formatting = formatting;
+    this.registryName = herb;
   }
 
   public Herb getHerb() {
@@ -116,5 +122,26 @@ public enum ModifierCores implements IModifierCore {
       }
     }
     return null;
+  }
+
+  @Override
+  public void setRegistryName(ResourceLocation name) {
+    throw new NotImplementedException("setRegistryName not implemented for this");
+  }
+
+  @Nonnull
+  @Override
+  public ResourceLocation getRegistryName() {
+    return registryName;
+  }
+
+  @Nonnull
+  @Override
+  public String getCachedName() {
+    if (cachedName == null) {
+      cachedName = this.registryName.toString();
+    }
+
+    return cachedName;
   }
 }

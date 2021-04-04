@@ -126,7 +126,7 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
   }
 
   private void addModifierSlot(IModifierCore core, TileEntityImposer imposer, int x, int y) {
-    SlotImposerModifierInfo slot = new SlotImposerModifierInfo(this::isSelectSpell, this::getInstanceFor, core, imposer, x, y);
+    SlotImposerModifierInfo slot = new SlotImposerModifierInfo(this, this::isSelectSpell, this::getInstanceFor, core, imposer, x, y);
     coreSlotMap.put(core, slot);
     addSlotToContainer(slot);
   }
