@@ -6,6 +6,7 @@ import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.tileentity.TileEntityImposer;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
@@ -21,13 +22,15 @@ public class SlotImposerModifierInfo extends Slot {
   private final IModifierCore core;
   private final IBooleanProvider isHidden;
   private final TileEntityImposer tile;
+  private final Container container;
 
-  public SlotImposerModifierInfo(IBooleanProvider isHidden, IModifierProvider info, IModifierCore core, TileEntityImposer tile, int xPosition, int yPosition) {
+  public SlotImposerModifierInfo(Container container, IBooleanProvider isHidden, IModifierProvider info, IModifierCore core, TileEntityImposer tile, int xPosition, int yPosition) {
     super(emptyInventory, 0, xPosition, yPosition);
     this.info = info;
     this.isHidden = isHidden;
     this.core = core;
     this.tile = tile;
+    this.container = container;
   }
 
   @Nullable
@@ -127,7 +130,7 @@ public class SlotImposerModifierInfo extends Slot {
   public void putStack(ItemStack stack) {
     if (!stack.isEmpty()) {
       // Consume the item on the server and the client side!
-      tile.addModifier(core, stack);
+      tile.addModifier(core, stack, container);
     }
   }
 
