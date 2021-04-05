@@ -60,7 +60,7 @@ public class EntityRitualWindwall extends EntityRitualBase {
     if (this.ticksExisted % ritual.interval == 0) {
       List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(posX - ritual.radius_x, posY - ritual.radius_y, posZ - ritual.radius_z, posX + ritual.radius_x, posY + ritual.radius_y, posZ + ritual.radius_z));
       for (Entity e : entities) {
-        if (EntityUtil.isHostile(e) && (Math.pow((posX - e.posX), 2) + Math.pow((posY - e.posY), 2) + Math.pow((posZ - e.posZ), 2)) < ritual.distance) {
+        if (EntityUtil.isHostile(e, RitualRegistry.ritual_windwall) && (Math.pow((posX - e.posX), 2) + Math.pow((posY - e.posY), 2) + Math.pow((posZ - e.posZ), 2)) < ritual.distance) {
           if (!world.isRemote) {
             if (e instanceof EntityLivingBase) {
               ((EntityLivingBase) e).knockBack(this, ritual.knockback, posX - e.posX, posZ - e.posZ);

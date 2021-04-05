@@ -1,0 +1,13 @@
+{
+  "name": "Modifiers",
+  "icon": "roots:imbuer",
+  "category": "spells",
+  "priority": true,
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Example."
+    }
+  ]
+}

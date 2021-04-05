@@ -169,14 +169,14 @@ public class SpellRadiance extends SpellBase {
             for (EntityLivingBase e : entities) {
               if (e != player && !(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
                 if (info.has(HEALING)) {
-                  if (!EntityUtil.isFriendly(e)) {
+                  if (!EntityUtil.isFriendly(e, SpellRadiance.instance)) {
                     continue;
                   }
 
                   e.heal(healing);
                   count++;
                 } else {
-                  if (info.has(PEACEFUL) && EntityUtil.isFriendly(e)) {
+                  if (info.has(PEACEFUL) && EntityUtil.isFriendly(e, SpellRadiance.instance)) {
                     continue;
                   }
                   if (e.hurtTime <= 0 && !e.isDead) {

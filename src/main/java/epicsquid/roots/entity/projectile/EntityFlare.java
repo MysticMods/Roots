@@ -116,7 +116,7 @@ public class EntityFlare extends Entity {
       if (target instanceof EntityPlayer) {
         continue;
       }
-      if (EntityUtil.isFriendly(target) || !EntityUtil.isHostile(target)) {
+      if (EntityUtil.isFriendly(target, RitualRegistry.ritual_fire_storm) || !EntityUtil.isHostile(target, RitualRegistry.ritual_fire_storm)) {
         continue;
       }
       DamageSource source = ModDamage.wildfireDamage(target.world);

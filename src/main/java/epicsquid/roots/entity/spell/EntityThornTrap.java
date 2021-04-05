@@ -100,7 +100,7 @@ public class EntityThornTrap extends EntitySpellModifiable<SpellRoseThorns> {
           List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - offset, posY - offset, posZ - offset, posX + offset, posY + offset, posZ + offset), o -> o != player);
           for (EntityLivingBase entity : entities) {
             if (!(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
-              if (modifiers.has(instance.PEACEFUL) && EntityUtil.isFriendly(entity)) {
+              if (modifiers.has(instance.PEACEFUL) && EntityUtil.isFriendly(entity, SpellRoseThorns.instance)) {
                 continue;
               }
               setDead();

@@ -58,7 +58,7 @@ public class EntityRitualHealingAura extends EntityRitualBase {
         if (e instanceof EntityPlayer) {
           continue;
         }
-        if (EntityUtil.isHostile(e)) {
+        if (EntityUtil.isHostile(e, RitualRegistry.ritual_healing_aura)) {
           continue;
         }
         if (!world.isRemote) {

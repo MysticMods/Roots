@@ -42,7 +42,7 @@ public class DeathEventHandler {
 
     if (entity.getControllingPassenger() != null) return;
 
-    List<Entity> entities = entity.getEntityWorld().getEntitiesInAABBexcluding(entity, BOUNDING_BOX.offset(entity.getPosition()), EntityUtil::isHostile);
+    List<Entity> entities = entity.getEntityWorld().getEntitiesInAABBexcluding(entity, BOUNDING_BOX.offset(entity.getPosition()), o -> EntityUtil.isHostileTo(entity, (EntityPlayer) trueSource));
     if (!entities.isEmpty()) {
       return;
     }

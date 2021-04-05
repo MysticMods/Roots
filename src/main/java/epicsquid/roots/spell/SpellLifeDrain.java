@@ -94,7 +94,7 @@ public class SpellLifeDrain extends SpellBase {
 
   private boolean handleEntity(EntityPlayer player, EntityLivingBase e, StaffModifierInstanceList info, List<EntityLivingBase> peacefuls, float dam, float h) {
     if (e != player && !(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
-      if (info.has(PEACEFUL) && EntityUtil.isFriendly(e)) {
+      if (info.has(PEACEFUL) && EntityUtil.isFriendly(e, SpellLifeDrain.instance)) {
         return false;
       }
       if (e.hurtTime <= 0 && !e.isDead) {
@@ -162,7 +162,7 @@ public class SpellLifeDrain extends SpellBase {
           double y = player.posY + player.getEyeHeight() + player.getLookVec().y * 3.0 * (float) i;
           double z = player.posZ + player.getLookVec().z * 3.0 * (float) i;
           List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 2.0, y - 2.0, z - 2.0, x + 2.0, y + 2.0, z + 2.0));
-          List<EntityLivingBase> peacefuls = entities.stream().filter(EntityUtil::isFriendly).collect(Collectors.toList());
+          List<EntityLivingBase> peacefuls = entities.stream().filter(o -> EntityUtil.isFriendly(o, SpellLifeDrain.instance)).collect(Collectors.toList());
           for (EntityLivingBase e : entities) {
             if (handleEntity(player, e, info, peacefuls, dam, h)) {
               foundTarget = true;

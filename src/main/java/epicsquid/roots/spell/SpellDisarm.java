@@ -121,7 +121,7 @@ public class SpellDisarm extends SpellBase {
     int count = 0;
 
     for (EntityLivingBase entity : entities) {
-      if (EntityUtil.isHostile(entity)) {
+      if (EntityUtil.isHostile(entity, SpellDisarm.instance)) {
         boolean disarmed = false;
         for (EntityEquipmentSlot handSlot : HANDS) {
           ItemStack stack = entity.getItemStackFromSlot(handSlot);

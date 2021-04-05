@@ -75,7 +75,7 @@ public class PotionStormCloud extends Potion {
 
       List<EntityLivingBase> entities = Util.getEntitiesWithinRadius(world, EntityLivingBase.class, entity.getPosition(), radius, radius, radius);
       for (EntityLivingBase e : entities) {
-        if (EntityUtil.isFriendly(e) || e == entity) {
+        if (EntityUtil.isFriendly(e, SpellStormCloud.instance) || e == entity) {
           if (entity.ticksExisted % SpellStormCloud.instance.heal_interval == 0) {
             if (mods.has(SpellStormCloud.HEALING)) {
               e.heal(SpellStormCloud.instance.heal_amount);

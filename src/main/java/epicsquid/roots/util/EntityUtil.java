@@ -1,6 +1,8 @@
 package epicsquid.roots.util;
 
 import epicsquid.roots.config.GeneralConfig;
+import epicsquid.roots.ritual.RitualBase;
+import epicsquid.roots.spell.SpellBase;
 import net.minecraft.entity.*;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.AbstractHorse;
@@ -10,13 +12,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nullable;
 import java.util.HashSet;
 import java.util.Set;
 
 public class EntityUtil {
-  private static Set<ResourceLocation> forcedFriendly = new HashSet<>();
-  private static Set<ResourceLocation> forcedHostile = new HashSet<>();
-
   public static boolean isFamiliar(Entity entity) {
     if (entity instanceof EntityPlayer) return false;
 
@@ -53,17 +53,44 @@ public class EntityUtil {
     return false;
   }
 
+  public static boolean isHostile(Entity entity, SpellBase spell) {
+    return isHostile(entity, spell, null);
+  }
+
+  public static boolean isHostile(Entity entity, RitualBase ritual) {
+    return isHostile(entity, null, ritual);
+  }
+
   public static boolean isHostile(Entity entity) {
+    return isHostile(entity, null, null);
+  }
+
+  public static boolean isHostile(Entity entity, @Nullable SpellBase spell, @Nullable RitualBase ritual) {
+
     if (entity instanceof EntityPlayer) return false;
 
     ResourceLocation rl = EntityList.getKey(entity);
 
-    if (forcedFriendly.contains(rl)) {
-      return false;
+    if (spell != null) {
+      if (EntityLists.getSpell(spell, EntityLists.Type.BLOCK).contains(rl)) {
+        return true;
+      } else if (EntityLists.getSpell(spell, EntityLists.Type.ALLOW).contains(rl)) {
+        return false;
+      }
     }
 
-    if (forcedHostile.contains(rl)) {
+    if (ritual != null) {
+      if (EntityLists.getRitual(ritual, EntityLists.Type.BLOCK).contains(rl)) {
+        return true;
+      } else if (EntityLists.getRitual(ritual, EntityLists.Type.ALLOW).contains(rl)) {
+        return false;
+      }
+    }
+
+    if (EntityLists.getGeneral(EntityLists.Type.BLOCK).contains(rl)) {
       return true;
+    } else if (EntityLists.getGeneral(EntityLists.Type.ALLOW).contains(rl)) {
+      return false;
     }
 
     if (entity instanceof IMob) {
@@ -78,17 +105,43 @@ public class EntityUtil {
 
   }
 
+  public static boolean isFriendly(Entity entity, SpellBase spell) {
+    return isFriendly(entity, spell, null);
+  }
+
+  public static boolean isFriendly(Entity entity, RitualBase ritual) {
+    return isFriendly(entity, null, ritual);
+  }
+
   public static boolean isFriendly(Entity entity) {
+    return isFriendly(entity, null, null);
+  }
+
+  public static boolean isFriendly(Entity entity, @Nullable SpellBase spell, @Nullable RitualBase ritual) {
     if (entity instanceof EntityPlayer) return false;
 
     ResourceLocation rl = EntityList.getKey(entity);
 
-    if (forcedFriendly.contains(rl)) {
-      return true;
+    if (spell != null) {
+      if (EntityLists.getSpell(spell, EntityLists.Type.BLOCK).contains(rl)) {
+        return false;
+      } else if (EntityLists.getSpell(spell, EntityLists.Type.ALLOW).contains(rl)) {
+        return true;
+      }
     }
 
-    if (forcedHostile.contains(rl)) {
+    if (ritual != null) {
+      if (EntityLists.getRitual(ritual, EntityLists.Type.BLOCK).contains(rl)) {
+        return false;
+      } else if (EntityLists.getRitual(ritual, EntityLists.Type.ALLOW).contains(rl)) {
+        return true;
+      }
+    }
+
+    if (EntityLists.getGeneral(EntityLists.Type.BLOCK).contains(rl)) {
       return false;
+    } else if (EntityLists.getGeneral(EntityLists.Type.ALLOW).contains(rl)) {
+      return true;
     }
 
     if (entity instanceof EntityAnimal) {
@@ -102,8 +155,20 @@ public class EntityUtil {
     return !isHostile(entity);
   }
 
+  public static boolean isHostileTo (Entity entity, EntityPlayer player, SpellBase spell) {
+    return isHostileTo(entity, player, spell, null);
+  }
+
+  public static boolean isHostileTo (Entity entity, EntityPlayer player, RitualBase ritual) {
+    return isHostileTo(entity, player, null, ritual);
+  }
+
   public static boolean isHostileTo(Entity entity, EntityPlayer player) {
-    if (isHostile(entity)) return true;
+    return isHostileTo(entity, player, null, null);
+  }
+
+  public static boolean isHostileTo(Entity entity, EntityPlayer player, @Nullable SpellBase spell, @Nullable RitualBase ritual) {
+    if (isHostile(entity, spell, ritual)) return true;
 
     if (entity instanceof EntityLiving) {
       EntityLiving living = (EntityLiving) entity;
@@ -122,8 +187,20 @@ public class EntityUtil {
 
   }
 
+  public static boolean isFriendlyTo (Entity entity, EntityPlayer player, SpellBase spell) {
+    return isFriendlyTo(entity, player, spell, null);
+  }
+
+  public static boolean isFriendlyTo (Entity entity, EntityPlayer player, RitualBase ritual) {
+    return isFriendlyTo(entity, player, null, ritual);
+  }
+
   public static boolean isFriendlyTo(Entity entity, EntityPlayer player) {
-    if (!isFriendly(entity)) {
+    return isFriendlyTo(entity, player, null, null);
+  }
+
+  public static boolean isFriendlyTo(Entity entity, EntityPlayer player, @Nullable SpellBase spell, @Nullable RitualBase ritual) {
+    if (!isFriendly(entity, spell, ritual)) {
       return false;
     }
 
