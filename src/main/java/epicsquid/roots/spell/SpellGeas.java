@@ -90,7 +90,7 @@ public class SpellGeas extends SpellBase {
       if (EntityUtil.isBoss(e)) {
         return 0;
       }
-      if (EntityUtil.isHostileTo(e, player)) {
+      if (EntityUtil.isHostileTo(e, player, SpellGeas.instance)) {
         if (!player.world.isRemote) {
           if (info.has(GUARDIANS) && SlaveUtil.canBecomeSlave(e)) {
             EntityLivingBase slave = SlaveUtil.enslave(e);
@@ -138,7 +138,7 @@ public class SpellGeas extends SpellBase {
       List<EntityLivingBase> entities = player.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(x - 4.0, y - 4.0, z - 4.0, x + 5.0, y + 5.0, z + 5.0));
       if (peaceful) {
         for (EntityLivingBase e : entities) {
-          if (EntityUtil.isFriendlyTo(e, player)) {
+          if (EntityUtil.isFriendlyTo(e, player, SpellGeas.instance)) {
             e.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, savior_duration, savior_amplifier));
           }
         }

@@ -93,7 +93,7 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
             for (EntityLivingBase entity : entities) {
               if (entity != player && !(entity instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
                 if (modifiers != null) {
-                  if (modifiers.has(SpellWildfire.PEACEFUL) && EntityUtil.isFriendly(entity)) {
+                  if (modifiers.has(SpellWildfire.PEACEFUL) && EntityUtil.isFriendly(entity, SpellWildfire.instance)) {
                     continue;
                   }
                   hit = true;

@@ -127,7 +127,7 @@ public class SpellAcidCloud extends SpellBase {
         // TODO: Additional visual effect
 
         if (info.has(HEALING)) {
-          if (EntityUtil.isHostile(e) || EntityUtil.isHostileTo(e, player)) {
+          if (EntityUtil.isHostile(e, SpellAcidCloud.instance) || EntityUtil.isHostileTo(e, player, SpellAcidCloud.instance)) {
             continue;
           }
           if (regen_duration != -1) {
@@ -145,7 +145,7 @@ public class SpellAcidCloud extends SpellBase {
           // TODO: Make instanceof check helper function
           if (e != player && !(e instanceof EntityPlayer && !FMLCommonHandler.instance().getMinecraftServerInstance().isPVPEnabled())) {
             if (e.hurtTime <= 0 && !e.isDead) {
-              if (info.has(PEACEFUL) && EntityUtil.isFriendly(e)) {
+              if (info.has(PEACEFUL) && EntityUtil.isFriendly(e, SpellAcidCloud.instance)) {
                 continue;
               }
               if (info.has(WEAKNESS)) {

@@ -232,7 +232,7 @@ public class SpellDandelionWinds extends SpellBase {
   }
 
   private void flingLivingEntity(EntityLivingBase e, Vec3d lookVec, double motion, StaffModifierInstanceList info) {
-    if (info.has(PEACEFUL) && EntityUtil.isFriendly(e)) {
+    if (info.has(PEACEFUL) && EntityUtil.isFriendly(e, SpellDandelionWinds.instance)) {
       return;
     }
     flingEntity(e, lookVec, motion, info);

@@ -50,7 +50,7 @@ public class PotionAnimalSense extends Potion {
       ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(entity.getEntityData(), SpellExtension.instance);
       int[] radius = SpellExtension.instance.getRadiusAnimals();
       AxisAlignedBB aabb = AABBUtil.buildFromEntity(entity).grow(radius[0], radius[1], radius[2]);
-      for (EntityLivingBase mob : entity.world.getEntitiesWithinAABB(EntityLivingBase.class, aabb, EntityUtil::isFriendly)) {
+      for (EntityLivingBase mob : entity.world.getEntitiesWithinAABB(EntityLivingBase.class, aabb, o -> EntityUtil.isFriendly(o, SpellExtension.instance))) {
         mob.addPotionEffect(new PotionEffect(MobEffects.GLOWING, 10, 0, false, false));
       }
     }

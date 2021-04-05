@@ -152,7 +152,7 @@ public class SpellDesaturate extends SpellBase {
 
       if (!info.has(THOUGHTFUL) && overheal > 0) {
         if (info.has(PEACEFUL)) {
-          List<EntityLivingBase> entities = caster.world.getEntitiesWithinAABB(EntityLivingBase.class, box.offset(caster.getPosition()), EntityUtil::isFriendly);
+          List<EntityLivingBase> entities = caster.world.getEntitiesWithinAABB(EntityLivingBase.class, box.offset(caster.getPosition()), o -> EntityUtil.isFriendly(o, SpellDesaturate.instance));
           int count = 0;
           while (entities.size() > 0 && count < heal_amount) {
             int targ = Util.rand.nextInt(entities.size());
@@ -179,7 +179,7 @@ public class SpellDesaturate extends SpellBase {
           caster.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, (int) (shield_base * overheal), shield_amplifier, false, false));
           // Add a shield
         } else if (info.has(DAMAGE)) {
-          List<EntityLivingBase> entities = caster.world.getEntitiesWithinAABB(EntityLivingBase.class, box.offset(caster.getPosition()), EntityUtil::isHostile);
+          List<EntityLivingBase> entities = caster.world.getEntitiesWithinAABB(EntityLivingBase.class, box.offset(caster.getPosition()), o -> EntityUtil.isHostile(o, SpellDesaturate.instance));
           int count = 0;
           while (entities.size() > 0 && count < damage_amount) {
             int targ = Util.rand.nextInt(entities.size());
@@ -189,7 +189,7 @@ public class SpellDesaturate extends SpellBase {
             count++;
           }
         } else if (info.has(LEVITATE)) {
-          List<EntityLivingBase> entities = caster.world.getEntitiesWithinAABB(EntityLivingBase.class, box.offset(caster.getPosition()), EntityUtil::isHostile);
+          List<EntityLivingBase> entities = caster.world.getEntitiesWithinAABB(EntityLivingBase.class, box.offset(caster.getPosition()), o->EntityUtil.isHostile(o, SpellDesaturate.instance));
           int count = 0;
           while (entities.size() > 0 && count < levitation_targets) {
             int targ = Util.rand.nextInt(entities.size());

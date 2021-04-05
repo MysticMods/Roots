@@ -103,9 +103,9 @@ public class SpellSanctuary extends SpellBase {
         boolean reject = false;
         if (e instanceof IProjectile) {
           reject = true;
-        } else if (EntityUtil.isHostile(e)) {
+        } else if (EntityUtil.isHostile(e, SpellSanctuary.instance)) {
           reject = true;
-        } else if (info.has(UNPEACEFUL) && EntityUtil.isFriendly(e)) {
+        } else if (info.has(UNPEACEFUL) && EntityUtil.isFriendly(e, SpellSanctuary.instance)) {
           reject = true;
         } else if (SpellConfig.spellFeaturesCategory.getSanctuaryBlacklist().contains(EntityList.getKey(e))) {
           reject = true;
