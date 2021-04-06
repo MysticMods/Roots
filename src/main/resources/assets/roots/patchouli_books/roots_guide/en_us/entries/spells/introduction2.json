@@ -1,5 +1,5 @@
 {
-  "name": "Introduction to Modifiers",
+  "name": "Mechanics of Modifiers",
   "icon": "minecraft:writable_book",
   "category": "spells",
   "priority": true,
@@ -7,14 +7,14 @@
   "pages": [
     {
       "type": "text",
-      "text": "While spells have specific functions that are outlined in their individual entries, they can be customised in many ways with modifiers.$(br2)As a once-only task, the modifier itself must be $(l:spells/introduction2#unlock)unlocked$().$(br2)After this, the modifier merely needs be enabled in the staff, either through the imposer or the $(l:spells/library)spell library$() interface."
+      "text": "While spells all function in unique ways, they can be modified in many ways. This entry will discuss the mechanics of imposing and enabling. For all other topics, see $(l:spells/modifiers)modifiers$().$(br2)$(l:spells/introduction2#unlock)Unlocking$() a modifier is permanent for all copies of that spell. It merely needs be enabled in your staff, via imposer or $(l:spells/library)spell library$()."
     },
     {
       "type": "crafting",
       "title": "Imposers",
       "anchor": "imposer",
       "recipe": "roots:imposer",
-      "text": "Inserting a staff into the imposer ($(l:spells/library)with spells selected$()) allows you to both insert modifiers globally and enable them for this staff.$(br2)$(info) Right-click with staff and then again with a $(l:crafting/knives)knife$() to open the interface."
+      "text": "Inserting a staff into the imposer ($(l:spells/library)with spells selected$()) allows you to both insert modifiers globally and enable them for this staff.$(br2)$(info) Right-click an imposer with staff inside with a $(l:crafting/knives)knife$() to open the interface."
     },
     {
       "type": "image",
