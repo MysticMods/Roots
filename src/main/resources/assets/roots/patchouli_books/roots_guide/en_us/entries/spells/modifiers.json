@@ -3,7 +3,7 @@
   "icon": "roots:imbuer",
   "category": "spells",
   "priority": true,
-  "sortnum": 4,
+  "sortnum": 5,
   "pages": [
     {
       "type": "text",
