@@ -1,8 +1,13 @@
 package epicsquid.roots.config;
 
 import epicsquid.roots.Roots;
+import epicsquid.roots.spell.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,7 +16,36 @@ import java.util.stream.Stream;
 @Config.LangKey("config.roots.category.spells")
 @Config(modid = Roots.MODID, name = "roots/spells", category = "spells")
 public class SpellConfig {
-
+  @SubscribeEvent(priority = EventPriority.HIGH)
+  public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
+    if (event.getModID().equals(Roots.MODID)) {
+      ConfigManager.sync(Roots.MODID, Config.Type.INSTANCE);
+      SpellWildfire.instance.setSound(SpellConfig.spellSoundsCategory.soundWildFire);
+      SpellSanctuary.instance.setSound(SpellConfig.spellSoundsCategory.soundSanctuary);
+      SpellDandelionWinds.instance.setSound(SpellConfig.spellSoundsCategory.soundDandelionWinds);
+      SpellRoseThorns.instance.setSound(SpellConfig.spellSoundsCategory.soundRoseThorns);
+      SpellShatter.instance.setSound(SpellConfig.spellSoundsCategory.soundShatter);
+      SpellPetalShell.instance.setSound(SpellConfig.spellSoundsCategory.soundPetalShell);
+      SpellTimeStop.instance.setSound(SpellConfig.spellSoundsCategory.soundTimeStop);
+      SpellSkySoarer.instance.setSound(SpellConfig.spellSoundsCategory.soundSkySoarer);
+      SpellLifeDrain.instance.setSound(SpellConfig.spellSoundsCategory.soundLifeDrain);
+      SpellAcidCloud.instance.setSound(SpellConfig.spellSoundsCategory.soundAcidCloud);
+      SpellGrowthInfusion.instance.setSound(SpellConfig.spellSoundsCategory.soundGrowthInfusion);
+      SpellGeas.instance.setSound(SpellConfig.spellSoundsCategory.soundGeas);
+      SpellRadiance.instance.setSound(SpellConfig.spellSoundsCategory.soundRadiance);
+      SpellHarvest.instance.setSound(SpellConfig.spellSoundsCategory.soundHarvest);
+      SpellFeyLight.instance.setSound(SpellConfig.spellSoundsCategory.soundFeyLight);
+      SpellStormCloud.instance.setSound(SpellConfig.spellSoundsCategory.soundStormCloud);
+      SpellSaturate.instance.setSound(SpellConfig.spellSoundsCategory.soundSaturate);
+      SpellDesaturate.instance.setSound(SpellConfig.spellSoundsCategory.soundDesaturate);
+      SpellChrysopoeia.instance.setSound(SpellConfig.spellSoundsCategory.soundChrysopoeia);
+      SpellDisarm.instance.setSound(SpellConfig.spellSoundsCategory.soundDisarm);
+      SpellNaturesScythe.instance.setSound(SpellConfig.spellSoundsCategory.soundNaturesScythe);
+      SpellAquaBubble.instance.setSound(SpellConfig.spellSoundsCategory.soundAquaBubble);
+      SpellAugment.instance.setSound(SpellConfig.spellSoundsCategory.soundAugment);
+      SpellExtension.instance.setSound(SpellConfig.spellSoundsCategory.soundExtension);
+    }
+  }
 
   @Config.LangKey("config.roots.subcategory.disable_spells")
   public static DisableSpellsCategory disableSpellsCategory = new DisableSpellsCategory();
