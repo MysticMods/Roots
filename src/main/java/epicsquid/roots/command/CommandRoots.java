@@ -111,6 +111,8 @@ public class CommandRoots extends CommandBase {
           for (SpellBase spell : SpellRegistry.getSpells()) {
             library.addSpell(spell);
           }
+        } else if (args.length == 2 && args[1].equals("kill")) {
+          SpellLibraryRegistry.clearData(player);
         } else {
           SpellLibraryData data = SpellLibraryRegistry.getData(player);
           for (LibrarySpellInfo info : data) {

@@ -16,6 +16,14 @@ public class SpellLibraryRegistry extends UUIDRegistry<SpellLibraryData> {
   }
 
   public static SpellLibraryData getData(EntityPlayer player) {
-    return INSTANCE.getDataInternal(player.getUniqueID());
+    return getData(player.getUniqueID());
+  }
+
+  public static SpellLibraryData clearData (UUID id) {
+    return INSTANCE.clearDataInternal(id);
+  }
+
+  public static SpellLibraryData clearData (EntityPlayer player) {
+    return clearData(player.getUniqueID());
   }
 }
