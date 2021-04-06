@@ -94,14 +94,20 @@ public class SpellAcidCloud extends SpellBase {
         new ItemStack(ModItems.runic_dust),
         new ItemStack(Items.ROTTEN_FLESH)
     );
-    setCastSound(ModSounds.Spells.ACID_CLOUD);
+    //setCastSound(ModSounds.Spells.ACID_CLOUD);
   }
 
   public static AxisAlignedBB boxGeneral, boxBoost;
 
-  private double getMultiplier(double time, float min, float max) {
-    int peak = 18000; // Allow this to be configured
-    return (max - min) * Math.exp(-(1.0 / (24000 * 100)) * (time - peak)) + min;
+  private double getMultiplier(double t, float min, float max) {
+    int peak = 18000;
+    int[] bounds = new int[]{12000, 6000};
+    int threshold = peak / 3;
+    if (t < bounds[0] && t > bounds[1]) {
+      return 0; // no bonus
+    } else {
+      return max + Math.abs((t - peak) / threshold) * (min - max);
+    }
   }
 
   @Override
