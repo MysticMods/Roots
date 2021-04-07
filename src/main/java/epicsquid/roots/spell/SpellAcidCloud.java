@@ -11,6 +11,7 @@ import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageAcidCloudFX;
 import epicsquid.roots.properties.Property;
+import epicsquid.roots.util.DamageUtil;
 import epicsquid.roots.util.EntityUtil;
 import epicsquid.roots.util.types.RandomIterable;
 import net.minecraft.entity.EntityLivingBase;
@@ -159,14 +160,18 @@ public class SpellAcidCloud extends SpellBase {
                 e.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, weakness_duration, weakness_amplifier));
               }
               if (info.has(FIRE)) {
+                DamageUtil.unhurt(e);
                 e.attackEntityFrom(ModDamage.fireDamageFrom(player), damage * modifier / 2);
+                DamageUtil.unhurt(e);
                 e.attackEntityFrom(DamageSource.causeMobDamage(player), damage * modifier / 2);
                 e.setFire(fireDuration);
               } else {
+                DamageUtil.unhurt(e);
                 e.attackEntityFrom(DamageSource.causeMobDamage(player), damage * modifier);
               }
               // TODO: Additional visual effect
               if (info.has(UNDEAD) && e.isEntityUndead()) {
+                DamageUtil.unhurt(e);
                 e.attackEntityFrom(ModDamage.radiantDamageFrom(player), undead_damage * modifier);
               }
               if (info.has(SLOWING)) {
