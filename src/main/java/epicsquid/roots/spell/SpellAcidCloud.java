@@ -101,12 +101,12 @@ public class SpellAcidCloud extends SpellBase {
 
   private double getMultiplier(double t, float min, float max) {
     int peak = 18000;
-    int[] bounds = new int[]{12000, 6000};
+    int[] bounds = new int[]{12500, 23500};
     int threshold = peak / 3;
-    if (t < bounds[0] && t > bounds[1]) {
-      return 0; // no bonus
-    } else {
+    if (t > bounds[0] && t < bounds[1]) {
       return max + Math.abs((t - peak) / threshold) * (min - max);
+    } else {
+      return 0;
     }
   }
 
@@ -122,7 +122,8 @@ public class SpellAcidCloud extends SpellBase {
       }
       float modifier = 1;
       if (info.has(NIGHT)) {
-        modifier += getMultiplier(player.world.getWorldTime(), night_low, night_high);
+        double mult = getMultiplier(player.world.getWorldTime(), night_low, night_high);
+        modifier += mult;
       }
       if (info.has(UNDERWATER)) {
         modifier += underwater_boost;
