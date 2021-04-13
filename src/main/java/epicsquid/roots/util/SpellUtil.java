@@ -15,6 +15,9 @@ import epicsquid.roots.world.data.SpellLibraryData;
 import epicsquid.roots.world.data.SpellLibraryRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 public class SpellUtil {
   public static boolean isValidStaff(ItemStack stack) {
@@ -27,6 +30,24 @@ public class SpellUtil {
 
   public static boolean isValidDust(ItemStack stack) {
     return stack.getItem() == ModItems.spell_dust || stack.getItem() == ModItems.spell_icon;
+  }
+
+  public static void updateModifiers (EntityPlayer player) {
+    if (player.world.isRemote) {
+      return;
+    }
+
+    IItemHandler handler = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+    if (handler == null) {
+      return;
+    }
+
+    for (int i = 0; i < handler.getSlots(); i++) {
+      ItemStack stack = handler.getStackInSlot(i);
+      if (isStaff(stack)) {
+        updateModifiers(stack, player);
+      }
+    }
   }
 
   public static boolean updateModifiers(ItemStack stack, EntityPlayer player) {
