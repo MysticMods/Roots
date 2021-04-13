@@ -106,19 +106,23 @@ public class EventManager {
           attacker.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, SpellAquaBubble.instance.slow_duration, SpellAquaBubble.instance.slow_amplifier));
         }
         if (mods.has(SpellAquaBubble.UNDEAD) && attacker.isEntityUndead()) {
-          event.setAmount(event.getAmount() * SpellAquaBubble.instance.undead_reduction);
+          float amount = event.getAmount() * SpellAquaBubble.instance.undead_reduction;
+          event.setAmount(amount < 1 ? 0 : amount);
         }
       }
 
       if (damage.isMagicDamage() && mods.has(SpellAquaBubble.MAGIC_RESIST)) {
-        event.setAmount(event.getAmount() * SpellAquaBubble.instance.magic_reduction);
+        float amount = event.getAmount() * SpellAquaBubble.instance.magic_reduction;
+        event.setAmount(amount < 1 ? 0 : amount);
       }
 
       if (damage.isFireDamage()) {
-        event.setAmount(event.getAmount() * SpellAquaBubble.instance.fire_reduction);
+        float amount = event.getAmount() * SpellAquaBubble.instance.fire_reduction;
+        event.setAmount(amount < 1 ? 0 : amount);
       }
       if (damage == DamageSource.LAVA) {
-        event.setAmount(event.getAmount() * SpellAquaBubble.instance.lava_reduction);
+        float amount = event.getAmount() * SpellAquaBubble.instance.lava_reduction;
+        event.setAmount(amount < 1 ? 0 : amount);
       }
     }
 

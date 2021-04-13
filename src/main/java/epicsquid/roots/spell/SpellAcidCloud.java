@@ -161,9 +161,9 @@ public class SpellAcidCloud extends SpellBase {
               }
               if (info.has(FIRE)) {
                 DamageUtil.unhurt(e);
-                e.attackEntityFrom(ModDamage.fireDamageFrom(player), damage * modifier / 2);
+                e.attackEntityFrom(ModDamage.fireDamageFrom(player), (damage * modifier) / 2);
                 DamageUtil.unhurt(e);
-                e.attackEntityFrom(DamageSource.causeMobDamage(player), damage * modifier / 2);
+                e.attackEntityFrom(DamageSource.causeMobDamage(player), (damage * modifier) / 2);
                 e.setFire(fireDuration);
               } else {
                 DamageUtil.unhurt(e);
