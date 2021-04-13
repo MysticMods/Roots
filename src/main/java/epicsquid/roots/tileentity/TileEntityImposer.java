@@ -6,19 +6,20 @@ import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.GuiHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.advancements.Advancements;
+import epicsquid.roots.container.ContainerImposer;
 import epicsquid.roots.init.ModItems;
 import epicsquid.roots.item.ItemDruidKnife;
 import epicsquid.roots.modifiers.IModifierCore;
-import epicsquid.roots.modifiers.ModifierCores;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.util.SpellUtil;
+import epicsquid.roots.world.data.SpellLibraryData;
+import epicsquid.roots.world.data.SpellLibraryRegistry;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -168,7 +169,7 @@ public class TileEntityImposer extends TileBase implements ITickable {
     return modifiers.getByCore(core);
   }
 
-  public void addModifier(IModifierCore core, ItemStack stack, Container container) {
+  public void addModifier(IModifierCore core, ItemStack stack, ContainerImposer container) {
     if (world != null && !world.isRemote) {
       StaffSpellStorage storage = getSpellStorage();
       StaffModifierInstance modifier = getModifier(storage, core);
@@ -181,14 +182,21 @@ public class TileEntityImposer extends TileBase implements ITickable {
         return;
       }
 
+      // Why sisn't this updatinfg the library
+
       modifier.setApplied();
       storage.saveToStack();
       markDirty();
       updatePacketViaState();
-      EntityPlayerMP player = Util.getPlayerByContainer(world, container);
-      if (player != null) {
-        Advancements.MODIFIER_TRIGGER.trigger(player, (ModifierCores) modifier.getModifier().getCore());
+      EntityPlayer player = container.getPlayer();
+      Advancements.MODIFIER_TRIGGER.trigger((EntityPlayerMP) player, modifier.getModifier().getCore());
+      SpellLibraryData data = SpellLibraryRegistry.getData(player);
+      StaffSpellInfo info = storage.getSpellInSlot(slot);
+      if (info == null) {
+        throw new NullPointerException("StaffSpellInfo for applied modifier was somehow null");
       }
+      data.updateSpell(info.toLibrary());
+      SpellUtil.updateModifiers(player);
     }
   }
 

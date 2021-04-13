@@ -1,6 +1,7 @@
 package epicsquid.roots.container.slots;
 
 import epicsquid.mysticallib.util.ItemUtil;
+import epicsquid.roots.container.ContainerImposer;
 import epicsquid.roots.modifiers.IModifierCore;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
@@ -22,9 +23,9 @@ public class SlotImposerModifierInfo extends Slot {
   private final IModifierCore core;
   private final IBooleanProvider isHidden;
   private final TileEntityImposer tile;
-  private final Container container;
+  private final ContainerImposer container;
 
-  public SlotImposerModifierInfo(Container container, IBooleanProvider isHidden, IModifierProvider info, IModifierCore core, TileEntityImposer tile, int xPosition, int yPosition) {
+  public SlotImposerModifierInfo(ContainerImposer container, IBooleanProvider isHidden, IModifierProvider info, IModifierCore core, TileEntityImposer tile, int xPosition, int yPosition) {
     super(emptyInventory, 0, xPosition, yPosition);
     this.info = info;
     this.isHidden = isHidden;

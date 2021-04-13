@@ -42,13 +42,19 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
   private boolean shiftDown = false;
   private boolean altDown = false;
   private boolean ctrlDown = false;
+  private final EntityPlayer player;
 
   public ContainerImposer(EntityPlayer player, TileEntityImposer tile) {
     this.tile = tile;
+    this.player = player;
 
     createPlayerInventory(player.inventory);
     createModifierSlots();
     createSpellSlots();
+  }
+
+  public EntityPlayer getPlayer() {
+    return player;
   }
 
   public boolean isSelectSpell() {
