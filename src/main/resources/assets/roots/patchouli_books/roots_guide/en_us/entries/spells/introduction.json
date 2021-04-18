@@ -7,6 +7,10 @@
   "pages": [
     {
       "type": "text",
+      "text": "The creation and management of spells is be a complicated system to understand, and divided into multiple chapters.$(li)This chapter covers basic concepts, including imbuing.$(li)$(l:spells/introduction2)The mechanics of imposing modifiers$()$(li)$(l:spells/modifiers)The functional uses of modifiers and spells$()$(li)$(l:spells/library)The mechanics of the spell library and its uses$()."
+    },
+    {
+      "type": "text",
       "text": "Spells are, like $(l:rituals/introduction)rituals$(), a way of unleashing the wild energy contained within herbs, harnessing it to effect change in the world around you.$(br2)Unlike rituals, spells merely require that you carry with you a $(l:crafting/staff)staff$() and $(l:spells/component_pouches)any component pouch$().$(br2)$(warning) However, like rituals, certain steps must be completed before you can begin"
     },
     {
