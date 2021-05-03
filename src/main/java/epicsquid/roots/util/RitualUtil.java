@@ -2,6 +2,7 @@ package epicsquid.roots.util;
 
 import com.google.common.collect.Sets;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.config.RunedWoodConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.tileentity.TileEntityCatalystPlate;
 import net.minecraft.block.Block;
@@ -219,74 +220,40 @@ public class RitualUtil {
   }
 
   public enum RunedWoodType implements StandingPillar {
-    ACACIA(() -> ModBlocks.runed_acacia,
-        (o) -> o.getBlock() == Blocks.LOG2 && o.getValue(BlockNewLog.VARIANT) == BlockPlanks.EnumType.ACACIA,
-        () -> new ItemStack(Blocks.LOG2, 1, 0),
-        () -> Blocks.LOG2.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.ACACIA)
-    ),
-    OAK(() -> ModBlocks.runed_oak,
-        (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.OAK,
-        () -> new ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.OAK.getMetadata()),
-        () -> Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.OAK)
-    ),
-    DARK_OAK(() -> ModBlocks.runed_dark_oak,
-        (o) -> o.getBlock() == Blocks.LOG2 && o.getValue(BlockNewLog.VARIANT) == BlockPlanks.EnumType.DARK_OAK,
-        () -> new ItemStack(Blocks.LOG2, 1, 1),
-        () -> Blocks.LOG2.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.DARK_OAK)
-    ),
-    BIRCH(() -> ModBlocks.runed_birch,
-        (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.BIRCH,
-        () -> new ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.BIRCH.getMetadata()),
-        () -> Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH)
-    ),
-    JUNGLE(() -> ModBlocks.runed_jungle,
-        (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.JUNGLE,
-        () -> new ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.JUNGLE.getMetadata()),
-        () -> Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE)
-    ),
-    SPRUCE(() -> ModBlocks.runed_spruce,
-        (o) -> o.getBlock() == Blocks.LOG && o.getValue(BlockOldLog.VARIANT) == BlockPlanks.EnumType.SPRUCE,
-        () -> new ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.SPRUCE.getMetadata()),
-        () -> Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.SPRUCE)
-    ),
-    WILDWOOD(() -> ModBlocks.runed_wildwood,
-        (o) -> o.getBlock() == ModBlocks.wildwood_log,
-        () -> new ItemStack(ModBlocks.wildwood_log),
-        () -> ModBlocks.wildwood_log.getDefaultState()
-    );
+    ACACIA(RunedWoodConfig.ACACIA),
+    OAK(RunedWoodConfig.OAK),
+    DARK_OAK(RunedWoodConfig.DARK_OAK),
+    BIRCH(RunedWoodConfig.BIRCH),
+    JUNGLE(RunedWoodConfig.JUNGLE),
+    SPRUCE(RunedWoodConfig.SPRUCE),
+    WILDWOOD(RunedWoodConfig.WILDWOOD);
 
-    private Supplier<Block> supplier;
-    private Predicate<IBlockState> matcher;
-    private Supplier<ItemStack> visual;
-    private Supplier<IBlockState> base;
+    private final RunedWoodConfig.RunedPillarConfig config;
 
-    RunedWoodType(Supplier<Block> supplier, Predicate<IBlockState> matcher, Supplier<ItemStack> visual, Supplier<IBlockState> base) {
-      this.supplier = supplier;
-      this.matcher = matcher;
-      this.visual = visual;
-      this.base = base;
+    RunedWoodType(RunedWoodConfig.RunedPillarConfig config) {
+      this.config = config;
     }
 
     public ItemStack getVisual() {
-      return visual.get();
+      return this.config.getItemStack();
     }
 
     public IBlockState getBase() {
-      return base.get();
+      return this.config.getPillarState();
     }
 
     public Block getTopper() {
-      return supplier.get();
+      return this.config.getCapstoneState().getBlock();
     }
 
     @Override
     public boolean matchesBase(IBlockState state) {
-      return matcher.test(state);
+      return this.config.getPillarMatcher().test(state);
     }
 
     @Override
     public boolean matchesTop(IBlockState state) {
-      return state.getBlock() == getTopper();
+      return this.config.getCapstoneMatcher().test(state);
     }
 
     @Nullable

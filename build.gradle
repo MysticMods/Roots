@@ -1,13 +1,24 @@
 buildscript {
     repositories {
-        jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
+        // jcenter()
+        mavenCentral()
+        maven {
+            name = "jitpack"
+            url = "https://jitpack.io/"
+        }
+        maven {
+            name = "forge"
+            url = "https://maven.minecraftforge.net/"
+        }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath("com.github.DStrand1:ForgeGradle:FG_2.3-SNAPSHOT") {
+            changing = true
+        }
     }
 }
-apply plugin: 'net.minecraftforge.gradle.forge'
+
+apply plugin: "net.minecraftforge.gradle.forge"
 
 version = "${minecraft_version}-${mod_version}"
 group = "epicsquid.roots"
