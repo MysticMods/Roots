@@ -7,11 +7,17 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example"
+      "text": "Ancient cloud berry bushes were attuned to the sky and had to be tied down lest they tear themselves from the soil and floated upwards.$(br2)Nowadays, still maintaining that attunement, the blossoms merely float like feathers when dropped.$(br2)Used in spells and rituals associated with the sky, $(l:herbs/cloud_berry#renew)it is also a renewable crop$()."
     },
     {
       "type": "ritual_crafting_template",
       "recipe": "cloud_berry"
+    },
+    {
+      "type": "text",
+      "anchor": "renew",
+      "title": "Renewability",
+      "text": "As an elemental herb, it requires one of the five forms of $(l:resources/elemental_soil)elemental soil$() to grow on, although it does not require a match between elements.$(br2)Otherwise, it grows in the same way as any other crop would, and is ripe when clusters of white cling to thin strands of green growth that sway even without a breeze."
     }
   ]
 }
