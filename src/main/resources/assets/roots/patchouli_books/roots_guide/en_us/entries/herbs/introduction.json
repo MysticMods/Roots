@@ -12,11 +12,12 @@
     },
     {
       "type": "text",
-      "text": "While you could spend time breaking grass in order to build up a large supply of these herbs, there are alternatives.$(br2)$(l:herbs/terra_moss)Terra Moss$() (the only herb that does not grow on soil of some description) is renewable through the $(l:rituals/ritual_overgrowth)Overgrowth Ritual$().$(br2)Besides the elemental herbs, $(l:herbs/infernal_bulb)Infernal Bulb$(), $(l:herbs/dewgonia)Dewgonia$(), $(l:herbs/cloud_berry)Cloud Berry$() and $(l:herbs/stalicripe)Stalicripe$(), all herbs can be grown as crops on normal farmland."
+      "title": "Renewable",
+      "text": "While you could spend time breaking grass in order to build up a large supply of these herbs, there are alternatives.$(br2)$(l:herbs/terra_moss)Terra Moss$() (the only herb that does not grow on soil of some description) is $(l:herbs/renewable_resources)renewable$() through the $(l:rituals/ritual_overgrowth)Overgrowth Ritual$().$(br2)Besides the elemental herbs, $(l:herbs/infernal_bulb)Infernal Bulb$(), $(l:herbs/dewgonia)Dewgonia$(), $(l:herbs/cloud_berry)Cloud Berry$() and $(l:herbs/stalicripe)Stalicripe$(), all herbs can be grown as crops on normal farmland."
     },
     {
       "type": "text",
-      "text": "This allows for an early, renewable source of $(l:herbs/wildroot)wildroot$().$(br2)A few herbs, $(l:herbs/spirit_herb)Spirit Herb$(), $(l:herbs/pereskia)Pereskia$(), and $(l:herbs/wildewheet)Wildewheet$() must be crafted into seeds (or bulbs) before they can be replanted.$(br2)Elemental herbs must be grown on elemental soil, although their types needn't match."
+      "text": "This allows for an early, $(l:herbs/renewable_resources)renewable$() source of $(l:herbs/wildroot)wildroot$().$(br2)A few herbs, $(l:herbs/spirit_herb)Spirit Herb$(), $(l:herbs/pereskia)Pereskia$(), and $(l:herbs/wildewheet)Wildewheet$() must be crafted into seeds (or bulbs) before they can be replanted.$(br2)$(info) Elemental herbs must be grown on elemental soil, of any of the five kinds."
     },
     {
       "type": "text",
