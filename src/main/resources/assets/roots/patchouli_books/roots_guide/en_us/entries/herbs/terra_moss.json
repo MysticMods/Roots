@@ -8,11 +8,18 @@
   "sortnum": 4,
   "pages": [
     {
-      "type": "text",
-      "text": "Example"
+      "type": "spotlight",
+      "item": "roots:terra_spores",
+      "text": "Commonly overlooked, terra moss grows in many places in the world, and can be scraped from many mossy surfaces by right-clicking with a $(l:crafting/knives)knife$().$(br2)Likewise, you will find terra spores when breaking tall grass. Under the correct circumstances, these will provide a mossy surface to scrape from."
+    },
+    {
+      "type": "moss_template",
+      "name": "Mossy Surfaces",
+      "text": "Many blocks are suitable for scraping moss from, leaving behind their pristine form and providing you with terra moss.$(br2)$(warning) Manually creating such a surface requires specific conditions."
     },
     {
       "type": "multiblock",
+      "anchor": "conditions",
       "multiblock": {
         "mapping": {
           "0": "minecraft:cobblestone",
@@ -21,18 +28,43 @@
         "pattern": [
           [" M ","M0M"," M "]
         ]
-      }
+      },
+      "text": "Cobblestone or any suitable surface, placed adjacent to water, provides the perfect conditions for moss growth."
+    },
+    {
+      "type": "multiblock",
+      "multiblock": {
+        "mapping": {
+          "0": "minecraft:mossy_cobblestone",
+          "M": "minecraft:water"
+        },
+        "pattern": [
+          [" M ","M0M"," M "]
+        ]
+      },
+      "text": "$(info) Simply right-click a water-adjacent block with terra spores to convert it into its mossy equivalent."
     },
     {
       "type": "spotlight",
-      "item": "minecraft:mossy_cobblestone",
+      "item": "roots:terra_moss",
       "link_recipe": true,
-      "text": "Once imbued into cobblestone that is adjacent to water, it will appear like any other mossy stone. Carefully scraping with a knife will give you Terra Moss, and indeed, this process can be performed even on mossy stones not imbued by you."
+      "text": "Once the spores have been imbued and the moss has spread to cover the entirety of the block (a process that happens rapidly), it is now ready to be harvest.$(br2)$(info) Simply right-click the mossy surface with a knife and you will obtain the moss, returning the block to its original form."
     },
     {
-      "type": "moss_template",
-      "name": "Terra Moss",
-      "text": "Scraping a number of other mossy blocks with a knife will also give you terra moss.$(br2)$(info) These other blocks can also be imbued as can cobblestone."
+      "type": "text",
+      "anchor": "renew",
+      "title": "Renewability",
+      "text": "While it may seem tedious to go through the process of gathering & applying spores and then scraping the moss repeatedly, this system is both renewable and $(l:herbs/terra_moss#auto)automatable$().$(br2)The $(l:rituals/ritual_overgrowth)Overgrowth$() ritual bypass the need for terra spores entirely, magically causing moss to grow on $(l:herbs/terra_moss#conditions)blocks that meet the conditions$() of being water-adjacent."
+    },
+    {
+      "type": "text",
+      "anchor": "auto",
+      "title": "Automation",
+      "text": "In combination with the $(l:rituals/ritual_overgrowth)Overgrowth$() ritual and some simple tools and devices, it is entirely possible to automate the creation of terra moss.$(br2)A knife placed in a dispenser will, when the dispenser is activated, attempt to scrap moss from the block it is facing.$(br2)Any resultant moss is then output in the air directly above the dispenser."
+    },
+    {
+      "type": "text",
+      "text": "In accord with $(l:rituals/automation)ritual automation$(), supply a single suitable (that meets $(l:herbs/terra_moss#conditions)the conditions$()) within the radius of the ritual.$(br2)A simple redstone setup triggering the dispenser, with a hopper above, allows for moss be fed into a nearby inventory.$(br2)This process will last for as long as there are ingredients to supply the ritual, and durability on your knives."
     }
   ]
 }
