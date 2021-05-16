@@ -35,6 +35,8 @@ public class ContainerPouch extends Container {
   private EntityPlayer player;
   private ItemStack pouch;
 
+  private int inventoryBegin;
+  private int herbsBegin;
   private int inventoryEnd;
   private int herbsEnd;
 
@@ -113,48 +115,37 @@ public class ContainerPouch extends Container {
       }
       addSlotToContainer(new PouchSlot(herbsHandler, true, i, xOffset + 127 + (21 * (i % 3)), yOffset + 23 + yPosOffset));
     }
+    herbsBegin = 0;
     herbsEnd = 9;
+    inventoryBegin = 0;
     inventoryEnd = 0;
   }
 
   private void createFeyPouchSlots() {
-    int xOffset = 16;
-    int yOffset = -55;
+    int xOffset = 13;
+    int yOffset = -44;
     int q = 0;
-    for (int i = 0; i < inventoryHandler.getSlots(); i++) {
-      // Top Row
-      if (i < 2) {
-        addSlotToContainer(new PouchSlot(inventoryHandler, q++, xOffset + (i * 21), yOffset + 23));
-      }
-      // Middle Row
-      if (i >= 2 && i < 4) {
-        addSlotToContainer(new PouchSlot(inventoryHandler, q++, xOffset + ((i - 2) * 21), yOffset + 44));
-      }
-      // Bottom Row
-      if (i >= 4 && i < 6) {
-        addSlotToContainer(new PouchSlot(inventoryHandler, q++, xOffset + ((i - 4) * 21), yOffset + 65));
-      }
-      // Herb Pouch
-    }
-    inventoryEnd = q;
+    herbsBegin = q;
     for (int i = 0; i < herbsHandler.getSlots(); i++) {
       // Controls which row the slots appear on
-      if (q >= 7 && q < 11) {
-        addSlotToContainer(new PouchSlot(herbsHandler, true, i, xOffset + 45 + (21 * (q % 4)), yOffset + 23));
-      } else if (q >= 11 && q < 15) {
-        addSlotToContainer(new PouchSlot(herbsHandler, true, i, xOffset + 45 + (21 * (q % 4)), yOffset + 44));
-      } else if (q >= 15 && q < 19) {
-        addSlotToContainer(new PouchSlot(herbsHandler, true, i, xOffset + 45 + (21 * (q % 4)), yOffset + 66));
-      }
+      addSlotToContainer(new PouchSlot(herbsHandler, true, i, xOffset + (20 * (i % 4)), yOffset + 23 + (i % 3) * 20));
       q++;
     }
     herbsEnd = q;
+    inventoryBegin = q;
+    for (int i = 0; i < inventoryHandler.getSlots(); i++) {
+      // Controls which row the slots appear on
+      addSlotToContainer(new PouchSlot(inventoryHandler, i, xOffset + 90 + (20 * (i % 2)), yOffset + 23 + (i % 3) * 20));
+      q++;
+    }
+    inventoryEnd = q;
   }
 
   private void createComponentPouchSlots() {
     int xOffset = -13;
     int yOffset = -55;
     int q = 0;
+    inventoryBegin = q;
     for (int i = 0; i < inventoryHandler.getSlots(); i++) {
       // Top Row
       if (i < 5) {
@@ -171,6 +162,7 @@ public class ContainerPouch extends Container {
       // Herb Pouch
     }
     inventoryEnd = q;
+    herbsBegin = q;
     for (int i = 0; i < herbsHandler.getSlots(); i++) {
       if (q >= 12 && q < 18) {
         // Controls which row the slots appear on
@@ -186,6 +178,7 @@ public class ContainerPouch extends Container {
     int xOffset = -35;
     int yOffset = -63;
     int q = 0;
+    inventoryBegin = q;
     for (int i = 0; i < inventoryHandler.getSlots(); i++) {
       // Top Row
       if (i < 6) {
@@ -202,6 +195,7 @@ public class ContainerPouch extends Container {
       q++;
     }
     inventoryEnd = q;
+    herbsBegin = q;
     for (int i = 0; i < herbsHandler.getSlots(); i++) {
       // Add Herb Slots
       q = inventoryEnd + i;
