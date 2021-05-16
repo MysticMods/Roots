@@ -8,7 +8,17 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example."
+      "text": "It is important to note that, while most $(cat:herbs)herbs$() have specific methods or recipes to obtain, all of them can be sustained renewably, without repeated crafting or gathering.$(br2)As mentioned in the $(l:herbs/introduction)introduction$(), most herbs can be planted as crops under the right circumstances, while others can be generated using rituals in the right circumstances."
+    },
+    {
+      "type": "text",
+      "title": "Crops",
+      "text": "All herbs but $(l:herbs/terra_moss)terra moss$() can be grown as crops, although the elemental plants require special soil.$(br2)$(l:herbs/baffle_cap)Baffle cap$() will spread in the same way as vanilla mushrooms, and sprout a giant mushroom if bone meal is used.$(br2)Of the remaining plants, $(l:herbs/wildroot)wildroot$() can be planted directly wherever normal crops would grow, including onto any one of the $(l:resources/elemental_soil)elemental soils$()."
+    },
+    {
+      "type": "text",
+      "title": "Seeds & Elementals",
+      "text": "The remaining herbs, $(l:herbs/moonglow)moonglow$(), $(l:herbs/pereskia)pereskia$(), $(l:herbs/spirit_herb)spirit herb$() and $(l:herbs/wildewheet)wildewheet$() can be converted to seeds and planted wherever crops grow.$(br2)Elemental herbs, $(l:herbs/cloud_berry)cloud berry$(), $(l:herbs/dewgonia)dewgonia$(), $(l:herbs)infernal bulb$() & $(l:herbs/stalicripe)stalicripe$() require $(l:resources/elemental_soil)elemental soil$().$(br2)$(info) These need not match the soil: dewgonia may be placed on magmatic soil. $(info) Any crop will grow on elemental soil."
     }
   ]
 }
