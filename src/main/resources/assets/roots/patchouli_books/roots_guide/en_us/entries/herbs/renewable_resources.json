@@ -18,7 +18,7 @@
     {
       "type": "text",
       "title": "Seeds & Elementals",
-      "text": "The remaining herbs, $(l:herbs/moonglow)moonglow$(), $(l:herbs/pereskia)pereskia$(), $(l:herbs/spirit_herb)spirit herb$() and $(l:herbs/wildewheet)wildewheet$() can be converted to seeds and planted wherever crops grow.$(br2)Elemental herbs, $(l:herbs/cloud_berry)cloud berry$(), $(l:herbs/dewgonia)dewgonia$(), $(l:herbs)infernal bulb$() & $(l:herbs/stalicripe)stalicripe$() require $(l:resources/elemental_soil)elemental soil$().$(br2)$(info) These need not match the soil: dewgonia may be placed on magmatic soil. $(info) Any crop will grow on elemental soil."
+      "text": "The remaining herbs, $(l:herbs/moonglow)moonglow$(), $(l:herbs/pereskia)pereskia$(), $(l:herbs/spirit_herb)spirit herb$() and $(l:herbs/wildewheet)wildewheet$() can be converted to seeds and planted wherever crops grow.$(br2)Elemental herbs, $(l:herbs/cloud_berry)cloud berry$(), $(l:herbs/dewgonia)dewgonia$(), $(l:herbs)infernal bulb$() & $(l:herbs/stalicripe)stalicripe$() require $(l:resources/elemental_soil)elemental soil$() and are planted directly, as with wildroot.$(br2)$(info) Element matching with soils is not required."
     },
     {
       "type": "text",
