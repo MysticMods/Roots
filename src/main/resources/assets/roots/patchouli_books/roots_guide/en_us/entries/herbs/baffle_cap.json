@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "While somewhat noxious, this fungi is safe to handle freely.$(br2)Not commonly found in this world any more, it can be recreated by bringing forth the wild magic within certain ingredients in the heat of a $(l:crafting/pyre)pyre$().$(br2)It is a $(l:herbs/baffle_cap#renew)renewable resource$(), and finds many uses in offensive spells and rituals."
+      "text": "While somewhat noxious, this fungi is safe to handle freely.$(br2)Not commonly found in this world any more, it can be recreated by bringing forth the wild magic within certain ingredients in the heat of a $(l:crafting/pyres)pyre$().$(br2)It is a $(l:herbs/baffle_cap#renew)renewable resource$(), and finds many uses in offensive spells and rituals."
     },
     {
       "type": "ritual_crafting_template",
