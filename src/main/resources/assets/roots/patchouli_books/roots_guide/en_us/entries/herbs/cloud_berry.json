@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Ancient cloud berry bushes were attuned to the sky and had to be tied down lest they tear themselves from the soil and floated upwards.$(br2)Nowadays, still maintaining that attunement, the blossoms merely float like feathers when dropped.$(br2)Used in spells and rituals associated with the sky, $(l:herbs/cloud_berry#renew)it is also a renewable crop$()."
+      "text": "Cultivated from a bush so bouyant that, as more cloud berries sprouted, it would eventually tear itself from the ground.$(br2)Tying the bushes down is no longer required, but the berries still float like feathers when dropped.$(br2)Used in spells and rituals associated with the sky, $(l:herbs/cloud_berry#renew)it is also a renewable crop$()."
     },
     {
       "type": "ritual_crafting_template",
