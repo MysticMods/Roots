@@ -7,17 +7,19 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example"
+      "text": "Said to gather the souls and ghosts of the noblest of departed animals, much of their wisdom may be found in its leaves.$(br2)The heat of a pyre is not enough to rekindle this herb.$(br2)Special care and $(l:crafting/runic_shears)runic shears$() are required to reach through to the fey realm and pluck a single leaf."
     },
     {
       "type": "runic_shears_template",
       "recipe": "spirit_herb",
       "name": "Spirit Herb",
-      "text": "Use Runic Shears on a fully grown Beetroot crop to obtain a Spirit Herb."
+      "text": "The closest plant cognate in our world is the humble beetroot.$(br2)Using $(l:crafting/runic_shears)runic shears$(), you can harvest the beetroot crop and simultaneously reaching through to the fey realm, exchanging it for spirit herb.$(br2)Once obtained, it becomes a $(l:herbs/spirit_herb#renew)renewable$() crop."
     },
     {
       "type": "crafting",
-      "recipe": "roots:spirit_herb_seed"
+      "recipe": "roots:spirit_herb_seed",
+      "anchor": "renew",
+      "text": "Once extract, the seeds of the spirit herb can be planted on any farmland that can support normal crop growth.$(br2)When mature, the intertwined leaves of the plant turn a bright green."
     }
   ]
 }
