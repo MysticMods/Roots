@@ -17,7 +17,7 @@
     {
       "type": "text",
       "title": "Quick Start (Part 2)",
-      "text": "$(li)$(bold)Alternately$() begin rituals & crafting by making a $(l:crafting/pyre)pyre$() and reading the $(l:rituals/introduction)Introduction to Rituals$().$(li)Craft a $(l:crafting/grove_stone)grove stone$() and $(l:crafting/fey_crafter)fey crafter$(), then perform a $(l:rituals/ritual_grove_supplication)Grove Supplication$() ritual. Read $(l:crafting/introduction)Introduction to Crafting$().$(br2)Further progress is gated behind access to herbs (or materials). The following steps may be done in any order."
+      "text": "$(li)$(bold)Alternately$() begin rituals & crafting by making a $(l:crafting/pyres)pyre$() and reading the $(l:rituals/introduction)Introduction to Rituals$().$(li)Craft a $(l:crafting/grove_stone)grove stone$() and $(l:crafting/fey_crafter)fey crafter$(), then perform a $(l:rituals/ritual_grove_supplication)Grove Supplication$() ritual. Read $(l:crafting/introduction)Introduction to Crafting$().$(br2)Further progress is gated behind access to herbs (or materials). The following steps may be done in any order."
     },
     {
       "type": "text",

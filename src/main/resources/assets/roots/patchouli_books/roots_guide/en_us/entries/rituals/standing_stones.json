@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Some rituals require standing stones or runed pillars in addition to the $(l:crafting/pyre)pyre$().$(br2)$(info) All rituals which require additional features to function properly will list them as such in their ritual entry.$(br2)$(info) Only rituals of $(l:rituals/tiers)tier I$() or higher may require standing stones or pillars."
+      "text": "Some rituals require standing stones or runed pillars in addition to the $(l:crafting/pyres)pyre$().$(br2)$(info) All rituals which require additional features to function properly will list them as such in their ritual entry.$(br2)$(info) Only rituals of $(l:rituals/tiers)tier I$() or higher may require standing stones or pillars."
     },
     {
       "type": "text",

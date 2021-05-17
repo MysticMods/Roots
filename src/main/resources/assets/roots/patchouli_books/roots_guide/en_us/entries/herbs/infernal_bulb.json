@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Beset by smouldering tendrils of flame-coloured growth, this bulb is purported by some to grow into an even more powerful plant.$(br2)Such a specimen has yet to be observed or be recorded.$(br2)Once found amongst volcanoes and in hellish landscapes, it can now be crafted through the heat of a $(l:crafting/pyre)pyre$() and is $(l:herbs/infernal_bulb#renew)renewable$()."
+      "text": "Beset by smouldering tendrils of flame-coloured growth, this bulb is purported by some to grow into an even more powerful plant.$(br2)Such a specimen has yet to be observed or be recorded.$(br2)Once found amongst volcanoes and in hellish landscapes, it can now be crafted through the heat of a $(l:crafting/pyres)pyre$() and is $(l:herbs/infernal_bulb#renew)renewable$()."
     },
     {
       "type": "ritual_crafting_template",
