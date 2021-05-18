@@ -24,6 +24,12 @@
       "title": "Unlocking Herbs",
       "anchor": "pyre",
       "text": "You will not immediately be able to access all herbs upon starting Roots. A number of them require the use of a specific tool for creation, while others require a crafting ritual on the Pyre.$(br2)The recipe for each herb is specified in its entry, and can be crafted as many times as you like.$(br)$(info) It is always worthwhile to grow herbs as crops after your initial crafting."
+    },
+    {
+      "type": "quest",
+      "title": "Completion",
+      "trigger": "roots:all_the_herbs_3",
+      "text": "To complete this entry, collect one of each of the herbs, either by crafting them in a $(l:crafting/pyre)pyre$(), through trading with villagers or by finding them in the wild.$(br2)There are 11 in total, and you can track them with the $(adv:roots:all_the_herbs_3)$() advancement."
     }
   ]
 }
