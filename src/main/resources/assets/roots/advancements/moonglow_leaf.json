@@ -34,7 +34,7 @@
     }
   },
   "requirements": [
-    "book",
-    "seeds"
-  ]
+    [
+      "book", "seeds"
+    ]
 }

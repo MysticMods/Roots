@@ -22,8 +22,14 @@
     },
     {
       "type": "text",
-      "title": "Renewability Instructions",
-      "text": "Each herb page will contain a section near the end detailing under what conditions it can be grown, and if any further steps (such as converting from herb to seed) are required."
+      "title": "Instructions",
+      "text": "Each herb page will contain a section near the end detailing under what conditions it can be grown, and if any further steps (such as converting from herb to seed) are required.$(br2)Most entries will also describe the herb visually, along with how it appears when matured & ready to harvest."
+    },
+    {
+      "type": "quest",
+      "title": "Completion",
+      "trigger": "roots:renewable_renaissance",
+      "text": "To complete this entry, plant all of the renewable resources described above and in their individual entries on the relevant soils.$(br2)There are 9 in total, and you can track them with the $(adv:roots:renewable_renaissance) advancement."
     }
   ]
 }

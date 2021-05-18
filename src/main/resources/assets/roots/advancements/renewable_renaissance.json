@@ -60,7 +60,7 @@
                 "block": "roots:stalicripe_crop"
             }
         },
-        "wildrood": {
+        "wildroot": {
             "trigger": "minecraft:placed_block",
             "conditions": {
                 "block": "roots:wildroot_crop"

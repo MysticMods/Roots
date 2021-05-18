@@ -34,7 +34,8 @@
     }
   },
   "requirements": [
-    "book",
-    "bulb"
+    [
+      "book", "bulb"
+    ]
   ]
 }
