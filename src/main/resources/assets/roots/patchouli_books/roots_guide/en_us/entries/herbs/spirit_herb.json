@@ -19,7 +19,7 @@
       "type": "crafting",
       "recipe": "roots:spirit_herb_seed",
       "anchor": "renew",
-      "text": "Once extract, the seeds of the spirit herb can be planted on any farmland that can support normal crop growth.$(br2)When mature, the intertwined leaves of the plant turn a bright green."
+      "text": "Once extracted, the seeds of the spirit herb can be planted on any farmland that can support normal crop growth.$(br2)When mature, the intertwined leaves of the plant turn a bright green."
     }
   ]
 }

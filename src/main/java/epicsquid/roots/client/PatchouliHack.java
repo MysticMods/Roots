@@ -10,7 +10,12 @@ import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementList;
+import net.minecraft.advancements.AdvancementManager;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.advancements.GuiScreenAdvancements;
+import net.minecraft.client.multiplayer.ClientAdvancementManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -271,8 +276,7 @@ public class PatchouliHack {
     FUNCTIONS.put("ritual", prop.apply("ritual"));
     COMMANDS.put("/ritual", reset);
 
-    Function<String, BookTextParser.FunctionProcessor> config = (type) ->
-        (parameter, state) -> {
+    BookTextParser.FunctionProcessor config = (parameter, state) -> {
           switch (parameter.toLowerCase(Locale.ROOT)) {
             case "earth_max_y":
               return "" + ElementalSoilConfig.EarthSoilMaxY;
@@ -287,8 +291,33 @@ public class PatchouliHack {
           }
         };
 
-    FUNCTIONS.put("config", prop.apply("config"));
+    FUNCTIONS.put("config", config);
     COMMANDS.put("/config", reset);
+
+    BookTextParser.FunctionProcessor advancement =
+        (parameter, state) -> {
+          ResourceLocation rl = new ResourceLocation(parameter.toLowerCase(Locale.ROOT));
+          ClientAdvancementManager manager = Minecraft.getMinecraft().player.connection.getAdvancementManager();
+          AdvancementList list = manager.getAdvancementList();
+          Advancement adv = list.getAdvancement(rl);
+          if (adv == null || adv.getDisplay() == null) {
+            return "INVALID ADVANCEMENT: " + rl;
+          }
+          String name = adv.getDisplay().getTitle().getFormattedText();
+          state.color = state.book.linkColor;
+          state.tooltip = adv.getDisplay().getDescription().getFormattedText();
+          state.onClick = () -> {
+            Minecraft mc = Minecraft.getMinecraft();
+            GuiScreenAdvancements screen = new GuiScreenAdvancements(mc.player.connection.getAdvancementManager());
+            screen.setSelectedTab(adv);
+            mc.displayGuiScreen(screen);
+          };
+          return name;
+        };
+
+    FUNCTIONS.put("adv", advancement);
+    COMMANDS.put("/adv", reset);
+
 /*    BookTextParser.FunctionProcessor li_link = (parameter, state) -> {
       state.lineBreaks = 1;
       state.spacingLeft = 4;
