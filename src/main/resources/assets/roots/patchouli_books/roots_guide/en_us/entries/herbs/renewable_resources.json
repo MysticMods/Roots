@@ -29,7 +29,7 @@
       "type": "quest",
       "title": "Completion",
       "trigger": "roots:renewable_renaissance",
-      "text": "To complete this entry, plant all of the renewable resources described above and in their individual entries on the relevant soils.$(br2)There are 9 in total, and you can track them with the $(adv:roots:renewable_renaissance) advancement."
+      "text": "To complete this entry, plant all of the renewable resources described above and in their individual entries on the relevant soils.$(br2)There are 9 in total, and you can track them with the $(adv:roots:renewable_renaissance)$() advancement."
     }
   ]
 }
