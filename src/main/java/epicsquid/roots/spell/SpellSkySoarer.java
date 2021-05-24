@@ -156,7 +156,6 @@ public class SpellSkySoarer extends SpellBase {
         }
 
         if (dest.y >= 128) {
-          System.out.println("URGH");
         }
 
         if (!player.world.isRemote) {

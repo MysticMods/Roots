@@ -36,7 +36,7 @@ public class ModBlocks {
 
   // Runestones
   public static Block runestone, runestone_brick, runestone_brick_alt, chiseled_runestone, wildwood_log, wildwood_planks, wildwood_leaves, wildwood_sapling, baffle_cap_huge_stem, baffle_cap_huge_top,
-      baffle_cap_mushroom, trample_rune;
+      baffle_cap_mushroom, runestone_trample;
 
   // Runed wood
   public static Block runed_acacia, runed_birch, runed_dark_oak, runed_jungle, runed_oak, runed_spruce, runed_wildwood;
@@ -111,7 +111,7 @@ public class ModBlocks {
     event.addBlock(runed_obsidian_brick = new BlockRunedObsidian(Material.ROCK, SoundType.METAL, 8.5f, "runed_obsidian_brick")).setCreativeTab(Roots.tab);
     event.addBlock(runed_obsidian_brick_alt = new BlockRunedObsidian(Material.ROCK, SoundType.METAL, 8.5f, "runed_obsidian_brick_alt")).setCreativeTab(Roots.tab);
     event.addBlock(chiseled_runed_obsidian = new BlockRunedObsidian(Material.ROCK, SoundType.METAL, 8.5f, "chiseled_runed_obsidian")).setCreativeTab(Roots.tab);
-    event.addBlock(trample_rune = new BlockTrample(Material.ROCK, SoundType.METAL, 1.4f, "runestone_trample", TileEntityTrample.class)).setCreativeTab(Roots.tab);
+    event.addBlock(runestone_trample = new BlockTrample(Material.ROCK, SoundType.METAL, 1.4f, "runestone_trample", TileEntityTrample.class)).setCreativeTab(Roots.tab);
 
     event.addBlock(runed_acacia = new BlockLogBase("runed_acacia")).setCreativeTab(Roots.tab);
     event.addBlock(runed_dark_oak = new BlockLogBase("runed_dark_oak")).setCreativeTab(Roots.tab);

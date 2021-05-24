@@ -40,7 +40,6 @@ public class PotionPetalShell extends Potion {
   public void performEffect(EntityLivingBase entity, int amplifier) {
     if (!entity.world.isRemote) {
       ModifierSnapshot mods = StaffModifierInstanceList.fromSnapshot(entity.getEntityData(), SpellPetalShell.instance);
-      Roots.logger.info(amplifier);
       PacketHandler.sendToAllTracking(new MessagePetalShellRingFX(entity.ticksExisted, entity.posX, entity.posY, entity.posZ, amplifier, mods), entity);
     }
   }

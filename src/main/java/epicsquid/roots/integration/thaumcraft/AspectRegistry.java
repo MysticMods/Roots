@@ -1,16 +1,144 @@
 package epicsquid.roots.integration.thaumcraft;
 
 import epicsquid.roots.Roots;
+import epicsquid.roots.init.ModBlocks;
+import epicsquid.roots.init.ModItems;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectEventProxy;
+import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.AspectRegistryEvent;
 
-@Mod.EventBusSubscriber(modid= Roots.MODID)
+@Mod.EventBusSubscriber(modid = Roots.MODID)
 public class AspectRegistry {
   @SubscribeEvent
-  @Optional.Method(modid="thaumcraft")
-  public static void registerAspects (AspectRegistryEvent event) {
-
+  @Optional.Method(modid = "thaumcraft")
+  public static void registerAspects(AspectRegistryEvent event) {
+    AspectEventProxy proxy = event.register;
+    proxy.registerObjectTag(new ItemStack(ModItems.apothecary_pouch), new AspectList().add(Aspect.VOID, 10).add(Aspect.BEAST, 10).add(Aspect.MAGIC, 5).add(Aspect.SOUL, 2).add(Aspect.CRAFT, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.baffle_cap_huge_stem), new AspectList().add(Aspect.EARTH, 1).add(Aspect.PLANT, 5).add(Aspect.MAGIC, 2).add(Aspect.FLUX, 2));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.baffle_cap_huge_top), new AspectList().add(Aspect.EARTH, 1).add(Aspect.PLANT, 5).add(Aspect.MAGIC, 2).add(Aspect.FLUX, 2));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.baffle_cap_mushroom), new AspectList().add(Aspect.EARTH, 1).add(Aspect.PLANT, 5).add(Aspect.MAGIC, 2).add(Aspect.FLUX, 2));
+    proxy.registerObjectTag(new ItemStack(ModItems.bark_acacia), new AspectList().add(Aspect.ENTROPY, 1).add(Aspect.PLANT, 4));
+    proxy.registerObjectTag(new ItemStack(ModItems.bark_birch), new AspectList().add(Aspect.ENTROPY, 1).add(Aspect.PLANT, 4));
+    proxy.registerObjectTag(new ItemStack(ModItems.bark_dark_oak), new AspectList().add(Aspect.ENTROPY, 1).add(Aspect.PLANT, 4));
+    proxy.registerObjectTag(new ItemStack(ModItems.bark_jungle), new AspectList().add(Aspect.ENTROPY, 1).add(Aspect.PLANT, 4));
+    proxy.registerObjectTag(new ItemStack(ModItems.bark_oak), new AspectList().add(Aspect.ENTROPY, 1).add(Aspect.PLANT, 4));
+    proxy.registerObjectTag(new ItemStack(ModItems.bark_spruce), new AspectList().add(Aspect.ENTROPY, 1).add(Aspect.PLANT, 4));
+    proxy.registerObjectTag(new ItemStack(ModItems.bark_wildwood), new AspectList().add(Aspect.ENTROPY, 1).add(Aspect.PLANT, 4).add(Aspect.MAGIC, 1));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.chiseled_runed_obsidian), new AspectList().add(Aspect.FIRE, 5).add(Aspect.ORDER, 2).add(Aspect.EARTH, 13).add(Aspect.MAGIC, 1).add(Aspect.DARKNESS, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.chiseled_runestone), new AspectList().add(Aspect.ORDER, 1).add(Aspect.EARTH, 3).add(Aspect.MAGIC, 1).add(Aspect.SENSES, 1));
+    proxy.registerObjectTag(new ItemStack(ModItems.cloud_berry), new AspectList().add(Aspect.AIR, 10).add(Aspect.PLANT, 5).add(Aspect.MAGIC, 2).add(Aspect.FLIGHT, 2));
+    proxy.registerObjectTag(new ItemStack(ModItems.component_pouch), new AspectList().add(Aspect.VOID, 10).add(Aspect.BEAST, 10).add(Aspect.MAGIC, 2).add(Aspect.CRAFT, 5));
+    proxy.registerObjectTag(new ItemStack(ModItems.cooked_pereskia), new AspectList().add(Aspect.LIFE, 5).add(Aspect.PLANT, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.decorative_pyre), new AspectList().add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 7).add(Aspect.PLANT, 45));
+    proxy.registerObjectTag(new ItemStack(ModItems.dewgonia), new AspectList().add(Aspect.WATER, 10).add(Aspect.COLD, 2).add(Aspect.PLANT, 5).add(Aspect.MAGIC, 2));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.elemental_soil), new AspectList().add(Aspect.EARTH, 10).add(Aspect.EXCHANGE, 1).add(Aspect.MAGIC, 2).add(Aspect.SENSES, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.elemental_soil_air), new AspectList().add(Aspect.AIR, 5).add(Aspect.EARTH, 10).add(Aspect.EXCHANGE, 1).add(Aspect.MAGIC, 2).add(Aspect.SENSES, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.elemental_soil_earth), new AspectList().add(Aspect.EARTH, 15).add(Aspect.EXCHANGE, 1).add(Aspect.MAGIC, 2).add(Aspect.SENSES, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.elemental_soil_fire), new AspectList().add(Aspect.FIRE, 5).add(Aspect.EARTH, 10).add(Aspect.EXCHANGE, 1).add(Aspect.MAGIC, 2).add(Aspect.SENSES, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.elemental_soil_water), new AspectList().add(Aspect.WATER, 5).add(Aspect.EARTH, 10).add(Aspect.EXCHANGE, 1).add(Aspect.MAGIC, 2).add(Aspect.SENSES, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.fey_crafter), new AspectList().add(Aspect.PLANT, 50).add(Aspect.TOOL, 10).add(Aspect.MAGIC, 2).add(Aspect.ALCHEMY, 5).add(Aspect.CRAFT, 5));
+    proxy.registerObjectTag(new ItemStack(ModItems.fey_leather), new AspectList().add(Aspect.BEAST, 5).add(Aspect.ELDRITCH, 1).add(Aspect.PROTECT, 5));
+    proxy.registerObjectTag(new ItemStack(ModItems.fey_pouch), new AspectList().add(Aspect.VOID, 10).add(Aspect.BEAST, 60).add(Aspect.MAGIC, 5).add(Aspect.CRAFT, 20));
+    proxy.registerObjectTag(new ItemStack(ModItems.flour), new AspectList().add(Aspect.EXCHANGE, 1).add(Aspect.LIFE, 3).add(Aspect.PLANT, 3));
+    proxy.registerObjectTag(new ItemStack(ModItems.gramary), new AspectList().add(Aspect.EARTH, 10).add(Aspect.EXCHANGE, 2).add(Aspect.PLANT, 5).add(Aspect.TOOL, 2).add(Aspect.MAGIC, 5).add(Aspect.SOUL, 2));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.grove_stone), new AspectList().add(Aspect.ENTROPY, 2).add(Aspect.EARTH, 20).add(Aspect.MAGIC, 1));
+    proxy.registerObjectTag(new ItemStack(ModItems.herb_pouch), new AspectList().add(Aspect.VOID, 10).add(Aspect.BEAST, 50).add(Aspect.MAGIC, 2).add(Aspect.CRAFT, 12));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.imbuer), new AspectList().add(Aspect.EARTH, 3).add(Aspect.PLANT, 3).add(Aspect.TOOL, 1));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.imposer), new AspectList().add(Aspect.ENTROPY, 2).add(Aspect.EARTH, 13).add(Aspect.PLANT, 3).add(Aspect.TOOL, 1));
+    proxy.registerObjectTag(new ItemStack(ModItems.infernal_bulb), new AspectList().add(Aspect.FIRE, 10).add(Aspect.ENERGY, 2).add(Aspect.PLANT, 5).add(Aspect.MAGIC, 2));
+    proxy.registerObjectTag(new ItemStack(ModItems.life_essence), new AspectList().add(Aspect.DEATH, 2).add(Aspect.LIFE, 2).add(Aspect.SOUL, 2));
+    proxy.registerObjectTag(new ItemStack(ModItems.living_arrow), new AspectList().add(Aspect.AIR, 1).add(Aspect.EARTH, 1).add(Aspect.LIFE, 1).add(Aspect.MAGIC, 1).add(Aspect.FLIGHT, 1).add(Aspect.AVERSION, 5));
+    proxy.registerObjectTag(new ItemStack(ModItems.living_axe), new AspectList().add(Aspect.EARTH, 1).add(Aspect.LIFE, 5).add(Aspect.TOOL, 12).add(Aspect.MAGIC, 1));
+    proxy.registerObjectTag(new ItemStack(ModItems.living_hoe), new AspectList().add(Aspect.EARTH, 1).add(Aspect.LIFE, 5).add(Aspect.TOOL, 12).add(Aspect.MAGIC, 1));
+    proxy.registerObjectTag(new ItemStack(ModItems.living_pickaxe), new AspectList().add(Aspect.EARTH, 1).add(Aspect.LIFE, 5).add(Aspect.TOOL, 12).add(Aspect.MAGIC, 1));
+    proxy.registerObjectTag(new ItemStack(ModItems.living_shovel), new AspectList().add(Aspect.EARTH, 1).add(Aspect.LIFE, 5).add(Aspect.TOOL, 12).add(Aspect.MAGIC, 1));
+    proxy.registerObjectTag(new ItemStack(ModItems.living_sword), new AspectList().add(Aspect.EARTH, 1).add(Aspect.LIFE, 5).add(Aspect.MAGIC, 1).add(Aspect.AVERSION, 12));
+    proxy.registerObjectTag(new ItemStack(ModItems.moonglow_leaf), new AspectList().add(Aspect.LIGHT, 2).add(Aspect.PLANT, 5).add(Aspect.MAGIC, 2).add(Aspect.DARKNESS, 10));
+    proxy.registerObjectTag(new ItemStack(ModItems.moonglow_seed), new AspectList().add(Aspect.PLANT, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.mortar), new AspectList().add(Aspect.FIRE, 7).add(Aspect.ENTROPY, 3).add(Aspect.EARTH, 18));
+    proxy.registerObjectTag(new ItemStack(ModItems.mystic_feather), new AspectList().add(Aspect.AIR, 5).add(Aspect.EXCHANGE, 2).add(Aspect.FLIGHT, 5).add(Aspect.ELDRITCH, 1));
+    proxy.registerObjectTag(new ItemStack(ModItems.pereskia), new AspectList().add(Aspect.ORDER, 2).add(Aspect.PLANT, 5).add(Aspect.MAGIC, 2).add(Aspect.AURA, 10));
+    proxy.registerObjectTag(new ItemStack(ModItems.pereskia_bulb), new AspectList().add(Aspect.PLANT, 5));
+    proxy.registerObjectTag(new ItemStack(ModItems.petals), new AspectList().add(Aspect.PLANT, 1));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.pyre), new AspectList().add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 7).add(Aspect.PLANT, 45).add(Aspect.MAGIC, 2));
+    proxy.registerObjectTag(new ItemStack(ModItems.reliquary), new AspectList().add(Aspect.DESIRE, 40));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runed_acacia), new AspectList().add(Aspect.PLANT, 18).add(Aspect.MAGIC, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runed_birch), new AspectList().add(Aspect.PLANT, 18).add(Aspect.MAGIC, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runed_dark_oak), new AspectList().add(Aspect.PLANT, 18).add(Aspect.MAGIC, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runed_jungle), new AspectList().add(Aspect.PLANT, 18).add(Aspect.MAGIC, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runed_oak), new AspectList().add(Aspect.PLANT, 18).add(Aspect.MAGIC, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runed_spruce), new AspectList().add(Aspect.PLANT, 18).add(Aspect.MAGIC, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runed_wildwood), new AspectList().add(Aspect.PLANT, 18).add(Aspect.MAGIC, 5));
+    proxy.registerObjectTag(new ItemStack(ModItems.runed_pickaxe), new AspectList().add(Aspect.FIRE, 10).add(Aspect.EARTH, 40).add(Aspect.TOOL, 20).add(Aspect.MAGIC, 4).add(Aspect.DARKNESS, 5));
+    proxy.registerObjectTag(new ItemStack(ModItems.runed_shovel), new AspectList().add(Aspect.FIRE, 10).add(Aspect.EARTH, 40).add(Aspect.TOOL, 20).add(Aspect.MAGIC, 4).add(Aspect.DARKNESS, 5));
+    proxy.registerObjectTag(new ItemStack(ModItems.runed_sword), new AspectList().add(Aspect.FIRE, 10).add(Aspect.EARTH, 40).add(Aspect.TOOL, 20).add(Aspect.MAGIC, 4).add(Aspect.DARKNESS, 5));
+    proxy.registerObjectTag(new ItemStack(ModItems.runed_axe), new AspectList().add(Aspect.FIRE, 10).add(Aspect.EARTH, 40).add(Aspect.TOOL, 20).add(Aspect.MAGIC, 4).add(Aspect.DARKNESS, 5));
+    proxy.registerObjectTag(new ItemStack(ModItems.runed_dagger), new AspectList().add(Aspect.FIRE, 10).add(Aspect.EARTH, 40).add(Aspect.TOOL, 10).add(Aspect.MAGIC, 4).add(Aspect.DARKNESS, 5).add(Aspect.AVERSION, 15));
+    proxy.registerObjectTag(new ItemStack(ModItems.runed_hoe), new AspectList().add(Aspect.FIRE, 10).add(Aspect.EARTH, 40).add(Aspect.TOOL, 20).add(Aspect.MAGIC, 4).add(Aspect.DARKNESS, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runed_obsidian), new AspectList().add(Aspect.FIRE, 5).add(Aspect.EARTH, 15).add(Aspect.MAGIC, 1).add(Aspect.DARKNESS, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runed_obsidian_brick), new AspectList().add(Aspect.FIRE, 5).add(Aspect.EARTH, 15).add(Aspect.MAGIC, 1).add(Aspect.DARKNESS, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runed_obsidian_brick_alt), new AspectList().add(Aspect.FIRE, 5).add(Aspect.EARTH, 15).add(Aspect.MAGIC, 1).add(Aspect.DARKNESS, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runed_obsidian_brick_alt_button), new AspectList().add(Aspect.FIRE, 3).add(Aspect.EARTH, 11).add(Aspect.DARKNESS, 3).add(Aspect.MECHANISM, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runed_obsidian_brick_alt_pressure_plate), new AspectList().add(Aspect.FIRE, 7).add(Aspect.EARTH, 22).add(Aspect.DARKNESS, 7).add(Aspect.MECHANISM, 5).add(Aspect.SENSES, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runed_obsidian_brick_button), new AspectList().add(Aspect.FIRE, 3).add(Aspect.EARTH, 11).add(Aspect.DARKNESS, 3).add(Aspect.MECHANISM, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runed_obsidian_brick_pressure_plate), new AspectList().add(Aspect.FIRE, 7).add(Aspect.EARTH, 22).add(Aspect.DARKNESS, 7).add(Aspect.MECHANISM, 5).add(Aspect.SENSES, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runed_obsidian_button), new AspectList().add(Aspect.FIRE, 3).add(Aspect.EARTH, 11).add(Aspect.DARKNESS, 3).add(Aspect.MECHANISM, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runed_obsidian_pressure_plate), new AspectList().add(Aspect.FIRE, 7).add(Aspect.EARTH, 22).add(Aspect.DARKNESS, 7).add(Aspect.MECHANISM, 5).add(Aspect.SENSES, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runestone), new AspectList().add(Aspect.EARTH, 5).add(Aspect.MAGIC, 1).add(Aspect.SENSES, 1));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runestone_brick), new AspectList().add(Aspect.EARTH, 3).add(Aspect.MAGIC, 1).add(Aspect.SENSES, 1));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runestone_brick_alt), new AspectList().add(Aspect.EARTH, 3).add(Aspect.MAGIC, 1).add(Aspect.SENSES, 1));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runestone_brick_alt_button), new AspectList().add(Aspect.EARTH, 2).add(Aspect.MECHANISM, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runestone_brick_alt_pressure_plate), new AspectList().add(Aspect.EARTH, 4).add(Aspect.MECHANISM, 5).add(Aspect.PROTECT, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runestone_brick_button), new AspectList().add(Aspect.EARTH, 2).add(Aspect.MECHANISM, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runestone_brick_pressure_plate), new AspectList().add(Aspect.EARTH, 4).add(Aspect.MECHANISM, 5).add(Aspect.PROTECT, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runestone_button), new AspectList().add(Aspect.EARTH, 3).add(Aspect.MECHANISM, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runestone_pressure_plate), new AspectList().add(Aspect.EARTH, 7).add(Aspect.MECHANISM, 5).add(Aspect.PROTECT, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runic_crafter), new AspectList().add(Aspect.EARTH, 20).add(Aspect.TOOL, 20).add(Aspect.MAGIC, 10).add(Aspect.ALCHEMY, 5).add(Aspect.CRAFT, 15));
+    proxy.registerObjectTag(new ItemStack(ModItems.runic_dust), new AspectList().add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 3).add(Aspect.EXCHANGE, 1).add(Aspect.MAGIC, 1));
+    proxy.registerObjectTag(new ItemStack(ModItems.runic_shears), new AspectList().add(Aspect.EXCHANGE, 5).add(Aspect.TOOL, 12).add(Aspect.MAGIC, 10));
+    proxy.registerObjectTag(new ItemStack(ModItems.spell_dust), new AspectList().add(Aspect.MAGIC, 20));
+    proxy.registerObjectTag(new ItemStack(ModItems.spirit_bag), new AspectList().add(Aspect.DESIRE, 20));
+    proxy.registerObjectTag(new ItemStack(ModItems.spirit_herb), new AspectList().add(Aspect.EXCHANGE, 2).add(Aspect.PLANT, 5).add(Aspect.MAGIC, 2).add(Aspect.SOUL, 10));
+    proxy.registerObjectTag(new ItemStack(ModItems.spirit_herb_seed), new AspectList().add(Aspect.PLANT, 5));
+    proxy.registerObjectTag(new ItemStack(ModItems.staff), new AspectList().add(Aspect.PLANT, 18).add(Aspect.SOUL, 1));
+    proxy.registerObjectTag(new ItemStack(ModItems.stalicripe), new AspectList().add(Aspect.EARTH, 10).add(Aspect.PLANT, 5).add(Aspect.TOOL, 2).add(Aspect.MAGIC, 2));
+    proxy.registerObjectTag(new ItemStack(ModItems.strange_ooze), new AspectList().add(Aspect.WATER, 5).add(Aspect.LIFE, 5).add(Aspect.ALCHEMY, 1).add(Aspect.ELDRITCH, 1));
+    proxy.registerObjectTag(new ItemStack(ModItems.sylvan_boots), new AspectList().add(Aspect.EARTH, 1).add(Aspect.BEAST, 5).add(Aspect.PLANT, 10).add(Aspect.MAGIC, 5).add(Aspect.PROTECT, 10));
+    proxy.registerObjectTag(new ItemStack(ModItems.sylvan_chestplate), new AspectList().add(Aspect.EARTH, 1).add(Aspect.BEAST, 5).add(Aspect.PLANT, 10).add(Aspect.MAGIC, 5).add(Aspect.PROTECT, 20));
+    proxy.registerObjectTag(new ItemStack(ModItems.sylvan_helmet), new AspectList().add(Aspect.EARTH, 1).add(Aspect.BEAST, 5).add(Aspect.PLANT, 10).add(Aspect.MAGIC, 5).add(Aspect.PROTECT, 10));
+    proxy.registerObjectTag(new ItemStack(ModItems.sylvan_leggings), new AspectList().add(Aspect.EARTH, 1).add(Aspect.BEAST, 5).add(Aspect.PLANT, 10).add(Aspect.MAGIC, 5).add(Aspect.PROTECT, 20));
+    proxy.registerObjectTag(new ItemStack(ModItems.terra_moss), new AspectList().add(Aspect.WATER, 5).add(Aspect.EARTH, 5).add(Aspect.PLANT, 5).add(Aspect.MAGIC, 2).add(Aspect.TRAP, 2));
+    proxy.registerObjectTag(new ItemStack(ModItems.terra_spores), new AspectList().add(Aspect.PLANT, 5));
+    proxy.registerObjectTag(new ItemStack(ModItems.terrastone_axe), new AspectList().add(Aspect.WATER, 5).add(Aspect.EARTH, 5).add(Aspect.TOOL, 20).add(Aspect.MAGIC, 1));
+    proxy.registerObjectTag(new ItemStack(ModItems.terrastone_hoe), new AspectList().add(Aspect.WATER, 5).add(Aspect.EARTH, 5).add(Aspect.TOOL, 20).add(Aspect.MAGIC, 1));
+    proxy.registerObjectTag(new ItemStack(ModItems.terrastone_pickaxe), new AspectList().add(Aspect.WATER, 5).add(Aspect.EARTH, 5).add(Aspect.TOOL, 20).add(Aspect.MAGIC, 1));
+    proxy.registerObjectTag(new ItemStack(ModItems.terrastone_shovel), new AspectList().add(Aspect.WATER, 5).add(Aspect.EARTH, 5).add(Aspect.TOOL, 20).add(Aspect.MAGIC, 1));
+    proxy.registerObjectTag(new ItemStack(ModItems.terrastone_sword), new AspectList().add(Aspect.WATER, 5).add(Aspect.EARTH, 5).add(Aspect.MAGIC, 1).add(Aspect.AVERSION, 20));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.runestone_trample), new AspectList().add(Aspect.WATER, 40).add(Aspect.EARTH, 40).add(Aspect.MAGIC, 5).add(Aspect.ALCHEMY, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.unending_bowl), new AspectList().add(Aspect.WATER, 40).add(Aspect.VOID, 20).add(Aspect.MAGIC, 10).add(Aspect.ALCHEMY, 5));
+    proxy.registerObjectTag(new ItemStack(ModItems.wildewheet), new AspectList().add(Aspect.EXCHANGE, 2).add(Aspect.LIFE, 10).add(Aspect.PLANT, 5).add(Aspect.MAGIC, 2));
+    proxy.registerObjectTag(new ItemStack(ModItems.wildewheet_bread), new AspectList().add(Aspect.LIFE, 11).add(Aspect.PLANT, 11).add(Aspect.MAGIC, 1));
+    proxy.registerObjectTag(new ItemStack(ModItems.wildewheet_seed), new AspectList().add(Aspect.PLANT, 5));
+    proxy.registerObjectTag(new ItemStack(ModItems.wildroot), new AspectList().add(Aspect.PLANT, 5).add(Aspect.MAGIC, 2).add(Aspect.SOUL, 2));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.wildroot_rune), new AspectList().add(Aspect.LIGHT, 1).add(Aspect.PLANT, 20).add(Aspect.MAGIC, 5).add(Aspect.SOUL, 5));
+    proxy.registerObjectTag(new ItemStack(ModItems.wildwood_quiver), new AspectList().add(Aspect.WATER, 5).add(Aspect.EARTH, 5).add(Aspect.EXCHANGE, 1).add(Aspect.VOID, 20).add(Aspect.PLANT, 15).add(Aspect.MAGIC, 5).add(Aspect.SOUL, 5).add(Aspect.AVERSION, 5));
+    proxy.registerObjectTag(new ItemStack(ModItems.wildwood_bow), new AspectList().add(Aspect.WATER, 5).add(Aspect.EARTH, 5).add(Aspect.EXCHANGE, 1).add(Aspect.VOID, 20).add(Aspect.PLANT, 15).add(Aspect.MAGIC, 5).add(Aspect.SOUL, 5).add(Aspect.FLIGHT, 5).add(Aspect.AVERSION, 15));
+    proxy.registerObjectTag(new ItemStack(ModItems.wildwood_boots), new AspectList().add(Aspect.MAGIC, 5).add(Aspect.SOUL, 10).add(Aspect.PROTECT, 10));
+    proxy.registerObjectTag(new ItemStack(ModItems.wildwood_helmet), new AspectList().add(Aspect.MAGIC, 5).add(Aspect.SOUL, 10).add(Aspect.PROTECT, 20));
+    proxy.registerObjectTag(new ItemStack(ModItems.wildwood_leggings), new AspectList().add(Aspect.MAGIC, 5).add(Aspect.SOUL, 10).add(Aspect.PROTECT, 10));
+    proxy.registerObjectTag(new ItemStack(ModItems.wildwood_chestplate), new AspectList().add(Aspect.MAGIC, 5).add(Aspect.SOUL, 10).add(Aspect.PROTECT, 20));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.wildwood_sapling), new AspectList().add(Aspect.LIFE, 5).add(Aspect.PLANT, 15).add(Aspect.MAGIC, 10).add(Aspect.SOUL, 20));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.wildwood_log), new AspectList().add(Aspect.PLANT, 20).add(Aspect.MAGIC, 5).add(Aspect.SOUL, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.wildwood_button), new AspectList().add(Aspect.PLANT, 2).add(Aspect.MECHANISM, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.wildwood_door), new AspectList().add(Aspect.PLANT, 4).add(Aspect.MAGIC, 1).add(Aspect.SOUL, 1).add(Aspect.TRAP, 5).add(Aspect.MECHANISM, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.wildwood_fence_gate), new AspectList().add(Aspect.PLANT, 7).add(Aspect.MAGIC, 1).add(Aspect.SOUL, 1).add(Aspect.TRAP, 5).add(Aspect.MECHANISM, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.wildwood_planks), new AspectList().add(Aspect.PLANT, 3).add(Aspect.MAGIC, 1).add(Aspect.SOUL, 1));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.wildwood_pressure_plate), new AspectList().add(Aspect.PLANT, 4).add(Aspect.MECHANISM, 5).add(Aspect.SENSES, 5));
+    proxy.registerObjectTag(new ItemStack(ModBlocks.wildwood_trapdoor), new AspectList().add(Aspect.MOTION, 5).add(Aspect.PLANT, 6));
   }
 }
