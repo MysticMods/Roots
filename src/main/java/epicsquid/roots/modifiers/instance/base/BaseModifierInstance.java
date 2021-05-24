@@ -144,7 +144,6 @@ public abstract class BaseModifierInstance extends RegistryItem implements INBTS
     try {
       tag.setString("m", modifier.getRegistryName().toString());
     } catch (NullPointerException e) {
-      System.out.println("null");
     }
     tag.setBoolean("a", applied);
     return tag;

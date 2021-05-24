@@ -16,7 +16,7 @@ import java.util.List;
 public class TrampleHandler {
   @SubscribeEvent
   public static void onTrample(BlockEvent.FarmlandTrampleEvent event) {
-    List<BlockPos> nearbyRune = Util.getBlocksWithinRadius(event.getWorld(), event.getPos(), BlockTrample.SAFE_RANGE_X, BlockTrample.SAFE_RANGE_Y, BlockTrample.SAFE_RANGE_Z, ModBlocks.trample_rune);
+    List<BlockPos> nearbyRune = Util.getBlocksWithinRadius(event.getWorld(), event.getPos(), BlockTrample.SAFE_RANGE_X, BlockTrample.SAFE_RANGE_Y, BlockTrample.SAFE_RANGE_Z, ModBlocks.runestone_trample);
     if (!nearbyRune.isEmpty()) {
       event.setCanceled(true);
     }
