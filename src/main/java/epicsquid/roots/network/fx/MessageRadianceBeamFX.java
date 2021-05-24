@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.event.handlers.ClientTickHandler;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellRadiance;
 import epicsquid.roots.spell.SpellRegistry;
@@ -62,6 +63,11 @@ public class MessageRadianceBeamFX implements IMessage {
     @SideOnly(Side.CLIENT)
     @Override
     public IMessage onMessage(final MessageRadianceBeamFX message, final MessageContext ctx) {
+      ClientTickHandler.addRunnable(() -> handleMessage(message, ctx));
+      return null;
+    }
+
+    private void handleMessage (final MessageRadianceBeamFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       EntityPlayer player = world.getPlayerEntityByUUID(message.id);
       if (player != null) {
@@ -155,7 +161,6 @@ public class MessageRadianceBeamFX implements IMessage {
           }
         }
       }
-      return null;
     }
   }
 
