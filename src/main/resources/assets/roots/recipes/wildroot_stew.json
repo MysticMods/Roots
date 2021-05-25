@@ -1,0 +1,25 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "W ",
+    "BB"
+  ],
+  "key": {
+    "W": [
+      {
+        "type": "forge:ore_dict",
+        "ore": "wildroot"
+      }
+    ],
+    "B": [
+      {
+        "item": "minecraft:bowl"
+      }
+    ]
+  },
+  "result": {
+    "item": "roots:wildroot_stew",
+    "data": 0,
+    "count": 2
+  }
+}
