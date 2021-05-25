@@ -67,6 +67,7 @@ public class MessageRadianceBeamFX implements IMessage {
       return null;
     }
 
+    @SideOnly(Side.CLIENT)
     private void handleMessage (final MessageRadianceBeamFX message, final MessageContext ctx) {
       World world = Minecraft.getMinecraft().world;
       EntityPlayer player = world.getPlayerEntityByUUID(message.id);
