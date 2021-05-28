@@ -43,7 +43,6 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class TileEntityFeyCrafter extends TileBase implements ITickable {
   public static int COUNTDOWN = 40;
@@ -306,26 +305,26 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
 
   @Override
   public void update() {
+    if (world.isRemote && world.getTotalWorldTime() % 2 == 0 && getRecipe() != null) {
+      ClientProxy.particleRenderer.spawnParticle(
+          world,
+          ParticleLeaf.class,
+          (double) pos.getX() + 0.5D,
+          (double) pos.getY() + 0.75D,
+          (double) pos.getZ() + 0.5D,
+          (Util.rand.nextDouble() - 0.5) * 0.005,
+          (Util.rand.nextDouble() * 0.02) * 0.5,
+          (Util.rand.nextDouble() - 0.5) * 0.005,
+          100,
+          63 / 255.0,
+          (143 / 255.0) + Util.rand.nextDouble() * 0.05,
+          74 / 255.0,
+          1, //0.785,
+          1,
+          1
+      );
+    }
     if (!world.isRemote) {
-      if (world.getTotalWorldTime() % 2 == 0 && getRecipe() != null) {
-        ClientProxy.particleRenderer.spawnParticle(
-            world,
-            ParticleLeaf.class,
-            (double) pos.getX() + 0.5D,
-            (double) pos.getY() + 0.75D,
-            (double) pos.getZ() + 0.5D,
-            (Util.rand.nextDouble() - 0.5) * 0.005,
-            (Util.rand.nextDouble() * 0.02) * 0.5,
-            (Util.rand.nextDouble() - 0.5) * 0.005,
-            100,
-            63 / 255.0,
-            (143 / 255.0) + Util.rand.nextDouble() * 0.05,
-            74 / 255.0,
-            1, //0.785,
-            1,
-            1
-        );
-      }
       if (countdown > 0) {
         countdown--;
       } else {
