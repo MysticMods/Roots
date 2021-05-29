@@ -47,7 +47,7 @@ void removeFish(
 );
 ```
 
-Removes a specific item from the fish drop table, preventing it from being dropped in water source blocks.
+Removes a specific item from the fish drop table, preventing it from being dropped in water source thaumcraft.blocks.
 
 ---
 

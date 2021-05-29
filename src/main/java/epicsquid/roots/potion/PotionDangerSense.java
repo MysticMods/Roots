@@ -21,7 +21,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PotionDangerSense extends Potion {
-  private ResourceLocation texture = new ResourceLocation(Roots.MODID, "textures/gui/potions.png");
+  private ResourceLocation texture = new ResourceLocation(Roots.MODID, "textures/gui/thaumcraft.potions.png");
 
   public PotionDangerSense() {
     super(false, 0xa82e2e);

@@ -8,4 +8,4 @@ StatePredicate.create(<blockstate:minecraft:cobblestone>);
 
 ### Notes
 
-Simply matches blocks between states, ignoring any property values.
+Simply matches thaumcraft.blocks between states, ignoring any property values.

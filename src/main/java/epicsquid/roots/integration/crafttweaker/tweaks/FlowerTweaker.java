@@ -97,7 +97,7 @@ public class FlowerTweaker {
       args = {
           @ZenDocArg(arg = "name", info = "The name of the recipe that you're adding"),
           @ZenDocArg(arg = "stack", info = "The itemstack describing an itemblock to be placed"),
-          @ZenDocArg(arg = "allowedSoils", info = "A list of blocks that this flower can be placed on")
+          @ZenDocArg(arg = "allowedSoils", info = "A list of thaumcraft.blocks that this flower can be placed on")
       },
       description = "Adds a recipe by creating a blockstate from an itemstack containing an itemblock and metadata to be grown during the Flower Growth ritual. The flower will only be grown on a soil mentioned. Accepts oredict entries."
   )

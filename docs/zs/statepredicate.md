@@ -9,7 +9,7 @@ import mods.roots.predicates.StatePredicate;
 
 ```zenscript
 StatePredicate create(
-  IBlockState state // description of a blockstate against which only blocks themselves (and not state properties) will be compared
+  IBlockState state // description of a blockstate against which only thaumcraft.blocks themselves (and not state properties) will be compared
 );
 ```
 
@@ -28,4 +28,4 @@ StatePredicate.create(<blockstate:minecraft:cobblestone>);
 
 ### Notes
 
-Simply matches blocks between states, ignoring any property values.
+Simply matches thaumcraft.blocks between states, ignoring any property values.

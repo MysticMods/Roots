@@ -22,10 +22,10 @@ Roots was designed with pack developers in mind, in order to be as configurable 
 - Enabling or disabling individual spells
 - Enabling or disabling individual rituals
 - Specifying mod IDs to exclude from Growth spells & rituals
-- Specifying individual blocks to exclude from Growth spells & rituals 
+- Specifying individual thaumcraft.blocks to exclude from Growth spells & rituals 
 - Access to a list of "growables" through the `/roots growables` command.
 - Specifying mod IDs to exclude from Harvest spells & rituals.
-- Specifying individual blocks to exclude from Harvest spells & rituals.
+- Specifying individual thaumcraft.blocks to exclude from Harvest spells & rituals.
 - Configure the minimum Y level required for Elemental Soil to convert into Caelic Soil.
 - Configure the minimum Y level required for Elemental Soil to convert into Terran Soil.
 - Configure the delay (in ticks) required for Elemental Soils (excluding Magmatic) to transform.
@@ -34,7 +34,7 @@ Roots was designed with pack developers in mind, in order to be as configurable 
 - Configure the radius of the Runic Shears' sheep-shearing AoE.
 - Specify saplings to be deliberately excluded from the Spreading Forest ritual.
 - Specify saplings that must be planted in a 2x2 for the Spreading Forest ritual.
-- Specify (and potentially remove or disable) via item (mod:item:meta (meta optional)) which mossy blocks can be scraped and what block they turn into. (This works primarily with blocks that have no directional or other information in their state.)
+- Specify (and potentially remove or disable) via item (mod:item:meta (meta optional)) which mossy thaumcraft.blocks can be scraped and what block they turn into. (This works primarily with thaumcraft.blocks that have no directional or other information in their state.)
 
 Some of the configuration options are too complex or ill-suited for a configuration file. These are instead performed via CraftTweaker integration, which is fully documented under the "Mods -> Roots 3" section of [the Official CraftTweaker Documentation](https://docs.blamejared.com/en/). Covered by those include:
 
@@ -47,7 +47,7 @@ Some of the configuration options are too complex or ill-suited for a configurat
 - Creatures considered animals that grant the ["Untrue Pacifist" advancement can be specified](https://docs.blamejared.com/en/#Mods/Roots_3/pacifist/).
 - Crafting recipes performed on a [Pyre](https://docs.blamejared.com/en/#Mods/Roots_3/pyre/) can be modified.
 - The ingredients for [Pyre Rituals](https://docs.blamejared.com/en/#Mods/Roots_3/ritual/) can be modified.
-- The results of using [Runic Shears on entities or blocks](https://docs.blamejared.com/en/#Mods/Roots_3/runicshears/) can be specified.
+- The results of using [Runic Shears on thaumcraft.entities or thaumcraft.blocks](https://docs.blamejared.com/en/#Mods/Roots_3/runicshears/) can be specified.
 - Recipes for the [Ritual of Transmutation](https://docs.blamejared.com/en/#Mods/Roots_3/transmutation/) can be removed or added.
 
 If there's anything that you'd like to modify that isn't currently available, you can open an issue or ask on Discord.

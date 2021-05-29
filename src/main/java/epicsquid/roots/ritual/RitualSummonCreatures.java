@@ -30,7 +30,7 @@ public class RitualSummonCreatures extends RitualBase {
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 3).setDescription("Radius on the Z Axis of the square area in which the ritual takes place");
   public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(150).setDescription("interval in ticks between each summoned creature");
   public static Property<Integer> PROP_TRIES = new Property<>("tries", 10).setDescription("number of attempts at finding a random good (satisfying the conditions) position to spawn the creature");
-  public static Property<Integer> PROP_GLOW_DURATION = new Property<>("glow_duration", 30).setDescription("the duration at which newly spawned and summoned entities will glow at (in ticks)");
+  public static Property<Integer> PROP_GLOW_DURATION = new Property<>("glow_duration", 30).setDescription("the duration at which newly spawned and summoned thaumcraft.entities will glow at (in ticks)");
 
   public int radius_x, radius_y, radius_z, tries, interval, glow_duration;
 

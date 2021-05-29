@@ -66,7 +66,7 @@ public class RunicShearsTweaker {
   @ZenMethod
   public static void addRecipeViaItem(String name, IItemStack outputDrop, IItemStack inputBlock, IItemStack replacementBlock, IItemStack displayItem) {
     if (!(CraftTweakerMC.getItemStack(inputBlock).getItem() instanceof ItemBlock) || (replacementBlock != null && !(CraftTweakerMC.getItemStack(replacementBlock).getItem() instanceof ItemBlock))) {
-      CraftTweakerAPI.logError("Runic Shears require input and replacement to be blocks. Recipe: " + name);
+      CraftTweakerAPI.logError("Runic Shears require input and replacement to be thaumcraft.blocks. Recipe: " + name);
       return;
     }
     CraftTweaker.LATE_ACTIONS.add(new Add(name, CraftTweakerMC.getItemStack(outputDrop), CraftTweakerMC.getBlock(Objects.requireNonNull(replacementBlock).asBlock()), CraftTweakerMC.getBlock(inputBlock.asBlock()), CraftTweakerMC.getItemStack(displayItem)));

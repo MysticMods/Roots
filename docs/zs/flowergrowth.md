@@ -59,11 +59,11 @@ Adds a recipe by creating a blockstate from an itemstack containing an itemblock
 void addRecipeItemOnSoils(
   string name,            // The name of the recipe that you're adding
   IItemStack stack,       // The itemstack describing an itemblock to be placed
-  List<IIngredient> soils // The types of "soils" (blocks) the itemblock can be placed on
+  List<IIngredient> soils // The types of "soils" (thaumcraft.blocks) the itemblock can be placed on
 );
 ```
 
-Adds a recipe by creating a blockstate from an itemstack containing an itemblock and metadata to be grown during the Flower Growth ritual, with a whitelist of "soils" (blocks) that this recipe can grow things on.
+Adds a recipe by creating a blockstate from an itemstack containing an itemblock and metadata to be grown during the Flower Growth ritual, with a whitelist of "soils" (thaumcraft.blocks) that this recipe can grow things on.
 
 The soils can be oredict entries.
 

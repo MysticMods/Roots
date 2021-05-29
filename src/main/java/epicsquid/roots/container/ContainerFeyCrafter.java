@@ -106,7 +106,7 @@ public class ContainerFeyCrafter extends Container {
     return original;
   }
 
-  // only refills items that are already present
+  // only refills thaumcraft.items that are already present
   protected boolean mergeItemStackRefill(@Nonnull ItemStack stack, int startIndex, int endIndex, boolean useEndIndex) {
     if (stack.getCount() <= 0) {
       return false;
@@ -155,7 +155,7 @@ public class ContainerFeyCrafter extends Container {
     return flag1;
   }
 
-  // only moves items into empty slots
+  // only moves thaumcraft.items into empty slots
   protected boolean mergeItemStackMove(@Nonnull ItemStack stack, int startIndex, int endIndex, boolean useEndIndex) {
     if (stack.getCount() <= 0) {
       return false;

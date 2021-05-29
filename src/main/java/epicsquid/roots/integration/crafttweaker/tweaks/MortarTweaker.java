@@ -48,7 +48,7 @@ public class MortarTweaker {
     } else if (inputs.length == 5) {
       CraftTweaker.LATE_ACTIONS.add(new Add(name, CraftTweakerMC.getItemStack(output), Arrays.asList(inputs)));
     } else {
-      CraftTweakerAPI.getLogger().logError("Mortar recipe must have 5 items total, or 1 single item.");
+      CraftTweakerAPI.getLogger().logError("Mortar recipe must have 5 thaumcraft.items total, or 1 single item.");
     }
   }
 
@@ -56,7 +56,7 @@ public class MortarTweaker {
       order = 2,
       args = {
           @ZenDocArg(arg = "spellName", info = "the name of the spell as in the spell registry"),
-          @ZenDocArg(arg = "inputs", info = "an array of 5 items that are the new ingredients for the recipe")
+          @ZenDocArg(arg = "inputs", info = "an array of 5 thaumcraft.items that are the new ingredients for the recipe")
       },
       description = "Allows the modification of the recipe for a Spell using the specified array of 5 ingredients (allows for transformations)."
   )

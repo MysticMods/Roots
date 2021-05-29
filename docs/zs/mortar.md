@@ -22,7 +22,7 @@ Creates a recipe to create output from an array of ingredients (allows transform
 ```zenscript
 void changeSpell(
   string spellName,    // the name of the spell as in the spell registry
-  IIngredient[] inputs // an array of 5 items that are the new ingredients for the recipe
+  IIngredient[] inputs // an array of 5 thaumcraft.items that are the new ingredients for the recipe
 );
 ```
 

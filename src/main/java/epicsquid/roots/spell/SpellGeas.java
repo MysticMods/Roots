@@ -30,8 +30,8 @@ public class SpellGeas extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("baffle_cap", 0.450));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(new SpellCost("terra_moss", 0.125));
-  public static Property<Integer> PROP_DURATION = new Property<>("geas_duration", 400).setDescription("duration in ticks of this spell effect on entities");
-  public static Property<Double> PROP_DISTANCE = new Property<>("distance", 15d).setDescription("the farthest extent that entities will be looked for when using targeted mode");
+  public static Property<Integer> PROP_DURATION = new Property<>("geas_duration", 400).setDescription("duration in ticks of this spell effect on thaumcraft.entities");
+  public static Property<Double> PROP_DISTANCE = new Property<>("distance", 15d).setDescription("the farthest extent that thaumcraft.entities will be looked for when using targeted mode");
   public static Property<Integer> PROP_EXTENSION = new Property<>("extension", 600).setDescription("additional duration in ticks to be added to the base duration");
   public static Property<Integer> PROP_WEAKNESS_DURATION = new Property<>("weakness_duration", 20 * 4).setDescription("how long the creature should be weakened for after geas ends");
   public static Property<Float> PROP_FIRE_DAMAGE = new Property<>("fire_damage", 2.5f).setDescription("the amount of fire damage that creatures should take after the geas ends");
@@ -39,8 +39,8 @@ public class SpellGeas extends SpellBase {
   public static Property<Float> PROP_PHYSICAL_DAMAGE = new Property<>("physical_damage", 2.5f).setDescription("the amount of physical damage creatures should take after the geas ends");
   public static Property<Float> PROP_WATER_DAMAGE = new Property<>("water_damage", 2.5f).setDescription("how much water damage creatures should take after the geas ends");
   public static Property<Integer> PROP_WEAKNESS_AMPLIFIER = new Property<>("weakness_amplifier", 0).setDescription("the amplifier to be applied to the weakness effect");
-  public static Property<Integer> PROP_SAVIOR_DURATION = new Property<>("savior_duration", 10 * 20).setDescription("the duration of the absorption effect to be applied to peaceful entities");
-  public static Property<Integer> PROP_SAVIOR_AMPLIFIER = new Property<>("savior_amplifier", 3).setDescription("the amplifier of the absorption effect to be applied to peaceful entities");
+  public static Property<Integer> PROP_SAVIOR_DURATION = new Property<>("savior_duration", 10 * 20).setDescription("the duration of the absorption effect to be applied to peaceful thaumcraft.entities");
+  public static Property<Integer> PROP_SAVIOR_AMPLIFIER = new Property<>("savior_amplifier", 3).setDescription("the amplifier of the absorption effect to be applied to peaceful thaumcraft.entities");
 
 
   public static Modifier DURATION = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "extended_geas"), ModifierCores.PERESKIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.45)));

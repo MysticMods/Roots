@@ -32,7 +32,7 @@ public class SpellSummersThaw extends SpellBase {
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 5).setDescription("radius on the X axis of the area in which the spell takes effect");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("radius on the Y axis of the area in which the spell takes effect");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 5).setDescription("radius on the Z axis of the area in which the spell takes effect");
-  public static Property<Integer> PROP_MAX_AFFECTED = new Property<>("max_affected", 5).setDescription("maximum affected blocks each time the spell is cast");
+  public static Property<Integer> PROP_MAX_AFFECTED = new Property<>("max_affected", 5).setDescription("maximum affected thaumcraft.blocks each time the spell is cast");
 
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_summers_thaw");
   public static SpellSummersThaw instance = new SpellSummersThaw(spellName);

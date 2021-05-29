@@ -36,7 +36,7 @@ public class FeyCraftingTweaker {
       args = {
           @ZenDocArg(arg = "name", info = "the name of the recipe; if replacing an existing recipe, be sure to use the same name to ensure Patchouli continuity"),
           @ZenDocArg(arg = "output", info = "the itemstack produced by this recipe"),
-          @ZenDocArg(arg = "inputs", info = "an array of IIngredients that make up the recipe; must contain 5 items")
+          @ZenDocArg(arg = "inputs", info = "an array of IIngredients that make up the recipe; must contain 5 thaumcraft.items")
       },
       description = "Creates a recipe producing output from an array of ingredients (transforms are supported), requires a name."
   )
@@ -50,15 +50,15 @@ public class FeyCraftingTweaker {
       args = {
           @ZenDocArg(arg = "name", info = "the name of the recipe; if replacing an existing recipe, be sure to use the same name to ensure Patchouli continuity"),
           @ZenDocArg(arg = "output", info = "the itemstack produced by this recipe"),
-          @ZenDocArg(arg = "inputs", info = "an array of IIngredients that make up the recipe; must contain 5 items"),
-          @ZenDocArg(arg = "xp", info = "the amount of xp (in levels) to reward the player for crafting this recipe")
+          @ZenDocArg(arg = "inputs", info = "an array of IIngredients that make up the recipe; must contain 5 thaumcraft.items"),
+          @ZenDocArg(arg = "xp", info = "the amount of xp (in levels) to reward the player for thaumcraft.crafting this recipe")
       },
       description = "Creates a recipe producing output from an array of ingredients (transforms are supported), requires a name. Additional drops the specified amount of experience whenever the recipe is crafted."
   )
   @ZenMethod
   public static void addRecipe(String name, IItemStack output, IIngredient[] inputs, int xp) throws IllegalArgumentException {
     if (inputs.length != 5) {
-      throw new IllegalArgumentException("Fey Crafting Ritual must have 5 items: " + name);
+      throw new IllegalArgumentException("Fey Crafting Ritual must have 5 thaumcraft.items: " + name);
     }
     CraftTweaker.LATE_ACTIONS.add(new Add(name, CraftTweakerMC.getItemStack(output), Arrays.asList(inputs), xp));
   }

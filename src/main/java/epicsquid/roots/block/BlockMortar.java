@@ -57,8 +57,8 @@ public class BlockMortar extends BlockTEBase {
 
   @Override
   /*
-    0 = No items or invalid recipe
-    1-5 = How many items
+    0 = No thaumcraft.items or invalid recipe
+    1-5 = How many thaumcraft.items
     15 = Valid recipe
    */
   public int getComparatorInputOverride(IBlockState blockState, World worldIn, BlockPos pos) {

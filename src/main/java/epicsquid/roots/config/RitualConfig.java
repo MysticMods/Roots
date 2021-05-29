@@ -25,7 +25,7 @@ public class RitualConfig {
   }
 
   @Config.Name("Animal Harvest produces fish")
-  @Config.Comment("Whether or not the Animal Harvest recipe should produce fish in water source blocks")
+  @Config.Comment("Whether or not the Animal Harvest recipe should produce fish in water source thaumcraft.blocks")
   public static boolean animalHarvestDoFish = true;
 
   @Config.LangKey("config.roots.subcategory.disable_rituals")

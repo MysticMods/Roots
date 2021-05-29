@@ -52,13 +52,13 @@ public class SpellSaturate extends SpellBase {
   public static Property<Double> PROP_FOOD_MULTIPLIER = new Property<>("food_multiplier", 0.5).setDescription("multiplier for the food value each food item gives");
   public static Property<Double> PROP_ADDITIONAL_SATURATION_MULTIPLIER = new Property<>("increased_saturation_multiplier", 0.3).setDescription("the additional value added to the multiplier");
   public static Property<Double> PROP_ADDITIONAL_FOOD_MULTIPLIER = new Property<>("increased_food_multiplier", 0.3);
-  public static Property<String> PROP_UNCOOKED_DICT = new Property<>("uncooked_dictionary", "rootsUncookedVegetables").setDescription("the ore dictionary name for items that should be considered uncooked vegetables");
+  public static Property<String> PROP_UNCOOKED_DICT = new Property<>("uncooked_dictionary", "rootsUncookedVegetables").setDescription("the ore dictionary name for thaumcraft.items that should be considered uncooked vegetables");
   public static Property<Double> PROP_UNCOOKED_ADDITIONAL_SATURATION = new Property<>("uncooked_saturation", 0.4).setDescription("how much additional saturation ratio uncooked food should provide");
   public static Property<Double> PROP_UNCOOKED_ADDITIONAL_FOOD = new Property<>("uncooked_food", 0.4).setDescription("how much additional food ratio uncooked food should provide");
-  public static Property<String> PROP_COOKED_DICT = new Property<>("cooked_dictionary", "rootsCookedFoods").setDescription("the ore dictionary name for items that should be considered cooked");
+  public static Property<String> PROP_COOKED_DICT = new Property<>("cooked_dictionary", "rootsCookedFoods").setDescription("the ore dictionary name for thaumcraft.items that should be considered cooked");
   public static Property<Double> PROP_COOKED_ADDITIONAL_SATURATION = new Property<>("cooked_saturation", 0.4).setDescription("how much additional saturation ratio cooked food should provide");
   public static Property<Double> PROP_COOKED_ADDITIONAL_FOOD = new Property<>("cooked_food", 0.4).setDescription("how much additional food ratio cooked food should provide");
-  public static Property<String> PROP_BOTTLED_DICT = new Property<>("bottled_dictionary", "rootsBottledFood").setDescription("the ore dictionary name for items that should be considered bottled goods");
+  public static Property<String> PROP_BOTTLED_DICT = new Property<>("bottled_dictionary", "rootsBottledFood").setDescription("the ore dictionary name for thaumcraft.items that should be considered bottled goods");
   public static Property<Double> PROP_BOTTLED_ADDITIONAL_SATURATION = new Property<>("bottled_saturation", 0.4).setDescription("how much additional saturation ratio bottled food should provide");
   public static Property<Double> PROP_BOTTLED_ADDITIONAL_FOOD = new Property<>("bottled_food", 0.4).setDescription("how much additional food ratio bottled food should provide");
   public static Property<Integer> PROP_RESISTANCE_DURATION = new Property<>("resistance_duration", 10 * 20).setDescription("the duration of the resistance effect, multiplied by how much additional saturation there is");

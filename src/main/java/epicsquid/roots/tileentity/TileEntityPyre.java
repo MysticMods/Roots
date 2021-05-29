@@ -7,6 +7,7 @@ import epicsquid.mysticallib.particle.RenderUtil;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.Roots;
 import epicsquid.roots.block.BlockPyre;
 import epicsquid.roots.config.RitualConfig;
 import epicsquid.roots.entity.ritual.EntityRitualBase;
@@ -47,6 +48,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -57,6 +59,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nonnull;
@@ -258,6 +261,21 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
   @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
+
+    if (false && !world.isRemote) {
+      String line1 = "PYRE: Pyre right clicked with item: " + heldItem.getItem().getRegistryName() + ", meta: " + heldItem.getMetadata();
+      int[] ids = OreDictionary.getOreIDs(heldItem);
+      StringJoiner ores = new StringJoiner(", ");
+      for (int id : ids) {
+        ores.add(OreDictionary.getOreName(id));
+      }
+      String line2 = "PYRE: Item is part of the following ore dictionary groups: " + ores.toString();
+      player.sendMessage(new TextComponentString(line1));
+      player.sendMessage(new TextComponentString(line2));
+      Roots.logger.info(line1);
+      Roots.logger.info(line2);
+    }
+
     if (heldItem.getItem() == ModItems.firestarter) {
       return false;
     }
@@ -306,7 +324,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
           }
         }
       }
-      // TODO: Make this a configurable array of items or extensible classes
+      // TODO: Make this a configurable array of thaumcraft.items or extensible classes
       if (fireStarters == null) {
         fireStarters = new OreIngredient("pyreFireStarters");
       }
@@ -578,7 +596,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
   }
 
   public void spawnCraftResult() {
-    //Spawn item if crafting recipe
+    //Spawn item if thaumcraft.crafting recipe
     if (!world.isRemote && !this.craftingResult.isEmpty()) {
       ItemStack result = this.craftingResult.copy();
       if (this.lastRecipeUsed != null) {

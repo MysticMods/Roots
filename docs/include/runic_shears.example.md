@@ -16,4 +16,4 @@ RunicShears.removeRecipe(<roots:fey_leather>);
 
 ### Notes
 
-Note that the `removeRecipe` function will attempt to remove any recipe (both runic shearing of blocks and of entities) that matches the desired output.
+Note that the `removeRecipe` function will attempt to remove any recipe (both runic shearing of thaumcraft.blocks and of thaumcraft.entities) that matches the desired output.
