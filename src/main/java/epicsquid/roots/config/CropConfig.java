@@ -12,7 +12,7 @@ import java.util.Set;
 @Config.LangKey("config.roots.category.crops")
 @Config(modid = Roots.MODID, name = "roots/crops", category = "crops")
 public class CropConfig {
-  @Config.Comment(("List of mod:blocks to ignore when growing crops, etc; use /roots growables for a complete list (for individual blocks)"))
+  @Config.Comment(("List of mod:thaumcraft.blocks to ignore when growing crops, etc; use /roots growables for a complete list (for individual thaumcraft.blocks)"))
   public static String[] GrowthBlacklist = new String[]{"minecraft:tallgrass"};
   @Config.Ignore
   private static Set<Block> growthBlacklist = null;
@@ -53,7 +53,7 @@ public class CropConfig {
     return harvestModBlacklist;
   }
 
-  @Config.Comment(("List modid:name of blocks/resource locations that should be excluded from Harvesting (for individual crops)"))
+  @Config.Comment(("List modid:name of thaumcraft.blocks/resource locations that should be excluded from Harvesting (for individual crops)"))
   public static String[] HarvestBlacklist = new String[]{};
 
   @Config.Ignore

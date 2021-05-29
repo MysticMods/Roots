@@ -35,7 +35,7 @@ public class PyreCraftingTweaker {
           @ZenDocArg(arg = "output", info = "the output of this recipe"),
           @ZenDocArg(arg = "inputs", info = "a list of five ingredients (no more, no less)")
       },
-      description = "Adds a Pyre crafting recipe that produces output after the standard amount of time, with the specified input ingredients (with potential transformers)."
+      description = "Adds a Pyre thaumcraft.crafting recipe that produces output after the standard amount of time, with the specified input ingredients (with potential transformers)."
   )
   @ZenMethod
   public static void addRecipe(String name, IItemStack output, IIngredient[] inputs) {
@@ -48,14 +48,14 @@ public class PyreCraftingTweaker {
           @ZenDocArg(arg = "name", info = "the name of the recipe being added; if replacing an existing game recipe, ensure the correct name is used"),
           @ZenDocArg(arg = "output", info = "the output of this recipe"),
           @ZenDocArg(arg = "inputs", info = "a list of five ingredients"),
-          @ZenDocArg(arg = "xp", info = "the amount of xp in levels that is granted after crafting")
+          @ZenDocArg(arg = "xp", info = "the amount of xp in levels that is granted after thaumcraft.crafting")
       },
-      description = "Adds a Pyre crafting recipe that produces output after the standard amount of time, with the specified input ingredients (with potential transformers). Allows for the specification of an amount of experience to be generated once the craft is finished."
+      description = "Adds a Pyre thaumcraft.crafting recipe that produces output after the standard amount of time, with the specified input ingredients (with potential transformers). Allows for the specification of an amount of experience to be generated once the craft is finished."
   )
   @ZenMethod
   public static void addRecipe(String name, IItemStack output, IIngredient[] inputs, int xp) {
     if (inputs.length != 5) {
-      CraftTweakerAPI.logError("Pyre Crafting Ritual must have 5 items: " + name);
+      CraftTweakerAPI.logError("Pyre Crafting Ritual must have 5 thaumcraft.items: " + name);
       return;
     }
     CraftTweaker.LATE_ACTIONS.add(new Add(name, CraftTweakerMC.getItemStack(output), Arrays.asList(inputs), xp));
@@ -66,7 +66,7 @@ public class PyreCraftingTweaker {
       args = {
           @ZenDocArg(arg = "output", info = "the output of the recipe to remove")
       },
-      description = "Removes a Pyre crafting recipe based on its output."
+      description = "Removes a Pyre thaumcraft.crafting recipe based on its output."
   )
   @ZenMethod
   public static void removeRecipe(IItemStack output) {

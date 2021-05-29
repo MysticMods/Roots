@@ -25,7 +25,7 @@ public class PacifistTweaker {
       args = {
           @ZenDocArg(arg = "entity", info = "the entity to add to the pacifist list")
       },
-      description = "Allows the addition of new entities to the list of 'Pacifist' creatures, i.e., those that, when killed, will grant the Untrue Pacifist advancement."
+      description = "Allows the addition of new thaumcraft.entities to the list of 'Pacifist' creatures, i.e., those that, when killed, will grant the Untrue Pacifist advancement."
   )
   @ZenMethod
   public static void addEntity(IEntityDefinition entity) {

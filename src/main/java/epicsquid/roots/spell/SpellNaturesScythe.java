@@ -60,12 +60,12 @@ public class SpellNaturesScythe extends SpellBase {
   public static Property<Integer> PROP_RADIUS = new Property<>("radius", 12).setDescription("horizontal radius of the area in which the spell takes effect");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("radius on the Y axis of the area in which the spell takes effect");
   public static Property<Integer> PROP_INTERVAL = new Property<>("interval", 2).setDescription("interval in ticks between each harvested block segment");
-  public static Property<Integer> PROP_MAX_AFFECTED = new Property<>("max_affected", 3).setDescription("maximum number of blocks affected each tick per enabled type");
+  public static Property<Integer> PROP_MAX_AFFECTED = new Property<>("max_affected", 3).setDescription("maximum number of thaumcraft.blocks affected each tick per enabled type");
   public static Property<String> PROP_TREE_DICT = new Property<>("tree_dictionary", "treeLeaves").setDescription("the ore dictionary entry that should be used to identify leaves");
   public static Property<String> PROP_WEB_DICT = new Property<>("web_dictionary", "webs").setDescription("the ore dictionary entry that should be used to identify cobwebs in addition to the standard vanilla block");
-  public static Property<String> PROP_GRASS_DICT = new Property<>("grass_dictionary", "tallgrass").setDescription("the ore dictionary entry that should be used to identify grass in addition to the standard vanilla blocks");
-  public static Property<String> PROP_MUSHROOM_DICT = new Property<>("mushroom_dictionary", "mushrooms").setDescription("the ore dictionary entry that should be used to identify mushroom blocks (not huge mushrooms) in addition to those that derive from the default mushroom");
-  public static Property<String> PROP_FLOWER_DICT = new Property<>("flower_dictionary", "flowers").setDescription("the ore dictionary entry that should be used to identify flower blocks in addition to those that derive from the default flowers");
+  public static Property<String> PROP_GRASS_DICT = new Property<>("grass_dictionary", "tallgrass").setDescription("the ore dictionary entry that should be used to identify grass in addition to the standard vanilla thaumcraft.blocks");
+  public static Property<String> PROP_MUSHROOM_DICT = new Property<>("mushroom_dictionary", "mushrooms").setDescription("the ore dictionary entry that should be used to identify mushroom thaumcraft.blocks (not huge mushrooms) in addition to those that derive from the default mushroom");
+  public static Property<String> PROP_FLOWER_DICT = new Property<>("flower_dictionary", "flowers").setDescription("the ore dictionary entry that should be used to identify flower thaumcraft.blocks in addition to those that derive from the default flowers");
   public static Property<String> PROP_VINES_DICT = new Property<>("vine_dictionary", "vines").setDescription("the ore dictionary entry that should be used to identify vines in addition to those that by default derive from vanilla vines");
 
   public static Modifier WEBS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "dewebbing"), ModifierCores.CLOUD_BERRY, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.125)));

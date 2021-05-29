@@ -36,9 +36,9 @@ public class SpellDisarm extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("moonglow_leaf", 0.425));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(new SpellCost("wildewheet", 0.125));
-  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 5).setDescription("radius on the X axis within which entities are affected by the spell");
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("radius on the Y axis within which entities are affected by the spell");
-  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 5).setDescription("radius on the Z axis within which entities are affected by the spell");
+  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 5).setDescription("radius on the X axis within which thaumcraft.entities are affected by the spell");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("radius on the Y axis within which thaumcraft.entities are affected by the spell");
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 5).setDescription("radius on the Z axis within which thaumcraft.entities are affected by the spell");
   public static Property<Float> PROP_DROP_CHANCE = new Property<>("drop_chance", 0.35f).setDescription("percentage chance for disarmed mobs to actually drop their weapons (default 0.35 = 35%)");
   public static Property<Float> PROP_CHANCE_INCREASE = new Property<>("chance_increase", 0.35f).setDescription("percentage chance to be applied when increased drop chance is active (default 0.35 = 35%)");
   public static Property<Float> PROP_ARMOR = new Property<>("armor_chance", 0.30f).setDescription("percent chance when armor is enabled to drop armor (percent doubled when both applied)");

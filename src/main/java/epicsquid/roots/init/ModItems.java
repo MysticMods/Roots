@@ -36,7 +36,7 @@ import java.util.List;
 
 public class ModItems {
 
-  // All mod items
+  // All mod thaumcraft.items
   public static Item guide, pestle, herb_pouch, component_pouch, apothecary_pouch, fey_pouch, spell_dust, staff, living_pickaxe, living_axe, living_shovel, living_hoe, living_sword, runic_shears, gold_knife, diamond_knife, iron_knife, stone_knife, wood_knife, wildwood_quiver, wildwood_bow,
       sylvan_helmet, sylvan_chestplate, sylvan_leggings, sylvan_boots, wildwood_helmet, wildwood_chestplate, wildwood_leggings, wildwood_boots, wooden_shears, firestarter,
       petals, flour, living_arrow, runic_dust, cooked_pereskia, wildroot_stew, fey_leather, wildewheet_bread, glass_eye, mystic_feather, strange_ooze, gramary, spirit_bag, reliquary;
@@ -68,7 +68,7 @@ public class ModItems {
   public static final ItemArmor.ArmorMaterial wildwoodArmorMaterial = EnumHelper.addArmorMaterial("WILDWOOD", Roots.MODID + ":wildwood", 20, new int[]{2, 6, 7, 2}, 20, SoundEvents.BLOCK_WOOD_PLACE, 1F);
 
   /**
-   * Register all items
+   * Register all thaumcraft.items
    */
   public static void registerItems(@Nonnull RegisterContentEvent event) {
     event.addItem(guide = new ItemGuide("roots_guide")).setCreativeTab(Roots.tab);

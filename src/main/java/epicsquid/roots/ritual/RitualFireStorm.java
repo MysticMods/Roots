@@ -11,9 +11,9 @@ import net.minecraft.util.text.TextFormatting;
 
 public class RitualFireStorm extends RitualBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(600);
-  public static Property<Integer> PROP_PROJECTILE_COUNT = new Property<>("projectile_count", 40).setDescription("maximum number of projectiles flare entities present during the ritual (checked every 2 ticks)");
-  public static Property<Float> PROP_PROJECTILE_DAMAGE = new Property<>("projectile_damage", 4f).setDescription("damage dealt to hostile entities by each ritual projectile");
-  public static Property<Float> PROP_PROJECTILE_KNOCKBACK = new Property<>("projectile_knockback", 0.5f).setDescription("knockback dealt to hostile entities by each ritual projectile");
+  public static Property<Integer> PROP_PROJECTILE_COUNT = new Property<>("projectile_count", 40).setDescription("maximum number of projectiles flare thaumcraft.entities present during the ritual (checked every 2 ticks)");
+  public static Property<Float> PROP_PROJECTILE_DAMAGE = new Property<>("projectile_damage", 4f).setDescription("damage dealt to hostile thaumcraft.entities by each ritual projectile");
+  public static Property<Float> PROP_PROJECTILE_KNOCKBACK = new Property<>("projectile_knockback", 0.5f).setDescription("knockback dealt to hostile thaumcraft.entities by each ritual projectile");
 
   public float projectile_damage, projectile_knockback;
   public int projectile_count;

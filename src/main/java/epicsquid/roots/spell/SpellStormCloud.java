@@ -30,7 +30,7 @@ public class SpellStormCloud extends SpellBase {
   public static Property<Integer> PROP_RADIUS_EXTENDED = new Property<>("extended_radius", 2).setDescription("the additional radius of the storm");
   public static Property<Float> PROP_LIGHTNING_CHANCE = new Property<>("lightning_chance", 0.25f).setDescription("chance for each lightning to spawn");
   public static Property<Integer> PROP_LIGHTNING_INTERVAL = new Property<>("lightning_interval", 3 * 20).setDescription("frequency that checks for lightning strikes are made");
-  public static Property<Integer> PROP_FIRE_RESISTANCE = new Property<>("fire_resistance", 2).setDescription("the level of fire resistance given entities for the duration");
+  public static Property<Integer> PROP_FIRE_RESISTANCE = new Property<>("fire_resistance", 2).setDescription("the level of fire resistance given thaumcraft.entities for the duration");
   public static Property<Float> PROP_LIGHTNING_DAMAGE = new Property<>("lightning_damage", 2.5f).setDescription("the amount of damage done when struck while in the storm");
   public static Property<Integer> PROP_HEAL_INTERVAL = new Property<>("heal_interval", 5 * 20).setDescription("the interval between each heal");
   public static Property<Float> PROP_HEAL_AMOUNT = new Property<>("heal_amount", 1f).setDescription("how much healing should be done");

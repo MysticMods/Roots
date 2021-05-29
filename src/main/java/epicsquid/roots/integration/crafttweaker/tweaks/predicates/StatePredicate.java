@@ -26,7 +26,7 @@ public class StatePredicate implements Predicates.IPredicate {
   @ZenDocMethod(
       order = 1,
       args = {
-          @ZenDocArg(arg = "state", info = "description of a blockstate against which only blocks themselves (and not state properties) will be compared"),
+          @ZenDocArg(arg = "state", info = "description of a blockstate against which only thaumcraft.blocks themselves (and not state properties) will be compared"),
       },
       description = "Creates an IPredicate where the state is stored, and is matched against other states purely by ensuring that they are of the same block, ignoring any property values."
   )

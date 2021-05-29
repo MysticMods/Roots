@@ -3,7 +3,7 @@ Intro
 
 Greetings! This has been a long time coming, starting around July or August last year. While this is not the final product and doesn't have all of the [planned additions, fixes and changes](https://github.com/MysticMods/Roots/issues?q=is%3Aissue+is%3Aopen+label%3A3.1.0), it's getting fairly close and I'm keen to begin testing.
 
-There are a number of changes, including additional spells and rituals, modified spells and rituals, items, etc. I've tried to summarise as simply as possible below. Then there are bug fixes and adjustments, not all of which are listed.
+There are a number of changes, including additional spells and rituals, modified spells and rituals, thaumcraft.items, etc. I've tried to summarise as simply as possible below. Then there are bug fixes and adjustments, not all of which are listed.
 
 Obtaining
 ---------
@@ -45,19 +45,19 @@ Bug Fixes
 
 This file will likely be updated, and is currently up to date for release: `alpha` (initial release).
 
-- Component and apothecary pouches should no longer void items.
+- Component and apothecary pouches should no longer void thaumcraft.items.
 
 Additional Spells
 =================
 
 - Autumn's Fall: causes nearby leaves to break
-- Chrysopoeia: transmutes (according to a recipe list) items in your off-hand
+- Chrysopoeia: transmutes (according to a recipe list) thaumcraft.items in your off-hand
 - Desaturate: expends saturation & filled hunger in exchange for health (at a lower ratio)
 - Disarm: an expensive spell that disarms a nearby creature, with a chance to drop the item
 - Nature's Blades: causes tall grass to grow on nearby surfaces, and causes grass to sprout on dirt
 - Nature's Scythe: causes nearby grass, tall grass and flowers to break
 - Reach: Temporarily grants you extended reach (except when fighting monsters)
-- Saturate: instantly consumes edible items in your inventory to refill your hunger and saturation, at a lower percentage than would be gained from eating them normally
+- Saturate: instantly consumes edible thaumcraft.items in your inventory to refill your hunger and saturation, at a lower percentage than would be gained from eating them normally
 - Scatter: plants seeds in nearby tilled ground
 - Spring Storm: causes dark storm clouds to gather above you, granting Resistance & Fire Resistance to players standing within them, melting snow, and striking hostile creatures with lightning
 - Summer's Thaw: causes ice, snow, etc, to melt
@@ -75,14 +75,14 @@ Added Rituals
 Significantly Modified Rituals
 ==============================
 
-- Fire Storm: The fire spawned by this ritual only harms hostile creatures, not items, players or passive creatures. Monsters killed by it are considered to have been killed by players with Looting II.
-- Summon Creatures: Significantly changed in the 3.0 series, this ritual now accepts multiple items from multiple offering plates, allowing for more complex recipes.
+- Fire Storm: The fire spawned by this ritual only harms hostile creatures, not thaumcraft.items, players or passive creatures. Monsters killed by it are considered to have been killed by players with Looting II.
+- Summon Creatures: Significantly changed in the 3.0 series, this ritual now accepts multiple thaumcraft.items from multiple offering plates, allowing for more complex recipes.
 
 New Items
 =========
 
 - Salmon of Knowledge: can be crafted to share advancements with another player.
-- Life Essence: obtained using Runic Shears while sneaking on entities listed in the Animal Harvest ritual (by default). Used in the Summon Creatures ritual in place of ingredients.
+- Life Essence: obtained using Runic Shears while sneaking on thaumcraft.entities listed in the Animal Harvest ritual (by default). Used in the Summon Creatures ritual in place of ingredients.
 - Creative Component Pouch: provides an infinite amount of herbs whenever a spell is cast.
 
 Modified Items

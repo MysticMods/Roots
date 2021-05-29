@@ -34,7 +34,7 @@ public class SpellAcidCloud extends SpellBase {
   public static Property.PropertyCooldown PROP_COOLDOWN = new Property.PropertyCooldown(10);
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("baffle_cap", 0.250));
-  public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(4f).setDescription("damage dealt each time to living entities");
+  public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(4f).setDescription("damage dealt each time to living thaumcraft.entities");
   public static Property<Integer> PROP_DAMAGE_COUNT = new Property<>("damage_count", 4).setDescription("maximum number of creatures that can be damaged per tick, -1 for infinite");
   public static Property<Integer> PROP_POISON_DURATION = new Property<>("poison_duration", 80).setDescription("duration in ticks of the poison effect applied on the enemies");
   public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 5).setDescription("duration in seconds of the fire effect applied on the enemies");
@@ -43,7 +43,7 @@ public class SpellAcidCloud extends SpellBase {
   public static Property<Integer> PROP_RADIUS_BOOST = new Property<>("radius_boost", 2).setDescription("how much radius should be boosted by when Radius Boost modifier applied");
   public static Property<Float> PROP_NIGHT_LOWER = new Property<>("night_modifier_low", 0.05f).setDescription("the value to multiply damage by at dusk and dawn, rising to night_modifier_high at midnight and then down again");
   public static Property<Float> PROP_NIGHT_HIGHER = new Property<>("night_modifier_high", 0.6f).setDescription("the value to multiply damage by at midnight, increasing to this from dusk and decreasing from this at dawn");
-  public static Property<Float> PROP_UNDEAD_DAMAGE = new Property<>("undead_damage", 2.0f).setDescription("additional damage done to undead entities with the spirit herb modifier");
+  public static Property<Float> PROP_UNDEAD_DAMAGE = new Property<>("undead_damage", 2.0f).setDescription("additional damage done to undead thaumcraft.entities with the spirit herb modifier");
   public static Property<Float> PROP_HEALING = new Property<>("healing", 1.0f).setDescription("how much healing is done by the cloud");
   public static Property<Integer> PROP_REGENERATION = new Property<>("regeneration", 40).setDescription("how long the duration of regen to apply (0 to not apply)");
   public static Property<Integer> PROP_REGEN_AMPLIFIER = new Property<>("regeneration_amplifier", 0).setDescription("what amplifier to use when applying the regen effect");
@@ -141,7 +141,7 @@ public class SpellAcidCloud extends SpellBase {
           if (regen_duration != -1) {
             e.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, regen_duration, regen_amp));
           }
-          // TODO: Particle effect to denote entities being healed
+          // TODO: Particle effect to denote thaumcraft.entities being healed
           if (healing > 0) {
             e.heal(healing * modifier);
           }
