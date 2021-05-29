@@ -293,6 +293,7 @@ public class ModItems {
     OreDictionary.registerOre("stonebrick", new ItemStack(Blocks.STONEBRICK, 1, BlockStoneBrick.CRACKED_META));
 
     OreDictionary.registerOre("mossyCobblestone", new ItemStack(Blocks.MOSSY_COBBLESTONE));
+    OreDictionary.registerOre("pyreFireStarters", new ItemStack(Items.FLINT_AND_STEEL, 1, OreDictionary.WILDCARD_VALUE));
   }
 
   private static void registerSeedDrops() {
