@@ -56,10 +56,8 @@ dependencies {
     deobfCompile "com.azanor:Baubles:${version_baubles}"
 
     // compile against the JEI API but do not include it at runtime
-    deobfProvided "mezz.jei:jei_${minecraft_version}:${jei_version}:api"
-    // at runtime, use the full JEI jar
-    runtime "mezz.jei:jei_${minecraft_version}:${jei_version}"
-    compileOnly("jeresources:JustEnoughResources-${minecraft_version}:${jer_version}") {
+    deobfCompile "mezz.jei:jei_${minecraft_version}:${jei_version}"
+    deobfCompile("jeresources:JustEnoughResources-${minecraft_version}:${jer_version}") {
         exclude group: 'mezz.jei'
     }
     compile("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${ct_version}") {

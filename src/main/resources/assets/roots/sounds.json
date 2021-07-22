@@ -372,13 +372,13 @@
   },
   "spell.time_stop": {
     "sounds": [
-      "minecraft:portal/trigger"
+      "roots:time_stop"
     ],
     "subtitle": "subtitle.roots.spell.time_stop"
   },
   "spell.time_stop_end": {
     "sounds": [
-      "minecraft:ui/toast/out"
+      "roots:time_stop_end"
     ],
     "subtitle": "subtitle.roots.spell.time_stop_end"
   },

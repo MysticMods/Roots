@@ -1,6 +1,7 @@
 package epicsquid.roots.entity.spell;
 
 import epicsquid.roots.init.ModPotions;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.particle.ParticleUtil;
 import epicsquid.roots.spell.SpellTimeStop;
 import epicsquid.roots.util.EntityUtil;
@@ -21,6 +22,13 @@ public class EntityTimeStop extends EntitySpellModifiable<SpellTimeStop> {
 
   public EntityTimeStop(World world, int duration) {
     super(world, SpellTimeStop.instance, duration);
+  }
+
+  @Override
+  public void onDeath() {
+    if (SpellTimeStop.instance.shouldPlaySound()) {
+      this.playSound(ModSounds.Spells.TIME_STOP_END, SpellTimeStop.instance.getSoundVolume(), 1);
+    }
   }
 
   @Override
@@ -60,5 +68,7 @@ public class EntityTimeStop extends EntitySpellModifiable<SpellTimeStop> {
         }
       }
     }
+
+
   }
 }
