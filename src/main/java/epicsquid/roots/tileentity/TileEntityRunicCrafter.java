@@ -293,5 +293,13 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
     super.readFromNBT(tag);
     pedestal.deserializeNBT(tag.getCompoundTag("pedestal"));
   }
+
+  @Override
+  public void breakBlock(World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, EntityPlayer player) {
+    super.breakBlock(world, pos, state, player);
+    if (!world.isRemote) {
+      Util.spawnInventoryInWorld(world, getPos().getX() + 0.5, getPos().getY() + 0.5, getPos().getZ() + 0.5, pedestal);
+    }
+  }
 }
 
