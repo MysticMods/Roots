@@ -43,8 +43,5 @@ public class PotionTimeStop extends Potion {
   @Override
   public void removeAttributesModifiersFromEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
     super.removeAttributesModifiersFromEntity(entityLivingBaseIn, attributeMapIn, amplifier);
-    if (SpellTimeStop.instance.shouldPlaySound()) {
-      entityLivingBaseIn.playSound(ModSounds.Spells.TIME_STOP_END, SpellTimeStop.instance.getSoundVolume(), 1);
-    }
   }
 }

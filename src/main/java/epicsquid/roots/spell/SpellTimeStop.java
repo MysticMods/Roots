@@ -4,6 +4,7 @@ import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
 import epicsquid.roots.entity.spell.EntityTimeStop;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageTimeStopStartFX;
@@ -71,7 +72,7 @@ public class SpellTimeStop extends SpellBase {
         new ItemStack(ModItems.pereskia),
         new ItemStack(Items.CLOCK)
     );
-    //setCastSound(ModSounds.Spells.TIME_STOP); // todo
+    setCastSound(ModSounds.Spells.TIME_STOP); // DONE, TY KITZAH
   }
 
   @Override
@@ -81,7 +82,6 @@ public class SpellTimeStop extends SpellBase {
       if (info.has(LONGER)) {
         dur += overtime;
       }
-      dur = dur;
       if (info.has(SHORTER)) {
         dur = undertime;
       }

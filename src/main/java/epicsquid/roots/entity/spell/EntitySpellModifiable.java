@@ -46,8 +46,12 @@ public abstract class EntitySpellModifiable<T extends SpellBase> extends Entity 
     getDataManager().set(lifetime, getDataManager().get(lifetime) - 1);
     getDataManager().setDirty(lifetime);
     if (getDataManager().get(lifetime) <= 0) {
+      onDeath();
       setDead();
     }
+  }
+
+  public void onDeath () {
   }
 
   public int getLifetime() {
