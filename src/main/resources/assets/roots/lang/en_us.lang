@@ -528,6 +528,8 @@ roots.commands.dump_recipes.usage=Usage: ct roots_recipes [mode] Modes: all | an
 roots.message.salmon_eaten=You suddenly feel more knowledgeable about the world!
 roots.message.no_staff=You aren't wielding a staff!
 
+roots.message.runic_crafter.no_grove=There's no active Grove Stone nearby!
+
 # Time
 roots.message.sense_time=It is currently %s on day %s; the moon %s.
 roots.message.sense_time.format=%s:%s

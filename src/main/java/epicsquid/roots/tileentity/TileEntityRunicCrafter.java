@@ -12,6 +12,7 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.network.fx.MessageGrowthCrafterVisualFX;
+import epicsquid.roots.particle.ParticleStar;
 import epicsquid.roots.recipe.FeyCraftingRecipe;
 import epicsquid.roots.util.IngredientWithStack;
 import epicsquid.roots.util.ItemHandlerUtil;
@@ -28,6 +29,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -97,6 +101,7 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
     }
 
     if (!hasValidGroveStone()) {
+      player.sendMessage(new TextComponentTranslation("roots.message.runic_crafter.no_grove").setStyle(new Style().setColor(TextFormatting.YELLOW)));
       return true;
     }
 
@@ -155,24 +160,46 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
   @Override
   public void update() {
     if (!world.isRemote) {
-      if (world.getTotalWorldTime() % 3 != 0 && getRecipe() != null) {
-        ClientProxy.particleRenderer.spawnParticle(
-            world,
-            ParticleLeaf.class,
-            (double) pos.getX() + 0.5D,
-            (double) pos.getY() + 0.75D,
-            (double) pos.getZ() + 0.5D,
-            (Util.rand.nextDouble() - 0.5) * 0.005,
-            (Util.rand.nextDouble() * 0.02) * 0.5,
-            (Util.rand.nextDouble() - 0.5) * 0.005,
-            100,
-            (140 / 255.0) + (Util.rand.nextDouble() - 0.5) * 0.1,
-            52 / 255.0,
-            245 / 255.0,
-            1, //0.785,
-            1,
-            1
-        );
+      if (!hasValidGroveStone()) {
+        if (world.getTotalWorldTime() % 3 != 0) {
+          ClientProxy.particleRenderer.spawnParticle(
+              world,
+              ParticleStar.class,
+              (double) pos.getX() + 0.5D,
+              (double) pos.getY() + 0.75D,
+              (double) pos.getZ() + 0.5D,
+              (Util.rand.nextDouble() - 0.5) * 0.005,
+              (Util.rand.nextDouble() * 0.02) * 0.5,
+              (Util.rand.nextDouble() - 0.5) * 0.005,
+              100,
+              219 / 255.0,
+              15 / 255.0,
+              15 / 255.0,
+              1, //0.785,
+              1,
+              1
+          );
+        } else {
+          if (world.getTotalWorldTime() % 3 != 0 && getRecipe() != null) {
+            ClientProxy.particleRenderer.spawnParticle(
+                world,
+                ParticleLeaf.class,
+                (double) pos.getX() + 0.5D,
+                (double) pos.getY() + 0.75D,
+                (double) pos.getZ() + 0.5D,
+                (Util.rand.nextDouble() - 0.5) * 0.005,
+                (Util.rand.nextDouble() * 0.02) * 0.5,
+                (Util.rand.nextDouble() - 0.5) * 0.005,
+                100,
+                (140 / 255.0) + (Util.rand.nextDouble() - 0.5) * 0.1,
+                52 / 255.0,
+                245 / 255.0,
+                1, //0.785,
+                1,
+                1
+            );
+          }
+        }
       }
       if (countdown > 0) {
         countdown--;
