@@ -6,7 +6,12 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example"
+      "text": "Runic dust can be obtained by grinding $(l:resources/runestone)runestone$() in a $(l:crafting/mortar_and_pestle)mortar$().$(br2)The resulting dust retains much of the magic of runestone and is used as an ingredient in spells, rituals and other crafts.$(br2)$(info) As many as five pieces of runestone can be crushed at a time, or as few as one."
+    },
+    {
+      "type": "mortar_template",
+      "recipe": "roots:runestone_to_runic_dust_5",
+      "link_recipe": true
     }
   ]
 }
