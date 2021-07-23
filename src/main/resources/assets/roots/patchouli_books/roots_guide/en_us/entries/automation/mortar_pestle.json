@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example."
+      "text": "The mortar and pestle can be provided ingredients by hoppers or other methods of delivering items to the top of the mortar.$(br2)A redstone comparator can be attached to determine when the mortar contains a valid recipe.$(br2)Finally, a dispenser containing a $(l:crafting/mortar_and_pestle)pestle$() can perform the craft."
     }
   ]
 }

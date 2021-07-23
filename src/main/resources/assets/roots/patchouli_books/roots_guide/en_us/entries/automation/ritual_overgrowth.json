@@ -6,7 +6,11 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example."
+      "text": "Automatic the ritual of $(l:rituals/ritual_overgrowth)Overgrowth$() requires cobble (or eligible stone) adjacent to water, a $(l:crafting/pyre)pyre$() with a chest containing the ingredients for the ritual directly below it.$(br2)Facing the block of cobble should be a dispenser containing one or more knives. Directly above the dispenser should be a hopper, feeding into a nearby chest.$(br2)Before beginning the ritual, create a redstone clock that causes the dispenser to pulse constantly."
+    },
+    {
+      "type": "text",
+      "text": "Once you begin the ritual, the ticking dispenser will automatically harvest the terra moss, which will then spawn in the air above it (directly into the hopper), and be fed into your chest."
     }
   ]
 }
