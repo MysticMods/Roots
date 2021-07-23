@@ -5,8 +5,10 @@
   "read_by_default": true,
   "pages": [
     {
-      "type": "text",
-      "text": "Example"
+      "type": "spotlight",
+      "item": "roots:fey_leather",
+      "link_recipe": true,
+      "text": "This hardy leather can be peacefully obtained from entities in the Fey realm by using $(l:crafting/runic_shears)runic shears$() on equivalent entities in our own world.$(br2)See $(sources:roots:fey_leather)JEI$() for a complete listing."
     }
   ]
 }
