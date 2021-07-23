@@ -224,10 +224,6 @@ public class ContainerImposer extends Container implements IInvalidatingContaine
   @Override
   @Nonnull
   public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
-    if (index <= 10) {
-      return ItemStack.EMPTY;
-    }
-
     Slot slot = this.inventorySlots.get(index);
 
     if (slot == null || !slot.getHasStack()) {
