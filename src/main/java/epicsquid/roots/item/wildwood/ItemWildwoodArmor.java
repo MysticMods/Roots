@@ -50,6 +50,7 @@ public class ItemWildwoodArmor extends ItemArmor implements IModeledObject, ILiv
 
   @Override
   public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
+    // TODO: Make configurable?
     switch (piecesWorn(player)) {
       case 1:
         if (itemRand.nextInt(12 * 20) == 0 && player.shouldHeal())

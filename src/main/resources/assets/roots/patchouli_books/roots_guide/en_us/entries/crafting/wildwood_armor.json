@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example."
+      "text": "Hardy armor of living wildwood, imbued with the strength of diamond, this armor set automatically heals the wearer over time.$(br2)$(info) The amount of healing increases in frequency with the number of pieces worn.$(br2)$(info) It can be repaired with $(l:resources/bark#dark_oak)wildwood bark$()."
     },
     {
       "type": "fey_crafting_template",
