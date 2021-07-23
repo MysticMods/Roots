@@ -12,10 +12,8 @@ import thaumcraft.api.aspects.AspectEventProxy;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.AspectRegistryEvent;
 
-@Mod.EventBusSubscriber(modid = Roots.MODID)
 public class AspectRegistry {
   @SubscribeEvent
-  @Optional.Method(modid = "thaumcraft")
   public static void registerAspects(AspectRegistryEvent event) {
     AspectEventProxy proxy = event.register;
     proxy.registerObjectTag(new ItemStack(ModItems.apothecary_pouch), new AspectList().add(Aspect.VOID, 10).add(Aspect.BEAST, 10).add(Aspect.MAGIC, 5).add(Aspect.SOUL, 2).add(Aspect.CRAFT, 5));
