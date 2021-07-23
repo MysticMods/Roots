@@ -1,56 +1,56 @@
 
 {
-  "processor": "epicsquid.roots.integration.patchouli.RunicCarvingRecipeProcessor",
+  "processor": "epicsquid.roots.integration.patchouli.RunicCarvingDoubleRecipeProcessor",
   "components": [
     {
       "type": "item",
       "item": "#block1",
       "framed": false,
-      "x": 64,
-      "y": 6
+      "x": 20,
+      "y": 37
     },
     {
       "type": "item",
       "item": "#rune1",
       "link_recipe": true,
       "framed": false,
-      "x": 64,
-      "y": 29
+      "x": 80,
+      "y": 37
     },
     {
       "type": "item",
       "item": "#herb1",
       "framed": false,
-      "x": 4,
-      "y": 6
+      "x": 51,
+      "y": 18
     },
     {
       "type": "item",
       "item": "#block2",
       "framed": false,
-      "x": 64,
-      "y": 56
+      "x": 20,
+      "y": 80
     },
     {
       "type": "item",
       "item": "#rune2",
       "link_recipe": true,
       "framed": false,
-      "x": 64,
-      "y": 79
+      "x": 80,
+      "y": 80
     },
     {
       "type": "item",
       "item": "#herb2",
       "framed": false,
-      "x": 4,
-      "y": 56
+      "x": 51,
+      "y": 61
     },
     {
       "type": "image",
       "image": "roots:textures/gui/patchouli/elements3.png",
       "x": 16,
-      "y": 14,
+      "y": 13,
       "u": 126,
       "v": 120,
       "width": 84,
