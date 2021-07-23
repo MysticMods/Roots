@@ -22,8 +22,8 @@ public class RunedWoodConfig {
   @Config.Comment(("Configurations for the replacement wood for the Birch runed pillar (note that the same configuration CAN be used for multiple runed pillars"))
   public static RunedPillarConfig BIRCH = new RunedPillarConfig("roots:runed_birch", "minecraft:log[variant=birch]", "minecraft:log:2");
 
-  @Config.Comment(("Configurations for the replacement wood for the Junge runed pillar (note that the same configuration CAN be used for multiple runed pillars"))
-  public static RunedPillarConfig JUNGLE = new RunedPillarConfig("roots:runed_jungle", "minecraft:log[variant=jungle]", "minecraft:log2:3");
+  @Config.Comment(("Configurations for the replacement wood for the Jungle runed pillar (note that the same configuration CAN be used for multiple runed pillars"))
+  public static RunedPillarConfig JUNGLE = new RunedPillarConfig("roots:runed_jungle", "minecraft:log[variant=jungle]", "minecraft:log:3");
 
   @Config.Comment(("Configurations for the replacement wood for the Spruce runed pillar (note that the same configuration CAN be used for multiple runed pillars"))
   public static RunedPillarConfig SPRUCE = new RunedPillarConfig("roots:runed_spruce", "minecraft:log[variant=spruce]", "minecraft:log:1");
