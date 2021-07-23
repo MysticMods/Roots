@@ -51,22 +51,22 @@ public class SpellRecipeProcessor implements IComponentProcessor {
       return ItemStackUtil.serializeStack(herbs.get(0));
     }
     if (s.equals("cost2")) {
-      if (herbs.size() <= 2) return ItemStackUtil.serializeStack(ItemStack.EMPTY);
+      if (herbs.size() < 2) return ItemStackUtil.serializeStack(ItemStack.EMPTY);
       return ItemStackUtil.serializeStack(herbs.get(1));
     }
     if (s.equals("cost3")) {
-      if (herbs.size() <= 3) return ItemStackUtil.serializeStack(ItemStack.EMPTY);
+      if (herbs.size() < 3) return ItemStackUtil.serializeStack(ItemStack.EMPTY);
       return ItemStackUtil.serializeStack(herbs.get(2));
     }
     if (s.equals("cost1_text")) {
       return costs.get(0);
     }
     if (s.equals("cost2_text")) {
-      if (costs.size() <= 2) return "";
+      if (costs.size() < 2) return "";
       return costs.get(1);
     }
     if (s.equals("cost3_text")) {
-      if (costs.size() <= 3) return "";
+      if (costs.size() < 3) return "";
       return costs.get(2);
     }
     return null;

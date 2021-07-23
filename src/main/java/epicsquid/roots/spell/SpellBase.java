@@ -267,9 +267,15 @@ public abstract class SpellBase extends RegistryItem {
   @SideOnly(Side.CLIENT)
   public void addToolTip(List<String> tooltip, @Nullable StaffModifierInstanceList list) {
     addToolTipBase(tooltip, list);
+    addToolTipInfo(tooltip, list);
+  }
+
+  @SideOnly(Side.CLIENT)
+  public void addToolTipInfo(List<String> tooltip, @Nullable StaffModifierInstanceList list) {
     if (list != null) {
       double addition = 0;
       double subtraction = 0;
+
       if (!GuiScreen.isShiftKeyDown()) {
         StringJoiner joiner = new StringJoiner(", ");
         for (StaffModifierInstance m : list) {

@@ -40,7 +40,7 @@ public class SpellFeyLight extends SpellBase {
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 10).setDescription("radius on the Y axis within which lights are affected by the spell");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15).setDescription("radius on the Z axis within which lights are affected by the spell");
 
-  public static Modifier PINK = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "pink_light"), ModifierCores.PERESKIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.125)));
+  public static Modifier PINK = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "pink_light"), ModifierCores.PERESKIA, Cost.of(Cost.cost(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.125), Cost.cost(CostType.ALL_COST_MULTIPLIER, -0.15))));
   public static Modifier YELLOW = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "yellow_light"), ModifierCores.WILDEWHEET, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 0.125)));
   public static Modifier FIXED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "fixed_light"), ModifierCores.WILDROOT, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.125)));
   public static Modifier PURPLE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "purple_light"), ModifierCores.MOONGLOW_LEAF, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 0.125)));

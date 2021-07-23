@@ -25,11 +25,11 @@
     },
     {
       "type": "image",
-      "image": "roots:textures/gui/patchouli/elements.png",
+      "image": "roots:textures/gui/patchouli/elements4.png",
       "x": 17,
       "y": 16,
-      "u": 156,
-      "v": 76,
+      "u": 0,
+      "v": 0,
       "width": 85,
       "height": 50
     },
