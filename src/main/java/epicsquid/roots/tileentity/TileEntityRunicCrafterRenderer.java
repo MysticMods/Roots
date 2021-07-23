@@ -22,11 +22,6 @@ public class TileEntityRunicCrafterRenderer extends TileEntitySpecialRenderer<Ti
   @Override
   public void render(TileEntityRunicCrafter te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
     if (!te.hasValidGroveStone()) {
-      if (GROVE_STONE.isEmpty()) {
-        GROVE_STONE = new ItemStack(ModBlocks.grove_stone);
-      }
-      renderResult((te.getWorld().getTotalWorldTime() + partialTicks) * 2.6f, x, y, z, GROVE_STONE, 0.99f);
-    } else {
       ItemStack pedestal = te.pedestal.getStackInSlot(0);
       if (!pedestal.isEmpty()) {
         renderResult((te.getWorld().getTotalWorldTime() + partialTicks) * 2.6f, x, y, z, pedestal, 0.99f);

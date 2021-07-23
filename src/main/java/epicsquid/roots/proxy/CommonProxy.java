@@ -4,7 +4,6 @@ import epicsquid.roots.advancements.Advancements;
 import epicsquid.roots.command.CommandRitual;
 import epicsquid.roots.command.CommandRoots;
 import epicsquid.roots.command.CommandStaff;
-import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.init.ModEntities;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.integration.cfb.RootsCFB;
@@ -15,6 +14,7 @@ import epicsquid.roots.integration.endercore.EndercoreHarvest;
 import epicsquid.roots.integration.harvest.HarvestIntegration;
 import epicsquid.roots.integration.jer.JERIntegration;
 import epicsquid.roots.integration.patchouli.ConfigKeys;
+import epicsquid.roots.integration.thaumcraft.ThaumcraftInit;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellRegistry;
 import net.minecraftforge.fml.common.Loader;
@@ -32,6 +32,9 @@ public class CommonProxy {
     SpellRegistry.preInit();
     RitualRegistry.preInit();
     ModEntities.registerLootTables();
+    if (Loader.isModLoaded("thaumcraft")) {
+      ThaumcraftInit.init();
+    }
   }
 
   public void init(FMLInitializationEvent event) {

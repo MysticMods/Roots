@@ -74,13 +74,13 @@ public class EventManager {
     }
   }
 
-  @SubscribeEvent
+/*  @SubscribeEvent
   @Optional.Method(modid = "baubles")
   public static void addBaublesCapability(AttachCapabilitiesEvent<ItemStack> event) {
     if (event.getObject().getItem() instanceof IItemPouch) {
       event.addCapability(BaubleBeltCapabilityHandler.IDENTIFIER, BaubleBeltCapabilityHandler.instance);
     }
-  }
+  }*/
 
   @SubscribeEvent(priority = EventPriority.HIGHEST)
   public static void onDamage(LivingHurtEvent event) {
