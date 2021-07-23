@@ -12,7 +12,6 @@ import epicsquid.roots.init.ModItems;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.network.fx.MessageGrowthCrafterVisualFX;
-import epicsquid.roots.particle.ParticleStar;
 import epicsquid.roots.recipe.FeyCraftingRecipe;
 import epicsquid.roots.util.IngredientWithStack;
 import epicsquid.roots.util.ItemHandlerUtil;
@@ -179,26 +178,26 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
               1,
               1
           );
-        } else {
-          if (world.getTotalWorldTime() % 3 != 0 && getRecipe() != null) {
-            ClientProxy.particleRenderer.spawnParticle(
-                world,
-                ParticleLeaf.class,
-                (double) pos.getX() + 0.5D,
-                (double) pos.getY() + 0.75D,
-                (double) pos.getZ() + 0.5D,
-                (Util.rand.nextDouble() - 0.5) * 0.005,
-                (Util.rand.nextDouble() * 0.02) * 0.5,
-                (Util.rand.nextDouble() - 0.5) * 0.005,
-                100,
-                (140 / 255.0) + (Util.rand.nextDouble() - 0.5) * 0.1,
-                52 / 255.0,
-                245 / 255.0,
-                1, //0.785,
-                1,
-                1
-            );
-          }
+        }
+      } else {
+        if (world.getTotalWorldTime() % 3 != 0 && getRecipe() != null) {
+          ClientProxy.particleRenderer.spawnParticle(
+              world,
+              ParticleLeaf.class,
+              (double) pos.getX() + 0.5D,
+              (double) pos.getY() + 0.75D,
+              (double) pos.getZ() + 0.5D,
+              (Util.rand.nextDouble() - 0.5) * 0.005,
+              (Util.rand.nextDouble() * 0.02) * 0.5,
+              (Util.rand.nextDouble() - 0.5) * 0.005,
+              100,
+              (140 / 255.0) + (Util.rand.nextDouble() - 0.5) * 0.1,
+              52 / 255.0,
+              245 / 255.0,
+              1, //0.785,
+              1,
+              1
+          );
         }
       }
       if (countdown > 0) {
