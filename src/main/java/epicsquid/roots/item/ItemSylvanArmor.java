@@ -52,6 +52,7 @@ public class ItemSylvanArmor extends ItemArmor implements IModeledObject {
   public static double sylvanBonus(EntityPlayer player) {
     int count = (int) Lists.newArrayList(player.getArmorInventoryList()).stream().filter((o) -> o.getItem() instanceof ItemSylvanArmor).count();
 
+    // TODO: Make configurable?
     switch (count) {
       case 1:
         return 0.02;

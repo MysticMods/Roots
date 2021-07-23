@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example."
+      "text": "This lightweight armor provides significant protection from attacks.$(br2)$(info) In addition, wearing Sylvan armor will reduce herb cost of $(l:spells/introduction)spells$().$(br2)Starting with a 2% reduction with one piece, it increases to 8% with a full set.$(br2)$(info) It can be repaired with $(l:resources/fey_leather)fey leather$()."
     },
     {
       "title": "Sylvan Helmet",

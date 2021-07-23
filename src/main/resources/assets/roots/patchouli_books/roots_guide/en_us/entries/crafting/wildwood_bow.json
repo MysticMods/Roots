@@ -6,11 +6,12 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example."
+      "text": "A much more powerful bow that is significantly more durable than the average, it, like other $(cat:crafting_armor_tools_living)living tools$(), repairs itself over time.$(br2)It can also be directly repaired using $(l:resources/bark#dark_oak)wildwood bark$()."
     },
     {
       "type": "fey_crafting_template",
-      "recipe": "wildwood_bow"
+      "recipe": "wildwood_bow",
+      "link_recipe": true
     }
   ]
 }
