@@ -8,6 +8,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 public class RitualFrostLands extends RitualBase implements IColdRitual {
@@ -32,7 +33,7 @@ public class RitualFrostLands extends RitualBase implements IColdRitual {
     recipe = new RitualRecipe(this,
         new OreIngredient("sugarcane"),
         new ItemStack(ModItems.dewgonia),
-        new ItemStack(Blocks.WATERLILY),
+        new OreIngredient("vine"),
         new ItemStack(ModItems.bark_spruce),
         new ItemStack(ModItems.bark_spruce)
     );
