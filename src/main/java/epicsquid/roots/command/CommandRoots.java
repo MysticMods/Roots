@@ -106,7 +106,7 @@ public class CommandRoots extends CommandBase {
         }
         player.sendMessage(new TextComponentString("Modifiers written to roots.log"));
       } else if (args[0].equalsIgnoreCase("library")) {
-        if (args.length == 2 && args[1].equals("fill")) {
+        if (args.length == 2 && args[1].equals("fill") || args[1].equals("all")) {
           SpellLibraryData library = SpellLibraryRegistry.getData(player);
           for (SpellBase spell : SpellRegistry.getSpells()) {
             library.addSpell(spell);
