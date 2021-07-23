@@ -1,6 +1,5 @@
 package epicsquid.roots.integration.patchouli;
 
-import epicsquid.roots.client.PatchouliHack;
 import epicsquid.roots.init.ModRecipes;
 import epicsquid.roots.recipe.MortarRecipe;
 import net.minecraft.item.ItemStack;
@@ -11,7 +10,6 @@ import vazkii.patchouli.api.IVariableProvider;
 import vazkii.patchouli.common.util.ItemStackUtil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MortarRecipeProcessor implements IComponentProcessor {
