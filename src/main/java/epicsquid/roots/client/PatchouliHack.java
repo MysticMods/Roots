@@ -283,9 +283,11 @@ public class PatchouliHack {
             case "air_min_y":
               return "" + ElementalSoilConfig.AirSoilMinY;
             case "air_delay":
-              return "" + ElementalSoilConfig.AirSoilDelay;
+              return "" + String.format("%.01f", ElementalSoilConfig.AirSoilDelay / 20.0f);
             case "earth_delay":
-              return "" + ElementalSoilConfig.EarthSoilDelay;
+              return "" + String.format("%.01f", ElementalSoilConfig.EarthSoilDelay / 20.0f);
+            case "water_delay":
+              return "" + String.format("%.01f", ElementalSoilConfig.WaterSoilDelay / 20.0f);
             default:
               return "" + 0;
           }
