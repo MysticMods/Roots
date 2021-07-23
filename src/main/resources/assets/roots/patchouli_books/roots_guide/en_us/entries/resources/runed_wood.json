@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example."
+      "text": "Runed wood is crafted using a $(l:crafting/knife)knife$() in one hand and $(l:herbs/wildroot)wildroot$() in the other. Simply right-click the relevant log with the knife and it will be transformed.$(br2)Such runed wood is used to top $(l:rituals/standing_stones)runed pillars$() required for some rituals.$(br2)$(info) The wildroot is consumed in the process."
     }
   ]
 }

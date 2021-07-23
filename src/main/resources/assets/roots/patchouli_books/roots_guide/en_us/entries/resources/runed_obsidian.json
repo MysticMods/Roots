@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example."
+      "text": "Runed obsidian is a hardier form of $(l:resources/runestone)runestone$() created with a $(l:crafting/fey_crafter)fey crafter$(), adding the hardness & blast resistance of obsidian.$(br2)It can be used for the construction of $(l:rituals/standing_stones)standing stones$() as well as $(l:crafting/runed_obsidian)decoratively$().$(br2)$(info) In addition, runed obsidian is immune to Withers and most bosses."
     },
     {
       "type": "fey_crafting_template",
