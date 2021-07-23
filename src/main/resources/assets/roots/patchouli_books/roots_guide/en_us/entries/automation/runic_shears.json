@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example."
+      "text": "Runic shears in a dispenser can be used to automatically harvest terra moss in a radius based on the block it is facing.$(br2)Additionally, its properties for entities can be used on any entity directly in front of the dispenser."
     }
   ]
 }
