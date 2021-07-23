@@ -162,7 +162,7 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
     if (!world.isRemote) {
       if (!hasValidGroveStone()) {
         if (world.getTotalWorldTime() % 3 != 0) {
-/*          ClientProxy.particleRenderer.spawnParticle(
+          ClientProxy.particleRenderer.spawnParticle(
               world,
               ParticleLeaf.class,
               (double) pos.getX() + 0.5D,
@@ -178,7 +178,7 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
               1, //0.785,
               1,
               1
-          );*/
+          );
         } else {
           if (world.getTotalWorldTime() % 3 != 0 && getRecipe() != null) {
             ClientProxy.particleRenderer.spawnParticle(
