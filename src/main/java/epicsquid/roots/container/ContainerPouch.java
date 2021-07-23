@@ -7,11 +7,13 @@
 
 package epicsquid.roots.container;
 
+import epicsquid.roots.Roots;
 import epicsquid.roots.handler.ClientPouchHandler;
 import epicsquid.roots.handler.IPouchHandler;
 import epicsquid.roots.handler.PouchHandler;
 import epicsquid.roots.init.HerbRegistry;
 import epicsquid.roots.item.ItemPouch;
+import epicsquid.roots.item.PouchType;
 import epicsquid.roots.util.CommonHerbUtil;
 import epicsquid.roots.util.ServerHerbUtil;
 import net.minecraft.entity.player.EntityPlayer;
@@ -87,6 +89,10 @@ public class ContainerPouch extends Container {
     } else {
       createComponentPouchSlots();
     }
+    Roots.logger.info("inventoryBegin: " + inventoryBegin);
+    Roots.logger.info("inventoryEnd: " + inventoryEnd);
+    Roots.logger.info("herbsBegin: " + herbsBegin);
+    Roots.logger.info("herbsEnd: " + herbsEnd);
   }
 
   public boolean isApothecary() {
@@ -104,7 +110,7 @@ public class ContainerPouch extends Container {
   private void createHerbPouchSlots() {
     int xOffset = -80;
     int yOffset = -50;
-    for (int i = 0; i < herbsHandler.getSlots(); i++) {
+    for (int i = 0; i < PouchType.HERB_POUCH_SLOTS; i++) {
       // Controls which row the slots appear on
       int yPosOffset = 0;
       if (i >= 3) {
@@ -126,19 +132,24 @@ public class ContainerPouch extends Container {
     int yOffset = -44;
     int q = 0;
     herbsBegin = q;
-    for (int i = 0; i < herbsHandler.getSlots(); i++) {
-      // Controls which row the slots appear on
-      addSlotToContainer(new PouchSlot(herbsHandler, true, i, xOffset + (20 * (i % 4)), yOffset + 23 + (i % 3) * 20));
-      q++;
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 4; j++) {
+        addSlotToContainer(new PouchSlot(herbsHandler, j + i * 4, xOffset + j * 20, 22 + yOffset + i * 20));
+        q++;
+      }
     }
     herbsEnd = q;
     inventoryBegin = q;
-    for (int i = 0; i < inventoryHandler.getSlots(); i++) {
-      // Controls which row the slots appear on
-      addSlotToContainer(new PouchSlot(inventoryHandler, i, xOffset + 90 + (20 * (i % 2)), yOffset + 23 + (i % 3) * 20));
-      q++;
-    }
-    inventoryEnd = q;
+    // 1st: 103, -21, 123, -21
+    //  2nd: 103, -1, 123, -1
+    // 3rd: 103, 19, 123, 19
+    addSlotToContainer(new PouchSlot(inventoryHandler, 0, 103, -21));
+    addSlotToContainer(new PouchSlot(inventoryHandler, 1, 123, -21));
+    addSlotToContainer(new PouchSlot(inventoryHandler, 2, 103, -1));
+    addSlotToContainer(new PouchSlot(inventoryHandler, 3, 123, -1));
+    addSlotToContainer(new PouchSlot(inventoryHandler, 4, 103, 19));
+    addSlotToContainer(new PouchSlot(inventoryHandler, 5, 123, 19));
+    inventoryEnd = q + 6;
   }
 
   private void createComponentPouchSlots() {
@@ -146,7 +157,7 @@ public class ContainerPouch extends Container {
     int yOffset = -55;
     int q = 0;
     inventoryBegin = q;
-    for (int i = 0; i < inventoryHandler.getSlots(); i++) {
+    for (int i = 0; i < PouchType.COMPONENT_POUCH_INVENTORY_SLOTS; i++) {
       // Top Row
       if (i < 5) {
         addSlotToContainer(new PouchSlot(inventoryHandler, q++, xOffset + 11 + (i * 21), yOffset + 23));
@@ -163,7 +174,7 @@ public class ContainerPouch extends Container {
     }
     inventoryEnd = q;
     herbsBegin = q;
-    for (int i = 0; i < herbsHandler.getSlots(); i++) {
+    for (int i = 0; i < PouchType.COMPONENT_POUCH_HERB_SLOTS; i++) {
       if (q >= 12 && q < 18) {
         // Controls which row the slots appear on
         int yPosOffset = q >= 14 ? q >= 16 ? 21 * 2 : 21 : 0;
@@ -179,7 +190,7 @@ public class ContainerPouch extends Container {
     int yOffset = -63;
     int q = 0;
     inventoryBegin = q;
-    for (int i = 0; i < inventoryHandler.getSlots(); i++) {
+    for (int i = 0; i < PouchType.APOTHECARY_POUCH_INVENTORY_SLOTS; i++) {
       // Top Row
       if (i < 6) {
         addSlotToContainer(new PouchSlot(inventoryHandler, q, xOffset + 25 + (20 * (q % 6)), yOffset + 19));
@@ -196,7 +207,7 @@ public class ContainerPouch extends Container {
     }
     inventoryEnd = q;
     herbsBegin = q;
-    for (int i = 0; i < herbsHandler.getSlots(); i++) {
+    for (int i = 0; i < PouchType.APOTHECARY_POUCH_HERB_SLOTS; i++) {
       // Add Herb Slots
       q = inventoryEnd + i;
       if (q >= 18 && q < 21) {
@@ -209,7 +220,7 @@ public class ContainerPouch extends Container {
         addSlotToContainer(new PouchSlot(herbsHandler, true, i, xOffset + 149 + (16 * (q % 3)), yOffset + 64 + (4 * (q % 2))));
       }
     }
-    herbsEnd = q + 1;
+    herbsEnd = q;
   }
 
   private void createPlayerInventory(InventoryPlayer inventoryPlayer) {
@@ -241,8 +252,10 @@ public class ContainerPouch extends Container {
     ItemStack slotStack = ItemStack.EMPTY;
 
     Slot slot = inventorySlots.get(index);
-    int herbStart = inventoryEnd + 36;
+    int herbStart = herbsBegin + 36;
     int herbStop = herbsEnd + 36;
+    int inventoryStart = inventoryBegin + 36;
+    int inventoryStop = inventoryEnd + 36;
 
     if (slot != null && slot.getHasStack()) {
       ItemStack stack = slot.getStack();
@@ -252,8 +265,10 @@ public class ContainerPouch extends Container {
 
       if (index < 36) { // Player Inventory -> Inventory/herbs
         if (herb && !mergeItemStack(stack, herbStart, herbStop, false)) {
-          return ItemStack.EMPTY;
-        } else if (!herb && !mergeItemStack(stack, 36, herbStart, false)) {
+          if (!mergeItemStack(stack, inventoryStart, inventoryStop, false)) {
+            return ItemStack.EMPTY;
+          }
+        } else if (!herb && !mergeItemStack(stack, inventoryStart, inventoryStop, false)) {
           return ItemStack.EMPTY;
         }
       } else {
