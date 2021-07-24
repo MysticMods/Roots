@@ -6,7 +6,11 @@
   "pages": [
     {
       "type": "text",
-      "text": "Runic shears in a dispenser can be used to automatically harvest terra moss in a radius based on the block it is facing.$(br2)Additionally, its properties for entities can be used on any entity directly in front of the dispenser."
+      "text": "$(l:crafting/runic_shears)Runic shears$() in a dispenser can be used to automatically harvest $(l:herbs/terra_moss)terra moss$() in a radius based on the block it is facing, spawning the moss above the dispenser.$(br2)Most significantly, its ability to gather drops from entities can also be leveraged by a dispenser, although these drops are spawned at the entity."
+    },
+    {
+      "type": "text",
+      "text": "This extends to shearing wool from sheep and other mundane uses."
     }
   ]
 }
