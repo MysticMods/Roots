@@ -2,6 +2,7 @@
   "name": "Staff",
   "icon": "roots:staff",
   "category": "crafting_armor_tools",
+  "sortnum" : 2,
   "read_by_default": true,
   "pages": [
     {

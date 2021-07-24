@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "An advanced, experimental variant of the $(l:crafting/fey_crafter)fey crafter$() with no interface. The output is right-clicked onto the crafter to set the recipe or remove it.$(br2)$(info) If a valid recipe out, items will be drawn from an inventory below to fill its input slots.$(br2)Begin crafting by right-clicking with a $(l:crafting/knives)knife$(), either by hand or dispenser."
+      "text": "An advanced, experimental variant of the $(l:crafting/fey_crafter)fey crafter$() with no interface. The output is right-clicked onto the crafter to set the recipe or remove it.$(br2)$(info) If it is a valid recipe output, items will be drawn from an inventory below to fill its input slots.$(br2)Begin crafting by right-clicking with a $(l:crafting/knives)knife$(), either by hand or dispenser."
     },
     {
       "type": "fey_crafting_template",

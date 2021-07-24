@@ -28,7 +28,7 @@
     {
       "type": "text",
       "title": "Runic Crafter",
-      "text": "Placed similarly to a fey crafter, the $(l:crafting/runic_crafter)runic crafter$() is capable of automatically selected ingredients from an inventory below it, based on the item inserted.$(br2)$(info) Items inserted into the runic crafter will appear floating above it. Right-clicking with an empty hand will remove it.$(br2)$(info )A dispenser with a knife can activate a runic crafter."
+      "text": "Placed similarly to a fey crafter, the $(l:crafting/runic_crafter)runic crafter$() is capable of automatically pulling ingredients from an inventory below it, based on the item inserted.$(br2)$(info) Items inserted into the runic crafter will appear floating above it. Right-clicking with an empty hand will remove it.$(br2)$(info )A dispenser with a knife can activate a runic crafter."
     },
     {
       "type": "text",

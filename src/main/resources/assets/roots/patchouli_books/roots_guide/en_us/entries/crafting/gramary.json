@@ -2,6 +2,7 @@
   "name": "Gramary",
   "icon": "roots:gramary",
   "category": "crafting_armor_tools",
+  "sortnum" : 3,
   "read_by_default": true,
   "pages": [
     {

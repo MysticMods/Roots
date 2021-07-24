@@ -2,12 +2,13 @@
   "name": "Knives",
   "icon": "roots:wood_knife",
   "category": "crafting_armor_tools",
+  "sortnum" : 1,
   "read_by_default": true,
   "pages": [
     {
       "type": "crafting",
       "recipe": "roots:wood_knife",
-      "text": "Knives are an essential, multi-use tool that also acts as a weapon.$(br2)$(info) They can be made of a variety of materials, and the material determines durability and the amount of damage dealt."
+      "text": "Knives are an essential, multi-use tool that also act as a weapon.$(br2)$(info) They can be made of a variety of materials, and the material determines durability and the amount of damage dealt."
     },
     {
       "type": "crafting",
@@ -30,7 +31,7 @@
     },
     {
       "type": "text",
-      "text": "When holding $(l:herbs)wildroot$() in the off-hand, right-clicking an eligible $(l:rituals/standing_stones)log to convert into runed wood$()."
+      "text": "When holding $(l:herbs)wildroot$() in the off-hand, right-clicking an eligible $(l:rituals/standing_stones)log converts it into runed wood$()."
     }
   ]
 }
