@@ -1,0 +1,32 @@
+{
+  "name": "Crafting",
+  "icon": "roots:runic_crafter",
+  "category": "automation",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Both the $(l:crafting/fey_crafter)fey crafter$() and the automation-based $(l:crafting/runic_crafter)runic crafter$() can be automated with a dispenser containing a knife.$(br2)A redstone signal applied to the dispenser will begin the crafting process, if there is an eligible recipe.$(br2)$(info) With the runic crafter drawing ingredients from the chest below it, simple automation of crafting recipes is easy."
+    },
+    {
+      "type": "multiblock",
+      "anchor": "multiblock",
+      "multiblock": {
+        "mapping": {
+          "0": "roots:runic_crafter",
+          "C": "minecraft:chest",
+          "D": "minecraft:dispenser[facing=]",
+          
+          "S": "minecraft:stone"
+        },
+        "pattern": [
+          ["          ","          ","          ","          "],
+          ["          ","0   H 232I","    C 4 4 ","      567 "],
+          ["  S       ","CSWTD1SSSR","  S S SSS ","      SSS "],
+          ["SSSSSSSSSS","SSSSSSSSSS","SSSSSSSSSS","SSSSSSSSSS"]
+        ]
+      },
+      "text": "hopper can be placed, feeding into a chest. $(l:rituals/automation)Automating the pyre$() ensures a steady supply of $(l:herbs/terra_moss)terra moss$()."
+    }
+  ]
+}

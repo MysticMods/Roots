@@ -6,11 +6,38 @@
   "pages": [
     {
       "type": "text",
-      "text": "Automatic the ritual of $(l:rituals/ritual_overgrowth)Overgrowth$() requires cobble (or eligible stone) adjacent to water, a $(l:crafting/pyre)pyre$() with a chest containing the ingredients for the ritual directly below it.$(br2)Facing the block of cobble should be a dispenser containing one or more knives. Directly above the dispenser should be a hopper, feeding into a nearby chest.$(br2)Before beginning the ritual, create a redstone clock that causes the dispenser to pulse constantly."
+      "text": "$(l:rituals/ritual_overgrowth)Overgrowth$() automation can be done simply with vanilla methods.$(br2)Place cobble (or eligible stone) adjacent to water with a dispenser facing it (with a $(l:crafting/knives)knife$() placed inside it). Create a redstone clock that pulses the dispenser, and then begin the Overgrowth ritual.$(br2)$(info) $(l:herbs/terra_moss)Terra moss$() will be spawned above the dispenser, where a"
     },
     {
-      "type": "text",
-      "text": "Once you begin the ritual, the ticking dispenser will automatically harvest the terra moss, which will then spawn in the air above it (directly into the hopper), and be fed into your chest."
+      "type": "multiblock",
+      "anchor": "multiblock",
+      "multiblock": {
+        "mapping": {
+          "0": "roots:pyre",
+          "R": "minecraft:redstone_block",
+          "C": "minecraft:chest[facing=north]",
+          "T": "minecraft:cobblestone",
+          "W": "minecraft:water",
+          "H": "minecraft:hopper[facing=east]",
+          "I": "minecraft:unlit_redstone_torch",
+          "D": "minecraft:dispenser[facing=north]",
+          "1": "minecraft:redstone_wire[east=none,north=up,south=none,west=none]",
+          "2": "minecraft:redstone_wire[east=none,north=side,south=side,west=side]",
+          "3": "minecraft:unpowered_repeater[facing=north]",
+          "4": "minecraft:redstone_wire[east=side,north=none,south=none,west=side]",
+          "5": "minecraft:redstone_wire[east=side,north=none,south=side,west=none]",
+          "6": "minecraft:unpowered_repeater[facing=south]",
+          "7": "minecraft:redstone_wire[east=side,north=none,south=side,west=none]",
+          "S": "minecraft:stone"
+        },
+        "pattern": [
+          ["          ","          ","          ","          "],
+          ["          ","0   H 232I","    C 4 4 ","      567 "],
+          ["  S       ","CSWTD1SSSR","  S S SSS ","      SSS "],
+          ["SSSSSSSSSS","SSSSSSSSSS","SSSSSSSSSS","SSSSSSSSSS"]
+        ]
+      },
+      "text": "hopper can be placed, feeding into a chest. $(l:rituals/automation)Automating the pyre$() ensures a steady supply of $(l:herbs/terra_moss)terra moss$()."
     }
   ]
 }
