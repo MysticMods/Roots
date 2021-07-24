@@ -12,6 +12,16 @@
     {
       "type": "spell_template",
       "spell": "spell_acid_cloud"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_acid_cloud",
+      "modifier": "roots:radius_boost"
+    },
+    {
+      "title": "Configuration",
+      "type": "text",
+      "text": "$(bold)Radius:$() The configured default radius of the spell is $(spell:acid_cloud/radius_general) blocks.$(br2)$(bold)Radius Boost:$() When the radius boost modifier is applied, the radius is increased by a further $(spell:acid_cloud/radius_boost) blocks."
     }
   ]
 }

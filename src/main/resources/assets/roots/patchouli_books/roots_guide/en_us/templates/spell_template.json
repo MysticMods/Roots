@@ -1,10 +1,10 @@
 
 {
-  "processor": "epicsquid.roots.integration.patchouli.SpellModifierProcessor",
+  "processor": "epicsquid.roots.integration.patchouli.SpellRecipeProcessor",
   "components": [
     {
       "type": "item",
-      "item": "#core",
+      "item": "#item1",
       "framed": false,
       "x": 8,
       "y": 14
@@ -87,11 +87,17 @@
       "type": "image",
       "image": "roots:textures/gui/patchouli/elements.png",
       "x": 4,
-      "y": -1,
-      "u": 0,
+      "y": 10,
+      "u": 84,
       "v": 0,
-      "width": 24,
-      "height": 24
+      "width": 100,
+      "height": 146
+    },
+    {
+      "type": "header",
+      "text": "Recipe & Casting Cost",
+      "x": -1,
+      "y": 0
     }
   ]
 }
