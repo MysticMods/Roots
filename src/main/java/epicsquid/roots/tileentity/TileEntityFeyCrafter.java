@@ -222,12 +222,9 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
   @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
 
-    boolean shouldGui = false;
+    boolean shouldGui = !hasValidGroveStone();
 
     // Knife detection is already handled
-    if (!hasValidGroveStone()) {
-      shouldGui = true;
-    }
 
     if (player.world.isRemote) {
       return true;
