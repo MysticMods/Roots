@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "$(l:rituals/ritual_overgrowth)Overgrowth$() automation can be done simply with vanilla methods.$(br2)Place cobble (or eligible stone) adjacent to water with a dispenser facing it (with a $(l:crafting/knives)knife$() placed inside it). Create a redstone clock that pulses the dispenser, and then begin the Overgrowth ritual.$(br2)$(info) $(l:herbs/terra_moss)Terra moss$() will be spawned above the dispenser, where a"
+      "text": "$(l:rituals/ritual_overgrowth)Overgrowth$() automation can be done simply with vanilla methods.$(br2)Place cobble (or $(l:herbs/terra_moss)eligible stone$()) adjacent to water with a dispenser (with a $(l:crafting/knives)knife$() inside) facing it. Create a redstone clock that pulses the dispenser, and then begin the Overgrowth ritual.$(br2)$(info) $(l:herbs/terra_moss)Terra moss$() will be spawned above the dispenser, where a"
     },
     {
       "type": "multiblock",

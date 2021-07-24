@@ -2,6 +2,7 @@
   "name": "Fire Starter",
   "icon": "roots:fire_starter",
   "category": "crafting_armor_tools",
+  "sortnum" : 7,
   "read_by_default": true,
   "pages": [
     {

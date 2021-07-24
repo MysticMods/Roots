@@ -25,7 +25,7 @@
     },
     {
       "type": "image",
-      "image": "roots:textures/gui/patchouli/elements4.png",
+      "image": "roots:textures/gui/patchouli/elements.png",
       "x": 17,
       "y": 16,
       "u": 0,

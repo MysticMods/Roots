@@ -15,15 +15,14 @@
         "mapping": {
           "0": "roots:runic_crafter",
           "C": "minecraft:chest",
-          "D": "minecraft:dispenser[facing=]",
-          
+          "D": "minecraft:dispenser[facing=south]",
           "S": "minecraft:stone"
         },
         "pattern": [
           ["          ","          ","          ","          "],
-          ["          ","0   H 232I","    C 4 4 ","      567 "],
-          ["  S       ","CSWTD1SSSR","  S S SSS ","      SSS "],
-          ["SSSSSSSSSS","SSSSSSSSSS","SSSSSSSSSS","SSSSSSSSSS"]
+          ["          ","          ","          ","          "],
+          ["          ","          ","          ","          "],
+          ["          ","    0     ","          ","          "]
         ]
       },
       "text": "hopper can be placed, feeding into a chest. $(l:rituals/automation)Automating the pyre$() ensures a steady supply of $(l:herbs/terra_moss)terra moss$()."

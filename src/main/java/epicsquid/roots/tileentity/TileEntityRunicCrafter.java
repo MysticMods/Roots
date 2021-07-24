@@ -160,7 +160,7 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
 
         MessageGrowthCrafterVisualFX packet = new MessageGrowthCrafterVisualFX(getPos(), world.provider.getDimension());
         PacketHandler.sendToAllTracking(packet, this);
-        world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), ModSounds.WHIRLWIND, SoundCategory.NEUTRAL, 1f, 1f);
+        world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), ModSounds.WHIRLWIND, SoundCategory.NEUTRAL, 0.6f, 1f);
       }
     }
     return true;

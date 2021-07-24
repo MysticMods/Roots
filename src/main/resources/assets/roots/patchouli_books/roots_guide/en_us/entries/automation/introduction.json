@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "There are many ways in which Roots can be automated.$(br2)Some devices are more suited to automation (such as the $(l:crafting/runic_crafter)runic crafter's$() auto-refilling).$(br2)As a rule, most devices that require a knife to activate can be automated with a dispenser containing a knife and a redstone clock."
+      "text": "There are many ways in which Roots can be automated.$(br2)Some devices are more suited to automation (such as the $(l:crafting/runic_crafter)runic crafter's$() auto-refilling).$(br2)As a rule, most devices that require a knife to activate can be automated with a dispenser (containing a knife) and a redstone clock."
     },
     {
       "type": "text",

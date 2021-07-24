@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Living tools have a significant advantage over other tools in that they repair themselves as time passes.$(br2)$(info) While having the same damage as an iron sword, the overall durability is slightly less.$(br2)Living tools can be manually repaired in an anvil using any type of bark."
+      "text": "Living tools have a significant advantage over other tools in that they repair themselves as time passes.$(br2)$(info) While having the same damage as an iron sword, the overall durability is slightly less.$(br2)Living tools can be manually repaired in an anvil or imbuer using any type of bark."
     },
     {
       "type": "fey_crafting_template",

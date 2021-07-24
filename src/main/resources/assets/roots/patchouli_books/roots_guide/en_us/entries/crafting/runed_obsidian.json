@@ -31,7 +31,7 @@
       "type": "crafting",
       "recipe": "roots:runed_obsidian_brick",
       "title": "Runed Obsidian Brick",
-      "text": "This variant of runed obsidian takes on a more ordered appearance, and can likewise be converted into decorative blocks.$(br2)$(info) As with all runed obsidian blocks, they are resistant to explosions and Vanilla bosses."
+      "text": "This variant of runed obsidian takes on a more ordered appearance, and can likewise be converted into decorative blocks.$(br2)$(info) As with all runed obsidian blocks, they are resistant to explosions and vanilla bosses."
     },
     {
       "type": "crafting",
@@ -55,7 +55,7 @@
       "type": "crafting",
       "recipe": "roots:runed_obsidian_brick_alt",
       "title": "Brick Alternate",
-      "text": "This alternate version of the runed obsidian brick is more orderly, and can likewise be converted into decorative blocks.$(br2)$(info) As with all runed obsidian blocks, they are resistant to explosions and Vanilla bosses."
+      "text": "This alternate version of the runed obsidian brick is more orderly, and can likewise be converted into decorative blocks.$(br2)$(info) As with all runed obsidian blocks, they are resistant to explosions and vanilla bosses."
     },
     {
       "type": "crafting",
