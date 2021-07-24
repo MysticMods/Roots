@@ -40,6 +40,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @SuppressWarnings("Duplicates")
@@ -78,6 +79,15 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
     List<ItemStack> inputItems = new ArrayList<>();
     if (recipe != null) {
       for (int i = 0; i < 5; i++) {
+        inputItems.add(inventory.extractItem(i, 1, true));
+      }
+
+      if (!recipe.matches(inputItems)) {
+        return Collections.emptyList();
+      }
+
+      inputItems.clear();
+      for (int i = 0; i < 5; i++) {
         inputItems.add(inventory.extractItem(i, 1, false));
       }
 
@@ -86,11 +96,20 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
       }
 
       result = recipe.getResult().copy();
-      recipe.postCraft(result, inputItems, player);
-      lastRecipe = recipe;
+      if (!result.isEmpty()) {
+        recipe.postCraft(result, inputItems, player);
+        lastRecipe = recipe;
+      } else {
+        lastRecipe = null;
+        this.storedItems.clear();
+      }
     }
 
-    return Lists.newArrayList(result);
+    if (!result.isEmpty()) {
+      return Lists.newArrayList(result);
+    } else {
+      return Collections.emptyList();
+    }
   }
 
   @Override
@@ -115,6 +134,7 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
           heldItem.grow(1);
         }
         pedestal.setStackInSlot(0, ItemStack.EMPTY);
+        countdown = -1;
         update = true;
         // pop it off
       } else if (pedestalItem.isEmpty()) {
@@ -122,13 +142,18 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
         pedestalStack.setCount(1);
         pedestal.setStackInSlot(0, pedestalStack);
         heldItem.shrink(1);
+        countdown = -1;
         update = true;
         // pop it in
       }
       if (update) {
         currentRecipe = ModRecipes.getFeyCraftingRecipe(pedestal.getStackInSlot(0));
+        updatePacketViaState();
       }
     } else {
+      if (this.countdown != -1) {
+        return true;
+      }
       this.storedItems = craft(player);
       if (!this.storedItems.isEmpty()) {
         this.countdown = COUNTDOWN;
@@ -152,6 +177,7 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
       return currentRecipe;
     } else {
       currentRecipe = ModRecipes.getFeyCraftingRecipe(pedestalStack);
+      this.countdown = -1;
       return currentRecipe;
     }
   }
@@ -201,7 +227,12 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
         }
       }
       if (countdown > 0) {
-        countdown--;
+        if (storedItems.isEmpty() || getRecipe() == null) {
+          countdown = -1;
+          updatePacketViaState();
+        } else {
+          countdown--;
+        }
       } else {
         countdown = -1;
         for (EnumFacing facing : EnumFacing.values()) {
@@ -236,7 +267,7 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
       if (countdown == -1) {
         List<ItemStack> items = getContents();
         FeyCraftingRecipe recipe = getRecipe();
-        if (recipe == null || (recipe != null && !items.isEmpty() && (items.size() != 5 || !recipe.matches(items)))) {
+        if (recipe == null || !items.isEmpty() && (items.size() != 5 || !recipe.matches(items))) {
           // Eject these
           TileEntity te = world.getTileEntity(getPos().down());
           if (te != null) {
