@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example"
+      "text": "Acid cloud creates a poisonous, vitriolic mist in a doughnut-shape around you, which moves as you move, damaging any entity it touches.$(br2)Modifiers allow for a variety of options, including mixing clouds of flame, increasing your movement speed, and more.$(br2)$(warning) Unless modified, your movement speed will be slowed while channeling."
     },
     {
       "type": "spell_template",
