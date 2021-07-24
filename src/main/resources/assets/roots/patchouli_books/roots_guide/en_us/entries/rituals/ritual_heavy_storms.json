@@ -12,7 +12,7 @@
     {
       "type": "pyre_template",
       "ritual": "ritual_heavy_storms",
-      "text": "$(standing_stones) As a $(l:rituals/tiers)$(bold)tier II$() ritual, $(l:rituals/ritual_healing_aura#multiblock)a standing stone and a runed pillar are required$(). Please see later pages."
+      "text": "$(standing_stones) As a $(l:rituals/tiers)$(bold)tier II$() ritual, $(l:rituals/ritual_heavy_storms#multiblock)a standing stone and a runed pillar are required$(). Please see later pages."
     },
     {
       "type": "multiblock",

@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Loose items on the ground will be gathered by magic and drawn into an adjacent inventory.$(br2)This operation is performed at regular intervals for the duration of the ritual, making it ideal for gathering up things regularly dropped.$(br2)$(warning) The target inventory can be located in anywhere around the pyre except beneath."
+      "text": "Loose items on the ground will be gathered by magic and drawn into an adjacent inventory.$(br2)This operation is performed at regular intervals for the duration of the ritual, making it ideal for gathering up things regularly dropped.$(br2)$(warning) The target inventory can be located in anywhere around the pyre - except beneath."
     },
     {
       "type": "pyre_template",

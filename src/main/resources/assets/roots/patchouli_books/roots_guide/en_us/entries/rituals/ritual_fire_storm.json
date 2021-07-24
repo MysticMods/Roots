@@ -12,7 +12,7 @@
     {
       "type": "pyre_template",
       "ritual": "ritual_fire_storm",
-      "text": "$(standing_stones) As a $(l:rituals/tiers)$(bold)tier IV$() ritual, $(l:rituals/ritual_divine_protection#multiblock)4 standing stones are required to begin$(). Please see later pages of this entry."
+      "text": "$(standing_stones) As a $(l:rituals/tiers)$(bold)tier IV$() ritual, $(l:rituals/ritual_fire_storm#multiblock)4 standing stones are required to begin$(). Please see later pages of this entry."
     },
     {
       "type": "multiblock",
@@ -30,7 +30,7 @@
           ["   R   ","       ","       ","R  0  R","       ","       ","   R   "]
         ]
       },
-      "text": "$(l:rituals/standing_stone)Standing stones$() of runestone or runed obsidian are required: a 3-high and three 4-high."
+      "text": "$(l:rituals/standing_stones)Standing stones$() of runestone or runed obsidian are required: a 3-high and three 4-high."
     },
     {
       "type": "text",
