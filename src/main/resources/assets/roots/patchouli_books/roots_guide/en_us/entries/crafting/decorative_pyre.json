@@ -7,7 +7,7 @@
     {
       "type": "crafting",
       "recipe": "roots:decorative_pyre",
-      "text": "Lacking the essential herbs that would make it into a fully function $(l:crafting/pyres)pyre$(), this decorative variant burns perpetually once placed.$(br2)It also produces light & heat, allowing the effect of a permanently burning pyre."
+      "text": "Lacking the essential herbs that would make it into a fully functioning $(l:crafting/pyres)pyre$(), this decorative variant burns perpetually once placed.$(br2)It also produces light & heat, allowing the effect of a permanently burning pyre."
     },
     {
       "type": "text",

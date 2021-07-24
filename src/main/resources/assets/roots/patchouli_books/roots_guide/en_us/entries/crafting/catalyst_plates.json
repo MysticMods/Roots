@@ -12,7 +12,7 @@
     {
       "type": "text",
       "title": "Usage",
-      "text": "Catalyst plates are primarily to support certain rituals by supplying additional ingredients.$(br2)$(info) See the $(l:rituals/catalyst_plates)entry on Catalyst Plates in the Rituals section$() for full information.$(br2)$(info) Reinforced catalyst plates are immune to damage from Vanilla bosses such as the Wither or the Ender Dragon, as well as highly resistant to explosions."
+      "text": "Catalyst plates are primarily to support certain rituals by supplying additional ingredients.$(br2)$(info) See the $(l:rituals/catalyst_plates)entry on Catalyst Plates in the Rituals section$() for full information.$(br2)$(info) Reinforced catalyst plates are immune to damage from vanilla bosses such as the Wither or the Ender Dragon, as well as highly resistant to explosions."
     }
   ]
 }

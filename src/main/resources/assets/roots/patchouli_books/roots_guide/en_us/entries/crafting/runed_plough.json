@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Sturdy and durable, while retaining just a small amount of their ability to naturally regenerate, albeit much slower compared with other tools.$(br2)$(info) Not only does this plough hoe dirt in a 3x3, it also moisturizes the resulting farmland, similarly to the $(l:crafting/terrastone_hoe)terrastone hoe$()."
+      "text": "Sturdy and durable, retains the ability to naturally regenerate, albeit much slower compared with other tools.$(br2)$(info) Not only does this plough hoe dirt in a 3x3 area, it also moisturizes the resulting farmland, similarly to the $(l:crafting/terrastone_hoe)terrastone hoe$()."
     },
     {
       "type": "fey_crafting_template",

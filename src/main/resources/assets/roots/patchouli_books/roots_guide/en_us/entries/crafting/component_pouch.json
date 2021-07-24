@@ -2,6 +2,7 @@
   "name": "Component Pouch",
   "icon": "roots:component_pouch",
   "category": "crafting_armor_tools",
+  "sortnum" : 5,
   "read_by_default": true,
   "pages": [
     {
