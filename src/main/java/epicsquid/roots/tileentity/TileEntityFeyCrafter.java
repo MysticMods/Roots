@@ -235,6 +235,9 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
     }
 
     if (!shouldGui) {
+      if (this.countdown != -1) {
+        return true;
+      }
       this.storedItems = craft(player);
       if (this.storedItems.isEmpty()) {
         shouldGui = true;
@@ -323,7 +326,11 @@ public class TileEntityFeyCrafter extends TileBase implements ITickable {
     }
     if (!world.isRemote) {
       if (countdown > 0) {
-        countdown--;
+        if (storedItems.isEmpty()) {
+          countdown = -1;
+        } else {
+          countdown--;
+        }
       } else {
         countdown = -1;
         for (EnumFacing facing : EnumFacing.values()) {

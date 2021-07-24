@@ -987,6 +987,9 @@ public class ModRecipes {
 
   @Nullable
   public static FeyCraftingRecipe getFeyCraftingRecipe(ItemStack stack) {
+    if (stack.isEmpty()) {
+      return null;
+    }
     for (FeyCraftingRecipe recipe : feyCraftingRecipes.values()) {
       if (ItemUtil.equalWithoutSize(recipe.getResult(), stack)) {
         return recipe;
