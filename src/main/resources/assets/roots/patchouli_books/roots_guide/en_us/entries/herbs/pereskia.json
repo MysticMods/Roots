@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "While closely associated with fairies, pereskia originated in our world before it was transplanted into the fey realm.$(br2)Once recreated in the heat of a $(l:crafting/pyres)pyre$(), the bulb can be extracted to make it $(l:herbs/pereskia#renew)renewable$().$(br2)Commonly associated with protection, order and light, its bulbs $(l:resources/roasted_pereskia)make a fine meal$() when cooked."
+      "text": "While closely associated with fairies, pereskia originated in our world before it was transplanted into the fey realm.$(br2)Once recreated in the heat of a $(l:crafting/pyres)pyre$(), the bulb can be extracted to make it $(l:herbs/pereskia#renew)renewable$().$(br2)Commonly associated with protection, order & light, its bulbs $(l:resources/roasted_pereskia)make a fine meal$() when cooked."
     },
     {
       "type": "ritual_crafting_template",
