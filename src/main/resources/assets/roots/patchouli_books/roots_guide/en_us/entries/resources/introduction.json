@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "There are a number of resources a sensible mage will have on hand. Some can be simply collected, while obtaining others may require $(l:crafting/introduction)tools that can be crafted$(), specific $(l:rituals/introduction)rituals$() or $(l:spells/introduction)spells$().$(br2)Some resources themselves are crafted, either through traditional means, or using specially purposed devices, or gathered from entities with special tools."
+      "text": "There are a number of resources a sensible mage will have on hand. Some can be simply collected, while obtaining others may require $(l:crafting/introduction)tools$() (that can be crafted), specific $(l:rituals/introduction)rituals$() or $(l:spells/introduction)spells$().$(br2)Some resources themselves are crafted, either through traditional means, or using specially purposed devices, or gathered from entities with special tools."
     },
     {
       "type": "text",

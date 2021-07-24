@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Once sprouting where patches of concentrated moonlight struck the earth, it can now be re-created in the heat of a $(l:crafting/pyres)pyre$().$(br2)Once crafted, the plant becomes $(l:herbs/moonglow_leaf#anchor)renewable$() once more.$(br2)Commonly associated with twilight, it bridges the gap between light and darkness. This herb can even be used to manipulate time itself."
+      "text": "Once sprouting only where patches of concentrated moonlight struck the earth, it can now be re-created in the heat of a $(l:crafting/pyres)pyre$().$(br2)Once crafted, the plant becomes $(l:herbs/moonglow_leaf#anchor)renewable$() once more.$(br2)Commonly associated with twilight, it bridges the gap between light and darkness. This herb can even be used to manipulate time itself."
     },
     {
       "type": "ritual_crafting_template",

@@ -17,7 +17,7 @@
       "type": "text",
       "title": "Renewability",
       "anchor": "renew",
-      "text": "With the discovery of $(l:resources/elemental_soil)elemental soil$(), the need for flood fields and underwater plantations disappeared.$(br2)It can be planted on any of the five types of elemental soil, and element matching is not required.$(br2)When ready to harvest, dripping clusters of flowers growing on firm stems will give off the sweet scent of the ocean."
+      "text": "With the discovery of $(l:resources/elemental_soil)elemental soil$(), the need for flooded fields and underwater plantations disappeared.$(br2)It can be planted on any of the five types of elemental soil, and element matching is not required.$(br2)When ready to harvest, dripping clusters of flowers growing on firm stems will give off the sweet scent of the ocean."
     }
   ]
 }
