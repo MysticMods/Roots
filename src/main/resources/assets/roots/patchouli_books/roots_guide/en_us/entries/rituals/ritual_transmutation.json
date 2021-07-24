@@ -30,7 +30,7 @@
           ["   R   ","       ","       ","   0   ","       ","       ","       "]
         ]
       },
-      "text": "A single $(l:rituals/standing_stone)standing stone$() of runestone or runed obsidian is required."
+      "text": "A single $(l:rituals/standing_stones)standing stone$() of runestone or runed obsidian is required."
     },
     {
       "type": "text",

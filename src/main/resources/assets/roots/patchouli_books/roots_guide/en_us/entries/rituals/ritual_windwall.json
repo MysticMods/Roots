@@ -37,7 +37,7 @@
     {
       "type": "text",
       "title": "Ritual Specifics",
-      "text": "$(bold)Duration:$() The ritual lasts $(ritual:windwall/SECONDS/duration) seconds.$(br2)$(bold)Size:$() The ritual will search for within an area of $(ritual:windwall/radius_x) and $(ritual:windwall/radius_z) blocks horizontally, and by $(ritual:windwall/radius_y) blocks vertically.$(br2)$(bold)Enforcement$(): Hostile creatures that stray within the $(ritual:windwall/distance) blocks of the ritual are blown back, with a knockback strength of $(ritual:windwall/knockback)."
+      "text": "$(bold)Duration:$() The ritual lasts $(ritual:windwall/SECONDS/duration) seconds.$(br2)$(bold)Size:$() The ritual will search for within an area of $(ritual:windwall/radius_x) and $(ritual:windwall/radius_z) blocks horizontally, and $(ritual:windwall/radius_y) blocks vertically.$(br2)$(bold)Enforcement$(): Hostile creatures that stray within the $(ritual:windwall/distance) blocks of the ritual are blown back, with a knockback strength of $(ritual:windwall/knockback)."
     },
     {
       "type": "relations",

@@ -44,7 +44,7 @@
     {
       "type": "text",
       "title": "Starting",
-      "text": "In addition to rituals continuing with valid ingredients, it is possible to automatically start a pyre by placing fire on any blocks in a 3x3 area around it. (See diagram)$(br2)$(info) Fire not on a fire source block will be consumed and extinguished to start the ritual.$(br2)$(warning) Currently this only functions for Vanilla fire."
+      "text": "In addition to rituals continuing with valid ingredients, it is possible to automatically start a pyre by placing fire on any blocks in a 3x3 area around it. (See diagram)$(br2)$(info) Fire not on a fire source block will be consumed and extinguished to start the ritual.$(br2)$(warning) Currently this only functions for vanilla fire."
     },
     {
       "type": "multiblock",
@@ -83,7 +83,7 @@
           ]
         ]
       },
-      "text": "All positions of torches the grass beneath are eligible for fire automation."
+      "text": "All positions of torches and the grass beneath are eligible for fire automation."
     }
   ]
 }

@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Supplicates and entreats whatever energy of the Fey world that still lingers in this world to anchor a $(l:crafting/grove_stones)Grove Stone$().$(br2)Once anchored, the stone will light up and become animated, as well as producing leaf particles, some of which will travel to nearby $(l:crafting/fey_crafter)fey crafters$().$(br2)The stone will also begin producing grass and rare flowers."
+      "text": "Supplicates and entreats whatever energy of the Fey world that still lingers in this world to anchor a $(l:crafting/grove_stone)Grove Stone$().$(br2)Once anchored, the stone will light up and become animated, as well as producing leaf particles, some of which will travel to nearby $(l:crafting/fey_crafter)fey crafters$().$(br2)The stone will also begin producing grass and rare flowers."
     },
     {
       "type": "pyre_template",

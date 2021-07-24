@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "With rituals that have an area of effect it can be difficult to determine exactly what blocks are and aren't being effected.$(br2)By sneak-right-clicking the pyre with a $(l:crafting/knives)knife$() will display a green particle field demonstrating the bounds of the ritual.$(br2)$(info) The dimensions of a ritual will be displayed in its entry under 'Ritual Specifics'."
+      "text": "With rituals that have an area of effect it can be difficult to determine exactly what blocks are and aren't being affected.$(br2)By sneak-right-clicking the pyre with a $(l:crafting/knives)knife$() will display a green particle field demonstrating the bounds of the ritual.$(br2)$(info) The dimensions of a ritual will be displayed in its entry under 'Ritual Specifics'."
     },
     {
       "type": "text",

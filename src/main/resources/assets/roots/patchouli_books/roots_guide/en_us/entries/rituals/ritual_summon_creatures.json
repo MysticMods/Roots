@@ -7,12 +7,12 @@
   "pages": [
     {
       "type": "text",
-      "text": "The spirit of a creature is summoned from beyond, while a fleshly body is created for it, returning it to this world.$(br2)$(info) The creature's form is determined by the items are placed on nearby $(l:rituals/catalyst_plates)catalyst plates$().$(br2)$(warning) Limitations of this guide book prevent a full list of combinations, but one can be found $(uses:roots:ritual_summon_creatures)in JEI$()."
+      "text": "The spirit of a creature is summoned from beyond, while a fleshy body is created for it, returning it to this world.$(br2)$(info) The creature's form is determined by the items that are placed on nearby $(l:rituals/catalyst_plates)catalyst plates$().$(br2)$(warning) Limitations of this guide book prevent a full list of combinations, but one can be found $(uses:roots:ritual_summon_creatures)in JEI$()."
     },
     {
       "type": "pyre_template",
       "ritual": "ritual_summon_creatures",
-      "text": "As a $(l:rituals/tiers)$(bold)tier I$() ritual, $(l:rituals/ritual_grove_supplication#multiblock)catalyst plates$() are required for the ritual to be effective."
+      "text": "As a $(l:rituals/tiers)$(bold)tier I$() ritual, $(l:rituals/ritual_summon_creatures#multiblock)catalyst plates$() are required for the ritual to be effective."
     },
     {
       "type": "multiblock",

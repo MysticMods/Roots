@@ -12,7 +12,7 @@
     {
       "type": "pyre_template",
       "ritual": "ritual_spreading_forest",
-      "text": "$(standing_stones) As a $(l:rituals/tiers)$(bold)tier III$() ritual, $(l:rituals/ritual_purity#multiblock)runed pillars$() (acacia, jungle & spruce) are required. Please see later pages of this entry."
+      "text": "$(standing_stones) As a $(l:rituals/tiers)$(bold)tier III$() ritual, $(l:rituals/ritual_spreading_forest#multiblock)runed pillars$() (acacia, jungle & spruce) are required. Please see later pages of this entry."
     },
     {
       "type": "multiblock",
@@ -34,7 +34,7 @@
           ["   L   ","       ","       ","   0  A","       ","       ","   R   "]
         ]
       },
-      "text": "Three $(l:rituals/standing_stone)runed pillar$() are required: acacia, jungle and spruce."
+      "text": "Three $(l:rituals/standing_stones)runed pillar$() are required: acacia, jungle and spruce."
     },
     {
       "type": "text",

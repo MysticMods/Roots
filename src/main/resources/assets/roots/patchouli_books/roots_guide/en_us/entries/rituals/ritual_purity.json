@@ -1,5 +1,5 @@
 {
-  "name": "Purify",
+  "name": "Purity",
   "icon": "roots:ritual_purity",
   "category": "rituals",
   "read_by_default": true,
@@ -31,7 +31,7 @@
           ["   L   ","       ","       ","   0   ","       ","       ","   L   "]
         ]
       },
-      "text": "Two $(l:rituals/standing_stone)runed pillar$() of oak is required."
+      "text": "Two $(l:rituals/standing_stones)runed pillar$() of oak is required."
     },
     {
       "type": "text",

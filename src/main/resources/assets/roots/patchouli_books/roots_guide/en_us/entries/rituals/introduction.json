@@ -30,12 +30,12 @@
     {
       "type": "text",
       "title": "Visualisation",
-      "text": "($(o)See $(l:rituals/visualisation)Ritual Visualisation$())$(br2)If a ritual has a specific radius or cube size, it's possible to have the exact range of the ritual displayed in-world.$(br2)To do so, sneak-right-click a $(l:crafting/pyres)pyre$() that has ritual ingredients in it (or displays a previously activated ritual) with a $(l:crafting/knives)knife$()."
+      "text": "($(o)See $(l:rituals/visualisation)Ritual Visualisation$())$(br2)If a ritual has a specific radius or cube size, it's possible to have the exact range of the ritual displayed in-world.$(br2)To do so, sneak-right-click a $(l:crafting/pyres)pyre$() that has ritual ingredients in it (or display a previously activated ritual) with a $(l:crafting/knives)knife$()."
     },
     {
       "type": "text",
       "title": "Automation",
-      "text": "($(o)See $(l:rituals/automation)Ritual Automation$())$(br2)Ingredients for rituals can be stored in a chest beneath the pyre, and they will be consumed from there automatically whenever the pyre is empty.$(br2)An already-started ritual will automatically continue if new ingredients are provided, but nearby sources of flame will also be consumed to start a ritual."
+      "text": "($(o)See $(l:rituals/automation)Ritual Automation$())$(br2)Ingredients for rituals can be stored in a chest beneath the pyre, and they will be consumed from there automatically whenever the pyre is empty.$(br2)An already-started ritual will automatically continue if new ingredients are provided. Nearby sources of flame will also be consumed to start a ritual."
     }
   ]
 }

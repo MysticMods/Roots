@@ -35,7 +35,7 @@
     {
       "type": "text",
       "title": "Ritual Specifics",
-      "text": "$(bold)Duration:$() The ritual lasts $(ritual:warding_protection/SECONDS/duration) seconds.$(br2)$(bold)Size:$() The ritual will try to transmute blocks within an area of $(ritual:warding_protection/radius_x) and $(ritual:warding_protection/radius_z) blocks horizontally, and by $(ritual:warding_protection/radius_y) blocks vertically.$(br2)$(bold)Protection$(): Protection is applied every $(ritual:warding_protection/SECONDS/interval) seconds, with the effect itself lasting $(ritual:warding_protection/SECONDS/invuln_duration) seconds."
+      "text": "$(bold)Duration:$() The ritual lasts $(ritual:warding_protection/SECONDS/duration) seconds.$(br2)$(bold)Size:$() The ritual will try to transmute blocks within an area of $(ritual:warding_protection/radius_x) and $(ritual:warding_protection/radius_z) blocks horizontally, and $(ritual:warding_protection/radius_y) blocks vertically.$(br2)$(bold)Protection$(): Protection is applied every $(ritual:warding_protection/SECONDS/interval) seconds, with the effect itself lasting $(ritual:warding_protection/SECONDS/invuln_duration) seconds."
     },
     {
       "type": "relations",
