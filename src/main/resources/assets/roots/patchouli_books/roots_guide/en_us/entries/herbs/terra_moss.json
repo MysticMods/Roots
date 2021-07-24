@@ -60,11 +60,7 @@
       "type": "text",
       "anchor": "auto",
       "title": "Automation",
-      "text": "In combination with the $(l:rituals/ritual_overgrowth)Overgrowth$() ritual and some simple tools and devices, it is entirely possible to automate the creation of terra moss.$(br2)A knife placed in a dispenser will, when the dispenser is activated, attempt to scrape moss from the block it is facing.$(br2)Any resultant moss is then output in the air directly above the dispenser."
-    },
-    {
-      "type": "text",
-      "text": "In accord with $(l:rituals/automation)ritual automation$(), supply a single suitable block (that meets $(l:herbs/terra_moss#conditions)the conditions$()) within the radius of the ritual.$(br2)A simple redstone setup triggering the dispenser, with a hopper above, allows for moss be fed into a nearby inventory.$(br2)This process will last for as long as there are ingredients to supply the ritual, and durability on your knives."
+      "text": "$(l:automation/ritual_overgrowth)This ritual can easily be automated$() using vanilla methods."
     }
   ]
 }
