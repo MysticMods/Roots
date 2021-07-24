@@ -59,13 +59,10 @@ public class SpellModifierProcessor implements IComponentProcessor {
         if (mainCost == null) {
           return "Invalid cost.";
         }
-        return String.format("%.03f", mainCost.getValue());
+        return String.format("x%.04f", mainCost.getValue());
       case "additions":
         StringJoiner result = new StringJoiner("\n");
         for (IModifierCost cost : modifier.getCosts().values()) {
-          if (cost == mainCost) {
-            continue;
-          }
           switch (cost.getCost()) {
             case NO_COST:
               result.add(I18n.format("roots.tooltip.modifier.no_cost"));

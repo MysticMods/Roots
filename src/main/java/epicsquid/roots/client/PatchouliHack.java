@@ -120,6 +120,9 @@ public class PatchouliHack {
             String[] parts = parameter.split("/");
             RitualBase ritual = RitualRegistry.getRitual(parts[0]);
             SpellBase spell = SpellRegistry.getSpell(parts[0]);
+            if (spell == null) {
+              spell = SpellRegistry.getSpell("spell_" + parts[0]);
+            }
             PropertyTable props;
             String propName = parts[1];
             boolean seconds = false;

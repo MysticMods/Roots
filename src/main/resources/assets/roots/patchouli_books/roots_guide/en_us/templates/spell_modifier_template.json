@@ -1,0 +1,59 @@
+
+{
+  "processor": "epicsquid.roots.integration.patchouli.SpellModifierProcessor",
+  "components": [
+    {
+      "type": "item",
+      "item": "#core",
+      "framed": false,
+      "x": 49,
+      "y": 17
+    },
+    {
+      "type": "header",
+      "text": "#name",
+      "x": -1,
+      "y": 0
+    },
+    {
+      "type": "text",
+      "text": "#cost",
+      "x": 71,
+      "y": 21
+    },
+    {
+      "type": "header",
+      "text": "Costs",
+      "x": -1,
+      "y": 45
+    },
+    {
+      "type": "text",
+      "text": "#additions",
+      "x": 1,
+      "y": 60
+    },
+    {
+      "type": "header",
+      "text": "Description",
+      "x": -1,
+      "y": 110
+    },
+    {
+      "type": "text",
+      "text": "#description",
+      "x": 1,
+      "y": 125
+    },
+    {
+      "type": "image",
+      "image": "roots:textures/gui/patchouli/elements.png",
+      "x": 45,
+      "y": 13,
+      "u": 0,
+      "v": 0,
+      "width": 24,
+      "height": 24
+    }
+  ]
+}
