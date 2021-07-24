@@ -33,7 +33,7 @@
     {
       "type": "text",
       "title": "Ritual Specifics",
-      "text": "$(bold)Duration:$() The ritual lasts $(ritual:wildroot_growth/SECONDS/duration) seconds, and after $(ritual:wildroot_growth/SECONDS/interval) seconds, it will attempt to grow a tree from a nearby, fully-grown wildroot crop.$(br2)$(bold)Size:$() The ritual will search for crops within an area of $(ritual:wildroot_growth/radius_x) and $(ritual:wildroot_growth/radius_z) blocks horizontally, and by $(ritual:wildroot_growth/radius_y) blocks vertically."
+      "text": "$(bold)Duration:$() The ritual lasts $(ritual:wildroot_growth/SECONDS/duration) seconds, and after $(ritual:wildroot_growth/SECONDS/interval) seconds, it will attempt to grow a tree from a nearby, fully-grown wildroot crop.$(br2)$(bold)Size:$() The ritual will search for crops within an area of $(ritual:wildroot_growth/radius_x) and $(ritual:wildroot_growth/radius_z) blocks horizontally, and $(ritual:wildroot_growth/radius_y) blocks vertically."
     },
     {
       "type": "relations",

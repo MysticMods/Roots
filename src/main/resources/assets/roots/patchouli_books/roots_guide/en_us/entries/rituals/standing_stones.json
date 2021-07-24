@@ -6,12 +6,12 @@
   "pages": [
     {
       "type": "text",
-      "text": "Some rituals require standing stones or runed pillars in addition to the $(l:crafting/pyres)pyre$().$(br2)$(info) All rituals which require additional features to function properly will list them as such in their ritual entry.$(br2)$(info) Only rituals of $(l:rituals/tiers)tier I$() or higher may require standing stones or pillars."
+      "text": "Some rituals require standing stones or runed pillars in addition to the $(l:crafting/pyres)pyre$().$(br2)$(info) All rituals which require additional features to function properly will list them as such in their ritual entry.$(br2)$(info) Only rituals of $(l:rituals/tiers)Tier I$() or higher may require standing stones or pillars."
     },
     {
       "type": "text",
       "title": "Standing Stones",
-      "text": "Standing stones are defined as pillars, generally between three and four blocks high, made of $(l:resources/runestone)runestone$() or $(l:resources/runed_obsidian)runed obsidian$(), with the top stone made of $(l:crafting/runestone)chiseled runestone$() or $(l:crafting/runed_obsidian)chiseled runed obsidian$().$(br2)$(info) Runed obsidian is resistant to all Vanilla bosses, and can be combined with a reinforced pyre to provide ritual support when fighting such creatures."
+      "text": "Standing stones are defined as pillars, generally between three and four blocks high, made of $(l:resources/runestone)runestone$() or $(l:resources/runed_obsidian)runed obsidian$(), with the top stone made of $(l:crafting/runestone)chiseled runestone$() or $(l:crafting/runed_obsidian)chiseled runed obsidian$().$(br2)$(info) Runed obsidian is resistant to all vanilla bosses, and can be combined with a reinforced pyre to provide ritual support when fighting such creatures."
     },
     {
       "type": "multiblock",
