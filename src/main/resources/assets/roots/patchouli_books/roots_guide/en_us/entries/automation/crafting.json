@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Both the $(l:crafting/fey_crafter)fey crafter$() and the automation-based $(l:crafting/runic_crafter)runic crafter$() can be automated with a dispenser containing a knife.$(br2)A redstone signal applied to the dispenser will begin the crafting process, if there is an eligible recipe.$(br2)$(info) With the runic crafter drawing ingredients from the chest below it, simple automation of crafting recipes is easy."
+      "text": "Both the $(l:crafting/fey_crafter)fey crafter$() and the automation-based $(l:crafting/runic_crafter)runic crafter$() can be automated with a dispenser containing a knife.$(br2)A redstone signal applied to the dispenser will begin the crafting process, if there is an eligible recipe.$(br2)$(info) As the runic crafter draws ingredients from inventories below it, simple automation of crafting recipes is easy."
     },
     {
       "type": "multiblock",
@@ -15,17 +15,14 @@
         "mapping": {
           "0": "roots:runic_crafter",
           "C": "minecraft:chest",
-          "D": "minecraft:dispenser[facing=south]",
-          "S": "minecraft:stone"
+          "D": "minecraft:dispenser[facing=east]"
         },
         "pattern": [
-          ["          ","          ","          ","          "],
-          ["          ","          ","          ","          "],
-          ["          ","          ","          ","          "],
-          ["          ","    0     ","          ","          "]
+          ["D ","0C"],
+          ["  ","C "]
         ]
       },
-      "text": "hopper can be placed, feeding into a chest. $(l:rituals/automation)Automating the pyre$() ensures a steady supply of $(l:herbs/terra_moss)terra moss$()."
+      "text": "The runic crafter will output results to any adjacent inventory in a 3x3 area excluding the one below it."
     }
   ]
 }
