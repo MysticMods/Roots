@@ -8,7 +8,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "It is important to note that, while most $(cat:herbs)herbs$() have specific methods or recipes to obtain, all of them can be sustained renewably, without repeated crafting or gathering.$(br2)As mentioned in the $(l:herbs/introduction)introduction$(), most herbs can be planted as crops under the right circumstances, while others can be generated using rituals in the right circumstances."
+      "text": "It is important to note that, while most $(cat:herbs)herbs$() have specific methods or recipes to obtain, all of them can be sustained renewably, without repeated crafting or gathering.$(br2)As mentioned in the $(l:herbs/introduction)introduction$(), most herbs can be planted as crops under the right circumstances, while others can be generated using rituals."
     },
     {
       "type": "text",
