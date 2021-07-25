@@ -552,6 +552,8 @@ roots.message.spell_already=The spell %s is already in your library.
 
 roots.message.hold_staff=You must be holding a staff to open the spell library.
 
+roots.message.natures_scythe.no_modifier=This spell requires one or more of the following modifiers to be enabled to function: %s, %s, %s, %s or %s.
+
 # Modifiers
 
 roots.modifiers.modifiers.absorption.desc=Grants you an absorption shield.

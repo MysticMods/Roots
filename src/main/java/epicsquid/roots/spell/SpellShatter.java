@@ -69,7 +69,7 @@ public class SpellShatter extends SpellBase {
   public SpellShatter(ResourceLocation name) {
     super(name, TextFormatting.GRAY, 96f / 255f, 96f / 255f, 96f / 255f, 192f / 255f, 192f / 255f, 192f / 255f);
     properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DISTANCE, PROP_DEPTH, PROP_WIDTH, PROP_HEIGHT, PROP_DEFAULT_DEPTH, PROP_DEFAULT_HEIGHT, PROP_DEFAULT_WIDTH);
-    acceptsModifiers(WIDER, TALLER, MAGNETISM, DEEPER, SINGLE, KNIFE, VOID, FORTUNE, SMELTING, SILK_TOUCH);
+    acceptModifiers(WIDER, TALLER, MAGNETISM, DEEPER, SINGLE, KNIFE, VOID, FORTUNE, SMELTING, SILK_TOUCH);
   }
 
   @Override

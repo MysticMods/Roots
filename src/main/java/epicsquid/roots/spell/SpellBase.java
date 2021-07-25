@@ -63,7 +63,7 @@ public abstract class SpellBase extends RegistryItem {
   private TextFormatting textColor;
   protected EnumCastType castType = EnumCastType.INSTANTANEOUS;
   private Object2DoubleOpenHashMap<Herb> costs = new Object2DoubleOpenHashMap<>();
-  private List<Modifier> acceptedModifiers = new ArrayList<>();
+  private Set<Modifier> acceptedModifiers = new HashSet<>();
 
   public SpellRecipe recipe = SpellRecipe.EMPTY;
 
@@ -151,7 +151,7 @@ public abstract class SpellBase extends RegistryItem {
     return properties;
   }
 
-  public SpellBase acceptsModifiers(Modifier... modules) {
+  public SpellBase acceptModifiers(Modifier... modules) {
     acceptedModifiers.addAll(Arrays.asList(modules));
     for (Modifier mod : modules) {
       for (Property<ModifierCost> prop : mod.asProperties()) {
@@ -161,8 +161,18 @@ public abstract class SpellBase extends RegistryItem {
     return this;
   }
 
-  public List<Modifier> getModifiers() {
+  public Set<Modifier> getModifiers() {
     return acceptedModifiers;
+  }
+
+  public boolean acceptsModifiers (Modifier ... modules) {
+    for (Modifier mod : modules) {
+      if (!acceptedModifiers.contains(mod)) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   public void setCastSound(@Nullable SoundEvent event) {

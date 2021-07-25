@@ -14,7 +14,6 @@ import epicsquid.roots.util.EntityUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -84,7 +83,7 @@ public class SpellDisarm extends SpellBase {
   private SpellDisarm(ResourceLocation name) {
     super(name, TextFormatting.DARK_RED, 58F / 255F, 58F / 255F, 58F / 255F, 122F / 255F, 0F, 0F);
     properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_CHANCE_INCREASE, PROP_ARMOR, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_FIRE_DURATION, PROP_KNOCKBACK, PROP_WEAKNESS_AMPLIFIER, PROP_WEAKNESS_DURATION);
-    acceptsModifiers(DROP_CHANCE, ARMOR1, DUO, ARMOR2, POISON, FLOWERS, FIRE, WEAKNESS, KNOCKBACK);
+    acceptModifiers(DROP_CHANCE, ARMOR1, DUO, ARMOR2, POISON, FLOWERS, FIRE, WEAKNESS, KNOCKBACK);
   }
 
   @Override

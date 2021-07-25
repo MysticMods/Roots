@@ -1,7 +1,6 @@
 package epicsquid.roots.spell;
 
 import epicsquid.mysticallib.network.PacketHandler;
-import epicsquid.mysticalworld.init.ModItems;
 import epicsquid.roots.Roots;
 import epicsquid.roots.client.SpectatorHandler;
 import epicsquid.roots.config.SpellConfig;
@@ -25,8 +24,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameType;
-import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.OreIngredient;
 
 public class SpellAugment extends SpellBase {
 
@@ -86,7 +83,7 @@ public class SpellAugment extends SpellBase {
   private SpellAugment(ResourceLocation name) {
     super(name, TextFormatting.AQUA, 69 / 255.0f, 209 / 255.0f, 127 / 255.0f, 28 / 255.0f, 28 / 255.0f, 148 / 255.0f);
     properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_REACH, PROP_REACH_DURATION, PROP_SPEED_AMPLIFIER, PROP_SPEED_DURATION, PROP_SLOW_FALL_DURATION, PROP_DRIFTER_DURATION, PROP_LUCK_AMPLIFIER, PROP_LUCK_DURATION, PROP_AIR_AMOUNT, PROP_STRENGTH_AMPLIFIER, PROP_STRENGTH_DURATION, PROP_HASTE_AMPLIFIER, PROP_HASTE_DURATION);
-    acceptsModifiers(REACH, SPEED, SLOW_FALL, LIGHT_DRIFTER, MAGNETISM, LUCK, ABSORPTION, STRENGTH, HASTE, SECOND_WIND);
+    acceptModifiers(REACH, SPEED, SLOW_FALL, LIGHT_DRIFTER, MAGNETISM, LUCK, ABSORPTION, STRENGTH, HASTE, SECOND_WIND);
   }
 
   @Override

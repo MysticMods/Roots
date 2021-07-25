@@ -73,7 +73,7 @@ public class SpellFeyLight extends SpellBase {
   public SpellFeyLight(ResourceLocation name) {
     super(name, TextFormatting.LIGHT_PURPLE, 247f / 255f, 246 / 255f, 210f / 255f, 227f / 255f, 81f / 255f, 244f / 255f);
     properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1);
-    acceptsModifiers(PINK, YELLOW, FIXED, PURPLE, CONSUME, GREEN, DECAY, RED, BROWN, BLUE);
+    acceptModifiers(PINK, YELLOW, FIXED, PURPLE, CONSUME, GREEN, DECAY, RED, BROWN, BLUE);
   }
 
   @Override
