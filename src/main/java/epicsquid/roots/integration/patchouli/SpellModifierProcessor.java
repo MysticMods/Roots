@@ -67,33 +67,32 @@ public class SpellModifierProcessor implements IComponentProcessor {
         for (IModifierCost cost : modifier.getCosts().values()) {
           switch (cost.getCost()) {
             case NO_COST:
-              result.add(I18n.format("roots.tooltip.modifier.no_cost"));
               break;
             case ADDITIONAL_COST:
               if (cost.getHerb() == null) {
                 throw new NullPointerException("Additional herb modifier cost type but no herb specified.");
               }
-              result.add(I18n.format("roots.tooltip.modifier.additional_cost", I18n.format(cost.getHerb().getStack().getTranslationKey() + ".name"), String.format("%.4f", cost.getValue())));
+              result.add(I18n.format("roots.guide.modifier.additional_cost", I18n.format(cost.getHerb().getStack().getTranslationKey() + ".name"), String.format("%.4f", cost.getValue())));
               break;
             case ALL_COST_MULTIPLIER:
               if (cost.getValue() < 0) {
-                result.add(I18n.format("roots.tooltip.modifier.decreased_cost", Math.floor(cost.getValue() * 100) + "%"));
+                result.add(I18n.format("roots.guide.modifier.decreased_cost", Math.floor(cost.getValue() * 100) + "%"));
               } else {
-                result.add(I18n.format("roots.tooltip.modifier.increased_cost", Math.floor(cost.getValue() * 100) + "%"));
+                result.add(I18n.format("roots.guide.modifier.increased_cost", Math.floor(cost.getValue() * 100) + "%"));
               }
               break;
             case SPECIFIC_COST_ADJUSTMENT:
               if (cost.getValue() < 0) {
-                result.add(I18n.format("roots.tooltip.modifier.specific_decreased_cost", cost.getHerb().getName(), Math.floor(cost.getValue() * 100) + "%"));
+                result.add(I18n.format("roots.guide.modifier.specific_decreased_cost", cost.getHerb().getName(), Math.floor(cost.getValue() * 100) + "%"));
               } else {
-                result.add(I18n.format("roots.tooltip.modifier.specific_increased_cost", cost.getHerb().getName(), Math.floor(cost.getValue() * 100) + "%"));
+                result.add(I18n.format("roots.guide.modifier.specific_increased_cost", cost.getHerb().getName(), Math.floor(cost.getValue() * 100) + "%"));
               }
               break;
             case SPECIFIC_COST_MULTIPLIER:
               if (cost.getValue() < 0) {
-                result.add(I18n.format("roots.tooltip.modifier.specific_decreased_cost", cost.getHerb().getName(), Math.floor(cost.getValue() * 100) + "%"));
+                result.add(I18n.format("roots.guide.modifier.specific_decreased_cost", cost.getHerb().getName(), Math.floor(cost.getValue() * 100) + "%"));
               } else {
-                result.add(I18n.format("roots.tooltip.modifier.specific_increased_cost", cost.getHerb().getName(), Math.floor(cost.getValue() * 100) + "%"));
+                result.add(I18n.format("roots.guide.modifier.specific_increased_cost", cost.getHerb().getName(), Math.floor(cost.getValue() * 100) + "%"));
               }
               break;
             default:
