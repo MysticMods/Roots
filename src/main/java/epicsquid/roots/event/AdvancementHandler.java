@@ -36,7 +36,6 @@ public class AdvancementHandler {
     }
   }
 
-  @SubscribeEvent
   public static void onAdvancement(AdvancementEvent event) {
     if (event.getEntityPlayer().world.isRemote) return;
 
