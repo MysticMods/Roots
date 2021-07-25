@@ -12,6 +12,56 @@
     {
       "type": "spell_template",
       "spell": "spell_petal_shell"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_petal_shell",
+      "modifier": "roots:react_radiance"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_petal_shell",
+      "modifier": "roots:peaceful_dance"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_petal_shell",
+      "modifier": "roots:react_daggers"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_petal_shell",
+      "modifier": "roots:petal_overflow"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_petal_shell",
+      "modifier": "roots:mossy_leaves"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_petal_shell",
+      "modifier": "roots:react_poison"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_petal_shell",
+      "modifier": "roots:react_drift"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_petal_shell",
+      "modifier": "roots:react_fire"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_petal_shell",
+      "modifier": "roots:react_weakness"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_petal_shell",
+      "modifier": "roots:react_slow"
     }
   ]
 }

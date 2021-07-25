@@ -12,6 +12,52 @@
     {
       "type": "spell_template",
       "spell": "spell_radiance"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_radiance",
+      "modifier": "roots:peaceful_radiance"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_radiance",
+      "modifier": "roots:magnetic_radiance"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_radiance",
+      "modifier": "roots:withering_ray"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_radiance",
+      "modifier": "roots:glowing_ray"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_radiance",
+      "modifier": "roots:healing_ray"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_radiance",
+      "modifier": "roots:sickly_ray"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_radiance",
+      "modifier": "roots:burning_ray"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_radiance",
+      "modifier": "roots:wider_ray"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_radiance",
+      "modifier": "roots:slowing_ray"
     }
+
   ]
 }

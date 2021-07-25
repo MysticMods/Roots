@@ -46,3 +46,5 @@ user.properties
 eiostore.jks
 
 build\.sh
+
+spells/

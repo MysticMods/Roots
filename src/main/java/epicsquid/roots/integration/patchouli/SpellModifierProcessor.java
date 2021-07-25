@@ -43,9 +43,11 @@ public class SpellModifierProcessor implements IComponentProcessor {
     }
     IModifierCost mainCost = null;
     for (IModifierCost c : modifier.getCosts().values()) {
-      if (core.getItem().equals(c.getHerb().getItem())) {
-        mainCost = c;
-        break;
+      if (c.getHerb() != null) {
+        if (core.getItem().equals(c.getHerb().getItem())) {
+          mainCost = c;
+          break;
+        }
       }
     }
     switch (s) {
@@ -61,7 +63,7 @@ public class SpellModifierProcessor implements IComponentProcessor {
         }
         return String.format("x%.04f", mainCost.getValue());
       case "additions":
-        StringJoiner result = new StringJoiner("\n");
+        StringJoiner result = new StringJoiner("$(br)");
         for (IModifierCost cost : modifier.getCosts().values()) {
           switch (cost.getCost()) {
             case NO_COST:

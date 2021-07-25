@@ -12,7 +12,6 @@ import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementList;
-import net.minecraft.advancements.AdvancementManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.advancements.GuiScreenAdvancements;
 import net.minecraft.client.multiplayer.ClientAdvancementManager;
@@ -176,101 +175,100 @@ public class PatchouliHack {
               props = ritual.getProperties();
               if (props.hasProperty(propName)) {
                 value = props.getValue(propName);
-                if (seconds) {
-                  try {
-                    double val = (double) (int) value;
-                    value = String.format("%.01f", val / 20);
-                  } catch (ClassCastException e) {
-                    Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
-                    return "INVALID PROPERTY FOR SECONDS: " + propName;
-                  }
-                } else if (minutes) {
-                  try {
-                    double val = (double) (int) value;
-                    value = val / 20 / 60;
-                  } catch (ClassCastException e) {
-                    Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
-                    return "INVALID PROPERTY FOR MINUTES: " + propName;
-                  }
-                } else if (bool) {
-                  try {
-                    boolean val = (boolean) value;
-                    // TODO: Translate this
-                    value = val ? I18n.format("roots.patchouli.true") : I18n.format("roots.patchouli.false");
-                  } catch (ClassCastException e) {
-                    Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
-                    return "INVALID PROPERTY FOR BOOL: " + propName;
-                  }
-                } else if (night) {
-                  try {
-                    double val = 100.0 / (double) ((int) value + 1);
-                    value = (int) val + "%";
-                  } catch (ClassCastException e) {
-                    Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
-                    return "INVALID PROPERTY FOR NIGHT: " + propName;
-                  }
-                } else if (day) {
-                  try {
-                    double val = 100.0 / (double) (int) value;
-                    value = (int) val + "%";
-                  } catch (ClassCastException e) {
-                    Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
-                    return "INVALID PROPERTY FOR DAY: " + propName;
-                  }
-                } else if (heart) {
-                  try {
-                    float val = (float) value * 0.5f;
-                    value = String.format("%.01f", val);
-                  } catch (ClassCastException e) {
-                    Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
-                    return "INVALID PROPERTY FOR HEARTS: " + propName;
-                  }
-                } else if (chance) {
-                  try {
-                    double val = 1.0 / (double) (int) value;
-                    value = String.format("%.03f", val) + "%";
-                  } catch (ClassCastException e) {
-                    Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
-                    return "INVALID PROPERTY FOR CHANCE: " + propName;
-                  }
-                } else if (multiplier) {
-                  try {
-                    value = (int) value + 1;
-                  } catch (ClassCastException e) {
-                    Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
-                    return "INVALID PROPERTY FOR MULTIPLIER: " + propName;
-                  }
-                } else if (roman) {
-                  try {
-                    value = I18n.format("enchantment.level." + (int) value);
-                  } catch (ClassCastException e) {
-                    Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
-                    return "INVALID PROPERTY FOR ROMAN NUMERAL: " + propName;
-                  }
-                }
-              } else {
-                return "INVALID PROPERTY: " + propName;
               }
-            } else if (type.equals("ritual")) {
-              return "INVALID RITUAL";
             } else if (type.equals("spell") && spell != null) {
               props = spell.getProperties();
               if (props.hasProperty(propName)) {
                 value = props.getValue(propName);
-              } else {
-                return "INVALID PROPERTY: " + propName;
               }
+            } else if (type.equals("ritual")) {
+              return "INVALID RITUAL";
             } else if (type.equals("spell")) {
               return "INVALID SPELL";
             }
+
             if (value != null) {
-              return value.toString();
-            } else {
-              return "INVALID COMMAND";
+              if (seconds) {
+                try {
+                  double val = (double) (int) value;
+                  value = String.format("%.01f", val / 20);
+                } catch (ClassCastException e) {
+                  Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
+                  return "INVALID PROPERTY FOR SECONDS: " + propName;
+                }
+              } else if (minutes) {
+                try {
+                  double val = (double) (int) value;
+                  value = val / 20 / 60;
+                } catch (ClassCastException e) {
+                  Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
+                  return "INVALID PROPERTY FOR MINUTES: " + propName;
+                }
+              } else if (bool) {
+                try {
+                  boolean val = (boolean) value;
+                  // TODO: Translate this
+                  value = val ? I18n.format("roots.patchouli.true") : I18n.format("roots.patchouli.false");
+                } catch (ClassCastException e) {
+                  Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
+                  return "INVALID PROPERTY FOR BOOL: " + propName;
+                }
+              } else if (night) {
+                try {
+                  double val = 100.0 / (double) ((int) value + 1);
+                  value = (int) val + "%";
+                } catch (ClassCastException e) {
+                  Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
+                  return "INVALID PROPERTY FOR NIGHT: " + propName;
+                }
+              } else if (day) {
+                try {
+                  double val = 100.0 / (double) (int) value;
+                  value = (int) val + "%";
+                } catch (ClassCastException e) {
+                  Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
+                  return "INVALID PROPERTY FOR DAY: " + propName;
+                }
+              } else if (heart) {
+                try {
+                  float val = (float) value * 0.5f;
+                  value = String.format("%.01f", val);
+                } catch (ClassCastException e) {
+                  Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
+                  return "INVALID PROPERTY FOR HEARTS: " + propName;
+                }
+              } else if (chance) {
+                try {
+                  double val = 1.0 / (double) (int) value;
+                  value = String.format("%.03f", val) + "%";
+                } catch (ClassCastException e) {
+                  Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
+                  return "INVALID PROPERTY FOR CHANCE: " + propName;
+                }
+              } else if (multiplier) {
+                try {
+                  value = (int) value + 1;
+                } catch (ClassCastException e) {
+                  Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
+                  return "INVALID PROPERTY FOR MULTIPLIER: " + propName;
+                }
+              } else if (roman) {
+                try {
+                  value = I18n.format("enchantment.level." + (int) value);
+                } catch (ClassCastException e) {
+                  Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
+                  return "INVALID PROPERTY FOR ROMAN NUMERAL: " + propName;
+                }
+              }
+
+              if (value != null) {
+                return value.toString();
+              } else {
+                return "INVALID COMMAND";
+              }
             }
-          } else {
-            return "INVALID " + (type.equals("spell") ? "SPELL" : "RITUAL") + "COMMAND, REQUIRES PROPERTY TOO";
           }
+          return "INVALID " + (type.equals("spell") ? "SPELL" : "RITUAL") + "COMMAND, REQUIRES PROPERTY TOO";
         };
 
     FUNCTIONS.put("spell", prop.apply("spell"));
@@ -280,21 +278,21 @@ public class PatchouliHack {
     COMMANDS.put("/ritual", reset);
 
     BookTextParser.FunctionProcessor config = (parameter, state) -> {
-          switch (parameter.toLowerCase(Locale.ROOT)) {
-            case "earth_max_y":
-              return "" + ElementalSoilConfig.EarthSoilMaxY;
-            case "air_min_y":
-              return "" + ElementalSoilConfig.AirSoilMinY;
-            case "air_delay":
-              return "" + String.format("%.01f", ElementalSoilConfig.AirSoilDelay / 20.0f);
-            case "earth_delay":
-              return "" + String.format("%.01f", ElementalSoilConfig.EarthSoilDelay / 20.0f);
-            case "water_delay":
-              return "" + String.format("%.01f", ElementalSoilConfig.WaterSoilDelay / 20.0f);
-            default:
-              return "" + 0;
-          }
-        };
+      switch (parameter.toLowerCase(Locale.ROOT)) {
+        case "earth_max_y":
+          return "" + ElementalSoilConfig.EarthSoilMaxY;
+        case "air_min_y":
+          return "" + ElementalSoilConfig.AirSoilMinY;
+        case "air_delay":
+          return "" + String.format("%.01f", ElementalSoilConfig.AirSoilDelay / 20.0f);
+        case "earth_delay":
+          return "" + String.format("%.01f", ElementalSoilConfig.EarthSoilDelay / 20.0f);
+        case "water_delay":
+          return "" + String.format("%.01f", ElementalSoilConfig.WaterSoilDelay / 20.0f);
+        default:
+          return "" + 0;
+      }
+    };
 
     FUNCTIONS.put("config", config);
     COMMANDS.put("/config", reset);

@@ -12,6 +12,52 @@
     {
       "type": "spell_template",
       "spell": "spell_time_stop"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_time_stop",
+      "modifier": "roots:peaceful_passage"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_time_stop",
+      "modifier": "roots:freed_familiars"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_time_stop",
+      "modifier": "roots:overtime"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_time_stop",
+      "modifier": "roots:time_slip"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_time_stop",
+      "modifier": "roots:draining_stop"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_time_stop",
+      "modifier": "roots:hasty_escape"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_time_stop",
+      "modifier": "roots:burn_in_hell"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_time_stop",
+      "modifier": "roots:minor_halt"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_time_stop",
+      "modifier": "roots:ice_age"
     }
+
   ]
 }

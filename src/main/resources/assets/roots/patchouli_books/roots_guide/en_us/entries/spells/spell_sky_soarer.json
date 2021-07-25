@@ -12,6 +12,57 @@
     {
       "type": "spell_template",
       "spell": "spell_sky_soarer"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_sky_soarer",
+      "modifier": "roots:slow_fall"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_sky_soarer",
+      "modifier": "roots:arboreal_bypass"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_sky_soarer",
+      "modifier": "roots:momentum"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_sky_soarer",
+      "modifier": "roots:verticality"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_sky_soarer",
+      "modifier": "roots:jaunt"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_sky_soarer",
+      "modifier": "roots:regenerative_sky"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_sky_soarer",
+      "modifier": "roots:chem_trails"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_sky_soarer",
+      "modifier": "roots:eternal_flame"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_sky_soarer",
+      "modifier": "roots:friendly_earth"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_sky_soarer",
+      "modifier": "roots:aquaplane"
     }
+
   ]
 }

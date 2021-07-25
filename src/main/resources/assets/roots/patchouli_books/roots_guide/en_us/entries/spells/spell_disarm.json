@@ -12,6 +12,52 @@
     {
       "type": "spell_template",
       "spell": "spell_disarm"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_disarm",
+      "modifier": "roots:boost_drops"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_disarm",
+      "modifier": "roots:armor_i"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_disarm",
+      "modifier": "roots:disarm_duumvirate"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_disarm",
+      "modifier": "roots:armor_ii"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_disarm",
+      "modifier": "roots:poison_hands"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_disarm",
+      "modifier": "roots:flower_child"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_disarm",
+      "modifier": "roots:blaze"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_disarm",
+      "modifier": "roots:weakness"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_disarm",
+      "modifier": "roots:liquid_lurch"
     }
+
   ]
 }

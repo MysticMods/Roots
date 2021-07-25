@@ -12,6 +12,57 @@
     {
       "type": "spell_template",
       "spell": "spell_dandelion_winds"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_dandelion_winds",
+      "modifier": "roots:strong_gusts"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_dandelion_winds",
+      "modifier": "roots:peaceful_winds"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_dandelion_winds",
+      "modifier": "roots:grounded_wind"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_dandelion_winds",
+      "modifier": "roots:slow_falling"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_dandelion_winds",
+      "modifier": "roots:circle_of_winds"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_dandelion_winds",
+      "modifier": "roots:item_updraft"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_dandelion_winds",
+      "modifier": "roots:poisonous_breeze"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_dandelion_winds",
+      "modifier": "roots:flaming_wind"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_dandelion_winds",
+      "modifier": "roots:suction"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_dandelion_winds",
+      "modifier": "roots:extinguisher"
     }
+
   ]
 }

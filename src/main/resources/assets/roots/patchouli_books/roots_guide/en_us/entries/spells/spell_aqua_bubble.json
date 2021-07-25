@@ -12,6 +12,51 @@
     {
       "type": "spell_template",
       "spell": "spell_aqua_bubble"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_aqua_bubble",
+      "modifier": "roots:bubble_amplified"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_aqua_bubble",
+      "modifier": "roots:faithful_sharing"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_aqua_bubble",
+      "modifier": "roots:barkskin"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_aqua_bubble",
+      "modifier": "roots:moon_bubble"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_aqua_bubble",
+      "modifier": "roots:spirit_bubble"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_aqua_bubble",
+      "modifier": "roots:poison_protection"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_aqua_bubble",
+      "modifier": "roots:bubble_knockback"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_aqua_bubble",
+      "modifier": "roots:reflective_bubble"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_aqua_bubble",
+      "modifier": "roots:stoneskin"
     }
   ]
 }

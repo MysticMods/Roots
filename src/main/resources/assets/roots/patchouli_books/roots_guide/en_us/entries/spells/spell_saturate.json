@@ -12,6 +12,52 @@
     {
       "type": "spell_template",
       "spell": "spell_saturate"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_saturate",
+      "modifier": "roots:big_bellied"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_saturate",
+      "modifier": "roots:root_lover"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_saturate",
+      "modifier": "roots:inversion"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_saturate",
+      "modifier": "roots:iron_excess"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_saturate",
+      "modifier": "roots:antivenom"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_saturate",
+      "modifier": "roots:scattered_goods"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_saturate",
+      "modifier": "roots:cooked_goods"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_saturate",
+      "modifier": "roots:iron_gut"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_saturate",
+      "modifier": "roots:bottled_goods"
     }
+
   ]
 }

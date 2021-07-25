@@ -12,6 +12,57 @@
     {
       "type": "spell_template",
       "spell": "spell_extension"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_extension",
+      "modifier": "roots:sense_home"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_extension",
+      "modifier": "roots:sense_animals"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_extension",
+      "modifier": "roots:nondetection"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_extension",
+      "modifier": "roots:sense_time"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_extension",
+      "modifier": "roots:sense_hostiles"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_extension",
+      "modifier": "roots:sense_plants"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_extension",
+      "modifier": "roots:sense_containers"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_extension",
+      "modifier": "roots:sense_spawners"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_extension",
+      "modifier": "roots:sense_ores"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_extension",
+      "modifier": "roots:sense_liquids"
     }
+
   ]
 }

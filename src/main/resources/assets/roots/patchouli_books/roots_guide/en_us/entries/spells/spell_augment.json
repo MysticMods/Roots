@@ -12,6 +12,57 @@
     {
       "type": "spell_template",
       "spell": "spell_augment"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_augment",
+      "modifier": "roots:reach"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_augment",
+      "modifier": "roots:speed"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_augment",
+      "modifier": "roots:augment_slow_fall"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_augment",
+      "modifier": "roots:light_drifter"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_augment",
+      "modifier": "roots:magnetism"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_augment",
+      "modifier": "roots:bitter_luck"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_augment",
+      "modifier": "roots:absorption"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_augment",
+      "modifier": "roots:strength_of_flame"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_augment",
+      "modifier": "roots:haste"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_augment",
+      "modifier": "roots:second_wind"
     }
+
   ]
 }

@@ -12,6 +12,56 @@
     {
       "type": "spell_template",
       "spell": "spell_rose_thorns"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_rose_thorns",
+      "modifier": "roots:larger_trap"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_rose_thorns",
+      "modifier": "roots:peaceful_trap"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_rose_thorns",
+      "modifier": "roots:weakening_trap"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_rose_thorns",
+      "modifier": "roots:repelling_trap"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_rose_thorns",
+      "modifier": "roots:ghostly_trap"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_rose_thorns",
+      "modifier": "roots:poisonous_trap"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_rose_thorns",
+      "modifier": "roots:boosting_trap"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_rose_thorns",
+      "modifier": "roots:fire_trap"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_rose_thorns",
+      "modifier": "roots:empowering_trap"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_rose_thorns",
+      "modifier": "roots:slowing_trap"
     }
   ]
 }

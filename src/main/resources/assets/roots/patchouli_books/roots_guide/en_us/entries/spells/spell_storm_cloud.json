@@ -12,6 +12,57 @@
     {
       "type": "spell_template",
       "spell": "spell_winter_cloud"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_storm_cloud",
+      "modifier": "roots:spread"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_storm_cloud",
+      "modifier": "roots:peaceful_storm"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_storm_cloud",
+      "modifier": "roots:magnetic_storm"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_storm_cloud",
+      "modifier": "roots:lightning_strikes"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_storm_cloud",
+      "modifier": "roots:reactive_jolt"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_storm_cloud",
+      "modifier": "roots:healing_rain"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_storm_cloud",
+      "modifier": "roots:poison_storm"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_storm_cloud",
+      "modifier": "roots:ignification"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_storm_cloud",
+      "modifier": "roots:icicles"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_storm_cloud",
+      "modifier": "roots:freezing_rain"
     }
+
   ]
 }
