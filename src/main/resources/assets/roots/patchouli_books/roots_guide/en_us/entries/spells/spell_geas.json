@@ -12,6 +12,52 @@
     {
       "type": "spell_template",
       "spell": "spell_geas"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_geas",
+      "modifier": "roots:extended_geas"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_geas",
+      "modifier": "roots:animal_savior"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_geas",
+      "modifier": "roots:weakened_response"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_geas",
+      "modifier": "roots:unholy_command"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_geas",
+      "modifier": "roots:additional_target1"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_geas",
+      "modifier": "roots:additional_target2"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_geas",
+      "modifier": "roots:inferno"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_geas",
+      "modifier": "roots:avalanche"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_geas",
+      "modifier": "roots:waterfall"
     }
+
   ]
 }

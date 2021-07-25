@@ -12,6 +12,52 @@
     {
       "type": "spell_template",
       "spell": "spell_desaturate"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_desaturate",
+      "modifier": "roots:amplified_saturation"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_desaturate",
+      "modifier": "roots:excess_heal"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_desaturate",
+      "modifier": "roots:excess_growth"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_desaturate",
+      "modifier": "roots:excess_absorb"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_desaturate",
+      "modifier": "roots:excess_damage"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_desaturate",
+      "modifier": "roots:excess_levitation"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_desaturate",
+      "modifier": "roots:thoughtful"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_desaturate",
+      "modifier": "roots:excess_stone_skin"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_desaturate",
+      "modifier": "roots:excess_purification"
     }
+
   ]
 }

@@ -12,6 +12,57 @@
     {
       "type": "spell_template",
       "spell": "spell_shatter"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_shatter",
+      "modifier": "roots:wider"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_shatter",
+      "modifier": "roots:taller"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_shatter",
+      "modifier": "roots:magnetic_ray"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_shatter",
+      "modifier": "roots:deeper"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_shatter",
+      "modifier": "roots:singularity"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_shatter",
+      "modifier": "roots:moss_harvest"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_shatter",
+      "modifier": "roots:shatter_void"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_shatter",
+      "modifier": "roots:shatter_fortune"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_shatter",
+      "modifier": "roots:smelting_ray"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_shatter",
+      "modifier": "roots:shatter_silk_touch"
     }
+
   ]
 }

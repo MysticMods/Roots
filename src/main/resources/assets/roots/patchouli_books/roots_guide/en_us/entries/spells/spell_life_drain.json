@@ -12,6 +12,52 @@
     {
       "type": "spell_template",
       "spell": "spell_life_drain"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_life_drain",
+      "modifier": "roots:amplified_healing"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_life_drain",
+      "modifier": "roots:peaceful_drain"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_life_drain",
+      "modifier": "roots:distributed_healing"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_life_drain",
+      "modifier": "roots:spectral_drain"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_life_drain",
+      "modifier": "roots:targeted_drain"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_life_drain",
+      "modifier": "roots:lightened_load"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_life_drain",
+      "modifier": "roots:brimstone"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_life_drain",
+      "modifier": "roots:slowing_drain"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_life_drain",
+      "modifier": "roots:chthonic"
     }
+
   ]
 }

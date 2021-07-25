@@ -12,6 +12,57 @@
     {
       "type": "spell_template",
       "spell": "spell_wild_fire"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_wild_fire",
+      "modifier": "roots:purple_flame"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_wild_fire",
+      "modifier": "roots:peaceful_flame"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_wild_fire",
+      "modifier": "roots:weakening_thorns"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_wild_fire",
+      "modifier": "roots:slow_fire"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_wild_fire",
+      "modifier": "roots:green_flame"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_wild_fire",
+      "modifier": "roots:spiritual_duality"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_wild_fire",
+      "modifier": "roots:poisoned_fire"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_wild_fire",
+      "modifier": "roots:floating_cinders"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_wild_fire",
+      "modifier": "roots:pyroclastic_cloud"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_wild_fire",
+      "modifier": "roots:fire_and_ice"
     }
+
   ]
 }

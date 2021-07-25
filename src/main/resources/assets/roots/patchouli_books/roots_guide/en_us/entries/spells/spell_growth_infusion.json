@@ -12,6 +12,57 @@
     {
       "type": "spell_template",
       "spell": "spell_growth_infusion"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_growth_infusion",
+      "modifier": "roots:rampant_growth_i"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_growth_infusion",
+      "modifier": "roots:rampant_breeding"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_growth_infusion",
+      "modifier": "roots:flower_spreading"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_growth_infusion",
+      "modifier": "roots:false_night"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_growth_infusion",
+      "modifier": "roots:rampant_growth_ii"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_growth_infusion",
+      "modifier": "roots:embiggening"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_growth_infusion",
+      "modifier": "roots:arms_of_air"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_growth_infusion",
+      "modifier": "roots:incubation"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_growth_infusion",
+      "modifier": "roots:ore_infusion"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_growth_infusion",
+      "modifier": "roots:hydration"
     }
+
   ]
 }

@@ -19,6 +19,51 @@
       "modifier": "roots:radius_boost"
     },
     {
+      "type": "spell_modifier_template",
+      "spell": "spell_acid_cloud",
+      "modifier": "roots:peaceful_cloud"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_acid_cloud",
+      "modifier": "roots:weakening_cloud"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_acid_cloud",
+      "modifier": "roots:moonfall"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_acid_cloud",
+      "modifier": "roots:unholy_vanquisher"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_acid_cloud",
+      "modifier": "roots:healing_cloud"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_acid_cloud",
+      "modifier": "roots:increased_speed"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_acid_cloud",
+      "modifier": "roots:fire_cloud"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_acid_cloud",
+      "modifier": "roots:slowing"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_acid_cloud",
+      "modifier": "roots:underwater_increase"
+    },
+    {
       "title": "Configuration",
       "type": "text",
       "text": "$(bold)Radius:$() The configured default radius of the spell is $(spell:acid_cloud/radius_general) blocks.$(br2)$(bold)Radius Boost:$() When the radius boost modifier is applied, the radius is increased by a further $(spell:acid_cloud/radius_boost) blocks."

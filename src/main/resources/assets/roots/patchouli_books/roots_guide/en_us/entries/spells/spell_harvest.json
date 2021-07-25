@@ -12,6 +12,52 @@
     {
       "type": "spell_template",
       "spell": "spell_harvest"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_harvest",
+      "modifier": "roots:extended_harvest"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_harvest",
+      "modifier": "roots:magnetic_harvest"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_harvest",
+      "modifier": "roots:gifts_of_undeath"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_harvest",
+      "modifier": "roots:targeted_harvest"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_harvest",
+      "modifier": "roots:poisoned_harvest"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_harvest",
+      "modifier": "roots:regrowth"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_harvest",
+      "modifier": "roots:fiery_harvest"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_harvest",
+      "modifier": "roots:yield"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_harvest",
+      "modifier": "roots:harvest_silk_touch"
     }
+
   ]
 }

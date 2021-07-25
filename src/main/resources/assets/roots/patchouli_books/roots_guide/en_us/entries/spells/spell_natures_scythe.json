@@ -12,6 +12,57 @@
     {
       "type": "spell_template",
       "spell": "spell_natures_scythe"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_natures_scythe",
+      "modifier": "roots:dewebbing"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_natures_scythe",
+      "modifier": "roots:leaf_harvester"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_natures_scythe",
+      "modifier": "roots:magnetic_harvester"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_natures_scythe",
+      "modifier": "roots:fortunate_scythe"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_natures_scythe",
+      "modifier": "roots:voiding_scythe"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_natures_scythe",
+      "modifier": "roots:grass_harvester"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_natures_scythe",
+      "modifier": "roots:mushroom_harvester"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_natures_scythe",
+      "modifier": "roots:flower_harvester"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_natures_scythe",
+      "modifier": "roots:blazing_speed"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_natures_scythe",
+      "modifier": "roots:silk_scythe"
     }
+
   ]
 }

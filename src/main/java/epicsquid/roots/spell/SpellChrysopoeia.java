@@ -29,16 +29,6 @@ public class SpellChrysopoeia extends SpellBase {
   public static Property.PropertyCost PROP_COST_3 = new Property.PropertyCost(new SpellCost("spirit_herb", 0.1));
   public static Property<Integer> PROP_INTERVAL = new Property<>("interval", 20).setDescription("interval in ticks between each transmutation");
 
-/*  public static Modifier OVER1 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "overproduction_i"), ModifierCores.PERESKIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.275)));
-  public static Modifier BY1 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "byproduct_i"), ModifierCores.WILDEWHEET, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 0.275)));
-  public static Modifier BY4 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "byproduct_iv"), ModifierCores.WILDROOT, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.275)));
-  public static Modifier OVER2 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "overproduction_ii"), ModifierCores.MOONGLOW_LEAF, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 0.275)));
-  public static Modifier REPETITION = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "repetition"), ModifierCores.SPIRIT_HERB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.SPIRIT_HERB, 0.275)));
-  public static Modifier OVER3 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "overproduction_iii"), ModifierCores.TERRA_MOSS, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.TERRA_MOSS, 0.275)));
-  public static Modifier OVER4 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "overproduction_iv"), ModifierCores.BAFFLE_CAP, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.BAFFLE_CAP, 0.275)));
-  public static Modifier BY3 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "byproduct_iii"), ModifierCores.CLOUD_BERRY, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 0.275)));
-  public static Modifier BY2 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "byproduct_ii"), ModifierCores.STALICRIPE, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 0.275)));*/
-
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_chrysopoeia");
   public static SpellChrysopoeia instance = new SpellChrysopoeia(spellName);
 

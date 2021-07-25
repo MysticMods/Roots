@@ -12,6 +12,57 @@
     {
       "type": "spell_template",
       "spell": "spell_fey_light"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_fey_light",
+      "modifier": "roots:pink_light"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_fey_light",
+      "modifier": "roots:yellow_light"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_fey_light",
+      "modifier": "roots:fixed_light"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_fey_light",
+      "modifier": "roots:purple_light"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_fey_light",
+      "modifier": "roots:deluminator"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_fey_light",
+      "modifier": "roots:green_light"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_fey_light",
+      "modifier": "roots:decaying_light"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_fey_light",
+      "modifier": "roots:red_light"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_fey_light",
+      "modifier": "roots:brown_light"
+    },
+    {
+      "type": "spell_modifier_template",
+      "spell": "spell_fey_light",
+      "modifier": "roots:blue_light"
     }
+
   ]
 }
