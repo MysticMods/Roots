@@ -23,6 +23,8 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameType;
 import net.minecraft.world.World;
@@ -89,7 +91,7 @@ public class SpellNaturesScythe extends SpellBase {
   public SpellNaturesScythe(ResourceLocation name) {
     super(name, TextFormatting.DARK_GREEN, 64 / 255F, 240 / 255F, 24 / 255F, 26 / 255F, 110 / 255F, 13 / 255F);
     properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST, PROP_RADIUS, PROP_RADIUS_Y, PROP_INTERVAL, PROP_MAX_AFFECTED, PROP_TREE_DICT, PROP_WEB_DICT, PROP_GRASS_DICT, PROP_MUSHROOM_DICT, PROP_FLOWER_DICT, PROP_VINES_DICT);
-    acceptsModifiers(WEBS, LEAVES, MAGNETISM, FORTUNE, VOID, GRASS, MUSHROOM, FLOWER, SPEED, SILK_TOUCH);
+    acceptModifiers(WEBS, LEAVES, MAGNETISM, FORTUNE, VOID, GRASS, MUSHROOM, FLOWER, SPEED, SILK_TOUCH);
   }
 
   @Override
@@ -109,6 +111,11 @@ public class SpellNaturesScythe extends SpellBase {
     int x = max_affected;
     if (info.has(SPEED)) {
       x *= 2;
+    }
+
+    if (!info.has(WEBS) && !info.has(LEAVES) && !info.has(GRASS) && !info.has(MUSHROOM) && !info.has(FLOWER)) {
+      caster.sendMessage(new TextComponentTranslation("roots.message.natures_scythe.no_modifier", new TextComponentTranslation(WEBS.getTranslationKey()), new TextComponentTranslation(LEAVES.getTranslationKey()), new TextComponentTranslation(GRASS.getTranslationKey()), new TextComponentTranslation(MUSHROOM.getTranslationKey()), new TextComponentTranslation(FLOWER.getTranslationKey())).setStyle(new Style().setColor(TextFormatting.YELLOW)));
+      return false;
     }
 
     int interval = Math.max(1, this.interval);

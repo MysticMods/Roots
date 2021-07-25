@@ -5,6 +5,8 @@ import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.ElementalSoilConfig;
 import epicsquid.roots.integration.IntegrationUtil;
+import epicsquid.roots.modifiers.Modifier;
+import epicsquid.roots.modifiers.ModifierRegistry;
 import epicsquid.roots.properties.PropertyTable;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
@@ -268,7 +270,7 @@ public class PatchouliHack {
               }
             }
           }
-          return "INVALID " + (type.equals("spell") ? "SPELL" : "RITUAL") + "COMMAND, REQUIRES PROPERTY TOO";
+          return "INVALID " + (type.equals("spell") ? "SPELL" : "RITUAL") + " COMMAND, REQUIRES PROPERTY TOO";
         };
 
     FUNCTIONS.put("spell", prop.apply("spell"));
@@ -296,6 +298,22 @@ public class PatchouliHack {
 
     FUNCTIONS.put("config", config);
     COMMANDS.put("/config", reset);
+
+    BookTextParser.FunctionProcessor modifier = (parameter, state) -> {
+      ResourceLocation modid = !parameter.contains("roots:") ? new ResourceLocation(Roots.MODID, parameter) : new ResourceLocation(parameter);
+      Modifier mod = ModifierRegistry.get(modid);
+      if (mod == null) {
+        return "INVALID MODIFIER: " + parameter;
+      }
+      SpellBase spell = ModifierRegistry.getSpellFromModifier(mod);
+      if (spell == null) {
+        return "MODIFIER " + parameter + " IS NOT CONNECTED TO A SPELL";
+      }
+      return "$(l:spells/" + spell.getName() + "#" + mod.getRegistryName().getPath() + ")" + I18n.format(spell.getTranslationKey()) + "$()";
+    };
+
+    FUNCTIONS.put("modifier", modifier);
+    COMMANDS.put("/modifier", reset);
 
     BookTextParser.FunctionProcessor advancement =
         (parameter, state) -> {

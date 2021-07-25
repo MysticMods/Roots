@@ -20,7 +20,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.List;
@@ -62,7 +61,7 @@ public class SpellSanctuary extends SpellBase {
   public SpellSanctuary(ResourceLocation name) {
     super(name, TextFormatting.DARK_PURPLE, 208f / 255f, 16f / 255f, 80f / 255f, 224f / 255f, 32f / 255f, 144f / 255f);
     properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_VELOCITY, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z, PROP_RADIUS_BOOST, PROP_FIRE_DURATION, PROP_LEVITATION_DURATION, PROP_WITHER_AMPLIFIER, PROP_WITHER_DURATION, PROP_SPIDER_DAMAGE, PROP_UNDEAD_DAMAGE);
-    acceptsModifiers(UNPEACEFUL, WITHER, UNDEAD, KNOCKBACK1, SPIDER, LEVITATE, FIRE, RADIUS, KNOCKBACK2);
+    acceptModifiers(UNPEACEFUL, WITHER, UNDEAD, KNOCKBACK1, SPIDER, LEVITATE, FIRE, RADIUS, KNOCKBACK2);
   }
 
   @Override

@@ -18,7 +18,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 public class SpellStormCloud extends SpellBase {
@@ -61,7 +60,7 @@ public class SpellStormCloud extends SpellBase {
   public SpellStormCloud(ResourceLocation name) {
     super(name, TextFormatting.DARK_AQUA, 22f / 255f, 142f / 255f, 255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
     properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DURATION, PROP_RADIUS, PROP_RADIUS_EXTENDED, PROP_LIGHTNING_CHANCE, PROP_LIGHTNING_DAMAGE, PROP_LIGHTNING_INTERVAL, PROP_FIRE_RESISTANCE, PROP_HEAL_AMOUNT, PROP_HEAL_INTERVAL, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_ICICLE_DAMAGE, PROP_ICICLE_CHANCE, PROP_ICICLE_INTERVAL);
-    acceptsModifiers(RADIUS, PEACEFUL, MAGNETISM, LIGHTNING, JOLT, HEALING, POISON, OBSIDIAN, ICICLES, ICE);
+    acceptModifiers(RADIUS, PEACEFUL, MAGNETISM, LIGHTNING, JOLT, HEALING, POISON, OBSIDIAN, ICICLES, ICE);
   }
 
   @Override

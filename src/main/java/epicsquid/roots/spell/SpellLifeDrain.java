@@ -28,7 +28,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.Collections;
 import java.util.List;
@@ -77,7 +76,7 @@ public class SpellLifeDrain extends SpellBase {
   public SpellLifeDrain(ResourceLocation name) {
     super(name, TextFormatting.DARK_GRAY, 144f / 255f, 32f / 255f, 64f / 255f, 255f / 255f, 196f / 255f, 240f / 255f);
     properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_WITHER_DAMAGE, PROP_HEAL, PROP_WITHER_DURATION, PROP_WITHER_AMPLIFICATION, PROP_WITHER_CHANCE, PROP_ADDITIONAL_HEAL, PROP_SPECTRAL_CHANCE, PROP_DISTANCE);
-    acceptsModifiers(RATIO, PEACEFUL, DISTRIBUTE, SPIRITS, TARGET, DAMAGE, FIRE, SLOWING, CHTHONIC);
+    acceptModifiers(RATIO, PEACEFUL, DISTRIBUTE, SPIRITS, TARGET, DAMAGE, FIRE, SLOWING, CHTHONIC);
   }
 
   @Override

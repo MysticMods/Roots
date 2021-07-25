@@ -1,6 +1,8 @@
 package epicsquid.roots.modifiers;
 
 import epicsquid.roots.Roots;
+import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.spell.SpellRegistry;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
@@ -16,8 +18,8 @@ import java.util.*;
 // - Standard function to storeEntityData modifier per-modifier/per-spell
 
 public class ModifierRegistry {
-  private static Map<ResourceLocation, Modifier> map = new HashMap<>();
-  private static Set<ResourceLocation> disabledModifiers = new HashSet<>();
+  private static final Map<ResourceLocation, Modifier> map = new HashMap<>();
+  private static final Set<ResourceLocation> disabledModifiers = new HashSet<>();
 
   @Nullable
   public static Modifier get(Modifier modifier) {
@@ -50,6 +52,7 @@ public class ModifierRegistry {
 
   public static Modifier register(Modifier modifier) {
     ResourceLocation registryName = modifier.getRegistryName();
+    //noinspection ConstantConditions
     if (registryName == null) {
       throw new IllegalStateException("Modifier being registered has a null registry name.");
     }
@@ -74,6 +77,16 @@ public class ModifierRegistry {
       }
     }
 
+    return null;
+  }
+
+  @Nullable
+  public static SpellBase getSpellFromModifier(Modifier mod) {
+    for (SpellBase spell : SpellRegistry.getSpells()) {
+      if (spell.acceptsModifiers(mod)) {
+        return spell;
+      }
+    }
     return null;
   }
 }
