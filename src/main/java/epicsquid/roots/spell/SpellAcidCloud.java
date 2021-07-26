@@ -50,7 +50,6 @@ public class SpellAcidCloud extends SpellBase {
   public static Property<Integer> PROP_SLOW_DURATION = new Property<>("slow_duration", 40).setDescription("how long to apply slowness for");
   public static Property<Integer> PROP_SLOW_AMPLIFIER = new Property<>("slow_amplifier", 1).setDescription("the amplifier to be applied to the slowing effect");
   public static Property<Float> PROP_UNDERWATER_BOOST = new Property<>("underwater_boost", 1.4f).setDescription("the multiplier given to damage and healing when underwater");
-  public static Property<Float> PROP_PHYSICAL_DAMAGE = new Property<>("physical_damage", 2.0f).setDescription("additional physical damage that is done");
   public static Property<Integer> PROP_WEAKNESS_DURATION = new Property<>("weakness_duration", 4 * 20).setDescription("how long enemies should be weakened in place for");
   public static Property<Integer> PROP_WEAKNESS_AMPLIFIER = new Property<>("weakness_amplifier", 0).setDescription("the amplifier to be applied to the weakness effect");
 
@@ -75,13 +74,18 @@ public class SpellAcidCloud extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_acid_cloud");
   public static SpellAcidCloud instance = new SpellAcidCloud(spellName);
 
-  private float damage, night_low, night_high, undead_damage, healing, underwater_boost, physical_damage;
+  private float damage;
+  private float night_low;
+  private float night_high;
+  private float undead_damage;
+  private float healing;
+  private float underwater_boost;
   private int poisonDuration, poisonAmplification, fireDuration, regen_duration, regen_amp, damage_count, heal_count, weakness_amplifier, weakness_duration, slow_duration, slow_amplifier;
   public int radius, radius_boost;
 
   public SpellAcidCloud(ResourceLocation name) {
     super(name, TextFormatting.DARK_GREEN, 80f / 255f, 160f / 255f, 40f / 255f, 64f / 255f, 96f / 255f, 32f / 255f);
-    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_DAMAGE_COUNT, PROP_POISON_DURATION, PROP_FIRE_DURATION, PROP_POISON_AMPLIFICATION, PROP_RADIUS_BOOST, PROP_RADIUS_GENERAL, PROP_NIGHT_LOWER, PROP_NIGHT_HIGHER, PROP_UNDEAD_DAMAGE, PROP_HEALING, PROP_REGEN_AMPLIFIER, PROP_REGENERATION, PROP_UNDERWATER_BOOST, PROP_PHYSICAL_DAMAGE, PROP_HEALING_COUNT, PROP_SLOW_DURATION, PROP_SLOW_AMPLIFIER, PROP_UNDERWATER_BOOST, PROP_WEAKNESS_AMPLIFIER, PROP_WEAKNESS_DURATION);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_DAMAGE_COUNT, PROP_POISON_DURATION, PROP_FIRE_DURATION, PROP_POISON_AMPLIFICATION, PROP_RADIUS_BOOST, PROP_RADIUS_GENERAL, PROP_NIGHT_LOWER, PROP_NIGHT_HIGHER, PROP_UNDEAD_DAMAGE, PROP_HEALING, PROP_REGEN_AMPLIFIER, PROP_REGENERATION, PROP_UNDERWATER_BOOST, PROP_HEALING_COUNT, PROP_SLOW_DURATION, PROP_SLOW_AMPLIFIER, PROP_UNDERWATER_BOOST, PROP_WEAKNESS_AMPLIFIER, PROP_WEAKNESS_DURATION);
     acceptModifiers(RADIUS, PEACEFUL, WEAKNESS, NIGHT, UNDEAD, HEALING, SPEED, FIRE, SLOWING, UNDERWATER);
   }
 
@@ -215,7 +219,6 @@ public class SpellAcidCloud extends SpellBase {
     this.damage_count = properties.get(PROP_DAMAGE_COUNT);
     this.heal_count = properties.get(PROP_HEALING_COUNT);
     this.underwater_boost = properties.get(PROP_UNDERWATER_BOOST);
-    this.physical_damage = properties.get(PROP_PHYSICAL_DAMAGE);
     this.weakness_duration = properties.get(PROP_WEAKNESS_DURATION);
     this.weakness_amplifier = properties.get(PROP_WEAKNESS_AMPLIFIER);
     this.slow_duration = properties.get(PROP_SLOW_DURATION);
