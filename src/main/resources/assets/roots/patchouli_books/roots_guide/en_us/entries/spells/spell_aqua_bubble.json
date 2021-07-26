@@ -16,47 +16,56 @@
     {
       "type": "spell_modifier_template",
       "spell": "spell_aqua_bubble",
-      "modifier": "roots:bubble_amplified"
+      "modifier": "roots:bubble_amplified",
+      "anchor": "bubble_amplified"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_aqua_bubble",
-      "modifier": "roots:faithful_sharing"
+      "modifier": "roots:faithful_sharing",
+      "anchor": "faithful_sharing"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_aqua_bubble",
-      "modifier": "roots:barkskin"
+      "modifier": "roots:barkskin",
+      "anchor": "barkskin"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_aqua_bubble",
-      "modifier": "roots:moon_bubble"
+      "modifier": "roots:moon_bubble",
+      "anchor": "moon_bubble"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_aqua_bubble",
-      "modifier": "roots:spirit_bubble"
+      "modifier": "roots:spirit_bubble",
+      "anchor": "spirit_bubble"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_aqua_bubble",
-      "modifier": "roots:poison_protection"
+      "modifier": "roots:poison_protection",
+      "anchor": "poison_protection"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_aqua_bubble",
-      "modifier": "roots:bubble_knockback"
+      "modifier": "roots:bubble_knockback",
+      "anchor": "bubble_knockback"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_aqua_bubble",
-      "modifier": "roots:reflective_bubble"
+      "modifier": "roots:reflective_bubble",
+      "anchor": "reflective_bubble"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_aqua_bubble",
-      "modifier": "roots:stoneskin"
+      "modifier": "roots:stoneskin",
+      "anchor": "stoneskin"
     }
   ]
 }

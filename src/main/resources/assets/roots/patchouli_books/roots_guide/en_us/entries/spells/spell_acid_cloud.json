@@ -16,57 +16,75 @@
     {
       "type": "spell_modifier_template",
       "spell": "spell_acid_cloud",
-      "modifier": "roots:radius_boost"
+      "modifier": "roots:radius_boost",
+      "anchor": "radius_boost"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_acid_cloud",
-      "modifier": "roots:peaceful_cloud"
+      "modifier": "roots:peaceful_cloud",
+      "anchor": "peaceful_cloud"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_acid_cloud",
-      "modifier": "roots:weakening_cloud"
+      "modifier": "roots:weakening_cloud",
+      "anchor": "weakening_cloud"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_acid_cloud",
-      "modifier": "roots:moonfall"
+      "modifier": "roots:moonfall",
+      "anchor": "moonfall"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_acid_cloud",
-      "modifier": "roots:unholy_vanquisher"
+      "modifier": "roots:unholy_vanquisher",
+      "anchor": "unholy_vanquisher"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_acid_cloud",
-      "modifier": "roots:healing_cloud"
+      "modifier": "roots:healing_cloud",
+      "anchor": "healing_cloud"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_acid_cloud",
-      "modifier": "roots:increased_speed"
+      "modifier": "roots:increased_speed",
+      "anchor": "increased_speed"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_acid_cloud",
-      "modifier": "roots:fire_cloud"
+      "modifier": "roots:fire_cloud",
+      "anchor": "fire_cloud"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_acid_cloud",
-      "modifier": "roots:slowing"
+      "modifier": "roots:slowing",
+      "anchor": "slowing"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_acid_cloud",
-      "modifier": "roots:underwater_increase"
+      "modifier": "roots:underwater_increase",
+      "anchor": "underwater_increase"
     },
     {
       "title": "Spell Configuration",
       "type": "text",
-      "text": "$(bold)Damage:$() The spell deals $(spell:acid_cloud/HEART/damage) hearts of damage to up to $(spell:acid_cloud/damage_count) entities when it ticks.$(br2)$(bold)Poison:$() With the $(br2)$(bold)Radius:$() The configured default radius of the spell is $(spell:acid_cloud/radius_general) blocks.$(br2)$(bold)Radius Boost:$() When the radius boost modifier is applied, the radius is increased by a further $(spell:acid_cloud/radius_boost) blocks."
+      "text": "$(bold)Damage:$() The spell deals $(spell:acid_cloud/HEART/damage) hearts of damage to up to $(spell:acid_cloud/damage_count) entities when it ticks.$(br2)$(br2)$(bold)Radius:$() The configured default radius of the spell is $(spell:acid_cloud/radius_general) blocks.$(br2)$(bold)Radius Boost:$() When the $(modifier:radius_boost)$() modifier is applied, the radius is increased by a further $(spell:acid_cloud/radius_boost) blocks."
+    },
+    {
+      "type": "text",
+      "text": "$(bold)Poison:$() Enemies are afflicted with Poison $(spell:acid_cloud/ROMAN/poison_amplification) for $(spell:acid_cloud/SECONDS/poison_duration)$() seconds.$(br2)$(bold)Fire:$() With the $(modifier:fire_cloud)$() modifier enabled, enemies are set ablaze for $(spell:acid_cloud/fire_duration) seconds and part of the damage is dealt as fire damage.$(br2)$(bold)Night:$() With the $(modifier:moonfall)$() modifier enabled, damage is increased by $(spell:acid_cloud/PERCENT/night_modifier_low) at sunset, increasing to $(spell:acid_cloud/PERCENT/night_modifier_high) at midnight, before decreasing again until dawn."
+    },
+    {
+      "type": "text",
+      "text": "$(bold)Undead$(): With the $(modifier:unholy_vanquisher)$() modifier, an additional $(spell:acid_cloud/HEART/undead_damage) damage is dealt to undead creatures.$(br2)$(bold)Healing:$() With the $(modifier:healing_cloud)$() modifier, $(bold)no damage is dealt$(), but up to $(spell:acid_cloud/healing_count) non-hostile creatures nearby are healed for $(spell:acid_cloud/HEART/healing) hearts and given Regeneration $(spell:acid_cloud/ROMAN/regeneration_amplifier) for $(spell:acid_cloud/SECONDS/regeneration) seconds."
     }
   ]
 }

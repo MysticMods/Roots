@@ -16,53 +16,62 @@
     {
       "type": "spell_modifier_template",
       "spell": "spell_natures_scythe",
-      "modifier": "roots:dewebbing"
+      "modifier": "roots:dewebbing",
+      "anchor": "dewebbing"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_natures_scythe",
-      "modifier": "roots:leaf_harvester"
+      "modifier": "roots:leaf_harvester",
+      "anchor": "leaf_harvester"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_natures_scythe",
-      "modifier": "roots:magnetic_harvester"
+      "modifier": "roots:magnetic_harvester",
+      "anchor": "magnetic_harvester"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_natures_scythe",
-      "modifier": "roots:fortunate_scythe"
+      "modifier": "roots:fortunate_scythe",
+      "anchor": "fortunate_scythe"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_natures_scythe",
-      "modifier": "roots:voiding_scythe"
+      "modifier": "roots:voiding_scythe",
+      "anchor": "voiding_scythe"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_natures_scythe",
-      "modifier": "roots:grass_harvester"
+      "modifier": "roots:grass_harvester",
+      "anchor": "grass_harvester"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_natures_scythe",
-      "modifier": "roots:mushroom_harvester"
+      "modifier": "roots:mushroom_harvester",
+      "anchor": "mushroom_harvester"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_natures_scythe",
-      "modifier": "roots:flower_harvester"
+      "modifier": "roots:flower_harvester",
+      "anchor": "flower_harvester"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_natures_scythe",
-      "modifier": "roots:blazing_speed"
+      "modifier": "roots:blazing_speed",
+      "anchor": "blazing_speed"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_natures_scythe",
-      "modifier": "roots:silk_scythe"
+      "modifier": "roots:silk_scythe",
+      "anchor": "silk_scythe"
     }
-
   ]
 }

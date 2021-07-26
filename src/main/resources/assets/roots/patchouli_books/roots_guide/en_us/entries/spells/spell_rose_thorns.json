@@ -16,52 +16,62 @@
     {
       "type": "spell_modifier_template",
       "spell": "spell_rose_thorns",
-      "modifier": "roots:larger_trap"
+      "modifier": "roots:larger_trap",
+      "anchor": "larger_trap"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_rose_thorns",
-      "modifier": "roots:peaceful_trap"
+      "modifier": "roots:peaceful_trap",
+      "anchor": "peaceful_trap"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_rose_thorns",
-      "modifier": "roots:weakening_trap"
+      "modifier": "roots:weakening_trap",
+      "anchor": "weakening_trap"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_rose_thorns",
-      "modifier": "roots:repelling_trap"
+      "modifier": "roots:repelling_trap",
+      "anchor": "repelling_trap"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_rose_thorns",
-      "modifier": "roots:ghostly_trap"
+      "modifier": "roots:ghostly_trap",
+      "anchor": "ghostly_trap"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_rose_thorns",
-      "modifier": "roots:poisonous_trap"
+      "modifier": "roots:poisonous_trap",
+      "anchor": "poisonous_trap"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_rose_thorns",
-      "modifier": "roots:boosting_trap"
+      "modifier": "roots:boosting_trap",
+      "anchor": "boosting_trap"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_rose_thorns",
-      "modifier": "roots:fire_trap"
+      "modifier": "roots:fire_trap",
+      "anchor": "fire_trap"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_rose_thorns",
-      "modifier": "roots:empowering_trap"
+      "modifier": "roots:empowering_trap",
+      "anchor": "empowering_trap"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_rose_thorns",
-      "modifier": "roots:slowing_trap"
+      "modifier": "roots:slowing_trap",
+      "anchor": "slowing_trap"
     }
   ]
 }

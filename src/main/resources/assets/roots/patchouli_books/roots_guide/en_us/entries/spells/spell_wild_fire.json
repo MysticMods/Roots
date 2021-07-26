@@ -16,53 +16,62 @@
     {
       "type": "spell_modifier_template",
       "spell": "spell_wild_fire",
-      "modifier": "roots:purple_flame"
+      "modifier": "roots:purple_flame",
+      "anchor": "purple_flame"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_wild_fire",
-      "modifier": "roots:peaceful_flame"
+      "modifier": "roots:peaceful_flame",
+      "anchor": "peaceful_flame"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_wild_fire",
-      "modifier": "roots:weakening_thorns"
+      "modifier": "roots:weakening_thorns",
+      "anchor": "weakening_thorns"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_wild_fire",
-      "modifier": "roots:slow_fire"
+      "modifier": "roots:slow_fire",
+      "anchor": "slow_fire"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_wild_fire",
-      "modifier": "roots:green_flame"
+      "modifier": "roots:green_flame",
+      "anchor": "green_flame"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_wild_fire",
-      "modifier": "roots:spiritual_duality"
+      "modifier": "roots:spiritual_duality",
+      "anchor": "spiritual_duality"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_wild_fire",
-      "modifier": "roots:poisoned_fire"
+      "modifier": "roots:poisoned_fire",
+      "anchor": "poisoned_fire"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_wild_fire",
-      "modifier": "roots:floating_cinders"
+      "modifier": "roots:floating_cinders",
+      "anchor": "floating_cinders"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_wild_fire",
-      "modifier": "roots:pyroclastic_cloud"
+      "modifier": "roots:pyroclastic_cloud",
+      "anchor": "pyroclastic_cloud"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_wild_fire",
-      "modifier": "roots:fire_and_ice"
+      "modifier": "roots:fire_and_ice",
+      "anchor": "fire_and_ice"
     }
-
   ]
 }

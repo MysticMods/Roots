@@ -16,48 +16,56 @@
     {
       "type": "spell_modifier_template",
       "spell": "spell_desaturate",
-      "modifier": "roots:amplified_saturation"
+      "modifier": "roots:amplified_saturation",
+      "anchor": "amplified_saturation"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_desaturate",
-      "modifier": "roots:excess_heal"
+      "modifier": "roots:excess_heal",
+      "anchor": "excess_heal"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_desaturate",
-      "modifier": "roots:excess_growth"
+      "modifier": "roots:excess_growth",
+      "anchor": "excess_growth"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_desaturate",
-      "modifier": "roots:excess_absorb"
+      "modifier": "roots:excess_absorb",
+      "anchor": "excess_absorb"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_desaturate",
-      "modifier": "roots:excess_damage"
+      "modifier": "roots:excess_damage",
+      "anchor": "excess_damage"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_desaturate",
-      "modifier": "roots:excess_levitation"
+      "modifier": "roots:excess_levitation",
+      "anchor": "excess_levitation"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_desaturate",
-      "modifier": "roots:thoughtful"
+      "modifier": "roots:thoughtful",
+      "anchor": "thoughtful"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_desaturate",
-      "modifier": "roots:excess_stone_skin"
+      "modifier": "roots:excess_stone_skin",
+      "anchor": "excess_stone_skin"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_desaturate",
-      "modifier": "roots:excess_purification"
+      "modifier": "roots:excess_purification",
+      "anchor": "excess_purification"
     }
-
   ]
 }

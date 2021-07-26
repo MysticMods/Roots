@@ -16,48 +16,56 @@
     {
       "type": "spell_modifier_template",
       "spell": "spell_sanctuary",
-      "modifier": "roots:reject_nature"
+      "modifier": "roots:reject_nature",
+      "anchor": "reject_nature"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_sanctuary",
-      "modifier": "roots:withering"
+      "modifier": "roots:withering",
+      "anchor": "withering"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_sanctuary",
-      "modifier": "roots:undead_rejection"
+      "modifier": "roots:undead_rejection",
+      "anchor": "undead_rejection"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_sanctuary",
-      "modifier": "roots:repulsive_bubble"
+      "modifier": "roots:repulsive_bubble",
+      "anchor": "repulsive_bubble"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_sanctuary",
-      "modifier": "roots:spider_unsuffrage"
+      "modifier": "roots:spider_unsuffrage",
+      "anchor": "spider_unsuffrage"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_sanctuary",
-      "modifier": "roots:levitating_bubble"
+      "modifier": "roots:levitating_bubble",
+      "anchor": "levitating_bubble"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_sanctuary",
-      "modifier": "roots:inflammatory_bubble"
+      "modifier": "roots:inflammatory_bubble",
+      "anchor": "inflammatory_bubble"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_sanctuary",
-      "modifier": "roots:earthen_radius"
+      "modifier": "roots:earthen_radius",
+      "anchor": "earthen_radius"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_sanctuary",
-      "modifier": "roots:liquid_repulsion"
+      "modifier": "roots:liquid_repulsion",
+      "anchor": "liquid_repulsion"
     }
-
   ]
 }

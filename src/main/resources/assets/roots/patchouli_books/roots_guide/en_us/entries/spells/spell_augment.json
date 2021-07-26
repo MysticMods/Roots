@@ -16,53 +16,62 @@
     {
       "type": "spell_modifier_template",
       "spell": "spell_augment",
-      "modifier": "roots:reach"
+      "modifier": "roots:reach",
+      "anchor": "reach"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_augment",
-      "modifier": "roots:speed"
+      "modifier": "roots:speed",
+      "anchor": "speed"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_augment",
-      "modifier": "roots:augment_slow_fall"
+      "modifier": "roots:augment_slow_fall",
+      "anchor": "augment_slow_fall"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_augment",
-      "modifier": "roots:light_drifter"
+      "modifier": "roots:light_drifter",
+      "anchor": "light_drifter"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_augment",
-      "modifier": "roots:magnetism"
+      "modifier": "roots:magnetism",
+      "anchor": "magnetism"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_augment",
-      "modifier": "roots:bitter_luck"
+      "modifier": "roots:bitter_luck",
+      "anchor": "bitter_luck"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_augment",
-      "modifier": "roots:absorption"
+      "modifier": "roots:absorption",
+      "anchor": "absorption"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_augment",
-      "modifier": "roots:strength_of_flame"
+      "modifier": "roots:strength_of_flame",
+      "anchor": "strength_of_flame"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_augment",
-      "modifier": "roots:haste"
+      "modifier": "roots:haste",
+      "anchor": "haste"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_augment",
-      "modifier": "roots:second_wind"
+      "modifier": "roots:second_wind",
+      "anchor": "second_wind"
     }
-
   ]
 }

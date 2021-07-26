@@ -16,48 +16,56 @@
     {
       "type": "spell_modifier_template",
       "spell": "spell_time_stop",
-      "modifier": "roots:peaceful_passage"
+      "modifier": "roots:peaceful_passage",
+      "anchor": "peaceful_passage"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_time_stop",
-      "modifier": "roots:freed_familiars"
+      "modifier": "roots:freed_familiars",
+      "anchor": "freed_familiars"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_time_stop",
-      "modifier": "roots:overtime"
+      "modifier": "roots:overtime",
+      "anchor": "overtime"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_time_stop",
-      "modifier": "roots:time_slip"
+      "modifier": "roots:time_slip",
+      "anchor": "time_slip"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_time_stop",
-      "modifier": "roots:draining_stop"
+      "modifier": "roots:draining_stop",
+      "anchor": "draining_stop"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_time_stop",
-      "modifier": "roots:hasty_escape"
+      "modifier": "roots:hasty_escape",
+      "anchor": "hasty_escape"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_time_stop",
-      "modifier": "roots:burn_in_hell"
+      "modifier": "roots:burn_in_hell",
+      "anchor": "burn_in_hell"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_time_stop",
-      "modifier": "roots:minor_halt"
+      "modifier": "roots:minor_halt",
+      "anchor": "minor_halt"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_time_stop",
-      "modifier": "roots:ice_age"
+      "modifier": "roots:ice_age",
+      "anchor": "ice_age"
     }
-
   ]
 }

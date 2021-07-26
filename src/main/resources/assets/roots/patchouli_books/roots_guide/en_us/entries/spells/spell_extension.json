@@ -16,53 +16,62 @@
     {
       "type": "spell_modifier_template",
       "spell": "spell_extension",
-      "modifier": "roots:sense_home"
+      "modifier": "roots:sense_home",
+      "anchor": "sense_home"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_extension",
-      "modifier": "roots:sense_animals"
+      "modifier": "roots:sense_animals",
+      "anchor": "sense_animals"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_extension",
-      "modifier": "roots:nondetection"
+      "modifier": "roots:nondetection",
+      "anchor": "nondetection"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_extension",
-      "modifier": "roots:sense_time"
+      "modifier": "roots:sense_time",
+      "anchor": "sense_time"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_extension",
-      "modifier": "roots:sense_hostiles"
+      "modifier": "roots:sense_hostiles",
+      "anchor": "sense_hostiles"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_extension",
-      "modifier": "roots:sense_plants"
+      "modifier": "roots:sense_plants",
+      "anchor": "sense_plants"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_extension",
-      "modifier": "roots:sense_containers"
+      "modifier": "roots:sense_containers",
+      "anchor": "sense_containers"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_extension",
-      "modifier": "roots:sense_spawners"
+      "modifier": "roots:sense_spawners",
+      "anchor": "sense_spawners"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_extension",
-      "modifier": "roots:sense_ores"
+      "modifier": "roots:sense_ores",
+      "anchor": "sense_ores"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_extension",
-      "modifier": "roots:sense_liquids"
+      "modifier": "roots:sense_liquids",
+      "anchor": "sense_liquids"
     }
-
   ]
 }

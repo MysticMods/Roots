@@ -16,48 +16,56 @@
     {
       "type": "spell_modifier_template",
       "spell": "spell_geas",
-      "modifier": "roots:extended_geas"
+      "modifier": "roots:extended_geas",
+      "anchor": "extended_geas"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_geas",
-      "modifier": "roots:animal_savior"
+      "modifier": "roots:animal_savior",
+      "anchor": "animal_savior"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_geas",
-      "modifier": "roots:weakened_response"
+      "modifier": "roots:weakened_response",
+      "anchor": "weakened_response"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_geas",
-      "modifier": "roots:unholy_command"
+      "modifier": "roots:unholy_command",
+      "anchor": "unholy_command"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_geas",
-      "modifier": "roots:additional_target1"
+      "modifier": "roots:additional_target1",
+      "anchor": "additional_target1"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_geas",
-      "modifier": "roots:additional_target2"
+      "modifier": "roots:additional_target2",
+      "anchor": "additional_target2"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_geas",
-      "modifier": "roots:inferno"
+      "modifier": "roots:inferno",
+      "anchor": "inferno"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_geas",
-      "modifier": "roots:avalanche"
+      "modifier": "roots:avalanche",
+      "anchor": "avalanche"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_geas",
-      "modifier": "roots:waterfall"
+      "modifier": "roots:waterfall",
+      "anchor": "waterfall"
     }
-
   ]
 }

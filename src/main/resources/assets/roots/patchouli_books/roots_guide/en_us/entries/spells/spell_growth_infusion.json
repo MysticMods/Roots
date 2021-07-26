@@ -16,53 +16,62 @@
     {
       "type": "spell_modifier_template",
       "spell": "spell_growth_infusion",
-      "modifier": "roots:rampant_growth_i"
+      "modifier": "roots:rampant_growth_i",
+      "anchor": "rampant_growth_i"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_growth_infusion",
-      "modifier": "roots:rampant_breeding"
+      "modifier": "roots:rampant_breeding",
+      "anchor": "rampant_breeding"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_growth_infusion",
-      "modifier": "roots:flower_spreading"
+      "modifier": "roots:flower_spreading",
+      "anchor": "flower_spreading"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_growth_infusion",
-      "modifier": "roots:false_night"
+      "modifier": "roots:false_night",
+      "anchor": "false_night"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_growth_infusion",
-      "modifier": "roots:rampant_growth_ii"
+      "modifier": "roots:rampant_growth_ii",
+      "anchor": "rampant_growth_ii"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_growth_infusion",
-      "modifier": "roots:embiggening"
+      "modifier": "roots:embiggening",
+      "anchor": "embiggening"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_growth_infusion",
-      "modifier": "roots:arms_of_air"
+      "modifier": "roots:arms_of_air",
+      "anchor": "arms_of_air"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_growth_infusion",
-      "modifier": "roots:incubation"
+      "modifier": "roots:incubation",
+      "anchor": "incubation"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_growth_infusion",
-      "modifier": "roots:ore_infusion"
+      "modifier": "roots:ore_infusion",
+      "anchor": "ore_infusion"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_growth_infusion",
-      "modifier": "roots:hydration"
+      "modifier": "roots:hydration",
+      "anchor": "hydration"
     }
-
   ]
 }
