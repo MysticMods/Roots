@@ -31,7 +31,7 @@ public class GeneralConfig {
     }
   }
 
-  @Config.Comment(("Set to false to disable repairing thaumcraft.items in an Imbuer"))
+  @Config.Comment(("Set to false to disable repairing items in an Imbuer"))
   public static boolean AllowImbuerRepair = true;
 
   @Config.Comment(("Set to false to prevent runic dust from removing enchants with an Imbuer"))
@@ -49,7 +49,7 @@ public class GeneralConfig {
   @Config.Comment(("Set to true to give players the Roots Guide Book upon joining the server"))
   public static boolean GiveBook = false;
 
-  @Config.Comment(("Inject some thaumcraft.items from Roots into dungeon & other loot chests"))
+  @Config.Comment(("Inject some items from Roots into dungeon & other loot chests"))
   public static boolean InjectLoot = true;
 
   @Config.Comment(("Minimum number of pulls for injected loot"))
@@ -73,7 +73,7 @@ public class GeneralConfig {
   @Config.Comment(("The aoe-radius for using runic shears to aoe-shear things"))
   public static int RunicShearsRadius = 15;
 
-  @Config.Comment(("The health threshold at which thaumcraft.entities are considered boss-type creatures (in half hearts)"))
+  @Config.Comment(("The health threshold at which entities are considered boss-type creatures (in half hearts)"))
   public static float BossEntityHealth = 40;
 
   @Config.Comment(("List of mod:item:meta (meta optional) of saplings that should be planted in 2x2 by the Spreading Forest ritual"))

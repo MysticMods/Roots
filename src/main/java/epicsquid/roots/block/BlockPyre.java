@@ -160,7 +160,7 @@ public class BlockPyre extends BlockTEBase {
   /*
     0 = Unlit, no recipe
     1 = Unlit, valid recipe or ritual
-    3 = Lit, no thaumcraft.items
+    3 = Lit, no items
     4 = Lit, valid recipe of ritual
     5 = Lit, valid recipe or ritual matches current ritual or recipe
    */
@@ -201,7 +201,7 @@ public class BlockPyre extends BlockTEBase {
       return lit ? 3 : 0;
     }
 
-    // Empty, no thaumcraft.items in it
+    // Empty, no items in it
     return 0;
   }
 

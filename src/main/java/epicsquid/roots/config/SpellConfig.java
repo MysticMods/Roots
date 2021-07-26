@@ -141,7 +141,7 @@ public class SpellConfig {
 
     @Config.RequiresMcRestart
     @Config.Name("Sanctuary Spell Entities Blacklist")
-    @Config.Comment("Entities in this list will be excluded by Sanctuary Spell when repelling thaumcraft.entities (formatted as mod:mobname)")
+    @Config.Comment("Entities in this list will be excluded by Sanctuary Spell when repelling entities (formatted as mod:mobname)")
     public String[] sanctuaryEntitiesBlacklist = {};
 
     @Config.Ignore

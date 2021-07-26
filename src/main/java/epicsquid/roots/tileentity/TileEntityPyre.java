@@ -324,7 +324,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
           }
         }
       }
-      // TODO: Make this a configurable array of thaumcraft.items or extensible classes
+      // TODO: Make this a configurable array of items or extensible classes
       if (fireStarters == null) {
         fireStarters = new OreIngredient("pyreFireStarters");
       }

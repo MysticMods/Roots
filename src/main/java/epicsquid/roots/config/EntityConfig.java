@@ -28,7 +28,7 @@ public class EntityConfig {
   //      GENERAL
   // ******************
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered specifically hostile for the purposes of spells and rituals (modid:entityname)"))
+  @Config.Comment(("List of entities that should be considered specifically hostile for the purposes of spells and rituals (modid:entityname)"))
   public static String[] EntityBlacklist = new String[]{
       "minecraft:villager"
   };
@@ -44,7 +44,7 @@ public class EntityConfig {
     return entityBlacklist;
   }
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered specifically friendly for the purposes of spells and rituals (modid:entityname)"))
+  @Config.Comment(("List of entities that should be considered specifically friendly for the purposes of spells and rituals (modid:entityname)"))
   public static String[] EntityWhitelist = new String[]{
       "minecraft:enderman"
   };
@@ -64,7 +64,7 @@ public class EntityConfig {
   //     DANDELION
   // ******************
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered specifically hostile for the purposes of Dandelion Winds (modid:dandelionname)"))
+  @Config.Comment(("List of entities that should be considered specifically hostile for the purposes of Dandelion Winds (modid:dandelionname)"))
   public static String[] DandelionBlacklist = new String[]{
       "minecraft:villager"
   };
@@ -80,7 +80,7 @@ public class EntityConfig {
     return dandelionBlacklist;
   }
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered specifically prevented from being knocked back by Dandelion Winds (modid:entity)"))
+  @Config.Comment(("List of entities that should be considered specifically prevented from being knocked back by Dandelion Winds (modid:entity)"))
   public static String[] DandelionWhitelist = new String[]{
       "minecraft:enderman"
   };
@@ -100,7 +100,7 @@ public class EntityConfig {
   //     Wildfire
   // ******************
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered specifically hostile for the purposes of Wildfire (modid:wildfirename)"))
+  @Config.Comment(("List of entities that should be considered specifically hostile for the purposes of Wildfire (modid:wildfirename)"))
   public static String[] WildfireBlacklist = new String[]{
       "minecraft:villager"
   };
@@ -116,7 +116,7 @@ public class EntityConfig {
     return wildfireBlacklist;
   }
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered considered friendly for the purposes of Wildfire (modid:entity)"))
+  @Config.Comment(("List of entities that should be considered considered friendly for the purposes of Wildfire (modid:entity)"))
   public static String[] WildfireWhitelist = new String[]{
       "minecraft:enderman"
   };
@@ -136,7 +136,7 @@ public class EntityConfig {
   //     FireStorm
   // ******************
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered specifically hostile for the purposes of FireStorm (modid:fireStormname)"))
+  @Config.Comment(("List of entities that should be considered specifically hostile for the purposes of FireStorm (modid:fireStormname)"))
   public static String[] FireStormBlacklist = new String[]{
       "minecraft:villager"
   };
@@ -152,7 +152,7 @@ public class EntityConfig {
     return fireStormBlacklist;
   }
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
+  @Config.Comment(("List of entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
   public static String[] FireStormWhitelist = new String[]{
       "minecraft:enderman"
   };
@@ -172,7 +172,7 @@ public class EntityConfig {
   //     HealingAura
   // ******************
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered specifically hostile for the purposes of HealingAura (modid:healingAuraname)"))
+  @Config.Comment(("List of entities that should be considered specifically hostile for the purposes of HealingAura (modid:healingAuraname)"))
   public static String[] HealingAuraBlacklist = new String[]{
       "minecraft:villager"
   };
@@ -188,7 +188,7 @@ public class EntityConfig {
     return healingAuraBlacklist;
   }
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
+  @Config.Comment(("List of entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
   public static String[] HealingAuraWhitelist = new String[]{
       "minecraft:enderman"
   };
@@ -208,7 +208,7 @@ public class EntityConfig {
   //     Purity
   // ******************
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered specifically hostile for the purposes of Purity (modid:purityname)"))
+  @Config.Comment(("List of entities that should be considered specifically hostile for the purposes of Purity (modid:purityname)"))
   public static String[] PurityBlacklist = new String[]{
       "minecraft:villager"
   };
@@ -224,7 +224,7 @@ public class EntityConfig {
     return purityBlacklist;
   }
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
+  @Config.Comment(("List of entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
   public static String[] PurityWhitelist = new String[]{
       "minecraft:enderman"
   };
@@ -244,7 +244,7 @@ public class EntityConfig {
   //     WindWall
   // ******************
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered specifically hostile for the purposes of WindWall (modid:windWallname)"))
+  @Config.Comment(("List of entities that should be considered specifically hostile for the purposes of WindWall (modid:windWallname)"))
   public static String[] WindWallBlacklist = new String[]{
       "minecraft:villager"
   };
@@ -260,7 +260,7 @@ public class EntityConfig {
     return windWallBlacklist;
   }
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
+  @Config.Comment(("List of entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
   public static String[] WindWallWhitelist = new String[]{
       "minecraft:enderman"
   };
@@ -280,7 +280,7 @@ public class EntityConfig {
   //     RoseThorns
   // ******************
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered specifically hostile for the purposes of RoseThorns (modid:roseThornsname)"))
+  @Config.Comment(("List of entities that should be considered specifically hostile for the purposes of RoseThorns (modid:roseThornsname)"))
   public static String[] RoseThornsBlacklist = new String[]{
       "minecraft:villager"
   };
@@ -296,7 +296,7 @@ public class EntityConfig {
     return roseThornsBlacklist;
   }
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
+  @Config.Comment(("List of entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
   public static String[] RoseThornsWhitelist = new String[]{
       "minecraft:enderman"
   };
@@ -316,7 +316,7 @@ public class EntityConfig {
   //     TimeStop
   // ******************
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered specifically hostile for the purposes of TimeStop (modid:timeStopname)"))
+  @Config.Comment(("List of entities that should be considered specifically hostile for the purposes of TimeStop (modid:timeStopname)"))
   public static String[] TimeStopBlacklist = new String[]{
       "minecraft:villager"
   };
@@ -332,7 +332,7 @@ public class EntityConfig {
     return timeStopBlacklist;
   }
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
+  @Config.Comment(("List of entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
   public static String[] TimeStopWhitelist = new String[]{
       "minecraft:enderman"
   };
@@ -352,7 +352,7 @@ public class EntityConfig {
   //     Extension
   // ******************
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered specifically hostile for the purposes of Extension (modid:extensionname)"))
+  @Config.Comment(("List of entities that should be considered specifically hostile for the purposes of Extension (modid:extensionname)"))
   public static String[] ExtensionBlacklist = new String[]{
       "minecraft:villager"
   };
@@ -368,7 +368,7 @@ public class EntityConfig {
     return extensionBlacklist;
   }
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
+  @Config.Comment(("List of entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
   public static String[] ExtensionWhitelist = new String[]{
       "minecraft:enderman"
   };
@@ -388,7 +388,7 @@ public class EntityConfig {
   //     StormCloud
   // ******************
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered specifically hostile for the purposes of StormCloud (modid:stormCloudname)"))
+  @Config.Comment(("List of entities that should be considered specifically hostile for the purposes of StormCloud (modid:stormCloudname)"))
   public static String[] StormCloudBlacklist = new String[]{
       "minecraft:villager"
   };
@@ -404,7 +404,7 @@ public class EntityConfig {
     return stormCloudBlacklist;
   }
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
+  @Config.Comment(("List of entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
   public static String[] StormCloudWhitelist = new String[]{
       "minecraft:enderman"
   };
@@ -424,7 +424,7 @@ public class EntityConfig {
   //     AcidCloud
   // ******************
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered specifically hostile for the purposes of AcidCloud (modid:acidCloudname)"))
+  @Config.Comment(("List of entities that should be considered specifically hostile for the purposes of AcidCloud (modid:acidCloudname)"))
   public static String[] AcidCloudBlacklist = new String[]{
       "minecraft:villager"
   };
@@ -440,7 +440,7 @@ public class EntityConfig {
     return acidCloudBlacklist;
   }
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
+  @Config.Comment(("List of entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
   public static String[] AcidCloudWhitelist = new String[]{
       "minecraft:enderman"
   };
@@ -460,7 +460,7 @@ public class EntityConfig {
   //     Desaturate
   // ******************
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered specifically hostile for the purposes of Desaturate (modid:desaturatename)"))
+  @Config.Comment(("List of entities that should be considered specifically hostile for the purposes of Desaturate (modid:desaturatename)"))
   public static String[] DesaturateBlacklist = new String[]{
       "minecraft:villager"
   };
@@ -476,7 +476,7 @@ public class EntityConfig {
     return desaturateBlacklist;
   }
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
+  @Config.Comment(("List of entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
   public static String[] DesaturateWhitelist = new String[]{
       "minecraft:enderman"
   };
@@ -496,7 +496,7 @@ public class EntityConfig {
   //     Disarm
   // ******************
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered specifically hostile for the purposes of Disarm (modid:disarmname)"))
+  @Config.Comment(("List of entities that should be considered specifically hostile for the purposes of Disarm (modid:disarmname)"))
   public static String[] DisarmBlacklist = new String[]{
       "minecraft:villager"
   };
@@ -512,7 +512,7 @@ public class EntityConfig {
     return disarmBlacklist;
   }
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
+  @Config.Comment(("List of entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
   public static String[] DisarmWhitelist = new String[]{
       "minecraft:enderman"
   };
@@ -532,7 +532,7 @@ public class EntityConfig {
   //     LifeDrain
   // ******************
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered specifically hostile for the purposes of LifeDrain (modid:lifeDrainname)"))
+  @Config.Comment(("List of entities that should be considered specifically hostile for the purposes of LifeDrain (modid:lifeDrainname)"))
   public static String[] LifeDrainBlacklist = new String[]{
       "minecraft:villager"
   };
@@ -548,7 +548,7 @@ public class EntityConfig {
     return lifeDrainBlacklist;
   }
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
+  @Config.Comment(("List of entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
   public static String[] LifeDrainWhitelist = new String[]{
       "minecraft:enderman"
   };
@@ -568,7 +568,7 @@ public class EntityConfig {
   //     Radiance
   // ******************
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered specifically hostile for the purposes of Radiance (modid:radiancename)"))
+  @Config.Comment(("List of entities that should be considered specifically hostile for the purposes of Radiance (modid:radiancename)"))
   public static String[] RadianceBlacklist = new String[]{
       "minecraft:villager"
   };
@@ -584,7 +584,7 @@ public class EntityConfig {
     return radianceBlacklist;
   }
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
+  @Config.Comment(("List of entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
   public static String[] RadianceWhitelist = new String[]{
       "minecraft:enderman"
   };
@@ -604,7 +604,7 @@ public class EntityConfig {
   //     Sanctuary
   // ******************
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered specifically hostile for the purposes of Sanctuary (modid:sanctuaryname)"))
+  @Config.Comment(("List of entities that should be considered specifically hostile for the purposes of Sanctuary (modid:sanctuaryname)"))
   public static String[] SanctuaryBlacklist = new String[]{
       "minecraft:villager"
   };
@@ -620,7 +620,7 @@ public class EntityConfig {
     return sanctuaryBlacklist;
   }
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
+  @Config.Comment(("List of entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
   public static String[] SanctuaryWhitelist = new String[]{
       "minecraft:enderman"
   };
@@ -640,7 +640,7 @@ public class EntityConfig {
   //     Geas
   // ******************
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered specifically hostile for the purposes of Geas (modid:geasname)"))
+  @Config.Comment(("List of entities that should be considered specifically hostile for the purposes of Geas (modid:geasname)"))
   public static String[] GeasBlacklist = new String[]{
       "minecraft:villager"
   };
@@ -656,7 +656,7 @@ public class EntityConfig {
     return geasBlacklist;
   }
 
-  @Config.Comment(("List of thaumcraft.entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
+  @Config.Comment(("List of entities that should be considered considered friendly for the purposes of Fire Storm (modid:entity)"))
   public static String[] GeasWhitelist = new String[]{
       "minecraft:enderman"
   };

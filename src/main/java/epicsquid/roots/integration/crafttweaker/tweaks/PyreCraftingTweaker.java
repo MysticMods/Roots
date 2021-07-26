@@ -55,7 +55,7 @@ public class PyreCraftingTweaker {
   @ZenMethod
   public static void addRecipe(String name, IItemStack output, IIngredient[] inputs, int xp) {
     if (inputs.length != 5) {
-      CraftTweakerAPI.logError("Pyre Crafting Ritual must have 5 thaumcraft.items: " + name);
+      CraftTweakerAPI.logError("Pyre Crafting Ritual must have 5 items: " + name);
       return;
     }
     CraftTweaker.LATE_ACTIONS.add(new Add(name, CraftTweakerMC.getItemStack(output), Arrays.asList(inputs), xp));

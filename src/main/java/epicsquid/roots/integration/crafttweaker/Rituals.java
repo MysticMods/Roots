@@ -37,7 +37,7 @@ public class Rituals {
   @ZenMethod
   public static void modifyRitual(String name, IIngredient[] inputs) {
     if (inputs.length != 5) {
-      CraftTweakerAPI.logError("Rituals must have 5 thaumcraft.items: " + name);
+      CraftTweakerAPI.logError("Rituals must have 5 items: " + name);
       return;
     }
     CraftTweaker.LATE_ACTIONS.add(new Modify(name, Arrays.asList(inputs)));

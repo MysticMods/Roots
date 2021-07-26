@@ -81,7 +81,7 @@ public class SpellAcidCloud extends SpellBase {
 
   public SpellAcidCloud(ResourceLocation name) {
     super(name, TextFormatting.DARK_GREEN, 80f / 255f, 160f / 255f, 40f / 255f, 64f / 255f, 96f / 255f, 32f / 255f);
-    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_DAMAGE_COUNT, PROP_POISON_DURATION, PROP_FIRE_DURATION, PROP_POISON_AMPLIFICATION, PROP_RADIUS_BOOST, PROP_RADIUS_GENERAL, PROP_NIGHT_LOWER, PROP_NIGHT_HIGHER, PROP_UNDEAD_DAMAGE, PROP_HEALING, PROP_REGEN_AMPLIFIER, PROP_REGENERATION, PROP_UNDERWATER_BOOST, PROP_PHYSICAL_DAMAGE, PROP_HEALING_COUNT);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_DAMAGE_COUNT, PROP_POISON_DURATION, PROP_FIRE_DURATION, PROP_POISON_AMPLIFICATION, PROP_RADIUS_BOOST, PROP_RADIUS_GENERAL, PROP_NIGHT_LOWER, PROP_NIGHT_HIGHER, PROP_UNDEAD_DAMAGE, PROP_HEALING, PROP_REGEN_AMPLIFIER, PROP_REGENERATION, PROP_UNDERWATER_BOOST, PROP_PHYSICAL_DAMAGE, PROP_HEALING_COUNT, PROP_SLOW_DURATION, PROP_SLOW_AMPLIFIER, PROP_UNDERWATER_BOOST, PROP_WEAKNESS_AMPLIFIER, PROP_WEAKNESS_DURATION);
     acceptModifiers(RADIUS, PEACEFUL, WEAKNESS, NIGHT, UNDEAD, HEALING, SPEED, FIRE, SLOWING, UNDERWATER);
   }
 
@@ -140,7 +140,7 @@ public class SpellAcidCloud extends SpellBase {
           if (regen_duration != -1) {
             e.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, regen_duration, regen_amp));
           }
-          // TODO: Particle effect to denote thaumcraft.entities being healed
+          // TODO: Particle effect to denote entities being healed
           if (healing > 0) {
             e.heal(healing * modifier);
           }
