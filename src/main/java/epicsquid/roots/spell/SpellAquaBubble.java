@@ -30,7 +30,7 @@ public class SpellAquaBubble extends SpellBase {
   public static Property.PropertyDuration PROP_DURATION = new Property.PropertyDuration(1200);
   public static Property<Double> PROP_ABSORPTION = new Property<>("absorption", 20.0).setDescription("the amount of health absorption granted");
   public static Property<Float> PROP_FIRE_REDUCTION = new Property<>("fire_reduction", 0.6f).setDescription("how much fire damage is multiplied by");
-  public static Property<Float> PROP_LAVA_REDUCTION = new Property<>("fire_reduction", 0.0f).setDescription("how much lava damage is multiplied by");
+  public static Property<Float> PROP_LAVA_REDUCTION = new Property<>("lava_reduction", 0.0f).setDescription("how much lava damage is multiplied by");
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 5).setDescription("the radius to search for familiars and additional players within");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("the radius to search for familiars and additional players within");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 5).setDescription("the radius to search for familiars and additional players within");
