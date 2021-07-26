@@ -22,6 +22,8 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameType;
 
@@ -53,8 +55,8 @@ public class SpellAugment extends SpellBase {
   public static Property<Integer> PROP_HASTE_DURATION = new Property<>("haste_duration", 15 * 20).setDescription("duration for the haste potion effect");
   public static Property<Integer> PROP_HASTE_AMPLIFIER = new Property<>("haste_amplifier", 0).setDescription("amplifier for the haste potion effect");
 
-  public static Property<Integer> PROP_ABSORPTION_DURATION = new Property<>("absorption_duration", 15 * 20).setDescription("duration for the haste potion effect");
-  public static Property<Integer> PROP_ABSORPTION_AMPLIFIER = new Property<>("absorption_amplifier", 0).setDescription("amplifier for the haste potion effect");
+  public static Property<Integer> PROP_ABSORPTION_DURATION = new Property<>("absorption_duration", 15 * 20).setDescription("duration for the absorption potion effect");
+  public static Property<Integer> PROP_ABSORPTION_AMPLIFIER = new Property<>("absorption_amplifier", 0).setDescription("amplifier for the absorption potion effect");
 
   public static Property<Integer> PROP_AIR_AMOUNT = new Property<>("air_amount", 300).setDescription("the value to add to a user's air with the second wind effect");
 
@@ -171,6 +173,9 @@ public class SpellAugment extends SpellBase {
     if (info.has(HASTE)) {
       acted = true;
       player.addPotionEffect(new PotionEffect(MobEffects.HASTE, haste_duration, haste_amplifier, false, false));
+    }
+    if (!acted) {
+      player.sendMessage(new TextComponentTranslation("roots.message.augment.no_modifier").setStyle(new Style().setColor(TextFormatting.YELLOW)));
     }
     return acted;
   }
