@@ -16,53 +16,62 @@
     {
       "type": "spell_modifier_template",
       "spell": "spell_sky_soarer",
-      "modifier": "roots:slow_fall"
+      "modifier": "roots:slow_fall",
+      "anchor": "slow_fall"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_sky_soarer",
-      "modifier": "roots:arboreal_bypass"
+      "modifier": "roots:arboreal_bypass",
+      "anchor": "arboreal_bypass"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_sky_soarer",
-      "modifier": "roots:momentum"
+      "modifier": "roots:momentum",
+      "anchor": "momentum"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_sky_soarer",
-      "modifier": "roots:verticality"
+      "modifier": "roots:verticality",
+      "anchor": "verticality"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_sky_soarer",
-      "modifier": "roots:jaunt"
+      "modifier": "roots:jaunt",
+      "anchor": "jaunt"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_sky_soarer",
-      "modifier": "roots:regenerative_sky"
+      "modifier": "roots:regenerative_sky",
+      "anchor": "regenerative_sky"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_sky_soarer",
-      "modifier": "roots:chem_trails"
+      "modifier": "roots:chem_trails",
+      "anchor": "chem_trails"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_sky_soarer",
-      "modifier": "roots:eternal_flame"
+      "modifier": "roots:eternal_flame",
+      "anchor": "eternal_flame"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_sky_soarer",
-      "modifier": "roots:friendly_earth"
+      "modifier": "roots:friendly_earth",
+      "anchor": "friendly_earth"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_sky_soarer",
-      "modifier": "roots:aquaplane"
+      "modifier": "roots:aquaplane",
+      "anchor": "aquaplane"
     }
-
   ]
 }

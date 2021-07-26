@@ -16,53 +16,62 @@
     {
       "type": "spell_modifier_template",
       "spell": "spell_storm_cloud",
-      "modifier": "roots:spread"
+      "modifier": "roots:spread",
+      "anchor": "spread"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_storm_cloud",
-      "modifier": "roots:peaceful_storm"
+      "modifier": "roots:peaceful_storm",
+      "anchor": "peaceful_storm"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_storm_cloud",
-      "modifier": "roots:magnetic_storm"
+      "modifier": "roots:magnetic_storm",
+      "anchor": "magnetic_storm"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_storm_cloud",
-      "modifier": "roots:lightning_strikes"
+      "modifier": "roots:lightning_strikes",
+      "anchor": "lightning_strikes"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_storm_cloud",
-      "modifier": "roots:reactive_jolt"
+      "modifier": "roots:reactive_jolt",
+      "anchor": "reactive_jolt"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_storm_cloud",
-      "modifier": "roots:healing_rain"
+      "modifier": "roots:healing_rain",
+      "anchor": "healing_rain"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_storm_cloud",
-      "modifier": "roots:poison_storm"
+      "modifier": "roots:poison_storm",
+      "anchor": "poison_storm"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_storm_cloud",
-      "modifier": "roots:ignification"
+      "modifier": "roots:ignification",
+      "anchor": "ignification"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_storm_cloud",
-      "modifier": "roots:icicles"
+      "modifier": "roots:icicles",
+      "anchor": "icicles"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_storm_cloud",
-      "modifier": "roots:freezing_rain"
+      "modifier": "roots:freezing_rain",
+      "anchor": "freezing_rain"
     }
-
   ]
 }

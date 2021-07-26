@@ -16,53 +16,62 @@
     {
       "type": "spell_modifier_template",
       "spell": "spell_shatter",
-      "modifier": "roots:wider"
+      "modifier": "roots:wider",
+      "anchor": "wider"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_shatter",
-      "modifier": "roots:taller"
+      "modifier": "roots:taller",
+      "anchor": "taller"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_shatter",
-      "modifier": "roots:magnetic_ray"
+      "modifier": "roots:magnetic_ray",
+      "anchor": "magnetic_ray"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_shatter",
-      "modifier": "roots:deeper"
+      "modifier": "roots:deeper",
+      "anchor": "deeper"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_shatter",
-      "modifier": "roots:singularity"
+      "modifier": "roots:singularity",
+      "anchor": "singularity"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_shatter",
-      "modifier": "roots:moss_harvest"
+      "modifier": "roots:moss_harvest",
+      "anchor": "moss_harvest"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_shatter",
-      "modifier": "roots:shatter_void"
+      "modifier": "roots:shatter_void",
+      "anchor": "shatter_void"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_shatter",
-      "modifier": "roots:shatter_fortune"
+      "modifier": "roots:shatter_fortune",
+      "anchor": "shatter_fortune"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_shatter",
-      "modifier": "roots:smelting_ray"
+      "modifier": "roots:smelting_ray",
+      "anchor": "smelting_ray"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_shatter",
-      "modifier": "roots:shatter_silk_touch"
+      "modifier": "roots:shatter_silk_touch",
+      "anchor": "shatter_silk_touch"
     }
-
   ]
 }

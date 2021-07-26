@@ -16,48 +16,56 @@
     {
       "type": "spell_modifier_template",
       "spell": "spell_life_drain",
-      "modifier": "roots:amplified_healing"
+      "modifier": "roots:amplified_healing",
+      "anchor": "amplified_healing"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_life_drain",
-      "modifier": "roots:peaceful_drain"
+      "modifier": "roots:peaceful_drain",
+      "anchor": "peaceful_drain"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_life_drain",
-      "modifier": "roots:distributed_healing"
+      "modifier": "roots:distributed_healing",
+      "anchor": "distributed_healing"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_life_drain",
-      "modifier": "roots:spectral_drain"
+      "modifier": "roots:spectral_drain",
+      "anchor": "spectral_drain"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_life_drain",
-      "modifier": "roots:targeted_drain"
+      "modifier": "roots:targeted_drain",
+      "anchor": "targeted_drain"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_life_drain",
-      "modifier": "roots:lightened_load"
+      "modifier": "roots:lightened_load",
+      "anchor": "lightened_load"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_life_drain",
-      "modifier": "roots:brimstone"
+      "modifier": "roots:brimstone",
+      "anchor": "brimstone"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_life_drain",
-      "modifier": "roots:slowing_drain"
+      "modifier": "roots:slowing_drain",
+      "anchor": "slowing_drain"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_life_drain",
-      "modifier": "roots:chthonic"
+      "modifier": "roots:chthonic",
+      "anchor": "chthonic"
     }
-
   ]
 }

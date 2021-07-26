@@ -16,48 +16,56 @@
     {
       "type": "spell_modifier_template",
       "spell": "spell_disarm",
-      "modifier": "roots:boost_drops"
+      "modifier": "roots:boost_drops",
+      "anchor": "boost_drops"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_disarm",
-      "modifier": "roots:armor_i"
+      "modifier": "roots:armor_i",
+      "anchor": "armor_i"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_disarm",
-      "modifier": "roots:disarm_duumvirate"
+      "modifier": "roots:disarm_duumvirate",
+      "anchor": "disarm_duumvirate"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_disarm",
-      "modifier": "roots:armor_ii"
+      "modifier": "roots:armor_ii",
+      "anchor": "armor_ii"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_disarm",
-      "modifier": "roots:poison_hands"
+      "modifier": "roots:poison_hands",
+      "anchor": "poison_hands"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_disarm",
-      "modifier": "roots:flower_child"
+      "modifier": "roots:flower_child",
+      "anchor": "flower_child"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_disarm",
-      "modifier": "roots:blaze"
+      "modifier": "roots:blaze",
+      "anchor": "blaze"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_disarm",
-      "modifier": "roots:weakness"
+      "modifier": "roots:weakness",
+      "anchor": "weakness"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_disarm",
-      "modifier": "roots:liquid_lurch"
+      "modifier": "roots:liquid_lurch",
+      "anchor": "liquid_lurch"
     }
-
   ]
 }

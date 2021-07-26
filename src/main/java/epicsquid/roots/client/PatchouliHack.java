@@ -26,11 +26,14 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.patchouli.client.book.BookCategory;
+import vazkii.patchouli.client.book.BookEntry;
 import vazkii.patchouli.client.book.gui.GuiBook;
 import vazkii.patchouli.client.book.gui.GuiBookCategory;
+import vazkii.patchouli.client.book.gui.GuiBookEntry;
 import vazkii.patchouli.client.book.text.BookTextParser;
 import vazkii.patchouli.common.book.Book;
 
+import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Map;
 import java.util.function.Function;
@@ -135,6 +138,7 @@ public class PatchouliHack {
             boolean chance = false;
             boolean multiplier = false;
             boolean roman = false;
+            boolean percent = false;
             if (propName.equals("HEART")) {
               propName = parts[2];
               heart = true;
@@ -171,6 +175,10 @@ public class PatchouliHack {
               propName = parts[2];
               roman = true;
             }
+            if (propName.equals("PERCENT")) {
+              propName = parts[2];
+              percent = true;
+            }
 
             Object value = null;
             if (type.equals("ritual") && ritual != null) {
@@ -193,7 +201,9 @@ public class PatchouliHack {
               if (seconds) {
                 try {
                   double val = (double) (int) value;
-                  value = String.format("%.01f", val / 20);
+                  if (val != 0) {
+                    value = String.format("%.01f", val / 20);
+                  }
                 } catch (ClassCastException e) {
                   Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
                   return "INVALID PROPERTY FOR SECONDS: " + propName;
@@ -256,10 +266,17 @@ public class PatchouliHack {
                 }
               } else if (roman) {
                 try {
-                  value = I18n.format("enchantment.level." + (int) value);
+                  value = I18n.format("enchantment.level." + (((int) value) + 1));
                 } catch (ClassCastException e) {
                   Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
                   return "INVALID PROPERTY FOR ROMAN NUMERAL: " + propName;
+                }
+              } else if (percent) {
+                try {
+                  value = String.format("%.02f", ((Number) value).floatValue() * 100) + "%";
+                } catch (ClassCastException e) {
+                  Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
+                  return "INVALID PROPERTY FOR PERCENT: " + propName;
                 }
               }
 
@@ -299,6 +316,8 @@ public class PatchouliHack {
     FUNCTIONS.put("config", config);
     COMMANDS.put("/config", reset);
 
+    BookTextParser.FunctionProcessor link = FUNCTIONS.get("l");
+
     BookTextParser.FunctionProcessor modifier = (parameter, state) -> {
       ResourceLocation modid = !parameter.contains("roots:") ? new ResourceLocation(Roots.MODID, parameter) : new ResourceLocation(parameter);
       Modifier mod = ModifierRegistry.get(modid);
@@ -309,7 +328,35 @@ public class PatchouliHack {
       if (spell == null) {
         return "MODIFIER " + parameter + " IS NOT CONNECTED TO A SPELL";
       }
-      return "$(l:spells/" + spell.getName() + "#" + mod.getRegistryName().getPath() + ")" + I18n.format(spell.getTranslationKey()) + "$()";
+      state.cluster = new LinkedList<>();
+      state.prevColor = state.color;
+      state.color = state.book.linkColor;
+      String anchor = mod.getRegistryName().getPath();
+      ResourceLocation href = new ResourceLocation(state.book.getModNamespace(), "spells/" + spell.getName());
+      BookEntry entry = state.book.contents.entries.get(href);
+      if (entry != null) {
+        state.tooltip = entry.isLocked() ? TextFormatting.GRAY + I18n.format("patchouli.gui.lexicon.locked", new Object[0]) : entry.getName() + ": " + I18n.format(mod.getTranslationKey());
+        GuiBook gui = state.gui;
+        Book book = state.book;
+        int page = 0;
+        int anchorPage = entry.getPageFromAnchor(anchor);
+        if (anchorPage >= 0) {
+          page = anchorPage / 2;
+        } else {
+          state.tooltip = state.tooltip + " (INVALID ANCHOR:" + anchor + ")";
+        }
+
+        final int page2 = page;
+
+        state.onClick = () -> {
+          GuiBookEntry entryGui = new GuiBookEntry(book, entry, page2);
+          gui.displayLexiconGui(entryGui, true);
+          GuiBook.playBookFlipSound(book);
+        };
+      } else {
+        state.tooltip = "BAD LINK: " + parameter;
+      }
+      return I18n.format(mod.getTranslationKey());
     };
 
     FUNCTIONS.put("modifier", modifier);
@@ -338,60 +385,5 @@ public class PatchouliHack {
 
     FUNCTIONS.put("adv", advancement);
     COMMANDS.put("/adv", reset);
-
-/*    BookTextParser.FunctionProcessor li_link = (parameter, state) -> {
-      state.lineBreaks = 1;
-      state.spacingLeft = 4;
-      state.spacingRight = spaceWidth;
-
-      state.cluster = new LinkedList<>();
-
-      state.prevColor = state.color;
-      state.color = state.book.linkColor;
-      boolean isExternal = parameter.matches("^https?\\:.*");
-
-      if (isExternal) {
-        String url = parameter;
-        state.tooltip = I18n.format("patchouli.gui.lexicon.external_link");
-        state.isExternalLink = true;
-        state.onClick = () -> GuiBook.openWebLink(url);
-      } else {
-        int hash = parameter.indexOf('#');
-        String anchor = null;
-        if (hash >= 0) {
-          anchor = parameter.substring(hash + 1);
-          parameter = parameter.substring(0, hash);
-        }
-
-        ResourceLocation href = new ResourceLocation(state.book.getModNamespace(), parameter);
-        BookEntry entry = state.book.contents.entries.get(href);
-        if (entry != null) {
-          state.tooltip = entry.isLocked() ? (TextFormatting.GRAY + I18n.format("patchouli.gui.lexicon.locked")) : entry.getName();
-          GuiBook gui = state.gui;
-          Book book = state.book;
-          int page = 0;
-          if (anchor != null) {
-            int anchorPage = entry.getPageFromAnchor(anchor);
-            if (anchorPage >= 0)
-              page = anchorPage / 2;
-            else
-              state.tooltip += " (INVALID ANCHOR:" + anchor + ")";
-          }
-          int finalPage = page;
-          state.onClick = () -> {
-            GuiBookEntry entryGui = new GuiBookEntry(book, entry, finalPage);
-            gui.displayLexiconGui(entryGui, true);
-            GuiBook.playBookFlipSound(book);
-          };
-        } else {
-          state.tooltip = "BAD LINK: " + parameter;
-        }
-      }
-      char bullet = '\u2022';
-      return TextFormatting.BLACK.toString() + bullet + TextFormatting.RESET.toString();
-    };
-
-    FUNCTIONS.put("lil", li_link);
-    COMMANDS.put("/lil", reset);*/
   }
 }

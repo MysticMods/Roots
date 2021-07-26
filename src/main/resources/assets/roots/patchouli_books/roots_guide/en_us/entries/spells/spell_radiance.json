@@ -16,48 +16,56 @@
     {
       "type": "spell_modifier_template",
       "spell": "spell_radiance",
-      "modifier": "roots:peaceful_radiance"
+      "modifier": "roots:peaceful_radiance",
+      "anchor": "peaceful_radiance"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_radiance",
-      "modifier": "roots:magnetic_radiance"
+      "modifier": "roots:magnetic_radiance",
+      "anchor": "magnetic_radiance"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_radiance",
-      "modifier": "roots:withering_ray"
+      "modifier": "roots:withering_ray",
+      "anchor": "withering_ray"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_radiance",
-      "modifier": "roots:glowing_ray"
+      "modifier": "roots:glowing_ray",
+      "anchor": "glowing_ray"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_radiance",
-      "modifier": "roots:healing_ray"
+      "modifier": "roots:healing_ray",
+      "anchor": "healing_ray"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_radiance",
-      "modifier": "roots:sickly_ray"
+      "modifier": "roots:sickly_ray",
+      "anchor": "sickly_ray"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_radiance",
-      "modifier": "roots:burning_ray"
+      "modifier": "roots:burning_ray",
+      "anchor": "burning_ray"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_radiance",
-      "modifier": "roots:wider_ray"
+      "modifier": "roots:wider_ray",
+      "anchor": "wider_ray"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_radiance",
-      "modifier": "roots:slowing_ray"
+      "modifier": "roots:slowing_ray",
+      "anchor": "slowing_ray"
     }
-
   ]
 }

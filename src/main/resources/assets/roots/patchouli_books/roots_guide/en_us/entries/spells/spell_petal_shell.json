@@ -16,52 +16,62 @@
     {
       "type": "spell_modifier_template",
       "spell": "spell_petal_shell",
-      "modifier": "roots:react_radiance"
+      "modifier": "roots:react_radiance",
+      "anchor": "react_radiance"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_petal_shell",
-      "modifier": "roots:peaceful_dance"
+      "modifier": "roots:peaceful_dance",
+      "anchor": "peaceful_dance"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_petal_shell",
-      "modifier": "roots:react_daggers"
+      "modifier": "roots:react_daggers",
+      "anchor": "react_daggers"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_petal_shell",
-      "modifier": "roots:petal_overflow"
+      "modifier": "roots:petal_overflow",
+      "anchor": "petal_overflow"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_petal_shell",
-      "modifier": "roots:mossy_leaves"
+      "modifier": "roots:mossy_leaves",
+      "anchor": "mossy_leaves"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_petal_shell",
-      "modifier": "roots:react_poison"
+      "modifier": "roots:react_poison",
+      "anchor": "react_poison"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_petal_shell",
-      "modifier": "roots:react_drift"
+      "modifier": "roots:react_drift",
+      "anchor": "react_drift"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_petal_shell",
-      "modifier": "roots:react_fire"
+      "modifier": "roots:react_fire",
+      "anchor": "react_fire"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_petal_shell",
-      "modifier": "roots:react_weakness"
+      "modifier": "roots:react_weakness",
+      "anchor": "react_weakness"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_petal_shell",
-      "modifier": "roots:react_slow"
+      "modifier": "roots:react_slow",
+      "anchor": "react_slow"
     }
   ]
 }

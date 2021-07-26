@@ -16,48 +16,56 @@
     {
       "type": "spell_modifier_template",
       "spell": "spell_saturate",
-      "modifier": "roots:big_bellied"
+      "modifier": "roots:big_bellied",
+      "anchor": "big_bellied"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_saturate",
-      "modifier": "roots:root_lover"
+      "modifier": "roots:root_lover",
+      "anchor": "root_lover"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_saturate",
-      "modifier": "roots:inversion"
+      "modifier": "roots:inversion",
+      "anchor": "inversion"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_saturate",
-      "modifier": "roots:iron_excess"
+      "modifier": "roots:iron_excess",
+      "anchor": "iron_excess"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_saturate",
-      "modifier": "roots:antivenom"
+      "modifier": "roots:antivenom",
+      "anchor": "antivenom"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_saturate",
-      "modifier": "roots:scattered_goods"
+      "modifier": "roots:scattered_goods",
+      "anchor": "scattered_goods"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_saturate",
-      "modifier": "roots:cooked_goods"
+      "modifier": "roots:cooked_goods",
+      "anchor": "cooked_goods"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_saturate",
-      "modifier": "roots:iron_gut"
+      "modifier": "roots:iron_gut",
+      "anchor": "iron_gut"
     },
     {
       "type": "spell_modifier_template",
       "spell": "spell_saturate",
-      "modifier": "roots:bottled_goods"
+      "modifier": "roots:bottled_goods",
+      "anchor": "bottled_goods"
     }
-
   ]
 }
