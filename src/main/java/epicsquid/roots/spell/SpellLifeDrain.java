@@ -46,7 +46,7 @@ public class SpellLifeDrain extends SpellBase {
   public static Property<Float> PROP_ADDITIONAL_HEAL = new Property<>("additional_heal", 1.5f).setDescription("how much additional healing should be done");
   public static Property<Float> PROP_SPECTRAL_CHANCE = new Property<>("spectral_chance", 0.35f).setDescription("chance per cast of a spectral entity existing");
   public static Property<Double> PROP_DISTANCE = new Property<>("distance", 15d).setDescription("the distance that the targeted beam of life drain should extend for in thaumcraft.blocks");
-  public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 4).setDescription("the duration that relevant thaumcraft.entities should be set aflame for in seconds");
+  public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 4).setDescription("the duration that relevant entities should be set aflame for in seconds");
   public static Property<Float> PROP_FIRE_DAMAGE = new Property<>("fire_damage", 2.5f).setDescription("the additional fire damage (that does not heal)");
   public static Property<Integer> PROP_SLOW_DURATION = new Property<>("slow_duration", 5 * 20).setDescription("the duration of the slow effect");
   public static Property<Integer> PROP_SLOW_AMPLIFIER = new Property<>("slow_amplifier", 0).setDescription("the info.amplifier to be applied to the slow effect");
@@ -75,7 +75,7 @@ public class SpellLifeDrain extends SpellBase {
 
   public SpellLifeDrain(ResourceLocation name) {
     super(name, TextFormatting.DARK_GRAY, 144f / 255f, 32f / 255f, 64f / 255f, 255f / 255f, 196f / 255f, 240f / 255f);
-    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_WITHER_DAMAGE, PROP_HEAL, PROP_WITHER_DURATION, PROP_WITHER_AMPLIFICATION, PROP_WITHER_CHANCE, PROP_ADDITIONAL_HEAL, PROP_SPECTRAL_CHANCE, PROP_DISTANCE);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_WITHER_DAMAGE, PROP_HEAL, PROP_WITHER_DURATION, PROP_WITHER_AMPLIFICATION, PROP_WITHER_CHANCE, PROP_ADDITIONAL_HEAL, PROP_SPECTRAL_CHANCE, PROP_DISTANCE, PROP_FIRE_DAMAGE, PROP_FIRE_DURATION, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION);
     acceptModifiers(RATIO, PEACEFUL, DISTRIBUTE, SPIRITS, TARGET, DAMAGE, FIRE, SLOWING, CHTHONIC);
   }
 

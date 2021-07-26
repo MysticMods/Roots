@@ -29,7 +29,7 @@ public class SpellSanctuary extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.CONTINUOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("pereskia", 0.225));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(new SpellCost("wildroot", 0.225));
-  public static Property<Float> PROP_VELOCITY = new Property<>("push_velocity", 0.125f).setDescription("the knockback speed at which thaumcraft.entities are pushed away by the spell");
+  public static Property<Float> PROP_VELOCITY = new Property<>("push_velocity", 0.125f).setDescription("the knockback speed at which entities are pushed away by the spell");
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 4).setDescription("the radius on the X axis of the area the spell in which the spell takes effect");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 5).setDescription("the radius on the Y axis of the area the spell in which the spell takes effect");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 4).setDescription("the radius on the Z axis of the area the spell in which the spell takes effect");

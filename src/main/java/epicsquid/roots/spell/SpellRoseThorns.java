@@ -27,10 +27,10 @@ public class SpellRoseThorns extends SpellBase {
   public static Property<Integer> PROP_DURATION = new Property<>("trap_duration", 600).setDescription("duration in ticks of the trap before it disappears");
   public static Property<Integer> PROP_WEAKNESS_DURATION = new Property<>("weakness_duration", 4 * 20).setDescription("how long enemies should be weakened in place for");
   public static Property<Integer> PROP_WEAKNESS_AMPLIFIER = new Property<>("weakness_amplifier", 0).setDescription("the amplifier to be applied to the weakness effect");
-  public static Property<Float> PROP_KNOCKBACK = new Property<>("knockback", 1.2f).setDescription("how much thaumcraft.entities should be knocked back by");
+  public static Property<Float> PROP_KNOCKBACK = new Property<>("knockback", 1.2f).setDescription("how much entities should be knocked back by");
   public static Property<Float> PROP_UNDEAD_DAMAGE = new Property<>("undead_damage", 1f).setDescription("how much additional damage against undead");
   public static Property<Float> PROP_KNOCKUP = new Property<>("knock_up", 1.2f).setDescription("how much a creature should be knocked up by");
-  public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 4).setDescription("how long thaumcraft.entities should be set aflame for");
+  public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 4).setDescription("how long entities should be set aflame for");
   public static Property<Integer> PROP_STRENGTH_DURATION = new Property<>("strength_duration", 5 * 20).setDescription("how long the player should be empowered for when the trap triggers");
   public static Property<Integer> PROP_STRENGTH_AMPLIFIER = new Property<>("strength_amplifier", 0).setDescription("the amplifier to be applied to the strength potion effect");
 
@@ -59,7 +59,7 @@ public class SpellRoseThorns extends SpellBase {
 
   public SpellRoseThorns(ResourceLocation name) {
     super(name, TextFormatting.RED, 255f / 255f, 32f / 255f, 64f / 255f, 32f / 255f, 255f / 255f, 96f / 255f);
-    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_SLOWNESS_AMPLIFIER, PROP_SLOWNESS_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_DURATION, PROP_WEAKNESS_DURATION, PROP_KNOCKBACK, PROP_KNOCKUP, PROP_UNDEAD_DAMAGE, PROP_STRENGTH_AMPLIFIER, PROP_STRENGTH_DURATION);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_DAMAGE, PROP_SLOWNESS_AMPLIFIER, PROP_SLOWNESS_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_DURATION, PROP_WEAKNESS_DURATION, PROP_WEAKNESS_AMPLIFIER, PROP_KNOCKBACK, PROP_KNOCKUP, PROP_UNDEAD_DAMAGE, PROP_STRENGTH_AMPLIFIER, PROP_STRENGTH_DURATION, PROP_FIRE_DURATION);
     acceptModifiers(BIGGER, PEACEFUL, WEAKNESS, KNOCKBACK, UNDEAD, POISON, BOOST, FIRE, STRENGTH, SLOW);
   }
 

@@ -36,13 +36,13 @@ public class SpellRadiance extends SpellBase {
   public static Property<Float> PROP_DISTANCE = new Property<>("distance", 32f).setDescription("maximum reach of radiance beam");
   public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(5f).setDescription("damage dealt each time by radiance beam");
   public static Property<Float> PROP_UNDEAD_DAMAGE = new Property<>("undead_damage", 3f).setDescription("damage dealt each time by radiance beam on undead mobs");
-  public static Property<Integer> PROP_WITHER_DURATION = new Property<>("wither_duration", 5 * 20).setDescription("the duration of the wither effect to apply to affected thaumcraft.entities");
-  public static Property<Integer> PROP_GLOW_DURATION = new Property<>("glow_duration", 10 * 20).setDescription("the duration of the glow effect to apply to affected thaumcraft.entities");
-  public static Property<Integer> PROP_POISON_DURATION = new Property<>("poison_duration", 5 * 20).setDescription("the duration of the poison effect to apply to affected thaumcraft.entities");
+  public static Property<Integer> PROP_WITHER_DURATION = new Property<>("wither_duration", 5 * 20).setDescription("the duration of the wither effect to apply to affected entities");
+  public static Property<Integer> PROP_GLOW_DURATION = new Property<>("glow_duration", 10 * 20).setDescription("the duration of the glow effect to apply to affected entities");
+  public static Property<Integer> PROP_POISON_DURATION = new Property<>("poison_duration", 5 * 20).setDescription("the duration of the poison effect to apply to affected entities");
   public static Property<Integer> PROP_POISON_AMPLIFIER = new Property<>("poison_amplifier", 0).setDescription("the amplifier to use for the poison effect");
-  public static Property<Integer> PROP_SLOW_DURATION = new Property<>("slow_duration", 5 * 20).setDescription("the duration of the slow effect to apply to affected thaumcraft.entities");
+  public static Property<Integer> PROP_SLOW_DURATION = new Property<>("slow_duration", 5 * 20).setDescription("the duration of the slow effect to apply to affected entities");
   public static Property<Integer> PROP_SLOW_AMPLIFIER = new Property<>("slow_amplifier", 0).setDescription("the amplifier to use for the slow effect");
-  public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 5 * 20).setDescription("the duration of the fire effect to apply to affected thaumcraft.entities");
+  public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 5 * 20).setDescription("the duration of the fire effect to apply to affected entities");
   public static Property<Float> PROP_WIDTH = new Property<>("width", 0.1f).setDescription("default width of the radiance beam");
   public static Property<Float> PROP_ADDED_WIDTH = new Property<>("added_width", 0.3f).setDescription("width added to the default radiance beam");
   public static Property<Float> PROP_HEALING = new Property<>("healing", 2f).setDescription("the amount of healing each strike of the beam should do");
@@ -70,7 +70,7 @@ public class SpellRadiance extends SpellBase {
 
   public SpellRadiance(ResourceLocation name) {
     super(name, TextFormatting.WHITE, 255f / 255f, 255f / 255f, 64f / 255f, 255f / 255f, 255f / 255f, 192f / 255f);
-    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DISTANCE, PROP_DAMAGE, PROP_UNDEAD_DAMAGE, PROP_WITHER_DURATION, PROP_POISON_AMPLIFIER, PROP_POISON_DURATION, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_FIRE_DURATION, PROP_GLOW_DURATION, PROP_WIDTH, PROP_ADDED_WIDTH, PROP_HEALING);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DISTANCE, PROP_DAMAGE, PROP_UNDEAD_DAMAGE, PROP_WITHER_DURATION, PROP_POISON_DURATION, PROP_SLOW_AMPLIFIER, PROP_SLOW_DURATION, PROP_FIRE_DURATION, PROP_GLOW_DURATION, PROP_WIDTH, PROP_ADDED_WIDTH, PROP_HEALING, PROP_POISON_AMPLIFIER);
     acceptModifiers(PEACEFUL, MAGNETISM, WITHER, GLOWING, HEALING, POISON, FIRE, BIGGER, SLOW);
   }
 

@@ -13,7 +13,7 @@ public class RitualGathering extends RitualBase {
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 15).setDescription("Radius on the Y Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15).setDescription("Radius on the Z Axis of the cube in which the ritual takes place");
-  public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(80).setDescription("interval in ticks between each time the ritual tries to gather thaumcraft.items on the ground");
+  public static Property.PropertyInterval PROP_INTERVAL = new Property.PropertyInterval(80).setDescription("interval in ticks between each time the ritual tries to gather items on the ground");
 
   public int radius_x, radius_y, radius_z, interval;
 

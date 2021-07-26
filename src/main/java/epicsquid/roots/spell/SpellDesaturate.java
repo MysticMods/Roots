@@ -40,9 +40,9 @@ public class SpellDesaturate extends SpellBase {
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("spirit_herb", 0.5));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(new SpellCost("terra_moss", 0.5));
 
-  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 8).setDescription("radius on the X axis within which thaumcraft.entities are affected by the spell");
-  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 2).setDescription("radius on the Y axis within which thaumcraft.entities are affected by the spell");
-  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 8).setDescription("radius on the Z axis within which thaumcraft.entities are affected by the spell");
+  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 8).setDescription("radius on the X axis within which entities are affected by the spell");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 2).setDescription("radius on the Y axis within which entities are affected by the spell");
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 8).setDescription("radius on the Z axis within which entities are affected by the spell");
 
   public static Property<Double> PROP_MULTIPLIER = new Property<>("multiplier", 0.70).setDescription("amount of health points restored by each food point");
   public static Property<Double> PROP_AMPLIFIED_MULTIPLIER = new Property<>("multiplier", 0.95).setDescription("amount of health points restored by each food point when using the amplified bonus");

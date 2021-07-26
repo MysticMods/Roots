@@ -22,7 +22,7 @@ public class ModEntities {
   public static void registerMobs() {
     LibRegistry.setActiveMod(Roots.MODID, Roots.CONTAINER);
 
-    // Helper thaumcraft.entities
+    // Helper entities
     LibRegistry.registerEntity(EntityFireJet.class);
     LibRegistry.registerEntity(EntityThornTrap.class);
     LibRegistry.registerEntity(EntityTimeStop.class);
@@ -30,7 +30,7 @@ public class ModEntities {
     LibRegistry.registerEntity(EntityFlare.class);
     LibRegistry.registerEntity(EntityIcicle.class);
 
-    // Ritual thaumcraft.entities
+    // Ritual entities
     List<Class<? extends Entity>> ritualClasses = Arrays.asList(
         EntityRitualAnimalHarvest.class,
         EntityRitualDivineProtection.class,
