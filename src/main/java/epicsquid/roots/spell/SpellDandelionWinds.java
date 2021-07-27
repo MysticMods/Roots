@@ -35,12 +35,12 @@ public class SpellDandelionWinds extends SpellBase {
   public static Property.PropertyCastType PROP_CAST_TYPE = new Property.PropertyCastType(EnumCastType.INSTANTANEOUS);
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("cloud_berry", 0.125));
   public static Property<Float> PROP_DISTANCE = new Property<>("distance", 0.75f).setDescription("the vertical component of the vector that determines the direction of the entity");
-  public static Property<Double> PROP_RANGE_1 = new Property<>("range_1", 6.0).setDescription("the first range increment for calculating the bounding box");
-  public static Property<Double> PROP_RANGE_2 = new Property<>("range_2", 4.0).setDescription("the first range increment for calculating the bounding box");
+  public static Property<Double> PROP_RANGE_1 = new Property<>("range_1", 4.0).setDescription("the first range increment for calculating the bounding box");
+  public static Property<Double> PROP_RANGE_2 = new Property<>("range_2", 5.0).setDescription("the second range increment for calculating the bounding box");
   public static Property<Float> PROP_ADDITIONAL_DISTANCE = new Property<>("additional_distance", 0.25f).setDescription("the additional vertical component of the vector that determines the direction of the entity");
   public static Property<Float> PROP_ADDITIONAL_FALL = new Property<>("additional_fall", 1.75f).setDescription("the fall distance modifier");
   public static Property<Integer> PROP_SLOW_DURATION = new Property<>("slow_duration", 60).setDescription("the duration of the slow fall effect");
-  public static Property<Integer> PROP_POISON_DURATION = new Property<>("posion_duration", 5 * 20).setDescription("the duration of the poison effect to apply");
+  public static Property<Integer> PROP_POISON_DURATION = new Property<>("poison_duration", 5 * 20).setDescription("the duration of the poison effect to apply");
   public static Property<Integer> PROP_POISON_AMPLIFIER = new Property<>("poison_amplifier", 0).setDescription("the amplifier to apply to the poison effect");
   public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 4).setDescription("the duration (in seconds) that entities should be set on fire for");
 
