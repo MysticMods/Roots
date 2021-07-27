@@ -4,6 +4,7 @@ import epicsquid.mysticallib.util.CycleTimer;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.ElementalSoilConfig;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.integration.IntegrationUtil;
 import epicsquid.roots.modifiers.Modifier;
 import epicsquid.roots.modifiers.ModifierRegistry;
@@ -11,7 +12,9 @@ import epicsquid.roots.properties.PropertyTable;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
 import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.spell.SpellChrysopoeia;
 import epicsquid.roots.spell.SpellRegistry;
+import epicsquid.roots.spell.info.storage.DustSpellStorage;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementList;
 import net.minecraft.client.Minecraft;
@@ -82,7 +85,13 @@ public class PatchouliHack {
       state.prevColor = state.color;
       if (Loader.isModLoaded("jei")) {
         String[] parts = parameter.split(":");
-        ItemStack stack = ItemUtil.stackFromString(parts);
+        ItemStack stack;
+        if (parts[0].equals("roots") && parts[1].equals("chrysopoeia")) {
+          stack = new ItemStack(ModItems.spell_icon);
+          DustSpellStorage.fromStack(stack).setSpellToSlot(SpellChrysopoeia.instance);
+        } else {
+          stack = ItemUtil.stackFromString(parts);
+        }
         if (!stack.isEmpty()) {
           state.color = state.book.linkColor;
           state.tooltip = stack.getDisplayName();
