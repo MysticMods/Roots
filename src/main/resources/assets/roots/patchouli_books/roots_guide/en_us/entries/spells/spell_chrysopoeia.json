@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example"
+      "text": "This spell transmutes items into other items, although the exchange is often unequal.$(br2)Your held off-hand item is transformed according to a list of recipes when you cast the spell. All of the recipes can be viewed in $(uses:roots:chrysopoeia)JEI$().$(br2)$(warning) This spell has no modifiers."
     },
     {
       "type": "spell_template",
