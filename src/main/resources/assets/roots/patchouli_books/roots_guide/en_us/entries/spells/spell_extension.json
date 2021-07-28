@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example"
+      "text": "By default, this spell will extend your senses, granting you night vision for a period of time.$(br2)With modifiers, you can extend your vision further: high nearby hostile or passive entities (or both), and even specific types of blocks, such as ores or liquids.$(br2)You can even reduce the distance at which entities can detect you."
     },
     {
       "type": "spell_template",
@@ -72,6 +72,23 @@
       "spell": "spell_extension",
       "modifier": "roots:sense_liquids",
       "anchor": "sense_liquids"
+    },
+    {
+      "type": "text",
+      "title": "Spell Configuration",
+      "text": "$(bold)Night Vision:$() Night Vision is given for $(spell:extension/SECONDS/night_vision) seconds.$(br2)$(bold)Animals:$() With the $(modifier:sense_animals)$() modifier, animals and passives within $(spell:extension/radius_animals_x) and $(spell:extension/radius_animals_z) blocks horizontally and $(spell:extension/radius_animals_y) vertically are highlighted for $(spell:extension/SECONDS/animal_glow_duration) seconds.$(br2)$(bold)Enemies:$() With the $(modifier:sense_hostiles)$() modifier, hostile entities within $(spell:extension/radius_hostiles_x) and $(spell:extension/radius_hostiles_z) blocks horizontally and $(spell:extension/radius_hostiles_y) vertically are highlighted for"
+    },
+    {
+      "type": "text",
+      "text": "$(spell:extension/SECONDS/enemy_glow_duration) seconds.$(br2)$(bold)Ores:$() With the $(modifier:sense_ores)$() modifier, ores within $(spell:extension/radius_ore_x) and $(spell:extension/radius_ore_z) blocks horizontally and $(spell:extension/radius_ore_y) vertically are highlighted with particles.$(br2)$(bold)Held Ores:$() With the $(modifier:sense_ores)$() modifier, ores matching that of the one held in your off-hand within $(spell:extension/radius_ore_specific_x) and $(spell:extension/radius_ore_specific_z) blocks horizontally and $(spell:extension/radius_ore_specific_y) vertically are highlighted with particles."
+    },
+    {
+      "type": "text",
+      "text": "$(bold)Liquids:$() With the $(modifier:sense_liquids)$() modifier, liquid blocks (such as lava or water) within $(spell:extension/radius_liquid_x) and $(spell:extension/radius_liquid_z) blocks horizontally and $(spell:extension/radius_liquid_y) vertically are highlighted with particles.$(br2)$(bold)Spawners:$() With the $(modifier:sense_spawners)$() modifier, spawners within $(spell:extension/radius_spawner_x) and $(spell:extension/radius_spawner_z) blocks horizontally and $(spell:extension/radius_spawner_y) vertically are highlighted with particles.$(br2)$(bold)Containers:$() With the $(modifier:sense_containers)$() modifier, containers within $(spell:extension/radius_container_x) and $(spell:extension/radius_container_z) blocks horizontally and $(spell:extension/radius_container_y) vertically"
+    },
+    {
+      "type": "text",
+      "text": "are highlighted with particles.$(br2)$(bold)Plants:$() With the $(modifier:sense_plants)$() modifier, plants within $(spell:extension/radius_plants_x) and $(spell:extension/radius_plants_z) blocks horizontally and $(spell:extension/radius_plants_y) vertically are highlighted with particles.$(br2)$(bold)Home:$() With the $(modifier:sense_home)$() modifier, particles are drawn pointing in the direction of your current spawn location.$(br2)$(bold)Time:$() With the $(modifier:sense_time)$() modifier, a message in chat will give you information about the current time and day."
     }
   ]
 }
