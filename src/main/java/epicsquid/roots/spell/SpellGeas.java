@@ -30,7 +30,6 @@ public class SpellGeas extends SpellBase {
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("baffle_cap", 0.450));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(new SpellCost("terra_moss", 0.125));
   public static Property<Integer> PROP_DURATION = new Property<>("geas_duration", 400).setDescription("duration in ticks of this spell effect on entities");
-  public static Property<Double> PROP_DISTANCE = new Property<>("distance", 15d).setDescription("the farthest extent that entities will be looked for when using targeted mode");
   public static Property<Integer> PROP_EXTENSION = new Property<>("extension", 600).setDescription("additional duration in ticks to be added to the base duration");
   public static Property<Integer> PROP_WEAKNESS_DURATION = new Property<>("weakness_duration", 20 * 4).setDescription("how long the creature should be weakened for after geas ends");
   public static Property<Float> PROP_FIRE_DAMAGE = new Property<>("fire_damage", 2.5f).setDescription("the amount of fire damage that creatures should take after the geas ends");
@@ -68,7 +67,7 @@ public class SpellGeas extends SpellBase {
 
   public SpellGeas(ResourceLocation name) {
     super(name, TextFormatting.DARK_RED, 128f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f, 32f / 255f);
-    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DURATION, PROP_EXTENSION, PROP_WEAKNESS_DURATION, PROP_FIRE_DAMAGE, PROP_FIRE_DURATION, PROP_PHYSICAL_DAMAGE, PROP_WATER_DAMAGE, PROP_DISTANCE, PROP_WEAKNESS_AMPLIFIER, PROP_SAVIOR_AMPLIFIER, PROP_SAVIOR_DURATION);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_DURATION, PROP_EXTENSION, PROP_WEAKNESS_DURATION, PROP_FIRE_DAMAGE, PROP_FIRE_DURATION, PROP_PHYSICAL_DAMAGE, PROP_WATER_DAMAGE, PROP_WEAKNESS_AMPLIFIER, PROP_SAVIOR_AMPLIFIER, PROP_SAVIOR_DURATION);
     acceptModifiers(DURATION, PEACEFUL, WEAKNESS, GUARDIANS, ADDED1, ADDED2, FIRE, PHYSICAL, WATER);
   }
 
@@ -167,7 +166,6 @@ public class SpellGeas extends SpellBase {
     this.fire_damage = properties.get(PROP_FIRE_DAMAGE);
     this.physical_damage = properties.get(PROP_PHYSICAL_DAMAGE);
     this.water_damage = properties.get(PROP_WATER_DAMAGE);
-    this.distance = properties.get(PROP_DISTANCE);
     this.savior_duration = properties.get(PROP_SAVIOR_DURATION);
     this.savior_amplifier = properties.get(PROP_SAVIOR_AMPLIFIER);
   }
