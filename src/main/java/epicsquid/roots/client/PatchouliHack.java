@@ -209,7 +209,7 @@ public class PatchouliHack {
             if (value != null) {
               if (seconds) {
                 try {
-                  double val = (double) (int) value;
+                  double val = ((Number)value).doubleValue();
                   if (val != 0) {
                     value = String.format("%.01f", val / 20);
                   }
@@ -219,7 +219,7 @@ public class PatchouliHack {
                 }
               } else if (minutes) {
                 try {
-                  double val = (double) (int) value;
+                  double val = ((Number)value).doubleValue();
                   value = val / 20 / 60;
                 } catch (ClassCastException e) {
                   Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
@@ -236,7 +236,7 @@ public class PatchouliHack {
                 }
               } else if (night) {
                 try {
-                  double val = 100.0 / (double) ((int) value + 1);
+                  double val = 100.0 / ((((Number) value).doubleValue() + 1));
                   value = (int) val + "%";
                 } catch (ClassCastException e) {
                   Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
@@ -244,7 +244,7 @@ public class PatchouliHack {
                 }
               } else if (day) {
                 try {
-                  double val = 100.0 / (double) (int) value;
+                  double val = 100.0 / ((Number) value).doubleValue();
                   value = (int) val + "%";
                 } catch (ClassCastException e) {
                   Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
@@ -252,7 +252,7 @@ public class PatchouliHack {
                 }
               } else if (heart) {
                 try {
-                  float val = (float) value * 0.5f;
+                  float val = ((Number) value).floatValue() * 0.5f;
                   value = String.format("%.01f", val);
                 } catch (ClassCastException e) {
                   Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
@@ -260,7 +260,7 @@ public class PatchouliHack {
                 }
               } else if (chance) {
                 try {
-                  double val = 1.0 / (double) (int) value;
+                  double val = 1.0 / ((Number) value).doubleValue();
                   value = String.format("%.03f", val) + "%";
                 } catch (ClassCastException e) {
                   Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
@@ -268,14 +268,14 @@ public class PatchouliHack {
                 }
               } else if (multiplier) {
                 try {
-                  value = (int) value + 1;
+                  value = ((Number)value).intValue() + 1;
                 } catch (ClassCastException e) {
                   Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
                   return "INVALID PROPERTY FOR MULTIPLIER: " + propName;
                 }
               } else if (roman) {
                 try {
-                  value = I18n.format("enchantment.level." + (((int) value) + 1));
+                  value = I18n.format("enchantment.level." + (((Number)value).intValue()+1));
                 } catch (ClassCastException e) {
                   Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
                   return "INVALID PROPERTY FOR ROMAN NUMERAL: " + propName;

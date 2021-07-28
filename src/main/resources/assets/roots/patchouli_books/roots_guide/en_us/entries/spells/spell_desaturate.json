@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example"
+      "text": "A companion to ${l:spells/spell_saturate)Saturate$(), Desaturate converts hunger shanks into direct healing, although with a slightly lossier ratio than waiting for natural recovery to occur.$(br2)Modifiers can increase the ratio, or redirect the excess energies to affect the world around you."
     },
     {
       "type": "spell_template",
@@ -66,6 +66,23 @@
       "spell": "spell_desaturate",
       "modifier": "roots:excess_purification",
       "anchor": "excess_purification"
+    },
+    {
+      "type": "text",
+      "title": "Spell Configuration",
+      "text": "$(bold)Ratio:$() For every hunger shank consumed, you regain $(spell:desaturate/HEART/multiplier) hearts. With the $(modifier:amplified_saturation)$() modifier, you instead regain $(spell:desaturate/HEART/amplified_multiplier) hearts per shank.$(br2)$(bold)Radius:$() Every effect which targets additional creatures does so within $(spell:desaturate/radius_x) and $(spell:desaturate/radius_z) blocks horizontally and $(spell:desaturate/radius_y) vertically.$(br2)$(bold)Peaceful Healing:$() With the $(modifier:excess_heal)$() modifier, up to $(spell:desaturate/heal_targets) non-hostile entities are healed for any excess."
+    },
+    {
+      "type": "text",
+      "text": "$(bold)Growth:$() With the $(modifier:excess_growth)$() modifier, up to $(spell:desaturate/growth_count) plants are grown for up to $(spell:desaturate/growth_ticks) for every point of excess healing.$(br2)$(bold)Shield:$() With the $(modifier:excess_absorb)$() modifier, you are granted Absorption $(spell:desaturate/ROMAN/shield_amplifier) for $(spell:desaturate/SECONDS/shield_base_duration) seconds for every point of excess healing.$(br2)$(bold)Damage:$() With the $(modifier:excess_damage)$() modifier, up to $(spell:desaturate/damage_targets) hostile creatures within range are damaged for the excess amount."
+    },
+    {
+      "type": "text",
+      "text": "$(bold)Levitation:$() With the $(modifier:excess_levitation)$() modifier, up to $(spell:desaturate/levitation_targets) hostile creatures are given Levitation I for $(spell:desaturate/SECONDS/levitation_duration) seconds for every point of excess healing.$(br2)$(bold)Resistance:$() With the $(modifier:excess_stone_skin)$() modifier, you are granted Resistance $(spell:desaturate/ROMAN/resistance_amplifier) for $(spell:desaturate/SECONDS/resistance_base_duration) seconds for every point of excess healing.$(br2)$(bold)Purify:$() With the $(modifier:excess_purification)$() modifier, for every point of overhealing (rounded up), one negative"
+    },
+    {
+      "type": "text",
+      "text": "potion effect is removed from you.$(br2)$(bold)Thoughtful:$() With the $(modifier:thoughtful)$() modifier active, only enough shanks to heal you to full are consumed, preventing overhealing."
     }
   ]
 }

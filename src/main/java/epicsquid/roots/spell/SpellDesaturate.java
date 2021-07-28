@@ -31,6 +31,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreIngredient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SpellDesaturate extends SpellBase {
@@ -45,7 +46,7 @@ public class SpellDesaturate extends SpellBase {
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 8).setDescription("radius on the Z axis within which entities are affected by the spell");
 
   public static Property<Double> PROP_MULTIPLIER = new Property<>("multiplier", 0.70).setDescription("amount of health points restored by each food point");
-  public static Property<Double> PROP_AMPLIFIED_MULTIPLIER = new Property<>("multiplier", 0.95).setDescription("amount of health points restored by each food point when using the amplified bonus");
+  public static Property<Double> PROP_AMPLIFIED_MULTIPLIER = new Property<>("amplified_multiplier", 0.95).setDescription("amount of health points restored by each food point when using the amplified bonus");
 
   public static Property<Integer> PROP_SHIELD_BASE = new Property<>("shield_base_duration", 20).setDescription("the base duration for the shield, multiplied by overflow");
   public static Property<Integer> PROP_SHIELD_AMPLIFIER = new Property<>("shield_amplifier", 0).setDescription("the amplifier value for the shield");
@@ -203,14 +204,22 @@ public class SpellDesaturate extends SpellBase {
           caster.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, (int) (resistance_base * overheal), resistance_amplifier, false, false));
           // Grant resistance
         } else if (info.has(PURIFY)) {
-          Potion pot = null;
+          List<Potion> effects = new ArrayList<>();
+          int c = (int) Math.floor(overheal) + 1;
           for (PotionEffect ef : caster.getActivePotionEffects()) {
             if (ef.getPotion().isBadEffect()) {
-              pot = ef.getPotion();
-              break;
+              Potion pot = ef.getPotion();
+              if (pot != null) {
+                effects.add(pot);
+                c--;
+                if (c <= 0) {
+                  break;
+                }
+              }
             }
           }
-          if (pot != null) {
+
+          for (Potion pot : effects) {
             caster.removePotionEffect(pot);
           }
         }
