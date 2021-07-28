@@ -41,7 +41,7 @@ public class SpellDisarm extends SpellBase {
   public static Property<Float> PROP_DROP_CHANCE = new Property<>("drop_chance", 0.35f).setDescription("percentage chance for disarmed mobs to actually drop their weapons (default 0.35 = 35%)");
   public static Property<Float> PROP_CHANCE_INCREASE = new Property<>("chance_increase", 0.35f).setDescription("percentage chance to be applied when increased drop chance is active (default 0.35 = 35%)");
   public static Property<Float> PROP_ARMOR = new Property<>("armor_chance", 0.30f).setDescription("percent chance when armor is enabled to drop armor (percent doubled when both applied)");
-  public static Property<Integer> PROP_POISON_DURATION = new Property<>("posion_duration", 120).setDescription("duration of the poison effect when applied");
+  public static Property<Integer> PROP_POISON_DURATION = new Property<>("poison_duration", 120).setDescription("duration of the poison effect when applied");
   public static Property<Integer> PROP_POISON_AMPLIFIER = new Property<>("poison_amplifier", 0).setDescription("the amplifier to be applied to the poison effect");
   public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 4).setDescription("duration that disarmed creatures should be set on fire for in seconds");
   public static Property<Float> PROP_KNOCKBACK = new Property<>("knockback_strength", 0.5f).setDescription("the strength of the knockback effect");
