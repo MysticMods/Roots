@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example"
+      "text": "This spell allows you to place simple, floating light sources on the block you're looking at.$(br2)Modifiers allow you to choose the colour, cause them to decay over time, be placed at your location, or consume all nearby lights.$(br2)$(warning) Lights consumed with $(modifier:deluminator)$() cannot be restored without re-placing them."
     },
     {
       "type": "spell_template",
@@ -72,6 +72,11 @@
       "spell": "spell_fey_light",
       "modifier": "roots:blue_light",
       "anchor": "blue_light"
+    },
+    {
+      "type": "text",
+      "title": "Spell Configuration",
+      "text": "$(bold)Deluminator:$() With the $(modifier:deluminator)$() modifier, lights are consumed within a radius of $(spell:fey_light/radius_x) and $(spell:fey_light/radius_z) horizontally, and $(spell:fey_light/radius_y) vertically."
     }
   ]
 }

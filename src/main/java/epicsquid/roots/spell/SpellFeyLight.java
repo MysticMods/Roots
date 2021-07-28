@@ -40,6 +40,8 @@ public class SpellFeyLight extends SpellBase {
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 10).setDescription("radius on the Y axis within which lights are affected by the spell");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15).setDescription("radius on the Z axis within which lights are affected by the spell");
 
+  // TODO: Allow specification of how long it takes a light to decay?
+
   public static Modifier PINK = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "pink_light"), ModifierCores.PERESKIA, Cost.of(Cost.cost(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.125), Cost.cost(CostType.ALL_COST_MULTIPLIER, -0.15))));
   public static Modifier YELLOW = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "yellow_light"), ModifierCores.WILDEWHEET, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 0.125)));
   public static Modifier FIXED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "fixed_light"), ModifierCores.WILDROOT, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.125)));
@@ -72,7 +74,7 @@ public class SpellFeyLight extends SpellBase {
 
   public SpellFeyLight(ResourceLocation name) {
     super(name, TextFormatting.LIGHT_PURPLE, 247f / 255f, 246 / 255f, 210f / 255f, 227f / 255f, 81f / 255f, 244f / 255f);
-    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_RADIUS_X, PROP_RADIUS_Y, PROP_RADIUS_Z);
     acceptModifiers(PINK, YELLOW, FIXED, PURPLE, CONSUME, GREEN, DECAY, RED, BROWN, BLUE);
   }
 
