@@ -25,7 +25,7 @@ void addRecipe(
   string name,          // the name of the recipe; if replacing an existing recipe, be sure to use the same name to ensure Patchouli continuity
   IItemStack output,    // the itemstack produced by this recipe
   IIngredient[] inputs, // an array of IIngredients that make up the recipe; must contain 5 thaumcraft.items
-  int xp                // the amount of xp (in levels) to reward the player for thaumcraft.crafting this recipe
+  int xp                // the amount of xp (in levels) to reward the player for crafting this recipe
 );
 ```
 
@@ -59,7 +59,7 @@ Fey.addRecipe("tnt", <minecraft:tnt>, [<minecraft:gunpowder>, <minecraft:gunpowd
 // Removes the recipe for the living axe
 Fey.removeRecipe(<roots:living_axe>);
 
-// Adds a different recipe for the living axe, using the same name, to ensure that it shows up in Patchouli. By default all Fey thaumcraft.crafting recipe names are the same as the item's registry name.
+// Adds a different recipe for the living axe, using the same name, to ensure that it shows up in Patchouli. By default all Fey crafting recipe names are the same as the item's registry name.
 Fey.addRecipe("living_axe", <roots:living_axe>, [<minecraft:sand>, <minecraft:dirt>, <minecraft:stone>, <minecraft:glass>, <minecraft:stone_axe>]);
 
 Fey.addRecipe("nether_stone", <minecraft:netherrack>, [<minecraft:flint_and_steel>.anyDamage().transformDamage(1), <minecraft:cobblestone>, <minecraft:cobblestone>, <minecraft:cobblestone>, <minecraft:cobblestone>]);

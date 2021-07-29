@@ -15,7 +15,7 @@ void addRecipe(
 );
 ```
 
-Adds a Pyre thaumcraft.crafting recipe that produces output after the standard amount of time, with the specified input ingredients (with potential transformers).
+Adds a Pyre crafting recipe that produces output after the standard amount of time, with the specified input ingredients (with potential transformers).
 
 ---
 
@@ -25,11 +25,11 @@ void addRecipe(
   string name,          // the name of the recipe being added; if replacing an existing game recipe, ensure the correct name is used
   IItemStack output,    // the output of this recipe
   IIngredient[] inputs, // a list of five ingredients
-  int xp                // the amount of xp in levels that is granted after thaumcraft.crafting
+  int xp                // the amount of xp in levels that is granted after crafting
 );
 ```
 
-Adds a Pyre thaumcraft.crafting recipe that produces output after the standard amount of time, with the specified input ingredients (with potential transformers). Allows for the specification of an amount of experience to be generated once the craft is finished.
+Adds a Pyre crafting recipe that produces output after the standard amount of time, with the specified input ingredients (with potential transformers). Allows for the specification of an amount of experience to be generated once the craft is finished.
 
 ---
 
@@ -40,7 +40,7 @@ void removeRecipe(
 );
 ```
 
-Removes a Pyre thaumcraft.crafting recipe based on its output.
+Removes a Pyre crafting recipe based on its output.
 
 ---
 
@@ -64,6 +64,6 @@ Pyre.addRecipe("stalicripe2", <roots:stalicripe>*64, [<minecraft:diamond_block>,
 
 ### Notes
 
-It's extremely important when replacing recipes to ensure that the recipe name is the same to make certain that Patchouli correctly reports the correct recipe for thaumcraft.crafting base thaumcraft.items.
+It's extremely important when replacing recipes to ensure that the recipe name is the same to make certain that Patchouli correctly reports the correct recipe for crafting base thaumcraft.items.
 
 For all other thaumcraft.items, please use a name descriptive of what your recipe does.

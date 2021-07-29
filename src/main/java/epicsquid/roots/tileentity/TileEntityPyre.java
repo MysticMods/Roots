@@ -596,7 +596,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
   }
 
   public void spawnCraftResult() {
-    //Spawn item if thaumcraft.crafting recipe
+    //Spawn item if crafting recipe
     if (!world.isRemote && !this.craftingResult.isEmpty()) {
       ItemStack result = this.craftingResult.copy();
       if (this.lastRecipeUsed != null) {

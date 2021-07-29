@@ -125,7 +125,7 @@ public class GeneralConfig {
   @Config.Comment(("Whether or not the Wild Mage villager career should be populated (note: this may break pre-existing worlds if changed)"))
   public static boolean WildMageVillager = true;
 
-  @Config.Comment(("List of thaumcraft.blocks that Fey Crafters and Runic Crafters should not output to"))
+  @Config.Comment(("List of blocks that Fey Crafters and Runic Crafters should not output to"))
   public static String[] crafterOutputBlackist = new String[]{
       "minecraft:dispenser"
   };

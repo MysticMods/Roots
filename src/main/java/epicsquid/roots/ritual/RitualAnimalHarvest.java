@@ -20,7 +20,7 @@ public class RitualAnimalHarvest extends RitualBase {
   public static Property<Integer> PROP_GLOW_DURATION = new Property<>("glowing", 30).setDescription("duration (in ticks) mobs will glow after being harvested");
   public static Property<Integer> PROP_LOOTING_CHANCE = new Property<>("looting_chance", 6).setDescription("chance (1 in X) that the the looting chance will be set to looting_value");
   public static Property<Integer> PROP_LOOTING_VALUE = new Property<>("looting_value", 1).setDescription("the value passed to the loot function for 'looting' if looting_chance was successful");
-  public static Property<Integer> PROP_FISH_CHANCE = new Property<>("fish_chance", 5).setDescription("chance (1 in X) that, if suitable water source thaumcraft.blocks are found, fish will be produced instead of animal drops being produced");
+  public static Property<Integer> PROP_FISH_CHANCE = new Property<>("fish_chance", 5).setDescription("chance (1 in X) that, if suitable water source blocks are found, fish will be produced instead of animal drops being produced");
   public static Property<Integer> PROP_FISH_COUNT = new Property<>("fish_count", 3).setDescription("number of fish that are guaranteed to drop");
   public static Property<Integer> PROP_FISH_ADDITIONAL = new Property<>("fish_additional", 3).setDescription("additional fish (random 0-X)-2 that are produced if fish are produced");
 

@@ -69,7 +69,7 @@ public class AnimalHarvestTweaker {
       args = {
           @ZenDocArg(arg = "fish", info = "the type of fish to remove as an item stack")
       },
-      description = "Removes a specific item from the fish drop table, preventing it from being dropped in water source thaumcraft.blocks."
+      description = "Removes a specific item from the fish drop table, preventing it from being dropped in water source blocks."
   )
   @ZenMethod
   public static void removeFish(IItemStack fish) {

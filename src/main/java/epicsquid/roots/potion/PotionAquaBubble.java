@@ -22,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SuppressWarnings("NullableProblems")
 public class PotionAquaBubble extends Potion {
-  private ResourceLocation texture = new ResourceLocation(Roots.MODID, "textures/gui/thaumcraft.potions.png");
+  private ResourceLocation texture = new ResourceLocation(Roots.MODID, "textures/gui/potions.png");
   private float absorb_amount = 0;
   private float amplifier = 0;
 

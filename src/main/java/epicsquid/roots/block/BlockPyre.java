@@ -184,7 +184,7 @@ public class BlockPyre extends BlockTEBase {
         return lit ? 4 : 1;
       }
 
-      // Check for thaumcraft.crafting
+      // Check for crafting
       PyreCraftingRecipe recipe = recipeCache.get(pdos);
       if (recipe == null) {
         recipe = bon.getCurrentRecipe();

@@ -45,7 +45,7 @@ public class SpellLifeDrain extends SpellBase {
   public static Property<Integer> PROP_WITHER_CHANCE = new Property<>("wither_chance", 4).setDescription("chance for the enemies to be affected by a wither effect (the higher the number is the lower the chance is: 1/x) [default: 1/4]");
   public static Property<Float> PROP_ADDITIONAL_HEAL = new Property<>("additional_heal", 1.5f).setDescription("how much additional healing should be done");
   public static Property<Float> PROP_SPECTRAL_CHANCE = new Property<>("spectral_chance", 0.35f).setDescription("chance per cast of a spectral entity existing");
-  public static Property<Double> PROP_DISTANCE = new Property<>("distance", 15d).setDescription("the distance that the targeted beam of life drain should extend for in thaumcraft.blocks");
+  public static Property<Double> PROP_DISTANCE = new Property<>("distance", 15d).setDescription("the distance that the targeted beam of life drain should extend for in blocks");
   public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 4).setDescription("the duration that relevant entities should be set aflame for in seconds");
   public static Property<Float> PROP_FIRE_DAMAGE = new Property<>("fire_damage", 2.5f).setDescription("the additional fire damage (that does not heal)");
   public static Property<Integer> PROP_SLOW_DURATION = new Property<>("slow_duration", 5 * 20).setDescription("the duration of the slow effect");

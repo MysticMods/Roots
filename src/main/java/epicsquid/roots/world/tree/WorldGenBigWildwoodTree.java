@@ -215,7 +215,7 @@ public class WorldGenBigWildwoodTree extends WorldGenAbstractTree {
   }
 
   /**
-   * Generates additional wood thaumcraft.blocks to fill out the bases of different leaf nodes that would otherwise degrade.
+   * Generates additional wood blocks to fill out the bases of different leaf nodes that would otherwise degrade.
    */
   private void generateLeafNodeBases() {
     for (FoliageCoordinates worldgenbigtree$foliagecoordinates : this.foliageCoords) {
@@ -229,8 +229,8 @@ public class WorldGenBigWildwoodTree extends WorldGenAbstractTree {
   }
 
   /**
-   * Checks a line of thaumcraft.blocks in the world from the first coordinate to triplet to the second, returning the distance
-   * (in thaumcraft.blocks) before a non-air, non-leaf block is encountered and/or the end is encountered.
+   * Checks a line of blocks in the world from the first coordinate to triplet to the second, returning the distance
+   * (in blocks) before a non-air, non-leaf block is encountered and/or the end is encountered.
    */
   private int checkBlockLine(BlockPos posOne, BlockPos posTwo) {
     BlockPos blockpos = posTwo.add(-posOne.getX(), -posOne.getY(), -posOne.getZ());

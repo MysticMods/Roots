@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example"
+      "text": "This spell draws the life from nearby creatures, dealing damage to them and healing you in the process.$(br2)With modifiers, you can prevent yourself from damaging peaceful entities, target specific creatures, or even distribute the healing you receive to nearby allies.$(br2)"
     },
     {
       "type": "spell_template",
