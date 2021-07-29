@@ -47,8 +47,8 @@ public class SpellHarvest extends SpellBase {
   public static Property<Integer> PROP_UNDEAD_COUNT = new Property<>("undead_count", 1).setDescription("the number of guaranteed undead caches when granted");
   public static Property<Integer> PROP_UNDEAD_ADDITIONAL = new Property<>("undead_additional", 3).setDescription("the number of (0-(x-1)) additional caches");
   public static Property<Float> PROP_UNDEAD_RARITY = new Property<>("undead_rare", 0.3f).setDescription("the frequency at which caches will be upgraded from common to rare");
-  public static Property<Integer> PROP_GROWTH_COUNT = new Property<>("growth_count", 6).setDescription("how many additional ticks of growth will be applied");
-  public static Property<Integer> PROP_GROWTH_ADDITIONAL = new Property<>("growth_additional", 12).setDescription("how many additional randomised ticks of growth will be applied");
+  public static Property<Integer> PROP_GROWTH_COUNT = new Property<>("growth_count", 3).setDescription("how many additional ticks of growth will be applied");
+  public static Property<Integer> PROP_GROWTH_ADDITIONAL = new Property<>("growth_additional", 6).setDescription("how many additional randomised ticks of growth will be applied");
 
   public static Modifier RADIUS1 = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "extended_harvest"), ModifierCores.PERESKIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.275)));
   public static Modifier MAGNETISM = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "magnetic_harvest"), ModifierCores.WILDROOT, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.125)));
