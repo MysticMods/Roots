@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example"
+      "text": "This spell takes some of the repetitiveness out of farming.$(br2)With magic, you can automatically harvest and then replant them.$(br2)Modifiers can change this behaviour significantly, growing crops after they're harvested, increase or decrease the radius, or even potentially harvest unseen spirits for loot bags."
     },
     {
       "type": "spell_template",
@@ -66,6 +66,23 @@
       "spell": "spell_harvest",
       "modifier": "roots:harvest_silk_touch",
       "anchor": "harvest_silk_touch"
+    },
+    {
+      "type": "text",
+      "title": "Spell Configuration",
+      "text": "$(bold)Radius:$() The default radius of this spell is $(spell:harvest/radius_x) by $(spell:harvest/radius_z) blocks horizontally and $(spell:harvest/radius_y) vertically.$(br2)$(bold)Radius Boost:$() With the $(modifier:extended_harvest)$() modifier enabled, the range on all axes is increased by $(spell:harvest/radius_boost) blocks.$(br2)$(bold)Radius Unboost:$() With the $(modifier:targeted_harvest)$() modifier enabled, the range on all axes is reduced by $(spell:harvest/radius_unboost) blocks."
+    },
+    {
+      "type": "text",
+      "text": "$(bold)Growth:$() With the $(modifier:regrowth)$() modifier enabled, all replanted crops are given $(spell:harvest/growth_count) ticks of growth, and an additional number from 0 to $(spell:harvest/growth_additional) (exclusive).$(br2)$(bold)Magnetism:$() With the $(modifier:magnetic_harvest)$() modifier enabled, all drops from harvesting are teleported to your location.$(br2)$(bold)Poison:$() With the $(modifier:poisoned_harvest)$() modifier enabled, you will harvest poisoned variants of a crop instead."
+    },
+    {
+      "type": "text",
+      "text": "$(bold)Cooking:$() With the $(modifier:fiery_harvest)$() modifier enabled, all drops are processed as though they had been cooked in a furnace.$(br2)$(bold)Crushing:$() With the $(modifier:yield)$() modifier, all drops are processed as though they had been ground with a $(l:crafting/mortar_and_pestle)mortar & pestle$().$(br2)$(bold)Silk Touch:$() With the $(modifier:harvest_silk_touch)$() modifier enabled, all crops are harvest as though with shears or silk touch."
+    },
+    {
+      "type": "text",
+      "text": "$(bold)Spirit Harvest:$() With the $(modifier:gifts_of_undeath)$() modifier enabled, each time you perform a harvest operation you have a $(spell:harvest/PERCENT/undead_chance) percent chance of obtaining up to $(spell:harvest/undead_count) of either of two $(l:resources/loot_bags)loot bags$(). Each spirit bag has a $(spell:harvest/PERCENT/undead_rare) chance to be upgraded to a reliquary."
     }
   ]
 }
