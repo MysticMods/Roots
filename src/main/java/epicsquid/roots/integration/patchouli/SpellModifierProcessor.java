@@ -16,12 +16,14 @@ import vazkii.patchouli.common.util.ItemStackUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.StringJoiner;
 
 public class SpellModifierProcessor implements IComponentProcessor {
   private SpellBase recipe = null;
   private IModifier modifier = null;
   private ItemStack core = null;
+  private Set<IModifier> conflicts = null;
 
   @Override
   public void setup(IVariableProvider<String> iVariableProvider) {
@@ -34,6 +36,7 @@ public class SpellModifierProcessor implements IComponentProcessor {
       Roots.logger.error("Invalid modifier for spell " + iVariableProvider.get("spell") + ": " + iVariableProvider.get("modifier"));
     }
     core = modifier.getStack();
+    conflicts = modifier.getConflicts();
   }
 
   @Override
@@ -57,6 +60,15 @@ public class SpellModifierProcessor implements IComponentProcessor {
         return I18n.format(modifier.getTranslationKey());
       case "description":
         return I18n.format(modifier.getTranslationKey() + ".desc");
+      case "conflicts":
+        if (conflicts.isEmpty()) {
+          return "";
+        }
+        StringJoiner conflict = new StringJoiner(", ");
+        for (IModifier mod : conflicts) {
+          conflict.add("$(modifier:" + mod.getRegistryName().getPath() + ")$()");
+        }
+        return I18n.format("roots.patchouli.conflicts_with") + conflict;
       case "cost":
         if (mainCost == null) {
           return "Invalid cost.";

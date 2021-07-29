@@ -70,15 +70,15 @@
     {
       "type": "text",
       "title": "Spell Configuration",
-      "text": "$(bold)Radius:$() The nearest eligible hostile entity within $(spell:disarm/radius_x) and $(spell:disarm/radius_z) blocks horizontally and $(spell:disarm/radius_y) vertically is affected by this spell.$(br2)$(bold)$(bold)Drop:$() Disarmed items have a $(spell:disarm/PERCENT/drop_chance) chance to drop, with the addition of $(spell:disarm/PERCENT/chance_increase) added to that with the $(modifier:boost_drops)$() modifier applied.$(br2)$(bold)Armor:$() With one of $(modifier:armor_i)$() or $(modifier:armor_ii)$(), the drop chance for a piece of armor is $(spell:disarm/armor_chance), with the"
+      "text": "$(bold)Radius:$() The nearest eligible hostile entity within $(spell:disarm/radius_x) and $(spell:disarm/radius_z) blocks horizontally and $(spell:disarm/radius_y) vertically is affected by this spell.$(br2)$(bold)$(bold)Drop:$() Disarmed items have a $(spell:disarm/PERCENT/drop_chance) chance to drop, with the addition of $(spell:disarm/PERCENT/chance_increase) added to that with the $(modifier:boost_drops)$() modifier enabled.$(br2)$(bold)Armor:$() With one of $(modifier:armor_i)$() or $(modifier:armor_ii)$(), the drop chance for a piece of armor is $(spell:disarm/armor_chance), with the"
     },
     {
       "type": "text",
-      "text": "addition of $(spell:disarm/armor_chance) when both are applied.$(br2)$(bold)Poison:$() With the $(modifier:poison_hands)$() modifier, disarmed entities are given Poison $(spell:disarm/ROMAN/poison_amplifier) for $(spell:disarm/SECONDS/poison_duration) seconds.$(br2)$(bold)Fire:$() With the $(modifier:blaze)$() modifier applied, disarmed entities are set on fire for $(spell:disarm/fire_duration) seconds.$(br2)$(bold)Knockback:$() With the $(modifier:liquid_lurch)$() modifier applied, disarmed entities are also knocked back with a strength of $(spell:disarm/knockback_strength)."
+      "text": "addition of $(spell:disarm/armor_chance) when both are enabled.$(br2)$(bold)Poison:$() With the $(modifier:poison_hands)$() modifier, disarmed entities are given Poison $(spell:disarm/ROMAN/poison_amplifier) for $(spell:disarm/SECONDS/poison_duration) seconds.$(br2)$(bold)Fire:$() With the $(modifier:blaze)$() modifier enabled, disarmed entities are set on fire for $(spell:disarm/fire_duration) seconds.$(br2)$(bold)Knockback:$() With the $(modifier:liquid_lurch)$() modifier enabled, disarmed entities are also knocked back with a strength of $(spell:disarm/knockback_strength)."
     },
     {
       "type": "text",
-      "text": "$(bold)Weakness:$() With the $(modifier:weakness)$() modifier applied, disarmed entities are given Weakness $(spell:disarm/ROMAN/weakness_amplifier) for $(spell:disarm/SECONDS/weakness_duration) seconds.$(br2)$(bold)Duo:$() With the $(modifier:disarm_duumvirate)$() modifier enabled, the nearest two hostile entities are disarmed.$(br2)$(bold)Flowers:$() With the $(modifier:flower_child)$() modifier enabled, entity's held items are replaced with flowers instead."
+      "text": "$(bold)Weakness:$() With the $(modifier:weakness)$() modifier enabled, disarmed entities are given Weakness $(spell:disarm/ROMAN/weakness_amplifier) for $(spell:disarm/SECONDS/weakness_duration) seconds.$(br2)$(bold)Duo:$() With the $(modifier:disarm_duumvirate)$() modifier enabled, the nearest two hostile entities are disarmed.$(br2)$(bold)Flowers:$() With the $(modifier:flower_child)$() modifier enabled, entity's held items are replaced with flowers instead."
     }
   ]
 }
