@@ -183,8 +183,8 @@ public class SpellGrowthInfusion extends SpellBase {
               } else {
                 villager.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 200));
               }
-            MessageTradeResetFX message = new MessageTradeResetFX(villager.posX, villager.posY + villager.getEyeHeight(), villager.posZ, doReset);
-            PacketHandler.sendToAllTracking(message, villager);
+              MessageTradeResetFX message = new MessageTradeResetFX(villager.posX, villager.posY + villager.getEyeHeight(), villager.posZ, doReset);
+              PacketHandler.sendToAllTracking(message, villager);
             }
           }
         }
@@ -193,19 +193,25 @@ public class SpellGrowthInfusion extends SpellBase {
 
     boolean aoe = false;
     int boost = 0;
-    if (info.has(RADIUS1) || info.has(RADIUS2) || info.has(RADIUS3)) {
-      aoe = true;
-      if (info.has(RADIUS1)) {
-        boost += radius_boost;
-      }
-      if (info.has(RADIUS2)) {
-        boost += radius_boost;
-      }
-      if (info.has(RADIUS3)) {
-        boost += radius_boost;
-      }
+    Modifier init = null;
+    if (info.has(RADIUS1)) {
+      init = RADIUS1;
+    } else if (info.has(RADIUS2)) {
+      init = RADIUS2;
+    } else if (info.has(RADIUS3)) {
+      init = RADIUS3;
     }
+    aoe = init != null;
     if (aoe) {
+      if (info.has(RADIUS1) && init != RADIUS1) {
+        boost += radius_boost;
+      }
+      if (info.has(RADIUS2) && init != RADIUS2) {
+        boost += radius_boost;
+      }
+      if (info.has(RADIUS3) && init != RADIUS3) {
+        boost += radius_boost;
+      }
       List<BlockPos> positions = Growth.collect(player.world, player.getPosition(), radius_x + boost, radius_y + boost, radius_z + boost);
       if (positions.isEmpty()) return false;
       if (!player.world.isRemote) {
