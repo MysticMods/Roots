@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PotionReach extends Potion {
-  private ResourceLocation texture = new ResourceLocation(Roots.MODID, "textures/gui/thaumcraft.potions.png");
+  private ResourceLocation texture = new ResourceLocation(Roots.MODID, "textures/gui/potions.png");
 
   public PotionReach() {
     super(false, 0xbe6fbe);
