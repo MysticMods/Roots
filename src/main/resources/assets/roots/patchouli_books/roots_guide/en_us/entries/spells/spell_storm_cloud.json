@@ -1,9 +1,9 @@
 {
-  "name": "Winter Cloud",
+  "name": "Storm Cloud",
   "icon": "roots:spell_icon{spell_storage:{s:\"roots:spell_storm_cloud\"}}",
   "category": "spells",
   "read_by_default": true,
-  "flag": "roots:spell_winter_cloud",
+  "flag": "roots:spell_storm_cloud",
   "pages": [
     {
       "type": "text",
@@ -11,7 +11,7 @@
     },
     {
       "type": "spell_template",
-      "spell": "spell_winter_cloud"
+      "spell": "spell_storm_cloud"
     },
     {
       "type": "spell_modifier_template",

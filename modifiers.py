@@ -32,9 +32,15 @@ def main (args):
         spell_name = SPELL_FINDER.findall(data)[0]
 
         values = []
-        spell_data[spell_name] = {}
+        #spell_data[spell_name] = {}
         for mod in MODIFIER_FINDER.findall(data):
-            spell_data[spell_name]["roots:" + mod] = TEMPLATE % (spell_name, mod, mod)
+            values.append(TEMPLATE % (spell_name, mod, mod))
+            #spell_data[spell_name]["roots:" + mod] = TEMPLATE % (spell_name, mod, mod)
+
+        with open(os.path.join("spells", spell_name + ".json"), "w") as o:
+            o.write("\n".join(values))
+
+    return
 
     for f in os.listdir("src/main/resources/assets/roots/patchouli_books/roots_guide/en_us/entries/spells"):
         full = os.path.join("src/main/resources/assets/roots/patchouli_books/roots_guide/en_us/entries/spells", f)
