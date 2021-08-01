@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example"
+      "text": "This spell prevents hostile entities (including projectiles) from approaching you, providing a protective bubble around you that holds them at bay so long as the spell is channeled.$(br2)With modifiers, you can inflict various status effects on these entities, deal damage to specific entity types, push entities further or include non-hostile entities."
     },
     {
       "type": "spell_template",
@@ -66,6 +66,19 @@
       "spell": "spell_sanctuary",
       "modifier": "roots:liquid_repulsion",
       "anchor": "liquid_repulsion"
+    },
+    {
+      "type": "text",
+      "title": "Spell Configuration",
+      "text": "$(bold)Radius:$() The radius of the protective bubble is $(spell:sanctuary/radius_x) and $(spell:sanctuary/radius_z) blocks horizontally and $(spell:sanctuary/radius_y) vertically. With the $(modifier:earthen_radius)$() modifier enabled, each of these values is increased by $(spell:sanctuary/radius_boost) blocks.$(br2)$(bold)Velocity:$() Entities are pushed away from you with a velocity of $(spell:sanctuary/push_velocity). With $(modifier:liquid_repulsion)$() or $(modifier:repulsive_bubble)$() enabled, the velocity is doubled. With both, the velocity is quadrupled."
+    },
+    {
+      "type": "text",
+      "text": "$(bold)Fire:$() With the $(modifier:inflammatory_bubble)$() modifier enabled, entities pushed back are also set on fire for $(spell:sanctuary/fire_duration) seconds.$(br2)$(bold)Levitation:$() With the $(modifier:levitating_bubble)$() modifier enabled, entities pushed back are given Levitation I for $(spell:sanctuary/SECONDS/levitate_duration) seconds.$(br2)$(bold)Wither:$() With the $(modifier:withering)$() modifier enabled, entities pushed back are given Withering $(spell:sanctuary/ROMAN/wither_amplifier) for $(spell:sanctuary/SECONDS/wither_duration) seconds."
+    },
+    {
+      "type": "text",
+      "text": "$(bold)Spiders:$() With the $(modifier:spider_unsuffrage)$() modifier enabled, any arachnid entity pushed back is also damaged for $(spell:sanctuary/HEART/spider_damage) hearts.$(br2)$(bold)Undead:$() With the $(modifier:undead_rejection)$() modifier enabled, any undead entity pushed back is also damaged for $(spell:sanctuary/HEART/undead_damage) hearts.$(br2)$(bold)Peaceful:$() With the $(modifier:reject_nature)$() modifier enabled, peaceful or non-hostile entities are also pushed back."
     }
   ]
 }
