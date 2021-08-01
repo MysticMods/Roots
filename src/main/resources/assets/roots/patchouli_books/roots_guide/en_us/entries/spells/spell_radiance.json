@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example"
+      "text": "A powerful beam of radiant light shoots forth from your location in the direction you're looking, damaging entities that it hits and bouncing off any block that it comes into contact with.$(br2)Modifiers can prevent passive creatures from being damaged, cause any items dropped by slain enemies to be teleported to you, and more!"
     },
     {
       "type": "spell_template",
@@ -66,6 +66,19 @@
       "spell": "spell_radiance",
       "modifier": "roots:slowing_ray",
       "anchor": "slowing_ray"
+    },
+    {
+      "type": "text",
+      "title": "Spell Configuration",
+      "text": "$(bold)Size:$() The maximum reach of the Radiance beam is $(spell:radiance/distance) blocks, including bounces, while the default width is $(spell:radiance/width). With the $(modifier:wider_ray)$() modifier, this width is increased by a further $(spell:radiance/added_width).$(br2)$(bold)Damage:$() Each entity hit by the beam takes $(spell:radiance/HEART/damage) hearts radiant damage. Undead entities take an additioanl $(spell:radiance/HEART/undead_damage) hearts of damage."
+    },
+    {
+      "type": "text",
+      "text": "$(bold)Wither:$() With the $(modifier:withering_ray)$() modifier enabled, entities are given Wither I for $(spell:radiance/SECONDS/wither_duration) seconds.$(br2)$(bold)Glowing:$() With the $(modifier:glowing_ray)$() modifier enabled, entities are given Glowing I for $(spell:radiance/SECONDS/glow_duration).$(br2)$(bold)Healing:$() With the $(modifier:healing_ray)$() modifier enabled, instead of damaging entities, passive creatures and allies are healed for $(spell:radiance/HEART/healing) hearts.$(br2)$(bold)Poison:$() With the $(modifier:sickly_ray)$() modifier enabled, entities"
+    },
+    {
+      "type": "text",
+      "text": "damaged by the beam are given Poison $(spell:radiance/ROMAN/poison_amplifier) for $(spell:radiance/SECONDS/poison_duration).$(br2)$(bold)Fire:$() With the $(modifier:burning_ray)$() modifier enabled, entities are set on fire for $(spell:radiance/fire_duration) seconds.$(br2)$(bold)Slowness:$() With the $(modifier:slowing_ray)$() modifier enabled, affected entities are given Slowness $(spell:radiance/ROMAN/slow_amplifier) for $(spell:radiance/SECONDS/slow_duration) seconds."
     }
   ]
 }
