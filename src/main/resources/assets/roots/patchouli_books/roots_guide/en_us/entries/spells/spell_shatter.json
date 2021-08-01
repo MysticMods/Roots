@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example"
+      "text": "A powerful blast of wild earth magic shatters most blocks. By default, this is in a two-block pattern: the block you are targeting, the one directly below it (based off the angle you target the block).$(br2)With modifiers, you can extend this significantly: digging high, wider, and deeper, with silk touch, fortune, and even teleporting all drops to you."
     },
     {
       "type": "spell_template",
@@ -72,6 +72,11 @@
       "spell": "spell_shatter",
       "modifier": "roots:shatter_silk_touch",
       "anchor": "shatter_silk_touch"
+    },
+    {
+      "type": "text",
+      "title": "Spell Configuration",
+      "text": ""
     }
   ]
 }
