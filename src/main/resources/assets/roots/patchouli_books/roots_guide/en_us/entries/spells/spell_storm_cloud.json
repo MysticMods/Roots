@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example"
+      "text": "This spell creates a localised storm that follows you around, directly above your head.$(br2)The storm will extinguish fires around you, on you and on your allies. It also gives Fire Resistance $(spell:storm_cloud/ROMAN/fire_resistance) for $(spell:storm_cloud/SECONDS/duration).$(br2)With modifiers, you can convert lava to obsidian, water to ice, heal, shoot icicles, and cause lightning to strike nearby enemies."
     },
     {
       "type": "spell_template",
