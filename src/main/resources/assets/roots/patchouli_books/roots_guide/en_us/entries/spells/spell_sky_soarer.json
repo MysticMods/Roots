@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example"
+      "text": "Sky Soarer sends you flying in the direction you're currently looking, with the boost lasting for several seconds.$(br2)$(warning) Care should be taken without the $(modifier:friendly_earth)$() modifier enabled, as you will suffer fall damage.$(br2)With other modifiers, you can bypass leaves, increase the boost, or be launched vertically."
     },
     {
       "type": "spell_template",
@@ -72,6 +72,23 @@
       "spell": "spell_sky_soarer",
       "modifier": "roots:aquaplane",
       "anchor": "aquaplane"
+    },
+    {
+      "type": "text",
+      "title": "Spell Configuration",
+      "text": "$(bold)Duration:$() The boost lasts for $(spell:sky_soarer/SECONDS/lifetime) seconds. With the $(modifier:eternal_flame)$() modifier enabled, the boost lasts for an additional $(spell:sky_soarer/SECONDS/extended_lifetime) seconds.$(br2)$(bold)Motion:$() The default motion amplifier is $(spell:sky_soarer/amplifier). With the $(modifier:momentum)$() modifier enabled, this is increased by $(spell:sky_soarer/extended_amplifier).$(br2)$(bold)Jaunt:$() With the $(modifier:jaunt)$() modifier enabled, instad of soaring, you will be teleported $(spell:sky_soarer/jaunt_distance) blocks in the direction you're facing"
+    },
+    {
+      "type": "text",
+      "text": "being placed on the closest block vertically or horizontally.$(br2)$(bold)Vertical:$() With the $(modifier:verticality)$() modifier enabled, instead of traveling in the direction you're facing, you will be launched directly upwards.$(br2)$(bold)Horizontal:$() With the $(modifier:aquaplane)$() modifier, you will move horizontally in the direction you're facing with no vertical movement."
+    },
+    {
+      "type": "text",
+      "text": "$(bold)Leaves:$() With the $(modifier:arboreal_bypass)$() modifier, you will travel through any leaf-like material as though it were air.$(br2)$(bold)Falling:$() With the $(modifier:friendly_earth)$() modifier, you won't take any fall damage for $(spell:sky_soarer/SECONDS/fall_duration) seconds after the boost ends.$(br2)$(bold)Slow Fall:$() With the $(modifier:slow_fall)$() modifier enabled, you will be given Slow Fall I for $(spell:sky_soarer/SECONDS/slow_fall_duration) seconds.$(br2)$(bold)Regeneration:$() With the $(modifier:regenerative_sky)$() modifier"
+    },
+    {
+      "type": "text",
+      "text": "enabled, you will be given Regeneration $(spell:sky_soarer/ROMAN/regen_amplifier) for $(spell:sky_soarer/SECONDS/regen_duration) seconds."
     }
   ]
 }
