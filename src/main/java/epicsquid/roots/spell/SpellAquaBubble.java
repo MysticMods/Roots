@@ -92,8 +92,8 @@ public class SpellAquaBubble extends SpellBase {
       dur2 += resistance_duration * amplifier;
     }
     if (!caster.world.isRemote) {
-      caster.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, dur, 0, false, false));
       caster.getEntityData().setIntArray(getCachedName(), info.toArray());
+      caster.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, dur, 0, false, false));
       if (info.has(RESISTANCE)) {
         caster.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, dur2, resistance_amplifier));
       }
@@ -101,8 +101,8 @@ public class SpellAquaBubble extends SpellBase {
         List<EntityLivingBase> entities = caster.world.getEntitiesWithinAABB(EntityLivingBase.class, radius.offset(caster.getPosition()), o -> EntityUtil.isFamiliar(caster, o));
         if (!entities.isEmpty()) {
           EntityLivingBase other = entities.get(Util.rand.nextInt(entities.size()));
-          other.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, dur/*, 0, false, false*/));
           other.getEntityData().setIntArray(getCachedName(), info.toArray());
+          other.addPotionEffect(new PotionEffect(ModPotions.aqua_bubble, dur/*, 0, false, false*/));
           if (info.has(RESISTANCE)) {
             other.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, dur2, resistance_amplifier));
           }
