@@ -15,11 +15,15 @@
         "mapping": {
           "0": "roots:runic_crafter",
           "C": "minecraft:chest",
-          "D": "minecraft:dispenser[facing=east]"
+          "D": "minecraft:dispenser[facing=east]",
+          "1": "roots:grove_stone[facing=north,half=bottom,valid=true]",
+          "2": "roots:grove_stone[facing=north,half=middle,valid=true]",
+          "3": "roots:grove_stone[facing=north,half=top,valid=true]"
         },
         "pattern": [
-          ["D ","0C"],
-          ["  ","C "]
+          ["3  ","   "],
+          ["2D "," 0C"],
+          ["1  "," C "]
         ]
       },
       "text": "The runic crafter will output results to any adjacent inventory in a 3x3 area excluding the one below it."
