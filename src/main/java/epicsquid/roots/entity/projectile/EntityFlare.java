@@ -89,7 +89,7 @@ public class EntityFlare extends Entity {
       List<EntityLivingBase> entities = Util.getEntitiesWithinRadius(getEntityWorld(), EntityLivingBase.class, this.getPosition(), val * 0.125f, val * 0.125f, val * 0.125f);
       this.attackWithFire(entities);
       if (world.isAirBlock(getPosition().up())) {
-        world.setBlockState(getPosition().up(), ModBlocks.wild_fire.getDefaultState());
+        world.setBlockState(getPosition().up(), ModBlocks.fey_fire.getDefaultState());
       }
       this.setDead();
     }

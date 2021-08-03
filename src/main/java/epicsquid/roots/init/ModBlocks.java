@@ -30,7 +30,7 @@ public class ModBlocks {
   public static Block wildroot_rune;
   public static Block grove_stone, fey_crafter, runic_crafter;
 
-  public static Block wild_fire, fake_water, fake_lava;
+  public static Block fey_fire, fake_water, fake_lava;
 
   public static BlockCropBase moonglow, pereskia, wildroot, spirit_herb, wildewheet, cloud_berry, infernal_bulb, dewgonia, stalicripe;
 
@@ -217,7 +217,7 @@ public class ModBlocks {
     event.addBlock(fey_light = new BlockNormalFeyLight(Material.SNOW, SoundType.SNOW, 0.0f, "fey_light"));
     event.addBlock(fey_colored_light = new BlockColoredFeyLight(Material.SNOW, SoundType.SNOW, 0.0f, "fey_colored_light"));
     event.addBlock(fey_decaying_light = new BlockDecayingFeyLight(Material.SNOW, SoundType.SNOW, 0.0f, "fey_decaying_light"));
-    event.addBlock(wild_fire = new BlockWildFire("wild_fire")).setCreativeTab(Roots.tab);
+    event.addBlock(fey_fire = new BlockWildFire("fey_fire")).setCreativeTab(Roots.tab);
     event.addBlock(fake_water = new BlockFakeLiquid(Material.WATER, SoundType.SNOW, 0, "fake_water")).setCreativeTab(Roots.tab);
     event.addBlock(fake_lava = new BlockFakeLiquid(Material.LAVA, SoundType.SNOW, 0, "fake_lava")).setCreativeTab(Roots.tab);
 
