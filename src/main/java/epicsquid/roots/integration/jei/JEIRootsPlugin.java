@@ -38,6 +38,7 @@ import epicsquid.roots.spell.SpellChrysopoeia;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.info.SpellDustInfo;
 import epicsquid.roots.spell.info.storage.DustSpellStorage;
+import epicsquid.roots.tileentity.TileEntityPyre;
 import epicsquid.roots.util.RitualUtil;
 import mezz.jei.api.*;
 import mezz.jei.api.ingredients.VanillaTypes;
@@ -81,6 +82,7 @@ public class JEIRootsPlugin implements IModPlugin {
   public static final String LOOT = Roots.MODID + ".loot";
   public static final String BLOCK_BREAK = Roots.MODID + ".block_break";
   public static final String RIGHT_CLICK_BLOCK = Roots.MODID + ".right_click_block";
+  public static final String PYRE_LIGHT = Roots.MODID + ".pyre_light";
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registry) {
@@ -102,7 +104,8 @@ public class JEIRootsPlugin implements IModPlugin {
         new RunicShearsSummonEntityCategory(helper),
         new BlockBreakCategory(helper),
         new BlockRightClickCategory(helper),
-        new SoilCategory(helper)
+        new SoilCategory(helper),
+        new PyreLightCategory(helper)
     );
   }
 
@@ -161,6 +164,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(BlockBreakRecipe.class, BlockBreakWrapper::new, BLOCK_BREAK);
     registry.handleRecipes(BlockRightClickRecipe.class, BlockRightClickWrapper::new, RIGHT_CLICK_BLOCK);
     registry.handleRecipes(SoilRecipe.class, SoilWrapper::new, SOIL);
+    registry.handleRecipes(PyreLightWrapper.PyreLightRecipe.class, PyreLightWrapper::new, PYRE_LIGHT);
 
     registry.addRecipes(SoilRecipe.recipes, SOIL);
 
@@ -200,6 +204,13 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipes(ModRecipes.getTransmutationRecipes(), TRANSMUTATION);
     registry.addRecipes(Arrays.asList(RitualUtil.RunedWoodType.values()), RUNED_WOOD);
 
+    List<PyreLightWrapper.PyreLightRecipe> pyreLightRecipes = new ArrayList<>();
+    pyreLightRecipes.add(new PyreLightWrapper.PyreLightRecipe(new ItemStack(ModItems.firestarter)));
+    for (ItemStack item : TileEntityPyre.getFireStarters().getMatchingStacks()) {
+      pyreLightRecipes.add(new PyreLightWrapper.PyreLightRecipe(item));
+    }
+    registry.addRecipes(pyreLightRecipes, PYRE_LIGHT);
+
     ModRecipes.generateLifeEssence();
     List<SummonCreatureIntermediate> summonGenerated = ModRecipes.getLifeEssenceList().stream().map(SummonCreatureIntermediate::create).collect(Collectors.toList());
     registry.addRecipes(summonGenerated, SUMMON_CREATURES);
@@ -232,7 +243,6 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.imbuer), SPELL_MODIFIERS);
     registry.addRecipeCatalyst(new ItemStack(ModItems.reliquary), LOOT);
 
-    // TODO:
     ItemStack spellDust = new ItemStack(ModItems.spell_dust);
     DustSpellStorage.fromStack(spellDust).setSpellToSlot(SpellChrysopoeia.instance);
     registry.addRecipeCatalyst(spellDust, CHRYSOPOEIA);
@@ -240,23 +250,15 @@ public class JEIRootsPlugin implements IModPlugin {
     DustSpellStorage.fromStack(spellIcon).setSpellToSlot(SpellChrysopoeia.instance);
     registry.addRecipeCatalyst(spellIcon, CHRYSOPOEIA);
 
+    for (ItemStack item : TileEntityPyre.getFireStarters().getMatchingStacks()) {
+      registry.addRecipeCatalyst(item, PYRE_LIGHT);
+    }
+    registry.addRecipeCatalyst(new ItemStack(ModItems.firestarter), PYRE_LIGHT);
+
     // TODO: Try to improve this somehow
     registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_log), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood.desc"));
     registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_sapling), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood_sapling.desc"));
     registry.addIngredientInfo(new ItemStack(ModBlocks.wildwood_leaves), VanillaTypes.ITEM, I18n.format("jei.roots.wildwood_leaves.desc"));
-
-    //Elemental Soil Crafting Information Panels
-    // TODO: JUST USE TOKENS IDIOT (me)
-    String airSoilLocalized = new TextComponentTranslation("jei.roots.elemental_soil_air.desc").getFormattedText();
-    airSoilLocalized = airSoilLocalized.replace("@LEVEL", ((Integer) ElementalSoilConfig.AirSoilMinY).toString());
-    String earthSoilLocalized = new TextComponentTranslation("jei.roots.elemental_soil_earth.desc").getFormattedText();
-    earthSoilLocalized = earthSoilLocalized.replace("@LEVEL", ((Integer) ElementalSoilConfig.EarthSoilMaxY).toString());
-
-    // TODO: Improve these with config
-    registry.addIngredientInfo(new ItemStack(ModBlocks.elemental_soil_fire), VanillaTypes.ITEM, I18n.format("jei.roots.elemental_soil_fire.desc"));
-    registry.addIngredientInfo(new ItemStack(ModBlocks.elemental_soil_water), VanillaTypes.ITEM, I18n.format("jei.roots.elemental_soil_water.desc"));
-    registry.addIngredientInfo(new ItemStack(ModBlocks.elemental_soil_air), VanillaTypes.ITEM, airSoilLocalized);
-    registry.addIngredientInfo(new ItemStack(ModBlocks.elemental_soil_earth), VanillaTypes.ITEM, earthSoilLocalized);
 
     registry.getRecipeTransferRegistry().addRecipeTransferHandler(new FeyCrafterTransfer());
   }
