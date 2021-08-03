@@ -93,6 +93,9 @@ public class MappingsEvent {
           case "incense_burner":
             mapping.ignore();
             break;
+          case "fey_fire":
+            mapping.remap(epicsquid.roots.init.ModBlocks.wild_fire);
+            break;
         }
       }
     }
@@ -192,6 +195,9 @@ public class MappingsEvent {
             break;
           case "golden_eye":
             mapping.ignore();
+            break;
+          case "fey_fire":
+            mapping.remap(epicsquid.roots.init.ModItems.wild_fire);
             break;
         }
         if (missing.getPath().startsWith("runic_")) {

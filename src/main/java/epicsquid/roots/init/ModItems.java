@@ -53,7 +53,7 @@ public class ModItems {
 
   public static Item ritual_healing_aura, ritual_heavy_storms, ritual_divine_protection, ritual_fire_storm, ritual_spreading_forest, ritual_windwall, ritual_warding_protection, ritual_germination, ritual_purity, ritual_frost_lands, ritual_animal_harvest, ritual_summon_creatures, ritual_wildroot_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation, ritual_gathering, ritual_grove_supplication, spell_icon;
 
-  public static Item creative_pouch, fey_fire;
+  public static Item creative_pouch, wild_fire;
 
   public static Item life_essence, salmon;
 
@@ -224,7 +224,7 @@ public class ModItems {
     event.addItem(ritual_grove_supplication = new ItemBase("ritual_grove_supplication").setCreativeTab(null));
     event.addItem(spell_icon = new ItemSpellIcon("spell_icon").setCreativeTab(Roots.tab));
 
-    event.addItem(fey_fire = new ItemBase("fey_fire").setCreativeTab(null));
+    event.addItem(wild_fire = new ItemBase("wild_fire").setCreativeTab(null));
 
     // KEEP AT END
     registerSeedDrops();
