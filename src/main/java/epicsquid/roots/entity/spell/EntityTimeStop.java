@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class EntityTimeStop extends EntitySpellModifiable<SpellTimeStop> {
+  public static boolean refreshing = false;
 
   public EntityTimeStop(World worldIn) {
     this(worldIn, SpellTimeStop.instance.duration);
@@ -31,6 +32,8 @@ public class EntityTimeStop extends EntitySpellModifiable<SpellTimeStop> {
     }
   }
 
+  private AxisAlignedBB box = null;
+
   @Override
   public void onUpdate() {
     super.onUpdate();
@@ -46,7 +49,10 @@ public class EntityTimeStop extends EntitySpellModifiable<SpellTimeStop> {
       }
     }
     if (!world.isRemote) {
-      List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(posX - 9.0, posY - 1.0, posZ - 9.0, posX + 10.0, posY + 20.0, posZ + 10.0));
+      if (box == null) {
+        box = new AxisAlignedBB(posX - SpellTimeStop.instance.radius_x - 1, posY - 1.0, posZ - SpellTimeStop.instance.radius_z - 1, posX + SpellTimeStop.instance.radius_x, posY + SpellTimeStop.instance.radius_y, posZ + SpellTimeStop.instance.radius_z);
+      }
+      List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, box);
       for (EntityLivingBase e : entities) {
         if (!(e instanceof EntityPlayer)) {
           if (modifiers != null && modifiers.has(SpellTimeStop.PEACEFUL) && EntityUtil.isFriendly(e, SpellTimeStop.instance)) {
@@ -55,8 +61,10 @@ public class EntityTimeStop extends EntitySpellModifiable<SpellTimeStop> {
           if (modifiers != null && modifiers.has(SpellTimeStop.FAMILIARS) && EntityUtil.isFamiliar(e)) {
             continue;
           }
+          refreshing = true;
           e.addPotionEffect(new PotionEffect(ModPotions.time_stop, 40, 0, false, false));
           e.getEntityData().setIntArray(SpellTimeStop.instance.getCachedName(), modifiers.toArray());
+          refreshing = false;
           if (modifiers.has(SpellTimeStop.SLOW)) {
             e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, instance.slow_duration + 40, instance.slow_amplifier));
           }
@@ -64,7 +72,8 @@ public class EntityTimeStop extends EntitySpellModifiable<SpellTimeStop> {
             e.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, instance.weakness_duration + 40, instance.weakness_amplifier));
           }
           if (modifiers.has(SpellTimeStop.FIRE)) {
-            e.setFire(SpellTimeStop.instance.fire_duration);          }
+            e.setFire(SpellTimeStop.instance.fire_duration);
+          }
         }
       }
     }
