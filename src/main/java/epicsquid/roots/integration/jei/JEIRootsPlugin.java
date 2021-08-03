@@ -83,6 +83,7 @@ public class JEIRootsPlugin implements IModPlugin {
   public static final String BLOCK_BREAK = Roots.MODID + ".block_break";
   public static final String RIGHT_CLICK_BLOCK = Roots.MODID + ".right_click_block";
   public static final String PYRE_LIGHT = Roots.MODID + ".pyre_light";
+  public static final String RITUAL_VISUALISE = Roots.MODID + ".ritual_visualise";
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registry) {
@@ -105,7 +106,8 @@ public class JEIRootsPlugin implements IModPlugin {
         new BlockBreakCategory(helper),
         new BlockRightClickCategory(helper),
         new SoilCategory(helper),
-        new PyreLightCategory(helper)
+        new PyreLightCategory(helper),
+        new RitualVisualiseCategory(helper)
     );
   }
 
@@ -165,8 +167,10 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(BlockRightClickRecipe.class, BlockRightClickWrapper::new, RIGHT_CLICK_BLOCK);
     registry.handleRecipes(SoilRecipe.class, SoilWrapper::new, SOIL);
     registry.handleRecipes(PyreLightWrapper.PyreLightRecipe.class, PyreLightWrapper::new, PYRE_LIGHT);
+    registry.handleRecipes(RitualVisualiseWrapper.KnifeRecipe.class, RitualVisualiseWrapper::new, RITUAL_VISUALISE);
 
     registry.addRecipes(SoilRecipe.recipes, SOIL);
+    registry.addRecipes(Collections.singletonList(new RitualVisualiseWrapper.KnifeRecipe()), RITUAL_VISUALISE);
 
     Collection<SpellBase> spells = SpellRegistry.spellRegistry.values().stream().filter(o -> !o.isDisabled()).collect(Collectors.toList());
 
@@ -226,9 +230,11 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.elemental_soil), SOIL);
 
     for (Item knife : ModItems.knives) {
-      registry.addRecipeCatalyst(new ItemStack(knife), BARK_CARVING);
-      registry.addRecipeCatalyst(new ItemStack(knife), TERRA_MOSS);
-      registry.addRecipeCatalyst(new ItemStack(knife), RUNED_WOOD);
+      ItemStack k = new ItemStack(knife);
+      registry.addRecipeCatalyst(k, BARK_CARVING);
+      registry.addRecipeCatalyst(k, TERRA_MOSS);
+      registry.addRecipeCatalyst(k, RUNED_WOOD);
+      registry.addRecipeCatalyst(k, RITUAL_VISUALISE);
     }
 
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.pyre), RITUAL_CRAFTING);
