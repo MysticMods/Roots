@@ -61,7 +61,7 @@ public class CommandRoots extends CommandBase {
 
   @Override
   public String getUsage(ICommandSender sender) {
-    return "/roots book | /roots activate | /roots rituals | /roots growables | /roots spells | /roots library | /roots modifiers";
+    return "/roots book | /roots activate | /roots rituals | /roots growables | /roots spells | /roots library | /roots modifiers | /roots slave";
   }
 
   @Override
@@ -111,7 +111,7 @@ public class CommandRoots extends CommandBase {
           for (SpellBase spell : SpellRegistry.getSpells()) {
             library.addSpell(spell);
           }
-        } else if (args.length == 2 && args[1].equals("kill")) {
+        } else if (args.length == 2 && (args[1].equals("kill") || args[1].equals("clear"))) {
           SpellLibraryRegistry.clearData(player);
         } else {
           SpellLibraryData data = SpellLibraryRegistry.getData(player);
