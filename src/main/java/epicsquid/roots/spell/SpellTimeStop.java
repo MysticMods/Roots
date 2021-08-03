@@ -26,6 +26,9 @@ public class SpellTimeStop extends SpellBase {
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("pereskia", 0.5));
   public static Property.PropertyCost PROP_COST_2 = new Property.PropertyCost(new SpellCost("moonglow_leaf", 0.5));
   public static Property.PropertyCost PROP_COST_3 = new Property.PropertyCost(new SpellCost("dewgonia", 0.325));
+  public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 10).setDescription("the radius on the x axis");
+  public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 10).setDescription("the radius on the y axis");
+  public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 20).setDescription("the height of the time stop effect");
   public static Property<Integer> PROP_DURATION = new Property<>("duration", 200).setDescription("the duration of the time stop effect on entities");
   public static Property<Integer> PROP_OVERTIME = new Property<>("overtime", 200).setDescription("the extended duration that should apply when overtime is active");
   public static Property<Integer> PROP_UNDERTIME = new Property<>("undertime", 100).setDescription("the shortened duration that is applied instead of the normal duration");
@@ -36,6 +39,7 @@ public class SpellTimeStop extends SpellBase {
   public static Property<Integer> PROP_SPEED_DURATION = new Property<>("speed_duration", 80).setDescription("duration in ticks of the speed effect applied when the traps are triggered");
   public static Property<Integer> PROP_SPEED_AMPLIFIER = new Property<>("speed_amplifier", 0).setDescription("the level of the speed effect (0 is the first level)");
   public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 5).setDescription("the duration that entities should be set on fire for");
+  public static Property<Float> PROP_COLD_DAMAGE = new Property<>("cold_damage", 4.0f).setDescription("the amount of cold damage given to entities when the effect ends");
 
   public static Modifier PEACEFUL = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "peaceful_passage"), ModifierCores.WILDEWHEET, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 0.125)));
   public static Modifier FAMILIARS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "freed_familiars"), ModifierCores.WILDROOT, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.125)));
@@ -45,6 +49,7 @@ public class SpellTimeStop extends SpellBase {
   public static Modifier SPEED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "hasty_escape"), ModifierCores.CLOUD_BERRY, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 0.45)));
   public static Modifier FIRE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "burn_in_hell"), ModifierCores.INFERNAL_BULB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 0.45)));
   public static Modifier SHORTER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "minor_halt"), ModifierCores.STALICRIPE, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 0.125)));
+  // TODO: IMPLEMENT
   public static Modifier FREEZE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "ice_age"), ModifierCores.DEWGONIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 0.345)));
 
   static {
@@ -55,11 +60,11 @@ public class SpellTimeStop extends SpellBase {
   public static ResourceLocation spellName = new ResourceLocation(Roots.MODID, "spell_time_stop");
   public static SpellTimeStop instance = new SpellTimeStop(spellName);
 
-  public int duration, slow_duration, slow_amplifier, overtime, weakness_duration, weakness_amplifier, speed_duration, speed_amplifier, fire_duration, undertime;
+  public int duration, slow_duration, slow_amplifier, overtime, weakness_duration, weakness_amplifier, speed_duration, speed_amplifier, fire_duration, undertime, radius_x, radius_y, radius_z;
 
   public SpellTimeStop(ResourceLocation name) {
     super(name, TextFormatting.DARK_BLUE, 64f / 255f, 64f / 255f, 64f / 255f, 192f / 255f, 32f / 255f, 255f / 255f);
-    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_COST_3, PROP_DURATION, PROP_OVERTIME,PROP_UNDERTIME, PROP_SLOWNESS_AMPLIFIER, PROP_SLOWNESS_DURATION, PROP_WEAKNESS_AMPLIFIER, PROP_WEAKNESS_DURATION, PROP_SPEED_AMPLIFIER, PROP_SPEED_DURATION, PROP_FIRE_DURATION);
+    properties.add(PROP_COOLDOWN, PROP_CAST_TYPE, PROP_COST_1, PROP_COST_2, PROP_COST_3, PROP_RADIUS_X, PROP_RADIUS_Z, PROP_RADIUS_Y, PROP_DURATION, PROP_OVERTIME,PROP_UNDERTIME, PROP_SLOWNESS_AMPLIFIER, PROP_SLOWNESS_DURATION, PROP_WEAKNESS_AMPLIFIER, PROP_WEAKNESS_DURATION, PROP_SPEED_AMPLIFIER, PROP_SPEED_DURATION, PROP_FIRE_DURATION, PROP_COLD_DAMAGE);
     acceptModifiers(PEACEFUL, FAMILIARS, LONGER, SLOW, WEAKNESS, SPEED, FIRE, SHORTER, FREEZE);
   }
 
@@ -103,6 +108,10 @@ public class SpellTimeStop extends SpellBase {
     this.castType = properties.get(PROP_CAST_TYPE);
     this.cooldown = properties.get(PROP_COOLDOWN);
     this.duration = properties.get(PROP_DURATION);
+    int[] radius = properties.getRadius();
+    this.radius_x = radius[0];
+    this.radius_y = radius[1];
+    this.radius_z = radius[2];
     this.slow_duration = properties.get(PROP_SLOWNESS_DURATION);
     this.slow_amplifier = properties.get(PROP_SLOWNESS_AMPLIFIER);
     this.overtime = properties.get(PROP_OVERTIME);
