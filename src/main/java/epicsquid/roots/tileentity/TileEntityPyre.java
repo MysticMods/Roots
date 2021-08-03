@@ -256,25 +256,18 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
     }
   }
 
-  private Ingredient fireStarters = null;
+  public static Ingredient fireStarters = null;
+
+  public static Ingredient getFireStarters () {
+    if (fireStarters == null) {
+      fireStarters = new OreIngredient("pyreFireStarters");
+    }
+    return fireStarters;
+  }
 
   @Override
   public boolean activate(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ) {
     ItemStack heldItem = player.getHeldItem(hand);
-
-    if (false && !world.isRemote) {
-      String line1 = "PYRE: Pyre right clicked with item: " + heldItem.getItem().getRegistryName() + ", meta: " + heldItem.getMetadata();
-      int[] ids = OreDictionary.getOreIDs(heldItem);
-      StringJoiner ores = new StringJoiner(", ");
-      for (int id : ids) {
-        ores.add(OreDictionary.getOreName(id));
-      }
-      String line2 = "PYRE: Item is part of the following ore dictionary groups: " + ores.toString();
-      player.sendMessage(new TextComponentString(line1));
-      player.sendMessage(new TextComponentString(line2));
-      Roots.logger.info(line1);
-      Roots.logger.info(line2);
-    }
 
     if (heldItem.getItem() == ModItems.firestarter) {
       return false;
@@ -325,10 +318,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
         }
       }
       // TODO: Make this a configurable array of items or extensible classes
-      if (fireStarters == null) {
-        fireStarters = new OreIngredient("pyreFireStarters");
-      }
-      if (fireStarters.test(heldItem)) {
+      if (getFireStarters().test(heldItem)) {
         boolean result = startRitual(player, false);
         this.lastPlayerId = player.getUniqueID();
         if (result && heldItem.isItemStackDamageable() /*&& !player.isCreative()*/) {
