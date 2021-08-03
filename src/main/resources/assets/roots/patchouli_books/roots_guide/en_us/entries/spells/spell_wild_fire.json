@@ -76,7 +76,19 @@
     {
       "type": "text",
       "title": "Spell Configuration",
-      "text": ""
+      "text": "$(bold)Damage:$() The fireball inflicts $(spell:wild_fire/HEART/damage) hearts of fire damage and sets creatures on fire for $(spell:wild_fire/fire_duration) seconds.$(br2)$(bold)Lifetime:$() The fireball will travel for $(spell:wild_fire/SECONDS/lifetime) seconds before expiring.$(br2)$(bold)Slowness:$() With the $(modifier:slow_fire)$() modifier enabled, targets are also given Slowness $(spell:wild_fire/ROMAN/slow_amplifier) for $(spell:wild_fire/SECONDS/slow_duration) seconds."
+    },
+    {
+      "type": "text",
+      "text": "$(bold)Poison:$() With the $(modifier:poisoned_fire)$() modifier enabled, targets are also given Poison $(spell:wild_fire/ROMAN/poison_amplifier) for $(spell:wild_fire/SECONDS/poison_duration) seconds.$(br2)$(bold)Levitate:$() With the $(modifier:floating_cinders)$() modifier enabled, targets are also given Levitation I for $(spell:wild_fire/SECONDS/levitate_duration).$(br2)$(bold)Peaceful:$() With the $(modifier:peaceful_flame)$() modifier enabled, non-hostile entities are not damaged by wild fire.$(br2)$(bold)Purple:$() With the $(modifier:purple_flame)$() modifier, your fireball"
+    },
+    {
+      "type": "text",
+      "text": "is purple instead!$(br2)$(bold)Green:$() With the $(modifier:green_flame)$() modifier enabled, your fireball is green instead!$(br2)$(bold)Icicles:$() With the $(modifier:fire_and_ice)$() modifier enabled, entities hit by fireballs are also targeted by $(spell:wild_fire/icicle_count) icicles, each dealing $(spell:wild_fire/HEART/icicle_damage) hearts of damage when they hit.$(br2)$(bold)Weakness:$() With the $(modifier:weakening_thorns)$() modifier, entities are also given Weakness $(spell:wild_fire/ROMAN/weakness_amplifier) for $(spell:wild_fire/SECONDS/weakness_duration) seconds."
+    },
+    {
+      "type": "text",
+      "text": "$(bold)Fey Fire:$() With the $(modifier:pyroclastic_cloud)$() modifier enabled, the ground beneath targets will spawn $(l:resources/fey_fire)fey fire$().$(br2)$(bold)Growth:$() With the $(modifier:spiritual_duality)$() modifier enabled, eligible crops within a radius of $(spell:wild_fire/radius_x) and $(spell:wild_fire/radius_z) blocks horizontally and $(spell:wild_fire/radius_y) vertically are given $(spell:wild_fire/growth_ticks) growth ticks."
     }
   ]
 }
