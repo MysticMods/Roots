@@ -1,6 +1,0 @@
-{
-    "name": "Resources",
-    "sortnum" : 4,
-    "description": "Asides from $(cat:herbs)herbs$(), there are a variety of other resources, both magical and mundane, worldy and otherworldly, that can be gathered, created or obtained through magical means.$(br2)These are often used in the construction of items, the creation of $(cat:spells)spells$() and the execution of $(cat:rituals)rituals$().",
-    "icon": "roots:bark_oak"
-  }
