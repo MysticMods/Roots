@@ -1,6 +1,8 @@
 package epicsquid.roots.potion;
 
 import epicsquid.roots.Roots;
+import epicsquid.roots.entity.spell.EntityTimeStop;
+import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.spell.SpellAugment;
 import epicsquid.roots.spell.SpellTimeStop;
@@ -43,5 +45,8 @@ public class PotionTimeStop extends Potion {
   @Override
   public void removeAttributesModifiersFromEntity(EntityLivingBase entityLivingBaseIn, AbstractAttributeMap attributeMapIn, int amplifier) {
     super.removeAttributesModifiersFromEntity(entityLivingBaseIn, attributeMapIn, amplifier);
+    if (!EntityTimeStop.refreshing) {
+      entityLivingBaseIn.attackEntityFrom(ModDamage.COLD_DAMAGE, SpellTimeStop.instance.cold_damage);
+    }
   }
 }

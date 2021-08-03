@@ -33,6 +33,8 @@ public class ModDamage {
 
   public static DamageSource WATER_DAMAGE = (new DamageSource("water_damage")).setDamageBypassesArmor().setMagicDamage();
 
+  public static DamageSource COLD_DAMAGE = (new DamageSource("cold_damage")).setDamageBypassesArmor().setMagicDamage();
+
   public static DamageSource BLEED_DAMAGE = (new DamageSource("bleed_damage")).setDamageBypassesArmor();
 
   public static DamageSource ROSE_DAMAGE = (new DamageSource("rose_thorns")).setDamageBypassesArmor();
@@ -55,6 +57,16 @@ public class ModDamage {
       source = DamageSource.MAGIC;
     } else {
       source = new EntityDamageSource("magic", player).setDamageBypassesArmor().setMagicDamage();
+    }
+    return source;
+  }
+
+  public static DamageSource coldDamageFrom(@Nullable Entity player) {
+    DamageSource source;
+    if (player == null) {
+      source = DamageSource.MAGIC;
+    } else {
+      source = new EntityDamageSource("cold_damage", player).setDamageBypassesArmor().setMagicDamage();
     }
     return source;
   }
