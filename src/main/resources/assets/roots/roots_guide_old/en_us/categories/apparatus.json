@@ -1,6 +1,0 @@
-{
-    "name": "Tools of the Wilds",
-    "sortnum" : 5,
-    "description": "There are many magical tools, weapons, armor and other utility items that a mage of the wilds can craft or discover.$(br2)Some of them can be crafted immediately, whilst others will require a deeper delving into $(cat:herbs)herbs$(), $(cat:spells)spells$() & $(cat:rituals)rituals$() to unlock necessary ingredients.",
-    "icon": "roots:mortar"
-  }

@@ -1,6 +1,0 @@
-{
-  "name": "Spells",
-  "sortnum" : 2,
-  "description": "Spells are created by a selection of ingredients, combined in a $(l:apparatus/mortar)mortar with a pestle$(). Once infused into a $(l:apparatus/staff)staff$(), they can be cast using $(cat:herbs)herbs$() as reagents.$(br2)$(warning) Herbs must be stored in a $(l:basics/pouch)pouch$() in order to cast the spell.",
-  "icon": "roots:staff"
-}

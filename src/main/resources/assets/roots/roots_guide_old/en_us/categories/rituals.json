@@ -1,6 +1,0 @@
-{
-  "name": "Rituals",
-  "sortnum" : 3,
-  "description": "Rituals harness the magic of the wilds, using items to focus the power and fire as the catalyst. All are performed using a $(l:basics/pyre)pyre$() and generally take time to complete.$(br2)$(info) While portable, many higher $(l:rituals/tiers)tier$() rituals require $(l:rituals/standing_stones)standing stones or runed pillars$().$(br2)$(info) Almost every ritual can be $(l:rituals/automation)automated$() in some form.",
-  "icon": "roots:pyre"
-}
