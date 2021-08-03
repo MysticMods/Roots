@@ -22,7 +22,7 @@ public class SpellWildfire extends SpellBase {
   public static Property.PropertyCost PROP_COST_1 = new Property.PropertyCost(new SpellCost("infernal_bulb", 0.225));
   public static Property.PropertyDamage PROP_DAMAGE = new Property.PropertyDamage(4.5f);
 
-  public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 4).setDescription("how much fire damage should be done");
+  public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 4).setDescription("how long entities should be set on fire for");
   public static Property<Integer> PROP_SLOW_DURATION = new Property<>("slow_duration", 6 * 20).setDescription("how long an entity should be slowed for");
   public static Property<Integer> PROP_SLOW_AMPLIFIER = new Property<>("slow_amplifier", 0).setDescription("the amplifier that should be applied to the slow effect");
   public static Property<Integer> PROP_POISON_DURATION = new Property<>("poison_duration", 6 * 20).setDescription("how long an entity should be poisoned for");

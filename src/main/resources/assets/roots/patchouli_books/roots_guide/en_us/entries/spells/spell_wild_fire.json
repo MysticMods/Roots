@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Example"
+      "text": "The immense power of the elemental grove is unleashed with this spell, shooting a large ball of fire that damages any entity it hits.$(br2)With modifiers you can inflict status effects, avoid harming peaceful entities, create $(l:resources/wild_fire)wild fire$() in world and even fling icicles at targets you hit."
     },
     {
       "type": "spell_template",
@@ -72,6 +72,11 @@
       "spell": "spell_wild_fire",
       "modifier": "roots:fire_and_ice",
       "anchor": "fire_and_ice"
+    },
+    {
+      "type": "text",
+      "title": "Spell Configuration",
+      "text": ""
     }
   ]
 }
