@@ -206,19 +206,6 @@ roots.spell.spell_augment.name=Augment
 roots.spell.spell_extension.name=Extension
 roots.spell.spell_storm_cloud.name=Storm Cloud
 
-roots.modifiers.modifiers.reduction=Cost Reduction
-roots.modifiers.modifiers.reduction.desc=Reduces herb costs.
-roots.modifiers.modifiers.greater_speedy=Greater Speed
-roots.modifiers.modifiers.greater_speedy.desc=Greatly decreases cooldown, speeds up some spells.
-roots.modifiers.modifiers.greater_reduction=Greatly Reduced Cost
-roots.modifiers.modifiers.greater_reduction.desc=Greatly reduces herb costs.
-roots.modifiers.modifiers.speedy=Speed
-roots.modifiers.modifiers.speedy.desc=Decreases cooldown, speeds up some spells.
-roots.modifiers.modifiers.empower=Empowerment
-roots.modifiers.modifiers.empower.desc=Increases power of spells, damage of some spells.
-roots.modifiers.modifiers.greater_empower=Greatly Empowered
-roots.modifiers.modifiers.greater_empower.desc=Greatly increases power of spells, damage of some spells.
-
 roots.ritual.ritual_healing_aura.name=Healing Aura
 roots.ritual.ritual_heavy_storms.name=Heavy Storms
 roots.ritual.ritual_divine_protection.name=Divine Protection
