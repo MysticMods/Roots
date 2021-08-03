@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "The immense power of the elemental grove is unleashed with this spell, shooting a large ball of fire that damages any entity it hits.$(br2)With modifiers you can inflict status effects, avoid harming peaceful entities, create $(l:resources/wild_fire)wild fire$() in world and even fling icicles at targets you hit."
+      "text": "The immense power of the elemental grove is unleashed with this spell, shooting a large ball of fire that damages any entity it hits.$(br2)With modifiers you can inflict status effects, avoid harming peaceful entities, create $(l:resources/fey_fire)fey fire$() in world and even fling icicles at targets you hit."
     },
     {
       "type": "spell_template",
