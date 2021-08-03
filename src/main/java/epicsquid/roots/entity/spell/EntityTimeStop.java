@@ -62,8 +62,8 @@ public class EntityTimeStop extends EntitySpellModifiable<SpellTimeStop> {
             continue;
           }
           refreshing = true;
-          e.addPotionEffect(new PotionEffect(ModPotions.time_stop, 40, 0, false, false));
           e.getEntityData().setIntArray(SpellTimeStop.instance.getCachedName(), modifiers.toArray());
+          e.addPotionEffect(new PotionEffect(ModPotions.time_stop, 40, 0, false, false));
           refreshing = false;
           if (modifiers.has(SpellTimeStop.SLOW)) {
             e.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, instance.slow_duration + 40, instance.slow_amplifier));

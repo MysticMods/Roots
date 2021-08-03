@@ -111,23 +111,23 @@ public class SpellPetalShell extends SpellBase {
         entities.removeIf(o -> !EntityUtil.isFamiliar(player, o));
         if (!entities.isEmpty()) {
           EntityLivingBase entity = entities.get(Util.rand.nextInt(entities.size()));
+          entity.getEntityData().setIntArray(getCachedName(), info.toArray());
           PotionEffect effect = entity.getActivePotionEffect(ModPotions.petal_shell);
           if (effect != null) {
             entity.addPotionEffect(new PotionEffect(ModPotions.petal_shell, duration, shells, false, false));
           } else {
             entity.addPotionEffect(new PotionEffect(ModPotions.petal_shell, duration, maxShells, false, false));
           }
-          entity.getEntityData().setIntArray(getCachedName(), info.toArray());
           PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(entity.posX, entity.posY + 1.0f, entity.posZ, info), entity);
         }
       }
+      player.getEntityData().setIntArray(getCachedName(), info.toArray());
       PotionEffect effect = player.getActivePotionEffect(ModPotions.petal_shell);
       if (effect != null) {
         player.addPotionEffect(new PotionEffect(ModPotions.petal_shell, duration, shells, false, false));
       } else {
         player.addPotionEffect(new PotionEffect(ModPotions.petal_shell, duration, maxShells, false, false));
       }
-      player.getEntityData().setIntArray(getCachedName(), info.toArray());
       PacketHandler.sendToAllTracking(new MessagePetalShellBurstFX(player.posX, player.posY + 1.0f, player.posZ, info), player);
     }
     return true;

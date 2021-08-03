@@ -96,11 +96,11 @@ public class SpellGeas extends SpellBase {
             e.setDropItemsWhenDead(false);
             e.setDead();
             slave.setPositionAndUpdate(slave.posX, slave.posY, slave.posZ);
-            slave.addPotionEffect(new PotionEffect(ModPotions.geas, dur, 0, false, false));
             slave.getEntityData().setIntArray(getCachedName(), info.toArray());
+            slave.addPotionEffect(new PotionEffect(ModPotions.geas, dur, 0, false, false));
           } else {
-            e.addPotionEffect(new PotionEffect(ModPotions.geas, dur, 0, false, false));
             e.getEntityData().setIntArray(getCachedName(), info.toArray());
+            e.addPotionEffect(new PotionEffect(ModPotions.geas, dur, 0, false, false));
             if (e instanceof EntityLiving) {
               ((EntityLiving) e).setAttackTarget(null);
             }
