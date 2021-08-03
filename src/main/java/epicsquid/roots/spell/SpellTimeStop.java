@@ -49,7 +49,6 @@ public class SpellTimeStop extends SpellBase {
   public static Modifier SPEED = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "hasty_escape"), ModifierCores.CLOUD_BERRY, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.CLOUD_BERRY, 0.45)));
   public static Modifier FIRE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "burn_in_hell"), ModifierCores.INFERNAL_BULB, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.INFERNAL_BULB, 0.45)));
   public static Modifier SHORTER = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "minor_halt"), ModifierCores.STALICRIPE, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.STALICRIPE, 0.125)));
-  // TODO: IMPLEMENT
   public static Modifier FREEZE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "ice_age"), ModifierCores.DEWGONIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.DEWGONIA, 0.345)));
 
   static {
@@ -61,6 +60,8 @@ public class SpellTimeStop extends SpellBase {
   public static SpellTimeStop instance = new SpellTimeStop(spellName);
 
   public int duration, slow_duration, slow_amplifier, overtime, weakness_duration, weakness_amplifier, speed_duration, speed_amplifier, fire_duration, undertime, radius_x, radius_y, radius_z;
+
+  public float cold_damage;
 
   public SpellTimeStop(ResourceLocation name) {
     super(name, TextFormatting.DARK_BLUE, 64f / 255f, 64f / 255f, 64f / 255f, 192f / 255f, 32f / 255f, 255f / 255f);
@@ -123,5 +124,6 @@ public class SpellTimeStop extends SpellBase {
     this.undertime = properties.get(PROP_UNDERTIME);
     this.speed_duration = properties.get(PROP_SPEED_DURATION);
     this.speed_amplifier = properties.get(PROP_SPEED_AMPLIFIER);
+    this.cold_damage = properties.get(PROP_COLD_DAMAGE);
   }
 }
