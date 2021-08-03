@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "roots:items/fey_fire_layer_0",
+    "layer1": "roots:items/fey_fire_layer_1"
+  }
+}

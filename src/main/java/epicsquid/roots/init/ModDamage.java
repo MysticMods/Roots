@@ -14,15 +14,15 @@ import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class ModDamage {
-  private static final String WILD_FIRE_FAKE_PLAYER_NAME = "Wild Fire";
-  private static final UUID WILD_FIRE_FAKE_PLAYER_UUID = UUID.fromString("fd3bc208-e351-48ac-afc4-1b612dc36aff");
-  public static final GameProfile WILD_FIRE_FAKE_PLAYER = new GameProfile(WILD_FIRE_FAKE_PLAYER_UUID, WILD_FIRE_FAKE_PLAYER_NAME);
+  private static final String FEY_FIRE_FAKE_PLAYER_NAME = "Fey Fire";
+  private static final UUID FEY_FIRE_FAKE_PLAYER_UUID = UUID.fromString("fd3bc208-e351-48ac-afc4-1b612dc36aff");
+  public static final GameProfile FEY_FIRE_FAKE_PLAYER = new GameProfile(FEY_FIRE_FAKE_PLAYER_UUID, FEY_FIRE_FAKE_PLAYER_NAME);
 
   private static final String FEY_CRAFTER_FAKE_PLAYER_NAME = "Fey Crafter";
   private static final UUID FEY_CRAFTER_FAKE_PLAYER_UUID = UUID.fromString("f8f5968b-da9f-430d-851b-cf232728f141");
   public static final GameProfile FEY_CRAFTER_FAKE_PLAYER = new GameProfile(FEY_CRAFTER_FAKE_PLAYER_UUID, FEY_CRAFTER_FAKE_PLAYER_NAME);
 
-  public static final String WILD_FIRE = "wild_fire";
+  public static final String FEY_FIRE = "fey_fire";
 
   @SuppressWarnings("unused")
   public static DamageSource RADIANT_DAMAGE = (new DamageSource("holy_damage")).setDamageBypassesArmor().setMagicDamage();
@@ -118,11 +118,11 @@ public class ModDamage {
 
     FakePlayer player = getFakePlayer(world);
 
-    return new EntityDamageSource(WILD_FIRE, player).setDamageBypassesArmor().setMagicDamage().setFireDamage();
+    return new EntityDamageSource(FEY_FIRE, player).setDamageBypassesArmor().setMagicDamage().setFireDamage();
   }
 
   public static FakePlayer getFakePlayer(World world) {
-    return getFakePlayer(world, WILD_FIRE_FAKE_PLAYER);
+    return getFakePlayer(world, FEY_FIRE_FAKE_PLAYER);
   }
 
   public static FakePlayer getFakePlayer(World world, GameProfile profile) {
