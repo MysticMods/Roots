@@ -1,0 +1,13 @@
+{
+  "name": "Wild Fire",
+  "icon": "roots:wild_fire",
+  "category": "resources",
+  "read_by_default": true,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "roots:wild_fire",
+      "text": "The elemental grove is an incredible source of power. One manifestation of that is wild fire.$(br2)$(info) This fire does no harm to players or peaceful entities but hostile entities killed by wild fire are treated as though killed by a player with Fortune II."
+    }
+  ]
+}
