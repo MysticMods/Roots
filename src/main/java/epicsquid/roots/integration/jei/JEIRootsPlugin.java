@@ -1,5 +1,6 @@
 package epicsquid.roots.integration.jei;
 
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.config.MossConfig;
 import epicsquid.roots.init.ModBlocks;
@@ -29,6 +30,8 @@ import epicsquid.roots.integration.jei.summon.SummonCreaturesCategory;
 import epicsquid.roots.integration.jei.summon.SummonCreaturesWrapper;
 import epicsquid.roots.integration.jei.transmutation.TransmutationCategory;
 import epicsquid.roots.integration.jei.transmutation.TransmutationWrapper;
+import epicsquid.roots.modifiers.Modifier;
+import epicsquid.roots.modifiers.ModifierRegistry;
 import epicsquid.roots.recipe.*;
 import epicsquid.roots.ritual.RitualBase;
 import epicsquid.roots.ritual.RitualRegistry;
@@ -53,6 +56,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.*;
@@ -300,9 +305,25 @@ public class JEIRootsPlugin implements IModPlugin {
       return ISubtypeRegistry.ISubtypeInterpreter.NONE;
     };
 
+    ISubtypeRegistry.ISubtypeInterpreter modifierInterpreter = itemStack -> {
+      Item stackItem = itemStack.getItem();
+      if (stackItem != ModItems.spell_modifier) {
+        return ISubtypeRegistry.ISubtypeInterpreter.NONE;
+      }
+      NBTTagCompound tag = ItemUtil.getOrCreateTag(itemStack);
+      if (tag.hasKey("modifier")) {
+        Modifier mod = ModifierRegistry.get(new ResourceLocation(tag.getString("modifier")));
+        if (mod != null) {
+        return mod.getIdentifier();
+        }
+      }
+      return ISubtypeRegistry.ISubtypeInterpreter.NONE;
+    };
+
     subtypeRegistry.registerSubtypeInterpreter(ModItems.spell_dust, spellInterpreter);
     subtypeRegistry.registerSubtypeInterpreter(ModItems.spell_icon, spellInterpreter);
     subtypeRegistry.registerSubtypeInterpreter(ModItems.staff, spellInterpreter);
+    subtypeRegistry.registerSubtypeInterpreter(ModItems.spell_modifier, modifierInterpreter);
   }
 
   public static IJeiRuntime runtime = null;

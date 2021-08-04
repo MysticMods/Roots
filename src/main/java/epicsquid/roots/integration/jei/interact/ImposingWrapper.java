@@ -2,6 +2,7 @@ package epicsquid.roots.integration.jei.interact;
 
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
+import epicsquid.roots.modifiers.Modifier;
 import epicsquid.roots.spell.SpellBase;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 public class ImposingWrapper implements IRecipeWrapper {
   public static ItemStack imposer = ItemStack.EMPTY;
   public static List<List<ItemStack>> knives = null;
+  public final List<ItemStack> modifiers;
 
   public final SpellBase recipe;
 
@@ -28,12 +30,13 @@ public class ImposingWrapper implements IRecipeWrapper {
     if (knives == null) {
       knives = Collections.singletonList(ModItems.knives.stream().map(ItemStack::new).collect(Collectors.toList()));
     }
+    modifiers = recipe.getModifiers().stream().map(Modifier::getModifierStack).collect(Collectors.toList());
   }
 
   @Override
   public void getIngredients(IIngredients ingredients) {
     ingredients.setInputLists(VanillaTypes.ITEM, knives);
-    ingredients.setOutputLists(VanillaTypes.ITEM, Arrays.asList(Collections.singletonList(recipe.getStaff()), Collections.singletonList(imposer)));
+    ingredients.setOutputLists(VanillaTypes.ITEM, Arrays.asList(Collections.singletonList(recipe.getStaff()), Collections.singletonList(imposer), modifiers));
   }
 
   @Override

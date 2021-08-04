@@ -51,7 +51,7 @@ public class ModItems {
   public static Item moonglow_seed, pereskia_bulb, spirit_herb_seed, wildewheet_seed, cloud_berry, infernal_bulb,
       stalicripe, dewgonia, wildroot;
 
-  public static Item ritual_healing_aura, ritual_heavy_storms, ritual_divine_protection, ritual_fire_storm, ritual_spreading_forest, ritual_windwall, ritual_warding_protection, ritual_germination, ritual_purity, ritual_frost_lands, ritual_animal_harvest, ritual_summon_creatures, ritual_wildroot_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation, ritual_gathering, ritual_grove_supplication, spell_icon;
+  public static Item ritual_healing_aura, ritual_heavy_storms, ritual_divine_protection, ritual_fire_storm, ritual_spreading_forest, ritual_windwall, ritual_warding_protection, ritual_germination, ritual_purity, ritual_frost_lands, ritual_animal_harvest, ritual_summon_creatures, ritual_wildroot_growth, ritual_overgrowth, ritual_flower_growth, ritual_transmutation, ritual_gathering, ritual_grove_supplication, spell_icon, spell_modifier;
 
   public static Item creative_pouch, fey_fire;
 
@@ -223,6 +223,7 @@ public class ModItems {
     event.addItem(ritual_gathering = new ItemBase("ritual_gathering").setCreativeTab(null));
     event.addItem(ritual_grove_supplication = new ItemBase("ritual_grove_supplication").setCreativeTab(null));
     event.addItem(spell_icon = new ItemSpellIcon("spell_icon").setCreativeTab(Roots.tab));
+    event.addItem(spell_modifier = new ItemSpellModifier("spell_modifier").setCreativeTab(Roots.tab));
 
     event.addItem(fey_fire = new ItemBase("fey_fire").setCreativeTab(null));
 

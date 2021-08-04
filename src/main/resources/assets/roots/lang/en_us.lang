@@ -160,7 +160,10 @@ roots.tooltip.modifier.specific_increased_cost=Increases cost of %s by %s.
 roots.tooltip.modifier.specific_decreased_cost=Decreases cost of %s by %s.
 roots.tooltip.modifier.enabled=Enabled.
 roots.tooltip.modifier.disabled=Disabled.
-
+roots.tooltip.modifier.spell_name=Spell: %s
+roots.tooltip.modifier.herb_name=Herb: %s
+roots.tooltip.modifier.conflicts=Conflicts with: %s
+roots.tooltip.modifier.costs=Costs
 roots.info.staff.slot_and_spell=Selected Slot (%d) has spell: %s
 roots.info.staff.no_slots=Your staff has no room for new spells!
 roots.info.staff.empty_slot=That staff slot is already empty.
