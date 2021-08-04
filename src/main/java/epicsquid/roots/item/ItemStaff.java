@@ -4,6 +4,7 @@ import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.EventManager;
 import epicsquid.roots.spell.SpellBase;
+import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.DustSpellStorage;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
@@ -14,15 +15,13 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -39,6 +38,8 @@ public class ItemStaff extends ItemBase {
   public ItemStaff(String name) {
     super(name);
     setMaxStackSize(1);
+    this.hasSubtypes = true;
+    this.setHasSubtypes(true);
   }
 
   @Override
@@ -312,5 +313,18 @@ public class ItemStaff extends ItemBase {
     }
 
     return displayName;
+  }
+
+  @Override
+  public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
+    if (tab == this.getCreativeTab()) {
+      subItems.add(new ItemStack(this));
+      for (SpellBase entry : SpellRegistry.spellRegistry.values()) {
+        if (entry.isDisabled()) {
+          continue;
+        }
+        subItems.add(entry.getStaff());
+      }
+    }
   }
 }
