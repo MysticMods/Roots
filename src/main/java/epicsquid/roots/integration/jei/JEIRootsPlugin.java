@@ -84,6 +84,7 @@ public class JEIRootsPlugin implements IModPlugin {
   public static final String RIGHT_CLICK_BLOCK = Roots.MODID + ".right_click_block";
   public static final String PYRE_LIGHT = Roots.MODID + ".pyre_light";
   public static final String RITUAL_VISUALISE = Roots.MODID + ".ritual_visualise";
+  public static final String SPELL_IMBUING = Roots.MODID + ".spell_imbuing";
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registry) {
@@ -107,7 +108,8 @@ public class JEIRootsPlugin implements IModPlugin {
         new BlockRightClickCategory(helper),
         new SoilCategory(helper),
         new PyreLightCategory(helper),
-        new RitualVisualiseCategory(helper)
+        new RitualVisualiseCategory(helper),
+        new ImbuingCategory(helper)
     );
   }
 
@@ -168,6 +170,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(SoilRecipe.class, SoilWrapper::new, SOIL);
     registry.handleRecipes(PyreLightWrapper.PyreLightRecipe.class, PyreLightWrapper::new, PYRE_LIGHT);
     registry.handleRecipes(RitualVisualiseWrapper.KnifeRecipe.class, RitualVisualiseWrapper::new, RITUAL_VISUALISE);
+    registry.handleRecipes(SpellBase.class, ImbuingWrapper::new, SPELL_IMBUING);
 
     registry.addRecipes(SoilRecipe.recipes, SOIL);
     registry.addRecipes(Collections.singletonList(new RitualVisualiseWrapper.KnifeRecipe()), RITUAL_VISUALISE);
@@ -201,6 +204,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipes(RitualRegistry.ritualRegistry.values(), RITUAL);
     registry.addRecipes(ModRecipes.getFeyCraftingRecipes().values(), FEY_CRAFTING);
     registry.addRecipes(spells, SPELL_MODIFIERS);
+    registry.addRecipes(spells, SPELL_IMBUING);
     registry.addRecipes(ModRecipes.getBarkRecipes(), BARK_CARVING);
     registry.addRecipes(MossRecipe.getRecipeList(), TERRA_MOSS);
     registry.addRecipes(ModRecipes.getSummonCreatureEntries(), SUMMON_CREATURES);
@@ -228,6 +232,8 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(Blocks.TALLGRASS, 1, BlockTallGrass.EnumType.GRASS.getMeta()), BLOCK_BREAK);
     registry.addRecipeCatalyst(new ItemStack(ModItems.terra_spores), RIGHT_CLICK_BLOCK);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.elemental_soil), SOIL);
+    registry.addRecipeCatalyst(new ItemStack(ModItems.gramary), SPELL_IMBUING);
+    registry.addRecipeCatalyst(new ItemStack(ModBlocks.imbuer), SPELL_IMBUING);
 
     for (Item knife : ModItems.knives) {
       ItemStack k = new ItemStack(knife);
