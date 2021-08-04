@@ -1,13 +1,16 @@
 package epicsquid.roots.modifiers;
 
+import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.api.Herb;
+import epicsquid.roots.init.ModItems;
 import epicsquid.roots.properties.Property;
 import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.util.types.RegistryItem;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.*;
@@ -47,6 +50,17 @@ public class Modifier extends RegistryItem implements IModifier {
   @Override
   public ItemStack getStack() {
     return core.getStack();
+  }
+
+  private ItemStack modifierStack = ItemStack.EMPTY;
+
+  public ItemStack getModifierStack () {
+    if (modifierStack.isEmpty()) {
+      modifierStack = new ItemStack(ModItems.spell_modifier);
+      NBTTagCompound tag = ItemUtil.getOrCreateTag(modifierStack);
+      tag.setString("modifier", this.getRegistryName().toString());
+    }
+    return modifierStack;
   }
 
   @Override

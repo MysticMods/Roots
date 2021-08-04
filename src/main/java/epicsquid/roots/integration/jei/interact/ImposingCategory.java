@@ -17,7 +17,7 @@ public class ImposingCategory implements IRecipeCategory<ImposingWrapper> {
   private final IDrawable background;
 
   public ImposingCategory(IGuiHelper helper) {
-    this.background = helper.createDrawable(new ResourceLocation(Roots.MODID, "textures/gui/jei/spell_imposing.png"), 0, 0, 55, 43);
+    this.background = helper.createDrawable(new ResourceLocation(Roots.MODID, "textures/gui/jei/spell_imposing.png"), 0, 0, 90, 43);
   }
 
   @Override
@@ -49,5 +49,7 @@ public class ImposingCategory implements IRecipeCategory<ImposingWrapper> {
     group.set(1, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
     group.init(2, false, 36, 23);
     group.set(2, ingredients.getOutputs(VanillaTypes.ITEM).get(1));
+    group.init(3, false, 71, 13);
+    group.set(3, ingredients.getOutputs(VanillaTypes.ITEM).get(2));
   }
 }
