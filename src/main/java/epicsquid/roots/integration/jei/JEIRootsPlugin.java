@@ -1,7 +1,6 @@
 package epicsquid.roots.integration.jei;
 
 import epicsquid.roots.Roots;
-import epicsquid.roots.config.ElementalSoilConfig;
 import epicsquid.roots.config.MossConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
@@ -37,7 +36,9 @@ import epicsquid.roots.spell.SpellBase;
 import epicsquid.roots.spell.SpellChrysopoeia;
 import epicsquid.roots.spell.SpellRegistry;
 import epicsquid.roots.spell.info.SpellDustInfo;
+import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.DustSpellStorage;
+import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.tileentity.TileEntityPyre;
 import epicsquid.roots.util.RitualUtil;
 import mezz.jei.api.*;
@@ -49,12 +50,9 @@ import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 import java.util.*;
@@ -85,6 +83,7 @@ public class JEIRootsPlugin implements IModPlugin {
   public static final String PYRE_LIGHT = Roots.MODID + ".pyre_light";
   public static final String RITUAL_VISUALISE = Roots.MODID + ".ritual_visualise";
   public static final String SPELL_IMBUING = Roots.MODID + ".spell_imbuing";
+  public static final String SPELL_IMPOSING = Roots.MODID + ".spell_imposing";
 
   @Override
   public void registerCategories(IRecipeCategoryRegistration registry) {
@@ -109,7 +108,8 @@ public class JEIRootsPlugin implements IModPlugin {
         new SoilCategory(helper),
         new PyreLightCategory(helper),
         new RitualVisualiseCategory(helper),
-        new ImbuingCategory(helper)
+        new ImbuingCategory(helper),
+        new ImposingCategory(helper)
     );
   }
 
@@ -171,6 +171,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.handleRecipes(PyreLightWrapper.PyreLightRecipe.class, PyreLightWrapper::new, PYRE_LIGHT);
     registry.handleRecipes(RitualVisualiseWrapper.KnifeRecipe.class, RitualVisualiseWrapper::new, RITUAL_VISUALISE);
     registry.handleRecipes(SpellBase.class, ImbuingWrapper::new, SPELL_IMBUING);
+    registry.handleRecipes(SpellBase.class, ImposingWrapper::new, SPELL_IMPOSING);
 
     registry.addRecipes(SoilRecipe.recipes, SOIL);
     registry.addRecipes(Collections.singletonList(new RitualVisualiseWrapper.KnifeRecipe()), RITUAL_VISUALISE);
@@ -205,6 +206,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipes(ModRecipes.getFeyCraftingRecipes().values(), FEY_CRAFTING);
     registry.addRecipes(spells, SPELL_MODIFIERS);
     registry.addRecipes(spells, SPELL_IMBUING);
+    registry.addRecipes(spells, SPELL_IMPOSING);
     registry.addRecipes(ModRecipes.getBarkRecipes(), BARK_CARVING);
     registry.addRecipes(MossRecipe.getRecipeList(), TERRA_MOSS);
     registry.addRecipes(ModRecipes.getSummonCreatureEntries(), SUMMON_CREATURES);
@@ -234,6 +236,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.elemental_soil), SOIL);
     registry.addRecipeCatalyst(new ItemStack(ModItems.gramary), SPELL_IMBUING);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.imbuer), SPELL_IMBUING);
+    registry.addRecipeCatalyst(new ItemStack(ModItems.staff), SPELL_IMPOSING);
 
     for (Item knife : ModItems.knives) {
       ItemStack k = new ItemStack(knife);
@@ -254,6 +257,7 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModItems.staff), SPELL_COSTS);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.imbuer), SPELL_MODIFIERS);
     registry.addRecipeCatalyst(new ItemStack(ModItems.reliquary), LOOT);
+    registry.addRecipeCatalyst(new ItemStack(ModBlocks.imposer), SPELL_IMPOSING);
 
     ItemStack spellDust = new ItemStack(ModItems.spell_dust);
     DustSpellStorage.fromStack(spellDust).setSpellToSlot(SpellChrysopoeia.instance);
@@ -279,9 +283,16 @@ public class JEIRootsPlugin implements IModPlugin {
   public void registerItemSubtypes(ISubtypeRegistry subtypeRegistry) {
     ISubtypeRegistry.ISubtypeInterpreter spellInterpreter = itemStack -> {
       Item stackItem = itemStack.getItem();
-      if (stackItem != ModItems.spell_dust && stackItem != ModItems.spell_icon) return ISubtypeRegistry.ISubtypeInterpreter.NONE;
-      SpellDustInfo info = DustSpellStorage.fromStack(itemStack).getSelectedInfo();
-      SpellBase spell = info == null ? null : info.getSpell();
+      if (stackItem != ModItems.spell_dust && stackItem != ModItems.spell_icon && stackItem != ModItems.staff)
+        return ISubtypeRegistry.ISubtypeInterpreter.NONE;
+      SpellBase spell;
+      if (stackItem == ModItems.staff) {
+        StaffSpellInfo info = StaffSpellStorage.fromStack(itemStack).getSelectedInfo();
+        spell = info == null ? null : info.getSpell();
+      } else {
+        SpellDustInfo info = DustSpellStorage.fromStack(itemStack).getSelectedInfo();
+        spell = info == null ? null : info.getSpell();
+      }
       if (spell != null) {
         return spell.getName();
       }
@@ -291,6 +302,7 @@ public class JEIRootsPlugin implements IModPlugin {
 
     subtypeRegistry.registerSubtypeInterpreter(ModItems.spell_dust, spellInterpreter);
     subtypeRegistry.registerSubtypeInterpreter(ModItems.spell_icon, spellInterpreter);
+    subtypeRegistry.registerSubtypeInterpreter(ModItems.staff, spellInterpreter);
   }
 
   public static IJeiRuntime runtime = null;

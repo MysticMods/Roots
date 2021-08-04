@@ -41,6 +41,9 @@ public class ItemSpellDust extends ItemBase {
   public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
     if (tab == this.getCreativeTab()) {
       for (SpellBase entry : SpellRegistry.spellRegistry.values()) {
+        if (entry.isDisabled()) {
+          continue;
+        }
         subItems.add(entry.getResult());
       }
     }

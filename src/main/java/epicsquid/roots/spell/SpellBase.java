@@ -19,6 +19,7 @@ import epicsquid.roots.properties.PropertyTable;
 import epicsquid.roots.recipe.IRootsRecipe;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.DustSpellStorage;
+import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import epicsquid.roots.tileentity.TileEntityMortar;
 import epicsquid.roots.util.ClientHerbUtil;
 import epicsquid.roots.util.ServerHerbUtil;
@@ -453,6 +454,7 @@ public abstract class SpellBase extends RegistryItem {
 
   private ItemStack result = null;
   private ItemStack icon = null;
+  private ItemStack staff = null;
 
   public ItemStack getResult() {
     if (result == null) {
@@ -460,6 +462,14 @@ public abstract class SpellBase extends RegistryItem {
       DustSpellStorage.fromStack(result).setSpellToSlot(this);
     }
     return result;
+  }
+
+  public ItemStack getStaff () {
+    if (staff == null) {
+      staff = new ItemStack(ModItems.staff);
+      StaffSpellStorage.fromStack(staff).setSpellToSlot(1, StaffSpellInfo.fromSpell(this, false));
+    }
+    return staff;
   }
 
   public ItemStack getIcon() {
