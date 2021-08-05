@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "A companion to ${l:spells/spell_saturate)Saturate$(), Desaturate converts hunger shanks into direct healing, although with a slightly lossier ratio than waiting for natural recovery to occur.$(br2)Modifiers can increase the ratio, or redirect the excess energies to affect the world around you."
+      "text": "A companion to $(l:spells/spell_saturate)Saturate$(), Desaturate converts hunger shanks into direct healing, although with a slightly lossier ratio than waiting for natural recovery to occur.$(br2)Modifiers can increase the ratio, or redirect the excess energies to affect the world around you."
     },
     {
       "type": "spell_template",
