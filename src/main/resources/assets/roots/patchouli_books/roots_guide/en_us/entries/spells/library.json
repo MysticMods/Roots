@@ -7,7 +7,33 @@
   "pages": [
     {
       "type": "text",
-      "text": "The creation and management of spells is be a complicated system to understand, and divided into multiple chapters.$(li)$(l:spells/introduction)The first introduction basic concepts, including imbuing.$()$(li)$(l:spells/introduction2)The second introduction covers the mechanics of imposing modifiers$()$(li)$(l:spells/modifiers)The functional uses of modifiers and spells$()$(li)This entry mechanics of the spell library and its uses$()."
+      "text": "The creation and management of spells is be a complicated system to understand, and divided into multiple chapters.$(li)$(l:spells/introduction)The first introduction basic concepts, including imbuing.$()$(li)$(l:spells/introduction2)The second introduction covers the mechanics of imposing modifiers$()$(li)$(l:spells/modifiers)The functional uses of modifiers and spells$()$(li)This entry covers the mechanics of the spell library and its uses$()."
+    },
+    {
+      "type": "text",
+      "text": "As a concept, the library is your combined knowledge of spells and modifiers.$(br2)You add to your knowledge by $(l:spells/introduction#imbuing)imbuing$() spell dust into a $(l:crafting/gramary)gramary$(), or by opening someone else's staff into the library interface.(br2)You can add modifier knowledge by $(l:spells/introduction2)imposing modifiers$() onto specific spells.$(br2)$(info) The interface for interacting with your known spells is also called the spell library."
+    },
+    {
+      "type": "text",
+      "title": "Spell Library Interface",
+      "text": "The spell library is accessed using a $(l:crafting/staff)staff$(). Simply hold the staff in your hand and then press the associated keybind for the library: $(k:roots.keybinds.spell_library).$(br2)Once opened, you will see that it is divided into two sections: the left side is your currently held staff, while the right side consists of a listing of every spell that you know.$(br2)$(info) Opening a staff that contains spells you don't know will add these (and their modifiers) to your library."
+    },
+    {
+      "type": "image",
+      "title": "Spell Library",
+      "images": ["roots:textures/gui/patchouli/spell_library.png"],
+      "text": "Hovering over a spell will also show you which modifiers have been $(l:spells/introduction2)imposed$()."
+    },
+    {
+      "type": "text",
+      "title": "Spell Library Usage",
+      "text": ""
+    },
+    {
+      "type": "image",
+      "title": "Staff Interface",
+      "images": ["roots:textures/gui/patchouli/spell_library_staff.png"],
+      "text": "$(bold)Alt-Click$() to access staff-specific modifiers for that spell."
     }
   ]
 }
