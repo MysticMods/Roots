@@ -17,13 +17,15 @@ public class DamageSourceIndirectThaumcraftEntity extends EntityDamageSourceIndi
 	}
 
 	
-	public DamageSource setFireDamage()
+	@Override
+  public DamageSource setFireDamage()
     {
         this.fireDamage = true;
         return this;
     }
 	
-	public DamageSource setDamageBypassesArmor()
+	@Override
+  public DamageSource setDamageBypassesArmor()
     {
         this.isUnblockable = true;
         this.hungerDamage = 0.0F;

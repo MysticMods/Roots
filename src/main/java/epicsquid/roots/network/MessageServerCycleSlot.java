@@ -23,6 +23,7 @@ public class MessageServerCycleSlot implements IMessage {
   }
 
   public static class MessageHolder extends ServerMessageHandler<MessageServerCycleSlot> {
+    @Override
     protected void handleMessage(MessageServerCycleSlot message, MessageContext ctx) {
       EntityPlayerMP player = ctx.getServerHandler().player;
       ItemStack stack = player.getHeldItemMainhand();

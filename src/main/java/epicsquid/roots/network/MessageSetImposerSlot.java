@@ -42,6 +42,7 @@ public class MessageSetImposerSlot implements IMessage {
   }
 
   public static class MessageHolder extends ServerMessageHandler<MessageSetImposerSlot> {
+    @Override
     protected void handleMessage(MessageSetImposerSlot message, MessageContext ctx) {
       WorldServer server = DimensionManager.getWorld(message.dimension);
       TileEntity te = server.getTileEntity(message.pos);

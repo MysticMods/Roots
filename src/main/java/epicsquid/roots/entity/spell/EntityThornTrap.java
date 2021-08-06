@@ -48,6 +48,7 @@ public class EntityThornTrap extends EntitySpellModifiable<SpellRoseThorns> {
     }
   }
 
+  @Override
   public void setPlayer(UUID id) {
     this.playerId = id;
   }

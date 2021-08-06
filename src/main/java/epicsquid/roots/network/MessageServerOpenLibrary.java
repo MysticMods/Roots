@@ -20,6 +20,7 @@ public class MessageServerOpenLibrary implements IMessage {
   }
 
   public static class MessageHolder extends ServerMessageHandler<MessageServerOpenLibrary> {
+    @Override
     protected void handleMessage(MessageServerOpenLibrary message, MessageContext ctx) {
       EntityPlayerMP player = ctx.getServerHandler().player;
       player.openGui(Roots.getInstance(), GuiHandler.LIBRARY_ID, player.world, 0, 0, 0);

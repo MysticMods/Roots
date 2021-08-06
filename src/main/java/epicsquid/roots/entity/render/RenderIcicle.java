@@ -22,6 +22,7 @@ public class RenderIcicle extends Render<EntityIcicle> {
     super(renderManagerIn);
   }
 
+  @Override
   public void doRender(EntityIcicle entity, double x, double y, double z, float entityYaw, float partialTicks) {
     this.bindEntityTexture(entity);
     GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
