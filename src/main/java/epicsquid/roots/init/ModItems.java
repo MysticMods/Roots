@@ -8,6 +8,7 @@ import epicsquid.mysticallib.item.ItemFoodBase;
 import epicsquid.mysticallib.item.ItemSeedBase;
 import epicsquid.mysticallib.material.MaterialTypes;
 import epicsquid.roots.Roots;
+import epicsquid.roots.api.CreateToolEvent;
 import epicsquid.roots.item.*;
 import epicsquid.roots.item.living.*;
 import epicsquid.roots.item.materials.Materials;
@@ -143,33 +144,34 @@ public class ModItems {
     event.addItem(spirit_bag = new ItemUndeadDrop("spirit_bag", ItemUndeadDrop.DropType.POUCH)).setCreativeTab(Roots.tab);
     event.addItem(reliquary = new ItemUndeadDrop("reliquary", ItemUndeadDrop.DropType.RELIQUARY)).setCreativeTab(Roots.tab);
 
-    event.addItem(runed_pickaxe = new ItemRunedPickaxe(Materials.RUNIC, "runed_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(runed_axe = new ItemRunedAxe(Materials.RUNIC, "runed_axe").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(runed_shovel = new ItemRunedShovel(Materials.RUNIC, "runed_shovel").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(runed_hoe = new ItemRunedHoe(Materials.RUNIC, "runed_hoe").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(runed_sword = new ItemRunedSword(Materials.RUNIC, "runed_sword").setCreativeTab(Roots.tab).setMaxStackSize(1));
+
+    event.addItem(runed_pickaxe = CreateToolEvent.createTool("runed_pickaxe", () -> new ItemRunedPickaxe(Materials.RUNIC, "runed_pickaxe")).setMaxStackSize(1).setCreativeTab(Roots.tab));
+    event.addItem(runed_axe = CreateToolEvent.createTool("runed_axe", () -> new ItemRunedAxe(Materials.RUNIC, "runed_axe")).setMaxStackSize(1).setCreativeTab(Roots.tab));
+    event.addItem(runed_shovel = CreateToolEvent.createTool("runed_shovel", () -> new ItemRunedShovel(Materials.RUNIC, "runed_shovel")).setMaxStackSize(1).setCreativeTab(Roots.tab));
+    event.addItem(runed_hoe = CreateToolEvent.createTool("runed_hoe", () -> new ItemRunedHoe(Materials.RUNIC, "runed_hoe")).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(runed_sword = CreateToolEvent.createTool("runed_sword", () -> new ItemRunedSword(Materials.RUNIC, "runed_sword")).setCreativeTab(Roots.tab).setMaxStackSize(1));
 
     MaterialTypes.addMaterial("runed", Materials.RUNIC, null, Materials.RUNIC.getAttackDamage() - 4, -1.3f);
     event.addItem(runed_dagger = new ItemRunedKnife("runed_dagger", Materials.RUNIC).setCreativeTab(Roots.tab).setMaxStackSize(1));
 
-    event.addItem(terrastone_pickaxe = new ItemTerrastonePickaxe(Materials.TERRASTONE, "terrastone_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(terrastone_axe = new ItemTerrastoneAxe(Materials.TERRASTONE, "terrastone_axe").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(terrastone_shovel = new ItemTerrastoneShovel(Materials.TERRASTONE, "terrastone_shovel").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(terrastone_hoe = new ItemTerrastoneHoe(Materials.TERRASTONE, "terrastone_hoe").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(terrastone_sword = new ItemTerrastoneSword(Materials.TERRASTONE, "terrastone_sword").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(terrastone_pickaxe = CreateToolEvent.createTool("terrastone_pickaxe", () -> new ItemTerrastonePickaxe(Materials.TERRASTONE, "terrastone_pickaxe")).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(terrastone_axe = CreateToolEvent.createTool("terrastone_axe", () -> new ItemTerrastoneAxe(Materials.TERRASTONE, "terrastone_axe")).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(terrastone_shovel = CreateToolEvent.createTool("terrastone_shovel", () -> new ItemTerrastoneShovel(Materials.TERRASTONE, "terrastone_shovel")).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(terrastone_hoe = CreateToolEvent.createTool("terrastone_hoe", () -> new ItemTerrastoneHoe(Materials.TERRASTONE, "terrastone_hoe")).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(terrastone_sword = CreateToolEvent.createTool("terrastone_sword", () -> new ItemTerrastoneSword(Materials.TERRASTONE, "terrastone_sword")).setCreativeTab(Roots.tab).setMaxStackSize(1));
     //event.addItem(terrastone_knife = new ItemMageKnife("terrastone_knife", Materials.TERRASTONE).setCreativeTab(Roots.tab).setMaxStackSize(1));
 
-    event.addItem(living_pickaxe = new ItemLivingPickaxe(Materials.LIVING, "living_pickaxe").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(living_axe = new ItemLivingAxe(Materials.LIVING, "living_axe").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(living_shovel = new ItemLivingShovel(Materials.LIVING, "living_shovel").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(living_hoe = new ItemLivingHoe(Materials.LIVING, "living_hoe").setCreativeTab(Roots.tab).setMaxStackSize(1));
-    event.addItem(living_sword = new ItemLivingSword(Materials.LIVING, "living_sword").setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(living_pickaxe = CreateToolEvent.createTool("living_pickaxe", () -> new ItemLivingPickaxe(Materials.LIVING, "living_pickaxe")).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(living_axe = CreateToolEvent.createTool("living_axe", () -> new ItemLivingAxe(Materials.LIVING, "living_axe")).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(living_shovel = CreateToolEvent.createTool("living_shovel", () -> new ItemLivingShovel(Materials.LIVING, "living_shovel")).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(living_hoe = CreateToolEvent.createTool("living_hoe", () -> new ItemLivingHoe(Materials.LIVING, "living_hoe")).setCreativeTab(Roots.tab).setMaxStackSize(1));
+    event.addItem(living_sword = CreateToolEvent.createTool("living_sword", () -> new ItemLivingSword(Materials.LIVING, "living_sword")).setCreativeTab(Roots.tab).setMaxStackSize(1));
 
-    event.addItem(living_arrow = new ItemLivingArrow("living_arrow").setCreativeTab(Roots.tab));
-    event.addItem(wooden_shears = new ItemWoodenShears("wooden_shears").setCreativeTab(Roots.tab));
-    event.addItem(firestarter = new ItemFireStarter("fire_starter").setCreativeTab(Roots.tab));
-    event.addItem(wildwood_quiver = new ItemQuiver("wildwood_quiver").setCreativeTab(Roots.tab));
-    event.addItem(wildwood_bow = new ItemWildwoodBow("wildwood_bow").setCreativeTab(Roots.tab));
+    event.addItem(living_arrow = CreateToolEvent.createTool("living_arrow", () -> new ItemLivingArrow("living_arrow").setCreativeTab(Roots.tab)));
+    event.addItem(wooden_shears = CreateToolEvent.createTool("wooden_shears", () -> new ItemWoodenShears("wooden_shears").setCreativeTab(Roots.tab)));
+    event.addItem(firestarter = CreateToolEvent.createTool("fire_starter", () -> new ItemFireStarter("fire_starter").setCreativeTab(Roots.tab)));
+    event.addItem(wildwood_quiver = CreateToolEvent.createTool("wildwood_quiver", () -> new ItemQuiver("wildwood_quiver").setCreativeTab(Roots.tab)));
+    event.addItem(wildwood_bow = CreateToolEvent.createTool("wildwood_bow", () -> new ItemWildwoodBow("wildwood_bow").setCreativeTab(Roots.tab)));
 
     event.addItem(sylvan_helmet = new ItemSylvanArmor(sylvanArmorMaterial, EntityEquipmentSlot.HEAD, "sylvan_helmet").setMaxStackSize(1));
     event.addItem(sylvan_chestplate = new ItemSylvanArmor(sylvanArmorMaterial, EntityEquipmentSlot.CHEST, "sylvan_chestplate").setMaxStackSize(1));
@@ -180,7 +182,7 @@ public class ModItems {
     event.addItem(wildwood_leggings = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.LEGS, "wildwood_leggings").setMaxStackSize(1));
     event.addItem(wildwood_boots = new ItemWildwoodArmor(wildwoodArmorMaterial, EntityEquipmentSlot.FEET, "wildwood_boots").setMaxStackSize(1));
 
-    event.addItem(runic_shears = new ItemRunicShears("runic_shears").setCreativeTab(Roots.tab));
+    event.addItem(runic_shears = CreateToolEvent.createTool("runic_shears", () -> new ItemRunicShears("runic_shears").setCreativeTab(Roots.tab)));
 
     MaterialTypes.addMaterial("vanilla:wood", ToolMaterial.WOOD, null, ToolMaterial.WOOD.getAttackDamage(), -1.7f);
     MaterialTypes.addMaterial("vanilla:stone", ToolMaterial.STONE, null, ToolMaterial.STONE.getAttackDamage(), -1.7f);
@@ -188,11 +190,11 @@ public class ModItems {
     MaterialTypes.addMaterial("vanilla:diamond", ToolMaterial.DIAMOND, ItemArmor.ArmorMaterial.DIAMOND, ToolMaterial.DIAMOND.getAttackDamage(), -1.0f);
     MaterialTypes.addMaterial("vanilla:gold", ToolMaterial.GOLD, ItemArmor.ArmorMaterial.GOLD, ToolMaterial.GOLD.getAttackDamage(), -1.0f);
 
-    event.addItem(wood_knife = new ItemDruidKnife("wood_knife", ToolMaterial.WOOD).setCreativeTab(Roots.tab));
-    event.addItem(stone_knife = new ItemDruidKnife("stone_knife", ToolMaterial.STONE).setCreativeTab(Roots.tab));
-    event.addItem(iron_knife = new ItemDruidKnife("iron_knife", ToolMaterial.IRON).setCreativeTab(Roots.tab));
-    event.addItem(diamond_knife = new ItemDruidKnife("diamond_knife", ToolMaterial.DIAMOND).setCreativeTab(Roots.tab));
-    event.addItem(gold_knife = new ItemDruidKnife("gold_knife", ToolMaterial.GOLD).setCreativeTab(Roots.tab));
+    event.addItem(wood_knife = CreateToolEvent.createTool("wood_knife", () -> new ItemDruidKnife("wood_knife", ToolMaterial.WOOD).setCreativeTab(Roots.tab)));
+    event.addItem(stone_knife = CreateToolEvent.createTool("stone_knife", () -> new ItemDruidKnife("stone_knife", ToolMaterial.STONE).setCreativeTab(Roots.tab)));
+    event.addItem(iron_knife = CreateToolEvent.createTool("iron_knife", () -> new ItemDruidKnife("iron_knife", ToolMaterial.IRON).setCreativeTab(Roots.tab)));
+    event.addItem(diamond_knife = CreateToolEvent.createTool("diamond_knife", () -> new ItemDruidKnife("diamond_knife", ToolMaterial.DIAMOND).setCreativeTab(Roots.tab)));
+    event.addItem(gold_knife = CreateToolEvent.createTool("gold_knife", () -> new ItemDruidKnife("gold_knife", ToolMaterial.GOLD).setCreativeTab(Roots.tab)));
 
     event.addItem(cooked_pereskia = new ItemFoodBase("cooked_pereskia", 5, false).setCreativeTab(Roots.tab));
     event.addItem(wildroot_stew = new ItemBowlBase("wildroot_stew", 6, false).setCreativeTab(Roots.tab));
