@@ -46,6 +46,7 @@ public enum ModifierCores implements IModifierCore {
     this.registryName = herb;
   }
 
+  @Override
   public Herb getHerb() {
     return this.herb.get();
   }

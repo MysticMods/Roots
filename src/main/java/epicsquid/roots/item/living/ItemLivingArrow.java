@@ -17,6 +17,7 @@ public class ItemLivingArrow extends ItemArrowBase {
   public ItemLivingArrow(String name) {
     super(name);
     BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, new BehaviorProjectileDispense() {
+      @Override
       protected IProjectile getProjectileEntity(World worldIn, IPosition position, ItemStack stackIn) {
         EntityLivingArrow entitytippedarrow = new EntityLivingArrow(worldIn, position.getX(), position.getY(), position.getZ());
         entitytippedarrow.pickupStatus = EntityArrow.PickupStatus.ALLOWED;

@@ -21,6 +21,7 @@ public class MessageResetLibraryScreen implements IMessage {
   }
 
   public static class MessageHolder extends ServerMessageHandler<MessageResetLibraryScreen> {
+    @Override
     protected void handleMessage(MessageResetLibraryScreen message, MessageContext ctx) {
       Container container = ctx.getServerHandler().player.openContainer;
       if (container instanceof ContainerLibrary) {

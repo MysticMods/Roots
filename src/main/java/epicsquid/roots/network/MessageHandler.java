@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 public abstract class MessageHandler<T extends IMessage> implements IMessageHandler<T, IMessage> {
   protected static boolean DEBUG = true;
 
+  @Override
   public abstract IMessage onMessage(final T message, final MessageContext ctx);
 
   protected void handleMessageInternal(final T message, final MessageContext ctx) {

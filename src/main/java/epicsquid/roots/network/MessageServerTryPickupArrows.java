@@ -19,6 +19,7 @@ public class MessageServerTryPickupArrows implements IMessage {
   }
 
   public static class MessageHolder extends ServerMessageHandler<MessageServerTryPickupArrows> {
+    @Override
     protected void handleMessage(MessageServerTryPickupArrows message, MessageContext ctx) {
       EntityPlayerMP player = ctx.getServerHandler().player;
       ItemQuiver.tryPickupArrows(player);

@@ -35,6 +35,7 @@ public class MessageServerModifier implements IMessage {
   }
 
   public static class MessageHolder extends ServerMessageHandler<MessageServerModifier> {
+    @Override
     protected void handleMessage(MessageServerModifier message, MessageContext ctx) {
       EntityPlayerMP player = ctx.getServerHandler().player;
       if (player.openContainer instanceof IModifierContainer) {

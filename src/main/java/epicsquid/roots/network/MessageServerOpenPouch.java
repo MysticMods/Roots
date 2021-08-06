@@ -24,6 +24,7 @@ public class MessageServerOpenPouch implements IMessage {
   }
 
   public static class MessageHolder extends ServerMessageHandler<MessageServerOpenPouch> {
+    @Override
     protected void handleMessage(MessageServerOpenPouch message, MessageContext ctx) {
       EntityPlayerMP player = ctx.getServerHandler().player;
       ItemStack pouch = ServerHerbUtil.getFirstPouch(player);

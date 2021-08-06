@@ -21,6 +21,7 @@ public class MessageServerOpenQuiver implements IMessage {
   }
 
   public static class MessageHolder extends ServerMessageHandler<MessageServerOpenQuiver> {
+    @Override
     protected void handleMessage(MessageServerOpenQuiver message, MessageContext ctx) {
       EntityPlayerMP player = ctx.getServerHandler().player;
       ItemStack quiver = QuiverInventoryUtil.getQuiver(player);

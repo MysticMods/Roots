@@ -78,6 +78,7 @@ public class WorldCoordinates implements Comparable
         return this.getDistanceSquared(par1ChunkCoordinates.pos);
     }
 
+    @Override
     public int compareTo(Object par1Obj)
     {
         return this.compareWorldCoordinate((WorldCoordinates)par1Obj);
