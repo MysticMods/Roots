@@ -21,6 +21,10 @@ public class CreateToolEvent extends Event {
     return true;
   }
 
+  public String getRegistryName() {
+    return registry_name;
+  }
+
   public Item getItemResult() {
     if (result == null) {
       result = itemSupplier.get();
