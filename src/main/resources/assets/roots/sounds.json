@@ -137,20 +137,9 @@
   "spell.aqua_bubble": {
     "sounds": [
       {
-        "name": "minecraft:mob/zombie/infect",
-        "pitch": 0.8
-      },
-      {
-        "name": "minecraft:mob/zombie/infect",
-        "pitch": 0.9
-      },
-      {
-        "name": "minecraft:mob/zombie/infect",
-        "pitch": 1.0
-      },
-      {
-        "name": "minecraft:mob/zombie/infect",
-        "pitch": 1.1
+        "name": "roots:aqua_bubble",
+        "pitch": 1,
+        "volume": 0.5
       }
     ],
     "subtitle": "subtitle.roots.spell.aqua_bubble"
