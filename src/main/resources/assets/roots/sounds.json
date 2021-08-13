@@ -1,9 +1,9 @@
 {
   "whirlwind": {
-      "category": "neutral",
-      "sounds": [
-          "roots:whirlwind"
-      ]
+    "category": "neutral",
+    "sounds": [
+      "roots:whirlwind"
+    ]
   },
   "spell.acid_cloud": {
     "sounds": [
@@ -155,6 +155,26 @@
       "minecraft:ui/toast/out"
     ],
     "subtitle": "subtitle.roots.aqua_bubble_alt_end"
+  },
+  "spell.extension": {
+    "sounds": [
+      {
+        "name": "roots:extension",
+        "pitch": 0.5,
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "subtitle.roots.extension"
+  },
+  "spell.augment": {
+    "sounds": [
+      {
+        "name": "roots:extension",
+        "pitch": 1.2,
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "subtitle.roots.augment"
   },
   "spell.life_drain": {
     "sounds": [
