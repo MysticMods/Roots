@@ -9,6 +9,7 @@ import epicsquid.roots.client.Keybinds;
 import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.handler.PouchHandler;
 import epicsquid.roots.init.HerbRegistry;
+import epicsquid.roots.init.ModItems;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -160,7 +161,7 @@ public class ItemPouch extends ItemBase implements IItemPouch {
 
     if (getPouchType(stack) != PouchType.FEY) {
       NBTTagCompound tag = ItemUtil.getOrCreateTag(stack);
-      EnumDyeColor color = EnumDyeColor.BROWN;
+      EnumDyeColor color = this == ModItems.fey_pouch ? EnumDyeColor.BLUE : EnumDyeColor.BROWN;
       if (tag.hasKey("color", Constants.NBT.TAG_INT)) {
         color = EnumDyeColor.byMetadata(tag.getInteger("color"));
       }

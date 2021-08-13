@@ -27,7 +27,7 @@ public class DyeRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRec
       if (inSlot.isEmpty()) {
         continue;
       }
-      if (inSlot.getItem() == ModItems.apothecary_pouch || inSlot.getItem() == ModItems.component_pouch || inSlot.getItem() == ModItems.herb_pouch) {
+      if (inSlot.getItem() == ModItems.apothecary_pouch || inSlot.getItem() == ModItems.component_pouch || inSlot.getItem() == ModItems.herb_pouch || inSlot.getItem() == ModItems.fey_pouch) {
         if (foundPouch) {
           return false;
         }
@@ -51,7 +51,7 @@ public class DyeRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRec
 
     for (int i = 0; i < inv.getSizeInventory(); i++) {
       ItemStack inSlot = inv.getStackInSlot(i);
-      if (inSlot.getItem() == ModItems.component_pouch || inSlot.getItem() == ModItems.apothecary_pouch || inSlot.getItem() == ModItems.herb_pouch) {
+      if (inSlot.getItem() == ModItems.component_pouch || inSlot.getItem() == ModItems.apothecary_pouch || inSlot.getItem() == ModItems.herb_pouch || inSlot.getItem() == ModItems.fey_pouch) {
         pouch = inSlot;
       } else if (DyeUtils.isDye(inSlot)) {
         dye = inSlot;
