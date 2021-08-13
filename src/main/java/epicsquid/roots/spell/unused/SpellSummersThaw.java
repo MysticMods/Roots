@@ -1,3 +1,4 @@
+/*
 package epicsquid.roots.spell.unused;
 
 import epicsquid.mysticallib.network.PacketHandler;
@@ -137,3 +138,4 @@ public class SpellSummersThaw extends SpellBase {
     this.max = properties.get(PROP_MAX_AFFECTED);
   }
 }
+*/
