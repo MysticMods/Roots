@@ -30,6 +30,7 @@ import net.minecraftforge.items.IItemHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Objects;
 
 public class ItemPouch extends ItemBase implements IItemPouch {
   protected PouchType type = PouchType.COMPONENT;
@@ -136,7 +137,7 @@ public class ItemPouch extends ItemBase implements IItemPouch {
     IItemHandler handler = pouchHandler.getHerbs();
     for (int i = 0; i < handler.getSlots(); i++) {
       ItemStack stack = handler.getStackInSlot(i);
-      if (!stack.isEmpty() && HerbRegistry.isHerb(stack.getItem()) && HerbRegistry.getHerbByItem(stack.getItem()).equals(herb)) {
+      if (!stack.isEmpty() && HerbRegistry.isHerb(stack.getItem()) && Objects.equals(HerbRegistry.getHerbByItem(stack.getItem()), herb)) {
         if (!handler.extractItem(i, 1, false).isEmpty()) {
           createData(pouch, herb, 1.0);
           return true;
@@ -159,15 +160,13 @@ public class ItemPouch extends ItemBase implements IItemPouch {
       tooltip.add(TextFormatting.LIGHT_PURPLE + I18n.format("roots.tooltip.refill"));
     }
 
-    if (getPouchType(stack) != PouchType.FEY) {
-      NBTTagCompound tag = ItemUtil.getOrCreateTag(stack);
-      EnumDyeColor color = this == ModItems.fey_pouch ? EnumDyeColor.BLUE : EnumDyeColor.BROWN;
-      if (tag.hasKey("color", Constants.NBT.TAG_INT)) {
-        color = EnumDyeColor.byMetadata(tag.getInteger("color"));
-      }
-      tooltip.add("");
-      tooltip.add(I18n.format("roots.tooltip.color", I18n.format(color.getTranslationKey())));
+    NBTTagCompound tag = ItemUtil.getOrCreateTag(stack);
+    EnumDyeColor color = this == ModItems.fey_pouch ? EnumDyeColor.BLUE : EnumDyeColor.BROWN;
+    if (tag.hasKey("color", Constants.NBT.TAG_INT)) {
+      color = EnumDyeColor.byMetadata(tag.getInteger("color"));
     }
+    tooltip.add("");
+    tooltip.add(I18n.format("roots.tooltip.color", I18n.format(color.getTranslationKey())));
 
     super.addInformation(stack, worldIn, tooltip, flagIn);
   }
