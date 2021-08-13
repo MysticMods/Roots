@@ -80,7 +80,7 @@
     },
     {
       "type": "text",
-      "text": "$(bold)Radius Boost:$() For each growth modifier past the initial of $(modifier:rampant_growth_i)$(), $(modifier:rampant_growth_ii)$() or $(modifier:arms_of_air)$(), the radius of blocks searched is is increased by $(spell:growth_infusion/radius_boost) blocks in all directions. This boost only applies to crops.$(br2)$(bold)Crops:$() With any of $(modifier:rampant_growth_i)$(), $(modifier:rampant_growth_ii)$() or $(modifier:arms_of_air)$() enabled, a random amount of additional crops from 0 up to (but not including) $(spell:growth_infusion/additional_count) are also grown."
+      "text": "$(bold)Radius Boost:$() For each growth modifier past the initial of $(modifier:rampant_growth_i)$(), $(modifier:rampant_growth_ii)$() or $(modifier:arms_of_air)$(), the radius of blocks searched is increased by $(spell:growth_infusion/radius_boost) blocks in all directions. This boost only applies to crops.$(br2)$(bold)Crops:$() With any of $(modifier:rampant_growth_i)$(), $(modifier:rampant_growth_ii)$() or $(modifier:arms_of_air)$() enabled, a random amount of additional crops from 0 up to (but not including) $(spell:growth_infusion/additional_count) are also grown."
     },
     {
       "type": "text",

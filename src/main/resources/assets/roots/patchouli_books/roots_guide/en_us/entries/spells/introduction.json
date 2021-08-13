@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "The creation and management of spells is be a complicated system to understand, and divided into multiple chapters.$(li)This chapter covers basic concepts, including imbuing.$(li)$(l:spells/introduction2)The mechanics of imposing modifiers$()$(li)$(l:spells/modifiers)The functional uses of modifiers and spells$()$(li)$(l:spells/library)The mechanics of the spell library and its uses$()."
+      "text": "The creation and management of spells is a complicated system to understand, and divided into multiple chapters.$(li)This chapter covers basic concepts, including imbuing.$(li)$(l:spells/introduction2)The mechanics of imposing modifiers$()$(li)$(l:spells/modifiers)The functional uses of modifiers and spells$()$(li)$(l:spells/library)The mechanics of the spell library and its uses$()."
     },
     {
       "type": "text",
@@ -21,7 +21,7 @@
       "type": "crafting",
       "title": "Staffs",
       "recipe": "roots:staff",
-      "text": "The primary implement for casting spells is the staff. Simple to craft, it contains five slots, and each of these slots can contain a spell (including multiples of the spell), each with its own modifiers."
+      "text": "The primary implement for casting spells is the staff. Simple to craft, it contains five slots, and each of these slots can contain a spell (including multiples of the same spell), each with its own modifiers."
     },
     {
       "type": "text",
@@ -49,7 +49,7 @@
     {
       "type": "text",
       "title": "Spell Dusts",
-      "text": "Spell dust is created by combining the ingredients mentioned in the relevant entry in a $(l:crafting/mortar_and_pestle)mortar$() and grinding them with the pestle.$(br2)This spell dust contains the raw information needed by your $(l:spells/library)spell library$(), and it can be imbued into your library with a $(l:crafting/gramary)gramary$().$(br2)$(warning) It is not possible to imbue spell dust directly into your staff."
+      "text": "Spell dust is created by combining the ingredients listed in the relevant entry in a $(l:crafting/mortar_and_pestle)mortar$() and grinding them with the pestle.$(br2)This spell dust contains the raw information needed by your $(l:spells/library)spell library$(), and it can be imbued into your library with a $(l:crafting/gramary)gramary$().$(br2)$(warning) It is not possible to imbue spell dust directly into your staff."
     },
     {
       "type": "text",
@@ -59,7 +59,7 @@
     },
     {
       "type": "text",
-      "text": "$(info) Once the spell is imbued, it will be accessible in your $(l:spells/library)spell library$(), and you can immediately use the interface to add it to your staff.$(br2)$(info) Unlike other uses of the $(l:crafting/imbuer)imbuer$(), the gramary will remain inside it once the process it complete. You may remove it by simply right-clicking the imbuer."
+      "text": "$(info) Once the spell is imbued, it will be accessible in your $(l:spells/library)spell library$(), and you can immediately use the interface to add it to your staff.$(br2)$(info) Unlike other uses of the $(l:crafting/imbuer)imbuer$(), the gramary will remain inside it once the process is complete. You may remove it by simply right-clicking the imbuer."
     }
   ]
 }

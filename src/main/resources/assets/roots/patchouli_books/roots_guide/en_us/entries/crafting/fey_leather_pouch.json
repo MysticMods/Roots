@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "An imbued form of the $(l:crafting/herb_pouch)herb pouch$() that utilises the brilliant blue $(l:resources/fey_leather)fey leather$() in its construction. It has enough space to store a stack of each $(cat:herbs)herb$() plus a few non-herb items.$(br2)$(warning) This pouch cannot be dyed.$(br2)$(warning) Mechanics of pouches are more directly explained the $(l:spells/component_pouches)component pouches section on spells$()."
+      "text": "An imbued form of the $(l:crafting/herb_pouch)herb pouch$() that utilises the brilliant blue $(l:resources/fey_leather)fey leather$() in its construction. It has enough space to store a stack of each $(cat:herbs)herb$() plus a few non-herb items.$(br2) $(warning) Mechanics of pouches are more directly explained the $(l:spells/component_pouches)component pouches section on spells$()."
     },
     {
       "type": "fey_crafting_template",

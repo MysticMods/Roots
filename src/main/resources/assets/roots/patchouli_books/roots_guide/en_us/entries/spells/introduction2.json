@@ -7,11 +7,11 @@
   "pages": [
     {
       "type": "text",
-      "text": "The creation and management of spells is be a complicated system to understand, and divided into multiple chapters.$(li)$(l:spells/introduction)The first introduction basic concepts, including imbuing.$()$(li)this chapter covers the mechanics of imposing modifiers$()$(li)$(l:spells/modifiers)The functional uses of modifiers and spells$()$(li)$(l:spells/library)The mechanics of the spell library and its uses$()."
+      "text": "The creation and management of spells is a complicated system to understand, and divided into multiple chapters.$(li)$(l:spells/introduction)The first introduction covers basic concepts, including imbuing.$()$(li)this chapter covers the mechanics of imposing modifiers$()$(li)$(l:spells/modifiers)The functional uses of modifiers and spells$()$(li)$(l:spells/library)The mechanics of the spell library and its uses$()."
     },
     {
       "type": "text",
-      "text": "Spells each have a unique function. This function can be modified or augment with modifiers. This section will discuss the process of applying modifiers using an imposer.$(br2)$(warning) For modifier costs and other functionality, see $(l:spells/modifiers)this entry$().$(br2)$(info) $(l:spells/introduction2#unlock)Unlocking$() modifiers is permanent for all your staffs."
+      "text": "Spells each have a unique function. This function can be modified or augmented with modifiers. This section will discuss the process of applying modifiers using an imposer.$(br2)$(warning) For modifier costs and other functionality, see $(l:spells/modifiers)this entry$().$(br2)$(info) $(l:spells/introduction2#unlock)Unlocking$() modifiers is permanent for all your staffs."
     },
     {
       "type": "crafting",
