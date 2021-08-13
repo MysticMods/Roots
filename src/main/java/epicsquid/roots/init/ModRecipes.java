@@ -1151,7 +1151,6 @@ public class ModRecipes {
     initChrysopoeiaRecipes();
 
     GameRegistry.addSmelting(ModItems.flour, new ItemStack(Items.BREAD), 0.125f);
-    /*    GameRegistry.addSmelting(epicsquid.mysticalworld.init.ModItems.seeds, new ItemStack(epicsquid.mysticalworld.init.ModItems.cooked_seeds), 0.05f);*/ // TODO: Move to Mystical World
     GameRegistry.addSmelting(ModItems.pereskia_bulb, new ItemStack(ModItems.cooked_pereskia), 0.125f);
 
     initCraftingRecipes();
