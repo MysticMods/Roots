@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "This spell takes some of the repetitiveness out of farming.$(br2)With magic, you can automatically harvest and then replant them.$(br2)Modifiers can change this behaviour significantly, growing crops after they're harvested, increase or decrease the radius, or even potentially harvest unseen spirits for loot bags."
+      "text": "This spell takes some of the repetitiveness out of farming.$(br2)With magic, you can harvest automatically and then replant your crops.$(br2)Modifiers can change this behaviour significantly, growing crops after they're harvested, increase or decrease the radius, or even potentially harvest unseen spirits for loot bags."
     },
     {
       "type": "spell_template",

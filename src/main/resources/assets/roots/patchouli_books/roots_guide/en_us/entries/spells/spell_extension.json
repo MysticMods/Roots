@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "By default, this spell will extend your senses, granting you night vision for a period of time.$(br2)With modifiers, you can extend your vision further: high nearby hostile or passive entities (or both), and even specific types of blocks, such as ores or liquids.$(br2)You can even reduce the distance at which entities can detect you."
+      "text": "By default, this spell will extend your senses, granting you night vision for a period of time.$(br2)With modifiers, you can extend your vision further: highlight nearby hostile or passive entities (or both), and even specific types of blocks.$(br2)You can even reduce the distance at which entities can detect you."
     },
     {
       "type": "spell_template",

@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "The creation and management of spells is be a complicated system to understand, and divided into multiple chapters.$(li)$(l:spells/introduction)The first introduction basic concepts, including imbuing.$()$(li)$(l:spells/introduction2)The second introduction covers the mechanics of imposing modifiers$()$(li)$(l:spells/modifiers)The functional uses of modifiers and spells$()$(li)This entry covers the mechanics of the spell library and its uses$()."
+      "text": "The creation and management of spells is a complicated system to understand, and divided into multiple chapters.$(li)$(l:spells/introduction)The first introduction basic concepts, including imbuing.$()$(li)$(l:spells/introduction2)The second introduction covers the mechanics of imposing modifiers$()$(li)$(l:spells/modifiers)The functional uses of modifiers and spells$()$(li)This entry covers the mechanics of the spell library and its uses$()."
     },
     {
       "type": "text",

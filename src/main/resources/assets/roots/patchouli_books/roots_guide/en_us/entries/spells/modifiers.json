@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "The creation and management of spells is be a complicated system to understand, and divided into multiple chapters.$(li)$(l:spells/introduction)The first introduction basic concepts, including imbuing.$()$(li)$(l:spells/introduction2)The second introduction covers the mechanics of imposing modifiers$()$(li)This entry covers the functional uses of modifiers and spells$()$(li)$(l:spells/library)The mechanics of the spell library and its uses$()."
+      "text": "The creation and management of spells is a complicated system to understand, and divided into multiple chapters.$(li)$(l:spells/introduction)The first introduction basic concepts, including imbuing.$()$(li)$(l:spells/introduction2)The second introduction covers the mechanics of imposing modifiers$()$(li)This entry covers the functional uses of modifiers and spells$()$(li)$(l:spells/library)The mechanics of the spell library and its uses$()."
     },
     {
       "type": "text",
@@ -16,11 +16,11 @@
     {
       "type": "text",
       "title": "Conflicts",
-      "text": "$(warning) Not all modifiers can be used together.$(br2)When enabling a modifier, the highlight colour of other modifiers may change to purple.$(br2)This indicates that these modifiers are in conflict, and you cannot enable them.$(br2)$(info) These cannot be enabled until the culprit modifier is disabled."
+      "text": "$(warning) Not all modifiers can be used together.$(br2)When enabling a modifier, the highlight colour of other modifiers may change to purple.$(br2)This indicates that these modifiers are in conflict, and you cannot enable them.$(br2)$(info) These cannot be enabled until the conflicting modifier is disabled."
     },
     {
       "type": "text",
-      "text": "The tooltip of conflicting modifiers will specify what modifier is causing the conflict.$(br2)$(info) As a shortcut, you can hold [Alt] while clicking on a modifier to enable it, disabling any modifiers which conflict.$(br2)Otherwise, you are free to combine modifiers as you see fit, so long as you provide the necessary herbs."
+      "text": "The tooltip of conflicting modifiers will specify which modifier is causing the conflict.$(br2)$(info) As a shortcut, you can hold [Alt] while clicking on a modifier to enable it, disabling any modifiers which conflict.$(br2)Otherwise, you are free to combine modifiers as you see fit, so long as you provide the necessary herbs."
     }
   ]
 }

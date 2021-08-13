@@ -7,7 +7,7 @@
   "pages": [
     {
       "type": "text",
-      "text": "Your body is augmented by one of several modifiers:$(br2)You can increase your reach, speed, luck, strength, slow fall or haste, gain absorption, renew your air supply, teleport items to yourself, or drift through the world as spectral light.$(br2)$(warning) This spell requires enabled modifiers to function."
+      "text": "Your body is augmented by one of several modifiers:$(br2)You can increase your reach, speed, luck, strength, slow fall or haste, gain absorption, renew your air supply, teleport items to yourself, or drift through the world as though spectral.$(br2)$(warning) This spell requires enabled modifiers to function."
     },
     {
       "type": "spell_template",

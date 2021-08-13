@@ -80,7 +80,7 @@
     },
     {
       "type": "text",
-      "text": "$(bold)Poison:$() With the $(modifier:poisoned_fire)$() modifier enabled, targets are also given Poison $(spell:wild_fire/ROMAN/poison_amplifier) for $(spell:wild_fire/SECONDS/poison_duration) seconds.$(br2)$(bold)Levitate:$() With the $(modifier:floating_cinders)$() modifier enabled, targets are also given Levitation I for $(spell:wild_fire/SECONDS/levitate_duration).$(br2)$(bold)Peaceful:$() With the $(modifier:peaceful_flame)$() modifier enabled, non-hostile entities are not damaged by wild fire.$(br2)$(bold)Purple:$() With the $(modifier:purple_flame)$() modifier, your fireball"
+      "text": "$(bold)Poison:$() With the $(modifier:poisoned_fire)$() modifier enabled, targets are also given Poison $(spell:wild_fire/ROMAN/poison_amplifier) for $(spell:wild_fire/SECONDS/poison_duration) seconds.$(br2)$(bold)Levitate:$() With the $(modifier:floating_cinders)$() modifier enabled, targets are also given Levitation I for $(spell:wild_fire/SECONDS/levitate_duration).$(br2)$(bold)Peaceful:$() With the $(modifier:peaceful_flame)$() modifier enabled, non-hostile entities are not damaged by Wildfire.$(br2)$(bold)Purple:$() With the $(modifier:purple_flame)$() modifier, your fireball"
     },
     {
       "type": "text",

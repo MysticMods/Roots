@@ -80,7 +80,7 @@
     },
     {
       "type": "text",
-      "text": "$(bold)Webs:$() With the $(modifier:dewebbing)$() modifier enabled, blocks that match the ore dictionary entry $(bold)$(spell:natures_scythe/web_dictionary) are broken.$(br2)$(bold)Grass:$() With the $(modifier:grass_harvester)$() modifier enabled, blocks that match the ore dictionary entry $(bold)$(spell:natures_scythe/grass_dictionary)$() and $(bold)$(spell:natures_scythe/vine_dictionary)$() are broken.$(br2)$(bold)Mushrooms:$() With the $(modifier:mushroom_harvester)$() modifier enabled, blocks that match the ore dictionary entry $(bold)$(spell:natures_scythe/mushroom_dictionary)$() are broken."
+      "text": "$(bold)Webs:$() With the $(modifier:dewebbing)$() modifier enabled, blocks that match the ore dictionary entry $(bold)$(spell:natures_scythe/web_dictionary)$() are broken.$(br2)$(bold)Grass:$() With the $(modifier:grass_harvester)$() modifier enabled, blocks that match the ore dictionary entry $(bold)$(spell:natures_scythe/grass_dictionary)$() and $(bold)$(spell:natures_scythe/vine_dictionary)$() are broken.$(br2)$(bold)Mushrooms:$() With the $(modifier:mushroom_harvester)$() modifier enabled, blocks that match the ore dictionary entry $(bold)$(spell:natures_scythe/mushroom_dictionary)$() are broken."
     },
     {
       "type": "text",
