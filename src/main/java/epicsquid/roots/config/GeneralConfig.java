@@ -133,7 +133,7 @@ public class GeneralConfig {
   @Config.Ignore
   private static Set<Block> crafterOutputIgnore = null;
 
-  public static Set<Block> getCrafterOutputIgnore () {
+  public static Set<Block> getCrafterOutputIgnore() {
     if (crafterOutputIgnore == null) {
       crafterOutputIgnore = new HashSet<>();
       for (String rl : crafterOutputBlackist) {
@@ -146,6 +146,48 @@ public class GeneralConfig {
       }
     }
     return crafterOutputIgnore;
+  }
+
+  @Config.Comment(("List of blocks that Overgrowth and Terra Moss should consider water for adjacency purposes"))
+  public static String[] waterBlocks = new String[]{
+      "minecraft:water",
+      "minecraft:flowing_water"
+  };
+
+  @Config.Comment(("The block that is considered the cardinal definition of water"))
+  public static String waterBlock = "minecraft:water";
+
+  @Config.Ignore
+  private static Block actualWaterBlock = null;
+
+  @Config.Ignore
+  private static Set<Block> actualWaterBlocks = null;
+
+  public static Set<Block> getWaterBlocks() {
+    if (actualWaterBlocks == null) {
+      actualWaterBlocks = new HashSet<>();
+      for (String rl : waterBlocks) {
+        Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(rl));
+        if (block == null) {
+          Roots.logger.error("Invalid Configuration Value for: waterBlocks.\n  - " + rl + " is not a valid block.");
+        } else {
+          actualWaterBlocks.add(block);
+        }
+      }
+    }
+    return actualWaterBlocks;
+  }
+
+  public static Block getWaterBlock() {
+    if (actualWaterBlock == null) {
+      Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(waterBlock));
+      if (block == null) {
+        Roots.logger.error("Invalid Configuration Value for: waterBlock.\n  - " + waterBlock + " is not a valid block.");
+      } else {
+        actualWaterBlock = block;
+      }
+    }
+    return actualWaterBlock;
   }
 }
 

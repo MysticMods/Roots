@@ -3,7 +3,9 @@ package epicsquid.roots.item;
 import epicsquid.mysticallib.item.ItemBase;
 import epicsquid.mysticallib.particle.particles.ParticleGlitter;
 import epicsquid.mysticallib.proxy.ClientProxy;
+import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.config.MossConfig;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -49,7 +51,8 @@ public class ItemTerraSpore extends ItemBase {
 
   private boolean isWaterAround(BlockPos pos, World world) {
     for (EnumFacing dir : EnumFacing.HORIZONTALS) {
-      if (world.getBlockState(pos.offset(dir)).getBlock() == Blocks.WATER) {
+      Block block = world.getBlockState(pos.offset(dir)).getBlock();
+      if (GeneralConfig.getWaterBlocks().contains(block)) {
         return true;
       }
     }

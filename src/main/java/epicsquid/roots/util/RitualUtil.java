@@ -2,6 +2,7 @@ package epicsquid.roots.util;
 
 import com.google.common.collect.Sets;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.config.RunedWoodConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.tileentity.TileEntityCatalystPlate;
@@ -84,7 +85,7 @@ public class RitualUtil {
   public static boolean isAdjacentToWater(World world, BlockPos pos) {
     for (EnumFacing facing : EnumFacing.HORIZONTALS) {
       Block block = world.getBlockState(pos.offset(facing)).getBlock();
-      if (block == Blocks.WATER || block == Blocks.FLOWING_WATER) {
+      if (GeneralConfig.getWaterBlocks().contains(block)) {
         return true;
       }
     }

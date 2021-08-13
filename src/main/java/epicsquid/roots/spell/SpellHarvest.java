@@ -89,7 +89,7 @@ public class SpellHarvest extends SpellBase {
     setCastSound(ModSounds.Spells.HARVEST);
   }
 
-  private static List<Block> skipBlocks = Arrays.asList(Blocks.BEDROCK, Blocks.GRASS, Blocks.DIRT, Blocks.STONE, Blocks.TALLGRASS, Blocks.WATER, Blocks.LAVA, Blocks.DOUBLE_PLANT, Blocks.MELON_STEM, Blocks.PUMPKIN_STEM);
+  private static final List<Block> skipBlocks = Arrays.asList(Blocks.BEDROCK, Blocks.GRASS, Blocks.DIRT, Blocks.STONE, Blocks.TALLGRASS, Blocks.FLOWING_WATER, Blocks.WATER, Blocks.LAVA, Blocks.DOUBLE_PLANT, Blocks.MELON_STEM, Blocks.PUMPKIN_STEM);
 
   public ItemStack tryCook(ItemStack input) {
     ItemStack result = FurnaceRecipes.instance().getSmeltingResult(input);
