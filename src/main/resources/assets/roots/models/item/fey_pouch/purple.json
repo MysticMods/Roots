@@ -1,0 +1,7 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "roots:items/fey_pouch_main_layer",
+        "layer1": "roots:items/strings/purple"
+    }
+}
