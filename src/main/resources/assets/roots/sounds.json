@@ -160,8 +160,8 @@
     "sounds": [
       {
         "name": "roots:extension",
-        "pitch": 0.5,
-        "volume": 0.5
+        "pitch": 0.8,
+        "volume": 0.2
       }
     ],
     "subtitle": "subtitle.roots.extension"
@@ -170,8 +170,8 @@
     "sounds": [
       {
         "name": "roots:extension",
-        "pitch": 1.2,
-        "volume": 0.5
+        "pitch": 1.4,
+        "volume": 0.2
       }
     ],
     "subtitle": "subtitle.roots.augment"
