@@ -2,6 +2,7 @@ package epicsquid.roots.integration.jei;
 
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
+import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.config.MossConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.init.ModItems;
@@ -220,7 +221,9 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipes(Arrays.asList(RitualUtil.RunedWoodType.values()), RUNED_WOOD);
 
     List<PyreLightWrapper.PyreLightRecipe> pyreLightRecipes = new ArrayList<>();
-    pyreLightRecipes.add(new PyreLightWrapper.PyreLightRecipe(new ItemStack(ModItems.firestarter)));
+    if (GeneralConfig.injectFirestarter) {
+      pyreLightRecipes.add(new PyreLightWrapper.PyreLightRecipe(new ItemStack(ModItems.firestarter)));
+    }
     for (ItemStack item : TileEntityPyre.getFireStarters().getMatchingStacks()) {
       pyreLightRecipes.add(new PyreLightWrapper.PyreLightRecipe(item));
     }
@@ -314,7 +317,7 @@ public class JEIRootsPlugin implements IModPlugin {
       if (tag.hasKey("modifier")) {
         Modifier mod = ModifierRegistry.get(new ResourceLocation(tag.getString("modifier")));
         if (mod != null) {
-        return mod.getIdentifier();
+          return mod.getIdentifier();
         }
       }
       return ISubtypeRegistry.ISubtypeInterpreter.NONE;

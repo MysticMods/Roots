@@ -157,6 +157,9 @@ public class GeneralConfig {
   @Config.Comment(("The block that is considered the cardinal definition of water"))
   public static String waterBlock = "minecraft:water";
 
+  @Config.Comment(("Whether or not the firestarter should be injected into JEI"))
+  public static boolean injectFirestarter = true;
+
   @Config.Ignore
   private static Block actualWaterBlock = null;
 
