@@ -5,6 +5,7 @@ import epicsquid.mysticallib.util.AABBUtil;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModPotions;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.fx.MessageSenseFX;
@@ -116,9 +117,10 @@ public class SpellExtension extends SpellBase {
         new ItemStack(Items.COMPASS),
         new ItemStack(Items.GOLDEN_CARROT)
     );
+    setCastSound(ModSounds.Spells.EXTENSION);
   }
 
-  private IntArraySet ores = new IntArraySet();
+  private final IntArraySet ores = new IntArraySet();
 
   public enum SenseType {
     CONTAINER(new float[]{224 / 255.0f, 211 / 255.0f, 29 / 255.0f, 0.5f}),
@@ -127,7 +129,7 @@ public class SpellExtension extends SpellBase {
     ORE(new float[]{138 / 255.0f, 114 / 255.0f, 90 / 255.0f, 0.5f}),
     PLANTS(new float[]{3 / 255.0f, 252 / 255.0f, 11 / 255.0f, 0.5f});
 
-    private float[] color;
+    private final float[] color;
 
     SenseType(float[] color) {
       this.color = color;

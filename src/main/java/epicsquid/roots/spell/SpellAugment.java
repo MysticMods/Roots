@@ -5,6 +5,7 @@ import epicsquid.roots.Roots;
 import epicsquid.roots.client.SpectatorHandler;
 import epicsquid.roots.config.SpellConfig;
 import epicsquid.roots.init.ModPotions;
+import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.mechanics.Magnetize;
 import epicsquid.roots.modifiers.*;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
@@ -97,6 +98,7 @@ public class SpellAugment extends SpellBase {
         new ItemStack(epicsquid.roots.init.ModItems.petals),
         new ItemStack(Items.BOOK)
     );
+    setCastSound(ModSounds.Spells.AUGMENT);
   }
 
   @Override

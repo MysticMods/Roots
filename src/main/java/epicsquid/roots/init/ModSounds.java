@@ -11,6 +11,7 @@ public class ModSounds {
   public static SoundEvent WHIRLWIND;
 
   public static class Spells {
+    public static SoundEvent AUGMENT;
     public static SoundEvent ACID_CLOUD;
     public static SoundEvent ACID_CLOUD_ALT;
     public static SoundEvent NATURES_SCYTHE;
@@ -18,6 +19,7 @@ public class ModSounds {
     public static SoundEvent DANDELION_WINDS;
     public static SoundEvent DESATURATE;
     public static SoundEvent DISARM;
+    public static SoundEvent EXTENSION;
     public static SoundEvent FEY_LIGHT;
     public static SoundEvent GEAS;
     public static SoundEvent GEAS_EFFECT_END;
@@ -69,12 +71,14 @@ public class ModSounds {
     event.addSound(WHIRLWIND = createSoundEvent(new ResourceLocation(Roots.MODID, "whirlwind")));
 
     // Spells
+    event.addSound(Spells.AUGMENT = createSoundEvent("spell.augment"));
     event.addSound(Spells.ACID_CLOUD = createSoundEvent("spell.acid_cloud"));
     event.addSound(Spells.ACID_CLOUD_ALT = createSoundEvent("spell.acid_cloud_alt"));
     event.addSound(Spells.CHRYSOPOEIA = createSoundEvent("spell.chrysopoeia"));
     event.addSound(Spells.DANDELION_WINDS = createSoundEvent("spell.dandelion_winds"));
     event.addSound(Spells.DESATURATE = createSoundEvent("spell.desaturate"));
     event.addSound(Spells.DISARM = createSoundEvent("spell.disarm"));
+    event.addSound(Spells.EXTENSION = createSoundEvent("spell.extension"));
     event.addSound(Spells.FEY_LIGHT = createSoundEvent("spell.fey_light"));
     event.addSound(Spells.GEAS = createSoundEvent("spell.geas"));
     event.addSound(Spells.GEAS_EFFECT_END = createSoundEvent("spell.geas_end"));
