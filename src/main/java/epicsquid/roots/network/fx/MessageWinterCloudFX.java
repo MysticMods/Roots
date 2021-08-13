@@ -18,7 +18,6 @@ public class MessageWinterCloudFX implements IMessage {
   private float x;
   private float y;
   private float z;
-  private boolean isThaw;
 
   public MessageWinterCloudFX() {
   }
