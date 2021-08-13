@@ -3,6 +3,7 @@ package epicsquid.roots.potion;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
+import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.entity.spell.EntityIcicle;
 import epicsquid.roots.init.ModSounds;
 import epicsquid.roots.modifiers.instance.staff.ModifierSnapshot;
@@ -11,6 +12,7 @@ import epicsquid.roots.network.fx.MessageStormCloudGasFX;
 import epicsquid.roots.network.fx.MessageStormCloudStormFX;
 import epicsquid.roots.spell.SpellStormCloud;
 import epicsquid.roots.util.EntityUtil;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
@@ -62,8 +64,12 @@ public class PotionStormCloud extends Potion {
             world.setBlockState(pos, Blocks.AIR.getDefaultState());
           } else if (state.getBlock() == Blocks.LAVA && mods.has(SpellStormCloud.OBSIDIAN)) {
             world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState());
-          } else if (state.getBlock() == Blocks.WATER && mods.has(SpellStormCloud.ICE)) {
-            world.setBlockState(pos, Blocks.ICE.getDefaultState());
+          } else if (GeneralConfig.getWaterBlocks().contains(state.getBlock()) && mods.has(SpellStormCloud.ICE)) {
+            if (state.getPropertyKeys().contains(BlockLiquid.LEVEL)) {
+              if (state.getValue(BlockLiquid.LEVEL) == 0) {
+                world.setBlockState(pos, Blocks.ICE.getDefaultState());
+              }
+            }
           }
         }
       }

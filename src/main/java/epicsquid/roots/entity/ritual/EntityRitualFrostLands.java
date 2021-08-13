@@ -2,6 +2,7 @@ package epicsquid.roots.entity.ritual;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.network.fx.MessageFrostLandsProgressFX;
 import epicsquid.roots.ritual.IColdRitual;
 import epicsquid.roots.ritual.RitualFrostLands;
@@ -72,12 +73,12 @@ public class EntityRitualFrostLands extends EntityRitualBase implements IColdRit
         }
       }
 
-      positions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, (BlockPos pos) -> (world.getBlockState(pos).getBlock() == Blocks.WATER || world.getBlockState(pos).getBlock() == Blocks.LAVA) && world.isAirBlock(pos.up()));
+      positions = Util.getBlocksWithinRadius(world, getPosition(), ritual.radius_x, ritual.radius_y, ritual.radius_z, (BlockPos pos) -> (GeneralConfig.getWaterBlocks().contains(world.getBlockState(pos).getBlock()) || world.getBlockState(pos).getBlock() == Blocks.LAVA) && world.isAirBlock(pos.up()));
       if (!positions.isEmpty()) {
         BlockPos choice = positions.get(rand.nextInt(positions.size()));
         IBlockState state = world.getBlockState(choice);
 
-        if (state.getBlock() == Blocks.WATER) {
+        if (GeneralConfig.getWaterBlocks().contains(state.getBlock())) {
           if (state.getValue(BlockLiquid.LEVEL) == 0) {
             world.setBlockState(choice, Blocks.ICE.getDefaultState());
             affectedPositions.add(choice);

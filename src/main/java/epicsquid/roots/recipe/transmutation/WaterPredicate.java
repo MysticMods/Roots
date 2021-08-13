@@ -1,6 +1,8 @@
 package epicsquid.roots.recipe.transmutation;
 
+import epicsquid.roots.config.GeneralConfig;
 import epicsquid.roots.init.ModBlocks;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -10,7 +12,7 @@ import java.util.List;
 
 public class WaterPredicate extends BlocksPredicate {
   public WaterPredicate() {
-    super(Blocks.WATER, Blocks.FLOWING_WATER);
+    super(GeneralConfig.getWaterBlocks().toArray(new Block[0]));
   }
 
   @Override
