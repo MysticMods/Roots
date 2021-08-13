@@ -70,7 +70,7 @@ public class SpellNaturesScythe extends SpellBase {
   public static Property<String> PROP_FLOWER_DICT = new Property<>("flower_dictionary", "flowers").setDescription("the ore dictionary entry that should be used to identify flower blocks in addition to those that derive from the default flowers");
   public static Property<String> PROP_VINES_DICT = new Property<>("vine_dictionary", "vines").setDescription("the ore dictionary entry that should be used to identify vines in addition to those that by default derive from vanilla vines");
 
-  public static Modifier WEBS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "dewebbing"), ModifierCores.CLOUD_BERRY, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.125)));
+  public static Modifier WEBS = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "dewebbing"), ModifierCores.PERESKIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.125)));
   public static Modifier LEAVES = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "leaf_harvester"), ModifierCores.WILDEWHEET, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDEWHEET, 0.125)));
   public static Modifier MAGNETISM = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "magnetic_harvester"), ModifierCores.WILDROOT, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.WILDROOT, 0.275)));
   public static Modifier FORTUNE = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "fortunate_scythe"), ModifierCores.MOONGLOW_LEAF, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.MOONGLOW_LEAF, 0.475)));
