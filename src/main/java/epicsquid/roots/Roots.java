@@ -91,7 +91,7 @@ public class Roots {
 
   @EventHandler
   public void loadComplete(FMLLoadCompleteEvent event) {
-    //ExportDocumentation.main(new String[]{});
+    ExportDocumentation.main(new String[]{});
     proxy.loadComplete(event);
   }
 
