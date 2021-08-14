@@ -21,10 +21,10 @@ Creates an IWorldCondition which tests the state below a block using the provide
 ### Examples
 
 ```zenscript
-import mods.roots.predicates.BlockStateAbove;
+import mods.roots.predicates.BlockStateBelow;
 import mods.roots.predicates.PropertyPredicate;
 
-BlockStateAbove.create(PropertyPredicate.create(<blockstate:minecraft:log:variant=spruce>, "variant")); // Creates a world predicate that will only match blocks which have a block above them that is both a log and with the variant of spruce.
+BlockStateBelow.create(PropertyPredicate.create(<blockstate:minecraft:log:variant=spruce>, "variant")); // Creates a world predicate that will only match blocks which have a block below them that is both a log and with the variant of spruce.
 ```
 
 ### Notes

@@ -59,7 +59,7 @@ import mods.roots.Transmutation;
 Transmutation.addStateToStateRecipe("spruce_to_glowstone", PropertyPredicate.create(<blockstate:minecraft:log:variant=spruce> as IBlockState, "variant"), <blockstate:minecraft:glowstone>, BlockStateBelow.create(Predicates.Leaves));
 
 // Creates a transmutation where acacia logs (only acacia logs), will be converted into a cobblestone item, if and only if the block below is water.
-Transmutation.addStateToItemRecipe("acacia_to_cobblestone", PropertyPredicate.create(<blockstate:minecraft:log:variant=acacia> as IBlockState, "variant"), <minecraft:cobblestone>, BlockStateBelow.create(Predicates.Water));
+Transmutation.addStateToItemRecipe("acacia_to_cobblestone", PropertyPredicate.create(<blockstate:minecraft:log2:variant=acacia> as IBlockState, "variant"), <minecraft:cobblestone>, BlockStateBelow.create(Predicates.Water));
 
 // Removes the default pumpkin-over-water-to-melon recipe
 Transmutation.removeRecipe("pumpkin_melon");

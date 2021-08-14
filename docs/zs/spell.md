@@ -105,11 +105,11 @@ This cannot be used to add a new cost to a spell's modifier, only to modify an e
 
 ```zenscript
 import mods.roots.Spells;
-import mods.roots.Spells.Spell;
+import mods.roots.Spell;
 import mods.roots.Costs;
 import mods.roots.Herbs;
 
-Spell harvest = Spells.getSpell("harvest"); // If not placed at the beginning, "spell_" will be automatically added.
+var harvest = Spells.getSpell("harvest") as Spell; // If not placed at the beginning, "spell_" will be automatically added.
 harvest.setCooldown(800); // Sets the cooldown of the Harvest spell to 40 seconds.
 harvest.setCost(Herbs.wildewheet, 1.25); // Increases the wildewheet cost of Harvest from the default of 0.55 to 1.25
 harvest.setModifierCost(Costs.additional_cost, Herbs.wildroot, 0.9); // Increases the cost of the wildroot-related modifier's additional cost from the default of 0.125 to 0.9

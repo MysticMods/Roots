@@ -975,7 +975,7 @@ public class ModRecipes {
 
   public static void addPyreCraftingRecipe(ResourceLocation name, PyreCraftingRecipe recipe) {
     if (pyreCraftingRecipes.containsKey(name)) {
-      throw new IllegalStateException("Invalid state: already have recipe registered for name " + name.toString());
+      Roots.logger.error("Duplicate recipe registered for the name: " + name);
     }
 
     pyreCraftingRecipes.put(name, recipe);
@@ -1029,7 +1029,7 @@ public class ModRecipes {
   @Nullable
   public static PyreCraftingRecipe getCraftingRecipe(ItemStack output) {
     for (PyreCraftingRecipe recipe : pyreCraftingRecipes.values()) {
-      if (ItemStack.areItemStacksEqual(recipe.getResult(), output)) {
+      if (ItemUtil.equalWithoutSize(recipe.getResult(), output)) {
         return recipe;
       }
     }
