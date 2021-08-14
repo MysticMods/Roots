@@ -54,8 +54,8 @@ public class CommandProperties extends CraftTweakerCommand {
         break;
       case "cast_type":
         return;
-      case "cooldownLeft":
-        desc = "cooldownLeft (in ticks) before spell can be used again";
+      case "cooldown":
+        desc = "cooldown(in ticks) before spell can be used again";
         break;
       case "cost_0":
         desc = "first spell herb cost";

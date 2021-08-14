@@ -11,8 +11,8 @@ import mods.roots.RunicShears;
 void addRecipe(
   string name,                  // the name of the recipe being created
   IItemStack outputDrop,        // the item output obtained by performing the shearing
-  IBlockState replacementState, // the replacement blockstate described as a block state
   IPredicate inputState,        // a predicate describing the input state (see Predicates)
+  IBlockState replacementState, // the replacement blockstate described as a block state
   IItemStack displayItem        // the item that should be displayed in integration for this recipe
 );
 ```
@@ -26,13 +26,13 @@ Creates a recipe with the defined name that creats the specified itemstack whene
 void addRecipeViaItem(
   string name,                 // the name of the recipe being created
   IItemStack outputDrop,       // the item output obtained by performing the shearing
-  IItemStack replacementBlock, // the block (as an itemstack) that replaces the block being interacted with upon shearing
   IItemStack inputBlock,       // the block that is to be sheared
+  IItemStack replacementBlock, // the block (as an itemstack) that replaces the block being interacted with upon shearing
   IItemStack displayItem       // the item that should be displayed in integration for this recipe
 );
 ```
 
-Creates a recipe with the defined name that creats the specified itemstack whenever runic shears are used on the specified input state (derived from the itemstack), as well as the state that will replace the input state (derived from an itemstack). Additionally, an optional item that can be displayed in integration. ItemStacks for blockstates must be itemblocks.
+As above, but using ItemStacks that describe ItemBlocks to determine blockstates.
 
 ---
 

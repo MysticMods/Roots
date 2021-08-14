@@ -25,7 +25,6 @@ import java.util.List;
 @ZenRegister
 @ZenClass("mods." + Roots.MODID + ".Rituals")
 public class Rituals {
-
   @ZenDocMethod(
       order = 1,
       args = {
@@ -44,8 +43,8 @@ public class Rituals {
   }
 
   private static class Modify extends Action {
-    private String name;
-    private List<IIngredient> inputs;
+    private final String name;
+    private final List<IIngredient> inputs;
 
     private Modify(String name, List<IIngredient> inputs) {
       super("Ritual Modification");
@@ -95,7 +94,7 @@ public class Rituals {
   @ZenRegister
   @ZenClass("mods." + Roots.MODID + ".Ritual")
   public static class Ritual {
-    private RitualBase original;
+    private final RitualBase original;
 
     public Ritual(RitualBase original) {
       this.original = original;

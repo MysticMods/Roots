@@ -37,7 +37,7 @@ public class Property<T> extends AbstractProperty<T, Property<T>> {
 
   public static class PropertyCooldown extends Property<Integer> {
     public PropertyCooldown(Integer defaultValue) {
-      super("cooldownLeft", defaultValue);
+      super("cooldown", defaultValue);
     }
 
     @Override
