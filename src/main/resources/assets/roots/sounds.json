@@ -359,9 +359,11 @@
   },
   "spell.storm_cloud": {
     "sounds": [
-      "minecraft:ambient/weather/thunder1",
-      "minecraft:ambient/weather/thunder2",
-      "minecraft:ambient/weather/thunder3"
+      {
+        "name": "roots:storm_cloud",
+        "pitch": 0.95,
+        "volume": 0.3
+      }
     ],
     "subtitle": "subtitle.roots.spell.storm_cloud"
   },
