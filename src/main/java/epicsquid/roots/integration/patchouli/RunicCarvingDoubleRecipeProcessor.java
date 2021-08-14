@@ -20,22 +20,30 @@ public class RunicCarvingDoubleRecipeProcessor implements IComponentProcessor {
         recipe1 = type;
       }
     }
-    if (recipe1 == null) {
-      throw new IllegalStateException("Not a valid recipe name: " + recipeName);
-    }
     recipeName = iVariableProvider.get("recipe2");
     for (RitualUtil.RunedWoodType type : RitualUtil.RunedWoodType.values()) {
       if (type.toString().equalsIgnoreCase(recipeName)) {
         recipe2 = type;
       }
     }
-    if (recipe2 == null) {
-      throw new IllegalStateException("Not a valid recipe name: " + recipeName);
-    }
   }
 
   @Override
   public String process(String s) {
+    switch (s) {
+      case "block1":
+      case "rune1":
+      case "herb1":
+        if (recipe1 == null) {
+          return ItemStackUtil.serializeStack(ItemStack.EMPTY);
+        }
+      case "block2":
+      case "rune2":
+      case "herb2":
+        if (recipe2 == null) {
+          return ItemStackUtil.serializeStack(ItemStack.EMPTY);
+        }
+    }
     switch (s) {
       case "block1":
         return ItemStackUtil.serializeStack(recipe1.getVisual());

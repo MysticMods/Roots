@@ -20,6 +20,9 @@ public class RitualCraftingRecipeProcessor implements IComponentProcessor {
 
   @Override
   public String process(String s) {
+    if ((s.startsWith("item") || s.equalsIgnoreCase("result")) && pyreCraftingRecipe == null) {
+      return ItemStackUtil.serializeStack(ItemStack.EMPTY);
+    }
     if (s.startsWith("item")) {
       int index = Integer.parseInt(s.substring(4)) - 1;
 

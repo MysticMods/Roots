@@ -28,6 +28,9 @@ public class FeyCraftingRecipeProcessor implements IComponentProcessor {
   @Override
   public String process(String s) {
 
+    if ((s.startsWith("item") || s.equalsIgnoreCase("result")) && groveCraftingRecipe == null) {
+      return ItemStackUtil.serializeStack(ItemStack.EMPTY);
+    }
     if (s.startsWith("item")) {
       int index = Integer.parseInt(s.substring(4)) - 1;
 

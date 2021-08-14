@@ -19,13 +19,13 @@ public class RunicCarvingRecipeProcessor implements IComponentProcessor {
         recipe = type;
       }
     }
-    if (recipe == null) {
-      throw new IllegalStateException("Not a valid recipe name: " + recipeName);
-    }
   }
 
   @Override
   public String process(String s) {
+    if (recipe == null) {
+      return ItemStackUtil.serializeStack(ItemStack.EMPTY);
+    }
     if (s.equals("block")) {
       return ItemStackUtil.serializeStack(recipe.getVisual());
     } else if (s.equals("rune")) {

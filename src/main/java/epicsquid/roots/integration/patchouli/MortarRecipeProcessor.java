@@ -20,12 +20,17 @@ public class MortarRecipeProcessor implements IComponentProcessor {
   @Override
   public void setup(IVariableProvider<String> iVariableProvider) {
     MortarRecipe recipe = ModRecipes.getMortarRecipe(new ResourceLocation(iVariableProvider.get("recipe")));
-    output = recipe.getResult();
-    ingredients = recipe.getIngredients();
+    if (recipe != null) {
+      output = recipe.getResult();
+      ingredients = recipe.getIngredients();
+    }
   }
 
   @Override
   public String process(String s) {
+    if ((s.startsWith("item") || s.equalsIgnoreCase("result")) && (ingredients.isEmpty() || output.isEmpty())) {
+      return ItemStackUtil.serializeStack(ItemStack.EMPTY);
+    }
     if (s.startsWith("item")) {
       int index = Integer.parseInt(s.substring(4)) - 1;
       Ingredient ingredient = ingredients.get(index);
