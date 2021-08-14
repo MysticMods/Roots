@@ -11,7 +11,7 @@ import mods.roots.Fey;
 void addRecipe(
   string name,         // the name of the recipe; if replacing an existing recipe, be sure to use the same name to ensure Patchouli continuity
   IItemStack output,   // the itemstack produced by this recipe
-  IIngredient[] inputs // an array of IIngredients that make up the recipe; must contain 5 thaumcraft.items
+  IIngredient[] inputs // an array of IIngredients that make up the recipe; must contain 5 items
 );
 ```
 
@@ -24,7 +24,7 @@ Creates a recipe producing output from an array of ingredients (transforms are s
 void addRecipe(
   string name,          // the name of the recipe; if replacing an existing recipe, be sure to use the same name to ensure Patchouli continuity
   IItemStack output,    // the itemstack produced by this recipe
-  IIngredient[] inputs, // an array of IIngredients that make up the recipe; must contain 5 thaumcraft.items
+  IIngredient[] inputs, // an array of IIngredients that make up the recipe; must contain 5 items
   int xp                // the amount of xp (in levels) to reward the player for crafting this recipe
 );
 ```

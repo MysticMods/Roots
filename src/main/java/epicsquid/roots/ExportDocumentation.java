@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 public class ExportDocumentation {
 
   public static void main(String[] args) {
-    String targetPath = "docs/zs/";
+    String targetPath = "../roots/docs/zs/";
     Class<?>[] classes = {
         AnimalHarvestTweaker.class,
         BarkTweaker.class,
@@ -34,7 +34,8 @@ public class ExportDocumentation {
         PropertyPredicate.class,
         StatePredicate.class,
         Herbs.class,
-        Spells.class
+        Spells.class,
+        Spells.Spell.class
     };
 
     ZenDocExporter export = new ZenDocExporter();

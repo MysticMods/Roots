@@ -78,9 +78,9 @@ public class RunicShearsTweaker {
           @ZenDocArg(arg = "name", info = "the name of the recipe for the shearing"),
           @ZenDocArg(arg = "outputDrop", info = "the item that is dropped upon shearing the specified entity"),
           @ZenDocArg(arg = "entity", info = "the entity that is to be sheared to obtain the drop"),
-          @ZenDocArg(arg = "cooldownLeft", info = "the number of ticks (seconds multiplied by 20) it takes until the entity can be sheared again")
+          @ZenDocArg(arg = "cooldown", info = "the number of ticks (seconds multiplied by 20) it takes until the entity can be sheared again")
       },
-      description = "Create a Runic Shears recipe that provides the outputDrop whenever the specified entity is interacted with using runic shears. The drop will only be created once every specified cooldownLeft period. The entity specified must derive from EntityLivingBase."
+      description = "Create a Runic Shears recipe that provides the outputDrop whenever the specified entity is interacted with using runic shears. The drop will only be created once every specified cooldown period. The entity specified must derive from EntityLivingBase."
   )
   @ZenMethod
   public static void addEntityRecipe(String name, IItemStack outputDrop, IEntityDefinition entity, int cooldown) {

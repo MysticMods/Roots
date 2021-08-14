@@ -121,7 +121,7 @@ public class ZenDocExporter {
         out.append("\n");
 
         for (String s : toAppend) {
-          Path p = Paths.get(s);
+          Path p = Paths.get("../roots/" + s);
 
           try {
             List<String> lines = Files.readAllLines(p);
