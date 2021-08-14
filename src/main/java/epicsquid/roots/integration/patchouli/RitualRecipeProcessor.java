@@ -14,20 +14,23 @@ import java.util.List;
 public class RitualRecipeProcessor implements IComponentProcessor {
 
   private List<Ingredient> ingredients = new ArrayList<>();
-  private ItemStack icon;
+  private ItemStack icon = ItemStack.EMPTY;
 
   @Override
   public void setup(IVariableProvider<String> iVariableProvider) {
     String ritualName = iVariableProvider.get("ritual");
     RitualBase ritualBase = RitualRegistry.ritualRegistry.get(ritualName);
-    if (ritualBase == null) return;
-    ingredients = ritualBase.getIngredients();
-    icon = new ItemStack(ritualBase.getIcon());
+    if (ritualBase != null) {
+      ingredients = ritualBase.getIngredients();
+      icon = new ItemStack(ritualBase.getIcon());
+    }
   }
 
   @Override
   public String process(String s) {
-    if (icon == null || ingredients.isEmpty()) return null;
+    if ((s.startsWith("item") || s.equals("icon")) && (icon.isEmpty() || ingredients.isEmpty())) {
+      return ItemStackUtil.serializeStack(ItemStack.EMPTY);
+    }
 
     if (s.startsWith("item")) {
       int index = Integer.parseInt(s.substring(4)) - 1;
