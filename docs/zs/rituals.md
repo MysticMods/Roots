@@ -25,7 +25,7 @@ Ritual getRitual(
 );
 ```
 
-Returns a Ritual object which can have its properties modified.
+Returns a Ritual object which can have its properties modified. See the Ritual class for more information.
 
 ---
 
