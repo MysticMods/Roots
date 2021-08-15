@@ -63,7 +63,7 @@ public class EntityRitualFrostLands extends EntityRitualBase implements IColdRit
         breakout++;
       }
 
-      if (Util.rand.nextInt(ritual.interval_spawn) == 0) {
+      if (Util.rand.nextFloat() <= ritual.interval_spawn) {
         EntitySnowman snowy = new EntitySnowman(world);
         if (!positions.isEmpty()) {
           BlockPos chosen = positions.get(Util.rand.nextInt(positions.size()));

@@ -17,11 +17,12 @@ public class RitualHeavyStorms extends RitualBase {
   public static Property<Integer> PROP_RADIUS_X = new Property<>("radius_x", 15).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 15).setDescription("Radius on the Y Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15).setDescription("Radius on the Z Axis of the cube in which the ritual takes place");
-  public static Property<Integer> PROP_LIGHTNING_CHANCE = new Property<>("lightning_chance", 10).setDescription("Chance (per interval of 1 second) of the ritual duration for lightning to strike in the ritual area (1 in X)");
+  public static Property<Float> PROP_LIGHTNING_CHANCE = new Property<>("lightning_chance", 0.1f).setDescription("Chance (per interval of 1 second) of the ritual duration for lightning to strike in the ritual area");
   public static Property<Integer> PROP_MAX_STRIKES = new Property<>("lightning_interval", 10).setDescription("Maximum number of lightning strikes that can happen per ritual. (Set to -1 for infinite)");
 
   public double radius_x, radius_y, radius_z;
-  public int interval, lightning_chance, max_strikes;
+  public int interval, max_strikes;
+  public float lightning_chance;
 
   public RitualHeavyStorms(String name, boolean disabled) {
     super(name, disabled);

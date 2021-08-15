@@ -47,7 +47,7 @@ public class EntityRitualDivineProtection extends EntityRitualBase {
     // This has to happen every tick or otherwise the ritual doesn't work
     if (ritual.time) {
       if (world.getWorldTime() % ritual.day_length >= 0 && world.getWorldTime() % ritual.day_length < ritual.night_threshold) {
-        if (rand.nextInt(ritual.day_extension) == 0) {
+        if (rand.nextFloat() <= ritual.day_extension) {
           world.setWorldTime(world.getWorldTime() - 1);
         }
       } else {

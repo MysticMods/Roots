@@ -94,7 +94,7 @@ public class EntityRitualHeavyStorms extends EntityRitualBase {
         }
       }
       if (!world.isRemote) {
-        if (rand.nextInt(ritual.lightning_chance) == 0 && strike_count <= ritual.max_strikes) {
+        if (rand.nextFloat() <= ritual.lightning_chance && strike_count <= ritual.max_strikes) {
           BlockPos pos = validPosition();
           if (!entities.isEmpty() && rand.nextInt(5) == 0) {
             pos = entities.get(rand.nextInt(entities.size())).getPosition();

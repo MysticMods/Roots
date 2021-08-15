@@ -17,7 +17,7 @@
     {
       "type": "text",
       "title": "Ritual Specifics",
-      "text": "$(bold)Duration:$() The ritual lasts for $(ritual:frost_lands/SECONDS/duration) seconds.$(br2)$(bold)Size:$() Ritual area extends $(ritual:frost_lands/radius_x) and $(ritual:frost_lands/radius_z) blocks from the center, and vertically by $(ritual:frost_lands/radius_y) blocks.$(br2)$(bold)Snow Golems:$() Golems are healed every $(ritual:frost_lands/SECONDS/interval_snowman_heal) seconds, and have a $(ritual:frost_lands/CHANCE/interval_snowman_spawn) chance to spawn every tick."
+      "text": "$(bold)Duration:$() The ritual lasts for $(ritual:frost_lands/SECONDS/duration) seconds.$(br2)$(bold)Size:$() Ritual area extends $(ritual:frost_lands/radius_x) and $(ritual:frost_lands/radius_z) blocks from the center, and vertically by $(ritual:frost_lands/radius_y) blocks.$(br2)$(bold)Snow Golems:$() Golems are healed every $(ritual:frost_lands/SECONDS/interval_snowman_heal) seconds, and have a $(ritual:frost_lands/PERCENT/interval_snowman_spawn) chance to spawn every tick."
     },
     {
       "type": "relations",

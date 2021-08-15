@@ -18,18 +18,19 @@ public class RitualAnimalHarvest extends RitualBase {
   public static Property<Integer> PROP_RADIUS_Y = new Property<>("radius_y", 10).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 15).setDescription("Radius on the X Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_GLOW_DURATION = new Property<>("glowing", 30).setDescription("duration (in ticks) mobs will glow after being harvested");
-  public static Property<Integer> PROP_LOOTING_CHANCE = new Property<>("looting_chance", 6).setDescription("chance (1 in X) that the the looting chance will be set to looting_value");
+  public static Property<Float> PROP_LOOTING_CHANCE = new Property<>("looting_chance", 0.16f).setDescription("chance per operation that the the looting chance will be set to looting_value");
   public static Property<Integer> PROP_LOOTING_VALUE = new Property<>("looting_value", 1).setDescription("the value passed to the loot function for 'looting' if looting_chance was successful");
-  public static Property<Integer> PROP_FISH_CHANCE = new Property<>("fish_chance", 5).setDescription("chance (1 in X) that, if suitable water source blocks are found, fish will be produced instead of animal drops being produced");
+  public static Property<Float> PROP_FISH_CHANCE = new Property<>("fish_chance", 0.20f).setDescription("chance per operation that, if suitable water source blocks are found, fish will be produced instead of animal drops being produced");
   public static Property<Integer> PROP_FISH_COUNT = new Property<>("fish_count", 3).setDescription("number of fish that are guaranteed to drop");
   public static Property<Integer> PROP_FISH_ADDITIONAL = new Property<>("fish_additional", 3).setDescription("additional fish (random 0-X)-2 that are produced if fish are produced");
 
   public int interval;
   public int count;
   public int radius_x, radius_y, radius_z;
-  public int looting_chance, looting_value;
+  public int looting_value;
   public int glowing;
-  public int fish_chance, fish_count, fish_additional;
+  public int fish_additional, fish_count;
+  public float fish_chance, looting_chance;
 
   public RitualAnimalHarvest(String name, boolean disabled) {
     super(name, disabled);

@@ -17,9 +17,10 @@ public class RitualSpreadingForest extends RitualBase {
   public static Property<Integer> PROP_RADIUS_Z = new Property<>("radius_z", 35).setDescription("Radius on the Z Axis of the cube in which the ritual takes place");
   public static Property<Integer> PROP_PLACE_INTERVAL = new Property<>("place_interval", 30).setDescription("interval in ticks for each sapling to be planted");
   public static Property<Integer> PROP_GROWTH_INTERVAL = new Property<>("growth_interval", 20).setDescription("interval in ticks for each planted saplings to grow into a full tree");
-  public static Property<Integer> PROP_DOUBLE_CHANCE = new Property<>("double_chance", 20).setDescription("chances of growing a double sapling tree (the higher the value is the lower the chance becomes) [default: 1/20]");
+  public static Property<Float> PROP_DOUBLE_CHANCE = new Property<>("double_chance", 0.05f).setDescription("chances of growing a double sapling tree (the higher the value is the lower the chance becomes)");
 
-  public int radius_x, radius_y, radius_z, place_interval, growth_interval, double_chance;
+  public int radius_x, radius_y, radius_z, place_interval, growth_interval;
+  public float double_chance;
 
   public RitualSpreadingForest(String name, boolean disabled) {
     super(name, disabled);

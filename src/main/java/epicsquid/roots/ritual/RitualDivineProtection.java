@@ -13,7 +13,7 @@ public class RitualDivineProtection extends RitualBase {
   public static Property<Boolean> PROP_RAIN = new Property<>("rain", true).setDescription("whether or not rain should be disabled");
   public static Property<Boolean> PROP_TIME = new Property<>("time", true).setDescription("whether or not time should be accelerated or slowed");
   public static Property<Integer> PROP_NIGHT_REDUCTION = new Property<>("night_reduction", 1).setDescription("the number of additional ticks (per tick) added to night");
-  public static Property<Integer> PROP_DAY_EXTENSION = new Property<>("day_extension", 3).setDescription("the chance (1 in X) that ticks will be subtracted, lengthening the day");
+  public static Property<Float> PROP_DAY_EXTENSION = new Property<>("day_extension", 0.3f).setDescription("the chance per tick that ticks will be subtracted, lengthening the day");
   public static Property<Float> PROP_CONSECRATION_DAMAGE = new Property<>("consecration_damage", 4.0f).setDescription("damage done to undead creatures if Consecration is installed");
   public static Property<Float> PROP_FIRE_DAMAGE = new Property<>("fire_damage", 4.0f).setDescription("amount of fire damage done to undead creatures");
   public static Property<Integer> PROP_FIRE_DURATION = new Property<>("fire_duration", 2).setDescription("duration in SECONDS undead creatures will be set on fire for");
@@ -25,7 +25,8 @@ public class RitualDivineProtection extends RitualBase {
 
   public boolean rain, time;
   public float radius_x, radius_y, radius_z, consecration_damage, fire_damage;
-  public int night_reduction, day_extension, fire_duration, day_length, night_threshold;
+  public int night_reduction, fire_duration, day_length, night_threshold;
+  public float day_extension;
 
   public RitualDivineProtection(String name, boolean disabled) {
     super(name, disabled);
