@@ -164,7 +164,7 @@ public class EntityRitualSpreadingForest extends EntityRitualBase {
         BlockPlanks.EnumType type = null;
         if (state.getPropertyKeys().contains(BlockSapling.TYPE)) {
           type = state.getValue(BlockSapling.TYPE);
-          if (type == BlockPlanks.EnumType.DARK_OAK || ((type == BlockPlanks.EnumType.JUNGLE || type == BlockPlanks.EnumType.SPRUCE) && rand.nextInt(ritual.double_chance) == 0)) {
+          if (type == BlockPlanks.EnumType.DARK_OAK || ((type == BlockPlanks.EnumType.JUNGLE || type == BlockPlanks.EnumType.SPRUCE) && rand.nextFloat() <= ritual.double_chance)) {
             twoByTwo = true;
           }
         } else if (ConfigUtil.setContainsItemStack(GeneralConfig.getTwoByTwoSaplings(), state.getBlock().getItem(world, BlockPos.ORIGIN, state))) {

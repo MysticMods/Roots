@@ -34,7 +34,7 @@
     {
       "type": "text",
       "title": "Ritual Specifics",
-      "text": "$(bold)Duration:$() The ritual lasts for $(ritual:divine_protection/SECONDS/duration) seconds.$(br2)$(bold)Size:$() Undead damage area extends $(ritual:divine_protection/radius_x) and $(ritual:divine_protection/radius_z) blocks from the center, and vertically by $(ritual:divine_protection/radius_y) blocks.$(br2)$(bold)Rain$(): Rain is cleared: $(ritual:divine_protection/BOOL/rain).$(br2)$(bold)Time$(): Time is adjusted: $(ritual:divine_protection/BOOL/time). Night is decreased by $(ritual:divine_protection/NIGHT/night_reduction). Day is increased by $(ritual:divine_protection/DAY/day_extension).$(br2)"
+      "text": "$(bold)Duration:$() The ritual lasts for $(ritual:divine_protection/SECONDS/duration) seconds.$(br2)$(bold)Size:$() Undead damage area extends $(ritual:divine_protection/radius_x) and $(ritual:divine_protection/radius_z) blocks from the center, and vertically by $(ritual:divine_protection/radius_y) blocks.$(br2)$(bold)Rain$(): Rain is cleared: $(ritual:divine_protection/BOOL/rain).$(br2)$(bold)Time$(): Time is adjusted: $(ritual:divine_protection/BOOL/time). Night is decreased by $(ritual:divine_protection/NIGHT/night_reduction). Day has a $(ritual:divine_protection/PERCENT/day_extension) chance to be extended every tick.$(br2)"
     },
     {
       "type": "text",

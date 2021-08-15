@@ -38,7 +38,7 @@
     {
       "type": "text",
       "title": "Ritual Specifics",
-      "text": "$(bold)Duration:$() The ritual lasts $(ritual:heavy_storms/SECONDS/duration) seconds.$(br2)$(bold)Size:$() The ritual will search for within an area of $(ritual:heavy_storms/radius_x) and $(ritual:heavy_storms/radius_z) blocks horizontally, and by $(ritual:heavy_storms/radius_y) blocks vertically.$(br2)$(bold)Lightning$(): Lightning has a change of $(ritual:heavy_storms/CHANCE/lightning_chance) per tick of striking."
+      "text": "$(bold)Duration:$() The ritual lasts $(ritual:heavy_storms/SECONDS/duration) seconds.$(br2)$(bold)Size:$() The ritual will search for within an area of $(ritual:heavy_storms/radius_x) and $(ritual:heavy_storms/radius_z) blocks horizontally, and by $(ritual:heavy_storms/radius_y) blocks vertically.$(br2)$(bold)Lightning$(): Lightning has a $(ritual:heavy_storms/PERCENT/lightning_chance) chance per tick of striking."
     },
     {
       "type": "text",

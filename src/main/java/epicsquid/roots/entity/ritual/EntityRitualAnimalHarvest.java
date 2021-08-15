@@ -1,10 +1,12 @@
 package epicsquid.roots.entity.ritual;
 
+import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.config.RitualConfig;
 import epicsquid.roots.init.ModDamage;
 import epicsquid.roots.init.ModRecipes;
+import epicsquid.roots.network.fx.MessageRampantLifeInfusionFX;
 import epicsquid.roots.recipe.AnimalHarvestFishRecipe;
 import epicsquid.roots.ritual.RitualAnimalHarvest;
 import epicsquid.roots.ritual.RitualRegistry;
@@ -68,16 +70,16 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
         return (state.getMaterial() == Material.WATER && state.getPropertyKeys().contains(BlockLiquid.LEVEL) && state.getValue(BlockLiquid.LEVEL) == 0);
       });
       WeightedRegistry<AnimalHarvestFishRecipe> recipes = new WeightedRegistry<>(ModRecipes.getFishRecipes());
-      if (!recipes.isEmpty() && !waterSourceBlocks.isEmpty() && (rand.nextInt(ritual.fish_chance) == 0 || entityList.isEmpty())) {
+      if (!recipes.isEmpty() && !waterSourceBlocks.isEmpty() && (rand.nextFloat() <= ritual.fish_chance) || entityList.isEmpty()) {
         AnimalHarvestFishRecipe recipe = recipes.getRandomItem(rand);
         BlockPos pos = waterSourceBlocks.get(rand.nextInt(waterSourceBlocks.size()));
-        if (!world.isRemote) {
+        if (!world.isRemote && recipe != null) {
           ItemStack stack = recipe.getItemStack().copy();
           // Protection against those nasty "must be positive" errors
           stack.setCount(ritual.fish_count + Math.max(0, (rand.nextInt(ritual.fish_additional) - 2)));
           ItemUtil.spawnItem(world, pos.add(0, 1, 0), stack);
         }
-        //PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY() + 1, pos.getZ()), this);
+        PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY() + 1, pos.getZ()), this);
         return true;
       }
     }
@@ -89,7 +91,7 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
     if (!world.isRemote) {
       entity.captureDrops = true;
       entity.capturedDrops.clear();
-      int looting = Util.rand.nextInt(ritual.looting_chance) == 0 ? ritual.looting_value : 0;
+      int looting = Util.rand.nextFloat() <= ritual.looting_chance ? ritual.looting_value : 0;
       dropLoot(entity, looting);
       entity.captureDrops = false;
       if (!ForgeHooks.onLivingDrops(entity, DamageSource.GENERIC, entity.capturedDrops, looting, false)) {
