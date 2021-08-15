@@ -12,6 +12,11 @@
     {
       "type": "spell_template",
       "spell": "spell_chrysopoeia"
+    },
+    {
+      "type": "text",
+      "title": "Spell Configuration",
+      "text": "$(bold)Cooldown:$() The spell has a cooldown of $(spell:chrysopoeia/SECONDS/cooldown) seconds."
     }
   ]
 }

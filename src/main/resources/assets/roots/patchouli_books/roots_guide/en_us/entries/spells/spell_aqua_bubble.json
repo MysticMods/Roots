@@ -70,7 +70,7 @@
     {
       "type": "text",
       "title": "Spell Configuration",
-      "text": "$(bold)Duration:$() The bubble lasts $(spell:aqua_bubble/SECONDS/duration) seconds.$(br2)$(bold)Fire:$() Fire damage is reduced to $(spell:aqua_bubble/PERCENT/fire_reduction) of the original.$(br2)$(bold)Lava:$() Lava damage is reduced to $(spell:aqua_bubble/PERCENT/lava_reduction) of the original.$(br2)$(bold)Knockback:$() With the $(modifier:bubble_knockback)$() modifier, attacking entities are knocked back with a strength of $(spell:aqua_bubble/knockback)."
+      "text": "$(bold)Cooldown:$() The spell has a cooldown of $(spell:aqua_bubble/SECONDS/cooldown) seconds.$(br2)$(bold)Duration:$() The bubble lasts $(spell:aqua_bubble/SECONDS/duration) seconds.$(br2)$(bold)Fire:$() Fire damage is reduced to $(spell:aqua_bubble/PERCENT/fire_reduction) of the original.$(br2)$(bold)Lava:$() Lava damage is reduced to $(spell:aqua_bubble/PERCENT/lava_reduction) of the original.$(br2)$(bold)Knockback:$() With the $(modifier:bubble_knockback)$() modifier, attackers are knocked back by $(spell:aqua_bubble/knockback)."
     },
     {
       "type": "text",

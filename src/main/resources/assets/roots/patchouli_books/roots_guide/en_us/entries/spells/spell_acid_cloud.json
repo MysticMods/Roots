@@ -76,7 +76,7 @@
     {
       "title": "Spell Configuration",
       "type": "text",
-      "text": "$(bold)Damage:$() The spell deals $(spell:acid_cloud/HEART/damage) hearts of damage to up to $(spell:acid_cloud/damage_count) entities when it ticks.$(br2)$(br2)$(bold)Radius:$() The configured default radius of the spell is $(spell:acid_cloud/radius_general) blocks.$(br2)$(bold)Radius Boost:$() When the $(modifier:radius_boost)$() modifier is enabled, the radius is increased by a further $(spell:acid_cloud/radius_boost) blocks."
+      "text": "$(bold)Cooldown:$() The spell has a cooldown of $(spell:acid_cloud/SECONDS/cooldown) seconds.$(br2)$(bold)Damage:$() The spell deals $(spell:acid_cloud/HEART/damage) hearts of damage to up to $(spell:acid_cloud/damage_count) entities when it ticks.$(br2)$(br2)$(bold)Radius:$() The configured default radius of the spell is $(spell:acid_cloud/radius_general) blocks.$(br2)$(bold)Radius Boost:$() When the $(modifier:radius_boost)$() modifier is enabled, the radius is increased again by $(spell:acid_cloud/radius_boost) blocks."
     },
     {
       "type": "text",

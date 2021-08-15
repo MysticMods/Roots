@@ -76,11 +76,11 @@
     {
       "type": "text",
       "title": "Spell Configuration",
-      "text": "$(bold)Range:$() Entities within your range of vision up to $(spell:dandelion_winds/range_1) blocks away are blown back. With the $(modifier:strong_gusts)$() modifier, this distance increases to up to $(spell:dandelion_winds/range_2) blocks away.$(br2)$(bold)Strength:$() Entities are knocked upwards with a strength of $(spell:dandelion_winds/distance). With the $(modifier:strong_gusts)$() modifier, this distance is increased by a further $(spell:dandelion_winds/additional_distance)."
+      "text": "$(bold)Cooldown:$() The spell has a cooldown of $(spell:dandelion_winds/SECONDS/cooldown) seconds.$(br2)$(bold)Range:$() Entities within your range of vision up to $(spell:dandelion_winds/range_1) blocks away are blown back. With the $(modifier:strong_gusts)$() modifier, this distance increases to up to $(spell:dandelion_winds/range_2) blocks away.$(br2)$(bold)Strength:$() Entities are knocked upwards with a strength of $(spell:dandelion_winds/distance). With the $(modifier:strong_gusts)$() modifier, this distance is increased by a"
     },
     {
       "type": "text",
-      "text": "$(bold)Fall Damage:$() With the $(modifier:grounded_wind)$() modifier, the fall distance is artifically inflated by $(spell:dandelion_winds/PERCENT/additional_fall).$(br2)$(bold)Slow Fall:$() With the $(modifier:slow_falling)$() modifier, entities are granted Slow Fall I for $(spell:dandelion_winds/SECONDS/slow_duration) seconds.$(br2)$(bold)Poison:$() With the $(modifier:poisonous_breeze)$() modifier enabled, entities are given Poison $(spell:dandelion_winds/ROMAN/poison_amplifier) for $(spell:dandelion_winds/SECONDS/poison_duration) seconds."
+      "text": "further $(spell:dandelion_winds/additional_distance).$(br2)$(bold)Fall Damage:$() With the $(modifier:grounded_wind)$() modifier, the fall distance is artifically inflated by $(spell:dandelion_winds/PERCENT/additional_fall).$(br2)$(bold)Slow Fall:$() With the $(modifier:slow_falling)$() modifier, entities are granted Slow Fall I for $(spell:dandelion_winds/SECONDS/slow_duration) seconds.$(br2)$(bold)Poison:$() With the $(modifier:poisonous_breeze)$() modifier enabled, entities are given Poison $(spell:dandelion_winds/ROMAN/poison_amplifier) for $(spell:dandelion_winds/SECONDS/poison_duration) seconds."
     },
     {
       "type": "text",
