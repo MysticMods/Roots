@@ -76,15 +76,15 @@
     {
       "type": "text",
       "title": "Spell Configuration",
-      "text": "$(bold)Magnetism:$() Items within $(spell:augment/radius_x) and $(spell:augment/radius_z) horizontally and $(spell:augment/radius_y) vertically are teleported directly to you.$(br2)$(bold)Reach:$() You are given $(spell:augment/reach) additional blocks of reach for $(spell:augment/SECONDS/reach_duration) seconds.$(br2)$(bold)Speed:$() You are given Speed $(spell:augment/ROMAN/speed_amplifier) for $(spell:augment/SECONDS/speed_duration) seconds.$(br2)$(bold)Slow Fall:$() You are given Slow Fall for $(spell:augment/SECONDS/slow_fall_duration) seconds."
+      "text": "$(bold)Cooldown:$() The spell has a cooldown of $(spell:augment/SECONDS/cooldown) seconds.$(br2)$(bold)Magnetism:$() Items within $(spell:augment/radius_x) and $(spell:augment/radius_z) horizontally and $(spell:augment/radius_y) vertically are teleported directly to you.$(br2)$(bold)Reach:$() You are given $(spell:augment/reach) additional blocks of reach for $(spell:augment/SECONDS/reach_duration) seconds.$(br2)$(bold)Speed:$() You are given Speed $(spell:augment/ROMAN/speed_amplifier) for $(spell:augment/SECONDS/speed_duration) seconds."
     },
     {
       "type": "text",
-      "text": "$(bold)Light Drifter:$() You drift as spectral light, seeing through the world for $(spell:augment/SECONDS/drifter_duration) seconds.$(br2)$(bold)Luck:$() You are given Luck $(spell:augment/ROMAN/luck_amplifier) that affects chests and fishing for $(spell:augment/SECONDS/luck_duration) seconds.$(br2)$(bold)Strength:$() You are given Strength $(spell:augment/ROMAN/strength_amplifier) for $(spell:augment/SECONDS/strength_duration) seconds.$(br2)$(bold)Haste:$() You are given Haste $(spell:augment/ROMAN/haste_amplifier) for $(spell:augment/SECONDS/haste_duration) seconds.$(br2)$(bold)Absorption:$() You are given Absorption $(spell:augment/ROMAN/absorption_amplifier) for $(spell:augment/SECONDS/absorption_duration) seconds."
+      "text": "$(bold)Slow Fall:$() You are given Slow Fall for $(spell:augment/SECONDS/slow_fall_duration) seconds.$(bold)Light Drifter:$() You drift as spectral light, seeing through the world for $(spell:augment/SECONDS/drifter_duration) seconds.$(br2)$(bold)Luck:$() You are given Luck $(spell:augment/ROMAN/luck_amplifier) that affects chests and fishing for $(spell:augment/SECONDS/luck_duration) seconds.$(br2)$(bold)Strength:$() You are given Strength $(spell:augment/ROMAN/strength_amplifier) for $(spell:augment/SECONDS/strength_duration) seconds.$(br2)$(bold)Haste:$() You are given Haste $(spell:augment/ROMAN/haste_amplifier) for $(spell:augment/SECONDS/haste_duration) seconds."
     },
     {
       "type": "text",
-      "text": "$(bold)Air:$() Your air supply is increased by $(spell:augment/air_amount)."
+      "text": "$(bold)Absorption:$() You are given Absorption $(spell:augment/ROMAN/absorption_amplifier) for $(spell:augment/SECONDS/absorption_duration) seconds.$(bold)Air:$() Your air supply is increased by $(spell:augment/air_amount)."
     }
   ]
 }

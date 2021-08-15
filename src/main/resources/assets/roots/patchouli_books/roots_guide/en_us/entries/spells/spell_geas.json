@@ -70,15 +70,15 @@
     {
       "type": "text",
       "title": "Spell Configuration",
-      "text": "$(bold)Duration:$() The geas lasts for $(spell:geas/SECONDS/geas_duration) seconds, increase by $(spell:geas/SECONDS/extension) seconds with the $(modifier:extended_geas)$() modifier.$(br2)$(bold)Saviour:$() With the $(modifier:animal_savior)$() modifier, all nearby peaceful entities within view are given Absorption $(spell:geas/ROMAN/savior_amplifier) for $(spell:geas/SECONDS/savior_duration) seconds.$(br2)$(bold)Weakness:$() With the $(modifier:weakened_response)$() modifier, entities previously under a geas are given Weakness $(spell:geas/ROMAN/weakness_amplifier) for $(spell:geas/SECONDS/weakness_duration) seconds."
+      "text": "$(bold)Cooldown:$() The spell has a cooldown of $(spell:geas/SECONDS/cooldown) seconds.$(br2)$(bold)Duration:$() The geas lasts for $(spell:geas/SECONDS/geas_duration) seconds, increase by $(spell:geas/SECONDS/extension) seconds with the $(modifier:extended_geas)$() modifier.$(br2)$(bold)Saviour:$() With the $(modifier:animal_savior)$() modifier, all nearby peaceful entities within view are given Absorption $(spell:geas/ROMAN/savior_amplifier) for $(spell:geas/SECONDS/savior_duration) seconds.$(br2)$(bold)Weakness:$() With the $(modifier:weakened_response)$()"
     },
     {
       "type": "text",
-      "text": "$(bold)Additional Targets:$() For each modifier of $(modifier:additional_target1)$() and $(modifier:additional_target2)$(), an additional entity is given a geas.$(br2)$(bold)Fire:$() With the $(modifier:inferno)$() modifier, entities are set on fire for $(spell:geas/fire_duration) seconds.$(br2)$(bold)Physical:$() With the $(modifier:avalanche)$() modifier, entities take $(spell:geas/HEART/physical_damage) hearts of physical damage when the geas ends.$(br2)$(bold)Water:$() With the $(modifier:waterfall)$() modifier, entities take $(spell:geas/HEART/water_damage)"
+      "text": "modifier, entities previously under a geas are given Weakness $(spell:geas/ROMAN/weakness_amplifier) for $(spell:geas/SECONDS/weakness_duration) seconds.$(br2)$(bold)Additional Targets:$() For each modifier of $(modifier:additional_target1)$() and $(modifier:additional_target2)$(), an additional entity is given a geas.$(br2)$(bold)Fire:$() With the $(modifier:inferno)$() modifier, entities are set on fire for $(spell:geas/fire_duration) seconds.$(br2)$(bold)Physical:$() With the $(modifier:avalanche)$() modifier, entities take $(spell:geas/HEART/physical_damage) hearts of physical damage when the geas ends."
     },
     {
       "type": "text",
-      "text": "hearts of water damage when the geas ends.$(br2)$(bold)Zombie Slaves:$() With the $(modifier:unholy_command)$() modifier enabled, zombies and husks are converted into slaves that will fight for you for $(spell:geas/SECONDS/geas_duration) seconds, increased by $(spell:geas/SECONDS/extension) seconds with the $(modifier:extended_geas)$() modifier."
+      "text": "$(bold)Water:$() With the $(modifier:waterfall)$() modifier, entities take $(spell:geas/HEART/water_damage) hearts of water damage when the geas ends.$(br2)$(bold)Zombie Slaves:$() With the $(modifier:unholy_command)$() modifier enabled, zombies and husks are converted into slaves that will fight for you for $(spell:geas/SECONDS/geas_duration) seconds, increased by $(spell:geas/SECONDS/extension) seconds with the $(modifier:extended_geas)$() modifier."
     }
   ]
 }

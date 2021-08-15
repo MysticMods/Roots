@@ -76,7 +76,7 @@
     {
       "type": "text",
       "title": "Spell Configuration",
-      "text": "$(bold)Growth Chance:$() Up to $(spell:growth_infusion/growth_ticks) additional ticks are given to a plant for every tick that the spell is channeled.$(br2)$(bold)Radius:$() With any of $(modifier:rampant_growth_i)$(), $(modifier:rampant_growth_ii)$() or $(modifier:arms_of_air)$() enabled, $(spell:growth_infusion/count) crops within an area of $(spell:growth_infusion/radius_x) and $(spell:growth_infusion/radius_z) blocks horizontally and $(spell:growth_infusion/radius_y) vertically are selected for random growth for every tick that the spell is channeled."
+      "text": "$(bold)Cooldown:$() The spell has a cooldown of $(spell:growth_infusion/SECONDS/cooldown) seconds.$(br2)$(bold)Growth Chance:$() Up to $(spell:growth_infusion/growth_ticks) additional ticks are given to a plant for every tick that the spell is channeled.$(br2)$(bold)Radius:$() With any of $(modifier:rampant_growth_i)$(), $(modifier:rampant_growth_ii)$() or $(modifier:arms_of_air)$() enabled, $(spell:growth_infusion/count) crops within an area of $(spell:growth_infusion/radius_x) and $(spell:growth_infusion/radius_z) blocks horizontally and $(spell:growth_infusion/radius_y) vertically are selected for random growth every channeled tick."
     },
     {
       "type": "text",

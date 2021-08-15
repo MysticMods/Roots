@@ -1,5 +1,6 @@
 package epicsquid.roots.integration.crafttweaker.tweaks;
 
+import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.block.IBlockState;
 import crafttweaker.api.item.IItemStack;
@@ -136,7 +137,9 @@ public class TransmutationTweaker {
 
     @Override
     public void apply() {
-      ModRecipes.removeTransmutationRecipe(this.name);
+      if (!ModRecipes.removeTransmutationRecipe(this.name)) {
+        CraftTweakerAPI.logError("Unable to remove Transmutation recipe " + this.name + " as it doesn't exist.");
+      }
     }
 
     @Override

@@ -76,7 +76,7 @@
     {
       "type": "text",
       "title": "Spell Configuration",
-      "text": "$(bold)Deluminator:$() With the $(modifier:deluminator)$() modifier, lights are consumed within a radius of $(spell:fey_light/radius_x) and $(spell:fey_light/radius_z) horizontally, and $(spell:fey_light/radius_y) vertically."
+      "text": "$(bold)Cooldown:$() The spell has a cooldown of $(spell:fey_light/SECONDS/cooldown) seconds.$(br2)$(bold)Deluminator:$() With the $(modifier:deluminator)$() modifier, lights are consumed within a radius of $(spell:fey_light/radius_x) and $(spell:fey_light/radius_z) horizontally, and $(spell:fey_light/radius_y) vertically."
     }
   ]
 }

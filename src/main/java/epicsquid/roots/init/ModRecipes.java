@@ -519,8 +519,8 @@ public class ModRecipes {
     transmutationRecipes.put(n, recipe);
   }
 
-  public static void removeTransmutationRecipe(ResourceLocation name) {
-    transmutationRecipes.remove(name);
+  public static boolean removeTransmutationRecipe(ResourceLocation name) {
+    return transmutationRecipes.remove(name) != null;
   }
 
   public static TransmutationRecipe getTransmutationRecipe(ResourceLocation name) {
