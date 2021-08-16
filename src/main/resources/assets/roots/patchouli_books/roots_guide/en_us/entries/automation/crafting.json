@@ -27,6 +27,14 @@
         ]
       },
       "text": "The runic crafter will output results to any adjacent inventory in a 3x3 area excluding the one below it."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/fey_crafter",
+        "crafting/grove_stones"
+      ]
     }
   ]
 }

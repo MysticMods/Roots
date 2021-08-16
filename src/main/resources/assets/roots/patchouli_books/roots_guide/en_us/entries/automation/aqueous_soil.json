@@ -58,6 +58,13 @@
         ]
       },
       "text": "As gravel is below the aqueous soil, the wheat will not be harvested."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "resources/elemental_soil"
+      ]
     }
   ]
 }
