@@ -76,19 +76,19 @@
     {
       "type": "text",
       "title": "Spell Configuration",
-      "text": "$(bold)Distance:$() The maximum range of the beam for breaking is $(spell:shatter/distance) blocks.$(br2)$(bold)Size:$() By default, the beam will break blocks width a width of $(spell:shatter/default_width) (with 0 being 1 block), a height of $(spell:shatter/default_height) (with 0 being 2 blocks: the block and the block below), and a depth of $(spell:shatter/default_depth) (with 0 being 1 block broken).$(br2)$(bold)Width:$() With the $(modifier:wider)$() modifier, $(spell:shatter/width) block(s) are added on either side. A value of 1"
+      "text": "$(bold)Cooldown:$() The spell has a cooldown of $(spell:shatter/SECONDS/cooldown) seconds.$(br2)$(bold)Distance:$() The maximum range of the beam for breaking is $(spell:shatter/distance) blocks.$(br2)$(bold)Size:$() By default, the beam will break blocks width a width of $(spell:shatter/default_width) (with 0 being 1 block), a height of $(spell:shatter/default_height) (with 0 being 2 blocks: the block and the block below), and a depth of $(spell:shatter/default_depth) (with 0 being 1 block broken)."
     },
     {
       "type": "text",
-      "text": "would mean three blocks in a row are broken.$(br2)$(bold)Height:$() With the $(modifier:taller)$() modifier enabled, $(spell:shatter/height) block(s) are added on either side. A value of 1 would mean three blocks in a column are broken.$(br2)$(bold)Depth:$() With the $(modifier:deeper)$() modifier, $(spell:shatter/depth) blocks are added to the default. A value of 2 would mean that up to three blocks are broken behind the initial block, for a total of three blocks broken (if the default depth is 0)."
+      "text": "$(bold)Width:$() With the $(modifier:wider)$() modifier, $(spell:shatter/width) block(s) are added on either side. A value of 1 would mean three blocks in a row are broken.$(br2)$(bold)Height:$() With the $(modifier:taller)$() modifier enabled, $(spell:shatter/height) block(s) are added on either side. A value of 1 would mean three blocks in a column are broken.$(br2)$(bold)Depth:$() With the $(modifier:deeper)$() modifier, $(spell:shatter/depth) blocks are added to the default. A value of 2 would mean that up to three blocks are broken behind the"
     },
     {
       "type": "text",
-      "text": "$(bold)Single:$() With the $(modifier:singularity)$() modifier enabled, a single block is broken by default (instead of two).$(br2)$(bold)Magnetism:$() With the $(modifier:magnetic_ray)$() modifier enabled, all of the broken blocks are their drops are teleported to your location.$(br2)$(bold)Silk Touch:$() With the $(modifier:shatter_silk_touch)$() modifier enabled, blocks are broken as though the Silk Touch enchantment was used.$(br2)$(bold)Fortune:$() With the $(modifier:shatter_fortune)$()"
+      "text": "initial block, for a total of three blocks broken (if the default depth is 0).$(br2)$(bold)Single:$() With the $(modifier:singularity)$() modifier enabled, a single block is broken by default (instead of two).$(br2)$(bold)Magnetism:$() With the $(modifier:magnetic_ray)$() modifier enabled, all of the broken blocks are their drops are teleported to your location.$(br2)$(bold)Silk Touch:$() With the $(modifier:shatter_silk_touch)$() modifier enabled, blocks"
     },
     {
       "type": "text",
-      "text": "modifier enabled, blocks are broken as though enchanted with Fortune II.$(br2)$(bold)Smelting:$() With the $(modifier:smelting_ray)$() modifier enabled, blocks that are broken are smelted as though cooked in a furnace.$(br2)$(bold)Moss:$() With the $(modifier:moss_harvest)$() modifier enabled, blocks are processed as though with a knife to obtain $(l:herbs/terra_moss)terra moss$()."
+      "text": "are broken as though the Silk Touch enchantment was used.$(br2)$(bold)Fortune:$() With the $(modifier:shatter_fortune)$() modifier enabled, blocks are broken as though enchanted with Fortune II.$(br2)$(bold)Smelting:$() With the $(modifier:smelting_ray)$() modifier enabled, blocks that are broken are smelted as though cooked in a furnace.$(br2)$(bold)Moss:$() With the $(modifier:moss_harvest)$() modifier enabled, blocks are processed as though with a knife to obtain $(l:herbs/terra_moss)terra moss$()."
     },
     {
       "type": "text",

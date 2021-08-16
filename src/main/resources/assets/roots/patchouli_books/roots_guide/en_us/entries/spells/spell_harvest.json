@@ -70,7 +70,7 @@
     {
       "type": "text",
       "title": "Spell Configuration",
-      "text": "$(bold)Radius:$() The default radius of this spell is $(spell:harvest/radius_x) by $(spell:harvest/radius_z) blocks horizontally and $(spell:harvest/radius_y) vertically.$(br2)$(bold)Radius Boost:$() With the $(modifier:extended_harvest)$() modifier enabled, the range on all axes is increased by $(spell:harvest/radius_boost) blocks.$(br2)$(bold)Radius Unboost:$() With the $(modifier:targeted_harvest)$() modifier enabled, the range on all axes is reduced by $(spell:harvest/radius_unboost) blocks."
+      "text": "$(bold)Cooldown:$() The spell has a cooldown of $(spell:harvest/SECONDS/cooldown) seconds.$(br2)$(bold)Radius:$() The default radius of this spell is $(spell:harvest/radius_x) by $(spell:harvest/radius_z) blocks horizontally and $(spell:harvest/radius_y) vertically.$(br2)$(bold)Boost:$() With the $(modifier:extended_harvest)$() modifier enabled, the radius is increased $(spell:harvest/radius_boost) blocks.$(br2)$(bold)Unboost:$() With the $(modifier:targeted_harvest)$() modifier enabled, the raduis is reduced by $(spell:harvest/radius_unboost) blocks."
     },
     {
       "type": "text",

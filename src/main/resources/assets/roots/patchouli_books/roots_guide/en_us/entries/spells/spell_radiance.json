@@ -70,7 +70,7 @@
     {
       "type": "text",
       "title": "Spell Configuration",
-      "text": "$(bold)Size:$() The maximum reach of the Radiance beam is $(spell:radiance/distance) blocks, including bounces, while the default width is $(spell:radiance/width). With the $(modifier:wider_ray)$() modifier, this width is increased by a further $(spell:radiance/added_width).$(br2)$(bold)Damage:$() Each entity hit by the beam takes $(spell:radiance/HEART/damage) hearts radiant damage. Undead entities take an additioanl $(spell:radiance/HEART/undead_damage) hearts of damage."
+      "text": "$(bold)Cooldown:$() The spell has a cooldown of $(spell:radiance/SECONDS/cooldown) seconds.$(br2)$(bold)Size:$() The maximum reach of the Radiance beam is $(spell:radiance/distance) blocks, including bounces, while the default width is $(spell:radiance/width). With the $(modifier:wider_ray)$() modifier, this width is increased by a further $(spell:radiance/added_width).$(br2)$(bold)Damage:$() Each entity hit by the beam takes $(spell:radiance/HEART/damage) hearts of radiant damage. Undead take a further $(spell:radiance/HEART/undead_damage) hearts of damage."
     },
     {
       "type": "text",

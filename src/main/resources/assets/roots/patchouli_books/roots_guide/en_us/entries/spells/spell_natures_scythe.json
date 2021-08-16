@@ -76,7 +76,7 @@
     {
       "type": "text",
       "title": "Spell Configuration",
-      "text": "$(bold)Radius:$() Blocks within a radius of $(spell:natures_scythe/radius) horizontally and $(spell:natures_scythe/radius_y).$(br2)$(bold)Affected Blocks:$() Up to $(spell:natures_scythe/max_affected) blocks are broken every $(spell:natures_scythe/SECONDS/interval) seconds.$(br2)$(bold)Leaves:$() With the $(modifier:leaf_harvester)$() modifier enabled, blocks that match the ore dictionary entry $(bold)$(spell:natures_scythe/tree_dictionary)$() are broken."
+      "text": "$(bold)Cooldown:$() The spell has a cooldown of $(spell:natures_scythe/SECONDS/cooldown) seconds.$(br2)$(bold)Radius:$() Blocks within a radius of $(spell:natures_scythe/radius) horizontally and $(spell:natures_scythe/radius_y).$(br2)$(bold)Affected Blocks:$() Up to $(spell:natures_scythe/max_affected) blocks are broken every $(spell:natures_scythe/SECONDS/interval) seconds.$(br2)$(bold)Leaves:$() With the $(modifier:leaf_harvester)$() modifier enabled, blocks matching the entry $(bold)$(spell:natures_scythe/tree_dictionary)$() are broken."
     },
     {
       "type": "text",
