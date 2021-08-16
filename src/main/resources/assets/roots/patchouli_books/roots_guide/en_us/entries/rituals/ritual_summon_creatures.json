@@ -70,7 +70,8 @@
       "type": "relations",
       "entries": [
         "crafting/catalyst_plates",
-        "rituals/catalyst_plates"
+        "rituals/catalyst_plates",
+        "resources/life_essence"
       ]
     }
   ]
