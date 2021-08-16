@@ -5,7 +5,10 @@ import mods.roots.RunicShears;
 
 // Creates a recipe that obtains nether wart from red nether bricks
 // and then converts the bricks into normal nether bricks
-RunicShears.addRecipe("nether_wart_block", <minecraft:nether_wart>*2, StatePredicate.create(<blockstate:minecraft:nether_brick>), <blockstate:minecraft:red_nether_brick>, <minecraft:red_nether_brick>);
+RunicShears.addRecipe("nether_wart_block", <minecraft:nether_wart>*2, StatePredicate.create(<blockstate:minecraft:red_nether_brick>), <blockstate:minecraft:nether_brick>, <minecraft:red_nether_brick>);
+
+// Removes the default chicken->mystical feather recipe
+RunicShears.removeEntityRecipe(<entity:minecraft:chicken>);
 
 // Creates a recipe that obtains eggs from chickens with a 2 minute cooldown
 RunicShears.addEntityRecipe("egg_from_chicken", <minecraft:egg>*2, <entity:minecraft:chicken>, 120*20);
