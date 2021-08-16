@@ -11,6 +11,13 @@
     {
       "type": "fey_crafting_template",
       "recipe": "salmon_of_knowledge"
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/fey_crafting"
+      ]
     }
   ]
 }

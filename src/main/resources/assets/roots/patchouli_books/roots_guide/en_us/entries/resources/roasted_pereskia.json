@@ -12,6 +12,13 @@
     {
       "type": "ritual_crafting_template",
       "recipe": "cooked_pereskia"
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "herbs/pereskia"
+      ]
     }
   ]
 }

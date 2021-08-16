@@ -42,6 +42,14 @@
         ]
       },
       "text": "The four plates show the furthest plates may be placed from the pyre."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/catalyst_plates",
+        "rituals/ritual_summon_creatures"
+      ]
     }
   ]
 }

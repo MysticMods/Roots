@@ -23,6 +23,14 @@
     {
       "type": "fey_crafting_template",
       "recipe": "wildwood_boots"
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/fey_crafter",
+        "resources/wildwood"
+      ]
     }
   ]
 }

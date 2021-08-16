@@ -89,6 +89,14 @@
     {
       "type": "text",
       "text": "$(bold)Circle:$() With the $(modifier:circle_of_winds)$() modifier, all entities around you are affected instead of the regular blast radius.$(br2)$(bold)Peaceful:$() With the $(modifier:peaceful_winds)$() modifier, non-hostile entities are unaffected by this spell."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/modifiers",
+        "herbs/cloud_berry"
+      ]
     }
   ]
 }

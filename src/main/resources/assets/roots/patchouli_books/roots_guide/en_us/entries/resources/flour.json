@@ -13,6 +13,13 @@
       "type": "smelting",
       "recipe": "roots:flour",
       "text": "Once processed into flour, the flour can be smelted into bread."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/mortar_and_pestle"
+      ]
     }
   ]
 }

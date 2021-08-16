@@ -60,6 +60,18 @@
     {
       "type": "text",
       "text": "$(info) Once the spell is imbued, it will be accessible in your $(l:spells/library)spell library$(), and you can immediately use the interface to add it to your staff.$(br2)$(info) Unlike other uses of the $(l:crafting/imbuer)imbuer$(), the gramary will remain inside it once the process is complete. You may remove it by simply right-clicking the imbuer."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/introduction2",
+        "spells/library",
+        "spells/modifiers",
+        "crafting/gramary",
+        "crafting/staff",
+        "crafting/imbuer"
+      ]
     }
   ]
 }

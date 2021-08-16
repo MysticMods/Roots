@@ -84,6 +84,15 @@
         ]
       },
       "text": "All positions of torches and the grass beneath are eligible for fire automation."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/pyres",
+        "rituals/introduction",
+        "rituals/standing_stones"
+      ]
     }
   ]
 }

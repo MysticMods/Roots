@@ -69,6 +69,8 @@
     {
       "type": "relations",
       "entries": [
+        "crafting/catalyst_plates",
+        "rituals/catalyst_plates"
       ]
     }
   ]

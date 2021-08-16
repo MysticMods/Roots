@@ -13,6 +13,14 @@
       "type": "text",
       "title":  "Rituals",
       "text": "Instead, a canny wild mage may utilise the $(l:rituals/ritual_wildroot_growth)Wildroot Growth$() ritual to germinate and grow such a tree from the wildroot crop itself.$(br2)The resulting wildroot, and the $(l:resources/bark#dark_oak)bark$() obtained from it are used in many recipes, rituals and spells.$(br2)Additionally, wildwood can be used $(l:crafting/wildwood)decoratively$() in many ways."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/wildwood",
+        "crafting/wildwood_armor"
+      ]
     }
   ]
 }

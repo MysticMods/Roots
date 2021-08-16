@@ -12,6 +12,13 @@
     {
       "type": "text",
       "text": "$(warning) Like normal $(l:crafting/pyres)pyres$(), this counts as a ticking tile entity and may have a performance impact when used in large quantities."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/pyres"
+      ]
     }
   ]
 }

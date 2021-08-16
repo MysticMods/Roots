@@ -79,6 +79,15 @@
     {
       "type": "text",
       "text": "knocked back with a strength of $(spell:disarm/knockback_strength).$(br2)$(bold)Weakness:$() With the $(modifier:weakness)$() modifier enabled, disarmed entities are given Weakness $(spell:disarm/ROMAN/weakness_amplifier) for $(spell:disarm/SECONDS/weakness_duration) seconds.$(br2)$(bold)Duo:$() With the $(modifier:disarm_duumvirate)$() modifier enabled, the nearest two hostile entities are disarmed.$(br2)$(bold)Flowers:$() With the $(modifier:flower_child)$() modifier enabled, entity's held items are replaced with flowers instead."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/modifiers",
+        "herbs/wildewheet",
+        "herbs/moonglow"
+      ]
     }
   ]
 }

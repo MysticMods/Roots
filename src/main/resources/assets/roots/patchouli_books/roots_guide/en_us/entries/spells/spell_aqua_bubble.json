@@ -83,6 +83,15 @@
     {
       "type": "text",
       "text": "$(bold)Poison Resistance:$() With the $(modifier:poison_protection)$() modifier, you are immune to poison for the duration of the bubble."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/modifiers",
+        "herbs/terra_moss",
+        "herbs/dewgonia"
+      ]
     }
   ]
 }

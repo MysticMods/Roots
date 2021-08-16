@@ -89,6 +89,14 @@
     {
       "type":"text",
       "text": "$(spell:rose_thorns/fire_duration) seconds.$(br2)$(bold)Strength:$() With the $(modifier:empowering_trap)$() modifier enabled, the caster is given Strength $(spell:rose_thorns/ROMAN/strength_amplifier) for $(spell:rose_thorns/SECONDS/strength_duration) seconds when the trap is triggered.$(br2)$(bold)Slowness:$() With the $(modifier:slowing_trap)$() modifier enabled, damaged entities are given Slowness $(spell:rose_thorns/ROMAN/slowness_amplifier) for $(spell:rose_thorns/SECONDS/slowness_duration) seconds."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/modifiers",
+        "herbs/terra_moss"
+      ]
     }
   ]
 }

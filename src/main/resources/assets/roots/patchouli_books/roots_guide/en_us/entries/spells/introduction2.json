@@ -53,6 +53,18 @@
       "type": "text",
       "title": "Colour & Tooltip",
       "text": "Green colouring and no additional tooltip text mean the modifier is enabled.$(br2)$(info) Click the slot to disable it.$(br2)Purple colouring and 'Modifier conflicts' means this modifier conflicts with another modifier and cannot be enabled.$(br2)$(info) Disable the mentioned modifiers or hold Alt when clicking to disable them automatically."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/introduction",
+        "spells/library",
+        "spells/modifiers",
+        "crafting/staff",
+        "crafting/gramary",
+        "crafting/imposer"
+      ]
     }
   ]
 }

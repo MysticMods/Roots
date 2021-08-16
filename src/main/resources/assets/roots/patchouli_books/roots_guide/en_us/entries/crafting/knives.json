@@ -32,6 +32,19 @@
     {
       "type": "text",
       "text": "When holding $(l:herbs)wildroot$() in the off-hand, right-clicking an eligible $(l:rituals/standing_stones)log converts it into runed wood$()."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "resources/bark",
+        "herbs/terra_moss",
+        "rituals/ritual_overgrowth",
+        "rituals/visualisation",
+        "crafting/introduction",
+        "crafting/runic_dagger",
+        "automation/ritual_overgrowth"
+      ]
     }
   ]
 }

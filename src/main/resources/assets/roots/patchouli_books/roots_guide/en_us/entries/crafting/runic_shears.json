@@ -12,6 +12,18 @@
       "type": "fey_crafting_template",
       "recipe": "runic_shears",
       "link_recipe": true
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "resources/fey_leather",
+        "resources/life_essence",
+        "resources/mystic_feather",
+        "resources/strange_ooze",
+        "resources/runestone",
+        "herbs/pereskia"
+      ]
     }
   ]
 }

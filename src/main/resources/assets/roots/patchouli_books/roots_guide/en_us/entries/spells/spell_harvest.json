@@ -83,6 +83,14 @@
     {
       "type": "text",
       "text": "$(bold)Spirit Harvest:$() With the $(modifier:gifts_of_undeath)$() modifier enabled, each time you perform a harvest operation you have a $(spell:harvest/PERCENT/undead_chance) percent chance of obtaining up to $(spell:harvest/undead_count) of either of two $(l:resources/loot_bags)loot bags$(). Each spirit bag has a $(spell:harvest/PERCENT/undead_rare) chance to be upgraded to a reliquary."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/modifiers",
+        "herbs/wildewheet"
+      ]
     }
   ]
 }

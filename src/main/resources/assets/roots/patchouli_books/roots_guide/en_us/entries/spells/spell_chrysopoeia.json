@@ -17,6 +17,16 @@
       "type": "text",
       "title": "Spell Configuration",
       "text": "$(bold)Cooldown:$() The spell has a cooldown of $(spell:chrysopoeia/SECONDS/cooldown) seconds."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/modifiers",
+        "herbs/infernal_bulb",
+        "herbs/spirit_herb",
+        "herbs/dewgonia"
+      ]
     }
   ]
 }

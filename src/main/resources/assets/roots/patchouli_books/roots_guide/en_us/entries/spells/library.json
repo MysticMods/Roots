@@ -34,6 +34,19 @@
       "title": "Staff Interface",
       "images": ["roots:textures/gui/patchouli/spell_library_staff.png"],
       "text": "$(bold)Alt-Click$() to access modifiers for this specific staff. $(l:spells/introduction2)See modifiers$()."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/introduction",
+        "spells/introduction2",
+        "spells/modifiers",
+        "crafting/staff",
+        "crafting/gramary",
+        "crafting/imposer",
+        "crafting/imbuer"
+      ]
     }
   ]
 }

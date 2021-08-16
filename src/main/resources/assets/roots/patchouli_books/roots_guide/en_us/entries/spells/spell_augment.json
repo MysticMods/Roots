@@ -85,6 +85,14 @@
     {
       "type": "text",
       "text": "$(bold)Absorption:$() You are given Absorption $(spell:augment/ROMAN/absorption_amplifier) for $(spell:augment/SECONDS/absorption_duration) seconds.$(bold)Air:$() Your air supply is increased by $(spell:augment/air_amount)."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/modifiers",
+        "herbs/wildroot"
+      ]
     }
   ]
 }

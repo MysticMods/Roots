@@ -61,6 +61,15 @@
       "anchor": "auto",
       "title": "Automation",
       "text": "$(l:automation/ritual_overgrowth)This ritual can easily be automated$() using vanilla methods."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/knives",
+        "rituals/ritual_overgrowth",
+        "automation/ritual_overgrowth"
+      ]
     }
   ]
 }

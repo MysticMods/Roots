@@ -37,6 +37,11 @@
       "type": "relations",
       "anchor": "related",
       "entries": [
+        "herbs/terra_moss",
+        "crafting/knives",
+        "crafting/runic_shears",
+        "automation/runic_shears",
+        "automation/ritual_overgrowth"
       ]
     }
   ]

@@ -23,6 +23,8 @@
       "type": "relations",
       "anchor": "related",
       "entries": [
+        "resources/petals",
+        "resources/rare_flowers"
       ]
     }
   ]

@@ -37,6 +37,13 @@
         ]
       },
       "text": "An example of the mortar set-up."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/mortar_and_pestle"
+      ]
     }
   ]
 }

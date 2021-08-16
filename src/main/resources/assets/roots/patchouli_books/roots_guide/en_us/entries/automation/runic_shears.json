@@ -11,6 +11,13 @@
     {
       "type": "text",
       "text": "This extends to shearing wool from sheep and other mundane uses."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/runic_shears"
+      ]
     }
   ]
 }

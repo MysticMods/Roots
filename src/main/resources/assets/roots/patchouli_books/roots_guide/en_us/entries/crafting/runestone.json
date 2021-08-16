@@ -80,6 +80,17 @@
       "title": "Deconversion",
       "recipe": "roots:runestone_brick_from_chisel",
       "text": "This recipe allows you to 'de-convert' from the alternate type of brick back into the primary runestone."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "resources/runestone",
+        "resources/runed_obsidian",
+        "rituals/introduction",
+        "rituals/standing_stones",
+        "rituals/tiers"
+      ]
     }
   ]
 }

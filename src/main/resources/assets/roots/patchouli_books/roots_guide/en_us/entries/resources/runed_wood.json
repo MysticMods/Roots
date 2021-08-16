@@ -30,6 +30,14 @@
       "type": "runic_carving_template",
       "recipe": "wildwood",
       "name": "Wildwood"
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/knives",
+        "herbs/wildroot"
+      ]
     }
   ]
 }

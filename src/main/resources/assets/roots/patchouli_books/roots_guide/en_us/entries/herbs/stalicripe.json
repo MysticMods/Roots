@@ -17,6 +17,13 @@
       "type":"text",
       "title": "Renewability",
       "text": "Once obtained, stalicripe can be planted in any of the five types of $(l:resources/elemental_soil)elemental soil$().$(br2)It's not necessary to match the element of the soil with the element of stalicripe.$(br2)Once mature, paler clusters of soft, stone-like growth are strung together with calcified tendrils of woody growth."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "resources/elemental_soil"
+      ]
     }
   ]
 }

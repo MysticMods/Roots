@@ -41,6 +41,7 @@
     {
       "type": "relations",
       "entries": [
+        "rituals/introduction"
       ]
     }
   ]

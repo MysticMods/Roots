@@ -33,12 +33,6 @@
       "type": "text",
       "title": "Ritual Specifics",
       "text": "$(bold)Duration:$() The ritual lasts for $(ritual:gathering/SECONDS/duration) seconds.$(br2)$(bold)Size:$() Ritual area extends $(ritual:gathering/radius_x) and $(ritual:gathering/radius_z) blocks from the center, and vertically by $(ritual:gathering/radius_y) blocks.$(br2)$(bold)Frequency:$() Items are checked for every $(ritual:gathering/SECONDS/interval) seconds."
-    },
-    {
-      "type": "relations",
-      "anchor": "related",
-      "entries": [
-      ]
     }
   ]
 }

@@ -13,6 +13,14 @@
     {
       "type": "text",
       "text": "While channeling the fire starter, it is possible to see where the fire will be placed due to the smoke particles emanating from that block.$(br2)$(info) It is possible to use a fire starter to $(l:rituals/fire_starter)start a pyre$()."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "rituals/introduction",
+        "rituals/fire_starter"
+      ]
     }
   ]
 }

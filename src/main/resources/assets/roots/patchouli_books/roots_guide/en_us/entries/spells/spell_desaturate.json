@@ -83,6 +83,15 @@
     {
       "type": "text",
       "text": "$(bold)Purify:$() With the $(modifier:excess_purification)$() modifier, for every point of overhealing (rounded up), one negative potion effect is removed from you.$(br2)$(bold)Thoughtful:$() With the $(modifier:thoughtful)$() modifier active, only enough shanks to heal you to full are consumed, preventing overhealing."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/modifiers",
+        "herbs/spirit_herb",
+        "herbs/terra_moss"
+      ]
     }
   ]
 }

@@ -89,6 +89,14 @@
     {
       "type": "text",
       "text": "$(bold)Underwater:$() With the $(modifier:underwater_increase)$() modifier, damage dealt while underwater is increased by $(spell:acid_cloud/PERCENT/underwater_boost).$(br2)$(bold)Weakness:$() With the $(modifier:weakening_cloud)$() modifier, affected entities are given Weakness $(spell:acid_cloud/ROMAN/weakness_amplifier) for $(spell:acid_cloud/SECONDS/weakness_duration).$(br2)$(bold)Peaceful:$() With the $(modifier:peaceful_cloud)$() modifier, only hostile entities are affected."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/modifiers",
+        "herbs/baffle_cap"
+      ]
     }
   ]
 }

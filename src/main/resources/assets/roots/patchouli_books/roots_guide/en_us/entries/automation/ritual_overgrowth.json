@@ -38,6 +38,14 @@
         ]
       },
       "text": "hopper can be placed, feeding into a chest. $(l:rituals/automation)Automating the pyre$() ensures a steady supply of $(l:herbs/terra_moss)terra moss$()."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "rituals/ritual_overgrowth",
+        "herbs/terra_moss"
+      ]
     }
   ]
 }

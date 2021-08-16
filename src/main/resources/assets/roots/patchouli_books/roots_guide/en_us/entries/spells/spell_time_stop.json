@@ -83,6 +83,16 @@
     {
       "type":"text",
       "text": "$(bold)Speed:$() If the $(modifier:hasty_escape)$() modifier is enabled, you are given Speed $(spell:time_stop/ROMAN/speed_amplifier) for $(spell:time_stop/SECONDS/speed_duration) seconds after casting the spell.$(br2)$(bold)Cold:$() With the $(modifier:ice_age)$() modifier enabled, entities affected by the time stop take $(spell:time_stop/HEART/cold_damage) hearts of cold damage when the effect ends.$(br2)$(bold)Fire:$() With the $(modifier:burn_in_hell)$() modifier enabled, entities are set ablaze for $(spell:time_stop/fire_duration) seconds, refreshing once the effect ends."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/modifiers",
+        "herbs/pereskia",
+        "herbs/dewgonia",
+        "herbs/moonglow"
+      ]
     }
   ]
 }

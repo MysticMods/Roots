@@ -38,6 +38,8 @@
     {
       "type": "relations",
       "entries": [
+        "resources/wildwood",
+        "herbs/wildroot"
       ]
     }
   ]

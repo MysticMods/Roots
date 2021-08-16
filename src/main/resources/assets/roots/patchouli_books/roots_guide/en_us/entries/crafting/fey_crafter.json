@@ -27,6 +27,18 @@
       "type": "text",
       "title": "Movement",
       "text": "A fey crafter can be moved without requiring a new $(l:rituals/ritual_grove_supplication)Grove Supplication ritual$() being performed.$(br2)$(info) So long as the crafter is placed within ten blocks of an active grove stone, it will function properly.$(br2)On the other hand, breaking a grove stone or otherwise moving it will require that you complete the ritual again."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "concepts/groves",
+        "concepts/the_fey",
+        "crafting/grove_stone",
+        "crafting/runic_crafter",
+        "crafting/introduction",
+        "automation/crafting"
+      ]
     }
   ]
 }

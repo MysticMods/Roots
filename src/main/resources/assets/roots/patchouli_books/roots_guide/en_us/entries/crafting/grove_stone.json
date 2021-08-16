@@ -16,6 +16,18 @@
       "type": "text",
       "title": "In-World Effects",
       "text": "If placed in a suitable environment (i.e., with grass nearby), an active Grove Stone will attempt to transform the world around it to better match the wilds of the Fey.$(br2)This process entails the production of grasses, $(l:herbs/introduction)from which herbs can be collected$().$(br2)$(info) In addition, rare flowers such as rose bushes, lilacs, sunflowers and more all have a chance to grow!"
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/introduction",
+        "crafting/fey_crafter",
+        "crafting/runic_crafter",
+        "rituals/ritual_grove_supplication",
+        "concepts/groves",
+        "concepts/the_fey"
+      ]
     }
   ]
 }

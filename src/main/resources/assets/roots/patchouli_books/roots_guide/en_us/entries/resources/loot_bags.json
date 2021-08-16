@@ -15,6 +15,13 @@
       "item": "roots:spirit_bag",
       "link_recipe": true,
       "text": "You can see a listing of all of the items that can be obtained from $(uses:roots:reliquary)Reliquaries$() and $(uses:roots:spirit_bag)Spirit Bags$() with JEI."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/spell_harvest"
+      ]
     }
   ]
 }

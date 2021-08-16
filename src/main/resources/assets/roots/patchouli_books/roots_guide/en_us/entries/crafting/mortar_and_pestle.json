@@ -22,6 +22,16 @@
     {
       "type": "text",
       "text": "$(li)Blaze powder from blaze rods (with increased output).$(li)Magma creams from magma blocks.$(li)Sugar from sugar cane (with increased output).$(li)Silk thread from silkworm cocoons (although not as efficient as a spindle).$(li)Orange dye from carrots.$(br2)As mentioned previously, all recipes, including those added or adjusted by modpacks, can be found $(uses:roots:mortar)in JEI$()."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "automation/mortar_and_pestle",
+        "resources/flour",
+        "resources/petals",
+        "resources/runic_dust"
+      ]
     }
   ]
 }
