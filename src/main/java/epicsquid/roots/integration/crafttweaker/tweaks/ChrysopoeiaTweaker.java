@@ -1,5 +1,6 @@
 package epicsquid.roots.integration.crafttweaker.tweaks;
 
+import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
@@ -43,24 +44,47 @@ public class ChrysopoeiaTweaker {
       args = {
           @ZenDocArg(arg = "output", info = "the output of the recipe you wish to remove")
       },
-      description = "Removes a transmutative recipe based on the output of the recipe."
+      description = "Removes a transmutative recipe based on the output of the recipe, matches regardless of stack sizes."
   )
   @ZenMethod
-  public static void removeRecipe(IItemStack output) {
-    CraftTweaker.LATE_ACTIONS.add(new Remove(CraftTweakerMC.getItemStack(output)));
+  public static void removeRecipeByOutput(IItemStack output) {
+    CraftTweaker.LATE_ACTIONS.add(new Remove(CraftTweakerMC.getItemStack(output), true));
   }
 
-  private static class Remove extends Action {
-    private ItemStack output;
+  @ZenDocMethod(
+      order = 3,
+      args = {
+          @ZenDocArg(arg = "input", info = "the exact input of the recipe you wish to remove")
+      },
+      description = "Removes a transmutative recipe based on the exact input (including size, tag, etc)"
+  )
+  @ZenMethod
+  public static void removeRecipe(IItemStack input) {
+    CraftTweaker.LATE_ACTIONS.add(new Remove(CraftTweakerMC.getItemStack(input), false));
+  }
 
-    public Remove(ItemStack output) {
+
+  private static class Remove extends Action {
+    private final ItemStack output;
+    private final boolean isOutput;
+
+    public Remove(ItemStack output, boolean isOutput) {
       super("remove transubstantiation recipe");
       this.output = output;
+      this.isOutput = isOutput;
     }
 
     @Override
     public void apply() {
-      ModRecipes.removeChrysopoeiaRecipe(output);
+      if (isOutput) {
+        if (!ModRecipes.removeChrysopoeiaRecipeByOutput(output)) {
+          CraftTweakerAPI.logError("Unable to remove Chrysopoeia recipe for output item " + output + ": it does not exist as a recipe.");
+        }
+      } else {
+        if (!ModRecipes.removeChrysopoeiaRecipe(output)) {
+          CraftTweakerAPI.logError("Unable to remove Chrysopoeia recipe for input item " + output + ": it does not exist as a recipe.");
+        }
+      }
     }
 
     @Override
@@ -70,9 +94,9 @@ public class ChrysopoeiaTweaker {
   }
 
   private static class Add extends Action {
-    private IngredientWithStack inputs;
-    private ItemStack output;
-    private String name;
+    private final IngredientWithStack inputs;
+    private final ItemStack output;
+    private final String name;
 
     public Add(String name, IngredientWithStack inputs, ItemStack output) {
       super("Add transubstantiation recipe");

@@ -21,12 +21,23 @@ Adds a transmutative recipe that converts an input (in the form of an ingredient
 
 
 ```zenscript
-void removeRecipe(
+void removeRecipeByOutput(
   IItemStack output // the output of the recipe you wish to remove
 );
 ```
 
-Removes a transmutative recipe based on the output of the recipe.
+Removes a transmutative recipe based on the output of the recipe, matches regardless of stack sizes.
+
+---
+
+
+```zenscript
+void removeRecipe(
+  IItemStack input // the exact input of the recipe you wish to remove
+);
+```
+
+Removes a transmutative recipe based on the exact input (including size, tag, etc)
 
 ---
 
@@ -41,6 +52,9 @@ Chrysopoeia.addRecipe("ghast_tear", <ore:gunpowder>*5, <minecraft:ghast_tear>);
 
 Chrysopoeia.addRecipe("magma_cream", <minecraft:flint_and_steel>.transformDamage(1), <minecraft:magma_cream>);
 
-// Remove the default copper -> iron ingot recipe
-Chrysopoeia.removeRecipe(<minecraft:iron_ingot>);
+// Remove the default copper -> iron ingot recipe using the output
+Chrysopoeia.removeRecipeByOutput(<minecraft:iron_ingot>);
+
+// Remove the default silver -> gold recipe using the input
+Chrysopoeia.removeRecipe(<mysticalworld:silver_ingot>*2);
 ```

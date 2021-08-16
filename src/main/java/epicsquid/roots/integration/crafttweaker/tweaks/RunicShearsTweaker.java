@@ -104,6 +104,23 @@ public class RunicShearsTweaker {
     CraftTweaker.LATE_ACTIONS.add(new Remove(CraftTweakerMC.getItemStack(output)));
   }
 
+  @ZenDocMethod(
+      order = 5,
+      args = {
+          @ZenDocArg(arg = "entity", info = "the entity you wish to remove the recipef or")
+      },
+      description = "Removes any/all recipes related to that entity"
+  )
+  @ZenMethod
+  public static void removeEntityRecipe(IEntityDefinition entity) {
+    EntityEntry internal = (EntityEntry) entity.getInternal();
+    if (EntityLivingBase.class.isAssignableFrom(internal.getEntityClass())) {
+      CraftTweaker.LATE_ACTIONS.add(new RemoveEntity((Class<? extends EntityLivingBase>) internal.getEntityClass()));
+    } else {
+      CraftTweakerAPI.logError("Invalid class: " + internal.getEntityClass().getSimpleName() + " does not derive from EntityLivingBase; could not remove entity Runic Shears recipe");
+    }
+  }
+
   private static class Remove extends Action {
     private ItemStack output;
 
@@ -234,6 +251,31 @@ public class RunicShearsTweaker {
       }
       RunicShearEntityRecipe recipe = new RunicShearEntityRecipe(rl, outputItem, entity, cooldown);
       ModRecipes.addRunicShearRecipe(recipe);
+    }
+  }
+
+  private static class RemoveEntity extends Action {
+    private Class<? extends EntityLivingBase> entity;
+
+    private RemoveEntity(Class<? extends EntityLivingBase> entity) {
+      super("Runic Shears entity recipe removal");
+      this.entity = entity;
+    }
+
+    @Override
+    public String describe() {
+      return "Removing all Runic Shears recipes involving " + entity + " as its input";
+    }
+
+    @Override
+    public void apply() {
+      RunicShearEntityRecipe eRecipe = ModRecipes.getRunicShearEntityRecipe(entity);
+      if (eRecipe != null) {
+        ModRecipes.getRunicShearEntityRecipes().remove(eRecipe.getRegistryName());
+        ModRecipes.getGeneratedEntityRecipes().remove(eRecipe.getClazz());
+      } else {
+        CraftTweakerAPI.logError("No runic shear recipe found for entity " + entity);
+      }
     }
   }
 }

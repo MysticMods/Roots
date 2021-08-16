@@ -72,14 +72,16 @@ public class EntityRitualAnimalHarvest extends EntityRitualBase {
       WeightedRegistry<AnimalHarvestFishRecipe> recipes = new WeightedRegistry<>(ModRecipes.getFishRecipes());
       if (!recipes.isEmpty() && !waterSourceBlocks.isEmpty() && (rand.nextFloat() <= ritual.fish_chance) || entityList.isEmpty()) {
         AnimalHarvestFishRecipe recipe = recipes.getRandomItem(rand);
-        BlockPos pos = waterSourceBlocks.get(rand.nextInt(waterSourceBlocks.size()));
-        if (!world.isRemote && recipe != null) {
-          ItemStack stack = recipe.getItemStack().copy();
-          // Protection against those nasty "must be positive" errors
-          stack.setCount(ritual.fish_count + Math.max(0, (rand.nextInt(ritual.fish_additional) - 2)));
-          ItemUtil.spawnItem(world, pos.add(0, 1, 0), stack);
+        if (!waterSourceBlocks.isEmpty()) {
+          BlockPos pos = waterSourceBlocks.get(rand.nextInt(waterSourceBlocks.size()));
+          if (!world.isRemote && recipe != null) {
+            ItemStack stack = recipe.getItemStack().copy();
+            // Protection against those nasty "must be positive" errors
+            stack.setCount(ritual.fish_count + Math.max(0, (rand.nextInt(ritual.fish_additional) - 2)));
+            ItemUtil.spawnItem(world, pos.add(0, 1, 0), stack);
+          }
+          PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY() + 1, pos.getZ()), this);
         }
-        PacketHandler.sendToAllTracking(new MessageRampantLifeInfusionFX(pos.getX(), pos.getY() + 1, pos.getZ()), this);
         return true;
       }
     }

@@ -116,15 +116,35 @@ public class ModRecipes {
     return null;
   }
 
-  public static void removeChrysopoeiaRecipe(ResourceLocation name) {
-    chrysopoeiaRecipes.remove(name);
+  @Nullable
+  public static ChrysopoeiaRecipe getChrysopoeiaRecipeByOutput (ItemStack output) {
+    for (ChrysopoeiaRecipe recipe : getChrysopoeiaRecipes()) {
+      if (ItemUtil.equalWithoutSize(recipe.getOutput(), output)) {
+        return recipe;
+      }
+    }
+
+    return null;
   }
 
-  public static void removeChrysopoeiaRecipe(ItemStack stack) {
+  public static boolean removeChrysopoeiaRecipe(ResourceLocation name) {
+    return chrysopoeiaRecipes.remove(name) != null;
+  }
+
+  public static boolean removeChrysopoeiaRecipe(ItemStack stack) {
     ChrysopoeiaRecipe recipe = getChrysopoeiaRecipe(stack);
     if (recipe != null) {
-      removeChrysopoeiaRecipe(recipe.getRegistryName());
+      return removeChrysopoeiaRecipe(recipe.getRegistryName());
     }
+    return false;
+  }
+
+  public static boolean removeChrysopoeiaRecipeByOutput(ItemStack stack) {
+    ChrysopoeiaRecipe recipe = getChrysopoeiaRecipeByOutput(stack);
+    if (recipe != null) {
+      return removeChrysopoeiaRecipe(recipe.getRegistryName());
+    }
+    return false;
   }
 
   public static void initSummonCreatureEntries() {
@@ -845,6 +865,16 @@ public class ModRecipes {
     }
 
     return result;
+  }
+
+  @Nullable
+  public static RunicShearEntityRecipe getRunicShearEntityRecipe(Class<? extends EntityLivingBase> entity) {
+    for (RunicShearEntityRecipe recipe : runicShearEntityRecipes.values()) {
+      if (recipe.getClazz().equals(entity)) {
+        return recipe;
+      }
+    }
+    return null;
   }
 
   public static Set<Class<? extends Entity>> getRunicShearEntities() {
