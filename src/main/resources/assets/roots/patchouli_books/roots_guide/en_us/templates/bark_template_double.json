@@ -21,14 +21,14 @@
       "item": "#input2",
       "framed": false,
       "x": 45,
-      "y": 43
+      "y": 44
     },
     {
       "type": "item",
       "item": "#output2",
       "framed": false,
       "x": 81,
-      "y": 43
+      "y": 44
     },
     {
       "type": "image",
