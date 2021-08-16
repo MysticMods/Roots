@@ -7,14 +7,14 @@
       "item": "#input1",
       "framed": false,
       "x": 45,
-      "y": 19
+      "y": 20
     },
     {
       "type": "item",
       "item": "#output1",
       "framed": false,
       "x": 81,
-      "y": 19
+      "y": 20
     },
     {
       "type": "item",
