@@ -62,7 +62,7 @@ Transmutation.addStateToStateRecipe("spruce_to_glowstone", PropertyPredicate.cre
 Transmutation.addStateToItemRecipe("acacia_to_cobblestone", PropertyPredicate.create(<blockstate:minecraft:log2:variant=acacia> as IBlockState, "variant"), <minecraft:cobblestone>, BlockStateBelow.create(Predicates.Water));
 
 // Removes the default pumpkin-over-water-to-melon recipe
-Transmutation.removeRecipe("pumpkin_melon");
+Transmutation.removeRecipe("pumpkin_to_melon");
 ```
 
 ### Notes

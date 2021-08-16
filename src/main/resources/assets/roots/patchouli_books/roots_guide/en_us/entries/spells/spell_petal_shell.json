@@ -76,19 +76,19 @@
     {
       "type": "text",
       "title": "Spell Configuration",
-      "text": "$(bold)Shells:$() You can have a maximum of $(spell:petal_shell/maximum_shells), although this value increases by $(spell:petal_shell/extra_shells) with the $(modifier:petal_overflow)$() modifier enabled.$(br2)$(bold)Colour:$() With the $(modifier:mossy_leaves)$() modifier enabled, the petals display as green rather than pink.$(br2)$(bold)Radiant Damage:$() With the $(modifier:react_radiance)$() modifier enabled, an attacker breaking a shield takes $(spell:petal_shell/HEART/radiant_damage) hearts of"
+      "text": "$(bold)Cooldown:$() The spell has a cooldown of $(spell:petal_shell/SECONDS/cooldown) seconds.$(br2)$(bold)Shells:$() You can have a maximum of $(spell:petal_shell/maximum_shells), although this value increases by $(spell:petal_shell/extra_shells) with the $(modifier:petal_overflow)$() modifier enabled.$(br2)$(bold)Colour:$() With the $(modifier:mossy_leaves)$() modifier enabled, the petals display as green rather than pink.$(br2)$(bold)Radiant Damage:$() With the"
     },
     {
       "type": "text",
-      "text": "radiant damage.$(br2)$(bold)Familiars:$() With the $(modifier:peaceful_dance)$() modifier, a nearby familiar is also granted shields.$(br2)$(bold)Slash & Bleed Damage:$() With the $(modifier:react_daggers)$() modifier enabled, an attacker takes $(spell:petal_shell/HEART/dagger_damage) hearts of damage and is given Bleeding $(spell:petal_shell/ROMAN/bleed_amplifier) for $(spell:petal_shell/SECONDS/bleed_duration), causing damage over time.$(br2)$(bold)Poison Damage:$() With the $(modifier:react_poison)$() modifier enabled, attackers are given"
+      "text": "$(modifier:react_radiance)$() modifier enabled, an attacker breaking a shield takes $(spell:petal_shell/HEART/radiant_damage) hearts o fradiant damage.$(br2)$(bold)Familiars:$() With the $(modifier:peaceful_dance)$() modifier, a nearby familiar is also granted shields.$(br2)$(bold)Slash & Bleed Damage:$() With the $(modifier:react_daggers)$() modifier enabled, an attacker takes $(spell:petal_shell/HEART/dagger_damage) hearts of damage and is given Bleeding $(spell:petal_shell/ROMAN/bleed_amplifier) for $(spell:petal_shell/SECONDS/bleed_duration), causing damage over time."
     },
     {
       "type": "text",
-      "text": "Poison $(spell:petal_shell/ROMAN/poison_amplifier) for $(spell:petal_shell/SECONDS/poison_duration).$(br2)$(bold)Levitation:$() With the $(modifier:react_drift)$() modifier enabled, attackers are given Levitation I for $(spell:petal_shell/SECONDS/levitate_duration).$(br2)$(bold)Fire Damage:$() With the $(modifier:react_fire)$() modifier enabled, attackers take $(spell:petal_shell/HEART/fire_damage) hearts of fire damage and are set ablaze for $(spell:petal_shell/fire_duration) seconds.$(br2)$(bold)Weakness:$() With the $(modifier:react_weakness)$() modifier enabled, attackers are given Weakness $(spell:petal_shell/ROMAN/weakness_amplifier) for $(spell:petal_shell/SECONDS/weakness_duration) seconds."
+      "text": "$(bold)Poison Damage:$() With the $(modifier:react_poison)$() modifier enabled, attackers are given Poison $(spell:petal_shell/ROMAN/poison_amplifier) for $(spell:petal_shell/SECONDS/poison_duration).$(br2)$(bold)Levitation:$() With the $(modifier:react_drift)$() modifier enabled, attackers are given Levitation I for $(spell:petal_shell/SECONDS/levitate_duration).$(br2)$(bold)Fire Damage:$() With the $(modifier:react_fire)$() modifier enabled, attackers take $(spell:petal_shell/HEART/fire_damage) hearts of fire damage and are set ablaze for $(spell:petal_shell/fire_duration) seconds."
     },
     {
       "type":"text",
-      "text": "$(bold)Slowness:$() With the $(modifier:react_slow)$() modifier enabled, attackers are given Slowness $(spell:petal_shell/ROMAN/slow_amplifier) for $(spell:petal_shell/SECONDS/slow_duration) seconds."
+      "text": "$(bold)Weakness:$() With the $(modifier:react_weakness)$() modifier enabled, attackers are given Weakness $(spell:petal_shell/ROMAN/weakness_amplifier) for $(spell:petal_shell/SECONDS/weakness_duration) seconds.$(br2)$(bold)Slowness:$() With the $(modifier:react_slow)$() modifier enabled, attackers are given Slowness $(spell:petal_shell/ROMAN/slow_amplifier) for $(spell:petal_shell/SECONDS/slow_duration) seconds."
     }
   ]
 }

@@ -70,19 +70,19 @@
     {
       "type": "text",
       "title": "Spell Configuration",
-      "text": "$(bold)Damage:$() Damage dealt by this spell is considered wither damage. There is a $(spell:life_drain/IN_X/wither_chance) chance that damaged creatures will be given Withering $(spell:life_drain/ROMAN/wither_amplifier) for $(spell:life_drain/SECONDS/wither_duration).$(br2)$(bold)Healing:$() Every time an entity is damage, the caster is healed for $(spell:life_drain/HEART/heal) hearts. With the $(modifier:amplified_healing)$() modifier, an additional $(spell:life_drain/HEART/additional_heal) hearts worth of healing is done. With the $(modifier:distributed_healing)$() modifier, this healing is done to nearby"
+      "text": "$(bold)Cooldown:$() The spell has a cooldown of $(spell:life_drain/SECONDS/cooldown) seconds.$(br2)$(bold)Damage:$() Damage dealt by this spell is considered wither damage. There is a $(spell:life_drain/IN_X/wither_chance) chance that damaged creatures will be given Withering $(spell:life_drain/ROMAN/wither_amplifier) for $(spell:life_drain/SECONDS/wither_duration).$(br2)$(bold)Healing:$() Every time an entity is damage, the caster is healed for $(spell:life_drain/HEART/heal) hearts. With the $(modifier:amplified_healing)$() modifier, an additional $(spell:life_drain/HEART/additional_heal) hearts worth of"
     },
     {
       "type": "text",
-      "text": "peaceful entities instead of the caster.$(br2)$(bold)Spirit Drain:$() With the $(modifier:spectral_drain)$() modifier, you have a $(spell:life_drain/PERCENT/spectral_chance) chance to drain life into yourself from spirits and ghosts in the Twilight grove.$(br2)$(bold)Targeted:$() With the $(modifier:targeted_drain)$(), you can drain a target up to $(spell:life_drain/distance) blocks away.$(br2)$(bold)Decreased Damage:$() With the $(modifier:lightened_load)$() modifier enabled, the damage you deal"
+      "text": "healing is done. With the $(modifier:distributed_healing)$() modifier, this healing is done to nearby peaceful entities instead of the caster.$(br2)$(bold)Spirit Drain:$() With the $(modifier:spectral_drain)$() modifier, you have a $(spell:life_drain/PERCENT/spectral_chance) chance to drain life into yourself from spirits and ghosts in the Twilight grove.$(br2)$(bold)Targeted:$() With the $(modifier:targeted_drain)$(), you can drain a target up to $(spell:life_drain/distance) blocks away."
     },
     {
       "type": "text",
-      "text": "is halved, as is the healing you received.$(br2)$(bold)Fire:$() With the $(modifier:brimstone)$() modifier enabled, damaged entities are also set ablaze for $(spell:life_drain/fire_duration) and also take an additional $(spell:life_drain/HEART/fire_damage) hearts of fire damage. This additional damage does not heal you.$(br2)$(bold)Slowing:$() With the $(modifier:slowing_drain)$() modifier enabled, damaged entities are also given Slowness $(spell:life_drain/ROMAN/slow_amplifier) for $(spell:life_drain/SECONDS/slow_duration) seconds."
+      "text": "$(bold)Decreased Damage:$() With the $(modifier:lightened_load)$() modifier enabled, the damage you deal is halved, as is the healing you received.$(br2)$(bold)Fire:$() With the $(modifier:brimstone)$() modifier enabled, damaged entities are also set ablaze for $(spell:life_drain/fire_duration) and also take an additional $(spell:life_drain/HEART/fire_damage) hearts of fire damage. This additional damage does not heal you.$(br2)$(bold)Slowing:$() With the $(modifier:slowing_drain)$() modifier enabled, damaged entities are also"
     },
     {
       "type":"text",
-      "text":"$(bold)Underwater:$() With $(modifier:chthonic)$() modifier enabled, creatures immersed in water take double damage."
+      "text":"given Slowness $(spell:life_drain/ROMAN/slow_amplifier) for $(spell:life_drain/SECONDS/slow_duration) seconds.$(br2)$(bold)Underwater:$() With $(modifier:chthonic)$() modifier enabled, creatures immersed in water take double damage."
     }
   ]
 }

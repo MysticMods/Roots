@@ -76,7 +76,7 @@
     {
       "type": "text",
       "title": "Spell Configuration",
-      "text": "$(bold)Damage:$() The fireball inflicts $(spell:wild_fire/HEART/damage) hearts of fire damage and sets creatures on fire for $(spell:wild_fire/fire_duration) seconds.$(br2)$(bold)Lifetime:$() The fireball will travel for $(spell:wild_fire/SECONDS/lifetime) seconds before expiring.$(br2)$(bold)Slowness:$() With the $(modifier:slow_fire)$() modifier enabled, targets are also given Slowness $(spell:wild_fire/ROMAN/slow_amplifier) for $(spell:wild_fire/SECONDS/slow_duration) seconds."
+      "text": "$(bold)Cooldown:$() The spell has a cooldown of $(spell:wild_fire/SECONDS/cooldown) seconds.$(br2)$(bold)Damage:$() The fireball inflicts $(spell:wild_fire/HEART/damage) hearts of fire damage and sets creatures on fire for $(spell:wild_fire/fire_duration) seconds.$(br2)$(bold)Lifetime:$() The fireball will travel for $(spell:wild_fire/SECONDS/lifetime) seconds.$(br2)$(bold)Slowness:$() With the $(modifier:slow_fire)$() modifier enabled, targets are given Slowness $(spell:wild_fire/ROMAN/slow_amplifier) for $(spell:wild_fire/SECONDS/slow_duration) seconds."
     },
     {
       "type": "text",

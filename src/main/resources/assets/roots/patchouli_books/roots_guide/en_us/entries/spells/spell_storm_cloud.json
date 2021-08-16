@@ -76,19 +76,19 @@
     {
       "type": "text",
       "title": "Spell Configuration",
-      "text": "$(bold)Duration:$() The storm cloud lasts for $(spell:storm_cloud/SECONDS/duration).$(br2)$(bold)Radius:$() The radius of the cloud is $(spell:storm_cloud/radius) blocks around you, and entities within that range will be extinguished. With the $(modifier:spread)$() modifier enabled, it extends an additional $(spell:storm_cloud/extended_radius) blocks.$(br2)$(bold)Lightning:$() With the $(modifier:lightning_strikes)$() modifier enabled, there is a $(spell:storm_cloud/PERCENT/lightning_chance) chance every $(spell:storm_cloud/SECONDS/lightning_interval) seconds that the effect is active."
+      "text": "$(bold)Cooldown:$() The spell has a cooldown of $(spell:storm_cloud/SECONDS/cooldown) seconds.$(br2)$(bold)Duration:$() The storm cloud lasts for $(spell:storm_cloud/SECONDS/duration).$(br2)$(bold)Radius:$() The radius of the cloud is $(spell:storm_cloud/radius) blocks around you, and entities within that range will be extinguished. With the $(modifier:spread)$() modifier enabled, it extends an additional $(spell:storm_cloud/extended_radius) blocks.$(br2)$(bold)Lightning:$() With the $(modifier:lightning_strikes)$() modifier enabled, there"
     },
     {
       "type": "text",
-      "text": "$(bold)Peaceful:$() With the $(modifier:peaceful_storm)$() modifier enabled, only hostile creatures will be targeted for negative effects.$(br2)$(bold)Healing:$() With the $(modifier:healing_rain)$() modifier enabled, eligible entities will be healed for $(spell:storm_cloud/HEART/heal_amount) hearts every $(spell:storm_cloud/SECONDS/heal_interval) while the spell is active.$(br2)$(bold)Obsidian:$() With the $(modifier:ignification)$() modifier enabled, lava blocks within the radius of the storm will be converted into obsidian."
+      "text": "is a $(spell:storm_cloud/PERCENT/lightning_chance) chance every $(spell:storm_cloud/SECONDS/lightning_interval) seconds that the effect is active.$(br2)$(bold)Peaceful:$() With the $(modifier:peaceful_storm)$() modifier enabled, only hostile creatures will be targeted for negative effects.$(br2)$(bold)Healing:$() With the $(modifier:healing_rain)$() modifier enabled, eligible entities will be healed for $(spell:storm_cloud/HEART/heal_amount) hearts every $(spell:storm_cloud/SECONDS/heal_interval) while the spell is active.$(br2)$(bold)Obsidian:$() With the $(modifier:ignification)$() modifier enabled,"
     },
     {
       "type": "text",
-      "text": "$(bold)Ice:$() With the $(modifier:freezing_rain)$() modifier enabled, nearby water will be converted into ice.$(br2)$(bold)Poison:$() With the $(modifier:poison_storm)$() modifier enabled, entities will be given Poison $(spell:storm_cloud/ROMAN/poison_amplifier) for $(spell:storm_cloud/SECONDS/poison_duration).$(br2)$(bold)Magnetism:$() With the $(modifier:magnetic_storm)$() modifier enabled, ranged attackers will be teleported to your location if they hit you with an attack.$(br2)$(bold)Icicles:$() With the $(modifier:icicles)$() modifier enabled, there is a $(spell:storm_cloud/PERCENT/icicle_chance) chance every $(spell:storm_cloud/SECONDS/icicle_interval)"
+      "text": "lava blocks within the radius of the storm will be converted into obsidian.$(br2)$(bold)Ice:$() With the $(modifier:freezing_rain)$() modifier enabled, nearby water will be converted into ice.$(br2)$(bold)Poison:$() With the $(modifier:poison_storm)$() modifier enabled, entities will be given Poison $(spell:storm_cloud/ROMAN/poison_amplifier) for $(spell:storm_cloud/SECONDS/poison_duration).$(br2)$(bold)Magnetism:$() With the $(modifier:magnetic_storm)$() modifier enabled, ranged attackers will be teleported to your location if they hit you with an attack."
     },
     {
       "type": "text",
-      "text": "seconds while the storm is active to spawn an icicle projectile that shoots at an eligible target, dealing $(spell:storm_cloud/HEART/icicle_damage) hearts of physical damage.$(br2)$(bold)Jolt:$() With the $(modifier:reactive_jolt)$() modifier enabled, anyone who attacks you while the storm is active will take $(spell:storm_cloud/HEART/lightning_damage) hearts of damage."
+      "text": "$(bold)Icicles:$() With the $(modifier:icicles)$() modifier enabled, there is a $(spell:storm_cloud/PERCENT/icicle_chance) chance every $(spell:storm_cloud/SECONDS/icicle_interval) seconds while the storm is active to spawn an icicle projectile that shoots at an eligible target, dealing $(spell:storm_cloud/HEART/icicle_damage) hearts of physical damage.$(br2)$(bold)Jolt:$() With the $(modifier:reactive_jolt)$() modifier enabled, anyone who attacks you while the storm is active will take $(spell:storm_cloud/HEART/lightning_damage) hearts of damage."
     }
   ]
 }

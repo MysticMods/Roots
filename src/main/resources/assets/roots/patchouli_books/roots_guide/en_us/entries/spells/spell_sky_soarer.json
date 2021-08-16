@@ -76,11 +76,11 @@
     {
       "type": "text",
       "title": "Spell Configuration",
-      "text": "$(bold)Duration:$() The boost lasts for $(spell:sky_soarer/SECONDS/lifetime) seconds. With the $(modifier:eternal_flame)$() modifier enabled, the boost lasts for an additional $(spell:sky_soarer/SECONDS/extended_lifetime) seconds.$(br2)$(bold)Motion:$() The default motion amplifier is $(spell:sky_soarer/amplifier). With the $(modifier:momentum)$() modifier enabled, this is increased by $(spell:sky_soarer/extended_amplifier).$(br2)$(bold)Jaunt:$() With the $(modifier:jaunt)$() modifier enabled, instad of soaring, you will be teleported $(spell:sky_soarer/jaunt_distance) blocks in the direction you're facing"
+      "text": "$(bold)Cooldown:$() The spell has a cooldown of $(spell:sky_soarer/SECONDS/cooldown) seconds.$(br2)$(bold)Duration:$() The boost lasts for $(spell:sky_soarer/SECONDS/lifetime) seconds. With the $(modifier:eternal_flame)$() modifier enabled, the boost lasts for an additional $(spell:sky_soarer/SECONDS/extended_lifetime) seconds.$(br2)$(bold)Motion:$() The default motion amplifier is $(spell:sky_soarer/amplifier). With the $(modifier:momentum)$() modifier enabled, this is increased by $(spell:sky_soarer/extended_amplifier).$(br2)$(bold)Jaunt:$() With the $(modifier:jaunt)$() modifier"
     },
     {
       "type": "text",
-      "text": "being placed on the closest block vertically or horizontally.$(br2)$(bold)Vertical:$() With the $(modifier:verticality)$() modifier enabled, instead of traveling in the direction you're facing, you will be launched directly upwards.$(br2)$(bold)Horizontal:$() With the $(modifier:aquaplane)$() modifier, you will move horizontally in the direction you're facing with no vertical movement."
+      "text": "enabled, instad of soaring, you will be teleported $(spell:sky_soarer/jaunt_distance) blocks in the direction you face, placing you on the closest block up or down.$(br2)$(bold)Vertical:$() With the $(modifier:verticality)$() modifier enabled, instead of traveling in the direction you're facing, you will be launched directly upwards.$(br2)$(bold)Horizontal:$() With the $(modifier:aquaplane)$() modifier, you will move horizontally in the direction you face with no vertical movement."
     },
     {
       "type": "text",

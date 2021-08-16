@@ -70,7 +70,7 @@
     {
       "type": "text",
       "title": "Spell Configuration",
-      "text": "$(bold)Duration:$() The duration of the time stop field is $(spell:time_stop/SECONDS/duration) seconds. With the $(modifier:overtime)$() modifier, this duration is extended by a further $(spell:time_stop/SECONDS/overtime) seconds.$(br2)If the $(modifier:minor_halt)$() modifier is enabled, the duration of the time stop is instead limited to $(spell:time_stop/SECONDS/undertime) seconds."
+      "text": "$(bold)Cooldown:$() The spell has a cooldown of $(spell:time_stop/SECONDS/cooldown) seconds.$(br2)$(bold)Duration:$() The duration of the time stop field is $(spell:time_stop/SECONDS/duration) seconds. With the $(modifier:overtime)$() modifier, this duration is extended by a further $(spell:time_stop/SECONDS/overtime) seconds.$(br2)If the $(modifier:minor_halt)$() modifier is enabled, the duration of the time stop is instead limited to $(spell:time_stop/SECONDS/undertime) seconds."
     },
     {
       "type": "text",
