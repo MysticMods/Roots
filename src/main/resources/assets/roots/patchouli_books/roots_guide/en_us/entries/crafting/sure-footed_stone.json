@@ -8,6 +8,16 @@
       "type": "crafting",
       "recipe": "roots:runestone_trample",
       "text": "The ideal solution for any farmer!$(br2)Not only does this stone prevent crops within 30 blocks from being trampled by players, creatures or monsters, it also hydrates all farmland within five blocks."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/fey_crafter",
+        "crafting/unending_bowl",
+        "resources/runestone",
+        "herbs/terra_moss"
+      ]
     }
   ]
 }

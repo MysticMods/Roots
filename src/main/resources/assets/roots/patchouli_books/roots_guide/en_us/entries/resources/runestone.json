@@ -12,6 +12,13 @@
     {
       "type": "fey_crafting_template",
       "recipe": "runestone"
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/fey_crafter"
+      ]
     }
   ]
 }

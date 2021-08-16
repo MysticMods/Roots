@@ -36,6 +36,17 @@
       "type": "text",
       "title": "Automation",
       "text": "($(o)See $(l:rituals/automation)Ritual Automation$())$(br2)Ingredients for rituals can be stored in a chest beneath the pyre, and they will be consumed from there automatically whenever the pyre is empty.$(br2)An already-started ritual will automatically continue if new ingredients are provided. Nearby sources of flame will also be consumed to start a ritual."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "rituals/automation",
+        "rituals/tiers",
+        "rituals/standing_stones",
+        "rituals/visualisation",
+        "crafting/pyres"
+      ]
     }
   ]
 }

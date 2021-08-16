@@ -89,6 +89,14 @@
     {
       "type":"text",
       "text": "$(bold)Villager Trades:$() With the $(modifier:false_night)$() modifier applied, up to $(spell:growth_infusion/village_count) villagers within a radius of $(spell:growth_infusion/radius_villager_x) and $(spell:growth_infusion/radius_villager_y) blocks horizontally and $(spell:growth_infusion/radius_villager_y) vertically have a $(spell:growth_infusion/PERCENT/villager_growth_base) chance to reset their trades for every tick the spell is channeled.$(br2)$(bold)Embiggen:$() With the $(modifier:embiggening)$() modifier enabled, targeting a mushroom or sapling has a $(spell:growth_infusion/PERCENT/embiggen_chance) chance per tick the spell is channeled to be grown into a giant version."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/modifiers",
+        "herbs/terra_moss"
+      ]
     }
   ]
 }

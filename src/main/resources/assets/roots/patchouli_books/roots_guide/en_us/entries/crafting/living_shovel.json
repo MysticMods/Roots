@@ -11,6 +11,16 @@
     {
       "type": "fey_crafting_template",
       "recipe": "living_shovel"
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/fey_crafter",
+        "crafting/terrastone_shovel",
+        "crafting/runed_excavator",
+        "resources/bark"
+      ]
     }
   ]
 }

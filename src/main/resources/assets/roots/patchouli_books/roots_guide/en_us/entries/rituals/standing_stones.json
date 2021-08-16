@@ -245,6 +245,15 @@
     {
       "type": "text",
       "text": "Indeed, not all rituals require standing stones or pillars, however, all rituals with such requirements will show an icon: $(standing_stones) along with a link to visualisation of one potential arrangement.$(br2)In addition, these displays can be visualised in-world by clicking on the eye in the bottom-left corner."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "resources/runestone",
+        "resources/runed_obsidian",
+        "resources/runed_wood"
+      ]
     }
   ]
 }

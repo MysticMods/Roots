@@ -80,6 +80,13 @@
       "title": "Deconversion",
       "recipe": "roots:runed_obsidian_brick_from_chisel",
       "text": "This recipe allows you to 'de-convert' from the alternate type of brick back into the primary runed obsidian."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "resources/runed_obsidian"
+      ]
     }
   ]
 }

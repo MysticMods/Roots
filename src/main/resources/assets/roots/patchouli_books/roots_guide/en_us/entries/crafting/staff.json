@@ -13,6 +13,18 @@
     {
       "type": "text",
       "text": "$(info) In order to add spells to your staff, simply hold it and press '$(k:roots.keybinds.spell_library)' to open the $(l:spells/library)spell library$().$(br2)This interface allows you to swap spells in and out, adjust the order of spells, and enable/disable modifiers, and is explained in full detail in the spell library entry. "
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/introduction",
+        "spells/introduction2",
+        "spells/library",
+        "spells/modifiers",
+        "crafting/imbuer",
+        "crafting/imposer"
+      ]
     }
   ]
 }

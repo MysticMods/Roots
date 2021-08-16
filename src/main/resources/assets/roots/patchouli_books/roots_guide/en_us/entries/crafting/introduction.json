@@ -39,6 +39,15 @@
       "type": "text",
       "title": "Recipes",
       "text": "Most recipes can be found through JEI, if installed. Linked below are the categories, although you will need to adjust tabs as required:$(br2)$(li)$(uses:roots:pyre)Pyre rituals & recipes$() are listed here.$(li)$(uses:roots:fey_crafter)Fey crafting recipes$() are listed here.$(li)$(uses:roots:mortar)Spell & general mortar & pestle$() recipes are listed here.$(li)Vanilla crafting recipes are listed in their relevant entries."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/fey_crafter",
+        "crafting/grove_stone",
+        "crafting/runic_crafter"
+      ]
     }
   ]
 }

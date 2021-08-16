@@ -12,6 +12,14 @@
       "type": "mortar_template",
       "recipe": "roots:runestone_to_runic_dust_5",
       "link_recipe": true
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "resources/runestone",
+        "crafting/mortar_and_pestle"
+      ]
     }
   ]
 }

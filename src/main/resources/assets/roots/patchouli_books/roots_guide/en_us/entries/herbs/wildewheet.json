@@ -21,6 +21,13 @@
       "recipe": "roots:wildewheet_seed",
       "title": "Renewability",
       "text": "With a careful hand, suitable seeds can be obtained from wildewheet itself.$(br2)Once obtained, these seeds can be planted on any farmland that supports normal crop growth.$(br2)Visually similar to wheat, wildewheet has deep golden stems that darken at the base when mature."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/runic_shears"
+      ]
     }
   ]
 }

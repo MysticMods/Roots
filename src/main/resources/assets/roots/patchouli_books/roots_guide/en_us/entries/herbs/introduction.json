@@ -30,6 +30,14 @@
       "title": "Completion",
       "trigger": "roots:all_the_herbs_3",
       "text": "To complete this entry, collect one of each of the herbs, either by crafting them in a $(l:crafting/pyre)pyre$(), through trading with villagers or by finding them in the wild.$(br2)There are 11 in total, and you can track them with the $(adv:roots:all_the_herbs_3)$() advancement."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "herbs/renewable_resources",
+        "resources/elemental_soil"
+      ]
     }
   ]
 }

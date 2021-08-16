@@ -89,6 +89,14 @@
     {
       "type":"text",
       "text": "$(bold)Weakness:$() With the $(modifier:react_weakness)$() modifier enabled, attackers are given Weakness $(spell:petal_shell/ROMAN/weakness_amplifier) for $(spell:petal_shell/SECONDS/weakness_duration) seconds.$(br2)$(bold)Slowness:$() With the $(modifier:react_slow)$() modifier enabled, attackers are given Slowness $(spell:petal_shell/ROMAN/slow_amplifier) for $(spell:petal_shell/SECONDS/slow_duration) seconds."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/modifiers",
+        "herbs/spirit_herb"
+      ]
     }
   ]
 }

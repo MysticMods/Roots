@@ -89,6 +89,14 @@
     {
       "type": "text",
       "text": "enabled, you will be given Regeneration $(spell:sky_soarer/ROMAN/regen_amplifier) for $(spell:sky_soarer/SECONDS/regen_duration) seconds."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/modifiers",
+        "herbs/cloud_berry"
+      ]
     }
   ]
 }

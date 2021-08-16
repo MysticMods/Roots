@@ -23,6 +23,15 @@
       "type": "text",
       "title": "Item Disenchantment",
       "text": "It's possible to strip out the enchantments of an item, as well as potentially reducing the repair cost of the item by up to a third. Simply place the enchanted item in the imbuer, followed by $(l:resources/runic_dust)runic dust$().$(br2)$(warning) The enchanted item must be inserted first.$(br2)It's only possible to reduce the repair cost by removing enchantments."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/imposer",
+        "spells/introduction1",
+        "crafting/staff"
+      ]
     }
   ]
 }

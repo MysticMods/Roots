@@ -11,6 +11,17 @@
     {
       "type": "fey_crafting_template",
       "recipe": "fey_pouch"
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/apothecary_pouch",
+        "crafting/herb_pouch",
+        "crafting/fey_crafter",
+        "resources/fey_leather",
+        "spells/component_pouches"
+      ]
     }
   ]
 }

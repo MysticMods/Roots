@@ -21,6 +21,18 @@
     {
       "type": "text",
       "text": "The tooltip of conflicting modifiers will specify which modifier is causing the conflict.$(br2)$(info) As a shortcut, you can hold [Alt] while clicking on a modifier to enable it, disabling any modifiers which conflict.$(br2)Otherwise, you are free to combine modifiers as you see fit, so long as you provide the necessary herbs."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/introduction",
+        "spells/introduction2",
+        "spells/library",
+        "crafting/staff",
+        "crafting/gramary",
+        "crafting/imposer"
+      ]
     }
   ]
 }

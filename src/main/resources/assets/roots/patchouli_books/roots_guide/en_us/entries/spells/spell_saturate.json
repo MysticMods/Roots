@@ -87,6 +87,15 @@
     {
       "type": "text",
       "text": "with lower saturation and shanks will be converted at a significantly higher ratio, while high-shank and high-saturation foods will be converted at a lower ratio."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/modifiers",
+        "herbs/terra_moss",
+        "herbs/wildewheet"
+      ]
     }
   ]
 }

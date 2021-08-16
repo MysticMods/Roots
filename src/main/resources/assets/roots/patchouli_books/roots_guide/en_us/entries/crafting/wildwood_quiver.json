@@ -12,6 +12,14 @@
       "type": "fey_crafting_template",
       "recipe": "wildwood_quiver",
       "link_recipe": true
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/fey_crafter",
+        "resources/wildwood"
+      ]
     }
   ]
 }

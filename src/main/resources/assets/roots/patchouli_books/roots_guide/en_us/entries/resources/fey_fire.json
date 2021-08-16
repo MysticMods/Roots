@@ -8,6 +8,14 @@
       "type": "spotlight",
       "item": "roots:fey_fire",
       "text": "The elemental grove is an incredible source of power. One manifestation of that is fey fire.$(br2)$(info) This fire does no harm to players or peaceful entities but hostile entities killed by fey fire are treated as though killed by a player with Fortune II."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "rituals/ritual_fire_storm",
+        "spells/spell_wild_fire"
+      ]
     }
   ]
 }

@@ -31,6 +31,19 @@
       "link_recipe": true,
       "item": "roots:elemental_soil_fire",
       "text": "Magmatic soil is produced by throwing elemental soil directly into lava. The harsh flames will immediately convert the soil and return it for collection.$(br2)$(info) Magmatic soil automatically cooks a portion of the drops of all plants grown upon it, occasionally granting experience for harvesting."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/fey_crafter",
+        "herbs/infernal_bulb",
+        "herbs/dewgonia",
+        "herbs/cloud_berry",
+        "herbs/stalicripe",
+        "herbs/renewable_resources",
+        "automation/aqueous_soil"
+      ]
     }
   ]
 }

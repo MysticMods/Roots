@@ -83,6 +83,15 @@
     {
       "type":"text",
       "text":"given Slowness $(spell:life_drain/ROMAN/slow_amplifier) for $(spell:life_drain/SECONDS/slow_duration) seconds.$(br2)$(bold)Underwater:$() With $(modifier:chthonic)$() modifier enabled, creatures immersed in water take double damage."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/modifiers",
+        "herbs/baffle_cap",
+        "herbs/moonglow"
+      ]
     }
   ]
 }

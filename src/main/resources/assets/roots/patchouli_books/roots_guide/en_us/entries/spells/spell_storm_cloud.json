@@ -89,6 +89,14 @@
     {
       "type": "text",
       "text": "$(bold)Icicles:$() With the $(modifier:icicles)$() modifier enabled, there is a $(spell:storm_cloud/PERCENT/icicle_chance) chance every $(spell:storm_cloud/SECONDS/icicle_interval) seconds while the storm is active to spawn an icicle projectile that shoots at an eligible target, dealing $(spell:storm_cloud/HEART/icicle_damage) hearts of physical damage.$(br2)$(bold)Jolt:$() With the $(modifier:reactive_jolt)$() modifier enabled, anyone who attacks you while the storm is active will take $(spell:storm_cloud/HEART/lightning_damage) hearts of damage."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/modifiers",
+        "herbs/cloud_berry"
+      ]
     }
   ]
 }

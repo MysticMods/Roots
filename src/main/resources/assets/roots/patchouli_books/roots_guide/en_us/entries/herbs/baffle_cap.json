@@ -21,6 +21,13 @@
     {
       "type": "text",
       "text": "The second method involves bone meal or equivalent fertilizer (alternately applying the 'Embiggening' modifier to the $(l:spells/spell_growth_infusion)Growth Infusion$() spell).$(br2)Applying the bone meal has a chance to grow the baffle cap into a large variant of itself, and breaking these blocks has a chance to yield more mushrooms."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/growth_infusion"
+      ]
     }
   ]
 }

@@ -11,6 +11,13 @@
     {
       "type": "fey_crafting_template",
       "recipe": "runed_dagger"
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/knives"
+      ]
     }
   ]
 }

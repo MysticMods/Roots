@@ -24,6 +24,13 @@
       "anchor": "dark_oak",
       "name": "Bark Types",
       "text": "Obtained from breaking logs with knives.$(br2)$(info) Other, modded bark types may be available. For a full listing, $(uses:roots:stone_knife)see JEI$()."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/knives"
+      ]
     }
   ]
 }

@@ -79,6 +79,15 @@
     {
       "type": "text",
       "text": "damaged by the beam are given Poison $(spell:radiance/ROMAN/poison_amplifier) for $(spell:radiance/SECONDS/poison_duration).$(br2)$(bold)Fire:$() With the $(modifier:burning_ray)$() modifier enabled, entities are set on fire for $(spell:radiance/fire_duration) seconds.$(br2)$(bold)Slowness:$() With the $(modifier:slowing_ray)$() modifier enabled, affected entities are given Slowness $(spell:radiance/ROMAN/slow_amplifier) for $(spell:radiance/SECONDS/slow_duration) seconds."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/modifiers",
+        "herbs/cloud_berry",
+        "herbs/pereskia"
+      ]
     }
   ]
 }

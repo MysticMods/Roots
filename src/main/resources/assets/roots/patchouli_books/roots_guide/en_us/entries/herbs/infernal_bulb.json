@@ -18,6 +18,13 @@
       "title": "Renewability",
       "anchor": "renew",
       "text": "Only able to be grown on one of the five variants of $(l:resources/elemental_soil)elemental soil$(), the bulb itself propagates into an extravagant blossom when mature, which yields yet more bulbs.$(br2)$(info) It is not necessary to match the element of the herb with the element of the soil, and it will grow on any variant."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "resources/elemental_soil"
+      ]
     }
   ]
 }

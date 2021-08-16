@@ -41,6 +41,9 @@
       "type": "relations",
       "anchor": "related",
       "entries": [
+        "crafting/grove_stone",
+        "crafting/fey_crafter",
+        "crafting/runic_crafter"
       ]
     }
   ]

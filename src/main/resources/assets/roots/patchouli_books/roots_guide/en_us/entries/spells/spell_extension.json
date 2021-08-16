@@ -89,6 +89,14 @@
     {
       "type": "text",
       "text": "are highlighted with particles.$(br2)$(bold)Plants:$() With the $(modifier:sense_plants)$() modifier, plants within $(spell:extension/radius_plants_x) and $(spell:extension/radius_plants_z) blocks horizontally and $(spell:extension/radius_plants_y) vertically are highlighted with particles.$(br2)$(bold)Home:$() With the $(modifier:sense_home)$() modifier, particles are drawn pointing in the direction of your current spawn location.$(br2)$(bold)Time:$() With the $(modifier:sense_time)$() modifier, a message in chat will give you information about the current time and day."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/modifiers",
+        "herbs/wildroot"
+      ]
     }
   ]
 }

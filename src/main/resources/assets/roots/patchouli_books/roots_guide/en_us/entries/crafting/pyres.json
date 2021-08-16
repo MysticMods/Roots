@@ -23,6 +23,16 @@
       "recipe": "roots:reinforced_pyre",
       "title": "Reinforcement",
       "text": "It's possible to reinforce the pyre (which is not resistant to explosions and is weak to Vanilla bosses) with $(l:resources/runed_obsidian)runed obsidian$().$(br2)$(info) This reinforced pyre is immune to bosses and explosions."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "rituals/fire_starter",
+        "rituals/automation",
+        "rituals/introduction",
+        "crafting/decorative_pyres"
+      ]
     }
   ]
 }

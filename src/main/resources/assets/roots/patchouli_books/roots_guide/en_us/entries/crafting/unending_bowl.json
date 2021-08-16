@@ -11,6 +11,15 @@
     {
       "type": "fey_crafting_template",
       "recipe": "unending_bowl"
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/fey_crafter",
+        "resources/runestone",
+        "herbs/dewgonia"
+      ]
     }
   ]
 }

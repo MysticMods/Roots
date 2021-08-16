@@ -33,6 +33,19 @@
       "type": "text",
       "title": "Automation",
       "text": "$(warning) Unlike the $(l:crafting/fey_crafter)fey crafter$(), only a single craft of a recipe will be made upon activation.$(br2)With valid ingredients, particles will flow up from the pedestal, and a comparator will show an output of 15 (otherwise 0).$(br2)The result will be ejected nearby or placed into an inventory in one of the eligible locations shown."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "concepts/groves",
+        "concepts/the_fey",
+        "crafting/grove_stone",
+        "crafting/fey_crafter",
+        "crafting/introduction",
+        "resources/runestone",
+        "automation/crafting"
+      ]
     }
   ]
 }

@@ -19,6 +19,15 @@
       "type": "text",
       "title": "Automation",
       "text": "The pyre will automatically light itself if it finds fire in the area immediately around it. $(l:rituals/automation)Please see the section on Automation$() for more precise details."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/firestarter",
+        "crafting/pyres",
+        "rituals/automation"
+      ]
     }
   ]
 }

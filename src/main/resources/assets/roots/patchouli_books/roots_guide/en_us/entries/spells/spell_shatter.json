@@ -93,6 +93,14 @@
     {
       "type": "text",
       "text": "$(bold)Voiding:$() With $(modifier:shatter_void)$() modifier enabled, blocks are destroyed completely rather than broken."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/modifiers",
+        "herbs/stalicripe"
+      ]
     }
   ]
 }

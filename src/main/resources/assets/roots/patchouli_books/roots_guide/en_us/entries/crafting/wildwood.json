@@ -43,6 +43,13 @@
       "type": "crafting",
       "recipe": "roots:wildwood_ladder",
       "title": "Ladder"
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "resources/wildwood"
+      ]
     }
   ]
 }

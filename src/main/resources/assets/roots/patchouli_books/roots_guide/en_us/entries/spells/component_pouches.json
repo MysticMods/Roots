@@ -42,6 +42,16 @@
     {
       "type": "text",
       "text": "contained in one of your pouches, it will attempt to fill that slot before putting it into your inventory.$(br2)The keybind is also visible in the tooltip of the pouch. Likewise, if the auto-refill option is enabled, additional text will explain this function and that it can be disabled in the config."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/apothecary_pouch",
+        "crafting/component_pouch",
+        "crafting/fey_leather_pouch",
+        "crafting/herb_pouch"
+      ]
     }
   ]
 }

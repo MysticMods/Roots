@@ -79,6 +79,15 @@
     {
       "type": "text",
       "text": "pushed back are given Withering $(spell:sanctuary/ROMAN/wither_amplifier) for $(spell:sanctuary/SECONDS/wither_duration) seconds.$(br2)$(bold)Spiders:$() With the $(modifier:spider_unsuffrage)$() modifier enabled, any arachnid pushed back is also damaged for $(spell:sanctuary/HEART/spider_damage) hearts.$(br2)$(bold)Undead:$() With the $(modifier:undead_rejection)$() modifier enabled, any undead pushed back is also damaged for $(spell:sanctuary/HEART/undead_damage) hearts.$(br2)$(bold)Peaceful:$() With the $(modifier:reject_nature)$() modifier enabled, all entities are pushed back."
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "spells/modifiers",
+        "herbs/pereskia",
+        "herbs/wildroot"
+      ]
     }
   ]
 }

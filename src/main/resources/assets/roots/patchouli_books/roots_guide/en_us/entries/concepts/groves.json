@@ -69,6 +69,13 @@
       },
       "enable_visualize": false,
       "text": "$(o)Despite lacking evidence, often called a 'Fey' crafter.$()"
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/grove_stone"
+      ]
     }
   ]
 }

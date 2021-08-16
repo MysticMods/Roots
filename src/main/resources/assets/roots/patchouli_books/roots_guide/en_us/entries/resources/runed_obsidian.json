@@ -11,6 +11,14 @@
     {
       "type": "fey_crafting_template",
       "recipe": "runed_obsidian"
+    },
+    {
+      "type": "relations",
+      "anchor": "related",
+      "entries": [
+        "crafting/fey_crafter",
+        "resources/runestone"
+      ]
     }
   ]
 }
