@@ -149,6 +149,11 @@ public class PatchouliHack {
             boolean roman = false;
             boolean percent = false;
             boolean in_x = false;
+            boolean bubbles = false;
+            if (propName.equals("BUBBLES")) {
+              propName = parts[2];
+              bubbles = true;
+            }
             if (propName.equals("HEART")) {
               propName = parts[2];
               heart = true;
@@ -298,6 +303,13 @@ public class PatchouliHack {
                 } catch (ClassCastException e) {
                   Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
                   return "INVALID PROPERTY FOR IN_X: " + propName;
+                }
+              } else if (bubbles) {
+                try {
+                  value = String.valueOf((((Number) value).intValue() / 30));
+                } catch (ClassCastException e) {
+                  Roots.logger.error("Couldn't convert property value: " + propName + " " + value, e);
+                  return "INVALID PROPERTY FOR BUBBLES: " + propName;
                 }
               }
 
