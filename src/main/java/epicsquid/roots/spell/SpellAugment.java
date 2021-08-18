@@ -59,7 +59,7 @@ public class SpellAugment extends SpellBase {
   public static Property<Integer> PROP_ABSORPTION_DURATION = new Property<>("absorption_duration", 15 * 20).setDescription("duration for the absorption potion effect");
   public static Property<Integer> PROP_ABSORPTION_AMPLIFIER = new Property<>("absorption_amplifier", 0).setDescription("amplifier for the absorption potion effect");
 
-  public static Property<Integer> PROP_AIR_AMOUNT = new Property<>("air_amount", 300).setDescription("the value to add to a user's air with the second wind effect");
+  public static Property<Integer> PROP_AIR_AMOUNT = new Property<>("air_amount", 300).setDescription("the value to add to a user's air with the second wind effect [30 air = 1 bubble]");
 
 
   public static Modifier REACH = ModifierRegistry.register(new Modifier(new ResourceLocation(Roots.MODID, "reach"), ModifierCores.PERESKIA, Cost.single(CostType.ADDITIONAL_COST, ModifierCores.PERESKIA, 0.5)));
