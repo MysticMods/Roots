@@ -65,7 +65,7 @@ public class GuiLibrary extends GuiContainer {
       if (storage != null) {
         StaffSpellInfo info = storage.getSpellInSlot(container.getSpellSlot());
         if (info != null) {
-          String name = info.getSpell().getTextColor() + "" + TextFormatting.BOLD + I18n.format("roots.spell." + info.getSpell().getName() + ".name");
+          String name = info.getNonNullSpell().getTextColor() + "" + TextFormatting.BOLD + I18n.format("roots.spell." + info.getNonNullSpell().getName() + ".name");
           RenderHelper.enableGUIStandardItemLighting();
           this.drawCenteredString(renderer, name, this.width / 2, guiTop, 0xFFFFFFFF);
         }

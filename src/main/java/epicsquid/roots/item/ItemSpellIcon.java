@@ -59,13 +59,19 @@ public class ItemSpellIcon extends ItemBase {
       if (storage1 != null) {
         StaffSpellInfo info = storage1.getSelectedInfo();
         if (info != null) {
-          return spellMap.get(info.getSpell());
+          SpellBase spell = info.getSpell();
+          if (spell != null) {
+            return spellMap.get(spell);
+          }
         }
       }
       if (storage2 != null) {
         SpellDustInfo info = storage2.getSelectedInfo();
         if (info != null) {
-          return spellMap.get(info.getSpell());
+          SpellBase spell = info.getSpell();
+          if (spell != null) {
+            return spellMap.get(spell);
+          }
         }
       }
 

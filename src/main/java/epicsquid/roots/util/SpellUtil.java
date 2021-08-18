@@ -68,13 +68,18 @@ public class SpellUtil {
 
     for (StaffSpellInfo info : storage.getSpells()) {
       LibraryModifierInstanceList libraryModifiers = data.getModifiers(info.toLibrary());
-      info.getModifiers().removeIf(o -> libraryModifiers.get(o.getModifier()) == null || ModifierRegistry.get(o.getModifier()) == null);
+      if (libraryModifiers != null) {
+        info.getModifiers().removeIf(o -> libraryModifiers.get(o.getModifier()) == null || ModifierRegistry.get(o.getModifier()) == null);
 
-      data.updateSpell(info.toLibrary());
+        data.updateSpell(info.toLibrary());
+      }
     }
 
     for (StaffSpellInfo info : storage.getSpells()) {
       SpellBase spell = info.getSpell();
+      if (spell == null) {
+        continue;
+      }
       LibrarySpellInfo current = data.getData(spell);
       StaffModifierInstanceList modifiers = info.getModifiers();
       for (LibraryModifierInstance instance : current.getModifiers()) {

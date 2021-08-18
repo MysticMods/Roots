@@ -2,6 +2,7 @@ package epicsquid.roots.block;
 
 import epicsquid.mysticallib.block.BlockTEBase;
 import epicsquid.mysticallib.proxy.ClientProxy;
+import epicsquid.roots.Roots;
 import epicsquid.roots.particle.ParticlePyreLeaf;
 import epicsquid.roots.recipe.PyreCraftingRecipe;
 import epicsquid.roots.ritual.RitualBase;
@@ -20,12 +21,14 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -41,12 +44,16 @@ public class BlockPyre extends BlockTEBase {
   public static PropertyBool BURNING = PropertyBool.create("burning");
 
   public BlockPyre(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
-    this(mat, type, hardness, name, teClass, true);
+    super(mat, type, hardness, name, teClass);
+    setDefaultState(blockState.getBaseState().withProperty(BURNING, false));
   }
 
-  public BlockPyre(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass, boolean register) {
-    super(mat, type, hardness, name, teClass, register);
-    setDefaultState(blockState.getBaseState().withProperty(BURNING, false));
+  @Override
+  public void attemptRegistry(@Nonnull Class<? extends TileEntity> c, String name) {
+    if (!BlockTEBase.classes.contains(c)) {
+      BlockTEBase.classes.add(c);
+      GameRegistry.registerTileEntity(c, new ResourceLocation(Roots.MODID, "tile_entity_bonfire"));
+    }
   }
 
   @Override

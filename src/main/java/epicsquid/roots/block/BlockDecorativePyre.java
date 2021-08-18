@@ -1,5 +1,7 @@
 package epicsquid.roots.block;
 
+import epicsquid.mysticallib.block.BlockTEBase;
+import epicsquid.roots.Roots;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -8,11 +10,13 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -26,6 +30,14 @@ public class BlockDecorativePyre extends BlockPyre {
 
   public BlockDecorativePyre(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
     super(mat, type, hardness, name, teClass);
+  }
+
+  @Override
+  public void attemptRegistry(@Nonnull Class<? extends TileEntity> c, String name) {
+    if (!BlockTEBase.classes.contains(c)) {
+      BlockTEBase.classes.add(c);
+      GameRegistry.registerTileEntity(c, new ResourceLocation(Roots.MODID, "tile_entity_decorative_pyre"));
+    }
   }
 
   @Override

@@ -54,10 +54,13 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
   }
 
   public void addSpell(SpellDustInfo info) {
-    LibrarySpellInfo libinfo = spells.get(info.getSpell());
-    libinfo.setObtained();
-    list = null;
-    markDirty();
+    SpellBase spell = info.getSpell();
+    if (spell != null) {
+      LibrarySpellInfo libinfo = spells.get(spell);
+      libinfo.setObtained();
+      list = null;
+      markDirty();
+    }
   }
 
   public void addSpell(SpellBase spell) {
@@ -71,14 +74,22 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
     return spells.get(spell);
   }
 
+  @Nullable
   public LibraryModifierInstanceList getModifiers(LibrarySpellInfo incoming) {
     SpellBase spell = incoming.getSpell();
-    LibrarySpellInfo current = getData(spell);
-    return current.getModifiers();
+    if (spell != null) {
+      LibrarySpellInfo current = getData(spell);
+      return current.getModifiers();
+    } else {
+      return null;
+    }
   }
 
   public void updateSpell(LibrarySpellInfo incoming) {
     SpellBase spell = incoming.getSpell();
+    if (spell == null) {
+      return;
+    }
     LibrarySpellInfo current = getData(spell);
     if (!current.isObtained() && incoming.isObtained()) {
       current.setObtained();
@@ -105,7 +116,10 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
     generateMap();
     for (int i = 0; i < list.tagCount(); i++) {
       LibrarySpellInfo instance = LibrarySpellInfo.fromNBT(list.getCompoundTagAt(i));
-      spells.put(instance.getSpell(), instance);
+      SpellBase spell = instance.getSpell();
+      if (spell != null) {
+        spells.put(spell, instance);
+      }
     }
     uuid = nbt.getUniqueId("uuid");
     this.list = null;
@@ -127,9 +141,9 @@ public class SpellLibraryData extends WorldSavedData implements Iterable<Library
 
   public List<LibrarySpellInfo> asList() {
     if (list == null) {
-      list = spells.values().stream().filter(LibrarySpellInfo::isObtained).collect(Collectors.toList());
+      list = spells.values().stream().filter(o -> o.getSpell() != null).filter(LibrarySpellInfo::isObtained).collect(Collectors.toList());
     }
-    list.sort(Comparator.comparing(a -> a.getSpell().getRegistryName().getPath()));
+    list.sort(Comparator.comparing(a -> a.getSpell() == null ? "" : a.getSpell().getRegistryName().getPath()));
     return list;
   }
 

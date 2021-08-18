@@ -117,12 +117,12 @@ public class CommandRoots extends CommandBase {
           SpellLibraryData data = SpellLibraryRegistry.getData(player);
           for (LibrarySpellInfo info : data) {
             if (info.isObtained()) {
-              player.sendMessage(new TextComponentString("Obtained: " + info.getSpell().getRegistryName()));
+              player.sendMessage(new TextComponentString("Obtained: " + info.getNonNullSpell().getRegistryName()));
             }
           }
           for (LibrarySpellInfo info : data) {
             if (!info.isObtained()) {
-              player.sendMessage(new TextComponentString("Unobtained: " + info.getSpell().getRegistryName()));
+              player.sendMessage(new TextComponentString("Unobtained: " + info.getNonNullSpell().getRegistryName()));
             }
           }
         }

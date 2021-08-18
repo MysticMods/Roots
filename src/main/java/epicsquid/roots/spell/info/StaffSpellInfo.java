@@ -56,7 +56,12 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
   }
 
   public int cooldownTotal() {
-    return spell.getCooldown();
+    SpellBase spell = getSpell();
+    if (spell != null) {
+      return spell.getCooldown();
+    } else {
+      return 0;
+    }
   }
 
   public void use(long cd) {
@@ -116,9 +121,14 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
   }
 
   public static StaffSpellInfo fromLibrary(LibrarySpellInfo incoming) {
-    StaffSpellInfo info = new StaffSpellInfo(incoming.spell);
-    info.setModifiers(incoming.getModifiers().toStaff());
-    return info;
+    SpellBase spell = incoming.getSpell();
+    if (spell != null) {
+      StaffSpellInfo info = new StaffSpellInfo(spell);
+      info.setModifiers(incoming.getModifiers().toStaff());
+      return info;
+    } else {
+      return StaffSpellInfo.EMPTY;
+    }
   }
 
   public static StaffSpellInfo fromSpell(SpellBase spell, boolean modifiers) {
@@ -132,10 +142,15 @@ public class StaffSpellInfo extends AbstractSpellModifiers<StaffModifierInstance
   }
 
   public LibrarySpellInfo toLibrary() {
-    LibrarySpellInfo info = new LibrarySpellInfo(spell);
-    info.setObtained();
-    info.setModifiers(getModifiers().toLibrary());
-    return info;
+    SpellBase spell = getSpell();
+    if (spell != null) {
+      LibrarySpellInfo info = new LibrarySpellInfo(spell);
+      info.setObtained();
+      info.setModifiers(getModifiers().toLibrary());
+      return info;
+    } else {
+      return LibrarySpellInfo.EMPTY;
+    }
   }
 
   @Override

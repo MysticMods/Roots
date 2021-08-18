@@ -283,17 +283,19 @@ public class ItemStaff extends ItemBase {
           return Util.intColor(255, 255, 255);
         }
         SpellBase spell = info.getSpell();
-        if (tintIndex == 1) {
-          int r = (int) (255 * spell.getRed1());
-          int g = (int) (255 * spell.getGreen1());
-          int b = (int) (255 * spell.getBlue1());
-          return (r << 16) + (g << 8) + b;
-        }
-        if (tintIndex == 2) {
-          int r = (int) (255 * spell.getRed2());
-          int g = (int) (255 * spell.getGreen2());
-          int b = (int) (255 * spell.getBlue2());
-          return (r << 16) + (g << 8) + b;
+        if (spell != null) {
+          if (tintIndex == 1) {
+            int r = (int) (255 * spell.getRed1());
+            int g = (int) (255 * spell.getGreen1());
+            int b = (int) (255 * spell.getBlue1());
+            return (r << 16) + (g << 8) + b;
+          }
+          if (tintIndex == 2) {
+            int r = (int) (255 * spell.getRed2());
+            int g = (int) (255 * spell.getGreen2());
+            int b = (int) (255 * spell.getBlue2());
+            return (r << 16) + (g << 8) + b;
+          }
         }
         return Util.intColor(255, 255, 255);
       }

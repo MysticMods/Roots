@@ -113,6 +113,9 @@ public class TileEntityImbuer extends TileBase implements ITickable {
       }
       DustSpellStorage cap = DustSpellStorage.fromStack(spellDust);
       SpellBase spell = cap != null && cap.getSelectedInfo() != null ? cap.getSelectedInfo().getSpell() : FakeSpell.INSTANCE;
+      if (spell == null) {
+        spell = FakeSpell.INSTANCE;
+      }
       SpellLibraryData library = SpellLibraryRegistry.getData(player);
       if (spell == FakeSpell.INSTANCE) {
         player.sendStatusMessage(new TextComponentTranslation("roots.message.spell_invalid").setStyle(new Style().setColor(spell.getTextColor()).setBold(true)), true);
@@ -243,6 +246,9 @@ public class TileEntityImbuer extends TileBase implements ITickable {
       SpellBase spell;
       if (capability != null && capability.getSelectedInfo() != null) {
         spell = capability.getSelectedInfo().getSpell();
+        if (spell == null) {
+          spell = FakeSpell.INSTANCE;
+        }
       } else {
         spell = FakeSpell.INSTANCE;
       }

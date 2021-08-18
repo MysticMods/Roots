@@ -318,13 +318,16 @@ public class StaffSpellStorage extends AbstractSpellStorage<StaffSpellInfo> {
             }
           }
           break;
-        case "rampant_growth":
+        case "spell_rampant_growth":
           info = StaffSpellInfo.fromSpell(SpellGrowthInfusion.instance, false);
           for (StaffModifierInstance mod : info.getModifiers()) {
             Modifier m = mod.getModifier();
-            if (m == SpellGrowthInfusion.RADIUS1 || m == SpellGrowthInfusion.RADIUS2 || m == SpellGrowthInfusion.RADIUS3) {
+            if (m == SpellGrowthInfusion.RADIUS1) {
               mod.setApplied();
               mod.setEnabled(true);
+            }
+            if (m == SpellGrowthInfusion.RADIUS2 || m == SpellGrowthInfusion.RADIUS3) {
+              mod.setApplied();
             }
           }
           break;
