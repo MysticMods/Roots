@@ -62,7 +62,7 @@ dependencies {
     compile("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${ct_version}") {
         exclude group: 'mezz.jei'
     }
-    compileOnly("vazkii.botania:Botania:${botania_version}") {
+    deobfCompile("vazkii.botania:Botania:${botania_version}") {
         exclude group: 'mezz.jei'
     }
 
@@ -134,6 +134,6 @@ idea {
     }
 }
 
-sourceSets {
+/*sourceSets {
     main.output.resourcesDir = main.java.outputDir
-}
+}*/

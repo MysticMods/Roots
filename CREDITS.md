@@ -14,6 +14,8 @@ Original sound for the Shatter spell was created by Lich (http://twitter.com/lic
 
 Credit goes to ScrewyMacGyver for providing a large selection of pitch- and volume-shifted default Minecraft sounds as a basis for spell and ritual sounds. 
 
+KitzahTheNarrator produced many sounds for spells.
+
 # Translations (General)
 
 Many thanks to the following people who have donated their time for translating this project:
