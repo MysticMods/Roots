@@ -3,6 +3,7 @@ package epicsquid.roots.tileentity;
 import epicsquid.mysticallib.tile.TileBase;
 import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
+import epicsquid.roots.Roots;
 import epicsquid.roots.init.ModItems;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,8 +14,10 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
@@ -35,6 +38,7 @@ public class TileEntityCatalystPlate extends TileBase {
 
   public TileEntityCatalystPlate() {
     super();
+    GameRegistry.registerTileEntity(TileEntityCatalystPlate.class, new ResourceLocation(Roots.MODID, "tile_entity_offering_plate"));
   }
 
   @Override

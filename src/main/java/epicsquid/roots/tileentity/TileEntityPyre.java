@@ -34,32 +34,27 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemBucket;
-import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.ITickable;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nonnull;
@@ -117,6 +112,10 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
 
   public TileEntityPyre() {
     super();
+    GameRegistry.registerTileEntity(TileEntityPyre.class, new ResourceLocation(Roots.MODID, "tile_entity_bonfire"));
+  }
+
+  protected void readFromNBTLegacy(NBTTagCompound tag) {
   }
 
   @Nonnull
@@ -138,7 +137,11 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
     super.readFromNBT(tag);
     inventory.deserializeNBT(tag.getCompoundTag("handler"));
     burnTime = tag.getInteger("burnTime");
-    craftingResult = new ItemStack(tag.getCompoundTag("craftingResult"));
+    if (tag.hasKey("craftingResult")) {
+      craftingResult = new ItemStack(tag.getCompoundTag("craftingResult"));
+    } else {
+      craftingResult = ItemStack.EMPTY;
+    }
     craftingXP = tag.getInteger("craftingXP");
     lastRitualUsed = RitualRegistry.getRitual(tag.getString("lastRitualUsed"));
     lastRecipeUsed = ModRecipes.getCraftingRecipe(tag.getString("lastRecipeUsed"));
@@ -258,7 +261,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
 
   public static Ingredient fireStarters = null;
 
-  public static Ingredient getFireStarters () {
+  public static Ingredient getFireStarters() {
     if (fireStarters == null) {
       fireStarters = new OreIngredient("pyreFireStarters");
     }

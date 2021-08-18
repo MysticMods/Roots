@@ -21,9 +21,8 @@ import javax.annotation.Nonnull;
 public class BlockCatalystPlate extends BlockTEBase {
   public static final PropertyDirection FACING = PropertyDirection.create("facing");
 
-  public BlockCatalystPlate(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name,
-                            @Nonnull Class<? extends TileEntity> teClass) {
-    super(mat, type, hardness, name, teClass);
+  public BlockCatalystPlate(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass, boolean register) {
+    super(mat, type, hardness, name, teClass, register);
   }
 
   @Override
