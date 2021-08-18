@@ -77,7 +77,6 @@ public class JEIRootsPlugin implements IModPlugin {
   public static final String FEY_CRAFTING = Roots.MODID + ".fey_crafting";
   public static final String SOIL = Roots.MODID + ".soil";
   public static final String SPELL_COSTS = Roots.MODID + ".spell_costs";
-  public static final String SPELL_MODIFIERS = Roots.MODID + ".spell_modifiers";
   public static final String TERRA_MOSS = Roots.MODID + ".terra_moss";
   public static final String SUMMON_CREATURES = Roots.MODID + ".summon_creatures";
   public static final String CHRYSOPOEIA = Roots.MODID + ".chrysopoeia";
@@ -210,7 +209,6 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipes(spells, SPELL_COSTS);
     registry.addRecipes(RitualRegistry.ritualRegistry.values(), RITUAL);
     registry.addRecipes(ModRecipes.getFeyCraftingRecipes().values(), FEY_CRAFTING);
-    registry.addRecipes(spells, SPELL_MODIFIERS);
     registry.addRecipes(spells, SPELL_IMBUING);
     registry.addRecipes(spells, SPELL_IMPOSING);
     registry.addRecipes(ModRecipes.getBarkRecipes(), BARK_CARVING);
@@ -263,7 +261,6 @@ public class JEIRootsPlugin implements IModPlugin {
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.fey_crafter), FEY_CRAFTING);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.runic_crafter), FEY_CRAFTING);
     registry.addRecipeCatalyst(new ItemStack(ModItems.staff), SPELL_COSTS);
-    registry.addRecipeCatalyst(new ItemStack(ModBlocks.imbuer), SPELL_MODIFIERS);
     registry.addRecipeCatalyst(new ItemStack(ModItems.reliquary), LOOT);
     registry.addRecipeCatalyst(new ItemStack(ModBlocks.imposer), SPELL_IMPOSING);
 
