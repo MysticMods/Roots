@@ -41,7 +41,11 @@ public class BlockPyre extends BlockTEBase {
   public static PropertyBool BURNING = PropertyBool.create("burning");
 
   public BlockPyre(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass) {
-    super(mat, type, hardness, name, teClass);
+    this(mat, type, hardness, name, teClass, true);
+  }
+
+  public BlockPyre(@Nonnull Material mat, @Nonnull SoundType type, float hardness, @Nonnull String name, @Nonnull Class<? extends TileEntity> teClass, boolean register) {
+    super(mat, type, hardness, name, teClass, register);
     setDefaultState(blockState.getBaseState().withProperty(BURNING, false));
   }
 
