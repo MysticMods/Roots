@@ -8,6 +8,8 @@ import epicsquid.roots.spell.info.storage.LibrarySpellStorage;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
+import java.util.Objects;
+
 public class LibrarySpellInfo extends AbstractSpellModifiers<LibraryModifierInstanceList> {
   public static LibrarySpellInfo EMPTY = new LibrarySpellInfo();
 
@@ -55,9 +57,12 @@ public class LibrarySpellInfo extends AbstractSpellModifiers<LibraryModifierInst
   @Override
   public void deserializeNBT(NBTTagCompound nbt) {
     super.deserializeNBT(nbt);
-    this.modifiers = new LibraryModifierInstanceList(getSpell());
-    this.modifiers.deserializeNBT(nbt.getCompoundTag("m"));
-    this.obtained = nbt.getBoolean("o");
+    SpellBase spell = getSpell();
+    if (spell != null) {
+      this.modifiers = new LibraryModifierInstanceList(spell);
+      this.modifiers.deserializeNBT(nbt.getCompoundTag("m"));
+      this.obtained = nbt.getBoolean("o");
+    }
   }
 
   @Override
@@ -71,14 +76,19 @@ public class LibrarySpellInfo extends AbstractSpellModifiers<LibraryModifierInst
     NBTTagCompound comp = ItemUtil.getOrCreateTag(stack);
     comp.setBoolean("library", true);
     LibrarySpellStorage storage = LibrarySpellStorage.fromStack(stack);
-    storage.addSpell(this);
+    Objects.requireNonNull(storage).addSpell(this);
     return stack;
   }
 
   public StaffSpellInfo toStaff() {
-    StaffSpellInfo info = new StaffSpellInfo(spell);
-    info.setModifiers(modifiers.toStaff());
-    return info;
+    SpellBase spell = getSpell();
+    if (spell != null) {
+      StaffSpellInfo info = new StaffSpellInfo(spell);
+      info.setModifiers(modifiers.toStaff());
+      return info;
+    } else {
+      return StaffSpellInfo.EMPTY;
+    }
   }
 
   public static LibrarySpellInfo fromNBT(NBTTagCompound tag) {
@@ -88,9 +98,14 @@ public class LibrarySpellInfo extends AbstractSpellModifiers<LibraryModifierInst
   }
 
   public static LibrarySpellInfo fromStaff(StaffSpellInfo incoming) {
-    LibrarySpellInfo instance = new LibrarySpellInfo(incoming.spell);
-    instance.setObtained(true);
-    instance.setModifiers(incoming.getModifiers().toLibrary());
-    return instance;
+    SpellBase spell = incoming.getSpell();
+    if (spell != null) {
+      LibrarySpellInfo instance = new LibrarySpellInfo(spell);
+      instance.setObtained(true);
+      instance.setModifiers(incoming.getModifiers().toLibrary());
+      return instance;
+    } else {
+      return LibrarySpellInfo.EMPTY;
+    }
   }
 }

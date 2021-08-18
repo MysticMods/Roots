@@ -30,7 +30,12 @@ public class SpellDustInfo extends AbstractSpellInfo {
   }
 
   public StaffSpellInfo toStaff() {
-    return new StaffSpellInfo(getSpell());
+    SpellBase spell = getSpell();
+    if (spell != null) {
+      return new StaffSpellInfo(spell);
+    } else {
+      return StaffSpellInfo.EMPTY;
+    }
   }
 
   public static SpellDustInfo fromNBT(NBTTagCompound tag) {

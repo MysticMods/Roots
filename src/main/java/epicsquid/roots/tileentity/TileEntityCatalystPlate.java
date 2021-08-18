@@ -38,7 +38,6 @@ public class TileEntityCatalystPlate extends TileBase {
 
   public TileEntityCatalystPlate() {
     super();
-    GameRegistry.registerTileEntity(TileEntityCatalystPlate.class, new ResourceLocation(Roots.MODID, "tile_entity_offering_plate"));
   }
 
   @Override
@@ -113,8 +112,8 @@ public class TileEntityCatalystPlate extends TileBase {
         }
       }
     }
-    if (heldItem.isEmpty() && !world.isRemote && hand == EnumHand.MAIN_HAND) {
-      ItemStack inSlot = inventory.getStackInSlot(0);
+    ItemStack inSlot = inventory.getStackInSlot(0);
+    if ((heldItem.isEmpty() || ItemUtil.equalWithoutSize(heldItem, inSlot)) && !world.isRemote && hand == EnumHand.MAIN_HAND) {
       if (!inSlot.isEmpty()) {
         count = inSlot.getCount();
         if (player.isSneaking()) {
