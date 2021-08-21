@@ -4,7 +4,6 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import baubles.api.cap.BaubleItem;
 import baubles.api.cap.BaublesCapabilities;
-import epicsquid.roots.Roots;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
@@ -14,7 +13,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class BaubleBeltCapabilityHandler implements ICapabilityProvider {
-  public static ResourceLocation IDENTIFIER = new ResourceLocation(Roots.MODID, "baubles_pouch");
+  public static ResourceLocation IDENTIFIER = new ResourceLocation("roots", "baubles_pouch");
 
   public static final BaubleBeltCapabilityHandler instance = new BaubleBeltCapabilityHandler();
 

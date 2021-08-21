@@ -10,7 +10,7 @@ SummonCreatures.clearLifeEssence();
 // Remove the default recipe for chicken
 SummonCreatures.removeEntity(<entity:minecraft:chicken>);
 
-// Add a recipe to summon a Chicken using 3 thaumcraft.items
+// Add a recipe to summon a Chicken using 3 items
 SummonCreatures.addEntity(<entity:minecraft:chicken>, [<minecraft:wheat_seeds>, <minecraft:wheat>, <ore:ingotIron>]);
 
 // Add a recipe to summon a blaze using flint and steel
