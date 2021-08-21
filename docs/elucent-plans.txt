@@ -6,9 +6,9 @@
         I wanted to make a school of magic that would have tricky or chaotic effects, instead of some kind of simple raw power.
     
         offering Plate:
-            Runestone pedestal atop which thaumcraft.items can be placed.
-            Once per day, the thaumcraft.items on the pedestal will be consumed and replaced with a small amount of fairy dust.
-            Different thaumcraft.items have different values:
+            Runestone pedestal atop which items can be placed.
+            Once per day, the items on the pedestal will be consumed and replaced with a small amount of fairy dust.
+            Different items have different values:
                 Vanilla crops -- lowest.
                 Roots 2 herbs -- twice as good as vanilla crops.
                 Spider eyes -- four times as good as Roots 2 herbs.
@@ -27,7 +27,7 @@
                 Orange fairies will give you 20% reduced fire and lava damage per fairy, capping at full immunity.
         Fey Magic:
             Fey magic is a mana-like system that is obtained by drinking Spritely Brew, a form of bottled fairy dust.
-            It is drained by using certain fairy-themed thaumcraft.items.
+            It is drained by using certain fairy-themed items.
             Bathing in a fairy pool at night after many offerings will slowly regenerate your fey magic.
         Wand of Transfiguration:
             Transforms mobs into other kinds of mobs. Hostile mobs become random passive mobs, passive mobs become random hostiles, players get disguised
@@ -152,7 +152,7 @@
             This ritual will summon a powerful boss of the type of one of the five attuneable animals: a raven, a bear, a fox, a wolf, or a deer.
             The boss will only stick around as long as the ritual is active, and if they reach the ritual they will snuff it out and leave.
             The ritual will also summon dark spectral versions of the boss's animal that will attack you.
-            Each boss would have two different useful thaumcraft.items that it would drop. I never got around to deciding what these would be though.
+            Each boss would have two different useful items that it would drop. I never got around to deciding what these would be though.
         Ritual of Spirit Binding:
             Must be performed in Wild Lands.
             This ritual will bind your soul to a particular animal, consuming the animal in the process as you are fused as one.
@@ -169,7 +169,7 @@
             each animal.
         Polymorph Charm:
             When bound to an animal through Bestial Power, you can transform visually into the animal of choice using the Polymorph charm.
-            During this time you cannot use thaumcraft.items or attack, but you can still right-click to use your Bestial Power ability.
+            During this time you cannot use items or attack, but you can still right-click to use your Bestial Power ability.
             If your soul is bound to the animal, this lasts indefinitely. Otherwise, it drains your Bestial Power uses.
     
     Endgame Druidry:
@@ -220,7 +220,7 @@
         Call of Darkness:
             Nights are extended 3x.
         Soul Forging:
-            At an altar, Ancient Spirits may be bound to thaumcraft.items for particular powers.
+            At an altar, Ancient Spirits may be bound to items for particular powers.
             Not sure what these would be, but they would be extremely powerful while not simply being a numbers game. Stuff that could take down a
             Draconic player while still being able to be beaten by someone in Living Armor or Terrasteel.
             One Spirit could be bound per item. As a result, the item becomes entirely unbreakable. Even if it falls in the void it will simply reappear

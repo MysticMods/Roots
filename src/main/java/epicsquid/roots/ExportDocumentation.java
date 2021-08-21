@@ -17,6 +17,7 @@ public class ExportDocumentation {
     Class<?>[] classes = {
         AnimalHarvestTweaker.class,
         BarkTweaker.class,
+        Costs.class,
         FeyCraftingTweaker.class,
         FlowerTweaker.class,
         MortarTweaker.class,
@@ -34,7 +35,8 @@ public class ExportDocumentation {
         Herbs.class,
         Spells.class,
         Spell.class,
-        Ritual.class
+        Ritual.class,
+        Modifiers.class
     };
 
     ZenDocExporter export = new ZenDocExporter();
