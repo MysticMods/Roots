@@ -17,7 +17,7 @@ public class RitualVisualiseCategory implements IRecipeCategory<RitualVisualiseW
   private final IDrawable background;
 
   public RitualVisualiseCategory(IGuiHelper helper) {
-    this.background = helper.createDrawable(new ResourceLocation(Roots.MODID, "textures/gui/jei/ritual_visualise.png"), 0, 0, 54, 35);
+    this.background = helper.createDrawable(new ResourceLocation(Roots.MODID, "textures/gui/jei/ritual_visualise.png"), 0, 0, 55, 35);
   }
 
   @Override
