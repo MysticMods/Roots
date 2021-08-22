@@ -333,6 +333,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
         if (ritualEntity != null) {
           ritualEntity.setDead();
         }
+        isBurning = false;
         BlockPyre.setState(false, world, pos);
         world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1F, 1F);
         world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1F, 1F);
@@ -564,6 +565,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
 
         if (!burning || burnTime == 0) {
           burnTime = 0;
+          isBurning = false;
           spawnCraftResult();
           markDirty();
           if (!startRitual(lastPlayerId, true)) {
