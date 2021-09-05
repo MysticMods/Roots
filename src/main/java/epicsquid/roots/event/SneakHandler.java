@@ -43,7 +43,7 @@ public class SneakHandler {
     }
   }
 
-  @SubscribeEvent (priority= EventPriority.LOWEST)
+  @SubscribeEvent(priority = EventPriority.LOWEST)
   public static void onCheckAttack(LivingSetAttackTargetEvent event) {
     if (!(event.getTarget() instanceof EntityPlayer) || !(event.getEntityLiving() instanceof EntityMob)) {
       return;
@@ -61,7 +61,11 @@ public class SneakHandler {
   @SideOnly(Side.CLIENT)
   public static void onPlayerSneak(TickEvent.ClientTickEvent event) {
     Minecraft mc = Minecraft.getMinecraft();
-    if (mc.player == null) return;
+    //noinspection ConstantConditions
+    if (mc == null || mc.player == null) {
+      return;
+    }
+
 
     if (lastSneak != mc.player.isSneaking() && !lastSneak) {
       lastSneak = mc.player.isSneaking();

@@ -94,6 +94,9 @@ public class GuiLibrary extends GuiContainer {
 
   @Override
   protected void renderHoveredToolTip(int x, int y) {
+    if (this.mc == null || this.mc.player == null) {
+      return;
+    }
     if (this.mc.player.inventory.getItemStack().isEmpty() && this.hoveredSlot != null) {
       List<String> tooltip = new ArrayList<>();
       FontRenderer font = null;

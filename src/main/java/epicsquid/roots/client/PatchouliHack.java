@@ -398,6 +398,10 @@ public class PatchouliHack {
     BookTextParser.FunctionProcessor advancement =
         (parameter, state) -> {
           ResourceLocation rl = new ResourceLocation(parameter.toLowerCase(Locale.ROOT));
+          Minecraft mc = Minecraft.getMinecraft();
+          if (mc == null || mc.player == null) {
+            return "INVALID MINECRAFT";
+          }
           ClientAdvancementManager manager = Minecraft.getMinecraft().player.connection.getAdvancementManager();
           AdvancementList list = manager.getAdvancementList();
           Advancement adv = list.getAdvancement(rl);
@@ -408,7 +412,6 @@ public class PatchouliHack {
           state.color = state.book.linkColor;
           state.tooltip = adv.getDisplay().getDescription().getFormattedText();
           state.onClick = () -> {
-            Minecraft mc = Minecraft.getMinecraft();
             GuiScreenAdvancements screen = new GuiScreenAdvancements(mc.player.connection.getAdvancementManager());
             screen.setSelectedTab(adv);
             mc.displayGuiScreen(screen);

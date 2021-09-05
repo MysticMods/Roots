@@ -78,6 +78,9 @@ public class GuiImposer extends GuiContainer {
 
   @Override
   protected void renderHoveredToolTip(int x, int y) {
+    if (this.mc == null || this.mc.player == null) {
+      return;
+    }
     if (this.mc.player.inventory.getItemStack().isEmpty() && this.hoveredSlot != null) {
       List<String> tooltip = new ArrayList<>();
       FontRenderer font = null;
@@ -166,8 +169,10 @@ public class GuiImposer extends GuiContainer {
   @Override
   protected void actionPerformed(GuiButton button) throws IOException {
     if (button.id == backButton.id) {
-      MessageSetImposerSlot packet = new MessageSetImposerSlot(Minecraft.getMinecraft().player.world.provider.getDimension(), container.tile.getPos(), 0);
-      PacketHandler.INSTANCE.sendToServer(packet);
+      if (this.mc != null && this.mc.player != null) {
+        MessageSetImposerSlot packet = new MessageSetImposerSlot(this.mc.player.world.provider.getDimension(), container.tile.getPos(), 0);
+        PacketHandler.INSTANCE.sendToServer(packet);
+      }
     }
 
     super.actionPerformed(button);

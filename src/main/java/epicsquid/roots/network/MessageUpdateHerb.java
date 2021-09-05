@@ -40,7 +40,12 @@ public class MessageUpdateHerb implements IMessage {
     @SideOnly(Side.CLIENT)
     @Override
     protected void handleMessage(final MessageUpdateHerb message, final MessageContext ctx) {
-      RenderHerbHUD.INSTANCE.resolveSlots(Minecraft.getMinecraft().player, message.herb, message.amount);
+      Minecraft mc = Minecraft.getMinecraft();
+      //noinspection ConstantConditions
+      if (mc == null || mc.player == null) {
+        return;
+      }
+      RenderHerbHUD.INSTANCE.resolveSlots(mc.player, message.herb, message.amount);
     }
   }
 }

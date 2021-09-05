@@ -79,6 +79,9 @@ public class RenderHerbHUD {
     }
 
     Minecraft mc = Minecraft.getMinecraft();
+    if (mc == null || mc.player == null) {
+      return;
+    }
     if (player.getUniqueID() != mc.player.getUniqueID()) {
       return;
     }
@@ -136,6 +139,9 @@ public class RenderHerbHUD {
       }
 
       Minecraft mc = Minecraft.getMinecraft();
+      if (mc == null || mc.player == null) {
+        return;
+      }
 
       float progress;
 

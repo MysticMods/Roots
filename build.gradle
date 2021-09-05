@@ -133,7 +133,7 @@ idea {
         inheritOutputDirs = true
     }
 }
-
+/*
 sourceSets {
     main.output.resourcesDir = main.java.outputDir
-}
+}*/

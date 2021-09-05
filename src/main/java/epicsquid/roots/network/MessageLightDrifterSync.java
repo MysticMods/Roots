@@ -64,12 +64,17 @@ public class MessageLightDrifterSync implements IMessage {
     @SideOnly(Side.CLIENT)
     @Override
     protected void handleMessage(final MessageLightDrifterSync message, final MessageContext ctx) {
-      World world = Minecraft.getMinecraft().world;
+      Minecraft mc = Minecraft.getMinecraft();
+      //noinspection ConstantConditions
+      if (mc == null || mc.player == null) {
+        return;
+      }
+      World world = mc.world;
       EntityPlayer player = world.getPlayerEntityByUUID(message.id);
       if (player != null) {
         if (!message.enable) {
           player.setPositionAndUpdate(message.x, message.y, message.z);
-          if (player == Minecraft.getMinecraft().player) {
+          if (player == mc.player) {
             SpectatorHandler.setReal();
           }
           player.noClip = message.enable;
@@ -80,6 +85,7 @@ public class MessageLightDrifterSync implements IMessage {
 
         player.capabilities.isFlying = message.enable;
         GameType type = GameType.getByID(message.mode);
+        //noinspection ConstantConditions
         if (type == null) {
           type = GameType.SURVIVAL;
         }

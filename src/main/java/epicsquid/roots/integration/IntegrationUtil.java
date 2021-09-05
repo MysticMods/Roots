@@ -66,6 +66,9 @@ public class IntegrationUtil {
   @SideOnly(Side.CLIENT)
   public static void openCategory(ResourceLocation book, ResourceLocation category) {
     Minecraft mc = Minecraft.getMinecraft();
+    if (mc == null || mc.player == null) {
+      return;
+    }
     openCategory(mc.world, mc.player, book, category);
   }
 

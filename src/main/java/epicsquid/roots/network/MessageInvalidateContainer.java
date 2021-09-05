@@ -25,7 +25,12 @@ public class MessageInvalidateContainer implements IMessage {
     @SideOnly(Side.CLIENT)
     @Override
     protected void handleMessage(final MessageInvalidateContainer message, final MessageContext ctx) {
-      EntityPlayer player = Minecraft.getMinecraft().player;
+      Minecraft mc = Minecraft.getMinecraft();
+      //noinspection ConstantConditions
+      if (mc == null || mc.player == null) {
+        return;
+      }
+      EntityPlayer player = mc.player;
       if (player.openContainer instanceof IInvalidatingContainer) {
         ((IInvalidatingContainer) player.openContainer).invalidate();
       }

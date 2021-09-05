@@ -44,8 +44,13 @@ public class MessageSenseHomeFX implements IMessage {
     @SideOnly(Side.CLIENT)
     @Override
     protected void handleMessage(final MessageSenseHomeFX message, final MessageContext ctx) {
-      World world = Minecraft.getMinecraft().world;
-      EntityPlayer player = Minecraft.getMinecraft().player;
+      Minecraft mc = Minecraft.getMinecraft();
+      //noinspection ConstantConditions
+      if (mc == null || mc.player == null) {
+        return;
+      }
+      World world = mc.world;
+      EntityPlayer player = mc.player;
       Vec3d playerPos = player.getPositionVector().add(0, 1, 0);
       Vec3d line = new Vec3d(message.home.getX(), player.posY, message.home.getZ()).add(0.5, 0.5, 0.5);
       for (Vec3d vec : VecUtil.pointsBetween(playerPos, line, 15)) {
