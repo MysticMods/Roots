@@ -190,7 +190,7 @@ public class BlockPyre extends BlockTEBase {
         }
       }
       if (ritual != null) {
-        if (bon.getLastRitualUsed().equals(ritual) && lit) return 5;
+        if (ritual.equals(bon.getLastRitualUsed()) && lit) return 5;
 
         return lit ? 4 : 1;
       }
@@ -204,7 +204,7 @@ public class BlockPyre extends BlockTEBase {
         }
       }
       if (recipe != null) {
-        if (bon.getLastRecipeUsed().equals(recipe) && lit) return 5;
+        if (recipe.equals(bon.getLastRecipeUsed()) && lit) return 5;
 
         return lit ? 4 : 1;
       }
