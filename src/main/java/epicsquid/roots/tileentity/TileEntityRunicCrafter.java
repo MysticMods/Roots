@@ -184,7 +184,7 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
 
   @Override
   public void update() {
-    if (!world.isRemote) {
+    if (world.isRemote) {
       if (!hasValidGroveStone()) {
         if (world.getTotalWorldTime() % 3 != 0) {
           ClientProxy.particleRenderer.spawnParticle(
@@ -226,6 +226,8 @@ public class TileEntityRunicCrafter extends TileEntityFeyCrafter implements ITic
           );
         }
       }
+    }
+    if (!world.isRemote) {
       if (countdown > 0) {
         if (storedItems.isEmpty() || getRecipe() == null) {
           countdown = -1;
