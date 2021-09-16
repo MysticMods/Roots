@@ -88,7 +88,7 @@
     },
     {
       "type": "text",
-      "text": "$(bold)Fey Fire:$() With the $(modifier:pyroclastic_cloud)$() modifier enabled, the ground beneath targets will spawn $(l:resources/fey_fire)fey fire$().$(br2)$(bold)Growth:$() With the $(modifier:spiritual_duality)$() modifier enabled, two jets of flame are fired instead of one."
+      "text": "$(bold)Fey Fire:$() With the $(modifier:pyroclastic_cloud)$() modifier enabled, the ground beneath targets will spawn $(l:resources/fey_fire)fey fire$().$(br2)$(bold)Duality:$() With the $(modifier:spiritual_duality)$() modifier enabled, two jets of flame are fired instead of one."
     },
     {
       "type": "relations",
