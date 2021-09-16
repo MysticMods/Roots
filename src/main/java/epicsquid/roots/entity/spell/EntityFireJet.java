@@ -128,7 +128,7 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
                   if (modifiers.has(SpellWildfire.WILDFIRE)) {
                     wildFire(entity.getPosition());
                   }
-                  if (modifiers.has(SpellWildfire.DUALITY) && entity.isDead) {
+/*                  if (modifiers.has(SpellWildfire.DUALITY) && entity.isDead) {
                     List<BlockPos> positions = Growth.collect(world, getPosition(), instance.radius_x, instance.radius_y, instance.radius_z);
                     if (!world.isRemote) {
                       for (BlockPos pos : positions) {
@@ -138,7 +138,7 @@ public class EntityFireJet extends EntitySpellModifiable<SpellWildfire> {
                         }
                       }
                     }
-                  }
+                  }*/
                 }
               }
             }
