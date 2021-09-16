@@ -15,6 +15,21 @@ buildscript {
         classpath("com.github.DStrand1:ForgeGradle:FG_2.3-SNAPSHOT") {
             changing = true
         }
+        classpath "org.eclipse.platform:org.eclipse.compare.core:[3.6.1000]"
+        classpath "org.eclipse.platform:org.eclipse.core.commands:[3.9.800]"
+        classpath "org.eclipse.platform:org.eclipse.core.contenttype:[3.7.900]"
+        classpath "org.eclipse.platform:org.eclipse.core.expressions:[3.7.100]"
+        classpath "org.eclipse.platform:org.eclipse.core.filesystem:[1.7.700]"
+        classpath "org.eclipse.platform:org.eclipse.core.jobs:[3.10.1100]"
+        classpath "org.eclipse.platform:org.eclipse.core.resources:[3.14.0]"
+        classpath "org.eclipse.platform:org.eclipse.core.runtime:[3.20.100]"
+        classpath "org.eclipse.platform:org.eclipse.equinox.app:[1.5.100]"
+        classpath "org.eclipse.platform:org.eclipse.equinox.common:[3.14.100]"
+        classpath "org.eclipse.platform:org.eclipse.equinox.preferences:[3.8.200]"
+        classpath "org.eclipse.platform:org.eclipse.equinox.registry:[3.10.100]"
+        classpath "org.eclipse.platform:org.eclipse.osgi:[3.16.200]"
+        classpath "org.eclipse.platform:org.eclipse.team.core:[3.8.1100]"
+        classpath "org.eclipse.platform:org.eclipse.text:[3.11.0]"
     }
 }
 

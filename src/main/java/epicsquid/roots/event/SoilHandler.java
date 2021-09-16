@@ -4,10 +4,12 @@ import epicsquid.mysticallib.util.ItemUtil;
 import epicsquid.mysticallib.util.Util;
 import epicsquid.roots.Roots;
 import epicsquid.roots.block.BlockElementalSoil;
+import epicsquid.roots.config.ElementalSoilConfig;
 import epicsquid.roots.init.ModBlocks;
 import epicsquid.roots.mechanics.Harvest;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.EnumFacing;
@@ -84,6 +86,9 @@ public class SoilHandler {
                 Random random = new Random();
                 for (ItemStack stack : event.getDrops()) {
                   newDrops.add(stack);
+                  if (ElementalSoilConfig.EarthSkipSeeds && stack.getItem() instanceof IPlantable) {
+                    continue;
+                  }
                   if (random.nextInt(3) < fertility) {
                     ItemStack copy = stack.copy();
                     copy.setCount(fertility > 2 ? 2 : 1);
