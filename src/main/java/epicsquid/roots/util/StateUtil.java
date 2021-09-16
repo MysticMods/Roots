@@ -21,10 +21,10 @@ public class StateUtil {
     private IBlockState state = null;
 
     private Predicate<IBlockState> tester = null;
-    private Predicate<IBlockState> air = (s) -> s.getBlock() == Blocks.AIR;
-    private Predicate<IBlockState> any = (s) -> true;
+    private final Predicate<IBlockState> air = (s) -> s.getBlock() == Blocks.AIR;
+    private final Predicate<IBlockState> any = (s) -> true;
 
-    private List<IProperty<?>> pairList = new ArrayList<>();
+    private Set<IProperty<?>> pairList = null;
 
     public IBlockState getState() {
       if (state == null) {
@@ -56,6 +56,7 @@ public class StateUtil {
       if (keyName.equals(property.getName())) {
         for (T value : property.getAllowedValues()) {
           if (property.getName(value).equals(newValue)) {
+            pairList.add(property);
             return baseState.withProperty(property, value);
           }
         }
@@ -83,6 +84,8 @@ public class StateUtil {
     }
 
     private IBlockState calculateState() {
+      pairList = new HashSet<>();
+
       String[] split = initial.split("\\[");
       Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(split[0]));
       if (block != null) {
@@ -109,10 +112,10 @@ public class StateUtil {
     }
 
     private static class Matcher implements Predicate<IBlockState> {
-      private final List<IProperty<?>> props;
+      private final Set<IProperty<?>> props;
       private final IBlockState state;
 
-      public Matcher(List<IProperty<?>> props, IBlockState state) {
+      public Matcher(Set<IProperty<?>> props, IBlockState state) {
         this.props = props;
         this.state = state;
       }
