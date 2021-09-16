@@ -77,15 +77,17 @@ public class GuiHandler implements IGuiHandler {
         TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
         if (te instanceof TileEntityFeyCrafter) {
           return new ContainerFeyCrafter(player, (TileEntityFeyCrafter) te);
+        } else {
+          return new FakeContainer();
         }
-        break;
       case IMPOSER_ID:
         te = world.getTileEntity(new BlockPos(x, y, z));
         if (te instanceof TileEntityImposer) {
           ((TileEntityImposer) te).updateInSlot(player);
           return new ContainerImposer(player, (TileEntityImposer) te);
+        } else {
+          return new FakeContainer();
         }
-        break;
       case LIBRARY_ID:
         Supplier<ItemStack> staff = getStaff(player);
         if (staff != null) {
@@ -94,8 +96,8 @@ public class GuiHandler implements IGuiHandler {
           return new ContainerLibrary(player, staff, SpellLibraryRegistry.getData(player));
         } else {
           player.sendStatusMessage(new TextComponentTranslation("roots.message.hold_staff").setStyle(new Style().setColor(TextFormatting.LIGHT_PURPLE).setBold(true)), true);
+          return new FakeContainer();
         }
-        break;
     }
     return null;
   }
