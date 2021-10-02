@@ -1,0 +1,32 @@
+modLoader="javafml" 
+loaderVersion="[36,)"
+issueTrackerURL="https://github.com/MysticMods/Roots/issues"
+license="https://github.com/MysticMods/Roots/blob/master/LICENSE"
+[[mods]] 
+modId="roots" 
+version="${version}"
+displayName="Roots"
+displayURL="https://minecraft.curseforge.com/projects/roots"
+credits="Elucent, EpicSquid, Martacus, Davoleo"
+authors="Noobanidus"
+description='''
+A nature-themed magical mod!
+'''
+[[dependencies.roots]]
+    modId="forge"
+    mandatory=true
+    versionRange="[36,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.roots]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.4,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.roots]]
+    modId="mysticalworld"
+    mandatory=true
+    versionRange="[0.3.3.19,)"
+    ordering="NONE"
+    side="BOTH"

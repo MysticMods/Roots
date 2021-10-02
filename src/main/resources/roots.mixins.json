@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "mysticmods.roots.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "roots.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}
