@@ -44,6 +44,9 @@ public class MessageGrowthCrafterVisualFX implements IMessage {
     @Override
     protected void handleMessage(final MessageGrowthCrafterVisualFX message, final MessageContext ctx) {
       Minecraft mc = Minecraft.getMinecraft();
+      if (mc == null || mc.world == null) {
+        return;
+      }
       World world = mc.world;
       if (world.provider.getDimension() == message.dimension) {
         // TODO: This should be based on block pos tracking so we should be in range regardless
