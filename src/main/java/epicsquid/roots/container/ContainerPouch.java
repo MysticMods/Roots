@@ -89,10 +89,6 @@ public class ContainerPouch extends Container {
     } else {
       createComponentPouchSlots();
     }
-    Roots.logger.info("inventoryBegin: " + inventoryBegin);
-    Roots.logger.info("inventoryEnd: " + inventoryEnd);
-    Roots.logger.info("herbsBegin: " + herbsBegin);
-    Roots.logger.info("herbsEnd: " + herbsEnd);
   }
 
   public boolean isApothecary() {
