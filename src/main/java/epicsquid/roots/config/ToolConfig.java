@@ -1,7 +1,15 @@
 package epicsquid.roots.config;
 
 import epicsquid.roots.Roots;
+import net.minecraft.block.Block;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Config;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Config.LangKey("config.roots.category.tools")
 @Config(modid = Roots.MODID, name = "roots/tools", category = "tools")
@@ -31,4 +39,25 @@ public class ToolConfig {
 
   @Config.Comment(("Terrastone Hoe acts like Shears when used on Leaves, etc"))
   public static boolean HoeSilkTouch = true;
+
+  @Config.Comment(("List of blocks in the format of modid:blockid that won't be harvested by runic tools"))
+  public static String[] RunicBlockBlacklist = new String[]{"minecraft:bedrock"};
+
+  @Config.Ignore
+  private static Set<Block> runicBlockBlacklist = null;
+
+  public static Set<Block> getRunicBlockBlacklist () {
+    if (runicBlockBlacklist == null) {
+      runicBlockBlacklist = new HashSet<>();
+      for (String s : RunicBlockBlacklist) {
+        Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(s));
+        if (block != null) {
+          runicBlockBlacklist.add(block);
+        } else {
+          Roots.logger.error("Invalid block specified in Runic Block Blacklist configuration: " + s + " does not exist.");
+        }
+      }
+    }
+    return runicBlockBlacklist;
+  }
 }

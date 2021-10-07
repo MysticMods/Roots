@@ -1,6 +1,7 @@
 package epicsquid.roots.item.runed;
 
 import epicsquid.mysticallib.item.tool.ItemExcavatorBase;
+import epicsquid.roots.config.ToolConfig;
 import epicsquid.roots.item.ILivingRepair;
 import epicsquid.roots.recipe.ingredient.RootsIngredients;
 import net.minecraft.block.Block;
@@ -15,6 +16,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.Set;
 
 @SuppressWarnings("deprecation")
 public class ItemRunedShovel extends ItemExcavatorBase implements ILivingRepair {
@@ -53,5 +56,10 @@ public class ItemRunedShovel extends ItemExcavatorBase implements ILivingRepair 
   @Override
   public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
     return toRepair.getItem() == this && RootsIngredients.RUNED_OBSIDIAN.test(repair);
+  }
+
+  @Override
+  public Set<Block> getBlockBlacklist() {
+    return ToolConfig.getRunicBlockBlacklist();
   }
 }

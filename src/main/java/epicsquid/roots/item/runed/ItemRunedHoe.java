@@ -1,6 +1,7 @@
 package epicsquid.roots.item.runed;
 
 import epicsquid.mysticallib.item.tool.ItemPloughBase;
+import epicsquid.roots.config.ToolConfig;
 import epicsquid.roots.item.ILivingRepair;
 import epicsquid.roots.recipe.ingredient.RootsIngredients;
 import net.minecraft.block.Block;
@@ -19,6 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Set;
 
 public class ItemRunedHoe extends ItemPloughBase implements ILivingRepair {
 
@@ -68,5 +70,11 @@ public class ItemRunedHoe extends ItemPloughBase implements ILivingRepair {
   @Override
   public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
     return toRepair.getItem() == this && RootsIngredients.RUNED_OBSIDIAN.test(repair);
+  }
+
+
+  @Override
+  public Set<Block> getBlockBlacklist() {
+    return ToolConfig.getRunicBlockBlacklist();
   }
 }
