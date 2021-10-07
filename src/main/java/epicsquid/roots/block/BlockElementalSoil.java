@@ -79,7 +79,7 @@ public class BlockElementalSoil extends BlockBase {
     IBlockState plant = cropGrowEvent.getWorld().getBlockState(pos);
     World world = cropGrowEvent.getWorld();
     doHarvest(world, pos, soil, plant);
-    world.scheduleUpdate(pos, this, this.tickRate(world));
+    world.scheduleUpdate(pos, this, 30);
   }
 
   private boolean shouldHarvest(World world, BlockPos pos) {
