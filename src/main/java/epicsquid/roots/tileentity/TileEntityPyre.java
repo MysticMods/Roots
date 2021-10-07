@@ -568,7 +568,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
           isBurning = false;
           spawnCraftResult();
           markDirty();
-          if (!startRitual(lastPlayerId, true)) {
+          if (!startRitual(restart ? null : lastPlayerId, true)) {
             BlockPyre.setState(false, world, pos);
           }
           restart = false;
@@ -583,7 +583,7 @@ public class TileEntityPyre extends TileBase implements ITickable, RenderUtil.IR
 
       pickupItem();
       if (restart && !burning) {
-        startRitual(lastPlayerId, true);
+        startRitual((UUID)null, true);
       }
     } else {
       ongoingFlame();
