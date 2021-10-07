@@ -350,7 +350,7 @@ public abstract class SpellBase extends RegistryItem {
 
   private SpellBase addCost(Herb herb, double amount) {
     if (herb == null) {
-      System.out.println("Spell - " + this.getClass().getName() + " - added a null herb ingredient. This is a bug.");
+      Roots.logger.error("Spell - " + this.getClass().getName() + " - added a null herb ingredient. This is a bug.");
       return this;
     }
     costs.put(herb, amount);

@@ -632,7 +632,7 @@ public class ModRecipes {
   public static void addAnimalHarvestRecipe(String name, Class<? extends EntityLivingBase> clazz) {
     ResourceLocation n = new ResourceLocation(Roots.MODID, name);
     if (harvestRecipes.containsKey(n)) {
-      System.out.println("Animal Harvest recipe name is already registered: " + n.toString());
+      Roots.logger.error("Animal Harvest recipe name is already registered: " + n.toString());
       return;
     }
     AnimalHarvestRecipe recipe = new AnimalHarvestRecipe(n, clazz);
