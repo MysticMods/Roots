@@ -135,7 +135,7 @@ public class TileEntityUnendingBowl extends TileBase {
 
     @Override
     public boolean canFillFluidType(FluidStack fluid) {
-      return true;
+      return getFluid() != null && fluid.isFluidEqual(getFluid());
     }
 
     @Override
