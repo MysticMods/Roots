@@ -8,7 +8,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -47,14 +46,11 @@ public class MessageGrowthCrafterVisualFX implements IMessage {
       if (mc == null || mc.world == null) {
         return;
       }
+      // This is now sent only to those tracking the tile entity.
       World world = mc.world;
-      if (world.provider.getDimension() == message.dimension) {
-        // TODO: This should be based on block pos tracking so we should be in range regardless
-        // But it might be worhtwhile to check the distance of the player to this tile
-        TileEntity te = world.getTileEntity(message.pos);
-        if (te instanceof TileEntityFeyCrafter) {
-          ((TileEntityFeyCrafter) te).doVisual();
-        }
+      TileEntity te = world.getTileEntity(message.pos);
+      if (te instanceof TileEntityFeyCrafter) {
+        ((TileEntityFeyCrafter) te).doVisual();
       }
     }
   }
