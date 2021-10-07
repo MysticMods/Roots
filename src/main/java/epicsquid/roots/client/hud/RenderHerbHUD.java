@@ -74,7 +74,7 @@ public class RenderHerbHUD {
   }
 
   public void resolveSlots(EntityPlayer player, Herb herb, double amount) {
-    if (!player.world.isRemote) {
+    if (player.world == null || !player.world.isRemote) {
       return;
     }
 
