@@ -2,12 +2,12 @@ package epicsquid.roots.client;
 
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
-import epicsquid.roots.network.MessageServerCycleSlot;
-import epicsquid.roots.network.MessageServerOpenLibrary;
-import epicsquid.roots.network.MessageServerOpenPouch;
-import epicsquid.roots.network.MessageServerOpenQuiver;
+import epicsquid.roots.client.gui.GuiLibrary;
+import epicsquid.roots.container.slots.SlotSpellInfo;
+import epicsquid.roots.network.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.inventory.Slot;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -26,16 +26,20 @@ public class Keybinds {
   public static KeyBinding OPEN_SPELL_LIBRARY = null;
   public static KeyBinding CYCLE_SLOT = null;
 
+  public static KeyBinding DELETE_SPELL = null;
+
   public static void init() {
     POUCH_KEYBIND = new KeyBinding(ROOTS_BASE + "pouch", 0, ROOTS_GROUP);
     QUIVER_KEYBIND = new KeyBinding(ROOTS_BASE + "quiver", 0, ROOTS_GROUP);
     OPEN_SPELL_LIBRARY = new KeyBinding(ROOTS_BASE + "spell_library", 37, ROOTS_GROUP);
     CYCLE_SLOT = new KeyBinding(ROOTS_BASE + "cycle", 0, ROOTS_GROUP);
+    DELETE_SPELL = new KeyBinding(ROOTS_BASE + "delete_spell", 0, ROOTS_GROUP);
 
     ClientRegistry.registerKeyBinding(POUCH_KEYBIND);
     ClientRegistry.registerKeyBinding(QUIVER_KEYBIND);
     ClientRegistry.registerKeyBinding(OPEN_SPELL_LIBRARY);
     ClientRegistry.registerKeyBinding(CYCLE_SLOT);
+    ClientRegistry.registerKeyBinding(DELETE_SPELL);
   }
 
   @SubscribeEvent

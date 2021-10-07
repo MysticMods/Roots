@@ -45,6 +45,7 @@ public class RootsPacketHandler {
     PacketHandler.registerMessage(MessageServerOpenLibrary.MessageHolder.class, MessageServerOpenLibrary.class, Side.SERVER);
     PacketHandler.registerMessage(MessageResetLibraryScreen.MessageHolder.class, MessageResetLibraryScreen.class, Side.SERVER);
     PacketHandler.registerMessage(MessageServerCycleSlot.MessageHolder.class, MessageServerCycleSlot.class, Side.SERVER);
+    PacketHandler.registerMessage(MessageServerDeleteSpell.MessageHolder.class, MessageServerDeleteSpell.class, Side.SERVER);
 
     //Server 2 Client
     PacketHandler.registerMessage(MessageDisarmFX.Handler.class, MessageDisarmFX.class, Side.CLIENT);

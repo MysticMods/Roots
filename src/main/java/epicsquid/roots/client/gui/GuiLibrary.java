@@ -10,6 +10,7 @@ package epicsquid.roots.client.gui;
 import epicsquid.mysticallib.client.gui.InvisibleButton;
 import epicsquid.mysticallib.network.PacketHandler;
 import epicsquid.roots.Roots;
+import epicsquid.roots.client.Keybinds;
 import epicsquid.roots.container.ContainerLibrary;
 import epicsquid.roots.container.slots.SlotLibraryInfo;
 import epicsquid.roots.container.slots.SlotLibraryModifierInfo;
@@ -17,6 +18,7 @@ import epicsquid.roots.container.slots.SlotSpellInfo;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstance;
 import epicsquid.roots.modifiers.instance.staff.StaffModifierInstanceList;
 import epicsquid.roots.network.MessageResetLibraryScreen;
+import epicsquid.roots.network.MessageServerDeleteSpell;
 import epicsquid.roots.spell.info.StaffSpellInfo;
 import epicsquid.roots.spell.info.storage.StaffSpellStorage;
 import net.minecraft.client.Minecraft;
@@ -75,7 +77,7 @@ public class GuiLibrary extends GuiContainer {
       ItemStack staff = container.getStaff();
       if (!staff.isEmpty() && staff.hasDisplayName()) {
         RenderHelper.enableGUIStandardItemLighting();
-        this.drawCenteredString(renderer, staff.getDisplayName(), this.width / 2, guiTop - (guiTop/3), 0xffffffff);
+        this.drawCenteredString(renderer, staff.getDisplayName(), this.width / 2, guiTop - (guiTop / 3), 0xffffffff);
       }
     }
     this.renderHoveredToolTip(mouseX, mouseY);
@@ -129,6 +131,7 @@ public class GuiLibrary extends GuiContainer {
         SlotSpellInfo spellInfo = (SlotSpellInfo) hoveredSlot;
         if (spellInfo.getHasStack()) {
           tooltip.add(TextFormatting.BOLD + I18n.format("roots.tooltip.modifier.activate"));
+          tooltip.add(TextFormatting.BOLD + I18n.format("roots.tooltip.spell.delete", Keybinds.DELETE_SPELL.getDisplayName()));
         }
       }
       if (hasStack) {
@@ -228,5 +231,18 @@ public class GuiLibrary extends GuiContainer {
     }
 
     super.actionPerformed(button);
+  }
+
+  @Override
+  protected void keyTyped(char p_keyTyped_1_, int p_keyTyped_2_) throws IOException {
+    if (Keybinds.DELETE_SPELL.isActiveAndMatches(p_keyTyped_2_)) {
+      Slot slot = this.getSlotUnderMouse();
+      if (slot instanceof SlotSpellInfo) {
+        MessageServerDeleteSpell packet = new MessageServerDeleteSpell(((SlotSpellInfo) slot).getSlot());
+        PacketHandler.INSTANCE.sendToServer(packet);
+      }
+    } else {
+      super.keyTyped(p_keyTyped_1_, p_keyTyped_2_);
+    }
   }
 }
