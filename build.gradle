@@ -1,150 +1,54 @@
-buildscript {
-    repositories {
-        // jcenter()
-        mavenCentral()
-        maven {
-            name = "jitpack"
-            url = "https://jitpack.io/"
-        }
-        maven {
-            name = "forge"
-            url = "https://maven.minecraftforge.net/"
-        }
-    }
-    dependencies {
-        classpath("com.github.DStrand1:ForgeGradle:FG_2.3-SNAPSHOT") {
-            changing = true
-        }
-        classpath "org.eclipse.platform:org.eclipse.compare.core:[3.6.1000]"
-        classpath "org.eclipse.platform:org.eclipse.core.commands:[3.9.800]"
-        classpath "org.eclipse.platform:org.eclipse.core.contenttype:[3.7.900]"
-        classpath "org.eclipse.platform:org.eclipse.core.expressions:[3.7.100]"
-        classpath "org.eclipse.platform:org.eclipse.core.filesystem:[1.7.700]"
-        classpath "org.eclipse.platform:org.eclipse.core.jobs:[3.10.1100]"
-        classpath "org.eclipse.platform:org.eclipse.core.resources:[3.14.0]"
-        classpath "org.eclipse.platform:org.eclipse.core.runtime:[3.20.100]"
-        classpath "org.eclipse.platform:org.eclipse.equinox.app:[1.5.100]"
-        classpath "org.eclipse.platform:org.eclipse.equinox.common:[3.14.100]"
-        classpath "org.eclipse.platform:org.eclipse.equinox.preferences:[3.8.200]"
-        classpath "org.eclipse.platform:org.eclipse.equinox.registry:[3.10.100]"
-        classpath "org.eclipse.platform:org.eclipse.osgi:[3.16.200]"
-        classpath "org.eclipse.platform:org.eclipse.team.core:[3.8.1100]"
-        classpath "org.eclipse.platform:org.eclipse.text:[3.11.0]"
-    }
+plugins {
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
 }
 
-apply plugin: "net.minecraftforge.gradle.forge"
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply from: 'gradle/property_helper.gradle'
+apply from: 'gradle/property_loader.gradle'
 
-version = "${minecraft_version}-${mod_version}"
-group = "epicsquid.roots"
-archivesBaseName = "Roots"
+// Load mod related properties
+ext.modName = getRequiredString('mod_name')
+ext.modAuthor = getRequiredString('mod_author')
+ext.modId = getRequiredString('mod_id')
+ext.modCredits = getDefaultString('mod_credits', ext.modAuthor)
+ext.modDescription = getOptionalString('mod_description')
+ext.modChangelog = getOptionalString('mod_changelog')
+ext.modHomepage = getOptionalString('mod_homepage')
+ext.modSource = getOptionalString('mod_source')
+ext.modIssues = getOptionalString('mod_issues')
+ext.modLicense = getOptionalString('mod_license')
 
-sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
-compileJava {
-    sourceCompatibility = targetCompatibility = '1.8'
-}
+// Load Minecraft specific properties
+ext.mcVersion = getRequiredString('minecraft_version')
 
-runClient {
-    args "--username=Dev"
-}
+// Load build-time modules
+apply from: 'gradle/build_number.gradle'
+apply from: 'gradle/git_changelog.gradle'
+apply from: 'gradle/patreon.gradle'
+apply from: 'gradle/java.gradle'
+apply from: 'gradle/forge.gradle'
+apply from: 'gradle/dependencies.gradle'
+apply from: 'gradle/aequivaleo.gradle'
+apply from: 'gradle/api.gradle'
+apply from: 'gradle/blame.gradle'
+apply from: 'gradle/carrier_bees.gradle'
+apply from: 'gradle/curios.gradle'
+apply from: 'gradle/dynamic_trees.gradle'
+apply from: 'gradle/geckolib.gradle'
+apply from: 'gradle/jade.gradle'
+apply from: 'gradle/jei.gradle'
+apply from: 'gradle/mana_and_artifice.gradle'
+apply from: 'gradle/mysticalworld.gradle'
+apply from: 'gradle/patchouli.gradle'
+apply from: 'gradle/particleslib.gradle'
+apply from: 'gradle/shadow.gradle'
+apply from: 'gradle/stables.gradle'
+apply from: 'gradle/top.gradle'
+apply from: 'gradle/minify_jsons.gradle'
 
-minecraft {
-    version = "1.12.2-14.23.5.2847"
-    runDir = "run"
-
-    mappings = "stable_39"
-
-    replace "@VERSION@", project.version
-    replaceIn "Roots.java"
-    replace "after:maindependencies", project.depends
-    replaceIn "MysticalWorld.java"
-
-    // Scala: not even once
-    replace 'scala.actors.threadpool.Arrays', 'java.util.Arrays'
-}
-
-dependencies {
-    compileOnly "vazkii.patchouli:Patchouli:${patchouli_version}"
-    deobfCompile "com.azanor:Baubles:${version_baubles}"
-    // compile against the JEI API but do not include it at runtime
-    deobfCompile "mezz.jei:jei_${minecraft_version}:${jei_version}"
-    deobfCompile("jeresources:JustEnoughResources-${minecraft_version}:${jer_version}") {
-        exclude group: 'mezz.jei'
-    }
-    compile("CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${ct_version}") {
-        exclude group: 'mezz.jei'
-    }
-    deobfCompile("vazkii.botania:Botania:${botania_version}") {
-        exclude group: 'mezz.jei'
-    }
-
-    deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}"
-    deobfCompile "mcjty.theoneprobe:TheOneProbe-${top_version}"
-}
-
-repositories {
-    mavenLocal()
-    maven { 
-        name = 'Patchouli'
-        url = "https://maven.blamejared.com" 
-    }
-    maven {
-        // location of the maven that hosts JEI files
-        name = "Progwml6 maven"
-        url = "http://dvs1.progwml6.com/files/maven"
-    }
-    maven {
-        // location of a maven mirror for JEI files, as a fallback
-        name = "ModMaven"
-        url = "modmaven.k-4u.nl"
-    }
-    maven {
-        name = "MMD Maven"
-        url 'https://maven.mcmoddev.com'
-    }
-    maven {
-        //Also contains Patchouli
-        name = "Jared Maven"
-        url = "https://maven.blamejared.com"
-    }
-    maven {
-        name = 'Tterrag Maven'
-        url "http://maven.tterrag.com"
-    }
-}
-
-jar {
-    manifest {
-        attributes 'FMLAT': 'roots_at.cfg'
-    }
-}
-
-processResources {
-    // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    // replace stuff in mcmod.info, nothing else
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-                
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
-    }
-        
-    // copy everything else except the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
-
-    rename '(.+_at.cfg)', 'META-INF/$1'
-}
-
-idea {
-    module {
-        inheritOutputDirs = true
-    }
-}
-sourceSets {
-    main.output.resourcesDir = main.java.outputDir
-}
+// Load publishing modules
+apply from: 'gradle/maven.gradle'
+apply from: 'gradle/signing.gradle'
+apply from: 'gradle/curseforge.gradle'
+apply from: 'gradle/version_checker.gradle'
